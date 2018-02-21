@@ -304,13 +304,6 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link
-              active-class="active"
-              :to="`/${ lang }/resource`"
-              exact>{{ langConfig.resource }}
-            </router-link>
-          </li>
 
           <!-- gap -->
           <li class="nav-item" v-show="isComponentPage">

@@ -21,10 +21,22 @@
       }
     }
 
+    .delimiter {
+      background: #ddd;
+      width: 100%;
+      height: 1px;
+      margin: 20px 0 30px;
+    }
+
     .heading {
       font-size: 24px;
       margin-bottom: 60px;
       color: #333;
+    }
+
+    .info {
+      color: #a5a5a9;
+      font-style: italic;
     }
 
     .timeline {
@@ -135,21 +147,36 @@
   <div class="page-changelog">
     <div class="heading">
       <tm-button class="fr">
-        <a href="https://github.com/ElemeFE/element/releases" target="_blank">GitHub Releases</a>
+        <a href="https://github.com/tmconsulting/tmc24-components/releases" target="_blank">GitHub Releases</a>
       </tm-button>
       <%= 1 >
     </div>
     <ul class="timeline" ref="timeline">
     </ul>
     <change-log ref="changeLog"></change-log>
+    <div class="delimiter"></div>
+    <div class="heading">
+      <tm-button class="fr">
+        <a href="https://github.com/ElemeFE/element/releases" target="_blank">GitHub Releases</a>
+      </tm-button>
+      ElementUI Changelog (till 2.1.0)
+    </div>
+    <div class="info">
+      TM-Ui is based on ElementUI component library.
+      <br>You can read the latest changelog of version we use (2.1.0).
+    </div>
+    <ul class="timeline" ref="elementTimeline"></ul>
+    <element-change-log ref="elementChangeLog"></element-change-log>
   </div>
 </template>
 <script>
   import ChangeLog from '../../../CHANGELOG.md';
+  import ElementChangeLog from '../../../CHANGELOG.ElementUI.md';
 
   export default {
     components: {
-      ChangeLog
+      ChangeLog,
+      ElementChangeLog
     },
     data() {
       return {
@@ -157,29 +184,34 @@
       };
     },
     mounted() {
-      const changeLog = this.$refs.changeLog;
-      const changeLogNodes = changeLog.$el.children;
-      let a = changeLogNodes[1].querySelector('a');
-      a && a.remove();
-      let release = changeLogNodes[1].textContent.trim();
-      let fragments = `<li><h3><a href="https://github.com/ElemeFE/element/releases/tag/v${release}" target="_blank">${release}</a></h3>`;
+      this.renderChangeLog(this.$refs.changeLog, this.$refs.timeline);
+      this.renderChangeLog(this.$refs.elementChangeLog, this.$refs.elementTimeline);
+    },
+    methods: {
+      renderChangeLog(changeLog, timeline) {
+        const changeLogNodes = changeLog.$el.children;
+        let a = changeLogNodes[1].querySelector('a');
+        a && a.remove();
+        let release = changeLogNodes[1].textContent.trim();
+        let fragments = `<li><h3><a href="https://github.com/ElemeFE/element/releases/tag/v${release}" target="_blank">${release}</a></h3>`;
 
-      for (let len = changeLogNodes.length, i = 2; i < len; i++) {
-        let node = changeLogNodes[i];
-        a = changeLogNodes[i].querySelector('a');
-        a && a.getAttribute('class') === 'header-anchor' && a.remove();
-        if (node.tagName !== 'H3') {
-          fragments += changeLogNodes[i].outerHTML;
-        } else {
-          release = changeLogNodes[i].textContent.trim();
-          fragments += `</li><li><h3><a href="https://github.com/ElemeFE/element/releases/tag/v${release}" target="_blank">${release}</a></h3>`;
+        for (let len = changeLogNodes.length, i = 2; i < len; i++) {
+          let node = changeLogNodes[i];
+          a = changeLogNodes[i].querySelector('a');
+          a && a.getAttribute('class') === 'header-anchor' && a.remove();
+          if (node.tagName !== 'H3') {
+            fragments += changeLogNodes[i].outerHTML;
+          } else {
+            release = changeLogNodes[i].textContent.trim();
+            fragments += `</li><li><h3><a href="https://github.com/ElemeFE/element/releases/tag/v${release}" target="_blank">${release}</a></h3>`;
+          }
         }
-      }
-      fragments = fragments.replace(/#(\d+)/g, '<a href="https://github.com/ElemeFE/element/issues/$1" target="_blank">#$1</a>');
-      fragments = fragments.replace(/@(\w+)/g, '<a href="https://github.com/$1" target="_blank">@$1</a>');
-      this.$refs.timeline.innerHTML = `${fragments}</li>`;
+        fragments = fragments.replace(/#(\d+)/g, '<a href="https://github.com/ElemeFE/element/issues/$1" target="_blank">#$1</a>');
+        fragments = fragments.replace(/@(\w+)/g, '<a href="https://github.com/$1" target="_blank">@$1</a>');
+        timeline.innerHTML = `${fragments}</li>`;
 
-      changeLog.$el.remove();
+        changeLog.$el.remove();
+      }
     }
   };
 </script>
