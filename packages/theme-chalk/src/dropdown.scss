@@ -63,25 +63,47 @@
   top: 0;
   left: 0;
   z-index: 10;
-  padding: 10px 0;
-  margin: 5px 0;
+  padding: 0;
+  margin: 0;
   background-color: $--color-white;
   border: 1px solid $--border-color-lighter;
   border-radius: $--border-radius-base;
   box-shadow: $--dropdown-menu-box-shadow;
 
+  &.tm-popper > .popper__arrow {
+    display: none;
+  }
+
+  @include e(icon) {
+    width: $--dropdown-menuItem-icon-size;
+    height: $--dropdown-menuItem-icon-size;
+    font-size: $--dropdown-menuItem-icon-size;
+    fill: $--dropdown-menuItem-icon-color;
+    margin-right: 10px;
+  }
+
   @include e(item) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     list-style: none;
-    line-height: 36px;
-    padding: 0 20px;
+    height: 56px;
+    padding: 0 16px;
     margin: 0;
     font-size: $--font-size-base;
+    letter-spacing: -0.2px;
     color: $--color-text-regular;
     cursor: pointer;
     outline: none;
+    border-top: 1px solid $--dropdown-menuItem-border-color;
+    &:first-child {
+      border-top: none;
+    }
     &:not(.is-disabled):hover, &:focus {
       background-color: $--dropdown-menuItem-hover-fill;
-      color: $--dropdown-menuItem-hover-color;
+      .tm-dropdown-menu__icon {
+        fill: $--dropdown-menuItem-hover-icon-color;
+      }
     }
 
     @include m(divided) {
@@ -92,7 +114,7 @@
       border-top: 1px solid $--border-color-lighter;
 
       &:before {
-        content: '';
+        content: normal;
         height: $divided-offset;
         display: block;
         margin: 0 -20px;
@@ -108,10 +130,9 @@
   }
 
   @include m(medium) {
-    padding: 6px 0;
+    padding: 0;
 
     @include e(item) {
-      line-height: 30px;
       padding: 0 17px;
       font-size: 14px;
 
@@ -128,10 +149,9 @@
   }
 
   @include m(small) {
-    padding: 6px 0;
+    padding: 0;
 
     @include e(item) {
-      line-height: 27px;
       padding: 0 15px;
       font-size: 13px;
 
@@ -148,10 +168,9 @@
   }
 
   @include m(mini) {
-    padding: 3px 0;
+    padding: 0;
 
     @include e(item) {
-      line-height: 24px;
       padding: 0 10px;
       font-size: 12px;
 

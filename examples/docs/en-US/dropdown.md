@@ -64,7 +64,10 @@ Hover on the dropdown menu to unfold it for more actions.
     Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
   </span>
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item disabled>Action 4</tm-dropdown-item>
@@ -97,7 +100,10 @@ Use the button to trigger the dropdown list.
     Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
   </tm-button>
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item>Action 4</tm-dropdown-item>
@@ -107,7 +113,10 @@ Use the button to trigger the dropdown list.
 <tm-dropdown split-button type="primary" @click="handleClick">
   Dropdown List
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item>Action 4</tm-dropdown-item>
@@ -154,7 +163,10 @@ Click the triggering element or hover on it.
         Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
       </span>
       <tm-dropdown-menu slot="dropdown">
-        <tm-dropdown-item>Action 1</tm-dropdown-item>
+        <tm-dropdown-item>
+          <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+          Action 1
+        </tm-dropdown-item>
         <tm-dropdown-item>Action 2</tm-dropdown-item>
         <tm-dropdown-item>Action 3</tm-dropdown-item>
         <tm-dropdown-item>Action 4</tm-dropdown-item>
@@ -169,7 +181,10 @@ Click the triggering element or hover on it.
         Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
       </span>
       <tm-dropdown-menu slot="dropdown">
-        <tm-dropdown-item>Action 1</tm-dropdown-item>
+        <tm-dropdown-item>
+          <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+          Action 1
+        </tm-dropdown-item>
         <tm-dropdown-item>Action 2</tm-dropdown-item>
         <tm-dropdown-item>Action 3</tm-dropdown-item>
         <tm-dropdown-item>Action 4</tm-dropdown-item>
@@ -208,7 +223,10 @@ Use `hide-on-click` to define if menu closes on clicking.
     Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
   </span>
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item disabled>Action 4</tm-dropdown-item>
@@ -239,7 +257,10 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
     Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
   </span>
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item command="a">Action 1</tm-dropdown-item>
+    <tm-dropdown-item command="a">
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item command="b">Action 2</tm-dropdown-item>
     <tm-dropdown-item command="c">Action 3</tm-dropdown-item>
     <tm-dropdown-item command="d" disabled>Action 4</tm-dropdown-item>
@@ -279,7 +300,10 @@ Besides default size, Dropdown component provides three additional sizes for you
 <tm-dropdown split-button type="primary">
   Default
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item>Action 4</tm-dropdown-item>
@@ -289,7 +313,10 @@ Besides default size, Dropdown component provides three additional sizes for you
 <tm-dropdown size="medium" split-button type="primary">
   Medium
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item>Action 4</tm-dropdown-item>
@@ -299,17 +326,23 @@ Besides default size, Dropdown component provides three additional sizes for you
 <tm-dropdown size="small" split-button type="primary">
   Small
   <tm-dropdown-menu slot="dropdown">
-   <tm-dropdown-item>Action 1</tm-dropdown-item>
-   <tm-dropdown-item>Action 2</tm-dropdown-item>
-   <tm-dropdown-item>Action 3</tm-dropdown-item>
-   <tm-dropdown-item>Action 4</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
+    <tm-dropdown-item>Action 2</tm-dropdown-item>
+    <tm-dropdown-item>Action 3</tm-dropdown-item>
+    <tm-dropdown-item>Action 4</tm-dropdown-item>
   </tm-dropdown-menu>
 </tm-dropdown>
 
 <tm-dropdown size="mini" split-button type="primary">
   Mini
   <tm-dropdown-menu slot="dropdown">
-    <tm-dropdown-item>Action 1</tm-dropdown-item>
+    <tm-dropdown-item>
+      <tm-icon name="pencil" class="tm-dropdown-menu__icon"></tm-icon>
+      Action 1
+    </tm-dropdown-item>
     <tm-dropdown-item>Action 2</tm-dropdown-item>
     <tm-dropdown-item>Action 3</tm-dropdown-item>
     <tm-dropdown-item>Action 4</tm-dropdown-item>
