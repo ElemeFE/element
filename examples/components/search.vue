@@ -122,20 +122,10 @@
         query: '',
         isEmpty: false,
         langs: {
-          'zh-CN': {
-            search: '搜索文档',
-            empty: '无匹配结果',
-            index: 'zh'
-          },
           'en-US': {
             search: 'Search',
             empty: 'No results',
             index: 'en'
-          },
-          'es': {
-            search: 'Buscar',
-            empty: 'No hay datos que coincidan',
-            index: 'es'
           }
         }
       };
