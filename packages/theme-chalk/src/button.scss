@@ -94,7 +94,6 @@
     }
 
     &.is-plain,
-    &.is-cancel,
     &.is-remove {
       &,
       &:hover,
@@ -129,6 +128,32 @@
     &.tm-button--primary {
       padding-top: 16px;
       padding-bottom: 16px;
+    }
+  }
+  @include when(circle) {
+    padding: 11px 12px;
+    border-radius: $--border-radius-circle;
+
+    .tm-icon {
+      &.tm-icon-check {
+        fill: $--color-mantis;
+      }
+
+      &.tm-icon-cross {
+        fill: $--color-pastel-gray;
+      }
+    }
+
+    &:hover {
+      .tm-icon {
+        &.tm-icon-check {
+          fill: $--color-white;
+        }
+
+        &.tm-icon-cross {
+          fill: $--color-white;
+        }
+      }
     }
   }
   @include m(default) {

@@ -13,6 +13,7 @@
         'is-loading': loading,
         'is-plain': plain,
         'is-round': round,
+        'is-circle': circle,
         'is-cancel': cancel,
         'is-remove': remove,
         'is-icon': icon
@@ -53,6 +54,7 @@
       plain: Boolean,
       autofocus: Boolean,
       round: Boolean,
+      circle: Boolean,
       cancel: Boolean,
       remove: Boolean
     },

@@ -156,11 +156,12 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 :::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
 
 ```html
-<tm-button type="primary" icon="tm-icon-edit"></tm-button>
-<tm-button type="primary" icon="tm-icon-share"></tm-button>
-<tm-button type="primary" icon="tm-icon-delete"></tm-button>
-<tm-button type="primary" icon="tm-icon-search">Search</tm-button>
-<tm-button type="primary" icon>Upload<i class="tm-icon-upload tm-icon-right"></i></tm-button>
+<h4>Basic usage</h4>
+<tm-button type="secondary" icon="check" circle></tm-button>
+<tm-button type="secondary" icon="cross" circle cancel></tm-button>
+<h4>Disable usage</h4>
+<tm-button type="secondary" icon="check" circle disabled></tm-button>
+<tm-button type="secondary" icon="cross" circle cancel disabled></tm-button>
 ```
 :::
 
