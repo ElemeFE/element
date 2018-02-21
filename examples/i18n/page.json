@@ -72,20 +72,6 @@
         "13": "Top Navigation",
         "14": "Conforms to the normal browsing order from top to bottom, which makes things more natural. The navigation amount and text length are limited to the width of the top.",
         "15": "Suitable for sites with few navigations and large chunks."
-      },
-      "resource": {
-        "1": "Resource",
-        "2": "Under construction.",
-        "3": "Axure Components",
-        "4": "By importing Element UI in Axure, you can easily apply all the components we provide during interaction design.",
-        "5": "Download",
-        "6": "Sketch Template",
-        "7": "Apply components from Element template, so you can improve design efficiency while keeping a unified visual style.",
-        "8": "Interaction Design Documentation",
-        "9": "Take a closer look at the interaction design documentation. Learn more details of each component from a microcosmic perspective.",
-        "paraHeight": "1.6",
-        "placeholder1": "Under construction",
-        "placeholder2": "More resources are being developed"
       }
     }
   }
