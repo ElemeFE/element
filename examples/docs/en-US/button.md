@@ -29,27 +29,49 @@ Commonly used button.
 :::demo Use `type`, `plain` and `round` to define Button's style.
 
 ```html
+<h4>Basic usage</h4>
 <div>
   <tm-button>Default</tm-button>
   <tm-button type="primary">Primary</tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="secondary">Secondary</tm-button>
+  <tm-button type="secondary" cancel>Secondary Cancel</tm-button>
+  <tm-button type="secondary" remove>Secondary Delete</tm-button>
+</div>
+<div>
   <tm-button type="success">Success</tm-button>
   <tm-button type="info">Info</tm-button>
   <tm-button type="warning">Warning</tm-button>
   <tm-button type="danger">Danger</tm-button>
 </div>
-
+<h4>Plain usage</h4>
 <div style="margin: 20px 0">
   <tm-button plain>Plain</tm-button>
   <tm-button type="primary" plain>Primary</tm-button>
+</div>
+<div>
+  <tm-button type="secondary" plain>Secondary</tm-button>
+  <tm-button type="secondary" cancel plain>Secondary Cancel</tm-button>
+  <tm-button type="secondary" remove plain>Secondary Delete</tm-button>
+</div>
+<div style="margin: 20px 0">
   <tm-button type="success" plain>Success</tm-button>
   <tm-button type="info" plain>Info</tm-button>
   <tm-button type="warning" plain>Warning</tm-button>
   <tm-button type="danger" plain>Danger</tm-button>
 </div>
-
-<div>
+<h4>Round usage</h4>
+<div style="margin: 20px 0">
   <tm-button round>Round</tm-button>
   <tm-button type="primary" round>Primary</tm-button>
+</div>
+<div>
+  <tm-button type="secondary" round>Secondary</tm-button>
+  <tm-button type="secondary" cancel round>Secondary Cancel</tm-button>
+  <tm-button type="secondary" remove round>Secondary Delete</tm-button>
+</div>
+<div style="margin: 20px 0">
   <tm-button type="success" round>Success</tm-button>
   <tm-button type="info" round>Info</tm-button>
   <tm-button type="warning" round>Warning</tm-button>
@@ -65,22 +87,53 @@ The `disabled` attribute determines if the button is disabled.
 :::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
 
 ```html
+<h4>Basic usage</h4>
 <div>
   <tm-button disabled>Default</tm-button>
   <tm-button type="primary" disabled>Primary</tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="secondary" disabled>Secondary</tm-button>
+  <tm-button type="secondary" disabled cancel>Secondary Cancel</tm-button>
+  <tm-button type="secondary" disabled remove>Secondary Delete</tm-button>
+</div>
+<div>
   <tm-button type="success" disabled>Success</tm-button>
   <tm-button type="info" disabled>Info</tm-button>
   <tm-button type="warning" disabled>Warning</tm-button>
   <tm-button type="danger" disabled>Danger</tm-button>
 </div>
-
-<div style="margin-top: 20px">
-  <tm-button plain disabled>Plain</tm-button>
-  <tm-button type="primary" plain disabled>Primary</tm-button>
-  <tm-button type="success" plain disabled>Success</tm-button>
-  <tm-button type="info" plain disabled>Info</tm-button>
-  <tm-button type="warning" plain disabled>Warning</tm-button>
-  <tm-button type="danger" plain disabled>Danger</tm-button>
+<h4>Plain usage</h4>
+<div style="margin: 20px 0">
+  <tm-button disabled plain>Plain</tm-button>
+  <tm-button type="primary" disabled plain>Primary</tm-button>
+</div>
+<div>
+  <tm-button type="secondary" disabled plain>Secondary</tm-button>
+  <tm-button type="secondary" disabled cancel plain>Secondary Cancel</tm-button>
+  <tm-button type="secondary" disabled remove plain>Secondary Delete</tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="success" disabled plain>Success</tm-button>
+  <tm-button type="info" disabled plain>Info</tm-button>
+  <tm-button type="warning" disabled plain>Warning</tm-button>
+  <tm-button type="danger" disabled plain>Danger</tm-button>
+</div>
+<h4>Round usage</h4>
+<div style="margin: 20px 0">
+  <tm-button disabled round>Round</tm-button>
+  <tm-button type="primary" disabled round>Primary</tm-button>
+</div>
+<div>
+  <tm-button type="secondary" disabled round>Secondary</tm-button>
+  <tm-button type="secondary" disabled cancel round>Secondary Cancel</tm-button>
+  <tm-button type="secondary" disabled remove round>Secondary Delete</tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="success" disabled round>Success</tm-button>
+  <tm-button type="info" disabled round>Info</tm-button>
+  <tm-button type="warning" disabled round>Warning</tm-button>
+  <tm-button type="danger" disabled round>Danger</tm-button>
 </div>
 ```
 :::
@@ -107,7 +160,7 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 <tm-button type="primary" icon="tm-icon-share"></tm-button>
 <tm-button type="primary" icon="tm-icon-delete"></tm-button>
 <tm-button type="primary" icon="tm-icon-search">Search</tm-button>
-<tm-button type="primary">Upload<i class="tm-icon-upload tm-icon-right"></i></tm-button>
+<tm-button type="primary" icon>Upload<i class="tm-icon-upload tm-icon-right"></i></tm-button>
 ```
 :::
 

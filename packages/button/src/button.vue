@@ -12,7 +12,10 @@
         'is-disabled': disabled,
         'is-loading': loading,
         'is-plain': plain,
-        'is-round': round
+        'is-round': round,
+        'is-cancel': cancel,
+        'is-remove': remove,
+        'is-icon': icon
       }
     ]"
   >
@@ -49,7 +52,9 @@
       disabled: Boolean,
       plain: Boolean,
       autofocus: Boolean,
-      round: Boolean
+      round: Boolean,
+      cancel: Boolean,
+      remove: Boolean
     },
 
     computed: {

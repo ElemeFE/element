@@ -24,7 +24,7 @@ $--color-dark-gunmetal: #1e1e28 !default;
 $--color-taupe-gray: #909090 !default;
 $--color-pastel-gray: #cccccc !default;
 
-$--color-primary: $--color-dark-gunmetal !default;
+$--color-primary: $--color-mantis !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default;
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default;
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default;
@@ -229,7 +229,7 @@ $--radio-bordered-mini-height: 28px !default;
 $--radio-button-font-size: $--font-size-base !default;
 $--radio-button-checked-fill: $--color-text-secondary !default;
 $--radio-button-checked-color: $--color-white !default;
-$--radio-button-checked-border-color: $--color-text-secondary !default;
+$--radio-button-checked-border-color: $--color-text-primary !default;
 $--radio-button-disabled-checked-fill: $--color-secondary-light-5 !default;
 
 /* Select
@@ -242,15 +242,15 @@ $--select-icon-hover-color: $--color-text-secondary !default;
 
 $--select-input-color: $--color-text-placeholder !default;
 $--select-multiple-input-color: #666 !default;
-$--select-input-focus-background: $--color-primary !default;
+$--select-input-focus-background: $--color-taupe-gray !default;
 $--select-input-font-size: 14px !default;
 
-$--select-option-color: $--color-text-regular !default;
+$--select-option-color: $--color-text-primary !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
 $--select-option-disabled-background: $--color-white !default;
 $--select-option-height: 34px !default;
 $--select-option-hover-background: $--background-color-base !default;
-$--select-option-selected: $--color-primary !default;
+$--select-option-selected: $--color-text-regular !default;
 $--select-option-selected-hover: $--background-color-base !default;
 
 $--select-group-color: $--color-info !default;
@@ -358,7 +358,7 @@ $--input-clear-hover-color: $--color-text-secondary !default;
 $--input-icon-hover-color: $--color-text-primary !default;
 $--input-icon-focus-color: $--color-text-secondary !default;
 
-$--input-focus-border: $--color-primary !default;
+$--input-focus-border: $--color-taupe-gray !default;
 $--input-focus-fill: $--color-white !default;
 
 $--input-disabled-fill: $--disabled-fill-base !default;
@@ -441,13 +441,13 @@ $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
 $--button-mini-padding-vertical: 7px !default;
 $--button-mini-padding-horizontal: 15px !default;
 
-$--button-default-color: $--color-text-regular !default;
+$--button-default-color: $--color-primary !default;
 $--button-default-fill: $--color-white !default;
-$--button-default-border: $--border-color-base !default;
+$--button-default-border: $--color-primary !default;
 
-$--button-disabled-color: $--color-white !default;
-$--button-disabled-fill: $--color-primary-light-5 !default;
-$--button-disabled-border: $--color-primary-light-2 !default;
+$--button-disabled-color: $--disabled-color-base !default;
+$--button-disabled-fill: $--disabled-fill-base !default;
+$--button-disabled-border: $--disabled-border-base !default;
 
 $--button-primary-border: $--color-primary !default;
 $--button-primary-color: $--color-white !default;

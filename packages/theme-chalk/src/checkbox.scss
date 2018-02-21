@@ -28,7 +28,7 @@
     height: $--checkbox-bordered-height;
 
     &.is-checked {
-      border-color: $--color-primary;
+      border-color: $--color-secondary;
     }
 
     &.is-disabled {
@@ -119,13 +119,13 @@
 
     @include when(disabled) {
       .tm-checkbox__inner {
-        background-color: $--checkbox-disabled-input-fill;
-        border-color: $--checkbox-disabled-input-border-color;
+        background-color: $--disabled-fill-base;
+        border-color: $--border-color-light;
         cursor: not-allowed;
 
         &::after {
           cursor: not-allowed;
-          border-color: $--checkbox-disabled-icon-color;
+          border-color: $--border-color-light;
         }
 
         & + .tm-checkbox__label {
@@ -178,7 +178,7 @@
     }
     @include when(focus) { /*focus时 视觉上区分*/
       .tm-checkbox__inner {
-        border-color: $--border-base;
+        border-color: $--checkbox-input-border-color-hover;
       }
     }
     @include when(indeterminate) {
@@ -308,7 +308,7 @@
       color: $--checkbox-button-checked-color;
       background-color: $--checkbox-button-checked-fill;
       border-color: $--checkbox-button-checked-border-color;
-      box-shadow: -1px 0 0 0 $--color-primary-light-4;
+      box-shadow: -1px 0 0 0 $--color-text-placeholder;
     }
   }
 
