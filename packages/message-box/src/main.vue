@@ -48,6 +48,19 @@
         </div>
         <div class="el-message-box__btns">
           <el-button
+            v-for="button in buttons"
+            :key="button.text"
+            :loading="button.loading"
+            :type="button.type"
+            :class="[ button.class ]"
+            :round="button.roundButton"
+            size="small"
+            @click.native="handleCustomAction(button)"
+            @keydown.enter="handleCustomAction(button)"
+          >
+            {{ button.text }}
+          </el-button>
+          <el-button
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
             v-show="showCancelButton"
@@ -123,7 +136,8 @@
       roundButton: {
         default: false,
         type: Boolean
-      }
+      },
+      buttons: []
     },
 
     components: {
@@ -145,6 +159,9 @@
     },
 
     methods: {
+      isPromise(obj) {
+        return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+      },
       handleComposition(event) {
         if (event.type === 'compositionend') {
           setTimeout(() => {
@@ -208,6 +225,20 @@
           this.beforeClose(action, this, this.close);
         } else {
           this.doClose();
+        }
+      },
+
+      handleCustomAction(button) {
+        if (button.needValidate && this.$type === 'prompt' && !this.validate()) {
+          return;
+        }
+        let result = button.action && button.action(button);
+        if (this.isPromise(result)) {
+          result.then(() => {
+            this.handleAction('customize');
+          });
+        } else {
+          this.handleAction('customize');
         }
       },
 
