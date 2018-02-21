@@ -14,7 +14,6 @@ const path = require('path');
 const fileSave = require('file-save');
 const uppercamelcase = require('uppercamelcase');
 const componentname = process.argv[2];
-const chineseName = process.argv[3] || componentname;
 const ComponentName = uppercamelcase(componentname);
 const PackagePath = path.resolve(__dirname, '../../packages', componentname);
 const Files = [
@@ -70,10 +69,6 @@ export default {
 </script>`
   },
   {
-    filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
-    content: `## ${ComponentName} ${chineseName}`
-  },
-  {
     filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
     content: `## ${ComponentName}`
   },
@@ -122,9 +117,7 @@ Object.keys(navConfigFile).forEach(lang => {
   let groups = navConfigFile[lang][4].groups;
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
-    title: lang === 'zh-CN' && componentname !== chineseName
-      ? `${ComponentName} ${chineseName}`
-      : ComponentName
+    title: ComponentName
   });
 });
 

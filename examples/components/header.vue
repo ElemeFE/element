@@ -341,34 +341,33 @@
             </tm-dropdown>
           </li>
 
-          <!--&lt;!&ndash; 语言选择器 &ndash;&gt;-->
-          <!--<li class="nav-item lang-item">-->
-            <!--<tm-dropdown-->
-              <!--trigger="click"-->
-              <!--class="nav-dropdown nav-lang"-->
-              <!--:class="{ 'is-active': langDropdownVisible }">-->
-              <!--<span>-->
-                <!--{{ displayedLang }}-->
-                <!--<i class="tm-icon-arrow-down tm-icon&#45;&#45;right"></i>-->
-              <!--</span>-->
-              <!--<tm-dropdown-menu-->
-                <!--slot="dropdown"-->
-                <!--class="nav-dropdown-list"-->
-                <!--@input="handleLangDropdownToggle">-->
-                <!--<tm-dropdown-item-->
-                  <!--v-for="(value, key) in langs"-->
-                  <!--:key="key"-->
-                  <!--@click.native="switchLang(key)">-->
-                  <!--{{ value }}-->
-                <!--</tm-dropdown-item>-->
-              <!--</tm-dropdown-menu>-->
-            <!--</tm-dropdown>-->
-          <!--</li>-->
+          <li class="nav-item lang-item">
+            <tm-dropdown
+              trigger="click"
+              class="nav-dropdown nav-lang"
+              :class="{ 'is-active': langDropdownVisible }">
+              <span>
+                {{ displayedLang }}
+                <tm-icon class="tm-icon--right" name="arrow-down"></tm-icon>
+              </span>
+              <tm-dropdown-menu
+                slot="dropdown"
+                class="nav-dropdown-list"
+                @input="handleLangDropdownToggle">
+                <tm-dropdown-item
+                  v-for="(value, key) in langs"
+                  :key="key"
+                  @click.native="switchLang(key)">
+                  {{ value }}
+                </tm-dropdown-item>
+              </tm-dropdown-menu>
+            </tm-dropdown>
+          </li>
           
           <!--theme picker-->
-          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-picker/>
-          </li>
+          <!--<li class="nav-item nav-theme-switch" v-show="isComponentPage">-->
+            <!--<theme-picker/>-->
+          <!--</li>-->
         </ul>
       </div>
     </header>
@@ -404,7 +403,7 @@
         return this.$route.path.split('/')[1] || 'en-US';
       },
       displayedLang() {
-        return this.langs[this.lang] || '中文';
+        return this.langs[this.lang] || '';
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];

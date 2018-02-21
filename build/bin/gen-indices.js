@@ -8,12 +8,10 @@ const key = require('./algolia-key');
 
 const client = algoliasearch('9NLTR1QH8B', key);
 const langs = {
-  'zh-CN': 'element-zh',
-  'en-US': 'element-en',
-  'es': 'element-es'
+  'en-US': 'element-en'
 };
 
-['zh-CN', 'en-US', 'es'].forEach(lang => {
+['en-US'].forEach(lang => {
   const indexName = langs[lang];
   const index = client.initIndex(indexName);
   index.clearIndex(err => {
