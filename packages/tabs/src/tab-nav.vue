@@ -192,7 +192,7 @@
           : null;
 
         const icon = pane.icon
-          ? <tm-icon iconName={ pane.icon } iconClass="tm-tabs__icon"></tm-icon>
+          ? <tm-icon name={ pane.icon } class="tm-tabs__icon"></tm-icon>
           : null;
 
         const label = pane.$slots.label || pane.label;
