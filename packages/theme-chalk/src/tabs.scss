@@ -141,11 +141,12 @@
   @include e(icon) {
     height: $--tab-flow-icon-size;
     width: $--tab-flow-icon-size;
+    font-size: $--tab-flow-icon-size;
     display: block;
     fill: $--tab-flow-icon-color;
     > svg {
       height: $--tab-flow-icon-size;
-      width: 2$--tab-flow-icon-size;
+      width: $--tab-flow-icon-size;
     }
     + .tm-tabs__label {
       margin-left: 6px;
