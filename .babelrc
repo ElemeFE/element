@@ -5,9 +5,9 @@
     "utils": {
       "plugins": [
         ["module-resolver", {
-          "root": ["element-ui"],
+          "root": ["tmconsulting-ui"],
           "alias": {
-            "element-ui/src": "element-ui/lib"
+            "tmconsulting-ui/src": "tmconsulting-ui/lib"
           }
         }]
       ]

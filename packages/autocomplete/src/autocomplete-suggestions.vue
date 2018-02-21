@@ -12,7 +12,9 @@
         wrap-class="tm-autocomplete-suggestion__wrap"
         view-class="tm-autocomplete-suggestion__list"
       >
-        <li v-if="parent.loading"><i class="tm-icon-loading"></i></li>
+        <li v-if="parent.loading">
+          <tm-icon name="loader"></tm-icon>
+        </li>
         <slot v-else>
         </slot>
       </tm-scrollbar>
@@ -20,9 +22,9 @@
   </transition>
 </template>
 <script>
-  import Popper from 'element-ui/src/utils/vue-popper';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import TmScrollbar from 'element-ui/packages/scrollbar';
+  import Popper from 'tmconsulting-ui/src/utils/vue-popper';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import TmScrollbar from 'tmconsulting-ui/packages/scrollbar';
 
   export default {
     components: { TmScrollbar },

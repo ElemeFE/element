@@ -77,13 +77,13 @@
 </template>
 
 <script type="text/babel">
-  import Popup from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import TmInput from 'element-ui/packages/input';
-  import TmButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'element-ui/src/utils/dom';
-  import { t } from 'element-ui/src/locale';
-  import Dialog from 'element-ui/src/utils/aria-dialog';
+  import Popup from 'tmconsulting-ui/src/utils/popup';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
+  import TmInput from 'tmconsulting-ui/packages/input';
+  import TmButton from 'tmconsulting-ui/packages/button';
+  import { addClass, removeClass } from 'tmconsulting-ui/src/utils/dom';
+  import { t } from 'tmconsulting-ui/src/locale';
+  import Dialog from 'tmconsulting-ui/src/utils/aria-dialog';
 
   let messageBox;
   let typeMap = {

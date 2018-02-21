@@ -1,7 +1,7 @@
-import TmCheckbox from 'element-ui/packages/checkbox';
-import TmTag from 'element-ui/packages/tag';
-import objectAssign from 'element-ui/src/utils/merge';
-import { getPropByPath } from 'element-ui/src/utils/util';
+import TmCheckbox from 'tmconsulting-ui/packages/checkbox';
+import TmTag from 'tmconsulting-ui/packages/tag';
+import objectAssign from 'tmconsulting-ui/src/utils/merge';
+import { getPropByPath } from 'tmconsulting-ui/src/utils/util';
 
 let columnIdSeed = 1;
 

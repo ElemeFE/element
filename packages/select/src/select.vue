@@ -89,10 +89,11 @@
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
-      <i slot="suffix"
-       :class="['tm-select__caret', 'tm-input__icon', 'tm-icon-' + iconClass]"
-       @click="handleIconClick"
-      ></i>
+      <tm-icon slot="suffix"
+               class="tm-select__caret tm-input__icon"
+               :name="iconName"
+               :on-click="handleIconClick">
+      </tm-icon>
     </tm-input>
     <transition
       name="tm-zoom-in-top"
@@ -122,22 +123,22 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import TmInput from 'element-ui/packages/input';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import Focus from 'tmconsulting-ui/src/mixins/focus';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
+  import TmInput from 'tmconsulting-ui/packages/input';
   import TmSelectMenu from './select-dropdown.vue';
   import TmOption from './option.vue';
-  import TmTag from 'element-ui/packages/tag';
-  import TmScrollbar from 'element-ui/packages/scrollbar';
+  import TmTag from 'tmconsulting-ui/packages/tag';
+  import TmScrollbar from 'tmconsulting-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals } from 'element-ui/src/utils/util';
+  import Clickoutside from 'tmconsulting-ui/src/utils/clickoutside';
+  import { addClass, removeClass, hasClass } from 'tmconsulting-ui/src/utils/dom';
+  import { addResizeListener, removeResizeListener } from 'tmconsulting-ui/src/utils/resize-event';
+  import { t } from 'tmconsulting-ui/src/locale';
+  import scrollIntoView from 'tmconsulting-ui/src/utils/scroll-into-view';
+  import { getValueByPath } from 'tmconsulting-ui/src/utils/util';
+  import { valueEquals } from 'tmconsulting-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {
@@ -173,14 +174,14 @@
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
-      iconClass() {
+      iconName() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+        return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
       },
 
       debounce() {
@@ -437,7 +438,7 @@
 
       handleIconShow() {
         let icon = this.$el.querySelector('.tm-input__icon');
-        if (icon && !hasClass(icon, 'tm-icon-circle-close')) {
+        if (icon && !hasClass(icon, 'tm-icon-cross')) {
           addClass(icon, 'is-reverse');
         }
       },
@@ -524,7 +525,7 @@
       },
 
       handleIconClick(event) {
-        if (this.iconClass.indexOf('circle-close') > -1) {
+        if (this.iconName.indexOf('cross') > -1) {
           this.deleteSelected(event);
         } else {
           this.toggleMenu();

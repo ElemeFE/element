@@ -1,7 +1,7 @@
 // TODO: Run `npm run test:watch` and check warnings
-import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
-import TmCheckbox from 'element-ui/packages/checkbox';
-import TmTag from 'element-ui/packages/tag';
+import { hasClass, addClass, removeClass } from 'tmconsulting-ui/src/utils/dom';
+import TmCheckbox from 'tmconsulting-ui/packages/checkbox';
+import TmTag from 'tmconsulting-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';

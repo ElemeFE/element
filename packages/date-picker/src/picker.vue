@@ -20,12 +20,19 @@
     :validateEvent="false"
     :prefix-icon="triggerClass"
     ref="reference">
-    <i slot="suffix"
-      class="tm-input__icon"
-      @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon : '']"
-      v-if="haveTrigger">
-    </i>
+    <tm-icon :name="clearIcon"
+             slot="suffix"
+             :onClick="handleClickIcon"
+             v-show="showClose"
+             v-if="haveTrigger">
+    </tm-icon>
+    <!--<i slot="suffix"-->
+       <!--class="tm-icon-cross"-->
+       <!--@click="handleClickIcon"-->
+       <!--v-show="showClose"-->
+       <!--v-if="haveTrigger">-->
+    <!--</i>-->
+    <!--v-if="haveTrigger && showClose"-->
   </tm-input>
   <div
     class="tm-date-editor tm-range-editor tm-input__inner"
@@ -77,12 +84,12 @@
 
 <script>
 import Vue from 'vue';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
+import Clickoutside from 'tmconsulting-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
-import Popper from 'element-ui/src/utils/vue-popper';
-import Emitter from 'element-ui/src/mixins/emitter';
-import TmInput from 'element-ui/packages/input';
-import merge from 'element-ui/src/utils/merge';
+import Popper from 'tmconsulting-ui/src/utils/vue-popper';
+import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+import TmInput from 'tmconsulting-ui/packages/input';
+import merge from 'tmconsulting-ui/src/utils/merge';
 
 const NewPopper = {
   props: {
@@ -317,7 +324,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'tm-icon-circle-close'
+      default: 'cross'
     },
     name: {
       default: '',

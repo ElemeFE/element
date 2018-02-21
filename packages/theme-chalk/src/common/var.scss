@@ -97,6 +97,7 @@ $--border-radius-circle: 100% !default;
 $--box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
 $--box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
 $--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+$--box-shadow-popover: 0 2px 8px 0 rgba(0, 0, 0, 0.24) !default;
 
 /* Fill
 -------------------------- */
@@ -132,6 +133,9 @@ $--disabled-border-base: $--border-color-light !default;
 -------------------------- */
 $--icon-color: $--color-pastel-gray !default;
 $--icon-color-base: $--color-info !default;
+$--icon-size-base: $--font-size-base !default;
+$--icon-size-small: $--font-size-small !default;
+$--icon-size-large: $--font-size-large !default;
 
 /* Checkbox
 -------------------------- */
@@ -417,6 +421,14 @@ $--tab-header-fill-hover: rgba($--color-black, 0.06) !default;
 $--tab-vertical-header-width: 90px !default;
 $--tab-vertical-header-count-color: $--color-white !default;
 $--tab-vertical-header-count-fill: $--color-text-secondary !default;
+$--tab-flow-icon-color: $--color-pastel-gray !default;
+$--tab-flow-icon-size: 20px !default;
+$--tab-flow-item-padding: 16px !default;
+$--tab-flow-item-height: 40px !default;
+$--tab-flow-item-active-color: $--color-white !default;
+$--tab-flow-item-text-color: #646464 !default;
+$--tab-flow-item-border: 2px solid rgba(0, 0, 0, 0.08) !default;
+$--tab-flow-item-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04) !default;
 
 /* Button
 -------------------------- */
@@ -530,11 +542,12 @@ $--pagination-hover-color: $--color-white !default;
 $--popover-fill: $--color-white !default;
 $--popover-font-size: $--font-size-base !default;
 $--popover-border-color: $--border-color-lighter !default;
-$--popover-arrow-size: 6px !default;
-$--popover-padding: 12px !default;
+$--popover-arrow-size: 8px !default;
+$--popover-padding: 24px 27px 15px 26px !default;
 $--popover-padding-large: 18px 20px !default;
 $--popover-title-font-size: 16px !default;
 $--popover-title-color: $--color-text-primary !default;
+$--popover-border-radius: 5px !default;
 
 /* Tooltip
 -------------------------- */

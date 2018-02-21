@@ -222,12 +222,12 @@ Add an icon to indicate input type.
   <span class="demo-input-label">Using attributes</span>
   <tm-input
     placeholder="Pick a date"
-    suffix-icon="tm-icon-date"
+    suffix-icon="calendar"
     v-model="input2">
   </tm-input>
   <tm-input
     placeholder="Type something"
-    prefix-icon="tm-icon-search"
+    prefix-icon="search"
     v-model="input21">
   </tm-input>
 </div>
@@ -236,12 +236,12 @@ Add an icon to indicate input type.
   <tm-input
     placeholder="Pick a date"
     v-model="input22">
-    <i slot="suffix" class="tm-input__icon tm-icon-date"></i>
+    <tm-icon slot="suffix" name="calendar" class="tm-input__icon"></tm-icon>
   </tm-input>
   <tm-input
     placeholder="Type something"
     v-model="input23">
-    <i slot="prefix" class="tm-input__icon tm-icon-search"></i>
+    <tm-icon slot="prefix" name="search" class="tm-input__icon"></tm-icon>
   </tm-input>
 </div>
 
@@ -351,7 +351,7 @@ Prepend or append an element, generally a label or a button.
       <tm-option label="Order No." value="2"></tm-option>
       <tm-option label="Tel" value="3"></tm-option>
     </tm-select>
-    <tm-button slot="append" icon="tm-icon-search"></tm-button>
+    <tm-button slot="append" icon="search"></tm-button>
   </tm-input>
 </div>
 
@@ -509,6 +509,11 @@ Customize how suggestions are displayed.
     slot="suffix"
     @click="handleIconClick">
   </i>
+  <tm-icon class="tm-input__icon"
+           name="pencil"
+           slot="suffix"
+           :on-click="handleIconClick">
+  </tm-icon>
   <template slot-scope="props">
     <div class="value">{{ props.item.value }}</div>
     <span class="link">{{ props.item.link }}</span>

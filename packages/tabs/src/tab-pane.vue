@@ -21,7 +21,8 @@
       labelContent: Function,
       name: String,
       closable: Boolean,
-      disabled: Boolean
+      disabled: Boolean,
+      icon: String
     },
 
     data() {

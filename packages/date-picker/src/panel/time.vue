@@ -32,7 +32,7 @@
 
 <script type="text/babel">
   import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from '../util';
-  import Locale from 'element-ui/src/mixins/locale';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   export default {

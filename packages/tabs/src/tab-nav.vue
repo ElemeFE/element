@@ -1,6 +1,6 @@
 <script>
   import TabBar from './tab-bar';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { addResizeListener, removeResizeListener } from 'tmconsulting-ui/src/utils/resize-event';
 
   function noop() {}
   const firstUpperCase = str => {
@@ -191,7 +191,15 @@
           ? <span class="tm-icon-close" on-click={(ev) => { onTabRemove(pane, ev); }}></span>
           : null;
 
-        const tabLabelContent = pane.$slots.label || pane.label;
+        const icon = pane.icon
+          ? <tm-icon name={ pane.icon } class="tm-tabs__icon"></tm-icon>
+          : null;
+
+        const label = pane.$slots.label || pane.label;
+
+        const tabLabelContent = label
+          ? <div class="tm-tabs__label">{ label }</div>
+          : null;
         const tabindex = pane.active ? 0 : -1;
         return (
           <div
@@ -215,6 +223,7 @@
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
+            {icon}
             {tabLabelContent}
             {btnClose}
           </div>

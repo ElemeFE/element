@@ -75,7 +75,7 @@ Just use a `tm-icon` component with `name` parameter.
 :::demo
 
 ```html
-Oh my god, it's a non-jingle <tm-icon name="bell"></tm-icon> !
+Oh my god, it's an airplane - <tm-icon name="airplane"></tm-icon> !
 ```
 :::
 

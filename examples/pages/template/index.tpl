@@ -137,7 +137,7 @@
     }
 
     li {
-      width: 33.33333%;
+      width: 50%;
       padding: 0 19px;
       box-sizing: border-box;
       float: left;
@@ -288,22 +288,6 @@
         <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
       </div>
     </div>
-    <div class="sponsors">
-      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank">
-        <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
-        <div>
-          <p>Sponsored by Tipe.io</p>
-          <p>Next Generation API-first CMS</p>
-        </div>
-      </a>
-      <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
-        <img width="45px" src="~examples/assets/images/duohui.svg" alt="tipe.io">
-        <div>
-          <p>Sponsored by 多会</p>
-          <p>炫酷的新一代活动票务系统</p>
-        </div>
-      </a>
-    </div>
     <div class="cards">
       <ul class="container">
         <li>
@@ -326,18 +310,6 @@
             <router-link
               active-class="active"
               to="/<%= lang >/component/layout"
-              exact><%= 5 >
-            </router-link>
-          </div>
-        </li>
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/resource.png" alt="">
-            <h3><%= 8 ></h3>
-            <p><%= 9 ></p>
-            <router-link
-              active-class="active"
-              to="/<%= lang >/resource"
               exact><%= 5 >
             </router-link>
           </div>

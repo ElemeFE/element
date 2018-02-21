@@ -195,11 +195,11 @@
     prevMonth,
     nextMonth
   } from '../util';
-  import Locale from 'element-ui/src/mixins/locale';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
-  import TmInput from 'element-ui/packages/input';
-  import TmButton from 'element-ui/packages/button';
+  import TmInput from 'tmconsulting-ui/packages/input';
+  import TmButton from 'tmconsulting-ui/packages/button';
 
   const advanceDate = (date, amount) => {
     return new Date(new Date(date).getTime() + amount);

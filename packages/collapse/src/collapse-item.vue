@@ -44,9 +44,9 @@
   </div>
 </template>
 <script>
-  import TmCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import { generateId } from 'element-ui/src/utils/util';
+  import TmCollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import { generateId } from 'tmconsulting-ui/src/utils/util';
 
   export default {
     name: 'TmCollapseItem',

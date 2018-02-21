@@ -1,13 +1,18 @@
 @import "common/var";
 
-[class^="tm-icon"] {
-  width: 14px; // base size
-  height: 14px; // base size
-  max-width: 100%;
-  max-height: 100%;
+.tm-icon {
+  display: inline-block;
+  fill: $--icon-color-base;
+  svg {
+    width: 14px; // base size
+    height: 14px; // base size
+    max-width: 100%;
+    max-height: 100%;
+    fill: inherit;
+  }
 }
 
-.tm-icon-loading {
+.tm-icon-loading svg {
   animation: rotating 2s linear infinite;
 }
 
