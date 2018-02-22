@@ -38,6 +38,8 @@ describe('Select', () => {
             v-model="value"
             :multiple="multiple"
             :multiple-limit="multipleLimit"
+            :btnSelect="btnSelect"
+            :btnSelectLabels="btnSelectLabels"
             :popper-class="popperClass"
             :clearable="clearable"
             :filterable="filterable"
@@ -63,6 +65,8 @@ describe('Select', () => {
           options,
           multiple: configs.multiple,
           multipleLimit: configs.multipleLimit,
+          btnSelect: configs.btnSelect,
+          btnSelectLabels: configs.btnSelectLabels,
           clearable: configs.clearable,
           filterable: configs.filterable,
           collapseTags: configs.collapseTags,
@@ -643,6 +647,20 @@ describe('Select', () => {
         });
       }, 250);
     });
+  });
+
+  it('multiple selectAll', done => {
+    vm = getSelectVm({ multiple: true, btnSelect: true });
+    const options = vm.$el.querySelectorAll('.el-select-dropdown__btn .el-button');
+    options[0].click();
+    setTimeout(() => {
+      expect(vm.value.length === vm.options.length).to.true;
+      options[0].click();
+      setTimeout(() => {
+        expect(vm.value.length).to.equal(0);
+        done();
+      }, 50);
+    }, 50);
   });
 
   it('event:focus & blur', done => {

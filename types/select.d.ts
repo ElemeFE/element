@@ -68,4 +68,10 @@ export declare class ElSelect extends ElementUIComponent {
 
   /** Select first matching option on enter key. Use with filterable or remote */
   defaultFirstOption: boolean
+
+  /** Display a button to select all elements when multiple is activated */
+  btnSelect: boolean
+
+  /** Change label for btnSelect */
+  btnSelectLabels: object
 }
