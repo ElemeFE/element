@@ -294,6 +294,7 @@
         optionsCount: 0,
         filteredOptionsCount: 0,
         visible: false,
+        softFocus: false,
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
@@ -520,8 +521,14 @@
       },
 
       handleFocus(event) {
-        this.visible = true;
-        this.$emit('focus', event);
+        if (!this.softFocus) {
+          console.log('Hit handleFocus will toggle |  softFocus:', this.softFocus);
+          this.visible = true;
+          this.$emit('focus', event);
+        } else {
+          console.log('Hit handleFocus will not toggle |  softFocus:', this.softFocus);
+          this.softFocus = false;
+        }
       },
 
       handleBlur(event) {
@@ -643,7 +650,15 @@
           this.emitChange(option.value);
           this.visible = false;
         }
+        this.setSoftFocus();
         this.$nextTick(() => this.scrollToOption(option));
+      },
+
+      setSoftFocus() {
+        this.$nextTick(() => {
+          this.softFocus = true;
+          this.$refs.reference.focus();
+        });
       },
 
       getValueIndex(arr = [], value) {
