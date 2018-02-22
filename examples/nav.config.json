@@ -187,6 +187,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge"
             }
           ]
         }
