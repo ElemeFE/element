@@ -62,7 +62,9 @@ export default {
       loading: 'Loading',
       noMatch: 'No matching data',
       noData: 'No data',
-      placeholder: 'Select'
+      placeholder: 'Select',
+      btnSelectAll: 'Select All',
+      btnDeselectAll: 'Deselect All'
     },
     cascader: {
       noMatch: 'No matching data',

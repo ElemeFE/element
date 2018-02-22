@@ -62,7 +62,9 @@ export default {
       loading: 'Chargement',
       noMatch: 'Aucune correspondance',
       noData: 'Aucune donnée',
-      placeholder: 'Choisir'
+      placeholder: 'Choisir',
+      btnSelectAll: 'Sélectionner tout',
+      btnDeselectAll: 'Désélectionner tout'
     },
     cascader: {
       noMatch: 'Aucune correspondance',

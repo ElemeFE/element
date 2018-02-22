@@ -62,7 +62,9 @@ export default {
       loading: '加载中',
       noMatch: '无匹配数据',
       noData: '无数据',
-      placeholder: '请选择'
+      placeholder: '请选择',
+      btnSelectAll: '全选',
+      btnDeselectAll: '取消全部选择'
     },
     cascader: {
       noMatch: '无匹配数据',

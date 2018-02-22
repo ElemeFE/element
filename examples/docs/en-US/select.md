@@ -103,7 +103,11 @@
         value10: [],
         value11: [],
         loading: false,
-        states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+        states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"],
+        btnSelectLabels: {
+          selectAll: 'Select all !',
+          deselectAll: 'Deselect all !'
+        }
       };
     },
 
@@ -321,7 +325,7 @@ You can clear Select using a clear icon.
 
 Multiple select uses tags to display selected options.
 
-:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute. It´s possible to have a btn to select every elements with `btn-select`, text can be overrated with `btn-Select-labels`
 ```html
 <template>
   <el-select v-model="value5" multiple placeholder="Select">
@@ -332,11 +336,13 @@ Multiple select uses tags to display selected options.
       :value="item.value">
     </el-option>
   </el-select>
-  
+
   <el-select
     v-model="value11"
     multiple
     collapse-tags
+    btn-select
+    :btn-Select-labels="btnSelectLabels"
     style="margin-left: 20px;"
     placeholder="Select">
     <el-option
@@ -369,7 +375,11 @@ Multiple select uses tags to display selected options.
           label: 'Option5'
         }],
         value5: [],
-        value11: []
+        value11: [],
+        btnSelectLabels: {
+          selectAll: 'Select all !',
+          deselectAll: 'Deselect all !'
+        }
       }
     }
   }
@@ -685,6 +695,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 | popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
+| btnSelect | display a button to select all elements when multiple is activated | boolean | - | false |
+| btnSelectLabels | Change label for btnSelect  | Object | - | {selectAll: 'Select All', deselectAll: 'Deselect all'} |
 
 ### Select Events
 | Event Name | Description | Parameters |
