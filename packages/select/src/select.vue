@@ -102,6 +102,11 @@
         ref="popper"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
+        <div v-if="btnSelect && multiple" class="el-select-dropdown__btn">
+          <el-button
+            size="mini"
+            @click="handleBtnSelectAllClick">{{btnSelectLabel}}</el-button>
+        </div>
         <el-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
@@ -258,6 +263,16 @@
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
+      btnSelect: Boolean,
+      btnSelectLabels: {
+        type: Object,
+        default() {
+          return {
+            selectAll: t('el.select.btnSelectAll'),
+            deselectAll: t('el.select.btnDeselectAll')
+          };
+        }
+      },
       multipleLimit: {
         type: Number,
         default: 0
@@ -299,7 +314,8 @@
         query: '',
         previousQuery: null,
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        btnSelectLabel: this.btnSelectLabels.selectAll
       };
     },
 
@@ -544,6 +560,24 @@
         }
       },
 
+      handleBtnSelectAllClick() {
+        const value = this.value.slice();
+        if (this.btnSelectLabels.selectAll === this.btnSelectLabel) {
+          for (let i = 0; i !== this.options.length; ++i) {
+            const optionIndex = this.getValueIndex(value, this.options[i].value);
+            if (optionIndex === -1) {
+              value.push(this.options[i].value);
+            }
+          }
+          this.btnSelectLabel = this.btnSelectLabels.deselectAll;
+        } else {
+          value.splice(0, value.length);
+          this.btnSelectLabel = this.btnSelectLabels.selectAll;
+        }
+        this.$emit('input', value);
+        this.emitChange(value);
+      },
+
       doDestroy() {
         this.$refs.popper && this.$refs.popper.doDestroy();
       },
@@ -638,6 +672,11 @@
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
+          if (this.btnSelect) {
+            this.btnSelectLabel = value.length === this.options.length
+              ? this.btnSelectLabels.deselectAll
+              : this.btnSelectLabels.selectAll;
+          }
         } else {
           this.$emit('input', option.value);
           this.emitChange(option.value);

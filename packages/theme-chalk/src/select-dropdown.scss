@@ -34,6 +34,11 @@
     }
   }
 
+  .el-select-dropdown__btn {
+    margin-top: 6px;
+    margin-left: 6px;
+  }
+
   .el-scrollbar.is-empty .el-select-dropdown__list{
     padding: 0;
   }
