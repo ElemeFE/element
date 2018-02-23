@@ -1,5 +1,8 @@
 <style>
   .demo-box.demo-button {
+    &:hover {
+      background-color: whitesmoke;
+    }
     .tm-row {
       margin-bottom: 10px;
     }
@@ -138,14 +141,24 @@ The `disabled` attribute determines if the button is disabled.
 ```
 :::
 
-### Text Button
+### Text Button & Text Button vs Icon
 
 Buttons without border and background.
 
 :::demo
 ```html
-<tm-button type="text">Text Button</tm-button>
-<tm-button type="text" disabled>Text Button</tm-button>
+<div>
+  <tm-button type="text">Text Button</tm-button>
+  <tm-button type="text" disabled>Text Button</tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="text" icon="bucket">Отменить бронирование</tm-button>
+  <tm-button type="text" icon="repeat">Повторить заказ</tm-button>
+  <tm-button type="text" icon="copy">Скопировать</tm-button>
+  <tm-button type="text" icon="star">Добавить в избранное</tm-button>
+  <tm-button type="text" icon="upload">Загрузите список в формате .xls (.xlsx)</tm-button>
+  <tm-button type="text" icon="advanced-search" search>Расширеный поиск</tm-button>
+</div>
 ```
 :::
 
@@ -157,11 +170,31 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 
 ```html
 <h4>Basic usage</h4>
-<tm-button type="secondary" icon="check" circle></tm-button>
-<tm-button type="secondary" icon="cross" circle cancel></tm-button>
+<div>
+  <tm-button type="secondary" icon="check" circle approve></tm-button>
+  <tm-button type="secondary" icon="cross" circle cancel></tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="default" icon="cross" size="mini">Закрыть карту</tm-button>
+  <tm-button type="secondary" icon="location" size="mini">Поиск на карте</tm-button>
+</div>
+<div>
+  <tm-button type="secondary" icon="plus">Создать заказ</tm-button>
+  <tm-button type="info" icon="circle-plus" size="medium">Добавить перелет</tm-button>
+</div>
 <h4>Disable usage</h4>
-<tm-button type="secondary" icon="check" circle disabled></tm-button>
-<tm-button type="secondary" icon="cross" circle cancel disabled></tm-button>
+<div>
+  <tm-button type="secondary" icon="check" circle approve disabled></tm-button>
+  <tm-button type="secondary" icon="cross" circle cancel disabled></tm-button>
+</div>
+<div style="margin: 20px 0">
+  <tm-button type="default" icon="cross" size="mini" disabled>Закрыть карту</tm-button>
+  <tm-button type="secondary" icon="location" size="mini" disabled>Поиск на карте</tm-button>
+</div>
+<div>
+  <tm-button type="secondary" icon="plus" disabled>Создать заказ</tm-button>
+  <tm-button type="info" icon="circle-plus" size="medium" disabled>Добавить перелет</tm-button>
+</div>
 ```
 :::
 
@@ -173,13 +206,8 @@ Displayed as a button group, can be used to group a series of similar operations
 
 ```html
 <tm-button-group>
-  <tm-button type="primary" icon="tm-icon-arrow-left">Previous Page</tm-button>
-  <tm-button type="primary">Next Page<i class="tm-icon-arrow-right tm-icon-right"></i></tm-button>
-</tm-button-group>
-<tm-button-group>
-  <tm-button type="primary" icon="tm-icon-edit"></tm-button>
-  <tm-button type="primary" icon="tm-icon-share"></tm-button>
-  <tm-button type="primary" icon="tm-icon-delete"></tm-button>
+  <tm-button type="primary" icon="cart">В заказ</tm-button>
+  <tm-button type="primary" icon="arrow-next">Бронировать</tm-button>
 </tm-button-group>
 ```
 :::

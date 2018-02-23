@@ -11,8 +11,8 @@
   cursor: pointer;
   background: $--button-default-fill;
   border: $--border-base;
-  border-color: $--button-default-border;
-  color: $--button-default-color;
+  border-color: $--color-mantis;
+  color: $--color-mantis;
   -webkit-appearance: none;
   text-align: center;
   box-sizing: border-box;
@@ -56,9 +56,9 @@
 
     &:hover,
     &:focus {
-      background-color: $--color-white-smoke;
+      background-color: $--color-mantis;
       border-color: $--color-mantis;
-      color: $--color-mantis;
+      color: $--color-white;
     }
 
     &:active {
@@ -67,10 +67,6 @@
       color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
       outline: none;
     }
-  }
-
-  @include when(icon) {
-    min-width: auto;
   }
 
   @include when(active) {
@@ -96,6 +92,7 @@
 
   @include when(loading) {
     position: relative;
+    min-width: auto;
     pointer-events: none;
 
     &:before {
@@ -121,37 +118,41 @@
   }
   @include when(circle) {
     padding: 11px 12px;
+    min-width: auto;
     border-radius: $--border-radius-circle;
-
-    .tm-icon {
-      &.tm-icon-check {
-        fill: $--color-mantis;
-      }
-
-      &.tm-icon-cross {
-        fill: $--color-pastel-gray;
-      }
-    }
-
-    &:hover {
-      .tm-icon {
-        &.tm-icon-check {
-          fill: $--color-white;
-        }
-
-        &.tm-icon-cross {
-          fill: $--color-white;
-        }
-      }
-    }
   }
   @include m(default) {
-    @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
+    @include button-variant($--button-default-color, $--button-default-fill, $--button-default-border);
     min-width: 192px;
 
-    &:hover {
-      color: $--color-mantis;
+    &.is-plain {
+      color: $--color-taupe-gray;
+      border-color: $--color-white-smoke;
+    }
+    &.is-disabled,
+    &.is-disabled:hover {
+      color: mix($--color-taupe-gray, $--color-white);
+      border-color: mix($--color-white-smoke, $--color-white);
+
+      &.is-plain {
+        color: mix($--color-taupe-gray, $--color-white);
+        background-color: $--button-default-fill;
+        border-color: mix($--color-white-smoke, $--color-white);
+      }
+
+      .tm-icon {
+        fill: mix($--color-taupe-gray, $--color-white);
+      }
+    }
+    &:hover,
+    &.is-plain:hover {
+      color: $--color-taupe-gray;
       background-color: $--color-white;
+      border-color: $--color-white-smoke;
+    }
+
+    .tm-icon {
+      fill: $--color-taupe-gray;
     }
   }
   @include m(primary) {
@@ -160,40 +161,160 @@
     min-width: 226px;
     @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
 
-    &:hover {
+    &:hover,
+    &.is-plain:hover {
       color: $--color-mantis;
       background-color: $--color-white;
+
+      .tm-icon {
+        fill: $--color-mantis;
+      }
+    }
+
+    .tm-icon {
+      fill: $--color-white;
     }
   }
   @include m(secondary) {
     min-width: 192px;
-    @include button-variant($--button-secondary-color, $--button-secondary-fill, $--button-secondary-border);
 
+    &:focus {
+      color: $--color-white;
+      background-color: mix($--color-mantis, $--color-white, 80%);
+
+      .tm-icon {
+        fill: $--color-white;
+      }
+    }
     &:hover {
       color: $--color-white;
       background-color: $--color-mantis;
-    }
 
+      .tm-icon {
+        fill: $--color-white;
+      }
+    }
+    &.is-plain {
+      &.is-disabled {
+        background-color: mix($--color-white-smoke, $--color-white, 20%);
+      }
+    }
+    &.is-disabled {
+      .tm-icon {
+        fill: mix($--color-mantis, $--color-white, 50%);
+      }
+    }
+    &.is-approve {
+      .tm-icon {
+        &-check {
+          fill: $--color-mantis;
+        }
+      }
+
+      &:not(.is-disabled):hover,
+      &:not(.is-disabled):focus {
+        .tm-icon {
+          &-check {
+            fill: $--color-white;
+          }
+        }
+      }
+      &.is-disabled {
+        &,
+        &:hover,
+        &:focus {
+          .tm-icon {
+            &-check {
+              fill: mix($--color-mantis, $--color-white);
+            }
+          }
+        }
+      }
+    }
     &.is-cancel {
       color: $--color-taupe-gray;
       border-color: $--color-pastel-gray;
 
-      &:hover {
+      &:not(.is-disabled):focus {
+        color: $--color-white;
+        background-color: mix($--color-pastel-gray, $--color-white, 80%);
+
+        .tm-icon {
+          &-cross {
+            fill: $--color-white;
+          }
+        }
+      }
+      &:not(.is-disabled):hover {
         color: $--color-white;
         background-color: $--color-pastel-gray;
         border-color: $--color-pastel-gray;
+
+        .tm-icon {
+          &-cross {
+            fill: $--color-white;
+          }
+        }
+      }
+      &.is-plain {
+        background-color: mix($--color-pastel-gray, $--color-white, 10%);
+      }
+      &.is-disabled {
+        &,
+        &:hover,
+        &:focus {
+          color: mix($--color-taupe-gray, $--color-white);
+          border-color: mix($--color-pastel-gray, $--color-white);
+
+          .tm-icon {
+            &-cross {
+              fill: mix($--color-taupe-gray, $--color-white);
+            }
+          }
+        }
+
+        &.is-plain {
+          background-color: mix($--color-pastel-gray, $--color-white, 10%);
+        }
+      }
+
+      .tm-icon {
+        &-cross {
+          fill: $--color-taupe-gray;
+        }
       }
     }
-
     &.is-remove {
       color: $--color-sunset-orange;
       border-color: $--color-sunset-orange;
 
-      &:hover {
+      &:not(.is-disabled):focus {
+        color: $--color-white;
+        background-color: mix( $--color-sunset-orange, $--color-white, 80%);
+      }
+      &:not(.is-disabled):hover {
         color: $--color-white;
         background-color: $--color-sunset-orange;
         border-color: $--color-sunset-orange;
       }
+      &.is-plain {
+        background-color: mix($--color-sunset-orange, $--color-white, 10%);
+      }
+      &.is-disabled {
+        &,
+        &:hover,
+        &:focus {
+          color: mix($--color-sunset-orange, $--color-white);
+          border-color: mix( $--color-sunset-orange, $--color-white);
+        }
+        &.is-plain {
+          background-color: mix($--color-sunset-orange, $--color-white, 10%);
+        }
+      }
+    }
+
+    .tm-icon {
+      fill: $--color-mantis;
     }
   }
   @include m(success) {
@@ -207,39 +328,127 @@
   }
   @include m(info) {
     @include button-variant($--button-info-color, $--button-info-fill, $--button-info-border);
+
+    &:not(.is-disabled):focus {
+      color: mix($--color-blueberry, $--color-white, 80%);
+      background-color: $--color-white;
+      border-color: mix($--color-blueberry, $--color-white, 40%);
+
+      .tm-icon {
+        fill: mix($--color-blueberry, $--color-white, 80%);
+      }
+    }
+    &:not(.is-disabled):hover {
+      background-color: $--color-white;
+      border-color: $--color-blueberry;
+    }
+    &.is-disabled {
+      &,
+      &:hover {
+        color: mix($--color-blueberry, $--color-white, 50%);
+        background-color: transparent;
+        border-color: transparent;
+      }
+
+      .tm-icon {
+        fill: mix($--color-blueberry, $--color-white, 50%);
+      }
+      &.is-plain,
+      &.is-plain:hover {
+        color: mix($--color-blueberry, $--color-white, 40%);
+        background-color: mix($--color-blueberry, $--color-white, 10%);
+        border-color: mix($--color-blueberry, $--color-white, 30%);
+      }
+    }
+    &:not(.is-disabled).is-plain {
+      color: $--color-blueberry;
+      background-color: mix($--color-blueberry, $--color-white, 20%);
+      border-color: mix($--color-blueberry, $--color-white, 40%);
+
+      &:hover {
+        background-color: $--color-white;
+        border-color: $--color-blueberry;
+      }
+    }
+
+    .tm-icon {
+      fill: $--button-info-color;
+    }
   }
   @include m(medium) {
+    min-width: 226px;
     @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
   }
   @include m(small) {
+    min-width: 192px;
     @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-border-radius);
   }
   @include m(mini) {
+    min-width: 166px;
     @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
   }
   @include m(text) {
     border-color: transparent;
-    color: $--color-primary;
+    color: mix($--color-taupe-gray, $--color-white, 50%);
     background: transparent;
     padding-left: 0;
     padding-right: 0;
 
-    &:hover,
-    &:focus {
-      color: mix($--color-white, $--color-primary, $--button-hover-tint-percent);
+    &:not(.is-disabled):hover,
+    &:not(.is-disabled):focus {
+      color: mix($--color-taupe-gray, $--color-white, 80%);
       border-color: transparent;
       background-color: transparent;
-    }
-    &:active {
-      color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-      border-color: transparent;
-      background-color: transparent;
-    }
 
+      .tm-icon {
+        fill: mix($--color-taupe-gray, $--color-white, 80%);
+      }
+    }
+    &:not(.is-disabled):active {
+      color: $--color-taupe-gray;
+      border-color: transparent;
+      background-color: transparent;
+
+      .tm-icon {
+        fill: $--color-taupe-gray;
+      }
+    }
     &.is-disabled,
     &.is-disabled:hover,
     &.is-disabled:focus {
+      color: mix($--color-taupe-gray, $--color-white, 40%);
       border-color: transparent;
+
+      .tm-icon {
+        fill: mix($--color-taupe-gray, $--color-white, 40%);
+      }
+    }
+    &:not(.is-disabled).is-search {
+      &:focus {
+        color: mix($--color-text-regular,$--color-white, 40%);
+
+        .tm-icon {
+          fill: mix($--color-text-regular,$--color-white, 40%);
+        }
+      }
+      &:hover {
+        color: $--color-blueberry;
+
+        .tm-icon {
+          fill: $--color-blueberry;
+        }
+      }
+      &:active {
+        color: $--color-text-regular;
+
+        .tm-icon {
+          fill: $--color-text-regular;
+        }
+      }
+    }
+
+    .tm-icon {
+      fill: mix($--color-taupe-gray, $--color-white, 50%);
     }
   }
 }
@@ -252,6 +461,7 @@
   & .tm-button {
     float: left;
     position: relative;
+    min-width: 150px;
     & + .tm-button {
       margin-left: 0;
     }
@@ -261,8 +471,16 @@
       border-bottom-right-radius: 0;
     }
     &:last-child {
+      background-color: mix($--color-primary, $--color-black, 80%);
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+
+      &:focus {
+        background-color: mix($--color-primary, $--color-black, 90%);
+      }
+      &:hover {
+        background-color: $--color-white;
+      }
     }
     &:first-child:last-child {
       border-top-right-radius: $--button-border-radius;
