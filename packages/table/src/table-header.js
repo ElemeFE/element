@@ -154,7 +154,7 @@ export default {
                       style={ this.getHeaderCellStyle(rowIndex, 0, columns, 0) }
                       class="actions">
                       <span class="message">{ selectedRows }{ this.multipleSelect.message }</span>
-                      <div class="actions-container">{ this._l(this.multipleSelect.actions, action => <el-button on-click={ action.action(selectedRows) } class={ action.class } type={ action.type } size={ action.size }>{ action.label }</el-button>) }</div>
+                      <div class="actions-container">{ this._l(this.multipleSelect.actions, action => <el-button on-click={ ($event) => this.handleActionClick($event, action.action, this.store.states.selection) } class={ action.class } type={ action.type } size={ action.size }>{ action.label }</el-button>) }</div>
                     </th>
                     : ''
                 }
@@ -504,6 +504,10 @@ export default {
     handleMouseOut() {
       if (this.$isServer) return;
       document.body.style.cursor = '';
+    },
+
+    handleActionClick(event, action, selection) {
+      action(selection);
     },
 
     toggleOrder(order) {
