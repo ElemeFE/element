@@ -56,7 +56,7 @@
 
     &:hover,
     &:focus {
-      background-color: $--color-white;
+      background-color: $--color-white-smoke;
       border-color: $--color-mantis;
       color: $--color-mantis;
     }
@@ -91,17 +91,6 @@
 
     &.tm-button--text {
       background-color: transparent;
-    }
-
-    &.is-plain,
-    &.is-remove {
-      &,
-      &:hover,
-      &:focus {
-        background-color: mix($--color-white, $--color-white-smoke, 50%);
-        border-color: $--color-primary-light-5;
-        color: $--color-primary-light-5;
-      }
     }
   }
 
@@ -178,17 +167,11 @@
   }
   @include m(secondary) {
     min-width: 192px;
+    @include button-variant($--button-secondary-color, $--button-secondary-fill, $--button-secondary-border);
 
     &:hover {
       color: $--color-white;
       background-color: $--color-mantis;
-    }
-
-    &.is-plain {
-      &:hover {
-        color: $--color-white;
-        background-color: $--color-mantis;
-      }
     }
 
     &.is-cancel {
@@ -198,6 +181,7 @@
       &:hover {
         color: $--color-white;
         background-color: $--color-pastel-gray;
+        border-color: $--color-pastel-gray;
       }
     }
 
@@ -208,6 +192,7 @@
       &:hover {
         color: $--color-white;
         background-color: $--color-sunset-orange;
+        border-color: $--color-sunset-orange;
       }
     }
   }
