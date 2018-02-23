@@ -1267,6 +1267,122 @@ You can also select multiple rows.
 ```
 :::
 
+### Multiple select with actions
+
+You can also show actions to perform on the selection.
+
+:::demo Activating actions for multiple selection is easy: simply pass an object to `el-table` as `multiple-select`. The object should have a message and an array of actions which holds the information for each action as an object. Take a look at the code to see how it should be structured. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
+```html
+<template>
+  <el-table
+    ref="multipleTable"
+    :data="tableData3"
+    style="width: 100%"
+    :multiple-select="{
+      message: ' row(s) have been selected.',
+      actions: [
+        {
+          label: 'edit',
+          class: 'edit-button',
+          type: '',
+          size: 'mini',
+          action(selection) {
+            // action goes here
+          }
+        },
+        {
+          label: 'print',
+          class: 'print-button',
+          type: 'primary',
+          size: 'mini',
+          action(selection) {
+            // action goes here
+          }
+        }
+      ]
+    }"
+    @selection-change="handleSelectionChange">
+    <el-table-column
+      type="selection"
+      width="55">
+    </el-table-column>
+    <el-table-column
+      label="Date"
+      width="120">
+      <template slot-scope="scope">{{ scope.row.date }}</template>
+    </el-table-column>
+    <el-table-column
+      property="name"
+      label="Name"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      property="address"
+      label="Address"
+      show-overflow-tooltip>
+    </el-table-column>
+  </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Toggle selection status of second and third rows</el-button>
+    <el-button @click="toggleSelection()">Clear selection</el-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData3: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-08',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-06',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-07',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }],
+        multipleSelection: []
+      }
+    },
+    methods: {
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Sorting
 
 Sort the data to find or compare data quickly.

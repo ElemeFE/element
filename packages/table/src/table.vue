@@ -24,6 +24,7 @@
         :store="store"
         :border="border"
         :default-sort="defaultSort"
+        :multiple-select="multipleSelect"
         :style="{
           width: layout.bodyWidth ? layout.bodyWidth + 'px' : ''
         }">
@@ -303,6 +304,8 @@
       defaultExpandAll: Boolean,
 
       defaultSort: Object,
+
+      multipleSelect: Object,
 
       tooltipEffect: String,
 

@@ -104,6 +104,24 @@
         background: $--background-color-base;
       }
     }
+    
+    &.has-selection {
+      .actions {
+        padding: 0 0 0 14px;
+        font-weight: 500;
+        vertical-align: middle;
+        background: #ebeef5;
+
+        .message {
+          line-height: 40px;
+        }
+
+        .actions-container {
+          float: right;
+          margin-top: -1px;
+        }
+      }
+    }
   }
 
   th, td {

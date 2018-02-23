@@ -73,7 +73,10 @@ export default {
     const columnRows = convertToRows(originColumns, this.columns);
     // 是否拥有多级表头
     const isGroup = columnRows.length > 1;
+    const hasSelection = this.store.states.selection.length > 0;
+    const selectedRows = this.store.states.selection.length;
     if (isGroup) this.$parent.isGroup = true;
+    if (hasSelection) this.$parent.hasSelection = true;
     return (
       <table
         class="el-table__header"
@@ -88,7 +91,7 @@ export default {
             this.hasGutter ? <col name="gutter" /> : ''
           }
         </colgroup>
-        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+        <thead class={ [{ 'is-group': isGroup, 'has-selection': hasSelection, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr
@@ -138,6 +141,29 @@ export default {
               </tr>
             )
           }
+          {
+            this._l(columnRows, (columns, rowIndex) =>
+              <tr
+                style={ this.getHeaderRowStyle(rowIndex) }
+                class={ this.getHeaderRowClass(rowIndex) }
+              >
+                {
+                  hasSelection && this.multipleSelect
+                    ? <th
+                      colspan={ columns.length }
+                      style={ this.getHeaderCellStyle(rowIndex, 0, columns, 0) }
+                      class="actions">
+                      <span class="message">{ selectedRows }{ this.multipleSelect.message }</span>
+                      <div class="actions-container">{ this._l(this.multipleSelect.actions, action => <el-button on-click={ ($event) => this.handleActionClick($event, action.action, this.store.states.selection) } class={ action.class } type={ action.type } size={ action.size }>{ action.label }</el-button>) }</div>
+                    </th>
+                    : ''
+                }
+                {
+                  this.hasGutter ? <th class="gutter"></th> : ''
+                }
+              </tr>
+            )
+          }
         </thead>
       </table>
     );
@@ -156,6 +182,12 @@ export default {
           prop: '',
           order: ''
         };
+      }
+    },
+    multipleSelect: {
+      type: Object,
+      default() {
+        return null;
       }
     }
   },
@@ -472,6 +504,10 @@ export default {
     handleMouseOut() {
       if (this.$isServer) return;
       document.body.style.cursor = '';
+    },
+
+    handleActionClick(event, action, selection) {
+      action(selection);
     },
 
     toggleOrder(order) {
