@@ -270,7 +270,7 @@
         try {
           this.$router.push(route, () => {}, onError);
         } catch (e) {
-          console.error(e);
+          if (e) console.error(e);
         }
       },
       open(index) {
