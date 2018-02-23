@@ -1271,7 +1271,7 @@ You can also select multiple rows.
 
 You can also show actions to perform on the selection.
 
-:::demo Activating multiple selection is easy: simply add an `el-table-column` with its `type` set to `selection`. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
+:::demo Activating actions for multiple selection is easy: simply pass an object to `el-table` as `multiple-select`. The object should have a message and an array of actions which holds the information for each action as an object. Take a look at the code to see how it should be structured. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
 ```html
 <template>
   <el-table
@@ -1286,7 +1286,7 @@ You can also show actions to perform on the selection.
           class: 'edit-button',
           type: '',
           size: 'mini',
-          action(selectedRows) {
+          action(selection) {
             // action goes here
           }
         },
@@ -1295,7 +1295,7 @@ You can also show actions to perform on the selection.
           class: 'print-button',
           type: 'primary',
           size: 'mini',
-          action(selectedRows) {
+          action(selection) {
             // action goes here
           }
         }
@@ -1365,9 +1365,6 @@ You can also show actions to perform on the selection.
       }
     },
     methods: {
-      action(command) {
-        console.log(`This is what I should be doing: ${command}`)
-      },
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
