@@ -671,11 +671,11 @@ $--scrollbar-hover-background-color: rgba($--color-text-secondary, .5) !default;
 /* Carousel
 --------------------------*/
 $--carousel-arrow-font-size: 12px !default;
-$--carousel-arrow-size: 36px !default;
-$--carousel-arrow-background: rgba(31, 45, 61, 0.11) !default;
-$--carousel-arrow-hover-background: rgba(31, 45, 61, 0.23) !default;
-$--carousel-indicator-width: 30px !default;
-$--carousel-indicator-height: 2px !default;
+$--carousel-arrow-size: 24px !default;
+$--carousel-arrow-background: transparent !default;
+$--carousel-arrow-hover-background: transparent !default;
+$--carousel-indicator-width: 6px !default;
+$--carousel-indicator-height: 6px !default;
 $--carousel-indicator-padding-horizontal: 4px !default;
 $--carousel-indicator-padding-vertical: 12px !default;
 $--carousel-indicator-out-color: $--border-color-hover !default;

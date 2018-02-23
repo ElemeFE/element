@@ -71,6 +71,7 @@ Loop a series of images or texts in a limited space
   <div class="block">
     <span class="demonstration">Switch when indicator is hovered (default)</span>
     <tm-carousel height="150px">
+      <tm-badge round slot="label">35 свободных номеров</tm-badge>
       <tm-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </tm-carousel-item>
