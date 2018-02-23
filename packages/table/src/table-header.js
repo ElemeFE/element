@@ -148,12 +148,13 @@ export default {
                 class={ this.getHeaderRowClass(rowIndex) }
               >
                 {
-                  hasSelection
+                  hasSelection && this.multipleSelect
                     ? <th
                       colspan={ columns.length }
                       style={ this.getHeaderCellStyle(rowIndex, 0, columns, 0) }
-                      class={ this.getHeaderCellClass(rowIndex, 0, columns, 0) }>
-                      총 { selectedRows }개의 검사기록이 선택되었습니다.
+                      class="actions">
+                      <span class="message">{ selectedRows }{ this.multipleSelect.message }</span>
+                      <div class="actions-container">{ this._l(this.multipleSelect.actions, action => <el-button on-click={ action.action(selectedRows) } class={ action.class } type={ action.type } size={ action.size }>{ action.label }</el-button>) }</div>
                     </th>
                     : ''
                 }
@@ -181,6 +182,12 @@ export default {
           prop: '',
           order: ''
         };
+      }
+    },
+    multipleSelect: {
+      type: Object,
+      default() {
+        return null;
       }
     }
   },
