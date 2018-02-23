@@ -48,6 +48,7 @@
     width: $--icon-size-base;
     & + span {
       margin-left: 5px;
+      vertical-align: top;
     }
   }
 
