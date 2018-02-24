@@ -4,32 +4,33 @@
     :class="{ 'tm-carousel--card': type === 'card' }"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
+    <slot name="label"></slot>
     <div
       class="tm-carousel__container"
       :style="{ height: height }">
       <transition name="carousel-arrow-left">
-        <button
-          type="button"
+        <tm-button
+          type="default"
+          icon="arrow-left"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
           class="tm-carousel__arrow tm-carousel__arrow--left">
-          <i class="tm-icon-arrow-left"></i>
-        </button>
+        </tm-button>
       </transition>
       <transition name="carousel-arrow-right">
-        <button
-          type="button"
+        <tm-button
+          type="default"
+          icon="arrow-right"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
           class="tm-carousel__arrow tm-carousel__arrow--right">
-          <i class="tm-icon-arrow-right"></i>
-        </button>
+        </tm-button>
       </transition>
       <slot></slot>
     </div>

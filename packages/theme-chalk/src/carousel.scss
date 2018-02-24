@@ -19,7 +19,6 @@
     width: $--carousel-arrow-size;
     cursor: pointer;
     transition: .3s;
-    border-radius: 50%;
     background-color: $--carousel-arrow-background;
     color: $--color-white;
     position: absolute;
@@ -37,12 +36,17 @@
       right: 16px;
     }
 
+    &:focus,
     &:hover {
       background-color: $--carousel-arrow-hover-background;
     }
 
     & i {
       cursor: pointer;
+    }
+
+    .tm-icon {
+      fill: $--color-pastel-gray;
     }
   }
 
@@ -96,28 +100,35 @@
     cursor: pointer;
 
     &:hover button {
-      opacity: 0.72;
+      background-color: mix($--color-pastel-gray, $--color-black, 80%);
     }
 
     @include when(active) {
       button {
-        opacity: 1;
+        background-color: transparent;
       }
     }
   }
 
   @include e(button) {
     display: block;
-    opacity: 0.48;
     width: $--carousel-indicator-width;
     height: $--carousel-indicator-height;
-    background-color: $--color-white;
-    border: none;
+    background-color: $--color-pastel-gray;
+    border: 1px solid $--color-pastel-gray;
+    border-radius: $--border-radius-circle;
     outline: none;
     padding: 0;
     margin: 0;
     cursor: pointer;
     transition: .3s;
+  }
+
+  .tm-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
   }
 }
 
