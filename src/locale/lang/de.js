@@ -23,7 +23,7 @@ export default {
       day: 'Tag',
       week: 'Woche',
       month: 'Monat',
-      year: 'Jahr',
+      year: '',
       month1: 'Januar',
       month2: 'Februar',
       month3: 'März',
