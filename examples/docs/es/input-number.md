@@ -178,3 +178,14 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | Método | Descripción                          | Parámetro |
 | ------ | ------------------------------------ | --------- |
 | focus  | coloca el foco en el elemento actual | -         |
+
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |------------ |---------- |-------- |
+| label | label text for AT  | string | — |
+
+#### Keyboard interaction
+| Key      | Description       |         
+| -------- | ----------------- | 
+| Up/Down  | change the value |

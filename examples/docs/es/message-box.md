@@ -401,3 +401,10 @@ Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.conf
 | inputErrorMessage        | mensaje de error cuando la validacion falla | string                                   | —                                | Illegal input                            |
 | center                   | utilizado para alinear el contenido al centro | boolean                                  | —                                | false                                    |
 | roundButton              | utilizado para redondear el boton        | boolean                                  | —                                | false                                    |
+
+### Focus management
+By default, the first tabbable element within the dialog will receive focus upon open.
+Tabbing through the elements of the dialog will keep focus inside of the dialog element, wrapping back to the first tabbable element when reaching the end of the tab sequence.
+Once a dialog is closed, it will return focus to the element that was focused before the dialog was opened
+###  Keyboard interaction
+By default pressing the escape key will close the dialog. While this behavior can be turned off via the closeOnPressEscape attribute, users should generally avoid doing so as it breaks the expected interaction pattern for screen-reader users.

@@ -173,4 +173,3 @@ Simple step bars, where `align-center`, `description`, `direction` and `space` w
 | icon | custom icon |
 | title | step title |
 | description | step description |
-

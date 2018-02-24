@@ -229,3 +229,8 @@ Radio con estilo de botón.
 | ---------------- | --------------------------------- | ---------------------------------------- |
 | change           | se dispara cuando el valor cambia | el valor del `label` del Radio seleccionado |
 
+### Focus management
+
+| Key      | Description       |         
+| -------- | ----------------- | 
+| Right/Left | change focus  within  Radio-group |

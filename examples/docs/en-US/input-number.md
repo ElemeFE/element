@@ -177,3 +177,14 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | - |
+
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |------------ |---------- |-------- |
+| label | label text for AT  | string | — |
+
+#### Keyboard interaction
+| Key      | Description     |           
+| -------- | ----------------- | 
+| Up/Down  | change the value |

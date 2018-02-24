@@ -221,3 +221,11 @@ Description includes a message with more detailed information.
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | close | fires when alert is closed | — |
+
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |-------------- |---------- |-------- |
+| aria-label | label text for AT | string | — |
+| aria-labelledby | the element's ID which contain label text  | string | — | 
+| aria-describedby | the element's ID which contain description  | string | — | 

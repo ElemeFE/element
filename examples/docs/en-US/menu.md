@@ -347,3 +347,10 @@ Vertical NavMenu could be collapsed.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | title     | group title   | string  | — | — |
+
+### Keyboard interaction
+when mode is horizontal 
+
+| Key      | Description    |            
+| -------- | ----------------- | 
+| Up/Down  | change focus within subMenu|

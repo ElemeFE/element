@@ -175,3 +175,8 @@ Read-only Rate is for displaying rating score. Half star is supported.
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | change | Triggers when rate value is changed | value after changing |
+
+### Keyboard interaction
+| Key      | Description    |            
+| -------- | ----------------- | 
+| Left/Right | change the value |

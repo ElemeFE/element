@@ -1066,3 +1066,21 @@
 | name | 说明 |
 |------|--------|
 | — | 自定义树节点的内容，参数为 { node, data } |
+
+### Keyboard interaction
+
+| Key      | 说明             |    
+| -------- | ----------------- | 
+| Up  | 焦点移到上一个 treeitem |
+| Down | 焦点移到下一个 treeitem | 
+
+showCheckbox 为 false 时 
+| Key      | 说明             |    
+| -------- | ----------------- | 
+| Left/Right  | 触发 treeitem 的 click 事件 |
+
+showCheckbox 为 true 时 
+| Key      | 说明              |  
+| -------- | ----------------- | 
+| Left/Right  | 展开收起 treeitem 节点 |
+| Enter  | 选中节点的 checkbox |

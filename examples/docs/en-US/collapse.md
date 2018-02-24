@@ -154,3 +154,8 @@ Besides using the `title` attribute, you can customize panel title with named sl
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | name | unique identification of the panel | string/number | — | — |
 | title | title of the panel | string | — | — |
+
+### Keyboard interaction
+| Key      | Description      |          
+| -------- | ----------------- | 
+| Enter  | open/close the item |

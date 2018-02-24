@@ -392,3 +392,13 @@ Only card type Tabs support addable & closeable.
 | disabled | whether Tab is disabled | boolean | — | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, e.g. the first tab-pane is '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |
+
+### Keyboard interaction
+| Key      | 说明                
+| -------- | ----------------- | 
+| Left | move focus to the left tab |
+| Right | move focus to the right tab  |
+| Up | move focus to the top tab   |
+| Down | move focus to the bottom tab   |
+| Space/Enter |  active tab  |
+| Delete | delete the tab when closable is true  |

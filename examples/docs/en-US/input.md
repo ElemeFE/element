@@ -699,7 +699,6 @@ Attribute | Description | Type | Options | Default
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
-| label | label text | string | — | — |
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
 
@@ -722,3 +721,8 @@ Attribute | Description | Type | Options | Default
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | — |
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |-------------- |---------- |-------- |
+| label | label text for AT | string | placeholder's value |

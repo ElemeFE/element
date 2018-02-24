@@ -699,3 +699,9 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | Metodo | Descripción                   | Parametros |
 | ------ | ----------------------------- | ---------- |
 | focus  | coloca el foco en el elemento | —          |
+
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |-------------- |---------- |-------- |
+| label | label text for AT | string | placeholder's value |

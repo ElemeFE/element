@@ -227,3 +227,10 @@
 | label     | Radio 的 value  | string / number  |        —       |     —    |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | name | 原生 name 属性 | string    |      —         |     —    |
+
+#### Focus management
+导航到 RadioGroup 组件时，默认情况下，被选中的 radio 获得 focus ,若无则第一个 radio 获得焦点，焦点始终保持在 RadioGroup 组件组内。
+#### Keyboard interaction
+| Key      | 说明             |    
+| -------- | ----------------- | 
+| Right/Left | 各 radio 之间切换 |

@@ -176,3 +176,9 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
 | Nombre del evento | Descripción                              | Parámetros             |
 | ----------------- | ---------------------------------------- | ---------------------- |
 | change            | Se dispara cuando la puntuación es cambiada | valor luego del cambio |
+
+### Keyboard interaction
+
+| Key      | Description    |            
+| -------- | ----------------- | 
+| Left/Right | change the value |

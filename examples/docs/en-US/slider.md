@@ -240,7 +240,6 @@ Selecting a range of values is supported.
 | range | whether to select a range | boolean | — | false |
 | vertical | vertical mode | boolean | — | false |
 | height | Slider height, required in vertical mode | string | — | — |
-| label | label for screen reader | string | — | — |
 |debounce| debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 
 ## Events
@@ -248,3 +247,14 @@ Selecting a range of values is supported.
 |---------- |-------- |---------- |
 | change | triggers when the value changes (if the mouse is being dragged, this event only fires when the mouse is released) | value after changing |
 
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |-------------- |---------- |-------- |
+| label | label text for AT | string | — |
+
+#### Keyboard interaction
+
+| Key      | Description                
+| -------- | ----------------- | 
+| Left/Right/Up/Down  | change the value |

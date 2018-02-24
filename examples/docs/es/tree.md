@@ -1063,3 +1063,21 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | name | Description |
 |------|--------|
 | — | Contenido personalizado para nodos de tree. El parámetro del scope es { node, data }. |
+
+### Keyboard interaction
+
+| Key      | Description     |            
+| -------- | ----------------- | 
+| Up  | move focus to the top treeitem |
+| Down | move focus to the bottom treeitem | 
+
+when showCheckbox is false 
+| Key      | Description      |           
+| -------- | ----------------- | 
+| Left/Right  | trigger treeitem's click event |
+
+when showCheckbox is true
+| Key      | Description       |          
+| -------- | ----------------- | 
+| Right  | expend treeitem |
+| Enter  | select checkbox |
