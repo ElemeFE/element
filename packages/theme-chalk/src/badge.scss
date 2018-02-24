@@ -2,6 +2,9 @@
 @import "mixins/mixins";
 @import "mixins/utils";
 
+$--alpha-plain-fill-value: 0.8;
+$--color-text-default: #646464;
+
 @include b(badge) {
   position: relative;
   vertical-align: middle;
@@ -10,64 +13,275 @@
   line-height: 20px;
   text-align: center;
   padding: 0 10px;
-  background: #cccccc;
+  background: #ffffff;
+  color: #646464;
   border-radius: 2px;
-  color: #ffffff;
   font-size: $--font-size-base;
   cursor: default;
+  border: 1px solid transparent;
 
-  &:hover:not(.is-no-hover) {
-    background-color: $--color-blueberry;
+  .tm-icon {
+    fill: $--color-text-default;
+  }
+
+  &:hover {
+    color: #ffffff;
+    background: $--color-blueberry;
+
+    .tm-icon {
+      fill: #ffffff;
+    }
+  }
+
+  &:active {
+    background: $--color-dark-grey;
   }
 
   @include when(round) {
     border-radius: 10.5px;
   }
 
-  @include when(hollow) {
+  @include when(plain) {
+    border-color: #646464;
+
+    &:hover {
+      background-color: $--color-blueberry;
+      border-color: $--color-blueberry;
+    }
+
+    &:active {
+      color: #ffffff;
+      background: $--color-dark-grey;
+      border-color: $--color-dark-grey;
+
+      .tm-icon {
+        fill: #ffffff;
+      }
+    }
+  }
+
+  @include when(plain-default) {
+    background: transparentize(#ffffff, 0.7);
+
+    &:hover {
+      background: transparent;
+      color: $--color-blueberry;
+
+      .tm-icon {
+        fill: $--color-blueberry;
+      }
+    }
+
+    &:active {
+      color: #ffffff;
+      background: $--color-dark-grey;
+
+      .tm-icon {
+        fill: #ffffff;
+      }
+    }
+  }
+
+  @include when(plain-hollow) {
     background: transparent;
-    border: 1px solid #cccccc;
-    color: #cccccc;
-  }
 
-  @include m(red) {
-    background-color: $--color-sunset-orange;
+    &:hover {
+      color: #ffffff;
 
-    @include when(hollow) {
-      color: $--color-sunset-orange;
-      border-color: $--color-sunset-orange;
-
-      &:hover:not(.is-no-hover) {
-        background-color: $--color-sunset-orange;
-        color: #ffffff;
+      .tm-icon {
+        fill: #ffffff;
       }
     }
   }
 
-  @include m(green) {
-    background-color: $--color-mantis;
+  @include m(primary) {
+    background: #cccccc;
+    color: #ffffff;
 
-    @include when(hollow) {
-      color: $--color-mantis;
-      border-color: $--color-mantis;
+    .tm-icon {
+      fill: #ffffff;
+    }
 
-      &:hover:not(.is-no-hover) {
-        background-color: $--color-mantis;
+    &:hover, &:active {
+      color: #ffffff;
+
+      .tm-icon {
+        fill: #ffffff;
+      }
+    }
+
+    @include when(plain) {
+      border-color: #cccccc;
+      color: #cccccc;
+
+      .tm-icon {
+        fill: #cccccc;
+      }
+    }
+
+    @include when(plain-default) {
+      background: transparentize(#cccccc, $--alpha-plain-fill-value);
+    }
+  }
+
+  @include m(danger) {
+    color: #ffffff;
+    background-color: $--color-danger;
+
+    .tm-icon {
+      fill: #ffffff;
+    }
+
+    &:hover {
+      background: transparent;
+      color: $--color-danger;
+      border-color: $--color-danger;
+
+      .tm-icon {
+        fill: $--color-danger;
+      }
+    }
+
+    @include when(plain) {
+      border-color: $--color-danger;
+      color: $--color-danger;
+
+      .tm-icon {
+        fill: $--color-danger;
+      }
+    }
+
+    @include when(plain-default) {
+      background: transparentize($--color-danger, $--alpha-plain-fill-value);
+
+      &:hover {
+        background: transparent;
+        border-color: $--color-danger;
+        color: $--color-danger;
+
+        .tm-icon {
+          fill: $--color-danger;
+        }
+      }
+    }
+
+    @include when(plain-hollow) {
+      &:hover {
+        background: $--color-danger;
+        border-color: $--color-danger;
         color: #ffffff;
+
+        .tm-icon {
+          fill: #ffffff;
+        }
       }
     }
   }
 
-  @include m(orange) {
-    background-color: $--color-meat-brown;
+  @include m(success) {
+    color: #ffffff;
+    background-color: $--color-success;
 
-    @include when(hollow) {
-      color: $--color-meat-brown;
-      border-color: $--color-meat-brown;
+    .tm-icon {
+      fill: #ffffff;
+    }
 
-      &:hover:not(.is-no-hover) {
-        background-color: $--color-meat-brown;
+    &:hover {
+      background: transparent;
+      color: $--color-success;
+      border-color: $--color-success;
+
+      .tm-icon {
+        fill: $--color-success;
+      }
+    }
+
+    @include when(plain) {
+      border-color: $--color-success;
+      color: $--color-success;
+
+      .tm-icon {
+        fill: $--color-success;
+      }
+    }
+
+    @include when(plain-default) {
+      background: transparentize($--color-success, $--alpha-plain-fill-value);
+
+      &:hover {
+        background: transparent;
+        border-color: $--color-success;
+        color: $--color-success;
+
+        .tm-icon {
+          fill: $--color-success;
+        }
+      }
+    }
+
+    @include when(plain-hollow) {
+      &:hover {
+        background: $--color-success;
+        border-color: $--color-success;
         color: #ffffff;
+
+        .tm-icon {
+          fill: #ffffff;
+        }
+      }
+    }
+  }
+
+  @include m(warning) {
+    color: #ffffff;
+    background-color: $--color-warning;
+
+    .tm-icon {
+      fill: #ffffff;
+    }
+
+    &:hover {
+      background: transparent;
+      color: $--color-warning;
+      border-color: $--color-warning;
+
+      .tm-icon {
+        fill: $--color-warning;
+      }
+    }
+
+    @include when(plain) {
+      border-color: $--color-warning;
+      color: $--color-warning;
+
+      .tm-icon {
+        fill: $--color-warning;
+      }
+    }
+
+    @include when(plain-default) {
+      background: transparentize($--color-warning, $--alpha-plain-fill-value);
+
+      &:hover {
+        background: transparent;
+        color: $--color-warning;
+        border-color: $--color-warning;
+
+        .tm-icon {
+          fill: $--color-warning;
+        }
+      }
+    }
+
+    @include when(plain-hollow) {
+      &:hover {
+        background: $--color-warning;
+        border-color: $--color-warning;
+        color: #ffffff;
+
+        .tm-icon {
+          fill: #ffffff;
+        }
       }
     }
   }

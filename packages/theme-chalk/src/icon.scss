@@ -2,6 +2,7 @@
 
 .tm-icon {
   display: inline-block;
+  vertical-align: middle;
   fill: $--icon-color-base;
   svg {
     width: 14px; // base size

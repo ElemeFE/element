@@ -12,12 +12,29 @@ describe('Badge', () => {
     expect(vm.$el).to.exist;
   });
 
-  it('hollow', () => {
+  it('type', () => {
     vm = createTest(Badge, {
-      hollow: true
+      type: 'danger'
     }, true);
     let badgeElm = vm.$el;
-    expect(badgeElm.classList.contains('is-hollow')).to.be.true;
+    expect(badgeElm.classList.contains('tm-badge--danger')).to.be.true;
+  });
+
+  it('plain', () => {
+    vm = createTest(Badge, {
+      plain: true
+    }, true);
+    let badgeElm = vm.$el;
+    expect(badgeElm.classList.contains('is-plain')).to.be.true;
+  });
+
+  it('plain with fill', () => {
+    vm = createTest(Badge, {
+      plain: true,
+      fill: 'hollow'
+    }, true);
+    let badgeElm = vm.$el;
+    expect(badgeElm.classList.contains('is-plain-hollow')).to.be.true;
   });
 
   it('round', () => {
@@ -28,20 +45,5 @@ describe('Badge', () => {
     expect(badgeElm.classList.contains('is-round')).to.be.true;
   });
 
-  it('no-hover', () => {
-    vm = createTest(Badge, {
-      noHover: true
-    }, true);
-    let badgeElm = vm.$el;
-    expect(badgeElm.classList.contains('is-no-hover')).to.be.true;
-  });
-
-  it('color', () => {
-    vm = createTest(Badge, {
-      color: 'green'
-    }, true);
-    let badgeElm = vm.$el;
-    expect(badgeElm.classList.contains('tm-badge--green')).to.be.true;
-  });
 });
 

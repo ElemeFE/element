@@ -2,13 +2,22 @@
 
 ### 1.0.0
 
+*2018-02-24*
+
+- Переработка компонента Badge
+
 *2018-02-23*
+
 - Кастомизированны Basic Type Button
   - Icons Button
   - Text Buttons
   - Group Buttons
   - Circle Buttons
 - Кастомизированна Carousel
+
+*2018-02-24*
+
+- Добавлен новый компонент Badge
 
 *2018-02-21*
 

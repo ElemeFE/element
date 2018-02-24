@@ -1,38 +1,9 @@
 <style>
-    .demo-services .tm-badge {
-        box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
-        color: #5f5f5f;
-        margin-left: 5px;
+    .tm-badge + .tm-badge {
+        margin-left: 10px;
     }
-    .demo-services .tm-icon svg {
-        width: 12px;
-        height: 12px;
-        fill: #5f5f5f;
-    }
-    .demo-payment .tm-badge {
-        border: none;
-        font-weight: 500;
-        width: 160px;
-    }
-    .demo-payment .tm-badge--red {
-        background: #f5ddde;
-    }
-    .demo-payment .tm-badge--green {
-        background: #daf2e0;
-    }
-    .circle {
-        display: inline-block;
-        vertical-align: middle;
-        width: 6px;
-        height: 6px;
-        margin-right: 2px;
-        border-radius: 50%;
-    }
-    .circle-red {
-        background: #ec5657;
-    }
-    .circle-green {
-        background: #5dc376;
+    .demo-badge {
+        background: #f4f5f9;
     }
 </style>
 
@@ -42,89 +13,55 @@ Badges are using for show any information. See examples to understand it better.
 
 ### Basic usage
 
-:::demo Use `hollow` and `round` to define Badge's style. If you'd like to fix colors on hover use `no-hover`.
+:::demo Use `type`, `plain` and `round` to define Badge's style. Also you can use `fill` when `plain` is on.
 
 ```html
+<h4>Basic usage</h4>
 <div>
-    Account: <tm-badge>Default</tm-badge> / <tm-badge no-hover color="orange">VIP</tm-badge>
-    <br><br>
-    Subscription: <tm-badge hollow round color="green">Active</tm-badge> / <tm-badge hollow round color="red">Expired</tm-badge>
+    <tm-badge>Default</tm-badge>
+    <tm-badge type="primary">Primary</tm-badge>
+    <tm-badge type="success">Success</tm-badge>
+    <tm-badge type="warning">Warning</tm-badge>
+    <tm-badge type="danger">Danger</tm-badge>
+</div>
+<h4>Round usage</h4>
+<div>
+    <tm-badge round>Round</tm-badge>
+    <tm-badge round type="primary">Primary</tm-badge>
+    <tm-badge round type="success">Success</tm-badge>
+    <tm-badge round type="warning">Warning</tm-badge>
+    <tm-badge round type="danger">Danger</tm-badge>
+</div>
+<h4>Plain usage</h4>
+<div>
+    <tm-badge plain>Plain</tm-badge>
+    <tm-badge plain type="primary">Primary</tm-badge>
+    <tm-badge plain type="success">Success</tm-badge>
+    <tm-badge plain type="warning">Warning</tm-badge>
+    <tm-badge plain type="danger">Danger</tm-badge>
+</div>
+<h4>Plain usage with <u>fill="hollow"</u></h4>
+<div>
+    <tm-badge plain fill="hollow">Plain</tm-badge>
+    <tm-badge plain fill="hollow" type="primary">Primary</tm-badge>
+    <tm-badge plain fill="hollow" type="success">Success</tm-badge>
+    <tm-badge plain fill="hollow" type="warning">Warning</tm-badge>
+    <tm-badge plain fill="hollow" type="danger">Danger</tm-badge>
 </div>
 ```
 :::
 
-### Want any icons? Or anything else?
+### Extandable inner content
 
 :::demo You may place inside element anything you want. Really.
 
 ```html
+<h4>Using with icon</h4>
 <div>
-    <div class="demo-services">
-        Services:
-        <tm-badge round hollow no-hover>
-            <tm-icon name="wifi"></tm-icon>
-            Wi-Fi
-        </tm-badge>
-        <tm-badge round hollow no-hover>
-            <tm-icon name="bath"></tm-icon>
-            Bath
-        </tm-badge>
-        <tm-badge round hollow no-hover>
-            <tm-icon name="knife-fork"></tm-icon>
-            Kitchet
-        </tm-badge>
-    </div>
-    <hr>
-    <div class="demo-payment">
-        <tm-badge round hollow no-hover color="red">
-            <i class="circle circle-red"></i>
-            Waiting for payment
-        </tm-badge>
-        /
-        <tm-badge round hollow no-hover color="green">
-            <i class="circle circle-green"></i>
-            Paid
-        </tm-badge>
-    </div>
+    <tm-badge>
+        <tm-icon name="wifi"></tm-icon> Wi-Fi
+    </tm-badge>
 </div>
-
-<style>
-    .demo-services .tm-badge {
-        box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
-        color: #5f5f5f;
-        margin-left: 5px;
-    }
-    .demo-services .tm-icon svg {
-        width: 12px;
-        height: 12px;
-        fill: #5f5f5f;
-    }
-    .demo-payment .tm-badge {
-        border: none;
-        font-weight: 500;
-        width: 160px;
-    }
-    .demo-payment .tm-badge--red {
-        background: #f5ddde;
-    }
-    .demo-payment .tm-badge--green {
-        background: #daf2e0;
-    }
-    .circle {
-        display: inline-block;
-        vertical-align: middle;
-        width: 6px;
-        height: 6px;
-        margin-right: 2px;
-        border-radius: 50%;
-    }
-    .circle-red {
-        background: #ec5657;
-    }
-    .circle-green {
-        background: #5dc376;
-    }
-</style>
 ```
 :::
 
@@ -132,7 +69,7 @@ Badges are using for show any information. See examples to understand it better.
 ### Attributes
 | Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| color     | badge special color   | string  |   green / orange / red            |    —     |
-| hollow     | determine whether it's a hollow badge   | boolean    |   — |     false    |
-| round     | determine whether it's a round button   | boolean    | — | false   |
-| no-hover     | determine whether badge has no hover   | boolean    | — | false   |
+| type     | badge special color   | string  |   primary / success / warning / danger            |    —     |
+| round     | determine whether it's a round badge   | boolean    | — | false   |
+| plain     | determine whether it's a plain badge   | boolean    | — | false   |
+| fill     | determine fill of plain badge, available only with `plain`   | string    | default / hollow | —   |

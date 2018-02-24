@@ -1,11 +1,11 @@
 <template>
   <div class="tm-badge"
        :class="[
-        color ? 'tm-badge--' + color : '',
+        type ? 'tm-badge--' + type : '',
+        plainFill ? 'is-plain-' + fill : '',
         {
           'is-round': round,
-          'is-hollow': hollow,
-          'is-no-hover': noHover
+          'is-plain': plain
         }
        ]"
   >
@@ -18,18 +18,29 @@ export default {
   name: 'TmBadge',
 
   props: {
-    color: String,
+    type: {
+      type: String,
+      default: 'default'
+    },
     round: {
       type: Boolean,
       default: false
     },
-    hollow: {
+    plain: {
       type: Boolean,
       default: false
     },
-    noHover: {
-      type: Boolean,
-      default: false
+    fill: {
+      type: String,
+      default: 'default'
+    }
+  },
+  computed: {
+    plainFill() {
+      if (this.plain === true && this.fill) {
+        return true;
+      }
+      return false;
     }
   }
 };
