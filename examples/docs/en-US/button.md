@@ -250,6 +250,11 @@ Besides default size, Button component provides three additional sizes for you t
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | button size   | string  |   medium / small / mini            |    —     |
 | type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
+| cancel     | determine whether it's a cancel button   | boolean    | — | false   |
+| circle     | determine whether it's a circle button   | boolean    | — | false   |
+| approve     | determine whether it's a approve button   | boolean    | — | false   |
+| remove     | determine whether it's a remove button   | boolean    | — | false   |
+| search     | determine whether it's a search button   | boolean    | — | false   |
 | plain     | determine whether it's a plain button   | boolean    | — | false   |
 | round     | determine whether it's a round button   | boolean    | — | false   |
 | loading   | determine whether it's loading   | boolean    | — | false   |
