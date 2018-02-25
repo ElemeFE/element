@@ -46,13 +46,13 @@
   }
 
   @include e(icon) {
-    font-size: 10px;
-    height: 10px;
-    width: 10px;
-    fill: #409EFF;
+    font-size: $--dropdown-icon-size;
+    height: $--dropdown-icon-size;
+    width: $--dropdown-icon-size;
+    fill: $--dropdown-link-icon-color;
 
     @include m(white) {
-      fill: #fff;
+      fill: $--dropdown-button-icon-color;
     }
 
     @include m(single) {

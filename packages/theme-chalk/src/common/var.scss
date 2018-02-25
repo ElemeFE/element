@@ -11,8 +11,8 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 
 /* Colors
 -------------------------- */
-$--color-white: #ffffff !default;
-$--color-black: #000000 !default;
+$--color-white: #fff !default;
+$--color-black: #000 !default;
 $--color-blueberry: #7f95e1 !default;
 $--color-mantis: #5dc376 !default;
 $--color-sunset-orange: #ec5657 !default;
@@ -22,7 +22,7 @@ $--color-dark-grey: #50586d !default;
 $--color-white-smoke: #f4f5f9 !default;
 $--color-dark-gunmetal: #1e1e28 !default;
 $--color-taupe-gray: #909090 !default;
-$--color-pastel-gray: #cccccc !default;
+$--color-pastel-gray: #ccc !default;
 
 $--color-primary: $--color-dark-gunmetal !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default;
@@ -594,6 +594,9 @@ $--dropdown-menuItem-icon-size: 10px !default;
 $--dropdown-menuItem-icon-color: $--color-taupe-gray !default;
 $--dropdown-menuItem-hover-icon-color: $--color-blueberry !default;
 $--dropdown-menuItem-border-color: rgba(0, 0, 0, 0.12) !default;
+$--dropdown-link-button-color: $--color-white !default;
+$--dropdown-link-icon-color: $--link-color !default;
+$--dropdown-icon-size: 10px !default;
 
 /* Badge
 -------------------------- */
