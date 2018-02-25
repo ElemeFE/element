@@ -255,7 +255,7 @@
             {this.$slots.default}
           </tm-button>
           <tm-button ref="trigger" type={type} size={dropdownSize} class="tm-dropdown__caret-button">
-            <i class="tm-dropdown__icon tm-icon-arrow-down"></i>
+            <tm-icon name="arrow-down" class="tm-dropdown__icon tm-dropdown__icon--white"></tm-icon>
           </tm-button>
         </tm-button-group>);
 

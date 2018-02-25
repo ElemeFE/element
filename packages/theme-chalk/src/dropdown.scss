@@ -17,8 +17,6 @@
   }
 
   & .tm-dropdown__caret-button {
-    padding-left: 5px;
-    padding-right: 5px;
     position: relative;
     border-left: none;
 
@@ -46,9 +44,20 @@
       padding-left: 0;
     }
   }
+
   @include e(icon) {
-    font-size: 12px;
-    margin: 0 3px;
+    font-size: 10px;
+    height: 10px;
+    width: 10px;
+    fill: #409EFF;
+
+    @include m(white) {
+      fill: #fff;
+    }
+
+    @include m(single) {
+      margin-left: 10px;
+    }
   }
 
   .tm-dropdown-selfdefine { // 自定义

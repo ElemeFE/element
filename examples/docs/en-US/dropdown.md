@@ -61,7 +61,7 @@ Hover on the dropdown menu to unfold it for more actions.
 ```html
 <tm-dropdown>
   <span class="tm-dropdown-link">
-    Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
+    Dropdown List <tm-icon name="arrow-down" class="tm-dropdown__icon"></tm-icon>
   </span>
   <tm-dropdown-menu slot="dropdown">
     <tm-dropdown-item>
@@ -97,7 +97,8 @@ Use the button to trigger the dropdown list.
 ```html
 <tm-dropdown>
   <tm-button type="primary">
-    Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
+    Dropdown List 
+    <tm-icon name="arrow-down" class="tm-dropdown__icon tm-dropdown__icon--white  tm-dropdown__icon--single"></tm-icon>
   </tm-button>
   <tm-dropdown-menu slot="dropdown">
     <tm-dropdown-item>
@@ -160,7 +161,7 @@ Click the triggering element or hover on it.
     <span class="demonstration">hover to trigger</span>
     <tm-dropdown>
       <span class="tm-dropdown-link">
-        Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
+        Dropdown List <tm-icon name="arrow-down" class="tm-dropdown__icon"></tm-icon>
       </span>
       <tm-dropdown-menu slot="dropdown">
         <tm-dropdown-item>
@@ -178,7 +179,7 @@ Click the triggering element or hover on it.
     <span class="demonstration">click to trigger</span>
     <tm-dropdown trigger="click">
       <span class="tm-dropdown-link">
-        Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
+        Dropdown List <tm-icon name="arrow-down" class="tm-dropdown__icon"></tm-icon>
       </span>
       <tm-dropdown-menu slot="dropdown">
         <tm-dropdown-item>
@@ -220,7 +221,7 @@ Use `hide-on-click` to define if menu closes on clicking.
 ```html
 <tm-dropdown :hide-on-click="false">
   <span class="tm-dropdown-link">
-    Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
+    Dropdown List <tm-icon name="arrow-down" class="tm-dropdown__icon"></tm-icon>
   </span>
   <tm-dropdown-menu slot="dropdown">
     <tm-dropdown-item>
@@ -254,7 +255,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 ```html
 <tm-dropdown @command="handleCommand">
   <span class="tm-dropdown-link">
-    Dropdown List<i class="tm-icon-arrow-down tm-icon--right"></i>
+    Dropdown List <tm-icon name="arrow-down" class="tm-dropdown__icon"></tm-icon>
   </span>
   <tm-dropdown-menu slot="dropdown">
     <tm-dropdown-item command="a">
