@@ -17,7 +17,7 @@
 
   &:hover {
     .tm-radio__inner {
-      border-color: $--color-text-primary;
+      border-color: $--color-text-regular;
     }
 
     .tm-radio__label {
@@ -33,13 +33,13 @@
     height: $--radio-bordered-height;
 
     &.is-checked {
-      border-color: $--color-primary;
+      border-color: $--color-secondary;
     }
 
     &.is-disabled {
       cursor: not-allowed;
-      border-color: $--border-color-light;
-      background-color: $--color-primary-light-8;
+      border-color: $--disabled-border-base;
+      background-color: $--disabled-fill-base;
     }
 
     & + .tm-radio.is-bordered {
@@ -156,7 +156,7 @@
 
     @include when(focus) {
       .tm-radio__inner {
-        border-color: $--radio-input-border-color-hover;
+        border-color: $--color-text-regular;
       }
     }
   }
@@ -190,7 +190,7 @@
 
   &:focus:not(.is-focus):not(:active){ /*获得焦点时 样式提醒*/
     .tm-radio__inner {
-      box-shadow: 0 0 2px 2px $--radio-input-border-color-hover;
+      box-shadow: 0 0 2px 2px $--color-text-placeholder;
     }
   }
 

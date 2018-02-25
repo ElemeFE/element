@@ -24,7 +24,7 @@ $--color-dark-gunmetal: #1e1e28 !default;
 $--color-taupe-gray: #909090 !default;
 $--color-pastel-gray: #cccccc !default;
 
-$--color-primary: $--color-dark-gunmetal !default;
+$--color-primary: $--color-mantis !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default;
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default;
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default;
@@ -233,7 +233,7 @@ $--radio-bordered-mini-height: 28px !default;
 $--radio-button-font-size: $--font-size-base !default;
 $--radio-button-checked-fill: $--color-text-secondary !default;
 $--radio-button-checked-color: $--color-white !default;
-$--radio-button-checked-border-color: $--color-text-secondary !default;
+$--radio-button-checked-border-color: $--color-text-primary !default;
 $--radio-button-disabled-checked-fill: $--color-secondary-light-5 !default;
 
 /* Select
@@ -246,15 +246,15 @@ $--select-icon-hover-color: $--color-text-secondary !default;
 
 $--select-input-color: $--color-text-placeholder !default;
 $--select-multiple-input-color: #666 !default;
-$--select-input-focus-background: $--color-primary !default;
+$--select-input-focus-background: $--color-taupe-gray !default;
 $--select-input-font-size: 14px !default;
 
-$--select-option-color: $--color-text-regular !default;
+$--select-option-color: $--color-text-primary !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
 $--select-option-disabled-background: $--color-white !default;
 $--select-option-height: 34px !default;
 $--select-option-hover-background: $--background-color-base !default;
-$--select-option-selected: $--color-primary !default;
+$--select-option-selected: $--color-text-regular !default;
 $--select-option-selected-hover: $--background-color-base !default;
 
 $--select-group-color: $--color-info !default;
@@ -362,7 +362,7 @@ $--input-clear-hover-color: $--color-text-secondary !default;
 $--input-icon-hover-color: $--color-text-primary !default;
 $--input-icon-focus-color: $--color-text-secondary !default;
 
-$--input-focus-border: $--color-primary !default;
+$--input-focus-border: $--color-taupe-gray !default;
 $--input-focus-fill: $--color-white !default;
 
 $--input-disabled-fill: $--disabled-fill-base !default;
@@ -440,30 +440,34 @@ $--button-padding-horizontal: 20px !default;
 
 $--button-medium-font-size: 14px !default;
 $--button-medium-border-radius: $--border-radius-base !default;
-$--button-medium-padding-vertical: 10px !default;
+$--button-medium-padding-vertical: 12px !default;
 $--button-medium-padding-horizontal: 20px !default;
 
-$--button-small-font-size: 12px !default;
+$--button-small-font-size: 14px !default;
 $--button-small-border-radius: #{$--border-radius-base - 1} !default;
-$--button-small-padding-vertical: 9px !default;
-$--button-small-padding-horizontal: 15px !default;
+$--button-small-padding-vertical: 12px !default;
+$--button-small-padding-horizontal: 20px !default;
 
-$--button-mini-font-size: 12px !default;
+$--button-mini-font-size: 14px !default;
 $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
-$--button-mini-padding-vertical: 7px !default;
-$--button-mini-padding-horizontal: 15px !default;
+$--button-mini-padding-vertical: 12px !default;
+$--button-mini-padding-horizontal: 20px !default;
 
-$--button-default-color: $--color-text-regular !default;
-$--button-default-fill: $--color-white !default;
-$--button-default-border: $--border-color-base !default;
+$--button-default-border: $--color-white-smoke !default;
+$--button-default-color: $--color-taupe-gray !default;
+$--button-default-fill: rgba($--color-white, .76) !default;
 
-$--button-disabled-color: $--color-white !default;
-$--button-disabled-fill: $--color-primary-light-5 !default;
-$--button-disabled-border: $--color-primary-light-2 !default;
+$--button-disabled-border: $--disabled-border-base !default;
+$--button-disabled-color: $--disabled-color-base !default;
+$--button-disabled-fill: $--disabled-fill-base !default;
 
 $--button-primary-border: $--color-primary !default;
 $--button-primary-color: $--color-white !default;
 $--button-primary-fill: $--color-primary !default;
+
+$--button-secondary-border: $--color-primary !default;
+$--button-secondary-color: $--color-primary !default;
+$--button-secondary-fill: $--color-white-smoke !default;
 
 $--button-success-border: $--color-success !default;
 $--button-success-color: $--color-white !default;
@@ -477,9 +481,9 @@ $--button-danger-border: $--color-danger !default;
 $--button-danger-color: $--color-white !default;
 $--button-danger-fill: $--color-danger !default;
 
-$--button-info-border: $--color-info !default;
-$--button-info-color: $--color-white !default;
-$--button-info-fill: $--color-info !default;
+$--button-info-border: $--color-white-smoke !default;
+$--button-info-color: $--color-blueberry !default;
+$--button-info-fill: $--color-white-smoke !default;
 
 $--button-hover-tint-percent: 20% !default;
 $--button-active-shade-percent: 10% !default;

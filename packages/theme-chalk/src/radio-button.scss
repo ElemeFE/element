@@ -62,14 +62,15 @@
         color: $--button-disabled-color;
         cursor: not-allowed;
         background-image: none;
-        background-color: $--button-disabled-fill;
-        border-color: $--button-disabled-border;
+        background-color: $--disabled-fill-base;
+        border-color: $--disabled-border-base;
         box-shadow: none;
       }
 
       &:checked + .tm-radio-button__inner {
+        color: $--color-white;
         background-color: $--radio-button-disabled-checked-fill;
-        border-color: $--color-secondary-light-2;
+        border-color: $--disabled-border-base;
       }
     }
   }
@@ -110,6 +111,6 @@
   }
 
   &:focus:not(.is-focus):not(:active){ /*获得焦点时 样式提醒*/
-    box-shadow: 0 0 2px 2px $--radio-button-checked-border-color;
+    box-shadow: 0 0 2px 2px $--box-shadow-light;
   }
 }

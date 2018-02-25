@@ -16,10 +16,10 @@ describe('Button', () => {
   });
   it('icon', () => {
     vm = createTest(Button, {
-      icon: 'search'
+      icon: 'bucket'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.querySelector('.tm-icon-search')).to.be.ok;
+    expect(buttonElm.querySelector('.tm-icon-bucket')).to.be.ok;
   });
   it('nativeType', () => {
     vm = createTest(Button, {
@@ -42,6 +42,41 @@ describe('Button', () => {
     }, true);
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-disabled')).to.be.true;
+  });
+  it('cancel', () => {
+    vm = createTest(Button, {
+      cancel: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-cancel')).to.be.true;
+  });
+  it('remove', () => {
+    vm = createTest(Button, {
+      remove: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-remove')).to.be.true;
+  });
+  it('approve', () => {
+    vm = createTest(Button, {
+      approve: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-approve')).to.be.true;
+  });
+  it('circle', () => {
+    vm = createTest(Button, {
+      circle: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-circle')).to.be.true;
+  });
+  it('search', () => {
+    vm = createTest(Button, {
+      search: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-search')).to.be.true;
   });
   it('size', () => {
     vm = createTest(Button, {
