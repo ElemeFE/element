@@ -75,7 +75,7 @@ export default {
     const isGroup = columnRows.length > 1;
     if (isGroup) this.$parent.isGroup = true;
     const hasSelection = this.store.states.selection.length > 0;
-    hasSelection ? this.$parent.hasSelection = true : this.$parent.hasSelection = false;
+    this.$parent.hasSelection = hasSelection;
     return (
       <table
         class="el-table__header"
@@ -474,10 +474,6 @@ export default {
     handleMouseOut() {
       if (this.$isServer) return;
       document.body.style.cursor = '';
-    },
-
-    handleActionClick(event, action, selection) {
-      action(selection);
     },
 
     toggleOrder(order) {

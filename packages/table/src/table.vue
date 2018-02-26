@@ -30,12 +30,7 @@
         }">
       </table-header>
     </div>
-    <div
-      v-if="hasSelection"
-      class="el-table__bulk-wrapper"
-      ref="bulkWrapper">
-      <slot name="bulk" :selection="store.states.selection"></slot>
-    </div>
+    <slot name="bulk" :selection="store.states.selection" v-if="hasSelection"></slot>
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
@@ -109,12 +104,7 @@
             width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
           }"></table-header>
       </div>
-      <div
-        v-if="hasSelection"
-        class="el-table__bulk-wrapper"
-        ref="bulkWrapper">
-        <slot name="bulk" :selection="store.states.selection"></slot>
-      </div>
+      <slot name="bulk" :selection="store.states.selection" v-if="hasSelection"></slot>
       <div
         class="el-table__fixed-body-wrapper"
         ref="fixedBodyWrapper"
@@ -316,8 +306,6 @@
       defaultExpandAll: Boolean,
 
       defaultSort: Object,
-
-      multipleSelect: Object,
 
       tooltipEffect: String,
 
