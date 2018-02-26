@@ -54,5 +54,6 @@
   "aside": "./packages/aside/index.js",
   "main": "./packages/main/index.js",
   "footer": "./packages/footer/index.js",
-  "badge": "./packages/badge/index.js"
+  "badge": "./packages/badge/index.js",
+  "time-info": "./packages/time-info/index.js"
 }

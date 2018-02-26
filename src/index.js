@@ -56,6 +56,7 @@ import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import Badge from '../packages/badge/index.js';
+import TimeInfo from '../packages/time-info/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
 
@@ -112,6 +113,7 @@ const components = [
   Main,
   Footer,
   Badge,
+  TimeInfo,
   CollapseTransition
 ];
 
@@ -208,7 +210,8 @@ module.exports = {
   Aside,
   Main,
   Footer,
-  Badge
+  Badge,
+  TimeInfo
 };
 
 module.exports.default = module.exports;

@@ -191,6 +191,10 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/time-info",
+              "title": "TimeInfo"
             }
           ]
         }

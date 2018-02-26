@@ -1,0 +1,83 @@
+@import "common/var";
+@import "mixins/mixins";
+@import "mixins/utils";
+
+@include b(time-info) {
+  position: relative;
+  display: inline-block;
+  padding: 10px 0 15px;
+  width: 40px;
+  font-size: 15px;
+  text-align: center;
+  line-height: 15px;
+
+  & + & {
+    margin-left: 10px;
+  }
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-45deg);
+    border-color: $--border-color-base;
+    border-width: 2px;
+    border-left-style: solid;
+    border-top-style: solid;
+    border-right-style: dashed;
+    border-bottom-style: dashed;
+    border-radius: 50%;
+    box-sizing: border-box;
+    content: '';
+  }
+
+  @include m(day) {
+    color: $--color-mantis;
+    &::after,
+    &::before {
+      color: $--color-mantis;
+      border-color: $--color-mantis;
+    }
+    &::after {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      font-size: 11px;
+      content: 'дн';
+    }
+  }
+  @include m(hour) {
+    color: $--color-meat-brown;
+    &::after,
+    &::before {
+      color: $--color-meat-brown;
+      border-color: $--color-meat-brown;
+    }
+    &::after {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      font-size: 11px;
+      content: 'ч';
+    }
+  }
+  @include m(minute) {
+    color: $--color-sunset-orange;
+    &::after,
+    &::before {
+      color: $--color-sunset-orange;
+      border-color: $--color-sunset-orange;
+    }
+    &::after {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      font-size: 11px;
+      content: 'мин';
+    }
+  }
+}
