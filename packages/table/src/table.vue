@@ -24,7 +24,6 @@
         :store="store"
         :border="border"
         :default-sort="defaultSort"
-        :multiple-select="multipleSelect"
         :style="{
           width: layout.bodyWidth ? layout.bodyWidth + 'px' : ''
         }">
