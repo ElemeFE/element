@@ -31,6 +31,12 @@
       </table-header>
     </div>
     <div
+      v-if="hasSelection"
+      class="el-table__bulk-wrapper"
+      ref="bulkWrapper">
+      <slot name="bulk" :selection="store.states.selection"></slot>
+    </div>
+    <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
@@ -102,6 +108,12 @@
           :style="{
             width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
           }"></table-header>
+      </div>
+      <div
+        v-if="hasSelection"
+        class="el-table__bulk-wrapper"
+        ref="bulkWrapper">
+        <slot name="bulk" :selection="store.states.selection"></slot>
       </div>
       <div
         class="el-table__fixed-body-wrapper"
@@ -640,6 +652,7 @@
         },
         // 是否拥有多级表头
         isGroup: false,
+        hasSelection: false,
         scrollPosition: 'left'
       };
     }

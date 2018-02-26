@@ -1267,41 +1267,25 @@ You can also select multiple rows.
 ```
 :::
 
-### Multiple select with actions
+### Multiple select with bulk actions
 
-You can also show actions to perform on the selection.
+You can also show bulk actions to perform on the selection.
 
-:::demo Activating actions for multiple selection is easy: simply pass an object to `el-table` as `multiple-select`. The object should have a message and an array of actions which holds the information for each action as an object. Take a look at the code to see how it should be structured. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
+:::demo Activating bulk actions for multiple selection is easy: simply add a `bulk` slot right under the opening `el-table` tag. Take a look at the code below to see how it should be structured. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
 ```html
 <template>
   <el-table
     ref="multipleTable"
     :data="tableData3"
     style="width: 100%"
-    :multiple-select="{
-      message: ' row(s) have been selected.',
-      actions: [
-        {
-          label: 'edit',
-          class: 'edit-button',
-          type: '',
-          size: 'mini',
-          action(selection) {
-            // action goes here
-          }
-        },
-        {
-          label: 'print',
-          class: 'print-button',
-          type: 'primary',
-          size: 'mini',
-          action(selection) {
-            // action goes here
-          }
-        }
-      ]
-    }"
     @selection-change="handleSelectionChange">
+    <div class="actions" slot="bulk" slot-scope="scope">
+      <span class="message">A total of {{ scope.selection.length }} row(s) have been selected</span>
+      <div class="actions-container">
+        <el-button @click="actionOne(scope.selection)" size="mini">Action 1</el-button>
+        <el-button @click="actionTwo(scope.selection)" type="primary" size="mini">Action 2</el-button>
+      </div>
+    </div>
     <el-table-column
       type="selection"
       width="55">
@@ -1376,6 +1360,12 @@ You can also show actions to perform on the selection.
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+      },
+      actionOne(selection) {
+        // do something
+      },
+      actionTwo(selection) {
+        // do something
       }
     }
   }
