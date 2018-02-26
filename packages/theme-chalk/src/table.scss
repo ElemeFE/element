@@ -246,24 +246,6 @@
     }
   }
 
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0 0 14px;
-    font-weight: 500;
-    vertical-align: middle;
-    background: #ebeef5;
-
-    .message {
-      line-height: 38px;
-    }
-
-    .actions-container {
-      margin: -1px 14px 0 0;
-      line-height: 36px;
-    }
-  }
-
   // 拥有多级表头
   @include m((group, border)) {
     border: $--table-border;
