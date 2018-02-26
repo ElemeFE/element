@@ -29,6 +29,7 @@
         }">
       </table-header>
     </div>
+    <slot name="bulk" :selection="store.states.selection" v-if="hasSelection"></slot>
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
@@ -102,6 +103,7 @@
             width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
           }"></table-header>
       </div>
+      <slot name="bulk" :selection="store.states.selection" v-if="hasSelection"></slot>
       <div
         class="el-table__fixed-body-wrapper"
         ref="fixedBodyWrapper"
@@ -637,6 +639,7 @@
         },
         // 是否拥有多级表头
         isGroup: false,
+        hasSelection: false,
         scrollPosition: 'left'
       };
     }

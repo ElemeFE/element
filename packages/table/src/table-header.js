@@ -74,6 +74,8 @@ export default {
     // 是否拥有多级表头
     const isGroup = columnRows.length > 1;
     if (isGroup) this.$parent.isGroup = true;
+    const hasSelection = this.store.states.selection.length > 0;
+    this.$parent.hasSelection = hasSelection;
     return (
       <table
         class="el-table__header"
@@ -88,7 +90,7 @@ export default {
             this.hasGutter ? <col name="gutter" /> : ''
           }
         </colgroup>
-        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+        <thead class={ [{ 'is-group': isGroup, 'has-selection': hasSelection, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr
