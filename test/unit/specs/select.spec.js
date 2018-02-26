@@ -440,7 +440,7 @@ describe('Select', () => {
     };
     vm = getSelectVm({ filterable: true, filterMethod });
     const select = vm.$children[0];
-    select.$el.querySelector('input').focus();
+    select.$el.click();
     setTimeout(() => {
       select.selectedLabel = '面';
       select.onInputChange();
@@ -479,7 +479,7 @@ describe('Select', () => {
 
     const select = vm.$children[0];
     setTimeout(() => {
-      select.$el.querySelector('input').focus();
+      select.$el.click();
       select.query = '3';
       select.handleQueryChange('3');
       select.selectOption();
