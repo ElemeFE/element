@@ -1047,6 +1047,74 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    describe('change event', () => {
+      it('pick date, emits on confirm', done => {
+        vm = createVue({
+          template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+          data() {
+            return {
+              value: ''
+            };
+          }
+        }, true);
+
+        const spy = sinon.spy();
+        vm.$refs.compo.$on('change', spy);
+
+        const input = vm.$refs.compo.$el.querySelector('input');
+        input.blur();
+        input.focus();
+
+        setTimeout(_ => {
+          vm.$refs.compo.picker.$el.querySelector('td.available').click();
+          setTimeout(_ => {
+            expect(spy.called).to.equal(false);
+            vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--default').click();
+            setTimeout(_ => {
+              expect(vm.value).is.a('date');
+              expect(spy.calledOnce).to.equal(true);
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      });
+
+      it('input date, enter, emits on confirm', done => {
+        vm = createVue({
+          template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+          data() {
+            return {
+              value: ''
+            };
+          }
+        }, true);
+
+        const spy = sinon.spy();
+        vm.$refs.compo.$on('change', spy);
+
+        const input = vm.$refs.compo.$el.querySelector('input');
+        input.blur();
+        input.focus();
+
+        setTimeout(_ => {
+          const picker = vm.$refs.compo.picker;
+          // simplified change
+          picker.handleVisibleDateChange('2000-01-02');
+          setTimeout(_ => {
+            expect(picker.$el.querySelector('td.current').innerText.trim()).to.equal('2');
+            expect(spy.called).to.equal(false);
+            // keyDown does not work, event listener attached to document.body
+            picker.handleKeydown({ keyCode: ENTER, stopPropagation() {}, preventDefault() {} });
+            setTimeout(_ => {
+              expect(vm.value).is.a('date');
+              expect(spy.calledOnce).to.equal(true);
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      });
+    });
+
     describe('cancel time', () => {
       it('cancel to empty', done => {
         vm = createVue({
