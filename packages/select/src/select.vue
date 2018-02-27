@@ -522,11 +522,9 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          console.log('Hit handleFocus will toggle |  softFocus:', this.softFocus);
           this.visible = true;
           this.$emit('focus', event);
         } else {
-          console.log('Hit handleFocus will not toggle |  softFocus:', this.softFocus);
           this.softFocus = false;
         }
       },
