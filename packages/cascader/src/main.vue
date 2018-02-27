@@ -44,7 +44,7 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === ''">
+    <span class="el-cascader__label" v-show="inputValue === ''" :id="`el-cascader__label-${id}`">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
@@ -221,6 +221,7 @@ export default {
   watch: {
     menuVisible(value) {
       this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
+      this.$refs.input.$refs.input.setAttribute('aria-controls', `cascader-menu-${this.id}`);
       value ? this.showMenu() : this.hideMenu();
     },
     value(value) {
@@ -228,10 +229,6 @@ export default {
     },
     currentValue(value) {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
-    },
-    currentLabels(value) {
-      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
-      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
     },
     options: {
       deep: true,
@@ -429,6 +426,10 @@ export default {
 
   mounted() {
     this.flatOptions = this.flattenOptions(this.options);
+    if (this.$isServer) return;
+    this.$refs.input.$refs.input.setAttribute('role', 'combobox');
+    this.$refs.input.$refs.input.setAttribute('aria-labelledby', `el-cascader__label-${this.id}`);
+    this.$refs.input.$refs.input.setAttribute('aria-haspopup', 'menu');
   }
 };
 </script>

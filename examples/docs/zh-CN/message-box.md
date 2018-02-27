@@ -399,3 +399,9 @@ import { MessageBox } from 'element-ui';
 | inputErrorMessage | 校验未通过时的提示文本 | string | — | 输入的数据不合法! |
 | center | 是否居中布局 | boolean | — | false |
 | roundButton | 是否使用圆角按钮 | boolean | — | false |
+
+### Focus management
+当 messagebox 打开时，找到组件内第一个可聚焦元素获得焦点，通过 Tab 键在组件内导航，焦点始终保存在组件内.
+当 messagebox 关闭时，焦点回归到打开 messagebox 前页面的焦点元素.
+###  Keyboard interaction
+当 messagebox 不为alert时，默认通过 ESC键 关闭弹窗.可通过 closeOnPressEscape 属性设置来取消该行为，建议不要这样做.

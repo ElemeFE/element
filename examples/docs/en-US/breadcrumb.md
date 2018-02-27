@@ -42,8 +42,3 @@ Displays the location of the current page, making it easier to browser back.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | to | target route of the link, same as `to` of `vue-router` | string/object | — | — |
 | replace | if `true`, the navigation will not leave a history record | boolean | — | false |
-
-
-
-
-

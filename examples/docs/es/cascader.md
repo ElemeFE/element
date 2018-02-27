@@ -1703,3 +1703,12 @@ Buscar y seleccionar opciones con una palabra clave.
 | blur               | se dispara cuando Cascader pierde el foco | (event: Event)            |
 | focus              | se dispara cuando Cascader obtiene el foco | (event: Event)            |
 
+### Keyboard interaction
+the input element will be focused when init, and walk through the elements of the menu will keep focus inside of the menu element, wrapping back to the input element when menu closed. 
+
+| Key      | Description      |          
+| -------- | ----------------- | 
+| Enter  | Open menu |
+| Esc  | Close menu |
+| Left/Right/Up/Down  | change focus in  menu  |
+| Enter | select menuitem |

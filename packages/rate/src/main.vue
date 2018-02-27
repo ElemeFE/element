@@ -4,9 +4,9 @@
     @keydown="handelKey"
     role="slider"
     :aria-valuenow="currentValue"
-    :aria-valuetext="text"
-    aria-valuemin="0"
+    :aria-valuemin="0"
     :aria-valuemax="max"
+    :aria-valuetext="showText || showScore ? text: null"
     tabindex="0">
     <span
       v-for="item in max"
@@ -27,13 +27,14 @@
         </i>
       </i>
     </span>
-    <span v-if="showText || showScore" class="el-rate__text" :style="{ color: textColor }">{{ text }}</span>
+    <span :id="textId" v-if="showText || showScore" class="el-rate__text" :style="{ color: textColor }">{{ text }}</span>
   </div>
 </template>
 
 <script>
   import { hasClass } from 'element-ui/src/utils/dom';
   import Migrating from 'element-ui/src/mixins/migrating';
+  import { generateId } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElRate',
@@ -144,7 +145,9 @@
         }
         return result;
       },
-
+      textId() {
+        return `el-rate__text-${generateId()}`;
+      },
       decimalStyle() {
         let width = '';
         if (this.rateDisabled) {

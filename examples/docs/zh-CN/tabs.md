@@ -390,3 +390,13 @@
 | disabled | 是否禁用 | boolean | — | false |
 | name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
+
+### Keyboard interaction
+| Key      | 说明             |    
+| -------- | ----------------- | 
+| Left | 焦点移到左边前一个 tab |
+| Right | 焦点移到右边前一个 tab  |
+| Up | 焦点移到上方前一个 tab  |
+| Down | 焦点移到下方前一个 tab  |
+| Space/Enter | 选中当前焦点 tab  |
+| Delete | closable 为 true 时删除当前焦点 tab  |

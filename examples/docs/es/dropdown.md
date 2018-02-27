@@ -346,3 +346,11 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | command  | un comando que se enviará al `command` callback del Dropdown | string/number/object | —                 | —           |
 | disabled | si el elemento está desactivado          | boolean              | —                 | false       |
 | divided  | si se visualiza un divisor               | boolean              | —                 | false       |
+
+###  Keyboard interaction
+
+| Key      | Description     |            
+| -------- | ----------------- | 
+| Enter | open menu |
+| Esc | close menu |
+| Up/Down  |  change focus within the menu |

@@ -1697,3 +1697,14 @@
 | active-item-change | 当父级选项变化时触发的事件，仅在 `change-on-select` 为 `false` 时可用 | 各父级选项组成的数组 |
 | blur | 在 Cascader 失去焦点时触发 | (event: Event) |
 | focus | 在 Cascader 获得焦点时触发 | (event: Event) |
+
+### Keyboard interaction
+默认组件内输入框获得初始焦点，焦点始终保持在组件内，menu 关闭后，输入框回收焦点。
+
+| Key      | 说明             |   
+| -------- | ----------------- | 
+| Enter  | 打开 menu 面板 |
+| Esc  | 关闭面板 |
+| Left/Right/Up/Down  | 在 menu 内切换焦点元素 |
+| Enter | 选中当前 menuitem |
+

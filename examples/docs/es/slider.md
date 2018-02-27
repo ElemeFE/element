@@ -250,3 +250,15 @@ Se soporta la selección de un rango de valores.
 | ------ | ---------------------------------------- | ------------------------ |
 | change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor despues del cambio |
 
+
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |-------------- |---------- |-------- |
+| label | label text for AT | string | — |
+
+#### Keyboard interaction
+
+| Key      | Description     |            
+| -------- | ----------------- | 
+| Left/Right/Up/Down  | change the value |

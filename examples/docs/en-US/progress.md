@@ -58,4 +58,3 @@ In this case the percentage takes no additional space.
 | status | the current status of progress bar | string | success/exception | — |
 | width | the canvas width of circle progress bar | number | — | 126 |
 | show-text | whether to show percentage | boolean | — | true |
-

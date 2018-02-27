@@ -34,6 +34,7 @@
 <el-switch
   v-model="value2"
   active-color="#13ce66"
+  label="是否开店"
   inactive-color="#ff4949">
 </el-switch>
 

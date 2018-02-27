@@ -1,10 +1,10 @@
 <template>
   <div
     class="el-switch"
-    :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
+    :class="{ 'is-disabled': disabled, 'is-checked': checked }"
     role="switch"
     :aria-checked="checked"
-    :aria-disabled="switchDisabled"
+    :aria-disabled="disabled"
     @click="switchValue"
   >
     <input
@@ -17,6 +17,7 @@
       :false-value="inactiveValue"
       :disabled="switchDisabled"
       @keydown.enter="switchValue"
+      :aria-label="label"
     >
     <span
       :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
@@ -87,6 +88,10 @@
         default: false
       },
       name: {
+        type: String,
+        default: ''
+      },
+      label: {
         type: String,
         default: ''
       }

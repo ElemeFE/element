@@ -223,3 +223,11 @@ Descripción incluye un mensaje con información más detallada.
 | Nombre del evento | Descripción                           | Parámetros |
 | ----------------- | ------------------------------------- | ---------- |
 | close             | Se dispara cuando la alerta se cierra | —          |
+
+### Accessibility
+
+| Attribute      | Description          | Type      | Default  |
+|---------- |-------------- |---------- |-------- |
+| aria-label | label text for AT | string | — |
+| aria-labelledby | the element's ID which contain label text  | string | — | 
+| aria-describedby | the element's ID which contain description  | string | — | 

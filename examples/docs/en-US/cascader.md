@@ -1697,3 +1697,16 @@ Search and select options with a keyword.
 | active-item-change | triggers when active option changes, only works when `change-on-select` is `false` | an array of active options |
 | blur | triggers when Cascader blurs | (event: Event) |
 | focus | triggers when Cascader focuses | (event: Event) |
+
+
+### Keyboard interaction
+the input element will be focused when init, and walk through the elements of the menu will keep focus inside of the menu element, wrapping back to the input element when menu closed. 
+
+| Key      | Description       |         
+| -------- | ----------------- | 
+| Enter  | Open menu |
+| Esc  | Close menu |
+| Left/Right/Up/Down  | change focus in  menu  |
+| Enter | select menuitem |
+
+

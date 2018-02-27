@@ -229,3 +229,9 @@ fill  | border and background color when button is active | string   | — | #40
 label | the value of radio | string / number | — | —
 disabled | whether radio is disabled | boolean | — | false
 name | native 'name' attribute | string    |      —         |     —
+
+### Focus management
+
+| Key      | Description       |         
+| -------- | ----------------- | 
+| Right/Left | change focus  within  Radio-group |

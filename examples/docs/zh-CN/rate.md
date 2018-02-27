@@ -48,7 +48,7 @@
 ``` html
 <div class="block">
   <span class="demonstration">默认不区分颜色</span>
-  <el-rate v-model="value1"></el-rate>
+  <el-rate v-model="value1" aria-label="餐厅评分"></el-rate>
 </div>
 <div class="block">
   <span class="demonstration">区分颜色</span>
@@ -164,9 +164,12 @@
 | text-color | 辅助文字的颜色 | string | — | #1F2D3D |
 | texts | 辅助文字数组 | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
 | score-template | 分数显示模板 | string | — | {value} |
-
 ### Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | change | 分值改变时触发 | 改变后的分值 |
 
+#### Keyboard interaction
+| Key      | 说明             |    
+| -------- | ----------------- | 
+| Left/Right | 调节数值 |

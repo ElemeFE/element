@@ -3,6 +3,7 @@
     class="el-tree"
     :class="{ 'el-tree--highlight-current': highlightCurrent }"
     role="tree"
+    :aria-multiselectable="showCheckbox"
   >
     <el-tree-node
       v-for="child in root.childNodes"

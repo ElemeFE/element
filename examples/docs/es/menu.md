@@ -349,3 +349,10 @@ NavMenu vertical puede ser colapsado.
 | Atributo | Descripción      | Tipo   | Valores aceptados | Por defecto |
 | -------- | ---------------- | ------ | ----------------- | ----------- |
 | title    | título del grupo | string | —                 | —           |
+
+### Keyboard interaction
+when mode is horizontal 
+
+| Key      | Description    |            
+| -------- | ----------------- | 
+| Up/Down  | change focus within subMenu|

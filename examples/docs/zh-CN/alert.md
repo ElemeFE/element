@@ -215,3 +215,11 @@
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
 | close | 关闭alert时触发的事件 | — |
+
+### Accessibility
+
+| 参数      | 说明          | 类型      | 默认值  |
+|---------- |-------------- |---------- |-------- |
+| aria-label | 为 AT 设备提供 label 文案 | string | — |
+| aria-labelledby | 为 AT 设备提供 label 文案的元素的 ID | string | — | 
+| aria-describedby | 为 AT 设备提供描述文案的元素的 ID | string | — | 

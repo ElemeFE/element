@@ -392,3 +392,13 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | disabled | si la Tabulación está deshabilitada      | boolean | —                 | false                                    |
 | name     | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
 | closable | si el Tab es cerrable                    | boolean | —                 | false                                    |
+
+### Keyboard interaction
+| Key      | Descripción               |  
+| -------- | ----------------- | 
+| Left | move focus to the left tab |
+| Right | move focus to the right tab  |
+| Up | move focus to the top tab   |
+| Down | move focus to the bottom tab   |
+| Space/Enter |  active tab  |
+| Delete | delete the tab when closable is true  |
