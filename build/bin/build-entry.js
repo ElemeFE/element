@@ -28,7 +28,7 @@ const install = function(Vue, opts = {}) {
   });
 
   var __svg__ = { path: '../packages/theme-chalk/src/icons/*.svg', name: 'packages/theme-chalk/src/icons/[hash].sprite.svg' };
-  require('../node_modules/webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
+  require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
 
   Vue.use(Loading.directive);
 
