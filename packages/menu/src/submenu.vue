@@ -293,6 +293,7 @@
             on-mouseenter={this.handleTitleMouseenter}
             on-mouseleave={this.handleTitleMouseleave}
             style={[paddingStyle, titleStyle, { backgroundColor }]}
+            tabindex= { mode === 'vertical' ? 0 : null }
           >
             {$slots.title}
             <i class={[ 'el-submenu__icon-arrow', submenuTitleIcon ]}></i>

@@ -210,12 +210,17 @@
       }
     },
     mounted() {
+      if (this.$isServer) return;
       let innerInput = this.$refs.input.$refs.input;
       innerInput.setAttribute('role', 'spinbutton');
-      innerInput.setAttribute('aria-valuemax', this.max);
-      innerInput.setAttribute('aria-valuemin', this.min);
       innerInput.setAttribute('aria-valuenow', this.currentValue);
       innerInput.setAttribute('aria-disabled', this.inputNumberDisabled);
+      if (this.max !== Infinity) {
+        innerInput.setAttribute('aria-valuemax', this.max);
+      }
+      if (this.min !== -Infinity) {
+        innerInput.setAttribute('aria-valuemin', this.min);
+      }
     },
     updated() {
       let innerInput = this.$refs.input.$refs.input;

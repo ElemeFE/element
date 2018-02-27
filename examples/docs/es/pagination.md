@@ -218,3 +218,8 @@ Agrega más modulos basados en su escenario.
 | Nombre | Descripción                              |
 | ------ | ---------------------------------------- |
 | —      | Elemento propio. Para utilizar esto necesitas declarar `slot` en el `layout` |
+
+### Accessibility
+| Attribute      | Description          | Type      |  Default  |
+|--------------------|---------------|-------------------|--------|
+| labels | provide label for prev/next/NextMore | Object | { prevLabel: '',nextLabel: '', moreLabel: ''} |

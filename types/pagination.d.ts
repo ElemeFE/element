@@ -34,4 +34,7 @@ export declare class ElPagination extends ElementUIComponent {
 
   /** Text for the prev button */
   nextText: string
+
+  /** Labels for the prev/next button */
+  labels: object
 }

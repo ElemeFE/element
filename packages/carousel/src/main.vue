@@ -1,9 +1,18 @@
 <template>
   <div
     class="el-carousel"
-    :class="{ 'el-carousel--card': type === 'card' }"
+    :class="{
+    'el-carousel--card': type === 'card',
+    'focusing': focusing
+     }"
     @mouseenter.stop="handleMouseEnter"
-    @mouseleave.stop="handleMouseLeave">
+    @mouseleave.stop="handleMouseLeave"
+    tabindex="0"
+    @focus="handleMouseEnter"
+    @blur="handleMouseLeave"
+    @keydown="handleKeydown"
+    @click="focusing = false"
+  >
     <div
       class="el-carousel__container"
       :style="{ height: height }">
@@ -92,7 +101,8 @@ export default {
       activeIndex: -1,
       containerWidth: 0,
       timer: null,
-      hover: false
+      hover: false,
+      focusing: false
     };
   },
 
@@ -120,12 +130,28 @@ export default {
   methods: {
     handleMouseEnter() {
       this.hover = true;
+      this.focusing = true;
       this.pauseTimer();
     },
 
     handleMouseLeave() {
       this.hover = false;
+      this.focusing = false;
       this.startTimer();
+    },
+
+    handleKeydown(e) {
+      const keyCode = e.keyCode;
+      const left = this.$el.querySelector('.el-carousel__arrow--left');
+      const right = this.$el.querySelector('.el-carousel__arrow--right');
+      if ([37, 39].indexOf(keyCode) !== -1) {
+        if (keyCode === 37) {
+          left.click();
+        } else {
+          right.click();
+        }
+      }
+
     },
 
     itemInStage(item, index) {

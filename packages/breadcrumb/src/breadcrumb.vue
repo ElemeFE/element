@@ -1,5 +1,5 @@
 <template>
-  <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+  <div class="el-breadcrumb" role="navigation">
     <slot></slot>
   </div>
 </template>

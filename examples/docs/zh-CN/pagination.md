@@ -41,11 +41,27 @@
 
 :::demo 只需要一个`small`属性，它接受一个`Boolean`，默认为`false`，设为`true`即可启用。
 ```html
-<el-pagination
-  small
-  layout="prev, pager, next"
-  :total="50">
-</el-pagination>
+<template>
+  <el-pagination
+    small
+    layout="prev, pager, next"
+    :labels="labels"
+    :total="50">
+  </el-pagination>
+</template>
+ <script>
+  export default {
+    data() {
+      return {
+         labels: {
+           prevLabel: '上一页',
+           nextLabel: '下一页',
+           moreLabel: ''
+         } 
+      };
+    }
+  }
+</script>
 ```
 :::
 
@@ -142,7 +158,12 @@
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 4
+        currentPage4: 4,
+        labels: {
+          prevLabel: '上一页',
+          nextLabel: '下一页',
+          moreLabel: ''
+        } 
       };
     },
     mounted() {
@@ -232,3 +253,8 @@
 | name | 说明 |
 |------|--------|
 | — | 自定义内容，需要在 `layout` 中列出 `slot` |
+### Accessibility
+
+| 参数      | 说明         | 类型      | 默认值 |
+|----------|--------------|----------|--------|
+| labels | 为 prev/next/NextMore 提供的 label 文字 | Object | { prevLabel: '', nextLabel: '', moreLabel: ''} |

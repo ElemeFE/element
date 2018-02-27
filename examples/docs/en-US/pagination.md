@@ -91,11 +91,27 @@ Use small pagination in the case of limited space.
 
 :::demo Just set the `small` attribute to `true` and the Pagination becomes smaller.
 ```html
-<el-pagination
-  small
-  layout="prev, pager, next"
-  :total="50">
-</el-pagination>
+<template>
+  <el-pagination
+    small
+    layout="prev, pager, next"
+    :labels="labels"
+    :total="50">
+  </el-pagination>
+</template>
+ <script>
+  export default {
+    data() {
+      return {
+         labels: {
+           prevLabel: 'prev',
+           nextLabel: 'next',
+           moreLabel: ''
+         } 
+      };
+    }
+  }
+</script>
 ```
 :::
 
@@ -184,7 +200,12 @@ Add more modules based on your scenario.
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 4
+        currentPage4: 4,
+        labels: {
+          prevLabel: 'prev',
+          nextLabel: 'next',
+          moreLabel: ''
+        } 
       };
     },
     methods: {
@@ -232,3 +253,7 @@ Add more modules based on your scenario.
 | Name | Description |
 | --- | --- |
 | — | custom content. To use this, you need to declare `slot` in `layout` |
+### Accessibility
+| Attribute      | Description          | Type      |  Default  |
+|--------------------|---------------|-------------------|--------|
+| labels | provide label for prev/next/NextMore | Object | { prevLabel: '',nextLabel: '', moreLabel: ''} |

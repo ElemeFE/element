@@ -1,17 +1,17 @@
 <template>
   <li class="el-menu-item"
-    role="menuitem"
-    tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
-    :class="{
-      'is-active': active,
-      'is-disabled': disabled
-    }"
     @click="handleClick"
     @mouseenter="onMouseEnter"
     @focus="onMouseEnter"
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
+    :class="{
+      'is-active': active,
+      'is-disabled': disabled
+    }"
+    role="menuitem"
+    :tabindex= "mode === 'vertical' ? 0 : -1"
   >
     <el-tooltip
       v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse"

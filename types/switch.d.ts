@@ -37,4 +37,7 @@ export declare class ElSwitch extends ElementUIComponent {
 
   /** Input name of Switch */
   name: string
+
+  /** Label name of Switch */
+  label: string
 }

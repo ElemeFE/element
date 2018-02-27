@@ -8,6 +8,13 @@
     :style="wrapperStyle"
     ref="button"
     tabindex="0"
+    role="slider"
+    :aria-valuemin="min"
+    :aria-valuemax="max"
+    :aria-valuenow="value"
+    :aria-orientation="vertical ? 'vertical': 'horizontal'"
+    :aria-disabled="disabled"
+    :aria-label="label"
     @focus="handleMouseEnter"
     @blur="handleMouseLeave"
     @keydown.left="onLeftKeyDown"
@@ -62,7 +69,9 @@
       disabled() {
         return this.$parent.sliderDisabled;
       },
-
+      label() {
+        return this.$parent.label;
+      },
       max() {
         return this.$parent.max;
       },

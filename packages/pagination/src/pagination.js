@@ -42,6 +42,16 @@ export default {
 
     nextText: String,
 
+    labels: {
+      type: Object,
+      default() {
+        return {
+          prevLabel: '',
+          nextLabel: '',
+          moreLabel: ''
+        };
+      }
+    },
     background: Boolean
   },
 
@@ -62,7 +72,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } moreLabel= { this.labels.moreLabel } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <my-slot></my-slot>,
@@ -107,8 +117,13 @@ export default {
         return (
           <button
             type="button"
+            aria-disabled= { this.$parent.internalCurrentPage <= 1 }
+            aria-label={ this.$parent.labels.prevLabel || this.$parent.prevText }
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
-            on-click={ this.$parent.prev }>
+            on-click={ this.$parent.prev }
+            on-mousedown={ this.$parent.preventDefault }
+            on-keydown={ this.$parent.prevKeydown }
+          >
             {
               this.$parent.prevText
                 ? <span>{ this.$parent.prevText }</span>
@@ -124,10 +139,14 @@ export default {
         return (
           <button
             type="button"
+            aria-label={ this.$parent.labels.nextLabel || this.$parent.nextText }
+            aria-disabled= { this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             class={[
               'btn-next',
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             ]}
+            on-mousedown={ this.$parent.preventDefault }
+            on-keydown={ this.$parent.nextKeydown }
             on-click={ this.$parent.next }>
             {
               this.$parent.nextText
@@ -292,7 +311,26 @@ export default {
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
     },
+    prevKeydown(e) {
+      let keyCode = e.keyCode;
+      if ([13, 32].indexOf(keyCode) !== -1) {
+        e.preventDefault();
+        const newVal = this.internalCurrentPage - 1;
+        this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      }
+    },
 
+    nextKeydown(e) {
+      let keyCode = e.keyCode;
+      if ([13, 32].indexOf(keyCode) !== -1) {
+        e.preventDefault();
+        const newVal = this.internalCurrentPage + 1;
+        this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      }
+    },
+    preventDefault(e) {
+      e.preventDefault();
+    },
     getValidCurrentPage(value) {
       value = parseInt(value, 10);
 

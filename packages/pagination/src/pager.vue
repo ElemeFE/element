@@ -1,31 +1,37 @@
 <template>
-  <ul @click="onPagerClick" class="el-pager">
+  <ul @click="onPagerClick" @keydown.enter.space="onPagerClick" @mousedown="onMousedown" class="el-pager">
     <li
       :class="{ active: currentPage === 1 }"
       v-if="pageCount > 0"
+      tabindex="0"
       class="number">1</li>
     <li
       class="el-icon more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
+      tabindex="0"
       @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
       @mouseleave="quickprevIconClass = 'el-icon-more'">
     </li>
     <li
       v-for="pager in pagers"
       :key="pager"
+      tabindex="0"
       :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
     <li
       class="el-icon more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
+      :aria-label="moreLabel"
+      tabindex="0"
       @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
       @mouseleave="quicknextIconClass = 'el-icon-more'">
     </li>
     <li
       :class="{ active: currentPage === pageCount }"
       class="number"
+      tabindex="0"
       v-if="pageCount > 1">{{ pageCount }}</li>
   </ul>
 </template>
@@ -36,7 +42,7 @@
 
     props: {
       currentPage: Number,
-
+      moreLabel: String,
       pageCount: Number
     },
 
@@ -83,6 +89,9 @@
         if (newPage !== currentPage) {
           this.$emit('change', newPage);
         }
+      },
+      onMousedown(e) {
+        e.preventDefault();
       }
     },
 

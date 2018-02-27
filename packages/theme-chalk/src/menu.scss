@@ -89,10 +89,10 @@
         line-height: 60px;
         border-bottom: 2px solid transparent;
         color: $--color-text-secondary;
-
-        &:hover {
-          background-color: #fff;
-        }
+      }
+      .el-submenu__title:hover, .el-submenu__title:focus {
+        outline: none;
+        background-color: #fff;
       }
       & .el-submenu__icon-arrow {
         position: static;
@@ -219,7 +219,8 @@
   @include e(title) {
     @include menu-item;
 
-    &:hover {
+    &:hover, &:focus {
+      outline: none;
       background-color: $--menu-item-hover-fill;
     }
   }

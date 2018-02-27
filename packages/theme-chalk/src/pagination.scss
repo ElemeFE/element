@@ -48,9 +48,9 @@
     padding: 0 6px;
     background: transparent;
 
-    &:focus {
-      outline: none;
-    }
+    //&:focus {
+    //  outline: none;
+    //}
 
     &:hover {
       color: $--pagination-hover-fill;

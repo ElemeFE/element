@@ -5,6 +5,9 @@
   overflow-x: hidden;
   position: relative;
 
+  &:focus:hover, &:focus:not(.focusing){
+    outline: none;
+  }
   @include e(container) {
     position: relative;
     height: 300px;

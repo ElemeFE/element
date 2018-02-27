@@ -34,8 +34,7 @@
     data() {
       return {
         scrollable: false,
-        navOffset: 0,
-        isFocus: false
+        navOffset: 0
       };
     },
 
@@ -128,31 +127,26 @@
         if ([37, 38, 39, 40].indexOf(keyCode) !== -1) { // 左右上下键更换tab
           tabList = e.currentTarget.querySelectorAll('[role=tab]');
           currentIndex = Array.prototype.indexOf.call(tabList, e.target);
-        } else {
-          return;
-        }
-        if (keyCode === 37 || keyCode === 38) { // left
-          if (currentIndex === 0) { // first
-            nextIndex = tabList.length - 1;
-          } else {
-            nextIndex = currentIndex - 1;
+          if (keyCode === 37 || keyCode === 38) { // left
+            if (currentIndex === 0) { // first
+              nextIndex = tabList.length - 1;
+            } else {
+              nextIndex = currentIndex - 1;
+            }
+          } else { // right
+            if (currentIndex < tabList.length - 1) { // not last
+              nextIndex = currentIndex + 1;
+            } else {
+              nextIndex = 0;
+            }
           }
-        } else { // right
-          if (currentIndex < tabList.length - 1) { // not last
-            nextIndex = currentIndex + 1;
-          } else {
-            nextIndex = 0;
+          tabList[nextIndex].focus(); // 改变焦点元素
+        } else if ([13, 32].indexOf(keyCode) !== -1) { // enter
+          e.preventDefault();
+          if (e.target.className.indexOf('el-tabs__item') !== -1) {
+            e.target.click();
           }
         }
-        tabList[nextIndex].focus(); // 改变焦点元素
-        tabList[nextIndex].click(); // 选中下一个tab
-        this.setFocus();
-      },
-      setFocus() {
-        this.isFocus = true;
-      },
-      removeFocus() {
-        this.isFocus = false;
       }
     },
 
@@ -171,9 +165,7 @@
         scrollable,
         scrollNext,
         scrollPrev,
-        changeTab,
-        setFocus,
-        removeFocus
+        changeTab
       } = this;
       const scrollBtn = scrollable
         ? [
@@ -200,8 +192,7 @@
               [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
-              'is-closable': closable,
-              'is-focus': this.isFocus
+              'is-closable': closable
             }}
             id={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
@@ -210,9 +201,8 @@
             ref="tabs"
             tabindex={tabindex}
             refInFor
-            on-focus={ ()=> { setFocus(); }}
-            on-blur ={ ()=> { removeFocus(); }}
-            on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
+            on-mousedown = { (e)=> { e.preventDefault(); }}
+            on-click={(ev) => { onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
             {tabLabelContent}
