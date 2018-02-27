@@ -648,15 +648,15 @@
           this.emitChange(option.value);
           this.visible = false;
         }
-        this.setSoftFocus();
-        this.$nextTick(() => this.scrollToOption(option));
+        this.$nextTick(() => {
+          this.scrollToOption(option);
+          this.setSoftFocus();
+        });
       },
 
       setSoftFocus() {
-        this.$nextTick(() => {
-          this.softFocus = true;
-          this.$refs.reference.focus();
-        });
+        this.softFocus = true;
+        (this.$refs.input || this.$refs.reference).focus();
       },
 
       getValueIndex(arr = [], value) {

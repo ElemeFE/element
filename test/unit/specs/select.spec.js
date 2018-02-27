@@ -687,14 +687,15 @@ describe('Select', () => {
     const spySelectFocus = sinon.spy();
 
     vm.$refs.select.$on('focus', spySelectFocus);
-    vm.$refs.select.$refs.input.$on('focus', spyInputFocus);
+    vm.$refs.select.$refs.reference.$on('focus', spyInputFocus);
 
     const option = vm.$el.querySelectorAll('.el-select-dropdown__item')[0];
+    triggerEvent(option, 'mouseenter');
     option.click();
 
     vm.$nextTick(_ => {
       expect(spyInputFocus.calledOnce).to.be.true;
-      expect(spySelectFocus.calledOnce).to.be.true;
+      expect(spySelectFocus.calledOnce).not.to.be.true;
       done();
     });
   });
