@@ -180,6 +180,29 @@ describe('Input', () => {
     });
   });
 
+  it('does not show clearable icon when null', done => {
+    vm = createVue({
+      template: `
+        <el-input
+          ref="input"
+          v-model="nullValue"
+        >
+        </el-input>
+      `,
+      data() {
+        return {
+          nullValue: null
+        };
+      }
+    }, true);
+
+    vm.$refs.input.focus();
+    vm.$nextTick(_ => {
+      expect(vm.$refs.input.showClear).to.be.false;
+      done();
+    });
+  });
+
   describe('Input Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({
