@@ -1444,8 +1444,8 @@ describe('DatePicker', () => {
     });
 
     it('select daterange with defaultTime min', done => {
-
-      const vmWithDefaultTime = createVue({
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+      vm = createVue({
         template: `
           <el-date-picker ref="compo" type="datetimerange" v-model="value" :default-time="defaultTime"></el-date-picker>
         `,
@@ -1458,42 +1458,45 @@ describe('DatePicker', () => {
       }, true).$refs.compo;
 
       setTimeout(_ => {
-        vmWithDefaultTime.$el.click();
+        vm.$el.click();
 
         setTimeout(_ => {
-          const pickers = vmWithDefaultTime.picker.$el.querySelectorAll('.el-date-range-picker__content');
+          const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
 
           triggerEvent(leftCell, 'mousemove', true);
-          triggerEvent(leftCell, 'click', true);
           setTimeout(_ => {
-            triggerEvent(rightCell, 'mousemove', true);
+            triggerEvent(leftCell, 'click', true);
             setTimeout(_ => {
-              expect(rightCell.classList.contains('in-range')).to.be.true;
-
-              triggerEvent(rightCell, 'click', true);
+              triggerEvent(rightCell, 'mousemove', true);
               setTimeout(_ => {
-                const {
-                  minDate,
-                  maxDate
-                } = vmWithDefaultTime.picker;
-                expect(minDate.getHours()).to.be.equal(11);
-                expect(minDate.getMinutes()).to.be.equal(59);
-                expect(minDate.getSeconds()).to.be.equal(59);
-                expect(maxDate.getHours()).to.be.equal(0);
-                expect(maxDate.getMinutes()).to.be.equal(0);
-                expect(maxDate.getSeconds()).to.be.equal(0);
-                done();
+                expect(rightCell.classList.contains('in-range')).to.be.true;
+
+                triggerEvent(rightCell, 'click', true);
+                setTimeout(_ => {
+                  const {
+                    minDate,
+                    maxDate
+                  } = vm.picker;
+                  expect(minDate.getHours()).to.be.equal(11);
+                  expect(minDate.getMinutes()).to.be.equal(59);
+                  expect(minDate.getSeconds()).to.be.equal(59);
+                  expect(maxDate.getHours()).to.be.equal(0);
+                  expect(maxDate.getMinutes()).to.be.equal(0);
+                  expect(maxDate.getSeconds()).to.be.equal(0);
+                  done();
+                }, DELAY);
               }, DELAY);
             }, DELAY);
           }, DELAY);
         }, DELAY);
-      }, DELAY * 2); // `DELAY * 2` to ensure this case passes in travis CI
+      }, DELAY);
     });
 
     it('select daterange with defaultTime min & max', done => {
-      const vmWithDefaultTime = createVue({
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+      vm = createVue({
         template: `
           <el-date-picker ref="compo" type="datetimerange" v-model="value" :default-time="defaultTime"></el-date-picker>
         `,
@@ -1506,38 +1509,39 @@ describe('DatePicker', () => {
       }, true).$refs.compo;
 
       setTimeout(_ => {
-        vmWithDefaultTime.$el.click();
+        vm.$el.click();
 
         setTimeout(_ => {
-          const pickers = vmWithDefaultTime.picker.$el.querySelectorAll('.el-date-range-picker__content');
+          const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
 
           triggerEvent(leftCell, 'mousemove', true);
-          triggerEvent(leftCell, 'click', true);
           setTimeout(_ => {
-            triggerEvent(rightCell, 'mousemove', true);
+            triggerEvent(leftCell, 'click', true);
             setTimeout(_ => {
-              expect(rightCell.classList.contains('in-range')).to.be.true;
-
-              triggerEvent(rightCell, 'click', true);
+              triggerEvent(rightCell, 'mousemove', true);
               setTimeout(_ => {
-                const {
-                  minDate,
-                  maxDate
-                } = vmWithDefaultTime.picker;
-                expect(minDate.getHours()).to.be.equal(11);
-                expect(minDate.getMinutes()).to.be.equal(59);
-                expect(minDate.getSeconds()).to.be.equal(59);
-                expect(maxDate.getHours()).to.be.equal(18);
-                expect(maxDate.getMinutes()).to.be.equal(0);
-                expect(maxDate.getSeconds()).to.be.equal(0);
-                done();
+                expect(rightCell.classList.contains('in-range')).to.be.true;
+                triggerEvent(rightCell, 'click', true);
+                setTimeout(_ => {
+                  const {
+                    minDate,
+                    maxDate
+                  } = vm.picker;
+                  expect(minDate.getHours()).to.be.equal(11);
+                  expect(minDate.getMinutes()).to.be.equal(59);
+                  expect(minDate.getSeconds()).to.be.equal(59);
+                  expect(maxDate.getHours()).to.be.equal(18);
+                  expect(maxDate.getMinutes()).to.be.equal(0);
+                  expect(maxDate.getSeconds()).to.be.equal(0);
+                  done();
+                }, DELAY);
               }, DELAY);
             }, DELAY);
           }, DELAY);
         }, DELAY);
-      }, DELAY * 2); // `DELAY * 2` to ensure this case passes in travis CI
+      }, DELAY);
     });
 
     it('prev/next month button', done => {
