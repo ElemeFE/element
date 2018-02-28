@@ -1,0 +1,64 @@
+@import "common/var";
+@import "mixins/mixins";
+@import "mixins/utils";
+
+@include b(price-info) {
+  display: inline-block;
+  color: $--color-text-primary;
+  font-size: 20px;
+
+  @include e(sum) {
+    display: inline-flex;
+    border-bottom: 1px dashed $--color-dark-gunmetal;
+  }
+
+  @include e(change) {
+    display: inline-flex;
+    margin-left: 2px;
+    border-bottom: 1px dashed $--color-dark-gunmetal;
+  }
+
+  @include e(taxes) {
+    display: inline-flex;
+    vertical-align: top;
+    flex-direction: column;
+    margin-left: 6px;
+    font-size: 10px;
+    line-height: 10px;
+  }
+
+  @include e(currency) {
+    vertical-align: top;
+    margin-left: 2px;
+    fill: $--color-text-primary;
+  }
+
+  @include m(paid) {
+    @include e(sum) {
+      color: $--color-text-regular;
+    }
+  }
+
+  @include m(not-paid) {
+    @include e(sum) {
+      color: $--color-sunset-orange;
+    }
+  }
+
+  @include m(small) {
+    font-size: 17px;
+  }
+
+  @include m(medium) {
+    font-size: 20px;
+  }
+
+  @include m(large) {
+    font-size: 24px;
+
+    @include e(taxes) {
+      font-size: 13px;
+      line-height: 13px;
+    }
+  }
+}
