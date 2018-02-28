@@ -297,7 +297,8 @@ describe('Select', () => {
     vm.value = null;
     select.inputHovering = true;
     setTimeout(() => {
-      expect(vm.$el.querySelector('.el-input__icon').to.be.undefined);
+      const icon = vm.$el.querySelector('.el-input__icon');
+      expect(icon).to.be.undefined;
       done();
     }, 100);
   });
