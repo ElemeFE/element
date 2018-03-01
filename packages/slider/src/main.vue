@@ -33,11 +33,13 @@
       <slider-button
         :vertical="vertical"
         v-model="firstValue"
+        :tooltip-class="tooltipClass"
         ref="button1">
       </slider-button>
       <slider-button
         :vertical="vertical"
         v-model="secondValue"
+        :tooltip-class="tooltipClass"
         ref="button2"
         v-if="range">
       </slider-button>
@@ -122,7 +124,8 @@
       },
       label: {
         type: String
-      }
+      },
+      tooltipClass: String
     },
 
     components: {

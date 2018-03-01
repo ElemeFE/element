@@ -241,7 +241,8 @@ Selecting a range of values is supported.
 | vertical | vertical mode | boolean | — | false |
 | height | Slider height, required in vertical mode | string | — | — |
 | label | label for screen reader | string | — | — |
-|debounce| debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
+| debounce | debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
+| tooltip-class | custom class name for the tooltip | string | — | — |
 
 ## Events
 | Event Name | Description | Parameters |
