@@ -21,6 +21,7 @@
     :prefix-icon="triggerClass"
     ref="reference">
     <tm-icon :name="clearIcon"
+             class="tm-date-editor__clear"
              slot="suffix"
              :onClick="handleClickIcon"
              v-show="showClose"

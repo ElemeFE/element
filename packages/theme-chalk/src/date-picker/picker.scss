@@ -26,6 +26,10 @@
     }
   }
 
+  @include e(clear) {
+    line-height: 44px;
+  }
+
   .tm-icon-circle-close {
     cursor: pointer;
   }
