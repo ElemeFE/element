@@ -150,7 +150,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '1.0.1',
+  version: '1.0.2',
   locale: locale.use,
   i18n: locale.i18n,
   install,

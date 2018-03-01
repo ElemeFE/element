@@ -103,6 +103,10 @@
             {
               "path": "/form",
               "title": "Form"
+            },
+            {
+              "path": "/entity-counter",
+              "title": "Entity Counter"
             }
           ]
         },
