@@ -19,7 +19,7 @@ describe('Button', () => {
       icon: 'bucket'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.querySelector('.tm-icon-bucket')).to.be.ok;
+    expect(buttonElm.querySelector('.tm-icon--bucket')).to.be.ok;
   });
   it('nativeType', () => {
     vm = createTest(Button, {
