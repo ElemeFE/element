@@ -75,6 +75,10 @@ export default function upload(option) {
 
   const headers = option.headers || {};
 
+  if (typeof headers['X-Requested-With'] === 'undefined') {
+    headers['X-Requested-With'] = 'XMLHttpRequest';
+  }
+
   for (let item in headers) {
     if (headers.hasOwnProperty(item) && headers[item] !== null) {
       xhr.setRequestHeader(item, headers[item]);
