@@ -14,7 +14,7 @@
 
   @include e(change) {
     display: inline-flex;
-    margin-left: 2px;
+    margin: 0 2px;
     border-bottom: 1px dashed $--color-dark-gunmetal;
   }
 
@@ -42,6 +42,20 @@
   @include m(not-paid) {
     @include e(sum) {
       color: $--color-sunset-orange;
+    }
+  }
+
+  @include m(part-paid) {
+    @include e(part-sum) {
+      color: $--color-sunset-orange;
+      border-bottom: 1px dashed $--color-dark-gunmetal;
+    }
+    @include e(sum) {
+      color: $--color-text-regular;
+      
+      span {
+        margin-right: 2px;
+      }
     }
   }
 
