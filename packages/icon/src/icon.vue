@@ -19,10 +19,7 @@
       className() {
         let className = 'tm-icon';
         if (this.name) {
-          className += ' tm-icon-' + this.name;
-          if (this.name === 'loader') {
-            className += ' tm-icon-loading';
-          }
+          className += ' tm-icon--' + this.name;
         }
         return className;
       }
