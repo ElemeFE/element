@@ -86,26 +86,19 @@
             <div class="tm-date-range-picker__header">
               <button
                 type="button"
-                @click="leftPrevYear"
-                class="tm-picker-panel__icon-btn tm-icon-d-arrow-left"></button>
-              <button
-                type="button"
                 @click="leftPrevMonth"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-left"></button>
-              <button
-                type="button"
-                @click="leftNextYear"
-                v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
-                :class="{ 'is-disabled': !enableYearArrow }"
-                class="tm-picker-panel__icon-btn tm-icon-d-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-left">
+                <tm-icon name="arrow-left" class="tm-picker-panel__icon"></tm-icon>
+              </button>
               <button
                 type="button"
                 @click="leftNextMonth"
                 v-if="unlinkPanels"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-right">
+                <tm-icon name="arrow-right" class="tm-picker-panel__icon"></tm-icon>
+              </button>
               <div>{{ leftLabel }}</div>
             </div>
             <date-table
@@ -125,26 +118,19 @@
             <div class="tm-date-range-picker__header">
               <button
                 type="button"
-                @click="rightPrevYear"
-                v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
-                :class="{ 'is-disabled': !enableYearArrow }"
-                class="tm-picker-panel__icon-btn tm-icon-d-arrow-left"></button>
-              <button
-                type="button"
                 @click="rightPrevMonth"
                 v-if="unlinkPanels"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-left"></button>
-              <button
-                type="button"
-                @click="rightNextYear"
-                class="tm-picker-panel__icon-btn tm-icon-d-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-left">
+                <tm-icon name="arrow-left" class="tm-picker-panel__icon"></tm-icon>
+              </button>
               <button
                 type="button"
                 @click="rightNextMonth"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-right">
+                <tm-icon name="arrow-right" class="tm-picker-panel__icon"></tm-icon>
+              </button>
               <div>{{ rightLabel }}</div>
             </div>
             <date-table
@@ -200,6 +186,7 @@
   import DateTable from '../basic/date-table';
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmButton from 'tmconsulting-ui/packages/button';
+  import TmIcon from 'tmconsulting-ui/packages/icon';
 
   const advanceDate = (date, amount) => {
     return new Date(new Date(date).getTime() + amount);
@@ -237,11 +224,15 @@
       },
 
       leftLabel() {
-        return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`);
+        return this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`) +
+            ' ' + this.leftDate.getFullYear() +
+            ' ' + this.t('el.datepicker.year');
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
+        return this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`) +
+            ' ' + this.rightDate.getFullYear() +
+            ' ' + this.t('el.datepicker.year');
       },
 
       leftYear() {
@@ -625,6 +616,6 @@
       }
     },
 
-    components: { TimePicker, DateTable, TmInput, TmButton }
+    components: { TmIcon, TimePicker, DateTable, TmInput, TmButton }
   };
 </script>

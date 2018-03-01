@@ -1,7 +1,7 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 646px;
+  width: 510px;
 
   &.has-sidebar {
     width: 756px;
@@ -13,7 +13,8 @@
   }
 
   .tm-picker-panel__body {
-    min-width: 513px;
+    min-width: 0;
+    padding: 0 16px;
   }
 
   .tm-picker-panel__content {
@@ -24,6 +25,7 @@
     position: relative;
     text-align: center;
     height: 28px;
+    margin-bottom: 5px;
 
     [class*=arrow-left] {
       float: left;
@@ -34,22 +36,20 @@
     }
 
     div {
-      font-size: 16px;
-      font-weight: 500;
-      margin-right: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: -0.1px;
+      color: #1e1e28;
+      line-height: 24px;
     }
   }
 
   @include e(content) {
     float: left;
-    width: 50%;
+    width: calc(50% - 7px);
     box-sizing: border-box;
     margin: 0;
-    padding: 16px;
-
-    @include when(left) {
-      border-right: 1px solid $--datepicker-inner-border-color;
-    }
+    padding: 16px 0;
 
     @include when(right) {
       .tm-date-range-picker__header {
