@@ -1,4 +1,5 @@
 @import "common/var";
+@import "mixins/mixins";
 
 .tm-icon {
   display: inline-block;
@@ -27,13 +28,35 @@
     margin-right: 5px;
   }
 
+  @include m((success, error)) {
+    > svg {
+      fill: none;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 0;
+      stroke-width: 6;
+      stroke-miterlimit: 10;
+      &.circle {
+        animation: dash .9s ease-in-out;
+      }
+      &.line {
+        stroke-dashoffset: 1000;
+        animation: dash .9s .35s ease-in-out forwards;
+      }
+      &.check {
+        stroke-dashoffset: -100;
+        animation: dash-check .9s .35s ease-in-out forwards;
+      }
+    }
+  }
+
   @include m(success) {
-    fill: none;
+    stroke: $--color-success;
   }
 
   @include m(error) {
-    fill: none;
+    stroke: $--color-danger;
   }
+
 }
 
 @keyframes rotating {
@@ -42,5 +65,42 @@
   }
   100% {
     transform: rotateZ(360deg);
+  }
+}
+
+// Error/Success Animations
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
   }
 }
