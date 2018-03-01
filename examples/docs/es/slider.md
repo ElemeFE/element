@@ -244,6 +244,7 @@ Se soporta la selección de un rango de valores.
 | height              | alto del Slider, requerido en modo vertical | string          | —                 | —           |
 | label               | etiqueta para screen reader              | string          | —                 | —           |
 | debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
+| tooltip-class       | custom class name for the tooltip | string | — | — |
 
 ## Eventos
 | Nombre | Descripción                              | Parametros               |
