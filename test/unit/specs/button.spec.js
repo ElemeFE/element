@@ -34,7 +34,7 @@ describe('Button', () => {
     }, true);
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-loading')).to.be.true;
-    expect(buttonElm.querySelector('.tm-icon-loading')).to.be.ok;
+    expect(buttonElm.querySelector('.tm-icon--loader')).to.be.ok;
   });
   it('disabled', () => {
     vm = createTest(Button, {
