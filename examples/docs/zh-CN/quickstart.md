@@ -10,7 +10,8 @@
 
 ### 使用 Nuxt.js
 
-We can also start a project using [Nuxt.js](nuxtjs.org):
+
+我们还可以使用 [Nuxt.js](https://nuxtjs.org)：
 
 <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
   <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
@@ -241,20 +242,20 @@ Vue.prototype.$message = Message;
 
 完整引入 Element：
 
-```JS
-import Vue from 'vue'
-import Element from 'element-ui'
-Vue.use(Element, { size: 'small' })
+```js
+import Vue from 'vue';
+import Element from 'element-ui';
+Vue.use(Element, { size: 'small' });
 ```
 
 按需引入 Element：
 
-```JS
-import Vue from 'vue'
-import { Button } from 'element-ui'
+```js
+import Vue from 'vue';
+import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small' }
-Vue.use(Button)
+Vue.prototype.$ELEMENT = { size: 'small' };
+Vue.use(Button);
 ```
 
 按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'。

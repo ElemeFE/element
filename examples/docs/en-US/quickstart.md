@@ -241,20 +241,20 @@ When importing Element, you can define a global config object. For now this obje
 
 Fully import Element：
 
-```JS
-import Vue from 'vue'
-import Element from 'element-ui'
-Vue.use(Element, { size: 'small' })
+```js
+import Vue from 'vue';
+import Element from 'element-ui';
+Vue.use(Element, { size: 'small' });
 ```
 
 Partial import Element：
 
-```JS
-import Vue from 'vue'
-import { Button } from 'element-ui'
+```js
+import Vue from 'vue';
+import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small' }
-Vue.use(Button)
+Vue.prototype.$ELEMENT = { size: 'small' };
+Vue.use(Button);
 ```
 
 With the above config, the default size of all components that have size attribute will be 'small'.
