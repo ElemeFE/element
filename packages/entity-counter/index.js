@@ -1,8 +1,8 @@
-import TmDropdownMenu from '../dropdown/src/dropdown-menu';
+import TmEntityCounter from './src/entity-counter';
 
 /* istanbul ignore next */
-TmDropdownMenu.install = function(Vue) {
-  Vue.component(TmDropdownMenu.name, TmDropdownMenu);
+TmEntityCounter.install = function(Vue) {
+  Vue.component(TmEntityCounter.name, TmEntityCounter);
 };
 
-export default TmDropdownMenu;
+export default TmEntityCounter;
