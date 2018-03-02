@@ -15,7 +15,11 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
+    <el-tooltip
+      placement="top"
+      ref="tooltip"
+      :popper-class="tooltipClass"
+      :disabled="!showTooltip">
       <span slot="content">{{ formatValue }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
@@ -40,7 +44,8 @@
       vertical: {
         type: Boolean,
         default: false
-      }
+      },
+      tooltipClass: String
     },
 
     data() {

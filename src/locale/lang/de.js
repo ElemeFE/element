@@ -16,10 +16,10 @@ export default {
       startTime: 'Startzeit',
       endDate: 'Enddatum',
       endTime: 'Endzeit',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
+      prevYear: 'Letztes Jahr',
+      nextYear: 'Nächtes Jahr',
+      prevMonth: 'Letzter Monat',
+      nextMonth: 'Nächster Monat',
       day: 'Tag',
       week: 'Woche',
       month: 'Monat',
@@ -83,7 +83,7 @@ export default {
       error: 'Fehler'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'Klicke löschen zum entfernen',
       delete: 'Löschen',
       preview: 'Vorschau',
       continue: 'Fortsetzen'

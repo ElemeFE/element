@@ -239,6 +239,7 @@
 | height | Slider 高度，竖向模式时必填 | string | — | — |
 | label | 屏幕阅读器标签 | string | — | — |
 | debounce | 输入时的去抖延迟，毫秒，仅在`show-input`等于true时有效 | number | — | 300 |
+| tooltip-class | tooltip 的自定义类名 | string | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
