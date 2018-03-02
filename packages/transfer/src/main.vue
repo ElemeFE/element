@@ -117,6 +117,10 @@
             disabled: 'disabled'
           };
         }
+      },
+      targetOrder: {
+        type: String,
+        default: 'original'
       }
     },
 
@@ -128,12 +132,19 @@
     },
 
     computed: {
+      dataObj() {
+        const key = this.props.key;
+        return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {});
+      },
+  
       sourceData() {
         return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
       },
 
       targetData() {
-        return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+        return this.targetOrder === 'original'
+          ? this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1)
+          : this.value.map(key => this.dataObj[key]);
       },
 
       hasButtonTexts() {
@@ -178,11 +189,20 @@
 
       addToRight() {
         let currentValue = this.value.slice();
-        this.leftChecked.forEach(item => {
-          if (this.value.indexOf(item) === -1) {
-            currentValue = currentValue.concat(item);
+        const itemsToBeMoved = [];
+        const key = this.props.key;
+        this.data.forEach(item => {
+          const itemKey = item[key];
+          if (
+            this.leftChecked.indexOf(itemKey) > -1 &&
+            this.value.indexOf(itemKey) === -1
+          ) {
+            itemsToBeMoved.push(itemKey);
           }
         });
+        currentValue = this.targetOrder === 'unshift'
+          ? itemsToBeMoved.concat(currentValue)
+          : currentValue.concat(itemsToBeMoved);
         this.$emit('input', currentValue);
         this.$emit('change', currentValue, 'right', this.leftChecked);
       },
