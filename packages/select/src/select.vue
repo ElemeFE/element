@@ -74,7 +74,7 @@
       :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
-      :readonly="!filterable || multiple"
+      :readonly="!filterable || multiple || !visible"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
@@ -293,6 +293,7 @@
         optionsCount: 0,
         filteredOptionsCount: 0,
         visible: false,
+        softFocus: false,
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
@@ -334,7 +335,6 @@
 
       visible(val) {
         if (!val) {
-          this.$refs.reference.$el.querySelector('input').blur();
           this.handleIconHide();
           this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
@@ -519,7 +519,11 @@
       },
 
       handleFocus(event) {
-        this.$emit('focus', event);
+        if (!this.softFocus) {
+          this.$emit('focus', event);
+        } else {
+          this.softFocus = false;
+        }
       },
 
       handleBlur(event) {
@@ -631,7 +635,15 @@
           this.emitChange(option.value);
           this.visible = false;
         }
-        this.$nextTick(() => this.scrollToOption(option));
+        this.$nextTick(() => {
+          this.scrollToOption(option);
+          this.setSoftFocus();
+        });
+      },
+
+      setSoftFocus() {
+        this.softFocus = true;
+        (this.$refs.input || this.$refs.reference).focus();
       },
 
       getValueIndex(arr = [], value) {

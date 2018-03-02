@@ -667,6 +667,39 @@ describe('Select', () => {
     });
   });
 
+  it('soft focus', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" ref="select">
+            <el-option label="1" :value="1" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    const spyInputFocus = sinon.spy();
+    const spySelectFocus = sinon.spy();
+
+    vm.$refs.select.$on('focus', spySelectFocus);
+    vm.$refs.select.$refs.reference.$on('focus', spyInputFocus);
+
+    const option = vm.$el.querySelectorAll('.el-select-dropdown__item')[0];
+    triggerEvent(option, 'mouseenter');
+    option.click();
+
+    vm.$nextTick(_ => {
+      expect(spyInputFocus.calledOnce).to.be.true;
+      expect(spySelectFocus.calledOnce).not.to.be.true;
+      done();
+    });
+  });
+
   it('focus', done => {
     vm = createVue({
       template: `
