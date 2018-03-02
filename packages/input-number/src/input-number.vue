@@ -1,20 +1,20 @@
 <template>
-  <div class="el-input-number"
+  <div
+    @dragstart.prevent
     :class="[
+      'el-input-number',
       inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
-    ]"
-  >
+    ]">
     <span
       class="el-input-number__decrease"
       role="button"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{'is-disabled': minDisabled}"
-      @keydown.enter="decrease"
-    >
+      @keydown.enter="decrease">
       <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
     </span>
     <span
@@ -23,8 +23,7 @@
       v-if="controls"
       v-repeat-click="increase"
       :class="{'is-disabled': maxDisabled}"
-      @keydown.enter="increase"
-    >
+      @keydown.enter="increase">
       <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
     <el-input
@@ -40,8 +39,7 @@
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
       @focus="handleFocus"
-      @change="handleInputChange"
-    >
+      @change="handleInputChange">
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </template>
