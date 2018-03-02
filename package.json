@@ -29,20 +29,11 @@
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && karma start test/unit/karma.conf.js"
   },
-  "faas": {
-    "domain": "element",
-    "public": "temp_web/element"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:tmconsulting/tmc24-components.git"
   },
   "homepage": "https://github.com/tmconsulting/tmc24-components",
-  "keywords": [
-    "eleme",
-    "vue",
-    "components"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tmconsulting/tmc24-components/issues"

@@ -28,7 +28,8 @@ transitionList.forEach(function(file) {
 });
 
 externals = [Object.assign({
-  vue: 'vue'
+  vue: 'vue',
+  'webpack-svgstore-plugin': 'webpack-svgstore-plugin'
 }, externals), nodeExternals()];
 
 exports.externals = externals;
@@ -49,9 +50,9 @@ exports.vue = {
 
 exports.jsexclude = /node_modules|utils\/popper\.js|utils\/date.\js/;
 
-exports.postcss = function(webapck) {
+exports.postcss = function(webpack) {
   saladConfig.features.partialImport = {
-    addDependencyTo: webapck
+    addDependencyTo: webpack
   };
   return [
     require('postcss-salad')(saladConfig)
