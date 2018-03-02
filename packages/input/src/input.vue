@@ -181,8 +181,8 @@
       validateIcon() {
         return {
           validating: 'loader',
-          success: 'check',
-          error: 'cross'
+          success: 'success',
+          error: 'error'
         }[this.validateState];
       },
       textareaStyle() {
