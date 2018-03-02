@@ -8,14 +8,6 @@ Proveemos una plantilla general [project template](https://github.com/ElementUI/
 
 Si prefiere no utilizarlas, lee las siguientes secciones de este documento.
 
-### Use Nuxt.js
-
-We can also start a project using [Nuxt.js](nuxtjs.org):
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
-
 ### Importando Element
 
 Puede importar Element completamente o solamente importar lo que necesite. Comencemos importando todo.
@@ -273,3 +265,11 @@ npm run build
 ```
 
 Por favor, refiérase a la documentación de cada componente para aprender cómo usarlos.
+
+### Use Nuxt.js
+
+We can also start a project using [Nuxt.js](nuxtjs.org):
+
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
+</div>

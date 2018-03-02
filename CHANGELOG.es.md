@@ -1,5 +1,18 @@
 ## Changelog
 
+### 2.2.1
+
+*2018-03-02*
+
+- Fixed Aside, Header and Footer shrinking in some layout, #9812
+- Fixed Table with a `height` attribute not rendering in SSR, #9876
+- Fixed expandable Table not calculating its height when a row is expanded, #9848
+- Fixed `change` event not trigger when manually typing date in DateTimePicker, #9913
+- Fixed Select showing its options when the input box is right-clicked, #9894 (by @openks)
+- Added `tooltip-class` attribute for Slider, #9957
+- Now Select will stay focused after selection, #9857 (by @Seebiscuit)
+- Added `target-order` attribute for Transfer, #9960
+
 ### 2.2.0 Graphite
 
 *2018-02-12*

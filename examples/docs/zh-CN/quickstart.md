@@ -8,15 +8,6 @@
 
 如果不希望使用我们提供的模板，请继续阅读。
 
-### 使用 Nuxt.js
-
-
-我们还可以使用 [Nuxt.js](https://nuxtjs.org)：
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
-
 ### 引入 Element
 
 你可以引入整个 Element，或是根据需要仅引入部分组件。我们先介绍如何引入完整的 Element。
@@ -275,3 +266,12 @@ npm run build
 ```
 
 各个组件的使用方法请参阅它们各自的文档。
+
+### 使用 Nuxt.js
+
+我们还可以使用 [Nuxt.js](https://nuxtjs.org)：
+
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
+</div>
+
