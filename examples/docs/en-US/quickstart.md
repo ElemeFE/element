@@ -8,14 +8,6 @@ We provide a general [project template](https://github.com/ElementUI/element-sta
 
 If you prefer not to use them, please read the following.
 
-### Use Nuxt.js
-
-We can also start a project using [Nuxt.js](nuxtjs.org):
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
-
 ### Import Element
 
 You can import Element entirely, or just import what you need. Let's start with fully import.
@@ -274,3 +266,11 @@ npm run build
 ```
 
 Please refer to each component's documentation to learn how to use them.
+
+### Use Nuxt.js
+
+We can also start a project using [Nuxt.js](nuxtjs.org):
+
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element-ui?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element-ui on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
+</div>
