@@ -13,11 +13,6 @@ export interface AutoSize {
   maxRows: number
 }
 
-export interface IconClickEventHandler {
-  /** The handler function of on-icon-click property */
-  (this: Window, ev: MouseEvent): any
-}
-
 /** Input Component */
 export declare class ElInput extends ElementUIComponent {
   /** Type of input */
@@ -79,7 +74,4 @@ export declare class ElInput extends ElementUIComponent {
 
   /** Same as form in native input */
   form: string
-
-  /** Hook function when clicking on the input icon */
-  onIconClick: IconClickEventHandler
 }

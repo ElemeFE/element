@@ -18,8 +18,12 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
-    :prefix-icon="triggerClass"
     ref="reference">
+    <i slot="prefix"
+      class="el-input__icon"
+      :class="triggerClass"
+      @click="handleFocus">
+    </i>
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
