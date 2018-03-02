@@ -74,7 +74,7 @@
       :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
-      :readonly="!filterable || multiple"
+      :readonly="!filterable || multiple || !visible"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
@@ -335,7 +335,6 @@
 
       visible(val) {
         if (!val) {
-          this.$refs.reference.$el.querySelector('input').blur();
           this.handleIconHide();
           this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
