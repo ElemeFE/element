@@ -1,7 +1,7 @@
 var cooking = require('cooking');
 var config = require('./config');
 
-var SvgStorePlugin = require('webpack-svgstore-plugin');
+var WebpackSvgStore = require('webpack-svgstore-plugin')
 
 cooking.set({
   entry: './src/index.js',
@@ -21,7 +21,7 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
-cooking.add('plugin.SvgStorePlugin', new SvgStorePlugin({
+cooking.add('plugin.SvgStorePlugin', new WebpackSvgStore({
   svgoOptions: {
     plugins: [
       { removeTitle: true }
