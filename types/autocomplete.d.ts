@@ -1,5 +1,4 @@
 import { ElementUIComponent } from './component'
-import { IconClickEventHandler } from './input'
 
 export interface FetchSuggestionsCallback {
   /**

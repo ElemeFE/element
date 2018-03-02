@@ -675,7 +675,6 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 |fetch-suggestions | un método para obtener las sugerencias del input. Cuando las sugerencias estén listas, invocar `callback(data:[])` para devolverlas a Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | nombre personalizado de clase para el dropdown de autocomplete | string | — | — |
 | trigger-on-focus | si se deben mostrar sugerencias cuando el input obtiene el foco | boolean | — | true |
-| on-icon-click | funcion que se invoca cuando se hace click en el icono | function | — | — |
 | name | igual que `name` en el input nativo | string | — | — |
 | select-when-unmatched | si se emite un evento `select` al pulsar enter cuando no hay coincidencia de Autocomplete | boolean | — | false |
 | label | texto de la etiqueta | string | — | — |
