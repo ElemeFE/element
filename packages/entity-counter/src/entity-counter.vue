@@ -48,6 +48,9 @@
         return this.currentValue === 0
           ? this.placeholder
           : this.currentValue + ' ' + this.getValueLabel(this.currentValue);
+      },
+      className() {
+        return this.currentValue === 0 ? 'tm-entity-counter--empty' : '';
       }
     },
 
@@ -73,7 +76,7 @@
         } else if (value < 21) {
           return this.declination[2];
         } else {
-          return this.getValueLabel(Number(String(value).slice(-1)));
+          return this.getValueLabel(parseInt(value.toString().slice(-1), 10));
         }
       },
       handleIncrease() {
@@ -93,19 +96,19 @@
 </script>
 <template>
   <div class="tm-entity-counter"
-       :class="currentValue === 0 ? 'tm-entity-counter--empty' : ''">
-      <button class="tm-entity-counter__button tm-entity-counter__button--left"
-              @click="handleDecrease">
-          <tm-icon name="minus"
-                   class="tm-entity-counter__icon"></tm-icon>
-      </button>
-      <div class="tm-entity-counter__label">
-        {{ label }}
-      </div>
-      <button class="tm-entity-counter__button tm-entity-counter__button--right"
-              @click="handleIncrease">
-          <tm-icon name="plus"
-                   class="tm-entity-counter__icon"></tm-icon>
-      </button>
+       :class="className">
+    <button class="tm-entity-counter__button tm-entity-counter__button--left"
+            @click="handleDecrease">
+      <tm-icon class="tm-entity-counter__icon"
+               name="minus"></tm-icon>
+    </button>
+    <div class="tm-entity-counter__label">
+      {{ label }}
+    </div>
+    <button class="tm-entity-counter__button tm-entity-counter__button--right"
+            @click="handleIncrease">
+      <tm-icon class="tm-entity-counter__icon"
+               name="plus"></tm-icon>
+    </button>
   </div>
 </template>
