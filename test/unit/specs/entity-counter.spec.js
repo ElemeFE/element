@@ -1,8 +1,6 @@
 import {
   createVue,
-  destroyVM,
-  triggerEvent,
-  triggerClick
+  destroyVM
 } from '../util';
 
 describe('EntityCounter', () => {
