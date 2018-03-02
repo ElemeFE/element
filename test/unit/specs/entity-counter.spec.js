@@ -1,4 +1,9 @@
-import { createVue, destroyVM } from '../util';
+import {
+  createVue,
+  destroyVM,
+  triggerEvent,
+  triggerClick
+} from '../util';
 
 describe('EntityCounter', () => {
   let vm;
@@ -6,43 +11,106 @@ describe('EntityCounter', () => {
     destroyVM(vm);
   });
 
-  it('should create', done => {
+  it('should create', () => {
     vm = createVue({
       template: `
         <tm-entity-counter placeholder="Без детей (до 12 лет)"
             :declination="['взрослый', 'взрослых', 'взрослых']"></tm-entity-counter>
       `
     }, true);
-    let component = vm.$refs.entityCounter;
-    let $el = component.$el;
-    setTimeout(() => {
-      let cont = $el.querySelectorAll('.tm-entity-counter');
-      let buttons = $el.querySelectorAll('.tm-entity-counter__button');
-      let label = $el.querySelectorAll('.tm-entity-counter__label');
-      expect(entityCounter).to.be.true;
-      expect(cont.length === 1).to.be.true;
-      expect(buttons.length === 2).to.be.true;
-      expect(label.length === 1).to.be.true;
-      done();
-    }, 100);
+    let $el = vm.$el;
+    let buttons = $el.querySelectorAll('.tm-entity-counter__button');
+    let label = $el.querySelectorAll('.tm-entity-counter__label');
+    expect(buttons.length).to.be.equal(2);
+    expect(label.length).to.be.equal(1);
   });
 
-  it('default label should be visible', done => {
+  it('default label should be visible', () => {
     vm = createVue({
       template: `
         <tm-entity-counter placeholder="testPlaceholder"
-            min="0"
-            value="0"
+            :min="0"
+            :value="0"
             :declination="['взрослый', 'взрослых', 'взрослых']"></tm-entity-counter>
       `
     }, true);
-    let component = vm.$refs.entityCounter;
-    let $el = component.$el;
-    setTimeout(() => {
-      let label = $el.querySelectorAll('.tm-entity-counter__label');
-      expect(label.textContent === 'testPlaceholder').to.be.true;
+    let $el = vm.$el;
+    let label = $el.querySelector('.tm-entity-counter__label');
+    expect(label.textContent.includes('testPlaceholder')).to.be.true;
+    expect($el.classList.contains('tm-entity-counter--empty')).to.be.true;
+  });
+
+  it('declination for 1 works correctly', () => {
+    vm = createVue({
+      template: `
+        <tm-entity-counter placeholder="testPlaceholder"
+            :value="1"
+            :declination="['test1', 'test2', 'test3']"></tm-entity-counter>
+      `
+    }, true);
+    let $el = vm.$el;
+    let label = $el.querySelector('.tm-entity-counter__label');
+    expect(label.textContent.includes('1 test1')).to.be.true;
+  });
+
+  it('declination for 2-4 works correctly', () => {
+    vm = createVue({
+      template: `
+        <tm-entity-counter placeholder="testPlaceholder"
+            :value="4"
+            :declination="['test1', 'test2', 'test3']"></tm-entity-counter>
+      `
+    }, true);
+    let $el = vm.$el;
+    let label = $el.querySelector('.tm-entity-counter__label');
+    expect(label.textContent.includes('4 test2')).to.be.true;
+  });
+
+  it('declination for 5-20 works correctly', () => {
+    vm = createVue({
+      template: `
+        <tm-entity-counter placeholder="testPlaceholder"
+            :value="20"
+            :declination="['test1', 'test2', 'test3']"></tm-entity-counter>
+      `
+    }, true);
+    let $el = vm.$el;
+    let label = $el.querySelector('.tm-entity-counter__label');
+    expect(label.textContent.includes('20 test3')).to.be.true;
+  });
+
+  it('declination for 21+ works correctly', () => {
+    vm = createVue({
+      template: `
+        <tm-entity-counter placeholder="testPlaceholder"
+            :value="21"
+            :declination="['test1', 'test2', 'test3']"></tm-entity-counter>
+      `
+    }, true);
+    let $el = vm.$el;
+    let label = $el.querySelector('.tm-entity-counter__label');
+    expect(label.textContent.includes('21 test1')).to.be.true;
+  });
+
+  it('navigation next works correctly', done => {
+    vm = createVue({
+      template: `
+        <tm-entity-counter placeholder="testPlaceholder"
+            :value="1"
+            :declination="['test1', 'test2', 'test3']"></tm-entity-counter>
+      `
+    }, true);
+    let $el = vm.$el;
+    let next = $el.querySelector('.tm-entity-counter__button--right');
+    let label = $el.querySelector('.tm-entity-counter__label');
+
+    triggerEvent(next, 'mousedown');
+    triggerClick(document, 'mouseup');
+
+    vm.$nextTick(() => {
+      expect(label.textContent.includes('2 test12')).to.be.true;
       done();
-    }, 100);
+    });
   });
 
 });
