@@ -115,7 +115,12 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
+        <p
+          class="el-select-dropdown__empty"
+          v-if="emptyText &&
+            (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+          {{ emptyText }}
+        </p>
       </el-select-menu>
     </transition>
   </div>
