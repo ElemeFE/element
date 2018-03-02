@@ -4,14 +4,14 @@
 
 *2018-03-02*
 
-- Fixed Aside, Header and Footer shrinking in some layout, #9812
-- Fixed Table with a `height` attribute not rendering in SSR, #9876
-- Fixed expandable Table not calculating its height when a row is expanded, #9848
-- Fixed `change` event not trigger when manually typing date in DateTimePicker, #9913
-- Fixed Select showing its options when the input box is right-clicked, #9894 (by @openks)
-- Added `tooltip-class` attribute for Slider, #9957
-- Now Select will stay focused after selection, #9857 (by @Seebiscuit)
-- Added `target-order` attribute for Transfer, #9960
+- Corregido Aside, Header y Footer que se contraia en algunos layout, #9812
+- Corregido Table con un atributo `height`  no renderizaba en SSR, #9876
+- Corregido Table con fila expandible no calculaba la altura cuando la fila era expandida, #9484
+- Corregido que cuando se escribia la fecha de forma manual en DateTimePicker no se disparaba el evento  `change`, #9913
+- Corregido que Select mostraba sus opciones cuando se hacia click con el botón derecho del mouse en el Input, #9894 (by @openks)
+- Agregado el atributo `tooltip-class` para Slider, #9957 
+- Ahora Select permanecera enfocado despues de la selección, #9857 (by @Seebiscuit)
+- Agregado el atributo `target-order` para Transfer, #9960
 
 ### 2.2.0 Graphite
 
