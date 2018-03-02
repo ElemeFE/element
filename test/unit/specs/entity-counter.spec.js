@@ -104,13 +104,32 @@ describe('EntityCounter', () => {
     let next = $el.querySelector('.tm-entity-counter__button--right');
     let label = $el.querySelector('.tm-entity-counter__label');
 
-    triggerEvent(next, 'mousedown');
-    triggerClick(document, 'mouseup');
+    next.click();
 
-    vm.$nextTick(() => {
-      expect(label.textContent.includes('2 test12')).to.be.true;
+    setTimeout(() => {
+      expect(label.textContent.includes('2 test2')).to.be.true;
       done();
-    });
+    }, 400);
+  });
+
+  it('navigation prev works correctly', done => {
+    vm = createVue({
+      template: `
+        <tm-entity-counter placeholder="testPlaceholder"
+            :value="2"
+            :declination="['test1', 'test2', 'test3']"></tm-entity-counter>
+      `
+    }, true);
+    let $el = vm.$el;
+    let prev = $el.querySelector('.tm-entity-counter__button--left');
+    let label = $el.querySelector('.tm-entity-counter__label');
+
+    prev.click();
+
+    setTimeout(() => {
+      expect(label.textContent.includes('1 test1')).to.be.true;
+      done();
+    }, 400);
   });
 
 });
