@@ -480,7 +480,7 @@ describe('Tabs', () => {
       `
     }, true);
     setTimeout(() => {
-      const tabs = vm.$el.querySelector('.tm-icon-airplane');
+      const tabs = vm.$el.querySelector('.tm-icon--airplane');
       expect(!!tabs).to.true;
       done();
     }, 100);

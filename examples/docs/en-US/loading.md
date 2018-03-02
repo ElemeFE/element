@@ -38,7 +38,7 @@
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'tm-icon-loading',
+          spinner: 'tm-icon--loader',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
@@ -123,7 +123,7 @@ You can customize loading text, loading spinner and background color.
   <tm-table
     v-loading="loading2"
     element-loading-text="Loading..."
-    element-loading-spinner="tm-icon-loading"
+    element-loading-spinner="tm-icon--loader"
     element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
@@ -208,7 +208,7 @@ Show a full screen animation while loading data.
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'tm-icon-loading',
+          spinner: 'tm-icon--loader',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
