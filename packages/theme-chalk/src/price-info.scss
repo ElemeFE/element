@@ -51,10 +51,13 @@
       border-bottom: 1px dashed $--color-dark-gunmetal;
     }
     @include e(sum) {
+      margin-left: 2px;
       color: $--color-text-regular;
-      
-      span {
+
+      &::before {
+        display: inline;
         margin-right: 2px;
+        content: '/';
       }
     }
   }

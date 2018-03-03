@@ -5,11 +5,13 @@
         size ? 'tm-price-info--' + size : ''
        ]"
   >
-    <span v-if="partSum" class="tm-price-info__part-sum">{{ parsingPartSum[0] }}</span>
-    <span v-if="partSum" class="tm-price-info__change">,{{ parsingPartSum[1] }}</span>
-    <tm-icon v-if="currency&&partSum" :name="currency" class="tm-price-info__currency"></tm-icon>
-    <span class="tm-price-info__sum"><span v-if="partSum">/</span> {{ parsingSum[0] }}</span>
-    <span class="tm-price-info__change">,{{ parsingSum[1] }}</span>
+    <template v-if="partSum">
+      <span v-if="partSum" class="tm-price-info__part-sum">{{ parsingPartSum }}</span>
+      <span v-if="partSum" class="tm-price-info__change">,{{ parsingPartSum }}</span>
+      <tm-icon v-if="currency" :name="currency" class="tm-price-info__currency"></tm-icon>
+    </template>
+    <span class="tm-price-info__sum">{{ parsingSum }}</span>
+    <span class="tm-price-info__change">,{{ parsingSum }}</span>
     <tm-icon v-if="currency" :name="currency" class="tm-price-info__currency"></tm-icon>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
@@ -23,8 +25,12 @@ export default {
   name: 'TmPriceInfo',
 
   props: {
-    sum: String,
-    partSum: String,
+    sum: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    partSum: Number,
     type: String,
     currency: String,
     size: String,
@@ -35,10 +41,12 @@ export default {
   },
   computed: {
     parsingSum: function() {
-      return (this.sum.split(','));
+      // return (this.sum.split(','));
+      return this.sum;
     },
     parsingPartSum: function() {
-      return (this.partSum.split(','));
+      // return (this.partSum.split(','));
+      return this.partSum;
     }
   }
 };
