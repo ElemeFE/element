@@ -1,26 +1,40 @@
 'use strict';
 
-// var postcss = require('postcss');
 var fs = require('fs');
 var path = require('path');
-// var fontFile = fs.readFileSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icon.scss'), 'utf8');
-// var nodes = postcss.parse(fontFile).nodes;
-var classList = [];
+var uppercamelcase = require('uppercamelcase');
+var render = require('json-templater/string');
+var endOfLine = require('os').EOL;
 
-var iconsDir = fs.readdirSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icons'));
+var iconsPath = '../../packages/theme-chalk/src/icons';
+var iconsDir = fs.readdirSync(path.resolve(__dirname, iconsPath));
+var iconsList = [];
+var importIconsList = [];
+var exportIconsList = [];
+var exportIconsTemplate = `{{importList}}
+
+module.exports = {
+{{exportList}}
+};
+`;
 
 iconsDir.forEach(file => {
-  classList.push(file.replace('.svg', ''));
+  // Collect icons name
+  var fileName = file.replace('.svg', '');
+  iconsList.push(fileName);
+  // Preparing an import file
+  var componentName = uppercamelcase(fileName);
+  importIconsList.push(render('import {{name}} from \'' + iconsPath + '/{{icon}}.svg\';', {
+    name: componentName,
+    icon: fileName
+  }));
+  exportIconsList.push('  ' + componentName);
 });
 
-// nodes.forEach((node) => {
-//   var selector = node.selector || '';
-//   var reg = new RegExp(/\.tm-icon-([^:]+):before/);
-//   var arr = selector.match(reg);
-//
-//   if (arr && arr[1]) {
-//     classList.push(arr[1]);
-//   }
-// });q
+exportIconsTemplate = render(exportIconsTemplate, {
+  importList: importIconsList.join(endOfLine),
+  exportList: exportIconsList.join(',' + endOfLine)
+});
 
-fs.writeFile(path.resolve(__dirname, '../../examples/icon.json'), JSON.stringify(classList));
+fs.writeFile(path.resolve(__dirname, '../../examples/icon.json'), JSON.stringify(iconsList));
+fs.writeFile(path.resolve(__dirname, '../../packages/theme-chalk/icons.js'), exportIconsTemplate);

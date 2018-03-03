@@ -60,6 +60,9 @@ import TimeInfo from '../packages/time-info/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
 
+// import Symbols from '../packages/theme-chalk/icons.js';
+// console.log(Symbols);
+
 const components = [
   Pagination,
   Dialog,
@@ -124,9 +127,6 @@ const install = function(Vue, opts = {}) {
   components.map(component => {
     Vue.component(component.name, component);
   });
-
-  var __svg__ = { path: '../packages/theme-chalk/src/icons/*.svg', name: 'svgsprite/[hash].sprite.svg' };
-  require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
 
   Vue.use(Loading.directive);
 

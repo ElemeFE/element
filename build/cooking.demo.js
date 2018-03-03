@@ -2,7 +2,6 @@ var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var SvgStorePlugin = require('webpack-svgstore-plugin');
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
@@ -130,13 +129,12 @@ if (isProd) {
 cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
   { from: 'examples/versions.json' }
 ]));
-cooking.add('plugin.SvgStorePlugin', new SvgStorePlugin({
-  svgoOptions: {
-    plugins: [
-      { removeTitle: true }
-    ]
-  },
-  prefix: 'icon-'
-}));
+cooking.add('loader.svgSpriteLoader', {
+  test: /\.svg$/,
+  loaders: [
+    'svg-sprite-loader',
+    'svgo-loader'
+  ]
+});
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

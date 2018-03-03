@@ -116,6 +116,10 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.14.0",
     "style-loader": "^0.19.1",
+    "svg-sprite-loader": "^3.6.2",
+    "svg-spritemap-webpack-plugin": "^1.1.1",
+    "svgo": "^1.0.5",
+    "svgo-loader": "^2.1.0",
     "transliteration": "^1.6.2",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.6.2",
@@ -127,7 +131,6 @@
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",
-    "webpack-node-externals": "^1.6.0",
-    "webpack-svgstore-plugin": "^4.0.1"
+    "webpack-node-externals": "^1.6.0"
   }
 }

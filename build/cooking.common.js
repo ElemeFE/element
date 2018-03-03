@@ -1,7 +1,7 @@
 var cooking = require('cooking');
 var config = require('./config');
 
-var WebpackSvgStore = require('webpack-svgstore-plugin')
+// var SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 
 cooking.set({
   entry: './src/index.js',
@@ -21,12 +21,19 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
-cooking.add('plugin.SvgStorePlugin', new WebpackSvgStore({
-  svgoOptions: {
-    plugins: [
-      { removeTitle: true }
-    ]
-  },
-  prefix: 'icon-'
-}));
+cooking.add('loader.svgSpriteLoader', {
+  test: /\.svg$/,
+  loaders: [
+    'svg-sprite-loader',
+    'svgo-loader'
+  ]
+});
+// cooking.add('plugin.SVGSpritemapPlugin', new SVGSpritemapPlugin({
+//   src: './packages/theme-chalk/src/icons/**/*.svg',
+//   prefix: 'icon-',
+//   svgo: {
+//     removeTitle: true
+//   },
+//   filename: 'svg/spritemap.svg'
+// }));
 module.exports = cooking.resolve();

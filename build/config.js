@@ -28,8 +28,7 @@ transitionList.forEach(function(file) {
 });
 
 externals = [Object.assign({
-  vue: 'vue',
-  'webpack-svgstore-plugin': 'webpack-svgstore-plugin'
+  vue: 'vue'
 }, externals), nodeExternals()];
 
 exports.externals = externals;
