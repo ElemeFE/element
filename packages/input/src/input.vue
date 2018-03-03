@@ -284,6 +284,7 @@
       clear() {
         this.$emit('input', '');
         this.$emit('change', '');
+        this.$emit('clear');
         this.setCurrentValue('');
         this.focus();
       }
