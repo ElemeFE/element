@@ -6,12 +6,12 @@
        ]"
   >
     <template v-if="partSum">
-      <span v-if="partSum" class="tm-price-info__part-sum">{{ parsingPartSum }}</span>
-      <span v-if="partSum" class="tm-price-info__change">,{{ parsingPartSum }}</span>
+      <span v-if="partSum" class="tm-price-info__part-sum">{{ labelPartSum }}</span>
+      <span v-if="partSum" class="tm-price-info__change">,{{ labelPartChange }}</span>
       <tm-icon v-if="currency" :name="currency" class="tm-price-info__currency"></tm-icon>
     </template>
-    <span class="tm-price-info__sum">{{ parsingSum }}</span>
-    <span class="tm-price-info__change">,{{ parsingSum }}</span>
+    <span class="tm-price-info__sum">{{ labelSum }}</span>
+    <span class="tm-price-info__change">,{{ labelChange }}</span>
     <tm-icon v-if="currency" :name="currency" class="tm-price-info__currency"></tm-icon>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
@@ -23,14 +23,13 @@
 <script>
 export default {
   name: 'TmPriceInfo',
-
   props: {
     sum: {
-      type: Number,
-      required: true,
-      default: 0
+      type: [Number, String],
+      default: null,
+      required: true
     },
-    partSum: Number,
+    partSum: [Number, String],
     type: String,
     currency: String,
     size: String,
@@ -39,14 +38,35 @@ export default {
       default: false
     }
   },
-  computed: {
-    parsingSum: function() {
-      // return (this.sum.split(','));
-      return this.sum;
-    },
-    parsingPartSum: function() {
-      // return (this.partSum.split(','));
-      return this.partSum;
+  data: function() {
+    return {
+      labelSum: null,
+      labelChange: null,
+      labelPartSum: null,
+      labelPartChange: null
+    };
+  },
+  methods: {
+    parsingSum: function(value) {
+      if (typeof value === 'number') {
+        return (value.toFixed(2).split('.'));
+      } else if (typeof value === 'string') {
+        return (value.split('.'));
+      } else {
+        return false;
+      }
+    }
+  },
+  mounted: function() {
+    if (this.sum) {
+      let parsedSum = this.parsingSum(this.sum);
+      this.labelSum = parsedSum[0];
+      this.labelChange = parsedSum[1];
+    }
+    if (this.partSum) {
+      let parsedPartSum = this.parsingSum(this.partSum);
+      this.labelPartSum = parsedPartSum[0];
+      this.labelPartChange = parsedPartSum[1];
     }
   }
 };

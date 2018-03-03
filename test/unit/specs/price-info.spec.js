@@ -9,7 +9,8 @@ describe('PriceInfo', () => {
 
   it('type', () => {
     vm = createTest(PriceInfo, {
-      type: 'paid'
+      type: 'paid',
+      sum: '12560.10'
     }, true);
     let priceInfoElm = vm.$el;
     expect(priceInfoElm.classList.contains('tm-price-info--paid')).to.be.true;
@@ -17,7 +18,8 @@ describe('PriceInfo', () => {
 
   it('size', () => {
     vm = createTest(PriceInfo, {
-      size: 'small'
+      size: 'small',
+      sum: '12560.10'
     }, true);
     let priceInfoElm = vm.$el;
     expect(priceInfoElm.classList.contains('tm-price-info--small')).to.be.true;
@@ -25,7 +27,8 @@ describe('PriceInfo', () => {
 
   it('taxesInfo', () => {
     vm = createTest(PriceInfo, {
-      taxesInfo: true
+      taxesInfo: true,
+      sum: '12560.10'
     }, true);
     let priceInfoElm = vm.$el;
     expect(priceInfoElm.querySelector('.tm-price-info__taxes')).to.be.ok;
@@ -33,7 +36,8 @@ describe('PriceInfo', () => {
 
   it('currency', () => {
     vm = createTest(PriceInfo, {
-      currency: 'rub'
+      currency: 'rub',
+      sum: '12560.10'
     }, true);
     let priceInfoElm = vm.$el;
     expect(priceInfoElm.querySelector('.tm-icon-rub')).to.be.ok;
