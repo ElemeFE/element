@@ -202,9 +202,9 @@ export default class Color {
     }
 
     const fromHSV = (h, s, v) => {
-      this._hue = h;
-      this._saturation = s;
-      this._value = v;
+      this._hue = Math.max(0, Math.min(360, h));
+      this._saturation = Math.max(0, Math.min(100, s));
+      this._value = Math.max(0, Math.min(100, v));
 
       this.doOnChange();
     };
