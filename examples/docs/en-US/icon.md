@@ -79,8 +79,6 @@ Oh my god, it's an airplane - <tm-icon name="airplane"></tm-icon> !
 ```
 :::
 
-<tm-icon name="warning"></tm-icon> Other components with icons will be here a bit later :)
-
 ### Icons
 
 Here is a list of our default SVG icons.

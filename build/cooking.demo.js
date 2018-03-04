@@ -129,12 +129,9 @@ if (isProd) {
 cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
   { from: 'examples/versions.json' }
 ]));
-cooking.add('loader.svgSpriteLoader', {
+cooking.add('loader.svg', {
   test: /\.svg$/,
-  loaders: [
-    'svg-sprite-loader',
-    'svgo-loader'
-  ]
+  loader: 'svg-sprite-loader'
 });
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

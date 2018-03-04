@@ -21,12 +21,9 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
-cooking.add('loader.svgSpriteLoader', {
+cooking.add('loader.svg', {
   test: /\.svg$/,
-  loaders: [
-    'svg-sprite-loader',
-    'svgo-loader'
-  ]
+  loader: 'svg-sprite-loader'
 });
 // cooking.add('plugin.SVGSpritemapPlugin', new SVGSpritemapPlugin({
 //   src: './packages/theme-chalk/src/icons/**/*.svg',

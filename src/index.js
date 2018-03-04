@@ -60,8 +60,9 @@ import TimeInfo from '../packages/time-info/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
 
-// import Symbols from '../packages/theme-chalk/icons.js';
-// console.log(Symbols);
+import '../packages/theme-chalk/icons.js';
+import 'svg-sprite-loader/runtime/sprite.build';
+// console.log(Symbols, sprite);
 
 const components = [
   Pagination,
