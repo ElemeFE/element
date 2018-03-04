@@ -28,7 +28,8 @@ transitionList.forEach(function(file) {
 });
 
 externals = [Object.assign({
-  vue: 'vue'
+  vue: 'vue',
+  'svg-sprite-loader': 'svg-sprite-loader'
 }, externals), nodeExternals()];
 
 exports.externals = externals;

@@ -63,7 +63,6 @@ import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transit
 
 import '../packages/theme-chalk/icons.js';
 import 'svg-sprite-loader/runtime/sprite.build';
-// console.log(Symbols, sprite);
 
 const components = [
   Pagination,
@@ -153,7 +152,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '1.0.2',
+  version: '1.0.3',
   locale: locale.use,
   i18n: locale.i18n,
   install,
