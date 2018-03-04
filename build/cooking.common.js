@@ -1,8 +1,6 @@
 var cooking = require('cooking');
 var config = require('./config');
 
-// var SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
-
 cooking.set({
   entry: './src/index.js',
   dist: './lib',
@@ -25,12 +23,4 @@ cooking.add('loader.svg', {
   test: /\.svg$/,
   loader: 'svg-sprite-loader'
 });
-// cooking.add('plugin.SVGSpritemapPlugin', new SVGSpritemapPlugin({
-//   src: './packages/theme-chalk/src/icons/**/*.svg',
-//   prefix: 'icon-',
-//   svgo: {
-//     removeTitle: true
-//   },
-//   filename: 'svg/spritemap.svg'
-// }));
 module.exports = cooking.resolve();

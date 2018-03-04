@@ -117,7 +117,6 @@
     "sinon-chai": "^2.14.0",
     "style-loader": "^0.19.1",
     "svg-sprite-loader": "^3.6.2",
-    "svg-spritemap-webpack-plugin": "^1.1.1",
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "transliteration": "^1.6.2",

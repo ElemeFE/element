@@ -16,7 +16,6 @@ import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transit
 
 import '../packages/theme-chalk/icons.js';
 import 'svg-sprite-loader/runtime/sprite.build';
-// console.log(Symbols, sprite);
 
 const components = [
 {{install}},
