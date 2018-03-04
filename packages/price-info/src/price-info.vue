@@ -41,7 +41,7 @@ export default {
       default: false
     }
   },
-  data: function() {
+  data() {
     return {
       labelSum: null,
       labelChange: null,
@@ -59,7 +59,7 @@ export default {
       return false;
     }
   },
-  mounted: function() {
+  mounted() {
     if (this.sum) {
       let parsedSum = this.parsingSum(this.sum);
       this.labelSum = parsedSum[0];
