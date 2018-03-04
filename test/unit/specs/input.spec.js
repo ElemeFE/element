@@ -241,5 +241,36 @@ describe('Input', () => {
         done();
       });
     });
+    it('event:clear', done => {
+      vm = createVue({
+        template: `
+          <el-input
+            ref="input"
+            placeholder="请输入内容"
+            clearable
+            :value="input">
+          </el-input>
+        `,
+        data() {
+          return {
+            input: 'a'
+          };
+        }
+      }, true);
+
+      const spyClear = sinon.spy();
+      const inputElm = vm.$el.querySelector('input');
+
+      // focus to show clear button
+      inputElm.focus();
+      vm.$refs.input.$on('clear', spyClear);
+      vm.$nextTick(_ => {
+        vm.$el.querySelector('.el-input__clear').click();
+        vm.$nextTick(_ => {
+          expect(spyClear.calledOnce).to.be.true;
+          done();
+        });
+      });
+    });
   });
 });
