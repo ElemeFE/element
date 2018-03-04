@@ -41,6 +41,7 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
+        :select-on-click="selectOnClick"
         :style="{
            width: bodyWidth
         }">
@@ -114,6 +115,7 @@
           :store="store"
           :stripe="stripe"
           :highlight="highlightCurrentRow"
+          :select-on-click="selectOnClick"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :style="{
@@ -179,6 +181,7 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
+          :select-on-click="selectOnClick"
           :style="{
             width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : ''
           }">
@@ -306,7 +309,12 @@
 
       tooltipEffect: String,
 
-      spanMethod: Function
+      spanMethod: Function,
+
+      selectOnClick: {
+        type: Boolean,
+        default: false
+      },
     },
 
     components: {

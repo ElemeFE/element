@@ -46,6 +46,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Key of current row, a set only prop */
   currentRowKey: string | number
 
+  /** whether the row could be selected and highlighted by click. the selected rows are highlighted even if the rows are selected by checkbox */
+  selectOnClick: boolean
+
   /** Function that returns custom class names for a row, or a string assigning class names for every row */
   rowClassName: string | ((row: object, index: number) => string)
 
