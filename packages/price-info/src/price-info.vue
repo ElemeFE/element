@@ -8,11 +8,11 @@
     <template v-if="partSum">
       <span v-if="partSum" class="tm-price-info__part-sum">{{ labelPartSum }}</span>
       <span v-if="partSum" class="tm-price-info__change">,{{ labelPartChange }}</span>
-      <tm-icon v-if="currency" :name="currency" class="tm-price-info__currency"></tm-icon>
+      <tm-icon :name="currency" class="tm-price-info__currency"></tm-icon>
     </template>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
     <span class="tm-price-info__change">,{{ labelChange }}</span>
-    <tm-icon v-if="currency" :name="currency" class="tm-price-info__currency"></tm-icon>
+    <tm-icon :name="currency" class="tm-price-info__currency"></tm-icon>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
       <span>НДС</span>
@@ -31,7 +31,10 @@ export default {
     },
     partSum: [Number, String],
     type: String,
-    currency: String,
+    currency: {
+      type: String,
+      default: 'rub'
+    },
     size: String,
     taxesInfo: {
       type: Boolean,
@@ -47,14 +50,13 @@ export default {
     };
   },
   methods: {
-    parsingSum: function(value) {
+    parsingSum(value) {
       if (typeof value === 'number') {
         return (value.toFixed(2).split('.'));
       } else if (typeof value === 'string') {
         return (value.split('.'));
-      } else {
-        return false;
       }
+      return false;
     }
   },
   mounted: function() {
