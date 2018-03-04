@@ -84,7 +84,13 @@ export default {
       popper.setAttribute('tabindex', 0);
 
       if (this.trigger !== 'click') {
-        on(reference, 'focusin', this.handleFocus);
+        on(reference, 'focusin', () => {
+          this.handleFocus();
+          const instance = reference.__vue__;
+          if (instance && instance.focus) {
+            instance.focus();
+          }
+        });
         on(popper, 'focusin', this.handleFocus);
         on(reference, 'focusout', this.handleBlur);
         on(popper, 'focusout', this.handleBlur);
