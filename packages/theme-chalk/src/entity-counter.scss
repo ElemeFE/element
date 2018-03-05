@@ -23,6 +23,8 @@
     background: none;
     border: 1px solid transparent;
     outline: none !important;
+    flex-grow: 0;
+    flex-shrink: 0;
 
     @include m(left) {
       border-right-color: $--entity-counter-border-color;
