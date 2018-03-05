@@ -2,7 +2,7 @@
   .demo-color-box {
     border-radius: 4px;
     padding: 20px;
-    margin:5px 0;
+    margin: 5px 0;
     height: 74px;
     box-sizing: border-box;
     color: #fff;
