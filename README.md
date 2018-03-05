@@ -26,6 +26,7 @@ npm install tmconsulting-ui -S
 ``` javascript
 import Vue from 'vue'
 import TMui from 'tmconsulting-ui'
+import 'tmconsulting-ui/lib/theme-chalk/index.css'
 
 Vue.use(TMui)
 

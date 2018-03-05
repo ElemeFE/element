@@ -19,4 +19,8 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
+cooking.add('loader.svg', {
+  test: /\.svg$/,
+  loader: 'svg-sprite-loader'
+});
 module.exports = cooking.resolve();

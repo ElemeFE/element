@@ -195,6 +195,10 @@
             {
               "path": "/time-info",
               "title": "TimeInfo"
+            },
+            {
+              "path": "/price-info",
+              "title": "PriceInfo"
             }
           ]
         }

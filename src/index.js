@@ -57,8 +57,12 @@ import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import Badge from '../packages/badge/index.js';
 import TimeInfo from '../packages/time-info/index.js';
+import PriceInfo from '../packages/price-info/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
+
+import '../packages/theme-chalk/icons.js';
+import 'svg-sprite-loader/runtime/sprite.build';
 
 const components = [
   Pagination,
@@ -114,6 +118,7 @@ const components = [
   Footer,
   Badge,
   TimeInfo,
+  PriceInfo,
   CollapseTransition
 ];
 
@@ -124,9 +129,6 @@ const install = function(Vue, opts = {}) {
   components.map(component => {
     Vue.component(component.name, component);
   });
-
-  var __svg__ = { path: '../packages/theme-chalk/src/icons/*.svg', name: 'packages/theme-chalk/src/icons/[hash].sprite.svg' };
-  require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
 
   Vue.use(Loading.directive);
 
@@ -150,7 +152,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '1.0.2',
+  version: '1.0.4',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -211,7 +213,8 @@ module.exports = {
   Main,
   Footer,
   Badge,
-  TimeInfo
+  TimeInfo,
+  PriceInfo
 };
 
 module.exports.default = module.exports;
