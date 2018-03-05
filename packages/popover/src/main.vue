@@ -122,7 +122,7 @@ export default {
   methods: {
     doPrivateDestroy() {
       this.doDestroy();
-      this.$emit("distroyed");
+      this.$emit('distroyed');
     },
     doToggle() {
       this.showPopper = !this.showPopper;
