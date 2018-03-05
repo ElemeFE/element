@@ -1,7 +1,7 @@
 <svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
         <g id="icon/default/arrow_right" transform="translate(-8.000000, -6.000000)">
-            <polygon fill="#000000" fill-rule="nonzero" points="8 16.59 12.58 12 8 7.41 9.41 6 15.41 12 9.41 18"></polygon>
+            <polygon fill-rule="nonzero" points="8 16.59 12.58 12 8 7.41 9.41 6 15.41 12 9.41 18"></polygon>
         </g>
     </g>
 </svg>

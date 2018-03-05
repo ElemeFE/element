@@ -1,6 +1,6 @@
 {
   "name": "tmconsulting-ui",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "TeamcIO",
   "description": "A Component Library for Vue.js.",
   "main": "lib/tmconsulting-ui.common.js",
@@ -29,20 +29,11 @@
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && karma start test/unit/karma.conf.js"
   },
-  "faas": {
-    "domain": "element",
-    "public": "temp_web/element"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:tmconsulting/tmc24-components.git"
   },
   "homepage": "https://github.com/tmconsulting/tmc24-components",
-  "keywords": [
-    "eleme",
-    "vue",
-    "components"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tmconsulting/tmc24-components/issues"
@@ -125,6 +116,9 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.14.0",
     "style-loader": "^0.19.1",
+    "svg-sprite-loader": "^3.6.2",
+    "svgo": "^1.0.5",
+    "svgo-loader": "^2.1.0",
     "transliteration": "^1.6.2",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.6.2",
@@ -136,7 +130,6 @@
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1",
-    "webpack-node-externals": "^1.6.0",
-    "webpack-svgstore-plugin": "^4.0.1"
+    "webpack-node-externals": "^1.6.0"
   }
 }

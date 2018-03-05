@@ -1,14 +1,12 @@
 var cooking = require('cooking');
 var config = require('./config');
 
-var WebpackSvgStore = require('webpack-svgstore-plugin');
-
 cooking.set({
   entry: './src/index.js',
   dist: './lib',
   clean: false,
   format: 'umd',
-  moduleName: 'ELEMENT',
+  moduleName: 'TMui',
   extends: ['vue2'],
   alias: config.alias,
   externals: { vue: config.vue }
@@ -21,12 +19,4 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
-cooking.add('plugin.SvgStorePlugin', new WebpackSvgStore({
-  svgoOptions: {
-    plugins: [
-      { removeTitle: true }
-    ]
-  },
-  prefix: 'icon-'
-}));
 module.exports = cooking.resolve();

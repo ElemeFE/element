@@ -1,6 +1,6 @@
 <template>
   <i :class="className" @click="onClick">
-    <svg><use :xlink:href="'#icon-' + name"></use></svg>
+    <svg><use :xlink:href="iconHref"></use></svg>
   </i>
 </template>
 
@@ -22,6 +22,9 @@
           className += ' tm-icon--' + this.name;
         }
         return className;
+      },
+      iconHref() {
+        return '#' + this.name;
       }
     }
   };
