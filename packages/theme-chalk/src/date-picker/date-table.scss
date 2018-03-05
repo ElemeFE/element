@@ -29,6 +29,18 @@
       &.current div {
         background-color: $--datepicker-inrange-color;
       }
+
+      .start-date ~ .available div {
+        &:before {
+          content: '';
+          position: absolute;
+          width: 6px;
+          height: $--datepicker-cell-size;
+          left: -3px;
+          top: 2px;
+          background-color: $--datepicker-inrange-color;
+        }
+      }
     }
   }
 
