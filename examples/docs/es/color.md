@@ -2,6 +2,7 @@
   .demo-color-box {
     border-radius: 4px;
     padding: 20px;
+    margin: 5px 0;
     height: 74px;
     box-sizing: border-box;
     color: #fff;
@@ -16,6 +17,7 @@
   .demo-color-box-group {
     .demo-color-box {
       border-radius: 0;
+      margin: 0;
     }
     .demo-color-box:first-child {
       border-radius: 4px 4px 0 0;
@@ -80,7 +82,7 @@ Element utiliza un conjunto de paletas para especificar colores, y así, proporc
 El color principal de Element es el azul brillante y amigable.
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-blue">Azul<div class="value">#409EFF</div></div>
   </el-col>
 </el-row>
@@ -90,16 +92,16 @@ El color principal de Element es el azul brillante y amigable.
 Además del color principal, se necesitan utilizar distintos colores para diferentes escenarios (por ejemplo, el color en tono rojo indica una operación peligrosa).
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-success">Éxito<div class="value">#67C23A</div></div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-warning">Precaución<div class="value">#E6A23C</div></div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-danger">Peligro<div class="value">#F56C6C</div></div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-info">Info<div class="value">#909399</div></div>
   </el-col>
 </el-row>
@@ -109,7 +111,7 @@ Además del color principal, se necesitan utilizar distintos colores para difere
 Los colores neutrales son para texto, fondos y bordes. Puede usar diferentes colores neutrales para representar una estructura jeráquica.
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
       <div class="demo-color-box bg-text-primary">Texto primario<div class="value">#303133</div></div>
       <div class="demo-color-box bg-text-regular">Texto regular<div class="value">#606266</div></div>
@@ -117,7 +119,7 @@ Los colores neutrales son para texto, fondos y bordes. Puede usar diferentes col
       <div class="demo-color-box bg-text-placeholder">Texto de placeholder<div class="value">#C0C4CC</div></div>
     </div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
       <div class="demo-color-box bg-border-base">Borde base<div class="value">#DCDFE6</div></div>
       <div class="demo-color-box bg-border-light">Borde ligero<div class="value">#E4E7ED</div></div>
