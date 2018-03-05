@@ -617,6 +617,7 @@ export default {
     handleClickIcon(event) {
       if (this.readonly || this.pickerDisabled) return;
       if (this.showClose) {
+        this.valueOnOpen = this.value;
         event.stopPropagation();
         this.emitInput(null);
         this.emitChange(null);

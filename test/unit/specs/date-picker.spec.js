@@ -233,6 +233,34 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('change event: when clear(), without opening picker', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          ref="compo"
+          v-model="value"
+        />`,
+      data() {
+        return {
+          value: new Date()
+        };
+      }
+    }, true);
+
+    const spy = sinon.spy();
+    vm.$refs.compo.$on('change', spy);
+
+    setTimeout(_ => {
+      vm.$refs.compo.showClose = true;
+      vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.equal(true);
+        expect(spy.calledWith(null)).to.equal(true);
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
   describe('input event', () => {
     // mimic standard <select>'s behavior
     // emit input if and only if value changes
