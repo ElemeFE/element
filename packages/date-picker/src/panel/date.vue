@@ -128,6 +128,13 @@
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
+          size="mini"
+          type="warning"
+          class="el-picker-panel__link-btn"
+          @click="handleClear">
+          {{ t('el.datepicker.cancel') }}
+        </el-button>
+        <el-button
           plain
           size="mini"
           class="el-picker-panel__link-btn"
@@ -345,7 +352,6 @@
       confirm() {
         this.emit(this.date);
       },
-
       resetView() {
         if (this.selectionMode === 'month') {
           this.currentView = 'month';
