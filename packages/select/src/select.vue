@@ -406,7 +406,10 @@
     methods: {
       handleQueryChange(val) {
         if (this.previousQuery === val) return;
-        if (this.previousQuery === null && typeof this.filterMethod === 'function') {
+        if (
+          this.previousQuery === null &&
+          (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
+        ) {
           this.previousQuery = val;
           return;
         }
