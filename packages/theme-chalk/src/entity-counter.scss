@@ -38,4 +38,11 @@
   @include e(icon) {
     fill: $--entity-counter-border-color;
   }
+
+  @include e(label) {
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: center;
+  }
 }
