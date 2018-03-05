@@ -8,11 +8,11 @@
     <template v-if="partSum">
       <span v-if="partSum" class="tm-price-info__part-sum">{{ labelPartSum }}</span>
       <span v-if="partSum" class="tm-price-info__change">,{{ labelPartChange }}</span>
-      <tm-icon :name="currency" class="tm-price-info__currency"></tm-icon>
+      <tm-icon :name="currency" :class="'tm-price-info__currency tm-price-info__currency_' + currency"></tm-icon>
     </template>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
     <span class="tm-price-info__change">,{{ labelChange }}</span>
-    <tm-icon :name="currency" class="tm-price-info__currency"></tm-icon>
+    <tm-icon :name="currency" :class="'tm-price-info__currency tm-price-info__currency_' + currency"></tm-icon>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
       <span>НДС</span>

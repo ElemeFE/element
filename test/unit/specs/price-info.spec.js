@@ -40,6 +40,6 @@ describe('PriceInfo', () => {
       sum: '12560.10'
     }, true);
     let priceInfoElm = vm.$el;
-    expect(priceInfoElm.querySelector('.tm-icon-rub')).to.be.ok;
+    expect(priceInfoElm.querySelector('.tm-price-info__currency_rub')).to.be.ok;
   });
 });
