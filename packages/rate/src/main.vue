@@ -48,7 +48,6 @@
 
     data() {
       return {
-        classMap: {},
         pointerAtLeftHalf: true,
         currentValue: this.value,
         hoverIndex: -1
@@ -205,6 +204,16 @@
         return result;
       },
 
+      classMap() {
+        return {
+          lowClass: this.iconClasses[0],
+          mediumClass: this.iconClasses[1],
+          highClass: this.iconClasses[2],
+          voidClass: this.voidIconClass,
+          disabledVoidClass: this.disabledVoidIconClass
+        };
+      },
+
       rateDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
       }
@@ -332,13 +341,6 @@
       if (!this.value) {
         this.$emit('input', 0);
       }
-      this.classMap = {
-        lowClass: this.iconClasses[0],
-        mediumClass: this.iconClasses[1],
-        highClass: this.iconClasses[2],
-        voidClass: this.voidIconClass,
-        disabledVoidClass: this.disabledVoidIconClass
-      };
     }
   };
 </script>
