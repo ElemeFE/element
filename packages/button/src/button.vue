@@ -63,9 +63,7 @@
 
     methods: {
       handleClick(evt) {
-        if (!this.disabled && !this.loading) {
-          this.$emit('click', evt);
-        }
+        this.$emit('click', evt);
       }
     }
   };
