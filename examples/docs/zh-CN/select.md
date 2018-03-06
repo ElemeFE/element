@@ -339,10 +339,10 @@
     style="margin-left: 20px;"
     placeholder="请选择">
     <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
     </el-option>
   </el-select>
 </template>
@@ -609,7 +609,7 @@
 
 ### 创建条目
 可以创建并选中选项中不存在的条目
-:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。
+:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。本例还使用了`default-first-option`属性，在该属性打开的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
 ```html
 <template>
   <el-select
@@ -617,6 +617,7 @@
     multiple
     filterable
     allow-create
+    default-first-option
     placeholder="请选择文章标签">
     <el-option
       v-for="item in options5"
@@ -659,11 +660,12 @@
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
-| size | 输入框尺寸 | string | large/small/mini | — |
+| size | 输入框尺寸 | string | medium/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
 | name | select input 的 name 属性 | string | — | — |
+| auto-complete | select input 的 autocomplete 属性 | string | — | off |
 | placeholder | 占位符 | string | — | 请选择 |
 | filterable | 是否可搜索 | boolean | — | false |
 | allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
@@ -677,6 +679,7 @@
 | popper-class | Select 下拉框的类名 | string | — | — |
 | reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
+| popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

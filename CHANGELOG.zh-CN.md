@@ -1,5 +1,141 @@
 ## 更新日志
 
+### 2.2.1
+
+*2018-03-02*
+
+- 修复 Aside、Header 和 Footer 在某些布局中被压缩的问题，#9812
+- 修复设置了 `height` 属性的 Table 在服务端渲染时无法加载的问题，#9876
+- 修复可展开的 Table 在展开某一行后高度未重新计算的问题，#9848
+- 修复在 DateTimePicker 中手动输入日期后不能正确触发 `change` 事件的问题，#9913
+- 修复鼠标右键点击 Select 的输入框会展开选项的问题，#9894（by @openks）
+- 新增 Slider 的 `tooltip-class` 属性，#9957
+- 现在的 Select 在选中选项后仍然处于 focus 状态，#9857（by @Seebiscuit）
+- 新增 Transfer 的 `target-order` 属性，#9960
+
+### 2.2.0 Graphite
+
+*2018-02-12*
+
+#### 新特性
+- Menu
+  - SubMenu 新增 `popper-class` 和 `disabled` 属性，#9604 #9771
+  - 现在水平模式下的 Menu 支持多级 SubMenu 了，#9741
+- Tree
+  - 新增 `node-contextmenu` 事件，#9678
+  - 现在可以使用 scoped slot 自定义树节点的模板了，#9686
+  - 新增 `getNode`、`remove`、`append`、`insertBefore`、`insertAfter`、`getCheckedKeys`、`getHalfCheckedNodes`、`getHalfCheckedKeys` 方法和 `check` 事件，#9718 #9730
+- Transfer
+  - 新增 `clearQuery` 方法，#9753
+- Select
+  - 新增 `popper-append-to-body` 属性，#9782
+
+#### 修复
+- Table
+  - 修复点击可展开行的展开图标会触发 `row-click` 事件的问题，#9654
+  - 修复某些情况下通过拖动改变列宽后，布局没有同步更新的问题，#9668
+  - 修复合计行与固定列并存时的样式问题，#9667
+- Container
+  - 修复布局组件在 IE11 中无法自动填充可用空间的问题，#9655
+- Loading
+  - 修复在 `mounted` 中修改 `v-loading` 的值为 true 时不能正确显示 Loading 的问题，#9722
+- Switch
+  - 修复点击时会触发两次原生 click 事件的问题，#9760
+
+### 2.1.0 Charcoal
+
+*2018-01-31*
+
+#### 新特性
+- Cascader
+  - 新增 `focus` 和 `blur` 事件，#9184（by @viewweiwu）
+- Table
+  - `filter-method` 方法加入第三个参数 `column`，#9196（by @liyanlong）
+- DatePicker
+  - 新增 `prefix-icon` 和 `clear-icon` 属性，#9237（by @AdamSGit）
+  - 新增 `default-time` 属性，#9094（by @nighca）
+  - `value-format` 属性增加对 `timestamp` 的支持，#9319（by @wacky6）
+- InputNumber
+  - 组件绑定变量的值支持 `undefined`，#9361
+- Select
+  - 新增 `auto-complete` 属性，#9388
+- Form
+  - 新增 `disabled` 属性，#9529
+  - 新增 `validateOnRuleChange` 属性，#8141
+- Notificaition
+  - 新增 `closeAll` 方法，#9514
+
+#### 修复
+- InputNumber
+  - 修复初始输入小数点时被重置的问题，#9116
+- Dropdown
+  - 修复当页面仅有水平滚动条时，某些浏览器下拉菜单定位错误的问题，#9138（by @banzhuanmei）
+- Table
+  - 修复带有固定列的 Table 在列数据变化后固定列的个数计算错误的问题，#9188（by @kolesoffac）
+  - 修复多级表头最后一列的边框不能正确显示的问题，#9326
+  - 修复在 Safari 浏览器中表头错位的问题，#9327
+  - 修复带有展开行的表格在展开某一行后，当表格数据更新但 `row-key` 值不变时，该行会自动收起的问题，#9462
+  - 修复在一些情况下不必要的多次渲染问题，#9426
+  - 修复动态改变 TableColumn 的 `width` 属性时，其宽度计算错误的问题，#9426
+- Loading
+  - 修复某些情况下 Loading 不能被正确隐藏的问题，#9313
+- DatePicker
+  - 修复 `focus` 方法在范围选择时无效的问题，#9437
+  - 修复当目前时刻处于不可选择的范围内时，点击面板上的「此刻」按钮仍能选中目前时刻的问题，#9470（by @wacky6）
+  - 修复当在月选择面板中选中天数较少的月份时，日期面板呈现下一个月的问题，#9577（by @wacky6）
+- Steps
+  - 修复在 IE 11 中的样式问题，#9454
+
+#### 非兼容性更新
+- Menu
+  - `collapse` 状态下的弹出菜单现在会插入至 body 元素，修复其位于 Aside 内时弹出菜单不可见的问题，#9263
+- Table
+  - 勾选多选表格的 checkbox 时不再同时触发 `row-click` 事件，#9467
+- Loading
+  - 非全屏 Loading 遮罩层的 `z-index` 修改为 2000；全屏 Loading 遮罩层的 `z-index` 值会随页面上的弹出组件动态更新，#9522
+- Dropdown
+  - `show-timeout` 和 `hide-timeout` 属性现在仅在 trigger 为 `hover` 时生效，#9573
+
+### 2.0.11
+
+*2018-01-08*
+
+- 修复 Input 的 `prepend` 或 `append` slot 中 Select 的边框颜色错误，#9089
+- 修复 Select 的 `remove-tag` 事件参数与文档不符的问题，#9090
+- 新增 SubMenu 的 `show-timeout` 和 `hide-timeout` 属性，#8934（by @HugoLew）
+- 修复按需引入 Table 时 `show-overflow-tooltip` 的 Tooltip 样式丢失的问题，#9130
+- 修复 Table 在执行 `clearSort` 后点击对应列的排序图标无法正常排序的问题，#9100（by @zEmily）
+- 捷克语的 i18n 配置文件由 `cz` 重命名为 `cs-CZ`，#9164
+
+### 2.0.10
+
+*2017-12-29*
+
+- 修复了 Table 在固定列和合计行并存时的高度计算错误的问题，#9026
+- 修复了 Table 样式 SCSS 文件错误编译的问题，#9028
+- 现在 DatePicker 的 `change` 事件只会在 `value` 真正改变的时候触发，#9029（by @remizovvv）
+- 新增 Input 的 `tabindex` 属性，#9041（by @dicklwm）
+
+### 2.0.9🎄
+
+*2017-12-24*
+
+- 新增 Upload 的 `before-remove` 钩子方法，#8788（by @firesh）
+- 修复 FormItem 的 `error` 属性初始值无效的问题，#8840
+- 通过指令调用的 Loading 现在支持以 `element-loading-custom-class` 属性的方式设置自定义类名，#8826（by @earlymeme）
+- 修复 CarouselItem 为异步获取时被隐藏的问题，#8921
+- 新增 Tree 的 `renderAfterExpand` 属性，#8972
+
+### 2.0.8
+
+*2017-12-12*
+
+- 新增西班牙语文档
+- 修复 `show-timeout` 对点击触发的 Dropdown 无效的问题，#8734（by @presidenten）
+- 修复 Form 对于 `trigger` 为 blur 的校验规则触发时机有误的问题，#8776
+- 修复 DatePicker 在范围选择时 blur 事件触发时机有误的问题，#8784
+- TimePicker 的 `format` 新增对 AM/PM 的支持，#8620（by @firesh）
+
 ### 2.0.7
 
 *2017-11-29*

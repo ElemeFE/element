@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   export default {
     data() {
       return {
@@ -149,7 +149,7 @@ Input data using mouse or keyboard.
 
 ### Basic usage
 
-::: demo
+:::demo
 
 ```html
 <el-input placeholder="Please input" v-model="input"></el-input>
@@ -168,7 +168,7 @@ export default {
 
 ### Disabled
 
-::: demo Disable the Input with the `disabled` attribute.
+:::demo Disable the Input with the `disabled` attribute.
 
 ```html
 <el-input
@@ -191,7 +191,7 @@ export default {
 
 ### Clearable
 
-::: demo Make the Input clearable with the `clearable` attribute.
+:::demo Make the Input clearable with the `clearable` attribute.
 
 ```html
 <el-input
@@ -216,7 +216,7 @@ export default {
 
 Add an icon to indicate input type.
 
-::: demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
+:::demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
 ```html
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using attributes</span>
@@ -271,7 +271,7 @@ export default {
 
 Resizable for entering multiple lines of text information. Add attribute `type="textarea"` to change `input` into native `textarea`.
 
-::: demo Control the height by setting the `rows` prop.
+:::demo Control the height by setting the `rows` prop.
 
 ```html
 <el-input
@@ -297,7 +297,7 @@ export default {
 
 Setting the `autosize` prop for a textarea type of Input makes the height to automatically adjust based on the content. An options object can be provided to `autosize` to specify the minimum and maximum number of lines the textarea can automatically adjust.
 
-::: demo
+:::demo
 
 ```html
 <el-input
@@ -331,7 +331,7 @@ export default {
 
 Prepend or append an element, generally a label or a button.
 
-::: demo Use `slot` to distribute elements that prepend or append to Input.
+:::demo Use `slot` to distribute elements that prepend or append to Input.
 
 ```html
 <div>
@@ -380,7 +380,7 @@ export default {
 
 ### Sizes
 
-::: demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
+:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
 ```html
 <div class="demo-input-size">
   <el-input
@@ -423,7 +423,7 @@ export default {
 
 You can get some recommended tips based on the current input.
 
-::: demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
+:::demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 ```html
 <el-row class="demo-autocomplete">
   <el-col :span="12">
@@ -544,7 +544,7 @@ Customize how suggestions are displayed.
     methods: {
       querySearch(queryString, cb) {
         var links = this.links;
-        var results = queryString ? link.filter(this.createFilter(queryString)) : links;
+        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
         // call callback function to return suggestion objects
         cb(results);
       },
@@ -583,7 +583,7 @@ Customize how suggestions are displayed.
 
 Search data from server-side.
 
-::: demo
+:::demo
 ```html
 <el-autocomplete
   v-model="state4"
@@ -647,6 +647,7 @@ Search data from server-side.
 |maxlength| maximum Input text length| number| — | — |
 |minlength| minimum Input text length| number | — | — |
 |placeholder| placeholder of Input| string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
@@ -663,7 +664,7 @@ Search data from server-side.
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
-| clearable | whether to show clear button | boolean | — | false |
+| tabindex | input tabindex | string | - | - |
 
 ### Input slots
 
@@ -688,14 +689,13 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
-| valueKey | key name of the input suggestion object for display | string | — | value |
+| value-key | key name of the input suggestion object for display | string | — | value |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
 | debounce | debounce delay when typing, in milliseconds | number | — | 300 |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
-| on-icon-click | hook function when clicking on the input icon | function | — | — |
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 | label | label text | string | — | — |

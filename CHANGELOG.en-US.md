@@ -1,5 +1,141 @@
 ## Changelog
 
+### 2.2.1
+
+*2018-03-02*
+
+- Fixed Aside, Header and Footer shrinking in some layout, #9812
+- Fixed Table with a `height` attribute not rendering in SSR, #9876
+- Fixed expandable Table not calculating its height when a row is expanded, #9848
+- Fixed `change` event not trigger when manually typing date in DateTimePicker, #9913
+- Fixed Select showing its options when the input box is right-clicked, #9894 (by @openks)
+- Added `tooltip-class` attribute for Slider, #9957
+- Now Select will stay focused after selection, #9857 (by @Seebiscuit)
+- Added `target-order` attribute for Transfer, #9960
+
+### 2.2.0 Graphite
+
+*2018-02-12*
+
+#### New features
+- Menu
+  - Added `popper-class` and `disabled` attributes for SubMenu, #9604 #9771
+  - Horizontal Menu now supports multi-layered SubMenu, #9741
+- Tree
+  - Added `node-contextmenu` event, #9678
+  - Now you can customize node template using scoped slot, #9686
+  - Added `getNode`, `remove`, `append`, `insertBefore`, `insertAfter`, `getCheckedKeys`, `getHalfCheckedNodes`, `getHalfCheckedKeys` methods and `check` event, #9718 #9730
+- Transfer
+  - Added `clearQuery` method, #9753
+- Select
+  - Added `popper-append-to-body` attribute, #9782
+
+#### Bug fixes
+- Table
+  - Fixed clicking expanding icon of an expandable row triggers `row-click` event, #9654
+  - Fixed layout not update when column width is changed by user dragging, #9668
+  - Fixed style issue when summary row co-exists with fixed columns, #9667
+- Container
+  - Fixed container components not stretching in IE11, #9655
+- Loading
+  - Fixed Loading not showing when the value of `v-loading` is changed to true in the `mounted` hook, #9722
+- Switch
+  - Fixed two native click events are triggered when Switch is clicked, #9760
+
+### 2.1.0 Charcoal
+
+*2018-01-31*
+
+#### New features
+- Cascader
+  - Added `focus` and `blur` events, #9184 (by @viewweiwu)
+- Table
+  - The `filter-method` now has a third param `column`, #9196 (by @liyanlong)
+- DatePicker
+  - Added `prefix-icon` and `clear-icon` attributes, #9237 (by @AdamSGit)
+  - Added `default-time` attribute, #9094 (by @nighca)
+  - `value-format` now supports `timestamp`, #9319 (by @wacky6)
+- InputNumber
+  - Now the binding value can be `undefined`, #9361
+- Select
+  - Added `auto-complete` attribute, #9388
+- Form
+  - Added `disabled` attribute, #9529
+  - Added `validateOnRuleChange` attribute, #8141
+- Notificaition
+  - Added `closeAll` method, #9514
+
+#### Bug fixes
+- InputNumber
+  - Fixed value resetting when typing decimal point, #9116
+- Dropdown
+  - Fixed dropdown menu incorrect positioning when the page only has a horizontal scrollbar in some browsers, #9138 (by @banzhuanmei)
+- Table
+  - Fixed an error in calculating number of fixed columns after the column data changes, #9188（by @kolesoffac）
+  - Fixed the border of the last column of the grouped header not properly displayed, #9326
+  - Fixed incorrect positioning of table header in Safari, #9327
+  - Fixed expanded row collapsing when the table data changes, #9462
+  - Fixed unnecessary multiple renders in some conditions, #9426
+  - Fixed column width calculation error when `width` of TableColumn changes, #9426
+- Loading
+  - Fixed Loading not hiding correctly in some conditions, #9313
+- DatePicker
+  - Fixed `focus` method not working in range mode, #9437
+  - Fixed clicking the "now" button still selecting the current date even if it is disabled, #9470 (by @wacky6)
+  - Fixed date clamping when navigating, #9577 (by @wacky6)
+- Steps
+  - Fixed style error in IE 11, #9454
+
+#### Breaking changes
+- Menu
+  - The popup menu in `collapse` mode now appends directly to `body`, so that it is visible when nested in Aside, #9263
+- Table
+  - Now checking the checkboxes in multi-selection Table doesn't trigger `row-click` event, #9467
+- Loading
+  - The `z-index` of non-fullscreen loading mask is changed to 2000. The `z-index` of fullscreen loading mask will update dynamically with the popup components, #9522
+- Dropdown
+  - `show-timeout` and `hide-timeout` attributes now only works when trigger is `hover`, #9573
+
+### 2.0.11
+
+*2018-01-08*
+
+- Fixed border color issue of Select when in `prepend` or `append` slot of Input, #9089
+- Fixed `remove-tag` event's parameter of Select, #9090
+- Added `show-timeout` and `hide-timeout` attributes for SubMenu, #8934 (by @HugoLew)
+- Fixed missing Tooltip style of `show-overflow-tooltip` when Table is imported on demand, #9130
+- Fixed Table column's sorting malfunctioning after `clearSort` is executed on that column, #9100 (by @zEmily)
+- i18n config file for Czech is renamed from `cz` to `cs-CZ`, #9164
+
+### 2.0.10
+
+*2017-12-29*
+
+- Fixed wrong max height calculation of Table when fixed column and summary row co-exist, #9026
+- Fixed uncompiled color style of empty text in Table, #9028
+- Now DatePicker only emits `change` event when value is truly changed, #9029 (by @remizovvv)
+- Added `tabindex` attribute for Input, #9041 (by @dicklwm)
+
+### 2.0.9🎄
+
+*2017-12-24*
+
+- Added `before-remove` hook function for Upload, #8788 (by @firesh)
+- Fixed initial value of `error` not working for FormItem, #8840
+- Now Loading directive supports custom class name by assigning `element-loading-custom-class` attribute, #8826 (by @earlymeme)
+- Fixed CarouselItem becoming invisible when data is asynchronously updated, #8921
+- Added `renderAfterExpand` attribute for Tree, #8972
+
+### 2.0.8
+
+*2017-12-12*
+
+- Added Spanish documentation
+- Fixed `show-timeout` of Dropdown not working when trigger is click, #8734 (by @presidenten)
+- Fixed Form validation timing for rules whose trigger is blur, #8776
+- Fixed blur event of ranged DatePicker, #8784
+- `format` of TimePicker now supports AM/PM, #8620 (by @firesh)
+
 ### 2.0.7
 
 *2017-11-29*

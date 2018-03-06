@@ -5,7 +5,7 @@
      :aria-valuemin="min"
      :aria-valuemax="max"
      :aria-orientation="vertical ? 'vertical': 'horizontal'"
-     :aria-disabled="disabled"
+     :aria-disabled="sliderDisabled"
   >
     <el-input-number
       v-model="firstValue"
@@ -14,7 +14,7 @@
       ref="input"
       @change="$nextTick(emitChange)"
       :step="step"
-      :disabled="disabled"
+      :disabled="sliderDisabled"
       :controls="showInputControls"
       :min="min"
       :max="max"
@@ -22,7 +22,7 @@
       size="small">
     </el-input-number>
     <div class="el-slider__runway"
-      :class="{ 'show-input': showInput, 'disabled': disabled }"
+      :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
       ref="slider">
@@ -33,11 +33,13 @@
       <slider-button
         :vertical="vertical"
         v-model="firstValue"
+        :tooltip-class="tooltipClass"
         ref="button1">
       </slider-button>
       <slider-button
         :vertical="vertical"
         v-model="secondValue"
+        :tooltip-class="tooltipClass"
         ref="button2"
         v-if="range">
       </slider-button>
@@ -60,6 +62,12 @@
     name: 'ElSlider',
 
     mixins: [Emitter],
+
+    inject: {
+      elForm: {
+        default: ''
+      }
+    },
 
     props: {
       min: {
@@ -116,7 +124,8 @@
       },
       label: {
         type: String
-      }
+      },
+      tooltipClass: String
     },
 
     components: {
@@ -233,7 +242,7 @@
       },
 
       onSliderClick(event) {
-        if (this.disabled || this.dragging) return;
+        if (this.sliderDisabled || this.dragging) return;
         this.resetSize();
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
@@ -260,6 +269,7 @@
 
     computed: {
       stops() {
+        if (!this.showStops) return [];
         if (this.step === 0) {
           process.env.NODE_ENV !== 'production' &&
           console.warn('[Element Warn][Slider]step should not be 0.');
@@ -322,6 +332,10 @@
             width: this.barSize,
             left: this.barStart
           };
+      },
+
+      sliderDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
 

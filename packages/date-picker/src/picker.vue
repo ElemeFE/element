@@ -3,7 +3,7 @@
     class="el-date-editor"
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly"
-    :disabled="disabled"
+    :disabled="pickerDisabled"
     :size="pickerSize"
     :id="id"
     :name="name"
@@ -11,20 +11,23 @@
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
-    @blur="handleBlur"
     @keydown.native="handleKeydown"
     :value="displayValue"
     @input="value => userInput = value"
+    @change="handleChange"
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
-    @change.native="handleChange"
     :validateEvent="false"
-    :prefix-icon="triggerClass"
     ref="reference">
+    <i slot="prefix"
+      class="el-input__icon"
+      :class="triggerClass"
+      @click="handleFocus">
+    </i>
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="{ 'el-icon-circle-close': showClose }"
+      :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -33,7 +36,7 @@
     :class="[
       'el-date-editor--' + type,
       pickerSize ? `el-range-editor--${ pickerSize }` : '',
-      disabled ? 'is-disabled' : '',
+      pickerDisabled ? 'is-disabled' : '',
       pickerVisible ? 'is-active' : ''
     ]"
     @click="handleRangeClick"
@@ -47,7 +50,7 @@
     <input
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
-      :disabled="disabled"
+      :disabled="pickerDisabled"
       :id="id && id[0]"
       :readonly="!editable || readonly"
       :name="name && name[0]"
@@ -59,7 +62,7 @@
     <input
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
-      :disabled="disabled"
+      :disabled="pickerDisabled"
       :id="id && id[1]"
       :readonly="!editable || readonly"
       :name="name && name[1]"
@@ -70,7 +73,7 @@
     <i
       @click="handleClickIcon"
       v-if="haveTrigger"
-      :class="{ 'el-icon-circle-close': showClose }"
+      :class="[showClose ? '' + clearIcon : '']"
       class="el-input__icon el-range__close-icon">
     </i>
   </div>
@@ -82,7 +85,6 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
-import Focus from 'element-ui/src/mixins/focus';
 import ElInput from 'element-ui/packages/input';
 import merge from 'element-ui/src/utils/merge';
 
@@ -90,7 +92,8 @@ const NewPopper = {
   props: {
     appendToBody: Popper.props.appendToBody,
     offset: Popper.props.offset,
-    boundariesPadding: Popper.props.boundariesPadding
+    boundariesPadding: Popper.props.boundariesPadding,
+    arrowOffset: Popper.props.arrowOffset
   },
   methods: Popper.methods,
   data() {
@@ -123,9 +126,11 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange'
 ];
 const DATE_FORMATTER = function(value, format) {
+  if (format === 'timestamp') return value.getTime();
   return formatDate(value, format);
 };
 const DATE_PARSER = function(text, format) {
+  if (format === 'timestamp') return new Date(Number(text));
   return parseDate(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
@@ -134,7 +139,7 @@ const RANGE_FORMATTER = function(value, format) {
     const end = value[1];
 
     if (start && end) {
-      return [formatDate(start, format), formatDate(end, format)];
+      return [DATE_FORMATTER(start, format), DATE_FORMATTER(end, format)];
     }
   }
   return '';
@@ -147,7 +152,7 @@ const RANGE_PARSER = function(array, format, separator) {
     const range1 = array[0];
     const range2 = array[1];
 
-    return [parseDate(range1, format), parseDate(range2, format)];
+    return [DATE_PARSER(range1, format), DATE_PARSER(range2, format)];
   }
   return [];
 };
@@ -174,8 +179,8 @@ const TYPE_VALUE_RESOLVER_MAP = {
       let date = formatDate(trueDate, format);
 
       date = /WW/.test(date)
-            ? date.replace(/WW/, week < 10 ? '0' + week : week)
-            : date.replace(/W/, week);
+        ? date.replace(/WW/, week < 10 ? '0' + week : week)
+        : date.replace(/W/, week);
       return date;
     },
     parser(text) {
@@ -294,9 +299,12 @@ const validator = function(val) {
 };
 
 export default {
-  mixins: [Emitter, NewPopper, Focus('reference')],
+  mixins: [Emitter, NewPopper],
 
   inject: {
+    elForm: {
+      default: ''
+    },
     elFormItem: {
       default: ''
     }
@@ -310,6 +318,11 @@ export default {
     placeholder: String,
     startPlaceholder: String,
     endPlaceholder: String,
+    prefixIcon: String,
+    clearIcon: {
+      type: String,
+      default: 'el-icon-circle-close'
+    },
     name: {
       default: '',
       validator
@@ -334,6 +347,7 @@ export default {
     },
     value: {},
     defaultValue: {},
+    defaultTime: {},
     rangeSeparator: {
       default: '-'
     },
@@ -350,14 +364,14 @@ export default {
       pickerVisible: false,
       showClose: false,
       userInput: null,
-      valueOnOpen: null,  // value when picker opens, used to determine whether to emit change
+      valueOnOpen: null, // value when picker opens, used to determine whether to emit change
       unwatchPickerOptions: null
     };
   },
 
   watch: {
     pickerVisible(val) {
-      if (this.readonly || this.disabled) return;
+      if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
         this.valueOnOpen = this.value;
@@ -371,6 +385,7 @@ export default {
           this.userInput = null;
         }
         this.dispatch('ElFormItem', 'el.form.blur');
+        this.$emit('blur', this);
         this.blur();
       }
     },
@@ -424,7 +439,7 @@ export default {
     },
 
     triggerClass() {
-      return this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date';
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date');
     },
 
     selectionMode() {
@@ -473,6 +488,10 @@ export default {
 
     pickerSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+    },
+
+    pickerDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
     }
   },
 
@@ -486,6 +505,14 @@ export default {
   },
 
   methods: {
+    focus() {
+      if (!this.ranged) {
+        this.$refs.reference.focus();
+      } else {
+        this.handleFocus();
+      }
+    },
+
     blur() {
       this.refInput.forEach(input => input.blur());
     },
@@ -521,7 +548,7 @@ export default {
     },
 
     handleMouseEnter() {
-      if (this.readonly || this.disabled) return;
+      if (this.readonly || this.pickerDisabled) return;
       if (!this.valueIsEmpty && this.clearable) {
         this.showClose = true;
       }
@@ -537,6 +564,11 @@ export default {
             this.userInput = null;
           }
         }
+      }
+      if (this.userInput === '') {
+        this.emitInput(null);
+        this.emitChange(null);
+        this.userInput = null;
       }
     },
 
@@ -583,7 +615,7 @@ export default {
     },
 
     handleClickIcon(event) {
-      if (this.readonly || this.disabled) return;
+      if (this.readonly || this.pickerDisabled) return;
       if (this.showClose) {
         event.stopPropagation();
         this.emitInput(null);
@@ -599,9 +631,6 @@ export default {
 
     handleClose() {
       this.pickerVisible = false;
-      if (this.ranged) {
-        this.$emit('blur', this);
-      }
     },
 
     handleFocus() {
@@ -611,10 +640,6 @@ export default {
         this.pickerVisible = true;
       }
       this.$emit('focus', this);
-    },
-
-    handleBlur() {
-      this.$emit('blur', this);
     },
 
     handleKeydown(event) {
@@ -648,9 +673,8 @@ export default {
       }
 
       // Enter
-      if (keyCode === 13 && this.displayValue) {
-        const value = this.parseString(this.displayValue);
-        if (this.isValidValue(value)) {
+      if (keyCode === 13) {
+        if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
           this.blur();
@@ -708,6 +732,7 @@ export default {
     mountPicker() {
       this.picker = new Vue(this.panel).$mount();
       this.picker.defaultValue = this.defaultValue;
+      this.picker.defaultTime = this.defaultTime;
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
@@ -777,9 +802,12 @@ export default {
     },
 
     emitChange(val) {
-      this.$emit('change', val);
-      this.dispatch('ElFormItem', 'el.form.change', val);
-      this.valueOnOpen = val;
+      // determine user real change only
+      if (val !== this.valueOnOpen) {
+        this.$emit('change', val);
+        this.dispatch('ElFormItem', 'el.form.change', val);
+        this.valueOnOpen = val;
+      }
     },
 
     emitInput(val) {

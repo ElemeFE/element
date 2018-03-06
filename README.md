@@ -8,27 +8,49 @@
 [![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
 [![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
 [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
+[![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmcharts.com/compare/element-ui?minimal=true)
 ![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
 ![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS)
 [![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(Chinese)
 [![Join the chat at https://gitter.im/element-en/Lobby](https://badges.gitter.im/element-en/Lobby.svg)](https://gitter.im/element-en/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(English)
 [![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
 [![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
-
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 > A Vue.js 2.0 UI Toolkit for Web.
+
+<p align="center">
+  <b>Special thanks to the generous sponsorship by:</b>
+</p>
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://tipe.io/?ref=element" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/1016365/34124854-48fafa06-e3e9-11e7-8c04-251055feebee.png">
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Links
 - Homepage and documentation
-  - International users: http://element.eleme.io/
-  - Chinese users: http://element-cn.eleme.io/
+  - International users: http://element.eleme.io/#/en-US
+  - Chinese users: http://element-cn.eleme.io/#/zh-CN
+  - Spanish users: http://element.eleme.io/#/es
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
 - [Element for React](https://github.com/eleme/element-react)
-- [Element for Angular](https://github.com/eleme/element-angular)
+- [Element for Angular](https://github.com/ElemeFE/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
+- [Visual Studio Code helper](https://github.com/ElemeFE/vscode-element-helper)
 - Starter kit
   - [element-starter](https://github.com/ElementUI/element-starter)
   - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
@@ -79,7 +101,7 @@ We have collected some [frequently asked questions](https://github.com/ElemeFE/e
 Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md)) before making a pull request.
 
 ## Special Thanks
-English documentation is brought to you by SwiftGG Translation Team. Our special thanks go to these fellows:
+English documentation is brought to you by SwiftGG Translation Team:
 - [raychenfj](https://github.com/raychenfj)
 - [kevin](http://thekevin.cn/)
 - [曾小涛](https://github.com/zengxiaotao)
@@ -90,6 +112,18 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 - [梁杰](http://numbbbbb.com)
 - [Changing](https://github.com/sunzhuo11)
 - [mmoaay](https://github.com/mmoaay)
+
+Spanish documentation is made possible by these community developers:
+- [adavie1](https://github.com/adavie1)
+- [carmencitaqiu](https://github.com/carmencitaqiu)
+- [coderdiaz](https://github.com/coderdiaz)
+- [fedegar33](https://github.com/fedegar33)
+- [Gonzalo2310](https://github.com/Gonzalo2310)
+- [lesterbx](https://github.com/lesterbx)
+- [ProgramerGuy](https://github.com/ProgramerGuy)
+- [SantiagoGdaR](https://github.com/SantiagoGdaR)
+- [sigfriedCub1990](https://github.com/sigfriedCub1990)
+- [thechosenjuan](https://github.com/thechosenjuan)
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
@@ -169,4 +203,4 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 
 ## LICENSE
-MIT
+[MIT](LICENSE)

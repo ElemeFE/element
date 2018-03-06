@@ -8,6 +8,7 @@
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
+      :render-after-expand="renderAfterExpand"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
@@ -20,6 +21,7 @@
 
 <script>
   import TreeStore from './model/tree-store';
+  import { getNodeKey } from './model/util';
   import ElTreeNode from './tree-node.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from 'element-ui/src/mixins/emitter';
@@ -52,6 +54,10 @@
         default() {
           return t('el.tree.emptyText');
         }
+      },
+      renderAfterExpand: {
+        type: Boolean,
+        default: true
       },
       nodeKey: String,
       checkStrictly: Boolean,
@@ -137,12 +143,20 @@
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
         this.store.filter(value);
       },
-      getNodeKey(node, index) {
-        const nodeKey = this.nodeKey;
-        if (nodeKey && node) {
-          return node.data[nodeKey];
+      getNodeKey(node) {
+        return getNodeKey(this.nodeKey, node.data);
+      },
+      getNodePath(data) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getNodePath');
+        const node = this.store.getNode(data);
+        if (!node) return [];
+        const path = [node.data];
+        let parent = node.parent;
+        while (parent && parent !== this.root) {
+          path.push(parent.data);
+          parent = parent.parent;
         }
-        return index;
+        return path.reverse();
       },
       getCheckedNodes(leafOnly) {
         return this.store.getCheckedNodes(leafOnly);
@@ -170,6 +184,12 @@
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
+      getHalfCheckedNodes() {
+        return this.store.getHalfCheckedNodes();
+      },
+      getHalfCheckedKeys() {
+        return this.store.getHalfCheckedKeys();
+      },
       setCurrentNode(node) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentNode');
         this.store.setUserCurrentNode(node);
@@ -177,6 +197,21 @@
       setCurrentKey(key) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentKey');
         this.store.setCurrentNodeKey(key);
+      },
+      getNode(data) {
+        return this.store.getNode(data);
+      },
+      remove(data) {
+        this.store.remove(data);
+      },
+      append(data, parentNode) {
+        this.store.append(data, parentNode);
+      },
+      insertBefore(data, refNode) {
+        this.store.insertBefore(data, refNode);
+      },
+      insertAfter(data, refNode) {
+        this.store.insertAfter(data, refNode);
       },
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);

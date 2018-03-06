@@ -37,10 +37,7 @@
             <el-input
               v-model="inputValue"
               :type="inputType"
-              @compositionstart.native="handleComposition"
-              @compositionupdate.native="handleComposition"
-              @compositionend.native="handleComposition"
-              @keyup.enter.native="handleKeyup"
+              @keydown.enter.native="handleAction('confirm')"
               :placeholder="inputPlaceholder"
               ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
@@ -145,18 +142,6 @@
     },
 
     methods: {
-      handleComposition(event) {
-        if (event.type === 'compositionend') {
-          setTimeout(() => {
-            this.isOnComposition = false;
-          }, 100);
-        } else {
-          this.isOnComposition = true;
-        }
-      },
-      handleKeyup() {
-        !this.isOnComposition && this.handleAction('confirm');
-      },
       getSafeClose() {
         const currentId = this.uid;
         return () => {
@@ -213,15 +198,15 @@
 
       validate() {
         if (this.$type === 'prompt') {
-          var inputPattern = this.inputPattern;
+          const inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
             addClass(this.getInputElement(), 'invalid');
             return false;
           }
-          var inputValidator = this.inputValidator;
+          const inputValidator = this.inputValidator;
           if (typeof inputValidator === 'function') {
-            var validateResult = inputValidator(this.inputValue);
+            const validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
               addClass(this.getInputElement(), 'invalid');

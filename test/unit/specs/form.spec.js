@@ -417,10 +417,12 @@ describe('Form', () => {
                 el.dispatchEvent(evt);
               };
               keyDown(input, 37);
-              keyDown(input, 13);
               setTimeout(_ => {
-                expect(field.validateMessage).to.equal('');
-                done();
+                keyDown(input, 13);
+                setTimeout(_ => {
+                  expect(field.validateMessage).to.equal('');
+                  done();
+                }, DELAY);
               }, DELAY);
             }, DELAY);
           }, DELAY);

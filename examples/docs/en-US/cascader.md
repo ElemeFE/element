@@ -1695,3 +1695,5 @@ Search and select options with a keyword.
 |---------- |-------- |---------- |
 | change  | triggers when the binding value changes | value |
 | active-item-change | triggers when active option changes, only works when `change-on-select` is `false` | an array of active options |
+| blur | triggers when Cascader blurs | (event: Event) |
+| focus | triggers when Cascader focuses | (event: Event) |

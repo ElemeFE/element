@@ -1,20 +1,20 @@
 <template>
   <li class="el-menu-item"
+    role="menuitem"
+    tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
+    :class="{
+      'is-active': active,
+      'is-disabled': disabled
+    }"
     @click="handleClick"
     @mouseenter="onMouseEnter"
     @focus="onMouseEnter"
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
-    :class="{
-      'is-active': active,
-      'is-disabled': disabled
-    }"
-    role="menuitem"
-    tabindex="-1"
   >
     <el-tooltip
-      v-if="$parent === rootMenu && rootMenu.collapse"
+      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse"
       effect="dark"
       placement="right">
       <div slot="content"><slot name="title"></slot></div>
@@ -47,14 +47,8 @@
         type: String,
         required: true
       },
-      route: {
-        type: [String, Object],
-        required: false
-      },
-      disabled: {
-        type: Boolean,
-        required: false
-      }
+      route: [String, Object],
+      disabled: Boolean
     },
     computed: {
       active() {
@@ -100,8 +94,10 @@
         this.$el.style.backgroundColor = this.backgroundColor;
       },
       handleClick() {
-        this.dispatch('ElMenu', 'item-click', this);
-        this.$emit('click', this);
+        if (!this.disabled) {
+          this.dispatch('ElMenu', 'item-click', this);
+          this.$emit('click', this);
+        };
       }
     },
     created() {

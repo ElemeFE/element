@@ -74,7 +74,7 @@
     },
     computed: {
       barStyle() {
-        var style = {};
+        const style = {};
         style.width = this.percentage + '%';
         return style;
       },
@@ -82,16 +82,16 @@
         return (this.strokeWidth / this.width * 100).toFixed(1);
       },
       trackPath() {
-        var radius = parseInt(50 - parseFloat(this.relativeStrokeWidth) / 2, 10);
+        const radius = parseInt(50 - parseFloat(this.relativeStrokeWidth) / 2, 10);
 
         return `M 50 50 m 0 -${radius} a ${radius} ${radius} 0 1 1 0 ${radius * 2} a ${radius} ${radius} 0 1 1 0 -${radius * 2}`;
       },
       perimeter() {
-        var radius = 50 - parseFloat(this.relativeStrokeWidth) / 2;
+        const radius = 50 - parseFloat(this.relativeStrokeWidth) / 2;
         return 2 * Math.PI * radius;
       },
       circlePathStyle() {
-        var perimeter = this.perimeter;
+        const perimeter = this.perimeter;
         return {
           strokeDasharray: `${perimeter}px,${perimeter}px`,
           strokeDashoffset: (1 - this.percentage / 100) * perimeter + 'px',
@@ -99,7 +99,7 @@
         };
       },
       stroke() {
-        var ret;
+        let ret;
         switch (this.status) {
           case 'success':
             ret = '#13ce66';

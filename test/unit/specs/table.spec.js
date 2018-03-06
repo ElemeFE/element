@@ -45,7 +45,7 @@ describe('Table', () => {
         const ths = toArray(vm.$el.querySelectorAll('thead th'));
 
         expect(ths.map(node => node.textContent).filter(o => o))
-        .to.eql(['片名', '发行日期', '导演', '时长（分）']);
+          .to.eql(['片名', '发行日期', '导演', '时长（分）']);
         done();
       }, DELAY);
     });
@@ -85,6 +85,15 @@ describe('Table', () => {
       const vm = createTable('height="134"');
       setTimeout(_ => {
         expect(vm.$el.style.height).to.equal('134px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('height as string', done => {
+      const vm = createTable('height="100pt"');
+      setTimeout(_ => {
+        expect(vm.$el.style.height).to.equal('100pt');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -1092,7 +1101,7 @@ describe('Table', () => {
         setTimeout(_ => {
           const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
-          .to.eql(['80', '92', '92', '95', '100']);
+            .to.eql(['80', '92', '92', '95', '100']);
           done();
         }, DELAY);
       });

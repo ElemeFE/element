@@ -97,8 +97,8 @@ export default {
       render(h) {
         return (
           this.$parent.$slots.default
-          ? this.$parent.$slots.default[0]
-          : ''
+            ? this.$parent.$slots.default[0]
+            : ''
         );
       }
     },
@@ -165,7 +165,7 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
-              popperClass={ `${this.$parent.popperClass || ''} is-arrow-fixed` }
+              popperClass={ this.$parent.popperClass || '' }
               on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
@@ -214,6 +214,11 @@ export default {
           this.resetValueIfNeed(target.value);
           this.reassignMaxValue(target.value);
         },
+        handleKeyup({ keyCode, target }) {
+          if (keyCode === 13 && this.oldValue && target.value !== this.oldValue) {
+            this.handleChange(target.value);
+          }
+        },
         handleChange(value) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
           this.oldValue = null;
@@ -248,6 +253,7 @@ export default {
               domPropsValue={ this.$parent.internalCurrentPage }
               type="number"
               ref="input"
+              nativeOnKeyup={ this.handleKeyup }
               onChange={ this.handleChange }
               onFocus={ this.handleFocus }
               onBlur={ this.handleBlur }/>

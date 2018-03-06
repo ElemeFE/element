@@ -23,9 +23,15 @@
       float: right;
       line-height: 48px;
       font-weight: 300;
+      @include when(active) {
+        transform: rotate(90deg);
+      }
     }
     &.focusing:focus:not(:hover){
       color: $--color-primary;
+    }
+    @include when(active) {
+      border-bottom-color: transparent;
     }
   }
 
@@ -42,15 +48,6 @@
     font-size: $--collapse-content-size;
     color: $--collapse-content-color;
     line-height: 1.769230769230769;
-  }
-
-  @include when(active) {
-    .el-collapse-item__header {
-      border-bottom-color: transparent;
-      .el-collapse-item__arrow {
-        transform: rotate(90deg);
-      }
-    }
   }
 
   &:last-child {

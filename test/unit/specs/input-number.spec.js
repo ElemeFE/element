@@ -285,7 +285,7 @@ describe('InputNumber', () => {
     });
 
     it('emit on input', done => {
-      vm.$refs.compo.handleInput('3');
+      vm.$refs.compo.handleInputChange('3');
       setTimeout(_ => {
         expect(spy.calledOnce).to.be.true;
         expect(spy.args[0][0]).to.equal(3);

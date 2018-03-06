@@ -42,8 +42,8 @@ export default {
       if (this[prop] || this[prop] === 0) {
         classList.push(
           prop !== 'span'
-          ? `el-col-${prop}-${this[prop]}`
-          : `el-col-${this[prop]}`
+            ? `el-col-${prop}-${this[prop]}`
+            : `el-col-${this[prop]}`
         );
       }
     });
@@ -56,8 +56,8 @@ export default {
         Object.keys(props).forEach(prop => {
           classList.push(
             prop !== 'span'
-            ? `el-col-${size}-${prop}-${props[prop]}`
-            : `el-col-${size}-${props[prop]}`
+              ? `el-col-${size}-${prop}-${props[prop]}`
+              : `el-col-${size}-${props[prop]}`
           );
         });
       }

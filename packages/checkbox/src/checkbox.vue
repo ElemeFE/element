@@ -61,6 +61,9 @@
     mixins: [Emitter],
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -81,7 +84,7 @@
         get() {
           return this.isGroup
             ? this.store : this.value !== undefined
-            ? this.value : this.selfModel;
+              ? this.value : this.selfModel;
         },
 
         set(val) {
@@ -133,8 +136,8 @@
 
       isDisabled() {
         return this.isGroup
-          ? this._checkboxGroup.disabled || this.disabled
-          : this.disabled;
+          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          : this.disabled || (this.elForm || {}).disabled;
       },
 
       _elFormItemSize() {

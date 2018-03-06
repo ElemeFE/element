@@ -1,6 +1,8 @@
 import Vue, { VNode } from 'vue'
 import { MessageType } from './message'
 
+export type NotificationPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
+
 /** Notification Component */
 export declare class ElNotificationComponent extends Vue {
   /** Close the Notification instance */
@@ -40,6 +42,9 @@ export interface ElNotificationOptions {
 
   /** Offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset */
   offset?: number
+
+  /** custom position */
+  position?: NotificationPosition
 }
 
 export interface ElNotification {

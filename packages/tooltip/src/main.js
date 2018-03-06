@@ -1,5 +1,6 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
+import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';
 import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
 import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
@@ -19,6 +20,10 @@ export default {
     effect: {
       type: String,
       default: 'dark'
+    },
+    arrowOffset: {
+      type: Number,
+      default: 0
     },
     popperClass: String,
     content: String,
@@ -100,15 +105,8 @@ export default {
     if (!vnode) return vnode;
 
     const data = vnode.data = vnode.data || {};
-    const on = vnode.data.on = vnode.data.on || {};
-    const nativeOn = vnode.data.nativeOn = vnode.data.nativeOn || {};
-
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
-    nativeOn.mouseenter = on.mouseenter = this.addEventHandle(on.mouseenter, this.show);
-    nativeOn.mouseleave = on.mouseleave = this.addEventHandle(on.mouseleave, this.hide);
-    nativeOn.focus = on.focus = this.addEventHandle(on.focus, this.handleFocus);
-    nativeOn.blur = on.blur = this.addEventHandle(on.blur, this.handleBlur);
-    nativeOn.click = on.click = this.addEventHandle(on.click, () => { this.focusing = false; });
+
     return vnode;
   },
 
@@ -117,14 +115,19 @@ export default {
     if (this.$el.nodeType === 1) {
       this.$el.setAttribute('aria-describedby', this.tooltipId);
       this.$el.setAttribute('tabindex', 0);
+      on(this.referenceElm, 'mouseenter', this.show);
+      on(this.referenceElm, 'mouseleave', this.hide);
+      on(this.referenceElm, 'focus', this.handleFocus);
+      on(this.referenceElm, 'blur', this.handleBlur);
+      on(this.referenceElm, 'click', this.removeFocusing);
     }
   },
   watch: {
     focusing(val) {
       if (val) {
-        this.referenceElm.className += ' focusing';
+        addClass(this.referenceElm, 'focusing');
       } else {
-        this.referenceElm.className = this.referenceElm.className.replace('focusing', '');
+        removeClass(this.referenceElm, 'focusing');
       }
     }
   },
@@ -146,14 +149,8 @@ export default {
       this.focusing = false;
       this.hide();
     },
-    addEventHandle(old, fn) {
-      if (!old) {
-        return fn;
-      } else if (Array.isArray(old)) {
-        return old.indexOf(fn) > -1 ? old : old.concat(fn);
-      } else {
-        return old === fn ? old : [old, fn];
-      }
+    removeFocusing() {
+      this.focusing = false;
     },
 
     concatClass(a, b) {
@@ -191,5 +188,14 @@ export default {
       }
       this.expectedState = expectedState;
     }
+  },
+
+  destroyed() {
+    const reference = this.referenceElm;
+    off(reference, 'mouseenter', this.show);
+    off(reference, 'mouseleave', this.hide);
+    off(reference, 'focus', this.handleFocus);
+    off(reference, 'blur', this.handleBlur);
+    off(reference, 'click', this.removeFocusing);
   }
 };

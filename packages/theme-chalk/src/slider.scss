@@ -86,6 +86,7 @@
     background-color: transparent;
     text-align: center;
     user-select: none;
+    line-height: normal;
     @include utils-vertical-center;
 
     .el-tooltip {

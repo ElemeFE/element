@@ -19,10 +19,38 @@
       margin: 10px 0 5px;
     }
   }
+  .sponsors {
+    display: flex;
+    justify-content: center;
+  }
+  .sponsor {
+    margin: 0 20px 50px;
+    display: inline-flex;
+    width: 300px;
+    height: 100px;
+    justify-content: center;
+
+    img {
+      margin-right: 20px;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.8;
+      color: #999;
+      font-size: 14px;
+    }
+  }
   .jumbotron {
     width: 890px;
     height: 465px;
-    margin: 30px auto 100px;
+    margin: 30px auto;
     position: relative;
 
     div {
@@ -33,11 +61,11 @@
       top: 0;
       left: 0;
     }
-    
+
     img {
       position: absolute;
     }
-    
+
     .jumbotron-cloud-1 {
       right: 0;
       top: 0;
@@ -48,19 +76,19 @@
       left: 60px;
       top: 200px;
     }
-    
+
     .jumbotron-web {
       height: 385px;
       top: 35px;
       left: 110px;
     }
-    
+
     .jumbotron-cloud-2 {
       left: 0;
       top: 50px;
       height: 55px;
     }
-    
+
     .jumbotron-compo-1 {
       left: 94px;
       height: 90px;
@@ -72,7 +100,7 @@
       top: 60px;
       height: 124px;
     }
-  
+
     .jumbotron-compo-3 {
       right: 42px;
       top: 200px;
@@ -90,7 +118,7 @@
       right: 180px;
       height: 140px;
     }
-  
+
     .jumbotron-figure-2 {
       bottom: 0;
       right: 10px;
@@ -183,6 +211,7 @@
       width: 100%;
       .container {
         width: 100%;
+        margin: 0;
       }
     }
     .banner .container {
@@ -259,6 +288,22 @@
         <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
       </div>
     </div>
+    <div class="sponsors">
+      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
+        <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
+        <div>
+          <p>Sponsored by Tipe.io</p>
+          <p>Next Generation API-first CMS</p>
+        </div>
+      </a>
+      <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
+        <img width="45px" src="~examples/assets/images/duohui.svg" alt="tipe.io">
+        <div>
+          <p>Sponsored by 多会</p>
+          <p>炫酷的新一代活动票务系统</p>
+        </div>
+      </a>
+    </div>
     <div class="cards">
       <ul class="container">
         <li>
@@ -305,6 +350,11 @@
   import { Hover } from 'perspective.js';
 
   export default {
+    data() {
+      return {
+        lang: this.$route.meta.lang
+      };
+    },
     mounted() {
       new Hover('.jumbotron', { // eslint-disable-line
         max: 3,

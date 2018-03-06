@@ -1,10 +1,10 @@
 <template>
   <div
     class="el-switch"
-    :class="{ 'is-disabled': disabled, 'is-checked': checked }"
+    :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
     role="switch"
     :aria-checked="checked"
-    :aria-disabled="disabled"
+    :aria-disabled="switchDisabled"
     @click="switchValue"
   >
     <input
@@ -15,7 +15,7 @@
       :name="name"
       :true-value="activeValue"
       :false-value="inactiveValue"
-      :disabled="disabled"
+      :disabled="switchDisabled"
       @keydown.enter="switchValue"
     >
     <span
@@ -42,6 +42,11 @@
   export default {
     name: 'ElSwitch',
     mixins: [Focus('input'), Migrating],
+    inject: {
+      elForm: {
+        default: ''
+      }
+    },
     props: {
       value: {
         type: [Boolean, String, Number],
@@ -102,6 +107,9 @@
       },
       transform() {
         return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
+      },
+      switchDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
     watch: {
@@ -128,7 +136,7 @@
         this.$refs.core.style.backgroundColor = newColor;
       },
       switchValue() {
-        this.$refs.input.click();
+        !this.switchDisabled && this.handleChange();
       },
       getMigratingConfig() {
         return {
