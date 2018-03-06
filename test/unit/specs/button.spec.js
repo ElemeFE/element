@@ -76,4 +76,44 @@ describe('Button', () => {
       done();
     }, 20);
   });
+
+  it('click inside', done => {
+    let result;
+    vm = createVue({
+      template: `
+        <el-button @click="handleClick"><span class="inner-slot"></span></el-button>
+      `,
+      methods: {
+        handleClick(evt) {
+          result = evt;
+        }
+      }
+    }, true);
+    vm.$el.querySelector('.inner-slot').click();
+
+    setTimeout(_ => {
+      expect(result).to.exist;
+      done();
+    }, 20);
+  });
+
+  it('loading implies disabled', done => {
+    let result;
+    vm = createVue({
+      template: `
+        <el-button loading @click="handleClick"><span class="inner-slot"></span></el-button>
+      `,
+      methods: {
+        handleClick(evt) {
+          result = evt;
+        }
+      }
+    }, true);
+    vm.$el.querySelector('.inner-slot').click();
+
+    setTimeout(_ => {
+      expect(result).to.not.exist;
+      done();
+    }, 20);
+  });
 });
