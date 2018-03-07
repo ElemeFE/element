@@ -69,6 +69,8 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          key: project-dist-{{ .Revision }}
       - run:
           name: Deploy the app
           command: .circleci/deploy-heroku.sh
