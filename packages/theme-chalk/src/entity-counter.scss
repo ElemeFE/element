@@ -1,0 +1,48 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(entity-counter) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 320px;
+  height: 39px;
+  border: 1px solid $--entity-counter-border-color;
+  border-radius: 3px;
+  font-size: 15px;
+  color: $--color-dark-gunmetal;
+
+  @include m(empty) {
+    color: $--entity-counter-border-color;
+  }
+
+  @include e(button) {
+    cursor: pointer;
+    height: 25px;
+    width: 41px;
+    background: none;
+    border: 1px solid transparent;
+    outline: none !important;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    @include m(left) {
+      border-right-color: $--entity-counter-border-color;
+    }
+
+    @include m(right) {
+      border-left-color: $--entity-counter-border-color;
+    }
+  }
+
+  @include e(icon) {
+    fill: $--entity-counter-border-color;
+  }
+
+  @include e(label) {
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: center;
+  }
+}
