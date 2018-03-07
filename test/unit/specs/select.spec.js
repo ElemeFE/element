@@ -748,7 +748,7 @@ describe('Select', () => {
       done();
     }, 310);
   });
-  
+
   it('focus', done => {
     vm = createVue({
       template: `
