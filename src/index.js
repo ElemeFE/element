@@ -57,6 +57,7 @@ import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import Badge from '../packages/badge/index.js';
 import TimeInfo from '../packages/time-info/index.js';
+import EntityCounter from '../packages/entity-counter/index.js';
 import PriceInfo from '../packages/price-info/index.js';
 import NavBar from '../packages/nav-bar/index.js';
 
@@ -120,6 +121,7 @@ const components = [
   Footer,
   Badge,
   TimeInfo,
+  EntityCounter,
   PriceInfo,
   CollapseTransition,
   NavBar
@@ -217,6 +219,7 @@ module.exports = {
   Footer,
   Badge,
   TimeInfo,
+  EntityCounter,
   PriceInfo
 };
 
