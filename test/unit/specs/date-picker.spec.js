@@ -233,6 +233,34 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('change event: when clear(), without opening picker', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          ref="compo"
+          v-model="value"
+        />`,
+      data() {
+        return {
+          value: new Date()
+        };
+      }
+    }, true);
+
+    const spy = sinon.spy();
+    vm.$refs.compo.$on('change', spy);
+
+    setTimeout(_ => {
+      vm.$refs.compo.showClose = true;
+      vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.equal(true);
+        expect(spy.calledWith(null)).to.equal(true);
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
   describe('input event', () => {
     // mimic standard <select>'s behavior
     // emit input if and only if value changes
@@ -1293,6 +1321,50 @@ describe('DatePicker', () => {
               // input text is something like date string
               expect(inputs[0].value.length).to.equal(10);
               expect(inputs[1].value.length).to.equal(10);
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('works: reverse selection', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      inputs[0].focus();
+
+      setTimeout(_ => {
+        const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
+        expect(Array.prototype.slice.call(panels)).to.length(2);
+        panels[1].querySelector('td.available').click();
+        setTimeout(_ => {
+          panels[0].querySelector('td.available').click();
+          setTimeout(_ => {
+            inputs[0].focus();
+            setTimeout(_ => {
+              // correct highlight
+              const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
+              const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
+              const inRangeDate = rangePicker.picker.$el.querySelectorAll('.in-range');
+              expect(startDate.length).to.equal(1);
+              expect(endDate.length).to.equal(1);
+              expect(inRangeDate.length).to.above(0);
+              // value is array
+              expect(vm.value).to.be.an.instanceof(Array);
+              // input text is something like date string
+              expect(inputs[0].value.length).to.equal(10);
+              expect(inputs[1].value.length).to.equal(10);
+              // result array is properly ordered
+              expect(vm.value[0].getTime() < vm.value[1].getTime()).to.be.true;
               done();
             }, DELAY);
           }, DELAY);

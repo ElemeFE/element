@@ -626,6 +626,7 @@ describe('Select', () => {
       remoteMethod
     });
     const select = vm.$children[0];
+    select.handleQueryChange('');
     vm.$nextTick(() => {
       select.handleQueryChange('面');
       setTimeout(() => {
@@ -747,7 +748,7 @@ describe('Select', () => {
       done();
     }, 310);
   });
-
+  
   it('focus', done => {
     vm = createVue({
       template: `

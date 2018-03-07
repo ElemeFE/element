@@ -117,7 +117,12 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
+        <p
+          class="el-select-dropdown__empty"
+          v-if="emptyText &&
+            (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+          {{ emptyText }}
+        </p>
       </el-select-menu>
     </transition>
   </div>
@@ -404,7 +409,10 @@
     methods: {
       handleQueryChange(val) {
         if (this.previousQuery === val) return;
-        if (this.previousQuery === null && typeof this.filterMethod === 'function') {
+        if (
+          this.previousQuery === null &&
+          (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
+        ) {
           this.previousQuery = val;
           return;
         }
@@ -523,7 +531,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          setTimeout(() => {if (this.automaticDropdown) this.visible = true;}, 300);
+          setTimeout(() => { if (this.automaticDropdown) this.visible = true; }, 300);
           this.$emit('focus', event);
         } else {
           this.softFocus = false;

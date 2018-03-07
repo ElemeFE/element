@@ -2,7 +2,7 @@
   <button
     class="el-button"
     @click="handleClick"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
@@ -16,9 +16,9 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
-    <i :class="icon" v-if="icon && !loading" @click="handleInnerClick"></i>
-    <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
+    <i class="el-icon-loading" v-if="loading"></i>
+    <i :class="icon" v-if="icon && !loading"></i>
+    <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
@@ -64,11 +64,6 @@
     methods: {
       handleClick(evt) {
         this.$emit('click', evt);
-      },
-      handleInnerClick(evt) {
-        if (this.disabled) {
-          evt.stopPropagation();
-        }
       }
     }
   };

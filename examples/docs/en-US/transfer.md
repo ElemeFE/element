@@ -264,6 +264,7 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 | filterable | whether Transfer is filterable | boolean | — | false |
 | filter-placeholder | placeholder for the filter input | string | — | Enter keyword |
 | filter-method | custom filter method | function | — | — |
+| target-order | order strategy for elements in the target list. If set to `original`, the elements will keep the same order as the data source. If set to `push`, the newly added elements will be pushed to the bottom. If set to `unshift`, the newly added elements will be inserted on the top | string | original / push / unshift | original |
 | titles | custom list titles | array | — | ['List 1', 'List 2'] |
 | button-texts | custom button texts | array | — | [ ] |
 | render-content | custom render function for data items | function(h, option) | — | — |

@@ -1,5 +1,18 @@
 ## 更新日志
 
+### 2.2.1
+
+*2018-03-02*
+
+- 修复 Aside、Header 和 Footer 在某些布局中被压缩的问题，#9812
+- 修复设置了 `height` 属性的 Table 在服务端渲染时无法加载的问题，#9876
+- 修复可展开的 Table 在展开某一行后高度未重新计算的问题，#9848
+- 修复在 DateTimePicker 中手动输入日期后不能正确触发 `change` 事件的问题，#9913
+- 修复鼠标右键点击 Select 的输入框会展开选项的问题，#9894（by @openks）
+- 新增 Slider 的 `tooltip-class` 属性，#9957
+- 现在的 Select 在选中选项后仍然处于 focus 状态，#9857（by @Seebiscuit）
+- 新增 Transfer 的 `target-order` 属性，#9960
+
 ### 2.2.0 Graphite
 
 *2018-02-12*

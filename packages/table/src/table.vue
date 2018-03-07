@@ -456,6 +456,7 @@
 
       shouldUpdateHeight() {
         return this.height ||
+          this.maxHeight ||
           this.fixedColumns.length > 0 ||
           this.rightFixedColumns.length > 0;
       },

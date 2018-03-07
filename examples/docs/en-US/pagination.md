@@ -221,6 +221,7 @@ Add more modules based on your scenario.
 | popper-class | custom class name for the page size Select's dropdown | string | — | — |
 | prev-text | text for the prev button | string | — | — |
 | next-text | text for the next button | string | — | — |
+| disabled | whether Pagination is disabled | boolean | — | false |
 
 ### Events
 | Event Name | Description | Parameters |

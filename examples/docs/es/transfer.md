@@ -265,6 +265,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | filterable            | Si se puede filtrar                      | boolean                         | —                 | false                                    |
 | filter-placeholder    | Placeholder para el input del filtro     | string                          | —                 | Enter keyword                            |
 | filter-method         | Método de filtrado                       | function                        | —                 | —                                        |
+| target-order          | estrategia de órdenes para elementos de la lista destino. Si está configurado en `original`, los elementos mantendrán el mismo orden que la fuente de datos. Si está configurado para `push`, los nuevos elementos añadidos se insertaran al final. Si se ajusta a `unshift`, los nuevos elementos añadidos se insertarán en la parte superior. | string | original / push / unshift | original |
 | titles                | Títulos de las listas                    | array                           | —                 | ['List 1', 'List 2']                     |
 | button-texts          | Texto de los botones                     | array                           | —                 | [ ]                                      |
 | render-content        | Función de renderizado                   | function(h, option)             | —                 | —                                        |
