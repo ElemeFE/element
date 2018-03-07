@@ -667,7 +667,7 @@ describe('Select', () => {
     });
   });
 
-  it('soft focus', done => {
+  it('should return focus to input inside select after option select', done => {
     vm = createVue({
       template: `
         <div>
@@ -698,6 +698,54 @@ describe('Select', () => {
       expect(spySelectFocus.calledOnce).not.to.be.true;
       done();
     });
+  });
+
+  it('should not open popper when automatic-dropdown not set', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" ref="select">
+            <el-option label="1" :value="1" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    vm.$refs.select.$refs.reference.$el.focus();
+
+    setTimeout(() => {
+      expect(vm.visible).to.be.false;
+      done();
+    }, 310);
+  });
+
+  it('should open popper when automatic-dropdown is set', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" ref="select" :automatic-dropdown="true">
+            <el-option label="1" :value="1" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    vm.$refs.select.$refs.reference.$el.focus();
+
+    setTimeout(() => {
+      expect(vm.visible).to.be.true;
+      done();
+    }, 310);
   });
 
   it('focus', done => {

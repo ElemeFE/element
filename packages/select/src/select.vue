@@ -48,6 +48,7 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete"
+        :automatic-dropdown="automaticDropdown"
         @focus="handleFocus"
         @click.stop
         @keyup="managePlaceholder"
@@ -76,6 +77,7 @@
       :disabled="selectDisabled"
       :readonly="!filterable || multiple || !visible"
       :validate-event="false"
+      :automatic-dropdown="automaticDropdown"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -243,6 +245,7 @@
         type: String,
         default: 'off'
       },
+      automaticDropdown: Boolean,
       size: String,
       disabled: Boolean,
       clearable: Boolean,
@@ -520,6 +523,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
+          setTimeout(() => {if (this.automaticDropdown) this.visible = true;}, 300);
           this.$emit('focus', event);
         } else {
           this.softFocus = false;
