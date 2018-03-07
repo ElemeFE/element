@@ -87,6 +87,11 @@
     padding-left: 12px;    
   }
 
+  .el-pager li.disabled {
+    color: $--color-text-placeholder;
+    cursor: not-allowed;
+  }
+
   @include m(small) {
     .btn-prev,
     .btn-next,
@@ -173,6 +178,10 @@
       color: $--color-text-regular;
       min-width: 30px;
       border-radius: 2px;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
     }
 
     .btn-prev, .btn-next {
@@ -183,7 +192,7 @@
       }
     }
 
-    .el-pager li {
+    .el-pager li:not(.disabled) {
       &:hover {
         color: $--pagination-hover-fill;
       }
@@ -236,6 +245,10 @@
     &.btn-quickprev {
       line-height: 28px;
       color: $--pagination-button-color;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
     }
 
     &.btn-quickprev:hover {
