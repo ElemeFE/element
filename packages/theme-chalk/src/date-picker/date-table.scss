@@ -16,13 +16,24 @@
         }
         td:first-child div {
           margin-left: 5px;
-          border-top-left-radius: 15px;
-          border-bottom-left-radius: 15px;
+          border-top-left-radius: 28px;
+          border-bottom-left-radius: 28px;
         }
         td:last-child div {
           margin-right: 5px;
-          border-top-right-radius: 15px;
-          border-bottom-right-radius: 15px;
+          border-top-right-radius: 28px;
+          border-bottom-right-radius: 28px;
+        }
+        .available ~ .available div {
+          &:before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: $--datepicker-cell-size;
+            left: -3px;
+            top: 2px;
+            background-color: $--datepicker-inrange-color;
+          }
         }
       }
 
@@ -170,14 +181,14 @@
 
     &.start-date div {
       margin-left: 5px;
-      border-top-left-radius: 15px;
-      border-bottom-left-radius: 15px;
+      border-top-left-radius: $--datepicker-cell-size;
+      border-bottom-left-radius: $--datepicker-cell-size;
     }
 
     &.end-date div {
       margin-right: 5px;
-      border-top-right-radius: 15px;
-      border-bottom-right-radius: 15px;
+      border-top-right-radius: $--datepicker-cell-size;
+      border-bottom-right-radius: $--datepicker-cell-size;
     }
 
     &.disabled div {
