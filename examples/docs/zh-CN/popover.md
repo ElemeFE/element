@@ -74,27 +74,8 @@
           date: '2016-05-07',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
-        }],
-        singleSelection: {},
-        multipleSelection: [],
-        model: ''
+        }]
       };
-    },
-
-    watch: {
-      singleSelection(val) {
-        console.log('selection: ', val);
-      },
-
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    },
-
-    events: {
-      handleClick(row) {
-        console.log('you clicked ', row);
-      }
     }
   };
 </script>
@@ -258,4 +239,6 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | show | 显示时触发 | — |
+| after-enter | 显示动画播放完毕后触发 | — |
 | hide | 隐藏时触发 | — |
+| after-leave | 隐藏动画播放完毕后触发 | — |

@@ -1,6 +1,9 @@
 <template>
   <span>
-    <transition :name="transition" @after-leave="doDestroy">
+    <transition
+      :name="transition"
+      @after-enter="handleAfterEnter"
+      @after-leave="handleAfterLeave">
       <div
         class="el-popover el-popper"
         :class="[popperClass, content && 'el-popover--plain']"
@@ -190,6 +193,13 @@ export default {
         !popper ||
         popper.contains(e.target)) return;
       this.showPopper = false;
+    },
+    handleAfterEnter() {
+      this.$emit('after-enter');
+    },
+    handleAfterLeave() {
+      this.$emit('after-leave');
+      this.doDestroy();
     }
   },
 
