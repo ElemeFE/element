@@ -1,7 +1,5 @@
 import { createVue, destroyVM } from '../util';
 
-const DELAY = 100;
-
 describe('NavBar', () => {
   let vm;
   afterEach(() => {
