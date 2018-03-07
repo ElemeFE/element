@@ -246,3 +246,4 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |---------|--------|---------|
 | show | triggers when popover shows | — |
 | hide | triggers when popover hides | — |
+| destroyed | triggers when popover hides after all transitions | — |

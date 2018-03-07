@@ -1,6 +1,6 @@
 <template>
   <span>
-    <transition :name="transition" @after-leave="doDestroy">
+    <transition :name="transition" @after-leave="destroyed">
       <div
         class="el-popover el-popper"
         :class="[popperClass, content && 'el-popover--plain']"
@@ -135,6 +135,10 @@ export default {
   },
 
   methods: {
+    destroyed() {
+      this.doDestroy();
+      this.$emit('distroyed');
+    },
     doToggle() {
       this.showPopper = !this.showPopper;
     },
