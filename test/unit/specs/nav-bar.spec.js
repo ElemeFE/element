@@ -1,4 +1,6 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, destroyVM } from '../util';
+
+const DELAY = 100;
 
 describe('NavBar', () => {
   let vm;
@@ -12,7 +14,6 @@ describe('NavBar', () => {
         <tm-nav-bar title="TMC agent"></tm-nav-bar>
       `
     }, true);
-
     expect(vm).to.exist;
   });
 

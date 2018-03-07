@@ -59,6 +59,7 @@ import Badge from '../packages/badge/index.js';
 import TimeInfo from '../packages/time-info/index.js';
 import PriceInfo from '../packages/price-info/index.js';
 import NavBar from '../packages/nav-bar/index.js';
+
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
 
