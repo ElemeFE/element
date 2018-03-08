@@ -64,6 +64,17 @@ jobs:
           name: Push image to registry
           command: docker push tmconsulting/tmc24-components:develop
 
+  deploy:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          key: project-dist-{{ .Revision }}
+      - run:
+          name: Deploy the app
+          command: .circleci/deploy-heroku.sh
+
 workflows:
   version: 2
   build_test_and_push:
@@ -72,3 +83,7 @@ workflows:
       - image:
           requires:
             - assemble
+      - deploy:
+          requires:
+            - assemble
+            - image
