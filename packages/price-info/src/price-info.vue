@@ -30,15 +30,15 @@ export default {
       required: true
     },
     partSum: [Number, String],
-    type: {
-      type: String,
-      default: 'medium'
-    },
+    type: String,
     currency: {
       type: String,
       default: 'rub'
     },
-    size: String,
+    size: {
+      type: String,
+      default: 'medium'
+    },
     taxesInfo: {
       type: Boolean,
       default: false
