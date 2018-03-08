@@ -15,7 +15,9 @@
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
-        <slot>{{ content }}</slot>
+        <div v-if="!lazy || !disabled && showPopper">
+          <slot>{{ content }}</slot>
+        </div>
       </div>
     </transition>
     <slot name="reference"></slot>
@@ -44,6 +46,7 @@ export default {
     },
     title: String,
     disabled: Boolean,
+    lazy: Boolean,
     content: String,
     reference: {},
     popperClass: String,
