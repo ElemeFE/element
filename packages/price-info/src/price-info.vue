@@ -30,7 +30,10 @@ export default {
       required: true
     },
     partSum: [Number, String],
-    type: String,
+    type: {
+      type: String,
+      default: 'medium'
+    },
     currency: {
       type: String,
       default: 'rub'
