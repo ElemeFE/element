@@ -1,3 +1,7 @@
+
+自定义修改记录
+20180308 input组个增加keyup事件
+
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>

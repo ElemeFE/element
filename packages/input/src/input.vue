@@ -31,6 +31,8 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
+        @keyup="handleKeyUp"
+
         :aria-label="label"
       >
       <!-- 前置内容 -->
@@ -81,6 +83,7 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @change="handleChange"
+      @keyup="handleKeyUp"
       :aria-label="label"
     >
     </textarea>
@@ -253,6 +256,9 @@
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
+      },
+      handleKeyUp(event) {
+        this.$emit('keyup', event.target.value);
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;

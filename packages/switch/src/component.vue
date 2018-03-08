@@ -22,7 +22,7 @@
       :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
       v-if="inactiveIconClass || inactiveText">
       <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
-      <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
+      <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked"></span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
       <span class="el-switch__button" :style="{ transform }"></span>
@@ -31,7 +31,7 @@
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
       v-if="activeIconClass || activeText">
       <i :class="[activeIconClass]" v-if="activeIconClass"></i>
-      <span v-if="!activeIconClass && activeText" :aria-hidden="!checked">{{ activeText }}</span>
+      <span v-if="!activeIconClass && activeText" :aria-hidden="!checked"> <span v-if="checked">{{ activeText }}</span> <span v-else>{{inactiveText  }}</span>  </span>
     </span>
   </div>
 </template>
@@ -84,6 +84,11 @@
       name: {
         type: String,
         default: ''
+      },
+      reserved:{
+        default:function(){
+          return {}
+        }
       }
     },
     data() {
@@ -114,8 +119,9 @@
     },
     methods: {
       handleChange(event) {
-        this.$emit('input', !this.checked ? this.activeValue : this.inactiveValue);
-        this.$emit('change', !this.checked ? this.activeValue : this.inactiveValue);
+        let value = !this.checked ? this.activeValue : this.inactiveValue
+        this.$emit('input', value);
+        this.$emit('change', {reserved:this.reserved,value:value});
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value

@@ -120,6 +120,13 @@ const generateMiscRoutes = function(lang) {
     component: load(lang, 'resource')
   };
 
+  let testRoute = {
+    path: `/${ lang }/test`, // 资源
+  meta: { lang },
+  name: 'test' + lang,
+      component: load(lang, 'test')
+}
+
   let indexRoute = {
     path: `/${ lang }`, // 首页
     meta: { lang },
@@ -127,7 +134,7 @@ const generateMiscRoutes = function(lang) {
     component: load(lang, 'index')
   };
 
-  return [guideRoute, resourceRoute, indexRoute];
+  return [guideRoute, resourceRoute, indexRoute,testRoute];
 };
 
 langs.forEach(lang => {

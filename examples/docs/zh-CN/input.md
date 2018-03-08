@@ -188,15 +188,16 @@
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+<el-input v-model="input"   placeholder="fff"></el-input>
 
 <script>
 export default {
   data() {
     return {
       input: ''
-    }
+
   }
+
 }
 </script>
 ```

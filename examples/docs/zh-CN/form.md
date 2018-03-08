@@ -132,6 +132,7 @@
     },
     methods: {
       onSubmit() {
+
         console.log('submit!');
       },
       submitForm(formName) {
@@ -501,10 +502,12 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     },
     methods: {
       submitForm(formName) {
+      alert(5)
         this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
+          alert(444)
             console.log('error submit!!');
             return false;
           }
