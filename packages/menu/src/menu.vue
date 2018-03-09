@@ -130,15 +130,8 @@
       }
     },
     watch: {
-      defaultActive(value) {
-        const item = this.items[value];
-        if (item) {
-          this.activeIndex = item.index;
-          this.initOpenedMenu();
-        } else {
-          this.activeIndex = '';
-        }
-
+      defaultActive() {
+        this.highlightDefaultActive()
       },
       defaultOpeneds(value) {
         if (!this.collapse) {
@@ -278,6 +271,15 @@
       },
       close(index) {
         this.closeMenu(index);
+      },
+      highlightDefaultActive() {
+        const item = this.items[this.defaultActive];
+        if (item) {
+          this.activeIndex = item.index;
+          this.initOpenedMenu();
+        } else {
+          this.activeIndex = '';
+        }
       }
     },
     mounted() {
