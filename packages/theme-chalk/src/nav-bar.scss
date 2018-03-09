@@ -17,7 +17,10 @@
     justify-content: space-between;
   }
 
-  @include e(title) {
+  @include e(left) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 20px;
     letter-spacing: 0.4px;
     color: rgba(255, 255, 255, 0.72);

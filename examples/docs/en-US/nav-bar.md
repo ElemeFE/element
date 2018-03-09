@@ -2,9 +2,9 @@
 
 :::demo
 ```html
-<tm-nav-bar title="TMC agent">
-  <div style="margin-right: 20px;">test slot 1</div>
-  <div>test slot 2</div>
+<tm-nav-bar>
+  <div slot="left" style="margin-right: 20px;">test slot 1</div>
+  <div slot="right">test slot 2</div>
 </tm-nav-bar>
 ```
 :::

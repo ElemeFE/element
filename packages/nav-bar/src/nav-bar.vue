@@ -1,8 +1,11 @@
 <template>
   <div class="tm-nav-bar">
-    <div class="tm-nav-bar__title">{{ title }}</div>
+    <div class="tm-nav-bar__left">
+      <div class="tm-nav-bar__title">{{ title }}</div>
+      <slot name="left"></slot>
+    </div>
     <div class="tm-nav-bar__right">
-      <slot></slot>
+      <slot name="right"></slot>
     </div>
   </div>
 </template>
@@ -11,11 +14,6 @@
 
     name: 'TmNavBar',
 
-    componentName: 'TmNavBar',
-
-    props: {
-      title: String
-    }
-
+    componentName: 'TmNavBar'
   };
 </script>

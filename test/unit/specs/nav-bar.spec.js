@@ -9,27 +9,19 @@ describe('NavBar', () => {
   it('create', () => {
     vm = createVue({
       template: `
-        <tm-nav-bar title="TMC agent"></tm-nav-bar>
+        <tm-nav-bar></tm-nav-bar>
       `
     }, true);
     expect(vm).to.exist;
   });
 
-  it('title attribute works correctly', () => {
-    vm = createVue({
-      template: `
-        <tm-nav-bar title="test1"></tm-nav-bar>
-      `
-    }, true);
-    expect(vm.$el.querySelector('.tm-nav-bar__title').textContent.includes('test1')).to.be.true;
-  });
-
   it('slot works correctly', () => {
     vm = createVue({
       template: `
-        <tm-nav-bar title="test1">test2</tm-nav-bar>
+        <tm-nav-bar><div slot="right">test2</div><div slot="left">test3</div></tm-nav-bar>
       `
     }, true);
     expect(vm.$el.querySelector('.tm-nav-bar__right').textContent.includes('test2')).to.be.true;
+    expect(vm.$el.querySelector('.tm-nav-bar__left').textContent.includes('test3')).to.be.true;
   });
 });
