@@ -166,6 +166,10 @@
             {
               "path": "/dropdown",
               "title": "Dropdown"
+            },
+            {
+              "path": "/sidebar",
+              "title": "Sidebar"
             }
           ]
         },

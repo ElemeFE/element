@@ -1,0 +1,7 @@
+## Sidebar
+
+:::demo
+```html
+Hi
+```
+:::
