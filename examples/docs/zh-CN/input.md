@@ -820,6 +820,7 @@ export default {
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
+| tabindex | 输入框的tabindex | string | - | - |
 
 ### Input slots
 | name | 说明 |
@@ -847,7 +848,7 @@ export default {
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | placeholder   | 输入框占位文本   | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
-| valueKey | 输入建议对象中用于显示的键名 | string | — | value |
+| value-key | 输入建议对象中用于显示的键名 | string | — | value |
 | value         | 必填值，输入绑定值   | string  | — | — |
 | debounce      | 获取输入建议的去抖延时 | number         | — | 300 |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |

@@ -48,6 +48,10 @@ export default {
     visibleArrow: {
       default: true
     },
+    arrowOffset: {
+      type: Number,
+      default: 0
+    },
     transition: {
       type: String,
       default: 'fade-in-linear'
@@ -77,9 +81,14 @@ export default {
       addClass(reference, 'el-popover__reference');
       reference.setAttribute('aria-describedby', this.tooltipId);
       reference.setAttribute('tabindex', 0); // tab序列
+      popper.setAttribute('tabindex', 0);
 
-      this.trigger !== 'click' && on(reference, 'focus', this.handleFocus);
-      this.trigger !== 'click' && on(reference, 'blur', this.handleBlur);
+      if (this.trigger !== 'click') {
+        on(reference, 'focusin', this.handleFocus);
+        on(popper, 'focusin', this.handleFocus);
+        on(reference, 'focusout', this.handleBlur);
+        on(popper, 'focusout', this.handleBlur);
+      }
       on(reference, 'keydown', this.handleKeydown);
       on(reference, 'click', this.handleClick);
     }
@@ -100,8 +109,8 @@ export default {
         for (let i = 0; i < len; i++) {
           if (children[i].nodeName === 'INPUT' ||
               children[i].nodeName === 'TEXTAREA') {
-            on(children[i], 'focus', this.doShow);
-            on(children[i], 'blur', this.doClose);
+            on(children[i], 'focusin', this.doShow);
+            on(children[i], 'focusout', this.doClose);
             found = true;
             break;
           }
@@ -110,8 +119,8 @@ export default {
       if (found) return;
       if (reference.nodeName === 'INPUT' ||
         reference.nodeName === 'TEXTAREA') {
-        on(reference, 'focus', this.doShow);
-        on(reference, 'blur', this.doClose);
+        on(reference, 'focusin', this.doShow);
+        on(reference, 'focusout', this.doClose);
       } else {
         on(reference, 'mousedown', this.doShow);
         on(reference, 'mouseup', this.doClose);
@@ -184,8 +193,8 @@ export default {
     off(reference, 'click', this.doToggle);
     off(reference, 'mouseup', this.doClose);
     off(reference, 'mousedown', this.doShow);
-    off(reference, 'focus', this.doShow);
-    off(reference, 'blur', this.doClose);
+    off(reference, 'focusin', this.doShow);
+    off(reference, 'focusout', this.doClose);
     off(reference, 'mouseleave', this.handleMouseLeave);
     off(reference, 'mouseenter', this.handleMouseEnter);
     off(document, 'click', this.handleDocumentClick);

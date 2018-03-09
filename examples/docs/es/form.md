@@ -232,7 +232,7 @@
     }
     .demo-dynamic {
       width: 500px;
-
+    
       .el-input {
         margin-right: 10px;
         width: 270px;
@@ -835,18 +835,20 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 
 ### Form Atributos
 
-| Atributo       | Descripción                              | Tipo    | Valores aceptados     | Por defecto |
-| -------------- | ---------------------------------------- | ------- | --------------------- | ----------- |
-| model          | Datos del componente                     | object  | —                     | —           |
-| rules          | Reglas de validación                     | object  | —                     | —           |
-| inline         | Si el form es inline                     | boolean | —                     | false       |
-| label-position | Posicion de la etiqueta                  | string  | left / right / top    | right       |
-| label-width    | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
-| label-suffix   | sufijo de la etiqueta                    | string  | —                     | —           |
-| show-message   | si mostrar o no el mensaje de error      | boolean | —                     | true        |
-| inline-message | si desea visualizar el mensaje de error inline con la posición del form item | boolean | —                     | false       |
-| status-icon    | si desea visualizar un icono que indique el resultado de la validación | boolean | —                     | false       |
-| size           | el tamaño de los componentes en este form | string  | medium / small / mini | -           |
+| Atributo                | Descripción                              | Tipo    | Valores aceptados     | Por defecto |
+| ----------------------- | ---------------------------------------- | ------- | --------------------- | ----------- |
+| model                   | Datos del componente                     | object  | —                     | —           |
+| rules                   | Reglas de validación                     | object  | —                     | —           |
+| inline                  | Si el form es inline                     | boolean | —                     | false       |
+| label-position          | Posicion de la etiqueta                  | string  | left / right / top    | right       |
+| label-width             | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
+| label-suffix            | sufijo de la etiqueta                    | string  | —                     | —           |
+| show-message            | si mostrar o no el mensaje de error      | boolean | —                     | true        |
+| inline-message          | si desea visualizar el mensaje de error inline con la posición del form item | boolean | —                     | false       |
+| status-icon             | si desea visualizar un icono que indique el resultado de la validación | boolean | —                     | false       |
+| validate-on-rule-change | si se dispara la validacion cuando el prop `rules` cambia | boolean | —                     | true        |
+| size                    | el tamaño de los componentes en este form | string  | medium / small / mini | —           |
+| disabled                | si se desactivan todos los componentes del formulario. Si esta en `true` no puede ser cambiado por el prop `disabled` individual de los componentes. | boolean | —                     | false       |
 
 ### Form Metodos
 

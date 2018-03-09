@@ -171,26 +171,28 @@ Es posible escoger un rango de tiempo arbitrario.
 </script>
 
 ### Atributos
-| Atributo          | Descripción                              | Tipo                                     | Valores aceptados                        | Por defecto |
-| ----------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ----------- |
-| readonly          | si el Time Picker está en modo de sólo lectura | boolean                                  | —                                        | false       |
-| disabled          | si el Time Picker se encuentra deshabilitado | boolean                                  | —                                        | false       |
-| editable          | si el input puede ser editado            | boolean                                  | —                                        | true        |
-| clearable         | si mostrar el botón de borrado           | boolean                                  | —                                        | true        |
-| size              | tamaño del input                         | string                                   | medium / small / mini                    | —           |
-| placeholder       | placeholder en un modo fuera de rango    | string                                   | —                                        | —           |
-| start-placeholder | placeholder para el tiempo de inicio en modo de rango | string                                   | —                                        | —           |
-| end-placeholder   | placeholder para el tiempo de finalización en modo de rango | string                                   | —                                        | —           |
-| is-range          | si es posible escoger un rango de tiempo, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false       |
-| arrow-control     | si es posible escoger el tiempo usando los botones de flecha, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false       |
-| value             | valor del selector                       | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | hour `HH`, minute `mm`, second `ss`      | HH:mm:ss    |
-| align             | alineación                               | left / center / right                    | left                                     |             |
-| popper-class      | nombre de clase personalizada para el dropdown del Time Picker | string                                   | —                                        | —           |
-| picker-options    | opciones adicionales, revisar la tabla posterior | object                                   | —                                        | {}          |
-| range-separator   | separador de rango                       | string                                   | -                                        | '-'         |
-| default-value     | opcional, fecha por defecto del calendario | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | cualquier cosa aceptada por `new Date()` para el Selector de Tiempo,  Selector de Tiempo, valor seleccionable para el Seleccionador de Tiempo | —           |
-| value-format      | opcional, solo para Time Picker, formato de valor limitado | string                                   | hour `HH`, minute `mm`, second `ss`      | —           |
-| name              | como `name` en input nativo              | string                                   | —                                        | —           |
+| Atributo          | Descripción                              | Tipo                                     | Valores aceptados                        | Por defecto          |
+| ----------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | -------------------- |
+| readonly          | si el Time Picker está en modo de sólo lectura | boolean                                  | —                                        | false                |
+| disabled          | si el Time Picker se encuentra deshabilitado | boolean                                  | —                                        | false                |
+| editable          | si el input puede ser editado            | boolean                                  | —                                        | true                 |
+| clearable         | si mostrar el botón de borrado           | boolean                                  | —                                        | true                 |
+| size              | tamaño del input                         | string                                   | medium / small / mini                    | —                    |
+| placeholder       | placeholder en un modo fuera de rango    | string                                   | —                                        | —                    |
+| start-placeholder | placeholder para el tiempo de inicio en modo de rango | string                                   | —                                        | —                    |
+| end-placeholder   | placeholder para el tiempo de finalización en modo de rango | string                                   | —                                        | —                    |
+| is-range          | si es posible escoger un rango de tiempo, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false                |
+| arrow-control     | si es posible escoger el tiempo usando los botones de flecha, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false                |
+| value             | valor del selector                       | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | hour `HH`, minute `mm`, second `ss`      | HH:mm:ss             |
+| align             | alineación                               | left / center / right                    | left                                     |                      |
+| popper-class      | nombre de clase personalizada para el dropdown del Time Picker | string                                   | —                                        | —                    |
+| picker-options    | opciones adicionales, revisar la tabla posterior | object                                   | —                                        | {}                   |
+| range-separator   | separador de rango                       | string                                   | -                                        | '-'                  |
+| default-value     | opcional, fecha por defecto del calendario | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | cualquier cosa aceptada por `new Date()` para el Selector de Tiempo,  Selector de Tiempo, valor seleccionable para el Seleccionador de Tiempo | —                    |
+| value-format      | opcional, solo para Time Picker, formato del valor vinculado. Si no se especifica, el valor vinculado será un objeto Date | string                                   | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
+| name              | como `name` en input nativo              | string                                   | —                                        | —                    |
+| prefix-icon       | Clase personalizada para el icono de prefijado | string                                   | —                                        | el-icon-time         |
+| clear-icon        | Clase personalizada para el icono `clear` | string                                   | —                                        | el-icon-circle-close |
 
 ### Opciones para Time Picker
 | Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |
@@ -209,8 +211,8 @@ Es posible escoger un rango de tiempo arbitrario.
 
 
 ### Eventos
-| Nombre de Evento | Descripción                              | Parámetros                    |
-| ---------------- | ---------------------------------------- | ----------------------------- |
-| change           | se lanza cuando el usuario confirma el valor | valor limitado del componente |
-| blur             | se lanza cuando el input se difumina     | instancia del componente                |
-| focus            | se lanza cuando el input se enfoca       | instancia del componente                |
+| Nombre de Evento | Descripción                              | Parámetros                     |
+| ---------------- | ---------------------------------------- | ------------------------------ |
+| change           | se lanza cuando el usuario confirma el valor | valor vinculado del componente |
+| blur             | se lanza cuando el input se difumina     | instancia del componente       |
+| focus            | se lanza cuando el input se enfoca       | instancia del componente       |

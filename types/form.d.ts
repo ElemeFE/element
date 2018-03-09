@@ -31,6 +31,9 @@ export declare class ElForm extends ElementUIComponent {
   /** Whether the form is inline */
   inline: boolean
 
+  /** Whether the form is disabled */
+  disabled: boolean
+
   /** Position of label */
   labelPosition: FormItemLabelPosition
 
@@ -49,6 +52,9 @@ export declare class ElForm extends ElementUIComponent {
   /** Whether to display an icon indicating the validation result */
   statusIcon: boolean
 
+  /** Whether to trigger validation when the `rules` prop is changed */
+  validateOnRuleChange: boolean
+
   /** Controls the size of components in this form */
   size: ElementUIComponentSize
 
@@ -57,8 +63,8 @@ export declare class ElForm extends ElementUIComponent {
    *
    * @param callback A callback to tell the validation result
    */
-  validate (callback?: ValidateCallback): void
-
+  validate (callback: ValidateCallback): void
+  validate (): Promise<boolean>
   /**
    * Validate a certain form item
    *
@@ -69,4 +75,7 @@ export declare class ElForm extends ElementUIComponent {
 
   /** reset all the fields and remove validation result */
   resetFields (): void
+  
+  /** clear validation message for all fields */
+  clearValidate (): void
 }

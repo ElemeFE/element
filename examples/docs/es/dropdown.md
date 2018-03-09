@@ -330,8 +330,8 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | placement     | colocación del menú                      | string  | top/top-start/top-end/bottom/bottom-start/bottom-end | bottom-end  |
 | trigger       | cómo detonar                             | string  | hover/click                              | hover       |
 | hide-on-click | si se oculta el menú después de hacer clic en el elemento | boolean | —                                        | true        |
-| show-timeout  | Tiempo de retardo antes de mostrar un dropdown | number  | —                                        | 250         |
-| hide-timeout  | Tiempo de retardo antes de ocultar un dropdown | number  | —                                        | 150         |
+| show-timeout  | Tiempo de retardo antes de mostrar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 250         |
+| hide-timeout  | Tiempo de retardo antes de ocultar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 150         |
 
 ### Dropdown Eventos
 | Nombre         | Descripción                              | Parametros                               |

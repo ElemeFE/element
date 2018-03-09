@@ -56,6 +56,22 @@ describe('Menu', () => {
     }, 20);
 
   });
+  it('menu-item disabled', done => {
+    vm = createVue({
+      template: `
+        <el-menu default-active="2">
+          <el-menu-item index="1" ref="item1" disabled>处理中心</el-menu-item>
+          <el-menu-item index="2" ref="item2">订单管理</el-menu-item>
+        </el-menu>
+      `
+    }, true);
+    expect(vm.$refs.item2.$el.classList.contains('is-active')).to.be.true;
+    vm.$refs.item1.$el.click();
+    setTimeout(_ => {
+      expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.false;
+      done();
+    }, 20);
+  });
   describe('default active', () => {
     it('normal active', done => {
       vm = createVue({
@@ -216,6 +232,28 @@ describe('Menu', () => {
         done();
       }, 20);
     });
+    it('disabled', done => {
+      vm = createVue({
+        template: `
+          <el-menu>
+            <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
+            <el-submenu index="2" ref="submenu" disabled>
+              <template slot="title">我的工作台</template>
+              <el-menu-item index="2-1">选项1</el-menu-item>
+              <el-menu-item index="2-2" ref="submenuItem2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="3">订单管理</el-menu-item>
+          </el-menu>
+        `
+      }, true);
+      var submenu = vm.$refs.submenu;
+      submenu.$el.querySelector('.el-submenu__title').click();
+      setTimeout(_ => {
+        expect(submenu.$el.classList.contains('is-opened')).to.be.false;
+        done();
+      }, 20);
+    });
   });
   it('unique-opened', done => {
     vm = createVue({
@@ -270,7 +308,7 @@ describe('Menu', () => {
     var submenu = vm.$refs.submenu;
     triggerEvent(submenu.$el, 'mouseenter');
     setTimeout(_ => {
-      expect(submenu.$el.querySelector('.el-menu').style.display).to.not.ok;
+      expect(document.body.querySelector('.el-menu--popup').parentElement.style.display).to.not.ok;
       done();
     }, 500);
   });
@@ -301,10 +339,10 @@ describe('Menu', () => {
     triggerElm.click();
 
     setTimeout(_ => {
-      expect(submenu.$el.querySelector('.el-menu').style.display).to.not.ok;
+      expect(document.body.querySelector('.el-menu--popup').parentElement.style.display).to.not.ok;
       triggerElm.click();
       setTimeout(_ => {
-        expect(submenu.$el.querySelector('.el-menu').style.display).to.be.equal('none');
+        expect(document.body.querySelector('.el-menu--popup').parentElement.style.display).to.be.equal('none');
         done();
       }, 1000);
     }, 500);
@@ -328,5 +366,38 @@ describe('Menu', () => {
       `
     }, true);
     expect(vm.$refs.group1.$el.querySelector('.el-menu-item-group__title').innerText).to.be.equal('分组一');
+  });
+  it('dynamic menus, issue 9092', done => {
+    vm = createVue({
+      template: `
+          <el-menu :default-active="active">
+            <el-menu-item
+              v-ref="menus"
+              v-for="menu in menus"
+              :index="menu.name"
+              :key="menu.name">
+              {{menu.description}}
+            </el-menu-item>
+          </el-menu>
+        `,
+      data() {
+        return {
+          active: '',
+          menus: []
+        };
+      }
+    }, true);
+    setTimeout(_ => {
+      vm.active = '2';
+      vm.menus = [
+        {name: '1', description: 'happy'},
+        {name: '2', description: 'new'},
+        {name: '3', description: 'year'}
+      ];
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-menu-item.is-active').innerText).to.equal('new');
+        done();
+      }, 20);
+    }, 100);
   });
 });

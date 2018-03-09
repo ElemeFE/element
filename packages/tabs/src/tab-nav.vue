@@ -147,6 +147,7 @@
         }
         tabList[nextIndex].focus(); // 改变焦点元素
         tabList[nextIndex].click(); // 选中下一个tab
+        this.setFocus();
       },
       setFocus() {
         this.isFocus = true;
@@ -177,10 +178,10 @@
         removeFocus
       } = this;
       const scrollBtn = scrollable
-      ? [
-        <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
-        <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
-      ] : null;
+        ? [
+          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
+          <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+        ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
         let tabName = pane.name || pane.index || index;
@@ -198,6 +199,7 @@
           <div
             class={{
               'el-tabs__item': true,
+              [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'el-tabs__notice': pane.hasNotice,
               'is-disabled': pane.disabled,
@@ -207,12 +209,12 @@
             id={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
-            aria-selected= { pane.active }
+            aria-selected={ pane.active }
             ref="tabs"
-            tabindex= {tabindex}
+            tabindex={tabindex}
             refInFor
-            on-focus= { ()=> { setFocus(); }}
-            on-blur = { ()=> { removeFocus(); }}
+            on-focus={ ()=> { setFocus(); }}
+            on-blur ={ ()=> { removeFocus(); }}
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
@@ -222,7 +224,7 @@
         );
       });
       return (
-        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '']}>
+        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
             <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>

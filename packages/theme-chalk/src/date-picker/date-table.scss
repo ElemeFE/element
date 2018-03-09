@@ -68,6 +68,7 @@
       position: relative;
       span {
         color: $--color-primary;
+        font-weight: bold;
       }
       &.start-date span,
       &.end-date span {

@@ -68,8 +68,15 @@ Top bar NavMenu can be used in a variety of scenarios.
     <el-menu-item index="2-1">item one</el-menu-item>
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">item four</template>
+      <el-menu-item index="2-4-1">item one</el-menu-item>
+      <el-menu-item index="2-4-2">item two</el-menu-item>
+      <el-menu-item index="2-4-3">item three</el-menu-item>
+    </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+  <el-menu-item index="3" disabled>Info</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu
@@ -86,8 +93,15 @@ Top bar NavMenu can be used in a variety of scenarios.
     <el-menu-item index="2-1">item one</el-menu-item>
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">item four</template>
+      <el-menu-item index="2-4-1">item one</el-menu-item>
+      <el-menu-item index="2-4-2">item two</el-menu-item>
+      <el-menu-item index="2-4-3">item three</el-menu-item>
+    </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+  <el-menu-item index="3" disabled>Info</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 
 <script>
@@ -143,9 +157,13 @@ Vertical NavMenu with sub-menus.
         <i class="el-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span>Navigator Three</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span>Navigator Four</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -180,9 +198,13 @@ Vertical NavMenu with sub-menus.
         <i class="el-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span>Navigator Three</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span>Navigator Four</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -236,9 +258,13 @@ Vertical NavMenu could be collapsed.
     <i class="el-icon-menu"></i>
     <span slot="title">Navigator Two</span>
   </el-menu-item>
-  <el-menu-item index="3">
-    <i class="el-icon-setting"></i>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
     <span slot="title">Navigator Three</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">Navigator Four</span>
   </el-menu-item>
 </el-menu>
 
@@ -305,12 +331,17 @@ Vertical NavMenu could be collapsed.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | unique identification   | string  | — | — |
+| popper-class | custom class name for the popup menu | string | — | — |
+| show-timeout | timeout before showing a sub-menu | number | — | 300 |
+| hide-timeout | timeout before hiding a sub-menu | number | — | 300 |
+| disabled | whether the sub-menu is disabled | boolean | — | false |
 
 ### Menu-Item Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | unique identification   | string  | — | — |
 | route     | Vue Router object   | object | — | — |
+| disabled | whether disabled | boolean | — | false |
 
 ### Menu-Group Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

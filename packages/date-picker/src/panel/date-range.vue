@@ -190,6 +190,8 @@
     isDate,
     modifyDate,
     modifyTime,
+    prevYear,
+    nextYear,
     prevMonth,
     nextMonth
   } from '../util';
@@ -211,6 +213,19 @@
     } else {
       return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
     }
+  };
+
+  const modifyWithGivenTime = (date, time) => {
+    if (date == null || time == null) {
+      return date;
+    }
+    time = parseDate(time, 'HH:mm:ss');
+    return modifyTime(
+      date,
+      time.getHours(),
+      time.getMinutes(),
+      time.getSeconds()
+    );
   };
 
   export default {
@@ -288,7 +303,7 @@
       enableMonthArrow() {
         const nextMonth = (this.leftMonth + 1) % 12;
         const yearOffset = this.leftMonth + 1 >= 12 ? 1 : 0;
-        return this.unlinkPanels && new Date(`${this.leftYear + yearOffset}-${nextMonth + 1}`) < new Date(`${this.rightYear}-${this.rightMonth + 1}`);
+        return this.unlinkPanels && new Date(this.leftYear + yearOffset, nextMonth) < new Date(this.rightYear, this.rightMonth);
       },
 
       enableYearArrow() {
@@ -301,6 +316,7 @@
         popperClass: '',
         value: [],
         defaultValue: null,
+        defaultTime: null,
         minDate: '',
         maxDate: '',
         leftDate: new Date(),
@@ -381,9 +397,17 @@
           //       should allow them to be set individually in the future
           if (this.minDate) {
             this.leftDate = this.minDate;
-            this.rightDate = this.unlinkPanels && this.maxDate
-              ? this.maxDate
-              : nextMonth(this.leftDate);
+            if (this.unlinkPanels && this.maxDate) {
+              const minDateYear = this.minDate.getFullYear();
+              const minDateMonth = this.minDate.getMonth();
+              const maxDateYear = this.maxDate.getFullYear();
+              const maxDateMonth = this.maxDate.getMonth();
+              this.rightDate = minDateYear === maxDateYear && minDateMonth === maxDateMonth
+                ? nextMonth(this.maxDate)
+                : this.maxDate;
+            } else {
+              this.rightDate = nextMonth(this.leftDate);
+            }
           } else {
             this.leftDate = calcDefaultValue(this.defaultValue)[0];
             this.rightDate = nextMonth(this.leftDate);
@@ -480,17 +504,21 @@
       },
 
       handleRangePick(val, close = true) {
-        if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
+        const defaultTime = this.defaultTime || [];
+        const minDate = modifyWithGivenTime(val.minDate, defaultTime[0]);
+        const maxDate = modifyWithGivenTime(val.maxDate, defaultTime[1]);
+
+        if (this.maxDate === maxDate && this.minDate === minDate) {
           return;
         }
         this.onPick && this.onPick(val);
-        this.maxDate = val.maxDate;
-        this.minDate = val.minDate;
+        this.maxDate = maxDate;
+        this.minDate = minDate;
 
         // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
         setTimeout(() => {
-          this.maxDate = val.maxDate;
-          this.minDate = val.minDate;
+          this.maxDate = maxDate;
+          this.minDate = minDate;
         }, 10);
         if (!close || this.showTime) return;
         this.handleConfirm();
@@ -531,15 +559,12 @@
         }
       },
 
+      // leftPrev*, rightNext* need to take care of `unlinkPanels`
       leftPrevYear() {
-        this.leftDate = modifyDate(this.leftDate, this.leftYear - 1, this.leftMonth, this.leftMonthDate);
+        this.leftDate = prevYear(this.leftDate);
         if (!this.unlinkPanels) {
           this.rightDate = nextMonth(this.leftDate);
         }
-      },
-
-      leftNextYear() {
-        this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
       },
 
       leftPrevMonth() {
@@ -549,25 +574,13 @@
         }
       },
 
-      leftNextMonth() {
-        this.leftDate = nextMonth(this.leftDate);
-      },
-
-      rightPrevYear() {
-        this.rightDate = modifyDate(this.rightDate, this.rightYear - 1, this.rightMonth, this.rightMonthDate);
-      },
-
       rightNextYear() {
         if (!this.unlinkPanels) {
-          this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
+          this.leftDate = nextYear(this.leftDate);
           this.rightDate = nextMonth(this.leftDate);
         } else {
-          this.rightDate = modifyDate(this.rightDate, this.rightYear + 1, this.rightMonth, this.rightMonthDate);
+          this.rightDate = nextYear(this.rightDate);
         }
-      },
-
-      rightPrevMonth() {
-        this.rightDate = prevMonth(this.rightDate);
       },
 
       rightNextMonth() {
@@ -579,6 +592,23 @@
         }
       },
 
+      // leftNext*, rightPrev* are called when `unlinkPanels` is true
+      leftNextYear() {
+        this.leftDate = nextYear(this.leftDate);
+      },
+
+      leftNextMonth() {
+        this.leftDate = nextMonth(this.leftDate);
+      },
+
+      rightPrevYear() {
+        this.rightDate = prevYear(this.rightDate);
+      },
+
+      rightPrevMonth() {
+        this.rightDate = prevMonth(this.rightDate);
+      },
+
       handleConfirm(visible = false) {
         this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
@@ -588,10 +618,10 @@
           value && value[0] && value[1] &&
           isDate(value[0]) && isDate(value[1]) &&
           value[0].getTime() <= value[1].getTime() && (
-            typeof this.disabledDate === 'function'
+          typeof this.disabledDate === 'function'
             ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
             : true
-          );
+        );
       }
     },
 

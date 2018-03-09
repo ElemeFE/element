@@ -247,7 +247,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog :visible.sync="dialogVisible" size="tiny">
+<el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
 </el-dialog>
 <script>
@@ -410,6 +410,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | on-progress      | _hook_ lanzado cuando se produce algún progreso | function(event, file, fileList)    | —                         | —           |
 | on-change        | _hook_ lanzado cuando el archivo seleccionado se carga correctamente o falla | function(file, fileList)           | —                         | —           |
 | before-upload    | _hook_ lanzado antes de que el archivo sea cargado. Si este devuelve `true` o `Promise` entonces será rechazado, la carga puede ser cancelada | function(file)                     | —                         | —           |
+| before-remove    | _hook_ lanzado antes de eliminar un archivo. Los parametros son el archivo y la lista de archivos. Si se devuelve `false` o se devuelve una `Promise` y que luego es rechazada, la eliminación será abortada. | function(file, fileList)           | —                         | —           |
 | thumbnail-mode   | especifica si se mostrará la miniatura   | boolean                            | —                         | false       |
 | file-list        | archivos cargados por defecto, por ejemplo,  [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array                              | —                         | []          |
 | list-type        | tipo de lista de archivos                | string                             | text/picture/picture-card | text        |

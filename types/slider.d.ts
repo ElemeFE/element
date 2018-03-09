@@ -53,4 +53,7 @@ export declare class ElSlider extends ElementUIComponent {
 
   /** Debounce delay when typing, in milliseconds, works when show-input is true */
   debounce: number
+
+  /** Custom class name for the tooltip */
+  tooltipClass: string
 }

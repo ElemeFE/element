@@ -279,8 +279,7 @@ Import `Message`:
 import { Message } from 'element-ui';
 ```
 
-En este caso deberia llamar al metodo `Message(options)`. Tambien se han registrado metodos para los diferentes tipos, e.g. `Message.success(options)`.
-Puede llamar al metodo `Message.closeAll()` para cerrar manualmente todas las instancias.
+En este caso deberia llamar al metodo `Message(options)`. Tambien se han registrado metodos para los diferentes tipos, e.g. `Message.success(options)`. Puede llamar al metodo `Message.closeAll()` para cerrar manualmente todas las instancias.
 
 ### Options
 | Atributo                 | Descripcion                              | Tipo           | Valores permitidos         | Por defecto |

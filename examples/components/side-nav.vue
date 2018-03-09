@@ -63,6 +63,37 @@
           }
         }
       }
+  
+      &.sponsors {
+        & > .sub-nav {
+          margin-top: -10px;
+        }
+        
+        & > a {
+          color: #777;
+          font-weight: 300;
+          font-size: 14px;
+        }
+        
+        .nav-item {
+          display: inline-block;
+        
+          a {
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 8px 12px 12px 0;
+
+            img {
+              width: 36px;
+            }
+          }
+
+          &:nth-child(2) a img {
+            width: 42px;
+          }
+        }
+      }
     }
 
     .nav-group__title {
@@ -91,6 +122,21 @@
     :class="{ 'is-fade': isFade }"
     :style="navStyle">
     <ul>
+      <li class="nav-item sponsors">
+        <a>{{ lang === 'zh-CN' ? '赞助商' : 'Sponsors' }}</a>
+        <ul class="pure-menu-list sub-nav">
+          <li class="nav-item" v-show="lang !== 'zh-CN'">
+            <a href="https://tipe.io/?ref=element" target="_blank">
+              <img src="~examples/assets/images/tipe.svg" alt="tipe.io">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
+              <img src="~examples/assets/images/duohui.svg" alt="tipe.io">
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="nav-item" v-for="item in data">
         <a v-if="!item.path && !item.href" @click="expandMenu">{{item.name}}</a>
         <a v-if="item.href" :href="item.href" target="_blank">{{item.name}}</a>
@@ -171,8 +217,11 @@
         style.opacity = this.isFade ? '0.5' : '1';
         return style;
       },
+      lang() {
+        return this.$route.meta.lang;
+      },
       langConfig() {
-        return compoLang.filter(config => config.lang === this.$route.meta.lang)[0]['nav'];
+        return compoLang.filter(config => config.lang === this.lang)[0]['nav'];
       }
     },
     methods: {

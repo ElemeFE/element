@@ -189,8 +189,10 @@ Can pick an arbitrary time range.
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
 | default-value | optional, default date of the calendar | Date for TimePicker, string for TimeSelect | anything accepted by `new Date()` for TimePicker, selectable value for TimeSelect | — |
-| value-format | optional, only for TimePicker, format of bounded value | string | hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
+| value-format | optional, only for TimePicker, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
+| prefix-icon | Custom prefix icon class | string | — | el-icon-time |
+| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -211,6 +213,6 @@ Can pick an arbitrary time range.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when user confirms the value | component's bounded value |
+| change | triggers when user confirms the value | component's binding value |
 | blur | triggers when Input blurs | component instance |
 | focus | triggers when Input focuses | component instance |

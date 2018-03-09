@@ -265,6 +265,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | filterable            | Si se puede filtrar                      | boolean                         | —                 | false                                    |
 | filter-placeholder    | Placeholder para el input del filtro     | string                          | —                 | Enter keyword                            |
 | filter-method         | Método de filtrado                       | function                        | —                 | —                                        |
+| target-order          | order strategy for elements in the target list. If set to `original`, the elements will keep the same order as the data source. If set to `push`, the newly added elements will be pushed to the bottom. If set to `unshift`, the newly added elements will be inserted on the top | string | original / push / unshift | original |
 | titles                | Títulos de las listas                    | array                           | —                 | ['List 1', 'List 2']                     |
 | button-texts          | Texto de los botones                     | array                           | —                 | [ ]                                      |
 | render-content        | Función de renderizado                   | function(h, option)             | —                 | —                                        |
@@ -278,6 +279,11 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | ------------ | ---------------------------------------- |
 | left-footer  | Contenido del footer de la lista de la izquierda |
 | right-footer | Contenido del footer de la lista de la derecha |
+
+### Methods
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| clearQuery | borra la palabra clave del filtro de un determinado panel | 'left' / 'right' |
 
 ### Eventos
 | Nombre | Descripcion                              | Parametros                               |

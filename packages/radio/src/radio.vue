@@ -49,6 +49,10 @@
     mixins: [Emitter],
 
     inject: {
+      elForm: {
+        default: ''
+      },
+
       elFormItem: {
         default: ''
       }
@@ -106,8 +110,8 @@
       },
       isDisabled() {
         return this.isGroup
-          ? this._radioGroup.disabled || this.disabled
-          : this.disabled;
+          ? this._radioGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          : this.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
         return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;

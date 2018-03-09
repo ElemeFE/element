@@ -116,6 +116,9 @@
       },
       handleExceed(files, fileList) {
         this.$message.warning(`You can upload up to 3 files. You selected ${files.length} files this time, and ${files.length + fileList.length} files totally`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
       }
     }
   }
@@ -126,13 +129,14 @@ Upload files by clicking or drag-and-drop
 
 ### Click to upload files
 
-:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded.
+:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded. Plus, you can abort removing a file in the `before-remove` hook.
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :before-remove="beforeRemove"
   multiple
   :limit="3"
   :on-exceed="handleExceed"
@@ -156,6 +160,9 @@ Upload files by clicking or drag-and-drop
       },
       handleExceed(files, fileList) {
         this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
       }
     }
   }
@@ -247,7 +254,7 @@ Use `list-type` to change the fileList style.
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog :visible.sync="dialogVisible" size="tiny">
+<el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
 </el-dialog>
 <script>
@@ -410,6 +417,7 @@ on-error | hook function when some errors occurs | function(err, file, fileList)
 on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
 on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
 before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
+before-remove | hook function before removing a file with the file and file list as its parameters. If `false` is returned or a `Promise` is returned and then is rejected, removing will be aborted. | function(file, fileList) | — | — |
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |

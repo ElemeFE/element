@@ -676,6 +676,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | clearable            | si el single select puede ser limpiable  | boolean  | —                 | false            |
 | multiple-limit       | maximo numero de opciones que el usuario puede seleccionar cuando `multiple` es `true`.  Sin límite cuando se fija a 0 | number   | —                 | 0                |
 | name                 | el atributo `name` del input seleccionado | string   | —                 | —                |
+| auto-complete        | el atributo `autocomplete` del input seleccionado | string   | —         | off              |
 | placeholder          | placeholder                              | string   | —                 | Select           |
 | filterable           | si Select es filtrable                   | boolean  | —                 | false            |
 | allow-create         | si esta permitido crear nuevos items. Para usar esto, `filterable` debe ser `true`. | boolean  | —                 | false            |
@@ -689,6 +690,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
+| popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | - | true |
 
 ### Eventos Select
 | Nombre         | Descripción                              | Parametros                               |

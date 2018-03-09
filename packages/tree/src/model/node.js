@@ -168,10 +168,20 @@ export default class Node {
     return getPropertyFromData(this, 'disabled');
   }
 
-  insertChild(child, index) {
+  insertChild(child, index, batch) {
     if (!child) throw new Error('insertChild error: child is required.');
 
     if (!(child instanceof Node)) {
+      if (!batch) {
+        const children = this.getChildren() || [];
+        if (children.indexOf(child.data) === -1) {
+          if (typeof index === 'undefined' || index < 0) {
+            children.push(child.data);
+          } else {
+            children.splice(index, 0, child.data);
+          }
+        }
+      }
       objectAssign(child, {
         parent: this,
         store: this.store
@@ -208,6 +218,12 @@ export default class Node {
   }
 
   removeChild(child) {
+    const children = this.getChildren() || [];
+    const dataIndex = children.indexOf(child.data);
+    if (dataIndex > -1) {
+      children.splice(dataIndex, 1);
+    }
+
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
@@ -263,7 +279,7 @@ export default class Node {
 
   doCreateChildren(array, defaultProps = {}) {
     array.forEach((item) => {
-      this.insertChild(objectAssign({ data: item }, defaultProps));
+      this.insertChild(objectAssign({ data: item }, defaultProps), undefined, true);
     });
   }
 
@@ -342,6 +358,7 @@ export default class Node {
   }
 
   getChildren() { // this is data
+    if (this.level === 0) return this.data;
     const data = this.data;
     if (!data) return null;
 

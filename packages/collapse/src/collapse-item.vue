@@ -13,11 +13,17 @@
         :id="`el-collapse-head-${id}`"
         tabindex="0"
         @keyup.space.enter.stop="handleEnterClick"
-        :class="{'focusing': focusing}"
+        :class="{
+          'focusing': focusing,
+          'is-active': isActive
+        }"
         @focus="handleFocus"
         @blur="focusing = false"
       >
-        <i class="el-collapse-item__arrow el-icon-arrow-right"></i>
+        <i
+          class="el-collapse-item__arrow el-icon-arrow-right"
+          :class="{'is-active': isActive}">
+        </i>
         <slot name="title">{{title}}</slot>
       </div>
     </div>

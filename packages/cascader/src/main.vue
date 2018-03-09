@@ -4,7 +4,7 @@
     :class="[
       {
         'is-opened': menuVisible,
-        'is-disabled': disabled
+        'is-disabled': cascaderDisabled
       },
       cascaderSize ? 'el-cascader--' + cascaderSize : ''
     ]"
@@ -23,9 +23,11 @@
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
       :validate-event="false"
       :size="size"
-      :disabled="disabled"
+      :disabled="cascaderDisabled"
     >
       <template slot="suffix">
         <i
@@ -75,6 +77,7 @@ const popperMixin = {
       default: 'bottom-start'
     },
     appendToBody: Popper.props.appendToBody,
+    arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     popperOptions: Popper.props.popperOptions
@@ -92,6 +95,9 @@ export default {
   mixins: [popperMixin, emitter, Locale],
 
   inject: {
+    elForm: {
+      default: ''
+    },
     elFormItem: {
       default: ''
     }
@@ -203,6 +209,9 @@ export default {
     },
     cascaderSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+    },
+    cascaderDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
     },
     id() {
       return generateId();
@@ -377,13 +386,19 @@ export default {
       this.menuVisible = false;
     },
     handleClick() {
-      if (this.disabled) return;
+      if (this.cascaderDisabled) return;
       this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;
         return;
       }
       this.menuVisible = !this.menuVisible;
+    },
+    handleFocus(event) {
+      this.$emit('focus', event);
+    },
+    handleBlur(event) {
+      this.$emit('blur', event);
     }
   },
 

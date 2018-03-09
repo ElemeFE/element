@@ -17,6 +17,35 @@
     .filter-tree {
       margin-top: 20px;
     }
+
+    .custom-tree-container {
+      display: flex;
+      margin: -24px;
+    }
+  
+    .block {
+      flex: 1;
+      padding: 8px 24px 24px;
+  
+      &:first-child {
+        border-right: solid 1px #eff2f6;
+      }
+  
+      > p {
+        text-align: center;
+        margin: 0;
+        line-height: 4;
+      }
+    }
+  
+    .custom-tree-node {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-right: 8px;
+    }
   }
 </style>
 
@@ -218,11 +247,11 @@
         this.$refs.tree.setCheckedNodes([
           {
             id: 5,
-            label: '二级 2-1'
+            label: 'Level two 2-1'
           },
           {
             id: 9,
-            label: '三级 1-1-1'
+            label: 'Level three 1-1-1'
           }
         ]);
       },
@@ -249,13 +278,11 @@
 
       renderContent(h, { node, data, store }) {
         return (
-          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
+          <span class="custom-tree-node">
+            <span>{node.label}</span>
             <span>
-              <span>{node.label}</span>
-            </span>
-            <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -272,6 +299,7 @@
         data2,
         data3,
         data4: JSON.parse(JSON.stringify(data2)),
+        data5: JSON.parse(JSON.stringify(data2)),
         regions,
         defaultProps,
         props,
@@ -685,63 +713,92 @@ Tree nodes can be initially expanded or checked
 ### Custom node content
 The content of tree nodes can be customized, so you can add icons or buttons as you will
 
-:::demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
+:::demo There are two ways to customize template for tree nodes: `render-content` and scoped slot. Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. If you prefer scoped slot, you'll have access to `node` and `data` in the scope, standing for the TreeNode object and node data of the current node respectively. Note that the `render-content` demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
 ```html
-<el-tree
-  :data="data4"
-  :props="defaultProps"
-  show-checkbox
-  node-key="id"
-  default-expand-all
-  :expand-on-click-node="false"
-  :render-content="renderContent">
-</el-tree>
+<div class="custom-tree-container">
+  <div class="block">
+    <p>Using render-content</p>
+    <el-tree
+      :data="data4"
+      show-checkbox
+      node-key="id"
+      default-expand-all
+      :expand-on-click-node="false"
+      :render-content="renderContent">
+    </el-tree>
+  </div>
+  <div class="block">
+    <p>Using scoped slot</p>
+    <el-tree
+      :data="data5"
+      show-checkbox
+      node-key="id"
+      default-expand-all
+      :expand-on-click-node="false">
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <span>{{ node.label }}</span>
+        <span>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => append(data)">
+            Append
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => remove(node, data)">
+            Delete
+          </el-button>
+        </span>
+      </span>
+    </el-tree>
+  </div>
+</div>
 
 <script>
   let id = 1000;
 
   export default {
     data() {
+      const data = [{
+        id: 1,
+        label: 'Level one 1',
+        children: [{
+          id: 4,
+          label: 'Level two 1-1',
+          children: [{
+            id: 9,
+            label: 'Level three 1-1-1'
+          }, {
+            id: 10,
+            label: 'Level three 1-1-2'
+          }]
+        }]
+      }, {
+        id: 2,
+        label: 'Level one 2',
+        children: [{
+          id: 5,
+          label: 'Level two 2-1'
+        }, {
+          id: 6,
+          label: 'Level two 2-2'
+        }]
+      }, {
+        id: 3,
+        label: 'Level one 3',
+        children: [{
+          id: 7,
+          label: 'Level two 3-1'
+        }, {
+          id: 8,
+          label: 'Level two 3-2'
+        }]
+      }];
       return {
-        data4: [{
-          id: 1,
-          label: 'Level one 1',
-          children: [{
-            id: 4,
-            label: 'Level two 1-1',
-            children: [{
-              id: 9,
-              label: 'Level three 1-1-1'
-            }, {
-              id: 10,
-              label: 'Level three 1-1-2'
-            }]
-          }]
-        }, {
-          id: 2,
-          label: 'Level one 2',
-          children: [{
-            id: 5,
-            label: 'Level two 2-1'
-          }, {
-            id: 6,
-            label: 'Level two 2-2'
-          }]
-        }, {
-          id: 3,
-          label: 'Level one 3',
-          children: [{
-            id: 7,
-            label: 'Level two 3-1'
-          }, {
-            id: 8,
-            label: 'Level two 3-2'
-          }]
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
+        data4: JSON.parse(JSON.stringify(data)),
+        data5: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -763,19 +820,28 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
 
       renderContent(h, { node, data, store }) {
         return (
-          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
+          <span class="custom-tree-node">
+            <span>{node.label}</span>
             <span>
-              <span>{node.label}</span>
-            </span>
-            <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       }
     }
   };
 </script>
+
+<style>
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+  }
+</style>
 ```
 :::
 
@@ -937,7 +1003,8 @@ Only one node among the same level can be expanded at one time.
 | empty-text            | text displayed when data is void         | string                      | —               | —       |
 | node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
 | props                 | configuration options, see the following table | object                      | —               | —       |
-| load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
+| render-after-expand   | whether to render child nodes only after a parent node is expanded for the first time | boolean | — | true |
+| load                  | method for loading subtree data, only works when `lazy` is true  | function(node, resolve)     | —               | —       |
 | render-content        | render function for tree node            | Function(h, { node, data, store }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
 | default-expand-all    | whether to expand all nodes by default   | boolean                     | —               | false   |
@@ -950,14 +1017,15 @@ Only one node among the same level can be expanded at one time.
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
+| lazy                  | whether to lazy load leaf node, used with `load` attribute  | boolean                     | —    | false |
 
 ### props
 | Attribute | Description                              | Type   | Accepted Values | Default |
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |
 | label     | specify which key of node object is used as the node's label | string, function(data, node) | —               | —       |
-| children | specify which node object is used as the node's subtree | string, function(data, node) | —               | —       |
+| children | specify which node object is used as the node's subtree | string | —               | —       |
 | disabled | specify which key of node object represents if node's checkbox is disabled | boolean, function(data, node) | —    | —    |
-| isLeaf | specify whether the node is a leaf node | boolean, function(data, node) | —    | —    |
+| isLeaf | specify whether the node is a leaf node, only works when lazy load is enabled | boolean, function(data, node) | —    | —    |
 
 ### Method
 `Tree` has the following method, which returns the currently selected array of nodes.
@@ -970,16 +1038,30 @@ Only one node among the same level can be expanded at one time.
 | getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setCheckedKeys  | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setChecked      | set node to be checked or not, only works when `node-key` is assigned | (key/data, checked, deep) Accept three parameters: 1. node's key or data to be checked 2. a boolean typed parameter indicating checked or not. 3. a boolean typed parameter indicating deep or not. |
+| getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
+| getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
 | getCurrentKey   | return the highlight node's key (null if no node is highlighted) | — |
 | getCurrentNode  | return the highlight node (null if no node is highlighted) | — |
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted |
 | setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
+| getNode         | get node by data or key | (data) the node's data or key |
+| remove          | remove a node | (data) the node's data or node to be deleted |
+| append          | append a child node to a given node in the tree | (data, parentNode) 1. child node's data to be appended 2. parent node's data, key or node |
+| insertBefore    | insert a node before a given node in the tree | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
+| insertAfter     | insert a node after a given node in the tree   | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
 
 ### Events
 | Event Name     | Description                              | Parameters                               |
 | -------------- | ---------------------------------------- | ---------------------------------------- |
 | node-click     | triggers when a node is clicked          | three parameters: node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
+| node-contextmenu     | triggers when a node is clicked by right button          | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change   | triggers when the selected state of the node changes | three parameters: node object corresponding to the node whose selected state is changed, whether the node is selected, whether node's subtree has selected nodes |
+| check   | triggers after clicking the checkbox of a node | two parameters: node object corresponding to the node that is checked / unchecked, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change | triggers when current node changes       | two parameters: node object corresponding to the current node, `node` property of TreeNode |
 | node-expand    | triggers when current node open          | three parameters: node object corresponding to the node opened, `node` property of TreeNode, TreeNode itself |
 | node-collapse  | triggers when current node close         | three parameters: node object corresponding to the node closed, `node` property of TreeNode, TreeNode itself |
+
+### Scoped slot
+| name | Description |
+|------|--------|
+| — | Custom content for tree nodes. The scope parameter is { node, data } |
