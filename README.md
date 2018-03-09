@@ -4,6 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 > A Vue.js 2.0 UI Toolkit for Tm-consulting.
 
+Documentation of components and examples can be found on: <br>
+[https://tmc24-components.herokuapp.com](https://tmc24-components.herokuapp.com/)
+
 ## Special Thanks
 TM-Ui is a based on [ElementUI](https://github.com/ElemeFE/element) UI Toolkit. Special thanks to our mastermind!
 
