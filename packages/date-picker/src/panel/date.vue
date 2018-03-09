@@ -129,9 +129,9 @@
         </el-button>
         <el-button
           size="mini"
-          type="warning"
-          class="el-picker-panel__link-btn"
-          @click="handleClear">
+          type="text"
+          class="el-picker-panel__link-btn cancel"
+          @click="handleCancel">
           {{ t('el.datepicker.cancel') }}
         </el-button>
         <el-button
@@ -229,8 +229,17 @@
       },
 
       handleClear() {
+        this.oldDate = null;
         this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         this.$emit('pick', null);
+      },
+
+      handleCancel() {
+        if (this.visibleDate === '') {
+          this.$emit('pick', null);
+        } else {
+          this.emit(this.oldDate);
+        }
       },
 
       emit(value, ...args) {
@@ -350,6 +359,7 @@
       },
 
       confirm() {
+        this.oldDate = this.date;
         this.emit(this.date);
       },
       resetView() {
@@ -472,6 +482,7 @@
         format: '',
         arrowControl: false,
         userInputDate: null,
+        oldDate: null,
         userInputTime: null
       };
     },
