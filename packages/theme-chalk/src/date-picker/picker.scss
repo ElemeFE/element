@@ -26,6 +26,12 @@
     }
   }
 
+  @include e(clear) {
+    line-height: 44px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
   .tm-icon-circle-close {
     cursor: pointer;
   }

@@ -54,6 +54,7 @@
             }
           }]
         },
+        value: '',
         value1: '',
         value2: '',
         value3: '',
@@ -99,6 +100,15 @@
 ## DatePicker
 
 Use Date Picker for date input.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4" />
+```
+
+:::
+
 
 ###  Enter Date
 
