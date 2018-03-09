@@ -33,7 +33,7 @@ LoadingConstructor.prototype.close = function() {
     if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     } else {
-      console.log('loading log remove parent node failed')
+      console.log('loading log remove parent node failed');
     }
     this.$destroy();
   }, 300);
