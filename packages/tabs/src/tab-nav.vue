@@ -188,7 +188,9 @@
         pane.index = `${index}`;
 
         const btnClose = closable
-          ? <span class="tm-icon-close" on-click={(ev) => { onTabRemove(pane, ev); }}></span>
+          ? <span class="tm-tabs__close" on-click={(ev) => { onTabRemove(pane, ev); }}>
+            <tm-icon name="cross"></tm-icon>
+          </span>
           : null;
 
         const icon = pane.icon

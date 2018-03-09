@@ -166,6 +166,10 @@
             {
               "path": "/dropdown",
               "title": "Dropdown"
+            },
+            {
+              "path": "/nav-bar",
+              "title": "Nav Bar"
             }
           ]
         },

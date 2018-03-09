@@ -56,6 +56,7 @@
   "footer": "./packages/footer/index.js",
   "badge": "./packages/badge/index.js",
   "time-info": "./packages/time-info/index.js",
-  "entity-counter": "./packages/entity-counter/index.js",
-  "price-info": "./packages/price-info/index.js"
+  "price-info": "./packages/price-info/index.js",
+  "nav-bar": "./packages/nav-bar/index.js",
+  "entity-counter": "./packages/entity-counter/index.js"
 }
