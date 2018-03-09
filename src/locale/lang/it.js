@@ -16,10 +16,10 @@ export default {
       startTime: 'Ora inizio',
       endDate: 'Data fine',
       endTime: 'Ora fine',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
+      prevYear: 'Anno precedente',
+      nextYear: 'Anno successivo',
+      prevMonth: 'Mese precedente',
+      nextMonth: 'Mese successivo',
       year: 'Anno',
       month1: 'Gennaio',
       month2: 'Febbraio',
@@ -81,7 +81,7 @@ export default {
       error: 'Input non valido'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'Premi cancella per rimuovere',
       delete: 'Cancella',
       preview: 'Anteprima',
       continue: 'Continua'
@@ -91,7 +91,7 @@ export default {
       confirmFilter: 'Conferma',
       resetFilter: 'Reset',
       clearFilter: 'Tutti',
-      sumText: 'Sum' // to be translated
+      sumText: 'Somma'
     },
     tree: {
       emptyText: 'Nessun dato'
@@ -99,10 +99,10 @@ export default {
     transfer: {
       noMatch: 'Nessuna corrispondenza',
       noData: 'Nessun dato',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Inserisci filtro',
+      noCheckedFormat: '{total} elementi',
+      hasCheckedFormat: '{checked}/{total} selezionati'
     }
   }
 };
