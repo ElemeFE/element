@@ -644,8 +644,8 @@ Search data from server-side.
 | ----| ----| ----| ---- | ----- |
 |type| type of input | string | text / textarea | text |
 |value| binding value | string / number| — | — |
-|maxlength| maximum Input text length| number| — | — |
-|minlength| minimum Input text length| number | — | — |
+|maxlength| same as `maxlength` in native input | number| — | — |
+|minlength| same as `minlength` in native input | number | — | — |
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
