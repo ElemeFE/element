@@ -624,8 +624,8 @@ Búsqueda de datos desde el servidor.
 | ------------- | ---------------------------------------- | ---------------- | -------------------------------- | ----------- |
 | type          | tipo de input                            | string           | text / textarea                  | text        |
 | value         | valor enlazado                           | string / number  | —                                | —           |
-| maxlength     | el maximo para el largo del texto        | number           | —                                | —           |
-| minlength     | el mínimo para el largo del texto        | number           | —                                | —           |
+| maxlength     | igual que `maxlength` en el input nativo | number           | —                                | —           |
+| minlength     | igual que `minlength` en el input nativo | number           | —                                | —           |
 | placeholder   | placeholder del Input                    | string           | —                                | —           |
 | disabled      | si esta deshabilitado                    | boolean          | —                                | false       |
 | size          | tamaño del input, esto no funciona cuando `type` no es textarea | string           | medium / small / mini            | —           |

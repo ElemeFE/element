@@ -253,19 +253,7 @@ With the above config, the default size of all components that have size attribu
 
 ### Start coding
 
-Now you have implemented Vue and Element to your project, and it's time to write your code. Start development mode:
-
-```bash
-npm run dev
-```
-
-Build:
-
-```bash
-npm run build
-```
-
-Please refer to each component's documentation to learn how to use them.
+Now you have implemented Vue and Element to your project, and it's time to write your code. Please refer to each component's documentation to learn how to use them.
 
 ### Use Nuxt.js
 
