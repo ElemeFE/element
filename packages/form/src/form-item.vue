@@ -217,13 +217,16 @@
 
         let prop = getPropByPath(model, path, true);
 
+        this.validateDisabled = true;
         if (Array.isArray(value)) {
-          this.validateDisabled = true;
           prop.o[prop.k] = [].concat(this.initialValue);
         } else {
-          this.validateDisabled = true;
           prop.o[prop.k] = this.initialValue;
         }
+        /* Select 的值被代码改变时不会触发校验，
+           这里需要强行触发一次，刷新 validateDisabled 的值，
+           确保 Select 下一次值改变时能正确触发校验 */
+        this.broadcast('ElSelect', 'fieldReset');
       },
       getRules() {
         let formRules = this.form.rules;
