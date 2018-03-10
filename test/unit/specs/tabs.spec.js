@@ -208,7 +208,7 @@ describe('Tabs', () => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.tm-tabs__content').children;
 
-      tabList[1].querySelector('.tm-icon-close').click();
+      tabList[1].querySelector('.tm-icon--cross').click();
       vm.$nextTick(() => {
         expect(tabList.length).to.be.equal(2);
         expect(paneList.length).to.be.equal(2);
@@ -301,7 +301,7 @@ describe('Tabs', () => {
         expect(paneList.length).to.be.equal(3);
         expect(tabList[2].classList.contains('is-active')).to.be.true;
 
-        tabList[2].querySelector('.tm-icon-close').click();
+        tabList[2].querySelector('.tm-icon--cross').click();
         vm.$nextTick(() => {
           expect(tabList.length).to.be.equal(2);
           expect(paneList.length).to.be.equal(2);
@@ -324,7 +324,7 @@ describe('Tabs', () => {
     }, true);
 
     setTimeout(() => {
-      expect(vm.$el.querySelectorAll('.tm-icon-close').length).to.equal(2);
+      expect(vm.$el.querySelectorAll('.tm-icon--cross').length).to.equal(2);
       done();
     }, 100);
   });

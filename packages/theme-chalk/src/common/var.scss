@@ -664,11 +664,14 @@ $--datepicker-header-color: $--color-text-regular !default;
 $--datepicker-icon-color: $--color-text-primary !default;
 $--datepicker-border-color: $--disabled-border-base !default;
 $--datepicker-inner-border-color: #e4e4e4 !default;
-$--datepicker-inrange-color: $--border-color-extra-light !default;
+$--datepicker-inrange-color: rgba(93, 195, 118, 0.3) !default;
 $--datepicker-inrange-hover-color: $--border-color-extra-light !default;
 $--datepicker-active-color: $--color-primary !default;
 $--datepicker-text-hover-color: $--color-primary !default;
 $--datepicker-cell-hover-color: #fff !default;
+$--datepicker-cell-size: 28px !default;
+$--datepicker-cell-font: 14px !default;
+$--datepicker-icon-size: 12px !default;
 
 /* Loading
 --------------------------*/

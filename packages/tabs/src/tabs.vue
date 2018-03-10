@@ -138,6 +138,7 @@
           'tm-tabs': true,
           'tm-tabs--card': type === 'card',
           'tm-tabs--flow': type === 'flow',
+          'tm-tabs--nav': type === 'nav',
           [`tm-tabs--${tabPosition}`]: true,
           'tm-tabs--border-card': type === 'border-card'
         }}>
