@@ -644,6 +644,7 @@
           this.visible = false;
         }
         this.$nextTick(() => {
+          if (this.visible) return;
           this.scrollToOption(option);
           this.setSoftFocus();
         });
