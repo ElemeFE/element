@@ -351,6 +351,7 @@ export default {
       validator
     },
     disabled: Boolean,
+    selectedDate: Array,
     clearable: {
       type: Boolean,
       default: true
