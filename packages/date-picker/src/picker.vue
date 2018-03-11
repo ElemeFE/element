@@ -123,7 +123,8 @@ const HAVE_TRIGGER_TYPES = [
   'year',
   'daterange',
   'timerange',
-  'datetimerange'
+  'datetimerange',
+  'days'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -241,6 +242,28 @@ const TYPE_VALUE_RESOLVER_MAP = {
       } else {
         return null;
       }
+    }
+  },
+  days: {
+    formatter(value) {
+      let dates = value;
+      let texts = [];
+
+      for (let i = 0; i < dates.length; i++) {
+        texts[i] = DATE_FORMATTER(dates[i]);
+      }
+
+      return texts.join();
+    },
+    parser(text) {
+      let texts = text.split(',');
+      let dates = [];
+
+      for (let i = 0; i < texts.length; i++) {
+        dates[i] = DATE_PARSER(texts[i]);
+      }
+
+      return dates;
     }
   }
 };
@@ -394,6 +417,7 @@ export default {
       handler(val) {
         if (this.picker) {
           this.picker.value = val;
+          Array.isArray(val) && (this.picker.selectedDate = val);
         }
       }
     },
@@ -449,6 +473,8 @@ export default {
         return 'month';
       } else if (this.type === 'year') {
         return 'year';
+      } else if (this.type === 'days') {
+        return 'days';
       }
 
       return 'day';
@@ -769,6 +795,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.selectedDate = this.value;
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
@@ -848,6 +875,7 @@ export default {
       const formatted = this.formatToValue(val);
       if (!valueEquals(this.value, formatted)) {
         this.$emit('input', formatted);
+        formatted === null && (this.picker.selectedDate = []);
       }
     },
 

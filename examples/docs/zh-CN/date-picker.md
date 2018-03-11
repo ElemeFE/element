@@ -54,6 +54,12 @@
             }
           }]
         },
+        pickerOptions3: {
+          disabledDate(time) {
+              let today =  Number(new Date((new Date()).toDateString()));
+              return time.getTime() < today;
+          },
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -66,7 +72,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: []
+        value13: [],
+        value14: []
       };
     }
   };
@@ -159,6 +166,31 @@
         value1: '',
         value2: '',
       };
+    }
+  };
+</script>
+```
+:::
+
+###  日期多选
+
+通过扩展基础的日期选择，可以选择多个日期（这种扩展有其适用于预约系统）
+
+:::demo
+```html
+<div class="block">
+  <el-date-picker type="days" v-model="value14" placeholder="选择一个或多个日期" :picker-options="pickerOptions3"></el-date-picker>
+</div>
+<script>
+  export default {
+    data() {
+      return {
+        value14: '',
+        pickerOptions3: {
+          disabledDate(time) {
+            return time.getTime() <= Date.now();
+          },
+        }
     }
   };
 </script>
