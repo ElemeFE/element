@@ -765,3 +765,13 @@ $--breakpoints-spec: (
 --------------------------*/
 $--entity-counter-active-color: $--color-dark-gunmetal !default;
 $--entity-counter-border-color: #d8d8d8 !default;
+
+/* Sidebar
+--------------------------*/
+$--sidebar-nav-item-size: 72px;
+$--sidebar-nav-icon-size: 18px;
+$--sidebar-nav-color: rgba(255, 255, 255, 0.38);
+$--sidebar-nav-active-bg-color: #404656;
+$--sidebar-inner-active-bg-color: rgba(244, 245, 249, 0.54);
+$--sidebar-inner-active-color: $--color-dark-gunmetal;
+$--sidebar-inner-slot-border-color: rgba(0, 0, 0, 0.06);

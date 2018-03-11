@@ -58,6 +58,7 @@ import Footer from '../packages/footer/index.js';
 import Badge from '../packages/badge/index.js';
 import TimeInfo from '../packages/time-info/index.js';
 import PriceInfo from '../packages/price-info/index.js';
+import Sidebar from '../packages/sidebar/index.js';
 import NavBar from '../packages/nav-bar/index.js';
 import EntityCounter from '../packages/entity-counter/index.js';
 import locale from 'tmconsulting-ui/src/locale';
@@ -123,6 +124,7 @@ const components = [
   PriceInfo,
   NavBar,
   EntityCounter,
+  Sidebar,
   CollapseTransition
 ];
 
@@ -219,6 +221,7 @@ module.exports = {
   Badge,
   TimeInfo,
   PriceInfo,
+  Sidebar,
   NavBar,
   EntityCounter
 };

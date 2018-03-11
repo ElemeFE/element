@@ -168,6 +168,10 @@
               "title": "Dropdown"
             },
             {
+              "path": "/sidebar",
+              "title": "Sidebar"
+            },
+            {
               "path": "/nav-bar",
               "title": "Nav Bar"
             }
