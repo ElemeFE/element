@@ -795,7 +795,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
-      this.picker.selectedDate = this.value;
+      this.picker.selectedDate = this.value || [];
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
@@ -875,7 +875,7 @@ export default {
       const formatted = this.formatToValue(val);
       if (!valueEquals(this.value, formatted)) {
         this.$emit('input', formatted);
-        formatted === null && (this.picker.selectedDate = []);
+        formatted === null && (this.picker.selectedDate = []) || (this.picker.selectedDate = formatted);
       }
     },
 
