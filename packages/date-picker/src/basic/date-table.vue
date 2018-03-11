@@ -483,26 +483,7 @@
             date: newDate
           });
         } else if (selectionMode === 'days') {
-
-          // let isExisted = false;
           let selectedDate = this.selectedDate;
-          // let oldDates = this.selectedDate;
-          // let newDates = [];
-
-          /*  点击已选日期时，将日期从 selectedDate 中剔除  */
-          // for (let i=0; i<oldDates.length; i++) {
-          //   if (oldDates[i].toDateString() === newDate.toDateString()) {
-          //     isExisted = true;
-          //   } else {
-          //     newDates.push(oldDates[i]);
-          //   }
-          // }
-
-          // if (oldDates.length === 0 || isExisted === false) {
-          //   newDates.push(newDate);
-          // }
-
-          // cell.selected = !cell.selected;
 
           if (!cell.selected) {
             selectedDate.push(newDate);

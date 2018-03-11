@@ -351,7 +351,6 @@ export default {
       validator
     },
     disabled: Boolean,
-    selectedDate: Array,
     clearable: {
       type: Boolean,
       default: true
@@ -843,7 +842,6 @@ export default {
       const formatted = this.formatToValue(val);
       if (!valueEquals(this.value, formatted)) {
         this.$emit('input', formatted);
-        formatted === null && (this.picker.selectedDate = []) || (this.picker.selectedDate = formatted);
       }
     },
 
