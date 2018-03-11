@@ -795,7 +795,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
-      this.picker.selectedDate = this.value || [];
+      this.picker.selectedDate = Array.isArray(this.value) && this.value || [];
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
