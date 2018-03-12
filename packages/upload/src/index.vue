@@ -158,6 +158,7 @@ export default {
     },
     handleProgress(ev, rawFile) {
       const file = this.getFile(rawFile);
+      if(!file) return;
       this.onProgress(ev, file, this.uploadFiles);
       file.status = 'uploading';
       file.percentage = ev.percent || 0;
