@@ -22,7 +22,7 @@
                   @click="handleAction('cancel')"
                   @keydown.enter="handleAction('cancel')"
           >
-            <i class="tm-message-box__close tm-icon-close"></i>
+            <tm-icon name="cross"></tm-icon>
           </button>
         </div>
         <div class="tm-message-box__content" v-if="message !== ''">
@@ -48,27 +48,34 @@
         </div>
         <div class="tm-message-box__btns">
           <tm-button
+            type="secondary"
+            :icon="iconCancel"
             :loading="cancelButtonLoading"
-            :class="[ cancelButtonClasses ]"
             v-show="showCancelButton"
-            :round="roundButton"
-            size="small"
+            :circle="circle"
+            :cancel="cancel"
             @click.native="handleAction('cancel')"
             @keydown.enter="handleAction('cancel')"
           >
-            {{ cancelButtonText || t('el.messagebox.cancel') }}
+            <template v-if="cancelButtonText !== false">
+              {{ cancelButtonText || t('el.messagebox.cancel') }}
+            </template>
           </tm-button>
           <tm-button
+            type="secondary"
+            :icon="iconApprove"
             :loading="confirmButtonLoading"
             ref="confirm"
-            :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
-            :round="roundButton"
-            size="small"
+            :circle="circle"
+            :approve="approve"
+            :remove="remove"
             @click.native="handleAction('confirm')"
             @keydown.enter="handleAction('confirm')"
           >
-            {{ confirmButtonText || t('el.messagebox.confirm') }}
+            <template v-if="confirmButtonText !== false">
+              {{ confirmButtonText || t('el.messagebox.confirm') }}
+            </template>
           </tm-button>
         </div>
       </div>
@@ -330,7 +337,13 @@
         callback: null,
         dangerouslyUseHTMLString: false,
         focusAfterClosed: null,
-        isOnComposition: false
+        isOnComposition: false,
+        iconCancel: null,
+        iconApprove: null,
+        circle: false,
+        approve: false,
+        cancel: false,
+        remove: false
       };
     }
   };

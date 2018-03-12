@@ -7,8 +7,8 @@
   position: relative;
   margin: 0 auto 50px;
   background: $--color-white;
-  border-radius: $--border-radius-small;
-  box-shadow: $--dialog-box-shadow;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   width: 50%;
 
@@ -32,47 +32,55 @@
 
   @include e(header) {
     padding: $--dialog-padding-primary;
+    padding-top: 40px;
     padding-bottom: 10px;
   }
 
   @include e(headerbtn) {
     position: absolute;
-    top: $--dialog-padding-primary;
-    right: $--dialog-padding-primary;
+    top: 10px;
+    right: 10px;
     padding: 0;
     background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: $--message-close-size;
 
-    .tm-dialog__close {
-      color: $--color-info;
+    .tm-icon {
+      fill: $--dialog-close-color;
     }
 
     &:focus, &:hover {
-      .tm-dialog__close {
-        color: $--color-primary;
+      .tm-icon {
+        fill: $--dialog-close-hover-color;
       }
     }
   }
 
   @include e(title) {
+    margin: 0;
     line-height: $--dialog-line-height;
     font-size: $--dialog-title-font-size;
-    color: $--color-text-primary;
+    font-weight: bold;
+    color: $--color-text-regular;
   }
 
   @include e(body) {
-    padding: 30px 20px;
-    color: $--color-text-regular;
+    padding: 10px 20px;
+    color: $--color-text-primary;
     line-height: $--dialog-line-height;
     font-size: $--dialog-font-size;
+  }
+
+  @include e(content) {
+    margin: 0 0 10px;
+    line-height: normal;
   }
 
   @include e(footer) {
     padding: $--dialog-padding-primary;
     padding-top: 10px;
+    padding-bottom: 30px;
     text-align: right;
     box-sizing: border-box;
   }
@@ -82,8 +90,7 @@
     text-align: center;
 
     @include e(body) {
-      text-align: initial;
-      padding: 25px ($--dialog-padding-primary + 5px) 30px;
+      text-align: inherit;
     }
 
     @include e(footer) {

@@ -8,7 +8,7 @@
         :style="style">
         <div class="tm-dialog__header">
           <slot name="title">
-            <span class="tm-dialog__title">{{ title }}</span>
+            <h2 class="tm-dialog__title">{{ title }}</h2>
           </slot>
           <button
             type="button"
@@ -16,7 +16,7 @@
             aria-label="Close"
             v-if="showClose"
             @click="handleClose">
-            <i class="tm-dialog__close tm-icon tm-icon-close"></i>
+            <tm-icon name="cross"></tm-icon>
           </button>
         </div>
         <div class="tm-dialog__body" v-if="rendered"><slot></slot></div>

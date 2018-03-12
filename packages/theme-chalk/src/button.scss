@@ -207,17 +207,13 @@
     }
     &.is-approve {
       .tm-icon {
-        &-check {
-          fill: $--color-mantis;
-        }
+        fill: $--color-mantis;
       }
 
       &:not(.is-disabled):hover,
       &:not(.is-disabled):focus {
         .tm-icon {
-          &-check {
-            fill: $--color-white;
-          }
+          fill: $--color-white;
         }
       }
       &.is-disabled {
@@ -252,9 +248,7 @@
         border-color: $--color-pastel-gray;
 
         .tm-icon {
-          &-cross {
-            fill: $--color-white;
-          }
+          fill: $--color-white;
         }
       }
       &.is-plain {
@@ -268,9 +262,7 @@
           border-color: mix($--color-pastel-gray, $--color-white);
 
           .tm-icon {
-            &-cross {
-              fill: mix($--color-taupe-gray, $--color-white);
-            }
+            fill: mix($--color-taupe-gray, $--color-white);
           }
         }
 
@@ -280,9 +272,7 @@
       }
 
       .tm-icon {
-        &-cross {
-          fill: $--color-taupe-gray;
-        }
+        fill: $--color-taupe-gray;
       }
     }
     &.is-remove {

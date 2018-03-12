@@ -36,7 +36,7 @@
   }
 }
 @include b(form-item) {
-  margin-bottom: 22px;
+  margin-bottom: 10px;
   @include utils-clearfix;
 
   & .tm-form-item {
