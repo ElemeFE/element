@@ -39,8 +39,11 @@
 
       open3() {
         this.$prompt('Please input your email', 'Tips', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
+          confirmButtonText: false,
+          cancelButtonText: false,
+          circle: true,
+          iconCancel: 'cross',
+          iconApprove: 'check',
           cancel: true,
           approve: true,
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
@@ -71,13 +74,8 @@
             h('i', { style: 'color: teal' }, 'VNode')
           ]),
           showCancelButton: true,
-          confirmButtonText: false,
-          cancelButtonText: false,
-          circle: true,
           cancel: true,
           approve: true,
-          iconCancel: 'cross',
-          iconApprove: 'check',
           beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;

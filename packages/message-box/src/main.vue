@@ -197,6 +197,19 @@
         setTimeout(() => {
           if (this.action) this.callback(this.action, this);
         });
+
+        this.resetData();
+      },
+
+      resetData() {
+        setTimeout(() => {
+          this.iconCancel = null;
+          this.iconApprove = null;
+          this.circle = false;
+          this.approve = false;
+          this.cancel = false;
+          this.remove = false;
+        }, 500);
       },
 
       handleWrapperClick() {

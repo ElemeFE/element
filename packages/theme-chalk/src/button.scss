@@ -93,7 +93,9 @@
 
   @include when(loading) {
     position: relative;
-    min-width: auto;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    min-width: 192px;
     pointer-events: none;
 
     &:before {
