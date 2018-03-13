@@ -30,14 +30,14 @@
                   @input.native="handleDateInput($event, 'min')"
                   @change.native="handleDateChange($event, 'min')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => minTimePickerVisible = false">
                 <el-input
                   size="small"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleTime"
-                  @focus="minTimePickerVisible = !minTimePickerVisible"
+                  @focus="minTimePickerVisible = true"
                   @change.native="handleTimeChange($event, 'min')" />
                 <time-picker
                   ref="minTimePicker"
@@ -61,7 +61,7 @@
                   @input.native="handleDateInput($event, 'max')"
                   @change.native="handleDateChange($event, 'max')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => maxTimePickerVisible = false">
                 <el-input
                   size="small"
                   :disabled="rangeState.selecting"
@@ -69,7 +69,7 @@
                   :placeholder="t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
                   :value="maxVisibleTime"
-                  @focus="minDate && (maxTimePickerVisible = !maxTimePickerVisible)"
+                  @focus="minDate && (maxTimePickerVisible = true)"
                   :readonly="!minDate"
                   @change.native="handleTimeChange($event, 'max')" />
                 <time-picker
@@ -195,6 +195,7 @@
     prevMonth,
     nextMonth
   } from '../util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
@@ -230,6 +231,8 @@
 
   export default {
     mixins: [Locale],
+
+    directives: { Clickoutside },
 
     computed: {
       btnDisabled() {
