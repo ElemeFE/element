@@ -11,7 +11,7 @@
     </template>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
     <span class="tm-price-info__change">,{{ labelChange }}</span>
-    <span class="tm-price-info__currency">currencyUicode.currency</span>
+    <span class="tm-price-info__currency">{{ currencyUnicode[currency] }}</span>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
       <span>НДС</span>
@@ -52,10 +52,10 @@ export default {
       labelChange: null,
       labelPartSum: null,
       labelPartChange: null,
-      currencyUicode: {
-        'eur': '&#8364;',
-        'rub': '&#8381;',
-        'usd': '&#8381;'
+      currencyUnicode: {
+        eur: '\u20AC',
+        rub: '\u20BD',
+        usd: '\u0024'
       }
     };
   },
