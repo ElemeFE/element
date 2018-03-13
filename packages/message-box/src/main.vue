@@ -198,9 +198,10 @@
           if (this.action) this.callback(this.action, this);
         });
 
-        this.resetData();
+        this.resetData(); // to do
       },
 
+      // to do
       resetData() {
         setTimeout(() => {
           this.iconCancel = null;
