@@ -142,7 +142,7 @@ describe('Upload', () => {
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
 
       setTimeout(() => {
-        requests[0].respond(200, {}, `${files[0].name}`);
+        requests[0].respond(200, {}, files[0].name);
       }, 100);
     });
 
@@ -197,7 +197,7 @@ describe('Upload', () => {
       const files = [file];
 
       handlers.onSuccess = () => {
-        uploader.$el.querySelector('.tm-upload-list .tm-icon--close').click();
+        uploader.$el.querySelector('.tm-upload-list .tm-icon--cross').click();
         uploader.$nextTick(() => {
           expect(uploader.fileList.length).to.equal(0);
           done();

@@ -33,8 +33,10 @@
           'tm-icon--check': ['picture-card', 'picture'].indexOf(listType) > -1
         }"></i>
       </label>
-      <i class="tm-icon--close" v-if="!disabled" @click="$emit('remove', file)"></i>
-      <i class="tm-icon--close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
+      <tm-icon name="cross"
+               v-if="!disabled"
+               :onClick="onRemove.bind(file)"></tm-icon>
+
       <tm-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
@@ -63,6 +65,7 @@
 <script>
   import Locale from 'tmconsulting-ui/src/mixins/locale';
   import TmProgress from 'tmconsulting-ui/packages/progress';
+  import TmIcon from 'tmconsulting-ui/packages/icon';
 
   export default {
     mixins: [Locale],
@@ -72,7 +75,10 @@
         focusing: false
       };
     },
-    components: { TmProgress },
+    components: {
+      TmIcon,
+      TmProgress
+    },
 
     props: {
       files: {
@@ -94,6 +100,9 @@
       },
       handleClick(file) {
         this.handlePreview && this.handlePreview(file);
+      },
+      onRemove(file) {
+        this.$emit('remove', file);
       }
     }
   };
