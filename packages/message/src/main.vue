@@ -19,6 +19,7 @@
         <p v-else v-html="message" class="tm-message__content"></p>
       </slot>
       <tm-icon v-if="showClose"
+               name="cross"
                class="tm-message__closeBtn"
                :onClick="close"></tm-icon>
     </div>

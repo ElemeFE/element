@@ -142,7 +142,7 @@ describe('Upload', () => {
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
 
       setTimeout(() => {
-        requests[0].respond(200, {}, files[0].name);
+        requests[0].respond(200, {}, `${files[0].name}`);
       }, 100);
     });
 
