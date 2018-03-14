@@ -64,19 +64,19 @@
     }
   }
 
-  .tm-icon-success {
+  .tm-icon--success {
     color: $--notification-success-color;
   }
 
-  .tm-icon-error {
+  .tm-icon--error {
     color: $--notification-danger-color;
   }
 
-  .tm-icon-info {
+  .tm-icon--info {
     color: $--notification-info-color;
   }
 
-  .tm-icon-warning {
+  .tm-icon--warning {
     color: $--notification-warning-color;
   }
 }

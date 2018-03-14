@@ -9,7 +9,7 @@
       ]"
       :style="{backgroundColor: color}">
       <slot></slot>
-      <i class="tm-tag__close tm-icon-close"
+      <i class="tm-tag__close tm-icon--close"
         v-if="closable"
         @click.stop="handleClose"></i>
     </span>

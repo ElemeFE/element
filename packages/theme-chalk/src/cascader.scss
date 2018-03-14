@@ -18,7 +18,7 @@
     transition: none;
   }
 
-  .tm-icon-arrow-down {
+  .tm-icon--arrow-down {
     transition: transform .3s;
     font-size: 14px;
 
@@ -27,7 +27,7 @@
     }
   }
 
-  .tm-icon-circle-close {
+  .tm-icon--circle-close {
     z-index: #{$--index-normal + 1};
     transition: $--color-transition-base;
 

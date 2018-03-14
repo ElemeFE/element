@@ -52,8 +52,8 @@
       <div
         @mouseenter="emitSelectRange('hours')"
         class="tm-time-spinner__wrapper is-arrow">
-        <i v-repeat-click="decrease" class="tm-time-spinner__arrow tm-icon-arrow-up"></i>
-        <i v-repeat-click="increase" class="tm-time-spinner__arrow tm-icon-arrow-down"></i>
+        <i v-repeat-click="decrease" class="tm-time-spinner__arrow tm-icon--arrow-up"></i>
+        <i v-repeat-click="increase" class="tm-time-spinner__arrow tm-icon--arrow-down"></i>
         <ul class="tm-time-spinner__list" ref="hours">
           <li
             class="tm-time-spinner__item"
@@ -64,8 +64,8 @@
       <div
         @mouseenter="emitSelectRange('minutes')"
         class="tm-time-spinner__wrapper is-arrow">
-        <i v-repeat-click="decrease" class="tm-time-spinner__arrow tm-icon-arrow-up"></i>
-        <i v-repeat-click="increase" class="tm-time-spinner__arrow tm-icon-arrow-down"></i>
+        <i v-repeat-click="decrease" class="tm-time-spinner__arrow tm-icon--arrow-up"></i>
+        <i v-repeat-click="increase" class="tm-time-spinner__arrow tm-icon--arrow-down"></i>
         <ul class="tm-time-spinner__list" ref="minutes">
           <li
             class="tm-time-spinner__item"
@@ -79,8 +79,8 @@
         @mouseenter="emitSelectRange('seconds')"
         class="tm-time-spinner__wrapper is-arrow"
         v-if="showSeconds">
-        <i v-repeat-click="decrease" class="tm-time-spinner__arrow tm-icon-arrow-up"></i>
-        <i v-repeat-click="increase" class="tm-time-spinner__arrow tm-icon-arrow-down"></i>
+        <i v-repeat-click="decrease" class="tm-time-spinner__arrow tm-icon--arrow-up"></i>
+        <i v-repeat-click="increase" class="tm-time-spinner__arrow tm-icon--arrow-down"></i>
         <ul class="tm-time-spinner__list" ref="seconds">
           <li
             class="tm-time-spinner__item"

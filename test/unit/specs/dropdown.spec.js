@@ -11,7 +11,7 @@ describe('Dropdown', () => {
       template: `
         <tm-dropdown ref="dropdown">
           <span class="tm-dropdown-link">
-            下拉菜单<i class="tm-icon-caret-bottom tm-icon-right"></i>
+            下拉菜单<i class="tm-icon--caret-bottom tm-icon--right"></i>
           </span>
           <tm-dropdown-menu slot="dropdown" class="dropdown-test-creat">
             <tm-dropdown-item>黄金糕</tm-dropdown-item>
@@ -44,7 +44,7 @@ describe('Dropdown', () => {
       template: `
         <tm-dropdown ref="dropdown">
           <span class="tm-dropdown-link">
-            下拉菜单<i class="tm-icon-caret-bottom tm-icon-right"></i>
+            下拉菜单<i class="tm-icon--caret-bottom tm-icon--right"></i>
           </span>
           <tm-dropdown-menu slot="dropdown">
             <tm-dropdown-item command="a">黄金糕</tm-dropdown-item>
@@ -83,7 +83,7 @@ describe('Dropdown', () => {
       template: `
         <tm-dropdown trigger="click" ref="dropdown">
           <span class="tm-dropdown-link">
-            下拉菜单trigger click<i class="tm-icon-caret-bottom tm-icon-right"></i>
+            下拉菜单trigger click<i class="tm-icon--caret-bottom tm-icon--right"></i>
           </span>
           <tm-dropdown-menu slot="dropdown">
             <tm-dropdown-item>黄金糕</tm-dropdown-item>
@@ -153,7 +153,7 @@ describe('Dropdown', () => {
       template: `
         <tm-dropdown ref="dropdown" :hide-on-click="false">
           <span class="tm-dropdown-link">
-            下拉菜单<i class="tm-icon-caret-bottom tm-icon-right"></i>
+            下拉菜单<i class="tm-icon--caret-bottom tm-icon--right"></i>
           </span>
           <tm-dropdown-menu slot="dropdown">
             <tm-dropdown-item command="a">黄金糕</tm-dropdown-item>

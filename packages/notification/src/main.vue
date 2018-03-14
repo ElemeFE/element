@@ -23,7 +23,7 @@
           </slot>
         </div>
         <div
-          class="tm-notification__closeBtn tm-icon-close"
+          class="tm-notification__closeBtn tm-icon--close"
           v-if="showClose"
           @click.stop="close"></div>
       </div>

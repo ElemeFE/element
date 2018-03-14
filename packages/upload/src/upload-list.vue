@@ -24,17 +24,17 @@
         :src="file.url" alt=""
       >
       <a class="tm-upload-list__item-name" @click="handleClick(file)">
-        <i class="tm-icon-document"></i>{{file.name}}
+        <i class="tm-icon--document"></i>{{file.name}}
       </a>
       <label class="tm-upload-list__item-status-label">
         <i :class="{
-          'tm-icon-upload-success': true,
-          'tm-icon-circle-check': listType === 'text',
-          'tm-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
+          'tm-icon--upload-success': true,
+          'tm-icon--circle-check': listType === 'text',
+          'tm-icon--check': ['picture-card', 'picture'].indexOf(listType) > -1
         }"></i>
       </label>
-      <i class="tm-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
-      <i class="tm-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
+      <i class="tm-icon--close" v-if="!disabled" @click="$emit('remove', file)"></i>
+      <i class="tm-icon--close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
       <tm-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
@@ -47,14 +47,14 @@
           v-if="handlePreview && listType === 'picture-card'"
           @click="handlePreview(file)"
         >
-          <i class="tm-icon-zoom-in"></i>
+          <i class="tm-icon--zoom-in"></i>
         </span>
         <span
           v-if="!disabled"
           class="tm-upload-list__item-delete"
           @click="$emit('remove', file)"
         >
-          <i class="tm-icon-delete"></i>
+          <i class="tm-icon--delete"></i>
         </span>
       </span>
     </li>

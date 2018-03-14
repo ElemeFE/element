@@ -438,7 +438,7 @@
 
       handleIconShow() {
         let icon = this.$el.querySelector('.tm-input__icon');
-        if (icon && !hasClass(icon, 'tm-icon-cross')) {
+        if (icon && !hasClass(icon, 'tm-icon--cross')) {
           addClass(icon, 'is-reverse');
         }
       },

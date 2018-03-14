@@ -59,12 +59,12 @@ describe('DatePicker', () => {
     setTimeout(() => {
       const $el = vm.$refs.compo.picker.$el;
       const spans = $el.querySelectorAll('.tm-date-picker__header-label');
-      const arrowLeftElm = $el.querySelector('.tm-date-picker__prev-btn.tm-icon-arrow-left');
-      const arrowRightElm = $el.querySelector('.tm-date-picker__next-btn.tm-icon-arrow-right');
+      const arrowLeftElm = $el.querySelector('.tm-date-picker__prev-btn.tm-icon--arrow-left');
+      const arrowRightElm = $el.querySelector('.tm-date-picker__next-btn.tm-icon--arrow-right');
 
       expect(spans[0].textContent).to.include(date.getFullYear());
       expect(spans[1].textContent).to.include(monthNames[date.getMonth()]);
-      $el.querySelector('.tm-date-picker__prev-btn.tm-icon-d-arrow-left').click();
+      $el.querySelector('.tm-date-picker__prev-btn.tm-icon--d-arrow-left').click();
       let count = 20;
       while (--count) {
         arrowLeftElm.click();
@@ -158,7 +158,7 @@ describe('DatePicker', () => {
     input.focus();
     setTimeout(() => {
       const $el = vm.$refs.compo.picker.$el;
-      $el.querySelector('.tm-date-picker__next-btn.tm-icon-arrow-right').click();
+      $el.querySelector('.tm-date-picker__next-btn.tm-icon--arrow-right').click();
       setTimeout(() => {
         $el.querySelector('td.available').click();
         vm.$nextTick(() => {
@@ -800,9 +800,9 @@ describe('DatePicker', () => {
       setTimeout(() => {
         const $el = vm.$refs.compo.picker.$el;
         prevMonth = $el.querySelector('button.tm-icon--arrow-left');
-        prevYear = $el.querySelector('button.tm-icon-d-arrow-left');
+        prevYear = $el.querySelector('button.tm-icon--d-arrow-left');
         nextMonth = $el.querySelector('button.tm-icon--arrow-right');
-        nextYear = $el.querySelector('button.tm-icon-d-arrow-right');
+        nextYear = $el.querySelector('button.tm-icon--d-arrow-right');
         getYearLabel = () => $el.querySelectorAll('.tm-date-picker__header-label')[0].textContent;
         getMonthLabel = () => $el.querySelectorAll('.tm-date-picker__header-label')[1].textContent;
         cbk();
@@ -905,8 +905,8 @@ describe('DatePicker', () => {
       expect(vm.picker.$el.querySelector('.tm-year-table').style.display).to.empty;
       expect(vm.picker.$el.querySelector('.tm-month-table').style.display).to.be.equal('none');
 
-      const leftBtn = vm.picker.$el.querySelector('.tm-icon-d-arrow-left');
-      const rightBtn = vm.picker.$el.querySelector('.tm-icon-d-arrow-right');
+      const leftBtn = vm.picker.$el.querySelector('.tm-icon--d-arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.tm-icon--d-arrow-right');
       let count = 20;
 
       while (--count) {
@@ -1275,8 +1275,8 @@ describe('DatePicker', () => {
 
         expect(Array.prototype.slice.call(panels)).to.length(2);
 
-        panels[1].querySelector('.tm-icon-d-arrow-right').click();
-        panels[1].querySelector('.tm-icon-arrow-right').click();
+        panels[1].querySelector('.tm-icon--d-arrow-right').click();
+        panels[1].querySelector('.tm-icon--arrow-right').click();
 
         setTimeout(() => {
           const left = panels[0].querySelector('.tm-date-range-picker__header');
@@ -1544,8 +1544,8 @@ describe('DatePicker', () => {
     });
 
     it('prev/next month button', done => {
-      const leftBtn = vm.picker.$el.querySelector('.is-left .tm-icon-arrow-left');
-      const rightBtn = vm.picker.$el.querySelector('.is-right .tm-icon-arrow-right');
+      const leftBtn = vm.picker.$el.querySelector('.is-left .tm-icon--arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.is-right .tm-icon--arrow-right');
       const left = vm.picker.$el.querySelector('.is-left .tm-date-range-picker__header');
       const right = vm.picker.$el.querySelector('.is-right .tm-date-range-picker__header');
       const leftText = left.textContent.match(/\d+/g);
@@ -1571,8 +1571,8 @@ describe('DatePicker', () => {
     });
 
     it('prev/next year button', done => {
-      const leftBtn = vm.picker.$el.querySelector('.is-left .tm-icon-d-arrow-left');
-      const rightBtn = vm.picker.$el.querySelector('.is-right .tm-icon-d-arrow-right');
+      const leftBtn = vm.picker.$el.querySelector('.is-left .tm-icon--d-arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.is-right .tm-icon--d-arrow-right');
       const left = vm.picker.$el.querySelector('.is-left .tm-date-range-picker__header');
       const right = vm.picker.$el.querySelector('.is-right .tm-date-range-picker__header');
       const leftText = left.textContent.match(/\d+/g);

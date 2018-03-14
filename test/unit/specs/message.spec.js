@@ -46,11 +46,11 @@
 //   it('custom icon', done => {
 //     Message({
 //       message: '夏天',
-//       iconClass: 'tm-icon-close'
+//       iconClass: 'tm-icon--close'
 //     });
 //     setTimeout(() => {
 //       const icon = document.querySelector('.tm-message i');
-//       expect(icon.classList.contains('tm-icon-close')).to.true;
+//       expect(icon.classList.contains('tm-icon--close')).to.true;
 //       done();
 //     }, 500);
 //   });

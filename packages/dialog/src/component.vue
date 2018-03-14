@@ -16,7 +16,7 @@
             aria-label="Close"
             v-if="showClose"
             @click="handleClose">
-            <i class="tm-dialog__close tm-icon tm-icon-close"></i>
+            <i class="tm-dialog__close tm-icon tm-icon--close"></i>
           </button>
         </div>
         <div class="tm-dialog__body" v-if="rendered"><slot></slot></div>

@@ -177,8 +177,8 @@
       } = this;
       const scrollBtn = scrollable
         ? [
-          <span class={['tm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="tm-icon-arrow-left"></i></span>,
-          <span class={['tm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="tm-icon-arrow-right"></i></span>
+          <span class={['tm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="tm-icon--arrow-left"></i></span>,
+          <span class={['tm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="tm-icon--arrow-right"></i></span>
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {

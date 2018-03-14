@@ -126,7 +126,7 @@ export default {
                         }
                         {
                           column.filterable
-                            ? <span class="tm-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['tm-icon-arrow-down', column.filterOpened ? 'tm-icon-arrow-up' : ''] }></i></span>
+                            ? <span class="tm-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['tm-icon--arrow-down', column.filterOpened ? 'tm-icon--arrow-up' : ''] }></i></span>
                             : ''
                         }
                       </div>
