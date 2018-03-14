@@ -17,7 +17,7 @@
 
   #app {
     height: 100%;
-    
+
     @when component {
       overflow-y: hidden;
 
@@ -34,7 +34,7 @@
         left: 0;
         top: 0;
         z-index: 1500;
-        
+
         .container {
           padding: 0;
         }
@@ -90,15 +90,15 @@
   .page-container {
     padding-top: 55px;
 
-    h2 {
+    .content > h2 {
       font-size: 28px;
       color: #1f2d3d;
       margin: 0;
     }
-    h3 {
+    .content > h3 {
       font-size: 22px;
     }
-    h2, h3, h4, h5 {
+    .content > h2, .content > h3, .content > h4, .content > h5 {
       font-weight: normal;
       color: #1f2f3d;
 
@@ -118,7 +118,7 @@
       }
     }
 
-    p {
+    .content > p {
       font-size: 14px;
       color: #5e6d82;
       line-height: 1.5em;
@@ -165,7 +165,7 @@
     .page-container {
       padding: 0 20px;
     }
-  
+
     #app.is-component .headerWrapper .container {
       padding: 0 12px;
     }

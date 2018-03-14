@@ -49,27 +49,35 @@
         </div>
         <div class="tm-message-box__btns">
           <tm-button
+            type="secondary"
+            :icon="iconCancel"
             :loading="cancelButtonLoading"
-            :class="[ cancelButtonClasses ]"
             v-show="showCancelButton"
-            :round="roundButton"
-            size="small"
+            :circle="circle"
+            :cancel="cancel"
             @click.native="handleAction('cancel')"
             @keydown.enter="handleAction('cancel')"
           >
-            {{ cancelButtonText || t('el.messagebox.cancel') }}
+            <template v-if="cancelButtonText !== false">
+              {{ cancelButtonText || t('el.messagebox.cancel') }}
+            </template>
           </tm-button>
           <tm-button
+            type="secondary"
+            class="tm-button--confirm"
+            :icon="iconApprove"
             :loading="confirmButtonLoading"
             ref="confirm"
-            :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
-            :round="roundButton"
-            size="small"
+            :circle="circle"
+            :approve="approve"
+            :remove="remove"
             @click.native="handleAction('confirm')"
             @keydown.enter="handleAction('confirm')"
           >
-            {{ confirmButtonText || t('el.messagebox.confirm') }}
+            <template v-if="confirmButtonText !== false">
+              {{ confirmButtonText || t('el.messagebox.confirm') }}
+            </template>
           </tm-button>
         </div>
       </div>
@@ -193,6 +201,20 @@
         setTimeout(() => {
           if (this.action) this.callback(this.action, this);
         });
+
+        setTimeout(() => {
+          this.resetData(); //
+        }, 200);
+      },
+
+      // TODO: Реорганизовать destroy или что-то похожее
+      resetData() {
+        this.iconCancel = null;
+        this.iconApprove = null;
+        this.circle = false;
+        this.approve = false;
+        this.cancel = false;
+        this.remove = false;
       },
 
       handleWrapperClick() {
@@ -322,8 +344,8 @@
         showConfirmButton: true,
         showCancelButton: false,
         action: '',
-        confirmButtonText: '',
-        cancelButtonText: '',
+        confirmButtonText: 'Ok',
+        cancelButtonText: 'Cancel',
         confirmButtonLoading: false,
         cancelButtonLoading: false,
         confirmButtonClass: '',
@@ -333,7 +355,13 @@
         callback: null,
         dangerouslyUseHTMLString: false,
         focusAfterClosed: null,
-        isOnComposition: false
+        isOnComposition: false,
+        iconCancel: null,
+        iconApprove: null,
+        circle: false,
+        approve: false,
+        cancel: false,
+        remove: false
       };
     }
   };

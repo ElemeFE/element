@@ -85,7 +85,7 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.tm-message-box__wrapper')
-        .querySelector('.tm-button--primary').click();
+        .querySelector('.tm-button--secondary').click();
       expect(document.querySelector('.tm-message-box__wrapper')
         .__vue__.$parent.visible).to.false;
       done();
@@ -178,7 +178,7 @@ describe('MessageBox', () => {
       msgAction = action;
     });
     setTimeout(() => {
-      document.querySelector('.tm-message-box__close').click();
+      document.querySelector('.tm-message-box__headerbtn').click();
       setTimeout(() => {
         expect(msgAction).to.equal('cancel');
         done();
@@ -198,7 +198,7 @@ describe('MessageBox', () => {
       msgAction = action;
     });
     setTimeout(() => {
-      document.querySelector('.tm-message-box__wrapper .tm-button--primary').click();
+      document.querySelector('.tm-message-box__wrapper .tm-button--confirm').click();
       setTimeout(() => {
         expect(msgAction).to.equal('confirm');
         done();
@@ -214,7 +214,7 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.tm-message-box__wrapper .tm-button--primary').click();
+        document.querySelector('.tm-message-box__wrapper .tm-button--confirm').click();
       }, 50);
     });
 

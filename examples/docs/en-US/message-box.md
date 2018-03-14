@@ -15,8 +15,10 @@
 
       open2() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
-          confirmButtonText: 'OK',
+          confirmButtonText: 'Delete',
           cancelButtonText: 'Cancel',
+          cancel: true,
+          remove: true,
           type: 'warning'
         }).then(() => {
           setTimeout(() => {
@@ -37,8 +39,13 @@
 
       open3() {
         this.$prompt('Please input your email', 'Tips', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
+          confirmButtonText: false,
+          cancelButtonText: false,
+          circle: true,
+          iconCancel: 'cross',
+          iconApprove: 'check',
+          cancel: true,
+          approve: true,
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: 'Invalid Email'
         }).then(({ value }) => {
@@ -67,8 +74,8 @@
             h('i', { style: 'color: teal' }, 'VNode')
           ]),
           showCancelButton: true,
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
+          cancel: true,
+          approve: true,
           beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
@@ -145,6 +152,7 @@ Alert interrupts user operation until the user confirms.
       open() {
         this.$alert('This is a message', 'Title', {
           confirmButtonText: 'OK',
+          circle: true,
           callback: action => {
             this.$message({
               type: 'info',
@@ -163,7 +171,7 @@ Alert interrupts user operation until the user confirms.
 
 Confirm is used to ask users' confirmation.
 
-:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and it's value can be `success`, `error`, `info` and `warning`. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing. 
+:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and it's value can be `success`, `error`, `info` and `warning`. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing.
 
 ```html
 <template>
@@ -237,7 +245,7 @@ Prompt is used when user input is required.
 
 ### Customization
 
-Can be customized to show various content.
+Can be customized to show various content and with icons.
 
 :::demo The three methods mentioned above are repackagings of the `$msgbox` method. This example calls `$msgbox` method directly using the `showCancelButton` attribute, which is used to indicate if a cancel button is displayed. Besides we can use `cancelButtonClass` to add a custom style and `cancelButtonText` to customize the button text (the confirm button also has these fields, and a complete list of fields can be found at the end of this documentation). This example also uses the `beforeClose` attribute. It is a method and will be triggered when the MessageBox instance will be closed, and its execution will stop the instance from closing. It has three parameters: `action`, `instance` and `done`. Using it enables you to manipulate the instance before it closes, e.g. activating `loading` for confirm button; you can invoke the `done` method to close the MessageBox instance (if `done` is not called inside `beforeClose`, the instance will not be closed).
 
@@ -401,3 +409,9 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | inputErrorMessage | error message when validation fails | string | — | Illegal input |
 | center | whether to align the content in center | boolean | — | false |
 | roundButton | whether to use round button | boolean | — | false |
+| iconCancel | whether to use icon for cancel button | string | — | null |
+| iconApprove | whether to use icon for approve button | string | — | null |
+| circle | whether to use circle button | boolean | — | false |
+| approve | whether to use approve button | boolean | — | false |
+| cancel | whether to use cancel button | boolean | — | false |
+| remove | whether to use remove button | boolean | — | false |

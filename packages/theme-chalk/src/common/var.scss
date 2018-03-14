@@ -288,13 +288,15 @@ $--alert-icon-large-size: 28px !default;
 
 /* Message Box
 -------------------------- */
-$--msgbox-width: 420px !default;
-$--msgbox-border-radius: 4px !default;
+$--msgbox-width: 430px !default;
+$--msgbox-border-radius: 8px !default;
 $--msgbox-font-size: $--font-size-large !default;
 $--msgbox-content-font-size: $--font-size-base !default;
 $--msgbox-content-color: $--color-text-regular !default;
+$--msgbox-close-color: $--color-text-primary !default;
+$--msgbox-close-hover-color: $--color-text-regular !default;
 $--msgbox-error-font-size: 12px !default;
-$--msgbox-padding-primary: 15px !default;
+$--msgbox-padding-primary: 20px !default;
 
 $--msgbox-success-color: $--color-success !default;
 $--msgbox-info-color: $--color-info !default;
@@ -510,10 +512,11 @@ $--switch-button-size: 16px !default;
 -------------------------- */
 $--dialog-background-color: $--color-primary-light-4 !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
-$--dialog-close-hover-color: $--color-primary !default;
-$--dialog-title-font-size: $--font-size-large !default;
+$--dialog-close-color: $--color-text-primary !default;
+$--dialog-close-hover-color: $--color-text-regular !default;
+$--dialog-title-font-size: 22px !default;
 $--dialog-font-size: 14px !default;
-$--dialog-line-height: $--font-line-height-primary !default;
+$--dialog-line-height: normal !default;
 $--dialog-padding-primary: 20px !default;
 
 /* Table

@@ -2,23 +2,6 @@
   module.exports = {
     data() {
       return {
-        gridData: [{
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-03',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }],
         dialogVisible: false,
         dialogTableVisible: false,
         dialogFormVisible: false,
@@ -34,13 +17,19 @@
           type: [],
           resource: '',
           desc: ''
-        },
-        formLabelWidth: '120px'
+        }
       };
     },
     methods: {
       handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
+        this.$confirm('', 'Are you sure to close this dialog?', {
+          center: true,
+          confirmButtonText: false,
+          cancelButtonText: false,
+          confirmButtonText: 'Ок',
+          cancelButtonText: 'Cancel',
+          cancel: true
+        })
           .then(_ => {
             done();
           })
@@ -50,29 +39,6 @@
   };
 </script>
 
-<style>
-  .demo-box.demo-dialog {
-    .dialog-footer button:first-child {
-      margin-right: 10px;
-    }
-    .full-image {
-      width: 100%;
-    }
-    .tm-dialog__wrapper {
-      margin: 0;
-    }
-    .tm-select {
-      width: 300px;
-    }
-    .tm-input {
-      width: 300px;
-    }
-    .tm-button--text {
-      margin-right: 15px;
-    }
-  }
-</style>
-
 ## Dialog
 
 Informs users while preserving the current page state.
@@ -81,33 +47,88 @@ Informs users while preserving the current page state.
 
 Dialog pops up a dialog box, and it's quite customizable.
 
-:::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. Finally, this example demonstrates how `before-close` is used.
+:::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title.
 
 ```html
 <tm-button type="text" @click="dialogVisible = true">click to open the Dialog</tm-button>
 
 <tm-dialog
-  title="Tips"
+  title="Вы действительно хотите удалить пассажира?"
   :visible.sync="dialogVisible"
-  width="30%"
-  :before-close="handleClose">
-  <span>This is a message</span>
-  <span slot="footer" class="dialog-footer">
-    <tm-button @click="dialogVisible = false">Cancel</tm-button>
-    <tm-button type="primary" @click="dialogVisible = false">Confirm</tm-button>
-  </span>
+  width="35%"
+  center>
+  <p class="tm-dialog__content">Текст ясно дающий понять всю серьездность и необратимость данного действия.</p>
+  <div slot="footer" class="dialog-footer text-center">
+    <tm-button type="secondary" cancel @click="dialogVisible = false">Cancel</tm-button>
+    <tm-button type="secondary" remove @click="dialogVisible = false">Delete</tm-button>
+  </div>
+</tm-dialog>
+```
+:::
+
+### Customizations
+
+The content of Dialog can be anything, even form. This example shows how to use Element Form with Dialog. Finally, this example demonstrates how `before-close` is used.
+
+:::demo
+
+```html
+
+<!-- Form -->
+<tm-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</tm-button>
+
+<tm-dialog
+  title="Групповой тур?"
+  :visible.sync="dialogFormVisible"
+  :before-close="handleClose"
+  width="35%"
+  center>
+  <p class="tm-dialog__content">Оставьте свою заявку на групповой тер ниже. После обработки вашей заявки мы связемся с вами</p>
+  <tm-form :model="form">
+    <tm-form-item>
+      <div class="tm-row">
+        <div class="tm-col-12">
+          <tm-input
+            placeholder="Поиск города, отеля, ардеса"
+            prefix-icon="search">
+          </tm-input>
+        </div>
+        <div class="tm-col-12">
+          <tm-input
+            placeholder="Период пребывания"
+            suffix-icon="calendar">
+          </tm-input>
+        </div>
+      </div>
+    </tm-form-item>
+    <tm-form-item>
+      <tm-input type="textarea"></tm-input>
+    </tm-form-item>
+  </tm-form>
+  <div slot="footer" class="dialog-footer">
+    <tm-button type="primary" class="block__button-cont" @click="dialogFormVisible = false">Отправить</tm-button>
+  </div>
 </tm-dialog>
 
 <script>
   export default {
     data() {
       return {
-        dialogVisible: false
+        dialogVisible: false,
+        dialogTableVisible: false,
+        dialogFormVisible: false,
+        outerVisible: false,
+        innerVisible: false,
+        centerDialogVisible: false
       };
     },
     methods: {
       handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
+        this.$confirm('', 'Are you sure to close this dialog?', {
+          center: true,
+          confirmButtonText: false,
+          cancelButtonText: false
+        })
           .then(_ => {
             done();
           })
@@ -123,122 +144,6 @@ Dialog pops up a dialog box, and it's quite customizable.
 `before-close` only works when user clicks the close icon or the backdrop. If you have buttons that close the Dialog in the `footer` named slot, you can add what you would do with `before-close` in the buttons' click event handler.
 :::
 
-### Customizations
-
-The content of Dialog can be anything, even a table or a form. This example shows how to use Element Table and Form with Dialog。
-
-:::demo
-
-```html
-<!-- Table -->
-<tm-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</tm-button>
-
-<tm-dialog title="Shipping address" :visible.sync="dialogTableVisible">
-  <tm-table :data="gridData">
-    <tm-table-column property="date" label="Date" width="150"></tm-table-column>
-    <tm-table-column property="name" label="Name" width="200"></tm-table-column>
-    <tm-table-column property="address" label="Address"></tm-table-column>
-  </tm-table>
-</tm-dialog>
-
-<!-- Form -->
-<tm-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</tm-button>
-
-<tm-dialog title="Shipping address" :visible.sync="dialogFormVisible">
-  <tm-form :model="form">
-    <tm-form-item label="Promotion name" :label-width="formLabelWidth">
-      <tm-input v-model="form.name" auto-complete="off"></tm-input>
-    </tm-form-item>
-    <tm-form-item label="Zones" :label-width="formLabelWidth">
-      <tm-select v-model="form.region" placeholder="Please select a zone">
-        <tm-option label="Zone No.1" value="shanghai"></tm-option>
-        <tm-option label="Zone No.2" value="beijing"></tm-option>
-      </tm-select>
-    </tm-form-item>
-  </tm-form>
-  <span slot="footer" class="dialog-footer">
-    <tm-button @click="dialogFormVisible = false">Cancel</tm-button>
-    <tm-button type="primary" @click="dialogFormVisible = false">Confirm</tm-button>
-  </span>
-</tm-dialog>
-
-<script>
-  export default {
-    data() {
-      return {
-        gridData: [{
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-03',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }],
-        dialogTableVisible: false,
-        dialogFormVisible: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
-      };
-    }
-  };
-</script>
-```
-:::
-
-### Nested Dialog
-If a Dialog is nested in another Dialog, `append-to-body` is required.
-:::demo Normally we do not recommend using nested Dialog. If you need multiple Dialogs rendered on the page, you can simply flat them so that they're siblings to each other. If you must nest a Dialog inside another Dialog, set `append-to-body` of the nested Dialog to true, and it will append to body instead of its parent node, so both Dialogs can be correctly rendered.
-```html
-<template>
-  <tm-button type="text" @click="outerVisible = true">open the outer Dialog</tm-button>
-  
-  <tm-dialog title="Outer Dialog" :visible.sync="outerVisible">
-    <tm-dialog
-        width="30%"
-        title="Inner Dialog"
-        :visible.sync="innerVisible"
-        append-to-body>
-    </tm-dialog>
-    <div slot="footer" class="dialog-footer">
-      <tm-button @click="outerVisible = false">Cancel</tm-button>
-      <tm-button type="primary" @click="innerVisible = true">open the inner Dialog</tm-button>
-    </div>
-  </tm-dialog>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        outerVisible: false,
-        innerVisible: false
-      };
-    }
-  }
-</script>
-```
-:::
-
-:::
-
 ### Centered content
 Dialog's content can be centered.
 
@@ -252,11 +157,7 @@ Dialog's content can be centered.
   :visible.sync="centerDialogVisible"
   width="30%"
   center>
-  <span>It should be noted that the content will not be aligned in center by default</span>
-  <span slot="footer" class="dialog-footer">
-    <tm-button @click="centerDialogVisible = false">Cancel</tm-button>
-    <tm-button type="primary" @click="centerDialogVisible = false">Confirm</tm-button>
-  </span>
+  <p class="tm-dialog__content">It should be noted that the content will not be aligned in center by default</p>
 </tm-dialog>
 
 <script>

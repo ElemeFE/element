@@ -51,8 +51,8 @@
 
   @include e(headerbtn) {
     position: absolute;
-    top: $--msgbox-padding-primary;
-    right: $--msgbox-padding-primary;
+    top: 10px;
+    right: 10px;
     padding: 0;
     border: none;
     outline: none;
@@ -60,13 +60,13 @@
     font-size: $--message-close-size;
     cursor: pointer;
 
-    .tm-message-box__close {
-      color: $--color-info;
+    .tm-icon {
+      fill: $--msgbox-close-color;
     }
 
     &:focus, &:hover {
-      .tm-message-box__close {
-        color: $--color-primary;
+      .tm-icon {
+        fill: $--msgbox-close-hover-color;
       }
     }
 

@@ -8,7 +8,7 @@
         :style="style">
         <div class="tm-dialog__header">
           <slot name="title">
-            <span class="tm-dialog__title">{{ title }}</span>
+            <h2 class="tm-dialog__title">{{ title }}</h2>
           </slot>
           <button
             type="button"
