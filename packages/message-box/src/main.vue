@@ -22,7 +22,7 @@
                   @click="handleAction('cancel')"
                   @keydown.enter="handleAction('cancel')"
           >
-            <i class="tm-message-box__close tm-icon-close"></i>
+            <i class="tm-message-box__close tm-icon--close"></i>
           </button>
         </div>
         <div class="tm-message-box__content" v-if="message !== ''">

@@ -48,7 +48,7 @@
                 </time-picker>
               </span>
             </span>
-            <span class="tm-icon-arrow-right"></span>
+            <span class="tm-icon--arrow-right"></span>
             <span class="tm-date-range-picker__editors-wrap is-right">
               <span class="tm-date-range-picker__time-picker-wrap">
                 <tm-input
@@ -87,7 +87,7 @@
               <button
                 type="button"
                 @click="leftPrevMonth"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-left">
+                class="tm-picker-panel__icon-btn tm-icon--arrow-left">
                 <tm-icon name="arrow-left" class="tm-picker-panel__icon"></tm-icon>
               </button>
               <button
@@ -96,7 +96,7 @@
                 v-if="unlinkPanels"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-right">
+                class="tm-picker-panel__icon-btn tm-icon--arrow-right">
                 <tm-icon name="arrow-right" class="tm-picker-panel__icon"></tm-icon>
               </button>
               <div>{{ leftLabel }}</div>
@@ -122,13 +122,13 @@
                 v-if="unlinkPanels"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-left">
+                class="tm-picker-panel__icon-btn tm-icon--arrow-left">
                 <tm-icon name="arrow-left" class="tm-picker-panel__icon"></tm-icon>
               </button>
               <button
                 type="button"
                 @click="rightNextMonth"
-                class="tm-picker-panel__icon-btn tm-icon-arrow-right">
+                class="tm-picker-panel__icon-btn tm-icon--arrow-right">
                 <tm-icon name="arrow-right" class="tm-picker-panel__icon"></tm-icon>
               </button>
               <div>{{ rightLabel }}</div>

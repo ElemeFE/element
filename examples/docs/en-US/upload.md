@@ -183,7 +183,7 @@ Use `before-upload` hook to limit the upload file format and size.
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="tm-icon-plus avatar-uploader-icon"></i>
+  <i v-else class="tm-icon--plus avatar-uploader-icon"></i>
 </tm-upload>
 
 <style>
@@ -252,7 +252,7 @@ Use `list-type` to change the fileList style.
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
-  <i class="tm-icon-plus"></i>
+  <i class="tm-icon--plus"></i>
 </tm-upload>
 <tm-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -366,7 +366,7 @@ You can drag your file to a certain area to upload it.
   :on-remove="handleRemove"
   :file-list="fileList"
   multiple>
-  <i class="tm-icon-upload"></i>
+  <i class="tm-icon--upload"></i>
   <div class="tm-upload__text">Drop file here or <em>click to upload</em></div>
   <div class="tm-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </tm-upload>

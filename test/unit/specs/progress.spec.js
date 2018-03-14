@@ -37,14 +37,14 @@ describe('Progress', () => {
       `
     }, true);
     expect(vm.$refs.lineSuccess.$el.classList.contains('is-success')).to.be.true;
-    expect(vm.$refs.lineSuccess.$el.querySelector('.tm-progress__text .tm-icon-circle-check')).to.be.exist;
+    expect(vm.$refs.lineSuccess.$el.querySelector('.tm-progress__text .tm-icon--circle-check')).to.be.exist;
     expect(vm.$refs.lineException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.lineException.$el.querySelector('.tm-progress__text .tm-icon-circle-cross')).to.be.exist;
+    expect(vm.$refs.lineException.$el.querySelector('.tm-progress__text .tm-icon--circle-cross')).to.be.exist;
 
     expect(vm.$refs.circleSuccess.$el.classList.contains('is-success')).to.be.true;
-    expect(vm.$refs.circleSuccess.$el.querySelector('.tm-progress__text .tm-icon-check')).to.be.exist;
+    expect(vm.$refs.circleSuccess.$el.querySelector('.tm-progress__text .tm-icon--check')).to.be.exist;
     expect(vm.$refs.circleException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.circleException.$el.querySelector('.tm-progress__text .tm-icon-close')).to.be.exist;
+    expect(vm.$refs.circleException.$el.querySelector('.tm-progress__text .tm-icon--close')).to.be.exist;
   });
   it('text inside', () => {
     vm = createVue({

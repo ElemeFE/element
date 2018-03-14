@@ -356,7 +356,7 @@ You can use named slot to customize the tab label content.
 ```html
 <tm-tabs type="border-card">
   <tm-tab-pane>
-    <span slot="label"><i class="tm-icon-date"></i> Route</span>
+    <span slot="label"><i class="tm-icon--date"></i> Route</span>
     Route
   </tm-tab-pane>
   <tm-tab-pane label="Config">Config</tm-tab-pane>

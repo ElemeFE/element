@@ -288,8 +288,8 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
-| prefix-icon | Custom prefix icon class | string | — | tm-icon-date |
-| clear-icon | Custom clear icon class | string | — | tm-icon-circle-close |
+| prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
+| clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

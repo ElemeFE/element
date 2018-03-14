@@ -284,8 +284,8 @@
             {$slots.title}
             <i class={{
               'tm-submenu__icon-arrow': true,
-              'tm-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
-              'tm-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
+              'tm-icon--arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
+              'tm-icon--arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
             }}>
             </i>
           </div>

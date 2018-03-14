@@ -314,8 +314,8 @@ describe('Menu', () => {
       template: `
         <tm-menu mode="vertical" default-active="1">
           <tm-menu-item-group title="分组一" ref="group1">
-            <tm-menu-item index="1"><i class="tm-icon-message"></i>导航一</tm-menu-item>
-            <tm-menu-item index="2"><i class="tm-icon-message"></i>导航二</tm-menu-item>
+            <tm-menu-item index="1"><i class="tm-icon--message"></i>导航一</tm-menu-item>
+            <tm-menu-item index="2"><i class="tm-icon--message"></i>导航二</tm-menu-item>
           </tm-menu-item-group>
           <tm-submenu index="5">
             <template slot="title">导航五</template>

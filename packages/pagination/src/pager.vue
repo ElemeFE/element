@@ -8,8 +8,8 @@
       class="tm-icon more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
-      @mouseenter="quickprevIconClass = 'tm-icon-d-arrow-left'"
-      @mouseleave="quickprevIconClass = 'tm-icon-more'">
+      @mouseenter="quickprevIconClass = 'tm-icon--d-arrow-left'"
+      @mouseleave="quickprevIconClass = 'tm-icon--more'">
     </li>
     <li
       v-for="pager in pagers"
@@ -20,8 +20,8 @@
       class="tm-icon more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
-      @mouseenter="quicknextIconClass = 'tm-icon-d-arrow-right'"
-      @mouseleave="quicknextIconClass = 'tm-icon-more'">
+      @mouseenter="quicknextIconClass = 'tm-icon--d-arrow-right'"
+      @mouseleave="quicknextIconClass = 'tm-icon--more'">
     </li>
     <li
       :class="{ active: currentPage === pageCount }"
@@ -42,11 +42,11 @@
 
     watch: {
       showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'tm-icon-more';
+        if (!val) this.quickprevIconClass = 'tm-icon--more';
       },
 
       showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'tm-icon-more';
+        if (!val) this.quicknextIconClass = 'tm-icon--more';
       }
     },
 
@@ -140,8 +140,8 @@
         current: null,
         showPrevMore: false,
         showNextMore: false,
-        quicknextIconClass: 'tm-icon-more',
-        quickprevIconClass: 'tm-icon-more'
+        quicknextIconClass: 'tm-icon--more',
+        quickprevIconClass: 'tm-icon--more'
       };
     }
   };

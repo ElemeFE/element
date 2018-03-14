@@ -1432,7 +1432,7 @@ Customize table column so it can be integrated with other components.
       label="Date"
       width="180">
       <template slot-scope="scope">
-        <i class="tm-icon-time"></i>
+        <i class="tm-icon--time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
     </tm-table-column>

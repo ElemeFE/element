@@ -75,7 +75,7 @@ const forced = {
       const expanded = store.states.expandRows.indexOf(row) > -1;
       return <div class={ 'tm-table__expand-icon ' + (expanded ? 'tm-table__expand-icon--expanded' : '') }
         on-click={ () => proxy.handleExpandClick(row) }>
-        <i class='tm-icon tm-icon-arrow-right'></i>
+        <i class='tm-icon tm-icon--arrow-right'></i>
       </div>;
     },
     sortable: false,

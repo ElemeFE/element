@@ -28,7 +28,7 @@
              v-if="haveTrigger">
     </tm-icon>
     <!--<i slot="suffix"-->
-       <!--class="tm-icon-cross"-->
+       <!--class="tm-icon--cross"-->
        <!--@click="handleClickIcon"-->
        <!--v-show="showClose"-->
        <!--v-if="haveTrigger">-->
@@ -443,7 +443,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'tm-icon-time' : 'tm-icon-date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'tm-icon--time' : 'tm-icon--date');
     },
 
     selectionMode() {

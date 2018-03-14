@@ -179,7 +179,7 @@
         @mouseenter="hover = true"
         @mouseleave="hover = false"
         @click="toTop">
-        <i class="tm-icon-caret-top"></i>
+        <i class="tm-icon--caret-top"></i>
       </div>
     </transition>
   </div>

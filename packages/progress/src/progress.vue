@@ -114,9 +114,9 @@
       },
       iconClass() {
         if (this.type === 'line') {
-          return this.status === 'success' ? 'tm-icon-circle-check' : 'tm-icon-circle-cross';
+          return this.status === 'success' ? 'tm-icon--circle-check' : 'tm-icon--circle-cross';
         } else {
-          return this.status === 'success' ? 'tm-icon-check' : 'tm-icon-close';
+          return this.status === 'success' ? 'tm-icon--check' : 'tm-icon--close';
         }
       },
       progressTextSize() {
