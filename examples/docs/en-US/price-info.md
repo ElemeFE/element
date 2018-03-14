@@ -20,6 +20,9 @@ Price Info used to display the sum and part sum. See examples to understand it b
   <tm-price-info :sum="42560.00" type="not-paid" currency="rub" size="large" taxes-info></tm-price-info>
   <tm-price-info :sum="52560.00" :part-sum="17560.00" type="part-paid" currency="rub" size="large" taxes-info></tm-price-info>
 </div>
+<div>
+  <tm-price-info :sum="12560.10" is-start-price></tm-price-info>
+</div>
 ```
 :::
 
@@ -33,3 +36,5 @@ Price Info used to display the sum and part sum. See examples to understand it b
 | currency     | type of currency  | string    |   rub / usd / eur |     —    |
 | size     | size price info  | string    |   small / medium / large |     —    |
 | taxesInfo     | taxes on/off  | Boolean    |   false / true |     false    |
+| isStartedPrice     | Shows 'from' word and defined that price isn't fixed  | Boolean    |   false / true |     false    |
+| startsPrefix     | Defines the prefix word before price | String    |   -  |    'от'    |

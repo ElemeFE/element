@@ -9,6 +9,7 @@
       <span v-if="partSum" class="tm-price-info__part-sum">{{ labelPartSum }}</span>
       <span v-if="partSum" class="tm-price-info__change">,{{ labelPartChange }}</span>
     </template>
+    <span class="tm-price-info__starts-prefix" v-if="isStartPrice && !partSum">{{ startsPrefix }}</span>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
     <span class="tm-price-info__change">,{{ labelChange }}</span>
     <span class="tm-price-info__currency">{{ currencyUnicode[currency] }}</span>
@@ -23,6 +24,14 @@
 export default {
   name: 'TmPriceInfo',
   props: {
+    isStartPrice: {
+      type: Boolean,
+      default: false
+    },
+    startsPrefix: {
+      type: String,
+      default: 'от'
+    },
     sum: {
       type: [Number, String],
       default: null,
