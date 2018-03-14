@@ -4,19 +4,19 @@
 
 *2018-03-14*
 
-- Added `clear` event for Input, #9988 (by @blackmiaool)
-- Now manual input of ColorPicker supports `hsl`, `hsv` and `rgb` modes, #9991
-- Fixed DatePicker not triggering `change` event when its initial value is cleared, #9986
-- Now icon class related attributes of Rate support dynamic updates, #10003
-- Fixed Table with fixed columns not updating its height correctly if `max-height` is set, #10034
-- Now DatePicker's range mode supports reverse selection (clicking the end date, then clicking the start date), #8156 (by @earlymeme)
-- Added `disabled` attribute for Pagination, #10006
-- Added `after-enter` and ` after-leave` events for Popover, #10047
-- Fixed Select not triggering validation when user selects an option after executing `resetFields` of Form, #10105
-- Fixed incorrect widths of fixed columns of Table in some cases, #10130
-- Fixed MessageBox inheriting the `title` attribute of its previous instance when called without `title`, #10126 (by @Pochodaydayup)
-- Added `input-size` attribute for Slider, #10154
-- Added `left-check-change` and `right-check-change` events for Transfer, #10156
+- Agregado el evento `clear` para Input, #9988 (by @blackmiaool)
+- Ahora la entrada manual de ColorPicker soporta los modos `hsl`, `hsv` y `rgb`, #9991
+- Arreglado DatePicker no desencadenaba el evento `change` cuando se borraba su valor inicial, #9986
+- Ahora la clase de iconos relacionadas con los atributos de Rate soporta actualizaciones dinamicas, #10003
+- Arreglado Table que con columnas `fixed` no actualizaban correctamente su altura si se fijaba `max-height`, #10034
+- Ahora DatePicker en modo rango admite la selección inversa (haciendo clic en la fecha final y, a continuación, haciendo clic en la fecha de inicio), #8156 (by @earlymeme)
+- Agregado el atributo `disabled` para Pagination, #10006
+- Agregados los eventos `after-enter` y ` after-leave` para Popover, #10047
+- Arreglado Select no disparaba validación cuando el usuario seleccionaba una opción después de ejecutar `resetFields` de Form, #10105
+- Arreglado anchos incorrectos de columnas fijas de Table en algunos casos, #10130
+- Corregido MessageBox heredaba el atributo `title` de su instancia anterior cuando se llamaba sin `title`, #10126 (by @Pochodaydayup)
+- Agregado el atributo `input-size` para Slider, #10154
+- Agregados los eventos  `left-check-change` y `right-check-change` para Transfer, #10156
 
 ### 2.2.1
 
