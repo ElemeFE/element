@@ -35,7 +35,6 @@ MenuItem.prototype.addListeners = function() {
         Utils.triggerEvent(event.currentTarget, 'mouseleave');
         break;
       case keys.enter:
-      case keys.space:
         prevDef = true;
         event.currentTarget.click();
         break;
