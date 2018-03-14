@@ -165,6 +165,10 @@
       },
 
       handleContextMenu(event) {
+        if (this.tree._events['node-contextmenu'] && this.tree._events['node-contextmenu'].length > 0) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
         this.tree.$emit('node-contextmenu', event, this.node.data, this.node, this);
       },
 
