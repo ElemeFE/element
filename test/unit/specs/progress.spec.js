@@ -44,7 +44,7 @@ describe('Progress', () => {
     expect(vm.$refs.circleSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.circleSuccess.$el.querySelector('.tm-progress__text .tm-icon--check')).to.be.exist;
     expect(vm.$refs.circleException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.circleException.$el.querySelector('.tm-progress__text .tm-icon--close')).to.be.exist;
+    expect(vm.$refs.circleException.$el.querySelector('.tm-progress__text .tm-icon--cross')).to.be.exist;
   });
   it('text inside', () => {
     vm = createVue({

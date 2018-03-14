@@ -18,12 +18,17 @@
         <p v-if="!dangerouslyUseHTMLString" class="tm-message__content">{{ message }}</p>
         <p v-else v-html="message" class="tm-message__content"></p>
       </slot>
-      <i v-if="showClose" class="tm-message__closeBtn tm-icon--close" @click="close"></i>
+      <tm-icon v-if="showClose"
+               name="cross"
+               class="tm-message__closeBtn"
+               :onClick="close"></tm-icon>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
+  import TmIcon from 'tmconsulting-ui/packages/icon/src/icon';
+
   const typeMap = {
     success: 'success',
     info: 'info',
@@ -32,6 +37,9 @@
   };
 
   export default {
+    components: {
+      TmIcon
+    },
     data() {
       return {
         visible: false,

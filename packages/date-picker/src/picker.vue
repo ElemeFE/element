@@ -27,12 +27,12 @@
              v-show="showClose"
              v-if="haveTrigger">
     </tm-icon>
-    <!--<i slot="suffix"-->
-       <!--class="tm-icon--cross"-->
+    <!--<tm-icon slot="suffix"-->
+       <!--name="cross"-->
        <!--@click="handleClickIcon"-->
        <!--v-show="showClose"-->
        <!--v-if="haveTrigger">-->
-    <!--</i>-->
+    <!--</tm-icon>-->
     <!--v-if="haveTrigger && showClose"-->
   </tm-input>
   <div
@@ -90,6 +90,7 @@ import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'tmconsulting-ui/src/utils/vue-popper';
 import Emitter from 'tmconsulting-ui/src/mixins/emitter';
 import TmInput from 'tmconsulting-ui/packages/input';
+import TmIcon from 'tmconsulting-ui/packages/icon/src/icon';
 import merge from 'tmconsulting-ui/src/utils/merge';
 
 const NewPopper = {
@@ -305,6 +306,11 @@ const validator = function(val) {
 export default {
   mixins: [Emitter, NewPopper],
 
+  components: {
+    TmIcon,
+    TmInput
+  },
+
   inject: {
     elForm: {
       default: ''
@@ -358,8 +364,6 @@ export default {
     pickerOptions: {},
     unlinkPanels: Boolean
   },
-
-  components: { TmInput },
 
   directives: { Clickoutside },
 
