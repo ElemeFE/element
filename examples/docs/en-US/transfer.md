@@ -288,3 +288,5 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | change | triggers when data items change in the right list | key array of current data items in the right list, transfer direction (left or right), moved item keys |
+| left-check-change | triggers when end user changes the checked state of any data item in the left list | key array of currently checked items, key array of items whose checked state have changed |
+| right-check-change | triggers when end user changes the checked state of any data item in the right list | key array of currently checked items, key array of items whose checked state have changed |

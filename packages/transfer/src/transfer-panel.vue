@@ -112,14 +112,22 @@
         checked: [],
         allChecked: false,
         query: '',
-        inputHover: false
+        inputHover: false,
+        checkChangeByUser: true
       };
     },
 
     watch: {
-      checked(val) {
+      checked(val, oldVal) {
         this.updateAllChecked();
-        this.$emit('checked-change', val);
+        if (this.checkChangeByUser) {
+          const movedKeys = val.concat(oldVal)
+            .filter(v => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1);
+          this.$emit('checked-change', val, movedKeys);
+        } else {
+          this.$emit('checked-change', val);
+          this.checkChangeByUser = true;
+        }
       },
 
       data() {
@@ -130,6 +138,7 @@
             checked.push(item);
           }
         });
+        this.checkChangeByUser = false;
         this.checked = checked;
       },
 
@@ -149,6 +158,7 @@
               checked.push(item);
             }
           });
+          this.checkChangeByUser = false;
           this.checked = checked;
         }
       }

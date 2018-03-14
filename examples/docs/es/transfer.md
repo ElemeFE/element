@@ -289,4 +289,5 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | Nombre | Descripcion                              | Parametros                               |
 | ------ | ---------------------------------------- | ---------------------------------------- |
 | change | se lanzá cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
-
+| left-check-change | triggers when end user changes the checked state of any data item in the left list | key array of currently checked items, key array of items whose checked state have changed |
+| right-check-change | triggers when end user changes the checked state of any data item in the right list | key array of currently checked items, key array of items whose checked state have changed |
