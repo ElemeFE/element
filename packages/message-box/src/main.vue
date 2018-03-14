@@ -63,6 +63,7 @@
           </tm-button>
           <tm-button
             type="secondary"
+            class="tm-button--confirm"
             :icon="iconApprove"
             :loading="confirmButtonLoading"
             ref="confirm"
