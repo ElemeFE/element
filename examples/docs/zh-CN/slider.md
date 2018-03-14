@@ -230,7 +230,8 @@
 | disabled | 是否禁用 | boolean | — | false |
 | step | 步长 | number | — | 1 |
 | show-input | 是否显示输入框，仅在非范围选择时有效 | boolean | — | false |
-| show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true|
+| show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true |
+| input-size | 输入框的尺寸 | string | large / medium / small / mini | small |
 | show-stops | 是否显示间断点 | boolean | — | false |
 | show-tooltip | 是否显示 tooltip | boolean | — | true |
 | format-tooltip | 格式化 tooltip message | function(value) | — | — |

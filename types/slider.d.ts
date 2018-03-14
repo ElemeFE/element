@@ -36,6 +36,9 @@ export declare class ElSlider extends ElementUIComponent {
   /** Whether to display control buttons when show-input is true */
   showInputControls: boolean
 
+  /** Size of the input box */
+  inputSize: string
+
   /** Whether to display breakpoints */
   showStops: boolean
 
