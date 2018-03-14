@@ -33,12 +33,17 @@
       :style="{fontSize: progressTextSize + 'px'}"
     >
       <template v-if="!status">{{percentage}}%</template>
-      <i v-else :class="iconClass"></i>
+      <tm-icon v-else :name="iconClass"></tm-icon>
     </div>
   </div>
 </template>
 <script>
+  import TmIcon from 'tmconsulting-ui/packages/icon/src/icon';
+
   export default {
+    components: {
+      TmIcon
+    },
     name: 'TmProgress',
     props: {
       type: {
@@ -114,9 +119,9 @@
       },
       iconClass() {
         if (this.type === 'line') {
-          return this.status === 'success' ? 'tm-icon-circle-check' : 'tm-icon-circle-cross';
+          return this.status === 'success' ? 'circle-check' : 'circle-cross';
         } else {
-          return this.status === 'success' ? 'tm-icon-check' : 'tm-icon-close';
+          return this.status === 'success' ? 'check' : 'cross';
         }
       },
       progressTextSize() {

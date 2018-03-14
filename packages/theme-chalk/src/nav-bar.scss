@@ -1,0 +1,28 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(nav-bar) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  width: 100%;
+  padding: 0 16px;
+  background-color: #3f4557;
+  box-sizing: border-box;
+
+  @include e(right) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @include e(left) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+    color: rgba(255, 255, 255, 0.72);
+  }
+}

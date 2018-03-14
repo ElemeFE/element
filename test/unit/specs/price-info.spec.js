@@ -40,6 +40,6 @@ describe('PriceInfo', () => {
       sum: '12560.10'
     }, true);
     let priceInfoElm = vm.$el;
-    expect(priceInfoElm.querySelector('.tm-price-info__currency_rub')).to.be.ok;
+    expect(priceInfoElm.querySelector('.tm-price-info__currency').innerText).to.equal('\u20BD');
   });
 });

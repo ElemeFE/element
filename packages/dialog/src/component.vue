@@ -16,7 +16,8 @@
             aria-label="Close"
             v-if="showClose"
             @click="handleClose">
-            <tm-icon name="cross"></tm-icon>
+            <tm-icon class="tm-dialog__close"
+                     name="cross"></tm-icon>
           </button>
         </div>
         <div class="tm-dialog__body" v-if="rendered"><slot></slot></div>
@@ -32,11 +33,16 @@
   import Popup from 'tmconsulting-ui/src/utils/popup';
   import Migrating from 'tmconsulting-ui/src/mixins/migrating';
   import emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import TmIcon from 'tmconsulting-ui/packages/icon/src/icon';
 
   export default {
     name: 'TmDialog',
 
     mixins: [Popup, emitter, Migrating],
+
+    components: {
+      TmIcon
+    },
 
     props: {
       title: {

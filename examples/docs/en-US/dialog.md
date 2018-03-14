@@ -25,7 +25,10 @@
         this.$confirm('', 'Are you sure to close this dialog?', {
           center: true,
           confirmButtonText: false,
-          cancelButtonText: false
+          cancelButtonText: false,
+          confirmButtonText: 'Ок',
+          cancelButtonText: 'Cancel',
+          cancel: true
         })
           .then(_ => {
             done();

@@ -7,6 +7,19 @@
     position: relative;
     margin: 0 0 15px;
   }
+  @include e(close) {
+    margin-left: 5px;
+    position: absolute;
+    right: 5px;
+    top: 0;
+
+    svg {
+      font-size: 10px;
+      width: 10px;
+      height: 10px;
+      fill: $--color-taupe-gray;
+    }
+  }
   @include e(active-bar) {
     position: absolute;
     bottom: 0;
@@ -31,7 +44,7 @@
     cursor: pointer;
     transition: all .15s;
 
-    .tm-icon-plus {
+    .tm-icon--plus {
       transform: scale(0.8, 0.8);
     }
 
@@ -104,7 +117,7 @@
       border-radius: 3px;
     }
 
-    & .tm-icon-close {
+    & .tm-icon--cross {
       border-radius: 50%;
       text-align: center;
       transition: all .3s cubic-bezier(.645,.045,.355,1);
@@ -167,7 +180,7 @@
     > .tm-tabs__header .tm-tabs__active-bar {
       display: none;
     }
-    > .tm-tabs__header .tm-tabs__item .tm-icon-close {
+    > .tm-tabs__header .tm-tabs__item .tm-icon--cross {
       position: relative;
       font-size: 12px;
       width: 0;
@@ -191,7 +204,7 @@
           padding-left: 13px;
           padding-right: 13px;
 
-          & .tm-icon-close {
+          & .tm-icon--cross {
             width: 14px;
           }
         }
@@ -203,7 +216,7 @@
           padding-left: 20px;
           padding-right: 20px;
 
-          .tm-icon-close {
+          .tm-icon--cross {
             width: 14px;
           }
         }
@@ -528,6 +541,47 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .tm-tabs__nav-wrap:after {
+      content: normal;
+    }
+  }
+
+  @include m(nav) {
+    @include e(close) {
+      position: relative;
+      left: 15px;
+    }
+    .tm-tabs__nav {
+      display: flex;
+    }
+    .tm-tabs__item {
+      padding: 24px 33px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+      color: $--color-taupe-gray;
+      box-sizing: border-box;
+      border-bottom: 3px solid transparent;
+      text-transform: uppercase;
+
+      @include when(active) {
+        border-bottom: 3px solid $--color-blueberry;
+        color: $--color-blueberry;
+      }
+
+      &.is-bottom, &.is-top {
+        &:nth-child(2), &:last-child {
+          padding-left: 33px;
+        }
+        &:last-child {
+          padding-right: 33px;
+        }
+      }
     }
     .tm-tabs__nav-wrap:after {
       content: normal;

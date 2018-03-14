@@ -7,15 +7,22 @@
   color: $--color-text-primary;
   font-size: 20px;
 
+  @include e(starts-prefix) {
+    display: inline-flex;
+    margin-right: 4px;
+  }
+
   @include e(sum) {
     display: inline-flex;
     border-bottom: 1px dashed $--color-dark-gunmetal;
+    font-weight: 500;
   }
 
   @include e(change) {
     display: inline-flex;
     margin: 0 2px;
     border-bottom: 1px dashed $--color-dark-gunmetal;
+    font-weight: 500;
   }
 
   @include e(taxes) {
@@ -30,7 +37,8 @@
   @include e(currency) {
     vertical-align: top;
     margin-left: 2px;
-    fill: $--color-text-primary;
+    color: $--color-text-primary;
+    font-weight: 500;
   }
 
   @include m(paid) {
@@ -64,15 +72,26 @@
 
   @include m(small) {
     font-size: 17px;
+
+    @include e(starts-prefix) {
+      font-size: 13px;
+    }
   }
 
   @include m(medium) {
     font-size: 20px;
+
+    @include e(starts-prefix) {
+      font-size: 16px;
+    }
   }
 
   @include m(large) {
     font-size: 24px;
 
+    @include e(starts-prefix) {
+      font-size: 20px;
+    }
     @include e(taxes) {
       font-size: 13px;
       line-height: 13px;

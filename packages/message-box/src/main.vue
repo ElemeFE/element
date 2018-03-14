@@ -22,7 +22,8 @@
                   @click="handleAction('cancel')"
                   @keydown.enter="handleAction('cancel')"
           >
-            <tm-icon name="cross"></tm-icon>
+            <tm-icon class="tm-message-box__close"
+                     name="cross"></tm-icon>
           </button>
         </div>
         <div class="tm-message-box__content" v-if="message !== ''">
@@ -89,6 +90,7 @@
   import Locale from 'tmconsulting-ui/src/mixins/locale';
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmButton from 'tmconsulting-ui/packages/button';
+  import TmIcon from 'tmconsulting-ui/packages/icon/src/icon';
   import { addClass, removeClass } from 'tmconsulting-ui/src/utils/dom';
   import { t } from 'tmconsulting-ui/src/locale';
   import Dialog from 'tmconsulting-ui/src/utils/aria-dialog';
@@ -136,7 +138,8 @@
 
     components: {
       TmInput,
-      TmButton
+      TmButton,
+      TmIcon
     },
 
     computed: {

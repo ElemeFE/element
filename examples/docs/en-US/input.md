@@ -505,7 +505,7 @@ Customize how suggestions are displayed.
   placeholder="Please input"
   @select="handleSelect">
   <i
-    class="tm-icon-edit tm-input__icon"
+    class="tm-icon--edit tm-input__icon"
     slot="suffix"
     @click="handleIconClick">
   </i>

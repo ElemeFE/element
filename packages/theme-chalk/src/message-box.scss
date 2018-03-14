@@ -106,19 +106,19 @@
       padding-right: 12px;
     }
 
-    &.tm-icon-success {
+    &.tm-icon--success {
       color: $--msgbox-success-color;
     }
 
-    &.tm-icon-info {
+    &.tm-icon--info {
       color: $--msgbox-info-color;
     }
 
-    &.tm-icon-warning {
+    &.tm-icon--warning {
       color: $--msgbox-warning-color;
     }
 
-    &.tm-icon-error {
+    &.tm-icon--error {
       color: $--msgbox-danger-color;
     }
   }

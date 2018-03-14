@@ -50,14 +50,14 @@
               type="button"
               @click="prevYear"
               :aria-label="t(`el.datepicker.prevYear`)"
-              class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon-d-arrow-left">
+              class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon--d-arrow-left">
             </button>
             <button
               type="button"
               @click="prevMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
-              class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon-arrow-left">
+              class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon--arrow-left">
             </button>
             <span
               @click="showYearPicker"
@@ -73,14 +73,14 @@
               type="button"
               @click="nextYear"
               :aria-label="t(`el.datepicker.nextYear`)"
-              class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon-d-arrow-right">
+              class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon--d-arrow-right">
             </button>
             <button
               type="button"
               @click="nextMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
-              class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon-arrow-right">
+              class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon--arrow-right">
             </button>
           </div>
 

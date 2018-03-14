@@ -6,7 +6,7 @@
   box-shadow: $--box-shadow-light;
   background: $--color-white;
   border-radius: $--border-radius-base;
-  line-height: 30px;
+  line-height: $--datepicker-cell-size;
   margin: 5px 0;
 
   @include e((body, body-wrapper)) {
@@ -20,6 +20,10 @@
   @include e(content) {
     position: relative;
     margin: 15px;
+
+    &.is-left {
+      margin-right: $--datepicker-cell-size / 2;
+    }
   }
 
   @include e(footer) {
@@ -78,7 +82,7 @@
     background: transparent;
     cursor: pointer;
     outline: none;
-    margin-top: 8px;
+    margin-top: 0;
 
     &:hover {
       color: $--datepicker-text-hover-color;
@@ -93,8 +97,19 @@
     }
   }
 
+  @include e(icon) {
+    height: $--datepicker-icon-size;
+    width: $--datepicker-icon-size;
+    font-size: $--datepicker-icon-size;
+    fill: $--color-pastel-gray;
+  }
+
   @include e(link-btn) {
     vertical-align: middle;
+  }
+
+  &.tm-popper > .popper__arrow {
+    display: none;
   }
 }
 

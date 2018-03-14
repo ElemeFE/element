@@ -176,7 +176,7 @@ These components use flex for layout, so please make sure your browser supports 
   <tm-aside width="200px" style="background-color: rgb(238, 241, 246)">
     <tm-menu :default-openeds="['1', '3']">
       <tm-submenu index="1">
-        <template slot="title"><i class="tm-icon-message"></i>Navigator One</template>
+        <template slot="title"><i class="tm-icon--message"></i>Navigator One</template>
         <tm-menu-item-group>
           <template slot="title">Group 1</template>
           <tm-menu-item index="1-1">Option 1</tm-menu-item>
@@ -191,7 +191,7 @@ These components use flex for layout, so please make sure your browser supports 
         </tm-submenu>
       </tm-submenu>
       <tm-submenu index="2">
-        <template slot="title"><i class="tm-icon-menu"></i>Navigator Two</template>
+        <template slot="title"><i class="tm-icon--menu"></i>Navigator Two</template>
         <tm-menu-item-group>
           <template slot="title">Group 1</template>
           <tm-menu-item index="2-1">Option 1</tm-menu-item>
@@ -206,7 +206,7 @@ These components use flex for layout, so please make sure your browser supports 
         </tm-submenu>
       </tm-submenu>
       <tm-submenu index="3">
-        <template slot="title"><i class="tm-icon-setting"></i>Navigator Three</template>
+        <template slot="title"><i class="tm-icon--setting"></i>Navigator Three</template>
         <tm-menu-item-group>
           <template slot="title">Group 1</template>
           <tm-menu-item index="3-1">Option 1</tm-menu-item>
@@ -226,7 +226,7 @@ These components use flex for layout, so please make sure your browser supports 
   <tm-container>
     <tm-header style="text-align: right; font-size: 12px">
       <tm-dropdown>
-        <i class="tm-icon-setting" style="margin-right: 15px"></i>
+        <i class="tm-icon--setting" style="margin-right: 15px"></i>
         <tm-dropdown-menu slot="dropdown">
           <tm-dropdown-item>View</tm-dropdown-item>
           <tm-dropdown-item>Add</tm-dropdown-item>

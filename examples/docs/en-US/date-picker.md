@@ -54,6 +54,7 @@
             }
           }]
         },
+        value: '',
         value1: '',
         value2: '',
         value3: '',
@@ -99,6 +100,15 @@
 ## DatePicker
 
 Use Date Picker for date input.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4" />
+```
+
+:::
+
 
 ###  Enter Date
 
@@ -466,8 +476,8 @@ When picking a date range, you can assign the time part for start date and end d
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
-| prefix-icon | Custom prefix icon class | string | — | tm-icon-date |
-| clear-icon | Custom clear icon class | string | — | tm-icon-circle-close |
+| prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
+| clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

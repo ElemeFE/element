@@ -6,6 +6,19 @@
         activeName2: 'first',
         editableTabsValue: '2',
         editableTabsValue2: '2',
+        navTabsValue: '2',
+        navTabs: [{
+          title: 'СПИСОК КЛИЕНТОВ',
+          name: '1',
+          content: 'СПИСОК КЛИЕНТОВ',
+          closable: false
+        }, {
+          title: 'Клиент 1',
+          name: '2',
+          content: 'Клиент 1',
+          closable: true
+        }],
+        tabIndex: 2,
         editableTabs: [{
           title: 'Tab 1',
           name: '1',
@@ -85,6 +98,32 @@
         
         this.editableTabsValue2 = activeName;
         this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+      },
+      addNavTab(targetName) {
+        let newTabName = ++this.tabIndex + '';
+        this.navTabs.push({
+          title: 'New Tab',
+          name: newTabName,
+          content: 'New Tab content'
+        });
+        this.navTabsValue = newTabName;
+      },
+      removeNavTab(targetName) {
+        let tabs = this.navTabs;
+        let activeName = this.navTabsValue;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab.name === targetName) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+                activeName = nextTab.name;
+              }
+            }
+          });
+        }
+    
+        this.navTabsValue = activeName;
+        this.navTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
   }
@@ -151,6 +190,74 @@ Flow tabs.
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Nav Tabs usage
+
+Nav Tabs.
+
+:::demo
+
+```html
+<template>
+  <tm-tabs type="nav" v-model="navTabsValue" @tab-remove="removeNavTab">
+    <tm-tab-pane v-for="(item, index) in navTabs"
+                 :key="item.name"
+                 :label="item.title"
+                 :name="item.name"
+                 :closable="item.closable">{{ item.content }}</tm-tab-pane>
+  </tm-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        navTabsValue: '2',
+        navTabs: [{
+          title: 'СПИСОК КЛИЕНТОВ',
+          name: '1',
+          content: 'СПИСОК КЛИЕНТОВ',
+          closable: false
+        }, {
+          title: 'Клиент 1',
+          name: '2',
+          content: 'Клиент 1',
+          closable: true
+        }],
+        tabIndex: 2
+      };
+    },
+    methods: {
+      addNavTab(targetName) {
+        let newTabName = ++this.tabIndex + '';
+        this.navTabs.push({
+          title: 'New Tab',
+          name: newTabName,
+          content: 'New Tab content'
+        });
+        this.navTabsValue = newTabName;
+      },
+      removeNavTab(targetName) {
+        let tabs = this.navTabs;
+        let activeName = this.navTabsValue;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab.name === targetName) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+                activeName = nextTab.name;
+              }
+            }
+          });
+        }
+      
+        this.navTabsValue = activeName;
+        this.navTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
   };
@@ -249,7 +356,7 @@ You can use named slot to customize the tab label content.
 ```html
 <tm-tabs type="border-card">
   <tm-tab-pane>
-    <span slot="label"><i class="tm-icon-date"></i> Route</span>
+    <span slot="label"><i class="tm-icon--date"></i> Route</span>
     Route
   </tm-tab-pane>
   <tm-tab-pane label="Config">Config</tm-tab-pane>

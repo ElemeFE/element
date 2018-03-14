@@ -11,7 +11,7 @@
       cursor: pointer;
       color: #409EFF;
     }
-    .tm-icon-arrow-down {
+    .tm-icon--arrow-down {
       font-size: 12px;
     }
   }
@@ -80,7 +80,7 @@ Hover on the dropdown menu to unfold it for more actions.
     cursor: pointer;
     color: #409EFF;
   }
-  .tm-icon-arrow-down {
+  .tm-icon--arrow-down {
     font-size: 12px;
   }
 </style>
@@ -132,7 +132,7 @@ Use the button to trigger the dropdown list.
   .tm-dropdown + .tm-dropdown {
     margin-left: 15px;
   }
-  .tm-icon-arrow-down {
+  .tm-icon--arrow-down {
     font-size: 12px;
   }
 </style>
@@ -200,7 +200,7 @@ Click the triggering element or hover on it.
     cursor: pointer;
     color: #409EFF;
   }
-  .tm-icon-arrow-down {
+  .tm-icon--arrow-down {
     font-size: 12px;
   }
   .demonstration {
@@ -240,7 +240,7 @@ Use `hide-on-click` to define if menu closes on clicking.
     cursor: pointer;
     color: #409EFF;
   }
-  .tm-icon-arrow-down {
+  .tm-icon--arrow-down {
     font-size: 12px;
   }
 </style>
@@ -274,7 +274,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
     cursor: pointer;
     color: #409EFF;
   }
-  .tm-icon-arrow-down {
+  .tm-icon--arrow-down {
     font-size: 12px;
   }
 </style>

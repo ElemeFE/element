@@ -9,14 +9,20 @@
       ]"
       :style="{backgroundColor: color}">
       <slot></slot>
-      <i class="tm-tag__close tm-icon-close"
-        v-if="closable"
-        @click.stop="handleClose"></i>
+      <tm-icon class="tm-tag__close"
+               name="cross"
+               v-if="closable"
+               :onClick="handleClose"></tm-icon>
     </span>
   </transition>
 </template>
 <script>
+  import TmIcon from 'tmconsulting-ui/packages/icon';
+
   export default {
+    components: {
+      TmIcon
+    },
     name: 'TmTag',
     props: {
       text: String,

@@ -124,7 +124,7 @@ Vertical NavMenu with sub-menus.
       @close="handleClose">
       <tm-submenu index="1">
         <template slot="title">
-          <i class="tm-icon-location"></i>
+          <i class="tm-icon--location"></i>
           <span>Navigator One</span>
         </template>
         <tm-menu-item-group title="Group One">
@@ -140,11 +140,11 @@ Vertical NavMenu with sub-menus.
         </tm-submenu>
       </tm-submenu>
       <tm-menu-item index="2">
-        <i class="tm-icon-menu"></i>
+        <i class="tm-icon--menu"></i>
         <span>Navigator Two</span>
       </tm-menu-item>
       <tm-menu-item index="3">
-        <i class="tm-icon-setting"></i>
+        <i class="tm-icon--setting"></i>
         <span>Navigator Three</span>
       </tm-menu-item>
     </tm-menu>
@@ -161,7 +161,7 @@ Vertical NavMenu with sub-menus.
       active-text-color="#ffd04b">
       <tm-submenu index="1">
         <template slot="title">
-          <i class="tm-icon-location"></i>
+          <i class="tm-icon--location"></i>
           <span>Navigator One</span>
         </template>
         <tm-menu-item-group title="Group One">
@@ -177,11 +177,11 @@ Vertical NavMenu with sub-menus.
         </tm-submenu>
       </tm-submenu>
       <tm-menu-item index="2">
-        <i class="tm-icon-menu"></i>
+        <i class="tm-icon--menu"></i>
         <span>Navigator Two</span>
       </tm-menu-item>
       <tm-menu-item index="3">
-        <i class="tm-icon-setting"></i>
+        <i class="tm-icon--setting"></i>
         <span>Navigator Three</span>
       </tm-menu-item>
     </tm-menu>
@@ -216,7 +216,7 @@ Vertical NavMenu could be collapsed.
 <tm-menu default-active="2" class="tm-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
   <tm-submenu index="1">
     <template slot="title">
-      <i class="tm-icon-location"></i>
+      <i class="tm-icon--location"></i>
       <span slot="title">Navigator One</span>
     </template>
     <tm-menu-item-group>
@@ -233,11 +233,11 @@ Vertical NavMenu could be collapsed.
     </tm-submenu>
   </tm-submenu>
   <tm-menu-item index="2">
-    <i class="tm-icon-menu"></i>
+    <i class="tm-icon--menu"></i>
     <span slot="title">Navigator Two</span>
   </tm-menu-item>
   <tm-menu-item index="3">
-    <i class="tm-icon-setting"></i>
+    <i class="tm-icon--setting"></i>
     <span slot="title">Navigator Three</span>
   </tm-menu-item>
 </tm-menu>

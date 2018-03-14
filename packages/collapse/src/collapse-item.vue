@@ -21,7 +21,7 @@
         @blur="focusing = false"
       >
         <i
-          class="tm-collapse-item__arrow tm-icon-arrow-right"
+          class="tm-collapse-item__arrow tm-icon--arrow-right"
           :class="{'is-active': isActive}">
         </i>
         <slot name="title">{{title}}</slot>
