@@ -417,7 +417,7 @@ export default {
       handler(val) {
         if (this.picker) {
           this.picker.value = val;
-          Array.isArray(val) && (this.picker.selectedDate = val);
+          Array.isArray(val) && (this.picker.selectedDate = val) || (this.picker.selectedDate = []);
         }
       }
     },
