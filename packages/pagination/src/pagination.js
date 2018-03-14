@@ -211,6 +211,14 @@ export default {
 
       components: { ElInput },
 
+      watch: {
+        '$parent.internalPageSize'() {
+          this.$nextTick(() => {
+            this.$refs.input.$el.querySelector('input').value = this.$parent.internalCurrentPage;
+          });
+        }
+      },
+
       methods: {
         handleFocus(event) {
           this.oldValue = event.target.value;
