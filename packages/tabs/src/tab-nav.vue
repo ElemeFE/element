@@ -81,6 +81,7 @@
         if (!this.scrollable) return;
         const nav = this.$refs.nav;
         const activeTab = this.$el.querySelector('.is-active');
+        if (!activeTab) return;
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
