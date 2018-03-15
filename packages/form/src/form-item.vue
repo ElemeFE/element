@@ -227,6 +227,8 @@
            这里需要强行触发一次，刷新 validateDisabled 的值，
            确保 Select 下一次值改变时能正确触发校验 */
         this.broadcast('ElSelect', 'fieldReset');
+
+        this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
         let formRules = this.form.rules;
