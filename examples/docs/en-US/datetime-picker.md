@@ -105,7 +105,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
     <el-date-picker
       v-model="value1"
       type="datetime"
-      placeholder="Select date and time">
+      placeholder="Select date and time"
     </el-date-picker>
   </div>
   <div class="block">
@@ -114,7 +114,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       v-model="value2"
       type="datetime"
       placeholder="Select date and time"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions1"
     </el-date-picker>
   </div>
 </template>
@@ -179,7 +179,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
-      align="right">
+      align="right"
     </el-date-picker>
   </div>
 </template>
@@ -236,7 +236,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
-      :default-time="['12:00:00']">
+      :default-time="['12:00:00']"
     </el-date-picker>
   </div>
   <div class="block">
@@ -247,7 +247,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       align="right"
       start-placeholder="Start Date"
       end-placeholder="End Date"
-      :default-time="['12:00:00', '08:00:00']">
+      :default-time="['12:00:00', '08:00:00']"
     </el-date-picker>
   </div>
 </template>
