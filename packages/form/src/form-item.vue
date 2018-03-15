@@ -243,7 +243,7 @@
         const rules = this.getRules();
 
         return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1 || (Array.isArray(rule.trigger) && trigger === '');
         }).map(rule => objectAssign({}, rule));
       },
       onFieldBlur() {
