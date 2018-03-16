@@ -1684,7 +1684,7 @@
       label="数值 3">
     </el-table-column>
   </el-table>
-  
+
   <el-table
     :data="tableData6"
     border
@@ -2035,6 +2035,7 @@
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| select-on-indeterminate | Controls the behavior of master checkbox in multi-select tables when only some rows are selected (but not all). If true, all rows will be selected, else deselected. | Boolean | — | false |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
