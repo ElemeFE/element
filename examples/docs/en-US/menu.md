@@ -308,7 +308,7 @@ Vertical NavMenu could be collapsed.
 | unique-opened  |  whether only one sub-menu can be active  | boolean   | — | false   |
 | menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | — | hover |
 | router  | whether `vue-router` mode is activated. If true, index will be used as 'path' to activate the route action | boolean   | — | false   |
-| collapse-transition  | whether the menu collapse transition is active | boolean   | — | true   |
+| collapse-transition  | whether to enable the collapse transition | boolean   | — | true   |
 
 ### Menu Methods
 | Event Name | Description | Parameters |
