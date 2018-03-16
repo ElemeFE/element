@@ -79,6 +79,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Custom summary method */
   summaryMethod: (param: SummaryMethodParams) => any[]
 
+  /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
+  selectOnIndeterminate: boolean
+
   /** Clear selection. Might be useful when `reserve-selection` is on */
   clearSelection (): void
 
