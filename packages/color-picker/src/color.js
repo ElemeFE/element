@@ -215,6 +215,8 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      } else {
+        this._alpha = 100;
       }
       if (parts.length >= 3) {
         const { h, s, v } = hsl2hsv(parts[0], parts[1], parts[2]);
@@ -226,6 +228,8 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      } else {
+        this._alpha = 100;
       }
       if (parts.length >= 3) {
         fromHSV(parts[0], parts[1], parts[2]);
@@ -259,11 +263,20 @@ export default class Color {
 
       if (hex.length === 8) {
         this._alpha = Math.floor(parseHexChannel(hex.substring(6)) / 255 * 100);
+      } else {
+        this._alpha = 100;
       }
 
       const { h, s, v } = rgb2hsv(r, g, b);
       fromHSV(h, s, v);
     }
+  }
+
+  compare(color) {
+    return Math.round(color._hue * 100) === Math.round(this._hue * 100) &&
+      Math.round(color._saturation * 100) === Math.round(this._saturation * 100) &&
+      Math.round(color._value * 100) === Math.round(this._value * 100) &&
+      color._alpha === this._alpha;
   }
 
   doOnChange() {

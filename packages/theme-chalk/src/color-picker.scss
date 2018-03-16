@@ -19,6 +19,10 @@
     border: 1px #8c939d solid;
     border-radius: 2px;
     cursor: pointer;
+
+    &.selected {
+      border: 3px $--color-primary solid;
+    }
   }
 }
 
