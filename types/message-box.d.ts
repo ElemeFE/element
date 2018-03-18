@@ -22,6 +22,7 @@ export declare class ElMessageBoxComponent extends Vue {
   showClose: boolean
   inputValue: string
   inputPlaceholder: string
+  inputType: string
   inputPattern: RegExp
   inputValidator: MessageBoxInputValidator
   inputErrorMessage: string
@@ -109,6 +110,9 @@ export interface ElMessageBoxOptions {
 
   /** Regexp for the input */
   inputPattern?: RegExp
+
+  /** Input Type: text, textArea, password or number */
+  inputType?: string
 
   /** Validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage */
   inputValidator?: MessageBoxInputValidator
