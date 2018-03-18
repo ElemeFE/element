@@ -74,4 +74,9 @@ export declare class ElInput extends ElementUIComponent {
 
   /** Same as form in native input */
   form: string
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }
