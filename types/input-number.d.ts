@@ -33,4 +33,9 @@ export declare class ElInputNumber extends ElementUIComponent {
 
   /** Same as name in native input */
   name: string
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }
