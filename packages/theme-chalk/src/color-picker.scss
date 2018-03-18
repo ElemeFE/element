@@ -23,6 +23,15 @@
     &.selected {
       border: 3px $--color-primary solid;
     }
+
+    > div {
+      display: flex;
+      height: 100%;
+    }
+
+    @include when(alpha) {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+    }
   }
 }
 

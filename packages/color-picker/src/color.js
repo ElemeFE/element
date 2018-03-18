@@ -215,7 +215,7 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      } else {
+      } else if (parts.length === 3) {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
@@ -228,7 +228,7 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      } else {
+      } else if (parts.length === 3) {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
@@ -240,7 +240,7 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      } else {
+      } else if (parts.length === 3) {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
@@ -263,7 +263,7 @@ export default class Color {
 
       if (hex.length === 8) {
         this._alpha = Math.floor(parseHexChannel(hex.substring(6)) / 255 * 100);
-      } else {
+      } else if (hex.length === 3 || hex.length === 6) {
         this._alpha = 100;
       }
 
@@ -273,10 +273,10 @@ export default class Color {
   }
 
   compare(color) {
-    return Math.round(color._hue * 100) === Math.round(this._hue * 100) &&
-      Math.round(color._saturation * 100) === Math.round(this._saturation * 100) &&
-      Math.round(color._value * 100) === Math.round(this._value * 100) &&
-      color._alpha === this._alpha;
+    return Math.abs(color._hue - this._hue) < 2 &&
+      Math.abs(color._saturation - this._saturation) < 1 &&
+      Math.abs(color._value - this._value) < 1 &&
+      Math.abs(color._alpha - this._alpha) < 1;
   }
 
   doOnChange() {

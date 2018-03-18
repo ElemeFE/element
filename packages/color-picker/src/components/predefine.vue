@@ -3,11 +3,12 @@
     预设：
     <div class="el-color-predefine__colors">
       <div class="el-color-predefine__color-selector"
-           :class="{selected: item.selected}"
+           :class="{selected: item.selected, 'is-alpha': item._alpha < 100}"
            v-for="(item, index) in rgbaColors"
            :key="colors[index]"
-           :style="{'background-color': item.value}"
            @click="handleSelect(index)">
+        <div :style="{'background-color': item.value}">
+        </div>
       </div>
     </div>
   </div>
@@ -42,9 +43,12 @@
       }
     },
     watch: {
-      'color.value'() {
+      '$parent.currentColor'(val) {
+        const color = new Color();
+        color.fromString(val);
+
         this.rgbaColors.forEach(item => {
-          item.selected = this.color.compare(item);
+          item.selected = color.compare(item);
         });
       },
       colors(newVal) {
