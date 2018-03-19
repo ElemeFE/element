@@ -1,6 +1,8 @@
 import { CreateElement, VNode } from 'vue'
 import { ElementUIComponent } from './component'
 
+export type TransferPanelPosition = 'left' | 'right'
+
 export interface TransferData {
   key: any,
   label: string,
@@ -65,4 +67,7 @@ export declare class ElTransfer extends ElementUIComponent {
 
   /** Key array of initially checked data items of the right list */
   rightDefaultChecked: any[]
+
+  /** Clear the query text in specified panel */
+  clearQuery (which: TransferPanelPosition): void
 }
