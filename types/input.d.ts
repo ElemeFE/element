@@ -79,4 +79,9 @@ export declare class ElInput extends ElementUIComponent {
    * Focus the Input component
    */
   focus (): void
+
+  /**
+   * Select the text in input element
+   */
+  select (): void
 }

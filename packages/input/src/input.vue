@@ -229,7 +229,7 @@
           this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
         }
       },
-      inputSelect() {
+      select() {
         (this.$refs.input || this.$refs.textarea).select();
       },
       resizeTextarea() {
@@ -291,7 +291,7 @@
     },
 
     created() {
-      this.$on('inputSelect', this.inputSelect);
+      this.$on('inputSelect', this.select);
     },
 
     mounted() {

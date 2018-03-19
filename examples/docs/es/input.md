@@ -663,6 +663,13 @@ Búsqueda de datos desde el servidor.
 | change | se activa cuando cambia el valor de entrada | (value: string \| number) |
 | clear | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | (event: Event) |
 
+### Input Metodo
+
+| Metodo | Descripción                   | Parametros |
+| ------ | ----------------------------- | ---------- |
+| focus  | coloca el foco en el elemento | —          |
+| select | select the text in input element | —       |
+
 ### Autocomplete Atributos
 
 Atributo | Descripción | Tipo | Opciones | Por defecto
@@ -695,7 +702,8 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | ------ | ---------------------------------------- | ---------------------------------------- |
 | select | se dispara cuando se hace click a una sugerencia | sugerencia en la que se está haciendo click |
 
-### Metodo
+### Autocomplete Metodo
+
 | Metodo | Descripción                   | Parametros |
 | ------ | ----------------------------- | ---------- |
 | focus  | coloca el foco en el elemento | —          |
