@@ -5,7 +5,7 @@
     :readonly="!editable || readonly"
     :disabled="pickerDisabled"
     :size="pickerSize"
-    :id="id"
+    :id="inputId"
     :name="name"
     v-if="!ranged"
     v-clickoutside="handleClose"
@@ -414,6 +414,13 @@ export default {
   },
 
   computed: {
+    inputId() {
+      if (this.id) {
+        return this.id;
+      }
+      return this.uid;
+    },
+
     ranged() {
       return this.type.indexOf('range') > -1;
     },
