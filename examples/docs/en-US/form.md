@@ -42,7 +42,6 @@
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
           type: [],
           resource: '',
           desc: ''
@@ -52,7 +51,6 @@
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
           type: [],
           resource: '',
           desc: ''
@@ -72,7 +70,6 @@
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
           type: [],
           resource: '',
           desc: ''
@@ -275,9 +272,6 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
       <tm-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></tm-time-picker>
     </tm-col>
   </tm-form-item>
-  <tm-form-item label="Instant delivery">
-    <tm-switch v-model="form.delivery"></tm-switch>
-  </tm-form-item>
   <tm-form-item label="Activity type">
     <tm-checkbox-group v-model="form.type">
       <tm-checkbox label="Online activities" name="type"></tm-checkbox>
@@ -309,7 +303,6 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
           type: [],
           resource: '',
           desc: ''
@@ -445,9 +438,6 @@ Form component allows you to verify your data, helping you find and correct erro
       </tm-form-item>
     </tm-col>
   </tm-form-item>
-  <tm-form-item label="Instant delivery" prop="delivery">
-    <tm-switch v-model="ruleForm.delivery"></tm-switch>
-  </tm-form-item>
   <tm-form-item label="Activity type" prop="type">
     <tm-checkbox-group v-model="ruleForm.type">
       <tm-checkbox label="Online activities" name="type"></tm-checkbox>
@@ -479,7 +469,6 @@ Form component allows you to verify your data, helping you find and correct erro
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
           type: [],
           resource: '',
           desc: ''
@@ -811,7 +800,6 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
           type: [],
           resource: '',
           desc: ''
