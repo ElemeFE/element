@@ -1,0 +1,30 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+
+@include b(form-group-item) {
+  display: inline-block;
+  overflow: hidden;
+  border: 1px solid $--color-pastel-gray;
+  border-radius: $--border-radius-base;
+
+  .tm-input {
+    width: auto;
+    
+    &:last-child {
+      .tm-input__inner {
+        border: none;
+      }
+    }
+
+    &__inner {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 30px;
+      border-top: none;
+      border-bottom: none;
+      border-left: none;
+      border-radius: 0;
+    }
+  }
+}
