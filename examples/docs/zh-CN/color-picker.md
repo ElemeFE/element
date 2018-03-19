@@ -5,7 +5,19 @@
         color1: '#409EFF',
         color2: null,
         color3: 'rgba(19, 206, 102, 0.8)',
-        color4: '#409EFF'
+        color4: '#409EFF',
+        color5: 'hsva(180, 65, 20, 0.5)',
+        predefineColors: [
+          'rgba(19, 206, 102, 0.18)',
+          'rgb(25, 159, 147)',
+          'hsv(250, 54, 98)',
+          'hsva(180, 65, 20, 0.5)',
+          'hsl(170, 32%, 87%)',
+          'hsla(45, 62%, 47%, 0.13)',
+          '#7486de',
+          '#45aa9477',
+          '#892345'
+        ]
       };
     },
     mounted() {
@@ -88,6 +100,35 @@
 ```
 :::
 
+### 预定义颜色
+
+:::demo ColorPicker 支持预定义颜色
+```html
+<el-color-picker v-model="color5" show-alpha :predefine="predefineColors"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color5: 'hsva(180, 65, 20, 0.5)',
+        predefineColors: [
+          'rgba(19, 206, 102, 0.18)',
+          'rgb(25, 159, 147)',
+          'hsv(250, 54, 98)',
+          'hsva(180, 65, 20, 0.5)',
+          'hsl(170, 32%, 87%)',
+          'hsla(45, 62%, 47%, 0.13)',
+          '#7486de',
+          '#45aa9477',
+          '#892345'
+        ]
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 不同尺寸
 
 :::demo
@@ -117,6 +158,7 @@
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 | popper-class | ColorPicker 下拉框的类名 | string | — | — |
+| predefine | 预定义颜色 | array | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

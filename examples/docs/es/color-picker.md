@@ -5,7 +5,19 @@
         color1: '#409EFF',
         color2: null,
         color3: 'rgba(19, 206, 102, 0.8)',
-        color4: '#409EFF'
+        color4: '#409EFF',
+        color5: 'hsva(180, 65, 20, 0.5)',
+        predefineColors: [
+          'rgba(19, 206, 102, 0.18)',
+          'rgb(25, 159, 147)',
+          'hsv(250, 54, 98)',
+          'hsva(180, 65, 20, 0.5)',
+          'hsl(170, 32%, 87%)',
+          'hsla(45, 62%, 47%, 0.13)',
+          '#7486de',
+          '#45aa9477',
+          '#892345'
+        ]
       };
     },
     mounted() {
@@ -88,6 +100,35 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 ```
 :::
 
+### Colores predefinidos
+
+:::demo ColorPicker admite colores predefinidos
+```html
+<el-color-picker v-model="color5" show-alpha :predefine="predefineColors"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color5: 'hsva(180, 65, 20, 0.5)',
+        predefineColors: [
+          'rgba(19, 206, 102, 0.18)',
+          'rgb(25, 159, 147)',
+          'hsv(250, 54, 98)',
+          'hsva(180, 65, 20, 0.5)',
+          'hsl(170, 32%, 87%)',
+          'hsla(45, 62%, 47%, 0.13)',
+          '#7486de',
+          '#45aa9477',
+          '#892345'
+        ]
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Sizes
 
 :::demo
@@ -117,6 +158,7 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 | show-alpha   | especifica si se muestra el control deslizante para el valor alpha | boolean | —                     | false                                    |
 | color-format | formato de color del `v-model`           | string  | hsl / hsv / hex / rgb | hex (si show-alpha es false)/ rgb (si show-alpha es true) |
 | popper-class | nombre de clase para el dropdown del ColorPicker | string  | —                     | —                                        |
+| predefine | colores predefinidos | array | — | — |
 
 ### Eventos
 | Nombre de Evento | Descripción                              | Parametros             |
