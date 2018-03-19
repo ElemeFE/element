@@ -84,7 +84,7 @@ export declare class ElTree extends ElementUIComponent {
   indent: number
 
   /**
-   * Filter all tree nodes.Ffiltered nodes will be hidden
+   * Filter all tree nodes. Filtered nodes will be hidden
    *
    * @param value The value to be used as first parameter for `filter-node-method`
    */
