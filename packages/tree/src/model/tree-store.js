@@ -124,13 +124,6 @@ export default class TreeStore {
     }
   }
 
-  setDefaultCheckedKey(newVal) {
-    if (newVal !== this.defaultCheckedKeys) {
-      this.defaultCheckedKeys = newVal;
-      this._initDefaultCheckedNodes();
-    }
-  }
-
   registerNode(node) {
     const key = this.key;
     if (!key || !node || !node.data) return;
@@ -287,16 +280,6 @@ export default class TreeStore {
     });
 
     this._setCheckedKeys(key, leafOnly, checkedKeys);
-  }
-
-  setDefaultExpandedKeys(keys) {
-    keys = keys || [];
-    this.defaultExpandedKeys = keys;
-
-    keys.forEach((key) => {
-      const node = this.getNode(key);
-      if (node) node.expand(null, this.autoExpandParent);
-    });
   }
 
   setChecked(data, checked, deep) {
