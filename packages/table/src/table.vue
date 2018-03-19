@@ -438,10 +438,10 @@
       },
 
       doLayout() {
+        this.layout.updateColumnsWidth();
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
-        this.layout.updateColumnsWidth();
       }
     },
 
