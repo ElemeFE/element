@@ -816,6 +816,43 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ```
 :::
 
+### Form Item Group
+
+Wrapper for item form group
+:::demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+```html
+<tm-form-group-item>
+  <tm-input
+    prefix-icon="search"
+    placeholder="Please Input">
+  </tm-input>
+  <tm-input
+    suffix-icon="calendar"
+    placeholder="Please Input">
+  </tm-input>
+  <tm-input
+    suffix-icon="man-woman"
+    placeholder="Please Input">
+  </tm-input>
+</tm-form-group-item>
+<tm-form-group-item>
+  <tm-select v-model="sizeForm.region" placeholder="please select your zone">
+    <tm-option label="Zone one" value="shanghai"></tm-option>
+    <tm-option label="Zone two" value="beijing"></tm-option>
+  </tm-select>
+  <tm-input
+    suffix-icon="calendar"
+    placeholder="Please Input">
+  </tm-input>
+  <tm-date-picker
+    type="week"
+    format="Week WW"
+    placeholder="Pick a week">
+  </tm-date-picker>
+</tm-form-group-item>
+```
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

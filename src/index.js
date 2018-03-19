@@ -33,6 +33,7 @@ import Tooltip from '../packages/tooltip/index.js';
 import MessageBox from '../packages/message-box/index.js';
 import Form from '../packages/form/index.js';
 import FormItem from '../packages/form-item/index.js';
+import FormGroupItem from '../packages/form-group-item/index.js';
 import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
@@ -100,6 +101,7 @@ const components = [
   Tooltip,
   Form,
   FormItem,
+  FormGroupItem,
   Tabs,
   TabPane,
   Tag,
@@ -197,6 +199,7 @@ module.exports = {
   MessageBox,
   Form,
   FormItem,
+  FormGroupItem,
   Tabs,
   TabPane,
   Tag,
