@@ -5,6 +5,7 @@
   display: flex;
   font-size: 12px;
   margin-top: 8px;
+  width: 280px;
 
   @include e(colors) {
     display: flex;
@@ -13,20 +14,24 @@
   }
 
   @include e(color-selector) {
-    margin: 0 0 6px 6px;
-    width: 24px;
-    height: 24px;
-    border: 1px #8c939d solid;
-    border-radius: 2px;
+    margin: 0 0 8px 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
     cursor: pointer;
 
+    &:nth-child(10n + 1) {
+      margin-left: 0;
+    }
+
     &.selected {
-      border: 3px $--color-primary solid;
+      box-shadow: 0 0 3px 2px $--color-primary;
     }
 
     > div {
       display: flex;
       height: 100%;
+      border-radius: 3px;
     }
 
     @include when(alpha) {
