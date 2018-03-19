@@ -1,6 +1,5 @@
 <template>
   <div class="el-color-predefine">
-    预设：
     <div class="el-color-predefine__colors">
       <div class="el-color-predefine__color-selector"
            :class="{selected: item.selected, 'is-alpha': item._alpha < 100}"
@@ -24,8 +23,8 @@
     },
     data() {
       return {
-        rgbaColors: this.parseColors(this.colors, this.color),
-      }
+        rgbaColors: this.parseColors(this.colors, this.color)
+      };
     },
     methods: {
       handleSelect(index) {
