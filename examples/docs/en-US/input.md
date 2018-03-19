@@ -643,29 +643,6 @@ Search data from server-side.
 ```
 :::
 
-### Form Item Group
-
-Wrapper for horizontal grouping of form item
-
-:::demo
-```html
-<tm-form-group-item>
-  <tm-input
-    prefix-icon="search"
-    placeholder="Please Input">
-  </tm-input>
-  <tm-input
-    suffix-icon="calendar"
-    placeholder="Please Input">
-  </tm-input>
-  <tm-input
-    suffix-icon="man-woman"
-    placeholder="Please Input">
-  </tm-input>
-</tm-form-group-item>
-```
-:::
-
 ### Input Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
