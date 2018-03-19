@@ -215,6 +215,8 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      } else if (parts.length === 3) {
+        this._alpha = 100;
       }
       if (parts.length >= 3) {
         const { h, s, v } = hsl2hsv(parts[0], parts[1], parts[2]);
@@ -226,6 +228,8 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      } else if (parts.length === 3) {
+        this._alpha = 100;
       }
       if (parts.length >= 3) {
         fromHSV(parts[0], parts[1], parts[2]);
@@ -236,6 +240,8 @@ export default class Color {
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      } else if (parts.length === 3) {
+        this._alpha = 100;
       }
       if (parts.length >= 3) {
         const { h, s, v } = rgb2hsv(parts[0], parts[1], parts[2]);
@@ -249,15 +255,28 @@ export default class Color {
         r = parseHexChannel(hex[0] + hex[0]);
         g = parseHexChannel(hex[1] + hex[1]);
         b = parseHexChannel(hex[2] + hex[2]);
-      } else if (hex.length === 6) {
+      } else if (hex.length === 6 || hex.length === 8) {
         r = parseHexChannel(hex.substring(0, 2));
         g = parseHexChannel(hex.substring(2, 4));
-        b = parseHexChannel(hex.substring(4));
+        b = parseHexChannel(hex.substring(4, 6));
+      }
+
+      if (hex.length === 8) {
+        this._alpha = Math.floor(parseHexChannel(hex.substring(6)) / 255 * 100);
+      } else if (hex.length === 3 || hex.length === 6) {
+        this._alpha = 100;
       }
 
       const { h, s, v } = rgb2hsv(r, g, b);
       fromHSV(h, s, v);
     }
+  }
+
+  compare(color) {
+    return Math.abs(color._hue - this._hue) < 2 &&
+      Math.abs(color._saturation - this._saturation) < 1 &&
+      Math.abs(color._value - this._value) < 1 &&
+      Math.abs(color._alpha - this._alpha) < 1;
   }
 
   doOnChange() {

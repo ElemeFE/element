@@ -1,6 +1,40 @@
 @import "mixins/mixins";
 @import "common/var";
 
+@include b(color-predefine) {
+  display: flex;
+  font-size: 12px;
+  margin-top: 8px;
+
+  @include e(colors) {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  @include e(color-selector) {
+    margin: 0 0 6px 6px;
+    width: 24px;
+    height: 24px;
+    border: 1px #8c939d solid;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &.selected {
+      border: 3px $--color-primary solid;
+    }
+
+    > div {
+      display: flex;
+      height: 100%;
+    }
+
+    @include when(alpha) {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+    }
+  }
+}
+
 @include b(color-hue-slider) {
   position: relative;
   box-sizing: border-box;
