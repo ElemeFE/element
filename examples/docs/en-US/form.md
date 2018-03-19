@@ -857,7 +857,6 @@ Wrapper for item form group
     placeholder="Please Input">
   </tm-input>
   <tm-date-picker
-    v-model="value3"
     type="week"
     format="Week WW"
     placeholder="Pick a week">
