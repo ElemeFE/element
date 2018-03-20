@@ -153,7 +153,9 @@
     nextYear,
     prevMonth,
     nextMonth,
-    changeYearMonthAndClampDate
+    changeYearMonthAndClampDate,
+    extractDateFormat,
+    extractTimeFormat
   } from '../util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
@@ -215,7 +217,6 @@
         const value = value => {this.$refs.timepicker.value = value;};
         const date = date => {this.$refs.timepicker.date = date;};
 
-        this.$watch('format', format);
         this.$watch('value', value);
         this.$watch('date', date);
 
@@ -523,8 +524,8 @@
       },
 
       timeFormat() {
-        if (this.format && this.format.indexOf('ss') === -1) {
-          return 'HH:mm';
+        if (this.format) {
+          return extractTimeFormat(this.format);
         } else {
           return 'HH:mm:ss';
         }
@@ -532,7 +533,7 @@
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH', '').replace(/[^a-zA-Z]*mm/, '').replace(/[^a-zA-Z]*ss/, '').trim();
+          return extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
         }
