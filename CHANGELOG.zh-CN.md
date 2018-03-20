@@ -388,7 +388,7 @@
 - Steps
   - 移除 `center` 属性
   - 现在步骤条将默认充满父容器
-  - DatePicker
+- DatePicker
   - `change` 事件参数现在为组件的绑定值，格式由 `value-format` 控制
 - Table
   - 移除通过 `inline-template` 自定义列模板的功能

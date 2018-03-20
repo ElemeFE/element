@@ -50,7 +50,9 @@ export default {
   data() {
     return {
       internalCurrentPage: 1,
-      internalPageSize: 0
+      internalPageSize: 0,
+      lastEmittedPage: -1,
+      userChangePageSize: false
     };
   },
 
@@ -194,6 +196,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
+            this.$parent.userChangePageSize = true;
             this.$parent.$emit('size-change', val);
           }
         }
@@ -234,6 +237,7 @@ export default {
         },
         handleChange(value) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
+          this.$parent.emitChange();
           this.oldValue = null;
           this.resetValueIfNeed(value);
         },
@@ -295,18 +299,21 @@ export default {
   methods: {
     handleCurrentChange(val) {
       this.internalCurrentPage = this.getValidCurrentPage(val);
+      this.emitChange();
     },
 
     prev() {
       if (this.disabled) return;
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      this.emitChange();
     },
 
     next() {
       if (this.disabled) return;
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      this.emitChange();
     },
 
     getValidCurrentPage(value) {
@@ -332,6 +339,15 @@ export default {
       }
 
       return resetValue === undefined ? value : resetValue;
+    },
+
+    emitChange() {
+      this.$nextTick(() => {
+        if (this.internalCurrentPage !== this.lastEmittedPage) {
+          this.$emit('current-change', this.internalCurrentPage);
+          this.lastEmittedPage = this.internalCurrentPage;
+        }
+      });
     }
   },
 
@@ -376,12 +392,10 @@ export default {
           this.internalCurrentPage = newVal;
           if (oldVal !== newVal) {
             this.$emit('update:currentPage', newVal);
-            this.$emit('current-change', this.internalCurrentPage);
           }
         });
       } else {
         this.$emit('update:currentPage', newVal);
-        this.$emit('current-change', this.internalCurrentPage);
       }
     },
 
@@ -392,7 +406,9 @@ export default {
         this.internalCurrentPage = 1;
       } else if (oldPage > newVal) {
         this.internalCurrentPage = newVal === 0 ? 1 : newVal;
+        this.userChangePageSize && this.emitChange();
       }
+      this.userChangePageSize = false;
     }
   }
 };
