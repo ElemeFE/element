@@ -1,7 +1,11 @@
 <template>
   <div
     class="el-tree"
-    :class="{ 'el-tree--highlight-current': highlightCurrent }"
+    :class="{
+      'el-tree--highlight-current': highlightCurrent,
+      dragging: !!store.dragSourceNode,
+      'drop-not-allow': !store.allowDrop
+    }"
     role="tree"
   >
     <el-tree-node
@@ -15,6 +19,12 @@
     </el-tree-node>
     <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
+    </div>
+    <div
+      v-if="!!dropAt"
+      class="el-tree__drag-indicator"
+      :style="{top: dragIndicatorOffset}"
+      ref="drag-indicator">
     </div>
   </div>
 </template>
@@ -81,6 +91,12 @@
         type: Boolean,
         default: false
       },
+      draggable: {
+        type: Boolean,
+        default: false
+      },
+      allowDrag: Function,
+      allowDrop: Function,
       props: {
         default() {
           return {
@@ -116,6 +132,40 @@
       },
       treeItemArray() {
         return Array.prototype.slice.call(this.treeItems);
+      },
+      dragIndicatorOffset() {
+        if (!this.dropAt) return;
+
+        const dom = this.store.dragTargetDom;
+        if (this.store.dragSourceNode.level !== this.store.dragTargetNode.level) {
+          return (dom.offsetTop + dom.querySelector('.el-tree-node__content').scrollHeight) + 'px';
+        } else {
+          return (dom.offsetTop + dom.scrollHeight) + 'px';
+        }
+      },
+      dropAt() {
+        let target = this.store.dragTargetNode;
+        let from = this.store.dragSourceNode;
+        if (!target || !from) {
+          return null;
+        }
+        if (typeof this.allowDrop === 'function' && !this.allowDrop(from, target)) {
+          return null;
+        }
+
+        if (target.level === from.level - 1) {
+          return {
+            parent: target,
+            index: 0
+          };
+        }
+        if (target.level === from.level) {
+          return {
+            parent: target.parent,
+            index: target.parent.childNodes.indexOf(target) + 1
+          };
+        }
+        return null;
       }
     },
 

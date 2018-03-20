@@ -151,6 +151,52 @@
     }]
   }];
 
+  const data6 = [{
+    id: 1,
+    label: '一级 1',
+    children: [{
+      id: 4,
+      label: '二级 1-1',
+      children: [{
+        id: 9,
+        label: '三级 1-1-1'
+      }, {
+        id: 10,
+        label: '三级 1-1-2'
+      }]
+    }]
+  }, {
+    id: 2,
+    label: '一级 2',
+    children: [{
+      id: 5,
+      label: '二级 2-1'
+    }, {
+      id: 6,
+      label: '二级 2-2'
+    }]
+  }, {
+    id: 3,
+    label: '一级 3',
+    children: [{
+      id: 7,
+      label: '二级 3-1'
+    }, {
+      id: 8,
+      label: '二级 3-2',
+      children: [{
+       id: 11,
+        label: '三级 3-2-1'
+      }, {
+        id: 12,
+        label: '三级 3-2-2'
+      }, {
+        id: 13,
+        label: '三级 3-2-3'
+      }]
+    }]
+  }];
+
   let id = 1000;
 
   const regions = [{
@@ -190,6 +236,27 @@
       },
       handleNodeClick(data) {
         console.log(data);
+      },
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(node, ev) {
+        console.log('tree drag enter: ', node.label);
+      },
+      handleDragLeave(node, ev) {
+        console.log('tree drag leave: ', node.label);
+      },
+      handleDragEnd(from, target, position, ev) {
+        console.log('tree drag end: ', target.label);
+        if (position !== null) {
+          console.log(`target position: parent node: ${position.parent.label}, index: ${position.index}`);
+        }
+      },
+      allowDrop(from, target) {
+        return target.data.label !== '二级 3-1';
+      },
+      allowDrag(node) {
+        return node.data.label.indexOf('三级 3-1-1') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -300,6 +367,7 @@
         data3,
         data4: JSON.parse(JSON.stringify(data2)),
         data5: JSON.parse(JSON.stringify(data2)),
+        data6,
         regions,
         defaultProps,
         props,
@@ -995,6 +1063,107 @@
 ```
 :::
 
+### 可拖拽节点
+
+通过draggable属性可让节点变为可拖拽，节点只能放到相同level节点旁边。
+
+:::demo
+```html
+<el-tree
+  :data="data6"
+  node-key="id"
+  default-expand-all
+  @node-drag-start="handleDragStart"
+  @node-drag-enter="handleDragEnter"
+  @node-drag-leave="handleDragLeave"
+  @node-drag-end="handleDragEnd"
+  draggable
+  :allow-drop="allowDrop"
+  :allow-drag="allowDrag">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data6: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2',
+            children: [{
+             id: 11,
+              label: '三级 3-2-1'
+            }, {
+              id: 12,
+              label: '三级 3-2-2'
+            }, {
+              id: 13,
+              label: '三级 3-2-3'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(node, ev) {
+        console.log('tree drag enter: ', node.label);
+      },
+      handleDragLeave(node, ev) {
+        console.log('tree drag leave: ', node.label);
+      },
+      handleDragEnd(from, target, position, ev) {
+        console.log('tree drag end: ', target.label);
+        if (position !== null) {
+          console.log(`target position: parent node: ${position.parent.label}, index: ${position.index}`);
+        }
+      },
+      allowDrop(from, target) {
+        return target.data.label !== '二级 3-1';
+      },
+      allowDrag(node) {
+        return node.data.label.indexOf('三级 3-1-1') === -1;
+      },
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数                  | 说明                                               | 类型                        | 可选值  | 默认值   |
 | --------------------- | ---------------------------------------- | --------------------------- | ---- | ----- |
@@ -1017,6 +1186,9 @@
 | accordion             | 是否每次只打开一个同级树节点展开                   | boolean                     | —    | false |
 | indent                | 相邻级节点间的水平缩进，单位为像素                 | number                     | —    | 16 |
 | lazy                  | 是否懒加载子节点，需与 load 方法结合使用           | boolean                     | —    | false |
+| draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
+| allow-drag            | 判断节点能否被拖拽                  | Function(Node)  | —  | —  |
+| allow-drop            | 拖拽时判定位置能否被放置             | Function(fromNode, toNode)  | —    | —     |
 
 ### props
 | 参数       | 说明                | 类型     | 可选值  | 默认值  |
@@ -1061,6 +1233,10 @@
 | current-change | 当前选中节点变化时触发的事件 | 共两个参数，依次为：当前节点的数据，当前节点的 Node 对象          |
 | node-expand    | 节点被展开时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
 | node-collapse  | 节点被关闭时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
+| node-drag-start| 节点开始拖拽时触发的事件  | 共两个参数，依次为：被拖拽节点对应的 Node、Vue传来的drag event。   |
+| node-drag-enter| 拖拽进入其他节点时触发的事件  | 共两个参数，依次为：所进入节点对应的 Node、Vue传来的drag event。   |
+| node-drag-leave| 拖拽离开某个节点时触发的事件  | 共两个参数，依次为：所离开节点对应的 Node、Vue传来的drag event。（注意：上个节点的leave事件有可能在下个节点enter之后执行）   |
+| node-drag-end  | 拖拽结束时触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后指向的节点、被拖拽节点的放置位置{ parent: 位置的父节点, index: 在父节点中的序号 }、Vue传来的drag event。|
 
 ### Scoped slot
 | name | 说明 |
