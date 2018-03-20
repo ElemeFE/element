@@ -193,7 +193,9 @@
     prevYear,
     nextYear,
     prevMonth,
-    nextMonth
+    nextMonth,
+    extractDateFormat,
+    extractTimeFormat
   } from '../util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
@@ -272,34 +274,34 @@
       },
 
       minVisibleDate() {
-        return this.minDate ? formatDate(this.minDate) : '';
+        return this.minDate ? formatDate(this.minDate, this.dateFormat) : '';
       },
 
       maxVisibleDate() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate) : '';
+        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.dateFormat) : '';
       },
 
       minVisibleTime() {
-        return this.minDate ? formatDate(this.minDate, 'HH:mm:ss') : '';
+        return this.minDate ? formatDate(this.minDate, this.timeFormat) : '';
       },
 
       maxVisibleTime() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, 'HH:mm:ss') : '';
+        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.timeFormat) : '';
+      },
+
+      timeFormat() {
+        if (this.format) {
+          return extractTimeFormat(this.format);
+        } else {
+          return 'HH:mm:ss';
+        }
       },
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH:mm', '').replace(':ss', '').trim();
+          return extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
-        }
-      },
-
-      timeFormat() {
-        if (this.format && this.format.indexOf('ss') === -1) {
-          return 'HH:mm';
-        } else {
-          return 'HH:mm:ss';
         }
       },
 
