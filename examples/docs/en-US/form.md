@@ -849,8 +849,8 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
-| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| validate | validate the whole form. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Returns a promise if callback is omitted | Function(callback: Function(boolean, object)) |
+| validateField | validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
 | clearValidate | clear validation message for all fields | -
 
