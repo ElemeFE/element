@@ -402,7 +402,7 @@
           } else {
             self.scrollPosition = 'middle';
           }
-        });
+        }, {passive: true});
 
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);

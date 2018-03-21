@@ -169,7 +169,7 @@
       this.referenceElm = this.cell;
       this.table.bodyWrapper.addEventListener('scroll', () => {
         this.updatePopper();
-      });
+      }, {passive: true});
 
       this.$watch('showPopper', (value) => {
         if (this.column) this.column.filterOpened = value;
