@@ -401,7 +401,8 @@
             self.scrollPosition = 'left';
           } else {
             self.scrollPosition = 'middle';
-          }
+          };
+          self.$emit("scroll", this.scrollTop, this.scrollLeft);
         });
 
         if (this.fit) {
