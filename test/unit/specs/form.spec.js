@@ -686,6 +686,40 @@ describe('Form', () => {
         });
       });
     });
+    it('invalid fields', done => {
+      var checkName = (rule, value, callback) => {
+        if (value.length < 5) {
+          callback(new Error('长度至少为5'));
+        } else {
+          callback();
+        }
+      };
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { validator: checkName, trigger: 'change' }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate((valid, invalidFields) => {
+        expect(invalidFields.name.length).to.equal(1);
+        done();
+      });
+    });
     it('validate return promise', done => {
       var checkName = (rule, value, callback) => {
         if (value.length < 5) {
