@@ -261,6 +261,34 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('select datetime with defaultTime', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker ref="compo" type="datetime" v-model="value" default-time="12:00:00"></el-date-picker>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    setTimeout(_ => {
+      const picker = vm.$refs.compo.picker;
+      picker.$el.querySelector('td.available + td.today').click();
+      setTimeout(_ => {
+        const date = vm.$refs.compo.picker.date;
+        expect(date.getHours()).to.equal(12);
+        expect(date.getMinutes()).to.equal(0);
+        expect(date.getSeconds()).to.equal(0);
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
   describe('input event', () => {
     // mimic standard <select>'s behavior
     // emit input if and only if value changes
