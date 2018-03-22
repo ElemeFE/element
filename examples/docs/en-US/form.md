@@ -867,6 +867,11 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | inline style validate message | boolean | — | false |
 | size  | control the size of components in this form-item | string | medium / small / mini | - |
+| vuelidate | activate validation through vuelidate by pointing the `vuelidate` attribute to a vuelidate field... `$v.form.username` | object | — | — |
+| vuelidate-messages | error messages in a object, the object should look like a vuelidate field but replacing validators with the error string `{username: {required: 'username is required!', exists: 'username already exists in db'}}` | object | — | — |
+| vuelidate-pending | shows loading animations on the form item when the vuelidate's pending variable equals to `true` | boolean | — | false |
+| vuelidate-popover | useful to show multiple errors at the same time, it shows error messages inside a popover | boolean | — | false |
+| vuelidate-popover-title | sets the title of the error list's popover | string | — | — |
 
 ### Form-Item Slot
 | Name | Description |

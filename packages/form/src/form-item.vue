@@ -1,19 +1,36 @@
 <template>
   <div class="el-form-item" :class="[{
       'el-form-item--feedback': elForm && elForm.statusIcon,
-      'is-error': validateState === 'error',
-      'is-validating': validateState === 'validating',
-      'is-success': validateState === 'success',
-      'is-required': isRequired || required
+      'is-error':      validateState === 'error'      || (vuelidate ? vuelidate.$error : ''),
+      'is-validating': validateState === 'validating' || (vuelidate ? vuelidate.$pending : ''),
+      'is-success':    validateState === 'success'    || (vuelidate ? !vuelidate.$invalid : ''),
+      'is-required':   isRequired || required         || (vuelidate ? vuelidate.hasOwnProperty('required') : false)
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
     <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <div class="el-form-item__content" v-bind:style="contentStyle" v-loading="vuelidate && vuelidatePending && vuelidate.$pending">
       <slot></slot>
-      <transition name="el-zoom-in-top">
+
+      <!-- vuelidate's error -->
+      <span v-if="vuelidate && vuelidateMessages && vuelidate.$dirty">
+        <el-popover 
+          :style="{transition: 'height 250ms ease-in-out'}"
+          placement="bottom" 
+          :title="vuelidatePopoverTitle"
+          :value="vuelidate.$error"
+          trigger="manual"
+          v-if="vuelidatePopover"
+        >
+          <vuelidate-error-list></vuelidate-error-list>
+        </el-popover>
+        <vuelidate-error-list v-else></vuelidate-error-list>
+      </span>
+
+      <!-- async-validator's error -->
+      <transition name="el-zoom-in-top" v-else>
         <div
           v-if="validateState === 'error' && showMessage && form.showMessage"
           class="el-form-item__error"
@@ -34,11 +51,16 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
+  import VuelidateErrorList from './vuelidate-error-list.vue';
 
   export default {
     name: 'ElFormItem',
 
     componentName: 'ElFormItem',
+
+    components: {
+      VuelidateErrorList
+    },
 
     mixins: [emitter],
 
@@ -70,7 +92,12 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      vuelidateMessages: Object,
+      vuelidatePending: Boolean,
+      vuelidatePopover: Boolean,
+      vuelidatePopoverTitle: String,
+      vuelidate: Object
     },
     watch: {
       error: {
