@@ -291,6 +291,18 @@ describe('Select', () => {
     }, 100);
   });
 
+  it('does not show clearable icon when null', done => {
+    vm = getSelectVm({ clearable: true });
+    const select = vm.$children[0];
+    vm.value = null;
+    select.inputHovering = true;
+    setTimeout(() => {
+      const icon = vm.$el.querySelector('.el-input__icon');
+      expect(icon).to.be.undefined;
+      done();
+    }, 100);
+  });
+
   it('object typed value', done => {
     vm = createVue({
       template: `
