@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.0.9
+
+*2018-03-23*
+
+- Новые атрибуты для Price Info:
+    - hideCurrency
+    - noDash
+- Новый size для Price Info - "extra small"
+
 ### 1.0.8
 
 *2018-03-22*
