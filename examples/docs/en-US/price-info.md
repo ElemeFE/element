@@ -22,9 +22,9 @@ Price Info used to display the sum and part sum. See examples to understand it b
   <tm-price-info :sum="52560.00" :part-sum="17560.00" type="part-paid" currency="rub" size="large" taxes-info></tm-price-info>
 </div>
 <div>
-  <tm-price-info :sum="12312.30" hideCurrency></tm-price-info>
+  <tm-price-info :sum="12312.30" hide-currency></tm-price-info>
   <tm-price-info :sum="12560.10" is-start-price></tm-price-info>
-  <tm-price-info :sum="12312.21" noDash></tm-price-info>
+  <tm-price-info :sum="12312.21" no-dash></tm-price-info>
 </div>
 ```
 :::
