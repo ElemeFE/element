@@ -25,9 +25,9 @@
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content" v-if="message !== ''">
+        <div class="el-message-box__content">
           <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
-          <div class="el-message-box__message">
+          <div class="el-message-box__message" v-if="message !== ''">
             <slot>
               <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
               <p v-else v-html="message"></p>
