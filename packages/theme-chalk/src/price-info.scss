@@ -72,6 +72,25 @@
     }
   }
 
+  @include m(no-dash) {
+    
+    @include e(sum) {
+      color: $--color-text-regular;
+      border: none;
+    }
+    @include e(change) {
+      border: none;
+    }
+  }
+
+  @include m(extra-small) {
+    font-size: 11px;
+
+    @include e(starts-prefix) {
+      font-size: 7px;
+    }
+  }
+
   @include m(small) {
     font-size: 17px;
 
