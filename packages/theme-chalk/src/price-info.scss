@@ -55,6 +55,8 @@
 
   @include m(part-paid) {
     @include e(part-sum) {
+      display: inline-flex;
+      font-weight: 500;
       color: $--color-sunset-orange;
       border-bottom: 1px dashed $--color-dark-gunmetal;
     }
