@@ -10,11 +10,11 @@ Price Info used to display the sum and part sum. See examples to understand it b
 
 ### Basic usage
 
-:::demo Use `type` [`paid`, `not-paid`, `part-paid`, `paid-no-dash`] to define Info Price's style.
+:::demo Use `type` [`paid`, `not-paid`, `part-paid`] to define Info Price's style.
 
 ```html
 <div>
-  <tm-price-info :sum="10231.12" type="paid-no-dash" currency="rub" size="extra-small"></tm-price-info>
+  <tm-price-info :sum="10231.12" currency="rub" size="extra-small"></tm-price-info>
   <tm-price-info :sum="12560.10" type="paid" currency="rub" size="small" taxes-info></tm-price-info>
   <tm-price-info :sum="22560.56" type="paid" currency="usd" size="medium" taxes-info></tm-price-info>
   <tm-price-info :sum="32560.23" type="paid" currency="eur" size="large" taxes-info></tm-price-info>
@@ -24,6 +24,7 @@ Price Info used to display the sum and part sum. See examples to understand it b
 <div>
   <tm-price-info :sum="12312.30" hideCurrency></tm-price-info>
   <tm-price-info :sum="12560.10" is-start-price></tm-price-info>
+  <tm-price-info :sum="12312.21" noDash></tm-price-info>
 </div>
 ```
 :::
@@ -41,3 +42,4 @@ Price Info used to display the sum and part sum. See examples to understand it b
 | isStartedPrice     | Shows 'from' word and defined that price isn't fixed  | Boolean    |   false / true |     false    |
 | startsPrefix     | Defines the prefix word before price | String    |   -  |    'от'    |
 | hideCurrency     | Hides currency if true | Boolean | false / true |    false    |
+| noDash     | Remove dashed border if true | Boolean | false / true |    false    |

@@ -70,7 +70,7 @@
     }
   }
 
-  @include m(paid-no-dash) {
+  @include m(no-dash) {
     
     @include e(sum) {
       color: $--color-text-regular;

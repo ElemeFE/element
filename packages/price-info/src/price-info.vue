@@ -2,7 +2,8 @@
   <div class="tm-price-info"
        :class="[
         type ? 'tm-price-info--' + type : '',
-        size ? 'tm-price-info--' + size : ''
+        size ? 'tm-price-info--' + size : '',
+        noDash ? 'tm-price-info--no-dash' : ''
        ]"
   >
     <template v-if="partSum">
@@ -55,6 +56,10 @@ export default {
       default: false
     },
     hideCurrency: {
+      type: Boolean,
+      default: false
+    },
+    noDash: {
       type: Boolean,
       default: false
     }
