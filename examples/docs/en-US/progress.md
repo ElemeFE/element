@@ -39,10 +39,11 @@ In this case the percentage takes no additional space.
 
 ### Circular progress bar
 
-:::demo You can specify `type` attribute to `circle` to use circular progress bar, and use `width` attribute to change the size of circle.
+:::demo You can specify `type` attribute to `circle` to use circular progress bar, and use `width` attribute to change the size of circle, and use `status` attribute to change the color of circle.
 ```html
 <el-progress type="circle" :percentage="0"></el-progress>
 <el-progress type="circle" :percentage="25"></el-progress>
+<el-progress type="circle" :percentage="80" status="8e71c7"></el-progress>
 <el-progress type="circle" :percentage="100" status="success"></el-progress>
 <el-progress type="circle" :percentage="50" status="exception"></el-progress>
 ``` 

@@ -108,7 +108,11 @@
             ret = '#ff4949';
             break;
           default:
-            ret = '#20a0ff';
+            if (this.status) {
+              ret = '#' + this.status;
+            } else {
+              ret = '#20a0ff';
+            }
         }
         return ret;
       },
