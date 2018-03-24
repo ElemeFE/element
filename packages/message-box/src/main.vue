@@ -37,7 +37,7 @@
             <el-input
               v-model="inputValue"
               :type="inputType"
-              @keydown.enter.native="handleAction('confirm')"
+              @keydown.enter.native="handleInputEnter()"
               :placeholder="inputPlaceholder"
               ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
@@ -180,6 +180,12 @@
       handleWrapperClick() {
         if (this.closeOnClickModal) {
           this.handleAction('cancel');
+        }
+      },
+
+      handleInputEnter() {
+        if (this.inputType !== 'textarea') {
+          return this.handleAction('confirm');
         }
       },
 
