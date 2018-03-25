@@ -3,14 +3,14 @@
 @import "common/var";
 
 @include b(form-group-item) {
-  display: inline-block;
+  display: inline-flex;
   overflow: hidden;
   border: 1px solid $--color-pastel-gray;
   border-radius: $--border-radius-base;
 
   .tm-input {
     width: auto;
-    
+
     &:last-child {
       .tm-input__inner {
         border: none;
@@ -25,6 +25,14 @@
       border-bottom: none;
       border-left: none;
       border-radius: 0;
+    }
+  }
+
+  .tm-select {
+    &:last-child {
+      .tm-input__inner {
+        border: none;
+      }
     }
   }
 }
