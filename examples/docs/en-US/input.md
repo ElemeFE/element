@@ -166,6 +166,25 @@ export default {
 ```
 :::
 
+### Search
+
+:::demo
+
+```html
+<tm-input placeholder="Please input" v-model="input" class="tm-input--search" prefix-icon="search"></tm-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Disabled
 
 :::demo Disable the Input with the `disabled` attribute.
