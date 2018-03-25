@@ -22,20 +22,28 @@
       }
     },
 
-    render() {
+    render(h) {
       const { size, move, bar } = this;
 
-      return (
-        <div
-          class={ ['tm-scrollbar__bar', 'is-' + bar.key] }
-          onMousedown={ this.clickTrackHandler } >
-          <div
-            ref="thumb"
-            class="tm-scrollbar__thumb"
-            onMousedown={ this.clickThumbHandler }
-            style={ renderThumbStyle({ size, move, bar }) }>
-          </div>
-        </div>
+      return h(
+        'div',
+        {
+          class: ['tm-scrollbar__bar', 'is-' + bar.key],
+          on: {
+            mousedown: this.clickTrackHandler
+          }
+        },
+        [h(
+          'div',
+          {
+            ref: 'thumb',
+            class: 'tm-scrollbar__thumb',
+            on: {
+              mousedown: this.clickThumbHandler
+            },
+            style: renderThumbStyle({ size, move, bar })
+          }
+        )]
       );
     },
 
