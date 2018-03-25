@@ -854,6 +854,11 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | resetFields | reset all the fields and remove validation result | — |
 | clearValidate | clear validation message for all fields | -
 
+### Form Events
+| Event Name | Description | Parameters |
+|----------- |------------ |----------- |
+| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed |
+
 ### Form-Item Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -861,7 +866,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
-| required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
+| required | whether the field is required or not, will be determined by validation rules if omitted | boolean |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
