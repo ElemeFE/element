@@ -209,6 +209,24 @@
     }
   }
 
+  @include m((search, suffix)) {
+    .tm-input__inner {
+      padding-right: 40px;
+    }
+    .tm-input__suffix {
+      right: 10px;
+    }
+  }
+
+  @include m((search, prefix)) {
+    .tm-input__inner {
+      padding-left: 40px;
+    }
+    .tm-input__prefix {
+      left: 10px;
+    }
+  }
+
   @include m(medium) {
     font-size: $--input-medium-font-size;
 
