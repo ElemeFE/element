@@ -112,8 +112,6 @@
           )
         ]);
       }
-
-      console.log(nodes);
       return h('div', { class: 'tm-scrollbar' }, nodes);
     },
 
