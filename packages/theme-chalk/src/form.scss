@@ -66,7 +66,9 @@
       margin-bottom: 18px;
     }
     .tm-form-item__error {
-      padding-top: 2px;
+      margin-top: 8px;
+      font-size: 12px;
+      padding: 8px 10px;
     }
   }
   @include m(mini) {
@@ -80,7 +82,9 @@
       margin-bottom: 18px;
     }
     .tm-form-item__error {
-      padding-top: 1px;
+      margin-top: 5px;
+      font-size: 11px;
+      padding: 7px 8px;
     }
   }
 
@@ -101,13 +105,13 @@
     @include utils-clearfix;
   }
   @include e(error) {
-    color: $--color-danger;
-    font-size: 12px;
+    background: #fdebec;
+    color: $--color-sunset-orange;
+    font-size: 14px;
     line-height: 1;
-    padding-top: 4px;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    padding: 10px 13px;
+    border-radius: 6px;
+    margin-top: 10px;
 
     @include m(inline) {
       position: relative;

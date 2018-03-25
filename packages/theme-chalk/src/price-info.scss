@@ -55,6 +55,8 @@
 
   @include m(part-paid) {
     @include e(part-sum) {
+      display: inline-flex;
+      font-weight: 500;
       color: $--color-sunset-orange;
       border-bottom: 1px dashed $--color-dark-gunmetal;
     }
@@ -67,6 +69,25 @@
         margin-right: 2px;
         content: '/';
       }
+    }
+  }
+
+  @include m(no-dash) {
+    
+    @include e(sum) {
+      color: $--color-text-regular;
+      border: none;
+    }
+    @include e(change) {
+      border: none;
+    }
+  }
+
+  @include m(extra-small) {
+    font-size: 11px;
+
+    @include e(starts-prefix) {
+      font-size: 7px;
     }
   }
 

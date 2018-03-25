@@ -2,7 +2,8 @@
   <div class="tm-price-info"
        :class="[
         type ? 'tm-price-info--' + type : '',
-        size ? 'tm-price-info--' + size : ''
+        size ? 'tm-price-info--' + size : '',
+        noDash ? 'tm-price-info--no-dash' : ''
        ]"
   >
     <template v-if="partSum">
@@ -12,7 +13,7 @@
     <span class="tm-price-info__starts-prefix" v-if="isStartPrice && !partSum">{{ startsPrefix }}</span>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
     <span class="tm-price-info__change">,{{ labelChange }}</span>
-    <span class="tm-price-info__currency">{{ currencyUnicode[currency] }}</span>
+    <span v-if="!hideCurrency" class="tm-price-info__currency">{{ currencyUnicode[currency] }}</span>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
       <span>НДС</span>
@@ -51,6 +52,14 @@ export default {
       default: 'medium'
     },
     taxesInfo: {
+      type: Boolean,
+      default: false
+    },
+    hideCurrency: {
+      type: Boolean,
+      default: false
+    },
+    noDash: {
       type: Boolean,
       default: false
     }

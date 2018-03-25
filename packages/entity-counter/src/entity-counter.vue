@@ -64,9 +64,7 @@
       setCurrentValue(value) {
         if (value === this.currentValue) return;
         this.currentValue = value;
-        if (this.validateEvent) {
-          this.dispatch('TmFormItem', 'el.form.change', [value]);
-        }
+        this.$emit('change', value);
       },
       getValueLabel(value) {
         if (value === 1) {
