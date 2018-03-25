@@ -26,7 +26,7 @@
       const { size, move, bar } = this;
 
       return (
-        <div
+        `<div
           class={ ['tm-scrollbar__bar', 'is-' + bar.key] }
           onMousedown={ this.clickTrackHandler } >
           <div
@@ -35,7 +35,7 @@
             onMousedown={ this.clickThumbHandler }
             style={ renderThumbStyle({ size, move, bar }) }>
           </div>
-        </div>
+        </div>`
       );
     },
 
