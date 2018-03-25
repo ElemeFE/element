@@ -63,35 +63,35 @@
         ref: 'resize'
       }, this.$slots.default);
       const wrap = (
-        `<div
+        <div
           ref="wrap"
           style={ style }
           onScroll={ this.handleScroll }
           class={ [this.wrapClass, 'tm-scrollbar__wrap', gutter ? '' : 'tm-scrollbar__wrap--hidden-default'] }>
           { [view] }
-        </div>`
+        </div>
       );
       let nodes;
 
       if (!this.native) {
         nodes = ([
           wrap,
-          `<Bar
+          <Bar
             move={ this.moveX }
-            size={ this.sizeWidth }></Bar>`,
-          `<Bar
+            size={ this.sizeWidth }></Bar>,
+          <Bar
             vertical
             move={ this.moveY }
-            size={ this.sizeHeight }></Bar>`
+            size={ this.sizeHeight }></Bar>
         ]);
       } else {
         nodes = ([
-          `<div
+          <div
             ref="wrap"
             class={ [this.wrapClass, 'tm-scrollbar__wrap'] }
             style={ style }>
             { [view] }
-          </div>`
+          </div>
         ]);
       }
       return h('div', { class: 'tm-scrollbar' }, nodes);
