@@ -859,6 +859,11 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | resetFields   | restablece todos los campos y elimina el resultado de validación | —                                        |
 | clearValidate | limpia mensaje de validación para todos los campos | -
 
+### Form Events
+| Nombre     | Descripción | Parametros |
+|----------- |------------ |----------- |
+| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed |
+
 ### Form-Item Atributos
 
 | Atributo       | Descripción                              | Tipo    | Valores aceptados                   | Por defecto |
@@ -866,7 +871,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | prop           | un key de `model`. En el uso del método validate and resetFields, el atributo es obligatorio. | string  | keys of model that passed to `form` |             |
 | label          | etiqueta                                 | string  | —                                   | —           |
 | label-width    | ancho de la etiqueta, e.g. '50px'        | string  | —                                   | —           |
-| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | string  | —                                   | false       |
+| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | boolean  | —                                   | false       |
 | rules          | reglas de validacion del form            | object  | —                                   | —           |
 | error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                   | —           |
 | show-message   | si mostrar o no el mensaje de error      | boolean | —                                   | true        |
