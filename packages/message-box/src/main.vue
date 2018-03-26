@@ -12,7 +12,7 @@
       <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
         <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
-            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
+            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center && message !== ''"></div>
             <span>{{ title }}</span>
           </div>
           <button type="button"
@@ -25,9 +25,9 @@
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content" v-if="message !== ''">
+        <div class="el-message-box__content">
           <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
-          <div class="el-message-box__message">
+          <div class="el-message-box__message" v-if="message !== ''">
             <slot>
               <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
               <p v-else v-html="message"></p>
@@ -37,7 +37,7 @@
             <el-input
               v-model="inputValue"
               :type="inputType"
-              @keydown.enter.native="handleAction('confirm')"
+              @keydown.enter.native="handleInputEnter()"
               :placeholder="inputPlaceholder"
               ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
@@ -180,6 +180,12 @@
       handleWrapperClick() {
         if (this.closeOnClickModal) {
           this.handleAction('cancel');
+        }
+      },
+
+      handleInputEnter() {
+        if (this.inputType !== 'textarea') {
+          return this.handleAction('confirm');
         }
       },
 
