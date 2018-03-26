@@ -5,10 +5,6 @@
     .el-time-spinner__wrapper {
       width: 33.3%;
     }
-
-    .el-time-spinner__wrapper:nth-child(2) {
-      margin-left: 1%;
-    }
   }
 
   @include e(wrapper) {
