@@ -3,6 +3,9 @@
     .el-row {
       margin-bottom: 10px;
     }
+    .el-button {
+      margin-bottom: 20px;
+    }
     .el-button + .el-button {
       margin-left: 10px;
     }
@@ -38,7 +41,7 @@ Botones comúnmente usados.
   <el-button type="danger">Danger</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button plain>Plain</el-button>
   <el-button type="primary" plain>Primary</el-button>
   <el-button type="success" plain>Success</el-button>
@@ -47,7 +50,7 @@ Botones comúnmente usados.
   <el-button type="danger" plain>Danger</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button round>Round</el-button>
   <el-button type="primary" round>Primary</el-button>
   <el-button type="success" round>Success</el-button>
@@ -163,7 +166,7 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
 </div>
-<div style="margin-top: 20px">
+<div>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>

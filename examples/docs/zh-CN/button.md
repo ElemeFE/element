@@ -3,6 +3,9 @@
     .el-row {
       margin-bottom: 10px;
     }
+    .el-button {
+      margin-bottom: 20px;
+    }
     .el-button + .el-button {
       margin-left: 10px;
     }
@@ -39,7 +42,7 @@
   <el-button type="danger">危险按钮</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button plain>朴素按钮</el-button>
   <el-button type="primary" plain>主要按钮</el-button>
   <el-button type="success" plain>成功按钮</el-button>
@@ -48,7 +51,7 @@
   <el-button type="danger" plain>危险按钮</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button round>圆角按钮</el-button>
   <el-button type="primary" round>主要按钮</el-button>
   <el-button type="success" round>成功按钮</el-button>
@@ -84,7 +87,7 @@
   <el-button type="danger" disabled>危险按钮</el-button>
 </div>
 
-<div style="margin-top: 20px">
+<div>
   <el-button plain disabled>朴素按钮</el-button>
   <el-button type="primary" plain disabled>主要按钮</el-button>
   <el-button type="success" plain disabled>成功按钮</el-button>
@@ -164,7 +167,7 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
   <el-button size="small">小型按钮</el-button>
   <el-button size="mini">超小按钮</el-button>
 </div>
-<div style="margin-top: 20px">
+<div>
   <el-button round>默认按钮</el-button>
   <el-button size="medium" round>中等按钮</el-button>
   <el-button size="small" round>小型按钮</el-button>
