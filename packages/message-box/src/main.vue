@@ -12,7 +12,7 @@
       <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
         <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
-            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
+            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center && message !== ''"></div>
             <span>{{ title }}</span>
           </div>
           <button type="button"
