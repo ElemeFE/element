@@ -26,7 +26,7 @@
     methods: {
       handleClick(event) {
         this.$emit('click', event);
-      },
+      }
     }
   };
 </script>
