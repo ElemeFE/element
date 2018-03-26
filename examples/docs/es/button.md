@@ -179,6 +179,7 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
 | type        | tipo de botón                            | string  | primary / success / warning / danger / info / text | —           |
 | plain       | determinar si es o no un botón plano     | boolean | —                                        | false       |
 | round       | determinar si es o no un botón redondo   | boolean | —                                        | false       |
+| circle      | determinar si es o no un botón circle    | boolean | —                                        | false       |
 | loading     | determinar si es o no un botón de descarga | boolean | —                                        | false       |
 | disabled    | deshabilitar el botón                    | boolean | —                                        | false       |
 | icon        | nombre de la clase del icono             | string  | —                                        | —           |

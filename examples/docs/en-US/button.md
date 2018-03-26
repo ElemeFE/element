@@ -179,6 +179,7 @@ Besides default size, Button component provides three additional sizes for you t
 | type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | determine whether it's a plain button   | boolean    | — | false   |
 | round     | determine whether it's a round button   | boolean    | — | false   |
+| circle     | determine whether it's a circle button   | boolean    | — | false   |
 | loading   | determine whether it's loading   | boolean    | — | false   |
 | disabled  | disable the button    | boolean   | —   | false   |
 | icon  | icon class name | string   |  —  |  —  |

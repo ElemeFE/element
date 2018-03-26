@@ -49,7 +49,7 @@
 </div>
 
 <div style="margin: 20px 0">
-  <el-button round>圆形按钮</el-button>
+  <el-button round>圆角按钮</el-button>
   <el-button type="primary" round>主要按钮</el-button>
   <el-button type="success" round>成功按钮</el-button>
   <el-button type="info" round>信息按钮</el-button>
@@ -179,7 +179,8 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | size     | 尺寸   | string  |   medium / small / mini            |    —     |
 | type     | 类型   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | 是否朴素按钮   | boolean    | — | false   |
-| round     | 是否圆形按钮   | boolean    | — | false   |
+| round     | 是否圆角按钮   | boolean    | — | false   |
+| circle     | 是否圆形按钮   | boolean    | — | false   |
 | loading     | 是否加载中状态   | boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |
 | icon  | 图标类名 | string   |  —  |  —  |
