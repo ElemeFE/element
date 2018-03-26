@@ -5,8 +5,8 @@
     :readonly="!editable || readonly"
     :disabled="pickerDisabled"
     :size="pickerSize"
-    :id="id"
     :name="name"
+    v-bind="firstInputId"
     v-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
@@ -51,7 +51,7 @@
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
       :disabled="pickerDisabled"
-      :id="id && id[0]"
+      v-bind="firstInputId"
       :readonly="!editable || readonly"
       :name="name && name[0]"
       @input="handleStartInput"
@@ -63,7 +63,7 @@
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
       :disabled="pickerDisabled"
-      :id="id && id[1]"
+      v-bind="secondInputId"
       :readonly="!editable || readonly"
       :name="name && name[1]"
       @input="handleEndInput"
@@ -492,6 +492,28 @@ export default {
 
     pickerDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
+    },
+
+    firstInputId() {
+      const obj = {};
+      let id;
+      if (this.ranged) {
+        id = this.id && this.id[0];
+      } else {
+        id = this.id;
+      }
+      if (id) obj.id = id;
+      return obj;
+    },
+
+    secondInputId() {
+      const obj = {};
+      let id;
+      if (this.ranged) {
+        id = this.id && this.id[1];
+      }
+      if (id) obj.id = id;
+      return obj;
     }
   },
 
