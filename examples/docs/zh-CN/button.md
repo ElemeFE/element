@@ -80,8 +80,8 @@
   <el-button type="primary" disabled>主要按钮</el-button>
   <el-button type="success" disabled>成功按钮</el-button>
   <el-button type="info" disabled>信息按钮</el-button>
-  <el-button type="warning" icon="el-icon-search" disabled>警告按钮</el-button>
-  <el-button type="danger" icon="el-icon-delete" disabled>危险按钮</el-button>
+  <el-button type="warning" disabled>警告按钮</el-button>
+  <el-button type="danger" disabled>危险按钮</el-button>
 </div>
 
 <div style="margin-top: 20px">
