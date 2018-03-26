@@ -668,6 +668,7 @@ Búsqueda de datos desde el servidor.
 | Metodo | Descripción                   | Parametros |
 | ------ | ----------------------------- | ---------- |
 | focus  | coloca el foco en el elemento | —          |
+| blur   | blur the input element        | —          |
 | select | select the text in input element | —       |
 
 ### Autocomplete Atributos

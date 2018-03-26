@@ -81,6 +81,11 @@ export declare class ElInput extends ElementUIComponent {
   focus (): void
 
   /**
+   * Blur the Input component
+   */
+  blur (): void
+
+  /**
    * Select the text in input element
    */
   select (): void

@@ -689,6 +689,7 @@ Search data from server-side.
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the input element | — |
+| blur | blur the input element | — |
 | select | select the text in input element | — |
 
 ### Autocomplete Attributes
