@@ -59,7 +59,7 @@ describe('Button', () => {
   });
   it('round', () => {
     vm = createTest(Button, {
-      circle: true
+      round: true
     }, true);
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-round')).to.be.true;
