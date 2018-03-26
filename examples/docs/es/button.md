@@ -86,7 +86,7 @@ El atributo `disabled` determina su un botón esta deshabilitado.
   <el-button type="danger" disabled>Danger</el-button>
 </div>
 
-<div style="margin-top: 20px">
+<div>
   <el-button plain disabled>Plain</el-button>
   <el-button type="primary" plain disabled>Primary</el-button>
   <el-button type="success" plain disabled>Success</el-button>
