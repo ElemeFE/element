@@ -211,6 +211,9 @@
       focus() {
         (this.$refs.input || this.$refs.textarea).focus();
       },
+      blur() {
+        (this.$refs.input || this.$refs.textarea).blur();
+      },
       getMigratingConfig() {
         return {
           props: {

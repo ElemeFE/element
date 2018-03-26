@@ -842,6 +842,7 @@ export default {
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | focus | 使 input 获取焦点 | — |
+| blur | 使 input 失去焦点 | — |
 | select | 选中 input 中的文字 | — |
 
 ### Autocomplete Attributes
