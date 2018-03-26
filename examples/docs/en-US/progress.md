@@ -59,6 +59,6 @@ In this case the percentage takes no additional space.
 | stroke-width | the width of progress bar | number | — | 6 |
 | text-inside | whether to place the percentage inside progress bar, only works when `type` is 'line' | boolean | — | false |
 | status | the current status of progress bar | string | success/exception | — |
-| color  | the color of progress bar, can override the color of the current status | string | — | — |
+| color  | background color of progress bar. Overrides `status` prop | string | — | — |
 | width | the canvas width of circle progress bar | number | — | 126 |
 | show-text | whether to show percentage | boolean | — | true |
