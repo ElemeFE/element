@@ -26,7 +26,7 @@ Botones comúnmente usados.
 
 ### Uso básico
 
-:::demo Use `type`, `plain` y `round` para definir estilos a los botones.
+:::demo Use `type`, `plain`,`round` y `circle` para definir estilos a los botones.
 
 ```html
 <div>
@@ -47,13 +47,22 @@ Botones comúnmente usados.
   <el-button type="danger" plain>Danger</el-button>
 </div>
 
-<div>
+<div style="margin: 20px 0">
   <el-button round>Round</el-button>
   <el-button type="primary" round>Primary</el-button>
   <el-button type="success" round>Success</el-button>
   <el-button type="info" round>Info</el-button>
   <el-button type="warning" round>Warning</el-button>
   <el-button type="danger" round>Danger</el-button>
+</div>
+
+<div>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button type="success" icon="el-icon-check" circle></el-button>
+  <el-button type="info" icon="el-icon-message" circle></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle></el-button>
 </div>
 ```
 :::
