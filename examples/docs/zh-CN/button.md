@@ -3,6 +3,9 @@
     .el-row {
       margin-bottom: 10px;
     }
+    .el-button {
+      margin-bottom: 20px;
+    }
     .el-button + .el-button {
       margin-left: 10px;
     }
@@ -27,7 +30,7 @@
 
 基础的按钮用法。
 
-:::demo 使用`type`、`plain`和`round`属性来定义 Button 的样式。
+:::demo 使用`type`、`plain`、`round`和`circle`属性来定义 Button 的样式。
 
 ```html
 <div>
@@ -39,7 +42,7 @@
   <el-button type="danger">危险按钮</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button plain>朴素按钮</el-button>
   <el-button type="primary" plain>主要按钮</el-button>
   <el-button type="success" plain>成功按钮</el-button>
@@ -49,12 +52,21 @@
 </div>
 
 <div>
-  <el-button round>圆形按钮</el-button>
+  <el-button round>圆角按钮</el-button>
   <el-button type="primary" round>主要按钮</el-button>
   <el-button type="success" round>成功按钮</el-button>
   <el-button type="info" round>信息按钮</el-button>
   <el-button type="warning" round>警告按钮</el-button>
   <el-button type="danger" round>危险按钮</el-button>
+</div>
+
+<div>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button type="success" icon="el-icon-check" circle></el-button>
+  <el-button type="info" icon="el-icon-message" circle></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle></el-button>
 </div>
 ```
 :::
@@ -75,7 +87,7 @@
   <el-button type="danger" disabled>危险按钮</el-button>
 </div>
 
-<div style="margin-top: 20px">
+<div>
   <el-button plain disabled>朴素按钮</el-button>
   <el-button type="primary" plain disabled>主要按钮</el-button>
   <el-button type="success" plain disabled>成功按钮</el-button>
@@ -155,7 +167,7 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
   <el-button size="small">小型按钮</el-button>
   <el-button size="mini">超小按钮</el-button>
 </div>
-<div style="margin-top: 20px">
+<div>
   <el-button round>默认按钮</el-button>
   <el-button size="medium" round>中等按钮</el-button>
   <el-button size="small" round>小型按钮</el-button>
@@ -170,7 +182,8 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | size     | 尺寸   | string  |   medium / small / mini            |    —     |
 | type     | 类型   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | 是否朴素按钮   | boolean    | — | false   |
-| round     | 是否圆形按钮   | boolean    | — | false   |
+| round     | 是否圆角按钮   | boolean    | — | false   |
+| circle     | 是否圆形按钮   | boolean    | — | false   |
 | loading     | 是否加载中状态   | boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |
 | icon  | 图标类名 | string   |  —  |  —  |
