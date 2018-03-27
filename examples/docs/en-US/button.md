@@ -1,17 +1,16 @@
 <style>
   .demo-box.demo-button {
     .el-row {
-      margin-bottom: 10px;
-    }
-    .el-button {
       margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
     .el-button + .el-button {
       margin-left: 10px;
     }
     .el-button-group {
-      margin-bottom: 20px;
-
       .el-button + .el-button {
         margin-left: 0;
       }
@@ -32,41 +31,41 @@ Commonly used button.
 :::demo Use `type`, `plain`, `round` and `circle` to define Button's style.
 
 ```html
-<div>
+<el-row>
   <el-button>Default</el-button>
   <el-button type="primary">Primary</el-button>
   <el-button type="success">Success</el-button>
   <el-button type="info">Info</el-button>
   <el-button type="warning">Warning</el-button>
   <el-button type="danger">Danger</el-button>
-</div>
+</el-row>
 
-<div>
+<el-row>
   <el-button plain>Plain</el-button>
   <el-button type="primary" plain>Primary</el-button>
   <el-button type="success" plain>Success</el-button>
   <el-button type="info" plain>Info</el-button>
   <el-button type="warning" plain>Warning</el-button>
   <el-button type="danger" plain>Danger</el-button>
-</div>
+</el-row>
 
-<div>
+<el-row>
   <el-button round>Round</el-button>
   <el-button type="primary" round>Primary</el-button>
   <el-button type="success" round>Success</el-button>
   <el-button type="info" round>Info</el-button>
   <el-button type="warning" round>Warning</el-button>
   <el-button type="danger" round>Danger</el-button>
-</div>
+</el-row>
 
-<div>
+<el-row>
   <el-button icon="el-icon-search" circle></el-button>
   <el-button type="primary" icon="el-icon-edit" circle></el-button>
   <el-button type="success" icon="el-icon-check" circle></el-button>
   <el-button type="info" icon="el-icon-message" circle></el-button>
   <el-button type="warning" icon="el-icon-star-off" circle></el-button>
   <el-button type="danger" icon="el-icon-delete" circle></el-button>
-</div>
+</el-row>
 ```
 :::
 
@@ -77,23 +76,23 @@ The `disabled` attribute determines if the button is disabled.
 :::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
 
 ```html
-<div>
+<el-row>
   <el-button disabled>Default</el-button>
   <el-button type="primary" disabled>Primary</el-button>
   <el-button type="success" disabled>Success</el-button>
   <el-button type="info" disabled>Info</el-button>
   <el-button type="warning" disabled>Warning</el-button>
   <el-button type="danger" disabled>Danger</el-button>
-</div>
+</el-row>
 
-<div>
+<el-row>
   <el-button plain disabled>Plain</el-button>
   <el-button type="primary" plain disabled>Primary</el-button>
   <el-button type="success" plain disabled>Success</el-button>
   <el-button type="info" plain disabled>Info</el-button>
   <el-button type="warning" plain disabled>Warning</el-button>
   <el-button type="danger" plain disabled>Danger</el-button>
-</div>
+</el-row>
 ```
 :::
 
@@ -160,18 +159,18 @@ Besides default size, Button component provides three additional sizes for you t
 :::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
-<div>
+<el-row>
   <el-button>Default</el-button>
   <el-button size="medium">Medium</el-button>
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
-</div>
-<div>
+</el-row>
+<el-row>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
   <el-button size="mini" round>Mini</el-button>
-</div>
+</el-row>
 ```
 :::
 
