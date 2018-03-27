@@ -26,11 +26,11 @@ export default {
       return;
     }
 
-    const unwatchContext = context.$watch(expression, (val) => {
+    const unwatchContext = context.$watch(expression, function(val) {
       component[prop] = val;
     });
 
-    const unwatchComponent = component.$watch(prop, (val) => {
+    const unwatchComponent = component.$watch(prop, function(val) {
       context[expression] = val;
     });
 

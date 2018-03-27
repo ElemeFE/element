@@ -74,7 +74,7 @@ const scrollListener = function(event) {
     if (checkTriggers(this)) {
       this.__resizeLast__.width = this.offsetWidth;
       this.__resizeLast__.height = this.offsetHeight;
-      this.__resizeListeners__.forEach((fn) => {
+      this.__resizeListeners__.forEach(function(fn) {
         fn.call(this, event);
       });
     }

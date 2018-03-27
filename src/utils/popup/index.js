@@ -7,10 +7,10 @@ import { getStyle } from '../dom';
 let idSeed = 1;
 const transitions = [];
 
-const hookTransition = (transition) => {
+const hookTransition = function(transition) {
   if (transitions.indexOf(transition) !== -1) return;
 
-  const getVueInstance = (element) => {
+  const getVueInstance = function(element) {
     let instance = element.__vue__;
     if (!instance) {
       const textNode = element.previousSibling;
