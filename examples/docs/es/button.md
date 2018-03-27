@@ -3,6 +3,9 @@
     .el-row {
       margin-bottom: 10px;
     }
+    .el-button {
+      margin-bottom: 20px;
+    }
     .el-button + .el-button {
       margin-left: 10px;
     }
@@ -26,7 +29,7 @@ Botones comúnmente usados.
 
 ### Uso básico
 
-:::demo Use `type`, `plain` y `round` para definir estilos a los botones.
+:::demo Use `type`, `plain`,`round` y `circle` para definir estilos a los botones.
 
 ```html
 <div>
@@ -38,7 +41,7 @@ Botones comúnmente usados.
   <el-button type="danger">Danger</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button plain>Plain</el-button>
   <el-button type="primary" plain>Primary</el-button>
   <el-button type="success" plain>Success</el-button>
@@ -54,6 +57,15 @@ Botones comúnmente usados.
   <el-button type="info" round>Info</el-button>
   <el-button type="warning" round>Warning</el-button>
   <el-button type="danger" round>Danger</el-button>
+</div>
+
+<div>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button type="success" icon="el-icon-check" circle></el-button>
+  <el-button type="info" icon="el-icon-message" circle></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle></el-button>
 </div>
 ```
 :::
@@ -74,7 +86,7 @@ El atributo `disabled` determina su un botón esta deshabilitado.
   <el-button type="danger" disabled>Danger</el-button>
 </div>
 
-<div style="margin-top: 20px">
+<div>
   <el-button plain disabled>Plain</el-button>
   <el-button type="primary" plain disabled>Primary</el-button>
   <el-button type="success" plain disabled>Success</el-button>
@@ -154,7 +166,7 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
 </div>
-<div style="margin-top: 20px">
+<div>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
@@ -170,6 +182,7 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
 | type        | tipo de botón                            | string  | primary / success / warning / danger / info / text | —           |
 | plain       | determinar si es o no un botón plano     | boolean | —                                        | false       |
 | round       | determinar si es o no un botón redondo   | boolean | —                                        | false       |
+| circle      | determinar si es o no un botón circle    | boolean | —                                        | false       |
 | loading     | determinar si es o no un botón de descarga | boolean | —                                        | false       |
 | disabled    | deshabilitar el botón                    | boolean | —                                        | false       |
 | icon        | nombre de la clase del icono             | string  | —                                        | —           |

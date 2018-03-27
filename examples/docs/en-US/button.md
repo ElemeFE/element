@@ -3,6 +3,9 @@
     .el-row {
       margin-bottom: 10px;
     }
+    .el-button {
+      margin-bottom: 20px;
+    }
     .el-button + .el-button {
       margin-left: 10px;
     }
@@ -26,7 +29,7 @@ Commonly used button.
 
 ### Basic usage
 
-:::demo Use `type`, `plain` and `round` to define Button's style.
+:::demo Use `type`, `plain`, `round` and `circle` to define Button's style.
 
 ```html
 <div>
@@ -38,7 +41,7 @@ Commonly used button.
   <el-button type="danger">Danger</el-button>
 </div>
 
-<div style="margin: 20px 0">
+<div>
   <el-button plain>Plain</el-button>
   <el-button type="primary" plain>Primary</el-button>
   <el-button type="success" plain>Success</el-button>
@@ -54,6 +57,15 @@ Commonly used button.
   <el-button type="info" round>Info</el-button>
   <el-button type="warning" round>Warning</el-button>
   <el-button type="danger" round>Danger</el-button>
+</div>
+
+<div>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button type="success" icon="el-icon-check" circle></el-button>
+  <el-button type="info" icon="el-icon-message" circle></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle></el-button>
 </div>
 ```
 :::
@@ -74,7 +86,7 @@ The `disabled` attribute determines if the button is disabled.
   <el-button type="danger" disabled>Danger</el-button>
 </div>
 
-<div style="margin-top: 20px">
+<div>
   <el-button plain disabled>Plain</el-button>
   <el-button type="primary" plain disabled>Primary</el-button>
   <el-button type="success" plain disabled>Success</el-button>
@@ -154,7 +166,7 @@ Besides default size, Button component provides three additional sizes for you t
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
 </div>
-<div style="margin-top: 20px">
+<div>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
@@ -170,6 +182,7 @@ Besides default size, Button component provides three additional sizes for you t
 | type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | determine whether it's a plain button   | boolean    | — | false   |
 | round     | determine whether it's a round button   | boolean    | — | false   |
+| circle     | determine whether it's a circle button   | boolean    | — | false   |
 | loading   | determine whether it's loading   | boolean    | — | false   |
 | disabled  | disable the button    | boolean   | —   | false   |
 | icon  | icon class name | string   |  —  |  —  |
