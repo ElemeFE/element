@@ -23,7 +23,7 @@
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
         class="el-input__inner"
-        v-bind="$props"
+        v-bind="$attrs"
         :disabled="inputDisabled"
         :autocomplete="autoComplete"
         :value="currentValue"
@@ -77,7 +77,7 @@
       :value="currentValue"
       @input="handleInput"
       ref="textarea"
-      v-bind="$props"
+      v-bind="$attrs"
       :disabled="inputDisabled"
       :style="textareaStyle"
       @focus="handleFocus"
@@ -123,16 +123,9 @@
 
     props: {
       value: [String, Number],
-      placeholder: String,
       size: String,
       resize: String,
-      name: String,
       form: String,
-      id: String,
-      maxlength: Number,
-      minlength: Number,
-      readonly: Boolean,
-      autofocus: Boolean,
       disabled: Boolean,
       type: {
         type: String,
@@ -142,17 +135,10 @@
         type: [Boolean, Object],
         default: false
       },
-      rows: {
-        type: Number,
-        default: 2
-      },
       autoComplete: {
         type: String,
         default: 'off'
       },
-      max: {},
-      min: {},
-      step: {},
       validateEvent: {
         type: Boolean,
         default: true
