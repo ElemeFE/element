@@ -1,6 +1,10 @@
 <template>
   <transition name="el-zoom-in-top">
-    <div class="el-table-filter" v-if="multiple" v-show="showPopper">
+    <div
+      class="el-table-filter"
+      v-if="multiple"
+      v-clickoutside="handleOutsideClick"
+      v-show="showPopper">
       <div class="el-table-filter__content">
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
           <el-checkbox
@@ -16,7 +20,11 @@
         <button @click="handleReset">{{ t('el.table.resetFilter') }}</button>
       </div>
     </div>
-    <div class="el-table-filter" v-else v-show="showPopper">
+    <div
+      class="el-table-filter"
+      v-else
+      v-clickoutside="handleOutsideClick"
+      v-show="showPopper">
       <ul class="el-table-filter__list">
         <li class="el-table-filter__list-item"
             :class="{ 'is-active': filterValue === undefined || filterValue === null }"
@@ -79,7 +87,9 @@
       },
 
       handleOutsideClick() {
-        this.showPopper = false;
+        setTimeout(() => {
+          this.showPopper = false;
+        }, 16);
       },
 
       handleConfirm() {
