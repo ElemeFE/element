@@ -50,7 +50,7 @@ describe('Card', () => {
 
   it('shadow', () => {
     vm = createTest(Card, {
-      shadow: 'none'
+      shadow: 'never'
     });
     expect(vm.$el.classList.contains('is-shadow')).to.be.false;
     expect(vm.$el.classList.contains('is-hover-shadow')).to.be.false;
