@@ -70,11 +70,11 @@ const checkTriggers = function(element) {
 const scrollListener = function(event) {
   resetTrigger(this);
   if (this.__resizeRAF__) cancelFrame(this.__resizeRAF__);
-  this.__resizeRAF__ = requestFrame(() => {
+  this.__resizeRAF__ = requestFrame(function() {
     if (checkTriggers(this)) {
       this.__resizeLast__.width = this.offsetWidth;
       this.__resizeLast__.height = this.offsetHeight;
-      this.__resizeListeners__.forEach((fn) => {
+      this.__resizeListeners__.forEach(function(fn) {
         fn.call(this, event);
       });
     }

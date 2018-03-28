@@ -7,10 +7,10 @@ import { getStyle } from '../dom';
 let idSeed = 1;
 const transitions = [];
 
-const hookTransition = (transition) => {
+const hookTransition = function(transition) {
   if (transitions.indexOf(transition) !== -1) return;
 
-  const getVueInstance = (element) => {
+  const getVueInstance = function(element) {
     let instance = element.__vue__;
     if (!instance) {
       const textNode = element.previousSibling;
@@ -126,7 +126,7 @@ export default {
         if (this._opening) return;
         if (!this.rendered) {
           this.rendered = true;
-          Vue.nextTick(() => {
+          Vue.nextTick(function() {
             this.open();
           });
         } else {
@@ -154,7 +154,7 @@ export default {
 
       const openDelay = Number(props.openDelay);
       if (openDelay > 0) {
-        this._openTimer = setTimeout(() => {
+        this._openTimer = setTimeout(function() {
           this._openTimer = null;
           this.doOpen(props);
         }, openDelay);
@@ -230,7 +230,7 @@ export default {
       const closeDelay = Number(this.closeDelay);
 
       if (closeDelay > 0) {
-        this._closeTimer = setTimeout(() => {
+        this._closeTimer = setTimeout(function() {
           this._closeTimer = null;
           this.doClose();
         }, closeDelay);
@@ -245,7 +245,7 @@ export default {
       this.onClose && this.onClose();
 
       if (this.lockScroll) {
-        setTimeout(() => {
+        setTimeout(function() {
           if (this.modal && this.bodyOverflow !== 'hidden') {
             document.body.style.overflow = this.bodyOverflow;
             document.body.style.paddingRight = this.bodyPaddingRight;
