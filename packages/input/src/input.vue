@@ -101,6 +101,8 @@
 
     mixins: [emitter, Migrating],
 
+    inheritAttrs: false,
+
     inject: {
       elForm: {
         default: ''
