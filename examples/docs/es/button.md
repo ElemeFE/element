@@ -175,15 +175,15 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
 :::
 
 ### Atributos
-| Atributo    | Descripción                              | Tipo    | Valores aceptados                        | Por defecto |
-| ----------- | ---------------------------------------- | ------- | ---------------------------------------- | ----------- |
-| size        | tamaño del botón                         | string  | medium / small / mini                    | —           |
-| type        | tipo de botón                            | string  | primary / success / warning / danger / info / text | —           |
-| plain       | determinar si es o no un botón plano     | boolean | —                                        | false       |
-| round       | determinar si es o no un botón redondo   | boolean | —                                        | false       |
-| circle      | determine whether it's a circle button   | boolean | —                                        | false       |
-| loading     | determinar si es o no un botón de descarga | boolean | —                                      | false       |
-| disabled    | deshabilitar el botón                    | boolean | —                                        | false       |
-| icon        | nombre de la clase del icono             | string  | —                                        | —           |
-| autofocus   | misma funcionalidad que la nativa `autofocus` | boolean | —                                   | false       |
-| native-type | misma funcionalidad que la nativa `type` | string  | button / submit / reset                  | button      |
+| Atributo    | Descripción                                   | Tipo    | Valores aceptados                                  | Por defecto |
+| ----------- | --------------------------------------------- | ------- | -------------------------------------------------- | ----------- |
+| size        | tamaño del botón                              | string  | medium / small / mini                              | —           |
+| type        | tipo de botón                                 | string  | primary / success / warning / danger / info / text | —           |
+| plain       | determinar si es o no un botón plano          | boolean | —                                                  | false       |
+| round       | determinar si es o no un botón redondo        | boolean | —                                                  | false       |
+| circle      | determina si es un boton circular             | boolean | —                                                  | false       |
+| loading     | determinar si es o no un botón de descarga    | boolean | —                                                  | false       |
+| disabled    | deshabilitar el botón                         | boolean | —                                                  | false       |
+| icon        | nombre de la clase del icono                  | string  | —                                                  | —           |
+| autofocus   | misma funcionalidad que la nativa `autofocus` | boolean | —                                                  | false       |
+| native-type | misma funcionalidad que la nativa `type`      | string  | button / submit / reset                            | button      |

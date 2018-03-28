@@ -150,7 +150,7 @@
       }]
     }]
   }];
-  
+
   const data6 = [{
     label: 'Level one 1',
     children: [{
@@ -1175,16 +1175,16 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
-| draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
-| allow-drag            | this function will be executed before dragging a node. if return `false`, the node can not be drag.  | Function(node)  | —  | —  |
-| allow-drop            | this function will be executed when dragging enter a node. if return `false`, dragging node can not be drop at the node. | Function(draggingNode, dropNode)  | —    | —     |
+| draggable             | si se habilita la función de drag and drop en los nodos | boolean            | —    | false |
+| allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
+| allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. | Function(Nodoquesearrastra, Nododestino) | —    | —     |
 
 ### props
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ----------------------------- | ----------------- | ----------- |
 | label    | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node)  | —                 | —           |
 | children | Especifica que objeto del nodo se utiliza como subárbol | string | —                 | —           |
-| isLeaf   | Especifica si el nodo es una hoja, only works when lazy load is enabled        | boolean, function(data, node) | —                 | —           |
+| isLeaf   | Especifica si el nodo es una hoja, sólo funciona cuando lazy load está activado | boolean, function(datos, nodo) | —                 | —           |
 
 ### Métodos
 `Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
@@ -1219,12 +1219,12 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
-| node-drag-start | triggers when dragging starts  | two parameters: node object corresponding to the dragging node, event. |
-| node-drag-enter | triggers when the dragging node enters another node  | three parameters: node object corresponding to the dragging node, node object corresponding to the entering node, event. |
-| node-drag-leave | triggers when the dragging node leaves a node  | three parameters: node object corresponding to the dragging node, node object corresponding to the leaving node, event.  |
-| node-drag-over | triggers when dragging over a node (like mouseover event) | three parameters: node object corresponding to the dragging node, node object corresponding to the dragging over node, event.  |
-| node-drag-end  | triggers when dragging ends  | four parameters: node object corresponding to the dragging node, node object corresponding to the dragging end node (may be `undefined`), node drop type (before / after / inner), event. |
-| node-drop  | triggers after the dragging node is dropped | four parameters: node object corresponding to the dragging node, node object corresponding to the dropped node, node drop type (before / after / inner), event. |
+| node-drag-start | se activa cuando se inicia el arrastre | dos parametros: el objeto del nodo que se arrastrara, evento. |
+| node-drag-enter | se desencadena cuando el nodo de arrastre entra en otro nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo en el que entra, evento. |
+| node-drag-leave | se desencadena cuando el nodo de arrastre sale de un nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo del cual se sale, evento. |
+| node-drag-over | se activa cuando se arrastra sobre un nodo (como el evento mouseover) | tres parametros: objeto del nodo que se arrastra, objeto del nodo sobre el que esta el arrastre, evento. |
+| node-drag-end  | se activa cuando se termina de arrastrar | cuatro parametros: objeto del nodo que se arrastra, objeto del nodo que corresponde al final del arrastre (puede ser `undefined` ), tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
+| node-drop  | después de soltar el nodo de arrastre | cuatro parametros: objeto del nodo que se esta arrastrando, objeto del nodo sobre el que se esta soltando, tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
 
 ### Scoped slot
 | name | Description |

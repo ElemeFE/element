@@ -172,7 +172,7 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 | show-alpha   | especifica si se muestra el control deslizante para el valor alpha | boolean | —                     | false                                    |
 | color-format | formato de color del `v-model`           | string  | hsl / hsv / hex / rgb | hex (si show-alpha es false)/ rgb (si show-alpha es true) |
 | popper-class | nombre de clase para el dropdown del ColorPicker | string  | —                     | —                                        |
-| predefine    | predefined color options | array | — | — |
+| predefine    | opciones de colores predefinidas | array | — | — |
 
 ### Eventos
 | Nombre de Evento | Descripción                              | Parametros             |
