@@ -240,23 +240,26 @@
       handleDragStart(node, ev) {
         console.log('drag start', node);
       },
-      handleDragEnter(node, ev) {
-        console.log('tree drag enter: ', node.label);
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
       },
-      handleDragLeave(node, ev) {
-        console.log('tree drag leave: ', node.label);
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
       },
-      handleDragEnd(from, target, position, ev) {
-        console.log('tree drag end: ', target.label);
-        if (position !== null) {
-          console.log(`target position: parent node: ${position.parent.label}, index: ${position.index}`);
-        }
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
       },
-      allowDrop(from, target) {
-        return target.data.label !== '二级 3-1';
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
       },
-      allowDrag(node) {
-        return node.data.label.indexOf('三级 3-1-1') === -1;
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode) {
+        return dropNode.data.label !== '二级 3-1';
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('三级 3-1-1') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -1153,7 +1156,7 @@
         console.log('tree drag over: ', dropNode.label);
       },
       handleDragEnd(draggingNode, dropNode, dropType, ev) {
-        console.log('tree drag end: ', dropNode.label, dropType);
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
       },
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
@@ -1237,14 +1240,14 @@
 | check-change   | 节点选中状态发生变化时的回调 | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点本身是否被选中、节点的子树中是否有被选中的节点 |
 | check          | 当复选框被点击的时候触发 | 共两个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、树目前的选中状态对象，包含 checkedNodes、checkedKeys、halfCheckedNodes、halfCheckedKeys 四个属性 |
 | current-change | 当前选中节点变化时触发的事件 | 共两个参数，依次为：当前节点的数据，当前节点的 Node 对象          |
-| node-expand    | 节点被展开时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
-| node-collapse  | 节点被关闭时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
-| node-drag-start | 节点开始拖拽时触发的事件  | 共两个参数，依次为：被拖拽节点对应的 Node、event。 |
-| node-drag-enter | 拖拽进入其他节点时触发的事件  | 共三个参数，依次为：被拖拽节点对应的 Node、所进入节点对应的 Node、event。|
-| node-drag-leave | 拖拽离开某个节点时触发的事件  | 共三个参数，依次为：被拖拽节点对应的 Node、所离开节点对应的 Node、event。 |
-| node-drag-over | 在拖拽节点时触发的事件（类似浏览器的 mouseover 事件） | 共三个参数，依次为：被拖拽节点对应的 Node、当前进入节点对应的 Node、event。 |
-| node-drag-end  | 拖拽结束时（可能未成功）触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点（可能为空）、被拖拽节点的放置位置（before、after、inner）、event。|
-| node-drop  | 拖拽成功完成时触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点、被拖拽节点的放置位置（before、after、inner）、event。|
+| node-expand    | 节点被展开时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身 |
+| node-collapse  | 节点被关闭时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身 |
+| node-drag-start | 节点开始拖拽时触发的事件  | 共两个参数，依次为：被拖拽节点对应的 Node、event |
+| node-drag-enter | 拖拽进入其他节点时触发的事件  | 共三个参数，依次为：被拖拽节点对应的 Node、所进入节点对应的 Node、event |
+| node-drag-leave | 拖拽离开某个节点时触发的事件  | 共三个参数，依次为：被拖拽节点对应的 Node、所离开节点对应的 Node、event |
+| node-drag-over | 在拖拽节点时触发的事件（类似浏览器的 mouseover 事件） | 共三个参数，依次为：被拖拽节点对应的 Node、当前进入节点对应的 Node、event |
+| node-drag-end  | 拖拽结束时（可能未成功）触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点（可能为空）、被拖拽节点的放置位置（before、after、inner）、event |
+| node-drop  | 拖拽成功完成时触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点、被拖拽节点的放置位置（before、after、inner）、event |
 
 ### Scoped slot
 | name | 说明 |
