@@ -24,6 +24,7 @@
         v-if="type !== 'textarea'"
         class="el-input__inner"
         v-bind="$attrs"
+        :type="type"
         :disabled="inputDisabled"
         :autocomplete="autoComplete"
         :value="currentValue"
