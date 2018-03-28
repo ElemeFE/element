@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -46,7 +46,8 @@ describe('Select', () => {
             :filterMethod="filterMethod"
             :remote="remote"
             :loading="loading"
-            :remoteMethod="remoteMethod">
+            :remoteMethod="remoteMethod"
+            :automatic-dropdown="automaticDropdown">
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -68,6 +69,7 @@ describe('Select', () => {
           collapseTags: configs.collapseTags,
           allowCreate: configs.allowCreate,
           popperClass: configs.popperClass,
+          automaticDropdown: configs.automaticDropdown,
           loading: false,
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
@@ -702,51 +704,25 @@ describe('Select', () => {
   });
 
   it('should not open popper when automatic-dropdown not set', done => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-select v-model="value" ref="select">
-            <el-option label="1" :value="1" />
-          </el-select>
-        </div>
-      `,
-      data() {
-        return {
-          value: ''
-        };
-      }
-    }, true);
+    vm = getSelectVm();
 
-    vm.$refs.select.$refs.reference.$el.focus();
+    vm.$refs.select.$refs.reference.$refs.input.focus();
 
     setTimeout(() => {
-      expect(vm.visible).to.be.false;
+      expect(vm.$refs.select.visible).to.be.false;
       done();
-    }, 310);
+    }, 610);
   });
 
   it('should open popper when automatic-dropdown is set', done => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-select v-model="value" ref="select" :automatic-dropdown="true">
-            <el-option label="1" :value="1" />
-          </el-select>
-        </div>
-      `,
-      data() {
-        return {
-          value: ''
-        };
-      }
-    }, true);
+    vm = getSelectVm({ automaticDropdown: true });
 
-    vm.$refs.select.$refs.reference.$el.focus();
+    vm.$refs.select.$refs.reference.$refs.input.focus();
 
     setTimeout(() => {
-      expect(vm.visible).to.be.true;
+      expect(vm.$refs.select.visible).to.be.true;
       done();
-    }, 310);
+    }, 610);
   });
 
   it('focus', done => {
