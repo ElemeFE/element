@@ -150,6 +150,42 @@
       }]
     }]
   }];
+  
+  const data6 = [{
+    label: 'Level one 1',
+    children: [{
+      label: 'Level two 1-1',
+      children: [{
+        label: 'Level three 1-1-1'
+      }]
+    }]
+  }, {
+    label: 'Level one 2',
+    children: [{
+      label: 'Level two 2-1',
+      children: [{
+        label: 'Level three 2-1-1'
+      }]
+    }, {
+      label: 'Level two 2-2',
+      children: [{
+        label: 'Level three 2-2-1'
+      }]
+    }]
+  }, {
+    label: 'Level one 3',
+    children: [{
+      label: 'Level two 3-1',
+      children: [{
+        label: 'Level three 3-1-1'
+      }]
+    }, {
+      label: 'Level two 3-2',
+      children: [{
+        label: 'Level three 3-2-1'
+      }]
+    }]
+  }];
 
   let id = 1000;
 
@@ -190,6 +226,30 @@
       },
       handleNodeClick(data) {
         console.log(data);
+      },
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
+      },
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
+      },
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
+      },
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
+      },
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode) {
+        return dropNode.data.label !== 'Level two 3-1';
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -300,6 +360,7 @@
         data3,
         data4: JSON.parse(JSON.stringify(data2)),
         data5: JSON.parse(JSON.stringify(data2)),
+        data6,
         regions,
         defaultProps,
         props,
@@ -998,7 +1059,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 
 ### Draggable
 
-Tree nodes can be drag and drop.
+You can drag and drop Tree nodes by adding a `draggable` attribute.
 
 :::demo
 ```html
@@ -1076,7 +1137,7 @@ Tree nodes can be drag and drop.
         console.log('tree drag over: ', dropNode.label);
       },
       handleDragEnd(draggingNode, dropNode, dropType, ev) {
-        console.log('tree drag end: ', dropNode.label, dropType);
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
       },
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
@@ -1158,12 +1219,12 @@ Tree nodes can be drag and drop.
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
-| node-drag-start | triggers when dragging start   | two parameters: node object corresponding to the dragging node、event. |
-| node-drag-enter | triggers when dragging node enters a node  | three parameters: node object corresponding to the dragging node、node object corresponding to the dragging enter node、event. |
-| node-drag-leave | triggers when dragging node leaves a node  | three parameters: node object corresponding to the dragging node、node object corresponding to the dragging leave node、event.  |
-| node-drag-over | triggers when dragging over a node（like browser mouseover event） | three parameters: node object corresponding to the dragging node、node object corresponding to the dragging over node、event.  |
-| node-drag-end  | triggers when dragging end  | four parameters: node object corresponding to the dragging node、node object corresponding to the dragging end node、node drop type (before、after、inner)、event. |
-| node-drop  | triggers after dragging and dropping onto a node  | four parameters: node object corresponding to the dragging node、node object corresponding to the dragging end node、node drop type (before、after、inner)、event. |
+| node-drag-start | triggers when dragging starts  | two parameters: node object corresponding to the dragging node, event. |
+| node-drag-enter | triggers when the dragging node enters another node  | three parameters: node object corresponding to the dragging node, node object corresponding to the entering node, event. |
+| node-drag-leave | triggers when the dragging node leaves a node  | three parameters: node object corresponding to the dragging node, node object corresponding to the leaving node, event.  |
+| node-drag-over | triggers when dragging over a node (like mouseover event) | three parameters: node object corresponding to the dragging node, node object corresponding to the dragging over node, event.  |
+| node-drag-end  | triggers when dragging ends  | four parameters: node object corresponding to the dragging node, node object corresponding to the dragging end node (may be `undefined`), node drop type (before / after / inner), event. |
+| node-drop  | triggers after the dragging node is dropped | four parameters: node object corresponding to the dragging node, node object corresponding to the dropped node, node drop type (before / after / inner), event. |
 
 ### Scoped slot
 | name | Description |
