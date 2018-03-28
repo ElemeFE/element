@@ -90,7 +90,7 @@ const PopupManager = {
       let classArr = modalClass.trim().split(/\s+/);
       classArr.forEach(item => addClass(modalDom, item));
     }
-    setTimeout(function() {
+    setTimeout(() => {
       removeClass(modalDom, 'v-modal-enter');
     }, 200);
 
@@ -139,7 +139,7 @@ const PopupManager = {
       if (this.modalFade) {
         addClass(modalDom, 'v-modal-leave');
       }
-      setTimeout(function() {
+      setTimeout(() => {
         if (modalStack.length === 0) {
           if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
           modalDom.style.display = 'none';
