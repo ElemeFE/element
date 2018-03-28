@@ -1065,7 +1065,7 @@
 
 ### 可拖拽节点
 
-通过draggable属性可让节点变为可拖拽，节点只能放到相同level节点旁边。
+通过 draggable 属性可让节点变为可拖拽。
 
 :::demo
 ```html
@@ -1076,7 +1076,9 @@
   @node-drag-start="handleDragStart"
   @node-drag-enter="handleDragEnter"
   @node-drag-leave="handleDragLeave"
+  @node-drag-over="handleDragOver"
   @node-drag-end="handleDragEnd"
+  @node-drop="handleDrop"
   draggable
   :allow-drop="allowDrop"
   :allow-drag="allowDrag">
@@ -1141,24 +1143,28 @@
       handleDragStart(node, ev) {
         console.log('drag start', node);
       },
-      handleDragEnter(node, ev) {
-        console.log('tree drag enter: ', node.label);
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
       },
-      handleDragLeave(node, ev) {
-        console.log('tree drag leave: ', node.label);
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
       },
-      handleDragEnd(from, target, position, ev) {
-        console.log('tree drag end: ', target.label);
-        if (position !== null) {
-          console.log(`target position: parent node: ${position.parent.label}, index: ${position.index}`);
-        }
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
       },
-      allowDrop(from, target) {
-        return target.data.label !== '二级 3-1';
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode.label, dropType);
       },
-      allowDrag(node) {
-        return node.data.label.indexOf('三级 3-1-1') === -1;
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
       },
+      allowDrop(draggingNode, dropNode) {
+        return dropNode.data.label !== '二级 3-1';
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('三级 3-1-1') === -1;
+      }
+    }
   };
 </script>
 ```
@@ -1187,8 +1193,8 @@
 | indent                | 相邻级节点间的水平缩进，单位为像素                 | number                     | —    | 16 |
 | lazy                  | 是否懒加载子节点，需与 load 方法结合使用           | boolean                     | —    | false |
 | draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
-| allow-drag            | 判断节点能否被拖拽                  | Function(Node)  | —  | —  |
-| allow-drop            | 拖拽时判定位置能否被放置             | Function(fromNode, toNode)  | —    | —     |
+| allow-drag            | 判断节点能否被拖拽                  | Function(node)  | —  | —  |
+| allow-drop            | 拖拽时判定位置能否被放置             | Function(draggingNode, dropNode)  | —    | —     |
 
 ### props
 | 参数       | 说明                | 类型     | 可选值  | 默认值  |
@@ -1233,10 +1239,12 @@
 | current-change | 当前选中节点变化时触发的事件 | 共两个参数，依次为：当前节点的数据，当前节点的 Node 对象          |
 | node-expand    | 节点被展开时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
 | node-collapse  | 节点被关闭时触发的事件    | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
-| node-drag-start| 节点开始拖拽时触发的事件  | 共两个参数，依次为：被拖拽节点对应的 Node、Vue传来的drag event。   |
-| node-drag-enter| 拖拽进入其他节点时触发的事件  | 共两个参数，依次为：所进入节点对应的 Node、Vue传来的drag event。   |
-| node-drag-leave| 拖拽离开某个节点时触发的事件  | 共两个参数，依次为：所离开节点对应的 Node、Vue传来的drag event。（注意：上个节点的leave事件有可能在下个节点enter之后执行）   |
-| node-drag-end  | 拖拽结束时触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后指向的节点、被拖拽节点的放置位置{ parent: 位置的父节点, index: 在父节点中的序号 }、Vue传来的drag event。|
+| node-drag-start | 节点开始拖拽时触发的事件  | 共两个参数，依次为：被拖拽节点对应的 Node、event。 |
+| node-drag-enter | 拖拽进入其他节点时触发的事件  | 共三个参数，依次为：被拖拽节点对应的 Node、所进入节点对应的 Node、event。|
+| node-drag-leave | 拖拽离开某个节点时触发的事件  | 共三个参数，依次为：被拖拽节点对应的 Node、所离开节点对应的 Node、event。 |
+| node-drag-over | 在拖拽节点时触发的事件（类似浏览器的 mouseover 事件） | 共三个参数，依次为：被拖拽节点对应的 Node、当前进入节点对应的 Node、event。 |
+| node-drag-end  | 拖拽结束时（可能未成功）触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点（可能为空）、被拖拽节点的放置位置（before、after、inner）、event。|
+| node-drop  | 拖拽成功完成时触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点、被拖拽节点的放置位置（before、after、inner）、event。|
 
 ### Scoped slot
 | name | 说明 |

@@ -23,9 +23,10 @@
     color: mix($--color-primary, rgb(158, 68, 0), 50%);
   }
 
-  @include e(drag-indicator) {
+  @include e(drop-indicator) {
     position: absolute;
-    width: 100%;
+    left: 0;
+    right: 0;
     height: 1px;
     background-color: $--color-primary;
   }
@@ -39,6 +40,14 @@
       background-color: $--tree-node-hover-color;
     }
   }
+
+  @include when(drop-inner) {
+    > .el-tree-node__content .el-tree-node__label {
+      background-color: $--color-primary;
+      color: #fff;
+    }
+  }
+
   @include e(content) {
     display: flex;
     align-items: center;
@@ -55,14 +64,15 @@
       background-color: $--tree-node-hover-color;
     }
 
-    .el-tree.dragging & {
+    .el-tree.is-dragging & {
       cursor: move;
 
       & * {
         pointer-events: none;
       }
     }
-    .el-tree.dragging.drop-not-allow & {
+
+    .el-tree.is-dragging.is-drop-not-allow & {
       cursor: not-allowed;
     }
   }
