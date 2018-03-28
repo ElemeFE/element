@@ -32,4 +32,27 @@ describe('Card', () => {
 
     expect(vm.$el.querySelector('.el-card__body').style.padding).to.equal('10px');
   });
+
+  it('shadow', () => {
+    vm = createTest(Card, {
+      shadow: 'always'
+    });
+    expect(vm.$el.classList.contains('is-shadow')).to.be.true;
+  });
+
+  it('shadow', () => {
+    vm = createTest(Card, {
+      shadow: 'hover'
+    });
+    expect(vm.$el.classList.contains('is-shadow')).to.be.false;
+    expect(vm.$el.classList.contains('is-hover-shadow')).to.be.true;
+  });
+
+  it('shadow', () => {
+    vm = createTest(Card, {
+      shadow: 'none'
+    });
+    expect(vm.$el.classList.contains('is-shadow')).to.be.false;
+    expect(vm.$el.classList.contains('is-hover-shadow')).to.be.false;
+  });
 });
