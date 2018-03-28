@@ -336,7 +336,7 @@
         event.dataTransfer.effectAllowed = 'move';
         event.dataTransfer.setData('text/plain', treeNode.node.label);
         dragState.draggingNode = treeNode;
-        this.$emit('node-drag-start', event, treeNode.node);
+        this.$emit('node-drag-start', treeNode.node, event);
       });
 
       this.$on('tree-node-drag-over', (event, treeNode) => {
