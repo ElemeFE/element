@@ -537,6 +537,11 @@
         }
       },
 
+      blur() {
+        this.visible = false;
+        this.$refs.reference.blur();
+      },
+
       handleBlur(event) {
         this.$emit('blur', event);
       },
