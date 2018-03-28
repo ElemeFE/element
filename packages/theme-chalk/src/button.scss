@@ -368,6 +368,10 @@
       fill: $--button-info-color;
     }
   }
+  @include m(large) {
+    min-width: 322px;
+    @include button-size($--button-large-padding-vertical, $--button-large-padding-horizontal, $--button-large-font-size, $--button-large-border-radius);
+  }
   @include m(medium) {
     min-width: 226px;
     @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
