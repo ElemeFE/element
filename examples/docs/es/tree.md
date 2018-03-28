@@ -996,6 +996,103 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 ```
 :::
 
+### Draggable
+
+Tree nodes can be drag and drop.
+
+:::demo
+```html
+<el-tree
+  :data="data6"
+  node-key="id"
+  default-expand-all
+  @node-drag-start="handleDragStart"
+  @node-drag-enter="handleDragEnter"
+  @node-drag-leave="handleDragLeave"
+  @node-drag-over="handleDragOver"
+  @node-drag-end="handleDragEnd"
+  @node-drop="handleDrop"
+  draggable
+  :allow-drop="allowDrop"
+  :allow-drag="allowDrag">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data6: [{
+          label: 'Level one 1',
+          children: [{
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 2',
+          children: [{
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
+          }, {
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 3',
+          children: [{
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
+          }, {
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
+      },
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
+      },
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
+      },
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode.label, dropType);
+      },
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode) {
+        return dropNode.data.label !== 'Level two 3-1';
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Atributos
 | Atributo              | Descripción                              | Tipo                              | Valores aceptados | Por defecto |
 | --------------------- | ---------------------------------------- | --------------------------------- | ----------------- | ----------- |
@@ -1017,6 +1114,9 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
+| draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
+| allow-drag            | this function will be executed before dragging a node. if return `false`, the node can not be drag.  | Function(node)  | —  | —  |
+| allow-drop            | this function will be executed when dragging enter a node. if return `false`, dragging node can not be drop at the node. | Function(draggingNode, dropNode)  | —    | —     |
 
 ### props
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
@@ -1058,6 +1158,12 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
+| node-drag-start | triggers when dragging start   | two parameters: node object corresponding to the dragging node、event. |
+| node-drag-enter | triggers when dragging node enters a node  | three parameters: node object corresponding to the dragging node、node object corresponding to the dragging enter node、event. |
+| node-drag-leave | triggers when dragging node leaves a node  | three parameters: node object corresponding to the dragging node、node object corresponding to the dragging leave node、event.  |
+| node-drag-over | triggers when dragging over a node（like browser mouseover event） | three parameters: node object corresponding to the dragging node、node object corresponding to the dragging over node、event.  |
+| node-drag-end  | triggers when dragging end  | four parameters: node object corresponding to the dragging node、node object corresponding to the dragging end node、node drop type (before、after、inner)、event. |
+| node-drop  | triggers after dragging and dropping onto a node  | four parameters: node object corresponding to the dragging node、node object corresponding to the dragging end node、node drop type (before、after、inner)、event. |
 
 ### Scoped slot
 | name | Description |
