@@ -9,7 +9,7 @@
   color: $--color-text-primary;
   transition: 0.3s;
 
-  @include when(shadow) {
+  @include when(always-shadow) {
     box-shadow: $--box-shadow-light;
   }
 
