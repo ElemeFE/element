@@ -219,6 +219,10 @@ export default {
     },
 
     close() {
+      if (!this.opened) {
+        return ;
+      }
+
       if (this.willClose && !this.willClose()) return;
 
       if (this._openTimer !== null) {

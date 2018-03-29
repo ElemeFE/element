@@ -149,6 +149,9 @@
         if (!this.closeOnClickModal) return;
         this.handleClose();
       },
+      onClose() {
+        this.handleWrapperClick();
+      },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
           this.beforeClose(this.hide);
