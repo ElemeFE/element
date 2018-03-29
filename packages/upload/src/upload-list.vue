@@ -35,7 +35,7 @@
       </label>
       <tm-icon name="cross"
                v-if="!disabled"
-               :onClick="onRemove.bind(file)"></tm-icon>
+               @click="onRemove.bind(file)"></tm-icon>
 
       <tm-progress
         v-if="file.status === 'uploading'"

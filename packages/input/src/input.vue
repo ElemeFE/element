@@ -58,7 +58,7 @@
           <tm-icon v-else
                    name="cross"
                    class="tm-input__icon tm-input__clear"
-                   :on-click="clear">
+                   @click="clear">
           </tm-icon>
         </span>
         <tm-icon class="tm-input__validateIcon tm-input__icon"

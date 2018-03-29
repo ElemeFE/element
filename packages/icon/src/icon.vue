@@ -1,5 +1,5 @@
 <template>
-  <i :class="className" @click="onClick">
+  <i :class="className" @click="handleClick">
     <svg><use :xlink:href="iconHref"></use></svg>
   </i>
 </template>
@@ -9,11 +9,7 @@
     name: 'TmIcon',
 
     props: {
-      name: String,
-      onClick: {
-        type: Function,
-        default: () => {}
-      }
+      name: String
     },
     computed: {
       className() {
@@ -25,6 +21,11 @@
       },
       iconHref() {
         return '#' + this.name;
+      }
+    },
+    methods: {
+      handleClick(event) {
+        this.$emit('click', event);
       }
     }
   };
