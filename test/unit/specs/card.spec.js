@@ -37,14 +37,13 @@ describe('Card', () => {
     vm = createTest(Card, {
       shadow: 'always'
     });
-    expect(vm.$el.classList.contains('is-shadow')).to.be.true;
+    expect(vm.$el.classList.contains('is-always-shadow')).to.be.true;
   });
 
   it('shadow', () => {
     vm = createTest(Card, {
       shadow: 'hover'
     });
-    expect(vm.$el.classList.contains('is-shadow')).to.be.false;
     expect(vm.$el.classList.contains('is-hover-shadow')).to.be.true;
   });
 
@@ -52,7 +51,6 @@ describe('Card', () => {
     vm = createTest(Card, {
       shadow: 'never'
     });
-    expect(vm.$el.classList.contains('is-shadow')).to.be.false;
-    expect(vm.$el.classList.contains('is-hover-shadow')).to.be.false;
+    expect(vm.$el.classList.contains('is-never-shadow')).to.be.true;
   });
 });
