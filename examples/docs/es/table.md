@@ -213,7 +213,7 @@
             sums[index] = 'N/A';
           }
         });
-
+    
         return sums;
       },
       setCurrent(row) {
@@ -228,40 +228,40 @@
           this.$refs.multipleTable.clearSelection();
         }
       },
-
+    
       handleClick() {
         console.log('click');
       },
-
+    
       handleEdit(index, row) {
         console.log(index, row);
       },
-
+    
       handleDelete(index, row) {
         console.log(index, row);
       },
-
+    
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
-
+    
       handleCurrentChange(val) {
         this.currentRow = val;
       },
-
+    
       formatter(row, column) {
         return row.address;
       },
-
+    
       filterTag(value, row) {
         return row.tag === value;
       },
-
+    
       filterHandler(value, row, column) {
         const property = column['property'];
         return row[property] === value;
       },
-
+    
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -270,11 +270,11 @@
         }
         return '';
       },
-
+    
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
-
+    
       arraySpanMethod({ row, column, rowIndex, columnIndex }) {
         if (rowIndex % 2 === 0) {
           if (columnIndex === 0) {
@@ -284,7 +284,7 @@
           }
         }
       },
-
+    
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         if (columnIndex === 0) {
           if (rowIndex % 2 === 0) {
@@ -300,12 +300,12 @@
           }
         }
       },
-
+    
       indexMethod(index) {
         return index * 2;
       }
     },
-
+    
     watch: {
       multipleSelection(val) {
         console.log('selection: ', val);
@@ -1978,7 +1978,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sum-text               | texto a mostrar para la primer columna de la fila de resumen | String                                   | —                              | Sum                                      |
 | summary-method         | método personalizado para resumen        | Function({ columns, data })              | —                              | —                                        |
 | span-method            | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | —                              | —                                        |
-| select-on-indeterminate | controls the behavior of master checkbox in multi-select tables when only some rows are selected (but not all). If true, all rows will be selected, else deselected. | Boolean | — | true |
+| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas. | Boolean | — | true |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |

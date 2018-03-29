@@ -57,6 +57,6 @@ En este caso el porcentage no toma espacio adicional.
 | stroke-width | ancho de la barra de progreso            | number  | —                 | 6           |
 | text-inside  | mostrar el porcentaje dentro de la barra de progreso, solo funciona cuando `type` es 'line' | boolean | —                 | false       |
 | status       | estado actual de la barra de progreso    | string  | success/exception | —           |
-| color        | background color of progress bar. Overrides `status` prop | string     | — |       — |
+| color        | color de fondo de la barra de progreso. Sobreescribe la propiedad `status` | string     | — |       — |
 | width        | ancho del canvas que contiene la barra de progreso circula | number  | —                 | 126         |
 | show-text    | mostrar porcentaje                       | boolean | —                 | true        |
