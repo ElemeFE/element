@@ -860,9 +860,9 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | clearValidate | limpia mensaje de validación para todos los campos | -
 
 ### Form Events
-| Nombre     | Descripción | Parametros |
-|----------- |------------ |----------- |
-| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed |
+| Nombre   | Descripción                                          | Parametros                                                   |
+| -------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| validate | se dispara después de validar un item del formulario | la propiedad (`prop name`) nombre del item del form que se esta validando, si la validacion paso o no. |
 
 ### Form-Item Atributos
 
