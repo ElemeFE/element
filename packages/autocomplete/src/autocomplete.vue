@@ -38,7 +38,7 @@
     <el-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
-      popperOptions="popperOptions"
+      :popper-options="popperOptions"
       ref="suggestions"
       placement="bottom-start"
       :id="id">
