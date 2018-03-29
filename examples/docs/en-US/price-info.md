@@ -38,7 +38,7 @@ Price Info used to display the sum and part sum. See examples to understand it b
 | partSum     |  value part sum | string    |   - |     —    |
 | type     | type price info  | string    |   paid-no-dash / paid / not-paid / part-paid |     —    |
 | currency     | type of currency  | string    |   rub / usd / eur |     —    |
-| size     | size price info  | string    |   extra-small / small / medium / large |     —    |
+| size     | size price info  | string    |   tiny / extra-small / small / medium / large |     —    |
 | taxesInfo     | taxes on/off  | Boolean    |   false / true |     false    |
 | isStartedPrice     | Shows 'from' word and defined that price isn't fixed  | Boolean    |   false / true |     false    |
 | startsPrefix     | Defines the prefix word before price | String    |   -  |    'от'    |
