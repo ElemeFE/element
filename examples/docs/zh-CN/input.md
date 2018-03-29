@@ -17,6 +17,9 @@
         input8: '',
         input9: '',
         input10: '',
+        input11: '',
+        input12: '',
+        input13: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -24,7 +27,20 @@
         state1: '',
         state2: '',
         state3: '',
-        state4: ''
+        state4: '',
+        maskOptions: {
+          mask: '#,##0.00',
+          reverse: true
+        },
+        maskOptions2: {
+          mask: '0ZZ.0ZZ.0ZZ.0ZZ',
+          translation:  {
+            'Z': {
+              pattern: /[0-9]/, optional: true
+            }
+          },
+          clearIfNotMatch: true
+        }
       };
     },
     methods: {
@@ -794,6 +810,65 @@ export default {
 ```
 :::
 
+### 自动格式化字符串
+
+:::demo
+```html
+<div class="demo-input-suffix">
+  日期：
+  <el-input
+    placeholder="__/__/____"
+    v-model="input11"
+    mask="00/00/0000"
+    clearable>
+  </el-input>
+</div>
+<div class="demo-input-suffix">
+  货币：
+  <el-input
+    placeholder="请输入内容"
+    v-model="input12"
+    :mask="maskOptions"
+    clearable>
+  </el-input>
+</div>
+<div class="demo-input-suffix">
+  ip地址：
+  <el-input
+    placeholder="请输入内容"
+    v-model="input13"
+    :mask="maskOptions2"
+    clearable>
+  </el-input>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: '',
+        input12: '',
+        input13: '',
+        maskOptions: {
+          pattern: '#,##0.00',
+          reverse: true
+        },
+        maskOptions2: { //自定义匹配符示例，实际等效于 { mask: '099.099.099.099' }
+          mask: '0ZZ.0ZZ.0ZZ.0ZZ',
+          translation:  {
+            'Z': {
+              pattern: /[0-9]/, optional: true
+            }
+          },
+          clearIfNotMatch: true
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Input Attributes
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
@@ -821,6 +896,7 @@ export default {
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
 | tabindex | 输入框的tabindex | string | - | - |
+| mask | 自动格式化输入的字符串（使用方法参照：[jQuery-Mask-Plugin](http://igorescobar.github.io/jQuery-Mask-Plugin/)） | String / Object | — | — |
 
 ### Input slots
 | name | 说明 |

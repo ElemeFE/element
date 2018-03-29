@@ -272,5 +272,30 @@ describe('Input', () => {
         });
       });
     });
+
+    it('mask', done => {
+      vm = createVue({
+        template: `
+          <el-input
+            ref="input"
+            placeholder="请输入内容"
+            mask="099.099.099.099"
+            v-model="input">
+          </el-input>
+        `,
+        data() {
+          return {
+            input: '1001251231'
+          };
+        }
+      });
+
+      setTimeout(() => {
+        expect(vm.$children[0].currentValue).to.be.equal('100.125.123.1');
+        const input = vm.$el.querySelector('input');
+        expect(input.value).to.be.equal('100.125.123.1');
+        done();
+      }, 100);
+    });
   });
 });

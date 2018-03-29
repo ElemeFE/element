@@ -32,6 +32,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
+        @keydown="handleKeydown"
         :aria-label="label"
       >
       <!-- 前置内容 -->
@@ -92,6 +93,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
+  import mask from './mask';
   import merge from 'element-ui/src/utils/merge';
 
   export default {
@@ -99,7 +101,7 @@
 
     componentName: 'ElInput',
 
-    mixins: [emitter, Migrating],
+    mixins: [emitter, Migrating, mask],
 
     inject: {
       elForm: {
@@ -203,7 +205,11 @@
 
     watch: {
       'value'(val, oldValue) {
-        this.setCurrentValue(val);
+        if (!this.maskOptions) {
+          this.setCurrentValue(val);
+        } else {
+          this.maskBehaviour(val);
+        }
       }
     },
 
@@ -228,6 +234,12 @@
       handleBlur(event) {
         this.focused = false;
         this.$emit('blur', event);
+
+        if (this.maskOptions && this.maskOptions.clearIfNotMatch &&
+          !this.maskState.regexMask.test(this.currentValue)) {
+          this.clear();
+        }
+
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
         }
@@ -255,12 +267,25 @@
         this.$emit('focus', event);
       },
       handleInput(event) {
-        const value = event.target.value;
-        this.$emit('input', value);
-        this.setCurrentValue(value);
+        if (this.maskOptions && this.maskOptions.mask) {
+          const value = this.maskBehaviour();
+          if (value !== null) {
+            this.$emit('input', value);
+          }
+        } else {
+          const value = event.target.value;
+          this.$emit('input', value);
+          this.setCurrentValue(value);
+        }
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
+      },
+      handleKeydown(event) {
+        this.maskState.keycode = event.keyCode || event.which;
+        this.maskState.previusValue = this.currentValue;
+        this.maskState.previusCaretPos = this.getCaret();
+        this.maskState.maskDigitPosMapOld = this.maskState.maskDigitPosMap;
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;
