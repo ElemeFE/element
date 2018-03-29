@@ -23,7 +23,7 @@
     <tm-icon :name="clearIcon"
              class="tm-date-editor__clear"
              slot="suffix"
-             :onClick="handleClickIcon"
+             @click="handleClickIcon"
              v-show="showClose"
              v-if="haveTrigger">
     </tm-icon>
