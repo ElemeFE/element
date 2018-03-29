@@ -92,7 +92,7 @@
       <tm-icon slot="suffix"
                class="tm-select__caret tm-input__icon"
                :name="iconName"
-               :on-click="handleIconClick">
+               @click="handleIconClick">
       </tm-icon>
     </tm-input>
     <transition

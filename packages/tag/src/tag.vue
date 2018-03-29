@@ -12,7 +12,7 @@
       <tm-icon class="tm-tag__close"
                name="cross"
                v-if="closable"
-               :onClick="handleClose"></tm-icon>
+               @click="handleClose"></tm-icon>
     </span>
   </transition>
 </template>
