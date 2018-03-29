@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2.3.2
+
+*2018-03-29*
+
+- Fixed an Autocomplete regression, #10442
+
 ### 2.3.1
 
 *2018-03-29*
