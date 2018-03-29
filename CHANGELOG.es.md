@@ -4,14 +4,14 @@
 
 *2018-03-29*
 
-- Fixed an Autocomplete regression, #10442
+- Arreglada una regresión de Autocompletar, #10442
 
 ### 2.3.1
 
 *2018-03-29*
 
-- Fixed a regression that `type` of Input is not passed down to the native input element, #10415
-- Added `blur` method for Select, #10416
+- Se ha corregido una regresión por la que el `type` de input no se transmitia al elemento de entrada nativo, #10415
+- Agregado el metodo `blur` para Select, #10416
 
 ### 2.3.0 Diamond
 
