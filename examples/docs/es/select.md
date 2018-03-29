@@ -719,4 +719,4 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | Metodo | Descripción                 | Parametros |
 | ------ | --------------------------- | ---------- |
 | focus  | Foco en el componente input | -          |
-| blur   | blur the Input component, and hide the dropdown | - |
+| blur   | Quita el focus del componente y oculta el dropdown | - |
