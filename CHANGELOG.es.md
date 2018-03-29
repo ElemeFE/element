@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2.3.1
+
+*2018-03-29*
+
+- Fixed a regression that `type` of Input is not passed down to the native input element, #10415
+- Added `blur` method for Select, #10416
+
 ### 2.3.0 Diamond
 
 *2018-03-28*
