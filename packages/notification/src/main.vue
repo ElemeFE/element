@@ -26,7 +26,7 @@
           class="tm-notification__closeBtn"
           name="cross"
           v-if="showClose"
-          :onClick="close"></tm-icon>
+          @click="close"></tm-icon>
       </div>
     </div>
   </transition>

@@ -140,7 +140,8 @@
           'tm-tabs--flow': type === 'flow',
           'tm-tabs--nav': type === 'nav',
           [`tm-tabs--${tabPosition}`]: true,
-          'tm-tabs--border-card': type === 'border-card'
+          'tm-tabs--border-card': type === 'border-card',
+          'tm-tabs--border-nav': type === 'border-nav'
         }}>
           { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }
         </div>
