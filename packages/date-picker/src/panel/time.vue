@@ -61,7 +61,9 @@
         let date;
         if (newVal instanceof Date) {
           date = limitTimeRange(newVal, this.selectableRange, this.format);
-        } else if (!newVal) {
+        } else if (typeof newVal === 'number') {
+          date = new Date(newVal);
+        } else {
           date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         }
 
