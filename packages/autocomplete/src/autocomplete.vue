@@ -40,7 +40,7 @@
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
       ref="suggestions"
-      placement="bottom-start"
+      :placement="placement"
       :id="id">
       <li
         v-for="(item, index) in suggestions"
@@ -113,6 +113,10 @@
       debounce: {
         type: Number,
         default: 300
+      },
+      placement: {
+        type: String,
+        default: 'bottom-start'
       }
     },
     data() {

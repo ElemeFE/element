@@ -854,6 +854,7 @@ export default {
 | value-key | 输入建议对象中用于显示的键名 | string | — | value |
 | value         | 必填值，输入绑定值   | string  | — | — |
 | debounce      | 获取输入建议的去抖延时 | number         | — | 300 |
+| placement     | 菜单弹出位置 | string         | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
