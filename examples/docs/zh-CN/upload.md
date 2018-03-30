@@ -71,7 +71,14 @@
         }],
         imageUrl: '',
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        imageProcess: {
+          maxWidth: 400,
+          maxHeight: 400,
+          type: 'jpeg',
+          quality: 0.8,
+          processor: this.customImageProcessor
+        }
       };
     },
     methods: {
@@ -118,6 +125,12 @@
       },
       beforeRemove(file, fileList) {
         return this.$confirm(`确定移除 ${ file.name }？`);
+      },
+      customImageProcessor(file, callback) {
+        setTimeout(function() {
+          console.log('custom processor');
+          callback(file);
+        }, 200);
       }
     }
   }
@@ -379,6 +392,7 @@
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
+  :image-process="imageProcess"
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
@@ -388,7 +402,14 @@
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
+        imageProcess: {
+          width: 400,
+          height: 400,
+          type: 'jpeg',
+          quality: 0.8,
+          processor: this.customImageProcessor
+        }
       };
     },
     methods: {
@@ -400,6 +421,12 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      customImageProcessor(file, callback) {
+        setTimeout(function() {
+          console.log('custom processor');
+          callback(file);
+        }, 200);
       }
     }
   }
@@ -434,6 +461,7 @@
 | disabled | 是否禁用 | boolean | — | false |
 | limit | 最大允许上传个数 |  number | — | — |
 | on-exceed | 文件超出个数限制时的钩子 | function(files, fileList) | — | - |
+| image-process | 图片的预处理选项 | Object({ maxWidth, maxHeight, type, quality, processor })<br>`type`: 输出的图片类型，可选值为(png, jpeg)，默认png<br>`quality`: 指定jpeg的输出质量(0~1)<br>`processor`: 自定义图像处理函数，原型为function(file, callback) | — | — |
 
 ### Methods
 | 方法名      | 说明          | 参数 |

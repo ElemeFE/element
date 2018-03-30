@@ -45,7 +45,8 @@ export default {
     },
     disabled: Boolean,
     limit: Number,
-    onExceed: Function
+    onExceed: Function,
+    imageProcess: Object
   },
 
   data() {
@@ -65,6 +66,66 @@ export default {
       if (!files) return;
       this.uploadFiles(files);
     },
+    processImage(file, callback) {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      const reader = new FileReader();
+      const img = new Image();
+      const { maxWidth, maxHeight, processor, quality } = this.imageProcess;
+
+      let type = 'image/png';
+      if (this.imageProcess.type) {
+        if (!this.imageProcess.type.startsWith('image/')) {
+          type = 'image/' + this.imageProcess.type;
+        } else {
+          type = this.imageProcess.type;
+        }
+      }
+
+      if (!maxWidth && !maxHeight && !type) {
+        if (processor) {
+          processor(file, callback);
+        }
+        return;
+      }
+
+      img.onload = function() {
+        const originWidth = this.width;
+        const originHeight = this.height;
+
+        let targetWidth = originWidth;
+        let targetHeight = originHeight;
+
+        if (originWidth > maxWidth || originHeight > maxHeight) {
+          if (!maxHeight || originWidth / originHeight > maxWidth / maxHeight) {
+            targetWidth = maxWidth;
+            targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+          } else {
+            targetHeight = maxHeight;
+            targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+          }
+        }
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        context.clearRect(0, 0, targetWidth, targetHeight);
+        context.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+        canvas.toBlob(blob => {
+          blob.name = file.name;
+          if (processor) {
+            processor(blob, callback);
+          } else {
+            callback(blob);
+          }
+        }, type, quality);
+      };
+
+      reader.onload = (e => { img.src = e.target.result; });
+
+      reader.readAsDataURL(file);
+    },
     uploadFiles(files) {
       if (this.limit && this.fileList.length + files.length > this.limit) {
         this.onExceed && this.onExceed(files, this.fileList);
@@ -77,8 +138,16 @@ export default {
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
-        this.onStart(rawFile);
-        if (this.autoUpload) this.upload(rawFile);
+        const cb = (file) => {
+          this.onStart(file);
+          if (this.autoUpload) this.upload(file);
+        };
+
+        if (rawFile.type.indexOf('image') === -1 || !this.imageProcess) {
+          cb(rawFile);
+        } else {
+          this.processImage(rawFile, blob => cb(blob));
+        }
       });
     },
     upload(rawFile, file) {

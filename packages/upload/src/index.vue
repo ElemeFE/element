@@ -105,7 +105,8 @@ export default {
     onExceed: {
       type: Function,
       default: noop
-    }
+    },
+    imageProcess: Object
   },
 
   data() {
@@ -282,7 +283,8 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
-        'http-request': this.httpRequest
+        'http-request': this.httpRequest,
+        imageProcess: this.imageProcess
       },
       ref: 'upload-inner'
     };
