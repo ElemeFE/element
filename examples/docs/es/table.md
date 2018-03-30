@@ -189,7 +189,7 @@
         multipleSelection: []
       };
     },
-    
+
     methods: {
       getSummaries(param) {
         const { columns, data } = param;
@@ -1978,6 +1978,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sum-text               | texto a mostrar para la primer columna de la fila de resumen | String                                   | —                              | Sum                                      |
 | summary-method         | método personalizado para resumen        | Function({ columns, data })              | —                              | —                                        |
 | span-method            | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | —                              | —                                        |
+| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas. | Boolean | — | true |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |

@@ -389,6 +389,12 @@ export default {
       if (this.columnConfig) {
         this.columnConfig.index = newVal;
       }
+    },
+
+    formatter(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.formatter = newVal;
+      }
     }
   },
 

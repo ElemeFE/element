@@ -107,7 +107,8 @@ const TableStore = function(table, initialState = {}) {
     hoverRow: null,
     filters: {},
     expandRows: [],
-    defaultExpandAll: false
+    defaultExpandAll: false,
+    selectOnIndeterminate: false
   };
 
   for (let prop in initialState) {
@@ -293,8 +294,12 @@ TableStore.prototype.mutations = {
   toggleAllSelection: debounce(10, function(states) {
     const data = states.data || [];
     if (data.length === 0) return;
-    const value = !states.isAllSelected;
     const selection = this.states.selection;
+    // when only some rows are selected (but not all), select or deselect all of them
+    // depending on the value of selectOnIndeterminate
+    const value = states.selectOnIndeterminate
+      ? !states.isAllSelected
+      : !(states.isAllSelected || selection.length);
     let selectionChanged = false;
 
     data.forEach((item, index) => {

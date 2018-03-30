@@ -19,8 +19,10 @@ export default {
     IframeUpload
   },
 
-  provide: {
-    uploader: this
+  provide() {
+    return {
+      uploader: this
+    };
   },
 
   inject: {

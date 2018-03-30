@@ -237,6 +237,9 @@
           this.visible = false;
         }
         this.$emit('command', command, instance);
+      },
+      focus() {
+        this.triggerElm.focus && this.triggerElm.focus();
       }
     },
 

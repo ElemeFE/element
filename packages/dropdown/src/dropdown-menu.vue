@@ -19,6 +19,10 @@
       visibleArrow: {
         type: Boolean,
         default: true
+      },
+      arrowOffset: {
+        type: Number,
+        default: 0
       }
     },
 

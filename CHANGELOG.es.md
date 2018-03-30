@@ -1,5 +1,73 @@
 ## Changelog
 
+### 2.3.2
+
+*2018-03-29*
+
+- Arreglada una regresión de Autocompletar, #10442
+
+### 2.3.1
+
+*2018-03-29*
+
+- Se ha corregido una regresión por la que el `type` de input no se transmitia al elemento de entrada nativo, #10415
+- Agregado el metodo `blur` para Select, #10416
+
+### 2.3.0 Diamond
+
+*2018-03-28*
+
+#### Nuevas características
+- Table
+  - Ahora `formatter` de TableColumn puede ser actualizado dinámicamente, #10184 (by @elfman)
+  - Agregado el atributo  `select-on-indeterminate`, #9924 (by @syn-zeta)
+- Menu
+  - Agregado el atributo `collapse-transition`, #8809 (by @limichange)
+- Input
+  - Agregado el metodo `select` , #10229
+  - Agregado el metodo `blur`, #10356
+- ColorPicker
+  - Agregado el atributo `predefine`, #10170 (by @elfman)
+- Tree
+  - Agregados los atributos `draggable`, `allow-drop` y `allow-drag`, y los eventos `node-drag-start`, `node-drag-enter`, `node-drag-leave`, `node-drag-over`, `node-drag-end` y `node-drop`, #9251 #10372 (by @elfman)
+- Form
+  - El metodo `validate` ahora acepta un segundo parametro, que contiene información de los ítems  del formulario que no superaron la validación, #10279
+  - Agregado el evento  `validate`, #10351
+- Progress
+  - Agregado el atributo `color`, #10352 (by @YunYouJun)
+- Button
+  - Agregado el atributo `circle`, #10359 (by @YunYouJun)
+
+#### Bug's arreglados
+- Form
+  - Solucionado: Label del FormItem no se alineaba adecuadamente con Input mixto, #10189
+- Menu
+  - Ahora collapsed Menu sólo mostrará el Tooltip cuando el slot `title` de MenuItem esté configurado, #10193 (by @PanJiaChen)
+- Pagination
+  - Corregido el evento  `current-change`  que se disparaba erróneamente sin interacción del usuario, #10247
+- DatePicker
+  - Ahora la fecha y la hora en el panel desplegable están correctamente formateadas según el atributo `format`, #10174（by @remizovvv）
+- Upload
+  - Solucionado el atributo `accept` no trabajaba cuando `drag` era true, #10278
+
+### 2.2.2
+
+*2018-03-14*
+
+- Agregado el evento `clear` para Input, #9988 (by @blackmiaool)
+- Ahora la entrada manual de ColorPicker soporta los modos `hsl`, `hsv` y `rgb`, #9991
+- Arreglado DatePicker no desencadenaba el evento `change` cuando se borraba su valor inicial, #9986
+- Ahora la clase de iconos relacionadas con los atributos de Rate soporta actualizaciones dinamicas, #10003
+- Arreglado Table que con columnas `fixed` no actualizaban correctamente su altura si se fijaba `max-height`, #10034
+- Ahora DatePicker en modo rango admite la selección inversa (haciendo clic en la fecha final y, a continuación, haciendo clic en la fecha de inicio), #8156 (by @earlymeme)
+- Agregado el atributo `disabled` para Pagination, #10006
+- Agregados los eventos `after-enter` y ` after-leave` para Popover, #10047
+- Arreglado Select no disparaba validación cuando el usuario seleccionaba una opción después de ejecutar `resetFields` de Form, #10105
+- Arreglado anchos incorrectos de columnas fijas de Table en algunos casos, #10130
+- Corregido MessageBox heredaba el atributo `title` de su instancia anterior cuando se llamaba sin `title`, #10126 (by @Pochodaydayup)
+- Agregado el atributo `input-size` para Slider, #10154
+- Agregados los eventos  `left-check-change` y `right-check-change` para Transfer, #10156
+
 ### 2.2.1
 
 *2018-03-02*

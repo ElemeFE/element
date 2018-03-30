@@ -57,6 +57,20 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-plain')).to.be.true;
   });
+  it('round', () => {
+    vm = createTest(Button, {
+      round: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-round')).to.be.true;
+  });
+  it('circle', () => {
+    vm = createTest(Button, {
+      circle: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-circle')).to.be.true;
+  });
   it('click', done => {
     let result;
     vm = createVue({

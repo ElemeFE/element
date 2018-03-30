@@ -26,10 +26,10 @@
                 @input="val => userInputDate = val"
                 @change="handleVisibleDateChange" />
             </span>
-            <span class="el-date-picker__editor-wrap">
+            <span class="el-date-picker__editor-wrap" v-clickoutside="() => timePickerVisible = false">
               <el-input
                 ref="input"
-                @focus="timePickerVisible = !timePickerVisible"
+                @focus="timePickerVisible = true"
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
@@ -156,8 +156,11 @@
     nextYear,
     prevMonth,
     nextMonth,
-    changeYearMonthAndClampDate
+    changeYearMonthAndClampDate,
+    extractDateFormat,
+    extractTimeFormat
   } from '../util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
@@ -168,6 +171,8 @@
 
   export default {
     mixins: [Locale],
+
+    directives: { Clickoutside },
 
     watch: {
       showTime(val) {
@@ -217,7 +222,6 @@
         const value = value => {this.$refs.timepicker.value = value;};
         const date = date => {this.$refs.timepicker.date = date;};
 
-        this.$watch('format', format);
         this.$watch('value', value);
         this.$watch('date', date);
 
@@ -544,8 +548,8 @@
       },
 
       timeFormat() {
-        if (this.format && this.format.indexOf('ss') === -1) {
-          return 'HH:mm';
+        if (this.format) {
+          return extractTimeFormat(this.format);
         } else {
           return 'HH:mm:ss';
         }
@@ -553,7 +557,7 @@
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH', '').replace(/[^a-zA-Z]*mm/, '').replace(/[^a-zA-Z]*ss/, '').trim();
+          return extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
         }

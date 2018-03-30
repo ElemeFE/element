@@ -7,8 +7,9 @@ export interface ValidateCallback {
    * The callback to tell the validation result
    *
    * @param isValid Whether the form is valid
+   * @param invalidFields fields that fail validation
    */
-  (isValid: boolean): void
+  (isValid: boolean, invalidFields: object): void
 }
 
 export interface ValidateFieldCallback {

@@ -1684,7 +1684,7 @@
       label="数值 3">
     </el-table-column>
   </el-table>
-  
+
   <el-table
     :data="tableData6"
     border
@@ -2035,6 +2035,7 @@
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |

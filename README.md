@@ -2,21 +2,39 @@
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
 
-# Element
-
-[![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
-[![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
-[![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
-[![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmcharts.com/compare/element-ui?minimal=true)
-![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
-![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS)
-[![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(Chinese)
-[![Join the chat at https://gitter.im/element-en/Lobby](https://badges.gitter.im/element-en/Lobby.svg)](https://gitter.im/element-en/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(English)
-[![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
-[![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-> A Vue.js 2.0 UI Toolkit for Web.
+<p align="center">
+  <a href="https://travis-ci.org/ElemeFE/element">
+    <img src="https://travis-ci.org/ElemeFE/element.svg?branch=master">
+  </a>
+  <a href="https://coveralls.io/github/ElemeFE/element?branch=master">
+    <img src="https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master">
+  </a>
+  <a href="https://cdnjs.com/libraries/element-ui">
+    <img src="https://img.shields.io/cdnjs/v/element-ui.svg">
+  </a>
+  <a href="https://www.npmjs.org/package/element-ui">
+    <img src="https://img.shields.io/npm/v/element-ui.svg">
+  </a>
+  <a href="https://npmcharts.com/compare/element-ui?minimal=true">
+    <img src="http://img.shields.io/npm/dm/element-ui.svg">
+  </a>
+  <br>
+  <a href="http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS">
+    <img src="http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS">
+  </a>
+  <a href="http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
+    <img src="http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
+  </a>
+  <a href="#backers">
+    <img src="https://opencollective.com/element/backers/badge.svg">
+  </a>
+  <a href="#sponsors">
+    <img src="https://opencollective.com/element/sponsors/badge.svg">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
+  </a>
+</p>
 
 <p align="center">
   <b>Special thanks to the generous sponsorship by:</b>
@@ -38,11 +56,13 @@
   </tbody>
 </table>
 
+> A Vue.js 2.0 UI Toolkit for Web.
+
 ## Links
 - Homepage and documentation
-  - International users: http://element.eleme.io/#/en-US
-  - Chinese users: http://element-cn.eleme.io/#/zh-CN
-  - Spanish users: http://element.eleme.io/#/es
+  - [International users](http://element.eleme.io/#/en-US)
+  - [Chinese users](http://element-cn.eleme.io/#/zh-CN)
+  - [Spanish users](http://element.eleme.io/#/es)
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
@@ -54,10 +74,10 @@
 - Starter kit
   - [element-starter](https://github.com/ElementUI/element-starter)
   - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
-- [Design resources](https://github.com/ElementUI/Resources) (working in progress)
-- Boilerplate for bug reports
-  - [CodePen](https://codepen.io/anon/pen/ozYpNA)
-  - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+- [Design resources](https://github.com/ElementUI/Resources)
+- Gitter
+  - [International users](https://gitter.im/element-en/Lobby)
+  - [Chinese users](https://gitter.im/ElemeFE/element)
 
 ## Install
 ```shell
@@ -89,7 +109,7 @@ Modern browsers and Internet Explorer 10+.
 ## Development
 Skip this part if you just want to use Element.
 
-For those who are interested in contributing to Element, please refer to our contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md)) to see how to run this project.
+For those who are interested in contributing to Element, please refer to our contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) to see how to run this project.
 
 ## Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
@@ -98,7 +118,7 @@ Detailed changes for each release are documented in the [release notes](https://
 We have collected some [frequently asked questions](https://github.com/ElemeFE/element/blob/master/FAQ.md). Before reporting an issue, please search if the FAQ has the answer to your problem.
 
 ## Contribution
-Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md)) before making a pull request.
+Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) before making a pull request.
 
 ## Special Thanks
 English documentation is brought to you by SwiftGG Translation Team:
@@ -127,7 +147,8 @@ Spanish documentation is made possible by these community developers:
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
-<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg?t=2017" alt="">
+
+<img width="650" src="https://user-images.githubusercontent.com/10095631/37442034-3170a9e0-283f-11e8-8fdd-56748646fa43.jpg" alt="donation">
 
 ## Backers
 

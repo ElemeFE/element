@@ -1946,7 +1946,7 @@ You can customize row index in `type=index` columns.
 
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
+|----------------|----------------------|-----------|-----------------------|----------|
 | data | Table data | array | — | — |
 | height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the value will be assigned to element's style.height, the height is affected by external styles | string/number | — | — |
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
@@ -1975,6 +1975,7 @@ You can customize row index in `type=index` columns.
 | sum-text | displayed text for the first column of summary row | String | — | Sum |
 | summary-method | custom summary method | Function({ columns, data }) | — | — |
 | span-method | method that returns rowspan and colspan | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| select-on-indeterminate | controls the behavior of master checkbox in multi-select tables when only some rows are selected (but not all). If true, all rows will be selected, else deselected. | Boolean | — | true |
 
 ### Table Events
 | Event Name | Description | Parameters |

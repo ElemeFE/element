@@ -2,17 +2,18 @@
   <button
     class="el-button"
     @click="handleClick"
-    :disabled="disabled || loading"
+    :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
       buttonSize ? 'el-button--' + buttonSize : '',
       {
-        'is-disabled': disabled,
+        'is-disabled': buttonDisabled,
         'is-loading': loading,
         'is-plain': plain,
-        'is-round': round
+        'is-round': round,
+        'is-circle': circle
       }
     ]"
   >
@@ -26,6 +27,9 @@
     name: 'ElButton',
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -49,7 +53,8 @@
       disabled: Boolean,
       plain: Boolean,
       autofocus: Boolean,
-      round: Boolean
+      round: Boolean,
+      circle: Boolean
     },
 
     computed: {
@@ -58,6 +63,9 @@
       },
       buttonSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      buttonDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
 

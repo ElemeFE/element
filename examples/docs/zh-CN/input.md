@@ -800,8 +800,8 @@ export default {
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type         | 类型   | string  | text / textarea | text |
 | value         | 绑定值           | string / number  | — | — |
-| maxlength     | 最大输入长度      | number          |  —  | — |
-| minlength     | 最小输入长度      | number          | — | — |
+| maxlength     | 原生属性，最大输入长度      | number          |  —  | — |
+| minlength     | 原生属性，最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
 | clearable     | 是否可清空        | boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
@@ -841,7 +841,9 @@ export default {
 ### Input Methods
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| focus | 使 input 获取焦点 | - |
+| focus | 使 input 获取焦点 | — |
+| blur | 使 input 失去焦点 | — |
+| select | 选中 input 中的文字 | — |
 
 ### Autocomplete Attributes
 
@@ -852,6 +854,7 @@ export default {
 | value-key | 输入建议对象中用于显示的键名 | string | — | value |
 | value         | 必填值，输入绑定值   | string  | — | — |
 | debounce      | 获取输入建议的去抖延时 | number         | — | 300 |
+| placement     | 菜单弹出位置 | string         | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
@@ -873,3 +876,8 @@ export default {
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | select | 点击选中建议项时触发 | 选中建议项 |
+
+### Autocomplete Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

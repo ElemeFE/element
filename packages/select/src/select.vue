@@ -390,6 +390,9 @@
 
       options() {
         if (this.$isServer) return;
+        this.$nextTick(() => {
+          this.broadcast('ElSelectDropdown', 'updatePopper');
+        });
         if (this.multiple) {
           this.resetInputHeight();
         }
@@ -534,6 +537,11 @@
         }
       },
 
+      blur() {
+        this.visible = false;
+        this.$refs.reference.blur();
+      },
+
       handleBlur(event) {
         this.$emit('blur', event);
       },
@@ -644,6 +652,7 @@
           this.visible = false;
         }
         this.$nextTick(() => {
+          if (this.visible) return;
           this.scrollToOption(option);
           this.setSoftFocus();
         });
@@ -789,6 +798,9 @@
 
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
+      this.$on('fieldReset', () => {
+        this.dispatch('ElFormItem', 'el.form.change');
+      });
     },
 
     mounted() {

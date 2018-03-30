@@ -236,6 +236,7 @@ Se soporta la selección de un rango de valores.
 | step                | tamaño del paso                          | number          | —                 | 1           |
 | show-input          | Si se muestra el input, trabaja cuando`range`es false | boolean         | —                 | false       |
 | show-input-controls | si se muestran los botones de control cuando`show-input`es true | boolean         | —                 | true        |
+| input-size          | tamaño del input   | string           | large / medium / small / mini | small |
 | show-stops          | si se muestran los puntos de ruptura (breakpoints) | boolean         | —                 | false       |
 | show-tooltip        | si se muestra el valor en un tooltip     | boolean         | —                 | true        |
 | format-tooltip      | formato para mostrar el valor del tooltip | function(value) | —                 | —           |

@@ -30,14 +30,14 @@
                   @input.native="handleDateInput($event, 'min')"
                   @change.native="handleDateChange($event, 'min')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => minTimePickerVisible = false">
                 <el-input
                   size="small"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleTime"
-                  @focus="minTimePickerVisible = !minTimePickerVisible"
+                  @focus="minTimePickerVisible = true"
                   @change.native="handleTimeChange($event, 'min')" />
                 <time-picker
                   ref="minTimePicker"
@@ -61,7 +61,7 @@
                   @input.native="handleDateInput($event, 'max')"
                   @change.native="handleDateChange($event, 'max')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => maxTimePickerVisible = false">
                 <el-input
                   size="small"
                   :disabled="rangeState.selecting"
@@ -69,7 +69,7 @@
                   :placeholder="t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
                   :value="maxVisibleTime"
-                  @focus="minDate && (maxTimePickerVisible = !maxTimePickerVisible)"
+                  @focus="minDate && (maxTimePickerVisible = true)"
                   :readonly="!minDate"
                   @change.native="handleTimeChange($event, 'max')" />
                 <time-picker
@@ -193,8 +193,11 @@
     prevYear,
     nextYear,
     prevMonth,
-    nextMonth
+    nextMonth,
+    extractDateFormat,
+    extractTimeFormat
   } from '../util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
@@ -230,6 +233,8 @@
 
   export default {
     mixins: [Locale],
+
+    directives: { Clickoutside },
 
     computed: {
       btnDisabled() {
@@ -269,34 +274,34 @@
       },
 
       minVisibleDate() {
-        return this.minDate ? formatDate(this.minDate) : '';
+        return this.minDate ? formatDate(this.minDate, this.dateFormat) : '';
       },
 
       maxVisibleDate() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate) : '';
+        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.dateFormat) : '';
       },
 
       minVisibleTime() {
-        return this.minDate ? formatDate(this.minDate, 'HH:mm:ss') : '';
+        return this.minDate ? formatDate(this.minDate, this.timeFormat) : '';
       },
 
       maxVisibleTime() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, 'HH:mm:ss') : '';
+        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.timeFormat) : '';
+      },
+
+      timeFormat() {
+        if (this.format) {
+          return extractTimeFormat(this.format);
+        } else {
+          return 'HH:mm:ss';
+        }
       },
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH:mm', '').replace(':ss', '').trim();
+          return extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
-        }
-      },
-
-      timeFormat() {
-        if (this.format && this.format.indexOf('ss') === -1) {
-          return 'HH:mm';
-        } else {
-          return 'HH:mm:ss';
         }
       },
 

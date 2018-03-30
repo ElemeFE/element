@@ -24,7 +24,8 @@
        @pick="confirmValue"
        @clear="clearValue"
        :color="color"
-       :show-alpha="showAlpha">
+       :show-alpha="showAlpha"
+       :predefine="predefine">
     </picker-dropdown>
   </div>
 </template>
@@ -43,7 +44,8 @@
       colorFormat: String,
       disabled: Boolean,
       size: String,
-      popperClass: String
+      popperClass: String,
+      predefine: Array
     },
 
     inject: {

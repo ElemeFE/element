@@ -252,19 +252,7 @@ Con la anterior configuración, el tamaño por defecto de todos los componentes 
 
 ### Empiece ya!
 
-Ahora ha incorporado Vue y Element a su proyecto y es el momento para comenzar a programar. Inicie el modo de desarrollo:
-
-```bash
-npm run dev
-```
-
-Build:
-
-```bash
-npm run build
-```
-
-Por favor, refiérase a la documentación de cada componente para aprender cómo usarlos.
+Ahora ha incorporado Vue y Element a su proyecto y es el momento para comenzar a programar. Por favor, refiérase a la documentación de cada componente para aprender cómo usarlos.
 
 ### Use Nuxt.js
 

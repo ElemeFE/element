@@ -304,10 +304,11 @@ Vertical NavMenu could be collapsed.
 | text-color  | text color of Menu (hex format) | string |   —   | #303133 |
 | active-text-color  | text color of currently active menu item (hex format) | string |   —   | #409EFF |
 | default-active | index of currently active menu | string    | — | — |
-| default-openeds | array that contains keys of currently active sub-menus  | Array    | — | — |
+| default-openeds | array that contains indexes of currently active sub-menus  | Array    | — | — |
 | unique-opened  |  whether only one sub-menu can be active  | boolean   | — | false   |
 | menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | — | hover |
 | router  | whether `vue-router` mode is activated. If true, index will be used as 'path' to activate the route action | boolean   | — | false   |
+| collapse-transition  | whether to enable the collapse transition | boolean   | — | true   |
 
 ### Menu Methods
 | Event Name | Description | Parameters |

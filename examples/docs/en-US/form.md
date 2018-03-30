@@ -849,10 +849,15 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
-| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| validate | validate the whole form. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Returns a promise if callback is omitted | Function(callback: Function(boolean, object)) |
+| validateField | validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
 | clearValidate | clear validation message for all fields | -
+
+### Form Events
+| Event Name | Description | Parameters |
+|----------- |------------ |----------- |
+| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed |
 
 ### Form-Item Attributes
 
@@ -861,7 +866,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
-| required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
+| required | whether the field is required or not, will be determined by validation rules if omitted | boolean |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |

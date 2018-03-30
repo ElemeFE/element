@@ -68,4 +68,14 @@ export declare class ElSelect extends ElementUIComponent {
 
   /** Select first matching option on enter key. Use with filterable or remote */
   defaultFirstOption: boolean
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
+
+  /**
+   * Blur the Input component, and hide the dropdown
+   */
+  blur (): void
 }
