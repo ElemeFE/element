@@ -334,7 +334,6 @@
           return false;
         }
         event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData('text/plain', treeNode.node.label);
         dragState.draggingNode = treeNode;
         this.$emit('node-drag-start', treeNode.node, event);
       });
@@ -448,7 +447,7 @@
           }
         }
         if (draggingNode && !dropNode) {
-          this.$emit('node-drag-end', draggingNode.node, dropNode.node, dropType, event);
+          this.$emit('node-drag-end', draggingNode.node, null, dropType, event);
         }
 
         dragState.showDropIndicator = false;
