@@ -7,21 +7,44 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+
+    &.is-component {
+      overflow: hidden;
+    }
   }
 
   #app {
     height: 100%;
-  }
+    
+    @when component {
+      overflow-y: hidden;
 
-  body {
-    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
-    overflow: auto;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
+      .main-cnt {
+        padding: 0;
+        margin-top: 0;
+        height: 100%;
+        min-height: auto;
+      }
+
+      .headerWrapper {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1500;
+        
+        .container {
+          padding: 0;
+        }
+      }
+    }
   }
 
   a {
-    color: #4078c0;
+    color: #409EFF;
     text-decoration: none;
   }
 
@@ -44,7 +67,7 @@
     font-family: Menlo, Monaco, Consolas, Courier, monospace;
     font-size: 12px;
     padding: 18px 24px;
-    background-color: #f9fafc;
+    background-color: #fafafa;
     border: solid 1px #eaeefb;
     margin-bottom: 25px;
     border-radius: 4px;
@@ -53,7 +76,7 @@
 
   .main-cnt {
     margin-top: -80px;
-    padding: 80px 0 120px;
+    padding: 80px 0 340px;
     box-sizing: border-box;
     min-height: 100%;
   }
@@ -61,7 +84,7 @@
   .container,
   .page-container {
     width: 1140px;
-    padding: 0 30px;
+    padding: 0;
     margin: 0 auto;
   }
 
@@ -107,9 +130,23 @@
       background-color: #ECF8FF;
       border-radius: 4px;
       border-left: #50bfff 5px solid;
+      margin: 20px 0;
 
       code {
-        background-color: rgba(#fff, .7);
+        background-color: rgba(255, 255, 255, .7);
+        color: #445368;
+      }
+    }
+
+    .warning {
+      padding: 8px 16px;
+      background-color: #fff6f7;
+      border-radius: 4px;
+      border-left: #FE6C6F 5px solid;
+      margin: 20px 0;
+
+      code {
+        background-color: rgba(255, 255, 255, .7);
         color: #445368;
       }
     }
@@ -129,16 +166,20 @@
     .page-container {
       padding: 0 20px;
     }
+  
+    #app.is-component .headerWrapper .container {
+      padding: 0 12px;
+    }
   }
 </style>
 
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'is-component': isComponent }">
     <main-header v-if="lang !== 'play'"></main-header>
     <div class="main-cnt">
       <router-view></router-view>
     </div>
-    <main-footer v-if="lang !== 'play'"></main-footer>
+    <main-footer v-if="lang !== 'play' && !isComponent"></main-footer>
   </div>
 </template>
 
@@ -146,7 +187,22 @@
   import { use } from 'main/locale';
   import zhLocale from 'main/locale/lang/zh-CN';
   import enLocale from 'main/locale/lang/en';
-  use(location.href.indexOf('zh-CN') > -1 ? zhLocale : enLocale);
+  import esLocale from 'main/locale/lang/es';
+
+  const lang = location.hash.replace('#', '').split('/')[1] || 'zh-CN';
+  const localize = lang => {
+    switch (lang) {
+      case 'zh-CN':
+        use(zhLocale);
+        break;
+      case 'es':
+        use(esLocale);
+        break;
+      default:
+        use(enLocale);
+    }
+  };
+  localize(lang);
 
   export default {
     name: 'app',
@@ -154,60 +210,70 @@
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
+      },
+      isComponent() {
+        return /^component-/.test(this.$route.name || '');
       }
     },
 
     watch: {
-      lang() {
-        this.localize();
+      lang(val) {
+        if (val === 'zh-CN') {
+          this.suggestJump();
+        }
+        localize(val);
       }
     },
 
     methods: {
-      localize() {
-        use(this.lang === 'zh-CN' ? zhLocale : enLocale);
-      },
-
-      renderAnchorHref() {
-        if (/changelog/g.test(location.href)) return;
-        const anchors = document.querySelectorAll('h2 a,h3 a');
-        const basePath = location.href.split('#').splice(0, 2).join('#');
-
-        [].slice.call(anchors).forEach(a => {
-          const href = a.getAttribute('href');
-          a.href = basePath + href;
-        });
-      },
-
-      goAnchor() {
-        if (location.href.match(/#/g).length > 1) {
-          const anchor = location.href.match(/#[^#]+$/g);
-          if (!anchor) return;
-          const elm = document.querySelector(anchor[0]);
-          if (!elm) return;
-
-          setTimeout(_ => {
-            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
-          }, 50);
-        }
+      suggestJump() {
+        const href = location.href;
+        const preferGithub = localStorage.getItem('PREFER_GITHUB');
+        if (href.indexOf('element-cn') > -1 || preferGithub) return;
+        setTimeout(() => {
+          if (this.lang !== 'zh-CN') return;
+          this.$confirm('建议大陆用户访问部署在国内的站点，是否跳转？', '提示')
+            .then(() => {
+              location.href = location.href
+                .replace('https:', 'http:')
+                .replace('element.', 'element-cn.');
+            })
+            .catch(() => {
+              localStorage.setItem('PREFER_GITHUB', 'true');
+            });
+        }, 1000);
       }
     },
 
     mounted() {
-      this.localize();
-      this.renderAnchorHref();
-      this.goAnchor();
-    },
-
-    created() {
-      window.addEventListener('hashchange', () => {
-        if (location.href.match(/#/g).length < 2) {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-          this.renderAnchorHref();
-        } else {
-          this.goAnchor();
-        }
-      });
+      localize(this.lang);
+      if (this.lang === 'zh-CN') {
+        this.suggestJump();
+      }
+      // setTimeout(() => {
+      //   const notified = localStorage.getItem('ES_NOTIFIED_2');
+      //   if (!notified && this.lang !== 'es') {
+      //     const title = this.lang === 'zh-CN'
+      //       ? '西班牙语文档正式上线'
+      //       : 'Spanish docs now available';
+      //     const message = this.lang === 'zh-CN'
+      //       ? '点击这里进行切换'
+      //       : 'Click here to switch';
+      //     const self = this;
+      //     this.$notify({
+      //       title,
+      //       duration: 0,
+      //       message,
+      //       onClick() {
+      //         self.$router.push('/es');
+      //         localStorage.setItem('ES_NOTIFIED_2', 1);
+      //       },
+      //       onClose() {
+      //         localStorage.setItem('ES_NOTIFIED_2', 1);
+      //       }
+      //     });
+      //   }
+      // }, 3500);
     }
   };
 </script>

@@ -32,7 +32,10 @@ export default {
       default: function() {}
     },
     drag: Boolean,
-    listType: String
+    listType: String,
+    disabled: Boolean,
+    limit: Number,
+    onExceed: Function
   },
 
   data() {
@@ -40,7 +43,7 @@ export default {
       mouseover: false,
       domain: '',
       file: null,
-      disabled: false
+      submitting: false
     };
   },
 
@@ -49,7 +52,9 @@ export default {
       return str.indexOf('image') !== -1;
     },
     handleClick() {
-      this.$refs.input.click();
+      if (!this.disabled) {
+        this.$refs.input.click();
+      }
     },
     handleChange(ev) {
       const file = ev.target.value;
@@ -58,8 +63,13 @@ export default {
       }
     },
     uploadFiles(file) {
-      if (this.disabled) return;
-      this.disabled = true;
+      if (this.limit && this.$parent.uploadFiles.length + file.length > this.limit) {
+        this.onExceed && this.onExceed(this.fileList);
+        return;
+      }
+
+      if (this.submitting) return;
+      this.submitting = true;
       this.file = file;
       this.onStart(file);
 
@@ -95,15 +105,15 @@ export default {
     const self = this;
     !this.$isServer && window.addEventListener('message', (event) => {
       if (!self.file) return;
-      var targetOrigin = new URL(self.action).origin;
+      const targetOrigin = new URL(self.action).origin;
       if (event.origin !== targetOrigin) return;
-      var response = event.data;
+      const response = event.data;
       if (response.result === 'success') {
         self.onSuccess(response, self.file);
       } else if (response.result === 'failed') {
         self.onError(response, self.file);
       }
-      self.disabled = false;
+      self.submitting = false;
       self.file = null;
     }, false);
   },
@@ -113,7 +123,8 @@ export default {
       drag,
       uploadFiles,
       listType,
-      frameName
+      frameName,
+      disabled
     } = this;
     const oClass = { 'el-upload': true };
     oClass[`el-upload--${listType}`] = true;
@@ -146,8 +157,8 @@ export default {
         </form>
         {
           drag
-          ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
-          : this.$slots.default
+            ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
+            : this.$slots.default
         }
       </div>
     );

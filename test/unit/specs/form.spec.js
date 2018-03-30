@@ -1,7 +1,23 @@
 import { createVue, destroyVM } from '../util';
 
+const DELAY = 50;
+
 describe('Form', () => {
   let vm;
+  let hasPromise = true;
+  before(() => {
+    if (!window.Promise) {
+      hasPromise = false;
+      window.Promise = require('es6-promise').Promise;
+    }
+  });
+
+  after(() => {
+    if (!hasPromise) {
+      window.Promise = undefined;
+    }
+  });
+
   afterEach(() => {
     destroyVM(vm);
   });
@@ -320,7 +336,7 @@ describe('Form', () => {
             <el-form-item label="记住密码" prop="region" ref="field">
               <el-select v-model="form.region" placeholder="请选择活动区域">
                 <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
+                <el-option label="区域二" ref="opt" value="beijing"></el-option>
               </el-select>
             </el-form-item>
           </el-form>
@@ -328,7 +344,7 @@ describe('Form', () => {
         data() {
           return {
             form: {
-              region: 'shanghai'
+              region: ''
             },
             rules: {
               region: [
@@ -336,24 +352,23 @@ describe('Form', () => {
               ]
             }
           };
-        },
-        methods: {
-          setValue(value) {
-            this.form.region = value;
-          }
         }
       }, true);
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
-        expect(valid).to.true;
-        vm.setValue('');
+        expect(valid).to.false;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择活动区域');
-          vm.setValue('shanghai');
-
+          // programatic modification of bound value does not triggers change validation
+          vm.form.region = 'shanghai';
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('');
-            done();
+            expect(field.validateMessage).to.equal('请选择活动区域');
+            // user modification of bound value triggers change validation
+            vm.$refs.opt.$el.click();
+            setTimeout(_ => {
+              expect(field.validateMessage).to.equal('');
+              done();
+            }, 100);
           }, 100);
         }, 100);
       });
@@ -363,7 +378,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" ref="picker" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-form>
         `,
@@ -378,26 +393,40 @@ describe('Form', () => {
               ]
             }
           };
-        },
-        methods: {
-          setValue(value) {
-            this.form.date = value;
-          }
         }
       }, true);
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择日期');
-
-          vm.setValue(new Date());
-
-          vm.$refs.form.$nextTick(_ => {
-            expect(field.validateMessage).to.equal('');
-            done();
-          });
-        });
+          // programatic modification does not trigger change
+          vm.value = new Date();
+          setTimeout(_ => {
+            expect(field.validateMessage).to.equal('请选择日期');
+            vm.value = '';
+            // user modification triggers change
+            const input = vm.$refs.picker.$el.querySelector('input');
+            input.blur();
+            input.focus();
+            setTimeout(_ => {
+              const keyDown = (el, keyCode) => {
+                const evt = document.createEvent('Events');
+                evt.initEvent('keydown', true, true);
+                evt.keyCode = keyCode;
+                el.dispatchEvent(evt);
+              };
+              keyDown(input, 37);
+              setTimeout(_ => {
+                keyDown(input, 13);
+                setTimeout(_ => {
+                  expect(field.validateMessage).to.equal('');
+                  done();
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
       });
     });
     it('timepicker', done => {
@@ -405,7 +434,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
+              <el-time-picker type="fixed-time" ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-form>
         `,
@@ -420,25 +449,31 @@ describe('Form', () => {
               ]
             }
           };
-        },
-        methods: {
-          setValue(value) {
-            this.form.date = value;
-          }
         }
       }, true);
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择时间');
-          vm.setValue(new Date());
-
-          vm.$refs.form.$nextTick(_ => {
-            expect(field.validateMessage).to.equal('');
-            done();
-          });
-        });
+          // programatic modification does not trigger change
+          vm.value = new Date();
+          setTimeout(_ => {
+            expect(field.validateMessage).to.equal('请选择时间');
+            vm.value = '';
+            // user modification triggers change
+            const input = vm.$refs.picker.$el.querySelector('input');
+            input.blur();
+            input.focus();
+            setTimeout(_ => {
+              vm.$refs.picker.picker.$el.querySelector('.confirm').click();
+              setTimeout(_ => {
+                expect(field.validateMessage).to.equal('');
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
       });
     });
     it('checkbox group', done => {
@@ -651,5 +686,128 @@ describe('Form', () => {
         });
       });
     });
+    it('invalid fields', done => {
+      var checkName = (rule, value, callback) => {
+        if (value.length < 5) {
+          callback(new Error('长度至少为5'));
+        } else {
+          callback();
+        }
+      };
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { validator: checkName, trigger: 'change' }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate((valid, invalidFields) => {
+        expect(invalidFields.name.length).to.equal(1);
+        done();
+      });
+    });
+    it('validate return promise', done => {
+      var checkName = (rule, value, callback) => {
+        if (value.length < 5) {
+          callback(new Error('长度至少为5'));
+        } else {
+          callback();
+        }
+      };
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { validator: checkName, trigger: 'change' }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate().catch(validFailed => {
+        expect(validFailed).to.false;
+        done();
+      });
+    });
+  });
+  it('validate event', done => {
+    vm = createVue({
+      template: `
+          <el-form :model="form" :rules="rules" ref="form" @validate="onValidate">
+            <el-form-item label="活动名称" prop="name" ref="name">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="活动地点" prop="addr" ref="addr">
+              <el-input v-model="form.addr"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+      data() {
+        return {
+          form: {
+            name: '',
+            addr: ''
+          },
+          valid: {
+            name: null,
+            addr: null
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
+            ],
+            addr: [
+              { required: true, message: '请输入活动名称', trigger: 'change' }
+            ]
+          }
+        };
+      },
+      methods: {
+        onValidate(prop, valid) {
+          this.valid[prop] = valid;
+        },
+        setValue(prop, value) {
+          this.form[prop] = value;
+        }
+      }
+    }, true);
+    vm.setValue('name', '1');
+    setTimeout(() => {
+      expect(vm.valid.name).to.equal(false);
+      vm.setValue('addr', '1');
+      setTimeout(() => {
+        expect(vm.valid.addr).to.equal(true);
+        vm.setValue('name', '111');
+        setTimeout(() => {
+          expect(vm.valid.name).to.equal(true);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
   });
 });

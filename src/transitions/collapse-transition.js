@@ -65,6 +65,7 @@ class Transition {
 }
 
 export default {
+  name: 'ElCollapseTransition',
   functional: true,
   render(h, { children }) {
     const data = {

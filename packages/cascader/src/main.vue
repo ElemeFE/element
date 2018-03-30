@@ -4,27 +4,32 @@
     :class="[
       {
         'is-opened': menuVisible,
-        'is-disabled': disabled
+        'is-disabled': cascaderDisabled
       },
-      size ? 'el-cascader--' + size : ''
+      cascaderSize ? 'el-cascader--' + cascaderSize : ''
     ]"
     @click="handleClick"
     @mouseenter="inputHover = true"
+    @focus="inputHover = true"
     @mouseleave="inputHover = false"
+    @blur="inputHover = false"
     ref="reference"
     v-clickoutside="handleClickoutside"
+    @keydown="handleKeydown"
   >
     <el-input
       ref="input"
       :readonly="!filterable"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
-      @change="debouncedInputChange"
+      @input="debouncedInputChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
       :validate-event="false"
       :size="size"
-      :disabled="disabled"
+      :disabled="cascaderDisabled"
     >
-      <template slot="icon">
+      <template slot="suffix">
         <i
           key="1"
           v-if="clearable && inputHover && currentLabels.length"
@@ -34,7 +39,7 @@
         <i
           key="2"
           v-else
-          class="el-input__icon el-icon-caret-bottom"
+          class="el-input__icon el-icon-arrow-down"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>
@@ -43,7 +48,7 @@
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> / </span>
+          <span v-if="index < currentLabels.length - 1"> {{ separator }} </span>
         </template>
       </template>
       <template v-else>
@@ -63,6 +68,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
+import { generateId } from 'element-ui/src/utils/util';
 
 const popperMixin = {
   props: {
@@ -71,6 +77,7 @@ const popperMixin = {
       default: 'bottom-start'
     },
     appendToBody: Popper.props.appendToBody,
+    arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     popperOptions: Popper.props.popperOptions
@@ -86,6 +93,15 @@ export default {
   directives: { Clickoutside },
 
   mixins: [popperMixin, emitter, Locale],
+
+  inject: {
+    elForm: {
+      default: ''
+    },
+    elFormItem: {
+      default: ''
+    }
+  },
 
   components: {
     ElInput
@@ -113,6 +129,10 @@ export default {
         return [];
       }
     },
+    separator: {
+      type: String,
+      default: '/'
+    },
     placeholder: {
       type: String,
       default() {
@@ -139,12 +159,20 @@ export default {
     debounce: {
       type: Number,
       default: 300
+    },
+    beforeFilter: {
+      type: Function,
+      default: () => (() => {})
+    },
+    hoverThreshold: {
+      type: Number,
+      default: 500
     }
   },
 
   data() {
     return {
-      currentValue: this.value,
+      currentValue: this.value || [],
       menu: null,
       debouncedInputChange() {},
       menuVisible: false,
@@ -175,11 +203,24 @@ export default {
         }
       });
       return labels;
+    },
+    _elFormItemSize() {
+      return (this.elFormItem || {}).elFormItemSize;
+    },
+    cascaderSize() {
+      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+    },
+    cascaderDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
+    },
+    id() {
+      return generateId();
     }
   },
 
   watch: {
     menuVisible(value) {
+      this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
       value ? this.showMenu() : this.hideMenu();
     },
     value(value) {
@@ -187,6 +228,10 @@ export default {
     },
     currentValue(value) {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
+    },
+    currentLabels(value) {
+      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
+      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
     },
     options: {
       deep: true,
@@ -208,10 +253,13 @@ export default {
       this.menu.expandTrigger = this.expandTrigger;
       this.menu.changeOnSelect = this.changeOnSelect;
       this.menu.popperClass = this.popperClass;
+      this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
+      this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
       this.menu.$on('menuLeave', this.doDestroy);
+      this.menu.$on('closeInside', this.handleClickoutside);
     },
     showMenu() {
       if (!this.menu) {
@@ -229,12 +277,30 @@ export default {
     hideMenu() {
       this.inputValue = '';
       this.menu.visible = false;
+      this.$refs.input.focus();
     },
     handleActiveItemChange(value) {
       this.$nextTick(_ => {
         this.updatePopper();
       });
       this.$emit('active-item-change', value);
+    },
+    handleKeydown(e) {
+      const keyCode = e.keyCode;
+      if (keyCode === 13) {
+        this.handleClick();
+      } else if (keyCode === 40) { // down
+        this.menuVisible = true; // 打开
+        setTimeout(() => {
+          const firstMenu = this.popperElm.querySelectorAll('.el-cascader-menu')[0];
+          firstMenu.querySelectorAll("[tabindex='-1']")[0].focus();
+        });
+        e.stopPropagation();
+        e.preventDefault();
+      } else if (keyCode === 27 || keyCode === 9) { // esc  tab
+        this.inputValue = '';
+        if (this.menu) this.menu.visible = false;
+      }
     },
     handlePick(value, close = true) {
       this.currentValue = value;
@@ -243,6 +309,8 @@ export default {
 
       if (close) {
         this.menuVisible = false;
+      } else {
+        this.$nextTick(this.updatePopper);
       }
     },
     handleInputChange(value) {
@@ -251,6 +319,7 @@ export default {
 
       if (!value) {
         this.menu.options = this.options;
+        this.$nextTick(this.updatePopper);
         return;
       }
 
@@ -275,6 +344,7 @@ export default {
         }];
       }
       this.menu.options = filteredFlatOptions;
+      this.$nextTick(this.updatePopper);
     },
     renderFilteredOptionLabel(inputValue, optionsStack) {
       return optionsStack.map((option, index) => {
@@ -316,18 +386,44 @@ export default {
       this.menuVisible = false;
     },
     handleClick() {
-      if (this.disabled) return;
+      if (this.cascaderDisabled) return;
+      this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;
         return;
       }
       this.menuVisible = !this.menuVisible;
+    },
+    handleFocus(event) {
+      this.$emit('focus', event);
+    },
+    handleBlur(event) {
+      this.$emit('blur', event);
     }
   },
 
   created() {
     this.debouncedInputChange = debounce(this.debounce, value => {
-      this.handleInputChange(value);
+      const before = this.beforeFilter(value);
+
+      if (before && before.then) {
+        this.menu.options = [{
+          __IS__FLAT__OPTIONS: true,
+          label: this.t('el.cascader.loading'),
+          value: '',
+          disabled: true
+        }];
+        before
+          .then(() => {
+            this.$nextTick(() => {
+              this.handleInputChange(value);
+            });
+          });
+      } else if (before !== false) {
+        this.$nextTick(() => {
+          this.handleInputChange(value);
+        });
+      }
     });
   },
 

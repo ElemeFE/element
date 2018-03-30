@@ -81,6 +81,33 @@ describe('Slider', () => {
     expect(slider.$refs.tooltip.disabled).to.true;
   });
 
+  it('format tooltip', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" :format-tooltip="formatTooltip">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      },
+      methods: {
+        formatTooltip(val) {
+          return '$' + val;
+        }
+      }
+    }, true);
+    const slider = vm.$children[0].$children[0];
+    expect(slider.formatTooltip).to.function;
+    vm.$nextTick(() => {
+      expect(slider.formatValue).to.equal('$0');
+    });
+  });
+
   it('drag', done => {
     vm = createVue({
       template: `
@@ -153,6 +180,39 @@ describe('Slider', () => {
     }, 10);
   });
 
+  it('change event', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" @change="onChange">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          data: 0,
+          value: 0
+        };
+      },
+      methods: {
+        onChange(val) {
+          this.data = val;
+        }
+      }
+    }, true);
+    const slider = vm.$children[0];
+    vm.value = 10;
+    setTimeout(() => {
+      expect(vm.data).to.equal(0);
+      slider.onSliderClick({ clientX: 100 });
+      setTimeout(() => {
+        expect(vm.data > 0).to.true;
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('disabled', done => {
     vm = createVue({
       template: `
@@ -209,6 +269,30 @@ describe('Slider', () => {
     }, true);
     const stops = vm.$el.querySelectorAll('.el-slider__stop');
     expect(stops.length).to.equal(9);
+  });
+
+  it('vertical mode', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider vertical v-model="value" height="200px"></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    setTimeout(() => {
+      slider.onSliderClick({ clientY: 100 });
+      setTimeout(() => {
+        expect(vm.value > 0).to.true;
+        done();
+      }, 10);
+    }, 10);
   });
 
   describe('range', () => {

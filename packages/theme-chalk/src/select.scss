@@ -1,0 +1,144 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+@import "select-dropdown";
+@import "input";
+@import "tag";
+@import "option";
+@import "option-group";
+@import "scrollbar";
+
+@include b(select) {
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    .el-input__inner {
+      border-color: $--select-border-color-hover;
+    }
+  }
+
+  .el-input__inner {
+    cursor: pointer;
+    padding-right: 35px;
+
+    &:focus {
+      border-color: $--select-input-focus-background;
+    }
+  }
+
+  .el-input {
+    & .el-select__caret {
+      color: $--select-input-color;
+      font-size: $--select-input-font-size;
+      transition: transform .3s;
+      transform: rotateZ(180deg);
+      line-height: 16px;
+      cursor: pointer;
+
+      @include when(reverse) {
+        transform: rotateZ(0deg);
+      }
+
+      @include when(show-close) {
+        font-size: $--select-font-size;
+        text-align: center;
+        transform: rotateZ(180deg);
+        border-radius: $--border-radius-circle;
+        color: $--select-input-color;
+        transition: $--color-transition-base;
+
+        &:hover {
+          color: $--select-close-hover-color;
+        }
+      }
+    }
+
+    &.is-disabled {
+      & .el-input__inner {
+        cursor: not-allowed;
+
+        &:hover {
+          border-color: $--select-disabled-border;
+        }
+      }
+    }
+
+    &.is-focus .el-input__inner {
+      border-color: $--select-input-focus-background;
+    }
+  }
+
+  > .el-input {
+    display: block;
+  }
+
+  @include e(input) {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin-left: 15px;
+    color: $--select-multiple-input-color;
+    font-size: $--select-font-size;
+    appearance: none;
+    height: 28px;
+    background-color: transparent;
+    @include when(mini) {
+      height: 14px;
+    }
+  }
+
+  @include e(close) {
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    z-index: $--index-top;
+    right: 25px;
+    color: $--select-input-color;
+    line-height: 18px;
+    font-size: $--select-input-font-size;
+
+    &:hover {
+      color: $--select-close-hover-color;
+    }
+  }
+
+  @include e(tags) {
+    position: absolute;
+    line-height: normal;
+    white-space: normal;
+    z-index: $--index-normal;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .el-tag__close {
+    margin-top: -2px;
+  }
+
+  .el-tag {
+    box-sizing: border-box;
+    border-color: transparent;
+    margin: 2px 0 2px 6px;
+    background-color: #f0f2f5;
+
+    &__close.el-icon-close {
+      background-color: $--color-text-placeholder;
+      right: -7px;
+      top: 0;
+      color: $--color-white;
+
+      &:hover {
+        background-color: $--color-text-secondary;
+      }
+
+      &::before {
+        display: block;
+        transform: translate(0, .5px);
+      }
+    }
+  }
+}

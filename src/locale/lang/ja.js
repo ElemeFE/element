@@ -9,13 +9,17 @@ export default {
       today: '今日',
       cancel: 'キャンセル',
       clear: 'クリア',
-      confirm: 'はい',
+      confirm: 'OK',
       selectDate: '日付を選択',
       selectTime: '時間を選択',
       startDate: '開始日',
       startTime: '開始時間',
       endDate: '終了日',
       endTime: '終了時間',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '年',
       month1: '1月',
       month2: '2月',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: 'データなし',
+      loading: 'ロード中',
       placeholder: '選択してください'
     },
     pagination: {
@@ -72,11 +77,12 @@ export default {
     },
     messagebox: {
       title: 'メッセージ',
-      confirm: 'はい',
+      confirm: 'OK',
       cancel: 'キャンセル',
       error: '正しくない入力'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: '削除する',
       preview: 'プレビュー',
       continue: '続行する'
@@ -85,10 +91,19 @@ export default {
       emptyText: 'データなし',
       confirmFilter: '確認',
       resetFilter: '初期化',
-      clearFilter: 'すべて'
+      clearFilter: 'すべて',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'データなし'
+    },
+    transfer: {
+      noMatch: 'データなし',
+      noData: 'データなし',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

@@ -2,6 +2,7 @@
   .demo-color-box {
     border-radius: 4px;
     padding: 20px;
+    margin: 5px 0;
     height: 74px;
     box-sizing: border-box;
     color: #fff;
@@ -16,6 +17,7 @@
   .demo-color-box-group {
     .demo-color-box {
       border-radius: 0;
+      margin: 0;
     }
     .demo-color-box:first-child {
       border-radius: 4px 4px 0 0;
@@ -24,63 +26,51 @@
       border-radius: 0 0 4px 4px;
     }
   }
-  .bg-blue-light {
-    background-color: #58b7ff;
-  }
-  .bg-blue,
-  .bg-info {
-    background-color: #20a0ff;
-  }
-  .bg-blue-dark {
-    background-color: #1d8ce0;
+  .bg-blue {
+    background-color: #409EFF;
   }
 
   .bg-success {
-    background-color: #13CE66;
+    background-color: #67C23A;
   }
   .bg-warning {
-    background-color: #f7ba2a;
+    background-color: #E6A23C;
   }
   .bg-danger {
-    background-color: #ff4949;
+    background-color: #F56C6C;
+  }
+  .bg-info {
+    background-color: #909399;
   }
 
-  .bg-black {
-    background-color: #1f2d3d;
+  .bg-text-primary {
+    background-color: #303133;
   }
-  .bg-black-light {
-    background-color: #324057;
+  .bg-text-regular {
+    background-color: #606266;
   }
-  .bg-black-lighter {
-    background-color: #475669;
+  .bg-text-secondary {
+    background-color: #909399;
   }
-
-  .bg-silver {
-    background-color: #8492a6;
-  }
-  .bg-silver-light {
-    background-color: #99a9bf;
-  }
-  .bg-silver-lighter {
-    background-color: #c0ccda;
+  .bg-text-placeholder {
+    background-color: #c0c4cc;
   }
 
-  .bg-gray {
-    background-color: #d3dce6;
+  .bg-border-base {
+    background-color: #dcdfe6;
   }
-  .bg-gray-light {
-    background-color: #e5e9f2;
+  .bg-border-light {
+    background-color: #e4e7ed;
   }
-  .bg-gray-lighter {
-    background-color: #eff2f7;
+  .bg-border-lighter {
+    background-color: #ebeef5;
+  }
+  .bg-border-extra-light {
+    background-color: #f2f6fc;
   }
 
-  .bg-white-dark {
-    background-color: #f9fafc;
-  }
-
-  .color-gray {
-    color: #5e6d82;
+  [class*=" bg-border-"] {
+    color: #303133;
   }
 </style>
 
@@ -93,14 +83,8 @@ Element 为了避免视觉传达差异，使用一套特定的调色板来规定
 Element 主要品牌颜色是鲜艳、友好的蓝色。
 
 <el-row :gutter="12">
-  <el-col :span="8">
-    <div class="demo-color-box bg-blue-light">Light Blue<div class="value">#58B7FF</div></div>
-  </el-col>
-  <el-col :span="8">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#20A0FF</div></div>
-  </el-col>
-  <el-col :span="8">
-    <div class="demo-color-box bg-blue-dark">Dark Blue<div class="value">#1D8CE0</div></div>
+  <el-col :span="6" :xs="{span: 12}">
+    <div class="demo-color-box bg-blue">Blue<div class="value">#409EFF</div></div>
   </el-col>
 </el-row>
 
@@ -109,17 +93,17 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 除了主色外的场景色，需要在不同的场景中使用（例如危险色表示危险的操作）。
 
 <el-row :gutter="12">
-  <el-col :span="6">
-    <div class="demo-color-box bg-info">Blue<div class="value">#20A0FF</div></div>
+  <el-col :span="6" :xs="{span: 12}">
+    <div class="demo-color-box bg-success">Success<div class="value">#67C23A</div></div>
   </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box bg-success">Success<div class="value">#13CE66</div></div>
+  <el-col :span="6" :xs="{span: 12}">
+    <div class="demo-color-box bg-warning">Warning<div class="value">#E6A23C</div></div>
   </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box bg-warning">Warning<div class="value">#F7BA2A</div></div>
+  <el-col :span="6" :xs="{span: 12}">
+    <div class="demo-color-box bg-danger">Danger<div class="value">#F56C6C</div></div>
   </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box bg-danger">Danger<div class="value">#FF4949</div></div>
+  <el-col :span="6" :xs="{span: 12}">
+    <div class="demo-color-box bg-info">Info<div class="value">#909399</div></div>
   </el-col>
 </el-row>
 
@@ -128,31 +112,20 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 中性色用于文本、背景和边框颜色。通过运用不同的中性色，来表现层次结构。
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-black">Black<div class="value">#1F2D3D</div></div>
-      <div class="demo-color-box bg-black-light">Light Black<div class="value">#324057</div></div>
-      <div class="demo-color-box bg-black-lighter">Extra Light Black<div class="value">#475669</div></div>
+      <div class="demo-color-box bg-text-primary">主要文字<div class="value">#303133</div></div>
+      <div class="demo-color-box bg-text-regular">常规文字<div class="value">#606266</div></div>
+      <div class="demo-color-box bg-text-secondary">次要文字<div class="value">#909399</div></div>
+      <div class="demo-color-box bg-text-placeholder">占位文字<div class="value">#C0C4CC</div></div>
     </div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-silver">Silver<div class="value">#8492A6</div></div>
-      <div class="demo-color-box bg-silver-light">Light Silver<div class="value">#99A9BF</div></div>
-      <div class="demo-color-box bg-silver-lighter">Extra Light Silver<div class="value">#C0CCDA</div></div>
-    </div>
-  </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box-group">
-      <div class="demo-color-box color-gray bg-gray">Gray<div class="value">#D3DCE6</div></div>
-      <div class="demo-color-box color-gray bg-gray-light">Light Gray<div class="value">#E5E9F2</div></div>
-      <div class="demo-color-box color-gray bg-gray-lighter">Extra Light Gray<div class="value">#EFF2F7</div></div>
-    </div>
-  </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box-group" style="border: 1px solid #e0e6ed;border-radius: 4px;">
-      <div class="demo-color-box color-gray bg-white-dark">Dark White<div class="value">#F9FAFC</div></div>
-      <div class="demo-color-box color-gray bg-white">White<div class="value">#FFFFFF</div></div>
+      <div class="demo-color-box bg-border-base">一级边框<div class="value">#DCDFE6</div></div>
+      <div class="demo-color-box bg-border-light">二级边框<div class="value">#E4E7ED</div></div>
+      <div class="demo-color-box bg-border-lighter">三级边框<div class="value">#EBEEF5</div></div>
+      <div class="demo-color-box bg-border-extra-light">四级边框<div class="value">#F2F6FC</div></div>
     </div>
   </el-col>
 </el-row>

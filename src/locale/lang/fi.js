@@ -16,6 +16,10 @@ export default {
       startTime: 'Aloitusaika',
       endDate: 'Lopetuspäivä',
       endTime: 'Lopetusaika',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'tammikuu',
       month2: 'helmikuu',
@@ -60,6 +64,11 @@ export default {
       noData: 'Ei tietoja',
       placeholder: 'Valitse'
     },
+    cascader: {
+      noMatch: 'Ei vastaavia tietoja',
+      loading: 'Lataa',
+      placeholder: 'Valitse'
+    },
     pagination: {
       goto: 'Mene',
       pagesize: '/sivu',
@@ -73,6 +82,7 @@ export default {
       error: 'Virheellinen syöte'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Poista',
       preview: 'Esikatsele',
       continue: 'Jatka'
@@ -81,10 +91,19 @@ export default {
       emptyText: 'Ei tietoja',
       confirmFilter: 'Vahvista',
       resetFilter: 'Tyhjennä',
-      clearFilter: 'Kaikki'
+      clearFilter: 'Kaikki',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Ei tietoja'
+    },
+    transfer: {
+      noMatch: 'Ei vastaavia tietoja',
+      noData: 'Ei tietoja',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

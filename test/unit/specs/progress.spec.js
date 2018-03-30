@@ -87,4 +87,20 @@ describe('Progress', () => {
     expect(vm.$el.querySelector('.el-progress-circle').style.height).to.be.equal('120px');
     expect(vm.$el.querySelector('.el-progress-circle').style.width).to.be.equal('120px');
   });
+  it('should work with stroke-width', () => {
+    vm = createVue({
+      template: `
+        <el-progress :text-inside="true" :stroke-width="36" :percentage="0"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(12);
+  });
+  it('color', () => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="50" color="rgb(0, 0, 0)"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(0, 0, 0)');
+  });
 });

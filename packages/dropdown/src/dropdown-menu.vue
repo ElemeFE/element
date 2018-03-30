@@ -1,6 +1,6 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <ul class="el-dropdown-menu" v-show="showPopper">
+    <ul class="el-dropdown-menu el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
       <slot></slot>
     </ul>
   </transition>
@@ -15,7 +15,29 @@
 
     mixins: [Popper],
 
+    props: {
+      visibleArrow: {
+        type: Boolean,
+        default: true
+      },
+      arrowOffset: {
+        type: Number,
+        default: 0
+      }
+    },
+
+    data() {
+      return {
+        size: this.dropdown.dropdownSize
+      };
+    },
+
+    inject: ['dropdown'],
+
     created() {
+      this.$on('updatePopper', () => {
+        if (this.showPopper) this.updatePopper();
+      });
       this.$on('visible', val => {
         this.showPopper = val;
       });
@@ -27,10 +49,10 @@
     },
 
     watch: {
-      '$parent.menuAlign': {
+      'dropdown.placement': {
         immediate: true,
         handler(val) {
-          this.currentPlacement = `bottom-${val}`;
+          this.currentPlacement = val;
         }
       }
     }

@@ -1,5 +1,5 @@
 const defaults = {
-  title: undefined,
+  title: null,
   message: '',
   type: '',
   showInput: false,
@@ -8,8 +8,10 @@ const defaults = {
   lockScroll: true,
   closeOnClickModal: true,
   closeOnPressEscape: true,
+  closeOnHashChange: true,
   inputValue: null,
   inputPlaceholder: '',
+  inputType: 'text',
   inputPattern: null,
   inputValidator: null,
   inputErrorMessage: '',
@@ -23,12 +25,16 @@ const defaults = {
   confirmButtonClass: '',
   cancelButtonClass: '',
   customClass: '',
-  beforeClose: null
+  beforeClose: null,
+  dangerouslyUseHTMLString: false,
+  center: false,
+  roundButton: false
 };
 
 import Vue from 'vue';
 import msgboxVue from './main.vue';
 import merge from 'element-ui/src/utils/merge';
+import { isVNode } from 'element-ui/src/utils/vdom';
 
 const MessageBoxConstructor = Vue.extend(msgboxVue);
 
@@ -46,19 +52,14 @@ const defaultCallback = action => {
       }
     }
     if (currentMsg.resolve) {
-      let $type = currentMsg.options.$type;
-      if ($type === 'confirm' || $type === 'prompt') {
-        if (action === 'confirm') {
-          if (instance.showInput) {
-            currentMsg.resolve({ value: instance.inputValue, action });
-          } else {
-            currentMsg.resolve(action);
-          }
-        } else if (action === 'cancel' && currentMsg.reject) {
-          currentMsg.reject(action);
+      if (action === 'confirm') {
+        if (instance.showInput) {
+          currentMsg.resolve({ value: instance.inputValue, action });
+        } else {
+          currentMsg.resolve(action);
         }
-      } else {
-        currentMsg.resolve(action);
+      } else if (action === 'cancel' && currentMsg.reject) {
+        currentMsg.reject(action);
       }
     }
   }
@@ -78,7 +79,7 @@ const showNextMsg = () => {
   }
   instance.action = '';
 
-  if (!instance.value || instance.closeTimer) {
+  if (!instance.visible || instance.closeTimer) {
     if (msgQueue.length > 0) {
       currentMsg = msgQueue.shift();
 
@@ -97,7 +98,13 @@ const showNextMsg = () => {
         oldCb(action, instance);
         showNextMsg();
       };
-      ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
+      if (isVNode(instance.message)) {
+        instance.$slots.default = [instance.message];
+        instance.message = null;
+      } else {
+        delete instance.$slots.default;
+      }
+      ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape', 'closeOnHashChange'].forEach(prop => {
         if (instance[prop] === undefined) {
           instance[prop] = true;
         }
@@ -105,7 +112,7 @@ const showNextMsg = () => {
       document.body.appendChild(instance.$el);
 
       Vue.nextTick(() => {
-        instance.value = true;
+        instance.visible = true;
       });
     }
   }
@@ -113,15 +120,12 @@ const showNextMsg = () => {
 
 const MessageBox = function(options, callback) {
   if (Vue.prototype.$isServer) return;
-  if (typeof options === 'string') {
+  if (typeof options === 'string' || isVNode(options)) {
     options = {
       message: options
     };
-    if (arguments[1]) {
+    if (typeof arguments[1] === 'string') {
       options.title = arguments[1];
-    }
-    if (arguments[2]) {
-      options.type = arguments[2];
     }
   } else if (options.callback && !callback) {
     callback = options.callback;
@@ -156,6 +160,8 @@ MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -170,6 +176,8 @@ MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -183,6 +191,8 @@ MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -194,7 +204,8 @@ MessageBox.prompt = (message, title, options) => {
 };
 
 MessageBox.close = () => {
-  instance.value = false;
+  instance.doClose();
+  instance.visible = false;
   msgQueue = [];
   currentMsg = null;
 };

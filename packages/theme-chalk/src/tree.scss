@@ -1,0 +1,120 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(tree) {
+  position: relative;
+  cursor: default;
+  background: $--color-white;
+  color: $--tree-text-color;
+
+  @include e(empty-block) {
+    position: relative;
+    min-height: 60px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(empty-text) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: mix($--color-primary, rgb(158, 68, 0), 50%);
+  }
+
+  @include e(drop-indicator) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $--color-primary;
+  }
+}
+
+@include b(tree-node) {
+  white-space: nowrap;
+  outline: none;
+  &:focus { /* focus */
+    > .el-tree-node__content {
+      background-color: $--tree-node-hover-color;
+    }
+  }
+
+  @include when(drop-inner) {
+    > .el-tree-node__content .el-tree-node__label {
+      background-color: $--color-primary;
+      color: #fff;
+    }
+  }
+
+  @include e(content) {
+    display: flex;
+    align-items: center;
+    height: 26px;
+    cursor: pointer;
+
+    & > .el-tree-node__expand-icon {
+      padding: 6px;
+    }
+    & > .el-checkbox {
+      margin-right: 8px;
+    }
+    &:hover {
+      background-color: $--tree-node-hover-color;
+    }
+
+    .el-tree.is-dragging & {
+      cursor: move;
+
+      & * {
+        pointer-events: none;
+      }
+    }
+
+    .el-tree.is-dragging.is-drop-not-allow & {
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(expand-icon) {
+    cursor: pointer;
+    color: $--tree-expand-icon-color;
+    font-size: 12px;
+
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+
+    &.expanded {
+      transform: rotate(90deg);
+    }
+
+    &.is-leaf {
+      color: transparent;
+      cursor: default;
+    }
+  }
+
+  @include e(label) {
+    font-size: $--font-size-base;
+  }
+
+  @include e(loading-icon) {
+    margin-right: 8px;
+    font-size: $--font-size-base;
+    color: $--tree-expand-icon-color;
+  }
+
+  & > .el-tree-node__children {
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  &.is-expanded > .el-tree-node__children {
+    display: block;
+  }
+}
+
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+  background-color: mix($--color-white, $--color-primary, 92%);
+}

@@ -3,7 +3,7 @@
     <slot></slot>
     <transition name="el-zoom-in-center">
       <sup
-        v-show="!hidden && ( content || isDot )"
+        v-show="!hidden && (content || content === 0 || isDot)"
         v-text="content"
         class="el-badge__content"
         :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }">

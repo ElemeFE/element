@@ -3,6 +3,7 @@ import ajax from './ajax';
 import UploadDragger from './upload-dragger.vue';
 
 export default {
+  inject: ['uploader'],
   components: {
     UploadDragger
   },
@@ -38,12 +39,19 @@ export default {
     fileList: Array,
     autoUpload: Boolean,
     listType: String,
-    httpRequest: Function
+    httpRequest: {
+      type: Function,
+      default: ajax
+    },
+    disabled: Boolean,
+    limit: Number,
+    onExceed: Function
   },
 
   data() {
     return {
-      mouseover: false
+      mouseover: false,
+      reqs: {}
     };
   },
 
@@ -56,9 +64,13 @@ export default {
 
       if (!files) return;
       this.uploadFiles(files);
-      this.$refs.input.value = null;
     },
     uploadFiles(files) {
+      if (this.limit && this.fileList.length + files.length > this.limit) {
+        this.onExceed && this.onExceed(files, this.fileList);
+        return;
+      }
+
       let postFiles = Array.prototype.slice.call(files);
       if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
 
@@ -70,6 +82,8 @@ export default {
       });
     },
     upload(rawFile, file) {
+      this.$refs.input.value = null;
+
       if (!this.beforeUpload) {
         return this.post(rawFile);
       }
@@ -77,23 +91,39 @@ export default {
       const before = this.beforeUpload(rawFile);
       if (before && before.then) {
         before.then(processedFile => {
-          if (Object.prototype.toString.call(processedFile) === '[object File]') {
+          const fileType = Object.prototype.toString.call(processedFile);
+          if (fileType === '[object File]' || fileType === '[object Blob]') {
             this.post(processedFile);
           } else {
             this.post(rawFile);
           }
         }, () => {
-          this.onRemove(rawFile, true);
+          this.onRemove(null, rawFile);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        this.onRemove(rawFile, true);
+        this.onRemove(null, rawFile);
+      }
+    },
+    abort(file) {
+      const { reqs } = this;
+      if (file) {
+        let uid = file;
+        if (file.uid) uid = file.uid;
+        if (reqs[uid]) {
+          reqs[uid].abort();
+        }
+      } else {
+        Object.keys(reqs).forEach((uid) => {
+          if (reqs[uid]) reqs[uid].abort();
+          delete reqs[uid];
+        });
       }
     },
     post(rawFile) {
-      const request = this.httpRequest || ajax;
-      request({
+      const { uid } = rawFile;
+      const options = {
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
@@ -105,14 +135,29 @@ export default {
         },
         onSuccess: res => {
           this.onSuccess(res, rawFile);
+          delete this.reqs[uid];
         },
         onError: err => {
           this.onError(err, rawFile);
+          delete this.reqs[uid];
         }
-      });
+      };
+      const req = this.httpRequest(options);
+      this.reqs[uid] = req;
+      if (req && req.then) {
+        req.then(options.onSuccess, options.onError);
+      }
     },
     handleClick() {
-      this.$refs.input.click();
+      if (!this.disabled) {
+        this.$refs.input.value = null;
+        this.$refs.input.click();
+      }
+    },
+    handleKeydown(e) {
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        this.handleClick();
+      }
     }
   },
 
@@ -120,29 +165,33 @@ export default {
     let {
       handleClick,
       drag,
+      name,
       handleChange,
       multiple,
       accept,
       listType,
-      uploadFiles
+      uploadFiles,
+      disabled,
+      handleKeydown
     } = this;
     const data = {
       class: {
         'el-upload': true
       },
       on: {
-        click: handleClick
+        click: handleClick,
+        keydown: handleKeydown
       }
     };
     data.class[`el-upload--${listType}`] = true;
     return (
-      <div {...data}>
+      <div {...data} tabindex="0" >
         {
           drag
-          ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
-          : this.$slots.default
+            ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+            : this.$slots.default
         }
-        <input class="el-upload__input" type="file" ref="input" on-change={handleChange} multiple={multiple} accept={accept}></input>
+        <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
       </div>
     );
   }

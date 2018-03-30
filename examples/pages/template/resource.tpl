@@ -2,6 +2,29 @@
   .page-resource {
     padding-top: 55px;
     box-sizing: border-box;
+    
+    .resource-placeholder {
+      margin: 50px auto 100px;
+      text-align: center;
+      
+      img {
+        width: 150px;
+      }
+      
+      h4 {
+        margin: 20px 0 16px;
+        font-size: 16px;
+        color: #1f2f3d;
+        line-height: 1;
+      }
+      
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #99a9bf;
+        line-height: 1;
+      }
+    }
   }
   .cards {
     margin: 35px auto 110px;
@@ -65,7 +88,7 @@
       display: inline-block;
       line-height: @height;
       font-size: 14px;
-      background-color: #20a0ff;
+      background-color: #409EFF;
       color: #fff;
       text-align: center;
       border: 0;
@@ -98,33 +121,39 @@
 <template>
   <div class="page-container page-resource">
     <h2><%= 1 ></h2>
-    <p><%= 2 ></p>
+    <!--<div class="resource-placeholder">-->
+      <!--<img src="~examples/assets/images/resource-placeholder.svg" alt="">-->
+      <!--<h4><%= placeholder1 ></h4>-->
+      <!--<p><%= placeholder2 ></p>-->
+    <!--</div>-->
+    
+    <p><%= placeholder2 ></p>
     <div class="cards">
       <ul class="container">
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/Axure-Components.svg" alt="">
-            <h3><%= 3 ></h3>
-            <p><%= 4 ></p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v1.1.0.rplib"><%= 5 ></a>
-          </div>
-        </li>
+        <!--<li>-->
+          <!--<div class="card">-->
+            <!--<img src="~examples/assets/images/Axure-Components.svg" alt="">-->
+            <!--<h3><%= 3 ></h3>-->
+            <!--<p><%= 4 ></p>-->
+            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v1.1.0.rplib"><%= 5 ></a>-->
+          <!--</div>-->
+        <!--</li>-->
         <li>
           <div class="card">
             <img src="~examples/assets/images/Sketch-Template.svg" alt="">
             <h3><%= 6 ></h3>
             <p><%= 7 ></p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v1.3.sketch"><%= 5 ></a>
+            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v2.0.sketch"><%= 5 ></a>
           </div>
         </li>
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/Module.svg" alt="">
-            <h3><%= 8 ></h3>
-            <p><%= 9 ></p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20Components%20Documentation.zip"><%= 5 ></a>
-          </div>
-        </li>
+        <!--<li>-->
+          <!--<div class="card">-->
+            <!--<img src="~examples/assets/images/Module.svg" alt="">-->
+            <!--<h3><%= 8 ></h3>-->
+            <!--<p><%= 9 ></p>-->
+            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element%20Components%20Documentation.zip"><%= 5 ></a>-->
+          <!--</div>-->
+        <!--</li>-->
       </ul>
     </div>
   </div>
