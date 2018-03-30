@@ -1355,7 +1355,7 @@ describe('DatePicker', () => {
       for (let i = 0; i < tds.length; i++) {
         tds[i].click();
       }
-      vm.$el.querySelectorAll('.el-picker-panel__footer .el-button').click();
+      vm.$el.querySelector('.el-picker-panel__footer .el-button').click();
       setTimeout(_ => {
         console.log(vm.picker.selectedDate);
         expect(vm.picker.selectedDate).to.exist;
