@@ -227,7 +227,7 @@ Click the button to load data, then the button displays a loading state.
 
 Besides default size, Button component provides three additional sizes for you to choose among different scenarios.
 
-:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+:::demo Use attribute `size` to set additional sizes with `medium`, `small`, `mini` or `large`.
 
 ```html
 <div>
@@ -235,12 +235,14 @@ Besides default size, Button component provides three additional sizes for you t
   <tm-button size="medium">Medium</tm-button>
   <tm-button size="small">Small</tm-button>
   <tm-button size="mini">Mini</tm-button>
+  <tm-button size="large">Large</tm-button>
 </div>
 <div style="margin-top: 20px">
   <tm-button round>Default</tm-button>
   <tm-button size="medium" round>Medium</tm-button>
   <tm-button size="small" round>Small</tm-button>
   <tm-button size="mini" round>Mini</tm-button>
+  <tm-butoon size="large" round>Large</tm-button>
 </div>
 ```
 :::
@@ -248,7 +250,7 @@ Besides default size, Button component provides three additional sizes for you t
 ### Attributes
 | Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | button size   | string  |   medium / small / mini            |    —     |
+| size     | button size   | string  |   medium / small / mini / large           |    —     |
 | type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
 | cancel     | determine whether it's a cancel button   | boolean    | — | false   |
 | circle     | determine whether it's a circle button   | boolean    | — | false   |
