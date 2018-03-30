@@ -1400,6 +1400,43 @@ describe('DatePicker', () => {
     });
   });
 
+  describe('type:days', () => {
+    let vm;
+
+    beforeEach(done => {
+      vm = createVue({
+        template: '<el-date-picker type="days" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: '2018/3/1'
+          };
+        }
+      }, true);
+
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('click cell', done => {
+      const tds = vm.$el.querySelectorAll('.el-date-table__row .available');
+      for (let i = 0; i < tds.length; i++) {
+        tds[i].click();
+      }
+      vm.$el.querySelectorAll('.el-picker-panel__footer .el-button').click();
+      setTimeout(_ => {
+        console.log(vm.picker.selectedDate);
+        expect(vm.picker.selectedDate).to.exist;
+        done();
+      }, DELAY);
+    });
+
+  });
+
   describe('type:daterange', () => {
     it('works', done => {
       vm = createVue({
