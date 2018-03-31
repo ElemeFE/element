@@ -242,7 +242,7 @@ Besides default size, Button component provides three additional sizes for you t
   <tm-button size="medium" round>Medium</tm-button>
   <tm-button size="small" round>Small</tm-button>
   <tm-button size="mini" round>Mini</tm-button>
-  <tm-butoon size="large" round>Large</tm-button>
+  <tm-button size="large" round>Large</tm-button>
 </div>
 ```
 :::
