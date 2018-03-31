@@ -97,6 +97,69 @@
       text-align: inherit;
     }
   }
+
+  @include m(simplified) {
+    background: transparent;
+    box-shadow: none;
+
+    @include e(header) {
+      padding: 0;
+      margin-bottom: 10px;
+
+      @include when(empty) {
+        margin-bottom: 0;
+      }
+    }
+    @include e(headerbtn) {
+      right: -13px;
+      margin-right: -12px;
+      top: 0;
+
+      .tm-icon {
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+      }
+      &:hover {
+        .tm-icon {
+          fill: #ffffff;
+        }
+      }
+    }
+    @include e(title) {
+      color: #ffffff;
+    }
+    @include e(body) {
+      padding: 0;
+      color: #ffffff;
+    }
+  }
+
+  // collide fixes
+  &--simplified.is-fullscreen {
+    .tm-dialog {
+      &__header {
+        padding: 20px 10px 10px;
+        margin-bottom: 0;
+      }
+      &__headerbtn {
+        top: 5px;
+        right: 10px;
+        margin: 0;
+
+        .tm-icon {
+          svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+      &__body {
+        padding: 0 10px;
+      }
+    }
+  }
 }
 
 .dialog-fade-enter-active {
