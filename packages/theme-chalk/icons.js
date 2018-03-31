@@ -32,7 +32,6 @@ import FlightDepart from '../../packages/theme-chalk/src/icons/flight-depart.svg
 import FullStar from '../../packages/theme-chalk/src/icons/full-star.svg';
 import HalfStar from '../../packages/theme-chalk/src/icons/half-star.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
-import Insurence from '../../packages/theme-chalk/src/icons/insurence.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
 import ItemSort from '../../packages/theme-chalk/src/icons/item-sort.svg';
 import KnifeFork from '../../packages/theme-chalk/src/icons/knife-fork.svg';
@@ -58,6 +57,7 @@ import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
 import Transfer from '../../packages/theme-chalk/src/icons/transfer.svg';
 import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
+import UmbrellaAngle from '../../packages/theme-chalk/src/icons/umbrella-angle.svg';
 import Umbrella from '../../packages/theme-chalk/src/icons/umbrella.svg';
 import Upload from '../../packages/theme-chalk/src/icons/upload.svg';
 import Vault from '../../packages/theme-chalk/src/icons/vault.svg';
@@ -100,7 +100,6 @@ module.exports = {
   FullStar,
   HalfStar,
   Hotel,
-  Insurence,
   ItemList,
   ItemSort,
   KnifeFork,
@@ -126,6 +125,7 @@ module.exports = {
   Success,
   Transfer,
   Tv,
+  UmbrellaAngle,
   Umbrella,
   Upload,
   Vault,
