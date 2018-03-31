@@ -87,18 +87,18 @@ fileSave(path.join(__dirname, '../../components.json'))
 
 // Add package dir
 Files.forEach(file => {
-  console.log(path.join(PackagePath, file.filename))
+  console.log(path.join(PackagePath, file.filename));
   fileSave(path.join(PackagePath, file.filename))
     .write(file.content, 'utf8')
     .end('\n');
 });
 
 // Import styles to index.scss
-const stylesFile = path.join(__dirname, '../../packages/theme-chalk/src/index.scss')
-const stylesData = fs.readFileSync(stylesFile, 'utf8')
+const stylesFile = path.join(__dirname, '../../packages/theme-chalk/src/index.scss');
+const stylesData = fs.readFileSync(stylesFile, 'utf8');
 fileSave(stylesFile)
   .write(stylesData)
-  .end('@import "./' + componentname + '.scss";\n')
+  .end('@import "./' + componentname + '.scss";\n');
 
 // nav.config.json
 const navConfigFile = require('../../examples/nav.config.json');
