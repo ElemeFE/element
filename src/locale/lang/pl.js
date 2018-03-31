@@ -92,7 +92,7 @@ export default {
       confirmFilter: 'Potwierdź',
       resetFilter: 'Resetuj',
       clearFilter: 'Wszystko',
-      sumText: 'Razem' 
+      sumText: 'Razem'
     },
     tree: {
       emptyText: 'Brak danych'
@@ -100,10 +100,10 @@ export default {
     transfer: {
       noMatch: 'Brak dopasowań',
       noData: 'Brak danych',
-      titles: ['Lista 1', 'Lista 2'], 
+      titles: ['Lista 1', 'Lista 2'],
       filterPlaceholder: 'Wpisz szukaną frazę',
-      noCheckedFormat: 'razem: {total}', 
-      hasCheckedFormat: 'wybranyh: {checked}/{total}' 
+      noCheckedFormat: 'razem: {total}',
+      hasCheckedFormat: 'wybranyh: {checked}/{total}'
     }
   }
 };
