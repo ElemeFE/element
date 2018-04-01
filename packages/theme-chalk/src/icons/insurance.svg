@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>
             <polygon points="0 0 16 0 16 16 0 16"></polygon>
             <path d="M13.8,8 C13.8,7.3125 14.34,6.75 15,6.75 L15,3.25 C15,2.5625 14.46,2 13.8,2 L2.2,2 C1.54,2 1.006,2.5625 1.006,3.25 L1.006,6.75 C1.666,6.75 2.2,7.3125 2.2,8 C2.2,8.6875 1.666,9.25 1,9.25 L1,12.75 C1,13.4375 1.54,14 2.2,14 L13.8,14 C14.46,14 15,13.4375 15,12.75 L15,9.25 C14.34,9.25 13.8,8.6875 13.8,8 Z" fill-rule="nonzero"></path>
