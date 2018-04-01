@@ -45,7 +45,7 @@
     height: 96px;
     overflow: hidden;
     :first-child {
-      margin-left: 0;
+      margin-left: 1px;
     }
   }
   &__thumb-wrapper {
@@ -56,7 +56,7 @@
     width: 146px;
     height:94px;
     border-radius: 8px;
-    margin-left: 10px;
+    margin-left: 12px;
     cursor: pointer;
     border: solid 1px transparent;
     &:hover {
