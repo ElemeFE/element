@@ -76,7 +76,7 @@
 :::demo Transfer 的数据通过 `data` 属性传入。数据需要是一个对象数组，每个对象有以下属性：`key` 为数据的唯一性标识，`label` 为显示文本，`disabled` 表示该项数据是否禁止转移。目标列表中的数据项会同步到绑定至 `v-model` 的变量，值为数据项的 `key` 所组成的数组。当然，如果希望在初始状态时目标列表不为空，可以像本例一样为 `v-model` 绑定的变量赋予一个初始值。
 ```html
 <template>
-  <el-transfer v-model="value1" :data="data"></el-transfer>
+  <el-transfer v-model="value1" :data="data" target-order="push" moveable></el-transfer>
 </template>
 
 <script>
@@ -269,6 +269,7 @@
 | props | 数据源的字段别名 | object{key, label, disabled} | — | — |
 | left-default-checked | 初始状态下左侧列表的已勾选项的 key 数组 | array | — | [ ] |
 | right-default-checked | 初始状态下右侧列表的已勾选项的 key 数组 | array | — | [ ] |
+| moveable | 是否启用右侧列表的移动排序功能，target-order为`unshift`或`push`时可用 | boolean | — | false |
 
 ### Slot
 | name | 说明 |
