@@ -11,7 +11,7 @@
           <img :src="images[selected].src" class="vue-lb-modal-image">
         </div>
         <div class="tm-gallery__controls">
-          <div class="tm-gallery__counter">{{ selected + 1 }} / {{ countImages }}\{{ displayThumbs.length }}</div>
+          <div class="tm-gallery__counter">{{ selected + 1 }} / {{ countImages }}</div>
           <div class="tm-gallery__buttons">
             <tm-icon name="arrow-left" @click="prev()"></tm-icon>
             <tm-icon name="arrow-right" @click="next()"></tm-icon>
