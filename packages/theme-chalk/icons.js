@@ -11,6 +11,7 @@ import Bath from '../../packages/theme-chalk/src/icons/bath.svg';
 import Bell from '../../packages/theme-chalk/src/icons/bell.svg';
 import Bucket from '../../packages/theme-chalk/src/icons/bucket.svg';
 import Calendar from '../../packages/theme-chalk/src/icons/calendar.svg';
+import Car from '../../packages/theme-chalk/src/icons/car.svg';
 import Cart from '../../packages/theme-chalk/src/icons/cart.svg';
 import Case from '../../packages/theme-chalk/src/icons/case.svg';
 import Check from '../../packages/theme-chalk/src/icons/check.svg';
@@ -32,6 +33,7 @@ import FlightDepart from '../../packages/theme-chalk/src/icons/flight-depart.svg
 import FullStar from '../../packages/theme-chalk/src/icons/full-star.svg';
 import HalfStar from '../../packages/theme-chalk/src/icons/half-star.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
+import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
 import ItemSort from '../../packages/theme-chalk/src/icons/item-sort.svg';
 import KnifeFork from '../../packages/theme-chalk/src/icons/knife-fork.svg';
@@ -79,6 +81,7 @@ module.exports = {
   Bell,
   Bucket,
   Calendar,
+  Car,
   Cart,
   Case,
   Check,
@@ -100,6 +103,7 @@ module.exports = {
   FullStar,
   HalfStar,
   Hotel,
+  Insurance,
   ItemList,
   ItemSort,
   KnifeFork,
