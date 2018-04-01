@@ -1,17 +1,4 @@
 <template>
-  <!--<div class="tm-gallery">
-    <div class="tm-gallery__content">
-      <div class="tm-gallery__image">
-        <img src="https://s3-us-west-1.amazonaws.com/powr/defaults/image-slider2.jpg" class="vue-lb-modal-image">
-      </div>
-      <div class="tm-gallery__controls">
-        controls
-      </div>
-      <div class="tm-gallery__thumbs">
-        thumbs
-      </div>
-    </div>
-  </div>-->
   <tm-dialog
     width="938px"
     top="8vh"
