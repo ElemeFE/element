@@ -11,7 +11,7 @@
           <img :src="images[selected].src" class="vue-lb-modal-image">
         </div>
         <div class="tm-gallery__controls">
-          <div class="tm-gallery__counter">{{ selected + 1 }} / {{ countImages }}</div>
+          <div class="tm-gallery__counter">{{ selected + 1 }} / {{ countImages }}\{{ displayThumbs.length }}</div>
           <div class="tm-gallery__buttons">
             <tm-icon name="arrow-left" @click="prev()"></tm-icon>
             <tm-icon name="arrow-right" @click="next()"></tm-icon>
@@ -52,7 +52,7 @@ export default {
       nThumbs: 6,
       selected: this.startAt,
       thumbSelected: this.startAt,
-      displayThumbs: this.images.slice(0, this.nThumbs),
+      displayThumbs: null,
       beginThumbIndex: 0
     };
   },
@@ -92,6 +92,9 @@ export default {
       this.$set(this, 'thumbSelected', halfDown - mod);
       this.$set(this, 'displayThumbs', this.images.slice(this.selected - halfDown + mod, this.selected + halfDown + 1));
     }
+  },
+  mounted() {
+    this.$set(this, 'displayThumbs', this.images.slice(0, this.nThumbs));
   },
   methods: {
     show: function(event) {

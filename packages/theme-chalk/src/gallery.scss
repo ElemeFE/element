@@ -49,6 +49,9 @@
     }
   }
   &__thumb-wrapper {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     float: left;
     width: 146px;
     height:94px;
@@ -64,8 +67,8 @@
     }
   }
   &__thumb {
-    width: 146px;
-    height:94px;
+    width: 144px;
+    height:92px;
     border-radius: 8px;
     background-size: cover;
     cursor: pointer;
