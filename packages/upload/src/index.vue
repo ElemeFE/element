@@ -103,9 +103,13 @@ export default {
     onExceed: {
       type: Function,
       default: noop
-    }
-  },
+    },
+    handleLoadImgError: {
+      type: Function,
+      default: noop
 
+    } // 处理图片加载失败
+  },
   data() {
     return {
       uploadFiles: [],
@@ -251,6 +255,7 @@ export default {
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
+          handle-load-img-error={this.handleLoadImgError}
           handlePreview={this.onPreview}>
         </UploadList>
       );
