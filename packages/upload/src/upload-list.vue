@@ -21,6 +21,7 @@
       <img
         class="el-upload-list__item-thumbnail"
         v-if="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(listType) > -1"
+        @error="handleLoadImgError(file, index)"
         :src="file.url" alt=""
       >
       <a class="el-upload-list__item-name" @click="handleClick(file)">
@@ -86,7 +87,10 @@
         default: false
       },
       handlePreview: Function,
-      listType: String
+      listType: String,
+      handleLoadImgError: {
+        type: Function
+      } // 处理image加载失败的情况
     },
     methods: {
       parsePercentage(val) {

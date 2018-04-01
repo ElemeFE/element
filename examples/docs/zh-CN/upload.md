@@ -48,7 +48,7 @@
           status: 'finished'
         }, {
           name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg2.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
           status: 'finished'
         }],
         fileList2: [{
@@ -75,6 +75,9 @@
       };
     },
     methods: {
+       handleImgError () {
+        alert('123123')
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -139,19 +142,24 @@
   :before-remove="beforeRemove"
   multiple
   :limit="3"
+  :handle-load-img-error="handleImgError"
   :on-exceed="handleExceed"
+  list-type="picture"
   :file-list="fileList">
   <el-button size="small" type="primary">点击上传</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb3333</div>
 </el-upload>
 <script>
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg2.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
+      handleImgError () {
+        alert('123123')
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
