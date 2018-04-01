@@ -8,6 +8,7 @@
         outerVisible: false,
         innerVisible: false,
         centerDialogVisible: false,
+        simplifiedDialogVisible: false,
         form: {
           name: '',
           region: '',
@@ -180,6 +181,25 @@ Dialog's content can be centered.
 If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
 :::
 
+### Simplified view (transparent Dialog)
+
+Dialog with simplified view with transparent background
+
+:::demo send anything
+
+```html
+<tm-button type="text" @click="simplifiedDialogVisible = true">click to open the Dialog</tm-button>
+
+<tm-dialog
+  :visible.sync="simplifiedDialogVisible"
+  center
+  simplified>
+  <tm-input placeholder="Write anything you want"></tm-input>
+  <div style="margin-top: 10px;">This is a possibility of a simplified dialog. With no background.</div>
+</tm-dialog>
+```
+:::
+
 ### Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -199,6 +219,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | show-close | whether to show a close button | boolean    | — | true |
 | before-close | callback before Dialog closes, and it will prevent Dialog from closing | function(done)，done is used to close the Dialog | — | — |
 | center | whether to align the header and footer in center | boolean | — | false |
+| simplified | whether to customize dialog as a simplified modal window (with no background) | boolean | — | false |
 
 ### Slot
 

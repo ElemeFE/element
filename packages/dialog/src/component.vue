@@ -3,10 +3,17 @@
     <div class="tm-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="tm-dialog"
-        :class="[{ 'is-fullscreen': fullscreen, 'tm-dialog--center': center }, customClass]"
+        :class="[
+          {
+            'is-fullscreen': fullscreen,
+            'tm-dialog--center': center,
+            'tm-dialog--simplified': simplified
+          },
+          customClass
+        ]"
         ref="dialog"
         :style="style">
-        <div class="tm-dialog__header">
+        <div class="tm-dialog__header" :class="{ 'is-empty': !title }">
           <slot name="title">
             <h2 class="tm-dialog__title">{{ title }}</h2>
           </slot>
@@ -100,6 +107,10 @@
       },
       beforeClose: Function,
       center: {
+        type: Boolean,
+        default: false
+      },
+      simplified: {
         type: Boolean,
         default: false
       }

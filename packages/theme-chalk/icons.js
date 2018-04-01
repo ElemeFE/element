@@ -1,4 +1,5 @@
 import AdvancedSearch from '../../packages/theme-chalk/src/icons/advanced-search.svg';
+import Aeroexpress from '../../packages/theme-chalk/src/icons/aeroexpress.svg';
 import Airplane from '../../packages/theme-chalk/src/icons/airplane.svg';
 import ArrowBack from '../../packages/theme-chalk/src/icons/arrow-back.svg';
 import ArrowDown from '../../packages/theme-chalk/src/icons/arrow-down.svg';
@@ -56,7 +57,9 @@ import Snow from '../../packages/theme-chalk/src/icons/snow.svg';
 import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
+import Transfer from '../../packages/theme-chalk/src/icons/transfer.svg';
 import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
+import UmbrellaAngle from '../../packages/theme-chalk/src/icons/umbrella-angle.svg';
 import Umbrella from '../../packages/theme-chalk/src/icons/umbrella.svg';
 import Upload from '../../packages/theme-chalk/src/icons/upload.svg';
 import Vault from '../../packages/theme-chalk/src/icons/vault.svg';
@@ -66,6 +69,7 @@ import Window from '../../packages/theme-chalk/src/icons/window.svg';
 
 module.exports = {
   AdvancedSearch,
+  Aeroexpress,
   Airplane,
   ArrowBack,
   ArrowDown,
@@ -123,7 +127,9 @@ module.exports = {
   Star,
   StatsPie,
   Success,
+  Transfer,
   Tv,
+  UmbrellaAngle,
   Umbrella,
   Upload,
   Vault,
