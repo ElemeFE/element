@@ -10,6 +10,7 @@ import Bath from '../../packages/theme-chalk/src/icons/bath.svg';
 import Bell from '../../packages/theme-chalk/src/icons/bell.svg';
 import Bucket from '../../packages/theme-chalk/src/icons/bucket.svg';
 import Calendar from '../../packages/theme-chalk/src/icons/calendar.svg';
+import Car from '../../packages/theme-chalk/src/icons/car.svg';
 import Cart from '../../packages/theme-chalk/src/icons/cart.svg';
 import Case from '../../packages/theme-chalk/src/icons/case.svg';
 import Check from '../../packages/theme-chalk/src/icons/check.svg';
@@ -55,7 +56,6 @@ import Snow from '../../packages/theme-chalk/src/icons/snow.svg';
 import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
-import Transfer from '../../packages/theme-chalk/src/icons/transfer.svg';
 import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
 import Umbrella from '../../packages/theme-chalk/src/icons/umbrella.svg';
 import Upload from '../../packages/theme-chalk/src/icons/upload.svg';
@@ -77,6 +77,7 @@ module.exports = {
   Bell,
   Bucket,
   Calendar,
+  Car,
   Cart,
   Case,
   Check,
@@ -122,7 +123,6 @@ module.exports = {
   Star,
   StatsPie,
   Success,
-  Transfer,
   Tv,
   Umbrella,
   Upload,
