@@ -27,6 +27,24 @@
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
         <i class="el-icon-arrow-right"></i>
       </el-button>
+      <el-button
+        v-if="moveable"
+        type="primary"
+        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
+        @click.native="toUp"
+        :disabled="rightChecked.length === 0 || rightChecked.length > 1">
+        <span v-if="buttonTexts[2] !== undefined">{{ buttonTexts[2] }}</span>
+        <i class="el-icon-arrow-up"></i>
+      </el-button>
+      <el-button
+        v-if="moveable"
+        type="primary"
+        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
+        @click.native="toDown"
+        :disabled="rightChecked.length === 0 || rightChecked.length > 1">
+        <span v-if="buttonTexts[3] !== undefined">{{ buttonTexts[3] }}</span>
+        <i class="el-icon-arrow-down"></i>
+      </el-button>
     </div>
     <transfer-panel
       v-bind="$props"
@@ -121,7 +139,8 @@
       targetOrder: {
         type: String,
         default: 'original'
-      }
+      },
+      moveable: Boolean
     },
 
     data() {
@@ -148,7 +167,7 @@
       },
 
       hasButtonTexts() {
-        return this.buttonTexts.length === 2;
+        return this.buttonTexts.length === 4;
       }
     },
 
@@ -210,6 +229,20 @@
         this.$emit('input', currentValue);
         this.$emit('change', currentValue, 'right', this.leftChecked);
       },
+      toUp() {
+        let currentValue = this.value.slice();
+        let index = currentValue.indexOf(this.rightChecked[0]);
+        currentValue = this.upRecord(currentValue, index);
+        this.$emit('input', currentValue);
+        this.$emit('change', currentValue, 'right');
+      },
+      toDown() {
+        let currentValue = this.value.slice();
+        let index = currentValue.indexOf(this.rightChecked[0]);
+        currentValue = this.downRecord(currentValue, index);
+        this.$emit('input', currentValue);
+        this.$emit('change', currentValue, 'right');
+      },
 
       clearQuery(which) {
         if (which === 'left') {
@@ -217,6 +250,25 @@
         } else if (which === 'right') {
           this.$refs.rightPanel.query = '';
         }
+      },
+
+      swapItems(arr, index1, index2) {
+        arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+        return arr;
+      },
+
+      upRecord(arr, $index) {
+        if ($index === 0) {
+          return arr;
+        }
+        return this.swapItems(arr, $index, $index - 1);
+      },
+
+      downRecord(arr, $index) {
+        if ($index === arr.length - 1) {
+          return arr;
+        }
+        return this.swapItems(arr, $index, $index + 1);
       }
     }
   };
