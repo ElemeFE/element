@@ -3,12 +3,15 @@
 
 @include b(gallery) {
   &__image {
-    /*height: 507px;*/
-    overflow:hidden;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
+    height: 507px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     & img {
-      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
     }
   }
   &__controls {
@@ -45,7 +48,7 @@
     height: 96px;
     overflow: hidden;
     :first-child {
-      margin-left: 0;
+      margin-left: 1px;
     }
   }
   &__thumb-wrapper {
@@ -56,7 +59,7 @@
     width: 146px;
     height:94px;
     border-radius: 8px;
-    margin-left: 10px;
+    margin-left: 12px;
     cursor: pointer;
     border: solid 1px transparent;
     &:hover {
