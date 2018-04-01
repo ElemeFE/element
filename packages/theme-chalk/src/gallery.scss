@@ -1,0 +1,26 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(gallery) {
+  display:none!important;
+  position: fixed;
+  width: 100%;
+  height:100%;
+  z-index: 2001;
+  top: 0;
+  left: 0;
+  background-color: rgba(63, 69, 87, 0.8);
+  align-items: center;
+  box-sizing: border-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  &__content {
+    max-width: 1024px;
+    margin: 0 auto;
+    position: relative;
+    background: grey;
+  }
+}

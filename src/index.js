@@ -62,6 +62,7 @@ import EntityCounter from '../packages/entity-counter/index.js';
 import PriceInfo from '../packages/price-info/index.js';
 import Sidebar from '../packages/sidebar/index.js';
 import NavBar from '../packages/nav-bar/index.js';
+import Gallery from '../packages/gallery/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
 
@@ -127,6 +128,7 @@ const components = [
   PriceInfo,
   Sidebar,
   NavBar,
+  Gallery,
   CollapseTransition
 ];
 
@@ -226,7 +228,8 @@ module.exports = {
   EntityCounter,
   PriceInfo,
   Sidebar,
-  NavBar
+  NavBar,
+  Gallery
 };
 
 module.exports.default = module.exports;
