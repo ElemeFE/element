@@ -1,67 +1,119 @@
+<script>
+  export default {
+    data: function () {
+      return {
+        images: [
+        {src: "https://images.aanda.ru/photos/2150/168691.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168692.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168693.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168694.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168695.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168688.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168689.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168690.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166006.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166007.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166008.jpg"},
+        {src: "http://images.aanda.ru/photos/4338/92353.jpg"},
+        {src: "http://images.aanda.ru/photos/8556/154294.jpg"},
+        {src: "http://images.aanda.ru/photos/4387/156427.jpg"},
+        {src: "http://images.aanda.ru/photos/5757/55286.jpg"}
+        ]
+      }
+    }
+  }
+</script>
 ## Gallery
+
+### Basic usage
 
 :::demo default
 
 ```html
-<tm-gallery ref="gallery1"></tm-gallery>
+<tm-gallery ref="gallery1" :images="images"></tm-gallery>
 <div>
-  <tm-button type="primary" @click="() => { this.$refs.gallery1.tst() }">Primary</tm-button>
+  <tm-button type="secondary" cancel @click="() => { this.$refs.gallery1.show() }">Open gallery</tm-button>
 </div>
+
+<script>
+  export default {
+    data: function () {
+      return {
+        images: [
+        {src: "https://images.aanda.ru/photos/2150/168691.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168692.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168693.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168694.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168695.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168688.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168689.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168690.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166006.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166007.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166008.jpg"},
+        {src: "http://images.aanda.ru/photos/4338/92353.jpg"},
+        {src: "http://images.aanda.ru/photos/8556/154294.jpg"},
+        {src: "http://images.aanda.ru/photos/4387/156427.jpg"},
+        {src: "http://images.aanda.ru/photos/5757/55286.jpg"}
+        ]
+      }
+    }
+  }
+</script>
+
 ```
 :::
 
-### Basic usage
+### Start at N position
 
-:::demo Use `type`, `plain` and `round` to define Button's style.
+:::demo use `start-at` for start from N position
 
 ```html
-<h4>Basic usage</h4>
+<tm-gallery ref="gallery2" :images="images" :start-at=2></tm-gallery>
 <div>
-  <tm-button>Default</tm-button>
-  <tm-button type="primary">Primary</tm-button>
+  <tm-button type="secondary" cancel @click="() => { this.$refs.gallery2.show() }">Open gallery</tm-button>
 </div>
-<div style="margin: 20px 0">
-  <tm-button type="secondary">Secondary</tm-button>
-  <tm-button type="secondary" cancel>Secondary Cancel</tm-button>
-  <tm-button type="secondary" remove>Secondary Delete</tm-button>
-</div>
-<div>
-  <tm-button type="success">Success</tm-button>
-  <tm-button type="info">Info</tm-button>
-  <tm-button type="warning">Warning</tm-button>
-  <tm-button type="danger">Danger</tm-button>
-</div>
-<h4>Plain usage</h4>
-<div style="margin: 20px 0">
-  <tm-button plain>Plain</tm-button>
-  <tm-button type="primary" plain>Primary</tm-button>
-</div>
-<div>
-  <tm-button type="secondary" plain>Secondary</tm-button>
-  <tm-button type="secondary" cancel plain>Secondary Cancel</tm-button>
-  <tm-button type="secondary" remove plain>Secondary Delete</tm-button>
-</div>
-<div style="margin: 20px 0">
-  <tm-button type="success" plain>Success</tm-button>
-  <tm-button type="info" plain>Info</tm-button>
-  <tm-button type="warning" plain>Warning</tm-button>
-  <tm-button type="danger" plain>Danger</tm-button>
-</div>
-<h4>Round usage</h4>
-<div style="margin: 20px 0">
-  <tm-button round>Round</tm-button>
-  <tm-button type="primary" round>Primary</tm-button>
-</div>
-<div>
-  <tm-button type="secondary" round>Secondary</tm-button>
-  <tm-button type="secondary" cancel round>Secondary Cancel</tm-button>
-  <tm-button type="secondary" remove round>Secondary Delete</tm-button>
-</div>
-<div style="margin: 20px 0">
-  <tm-button type="success" round>Success</tm-button>
-  <tm-button type="info" round>Info</tm-button>
-  <tm-button type="warning" round>Warning</tm-button>
-  <tm-button type="danger" round>Danger</tm-button>
-</div>
+
+<script>
+  export default {
+    data: function () {
+      return {
+        images: [
+        {src: "https://images.aanda.ru/photos/2150/168691.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168692.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168693.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168694.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168695.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168688.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168689.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/168690.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166006.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166007.jpg"},
+        {src: "https://images.aanda.ru/photos/2150/166008.jpg"},
+        {src: "http://images.aanda.ru/photos/4338/92353.jpg"},
+        {src: "http://images.aanda.ru/photos/8556/154294.jpg"},
+        {src: "http://images.aanda.ru/photos/4387/156427.jpg"},
+        {src: "http://images.aanda.ru/photos/5757/55286.jpg"}
+        ]
+      }
+    }
+  }
+</script>
+
 ```
 :::
+
+### Gallery Attributes
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| images | images to show | array | — | — |
+| start-at | start from N position | number | — | 0 |
+
+### Gallery Methods
+| Method | Description | Parameters |
+|---------- |-------------- | -- |
+| show | show gallery | — |
+| hide | hide gallery | — |
+| prev | switch to the previous image | — |
+| next | switch to the next image | — |
+| showImage | switch to N image | number |
