@@ -1,0 +1,73 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(gallery) {
+  &__image {
+    /*height: 507px;*/
+    overflow:hidden;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
+    & img {
+      width: 100%;
+    }
+  }
+  &__controls {
+    height: 47px;
+  }
+  &__counter {
+    margin-top: 14px;
+    float: left;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    text-align: left;
+    color: #ffffff;
+  }
+  &__buttons {
+    float: right;
+    margin-top:12px;
+    & .tm-icon {
+      fill: #ccc;
+      cursor: pointer;
+      &:hover {
+        fill: #fff;
+      }
+    }
+    & .tm-icon--arrow-right {
+      margin-left:23px;
+    }
+  }
+  &__thumbs {
+    height: 96px;
+    overflow: hidden;
+    :first-child {
+      margin-left: 0;
+    }
+  }
+  &__thumb-wrapper {
+    float: left;
+    width: 146px;
+    height:94px;
+    border-radius: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: solid 1px transparent;
+    &:hover {
+      border: solid 1px rgba(255, 255, 255, 0.4);
+    }
+    &--active {
+      border: solid 1px #ffffff;
+    }
+  }
+  &__thumb {
+    width: 146px;
+    height:94px;
+    border-radius: 8px;
+    background-size: cover;
+    cursor: pointer;
+  }
+}

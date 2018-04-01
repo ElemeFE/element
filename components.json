@@ -60,5 +60,6 @@
   "entity-counter": "./packages/entity-counter/index.js",
   "price-info": "./packages/price-info/index.js",
   "sidebar": "./packages/sidebar/index.js",
-  "nav-bar": "./packages/nav-bar/index.js"
+  "nav-bar": "./packages/nav-bar/index.js",
+  "gallery": "./packages/gallery/index.js"
 }

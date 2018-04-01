@@ -211,6 +211,10 @@
             {
               "path": "/price-info",
               "title": "PriceInfo"
+            },
+            {
+              "path": "/gallery",
+              "title": "Gallery"
             }
           ]
         }
