@@ -53,10 +53,11 @@
         },
         value1: '',
         value2: '',
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value4: '',
+        value3: '',
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: '',
-        value6: ''
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -117,6 +118,15 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       :picker-options="pickerOptions1">
     </el-date-picker>
   </div>
+  <div class="block">
+    <span class="demonstration">设置默认时间</span>
+    <el-date-picker
+      v-model="value3"
+      type="datetime"
+      placeholder="选择日期时间"
+      default-time="12:00:00">
+    </el-date-picker>
+  </div>
 </template>
 
 <script>
@@ -146,7 +156,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
           }]
         },
         value1: '',
-        value2: ''
+        value2: '',
+        value3: ''
       };
     }
   };
@@ -162,7 +173,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">默认</span>
     <el-date-picker
-      v-model="value3"
+      v-model="value4"
       type="datetimerange"
       range-separator="至"
       start-placeholder="开始日期"
@@ -172,7 +183,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">带快捷选项</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value5"
       type="datetimerange"
       :picker-options="pickerOptions2"
       range-separator="至"
@@ -214,8 +225,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
             }
           }]
         },
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value4: ''
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value5: ''
       };
     }
   };
@@ -231,7 +242,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value6"
       type="datetimerange"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
@@ -241,7 +252,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00，结束日期时刻为 08:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value7"
       type="datetimerange"
       align="right"
       start-placeholder="开始日期"
@@ -255,8 +266,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   export default {
     data() {
       return {
-        value5: '',
-        value6: ''
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -283,7 +294,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | '-' |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
-| default-time | 范围选择时选中日期的默认具体时刻 | string[] | 数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
+| default-time | 选中日期后的默认具体时刻 | 非范围选择时：string / 范围选择时：string[] | 非范围选择时：形如`12:00:00`的字符串；范围选择时：数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻。不指定会使用时刻 `00:00:00` | — |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
