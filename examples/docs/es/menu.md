@@ -338,6 +338,7 @@ NavMenu vertical puede ser colapsado.
 | show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
 | hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |
 | disabled | si esta `disabled` el sub-menu | boolean | — | false |
+| popper-append-to-body | whether to append the popup menu to body. If the positioning of the menu is wrong, you can try setting this prop | boolean | - | level one Submenu: true / other Submenus: false |
 
 ### Atributos Menu-Item 
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
