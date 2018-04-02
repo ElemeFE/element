@@ -336,6 +336,7 @@ Vertical NavMenu could be collapsed.
 | show-timeout | timeout before showing a sub-menu | number | — | 300 |
 | hide-timeout | timeout before hiding a sub-menu | number | — | 300 |
 | disabled | whether the sub-menu is disabled | boolean | — | false |
+| popper-append-to-body | whether to append the popup menu to body. If the positioning of the menu is wrong, you can try setting this prop | boolean | - | level one Submenu: true / other Submenus: false |
 
 ### Menu-Item Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

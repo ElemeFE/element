@@ -43,7 +43,11 @@
         default: 300
       },
       popperClass: String,
-      disabled: Boolean
+      disabled: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: undefined
+      }
     },
 
     data() {
@@ -51,7 +55,8 @@
         popperJS: null,
         timeout: null,
         items: {},
-        submenus: {}
+        submenus: {},
+        mouseInChild: false
       };
     },
     watch: {
@@ -66,7 +71,9 @@
     computed: {
       // popper option
       appendToBody() {
-        return this.isFirstLevel;
+        return this.popperAppendToBody === undefined
+          ? this.isFirstLevel
+          : this.popperAppendToBody;
       },
       menuTransitionName() {
         return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
@@ -180,6 +187,7 @@
         ) {
           return;
         }
+        this.dispatch('ElSubmenu', 'mouse-enter-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
@@ -193,9 +201,10 @@
         ) {
           return;
         }
+        this.dispatch('ElSubmenu', 'mouse-leave-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-          this.rootMenu.closeMenu(this.index);
+          !this.mouseInChild && this.rootMenu.closeMenu(this.index);
         }, this.hideTimeout);
       },
       handleTitleMouseenter() {
@@ -223,6 +232,14 @@
       this.parentMenu.addSubmenu(this);
       this.rootMenu.addSubmenu(this);
       this.$on('toggle-collapse', this.handleCollapseToggle);
+      this.$on('mouse-enter-child', () => {
+        this.mouseInChild = true;
+        clearTimeout(this.timeout);
+      });
+      this.$on('mouse-leave-child', () => {
+        this.mouseInChild = false;
+        clearTimeout(this.timeout);
+      });
     },
     mounted() {
       this.initPopper();
