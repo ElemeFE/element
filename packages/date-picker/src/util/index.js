@@ -142,6 +142,14 @@ export const modifyTime = function(date, h, m, s) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
 };
 
+export const modifyWithDefaultTime = (date, time) => {
+  if (date == null || !time) {
+    return date;
+  }
+  time = parseDate(time, 'HH:mm:ss');
+  return modifyTime(date, time.getHours(), time.getMinutes(), time.getSeconds());
+};
+
 export const clearTime = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
