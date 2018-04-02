@@ -54,7 +54,7 @@
         value1: '',
         value2: '',
         value3: '',
-        value4: new Date(),
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: '',
         value6: '',
         value7: ''
@@ -295,7 +295,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| default-time | the time value to use when selecting date range | string[] | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | — |
+| default-time | the default time value after picking a date | non-range: string / range: string[] | non-range: a string like `12:00:00`, range: array of two strings, and the first item is for the start date and second for the end date. `00:00:00` will be used if not specified | — |
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
