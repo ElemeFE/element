@@ -192,8 +192,10 @@
       handleClick(type, {value, disabled}) {
         if (!disabled) {
           this.modifyDateField(type, value);
-          this.emitSelectRange(type);
-          this.adjustSpinner(type, value);
+          this.$nextTick(() => {
+            this.emitSelectRange(type);
+            this.adjustSpinner(type, value);
+          });
         }
       },
 
