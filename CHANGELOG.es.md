@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2.3.3
+
+*2018-04-04*
+
+- Added `shadow` attribute for Card, #10418 (by @YunYouJun)
+- Fixed Badge being hidden when `value` is `0`, #10470
+- Fixed some bugs of draggable Tree, #10474 #10494
+- Added `placement` for Autocomplete, #10475
+- Now `default-time` attribute also works in non-range DateTimePicker, #10321 (by @RickMacTurk)
+- Removed the blue outline of TabItem after the browser blurs or is minimized, #10503
+- Added `popper-append-to-body` attribute for SubMenu, #10515
+- Removed visual feedback when hovering on non-link BreadcrumbItem, #10551
+- Fixed InputNumber's `change` event to ensure the component's binding value is updated in the event handler, #10553
+
 ### 2.3.2
 
 *2018-03-29*
