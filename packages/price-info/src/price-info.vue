@@ -66,10 +66,6 @@ export default {
   },
   data() {
     return {
-      labelSum: null,
-      labelChange: null,
-      labelPartSum: null,
-      labelPartChange: null,
       currencyUnicode: {
         eur: '\u20AC',
         rub: '\u20BD',
@@ -87,20 +83,34 @@ export default {
       return false;
     }
   },
-  mounted() {
-    if (this.sum) {
-      let parsedSum = this.parsingSum(this.sum);
-      this.labelSum = parsedSum[0];
-      this.labelChange = parsedSum[1];
-    } else {
-      this.labelSum = 0;
-    }
-    if (this.partSum) {
-      let parsedPartSum = this.parsingSum(this.partSum);
-      this.labelPartSum = parsedPartSum[0];
-      this.labelPartChange = parsedPartSum[1];
-    } else {
-      this.labelPartSum = 0;
+  computed: {
+    labelSum() {
+      if (this.sum) {
+        return this.parsingSum(this.sum)[0];
+      } else if (this.sum === 0) {
+        return this.sum;
+      }
+      return null;
+    },
+    labelChange() {
+      if (this.sum) {
+        return this.parsingSum(this.sum)[1];
+      }
+      return null;
+    },
+    labelPartSum() {
+      if (this.partSum) {
+        return this.parsingSum(this.partSum)[0];
+      } else if (this.partSum === 0) {
+        return this.partSum;
+      }
+      return null;
+    },
+    labelPartChange() {
+      if (this.partSum) {
+        return this.parsingSum(this.partSum)[1];
+      }
+      return null;
     }
   }
 };
