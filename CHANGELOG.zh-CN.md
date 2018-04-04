@@ -1,5 +1,19 @@
 ## 更新日志
 
+### 2.3.3
+
+*2018-04-04*
+
+- 新增 Card 的 `shadow` 属性，#10418（by @YunYouJun）
+- 修复 Badge 在 `value` 属性为 `0` 时不显示上标的问题，#10470
+- 修复 Tree 节点拖拽相关的问题，#10474 #10494
+- 新增 Autocomplete 的 `placement` 属性，#10475
+- 现在 `default-time` 属性也可用于非范围选择的 DateTimePicker 了，#10321（by @RickMacTurk）
+- 修复 TabItem 在浏览器失焦和隐藏后出现蓝色边框的问题，#10503
+- 新增 SubMenu 的 `popper-append-to-body` 属性，#10515
+- 现在非链接的 BreadcrumbItem 在 hover 时不再具有视觉反馈，#10551
+- 调整 InputNumber `change` 事件的触发时机，使得在回调中能够取得最新的组件绑定值，#10553
+
 ### 2.3.2
 
 *2018-03-29*
