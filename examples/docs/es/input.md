@@ -681,7 +681,7 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 |icon | nombre del icono | string | — | — |
 |value | valor enlazado | string | — | — |
 | debounce | retardo al escribir, en milisegundos | number | — | 300 |
-| placement | placement of the popup menu | string | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
+| placement | ubicación del menú emergente | string | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
 |fetch-suggestions | un método para obtener las sugerencias del input. Cuando las sugerencias estén listas, invocar `callback(data:[])` para devolverlas a Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | nombre personalizado de clase para el dropdown de autocomplete | string | — | — |
 | trigger-on-focus | si se deben mostrar sugerencias cuando el input obtiene el foco | boolean | — | true |
