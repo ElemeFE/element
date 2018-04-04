@@ -8,9 +8,6 @@ export declare class ElSubmenu extends ElementUIComponent {
   /** Delay time before show a sub-menu */
   showTimeout: number
 
-  /** Delay time before showing a sub-menu */
-  showTimeout: number
-
   /** Delay time before hiding a sub-menu */
   hideTimeout: number
 
