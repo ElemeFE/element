@@ -6,13 +6,13 @@
         noDash ? 'tm-price-info--no-dash' : ''
        ]"
   >
-    <template v-if="partSum">
-      <span v-if="partSum" class="tm-price-info__part-sum">{{ labelPartSum }}</span>
-      <span v-if="partSum" class="tm-price-info__change">,{{ labelPartChange }}</span>
+    <template v-if="partSum || partSum === 0">
+      <span class="tm-price-info__part-sum">{{ labelPartSum }}</span>
+      <span v-if="labelPartChange" class="tm-price-info__change">,{{ labelPartChange }}</span>
     </template>
     <span class="tm-price-info__starts-prefix" v-if="isStartPrice && !partSum">{{ startsPrefix }}</span>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
-    <span class="tm-price-info__change">,{{ labelChange }}</span>
+    <span v-if="labelChange" class="tm-price-info__change">,{{ labelChange }}</span>
     <span v-if="!hideCurrency" class="tm-price-info__currency">{{ currencyUnicode[currency] }}</span>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
@@ -92,11 +92,15 @@ export default {
       let parsedSum = this.parsingSum(this.sum);
       this.labelSum = parsedSum[0];
       this.labelChange = parsedSum[1];
+    } else {
+      this.labelSum = 0;
     }
     if (this.partSum) {
       let parsedPartSum = this.parsingSum(this.partSum);
       this.labelPartSum = parsedPartSum[0];
       this.labelPartChange = parsedPartSum[1];
+    } else {
+      this.labelPartSum = 0;
     }
   }
 };

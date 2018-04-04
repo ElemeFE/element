@@ -3,7 +3,7 @@
 @import "mixins/utils";
 
 @include b(price-info) {
-  display: inline-block;
+  display: inline-flex;
   color: $--color-text-primary;
   font-size: 20px;
 
@@ -73,7 +73,7 @@
   }
 
   @include m(no-dash) {
-    
+
     @include e(sum) {
       color: $--color-text-regular;
       border: none;
