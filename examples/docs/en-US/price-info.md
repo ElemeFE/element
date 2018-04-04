@@ -14,7 +14,7 @@ Price Info used to display the sum and part sum. See examples to understand it b
 
 ```html
 <div>
-  <tm-price-info :sum="10334.92" currency="rub" size="tiny"></tm-price-info>
+  <tm-price-info :sum="0" currency="rub" size="tiny"></tm-price-info>
   <tm-price-info :sum="11731.11" currency="rub" size="extra-small"></tm-price-info>
   <tm-price-info :sum="12560.10" type="paid" currency="rub" size="small" taxes-info></tm-price-info>
   <tm-price-info :sum="22560.56" type="paid" currency="usd" size="medium" taxes-info></tm-price-info>

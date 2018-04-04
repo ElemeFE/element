@@ -6,13 +6,13 @@
         noDash ? 'tm-price-info--no-dash' : ''
        ]"
   >
-    <template v-if="partSum">
-      <span v-if="partSum" class="tm-price-info__part-sum">{{ labelPartSum }}</span>
-      <span v-if="partSum" class="tm-price-info__change">,{{ labelPartChange }}</span>
+    <template v-if="partSum || partSum === 0">
+      <span class="tm-price-info__part-sum">{{ labelPartSum }}</span>
+      <span v-if="labelPartChange" class="tm-price-info__change">,{{ labelPartChange }}</span>
     </template>
     <span class="tm-price-info__starts-prefix" v-if="isStartPrice && !partSum">{{ startsPrefix }}</span>
     <span class="tm-price-info__sum">{{ labelSum }}</span>
-    <span class="tm-price-info__change">,{{ labelChange }}</span>
+    <span v-if="labelChange" class="tm-price-info__change">,{{ labelChange }}</span>
     <span v-if="!hideCurrency" class="tm-price-info__currency">{{ currencyUnicode[currency] }}</span>
     <span v-if="taxesInfo" class="tm-price-info__taxes">
       <span>вкл.</span>
@@ -66,10 +66,6 @@ export default {
   },
   data() {
     return {
-      labelSum: null,
-      labelChange: null,
-      labelPartSum: null,
-      labelPartChange: null,
       currencyUnicode: {
         eur: '\u20AC',
         rub: '\u20BD',
@@ -87,16 +83,34 @@ export default {
       return false;
     }
   },
-  mounted() {
-    if (this.sum) {
-      let parsedSum = this.parsingSum(this.sum);
-      this.labelSum = parsedSum[0];
-      this.labelChange = parsedSum[1];
-    }
-    if (this.partSum) {
-      let parsedPartSum = this.parsingSum(this.partSum);
-      this.labelPartSum = parsedPartSum[0];
-      this.labelPartChange = parsedPartSum[1];
+  computed: {
+    labelSum() {
+      if (this.sum) {
+        return this.parsingSum(this.sum)[0];
+      } else if (this.sum === 0) {
+        return this.sum;
+      }
+      return null;
+    },
+    labelChange() {
+      if (this.sum) {
+        return this.parsingSum(this.sum)[1];
+      }
+      return null;
+    },
+    labelPartSum() {
+      if (this.partSum) {
+        return this.parsingSum(this.partSum)[0];
+      } else if (this.partSum === 0) {
+        return this.partSum;
+      }
+      return null;
+    },
+    labelPartChange() {
+      if (this.partSum) {
+        return this.parsingSum(this.partSum)[1];
+      }
+      return null;
     }
   }
 };
