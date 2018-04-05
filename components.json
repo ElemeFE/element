@@ -61,5 +61,6 @@
   "price-info": "./packages/price-info/index.js",
   "sidebar": "./packages/sidebar/index.js",
   "nav-bar": "./packages/nav-bar/index.js",
-  "gallery": "./packages/gallery/index.js"
+  "gallery": "./packages/gallery/index.js",
+  "value-switcher": "./packages/value-switcher/index.js"
 }

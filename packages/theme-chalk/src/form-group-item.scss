@@ -35,4 +35,19 @@
       }
     }
   }
+
+  .tm-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 30px;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: 1px solid #ccc;
+    border-radius: 0;
+  }
+
+  .tm-autocomplete {
+
+  }
 }
