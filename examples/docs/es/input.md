@@ -489,9 +489,9 @@ Personalice cómo se muestran las sugerencias.
     slot="suffix"
     @click="handleIconClick">
   </i>
-  <template slot-scope="props">
-    <div class="value">{{ props.item.value }}</div>
-    <span class="link">{{ props.item.link }}</span>
+  <template slot-scope="{ item }">
+    <div class="value">{{ item.value }}</div>
+    <span class="link">{{ item.link }}</span>
   </template>
 </el-autocomplete>
 
@@ -689,7 +689,7 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | select-when-unmatched | si se emite un evento `select` al pulsar enter cuando no hay coincidencia de Autocomplete | boolean | — | false |
 | label | texto de la etiqueta | string | — | — |
 
-### Autocomplete slots
+### Autocomplete Slots
 
 | Nombre  | Descripción                          |
 | ------- | ------------------------------------ |
@@ -697,6 +697,12 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | suffix  | contenido como sufijo del input      |
 | prepend | contenido antes del input            |
 | append  | contenido a añadir después del input |
+
+### Autocomplete Scoped Slot
+
+| Name | Description |
+|------|--------|
+| — | Custom content for input suggestions. The scope parameter is { item } |
 
 ### Autocomplete Eventos
 

@@ -2045,3 +2045,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
 | filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)      | —                             | —           |
 | filtered-value        | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array                             | —                             | —           |
+
+### Table-column Scoped Slot
+| Name | Description |
+|------|--------|
+| — | Custom content for table columns. The scope parameter is { row, column, $index } |
