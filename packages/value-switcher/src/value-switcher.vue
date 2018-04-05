@@ -1,6 +1,7 @@
 <template>
   <div class="tm-value-switcher">
-    <tm-autocomplete :fetch-suggestions="fetchSuggestions"
+    <tm-autocomplete class="tm-value-switcher__autocomplete"
+                     :fetch-suggestions="fetchSuggestions"
                      :placeholder="leftPlaceholder"
                      :suffix-icon="suffixIcon"
                      v-model="labelLeft"
@@ -9,11 +10,12 @@
         <tm-value-switcher-item :title="props.item.title"></tm-value-switcher-item>
       </template>
     </tm-autocomplete>
-    <tm-button>
-      <tm-icon name="airplane"
-               @click="onSwitch"></tm-icon>
+    <tm-button class="tm-value-switcher__btn"
+               @click="onSwitch">
+      <tm-icon name="arrows-reverse"></tm-icon>
     </tm-button>
-    <tm-autocomplete :fetch-suggestions="fetchSuggestions"
+    <tm-autocomplete class="tm-value-switcher__autocomplete"
+                     :fetch-suggestions="fetchSuggestions"
                      :placeholder="rightPlaceholder"
                      :suffix-icon="suffixIcon"
                      v-model="labelRight"

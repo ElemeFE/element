@@ -48,6 +48,19 @@
   }
 
   .tm-autocomplete {
+    > .tm-input {
+      > .tm-input__inner {
+        border: none;
+        border-right: 1px solid #ccc;
+      }
+    }
 
+    &:last-child {
+      > .tm-input {
+        > .tm-input__inner {
+          border: none;
+        }
+      }
+    }
   }
 }
