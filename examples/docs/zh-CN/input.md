@@ -579,9 +579,9 @@ export default {
     slot="suffix"
     @click="handleIconClick">
   </i>
-  <template slot-scope="props">
-    <div class="name">{{ props.item.value }}</div>
-    <span class="addr">{{ props.item.address }}</span>
+  <template slot-scope="{ item }">
+    <div class="name">{{ item.value }}</div>
+    <span class="addr">{{ item.address }}</span>
   </template>
 </el-autocomplete>
 
@@ -822,7 +822,7 @@ export default {
 | label | 输入框关联的label文字 | string | — | — |
 | tabindex | 输入框的tabindex | string | - | - |
 
-### Input slots
+### Input Slots
 | name | 说明 |
 |------|--------|
 | prefix | 输入框头部内容，只对 `type="text"` 有效 |
@@ -864,13 +864,18 @@ export default {
 | prefix-icon | 输入框头部图标 | string | — | — |
 | suffix-icon | 输入框尾部图标 | string | — | — |
 
-### Autocomplete slots
+### Autocomplete Slots
 | name | 说明 |
 |------|--------|
 | prefix | 输入框头部内容 |
 | suffix | 输入框尾部内容 |
 | prepend | 输入框前置内容 |
 | append | 输入框后置内容 |
+
+### Autocomplete Scoped Slot
+| name | 说明 |
+|------|--------|
+| — | 自定义输入建议，参数为 { item } |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |
