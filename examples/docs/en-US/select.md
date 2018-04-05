@@ -102,6 +102,7 @@
         value9: [],
         value10: [],
         value11: [],
+        value12: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -332,7 +333,7 @@ Multiple select uses tags to display selected options.
       :value="item.value">
     </tm-option>
   </tm-select>
-  
+
   <tm-select
     v-model="value11"
     multiple
@@ -370,6 +371,52 @@ Multiple select uses tags to display selected options.
         }],
         value5: [],
         value11: []
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Basic checkbox select
+
+Chekbox select uses tags to display selected options.
+
+:::demo Set `checkbox` attribute for `tm-select` to enable checkbox mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
+```html
+<template>
+  <tm-select v-model="value12" multiple placeholder="Select">
+    <tm-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      checkbox>
+    </tm-option>
+  </tm-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value12: []
       }
     }
   }

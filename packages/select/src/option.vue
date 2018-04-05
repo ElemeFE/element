@@ -7,10 +7,12 @@
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
-      'hover': hover
+      'is-checkbox': isCheckbox,
+      'hover': hover,
     }">
     <slot>
       <span>{{ currentLabel }}</span>
+      <tm-checkbox v-if="isCheckbox" v-model="itemSelected"></tm-checkbox>
     </slot>
   </li>
 </template>
@@ -37,6 +39,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      checkbox: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -51,6 +57,9 @@
     },
 
     computed: {
+      isCheckbox() {
+        return this.checkbox;
+      },
       isObject() {
         return Object.prototype.toString.call(this.value).toLowerCase() === '[object object]';
       },
