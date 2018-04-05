@@ -38,7 +38,10 @@ export default {
       default: null,
       required: true
     },
-    partSum: [Number, String],
+    partSum: {
+      type: [Number, String],
+      default: null
+    },
     type: {
       type: String,
       default: 'paid'
