@@ -296,7 +296,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |
 | range-separator    | separador de rango                       | string            | -                                        | '-'                  |
 | default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |                      |
-| default-time | the default time value after picking a date | non-range: string / range: string[] | non-range: a string like `12:00:00`, range: array of two strings, and the first item is for the start date and second for the end date. `00:00:00` will be used if not specified | — |
+| default-time | el valor de tiempo por defecto después de elegir una fecha | non-range: string / range: string[] | non-range: Una cadena de texto como `12:00:00`, range: array de dos strings, el primero es para la fecha de inicio y el segundo para la fecha final. 00:00:00 se utilizará si no se especifica | — |
 | value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
