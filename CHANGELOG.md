@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.1.9
+
+*2018-04-06*
+
+- Изменения по компоненту Price Info
+    - Размер tiny заменен на extra-small
+    - Размер extra-small заменен на small
+    - Размер small заменен на default
+
 ### 1.1.8
 
 *2018-04-05*

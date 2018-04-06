@@ -92,6 +92,14 @@
   }
 
   @include m(small) {
+    font-size: 15px;
+
+    @include e(starts-prefix) {
+      font-size: 9px;
+    }
+  }
+
+  @include m(default) {
     font-size: 17px;
 
     @include e(starts-prefix) {
