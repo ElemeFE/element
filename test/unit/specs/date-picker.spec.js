@@ -1332,15 +1332,9 @@ describe('DatePicker', () => {
     let vm;
 
     beforeEach(done => {
-      vm = createVue({
-        template: '<el-date-picker type="days" v-model="value" ref="compo" />',
-        data() {
-          return {
-            value: '2018/3/1'
-          };
-        }
+      vm = createTest(DatePicker, {
+        type: 'days'
       }, true);
-
       const input = vm.$el.querySelector('input');
 
       input.blur();
@@ -1348,15 +1342,12 @@ describe('DatePicker', () => {
       setTimeout(done, DELAY);
     });
 
-    afterEach(() => destroyVM(vm));
-
     it('click cell', done => {
-      const tds = vm.$el.querySelectorAll('.el-date-table__row .available');
+      const tds = vm.picker.$el.querySelectorAll('.el-date-table__row .available');
       for (let i = 0; i < tds.length; i++) {
         tds[i].click();
       }
       setTimeout(_ => {
-        console.log(vm.picker.selectedDate);
         expect(vm.picker.selectedDate).to.exist;
         done();
       }, DELAY);
