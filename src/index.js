@@ -63,6 +63,7 @@ import PriceInfo from '../packages/price-info/index.js';
 import Sidebar from '../packages/sidebar/index.js';
 import NavBar from '../packages/nav-bar/index.js';
 import Gallery from '../packages/gallery/index.js';
+import ValueSwitcher from '../packages/value-switcher/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
 
@@ -129,6 +130,7 @@ const components = [
   Sidebar,
   NavBar,
   Gallery,
+  ValueSwitcher,
   CollapseTransition
 ];
 
@@ -229,7 +231,8 @@ module.exports = {
   PriceInfo,
   Sidebar,
   NavBar,
-  Gallery
+  Gallery,
+  ValueSwitcher
 };
 
 module.exports.default = module.exports;

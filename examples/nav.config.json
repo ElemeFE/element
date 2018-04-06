@@ -215,6 +215,10 @@
             {
               "path": "/gallery",
               "title": "Gallery"
+            },
+            {
+              "path": "/value-switcher",
+              "title": "ValueSwitcher"
             }
           ]
         }

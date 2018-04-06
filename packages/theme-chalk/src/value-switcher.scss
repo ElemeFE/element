@@ -1,0 +1,30 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(value-switcher) {
+  display: flex;
+
+  @include e(btn) {
+    width: 48px;
+    min-width: 48px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  @include e(autocomplete) {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+}
+
+.tm-popper.tm-popper__autocomplete.tm-autocomplete-suggestion {
+  .tm-autocomplete-suggestion__wrap {
+    padding: 0;
+  }
+
+   li {
+    padding: 0;
+    line-height: normal;
+  }
+}
