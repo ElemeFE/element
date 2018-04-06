@@ -3,7 +3,11 @@
     data() {
       return {
         modelA: 'modelA',
-        modelB: 'modelB'
+        modelB: 'modelB',
+        lLabel: 'left',
+        rLabel: 'right',
+        lIcon: 'airplane',
+        rIcon: 'cross'
       }  
     },
     methods: {
@@ -12,31 +16,31 @@
           {
             title: 'title1',
             description: 'description',
-            icon: 'plane',
+            icon: 'airplane',
             code: 'code'
           },
           {
             title: 'title2',
             description: 'description',
-            icon: 'plane',
+            icon: 'airplane',
             code: 'code'
           },
           {
             title: 'title3',
             description: 'description',
-            icon: 'plane',
+            icon: 'airplane',
             code: 'code'
           },
           {
             title: 'title4',
             description: 'description',
-            icon: 'plane',
+            icon: 'airplane',
             code: 'code'
           },
           {
             title: 'title5',
             description: 'description',
-            icon: 'plane',
+            icon: 'airplane',
             code: 'code'
           }
         ]
@@ -52,7 +56,12 @@
 :::demo
 ```html
 <tm-form-group-item>
-  <tm-value-switcher :fetch-suggestions="searchPlaces"></tm-value-switcher>
+  <tm-value-switcher 
+    :fetch-suggestions="searchPlaces" 
+    :suffix-icon-left="lIcon" 
+    :suffix-icon-right="rIcon"
+    :left-placeholder="lLabel"
+    :right-placeholder="rLabel"></tm-value-switcher>
 </tm-form-group-item>
 <script>
   export default {

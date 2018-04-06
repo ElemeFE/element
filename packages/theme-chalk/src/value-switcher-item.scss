@@ -2,5 +2,48 @@
 @import "common/var";
 
 @include b(value-switcher-item) {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
+  @include e(icon) {
+    height: 56px;
+    width: 56px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    svg {
+      fill: $--color-pastel-gray;
+    }
+  }
+
+  @include e(wrap) {
+    width: 100%;
+  }
+
+  @include e(title) {
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    color: $--color-dark-gunmetal;
+    margin-bottom: 2px;
+  }
+
+  @include e(description) {
+    font-size: 11px;
+    letter-spacing: -0.1px;
+    color: $--color-taupe-gray;
+  }
+
+  @include e(code) {
+    font-size: 13px;
+    letter-spacing: -0.1px;
+    color: $--color-taupe-gray;
+    margin-right: 16px;
+  }
 }

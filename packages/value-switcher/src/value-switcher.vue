@@ -1,13 +1,17 @@
 <template>
   <div class="tm-value-switcher">
     <tm-autocomplete class="tm-value-switcher__autocomplete"
+                     popper-class="tm-popper__autocomplete"
                      :fetch-suggestions="fetchSuggestions"
                      :placeholder="leftPlaceholder"
-                     :suffix-icon="suffixIcon"
+                     :suffix-icon="suffixIconLeft"
                      v-model="labelLeft"
                      @select="onPlaceSelect($event, true)">
       <template scope="props">
-        <tm-value-switcher-item :title="props.item.title"></tm-value-switcher-item>
+        <tm-value-switcher-item :title="props.item.title"
+                                :icon="props.item.icon"
+                                :code="props.item.code"
+                                :description="props.item.description"></tm-value-switcher-item>
       </template>
     </tm-autocomplete>
     <tm-button class="tm-value-switcher__btn"
@@ -15,13 +19,17 @@
       <tm-icon name="arrows-reverse"></tm-icon>
     </tm-button>
     <tm-autocomplete class="tm-value-switcher__autocomplete"
+                     popper-class="tm-popper__autocomplete"
                      :fetch-suggestions="fetchSuggestions"
                      :placeholder="rightPlaceholder"
-                     :suffix-icon="suffixIcon"
+                     :suffix-icon="suffixIconRight"
                      v-model="labelRight"
                      @select="onPlaceSelect($event, false)">
       <template scope="props">
-        <tm-value-switcher-item :title="props.item.title"></tm-value-switcher-item>
+        <tm-value-switcher-item :title="props.item.title"
+                                :icon="props.item.icon"
+                                :code="props.item.code"
+                                :description="props.item.description"></tm-value-switcher-item>
       </template>
     </tm-autocomplete>
   </div>
@@ -42,7 +50,8 @@
     },
     name: 'TmValueSwitcher',
     props: {
-      suffixIcon: String,
+      suffixIconLeft: String,
+      suffixIconRight: String,
       leftPlaceholder: String,
       rightPlaceholder: String,
       fetchSuggestions: Function

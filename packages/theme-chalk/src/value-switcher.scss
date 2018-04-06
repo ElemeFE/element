@@ -17,3 +17,14 @@
     flex-shrink: 1;
   }
 }
+
+.tm-popper.tm-popper__autocomplete.tm-autocomplete-suggestion {
+  .tm-autocomplete-suggestion__wrap {
+    padding: 0;
+  }
+
+   li {
+    padding: 0;
+    line-height: normal;
+  }
+}
