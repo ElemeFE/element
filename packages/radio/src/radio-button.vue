@@ -26,8 +26,8 @@
       @blur="focus = false"
     >
     <span class="tm-radio-button__inner" :style="value === label ? activeStyle : null">
-      <slot></slot>
-      <template v-if="!$slots.default">{{label}}</template>
+      <slot :item="customData"></slot>
+      <template v-if="!customData && !$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
@@ -51,7 +51,8 @@
     props: {
       label: {},
       disabled: Boolean,
-      name: String
+      name: String,
+      customData: [String, Number, Function, Object]
     },
     data() {
       return {

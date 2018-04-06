@@ -12,7 +12,10 @@
         radio7: '1',
         radio8: '1',
         radio9: '1',
-        radio10: '1'
+        radio10: '1',
+        radioCustom: 'a',
+        customData: 'b',
+        customData2: 'a'
       };
     }
   };
@@ -38,6 +41,45 @@ Radio should not have too many options. Otherwise, use the Select component inst
     data () {
       return {
         radio: '1'
+      };
+    }
+  }
+</script>
+```
+:::
+
+
+### Custom content usage
+
+:::demo 
+```html
+<template>
+  <tm-radio-group v-model="radioCustom" style="width: 200px">
+    <tm-radio-button :custom-data="customData" :label="customData" class="tm-radio-button--separate">
+      <template slot-scope="props">
+        <span>{{ props.item }}</span><span>{{ props.item }}</span>
+      </template>
+    </tm-radio-button>
+    <tm-radio-button :custom-data="customData2" :label="customData2" class="tm-radio-button--separate">
+      <template slot-scope="props">
+        <span>{{ props.item }}</span><span>{{ props.item }}</span>
+      </template>
+    </tm-radio-button>
+  </tm-radio-group>  
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        customData: {
+          a: 'a',
+          b: 'b'
+        },
+        customData2: {
+          a: 'a2',
+          b: 'b2'
+        }
       };
     }
   }
@@ -229,3 +271,4 @@ fill  | border and background color when button is active | string   | — | #40
 label | the value of radio | string / number | — | —
 disabled | whether radio is disabled | boolean | — | false
 name | native 'name' attribute | string    |      —         |     —
+customData | custom data to pass into slot | any    |      —         |     —
