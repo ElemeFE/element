@@ -109,6 +109,41 @@
       @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
     }
   }
+  @include m(separate) {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    box-shadow: none;
+
+    .tm-radio-button__orig-radio:checked + .tm-radio-button__inner {
+      border: none;
+      background-color: $--color-primary;
+      box-shadow: none;
+    }
+
+    .tm-radio-button__inner {
+      box-shadow: none;
+      border-radius: $--border-radius-base;
+      border: $--border-base;
+      width: 100%;
+      transition: background-color .3s cubic-bezier(.645,.045,.355,1);
+    }
+
+    &:first-child {
+      .tm-radio-button__inner {
+        border-radius: $--border-radius-base;
+        border: $--border-base;
+      }
+    }
+
+    &:last-child {
+      .tm-radio-button__inner {
+        border-radius: $--border-radius-base;
+        border: $--border-base;
+      }
+    }
+
+  }
 
   &:focus:not(.is-focus):not(:active){ /*获得焦点时 样式提醒*/
     box-shadow: 0 0 2px 2px $--box-shadow-light;
