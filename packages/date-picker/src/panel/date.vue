@@ -371,7 +371,7 @@
           this.emit(this.selectedDate);
         } else {
           const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
-          this.emit(this.date);
+          this.emit(date);
         }
       },
 
