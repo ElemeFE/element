@@ -38,5 +38,16 @@
 
   & .el-select-dropdown__item {
     padding-left: $gap;
+    word-break: break-word;
+    white-space: normal;
+    overflow: visible;
+    line-height: 1.4;
+    height: auto !important;
+    margin-bottom: 10px;
+
+    > span {
+      display: inline-block;
+      line-height: 1.4 !important;
+    }
   }
 }

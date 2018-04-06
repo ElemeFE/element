@@ -11,6 +11,9 @@
   box-shadow: $--select-dropdown-shadow;
   box-sizing: border-box;
   margin: 5px 0;
+  @media (max-width: 767px) {
+    max-width: 340px !important
+  }
 
   @include when(multiple) {
     & .el-select-dropdown__item.selected {
