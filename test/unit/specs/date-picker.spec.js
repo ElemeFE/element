@@ -1342,6 +1342,8 @@ describe('DatePicker', () => {
       setTimeout(done, DELAY);
     });
 
+    afterEach(() => destroyVM(vm));
+    
     it('click cell', done => {
       const tds = vm.picker.$el.querySelectorAll('.el-date-table__row .available');
       for (let i = 0; i < tds.length; i++) {
