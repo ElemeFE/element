@@ -800,7 +800,6 @@ export default {
         this.picker.format = format;
       });
 
-
       const updateOptions = () => {
         const options = this.pickerOptions;
 
