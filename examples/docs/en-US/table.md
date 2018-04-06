@@ -2043,3 +2043,8 @@ You can customize row index in `type=index` columns.
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
 | filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row, column) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |
+
+### Table-column Scoped Slot
+| Name | Description |
+|------|--------|
+| — | Custom content for table columns. The scope parameter is { row, column, $index } |

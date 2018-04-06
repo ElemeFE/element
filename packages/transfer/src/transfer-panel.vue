@@ -82,10 +82,13 @@
               return vm;
             }
           };
-          const parent = getParent(this);
-          return parent.renderContent
-            ? parent.renderContent(h, this.option)
-            : <span>{ this.option[parent.labelProp] || this.option[parent.keyProp] }</span>;
+          const panel = getParent(this);
+          const transfer = panel.$parent || panel;
+          return panel.renderContent
+            ? panel.renderContent(h, this.option)
+            : transfer.$scopedSlots.default
+              ? transfer.$scopedSlots.default({ option: this.option })
+              : <span>{ this.option[panel.labelProp] || this.option[panel.keyProp] }</span>;
         }
       }
     },

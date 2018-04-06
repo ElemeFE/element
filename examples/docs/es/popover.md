@@ -212,7 +212,7 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
   }
 </script>
 ```
-
+:::
 
 ### Atributos
 | Atributo       | Descripción                              | Tipo           | Valores aceptados                        | Por defecto                              |
