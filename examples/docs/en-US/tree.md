@@ -1228,7 +1228,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | node-drag-end  | triggers when dragging ends  | four parameters: node object corresponding to the dragging node, node object corresponding to the dragging end node (may be `undefined`), node drop type (before / after / inner), event. |
 | node-drop  | triggers after the dragging node is dropped | four parameters: node object corresponding to the dragging node, node object corresponding to the dropped node, node drop type (before / after / inner), event. |
 
-### Scoped slot
-| name | Description |
+### Scoped Slot
+| Name | Description |
 |------|--------|
 | — | Custom content for tree nodes. The scope parameter is { node, data } |

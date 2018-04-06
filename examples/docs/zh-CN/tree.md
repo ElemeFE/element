@@ -1249,7 +1249,7 @@
 | node-drag-end  | 拖拽结束时（可能未成功）触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点（可能为空）、被拖拽节点的放置位置（before、after、inner）、event |
 | node-drop  | 拖拽成功完成时触发的事件  | 共四个参数，依次为：被拖拽节点对应的 Node、结束拖拽时最后进入的节点、被拖拽节点的放置位置（before、after、inner）、event |
 
-### Scoped slot
+### Scoped Slot
 | name | 说明 |
 |------|--------|
 | — | 自定义树节点的内容，参数为 { node, data } |
