@@ -2,6 +2,7 @@ import AdvancedSearch from '../../packages/theme-chalk/src/icons/advanced-search
 import Aeroexpress from '../../packages/theme-chalk/src/icons/aeroexpress.svg';
 import Airplane from '../../packages/theme-chalk/src/icons/airplane.svg';
 import ArrowBack from '../../packages/theme-chalk/src/icons/arrow-back.svg';
+import ArrowBoth from '../../packages/theme-chalk/src/icons/arrow-both.svg';
 import ArrowDown from '../../packages/theme-chalk/src/icons/arrow-down.svg';
 import ArrowLeft from '../../packages/theme-chalk/src/icons/arrow-left.svg';
 import ArrowNext from '../../packages/theme-chalk/src/icons/arrow-next.svg';
@@ -72,6 +73,7 @@ module.exports = {
   Aeroexpress,
   Airplane,
   ArrowBack,
+  ArrowBoth,
   ArrowDown,
   ArrowLeft,
   ArrowNext,
