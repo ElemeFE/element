@@ -390,12 +390,10 @@ export default {
       }
 
       if (newVal !== undefined) {
-        this.$nextTick(() => {
-          this.internalCurrentPage = newVal;
-          if (oldVal !== newVal) {
-            this.$emit('update:currentPage', newVal);
-          }
-        });
+        this.internalCurrentPage = newVal;
+        if (oldVal !== newVal) {
+          this.$emit('update:currentPage', newVal);
+        }
       } else {
         this.$emit('update:currentPage', newVal);
       }
