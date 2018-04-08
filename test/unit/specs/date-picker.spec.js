@@ -278,7 +278,7 @@ describe('DatePicker', () => {
     input.focus();
     setTimeout(_ => {
       const picker = vm.$refs.compo.picker;
-      picker.$el.querySelector('td.available + td.today').click();
+      picker.$el.querySelector('td.available').click();
       setTimeout(_ => {
         const date = vm.$refs.compo.picker.date;
         expect(date.getHours()).to.equal(12);
