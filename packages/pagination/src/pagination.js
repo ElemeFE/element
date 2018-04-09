@@ -113,7 +113,8 @@ export default {
         return (
           <button
             type="button"
-            class={['btn-prev', { disabled: this.$parent.disabled || this.$parent.internalCurrentPage <= 1 }]}
+            class="btn-prev"
+            disabled={ this.$parent.disabled || this.$parent.internalCurrentPage <= 1 }
             on-click={ this.$parent.prev }>
             {
               this.$parent.prevText
@@ -130,10 +131,8 @@ export default {
         return (
           <button
             type="button"
-            class={[
-              'btn-next',
-              { disabled: this.$parent.disabled || this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
-            ]}
+            class="btn-next"
+            disabled={ this.$parent.disabled || this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             on-click={ this.$parent.next }>
             {
               this.$parent.nextText
