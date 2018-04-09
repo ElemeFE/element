@@ -129,6 +129,17 @@ describe('Pagination', () => {
     expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('3');
   });
 
+  it('currentPage: NaN', () => {
+    vm = createTest(Pagination, {
+      pageSize: 20,
+      total: 200,
+      currentPage: NaN
+    });
+
+    expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('1');
+    expect(vm.$el.querySelectorAll('li.number')).to.length(7);
+  });
+
   it('set currentPage & total', (done) => {
     vm = createVue({
       template: `

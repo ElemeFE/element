@@ -379,23 +379,26 @@ export default {
       }
     },
 
-    internalCurrentPage(newVal, oldVal) {
-      newVal = parseInt(newVal, 10);
+    internalCurrentPage: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        newVal = parseInt(newVal, 10);
 
-      /* istanbul ignore if */
-      if (isNaN(newVal)) {
-        newVal = oldVal || 1;
-      } else {
-        newVal = this.getValidCurrentPage(newVal);
-      }
+        /* istanbul ignore if */
+        if (isNaN(newVal)) {
+          newVal = oldVal || 1;
+        } else {
+          newVal = this.getValidCurrentPage(newVal);
+        }
 
-      if (newVal !== undefined) {
-        this.internalCurrentPage = newVal;
-        if (oldVal !== newVal) {
+        if (newVal !== undefined) {
+          this.internalCurrentPage = newVal;
+          if (oldVal !== newVal) {
+            this.$emit('update:currentPage', newVal);
+          }
+        } else {
           this.$emit('update:currentPage', newVal);
         }
-      } else {
-        this.$emit('update:currentPage', newVal);
       }
     },
 
