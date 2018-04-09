@@ -82,6 +82,16 @@ describe('Pagination', () => {
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
   });
 
+  it('pageSize: NaN', () => {
+    vm = createTest(Pagination, {
+      pageSize: NaN,
+      total: 100
+    });
+
+    const pagers = vm.$el.querySelectorAll('li.number');
+    expect(pagers).to.length(7);
+  });
+
   it('pageCount', () => {
     const vm = createTest(Pagination, {
       pageSize: 25,

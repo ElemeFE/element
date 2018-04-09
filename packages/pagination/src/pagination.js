@@ -375,7 +375,7 @@ export default {
     pageSize: {
       immediate: true,
       handler(val) {
-        this.internalPageSize = val;
+        this.internalPageSize = isNaN(val) ? 10 : val;
       }
     },
 
