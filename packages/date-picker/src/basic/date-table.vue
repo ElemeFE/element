@@ -188,7 +188,8 @@
 
             let newDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(newDate);
-            cell.selected = Array.isArray(selectedDate) && selectedDate.find(date => date.toString() === newDate.toString());
+            cell.selected = Array.isArray(selectedDate) &&
+              selectedDate.filter(date => date.toString() === newDate.toString())[0];
 
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
@@ -483,7 +484,7 @@
             value: value,
             date: newDate
           });
-        } else if (selectionMode === 'days') {
+        } else if (selectionMode === 'dates') {
           let selectedDate = this.selectedDate;
 
           if (!cell.selected) {

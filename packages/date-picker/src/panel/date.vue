@@ -127,7 +127,7 @@
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="!this.selectionMode === 'days'">
+          v-show="!this.selectionMode === 'dates'">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -211,7 +211,7 @@
           if (this.currentView !== 'year' || this.currentView !== 'month') {
             this.currentView = 'month';
           }
-        } else if (newVal === 'days') {
+        } else if (newVal === 'dates') {
           this.currentView = 'date';
         }
       }
@@ -331,7 +331,7 @@
       },
 
       handleDateSelect(value) {
-        if (this.selectionMode === 'days') {
+        if (this.selectionMode === 'dates') {
           this.selectedDate = value;
         }
       },
@@ -367,7 +367,7 @@
       },
 
       confirm() {
-        if (this.selectionMode === 'days') {
+        if (this.selectionMode === 'dates') {
           this.emit(this.selectedDate);
         } else {
           const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
@@ -519,7 +519,7 @@
       },
 
       footerVisible() {
-        return this.showTime || this.selectionMode === 'days';
+        return this.showTime || this.selectionMode === 'dates';
       },
 
       visibleTime() {

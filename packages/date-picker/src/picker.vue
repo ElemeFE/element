@@ -2,7 +2,7 @@
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly"
+    :readonly="!editable || readonly || type === 'dates'"
     :disabled="pickerDisabled"
     :size="pickerSize"
     :name="name"
@@ -124,7 +124,7 @@ const HAVE_TRIGGER_TYPES = [
   'daterange',
   'timerange',
   'datetimerange',
-  'days'
+  'dates'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -244,26 +244,13 @@ const TYPE_VALUE_RESOLVER_MAP = {
       }
     }
   },
-  days: {
-    formatter(value) {
-      let dates = value;
-      let texts = [];
-
-      for (let i = 0; i < dates.length; i++) {
-        texts[i] = DATE_FORMATTER(dates[i]);
-      }
-
-      return texts.join();
+  dates: {
+    formatter(value, format) {
+      return value.map(date => DATE_FORMATTER(date, format));
     },
-    parser(text) {
-      let texts = text.split(',');
-      let dates = [];
-
-      for (let i = 0; i < texts.length; i++) {
-        dates[i] = DATE_PARSER(texts[i]);
-      }
-
-      return dates;
+    parser(value, format) {
+      return (typeof value === 'string' ? value.split(', ') : value)
+        .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
     }
   }
 };
@@ -298,8 +285,10 @@ const valueEquals = function(a, b) {
   const aIsArray = a instanceof Array;
   const bIsArray = b instanceof Array;
   if (aIsArray && bIsArray) {
-    return new Date(a[0]).getTime() === new Date(b[0]).getTime() &&
-           new Date(a[1]).getTime() === new Date(b[1]).getTime();
+    if (a.length !== b.length) {
+      return false;
+    }
+    return a.every((item, index) => new Date(item).getTime() === new Date(b[index]).getTime());
   }
   if (!aIsArray && !bIsArray) {
     return new Date(a).getTime() === new Date(b).getTime();
@@ -397,7 +386,7 @@ export default {
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
-        this.valueOnOpen = this.value;
+        this.valueOnOpen = Array.isArray(this.value) ? this.value.slice() : this.value;
       } else {
         this.hidePicker();
         this.emitChange(this.value);
@@ -473,8 +462,8 @@ export default {
         return 'month';
       } else if (this.type === 'year') {
         return 'year';
-      } else if (this.type === 'days') {
-        return 'days';
+      } else if (this.type === 'dates') {
+        return 'dates';
       }
 
       return 'day';
@@ -494,8 +483,14 @@ export default {
           this.userInput[0] || (formattedValue && formattedValue[0]) || '',
           this.userInput[1] || (formattedValue && formattedValue[1]) || ''
         ];
+      } else if (this.userInput !== null) {
+        return this.userInput;
+      } else if (formattedValue) {
+        return this.type === 'dates'
+          ? formattedValue.join(', ')
+          : formattedValue;
       } else {
-        return this.userInput !== null ? this.userInput : formattedValue || '';
+        return '';
       }
     },
 
@@ -681,7 +676,18 @@ export default {
     },
 
     handleClose() {
+      if (!this.pickerVisible) return;
       this.pickerVisible = false;
+      const {
+        type,
+        valueOnOpen,
+        valueFormat,
+        rangeSeparator
+      } = this;
+      if (type === 'dates' && this.picker) {
+        this.picker.selectedDate = parseAsFormatAndType(valueOnOpen, valueFormat, type, rangeSeparator) || valueOnOpen;
+        this.emitInput(this.picker.selectedDate);
+      }
     },
 
     handleFieldReset(initialValue) {
@@ -873,7 +879,7 @@ export default {
 
     emitInput(val) {
       const formatted = this.formatToValue(val);
-      if (!valueEquals(this.value, formatted)) {
+      if (!valueEquals(this.value, formatted) || this.type === 'dates') {
         this.$emit('input', formatted);
       }
     },

@@ -1400,12 +1400,17 @@ describe('DatePicker', () => {
     });
   });
 
-  describe('type:days', () => {
+  describe('type:dates', () => {
     let vm;
 
     beforeEach(done => {
-      vm = createTest(DatePicker, {
-        type: 'days'
+      vm = createVue({
+        template: '<el-date-picker type="dates" value-format="timestamp" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: []
+          };
+        }
       }, true);
       const input = vm.$el.querySelector('input');
 
@@ -1417,16 +1422,39 @@ describe('DatePicker', () => {
     afterEach(() => destroyVM(vm));
 
     it('click cell', done => {
-      const tds = vm.picker.$el.querySelectorAll('.el-date-table__row .available');
-      for (let i = 0; i < tds.length; i++) {
-        tds[i].click();
-      }
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      td.click();
       setTimeout(_ => {
-        expect(vm.picker.selectedDate).to.exist;
+        expect(vm.$refs.compo.picker.selectedDate).to.exist;
+        expect(vm.value.length).to.equal(1);
         done();
       }, DELAY);
     });
 
+    it('value format', done => {
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      td.click();
+      setTimeout(_ => {
+        vm.$refs.compo.picker.$el.querySelector('.el-button--default').click();
+        setTimeout(() => {
+          expect(vm.$refs.compo.picker.selectedDate).to.exist;
+          expect(vm.value.length).to.equal(1);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('restore value when cancel', done => {
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      td.click();
+      setTimeout(_ => {
+        vm.$refs.compo.handleClose();
+        setTimeout(() => {
+          expect(vm.value.length).to.equal(0);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   describe('type:daterange', () => {
