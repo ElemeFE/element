@@ -30,8 +30,8 @@
         :value="currentValue"
         ref="input"
         @compositionstart="handleComposition"
-        @compositionupdate="handleComposition"
-        @compositionend="handleComposition"
+        @compositionupdate="handleCompositionUpdate"
+        @compositionend="handleCompositionUpdate"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -256,6 +256,14 @@
           this.handleInput(event);
         } else {
           this.isOnComposition = true;
+        }
+      },
+      handleCompositionUpdate(event) {
+        const value = event.target.value;
+        const reg = /([(\uAC00-\uD7AF)|(\u3130-\u318F)])+/gi;
+        const isKorean = reg.test(value[value.length - 1]);
+        if (isKorean) {
+          this.handleInput(event);
         }
       },
       handleInput(event) {
