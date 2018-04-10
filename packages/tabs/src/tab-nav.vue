@@ -163,7 +163,9 @@
         if (visibility === 'hidden') {
           this.focusable = false;
         } else if (visibility === 'visible') {
-          this.focusable = true;
+          setTimeout(() => {
+            this.focusable = true;
+          }, 50);
         }
       },
       windowBlurHandler() {

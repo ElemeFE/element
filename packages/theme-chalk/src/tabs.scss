@@ -227,6 +227,9 @@
       &:not(.is-disabled):hover {
         color: $--color-primary;
       }
+      &.is-disabled {
+        color: $--disabled-color-base;
+      }
     }
   }
   @include m((top, bottom)) {
