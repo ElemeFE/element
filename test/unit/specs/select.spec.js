@@ -708,10 +708,10 @@ describe('Select', () => {
 
     vm.$refs.select.$refs.reference.$refs.input.focus();
 
-    setTimeout(() => {
+    vm.$nextTick(_ => {
       expect(vm.$refs.select.visible).to.be.false;
       done();
-    }, 610);
+    });
   });
 
   it('should open popper when automatic-dropdown is set', done => {
@@ -719,10 +719,10 @@ describe('Select', () => {
 
     vm.$refs.select.$refs.reference.$refs.input.focus();
 
-    setTimeout(() => {
+    vm.$nextTick(_ => {
       expect(vm.$refs.select.visible).to.be.true;
       done();
-    }, 610);
+    });
   });
 
   it('focus', done => {

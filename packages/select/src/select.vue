@@ -529,7 +529,10 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          setTimeout(() => { if (this.automaticDropdown) this.visible = true; }, 300);
+          if (this.automaticDropdown) {
+            this.visible = true;
+            this.menuVisibleOnFocus = true;
+          }
           this.$emit('focus', event);
         } else {
           this.softFocus = false;
@@ -676,7 +679,11 @@
 
       toggleMenu() {
         if (!this.selectDisabled) {
-          this.visible = !this.visible;
+          if (this.menuVisibleOnFocus) {
+            this.menuVisibleOnFocus = false;
+          } else {
+            this.visible = !this.visible;
+          }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
           }
