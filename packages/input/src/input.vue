@@ -30,8 +30,8 @@
         :value="currentValue"
         ref="input"
         @compositionstart="handleComposition"
-        @compositionupdate="handleCompositionUpdate"
-        @compositionend="handleCompositionUpdate"
+        @compositionupdate="handleComposition"
+        @compositionend="handleComposition"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -100,6 +100,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
+  import {isKorean} from 'element-ui/src/utils/shared';
 
   export default {
     name: 'ElInput',
@@ -255,20 +256,14 @@
           this.isOnComposition = false;
           this.handleInput(event);
         } else {
-          this.isOnComposition = true;
-        }
-      },
-      handleCompositionUpdate(event) {
-        const value = event.target.value;
-        const reg = /([(\uAC00-\uD7AF)|(\u3130-\u318F)])+/gi;
-        const isKorean = reg.test(value[value.length - 1]);
-        if (isKorean) {
-          this.handleInput(event);
+          const text = event.target.value;
+          const lastCharacter = text[text.length - 1] || '';
+          this.isOnComposition = !isKorean(lastCharacter);
         }
       },
       handleInput(event) {
-        if (this.isOnComposition) return;
         const value = event.target.value;
+        if (this.isOnComposition || value === this.currentValue) return;
         this.$emit('input', value);
         this.setCurrentValue(value);
       },
