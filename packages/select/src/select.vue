@@ -412,7 +412,8 @@
 
     methods: {
       handleComposition(event) {
-        if (event.type === 'compositionend') {
+        const isKorean = event.target.value.match(/([(\uAC00-\uD7AF)|(\u3130-\u318F)])+/gi);
+        if (event.type === 'compositionend' || isKorean) {
           this.isOnComposition = false;
           this.handleQueryChange(event.target.value);
         } else {
