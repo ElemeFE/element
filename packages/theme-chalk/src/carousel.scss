@@ -17,6 +17,7 @@
     margin: 0;
     height: $--carousel-arrow-size;
     width: $--carousel-arrow-size;
+    min-width: 10px;
     cursor: pointer;
     transition: .3s;
     background-color: $--carousel-arrow-background;
@@ -29,11 +30,11 @@
     font-size: $--carousel-arrow-font-size;
 
     @include m(left) {
-      left: 16px;
+      left: 7px;
     }
 
     @include m(right) {
-      right: 16px;
+      right: 7px;
     }
 
     &:focus,
