@@ -62,5 +62,6 @@
   "sidebar": "./packages/sidebar/index.js",
   "nav-bar": "./packages/nav-bar/index.js",
   "gallery": "./packages/gallery/index.js",
-  "value-switcher": "./packages/value-switcher/index.js"
+  "value-switcher": "./packages/value-switcher/index.js",
+  "date-picker-joined": "./packages/date-picker-joined/index.js"
 }
