@@ -1,5 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
+@import "./value-switcher-item";
 
 @include b(value-switcher) {
   display: flex;
@@ -7,6 +8,7 @@
   @include e(btn) {
     width: 48px;
     min-width: 48px;
+    max-width: 48px;
     flex-grow: 0;
     flex-shrink: 0;
     padding: 0;
@@ -15,10 +17,21 @@
   @include e(autocomplete) {
     flex-grow: 1;
     flex-shrink: 1;
+    width: 100%;
+
+    .tm-input {
+      width: 100%;
+
+      &__inner {
+        width: 100%;
+      }
+    }
   }
 }
 
 .tm-popper.tm-popper__autocomplete.tm-autocomplete-suggestion {
+  width: 340px !important;
+
   .tm-autocomplete-suggestion__wrap {
     padding: 0;
   }

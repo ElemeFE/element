@@ -36,6 +36,18 @@
     }
   }
 
+  .tm-value-switcher {
+    &:not(:last-child) {
+      .tm-autocomplete {
+        > .tm-input {
+          > .tm-input__inner {
+            border-right: 1px solid #ccc;
+          }
+        }
+      }
+    }
+  }
+
   .tm-button {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -45,6 +57,9 @@
     border-left: none;
     border-right: 1px solid #ccc;
     border-radius: 0;
+    &:last-child {
+      border-right: none;
+    }
   }
 
   .tm-autocomplete {
