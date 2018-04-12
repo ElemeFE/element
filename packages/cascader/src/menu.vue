@@ -1,4 +1,5 @@
 <script>
+  import Outside from 'vue-focus-outside';
   import { isDef } from 'element-ui/src/utils/shared';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { generateId } from 'element-ui/src/utils/util';
@@ -29,6 +30,8 @@
 
   export default {
     name: 'ElCascaderMenu',
+
+    directives: { Outside },
 
     data() {
       return {
@@ -353,8 +356,9 @@
         <transition name="el-zoom-in-top" on-before-enter={this.handleMenuEnter} on-after-leave={this.handleMenuLeave}>
           <div
             v-show={visible}
+            v-outside={ this.handleClickoutside }
             class={[
-              'el-cascader-menus el-popper',
+              'el-cascader-menus el-popper el-focus-outside',
               popperClass
             ]}
             ref="wrapper"

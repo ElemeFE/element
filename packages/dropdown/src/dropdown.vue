@@ -1,5 +1,5 @@
 <script>
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Outside from 'vue-focus-outside';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import ElButton from 'element-ui/packages/button';
@@ -13,7 +13,7 @@
 
     mixins: [Emitter, Migrating],
 
-    directives: { Clickoutside },
+    directives: { Outside },
 
     components: {
       ElButton,
@@ -263,7 +263,7 @@
         </el-button-group>);
 
       return (
-        <div class="el-dropdown" v-clickoutside={hide}>
+        <div class="el-dropdown el-focus-outside" v-outside={hide}>
           {triggerElm}
           {this.$slots.dropdown}
         </div>

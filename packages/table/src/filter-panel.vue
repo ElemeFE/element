@@ -1,9 +1,9 @@
 <template>
   <transition name="el-zoom-in-top">
     <div
-      class="el-table-filter"
+      class="el-table-filter el-focus-outside"
       v-if="multiple"
-      v-clickoutside="handleOutsideClick"
+      v-outside="handleOutsideClick"
       v-show="showPopper">
       <div class="el-table-filter__content">
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
@@ -21,9 +21,9 @@
       </div>
     </div>
     <div
-      class="el-table-filter"
+      class="el-table-filter el-focus-outside"
       v-else
-      v-clickoutside="handleOutsideClick"
+      v-outside="handleOutsideClick"
       v-show="showPopper">
       <ul class="el-table-filter__list">
         <li class="el-table-filter__list-item"
@@ -41,10 +41,10 @@
 </template>
 
 <script type="text/babel">
+  import Outside from 'vue-focus-outside';
   import Popper from 'element-ui/src/utils/vue-popper';
   import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
@@ -55,7 +55,7 @@
     mixins: [Popper, Locale],
 
     directives: {
-      Clickoutside
+      Outside
     },
 
     components: {
