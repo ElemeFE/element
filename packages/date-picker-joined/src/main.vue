@@ -1,6 +1,5 @@
 <template>
   <div class="tm-date-picker-joined" @click.stop="onDateFocus">
-    --{{value}}
     <tm-input
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon"
@@ -40,7 +39,7 @@ export default {
       default: null
     },
     value: {
-      type: String,
+      type: Array,
       default: null
     }
   },
@@ -50,12 +49,12 @@ export default {
         return this.value;
       },
       set(newVal) {
-        this.date = newVal;
+        this.$emit('input', newVal);
       }
     },
     dateLabel() {
       return this.date && this.date.length
-        ? this.formatDate(this.date[0]) + ' -+- ' + this.formatDate(this.date[1])
+        ? this.formatDate(this.date[0]) + ' - ' + this.formatDate(this.date[1])
         : '';
     }
   },
@@ -66,7 +65,6 @@ export default {
         .click();
     },
     formatDate(date) {
-      this.$emit('input', this.date);
       return moment(date).format(this.dateFormat);
     }
   },
