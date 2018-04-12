@@ -1,5 +1,17 @@
 ## Changelog
 
+### 2.3.4
+
+*2018-04-12*
+
+- Deleted duplicate `showTimeout` attribute in SubMenu's TypeScript declaration, #10566 (by @kimond)
+- Now you can customize Transfer's data item using scoped slot, #10577
+- Fixed clicking disabled prev and next button of Pagination still triggers `current-change` event, #10628
+- Fixed Textarea displaying `undefined` in SSR when its value is not set, #10630
+- Fixed disabled TabItem style when `type` is border-car, #10640
+- Added `$index` as `formatter`'s fourth param of Table, #10645
+- Fixed CheckboxButton not exported in TypeScript declaration, #10666
+
 ### 2.3.3
 
 *2018-04-04*
