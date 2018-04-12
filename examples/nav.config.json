@@ -219,6 +219,10 @@
             {
               "path": "/value-switcher",
               "title": "ValueSwitcher"
+            },
+            {
+              "path": "/date-picker-joined",
+              "title": "DatePickerJoined"
             }
           ]
         }

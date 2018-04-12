@@ -1,0 +1,16 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(date-picker-joined) {
+  position: relative;
+  .tm-date-editor {
+    height: 0;
+    width: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
