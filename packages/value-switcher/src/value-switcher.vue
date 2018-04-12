@@ -1,6 +1,7 @@
 <template>
   <div class="tm-value-switcher">
     <tm-autocomplete class="tm-value-switcher__autocomplete"
+                     :size="size"
                      popper-class="tm-popper__autocomplete"
                      :fetch-suggestions="fetchSuggestions"
                      :placeholder="leftPlaceholder"
@@ -19,6 +20,7 @@
       <tm-icon name="arrows-reverse"></tm-icon>
     </tm-button>
     <tm-autocomplete class="tm-value-switcher__autocomplete"
+                     :size="size"
                      popper-class="tm-popper__autocomplete"
                      :fetch-suggestions="fetchSuggestions"
                      :placeholder="rightPlaceholder"
@@ -54,7 +56,11 @@
       suffixIconRight: String,
       leftPlaceholder: String,
       rightPlaceholder: String,
-      fetchSuggestions: Function
+      fetchSuggestions: Function,
+      size: {
+        type: String,
+        default: 'large'
+      }
     },
     data() {
       return {
