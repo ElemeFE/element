@@ -3,7 +3,6 @@
 @import "mixins/utils";
 
 @include b(price-info) {
-  display: inline-flex;
   color: $--color-text-primary;
   font-size: 20px;
 

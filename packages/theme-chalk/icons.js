@@ -58,6 +58,7 @@ import Snow from '../../packages/theme-chalk/src/icons/snow.svg';
 import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
+import Train from '../../packages/theme-chalk/src/icons/train.svg';
 import Transfer from '../../packages/theme-chalk/src/icons/transfer.svg';
 import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
 import UmbrellaAngle from '../../packages/theme-chalk/src/icons/umbrella-angle.svg';
@@ -129,6 +130,7 @@ module.exports = {
   Star,
   StatsPie,
   Success,
+  Train,
   Transfer,
   Tv,
   UmbrellaAngle,
