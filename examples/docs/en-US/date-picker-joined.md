@@ -16,7 +16,6 @@
 ```html
 <tm-date-picker-joined
   suffix-icon="calendar"
-  type="year"
   v-model="date"></tm-date-picker-joined>
 
 ```
