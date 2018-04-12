@@ -6,29 +6,25 @@
       v-model="dateLabel"
       placeholder="Период пребывания"></tm-input>
     <tm-date-picker
-      :type="type"
+      type="daterange"
       v-model="date"></tm-date-picker>
   </div>
 </template>
 
 <script>
+import '../../date-picker/';
 import moment from 'moment';
 
 export default {
   name: 'TmDatePickerJoined',
-  data() {
-    return {
-      dateFormat: 'DD MMMM'
-    };
-  },
   props: {
+    format: {
+      type: String,
+      default: 'DD MMMM'
+    },
     locale: {
       type: String,
       default: 'ru'
-    },
-    type: {
-      type: String,
-      default: 'daterange'
     },
     suffixIcon: {
       type: String,
@@ -60,12 +56,13 @@ export default {
   },
   methods: {
     onDateFocus() {
+      console.log(this.$el.querySelector('.tm-date-editor'));
       this.$el
         .querySelector('.tm-date-editor')
         .click();
     },
     formatDate(date) {
-      return moment(date).format(this.dateFormat);
+      return moment(date).format(this.format);
     }
   },
   mounted() {
