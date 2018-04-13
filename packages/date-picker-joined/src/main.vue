@@ -6,7 +6,7 @@
       v-model="dateLabel"
       placeholder="Период пребывания"></tm-input>
     <tm-date-picker
-      type="daterange"
+      :type="type"
       v-model="date"></tm-date-picker>
   </div>
 </template>
@@ -37,6 +37,10 @@ export default {
     value: {
       type: Array,
       default: null
+    },
+    type: {
+      type: String,
+      default: 'daterange'
     }
   },
   computed: {
@@ -49,20 +53,29 @@ export default {
       }
     },
     dateLabel() {
-      return this.date && this.date.length
-        ? this.formatDate(this.date[0]) + ' - ' + this.formatDate(this.date[1])
-        : '';
+      if (this.type === 'daterange') {
+        return this.getRangeDateLabel();
+      } else {
+        return this.getSingleDateLabel();
+      }
     }
   },
   methods: {
     onDateFocus() {
-      console.log(this.$el.querySelector('.tm-date-editor'));
       this.$el
         .querySelector('.tm-date-editor')
         .click();
     },
     formatDate(date) {
       return moment(date).format(this.format);
+    },
+    getRangeDateLabel() {
+      return this.date && this.date.length
+        ? this.formatDate(this.date[0]) + ' - ' + this.formatDate(this.date[1])
+        : '';
+    },
+    getSingleDateLabel() {
+      return this.formatDate(this.date);
     }
   },
   mounted() {
