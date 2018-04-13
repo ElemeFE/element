@@ -73,4 +73,9 @@ export declare class ElSelect extends ElementUIComponent {
    * Focus the Input component
    */
   focus (): void
+
+  /**
+   * Blur the Input component, and hide the dropdown
+   */
+  blur (): void
 }

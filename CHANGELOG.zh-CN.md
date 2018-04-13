@@ -1,5 +1,81 @@
 ## 更新日志
 
+### 2.3.4
+
+*2018-04-12*
+
+- 删除 SubMenu 在 TypeScript 类型声明中重复的 `showTimeout` 属性，#10566（by @kimond）
+- 现在 Transfer 数据项的渲染支持通过 scoped slot 自定义，#10577
+- 修复点击 Pagination 禁用的上一页、下一页按钮仍会触发 `current-change` 事件的问题，#10628
+- 修复未绑定值的 Textarea 在 SSR 中会显示 `undefined` 的问题，#10630
+- 修复 `type` 为 border-car 的 Tabs 中被禁用标签项的样式，#10640
+- 新增 `$index` 作为 Table 的 `formatter` 属性回调的第四个参数，#10645
+- 修复 TypeScript 类型声明未导出 CheckboxButton 的问题，#10666
+
+### 2.3.3
+
+*2018-04-04*
+
+- 新增 Card 的 `shadow` 属性，#10418（by @YunYouJun）
+- 修复 Badge 在 `value` 属性为 `0` 时不显示上标的问题，#10470
+- 修复 Tree 节点拖拽相关的问题，#10474 #10494
+- 新增 Autocomplete 的 `placement` 属性，#10475
+- 现在 `default-time` 属性也可用于非范围选择的 DateTimePicker 了，#10321（by @RickMacTurk）
+- 修复 TabItem 在浏览器失焦和隐藏后出现蓝色边框的问题，#10503
+- 新增 SubMenu 的 `popper-append-to-body` 属性，#10515
+- 现在非链接的 BreadcrumbItem 在 hover 时不再具有视觉反馈，#10551
+- 调整 InputNumber `change` 事件的触发时机，使得在回调中能够取得最新的组件绑定值，#10553
+
+### 2.3.2
+
+*2018-03-29*
+
+- 修复 Autocomplete 报错的问题，#10442
+
+### 2.3.1
+
+*2018-03-29*
+
+- 修复 Input 的 `type` 属性未传递至原生 input 元素的问题，#10415
+- 新增 Select 的 `blur` 方法，#10416
+
+### 2.3.0 Diamond
+
+*2018-03-28*
+
+#### 新特性
+- Table
+  - 现在 TableColumn 的 `formatter` 属性可以是动态的，#10184（by @elfman）
+  - 新增 `select-on-indeterminate` 属性，#9924（by @syn-zeta）
+- Menu
+  - 新增 `collapse-transition` 属性，#8809（by @limichange）
+- Input
+  - 新增 `select` 方法，#10229
+  - 新增 `blur` 方法，#10356
+- ColorPicker
+  - 新增 `predefine` 属性，#10170（by @elfman）
+- Tree
+  - 新增 `draggable`、`allow-drop` 和 `allow-drag` 属性，以及 `node-drag-start`、`node-drag-enter`、`node-drag-leave`、`node-drag-over`、`node-drag-end` 和 `node-drop` 事件，#9251 #10372（by @elfman）
+- Form
+  - `validate` 方法新增第二个参数，包含未通过本次校验的表单项信息，#10279
+  - 新增 `validate` 事件，#10351
+- Progress
+  - 新增 `color` 属性，#10352（by @YunYouJun）
+- Button
+  - 新增 `circle` 属性，#10359（by @YunYouJun）
+
+#### 修复
+- Form
+  - 修复嵌套复合型 Input 时，FormItem 标签与输入框未对齐的问题，#10189
+- Menu
+  - 现在折叠状态的菜单项仅在传入 `title` slot 时才显示 Tooltip，#10193（by @PanJiaChen）
+- Pagination
+  - 修复 `current-change` 在未发生用户交互时错误触发的问题，#10247
+- DatePicker
+  - 现在时间日期选择器下拉面板中的值能够正确地从 `format` 属性中获取对应格式了，#10174（by @remizovvv）
+- Upload
+  - 现在拖拽上传会拦截不在 `accept` 属性范围内的文件，#10278
+
 ### 2.2.2
 
 *2018-03-14*

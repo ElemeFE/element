@@ -52,7 +52,8 @@
         value1: [1, 4],
         value2: [],
         value3: [1],
-        value4: [],
+        value4: [1],
+        value5: [],
         filterMethod(query, item) {
           return item.pinyin.indexOf(query) > -1;
         },
@@ -152,26 +153,51 @@
 
 可以对列表标题文案、按钮文案、数据项的渲染函数、列表底部的勾选状态文案、列表底部的内容区等进行自定义。
 
-:::demo 可以使用 `titles`、`button-texts`、`render-content` 和 `format` 属性分别对列表标题文案、按钮文案、数据项的渲染函数和列表顶部的勾选状态文案进行自定义。对于列表底部的内容区，提供了两个具名 slot：`left-footer` 和 `right-footer`。此外，如果希望某些数据项在初始化时就被勾选，可以使用 `left-default-checked` 和 `right-default-checked` 属性。最后，本例还展示了 `change` 事件的用法。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
+:::demo 可以使用 `titles`、`button-texts`、`render-content` 和 `format` 属性分别对列表标题文案、按钮文案、数据项的渲染函数和列表顶部的勾选状态文案进行自定义。数据项的渲染还可以使用 `scoped-slot` 进行自定义。对于列表底部的内容区，提供了两个具名 slot：`left-footer` 和 `right-footer`。此外，如果希望某些数据项在初始化时就被勾选，可以使用 `left-default-checked` 和 `right-default-checked` 属性。最后，本例还展示了 `change` 事件的用法。注意：由于 jsfiddle 不支持 JSX 语法，所以使用 `render-content` 自定义数据项的例子在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <template>
-  <el-transfer
-    v-model="value3"
-    filterable
-    :left-default-checked="[2, 3]"
-    :right-default-checked="[1]"
-    :render-content="renderFunc"
-    :titles="['Source', 'Target']"
-    :button-texts="['到左边', '到右边']"
-    :format="{
-      noChecked: '${total}',
-      hasChecked: '${checked}/${total}'
-    }"
-    @change="handleChange"
-    :data="data">
-    <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
-    <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
-  </el-transfer>
+  <p style="text-align: center; margin: 0 0 20px">使用 render-content 自定义数据项</p>
+  <div style="text-align: center">
+    <el-transfer
+      style="text-align: left; display: inline-block"
+      v-model="value3"
+      filterable
+      :left-default-checked="[2, 3]"
+      :right-default-checked="[1]"
+      :render-content="renderFunc"
+      :titles="['Source', 'Target']"
+      :button-texts="['到左边', '到右边']"
+      :format="{
+        noChecked: '${total}',
+        hasChecked: '${checked}/${total}'
+      }"
+      @change="handleChange"
+      :data="data">
+      <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
+      <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
+    </el-transfer>
+  </div>
+  <p style="text-align: center; margin: 50px 0 20px">使用 scoped-slot 自定义数据项</p>
+  <div style="text-align: center">
+    <el-transfer
+      style="text-align: left; display: inline-block"
+      v-model="value4"
+      filterable
+      :left-default-checked="[2, 3]"
+      :right-default-checked="[1]"
+      :titles="['Source', 'Target']"
+      :button-texts="['到左边', '到右边']"
+      :format="{
+        noChecked: '${total}',
+        hasChecked: '${checked}/${total}'
+      }"
+      @change="handleChange"
+      :data="data">
+      <span slot-scope="{ option }">{{ option.key }} - {{ option.label }}</span>
+      <el-button class="transfer-footer" slot="left-footer" size="small">操作</el-button>
+      <el-button class="transfer-footer" slot="right-footer" size="small">操作</el-button>
+    </el-transfer>
+  </div>
 </template>
 
 <style>
@@ -198,6 +224,7 @@
       return {
         data: generateData(),
         value3: [1],
+        value4: [1],
         renderFunc(h, option) {
           return <span>{ option.key } - { option.label }</span>;
         }
@@ -221,7 +248,7 @@
 ```html
 <template>
   <el-transfer
-    v-model="value4"
+    v-model="value5"
     :props="{
       key: 'value',
       label: 'desc'
@@ -246,7 +273,7 @@
       };
       return {
         data3: generateData3(),
-        value4: []
+        value5: []
       };
     }
   };
@@ -275,6 +302,11 @@
 |------|--------|
 | left-footer | 左侧列表底部的内容 |
 | right-footer | 右侧列表底部的内容 |
+
+### Scoped Slot
+| name | 说明 |
+|------|--------|
+| — | 自定义数据项的内容，参数为 { option } |
 
 ### Methods
 | 方法名 | 说明 | 参数 |

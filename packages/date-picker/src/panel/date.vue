@@ -147,6 +147,7 @@
     isDate,
     modifyDate,
     modifyTime,
+    modifyWithDefaultTime,
     clearMilliseconds,
     clearTime,
     prevYear,
@@ -293,7 +294,7 @@
 
       handleTimePick(value, visible, first) {
         if (isDate(value)) {
-          const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
+          const newDate = this.value ? modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds()) : modifyWithDefaultTime(value, this.defaultTime);
           this.date = newDate;
           this.emit(this.date, true);
         } else {
@@ -318,7 +319,7 @@
 
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
-          this.date = modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate());
+          this.date = this.value ? modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate()) : modifyWithDefaultTime(value, this.defaultTime);
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
@@ -347,7 +348,8 @@
       },
 
       confirm() {
-        this.emit(this.date);
+        const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
+        this.emit(date);
       },
 
       resetView() {
@@ -458,6 +460,7 @@
         date: new Date(),
         value: '',
         defaultValue: null,
+        defaultTime: null,
         showTime: false,
         selectionMode: 'day',
         shortcuts: '',
