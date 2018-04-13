@@ -1,12 +1,15 @@
 <template>
-  <div class="el-tabs__active-bar" :class="`is-${ rootTabs.tabPosition }`" :style="barStyle"></div>
+  <div class="el-tabs__active-bar" :class="fixActiveBarClass" :style="barStyle">
+    <div class="el-tabs__custom-active-bar" :style="customBarStyle"></div>
+  </div>
 </template>
 <script>
   export default {
     name: 'TabBar',
 
     props: {
-      tabs: Array
+      tabs: Array,
+      activeWidth: [Number, String]
     },
 
     inject: ['rootTabs'],
@@ -44,6 +47,7 @@
             offset += 20;
           }
           const transform = `translate${firstUpperCase(sizeDir)}(${offset}px)`;
+          console.log('transform', transform);
           style[sizeName] = tabSize + 'px';
           style.transform = transform;
           style.msTransform = transform;
@@ -51,6 +55,25 @@
 
           return style;
         }
+      },
+      customBarStyle: {
+        cache: false,
+        get() {
+          let style = {};
+          if (this.activeWidth && this.activeWidth >= 0) {
+            style.width = this.activeWidth + 'px';
+          }
+          return style;
+        }
+      },
+      fixActiveBarClass() {
+        let classList = {
+          [`is-${ this.rootTabs.tabPosition }`]: true
+        };
+        if (this.activeWidth) {
+          classList['el-tabs__fix-width-active-bar'] = true;
+        }
+        return classList;
       }
     }
   };

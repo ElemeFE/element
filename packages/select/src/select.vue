@@ -88,12 +88,12 @@
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
-      <i slot="suffix"
+      <i slot="suffix" v-if="loading" class="el-input__icon el-icon-loading"></i>
+      <i slot="suffix" v-else
        :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
        @click="handleIconClick"
       ></i>
     </el-input>
-      <i v-if="loadingIcon" class="el-input__icon el-icon-loading"></i>
       <transition
       name="el-zoom-in-top"
       @before-enter="handleMenuEnter"
@@ -180,7 +180,7 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       iconClass() {
-        if (this.loadingIcon) {
+        if (this.loading) {
           return '';
         }
         let criteria = this.clearable &&
@@ -258,7 +258,6 @@
       filterable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
-      loadingIcon: Boolean,
       popperClass: String,
       remote: Boolean,
       loadingText: String,

@@ -23,18 +23,18 @@
     &>.el-tabs__custom-active-bar {
       margin: 0 auto;
       height: 100%;
-      background-color: var(--color-primary);
+      background-color: $--color-primary;
     }
   }
   @include e(notice) {
     &:before {
       content: '';
-      background-color: var(--color-danger);
+      background-color: $--color-danger;
       width: 5px;
       height: 5px;
       position: absolute;
-      top: 18px;
-      left: 8px;
+      top: 8px;
+      left: 0;
       border-radius: 2.5px;
     }
   }
@@ -253,7 +253,7 @@
   @include m((top, bottom)) {
     .el-tabs__item.is-top:nth-child(2),
     .el-tabs__item.is-bottom:nth-child(2) {
-      padding-left: 0;
+      padding-left: 5px;
     }
     .el-tabs__item.is-top:last-child,
     .el-tabs__item.is-bottom:last-child {
