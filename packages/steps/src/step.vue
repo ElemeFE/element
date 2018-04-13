@@ -48,6 +48,19 @@
         class="el-step__description"
         :class="['is-' + currentStatus]">
         <slot name="description">{{ description }}</slot>
+        <i style="margin-left: 3px;font-size: 15px;" v-if="desicon" :class="['el-icon-' + (currentStatus === 'success' ? 'success' : currentStatus==='process'?'warning':'info')]"
+          class="el-step__icon-inner is-status"
+        >
+        </i>
+        <br>  
+        <slot name="dates">{{dates}}</slot>  
+        <br>  
+        <slot name="button">
+          <el-button v-if="button && currentStatus==='process'" type="text" @click="buttonEnter" style="padding: 0;">{{button}}</el-button>  
+        </slot>  
+      </div>
+      <div>
+
       </div>
     </div>
   </div>
@@ -61,6 +74,9 @@ export default {
     title: String,
     icon: String,
     description: String,
+    dates: String,
+    desicon:String,  
+    button: String, 
     status: String
   },
 
@@ -167,7 +183,10 @@ export default {
         : style.width = step + '%';
 
       this.lineStyle = style;
-    }
+    },
+    buttonEnter(event) {  
+      this.$emit('button-enter', this, event);  
+    }  
   },
 
   mounted() {
