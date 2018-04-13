@@ -8,7 +8,7 @@
                      :suffix-icon="suffixIconLeft"
                      v-model="labelLeft"
                      @select="onPlaceSelect($event, true)">
-      <template scope="props">
+      <template slot-scope="props">
         <tm-value-switcher-item :title="props.item.title"
                                 :icon="props.item.icon"
                                 :code="props.item.code"
@@ -27,7 +27,7 @@
                      :suffix-icon="suffixIconRight"
                      v-model="labelRight"
                      @select="onPlaceSelect($event, false)">
-      <template scope="props">
+      <template slot-scope="props">
         <tm-value-switcher-item :title="props.item.title"
                                 :icon="props.item.icon"
                                 :code="props.item.code"

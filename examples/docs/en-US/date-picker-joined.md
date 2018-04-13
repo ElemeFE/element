@@ -2,14 +2,15 @@
   export default {
     data: function () {
       return {
-        date: null
+        date: null,
+        dateSingle: ''
       }
     }
   }
 </script>
 ## DatePickerJoined
 
-### This components uses only with daterange date-picker
+### Range
 
 :::demo default
 
@@ -22,9 +23,21 @@
 :::
 
 
+### Single
+
+:::demo 
+```html
+<tm-date-picker-joined
+  type="date"
+  suffix-icon="calendar"></tm-date-picker-joined>
+
+```
+:::
+
+
 ### Datepicker Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| v-model | data to bind | var | — | — |
 | suffix-icon | suffix-icon | string | — | — |
 | prefix-icon | prefix-icon | string | — | — |
+| type | datepicker type | string | date, daterange | daterange |

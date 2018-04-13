@@ -3,6 +3,7 @@
     <tm-input
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon"
+      readonly
       v-model="dateLabel"
       placeholder="Период пребывания"></tm-input>
     <tm-date-picker
@@ -35,7 +36,7 @@ export default {
       default: null
     },
     value: {
-      type: Array,
+      type: [Array, Date],
       default: null
     },
     type: {
@@ -63,7 +64,7 @@ export default {
   methods: {
     onDateFocus() {
       this.$el
-        .querySelector('.tm-date-editor')
+        .querySelector('.tm-date-editor.tm-input__inner, .tm-date-editor .tm-input__inner')
         .click();
     },
     formatDate(date) {
@@ -75,7 +76,9 @@ export default {
         : '';
     },
     getSingleDateLabel() {
-      return this.formatDate(this.date);
+      return this.date
+        ? this.formatDate(this.date)
+        : '';
     }
   },
   mounted() {
