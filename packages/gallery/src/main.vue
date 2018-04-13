@@ -97,18 +97,18 @@ export default {
     this.$set(this, 'displayThumbs', this.images.slice(0, this.nThumbs));
   },
   methods: {
-    show: function(event) {
+    show: function() {
       document.addEventListener('keydown', this.addKeyEvent);
       this.galleryDialog = true;
     },
-    hide: function(event) {
+    hide: function() {
       this.galleryDialog = false;
       document.removeEventListener('keydown', this.addKeyEvent);
     },
-    next: function(event) {
+    next: function() {
       this.$set(this, 'selected', (this.selected + 1) % this.countImages);
     },
-    prev: function(event) {
+    prev: function() {
       this.$set(this, 'selected', ((this.selected - 1) + this.countImages) % this.countImages);
     },
     showImage(index) {
