@@ -1,5 +1,81 @@
 ## Changelog
 
+### 2.3.4
+
+*2018-04-12*
+
+- Deleted duplicate `showTimeout` attribute in SubMenu's TypeScript declaration, #10566 (by @kimond)
+- Now you can customize Transfer's data item using scoped slot, #10577
+- Fixed clicking disabled prev and next button of Pagination still triggers `current-change` event, #10628
+- Fixed Textarea displaying `undefined` in SSR when its value is not set, #10630
+- Fixed disabled TabItem style when `type` is border-car, #10640
+- Added `$index` as `formatter`'s fourth param of Table, #10645
+- Fixed CheckboxButton not exported in TypeScript declaration, #10666
+
+### 2.3.3
+
+*2018-04-04*
+
+- Agregar atributo `shadow` para Card, #10418 (by @YunYouJun)
+- Se ha corregido el error de ocultar Badge cuando `value` es `0`, #10470
+- Arreglados algunos bugs del draggable Tree, #10474 #10494
+- Agregado `placement` para Autocomplete, #10475
+- Ahora el atributo `default-time` también funciona en un rango que no es el rango DateTimePicker, #10321 (by @RickMacTurk)
+- Eliminado el contorno azul de TabItem después de que el navegador se desdibuja o se minimiza, #10503
+- Agregado el atributo `popper-append-to-body` para SubMenu, #10515
+- Eliminado el feedback visual cuando se desplaza sobre non-link BreadcrumbItem, #10551
+- Se ha corregido el evento `change` de InputNumber para garantizar que el valor de ligado del componente se actualiza en el control de eventos, #10553
+
+### 2.3.2
+
+*2018-03-29*
+
+- Arreglada una regresión de Autocompletar, #10442
+
+### 2.3.1
+
+*2018-03-29*
+
+- Se ha corregido una regresión por la que el `type` de input no se transmitia al elemento de entrada nativo, #10415
+- Agregado el metodo `blur` para Select, #10416
+
+### 2.3.0 Diamond
+
+*2018-03-28*
+
+#### Nuevas características
+- Table
+  - Ahora `formatter` de TableColumn puede ser actualizado dinámicamente, #10184 (by @elfman)
+  - Agregado el atributo  `select-on-indeterminate`, #9924 (by @syn-zeta)
+- Menu
+  - Agregado el atributo `collapse-transition`, #8809 (by @limichange)
+- Input
+  - Agregado el metodo `select` , #10229
+  - Agregado el metodo `blur`, #10356
+- ColorPicker
+  - Agregado el atributo `predefine`, #10170 (by @elfman)
+- Tree
+  - Agregados los atributos `draggable`, `allow-drop` y `allow-drag`, y los eventos `node-drag-start`, `node-drag-enter`, `node-drag-leave`, `node-drag-over`, `node-drag-end` y `node-drop`, #9251 #10372 (by @elfman)
+- Form
+  - El metodo `validate` ahora acepta un segundo parametro, que contiene información de los ítems  del formulario que no superaron la validación, #10279
+  - Agregado el evento  `validate`, #10351
+- Progress
+  - Agregado el atributo `color`, #10352 (by @YunYouJun)
+- Button
+  - Agregado el atributo `circle`, #10359 (by @YunYouJun)
+
+#### Bug's arreglados
+- Form
+  - Solucionado: Label del FormItem no se alineaba adecuadamente con Input mixto, #10189
+- Menu
+  - Ahora collapsed Menu sólo mostrará el Tooltip cuando el slot `title` de MenuItem esté configurado, #10193 (by @PanJiaChen)
+- Pagination
+  - Corregido el evento  `current-change`  que se disparaba erróneamente sin interacción del usuario, #10247
+- DatePicker
+  - Ahora la fecha y la hora en el panel desplegable están correctamente formateadas según el atributo `format`, #10174（by @remizovvv）
+- Upload
+  - Solucionado el atributo `accept` no trabajaba cuando `drag` era true, #10278
+
 ### 2.2.2
 
 *2018-03-14*

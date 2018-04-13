@@ -57,7 +57,7 @@
       color: $--pagination-hover-fill;
     }
 
-    &.disabled {
+    &:disabled {
       color: $--pagination-button-disabled-color;
       background-color: $--pagination-button-disabled-fill;
       cursor: not-allowed;
@@ -188,7 +188,7 @@
     .btn-prev, .btn-next {
       padding: 0;
 
-      &.disabled {
+      &:disabled {
         color: $--color-text-placeholder;
       }
     }
