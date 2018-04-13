@@ -29,6 +29,7 @@
 ```html
 <tm-date-picker-joined
   type="date"
+  v-model="dateSingle"
   suffix-icon="calendar"></tm-date-picker-joined>
 ```
 :::
