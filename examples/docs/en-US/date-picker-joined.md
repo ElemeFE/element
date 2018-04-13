@@ -30,7 +30,6 @@
 <tm-date-picker-joined
   type="date"
   suffix-icon="calendar"></tm-date-picker-joined>
-
 ```
 :::
 

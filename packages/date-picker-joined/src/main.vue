@@ -7,6 +7,7 @@
       v-model="dateLabel"
       placeholder="Период пребывания"></tm-input>
     <tm-date-picker
+      ref="originPicker"
       :type="type"
       v-model="date"></tm-date-picker>
   </div>
@@ -63,9 +64,7 @@ export default {
   },
   methods: {
     onDateFocus() {
-      this.$el
-        .querySelector('.tm-date-editor.tm-input__inner, .tm-date-editor .tm-input__inner')
-        .click();
+      this.$refs.originPicker.focus();
     },
     formatDate(date) {
       return moment(date).format(this.format);
