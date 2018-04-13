@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.1.14
+
+*2018-04-13*
+
+- Добавлена обработка DatePicker с type=date в компонент DatePicker Joined
+- Внесены фиксы в компонент Value Switcher
+
+
 ### 1.1.13
 
 *2018-04-12*
