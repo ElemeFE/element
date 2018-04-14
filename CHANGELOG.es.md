@@ -4,13 +4,13 @@
 
 *2018-04-12*
 
-- Deleted duplicate `showTimeout` attribute in SubMenu's TypeScript declaration, #10566 (by @kimond)
-- Now you can customize Transfer's data item using scoped slot, #10577
-- Fixed clicking disabled prev and next button of Pagination still triggers `current-change` event, #10628
-- Fixed Textarea displaying `undefined` in SSR when its value is not set, #10630
-- Fixed disabled TabItem style when `type` is border-car, #10640
-- Added `$index` as `formatter`'s fourth param of Table, #10645
-- Fixed CheckboxButton not exported in TypeScript declaration, #10666
+- Eliminado el atributo duplicado  `showTimeout` en SubMenu's en la declaracion TypeScript, #10566 (by @kimond)
+- Ahora se puede personalizar los datos de los items de Transfer usando scoped slot, #10577
+- Arreglado que los click de los botones `next` y `prev`  en Pagination se deshabilitaban cuando se disparaba el evento  `current-change`, #10628
+- Arreglado que Textarea mostraba `undefined` en SSR cuando el valor no era asignado, #10630
+- Arreglado que se deshabilitaba el estilo del TabItem cuando  `type` era border-car, #10640
+- Agregado `$index` como cuarto parametro en el atributo de las columnas de Table  `formatter` , #10645
+- Arreglado que CheckboxButton no se exportaba en la declaracion de TypeScript, #10666
 
 ### 2.3.3
 
