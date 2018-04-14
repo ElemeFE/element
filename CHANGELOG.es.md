@@ -8,7 +8,7 @@
 - Ahora se puede personalizar los datos de los items de Transfer usando scoped slot, #10577
 - Arreglado que los click de los botones `next` y `prev`  en Pagination se deshabilitaban cuando se disparaba el evento  `current-change`, #10628
 - Arreglado que Textarea mostraba `undefined` en SSR cuando el valor no era asignado, #10630
-- Arreglado que se deshabilitaba el estilo del TabItem cuando  `type` era border-car, #10640
+- Arreglado que se deshabilitaba el estilo del TabItem cuando  `type` era border-card, #10640
 - Agregado `$index` como cuarto parametro en el atributo de las columnas de Table  `formatter` , #10645
 - Arreglado que CheckboxButton no se exportaba en la declaracion de TypeScript, #10666
 
