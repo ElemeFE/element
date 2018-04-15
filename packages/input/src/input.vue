@@ -100,7 +100,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
-  import {isKorean} from 'element-ui/src/utils/shared';
+  import { isKorean } from 'element-ui/src/utils/shared';
 
   export default {
     name: 'ElInput',
@@ -263,7 +263,7 @@
       },
       handleInput(event) {
         const value = event.target.value;
-        if (this.isOnComposition || value === this.currentValue) return;
+        if (this.isOnComposition) return;
         this.$emit('input', value);
         this.setCurrentValue(value);
       },
