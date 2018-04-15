@@ -311,7 +311,8 @@
 
         newDate.setDate(parseInt(cell.text, 10));
 
-        return getWeekNumber(newDate) === getWeekNumber(this.date);
+        const valueYear = isDate(this.value) ? this.value.getFullYear() : null;
+        return year === valueYear && getWeekNumber(newDate) === getWeekNumber(this.value);
       },
 
       markRange(maxDate) {

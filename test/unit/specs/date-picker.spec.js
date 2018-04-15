@@ -1354,6 +1354,50 @@ describe('DatePicker', () => {
         }, DELAY);
       }, DELAY);
     });
+
+    it('highlight correctly', done => {
+      vm = createVue({
+        template: '<el-date-picker type="week" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: null
+          };
+        }
+      }, true);
+
+      const input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+
+      setTimeout(() => {
+        const pickerEl = vm.$refs.compo.picker.$el;
+        const numberOfHighlightRows = () => pickerEl.querySelectorAll('.el-date-table__row.current').length;
+        expect(numberOfHighlightRows()).to.equal(0);
+        setTimeout(() => {
+          pickerEl.querySelector('td.available').click();
+          setTimeout(() => {
+            expect(vm.value).to.exist;
+            input.blur();
+            input.focus();
+            setTimeout(() => {
+              expect(numberOfHighlightRows()).to.equal(1);
+              // test: next month should not have highlight
+              pickerEl.querySelector('.el-icon-arrow-right').click();
+              setTimeout(() => {
+                expect(numberOfHighlightRows()).to.equal(0);
+                // test: next year should not have highlight
+                pickerEl.querySelector('.el-icon-arrow-left').click(); // go back one month
+                pickerEl.querySelector('.el-icon-d-arrow-right').click();
+                setTimeout(() => {
+                  expect(numberOfHighlightRows()).to.equal(0);
+                  done();
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   describe('type:daterange', () => {
