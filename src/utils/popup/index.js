@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
-import { getStyle } from '../dom';
 
 let idSeed = 1;
 const transitions = [];
@@ -37,8 +36,6 @@ const hookTransition = (transition) => {
     }
   });
 };
-
-let scrollBarWidth;
 
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
