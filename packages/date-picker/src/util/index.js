@@ -95,6 +95,7 @@ export const getStartDateOfMonth = function(year, month) {
 };
 
 export const getWeekNumber = function(src) {
+  if (!isDate(src)) return null;
   const date = new Date(src.getTime());
   date.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
