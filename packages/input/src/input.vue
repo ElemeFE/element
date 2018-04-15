@@ -262,8 +262,8 @@
         }
       },
       handleInput(event) {
-        const value = event.target.value;
         if (this.isOnComposition) return;
+        const value = event.target.value;
         this.$emit('input', value);
         this.setCurrentValue(value);
       },
