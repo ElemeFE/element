@@ -147,6 +147,7 @@
   import { getValueByPath } from 'element-ui/src/utils/util';
   import { valueEquals } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
+  import { isKorean } from 'element-ui/src/utils/shared';
 
   const sizeMap = {
     'medium': 36,
@@ -412,11 +413,13 @@
 
     methods: {
       handleComposition(event) {
+        const text = event.target.value;
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.handleQueryChange(event.target.value);
+          this.handleQueryChange(text);
         } else {
-          this.isOnComposition = true;
+          const lastCharacter = text[text.length - 1] || '';
+          this.isOnComposition = !isKorean(lastCharacter);
         }
       },
       handleQueryChange(val) {
