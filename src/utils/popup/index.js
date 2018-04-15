@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
-import getScrollBarWidth from '../scrollbar-width';
 import { getStyle } from '../dom';
 
 let idSeed = 1;
@@ -114,8 +113,9 @@ export default {
   data() {
     return {
       opened: false,
-      bodyOverflow: null,
-      bodyPaddingRight: null,
+      bodyWidth: null,
+      bodyPosition: null,
+      bodyOverflowY: null,
       rendered: false
     };
   },
@@ -186,17 +186,14 @@ export default {
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
-          if (!this.bodyOverflow) {
-            this.bodyPaddingRight = document.body.style.paddingRight;
-            this.bodyOverflow = document.body.style.overflow;
+          if (!this.bodyOverflowY) {
+            this.bodyWidth = document.body.style.width;
+            this.bodyPosition = document.body.style.position || 'static';
+            this.bodyOverflowY = document.body.style.overflowY;
           }
-          scrollBarWidth = getScrollBarWidth();
-          let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
-          let bodyOverflowY = getStyle(document.body, 'overflowY');
-          if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll')) {
-            document.body.style.paddingRight = scrollBarWidth + 'px';
-          }
-          document.body.style.overflow = 'hidden';
+          document.body.style.width = '100%';
+          document.body.style.position = 'fixed';
+          document.body.style.overflowY = 'scroll';
         }
       }
 
@@ -246,12 +243,14 @@ export default {
 
       if (this.lockScroll) {
         setTimeout(() => {
-          if (this.modal && this.bodyOverflow !== 'hidden') {
-            document.body.style.overflow = this.bodyOverflow;
-            document.body.style.paddingRight = this.bodyPaddingRight;
+          if (this.modal && this.bodyOverflowY !== 'scroll') {
+            document.body.style.width = this.bodyWidth;
+            document.body.style.position = this.bodyPosition;
+            document.body.style.overflowY = this.bodyOverflowY;
           }
-          this.bodyOverflow = null;
-          this.bodyPaddingRight = null;
+          this.bodyWidth = null;
+          this.bodyPosition = null;
+          this.bodyOverflowY = null;
         }, 200);
       }
 
