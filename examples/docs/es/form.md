@@ -854,10 +854,15 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 
 | Metodo        | Descripción                              | Parametros                               |
 | ------------- | ---------------------------------------- | ---------------------------------------- |
-| validate      | el método para validar todo el formulario. Devuelve una promesa si se omite el return | Function(callback: Function(boolean))    |
+| validate      | el método para validar todo el formulario. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Devuelve una promesa si se omite el return | Function(callback: Function(boolean, object))    |
 | validateField | el método para validar un determinado form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields   | restablece todos los campos y elimina el resultado de validación | —                                        |
 | clearValidate | limpia mensaje de validación para todos los campos | -
+
+### Form Events
+| Nombre   | Descripción                                          | Parametros                                                   |
+| -------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| validate | se dispara después de validar un item del formulario | la propiedad (`prop name`) nombre del item del form que se esta validando, si la validacion paso o no. |
 
 ### Form-Item Atributos
 
@@ -866,7 +871,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | prop           | un key de `model`. En el uso del método validate and resetFields, el atributo es obligatorio. | string  | keys of model that passed to `form` |             |
 | label          | etiqueta                                 | string  | —                                   | —           |
 | label-width    | ancho de la etiqueta, e.g. '50px'        | string  | —                                   | —           |
-| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | string  | —                                   | false       |
+| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | boolean  | —                                   | false       |
 | rules          | reglas de validacion del form            | object  | —                                   | —           |
 | error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                   | —           |
 | show-message   | si mostrar o no el mensaje de error      | boolean | —                                   | true        |

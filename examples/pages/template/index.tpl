@@ -289,7 +289,7 @@
       </div>
     </div>
     <div class="sponsors">
-      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank">
+      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
         <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
         <div>
           <p>Sponsored by Tipe.io</p>
@@ -350,6 +350,11 @@
   import { Hover } from 'perspective.js';
 
   export default {
+    data() {
+      return {
+        lang: this.$route.meta.lang
+      };
+    },
     mounted() {
       new Hover('.jumbotron', { // eslint-disable-line
         max: 3,

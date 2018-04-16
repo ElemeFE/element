@@ -95,6 +95,7 @@ export const getStartDateOfMonth = function(year, month) {
 };
 
 export const getWeekNumber = function(src) {
+  if (!isDate(src)) return null;
   const date = new Date(src.getTime());
   date.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
@@ -140,6 +141,14 @@ export const modifyDate = function(date, y, m, d) {
 
 export const modifyTime = function(date, h, m, s) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
+};
+
+export const modifyWithDefaultTime = (date, time) => {
+  if (date == null || !time) {
+    return date;
+  }
+  time = parseDate(time, 'HH:mm:ss');
+  return modifyTime(date, time.getHours(), time.getMinutes(), time.getSeconds());
 };
 
 export const clearTime = function(date) {
@@ -214,4 +223,17 @@ export const nextYear = function(date, amount = 1) {
   const year = date.getFullYear();
   const month = date.getMonth();
   return changeYearMonthAndClampDate(date, year + amount, month);
+};
+
+export const extractDateFormat = function(format) {
+  return format
+    .replace(/\W?m{1,2}|\W?ZZ/g, '')
+    .replace(/\W?h{1,2}|\W?s{1,3}|\W?a/gi, '')
+    .trim();
+};
+
+export const extractTimeFormat = function(format) {
+  return format
+    .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
+    .trim();
 };

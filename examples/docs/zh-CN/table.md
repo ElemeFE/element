@@ -1684,7 +1684,7 @@
       label="数值 3">
     </el-table-column>
   </el-table>
-  
+
   <el-table
     :data="tableData6"
     border
@@ -2035,6 +2035,7 @@
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -2060,7 +2061,7 @@
 ### Table Methods
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| clearSelection | 用于多选表格，清空用户的选择，当使用 reserve-selection 功能的时候，可能会需要使用此方法 | selection |
+| clearSelection | 用于多选表格，清空用户的选择 | — |
 | toggleRowSelection | 用于多选表格，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中） | row, selected |
 | toggleRowExpansion | 用于可展开表格，切换某一行的展开状态，如果使用了第二个参数，则是设置这一行展开与否（expanded 为 true 则展开） | row, expanded |
 | setCurrentRow | 用于单选表格，设定某一行为选中行，如果调用时不加参数，则会取消目前高亮行的选中状态。 | row |
@@ -2089,16 +2090,21 @@
 | sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效，需返回一个数字，和 Array.sort 表现一致 | Function(a, b) | — | — |
 | sort-by | 指定数据按照哪个属性进行排序，仅当 sortable 设置为 true 且没有设置 sort-method 的时候有效。如果 sort-by 为数组，则先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推。 | String/Array/Function(row, index) | — | — |
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
-| formatter | 用来格式化内容 | Function(row, column, cellValue) | — | — |
+| formatter | 用来格式化内容 | Function(row, column, cellValue, index) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
 | align | 对齐方式 | String | left/center/right | left |
 | header-align | 表头对齐方式，若不设置该项，则使用表格的对齐方式 | String | left/center/right | — |
 | class-name | 列的 className | string | — | — |
 | label-class-name | 当前列标题的自定义类名 | string | — | — |
 | selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | — | — |
-| reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | — | false |
+| reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则会在数据更新之后保留之前选中的数据（需指定 `row-key`） | Boolean | — | false |
 | filters | 数据过滤的选项，数组格式，数组中的元素需要有 text 和 value 属性。 | Array[{ text, value }] | — | — |
 | filter-placement | 过滤弹出框的定位 | String | 与 Tooltip 的 `placement` 属性相同 | — |
 | filter-multiple | 数据过滤的选项是否多选 | Boolean | — | true |
 | filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row, column) | — | — |
 | filtered-value | 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性。 | Array | — | — |
+
+### Table-column Scoped Slot
+| name | 说明 |
+|------|--------|
+| — | 自定义列的内容，参数为 { row, column, $index } |

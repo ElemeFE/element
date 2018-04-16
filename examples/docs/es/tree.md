@@ -17,6 +17,35 @@
     .filter-tree {
       margin-top: 20px;
     }
+    
+    .custom-tree-container {
+      display: flex;
+      margin: -24px;
+    }
+      
+    .block {
+      flex: 1;
+      padding: 8px 24px 24px;
+      
+      &:first-child {
+        border-right: solid 1px #eff2f6;
+      }
+      
+      > p {
+        text-align: center;
+        margin: 0;
+        line-height: 4;
+      }
+    }
+      
+    .custom-tree-node {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-right: 8px;
+    }
   }
 </style>
 
@@ -122,6 +151,42 @@
     }]
   }];
 
+  const data6 = [{
+    label: 'Level one 1',
+    children: [{
+      label: 'Level two 1-1',
+      children: [{
+        label: 'Level three 1-1-1'
+      }]
+    }]
+  }, {
+    label: 'Level one 2',
+    children: [{
+      label: 'Level two 2-1',
+      children: [{
+        label: 'Level three 2-1-1'
+      }]
+    }, {
+      label: 'Level two 2-2',
+      children: [{
+        label: 'Level three 2-2-1'
+      }]
+    }]
+  }, {
+    label: 'Level one 3',
+    children: [{
+      label: 'Level two 3-1',
+      children: [{
+        label: 'Level three 3-1-1'
+      }]
+    }, {
+      label: 'Level two 3-2',
+      children: [{
+        label: 'Level three 3-2-1'
+      }]
+    }]
+  }];
+
   let id = 1000;
 
   const regions = [{
@@ -161,6 +226,30 @@
       },
       handleNodeClick(data) {
         console.log(data);
+      },
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
+      },
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
+      },
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
+      },
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
+      },
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode) {
+        return dropNode.data.label !== 'Level two 3-1';
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -218,11 +307,11 @@
         this.$refs.tree.setCheckedNodes([
           {
             id: 5,
-            label: '二级 2-1'
+            label: 'Level two 2-1'
           },
           {
             id: 9,
-            label: '三级 1-1-1'
+            label: 'Level three 1-1-1'
           }
         ]);
       },
@@ -249,13 +338,11 @@
     
       renderContent(h, { node, data, store }) {
         return (
-          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
+          <span class="custom-tree-node">
+            <span>{node.label}</span>
             <span>
-              <span>{node.label}</span>
-            </span>
-            <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -272,6 +359,8 @@
         data2,
         data3,
         data4: JSON.parse(JSON.stringify(data2)),
+        data5: JSON.parse(JSON.stringify(data2)),
+        data6,
         regions,
         defaultProps,
         props,
@@ -685,63 +774,92 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-:::demo Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+:::demo There are two ways to customize template for tree nodes: `render-content` and scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. If you prefer scoped slot, you'll have access to `node` and `data` in the scope, standing for the TreeNode object and node data of the current node respectively. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
-<el-tree
-  :data="data4"
-  :props="defaultProps"
-  show-checkbox
-  node-key="id"
-  default-expand-all
-  :expand-on-click-node="false"
-  :render-content="renderContent">
-</el-tree>
+<div class="custom-tree-container">
+  <div class="block">
+    <p>Using render-content</p>
+    <el-tree
+      :data="data4"
+      show-checkbox
+      node-key="id"
+      default-expand-all
+      :expand-on-click-node="false"
+      :render-content="renderContent">
+    </el-tree>
+  </div>
+  <div class="block">
+    <p>Using scoped slot</p>
+    <el-tree
+      :data="data5"
+      show-checkbox
+      node-key="id"
+      default-expand-all
+      :expand-on-click-node="false">
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <span>{{ node.label }}</span>
+        <span>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => append(data)">
+            Append
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => remove(node, data)">
+            Delete
+          </el-button>
+        </span>
+      </span>
+    </el-tree>
+  </div>
+</div>
 
 <script>
   let id = 1000;
 
   export default {
     data() {
+      const data = [{
+        id: 1,
+        label: 'Level one 1',
+        children: [{
+          id: 4,
+          label: 'Level two 1-1',
+          children: [{
+            id: 9,
+            label: 'Level three 1-1-1'
+          }, {
+            id: 10,
+            label: 'Level three 1-1-2'
+          }]
+        }]
+      }, {
+        id: 2,
+        label: 'Level one 2',
+        children: [{
+          id: 5,
+          label: 'Level two 2-1'
+        }, {
+          id: 6,
+          label: 'Level two 2-2'
+        }]
+      }, {
+        id: 3,
+        label: 'Level one 3',
+        children: [{
+          id: 7,
+          label: 'Level two 3-1'
+        }, {
+          id: 8,
+          label: 'Level two 3-2'
+        }]
+      }];
       return {
-        data4: [{
-          id: 1,
-          label: 'Level one 1',
-          children: [{
-            id: 4,
-            label: 'Level two 1-1',
-            children: [{
-              id: 9,
-              label: 'Level three 1-1-1'
-            }, {
-              id: 10,
-              label: 'Level three 1-1-2'
-            }]
-          }]
-        }, {
-          id: 2,
-          label: 'Level one 2',
-          children: [{
-            id: 5,
-            label: 'Level two 2-1'
-          }, {
-            id: 6,
-            label: 'Level two 2-2'
-          }]
-        }, {
-          id: 3,
-          label: 'Level one 3',
-          children: [{
-            id: 7,
-            label: 'Level two 3-1'
-          }, {
-            id: 8,
-            label: 'Level two 3-2'
-          }]
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
+        data4: JSON.parse(JSON.stringify(data)),
+        data5: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -763,19 +881,28 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
 
       renderContent(h, { node, data, store }) {
         return (
-          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
+          <span class="custom-tree-node">
+            <span>{node.label}</span>
             <span>
-              <span>{node.label}</span>
-            </span>
-            <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       }
     }
   };
 </script>
+
+<style>
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+  }
+</style>
 ```
 :::
 
@@ -930,6 +1057,103 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 ```
 :::
 
+### Draggable
+
+You can drag and drop Tree nodes by adding a `draggable` attribute.
+
+:::demo
+```html
+<el-tree
+  :data="data6"
+  node-key="id"
+  default-expand-all
+  @node-drag-start="handleDragStart"
+  @node-drag-enter="handleDragEnter"
+  @node-drag-leave="handleDragLeave"
+  @node-drag-over="handleDragOver"
+  @node-drag-end="handleDragEnd"
+  @node-drop="handleDrop"
+  draggable
+  :allow-drop="allowDrop"
+  :allow-drag="allowDrag">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data6: [{
+          label: 'Level one 1',
+          children: [{
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 2',
+          children: [{
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
+          }, {
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 3',
+          children: [{
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
+          }, {
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
+      },
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
+      },
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
+      },
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
+      },
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode) {
+        return dropNode.data.label !== 'Level two 3-1';
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Atributos
 | Atributo              | Descripción                              | Tipo                              | Valores aceptados | Por defecto |
 | --------------------- | ---------------------------------------- | --------------------------------- | ----------------- | ----------- |
@@ -951,13 +1175,16 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
+| draggable             | si se habilita la función de drag and drop en los nodos | boolean            | —    | false |
+| allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
+| allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. | Function(Nodoquesearrastra, Nododestino) | —    | —     |
 
 ### props
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ----------------------------- | ----------------- | ----------- |
 | label    | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node)  | —                 | —           |
-| children | Especifica que objeto del nodo se utiliza como subárbol | string, function(data, node)  | —                 | —           |
-| isLeaf   | Especifica si el nodo es una hoja        | boolean, function(data, node) | —                 | —           |
+| children | Especifica que objeto del nodo se utiliza como subárbol | string | —                 | —           |
+| isLeaf   | Especifica si el nodo es una hoja, sólo funciona cuando lazy load está activado | boolean, function(datos, nodo) | —                 | —           |
 
 ### Métodos
 `Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
@@ -970,16 +1197,36 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
 | setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
 | setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
+| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de nodos actualmente seleccionada. | - |
+| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
+| getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
+| remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
+| append          | añadir un nodo hijo a un nodo determinado del árbol | (data, parentNode) 1. los datos del nodo hijo que se añadirán 2. los datos del nodo padre, clave o nodo |
+| insertBefore    | insertar un nodo antes de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
+| insertAfter     | insertar un nodo después de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
 
 ### Eventos
 | Nombre del evento | Descripción                              | Parámetros                               |
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
+| node-contextmenu     | se lanza cuando en un nodo se hace click con el boton derecho | cuatro parámetros: evento, el objeto nodo sobre el que se hizo click, la propiedad `node`  del TreeNode, el TreeNode en si mismo |
 | check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
+| check   | se activa al hacer clic en la casilla de selección de un nodo | dos parámetros: objeto de nodo correspondiente al nodo que se marca/desmarca, objeto de status de árbol verificado que tiene cuatro puntales: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
+| node-drag-start | se activa cuando se inicia el arrastre | dos parametros: el objeto del nodo que se arrastrara, evento. |
+| node-drag-enter | se desencadena cuando el nodo de arrastre entra en otro nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo en el que entra, evento. |
+| node-drag-leave | se desencadena cuando el nodo de arrastre sale de un nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo del cual se sale, evento. |
+| node-drag-over | se activa cuando se arrastra sobre un nodo (como el evento mouseover) | tres parametros: objeto del nodo que se arrastra, objeto del nodo sobre el que esta el arrastre, evento. |
+| node-drag-end  | se activa cuando se termina de arrastrar | cuatro parametros: objeto del nodo que se arrastra, objeto del nodo que corresponde al final del arrastre (puede ser `undefined` ), tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
+| node-drop  | después de soltar el nodo de arrastre | cuatro parametros: objeto del nodo que se esta arrastrando, objeto del nodo sobre el que se esta soltando, tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
+
+### Scoped Slot
+| Name | Description |
+|------|--------|
+| — | Contenido personalizado para nodos de tree. El parámetro del scope es { node, data }. |

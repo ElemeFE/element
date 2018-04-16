@@ -189,7 +189,7 @@
         multipleSelection: []
       };
     },
-    
+
     methods: {
       getSummaries(param) {
         const { columns, data } = param;
@@ -1978,6 +1978,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sum-text               | texto a mostrar para la primer columna de la fila de resumen | String                                   | —                              | Sum                                      |
 | summary-method         | método personalizado para resumen        | Function({ columns, data })              | —                              | —                                        |
 | span-method            | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | —                              | —                                        |
+| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas. | Boolean | — | true |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |
@@ -2003,7 +2004,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 ### Métodos de la tabla
 | Metodo             | Descripción                              | Parametros    |
 | ------------------ | ---------------------------------------- | ------------- |
-| clearSelection     | utilizado en selección múltiple de la tabla, limpiar selección, puede ser poco útil cuando `reserve-selection` está habilitado | selection     |
+| clearSelection     | utilizado en selección múltiple de la tabla, limpiar selección | —     |
 | toggleRowSelection | utilizado en selección múltiple de la tabla, alterna si una cierta fila es seleccionada. Con el segundo parámetro, puede directamente establecer si la fila es seleccionada | row, selected |
 | toggleRowExpansion | utilizado en tabla expandible, alterna si una cierta fila es expandida. Con el segundo parámetro, puede directamente establecer si esta fila es expandida o colapsada | row, expanded |
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
@@ -2031,16 +2032,21 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sort-method           | método de ordenamiento, funciona cuando `sortable` está en `true`. Debería devolver un número, al igual que Array.sort | Function(a, b)                    | —                             | —           |
 | sort-by               | especifica por cual propiedad de va a ordenar, funciona cuando `sortable` es `true` y `sort-method` es `undefined`. Si se establece a un arreglo, la columna ordenara secuencialmente por la siguiente propiedad si la anterior es igual | Function(row, index)/String/Array | —                             | —           |
 | resizable             | especifica si el ancho de la columna puede ser redimensionado, funciona cuando `border` de `el-table` está en `true` | boolean                           | —                             | false       |
-| formatter             | función que formatea el contenido de la celda | Function(row, column, cellValue)  | —                             | —           |
+| formatter             | función que formatea el contenido de la celda | Function(row, column, cellValue, index)  | —                             | —           |
 | show-overflow-tooltip | especifica si el _tooltip_ debe ocultarse o mostrarse al hacer _hover_ en la celda | boolean                           | —                             | false       |
 | align                 | alineación                               | string                            | left/center/right             | left        |
 | header-align          | alineación de la cabecera de la tabla. Si se omite, se aplicará el valor del atributo anterior. | String                            | left/center/right             | —           |
 | class-name            | nombre de clase de la celda en la columna | string                            | —                             | —           |
 | label-class-name      | nombre de clase de la etiqueta de esta columna | string                            | —                             | —           |
 | selectable            | función que determina si una cierta fila puede ser seleccionada, funciona cuando `type` esta en `selection` | Function(row, index)              | —                             | —           |
-| reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection` | boolean                           | —                             | false       |
+| reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection`. Note that `row-key` is required for this to work | boolean                           | —                             | false       |
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
 | filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
 | filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)      | —                             | —           |
 | filtered-value        | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array                             | —                             | —           |
+
+### Table-column Scoped Slot
+| Name | Description |
+|------|--------|
+| — | Custom content for table columns. The scope parameter is { row, column, $index } |

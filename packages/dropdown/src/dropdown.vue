@@ -237,13 +237,16 @@
           this.visible = false;
         }
         this.$emit('command', command, instance);
+      },
+      focus() {
+        this.triggerElm.focus && this.triggerElm.focus();
       }
     },
 
     render(h) {
       let { hide, splitButton, type, dropdownSize } = this;
 
-      var handleMainButtonClick = (event) => {
+      const handleMainButtonClick = (event) => {
         this.$emit('click', event);
         hide();
       };

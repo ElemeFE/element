@@ -89,20 +89,20 @@
         return this.for || this.prop;
       },
       labelStyle() {
-        var ret = {};
+        const ret = {};
         if (this.form.labelPosition === 'top') return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
+        const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.width = labelWidth;
         }
         return ret;
       },
       contentStyle() {
-        var ret = {};
+        const ret = {};
         const label = this.label;
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
+        const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;
         }
@@ -123,10 +123,10 @@
       fieldValue: {
         cache: false,
         get() {
-          var model = this.form.model;
+          const model = this.form.model;
           if (!model || !this.prop) { return; }
 
-          var path = this.prop;
+          let path = this.prop;
           if (path.indexOf(':') !== -1) {
             path = path.replace(/:/, '.');
           }
@@ -171,7 +171,7 @@
     methods: {
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
-        var rules = this.getFilteredRule(trigger);
+        const rules = this.getFilteredRule(trigger);
         if ((!rules || rules.length === 0) && this.required === undefined) {
           callback();
           return true;
@@ -179,7 +179,7 @@
 
         this.validateState = 'validating';
 
-        var descriptor = {};
+        const descriptor = {};
         if (rules && rules.length > 0) {
           rules.forEach(rule => {
             delete rule.trigger;
@@ -187,16 +187,17 @@
         }
         descriptor[this.prop] = rules;
 
-        var validator = new AsyncValidator(descriptor);
-        var model = {};
+        const validator = new AsyncValidator(descriptor);
+        const model = {};
 
         model[this.prop] = this.fieldValue;
 
-        validator.validate(model, { firstFields: true }, (errors, fields) => {
+        validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 
-          callback(this.validateMessage);
+          callback(this.validateMessage, invalidFields);
+          this.elForm && this.elForm.$emit('validate', this.prop, !errors);
         });
       },
       clearValidate() {
@@ -217,28 +218,39 @@
 
         let prop = getPropByPath(model, path, true);
 
+        this.validateDisabled = true;
         if (Array.isArray(value)) {
-          this.validateDisabled = true;
           prop.o[prop.k] = [].concat(this.initialValue);
         } else {
-          this.validateDisabled = true;
           prop.o[prop.k] = this.initialValue;
         }
+        /* Select 的值被代码改变时不会触发校验，
+           这里需要强行触发一次，刷新 validateDisabled 的值，
+           确保 Select 下一次值改变时能正确触发校验 */
+        this.broadcast('ElSelect', 'fieldReset');
+
+        this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
-        var formRules = this.form.rules;
-        var selfRules = this.rules;
-        var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
+        let formRules = this.form.rules;
+        const selfRules = this.rules;
+        const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? getPropByPath(formRules, this.prop || '').o[this.prop || ''] : [];
+        const prop = getPropByPath(formRules, this.prop || '');
+        formRules = formRules ? (prop.o[this.prop || ''] || prop.v) : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
       getFilteredRule(trigger) {
-        var rules = this.getRules();
+        const rules = this.getRules();
 
         return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          if (!rule.trigger || trigger === '') return true;
+          if (Array.isArray(rule.trigger)) {
+            return rule.trigger.indexOf(trigger) > -1;
+          } else {
+            return rule.trigger === trigger;
+          }
         }).map(rule => objectAssign({}, rule));
       },
       onFieldBlur() {

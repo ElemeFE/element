@@ -26,7 +26,11 @@ loadingDirective.install = Vue => {
 
             ['top', 'left'].forEach(property => {
               const scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
-              el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[scroll] + document.documentElement[scroll] + 'px';
+              el.maskStyle[property] = el.getBoundingClientRect()[property] +
+                document.body[scroll] +
+                document.documentElement[scroll] -
+                parseInt(getStyle(document.body, `margin-${ property }`), 10) +
+                'px';
             });
             ['height', 'width'].forEach(property => {
               el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
@@ -100,7 +104,7 @@ loadingDirective.install = Vue => {
       el.mask = mask.$el;
       el.maskStyle = {};
 
-      toggleLoading(el, binding);
+      binding.value && toggleLoading(el, binding);
     },
 
     update: function(el, binding) {

@@ -1,30 +1,30 @@
 <template>
   <ul @click="onPagerClick" class="el-pager">
     <li
-      :class="{ active: currentPage === 1 }"
+      :class="{ active: currentPage === 1, disabled }"
       v-if="pageCount > 0"
       class="number">1</li>
     <li
       class="el-icon more btn-quickprev"
-      :class="[quickprevIconClass]"
+      :class="[quickprevIconClass, { disabled }]"
       v-if="showPrevMore"
-      @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
+      @mouseenter="onMouseenter('left')"
       @mouseleave="quickprevIconClass = 'el-icon-more'">
     </li>
     <li
       v-for="pager in pagers"
       :key="pager"
-      :class="{ active: currentPage === pager }"
+      :class="{ active: currentPage === pager, disabled }"
       class="number">{{ pager }}</li>
     <li
       class="el-icon more btn-quicknext"
-      :class="[quicknextIconClass]"
+      :class="[quicknextIconClass, { disabled }]"
       v-if="showNextMore"
-      @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
+      @mouseenter="onMouseenter('right')"
       @mouseleave="quicknextIconClass = 'el-icon-more'">
     </li>
     <li
-      :class="{ active: currentPage === pageCount }"
+      :class="{ active: currentPage === pageCount, disabled }"
       class="number"
       v-if="pageCount > 1">{{ pageCount }}</li>
   </ul>
@@ -37,7 +37,9 @@
     props: {
       currentPage: Number,
 
-      pageCount: Number
+      pageCount: Number,
+
+      disabled: Boolean
     },
 
     watch: {
@@ -53,7 +55,7 @@
     methods: {
       onPagerClick(event) {
         const target = event.target;
-        if (target.tagName === 'UL') {
+        if (target.tagName === 'UL' || this.disabled) {
           return;
         }
 
@@ -82,6 +84,15 @@
 
         if (newPage !== currentPage) {
           this.$emit('change', newPage);
+        }
+      },
+
+      onMouseenter(direction) {
+        if (this.disabled) return;
+        if (direction === 'left') {
+          this.quickprevIconClass = 'el-icon-d-arrow-left';
+        } else {
+          this.quicknextIconClass = 'el-icon-d-arrow-right';
         }
       }
     },

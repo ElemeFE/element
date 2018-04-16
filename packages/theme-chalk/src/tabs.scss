@@ -224,8 +224,11 @@
         border-right-color: $--border-color-base;
         border-left-color: $--border-color-base;
       }
-      &:hover {
+      &:not(.is-disabled):hover {
         color: $--color-primary;
+      }
+      &.is-disabled {
+        color: $--disabled-color-base;
       }
     }
   }

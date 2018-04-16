@@ -131,7 +131,7 @@
         const disabledDate = this.disabledDate;
         const now = clearHours(new Date());
 
-        for (var i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
           const row = rows[i];
 
           if (this.showWeekNumber) {
@@ -140,7 +140,7 @@
             }
           }
 
-          for (var j = 0; j < 7; j++) {
+          for (let j = 0; j < 7; j++) {
             let cell = row[this.showWeekNumber ? j + 1 : j];
             if (!cell) {
               cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
@@ -311,7 +311,8 @@
 
         newDate.setDate(parseInt(cell.text, 10));
 
-        return getWeekNumber(newDate) === getWeekNumber(this.date);
+        const valueYear = isDate(this.value) ? this.value.getFullYear() : null;
+        return year === valueYear && getWeekNumber(newDate) === getWeekNumber(this.value);
       },
 
       markRange(maxDate) {
@@ -331,9 +332,15 @@
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
             const time = nextDate(startDate, index - this.offsetDay).getTime();
 
-            cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
-            cell.start = minDate && time === clearHours(minDate.getTime());
-            cell.end = maxDate && time === clearHours(maxDate.getTime());
+            if (maxDate && maxDate < minDate) {
+              cell.inRange = minDate && time >= clearHours(maxDate) && time <= clearHours(minDate);
+              cell.start = maxDate && time === clearHours(maxDate.getTime());
+              cell.end = minDate && time === clearHours(minDate.getTime());
+            } else {
+              cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
+              cell.start = minDate && time === clearHours(minDate.getTime());
+              cell.end = maxDate && time === clearHours(maxDate.getTime());
+            }
           }
         }
       },
@@ -442,8 +449,9 @@
               });
             } else {
               const minDate = new Date(newDate.getTime());
+              this.rangeState.selecting = false;
 
-              this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
+              this.$emit('pick', { minDate, maxDate: this.minDate });
             }
           } else if (!this.minDate) {
             const minDate = new Date(newDate.getTime());
@@ -455,7 +463,7 @@
         } else if (selectionMode === 'day') {
           this.$emit('pick', newDate);
         } else if (selectionMode === 'week') {
-          var weekNumber = getWeekNumber(newDate);
+          const weekNumber = getWeekNumber(newDate);
 
           const value = newDate.getFullYear() + 'w' + weekNumber;
           this.$emit('pick', {

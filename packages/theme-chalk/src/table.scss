@@ -253,7 +253,7 @@
     @include share-rule(border-pseudo) {
       content: '';
       position: absolute;
-      background-color: $--border-color-lighter;
+      background-color: $--table-border-color;
       z-index: 1;
     }
 
@@ -280,6 +280,10 @@
   @include m(border) {
     border-right: none;
     border-bottom: none;
+
+    &.el-loading-parent--relative {
+      border-color: transparent;
+    }
 
     th, td {
       border-right: $--table-border;

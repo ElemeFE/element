@@ -42,7 +42,12 @@
         type: Number,
         default: 300
       },
-      popperClass: String
+      popperClass: String,
+      disabled: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: undefined
+      }
     },
 
     data() {
@@ -50,7 +55,8 @@
         popperJS: null,
         timeout: null,
         items: {},
-        submenus: {}
+        submenus: {},
+        mouseInChild: false
       };
     },
     watch: {
@@ -65,7 +71,9 @@
     computed: {
       // popper option
       appendToBody() {
-        return this.rootMenu === this.$parent;
+        return this.popperAppendToBody === undefined
+          ? this.isFirstLevel
+          : this.popperAppendToBody;
       },
       menuTransitionName() {
         return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
@@ -124,6 +132,19 @@
             ? this.activeTextColor
             : this.textColor
         };
+      },
+      isFirstLevel() {
+        let isFirstLevel = true;
+        let parent = this.$parent;
+        while (parent && parent !== this.rootMenu) {
+          if (['ElSubmenu', 'ElMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
+            isFirstLevel = false;
+            break;
+          } else {
+            parent = parent.$parent;
+          }
+        }
+        return isFirstLevel;
       }
     },
     methods: {
@@ -147,23 +168,26 @@
         delete this.submenus[item.index];
       },
       handleClick() {
-        const {rootMenu} = this;
+        const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'hover' && rootMenu.mode === 'horizontal') ||
-          (rootMenu.collapse && rootMenu.mode === 'vertical')
+          (rootMenu.collapse && rootMenu.mode === 'vertical') ||
+          disabled
         ) {
           return;
         }
         this.dispatch('ElMenu', 'submenu-click', this);
       },
       handleMouseenter() {
-        const {rootMenu} = this;
+        const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
-          (!rootMenu.collapse && rootMenu.mode === 'vertical')
+          (!rootMenu.collapse && rootMenu.mode === 'vertical') ||
+          disabled
         ) {
           return;
         }
+        this.dispatch('ElSubmenu', 'mouse-enter-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
@@ -177,9 +201,10 @@
         ) {
           return;
         }
+        this.dispatch('ElSubmenu', 'mouse-leave-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-          this.rootMenu.closeMenu(this.index);
+          !this.mouseInChild && this.rootMenu.closeMenu(this.index);
         }, this.hideTimeout);
       },
       handleTitleMouseenter() {
@@ -193,7 +218,9 @@
         title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
       },
       updatePlacement() {
-        this.currentPlacement = this.mode === 'horizontal' ? 'bottom-start' : 'right-start';
+        this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
+          ? 'bottom-start'
+          : 'right-start';
       },
       initPopper() {
         this.referenceElm = this.$el;
@@ -205,6 +232,14 @@
       this.parentMenu.addSubmenu(this);
       this.rootMenu.addSubmenu(this);
       this.$on('toggle-collapse', this.handleCollapseToggle);
+      this.$on('mouse-enter-child', () => {
+        this.mouseInChild = true;
+        clearTimeout(this.timeout);
+      });
+      this.$on('mouse-leave-child', () => {
+        this.mouseInChild = false;
+        clearTimeout(this.timeout);
+      });
     },
     mounted() {
       this.initPopper();
@@ -220,12 +255,14 @@
         paddingStyle,
         titleStyle,
         backgroundColor,
-        $slots,
         rootMenu,
         currentPlacement,
         menuTransitionName,
         mode,
-        popperClass
+        disabled,
+        popperClass,
+        $slots,
+        isFirstLevel
       } = this;
 
       const popupMenu = (
@@ -259,12 +296,18 @@
         </el-collapse-transition>
       );
 
+      const submenuTitleIcon = (
+        rootMenu.mode === 'horizontal' && isFirstLevel ||
+        rootMenu.mode === 'vertical' && !rootMenu.collapse
+      ) ? 'el-icon-arrow-down' : 'el-icon-arrow-right';
+
       return (
         <li
           class={{
             'el-submenu': true,
             'is-active': active,
-            'is-opened': opened
+            'is-opened': opened,
+            'is-disabled': disabled
           }}
           role="menuitem"
           aria-haspopup="true"
@@ -282,12 +325,7 @@
             style={[paddingStyle, titleStyle, { backgroundColor }]}
           >
             {$slots.title}
-            <i class={{
-              'el-submenu__icon-arrow': true,
-              'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
-              'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
-            }}>
-            </i>
+            <i class={[ 'el-submenu__icon-arrow', submenuTitleIcon ]}></i>
           </div>
           {this.isMenuPopup ? popupMenu : inlineMenu}
         </li>

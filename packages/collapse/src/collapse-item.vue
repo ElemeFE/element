@@ -1,5 +1,5 @@
 <template>
-  <div class="el-collapse-item">
+  <div class="el-collapse-item" :class="{'is-active': isActive}">
     <div
       role="tab"
       :aria-expanded="isActive"

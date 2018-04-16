@@ -19,8 +19,10 @@ export default {
     IframeUpload
   },
 
-  provide: {
-    uploader: this
+  provide() {
+    return {
+      uploader: this
+    };
   },
 
   inject: {
@@ -127,7 +129,7 @@ export default {
       handler(fileList) {
         this.uploadFiles = fileList.map(item => {
           item.uid = item.uid || (Date.now() + this.tempIndex++);
-          item.status = 'success';
+          item.status = item.status || 'success';
           return item;
         });
       }

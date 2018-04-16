@@ -58,7 +58,7 @@
       },
       width: {
         type: Number,
-        default: 0
+        default: 40
       },
       activeIconClass: {
         type: String,
@@ -136,7 +136,7 @@
         this.$refs.core.style.backgroundColor = newColor;
       },
       switchValue() {
-        this.$refs.input.click();
+        !this.switchDisabled && this.handleChange();
       },
       getMigratingConfig() {
         return {

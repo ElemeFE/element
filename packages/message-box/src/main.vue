@@ -7,27 +7,32 @@
       @click.self="handleWrapperClick"
       role="dialog"
       aria-modal="true"
-      :aria-label="title || 'dialog'"
-    >
+      :aria-label="title || 'dialog'">
       <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
-        <div class="el-message-box__header" v-if="title !== undefined">
+        <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
-            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
+            <div
+              :class="['el-message-box__status', typeClass]"
+              v-if="typeClass && center">
+            </div>
             <span>{{ title }}</span>
           </div>
-          <button type="button"
-                  class="el-message-box__headerbtn"
-                  aria-label="Close"
-                  v-if="showClose"
-                  @click="handleAction('cancel')"
-                  @keydown.enter="handleAction('cancel')"
-          >
+          <button
+            type="button"
+            class="el-message-box__headerbtn"
+            aria-label="Close"
+            v-if="showClose"
+            @click="handleAction('cancel')"
+            @keydown.enter="handleAction('cancel')">
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content" v-if="message !== ''">
-          <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
-          <div class="el-message-box__message">
+        <div class="el-message-box__content">
+          <div
+            :class="['el-message-box__status', typeClass]"
+            v-if="typeClass && !center && message !== ''">
+          </div>
+          <div class="el-message-box__message" v-if="message !== ''">
             <slot>
               <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
               <p v-else v-html="message"></p>
@@ -37,10 +42,7 @@
             <el-input
               v-model="inputValue"
               :type="inputType"
-              @compositionstart.native="handleComposition"
-              @compositionupdate.native="handleComposition"
-              @compositionend.native="handleComposition"
-              @keyup.enter.native="handleKeyup"
+              @keydown.enter.native="handleInputEnter"
               :placeholder="inputPlaceholder"
               ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
@@ -50,12 +52,11 @@
           <el-button
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
-            v-show="showCancelButton"
+            v-if="showCancelButton"
             :round="roundButton"
             size="small"
             @click.native="handleAction('cancel')"
-            @keydown.enter="handleAction('cancel')"
-          >
+            @keydown.enter="handleAction('cancel')">
             {{ cancelButtonText || t('el.messagebox.cancel') }}
           </el-button>
           <el-button
@@ -66,8 +67,7 @@
             :round="roundButton"
             size="small"
             @click.native="handleAction('confirm')"
-            @keydown.enter="handleAction('confirm')"
-          >
+            @keydown.enter="handleAction('confirm')">
             {{ confirmButtonText || t('el.messagebox.confirm') }}
           </el-button>
         </div>
@@ -145,18 +145,6 @@
     },
 
     methods: {
-      handleComposition(event) {
-        if (event.type === 'compositionend') {
-          setTimeout(() => {
-            this.isOnComposition = false;
-          }, 100);
-        } else {
-          this.isOnComposition = true;
-        }
-      },
-      handleKeyup() {
-        !this.isOnComposition && this.handleAction('confirm');
-      },
       getSafeClose() {
         const currentId = this.uid;
         return () => {
@@ -198,6 +186,12 @@
         }
       },
 
+      handleInputEnter() {
+        if (this.inputType !== 'textarea') {
+          return this.handleAction('confirm');
+        }
+      },
+
       handleAction(action) {
         if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
           return;
@@ -213,15 +207,15 @@
 
       validate() {
         if (this.$type === 'prompt') {
-          var inputPattern = this.inputPattern;
+          const inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
             addClass(this.getInputElement(), 'invalid');
             return false;
           }
-          var inputValidator = this.inputValidator;
+          const inputValidator = this.inputValidator;
           if (typeof inputValidator === 'function') {
-            var validateResult = inputValidator(this.inputValue);
+            const validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
               addClass(this.getInputElement(), 'invalid');
