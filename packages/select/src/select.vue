@@ -49,6 +49,7 @@
         :disabled="selectDisabled"
         :autocomplete="autoComplete"
         @focus="handleFocus"
+        @blur="softFocus = false"
         @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
@@ -252,6 +253,7 @@
         type: String,
         default: 'off'
       },
+      automaticDropdown: Boolean,
       size: String,
       disabled: Boolean,
       clearable: Boolean,
@@ -309,6 +311,7 @@
         previousQuery: null,
         inputHovering: false,
         currentPlaceholder: '',
+        menuVisibleOnFocus: false,
         isOnComposition: false
       };
     },
@@ -546,6 +549,10 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
+          if (this.automaticDropdown || event.target.className.indexOf('el-select__input') > -1) {
+            this.visible = true;
+            this.menuVisibleOnFocus = true;
+          }
           this.$emit('focus', event);
         } else {
           this.softFocus = false;
@@ -559,6 +566,7 @@
 
       handleBlur(event) {
         this.$emit('blur', event);
+        this.softFocus = false;
       },
 
       handleIconClick(event) {
@@ -698,7 +706,11 @@
 
       toggleMenu() {
         if (!this.selectDisabled) {
-          this.visible = !this.visible;
+          if (this.menuVisibleOnFocus) {
+            this.menuVisibleOnFocus = false;
+          } else {
+            this.visible = !this.visible;
+          }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
           }
