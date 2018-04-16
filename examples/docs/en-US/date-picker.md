@@ -54,6 +54,12 @@
             }
           }]
         },
+        pickerOptions3: {
+          disabledDate(time) {
+              let today =  Number(new Date((new Date()).toDateString()));
+              return time.getTime() < today;
+          },
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -66,7 +72,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: []
+        value13: [],
+        value14: []
       };
     }
   };
@@ -164,6 +171,31 @@ Basic date picker measured by 'day'.
 </script>
 ```
 
+:::
+
+###  Multiselect
+
+By extending the basis of the date selection, multiple dates can be selected (this extension has its application to the reservation system)
+
+:::demo
+```html
+<div class="block">
+  <el-date-picker type="days" v-model="value14" placeholder="Pick one or more days" :picker-options="pickerOptions3"></el-date-picker>
+</div>
+<script>
+  export default {
+    data() {
+      return {
+        value14: '',
+        pickerOptions3: {
+          disabledDate(time) {
+            return time.getTime() <= Date.now();
+          },
+        }
+    }
+  };
+</script>
+```
 :::
 
 ### Other measurements

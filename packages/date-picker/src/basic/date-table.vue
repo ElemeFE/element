@@ -73,6 +73,10 @@
 
       disabledDate: {},
 
+      selectedDate: {
+        type: Array
+      },
+
       minDate: {},
 
       maxDate: {},
@@ -129,6 +133,7 @@
 
         const startDate = this.startDate;
         const disabledDate = this.disabledDate;
+        const selectedDate = this.selectedDate || this.value;
         const now = clearHours(new Date());
 
         for (let i = 0; i < 6; i++) {
@@ -181,7 +186,9 @@
               }
             }
 
-            cell.disabled = typeof disabledDate === 'function' && disabledDate(new Date(time));
+            let newDate = new Date(time);
+            cell.disabled = typeof disabledDate === 'function' && disabledDate(newDate);
+            cell.selected = Array.isArray(selectedDate) && selectedDate.find(date => date.toString() === newDate.toString());
 
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
@@ -283,6 +290,10 @@
 
         if (cell.disabled) {
           classes.push('disabled');
+        }
+
+        if (cell.selected) {
+          classes.push('selected');
         }
 
         return classes.join(' ');
@@ -472,6 +483,20 @@
             value: value,
             date: newDate
           });
+        } else if (selectionMode === 'days') {
+          let selectedDate = this.selectedDate;
+
+          if (!cell.selected) {
+            selectedDate.push(newDate);
+          } else {
+            selectedDate.forEach((date, index) => {
+              if (date.toString() === newDate.toString()) {
+                selectedDate.splice(index, 1);
+              }
+            });
+          }
+
+          this.$emit('select', selectedDate);
         }
       }
     }

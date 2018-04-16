@@ -1400,6 +1400,35 @@ describe('DatePicker', () => {
     });
   });
 
+  describe('type:days', () => {
+    let vm;
+
+    beforeEach(done => {
+      vm = createTest(DatePicker, {
+        type: 'days'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('click cell', done => {
+      const tds = vm.picker.$el.querySelectorAll('.el-date-table__row .available');
+      for (let i = 0; i < tds.length; i++) {
+        tds[i].click();
+      }
+      setTimeout(_ => {
+        expect(vm.picker.selectedDate).to.exist;
+        done();
+      }, DELAY);
+    });
+
+  });
+
   describe('type:daterange', () => {
     it('works', done => {
       vm = createVue({
