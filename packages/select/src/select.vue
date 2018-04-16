@@ -549,7 +549,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          if (this.automaticDropdown || event.target.className.indexOf('el-select__input') > -1) {
+          if (this.automaticDropdown || this.filterable) {
             this.visible = true;
             this.menuVisibleOnFocus = true;
           }
