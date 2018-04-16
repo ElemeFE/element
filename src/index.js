@@ -171,7 +171,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '2.0.12-bate.1',
+  version: '2.0.13-bate.3',
   locale: locale.use,
   i18n: locale.i18n,
   install,

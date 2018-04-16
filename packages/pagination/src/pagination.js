@@ -60,7 +60,7 @@ export default {
     let template = <div class={['el-pagination', {
       'is-background': this.background,
       'el-pagination--small': this.small
-    }] }></div>;
+    }] }><div></div></div>;
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
