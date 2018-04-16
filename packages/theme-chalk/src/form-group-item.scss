@@ -78,4 +78,10 @@
       }
     }
   }
+
+  .tm-date-picker-joined {
+    > .tm-input {
+      width: 100%;
+    }
+  }
 }
