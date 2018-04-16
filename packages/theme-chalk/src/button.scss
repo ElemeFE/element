@@ -29,14 +29,15 @@
 
   &:hover,
   &:focus {
-    color: $--color-primary;
-    border-color: $--color-primary-light-7;
-    background-color: $--color-primary-light-9;
+    color: #333333;
+    border-color: #cccccc;
+    background-color: #fafafa;
   }
 
   &:active {
-    color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+    color: #333333;
+    border-color: transparent;
+    background-color: #eeeeee;
     outline: none;
   }
 
@@ -75,11 +76,11 @@
     &,
     &:hover,
     &:focus {
-      color: $--button-disabled-color;
+      color: #cccccc;
       cursor: not-allowed;
       background-image: none;
-      background-color: $--button-disabled-fill;
-      border-color: $--button-disabled-border;
+      background-color: #fafafa;
+      border-color: #eeeeee;
     }
 
     &.el-button--text {
