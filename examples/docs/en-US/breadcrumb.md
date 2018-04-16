@@ -10,7 +10,7 @@ Displays the location of the current page, making it easier to browser back.
 ```html
 <el-breadcrumb separator="/">
   <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-  <el-breadcrumb-item>promotion management</el-breadcrumb-item>
+  <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
   <el-breadcrumb-item>promotion list</el-breadcrumb-item>
   <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
 </el-breadcrumb>

@@ -184,8 +184,35 @@ export default {
 ```
 :::
 
+### 卡片阴影
+
+可对阴影的显示进行配置。
+
+:::demo 通过`shadow`属性设置卡片阴影出现的时机：`always`、`hover`或`never`。
+```html
+<el-row :gutter="12">
+  <el-col :span="8">
+    <el-card shadow="always">
+      总是显示
+    </el-card>
+  </el-col>
+  <el-col :span="8">
+    <el-card shadow="hover">
+      鼠标悬浮时显示
+    </el-card>
+  </el-col>
+  <el-col :span="8">
+    <el-card shadow="never">
+      从不显示
+    </el-card>
+  </el-col>
+</el-row>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | header | 设置 header，也可以通过 `slot#header` 传入 DOM | string| — | — |
 | body-style | 设置 body 的样式| object| — | { padding: '20px' } |
+| shadow | 设置阴影显示时机 | string | always / hover / never | always |

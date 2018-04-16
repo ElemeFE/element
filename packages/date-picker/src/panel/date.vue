@@ -26,10 +26,10 @@
                 @input="val => userInputDate = val"
                 @change="handleVisibleDateChange" />
             </span>
-            <span class="el-date-picker__editor-wrap">
+            <span class="el-date-picker__editor-wrap" v-clickoutside="() => timePickerVisible = false">
               <el-input
                 ref="input"
-                @focus="timePickerVisible = !timePickerVisible"
+                @focus="timePickerVisible = true"
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
@@ -147,14 +147,18 @@
     isDate,
     modifyDate,
     modifyTime,
+    modifyWithDefaultTime,
     clearMilliseconds,
     clearTime,
     prevYear,
     nextYear,
     prevMonth,
     nextMonth,
-    changeYearMonthAndClampDate
+    changeYearMonthAndClampDate,
+    extractDateFormat,
+    extractTimeFormat
   } from '../util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
@@ -165,6 +169,8 @@
 
   export default {
     mixins: [Locale],
+
+    directives: { Clickoutside },
 
     watch: {
       showTime(val) {
@@ -212,7 +218,6 @@
         const value = value => {this.$refs.timepicker.value = value;};
         const date = date => {this.$refs.timepicker.date = date;};
 
-        this.$watch('format', format);
         this.$watch('value', value);
         this.$watch('date', date);
 
@@ -289,7 +294,7 @@
 
       handleTimePick(value, visible, first) {
         if (isDate(value)) {
-          const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
+          const newDate = this.value ? modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds()) : modifyWithDefaultTime(value, this.defaultTime);
           this.date = newDate;
           this.emit(this.date, true);
         } else {
@@ -314,7 +319,7 @@
 
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
-          this.date = modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate());
+          this.date = this.value ? modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate()) : modifyWithDefaultTime(value, this.defaultTime);
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
@@ -343,7 +348,8 @@
       },
 
       confirm() {
-        this.emit(this.date);
+        const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
+        this.emit(date);
       },
 
       resetView() {
@@ -454,6 +460,7 @@
         date: new Date(),
         value: '',
         defaultValue: null,
+        defaultTime: null,
         showTime: false,
         selectionMode: 'day',
         shortcuts: '',
@@ -520,8 +527,8 @@
       },
 
       timeFormat() {
-        if (this.format && this.format.indexOf('ss') === -1) {
-          return 'HH:mm';
+        if (this.format) {
+          return extractTimeFormat(this.format);
         } else {
           return 'HH:mm:ss';
         }
@@ -529,7 +536,7 @@
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH', '').replace(/[^a-zA-Z]*mm/, '').replace(/[^a-zA-Z]*ss/, '').trim();
+          return extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
         }

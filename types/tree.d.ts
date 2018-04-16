@@ -84,11 +84,19 @@ export declare class ElTree extends ElementUIComponent {
   indent: number
 
   /**
-   * Filter all tree nodes.Ffiltered nodes will be hidden
+   * Filter all tree nodes. Filtered nodes will be hidden
    *
    * @param value The value to be used as first parameter for `filter-node-method`
    */
   filter (value: any): void
+
+  /**
+   * Update the children of the node which specified by the key
+   * 
+   * @param key the key of the node which children will be updated
+   * @param data the children data
+   */
+  updateKeyChildren (key: any, data: TreeNode[]): void
 
   /**
    * If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes
@@ -130,6 +138,16 @@ export declare class ElTree extends ElementUIComponent {
   setChecked (data: TreeNode | any, checked: boolean, deep: boolean): void
 
   /**
+   * If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes
+   */
+  getHalfCheckedNodes (): void
+
+  /**
+   * If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes' keys
+   */
+  getHalfCheckedKeys (): void;
+
+  /**
    * Return the highlight node's key (null if no node is highlighted)
    */
   getCurrentKey (): any
@@ -152,4 +170,42 @@ export declare class ElTree extends ElementUIComponent {
    * @param node The node to be highlighted
    */
   setCurrentNode (node: TreeNode): void
+
+  /**
+   * Get node by node key or node data
+   * 
+   * @param by node key or node data
+   */
+  getNode (by: TreeNode | any): TreeNode
+
+  /**
+   * Remove node by key or node data or node instance
+   * 
+   * @param by key or node data or node instance
+   */
+  remove (by: TreeNode | any): void
+
+  /**
+   * Append a child node to specified node
+   * 
+   * @param childData the data of appended node
+   * @param parent key or node data or node instance of the parent node
+   */
+  append (childData: TreeNode, parent: TreeNode | any): void
+
+  /**
+   * insert a node before specified node
+   * 
+   * @param data the data of inserted node
+   * @param ref key or node data or node instance of the reference node
+   */
+  insertBefore (data: TreeNode, ref: TreeNode | any): void
+
+  /**
+   * insert a node after specified node
+   * 
+   * @param data the data of inserted node
+   * @param ref key or node data or node instance of the reference node
+   */
+  insertAfter (data: TreeNode, ref: TreeNode | any): void
 }

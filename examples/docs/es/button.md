@@ -1,14 +1,16 @@
 <style>
   .demo-box.demo-button {
     .el-row {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
     .el-button + .el-button {
       margin-left: 10px;
     }
     .el-button-group {
-      margin-bottom: 20px;
-    
       .el-button + .el-button {
         margin-left: 0;
       }
@@ -26,35 +28,44 @@ Botones comúnmente usados.
 
 ### Uso básico
 
-:::demo Use `type`, `plain` y `round` para definir estilos a los botones.
+:::demo Use `type`, `plain`,`round` y `circle` para definir estilos a los botones.
 
 ```html
-<div>
+<el-row>
   <el-button>Default</el-button>
   <el-button type="primary">Primary</el-button>
   <el-button type="success">Success</el-button>
   <el-button type="info">Info</el-button>
   <el-button type="warning">Warning</el-button>
   <el-button type="danger">Danger</el-button>
-</div>
+</el-row>
 
-<div style="margin: 20px 0">
+<el-row>
   <el-button plain>Plain</el-button>
   <el-button type="primary" plain>Primary</el-button>
   <el-button type="success" plain>Success</el-button>
   <el-button type="info" plain>Info</el-button>
   <el-button type="warning" plain>Warning</el-button>
   <el-button type="danger" plain>Danger</el-button>
-</div>
+</el-row>
 
-<div>
+<el-row>
   <el-button round>Round</el-button>
   <el-button type="primary" round>Primary</el-button>
   <el-button type="success" round>Success</el-button>
   <el-button type="info" round>Info</el-button>
   <el-button type="warning" round>Warning</el-button>
   <el-button type="danger" round>Danger</el-button>
-</div>
+</el-row>
+
+<el-row>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button type="success" icon="el-icon-check" circle></el-button>
+  <el-button type="info" icon="el-icon-message" circle></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle></el-button>
+</el-row>
 ```
 :::
 
@@ -65,23 +76,23 @@ El atributo `disabled` determina su un botón esta deshabilitado.
 :::demo Use el atributo `disabled` para determinar si un botón esta deshabilitado. Acepta un valor `Boolean`.
 
 ```html
-<div>
+<el-row>
   <el-button disabled>Default</el-button>
   <el-button type="primary" disabled>Primary</el-button>
   <el-button type="success" disabled>Success</el-button>
   <el-button type="info" disabled>Info</el-button>
   <el-button type="warning" disabled>Warning</el-button>
   <el-button type="danger" disabled>Danger</el-button>
-</div>
+</el-row>
 
-<div style="margin-top: 20px">
+<el-row>
   <el-button plain disabled>Plain</el-button>
   <el-button type="primary" plain disabled>Primary</el-button>
   <el-button type="success" plain disabled>Success</el-button>
   <el-button type="info" plain disabled>Info</el-button>
   <el-button type="warning" plain disabled>Warning</el-button>
   <el-button type="danger" plain disabled>Danger</el-button>
-</div>
+</el-row>
 ```
 :::
 
@@ -148,30 +159,31 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
 :::demo Use el atributo `size` para setear tamaños adicionales con `medium`, `small` or `mini`.
 
 ```html
-<div>
+<el-row>
   <el-button>Default</el-button>
   <el-button size="medium">Medium</el-button>
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
-</div>
-<div style="margin-top: 20px">
+</el-row>
+<el-row>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
   <el-button size="mini" round>Mini</el-button>
-</div>
+</el-row>
 ```
 :::
 
 ### Atributos
-| Atributo    | Descripción                              | Tipo    | Valores aceptados                        | Por defecto |
-| ----------- | ---------------------------------------- | ------- | ---------------------------------------- | ----------- |
-| size        | tamaño del botón                         | string  | medium / small / mini                    | —           |
-| type        | tipo de botón                            | string  | primary / success / warning / danger / info / text | —           |
-| plain       | determinar si es o no un botón plano     | boolean | —                                        | false       |
-| round       | determinar si es o no un botón redondo   | boolean | —                                        | false       |
-| loading     | determinar si es o no un botón de descarga | boolean | —                                        | false       |
-| disabled    | deshabilitar el botón                    | boolean | —                                        | false       |
-| icon        | nombre de la clase del icono             | string  | —                                        | —           |
-| autofocus   | misma funcionalidad que la nativa `autofocus` | boolean | —                                        | false       |
-| native-type | misma funcionalidad que la nativa `type` | string  | button / submit / reset                  | button      |
+| Atributo    | Descripción                                   | Tipo    | Valores aceptados                                  | Por defecto |
+| ----------- | --------------------------------------------- | ------- | -------------------------------------------------- | ----------- |
+| size        | tamaño del botón                              | string  | medium / small / mini                              | —           |
+| type        | tipo de botón                                 | string  | primary / success / warning / danger / info / text | —           |
+| plain       | determinar si es o no un botón plano          | boolean | —                                                  | false       |
+| round       | determinar si es o no un botón redondo        | boolean | —                                                  | false       |
+| circle      | determina si es un boton circular             | boolean | —                                                  | false       |
+| loading     | determinar si es o no un botón de descarga    | boolean | —                                                  | false       |
+| disabled    | deshabilitar el botón                         | boolean | —                                                  | false       |
+| icon        | nombre de la clase del icono                  | string  | —                                                  | —           |
+| autofocus   | misma funcionalidad que la nativa `autofocus` | boolean | —                                                  | false       |
+| native-type | misma funcionalidad que la nativa `type`      | string  | button / submit / reset                            | button      |

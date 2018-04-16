@@ -95,4 +95,12 @@ describe('Progress', () => {
     }, true);
     expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(12);
   });
+  it('color', () => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="50" color="rgb(0, 0, 0)"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(0, 0, 0)');
+  });
 });

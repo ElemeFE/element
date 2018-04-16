@@ -53,10 +53,11 @@
         },
         value1: '',
         value2: '',
-        value3: new Date(),
-        value4: '',
+        value3: '',
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: '',
-        value6: ''
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -118,6 +119,15 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
       :picker-options="pickerOptions1">
     </el-date-picker>
   </div>
+  <div class="block">
+    <span class="demonstration">With default time</span>
+    <el-date-picker
+      v-model="value3"
+      type="datetime"
+      placeholder="Select date and time"
+      default-time="12:00:00">
+    </el-date-picker>
+  </div>
 </template>
 
 <script>
@@ -147,7 +157,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
           }]
         },
         value1: '',
-        value2: ''
+        value2: '',
+        value3: ''
       };
     }
   };
@@ -164,7 +175,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value3"
+      v-model="value4"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
@@ -174,7 +185,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">With shortcuts</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value5"
       type="datetimerange"
       :picker-options="pickerOptions2"
       range-separator="To"
@@ -216,8 +227,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
             }
           }]
         },
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value4: ''
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value5: ''
       };
     }
   };
@@ -233,7 +244,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Start date time 12:00:00</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value6"
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
@@ -243,7 +254,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value7"
       type="datetimerange"
       align="right"
       start-placeholder="Start Date"
@@ -257,8 +268,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        value5: '',
-        value6: ''
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -285,7 +296,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |
 | range-separator    | separador de rango                       | string            | -                                        | '-'                  |
 | default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |                      |
-| default-time       | the time value to use when selecting date range | string[]          | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | —                    |
+| default-time | el valor de tiempo por defecto después de elegir una fecha | non-range: string / range: string[] | non-range: Una cadena de texto como `12:00:00`, range: array de dos strings, el primero es para la fecha de inicio y el segundo para la fecha final. 00:00:00 se utilizará si no se especifica | — |
 | value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |

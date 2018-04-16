@@ -117,6 +117,10 @@
     border-radius: 20px;
     padding: 12px 23px;
   }
+  @include when(circle) {
+    border-radius: 50%;
+    padding: 12px;
+  }
   @include m(primary) {
     @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
   }

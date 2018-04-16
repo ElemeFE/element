@@ -1,5 +1,5 @@
 const defaults = {
-  title: undefined,
+  title: null,
   message: '',
   type: '',
   showInput: false,

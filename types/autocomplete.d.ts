@@ -1,5 +1,7 @@
 import { ElementUIComponent } from './component'
 
+export type SuggestionPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
+
 export interface FetchSuggestionsCallback {
   /**
    * Callback function used in fetch-suggestions function
@@ -33,6 +35,9 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** Debounce delay when typing */
   debounce: number
 
+  /** Placement of the popup menu */
+  placement: SuggestionPlacement
+
   /** Name for the inner native input */
   name: string
 
@@ -50,4 +55,9 @@ export declare class ElAutocomplete extends ElementUIComponent {
 
   /** Whether show suggestions when input focus */
   triggerOnFocus: boolean
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }

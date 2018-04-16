@@ -713,3 +713,4 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | - |
+| blur | blur the Input component, and hide the dropdown | - |

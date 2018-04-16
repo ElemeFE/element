@@ -58,6 +58,9 @@
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
+        @compositionstart="handleComposition"
+        @compositionupdate="handleComposition"
+        @compositionend="handleComposition"
         v-model="query"
         @input="e => handleQueryChange(e.target.value)"
         :debounce="remote ? 300 : 0"
@@ -145,6 +148,7 @@
   import { getValueByPath } from 'element-ui/src/utils/util';
   import { valueEquals } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
+  import { isKorean } from 'element-ui/src/utils/shared';
 
   const sizeMap = {
     'medium': 36,
@@ -307,7 +311,8 @@
         previousQuery: null,
         inputHovering: false,
         currentPlaceholder: '',
-        menuVisibleOnFocus: false
+        menuVisibleOnFocus: false,
+        isOnComposition: false
       };
     },
 
@@ -363,7 +368,7 @@
           if (!this.multiple) {
             if (this.selected) {
               if (this.filterable && this.allowCreate &&
-                this.createdSelected && this.createdOption) {
+                this.createdSelected && this.createdLabel) {
                 this.selectedLabel = this.createdLabel;
               } else {
                 this.selectedLabel = this.selected.currentLabel;
@@ -393,6 +398,9 @@
 
       options() {
         if (this.$isServer) return;
+        this.$nextTick(() => {
+          this.broadcast('ElSelectDropdown', 'updatePopper');
+        });
         if (this.multiple) {
           this.resetInputHeight();
         }
@@ -407,8 +415,18 @@
     },
 
     methods: {
+      handleComposition(event) {
+        const text = event.target.value;
+        if (event.type === 'compositionend') {
+          this.isOnComposition = false;
+          this.handleQueryChange(text);
+        } else {
+          const lastCharacter = text[text.length - 1] || '';
+          this.isOnComposition = !isKorean(lastCharacter);
+        }
+      },
       handleQueryChange(val) {
-        if (this.previousQuery === val) return;
+        if (this.previousQuery === val || this.isOnComposition) return;
         if (
           this.previousQuery === null &&
           (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
@@ -541,6 +559,11 @@
         }
       },
 
+      blur() {
+        this.visible = false;
+        this.$refs.reference.blur();
+      },
+
       handleBlur(event) {
         this.$emit('blur', event);
         this.softFocus = false;
@@ -652,6 +675,7 @@
           this.visible = false;
         }
         this.$nextTick(() => {
+          if (this.visible) return;
           this.scrollToOption(option);
           this.setSoftFocus();
         });
@@ -801,6 +825,9 @@
 
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
+      this.$on('fieldReset', () => {
+        this.dispatch('ElFormItem', 'el.form.change');
+      });
     },
 
     mounted() {

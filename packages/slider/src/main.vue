@@ -19,7 +19,7 @@
       :min="min"
       :max="max"
       :debounce="debounce"
-      size="small">
+      :size="inputSize">
     </el-input-number>
     <div class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
@@ -93,6 +93,10 @@
       showInputControls: {
         type: Boolean,
         default: true
+      },
+      inputSize: {
+        type: String,
+        default: 'small'
       },
       showStops: {
         type: Boolean,

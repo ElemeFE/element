@@ -5,6 +5,7 @@ body {
   font-weight: 400;
   font-size: $--font-size-base;
   color: $--color-black;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {

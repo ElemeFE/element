@@ -99,7 +99,7 @@
           :border="border"
           :store="store"
           :style="{
-            width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
+            width: bodyWidth
           }"></table-header>
       </div>
       <div
@@ -117,7 +117,7 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :style="{
-            width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
+            width: bodyWidth
           }">
         </table-body>
         <div
@@ -139,7 +139,7 @@
           :summary-method="summaryMethod"
           :store="store"
           :style="{
-            width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
+            width: bodyWidth
           }"></table-footer>
       </div>
     </div>
@@ -162,7 +162,7 @@
           :border="border"
           :store="store"
           :style="{
-            width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : ''
+            width: bodyWidth
           }"></table-header>
       </div>
       <div
@@ -180,7 +180,7 @@
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
           :style="{
-            width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : ''
+            width: bodyWidth
           }">
         </table-body>
       </div>
@@ -196,7 +196,7 @@
           :summary-method="summaryMethod"
           :store="store"
           :style="{
-            width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : ''
+            width: bodyWidth
           }"></table-footer>
       </div>
     </div>
@@ -306,7 +306,12 @@
 
       tooltipEffect: String,
 
-      spanMethod: Function
+      spanMethod: Function,
+
+      selectOnIndeterminate: {
+        type: Boolean,
+        default: true
+      }
     },
 
     components: {
@@ -433,10 +438,10 @@
       },
 
       doLayout() {
+        this.layout.updateColumnsWidth();
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
-        this.layout.updateColumnsWidth();
       }
     },
 
@@ -618,7 +623,8 @@
     data() {
       const store = new TableStore(this, {
         rowKey: this.rowKey,
-        defaultExpandAll: this.defaultExpandAll
+        defaultExpandAll: this.defaultExpandAll,
+        selectOnIndeterminate: this.selectOnIndeterminate
       });
       const layout = new TableLayout({
         store,

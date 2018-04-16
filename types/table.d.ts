@@ -79,6 +79,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Custom summary method */
   summaryMethod: (param: SummaryMethodParams) => any[]
 
+  /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
+  selectOnIndeterminate: boolean
+
   /** Clear selection. Might be useful when `reserve-selection` is on */
   clearSelection (): void
 
@@ -96,4 +99,21 @@ export declare class ElTable extends ElementUIComponent {
    * @param row The row that is going to set as selected
    */
   setCurrentRow (row?: object): void
+  
+  /**
+   * Toggle or set if a certain row is expanded
+   *
+   * @param row The row that is going to set its expanded state
+   * @param expanded Whether the row is expanded. The expanded state will be toggled if not set
+   */
+  toggleRowExpansion (row: object, expanded?: boolean): void
+
+  /** Clear sort status, reset the table to unsorted  */
+  clearSort (): void
+
+  /** Clear filter, reset the table to unfiltered  */
+  clearFilter (): void
+
+  /** Relayout the table, maybe needed when change the table or it's ancestors visibility */
+  doLayout (): void
 }

@@ -7,6 +7,8 @@
   </form>
 </template>
 <script>
+  import objectAssign from 'element-ui/src/utils/merge';
+
   export default {
     name: 'ElForm',
 
@@ -104,13 +106,15 @@
         if (this.fields.length === 0 && callback) {
           callback(true);
         }
-        this.fields.forEach((field, index) => {
-          field.validate('', errors => {
-            if (errors) {
+        let invalidFields = {};
+        this.fields.forEach(field => {
+          field.validate('', (message, field) => {
+            if (message) {
               valid = false;
             }
+            invalidFields = objectAssign({}, invalidFields, field);
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid);
+              callback(valid, invalidFields);
             }
           });
         });

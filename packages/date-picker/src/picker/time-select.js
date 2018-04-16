@@ -6,8 +6,16 @@ export default {
 
   name: 'ElTimeSelect',
 
+  componentName: 'ElTimeSelect',
+
+  props: {
+    type: {
+      type: String,
+      default: 'time-select'
+    }
+  },
+
   beforeCreate() {
-    this.type = 'time-select';
     this.panel = Panel;
   }
 };
