@@ -310,6 +310,7 @@ NavMenu vertical puede ser colapsado.
 | unique-opened     | si solo un submenu puede ser activo      | boolean | —                     | false       |
 | menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | —                     | hover       |
 | router            | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
+| collapse-transition  | si se debe permitir collapse transition | boolean   | — | true   |
 
 ### Métodos Menu 
 | Nombre de evento | Descripción                   | Parámetros                             |
@@ -337,6 +338,7 @@ NavMenu vertical puede ser colapsado.
 | show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
 | hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |
 | disabled | si esta `disabled` el sub-menu | boolean | — | false |
+| popper-append-to-body | si se debe agregar el menú emergente al cuerpo. Si la posición del menú es incorrecta, puede intentar ajustar este prop | boolean | - | level one Submenu: true / other Submenus: false |
 
 ### Atributos Menu-Item 
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |

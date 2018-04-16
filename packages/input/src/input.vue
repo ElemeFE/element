@@ -23,11 +23,15 @@
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
         class="el-input__inner"
-        v-bind="$props"
+        v-bind="$attrs"
+        :type="type"
         :disabled="inputDisabled"
         :autocomplete="autoComplete"
         :value="currentValue"
         ref="input"
+        @compositionstart="handleComposition"
+        @compositionupdate="handleComposition"
+        @compositionend="handleComposition"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -75,9 +79,12 @@
       :tabindex="tabindex"
       class="el-textarea__inner"
       :value="currentValue"
+      @compositionstart="handleComposition"
+      @compositionupdate="handleComposition"
+      @compositionend="handleComposition"
       @input="handleInput"
       ref="textarea"
-      v-bind="$props"
+      v-bind="$attrs"
       :disabled="inputDisabled"
       :style="textareaStyle"
       @focus="handleFocus"
@@ -101,6 +108,8 @@
 
     mixins: [emitter, Migrating],
 
+    inheritAttrs: false,
+
     inject: {
       elForm: {
         default: ''
@@ -112,27 +121,21 @@
 
     data() {
       return {
-        currentValue: this.value,
+        currentValue: this.value || '',
         textareaCalcStyle: {},
         prefixOffset: null,
         suffixOffset: null,
         hovering: false,
-        focused: false
+        focused: false,
+        isOnComposition: false
       };
     },
 
     props: {
       value: [String, Number],
-      placeholder: String,
       size: String,
       resize: String,
-      name: String,
       form: String,
-      id: String,
-      maxlength: Number,
-      minlength: Number,
-      readonly: Boolean,
-      autofocus: Boolean,
       disabled: Boolean,
       type: {
         type: String,
@@ -142,17 +145,10 @@
         type: [Boolean, Object],
         default: false
       },
-      rows: {
-        type: Number,
-        default: 2
-      },
       autoComplete: {
         type: String,
         default: 'off'
       },
-      max: {},
-      min: {},
-      step: {},
       validateEvent: {
         type: Boolean,
         default: true
@@ -197,7 +193,7 @@
         return this.$slots.prepend || this.$slots.append;
       },
       showClear() {
-        return this.clearable && this.currentValue !== '' && (this.focused || this.hovering);
+        return this.clearable && !this.disabled && this.currentValue !== '' && (this.focused || this.hovering);
       }
     },
 
@@ -210,6 +206,9 @@
     methods: {
       focus() {
         (this.$refs.input || this.$refs.textarea).focus();
+      },
+      blur() {
+        (this.$refs.input || this.$refs.textarea).blur();
       },
       getMigratingConfig() {
         return {
@@ -229,7 +228,7 @@
           this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
         }
       },
-      inputSelect() {
+      select() {
         (this.$refs.input || this.$refs.textarea).select();
       },
       resizeTextarea() {
@@ -251,7 +250,16 @@
         this.focused = true;
         this.$emit('focus', event);
       },
+      handleComposition(event) {
+        if (event.type === 'compositionend') {
+          this.isOnComposition = false;
+          this.handleInput(event);
+        } else {
+          this.isOnComposition = true;
+        }
+      },
       handleInput(event) {
+        if (this.isOnComposition) return;
         const value = event.target.value;
         this.$emit('input', value);
         this.setCurrentValue(value);
@@ -284,13 +292,14 @@
       clear() {
         this.$emit('input', '');
         this.$emit('change', '');
+        this.$emit('clear');
         this.setCurrentValue('');
         this.focus();
       }
     },
 
     created() {
-      this.$on('inputSelect', this.inputSelect);
+      this.$on('inputSelect', this.select);
     },
 
     mounted() {

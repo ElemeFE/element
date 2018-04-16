@@ -234,6 +234,7 @@ Selecting a range of values is supported.
 | step | step size | number | — | 1 |
 | show-input | whether to display an input box, works when `range` is false | boolean | — | false |
 | show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
+| input-size | size of the input box | string | large / medium / small / mini | small |
 | show-stops | whether to display breakpoints | boolean | — | false |
 | show-tooltip | whether to display tooltip value | boolean | — | true |
 | format-tooltip | format to display tooltip value | function(value) | — | — |

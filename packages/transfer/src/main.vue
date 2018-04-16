@@ -167,12 +167,16 @@
         };
       },
 
-      onSourceCheckedChange(val) {
+      onSourceCheckedChange(val, movedKeys) {
         this.leftChecked = val;
+        if (movedKeys === undefined) return;
+        this.$emit('left-check-change', val, movedKeys);
       },
 
-      onTargetCheckedChange(val) {
+      onTargetCheckedChange(val, movedKeys) {
         this.rightChecked = val;
+        if (movedKeys === undefined) return;
+        this.$emit('right-check-change', val, movedKeys);
       },
 
       addToLeft() {

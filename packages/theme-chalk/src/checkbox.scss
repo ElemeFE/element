@@ -298,6 +298,9 @@
       border-color: $--checkbox-button-checked-border-color;
       box-shadow: -1px 0 0 0 $--color-primary-light-4;
     }
+    &:first-child .el-checkbox-button__inner {
+      border-left-color: $--checkbox-button-checked-border-color;
+    }
   }
 
   &.is-disabled {
@@ -308,6 +311,9 @@
       background-color: $--button-disabled-fill;
       border-color: $--button-disabled-border;
       box-shadow: none;
+    }
+    &:first-child .el-checkbox-button__inner {
+      border-left-color: $--button-disabled-border;
     }
   }
 

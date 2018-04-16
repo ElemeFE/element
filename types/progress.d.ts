@@ -20,6 +20,9 @@ export declare class ElProgress extends ElementUIComponent {
   /** The current status of progress bar */
   status: ProgressStatus
 
+  /** Background color of progress bar. Overrides `status` prop */
+  color: string
+
   /** The canvas width of circle progress bar */
   width: number
 

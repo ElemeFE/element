@@ -88,10 +88,7 @@
           date: '2016-05-07',
           name: 'Jack',
           address: 'New York City'
-        }],
-        singleSelection: {},
-        multipleSelection: [],
-        model: ''
+        }]
       };
     }
   };
@@ -215,7 +212,7 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
   }
 </script>
 ```
-
+:::
 
 ### Atributos
 | Atributo       | Descripción                              | Tipo           | Valores aceptados                        | Por defecto                              |
@@ -244,4 +241,6 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | Nombre del evento | Descripción                             | Parámetros |
 | ----------------- | --------------------------------------- | ---------- |
 | show              | se dispara cuando se muestra el popover | —          |
+| after-enter       | se dispara cuando la transicion de entrada termina | —       |
 | hide              | se dispara cuando se oculta el popover  | —          |
+| after-leave       | se dispara cuando la transicion de salida termina | —        |

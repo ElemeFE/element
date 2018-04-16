@@ -2,6 +2,7 @@
   .demo-color-box {
     border-radius: 4px;
     padding: 20px;
+    margin: 5px 0;
     height: 74px;
     box-sizing: border-box;
     color: #fff;
@@ -16,6 +17,7 @@
   .demo-color-box-group {
     .demo-color-box {
       border-radius: 0;
+      margin: 0;
     }
     .demo-color-box:first-child {
       border-radius: 4px 4px 0 0;
@@ -80,7 +82,7 @@ Element uses a specific set of palettes to specify colors to provide a consisten
 The main color of Element is bright and friendly blue.
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-blue">Blue<div class="value">#409EFF</div></div>
   </el-col>
 </el-row>
@@ -90,16 +92,16 @@ The main color of Element is bright and friendly blue.
 Besides the main color, you need to use different scene colors in different scenarios (for example, dangerous color indicates dangerous operation)
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-success">Success<div class="value">#67C23A</div></div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-warning">Warning<div class="value">#E6A23C</div></div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-danger">Danger<div class="value">#F56C6C</div></div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box bg-info">Info<div class="value">#909399</div></div>
   </el-col>
 </el-row>
@@ -109,7 +111,7 @@ Besides the main color, you need to use different scene colors in different scen
 Neutral colors are for text, background and border colors. You can use different neutral colors to represent the hierarchical structure.
 
 <el-row :gutter="12">
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
       <div class="demo-color-box bg-text-primary">Primary Text<div class="value">#303133</div></div>
       <div class="demo-color-box bg-text-regular">Regular Text<div class="value">#606266</div></div>
@@ -117,7 +119,7 @@ Neutral colors are for text, background and border colors. You can use different
       <div class="demo-color-box bg-text-placeholder">Placeholder Text<div class="value">#C0C4CC</div></div>
     </div>
   </el-col>
-  <el-col :span="6">
+  <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
       <div class="demo-color-box bg-border-base">Base Border<div class="value">#DCDFE6</div></div>
       <div class="demo-color-box bg-border-light">Light Border<div class="value">#E4E7ED</div></div>

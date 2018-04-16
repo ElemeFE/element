@@ -88,10 +88,7 @@
           date: '2016-05-07',
           name: 'Jack',
           address: 'New York City'
-        }],
-        singleSelection: {},
-        multipleSelection: [],
-        model: ''
+        }]
       };
     }
   };
@@ -245,4 +242,6 @@ Of course, you can nest other operations. It's more light-weight than using a di
 | Event Name | Description | 回调参数 |
 |---------|--------|---------|
 | show | triggers when popover shows | — |
+| after-enter | triggers when the entering transition ends | — |
 | hide | triggers when popover hides | — |
+| after-leave | triggers when the leaving transition ends | — |

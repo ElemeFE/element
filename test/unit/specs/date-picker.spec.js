@@ -233,6 +233,62 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('change event: when clear(), without opening picker', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          ref="compo"
+          v-model="value"
+        />`,
+      data() {
+        return {
+          value: new Date()
+        };
+      }
+    }, true);
+
+    const spy = sinon.spy();
+    vm.$refs.compo.$on('change', spy);
+
+    setTimeout(_ => {
+      vm.$refs.compo.showClose = true;
+      vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.equal(true);
+        expect(spy.calledWith(null)).to.equal(true);
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('select datetime with defaultTime', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker ref="compo" type="datetime" v-model="value" default-time="12:00:00"></el-date-picker>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    setTimeout(_ => {
+      const picker = vm.$refs.compo.picker;
+      picker.$el.querySelector('td.available').click();
+      setTimeout(_ => {
+        const date = vm.$refs.compo.picker.date;
+        expect(date.getHours()).to.equal(12);
+        expect(date.getMinutes()).to.equal(0);
+        expect(date.getSeconds()).to.equal(0);
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
   describe('input event', () => {
     // mimic standard <select>'s behavior
     // emit input if and only if value changes
@@ -939,6 +995,49 @@ describe('DatePicker', () => {
       expect(vm.picker.$el.querySelector('.el-time-panel')).to.ok;
     });
 
+    it('both picker show correct formated value (extract date-format and time-format from format property)', done => {
+      vm = createVue({
+        template: '<el-date-picker type="datetime" v-model="value" :format="format" :pickerOptions="pickerOptions" ref="compo" />',
+        data() {
+          return {
+            value: new Date(2018, 2, 5, 10, 15, 24),
+            format: 'yyyy/MM/dd hh:mm A',
+            pickerOptions: null
+          };
+        }
+      }, true);
+
+      const input = vm.$refs.compo.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(_ => {
+        const datePanel = vm.$refs.compo.picker;
+        const dateInput = datePanel.$el.querySelector('.el-date-picker__time-header > span:nth-child(1) input');
+        const timeInput = datePanel.$el.querySelector('.el-date-picker__time-header > span:nth-child(2) input');
+        timeInput.focus();
+        setTimeout(_ => {
+          // both input shows correct value
+          expect(dateInput.value).to.equal('2018/03/05');
+          expect(timeInput.value).to.equal('10:15 AM');
+
+          // change main format
+          vm.format = 'd-M-yy hh a';
+          setTimeout(_ => {
+            expect(dateInput.value).to.equal('5-3-18');
+            expect(timeInput.value).to.equal('10 am');
+
+            // change not documented pickerOptions.format mustn't change picker format
+            vm.pickerOptions = { format: 'yyyy-MM-dd HH:mm:ss'};
+            setTimeout(_ => {
+              expect(dateInput.value).to.equal('5-3-18');
+              expect(timeInput.value).to.equal('10 am');
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('both picker show correct value', done => {
       vm = createVue({
         template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
@@ -1300,6 +1399,50 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('works: reverse selection', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      inputs[0].focus();
+
+      setTimeout(_ => {
+        const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
+        expect(Array.prototype.slice.call(panels)).to.length(2);
+        panels[1].querySelector('td.available').click();
+        setTimeout(_ => {
+          panels[0].querySelector('td.available').click();
+          setTimeout(_ => {
+            inputs[0].focus();
+            setTimeout(_ => {
+              // correct highlight
+              const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
+              const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
+              const inRangeDate = rangePicker.picker.$el.querySelectorAll('.in-range');
+              expect(startDate.length).to.equal(1);
+              expect(endDate.length).to.equal(1);
+              expect(inRangeDate.length).to.above(0);
+              // value is array
+              expect(vm.value).to.be.an.instanceof(Array);
+              // input text is something like date string
+              expect(inputs[0].value.length).to.equal(10);
+              expect(inputs[1].value.length).to.equal(10);
+              // result array is properly ordered
+              expect(vm.value[0].getTime() < vm.value[1].getTime()).to.be.true;
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('type:daterange unlink:true', done => {
       vm = createVue({
         template: '<el-date-picker type="daterange" unlink-panels v-model="value" ref="compo" />',
@@ -1558,6 +1701,56 @@ describe('DatePicker', () => {
               }, DELAY);
             }, DELAY);
           }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('both picker show correct formated value (extract date-format and time-format from format property)', done => {
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+      vm = createVue({
+        template: `
+          <el-date-picker ref="compo" type="datetimerange" v-model="value" :format="format"></el-date-picker>
+        `,
+        data() {
+          return {
+            value: [new Date(2018, 8, 5, 10, 20, 30), new Date(2018, 8, 15, 15, 35, 45)],
+            format: 'yyyy/MM/dd hh:mm A'
+          };
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const compo = vm.$refs.compo;
+        compo.$el.click();
+        setTimeout(_ => {
+          const pickers = compo.picker.$el.querySelectorAll('.el-date-range-picker__time-header .el-date-range-picker__editors-wrap');
+          const left = {
+            dateInput: pickers[0].querySelector('.el-date-range-picker__time-picker-wrap:nth-child(1) input'),
+            timeInput: pickers[0].querySelector('.el-date-range-picker__time-picker-wrap:nth-child(2) input')
+          };
+          const right = {
+            dateInput: pickers[1].querySelector('.el-date-range-picker__time-picker-wrap:nth-child(1) input'),
+            timeInput: pickers[1].querySelector('.el-date-range-picker__time-picker-wrap:nth-child(2) input')
+          };
+          left.timeInput.focus();
+          right.timeInput.focus();
+
+          // all inputs shows correct value
+          expect(left.dateInput.value).to.equal('2018/09/05');
+          expect(left.timeInput.value).to.equal('10:20 AM');
+          expect(right.dateInput.value).to.equal('2018/09/15');
+          expect(right.timeInput.value).to.equal('03:35 PM');
+
+          vm.format = 'd-M-yy HH:mm:ss';
+          setTimeout(_ => {
+            expect(left.dateInput.value).to.equal('5-9-18');
+            expect(left.timeInput.value).to.equal('10:20:30');
+            expect(right.dateInput.value).to.equal('15-9-18');
+            expect(right.timeInput.value).to.equal('15:35:45');
+
+            done();
+          }, DELAY);
+
         }, DELAY);
       }, DELAY);
     });

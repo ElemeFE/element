@@ -686,6 +686,40 @@ describe('Form', () => {
         });
       });
     });
+    it('invalid fields', done => {
+      var checkName = (rule, value, callback) => {
+        if (value.length < 5) {
+          callback(new Error('长度至少为5'));
+        } else {
+          callback();
+        }
+      };
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { validator: checkName, trigger: 'change' }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate((valid, invalidFields) => {
+        expect(invalidFields.name.length).to.equal(1);
+        done();
+      });
+    });
     it('validate return promise', done => {
       var checkName = (rule, value, callback) => {
         if (value.length < 5) {
@@ -720,5 +754,60 @@ describe('Form', () => {
         done();
       });
     });
+  });
+  it('validate event', done => {
+    vm = createVue({
+      template: `
+          <el-form :model="form" :rules="rules" ref="form" @validate="onValidate">
+            <el-form-item label="活动名称" prop="name" ref="name">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="活动地点" prop="addr" ref="addr">
+              <el-input v-model="form.addr"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+      data() {
+        return {
+          form: {
+            name: '',
+            addr: ''
+          },
+          valid: {
+            name: null,
+            addr: null
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
+            ],
+            addr: [
+              { required: true, message: '请输入活动名称', trigger: 'change' }
+            ]
+          }
+        };
+      },
+      methods: {
+        onValidate(prop, valid) {
+          this.valid[prop] = valid;
+        },
+        setValue(prop, value) {
+          this.form[prop] = value;
+        }
+      }
+    }, true);
+    vm.setValue('name', '1');
+    setTimeout(() => {
+      expect(vm.valid.name).to.equal(false);
+      vm.setValue('addr', '1');
+      setTimeout(() => {
+        expect(vm.valid.addr).to.equal(true);
+        vm.setValue('name', '111');
+        setTimeout(() => {
+          expect(vm.valid.name).to.equal(true);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
   });
 });

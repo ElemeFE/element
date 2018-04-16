@@ -5,8 +5,8 @@
     :readonly="!editable || readonly"
     :disabled="pickerDisabled"
     :size="pickerSize"
-    :id="id"
     :name="name"
+    v-bind="firstInputId"
     v-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
@@ -51,7 +51,7 @@
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
       :disabled="pickerDisabled"
-      :id="id && id[0]"
+      v-bind="firstInputId"
       :readonly="!editable || readonly"
       :name="name && name[0]"
       @input="handleStartInput"
@@ -63,7 +63,7 @@
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
       :disabled="pickerDisabled"
-      :id="id && id[1]"
+      v-bind="secondInputId"
       :readonly="!editable || readonly"
       :name="name && name[1]"
       @input="handleEndInput"
@@ -492,6 +492,28 @@ export default {
 
     pickerDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
+    },
+
+    firstInputId() {
+      const obj = {};
+      let id;
+      if (this.ranged) {
+        id = this.id && this.id[0];
+      } else {
+        id = this.id;
+      }
+      if (id) obj.id = id;
+      return obj;
+    },
+
+    secondInputId() {
+      const obj = {};
+      let id;
+      if (this.ranged) {
+        id = this.id && this.id[1];
+      }
+      if (id) obj.id = id;
+      return obj;
     }
   },
 
@@ -502,6 +524,8 @@ export default {
       gpuAcceleration: false
     };
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+
+    this.$on('fieldReset', this.handleFieldReset);
   },
 
   methods: {
@@ -617,6 +641,7 @@ export default {
     handleClickIcon(event) {
       if (this.readonly || this.pickerDisabled) return;
       if (this.showClose) {
+        this.valueOnOpen = this.value;
         event.stopPropagation();
         this.emitInput(null);
         this.emitChange(null);
@@ -631,6 +656,10 @@ export default {
 
     handleClose() {
       this.pickerVisible = false;
+    },
+
+    handleFieldReset(initialValue) {
+      this.userInput = initialValue;
     },
 
     handleFocus() {
@@ -740,9 +769,9 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
-      if (this.format) {
-        this.picker.format = this.format;
-      }
+      this.$watch('format', (format) => {
+        this.picker.format = format;
+      });
 
       const updateOptions = () => {
         const options = this.pickerOptions;
@@ -762,6 +791,11 @@ export default {
               option !== 'selectableRange') {
             this.picker[option] = options[option];
           }
+        }
+
+        // main format must prevail over undocumented pickerOptions.format
+        if (this.format) {
+          this.picker.format = this.format;
         }
       };
       updateOptions();

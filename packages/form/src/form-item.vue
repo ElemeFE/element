@@ -192,11 +192,12 @@
 
         model[this.prop] = this.fieldValue;
 
-        validator.validate(model, { firstFields: true }, (errors, fields) => {
+        validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 
-          callback(this.validateMessage);
+          callback(this.validateMessage, invalidFields);
+          this.elForm && this.elForm.$emit('validate', this.prop, !errors);
         });
       },
       clearValidate() {
@@ -217,20 +218,26 @@
 
         let prop = getPropByPath(model, path, true);
 
+        this.validateDisabled = true;
         if (Array.isArray(value)) {
-          this.validateDisabled = true;
           prop.o[prop.k] = [].concat(this.initialValue);
         } else {
-          this.validateDisabled = true;
           prop.o[prop.k] = this.initialValue;
         }
+        /* Select 的值被代码改变时不会触发校验，
+           这里需要强行触发一次，刷新 validateDisabled 的值，
+           确保 Select 下一次值改变时能正确触发校验 */
+        this.broadcast('ElSelect', 'fieldReset');
+
+        this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
         let formRules = this.form.rules;
         const selfRules = this.rules;
         const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? getPropByPath(formRules, this.prop || '').o[this.prop || ''] : [];
+        const prop = getPropByPath(formRules, this.prop || '');
+        formRules = formRules ? (prop.o[this.prop || ''] || prop.v) : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
@@ -238,7 +245,12 @@
         const rules = this.getRules();
 
         return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          if (!rule.trigger || trigger === '') return true;
+          if (Array.isArray(rule.trigger)) {
+            return rule.trigger.indexOf(trigger) > -1;
+          } else {
+            return rule.trigger === trigger;
+          }
         }).map(rule => objectAssign({}, rule));
       },
       onFieldBlur() {

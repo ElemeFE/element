@@ -183,8 +183,35 @@ export default {
 ```
 :::
 
+### Shadow
+
+You can define when to show the card shadows
+
+:::demo The `shadow` attribute determines when the card shadows are displayed. It can be `always`, `hover` or `never`.
+```html
+<el-row :gutter="12">
+  <el-col :span="8">
+    <el-card shadow="always">
+      Always
+    </el-card>
+  </el-col>
+  <el-col :span="8">
+    <el-card shadow="hover">
+      Hover
+    </el-card>
+  </el-col>
+  <el-col :span="8">
+    <el-card shadow="never">
+      Never
+    </el-card>
+  </el-col>
+</el-row>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| header | Title of the card. Also accepts a DOM passed by `slot#header` | string| — | — |
+| header | title of the card. Also accepts a DOM passed by `slot#header` | string| — | — |
 | body-style | CSS style of body | object| — | { padding: '20px' } |
+| shadow | when to show card shadows | string | always / hover / never | always |

@@ -221,6 +221,7 @@
 | popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
 | prev-text | 替代图标显示的上一页文字 | string | — | — |
 | next-text | 替代图标显示的下一页文字 | string | — | — |
+| disabled | 是否禁用 | boolean | — | false |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

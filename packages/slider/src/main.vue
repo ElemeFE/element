@@ -19,7 +19,7 @@
       :min="min"
       :max="max"
       :debounce="debounce"
-      size="small">
+      :size="inputSize">
     </el-input-number>
     <div class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
@@ -93,6 +93,10 @@
       showInputControls: {
         type: Boolean,
         default: true
+      },
+      inputSize: {
+        type: String,
+        default: 'small'
       },
       showStops: {
         type: Boolean,
@@ -193,6 +197,10 @@
         }
       },
       setValues() {
+        if (this.min > this.max) {
+          console.error('[Element Error][Slider]min should not be greater than max.');
+          return;
+        }
         const val = this.value;
         if (this.range && Array.isArray(val)) {
           if (val[1] < this.min) {
@@ -269,7 +277,7 @@
 
     computed: {
       stops() {
-        if (!this.showStops) return [];
+        if (!this.showStops || this.min > this.max) return [];
         if (this.step === 0) {
           process.env.NODE_ENV !== 'production' &&
           console.warn('[Element Warn][Slider]step should not be 0.');

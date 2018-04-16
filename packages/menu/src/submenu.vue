@@ -43,7 +43,11 @@
         default: 300
       },
       popperClass: String,
-      disabled: Boolean
+      disabled: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: undefined
+      }
     },
 
     data() {
@@ -51,7 +55,8 @@
         popperJS: null,
         timeout: null,
         items: {},
-        submenus: {}
+        submenus: {},
+        mouseInChild: false
       };
     },
     watch: {
@@ -66,7 +71,9 @@
     computed: {
       // popper option
       appendToBody() {
-        return this.rootMenu === this.$parent;
+        return this.popperAppendToBody === undefined
+          ? this.isFirstLevel
+          : this.popperAppendToBody;
       },
       menuTransitionName() {
         return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
@@ -125,6 +132,19 @@
             ? this.activeTextColor
             : this.textColor
         };
+      },
+      isFirstLevel() {
+        let isFirstLevel = true;
+        let parent = this.$parent;
+        while (parent && parent !== this.rootMenu) {
+          if (['ElSubmenu', 'ElMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
+            isFirstLevel = false;
+            break;
+          } else {
+            parent = parent.$parent;
+          }
+        }
+        return isFirstLevel;
       }
     },
     methods: {
@@ -167,6 +187,7 @@
         ) {
           return;
         }
+        this.dispatch('ElSubmenu', 'mouse-enter-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
@@ -180,9 +201,10 @@
         ) {
           return;
         }
+        this.dispatch('ElSubmenu', 'mouse-leave-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-          this.rootMenu.closeMenu(this.index);
+          !this.mouseInChild && this.rootMenu.closeMenu(this.index);
         }, this.hideTimeout);
       },
       handleTitleMouseenter() {
@@ -196,7 +218,7 @@
         title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
       },
       updatePlacement() {
-        this.currentPlacement = this.mode === 'horizontal' && this.rootMenu === this.$parent
+        this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
           ? 'bottom-start'
           : 'right-start';
       },
@@ -210,6 +232,14 @@
       this.parentMenu.addSubmenu(this);
       this.rootMenu.addSubmenu(this);
       this.$on('toggle-collapse', this.handleCollapseToggle);
+      this.$on('mouse-enter-child', () => {
+        this.mouseInChild = true;
+        clearTimeout(this.timeout);
+      });
+      this.$on('mouse-leave-child', () => {
+        this.mouseInChild = false;
+        clearTimeout(this.timeout);
+      });
     },
     mounted() {
       this.initPopper();
@@ -232,7 +262,7 @@
         disabled,
         popperClass,
         $slots,
-        $parent
+        isFirstLevel
       } = this;
 
       const popupMenu = (
@@ -267,7 +297,7 @@
       );
 
       const submenuTitleIcon = (
-        rootMenu.mode === 'horizontal' && $parent === rootMenu ||
+        rootMenu.mode === 'horizontal' && isFirstLevel ||
         rootMenu.mode === 'vertical' && !rootMenu.collapse
       ) ? 'el-icon-arrow-down' : 'el-icon-arrow-right';
 

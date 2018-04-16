@@ -52,7 +52,8 @@
         value1: [1, 4],
         value2: [],
         value3: [1],
-        value4: [],
+        value4: [1],
+        value5: [],
         filterMethod(query, item) {
           return item.initial.toLowerCase().indexOf(query.toLowerCase()) > -1;
         },
@@ -155,26 +156,51 @@ Puede buscar y filtrar los items.
 
 Puede personalizar los títulos, botones, la función de renderizado de los items, el texto de status de la cabecera y el contenido del pie.
 
-:::demo Use `titles`, `button-texts`, `render-content` y `format` respectivamente para personalizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quiere algunos items marcados inicialmente puede usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Tenga en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
+:::demo Use `titles`, `button-texts`, `render-content` y `format` respectivamente para personalizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Plus, you can also use scoped slot to customize data items. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quiere algunos items marcados inicialmente puede usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Tenga en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
 ```html
 <template>
-  <el-transfer
-    v-model="value3"
-    filterable
-    :left-default-checked="[2, 3]"
-    :right-default-checked="[1]"
-    :render-content="renderFunc"
-    :titles="['Source', 'Target']"
-    :button-texts="['To left', 'To right']"
-    :format="{
-      noChecked: '${total}',
-      hasChecked: '${checked}/${total}'
-    }"
-    @change="handleChange"
-    :data="data">
-    <el-button class="transfer-footer" slot="left-footer" size="small">Operation</el-button>
-    <el-button class="transfer-footer" slot="right-footer" size="small">Operation</el-button>
-  </el-transfer>
+  <p style="text-align: center; margin: 0 0 20px">Customize data items using render-content</p>
+  <div style="text-align: center">
+    <el-transfer
+      style="text-align: left; display: inline-block"
+      v-model="value3"
+      filterable
+      :left-default-checked="[2, 3]"
+      :right-default-checked="[1]"
+      :render-content="renderFunc"
+      :titles="['Source', 'Target']"
+      :button-texts="['To left', 'To right']"
+      :format="{
+        noChecked: '${total}',
+        hasChecked: '${checked}/${total}'
+      }"
+      @change="handleChange"
+      :data="data">
+      <el-button class="transfer-footer" slot="left-footer" size="small">Operation</el-button>
+      <el-button class="transfer-footer" slot="right-footer" size="small">Operation</el-button>
+    </el-transfer>
+  </div>
+  <p style="text-align: center; margin: 50px 0 20px">Customize data items using scoped slot</p>
+  <div style="text-align: center">
+    <el-transfer
+      style="text-align: left; display: inline-block"
+      v-model="value4"
+      filterable
+      :left-default-checked="[2, 3]"
+      :right-default-checked="[1]"
+      :titles="['Source', 'Target']"
+      :button-texts="['To left', 'To right']"
+      :format="{
+        noChecked: '${total}',
+        hasChecked: '${checked}/${total}'
+      }"
+      @change="handleChange"
+      :data="data">
+      <span slot-scope="{ option }">{{ option.key }} - {{ option.label }}</span>
+      <el-button class="transfer-footer" slot="left-footer" size="small">Operation</el-button>
+      <el-button class="transfer-footer" slot="right-footer" size="small">Operation</el-button>
+    </el-transfer>
+  </div>
 </template>
 
 <style>
@@ -201,6 +227,7 @@ Puede personalizar los títulos, botones, la función de renderizado de los item
       return {
         data: generateData(),
         value3: [1],
+        value4: [1],
         renderFunc(h, option) {
           return <span>{ option.key } - { option.label }</span>;
         }
@@ -225,7 +252,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ```html
 <template>
   <el-transfer
-    v-model="value4"
+    v-model="value5"
     :props="{
       key: 'value',
       label: 'desc'
@@ -250,7 +277,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
       };
       return {
         data3: generateData3(),
-        value4: []
+        value5: []
       };
     }
   };
@@ -265,7 +292,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | filterable            | Si se puede filtrar                      | boolean                         | —                 | false                                    |
 | filter-placeholder    | Placeholder para el input del filtro     | string                          | —                 | Enter keyword                            |
 | filter-method         | Método de filtrado                       | function                        | —                 | —                                        |
-| target-order          | order strategy for elements in the target list. If set to `original`, the elements will keep the same order as the data source. If set to `push`, the newly added elements will be pushed to the bottom. If set to `unshift`, the newly added elements will be inserted on the top | string | original / push / unshift | original |
+| target-order          | estrategia de órdenes para elementos de la lista destino. Si está configurado en `original`, los elementos mantendrán el mismo orden que la fuente de datos. Si está configurado para `push`, los nuevos elementos añadidos se insertaran al final. Si se ajusta a `unshift`, los nuevos elementos añadidos se insertarán en la parte superior. | string | original / push / unshift | original |
 | titles                | Títulos de las listas                    | array                           | —                 | ['List 1', 'List 2']                     |
 | button-texts          | Texto de los botones                     | array                           | —                 | [ ]                                      |
 | render-content        | Función de renderizado                   | function(h, option)             | —                 | —                                        |
@@ -280,6 +307,11 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | left-footer  | Contenido del footer de la lista de la izquierda |
 | right-footer | Contenido del footer de la lista de la derecha |
 
+### Scoped Slot
+| Name | Description |
+|------|--------|
+| — | Custom content for data items. The scope parameter is { option } |
+
 ### Methods
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
@@ -289,4 +321,5 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | Nombre | Descripcion                              | Parametros                               |
 | ------ | ---------------------------------------- | ---------------------------------------- |
 | change | se lanzá cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
-
+| left-check-change | se dispara cuando el usuario final cambia el estado verificado de cualquier elemento de datos en la lista izquierda | array clave de ítems actualmente verificados, array clave de ítems cuyo estado verificado ha cambiado |
+| right-check-change | se dispara cuando el usuario final cambia el estado verificado de cualquier elemento de datos en la lista derecha. | array clave de ítems actualmente verificados, array clave de ítems cuyo estado verificado ha cambiado |

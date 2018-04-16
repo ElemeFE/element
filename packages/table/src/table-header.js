@@ -325,7 +325,8 @@ export default {
     handleFilterClick(event, column) {
       event.stopPropagation();
       const target = event.target;
-      const cell = target.parentNode;
+      let cell = target.tagName === 'TH' ? target : target.parentNode;
+      cell = cell.querySelector('.el-table__column-filter-trigger') || cell;
       const table = this.$parent;
 
       let filterPanel = this.filterPanels[column.id];
