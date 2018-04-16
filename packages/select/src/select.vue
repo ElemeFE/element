@@ -49,6 +49,7 @@
         :disabled="selectDisabled"
         :autocomplete="autoComplete"
         @focus="handleFocus"
+        @blur="softFocus = false"
         @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
@@ -305,7 +306,8 @@
         query: '',
         previousQuery: null,
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        menuVisibleOnFocus: false
       };
     },
 
@@ -529,7 +531,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          if (this.automaticDropdown) {
+          if (this.automaticDropdown || event.target.className.indexOf('el-select__input') > -1) {
             this.visible = true;
             this.menuVisibleOnFocus = true;
           }
@@ -541,6 +543,7 @@
 
       handleBlur(event) {
         this.$emit('blur', event);
+        this.softFocus = false;
       },
 
       handleIconClick(event) {
