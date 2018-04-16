@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import Outside from 'vue-focus-outside';
+  import Outside from 'element-ui/src/utils/outside';
   import Color from './color';
   import PickerDropdown from './components/picker-dropdown.vue';
 

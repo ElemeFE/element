@@ -41,7 +41,7 @@
 </template>
 
 <script type="text/babel">
-  import Outside from 'vue-focus-outside';
+  import Outside from 'element-ui/src/utils/outside';
   import Popper from 'element-ui/src/utils/vue-popper';
   import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';

@@ -1,5 +1,5 @@
 <script>
-  import Outside from 'vue-focus-outside';
+  import Outside from 'element-ui/src/utils/outside';
   import { isDef } from 'element-ui/src/utils/shared';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { generateId } from 'element-ui/src/utils/util';

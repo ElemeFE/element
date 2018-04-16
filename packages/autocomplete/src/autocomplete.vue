@@ -61,7 +61,7 @@
   </div>
 </template>
 <script>
-  import Outside from 'vue-focus-outside';
+  import Outside from 'element-ui/src/utils/outside';
   import debounce from 'throttle-debounce/debounce';
   import ElInput from 'element-ui/packages/input';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';

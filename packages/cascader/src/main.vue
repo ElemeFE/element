@@ -60,7 +60,7 @@
 
 <script>
 import Vue from 'vue';
-import Outside from 'vue-focus-outside';
+import Outside from 'element-ui/src/utils/outside';
 import ElCascaderMenu from './menu';
 import ElInput from 'element-ui/packages/input';
 import Popper from 'element-ui/src/utils/vue-popper';

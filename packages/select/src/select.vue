@@ -141,7 +141,7 @@
   import ElTag from 'element-ui/packages/tag';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Outside from 'vue-focus-outside';
+  import Outside from 'element-ui/src/utils/outside';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';

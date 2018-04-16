@@ -81,7 +81,7 @@
 
 <script>
 import Vue from 'vue';
-import Outside from 'vue-focus-outside';
+import Outside from 'element-ui/src/utils/outside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';

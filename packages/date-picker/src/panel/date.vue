@@ -160,7 +160,7 @@
     extractDateFormat,
     extractTimeFormat
   } from '../util';
-  import Outside from 'vue-focus-outside';
+  import Outside from 'element-ui/src/utils/outside';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
