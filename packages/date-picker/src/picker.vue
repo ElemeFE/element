@@ -386,7 +386,7 @@ export default {
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
-        this.valueOnOpen = Array.isArray(this.value) ? this.value.slice() : this.value;
+        this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
       } else {
         this.hidePicker();
         this.emitChange(this.value);
@@ -406,7 +406,7 @@ export default {
       handler(val) {
         if (this.picker) {
           this.picker.value = val;
-          Array.isArray(val) && (this.picker.selectedDate = val) || (this.picker.selectedDate = []);
+          this.picker.selectedDate = Array.isArray(val) ? val : [];
         }
       }
     },

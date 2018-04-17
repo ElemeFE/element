@@ -127,7 +127,7 @@
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="!this.selectionMode === 'dates'">
+          v-show="selectionMode !== 'dates'">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -240,12 +240,7 @@
         if (!value) {
           this.$emit('pick', value, ...args);
         } else if (Array.isArray(value)) {
-          let dates = value;
-
-          for (let i = 0; i < dates.length; i++) {
-            dates[i] = this.showTime ? clearMilliseconds(dates[i]) : clearTime(dates[i]);
-          }
-
+          const dates = value.map(date => this.showTime ? clearMilliseconds(date) : clearTime(date));
           this.$emit('pick', dates, ...args);
         } else {
           this.$emit('pick', this.showTime ? clearMilliseconds(value) : clearTime(value), ...args);

@@ -217,7 +217,6 @@
   </div>
   <div class="block">
     <span class="demonstration">多个日期</span>
-    <p>{{value14}}</p>
     <el-date-picker
       type="dates"
       v-model="value14"
