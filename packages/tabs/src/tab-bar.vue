@@ -18,7 +18,7 @@
       barStyle: {
         cache: false,
         get() {
-          if (!this.$parent.$refs.tabs) return {};
+          // if (!this.$parent.$refs.tabs) return {};
           let style = {};
           let offset = 0;
           let tabSize = 0;
