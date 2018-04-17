@@ -1,6 +1,6 @@
 import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
-export type DatePickerType = 'year' | 'month' | 'date' | 'datetime' | 'week' | 'datetimerange' | 'daterange'
+export type DatePickerType = 'year' | 'month' | 'date' | 'datetime' | 'week' | 'datetimerange' | 'daterange' | 'dates'
 export type FirstDayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export interface DisabledDateChecker {

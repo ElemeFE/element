@@ -26,6 +26,13 @@
     }
   }
 
+  @include m(dates) {
+    .el-input__inner {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
   .el-icon-circle-close {
     cursor: pointer;
   }
