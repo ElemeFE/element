@@ -226,8 +226,10 @@ Add more modules based on your scenario.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| size-change | triggers when `page-size` changes | the new `page-size` |
-| current-change | triggers when `current-page` changes | the new `current-page` |
+| size-change | triggers when `page-size` changes | the new page size |
+| current-change | triggers when `current-page` changes | the new current page |
+| prev-click | triggers when the prev button is clicked and current page changes | the new current page |
+| next-click | triggers when the next button is clicked and current page changes | the new current page |
 
 ### Slot
 | Name | Description |
