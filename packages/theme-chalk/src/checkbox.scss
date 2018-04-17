@@ -5,7 +5,6 @@
 
 @include b(checkbox) {
   color: $--checkbox-color;
-  font-weight: $--checkbox-font-weight;
   font-size: $--font-size-base;
   position: relative;
   cursor: pointer;
@@ -263,7 +262,6 @@
   @include e(inner) {
     display: inline-block;
     line-height: 1;
-    font-weight: $--checkbox-font-weight;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;

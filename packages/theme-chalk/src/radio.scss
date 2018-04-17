@@ -5,7 +5,6 @@
 
 @include b(radio) {
   color: $--radio-color;
-  font-weight: $--radio-font-weight;
   line-height: 1;
   position: relative;
   cursor: pointer;
