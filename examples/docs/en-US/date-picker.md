@@ -104,7 +104,15 @@ Use Date Picker for date input.
 :::demo
 
 ```html
-<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4" />
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4">
+    <div slot="topBlock">
+        <tm-input value="Am I at the top?">
+    </div>
+    <div slot="bottomBlock">
+        <tm-input value="What about bottom?">
+    </div>
+</tm-date-picker>
+
 ```
 
 :::
