@@ -306,6 +306,7 @@ export default {
       if (this.disabled) return;
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      this.$emit('prev-click', this.internalCurrentPage);
       this.emitChange();
     },
 
@@ -313,6 +314,7 @@ export default {
       if (this.disabled) return;
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      this.$emit('next-click', this.internalCurrentPage);
       this.emitChange();
     },
 

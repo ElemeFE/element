@@ -226,8 +226,10 @@
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| size-change | pageSize 改变时会触发 | 每页条数`size` |
-| current-change | currentPage 改变时会触发 | 当前页`currentPage` |
+| size-change | pageSize 改变时会触发 | 每页条数 |
+| current-change | currentPage 改变时会触发 | 当前页 |
+| prev-click | 用户点击上一页按钮改变当前页后触发 | 当前页 |
+| next-click | 用户点击下一页按钮改变当前页后触发 | 当前页 |
 
 ### Slot
 | name | 说明 |

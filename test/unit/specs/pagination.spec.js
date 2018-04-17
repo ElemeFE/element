@@ -322,6 +322,34 @@ describe('Pagination', () => {
     }, 50);
   });
 
+  it('event: prev and next click', done => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          :total="100"
+          layout="sizes, prev, pager, next"
+          @prev-click="trigger = true"
+          @next-click="trigger = true"
+          :pageSize="10" />
+      `,
+
+      data() {
+        return { trigger: false };
+      }
+    }, true);
+    const prev = vm.$el.querySelector('.btn-prev');
+    const next = vm.$el.querySelector('.btn-next');
+    prev.click();
+    setTimeout(_ => {
+      expect(vm.trigger).to.false;
+      next.click();
+      setTimeout(_ => {
+        expect(vm.trigger).to.true;
+        done();
+      }, 50);
+    }, 50);
+  });
+
   it('pageSize > total', () => {
     vm = createVue({
       template: `

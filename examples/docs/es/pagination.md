@@ -214,6 +214,8 @@ Agrega más modulos basados en su escenario.
 | ----------------- | --------------------------------------- | ----------------------------- |
 | size-change       | se dispara cuando `page-size` cambia    | nuevo valor de `page-size`    |
 | current-change    | se dispara cuando `current-page` cambia | nuevo valor de `current-page` |
+| prev-click | triggers when the prev button is clicked and current page changes | the new current page |
+| next-click | triggers when the next button is clicked and current page changes | the new current page |
 
 ### Slot
 | Nombre | Descripción                              |
