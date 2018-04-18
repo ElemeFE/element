@@ -101,6 +101,16 @@ describe('Pagination', () => {
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
   });
 
+  it('pagerCount', () => {
+    const vm = createTest(Pagination, {
+      pageSize: 25,
+      total: 1000,
+      pagerCount: 21
+    });
+
+    expect(vm.$el.querySelectorAll('li.number')).to.length(21);
+  });
+
   it('will work without total & page-count', (done) => {
     const vm = createTest(Pagination, {
       pageSize: 25,

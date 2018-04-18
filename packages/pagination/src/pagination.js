@@ -20,6 +20,14 @@ export default {
 
     pageCount: Number,
 
+    pagerCount: {
+      type: Number,
+      validator(value) {
+        return value > 4 && value < 22 && (value | 0) === value && (value % 2) === 1;
+      },
+      default: 7
+    },
+
     currentPage: {
       type: Number,
       default: 1
@@ -66,7 +74,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
       next: <next></next>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <my-slot></my-slot>,
