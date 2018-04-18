@@ -25,6 +25,7 @@
         class="el-radio__original"
         :value="label"
         type="radio"
+        aria-hidden="true"
         v-model="model"
         @focus="focus = true"
         @blur="focus = false"
