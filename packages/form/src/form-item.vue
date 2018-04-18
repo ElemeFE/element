@@ -262,7 +262,9 @@
           return;
         }
 
-        this.validate('change');
+        this.$nextTick(() => {
+          this.validate('change');
+        });
       }
     },
     mounted() {
