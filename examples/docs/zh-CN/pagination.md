@@ -23,6 +23,19 @@
 ```
 :::
 
+### 设置最大页码按钮数
+
+:::demo 默认情况下，当总页数超过 7 页时，Pagination 会折叠多余的页码按钮。通过`pager-count`属性可以设置最大页码按钮数。
+```html
+<el-pagination
+  :page-size="20"
+  :pager-count="11"
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### 带有背景色的分页
 
 :::demo 设置`background`属性可以为分页按钮添加背景色。
@@ -103,18 +116,6 @@
       :total="400">
     </el-pagination>
   </div>
-  <div class="block">
-    <span class="demonstration">Pager 页码数(默认 7 个)</span>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage5"
-      :page-size="20"
-      :pager-count="9"
-      layout="sizes, prev, pager, next"
-      :total="1000">
-    </el-pagination>
-  </div>
 </template>
 <script>
   export default {
@@ -131,8 +132,7 @@
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 4,
-        currentPage5: 15
+        currentPage4: 4
       };
     }
   }
@@ -155,8 +155,7 @@
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 4,
-        currentPage5: 15
+        currentPage4: 4
       };
     },
     mounted() {
@@ -229,7 +228,7 @@
 | page-size | 每页显示条目个数 | Number | — | 10 |
 | total | 总条目数 | Number | — | — |
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
-| pager-count | 显示页码按钮的最大数（不包括prev和next） | Number | 大于等于 5 且小于等于 21 的奇数 | 7 |
+| pager-count | 页码按钮的数量，当总页数超过该值时会折叠 | Number | 大于等于 5 且小于等于 21 的奇数 | 7 |
 | current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
