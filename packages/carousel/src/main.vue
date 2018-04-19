@@ -31,7 +31,7 @@
           <i class="el-icon-arrow-right"></i>
         </button>
       </transition>
-      <slot></slot>
+      <slot :active-index="activeIndex"></slot>
     </div>
     <ul
       class="el-carousel__indicators"
