@@ -30,6 +30,26 @@ export interface FilterNodeMethod {
   (value: string, data: TreeNode, node: any): boolean
 }
 
+export interface AllowDragMethod {
+  /**
+   * Function executed before dragging a node
+   *
+   * @param node The node to be dragged
+   */
+  (node: any): boolean
+}
+
+export interface AllowDropMethod {
+  /**
+   * Function executed before the dragging node is dropped
+   *
+   * @param draggingNode The dragging node
+   * @param dropNode The target node
+   * @param type Drop type
+   */
+  (draggingNode: any, dropNode: any, type: string): boolean
+}
+
 /** Tree Component */
 export declare class ElTree extends ElementUIComponent {
   /** Tree data */
@@ -82,6 +102,15 @@ export declare class ElTree extends ElementUIComponent {
 
   /** Horizontal indentation of nodes in adjacent levels in pixels */
   indent: number
+
+  /** Whether enable tree nodes drag and drop */
+  draggable: boolean
+
+  /** Function to be executed before dragging a node */
+  allowDrag: AllowDragMethod
+
+  /** Function to be executed before the dragging node is dropped */
+  allowDrop: AllowDropMethod
 
   /**
    * Filter all tree nodes. Filtered nodes will be hidden
