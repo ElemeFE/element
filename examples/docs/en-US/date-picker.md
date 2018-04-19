@@ -75,7 +75,6 @@
 
 <style>
   .demo-block.demo-date-picker .source {
-    padding: 0;
     display: flex;
   }
 
@@ -104,6 +103,17 @@ Use Date Picker for date input.
 :::demo
 
 ```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4"/>
+
+```
+
+:::
+
+Use slots `topBlock` and `bottomBlock` to extend DatePicker's popover.
+
+:::demo
+
+```html
 <tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4">
     <div slot="topBlock">
         <tm-input value="Am I at the top?">
@@ -114,8 +124,6 @@ Use Date Picker for date input.
 </tm-date-picker>
 
 ```
-
-:::
 
 
 ###  Enter Date
