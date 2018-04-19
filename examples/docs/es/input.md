@@ -661,7 +661,7 @@ Búsqueda de datos desde el servidor.
 | blur   | Se dispara cuando se pierde el foco      | (event: Event)            |
 | focus  | Se dispara cuando se obtiene el foco     | (event: Event)            |
 | change | se activa cuando cambia el valor de entrada | (value: string \| number) |
-| clear | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | (event: Event) |
+| clear | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | — |
 
 ### Input Metodo
 
