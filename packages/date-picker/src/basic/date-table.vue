@@ -31,8 +31,8 @@
 
 <script>
   import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, nextDate, isDate } from '../util';
-  import { hasClass } from 'element-ui/src/utils/dom';
-  import Locale from 'element-ui/src/mixins/locale';
+  import { hasClass } from 'element-ei/src/utils/dom';
+  import Locale from 'element-ei/src/mixins/locale';
 
   const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const clearHours = function(time) {

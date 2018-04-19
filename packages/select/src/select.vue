@@ -130,22 +130,22 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
+  import Emitter from 'element-ei/src/mixins/emitter';
+  import Focus from 'element-ei/src/mixins/focus';
+  import Locale from 'element-ei/src/mixins/locale';
+  import ElInput from 'element-ei/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElTag from 'element-ei/packages/tag';
+  import ElScrollbar from 'element-ei/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals } from 'element-ui/src/utils/util';
+  import Clickoutside from 'element-ei/src/utils/clickoutside';
+  import { addClass, removeClass, hasClass } from 'element-ei/src/utils/dom';
+  import { addResizeListener, removeResizeListener } from 'element-ei/src/utils/resize-event';
+  import { t } from 'element-ei/src/locale';
+  import scrollIntoView from 'element-ei/src/utils/scroll-into-view';
+  import { getValueByPath } from 'element-ei/src/utils/util';
+  import { valueEquals } from 'element-ei/src/utils/util';
   import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {

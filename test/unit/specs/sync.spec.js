@@ -1,5 +1,5 @@
 import { createVue, triggerEvent } from '../util';
-import Sync from 'element-ui/src/utils/sync';
+import Sync from 'element-ei/src/utils/sync';
 
 const Test = {
   template: `<div class="sync-test" v-show="visible">

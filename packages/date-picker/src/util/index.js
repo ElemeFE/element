@@ -1,5 +1,5 @@
-import dateUtil from 'element-ui/src/utils/date';
-import { t } from 'element-ui/src/locale';
+import dateUtil from 'element-ei/src/utils/date';
+import { t } from 'element-ei/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];

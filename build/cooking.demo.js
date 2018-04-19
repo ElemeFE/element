@@ -17,7 +17,7 @@ function convert(str) {
 cooking.set({
   entry: isProd ? {
     docs: './examples/entry.js',
-    'element-ui': './src/index.js'
+    'element-ei': './src/index.js'
   } : (isPlay ? './examples/play.js' : './examples/entry.js'),
   dist: './examples/element-ui/',
   template: [
@@ -37,7 +37,7 @@ cooking.set({
   },
   minimize: true,
   chunk: isProd ? {
-    'common': { name: ['element-ui', 'manifest'] }
+    'common': { name: ['element-ei', 'manifest'] }
   } : false,
   extractCSS: true,
   alias: config.alias,

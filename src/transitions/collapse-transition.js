@@ -1,4 +1,4 @@
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from 'element-ei/src/utils/dom';
 
 class Transition {
   beforeEnter(el) {

@@ -69,8 +69,8 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
-import locale from 'element-ui/src/locale';
-import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import locale from 'element-ei/src/locale';
+import CollapseTransition from 'element-ei/src/transitions/collapse-transition';
 
 const components = [
   Pagination,

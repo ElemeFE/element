@@ -63,7 +63,7 @@
     clearMilliseconds,
     timeWithinRange
   } from '../util';
-  import Locale from 'element-ui/src/mixins/locale';
+  import Locale from 'element-ei/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');

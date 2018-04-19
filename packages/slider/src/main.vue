@@ -54,9 +54,9 @@
 </template>
 
 <script type="text/babel">
-  import ElInputNumber from 'element-ui/packages/input-number';
+  import ElInputNumber from 'element-ei/packages/input-number';
   import SliderButton from './button.vue';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ei/src/mixins/emitter';
 
   export default {
     name: 'ElSlider',

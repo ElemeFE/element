@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
-import merge from 'element-ui/src/utils/merge';
+import merge from 'element-ei/src/utils/merge';
 import { orderBy, getColumnById, getRowIdentity } from './util';
 
 const sortData = (data, states) => {
