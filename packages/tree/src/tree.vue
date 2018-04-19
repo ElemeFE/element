@@ -355,8 +355,14 @@
         if (!draggingNode || !dropNode) return;
 
         let allowDrop = true;
-        if (typeof this.allowDrop === 'function' && !this.allowDrop(draggingNode.node, dropNode.node)) {
-          allowDrop = false;
+        let dropPrev = true;
+        let dropInner = true;
+        let dropNext = true;
+        if (typeof this.allowDrop === 'function') {
+          dropPrev = this.allowDrop(draggingNode.node, dropNode.node, 'prev');
+          dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
+          dropNext = this.allowDrop(draggingNode.node, dropNode.node, 'next');
+          allowDrop = dropInner;
         }
         dragState.allowDrop = allowDrop;
         event.dataTransfer.dropEffect = allowDrop ? 'move' : 'none';
@@ -370,10 +376,6 @@
         if (allowDrop) {
           dragState.dropNode = dropNode;
         }
-
-        let dropPrev = allowDrop;
-        let dropInner = allowDrop;
-        let dropNext = allowDrop;
 
         if (dropNode.node.nextSibling === draggingNode.node) {
           dropNext = false;
