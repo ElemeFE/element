@@ -454,7 +454,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'tm-icon--time' : 'tm-icon--date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'time' : 'calendar');
     },
 
     selectionMode() {

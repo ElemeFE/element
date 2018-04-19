@@ -37,7 +37,7 @@ export default {
       default: null
     },
     value: {
-      type: [Array, Date],
+      type: [Array, Date, String],
       default: null
     },
     type: {
