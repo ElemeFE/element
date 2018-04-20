@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2.3.5
+
+*2018-04-20*
+
+- Fixed incorrect highlights in DatePicker panel when `type` is week, #10712
+- Fixed InputNumber being empty when its initial value is 0, #10714
+- Added `automatic-dropdown` attribute for Select, #10042 (by @Seebiscuit)
+- Fixed disabled Rate's value still being updated by navigation keys, #10726 (by @Richard-Choooou)
+- Now DatePicker's `type` attribute can be `'dates'`, where you can pick multiple dates in one picker, #10650 (by @Mini256)
+- Added `prev-click` and `next-click` events for Pagination, #10755
+- Added `pager-count` attribute for Pagination, #10493 (by @chongjohn716)
+- Added `type` as the 3rd param of Tree's `allow-drop` attribute callback, #10792
+- Now we use ResizeObserver to detect DOM element resizing, #10779
+
 ### 2.3.4
 
 *2018-04-12*
