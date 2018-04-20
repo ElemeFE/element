@@ -82,7 +82,13 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
+import {
+  formatDate,
+  parseDate,
+  isDateObject,
+  getWeekNumber,
+  getQuarterNumber
+} from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -111,7 +117,8 @@ const DEFAULT_FORMATS = {
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
-  year: 'yyyy'
+  year: 'yyyy',
+  quarter: 'yyyy年Q季度'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -124,7 +131,8 @@ const HAVE_TRIGGER_TYPES = [
   'daterange',
   'timerange',
   'datetimerange',
-  'dates'
+  'dates',
+  'quarter'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -251,6 +259,20 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser(value, format) {
       return (typeof value === 'string' ? value.split(', ') : value)
         .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+    }
+  },
+  quarter: {
+    formatter(value, format) {
+      console.log('[formatter picked value]', value);
+      const quarter = getQuarterNumber(value);
+      let date = formatDate(value, format);
+      if (/Q/.test(date)) {
+        date = date.replace(/Q/, quarter);
+      }
+      return date;
+    },
+    parser(value) {
+      return value;
     }
   }
 };
@@ -459,6 +481,8 @@ export default {
         return 'year';
       } else if (this.type === 'dates') {
         return 'dates';
+      } else if (this.type === 'quarter') {
+        return 'quarter';
       }
 
       return 'day';

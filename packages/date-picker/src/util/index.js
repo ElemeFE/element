@@ -237,3 +237,15 @@ export const extractTimeFormat = function(format) {
     .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
     .trim();
 };
+
+// eg: (2018-01-01) => 1; (2018-06-01) => 2
+export const getQuarterNumber = function(date) {
+  const m = date.getMonth();
+  return Math.floor((m + 3) / 3);
+};
+
+// eg: (1) => [0, 1, 2]; (4) => [9, 10, 11]
+export const getMonthNumberInQuarter = function(quarter) {
+  const start = quarter * 3 - 3;
+  return [start, start + 1, start + 2];
+};
