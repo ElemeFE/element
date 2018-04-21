@@ -731,6 +731,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | popper-class | custom class name for Select's dropdown | string | — | — |
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
+| prefix-icon | prefix icon class | string | — | — |
+| suffix-icon | suffix icon class | string | — | arrow-down |
 
 ### Select Events
 | Event Name | Description | Parameters |
