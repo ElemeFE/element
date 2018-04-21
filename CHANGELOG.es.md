@@ -4,15 +4,15 @@
 
 *2018-04-20*
 
-- Fixed incorrect highlights in DatePicker panel when `type` is week, #10712
-- Fixed InputNumber being empty when its initial value is 0, #10714
-- Added `automatic-dropdown` attribute for Select, #10042 (by @Seebiscuit)
-- Fixed disabled Rate's value still being updated by navigation keys, #10726 (by @Richard-Choooou)
-- Now DatePicker's `type` attribute can be `'dates'`, where you can pick multiple dates in one picker, #10650 (by @Mini256)
-- Added `prev-click` and `next-click` events for Pagination, #10755
-- Added `pager-count` attribute for Pagination, #10493 (by @chongjohn716)
-- Added `type` as the 3rd param of Tree's `allow-drop` attribute callback, #10792
-- Now we use ResizeObserver to detect DOM element resizing, #10779
+- Arreglado los incorrectos realces en el panel de DatePicker cuando `type` es week, #10712
+- Arreglado que InputNumber comenzaba vacio cuando el valor inicial era 0, #10714
+- Agregado el atributo  `automatic-dropdown` para Select, #10042 (by @Seebiscuit)
+- Arreglado que el valor del Rate pasaba a `disabled` cuando se comenzaba a actualizar con las teclas de navegacion, #10726 (by @Richard-Choooou)
+- Ahora el atributo `type` de DatePicker's puede ser  `'dates'`, donde puede elegir varias fechas en un solo picker, #10650 (by @Mini256)
+- Agregados los eventos  `prev-click` y `next-click` para Pagination, #10755
+- Agregado el atributo `pager-count` para Pagination, #10493 (by @chongjohn716)
+- Agregado `type` como 3rd parametro del atributo  `allow-drop`  de Tree, #10792
+- Ahora usamos ResizeObserver para detectar el redimensionamiento de elementos DOM, #10779
 
 ### 2.3.4
 

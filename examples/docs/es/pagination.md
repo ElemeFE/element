@@ -214,7 +214,7 @@ Agrega más modulos basados en su escenario.
 | page-size    | cantidad de elementos por página         | number   | —                                        | 10                                     |
 | total        | total de elementos                       | number   | —                                        | —                                      |
 | page-count   | total de páginas. Asigna `total` o `page-count` y las páginas serán mostradas; si necesitas `page-sizes`, `total` es **requerido** | number   | —                                        | —                                      |
-| pager-count  | number of pagers. Pagination collapses when the total page count exceeds this value | number | odd number between 5 and 21 | 7 |
+| pager-count  | número de paginadores. La paginación colapsa cuando el número total de páginas excede este valor. | number | odd number between 5 and 21 | 7 |
 | current-page | número actual de la página, soporta el modificador .sync | number   | —                                        | 1                                      |
 | layout       | layout de la paginación, elementos separados por coma | string   | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total' |
 | page-sizes   | opciones para la cantidad de elementos por página | number[] | —                                        | [10, 20, 30, 40, 50, 100]              |
@@ -228,8 +228,8 @@ Agrega más modulos basados en su escenario.
 | ----------------- | --------------------------------------- | ----------------------------- |
 | size-change       | se dispara cuando `page-size` cambia    | nuevo valor de `page-size`    |
 | current-change    | se dispara cuando `current-page` cambia | nuevo valor de `current-page` |
-| prev-click | triggers when the prev button is clicked and current page changes | the new current page |
-| next-click | triggers when the next button is clicked and current page changes | the new current page |
+| prev-click | Se dispara cuando el boton `prev` recibe el click y la pagina actual cambia | la nueva pagina actual |
+| next-click | Se dispara cuando el boton `next` recibe el click y la pagina actual cambia | la nueva pagina actual |
 
 ### Slot
 | Nombre | Descripción                              |
