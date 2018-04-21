@@ -354,7 +354,6 @@
         const draggingNode = dragState.draggingNode;
         if (!draggingNode || !dropNode) return;
 
-        let allowDrop = true;
         let dropPrev = true;
         let dropInner = true;
         let dropNext = true;
@@ -362,18 +361,17 @@
           dropPrev = this.allowDrop(draggingNode.node, dropNode.node, 'prev');
           dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
           dropNext = this.allowDrop(draggingNode.node, dropNode.node, 'next');
-          allowDrop = dropInner;
         }
-        dragState.allowDrop = allowDrop;
-        event.dataTransfer.dropEffect = allowDrop ? 'move' : 'none';
-        if (allowDrop && oldDropNode !== dropNode) {
+        dragState.allowDrop = dropInner;
+        event.dataTransfer.dropEffect = dropInner ? 'move' : 'none';
+        if ((dropPrev || dropInner || dropNext) && oldDropNode !== dropNode) {
           if (oldDropNode) {
             this.$emit('node-drag-leave', draggingNode.node, oldDropNode.node, event);
           }
           this.$emit('node-drag-enter', draggingNode.node, dropNode.node, event);
         }
 
-        if (allowDrop) {
+        if (dropPrev || dropInner || dropNext) {
           dragState.dropNode = dropNode;
         }
 
