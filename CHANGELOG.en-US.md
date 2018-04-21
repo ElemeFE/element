@@ -1,5 +1,13 @@
 ## Changelog
 
+### 2.3.6
+
+*2018-04-21*
+
+- Fixed wrong behavior of Tree's `allow-drop` callback when `type` parameter is used, #10821
+- Now you can properly enter keywords in filterable single Select in IE11, #10822
+- Fixed single Select incorrectly triggering `blur` event after clicking an option, #10822
+
 ### 2.3.5
 
 *2018-04-20*
