@@ -78,7 +78,7 @@
       :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
-      :readonly="!filterable || multiple || !visible"
+      :readonly="!filterable || multiple"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
@@ -312,7 +312,8 @@
         inputHovering: false,
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
-        isOnComposition: false
+        isOnComposition: false,
+        isSilentBlur: false
       };
     },
 
@@ -565,7 +566,13 @@
       },
 
       handleBlur(event) {
-        this.$emit('blur', event);
+        setTimeout(() => {
+          if (this.isSilentBlur) {
+            this.isSilentBlur = false;
+          } else {
+            this.$emit('blur', event);
+          }
+        }, 50);
         this.softFocus = false;
       },
 
@@ -652,7 +659,7 @@
         }, 300);
       },
 
-      handleOptionSelect(option) {
+      handleOptionSelect(option, byClick) {
         if (this.multiple) {
           const value = this.value.slice();
           const optionIndex = this.getValueIndex(value, option.value);
@@ -674,10 +681,11 @@
           this.emitChange(option.value);
           this.visible = false;
         }
+        this.isSilentBlur = byClick;
+        this.setSoftFocus();
+        if (this.visible) return;
         this.$nextTick(() => {
-          if (this.visible) return;
           this.scrollToOption(option);
-          this.setSoftFocus();
         });
       },
 

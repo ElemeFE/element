@@ -663,11 +663,11 @@ describe('Select', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
-    });
+    }, 100);
   });
 
   it('should return focus to input inside select after option select', done => {
