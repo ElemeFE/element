@@ -23,7 +23,8 @@
         checkboxGroup3: ['Shanghai'],
         checkboxGroup4: ['Shanghai'],
         checkboxGroup5: [],
-        checkboxGroup6: []
+        checkboxGroup6: [],
+        checkboxGroup7: []
       };
     },
     methods: {
@@ -201,6 +202,13 @@ Checkbox with button styles.
 ```html
 <template>
   <div>
+    <tm-checkbox-group v-model="checkboxGroup7">
+      <tm-checkbox-button label="wifi"><tm-icon name="wifi"></tm-icon></tm-checkbox-button>
+      <tm-checkbox-button label="tv"><tm-icon name="tv"></tm-icon></tm-checkbox-button>
+      <tm-checkbox-button label="transfer"><tm-icon name="transfer"></tm-icon></tm-checkbox-button>
+    </tm-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
     <tm-checkbox-group v-model="checkboxGroup1">
       <tm-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</tm-checkbox-button>
     </tm-checkbox-group>

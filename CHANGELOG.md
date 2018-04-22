@@ -7,6 +7,8 @@
 - Доработан компонент Select
   - Добавлен prefix-icon
   - Добавлен suffix-icon
+- Fix RadioButton и CheckboxButton
+  - Добавлен цвет на иконку при выбранном элементе
 
 *2018-04-19*
 
