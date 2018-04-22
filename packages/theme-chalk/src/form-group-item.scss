@@ -25,6 +25,9 @@
       border-bottom: none;
       border-left: none;
       border-radius: 0;
+      &:hover, &:focus {
+        border-color: $--color-pastel-gray;
+      }
     }
   }
 
