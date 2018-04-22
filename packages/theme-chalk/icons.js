@@ -26,6 +26,7 @@ import DisabledPerson from '../../packages/theme-chalk/src/icons/disabled-person
 import DotsHorizontal from '../../packages/theme-chalk/src/icons/dots-horizontal.svg';
 import DotsVertical from '../../packages/theme-chalk/src/icons/dots-vertical.svg';
 import DoubleBed from '../../packages/theme-chalk/src/icons/double-bed.svg';
+import Download from '../../packages/theme-chalk/src/icons/download.svg';
 import Dryer from '../../packages/theme-chalk/src/icons/dryer.svg';
 import Error from '../../packages/theme-chalk/src/icons/error.svg';
 import Files from '../../packages/theme-chalk/src/icons/files.svg';
@@ -99,6 +100,7 @@ module.exports = {
   DotsHorizontal,
   DotsVertical,
   DoubleBed,
+  Download,
   Dryer,
   Error,
   Files,
