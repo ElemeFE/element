@@ -26,6 +26,7 @@ import DisabledPerson from '../../packages/theme-chalk/src/icons/disabled-person
 import DotsHorizontal from '../../packages/theme-chalk/src/icons/dots-horizontal.svg';
 import DotsVertical from '../../packages/theme-chalk/src/icons/dots-vertical.svg';
 import DoubleBed from '../../packages/theme-chalk/src/icons/double-bed.svg';
+import Download from '../../packages/theme-chalk/src/icons/download.svg';
 import Dryer from '../../packages/theme-chalk/src/icons/dryer.svg';
 import Error from '../../packages/theme-chalk/src/icons/error.svg';
 import Files from '../../packages/theme-chalk/src/icons/files.svg';
@@ -58,6 +59,7 @@ import Snow from '../../packages/theme-chalk/src/icons/snow.svg';
 import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
+import Ticket from '../../packages/theme-chalk/src/icons/ticket.svg';
 import Train from '../../packages/theme-chalk/src/icons/train.svg';
 import Transfer from '../../packages/theme-chalk/src/icons/transfer.svg';
 import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
@@ -98,6 +100,7 @@ module.exports = {
   DotsHorizontal,
   DotsVertical,
   DoubleBed,
+  Download,
   Dryer,
   Error,
   Files,
@@ -130,6 +133,7 @@ module.exports = {
   Star,
   StatsPie,
   Success,
+  Ticket,
   Train,
   Transfer,
   Tv,

@@ -94,6 +94,11 @@
                :name="iconName"
                @click="handleIconClick">
       </tm-icon>
+      <tm-icon slot="prefix"
+               v-if="prefixIcon"
+               class="tm-select__caret"
+               :name="prefixIcon">
+      </tm-icon>
     </tm-input>
     <transition
       name="tm-zoom-in-top"
@@ -181,7 +186,7 @@
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
+        return criteria ? 'cross' : (this.remote && this.filterable ? '' : this.suffixIcon);
       },
 
       debounce() {
@@ -274,7 +279,12 @@
         type: String,
         default: 'value'
       },
-      collapseTags: Boolean
+      collapseTags: Boolean,
+      suffixIcon: {
+        type: String,
+        default: 'arrow-down'
+      },
+      prefixIcon: String
     },
 
     data() {

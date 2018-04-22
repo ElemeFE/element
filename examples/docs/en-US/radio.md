@@ -13,6 +13,7 @@
         radio8: '1',
         radio9: '1',
         radio10: '1',
+        radio11: 'calendar',
         radioCustom: 'a',
         customData: 'b',
         customData2: 'a'
@@ -51,7 +52,7 @@ Radio should not have too many options. Otherwise, use the Select component inst
 
 ### Custom content usage
 
-:::demo 
+:::demo
 ```html
 <template>
   <tm-radio-group v-model="radioCustom" style="width: 200px">
@@ -137,12 +138,18 @@ Suitable for choosing from some mutually exclusive options.
 
 ### Button style
 
-Radio with button styles.
+Radio with button styles and with icons.
 
 :::demo You just need to change `tm-radio` element into `tm-radio-button` element. We also provide `size` attribute.
 ```html
 <template>
   <div>
+    <tm-radio-group v-model="radio11">
+      <tm-radio-button label="calendar"><tm-icon name="calendar"></tm-icon></tm-radio-button>
+      <tm-radio-button label="item-list"><tm-icon name="item-list"></tm-icon></tm-radio-button>
+    </tm-radio-group>
+  </div>
+  <div style="margin-top: 20px">
     <tm-radio-group v-model="radio3">
       <tm-radio-button label="New York"></tm-radio-button>
       <tm-radio-button label="Washington"></tm-radio-button>
@@ -183,7 +190,8 @@ Radio with button styles.
         radio3: 'New York',
         radio4: 'New York',
         radio5: 'New York',
-        radio6: 'New York'
+        radio6: 'New York',
+        radio11: 'calendar',
       };
     }
   }
