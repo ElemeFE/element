@@ -362,6 +362,7 @@
 
       updateScrollY() {
         this.layout.updateScrollY();
+        this.layout.updateColumnsWidth();
       },
 
       handleFixedMousewheel(event, data) {
