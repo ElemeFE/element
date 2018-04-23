@@ -14,7 +14,8 @@ describe('Input', () => {
           :maxlength="5"
           placeholder="请输入内容"
           @focus="handleFocus"
-          value="input">
+          value="input"
+          custom-class="abc">
         </el-input>
       `,
       data() {
@@ -35,6 +36,7 @@ describe('Input', () => {
     expect(inputElm.value).to.equal('input');
     expect(inputElm.getAttribute('minlength')).to.equal('3');
     expect(inputElm.getAttribute('maxlength')).to.equal('5');
+    expect(inputElm.getAttribute('class')).to.equal('el-input__inner abc');
   });
 
   it('disabled', () => {
