@@ -9,15 +9,16 @@
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <span v-if="collapseTags && selected.length">
+      <span class="el-select__tags-wrapper" v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
           @close="deleteTag($event, selected[0])"
-          disable-transitions>
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+          disable-transitions
+          :style="{ 'max-width': inputWidth - 32 + 'px' }">
+          <span class="el-select__tags-text" :style="{ 'max-width': inputWidth - 114 + 'px' }">{{ selected[0].currentLabel }}</span>
         </el-tag>
         <el-tag
           v-if="selected.length > 1"
@@ -28,7 +29,7 @@
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
         </el-tag>
       </span>
-      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
+      <transition-group class="el-select__tags-wrapper" @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -37,8 +38,9 @@
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
-          disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          disable-transitions
+          :style="{ 'max-width': inputWidth - 32 + 'px' }">
+          <span class="el-select__tags-text" :style="{ 'max-width': inputWidth - 74 + 'px' }">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 

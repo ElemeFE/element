@@ -113,6 +113,12 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    overflow-x: scroll;
+  }
+
+  .el-select__tags-wrapper {
+    display: flex;
+    justify-content: space-between;
   }
 
   .el-tag__close {
@@ -124,6 +130,16 @@
     border-color: transparent;
     margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .el-select__tags-text{
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
     &__close.el-icon-close {
       background-color: $--color-text-placeholder;
