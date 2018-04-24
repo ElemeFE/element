@@ -23,7 +23,7 @@
   }
 
   &[x-placement^="top"] {
-    margin-bottom: #{$--popover-arrow-size + 6};
+    margin-bottom: 6px;
   }
 
   &[x-placement^="top"] .popper__arrow {
@@ -42,7 +42,7 @@
   }
 
   &[x-placement^="bottom"] {
-    margin-top: #{$--popover-arrow-size + 6};
+    margin-top: 6px;
   }
 
   &[x-placement^="bottom"] .popper__arrow {

@@ -35,7 +35,7 @@
       },
 
       visibleArrow: {
-        default: true
+        default: false
       }
     },
 

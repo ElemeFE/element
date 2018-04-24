@@ -227,6 +227,26 @@
     }
   }
 
+  @include m(extra-large) {
+    font-size: 14px;
+    line-height: 48px;
+
+    @include e(inner) {
+      height: 48px;
+      line-height: 48px;
+    }
+
+    .tm-input__icon {
+      line-height: 56px;
+      height: 48px;
+
+      svg {
+        height: 20px;
+        width: 20px;
+        font-size: 20px;
+      }
+    }
+  }
   @include m(medium) {
     font-size: $--input-medium-font-size;
 
