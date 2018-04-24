@@ -88,7 +88,9 @@
       @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
-      @mouseleave.native="inputHovering = false">
+      @mouseleave.native="inputHovering = false"
+      :suffix-icon="suffixIcon"
+      :prefix-icon="prefixIcon">
       <tm-icon slot="suffix"
                class="tm-select__caret tm-input__icon"
                :name="iconName"
@@ -177,7 +179,6 @@
       iconName() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
-          this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
@@ -274,7 +275,9 @@
         type: String,
         default: 'value'
       },
-      collapseTags: Boolean
+      collapseTags: Boolean,
+      prefixIcon: String,
+      suffixIcon: String
     },
 
     data() {

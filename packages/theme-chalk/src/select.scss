@@ -34,7 +34,24 @@
     }
   }
 
+  @include m(extra-large) {
+    .tm-input--extra-large {
+      .tm-input__suffix {
+        .tm-select__caret {
+          line-height: 48px;
+        }
+      }
+    }
+  }
+
   .tm-input {
+    @include when(focus) {
+      .tm-input__suffix-inner {
+        .tm-icon:not(.tm-select__caret) {
+          fill: $--select-close-hover-color;
+        }
+      }
+    }
     & .tm-select__caret {
       fill: $--select-input-color;
       font-size: $--select-input-font-size;
@@ -46,11 +63,9 @@
         height: 12px;
         transition: transform .3s;
         transform: rotateZ(0deg);
-      }
 
-      @include when(reverse) {
-        svg {
-          transform: rotateZ(180deg);
+        &:hover {
+          fill: $--select-close-hover-color;
         }
       }
 
@@ -63,7 +78,7 @@
         transition: $--color-transition-base;
 
         &:hover {
-          color: $--select-close-hover-color;
+          fill: $--select-close-hover-color;
         }
       }
     }
@@ -147,16 +162,17 @@
     box-sizing: border-box;
     border-color: transparent;
     margin: 2px 0 2px 6px;
-    background-color: #f0f2f5;
+    background-color: transparent;
 
     &__close.tm-icon--cross {
-      background-color: $--color-text-placeholder;
+      background-color: transparent;
       right: -7px;
       top: 0;
-      fill: $--color-white;
+      fill: $--input-icon-color;
 
       &:hover {
-        background-color: $--color-text-secondary;
+        background-color: transparent;
+        fill: $--color-text-secondary;
       }
     }
   }
