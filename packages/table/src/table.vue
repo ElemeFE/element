@@ -41,6 +41,7 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
+        :selectedHighlight="selectedHighlight"
         :style="{
            width: bodyWidth
         }">
@@ -114,6 +115,7 @@
           :store="store"
           :stripe="stripe"
           :highlight="highlightCurrentRow"
+          :selectedHighlight="selectedHighlight"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :style="{
@@ -179,6 +181,7 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
+          :selectedHighlight="selectedHighlight"
           :style="{
             width: bodyWidth
           }">
@@ -311,7 +314,9 @@
       selectOnIndeterminate: {
         type: Boolean,
         default: true
-      }
+      },
+
+      selectedHighlight: Boolean
     },
 
     components: {

@@ -24,7 +24,8 @@ export default {
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    selectedHighlight: Boolean
   },
 
   render(h) {
@@ -160,6 +161,19 @@ export default {
       }
       if (newRow) {
         addClass(newRow, 'current-row');
+      }
+    },
+    'store.states.selection'(newVal, oldVal) {
+      if (!this.selectedHighlight) return;
+      const el = this.$el;
+      if (!el) return;
+      const data = this.store.states.data;
+      const tr = el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
+      const selectedRows = [].map.call(newVal, val => rows[data.indexOf(val)]);
+      [].forEach.call(rows, row => removeClass(row, 'selected-row'));
+      if (selectedRows) {
+        [].forEach.call(selectedRows, row => addClass(row, 'selected-row'));
       }
     }
   },
