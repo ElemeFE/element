@@ -23,6 +23,7 @@
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
         class="el-input__inner"
+        :class="customClass"
         v-bind="$attrs"
         :type="type"
         :disabled="inputDisabled"
@@ -78,6 +79,7 @@
       v-else
       :tabindex="tabindex"
       class="el-textarea__inner"
+      :class="customClass"
       :value="currentValue"
       @compositionstart="handleComposition"
       @compositionupdate="handleComposition"
@@ -161,7 +163,11 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      customClass: {
+        type: String,
+        default: ''
+      }
     },
 
     computed: {

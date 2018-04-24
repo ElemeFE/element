@@ -75,6 +75,9 @@ export declare class ElInput extends ElementUIComponent {
   /** Same as form in native input */
   form: string
 
+  /** Custom class of input or textarea */
+  customClass: string
+
   /**
    * Focus the Input component
    */
