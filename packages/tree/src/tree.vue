@@ -165,7 +165,7 @@
       },
 
       checkStrictly(newVal) {
-        this.store.checkStrictly = !!newVal;
+        this.store.checkStrictly = newVal;
       }
     },
 
