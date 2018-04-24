@@ -511,6 +511,10 @@
     tr.current-row > td {
       background-color: $--table-current-row-background;
     }
+
+    tr.selected-row > td {
+      background-color: $--table-current-row-background;
+    }
   }
 
   @include e(column-resize-proxy) {
