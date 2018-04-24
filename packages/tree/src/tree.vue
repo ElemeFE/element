@@ -162,6 +162,10 @@
         Array.prototype.forEach.call(val, (checkbox) => {
           checkbox.setAttribute('tabindex', -1);
         });
+      },
+
+      checkStrictly(newVal) {
+        this.store.checkStrictly = newVal;
       }
     },
 
