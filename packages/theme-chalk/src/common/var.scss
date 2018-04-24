@@ -64,7 +64,7 @@ $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 $--color-text-primary: $--color-taupe-gray !default;
 $--color-text-regular: $--color-dark-gunmetal !default;
 $--color-text-secondary: $--color-blueberry !default;
-$--color-text-placeholder: $--color-pastel-gray !default;
+$--color-text-placeholder: $--color-taupe-gray !default;
 
 /* Link
 -------------------------- */
@@ -81,7 +81,7 @@ $--border-width-base: 1px !default;
 $--border-width-radio-base: 2px !default;
 $--border-width-radio-checked-base: 6px !default;
 $--border-style-base: solid !default;
-$--border-color-base: $--color-text-placeholder !default;
+$--border-color-base: $--color-pastel-gray !default;
 $--border-color-light: mix($--color-white, $--border-color-base, 20%) !default;
 $--border-color-lighter: mix($--color-white, $--border-color-base, 50%) !default;
 $--border-color-extra-light: mix($--color-white, $--border-color-base, 80%) !default;
@@ -242,7 +242,8 @@ $--select-border-color-hover: $--border-color-hover !default;
 $--select-disabled-border: $--disabled-border-base !default;
 $--select-font-size: $--font-size-base !default;
 $--select-close-hover-color: $--color-text-secondary !default;
-$--select-icon-hover-color: $--color-text-secondary !default;
+$--select-icon-color: $--border-color-base !default;
+$--select-icon-hover-color: $--color-text-placeholder !default;
 
 $--select-input-color: $--color-text-placeholder !default;
 $--select-multiple-input-color: #666 !default;
@@ -355,7 +356,7 @@ $--input-border-color-hover: $--border-color-hover !default;
 $--input-fill: $--color-white !default;
 $--input-fill-disabled: $--disabled-fill-base !default;
 $--input-color-disabled: $--font-color-disabled-base !default;
-$--input-icon-color: $--color-text-placeholder !default;
+$--input-icon-color: $--border-color-base !default;
 $--input-placeholder-color: $--color-text-placeholder !default;
 $--input-max-width: 314px !default;
 

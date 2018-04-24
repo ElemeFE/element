@@ -54,6 +54,10 @@
         background-color: $--radio-button-checked-fill;
         border-color: $--radio-button-checked-border-color;
         box-shadow: -1px 0 0 0 $--radio-button-checked-border-color;
+
+        .tm-icon {
+          fill: $--color-white;
+        }
       }
     }
 

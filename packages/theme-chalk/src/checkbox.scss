@@ -307,6 +307,10 @@
       background-color: $--checkbox-button-checked-fill;
       border-color: $--checkbox-button-checked-border-color;
       box-shadow: -1px 0 0 0 $--color-text-placeholder;
+
+      .tm-icon {
+        fill: #ffffff;
+      }
     }
   }
 
