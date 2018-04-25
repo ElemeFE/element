@@ -26,7 +26,6 @@
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
-      <span class="el-switch__button" :style="{ transform }"></span>
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
@@ -106,9 +105,6 @@
     computed: {
       checked() {
         return this.value === this.activeValue;
-      },
-      transform() {
-        return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
       },
       switchDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
