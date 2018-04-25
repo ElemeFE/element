@@ -88,7 +88,7 @@
       background-color: $--switch-on-color;
       &::after {
         left: 100%;
-        margin-left: -$--switch-button-size;
+        margin-left: -$--switch-button-size - 1px;
       }
     }
   }
