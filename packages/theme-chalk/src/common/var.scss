@@ -291,6 +291,7 @@ $--alert-icon-large-size: 28px !default;
 -------------------------- */
 $--msgbox-width: 430px !default;
 $--msgbox-border-radius: 8px !default;
+$--msgbox-title-font-size: 17px !default;
 $--msgbox-font-size: $--font-size-large !default;
 $--msgbox-content-font-size: $--font-size-base !default;
 $--msgbox-content-color: $--color-text-regular !default;
@@ -520,7 +521,7 @@ $--dialog-background-color: $--color-primary-light-4 !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 $--dialog-close-color: $--color-text-primary !default;
 $--dialog-close-hover-color: $--color-text-regular !default;
-$--dialog-title-font-size: 22px !default;
+$--dialog-title-font-size: 17px !default;
 $--dialog-font-size: 14px !default;
 $--dialog-line-height: normal !default;
 $--dialog-padding-primary: 20px !default;
