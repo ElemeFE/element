@@ -60,6 +60,7 @@ import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
 import Ticket from '../../packages/theme-chalk/src/icons/ticket.svg';
+import Time from '../../packages/theme-chalk/src/icons/time.svg';
 import Train from '../../packages/theme-chalk/src/icons/train.svg';
 import Transfer from '../../packages/theme-chalk/src/icons/transfer.svg';
 import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
@@ -134,6 +135,7 @@ module.exports = {
   StatsPie,
   Success,
   Ticket,
+  Time,
   Train,
   Transfer,
   Tv,
