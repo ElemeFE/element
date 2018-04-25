@@ -12,6 +12,7 @@
       type="checkbox"
       @change="handleChange"
       ref="input"
+      :id="id"
       :name="name"
       :true-value="activeValue"
       :false-value="inactiveValue"
@@ -89,7 +90,8 @@
       name: {
         type: String,
         default: ''
-      }
+      },
+      id: String
     },
     data() {
       return {
