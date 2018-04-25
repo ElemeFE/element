@@ -144,7 +144,11 @@
     }
 
     &.available:hover {
-      color: $--datepicker-text-hover-color;
+      color: $--color-white;
+
+      span {
+        background-color: rgba($--datepicker-text-hover-color, 0.5);
+      }
     }
 
     &.in-range {

@@ -3,6 +3,7 @@
     <tm-input
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon"
+      :size="size"
       readonly
       v-model="dateLabel"
       placeholder="Период пребывания"></tm-input>
@@ -43,6 +44,10 @@ export default {
     type: {
       type: String,
       default: 'daterange'
+    },
+    size: {
+      type: String,
+      default: 'large'
     }
   },
   computed: {

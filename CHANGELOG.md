@@ -2,6 +2,11 @@
 
 ### 1.1.15
 
+*2018-04-25*
+
+- Добавлен extra-large для date-picker и date-picker-joined
+- Изменен ховер в date-picker-table
+
 *2018-04-22*
 
 - Добавлена иконка download
