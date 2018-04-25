@@ -6,6 +6,10 @@
 
 - Добавлен extra-large для date-picker и date-picker-joined
 - Изменен ховер в date-picker-table
+- Правки по стилям компонента Entity Counter (высота и расположение иконок)
+- Правки Dialog и MessageBox
+    - Поправлен блок title компонента
+    - Поправлена иконка закрытия всплывающего окна
 
 *2018-04-22*
 
