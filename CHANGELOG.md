@@ -4,6 +4,7 @@
 
 *2018-04-25*
 
+- Добавлна иконка time
 - Добавлен extra-large для date-picker и date-picker-joined
 - Изменен ховер в date-picker-table
 
