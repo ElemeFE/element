@@ -778,7 +778,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 | prefix-icon | prefix icon class | string | — | — |
-| suffix-icon | suffix icon class | string | — | arrow-down |
+| suffix-icon | suffix icon class | string | — | — |
+| show-arrow | toggle carret show in the select input | boolean | — | true |
 
 ### Select Events
 | Event Name | Description | Parameters |
