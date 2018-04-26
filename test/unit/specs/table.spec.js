@@ -1044,7 +1044,7 @@ describe('Table', () => {
         const vm = createTable(
           'sortable :sort-method="sortMethod"', '', '', '', {
             methods: {
-              sortMethod({value: a}, {value: b}) {
+              sortMethod(a, b) {
                 // sort method should return number
                 if (a.runtime < b.runtime) {
                   return 1;
