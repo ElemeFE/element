@@ -40,6 +40,29 @@
   };
 </script>
 
+<style>
+.custom-datepicker__form {
+    margin-top: 28px;
+    padding: 0 15px;
+}
+.custom-datepicker__form .tm-form-item {
+    margin-bottom: 0px;
+}
+.custom-datepicker__form .tm-form-group-item {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.custom-datepicker__form .tm-input {
+    width: 100%;
+}
+.custom-datepicker__form textarea {
+    height: 108px;
+}
+.custom-datepicker__button {
+    width: calc(100% - 20px);
+}
+</style>
+
 ## Dialog
 
 Informs users while preserving the current page state.
@@ -82,32 +105,28 @@ The content of Dialog can be anything, even form. This example shows how to use 
   title="Групповой тур?"
   :visible.sync="dialogFormVisible"
   :before-close="handleClose"
-  width="35%"
+  width="607px"
   center>
   <p class="tm-dialog__content">Оставьте свою заявку на групповой тер ниже. После обработки вашей заявки мы связемся с вами</p>
-  <tm-form :model="form">
+  <tm-form :model="form" class="custom-datepicker__form">
+    <tm-form-group-item>
+      <tm-input
+        size="extra-large"
+        placeholder="Поиск города, отеля, ардеса"
+        prefix-icon="search">
+      </tm-input>
+      <tm-date-picker
+        size="extra-large"
+        placeholder="Период пребывания"
+        suffix-icon="calendar">
+      </tm-date-picker>
+    </tm-form-group-item>
     <tm-form-item>
-      <div class="tm-row">
-        <div class="tm-col-12">
-          <tm-input
-            placeholder="Поиск города, отеля, ардеса"
-            prefix-icon="search">
-          </tm-input>
-        </div>
-        <div class="tm-col-12">
-          <tm-input
-            placeholder="Период пребывания"
-            suffix-icon="calendar">
-          </tm-input>
-        </div>
-      </div>
-    </tm-form-item>
-    <tm-form-item>
-      <tm-input type="textarea"></tm-input>
+      <tm-input type="textarea" placeholder="Особые пожелания"></tm-input>
     </tm-form-item>
   </tm-form>
   <div slot="footer" class="dialog-footer">
-    <tm-button type="primary" class="block__button-cont" @click="dialogFormVisible = false">Отправить</tm-button>
+    <tm-button type="primary" class="custom-datepicker__button" @click="dialogFormVisible = false">Отправить</tm-button>
   </div>
 </tm-dialog>
 
