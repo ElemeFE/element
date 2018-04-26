@@ -91,7 +91,8 @@
       @mouseleave.native="inputHovering = false"
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon">
-      <tm-icon slot="suffix"
+      <tm-icon v-if="showControlIcon"
+               slot="suffix"
                class="tm-select__caret tm-input__icon"
                :name="iconName"
                @click="handleIconClick">
@@ -183,6 +184,13 @@
           this.value !== undefined &&
           this.value !== '';
         return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
+      },
+      showControlIcon() {
+        const showCross = this.clearable &&
+          !this.selectDisabled &&
+          !this.multiple &&
+          this.value;
+        return showCross || this.showArrow;
       },
 
       debounce() {
@@ -277,7 +285,11 @@
       },
       collapseTags: Boolean,
       prefixIcon: String,
-      suffixIcon: String
+      suffixIcon: String,
+      showArrow: {
+        type: Boolean,
+        default: true
+      }
     },
 
     data() {
