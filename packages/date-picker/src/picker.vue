@@ -331,7 +331,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'cross'
+      default: 'cross-bold'
     },
     name: {
       default: '',

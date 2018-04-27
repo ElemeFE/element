@@ -24,7 +24,7 @@
             v-if="showClose"
             @click="handleClose">
             <tm-icon class="tm-dialog__close"
-                     name="cross"></tm-icon>
+                     name="cross-bold"></tm-icon>
           </button>
         </div>
         <div class="tm-dialog__body" v-if="rendered"><slot></slot></div>

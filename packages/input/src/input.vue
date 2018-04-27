@@ -56,7 +56,7 @@
             </tm-icon>
           </template>
           <tm-icon v-else
-                   name="cross"
+                   name="cross-bold"
                    class="tm-input__icon tm-input__clear"
                    @click="clear">
           </tm-icon>

@@ -56,7 +56,8 @@
 :::demo
 ```html
 <tm-form-group-item>
-  <tm-value-switcher 
+  <tm-value-switcher
+    size="extra-large"
     :fetch-suggestions="searchPlaces" 
     :suffix-icon-left="lIcon" 
     :suffix-icon-right="rIcon"

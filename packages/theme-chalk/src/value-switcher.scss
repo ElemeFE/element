@@ -13,6 +13,12 @@
     flex-grow: 0;
     flex-shrink: 0;
     padding: 0;
+    line-height: 1;
+    .tm-icon {
+      width: 24px;
+      height: 24px;
+      fill: $--color-pastel-gray;
+    }
   }
 
   @include e(autocomplete) {

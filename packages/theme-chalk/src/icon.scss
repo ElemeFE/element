@@ -32,8 +32,8 @@
   }
 
   @include m((success, error)) {
+    fill: none;
     > svg {
-      fill: none;
       stroke-dasharray: 1000;
       stroke-dashoffset: 0;
       stroke-width: 6;

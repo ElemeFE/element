@@ -18,9 +18,7 @@
     flex-grow: 0;
     flex-shrink: 0;
 
-    svg {
-      fill: $--color-pastel-gray;
-    }
+    fill: $--color-pastel-gray;
   }
 
   @include e(wrap) {

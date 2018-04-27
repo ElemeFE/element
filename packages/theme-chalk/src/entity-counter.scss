@@ -27,6 +27,7 @@
     flex-shrink: 0;
 
     @include m(left) {
+      padding-top: 0;
       border-right-color: $--entity-counter-border-color;
     }
 
@@ -38,12 +39,8 @@
 
   @include e(icon) {
     fill: $--entity-counter-border-color;
-    width: 14px;
-    height: 14px;
-    svg {
-      width: 100%;
-      height: 100%;
-    }
+    width: 24px;
+    height: 24px;
   }
 
   @include e(label) {
