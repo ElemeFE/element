@@ -10,6 +10,15 @@
 - Фикс по стилям в ValueSwitcher
 - Убрана стрелка popper у компонента Autocomplete
 - Фикс бордера у выбранного Radio Button
+- Добавлены иконки
+    - arrow-down-long
+    - book
+    - cup
+    - gym
+    - iron
+    - parking
+    - pet
+    - pillows
 
 *2018-04-26*
 
