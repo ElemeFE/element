@@ -1369,7 +1369,7 @@ Filter the table to find desired data.
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</el-tag>
       </template>
     </el-table-column>
   </el-table>

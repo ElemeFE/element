@@ -1408,7 +1408,7 @@
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === '家' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</el-tag>
       </template>
     </el-table-column>
   </el-table>
