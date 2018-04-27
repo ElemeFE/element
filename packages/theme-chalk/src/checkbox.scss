@@ -177,7 +177,7 @@
     }
     @include when(focus) { /*focus时 视觉上区分*/
       .tm-checkbox__inner {
-        border-color: $--checkbox-input-border-color-hover;
+        border-color: $--checkbox-checked-input-fill;
       }
     }
     @include when(indeterminate) {
