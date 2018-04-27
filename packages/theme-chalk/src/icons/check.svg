@@ -1,7 +1,6 @@
-<svg width="11px" height="9px" viewBox="0 0 11 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="icon/default/check" transform="translate(-3.000000, -4.000000)">
-            <polygon id="Shape" fill-rule="nonzero" points="6.66666667 12.92 3 9.25333333 4.2925 7.96083333 6.66666667 10.3258333 12.7075 4.285 14 5.58666667"></polygon>
-        </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+        <polygon fill-rule="nonzero" points="6.66666667 12.92 3 9.25333333 4.2925 7.96083333 6.66666667 10.3258333 12.7075 4.285 14 5.58666667"></polygon>
     </g>
 </svg>
