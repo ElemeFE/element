@@ -9,6 +9,7 @@
     - Добавлена возможность передавать данные в слоты `topBlock` и `bottomBlock`
 - Фикс по стилям в ValueSwitcher
 - Убрана стрелка popper у компонента Autocomplete
+- Фикс бордера у выбранного Radio Button
 
 *2018-04-26*
 
