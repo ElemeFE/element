@@ -122,7 +122,9 @@
 
     data() {
       return {
-        currentValue: this.value === undefined ? '' : this.value,
+        currentValue: this.value === undefined || this.value === null
+          ? ''
+          : this.value,
         textareaCalcStyle: {},
         prefixOffset: null,
         suffixOffset: null,
