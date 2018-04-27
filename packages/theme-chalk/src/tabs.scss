@@ -13,10 +13,10 @@
     right: 5px;
     top: 0;
 
-    svg {
-      font-size: 10px;
-      width: 10px;
-      height: 10px;
+    .tm-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
       fill: $--color-pastel-gray;
     }
   }
@@ -210,7 +210,7 @@
           padding-left: 13px;
           padding-right: 13px;
 
-          & .tm-icon--cross {
+          & .tm-icon--cross-bold {
             width: 14px;
           }
         }
@@ -222,7 +222,7 @@
           padding-left: 20px;
           padding-right: 20px;
 
-          .tm-icon--cross {
+          .tm-icon--cross-bold {
             width: 14px;
           }
         }

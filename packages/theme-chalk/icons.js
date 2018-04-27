@@ -23,6 +23,7 @@ import CirclePlus from '../../packages/theme-chalk/src/icons/circle-plus.svg';
 import City from '../../packages/theme-chalk/src/icons/city.svg';
 import Copy from '../../packages/theme-chalk/src/icons/copy.svg';
 import CreditCard from '../../packages/theme-chalk/src/icons/credit-card.svg';
+import CrossBold from '../../packages/theme-chalk/src/icons/cross-bold.svg';
 import Cross from '../../packages/theme-chalk/src/icons/cross.svg';
 import Cup from '../../packages/theme-chalk/src/icons/cup.svg';
 import DisabledPerson from '../../packages/theme-chalk/src/icons/disabled-person.svg';
@@ -107,6 +108,7 @@ module.exports = {
   City,
   Copy,
   CreditCard,
+  CrossBold,
   Cross,
   Cup,
   DisabledPerson,
