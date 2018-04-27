@@ -5,6 +5,7 @@
 *2018-04-27*
 
 - Добавлена возможность передать placeholder в компонент DatePicker Joined
+- Фикс по стилям в ValueSwitcher
 
 *2018-04-26*
 

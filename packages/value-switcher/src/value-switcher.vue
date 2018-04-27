@@ -16,6 +16,7 @@
       </template>
     </tm-autocomplete>
     <tm-button class="tm-value-switcher__btn"
+               :size="size"
                @click="onSwitch">
       <tm-icon name="arrows-reverse"></tm-icon>
     </tm-button>
