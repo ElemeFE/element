@@ -53,11 +53,6 @@
       margin-left: 5px;
       vertical-align: top;
     }
-    svg {
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-    }
   }
 
   @include when(plain) {
@@ -130,13 +125,20 @@
   @include when(circle) {
     padding: 0;
     text-align: center;
-    line-height: 40px;
+    line-height: 38px;
     width: 40px;
     min-width: auto;
     border-radius: $--border-radius-circle;
+    .tm-icon {
+      height: 24px;
+      width: 24px;
+      font-size: 24px;
+      line-height: 0;
+    }
   }
   @include when(bold-border) {
     border-width: 2px;
+    line-height: 36px;
   }
   @include m(default) {
     @include button-variant($--button-default-color, $--button-default-fill, $--button-default-border);
