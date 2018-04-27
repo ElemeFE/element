@@ -15,14 +15,17 @@
   box-shadow: $--box-shadow-light;
   border-radius: $--border-radius-base;
 
+  .tm-scrollbar {
+    border: 1px solid $--border-color-light;
+    border-radius: $--border-radius-base;
+  }
+
   @include e(wrap) {
     max-height: 280px;
     padding: 10px 0;
     box-sizing: border-box;
     overflow: auto;
     background-color: $--color-white;
-    border: 1px solid $--border-color-light;
-    border-radius: $--border-radius-base;
   }
 
   @include e(list) {
@@ -57,6 +60,12 @@
 
     &.divider:last-child {
       margin-bottom: -6px;
+    }
+  }
+
+  &.tm-popper {
+    .popper__arrow {
+      display: none;
     }
   }
 

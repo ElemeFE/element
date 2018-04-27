@@ -6,6 +6,7 @@
 
 - Добавлена возможность передать placeholder в компонент DatePicker Joined
 - Фикс по стилям в ValueSwitcher
+- Убрана стрелка popper у компонента Autocomplete
 
 *2018-04-26*
 
