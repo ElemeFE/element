@@ -1,7 +1,3 @@
-<svg width="22px" height="15px" viewBox="0 0 22 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="icon/default/hotel" transform="translate(-1.000000, -5.000000)">
-            <path d="M7,13 C8.66,13 10,11.66 10,10 C10,8.34 8.66,7 7,7 C5.34,7 4,8.34 4,10 C4,11.66 5.34,13 7,13 Z M19,7 L11,7 L11,14 L3,14 L3,5 L1,5 L1,20 L3,20 L3,17 L21,17 L21,20 L23,20 L23,11 C23,8.79 21.21,7 19,7 Z" id="Shape" fill-rule="nonzero"></path>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill-rule="nonzero" d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/>
 </svg>

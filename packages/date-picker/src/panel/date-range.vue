@@ -7,6 +7,7 @@
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]">
+      <slot name="topBlock" class="tm-picker-panel__top-block"></slot>
       <div class="tm-picker-panel__body-wrapper">
         <slot name="sidebar" class="tm-picker-panel__sidebar"></slot>
         <div class="tm-picker-panel__sidebar" v-if="shortcuts">
@@ -148,6 +149,7 @@
           </div>
         </div>
       </div>
+      <slot name="bottomBlock" class="tm-picker-panel__bottom-block"></slot>
       <div class="tm-picker-panel__footer" v-if="showTime">
         <tm-button
           size="mini"

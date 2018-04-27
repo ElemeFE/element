@@ -174,6 +174,10 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
   <tm-button type="secondary" icon="check" circle approve></tm-button>
   <tm-button type="secondary" icon="cross" circle cancel></tm-button>
 </div>
+<div>
+  <tm-button type="secondary" icon="check" circle approve bold-border></tm-button>
+  <tm-button type="secondary" icon="cross" circle cancel bold-border></tm-button>
+</div>
 <div style="margin: 20px 0">
   <tm-button type="default" icon="cross" size="mini">Закрыть карту</tm-button>
   <tm-button type="secondary" icon="location" size="mini">Поиск на карте</tm-button>
@@ -236,13 +240,14 @@ Besides default size, Button component provides three additional sizes for you t
   <tm-button size="small">Small</tm-button>
   <tm-button size="mini">Mini</tm-button>
   <tm-button size="large">Large</tm-button>
+  <tm-button size="extra-large">Extra Large</tm-button>
 </div>
 <div style="margin-top: 20px">
   <tm-button round>Default</tm-button>
   <tm-button size="medium" round>Medium</tm-button>
   <tm-button size="small" round>Small</tm-button>
   <tm-button size="mini" round>Mini</tm-button>
-  <tm-button size="large" round>Large</tm-button>
+  <tm-button size="extra-large" round>Extra Large</tm-button>
 </div>
 ```
 :::

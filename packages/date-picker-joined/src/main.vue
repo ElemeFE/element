@@ -3,13 +3,21 @@
     <tm-input
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon"
+      :size="size"
       readonly
       v-model="dateLabel"
-      placeholder="Период пребывания"></tm-input>
+      :placeholder="placeholder"></tm-input>
     <tm-date-picker
       ref="originPicker"
       :type="type"
-      v-model="date"></tm-date-picker>
+      v-model="date">
+      <template slot="topBlock">
+        <slot name="topBlock"></slot>
+      </template>
+      <template slot="bottomBlock">
+        <slot name="bottomBlock"></slot>
+      </template>
+    </tm-date-picker>
   </div>
 </template>
 
@@ -43,6 +51,14 @@ export default {
     type: {
       type: String,
       default: 'daterange'
+    },
+    size: {
+      type: String,
+      default: 'large'
+    },
+    placeholder: {
+      type: String,
+      default: 'Дата'
     }
   },
   computed: {

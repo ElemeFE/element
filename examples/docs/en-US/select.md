@@ -103,6 +103,7 @@
         value10: [],
         value11: [],
         value12: [],
+        value13: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -702,6 +703,51 @@ Create and select new items that are not included in select options
 ```
 :::
 
+
+### With icons extra large
+:::demo 
+```html
+<template>
+  <tm-select
+    size="extra-large"
+    prefix-icon="item-sort"
+    suffix-icon="location"
+    v-model="value13"
+    clearable
+    allow-create
+    default-first-option
+    placeholder="Choose">
+    <tm-option
+      v-for="item in options5"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </tm-option>
+  </tm-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options5: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        value10: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 :::tip
 If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
 :::
@@ -712,7 +758,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
-| size | size of Input | string | large/small/mini | — |
+| size | size of Input | string | large/small/mini/extra-large | — |
 | clearable | whether single select can be cleared | boolean | — | false |
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
@@ -732,7 +778,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 | prefix-icon | prefix icon class | string | — | — |
-| suffix-icon | suffix icon class | string | — | arrow-down |
+| suffix-icon | suffix icon class | string | — | — |
+| show-arrow | toggle carret show in the select input | boolean | — | true |
 
 ### Select Events
 | Event Name | Description | Parameters |

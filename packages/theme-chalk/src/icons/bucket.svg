@@ -1,7 +1,6 @@
-<svg width="9px" height="11px" viewBox="0 0 9 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="icon/default/delete" transform="translate(-3.000000, -2.000000)">
-            <path d="M5,13 L10,13 C10.5522847,13 11,12.5522847 11,12 L11,5 L4,5 L4,12 C4,12.5522847 4.44771525,13 5,13 Z M12,3 L9.3,3 L9.3,2 L5.7,2 L5.7,3 L3,3 L3,4 L12,4 L12,3 Z" id="delete" fill-rule="nonzero"></path>
-        </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+        <path d="M5,13 L10,13 C10.5522847,13 11,12.5522847 11,12 L11,5 L4,5 L4,12 C4,12.5522847 4.44771525,13 5,13 Z M12,3 L9.3,3 L9.3,2 L5.7,2 L5.7,3 L3,3 L3,4 L12,4 L12,3 Z" fill-rule="nonzero"></path>
     </g>
 </svg>

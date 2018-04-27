@@ -291,6 +291,7 @@ $--alert-icon-large-size: 28px !default;
 -------------------------- */
 $--msgbox-width: 430px !default;
 $--msgbox-border-radius: 8px !default;
+$--msgbox-title-font-size: 17px !default;
 $--msgbox-font-size: $--font-size-large !default;
 $--msgbox-content-font-size: $--font-size-base !default;
 $--msgbox-content-color: $--color-text-regular !default;
@@ -436,7 +437,7 @@ $--tab-flow-item-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04) !default;
 /* Button
 -------------------------- */
 $--button-font-size: 14px !default;
-$--button-font-weight: $--font-weight-primary !default;
+$--button-font-weight: 500 !default;
 $--button-border-radius: $--border-radius-base !default;
 $--button-padding-vertical: 12px !default;
 $--button-padding-horizontal: 20px !default;
@@ -520,7 +521,7 @@ $--dialog-background-color: $--color-primary-light-4 !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 $--dialog-close-color: $--color-text-primary !default;
 $--dialog-close-hover-color: $--color-text-regular !default;
-$--dialog-title-font-size: 22px !default;
+$--dialog-title-font-size: 17px !default;
 $--dialog-font-size: 14px !default;
 $--dialog-line-height: normal !default;
 $--dialog-padding-primary: 20px !default;
@@ -555,7 +556,7 @@ $--pagination-hover-color: $--color-white !default;
 $--popover-fill: $--color-white !default;
 $--popover-font-size: $--font-size-base !default;
 $--popover-border-color: $--border-color-lighter !default;
-$--popover-arrow-size: 8px !default;
+$--popover-arrow-size: 6px !default;
 $--popover-padding: 24px 27px 15px 26px !default;
 $--popover-padding-large: 18px 20px !default;
 $--popover-title-font-size: 16px !default;

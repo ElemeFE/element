@@ -120,7 +120,7 @@
     box-shadow: none;
 
     .tm-radio-button__orig-radio:checked + .tm-radio-button__inner {
-      border: none;
+      border-color: $--color-primary;
       background-color: $--color-primary;
       box-shadow: none;
     }

@@ -143,8 +143,12 @@
       }
     }
 
-    &.available:hover {
-      color: $--datepicker-text-hover-color;
+    &:not(.start-date):not(.end-date).available:hover {
+      color: $--color-white;
+
+      span {
+        background-color: rgba($--datepicker-text-hover-color, 0.5);
+      }
     }
 
     &.in-range {

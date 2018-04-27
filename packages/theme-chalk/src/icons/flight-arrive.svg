@@ -1,7 +1,5 @@
-<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="icon/hover/airplane_down" transform="translate(-2.000000, -2.000000)">
-            <path d="M2.5,19 L21.5,19 L21.5,21 L2.5,21 L2.5,19 Z M9.68,13.27 L14.03,14.43 L19.34,15.85 C20.14,16.06 20.96,15.59 21.18,14.79 C21.39,13.99 20.92,13.17 20.12,12.95 L14.81,11.53 L12.05,2.51 L10.12,2 L10.12,10.28 L5.15,8.95 L4.22,6.63 L2.77,6.24 L2.77,11.41 L4.37,11.84 L9.68,13.27 Z" id="Shape" fill-rule="nonzero"></path>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g fill-rule="evenodd">
+        <path fill-rule="nonzero" d="M2.5 19h19v2h-19v-2zm7.18-5.73l4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.8-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.02L10.12 2v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43 5.31 1.43z"/>
     </g>
 </svg>

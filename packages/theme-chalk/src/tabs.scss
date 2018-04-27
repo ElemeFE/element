@@ -17,7 +17,7 @@
       font-size: 10px;
       width: 10px;
       height: 10px;
-      fill: $--color-taupe-gray;
+      fill: $--color-pastel-gray;
     }
   }
   @include e(active-bar) {
@@ -128,8 +128,14 @@
       }
 
       &:hover {
-        background-color: $--color-text-placeholder;
-        color: $--color-white;
+        svg {
+          fill: $--color-taupe-gray;
+        }
+      }
+      &:active {
+        svg {
+          fill: $--color-blueberry;
+        }
       }
     }
 

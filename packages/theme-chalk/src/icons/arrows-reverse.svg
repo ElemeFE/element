@@ -1,8 +1,5 @@
-<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="icon/hover/revers" transform="translate(-3.000000, -3.000000)">
-            <polygon fill-rule="nonzero" points="16 3 14.59 4.41 17.17 7 11 7 11 9 17.17 9 14.59 11.59 16 13 21 8"></polygon>
-            <polygon fill-rule="nonzero" transform="translate(8.000000, 16.000000) scale(-1, 1) translate(-8.000000, -16.000000) " points="8 11 6.59 12.41 9.17 15 3 15 3 17 9.17 17 6.59 19.59 8 21 13 16"></polygon>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g fill-rule="evenodd">
+        <path fill-rule="nonzero" d="M16 3l-1.41 1.41L17.17 7H11v2h6.17l-2.58 2.59L16 13l5-5zM8 11l1.41 1.41L6.83 15H13v2H6.83l2.58 2.59L8 21l-5-5z"/>
     </g>
 </svg>

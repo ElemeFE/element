@@ -31,23 +31,29 @@
   }
 
   @include e(header) {
-    padding: $--dialog-padding-primary;
-    padding-top: 40px;
-    padding-bottom: 10px;
+    padding: 41px 20px 13px 20px;
   }
 
   @include e(headerbtn) {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 0;
+    top: 9px;
+    right: 9px;
+    padding: 4px;
     background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
 
     .tm-icon {
+      display: block;
+      height: 10px;
+      width: 10px;
       fill: $--dialog-close-color;
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     &:focus, &:hover {
@@ -61,12 +67,12 @@
     margin: 0;
     line-height: $--dialog-line-height;
     font-size: $--dialog-title-font-size;
-    font-weight: bold;
+    font-weight: normal;
     color: $--color-text-regular;
   }
 
   @include e(body) {
-    padding: 10px 20px;
+    padding: 10px 40px;
     color: $--color-text-primary;
     line-height: $--dialog-line-height;
     font-size: $--dialog-font-size;
@@ -78,9 +84,7 @@
   }
 
   @include e(footer) {
-    padding: $--dialog-padding-primary;
-    padding-top: 10px;
-    padding-bottom: 30px;
+    padding: 10px 40px 40px;
     text-align: right;
     box-sizing: border-box;
   }
@@ -111,16 +115,15 @@
       }
     }
     @include e(headerbtn) {
-      right: -13px;
-      margin-right: -12px;
-      top: 0;
+      right: -30px;
+      top: -1px;
 
-      .tm-icon {
-        svg {
-          width: 12px;
-          height: 12px;
-        }
-      }
+      //.tm-icon {
+      //  svg {
+      //    width: 12px;
+      //    height: 12px;
+      //  }
+      //}
       &:hover {
         .tm-icon {
           fill: #ffffff;
@@ -144,15 +147,14 @@
         margin-bottom: 0;
       }
       &__headerbtn {
-        top: 5px;
+        top: 8px;
         right: 10px;
+        padding: 0;
         margin: 0;
 
         .tm-icon {
-          svg {
-            width: 14px;
-            height: 14px;
-          }
+          width: 14px;
+          height: 14px;
         }
       }
       &__body {

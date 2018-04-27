@@ -88,16 +88,14 @@
       @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
-      @mouseleave.native="inputHovering = false">
-      <tm-icon slot="suffix"
+      @mouseleave.native="inputHovering = false"
+      :suffix-icon="suffixIcon"
+      :prefix-icon="prefixIcon">
+      <tm-icon v-if="showControlIcon"
+               slot="suffix"
                class="tm-select__caret tm-input__icon"
                :name="iconName"
                @click="handleIconClick">
-      </tm-icon>
-      <tm-icon slot="prefix"
-               v-if="prefixIcon"
-               class="tm-select__caret"
-               :name="prefixIcon">
       </tm-icon>
     </tm-input>
     <transition
@@ -182,11 +180,17 @@
       iconName() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
-          this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'cross' : (this.remote && this.filterable ? '' : this.suffixIcon);
+        return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
+      },
+      showControlIcon() {
+        const showCross = this.clearable &&
+          !this.selectDisabled &&
+          !this.multiple &&
+          this.value;
+        return showCross || this.showArrow;
       },
 
       debounce() {
@@ -280,11 +284,12 @@
         default: 'value'
       },
       collapseTags: Boolean,
-      suffixIcon: {
-        type: String,
-        default: 'arrow-down'
-      },
-      prefixIcon: String
+      prefixIcon: String,
+      suffixIcon: String,
+      showArrow: {
+        type: Boolean,
+        default: true
+      }
     },
 
     data() {

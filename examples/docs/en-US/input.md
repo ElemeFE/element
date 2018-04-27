@@ -673,7 +673,7 @@ Search data from server-side.
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
-|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
+|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini / extra-large | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
 | suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |

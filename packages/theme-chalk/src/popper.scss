@@ -13,13 +13,14 @@
   }
 
   .popper__arrow {
-    border-width: $--popover-arrow-size;
-    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03))
+    height: $--popover-arrow-size;
+    width: $--popover-arrow-size;
   }
 
   .popper__arrow::after {
     content: " ";
     border-width: $--popover-arrow-size;
+    border-color: #fff #fff transparent transparent;
   }
 
   &[x-placement^="top"] {
@@ -27,17 +28,14 @@
   }
 
   &[x-placement^="top"] .popper__arrow {
-    bottom: -$--popover-arrow-size;
+    bottom: -#{$--popover-arrow-size + $--popover-arrow-size / 2};
     left: 50%;
-    margin-right: #{$--tooltip-arrow-size / 2};
-    border-top-color: $--popover-border-color;
-    border-bottom-width: 0;
+    margin-right: $--tooltip-arrow-size;
 
     &::after {
-      bottom: 1px;
-      margin-left: -$--popover-arrow-size;
-      border-top-color: $--popover-fill;
-      border-bottom-width: 0;
+      bottom: 0;
+      transform: rotate(135deg);
+      box-shadow: 3px -3px 3px -1px rgba(0,0,0,0.14);
     }
   }
 
@@ -46,17 +44,14 @@
   }
 
   &[x-placement^="bottom"] .popper__arrow {
-    top: -$--popover-arrow-size;
+    top: -#{$--popover-arrow-size + $--popover-arrow-size / 2};
     left: 50%;
     margin-right: #{$--tooltip-arrow-size / 2};
-    border-top-width: 0;
-    border-bottom-color: $--popover-border-color;
 
     &::after {
-      top: 1px;
-      margin-left: -$--popover-arrow-size;
-      border-top-width: 0;
-      border-bottom-color: $--popover-fill;
+      top: 0;
+      transform: rotate(-45deg);
+      box-shadow: 2px -2px 3px -1px rgba(0, 0, 0, 0.19);
     }
   }
 
@@ -66,16 +61,13 @@
 
   &[x-placement^="right"] .popper__arrow {
     top: 50%;
-    left: -$--popover-arrow-size;
-    margin-bottom: #{$--tooltip-arrow-size / 2};
-    border-right-color: $--popover-border-color;
-    border-left-width: 0;
+    left: -#{$--popover-arrow-size + $--popover-arrow-size / 2};
+    margin-top: -$--tooltip-arrow-size;
 
     &::after {
-      bottom: -$--popover-arrow-size;
-      left: 1px;
-      border-right-color: $--popover-fill;
-      border-left-width: 0;
+      left: 0;
+      transform: rotate(-135deg);
+      box-shadow: 3px -3px 3px -1px rgba(0,0,0,0.14);
     }
   }
 
@@ -85,17 +77,13 @@
 
   &[x-placement^="left"] .popper__arrow {
     top: 50%;
-    right: -$--popover-arrow-size;
-    margin-bottom: #{$--tooltip-arrow-size / 2};
-    border-right-width: 0;
-    border-left-color: $--popover-border-color;
+    right: -#{$--popover-arrow-size + $--popover-arrow-size / 2};
+    margin-top: -$--tooltip-arrow-size;
 
     &::after {
-      right: 1px;
-      bottom: -$--popover-arrow-size;
-      margin-left: -$--popover-arrow-size;
-      border-right-width: 0;
-      border-left-color: $--popover-fill;
+      right: 0;
+      transform: rotate(45deg);
+      box-shadow: 3px -3px 3px -1px rgba(0,0,0,0.14);
     }
   }
 }

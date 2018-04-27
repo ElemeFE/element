@@ -37,6 +37,16 @@
       right: 7px;
     }
 
+    .tm-icon {
+      fill: $--color-pastel-gray;
+      transition: fill 0.1s ease-in-out 0s;
+    }
+    &:hover {
+      .tm-icon {
+        fill: #ffffff;
+      }
+    }
+
     &:focus,
     &:hover {
       background-color: $--carousel-arrow-hover-background;
@@ -44,10 +54,6 @@
 
     & i {
       cursor: pointer;
-    }
-
-    .tm-icon {
-      fill: $--color-pastel-gray;
     }
   }
 

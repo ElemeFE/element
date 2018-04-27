@@ -34,10 +34,24 @@
 ```
 :::
 
+### Extra large
+
+:::demo 
+```html
+<tm-date-picker-joined
+  size="extra-large"
+  type="date"
+  v-model="dateSingle"
+  suffix-icon="calendar"></tm-date-picker-joined>
+```
+:::
+
 
 ### Datepicker Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | suffix-icon | suffix-icon | string | — | — |
 | prefix-icon | prefix-icon | string | — | — |
+| size | input size | string | — | — |
+| placeholder | input placeholder | string | — | — |
 | type | datepicker type | string | date, daterange | daterange |
