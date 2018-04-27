@@ -158,14 +158,14 @@
 
   @include e(icon) {
     height: 100%;
-    width: 25px;
+    width: 16px;
     text-align: center;
     transition: all .3s;
     line-height: $--input-height+4;
 
     svg {
-      width: $--icon-size-base;
-      height: $--icon-size-base;
+      width: $--icon-size-base+2;
+      height: $--icon-size-base+2;
     }
   }
 
@@ -241,9 +241,9 @@
       height: 48px;
 
       svg {
-        height: 20px;
-        width: 20px;
-        font-size: 20px;
+        height: 24px;
+        width: 24px;
+        font-size: 24px;
       }
     }
   }

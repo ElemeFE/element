@@ -1,7 +1,5 @@
-<svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
-        <g id="icon/hover/selector_down" transform="translate(-6.000000, -8.000000)">
-            <polygon fill-rule="nonzero" points="7.41 8 12 12.58 16.59 8 18 9.41 12 15.41 6 9.41"></polygon>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <g fill-rule="evenodd" transform="translate(-4, -3)">
+        <path fill-rule="nonzero" d="M7.41 8L12 12.58 16.59 8 18 9.41l-6 6-6-6z"/>
     </g>
 </svg>

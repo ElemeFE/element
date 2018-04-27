@@ -55,12 +55,12 @@
     & .tm-select__caret {
       fill: $--select-icon-color;
       font-size: $--select-input-font-size;
-      line-height: 42px;
+      line-height: 46px;
       cursor: pointer;
 
       svg {
-        width: 12px;
-        height: 12px;
+        width: 16px;
+        height: 16px;
         transition: transform .3s;
         transform: rotateZ(0deg);
 

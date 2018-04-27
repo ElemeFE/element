@@ -32,6 +32,7 @@
 
     @include m(right) {
       border-left-color: $--entity-counter-border-color;
+      padding-top: 0;
     }
   }
 

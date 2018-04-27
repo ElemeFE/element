@@ -51,6 +51,10 @@
       display: block;
       margin: 0 auto 10px;
     }
+    svg {
+        width: 26px;
+        height: 26px;
+    }
     .icon-name {
       display: block;
       padding: 0 3px;

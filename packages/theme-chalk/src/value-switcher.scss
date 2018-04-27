@@ -4,6 +4,7 @@
 
 @include b(value-switcher) {
   display: flex;
+  align-items: center;
 
   @include e(btn) {
     width: 48px;
