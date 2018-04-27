@@ -3,6 +3,7 @@ import Aeroexpress from '../../packages/theme-chalk/src/icons/aeroexpress.svg';
 import Airplane from '../../packages/theme-chalk/src/icons/airplane.svg';
 import ArrowBack from '../../packages/theme-chalk/src/icons/arrow-back.svg';
 import ArrowBoth from '../../packages/theme-chalk/src/icons/arrow-both.svg';
+import ArrowDownLong from '../../packages/theme-chalk/src/icons/arrow-down-long.svg';
 import ArrowDown from '../../packages/theme-chalk/src/icons/arrow-down.svg';
 import ArrowLeft from '../../packages/theme-chalk/src/icons/arrow-left.svg';
 import ArrowNext from '../../packages/theme-chalk/src/icons/arrow-next.svg';
@@ -10,6 +11,7 @@ import ArrowRight from '../../packages/theme-chalk/src/icons/arrow-right.svg';
 import ArrowsReverse from '../../packages/theme-chalk/src/icons/arrows-reverse.svg';
 import Bath from '../../packages/theme-chalk/src/icons/bath.svg';
 import Bell from '../../packages/theme-chalk/src/icons/bell.svg';
+import Book from '../../packages/theme-chalk/src/icons/book.svg';
 import Bucket from '../../packages/theme-chalk/src/icons/bucket.svg';
 import Calendar from '../../packages/theme-chalk/src/icons/calendar.svg';
 import Car from '../../packages/theme-chalk/src/icons/car.svg';
@@ -22,6 +24,7 @@ import City from '../../packages/theme-chalk/src/icons/city.svg';
 import Copy from '../../packages/theme-chalk/src/icons/copy.svg';
 import CreditCard from '../../packages/theme-chalk/src/icons/credit-card.svg';
 import Cross from '../../packages/theme-chalk/src/icons/cross.svg';
+import Cup from '../../packages/theme-chalk/src/icons/cup.svg';
 import DisabledPerson from '../../packages/theme-chalk/src/icons/disabled-person.svg';
 import DotsHorizontal from '../../packages/theme-chalk/src/icons/dots-horizontal.svg';
 import DotsVertical from '../../packages/theme-chalk/src/icons/dots-vertical.svg';
@@ -33,9 +36,11 @@ import Files from '../../packages/theme-chalk/src/icons/files.svg';
 import FlightArrive from '../../packages/theme-chalk/src/icons/flight-arrive.svg';
 import FlightDepart from '../../packages/theme-chalk/src/icons/flight-depart.svg';
 import FullStar from '../../packages/theme-chalk/src/icons/full-star.svg';
+import Gym from '../../packages/theme-chalk/src/icons/gym.svg';
 import HalfStar from '../../packages/theme-chalk/src/icons/half-star.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
 import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
+import Iron from '../../packages/theme-chalk/src/icons/iron.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
 import ItemSort from '../../packages/theme-chalk/src/icons/item-sort.svg';
 import KnifeFork from '../../packages/theme-chalk/src/icons/knife-fork.svg';
@@ -46,15 +51,19 @@ import ManWoman from '../../packages/theme-chalk/src/icons/man-woman.svg';
 import Message from '../../packages/theme-chalk/src/icons/message.svg';
 import Minus from '../../packages/theme-chalk/src/icons/minus.svg';
 import NoSmoking from '../../packages/theme-chalk/src/icons/no-smoking.svg';
+import Parking from '../../packages/theme-chalk/src/icons/parking.svg';
 import Pencil from '../../packages/theme-chalk/src/icons/pencil.svg';
 import Person from '../../packages/theme-chalk/src/icons/person.svg';
+import Pet from '../../packages/theme-chalk/src/icons/pet.svg';
 import Phone from '../../packages/theme-chalk/src/icons/phone.svg';
+import Pillows from '../../packages/theme-chalk/src/icons/pillows.svg';
 import Plus from '../../packages/theme-chalk/src/icons/plus.svg';
 import Pocket from '../../packages/theme-chalk/src/icons/pocket.svg';
 import Repeat from '../../packages/theme-chalk/src/icons/repeat.svg';
 import SearchSmall from '../../packages/theme-chalk/src/icons/search-small.svg';
 import Search from '../../packages/theme-chalk/src/icons/search.svg';
 import SingleBed from '../../packages/theme-chalk/src/icons/single-bed.svg';
+import Snow2 from '../../packages/theme-chalk/src/icons/snow-2.svg';
 import Snow from '../../packages/theme-chalk/src/icons/snow.svg';
 import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
@@ -78,6 +87,7 @@ module.exports = {
   Airplane,
   ArrowBack,
   ArrowBoth,
+  ArrowDownLong,
   ArrowDown,
   ArrowLeft,
   ArrowNext,
@@ -85,6 +95,7 @@ module.exports = {
   ArrowsReverse,
   Bath,
   Bell,
+  Book,
   Bucket,
   Calendar,
   Car,
@@ -97,6 +108,7 @@ module.exports = {
   Copy,
   CreditCard,
   Cross,
+  Cup,
   DisabledPerson,
   DotsHorizontal,
   DotsVertical,
@@ -108,9 +120,11 @@ module.exports = {
   FlightArrive,
   FlightDepart,
   FullStar,
+  Gym,
   HalfStar,
   Hotel,
   Insurance,
+  Iron,
   ItemList,
   ItemSort,
   KnifeFork,
@@ -121,15 +135,19 @@ module.exports = {
   Message,
   Minus,
   NoSmoking,
+  Parking,
   Pencil,
   Person,
+  Pet,
   Phone,
+  Pillows,
   Plus,
   Pocket,
   Repeat,
   SearchSmall,
   Search,
   SingleBed,
+  Snow2,
   Snow,
   Star,
   StatsPie,
