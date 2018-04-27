@@ -7,6 +7,7 @@
 @include b(button) {
   display: inline-block;
   line-height: 1;
+  height: 40px;
   white-space: nowrap;
   cursor: pointer;
   background: $--button-default-fill;
@@ -25,7 +26,7 @@
     margin-left: 10px;
   }
 
-  @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
+  @include button-size(0, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
 
   &:hover,
   &:focus {
@@ -45,7 +46,9 @@
   }
 
   & [class*="tm-icon"] {
-    width: $--icon-size-base;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
     & + span {
       margin-left: 5px;
       vertical-align: top;
@@ -120,9 +123,22 @@
     }
   }
   @include when(circle) {
-    padding: 11px 12px;
+    padding: 0;
+    text-align: center;
+    line-height: 38px;
+    width: 40px;
     min-width: auto;
     border-radius: $--border-radius-circle;
+    .tm-icon {
+      height: 24px;
+      width: 24px;
+      font-size: 24px;
+      line-height: 0;
+    }
+  }
+  @include when(bold-border) {
+    border-width: 2px;
+    line-height: 36px;
   }
   @include m(default) {
     @include button-variant($--button-default-color, $--button-default-fill, $--button-default-border);
@@ -159,9 +175,8 @@
     }
   }
   @include m(primary) {
-    padding-top: 16px;
-    padding-bottom: 16px;
     min-width: 226px;
+    height: 48px;
     @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
 
     &:hover,
@@ -368,9 +383,17 @@
       fill: $--button-info-color;
     }
   }
+  @include m(extra-large) {
+    min-width: 322px;
+    height: 48px;
+    line-height: 48px;
+    @include button-size(0, 27px, 15px, $--button-large-border-radius);
+  }
   @include m(large) {
     min-width: 322px;
-    @include button-size($--button-large-padding-vertical, $--button-large-padding-horizontal, $--button-large-font-size, $--button-large-border-radius);
+    height: 40px;
+    line-height: 40px;
+    @include button-size(0, $--button-large-padding-horizontal, $--button-large-font-size, $--button-large-border-radius);
   }
   @include m(medium) {
     min-width: 226px;

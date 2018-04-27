@@ -18,7 +18,8 @@
         'is-cancel': cancel,
         'is-remove': remove,
         'is-search': search,
-        'is-icon': icon
+        'is-icon': icon,
+        'is-bold-border': boldBorder
       }
     ]"
   >
@@ -60,7 +61,8 @@
       approve: Boolean,
       cancel: Boolean,
       remove: Boolean,
-      search: Boolean
+      search: Boolean,
+      boldBorder: Boolean
     },
 
     computed: {
