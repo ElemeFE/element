@@ -19,6 +19,7 @@
     - parking
     - pet
     - pillows
+    - snow-2
 
 *2018-04-26*
 
