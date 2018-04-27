@@ -6,7 +6,7 @@
       :size="size"
       readonly
       v-model="dateLabel"
-      placeholder="Период пребывания"></tm-input>
+      :placeholder="placeholder"></tm-input>
     <tm-date-picker
       ref="originPicker"
       :type="type"
@@ -48,6 +48,10 @@ export default {
     size: {
       type: String,
       default: 'large'
+    },
+    placeholder: {
+      type: String,
+      default: 'Дата'
     }
   },
   computed: {

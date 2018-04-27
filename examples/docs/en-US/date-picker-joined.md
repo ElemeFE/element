@@ -52,5 +52,6 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | suffix-icon | suffix-icon | string | — | — |
 | prefix-icon | prefix-icon | string | — | — |
-| size | size | string | — | — |
+| size | input size | string | — | — |
+| placeholder | input placeholder | string | — | — |
 | type | datepicker type | string | date, daterange | daterange |
