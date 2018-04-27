@@ -15,7 +15,7 @@
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease"
     >
-      <i :class="`tm-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
+      <tm-icon :name="controlsAtRight ? 'arrow-down' : 'minus'"/>
     </span>
     <span
       class="tm-input-number__increase"
@@ -25,7 +25,7 @@
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase"
     >
-      <i :class="`tm-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
+      <tm-icon :name="controlsAtRight ? 'arrow-down' : 'plus'"/>
     </span>
     <tm-input
       ref="input"

@@ -49,6 +49,9 @@
     right: 1px;
     border-radius: 0 $--border-radius-base $--border-radius-base 0;
     border-left: $--border-base;
+    .tm-icon {
+      transform: rotate(180deg);
+    }
   }
 
   @include e(decrease) {
@@ -96,6 +99,11 @@
         transform: scale(.9);
       }
     }
+    @include e(increase) {
+      [class*=tm-icon] {
+        transform: rotate(180deg) scale(.9);
+      }
+    }
 
     .tm-input__inner {
       padding-left: #{$--input-small-height + 7};
@@ -113,6 +121,11 @@
 
       [class*=tm-icon] {
         transform: scale(.8);
+      }
+    }
+    @include e(increase) {
+      [class*=tm-icon] {
+        transform: rotate(180deg) scale(.8);
       }
     }
 
@@ -141,6 +154,11 @@
 
       [class*=tm-icon] {
         transform: scale(.8);
+      }
+    }
+    @include e(increase) {
+      [class*=tm-icon] {
+        transform: rotate(180deg) scale(.8);
       }
     }
 
