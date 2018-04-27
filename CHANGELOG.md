@@ -4,7 +4,9 @@
 
 *2018-04-27*
 
-- Добавлена возможность передать placeholder в компонент DatePicker Joined
+- Правки по DatePicker Joined
+    - Добавлена возможность передать placeholder
+    - Добавлена возможность передавать данные в слоты `topBlock` и `bottomBlock`
 - Фикс по стилям в ValueSwitcher
 - Убрана стрелка popper у компонента Autocomplete
 

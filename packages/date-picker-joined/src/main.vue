@@ -10,7 +10,14 @@
     <tm-date-picker
       ref="originPicker"
       :type="type"
-      v-model="date"></tm-date-picker>
+      v-model="date">
+      <template slot="topBlock">
+        <slot name="topBlock"></slot>
+      </template>
+      <template slot="bottomBlock">
+        <slot name="bottomBlock"></slot>
+      </template>
+    </tm-date-picker>
   </div>
 </template>
 
