@@ -8,6 +8,7 @@
       'is-disabled': disabled
     }"
     @click="handleClick"
+    @click.right="handleRightClick"
     @mouseenter="onMouseEnter"
     @focus="onMouseEnter"
     @blur="onMouseLeave"
@@ -98,6 +99,9 @@
           this.dispatch('ElMenu', 'item-click', this);
           this.$emit('click', this);
         };
+      },
+      handleRightClick() {
+        this.$emit('contextmenu', this);
       }
     },
     created() {
