@@ -18,9 +18,9 @@
         </div>
         <div class="tm-picker-panel__body">
           <div class="tm-picker-panel__switch">
-            <tm-radio-group v-model="radio11">
-              <tm-radio-button label="Туда-обратно"></tm-radio-button>
-              <tm-radio-button label="Только туда"></tm-radio-button>
+            <tm-radio-group v-model="panelswitch">
+              <tm-radio-button name="double" theme="primary" label="double">Туда-обратно</tm-radio-button>
+              <tm-radio-button name="single" theme="primary" label="single">Только туда</tm-radio-button>
             </tm-radio-group>
           </div>
           <div class="tm-date-range-picker__time-header" v-if="showTime">
@@ -88,7 +88,10 @@
               </span>
             </span>
           </div>
-          <div class="tm-picker-panel__content tm-date-range-picker__content is-left">
+          <div class="tm-picker-panel__content tm-date-range-picker__content" :class="{
+            'is-left' : panelswitch === 'double',
+            'is-full-width' : panelswitch === 'single'
+          }">
             <div class="tm-date-range-picker__header">
               <button
                 type="button"
@@ -105,10 +108,26 @@
                 class="tm-picker-panel__icon-btn tm-icon--arrow-right">
                 <tm-icon name="arrow-right" class="tm-picker-panel__icon"></tm-icon>
               </button>
+              <button
+                type="button"
+                @click="rightPrevMonth"
+                v-if="unlinkPanels && panelswitch === 'single'"
+                :disabled="!enableMonthArrow"
+                :class="{ 'is-disabled': !enableMonthArrow }"
+                class="tm-picker-panel__icon-btn tm-icon--arrow-left">
+                <tm-icon name="arrow-left" class="tm-picker-panel__icon"></tm-icon>
+              </button>
+              <button
+                type="button"
+                @click="rightNextMonth"
+                v-if="panelswitch === 'single'"
+                class="tm-picker-panel__icon-btn tm-icon--arrow-right">
+                <tm-icon name="arrow-right" class="tm-picker-panel__icon"></tm-icon>
+              </button>
               <div>{{ leftLabel }}</div>
             </div>
             <date-table
-              selection-mode="range"
+              :selection-mode="panelswitch === 'double' ? 'range' : 'day'"
               :date="leftDate"
               :default-value="defaultValue"
               :min-date="minDate"
@@ -120,7 +139,7 @@
               @pick="handleRangePick">
             </date-table>
           </div>
-          <div class="tm-picker-panel__content tm-date-range-picker__content is-right">
+          <div class="tm-picker-panel__content tm-date-range-picker__content is-right" v-if="panelswitch === 'double'">
             <div class="tm-date-range-picker__header">
               <button
                 type="button"
@@ -333,7 +352,8 @@
         maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
-        unlinkPanels: false
+        unlinkPanels: false,
+        panelswitch: 'double'
       };
     },
 
@@ -410,6 +430,7 @@
             this.rightDate = nextMonth(this.leftDate);
           }
         }
+        console.log(this.value);
       },
 
       defaultValue(val) {

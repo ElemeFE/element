@@ -19,6 +19,10 @@
 
   .tm-picker-panel__content {
     margin: 0;
+
+    &.is-full-width {
+      width: 100%;
+    }
   }
 
   @include e(header) {
