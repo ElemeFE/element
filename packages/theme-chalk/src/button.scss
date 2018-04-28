@@ -177,6 +177,10 @@
   display: inline-block;
   vertical-align: middle;
 
+  & + .el-button {
+    margin-left: 10px;
+  }
+
   & .el-button {
     float: left;
     position: relative;
