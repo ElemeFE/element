@@ -624,13 +624,13 @@ $--tree-expand-icon-color: $--color-text-placeholder !default;
 $--dropdown-menu-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08) !default;
 $--dropdown-menuItem-hover-fill: rgba(244, 245, 249, 0.54) !default;
 $--dropdown-menuItem-hover-color: $--link-color !default;
-$--dropdown-menuItem-icon-size: 10px !default;
+$--dropdown-menuItem-icon-size: 16px !default;
 $--dropdown-menuItem-icon-color: $--color-taupe-gray !default;
 $--dropdown-menuItem-hover-icon-color: $--color-blueberry !default;
 $--dropdown-menuItem-border-color: rgba(0, 0, 0, 0.12) !default;
 $--dropdown-link-button-color: $--color-white !default;
 $--dropdown-link-icon-color: $--link-color !default;
-$--dropdown-icon-size: 10px !default;
+$--dropdown-icon-size: 16px !default;
 $--dropdown-button-icon-color: $--color-white !default;
 
 /* Badge
@@ -693,7 +693,7 @@ $--datepicker-text-hover-color: $--color-primary !default;
 $--datepicker-cell-hover-color: #fff !default;
 $--datepicker-cell-size: 28px !default;
 $--datepicker-cell-font: 14px !default;
-$--datepicker-icon-size: 12px !default;
+$--datepicker-icon-size: 16px !default;
 
 /* Loading
 --------------------------*/

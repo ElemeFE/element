@@ -34,15 +34,7 @@
     }
   }
 
-  @include m(extra-large) {
-    .tm-input--extra-large {
-      .tm-input__suffix {
-        .tm-select__caret {
-          line-height: 48px;
-        }
-      }
-    }
-  }
+  @include m(extra-large) {}
 
   .tm-input {
     @include when(focus) {
@@ -55,18 +47,15 @@
     & .tm-select__caret {
       fill: $--select-icon-color;
       font-size: $--select-input-font-size;
-      line-height: 46px;
       cursor: pointer;
+      width: 16px;
+      height: 16px;
 
-      svg {
-        width: 16px;
-        height: 16px;
-        transition: transform .3s;
-        transform: rotateZ(0deg);
+      transition: transform .3s;
+      transform: rotateZ(0deg);
 
-        &:hover {
-          fill: $--select-close-hover-color;
-        }
+      &:hover {
+        fill: $--select-close-hover-color;
       }
 
       @include when(show-close) {

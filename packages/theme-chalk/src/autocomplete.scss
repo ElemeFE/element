@@ -84,10 +84,8 @@
     }
 
     & .tm-icon--loader {
-      svg {
-        width: $--icon-size-base+2;
-        height: $--icon-size-base+2;
-      }
+      width: $--icon-size-base+2;
+      height: $--icon-size-base+2;
       vertical-align: middle;
     }
   }

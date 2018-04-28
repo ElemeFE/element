@@ -189,7 +189,7 @@
 
         const btnClose = closable
           ? <span class="tm-tabs__close" on-click={(ev) => { onTabRemove(pane, ev); }}>
-            <tm-icon name="cross"></tm-icon>
+            <tm-icon name="cross-bold"></tm-icon>
           </span>
           : null;
 

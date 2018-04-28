@@ -28,7 +28,7 @@
     letter-spacing: -0.1px;
     cursor: pointer;
 
-    svg {
+    .tm-icon {
       fill: $--sidebar-nav-color;
     }
 
@@ -37,7 +37,7 @@
       color: $--color-white;
       background-color: $--sidebar-nav-active-bg-color;
 
-      svg {
+      .tm-icon {
         fill: $--color-white;
       }
     }
