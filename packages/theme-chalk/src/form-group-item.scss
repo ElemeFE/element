@@ -9,44 +9,40 @@
   border-radius: $--border-radius-base;
 
   .tm-input {
+    position: relative;
     width: auto;
-
-    &:last-child {
-      .tm-input__inner {
-        border: none;
-      }
-    }
-
     &__inner {
-      margin-top: 5px;
-      margin-bottom: 5px;
+      border: none;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
       height: 30px;
-      border-top: none;
-      border-bottom: none;
-      border-left: none;
-      border-radius: 0;
-      &:hover, &:focus {
-        border-color: $--color-pastel-gray;
+      margin-top: -15px;
+      width: 1px;
+      background: $--color-pastel-gray;
+      z-index: 1;
+    }
+    &:hover, &:focus {
+      &:after {
+        background: $--color-pastel-gray;
       }
     }
   }
 
-  .tm-select {
+  & > .tm-input {
     &:last-child {
-      .tm-input__inner {
-        border: none;
+      &:after {
+        display: none;
       }
     }
   }
-
-  .tm-value-switcher {
-    &:not(:last-child) {
-      .tm-autocomplete {
-        > .tm-input {
-          > .tm-input__inner {
-            border-right: 1px solid #ccc;
-          }
-        }
+  & > .tm-autocomplete,
+  & > .tm-select {
+    &:last-child {
+      .tm-input:after {
+        display: none;
       }
     }
   }
@@ -62,23 +58,6 @@
     border-radius: 0;
     &:last-child {
       border-right: none;
-    }
-  }
-
-  .tm-autocomplete {
-    > .tm-input {
-      > .tm-input__inner {
-        border: none;
-        border-right: 1px solid #ccc;
-      }
-    }
-
-    &:last-child {
-      > .tm-input {
-        > .tm-input__inner {
-          border: none;
-        }
-      }
     }
   }
 
