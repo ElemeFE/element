@@ -110,7 +110,7 @@
     "node-sass": "^4.7.2",
     "perspective.js": "^1.0.0",
     "postcss": "^5.2.18",
-    "postcss-loader": "0.11.1",
+    "postcss-loader": "^0.11.1",
     "postcss-salad": "^1.0.8",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
