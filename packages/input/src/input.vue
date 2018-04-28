@@ -278,8 +278,12 @@
           this.resizeTextarea();
         });
         this.currentValue = value;
+        // 外部v-model.number等导致this.currentValue与this.value不一致
+        this.$nextTick(_ => {
+          this.currentValue = this.value;
+        });
         if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.change', [value]);
+          this.dispatch('ElFormItem', 'el.form.change');
         }
       },
       calcIconOffset(place) {
