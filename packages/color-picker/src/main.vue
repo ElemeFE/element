@@ -96,14 +96,14 @@
         }
       },
       displayedColor(val) {
-        const outerColor = new Color({
+        const currentValueColor = new Color({
           enableAlpha: this.showAlpha,
           format: this.colorFormat
         });
-        outerColor.fromString(this.value);
+        currentValueColor.fromString(this.value);
 
-        const outerColorRgb = this.displayedRgb(outerColor, this.showAlpha);
-        if (val !== outerColorRgb) {
+        const currentValueColorRgb = this.displayedRgb(currentValueColor, this.showAlpha);
+        if (val !== currentValueColorRgb) {
           this.$emit('active-change', val);
         }
       }

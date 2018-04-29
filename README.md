@@ -49,7 +49,7 @@
       </td>
       <td align="center" valign="middle">
         <a href="https://www.duotai.cn/?utm_source=element" target="_blank">
-          <img width="150px" src="https://user-images.githubusercontent.com/10095631/39403151-c42dbcee-4ba5-11e8-9c09-8e5283da4144.png">
+          <img width="140px" src="https://user-images.githubusercontent.com/10095631/39403151-c42dbcee-4ba5-11e8-9c09-8e5283da4144.png">
         </a>
       </td>
       <td align="center" valign="middle">
