@@ -64,7 +64,7 @@
         if (!this.value && !this.showPanelColor) {
           return 'transparent';
         }
-        
+
         return this.displayedRgb(this.color, this.showAlpha);
       },
 
@@ -98,12 +98,11 @@
       displayedColor(val) {
         const outerColor = new Color({
           enableAlpha: this.showAlpha,
-          format: this.colorFormat,
-        })
+          format: this.colorFormat
+        });
         outerColor.fromString(this.value);
 
         const outerColorRgb = this.displayedRgb(outerColor, this.showAlpha);
-
         if (val !== outerColorRgb) {
           this.$emit('active-change', val);
         }
