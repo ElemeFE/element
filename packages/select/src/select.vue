@@ -78,7 +78,7 @@
       :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
-      :readonly="!filterable || multiple"
+      :readonly="readonly"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
@@ -183,6 +183,13 @@
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
+
+      readonly() {
+        // trade-off for IE input readonly problem: https://github.com/ElemeFE/element/issues/10403
+        const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
+        return !this.filterable || this.multiple || !isIE && !this.visible;
+      },
+
       iconClass() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
