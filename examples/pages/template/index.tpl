@@ -296,8 +296,15 @@
           <p>Next Generation API-first CMS</p>
         </div>
       </a>
+      <a class="sponsor" href="https://www.duotai.net/?utm_source=element" target="_blank">
+        <img width="42px" src="~examples/assets/images/duotai.svg" alt="duotai">
+        <div>
+          <p>Sponsored by 多态</p>
+          <p>多元化的数据收集和整理工具</p>
+        </div>
+      </a>
       <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
-        <img width="45px" src="~examples/assets/images/duohui.svg" alt="tipe.io">
+        <img width="45px" src="~examples/assets/images/duohui.svg" alt="duohui">
         <div>
           <p>Sponsored by 多会</p>
           <p>炫酷的新一代活动票务系统</p>

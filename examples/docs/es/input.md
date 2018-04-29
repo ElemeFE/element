@@ -622,7 +622,7 @@ Búsqueda de datos desde el servidor.
 
 | Atributo      | Descripción                              | Tipo             | Valores aceptados                | Por defecto |
 | ------------- | ---------------------------------------- | ---------------- | -------------------------------- | ----------- |
-| type          | tipo de input                            | string           | text / textarea                  | text        |
+| type          | tipo de input                            | string           | text, textarea and other [native input types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)  | text        |
 | value         | valor enlazado                           | string / number  | —                                | —           |
 | maxlength     | igual que `maxlength` en el input nativo | number           | —                                | —           |
 | minlength     | igual que `minlength` en el input nativo | number           | —                                | —           |
