@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.3.7
+
+*2018-04-29*
+
+- Fixed Table not updating its header widths when the scroll bar disappears due to filtering, #10834
+- Fixed clearable Input still showing the clear icon when its initial value is `null`, #10912
+- Fixed incorrect trigger of the `active-change` event after changing ColorPicker's binding value programatically, #10903 (by @zhangbobell)
+- Fixed filterable Select causing an infinite loop when navigating options using keyboard if all options are disabled, #10945
+
 ### 2.3.6
 
 *2018-04-21*
