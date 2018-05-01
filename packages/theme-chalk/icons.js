@@ -4,10 +4,12 @@ import Airplane from '../../packages/theme-chalk/src/icons/airplane.svg';
 import ArrowBack from '../../packages/theme-chalk/src/icons/arrow-back.svg';
 import ArrowBoth from '../../packages/theme-chalk/src/icons/arrow-both.svg';
 import ArrowDownLong from '../../packages/theme-chalk/src/icons/arrow-down-long.svg';
+import ArrowDownSoft from '../../packages/theme-chalk/src/icons/arrow-down-soft.svg';
 import ArrowDown from '../../packages/theme-chalk/src/icons/arrow-down.svg';
 import ArrowLeft from '../../packages/theme-chalk/src/icons/arrow-left.svg';
 import ArrowNext from '../../packages/theme-chalk/src/icons/arrow-next.svg';
 import ArrowRight from '../../packages/theme-chalk/src/icons/arrow-right.svg';
+import ArrowUpSoft from '../../packages/theme-chalk/src/icons/arrow-up-soft.svg';
 import ArrowsReverse from '../../packages/theme-chalk/src/icons/arrows-reverse.svg';
 import Bath from '../../packages/theme-chalk/src/icons/bath.svg';
 import Bell from '../../packages/theme-chalk/src/icons/bell.svg';
@@ -109,10 +111,12 @@ module.exports = {
   ArrowBack,
   ArrowBoth,
   ArrowDownLong,
+  ArrowDownSoft,
   ArrowDown,
   ArrowLeft,
   ArrowNext,
   ArrowRight,
+  ArrowUpSoft,
   ArrowsReverse,
   Bath,
   Bell,

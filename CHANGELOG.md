@@ -25,6 +25,8 @@
     - boiler
     - customs-officer
     - utility
+    - arrow-up-soft
+    - arrow-down-soft
 
 *2018-04-28*
 
