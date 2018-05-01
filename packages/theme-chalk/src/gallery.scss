@@ -47,8 +47,9 @@
   &__thumbs {
     height: 96px;
     overflow: hidden;
+
     :first-child {
-      margin-left: 1px;
+      margin: 0;
     }
   }
   &__thumb-wrapper {
