@@ -58,9 +58,8 @@
   @include scroll-bar;
 
   & .tm-input__clear {
-    fill: $--input-border;
+    fill: $--color-pastel-gray;
     font-size: 18px;
-    line-height: $--input-height+2;
     cursor: pointer;
     transition: $--color-transition-base;
 
@@ -152,16 +151,10 @@
   }
 
   @include e(icon) {
-    height: 100%;
     width: 16px;
     text-align: center;
     transition: all .3s;
-    line-height: $--input-height+4;
-
-    svg {
-      width: $--icon-size-base+2;
-      height: $--icon-size-base+2;
-    }
+    line-height: $--input-height + 4;
   }
 
   @include e(validateIcon) {
@@ -234,12 +227,8 @@
     .tm-input__icon {
       line-height: 56px;
       height: 48px;
-
-      svg {
-        height: 24px;
-        width: 24px;
-        font-size: 24px;
-      }
+      width: 24px;
+      font-size: 24px;
     }
   }
   @include m(medium) {
