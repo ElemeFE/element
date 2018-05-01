@@ -150,12 +150,15 @@
     }
   }
 
+  @include e((prefix, suffix)) {
+    line-height: $--input-height - 2;
+  }
+
   @include e(icon) {
-    width: 16px;
-    height: 100%;
     text-align: center;
     transition: all .3s;
-    line-height: $--input-height + 4;
+    width: $--icon-size-base+2;
+    height: $--icon-size-base+2;
   }
 
   @include e(validateIcon) {
@@ -225,9 +228,12 @@
       line-height: 48px;
     }
 
+    @include e((prefix, suffix)) {
+      line-height: 48px;
+    }
+
     .tm-input__icon {
-      line-height: 56px;
-      height: 48px;
+      height: 24px;
       width: 24px;
       font-size: 24px;
     }
@@ -237,10 +243,10 @@
 
     @include e(inner) {
       height: $--input-medium-height;
+      line-height: 40px;
     }
-
-    .tm-input__icon {
-      line-height: $--input-medium-height;
+    @include e((prefix, suffix)) {
+      line-height: 36px;
     }
   }
   @include m(small) {
@@ -249,9 +255,8 @@
     @include e(inner) {
       height: $--input-small-height;
     }
-
-    .tm-input__icon {
-      line-height: $--input-small-height;
+    @include e((prefix, suffix)) {
+      line-height: 32px;
     }
   }
   @include m(mini) {
@@ -260,9 +265,8 @@
     @include e(inner) {
       height: $--input-mini-height;
     }
-
-    .tm-input__icon {
-      line-height: $--input-mini-height;
+    @include e((prefix, suffix)) {
+      line-height: 26px;
     }
   }
 }
