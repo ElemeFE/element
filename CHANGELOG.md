@@ -22,6 +22,9 @@
     - ramp
     - service
     - sofa
+    - boiler
+    - customs-officer
+    - utility
 
 *2018-04-28*
 

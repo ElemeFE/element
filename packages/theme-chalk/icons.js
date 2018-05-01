@@ -1,4 +1,3 @@
-import DsStore from '../../packages/theme-chalk/src/icons/.DS_Store.svg';
 import AdvancedSearch from '../../packages/theme-chalk/src/icons/advanced-search.svg';
 import Aeroexpress from '../../packages/theme-chalk/src/icons/aeroexpress.svg';
 import Airplane from '../../packages/theme-chalk/src/icons/airplane.svg';
@@ -12,6 +11,7 @@ import ArrowRight from '../../packages/theme-chalk/src/icons/arrow-right.svg';
 import ArrowsReverse from '../../packages/theme-chalk/src/icons/arrows-reverse.svg';
 import Bath from '../../packages/theme-chalk/src/icons/bath.svg';
 import Bell from '../../packages/theme-chalk/src/icons/bell.svg';
+import Boiler from '../../packages/theme-chalk/src/icons/boiler.svg';
 import Book from '../../packages/theme-chalk/src/icons/book.svg';
 import Bucket from '../../packages/theme-chalk/src/icons/bucket.svg';
 import Calendar from '../../packages/theme-chalk/src/icons/calendar.svg';
@@ -30,6 +30,7 @@ import CrossBold from '../../packages/theme-chalk/src/icons/cross-bold.svg';
 import Cross from '../../packages/theme-chalk/src/icons/cross.svg';
 import CupHot from '../../packages/theme-chalk/src/icons/cup-hot.svg';
 import Cup from '../../packages/theme-chalk/src/icons/cup.svg';
+import CustomsOfficer from '../../packages/theme-chalk/src/icons/customs-officer.svg';
 import DisabledPerson from '../../packages/theme-chalk/src/icons/disabled-person.svg';
 import DotsHorizontal from '../../packages/theme-chalk/src/icons/dots-horizontal.svg';
 import DotsVertical from '../../packages/theme-chalk/src/icons/dots-vertical.svg';
@@ -95,13 +96,13 @@ import Tv from '../../packages/theme-chalk/src/icons/tv.svg';
 import UmbrellaAngle from '../../packages/theme-chalk/src/icons/umbrella-angle.svg';
 import Umbrella from '../../packages/theme-chalk/src/icons/umbrella.svg';
 import Upload from '../../packages/theme-chalk/src/icons/upload.svg';
+import Utility from '../../packages/theme-chalk/src/icons/utility.svg';
 import Vault from '../../packages/theme-chalk/src/icons/vault.svg';
 import Warning from '../../packages/theme-chalk/src/icons/warning.svg';
 import Wifi from '../../packages/theme-chalk/src/icons/wifi.svg';
 import Window from '../../packages/theme-chalk/src/icons/window.svg';
 
 module.exports = {
-  DsStore,
   AdvancedSearch,
   Aeroexpress,
   Airplane,
@@ -115,6 +116,7 @@ module.exports = {
   ArrowsReverse,
   Bath,
   Bell,
+  Boiler,
   Book,
   Bucket,
   Calendar,
@@ -133,6 +135,7 @@ module.exports = {
   Cross,
   CupHot,
   Cup,
+  CustomsOfficer,
   DisabledPerson,
   DotsHorizontal,
   DotsVertical,
@@ -198,6 +201,7 @@ module.exports = {
   UmbrellaAngle,
   Umbrella,
   Upload,
+  Utility,
   Vault,
   Warning,
   Wifi,
