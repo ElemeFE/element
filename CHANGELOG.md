@@ -27,6 +27,7 @@
     - utility
     - arrow-up-soft
     - arrow-down-soft
+    - knife-fork-2
 
 *2018-04-28*
 

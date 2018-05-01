@@ -55,6 +55,7 @@ import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
 import Iron from '../../packages/theme-chalk/src/icons/iron.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
 import ItemSort from '../../packages/theme-chalk/src/icons/item-sort.svg';
+import KnifeFork2 from '../../packages/theme-chalk/src/icons/knife-fork-2.svg';
 import KnifeFork from '../../packages/theme-chalk/src/icons/knife-fork.svg';
 import Label from '../../packages/theme-chalk/src/icons/label.svg';
 import Loader from '../../packages/theme-chalk/src/icons/loader.svg';
@@ -162,6 +163,7 @@ module.exports = {
   Iron,
   ItemList,
   ItemSort,
+  KnifeFork2,
   KnifeFork,
   Label,
   Loader,
