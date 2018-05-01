@@ -18,6 +18,14 @@
       width: 24px;
       height: 24px;
       fill: $--color-pastel-gray;
+
+      &:hover {
+        fill: $--color-taupe-gray;
+      }
+
+      &:active {
+        fill: $--color-blueberry;
+      }
     }
   }
 
