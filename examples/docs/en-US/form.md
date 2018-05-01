@@ -428,11 +428,11 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ```html
 <tm-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" :status-icon="true">
-  <tm-form-item label="Activity name" prop="name">
-    <tm-input v-model="ruleForm.name"></tm-input>
+  <tm-form-item prop="name">
+    <tm-input v-model="ruleForm.name" placeholder="Input" required></tm-input>
   </tm-form-item>
-  <tm-form-item label="Activity zone" prop="region">
-    <tm-select v-model="ruleForm.region" placeholder="Activity zone">
+  <tm-form-item prop="region">
+    <tm-select v-model="ruleForm.region" placeholder="Activity zone" required>
       <tm-option label="Zone one" value="shanghai"></tm-option>
       <tm-option label="Zone two" value="beijing"></tm-option>
     </tm-select>
