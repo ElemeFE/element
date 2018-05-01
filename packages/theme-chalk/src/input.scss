@@ -152,6 +152,7 @@
 
   @include e(icon) {
     width: 16px;
+    height: 100%;
     text-align: center;
     transition: all .3s;
     line-height: $--input-height + 4;
