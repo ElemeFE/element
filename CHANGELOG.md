@@ -2,6 +2,27 @@
 
 ### 1.2.0
 
+*2018-05-01*
+
+- Добавлены иконки:
+    - conductor
+    - gear-n-wrench
+    - glass
+    - shower
+    - smoke
+    - cup-hot
+    - cooler
+    - extinguisher
+    - disabled-person (предыдущая переименована в seat-person)
+    - teddybear
+    - luggage
+    - negotiations
+    - hanger
+    - pram
+    - ramp
+    - service
+    - sofa
+
 *2018-04-28*
 
 - Переделано отображение границ у полей ввода в Form Group Item (теперь используется псевдоэлемент :after)
