@@ -86,7 +86,7 @@ describe('Select', () => {
 
   it('create', () => {
     vm = createTest(Select, true);
-    expect(vm.$el.className).to.equal('tm-select');
+    expect(vm.$el.className.search('tm-select') !== -1).to.true;
     expect(vm.$el.querySelector('.tm-input__inner').placeholder).to.equal('Select');
     vm.toggleMenu();
     expect(vm.visible).to.true;
