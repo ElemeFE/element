@@ -403,23 +403,89 @@ export default {
 ```html
 <div class="demo-input-size">
   <tm-input
+    size="extra-large"
     placeholder="Please Input"
-    v-model="input6">
+    v-model="input6"
+    required>
+  </tm-input>
+  <tm-input
+    placeholder="Please Input"
+    v-model="input6"
+    required>
   </tm-input>
   <tm-input
     size="medium"
     placeholder="Please Input"
-    v-model="input7">
+    v-model="input7"
+    required>
   </tm-input>
   <tm-input
     size="small"
     placeholder="Please Input"
-    v-model="input8">
+    v-model="input8"
+    required>
   </tm-input>
   <tm-input
     size="mini"
     placeholder="Please Input"
-    v-model="input9">
+    v-model="input9"
+    required>
+  </tm-input>
+</div>
+
+<script>
+export default {
+  data() {
+    return {
+      input6: '',
+      input7: '',
+      input8: '',
+      input9: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Sizes with icons
+
+:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
+```html
+<div class="demo-input-size">
+  <tm-input
+    size="extra-large"
+    prefix-icon="airplane"
+    placeholder="Please Input"
+    v-model="input6"
+    required>
+  </tm-input>
+  <tm-input
+    prefix-icon="airplane"
+    placeholder="Please Input"
+    v-model="input6"
+    required>
+  </tm-input>
+  <tm-input
+    size="medium"
+    prefix-icon="airplane"
+    placeholder="Please Input"
+    v-model="input7"
+    required>
+  </tm-input>
+  <tm-input
+    size="small"
+    prefix-icon="airplane"
+    placeholder="Please Input"
+    v-model="input8"
+    required>
+  </tm-input>
+  <tm-input
+    size="mini"
+    prefix-icon="airplane"
+    placeholder="Please Input"
+    v-model="input9"
+    required>
   </tm-input>
 </div>
 
