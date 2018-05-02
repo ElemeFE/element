@@ -6,8 +6,10 @@ import ArrowBoth from '../../packages/theme-chalk/src/icons/arrow-both.svg';
 import ArrowDownLong from '../../packages/theme-chalk/src/icons/arrow-down-long.svg';
 import ArrowDownSoft from '../../packages/theme-chalk/src/icons/arrow-down-soft.svg';
 import ArrowDown from '../../packages/theme-chalk/src/icons/arrow-down.svg';
+import ArrowLeftLong from '../../packages/theme-chalk/src/icons/arrow-left-long.svg';
 import ArrowLeft from '../../packages/theme-chalk/src/icons/arrow-left.svg';
 import ArrowNext from '../../packages/theme-chalk/src/icons/arrow-next.svg';
+import ArrowRightLong from '../../packages/theme-chalk/src/icons/arrow-right-long.svg';
 import ArrowRight from '../../packages/theme-chalk/src/icons/arrow-right.svg';
 import ArrowUpSoft from '../../packages/theme-chalk/src/icons/arrow-up-soft.svg';
 import ArrowsReverse from '../../packages/theme-chalk/src/icons/arrows-reverse.svg';
@@ -115,8 +117,10 @@ module.exports = {
   ArrowDownLong,
   ArrowDownSoft,
   ArrowDown,
+  ArrowLeftLong,
   ArrowLeft,
   ArrowNext,
+  ArrowRightLong,
   ArrowRight,
   ArrowUpSoft,
   ArrowsReverse,
