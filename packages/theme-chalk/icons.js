@@ -102,6 +102,7 @@ import Upload from '../../packages/theme-chalk/src/icons/upload.svg';
 import Utility from '../../packages/theme-chalk/src/icons/utility.svg';
 import Vault from '../../packages/theme-chalk/src/icons/vault.svg';
 import Warning from '../../packages/theme-chalk/src/icons/warning.svg';
+import Wc from '../../packages/theme-chalk/src/icons/wc.svg';
 import Wifi from '../../packages/theme-chalk/src/icons/wifi.svg';
 import Window from '../../packages/theme-chalk/src/icons/window.svg';
 
@@ -210,6 +211,7 @@ module.exports = {
   Utility,
   Vault,
   Warning,
+  Wc,
   Wifi,
   Window
 };

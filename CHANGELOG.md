@@ -5,6 +5,7 @@
 *2018-05-01*
 
 - Добавлены иконки:
+    - wc
     - conductor
     - gear-n-wrench
     - glass
