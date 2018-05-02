@@ -1401,7 +1401,7 @@ describe('DatePicker', () => {
         const numberOfHighlightRows = () => pickerEl.querySelectorAll('.el-date-table__row.current').length;
         expect(numberOfHighlightRows()).to.equal(0);
         setTimeout(() => {
-          pickerEl.querySelector('td.available').click();
+          pickerEl.querySelector('.el-date-table__row ~ .el-date-table__row td.available').click();
           setTimeout(() => {
             expect(vm.value).to.exist;
             input.blur();
