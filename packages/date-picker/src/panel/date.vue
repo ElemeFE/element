@@ -90,12 +90,14 @@
             <date-table
               v-show="currentView === 'date'"
               @pick="handleDatePick"
+              @select="handleDateSelect"
               :selection-mode="selectionMode"
               :first-day-of-week="firstDayOfWeek"
               :value="new Date(value)"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate"
+              :selected-date="selectedDate">
             </date-table>
             <year-table
               v-show="currentView === 'year'"
@@ -124,7 +126,8 @@
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
-          @click="changeToNow">
+          @click="changeToNow"
+          v-show="selectionMode !== 'dates'">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -208,6 +211,8 @@
           if (this.currentView !== 'year' || this.currentView !== 'month') {
             this.currentView = 'month';
           }
+        } else if (newVal === 'dates') {
+          this.currentView = 'date';
         }
       }
     },
@@ -234,6 +239,9 @@
       emit(value, ...args) {
         if (!value) {
           this.$emit('pick', value, ...args);
+        } else if (Array.isArray(value)) {
+          const dates = value.map(date => this.showTime ? clearMilliseconds(date) : clearTime(date));
+          this.$emit('pick', dates, ...args);
         } else {
           this.$emit('pick', this.showTime ? clearMilliseconds(value) : clearTime(value), ...args);
         }
@@ -317,6 +325,12 @@
         }
       },
 
+      handleDateSelect(value) {
+        if (this.selectionMode === 'dates') {
+          this.selectedDate = value;
+        }
+      },
+
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
           this.date = this.value ? modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate()) : modifyWithDefaultTime(value, this.defaultTime);
@@ -348,8 +362,12 @@
       },
 
       confirm() {
-        const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
-        this.emit(date);
+        if (this.selectionMode === 'dates') {
+          this.emit(this.selectedDate);
+        } else {
+          const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
+          this.emit(date);
+        }
       },
 
       resetView() {
@@ -467,6 +485,7 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
+        selectedDate: [],
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,
@@ -495,7 +514,7 @@
       },
 
       footerVisible() {
-        return this.showTime;
+        return this.showTime || this.selectionMode === 'dates';
       },
 
       visibleTime() {

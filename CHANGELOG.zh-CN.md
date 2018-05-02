@@ -1,5 +1,36 @@
 ## 更新日志
 
+### 2.3.7
+
+*2018-04-29*
+
+- 修复 Table 在由于筛选而使原有的滚动条消失后表头各列宽度未及时更新的问题，#10834
+- 修复可清空的 Input 在初始值为 `null` 时仍然显示清空图标的问题，#10912
+- 修复在通过代码改变 ColorPicker 的绑定值后错误地触发 `active-change` 事件的问题，#10903（by @zhangbobell）
+- 修复可搜索的 Select 在备选项均被禁用时，通过键盘导航会造成无限循环的问题，#10945
+
+### 2.3.6
+
+*2018-04-21*
+
+- 修复 Tree 的 `allow-drop` 回调在使用 `type` 参数后的错误行为，#10821
+- 修复可搜索的单选 Select 在 IE11 中无法输入搜索关键词的问题，#10822
+- 修复单选 Select 在使用鼠标选中某个选项后错误地触发 `blur` 事件的问题，#10822
+
+### 2.3.5
+
+*2018-04-20*
+
+- 修复 DatePicker 的 `type` 为 week 时面板错误高亮的问题，#10712
+- 修复 InputNumber 初始值为 0 时输入框为空的问题，#10714
+- 新增 Select 的 `automatic-dropdown` 属性，#10042（by @Seebiscuit）
+- 修复 `disabled` 的 Rate 仍能通过键盘左右键改变组件值的问题，#10726（by @Richard-Choooou）
+- 现在 DatePicker 的 `type` 属性可以接收 `'dates'`，用于选择多个日期，#10650（by @Mini256）
+- 新增 Pagination 的 `prev-click` 和 `next-click` 事件，#10755
+- 新增 Pagination 的 `pager-count` 属性，#10493（by @chongjohn716）
+- 新增 `type` 作为 Tree 的 `allow-drop` 属性回调的第三个参数，#10792
+- 改用 ResizeObserver 对元素的尺寸变化进行监测，#10779
+
 ### 2.3.4
 
 *2018-04-12*
@@ -8,7 +39,7 @@
 - 现在 Transfer 数据项的渲染支持通过 scoped slot 自定义，#10577
 - 修复点击 Pagination 禁用的上一页、下一页按钮仍会触发 `current-change` 事件的问题，#10628
 - 修复未绑定值的 Textarea 在 SSR 中会显示 `undefined` 的问题，#10630
-- 修复 `type` 为 border-car 的 Tabs 中被禁用标签项的样式，#10640
+- 修复 `type` 为 border-card 的 Tabs 中被禁用标签项的样式，#10640
 - 新增 `$index` 作为 Table 的 `formatter` 属性回调的第四个参数，#10645
 - 修复 TypeScript 类型声明未导出 CheckboxButton 的问题，#10666
 

@@ -223,6 +223,7 @@
             }
             if (typeof validateResult === 'string') {
               this.editorErrorMessage = validateResult;
+              addClass(this.getInputElement(), 'invalid');
               return false;
             }
           }

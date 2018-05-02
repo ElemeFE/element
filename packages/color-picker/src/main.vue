@@ -63,12 +63,9 @@
       displayedColor() {
         if (!this.value && !this.showPanelColor) {
           return 'transparent';
-        } else {
-          const { r, g, b } = this.color.toRgb();
-          return this.showAlpha
-            ? `rgba(${ r }, ${ g }, ${ b }, ${ this.color.get('alpha') / 100 })`
-            : `rgb(${ r }, ${ g }, ${ b })`;
         }
+
+        return this.displayedRgb(this.color, this.showAlpha);
       },
 
       _elFormItemSize() {
@@ -99,7 +96,16 @@
         }
       },
       displayedColor(val) {
-        this.$emit('active-change', val);
+        const currentValueColor = new Color({
+          enableAlpha: this.showAlpha,
+          format: this.colorFormat
+        });
+        currentValueColor.fromString(this.value);
+
+        const currentValueColorRgb = this.displayedRgb(currentValueColor, this.showAlpha);
+        if (val !== currentValueColorRgb) {
+          this.$emit('active-change', val);
+        }
       }
     },
 
@@ -132,6 +138,16 @@
             this.showPanelColor = false;
           }
         });
+      },
+      displayedRgb(color, showAlpha) {
+        if (!(color instanceof Color)) {
+          throw Error('color should be instance of Color Class');
+        }
+
+        const { r, g, b } = color.toRgb();
+        return showAlpha
+          ? `rgba(${ r }, ${ g }, ${ b }, ${ color.get('alpha') / 100 })`
+          : `rgb(${ r }, ${ g }, ${ b })`;
       }
     },
 

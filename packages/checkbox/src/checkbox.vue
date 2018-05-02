@@ -26,6 +26,7 @@
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
         type="checkbox"
+        aria-hidden="true"
         :name="name"
         :disabled="isDisabled"
         :true-value="trueLabel"
@@ -38,6 +39,7 @@
         v-else
         class="el-checkbox__original"
         type="checkbox"
+        aria-hidden="true"
         :disabled="isDisabled"
         :value="label"
         :name="name"

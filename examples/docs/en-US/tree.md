@@ -245,8 +245,12 @@
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
       },
-      allowDrop(draggingNode, dropNode) {
-        return dropNode.data.label !== 'Level two 3-1';
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === 'Level two 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
       },
       allowDrag(draggingNode) {
         return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
@@ -1142,8 +1146,12 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
       },
-      allowDrop(draggingNode, dropNode) {
-        return dropNode.data.label !== 'Level two 3-1';
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === 'Level two 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
       },
       allowDrag(draggingNode) {
         return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
@@ -1178,7 +1186,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | lazy                  | whether to lazy load leaf node, used with `load` attribute  | boolean                     | —    | false |
 | draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
 | allow-drag            | this function will be executed before dragging a node. If `false` is returned, the node can not be dragged | Function(node)  | —  | —  |
-| allow-drop            | this function will be executed before the dragging node is dropped. If `false` is returned, the dragging node can not be dropped at the target node | Function(draggingNode, dropNode)  | —    | —     |
+| allow-drop            | this function will be executed before the dragging node is dropped. If `false` is returned, the dragging node can not be dropped at the target node. `type` has three possible values: 'prev' (inserting the dragging node before the target node), 'inner' (inserting the dragging node to the target node) and 'next' (inserting the dragging node after the target node) | Function(draggingNode, dropNode, type)  | —    | —     |
 
 ### props
 | Attribute | Description                              | Type   | Accepted Values | Default |

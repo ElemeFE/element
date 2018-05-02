@@ -73,6 +73,19 @@ If you have too much data to display in one page, use pagination.
 ```
 :::
 
+### Number of pagers
+
+:::demo By default, Pagination collapses extra pager buttons when it has more than 7 pages. This can be configured with the `pager-count` attribute.
+```html
+<el-pagination
+  :page-size="20"
+  :pager-count="11"
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### Buttons with background color
 
 :::demo Set the `background` attribute and the buttons will have a background color.
@@ -215,6 +228,7 @@ Add more modules based on your scenario.
 | page-size              | item count of each page  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
+| pager-count | number of pagers. Pagination collapses when the total page count exceeds this value | number | odd number between 5 and 21 | 7 |
 | current-page | current page number, supports the .sync modifier | number | — | 1 |
 | layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
@@ -226,8 +240,10 @@ Add more modules based on your scenario.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| size-change | triggers when `page-size` changes | the new `page-size` |
-| current-change | triggers when `current-page` changes | the new `current-page` |
+| size-change | triggers when `page-size` changes | the new page size |
+| current-change | triggers when `current-page` changes | the new current page |
+| prev-click | triggers when the prev button is clicked and current page changes | the new current page |
+| next-click | triggers when the next button is clicked and current page changes | the new current page |
 
 ### Slot
 | Name | Description |

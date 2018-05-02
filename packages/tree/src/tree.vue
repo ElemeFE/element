@@ -162,6 +162,10 @@
         Array.prototype.forEach.call(val, (checkbox) => {
           checkbox.setAttribute('tabindex', -1);
         });
+      },
+
+      checkStrictly(newVal) {
+        this.store.checkStrictly = newVal;
       }
     },
 
@@ -354,26 +358,26 @@
         const draggingNode = dragState.draggingNode;
         if (!draggingNode || !dropNode) return;
 
-        let allowDrop = true;
-        if (typeof this.allowDrop === 'function' && !this.allowDrop(draggingNode.node, dropNode.node)) {
-          allowDrop = false;
+        let dropPrev = true;
+        let dropInner = true;
+        let dropNext = true;
+        if (typeof this.allowDrop === 'function') {
+          dropPrev = this.allowDrop(draggingNode.node, dropNode.node, 'prev');
+          dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
+          dropNext = this.allowDrop(draggingNode.node, dropNode.node, 'next');
         }
-        dragState.allowDrop = allowDrop;
-        event.dataTransfer.dropEffect = allowDrop ? 'move' : 'none';
-        if (allowDrop && oldDropNode !== dropNode) {
+        dragState.allowDrop = dropInner;
+        event.dataTransfer.dropEffect = dropInner ? 'move' : 'none';
+        if ((dropPrev || dropInner || dropNext) && oldDropNode !== dropNode) {
           if (oldDropNode) {
             this.$emit('node-drag-leave', draggingNode.node, oldDropNode.node, event);
           }
           this.$emit('node-drag-enter', draggingNode.node, dropNode.node, event);
         }
 
-        if (allowDrop) {
+        if (dropPrev || dropInner || dropNext) {
           dragState.dropNode = dropNode;
         }
-
-        let dropPrev = allowDrop;
-        let dropInner = allowDrop;
-        let dropNext = allowDrop;
 
         if (dropNode.node.nextSibling === draggingNode.node) {
           dropNext = false;

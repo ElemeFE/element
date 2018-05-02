@@ -1,16 +1,47 @@
 ## Changelog
 
+### 2.3.7
+
+*2018-04-29*
+
+- Corregido que Table no actualizaba el ancho de encabezado cuando la barra de desplazamiento desaparecia debido al filtrado, #10834
+- Corregido input borrable que mostraba el icono de borrado cuando su valor inicial era `nulo`, #10912
+- Corregido el disparador incorrecto del evento `active-change` después de cambiar el valor enlazado de ColorPicker programáticamente, #10903 (por @zhangbobell)
+- Corregido filterable Select que causaba un bucle infinito al navegar por las opciones usando el teclado si todas las opciones estában deshabilitadas, #10945
+
+### 2.3.6
+
+*2018-04-21*
+
+- Corregido el comportamiento incorrecto del callback  `allow-drop` de Tree cuando se usaba el parámetro `type`, #10821
+- Ahora puede introducir correctamente las palabras clave en filterable Single Select en IE11, #10822
+- Corregido Single Select activaba incorrectamente el evento `blur` después de hacer clic en una opción, #10822
+
+### 2.3.5
+
+*2018-04-20*
+
+- Arreglado los incorrectos realces en el panel de DatePicker cuando `type` es week, #10712
+- Arreglado que InputNumber comenzaba vacio cuando el valor inicial era 0, #10714
+- Agregado el atributo  `automatic-dropdown` para Select, #10042 (by @Seebiscuit)
+- Arreglado que el valor del Rate pasaba a `disabled` cuando se comenzaba a actualizar con las teclas de navegacion, #10726 (by @Richard-Choooou)
+- Ahora el atributo `type` de DatePicker's puede ser  `'dates'`, donde puede elegir varias fechas en un solo picker, #10650 (by @Mini256)
+- Agregados los eventos  `prev-click` y `next-click` para Pagination, #10755
+- Agregado el atributo `pager-count` para Pagination, #10493 (by @chongjohn716)
+- Agregado `type` como 3rd parametro del atributo  `allow-drop`  de Tree, #10792
+- Ahora usamos ResizeObserver para detectar el redimensionamiento de elementos DOM, #10779
+
 ### 2.3.4
 
 *2018-04-12*
 
-- Deleted duplicate `showTimeout` attribute in SubMenu's TypeScript declaration, #10566 (by @kimond)
-- Now you can customize Transfer's data item using scoped slot, #10577
-- Fixed clicking disabled prev and next button of Pagination still triggers `current-change` event, #10628
-- Fixed Textarea displaying `undefined` in SSR when its value is not set, #10630
-- Fixed disabled TabItem style when `type` is border-car, #10640
-- Added `$index` as `formatter`'s fourth param of Table, #10645
-- Fixed CheckboxButton not exported in TypeScript declaration, #10666
+- Eliminado el atributo duplicado  `showTimeout` en SubMenu's en la declaracion TypeScript, #10566 (by @kimond)
+- Ahora se puede personalizar los datos de los items de Transfer usando scoped slot, #10577
+- Arreglado que los click de los botones `next` y `prev`  en Pagination se deshabilitaban cuando se disparaba el evento  `current-change`, #10628
+- Arreglado que Textarea mostraba `undefined` en SSR cuando el valor no era asignado, #10630
+- Arreglado que se deshabilitaba el estilo del TabItem cuando  `type` era border-card, #10640
+- Agregado `$index` como cuarto parametro en el atributo de las columnas de Table  `formatter` , #10645
+- Arreglado que CheckboxButton no se exportaba en la declaracion de TypeScript, #10666
 
 ### 2.3.3
 

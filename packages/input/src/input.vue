@@ -100,6 +100,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
+  import { isKorean } from 'element-ui/src/utils/shared';
 
   export default {
     name: 'ElInput',
@@ -121,7 +122,9 @@
 
     data() {
       return {
-        currentValue: this.value || '',
+        currentValue: this.value === undefined || this.value === null
+          ? ''
+          : this.value,
         textareaCalcStyle: {},
         prefixOffset: null,
         suffixOffset: null,
@@ -255,7 +258,9 @@
           this.isOnComposition = false;
           this.handleInput(event);
         } else {
-          this.isOnComposition = true;
+          const text = event.target.value;
+          const lastCharacter = text[text.length - 1] || '';
+          this.isOnComposition = !isKorean(lastCharacter);
         }
       },
       handleInput(event) {

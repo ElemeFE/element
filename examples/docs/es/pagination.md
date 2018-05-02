@@ -72,6 +72,19 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 ```
 :::
 
+### Number of pagers
+
+:::demo By default, Pagination collapses extra pager buttons when it has more than 7 pages. This can be configured with the `pager-count` attribute.
+```html
+<el-pagination
+  :page-size="20"
+  :pager-count="11"
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### Paginación pequeña
 
 Usa una paginación pequeña en caso de espacio limitado.
@@ -201,6 +214,7 @@ Agrega más modulos basados en su escenario.
 | page-size    | cantidad de elementos por página         | number   | —                                        | 10                                     |
 | total        | total de elementos                       | number   | —                                        | —                                      |
 | page-count   | total de páginas. Asigna `total` o `page-count` y las páginas serán mostradas; si necesitas `page-sizes`, `total` es **requerido** | number   | —                                        | —                                      |
+| pager-count  | número de paginadores. La paginación colapsa cuando el número total de páginas excede este valor. | number | odd number between 5 and 21 | 7 |
 | current-page | número actual de la página, soporta el modificador .sync | number   | —                                        | 1                                      |
 | layout       | layout de la paginación, elementos separados por coma | string   | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total' |
 | page-sizes   | opciones para la cantidad de elementos por página | number[] | —                                        | [10, 20, 30, 40, 50, 100]              |
@@ -214,6 +228,8 @@ Agrega más modulos basados en su escenario.
 | ----------------- | --------------------------------------- | ----------------------------- |
 | size-change       | se dispara cuando `page-size` cambia    | nuevo valor de `page-size`    |
 | current-change    | se dispara cuando `current-page` cambia | nuevo valor de `current-page` |
+| prev-click | Se dispara cuando el boton `prev` recibe el click y la pagina actual cambia | la nueva pagina actual |
+| next-click | Se dispara cuando el boton `next` recibe el click y la pagina actual cambia | la nueva pagina actual |
 
 ### Slot
 | Nombre | Descripción                              |

@@ -69,12 +69,13 @@
     transition: border-color .3s, background-color .3s;
     vertical-align: middle;
 
-    & .el-switch__button {
+    &:after {
+      content: "";
       position: absolute;
       top: 1px;
       left: 1px;
       border-radius: $--border-radius-circle;
-      transition: transform .3s;
+      transition: all .3s;
       width: $--switch-button-size;
       height: $--switch-button-size;
       background-color: $--color-white;
@@ -85,6 +86,10 @@
     .el-switch__core {
       border-color: $--switch-on-color;
       background-color: $--switch-on-color;
+      &::after {
+        left: 100%;
+        margin-left: -$--switch-button-size - 1px;
+      }
     }
   }
 

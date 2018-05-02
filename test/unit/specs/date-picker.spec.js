@@ -261,6 +261,33 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('nuke invalid input on close', done => {
+    vm = createVue({
+      template: '<el-date-picker v-model="value" value-format="yyyy-MM-dd" ref="compo" />',
+      data() {
+        return {
+          value: '2010-10-01'
+        };
+      }
+    }, true);
+
+    const compo = vm.$refs.compo;
+    const input = compo.$el.querySelector('input');
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      compo.userInput = 'abc';
+      compo.handleChange(); // simplified test
+      compo.handleClose();
+      setTimeout(_ => {
+        expect(input.value).to.equal('2010-10-01');
+        expect(vm.value).to.equal('2010-10-01');
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
   it('select datetime with defaultTime', done => {
     vm = createVue({
       template: `
@@ -1350,6 +1377,107 @@ describe('DatePicker', () => {
 
         setTimeout(_ => {
           expect(vm.picker.$el.querySelector('.el-date-table.is-week-mode').style.display).to.equal('');
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('highlight correctly', done => {
+      vm = createVue({
+        template: '<el-date-picker type="week" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: null
+          };
+        }
+      }, true);
+
+      const input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+
+      setTimeout(() => {
+        const pickerEl = vm.$refs.compo.picker.$el;
+        const numberOfHighlightRows = () => pickerEl.querySelectorAll('.el-date-table__row.current').length;
+        expect(numberOfHighlightRows()).to.equal(0);
+        setTimeout(() => {
+          pickerEl.querySelector('td.available').click();
+          setTimeout(() => {
+            expect(vm.value).to.exist;
+            input.blur();
+            input.focus();
+            setTimeout(() => {
+              expect(numberOfHighlightRows()).to.equal(1);
+              // test: next month should not have highlight
+              pickerEl.querySelector('.el-icon-arrow-right').click();
+              setTimeout(() => {
+                expect(numberOfHighlightRows()).to.equal(0);
+                // test: next year should not have highlight
+                pickerEl.querySelector('.el-icon-arrow-left').click(); // go back one month
+                pickerEl.querySelector('.el-icon-d-arrow-right').click();
+                setTimeout(() => {
+                  expect(numberOfHighlightRows()).to.equal(0);
+                  done();
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+  });
+
+  describe('type:dates', () => {
+    let vm;
+
+    beforeEach(done => {
+      vm = createVue({
+        template: '<el-date-picker type="dates" value-format="timestamp" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: []
+          };
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('click cell', done => {
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      td.click();
+      setTimeout(_ => {
+        expect(vm.$refs.compo.picker.selectedDate).to.exist;
+        expect(vm.value.length).to.equal(1);
+        done();
+      }, DELAY);
+    });
+
+    it('value format', done => {
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      td.click();
+      setTimeout(_ => {
+        vm.$refs.compo.picker.$el.querySelector('.el-button--default').click();
+        setTimeout(() => {
+          expect(vm.$refs.compo.picker.selectedDate).to.exist;
+          expect(vm.value.length).to.equal(1);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('restore value when cancel', done => {
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      td.click();
+      setTimeout(_ => {
+        vm.$refs.compo.handleClose();
+        setTimeout(() => {
+          expect(vm.value.length).to.equal(0);
           done();
         }, DELAY);
       }, DELAY);
