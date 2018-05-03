@@ -39,6 +39,7 @@
 <p align="center">
   <b>Special thanks to the generous sponsorship by:</b>
 </p>
+<p align="center">
 <table>
   <tbody>
     <tr>
@@ -60,6 +61,7 @@
     </tr>
   </tbody>
 </table>
+</p>
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
