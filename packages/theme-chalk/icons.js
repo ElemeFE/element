@@ -6,8 +6,10 @@ import ArrowBoth from '../../packages/theme-chalk/src/icons/arrow-both.svg';
 import ArrowDownLong from '../../packages/theme-chalk/src/icons/arrow-down-long.svg';
 import ArrowDownSoft from '../../packages/theme-chalk/src/icons/arrow-down-soft.svg';
 import ArrowDown from '../../packages/theme-chalk/src/icons/arrow-down.svg';
+import ArrowLeftLong from '../../packages/theme-chalk/src/icons/arrow-left-long.svg';
 import ArrowLeft from '../../packages/theme-chalk/src/icons/arrow-left.svg';
 import ArrowNext from '../../packages/theme-chalk/src/icons/arrow-next.svg';
+import ArrowRightLong from '../../packages/theme-chalk/src/icons/arrow-right-long.svg';
 import ArrowRight from '../../packages/theme-chalk/src/icons/arrow-right.svg';
 import ArrowUpSoft from '../../packages/theme-chalk/src/icons/arrow-up-soft.svg';
 import ArrowsReverse from '../../packages/theme-chalk/src/icons/arrows-reverse.svg';
@@ -102,6 +104,7 @@ import Upload from '../../packages/theme-chalk/src/icons/upload.svg';
 import Utility from '../../packages/theme-chalk/src/icons/utility.svg';
 import Vault from '../../packages/theme-chalk/src/icons/vault.svg';
 import Warning from '../../packages/theme-chalk/src/icons/warning.svg';
+import Wc from '../../packages/theme-chalk/src/icons/wc.svg';
 import Wifi from '../../packages/theme-chalk/src/icons/wifi.svg';
 import Window from '../../packages/theme-chalk/src/icons/window.svg';
 
@@ -114,8 +117,10 @@ module.exports = {
   ArrowDownLong,
   ArrowDownSoft,
   ArrowDown,
+  ArrowLeftLong,
   ArrowLeft,
   ArrowNext,
+  ArrowRightLong,
   ArrowRight,
   ArrowUpSoft,
   ArrowsReverse,
@@ -210,6 +215,7 @@ module.exports = {
   Utility,
   Vault,
   Warning,
+  Wc,
   Wifi,
   Window
 };

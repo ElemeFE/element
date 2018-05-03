@@ -58,15 +58,13 @@
   @include scroll-bar;
 
   & .tm-input__clear {
-    fill: $--input-icon-color;
-    font-size: $--input-font-size;
+    fill: $--color-pastel-gray;
+    font-size: 18px;
     cursor: pointer;
     transition: $--color-transition-base;
-    width: $--icon-size-base;
-    height: $--icon-size-base;
 
     &:hover {
-      fill: $--input-clear-hover-color;
+      fill: $--input-icon-focus-color;
     }
   }
 
@@ -112,7 +110,7 @@
       & + .tm-input__prefix {
         color: $--input-icon-focus-color;
 
-        .tm-icon {
+        .tm-icon:not(.tm-input__clear) {
           fill: $--input-icon-focus-color;
         }
       }
@@ -128,6 +126,10 @@
     color: $--input-icon-color;
     transition: all .3s;
     pointer-events: none;
+
+    .tm-icon {
+      fill: $--input-icon-color;
+    }
   }
 
   @include e(suffix-inner) {
@@ -142,21 +144,19 @@
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
-  }
 
-  @include e((prefix, suffix)) {
-    line-height: $--input-height - 2;
     .tm-icon {
       fill: $--input-icon-color;
     }
   }
 
+  @include e((prefix, suffix)) {
+    line-height: $--input-height - 2;
+  }
+
   @include e(icon) {
-    height: 100%;
-    width: 16px;
     text-align: center;
     transition: all .3s;
-
     width: $--icon-size-base+2;
     height: $--icon-size-base+2;
   }
@@ -229,7 +229,7 @@
     }
 
     @include e((prefix, suffix)) {
-      line-height: $--input-height+4;
+      line-height: 48px;
     }
 
     .tm-input__icon {
@@ -243,10 +243,10 @@
 
     @include e(inner) {
       height: $--input-medium-height;
+      line-height: 40px;
     }
-
-    .tm-input__icon {
-      line-height: $--input-medium-height;
+    @include e((prefix, suffix)) {
+      line-height: 36px;
     }
   }
   @include m(small) {
@@ -255,9 +255,8 @@
     @include e(inner) {
       height: $--input-small-height;
     }
-
-    .tm-input__icon {
-      line-height: $--input-small-height;
+    @include e((prefix, suffix)) {
+      line-height: 32px;
     }
   }
   @include m(mini) {
@@ -266,9 +265,8 @@
     @include e(inner) {
       height: $--input-mini-height;
     }
-
-    .tm-input__icon {
-      line-height: $--input-mini-height;
+    @include e((prefix, suffix)) {
+      line-height: 26px;
     }
   }
 }

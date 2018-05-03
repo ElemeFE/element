@@ -8,7 +8,7 @@
     &:before {
       content: '*';
       position: absolute;
-      left: 9px;
+      left: 8px;
       top: 11px;
       color: red;
       line-height: normal;
@@ -42,7 +42,7 @@
 
   @include m(prefix) {
     &:before {
-      left: 33px;
+      left: 32px;
     }
   }
 }

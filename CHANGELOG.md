@@ -2,9 +2,17 @@
 
 ### 1.2.0
 
+*2018-05-02*
+
+- Добавлены иконки:
+    - wc
+    - arrow-left-long
+    - arrow-right-long
+
 *2018-05-01*
 
 - Добавлены иконки:
+    - wc
     - conductor
     - gear-n-wrench
     - glass

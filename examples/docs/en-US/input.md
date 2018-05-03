@@ -404,6 +404,8 @@ export default {
 <div class="demo-input-size">
   <tm-input
     size="extra-large"
+    suffix-icon="airplane"
+    prefix-icon="airplane"
     placeholder="Please Input"
     v-model="input6"
     required>
