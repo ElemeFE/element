@@ -8,24 +8,37 @@
     margin: 0 0 15px;
   }
   @include e(close) {
-    margin-left: 5px;
-    position: absolute;
-    right: 5px;
-    top: 0;
+    margin: 0;
+    position: relative;
+    left: 10px;
 
     .tm-icon {
       font-size: 16px;
       width: 16px;
       height: 16px;
       fill: $--color-pastel-gray;
+      opacity: 0;
+
+      &:hover {
+        fill: $--color-taupe-gray;
+      }
+
+      &:active {
+        fill: $--color-blueberry;
+      }
     }
   }
+
+  &:focus {
+    outline: none;
+  }
+
   @include e(active-bar) {
     position: absolute;
     bottom: 0;
     left: 0;
     height: 2px;
-    background-color: $--color-primary;
+    background-color: $--color-blueberry;
     z-index: 1;
     transition: transform .3s cubic-bezier(.645,.045,.355,1);
     list-style: none;
@@ -49,7 +62,7 @@
     }
 
     &:hover {
-      color: $--color-primary;
+      color: $--color-blueberry;
     }
   }
   @include e(nav-wrap) {
@@ -117,31 +130,33 @@
       border-radius: 3px;
     }
 
-    & .tm-icon--cross {
-      border-radius: 50%;
-      text-align: center;
-      transition: all .3s cubic-bezier(.645,.045,.355,1);
-      margin-left: 5px;
-      &:before {
-        transform: scale(.9);
-        display: inline-block;
-      }
-
-      &:hover {
-        fill: $--color-taupe-gray;
-      }
-      &:active {
-        fill: $--color-blueberry;
+    .tm-tabs__close {
+      > .tm-icon.tm-icon--cross-bold {
+        &:active {
+          fill: $--color-blueberry;
+        }
       }
     }
 
     @include when(active) {
-      color: $--color-primary;
+      color: $--color-blueberry;
     }
 
     &:hover {
-      color: $--color-primary;
+      color: $--color-blueberry;
       cursor: pointer;
+
+      .tm-tabs__close {
+
+        .tm-icon {
+          opacity: 1;
+          fill: $--color-taupe-gray;
+        }
+      }
+
+      .tm-icon:not(.tm-icon--cross-bold) {
+        fill: $--color-blueberry;
+      }
     }
 
     @include when(disabled) {
@@ -244,13 +259,13 @@
       color: $--color-text-secondary;
 
       &.is-active {
-        color: $--color-primary;
+        color: $--color-blueberry;
         background-color: $--color-white;
         border-right-color: $--border-color-base;
         border-left-color: $--border-color-base;
       }
       &:hover {
-        color: $--color-primary;
+        color: $--color-blueberry;
       }
     }
   }
@@ -508,36 +523,65 @@
     margin-bottom: 16px;
     .tm-tabs__item {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: $--tab-flow-item-height;
-      padding: 0 $--tab-flow-item-padding;
+      align-items: flex-start;
+      justify-content: flex-start;
+      min-height: $--tab-flow-item-height;
+      max-height: $--tab-flow-item-height;
+      line-height: $--tab-flow-item-height - 4;
+      padding: 6px $--tab-flow-item-padding;
       box-sizing: border-box;
       font-size: 14px;
-      line-height: 6px;
-      text-align: center;
+      text-align: left;
       color: $--tab-flow-item-text-color;
       background-color: transparent;
       border: $--tab-flow-item-border;
       border-radius: 4px;
+      transition: $--all-transition;
       &.is-active {
         background-color: $--tab-flow-item-active-color;
         border-color: $--tab-flow-item-active-color;
         box-shadow: $--tab-flow-item-shadow;
+
+        &:hover {
+          height: auto;
+          max-height: 300px;
+
+          .tm-tabs__label {
+            white-space: normal;
+          }
+        }
       }
       &.is-bottom, &.is-top {
         &:nth-child(2), &:last-child {
-          padding: 0 $--tab-flow-item-padding;
+          padding: 6px $--tab-flow-item-padding;
         }
       }
       & + .tm-tabs__item {
         margin-left: $--tab-flow-item-padding;
       }
+      .tm-tabs__label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 300px;
+        height: 100%;
+        line-height: 1.36;
+        transition: $--all-transition;
+        word-break: keep-all;
+        margin-top: 3px;
+      }
+      .tm-tabs__close {
+        line-height: normal;
+
+        .tm-icon {
+          line-height: 28px;
+        }
+      }
     }
     .tm-tabs__nav {
       padding: $--tab-flow-item-padding 1px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
     }
     .tm-tabs__nav-wrap:after {

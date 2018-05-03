@@ -173,12 +173,14 @@ Flow tabs.
 
 ```html
 <template>
-  <tm-tabs type="flow" v-model="activeName" @tab-click="handleClick">
-    <tm-tab-pane label="User" name="first" icon="airplane">User</tm-tab-pane>
-    <tm-tab-pane label="Config" name="second">Config</tm-tab-pane>
-    <tm-tab-pane label="Role" name="third">Role</tm-tab-pane>
-    <tm-tab-pane name="fourth" icon="airplane"></tm-tab-pane>
-  </tm-tabs>
+  <div style="padding: 20px; background-color: #f4f5f9;">
+    <tm-tabs type="flow" v-model="activeName" @tab-click="handleClick">
+      <tm-tab-pane label="User" name="first" icon="airplane">User</tm-tab-pane>
+      <tm-tab-pane icon="airplane" label="Config Config Config Config Config Config Config Config Config Config Config Config Config Config Config " name="second" closable>Config</tm-tab-pane>
+      <tm-tab-pane label="Role Role" name="third">Role</tm-tab-pane>
+      <tm-tab-pane name="fourth" icon="airplane" closable></tm-tab-pane>
+    </tm-tabs>
+  </div>
 </template>
 <script>
   export default {
