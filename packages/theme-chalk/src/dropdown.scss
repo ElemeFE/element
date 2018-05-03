@@ -71,6 +71,7 @@
   box-shadow: $--dropdown-menu-box-shadow;
 
   @include e(item) {
+    position: relative;
     list-style: none;
     line-height: 36px;
     padding: 0 20px;
@@ -79,9 +80,18 @@
     color: $--color-text-regular;
     cursor: pointer;
     outline: none;
+    white-space: nowrap;
     &:not(.is-disabled):hover, &:focus {
       background-color: $--dropdown-menuItem-hover-fill;
       color: $--dropdown-menuItem-hover-color;
+    }
+
+    .el-dropdown-menu__item--icon {
+      position: absolute;
+      font-size: 10px;
+      top: 50%;
+      right: 20px;
+      margin-top: -6px;
     }
 
     @include m(divided) {
@@ -91,12 +101,26 @@
       margin-top: $divided-offset;
       border-top: 1px solid $--border-color-lighter;
 
+      .el-dropdown-menu__item--icon {
+        margin-top: -2px;
+      }
+
       &:before {
         content: '';
         height: $divided-offset;
         display: block;
         margin: 0 -20px;
         background-color: $--color-white;
+      }
+    }
+
+    @include m(submenu) {
+      padding-right: 40px;
+
+      &.el-dropdown-menu__item--divided {
+        &:before {
+          margin-right: -40px;
+        }
       }
     }
 
