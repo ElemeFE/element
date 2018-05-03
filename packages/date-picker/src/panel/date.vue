@@ -188,6 +188,7 @@
       },
 
       value(val) {
+        if (this.selectionMode === 'dates' && this.value) return;
         if (isDate(val)) {
           this.date = new Date(val);
         } else {
