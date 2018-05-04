@@ -7,6 +7,8 @@
 - Обновлены иконки:
     - arrow-left-long
     - arrow-right-long
+- Изменены стили для button в form-group-item
+- Стилизация компонента Tabs
 
 *2018-05-02*
 
