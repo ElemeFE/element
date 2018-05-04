@@ -306,6 +306,38 @@ describe('Pagination', () => {
     }, 50);
   });
 
+  it('event:current-change after current page is manually updated', (done) => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          :total="15"
+          :current-page.sync="currentPage"
+          @current-change="emitCount++" />
+      `,
+
+      data() {
+        return {
+          emitCount: 0,
+          currentPage: 1
+        };
+      }
+    });
+    const next = vm.$el.querySelector('button.btn-next');
+    next.click();
+    setTimeout(() => {
+      expect(vm.emitCount).to.equal(1);
+      vm.currentPage = 1;
+      setTimeout(() => {
+        expect(vm.emitCount).to.equal(1);
+        next.click();
+        setTimeout(() => {
+          expect(vm.emitCount).to.equal(2);
+          done();
+        }, 50);
+      }, 50);
+    }, 50);
+  });
+
   it('event:size-change', done => {
     vm = createVue({
       template: `
