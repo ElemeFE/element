@@ -280,18 +280,36 @@ const formatAsFormatAndType = (value, customFormat, type) => {
   return formatter(value, format);
 };
 
-// only considers date-picker's value: Date or [Date, Date]
+/*
+ * Considers:
+ *   1. Date object
+ *   2. date string
+ *   3. array of 1 or 2
+ */
 const valueEquals = function(a, b) {
+  // considers Date object and string
+  const dateEquals = function(a, b) {
+    const aIsDate = a instanceof Date;
+    const bIsDate = b instanceof Date;
+    if (aIsDate && bIsDate) {
+      return a.getTime() === b.getTime();
+    }
+    if (!aIsDate && !bIsDate) {
+      return a === b;
+    }
+    return false;
+  };
+
   const aIsArray = a instanceof Array;
   const bIsArray = b instanceof Array;
   if (aIsArray && bIsArray) {
     if (a.length !== b.length) {
       return false;
     }
-    return a.every((item, index) => new Date(item).getTime() === new Date(b[index]).getTime());
+    return a.every((item, index) => dateEquals(item, b[index]));
   }
   if (!aIsArray && !bIsArray) {
-    return new Date(a).getTime() === new Date(b).getTime();
+    return dateEquals(a, b);
   }
   return false;
 };
@@ -865,7 +883,7 @@ export default {
 
     emitChange(val) {
       // determine user real change only
-      if (val !== this.valueOnOpen) {
+      if (!valueEquals(val, this.valueOnOpen)) {
         this.$emit('change', val);
         this.dispatch('ElFormItem', 'el.form.change', val);
         this.valueOnOpen = val;
@@ -874,7 +892,7 @@ export default {
 
     emitInput(val) {
       const formatted = this.formatToValue(val);
-      if (!valueEquals(this.value, formatted) || this.type === 'dates') {
+      if (!valueEquals(this.value, formatted)) {
         this.$emit('input', formatted);
       }
     },
