@@ -172,6 +172,41 @@
           key: Date.now(),
           value: ''
         });
+      },
+      switcherSearch (query, cb) {
+        const mock = [
+          {
+            title: 'title1',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title2',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title3',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title4',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title5',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          }
+        ]
+        cb(mock)
       }
     }
   }
@@ -849,6 +884,13 @@ Wrapper for item form group
     suffix-icon="man-woman"
     placeholder="Please Input">
   </tm-input>
+  <tm-value-switcher
+      :fetch-suggestions="switcherSearch"
+      suffix-icon-left="bell"
+      suffix-icon-right="bell"
+      left-placeholder="Значение 1"
+      right-placeholder="Значение 2">
+  </tm-value-switcher>
 </tm-form-group-item>
 <tm-form-group-item>
   <tm-select v-model="sizeForm.region" placeholder="please select your zone">
