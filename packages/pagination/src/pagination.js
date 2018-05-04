@@ -408,6 +408,9 @@ export default {
         } else {
           this.$emit('update:currentPage', newVal);
         }
+        
+        //reset lastEmittedPage
+        this.internalCurrentPage === 1 && (this.lastEmittedPage = -1);
       }
     },
 
