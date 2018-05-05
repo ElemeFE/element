@@ -67,7 +67,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: []
+        value13: [],
+        dynamic: ''
       };
     }
   };
@@ -134,7 +135,7 @@ Use DynamicPicker for date input.
 :::demo
 
 ```html
-<tm-date-picker v-model="value" ref="compo" type="dynamicpicker" default-value="2018-3-4"/>
+<tm-date-picker v-model="dynamic" ref="compo" type="dynamicpicker" default-value="2018-3-4"/>
 
 ```
 
