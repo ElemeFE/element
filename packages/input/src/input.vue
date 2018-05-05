@@ -92,6 +92,7 @@
 <script>
   import emitter from 'tmconsulting-ui/src/mixins/emitter';
   import Migrating from 'tmconsulting-ui/src/mixins/migrating';
+  import FormElementMixin from 'tmconsulting-ui/src/mixins/form-element';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'tmconsulting-ui/src/utils/merge';
 
@@ -100,7 +101,11 @@
 
     componentName: 'TmInput',
 
-    mixins: [emitter, Migrating],
+    mixins: [
+      emitter,
+      Migrating,
+      FormElementMixin
+    ],
 
     inject: {
       elForm: {

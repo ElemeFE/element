@@ -2,6 +2,49 @@
 
 ### 1.2.0
 
+*2018-05-04*
+
+- Обновлены иконки:
+    - arrow-left-long
+    - arrow-right-long
+- Изменены стили для button в form-group-item
+- Стилизация компонента Tabs
+
+*2018-05-02*
+
+- Добавлены иконки:
+    - wc
+    - arrow-left-long
+    - arrow-right-long
+
+*2018-05-01*
+
+- Добавлены иконки:
+    - wc
+    - conductor
+    - gear-n-wrench
+    - glass
+    - shower
+    - smoke
+    - cup-hot
+    - cooler
+    - extinguisher
+    - disabled-person (предыдущая переименована в seat-person)
+    - teddybear
+    - luggage
+    - negotiations
+    - hanger
+    - pram
+    - ramp
+    - service
+    - sofa
+    - boiler
+    - customs-officer
+    - utility
+    - arrow-up-soft
+    - arrow-down-soft
+    - knife-fork-2
+
 *2018-04-28*
 
 - Переделано отображение границ у полей ввода в Form Group Item (теперь используется псевдоэлемент :after)

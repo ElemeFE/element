@@ -49,8 +49,8 @@
       font-size: $--select-input-font-size;
       cursor: pointer;
       width: 16px;
-      height: 16px;
-
+      height: 100%;
+      line-height: 0;
       transition: transform .3s;
       transform: rotateZ(0deg);
 

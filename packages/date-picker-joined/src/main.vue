@@ -3,6 +3,7 @@
     <tm-input
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon"
+      :required="required"
       :size="size"
       readonly
       v-model="dateLabel"
@@ -59,6 +60,10 @@ export default {
     placeholder: {
       type: String,
       default: 'Дата'
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

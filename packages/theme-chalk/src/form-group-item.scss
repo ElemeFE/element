@@ -46,24 +46,49 @@
       }
     }
   }
-
-  .tm-button {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    height: 30px;
-    border-top: none;
-    border-bottom: none;
-    border-left: none;
-    border-right: 1px solid #ccc;
-    border-radius: 0;
-    &:last-child {
-      border-right: none;
+  .tm-value-switcher {
+    .tm-button {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 30px;
+      border-top: none;
+      border-bottom: none;
+      border-left: none;
+      border-right: 1px solid #ccc;
+      border-radius: 0;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
-
   .tm-date-picker-joined {
     > .tm-input {
       width: 100%;
     }
   }
+  // TODO: Что за кейс?
+  //.tm-button {
+  //  border: none;
+  //  &:after {
+  //    content: '';
+  //    position: absolute;
+  //    top: 50%;
+  //    height: 30px;
+  //    margin-top: -15px;
+  //    width: 1px;
+  //    background: $--color-pastel-gray;
+  //    z-index: 1;
+  //  }
+  //
+  //  &:hover, &:focus {
+  //    &:after {
+  //      background: $--color-pastel-gray;
+  //    }
+  //  }
+  //  &:last-child {
+  //    &:after {
+  //      display: none;
+  //    }
+  //  }
+  //}
 }

@@ -172,6 +172,41 @@
           key: Date.now(),
           value: ''
         });
+      },
+      switcherSearch (query, cb) {
+        const mock = [
+          {
+            title: 'title1',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title2',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title3',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title4',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          },
+          {
+            title: 'title5',
+            description: 'description',
+            icon: 'airplane',
+            code: 'code'
+          }
+        ]
+        cb(mock)
       }
     }
   }
@@ -428,11 +463,11 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ```html
 <tm-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" :status-icon="true">
-  <tm-form-item label="Activity name" prop="name">
-    <tm-input v-model="ruleForm.name"></tm-input>
+  <tm-form-item prop="name">
+    <tm-input v-model="ruleForm.name" placeholder="Input" required></tm-input>
   </tm-form-item>
-  <tm-form-item label="Activity zone" prop="region">
-    <tm-select v-model="ruleForm.region" placeholder="Activity zone">
+  <tm-form-item prop="region">
+    <tm-select v-model="ruleForm.region" placeholder="Activity zone" required>
       <tm-option label="Zone one" value="shanghai"></tm-option>
       <tm-option label="Zone two" value="beijing"></tm-option>
     </tm-select>
@@ -849,6 +884,13 @@ Wrapper for item form group
     suffix-icon="man-woman"
     placeholder="Please Input">
   </tm-input>
+  <tm-value-switcher
+      :fetch-suggestions="switcherSearch"
+      suffix-icon-left="bell"
+      suffix-icon-right="bell"
+      left-placeholder="Значение 1"
+      right-placeholder="Значение 2">
+  </tm-value-switcher>
 </tm-form-group-item>
 <tm-form-group-item>
   <tm-select v-model="sizeForm.region" placeholder="please select your zone">

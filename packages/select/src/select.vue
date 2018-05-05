@@ -143,6 +143,7 @@
   import { getValueByPath } from 'tmconsulting-ui/src/utils/util';
   import { valueEquals } from 'tmconsulting-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
+  import FormElementMixin from 'tmconsulting-ui/src/mixins/form-element';
 
   const sizeMap = {
     'medium': 36,
@@ -151,7 +152,13 @@
   };
 
   export default {
-    mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
+    mixins: [
+      Emitter,
+      Locale,
+      Focus('reference'),
+      NavigationMixin,
+      FormElementMixin
+    ],
 
     name: 'TmSelect',
 

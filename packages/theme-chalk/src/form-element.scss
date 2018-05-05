@@ -1,0 +1,48 @@
+@import "mixins/mixins";
+
+@include b(form-element) {
+  position: relative;
+
+  @include m(required) {
+
+    &:before {
+      content: '*';
+      position: absolute;
+      left: 8px;
+      top: 11px;
+      color: red;
+      line-height: normal;
+      z-index: 1;
+    }
+  }
+
+  @include m(extra-large) {
+    &:before {
+      top: 15px;
+    }
+  }
+
+  @include m(medium) {
+    &:before {
+      top: 10px;
+    }
+  }
+
+  @include m(small) {
+    &:before {
+      top: 9px;
+    }
+  }
+
+  @include m(mini) {
+    &:before {
+      top: 7px;
+    }
+  }
+
+  @include m(prefix) {
+    &:before {
+      left: 32px;
+    }
+  }
+}
