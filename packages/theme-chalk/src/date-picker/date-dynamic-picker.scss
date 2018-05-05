@@ -1,0 +1,108 @@
+@import "../common/var";
+
+@include b(date-dynamic-picker) {
+  width: 510px;
+
+  &.has-sidebar {
+    width: 756px;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .tm-picker-panel__body {
+    min-width: 0;
+    margin: 0;
+    padding: 0 16px;
+  }
+
+  .tm-picker-panel__content {
+    margin: 0;
+    padding: 16px 0;
+
+    &.is-full-width {
+      width: 100%;
+    }
+  }
+
+  @include e(header) {
+    position: relative;
+    text-align: center;
+    height: 28px;
+    margin-bottom: 5px;
+
+    [class*=arrow-left] {
+      float: left;
+    }
+
+    [class*=arrow-right] {
+      float: right;
+    }
+
+    div {
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: -0.1px;
+      color: #1e1e28;
+      line-height: 24px;
+    }
+  }
+
+  @include e(content) {
+    float: left;
+    width: calc(50% - 7px);
+    box-sizing: border-box;
+
+    @include when(right) {
+      .tm-date-dinamic-picker__header {
+
+        div {
+          margin-left: 50px;
+          margin-right: 50px;
+        }
+      }
+    }
+  }
+
+  @include e(editors-wrap) {
+    box-sizing: border-box;
+    display: table-cell;
+
+    @include when(right) {
+      text-align: right;
+    }
+  }
+
+  @include e(time-header) {
+    position: relative;
+    border-bottom: 1px solid $--datepicker-inner-border-color;
+    font-size: 12px;
+    padding: 8px 5px 5px 5px;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+
+    > .tm-icon--arrow-right {
+      font-size: 20px;
+      vertical-align: middle;
+      display: table-cell;
+      color: $--datepicker-icon-color;
+    }
+  }
+
+  @include e(time-picker-wrap) {
+    position: relative;
+    display: table-cell;
+    padding: 0 5px;
+
+    .tm-picker-panel {
+      position: absolute;
+      top: 13px;
+      right: 0;
+      z-index: 1;
+      background: $--color-white;
+    }
+  }
+}
