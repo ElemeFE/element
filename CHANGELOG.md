@@ -4,7 +4,7 @@
 
 *2018-05-05*
 
-- Добавлен DatePickerDynamic
+- Добавлен type "dynamicpicker" для компонента DatePicker
 
 *2018-05-04*
 
