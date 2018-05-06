@@ -135,7 +135,7 @@ Use DynamicPicker for date input.
 :::demo
 
 ```html
-<tm-date-picker v-model="dynamic" ref="compo" type="dynamicpicker" default-value="2018-3-4"/>
+<tm-date-picker v-model="dynamic" ref="compo" type="dynamic" default-value="2018-3-4"/>
 
 ```
 

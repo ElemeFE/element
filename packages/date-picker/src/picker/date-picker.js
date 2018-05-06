@@ -1,13 +1,13 @@
 import Picker from '../picker';
 import DatePanel from '../panel/date';
 import DateRangePanel from '../panel/date-range';
-import dynamicPickerPanel from '../panel/dynamic-picker';
+import DateDynamicPanel from '../panel/dynamic-picker';
 
 const getPanel = function(type) {
   if (type === 'daterange' || type === 'datetimerange') {
     return DateRangePanel;
-  } else if (type === 'dynamicpicker') {
-    return dynamicPickerPanel;
+  } else if (type === 'dynamic') {
+    return DateDynamicPanel;
   }
   return DatePanel;
 };

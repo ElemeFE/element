@@ -115,7 +115,7 @@ const DEFAULT_FORMATS = {
   week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
-  dynamicpicker: 'yyyy-MM-dd',
+  dynamic: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy'
 };
@@ -128,7 +128,7 @@ const HAVE_TRIGGER_TYPES = [
   'month',
   'year',
   'daterange',
-  'dynamicpicker',
+  'dynamic',
   'timerange',
   'datetimerange'
 ];
@@ -240,7 +240,7 @@ const TYPE_VALUE_RESOLVER_MAP = {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
   },
-  dynamicpicker: {
+  dynamic: {
     formatter: DYNAMIC_FORMATTER,
     parser: DYNAMIC_PARSER
   },
