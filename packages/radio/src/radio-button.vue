@@ -2,6 +2,7 @@
   <label
     class="tm-radio-button"
     :class="[
+      theme ? 'tm-radio-button--' + theme : '',
       size ? 'tm-radio-button--' + size : '',
       { 'is-active': value === label },
       { 'is-disabled': isDisabled },
@@ -52,6 +53,7 @@
       label: {},
       disabled: Boolean,
       name: String,
+      theme: String,
       customData: [String, Number, Function, Object]
     },
     data() {

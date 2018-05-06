@@ -1,6 +1,6 @@
 @import "../common/var";
 
-@include b(date-range-picker) {
+@include b(date-dynamic-picker) {
   width: 510px;
 
   &.has-sidebar {
@@ -14,11 +14,13 @@
 
   .tm-picker-panel__body {
     min-width: 0;
+    margin: 0;
     padding: 0 16px;
   }
 
   .tm-picker-panel__content {
     margin: 0;
+    padding: 16px 0;
 
     &.is-full-width {
       width: 100%;
@@ -52,11 +54,9 @@
     float: left;
     width: calc(50% - 7px);
     box-sizing: border-box;
-    margin: 0;
-    padding: 16px 0;
 
     @include when(right) {
-      .tm-date-range-picker__header {
+      .tm-date-dinamic-picker__header {
 
         div {
           margin-left: 50px;

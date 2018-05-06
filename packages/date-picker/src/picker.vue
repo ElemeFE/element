@@ -115,6 +115,7 @@ const DEFAULT_FORMATS = {
   week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
+  dynamic: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy'
 };
@@ -127,6 +128,7 @@ const HAVE_TRIGGER_TYPES = [
   'month',
   'year',
   'daterange',
+  'dynamic',
   'timerange',
   'datetimerange'
 ];
@@ -149,7 +151,32 @@ const RANGE_FORMATTER = function(value, format) {
   }
   return '';
 };
+const DYNAMIC_FORMATTER = function(value, format) {
+  if (Array.isArray(value) && value.length === 2) {
+    const start = value[0];
+    const end = value[1];
+
+    if (start && end) {
+      return DATE_FORMATTER(start, format) + ' - ' + DATE_FORMATTER(end, format);
+    }
+  } else {
+    return DATE_FORMATTER(value, format);
+  }
+  return '';
+};
 const RANGE_PARSER = function(array, format, separator) {
+  if (!Array.isArray(array)) {
+    array = array.split(separator);
+  }
+  if (array.length === 2) {
+    const range1 = array[0];
+    const range2 = array[1];
+
+    return [DATE_PARSER(range1, format), DATE_PARSER(range2, format)];
+  }
+  return [];
+};
+const DYNAMIC_PARSER = function(array, format, separator) {
   if (!Array.isArray(array)) {
     array = array.split(separator);
   }
@@ -212,6 +239,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
   daterange: {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
+  },
+  dynamic: {
+    formatter: DYNAMIC_FORMATTER,
+    parser: DYNAMIC_PARSER
   },
   datetimerange: {
     formatter: RANGE_FORMATTER,

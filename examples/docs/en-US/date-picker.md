@@ -67,7 +67,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: []
+        value13: [],
+        dynamic: ''
       };
     }
   };
@@ -125,6 +126,20 @@ Use slots `topBlock` and `bottomBlock` to extend DatePicker's popover.
 
 ```
 
+:::
+
+## DynamicPicker
+
+Use DynamicPicker for date input.
+
+:::demo
+
+```html
+<tm-date-picker v-model="dynamic" ref="compo" type="dynamic" default-value="2018-3-4"/>
+
+```
+
+:::
 
 ###  Enter Date
 

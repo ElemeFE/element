@@ -17,6 +17,23 @@
     }
   }
 
+  @include e(switch) {
+    padding-top: 16px;
+
+    .tm-radio-group {
+      display: flex;
+
+      .tm-radio-button {
+        flex: 1 1 0px;
+
+        .tm-radio-button__inner {
+          width: 100%;
+          // border-color: #5e82fc;
+        }
+      }
+    }
+  }
+
   @include e(content) {
     position: relative;
     margin: 15px;
