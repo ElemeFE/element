@@ -824,6 +824,9 @@ export default {
         this.emitInput(date);
         this.picker.resetView && this.picker.resetView();
       });
+      this.picker.$on('dynamicChange', value => {
+        this.$emit('typechange', value);
+      });
 
       this.picker.$on('select-range', (start, end, pos) => {
         if (this.refInput.length === 0) return;

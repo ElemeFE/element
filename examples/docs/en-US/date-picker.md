@@ -68,7 +68,8 @@
         value11: '',
         value12: '',
         value13: [],
-        dynamic: ''
+        dynamic: '',
+        dynamicCurrentValue: null
       };
     }
   };
@@ -128,15 +129,20 @@ Use slots `topBlock` and `bottomBlock` to extend DatePicker's popover.
 
 :::
 
-## DynamicPicker
+### DynamicPicker
 
 Use DynamicPicker for date input.
 
 :::demo
 
 ```html
-<tm-date-picker v-model="dynamic" ref="compo" type="dynamic" default-value="2018-3-4"/>
-
+<div>
+    <span>Now selected type is: {{ dynamicCurrentValue }}</span>
+    <br>
+    <div>
+        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" default-value="2018-3-4"/>
+    </div>
+</div>
 ```
 
 :::
