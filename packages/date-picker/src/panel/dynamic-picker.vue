@@ -19,7 +19,7 @@
         </div>
         <div class="tm-picker-panel__body">
           <div class="tm-picker-panel__switch">
-            <tm-radio-group v-model="panelswitch" @change="handlePanelChange">
+            <tm-radio-group v-model="panelSwitch" @change="handlePanelChange">
               <tm-radio-button name="double" theme="primary" label="double">Туда-обратно</tm-radio-button>
               <tm-radio-button name="single" theme="primary" label="single">Только туда</tm-radio-button>
             </tm-radio-group>
@@ -89,7 +89,7 @@
               </span>
             </span>
           </div>
-          <template v-if="panelswitch === 'double'">
+          <template v-if="panelSwitch === 'double'">
             <div class="tm-picker-panel__content tm-date-dynamic-picker__content is-left">
               <div class="tm-date-dynamic-picker__header">
                 <button
@@ -243,6 +243,8 @@
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmButton from 'tmconsulting-ui/packages/button';
   import TmIcon from 'tmconsulting-ui/packages/icon';
+  import TmRadioGroup from 'tmconsulting-ui/packages/radio-group';
+  import TmRadioButton from 'tmconsulting-ui/packages/radio-button';
 
   const advanceDate = (date, amount) => {
     return new Date(new Date(date).getTime() + amount);
@@ -385,7 +387,7 @@
         arrowControl: false,
         unlinkPanels: false,
         date: new Date(),
-        panelswitch: 'double'
+        panelSwitch: 'double'
       };
     },
 
@@ -553,6 +555,7 @@
       },
 
       handlePanelChange() {
+        this.$emit('dynamicChange', this.panelSwitch);
         if (this.minDate) {
           this.value = this.minDate;
         }
@@ -689,6 +692,6 @@
       }
     },
 
-    components: { TmIcon, TimePicker, DateTable, TmInput, TmButton }
+    components: { TmIcon, TimePicker, DateTable, TmInput, TmButton, TmRadioGroup, TmRadioButton }
   };
 </script>
