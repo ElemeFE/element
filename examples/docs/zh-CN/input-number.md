@@ -36,7 +36,7 @@
 :::demo 要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+  <el-input-number v-model="num1" @change="handleChange" :decimal="2" :min="1" :max="10" label="描述文字"></el-input-number>
 </template>
 <script>
   export default {
@@ -155,6 +155,8 @@
 | value    | 绑定值         | number | — | — |
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
+| integer  | 设置计数器结果是否整数 | boolean | — | false |
+| decimal  | 设置计数器结果允许几位小数 | number | — | 0 |
 | step     | 计数器步长           | number   | — | 1 |
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
