@@ -1676,6 +1676,60 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('change event', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker
+            ref="compo"
+            v-model="value"
+            type="daterange" />`,
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+
+      const spy = sinon.spy();
+      vm.$refs.compo.$on('change', spy);
+
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        const picker = vm.$refs.compo.picker;
+        setTimeout(_ => {
+          picker.$el.querySelector('td.available').click();
+          setTimeout(_ => {
+            picker.$el.querySelector('td.available ~ td.available').click();
+            setTimeout(_ => {
+              expect(spy.calledOnce).to.equal(true);
+              console.log('first assert passed');
+              // change event is not emitted if used does not change value
+              // datarange also requires proper array equality check
+              input.blur();
+              input.focus();
+              setTimeout(_ => {
+                const startCell = picker.$el.querySelector('td.start-date');
+                const endCell = picker.$el.querySelector('td.end-date');
+                startCell.click();
+                setTimeout(_ => {
+                  endCell.click();
+                  setTimeout(_ => {
+                    expect(spy.calledOnce).to.equal(true);
+                    console.log('second assert passed');
+                    done();
+                  }, DELAY);
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
     describe('default value', () => {
       it('single', done => {
         let defaultValue = '2000-10-01';
