@@ -28,6 +28,7 @@
     </span>
     <el-input
       ref="input"
+      :readonly="readonly"
       :value="currentValue"
       :disabled="inputNumberDisabled"
       :size="inputNumberSize"
@@ -83,6 +84,10 @@
       min: {
         type: Number,
         default: -Infinity
+      },
+      readonly: {
+        type: Boolean,
+        default: false
       },
       value: {},
       disabled: Boolean,

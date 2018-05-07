@@ -19,6 +19,9 @@ export declare class ElInputNumber extends ElementUIComponent {
   /** Size of the component */
   size: InputNumberSize
 
+  /** Whether the input is readonly */
+  readonly: boolean
+
   /** Whether the component is disabled */
   disabled: boolean
 
