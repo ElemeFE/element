@@ -693,7 +693,7 @@
 | focus | 当 input 获得焦点时触发 | (event: Event) |
 
 ### Select Slots
-|   名称   | 说明    |
+|   name  | 说明     |
 |---------|---------|
 |    —    | Option 组件列表 |
 | prefix  | Select 组件头部内容 |
