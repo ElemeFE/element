@@ -329,7 +329,8 @@
         maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
-        unlinkPanels: false
+        unlinkPanels: false,
+        autoClose: false
       };
     },
 
@@ -513,7 +514,7 @@
           this.maxDate = maxDate;
           this.minDate = minDate;
         }, 10);
-        if (!close || this.showTime) return;
+        if (!close || (!this.autoClose && this.showTime)) return;
         this.handleConfirm();
       },
 

@@ -257,7 +257,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       align="right"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
-      :default-time="['12:00:00', '08:00:00']">
+      :default-time="['12:00:00', '08:00:00']"
+      auto-close>
     </el-date-picker>
   </div>
 </template>
@@ -300,6 +301,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 | prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
+| auto-close | 当选择完日期后，自动确认并关闭| boolean | — | false
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

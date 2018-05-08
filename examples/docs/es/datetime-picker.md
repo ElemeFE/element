@@ -259,7 +259,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
       align="right"
       start-placeholder="Start Date"
       end-placeholder="End Date"
-      :default-time="['12:00:00', '08:00:00']">
+      :default-time="['12:00:00', '08:00:00']"
+      auto-close>
     </el-date-picker>
   </div>
 </template>
@@ -302,7 +303,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
 | prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
 | clear-icon         | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
-
+| auto-close | Cuando se seleccionó la fecha de rango, auto cierre el panel | boolean | — | false
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |
 | -------------- | ---------------------------------------- | -------- | ----------------- | ----------- |
