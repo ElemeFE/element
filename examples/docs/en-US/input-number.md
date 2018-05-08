@@ -160,6 +160,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
 |size | size of the component | string | large/small| — |
+|readonly | same as `readonly` in native input | boolean | — | false |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |
 |controls-position | position of the control buttons | string | right | - |
