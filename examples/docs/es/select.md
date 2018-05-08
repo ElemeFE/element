@@ -703,6 +703,12 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | blur           | se dispara cuando el input pierde el foco | (event: Event)                           |
 | focus          | se dispara cuando el input obtiene el foco | (event: Event)                           |
 
+### Select Slots
+| Name    | Description |
+|---------|-------------|
+|    —    | Option component list |
+| prefix  | content as Select prefix |
+
 ### Atributos del grupo de opciones
 | Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ------- | ----------------- | ----------- |
