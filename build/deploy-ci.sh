@@ -36,7 +36,7 @@ if [ "$TRAVIS_TAG" ]; then
   # build site
   npm run deploy:build
   cd temp_web
-  git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
+  git clone --depth 1 -b gh-pages --single-branch https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
   # build sub folder
   echo $TRAVIS_TAG
 
