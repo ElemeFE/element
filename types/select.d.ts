@@ -33,6 +33,12 @@ export declare class ElSelect extends ElementUIComponent {
   /** The name attribute of select input */
   name: string
 
+  /** Prefix icon class */
+  prefixIcon: string
+
+  /** Suffix icon class */
+  suffixIcon: string
+  
   /** Placeholder */
   placeholder: string
 

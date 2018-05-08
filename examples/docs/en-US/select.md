@@ -317,6 +317,52 @@ You can clear Select using a clear icon.
 ```
 :::
 
+### Select with icon
+
+<!-- You can clear Select using a clear icon. -->
+Add icon on left side in select. 
+
+:::demo Set `prefix-icon` attribute for `el-select` and icon will appear. Note that you have on prefix icon option.  you can not add icon using slot. eg. `<i slot="prefix" class="el-input__icon el-icon-search"></i>`
+```html
+<template>
+  <el-select prefix-icon="el-icon-search" v-model="value4" clearable placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value4: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Basic multiple select
 
 Multiple select uses tags to display selected options.
@@ -674,6 +720,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | placeholder | placeholder | string | — | Select |
 | filterable | whether Select is filterable | boolean | — | false |
 | allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |
+| prefix-icon   | prefix icon class  | string          | — | — |
 | filter-method | custom filter method | function | — | — |
 | remote | whether options are loaded from server | boolean | — | false |
 | remote-method | custom remote search method | function | — | — |

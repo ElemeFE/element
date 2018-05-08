@@ -75,6 +75,7 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :id="id"
+      :prefix-icon="prefixIcon"
       :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
@@ -254,6 +255,7 @@
     directives: { Clickoutside },
 
     props: {
+      prefixIcon: String,
       name: String,
       id: String,
       value: {
