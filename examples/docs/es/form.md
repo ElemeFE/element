@@ -889,3 +889,4 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | Metodo     | Descripción                              | Parametros |
 | ---------- | ---------------------------------------- | ---------- |
 | resetField | restablecer campo actual y eliminar resultado de validación | —          |
+| clearValidate | remove validation status of the field | - |
