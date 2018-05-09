@@ -96,7 +96,15 @@
         default: ''
       },
       name: String,
-      label: String
+      label: String,
+      integer: {
+        type: Boolean,
+        default: false
+      },
+      decimal: {
+        type: Number,
+        default: 0
+      }
     },
     data() {
       return {
@@ -190,6 +198,11 @@
       },
       setCurrentValue(newVal) {
         const oldVal = this.currentValue;
+        if (this.integer) newVal = Math.floor(newVal);
+        if (!this.integer && this.decimal > 0) {
+          let pow = Math.pow(10, this.decimal);
+          newVal = Math.round(newVal * pow) / pow;
+        }
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
         if (oldVal === newVal) {

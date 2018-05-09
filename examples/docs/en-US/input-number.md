@@ -158,6 +158,8 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |value | binding value| number | — | — |
 |min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
+| integer  | the value allowed to be an integer  | boolean | — | false |
+| decimal  | the value Keep N decimal digits | number | — | 0 |
 |step | incremental step | number | — | 1 |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |

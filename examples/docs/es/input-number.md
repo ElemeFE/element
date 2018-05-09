@@ -157,8 +157,10 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | Atributo          | Descripción                              | Tipo    | Valores aceptados | Por defecto |
 | ----------------- | ---------------------------------------- | ------- | ----------------- | ----------- |
 | value             | valor vinculado                          | number  | —                 | —           |
-| min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
+| min               | el valor mínimo permitido                | number  | —                 | `-Infinity` |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
+| integer           | el valor formato de enteros              | boolean | —                 | false       |
+| decimal           | el valor formato n decimales             | number  | —                 | 0           |
 | step              | incremento (salto)                       | number  | —                 | 1           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |

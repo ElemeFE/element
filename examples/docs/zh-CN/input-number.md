@@ -155,6 +155,8 @@
 | value    | 绑定值         | number | — | — |
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
+| integer  | 设置计数器结果是否整数 | boolean | — | false |
+| decimal  | 设置计数器结果允许几位小数 | number | — | 0 |
 | step     | 计数器步长           | number   | — | 1 |
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
