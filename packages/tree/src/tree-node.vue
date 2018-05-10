@@ -167,6 +167,11 @@
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
+        if (this.tree.checkOnClickNode) {
+          this.handleCheckChange(null, {
+            target: { checked: !this.node.checked }
+          });
+        }
         this.tree.$emit('node-click', this.node.data, this.node, this);
       },
 

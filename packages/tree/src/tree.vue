@@ -83,6 +83,7 @@
         type: Boolean,
         default: true
       },
+      checkOnClickNode: Boolean,
       checkDescendants: {
         type: Boolean,
         default: false

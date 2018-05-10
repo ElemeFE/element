@@ -79,6 +79,9 @@ export declare class ElTree extends ElementUIComponent {
   /** Whether to expand or collapse node when clicking on the node. If false, then expand or collapse node only when clicking on the arrow icon. */
   expandOnClickNode: boolean
 
+  /** Whether to check or uncheck node when clicking on the node, if false, the node can only be checked or unchecked by clicking on the checkbox. */
+  checkOnClickNode: boolean
+
   /** Whether to expand father node when a child node is expanded */
   autoExpandParent: boolean
 
