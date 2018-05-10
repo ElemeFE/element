@@ -162,12 +162,11 @@
         messageBox.closeDialog(); // 解绑
         if (this.lockScroll) {
           setTimeout(() => {
-            if (this.modal && this.bodyOverflow !== 'hidden') {
-              document.body.style.overflow = this.bodyOverflow;
+            if (this.modal) {
               document.body.style.paddingRight = this.bodyPaddingRight;
             }
-            this.bodyOverflow = null;
             this.bodyPaddingRight = null;
+            removeClass(document.body, 'el-popup-parent--hidden');
           }, 200);
         }
         this.opened = false;

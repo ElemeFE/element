@@ -2,7 +2,7 @@ import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
-import { getStyle } from '../dom';
+import { getStyle, addClass, removeClass, hasClass } from '../dom';
 
 let idSeed = 1;
 const transitions = [];
@@ -103,18 +103,16 @@ export default {
   beforeDestroy() {
     PopupManager.deregister(this._popupId);
     PopupManager.closeModal(this._popupId);
-    if (this.modal && this.bodyOverflow !== null && this.bodyOverflow !== 'hidden') {
-      document.body.style.overflow = this.bodyOverflow;
+    if (this.modal) {
       document.body.style.paddingRight = this.bodyPaddingRight;
     }
-    this.bodyOverflow = null;
     this.bodyPaddingRight = null;
+    removeClass(document.body, 'el-popup-parent--hidden');
   },
 
   data() {
     return {
       opened: false,
-      bodyOverflow: null,
       bodyPaddingRight: null,
       rendered: false
     };
@@ -186,9 +184,8 @@ export default {
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
-          if (!this.bodyOverflow) {
+          if (!hasClass(document.body, 'el-popup-parent--hidden')) {
             this.bodyPaddingRight = document.body.style.paddingRight;
-            this.bodyOverflow = document.body.style.overflow;
           }
           scrollBarWidth = getScrollBarWidth();
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
@@ -196,7 +193,7 @@ export default {
           if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll')) {
             document.body.style.paddingRight = scrollBarWidth + 'px';
           }
-          document.body.style.overflow = 'hidden';
+          addClass(document.body, 'el-popup-parent--hidden');
         }
       }
 
@@ -246,12 +243,11 @@ export default {
 
       if (this.lockScroll) {
         setTimeout(() => {
-          if (this.modal && this.bodyOverflow !== 'hidden') {
-            document.body.style.overflow = this.bodyOverflow;
+          if (this.modal) {
             document.body.style.paddingRight = this.bodyPaddingRight;
           }
-          this.bodyOverflow = null;
           this.bodyPaddingRight = null;
+          removeClass(document.body, 'el-popup-parent--hidden');
         }, 200);
       }
 
