@@ -5,39 +5,6 @@ import getScrollBarWidth from '../scrollbar-width';
 import { getStyle, addClass, removeClass, hasClass } from '../dom';
 
 let idSeed = 1;
-const transitions = [];
-
-const hookTransition = (transition) => {
-  if (transitions.indexOf(transition) !== -1) return;
-
-  const getVueInstance = (element) => {
-    let instance = element.__vue__;
-    if (!instance) {
-      const textNode = element.previousSibling;
-      if (textNode.__vue__) {
-        instance = textNode.__vue__;
-      }
-    }
-    return instance;
-  };
-
-  Vue.transition(transition, {
-    afterEnter(el) {
-      const instance = getVueInstance(el);
-
-      if (instance) {
-        instance.doAfterOpen && instance.doAfterOpen();
-      }
-    },
-    afterLeave(el) {
-      const instance = getVueInstance(el);
-
-      if (instance) {
-        instance.doAfterClose && instance.doAfterClose();
-      }
-    }
-  });
-};
 
 let scrollBarWidth;
 
@@ -54,10 +21,6 @@ export default {
     visible: {
       type: Boolean,
       default: false
-    },
-    transition: {
-      type: String,
-      default: ''
     },
     openDelay: {},
     closeDelay: {},
@@ -86,12 +49,6 @@ export default {
     closeOnClickModal: {
       type: Boolean,
       default: false
-    }
-  },
-
-  created() {
-    if (this.transition) {
-      hookTransition(this.transition);
     }
   },
 
@@ -206,9 +163,7 @@ export default {
 
       this.onOpen && this.onOpen();
 
-      if (!this.transition) {
-        this.doAfterOpen();
-      }
+      this.doAfterOpen();
     },
 
     doAfterOpen() {
@@ -253,9 +208,7 @@ export default {
 
       this.opened = false;
 
-      if (!this.transition) {
-        this.doAfterClose();
-      }
+      this.doAfterClose();
     },
 
     doAfterClose() {

@@ -39,7 +39,6 @@ export default {
       type: Number,
       default: 35
     },
-    transition: String,
     appendToBody: {
       type: Boolean,
       default: true

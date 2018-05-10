@@ -170,10 +170,7 @@
           }, 200);
         }
         this.opened = false;
-
-        if (!this.transition) {
-          this.doAfterClose();
-        }
+        this.doAfterClose();
         setTimeout(() => {
           if (this.action) this.callback(this.action, this);
         });
