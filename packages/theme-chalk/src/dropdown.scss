@@ -79,8 +79,10 @@
   border-radius: $--border-radius-base;
   box-shadow: $--dropdown-menu-box-shadow;
 
-  &.tm-popper > .popper__arrow {
-    display: none;
+  &.tm-popper {
+    & > .popper__arrow {
+      display: none;
+    }
   }
 
   @include e(icon) {

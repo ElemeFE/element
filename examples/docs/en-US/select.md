@@ -183,6 +183,108 @@ When there are plenty of options, use a drop-down menu to display and select des
 ```
 :::
 
+### Different Sizes
+
+:::demo Use `size` to change its size.
+
+```html
+<template>
+  <div style="margin-bottom: 10px;">
+      Extra-large:<br>
+      <tm-select v-model="value" placeholder="Select" size="extra-large">
+        <tm-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </tm-option>
+      </tm-select>
+  </div>
+  <div style="margin-bottom: 10px;">
+      Large:<br>
+      <tm-select v-model="value" placeholder="Select" size="large">
+        <tm-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </tm-option>
+      </tm-select>
+  </div>
+  <div style="margin-bottom: 10px;">
+      Medium:<br>
+      <tm-select v-model="value" placeholder="Select" size="medium">
+        <tm-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </tm-option>
+      </tm-select>
+  </div>
+  <div style="margin-bottom: 10px;">
+      Default:<br>
+      <tm-select v-model="value" placeholder="Select">
+        <tm-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </tm-option>
+      </tm-select>
+  </div>
+  <div style="margin-bottom: 10px;">
+      Small:<br>
+      <tm-select v-model="value" placeholder="Select" size="small">
+        <tm-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </tm-option>
+      </tm-select>
+  </div>
+  <div style="margin-bottom: 10px;">
+      Mini:<br>
+      <tm-select v-model="value" placeholder="Select" size="mini">
+        <tm-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </tm-option>
+      </tm-select>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Disabled option
 
 :::demo Set the value of `disabled` in `tm-option` to `true` to disable this option.

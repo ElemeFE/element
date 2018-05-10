@@ -37,6 +37,20 @@
   .tm-scrollbar.is-empty .tm-select-dropdown__list{
     padding: 0;
   }
+  &.tm-popper {
+    &[x-placement^="top"] {
+      margin-bottom: #{$--popover-arrow-size};
+    }
+    &[x-placement^="bottom"] {
+      margin-top: #{$--popover-arrow-size};
+    }
+    &[x-placement^="right"] {
+      margin-left: #{$--popover-arrow-size};
+    }
+    &[x-placement^="left"] {
+      margin-right: #{$--popover-arrow-size};
+    }
+  }
 }
 
 @include b(select-dropdown__empty) {
