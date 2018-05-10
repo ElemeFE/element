@@ -82,6 +82,16 @@ describe('Pagination', () => {
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
   });
 
+  it('pageSize: NaN', () => {
+    vm = createTest(Pagination, {
+      pageSize: NaN,
+      total: 100
+    });
+
+    const pagers = vm.$el.querySelectorAll('li.number');
+    expect(pagers).to.length(7);
+  });
+
   it('pageCount', () => {
     const vm = createTest(Pagination, {
       pageSize: 25,
@@ -89,6 +99,16 @@ describe('Pagination', () => {
     });
 
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
+  });
+
+  it('pagerCount', () => {
+    const vm = createTest(Pagination, {
+      pageSize: 25,
+      total: 1000,
+      pagerCount: 21
+    });
+
+    expect(vm.$el.querySelectorAll('li.number')).to.length(21);
   });
 
   it('will work without total & page-count', (done) => {
@@ -117,6 +137,17 @@ describe('Pagination', () => {
     });
 
     expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('3');
+  });
+
+  it('currentPage: NaN', () => {
+    vm = createTest(Pagination, {
+      pageSize: 20,
+      total: 200,
+      currentPage: NaN
+    });
+
+    expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('1');
+    expect(vm.$el.querySelectorAll('li.number')).to.length(7);
   });
 
   it('set currentPage & total', (done) => {
@@ -275,6 +306,38 @@ describe('Pagination', () => {
     }, 50);
   });
 
+  it('event:current-change after current page is manually updated', (done) => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          :total="15"
+          :current-page.sync="currentPage"
+          @current-change="emitCount++" />
+      `,
+
+      data() {
+        return {
+          emitCount: 0,
+          currentPage: 1
+        };
+      }
+    });
+    const next = vm.$el.querySelector('button.btn-next');
+    next.click();
+    setTimeout(() => {
+      expect(vm.emitCount).to.equal(1);
+      vm.currentPage = 1;
+      setTimeout(() => {
+        expect(vm.emitCount).to.equal(1);
+        next.click();
+        setTimeout(() => {
+          expect(vm.emitCount).to.equal(2);
+          done();
+        }, 50);
+      }, 50);
+    }, 50);
+  });
+
   it('event:size-change', done => {
     vm = createVue({
       template: `
@@ -294,6 +357,34 @@ describe('Pagination', () => {
 
     setTimeout(_ => {
       vm.$el.querySelectorAll('li.el-select-dropdown__item')[1].click();
+      setTimeout(_ => {
+        expect(vm.trigger).to.true;
+        done();
+      }, 50);
+    }, 50);
+  });
+
+  it('event: prev and next click', done => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          :total="100"
+          layout="sizes, prev, pager, next"
+          @prev-click="trigger = true"
+          @next-click="trigger = true"
+          :pageSize="10" />
+      `,
+
+      data() {
+        return { trigger: false };
+      }
+    }, true);
+    const prev = vm.$el.querySelector('.btn-prev');
+    const next = vm.$el.querySelector('.btn-next');
+    prev.click();
+    setTimeout(_ => {
+      expect(vm.trigger).to.false;
+      next.click();
       setTimeout(_ => {
         expect(vm.trigger).to.true;
         done();

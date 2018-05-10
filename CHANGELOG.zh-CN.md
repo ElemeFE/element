@@ -1,5 +1,266 @@
 ## 更新日志
 
+### 2.3.7
+
+*2018-04-29*
+
+- 修复 Table 在由于筛选而使原有的滚动条消失后表头各列宽度未及时更新的问题，#10834
+- 修复可清空的 Input 在初始值为 `null` 时仍然显示清空图标的问题，#10912
+- 修复在通过代码改变 ColorPicker 的绑定值后错误地触发 `active-change` 事件的问题，#10903（by @zhangbobell）
+- 修复可搜索的 Select 在备选项均被禁用时，通过键盘导航会造成无限循环的问题，#10945
+
+### 2.3.6
+
+*2018-04-21*
+
+- 修复 Tree 的 `allow-drop` 回调在使用 `type` 参数后的错误行为，#10821
+- 修复可搜索的单选 Select 在 IE11 中无法输入搜索关键词的问题，#10822
+- 修复单选 Select 在使用鼠标选中某个选项后错误地触发 `blur` 事件的问题，#10822
+
+### 2.3.5
+
+*2018-04-20*
+
+- 修复 DatePicker 的 `type` 为 week 时面板错误高亮的问题，#10712
+- 修复 InputNumber 初始值为 0 时输入框为空的问题，#10714
+- 新增 Select 的 `automatic-dropdown` 属性，#10042（by @Seebiscuit）
+- 修复 `disabled` 的 Rate 仍能通过键盘左右键改变组件值的问题，#10726（by @Richard-Choooou）
+- 现在 DatePicker 的 `type` 属性可以接收 `'dates'`，用于选择多个日期，#10650（by @Mini256）
+- 新增 Pagination 的 `prev-click` 和 `next-click` 事件，#10755
+- 新增 Pagination 的 `pager-count` 属性，#10493（by @chongjohn716）
+- 新增 `type` 作为 Tree 的 `allow-drop` 属性回调的第三个参数，#10792
+- 改用 ResizeObserver 对元素的尺寸变化进行监测，#10779
+
+### 2.3.4
+
+*2018-04-12*
+
+- 删除 SubMenu 在 TypeScript 类型声明中重复的 `showTimeout` 属性，#10566（by @kimond）
+- 现在 Transfer 数据项的渲染支持通过 scoped slot 自定义，#10577
+- 修复点击 Pagination 禁用的上一页、下一页按钮仍会触发 `current-change` 事件的问题，#10628
+- 修复未绑定值的 Textarea 在 SSR 中会显示 `undefined` 的问题，#10630
+- 修复 `type` 为 border-card 的 Tabs 中被禁用标签项的样式，#10640
+- 新增 `$index` 作为 Table 的 `formatter` 属性回调的第四个参数，#10645
+- 修复 TypeScript 类型声明未导出 CheckboxButton 的问题，#10666
+
+### 2.3.3
+
+*2018-04-04*
+
+- 新增 Card 的 `shadow` 属性，#10418（by @YunYouJun）
+- 修复 Badge 在 `value` 属性为 `0` 时不显示上标的问题，#10470
+- 修复 Tree 节点拖拽相关的问题，#10474 #10494
+- 新增 Autocomplete 的 `placement` 属性，#10475
+- 现在 `default-time` 属性也可用于非范围选择的 DateTimePicker 了，#10321（by @RickMacTurk）
+- 修复 TabItem 在浏览器失焦和隐藏后出现蓝色边框的问题，#10503
+- 新增 SubMenu 的 `popper-append-to-body` 属性，#10515
+- 现在非链接的 BreadcrumbItem 在 hover 时不再具有视觉反馈，#10551
+- 调整 InputNumber `change` 事件的触发时机，使得在回调中能够取得最新的组件绑定值，#10553
+
+### 2.3.2
+
+*2018-03-29*
+
+- 修复 Autocomplete 报错的问题，#10442
+
+### 2.3.1
+
+*2018-03-29*
+
+- 修复 Input 的 `type` 属性未传递至原生 input 元素的问题，#10415
+- 新增 Select 的 `blur` 方法，#10416
+
+### 2.3.0 Diamond
+
+*2018-03-28*
+
+#### 新特性
+- Table
+  - 现在 TableColumn 的 `formatter` 属性可以是动态的，#10184（by @elfman）
+  - 新增 `select-on-indeterminate` 属性，#9924（by @syn-zeta）
+- Menu
+  - 新增 `collapse-transition` 属性，#8809（by @limichange）
+- Input
+  - 新增 `select` 方法，#10229
+  - 新增 `blur` 方法，#10356
+- ColorPicker
+  - 新增 `predefine` 属性，#10170（by @elfman）
+- Tree
+  - 新增 `draggable`、`allow-drop` 和 `allow-drag` 属性，以及 `node-drag-start`、`node-drag-enter`、`node-drag-leave`、`node-drag-over`、`node-drag-end` 和 `node-drop` 事件，#9251 #10372（by @elfman）
+- Form
+  - `validate` 方法新增第二个参数，包含未通过本次校验的表单项信息，#10279
+  - 新增 `validate` 事件，#10351
+- Progress
+  - 新增 `color` 属性，#10352（by @YunYouJun）
+- Button
+  - 新增 `circle` 属性，#10359（by @YunYouJun）
+
+#### 修复
+- Form
+  - 修复嵌套复合型 Input 时，FormItem 标签与输入框未对齐的问题，#10189
+- Menu
+  - 现在折叠状态的菜单项仅在传入 `title` slot 时才显示 Tooltip，#10193（by @PanJiaChen）
+- Pagination
+  - 修复 `current-change` 在未发生用户交互时错误触发的问题，#10247
+- DatePicker
+  - 现在时间日期选择器下拉面板中的值能够正确地从 `format` 属性中获取对应格式了，#10174（by @remizovvv）
+- Upload
+  - 现在拖拽上传会拦截不在 `accept` 属性范围内的文件，#10278
+
+### 2.2.2
+
+*2018-03-14*
+
+- 新增 Input 的 `clear` 事件，#9988（by @blackmiaool）
+- 现在 ColorPicker 的手动输入支持 `hsl`、`hsv` 和 `rgb` 格式了，#9991
+- 修复 DatePicker 在清除初始值时不触发 `change` 事件的问题，#9986
+- 现在 Rate 的图标类相关属性支持动态更新了，#10003
+- 修复含有固定列的 Table 在设置 `max-height` 属性后有时不能及时更新布局高度的问题，#10034
+- 现在 DatePicker 的范围选择支持先点选结束日期，再点选开始日期了，#8156（by @earlymeme）
+- 新增 Pagination 的 `disabled` 属性，#10006
+- 新增 Popover 的 `after-enter` 和 `after-leave` 事件，#10047
+- 修复重置表单后，用户第一次改变 Select 的值时不触发校验的问题，#10105
+- 修复 Table 的固定列在某些情况下宽度不正确的问题，#10130
+- 修复调用 MessageBox 未传入 `title` 时，打开的 MessageBox 会继承上一个实例的 `title` 属性的问题，#10126（by @Pochodaydayup）
+- 新增 Slider 的 `input-size` 属性，#10154
+- 新增 Transfer 的 `left-check-change` 和 `right-check-change` 事件，#10156
+
+### 2.2.1
+
+*2018-03-02*
+
+- 修复 Aside、Header 和 Footer 在某些布局中被压缩的问题，#9812
+- 修复设置了 `height` 属性的 Table 在服务端渲染时无法加载的问题，#9876
+- 修复可展开的 Table 在展开某一行后高度未重新计算的问题，#9848
+- 修复在 DateTimePicker 中手动输入日期后不能正确触发 `change` 事件的问题，#9913
+- 修复鼠标右键点击 Select 的输入框会展开选项的问题，#9894（by @openks）
+- 新增 Slider 的 `tooltip-class` 属性，#9957
+- 现在的 Select 在选中选项后仍然处于 focus 状态，#9857（by @Seebiscuit）
+- 新增 Transfer 的 `target-order` 属性，#9960
+
+### 2.2.0 Graphite
+
+*2018-02-12*
+
+#### 新特性
+- Menu
+  - SubMenu 新增 `popper-class` 和 `disabled` 属性，#9604 #9771
+  - 现在水平模式下的 Menu 支持多级 SubMenu 了，#9741
+- Tree
+  - 新增 `node-contextmenu` 事件，#9678
+  - 现在可以使用 scoped slot 自定义树节点的模板了，#9686
+  - 新增 `getNode`、`remove`、`append`、`insertBefore`、`insertAfter`、`getCheckedKeys`、`getHalfCheckedNodes`、`getHalfCheckedKeys` 方法和 `check` 事件，#9718 #9730
+- Transfer
+  - 新增 `clearQuery` 方法，#9753
+- Select
+  - 新增 `popper-append-to-body` 属性，#9782
+
+#### 修复
+- Table
+  - 修复点击可展开行的展开图标会触发 `row-click` 事件的问题，#9654
+  - 修复某些情况下通过拖动改变列宽后，布局没有同步更新的问题，#9668
+  - 修复合计行与固定列并存时的样式问题，#9667
+- Container
+  - 修复布局组件在 IE11 中无法自动填充可用空间的问题，#9655
+- Loading
+  - 修复在 `mounted` 中修改 `v-loading` 的值为 true 时不能正确显示 Loading 的问题，#9722
+- Switch
+  - 修复点击时会触发两次原生 click 事件的问题，#9760
+
+### 2.1.0 Charcoal
+
+*2018-01-31*
+
+#### 新特性
+- Cascader
+  - 新增 `focus` 和 `blur` 事件，#9184（by @viewweiwu）
+- Table
+  - `filter-method` 方法加入第三个参数 `column`，#9196（by @liyanlong）
+- DatePicker
+  - 新增 `prefix-icon` 和 `clear-icon` 属性，#9237（by @AdamSGit）
+  - 新增 `default-time` 属性，#9094（by @nighca）
+  - `value-format` 属性增加对 `timestamp` 的支持，#9319（by @wacky6）
+- InputNumber
+  - 组件绑定变量的值支持 `undefined`，#9361
+- Select
+  - 新增 `auto-complete` 属性，#9388
+- Form
+  - 新增 `disabled` 属性，#9529
+  - 新增 `validateOnRuleChange` 属性，#8141
+- Notificaition
+  - 新增 `closeAll` 方法，#9514
+
+#### 修复
+- InputNumber
+  - 修复初始输入小数点时被重置的问题，#9116
+- Dropdown
+  - 修复当页面仅有水平滚动条时，某些浏览器下拉菜单定位错误的问题，#9138（by @banzhuanmei）
+- Table
+  - 修复带有固定列的 Table 在列数据变化后固定列的个数计算错误的问题，#9188（by @kolesoffac）
+  - 修复多级表头最后一列的边框不能正确显示的问题，#9326
+  - 修复在 Safari 浏览器中表头错位的问题，#9327
+  - 修复带有展开行的表格在展开某一行后，当表格数据更新但 `row-key` 值不变时，该行会自动收起的问题，#9462
+  - 修复在一些情况下不必要的多次渲染问题，#9426
+  - 修复动态改变 TableColumn 的 `width` 属性时，其宽度计算错误的问题，#9426
+- Loading
+  - 修复某些情况下 Loading 不能被正确隐藏的问题，#9313
+- DatePicker
+  - 修复 `focus` 方法在范围选择时无效的问题，#9437
+  - 修复当目前时刻处于不可选择的范围内时，点击面板上的「此刻」按钮仍能选中目前时刻的问题，#9470（by @wacky6）
+  - 修复当在月选择面板中选中天数较少的月份时，日期面板呈现下一个月的问题，#9577（by @wacky6）
+- Steps
+  - 修复在 IE 11 中的样式问题，#9454
+
+#### 非兼容性更新
+- Menu
+  - `collapse` 状态下的弹出菜单现在会插入至 body 元素，修复其位于 Aside 内时弹出菜单不可见的问题，#9263
+- Table
+  - 勾选多选表格的 checkbox 时不再同时触发 `row-click` 事件，#9467
+- Loading
+  - 非全屏 Loading 遮罩层的 `z-index` 修改为 2000；全屏 Loading 遮罩层的 `z-index` 值会随页面上的弹出组件动态更新，#9522
+- Dropdown
+  - `show-timeout` 和 `hide-timeout` 属性现在仅在 trigger 为 `hover` 时生效，#9573
+
+### 2.0.11
+
+*2018-01-08*
+
+- 修复 Input 的 `prepend` 或 `append` slot 中 Select 的边框颜色错误，#9089
+- 修复 Select 的 `remove-tag` 事件参数与文档不符的问题，#9090
+- 新增 SubMenu 的 `show-timeout` 和 `hide-timeout` 属性，#8934（by @HugoLew）
+- 修复按需引入 Table 时 `show-overflow-tooltip` 的 Tooltip 样式丢失的问题，#9130
+- 修复 Table 在执行 `clearSort` 后点击对应列的排序图标无法正常排序的问题，#9100（by @zEmily）
+- 捷克语的 i18n 配置文件由 `cz` 重命名为 `cs-CZ`，#9164
+
+### 2.0.10
+
+*2017-12-29*
+
+- 修复了 Table 在固定列和合计行并存时的高度计算错误的问题，#9026
+- 修复了 Table 样式 SCSS 文件错误编译的问题，#9028
+- 现在 DatePicker 的 `change` 事件只会在 `value` 真正改变的时候触发，#9029（by @remizovvv）
+- 新增 Input 的 `tabindex` 属性，#9041（by @dicklwm）
+
+### 2.0.9🎄
+
+*2017-12-24*
+
+- 新增 Upload 的 `before-remove` 钩子方法，#8788（by @firesh）
+- 修复 FormItem 的 `error` 属性初始值无效的问题，#8840
+- 通过指令调用的 Loading 现在支持以 `element-loading-custom-class` 属性的方式设置自定义类名，#8826（by @earlymeme）
+- 修复 CarouselItem 为异步获取时被隐藏的问题，#8921
+- 新增 Tree 的 `renderAfterExpand` 属性，#8972
+
+### 2.0.8
+
+*2017-12-12*
+
+- 新增西班牙语文档
+- 修复 `show-timeout` 对点击触发的 Dropdown 无效的问题，#8734（by @presidenten）
+- 修复 Form 对于 `trigger` 为 blur 的校验规则触发时机有误的问题，#8776
+- 修复 DatePicker 在范围选择时 blur 事件触发时机有误的问题，#8784
+- TimePicker 的 `format` 新增对 AM/PM 的支持，#8620（by @firesh）
+
 ### 2.0.7
 
 *2017-11-29*
@@ -234,7 +495,7 @@
 - Steps
   - 移除 `center` 属性
   - 现在步骤条将默认充满父容器
-  - DatePicker
+- DatePicker
   - `change` 事件参数现在为组件的绑定值，格式由 `value-format` 控制
 - Table
   - 移除通过 `inline-template` 自定义列模板的功能

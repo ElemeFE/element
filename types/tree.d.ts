@@ -30,6 +30,26 @@ export interface FilterNodeMethod {
   (value: string, data: TreeNode, node: any): boolean
 }
 
+export interface AllowDragMethod {
+  /**
+   * Function executed before dragging a node
+   *
+   * @param node The node to be dragged
+   */
+  (node: any): boolean
+}
+
+export interface AllowDropMethod {
+  /**
+   * Function executed before the dragging node is dropped
+   *
+   * @param draggingNode The dragging node
+   * @param dropNode The target node
+   * @param type Drop type
+   */
+  (draggingNode: any, dropNode: any, type: string): boolean
+}
+
 /** Tree Component */
 export declare class ElTree extends ElementUIComponent {
   /** Tree data */
@@ -59,6 +79,9 @@ export declare class ElTree extends ElementUIComponent {
   /** Whether to expand or collapse node when clicking on the node. If false, then expand or collapse node only when clicking on the arrow icon. */
   expandOnClickNode: boolean
 
+  /** Whether to check or uncheck node when clicking on the node, if false, the node can only be checked or unchecked by clicking on the checkbox. */
+  checkOnClickNode: boolean
+
   /** Whether to expand father node when a child node is expanded */
   autoExpandParent: boolean
 
@@ -83,12 +106,29 @@ export declare class ElTree extends ElementUIComponent {
   /** Horizontal indentation of nodes in adjacent levels in pixels */
   indent: number
 
+  /** Whether enable tree nodes drag and drop */
+  draggable: boolean
+
+  /** Function to be executed before dragging a node */
+  allowDrag: AllowDragMethod
+
+  /** Function to be executed before the dragging node is dropped */
+  allowDrop: AllowDropMethod
+
   /**
-   * Filter all tree nodes.Ffiltered nodes will be hidden
+   * Filter all tree nodes. Filtered nodes will be hidden
    *
    * @param value The value to be used as first parameter for `filter-node-method`
    */
   filter (value: any): void
+
+  /**
+   * Update the children of the node which specified by the key
+   * 
+   * @param key the key of the node which children will be updated
+   * @param data the children data
+   */
+  updateKeyChildren (key: any, data: TreeNode[]): void
 
   /**
    * If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes
@@ -130,6 +170,16 @@ export declare class ElTree extends ElementUIComponent {
   setChecked (data: TreeNode | any, checked: boolean, deep: boolean): void
 
   /**
+   * If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes
+   */
+  getHalfCheckedNodes (): void
+
+  /**
+   * If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes' keys
+   */
+  getHalfCheckedKeys (): void;
+
+  /**
    * Return the highlight node's key (null if no node is highlighted)
    */
   getCurrentKey (): any
@@ -152,4 +202,42 @@ export declare class ElTree extends ElementUIComponent {
    * @param node The node to be highlighted
    */
   setCurrentNode (node: TreeNode): void
+
+  /**
+   * Get node by node key or node data
+   * 
+   * @param by node key or node data
+   */
+  getNode (by: TreeNode | any): TreeNode
+
+  /**
+   * Remove node by key or node data or node instance
+   * 
+   * @param by key or node data or node instance
+   */
+  remove (by: TreeNode | any): void
+
+  /**
+   * Append a child node to specified node
+   * 
+   * @param childData the data of appended node
+   * @param parent key or node data or node instance of the parent node
+   */
+  append (childData: TreeNode, parent: TreeNode | any): void
+
+  /**
+   * insert a node before specified node
+   * 
+   * @param data the data of inserted node
+   * @param ref key or node data or node instance of the reference node
+   */
+  insertBefore (data: TreeNode, ref: TreeNode | any): void
+
+  /**
+   * insert a node after specified node
+   * 
+   * @param data the data of inserted node
+   * @param ref key or node data or node instance of the reference node
+   */
+  insertAfter (data: TreeNode, ref: TreeNode | any): void
 }

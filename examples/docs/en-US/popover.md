@@ -88,10 +88,7 @@
           date: '2016-05-07',
           name: 'Jack',
           address: 'New York City'
-        }],
-        singleSelection: {},
-        multipleSelection: [],
-        model: ''
+        }]
       };
     }
   };
@@ -103,37 +100,37 @@
 
 Similar to Tooltip, Popover is also built with `Vue-popper`. So for some duplicated attributes, please refer to the documentation of Tooltip.
 
-:::demo Add `ref` in your popover, then in your button, use `v-popover` directive to link the button and the popover. The attribute `trigger` is used to define how popover is triggered: `hover`, `click` or `focus`. Alternatively, you can specify reference using a named `slot`.
+:::demo The `trigger` attribute is used to define how popover is triggered: `hover`, `click`, `focus` or `manual`. As for the triggering element, you can write it in two different ways: use the `slot="reference"` named slot, or use the `v-popover` directive and set it to Popover's `ref`.
 
 ```html
 <el-popover
-  ref="popover1"
   placement="top-start"
   title="Title"
   width="200"
   trigger="hover"
   content="this is content, this is content, this is content">
+  <el-button slot="reference">Hover to activate</el-button>
 </el-popover>
 
 <el-popover
-  ref="popover2"
   placement="bottom"
   title="Title"
   width="200"
   trigger="click"
   content="this is content, this is content, this is content">
+  <el-button slot="reference">Click to activate</el-button>
 </el-popover>
 
-<el-button v-popover:popover1>Hover to activate</el-button>
-<el-button v-popover:popover2>Click to activate</el-button>
 <el-popover
+  ref="popover"
   placement="right"
   title="Title"
   width="200"
   trigger="focus"
   content="this is content, this is content, this is content">
-  <el-button slot="reference">Focus to activate</el-button>
 </el-popover>
+<el-button v-popover:popover>Focus to activate</el-button>
+
 ```
 :::
 
@@ -145,7 +142,6 @@ Other components can be nested in popover. Following is an example of nested tab
 
 ```html
 <el-popover
-  ref="popover4"
   placement="right"
   width="400"
   trigger="click">
@@ -154,9 +150,8 @@ Other components can be nested in popover. Following is an example of nested tab
     <el-table-column width="100" property="name" label="name"></el-table-column>
     <el-table-column width="300" property="address" label="address"></el-table-column>
   </el-table>
+  <el-button slot="reference">Click to activate</el-button>
 </el-popover>
-
-<el-button v-popover:popover4>Click to activate</el-button>
 
 <script>
   export default {
@@ -193,7 +188,6 @@ Of course, you can nest other operations. It's more light-weight than using a di
 :::demo
 ```html
 <el-popover
-  ref="popover5"
   placement="top"
   width="160"
   v-model="visible2">
@@ -202,9 +196,8 @@ Of course, you can nest other operations. It's more light-weight than using a di
     <el-button size="mini" type="text" @click="visible2 = false">cancel</el-button>
     <el-button type="primary" size="mini" @click="visible2 = false">confirm</el-button>
   </div>
+  <el-button slot="reference">Delete</el-button>
 </el-popover>
-
-<el-button v-popover:popover5>Delete</el-button>
 
 <script>
   export default {
@@ -245,4 +238,6 @@ Of course, you can nest other operations. It's more light-weight than using a di
 | Event Name | Description | 回调参数 |
 |---------|--------|---------|
 | show | triggers when popover shows | — |
+| after-enter | triggers when the entering transition ends | — |
 | hide | triggers when popover hides | — |
+| after-leave | triggers when the leaving transition ends | — |

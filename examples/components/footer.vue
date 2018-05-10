@@ -10,7 +10,7 @@
         <a href="https://github.com/ElementUI/element-theme" class="footer-main-link" target="_blank">{{ langConfig.theme }}</a>
         <a href="https://github.com/ElementUI/theme-chalk-preview" class="footer-main-link" target="_blank">{{ langConfig.preview }}</a>
         <a href="https://github.com/eleme/element-react" class="footer-main-link" target="_blank">Element-React</a>
-        <a href="https://github.com/eleme/element-angular" class="footer-main-link" target="_blank">Element-Angular</a>
+        <a href="https://github.com/ElemeFE/element-angular" class="footer-main-link" target="_blank">Element-Angular</a>
       </div>
       <div class="footer-main">
         <h4>{{ langConfig.community }}</h4>
@@ -21,7 +21,7 @@
         <a href="https://github.com/ElementUI/awesome-element" class="footer-main-link" target="_blank">Awesome Element</a>
       </div>
       <div class="footer-social">
-        <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Carbon</p>
+        <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Diamond</p>
         <el-popover
           ref="weixin"
           placement="top"
@@ -139,10 +139,22 @@
       margin: 10px;
     }
   }
+  @media (max-width: 1140px) {
+    .footer {
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .footer-social {
+      display: none;
+    }
+  }
+  
   @media (max-width: 768px) {
     .footer {
-      .footer-social {
-        display: none;
+      .footer-main {
+        margin-bottom: 30px;
       }
     }
   }

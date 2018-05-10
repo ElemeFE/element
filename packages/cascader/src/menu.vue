@@ -314,17 +314,17 @@
             {items}
             {
               isHoveredMenu
-              ? (<svg
-                ref="hoverZone"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  height: '100%',
-                  width: '100%',
-                  left: 0,
-                  pointerEvents: 'none'
-                }}
-              ></svg>) : null
+                ? (<svg
+                  ref="hoverZone"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    height: '100%',
+                    width: '100%',
+                    left: 0,
+                    pointerEvents: 'none'
+                  }}
+                ></svg>) : null
             }
           </ul>
         );

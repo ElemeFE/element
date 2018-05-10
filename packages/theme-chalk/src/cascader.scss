@@ -94,10 +94,6 @@
   border: $--select-dropdown-border;
   border-radius: $--border-radius-small;
   box-shadow: $--select-dropdown-shadow;
-
-  .popper__arrow {
-    transform: translateX(-400%);
-  }
 }
 
 @include b(cascader-menu) {

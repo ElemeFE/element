@@ -714,4 +714,68 @@ describe('Cascader', () => {
       done();
     }, 100);
   });
+  describe('Cascader Events', () => {
+    it('event:focus & blur', done => {
+      vm = createVue({
+        template: `
+          <el-cascader
+            ref="cascader"
+            placeholder="请选择"
+            :options="options"
+            clearable
+            v-model="selectedOptions"
+          ></el-cascader>
+        `,
+        data() {
+          return {
+            options: [{
+              value: 'zhejiang',
+              label: 'Zhejiang',
+              children: [{
+                value: 'hangzhou',
+                label: 'Hangzhou',
+                children: [{
+                  value: 'xihu',
+                  label: 'West Lake'
+                }]
+              }, {
+                value: 'ningbo',
+                label: 'NingBo',
+                children: [{
+                  value: 'jiangbei',
+                  label: 'Jiang Bei'
+                }]
+              }]
+            }, {
+              value: 'jiangsu',
+              label: 'Jiangsu',
+              children: [{
+                value: 'nanjing',
+                label: 'Nanjing',
+                children: [{
+                  value: 'zhonghuamen',
+                  label: 'Zhong Hua Men'
+                }]
+              }]
+            }],
+            selectedOptions: []
+          };
+        }
+      }, true);
+
+      const spyFocus = sinon.spy();
+      const spyBlur = sinon.spy();
+
+      vm.$refs.cascader.$on('focus', spyFocus);
+      vm.$refs.cascader.$on('blur', spyBlur);
+      vm.$el.querySelector('input').focus();
+      vm.$el.querySelector('input').blur();
+
+      vm.$nextTick(_ => {
+        expect(spyFocus.calledOnce).to.be.true;
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
+    });
+  });
 });

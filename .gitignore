@@ -6,9 +6,11 @@ npm-debug.log.*
 lerna-debug.log.*
 lib
 .idea
+.vscode
 examples/element-ui
 examples/pages/en-US
 examples/pages/zh-CN
+examples/pages/es
 fe.element/element-ui
 .npmrc
 coverage

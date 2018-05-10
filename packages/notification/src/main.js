@@ -25,7 +25,7 @@ const Notification = function(options) {
 
   if (isVNode(options.message)) {
     instance.$slots.default = [options.message];
-    options.message = '';
+    options.message = 'REPLACED_BY_VNODE';
   }
   instance.id = id;
   instance.vm = instance.$mount();
@@ -81,6 +81,12 @@ Notification.close = function(id, userOnClose) {
       instances[i].dom.style[instance.verticalProperty] =
         parseInt(instances[i].dom.style[instance.verticalProperty], 10) - removedHeight - 16 + 'px';
     }
+  }
+};
+
+Notification.closeAll = function() {
+  for (let i = instances.length - 1; i >= 0; i--) {
+    instances[i].close();
   }
 };
 

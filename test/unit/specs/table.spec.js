@@ -45,7 +45,7 @@ describe('Table', () => {
         const ths = toArray(vm.$el.querySelectorAll('thead th'));
 
         expect(ths.map(node => node.textContent).filter(o => o))
-        .to.eql(['片名', '发行日期', '导演', '时长（分）']);
+          .to.eql(['片名', '发行日期', '导演', '时长（分）']);
         done();
       }, DELAY);
     });
@@ -85,6 +85,15 @@ describe('Table', () => {
       const vm = createTable('height="134"');
       setTimeout(_ => {
         expect(vm.$el.style.height).to.equal('134px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('height as string', done => {
+      const vm = createTable('height="100pt"');
+      setTimeout(_ => {
+        expect(vm.$el.style.height).to.equal('100pt');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -222,6 +231,47 @@ describe('Table', () => {
             destroyVM(vm);
             done();
           }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('select-on-indeterminate', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" @selection-change="change" :select-on-indeterminate="false" ref="table">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" label="name" />
+            <el-table-column prop="release" label="release" />
+            <el-table-column prop="director" label="director" />
+            <el-table-column prop="runtime" label="runtime" />
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        mounted() {
+          this.$refs.table.toggleRowSelection(this.testData[0]);
+        },
+
+        data() {
+          return { selected: [] };
+        },
+
+        methods: {
+          change(val) {
+            this.selected = val;
+          }
+        }
+      }, true);
+
+      setTimeout(_ => {
+        vm.$el.querySelector('.el-checkbox').click();
+        setTimeout(_ => {
+          expect(vm.selected).to.length(0);
+          destroyVM(vm);
+          done();
         }, DELAY);
       }, DELAY);
     });
@@ -1092,7 +1142,7 @@ describe('Table', () => {
         setTimeout(_ => {
           const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
-          .to.eql(['80', '92', '92', '95', '100']);
+            .to.eql(['80', '92', '92', '95', '100']);
           done();
         }, DELAY);
       });

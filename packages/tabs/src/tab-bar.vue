@@ -1,5 +1,5 @@
 <template>
-  <div class="el-tabs__active-bar" :style="barStyle"></div>
+  <div class="el-tabs__active-bar" :class="`is-${ rootTabs.tabPosition }`" :style="barStyle"></div>
 </template>
 <script>
   export default {
@@ -33,8 +33,8 @@
               return true;
             } else {
               tabSize = $el[`client${firstUpperCase(sizeName)}`];
-              if (sizeName === 'width') {
-                tabSize -= index === 0 ? 20 : 40;
+              if (sizeName === 'width' && this.tabs.length > 1) {
+                tabSize -= (index === 0 || index === this.tabs.length - 1) ? 20 : 40;
               }
               return false;
             }

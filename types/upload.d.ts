@@ -15,7 +15,8 @@ export interface ElUploadInternalFileDetail {
   size: number,
   percentage: number,
   uid: number,
-  raw: File
+  raw: File,
+  url?: string
 }
 
 export interface ElUploadProgressEvent extends ProgressEvent {
@@ -107,4 +108,10 @@ export declare class ElUpload extends ElementUIComponent {
 
   /** Hook function when limit is exceeded */
   onExceed: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
+
+  /** Clear the upload file list */
+  clearFiles (): void;
+
+  /** Abort specified file */
+  abort (file: ElUploadInternalFileDetail): void
 }

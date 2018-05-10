@@ -1,6 +1,9 @@
 <template>
   <span class="el-breadcrumb__item">
-    <span class="el-breadcrumb__inner" ref="link" role="link">
+    <span
+      :class="['el-breadcrumb__inner', to ? 'is-link' : '']"
+      ref="link"
+      role="link">
       <slot></slot>
     </span>
     <i v-if="separatorClass" class="el-breadcrumb__separator" :class="separatorClass"></i>
@@ -26,14 +29,13 @@
     mounted() {
       this.separator = this.elBreadcrumb.separator;
       this.separatorClass = this.elBreadcrumb.separatorClass;
-      let self = this;
       if (this.to) {
         let link = this.$refs.link;
+        let to = this.to;
         link.setAttribute('role', 'link');
         link.addEventListener('click', _ => {
-          let to = this.to;
-          self.replace ? self.$router.replace(to)
-                       : self.$router.push(to);
+          this.replace ? this.$router.replace(to)
+            : this.$router.push(to);
         });
       }
     }

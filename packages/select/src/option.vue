@@ -74,7 +74,7 @@
       limitReached() {
         if (this.select.multiple) {
           return !this.itemSelected &&
-            this.select.value.length >= this.select.multipleLimit &&
+            (this.select.value || []).length >= this.select.multipleLimit &&
             this.select.multipleLimit > 0;
         } else {
           return false;
@@ -124,7 +124,7 @@
 
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
-          this.dispatch('ElSelect', 'handleOptionClick', this);
+          this.dispatch('ElSelect', 'handleOptionClick', [this, true]);
         }
       },
 

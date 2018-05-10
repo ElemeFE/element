@@ -168,10 +168,66 @@ export default class Node {
     return getPropertyFromData(this, 'disabled');
   }
 
-  insertChild(child, index) {
+  get nextSibling() {
+    const parent = this.parent;
+    if (parent) {
+      const index = parent.childNodes.indexOf(this);
+      if (index > -1) {
+        return parent.childNodes[index + 1];
+      }
+    }
+    return null;
+  }
+
+  get previousSibling() {
+    const parent = this.parent;
+    if (parent) {
+      const index = parent.childNodes.indexOf(this);
+      if (index > -1) {
+        return index > 0 ? parent.childNodes[index - 1] : null;
+      }
+    }
+    return null;
+  }
+
+  contains(target, deep = true) {
+    const walk = function(parent) {
+      const children = parent.childNodes || [];
+      let result = false;
+      for (let i = 0, j = children.length; i < j; i++) {
+        const child = children[i];
+        if (child === target || (deep && walk(child))) {
+          result = true;
+          break;
+        }
+      }
+      return result;
+    };
+
+    return walk(this);
+  }
+
+  remove() {
+    const parent = this.parent;
+    if (parent) {
+      parent.removeChild(this);
+    }
+  }
+
+  insertChild(child, index, batch) {
     if (!child) throw new Error('insertChild error: child is required.');
 
     if (!(child instanceof Node)) {
+      if (!batch) {
+        const children = this.getChildren(true);
+        if (children.indexOf(child.data) === -1) {
+          if (typeof index === 'undefined' || index < 0) {
+            children.push(child.data);
+          } else {
+            children.splice(index, 0, child.data);
+          }
+        }
+      }
       objectAssign(child, {
         parent: this,
         store: this.store
@@ -208,6 +264,12 @@ export default class Node {
   }
 
   removeChild(child) {
+    const children = this.getChildren() || [];
+    const dataIndex = children.indexOf(child.data);
+    if (dataIndex > -1) {
+      children.splice(dataIndex, 1);
+    }
+
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
@@ -263,7 +325,7 @@ export default class Node {
 
   doCreateChildren(array, defaultProps = {}) {
     array.forEach((item) => {
-      this.insertChild(objectAssign({ data: item }, defaultProps));
+      this.insertChild(objectAssign({ data: item }, defaultProps), undefined, true);
     });
   }
 
@@ -341,7 +403,8 @@ export default class Node {
     }
   }
 
-  getChildren() { // this is data
+  getChildren(forceInit = false) { // this is data
+    if (this.level === 0) return this.data;
     const data = this.data;
     if (!data) return null;
 
@@ -353,6 +416,10 @@ export default class Node {
 
     if (data[children] === undefined) {
       data[children] = null;
+    }
+
+    if (forceInit && !data[children]) {
+      data[children] = [];
     }
 
     return data[children];

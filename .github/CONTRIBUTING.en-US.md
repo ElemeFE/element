@@ -35,19 +35,9 @@ We are excited that you are interested in contributing to Element. Before submit
 - Merging a PR takes two maintainers: one approves the changes after reviewing, and then the other reviews and merges.
 
 ## Prerequisites
-`Node.js 4+` and `NPM 3+` are required.
+`Node.js 4+`, `yarn` and `npm 3+` are required. Note: we use yarn to lock dependency versions, so you should install dependencies using `yarn` instead of `npm install`.
 ```shell
 git clone git@github.com:ElemeFE/element.git
-npm run dev
-
-# open http://localhost:8085
-```
-
-For Chinese users, [yarn](https://github.com/yarnpkg/yarn) with taobao registry is recommended if the dependency installation is slow.
-```shell
-npm i yarn -g
-yarn config set registry https://registry.npm.taobao.org
-yarn
 npm run dev
 
 # open http://localhost:8085

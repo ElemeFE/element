@@ -1,6 +1,5 @@
 import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
-/** Options when el-time-picker acts like a Time Picker */
 export interface TimePickerOptions {
   /**
    * Available time range.
@@ -13,25 +12,7 @@ export interface TimePickerOptions {
   format?: string
 }
 
-/** Options when el-time-picker acts like a Time Select */
-export interface TimeSelectOptions {
-  /** Start time */
-  start?: string,
-
-  /** End time */
-  end?: string,
-
-  /** Time step */
-  step?: string,
-
-  /** Minimum time, any time before this time will be disabled */
-  minTime?: string,
-
-  /** Maximum time, any time after this time will be disabled */
-  maxTime?: string
-}
-
-/** TimePicker and Time Select Component */
+/** TimePicker Component */
 export declare class ElTimePicker extends ElementUIComponent {
   /** Whether DatePicker is read only */
   readonly: boolean
@@ -57,7 +38,7 @@ export declare class ElTimePicker extends ElementUIComponent {
   /** Placeholder for the end time in range mode */
   endPlaceholder: string
 
-  /** Whether to pick a time range, only works with <el-time-picker> */
+  /** Whether to pick a time range */
   isRange: boolean
 
   /** Value of the picker */
@@ -70,8 +51,13 @@ export declare class ElTimePicker extends ElementUIComponent {
   popperClass: string
 
   /** Additional options, check the table below */
-  pickerOptions: object
+  pickerOptions: TimePickerOptions
 
   /** Range separator */
   rangeSeparator: string
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }

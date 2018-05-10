@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-rate"
-    @keydown="handelKey"
+    @keydown="handleKey"
     role="slider"
     :aria-valuenow="currentValue"
     :aria-valuetext="text"
@@ -14,7 +14,7 @@
       @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
-      :style="{ cursor: disabled ? 'auto' : 'pointer' }">
+      :style="{ cursor: rateDisabled ? 'auto' : 'pointer' }">
       <i
         :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
         class="el-rate__icon"
@@ -40,9 +40,14 @@
 
     mixins: [Migrating],
 
+    inject: {
+      elForm: {
+        default: ''
+      }
+    },
+
     data() {
       return {
-        classMap: {},
         pointerAtLeftHalf: true,
         currentValue: this.value,
         hoverIndex: -1
@@ -130,7 +135,7 @@
       text() {
         let result = '';
         if (this.showScore) {
-          result = this.scoreTemplate.replace(/\{\s*value\s*\}/, this.disabled
+          result = this.scoreTemplate.replace(/\{\s*value\s*\}/, this.rateDisabled
             ? this.value
             : this.currentValue);
         } else if (this.showText) {
@@ -141,7 +146,7 @@
 
       decimalStyle() {
         let width = '';
-        if (this.disabled) {
+        if (this.rateDisabled) {
           width = `${ this.valueDecimal < 50 ? 0 : 50 }%`;
         }
         if (this.allowHalf) {
@@ -162,7 +167,7 @@
       },
 
       voidClass() {
-        return this.disabled ? this.classMap.disabledVoidClass : this.classMap.voidClass;
+        return this.rateDisabled ? this.classMap.disabledVoidClass : this.classMap.voidClass;
       },
 
       activeClass() {
@@ -197,6 +202,20 @@
           result.push(this.voidClass);
         }
         return result;
+      },
+
+      classMap() {
+        return {
+          lowClass: this.iconClasses[0],
+          mediumClass: this.iconClasses[1],
+          highClass: this.iconClasses[2],
+          voidClass: this.voidIconClass,
+          disabledVoidClass: this.disabledVoidIconClass
+        };
+      },
+
+      rateDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
 
@@ -229,7 +248,7 @@
       },
 
       showDecimalIcon(item) {
-        let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
+        let showWhenDisabled = this.rateDisabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
         /* istanbul ignore next */
         let showWhenAllowHalf = this.allowHalf &&
           this.pointerAtLeftHalf &&
@@ -239,14 +258,14 @@
       },
 
       getIconStyle(item) {
-        const voidColor = this.disabled ? this.colorMap.disabledVoidColor : this.colorMap.voidColor;
+        const voidColor = this.rateDisabled ? this.colorMap.disabledVoidColor : this.colorMap.voidColor;
         return {
           color: item <= this.currentValue ? this.activeColor : voidColor
         };
       },
 
       selectValue(value) {
-        if (this.disabled) {
+        if (this.rateDisabled) {
           return;
         }
         if (this.allowHalf && this.pointerAtLeftHalf) {
@@ -258,7 +277,10 @@
         }
       },
 
-      handelKey(e) {
+      handleKey(e) {
+        if (this.rateDisabled) {
+          return;
+        }
         let currentValue = this.currentValue;
         const keyCode = e.keyCode;
         if (keyCode === 38 || keyCode === 39) { // left / down
@@ -286,7 +308,7 @@
       },
 
       setCurrentValue(value, event) {
-        if (this.disabled) {
+        if (this.rateDisabled) {
           return;
         }
         /* istanbul ignore if */
@@ -307,7 +329,7 @@
       },
 
       resetCurrentValue() {
-        if (this.disabled) {
+        if (this.rateDisabled) {
           return;
         }
         if (this.allowHalf) {
@@ -322,13 +344,6 @@
       if (!this.value) {
         this.$emit('input', 0);
       }
-      this.classMap = {
-        lowClass: this.iconClasses[0],
-        mediumClass: this.iconClasses[1],
-        highClass: this.iconClasses[2],
-        voidClass: this.voidIconClass,
-        disabledVoidClass: this.disabledVoidIconClass
-      };
     }
   };
 </script>

@@ -19,5 +19,8 @@ export declare class ElCard extends ElementUIComponent {
   /** CSS style of body */
   bodyStyle: object
 
+  /** When to show card shadows */
+  shadow: string
+
   $slots: CardSlots
 }
