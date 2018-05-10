@@ -208,10 +208,12 @@
       },
 
       handleDragStart(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-start', event, this);
       },
 
       handleDragOver(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-over', event, this);
         event.preventDefault();
       },
@@ -221,6 +223,7 @@
       },
 
       handleDragEnd(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-end', event, this);
       }
     },
