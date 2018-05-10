@@ -49,13 +49,15 @@ describe('Mixin:vue-popup', () => {
   it('lock scroll', done => {
     vm = createTest(Popup, { modal: true });
     vm.open();
-    expect(document.body.style.overflow).to.equal('hidden');
+    expect(document.body.style.position).to.equal('fixed');
+    expect(document.body.style.overflowY).to.equal('scroll');
     vm.close();
     destroyVM(vm);
     setTimeout(() => {
       vm = createTest(Popup, { modal: true, lockScroll: false });
       vm.open();
-      expect(document.body.style.overflow).to.not.equal('hidden');
+      expect(document.body.style.position).to.not.equal('fixed');
+      expect(document.body.style.overflowY).to.not.equal('scroll');
       done();
     }, 200);
   });
