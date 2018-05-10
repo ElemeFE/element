@@ -4,10 +4,10 @@
 
 *2018-04-29*
 
-- Fixed Table not updating its header widths when the scroll bar disappears due to filtering, #10834
-- Fixed clearable Input still showing the clear icon when its initial value is `null`, #10912
-- Fixed incorrect trigger of the `active-change` event after changing ColorPicker's binding value programatically, #10903 (by @zhangbobell)
-- Fixed filterable Select causing an infinite loop when navigating options using keyboard if all options are disabled, #10945
+- Corregido que Table no actualizaba el ancho de encabezado cuando la barra de desplazamiento desaparecia debido al filtrado, #10834
+- Corregido input borrable que mostraba el icono de borrado cuando su valor inicial era `nulo`, #10912
+- Corregido el disparador incorrecto del evento `active-change` después de cambiar el valor enlazado de ColorPicker programáticamente, #10903 (por @zhangbobell)
+- Corregido filterable Select que causaba un bucle infinito al navegar por las opciones usando el teclado si todas las opciones estában deshabilitadas, #10945
 
 ### 2.3.6
 

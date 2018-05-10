@@ -8,7 +8,7 @@
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
       'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon
+      'el-input--suffix': $slots.suffix || suffixIcon || clearable
     }
     ]"
     @mouseenter="hovering = true"
@@ -196,7 +196,11 @@
         return this.$slots.prepend || this.$slots.append;
       },
       showClear() {
-        return this.clearable && !this.disabled && this.currentValue !== '' && (this.focused || this.hovering);
+        return this.clearable &&
+          !this.disabled &&
+          !this.readonly &&
+          this.currentValue !== '' &&
+          (this.focused || this.hovering);
       }
     },
 
