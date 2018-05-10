@@ -232,10 +232,10 @@
         removeClass(this.getInputElement(), 'invalid');
         return true;
       },
-      getFistFocus() {
-        const $btns = this.$el.querySelector('.el-message-box__btns .el-button');
-        const $title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
-        return $btns && $btns[0] || $title;
+      getFirstFocus() {
+        const btn = this.$el.querySelector('.el-message-box__btns .el-button');
+        const title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
+        return btn || title;
       },
       getInputElement() {
         const inputRefs = this.$refs.input.$refs;
@@ -264,7 +264,7 @@
             });
           }
           this.focusAfterClosed = document.activeElement;
-          messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFistFocus());
+          messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus());
         }
 
         // prompt
