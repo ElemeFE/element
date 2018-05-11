@@ -161,13 +161,7 @@
         this.onClose && this.onClose();
         messageBox.closeDialog(); // 解绑
         if (this.lockScroll) {
-          setTimeout(() => {
-            if (this.modal) {
-              document.body.style.paddingRight = this.bodyPaddingRight;
-            }
-            this.bodyPaddingRight = null;
-            removeClass(document.body, 'el-popup-parent--hidden');
-          }, 200);
+          setTimeout(this.restoreBodyStyle, 200);
         }
         this.opened = false;
         this.doAfterClose();

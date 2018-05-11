@@ -60,17 +60,16 @@ export default {
   beforeDestroy() {
     PopupManager.deregister(this._popupId);
     PopupManager.closeModal(this._popupId);
-    if (this.modal) {
-      document.body.style.paddingRight = this.bodyPaddingRight;
-    }
-    this.bodyPaddingRight = null;
-    removeClass(document.body, 'el-popup-parent--hidden');
+
+    this.restoreBodyStyle();
   },
 
   data() {
     return {
       opened: false,
       bodyPaddingRight: null,
+      computedBodyPaddingRight: 0,
+      withoutHiddenClass: false,
       rendered: false
     };
   },
@@ -141,14 +140,16 @@ export default {
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
-          if (!hasClass(document.body, 'el-popup-parent--hidden')) {
+          this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
+          if (this.withoutHiddenClass) {
             this.bodyPaddingRight = document.body.style.paddingRight;
+            this.computedBodyPaddingRight = parseInt(getStyle(document.body, 'paddingRight'), 10);
           }
           scrollBarWidth = getScrollBarWidth();
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
           let bodyOverflowY = getStyle(document.body, 'overflowY');
-          if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll')) {
-            document.body.style.paddingRight = scrollBarWidth + 'px';
+          if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll') && this.withoutHiddenClass) {
+            document.body.style.paddingRight = this.computedBodyPaddingRight + scrollBarWidth + 'px';
           }
           addClass(document.body, 'el-popup-parent--hidden');
         }
@@ -197,13 +198,7 @@ export default {
       this.onClose && this.onClose();
 
       if (this.lockScroll) {
-        setTimeout(() => {
-          if (this.modal) {
-            document.body.style.paddingRight = this.bodyPaddingRight;
-          }
-          this.bodyPaddingRight = null;
-          removeClass(document.body, 'el-popup-parent--hidden');
-        }, 200);
+        setTimeout(this.restoreBodyStyle, 200);
       }
 
       this.opened = false;
@@ -214,6 +209,13 @@ export default {
     doAfterClose() {
       PopupManager.closeModal(this._popupId);
       this._closing = false;
+    },
+
+    restoreBodyStyle() {
+      if (this.modal && this.withoutHiddenClass) {
+        document.body.style.paddingRight = this.bodyPaddingRight;
+        removeClass(document.body, 'el-popup-parent--hidden');
+      }
     }
   }
 };
