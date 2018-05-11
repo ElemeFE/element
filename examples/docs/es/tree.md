@@ -1175,7 +1175,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | highlight-current     | Si el nodo actual está resaltado         | boolean                           | —                 | false       |
 | default-expand-all    | Expandir todos los nodos por defecto     | boolean                           | —                 | false       |
 | expand-on-click-node  | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | boolean | — | true |
-| check-on-click-node   | whether to check or uncheck node when clicking on the node, if false, the node can only be checked or unchecked by clicking on the checkbox. | boolean | — | false |
+| check-on-click-node   | si marcar o desmarcar el nodo al hacer clic en el. Si es `false`, el nodo sólo se puede marcar o desmarcar haciendo clic en la casilla de verificación. | boolean | — | false |
 | auto-expand-parent    | Expandir un nodo padre si el hijo está seleccionado | boolean                           | —                 | true        |
 | default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array                             | —                 | —           |
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
