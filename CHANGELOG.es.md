@@ -1,5 +1,17 @@
 ## Changelog
 
+### 2.3.8
+
+*2018-05-11*
+
+- Fixed DatePicker panel jumping to the current month after picking a date in a non-current month when `type` is dates, #10973
+- Fixed clearable Input still displaying the clear icon when readonly, #10912
+- Fixed closing the DatePicker panel without changing the value incorrectly triggering the `change` event, #11017
+- Fixed keyboard navigation not working properly when Select has grouped options, #11058
+- Added `prefix` named slot for Select, #11063
+- Added 'clearValidate` method for FormItem, #11076
+- Added `checkOnClickNode` attribute for Tree, #11111
+
 ### 2.3.7
 
 *2018-04-29*

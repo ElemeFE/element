@@ -411,7 +411,7 @@
 | show-file-list | 是否显示已上传文件列表 | boolean | — | true |
 | drag | 是否启用拖拽上传 | boolean | — | false |
 | accept | 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)（thumbnail-mode 模式下此参数无效）| string | — | — |
-| on-preview | 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据 | function(file) | — | — |
+| on-preview | 点击文件列表中已上传的文件时的钩子 | function(file) | — | — |
 | on-remove | 文件列表移除文件时的钩子 | function(file, fileList) | — | — |
 | on-success | 文件上传成功时的钩子 | function(response, file, fileList) | — | — |
 | on-error | 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
