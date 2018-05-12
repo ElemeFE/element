@@ -82,11 +82,19 @@
     }
   }
 
-  @include m(extra-small) {
+  @include m(tiny) {
     font-size: 11px;
 
     @include e(starts-prefix) {
       font-size: 7px;
+    }
+  }
+
+  @include m(extra-small) {
+    font-size: 13px;
+
+    @include e(starts-prefix) {
+      font-size: 13px;
     }
   }
 
