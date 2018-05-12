@@ -51,7 +51,7 @@
     font-size: 13px;
     letter-spacing: -0.1px;
     text-align: left;
-    color: #1e1e28;
+    color: $--pagination-button-color;
 
     &:focus {
       outline: none;
@@ -79,7 +79,7 @@
       align-items: center;
     }
     .tm-icon {
-      fill: #909090;
+      fill: $--pagination-icon-fill;
     }
   }
 
@@ -249,7 +249,7 @@
         line-height: 2;
       }
       & .tm-icon {
-        fill: #909090;
+        fill: $--pagination-icon-fill;
         &--dots-horizontal {
           width: 9px;
           height: 9px;
