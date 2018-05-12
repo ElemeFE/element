@@ -4,7 +4,7 @@
 
 *2018-05-12*
 
-- Добален type для PriceInfo (medium-small)
+- Добален type для PriceInfo (tiny). Тип extra-small увеличен в размерах.
 
 *2018-05-10*
 
