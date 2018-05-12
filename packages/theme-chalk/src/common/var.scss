@@ -553,14 +553,14 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 -------------------------- */
 $--pagination-font-size: 13px !default;
 $--pagination-fill: $--color-white !default;
-$--pagination-color: $--color-text-primary !default;
+$--pagination-color: #1e1e28 !default;
 $--pagination-border-radius: 3px !default;
 $--pagination-button-color: $--color-text-primary !default;
 $--pagination-button-width: 35.5px !default;
 $--pagination-button-height: 28px !default;
 $--pagination-button-disabled-color: $--color-text-placeholder !default;
 $--pagination-button-disabled-fill: $--color-white !default;
-$--pagination-hover-fill: $--color-primary !default;
+$--pagination-hover-fill: $--color-white !default;
 $--pagination-hover-color: $--color-white !default;
 
 /* Popover

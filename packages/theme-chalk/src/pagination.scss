@@ -7,7 +7,7 @@
   white-space: nowrap;
   padding: 2px 5px;
   color: $--pagination-color;
-  font-weight: bold;
+  font-weight: 500;
   @include utils-clearfix;
 
   span:not([class*=suffix]),
@@ -48,17 +48,21 @@
     padding: 0 6px;
     background: transparent;
 
+    font-size: 13px;
+    letter-spacing: -0.1px;
+    text-align: left;
+    color: #1e1e28;
+
     &:focus {
       outline: none;
     }
 
     &:hover {
-      color: $--pagination-hover-fill;
     }
 
     &.disabled {
-      color: $--pagination-button-disabled-color;
-      background-color: $--pagination-button-disabled-fill;
+      /*color: $--pagination-button-disabled-color;
+      background-color: $--pagination-button-disabled-fill;*/
       cursor: not-allowed;
     }
   }
@@ -70,21 +74,24 @@
     background-color: $--pagination-fill;
     cursor: pointer;
     margin: 0;
-    color: $--pagination-button-color;
 
     .tm-icon {
-      display: block;
-      font-size: 12px;
-      font-weight: bold;
+      fill: #909090;
     }
   }
 
   .btn-prev {
     padding-right: 12px;
+    & span .tm-icon {
+      margin-right: 5px;
+    }
   }
 
   .btn-next {
-    padding-left: 12px;    
+    padding-left: 12px;
+    & span .tm-icon {
+      margin-left: 5px;
+    }
   }
 
   @include m(small) {
@@ -96,7 +103,7 @@
       font-size: 12px;
       line-height: 22px;
       height: 22px;
-      min-width: 22px;
+      width: 22px;
     }
 
     .arrow.disabled {
@@ -212,30 +219,35 @@
   vertical-align: top;
   font-size: 0;
   padding: 0;
-  margin: 0;
+  margin: 0 10px;
 
   .more::before {
     line-height: 30px;
   }
 
   li {
-    padding: 0 4px;
+    width: 28px;
+    height: 28px;
+    margin: 0 7px;
     background: $--pagination-fill;
     vertical-align: top;
     display: inline-block;
     font-size: $--pagination-font-size;
-    min-width: $--pagination-button-width;
-    height: $--pagination-button-height;
+    font-weight: 500;
     line-height: $--pagination-button-height;
     cursor: pointer;
     box-sizing: border-box;
     text-align: center;
-    margin: 0;
 
     &.btn-quicknext,
     &.btn-quickprev {
-      line-height: 28px;
-      color: $--pagination-button-color;
+      line-height: 2.3;
+      &:hover {
+        line-height: 2;
+      }
+      & .tm-icon {
+        fill: #909090;
+      }
     }
 
     &.btn-quickprev:hover {
@@ -251,11 +263,12 @@
     }
 
     &:hover {
-      color: $--pagination-hover-fill;
     }
 
     &.active {
       color: $--pagination-hover-fill;
+      background-color: #50586d;
+      border-radius: 50%;
       cursor: default;
     }
   }

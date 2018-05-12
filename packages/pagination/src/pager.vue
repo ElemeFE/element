@@ -8,8 +8,9 @@
       class="tm-icon more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
-      @mouseenter="quickprevIconClass = 'tm-icon--d-arrow-left'"
-      @mouseleave="quickprevIconClass = 'tm-icon--more'">
+      @mouseenter="quickprevIconClass = 'arrow-left'"
+      @mouseleave="quickprevIconClass = 'dots-horizontal'">
+      <tm-icon :name="quickprevIconClass"></tm-icon>
     </li>
     <li
       v-for="pager in pagers"
@@ -20,8 +21,9 @@
       class="tm-icon more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
-      @mouseenter="quicknextIconClass = 'tm-icon--d-arrow-right'"
-      @mouseleave="quicknextIconClass = 'tm-icon--more'">
+      @mouseenter="quicknextIconClass = 'arrow-right'"
+      @mouseleave="quicknextIconClass = 'dots-horizontal'">
+      <tm-icon :name="quicknextIconClass"></tm-icon>
     </li>
     <li
       :class="{ active: currentPage === pageCount }"
@@ -42,19 +44,26 @@
 
     watch: {
       showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'tm-icon--more';
+        if (!val) this.quickprevIconClass = 'dots-horizontal';
       },
 
       showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'tm-icon--more';
+        if (!val) this.quicknextIconClass = 'dots-horizontal';
       }
     },
 
     methods: {
       onPagerClick(event) {
-        const target = event.target;
+        let target = event.target;
+        console.log('TAG', target.tagName);
         if (target.tagName === 'UL') {
           return;
+        }
+        if (target.tagName !== 'LI') {
+          while (target.tagName !== 'LI') {
+            target = target.parentNode;
+          }
+
         }
 
         let newPage = Number(event.target.textContent);
@@ -140,8 +149,8 @@
         current: null,
         showPrevMore: false,
         showNextMore: false,
-        quicknextIconClass: 'tm-icon--more',
-        quickprevIconClass: 'tm-icon--more'
+        quicknextIconClass: 'dots-horizontal',
+        quickprevIconClass: 'dots-horizontal'
       };
     }
   };
