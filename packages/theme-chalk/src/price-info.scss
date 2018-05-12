@@ -90,6 +90,14 @@
     }
   }
 
+  @include m(medium-small) {
+    font-size: 13px;
+
+    @include e(starts-prefix) {
+      font-size: 13px;
+    }
+  }
+
   @include m(small) {
     font-size: 15px;
 
