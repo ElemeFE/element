@@ -74,7 +74,10 @@
     background-color: $--pagination-fill;
     cursor: pointer;
     margin: 0;
-
+    & span {
+      display: flex;
+      align-items: center;
+    }
     .tm-icon {
       fill: #909090;
     }
@@ -219,7 +222,7 @@
   vertical-align: top;
   font-size: 0;
   padding: 0;
-  margin: 0 10px;
+  margin: 0 25px;
 
   .more::before {
     line-height: 30px;
@@ -247,6 +250,10 @@
       }
       & .tm-icon {
         fill: #909090;
+        &--dots-horizontal {
+          width: 9px;
+          height: 9px;
+        }
       }
     }
 

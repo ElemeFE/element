@@ -5,7 +5,7 @@
       v-if="pageCount > 0"
       class="number">1</li>
     <li
-      class="tm-icon more btn-quickprev"
+      class="more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
       @mouseenter="quickprevIconClass = 'arrow-left'"
@@ -18,7 +18,7 @@
       :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
     <li
-      class="tm-icon more btn-quicknext"
+      class="more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
       @mouseenter="quicknextIconClass = 'arrow-right'"

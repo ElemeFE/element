@@ -78,8 +78,8 @@ If you have too much data to display in one page, use pagination.
 :::demo Set the `background` attribute and the buttons will have a background color.
 ```html
 <tm-pagination
-  prev-text="prev"
-  next-text="next"
+  prev-text="PREV"
+  next-text="NEXT"
   layout="prev, pager, next"
   :total="1000">
 </tm-pagination>
