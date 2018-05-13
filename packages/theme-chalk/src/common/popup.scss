@@ -1,3 +1,5 @@
+@import "../mixins/mixins";
+
 .v-modal-enter {
   animation: v-modal-in .2s ease;
 }
@@ -30,4 +32,10 @@
   height: 100%;
   opacity: 0.5;
   background: #000;
+}
+
+@include b(popup-parent) {
+  @include m(hidden) {
+    overflow: hidden;
+  }
 }

@@ -13,6 +13,7 @@ const Popup = Object.assign({}, VuePopup, {
 describe('Mixin:vue-popup', () => {
   let vm;
   before(() => {
+    document.body.className = '';
     const modals = document.querySelectorAll('.v-modal');
     [].forEach.call(modals, modal => {
       modal &&
@@ -49,13 +50,13 @@ describe('Mixin:vue-popup', () => {
   it('lock scroll', done => {
     vm = createTest(Popup, { modal: true });
     vm.open();
-    expect(document.body.style.overflow).to.equal('hidden');
+    expect(document.body.classList.contains('el-popup-parent--hidden')).to.be.true;
     vm.close();
     destroyVM(vm);
     setTimeout(() => {
       vm = createTest(Popup, { modal: true, lockScroll: false });
       vm.open();
-      expect(document.body.style.overflow).to.not.equal('hidden');
+      expect(document.body.classList.contains('el-popup-parent--hidden')).to.be.false;
       done();
     }, 200);
   });
