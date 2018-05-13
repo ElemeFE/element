@@ -57,7 +57,7 @@ describe('Mixin:vue-popup', () => {
       vm.open();
       expect(document.body.classList.contains('el-popup-parent--hidden')).to.be.false;
       done();
-    }, 200);
+    }, 400);
   });
 
   it('z-index should increase', () => {
