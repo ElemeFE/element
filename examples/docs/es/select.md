@@ -706,8 +706,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 ### Select Slots
 | Name    | Description |
 |---------|-------------|
-|    —    | Option component list |
-| prefix  | content as Select prefix |
+|    —    | lista de los componentes Option |
+| prefix  | contenido prefix de un  Select |
 
 ### Atributos del grupo de opciones
 | Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |
