@@ -72,6 +72,8 @@ export default {
     const rightWrapper = <div class="tm-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
 
+    template.children = template.children || [];
+    rightWrapper.children = rightWrapper.children || [];
     components.forEach(compo => {
       if (compo === '->') {
         haveRightWrapper = true;
@@ -111,8 +113,8 @@ export default {
             on-click={ this.$parent.prev }>
             {
               this.$parent.prevText
-                ? <span>{ this.$parent.prevText }</span>
-                : <i class="tm-icon tm-icon--arrow-left"></i>
+                ? <span><tm-icon name="arrow-left-long"></tm-icon>{ this.$parent.prevText }</span>
+                : <tm-icon name="arrow-left-long"></tm-icon>
             }
           </button>
         );
@@ -131,8 +133,8 @@ export default {
             on-click={ this.$parent.next }>
             {
               this.$parent.nextText
-                ? <span>{ this.$parent.nextText }</span>
-                : <i class="tm-icon tm-icon--arrow-right"></i>
+                ? <span>{ this.$parent.nextText }<tm-icon name="arrow-right-long"></tm-icon></span>
+                : <tm-icon name="arrow-right-long"></tm-icon>
             }
           </button>
         );
