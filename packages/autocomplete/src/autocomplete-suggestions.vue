@@ -56,7 +56,7 @@
 
     updated() {
       this.$nextTick(_ => {
-        this.updatePopper();
+        this.popperJS && this.updatePopper();
       });
     },
 
