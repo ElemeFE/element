@@ -44,7 +44,7 @@
                   @pick="handleMinTimePick"
                   :time-arrow-control="arrowControl"
                   :visible="minTimePickerVisible"
-                  @mounted="$refs.minTimePicker.format=timeFormat">
+                  @mounted="proxyMinTimePickerDataProperties">
                 </time-picker>
               </span>
             </span>
@@ -77,7 +77,7 @@
                   @pick="handleMaxTimePick"
                   :time-arrow-control="arrowControl"
                   :visible="maxTimePickerVisible"
-                  @mounted="$refs.maxTimePicker.format=timeFormat">
+                  @mounted="proxyMaxTimePickerDataProperties">
                 </time-picker>
               </span>
             </span>
@@ -306,6 +306,7 @@
 
     data() {
       return {
+        selectableRange: [],
         popperClass: '',
         value: [],
         defaultValue: null,
@@ -420,6 +421,20 @@
     },
 
     methods: {
+      proxyMinTimePickerDataProperties() {
+        this.proxyTimePickerDataProperties(this.$refs.minTimePicker);
+      },
+      proxyMaxTimePickerDataProperties() {
+        this.proxyTimePickerDataProperties(this.$refs.maxTimePicker);
+      },
+      proxyTimePickerDataProperties(timePicker) {
+        timePicker.format = this.timeFormat;
+        this.$watch('selectableRange', (value) => {
+          timePicker.selectableRange = value;
+        }, {
+          immediate: true
+        });
+      },
       handleClear() {
         this.minDate = null;
         this.maxDate = null;

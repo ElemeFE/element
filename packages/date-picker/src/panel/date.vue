@@ -223,13 +223,16 @@
         const format = timeFormat => {this.$refs.timepicker.format = timeFormat;};
         const value = value => {this.$refs.timepicker.value = value;};
         const date = date => {this.$refs.timepicker.date = date;};
+        const selectableRange = range => {this.$refs.timepicker.selectableRange = range;};
 
         this.$watch('value', value);
         this.$watch('date', date);
+        this.$watch('selectableRange', selectableRange);
 
         format(this.timeFormat);
         value(this.value);
         date(this.date);
+        selectableRange(this.selectableRange);
       },
 
       handleClear() {
@@ -487,6 +490,7 @@
         currentView: 'date',
         disabledDate: '',
         selectedDate: [],
+        selectableRange: [],
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,
