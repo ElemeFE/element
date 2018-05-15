@@ -7,7 +7,8 @@
       isSimple && 'is-simple',
       isLast && !space && !isCenter && 'is-flex',
       isCenter && !isVertical && !isSimple && 'is-center'
-     ]">
+     ]"
+     @click.prevent="$emit('click')">
     <!-- icon & line -->
     <div
       class="el-step__head"
