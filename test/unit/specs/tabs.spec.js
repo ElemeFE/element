@@ -457,4 +457,30 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('should work with lazy', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿" lazy>D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    let paneList = vm.$el.querySelector('.el-tabs__content').children;
+    expect(paneList.length).to.be.equal(3);
+    expect(vm.$el.querySelector('.el-tabs__nav > #tab-3')).to.be.equal(null);
+
+    setTimeout(_ => {
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
+      tabList[3].click();
+      vm.$nextTick(_ => {
+        expect(paneList.length).to.be.equal(3);
+        expect(vm.$el.querySelector('.el-tabs__nav > #tab-3')).not.to.be.equal(null);
+        done();
+      });
+    }, 100);
+  });
 });
