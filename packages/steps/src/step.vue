@@ -2,7 +2,8 @@
   <div
     class="el-step"
     :style="[style,  isLast ? '' : { marginRight: - $parent.stepOffset + 'px' }]"
-    :class="['is-' + $parent.direction]">
+    :class="['is-' + $parent.direction]"
+    @click.prevent="$emit('click')">
     <div
       class="el-step__head"
       :class="['is-' + currentStatus, { 'is-text': !icon }]">
