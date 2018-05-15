@@ -123,7 +123,7 @@
       },
       iconClass() {
         if (this.type === 'line') {
-          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-cross';
+          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-close';
         } else {
           return this.status === 'success' ? 'el-icon-check' : 'el-icon-close';
         }
