@@ -461,25 +461,29 @@ describe('Tabs', () => {
     vm = createVue({
       template: `
         <el-tabs ref="tabs">
-          <el-tab-pane label="用户管理">A</el-tab-pane>
-          <el-tab-pane label="配置管理">B</el-tab-pane>
-          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
-          <el-tab-pane label="定时任务补偿" lazy>D</el-tab-pane>
+          <el-tab-pane label="用户管理" name="A">A</el-tab-pane>
+          <el-tab-pane label="配置管理" name="B">B</el-tab-pane>
+          <el-tab-pane label="角色管理" name="C">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿" lazy name="D">D</el-tab-pane>
         </el-tabs>
       `
     }, true);
 
-    let paneList = vm.$el.querySelector('.el-tabs__content').children;
-    expect(paneList.length).to.be.equal(3);
-    expect(vm.$el.querySelector('.el-tabs__nav > #tab-3')).to.be.equal(null);
+    expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
+    expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
 
     setTimeout(_ => {
-      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
-      tabList[3].click();
-      vm.$nextTick(_ => {
-        expect(paneList.length).to.be.equal(3);
-        expect(vm.$el.querySelector('.el-tabs__nav > #tab-3')).not.to.be.equal(null);
-        done();
+      vm.$el.querySelector('.el-tabs__nav > #tab-D').click();
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(4);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).not.to.be.equal(null);
+
+        vm.$el.querySelector('.el-tabs__nav > #tab-A').click();
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+          done();
+        });
       });
     }, 100);
   });
