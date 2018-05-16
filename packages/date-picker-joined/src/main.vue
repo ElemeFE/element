@@ -4,6 +4,7 @@
       :suffix-icon="suffixIcon"
       :prefix-icon="prefixIcon"
       :required="required"
+      :clearable="clearable"
       :size="size"
       readonly
       v-model="dateLabel"
@@ -64,6 +65,10 @@ export default {
     required: {
       type: Boolean,
       default: false
+    },
+    clearable: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -75,11 +80,18 @@ export default {
         this.$emit('input', newVal);
       }
     },
-    dateLabel() {
-      if (this.type === 'daterange') {
-        return this.getRangeDateLabel();
-      } else {
-        return this.getSingleDateLabel();
+    dateLabel: {
+      get() {
+        if (this.type === 'daterange') {
+          return this.getRangeDateLabel();
+        } else {
+          return this.getSingleDateLabel();
+        }
+      },
+      set(newVal) {
+        if (newVal === '') {
+          this.$refs.originPicker.clear();
+        }
       }
     }
   },

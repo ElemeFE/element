@@ -542,3 +542,4 @@ When picking a date range, you can assign the time part for start date and end d
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | — |
+| clear | clear data | — |

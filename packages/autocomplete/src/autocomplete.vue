@@ -16,11 +16,14 @@
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @clear="close"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
       :label="label"
+      :clearable="clearable"
+      :focusAfterClear="false"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -111,6 +114,10 @@
       debounce: {
         type: Number,
         default: 300
+      },
+      clearable: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
