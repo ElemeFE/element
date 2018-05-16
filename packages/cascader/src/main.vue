@@ -192,6 +192,9 @@ export default {
     childrenKey() {
       return this.props.children || 'children';
     },
+    disabledKey() {
+      return this.props.disabled || 'disabled';
+    },
     currentLabels() {
       let options = this.options;
       let labels = [];
@@ -332,7 +335,8 @@ export default {
           return {
             __IS__FLAT__OPTIONS: true,
             value: optionStack.map(item => item[this.valueKey]),
-            label: this.renderFilteredOptionLabel(value, optionStack)
+            label: this.renderFilteredOptionLabel(value, optionStack),
+            disabled: optionStack.some(item => item[this.disabledKey])
           };
         });
       } else {
