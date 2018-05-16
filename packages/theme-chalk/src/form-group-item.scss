@@ -8,10 +8,7 @@
   flex-flow: row nowrap;
   border: 1px solid $--color-pastel-gray;
   border-radius: $--border-radius-base;
-
-  & + & {
-    margin-top: 17px;
-  }
+  
   .tm-input {
     position: relative;
     width: auto;
