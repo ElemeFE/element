@@ -179,7 +179,7 @@ TableStore.prototype.mutations = {
         if (ids[rowId]) {
           expandRows.push(row);
         }
-      };
+      }
       this.states.expandRows = expandRows;
     } else {
       // clear the old rows
