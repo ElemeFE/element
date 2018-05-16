@@ -170,7 +170,11 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      focusAfterClear: {
+        type: Boolean,
+        default: true
+      }
     },
 
     computed: {
@@ -291,7 +295,10 @@
         this.$emit('input', '');
         this.$emit('change', '');
         this.setCurrentValue('');
-        this.focus();
+        if (this.focusAfterClear) {
+          this.focus();
+        }
+        this.$emit('clear', '');
       }
     },
 

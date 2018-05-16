@@ -579,6 +579,52 @@ You can get some recommended tips based on the current input.
 ```
 :::
 
+### Autocomplete - clearable
+
+:::demo Autocomplete clearable
+```html
+<tm-autocomplete
+  class="inline-input"
+  v-model="state1"
+  placeholder="Please Input"
+  :fetch-suggestions="querySearch"
+  :clearable="true"
+></tm-autocomplete>
+<script>
+  export default {
+    data() {
+      return {
+        links: [],
+        state1: ''
+      };
+    },
+    methods: {
+      querySearch(queryString, cb) {
+        var links = this.links;
+        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
+        // call callback function to return suggestions
+        cb(results);
+      },
+      loadAll() {
+        return [
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
+         ];
+      }
+    },
+    mounted() {
+      this.links = this.loadAll();
+    }
+  }
+</script>
+```
+:::
+
 ### Custom template
 
 Customize how suggestions are displayed.
@@ -757,6 +803,7 @@ Search data from server-side.
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
 | tabindex | input tabindex | string | - | - |
+|focusAfterClear | set focus after clear input or not | boolean | — | true |
 
 ### Input slots
 
@@ -773,6 +820,7 @@ Search data from server-side.
 |----| ----| ----|
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
+| clear | triggers when Input cleared | |
 | change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Attributes

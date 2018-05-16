@@ -22,6 +22,19 @@
 ```
 :::
 
+### Range - clearable
+
+:::demo default
+
+```html
+<tm-date-picker-joined
+  suffix-icon="calendar"
+  :clearable="true"
+  v-model="date"></tm-date-picker-joined>
+
+```
+:::
+
 
 ### Single
 
@@ -55,3 +68,4 @@
 | size | input size | string | — | — |
 | placeholder | input placeholder | string | — | — |
 | type | datepicker type | string | date, daterange | daterange |
+| clearable | Whether to show clear button | boolean | — | true |

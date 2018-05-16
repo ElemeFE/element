@@ -559,6 +559,15 @@ export default {
       }
     },
 
+    clear() {
+      this.picker.handleClear();
+      let self = this;
+      // hide opened datepicker hack
+      window.setTimeout(function() {
+        self.pickerVisible = false;
+      }, 1);
+    },
+
     blur() {
       this.refInput.forEach(input => input.blur());
     },
