@@ -169,6 +169,8 @@ TableStore.prototype.mutations = {
     const defaultExpandAll = states.defaultExpandAll;
     if (defaultExpandAll) {
       this.states.expandRows = (states.data || []).slice(0);
+    } else {
+      this.states.expandRows = [];
     }
 
     Vue.nextTick(() => this.table.updateScrollY());
