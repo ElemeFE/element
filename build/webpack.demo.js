@@ -171,7 +171,10 @@ const webpackConfig = {
     ]),
     new ProgressBarPlugin(),
     new webpack.LoaderOptionsPlugin({
-      minimize: true
+      minimize: true,
+      vue: {
+        preserveWhitespace: false
+      }
     })
   ]
 };
