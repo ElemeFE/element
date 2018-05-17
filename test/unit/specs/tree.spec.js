@@ -448,7 +448,12 @@ describe('Tree', () => {
     tree.setCurrentKey(111);
     vm.$nextTick(() => {
       expect(tree.store.currentNode.data.id).to.equal(111);
-      done();
+      // cancel highlight
+      tree.setCurrentKey(null);
+      vm.$nextTick(() => {
+        expect(tree.store.currentNode).to.equal(null);
+        done();
+      });
     });
   });
 

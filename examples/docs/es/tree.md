@@ -1210,7 +1210,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
-| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
+| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
 | remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
