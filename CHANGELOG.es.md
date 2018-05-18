@@ -4,12 +4,12 @@
 
 *2018-05-18*
 
-- Fixed when the source data does not have the field specified by a TableColumn's `prop` attribute, an error would occur when the mouse moves into that column's cells, #11137
-- The `lockScroll` attribute of pop up components no longer adds an inline style to the parent element, but instead adds a class name, #11114
-- Fixed the icon of Progress not displaying when its `status` is exception, #11172
-- Fixed options' `disabled` attribute not working in filterable Cascader's filter result list, #11185
-- Fixed an issue where Table's expanded row cannot be collapsed if the data source is updated after its expansion, #11186
-- `setCurrentKey` of Tree now accepts `null` as its param to cancel the currently highlighted node, #11205
+- Corregido que cuando los datos de origen no tenian el campo especificado por el atributo `prop` de una TableColumn, se producía un error al moverse el ratón dentro de las celdas de esa columna, #11137.
+- El atributo `lockScroll` de los componentes pop-up ya no añade un inline style al elemento padre, sino que añade un nombre de clase, #1111114.
+- Arreglado el icono de Progreso que no se mostraba cuando su `status` era `exception`, #11172
+- El atributo `disabled` no funcionaba en la lista de resultados del filtro de Cascader, #11185
+- Se ha corregido un problema por el que la fila expandida de la Tabla no se podía contraer si los datos de origen se actualizaban después de su expansión, #11186.
+- `setCurrentKey` de Tree ahora acepta `null` como parámetro para cancelar el nodo actualmente resaltado, #11205
 
 ### 2.3.8
 

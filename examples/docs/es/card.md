@@ -187,9 +187,10 @@ export default {
 
 ### Shadow
 
-You can define when to show the card shadows
+Puede definir cuándo mostrar las sombras.
 
-:::demo The `shadow` attribute determines when the card shadows are displayed. It can be `always`, `hover` or `never`.
+:::demo El atributo de sombra determina cuándo se muestran las sombras. Puede ser `always`, `hover` o `never`.
+
 ```html
 <el-row :gutter="12">
   <el-col :span="8">
