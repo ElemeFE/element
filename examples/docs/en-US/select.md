@@ -441,6 +441,7 @@ Multiple select uses tags to display selected options.
     v-model="value11"
     multiple
     collapse-tags
+    removeable-tags
     style="margin-left: 20px;"
     placeholder="Select">
     <tm-option
@@ -863,6 +864,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | size | size of Input | string | large/small/mini/extra-large | — |
 | clearable | whether single select can be cleared | boolean | — | false |
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
+| removeable-tags | define availability to remove tags or not | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
 | auto-complete | the autocomplete attribute of select input | string | — | off |

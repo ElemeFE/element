@@ -11,7 +11,7 @@
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <span v-if="collapseTags && selected.length">
         <tm-tag
-          :closable="!selectDisabled"
+          :closable="isTagCloseable"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
@@ -237,6 +237,9 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
+      },
+      isTagClosable() {
+        return !this.selectDisabled && this.removeableTags;
       }
     },
 
@@ -291,6 +294,10 @@
         default: 'value'
       },
       collapseTags: Boolean,
+      removeableTags: {
+        type: Boolean,
+        default: false
+      },
       prefixIcon: String,
       suffixIcon: String,
       showArrow: {
