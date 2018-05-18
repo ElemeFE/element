@@ -26,8 +26,8 @@
     flex-grow: 0;
     flex-shrink: 0;
     &:hover{
-      @include e(icon) {
-        fill: $--entity-counter-active-color;
+      .tm-entity-counter__icon {
+        fill: $--entity-counter-hover-color;
       }
     }
 
