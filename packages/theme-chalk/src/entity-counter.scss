@@ -25,6 +25,11 @@
     outline: none !important;
     flex-grow: 0;
     flex-shrink: 0;
+    &:hover{
+      @include e(icon) {
+        fill: $--entity-counter-active-color;
+      }
+    }
 
     @include m(left) {
       padding-top: 0;
@@ -41,6 +46,7 @@
     fill: $--entity-counter-border-color;
     width: 24px;
     height: 24px;
+    transition: .2s;
   }
 
   @include e(label) {
