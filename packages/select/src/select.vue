@@ -240,7 +240,6 @@
           : 'small';
       },
       isTagCloseable() {
-        console.log(!this.selectDisabled, this.removeableTags);
         return !this.selectDisabled && this.removeableTags;
       }
     },
