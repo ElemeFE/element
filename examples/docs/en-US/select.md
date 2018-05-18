@@ -428,7 +428,7 @@ Multiple select uses tags to display selected options.
 :::demo Set `multiple` attribute for `tm-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
-  <tm-select v-model="value5" multiple placeholder="Select">
+  <tm-select v-model="value5" multiple removeable-tags placeholder="Select">
     <tm-option
       v-for="item in options"
       :key="item.value"
@@ -441,7 +441,6 @@ Multiple select uses tags to display selected options.
     v-model="value11"
     multiple
     collapse-tags
-    removeable-tags
     style="margin-left: 20px;"
     placeholder="Select">
     <tm-option
