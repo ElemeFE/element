@@ -24,8 +24,9 @@
           :closable="false"
           :size="collapseTagSize"
           type="info"
+          class="tm-select__tags-hidden-number"
           disable-transitions>
-          <span class="tm-select__tags-text">+ {{ selected.length - 1 }}</span>
+          <span class="tm-select__tags-text">+{{ selected.length - 1 }}</span>
         </tm-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
