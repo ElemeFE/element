@@ -81,7 +81,7 @@ export default {
         if (this.autoUpload) this.upload(rawFile);
       });
     },
-    upload(rawFile, file) {
+    upload(rawFile) {
       this.$refs.input.value = null;
 
       if (!this.beforeUpload) {
@@ -92,7 +92,10 @@ export default {
       if (before && before.then) {
         before.then(processedFile => {
           const fileType = Object.prototype.toString.call(processedFile);
+
           if (fileType === '[object File]' || fileType === '[object Blob]') {
+            processedFile.name = rawFile.name;
+            processedFile.uid = rawFile.uid;
             this.post(processedFile);
           } else {
             this.post(rawFile);
