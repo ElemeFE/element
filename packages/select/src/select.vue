@@ -239,7 +239,7 @@
           ? 'mini'
           : 'small';
       },
-      isTagClosable() {
+      isTagCloseable() {
         return !this.selectDisabled && this.removeableTags;
       }
     },
