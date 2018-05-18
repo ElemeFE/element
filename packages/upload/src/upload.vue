@@ -93,10 +93,9 @@ export default {
         before.then(processedFile => {
           const fileType = Object.prototype.toString.call(processedFile);
 
-          processedFile.name = rawFile.name;
-          processedFile.uid = rawFile.uid;
-
           if (fileType === '[object File]' || fileType === '[object Blob]') {
+            processedFile.name = rawFile.name;
+            processedFile.uid = rawFile.uid;
             this.post(processedFile);
           } else {
             this.post(rawFile);
