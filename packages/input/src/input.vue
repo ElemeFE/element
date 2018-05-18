@@ -130,7 +130,8 @@
         suffixOffset: null,
         hovering: false,
         focused: false,
-        isOnComposition: false
+        isOnComposition: false,
+        valueBeforeComposition: null
       };
     },
 
@@ -260,28 +261,34 @@
       handleComposition(event) {
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
+          this.currentValue = this.valueBeforeComposition;
+          this.valueBeforeComposition = null;
           this.handleInput(event);
         } else {
           const text = event.target.value;
           const lastCharacter = text[text.length - 1] || '';
           this.isOnComposition = !isKorean(lastCharacter);
+          if (this.isOnComposition && event.type === 'compositionstart') {
+            this.valueBeforeComposition = text;
+          }
         }
       },
       handleInput(event) {
-        if (this.isOnComposition) return;
         const value = event.target.value;
-        this.$emit('input', value);
         this.setCurrentValue(value);
+        if (this.isOnComposition) return;
+        this.$emit('input', value);
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
       },
       setCurrentValue(value) {
-        if (value === this.currentValue) return;
+        if (this.isOnComposition && value === this.valueBeforeComposition) return;
+        this.currentValue = value;
+        if (this.isOnComposition) return;
         this.$nextTick(_ => {
           this.resizeTextarea();
         });
-        this.currentValue = value;
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }
