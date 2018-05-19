@@ -1,17 +1,4 @@
 import dateUtil from 'tmconsulting-ui/src/utils/date';
-import { t } from 'tmconsulting-ui/src/locale';
-
-const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-const getI18nSettings = () => {
-  return {
-    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-    dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-    monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
-    monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`)),
-    amPm: ['am', 'pm']
-  };
-};
 
 const newArray = function(start, end) {
   let result = [];
@@ -38,11 +25,11 @@ export const isDateObject = function(val) {
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
-  return dateUtil.format(date, format || 'yyyy-MM-dd', getI18nSettings());
+  return dateUtil.format(date, format);
 };
 
 export const parseDate = function(string, format) {
-  return dateUtil.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
+  return dateUtil.parse(string, format);
 };
 
 export const getDayCountOfMonth = function(year, month) {

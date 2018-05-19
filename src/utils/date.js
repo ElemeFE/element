@@ -102,6 +102,7 @@
       return i18n.dayNamesShort[dateObj.getDay()];
     },
     dddd: function(dateObj, i18n) {
+      console.log(i18n);
       return i18n.dayNames[dateObj.getDay()];
     },
     M: function(dateObj) {
