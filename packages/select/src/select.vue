@@ -24,7 +24,7 @@
                     placement="top"
                     key="show-more"
                     trigger="hover">
-          <div class="tm-select__tags-text row-collapser__item"
+          <div class="tm-select__tags-text"
                v-for="item in collapsedList"
                :key="getValueKey(item)">
             {{ item.currentLabel }}

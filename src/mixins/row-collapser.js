@@ -54,7 +54,9 @@ export default {
     this.resizeHandler = handler;
     window.addEventListener('resize', debounce(handler));
     this.handleCollapse();
-    this.$watch(this.listNS, handler);
+    this.$watch(this.listNS, () => {
+      this.$nextTick(handler);
+    });
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler);
