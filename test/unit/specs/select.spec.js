@@ -519,78 +519,13 @@ describe('Select', () => {
         options[3].click();
         setTimeout(() => {
           expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
-          const tagCloseIcons = vm.$el.querySelectorAll('.tm-tag__close');
-          tagCloseIcons[0].click();
           setTimeout(() => {
-            expect(vm.value.indexOf('选项1')).to.equal(-1);
+            expect(vm.value.indexOf('选项1')).to.not.equal(-1);
             done();
           }, 100);
         }, 100);
       }, 100);
     }, 100);
-  });
-
-  it('multiple remove-tag', done => {
-    sinon.stub(window.console, 'log');
-    vm = createVue({
-      template: `
-        <div>
-          <tm-select v-model="value" multiple @remove-tag="handleRemoveTag">
-            <tm-option
-              v-for="item in options"
-              :label="item.label"
-              :key="item.value"
-              :value="item.value">
-              <p>{{item.label}} {{item.value}}</p>
-            </tm-option>
-          </tm-select>
-        </div>
-      `,
-
-      data() {
-        return {
-          options: [{
-            value: '选项1',
-            label: '黄金糕'
-          }, {
-            value: '选项2',
-            label: '双皮奶'
-          }, {
-            value: '选项3',
-            label: '蚵仔煎'
-          }, {
-            value: '选项4',
-            label: '龙须面'
-          }, {
-            value: '选项5',
-            label: '北京烤鸭'
-          }],
-          value: ['选项1', '选项3']
-        };
-      },
-
-      methods: {
-        handleRemoveTag() {
-          console.log('remove tag');
-        }
-      }
-    }, true);
-    expect(vm.value.length).to.equal(2);
-    setTimeout(() => {
-      const tagCloseIcons = vm.$el.querySelectorAll('.tm-tag__close');
-      tagCloseIcons[1].click();
-      setTimeout(() => {
-        expect(vm.value.length).to.equal(1);
-        expect(window.console.log.callCount).to.equal(1);
-        tagCloseIcons[0].click();
-        setTimeout(() => {
-          expect(vm.value.length).to.equal(0);
-          expect(window.console.log.callCount).to.equal(2);
-          window.console.log.restore();
-          done();
-        }, 50);
-      }, 50);
-    }, 50);
   });
 
   it('multiple limit', done => {

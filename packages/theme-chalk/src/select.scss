@@ -133,13 +133,41 @@
   @include e(tags) {
     position: absolute;
     line-height: normal;
-    white-space: normal;
+    white-space: nowrap;
     z-index: $--index-normal;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    padding-left: 5px;
+  }
+
+  @include e(tags-text) {
+    margin-left: 0;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    color: $--color-dark-gunmetal;
+  }
+
+  @include e(show-more) {
+    position: absolute;
+    top: 1px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -0.2px;
+    color: $--color-taupe-gray;
+    cursor: pointer;
+
+    &:hover {
+      color: $--color-blueberry;
+    }
+  }
+
+  @include e(collapsed-popper) {
+    &.tm-popover {
+      text-align: center;
+    }
   }
 
   .tm-tag__close {
