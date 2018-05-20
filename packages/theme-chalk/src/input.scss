@@ -238,6 +238,22 @@
       font-size: 24px;
     }
   }
+  @include m(large) {
+    font-size: 14px;
+    line-height: 40px;
+    @include e(inner) {
+      height: 40px;
+      line-height: 40px;
+    }
+    @include e((prefix, suffix)) {
+      line-height: 40px;
+    }
+    .tm-input__icon {
+      height: 24px;
+      width: 24px;
+      font-size: 24px;
+    }
+  }
   @include m(medium) {
     font-size: $--input-medium-font-size;
 

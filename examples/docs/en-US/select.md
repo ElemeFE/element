@@ -191,7 +191,7 @@ When there are plenty of options, use a drop-down menu to display and select des
 <template>
   <div style="margin-bottom: 10px;">
       Extra-large:<br>
-      <tm-select v-model="value" placeholder="Select" size="extra-large">
+      <tm-select v-model="value" placeholder="Select" size="extra-large" prefix-icon="location">
         <tm-option
           v-for="item in options"
           :key="item.value"
@@ -202,7 +202,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   </div>
   <div style="margin-bottom: 10px;">
       Large:<br>
-      <tm-select v-model="value" placeholder="Select" size="large">
+      <tm-select v-model="value" placeholder="Select" size="large" prefix-icon="location">
         <tm-option
           v-for="item in options"
           :key="item.value"
@@ -213,7 +213,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   </div>
   <div style="margin-bottom: 10px;">
       Medium:<br>
-      <tm-select v-model="value" placeholder="Select" size="medium">
+      <tm-select v-model="value" placeholder="Select" size="medium" prefix-icon="location">
         <tm-option
             v-for="item in options"
             :key="item.value"
@@ -224,7 +224,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   </div>
   <div style="margin-bottom: 10px;">
       Default:<br>
-      <tm-select v-model="value" placeholder="Select">
+      <tm-select v-model="value" placeholder="Select" prefix-icon="location">
         <tm-option
             v-for="item in options"
             :key="item.value"
@@ -235,7 +235,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   </div>
   <div style="margin-bottom: 10px;">
       Small:<br>
-      <tm-select v-model="value" placeholder="Select" size="small">
+      <tm-select v-model="value" placeholder="Select" size="small" prefix-icon="location">
         <tm-option
             v-for="item in options"
             :key="item.value"
@@ -246,7 +246,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   </div>
   <div style="margin-bottom: 10px;">
       Mini:<br>
-      <tm-select v-model="value" placeholder="Select" size="mini">
+      <tm-select v-model="value" placeholder="Select" size="mini" prefix-icon="location">
         <tm-option
             v-for="item in options"
             :key="item.value"
