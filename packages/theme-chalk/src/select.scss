@@ -139,6 +139,7 @@
     align-items: center;
     flex-wrap: wrap;
     padding-left: 5px;
+    overflow: hidden;
   }
 
   @include e(tags-text) {

@@ -32,7 +32,6 @@ export default {
         const width = list.offsetWidth;
         const children = this.$el.querySelectorAll('.row-collapser__list .row-collapser__item');
         let collapseIndex = -1;
-        this.collapseIndex = collapseIndex;
         children.forEach((child, index) => {
           const offsetWidth = child.offsetLeft + child.offsetWidth + this.margin;
           if (offsetWidth > width - this.showMoreWidth) {
@@ -50,13 +49,11 @@ export default {
     }
   },
   mounted() {
-    const handler = this.handleCollapse.bind(this);
+    const handler = debounce(this.handleCollapse.bind(this));
     this.resizeHandler = handler;
-    window.addEventListener('resize', debounce(handler));
+    window.addEventListener('resize', handler);
     this.handleCollapse();
-    this.$watch(this.listNS, () => {
-      this.$nextTick(handler);
-    });
+    this.$watch(this.listNS, handler);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler);
