@@ -98,4 +98,8 @@
   //    }
   //  }
   //}
+
+  @include m(large) {
+    height: 48px;
+  }
 }
