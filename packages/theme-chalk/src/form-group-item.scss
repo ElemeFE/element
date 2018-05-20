@@ -3,11 +3,17 @@
 @import "common/var";
 
 @include b(form-group-item) {
+  height: 40px;
   display: flex;
   overflow: hidden;
   flex-flow: row nowrap;
   border: 1px solid $--color-pastel-gray;
   border-radius: $--border-radius-base;
+
+  & > * {
+    position: relative;
+    top: -1px;
+  }
   
   .tm-input {
     position: relative;
@@ -18,7 +24,7 @@
     &:after {
       content: '';
       position: absolute;
-      top: 50%;
+      top: calc(50% + 1px);
       height: 30px;
       margin-top: -15px;
       width: 1px;
