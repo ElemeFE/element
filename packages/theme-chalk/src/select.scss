@@ -34,8 +34,6 @@
     }
   }
 
-  @include m(extra-large) {}
-
   .tm-input {
     @include when(focus) {
       .tm-input__suffix-inner {
@@ -170,26 +168,33 @@
     }
   }
 
-  .tm-tag__close {
-    margin-top: -2px;
-  }
-
   .tm-tag {
     box-sizing: border-box;
     border-color: transparent;
-    margin: 2px 0 2px 6px;
     background-color: transparent;
+    margin: 0;
+    color: $--select-multiple-input-color;
+    font-size: $--select-font-size;
 
-    &__close.tm-icon--cross {
-      background-color: transparent;
-      right: -7px;
-      top: 0;
-      fill: $--input-icon-color;
-
-      &:hover {
+    &__close {
+      margin-top: -2px;
+      &.tm-icon--cross {
         background-color: transparent;
-        fill: $--color-text-secondary;
+        right: -7px;
+        top: 0;
+        fill: $--input-icon-color;
+
+        &:hover {
+          background-color: transparent;
+          fill: $--color-text-secondary;
+        }
       }
+    }
+    &.tm-select__tags-hidden-number {
+      padding: 0;
+      margin-left: 4px;
+      color: $--color-blueberry;
+      font-weight: 600;
     }
   }
 }

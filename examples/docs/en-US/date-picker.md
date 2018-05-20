@@ -393,10 +393,12 @@ Pay attention to capitalization
 | `yyyy` | year | | 2017 |
 | `M`  | month | no leading 0 | 1 |
 | `MM` | month | | 01 |
-| `W`  | week | only for week picker's `format`; no leading 0 | 1 |
-| `WW` | week | only for week picker's `format`| 01 |
+| `MMM` | month name short | | January = Jan |
+| `MMMM` | month name | | January |
 | `d`  | day | no leading 0 | 2 |
 | `dd` | day | | 02 |
+| `ddd` | day name short | | Sunday = Sun |
+| `dddd` | day name | | Sunday |
 | `H`  | hour | 24-hour clock; no leading 0 | 3 |
 | `HH` | hour | 24-hour clock | 03 |
 | `h`  | hour | 12-hour clock; must be used with `A` or `a`; no leading 0 | 3 |

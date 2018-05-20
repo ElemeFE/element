@@ -10,7 +10,7 @@ $--color-text-default: #646464;
   vertical-align: middle;
   display: inline-block;
   height: 20px;
-  line-height: 20px;
+  line-height: 18px;
   text-align: center;
   padding: 0 10px;
   background: #ffffff;
@@ -19,6 +19,7 @@ $--color-text-default: #646464;
   font-size: $--font-size-base;
   cursor: default;
   border: 1px solid transparent;
+  box-sizing: border-box;
 
   .tm-icon {
     fill: $--color-text-default;
@@ -39,6 +40,8 @@ $--color-text-default: #646464;
 
   @include when(round) {
     border-radius: 10.5px;
+    height: 22px;
+    line-height: 20px;
   }
 
   @include when(plain) {
