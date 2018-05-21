@@ -711,6 +711,7 @@ Attribute | Description | Type | Options | Default
 | label | label text | string | — | — |
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
+| hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
 
 ### Autocomplete Slots
 
