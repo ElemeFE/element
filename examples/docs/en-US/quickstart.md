@@ -230,14 +230,14 @@ Vue.prototype.$message = Message;
 
 ### Global config
 
-When importing Element, you can define a global config object. For now this object has only one property: `size`, which sets the default size for all components:
+When importing Element, you can define a global config object. For now this object has two properties: `size` and `zIndex`. The property `size` sets the default size for all components and the property `zIndex` sets the initial z-index (default: 2000) for modal boxes:
 
 Fully import Element：
 
 ```js
 import Vue from 'vue';
 import Element from 'element-ui';
-Vue.use(Element, { size: 'small' });
+Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
 Partial import Element：
@@ -246,11 +246,11 @@ Partial import Element：
 import Vue from 'vue';
 import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small' };
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);
 ```
 
-With the above config, the default size of all components that have size attribute will be 'small'.
+With the above config, the default size of all components that have size attribute will be 'small', and the initial z-index of modal boxes is 3000.
 
 ### Start coding
 
