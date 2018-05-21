@@ -56,7 +56,7 @@ if [ "$TRAVIS_TAG" ]; then
 fi
 
 # build dev site
-npm run build:file && CI_ENV=/dev/$TRAVIS_BRANCH/ node_modules/.bin/cooking build -c build/cooking.demo.js
+npm run build:file && CI_ENV=/dev/$TRAVIS_BRANCH/ node_modules/.bin/webpack --config build/webpack.demo.js
 cd temp_web
 git clone https://$ROT_TOKEN@github.com/ElementUI/dev.git && cd dev
 mkdir $TRAVIS_BRANCH
