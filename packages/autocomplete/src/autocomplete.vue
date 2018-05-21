@@ -10,9 +10,6 @@
     <el-input
       ref="input"
       v-bind="$props"
-      @compositionstart.native="handleComposition"
-      @compositionupdate.native="handleComposition"
-      @compositionend.native="handleComposition"
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -122,7 +119,6 @@
     data() {
       return {
         activated: false,
-        isOnComposition: false,
         suggestions: [],
         loading: false,
         highlightedIndex: -1
@@ -163,17 +159,9 @@
           }
         });
       },
-      handleComposition(event) {
-        if (event.type === 'compositionend') {
-          this.isOnComposition = false;
-          this.handleChange(event.target.value);
-        } else {
-          this.isOnComposition = true;
-        }
-      },
       handleChange(value) {
         this.$emit('input', value);
-        if (this.isOnComposition || (!this.triggerOnFocus && !value)) {
+        if (!this.triggerOnFocus && !value) {
           this.suggestions = [];
           return;
         }
