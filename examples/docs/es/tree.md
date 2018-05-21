@@ -1063,7 +1063,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 
 ### Draggable
 
-You can drag and drop Tree nodes by adding a `draggable` attribute.
+Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 
 :::demo
 ```html
