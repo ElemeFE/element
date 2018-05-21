@@ -22,4 +22,7 @@ export declare class ElTabs extends ElementUIComponent {
 
   /** Position of tabs */
   tabPosition: TabPosition
+
+  /** Hook function before switching tab. If false or a Promise is returned and then is rejected, switching will be prevented */
+  beforeLeave: () => boolean | Promise<any>
 }
