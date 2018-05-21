@@ -863,6 +863,7 @@ export default {
 | label | 输入框关联的label文字 | string | — | — |
 | prefix-icon | 输入框头部图标 | string | — | — |
 | suffix-icon | 输入框尾部图标 | string | — | — |
+| hide-loading | 是否隐藏远程加载时的加载图标 | boolean | — | false |
 
 ### Autocomplete Slots
 | name | 说明 |

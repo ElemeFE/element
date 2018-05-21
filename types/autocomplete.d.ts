@@ -56,6 +56,18 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** Whether show suggestions when input focus */
   triggerOnFocus: boolean
 
+  /** Whether to emit a `select` event on enter when there is no autocomplete match */
+  selectWhenUnmatched: boolean
+
+  /** Prefix icon class */
+  prefixIcon: string
+
+  /** Suffix icon class */
+  suffixIcon: string
+
+  /** Whether to hide the loading icon in remote search */
+  hideLoading: boolean
+
   /**
    * Focus the Input component
    */
