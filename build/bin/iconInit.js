@@ -3,7 +3,8 @@
 var postcss = require('postcss');
 var fs = require('fs');
 var path = require('path');
-var fontFile = fs.readFileSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icon.scss'), 'utf8');
+var fontFile = fs.readFileSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icon.scss'), 'utf8'); // 获取绝对路径下面的信息
+console.log(fontFile);
 var nodes = postcss.parse(fontFile).nodes;
 var classList = [];
 
