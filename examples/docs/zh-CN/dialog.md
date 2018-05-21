@@ -238,7 +238,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 
 标题和底部可水平居中
 
-:::demo 将 `center` 设置为 `true` 即可使标题和底部居中。
+:::demo 将`center`设置为`true`即可使标题和底部居中。`center`仅影响标题和底部区域。Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加 CSS。
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">点击打开 Dialog</el-button>
@@ -268,7 +268,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 :::
 
 :::tip
-`center` 仅影响标题和底部区域。Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加 CSS。
+Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
 :::
 
 :::tip
