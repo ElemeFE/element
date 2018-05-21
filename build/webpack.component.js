@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-var Components = require('../components.json');
+const Components = require('../components.json');
 const config = require('./config');
 
 const webpackConfig = {
