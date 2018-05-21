@@ -10,6 +10,25 @@
   border: 1px solid $--color-pastel-gray;
   border-radius: $--border-radius-base;
 
+  @include m(large) {
+    height: 48px;
+  }
+
+  .tm-form-item {
+    margin: 0;
+    &.is-error {
+      .tm-input__inner {
+        color: $--color-sunset-orange;
+        &::placeholder {
+          color: $--color-sunset-orange;
+        }
+      }
+    }
+    &__error {
+      display: none;
+    }
+  }
+
   & > * {
     position: relative;
     top: -1px;
@@ -98,8 +117,4 @@
   //    }
   //  }
   //}
-
-  @include m(large) {
-    height: 48px;
-  }
 }
