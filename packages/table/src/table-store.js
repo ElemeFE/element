@@ -415,10 +415,10 @@ TableStore.prototype.toggleRowSelection = function(row, selected) {
   }
 };
 
-TableStore.prototype.toggleRowExpansion = function(row, expanded, supressChangeEvent = false) {
+TableStore.prototype.toggleRowExpansion = function(row, expanded, noChange = false) {
   const changed = toggleRowExpansion(this.states, row, expanded);
   if (changed) {
-    if (!supressChangeEvent) {
+    if (!noChange) {
       this.table.$emit('expand-change', row, this.states.expandRows);
     }
     this.scheduleLayout();
