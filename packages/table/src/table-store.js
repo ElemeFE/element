@@ -415,10 +415,12 @@ TableStore.prototype.toggleRowSelection = function(row, selected) {
   }
 };
 
-TableStore.prototype.toggleRowExpansion = function(row, expanded) {
+TableStore.prototype.toggleRowExpansion = function(row, expanded, supressChangeEvent = false) {
   const changed = toggleRowExpansion(this.states, row, expanded);
   if (changed) {
-    this.table.$emit('expand-change', row, this.states.expandRows);
+    if (!supressChangeEvent) {
+      this.table.$emit('expand-change', row, this.states.expandRows);
+    }
     this.scheduleLayout();
   }
 };
