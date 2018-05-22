@@ -1,10 +1,10 @@
 /** **** build主入口 *******/
 var Components = require('../../components.json'); // 加载所有的components
 var fs = require('fs');
-var render = require('json-templater/string');
+var render = require('json-templater/string'); // json-templater下面的string模块，相当于是一个简易的 mushache
 var uppercamelcase = require('uppercamelcase');
 var path = require('path');
-var endOfLine = require('os').EOL;
+var endOfLine = require('os').EOL; // 系统行结束标识
 
 var OUTPUT_PATH = path.join(__dirname, '../../src/index.js'); // 获取index.js的路径
 var IMPORT_TEMPLATE = 'import {{name}} from \'../packages/{{package}}/index.js\';';
@@ -64,20 +64,22 @@ module.exports.default = module.exports;
 
 delete Components.font;
 
-var ComponentNames = Object.keys(Components);
+var ComponentNames = Object.keys(Components); // 一个包含所有组件的数组
 
 var includeComponentTemplate = [];
 var installTemplate = [];
 var listTemplate = [];
 
 ComponentNames.forEach(name => {
-  var componentName = uppercamelcase(name);
+  var componentName = uppercamelcase(name); // 统一大驼峰
 
+  // 批量生成import语句并存放在数组中
   includeComponentTemplate.push(render(IMPORT_TEMPLATE, {
     name: componentName,
     package: name
   }));
 
+  // 符合以下的组件，会将组件放到另外的一个数组中，这个数组的目的是要直接挂载到全局上面
   if (['Loading', 'MessageBox', 'Notification', 'Message'].indexOf(componentName) === -1) {
     installTemplate.push(render(INSTALL_COMPONENT_TEMPLATE, {
       name: componentName,
@@ -85,13 +87,14 @@ ComponentNames.forEach(name => {
     }));
   }
 
+  // 除Loading之外，所有的组件都要写入listTemplate
   if (componentName !== 'Loading') listTemplate.push(`  ${componentName}`);
 });
 
 var template = render(MAIN_TEMPLATE, {
   include: includeComponentTemplate.join(endOfLine),
   install: installTemplate.join(',' + endOfLine),
-  version: process.env.VERSION || require('../../package.json').version,
+  version: process.env.VERSION || require('../../package.json').version, // 获取node的版本，没有====获取package.json的版本
   list: listTemplate.join(',' + endOfLine)
 });
 
