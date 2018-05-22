@@ -29,15 +29,13 @@
     mounted() {
       this.separator = this.elBreadcrumb.separator;
       this.separatorClass = this.elBreadcrumb.separatorClass;
-      if (this.to) {
-        let link = this.$refs.link;
-        let to = this.to;
-        link.setAttribute('role', 'link');
-        link.addEventListener('click', _ => {
-          this.replace ? this.$router.replace(to)
-            : this.$router.push(to);
-        });
-      }
+      const link = this.$refs.link;
+      link.setAttribute('role', 'link');
+      link.addEventListener('click', _ => {
+        const { to, $router } = this;
+        if (!to || !$router) return;
+        this.replace ? $router.replace(to) : $router.push(to);
+      });
     }
   };
 </script>
