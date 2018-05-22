@@ -1062,6 +1062,22 @@ describe('Table', () => {
         }, DELAY);
       });
 
+      it('sortable orders', done => {
+        const vm = createTable('', '', '', 'sortable :sort-orders="[\'descending\', \'ascending\']"', {});
+
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+          elm.click();
+
+          setTimeout(_ => {
+            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      });
+
       it('sortable method', done => {
         const vm = createTable(
           'sortable :sort-method="sortMethod"', '', '', '', {
