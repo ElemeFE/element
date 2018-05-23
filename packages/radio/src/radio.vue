@@ -12,7 +12,7 @@
     :aria-checked="model === label"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
-    @keydown.space.stop.prevent="model = label"
+    @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
       :class="{
