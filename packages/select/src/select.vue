@@ -30,7 +30,7 @@
             {{ item.currentLabel }}
           </div>
           <span :style="showMoreStyle"
-                v-if="isCollapsed"
+                v-if="collapsedList.length"
                 class="tm-select__show-more"
                 slot="reference">
           +{{ collapsedList.length }}

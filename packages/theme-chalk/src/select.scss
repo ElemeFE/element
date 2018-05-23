@@ -157,6 +157,7 @@
     letter-spacing: -0.2px;
     color: $--color-taupe-gray;
     cursor: pointer;
+    transition: $--all-transition;
 
     &:hover {
       color: $--color-blueberry;

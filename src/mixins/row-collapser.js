@@ -7,7 +7,8 @@ export default {
       listNS: 'list',
       showMoreWidth: 23,
       margin: 0,
-      collapseWidth: 0
+      collapseWidth: 0,
+      showMoreLabelVisible: false
     };
   },
   computed: {
@@ -21,12 +22,13 @@ export default {
     },
     showMoreStyle() {
       return {
-        left: this.collapseWidth + 'px'
+        left: this.collapseWidth + 'px',
+        opacity: this.showMoreLabelVisible ? 1 : 0
       };
     }
   },
   methods: {
-    handleCollapse() {
+    handleCollapse(skipShowMore) {
       const list = this.$el.querySelector('.row-collapser__list');
       if (list) {
         const width = list.offsetWidth;
@@ -45,6 +47,9 @@ export default {
           }
         });
         this.collapseIndex = collapseIndex;
+        if (!skipShowMore) {
+          this.showMoreLabelVisible = this.isCollapsed;
+        }
       }
     }
   },
@@ -53,7 +58,11 @@ export default {
     this.resizeHandler = handler;
     window.addEventListener('resize', handler);
     this.handleCollapse();
-    this.$watch(this.listNS, handler);
+    this.$watch(this.listNS, () => {
+      this.showMoreLabelVisible = false;
+      this.handleCollapse(true);
+      handler();
+    });
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler);
