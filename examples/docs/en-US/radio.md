@@ -145,8 +145,8 @@ Radio with button styles and with icons.
 <template>
   <div>
     <tm-radio-group v-model="radio11">
-      <tm-radio-button label="calendar"><tm-icon name="calendar"></tm-icon></tm-radio-button>
-      <tm-radio-button label="item-list"><tm-icon name="item-list"></tm-icon></tm-radio-button>
+      <tm-radio-button theme="primary" label="calendar"><tm-icon name="calendar"></tm-icon></tm-radio-button>
+      <tm-radio-button theme="primary" label="item-list"><tm-icon name="item-list"></tm-icon></tm-radio-button>
     </tm-radio-group>
   </div>
   <div style="margin-top: 20px">
