@@ -471,6 +471,36 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('should work with lazy', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs">
+          <el-tab-pane label="用户管理" name="A">A</el-tab-pane>
+          <el-tab-pane label="配置管理" name="B">B</el-tab-pane>
+          <el-tab-pane label="角色管理" name="C">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿" lazy name="D">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
+    expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+
+    setTimeout(_ => {
+      vm.$el.querySelector('.el-tabs__nav > #tab-D').click();
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(4);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).not.to.be.equal(null);
+
+        vm.$el.querySelector('.el-tabs__nav > #tab-A').click();
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+          done();
+        });
+      });
+    }, 100);
+  });
   it('before leave', done => {
     vm = createVue({
       template: `
