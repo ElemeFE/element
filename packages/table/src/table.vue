@@ -443,6 +443,10 @@
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+      },
+
+      sort() {
+        this.store.commit('changeSortCondition');
       }
     },
 
