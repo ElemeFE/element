@@ -204,6 +204,12 @@
       if (this.indeterminate) {
         this.$el.setAttribute('aria-controls', this.controls);
       }
+    },
+
+    watch: {
+      value(value) {
+        this.dispatch('ElFormItem', 'el.form.change', value);
+      }
     }
   };
 </script>

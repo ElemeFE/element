@@ -688,6 +688,9 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | name | igual que `name` en el input nativo | string | — | — |
 | select-when-unmatched | si se emite un evento `select` al pulsar enter cuando no hay coincidencia de Autocomplete | boolean | — | false |
 | label | texto de la etiqueta | string | — | — |
+| prefix-icon | prefix icon class | string | — | — |
+| suffix-icon | suffix icon class | string | — | — |
+| hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
 
 ### Autocomplete Slots
 

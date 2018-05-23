@@ -347,7 +347,7 @@ export default {
       const rangeWidth = range.getBoundingClientRect().width;
       const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
         (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
-      if (rangeWidth + padding > cellChild.offsetWidth && this.$refs.tooltip) {
+      if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
         const tooltip = this.$refs.tooltip;
         // TODO 会引起整个 Table 的重新渲染，需要优化
         this.tooltipContent = cell.textContent || cell.innerText;

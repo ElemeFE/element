@@ -246,7 +246,7 @@ Si un diálogo está anidado en otro diálogo, se requiere append-to-body.
 ### Contenido centrado
 El contenido de Diálogo se puede centrar.
 
-:::demo Ajuste `center` en `true` para centrar el encabezado y el pie de página del cuadro de diálogo horizontalmente.
+:::demo Ajuste `center` en `true` para centrar el encabezado y el pie de página del cuadro de diálogo horizontalmente. `center` sólo afecta al encabezado y pie de página de Dialog. El cuerpo de Dialog puede ser cualquier cosa, así que a veces no se ve bien cuando está centrado. Necesitas escribir algún CSS si deseas centrar el cuerpo también.
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -276,7 +276,7 @@ El contenido de Diálogo se puede centrar.
 :::
 
 :::tip
-`center` sólo afecta al encabezado y pie de página de Dialog. El cuerpo de Dialog puede ser cualquier cosa, así que a veces no se ve bien cuando está centrado. Necesitas escribir algún CSS si deseas centrar el cuerpo también.
+The content of Dialog is lazily rendered, which means the default slot is not rendered onto the DOM until it is firstly opened. Therefore, if you need to perform a DOM manipulation or access a component using `ref`, do it in the `open` event callback.
 :::
 
 :::tip

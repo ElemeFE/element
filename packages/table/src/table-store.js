@@ -139,6 +139,8 @@ TableStore.prototype.mutations = {
 
     this.updateCurrentRow();
 
+    const rowKey = states.rowKey;
+
     if (!states.reserveSelection) {
       if (dataInstanceChanged) {
         this.clearSelection();
@@ -147,7 +149,6 @@ TableStore.prototype.mutations = {
       }
       this.updateAllSelected();
     } else {
-      const rowKey = states.rowKey;
       if (rowKey) {
         const selection = states.selection;
         const selectedMap = getKeysMap(selection, rowKey);
@@ -169,6 +170,20 @@ TableStore.prototype.mutations = {
     const defaultExpandAll = states.defaultExpandAll;
     if (defaultExpandAll) {
       this.states.expandRows = (states.data || []).slice(0);
+    } else if (rowKey) {
+      // update expandRows to new rows according to rowKey
+      const ids = getKeysMap(this.states.expandRows, rowKey);
+      let expandRows = [];
+      for (const row of states.data) {
+        const rowId = getRowIdentity(row, rowKey);
+        if (ids[rowId]) {
+          expandRows.push(row);
+        }
+      }
+      this.states.expandRows = expandRows;
+    } else {
+      // clear the old rows
+      this.states.expandRows = [];
     }
 
     Vue.nextTick(() => this.table.updateScrollY());

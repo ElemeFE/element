@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.3.9
+
+*2018-05-18*
+
+- Corregido que cuando los datos de origen no tenian el campo especificado por el atributo `prop` de una TableColumn, se producía un error al moverse el ratón dentro de las celdas de esa columna, #11137.
+- El atributo `lockScroll` de los componentes pop-up ya no añade un inline style al elemento padre, sino que añade un nombre de clase, #1111114.
+- Arreglado el icono de Progreso que no se mostraba cuando su `status` era `exception`, #11172
+- El atributo `disabled` no funcionaba en la lista de resultados del filtro de Cascader, #11185
+- Se ha corregido un problema por el que la fila expandida de la Tabla no se podía contraer si los datos de origen se actualizaban después de su expansión, #11186.
+- `setCurrentKey` de Tree ahora acepta `null` como parámetro para cancelar el nodo actualmente resaltado, #11205
+
 ### 2.3.8
 
 *2018-05-11*

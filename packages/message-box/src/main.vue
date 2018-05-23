@@ -273,9 +273,11 @@
     },
 
     mounted() {
-      if (this.closeOnHashChange) {
-        window.addEventListener('hashchange', this.close);
-      }
+      this.$nextTick(() => {
+        if (this.closeOnHashChange) {
+          window.addEventListener('hashchange', this.close);
+        }
+      });
     },
 
     beforeDestroy() {

@@ -229,14 +229,14 @@ Vue.prototype.$message = Message;
 
 ### 全局配置
 
-在引入 Element 时，可以传入一个全局配置对象。该对象目前仅支持 `size` 字段，用于改变组件的默认尺寸。按照引入 Element 的方式，具体操作如下：
+在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 `size` 与 `zIndex` 字段。`size` 用于改变组件的默认尺寸，`zIndex` 设置弹框的初始 z-index（默认值：2000）。按照引入 Element 的方式，具体操作如下：
 
 完整引入 Element：
 
 ```js
 import Vue from 'vue';
 import Element from 'element-ui';
-Vue.use(Element, { size: 'small' });
+Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
 按需引入 Element：
@@ -245,11 +245,11 @@ Vue.use(Element, { size: 'small' });
 import Vue from 'vue';
 import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small' };
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);
 ```
 
-按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'。
+按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'，弹框的初始 z-index 为 3000。
 
 ### 开始使用
 

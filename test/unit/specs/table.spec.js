@@ -959,17 +959,16 @@ describe('Table', () => {
             </el-table>
           `,
 
-            created() {
-              this.testData = getTestData();
-            },
-
             data() {
-              return { expandCount: 0, expandRowKeys: [] };
+              return { expandCount: 0, expandRowKeys: [], testData: getTestData() };
             },
 
             methods: {
               handleExpand() {
                 this.expandCount++;
+              },
+              refreshData() {
+                this.testData = getTestData();
               }
             }
           }, true);
@@ -1026,6 +1025,29 @@ describe('Table', () => {
             done();
           }, DELAY);
         });
+
+        it('should unexpand after refresh data and click', function(done) {
+          const vm = createInstance();
+          setTimeout(_ => {
+            vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+            setTimeout(_ => {
+              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+              expect(vm.expandCount).to.equal(1);
+              vm.refreshData();
+              setTimeout(_ => { // wait until refreshed
+                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+                vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+                setTimeout(_ => {
+                  // should unexpand
+                  expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(0);
+                  expect(vm.expandCount).to.equal(2);
+                  destroyVM(vm);
+                  done();
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        });
       });
     });
 
@@ -1037,6 +1059,22 @@ describe('Table', () => {
           expect(vm.$el.querySelectorAll('.caret-wrapper')).to.length(1);
           destroyVM(vm);
           done();
+        }, DELAY);
+      });
+
+      it('sortable orders', done => {
+        const vm = createTable('', '', '', 'sortable :sort-orders="[\'descending\', \'ascending\']"', {});
+
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+          elm.click();
+
+          setTimeout(_ => {
+            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
         }, DELAY);
       });
 

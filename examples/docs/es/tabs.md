@@ -376,6 +376,7 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | editable     | si la Pestaña es añadible y cerrable | boolean | —                     | false                       |
 | value        | nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
 | tab-position | posición de tabulación               | string  | top/right/bottom/left | top                         |
+| before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | function | — | — |
 
 ### Eventos de Pestañas
 | Nombre de Evento | Descripción                              | Parámetros                    |
