@@ -96,6 +96,7 @@
         }
       },
       displayedColor(val) {
+        if (!this.showPicker) return;
         const currentValueColor = new Color({
           enableAlpha: this.showAlpha,
           format: this.colorFormat
