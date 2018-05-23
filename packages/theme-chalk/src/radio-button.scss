@@ -99,45 +99,45 @@
   }
 
   @include m(primary) {
-    & .tm-radio-button__inner {
-      border-color: $--radio-button-primary-border-colot;
-      background-color: $--radio-button-primary--bg-colot;
-      color: $--radio-button-primary-colot;
+    &:first-child .tm-radio-button__inner, .tm-radio-button__inner {
+      border-color: $--radio-button-primary-border-color;
+      background-color: $--radio-button-primary--bg-color;
+      color: $--radio-button-primary-color;
 
       &.is-active {
-        border-color: $--radio-button-primary-active-border-colot;
-        background-color: $--radio-button-primary-active-bg-colot;
-        color: $--radio-button-primary-active-colot;
+        border-color: $--radio-button-primary-active-border-color;
+        background-color: $--radio-button-primary-active-bg-color;
+        color: $--radio-button-primary-active-color;
       }
     }
 
     .tm-radio-button__orig-radio:checked {
       & + .tm-radio-button__inner {
-        border-color: $--radio-button-primary-active-border-colot;
-        background-color: $--radio-button-primary-active-bg-colot;
-        color: $--radio-button-primary-active-colot;
+        border-color: $--radio-button-primary-active-border-color;
+        background-color: $--radio-button-primary-active-bg-color;
+        color: $--radio-button-primary-active-color;
       }
     }
   }
 
   @include m(secondary) {
     & .tm-radio-button__inner {
-      border-color: $--radio-button-secondary-border-colot;
-      background-color: $--radio-button-secondary--bg-colot;
-      color: $--radio-button-secondary-colot;
+      border-color: $--radio-button-secondary-border-color;
+      background-color: $--radio-button-secondary--bg-color;
+      color: $--radio-button-secondary-color;
 
       &.is-active {
-        border-color: $--radio-button-secondary-active-border-colot;
-        background-color: $--radio-button-secondary-active-bg-colot;
-        color: $--radio-button-secondary-active-colot;
+        border-color: $--radio-button-secondary-active-border-color;
+        background-color: $--radio-button-secondary-active-bg-color;
+        color: $--radio-button-secondary-active-color;
       }
     }
 
     .tm-radio-button__orig-radio:checked {
       & + .tm-radio-button__inner {
-        border-color: $--radio-button-secondary-active-border-colot;
-        background-color: $--radio-button-secondary-active-bg-colot;
-        color: $--radio-button-secondary-active-colot;
+        border-color: $--radio-button-secondary-active-border-color;
+        background-color: $--radio-button-secondary-active-bg-color;
+        color: $--radio-button-secondary-active-color;
       }
     }
   }
