@@ -445,8 +445,8 @@
         }
       },
 
-      sort() {
-        this.store.commit('changeSortCondition');
+      sort(prop, order) {
+        this.store.commit('sort', { prop, order });
       }
     },
 

@@ -117,6 +117,6 @@ export declare class ElTable extends ElementUIComponent {
   /** Relayout the table, maybe needed when change the table or it's ancestors visibility */
   doLayout (): void
 
-  /** Sort Table manually by current conditions */
-  sort (): void
+  /** Sort Table manually */
+  sort (prop: string, order: string): void
 }

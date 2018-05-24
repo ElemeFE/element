@@ -208,25 +208,8 @@ export default {
   },
 
   mounted() {
-    if (this.defaultSort.prop) {
-      const states = this.store.states;
-      states.sortProp = this.defaultSort.prop;
-      states.sortOrder = this.defaultSort.order || 'ascending';
-      this.$nextTick(_ => {
-        for (let i = 0, length = this.columns.length; i < length; i++) {
-          let column = this.columns[i];
-          if (column.property === states.sortProp) {
-            column.order = states.sortOrder;
-            states.sortingColumn = column;
-            break;
-          }
-        }
-
-        if (states.sortingColumn) {
-          this.store.commit('changeSortCondition');
-        }
-      });
-    }
+    const { prop, order } = this.defaultSort;
+    this.store.commit('sort', { prop, order });
   },
 
   beforeDestroy() {

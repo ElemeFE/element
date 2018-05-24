@@ -2011,7 +2011,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
 | clearFilter        | limpiar filtros                          | —             |
 | doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
-| sort | sort Table manually by current conditions | — |
+| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | Function(prop, order) |
 
 ### Slots de la tabla
 | Nombre | Descripción                              |

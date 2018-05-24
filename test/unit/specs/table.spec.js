@@ -1737,7 +1737,7 @@ describe('Table', () => {
 
         vm.$nextTick(() => {
           vm.testData = vm.testData.map(data => Object.assign(data, { runtime: -data.runtime }));
-          vm.$refs.table.sort();
+          vm.$refs.table.sort('runtime', 'ascending');
           vm.$nextTick(() => {
             expect(toArray(lastCells).map(node => node.textContent))
               .to.eql(['-100', '-95', '-92', '-92', '-80']);
