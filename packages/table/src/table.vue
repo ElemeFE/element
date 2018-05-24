@@ -443,6 +443,10 @@
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+      },
+
+      sort(prop, order) {
+        this.store.commit('sort', { prop, order });
       }
     },
 

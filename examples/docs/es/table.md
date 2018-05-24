@@ -2010,6 +2010,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
 | clearFilter        | limpiar filtros                          | —             |
+| doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
+| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
 ### Slots de la tabla
 | Nombre | Descripción                              |

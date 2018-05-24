@@ -203,6 +203,28 @@ TableStore.prototype.mutations = {
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
+  sort(states, options) {
+    const { prop, order } = options;
+    if (prop) {
+      states.sortProp = prop;
+      states.sortOrder = order || 'ascending';
+      Vue.nextTick(() => {
+        for (let i = 0, length = states.columns.length; i < length; i++) {
+          let column = states.columns[i];
+          if (column.property === states.sortProp) {
+            column.order = states.sortOrder;
+            states.sortingColumn = column;
+            break;
+          }
+        }
+
+        if (states.sortingColumn) {
+          this.commit('changeSortCondition');
+        }
+      });
+    }
+  },
+
   filterChange(states, options) {
     let { column, values, silent } = options;
     if (values && !Array.isArray(values)) {

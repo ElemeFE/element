@@ -1709,6 +1709,43 @@ describe('Table', () => {
 
       destroyVM(vm);
     });
+
+    it('sort', done => {
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
+            <el-table-column prop="name" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { testData: this.testData };
+        }
+      });
+
+      setTimeout(() => {
+        const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+        expect(toArray(lastCells).map(node => node.textContent))
+          .to.eql(['80', '92', '92', '95', '100']);
+
+        vm.$nextTick(() => {
+          vm.testData = vm.testData.map(data => Object.assign(data, { runtime: -data.runtime }));
+          vm.$refs.table.sort('runtime', 'ascending');
+          vm.$nextTick(() => {
+            expect(toArray(lastCells).map(node => node.textContent))
+              .to.eql(['-100', '-95', '-92', '-92', '-80']);
+            done();
+          });
+        });
+      }, DELAY);
+    });
   });
 
   it('hover', done => {
