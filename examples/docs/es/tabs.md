@@ -393,4 +393,4 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | disabled | si la Tabulación está deshabilitada      | boolean | —                 | false                                    |
 | name     | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
 | closable | si el Tab es cerrable                    | boolean | —                 | false                                    |
-| lazy     | whether Tab is lazy to render            | boolean | —                 | false                                    |
+| lazy     | whether Tab is lazily rendered            | boolean | —                 | false                                    |
