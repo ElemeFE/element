@@ -2008,7 +2008,7 @@ You can customize row index in `type=index` columns.
 | clearSort | clear sorting, restore data to the original order | — |
 | clearFilter | clear filter | — |
 | doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
-| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | Function(prop, order) |
+| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
 ### Table Slot
 | Name | Description |
