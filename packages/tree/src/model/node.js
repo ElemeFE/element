@@ -234,6 +234,7 @@ export default class Node {
       });
       child = new Node(child);
     }
+    console.log(child)
 
     child.level = this.level + 1;
 
