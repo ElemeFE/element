@@ -1165,7 +1165,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 ### Atributos
 | Atributo              | Descripción                              | Tipo                              | Valores aceptados | Por defecto |
 | --------------------- | ---------------------------------------- | --------------------------------- | ----------------- | ----------- |
-| data                  | Datos del árbol                          | array                             | —                 | —           |
+| data                  | Datos del árbol                          | array                             | —                 | []          |
 | empty-text            | Texto a mostrar cuando data es void      | string                            | —                 | —           |
 | node-key              | Identificador único en todo el árbol para los nodos | string                            | —                 | —           |
 | props                 | Opciones de configuración                | object                            | —                 | —           |
