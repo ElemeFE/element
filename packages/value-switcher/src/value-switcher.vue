@@ -7,6 +7,7 @@
                      :placeholder="leftPlaceholder"
                      :suffix-icon="suffixIconLeft"
                      v-model="labelLeft"
+                     :clearable="clearable"
                      @select="onPlaceSelect($event, true)">
       <template slot-scope="props">
         <tm-value-switcher-item :title="props.item.title"
@@ -24,6 +25,7 @@
                      popper-class="tm-popper__autocomplete"
                      :fetch-suggestions="fetchSuggestions"
                      :placeholder="rightPlaceholder"
+                     :clearable="clearable"
                      :suffix-icon="suffixIconRight"
                      v-model="labelRight"
                      @select="onPlaceSelect($event, false)">
@@ -60,6 +62,10 @@
       size: {
         type: String,
         default: 'large'
+      },
+      clearable: {
+        type: Boolean,
+        default: true
       }
     },
     data() {
