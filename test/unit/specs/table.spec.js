@@ -1785,7 +1785,7 @@ describe('Table', () => {
           <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" />
+          <el-table-column prop="runtime" label="时长（分）" sortable />
         </el-table>
       `,
 
@@ -1800,12 +1800,22 @@ describe('Table', () => {
         expect(tr.classList.contains('current-row')).to.be.true;
         const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
 
-        triggerEvent(rows[2], 'click', true, false);
+        triggerEvent(rows[1], 'click', true, false);
         setTimeout(_ => {
           expect(tr.classList.contains('current-row')).to.be.false;
-          expect(rows[2].classList.contains('current-row')).to.be.true;
-          destroyVM(vm);
-          done();
+          expect(rows[1].classList.contains('current-row')).to.be.true;
+
+          const ths = vm.$el.querySelectorAll('.el-table__header-wrapper thead th');
+          triggerEvent(ths[3], 'click', true, false);
+
+          setTimeout(_ => {
+            const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+
+            expect(rows[1].classList.contains('current-row')).to.be.false;
+            expect(rows[3].classList.contains('current-row')).to.be.true;
+            destroyVM(vm);
+            done();
+          }, DELAY);
         }, DELAY);
       }, DELAY);
     }, DELAY);
