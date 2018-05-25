@@ -9,26 +9,28 @@
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <span v-if="collapseTags && selected.length">
+      <span v-if="isCollapseTags && selected.length">
         <el-tag
+          v-for="item in selected.slice(0, collapseTagsCount)"
+          :key="getValueKey(item)"
           :closable="!selectDisabled"
           :size="collapseTagSize"
-          :hit="selected[0].hitState"
+          :hit="item.hitState"
           type="info"
-          @close="deleteTag($event, selected[0])"
+          @close="deleteTag($event, item)"
           disable-transitions>
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
         <el-tag
-          v-if="selected.length > 1"
+          v-if="selected.length > collapseTagsCount"
           :closable="false"
           :size="collapseTagSize"
           type="info"
           disable-transitions>
-          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+          <span class="el-select__tags-text">+ {{ selected.length - collapseTagsCount }}</span>
         </el-tag>
       </span>
-      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
+      <transition-group @after-leave="resetInputHeight" v-if="!isCollapseTags ">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -240,6 +242,13 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
+      },
+
+      collapseTagsCount() {
+        return Number(this.collapseTags) || 1;
+      },
+      isCollapseTags() {
+        return this.collapseTags !== false;
       }
     },
 
@@ -294,7 +303,17 @@
         type: String,
         default: 'value'
       },
-      collapseTags: Boolean,
+      collapseTags: {
+        type: [Boolean, Number, String],
+        validator(value) {
+          // check for postive number, integer, and strings
+          return parseInt(Number(value), 10) === Number(value)
+            ? value === false || value === ''
+              ? true
+              : Number(value) > 0
+            : false;
+        }
+      },
       popperAppendToBody: {
         type: Boolean,
         default: true
