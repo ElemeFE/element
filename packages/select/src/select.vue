@@ -12,31 +12,32 @@
         'max-width': inputWidth - 32 + 'px',
         'min-width': inputWidth - 32 + 'px'
       }">
-      <transition-group @after-leave="resetInputHeight">
+      <transition-group class="tm-select__list-transition"
+                        @after-leave="resetInputHeight">
         <span class="tm-select__tags-text row-collapser__item"
               v-for="item in selected"
               :key="getValueKey(item)">
           {{ item.currentLabel }};
         </span>
-        <tm-popover v-if="isCollapsed"
-                    popper-class="tm-select__collapsed-popper"
-                    width="109"
-                    placement="top"
-                    key="show-more"
-                    trigger="hover">
-          <div class="tm-select__tags-text"
-               v-for="item in collapsedList"
-               :key="getValueKey(item)">
-            {{ item.currentLabel }}
-          </div>
-          <span :style="showMoreStyle"
-                v-if="collapsedList.length"
-                class="tm-select__show-more"
-                slot="reference">
+      </transition-group>
+      <tm-popover v-if="isCollapsed"
+                  popper-class="tm-select__collapsed-popper"
+                  width="109"
+                  placement="top"
+                  key="show-more"
+                  trigger="hover">
+        <div class="tm-select__tags-text"
+             v-for="item in collapsedList"
+             :key="getValueKey(item)">
+          {{ item.currentLabel }}
+        </div>
+        <span :style="showMoreStyle"
+              v-if="collapsedList.length"
+              class="tm-select__show-more"
+              slot="reference">
           +{{ collapsedList.length }}
         </span>
-        </tm-popover>
-      </transition-group>
+      </tm-popover>
       <input
         type="text"
         class="tm-select__input"

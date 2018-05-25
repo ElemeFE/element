@@ -147,6 +147,27 @@
     font-size: 14px;
     letter-spacing: -0.2px;
     color: $--color-dark-gunmetal;
+    transition: $--all-transition;
+    opacity: 1;
+
+    &.v-enter {
+      opacity: 0;
+      transition: none;
+    }
+
+    &.v-enter-to {
+      opacity: 1;
+      transition: none;
+    }
+
+    &.v-leave-to {
+      opacity: 1;
+    }
+  }
+
+  @include e(list-transition) {
+    display: block;
+    width: 100%;
   }
 
   @include e(show-more) {
