@@ -5,44 +5,43 @@
     v-clickoutside="handleClose">
     <div
       class="tm-select__tags"
+      :class="{
+        'tm-select__tags--with-prefix': !!prefixIcon,
+        'tm-select__tags--with-suffix': !!suffixIcon
+      }"
       v-if="multiple"
       @click.stop="toggleMenu"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <span v-if="collapseTags && selected.length">
-        <tm-tag
-          :closable="isTagCloseable"
-          :size="collapseTagSize"
-          :hit="selected[0].hitState"
-          type="info"
-          @close="deleteTag($event, selected[0])"
-          disable-transitions>
-          <span class="tm-select__tags-text">{{ selected[0].currentLabel }}</span>
-        </tm-tag>
-        <tm-tag
-          v-if="selected.length > 1"
-          :closable="false"
-          :size="collapseTagSize"
-          type="info"
-          class="tm-select__tags-hidden-number"
-          disable-transitions>
-          <span class="tm-select__tags-text">+{{ selected.length - 1 }}</span>
-        </tm-tag>
-      </span>
-      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
-        <tm-tag
-          v-for="item in selected"
-          :key="getValueKey(item)"
-          :closable="!selectDisabled"
-          :size="collapseTagSize"
-          :hit="item.hitState"
-          type="info"
-          @close="deleteTag($event, item)"
-          disable-transitions>
-          <span class="tm-select__tags-text">{{ item.currentLabel }}</span>
-        </tm-tag>
+      :style="{
+        'max-width': inputWidth - 32 + 'px',
+        'min-width': inputWidth - 32 + 'px'
+      }">
+      <transition-group class="tm-select__list-transition row-collapser__list"
+                        @after-leave="resetInputHeight">
+        <span class="tm-select__tags-text row-collapser__item"
+              v-for="item in selected"
+              :key="getValueKey(item)">
+          {{ item.currentLabel }};
+        </span>
       </transition-group>
-
+      <tm-popover v-if="isCollapsed"
+                  popper-class="tm-select__collapsed-popper"
+                  width="109"
+                  placement="top"
+                  key="show-more"
+                  trigger="hover">
+        <div class="tm-select__tags-text"
+             v-for="item in collapsedList"
+             :key="getValueKey(item)">
+          {{ item.currentLabel }}
+        </div>
+        <span :style="showMoreStyle"
+              v-if="collapsedList.length"
+              class="tm-select__show-more"
+              slot="reference">
+          +{{ collapsedList.length }}
+        </span>
+      </tm-popover>
       <input
         type="text"
         class="tm-select__input"
@@ -145,6 +144,8 @@
   import { valueEquals } from 'tmconsulting-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
   import FormElementMixin from 'tmconsulting-ui/src/mixins/form-element';
+  import RowCollapserMixin from 'tmconsulting-ui/src/mixins/row-collapser';
+  import TmPopover from '../../popover';
 
   const sizeMap = {
     'medium': 36,
@@ -158,7 +159,8 @@
       Locale,
       Focus('reference'),
       NavigationMixin,
-      FormElementMixin
+      FormElementMixin,
+      RowCollapserMixin
     ],
 
     name: 'TmSelect',
@@ -238,13 +240,11 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
-      },
-      isTagCloseable() {
-        return !this.selectDisabled && this.removeableTags;
       }
     },
 
     components: {
+      TmPopover,
       TmInput,
       TmSelectMenu,
       TmOption,
@@ -295,10 +295,6 @@
         default: 'value'
       },
       collapseTags: Boolean,
-      removeableTags: {
-        type: Boolean,
-        default: false
-      },
       prefixIcon: String,
       suffixIcon: String,
       showArrow: {
@@ -325,7 +321,8 @@
         query: '',
         previousQuery: null,
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        listNS: 'selected'
       };
     },
 

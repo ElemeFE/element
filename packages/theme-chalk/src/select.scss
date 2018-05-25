@@ -131,13 +131,57 @@
   @include e(tags) {
     position: absolute;
     line-height: normal;
-    white-space: normal;
+    white-space: nowrap;
     z-index: $--index-normal;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-left: 13px;
+    overflow: hidden;
+
+    @include m(with-prefix) {
+      margin-left: 33px;
+    }
+
+    @include m(with-suffix) {
+      padding-right: 33px;
+      box-sizing: border-box;
+    }
+  }
+
+  @include e(tags-text) {
+    margin-left: 0;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    color: $--color-dark-gunmetal;
+  }
+
+  @include e(list-transition) {
+    display: block;
+    width: 100%;
+  }
+
+  @include e(show-more) {
+    position: absolute;
+    top: 1px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -0.2px;
+    color: $--color-taupe-gray;
+    cursor: pointer;
+    transition: $--all-transition;
+
+    &:hover {
+      color: $--color-blueberry;
+    }
+  }
+
+  @include e(collapsed-popper) {
+    &.tm-popover {
+      text-align: center;
+    }
   }
 
   .tm-tag {
