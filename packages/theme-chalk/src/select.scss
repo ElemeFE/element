@@ -138,8 +138,17 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    padding-left: 5px;
+    margin-left: 13px;
     overflow: hidden;
+
+    @include m(with-prefix) {
+      margin-left: 33px;
+    }
+
+    @include m(with-suffix) {
+      padding-right: 33px;
+      box-sizing: border-box;
+    }
   }
 
   @include e(tags-text) {

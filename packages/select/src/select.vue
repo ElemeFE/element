@@ -4,7 +4,11 @@
     :class="[selectSize ? 'tm-select--' + selectSize : '']"
     v-clickoutside="handleClose">
     <div
-      class="tm-select__tags row-collapser__list"
+      class="tm-select__tags"
+      :class="{
+        'tm-select__tags--with-prefix': !!prefixIcon,
+        'tm-select__tags--with-suffix': !!suffixIcon
+      }"
       v-if="multiple"
       @click.stop="toggleMenu"
       ref="tags"
@@ -12,7 +16,7 @@
         'max-width': inputWidth - 32 + 'px',
         'min-width': inputWidth - 32 + 'px'
       }">
-      <transition-group class="tm-select__list-transition"
+      <transition-group class="tm-select__list-transition row-collapser__list"
                         @after-leave="resetInputHeight">
         <span class="tm-select__tags-text row-collapser__item"
               v-for="item in selected"

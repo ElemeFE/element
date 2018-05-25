@@ -6,7 +6,7 @@ export default {
       resizeHandler: null,
       listNS: 'list',
       showMoreWidth: 23,
-      margin: 0,
+      margin: 5,
       collapseWidth: 0,
       showMoreLabelVisible: false
     };
@@ -35,8 +35,8 @@ export default {
         const children = this.$el.querySelectorAll('.row-collapser__list .row-collapser__item');
         let collapseIndex = -1;
         children.forEach((child, index) => {
-          const offsetWidth = child.offsetLeft + child.offsetWidth + this.margin;
-          if (offsetWidth > width - this.showMoreWidth) {
+          const offsetWidth = child.offsetLeft + child.offsetWidth;
+          if (offsetWidth > width - this.showMoreWidth - this.margin) {
             if (collapseIndex === -1) {
               collapseIndex = index;
             }

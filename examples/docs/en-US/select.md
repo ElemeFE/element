@@ -440,6 +440,8 @@ Multiple select uses tags to display selected options.
   <tm-select
     v-model="value11"
     multiple
+    prefix-icon="airplane"
+    suffix-icon="airplane"
     collapse-tags
     style="margin-left: 20px;"
     placeholder="Select">
