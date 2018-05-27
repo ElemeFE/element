@@ -320,6 +320,7 @@
 
     mounted() {
       this.resizeTextarea();
+      this.setCurrentValue(this.value);
       if (this.isGroup) {
         this.prefixOffset = this.calcIconOffset('pre');
         this.suffixOffset = this.calcIconOffset('suf');
