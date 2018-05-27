@@ -232,7 +232,7 @@
       line-height: 48px;
     }
 
-    .tm-input__icon {
+    .tm-input__icon:not(.tm-input__clear):not(.tm-select__caret) {
       height: 24px;
       width: 24px;
       font-size: 24px;

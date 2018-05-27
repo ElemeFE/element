@@ -457,6 +457,7 @@ export default {
 <div class="demo-input-size">
   <tm-input
     size="extra-large"
+    clearable
     prefix-icon="airplane"
     placeholder="Please Input"
     v-model="input6"
@@ -464,12 +465,14 @@ export default {
   </tm-input>
   <tm-input
     prefix-icon="airplane"
+    clearable
     placeholder="Please Input"
     v-model="input6"
     required>
   </tm-input>
   <tm-input
     size="medium"
+    clearable
     prefix-icon="airplane"
     placeholder="Please Input"
     v-model="input7"
@@ -477,6 +480,7 @@ export default {
   </tm-input>
   <tm-input
     size="small"
+    clearable
     prefix-icon="airplane"
     placeholder="Please Input"
     v-model="input8"
@@ -484,6 +488,7 @@ export default {
   </tm-input>
   <tm-input
     size="mini"
+    clearable
     prefix-icon="airplane"
     placeholder="Please Input"
     v-model="input9"
