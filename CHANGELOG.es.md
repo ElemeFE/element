@@ -4,46 +4,46 @@
 
 *2018-05-28*
 
-#### New features
-- General
-  - Dev tool and bundler is switched to native webpack, #11216
-  - Now you can globally set the initial z-index of popups, #11257
+#### Nuevas características
+- Generalidades
+  - La herramienta de desarrollo y el empaquetador se cambiaron a webpack nativo, #11216
+  - Ahora puede configurar globalmente el z-index inicial de los popups, #11257
 - Autocomplete
-  - Added `hide-loading` attribute, #11260
+  - Añadido el atributo `hide-loading`, #11260
 - Button
-  - Now you can use the `size` attribute on circle buttons to control their sizes, #11275
+  - Ahora se puede usar el atributo `size` en los botones circulares para controlar sus tamaños, #11275
 - InputNumber
-  - Added `precision` attribute, #11281
+  - Añadido el atributo `precision`, #11281
 - Tabs
-  - Added `before-leave` attribute, #11259
-  - Added `lazy` attribute, #11167（by @Kingwl）
+  - Añadido el atributo `before-leave`, #11259
+  - Añadido el atributo `lazy`, #11167（by @Kingwl）
 - Table
-  - Added `sort` method to manually sort the table, #11311
+  - Añadido el método `sort` para ordenar manualmente la tabla, #11311
 
-#### Bug fixes
+#### Corrección de errores
 - Input
-  - Fixed an issue that causes a re-render when using the Chinese IME to quickly input text, #11235 (by @STLighter)
+  - Se ha corregido un problema que provocaba que se volviera a procesar al utilizar el IME chino para introducir texto rápidamente, #11235 (por @STLighter).
 - Popover
-  - Fixed the console error when the triggering element is Radio or Checkbox, #11265
+  - Corregido el error de la consola cuando el elemento disparador es Radio o Checkbox, #11265
 - Breadcrumb
-  - Fixed the `to` attribute not supporting dynamic update, #11286
+  - Arreglado el atributo `to` que no soportaba la actualización dinámica, #11286
 - Upload
-  - Fixed the console error when a File is resolved in the returned Promise of the `beforeUpload` method, #11297 (by @qusiba)
+  - Corregido el error de la consola cuando se resolvia el Archivo en la Promesa devuelta del método `beforeUpload`, #11297 (por @qusiba)
 - Tooltip
-  - Fixed arrow not positioned correctly when content is empty, #11335
-- Autocomplete
-  - Fixed incorrect input suggestions after deleting keyword quickly, #11323
+  - Solucionado que la flecha no se  posicionaba correctamente cuando el contenido estaba vacío, #11335
+- Autocompletar
+  - Corregido que  las sugerencias de entrada eran  incorrectas después de eliminar la palabra clave rápidamente, #11323
 - ColorPicker
-  - Fixed `active-change` event incorrectly triggering when picker dropdown is closed, #11304
+  - Corregido el evento `active-change` que se disparaba incorrectamente cuando el menú desplegable del picker estaba cerrado, #11304
 - Table
-  - Fixed style error of oversized filter panel, #11314
-  - Fixed currently selected row not retained when the table is sorted, #11348
-- Checkbox
-  - Fixed single checkbox not supporting validation, #11271
+  - Corregido el error de estilo del panel de filtro cuando se sobredimensionaba, #11314
+  - Corregida que la fila seleccionada actualmente no se retenia cuando se ordenaba la tabla, #11348
+- CheckBox
+  - Arreglado que cuando el checkbox era único no soportaba validación, #11271
 - Radio
-  - Fixed disabled Radio still being selected when pressing space key, #11303
+  - Arreglado que el Radio desactivado seguia estando seleccionada cuando se pulsaba la tecla espaciadora, #11303
 - MessageBox
-  - Fixed the `el-popup-parent--hidden` class not removed when opening MessageBox in succession, #11371
+  - Corregida la clase `el-popup-parent--hidden` que no se eliminaba al abrir MessageBox sucesivamente, #11371
 
 ### 2.3.9
 
