@@ -13,6 +13,10 @@
   margin: 5px 0;
 
   @include when(multiple) {
+    span
+    {
+      padding-right: 20px;
+    }
     & .el-select-dropdown__item.selected {
       color: $--select-option-selected;
       background-color: $--select-dropdown-background;
