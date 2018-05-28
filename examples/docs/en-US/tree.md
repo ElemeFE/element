@@ -1165,7 +1165,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 ### Attributes
 | Attribute             | Description                              | Type                        | Accepted Values | Default |
 | --------------------- | ---------------------------------------- | --------------------------- | --------------- | ------- |
-| data                  | tree data                                | array                       | —               | —       |
+| data                  | tree data                                | array                       | —               | []      |
 | empty-text            | text displayed when data is void         | string                      | —               | —       |
 | node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
 | props                 | configuration options, see the following table | object                      | —               | —       |
