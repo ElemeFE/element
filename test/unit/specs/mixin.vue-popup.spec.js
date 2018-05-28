@@ -13,7 +13,6 @@ const Popup = Object.assign({}, VuePopup, {
 describe('Mixin:vue-popup', () => {
   let vm;
   before(() => {
-    document.body.className = '';
     const modals = document.querySelectorAll('.v-modal');
     [].forEach.call(modals, modal => {
       modal &&

@@ -69,7 +69,7 @@ export default {
       opened: false,
       bodyPaddingRight: null,
       computedBodyPaddingRight: 0,
-      withoutHiddenClass: false,
+      withoutHiddenClass: true,
       rendered: false
     };
   },
@@ -216,6 +216,7 @@ export default {
         document.body.style.paddingRight = this.bodyPaddingRight;
         removeClass(document.body, 'el-popup-parent--hidden');
       }
+      this.withoutHiddenClass = true;
     }
   }
 };
