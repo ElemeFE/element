@@ -1,5 +1,50 @@
 ## Changelog
 
+### 2.4.0 Fullerene
+
+*2018-05-28*
+
+#### New features
+- General
+  - Dev tool and bundler is switched to native webpack, #11216
+  - Now you can globally set the initial z-index of popups, #11257
+- Autocomplete
+  - Added `hide-loading` attribute, #11260
+- Button
+  - Now you can use the `size` attribute on circle buttons to control their sizes, #11275
+- InputNumber
+  - Added `precision` attribute, #11281
+- Tabs
+  - Added `before-leave` attribute, #11259
+  - Added `lazy` attribute, #11167（by @Kingwl）
+- Table
+  - Added `sort` method to manually sort the table, #11311
+
+#### Bug fixes
+- Input
+  - Fixed an issue that causes a re-render when using the Chinese IME to quickly input text, #11235 (by @STLighter)
+- Popover
+  - Fixed the console error when the triggering element is Radio or Checkbox, #11265
+- Breadcrumb
+  - Fixed the `to` attribute not supporting dynamic update, #11286
+- Upload
+  - Fixed the console error when a File is resolved in the returned Promise of the `beforeUpload` method, #11297 (by @qusiba)
+- Tooltip
+  - Fixed arrow not positioned correctly when content is empty, #11335
+- Autocomplete
+  - Fixed incorrect input suggestions after deleting keyword quickly, #11323
+- ColorPicker
+  - Fixed `active-change` event incorrectly triggering when picker dropdown is closed, #11304
+- Table
+  - Fixed style error of oversized filter panel, #11314
+  - Fixed currently selected row not retained when the table is sorted, #11348
+- Checkbox
+  - Fixed single checkbox not supporting validation, #11271
+- Radio
+  - Fixed disabled Radio still being selected when pressing space key, #11303
+- MessageBox
+  - Fixed the `el-popup-parent--hidden` class not removed when opening MessageBox in succession, #11371
+
 ### 2.3.9
 
 *2018-05-18*

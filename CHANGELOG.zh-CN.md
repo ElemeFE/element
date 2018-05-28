@@ -1,5 +1,50 @@
 ## 更新日志
 
+### 2.4.0 Fullerene
+
+*2018-05-28*
+
+#### 新特性
+- 综合
+  - 使用原生 webpack 作为构建和打包工具，#11216
+  - 可以全局配置弹出层的初始 z-index，#11257
+- Autocomplete
+  - 新增 `hide-loading` 属性，#11260
+- Button
+  - 现在圆形按钮也支持通过 `size` 属性改变其尺寸了，#11275
+- InputNumber
+  - 新增 `precision` 属性，#11281
+- Tabs
+  - 新增 `before-leave` 钩子，#11259
+  - 新增 `lazy` 属性，#11167（by @Kingwl）
+- Table
+  - 新增 `sort` 方法，支持手动排序，#11311
+
+#### 修复
+- Input
+  - 修复使用中文输入法快速输入文字时会导致视图重新渲染的问题，#11235（by @STLighter）
+- Popover
+  - 修复当触发元素为 Radio 或 Checkbox 时控制台报错的问题，#11265
+- Breadcrumb
+  - 修复 `to` 属性不支持动态更新的问题，#11286
+- Upload
+  - 修复在 `beforeUpload` 方法返回的 Promise 中 resolve 一个 File 时控制台报错的问题，#11297（by @qusiba）
+- Tooltip
+  - 修复内容为空时箭头错位的问题，#11335
+- Autocomplete
+  - 修复在快速删除搜索内容后输入建议不正确的问题，#11323
+- ColorPicker
+  - 修复关闭选色器时触发 `active-change` 事件的问题，#11304
+- Table
+  - 修复筛选列表过长导致样式超出的问题，#11314
+  - 修复排序后导致无法正常显示选中行样式的问题，#11348
+- Checkbox
+  - 修复单个 Checkbox 不支持表单验证的问题，#11271
+- Radio
+  - 修复通过空格可以选中被禁用的 Radio 的问题，#11303
+- MessageBox
+  - 修复连续打开两个 MessageBox 时 `el-popup-parent--hidden` 无法移除的问题，#11371
+
 ### 2.3.9
 
 *2018-05-18*
