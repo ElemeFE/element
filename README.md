@@ -153,7 +153,7 @@ Spanish documentation is made possible by these community developers:
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 
-<img width="650" src="https://user-images.githubusercontent.com/10095631/37442034-3170a9e0-283f-11e8-8fdd-56748646fa43.jpg" alt="donation">
+<img width="650" src="https://user-images.githubusercontent.com/10095631/40616626-568895b2-62be-11e8-9fc3-dc54a2892515.jpg" alt="donation">
 
 ## Backers
 
