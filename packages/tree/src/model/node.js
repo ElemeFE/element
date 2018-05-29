@@ -131,7 +131,6 @@ export default class Node {
   }
 
   setData(data) {
-    console.log('setData');
     if (!Array.isArray(data)) {
       markNodeData(this, data);
     }
@@ -219,8 +218,6 @@ export default class Node {
     if (!child) throw new Error('insertChild error: child is required.');
 
     if (!(child instanceof Node)) {
-      console.log('insertChild instanceof Node=false');
-      console.log(child);
       if (!batch && !this.store.lazy) {
         const children = this.getChildren(true);
         if (children.indexOf(child.data) === -1) {
@@ -231,17 +228,12 @@ export default class Node {
           }
         }
       }
-      console.log('++++++++++++++++');
-      console.log(child);
       objectAssign(child, {
         parent: this,
         store: this.store
       });
-      console.log('----------------');
-      console.log(child);
       child = new Node(child);
       if (!batch && this.store.lazy) {
-        console.log('============= loaded = true');
         child.loaded = !child.isLeaf;
         child.expanded = !child.isLeaf;
         child.updateLeafState();
@@ -249,8 +241,6 @@ export default class Node {
     } else {
       child.parent = this; // no parent is set after node drop
     }
-    console.log('insertChild parent=' + this.label + ' name=' + child.label + ' index=' + index + ' batch=' + batch + ' isLeaf=' + child.isLeaf);
-    console.log(child);
 
     child.level = this.level + 1;
 
@@ -287,7 +277,6 @@ export default class Node {
       children.splice(dataIndex, 1);
     }
 
-    console.log(this);
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
@@ -295,7 +284,6 @@ export default class Node {
       child.parent = null;
       this.childNodes.splice(index, 1);
     }
-    console.log('removeChild parent=' + this.label + ' name=' + child.label + ' index=' + index + ' childNodes.length=' + this.childNodes.length);
 
     this.updateLeafState();
   }
@@ -314,9 +302,7 @@ export default class Node {
   }
 
   expand(callback, expandParent) {
-    console.log('expand1 node=' + this.label + ' expandParent=' + expandParent);
     const done = () => {
-      console.log('expand2 node=' + this.label + ' expandParent=' + expandParent);
       if (expandParent) {
         let parent = this.parent;
         while (parent.level > 0) {
@@ -345,7 +331,6 @@ export default class Node {
   }
 
   doCreateChildren(array, defaultProps = {}) {
-    console.log('doCreateChildren');
     array.forEach((item) => {
       this.insertChild(objectAssign({ data: item }, defaultProps), undefined, true);
     });
@@ -462,10 +447,6 @@ export default class Node {
     if (this.store.lazy) return; // no node.data.children in the lazy mode
     const newData = this.getChildren() || [];
     const oldData = this.childNodes.map((node) => node.data);
-    console.log('updateChildren');
-    console.log(newData);
-    console.log(oldData);
-
     const newDataMap = {};
     const newNodes = [];
 
@@ -489,7 +470,6 @@ export default class Node {
   }
 
   loadData(callback, defaultProps = {}) {
-    console.log('loadData');
     if (this.store.lazy === true && this.store.load && !this.loaded && (!this.loading || Object.keys(defaultProps).length)) {
       this.loading = true;
 

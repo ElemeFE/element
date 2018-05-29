@@ -444,7 +444,6 @@
           dragState.draggingNode = null;
           dragState.dropNode = null;
           dragState.allowDrop = true;
-          console.log('============== tree-node-drag-end - exit =========');
         };
         const emitEvents = () => {
           removeClass(dropNode.$el, 'is-drop-inner');
@@ -474,7 +473,6 @@
             dropNode.node.parent.insertAfter(value, dropNode.node);
           } else if (dropType === 'inner') {
             dropNode.node.expand(() => {
-              console.log('============== tree-node-drag-end enter =========');
               draggingNode.node.remove();
               dropNode.node.insertChild(value);
               emitEvents();
