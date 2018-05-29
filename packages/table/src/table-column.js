@@ -180,7 +180,16 @@ export default {
       type: Boolean,
       default: true
     },
-    index: [Number, Function]
+    index: [Number, Function],
+    sortOrders: {
+      type: Array,
+      default() {
+        return ['ascending', 'descending', null];
+      },
+      validator(val) {
+        return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
+      }
+    }
   },
 
   data() {
@@ -266,7 +275,8 @@ export default {
       filterOpened: false,
       filteredValue: this.filteredValue || [],
       filterPlacement: this.filterPlacement || '',
-      index: this.index
+      index: this.index,
+      sortOrders: this.sortOrders
     });
 
     objectAssign(column, forced[type] || {});

@@ -29,8 +29,10 @@ const install = function(Vue, opts = {}) {
 
   Vue.use(Loading.directive);
 
-  const ELEMENT = {};
-  ELEMENT.size = opts.size || '';
+  Vue.prototype.$ELEMENT = {
+    size: opts.size || '',
+    zIndex: opts.zIndex || 2000
+  };
 
   Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
@@ -40,7 +42,6 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
 
-  Vue.prototype.$ELEMENT = ELEMENT;
 };
 
 /* istanbul ignore if */

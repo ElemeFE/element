@@ -48,6 +48,11 @@
         </a>
       </td>
       <td align="center" valign="middle">
+        <a href="https://www.duotai.cn/?utm_source=element" target="_blank">
+          <img width="140px" src="https://user-images.githubusercontent.com/10095631/39403151-c42dbcee-4ba5-11e8-9c09-8e5283da4144.png">
+        </a>
+      </td>
+      <td align="center" valign="middle">
         <a href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
           <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
         </a>
@@ -148,7 +153,7 @@ Spanish documentation is made possible by these community developers:
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 
-<img width="650" src="https://user-images.githubusercontent.com/10095631/37442034-3170a9e0-283f-11e8-8fdd-56748646fa43.jpg" alt="donation">
+<img width="650" src="https://user-images.githubusercontent.com/10095631/40616626-568895b2-62be-11e8-9fc3-dc54a2892515.jpg" alt="donation">
 
 ## Backers
 

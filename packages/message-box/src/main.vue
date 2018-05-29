@@ -161,20 +161,10 @@
         this.onClose && this.onClose();
         messageBox.closeDialog(); // 解绑
         if (this.lockScroll) {
-          setTimeout(() => {
-            if (this.modal && this.bodyOverflow !== 'hidden') {
-              document.body.style.overflow = this.bodyOverflow;
-              document.body.style.paddingRight = this.bodyPaddingRight;
-            }
-            this.bodyOverflow = null;
-            this.bodyPaddingRight = null;
-          }, 200);
+          setTimeout(this.restoreBodyStyle, 200);
         }
         this.opened = false;
-
-        if (!this.transition) {
-          this.doAfterClose();
-        }
+        this.doAfterClose();
         setTimeout(() => {
           if (this.action) this.callback(this.action, this);
         });
@@ -223,6 +213,7 @@
             }
             if (typeof validateResult === 'string') {
               this.editorErrorMessage = validateResult;
+              addClass(this.getInputElement(), 'invalid');
               return false;
             }
           }
@@ -231,10 +222,10 @@
         removeClass(this.getInputElement(), 'invalid');
         return true;
       },
-      getFistFocus() {
-        const $btns = this.$el.querySelector('.el-message-box__btns .el-button');
-        const $title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
-        return $btns && $btns[0] || $title;
+      getFirstFocus() {
+        const btn = this.$el.querySelector('.el-message-box__btns .el-button');
+        const title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
+        return btn || title;
       },
       getInputElement() {
         const inputRefs = this.$refs.input.$refs;
@@ -263,7 +254,7 @@
             });
           }
           this.focusAfterClosed = document.activeElement;
-          messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFistFocus());
+          messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus());
         }
 
         // prompt
@@ -282,9 +273,11 @@
     },
 
     mounted() {
-      if (this.closeOnHashChange) {
-        window.addEventListener('hashchange', this.close);
-      }
+      this.$nextTick(() => {
+        if (this.closeOnHashChange) {
+          window.addEventListener('hashchange', this.close);
+        }
+      });
     },
 
     beforeDestroy() {

@@ -99,6 +99,31 @@ Le permite definir el nivel de incremento de los saltos.
 ```
 :::
 
+### Precision
+
+:::demo Add `precision` attribute to set the precision of input value.
+
+```html
+<template>
+  <el-input-number v-model="num9" :precision="2" :step="0.1" :max="10"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num9: 1
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+:::tip
+The value of `precision` must be a positive integer and should not be less than the decimal places of `step`.
+:::
+
 ### Tamaño
 
 Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
@@ -160,6 +185,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
+| precision         | precision of input value                 | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
 | controls          | si se activan los botones de control     | boolean | —                 | true        |

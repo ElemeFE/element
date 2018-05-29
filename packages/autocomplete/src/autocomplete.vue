@@ -10,9 +10,6 @@
     <el-input
       ref="input"
       v-bind="$props"
-      @compositionstart.native="handleComposition"
-      @compositionupdate.native="handleComposition"
-      @compositionend.native="handleComposition"
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -117,15 +114,16 @@
       placement: {
         type: String,
         default: 'bottom-start'
-      }
+      },
+      hideLoading: Boolean
     },
     data() {
       return {
         activated: false,
-        isOnComposition: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: -1
+        highlightedIndex: -1,
+        suggestionDisabled: false
       };
     },
     computed: {
@@ -153,27 +151,27 @@
         };
       },
       getData(queryString) {
+        if (this.suggestionDisabled) {
+          return;
+        }
         this.loading = true;
         this.fetchSuggestions(queryString, (suggestions) => {
           this.loading = false;
+          if (this.suggestionDisabled) {
+            return;
+          }
           if (Array.isArray(suggestions)) {
             this.suggestions = suggestions;
           } else {
-            console.error('autocomplete suggestions must be an array');
+            console.error('[Element Error][Autocomplete]autocomplete suggestions must be an array');
           }
         });
       },
-      handleComposition(event) {
-        if (event.type === 'compositionend') {
-          this.isOnComposition = false;
-          this.handleChange(event.target.value);
-        } else {
-          this.isOnComposition = true;
-        }
-      },
       handleChange(value) {
         this.$emit('input', value);
-        if (this.isOnComposition || (!this.triggerOnFocus && !value)) {
+        this.suggestionDisabled = false;
+        if (!this.triggerOnFocus && !value) {
+          this.suggestionDisabled = true;
           this.suggestions = [];
           return;
         }
@@ -239,9 +237,7 @@
       }
     },
     mounted() {
-      this.debouncedGetData = debounce(this.debounce, (val) => {
-        this.getData(val);
-      });
+      this.debouncedGetData = debounce(this.debounce, this.getData);
       this.$on('item-click', item => {
         this.select(item);
       });

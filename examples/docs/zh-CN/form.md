@@ -627,7 +627,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     label="邮箱"
     :rules="[
       { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }
+      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -872,3 +872,4 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | 方法名      | 说明          | 参数
 |---------- |-------------- | --------------
 | resetField | 对该表单项进行重置，将其值重置为初始值并移除校验结果 | -
+| clearValidate | 移除该表单项的校验结果 | -

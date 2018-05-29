@@ -1369,7 +1369,7 @@ Filter the table to find desired data.
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</el-tag>
       </template>
     </el-table-column>
   </el-table>
@@ -2007,7 +2007,8 @@ You can customize row index in `type=index` columns.
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
 | clearFilter | clear filter | — |
-| doLayout | Refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
+| doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
+| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
 ### Table Slot
 | Name | Description |
@@ -2029,6 +2030,7 @@ You can customize row index in `type=index` columns.
 | sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
 | sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
 | sort-by | specify which property to sort by, works when `sortable` is `true` and `sort-method` is `undefined`. If set to an Array, the column will sequentially sort by the next property if the previous one is equal | Function(row, index)/String/Array | — | — |
+| sort-orders | the order of the sorting strategies used when sorting the data, works when `sortable` is `true`. Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array | array | the elements in the array need to be one of the following: `ascending`, `descending` and `null` (restores to the original order) | ['ascending', 'descending', null] |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats cell content | Function(row, column, cellValue, index) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |

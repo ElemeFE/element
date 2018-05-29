@@ -136,7 +136,7 @@ export interface ElMessageBox {
   /** Show an alert message box */
   alert: ElMessageBoxShortcutMethod
 
-  /** Show a comfirm message box */
+  /** Show a confirm message box */
   confirm: ElMessageBoxShortcutMethod
 
   /** Show a prompt message box */

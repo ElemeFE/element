@@ -1,5 +1,104 @@
 ## 更新日志
 
+### 2.4.0 Fullerene
+
+*2018-05-28*
+
+#### 新特性
+- 综合
+  - 使用原生 webpack 作为构建和打包工具，#11216
+  - 可以全局配置弹出层的初始 z-index，#11257
+- Autocomplete
+  - 新增 `hide-loading` 属性，#11260
+- Button
+  - 现在圆形按钮也支持通过 `size` 属性改变其尺寸了，#11275
+- InputNumber
+  - 新增 `precision` 属性，#11281
+- Tabs
+  - 新增 `before-leave` 钩子，#11259
+  - 新增 `lazy` 属性，#11167（by @Kingwl）
+- Table
+  - 新增 `sort` 方法，支持手动排序，#11311
+
+#### 修复
+- Input
+  - 修复使用中文输入法快速输入文字时会导致视图重新渲染的问题，#11235（by @STLighter）
+- Popover
+  - 修复当触发元素为 Radio 或 Checkbox 时控制台报错的问题，#11265
+- Breadcrumb
+  - 修复 `to` 属性不支持动态更新的问题，#11286
+- Upload
+  - 修复在 `beforeUpload` 方法返回的 Promise 中 resolve 一个 File 时控制台报错的问题，#11297（by @qusiba）
+- Tooltip
+  - 修复内容为空时箭头错位的问题，#11335
+- Autocomplete
+  - 修复在快速删除搜索内容后输入建议不正确的问题，#11323
+- ColorPicker
+  - 修复关闭选色器时触发 `active-change` 事件的问题，#11304
+- Table
+  - 修复筛选列表过长导致样式超出的问题，#11314
+  - 修复排序后导致无法正常显示选中行样式的问题，#11348
+- Checkbox
+  - 修复单个 Checkbox 不支持表单验证的问题，#11271
+- Radio
+  - 修复通过空格可以选中被禁用的 Radio 的问题，#11303
+- MessageBox
+  - 修复连续打开两个 MessageBox 时 `el-popup-parent--hidden` 无法移除的问题，#11371
+
+### 2.3.9
+
+*2018-05-18*
+
+- 修复当 TableColumn 的 `prop` 属性指定的字段在数据源中不存在时，鼠标移入该列单元格会报错的问题，#11137
+- 弹出类组件的 `lockScroll` 属性不再为父元素添加内联样式，而是添加相应类名，#11114
+- 修复 Progress 在 `status` 为 exception 时图标不显示的问题，#11172
+- 修复可搜索的 Cascader 在输入关键词后，选项的 `disabled` 属性失效的问题，#11185
+- 修复可展开的 Table 在展开某一行后更新数据源会造成该行无法收起的问题，#11186
+- Tree 的 `setCurrentKey` 方法支持传入 `null`，可取消当前高亮的节点，#11205
+
+### 2.3.8
+
+*2018-05-11*
+
+- 修复 `type` 为 dates 的 DatePicker 在选择非当前月的日期后，面板会跳转至当前月的问题，#10973
+- 修复可清空的只读 Input 仍会显示清空图标的问题，#10912
+- 修复范围选择的 DatePicker 在未改变值的情况下关闭下拉面板仍会触发 `change` 事件的问题，#11017
+- 修复 Select 在有分组选项时不能正确通过键盘导航的问题，#11058
+- 新增 Select 的 `prefix` 具名 slot，#11063
+- 新增 FormItem 的 `clearValidate` 方法，#11076
+- 新增 Tree 的 `checkOnClickNode` 属性，#11111
+
+### 2.3.7
+
+*2018-04-29*
+
+- 修复 Table 在由于筛选而使原有的滚动条消失后表头各列宽度未及时更新的问题，#10834
+- 修复可清空的 Input 在初始值为 `null` 时仍然显示清空图标的问题，#10912
+- 修复在通过代码改变 ColorPicker 的绑定值后错误地触发 `active-change` 事件的问题，#10903（by @zhangbobell）
+- 修复可搜索的 Select 在备选项均被禁用时，通过键盘导航会造成无限循环的问题，#10945
+
+### 2.3.6
+
+*2018-04-21*
+
+- 修复 Tree 的 `allow-drop` 回调在使用 `type` 参数后的错误行为，#10821
+- 修复可搜索的单选 Select 在 IE11 中无法输入搜索关键词的问题，#10822
+- 修复单选 Select 在使用鼠标选中某个选项后错误地触发 `blur` 事件的问题，#10822
+
+### 2.3.5
+
+*2018-04-20*
+
+- 修复 DatePicker 的 `type` 为 week 时面板错误高亮的问题，#10712
+- 修复 InputNumber 初始值为 0 时输入框为空的问题，#10714
+- 新增 Select 的 `automatic-dropdown` 属性，#10042（by @Seebiscuit）
+- 修复 `disabled` 的 Rate 仍能通过键盘左右键改变组件值的问题，#10726（by @Richard-Choooou）
+- 现在 DatePicker 的 `type` 属性可以接收 `'dates'`，用于选择多个日期，#10650（by @Mini256）
+- 新增 Pagination 的 `prev-click` 和 `next-click` 事件，#10755
+- 新增 Pagination 的 `pager-count` 属性，#10493（by @chongjohn716）
+- 新增 `type` 作为 Tree 的 `allow-drop` 属性回调的第三个参数，#10792
+- 改用 ResizeObserver 对元素的尺寸变化进行监测，#10779
+
 ### 2.3.4
 
 *2018-04-12*

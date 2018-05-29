@@ -66,7 +66,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: []
+        value13: [],
+        value14: []
       };
     }
   };
@@ -83,6 +84,20 @@
     text-align: center;
     border-right: solid 1px #EFF2F6;
     flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-date-picker .container {
+    flex: 1;
+    border-right: solid 1px #EFF2F6;
+    .block {
+      border-right: none;
+      &:last-child {
+        border-top: solid 1px #EFF2F6;
+      }
+    }
     &:last-child {
       border-right: none;
     }
@@ -163,40 +178,51 @@ Basic date picker measured by 'day'.
   };
 </script>
 ```
-
 :::
 
 ### Other measurements
 
-You can choose week, month or year by extending the standard date picker component.
+You can choose week, month, year or multiple dates by extending the standard date picker component.
 
 :::demo
 
 ```html
-<div class="block">
-  <span class="demonstration">Week</span>
-  <el-date-picker
-    v-model="value3"
-    type="week"
-    format="Week WW"
-    placeholder="Pick a week">
-  </el-date-picker>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">Week</span>
+    <el-date-picker
+      v-model="value3"
+      type="week"
+      format="Week WW"
+      placeholder="Pick a week">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Month</span>
+    <el-date-picker
+      v-model="value4"
+      type="month"
+      placeholder="Pick a month">
+    </el-date-picker>
+  </div>
 </div>
-<div class="block">
-  <span class="demonstration">Month</span>
-  <el-date-picker
-    v-model="value4"
-    type="month"
-    placeholder="Pick a month">
-  </el-date-picker>
-</div>
-<div class="block">
-  <span class="demonstration">Year</span>
-  <el-date-picker
-    v-model="value5"
-    type="year"
-    placeholder="Pick a year">
-  </el-date-picker>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">Year</span>
+    <el-date-picker
+      v-model="value5"
+      type="year"
+      placeholder="Pick a year">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Dates</span>
+    <el-date-picker
+      type="dates"
+      v-model="value14"
+      placeholder="Pick one or more dates">
+    </el-date-picker>
+  </div>
 </div>
 
 <script>
@@ -205,7 +231,8 @@ You can choose week, month or year by extending the standard date picker compone
       return {
         value3: '',
         value4: '',
-        value5: ''
+        value5: '',
+        value14: []
       };
     }
   };
@@ -455,7 +482,7 @@ When picking a date range, you can assign the time part for start date and end d
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
-| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
+| type | type of the picker | string | year/month/date/dates/datetime/ week/datetimerange/daterange | date |
 | format | format of the displayed value in the input box | string | see [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |

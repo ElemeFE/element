@@ -9,7 +9,8 @@
         num5: 1,
         num6: 1,
         num7: 1,
-        num8: 1
+        num8: 1,
+        num9: 1
       }
     },
     methods: {
@@ -97,6 +98,31 @@
 ```
 :::
 
+### 精度
+
+:::demo 设置 `precision` 属性可以控制数值精度，接收一个 `Number`。
+
+```html
+<template>
+  <el-input-number v-model="num9" :precision="2" :step="0.1" :max="10"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num9: 1
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+:::tip
+`precision` 的值必须是一个正整数，并且不能小于 `step` 的小数位数。
+:::
+
 ### 尺寸
 
 额外提供了 `medium`、`small`、`mini` 三种尺寸的数字输入框
@@ -156,6 +182,7 @@
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
 | step     | 计数器步长           | number   | — | 1 |
+| precision| 数值精度             | number   | — | — |
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
 | controls | 是否使用控制按钮        | boolean | — | true |

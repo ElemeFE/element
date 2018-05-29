@@ -177,17 +177,27 @@ describe('Tree', () => {
     const firstNode = document.querySelector('.el-tree-node');
     firstNode.click();
     vm.$nextTick(() => {
-      expect(firstNode.className.indexOf('is-current') !== -1);
+      expect(firstNode.className.indexOf('is-current')).to.not.equal(-1);
       done();
     });
   });
 
   it('expandOnNodeClick', done => {
-    vm = getTreeVm(':props="defaultProps" :expand-on-node-click="false"');
+    vm = getTreeVm(':props="defaultProps" :expand-on-click-node="false"');
     const firstNode = document.querySelector('.el-tree-node');
     firstNode.click();
     vm.$nextTick(() => {
-      expect(firstNode.className.indexOf('is-expanded') === -1);
+      expect(firstNode.className.indexOf('is-expanded')).to.equal(-1);
+      done();
+    });
+  });
+
+  it('checkOnNodeClick', done => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox check-on-click-node');
+    const firstNode = document.querySelector('.el-tree-node');
+    firstNode.click();
+    vm.$nextTick(() => {
+      expect(firstNode.querySelector('input').checked).to.true;
       done();
     });
   });
@@ -438,7 +448,12 @@ describe('Tree', () => {
     tree.setCurrentKey(111);
     vm.$nextTick(() => {
       expect(tree.store.currentNode.data.id).to.equal(111);
-      done();
+      // cancel highlight
+      tree.setCurrentKey(null);
+      vm.$nextTick(() => {
+        expect(tree.store.currentNode).to.equal(null);
+        done();
+      });
     });
   });
 

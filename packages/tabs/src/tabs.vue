@@ -18,7 +18,8 @@
       tabPosition: {
         type: String,
         default: 'top'
-      }
+      },
+      beforeLeave: Function
     },
 
     provide() {
@@ -67,8 +68,22 @@
         this.$emit('tab-add');
       },
       setCurrentName(value) {
-        this.currentName = value;
-        this.$emit('input', value);
+        const changeCurrentName = () => {
+          this.currentName = value;
+          this.$emit('input', value);
+        };
+        if (this.currentName !== value && this.beforeLeave) {
+          const before = this.beforeLeave();
+          if (before && before.then) {
+            before.then(() => {
+              changeCurrentName();
+            });
+          } else if (before !== false) {
+            changeCurrentName();
+          }
+        } else {
+          changeCurrentName();
+        }
       },
       addPanes(item) {
         const index = this.$slots.default.filter(item => {

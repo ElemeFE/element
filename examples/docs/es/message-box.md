@@ -288,6 +288,12 @@ Puede ser personalizado para mostrar diversos contenidos.
 ```
 :::
 
+:::tip
+
+El contenido de MessageBox puede ser `VNode`, permitiéndonos pasar componentes personalizados. Al abrir el MessageBox, Vue compara el nuevo `VNode` con el viejo `VNode`, y luego averigua cómo actualizar eficientemente la interfaz de usuario, de modo que es posible que los componentes no se vuelvan a procesar completamente ([#8931](https://github.com/ElemeFE/element/issues/8931)). En este caso, se puede añadir una clave única a `VNode` cada vez que se abre MessageBox: [ejemplo](https://jsfiddle.net/zhiyang/ezmhq2ef).
+
+:::
+
 ### Utiliza cadenas HTML
 `message` soporta cadenas HTML.
 

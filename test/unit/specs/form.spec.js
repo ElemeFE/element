@@ -476,6 +476,58 @@ describe('Form', () => {
         }, DELAY);
       });
     });
+    it('checkbox', done => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="是否接受协议" prop="accept" ref="field">
+              <el-checkbox v-model="form.accept">
+                <span>接受协议</span>
+              </el-checkbox>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              accept: true
+            },
+            rules: {
+              accept: [
+                {
+                  validator: (rule, value, callback) => {
+                    value ? callback() : callback(new Error('您需要接受用户协议'));
+                  },
+                  trigger: 'change'
+                }
+              ]
+            }
+          };
+        },
+        methods: {
+          setValue(value) {
+            this.form.accept = value;
+          }
+        }
+      }, true);
+      vm.form.accept = false;
+      vm.$nextTick(_ => {
+        expect(vm.$refs.field.validateMessage).to.equal('您需要接受用户协议');
+      });
+      vm.$refs.form.validate(valid => {
+        let field = vm.$refs.field;
+        expect(valid).to.not.true;
+        expect(field.validateMessage).to.equal('您需要接受用户协议');
+        vm.$refs.form.$nextTick(_ => {
+          vm.setValue(true);
+
+          vm.$refs.form.$nextTick(_ => {
+            expect(field.validateMessage).to.equal('');
+            done();
+          });
+        });
+      });
+    });
     it('checkbox group', done => {
       vm = createVue({
         template: `

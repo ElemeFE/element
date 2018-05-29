@@ -1408,7 +1408,7 @@
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === '家' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</el-tag>
       </template>
     </el-table-column>
   </el-table>
@@ -2029,7 +2029,7 @@
 | empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
-| default-sort | 默认的排序列的prop和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序| Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
+| default-sort | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序| Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
 | tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 | show-summary | 是否在表尾显示合计行 | Boolean | — | false |
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
@@ -2068,6 +2068,7 @@
 | clearSort | 用于清空排序条件，数据会恢复成未排序的状态 | — |
 | clearFilter | 用于清空过滤条件，数据会恢复成未过滤的状态 | — |
 | doLayout | 对 Table 进行重新布局。当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法 | — |
+| sort | 手动对 Table 进行排序。参数`prop`属性指定排序列，`order`指定排序顺序。 | prop: string, order: string |
 
 ### Table Slot
 | name | 说明 |
@@ -2088,7 +2089,8 @@
 | render-header | 列标题 Label 区域渲染使用的 Function | Function(h, { column, $index }) | — | — |
 | sortable | 对应列是否可以排序，如果设置为 'custom'，则代表用户希望远程排序，需要监听 Table 的 sort-change 事件 | boolean, string | true, false, 'custom' | false |
 | sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效，需返回一个数字，和 Array.sort 表现一致 | Function(a, b) | — | — |
-| sort-by | 指定数据按照哪个属性进行排序，仅当 sortable 设置为 true 且没有设置 sort-method 的时候有效。如果 sort-by 为数组，则先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推。 | String/Array/Function(row, index) | — | — |
+| sort-by | 指定数据按照哪个属性进行排序，仅当 sortable 设置为 true 且没有设置 sort-method 的时候有效。如果 sort-by 为数组，则先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推 | String/Array/Function(row, index) | — | — |
+| sort-orders | 数据在排序时所使用排序策略的轮转顺序，仅当 sortable 为 true 时有效。需传入一个数组，随着用户点击表头，该列依次按照数组中元素的顺序进行排序 | array | 数组中的元素需为以下三者之一：`ascending` 表示升序，`descending` 表示降序，`null` 表示还原为原始顺序 | ['ascending', 'descending', null] |
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column, cellValue, index) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |

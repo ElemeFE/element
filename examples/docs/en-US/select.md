@@ -697,6 +697,12 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 
+### Select Slots
+| Name    | Description |
+|---------|-------------|
+|    —    | Option component list |
+| prefix  | content as Select prefix |
+
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |

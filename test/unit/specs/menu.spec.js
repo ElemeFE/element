@@ -372,7 +372,6 @@ describe('Menu', () => {
       template: `
           <el-menu :default-active="active">
             <el-menu-item
-              v-ref="menus"
               v-for="menu in menus"
               :index="menu.name"
               :key="menu.name">

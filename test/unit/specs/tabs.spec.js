@@ -2,6 +2,20 @@ import { createVue, destroyVM } from '../util';
 
 describe('Tabs', () => {
   let vm;
+  let hasPromise = true;
+  before(() => {
+    if (!window.Promise) {
+      hasPromise = false;
+      window.Promise = require('es6-promise').Promise;
+    }
+  });
+
+  after(() => {
+    if (!hasPromise) {
+      window.Promise = undefined;
+    }
+  });
+
   afterEach(() => {
     destroyVM(vm);
   });
@@ -454,6 +468,77 @@ describe('Tabs', () => {
             done();
           });
         });
+      });
+    }, 100);
+  });
+  it('should work with lazy', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs">
+          <el-tab-pane label="用户管理" name="A">A</el-tab-pane>
+          <el-tab-pane label="配置管理" name="B">B</el-tab-pane>
+          <el-tab-pane label="角色管理" name="C">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿" lazy name="D">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
+    expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+
+    setTimeout(_ => {
+      vm.$el.querySelector('.el-tabs__nav > #tab-D').click();
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(4);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).not.to.be.equal(null);
+
+        vm.$el.querySelector('.el-tabs__nav > #tab-A').click();
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+          done();
+        });
+      });
+    }, 100);
+  });
+  it('before leave', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" v-model="activeName" :before-leave="beforeLeave">
+          <el-tab-pane name="tab-A" label="用户管理">A</el-tab-pane>
+          <el-tab-pane name="tab-B" label="配置管理">B</el-tab-pane>
+          <el-tab-pane name="tab-C" label="角色管理">C</el-tab-pane>
+          <el-tab-pane name="tab-D" label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `,
+      data() {
+        return {
+          activeName: 'tab-B'
+        };
+      },
+      methods: {
+        beforeLeave() {
+          return new window.Promise((resolve, reject) => {
+            reject();
+          });
+        }
+      }
+    }, true);
+    setTimeout(_ => {
+      const paneList = vm.$el.querySelector('.el-tabs__content').children;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
+
+      expect(tabList[1].classList.contains('is-active')).to.be.true;
+      expect(paneList[1].style.display).to.not.ok;
+
+      tabList[3].click();
+      vm.$nextTick(_ => {
+        setTimeout(() => {
+          expect(tabList[1].classList.contains('is-active')).to.be.true;
+          expect(paneList[1].style.display).to.not.ok;
+          expect(vm.activeName === 'tab-B');
+          done();
+        }, 200);
       });
     }, 100);
   });

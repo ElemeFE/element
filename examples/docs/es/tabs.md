@@ -376,6 +376,7 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | editable     | si la Pestaña es añadible y cerrable | boolean | —                     | false                       |
 | value        | nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
 | tab-position | posición de tabulación               | string  | top/right/bottom/left | top                         |
+| before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | function | — | — |
 
 ### Eventos de Pestañas
 | Nombre de Evento | Descripción                              | Parámetros                    |
@@ -392,3 +393,4 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | disabled | si la Tabulación está deshabilitada      | boolean | —                 | false                                    |
 | name     | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
 | closable | si el Tab es cerrable                    | boolean | —                 | false                                    |
+| lazy     | whether Tab is lazily rendered            | boolean | —                 | false                                    |

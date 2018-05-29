@@ -622,7 +622,7 @@ Búsqueda de datos desde el servidor.
 
 | Atributo      | Descripción                              | Tipo             | Valores aceptados                | Por defecto |
 | ------------- | ---------------------------------------- | ---------------- | -------------------------------- | ----------- |
-| type          | tipo de input                            | string           | text / textarea                  | text        |
+| type          | tipo de input                            | string           | text, textarea y otros [tipos de entrada nativos](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/input#Form_%3Cinput%3E_types)  | text        |
 | value         | valor enlazado                           | string / number  | —                                | —           |
 | maxlength     | igual que `maxlength` en el input nativo | number           | —                                | —           |
 | minlength     | igual que `minlength` en el input nativo | number           | —                                | —           |
@@ -661,7 +661,7 @@ Búsqueda de datos desde el servidor.
 | blur   | Se dispara cuando se pierde el foco      | (event: Event)            |
 | focus  | Se dispara cuando se obtiene el foco     | (event: Event)            |
 | change | se activa cuando cambia el valor de entrada | (value: string \| number) |
-| clear | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | (event: Event) |
+| clear | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | — |
 
 ### Input Metodo
 
@@ -688,6 +688,9 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | name | igual que `name` en el input nativo | string | — | — |
 | select-when-unmatched | si se emite un evento `select` al pulsar enter cuando no hay coincidencia de Autocomplete | boolean | — | false |
 | label | texto de la etiqueta | string | — | — |
+| prefix-icon | prefix icon class | string | — | — |
+| suffix-icon | suffix icon class | string | — | — |
+| hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
 
 ### Autocomplete Slots
 

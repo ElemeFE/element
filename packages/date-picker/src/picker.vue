@@ -2,7 +2,7 @@
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly"
+    :readonly="!editable || readonly || type === 'dates'"
     :disabled="pickerDisabled"
     :size="pickerSize"
     :name="name"
@@ -123,7 +123,8 @@ const HAVE_TRIGGER_TYPES = [
   'year',
   'daterange',
   'timerange',
-  'datetimerange'
+  'datetimerange',
+  'dates'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -242,6 +243,15 @@ const TYPE_VALUE_RESOLVER_MAP = {
         return null;
       }
     }
+  },
+  dates: {
+    formatter(value, format) {
+      return value.map(date => DATE_FORMATTER(date, format));
+    },
+    parser(value, format) {
+      return (typeof value === 'string' ? value.split(', ') : value)
+        .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+    }
   }
 };
 const PLACEMENT_MAP = {
@@ -270,16 +280,36 @@ const formatAsFormatAndType = (value, customFormat, type) => {
   return formatter(value, format);
 };
 
-// only considers date-picker's value: Date or [Date, Date]
+/*
+ * Considers:
+ *   1. Date object
+ *   2. date string
+ *   3. array of 1 or 2
+ */
 const valueEquals = function(a, b) {
+  // considers Date object and string
+  const dateEquals = function(a, b) {
+    const aIsDate = a instanceof Date;
+    const bIsDate = b instanceof Date;
+    if (aIsDate && bIsDate) {
+      return a.getTime() === b.getTime();
+    }
+    if (!aIsDate && !bIsDate) {
+      return a === b;
+    }
+    return false;
+  };
+
   const aIsArray = a instanceof Array;
   const bIsArray = b instanceof Array;
   if (aIsArray && bIsArray) {
-    return new Date(a[0]).getTime() === new Date(b[0]).getTime() &&
-           new Date(a[1]).getTime() === new Date(b[1]).getTime();
+    if (a.length !== b.length) {
+      return false;
+    }
+    return a.every((item, index) => dateEquals(item, b[index]));
   }
   if (!aIsArray && !bIsArray) {
-    return new Date(a).getTime() === new Date(b).getTime();
+    return dateEquals(a, b);
   }
   return false;
 };
@@ -374,16 +404,11 @@ export default {
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
-        this.valueOnOpen = this.value;
+        this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
       } else {
         this.hidePicker();
         this.emitChange(this.value);
-        // flush user input if it is parsable
-        // this.displayValue here is not a typo, it merges text for both panels in range mode
-        const parsedValue = this.parseString(this.displayValue);
-        if (this.userInput && parsedValue && this.isValidValue(parsedValue)) {
-          this.userInput = null;
-        }
+        this.userInput = null;
         this.dispatch('ElFormItem', 'el.form.blur');
         this.$emit('blur', this);
         this.blur();
@@ -394,6 +419,7 @@ export default {
       handler(val) {
         if (this.picker) {
           this.picker.value = val;
+          this.picker.selectedDate = Array.isArray(val) ? val : [];
         }
       }
     },
@@ -449,6 +475,8 @@ export default {
         return 'month';
       } else if (this.type === 'year') {
         return 'year';
+      } else if (this.type === 'dates') {
+        return 'dates';
       }
 
       return 'day';
@@ -468,8 +496,14 @@ export default {
           this.userInput[0] || (formattedValue && formattedValue[0]) || '',
           this.userInput[1] || (formattedValue && formattedValue[1]) || ''
         ];
+      } else if (this.userInput !== null) {
+        return this.userInput;
+      } else if (formattedValue) {
+        return this.type === 'dates'
+          ? formattedValue.join(', ')
+          : formattedValue;
       } else {
-        return this.userInput !== null ? this.userInput : formattedValue || '';
+        return '';
       }
     },
 
@@ -655,7 +689,18 @@ export default {
     },
 
     handleClose() {
+      if (!this.pickerVisible) return;
       this.pickerVisible = false;
+      const {
+        type,
+        valueOnOpen,
+        valueFormat,
+        rangeSeparator
+      } = this;
+      if (type === 'dates' && this.picker) {
+        this.picker.selectedDate = parseAsFormatAndType(valueOnOpen, valueFormat, type, rangeSeparator) || valueOnOpen;
+        this.emitInput(this.picker.selectedDate);
+      }
     },
 
     handleFieldReset(initialValue) {
@@ -769,6 +814,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.selectedDate = Array.isArray(this.value) && this.value || [];
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
@@ -837,7 +883,7 @@ export default {
 
     emitChange(val) {
       // determine user real change only
-      if (val !== this.valueOnOpen) {
+      if (!valueEquals(val, this.valueOnOpen)) {
         this.$emit('change', val);
         this.dispatch('ElFormItem', 'el.form.change', val);
         this.valueOnOpen = val;

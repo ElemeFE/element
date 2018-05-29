@@ -11,7 +11,7 @@
     :aria-checked="value === label"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
-    @keydown.space.stop.prevent="value = label"
+    @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
     <input
       class="el-radio-button__orig-radio"

@@ -1367,7 +1367,7 @@ Filtra la tabla para encontrar la información que necesita.
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</el-tag>
       </template>
     </el-table-column>
   </el-table>
@@ -2010,6 +2010,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
 | clearFilter        | limpiar filtros                          | —             |
+| doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
+| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
 ### Slots de la tabla
 | Nombre | Descripción                              |
@@ -2031,6 +2033,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sortable              | especifica que columna puede ser ordenado. El ordenamiento remoto puede ser hecho configurando el atributo `custom` y escucha al evento de tabla `sort-change` | boolean, string                   | true, false, custom           | false       |
 | sort-method           | método de ordenamiento, funciona cuando `sortable` está en `true`. Debería devolver un número, al igual que Array.sort | Function(a, b)                    | —                             | —           |
 | sort-by               | especifica por cual propiedad de va a ordenar, funciona cuando `sortable` es `true` y `sort-method` es `undefined`. Si se establece a un arreglo, la columna ordenara secuencialmente por la siguiente propiedad si la anterior es igual | Function(row, index)/String/Array | —                             | —           |
+| sort-orders           | the order of the sorting strategies used when sorting the data, works when `sortable` is `true`. Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array | array | the elements in the array need to be one of the following: `ascending`, `descending` and `null` (restores to the original order) | ['ascending', 'descending', null] |
 | resizable             | especifica si el ancho de la columna puede ser redimensionado, funciona cuando `border` de `el-table` está en `true` | boolean                           | —                             | false       |
 | formatter             | función que formatea el contenido de la celda | Function(row, column, cellValue, index)  | —                             | —           |
 | show-overflow-tooltip | especifica si el _tooltip_ debe ocultarse o mostrarse al hacer _hover_ en la celda | boolean                           | —                             | false       |

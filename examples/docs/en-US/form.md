@@ -639,7 +639,7 @@ This example shows how to customize your own validation rules to finish a two-fa
     label="Email"
     :rules="[
       { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -884,3 +884,4 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | resetField | reset current field and remove validation result | — |
+| clearValidate | remove validation status of the field | -

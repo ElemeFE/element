@@ -692,6 +692,12 @@
 | blur | 当 input 失去焦点时触发 | (event: Event) |
 | focus | 当 input 获得焦点时触发 | (event: Event) |
 
+### Select Slots
+|   name  | 说明     |
+|---------|---------|
+|    —    | Option 组件列表 |
+| prefix  | Select 组件头部内容 |
+
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |

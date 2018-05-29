@@ -640,7 +640,7 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
     label="Email"
     :rules="[
       { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -889,3 +889,4 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | Metodo     | Descripción                              | Parametros |
 | ---------- | ---------------------------------------- | ---------- |
 | resetField | restablecer campo actual y eliminar resultado de validación | —          |
+| clearValidate | elimina el estado de la validacion de un campo | - |

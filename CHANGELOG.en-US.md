@@ -1,5 +1,104 @@
 ## Changelog
 
+### 2.4.0 Fullerene
+
+*2018-05-28*
+
+#### New features
+- General
+  - Dev tool and bundler is switched to native webpack, #11216
+  - Now you can globally set the initial z-index of popups, #11257
+- Autocomplete
+  - Added `hide-loading` attribute, #11260
+- Button
+  - Now you can use the `size` attribute on circle buttons to control their sizes, #11275
+- InputNumber
+  - Added `precision` attribute, #11281
+- Tabs
+  - Added `before-leave` attribute, #11259
+  - Added `lazy` attribute, #11167（by @Kingwl）
+- Table
+  - Added `sort` method to manually sort the table, #11311
+
+#### Bug fixes
+- Input
+  - Fixed an issue that causes a re-render when using the Chinese IME to quickly input text, #11235 (by @STLighter)
+- Popover
+  - Fixed the console error when the triggering element is Radio or Checkbox, #11265
+- Breadcrumb
+  - Fixed the `to` attribute not supporting dynamic update, #11286
+- Upload
+  - Fixed the console error when a File is resolved in the returned Promise of the `beforeUpload` method, #11297 (by @qusiba)
+- Tooltip
+  - Fixed arrow not positioned correctly when content is empty, #11335
+- Autocomplete
+  - Fixed incorrect input suggestions after deleting keyword quickly, #11323
+- ColorPicker
+  - Fixed `active-change` event incorrectly triggering when picker dropdown is closed, #11304
+- Table
+  - Fixed style error of oversized filter panel, #11314
+  - Fixed currently selected row not retained when the table is sorted, #11348
+- Checkbox
+  - Fixed single checkbox not supporting validation, #11271
+- Radio
+  - Fixed disabled Radio still being selected when pressing space key, #11303
+- MessageBox
+  - Fixed the `el-popup-parent--hidden` class not removed when opening MessageBox in succession, #11371
+
+### 2.3.9
+
+*2018-05-18*
+
+- Fixed when the source data does not have the field specified by a TableColumn's `prop` attribute, an error would occur when the mouse moves into that column's cells, #11137
+- The `lockScroll` attribute of pop up components no longer adds an inline style to the parent element, but instead adds a class name, #11114
+- Fixed the icon of Progress not displaying when its `status` is exception, #11172
+- Fixed options' `disabled` attribute not working in filterable Cascader's filter result list, #11185
+- Fixed an issue where Table's expanded row cannot be collapsed if the data source is updated after its expansion, #11186
+- `setCurrentKey` of Tree now accepts `null` as its param to cancel the currently highlighted node, #11205
+
+### 2.3.8
+
+*2018-05-11*
+
+- Fixed DatePicker panel jumping to the current month after picking a date in a non-current month when `type` is dates, #10973
+- Fixed clearable Input still displaying the clear icon when readonly, #10912
+- Fixed closing the DatePicker panel without changing the value incorrectly triggering the `change` event, #11017
+- Fixed keyboard navigation not working properly when Select has grouped options, #11058
+- Added `prefix` named slot for Select, #11063
+- Added 'clearValidate` method for FormItem, #11076
+- Added `checkOnClickNode` attribute for Tree, #11111
+
+### 2.3.7
+
+*2018-04-29*
+
+- Fixed Table not updating its header widths when the scroll bar disappears due to filtering, #10834
+- Fixed clearable Input still showing the clear icon when its initial value is `null`, #10912
+- Fixed incorrect trigger of the `active-change` event after changing ColorPicker's binding value programatically, #10903 (by @zhangbobell)
+- Fixed filterable Select causing an infinite loop when navigating options using keyboard if all options are disabled, #10945
+
+### 2.3.6
+
+*2018-04-21*
+
+- Fixed wrong behavior of Tree's `allow-drop` callback when `type` parameter is used, #10821
+- Now you can properly enter keywords in filterable single Select in IE11, #10822
+- Fixed single Select incorrectly triggering `blur` event after clicking an option, #10822
+
+### 2.3.5
+
+*2018-04-20*
+
+- Fixed incorrect highlights in DatePicker panel when `type` is week, #10712
+- Fixed InputNumber being empty when its initial value is 0, #10714
+- Added `automatic-dropdown` attribute for Select, #10042 (by @Seebiscuit)
+- Fixed disabled Rate's value still being updated by navigation keys, #10726 (by @Richard-Choooou)
+- Now DatePicker's `type` attribute can be `'dates'`, where you can pick multiple dates in one picker, #10650 (by @Mini256)
+- Added `prev-click` and `next-click` events for Pagination, #10755
+- Added `pager-count` attribute for Pagination, #10493 (by @chongjohn716)
+- Added `type` as the 3rd param of Tree's `allow-drop` attribute callback, #10792
+- Now we use ResizeObserver to detect DOM element resizing, #10779
+
 ### 2.3.4
 
 *2018-04-12*

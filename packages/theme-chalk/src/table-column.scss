@@ -76,11 +76,16 @@
     }
   }
 
+  @include e(wrap) {
+    max-height: 280px;
+  }
+
   @include e(checkbox-group) {
     padding: 10px;
 
     label.el-checkbox {
       display: block;
+      margin-right: 5px;
       margin-bottom: 8px;
       margin-left: 5px;
     }

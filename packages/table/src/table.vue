@@ -362,6 +362,7 @@
 
       updateScrollY() {
         this.layout.updateScrollY();
+        this.layout.updateColumnsWidth();
       },
 
       handleFixedMousewheel(event, data) {
@@ -442,6 +443,10 @@
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+      },
+
+      sort(prop, order) {
+        this.store.commit('sort', { prop, order });
       }
     },
 

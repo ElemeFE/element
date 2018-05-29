@@ -322,6 +322,10 @@ export default class TreeStore {
   }
 
   setCurrentNodeKey(key) {
+    if (key === null) {
+      this.currentNode = null;
+      return;
+    }
     const node = this.getNode(key);
     if (node) {
       this.currentNode = node;
