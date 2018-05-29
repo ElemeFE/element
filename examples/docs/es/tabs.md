@@ -376,7 +376,7 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | editable     | si la Pestaña es añadible y cerrable | boolean | —                     | false                       |
 | value        | nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
 | tab-position | posición de tabulación               | string  | top/right/bottom/left | top                         |
-| before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | function | — | — |
+| before-leave | función `hook` antes de cambiar de pestaña. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se evitará el cambio. | function | — | — |
 
 ### Eventos de Pestañas
 | Nombre de Evento | Descripción                              | Parámetros                    |
@@ -387,10 +387,10 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | edit             | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action)          |
 
 ### Attributos del Tab-pane
-| Atributo | Descripción                              | Tipo    | Valores Aceptados | Default                                  |
-| -------- | ---------------------------------------- | ------- | ----------------- | ---------------------------------------- |
-| label    | título de la pestaña                     | string  | —                 | —                                        |
-| disabled | si la Tabulación está deshabilitada      | boolean | —                 | false                                    |
+| Atributo | Descripción                                                  | Tipo    | Valores Aceptados | Default                                                      |
+| -------- | ------------------------------------------------------------ | ------- | ----------------- | ------------------------------------------------------------ |
+| label    | título de la pestaña                                         | string  | —                 | —                                                            |
+| disabled | si la Tabulación está deshabilitada                          | boolean | —                 | false                                                        |
 | name     | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
-| closable | si el Tab es cerrable                    | boolean | —                 | false                                    |
-| lazy     | whether Tab is lazily rendered            | boolean | —                 | false                                    |
+| closable | si el Tab es cerrable                                        | boolean | —                 | false                                                        |
+| lazy     | si Tab es renderizado con `lazy-load`                        | boolean | —                 | false                                                        |
