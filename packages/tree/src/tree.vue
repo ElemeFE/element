@@ -252,8 +252,12 @@
         this.store.remove(data);
       },
 
-      append(data, parentNode) {
-        this.store.append(data, parentNode);
+      close(node) {
+        this.store.close(node);
+      },
+
+      append(data, parentNode, callback) {
+        this.store.append(data, parentNode, callback);
       },
 
       insertBefore(data, refNode) {
@@ -435,37 +439,54 @@
       });
 
       this.$on('tree-node-drag-end', (event) => {
-        const { draggingNode, dropType, dropNode } = dragState;
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
-
-        if (draggingNode && dropNode) {
-          const data = draggingNode.node.data;
-          if (dropType === 'before') {
-            draggingNode.node.remove();
-            dropNode.node.parent.insertBefore({ data }, dropNode.node);
-          } else if (dropType === 'after') {
-            draggingNode.node.remove();
-            dropNode.node.parent.insertAfter({ data }, dropNode.node);
-          } else if (dropType === 'inner') {
-            dropNode.node.insertChild({ data });
-            draggingNode.node.remove();
-          }
+        const clrDragState = () => {
+          dragState.showDropIndicator = false;
+          dragState.draggingNode = null;
+          dragState.dropNode = null;
+          dragState.allowDrop = true;
+          console.log('============== tree-node-drag-end - exit =========');
+        };
+        const emitEvents = () => {
           removeClass(dropNode.$el, 'is-drop-inner');
 
           this.$emit('node-drag-end', draggingNode.node, dropNode.node, dropType, event);
           if (dropType !== 'none') {
             this.$emit('node-drop', draggingNode.node, dropNode.node, dropType, event);
           }
+        };
+        const { draggingNode, dropType, dropNode } = dragState;
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+
+        if (draggingNode && dropNode) {
+          var value;
+          if (this.store.lazy) {
+            value = draggingNode.node;
+          } else {
+            const data = draggingNode.node.data;
+            value = {data};
+          }
+          if (dropType === 'before') {
+            draggingNode.node.remove();
+            dropNode.node.parent.insertBefore(value, dropNode.node);
+          } else if (dropType === 'after') {
+            draggingNode.node.remove();
+            dropNode.node.parent.insertAfter(value, dropNode.node);
+          } else if (dropType === 'inner') {
+            dropNode.node.expand(() => {
+              console.log('============== tree-node-drag-end enter =========');
+              draggingNode.node.remove();
+              dropNode.node.insertChild(value);
+              emitEvents();
+            });
+            return clrDragState();
+          }
+          emitEvents();
         }
         if (draggingNode && !dropNode) {
           this.$emit('node-drag-end', draggingNode.node, null, dropType, event);
         }
-
-        dragState.showDropIndicator = false;
-        dragState.draggingNode = null;
-        dragState.dropNode = null;
-        dragState.allowDrop = true;
+        clrDragState();
       });
     },
 

@@ -95,11 +95,26 @@ export default class TreeStore {
     }
   }
 
-  append(data, parentData) {
+  close(node) {
+    if (this.lazy) {
+      node.close();
+    }
+  }
+
+  append(data, parentData, callback) {
+    console.log('tree-store append');
     const parentNode = parentData ? this.getNode(parentData) : this.root;
 
     if (parentNode) {
-      parentNode.insertChild({ data });
+      if (this.lazy) {
+        parentNode.expand(() =>{
+          parentNode.insertChild({ data });
+          if (callback) callback();
+        });
+      } else {
+        parentNode.insertChild({ data });
+        if (callback) callback();
+      }
     }
   }
 
@@ -211,6 +226,7 @@ export default class TreeStore {
   }
 
   updateChildren(key, data) {
+    console.log('tree-store updateChildren');
     const node = this.nodesMap[key];
     if (!node) return;
     const childNodes = node.childNodes;

@@ -1,0 +1,39 @@
+Сделать Fork в эту папку
+
+cd ./No
+
+cd c:\NodeJs\github\
+git clone git@github.com:ElemeFE/element.git
+
+убрать из файла .gitignore строки
+lib
+
+Добавиить в файл .eslintignore  строки
+*.ttf
+*.woff
+
+== сборка development -версии
+cd .\Element
+npm run dev
+
+== сборка lib после сборки development -версии
+npm run dist
+
+после этого папку lib можно скопировать в свой проект
+например сюда
+c:\NodeJs\kvsrvwork\node_modules\element-ui\lib 
+
+
+Установка в свой проект из github
+npm install git https://github.com/abernov/element.git --save
+или так
+npm install https://github.com/abernov/element/tarball/master --save
+
+
+================ Отладка компонентов ================
+npm run dev:play
+
+весь код, проверяющий компонент, пишем здесь
+c:\NodeJs\github\element\examples\play\index.vue
+
+ 
