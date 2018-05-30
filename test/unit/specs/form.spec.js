@@ -102,6 +102,27 @@ describe('Form', () => {
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
     done();
   });
+  it('label size', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-form :model="form" size="mini" ref="labelMini">
+            <el-form-item>
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+      `,
+      data() {
+        return {
+          form: {
+            name: ''
+          }
+        };
+      }
+    }, true);
+    expect(vm.$refs.labelMini.$el.children[0].classList.contains('el-form-item--mini')).to.be.true;
+  });
   it('show message', done => {
     vm = createVue({
       template: `
