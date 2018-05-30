@@ -156,7 +156,7 @@
         return this.size || this._formSize;
       },
       sizeClass() {
-        return (this.$ELEMENT || {}).size || this.elFormItemSize;
+        return this.elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
     data() {
