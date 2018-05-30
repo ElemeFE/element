@@ -102,7 +102,7 @@ describe('Form', () => {
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
     done();
   });
-  it('label size', done => {
+  it('label size', () => {
     vm = createVue({
       template: `
         <div>
@@ -122,7 +122,6 @@ describe('Form', () => {
       }
     }, true);
     expect(vm.$refs.labelMini.$el.children[0].classList.contains('el-form-item--mini')).to.be.true;
-    done();
   });
   it('show message', done => {
     vm = createVue({
