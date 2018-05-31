@@ -486,7 +486,14 @@ export default class Node {
         }
       };
 
-      this.store.load(this, resolve);
+      const reject = () => {
+        this.loaded = false;
+        this.loading = false;
+        this.childNodes = [];
+        this.updateLeafState();
+      };      
+
+      this.store.load(this, resolve, reject);
     } else {
       if (callback) {
         callback.call(this);
