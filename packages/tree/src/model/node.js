@@ -111,7 +111,7 @@ export default class Node {
     } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
       this.expand();
     }
-    if (!Array.isArray(data)) {
+    if (!Array.isArray(this.data)) {
         markNodeData(this, this.data);
     }
     if (!this.data) return;
