@@ -491,7 +491,7 @@ export default class Node {
         this.loading = false;
         this.childNodes = [];
         this.updateLeafState();
-      };      
+      };
 
       this.store.load(this, resolve, reject);
     } else {
