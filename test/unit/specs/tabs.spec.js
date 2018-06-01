@@ -494,8 +494,8 @@ describe('Tabs', () => {
 
         vm.$el.querySelector('.el-tabs__nav > #tab-A').click();
         vm.$nextTick(() => {
-          expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(3);
-          expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+          expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(4);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).not.to.be.equal(null);
           done();
         });
       });
