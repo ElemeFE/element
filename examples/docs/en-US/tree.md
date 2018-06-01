@@ -444,6 +444,10 @@ Basic tree structure.
 ```
 :::
 
+:::tip
+When there are multiple Tree components on the page, do not share `data` between Tree components. Make sure the `data` of each component is unique.
+:::
+
 ### Selectable
 
 Used for node selection.
