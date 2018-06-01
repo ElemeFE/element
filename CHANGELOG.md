@@ -2,6 +2,10 @@
 
 ### 1.2.1
 
+*2018-06-02*
+
+- Исправлены checkbox select
+
 *2018-05-26*
 
 - Добавлен clearable для value switcher
