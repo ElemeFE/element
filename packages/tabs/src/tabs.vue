@@ -88,9 +88,7 @@
         }
       },
       addPanes(item) {
-        const index = this.$slots.default.filter(item => {
-          return item.elm.nodeType === 1 && /\bel-tab-pane\b/.test(item.elm.className);
-        }).indexOf(item.$vnode);
+        const index = this.$slots.default.indexOf(item.$vnode);
         this.panes.splice(index, 0, item);
       },
       removePanes(item) {
