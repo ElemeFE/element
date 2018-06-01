@@ -139,5 +139,11 @@
         transform: translate(0, .5px);
       }
     }
+    .el-select__tags-text {
+      display: inline-block;
+      vertical-align: middle;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 }
