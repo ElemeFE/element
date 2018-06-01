@@ -199,6 +199,7 @@
           this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
+          this.value !== null &&
           this.value !== '';
         return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
       },
