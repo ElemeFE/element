@@ -1362,6 +1362,38 @@ describe('DatePicker', () => {
         }, DELAY);
       }, DELAY);
     });
+
+    it('confirm button honors picked date', done => {
+      vm = createVue({
+        template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: new Date(2000, 9, 1, 12, 0, 0) // 2010-10-01 12:00:00
+          };
+        }
+      }, true);
+      vm.$refs.compo.$el.querySelector('input').focus();
+      setTimeout(_ => {
+        // changed month / year should not effect picked time
+        vm.$refs.compo.picker.$el.querySelector('.el-date-picker__header .el-icon-arrow-right').click();
+        setTimeout(_ => {
+          vm.$refs.compo.picker.$el.querySelector('.el-date-picker__header .el-icon-d-arrow-right').click();
+          setTimeout(_ => {
+            // click confirm button
+            vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--default').click();
+            setTimeout(_ => {
+              expect(vm.value.getFullYear()).to.equal(2000);
+              expect(vm.value.getMonth()).to.equal(9);
+              expect(vm.value.getDate()).to.equal(1);
+              expect(vm.value.getHours()).to.equal(12);
+              expect(vm.value.getMinutes()).to.equal(0);
+              expect(vm.value.getSeconds()).to.equal(0);
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   describe('type:week', () => {

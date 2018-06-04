@@ -370,8 +370,13 @@
         if (this.selectionMode === 'dates') {
           this.emit(this.selectedDate);
         } else {
-          const date = this.value ? this.date : modifyWithTimeString(this.date, this.defaultTime);
-          this.emit(date);
+          // value were emitted in handle{Date,Time}Pick, nothing to update here
+          // deal with the scenario where: user opens the picker, then confirm without doing anything
+          const value = this.value
+            ? this.value
+            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
+          this.date = new Date(value); // refresh date
+          this.emit(value);
         }
       },
 
