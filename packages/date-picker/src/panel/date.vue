@@ -150,7 +150,7 @@
     isDate,
     modifyDate,
     modifyTime,
-    modifyWithDefaultTime,
+    modifyWithTimeString,
     clearMilliseconds,
     clearTime,
     prevYear,
@@ -192,7 +192,7 @@
         if (isDate(val)) {
           this.date = new Date(val);
         } else {
-          this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
+          this.date = this.getDefaultValue();
         }
       },
 
@@ -233,7 +233,7 @@
       },
 
       handleClear() {
-        this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
+        this.date = this.getDefaultValue();
         this.$emit('pick', null);
       },
 
@@ -303,7 +303,9 @@
 
       handleTimePick(value, visible, first) {
         if (isDate(value)) {
-          const newDate = this.value ? modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds()) : modifyWithDefaultTime(value, this.defaultTime);
+          const newDate = this.value
+            ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
+            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
           this.date = newDate;
           this.emit(this.date, true);
         } else {
@@ -334,7 +336,9 @@
 
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
-          this.date = this.value ? modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate()) : modifyWithDefaultTime(value, this.defaultTime);
+          this.date = this.value
+            ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
+            : modifyWithTimeString(value, this.defaultTime);
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
@@ -366,7 +370,7 @@
         if (this.selectionMode === 'dates') {
           this.emit(this.selectedDate);
         } else {
-          const date = this.value ? this.date : modifyWithDefaultTime(this.date, this.defaultTime);
+          const date = this.value ? this.date : modifyWithTimeString(this.date, this.defaultTime);
           this.emit(date);
         }
       },
@@ -466,6 +470,12 @@
             ? !this.disabledDate(value)
             : true
         );
+      },
+
+      getDefaultValue() {
+        // if default-value is set, return it
+        // otherwise, return now (the moment this method gets called)
+        return this.defaultValue ? new Date(this.defaultValue) : new Date();
       }
     },
 
@@ -478,7 +488,7 @@
         popperClass: '',
         date: new Date(),
         value: '',
-        defaultValue: null,
+        defaultValue: null, // use getDefaultValue() for time computation
         defaultTime: null,
         showTime: false,
         selectionMode: 'day',
