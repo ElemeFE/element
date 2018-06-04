@@ -111,7 +111,9 @@ export default class Node {
     } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
       this.expand();
     }
-
+    if (!Array.isArray(this.data)) {
+      markNodeData(this, this.data);
+    }
     if (!this.data) return;
     const defaultExpandedKeys = store.defaultExpandedKeys;
     const key = store.key;
