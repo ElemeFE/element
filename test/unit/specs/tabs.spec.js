@@ -395,6 +395,34 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('stretch', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" stretch :tab-position="tabPosition">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `,
+      data() {
+        return {
+          tabPosition: 'bottom'
+        };
+      }
+    }, true);
+
+    setTimeout(_ => {
+      expect(vm.$el.querySelector('[role=tablist]').classList.contains('is-stretch')).to.be.true;
+
+      vm.tabPosition = 'left';
+
+      vm.$nextTick(_ => {
+        expect(vm.$el.querySelector('[role=tablist]').classList.contains('is-stretch')).not.to.be.true;
+        done();
+      });
+    }, 100);
+  });
   it('horizonal-scrollable', done => {
     vm = createVue({
       template: `
