@@ -1,4 +1,4 @@
-import { createVue, triggerClick, destroyVM } from '../util';
+import { createVue, triggerClick, destroyVM, triggerKeyDown } from '../util';
 
 describe('Autocomplete', () => {
   let vm;
@@ -126,6 +126,142 @@ describe('Autocomplete', () => {
         done();
       }, 500);
     }, 500);
+  });
+  it('input', done => {
+    vm = createVue({
+      template: `
+        <el-autocomplete
+          ref="autocomplete"
+          v-model="state"
+          :trigger-on-focus="false"
+          :fetch-suggestions="querySearch"
+        ></el-autocomplete>
+      `,
+      data() {
+        return {
+          restaurants: [],
+          state: ''
+        };
+      },
+      methods: {
+        querySearch(queryString, cb) {
+          var restaurants = this.restaurants;
+          var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+          cb(results);
+        },
+        createFilter(queryString) {
+          return (restaurant) => {
+            return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          };
+        },
+        loadAll() {
+          return [
+            { 'value': '三全鲜食（北新泾店）', 'address': '长宁区新渔路144号' },
+            { 'value': 'Hot honey 首尔炸鸡（仙霞路）', 'address': '上海市长宁区淞虹路661号' },
+            { 'value': '新旺角茶餐厅', 'address': '上海市普陀区真北路988号创邑金沙谷6号楼113' },
+            { 'value': '泷千家(天山西路店)', 'address': '天山西路438号' }
+          ];
+        }
+      },
+      mounted() {
+        this.restaurants = this.loadAll();
+      }
+    }, true);
+    const autocomplete = vm.$refs.autocomplete;
+    const input = autocomplete.$refs.input;
+    input.$emit('input', '三');
+    setTimeout(() => {
+      expect(vm.state).to.be.equal('三');
+      expect(autocomplete.suggestions[0].value).to.be.equal('三全鲜食（北新泾店）');
+      input.$emit('input', '');
+      setTimeout(() => {
+        expect(vm.state).to.be.equal('');
+        expect(autocomplete.suggestions.length).to.be.equal(0);
+        done();
+      }, 500);
+    }, 500);
+  });
+  describe('enter select', () => {
+    const createVm = (selectWhenUnmatched = false) => {
+      return createVue({
+        template: `
+          <el-autocomplete
+            ref="autocomplete"
+            v-model="state"
+            @select="handleSelect"
+            :trigger-on-focus="false"
+            :select-when-unmatched="selectWhenUnmatched"
+            :fetch-suggestions="querySearch"
+          ></el-autocomplete>
+        `,
+        data() {
+          return {
+            restaurants: [],
+            state: '',
+            selectWhenUnmatched: selectWhenUnmatched,
+            item: {}
+          };
+        },
+        methods: {
+          querySearch(queryString, cb) {
+            var restaurants = this.restaurants;
+            var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+            cb(results);
+          },
+          createFilter(queryString) {
+            return (restaurant) => {
+              return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+            };
+          },
+          loadAll() {
+            return [
+              { 'value': '三全鲜食（北新泾店）', 'address': '长宁区新渔路144号' },
+              { 'value': 'Hot honey 首尔炸鸡（仙霞路）', 'address': '上海市长宁区淞虹路661号' },
+              { 'value': '新旺角茶餐厅', 'address': '上海市普陀区真北路988号创邑金沙谷6号楼113' },
+              { 'value': '泷千家(天山西路店)', 'address': '天山西路438号' }
+            ];
+          },
+          handleSelect(item) {
+            this.item = item;
+          }
+        },
+        mounted() {
+          this.restaurants = this.loadAll();
+        }
+      }, true);
+    };
+    it('select', done => {
+      vm = createVm();
+      const autocomplete = vm.$refs.autocomplete;
+      const input = autocomplete.$refs.input;
+      input.$el.querySelector('input').focus();
+      input.$emit('input', '三');
+      setTimeout(() => {
+        triggerKeyDown(input.$el, 40); // down
+        setTimeout(() => {
+          triggerKeyDown(input.$el, 13); // enter
+          setTimeout(() => {
+            expect(vm.item.address).to.be.equal('长宁区新渔路144号');
+            done();
+          }, 200);
+        }, 200);
+      }, 500);
+    });
+    it('select unmatched', done => {
+      vm = createVm(true);
+      const autocomplete = vm.$refs.autocomplete;
+      const input = autocomplete.$refs.input;
+      input.$emit('input', '关键字');
+      setTimeout(() => {
+        expect(autocomplete.suggestions.length).to.be.equal(0);
+        triggerKeyDown(input.$el, 13); // enter
+        setTimeout(() => {
+          expect(autocomplete.highlightedIndex).to.be.equal(-1);
+          expect(vm.item.value).to.be.equal('关键字');
+          done();
+        }, 500);
+      }, 500);
+    });
   });
   it('props', done => {
     vm = createVue({
