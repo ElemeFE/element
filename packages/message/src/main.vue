@@ -50,13 +50,6 @@
     },
 
     computed: {
-      iconWrapClass() {
-        const classes = ['el-message__icon'];
-        if (this.type && !this.iconClass) {
-          classes.push(`el-message__icon--${ this.type }`);
-        }
-        return classes;
-      },
 
       typeClass() {
         return this.type && !this.iconClass

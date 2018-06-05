@@ -12,8 +12,8 @@
         <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
             <div
-              :class="['el-message-box__status', typeClass]"
-              v-if="typeClass && center">
+              :class="typeClasses"
+              v-if="typeClasses.length > 1 && center">
             </div>
             <span>{{ title }}</span>
           </div>
@@ -29,8 +29,8 @@
         </div>
         <div class="el-message-box__content">
           <div
-            :class="['el-message-box__status', typeClass]"
-            v-if="typeClass && !center && message !== ''">
+            :class="typeClasses"
+            v-if="typeClasses.length > 1 && !center && message !== ''">
           </div>
           <div class="el-message-box__message" v-if="message !== ''">
             <slot>
@@ -132,8 +132,17 @@
     },
 
     computed: {
-      typeClass() {
-        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+
+      typeClasses() {
+        let classes = ['el-message-box__status'];
+        if (this.type) {
+          if (typeMap[this.type]) {
+            classes.push(`el-icon-${ typeMap[this.type] }`);
+          } else {
+            classes = classes.concat(['user-customized-type', `el-icon-${ this.type }`, `user-customized-icon-${ this.type }`]);
+          }
+        }
+        return classes;
       },
 
       confirmButtonClasses() {

@@ -162,7 +162,7 @@
 
 提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。
 
-:::demo 调用`$confirm`方法即可打开消息提示，它模拟了系统的 `confirm`。Message Box 组件也拥有极高的定制性，我们可以传入`options`作为第三个参数，它是一个字面量对象。`type`字段表明消息类型，可以为`success`，`error`，`info`和`warning`，无效的设置将会被忽略。注意，第二个参数`title`必须定义为`String`类型，如果是`Object`，会被理解为`options`。在这里我们用了 Promise 来处理后续响应。
+:::demo 调用`$confirm`方法即可打开消息提示，它模拟了系统的 `confirm`。Message Box 组件也拥有极高的定制性，我们可以传入`options`作为第三个参数，它是一个字面量对象。`type`字段表明消息类型，可以为`success`，`error`，`info`和`warning`，其他值被视为用户自定义类型。注意，第二个参数`title`必须定义为`String`类型，如果是`Object`，会被理解为`options`。在这里我们用了 Promise 来处理后续响应。
 
 ```html
 <template>
@@ -379,7 +379,7 @@ import { MessageBox } from 'element-ui';
 | title | MessageBox 标题 | string | — | — |
 | message | MessageBox 消息正文内容 | string / VNode | — | — |
 | dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
-| type | 消息类型，用于显示图标 | string | success / info / warning / error | — |
+| type | 消息类型，用于显示图标 | string | success / info / warning / error，其他值被视作用户自定义类型 | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm'或'cancel', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |
 | showClose | MessageBox 是否显示右上角关闭按钮 | boolean | — | true |
