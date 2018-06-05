@@ -163,7 +163,7 @@ Alert interrupts user operation until the user confirms.
 
 Confirm is used to ask users' confirmation.
 
-:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and it's value can be `success`, `error`, `info` and `warning`. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing. 
+:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and its value can be `success`, `error`, `info` and `warning`. If not one of them, the `type` is considered a user-customized type. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing. 
 
 ```html
 <template>
@@ -381,7 +381,7 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | title | title of the MessageBox | string | — | — |
 | message | content of the MessageBox | string | — | — |
 | dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
-| type | message type, used for icon display | string | success / info / warning / error | — |
+| type | message type, used for icon display | string | success / info / warning / error, other is considered a user-customized type | — |
 | customClass | custom class name for MessageBox | string | — | — |
 | callback | MessageBox closing callback if you don't prefer Promise | function(action), where action can be 'confirm' or 'cancel', and `instance` is the MessageBox instance. You can access to that instance's attributes and methods | — | — |
 | showClose | whether to show close icon of MessageBox | boolean | — | true |

@@ -164,7 +164,7 @@ Alert interrumpe las operaciones realizadas hasta que el usuario confirme la ale
 Confirm es utilizado para preguntar al usuario y recibir una confirmacion.
 
 
-:::demo Llamando al metodo `$confirm` para abrir el componente confirm, y simula el sistema `confirm`. Tambien podemos personalizar a gran medida el componente Message Box al mandar un tercer atributo llamado `options` que es literalmente un objeto. El atributo `type` indica el tipo de mensaje, y su valor puede ser `success`, `error`, `info` y `warning`. Se debe tener en cuenta que el segundo atributo `title` debe ser de tipo `string`, y si es de tipo `object`, sera manejado como el atributo `options`. Aqui utilizamos `Promise` para manejar posteriormente el proceso. 
+:::demo Llamando al metodo `$confirm` para abrir el componente confirm, y simula el sistema `confirm`. Tambien podemos personalizar a gran medida el componente Message Box al mandar un tercer atributo llamado `options` que es literalmente un objeto. El atributo `type` indica el tipo de mensaje, y su valor puede ser `success`, `error`, `info` y `warning`. If not one of them, the `type` is considered a user-customized type. Se debe tener en cuenta que el segundo atributo `title` debe ser de tipo `string`, y si es de tipo `object`, sera manejado como el atributo `options`. Aqui utilizamos `Promise` para manejar posteriormente el proceso. 
 
 ```html
 <template>
@@ -384,7 +384,7 @@ Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.conf
 | title                    | titulo del componente MessageBox         | string                                   | —                                | —                                        |
 | message                  | contenido del componente MessageBox      | string                                   | —                                | —                                        |
 | dangerouslyUseHTMLString | utilizado para que `message` sea tratado como una cadena HTML | boolean                                  | —                                | false                                    |
-| type                     | tipo de mensaje , utilizado para mostrar el  icono | string                                   | success / info / warning / error | —                                        |
+| type                     | tipo de mensaje , utilizado para mostrar el  icono | string                                   | success / info / warning / error, other is considered a user-customized type | —                                        |
 | customClass              | nombre de la clase personzalida para el componente MessageBox | string                                   | —                                | —                                        |
 | callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm' o 'cancel', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
 | beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm' o 'cancel'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |

@@ -50,6 +50,18 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('user customed type', done => {
+    MessageBox({
+      type: 'question',
+      title: '消息',
+      message: '这是一段内容'
+    });
+    setTimeout(() => {
+      const msgbox = document.querySelector('.el-message-box__wrapper');
+      expect(msgbox.querySelectorAll('.user-customized-type.el-icon-question').length).to.be.equal(1);
+      done();
+    }, 300);
+  });
   it('html string', done => {
     MessageBox({
       title: 'html string',
