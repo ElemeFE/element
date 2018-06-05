@@ -84,11 +84,8 @@
     z-index: #{$--index-normal + 1};
 
     @include when(stretch) {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
       min-width: 100%;
+      display: flex;
       & > * {
         flex: 1;
         text-align: center;
