@@ -133,4 +133,24 @@ describe('Tooltip', () => {
       }, 100);
     });
   });
+  it('reference element focus', done => {
+    vm = createVue(`
+    <el-tooltip ref="tooltip" content="提示文字">
+      <button>click</button>
+    </el-tooltip>`);
+    const tooltip = vm.$refs.tooltip;
+    vm.$nextTick(_ => {
+      triggerEvent(tooltip.$el, 'focus');
+      setTimeout(() => {
+        expect(tooltip.showPopper).to.be.true;
+        expect(tooltip.focusing).to.be.true;
+        triggerEvent(tooltip.$el, 'blur');
+        setTimeout(() => {
+          expect(tooltip.showPopper).to.be.false;
+          expect(tooltip.focusing).to.be.false;
+          done();
+        }, 300);
+      }, 100);
+    });
+  });
 });

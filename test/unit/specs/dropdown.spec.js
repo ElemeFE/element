@@ -1,11 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
-
-const keyDown = (el, keyCode) => {
-  const evt = document.createEvent('Events');
-  evt.initEvent('keydown', true, true);
-  evt.keyCode = keyCode;
-  el.dispatchEvent(evt);
-};
+import { createVue, triggerEvent, destroyVM, triggerKeyDown } from '../util';
 
 describe('Dropdown', () => {
   let vm;
@@ -209,10 +202,10 @@ describe('Dropdown', () => {
     let dropdown = vm.$refs.dropdown;
     let dropdownElm = dropdown.$el;
     let triggerElm = dropdownElm.children[0];
-    keyDown(triggerElm, 13); // enter
+    triggerKeyDown(triggerElm, 13); // enter
     setTimeout(() => {
       expect(dropdown.visible).to.be.true;
-      keyDown(triggerElm, 27); // esc
+      triggerKeyDown(triggerElm, 27); // esc
       setTimeout(() => {
         expect(dropdown.visible).to.be.false;
         done();
@@ -245,9 +238,9 @@ describe('Dropdown', () => {
 
     setTimeout(() => {
       expect(dropdown.visible).to.be.true;
-      keyDown(dropdownMenu, 40); // down
+      triggerKeyDown(dropdownMenu, 40); // down
       setTimeout(() => {
-        keyDown(dropdownMenu, 13); // enter
+        triggerKeyDown(dropdownMenu, 13); // enter
         setTimeout(() => {
           expect(dropdown.visible).to.be.false;
           done();

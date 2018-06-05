@@ -94,3 +94,15 @@ exports.triggerClick = function(elm, ...opts) {
 
   return elm;
 };
+
+/**
+ * 触发 keydown 事件
+ * @param {Element} elm
+ * @param {keyCode} int
+ */
+exports.triggerKeyDown = function(el, keyCode) {
+  const evt = document.createEvent('Events');
+  evt.initEvent('keydown', true, true);
+  evt.keyCode = keyCode;
+  el.dispatchEvent(evt);
+};
