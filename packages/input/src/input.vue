@@ -245,7 +245,7 @@
         if (type !== 'textarea') return;
         if (!autosize) {
           this.textareaCalcStyle = {
-            minHeight: calcTextareaHeight(this.$refs.textarea).minHeight
+            minHeight: this.textareaCalcStyle.minHeight || calcTextareaHeight(this.$refs.textarea).minHeight
           };
           return;
         }
