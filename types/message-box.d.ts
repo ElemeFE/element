@@ -17,6 +17,7 @@ export declare class ElMessageBoxComponent extends Vue {
   title: string
   message: string
   type: MessageType
+  iconClass: string
   customClass: string
   showInput: boolean
   showClose: boolean
@@ -50,6 +51,9 @@ export interface ElMessageBoxOptions {
 
   /** Message type, used for icon display */
   type?: MessageType
+
+  /** Custom icon's class */
+  iconClass?: string
 
   /** Custom class name for MessageBox */
   customClass?: string
