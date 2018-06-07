@@ -19,7 +19,8 @@
         type: String,
         default: 'top'
       },
-      beforeLeave: Function
+      beforeLeave: Function,
+      stretch: Boolean
     },
 
     provide() {
@@ -109,7 +110,8 @@
         panes,
         editable,
         addable,
-        tabPosition
+        tabPosition,
+        stretch
       } = this;
 
       const newButton = editable || addable
@@ -132,7 +134,8 @@
           onTabRemove: handleTabRemove,
           editable,
           type,
-          panes
+          panes,
+          stretch
         },
         ref: 'nav'
       };

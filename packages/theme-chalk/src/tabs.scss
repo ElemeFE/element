@@ -82,6 +82,15 @@
     transition: transform .3s;
     float: left;
     z-index: #{$--index-normal + 1};
+
+    @include when(stretch) {
+      min-width: 100%;
+      display: flex;
+      & > * {
+        flex: 1;
+        text-align: center;
+      }
+    }
   }
   @include e(item) {
     padding: 0 20px;
@@ -149,6 +158,7 @@
       border: 1px solid $--border-color-light;
       border-bottom: none;
       border-radius: 4px 4px 0 0;
+      box-sizing: border-box;
     }
     > .el-tabs__header .el-tabs__active-bar {
       display: none;

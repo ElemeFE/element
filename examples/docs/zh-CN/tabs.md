@@ -374,6 +374,7 @@
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
 | value  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 | tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
+| stretch  | 标签的宽度是否自撑开 | boolean   |  -  |  false |
 | before-leave | 切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。 | function | — | — |
 
 ### Tabs Events
