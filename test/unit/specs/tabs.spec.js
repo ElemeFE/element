@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, triggerKeyDown } from '../util';
 
 describe('Tabs', () => {
   let vm;
@@ -569,5 +569,41 @@ describe('Tabs', () => {
         }, 200);
       });
     }, 100);
+  });
+  it('keyboard event', done => {
+    vm = createVue({
+      template: `
+        <el-tabs v-model="activeName">
+          <el-tab-pane label="用户管理" name="first">A</el-tab-pane>
+          <el-tab-pane label="配置管理" name="second">B</el-tab-pane>
+          <el-tab-pane label="角色管理" name="third">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿" name="fourth">D</el-tab-pane>
+        </el-tabs>
+      `,
+      data() {
+        return {
+          activeName: 'second'
+        };
+      }
+    }, true);
+
+    expect(vm.activeName).to.be.equal('second');
+    vm.$nextTick(() => {
+      triggerKeyDown(vm.$el.querySelector('#tab-second'), 39);
+      expect(vm.activeName).to.be.equal('third');
+
+      triggerKeyDown(vm.$el.querySelector('#tab-third'), 39);
+      expect(vm.activeName).to.be.equal('fourth');
+
+      triggerKeyDown(vm.$el.querySelector('#tab-fourth'), 39);
+      expect(vm.activeName).to.be.equal('first');
+
+      triggerKeyDown(vm.$el.querySelector('#tab-first'), 37);
+      expect(vm.activeName).to.be.equal('fourth');
+
+      triggerKeyDown(vm.$el.querySelector('#tab-fourth'), 37);
+      expect(vm.activeName).to.be.equal('third');
+      done();
+    });
   });
 });
