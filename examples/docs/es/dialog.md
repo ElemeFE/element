@@ -318,4 +318,5 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 | ---------------- | ---------------------------------------- | ---------- |
 | open             | se activa cuando se abre el cuadro de Diálogo | —          |
 | close            | se dispara cuando el Diálogo se cierra   | —          |
-| closed           | triggers when the Dialog closing animation ends | — |
+| closed           | se activa cuando finaliza la animación de cierre del Diálog | — |
+
