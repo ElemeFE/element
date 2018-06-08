@@ -249,7 +249,7 @@
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
             <div
-              class={['el-tabs__nav', stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              class={['el-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
               ref="nav"
               style={navStyle}
               role="tablist"
@@ -278,4 +278,3 @@
     }
   };
 </script>
-
