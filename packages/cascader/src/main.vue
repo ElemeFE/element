@@ -48,7 +48,7 @@
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> {{ separator }} </span>
+          <span v-if="index < currentLabels.length - 1" :key="index"> {{ separator }} </span>
         </template>
       </template>
       <template v-else>
@@ -178,7 +178,9 @@ export default {
       menuVisible: false,
       inputHover: false,
       inputValue: '',
-      flatOptions: null
+      flatOptions: null,
+      id: generateId(),
+      needFocus: true
     };
   },
 
@@ -215,9 +217,6 @@ export default {
     },
     cascaderDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
-    },
-    id() {
-      return generateId();
     }
   },
 
@@ -280,7 +279,11 @@ export default {
     hideMenu() {
       this.inputValue = '';
       this.menu.visible = false;
-      this.$refs.input.focus();
+      if (this.needFocus) {
+        this.$refs.input.focus();
+      } else {
+        this.needFocus = true;
+      }
     },
     handleActiveItemChange(value) {
       this.$nextTick(_ => {
@@ -387,6 +390,9 @@ export default {
       this.handlePick([], true);
     },
     handleClickoutside() {
+      if (this.menuVisible) {
+        this.needFocus = false;
+      }
       this.menuVisible = false;
     },
     handleClick() {

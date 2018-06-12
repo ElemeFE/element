@@ -42,7 +42,8 @@
         changeOnSelect: false,
         popperClass: '',
         hoverTimer: 0,
-        clicking: false
+        clicking: false,
+        id: generateId()
       };
     },
 
@@ -97,9 +98,6 @@
           formatOptions(optionsCopy);
           return loadActiveOptions(optionsCopy);
         }
-      },
-      id() {
-        return generateId();
       }
     },
 
