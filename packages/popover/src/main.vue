@@ -19,6 +19,7 @@
       </div>
     </transition>
     <slot name="reference"></slot>
+    <div v-if="mask" class="el-popover__mask" :class="{'el-popover__mask--show': showPopper}" id="el-popover-mask"></div>
   </span>
 </template>
 <script>
@@ -26,11 +27,18 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
 import { addClass, removeClass } from 'element-ui/src/utils/dom';
 import { generateId } from 'element-ui/src/utils/util';
+import { PopupManager } from 'element-ui/src/utils/popup';
 
 export default {
   name: 'ElPopover',
 
   mixins: [Popper],
+
+  data() {
+    return {
+      maskDom: null
+    };
+  },
 
   props: {
     trigger: {
@@ -58,6 +66,10 @@ export default {
     transition: {
       type: String,
       default: 'fade-in-linear'
+    },
+    mask: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -69,6 +81,7 @@ export default {
   watch: {
     showPopper(val) {
       val ? this.$emit('show') : this.$emit('hide');
+      this.maskDom && (this.maskDom.style.zIndex = PopupManager.nextZIndex());
     }
   },
 
@@ -135,6 +148,8 @@ export default {
         on(reference, 'mouseup', this.doClose);
       }
     }
+
+    this.maskDom = this.$el.querySelector('#el-popover-mask');
   },
 
   methods: {

@@ -33,6 +33,22 @@
     }
   }
 
+  @include e(mask) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    margin: 0;
+    display: none;
+    background: #000;
+    opacity: 0.5;
+    @include m(show) {
+      display: block;
+    }
+  }
+
   &:focus:active, &:focus {
     outline-width: 0;
   }
