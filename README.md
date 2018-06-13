@@ -57,6 +57,11 @@
           <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
         </a>
       </td>
+      <td align="center" valign="middle">
+        <a href="https://bitsrc.io/" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/10095631/41342907-e44e7196-6f2f-11e8-92f2-47702dc8f059.png">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
