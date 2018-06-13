@@ -259,8 +259,10 @@ export default {
           }
         },
         reassignMaxValue(value) {
-          if (+value > this.$parent.internalPageCount) {
-            this.$refs.input.$el.querySelector('input').value = this.$parent.internalPageCount;
+          var internalPageCount = this.$parent.internalPageCount;
+          if (+value > internalPageCount) {
+            this.$refs.input.$el.querySelector('input').value = internalPageCount;
+            this.$refs.input.currentValue = internalPageCount;
           }
         }
       },
