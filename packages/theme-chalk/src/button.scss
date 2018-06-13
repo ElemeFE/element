@@ -206,6 +206,14 @@
       border-bottom-right-radius: $--button-border-radius;
       border-top-left-radius: $--button-border-radius;
       border-bottom-left-radius: $--button-border-radius;
+
+      &.is-round {
+        border-radius: 20px;
+      }
+
+      &.is-circle {
+        border-radius: 50%;
+      }
     }
     &:not(:first-child):not(:last-child) {
       border-radius: 0;
