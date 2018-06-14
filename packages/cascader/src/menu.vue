@@ -238,7 +238,7 @@
                 });
               };
               events.on[triggerEvent] = triggerHandler;
-              if (triggerEvent === 'mouseenter') {
+              if (triggerEvent === 'mouseenter' && this.changeOnSelect) {
                 events.on.click = () => {
                   if (this.activeValue.indexOf(item.value) !== -1) {
                     this.$emit('closeInside', true);
