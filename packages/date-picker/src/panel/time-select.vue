@@ -58,6 +58,10 @@
     const timeValue = parseTime(time);
     const stepValue = parseTime(step);
 
+    if (stepValue.hours < 0 || stepValue.minutes < 0 || stepValue.hours === 0 && stepValue.minutes === 0) {
+      throw new Error('step is invalid in pickerOptions');
+    }
+  
     const next = {
       hours: timeValue.hours,
       minutes: timeValue.minutes
