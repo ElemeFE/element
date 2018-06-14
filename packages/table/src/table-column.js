@@ -405,6 +405,18 @@ export default {
       if (this.columnConfig) {
         this.columnConfig.formatter = newVal;
       }
+    },
+
+    className(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.className = newVal;
+      }
+    },
+
+    labelClassName(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.labelClassName = newVal;
+      }
     }
   },
 
