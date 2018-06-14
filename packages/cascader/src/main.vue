@@ -389,8 +389,8 @@ export default {
       ev.stopPropagation();
       this.handlePick([], true);
     },
-    handleClickoutside() {
-      if (this.menuVisible) {
+    handleClickoutside(pickFinished = false) {
+      if (this.menuVisible && !pickFinished) {
         this.needFocus = false;
       }
       this.menuVisible = false;
