@@ -362,12 +362,12 @@
         let dropPrev = true;
         let dropInner = true;
         let dropNext = true;
+        let userAllowDropInner = true;
         if (typeof this.allowDrop === 'function') {
           dropPrev = this.allowDrop(draggingNode.node, dropNode.node, 'prev');
-          dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
+          userAllowDropInner = dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
           dropNext = this.allowDrop(draggingNode.node, dropNode.node, 'next');
         }
-        dragState.allowDrop = dropInner;
         event.dataTransfer.dropEffect = dropInner ? 'move' : 'none';
         if ((dropPrev || dropInner || dropNext) && oldDropNode !== dropNode) {
           if (oldDropNode) {
@@ -399,8 +399,8 @@
         const treePosition = this.$el.getBoundingClientRect();
 
         let dropType;
-        const prevPercent = dropPrev ? (dropInner ? 0.25 : (dropNext ? 0.5 : 1)) : -1;
-        const nextPercent = dropNext ? (dropInner ? 0.75 : (dropPrev ? 0.5 : 0)) : 1;
+        const prevPercent = dropPrev ? (dropInner ? 0.25 : (dropNext ? 0.45 : 1)) : -1;
+        const nextPercent = dropNext ? (dropInner ? 0.75 : (dropPrev ? 0.55 : 0)) : 1;
 
         let indicatorTop = -9999;
         const distance = event.clientY - targetPosition.top;
@@ -430,6 +430,7 @@
         }
 
         dragState.showDropIndicator = dropType === 'before' || dropType === 'after';
+        dragState.allowDrop = dragState.showDropIndicator || userAllowDropInner;
         dragState.dropType = dropType;
         this.$emit('node-drag-over', draggingNode.node, dropNode.node, event);
       });
