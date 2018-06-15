@@ -118,9 +118,14 @@ const DEFAULT_RENDER_CELL = function(h, { row, column, $index }) {
 
 const parseWidth = (width) => {
   if (width !== undefined) {
-    width = parseInt(width, 10);
-    if (isNaN(width)) {
-      width = null;
+    // 百分比polyfill
+    if (/^\d+%$/.test(width)) {
+      return width;
+    } else {
+      width = parseInt(width, 10);
+      if (isNaN(width)) {
+        width = null;
+      }
     }
   }
   return width;
