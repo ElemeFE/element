@@ -2,12 +2,6 @@
   module.exports = {
     data() {
       return {
-        pickerOptionsDynamic: {
-          disabledDate(time) {
-            console.log("TT", time.getTime());
-            return time.getTime()+86400000 < Date.now();
-          }
-        },
         pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
@@ -146,23 +140,9 @@ Use DynamicPicker for date input.
     <span>Now selected type is: {{ dynamicCurrentValue }}</span>
     <br>
     <div>
-        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" :picker-options="pickerOptionsDynamic" />
+        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" :disable-old-date="true" />
     </div>
 </div>
-
-<script>
-  export default {
-    data() {
-      return {
-        pickerOptionsDynamic: {
-          disabledDate(time) {
-            return time.getTime() + 86400000 <= Date.now();
-          }
-        }
-      };
-    }
-  };
-</script>
 ```
 
 :::
@@ -537,6 +517,7 @@ When picking a date range, you can assign the time part for start date and end d
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
 | prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
 | clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
+| disable-old-date | Disable select days before today | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

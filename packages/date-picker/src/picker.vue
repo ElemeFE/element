@@ -393,7 +393,11 @@ export default {
       default: '-'
     },
     pickerOptions: {},
-    unlinkPanels: Boolean
+    unlinkPanels: Boolean,
+    disableOldDate: {
+      type: Boolean,
+      default: false
+    }
   },
 
   directives: { Clickoutside },
@@ -551,6 +555,9 @@ export default {
   },
 
   methods: {
+    disabledOldDateHandler(time) {
+      return time.getTime() + 86400000 <= Date.now();
+    },
     focus() {
       if (!this.ranged) {
         this.$refs.reference.focus();
@@ -818,6 +825,10 @@ export default {
               option !== 'selectableRange') {
             this.picker[option] = options[option];
           }
+        }
+        console.log('DD', this.disableOldDate);
+        if (this.disableOldDate) {
+          this.picker['disabledDate'] = this.disabledOldDateHandler;
         }
       };
       updateOptions();
