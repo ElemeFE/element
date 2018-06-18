@@ -285,14 +285,14 @@
 
       leftLabel() {
         return this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`) +
-                  ' ' + this.leftDate.getFullYear() +
-                  ' ' + this.t('el.datepicker.year');
+            ' ' + this.leftDate.getFullYear() +
+            ' ' + this.t('el.datepicker.year');
       },
 
       rightLabel() {
         return this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`) +
-                  ' ' + this.rightDate.getFullYear() +
-                  ' ' + this.t('el.datepicker.year');
+            ' ' + this.rightDate.getFullYear() +
+            ' ' + this.t('el.datepicker.year');
       },
 
       leftYear() {
@@ -501,7 +501,7 @@
 
         if (parsedValue) {
           if (typeof this.disabledDate === 'function' &&
-                      this.disabledDate(new Date(parsedValue))) {
+            this.disabledDate(new Date(parsedValue))) {
             return;
           }
           if (type === 'min') {
@@ -684,9 +684,9 @@
 
       isValidValue(value) {
         return Array.isArray(value) &&
-                  value && value[0] && value[1] &&
-                  isDate(value[0]) && isDate(value[1]) &&
-                  value[0].getTime() <= value[1].getTime() && (
+          value && value[0] && value[1] &&
+          isDate(value[0]) && isDate(value[1]) &&
+          value[0].getTime() <= value[1].getTime() && (
           typeof this.disabledDate === 'function'
             ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
             : true
