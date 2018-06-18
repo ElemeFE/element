@@ -826,7 +826,6 @@ export default {
             this.picker[option] = options[option];
           }
         }
-        console.log('DD', this.disableOldDate);
         if (this.disableOldDate) {
           this.picker['disabledDate'] = this.disabledOldDateHandler;
         }
