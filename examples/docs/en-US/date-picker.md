@@ -2,6 +2,12 @@
   module.exports = {
     data() {
       return {
+        pickerOptionsDynamic: {
+          disabledDate(time) {
+            console.log("TT", time.getTime());
+            return time.getTime()+86400000 < Date.now();
+          }
+        },
         pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
@@ -140,9 +146,23 @@ Use DynamicPicker for date input.
     <span>Now selected type is: {{ dynamicCurrentValue }}</span>
     <br>
     <div>
-        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" default-value="2018-3-4"/>
+        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" :picker-options="pickerOptionsDynamic" />
     </div>
 </div>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptionsDynamic: {
+          disabledDate(time) {
+            return time.getTime() + 86400000 <= Date.now();
+          }
+        }
+      };
+    }
+  };
+</script>
 ```
 
 :::
