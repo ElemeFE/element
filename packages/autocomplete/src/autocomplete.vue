@@ -116,7 +116,11 @@
         type: String,
         default: 'bottom-start'
       },
-      hideLoading: Boolean
+      hideLoading: Boolean,
+      suggestionWidth: {
+        type: Number,
+        default: 0
+      }
     },
     data() {
       return {
@@ -139,7 +143,7 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
+        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.suggestionWidth > 0 ? this.suggestionWidth : this.$refs.input.$refs.input.offsetWidth]);
       }
     },
     methods: {
