@@ -196,7 +196,6 @@
     }
 
     &.disabled div {
-      background-color: $--background-color-base;
       opacity: 1;
       cursor: not-allowed;
       color: $--color-text-placeholder;
