@@ -66,6 +66,22 @@ describe('${ComponentName}', () => {
   });
 });
 `
+  },
+  {
+    filename: path.join('../../packages/theme-chalk/src', `${componentname}.scss`),
+    content: `@import "mixins/mixins";
+@import "common/var";
+
+@include b(${componentname}) {
+}`
+  },
+  {
+    filename: path.join('../../types', `${componentname}.d.ts`),
+    content: `import { ElementUIComponent } from './component'
+
+/** ${ComponentName} Component */
+export declare class El${ComponentName} extends ElementUIComponent {
+}`
   }
 ];
 
