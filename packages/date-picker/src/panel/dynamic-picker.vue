@@ -192,9 +192,11 @@
               </div>
               <date-table
                 selection-mode="day"
-                :date="date"
+                :date="leftDate"
                 :value="new Date(value)"
                 :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
                 :disabled-date="disabledDate"
                 :first-day-of-week="firstDayOfWeek"
                 @pick="handleDatePick">

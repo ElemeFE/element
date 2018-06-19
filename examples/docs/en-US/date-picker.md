@@ -140,7 +140,7 @@ Use DynamicPicker for date input.
     <span>Now selected type is: {{ dynamicCurrentValue }}</span>
     <br>
     <div>
-        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" default-value="2018-3-4"/>
+        <tm-date-picker v-model="dynamic" ref="compo" type="dynamic" @typechange="value => dynamicCurrentValue = value" :disable-old-date="true" />
     </div>
 </div>
 ```
@@ -517,6 +517,7 @@ When picking a date range, you can assign the time part for start date and end d
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
 | prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
 | clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
+| disable-old-date | Disable select days before today | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
