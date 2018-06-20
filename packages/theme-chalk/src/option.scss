@@ -27,6 +27,7 @@
     @include when(checkbox) {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     &.hover, &:hover {
@@ -36,10 +37,6 @@
     &.selected {
       color: $--select-option-selected;
       font-weight: normal;
-    }
-
-    & span {
-      line-height: 34px !important;
     }
   }
 }
