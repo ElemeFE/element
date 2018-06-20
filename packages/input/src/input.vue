@@ -130,8 +130,7 @@
         suffixOffset: null,
         hovering: false,
         focused: false,
-        isOnComposition: false,
-        valueBeforeComposition: null
+        isOnComposition: false
       };
     },
 
@@ -261,16 +260,10 @@
       handleComposition(event) {
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.currentValue = this.valueBeforeComposition;
-          this.valueBeforeComposition = null;
-          this.handleInput(event);
         } else {
           const text = event.target.value;
           const lastCharacter = text[text.length - 1] || '';
           this.isOnComposition = !isKorean(lastCharacter);
-          if (this.isOnComposition && event.type === 'compositionstart') {
-            this.valueBeforeComposition = text;
-          }
         }
       },
       handleInput(event) {
