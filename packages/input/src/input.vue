@@ -276,7 +276,6 @@
         this.$emit('change', event.target.value);
       },
       setCurrentValue(value) {
-        if (this.isOnComposition) return;
         this.currentValue = value;
         if (this.isOnComposition) return;
         this.$nextTick(_ => {
