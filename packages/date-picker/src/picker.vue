@@ -86,21 +86,21 @@ import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
-import merge from 'element-ui/src/utils/merge';
+// import merge from 'element-ui/src/utils/merge';
 
-const NewPopper = {
-  props: {
-    appendToBody: Popper.props.appendToBody,
-    offset: Popper.props.offset,
-    boundariesPadding: Popper.props.boundariesPadding,
-    arrowOffset: Popper.props.arrowOffset
-  },
-  methods: Popper.methods,
-  data() {
-    return merge({ visibleArrow: true }, Popper.data);
-  },
-  beforeDestroy: Popper.beforeDestroy
-};
+// const NewPopper = {
+//   props: {
+//     appendToBody: Popper.props.appendToBody,
+//     offset: Popper.props.offset,
+//     boundariesPadding: Popper.props.boundariesPadding,
+//     arrowOffset: Popper.props.arrowOffset
+//   },
+//   methods: Popper.methods,
+//   data() {
+//     return merge({ visibleArrow: true }, Popper.data);
+//   },
+//   beforeDestroy: Popper.beforeDestroy
+// };
 
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
@@ -329,7 +329,7 @@ const validator = function(val) {
 };
 
 export default {
-  mixins: [Emitter, NewPopper],
+  mixins: [Emitter, Popper],
 
   inject: {
     elForm: {
@@ -553,10 +553,11 @@ export default {
 
   created() {
     // vue-popper
-    this.popperOptions = {
-      boundariesPadding: 0,
-      gpuAcceleration: false
-    };
+    // TODO: boundariesPadding 对应 preventOverflow 或者 flip 的 padding
+    // this.popperOptions = {
+    //   boundariesPadding: 0,
+    //   gpuAcceleration: false
+    // };
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
 
     this.$on('fieldReset', this.handleFieldReset);

@@ -4,32 +4,36 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
 
-  const poperMixins = {
-    props: {
-      transformOrigin: {
-        type: [Boolean, String],
-        default: false
-      },
-      offset: Popper.props.offset,
-      boundariesPadding: Popper.props.boundariesPadding,
-      popperOptions: Popper.props.popperOptions
-    },
-    data: Popper.data,
-    methods: Popper.methods,
-    beforeDestroy: Popper.beforeDestroy,
-    deactivated: Popper.deactivated
-  };
+  // const poperMixins = {
+  //   props: {
+  //     transformOrigin: {
+  //       type: [Boolean, String],
+  //       default: false
+  //     },
+  //     offset: Popper.props.offset,
+  //     boundariesPadding: Popper.props.boundariesPadding,
+  //     popperOptions: Popper.props.popperOptions
+  //   },
+  //   data: Popper.data,
+  //   methods: Popper.methods,
+  //   beforeDestroy: Popper.beforeDestroy,
+  //   deactivated: Popper.deactivated
+  // };
 
   export default {
     name: 'ElSubmenu',
 
     componentName: 'ElSubmenu',
 
-    mixins: [menuMixin, Emitter, poperMixins],
+    mixins: [menuMixin, Emitter, Popper],
 
     components: { ElCollapseTransition },
 
     props: {
+      transformOrigin: {
+        type: [Boolean, String],
+        default: false
+      },
       index: {
         type: String,
         required: true

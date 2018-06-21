@@ -34,14 +34,14 @@ export default {
       type: String,
       default: 'el-fade-in-linear'
     },
-    popperOptions: {
-      default() {
-        return {
-          boundariesPadding: 10,
-          gpuAcceleration: false
-        };
-      }
-    },
+    // popperOptions: {
+    //   default() {
+    //     return {
+    //       boundariesPadding: 10,
+    //       gpuAcceleration: false
+    //     };
+    //   }
+    // },
     enterable: {
       type: Boolean,
       default: true

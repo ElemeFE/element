@@ -70,29 +70,29 @@ import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
 import { generateId } from 'element-ui/src/utils/util';
 
-const popperMixin = {
-  props: {
-    placement: {
-      type: String,
-      default: 'bottom-start'
-    },
-    appendToBody: Popper.props.appendToBody,
-    arrowOffset: Popper.props.arrowOffset,
-    offset: Popper.props.offset,
-    boundariesPadding: Popper.props.boundariesPadding,
-    popperOptions: Popper.props.popperOptions
-  },
-  methods: Popper.methods,
-  data: Popper.data,
-  beforeDestroy: Popper.beforeDestroy
-};
+// const popperMixin = {
+//   props: {
+//     placement: {
+//       type: String,
+//       default: 'bottom-start'
+//     },
+//     appendToBody: Popper.props.appendToBody,
+//     arrowOffset: Popper.props.arrowOffset,
+//     offset: Popper.props.offset,
+//     boundariesPadding: Popper.props.boundariesPadding,
+//     popperOptions: Popper.props.popperOptions
+//   },
+//   methods: Popper.methods,
+//   data: Popper.data,
+//   beforeDestroy: Popper.beforeDestroy
+// };
 
 export default {
   name: 'ElCascader',
 
   directives: { Clickoutside },
 
-  mixins: [popperMixin, emitter, Locale],
+  mixins: [Popper, emitter, Locale],
 
   inject: {
     elForm: {
@@ -108,6 +108,10 @@ export default {
   },
 
   props: {
+    placement: {
+      type: String,
+      default: 'bottom-start'
+    },
     options: {
       type: Array,
       required: true
