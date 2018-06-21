@@ -1,0 +1,94 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(timeline-item) {
+  position: relative;
+  padding-bottom: 20px;
+
+  @include e(wrapper) {
+    position: relative;
+    padding-left: 18px;
+    top: -4px;
+  }
+
+  @include e(tail) {
+    position: absolute;
+    border-left: 2px solid $--timeline-node-color;
+
+    @include m(normal) {
+      left: 5px;
+      top: $--timeline-node-size-normal + 2px;
+      height: calc(100% - #{$--timeline-node-size-normal + 4px});
+    }
+    @include m(large) {
+      left: 5px;
+      top: $--timeline-node-size-large + 2px;
+      height: calc(100% - #{$--timeline-node-size-large + 4px});
+    }
+  }
+
+  @include e(icon) {
+    color: $--color-white;
+    font-size: $--font-size-small;
+  }
+
+  @include e(node) {
+    position: absolute;
+    background-color: $--timeline-node-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include m(normal) {
+      left: -1px;
+      width: $--timeline-node-size-normal;
+      height: $--timeline-node-size-normal;
+    }
+    @include m(large) {
+      left: -2px;
+      width: $--timeline-node-size-large;
+      height: $--timeline-node-size-large;
+    }
+
+    @include m(primary) {
+      background-color: $--color-primary;
+    }
+    @include m(success) {
+      background-color: $--color-success;
+    }
+    @include m(warning) {
+      background-color: $--color-warning;
+    }
+    @include m(danger) {
+      background-color: $--color-danger;
+    }
+    @include m(info) {
+      background-color: $--color-info;
+    }
+  }
+
+  @include e(dot) {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include e(content) {
+    color: $--color-text-primary;
+  }
+
+  @include e(timestamp) {
+    color: $--color-text-regular;
+    line-height: 1;
+
+    @include when(top) {
+      margin-bottom: 4px;
+      padding-top: 4px;
+    }
+    @include when(bottom) {
+      margin-top: 4px;
+    }
+  }
+}
