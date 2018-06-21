@@ -87,7 +87,7 @@
             let active = activeValue[level];
             if (isDef(active)) {
               options = options.filter(option => option.value === active)[0];
-              if (options && options.children) {
+              if (options && options.children && options.children.length > 0) {
                 loadActiveOptions(options.children, activeOptions);
               }
             }
@@ -208,7 +208,7 @@
                   previousMenu.querySelector('[aria-expanded=true]').focus();
                 }
               } else if (keyCode === 39) { // right
-                if (item.children) {
+                if (item.children && item.children.length > 0) {
                   // 有子menu 选择子menu的第一个menuitem
                   nextMenu = this.$refs.menus[menuIndex + 1];
                   nextMenu.querySelectorAll("[tabindex='-1']")[0].focus();
@@ -224,7 +224,7 @@
                 this.$emit('closeInside');
               }
             };
-            if (item.children) {
+            if (item.children && item.children.length > 0) {
               let triggerEvent = {
                 click: 'click',
                 hover: 'mouseenter'
@@ -270,7 +270,7 @@
             <li
               class={{
                 'el-cascader-menu__item': true,
-                'el-cascader-menu__item--extensible': item.children,
+                'el-cascader-menu__item--extensible': item.children && item.children.length > 0,
                 'is-active': item.value === activeValue[menuIndex],
                 'is-disabled': item.disabled
               }}
@@ -278,7 +278,7 @@
               {...events}
               tabindex= { item.disabled ? null : -1 }
               role="menuitem"
-              aria-haspopup={ !!item.children }
+              aria-haspopup={ !!(item.children && item.children.length > 0) }
               aria-expanded={ item.value === activeValue[menuIndex] }
               id = { itemId }
               aria-owns = { !item.children ? null : ownsId }
