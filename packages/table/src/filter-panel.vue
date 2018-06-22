@@ -44,7 +44,6 @@
 
 <script type="text/babel">
   import Popper from 'element-ui/src/utils/vue-popper';
-  // import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
@@ -180,7 +179,7 @@
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
       this.table.bodyWrapper.addEventListener('scroll', () => {
-        console.warn('确认一下看看这里能否调整一下');
+        // TODO: 确认一下看看这里能否调整一下
         this.updatePopper();
       });
 
@@ -192,14 +191,6 @@
           Dropdown.close(this);
         }
       });
-    },
-    watch: {
-      showPopper(val) {
-        console.warn('可以删除了');
-        // if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
-        //   this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
-        // }
-      }
     }
   };
 </script>

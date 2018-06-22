@@ -45,9 +45,6 @@
         type: String,
         default: 'bottom-end'
       },
-      visibleArrow: {
-        default: true
-      },
       showTimeout: {
         type: Number,
         default: 250

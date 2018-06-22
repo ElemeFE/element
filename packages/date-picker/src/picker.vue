@@ -436,10 +436,10 @@ export default {
       return this.type.indexOf('range') > -1;
     },
 
-    reference() {
-      const reference = this.$refs.reference;
-      return reference.$el || reference;
-    },
+    // reference() {
+    //   const reference = this.$refs.reference;
+    //   return reference.$el || reference;
+    // },
 
     refInput() {
       if (this.reference) {
@@ -558,6 +558,7 @@ export default {
     //   boundariesPadding: 0,
     //   gpuAcceleration: false
     // };
+    // TODO: placement 是作为 props 的
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
 
     this.$on('fieldReset', this.handleFieldReset);

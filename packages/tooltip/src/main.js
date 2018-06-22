@@ -27,21 +27,10 @@ export default {
     },
     popperClass: String,
     content: String,
-    visibleArrow: {
-      default: true
-    },
     transition: {
       type: String,
       default: 'el-fade-in-linear'
     },
-    // popperOptions: {
-    //   default() {
-    //     return {
-    //       boundariesPadding: 10,
-    //       gpuAcceleration: false
-    //     };
-    //   }
-    // },
     enterable: {
       type: Boolean,
       default: true

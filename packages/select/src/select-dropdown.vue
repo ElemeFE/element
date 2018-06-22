@@ -22,26 +22,12 @@
         default: 'bottom-start'
       },
 
-      // boundariesPadding: {
-      //   default: 0
-      // },
-
-      // popperOptions: {
-      //   default() {
-      //     return {
-      //       gpuAcceleration: false
-      //     };
-      //   }
-      // },
-
-      visibleArrow: {
-        default: true
-      },
-
-      appendToBody: {
-        type: Boolean,
-        default: true
+      popperOptions: {
+        preventOverflow: {
+          padding: 0
+        }
       }
+
     },
 
     data() {

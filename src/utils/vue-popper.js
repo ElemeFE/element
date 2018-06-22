@@ -1,11 +1,26 @@
-import Vue from 'vue';
 import objectAssign from 'element-ui/src/utils/merge';
-import {
-  PopupManager
-} from 'element-ui/src/utils/popup';
+import { PopupManager } from 'element-ui/src/utils/popup';
+import PopperUtils from 'popper.js/dist/popper-utils';
+import PopperJS from 'popper.js';
 
-const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
 const stop = e => e.stopPropagation();
+
+function applyStyle(data) {
+  // 如果在 applyStyle 中函数中，访问 this，我们就可以做出许多调整了
+  PopperUtils.setStyles(data.instance.popper, data.styles);
+  PopperUtils.setAttributes(data.instance.popper, data.attributes);
+
+  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
+    if (this.arrowOffset !== 0) {
+      Object.keys(data.arrowStyles).forEach(prop => {
+        if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && data.arrowStyles[prop] > 35) {
+          data.arrowStyles[prop] = this.arrowOffset;
+        }
+      });
+    }
+    PopperUtils.setStyles(data.arrowElement, data.arrowStyles);
+  }
+}
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -32,23 +47,15 @@ export default {
     // },
     reference: Object,
     popper: Object,
-    // 不清楚用途
-    // offset: {
-    //   default: 0
-    // },
     value: Boolean,
-    // 默认值可以设置为 true
-    // visibleArrow: Boolean,
     visibleArrow: {
       type: Boolean,
       default: true
     },
-    // arrowOffset 自己添加的参数
-    // todo: 以后要实现该功能
-    // arrowOffset: {
-    //   type: Number,
-    //   default: 35
-    // },
+    arrowOffset: {
+      type: Number,
+      default: 35
+    },
     appendToBody: {
       type: Boolean,
       default: true
@@ -56,10 +63,7 @@ export default {
     popperOptions: {
       type: Object,
       default() {
-        return {
-          // TODO: 可以删除，如果是真的要使用，也应该放在 computeStyle 中的 gpuAcceleration 中
-          // gpuAcceleration: false
-        };
+        return {};
       }
     }
   },
@@ -116,19 +120,20 @@ export default {
       const options = objectAssign({
         placement: this.currentPlacement,
         onCreate: () => {
-          // this.$emit('created', this);
           this.resetTransformOrigin();
           this.$nextTick(this.updatePopper);
+        },
+        modifiers: {
+          applyStyle: { enabled: false },
+          // computeStyle: { gpuAcceleration: false },
+          applyReactStyle: {
+            enabled: true,
+            fn: applyStyle.bind(this),
+            order: 900
+          }
         }
       }, this.popperOptions);
-      // options.placement = this.currentPlacement;
-      // options.offset = this.offset;
-      // options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
-      // if (typeof options.onUpdate === 'function') {
-      //   this.popperJS.onUpdate(options.onUpdate);
-      // }
-      // this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
       this.increaseZIndex();
       this.popperElm.addEventListener('click', stop);
     },
@@ -138,9 +143,6 @@ export default {
       if (popperJS) {
         popperJS.update();
         this.increaseZIndex();
-        // if (popperJS._popper) {
-        //   popperJS._popper.style.zIndex = PopupManager.nextZIndex();
-        // }
       } else {
         this.createPopper();
       }
