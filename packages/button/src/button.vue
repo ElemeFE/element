@@ -18,11 +18,13 @@
     ]"
   >
     <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
+    <i :class="userIconClass" v-if="userIconClass && !loading"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
+  import { getIconClass } from 'element-ui/src/utils/icon';
+
   export default {
     name: 'ElButton',
 
@@ -42,6 +44,10 @@
       },
       size: String,
       icon: {
+        type: String,
+        default: ''
+      },
+      iconClass: {
         type: String,
         default: ''
       },
@@ -66,6 +72,10 @@
       },
       buttonDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
+      },
+
+      userIconClass() {
+        return this.iconClass || (this.icon ? getIconClass(this.icon) : '');
       }
     },
 

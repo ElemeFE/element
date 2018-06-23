@@ -45,7 +45,8 @@
       </slider-button>
       <div
         class="el-slider__stop"
-        v-for="item in stops"
+        v-for="(item, index) in stops"
+        :key="index"
         :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
         v-if="showStops">
       </div>

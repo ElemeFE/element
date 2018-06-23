@@ -153,7 +153,8 @@ const install = function(Vue, opts = {}) {
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
-    zIndex: opts.zIndex || 2000
+    zIndex: opts.zIndex || 2000,
+    iconPrefix: opts.iconPrefix || 'el-icon-'
   };
 
   Vue.prototype.$loading = Loading.service;

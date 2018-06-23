@@ -60,12 +60,13 @@
 </el-row>
 
 <el-row>
-  <el-button icon="el-icon-search" circle></el-button>
-  <el-button type="primary" icon="el-icon-edit" circle></el-button>
-  <el-button type="success" icon="el-icon-check" circle></el-button>
-  <el-button type="info" icon="el-icon-message" circle></el-button>
-  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-  <el-button type="danger" icon="el-icon-delete" circle></el-button>
+  <el-button icon="search" circle></el-button>
+  <el-button type="primary" icon="edit" circle></el-button>
+  <el-button type="success" icon="check" circle></el-button>
+  <el-button type="info" icon="message" circle></el-button>
+  <el-button type="warning" icon="star-off" circle></el-button>
+  <el-button type="danger" icon="delete" circle></el-button>
+  <el-button type="danger" icon-class="el-icon-delete" circle></el-button>
 </el-row>
 ```
 :::
@@ -112,14 +113,14 @@
 
 带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。
 
-:::demo 设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
+:::demo 设置`icon` 或者 `iconClass` 属性。区别是 `iconClass` 提供完整的图标类名，`icon` 会自动补上前缀。默认前缀为 `el-icon-`，如`icon="share"` 会生成 `class="el-icon-share"`。可以配置 `Vue.prototype.$ELEMENT.iconPrefix` 修改前缀，方便使用自己的图标集合（假如配置 `Vue.prototype.$ELEMENT.iconPrefix="iconfont icon-"`，属性 `icon="delete"` 会生成 `class="iconfont icon-delete"`）。内置的图标列表可以参考 Element 的 Icon 组件。
 
 ```html
-<el-button type="primary" icon="el-icon-edit"></el-button>
-<el-button type="primary" icon="el-icon-share"></el-button>
-<el-button type="primary" icon="el-icon-delete"></el-button>
-<el-button type="primary" icon="el-icon-search">搜索</el-button>
-<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+<el-button type="primary" icon="edit"></el-button>
+<el-button type="primary" icon="share"></el-button>
+<el-button type="primary" icon="delete"></el-button>
+<el-button type="primary" icon="search">搜索</el-button>
+<el-button type="primary">上传<i class="el-icon-upload el-icon-right"></i></el-button>
 ```
 :::
 
@@ -131,13 +132,13 @@
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
-  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+  <el-button type="primary" icon="arrow-left">上一页</el-button>
+  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon-right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="el-icon-edit"></el-button>
-  <el-button type="primary" icon="el-icon-share"></el-button>
-  <el-button type="primary" icon="el-icon-delete"></el-button>
+  <el-button type="primary" icon="edit"></el-button>
+  <el-button type="primary" icon="share"></el-button>
+  <el-button type="primary" icon="delete"></el-button>
 </el-button-group>
 ```
 :::
