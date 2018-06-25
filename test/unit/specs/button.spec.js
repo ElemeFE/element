@@ -21,6 +21,20 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;
   });
+  it('icon', () => {
+    vm = createTest(Button, {
+      icon: 'search'
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;
+  });
+  it('iconClass', () => {
+    vm = createTest(Button, {
+      iconClass: 'some-random-class'
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.querySelector('.some-random-class')).to.be.ok;
+  });
   it('nativeType', () => {
     vm = createTest(Button, {
       nativeType: 'submit'
