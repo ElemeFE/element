@@ -512,6 +512,8 @@
       getOption(value) {
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
+        const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
+
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
           const isEqual = isObject
@@ -523,7 +525,7 @@
           }
         }
         if (option) return option;
-        const label = !isObject
+        const label = (!isObject && !isNull)
           ? value : '';
         let newOption = {
           value: value,
