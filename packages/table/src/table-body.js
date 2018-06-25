@@ -272,9 +272,6 @@ export default {
         ? ['el-table__row', 'current-row']
         : ['el-table__row'];
 
-      if (this.stripe && rowIndex % 2 === 1) {
-        classes.push('el-table__row--striped');
-      }
       const rowClassName = this.table.rowClassName;
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);

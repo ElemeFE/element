@@ -485,10 +485,8 @@
 
   @include m(striped) {
     & .el-table__body {
-      & tr.el-table__row--striped {
-        td {
-          background: #FAFAFA;
-        }
+      & tr:nth-child(2n) {
+        background: #FAFAFA;
 
         &.current-row td {
           background-color: $--table-current-row-background;
