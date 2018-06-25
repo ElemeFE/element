@@ -44,7 +44,7 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === ''">
+    <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
@@ -69,6 +69,7 @@ import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
 import { generateId } from 'element-ui/src/utils/util';
+import { on, off } from 'element-ui/src/utils/dom';
 
 const popperMixin = {
   props: {
@@ -180,7 +181,8 @@ export default {
       inputValue: '',
       flatOptions: null,
       id: generateId(),
-      needFocus: true
+      needFocus: true,
+      isOnComposition: false
     };
   },
 
@@ -409,6 +411,9 @@ export default {
     },
     handleBlur(event) {
       this.$emit('blur', event);
+    },
+    handleComposition(event) {
+      this.isOnComposition = event.type !== 'compositionend';
     }
   },
 
@@ -439,6 +444,14 @@ export default {
 
   mounted() {
     this.flatOptions = this.flattenOptions(this.options);
+    const inputEl = this.$refs.input.$refs.input;
+    on(inputEl, 'compositionstart', this.handleComposition);
+    on(inputEl, 'compositionend', this.handleComposition);
+  },
+  beforeDestroy() {
+    const inputEl = this.$refs.input.$refs.input;
+    off(inputEl, 'compositionstart', this.handleComposition);
+    off(inputEl, 'compositionend', this.handleComposition);
   }
 };
 </script>
