@@ -27,5 +27,5 @@ export declare class ElTabs extends ElementUIComponent {
   stretch: Boolean
 
   /** Hook function before switching tab. If false or a Promise is returned and then is rejected, switching will be prevented */
-  beforeLeave: () => boolean | Promise<any>
+  beforeLeave: (activeName: string, oldActiveName: string) => boolean | Promise<any>
 }

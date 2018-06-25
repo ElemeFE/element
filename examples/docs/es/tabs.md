@@ -377,7 +377,7 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | value        | nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
 | tab-position | posición de tabulación               | string  | top/right/bottom/left | top                         |
 | stretch      | si el ancho del tab se ajusta automáticamente a su contenedor | boolean | - | false |
-| before-leave | función `hook` antes de cambiar de pestaña. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se evitará el cambio. | function | — | — |
+| before-leave | función `hook` antes de cambiar de pestaña. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se evitará el cambio. | Function(activeName, oldActiveName) | — | — |
 
 ### Eventos de Pestañas
 | Nombre de Evento | Descripción                              | Parámetros                    |

@@ -74,7 +74,7 @@
           this.$emit('input', value);
         };
         if (this.currentName !== value && this.beforeLeave) {
-          const before = this.beforeLeave();
+          const before = this.beforeLeave(value, this.currentName);
           if (before && before.then) {
             before.then(() => {
               changeCurrentName();
