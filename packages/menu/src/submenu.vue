@@ -3,29 +3,25 @@
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
+  import objectAssign from 'element-ui/src/utils/merge';
 
-  // const poperMixins = {
-  //   props: {
-  //     transformOrigin: {
-  //       type: [Boolean, String],
-  //       default: false
-  //     },
-  //     offset: Popper.props.offset,
-  //     boundariesPadding: Popper.props.boundariesPadding,
-  //     popperOptions: Popper.props.popperOptions
-  //   },
-  //   data: Popper.data,
-  //   methods: Popper.methods,
-  //   beforeDestroy: Popper.beforeDestroy,
-  //   deactivated: Popper.deactivated
-  // };
+  const poperMixins = Object.keys(Popper).reduce((val, key) => {
+    if (key === 'props') {
+      const props = objectAssign({}, Popper.props);
+      delete props.appendToBody;
+      val.props = props;
+    } else if (key !== 'watch') {
+      val[key] = Popper[key];
+    }
+    return val;
+  }, {});
 
   export default {
     name: 'ElSubmenu',
 
     componentName: 'ElSubmenu',
 
-    mixins: [menuMixin, Emitter, Popper],
+    mixins: [menuMixin, Emitter, poperMixins],
 
     components: { ElCollapseTransition },
 
@@ -65,10 +61,8 @@
     },
     watch: {
       opened(val) {
-        if (this.isMenuPopup) {
-          this.$nextTick(_ => {
-            this.updatePopper();
-          });
+        if (this.isMenuPopup && val) {
+          this.$nextTick(this.updatePopper);
         }
       }
     },

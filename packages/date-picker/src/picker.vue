@@ -86,21 +86,19 @@ import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
-// import merge from 'element-ui/src/utils/merge';
+import objectAssign from 'element-ui/src/utils/merge';
 
-// const NewPopper = {
-//   props: {
-//     appendToBody: Popper.props.appendToBody,
-//     offset: Popper.props.offset,
-//     boundariesPadding: Popper.props.boundariesPadding,
-//     arrowOffset: Popper.props.arrowOffset
-//   },
-//   methods: Popper.methods,
-//   data() {
-//     return merge({ visibleArrow: true }, Popper.data);
-//   },
-//   beforeDestroy: Popper.beforeDestroy
-// };
+const poperMixins = Object.keys(Popper).reduce((val, key) => {
+  if (key === 'props') {
+    const props = objectAssign({}, Popper.props);
+    delete props.reference;
+    delete props.placement;
+    val.props = props;
+  } else if (key !== 'watch') {
+    val[key] = Popper[key];
+  }
+  return val;
+}, {});
 
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
@@ -329,7 +327,7 @@ const validator = function(val) {
 };
 
 export default {
-  mixins: [Emitter, Popper],
+  mixins: [Emitter, poperMixins],
 
   inject: {
     elForm: {
@@ -382,7 +380,17 @@ export default {
       default: '-'
     },
     pickerOptions: {},
-    unlinkPanels: Boolean
+    unlinkPanels: Boolean,
+    popperOptions: {
+      type: Object,
+      default() {
+        return {
+          modifiers: {
+            preventOverflow: { padding: 0 }
+          }
+        };
+      }
+    }
   },
 
   components: { ElInput },
@@ -436,10 +444,10 @@ export default {
       return this.type.indexOf('range') > -1;
     },
 
-    // reference() {
-    //   const reference = this.$refs.reference;
-    //   return reference.$el || reference;
-    // },
+    reference() {
+      const reference = this.$refs.reference;
+      return reference.$el || reference;
+    },
 
     refInput() {
       if (this.reference) {
@@ -552,13 +560,6 @@ export default {
   },
 
   created() {
-    // vue-popper
-    // TODO: boundariesPadding 对应 preventOverflow 或者 flip 的 padding
-    // this.popperOptions = {
-    //   boundariesPadding: 0,
-    //   gpuAcceleration: false
-    // };
-    // TODO: placement 是作为 props 的
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
 
     this.$on('fieldReset', this.handleFieldReset);

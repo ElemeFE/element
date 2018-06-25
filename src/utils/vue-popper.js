@@ -40,11 +40,6 @@ export default {
       type: String,
       default: 'bottom'
     },
-    // 老版本的参数
-    // boundariesPadding: {
-    //   type: Number,
-    //   default: 5
-    // },
     reference: Object,
     popper: Object,
     value: Boolean,
@@ -125,7 +120,8 @@ export default {
         },
         modifiers: {
           applyStyle: { enabled: false },
-          // computeStyle: { gpuAcceleration: false },
+          computeStyle: { gpuAcceleration: false },
+          preventOverflow: { escapeWithReference: true },
           applyReactStyle: {
             enabled: true,
             fn: applyStyle.bind(this),
@@ -162,19 +158,18 @@ export default {
     },
 
     resetTransformOrigin() {
-      console.warn('todo: resetTransformOrigin');
-      // if (!this.transformOrigin) return;
-      // let placementMap = {
-      //   top: 'bottom',
-      //   bottom: 'top',
-      //   left: 'right',
-      //   right: 'left'
-      // };
-      // let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
-      // let origin = placementMap[placement];
-      // this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
-      //   ? this.transformOrigin
-      //   : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      if (!this.transformOrigin) return;
+      let placementMap = {
+        top: 'bottom',
+        bottom: 'top',
+        left: 'right',
+        right: 'left'
+      };
+      let placement = this.popperElm.getAttribute('x-placement').split('-')[0];
+      let origin = placementMap[placement];
+      this.popperElm.style.transformOrigin = typeof this.transformOrigin === 'string'
+        ? this.transformOrigin
+        : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     increaseZIndex() {
