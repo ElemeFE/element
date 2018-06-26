@@ -19,12 +19,14 @@
   >
     <el-input
       ref="input"
-      :readonly="!filterable"
+      :readonly="!(filterable && menuVisible)"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @compositionstart.native="handleComposition"
+      @compositionend.native="handleComposition"
       :validate-event="false"
       :size="size"
       :disabled="cascaderDisabled"
@@ -69,7 +71,6 @@ import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
 import { generateId } from 'element-ui/src/utils/util';
-import { on, off } from 'element-ui/src/utils/dom';
 
 const popperMixin = {
   props: {
@@ -444,14 +445,7 @@ export default {
 
   mounted() {
     this.flatOptions = this.flattenOptions(this.options);
-    const inputEl = this.$refs.input.$refs.input;
-    on(inputEl, 'compositionstart', this.handleComposition);
-    on(inputEl, 'compositionend', this.handleComposition);
-  },
-  beforeDestroy() {
-    const inputEl = this.$refs.input.$refs.input;
-    off(inputEl, 'compositionstart', this.handleComposition);
-    off(inputEl, 'compositionend', this.handleComposition);
   }
+
 };
 </script>
