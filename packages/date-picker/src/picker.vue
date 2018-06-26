@@ -83,19 +83,19 @@
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
-import Popper from 'element-ui/src/utils/vue-popper';
+import { BasePopper } from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
 import objectAssign from 'element-ui/src/utils/merge';
 
-const poperMixins = Object.keys(Popper).reduce((val, key) => {
+const poperMixins = Object.keys(BasePopper).reduce((val, key) => {
   if (key === 'props') {
-    const props = objectAssign({}, Popper.props);
+    const props = objectAssign({}, BasePopper.props);
     delete props.reference;
     delete props.placement;
     val.props = props;
-  } else if (key !== 'watch') {
-    val[key] = Popper[key];
+  } else {
+    val[key] = BasePopper[key];
   }
   return val;
 }, {});

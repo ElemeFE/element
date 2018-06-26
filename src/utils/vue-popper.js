@@ -30,7 +30,7 @@ function applyStyle(data) {
  * @param {Boolean} [visible=false] Visibility of the popup element.
  * @param {Boolean} [visible-arrow=false] Visibility of the arrow, no style.
  */
-export default {
+export const BasePopper = {
   props: {
     transformOrigin: {
       type: [Boolean, String],
@@ -70,24 +70,6 @@ export default {
     };
   },
 
-  watch: {
-    value: {
-      immediate: true,
-      handler(val) {
-        this.showPopper = val;
-        this.$emit('input', val);
-      }
-    },
-
-    showPopper(val) {
-      if (this.disabled) {
-        return;
-      }
-      val ? this.updatePopper() : this.destroyPopper();
-      this.$emit('input', val);
-    }
-  },
-
   methods: {
     createPopper() {
       if (this.$isServer) return;
@@ -121,8 +103,8 @@ export default {
         modifiers: {
           applyStyle: { enabled: false },
           computeStyle: { gpuAcceleration: false },
-          preventOverflow: { escapeWithReference: true },
-          applyReactStyle: {
+          // preventOverflow: { escapeWithReference: true },
+          applyPopperStyle: {
             enabled: true,
             fn: applyStyle.bind(this),
             order: 900
@@ -214,4 +196,25 @@ export default {
   deactivated() {
     this.$options.beforeDestroy[0].call(this);
   }
+};
+
+export default {
+  watch: {
+    value: {
+      immediate: true,
+      handler(val) {
+        this.showPopper = val;
+        this.$emit('input', val);
+      }
+    },
+
+    showPopper(val) {
+      if (this.disabled) {
+        return;
+      }
+      val ? this.updatePopper() : this.destroyPopper();
+      this.$emit('input', val);
+    }
+  },
+  ...BasePopper
 };

@@ -1169,7 +1169,6 @@ function applyStyle(data) {
 
   // if arrowElement is defined and arrowStyles has some properties
   if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    console.log(data.arrowStyles);
     setStyles(data.arrowElement, data.arrowStyles);
   }
 
