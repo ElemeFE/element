@@ -446,6 +446,5 @@ export default {
   mounted() {
     this.flatOptions = this.flattenOptions(this.options);
   }
-
 };
 </script>
