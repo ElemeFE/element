@@ -4,15 +4,15 @@
 
 *2018-06-26*
 
-- Now `class-name` and `label-class-name` of Table are reactive, #11626
-- Fixed Table still highlighting clicked row when `highlight-current-row` is `false`, #11646
-- Fixed a style bug of ButtonGroup when it has only one `round` or `circle` Button, #11605
-- Fixed style of page size Select of Pagination, #11622
-- Fixed Menu's `open` method error when `collapse` is dynamically changed, #11646
-- Added `activeName` and `oldActiveName` parameters to the before-leave hook of Tabs, #11713
-- Fixed Cascader focused after outside clicked, #11588
-- Fixed Cascader not closing when option is clicked when `change-on-select` is true, #11623
-- Now updating Select's value programmatically will trigger form validation, #11672
+- Ahora el `class-name` y el `label-class-name` de la tabla son reactivos, #11626
+- Arreglado que Table seguia resaltando la fila en la que se había hecho clic cuando  `highlight-current-row` era `false`, #11646
+- Corregido un error de estilo de ButtonGroup cuando sólo habia un botón `round` o `circle`, #11605
+- Arreglado estilo del tamaño de página del Select de Pagination, #11622
+- Corregido un error del método `open`  de los Menús cuando se cambiaba dinámicamente `collapse`, #11646
+- Añadidos los parámetros `activeName` y `oldActiveName` al gancho before-leave de Tabs, #11713
+- Arreglado el focus en Cascader después de hacer clic fuera, #11588
+- Arreglado que Cascader no se cerraba cuando se hacia clic en la opción estando `change-on-select` como `true`, #11623
+- Ahora la actualización del valor de Select programáticamente activará la validación de formulario, #11672
 
 ### 2.4.1
 
