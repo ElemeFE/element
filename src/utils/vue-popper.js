@@ -1,27 +1,71 @@
 import objectAssign from 'element-ui/src/utils/merge';
+import deepmerge from 'deepmerge';
 import { PopupManager } from 'element-ui/src/utils/popup';
 import PopperUtils from 'popper.js/dist/popper-utils';
 import PopperJS from 'popper.js';
 
 const stop = e => e.stopPropagation();
 
-function applyStyle(data) {
-  // 如果在 applyStyle 中函数中，访问 this，我们就可以做出许多调整了
-  PopperUtils.setStyles(data.instance.popper, data.styles);
-  PopperUtils.setAttributes(data.instance.popper, data.attributes);
-
-  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    if (this.arrowOffset !== 0) {
-      Object.keys(data.arrowStyles).forEach(prop => {
-        if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && data.arrowStyles[prop] > 35) {
-          data.arrowStyles[prop] = this.arrowOffset;
-        }
-      });
-    }
-    PopperUtils.setStyles(data.arrowElement, data.arrowStyles);
+function computeArrow(data, options) {
+  if (!PopperUtils.isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
+    return data;
   }
-}
 
+  let arrowElement = options.element;
+
+  if (typeof arrowElement === 'string') {
+    arrowElement = data.instance.popper.querySelector(arrowElement);
+
+    if (!arrowElement) {
+      return data;
+    }
+  } else {
+    if (!data.instance.popper.contains(arrowElement)) {
+      console.warn(
+        'WARNING: `arrow.element` must be child of its popper element!'
+      );
+      return data;
+    }
+  }
+
+  const placement = data.placement.split('-')[0];
+  const { popper, reference } = data.offsets;
+  const isVertical = ['left', 'right'].indexOf(placement) !== -1;
+
+  const len = isVertical ? 'height' : 'width';
+  const sideCapitalized = isVertical ? 'Top' : 'Left';
+  const side = sideCapitalized.toLowerCase();
+  const altSide = isVertical ? 'left' : 'top';
+  const opSide = isVertical ? 'bottom' : 'right';
+  const arrowElementSize = PopperUtils.getOuterSizes(arrowElement)[len];
+
+  if (reference[opSide] - arrowElementSize < popper[side]) {
+    data.offsets.popper[side] -=
+      popper[side] - (reference[opSide] - arrowElementSize);
+  }
+  if (reference[side] + arrowElementSize > popper[opSide]) {
+    data.offsets.popper[side] +=
+      reference[side] + arrowElementSize - popper[opSide];
+  }
+  data.offsets.popper = PopperUtils.getClientRect(data.offsets.popper);
+  // use arrowOffset to compute center
+  const center = reference[side] + (this.arrowOffset || (reference[len] / 2 - arrowElementSize / 2));
+
+  const css = PopperUtils.getStyleComputedProperty(data.instance.popper);
+  const popperMarginSide = parseFloat(css[`margin${sideCapitalized}`], 10);
+  const popperBorderSide = parseFloat(css[`border${sideCapitalized}Width`], 10);
+  let sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
+  // adjust side Value
+  sideValue = Math.max(Math.min(popper[len] - arrowElementSize - 8, sideValue), 8);
+
+  data.arrowElement = arrowElement;
+  data.offsets.arrow = {
+    [side]: Math.round(sideValue),
+    [altSide]: ''
+  };
+
+  return data;
+}
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
  * @param {HTMLElement} [popper=$refs.popper] - The HTML element used as popper, or a configuration used to generate the popper.
@@ -40,8 +84,9 @@ export const BasePopper = {
       type: String,
       default: 'bottom'
     },
-    reference: Object,
-    popper: Object,
+    reference: HTMLElement,
+    popper: HTMLElement,
+    boundariesElement: [String, HTMLElement],
     value: Boolean,
     visibleArrow: {
       type: Boolean,
@@ -94,23 +139,28 @@ export const BasePopper = {
         this.popperJS.destroy();
       }
 
-      const options = objectAssign({
+      const options = deepmerge({
         placement: this.currentPlacement,
         onCreate: () => {
           this.resetTransformOrigin();
           this.$nextTick(this.updatePopper);
         },
         modifiers: {
-          applyStyle: { enabled: false },
-          computeStyle: { gpuAcceleration: false },
-          // preventOverflow: { escapeWithReference: true },
-          applyPopperStyle: {
-            enabled: true,
-            fn: applyStyle.bind(this),
-            order: 900
-          }
+          arrow: {
+            fn: computeArrow.bind(this)
+          },
+          computeStyle: { gpuAcceleration: false }
         }
       }, this.popperOptions);
+      if (this.boundariesElement) {
+        if (options.modifiers.preventOverflow) {
+          options.modifiers.preventOverflow.boundariesElement = this.boundariesElement;
+        } else {
+          options.modifiers.preventOverflow = {
+            boundariesElement: this.boundariesElement
+          };
+        }
+      }
       this.popperJS = new PopperJS(reference, popper, options);
       this.increaseZIndex();
       this.popperElm.addEventListener('click', stop);
@@ -198,7 +248,7 @@ export const BasePopper = {
   }
 };
 
-export default {
+export default objectAssign({}, BasePopper, {
   watch: {
     value: {
       immediate: true,
@@ -215,6 +265,5 @@ export default {
       val ? this.updatePopper() : this.destroyPopper();
       this.$emit('input', val);
     }
-  },
-  ...BasePopper
-};
+  }
+});

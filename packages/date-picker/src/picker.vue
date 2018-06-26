@@ -92,7 +92,6 @@ const poperMixins = Object.keys(BasePopper).reduce((val, key) => {
   if (key === 'props') {
     const props = objectAssign({}, BasePopper.props);
     delete props.reference;
-    delete props.placement;
     val.props = props;
   } else {
     val[key] = BasePopper[key];
@@ -390,7 +389,8 @@ export default {
           }
         };
       }
-    }
+    },
+    transformOrigin: false
   },
 
   components: { ElInput },
@@ -560,7 +560,7 @@ export default {
   },
 
   created() {
-    this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+    this.currentPlacement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
 
     this.$on('fieldReset', this.handleFieldReset);
   },
@@ -796,10 +796,10 @@ export default {
       }
       this.pickerVisible = this.picker.visible = true;
 
-      this.updatePopper();
-
       this.picker.value = this.parsedValue;
       this.picker.resetView && this.picker.resetView();
+
+      this.updatePopper();
 
       this.$nextTick(() => {
         this.picker.adjustSpinners && this.picker.adjustSpinners();

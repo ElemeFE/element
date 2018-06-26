@@ -50,13 +50,10 @@ describe('Utils:VuePopper', () => {
     expect(vm.popperJS).to.not.exist;
   });
 
-  it('createPopper', (done) => {
-    const vm = createTest(Popper, { placement: 'top' }, true);
+  it('createPopper', () => {
+    const vm = createTest(Popper, { placement: 'top' });
     vm.createPopper();
-    setTimeout(() => {
-      expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
-      done();
-    }, 20);
+    expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
   });
 
   it('destroy popper when calling createPopper twice', () => {
@@ -80,43 +77,31 @@ describe('Utils:VuePopper', () => {
     expect(vm.popperJS).to.equal(popperJS);
   });
 
-  it('doDestroy', (done) => {
+  it('doDestroy', () => {
     const vm = createTest(Popper, { placement: 'top' });
     vm.createPopper();
-
-    setTimeout(() => {
-      expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
-      vm.doDestroy();
-      expect(vm.popperJS).to.not.exist;
-      done();
-    }, 20);
+    expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
+    vm.doDestroy();
+    expect(vm.popperJS).to.not.exist;
   });
 
-  it('destroyPopper', (done) => {
+  it('destroyPopper', () => {
     const vm = createTest(Popper);
     const vm2 = createTest(Popper);
 
     vm.createPopper();
-
-    setTimeout(() => {
-      expect(() => vm.destroyPopper()).to.not.throw();
-      expect(() => vm2.destroyPopper()).to.not.throw();
-      done();
-    }, 20);
+    expect(() => vm.destroyPopper()).to.not.throw();
+    expect(() => vm2.destroyPopper()).to.not.throw();
   });
 
-  it('placement', (done) => {
+  it('placement', () => {
     const vm = createTest(Popper, { placement: 'bottom-start' });
     const vm2 = createTest(Popper, { placement: 'bottom-abc' });
 
     vm.createPopper();
     vm2.createPopper();
-
-    setTimeout(() => {
-      expect(vm.popperElm.getAttribute('x-placement')).to.equal('bottom-start');
-      expect(vm2.popperJS).to.not.exist;
-      done();
-    }, 20);
+    expect(vm.popperElm.getAttribute('x-placement')).to.equal('bottom-start');
+    expect(vm2.popperJS).to.not.exist;
   });
 
   it('display arrow', () => {
@@ -150,7 +135,7 @@ describe('Utils:VuePopper', () => {
     setTimeout(() => {
       expect(vm.popperElm.style.transformOrigin).to.include('right center');
       done();
-    }, 20);
+    }, 10);
   });
 
   it('appendArrow', () => {
