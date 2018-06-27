@@ -34,16 +34,14 @@
       reverse: {
         handler(newVal) {
           const slots = [];
-          for (let item of this.$slots.default) {
-            slots.splice(newVal ? slots.length : 0, 0, item);
+          const items = this.$slots.default;
+          for (let i = 0; i < items.length; i++) {
+            slots.splice(newVal ? slots.length : 0, 0, items[i]);
           }
           this.$slots.default = slots;
         },
         immediate: true
       }
-    },
-
-    computed: {
     }
   };
 </script>
