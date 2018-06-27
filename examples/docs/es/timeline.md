@@ -16,12 +16,13 @@
         activities2: [{
           content: '支持使用图标',
           timestamp: '2018-04-12 20:46',
+          size: 'large',
           type: 'primary',
           icon: 'more'
         }, {
           content: '支持自定义颜色',
           timestamp: '2018-04-03 20:46',
-          type: 'success'
+          color: '#0bbd87'
         }, {
           content: '支持自定义尺寸',
           timestamp: '2018-04-03 20:46',
@@ -68,6 +69,26 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
     </el-timeline-item>
   </el-timeline>
 </div>
+
+<script>
+  export default {
+    data() {
+      return {
+        reverse: true,
+        activities: [{
+          content: '创建成功',
+          timestamp: '2018-04-11'
+        }, {
+          content: '通过审核',
+          timestamp: '2018-04-13'
+        }, {
+          content: '活动按期开始',
+          timestamp: '2018-04-15'
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -84,12 +105,37 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
       :key="index"
       :icon="activity.icon"
       :type="activity.type"
+      :color="activity.color"
       :size="activity.size"
       :timestamp="activity.timestamp">
       {{activity.content}}
     </el-timeline-item>
   </el-timeline>
-</div>
+</div><script>
+  export default {
+    data() {
+      return {
+        activities2: [{
+          content: '支持使用图标',
+          timestamp: '2018-04-12 20:46',
+          size: 'large',
+          type: 'primary',
+          icon: 'more'
+        }, {
+          content: '支持自定义颜色',
+          timestamp: '2018-04-03 20:46',
+          color: '#0bbd87'
+        }, {
+          content: '支持自定义尺寸',
+          timestamp: '2018-04-03 20:46',
+          size: 'large'
+        }, {
+          content: '默认样式的节点',
+          timestamp: '2018-04-03 20:46'
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -128,7 +174,6 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | reverse | 指定节点是否排序方向，默认为倒序 | boolean | — | true |
-| pending  | 指定最后一个节点是否为幽灵节点 | boolean | — | false |
 
 ### Timeline-item Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
@@ -137,10 +182,12 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 | hide-timestamp  | 是否隐藏时间戳 | boolean | — | false |
 | placement | 时间戳位置 | string | top / bottom | bottom |
 | type | 节点类型 | string | primary / success / warning / danger / info | - |
+| color | 节点颜色 | string | hsl / hsv / hex / rgb | - |
 | size | 节点尺寸 | string | normal / large | normal |
 | icon | 节点图标 | string | — | - |
 
 ### Timeline-Item Slot
 | name | 说明 |
 |------|--------|
+| — | Timeline-Item 的内容 |
 | dot | 自定义节点 |

@@ -1,8 +1,6 @@
 <template>
   <li class="el-timeline-item">
-    <div class="el-timeline-item__tail"
-      :class="[`el-timeline-item__tail--${size}`]"
-    ></div>
+    <div class="el-timeline-item__tail"></div>
 
     <div v-if="!$slots.dot"
       class="el-timeline-item__node"
@@ -10,6 +8,9 @@
         `el-timeline-item__node--${size}`,
         `el-timeline-item__node--${type}`
       ]"
+      :style="{
+        backgroundColor: color
+      }"
     >
       <i v-if="icon"
         class="el-timeline-item__icon"
@@ -58,6 +59,8 @@
       },
 
       type: String,
+
+      color: String,
 
       size: {
         type: String,

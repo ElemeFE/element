@@ -7,24 +7,15 @@
 
   @include e(wrapper) {
     position: relative;
-    padding-left: 18px;
+    padding-left: 28px;
     top: -4px;
   }
 
   @include e(tail) {
     position: absolute;
+    left: 4px;
+    height: 100%;
     border-left: 2px solid $--timeline-node-color;
-
-    @include m(normal) {
-      left: 5px;
-      top: $--timeline-node-size-normal + 2px;
-      height: calc(100% - #{$--timeline-node-size-normal + 4px});
-    }
-    @include m(large) {
-      left: 5px;
-      top: $--timeline-node-size-large + 2px;
-      height: calc(100% - #{$--timeline-node-size-large + 4px});
-    }
   }
 
   @include e(icon) {
@@ -80,15 +71,16 @@
   }
 
   @include e(timestamp) {
-    color: $--color-text-regular;
+    color: $--color-text-secondary;
     line-height: 1;
+    font-size: $--font-size-small;
 
     @include when(top) {
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       padding-top: 4px;
     }
     @include when(bottom) {
-      margin-top: 4px;
+      margin-top: 8px;
     }
   }
 }
