@@ -50,9 +50,22 @@
         </div>
         <div class="el-message-box__btns">
           <el-button
+            v-for="button in buttons"
+            :key="button.text"
+            :loading="button.loading"
+            :type="button.type"
+            :class="[ button.class ]"
+            :round="button.roundButton"
+            size="small"
+            @click.native="handleCustomAction(button)"
+            @keydown.enter="handleCustomAction(button)"
+          >
+            {{ button.text }}
+          </el-button>
+          <el-button
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
-            v-if="showCancelButton"
+            v-if="showCancelButton && !inCustomButtonMode"
             :round="roundButton"
             size="small"
             @click.native="handleAction('cancel')"
@@ -63,7 +76,7 @@
             :loading="confirmButtonLoading"
             ref="confirm"
             :class="[ confirmButtonClasses ]"
-            v-show="showConfirmButton"
+            v-show="showConfirmButton && !inCustomButtonMode"
             :round="roundButton"
             size="small"
             @click.native="handleAction('confirm')"
@@ -123,7 +136,8 @@
       roundButton: {
         default: false,
         type: Boolean
-      }
+      },
+      buttons: []
     },
 
     components: {
@@ -142,10 +156,28 @@
       },
       cancelButtonClasses() {
         return `${ this.cancelButtonClass }`;
+      },
+      inCustomButtonMode() {
+        return this.buttons.length > 0;
       }
     },
 
     methods: {
+      isPromise(obj) {
+        return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+      },
+      handleComposition(event) {
+        if (event.type === 'compositionend') {
+          setTimeout(() => {
+            this.isOnComposition = false;
+          }, 100);
+        } else {
+          this.isOnComposition = true;
+        }
+      },
+      handleKeyup() {
+        !this.isOnComposition && this.handleAction('confirm');
+      },
       getSafeClose() {
         const currentId = this.uid;
         return () => {
@@ -193,6 +225,20 @@
           this.beforeClose(action, this, this.close);
         } else {
           this.doClose();
+        }
+      },
+
+      handleCustomAction(button) {
+        if (button.needValidate && this.$type === 'prompt' && !this.validate()) {
+          return;
+        }
+        let result = button.action && button.action(button);
+        if (this.isPromise(result)) {
+          result.then(() => {
+            this.handleAction('customize');
+          });
+        } else {
+          this.handleAction('customize');
         }
       },
 
