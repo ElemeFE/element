@@ -248,6 +248,30 @@ export const BasePopper = {
   }
 };
 
+/**
+ * @param {String|Array} attrs - delete some attribues in props
+ */
+export function customerPopper(attrs) {
+  if (!attrs) {
+    return BasePopper;
+  } else {
+    return Object.keys(BasePopper).reduce((val, key) => {
+      if (key === 'props') {
+        const props = objectAssign({}, BasePopper.props);
+        if (!Array.isArray(attrs)) {
+          attrs = [attrs];
+        }
+        attrs.forEach(attr => {
+          delete props[attr];
+        });
+        val.props = props;
+      } else {
+        val[key] = BasePopper[key];
+      }
+      return val;
+    }, {});
+  }
+}
 export default objectAssign({}, BasePopper, {
   watch: {
     value: {

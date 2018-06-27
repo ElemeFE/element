@@ -2,19 +2,9 @@
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
-  import { BasePopper } from 'element-ui/src/utils/vue-popper';
-  import objectAssign from 'element-ui/src/utils/merge';
+  import { customerPopper } from 'element-ui/src/utils/vue-popper';
 
-  const poperMixins = Object.keys(BasePopper).reduce((val, key) => {
-    if (key === 'props') {
-      const props = objectAssign({}, BasePopper.props);
-      delete props.appendToBody;
-      val.props = props;
-    } else {
-      val[key] = BasePopper[key];
-    }
-    return val;
-  }, {});
+  const poperMixins = customerPopper('appendToBody');
 
   export default {
     name: 'ElSubmenu',

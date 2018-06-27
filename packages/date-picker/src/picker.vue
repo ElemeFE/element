@@ -83,21 +83,11 @@
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
-import { BasePopper } from 'element-ui/src/utils/vue-popper';
+import { customerPopper } from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
-import objectAssign from 'element-ui/src/utils/merge';
 
-const poperMixins = Object.keys(BasePopper).reduce((val, key) => {
-  if (key === 'props') {
-    const props = objectAssign({}, BasePopper.props);
-    delete props.reference;
-    val.props = props;
-  } else {
-    val[key] = BasePopper[key];
-  }
-  return val;
-}, {});
+const poperMixins = customerPopper('reference');
 
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',

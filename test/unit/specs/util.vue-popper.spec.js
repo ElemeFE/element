@@ -2,14 +2,12 @@ import VuePopper from 'element-ui/src/utils/vue-popper';
 import { createTest } from '../util';
 
 const Popper = Object.assign({}, VuePopper, {
-  render(h) {
-    return h('div');
-  },
-
-  created() {
-    this.popperElm = document.createElement('div');
-    this.referenceElm = document.createElement('div');
-  }
+  template: `
+  <div style="padding: 100px; height: 100px; width: 100px;">
+    <div ref="popper">popper</div>
+    <div ref="reference">reference</div>
+  </div>
+  `
 });
 
 const CleanPopper = Object.assign({}, VuePopper, {
@@ -50,10 +48,13 @@ describe('Utils:VuePopper', () => {
     expect(vm.popperJS).to.not.exist;
   });
 
-  it('createPopper', () => {
+  it('createPopper', (done) => {
     const vm = createTest(Popper, { placement: 'top' });
     vm.createPopper();
-    expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
+    setTimeout(() => {
+      expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
+      done();
+    }, 10);
   });
 
   it('destroy popper when calling createPopper twice', () => {

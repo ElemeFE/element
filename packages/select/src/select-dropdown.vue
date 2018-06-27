@@ -23,8 +23,13 @@
       },
 
       popperOptions: {
-        preventOverflow: {
-          padding: 0
+        type: Object,
+        default() {
+          return {
+            preventOverflow: {
+              padding: 0
+            }
+          };
         }
       }
 
