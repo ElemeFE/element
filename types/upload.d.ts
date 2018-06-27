@@ -9,13 +9,17 @@ export interface FileListItem {
   status?: FileUploadStatus
 }
 
+export interface ElUploadInternalRawFile extends File {
+  uid: number
+}
+
 export interface ElUploadInternalFileDetail {
   status: FileUploadStatus,
   name: string,
   size: number,
   percentage: number,
   uid: number,
-  raw: File,
+  raw: ElUploadInternalRawFile,
   url?: string
 }
 
@@ -83,7 +87,7 @@ export declare class ElUpload extends ElementUIComponent {
   onChange: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function before uploading with the file to be uploaded as its parameter. If false or a Promise is returned, uploading will be aborted */
-  beforeUpload: (file: ElUploadInternalFileDetail) => boolean | Promise<File | boolean>
+  beforeUpload: (file: ElUploadInternalRawFile) => boolean | Promise<File | Blob | boolean>
 
   /** Whether thumbnail is displayed */
   thumbnailMode: boolean
@@ -108,4 +112,10 @@ export declare class ElUpload extends ElementUIComponent {
 
   /** Hook function when limit is exceeded */
   onExceed: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
+
+  /** Clear the upload file list */
+  clearFiles (): void;
+
+  /** Abort specified file */
+  abort (file: ElUploadInternalFileDetail): void
 }

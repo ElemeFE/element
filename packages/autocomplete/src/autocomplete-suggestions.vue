@@ -3,16 +3,14 @@
     <div
       v-show="showPopper"
       class="el-autocomplete-suggestion el-popper"
-      :class="{ 'is-loading': parent.loading }"
+      :class="{ 'is-loading': !parent.hideLoading && parent.loading }"
       :style="{ width: dropdownWidth }"
-      role="region"
-    >
+      role="region">
       <el-scrollbar
         tag="ul"
         wrap-class="el-autocomplete-suggestion__wrap"
-        view-class="el-autocomplete-suggestion__list"
-      >
-        <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
+        view-class="el-autocomplete-suggestion__list">
+        <li v-if="!parent.hideLoading && parent.loading"><i class="el-icon-loading"></i></li>
         <slot v-else>
         </slot>
       </el-scrollbar>
@@ -56,7 +54,7 @@
 
     updated() {
       this.$nextTick(_ => {
-        this.updatePopper();
+        this.popperJS && this.updatePopper();
       });
     },
 

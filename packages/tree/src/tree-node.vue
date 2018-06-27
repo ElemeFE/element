@@ -2,6 +2,7 @@
   <div
     class="el-tree-node"
     @click.stop="handleClick"
+    @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
     :class="{
       'is-expanded': expanded,
@@ -15,6 +16,12 @@
     :aria-expanded="expanded"
     :aria-disabled="node.disabled"
     :aria-checked="node.checked"
+    :draggable="tree.draggable"
+    @dragstart.stop="handleDragStart"
+    @dragover.stop="handleDragOver"
+    @dragend.stop="handleDragEnd"
+    @drop.stop="handleDrop"
+    ref="node"
   >
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
@@ -63,6 +70,7 @@
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
+  import { getNodeKey } from './model/util';
 
   export default {
     name: 'ElTreeNode',
@@ -96,13 +104,15 @@
         },
         render(h) {
           const parent = this.$parent;
+          const tree = parent.tree;
           const node = this.node;
-          const data = node.data;
-          const store = node.store;
+          const { data, store } = node;
           return (
             parent.renderContent
-              ? parent.renderContent.call(parent._renderProxy, h, { _self: parent.tree.$vnode.context, node, data, store })
-              : <span class="el-tree-node__label">{ this.node.label }</span>
+              ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
+              : tree.$scopedSlots.default
+                ? tree.$scopedSlots.default({ node, data })
+                : <span class="el-tree-node__label">{ node.label }</span>
           );
         }
       }
@@ -137,12 +147,8 @@
     },
 
     methods: {
-      getNodeKey(node, index) {
-        const nodeKey = this.tree.nodeKey;
-        if (nodeKey && node) {
-          return node.data[nodeKey];
-        }
-        return index;
+      getNodeKey(node) {
+        return getNodeKey(this.tree.nodeKey, node.data);
       },
 
       handleSelectChange(checked, indeterminate) {
@@ -161,7 +167,20 @@
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
+        if (this.tree.checkOnClickNode) {
+          this.handleCheckChange(null, {
+            target: { checked: !this.node.checked }
+          });
+        }
         this.tree.$emit('node-click', this.node.data, this.node, this);
+      },
+
+      handleContextMenu(event) {
+        if (this.tree._events['node-contextmenu'] && this.tree._events['node-contextmenu'].length > 0) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
+        this.tree.$emit('node-contextmenu', event, this.node.data, this.node, this);
       },
 
       handleExpandIconClick() {
@@ -177,11 +196,40 @@
 
       handleCheckChange(value, ev) {
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
+        this.$nextTick(() => {
+          const store = this.tree.store;
+          this.tree.$emit('check', this.node.data, {
+            checkedNodes: store.getCheckedNodes(),
+            checkedKeys: store.getCheckedKeys(),
+            halfCheckedNodes: store.getHalfCheckedNodes(),
+            halfCheckedKeys: store.getHalfCheckedKeys(),
+          });
+        });
       },
 
       handleChildNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.tree.$emit('node-expand', nodeData, node, instance);
+      },
+
+      handleDragStart(event) {
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drag-start', event, this);
+      },
+
+      handleDragOver(event) {
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drag-over', event, this);
+        event.preventDefault();
+      },
+
+      handleDrop(event) {
+        event.preventDefault();
+      },
+
+      handleDragEnd(event) {
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drag-end', event, this);
       }
     },
 

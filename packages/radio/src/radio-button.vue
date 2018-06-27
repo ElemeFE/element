@@ -11,7 +11,7 @@
     :aria-checked="value === label"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
-    @keydown.space.stop.prevent="value = label"
+    @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
     <input
       class="el-radio-button__orig-radio"
@@ -40,6 +40,9 @@
     mixins: [Emitter],
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -90,7 +93,7 @@
         return this._radioGroup.radioGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       isDisabled() {
-        return this.disabled || this._radioGroup.disabled;
+        return this.disabled || this._radioGroup.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
         return !this.isDisabled ? (this._radioGroup ? (this.value === this.label ? 0 : -1) : 0) : -1;

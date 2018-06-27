@@ -1,5 +1,7 @@
 <template>
-  <transition name="dialog-fade">
+  <transition
+    name="dialog-fade"
+    @after-leave="afterLeave">
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="el-dialog"
@@ -166,6 +168,9 @@
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
         this.broadcast('ElDropdownMenu', 'updatePopper');
+      },
+      afterLeave() {
+        this.$emit('closed');
       }
     },
 
@@ -181,7 +186,7 @@
 
     destroyed() {
       // if appendToBody is true, remove DOM node after destroy
-      if (this.appendToBody && this.$el) {
+      if (this.appendToBody && this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
       }
     }

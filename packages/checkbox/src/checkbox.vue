@@ -26,6 +26,7 @@
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
         type="checkbox"
+        aria-hidden="true"
         :name="name"
         :disabled="isDisabled"
         :true-value="trueLabel"
@@ -38,6 +39,7 @@
         v-else
         class="el-checkbox__original"
         type="checkbox"
+        aria-hidden="true"
         :disabled="isDisabled"
         :value="label"
         :name="name"
@@ -61,6 +63,9 @@
     mixins: [Emitter],
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -133,8 +138,8 @@
 
       isDisabled() {
         return this.isGroup
-          ? this._checkboxGroup.disabled || this.disabled
-          : this.disabled;
+          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          : this.disabled || (this.elForm || {}).disabled;
       },
 
       _elFormItemSize() {
@@ -198,6 +203,12 @@
     mounted() { // 为indeterminate元素 添加aria-controls 属性
       if (this.indeterminate) {
         this.$el.setAttribute('aria-controls', this.controls);
+      }
+    },
+
+    watch: {
+      value(value) {
+        this.dispatch('ElFormItem', 'el.form.change', value);
       }
     }
   };

@@ -53,20 +53,11 @@
         },
         value1: '',
         value2: '',
-        value3: new Date(),
-        value4: '',
+        value3: '',
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: '',
         value6: '',
-        value7: '',
-        value8: '',
-        value9: '',
-        value10: '',
-        value11: '',
-        value12: '',
-        value13: '',
-        value14: '',
-        value15: '',
-        value16: ''
+        value7: ''
       };
     }
   };
@@ -128,6 +119,15 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
       :picker-options="pickerOptions1">
     </el-date-picker>
   </div>
+  <div class="block">
+    <span class="demonstration">With default time</span>
+    <el-date-picker
+      v-model="value3"
+      type="datetime"
+      placeholder="Select date and time"
+      default-time="12:00:00">
+    </el-date-picker>
+  </div>
 </template>
 
 <script>
@@ -157,7 +157,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
           }]
         },
         value1: '',
-        value2: ''
+        value2: '',
+        value3: ''
       };
     }
   };
@@ -174,7 +175,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value3"
+      v-model="value4"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
@@ -184,7 +185,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">With shortcuts</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value5"
       type="datetimerange"
       :picker-options="pickerOptions2"
       range-separator="To"
@@ -226,8 +227,49 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
             }
           }]
         },
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value4: ''
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value5: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+###  Default time value for start date and end date
+
+:::demo When picking date range on the date panel with type `datetimerange`, `00:00:00` will be used as the default time value for start and end date. We can control it with the `default-time` attribute. `default-time` accepts an array of up to two strings. The first item controls time value of the start date and the second item controls time value of the end date.
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Start date time 12:00:00</span>
+    <el-date-picker
+      v-model="value6"
+      type="datetimerange"
+      start-placeholder="Start Date"
+      end-placeholder="End Date"
+      :default-time="['12:00:00']">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
+    <el-date-picker
+      v-model="value7"
+      type="datetimerange"
+      align="right"
+      start-placeholder="Start Date"
+      end-placeholder="End Date"
+      :default-time="['12:00:00', '08:00:00']">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -236,29 +278,30 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 :::
 
 ### Atributos
-| Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto |
-| ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | ----------- |
-| readonly           | si DatePicker es solo de lectura         | boolean           | —                                        | false       |
-| disabled           | si DatePicker esta deshabilitada         | boolean           | —                                        | false       |
-| editable           | Si la entrada es editable                | boolean           | —                                        | true        |
-| clearable          | Si mostrar el botón de `clear`           | boolean           | —                                        | true        |
-| size               | tamaño del input                         | string            | large/small/mini                         | —           |
-| placeholder        | placeholder cuando el modo NO es Range   | string            | —                                        | —           |
-| start-placeholder  | placeholder para el inicio de fecha en el modo Range | string            | —                                        | —           |
-| end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —           |
-| time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false       |
-| type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
-| format             | formato de valor mostrado en el input    | string            | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd  |
-| alinear            | alineación                               | left/center/right | left                                     |             |
-| popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —           |
-| picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}          |
-| range-separator    | separador de rango                       | string            | -                                        | '-'         |
-| default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |             |
-| value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
-| name               | igual que `name` en la entrada nativa    | string            | —                                        | —           |
-| unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false       |
-| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
-| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto          |
+| ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | -------------------- |
+| readonly           | si DatePicker es solo de lectura         | boolean           | —                                        | false                |
+| disabled           | si DatePicker esta deshabilitada         | boolean           | —                                        | false                |
+| editable           | Si la entrada es editable                | boolean           | —                                        | true                 |
+| clearable          | Si mostrar el botón de `clear`           | boolean           | —                                        | true                 |
+| size               | tamaño del input                         | string            | large/small/mini                         | —                    |
+| placeholder        | placeholder cuando el modo NO es Range   | string            | —                                        | —                    |
+| start-placeholder  | placeholder para el inicio de fecha en el modo Range | string            | —                                        | —                    |
+| end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —                    |
+| time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false                |
+| type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
+| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
+| align              | alineación                               | left/center/right | left                                     |                      |
+| popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —                    |
+| picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |
+| range-separator    | separador de rango                       | string            | -                                        | '-'                  |
+| default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |                      |
+| default-time | el valor de tiempo por defecto después de elegir una fecha | non-range: string / range: string[] | non-range: Una cadena de texto como `12:00:00`, range: array de dos strings, el primero es para la fecha de inicio y el segundo para la fecha final. 00:00:00 se utilizará si no se especifica | — |
+| value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
+| name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
+| unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
+| prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
+| clear-icon         | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |
@@ -277,8 +320,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | Nombre de evento | Descripción                              | Parámetros                    |
 | ---------------- | ---------------------------------------- | ----------------------------- |
 | change           | Se dispara cuando el usuario confirma el valor | valor enlazado del componente |
-| blur             | Se dispara cuando el input pierde el foco | instancia del componente                |
-| focus            | Se dispara cuando el input obtiene el foco | instancia del componente                |
+| blur             | Se dispara cuando el input pierde el foco | instancia del componente      |
+| focus            | Se dispara cuando el input obtiene el foco | instancia del componente      |
 
 ### Métodos
 | Método | Descripción      | Parámetros |

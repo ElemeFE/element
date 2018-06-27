@@ -1,7 +1,6 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
-import IframeUpload from './iframe-upload';
 import ElProgress from 'element-ui/packages/progress';
 import Migrating from 'element-ui/src/mixins/migrating';
 
@@ -15,12 +14,19 @@ export default {
   components: {
     ElProgress,
     UploadList,
-    Upload,
-    IframeUpload
+    Upload
   },
 
-  provide: {
-    uploader: this
+  provide() {
+    return {
+      uploader: this
+    };
+  },
+
+  inject: {
+    elForm: {
+      default: ''
+    }
   },
 
   props: {
@@ -109,13 +115,19 @@ export default {
     };
   },
 
+  computed: {
+    uploadDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
+    }
+  },
+
   watch: {
     fileList: {
       immediate: true,
       handler(fileList) {
         this.uploadFiles = fileList.map(item => {
           item.uid = item.uid || (Date.now() + this.tempIndex++);
-          item.status = 'success';
+          item.status = item.status || 'success';
           return item;
         });
       }
@@ -235,7 +247,7 @@ export default {
     if (this.showFileList) {
       uploadList = (
         <UploadList
-          disabled={this.disabled}
+          disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
@@ -259,7 +271,7 @@ export default {
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
-        disabled: this.disabled,
+        disabled: this.uploadDisabled,
         limit: this.limit,
         'on-exceed': this.onExceed,
         'on-start': this.handleStart,
@@ -274,9 +286,7 @@ export default {
     };
 
     const trigger = this.$slots.trigger || this.$slots.default;
-    const uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
-      ? <upload {...uploadData}>{trigger}</upload>
-      : <iframeUpload {...uploadData}>{trigger}</iframeUpload>;
+    const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
 
     return (
       <div>

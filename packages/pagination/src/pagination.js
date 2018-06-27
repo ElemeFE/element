@@ -20,6 +20,14 @@ export default {
 
     pageCount: Number,
 
+    pagerCount: {
+      type: Number,
+      validator(value) {
+        return (value | 0) === value && value > 4 && value < 22 && (value % 2) === 1;
+      },
+      default: 7
+    },
+
     currentPage: {
       type: Number,
       default: 1
@@ -42,13 +50,17 @@ export default {
 
     nextText: String,
 
-    background: Boolean
+    background: Boolean,
+
+    disabled: Boolean
   },
 
   data() {
     return {
       internalCurrentPage: 1,
-      internalPageSize: 0
+      internalPageSize: 0,
+      lastEmittedPage: -1,
+      userChangePageSize: false
     };
   },
 
@@ -62,7 +74,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
       next: <next></next>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <my-slot></my-slot>,
@@ -72,6 +84,8 @@ export default {
     const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
 
+    template.children = template.children || [];
+    rightWrapper.children = rightWrapper.children || [];
     components.forEach(compo => {
       if (compo === '->') {
         haveRightWrapper = true;
@@ -107,7 +121,8 @@ export default {
         return (
           <button
             type="button"
-            class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
+            class="btn-prev"
+            disabled={ this.$parent.disabled || this.$parent.internalCurrentPage <= 1 }
             on-click={ this.$parent.prev }>
             {
               this.$parent.prevText
@@ -124,10 +139,8 @@ export default {
         return (
           <button
             type="button"
-            class={[
-              'btn-next',
-              { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
-            ]}
+            class="btn-next"
+            disabled={ this.$parent.disabled || this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             on-click={ this.$parent.next }>
             {
               this.$parent.nextText
@@ -165,8 +178,10 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
-              popperClass={ `${this.$parent.popperClass || ''} is-arrow-fixed` }
-              on-input={ this.handleChange }>
+              popperClass={ this.$parent.popperClass || '' }
+              size="mini"
+              on-input={ this.handleChange }
+              disabled={ this.$parent.disabled }>
               {
                 this.pageSizes.map(item =>
                   <el-option
@@ -189,6 +204,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
+            this.$parent.userChangePageSize = true;
             this.$parent.$emit('size-change', val);
           }
         }
@@ -206,6 +222,14 @@ export default {
 
       components: { ElInput },
 
+      watch: {
+        '$parent.internalPageSize'() {
+          this.$nextTick(() => {
+            this.$refs.input.$el.querySelector('input').value = this.$parent.internalCurrentPage;
+          });
+        }
+      },
+
       methods: {
         handleFocus(event) {
           this.oldValue = event.target.value;
@@ -214,8 +238,14 @@ export default {
           this.resetValueIfNeed(target.value);
           this.reassignMaxValue(target.value);
         },
+        handleKeyup({ keyCode, target }) {
+          if (keyCode === 13 && this.oldValue && target.value !== this.oldValue) {
+            this.handleChange(target.value);
+          }
+        },
         handleChange(value) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
+          this.$parent.emitChange();
           this.oldValue = null;
           this.resetValueIfNeed(value);
         },
@@ -223,15 +253,16 @@ export default {
           const num = parseInt(value, 10);
           if (!isNaN(num)) {
             if (num < 1) {
-              this.$refs.input.$el.querySelector('input').value = 1;
+              this.$refs.input.setCurrentValue(1);
             } else {
               this.reassignMaxValue(value);
             }
           }
         },
         reassignMaxValue(value) {
-          if (+value > this.$parent.internalPageCount) {
-            this.$refs.input.$el.querySelector('input').value = this.$parent.internalPageCount;
+          var internalPageCount = this.$parent.internalPageCount;
+          if (+value > internalPageCount) {
+            this.$refs.input.setCurrentValue(internalPageCount);
           }
         }
       },
@@ -248,6 +279,8 @@ export default {
               domPropsValue={ this.$parent.internalCurrentPage }
               type="number"
               ref="input"
+              disabled={ this.$parent.disabled }
+              nativeOnKeyup={ this.handleKeyup }
               onChange={ this.handleChange }
               onFocus={ this.handleFocus }
               onBlur={ this.handleBlur }/>
@@ -275,16 +308,24 @@ export default {
   methods: {
     handleCurrentChange(val) {
       this.internalCurrentPage = this.getValidCurrentPage(val);
+      this.userChangePageSize = true;
+      this.emitChange();
     },
 
     prev() {
+      if (this.disabled) return;
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      this.$emit('prev-click', this.internalCurrentPage);
+      this.emitChange();
     },
 
     next() {
+      if (this.disabled) return;
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+      this.$emit('next-click', this.internalCurrentPage);
+      this.emitChange();
     },
 
     getValidCurrentPage(value) {
@@ -310,6 +351,16 @@ export default {
       }
 
       return resetValue === undefined ? value : resetValue;
+    },
+
+    emitChange() {
+      this.$nextTick(() => {
+        if (this.internalCurrentPage !== this.lastEmittedPage || this.userChangePageSize) {
+          this.$emit('current-change', this.internalCurrentPage);
+          this.lastEmittedPage = this.internalCurrentPage;
+          this.userChangePageSize = false;
+        }
+      });
     }
   },
 
@@ -335,31 +386,31 @@ export default {
     pageSize: {
       immediate: true,
       handler(val) {
-        this.internalPageSize = val;
+        this.internalPageSize = isNaN(val) ? 10 : val;
       }
     },
 
-    internalCurrentPage(newVal, oldVal) {
-      newVal = parseInt(newVal, 10);
+    internalCurrentPage: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        newVal = parseInt(newVal, 10);
 
-      /* istanbul ignore if */
-      if (isNaN(newVal)) {
-        newVal = oldVal || 1;
-      } else {
-        newVal = this.getValidCurrentPage(newVal);
-      }
+        /* istanbul ignore if */
+        if (isNaN(newVal)) {
+          newVal = oldVal || 1;
+        } else {
+          newVal = this.getValidCurrentPage(newVal);
+        }
 
-      if (newVal !== undefined) {
-        this.$nextTick(() => {
+        if (newVal !== undefined) {
           this.internalCurrentPage = newVal;
           if (oldVal !== newVal) {
             this.$emit('update:currentPage', newVal);
-            this.$emit('current-change', this.internalCurrentPage);
           }
-        });
-      } else {
-        this.$emit('update:currentPage', newVal);
-        this.$emit('current-change', this.internalCurrentPage);
+        } else {
+          this.$emit('update:currentPage', newVal);
+        }
+        this.lastEmittedPage = -1;
       }
     },
 
@@ -370,7 +421,9 @@ export default {
         this.internalCurrentPage = 1;
       } else if (oldPage > newVal) {
         this.internalCurrentPage = newVal === 0 ? 1 : newVal;
+        this.userChangePageSize && this.emitChange();
       }
+      this.userChangePageSize = false;
     }
   }
 };

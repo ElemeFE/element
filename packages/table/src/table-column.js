@@ -32,13 +32,16 @@ const defaults = {
 
 const forced = {
   selection: {
-    renderHeader: function(h) {
+    renderHeader: function(h, { store }) {
       return <el-checkbox
+        disabled={ store.states.data && store.states.data.length === 0 }
+        indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
         nativeOn-click={ this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
       return <el-checkbox
+        nativeOn-click={ (event) => event.stopPropagation() }
         value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
         on-input={ () => { store.commit('rowSelectedChanged', row); } } />;
@@ -71,7 +74,7 @@ const forced = {
     renderCell: function(h, { row, store }, proxy) {
       const expanded = store.states.expandRows.indexOf(row) > -1;
       return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
-        on-click={ () => proxy.handleExpandClick(row) }>
+        on-click={ e => proxy.handleExpandClick(row, e) }>
         <i class='el-icon el-icon-arrow-right'></i>
       </div>;
     },
@@ -104,13 +107,33 @@ const getDefaultColumn = function(type, options) {
   return column;
 };
 
-const DEFAULT_RENDER_CELL = function(h, { row, column }) {
+const DEFAULT_RENDER_CELL = function(h, { row, column, $index }) {
   const property = column.property;
   const value = property && getPropByPath(row, property).v;
   if (column && column.formatter) {
-    return column.formatter(row, column, value);
+    return column.formatter(row, column, value, $index);
   }
   return value;
+};
+
+const parseWidth = (width) => {
+  if (width !== undefined) {
+    width = parseInt(width, 10);
+    if (isNaN(width)) {
+      width = null;
+    }
+  }
+  return width;
+};
+
+const parseMinWidth = (minWidth) => {
+  if (minWidth !== undefined) {
+    minWidth = parseInt(minWidth, 10);
+    if (isNaN(minWidth)) {
+      minWidth = 80;
+    }
+  }
+  return minWidth;
 };
 
 export default {
@@ -157,7 +180,16 @@ export default {
       type: Boolean,
       default: true
     },
-    index: [Number, Function]
+    index: [Number, Function],
+    sortOrders: {
+      type: Array,
+      default() {
+        return ['ascending', 'descending', null];
+      },
+      validator(val) {
+        return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
+      }
+    }
   },
 
   data() {
@@ -202,25 +234,12 @@ export default {
     let parent = this.columnOrTableParent;
     let owner = this.owner;
     this.isSubColumn = owner !== parent;
-    this.columnId = (parent.tableId || (parent.columnId + '_')) + 'column_' + columnIdSeed++;
+    this.columnId = (parent.tableId || parent.columnId) + '_column_' + columnIdSeed++;
 
     let type = this.type;
 
-    let width = this.width;
-    if (width !== undefined) {
-      width = parseInt(width, 10);
-      if (isNaN(width)) {
-        width = null;
-      }
-    }
-
-    let minWidth = this.minWidth;
-    if (minWidth !== undefined) {
-      minWidth = parseInt(minWidth, 10);
-      if (isNaN(minWidth)) {
-        minWidth = 80;
-      }
-    }
+    const width = parseWidth(this.width);
+    const minWidth = parseMinWidth(this.minWidth);
 
     let isColumnGroup = false;
 
@@ -256,7 +275,8 @@ export default {
       filterOpened: false,
       filteredValue: this.filteredValue || [],
       filterPlacement: this.filterPlacement || '',
-      index: this.index
+      index: this.index,
+      sortOrders: this.sortOrders
     });
 
     objectAssign(column, forced[type] || {});
@@ -290,14 +310,15 @@ export default {
       }
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <div class="cell el-tooltip" style={{width: (data.column.realWidth || data.column.width) + 'px'}}>{ renderCell(h, data) }</div>
+        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
   },
 
   destroyed() {
     if (!this.$parent) return;
-    this.owner.store.commit('removeColumn', this.columnConfig);
+    const parent = this.$parent;
+    this.owner.store.commit('removeColumn', this.columnConfig, this.isSubColumn ? parent.columnConfig : null);
   },
 
   watch: {
@@ -349,14 +370,14 @@ export default {
 
     width(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.width = newVal;
+        this.columnConfig.width = parseWidth(newVal);
         this.owner.store.scheduleLayout();
       }
     },
 
     minWidth(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.minWidth = newVal;
+        this.columnConfig.minWidth = parseMinWidth(newVal);
         this.owner.store.scheduleLayout();
       }
     },
@@ -364,7 +385,7 @@ export default {
     fixed(newVal) {
       if (this.columnConfig) {
         this.columnConfig.fixed = newVal;
-        this.owner.store.scheduleLayout();
+        this.owner.store.scheduleLayout(true);
       }
     },
 
@@ -377,6 +398,24 @@ export default {
     index(newVal) {
       if (this.columnConfig) {
         this.columnConfig.index = newVal;
+      }
+    },
+
+    formatter(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.formatter = newVal;
+      }
+    },
+
+    className(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.className = newVal;
+      }
+    },
+
+    labelClassName(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.labelClassName = newVal;
       }
     }
   },

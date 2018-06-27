@@ -19,10 +19,14 @@
       margin: 10px 0 5px;
     }
   }
-  .sponsor {
-    margin: 0 auto 50px;
+  .sponsors {
     display: flex;
-    width: 400px;
+    justify-content: center;
+  }
+  .sponsor {
+    margin: 0 20px 50px;
+    display: inline-flex;
+    width: 300px;
     height: 100px;
     justify-content: center;
 
@@ -284,13 +288,29 @@
         <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
       </div>
     </div>
-    <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank">
-      <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
-      <div>
-        <p>Sponsored by Tipe.io</p>
-        <p>Next Generation API-first CMS</p>
-      </div>
-    </a>
+    <div class="sponsors">
+      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
+        <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
+        <div>
+          <p>Sponsored by Tipe.io</p>
+          <p>Next Generation API-first CMS</p>
+        </div>
+      </a>
+      <a class="sponsor" href="https://www.duotai.net/?utm_source=element" target="_blank">
+        <img width="42px" src="~examples/assets/images/duotai.svg" alt="duotai">
+        <div>
+          <p>Sponsored by 多态</p>
+          <p>多元化的数据收集和整理工具</p>
+        </div>
+      </a>
+      <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
+        <img width="45px" src="~examples/assets/images/duohui.svg" alt="duohui">
+        <div>
+          <p>Sponsored by 多会</p>
+          <p>炫酷的新一代活动票务系统</p>
+        </div>
+      </a>
+    </div>
     <div class="cards">
       <ul class="container">
         <li>
@@ -337,6 +357,11 @@
   import { Hover } from 'perspective.js';
 
   export default {
+    data() {
+      return {
+        lang: this.$route.meta.lang
+      };
+    },
     mounted() {
       new Hover('.jumbotron', { // eslint-disable-line
         max: 3,

@@ -33,7 +33,6 @@
       font-size: $--select-input-font-size;
       transition: transform .3s;
       transform: rotateZ(180deg);
-      line-height: 16px;
       cursor: pointer;
 
       @include when(reverse) {
@@ -80,7 +79,6 @@
     margin-left: 15px;
     color: $--select-multiple-input-color;
     font-size: $--select-font-size;
-    vertical-align: middle;
     appearance: none;
     height: 28px;
     background-color: transparent;
@@ -111,6 +109,9 @@
     z-index: $--index-normal;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   .el-tag__close {
@@ -120,7 +121,7 @@
   .el-tag {
     box-sizing: border-box;
     border-color: transparent;
-    margin: 3px 0 3px 6px;
+    margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
 
     &__close.el-icon-close {

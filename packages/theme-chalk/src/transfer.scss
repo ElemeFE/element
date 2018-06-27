@@ -66,6 +66,7 @@
   display: inline-block;
   vertical-align: middle;
   width: $--transfer-panel-width;
+  max-height: 100%;
   box-sizing: border-box;
   position: relative;
 
@@ -206,6 +207,7 @@
     line-height: $--transfer-item-height;
     padding: 6px 15px 0;
     color: $--color-text-secondary;
+    text-align: center;
   }
 
   .el-checkbox__label {

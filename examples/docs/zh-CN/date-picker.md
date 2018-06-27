@@ -66,7 +66,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: ''
+        value13: [],
+        value14: []
       };
     }
   };
@@ -76,6 +77,7 @@
   .demo-block.demo-date-picker .source {
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
   }
 
   .demo-date-picker .block {
@@ -83,6 +85,20 @@
     text-align: center;
     border-right: solid 1px #EFF2F6;
     flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  
+  .demo-date-picker .container {
+    flex: 1;
+    border-right: solid 1px #EFF2F6;
+    .block {
+      border-right: none;
+      &:last-child {
+        border-top: solid 1px #EFF2F6;
+      }
+    }
     &:last-child {
       border-right: none;
     }
@@ -167,35 +183,46 @@
 
 ###  其他日期单位
 
-通过扩展基础的日期选择，可以选择周、月、年
+通过扩展基础的日期选择，可以选择周、月、年或多个日期
 
 :::demo
 ```html
-<div class="block">
-  <span class="demonstration">周</span>
-  <el-date-picker
-    v-model="value3"
-    type="week"
-    format="yyyy 第 WW 周"
-    placeholder="选择周">
-  </el-date-picker>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">周</span>
+    <el-date-picker
+      v-model="value3"
+      type="week"
+      format="yyyy 第 WW 周"
+      placeholder="选择周">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">月</span>
+    <el-date-picker
+      v-model="value4"
+      type="month"
+      placeholder="选择月">
+    </el-date-picker>
+  </div>
 </div>
-<div class="block">
-  <span class="demonstration">月</span>
-  <el-date-picker
-    v-model="value4"
-    type="month"
-    placeholder="选择月">
-  </el-date-picker>
-</div>
-<div class="block">
-  <span class="demonstration">年</span>
-  <el-date-picker
-    v-model="value5"
-    align="right"
-    type="year"
-    placeholder="选择年">
-  </el-date-picker>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">年</span>
+    <el-date-picker
+      v-model="value5"
+      type="year"
+      placeholder="选择年">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">多个日期</span>
+    <el-date-picker
+      type="dates"
+      v-model="value14"
+      placeholder="选择一个或多个日期">
+    </el-date-picker>
+  </div>
 </div>
 
 <script>
@@ -204,7 +231,8 @@
       return {
         value3: '',
         value4: '',
-        value5: ''
+        value5: '',
+        value14: []
       };
     }
   };
@@ -221,6 +249,7 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
+    {{value6}}
     <el-date-picker
       v-model="value6"
       type="daterange"
@@ -284,107 +313,43 @@
 ```
 :::
 
-###  默认显示日期
+###  日期格式
 
-未选择日期时，默认显示今天的日历。使用`default-value`可以指定其他日期，该值需要能够被`new Date()`解析。
-类型为`daterange`时，指定左侧日历的日期。
+使用`format`指定输入框的格式；使用`value-format`指定绑定值的格式。
 
-:::demo
-```html
-<template>
-  <div class="block">
-    <span class="demonstration">date</span>
-    <el-date-picker
-      v-model="value8"
-      type="date"
-      placeholder="选择日期"
-      default-value="2010-10-01">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">daterange</span>
-    <el-date-picker
-      v-model="value9"
-      type="daterange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      default-value="2010-10-01">
-    </el-date-picker>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value8: '',
-        value9: ''
-      };
-    }
-  };
-</script>
-```
-:::
-
-###  默认的起始与结束时刻
-
-使用类型`datetimerange`选择时间范围时，在日期选择面板中选定起始与结束的日期，默认会使用该日期的`00:00:00`作为起始与结束的时刻；通过选项`default-time`可以控制选中起始与结束日期时所使用的具体时刻。
-
-`default-time`接受一个数组，数组每项值为字符串，形如`12:00:00`，其中第一项控制起始日期的具体时刻，第二项控制结束日期的具体时刻。
-
-:::demo
-```html
-<template>
-  <div class="block">
-    <span class="demonstration">起始日期时刻为 12:00:00</span>
-    <el-date-picker
-      v-model="value12"
-      type="datetimerange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :default-time="['12:00:00']">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">起始日期时刻为 12:00:00，结束日期时刻为 08:00:00</span>
-    <el-date-picker
-      v-model="value13"
-      type="datetimerange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :default-time="['12:00:00', '08:00:00']">
-    </el-date-picker>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value12: '',
-        value13: ''
-      };
-    }
-  };
-</script>
-```
-:::
-
-###  返回值格式
-
-默认情况下，组件接受并返回`Date`对象。
-使用`value-format`指定返回值的格式，支持的格式与`format`相同。
+默认情况下，组件接受并返回`Date`对象。以下为可用的格式化字串，以 UTC 2017年1月2日 03:04:05 为例：
 
 :::warning
-该功能处于测试阶段，欢迎提供反馈。
+请注意大小写
 :::
+
+| 格式 | 含义 | 备注 | 举例 |
+|------|------|------|------|------|
+| `yyyy` | 年 | | 2017 |
+| `M`  | 月 | 不补0 | 1 |
+| `MM` | 月 | | 01 |
+| `W`  | 周 | 仅周选择器的 `format` 可用；不补0 | 1 |
+| `WW` | 周 | 仅周选择器的 `format` 可用 | 01 |
+| `d`  | 日 | 不补0 | 2 |
+| `dd` | 日 | | 02 |
+| `H`  | 小时 | 24小时制；不补0 | 3 |
+| `HH` | 小时 | 24小时制 | 03 |
+| `h`  | 小时 | 12小时制，须和 `A` 或 `a` 使用；不补0 | 3 |
+| `hh` | 小时 | 12小时制，须和 `A` 或 `a` 使用 | 03 |
+| `m`  | 分钟 | 不补0 | 4 |
+| `mm` | 分钟 | | 04 |
+| `s`  | 秒 | 不补0 | 5 |
+| `ss` | 秒 | | 05 |
+| `A`  | AM/PM | 仅 `format` 可用，大写 | AM |
+| `a`  | am/pm | 仅 `format` 可用，小写 | am |
+| `timestamp` | JS时间戳 | 仅 `value-format` 可用；组件绑定值为`number`类型 | 1483326245000 |
 
 :::demo
 ```html
 <template>
   <div class="block">
     <span class="demonstration">默认为 Date 对象</span>
-    <div class="demonstration">组件值：{{ value10 }}</div>
+    <div class="demonstration">值：{{ value10 }}</div>
     <el-date-picker
       v-model="value10"
       type="date"
@@ -393,14 +358,25 @@
     </el-date-picker>
   </div>
   <div class="block">
-    <span class="demonstration">使用 value-format 进行格式化</span>
-    <div class="demonstration">组件值：{{ value11 }}</div>
+    <span class="demonstration">使用 value-format</span>
+    <div class="demonstration">值：{{ value11 }}</div>
     <el-date-picker
       v-model="value11"
       type="date"
       placeholder="选择日期"
       format="yyyy 年 MM 月 dd 日"
       value-format="yyyy-MM-dd">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">时间戳</span>
+    <div class="demonstration">值：{{ value12 }}</div>
+    <el-date-picker
+      v-model="value12"
+      type="date"
+      placeholder="选择日期"
+      format="yyyy 年 MM 月 dd 日"
+      value-format="timestamp">
     </el-date-picker>
   </div>
 </template>
@@ -411,6 +387,38 @@
       return {
         value10: '',
         value11: '',
+        value12: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+###  默认显示日期
+
+在选择日期范围时，指定起始日期和结束日期的默认时刻。
+
+:::demo 选择日期范围时，默认情况下，起始日期和结束日期的时间部分均为当天的 0 点 0 分 0 秒。通过`default-time`可以分别指定二者的具体时刻。`default-time`接受一个数组，其中的值为形如`12:00:00`的字符串，第一个值控制起始日期的时刻，第二个值控制结束日期的时刻。
+```html
+<template>
+  <div class="block">
+    <p>组件值：{{ value13 }}</p>
+    <el-date-picker
+      v-model="value13"
+      type="daterange"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      :default-time="['00:00:00', '23:59:59']">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value13: []
       };
     }
   };
@@ -429,15 +437,15 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
-| format | 显示在输入框中的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | yyyy-MM-dd |
+| type | 显示类型 | string | year/month/date/dates/ week/datetime/datetimerange/daterange | date |
+| format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | — | '-' |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
-| default-time | 可选，选择器 type 为 `datetimerange`，范围选择选中日期时所使用的当日内具体时刻 | string[] | 数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
-| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | — |
+| default-time | 范围选择时选中日期所使用的当日内具体时刻 | string[] | 数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
+| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 | prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |

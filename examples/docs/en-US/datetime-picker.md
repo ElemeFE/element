@@ -53,20 +53,11 @@
         },
         value1: '',
         value2: '',
-        value3: new Date(),
-        value4: '',
+        value3: '',
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: '',
         value6: '',
-        value7: '',
-        value8: '',
-        value9: '',
-        value10: '',
-        value11: '',
-        value12: '',
-        value13: '',
-        value14: '',
-        value15: '',
-        value16: ''
+        value7: ''
       };
     }
   };
@@ -127,6 +118,15 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       :picker-options="pickerOptions1">
     </el-date-picker>
   </div>
+  <div class="block">
+    <span class="demonstration">With default time</span>
+    <el-date-picker
+      v-model="value3"
+      type="datetime"
+      placeholder="Select date and time"
+      default-time="12:00:00">
+    </el-date-picker>
+  </div>
 </template>
 
 <script>
@@ -156,7 +156,8 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
           }]
         },
         value1: '',
-        value2: ''
+        value2: '',
+        value3: ''
       };
     }
   };
@@ -173,7 +174,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value3"
+      v-model="value4"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
@@ -183,7 +184,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
   <div class="block">
     <span class="demonstration">With shortcuts</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value5"
       type="datetimerange"
       :picker-options="pickerOptions2"
       range-separator="To"
@@ -225,8 +226,49 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
             }
           }]
         },
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value4: ''
+        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value5: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+###  Default time value for start date and end date
+
+:::demo When picking date range on the date panel with type `datetimerange`, `00:00:00` will be used as the default time value for start and end date. We can control it with the `default-time` attribute. `default-time` accepts an array of up to two strings. The first item controls time value of the start date and the second item controls time value of the end date.
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Start date time 12:00:00</span>
+    <el-date-picker
+      v-model="value6"
+      type="datetimerange"
+      start-placeholder="Start Date"
+      end-placeholder="End Date"
+      :default-time="['12:00:00']">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
+    <el-date-picker
+      v-model="value7"
+      type="datetimerange"
+      align="right"
+      start-placeholder="Start Date"
+      end-placeholder="End Date"
+      :default-time="['12:00:00', '08:00:00']">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -247,13 +289,14 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
 | time-arrow-control | whether to pick time using arrow buttons | boolean | — | false |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | yyyy-MM-dd |
+| format | format of the displayed value in the input box | string | see [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd HH:mm:ss |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
+| default-time | the default time value after picking a date | non-range: string / range: string[] | non-range: a string like `12:00:00`, range: array of two strings, and the first item is for the start date and second for the end date. `00:00:00` will be used if not specified | — |
+| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
 | prefix-icon | Custom prefix icon class | string | — | el-icon-date |

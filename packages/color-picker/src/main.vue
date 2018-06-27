@@ -2,11 +2,11 @@
   <div
     :class="[
       'el-color-picker',
-      disabled ? 'is-disabled' : '',
+      colorDisabled ? 'is-disabled' : '',
       colorSize ? `el-color-picker--${ colorSize }` : ''
     ]"
     v-clickoutside="hide">
-    <div class="el-color-picker__mask" v-if="disabled"></div>
+    <div class="el-color-picker__mask" v-if="colorDisabled"></div>
     <div class="el-color-picker__trigger" @click="handleTrigger">
       <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
         <span class="el-color-picker__color-inner"
@@ -24,7 +24,8 @@
        @pick="confirmValue"
        @clear="clearValue"
        :color="color"
-       :show-alpha="showAlpha">
+       :show-alpha="showAlpha"
+       :predefine="predefine">
     </picker-dropdown>
   </div>
 </template>
@@ -43,10 +44,14 @@
       colorFormat: String,
       disabled: Boolean,
       size: String,
-      popperClass: String
+      popperClass: String,
+      predefine: Array
     },
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -58,12 +63,9 @@
       displayedColor() {
         if (!this.value && !this.showPanelColor) {
           return 'transparent';
-        } else {
-          const { r, g, b } = this.color.toRgb();
-          return this.showAlpha
-            ? `rgba(${ r }, ${ g }, ${ b }, ${ this.color.get('alpha') / 100 })`
-            : `rgb(${ r }, ${ g }, ${ b })`;
         }
+
+        return this.displayedRgb(this.color, this.showAlpha);
       },
 
       _elFormItemSize() {
@@ -72,6 +74,10 @@
 
       colorSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+
+      colorDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
 
@@ -90,13 +96,23 @@
         }
       },
       displayedColor(val) {
-        this.$emit('active-change', val);
+        if (!this.showPicker) return;
+        const currentValueColor = new Color({
+          enableAlpha: this.showAlpha,
+          format: this.colorFormat
+        });
+        currentValueColor.fromString(this.value);
+
+        const currentValueColorRgb = this.displayedRgb(currentValueColor, this.showAlpha);
+        if (val !== currentValueColorRgb) {
+          this.$emit('active-change', val);
+        }
       }
     },
 
     methods: {
       handleTrigger() {
-        if (this.disabled) return;
+        if (this.colorDisabled) return;
         this.showPicker = !this.showPicker;
       },
       confirmValue(value) {
@@ -123,6 +139,16 @@
             this.showPanelColor = false;
           }
         });
+      },
+      displayedRgb(color, showAlpha) {
+        if (!(color instanceof Color)) {
+          throw Error('color should be instance of Color Class');
+        }
+
+        const { r, g, b } = color.toRgb();
+        return showAlpha
+          ? `rgba(${ r }, ${ g }, ${ b }, ${ color.get('alpha') / 100 })`
+          : `rgb(${ r }, ${ g }, ${ b })`;
       }
     },
 

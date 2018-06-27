@@ -1,5 +1,6 @@
 import { ElementUIComponent } from './component'
-import { IconClickEventHandler } from './input'
+
+export type SuggestionPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
 
 export interface FetchSuggestionsCallback {
   /**
@@ -34,6 +35,9 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** Debounce delay when typing */
   debounce: number
 
+  /** Placement of the popup menu */
+  placement: SuggestionPlacement
+
   /** Name for the inner native input */
   name: string
 
@@ -51,4 +55,18 @@ export declare class ElAutocomplete extends ElementUIComponent {
 
   /** Whether show suggestions when input focus */
   triggerOnFocus: boolean
+
+  /** Prefix icon class */
+  prefixIcon: string
+
+  /** Suffix icon class */
+  suffixIcon: string
+
+  /** Whether to hide the loading icon in remote search */
+  hideLoading: boolean
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }

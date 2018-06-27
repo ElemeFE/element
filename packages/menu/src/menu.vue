@@ -1,19 +1,4 @@
-<template>
-  <el-menu-collapse-transition>
-    <ul class="el-menu"
-      :key="+collapse"
-      :style="{ backgroundColor: backgroundColor || '' }"
-      :class="{
-        'el-menu--horizontal': mode === 'horizontal',
-        'el-menu--collapse': collapse
-      }"
-      role="menubar"
-    >
-      <slot></slot>
-    </ul>
-  </el-menu-collapse-transition>
-</template>
-<script>
+<script type="text/jsx">
   import emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import Menubar from 'element-ui/src/utils/menu/aria-menubar';
@@ -21,6 +6,33 @@
 
   export default {
     name: 'ElMenu',
+
+    render (h) {
+      const component = (
+        <ul
+          role="menubar"
+          key={ +this.collapse }
+          style={{ backgroundColor: this.backgroundColor || '' }}
+          class={{
+            'el-menu--horizontal': this.mode === 'horizontal',
+            'el-menu--collapse': this.collapse,
+            "el-menu": true
+          }}
+        >
+          { this.$slots.default }
+        </ul>
+      );
+
+      if (this.collapseTransition) {
+        return (
+          <el-menu-collapse-transition>
+            { component }
+          </el-menu-collapse-transition>
+        );
+      } else {
+        return component;
+      }
+    },
 
     componentName: 'ElMenu',
 
@@ -61,8 +73,13 @@
                 if (hasClass(el, 'el-menu--collapse')) {
                   removeClass(el, 'el-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
-                  el.dataset.scrollWidth = el.scrollWidth;
+                  el.dataset.scrollWidth = el.clientWidth;
                   addClass(el, 'el-menu--collapse');
+                } else {
+                  addClass(el, 'el-menu--collapse');
+                  el.dataset.oldOverflow = el.style.overflow;
+                  el.dataset.scrollWidth = el.clientWidth;
+                  removeClass(el, 'el-menu--collapse');
                 }
 
                 el.style.width = el.scrollWidth + 'px';
@@ -70,23 +87,8 @@
               },
 
               leave(el) {
-                if (!hasClass(el, 'el-menu--collapse')) {
-                  addClass(el, 'horizontal-collapse-transition');
-                  el.style.width = '64px';
-                } else {
-                  addClass(el, 'horizontal-collapse-transition');
-                  el.style.width = el.dataset.scrollWidth + 'px';
-                }
-              },
-
-              afterLeave(el) {
-                removeClass(el, 'horizontal-collapse-transition');
-                if (hasClass(el, 'el-menu--collapse')) {
-                  el.style.width = el.dataset.scrollWidth + 'px';
-                } else {
-                  el.style.width = '64px';
-                }
-                el.style.overflow = el.dataset.oldOverflow;
+                addClass(el, 'horizontal-collapse-transition');
+                el.style.width = el.dataset.scrollWidth + 'px';
               }
             }
           };
@@ -114,7 +116,11 @@
       collapse: Boolean,
       backgroundColor: String,
       textColor: String,
-      activeTextColor: String
+      activeTextColor: String,
+      collapseTransition: {
+        type: Boolean,
+        default: true
+      }
     },
     data() {
       return {
@@ -127,6 +133,9 @@
     computed: {
       hoverBackground() {
         return this.backgroundColor ? this.mixColor(this.backgroundColor, 0.2) : '';
+      },
+      isMenuPopup() {
+        return this.mode === 'horizontal' || (this.mode === 'vertical' && this.collapse);
       }
     },
     watch: {
@@ -140,6 +149,7 @@
 
       collapse(value) {
         if (value) this.openedMenus = [];
+        this.broadcast('ElSubmenu', 'toggle-collapse', value);
       }
     },
     methods: {
@@ -239,7 +249,9 @@
         }
       },
       handleItemClick(item) {
-        let { index, indexPath } = item;
+        const { index, indexPath } = item;
+        const oldActiveIndex = this.activeIndex;
+
         this.activeIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
@@ -248,7 +260,10 @@
         }
 
         if (this.router) {
-          this.routeToItem(item);
+          this.routeToItem(item, (error) => {
+            this.activeIndex = oldActiveIndex;
+            if (error) console.error(error);
+          });
         }
       },
       // 初始化展开菜单
@@ -267,10 +282,10 @@
           submenu && this.openMenu(index, submenu.indexPath);
         });
       },
-      routeToItem(item) {
+      routeToItem(item, onError) {
         let route = item.route || item.index;
         try {
-          this.$router.push(route);
+          this.$router.push(route, () => {}, onError);
         } catch (e) {
           console.error(e);
         }

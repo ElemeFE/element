@@ -24,7 +24,7 @@ Selección única entre múltiples opciones.
 ### Uso básico
 El elemento Radio no debe tener muchas opciones. De otra manera, utilice el componente Select.
 
-:::Demo Crear un elemento Radio es fácil, solo necesita enlazar(`bind`) una variable a la directiva `v-model` del Radio. Va a ser igual al valor `label` del Radio seleccionado. El tipo de dato de `label` es `String`, `Number` o `Boolean`.
+:::demo Crear un elemento Radio es fácil, solo necesita enlazar(`bind`) una variable a la directiva `v-model` del Radio. Va a ser igual al valor `label` del Radio seleccionado. El tipo de dato de `label` es `String`, `Number` o `Boolean`.
 ```html
 <template>
   <el-radio v-model="radio" label="1">Option A</el-radio>

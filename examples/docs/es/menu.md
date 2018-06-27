@@ -69,8 +69,15 @@ Top bar NavMenu puede ser usado en distinto escenarios.
     <el-menu-item index="2-1">item one</el-menu-item>
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">item four</template>
+      <el-menu-item index="2-4-1">item one</el-menu-item>
+      <el-menu-item index="2-4-2">item two</el-menu-item>
+      <el-menu-item index="2-4-3">item three</el-menu-item>
+    </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+  <el-menu-item index="3" disabled>Info</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu
@@ -87,8 +94,15 @@ Top bar NavMenu puede ser usado en distinto escenarios.
     <el-menu-item index="2-1">item one</el-menu-item>
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">item four</template>
+      <el-menu-item index="2-4-1">item one</el-menu-item>
+      <el-menu-item index="2-4-2">item two</el-menu-item>
+      <el-menu-item index="2-4-3">item three</el-menu-item>
+    </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+  <el-menu-item index="3" disabled>Info</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 
 <script>
@@ -145,9 +159,13 @@ NavMenu vertical con sub-menús.
         <i class="el-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span>Navigator Three</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span>Navigator Four</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -182,9 +200,13 @@ NavMenu vertical con sub-menús.
         <i class="el-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span>Navigator Three</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span>Navigator Four</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -238,9 +260,13 @@ NavMenu vertical puede ser colapsado.
     <i class="el-icon-menu"></i>
     <span slot="title">Navigator Two</span>
   </el-menu-item>
-  <el-menu-item index="3">
-    <i class="el-icon-setting"></i>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
     <span slot="title">Navigator Three</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">Navigator Four</span>
   </el-menu-item>
 </el-menu>
 
@@ -284,6 +310,7 @@ NavMenu vertical puede ser colapsado.
 | unique-opened     | si solo un submenu puede ser activo      | boolean | —                     | false       |
 | menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | —                     | hover       |
 | router            | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
+| collapse-transition  | si se debe permitir collapse transition | boolean   | — | true   |
 
 ### Métodos Menu 
 | Nombre de evento | Descripción                   | Parámetros                             |
@@ -307,14 +334,18 @@ NavMenu vertical puede ser colapsado.
 | Atributo     | Descripción                              | Tipo   | Valores aceptados | Por defecto |
 | ------------ | ---------------------------------------- | ------ | ----------------- | ----------- |
 | index        | identificador único                      | string | —                 | —           |
+| popper-class | nombre personalizado de la clase del menu popup | string | —                 | —           |
 | show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
 | hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |
+| disabled | si esta `disabled` el sub-menu | boolean | — | false |
+| popper-append-to-body | si se debe agregar el menú emergente al cuerpo. Si la posición del menú es incorrecta, puede intentar ajustar este prop | boolean | - | level one Submenu: true / other Submenus: false |
 
 ### Atributos Menu-Item 
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
 | -------- | ------------------- | ------ | ----------------- | ----------- |
 | index    | identificador único | string | —                 | —           |
 | route    | Objeto Vue Router   | object | —                 | —           |
+| disabled | si esta `disabled` | boolean | — | false |
 
 ### Atributos Menu-Group 
 | Atributo | Descripción      | Tipo   | Valores aceptados | Por defecto |

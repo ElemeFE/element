@@ -39,7 +39,7 @@ describe('Progress', () => {
     expect(vm.$refs.lineSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.lineSuccess.$el.querySelector('.el-progress__text .el-icon-circle-check')).to.be.exist;
     expect(vm.$refs.lineException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-cross')).to.be.exist;
+    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-close')).to.be.exist;
 
     expect(vm.$refs.circleSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.circleSuccess.$el.querySelector('.el-progress__text .el-icon-check')).to.be.exist;
@@ -94,5 +94,13 @@ describe('Progress', () => {
       `
     }, true);
     expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(12);
+  });
+  it('color', () => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="50" color="rgb(0, 0, 0)"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(0, 0, 0)');
   });
 });

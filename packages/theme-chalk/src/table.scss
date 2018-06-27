@@ -70,7 +70,7 @@
     }
 
     &:hover {
-      background-color: $--table-row-hover-background !important;
+      background-color: transparent !important;
     }
   }
 
@@ -80,6 +80,18 @@
 
     th.gutter, td.gutter {
       border-right-width: 1px;
+    }
+  }
+
+  @include m(scrollable-x) {
+    .el-table__body-wrapper {
+      overflow-x: auto;
+    }
+  }
+
+  @include m(scrollable-y) {
+    .el-table__body-wrapper {
+      overflow-y: auto;
     }
   }
 
@@ -241,7 +253,7 @@
     @include share-rule(border-pseudo) {
       content: '';
       position: absolute;
-      background-color: $--border-color-lighter;
+      background-color: $--table-border-color;
       z-index: 1;
     }
 
@@ -269,17 +281,15 @@
     border-right: none;
     border-bottom: none;
 
+    &.el-loading-parent--relative {
+      border-color: transparent;
+    }
+
     th, td {
       border-right: $--table-border;
 
       &:first-child .cell {
         padding-left: 10px;
-      }
-    }
-
-    .has-gutter {
-      th:nth-last-of-type(2), td:nth-last-of-type(2) {
-        border-right: none;
       }
     }
 
@@ -302,6 +312,7 @@
     top: 0;
     left: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
     box-shadow: $--table-fixed-box-shadow;
 
     &::before {
@@ -378,6 +389,7 @@
 
   @include e((header, body, footer)) {
     table-layout: fixed;
+    border-collapse: separate;
   }
 
   @include e((header-wrapper, footer-wrapper)) {
@@ -390,36 +402,36 @@
   }
 
   @include e(body-wrapper) {
-    overflow: auto;
+    overflow: hidden;
     position: relative;
 
-    @include when(scroll-none) {
+    @include when(scrolling-none) {
       ~ .el-table__fixed,
       ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    @include when(scroll-left) {
+    @include when(scrolling-left) {
       ~ .el-table__fixed {
         box-shadow: none;
       }
     }
 
-    @include when(scroll-right) {
+    @include when(scrolling-right) {
       ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
     .el-table--border {
-      @include when(scroll-right) {
+      @include when(scrolling-right) {
         ~ .el-table__fixed-right {
           border-left: $--table-border;
         }
       }
 
-      @include when(scroll-left) {
+      @include when(scrolling-left) {
         ~ .el-table__fixed {
           border-right: $--table-border;
         }
