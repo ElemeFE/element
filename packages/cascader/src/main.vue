@@ -19,7 +19,7 @@
   >
     <el-input
       ref="input"
-      :readonly="!(filterable && menuVisible)"
+      :readonly="readonly"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
@@ -220,6 +220,10 @@ export default {
     },
     cascaderDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
+    },
+    readonly() {
+      const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
+      return !this.filterable || (!isIE && !this.menuVisible);
     }
   },
 
