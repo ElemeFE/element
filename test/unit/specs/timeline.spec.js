@@ -219,7 +219,7 @@ describe('Timeline', () => {
         <el-timeline>
           <el-timeline-item
             timestamp="2018-04-11"
-            icon="more">
+            icon="el-icon-more">
             创建成功
           </el-timeline-item>
         </el-timeline>
