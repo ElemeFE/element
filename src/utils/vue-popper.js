@@ -272,6 +272,7 @@ export function customerPopper(attrs) {
     }, {});
   }
 }
+
 export default objectAssign({}, BasePopper, {
   watch: {
     value: {

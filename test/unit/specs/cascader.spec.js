@@ -357,10 +357,9 @@ describe('Cascader', () => {
       expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
       const menu = vm.$refs.cascader.menu;
       const menuElm = menu.$el;
-      const item1 = menuElm.children[1].querySelector('.el-cascader-menu__item');
-      const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
-      const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
-
+      const item1 = menuElm.children[0].querySelector('.el-cascader-menu__item');
+      const item2 = menuElm.children[1].querySelector('.el-cascader-menu__item');
+      const item3 = menuElm.children[2].querySelector('.el-cascader-menu__item');
       expect(menuElm.children.length).to.be.equal(4);
       expect(item1.classList.contains('is-active')).to.be.true;
       expect(item2.classList.contains('is-active')).to.be.true;
@@ -668,7 +667,7 @@ describe('Cascader', () => {
         const item1 = menuElm.querySelector('.el-cascader-menu__item');
 
         expect(menuElm.children.length).to.be.equal(2);
-        expect(menuElm.children[1].children.length).to.be.equal(3);
+        expect(menuElm.children[0].children.length).to.be.equal(3);
 
         item1.click();
 

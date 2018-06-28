@@ -4,8 +4,8 @@ import { createTest } from '../util';
 const Popper = Object.assign({}, VuePopper, {
   template: `
   <div style="padding: 100px; height: 100px; width: 100px;">
-    <div ref="popper">popper</div>
-    <div ref="reference">reference</div>
+    <div ref="reference"></div>
+    <div ref="popper"></div>
   </div>
   `
 });
@@ -17,6 +17,11 @@ const CleanPopper = Object.assign({}, VuePopper, {
 });
 
 describe('Utils:VuePopper', () => {
+
+  function describeVm(vm) {
+    vm.doDestroy();
+  }
+
   it('set popper not reference', () => {
     const vm = createTest(CleanPopper, {
       popper: document.createElement('div')
@@ -49,10 +54,11 @@ describe('Utils:VuePopper', () => {
   });
 
   it('createPopper', (done) => {
-    const vm = createTest(Popper, { placement: 'top' });
+    const vm = createTest(Popper, { placement: 'top' }, true);
     vm.createPopper();
     setTimeout(() => {
       expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
+      describeVm(vm);
       done();
     }, 10);
   });
@@ -131,10 +137,11 @@ describe('Utils:VuePopper', () => {
   it('resetTransformOrigin', (done) => {
     const vm = createTest(Popper, {
       placement: 'left'
-    });
+    }, true);
     vm.createPopper();
     setTimeout(() => {
       expect(vm.popperElm.style.transformOrigin).to.include('right center');
+      describeVm(vm);
       done();
     }, 10);
   });
