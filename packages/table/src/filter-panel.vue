@@ -179,7 +179,6 @@
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
       this.table.bodyWrapper.addEventListener('scroll', () => {
-        // TODO: 确认一下看看这里能否调整一下
         this.updatePopper();
       });
 

@@ -224,7 +224,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  offset        |  popover offset  | number           | — |  0 |
 |  transition     |  popover transition animation      | string             | — | el-fade-in-linear |
 |  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
-|  popper-options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{modifiers: { computeStyle: { gpuAcceleration: false }}}` |
+|  popper-options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ modifiers: { computeStyle: { gpuAcceleration: false }}}` |
 |  popper-class        |  custom class name for popover | string | — | — |
 |  open-delay        | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
 

@@ -380,7 +380,10 @@ export default {
         };
       }
     },
-    transformOrigin: false
+    transformOrigin: {
+      type: [Boolean, String],
+      default: false
+    }
   },
 
   components: { ElInput },

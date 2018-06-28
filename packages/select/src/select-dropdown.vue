@@ -26,8 +26,10 @@
         type: Object,
         default() {
           return {
-            preventOverflow: {
-              padding: 0
+            modifiers: {
+              preventOverflow: {
+                padding: 0
+              }
             }
           };
         }
