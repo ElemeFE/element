@@ -736,6 +736,7 @@
             this.menuVisibleOnFocus = false;
           } else {
             this.visible = !this.visible;
+            this.setSoftFocus();
           }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
