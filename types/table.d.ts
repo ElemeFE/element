@@ -61,7 +61,7 @@ export declare class ElTable extends ElementUIComponent {
   /** Function that returns custom class names for a row, or a string assigning class names for every row */
   rowClassName: string | ((param: rowCallbackParams) => string)
 
-  /** Function that returns custom style for a row, or a string assigning custom style for every row */
+  /** Function that returns custom style for a row, or an object assigning custom style for every row */
   rowStyle: object | ((param: rowCallbackParams) => object)
 
   /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
