@@ -1,7 +1,7 @@
 import objectAssign from 'element-ui/src/utils/merge';
 import deepmerge from 'deepmerge';
 import { PopupManager } from 'element-ui/src/utils/popup';
-import PopperUtils from 'popper.js/dist/popper-utils';
+import PopperUtils from 'popper.js/dist/esm/popper-utils';
 import PopperJS from 'popper.js';
 
 const stop = e => e.stopPropagation();
