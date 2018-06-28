@@ -62,25 +62,25 @@ export declare class ElTable extends ElementUIComponent {
   rowClassName: string | ((param: rowCallbackParams) => string)
 
   /** Function that returns custom style for a row, or a string assigning custom style for every row */
-  rowStyle: string | object | ((param: rowCallbackParams) => object)
+  rowStyle: object | ((param: rowCallbackParams) => object)
 
   /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
   cellClassName: string | ((param: cellCallbackParams) => string)
 
   /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
-  cellStyle: string | object | ((param: cellCallbackParams) => object)
+  cellStyle: object | ((param: cellCallbackParams) => object)
 
   /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
   headerRowClassName: string | ((param: rowCallbackParams) => string)
 
   /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
-  headerRowStyle: string | object | ((param: rowCallbackParams) => object)
+  headerRowStyle: object | ((param: rowCallbackParams) => object)
 
   /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
   headerCellClassName: string | ((param: cellCallbackParams) => string)
 
   /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
-  headerCellStyle: string | object | ((param: cellCallbackParams) => object)
+  headerCellStyle: object | ((param: cellCallbackParams) => object)
 
   /** Key of row data, used for optimizing rendering. Required if reserve-selection is on */
   rowKey: (row: object) => any
