@@ -18,7 +18,7 @@
           timestamp: '2018-04-12 20:46',
           size: 'large',
           type: 'primary',
-          icon: 'more'
+          icon: 'el-icon-more'
         }, {
           content: '支持自定义颜色',
           timestamp: '2018-04-03 20:46',
@@ -38,6 +38,9 @@
 <style>
   .demo-timeline .source .radio {
     margin-bottom: 20px;
+  }
+  .demo-timeline .source .radio .el-radio-group {
+    margin-left: 20px;
   }
 </style>
 
@@ -120,7 +123,7 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
           timestamp: '2018-04-12 20:46',
           size: 'large',
           type: 'primary',
-          icon: 'more'
+          icon: 'el-icon-more'
         }, {
           content: '支持自定义颜色',
           timestamp: '2018-04-03 20:46',
@@ -148,19 +151,19 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 <div class="block">
   <el-timeline>
     <el-timeline-item timestamp="2018/4/12" placement="top">
-      <el-card class="box-card">
+      <el-card>
         <h4>更新 Github 模板</h4>
         <p>王小虎 提交于 2018/4/12 20:46</p>
       </el-card>
     </el-timeline-item>
     <el-timeline-item timestamp="2018/4/3" placement="top">
-      <el-card class="box-card">
+      <el-card>
         <h4>更新 Github 模板</h4>
         <p>王小虎 提交于 2018/4/3 20:46</p>
       </el-card>
     </el-timeline-item>
     <el-timeline-item timestamp="2018/4/2" placement="top">
-      <el-card class="box-card">
+      <el-card>
         <h4>更新 Github 模板</h4>
         <p>王小虎 提交于 2018/4/2 20:46</p>
       </el-card>

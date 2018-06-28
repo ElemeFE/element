@@ -4,31 +4,31 @@
       return {
         reverse: true,
         activities: [{
-          content: '创建成功',
+          content: 'Success',
           timestamp: '2018-04-11'
         }, {
-          content: '通过审核',
+          content: 'Approved',
           timestamp: '2018-04-13'
         }, {
-          content: '活动按期开始',
+          content: 'Event start',
           timestamp: '2018-04-15'
         }],
         activities2: [{
-          content: '支持使用图标',
+          content: 'Custom icon',
           timestamp: '2018-04-12 20:46',
           size: 'large',
           type: 'primary',
-          icon: 'more'
+          icon: 'el-icon-more'
         }, {
-          content: '支持自定义颜色',
+          content: 'Custom color',
           timestamp: '2018-04-03 20:46',
           color: '#0bbd87'
         }, {
-          content: '支持自定义尺寸',
+          content: 'Custom size',
           timestamp: '2018-04-03 20:46',
           size: 'large'
         }, {
-          content: '默认样式的节点',
+          content: 'Default node',
           timestamp: '2018-04-03 20:46'
         }]
       };
@@ -39,24 +39,27 @@
   .demo-timeline .source .radio {
     margin-bottom: 20px;
   }
+  .demo-timeline .source .radio .el-radio-group {
+    margin-left: 20px;
+  }
 </style>
 
-## Timeline 时间线
+## Timeline
 
-可视化地呈现时间流信息。
+Visually display timeline.
 
-### 基础用法
+### Basic usage
 
-Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，时间戳是其区分于其他控件的重要特征，使⽤时注意与 Steps 步骤条等区分。
+Timeline can be split into multiple activities in ascending or descending. Timestamps are important features that distinguish them from other components. Note the difference with Steps.
 
 :::demo
 ```html
 <div class="block">
   <div class="radio">
-    排序：
+    Order: 
     <el-radio-group v-model="reverse">
-      <el-radio :label="true">倒序</el-radio>
-      <el-radio :label="false">正序</el-radio>
+      <el-radio :label="true">descending</el-radio>
+      <el-radio :label="false">ascending</el-radio>
     </el-radio-group>
   </div>
 
@@ -76,13 +79,13 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
       return {
         reverse: true,
         activities: [{
-          content: '创建成功',
+          content: 'Success',
           timestamp: '2018-04-11'
         }, {
-          content: '通过审核',
+          content: 'Approved',
           timestamp: '2018-04-13'
         }, {
-          content: '活动按期开始',
+          content: 'Event start',
           timestamp: '2018-04-15'
         }]
       };
@@ -92,9 +95,9 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 ```
 :::
 
-### ⾃定义节点样式
+### Custom node
 
-可根据实际场景⾃定义节点尺⼨、颜⾊，或直接使⽤图标。
+Size, color, and icons can be customized in node.
 
 :::demo
 ```html
@@ -116,22 +119,23 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
     data() {
       return {
         activities2: [{
-          content: '支持使用图标',
+          content: 'Custom icon',
           timestamp: '2018-04-12 20:46',
           size: 'large',
           type: 'primary',
-          icon: 'more'
+          icon: 'el-icon-more'
         }, {
-          content: '支持自定义颜色',
+          content: 'Custom color',
           timestamp: '2018-04-03 20:46',
           color: '#0bbd87'
         }, {
-          content: '支持自定义尺寸',
+          content: 'Custom size',
           timestamp: '2018-04-03 20:46',
           size: 'large'
         }, {
-          content: '默认样式的节点',
+          content: 'Default node',
           timestamp: '2018-04-03 20:46'
+        }]
       };
     }
   };
@@ -139,30 +143,30 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 ```
 :::
 
-### ⾃定义时间戳
+### Custom timestamp
 
-当内容在垂直⽅向上过⾼时，可将时间戳置于内容之上。
+Timestamp can be placed on top of content when content is too high.
 
 :::demo
 ```html
 <div class="block">
   <el-timeline>
     <el-timeline-item timestamp="2018/4/12" placement="top">
-      <el-card class="box-card">
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/12 20:46</p>
+      <el-card>
+        <h4>Update Github template</h4>
+        <p>Tom committed 2018/4/12 20:46</p>
       </el-card>
     </el-timeline-item>
     <el-timeline-item timestamp="2018/4/3" placement="top">
-      <el-card class="box-card">
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/3 20:46</p>
+      <el-card>
+        <h4>Update Github template</h4>
+        <p>Tom committed 2018/4/3 20:46</p>
       </el-card>
     </el-timeline-item>
     <el-timeline-item timestamp="2018/4/2" placement="top">
-      <el-card class="box-card">
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/2 20:46</p>
+      <el-card>
+        <h4>Update Github template</h4>
+        <p>Tom committed 2018/4/2 20:46</p>
       </el-card>
     </el-timeline-item>
   </el-timeline>
@@ -171,23 +175,23 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 :::
 
 ### Timeline Attributes
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+| Attribute      | Description    | Type      | Accepted Values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| reverse | 指定节点是否排序方向，默认为倒序 | boolean | — | true |
+| reverse | whether the node is ascending or descending, default is descending | boolean | — | true |
 
 ### Timeline-item Attributes
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+| Attribute      | Description    | Type      | Accepted Values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| timestamp     | 时间戳 | string  | - | — |
-| hide-timestamp  | 是否隐藏时间戳 | boolean | — | false |
-| placement | 时间戳位置 | string | top / bottom | bottom |
-| type | 节点类型 | string | primary / success / warning / danger / info | - |
-| color | 节点颜色 | string | hsl / hsv / hex / rgb | - |
-| size | 节点尺寸 | string | normal / large | normal |
-| icon | 节点图标 | string | — | - |
+| timestamp     | timestamp content | string  | - | — |
+| hide-timestamp  | whether to show timestamp | boolean | — | false |
+| placement | position of timestamp | string | top / bottom | bottom |
+| type | node type | string | primary / success / warning / danger / info | - |
+| color | background color of node | string | hsl / hsv / hex / rgb | - |
+| size | node size | string | normal / large | normal |
+| icon | icon class name | string | — | - |
 
 ### Timeline-Item Slot
-| name | 说明 |
+| name | Description |
 |------|--------|
-| — | Timeline-Item 的内容 |
-| dot | 自定义节点 |
+| — | Custom content for timeline item |
+| dot | Custom defined node |
