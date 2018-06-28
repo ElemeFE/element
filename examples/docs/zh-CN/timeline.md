@@ -114,7 +114,9 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
       {{activity.content}}
     </el-timeline-item>
   </el-timeline>
-</div><script>
+</div>
+
+<script>
   export default {
     data() {
       return {

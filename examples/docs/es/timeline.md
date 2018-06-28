@@ -114,7 +114,9 @@ Size, color, and icons can be customized in node.
       {{activity.content}}
     </el-timeline-item>
   </el-timeline>
-</div><script>
+</div>
+
+<script>
   export default {
     data() {
       return {
