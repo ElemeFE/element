@@ -11,24 +11,4 @@
       display: none;
     }
   }
-
-  @include when(reverse) {
-    @include when(pending) {
-      & .el-timeline-item:nth-last-child(2) {
-        & .el-timeline-item__tail {
-          border-left-style: dotted;
-        }
-      }
-    }
-  }
-
-  @include when(pending) {
-    &:not(.is-reverse) {
-      & .el-timeline-item:first-child {
-        & .el-timeline-item__tail {
-          border-left-style: dotted;
-        }
-      }
-    }
-  }
 }

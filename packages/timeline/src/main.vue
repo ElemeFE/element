@@ -1,8 +1,7 @@
 <template>
   <ul class="el-timeline"
     :class="{
-      'is-reverse': reverse,
-      'is-pending': pending
+      'is-reverse': reverse
     }">
     <slot></slot>
   </ul>
@@ -13,11 +12,6 @@
     name: 'ElTimeline',
 
     props: {
-      pending: {
-        type: Boolean,
-        default: false
-      },
-
       reverse: {
         type: Boolean,
         default: true
