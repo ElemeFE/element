@@ -14,7 +14,7 @@
     >
       <i v-if="icon"
         class="el-timeline-item__icon"
-        :class="`el-icon-${icon}`"
+        :class="icon"
       ></i>
     </div>
     <div v-if="$slots.dot" class="el-timeline-item__dot">
