@@ -1,11 +1,12 @@
 <template>
   <div
+    v-outside="hide"
+    class="el-focus-outside"
     :class="[
       'el-color-picker',
       colorDisabled ? 'is-disabled' : '',
       colorSize ? `el-color-picker--${ colorSize }` : ''
-    ]"
-    v-clickoutside="hide">
+    ]">
     <div class="el-color-picker__mask" v-if="colorDisabled"></div>
     <div class="el-color-picker__trigger" @click="handleTrigger">
       <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
@@ -18,7 +19,9 @@
       <span class="el-color-picker__icon el-icon-arrow-down" v-show="value || showPanelColor"></span>
     </div>
     <picker-dropdown
+        v-outside="hide"
        ref="dropdown"
+       class="el-focus-outside"
        :class="['el-color-picker__panel', popperClass || '']"
        v-model="showPicker"
        @pick="confirmValue"
@@ -31,9 +34,9 @@
 </template>
 
 <script>
+  import Outside from 'element-ui/src/utils/outside';
   import Color from './color';
   import PickerDropdown from './components/picker-dropdown.vue';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   export default {
     name: 'ElColorPicker',
@@ -57,7 +60,7 @@
       }
     },
 
-    directives: { Clickoutside },
+    directives: { Outside },
 
     computed: {
       displayedColor() {

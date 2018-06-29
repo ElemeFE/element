@@ -1,6 +1,7 @@
 <template>
   <span
-    class="el-cascader"
+    v-outside="handleClickoutside"
+    class="el-cascader el-focus-outside"
     :class="[
       {
         'is-opened': menuVisible,
@@ -14,7 +15,6 @@
     @mouseleave="inputHover = false"
     @blur="inputHover = false"
     ref="reference"
-    v-clickoutside="handleClickoutside"
     @keydown="handleKeydown"
   >
     <el-input
@@ -62,10 +62,10 @@
 
 <script>
 import Vue from 'vue';
+import Outside from 'element-ui/src/utils/outside';
 import ElCascaderMenu from './menu';
 import ElInput from 'element-ui/packages/input';
 import Popper from 'element-ui/src/utils/vue-popper';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
 import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
@@ -92,7 +92,7 @@ const popperMixin = {
 export default {
   name: 'ElCascader',
 
-  directives: { Clickoutside },
+  directives: { Outside },
 
   mixins: [popperMixin, emitter, Locale],
 
@@ -265,6 +265,7 @@ export default {
       this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
       this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
+      this.menu.handleClickoutside = this.handleClickoutside;
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
       this.menu.$on('menuLeave', this.doDestroy);

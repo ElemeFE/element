@@ -30,7 +30,9 @@
                   @input.native="handleDateInput($event, 'min')"
                   @change.native="handleDateChange($event, 'min')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => minTimePickerVisible = false">
+              <span
+                v-outside="() => minTimePickerVisible = false"
+                class="el-date-range-picker__time-picker-wrap el-focus-outside">
                 <el-input
                   size="small"
                   :disabled="rangeState.selecting"
@@ -61,7 +63,9 @@
                   @input.native="handleDateInput($event, 'max')"
                   @change.native="handleDateChange($event, 'max')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => maxTimePickerVisible = false">
+              <span
+                v-outside="() => maxTimePickerVisible = false"
+                class="el-date-range-picker__time-picker-wrap el-focus-outside" >
                 <el-input
                   size="small"
                   :disabled="rangeState.selecting"
@@ -198,7 +202,7 @@
     extractDateFormat,
     extractTimeFormat
   } from '../util';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Outside from 'element-ui/src/utils/outside';
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
@@ -222,7 +226,7 @@
   export default {
     mixins: [Locale],
 
-    directives: { Clickoutside },
+    directives: { Outside },
 
     computed: {
       btnDisabled() {

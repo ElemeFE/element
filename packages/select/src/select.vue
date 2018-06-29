@@ -1,9 +1,9 @@
 <template>
   <div
-    class="el-select"
+    v-outside="handleClose"
+    class="el-select el-focus-outside"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
-    @click.stop="toggleMenu"
-    v-clickoutside="handleClose">
+    @click.stop="toggleMenu">
     <div
       class="el-select__tags"
       v-if="multiple"
@@ -105,7 +105,9 @@
       @before-enter="handleMenuEnter"
       @after-leave="doDestroy">
       <el-select-menu
+        v-outside="handleClose"
         ref="popper"
+        class="el-focus-outside"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
@@ -143,7 +145,7 @@
   import ElTag from 'element-ui/packages/tag';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Outside from 'element-ui/src/utils/outside';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
@@ -252,7 +254,7 @@
       ElScrollbar
     },
 
-    directives: { Clickoutside },
+    directives: { Outside },
 
     props: {
       name: String,

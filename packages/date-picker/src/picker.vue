@@ -1,6 +1,6 @@
 <template>
   <el-input
-    class="el-date-editor"
+    class="el-date-editor el-focus-outside"
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly || type === 'dates'"
     :disabled="pickerDisabled"
@@ -8,7 +8,7 @@
     :name="name"
     v-bind="firstInputId"
     v-if="!ranged"
-    v-clickoutside="handleClose"
+    v-outside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
     @keydown.native="handleKeydown"
@@ -32,7 +32,7 @@
     </i>
   </el-input>
   <div
-    class="el-date-editor el-range-editor el-input__inner"
+    class="el-date-editor el-range-editor el-input__inner el-focus-outside"
     :class="[
       'el-date-editor--' + type,
       pickerSize ? `el-range-editor--${ pickerSize }` : '',
@@ -44,7 +44,7 @@
     @mouseleave="showClose = false"
     @keydown="handleKeydown"
     ref="reference"
-    v-clickoutside="handleClose"
+    v-outside="handleClose"
     v-else>
     <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
     <input
@@ -81,7 +81,7 @@
 
 <script>
 import Vue from 'vue';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
+import Outside from 'element-ui/src/utils/outside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
@@ -387,7 +387,7 @@ export default {
 
   components: { ElInput },
 
-  directives: { Clickoutside },
+  directives: { Outside },
 
   data() {
     return {

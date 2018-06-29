@@ -1,7 +1,7 @@
 <template>
   <div
-    class="el-autocomplete"
-    v-clickoutside="close"
+    v-outside="close"
+    class="el-autocomplete el-focus-outside"
     aria-haspopup="listbox"
     role="combobox"
     :aria-expanded="suggestionVisible"
@@ -33,6 +33,8 @@
     </el-input>
     <el-autocomplete-suggestions
       visible-arrow
+      v-outside="close"
+      class="el-focus-outside"
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
       ref="suggestions"
@@ -55,9 +57,9 @@
   </div>
 </template>
 <script>
+  import Outside from 'element-ui/src/utils/outside';
   import debounce from 'throttle-debounce/debounce';
   import ElInput from 'element-ui/packages/input';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
@@ -78,7 +80,7 @@
       ElAutocompleteSuggestions
     },
 
-    directives: { Clickoutside },
+    directives: { Outside },
 
     props: {
       valueKey: {

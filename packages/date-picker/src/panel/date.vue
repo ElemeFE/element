@@ -26,7 +26,9 @@
                 @input="val => userInputDate = val"
                 @change="handleVisibleDateChange" />
             </span>
-            <span class="el-date-picker__editor-wrap" v-clickoutside="() => timePickerVisible = false">
+            <span
+              v-outside="() => timePickerVisible = false"
+              class="el-date-picker__editor-wrap el-focus-outside">
               <el-input
                 ref="input"
                 @focus="timePickerVisible = true"
@@ -161,7 +163,7 @@
     extractDateFormat,
     extractTimeFormat
   } from '../util';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Outside from 'element-ui/src/utils/outside';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
@@ -173,7 +175,7 @@
   export default {
     mixins: [Locale],
 
-    directives: { Clickoutside },
+    directives: { Outside },
 
     watch: {
       showTime(val) {

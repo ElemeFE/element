@@ -1,5 +1,5 @@
 <script>
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import { bind, unbind } from 'focus-outside';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import ElButton from 'element-ui/packages/button';
@@ -12,8 +12,6 @@
     componentName: 'ElDropdown',
 
     mixins: [Emitter, Migrating],
-
-    directives: { Clickoutside },
 
     components: {
       ElButton,
@@ -81,6 +79,12 @@
       this.$on('menu-item-click', this.handleMenuItemClick);
       this.initEvent();
       this.initAria();
+    },
+
+    beforeDestroy() {
+      const { $el, hide, dropdownElm } = this;
+      unbind($el, hide);
+      unbind(dropdownElm, hide);
     },
 
     watch: {
@@ -200,12 +204,16 @@
         }
       },
       initEvent() {
-        let { trigger, show, hide, handleClick, splitButton, handleTriggerKeyDown, handleItemKeyDown } = this;
+        let { $el, trigger, show, hide, handleClick, splitButton, handleTriggerKeyDown, handleItemKeyDown } = this;
         this.triggerElm = splitButton
           ? this.$refs.trigger.$el
           : this.$slots.default[0].elm;
 
         let dropdownElm = this.dropdownElm = this.$slots.dropdown[0].elm;
+
+        // 绑定 focus 事件
+        bind($el, hide);
+        bind(dropdownElm, hide);
 
         this.triggerElm.addEventListener('keydown', handleTriggerKeyDown); // triggerElm keydown
         dropdownElm.addEventListener('keydown', handleItemKeyDown, true); // item keydown
@@ -259,9 +267,8 @@
             <i class="el-dropdown__icon el-icon-arrow-down"></i>
           </el-button>
         </el-button-group>);
-
       return (
-        <div class="el-dropdown" v-clickoutside={hide}>
+        <div class="el-dropdown el-focus-outside">
           {triggerElm}
           {this.$slots.dropdown}
         </div>
