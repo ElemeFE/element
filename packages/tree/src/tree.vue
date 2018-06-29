@@ -395,7 +395,7 @@
           dropNext = false;
         }
 
-        const targetPosition = dropNode.$el.querySelector('.el-tree-node__expand-icon').getBoundingClientRect();
+        const targetPosition = dropNode.$el.getBoundingClientRect();
         const treePosition = this.$el.getBoundingClientRect();
 
         let dropType;
