@@ -41,6 +41,7 @@ const MessageBoxConstructor = Vue.extend(msgboxVue);
 
 let currentMsg, instance;
 let msgQueue = [];
+let uniqueId = 1;
 
 const defaultCallback = action => {
   if (currentMsg) {
@@ -100,6 +101,7 @@ const showNextMsg = () => {
         showNextMsg();
       };
       if (isVNode(instance.message)) {
+        instance.message.key = uniqueId = (uniqueId + 1) % 2;
         instance.$slots.default = [instance.message];
         instance.message = null;
       } else {
