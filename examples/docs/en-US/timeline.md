@@ -4,14 +4,14 @@
       return {
         reverse: true,
         activities: [{
-          content: 'Success',
-          timestamp: '2018-04-11'
+          content: 'Event start',
+          timestamp: '2018-04-15'
         }, {
           content: 'Approved',
           timestamp: '2018-04-13'
         }, {
-          content: 'Event start',
-          timestamp: '2018-04-15'
+          content: 'Success',
+          timestamp: '2018-04-11'
         }],
         activities2: [{
           content: 'Custom icon',
@@ -79,14 +79,14 @@ Timeline can be split into multiple activities in ascending or descending. Times
       return {
         reverse: true,
         activities: [{
-          content: 'Success',
-          timestamp: '2018-04-11'
+          content: 'Event start',
+          timestamp: '2018-04-15'
         }, {
           content: 'Approved',
           timestamp: '2018-04-13'
         }, {
-          content: 'Event start',
-          timestamp: '2018-04-15'
+          content: 'Success',
+          timestamp: '2018-04-11'
         }]
       };
     }
@@ -179,7 +179,7 @@ Timestamp can be placed on top of content when content is too high.
 ### Timeline Attributes
 | Attribute      | Description    | Type      | Accepted Values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| reverse | whether the node is ascending or descending, default is descending | boolean | — | true |
+| reverse | whether the node is ascending or descending, default is ascending | boolean | — | false |
 
 ### Timeline-item Attributes
 | Attribute      | Description    | Type      | Accepted Values | Default   |

@@ -179,7 +179,7 @@ Timestamp can be placed on top of content when content is too high.
 ### Timeline Attributes
 | Attribute      | Description    | Type      | Accepted Values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| reverse | whether the node is ascending or descending, default is descending | boolean | — | true |
+| reverse | whether the node is ascending or descending, default is ascending | boolean | — | false |
 
 ### Timeline-item Attributes
 | Attribute      | Description    | Type      | Accepted Values | Default   |
