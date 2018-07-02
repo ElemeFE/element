@@ -857,7 +857,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | validate      | el método para validar todo el formulario. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Devuelve una promesa si se omite el return | Function(callback: Function(boolean, object))    |
 | validateField | el método para validar un determinado form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields   | restablece todos los campos y elimina el resultado de validación | —                                        |
-| clearValidate | limpia mensaje de validación para todos los campos | -
+| clearValidate | clear validation message for certain fields. The parameter is an array of prop names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: array)
 
 ### Form Events
 | Nombre   | Descripción                                          | Parametros                                                   |
