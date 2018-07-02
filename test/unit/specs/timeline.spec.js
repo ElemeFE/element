@@ -62,7 +62,7 @@ describe('Timeline', () => {
 
       data() {
         return {
-          reverse: false,
+          reverse: true,
           activities: [{
             content: '创建成功',
             timestamp: '2018-04-11'
@@ -82,7 +82,7 @@ describe('Timeline', () => {
       expect(elm.innerText).to.equal(vm.activities[vm.activities.length - index - 1].content);
     });
 
-    vm.reverse = true;
+    vm.reverse = false;
     vm.$nextTick(() => {
       const contentElms = vm.$el.querySelectorAll('.el-timeline-item__content');
       contentElms.forEach((elm, index) => {
