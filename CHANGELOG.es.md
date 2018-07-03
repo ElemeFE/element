@@ -1,5 +1,13 @@
 ## Changelog
 
+### 2.4.3
+
+*2018-07-03*
+
+- Fixed `allow-drop` not working properly when Tree nodes have a custom height, #11797
+- Now you can pass a parameter to the `clearValidate` method of Form, specifying which FormItems' validation results need to be cleared, #11821
+- Added `distinguishCancelAndClose` attribute for MessageBox, #11831
+
 ### 2.4.2
 
 *2018-06-26*

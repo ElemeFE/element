@@ -1,5 +1,13 @@
 ## 更新日志
 
+### 2.4.3
+
+*2018-07-03*
+
+- 修复当自定义 Tree 节点高度时，`allow-drop` 不能正常工作的问题，#11797
+- 现在 Form 的 `clearValidate` 方法支持传入参数，指定需要清空校验结果的 FormItem，#11821
+- 新增 MessageBox 的 `distinguishCancelAndClose` 属性，#11831
+
 ### 2.4.2
 
 *2018-06-26*
