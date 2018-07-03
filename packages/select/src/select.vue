@@ -851,9 +851,6 @@
 
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
-      this.$on('fieldReset', () => {
-        this.dispatch('ElFormItem', 'el.form.change');
-      });
     },
 
     mounted() {
