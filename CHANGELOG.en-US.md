@@ -1,5 +1,36 @@
 ## Changelog
 
+### 2.4.2
+
+*2018-06-26*
+
+- Now `class-name` and `label-class-name` of Table are reactive, #11626
+- Fixed Table still highlighting clicked row when `highlight-current-row` is `false`, #11646
+- Fixed a style bug of ButtonGroup when it has only one `round` or `circle` Button, #11605
+- Fixed style of page size Select of Pagination, #11622
+- Fixed Menu's `open` method error when `collapse` is dynamically changed, #11646
+- Added `activeName` and `oldActiveName` parameters to the before-leave hook of Tabs, #11713
+- Fixed Cascader focused after outside clicked, #11588
+- Fixed Cascader not closing when option is clicked when `change-on-select` is true, #11623
+- Now updating Select's value programmatically will trigger form validation, #11672
+
+### 2.4.1
+
+*2018-06-08*
+
+- Removed Autocomplete's duplicate type declaration, #11388
+- Fixed Select's dropdown arrow style in FireFox when nested in Form, #11427
+- Fixed clear icon of Select still showing when the initial value is `null`, #11460
+- Fixed disabled radio showing box-shadow when clicked, #11462
+- Added `iconClass` attribute for MessageBox, #11499
+- Added `stretch` attribute for Tabs, #11476
+- Fixed rendering order issue of TabPane when Tabs is `lazy`, #11461
+- Fixed Table not retaining current highlight row when expanded, #11464
+- Fixed focusing state when `before-leave` returns a resolved promise, #11386
+- Fixed disabled Popover still creating poppers, #11426
+- Fixed Tree's endless loop when a new node is added in lazy mode, #11430 (by @wangjingf)
+- Added `closed` event for Dialog, #11490
+
 ### 2.4.0 Fullerene
 
 *2018-05-28*

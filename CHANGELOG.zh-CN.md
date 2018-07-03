@@ -1,5 +1,36 @@
 ## 更新日志
 
+### 2.4.2
+
+*2018-06-26*
+
+- 修复 Table 的 `class-name` 和 `label-class-name` 属性不支持动态更新的问题，#11626
+- 修复 Table 在 `highlight-current-row` 为 `false` 时点击行也会触发高亮的问题，#11691 #11563
+- 修复 ButtonGroup 中只有一个 `round` 或 `circle` 的 Button 时的样式错误，#11605
+- 修复在某些情况下 Pagination 的条目数选择器的样式错误，#11622
+- 修复 Menu 的 `collapse` 属性变化后无法使用 `open` 方法的问题，#11646
+- Tabs 的 `before-leave` 钩子添加了 `activeName` 和 `oldActiveName` 参数，#11713
+- 修复 Cascader 关闭后的聚焦问题，#11588
+- 修复 Cascader 在 `change-on-select` 状态下点击选项不关闭的问题，#11623
+- 现在通过代码改变 Select 的值后会触发表单校验，与 Input 行为一致，#11672
+
+### 2.4.1
+
+*2018-06-08*
+
+- 移除 Autocomplete 的重复类型声明，#11388
+- 修复嵌套在 Form 内的 Select 在 FireFox 浏览器中下拉箭头错位的问题，#11427
+- 修复 Select 的初始值为 `null` 时仍然显示清除图标的问题，#11460
+- 修复禁用的 Radio 在点击时显示 box-shadow 的问题，#11462
+- 新增 MessageBox 的 `iconClass` 属性，#11499
+- 新增 Tabs 的 `stretch` 属性，#11476
+- 修复 Tabs 开启 `lazy` 时渲染顺序异常的问题，#11461
+- 修复 Table 展开行时无法保留选中行样式的问题，#11464
+- 修复 Tabs 调用 `before-leave` 并返回 Promise 的时候，Tabs 会存在 focus 状态的问题，#11386
+- 修复 Popover 禁用状态下创建弹出框的问题，#11426
+- 修复 Tree 在懒加载状态下添加新节点造成无限循环的问题，#11430 （by @wangjingf）
+- 新增 Dialog 的 `closed` 事件，#11490
+
 ### 2.4.0 Fullerene
 
 *2018-05-28*

@@ -380,6 +380,7 @@ import { MessageBox } from 'element-ui';
 | message | MessageBox 消息正文内容 | string / VNode | — | — |
 | dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
 | type | 消息类型，用于显示图标 | string | success / info / warning / error | — |
+| iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm'或'cancel', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |
 | showClose | MessageBox 是否显示右上角关闭按钮 | boolean | — | true |

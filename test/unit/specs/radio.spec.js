@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, triggerKeyDown } from '../util';
 
 describe('Radio', () => {
   let vm;
@@ -49,6 +49,25 @@ describe('Radio', () => {
       expect(radioElm.querySelector('.is-disabled')).to.be.ok;
       done();
     }, 10);
+  });
+  it('border', () => {
+    vm = createVue({
+      template: `
+        <el-radio
+          v-model="radio"
+          label="3"
+          border
+        >
+        </el-radio>
+      `,
+      data() {
+        return {
+          radio: ''
+        };
+      }
+    }, true);
+    let radioElm = vm.$el;
+    expect(radioElm.classList.contains('is-bordered')).to.be.true;
   });
   it('change event', done => {
     vm = createVue({
@@ -238,6 +257,46 @@ describe('Radio', () => {
         expect(vm.$refs.radio1.$el.classList.contains('is-active')).to.be.true;
         done();
       }, 10);
+    });
+    it('keyboard event', done => {
+      vm = createVue({
+        template: `
+          <el-radio-group v-model="radio">
+            <el-radio-button ref="radio1" :label="3">备选项</el-radio-button>
+            <el-radio-button ref="radio2" :label="6">备选项</el-radio-button>
+            <el-radio-button ref="radio3" :label="9">备选项</el-radio-button>
+          </el-radio-group>
+        `,
+        data() {
+          return {
+            radio: 6
+          };
+        }
+      }, true);
+
+      expect(vm.radio).to.be.equal(6);
+      vm.$nextTick(() => {
+        triggerKeyDown(vm.$refs.radio2.$el, 37);
+        expect(vm.radio).to.be.equal(3);
+
+        triggerKeyDown(vm.$refs.radio1.$el, 37);
+        expect(vm.radio).to.be.equal(9);
+
+        vm.$nextTick(() => {
+          triggerKeyDown(vm.$refs.radio3.$el, 39);
+          expect(vm.radio).to.be.equal(3);
+
+          triggerKeyDown(vm.$refs.radio1.$el, 39);
+          expect(vm.radio).to.be.equal(6);
+
+          vm.$nextTick(() => {
+            triggerKeyDown(vm.$refs.radio1.$el, 13);
+            expect(vm.radio).to.be.equal(6);
+
+            done();
+          });
+        });
+      });
     });
     describe('Radio Button', () => {
       it('create', done => {

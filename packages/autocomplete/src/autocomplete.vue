@@ -9,7 +9,7 @@
   >
     <el-input
       ref="input"
-      v-bind="$props"
+      v-bind="[$props, $attrs]"
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -17,7 +17,6 @@
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
-      :label="label"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -69,6 +68,8 @@
     name: 'ElAutocomplete',
 
     mixins: [Emitter, Focus('input'), Migrating],
+
+    inheritAttrs: false,
 
     componentName: 'ElAutocomplete',
 

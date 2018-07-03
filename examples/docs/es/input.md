@@ -690,7 +690,7 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | label | texto de la etiqueta | string | — | — |
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
-| hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
+| hide-loading | si se debe ocultar el icono de loading en la búsqueda remota | boolean | — | false |
 
 ### Autocomplete Slots
 

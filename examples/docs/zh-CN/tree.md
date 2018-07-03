@@ -263,7 +263,7 @@
         }
       },
       allowDrag(draggingNode) {
-        return draggingNode.data.label.indexOf('三级 3-1-1') === -1;
+        return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -1173,7 +1173,7 @@
         }
       },
       allowDrag(draggingNode) {
-        return draggingNode.data.label.indexOf('三级 3-1-1') === -1;
+        return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
       }
     }
   };

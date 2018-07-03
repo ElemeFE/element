@@ -102,6 +102,27 @@ describe('Form', () => {
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
     done();
   });
+  it('label size', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-form :model="form" size="mini" ref="labelMini">
+            <el-form-item>
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+      `,
+      data() {
+        return {
+          form: {
+            name: ''
+          }
+        };
+      }
+    }, true);
+    expect(vm.$refs.labelMini.$el.children[0].classList.contains('el-form-item--mini')).to.be.true;
+  });
   it('show message', done => {
     vm = createVue({
       template: `
@@ -359,15 +380,19 @@ describe('Form', () => {
         expect(valid).to.false;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择活动区域');
-          // programatic modification of bound value does not triggers change validation
+          // programatic modification triggers change validation
           vm.form.region = 'shanghai';
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('请选择活动区域');
-            // user modification of bound value triggers change validation
-            vm.$refs.opt.$el.click();
+            expect(field.validateMessage).to.equal('');
+            vm.form.region = '';
             setTimeout(_ => {
-              expect(field.validateMessage).to.equal('');
-              done();
+              expect(field.validateMessage).to.equal('请选择活动区域');
+              // user modification of bound value triggers change validation
+              vm.$refs.opt.$el.click();
+              setTimeout(_ => {
+                expect(field.validateMessage).to.equal('');
+                done();
+              }, 100);
             }, 100);
           }, 100);
         }, 100);

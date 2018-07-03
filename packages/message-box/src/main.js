@@ -2,6 +2,7 @@ const defaults = {
   title: null,
   message: '',
   type: '',
+  iconClass: '',
   showInput: false,
   showClose: true,
   modalFade: true,
