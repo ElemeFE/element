@@ -330,6 +330,7 @@ Besides default size, Dropdown component provides three additional sizes for you
 | hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
 | show-timeout | Delay time before show a dropdown (only works when trigger is `hover`) | number | — | 250 |
 | hide-timeout | Delay time before hide a dropdown (only works when trigger is `hover`) | number | — | 150 |
+| disabled     | whether the Dropdown is disabled                                       | boolean | — | false |
 
 ### Dropdown Events
 | Event Name | Description | Parameters |

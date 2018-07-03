@@ -55,6 +55,10 @@
       hideTimeout: {
         type: Number,
         default: 150
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -109,14 +113,14 @@
         };
       },
       show() {
-        if (this.triggerElm.disabled) return;
+        if (this.disabled) return;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = true;
         }, this.trigger === 'click' ? 0 : this.showTimeout);
       },
       hide() {
-        if (this.triggerElm.disabled) return;
+        if (this.disabled) return;
         this.removeTabindex();
         this.resetTabindex(this.triggerElm);
         clearTimeout(this.timeout);
@@ -125,7 +129,7 @@
         }, this.trigger === 'click' ? 0 : this.hideTimeout);
       },
       handleClick() {
-        if (this.triggerElm.disabled) return;
+        if (this.disabled) return;
         if (this.visible) {
           this.hide();
         } else {
@@ -242,23 +246,31 @@
     },
 
     render(h) {
-      let { hide, splitButton, type, dropdownSize } = this;
+      let { hide, splitButton, type, dropdownSize, disabled } = this;
 
       const handleMainButtonClick = (event) => {
         this.$emit('click', event);
         hide();
       };
-
-      let triggerElm = !splitButton
-        ? this.$slots.default
-        : (<el-button-group>
-          <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
+      let triggerElm = null;
+      if (splitButton) {
+        triggerElm = <el-button-group>
+          <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick} disabled={disabled}>
             {this.$slots.default}
           </el-button>
-          <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
+          <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button" disabled={disabled}>
             <i class="el-dropdown__icon el-icon-arrow-down"></i>
           </el-button>
-        </el-button-group>);
+        </el-button-group>;
+      } else {
+        triggerElm = this.$slots.default;
+        const vnodeData = triggerElm[0].data || {};
+        let { staticClass = '' } = vnodeData;
+        if (disabled && staticClass.indexOf('is-disabled') === -1) {
+          staticClass += (staticClass ? ' ' : '') + 'is-disabled';
+          vnodeData.staticClass = staticClass;
+        }
+      }
 
       return (
         <div class="el-dropdown" v-clickoutside={hide}>

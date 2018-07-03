@@ -36,7 +36,7 @@
     }
 
     &:hover {
-      &::before {
+      &:not(.is-disabled)::before {
         top: 0;
         bottom: 0;
       }
@@ -54,6 +54,11 @@
   .el-dropdown-selfdefine { // 自定义
     &:focus:active, &:focus:not(.focusing) {
       outline-width: 0;
+    }
+
+    @include when(disabled) {
+      cursor: not-allowed;
+      color: $--font-color-disabled-base;
     }
   }
 }
