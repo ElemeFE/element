@@ -98,16 +98,16 @@ Disabled state for checkbox.
 
 It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
 
-:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. Inside the `el-checkbox` element, `label` is the value of the checkbox. If no content is nested in that tag, `label` will be rendered as the description following the button of the checkbox. `label` also corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
+:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. Inside the `el-checkbox` element, `label` is the value of the checkbox. `label` also corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
 
 ```html
 <template>
   <el-checkbox-group v-model="checkList">
-    <el-checkbox label="Option A"></el-checkbox>
-    <el-checkbox label="Option B"></el-checkbox>
-    <el-checkbox label="Option C"></el-checkbox>
-    <el-checkbox label="disabled" disabled></el-checkbox>
-    <el-checkbox label="selected and disabled" disabled></el-checkbox>
+    <el-checkbox label="Option A">Option A</el-checkbox>
+    <el-checkbox label="Option B">Option B</el-checkbox>
+    <el-checkbox label="Option C">Option C</el-checkbox>
+    <el-checkbox label="disabled" disabled>disabled</el-checkbox>
+    <el-checkbox label="selected and disabled" disabled>selected and disabled</el-checkbox>
   </el-checkbox-group>
 </template>
 
@@ -245,23 +245,23 @@ Checkbox with button styles.
 ```html
 <template>
   <div>
-    <el-checkbox v-model="checked3" label="Option1" border></el-checkbox>
-    <el-checkbox v-model="checked4" label="Option2" border></el-checkbox>
+    <el-checkbox v-model="checked3" label="Option1" border>Option1</el-checkbox>
+    <el-checkbox v-model="checked4" label="Option2" border>Option2</el-checkbox>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox v-model="checked5" label="Option1" border size="medium"></el-checkbox>
-    <el-checkbox v-model="checked6" label="Option2" border size="medium"></el-checkbox>
+    <el-checkbox v-model="checked5" label="Option1" border size="medium">Option1</el-checkbox>
+    <el-checkbox v-model="checked6" label="Option2" border size="medium">Option2</el-checkbox>
   </div>
   <div style="margin-top: 20px">
     <el-checkbox-group v-model="checkboxGroup5" size="small">
-      <el-checkbox label="Option1" border></el-checkbox>
-      <el-checkbox label="Option2" border disabled></el-checkbox>
+      <el-checkbox label="Option1" border>Option1</el-checkbox>
+      <el-checkbox label="Option2" border disabled>Option2</el-checkbox>
     </el-checkbox-group>
   </div>
   <div style="margin-top: 20px">
     <el-checkbox-group v-model="checkboxGroup6" size="mini" disabled>
-      <el-checkbox label="Option1" border></el-checkbox>
-      <el-checkbox label="Option2" border></el-checkbox>
+      <el-checkbox label="Option1" border>Option1</el-checkbox>
+      <el-checkbox label="Option2" border>Option2</el-checkbox>
     </el-checkbox-group>
   </div>
 </template>

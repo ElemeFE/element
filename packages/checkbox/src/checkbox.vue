@@ -48,9 +48,8 @@
         @focus="focus = true"
         @blur="focus = false">
     </span>
-    <span class="el-checkbox__label" v-if="$slots.default || label">
+    <span class="el-checkbox__label" v-if="$slots.default">
       <slot></slot>
-      <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
