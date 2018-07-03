@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { MessageType } from './message'
 
-export type MessageBoxCloseAction = 'confirm' | 'cancel'
+export type MessageBoxCloseAction = 'confirm' | 'cancel' | 'close'
 export type MessageBoxData = MessageBoxCloseAction | MessageBoxInputData
 
 export interface MessageBoxInputData {
