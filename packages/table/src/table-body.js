@@ -392,7 +392,7 @@ export default {
     },
 
     handleClick(event, row) {
-      this.store.commit('setCurrentRow', row);
+      this.table.highlightCurrentRow && this.store.commit('setCurrentRow', row);
       this.handleEvent(event, row, 'click');
     },
 
