@@ -267,10 +267,10 @@ export default {
     },
 
     getRowClass(row, rowIndex) {
-      const currentRow = this.store.states.currentRow;
-      const classes = this.table.highlightCurrentRow && currentRow === row
-        ? ['el-table__row', 'current-row']
-        : ['el-table__row'];
+      const classes = ['el-table__row'];
+      if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
+        classes.push('current-row');
+      }
 
       if (this.stripe && rowIndex % 2 === 1) {
         classes.push('el-table__row--striped');

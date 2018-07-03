@@ -320,9 +320,7 @@ TableStore.prototype.mutations = {
 
   setCurrentRow(states, row) {
     const oldCurrentRow = states.currentRow;
-    if (this.table.highlightCurrentRow) {
-      states.currentRow = row;
-    }
+    states.currentRow = row;
 
     if (oldCurrentRow !== row) {
       this.table.$emit('current-change', row, oldCurrentRow);
