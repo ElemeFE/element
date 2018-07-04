@@ -4,9 +4,9 @@
 
 *2018-07-03*
 
-- Fixed `allow-drop` not working properly when Tree nodes have a custom height, #11797
-- Now you can pass a parameter to the `clearValidate` method of Form, specifying which FormItems' validation results need to be cleared, #11821
-- Added `distinguishCancelAndClose` attribute for MessageBox, #11831
+- Corregido `allow-drop` que no funcionaba correctamente cuando los nodos de árbol tenian una altura personalizada, #11797
+- Ahora puede pasar un parámetro al método `clearValidate` de Form, especificando qué resultados de validación de `FormItems` necesita borrar, #11821
+- Añadido el atributo `distinguishCancelAndClose` para MessageBox, #11831
 
 ### 2.4.2
 
