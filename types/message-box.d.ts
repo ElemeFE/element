@@ -73,6 +73,9 @@ export interface ElMessageBoxOptions {
   /** Whether to show a confirm button */
   showConfirmButton?: boolean
 
+  /** Whether to show a close button */
+  showClose?: boolean
+
   /** Text content of cancel button */
   cancelButtonText?: string
 
