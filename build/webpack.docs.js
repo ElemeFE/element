@@ -1,37 +1,52 @@
 const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const isProd = process.env.NODE_ENV === 'production';
+// const isDev = process.env.NODE_ENV === 'development';
+// const isPlay = !!process.env.PLAY_ENV;
+
 const config = require('./config');
 
-const webpackConfig = {
-  mode: 'none',
+module.exports = {
+  mode: process.env.NODE_ENV,
   entry: {
-    app: ['./src/index.js']
+    docs: './docs/entry.js',
+    'element-ui': './src/index.js'
   },
   output: {
-    path: path.resolve(process.cwd(), './dist'),
-    publicPath: '/dist/',
-    filename: '[name].js',
-    chunkFilename: '[id].js'
+    path: path.resolve(process.cwd(), './examples/element-ui/'),
+    publicPath: process.env.CI_ENV || '',
+    filename: '[name].[hash:7].js',
+    chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: Object.assign(config.alias, {
-      'vue$': 'vue/dist/vue.common.js'
-    }),
+    alias: config.alias,
     modules: ['node_modules']
   },
-  devtool: '#inline-source-map',
+  devServer: {
+    host: '0.0.0.0',
+    port: 8085,
+    publicPath: '/',
+    noInfo: true
+  },
+  performance: {
+    hints: false
+  },
+  stats: {
+    children: false
+  },
   module: {
     rules: [
       {
-        enforce: 'post',
-        test: /\.jsx?$/,
-        loader: 'istanbul-instrumenter-loader',
-        options: { esModules: true },
-        exclude: config.jsexclude,
-        include: /src|packages/
+        enforce: 'pre',
+        test: /\.(vue|jsx?)$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
       },
       {
         test: /\.(jsx?|babel|es6)$/,
@@ -43,9 +58,6 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-            js: process.env.CI_ENV ? 'istanbul-instrumenter-loader' : 'istanbul-instrumenter-loader!eslint-loader'
-          },
           preserveWhitespace: false
         }
       },
@@ -56,6 +68,10 @@ const webpackConfig = {
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader', 'postcss-loader']
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.html$/,
@@ -88,14 +104,21 @@ const webpackConfig = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new HtmlWebpackPlugin({
+      template: './examples/index.tpl',
+      filename: './index.html',
+      favicon: './examples/favicon.ico'
+    }),
+    new CopyWebpackPlugin([
+      { from: 'examples/versions.json' }
+    ]),
+    new ProgressBarPlugin(),
+    new VueLoaderPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      vue: {
+        preserveWhitespace: false
+      }
+    })
   ]
 };
-
-if (!process.env.CI_ENV) {
-  webpackConfig.plugins.push(
-    new ProgressBarPlugin()
-  );
-}
-
-module.exports = webpackConfig;
