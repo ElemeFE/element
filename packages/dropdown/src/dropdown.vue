@@ -141,7 +141,7 @@
           ev.preventDefault();
           ev.stopPropagation();
         } else if (keyCode === 13) { // space enter选中
-          this.handleClick();
+          // this.handleClick();
         } else if ([9, 27].indexOf(keyCode) > -1) { // tab || esc
           this.hide();
         }
@@ -165,11 +165,11 @@
           ev.preventDefault();
           ev.stopPropagation();
         } else if (keyCode === 13) { // enter选中
-          this.triggerElm.focus();
-          target.click();
-          if (this.hideOnClick) { // click关闭
-            this.visible = false;
-          }
+          // this.triggerElm.focus();
+          // target.click();
+          // if (this.hideOnClick) { // click关闭
+          //   this.visible = false;
+          // }
         } else if ([9, 27].indexOf(keyCode) > -1) { // tab // esc
           this.hide();
           this.triggerElm.focus();
