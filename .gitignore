@@ -4,7 +4,6 @@ npm-debug.log
 lerna-debug.log
 npm-debug.log.*
 lerna-debug.log.*
-lib
 .idea
 .vscode
 examples/element-ui
