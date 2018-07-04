@@ -77,10 +77,10 @@ describe('Checkbox', () => {
     vm = createVue({
       template: `
         <el-checkbox-group v-model="checkList">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
+          <el-checkbox label="a" ref="a">a</el-checkbox>
+          <el-checkbox label="b" ref="b">b</el-checkbox>
+          <el-checkbox label="c" ref="c">c</el-checkbox>
+          <el-checkbox label="d" ref="d">d</el-checkbox>
         </el-checkbox-group>
       `,
       data() {
@@ -101,8 +101,8 @@ describe('Checkbox', () => {
     vm = createVue({
       template: `
         <el-checkbox-group v-model="checkList" @change="onChange">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
+          <el-checkbox label="a" ref="a">a</el-checkbox>
+          <el-checkbox label="b" ref="b">b</el-checkbox>
         </el-checkbox-group>
       `,
       methods: {
@@ -133,10 +133,10 @@ describe('Checkbox', () => {
           :min="1" 
           :max="2"
         >
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
+          <el-checkbox label="a" ref="a">a</el-checkbox>
+          <el-checkbox label="b" ref="b">b</el-checkbox>
+          <el-checkbox label="c" ref="c">c</el-checkbox>
+          <el-checkbox label="d" ref="d">d</el-checkbox>
         </el-checkbox-group>
       `,
       data() {
@@ -169,10 +169,10 @@ describe('Checkbox', () => {
       template: `
         <el-checkbox-group v-model="checkList">
           <el-row>
-            <el-checkbox label="a" ref="a"></el-checkbox>
-            <el-checkbox label="b" ref="b"></el-checkbox>
-            <el-checkbox label="c" ref="c"></el-checkbox>
-            <el-checkbox label="d" ref="d"></el-checkbox>
+            <el-checkbox label="a" ref="a">a</el-checkbox>
+            <el-checkbox label="b" ref="b">b</el-checkbox>
+            <el-checkbox label="c" ref="c">c</el-checkbox>
+            <el-checkbox label="d" ref="d">d</el-checkbox>
           </el-row>
         </el-checkbox-group>
       `,
@@ -213,7 +213,7 @@ describe('Checkbox', () => {
         <div>
           <el-checkbox v-model="checked" checked></el-checkbox>
           <el-checkbox-group v-model="checklist">
-            <el-checkbox checked label="a"></el-checkbox>
+            <el-checkbox checked label="a">a</el-checkbox>
           </el-checkbox-group>
         </div>
       `,
@@ -307,10 +307,10 @@ describe('Checkbox', () => {
       vm = createVue({
         template: `
           <el-checkbox-group v-model="checkList">
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
+            <el-checkbox-button label="a" ref="a">a</el-checkbox-button>
+            <el-checkbox-button label="b" ref="b">b</el-checkbox-button>
+            <el-checkbox-button label="c" ref="c">c</el-checkbox-button>
+            <el-checkbox-button label="d" ref="d">d</el-checkbox-button>
           </el-checkbox-group>
         `,
         data() {
@@ -336,10 +336,10 @@ describe('Checkbox', () => {
       vm = createVue({
         template: `
         <el-checkbox-group v-model="checkList" @change="onChange">
-          <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-          <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-          <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-          <el-checkbox-button label="d" ref="d"></el-checkbox-button>
+          <el-checkbox-button label="a" ref="a">a</el-checkbox-button>
+          <el-checkbox-button label="b" ref="b">b</el-checkbox-button>
+          <el-checkbox-button label="c" ref="c">c</el-checkbox-button>
+          <el-checkbox-button label="d" ref="d">d</el-checkbox-button>
         </el-checkbox-group>
       `,
         methods: {
@@ -369,10 +369,10 @@ describe('Checkbox', () => {
       vm = createVue({
         template: `
           <el-checkbox-group v-model="checkList" size="large" fill="#FF0000" text-color="#000">
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
+            <el-checkbox-button label="a" ref="a">a</el-checkbox-button>
+            <el-checkbox-button label="b" ref="b">b</el-checkbox-button>
+            <el-checkbox-button label="c" ref="c">c</el-checkbox-button>
+            <el-checkbox-button label="d" ref="d">d</el-checkbox-button>
           </el-checkbox-group>
         `,
         data() {
@@ -401,10 +401,10 @@ describe('Checkbox', () => {
             :min="1" 
             :max="2"
           >
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
+            <el-checkbox-button label="a" ref="a">a</el-checkbox-button>
+            <el-checkbox-button label="b" ref="b">b</el-checkbox-button>
+            <el-checkbox-button label="c" ref="c">c</el-checkbox-button>
+            <el-checkbox-button label="d" ref="d">d</el-checkbox-button>
           </el-checkbox-group>
         `,
         data() {
@@ -437,10 +437,10 @@ describe('Checkbox', () => {
         template: `
           <el-checkbox-group v-model="checkList">
             <el-row>
-              <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-              <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-              <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-              <el-checkbox-button label="d" ref="d"></el-checkbox-button>
+              <el-checkbox-button label="a" ref="a">a</el-checkbox-button>
+              <el-checkbox-button label="b" ref="b">b</el-checkbox-button>
+              <el-checkbox-button label="c" ref="c">c</el-checkbox-button>
+              <el-checkbox-button label="d" ref="d">d</el-checkbox-button>
             </el-row>
           </el-checkbox-group>
         `,
@@ -485,7 +485,7 @@ describe('Checkbox', () => {
           <div>
             <el-checkbox-button v-model="checked" checked></el-checkbox-button>
             <el-checkbox-group v-model="checklist">
-              <el-checkbox-button checked label="a"></el-checkbox-button>
+              <el-checkbox-button checked label="a">a</el-checkbox-button>
             </el-checkbox-group>
           </div>
         `,
