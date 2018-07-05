@@ -273,7 +273,7 @@
       }
 
       return (
-        <div class="el-dropdown" v-clickoutside={hide}>
+        <div class="el-dropdown" v-clickoutside={hide} aria-disabled={disabled}>
           {triggerElm}
           {this.$slots.dropdown}
         </div>
