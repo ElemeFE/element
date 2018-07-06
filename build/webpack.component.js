@@ -90,10 +90,7 @@ const webpackConfig = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
+    new VueLoaderPlugin()
   ]
 };
 

@@ -5,7 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const config = require('./config');
 
 const webpackConfig = {
-  mode: 'none',
+  mode: 'development',
   entry: {
     app: ['./src/index.js']
   },
@@ -26,14 +26,6 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        enforce: 'post',
-        test: /\.jsx?$/,
-        loader: 'istanbul-instrumenter-loader',
-        options: { esModules: true },
-        exclude: config.jsexclude,
-        include: /src|packages/
-      },
-      {
         test: /\.(jsx?|babel|es6)$/,
         include: process.cwd(),
         exclude: config.jsexclude,
@@ -43,9 +35,6 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-            js: process.env.CI_ENV ? 'istanbul-instrumenter-loader' : 'istanbul-instrumenter-loader!eslint-loader'
-          },
           preserveWhitespace: false
         }
       },

@@ -1,14 +1,7 @@
-var webpackConfig = require('../../build/webpack.test');
-
-// no need for app entry during tests
-// delete webpackConfig.entry;
+const webpackConfig = require('../../build/webpack.test');
 
 module.exports = function(config) {
-  var configuration = {
-    // to run in additional browsers:
-    // 1. install corresponding karma launcher
-    //    http://karma-runner.github.io/0.13/config/browsers.html
-    // 2. add it to the `browsers` array below.
+  const configuration = {
     browsers: ['Chrome'],
     customLaunchers: {
       Chrome_travis_ci: {
@@ -35,7 +28,7 @@ module.exports = function(config) {
     },
     client: {
       mocha: {
-        timeout: 4000
+        timeout: 5000
       }
     }
   };

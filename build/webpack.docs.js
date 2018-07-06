@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -113,12 +112,6 @@ module.exports = {
       { from: 'examples/versions.json' }
     ]),
     new ProgressBarPlugin(),
-    new VueLoaderPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      vue: {
-        preserveWhitespace: false
-      }
-    })
+    new VueLoaderPlugin()
   ]
 };
