@@ -265,10 +265,10 @@
       } else {
         triggerElm = this.$slots.default;
         const vnodeData = triggerElm[0].data || {};
-        let { staticClass = '' } = vnodeData;
-        if (disabled && staticClass.indexOf('is-disabled') === -1) {
-          staticClass += (staticClass ? ' ' : '') + 'is-disabled';
-          vnodeData.staticClass = staticClass;
+        let { attrs = {} } = vnodeData;
+        if (disabled && !attrs.disabled) {
+          attrs.disabled = true;
+          vnodeData.attrs = attrs;
         }
       }
 

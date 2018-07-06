@@ -55,11 +55,12 @@
     &:focus:active, &:focus:not(.focusing) {
       outline-width: 0;
     }
+  }
 
-    @include when(disabled) {
-      cursor: not-allowed;
-      color: $--font-color-disabled-base;
-    }
+  [disabled] {
+    cursor: default;
+    pointer-events: none;
+    color: $--font-color-disabled-base;
   }
 }
 
