@@ -303,7 +303,7 @@ describe('Dropdown', () => {
 
     triggerEvent(triggerElm, 'mouseenter');
     setTimeout(() => {
-      expect(dropdownElm.querySelectorAll('.el-dropdown-link.is-disabled').length).equal(1);
+      expect(dropdownElm.querySelectorAll('.el-dropdown-link[disabled]').length).equal(1);
       expect(dropdown.visible).to.be.false;
       done();
     }, 10);
