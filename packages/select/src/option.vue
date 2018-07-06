@@ -1,7 +1,7 @@
 <template>
   <li
     @mouseenter="hoverItem"
-    @click.stop="selectOptionClick"
+    @mousedown="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
     :class="{
