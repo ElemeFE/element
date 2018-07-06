@@ -69,6 +69,7 @@
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
     "chai": "^3.5.0",
     "cheerio": "^0.18.0",
     "chokidar": "^1.7.0",
