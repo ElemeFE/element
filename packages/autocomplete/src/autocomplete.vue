@@ -38,7 +38,7 @@
         <slot name="suffix"></slot>
       </template>
     </tm-input>
-    <div class="custom-label"
+    <div class="tm-autocomplete__custom-label"
          @click="onCustomLabelClick"
          v-if="$slots.customLabel && showCustomLabel && value">
       <slot name="customLabel"></slot>
@@ -152,7 +152,6 @@
     },
     methods: {
       onCustomLabelClick(e) {
-        console.log('CLC');
         this.showCustomLabel = false;
         this.$refs.input.focus();
       },
