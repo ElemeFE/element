@@ -2,6 +2,10 @@
 
 ### 1.2.2
 
+*2018-07-09*
+
+- Добавлен customLabel в autocomplete
+
 *2018-07-08*
 
 - Исправлен праметр clearable у select c оцией multi

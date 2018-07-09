@@ -38,6 +38,11 @@
         <slot name="suffix"></slot>
       </template>
     </tm-input>
+    <div class="tm-autocomplete__custom-label"
+         @click="onCustomLabelClick"
+         v-if="$slots.customLabel && showCustomLabel && value">
+      <slot name="customLabel"></slot>
+    </div>
     <tm-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
@@ -126,7 +131,8 @@
         isOnComposition: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: -1
+        highlightedIndex: -1,
+        showCustomLabel: false
       };
     },
     computed: {
@@ -145,6 +151,10 @@
       }
     },
     methods: {
+      onCustomLabelClick(e) {
+        this.showCustomLabel = false;
+        this.$refs.input.focus();
+      },
       getMigratingConfig() {
         return {
           props: {
@@ -189,6 +199,9 @@
       },
       handleBlur(event) {
         this.$emit('blur', event);
+        if (this.$slots.customLabel) {
+          this.showCustomLabel = true;
+        }
       },
       close() {
         this.activated = false;
