@@ -190,15 +190,14 @@
       iconName() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
-          !this.multiple &&
           this.value !== undefined &&
-          this.value !== '';
+          this.value !== '' &&
+          this.value.length > 0;
         return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
       },
       showControlIcon() {
         const showCross = this.clearable &&
           !this.selectDisabled &&
-          !this.multiple &&
           this.value;
         return showCross || this.showArrow;
       },
@@ -703,9 +702,10 @@
       },
 
       deleteSelected(event) {
+        let value = this.multiple ? [] : '';
         event.stopPropagation();
-        this.$emit('input', '');
-        this.emitChange('');
+        this.$emit('input', value);
+        this.emitChange(value);
         this.visible = false;
         this.$emit('clear');
       },
