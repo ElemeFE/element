@@ -192,12 +192,12 @@ describe('Select', () => {
     const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
     expect(vm.value).to.equal('');
     triggerEvent(options[2], 'mouseenter');
-    options[2].click();
+    triggerEvent(options[2], 'mousedown');
     setTimeout(() => {
       expect(vm.value).to.equal('选项3');
       expect(vm.count).to.equal(1);
       triggerEvent(options[2], 'mouseenter');
-      options[4].click();
+      triggerEvent(options[4], 'mousedown');
       setTimeout(() => {
         expect(vm.value).to.equal('选项5');
         expect(vm.count).to.equal(2);
@@ -526,9 +526,9 @@ describe('Select', () => {
       select.selectedLabel = 'new';
       select.onInputChange();
       setTimeout(() => {
-        const options = document.querySelectorAll('.el-select-dropdown__item span');
+        const options = document.querySelectorAll('.el-select-dropdown__item');
         const target = [].filter.call(options, option => option.innerText === 'new');
-        target[0].click();
+        triggerEvent(target[0], 'mousedown');
         setTimeout(() => {
           expect(select.value.indexOf('new') > -1).to.true;
           done();
@@ -542,9 +542,9 @@ describe('Select', () => {
     const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
     vm.value = ['选项1'];
     setTimeout(() => {
-      options[1].click();
+      triggerEvent(options[1], 'mousedown');
       setTimeout(() => {
-        options[3].click();
+        triggerEvent(options[3], 'mousedown');
         setTimeout(() => {
           expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
           const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
@@ -624,10 +624,10 @@ describe('Select', () => {
   it('multiple limit', done => {
     vm = getSelectVm({ multiple: true, multipleLimit: 1 });
     const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
-    options[1].click();
+    triggerEvent(options[1], 'mousedown');
     setTimeout(() => {
       expect(vm.value.indexOf('选项2') > -1).to.true;
-      options[3].click();
+      triggerEvent(options[3], 'mousedown');
       setTimeout(() => {
         expect(vm.value.indexOf('选项4')).to.equal(-1);
         done();
@@ -659,7 +659,7 @@ describe('Select', () => {
       select.handleQueryChange('面');
       setTimeout(() => {
         expect(select.filteredOptionsCount).to.equal(1);
-        select.options[0].$el.click();
+        triggerEvent(select.options[0].$el, 'mousedown');
         vm.$nextTick(() => {
           expect(vm.value[0]).to.equal('选项4');
           select.deletePrevTag({ target: select.$refs.input });
@@ -720,7 +720,7 @@ describe('Select', () => {
 
     const option = vm.$el.querySelectorAll('.el-select-dropdown__item')[0];
     triggerEvent(option, 'mouseenter');
-    option.click();
+    triggerEvent(option, 'mousedown');
 
     vm.$nextTick(_ => {
       expect(spyInputFocus.calledOnce).to.be.true;
@@ -793,7 +793,7 @@ describe('Select', () => {
       expect(callCount).to.equal(0);
       const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
       triggerEvent(options[2], 'mouseenter');
-      options[2].click();
+      triggerEvent(options[2], 'mousedown');
       setTimeout(() => {
         expect(callCount).to.equal(1);
         done();

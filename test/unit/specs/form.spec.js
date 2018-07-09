@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, triggerEvent } from '../util';
 
 const DELAY = 50;
 
@@ -446,7 +446,7 @@ describe('Form', () => {
             setTimeout(_ => {
               expect(field.validateMessage).to.equal('请选择活动区域');
               // user modification of bound value triggers change validation
-              vm.$refs.opt.$el.click();
+              triggerEvent(vm.$refs.opt.$el, 'mousedown');
               setTimeout(_ => {
                 expect(field.validateMessage).to.equal('');
                 done();

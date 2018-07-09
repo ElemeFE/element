@@ -356,7 +356,8 @@ describe('Pagination', () => {
     expect(vm.trigger).to.false;
 
     setTimeout(_ => {
-      vm.$el.querySelectorAll('li.el-select-dropdown__item')[1].click();
+      const option = vm.$el.querySelectorAll('li.el-select-dropdown__item')[1];
+      triggerEvent(option, 'mousedown');
       setTimeout(_ => {
         expect(vm.trigger).to.true;
         done();

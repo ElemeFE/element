@@ -581,13 +581,11 @@
       },
 
       handleBlur(event) {
-        setTimeout(() => {
-          if (this.isSilentBlur) {
-            this.isSilentBlur = false;
-          } else {
-            this.$emit('blur', event);
-          }
-        }, 50);
+        if (this.isSilentBlur) {
+          this.isSilentBlur = false;
+        } else {
+          this.$emit('blur', event);
+        }
         this.softFocus = false;
       },
 
@@ -708,7 +706,7 @@
         this.softFocus = true;
         const input = this.$refs.input || this.$refs.reference;
         if (input) {
-          input.focus();
+          this.$nextTick(() => input.focus());
         }
       },
 
