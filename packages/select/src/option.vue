@@ -72,11 +72,15 @@
         return this.value || this.label || '';
       },
 
-      itemSelected() {
-        if (!this.select.multiple) {
-          return this.isEqual(this.value, this.select.value);
-        } else {
-          return this.contains(this.select.value, this.value);
+      itemSelected: {
+        get: function() {
+          if (!this.select.multiple) {
+            return this.isEqual(this.value, this.select.value);
+          } else {
+            return this.contains(this.select.value, this.value);
+          }
+        },
+        set: function() {
         }
       },
 

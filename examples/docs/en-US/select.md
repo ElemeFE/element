@@ -574,6 +574,53 @@ You can clear Select using a clear icon.
 ```
 :::
 
+### Basic checkbox select with disable option
+
+Chekbox select uses tags to display selected options.
+
+:::demo Set `checkbox` attribute for `tm-select` to enable checkbox mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
+```html
+<template>
+  <tm-select v-model="value12" multiple placeholder="Select">
+    <tm-option
+      v-for="item in options2"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      :disabled="item.disabled"
+      checkbox>
+    </tm-option>
+  </tm-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value12: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Custom template
 
 You can customize HTML templates for options.
