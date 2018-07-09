@@ -565,7 +565,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          if (this.automaticDropdown || this.filterable) {
+          if (this.automaticDropdown) {
             this.visible = true;
             this.menuVisibleOnFocus = true;
           }
