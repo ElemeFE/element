@@ -8,6 +8,14 @@
 @include b(autocomplete) {
   position: relative;
   display: inline-block;
+
+  .custom-label {
+    position: absolute;
+    top: 0;
+    left:0;
+    right: 0;
+    height: 100%;
+  }
 }
 
 @include b(autocomplete-suggestion) {

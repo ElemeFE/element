@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.2.2
+
+*2018-07-09*
+
+- Добавлен customLabel в autocomplete
+
 ### 1.2.1
 
 *2018-06-02*
