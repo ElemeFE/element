@@ -19,6 +19,14 @@
       color: $--select-option-disabled-color;
       cursor: not-allowed;
 
+      .tm-checkbox__inner {
+        border-color: $--select-option-disabled-color;
+        cursor: not-allowed;
+        &:hover {
+          border-color: $--select-option-disabled-color;
+        }
+      }
+
       &:hover {
         background-color: $--color-white;
       }
