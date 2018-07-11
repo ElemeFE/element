@@ -1,6 +1,7 @@
 @import "mixins/mixins";
 @import "mixins/utils";
 @import "common/var";
+@import "common/transition";
 
 @mixin menu-item {
   height: 56px;
