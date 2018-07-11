@@ -35,39 +35,17 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          preserveWhitespace: false
+          compilerOptions: {
+            preserveWhitespace: false
+          }
         }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       },
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.html$/,
-        loader: 'html-loader?minimize=false'
-      },
-      {
-        test: /\.otf|ttf|woff2?|eot(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.svg(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(gif|png|jpe?g)(\?\S*)?$/,
+        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,

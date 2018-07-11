@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -25,9 +24,7 @@ const webpackConfig = {
   performance: {
     hints: false
   },
-  stats: {
-    children: false
-  },
+  stats: 'none',
   optimization: {
     minimize: false
   },
@@ -43,12 +40,10 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          preserveWhitespace: false
+          compilerOptions: {
+            preserveWhitespace: false
+          }
         }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       },
       {
         test: /\.css$/,
@@ -59,27 +54,7 @@ const webpackConfig = {
         loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.html$/,
-        loader: 'html-loader?minimize=false'
-      },
-      {
-        test: /\.otf|ttf|woff2?|eot(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.svg(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(gif|png|jpe?g)(\?\S*)?$/,
+        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
