@@ -42,7 +42,8 @@
         v-for="(item, index) in suggestions"
         :key="index"
         :class="{'highlighted': highlightedIndex === index}"
-        @click="select(item)"
+        @mousedown="handleMousedown(item)"
+        @mouseup="clearSuggestions"
         :id="`${id}-item-${index}`"
         role="option"
         :aria-selected="highlightedIndex === index"
@@ -203,13 +204,21 @@
           });
         }
       },
-      select(item) {
+      handleMousedown(item) {
+        // mousedown triggered before blur so the validation onblur will recevie the selected value
         this.$emit('input', item[this.valueKey]);
         this.$emit('select', item);
+      },
+      clearSuggestions() {
         this.$nextTick(_ => {
           this.suggestions = [];
           this.highlightedIndex = -1;
         });
+      },
+      select(item) {
+        this.$emit('input', item[this.valueKey]);
+        this.$emit('select', item);
+        this.clearSuggestions();
       },
       highlight(index) {
         if (!this.suggestionVisible || this.loading) { return; }

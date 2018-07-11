@@ -1,4 +1,4 @@
-import { createVue, triggerClick, destroyVM, triggerKeyDown } from '../util';
+import { createVue, triggerClick, triggerEvent, destroyVM, triggerKeyDown } from '../util';
 
 describe('Autocomplete', () => {
   let vm;
@@ -117,7 +117,8 @@ describe('Autocomplete', () => {
     setTimeout(_ => {
       const suggestions = autocomplete.$refs.suggestions.$el;
       const suggestionList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
-      suggestionList[1].click();
+      triggerEvent(suggestionList[1], 'mousedown');
+      triggerEvent(suggestionList[1], 'mouseup');
       setTimeout(_ => {
         expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
         expect(vm.state).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
@@ -316,7 +317,8 @@ describe('Autocomplete', () => {
       const suggestions = autocomplete.$refs.suggestions.$el;
       const suggestionList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
       expect(suggestionList[1].innerHTML === '上海市长宁区淞虹路661号');
-      suggestionList[1].click();
+      triggerEvent(suggestionList[1], 'mousedown');
+      triggerEvent(suggestionList[1], 'mouseup');
       setTimeout(_ => {
         expect(inputElm.value).to.be.equal('上海市长宁区淞虹路661号');
         expect(vm.state).to.be.equal('上海市长宁区淞虹路661号');
