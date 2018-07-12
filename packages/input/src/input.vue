@@ -26,6 +26,7 @@
         v-bind="$attrs"
         :type="type"
         :disabled="inputDisabled"
+        :readonly="readonly"
         :autocomplete="autoComplete"
         :value="currentValue"
         ref="input"
@@ -85,6 +86,7 @@
       ref="textarea"
       v-bind="$attrs"
       :disabled="inputDisabled"
+      :readonly="readonly"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -138,6 +140,7 @@
       resize: String,
       form: String,
       disabled: Boolean,
+      readonly: Boolean,
       type: {
         type: String,
         default: 'text'
