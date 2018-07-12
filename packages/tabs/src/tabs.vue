@@ -89,8 +89,7 @@
         }
       },
       addPanes(item) {
-        const index = this.$slots.default.indexOf(item.$vnode);
-        this.panes.splice(index, 0, item);
+        this.panes.push(item);
       },
       removePanes(item) {
         const panes = this.panes;
