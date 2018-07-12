@@ -18,7 +18,7 @@
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
     </el-tree-node>
-    <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
+    <div class="el-tree__empty-block" v-if="isEmpty">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
     </div>
     <div
@@ -141,12 +141,16 @@
 
       treeItemArray() {
         return Array.prototype.slice.call(this.treeItems);
+      },
+
+      isEmpty() {
+        const { childNodes } = this.root;
+        return !childNodes || childNodes.length === 0 || childNodes.every(({visible}) => !visible);
       }
     },
 
     watch: {
       defaultCheckedKeys(newVal) {
-        this.store.defaultCheckedKeys = newVal;
         this.store.setDefaultCheckedKey(newVal);
       },
 
