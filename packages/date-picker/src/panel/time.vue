@@ -44,7 +44,8 @@
 
     props: {
       visible: Boolean,
-      timeArrowControl: Boolean
+      timeArrowControl: Boolean,
+      format: { type: String, default: 'HH:mm:ss' }
     },
 
     watch: {
@@ -86,7 +87,6 @@
     data() {
       return {
         popperClass: '',
-        format: 'HH:mm:ss',
         value: '',
         defaultValue: null,
         date: new Date(),
