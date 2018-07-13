@@ -453,8 +453,8 @@
             draggingNode.node.remove();
             dropNode.node.parent.insertAfter({ data }, dropNode.node);
           } else if (dropType === 'inner') {
-            dropNode.node.insertChild({ data });
             draggingNode.node.remove();
+            dropNode.node.insertChild({ data });
           }
           removeClass(dropNode.$el, 'is-drop-inner');
 
