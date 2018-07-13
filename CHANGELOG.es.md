@@ -1,5 +1,20 @@
 ## Changelog
 
+### 2.4.4
+
+*2018-07-13*
+
+- Fixed triggering Select validation after Form resetting, #11837
+- Fixed wrong position of Input `suffix` slot when `suffix` slot with `append` slot, #11951
+- Fixed clearable Input still displaying the clear icon when readonly, #11967
+- Fixed Tree node checked when it's disabled, #11847
+- Fixed Tree's `default-checked-keys` not working, #11971
+- Fixed `empty-text` not visible when Tree node filtered, #11971
+- Fixed the position of oversized `empty-text` in Table, #11965
+- Fixed Table row not be unhighlighted when `current-row-key` is assigned to `null`, #11866
+- Fixed showing filter dropdown when `filters` is an empty array, #11864
+- Fixed Radio's label does not stop event propagation, #11912
+
 ### 2.4.3
 
 *2018-07-03*
