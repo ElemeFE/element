@@ -20,7 +20,8 @@ const getModal = function() {
       event.stopPropagation();
     });
 
-    modalDom.addEventListener('click', function() {
+    modalDom.addEventListener('click', function(event) {
+      event.stopPropagation()
       PopupManager.doOnModalClick && PopupManager.doOnModalClick();
     });
   }
