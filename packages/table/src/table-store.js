@@ -328,12 +328,30 @@ TableStore.prototype.mutations = {
   },
 
   rowSelectedChanged(states, row) {
+    const hasOneSelected = states.selection.length === 1;
     const changed = toggleRowSelection(states, row);
     const selection = states.selection;
 
     if (changed) {
       const table = this.table;
-      table.$emit('selection-change', selection ? selection.slice() : []);
+      const isRangeSelection = hasOneSelected && table.isPressingShift && table.rowKey;
+      let changedSelection = selection ? selection.slice() : [];
+      if (isRangeSelection) {
+        const rowKey = table.rowKey;
+        const data = states.data;
+        let headIndex, tailIndex;
+        states.data.forEach((row, index) => {
+          const rowId = getRowIdentity(row, rowKey);
+          const headId = getRowIdentity(selection[0], rowKey);
+          const tailId = getRowIdentity(selection[1], rowKey);
+          if (rowId === headId) headIndex = index;
+          if (rowId === tailId) tailIndex = index;
+        });
+        if (headIndex > tailIndex) [headIndex, tailIndex] = [tailIndex, headIndex];
+        changedSelection = data.slice(headIndex, tailIndex + 1);
+        states.selection = changedSelection;
+      }
+      table.$emit('selection-change', changedSelection);
       table.$emit('select', selection, row);
     }
 

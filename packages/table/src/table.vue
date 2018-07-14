@@ -447,6 +447,24 @@
 
       sort(prop, order) {
         this.store.commit('sort', { prop, order });
+      },
+
+      addEventListeners() {
+        window.addEventListener('keydown', this.onKeydown);
+        window.addEventListener('keyup', this.onKeyup);
+      },
+
+      removeEventListeners() {
+        window.removeEventListener('keydown', this.onKeydown);
+        window.removeEventListener('keyup', this.onKeyup);
+      },
+
+      onKeydown({keyCode}) {
+        if (keyCode === 16) this.isPressingShift = true;
+      },
+
+      onKeyup({keyCode}) {
+        if (keyCode === 16) this.isPressingShift = false;
       }
     },
 
@@ -599,12 +617,14 @@
 
     destroyed() {
       if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener);
+      this.removeEventListeners();
     },
 
     mounted() {
       this.bindEvents();
       this.store.updateColumns();
       this.doLayout();
+      this.addEventListeners();
 
       this.resizeState = {
         width: this.$el.offsetWidth,
@@ -641,6 +661,7 @@
         layout,
         store,
         isHidden: false,
+        isPressingShift: false,
         renderExpanded: null,
         resizeProxyVisible: false,
         resizeState: {
