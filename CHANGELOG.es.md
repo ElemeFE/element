@@ -4,16 +4,16 @@
 
 *2018-07-13*
 
-- Fixed triggering Select validation after Form resetting, #11837
-- Fixed wrong position of Input `suffix` slot when `suffix` slot with `append` slot, #11951
-- Fixed clearable Input still displaying the clear icon when readonly, #11967
-- Fixed Tree node checked when it's disabled, #11847
-- Fixed Tree's `default-checked-keys` not working, #11971
-- Fixed `empty-text` not visible when Tree node filtered, #11971
-- Fixed the position of oversized `empty-text` in Table, #11965
-- Fixed Table row not be unhighlighted when `current-row-key` is assigned to `null`, #11866
-- Fixed showing filter dropdown when `filters` is an empty array, #11864
-- Fixed Radio's label does not stop event propagation, #11912
+- Corregido que se disparaba la validacion del Select después de reajustar el formulario, #11837
+- Corregida la posición incorrecta del slot Input `suffix`  cuando se usaba el slot `suffix` con el slot  `append`  , #11951
+- Corregido el clearable Input que muestraba el icono de borrado cuando era readonly, #11967
+- Arreglado el nodo Tree checked cuando estaba disabled, #11847
+- Corregido que  `default-checked-keys`  no funcionaba en Tree, #11971
+- Corregido que el `empty-text` no era visible cuando el nodo Tree se filtraba, #11971
+- Arreglada la posición de texto vacío sobredimensionado en Table, #11965
+- Corregido que la fila de la tabla no se modificado el resaltado cuando `current-row-key` era asignada a null, #11866
+- Arreglado que mostraba el filtro del dropdown cuando los filtros eran un array vacío, #11864
+- Corregido que el cambio de label de Radio no detenia propagacion de eventos, #11912
 
 ### 2.4.3
 
