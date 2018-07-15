@@ -21,7 +21,7 @@ const getModal = function() {
     });
 
     modalDom.addEventListener('click', function(event) {
-      event.stopPropagation()
+      event.stopPropagation();
       PopupManager.doOnModalClick && PopupManager.doOnModalClick();
     });
   }
