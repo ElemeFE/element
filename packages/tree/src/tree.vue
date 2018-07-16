@@ -289,15 +289,15 @@
         this.treeItems[0] && this.treeItems[0].setAttribute('tabindex', 0);
       },
 
-      handelKeydown(ev) {
+      handleKeydown(ev) {
         const currentItem = ev.target;
         if (currentItem.className.indexOf('el-tree-node') === -1) return;
-        ev.preventDefault();
         const keyCode = ev.keyCode;
         this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
         const currentIndex = this.treeItemArray.indexOf(currentItem);
         let nextIndex;
         if ([38, 40].indexOf(keyCode) > -1) { // up、down
+          ev.preventDefault();
           if (keyCode === 38) { // up
             nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
           } else {
@@ -306,10 +306,12 @@
           this.treeItemArray[nextIndex].focus(); // 选中
         }
         if ([37, 39].indexOf(keyCode) > -1) { // left、right 展开
+          ev.preventDefault();
           currentItem.click(); // 选中
         }
         const hasInput = currentItem.querySelector('[type="checkbox"]');
         if ([13, 32].indexOf(keyCode) > -1 && hasInput) { // space enter选中checkbox
+          ev.preventDefault();
           hasInput.click();
         }
       }
@@ -476,7 +478,7 @@
 
     mounted() {
       this.initTabIndex();
-      this.$el.addEventListener('keydown', this.handelKeydown);
+      this.$el.addEventListener('keydown', this.handleKeydown);
     },
 
     updated() {
