@@ -12,10 +12,7 @@
     <el-tree-node
       v-for="child in root.childNodes"
       :node="child"
-      :props="props"
-      :render-after-expand="renderAfterExpand"
       :key="getNodeKey(child)"
-      :render-content="renderContent"
       @node-expand="handleNodeExpand">
     </el-tree-node>
     <div class="el-tree__empty-block" v-if="isEmpty">
@@ -46,11 +43,16 @@
       ElTreeNode
     },
 
+    provide() {
+      return {
+        tree: this
+      };
+    },
+
     data() {
       return {
         store: null,
         root: null,
-        currentNode: null,
         treeItems: null,
         checkboxItems: [],
         dragState: {
@@ -130,14 +132,14 @@
     },
 
     computed: {
-      children: {
-        set(value) {
-          this.data = value;
-        },
-        get() {
-          return this.data;
-        }
-      },
+      // children: {
+      //   set(value) {
+      //     this.data = value;
+      //   },
+      //   get() {
+      //     return this.data;
+      //   }
+      // },
 
       treeItemArray() {
         return Array.prototype.slice.call(this.treeItems);
@@ -182,19 +184,6 @@
 
       getNodeKey(node) {
         return getNodeKey(this.nodeKey, node.data);
-      },
-
-      getNodePath(data) {
-        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getNodePath');
-        const node = this.store.getNode(data);
-        if (!node) return [];
-        const path = [node.data];
-        let parent = node.parent;
-        while (parent && parent !== this.root) {
-          path.push(parent.data);
-          parent = parent.parent;
-        }
-        return path.reverse();
       },
 
       getCheckedNodes(leafOnly) {
@@ -318,8 +307,6 @@
     },
 
     created() {
-      this.isTree = true;
-
       this.store = new TreeStore({
         key: this.nodeKey,
         data: this.data,

@@ -54,9 +54,7 @@
         :aria-expanded="expanded"
       >
         <el-tree-node
-          :render-content="renderContent"
           v-for="child in node.childNodes"
-          :render-after-expand="renderAfterExpand"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
@@ -69,6 +67,7 @@
 <script type="text/jsx">
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
+  import NodeContent from './node-content';
   import emitter from 'element-ui/src/mixins/emitter';
   import { getNodeKey } from './model/util';
 
@@ -79,54 +78,45 @@
 
     mixins: [emitter],
 
+    inject: ['tree'],
+
     props: {
       node: {
         default() {
           return {};
         }
       },
-      props: {},
-      renderContent: Function,
-      renderAfterExpand: {
-        type: Boolean,
-        default: true
-      }
+      // props: {},
+      // renderContent: Function,
+      // renderAfterExpand: {
+      //   type: Boolean,
+      //   default: true
+      // }
     },
 
     components: {
       ElCollapseTransition,
       ElCheckbox,
-      NodeContent: {
-        props: {
-          node: {
-            required: true
-          }
-        },
-        render(h) {
-          const parent = this.$parent;
-          const tree = parent.tree;
-          const node = this.node;
-          const { data, store } = node;
-          return (
-            parent.renderContent
-              ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
-              : tree.$scopedSlots.default
-                ? tree.$scopedSlots.default({ node, data })
-                : <span class="el-tree-node__label">{ node.label }</span>
-          );
-        }
-      }
+      NodeContent
     },
 
     data() {
       return {
-        tree: null,
         expanded: false,
         childNodeRendered: false,
         showCheckbox: false,
         oldChecked: null,
         oldIndeterminate: null
       };
+    },
+
+    computed: {
+      renderContent() {
+        return this.tree.renderContent;
+      },
+      renderAfterExpand() {
+        return this.tree.renderAfterExpand;
+      }
     },
 
     watch: {
@@ -163,7 +153,7 @@
         const store = this.tree.store;
         store.setCurrentNode(this.node);
         this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
-        this.tree.currentNode = this;
+        // this.tree.currentNode = this;
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
@@ -234,19 +224,8 @@
     },
 
     created() {
-      const parent = this.$parent;
-
-      if (parent.isTree) {
-        this.tree = parent;
-      } else {
-        this.tree = parent.tree;
-      }
-
       const tree = this.tree;
-      if (!tree) {
-        console.warn('Can not find node\'s tree.');
-      }
-
+      
       const props = tree.props || {};
       const childrenKey = props['children'] || 'children';
 
