@@ -662,6 +662,7 @@
         store,
         isHidden: false,
         isPressingShift: false,
+        anchorRow: null,
         renderExpanded: null,
         resizeProxyVisible: false,
         resizeState: {

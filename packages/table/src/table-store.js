@@ -328,33 +328,44 @@ TableStore.prototype.mutations = {
   },
 
   rowSelectedChanged(states, row) {
-    const hasOneSelected = states.selection.length === 1;
+    const table = this.table;
+    const isRangeSelection = table.isPressingShift && table.rowKey && table.anchorRow;
     const changed = toggleRowSelection(states, row);
     const selection = states.selection;
 
     if (changed) {
-      const table = this.table;
-      const isRangeSelection = hasOneSelected && table.isPressingShift && table.rowKey;
       let changedSelection = selection ? selection.slice() : [];
+
       if (isRangeSelection) {
-        const rowKey = table.rowKey;
         const data = states.data;
+        const { rowKey, anchorRow } = table;
+        const anchorId = getRowIdentity(anchorRow, rowKey);
+        const targetRowId = getRowIdentity(row, rowKey);
         let headIndex, tailIndex;
-        states.data.forEach((row, index) => {
-          const rowId = getRowIdentity(row, rowKey);
-          const headId = getRowIdentity(selection[0], rowKey);
-          const tailId = getRowIdentity(selection[1], rowKey);
-          if (rowId === headId) headIndex = index;
-          if (rowId === tailId) tailIndex = index;
+        data.forEach((_row, index) => {
+          const rowId = getRowIdentity(_row, rowKey);
+          if (rowId === targetRowId) headIndex = index;
+          if (rowId === anchorId) tailIndex = index;
         });
         if (headIndex > tailIndex) [headIndex, tailIndex] = [tailIndex, headIndex];
-        changedSelection = data.slice(headIndex, tailIndex + 1);
+        const dataRange = data.slice(headIndex, tailIndex + 1);
+        const isClickOnSelected = !this.isSelected(row);
+
+        if (isClickOnSelected) {
+          changedSelection = changedSelection
+            .filter(_row => dataRange.indexOf(_row) === -1);
+        } else {
+          changedSelection = changedSelection
+            .concat(dataRange)
+            .filter((_row, i, arr) => arr.indexOf(_row) === i);
+        }
         states.selection = changedSelection;
       }
+
       table.$emit('selection-change', changedSelection);
       table.$emit('select', selection, row);
     }
-
+    table.anchorRow = row;
     this.updateAllSelected();
   },
 
