@@ -59,6 +59,7 @@
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon--arrow-left">
+              <tm-icon name="arrow-left" />
             </button>
             <span
               @click="showYearPicker"
@@ -82,6 +83,7 @@
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
               class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon--arrow-right">
+              <tm-icon name="arrow-right" />
             </button>
           </div>
 

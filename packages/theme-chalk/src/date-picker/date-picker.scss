@@ -77,10 +77,16 @@
 
   @include e(prev-btn) {
     float: left;
+    .tm-icon {
+      fill: $--color-pastel-gray;
+    }
   }
 
   @include e(next-btn) {
     float: right;
+    .tm-icon {
+      fill: $--color-pastel-gray;
+    }
   }
 
   @include e(time-wrap) {
