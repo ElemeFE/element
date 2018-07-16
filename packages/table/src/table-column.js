@@ -279,7 +279,17 @@ export default {
       sortOrders: this.sortOrders
     });
 
-    objectAssign(column, forced[type] || {});
+    let source = forced[type] || {};
+    for (let prop in source) {
+      if (source.hasOwnProperty(prop)) {
+        let value = source[prop];
+        if (value !== undefined) {
+          column[prop] = prop === 'className'
+            ? `${column[prop]} ${value}`
+            : value;
+        }
+      }
+    }
 
     this.columnConfig = column;
 
