@@ -59,6 +59,7 @@
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon--arrow-left">
+              <tm-icon name="arrow-left" />
             </button>
             <span
               @click="showYearPicker"
@@ -82,6 +83,7 @@
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
               class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon--arrow-right">
+              <tm-icon name="arrow-right" />
             </button>
           </div>
 
@@ -156,6 +158,7 @@
   } from '../util';
   import Locale from 'tmconsulting-ui/src/mixins/locale';
   import TmInput from 'tmconsulting-ui/packages/input';
+  import TmIcon from 'tmconsulting-ui/packages/icon';
   import TmButton from 'tmconsulting-ui/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
@@ -444,7 +447,7 @@
     },
 
     components: {
-      TimePicker, YearTable, MonthTable, DateTable, TmInput, TmButton
+      TimePicker, YearTable, MonthTable, DateTable, TmInput, TmButton, TmIcon
     },
 
     data() {
