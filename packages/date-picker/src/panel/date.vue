@@ -158,6 +158,7 @@
   } from '../util';
   import Locale from 'tmconsulting-ui/src/mixins/locale';
   import TmInput from 'tmconsulting-ui/packages/input';
+  import TmIcon from 'tmconsulting-ui/packages/icon';
   import TmButton from 'tmconsulting-ui/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
@@ -446,7 +447,7 @@
     },
 
     components: {
-      TimePicker, YearTable, MonthTable, DateTable, TmInput, TmButton
+      TimePicker, YearTable, MonthTable, DateTable, TmInput, TmButton, TmIcon
     },
 
     data() {
