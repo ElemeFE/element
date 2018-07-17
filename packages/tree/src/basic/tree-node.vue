@@ -69,7 +69,7 @@
   import ElCheckbox from 'element-ui/packages/checkbox';
   import NodeContent from './node-content';
   import emitter from 'element-ui/src/mixins/emitter';
-  import { getNodeKey } from './model/util';
+  import { getNodeKey } from '../model/util';
 
   export default {
     name: 'ElTreeNode',
@@ -85,13 +85,7 @@
         default() {
           return {};
         }
-      },
-      // props: {},
-      // renderContent: Function,
-      // renderAfterExpand: {
-      //   type: Boolean,
-      //   default: true
-      // }
+      }
     },
 
     components: {
@@ -146,14 +140,13 @@
           this.tree.$emit('check-change', this.node.data, checked, indeterminate);
         }
         this.oldChecked = checked;
-        this.indeterminate = indeterminate;
+        this.oldIndeterminate = indeterminate;
       },
 
       handleClick() {
         const store = this.tree.store;
         store.setCurrentNode(this.node);
         this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
-        // this.tree.currentNode = this;
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
