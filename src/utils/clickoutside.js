@@ -19,6 +19,17 @@ let seed = 0;
 
 function createDocumentHandler(el, binding, vnode) {
   return function(mouseup = {}, mousedown = {}) {
+    if (mouseup.type === 'blur') {
+      if (binding.expression &&
+        el[ctx].methodName &&
+        vnode.context[el[ctx].methodName]) {
+        vnode.context[el[ctx].methodName]();
+      } else {
+        el[ctx].bindingFn && el[ctx].bindingFn();
+      }
+      return
+    }
+
     if (!vnode ||
       !vnode.context ||
       !mouseup.target ||
