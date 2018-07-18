@@ -124,6 +124,11 @@ export declare class ElTable extends ElementUIComponent {
   toggleRowSelection (row: object, selected?: boolean): void
 
   /**
+   * Toggle or set all rows
+   */
+  toggleAllSelection (): void
+
+  /**
    * Set a certain row as selected
    *
    * @param row The row that is going to set as selected
