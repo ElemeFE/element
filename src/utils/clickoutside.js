@@ -13,6 +13,10 @@ let seed = 0;
   nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
 });
 
+!Vue.prototype.$isServer && on(window, 'blur', e => {
+  nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
+});
+
 function createDocumentHandler(el, binding, vnode) {
   return function(mouseup = {}, mousedown = {}) {
     if (mouseup.type === 'blur') {
@@ -34,8 +38,8 @@ function createDocumentHandler(el, binding, vnode) {
       el.contains(mousedown.target) ||
       el === mouseup.target ||
       (vnode.context.popperElm &&
-      (vnode.context.popperElm.contains(mouseup.target) ||
-      vnode.context.popperElm.contains(mousedown.target)))) return;
+        (vnode.context.popperElm.contains(mouseup.target) ||
+          vnode.context.popperElm.contains(mousedown.target)))) return;
 
     if (binding.expression &&
       el[ctx].methodName &&
