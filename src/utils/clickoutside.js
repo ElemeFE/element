@@ -13,10 +13,6 @@ let seed = 0;
   nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
 });
 
-!Vue.prototype.$isServer && on(window, 'blur', e => {
-  nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
-});
-
 function createDocumentHandler(el, binding, vnode) {
   return function(mouseup = {}, mousedown = {}) {
     if (mouseup.type === 'blur') {
