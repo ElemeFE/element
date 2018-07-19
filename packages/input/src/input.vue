@@ -50,6 +50,7 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
+        :style="{'right':suffixRightForSearchButton}"
         v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
           <template v-if="!showClear">
@@ -130,7 +131,8 @@
         hovering: false,
         focused: false,
         isOnComposition: false,
-        valueBeforeComposition: null
+        valueBeforeComposition: null,
+        suffixRightForSearchButton:'5px'
       };
     },
 
@@ -315,6 +317,10 @@
         this.$emit('clear');
         this.setCurrentValue('');
         this.focus();
+      },
+      calcSuffixWidthWithSearchButton(slots){
+        let total_pixel = Object.keys(slots).map(v => slots[v].elm && slots[v].elm.clientWidth ? slots[0].elm.clientWidth : 0).reduce((prev,next) => prev+next);
+        return total_pixel > 0 ? (total_pixel+4)+'px' : '5px'
       }
     },
 
@@ -325,6 +331,8 @@
     mounted() {
       this.resizeTextarea();
       this.updateIconOffset();
+      if(this.$slots.append)
+        this.suffixRightForSearchButton = this.calcSuffixWidthWithSearchButton(this.$slots.append);
     },
 
     updated() {
