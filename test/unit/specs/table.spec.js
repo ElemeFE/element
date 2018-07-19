@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, selectDomsText } from '../util';
 
 const DELAY = 10;
 const testDataArr = [];
@@ -488,6 +488,19 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('cell-click-with-selected-text', done => {
+      const vm = createTable('cell-click-with-selected-text');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+        selectDomsText(cell);
+        cell.parentNode.click();
+        expect(vm.result).to.length(0); // event has been prevented
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('row-click', done => {
       const vm = createTable('row-click');
 
@@ -497,6 +510,20 @@ describe('Table', () => {
         triggerEvent(cell.parentNode.parentNode, 'click');
         expect(vm.result).to.length(3); // row, event, column
         expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('row-click-with-selected-text', done => {
+      const vm = createTable('row-click-with-selected-text');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+
+        selectDomsText(cell);
+        triggerEvent(cell.parentNode.parentNode, 'click');
+        expect(vm.result).to.length(0); // event has been prevented
         destroyVM(vm);
         done();
       }, DELAY);
