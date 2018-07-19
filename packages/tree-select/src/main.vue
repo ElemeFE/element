@@ -3,17 +3,21 @@
     class="el-tree-select"
     @click.stop="toggleTree"
     v-clickoutside="handleClose">
-    <div class="el-tree-select__tags" v-if="multiple">
+    <div
+      class="el-tree-select__tags"
+      :style="{ 'max-width': inputWidth - 32 + 'px' }"
+      ref="tags"
+      v-if="multiple">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-for="item in selected"
-          :key="getValueKey(item)"
+          :key="item.value"
           :closable="!selectDisabled"
           :size="collapseTagSize"
           type="info"
-          @close="deleteTag($event, item)"
-          disable-transitions>
-          <span class="el-tree-select__tags-text">{{ item.currentLabel }}</span>
+          disable-transitions
+          @close.stop="deleteTag(item)">
+          <span class="el-tree-select__tags-text">{{ item.label }}</span>
         </el-tag>
       </transition-group>
       <input
@@ -36,6 +40,7 @@
       :readonly="readonly"
       :validate-event="false"
       :size="selectSize"
+      :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @keyup.native="onInputChange"
       @mouseenter.native="inputHovering = true"
@@ -103,6 +108,12 @@ const popperMixin = {
   beforeDestroy: Popper.beforeDestroy
 };
 
+const sizeMap = {
+  'medium': 36,
+  'small': 32,
+  'mini': 28
+};
+
 export default {
   name: 'ElTreeSelect',
 
@@ -129,7 +140,10 @@ export default {
     multiple: Boolean,
     multipleLimit: {
       type: Number,
-      default: 0
+      default: 0,
+      validator(val) {
+        return val >= 0;
+      }
     },
     disabled: Boolean,
     clearable: Boolean,
@@ -169,7 +183,9 @@ export default {
       selectedLabel: '',
       inputLength: 20,
       visible: false,
+      inputWidth: 0,
       inputHovering: false,
+      treeVisibleOnFocus: false,
       selected: this.multiple ? [] : {}
     };
   },
@@ -186,7 +202,7 @@ export default {
           this.value !== '';
       if (criteria) {
         classes = [...classes, 'el-icon-circle-close', 'is-show-close'];
-      } else if (!this.filterable) {
+      } else { //  if (!this.filterable)
         classes.push('el-icon-arrow-down');
         if (this.visible) {
           classes.push('is-reverse');
@@ -197,8 +213,15 @@ export default {
     selectDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
     },
+    selectSize() {
+      return this.size || (this.elFormItem || {}).elFormItemSize || (this.$ELEMENT || {}).size;
+    },
+    collapseTagSize() {
+      return ['small', 'mini'].indexOf(this.selectSize) > -1
+        ? 'mini'
+        : 'small';
+    },
     readonly() {
-      // trade-off for IE input readonly problem: https://github.com/ElemeFE/element/issues/10403
       const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
       return !this.filterable || this.multiple || !isIE && !this.visible;
     }
@@ -217,6 +240,8 @@ export default {
         if (!this.multiple) {
           this.selectedLabel = this.selected.label || '';
           if (this.filterable) this.query = this.selectedLabel;
+        } else {
+          this.$refs.input.focus();
         }
         setTimeout(() => {
           this.handleQueryChange('');
@@ -228,6 +253,7 @@ export default {
   methods: {
     handleFocus(event) {
       console.log('focus 事件先触发');
+      this.treeVisibleOnFocus = true;
       this.visible = true;
       this.$emit('focus', event);
     },
@@ -237,12 +263,11 @@ export default {
     toggleTree() {
       console.log('toggleTree 有待完成');
       console.log('focus 与 click 事件的先后关系');
-      // if (!this.selectDisabled) {
-      //   this.visible = !this.visible;
-      //   if (this.visible) {
-      //     (this.$refs.input || this.$refs.reference).focus();
-      //   }
-      // }
+      if (this.treeVisibleOnFocus) {
+        this.treeVisibleOnFocus = false;
+      } else {
+        this.visible = !this.visible;
+      }
     },
     handleIconClick(event) {
       if (this.suffixIconClass.indexOf('el-icon-circle-close') > -1) {
@@ -268,12 +293,19 @@ export default {
       let { value, label } = node;
       // console.log(value);
       if (this.multiple) {
-        // todo
+        const index = this.getValueIndex(this.selected, value);
+        if (index > -1) {
+          this.selected.splice(index, 1);
+        } else if (this.multipleLimit === 0 || this.selected.length < this.multipleLimit) {
+          this.selected.push({ value, label });
+        }
+        const values = this.selected.map(({ value }) => value);
+        console.log(values);
+        this.$emit('input', values);
+        this.emitChange(values);
       } else {
         if (value === this.value) {
           value = ''; // toggle
-        } else {
-          // todo
         }
         this.selected = { value, label };
         this.selectedLabel = label;
@@ -281,26 +313,59 @@ export default {
         this.emitChange(value);
         this.visible = false;
       }
-      this.handleQueryChange('');
     },
     onInputChange() {
       // todo: 这段逻辑搞明白
-      console.log(`搜索 =》 ${this.query}, this.selectedLabel ${this.selectedLabel}`);
       if (this.filterable && this.query !== this.selectedLabel) {
         this.query = this.selectedLabel;
-        console.log('搜索 =》 ', this.query);
         this.handleQueryChange(this.query);
       }
     },
     filterMethod(value, data) {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
+    },
+    resetInputHeight() {
+      console.log('resetInputHeight');
+      this.$nextTick(() => {
+        const inputEl = this.$refs.reference.$refs.input;
+        const tags = this.$refs.tags;
+        let height = sizeMap[this.selectSize] || 40;
+        console.log(tags.childElementCount);
+        console.log(`clientHeight => ${tags.clientHeight}`);
+        if (this.selected.length !== 0) {
+          height = Math.max((tags.clientHeight + (tags.clientHeight > height ? 6 : 0)), height);
+        }
+        inputEl.style.height = `${height}px`;
+        if (this.visible) {
+          this.updatePopper();
+        }
+      });
+    },
+    getValueIndex(arr = [], value) {
+      let index = -1;
+      arr.some((item, i) => {
+        if (item.value === value) {
+          index = i;
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return index;
+    },
+    deleteTag(item) {
+      this.selected = this.selected.filter(selectItem => selectItem !== item);
+      const values = this.selected.map(({ value }) => value);
+      this.$emit('input', values);
+      this.emitChange(values);
     }
   },
 
   mounted() {
     this.referenceElm = this.$refs.reference.$el;
     this.popperElm = this.$refs.popper;
+    this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
   }
 };
 </script>
