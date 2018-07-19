@@ -27,6 +27,9 @@
         :disabled="selectDisabled"
         :autocomplete="false"
         @click.stop
+        @focus="handleFocus"
+        @keydown.esc.stop.prevent="visible = false"
+        @keydown.delete="deletePrevTag"
         v-model="query"
         @input="e => handleQueryChange(e.target.value)"
         :style="{ width: inputLength + 'px'}"
@@ -82,6 +85,8 @@ import ElTree from '../../tree/src/basic/basic-tree.vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import Popper from 'element-ui/src/utils/vue-popper';
 import { valueEquals } from 'element-ui/src/utils/util';
+import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import emitter from 'element-ui/src/mixins/emitter';
 // import objectAssign from 'element-ui/src/utils/merge';
 // import debounce from 'throttle-debounce/debounce';
 // import { t } from 'element-ui/src/locale';
@@ -117,7 +122,7 @@ const sizeMap = {
 export default {
   name: 'ElTreeSelect',
 
-  mixins: [popperMixin],
+  mixins: [popperMixin, emitter],
 
   inject: {
     elForm: {
@@ -231,6 +236,9 @@ export default {
     visible(val) {
       if (val) {
         this.updatePopper();
+        if (this.multiple) {
+          this.$refs.input.focus();
+        }
       } else {
         this.destroyPopper();
         if (this.$refs.input) {
@@ -240,12 +248,18 @@ export default {
         if (!this.multiple) {
           this.selectedLabel = this.selected.label || '';
           if (this.filterable) this.query = this.selectedLabel;
-        } else {
-          this.$refs.input.focus();
         }
         setTimeout(() => {
           this.handleQueryChange('');
         }, 100);
+      }
+    },
+    value(val, oldVal) {
+      if (this.multiple) {
+        this.resetInputHeight();
+      }
+      if (!valueEquals(val, oldVal)) {
+        this.dispatch('ElFormItem', 'el.form.change', val);
       }
     }
   },
@@ -354,11 +368,27 @@ export default {
       });
       return index;
     },
+    deletePrevTag(e) {
+      if (e.target.value.length <= 0) {
+        this.selected.splice(-1, 1);
+        const values = this.selected.map(({ value }) => value);
+        this.$emit('input', values);
+        this.emitChange(values);
+      }
+    },
     deleteTag(item) {
       this.selected = this.selected.filter(selectItem => selectItem !== item);
       const values = this.selected.map(({ value }) => value);
       this.$emit('input', values);
       this.emitChange(values);
+    },
+    resetInputWidth() {
+      this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+    },
+
+    handleResize() {
+      this.resetInputWidth();
+      if (this.multiple) this.resetInputHeight();
     }
   },
 
@@ -366,6 +396,11 @@ export default {
     this.referenceElm = this.$refs.reference.$el;
     this.popperElm = this.$refs.popper;
     this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+    addResizeListener(this.$el, this.handleResize);
+  },
+
+  beforeDestroy() {
+    removeResizeListener(this.$el, this.handleResize);
   }
 };
 </script>
