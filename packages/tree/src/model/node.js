@@ -170,6 +170,10 @@ export default class Node {
     return getPropertyFromData(this, 'disabled');
   }
 
+  get value() {
+    return getPropertyFromData(this, 'value');
+  }
+
   get nextSibling() {
     const parent = this.parent;
     if (parent) {

@@ -1,0 +1,49 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "input";
+
+@include b(tree-select) {
+  position: relative;
+  font-size: $--font-size-base;
+  line-height: $--input-height;
+
+  .el-input,
+  .el-input__inner {
+    cursor: pointer;
+  }
+
+  .el-icon-arrow-down {
+    transition: transform .3s;
+    font-size: 14px;
+
+    @include when(reverse) {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  .el-icon-circle-close {
+    z-index: #{$--index-normal + 1};
+    transition: $--color-transition-base;
+
+    &:hover {
+      color: $--color-text-secondary;
+    }
+  }
+
+}
+
+@include b(tree-select-dropdown) {
+  min-width: 240px;
+  // todo: 这里的变量需要调整
+  border: $--select-dropdown-border;
+  border-radius: $--border-radius-base;
+  background-color: $--select-dropdown-background;
+  box-shadow: $--select-dropdown-shadow;
+
+  .el-tree {
+    // 先不调整样式
+    & > .el-tree-node {
+      padding: 0 20px;
+    }
+  }
+}
