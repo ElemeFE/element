@@ -46,7 +46,7 @@
       currentName(value) {
         if (this.$refs.nav) {
           this.$nextTick(_ => {
-            this.$refs.nav.scrollToActiveTab();
+            this.scrollToActiveTab();
           });
         }
       }
@@ -98,6 +98,9 @@
         if (index > -1) {
           panes.splice(index, 1);
         }
+      },
+      scrollToActiveTab() {
+        this.$refs.nav.scrollToActiveTab();
       }
     },
     render(h) {

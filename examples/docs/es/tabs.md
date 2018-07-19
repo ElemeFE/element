@@ -387,6 +387,11 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | tab-add          | se lanza cuando se hace click al botón tab-add | —                             |
 | edit             | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action)          |
 
+### Tabs Methods
+| Method     | Description    | Parameters      |
+|---------- |-------- |---------- |
+| scrollToActiveTab  | scroll to active tab | - |
+
 ### Attributos del Tab-pane
 | Atributo | Descripción                                                  | Tipo    | Valores Aceptados | Default                                                      |
 | -------- | ------------------------------------------------------------ | ------- | ----------------- | ------------------------------------------------------------ |

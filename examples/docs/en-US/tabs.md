@@ -387,6 +387,11 @@ Only card type Tabs support addable & closeable.
 | tab-add  | triggers when tab-add button is clicked  | — |
 | edit  | triggers when tab-add button or tab-remove is clicked | (targetName, action) |
 
+### Tabs Methods
+| Method     | Description    | Parameters      |
+|---------- |-------- |---------- |
+| scrollToActiveTab  | scroll to active tab | - |
+
 ### Tab-pane Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
