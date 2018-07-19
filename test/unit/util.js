@@ -106,3 +106,17 @@ exports.triggerKeyDown = function(el, keyCode) {
   evt.keyCode = keyCode;
   el.dispatchEvent(evt);
 };
+
+/**
+ * 选中指定 dom 元素内的文本
+ * @param {Element} elm
+ */
+exports.selectDomsText = function(elm) {
+  if (window.getSelection) {
+    let selection = window.getSelection();
+    let range = document.createRange();
+    range.selectNodeContents(elm);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+};

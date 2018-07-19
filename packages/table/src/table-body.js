@@ -367,6 +367,10 @@ export default {
     },
 
     handleClick(event, row) {
+      // 如果鼠标有选中文字,就放弃点击事件
+      if (window.getSelection && window.getSelection().toString()) {
+        return;
+      }
       this.store.commit('setCurrentRow', row);
       this.handleEvent(event, row, 'click');
     },
