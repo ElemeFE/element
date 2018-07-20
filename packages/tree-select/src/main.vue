@@ -44,6 +44,7 @@
       :validate-event="false"
       :size="selectSize"
       :class="{ 'is-focus': visible }"
+      :placeholder="placeholder"
       @focus="handleFocus"
       @keyup.native="onInputChange"
       @mouseenter.native="inputHovering = true"
@@ -65,14 +66,15 @@
           ref="tree"
           :data="data"
           default-expand-all
-          check-on-click-node
+          :check-on-click-node="checkOnClickNode"
           highlight-current
-          node-key="id"
+          node-key="value"
           :show-checkbox="showCheckbox"
           :empty-text="emptyText"
           :expand-on-click-node="false"
           :check-strictly="checkStrictly"
           :filter-node-method="filterMethod"
+          :default-checked-keys="checkedKeys"
           @check="handleCheck"
           @node-click="handleNodeClick">
         </el-tree>
@@ -91,7 +93,7 @@ import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/re
 import emitter from 'element-ui/src/mixins/emitter';
 // import objectAssign from 'element-ui/src/utils/merge';
 // import debounce from 'throttle-debounce/debounce';
-// import { t } from 'element-ui/src/locale';
+import { t } from 'element-ui/src/locale';
 
 // todo: 等 vue-popper 合并后，这里还需要做出调整
 const popperMixin = {
@@ -161,7 +163,12 @@ export default {
       }
     },
     props: Object,
-    placeholder: String,
+    placeholder: {
+      type: String,
+      default() {
+        return t('el.select.placeholder');
+      }
+    },
     // lazy: Boolean,
     // load: Function,
     showCheckbox: {
@@ -177,7 +184,7 @@ export default {
     emptyText: String,
     showCheckedStrategy: {
       type: String,
-      default: 'all',
+      default: 'child',
       validator(val) {
         return ['all', 'parent', 'child'].indexOf(val) > -1;
       }
@@ -200,7 +207,8 @@ export default {
       inputWidth: 0,
       inputHovering: false,
       treeVisibleOnFocus: false,
-      selected: this.multiple ? [] : {}
+      selected: this.multiple ? [] : {},
+      checkOnClickNode: false
     };
   },
 
@@ -238,6 +246,13 @@ export default {
     readonly() {
       const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
       return !this.filterable || this.multiple || !isIE && !this.visible;
+    },
+    checkedKeys() {
+      if (this.multiple && this.showCheckbox) {
+        return this.value || [];
+      } else {
+        return [];
+      }
     }
   },
 
@@ -268,6 +283,7 @@ export default {
       if (this.multiple) {
         this.resetInputHeight();
       }
+      this.setSelected();
       if (!valueEquals(val, oldVal)) {
         this.dispatch('ElFormItem', 'el.form.change', val);
       }
@@ -314,39 +330,33 @@ export default {
       // if (input && this.filterable) {
       //   input.focus();
       // }
-      let { value, label } = node;
+      let { value } = node;
       if (this.multiple) {
-        const index = this.getValueIndex(this.selected, value);
+        const valueCopy = this.value.slice();
+        const index = this.getValueIndex(valueCopy, value);
         if (index > -1) {
-          this.selected.splice(index, 1);
-        } else if (this.multipleLimit === 0 || this.selected.length < this.multipleLimit) {
-          this.selected.push({ value, label });
+          valueCopy.splice(index, 1);
+        } else if (this.multipleLimit === 0 || valueCopy.length < this.multipleLimit) {
+          valueCopy.push(value);
         }
-        const values = this.selected.map(({ value }) => value);
-        this.$emit('input', values);
-        this.emitChange(values);
+        this.$emit('input', valueCopy);
+        this.emitChange(valueCopy);
       } else {
         if (value === this.value) {
           value = '';
         }
-        this.selected = { value, label };
-        this.selectedLabel = label;
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;
       }
     },
     handleCheck(data, info) {
-      console.log('handleCheck');
       const { checkedNodes } = info;
       let values = [];
-      const map = (arr) => arr.map(({ label, value }) => ({
-        label,
-        value
-      }));
+      const map = (arr) => arr.map(({ value }) => value);
       switch (this.showCheckedStrategy) {
         case 'parent':
-          values = this.getTreeCheckedParentNodes();
+          values = map(this.getTreeCheckedParentNodes());
           break;
         case 'child':
           values = map(checkedNodes.filter(({ children }) => !(children && children.length)));
@@ -355,8 +365,6 @@ export default {
           values = map(checkedNodes);
           break;
       }
-      console.log(values);
-      this.selected = values;
       this.$emit('input', values);
       this.emitChange(values);
     },
@@ -378,8 +386,28 @@ export default {
       checkedNodes(this.$refs.tree.store);
       return checkedNodes;
     },
+    getNodeData(value) {
+      let node = null;
+      if (Array.isArray(this.data)) {
+        const traverse = (arr) => {
+          for (let i = 0; i < arr.length; i++) {
+            const child = arr[i];
+            if (child.value === value) {
+              node = {
+                label: child.label,
+                value: child.value
+              };
+              break;
+            } else if (child.children && child.children.length > 0) {
+              traverse(child.children);
+            }
+          }
+        };
+        traverse(this.data);
+      }
+      return node;
+    },
     onInputChange() {
-      // todo: 这段逻辑搞明白
       if (this.filterable && this.query !== this.selectedLabel) {
         this.query = this.selectedLabel;
         this.handleQueryChange(this.query);
@@ -406,7 +434,7 @@ export default {
     getValueIndex(arr = [], value) {
       let index = -1;
       arr.some((item, i) => {
-        if (item.value === value) {
+        if (item === value) {
           index = i;
           return true;
         } else {
@@ -432,18 +460,53 @@ export default {
     resetInputWidth() {
       this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
     },
-
     handleResize() {
       this.resetInputWidth();
       if (this.multiple) this.resetInputHeight();
+    },
+    setSelected() {
+      if (this.multiple) {
+        const result = [];
+        if (this.showCheckbox) {
+          // 这里还要根据策略去判断一大堆的属性
+          // switch (this.showCheckedStrategy) {
+          //   case 'child':
+          //     break;
+          //   case '':
+          //     break;
+          //   default:
+          //     break;
+          // }
+        } else {
+          if (Array.isArray(this.value)) {
+            this.value.forEach(value => {
+              const node = this.getNodeData(value);
+              if (node) result.push(node);
+            });
+          }
+        }
+        this.selected = result;
+        this.$nextTick(this.resetInputHeight);
+      } else {
+        const node = this.getNodeData(this.value);
+        if (node) {
+          this.selected = node;
+          this.selectedLabel = node.label;
+          if (this.filterable) this.query = this.selectedLabel;
+        }
+      }
     }
   },
 
   mounted() {
+    if (this.multiple && this.showCheckbox) {
+      this.checkOnClickNode = true;
+    }
     this.referenceElm = this.$refs.reference.$el;
     this.popperElm = this.$refs.popper;
     this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
     addResizeListener(this.$el, this.handleResize);
+    this.setSelected();
   },
 
   beforeDestroy() {
