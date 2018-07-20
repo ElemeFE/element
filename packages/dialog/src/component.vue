@@ -17,7 +17,7 @@
             class="el-dialog__headerbtn"
             aria-label="Close"
             v-if="showClose"
-            @click="handleClose">
+            @click.stop="handleClose">
             <i class="el-dialog__close el-icon el-icon-close"></i>
           </button>
         </div>
