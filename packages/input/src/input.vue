@@ -132,7 +132,7 @@
         focused: false,
         isOnComposition: false,
         valueBeforeComposition: null,
-        suffixRightForSearchButton:'5px'
+        suffixRightForSearchButton: '5px'
       };
     },
 
@@ -318,9 +318,13 @@
         this.setCurrentValue('');
         this.focus();
       },
-      calcSuffixWidthWithSearchButton(slots){
-        let total_pixel = Object.keys(slots).map(v => slots[v].elm && slots[v].elm.clientWidth ? slots[0].elm.clientWidth : 0).reduce((prev,next) => prev+next);
-        return total_pixel > 0 ? (total_pixel+4)+'px' : '5px'
+      calcSuffixWidthWithSearchButton(slots) {
+        let total_pixel = Object.keys(slots).map(v => slots[v].elm && slots[v].elm.clientWidth ? slots[0].elm.clientWidth : 0).reduce((prev, next) => prev + next);
+        if (total_pixel > 0) {
+          return (total_pixel + 4) + 'px';
+        } else {
+          return '5px';
+        }
       }
     },
 
@@ -331,8 +335,9 @@
     mounted() {
       this.resizeTextarea();
       this.updateIconOffset();
-      if(this.$slots.append)
+      if (this.$slots.append) {
         this.suffixRightForSearchButton = this.calcSuffixWidthWithSearchButton(this.$slots.append);
+      }
     },
 
     updated() {
