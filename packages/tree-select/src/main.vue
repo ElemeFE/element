@@ -68,10 +68,12 @@
           check-on-click-node
           highlight-current
           node-key="id"
+          :show-checkbox="showCheckbox"
           :empty-text="emptyText"
           :expand-on-click-node="false"
           :check-strictly="checkStrictly"
           :filter-node-method="filterMethod"
+          @check="handleCheck"
           @node-click="handleNodeClick">
         </el-tree>
       </div>
@@ -160,8 +162,8 @@ export default {
     },
     props: Object,
     placeholder: String,
-    lazy: Boolean,
-    load: Function,
+    // lazy: Boolean,
+    // load: Function,
     showCheckbox: {
       type: Boolean,
       default: false
@@ -172,7 +174,14 @@ export default {
     },
     filterable: Boolean,
     // filterMethod: Function,
-    emptyText: String
+    emptyText: String,
+    showCheckedStrategy: {
+      type: String,
+      default: 'all',
+      validator(val) {
+        return ['all', 'parent', 'child'].indexOf(val) > -1;
+      }
+    }
   },
 
   components: {
@@ -236,7 +245,7 @@ export default {
     visible(val) {
       if (val) {
         this.updatePopper();
-        if (this.multiple) {
+        if (this.multiple && this.filterable) {
           this.$refs.input.focus();
         }
       } else {
@@ -244,6 +253,7 @@ export default {
         if (this.$refs.input) {
           this.$refs.input.blur();
         }
+        this.query = '';
         this.selectedLabel = '';
         if (!this.multiple) {
           this.selectedLabel = this.selected.label || '';
@@ -266,7 +276,6 @@ export default {
 
   methods: {
     handleFocus(event) {
-      console.log('focus 事件先触发');
       this.treeVisibleOnFocus = true;
       this.visible = true;
       this.$emit('focus', event);
@@ -275,8 +284,6 @@ export default {
       this.visible = false;
     },
     toggleTree() {
-      console.log('toggleTree 有待完成');
-      console.log('focus 与 click 事件的先后关系');
       if (this.treeVisibleOnFocus) {
         this.treeVisibleOnFocus = false;
       } else {
@@ -300,12 +307,14 @@ export default {
       }
     },
     handleQueryChange(val) {
-      console.log(`query ==>  ${val}`);
       this.$refs.tree.filter(val);
     },
     handleNodeClick(data, node, tree) {
+      // const input = this.$refs.input || this.$refs.reference;
+      // if (input && this.filterable) {
+      //   input.focus();
+      // }
       let { value, label } = node;
-      // console.log(value);
       if (this.multiple) {
         const index = this.getValueIndex(this.selected, value);
         if (index > -1) {
@@ -314,12 +323,11 @@ export default {
           this.selected.push({ value, label });
         }
         const values = this.selected.map(({ value }) => value);
-        console.log(values);
         this.$emit('input', values);
         this.emitChange(values);
       } else {
         if (value === this.value) {
-          value = ''; // toggle
+          value = '';
         }
         this.selected = { value, label };
         this.selectedLabel = label;
@@ -327,6 +335,48 @@ export default {
         this.emitChange(value);
         this.visible = false;
       }
+    },
+    handleCheck(data, info) {
+      console.log('handleCheck');
+      const { checkedNodes } = info;
+      let values = [];
+      const map = (arr) => arr.map(({ label, value }) => ({
+        label,
+        value
+      }));
+      switch (this.showCheckedStrategy) {
+        case 'parent':
+          values = this.getTreeCheckedParentNodes();
+          break;
+        case 'child':
+          values = map(checkedNodes.filter(({ children }) => !(children && children.length)));
+          break;
+        default:
+          values = map(checkedNodes);
+          break;
+      }
+      console.log(values);
+      this.selected = values;
+      this.$emit('input', values);
+      this.emitChange(values);
+    },
+    getTreeCheckedParentNodes() {
+      const checkedNodes = [];
+      const traverse = (node) => {
+        const childNodes = node.root ? node.root.childNodes : node.childNodes;
+        childNodes.forEach(child => {
+          if (child.checked && !child.isLeaf) {
+            checkedNodes.push({
+              label: child.data.label,
+              value: child.data.value
+            });
+          } else {
+            traverse(child);
+          }
+        });
+      };
+      checkedNodes(this.$refs.tree.store);
+      return checkedNodes;
     },
     onInputChange() {
       // todo: 这段逻辑搞明白
@@ -340,13 +390,10 @@ export default {
       return data.label.indexOf(value) !== -1;
     },
     resetInputHeight() {
-      console.log('resetInputHeight');
       this.$nextTick(() => {
         const inputEl = this.$refs.reference.$refs.input;
         const tags = this.$refs.tags;
         let height = sizeMap[this.selectSize] || 40;
-        console.log(tags.childElementCount);
-        console.log(`clientHeight => ${tags.clientHeight}`);
         if (this.selected.length !== 0) {
           height = Math.max((tags.clientHeight + (tags.clientHeight > height ? 6 : 0)), height);
         }
