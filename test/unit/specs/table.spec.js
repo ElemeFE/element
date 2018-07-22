@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, triggerKeyDown } from '../util';
 
 const DELAY = 10;
 const testDataArr = [];
@@ -859,7 +859,7 @@ describe('Table', () => {
       const createTable = function(type) {
         return createVue({
           template: `
-            <el-table :data="testData" @selection-change="change">
+            <el-table row-key="id" :data="testData" @selection-change="change">
               <el-table-column type="${type}" />
               <el-table-column prop="name" label="name" />
               <el-table-column prop="release" label="release" />
@@ -922,6 +922,24 @@ describe('Table', () => {
             setTimeout(_ => {
               expect(vm2.selected).to.length(1);
               expect(vm2.selected[0].name).to.equal(getTestData()[0].name);
+              destroyVM(vm2);
+              done();
+            }, DELAY);
+          }, DELAY);
+        });
+
+        it('select range', done => {
+          const vm2 = createTable('selection');
+
+          setTimeout(_ => {
+            const checkboxes = vm2.$el.querySelectorAll('.el-checkbox');
+            checkboxes[1].click();
+            triggerKeyDown(window, 16); // shift
+            checkboxes[3].click();
+
+            setTimeout(_ => {
+              expect(vm2.selected).to.length(3);
+              expect(vm2.selected.map(m => m.name)).to.include(getTestData()[1].name);
               destroyVM(vm2);
               done();
             }, DELAY);
