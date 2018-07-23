@@ -587,9 +587,7 @@ TableStore.prototype.setCurrentRowKey = function(key) {
   const data = states.data || [];
   const keysMap = getKeysMap(data, rowKey);
   const info = keysMap[key];
-  if (info) {
-    states.currentRow = info.row;
-  }
+  states.currentRow = info ? info.row : null;
 };
 
 TableStore.prototype.updateCurrentRow = function() {

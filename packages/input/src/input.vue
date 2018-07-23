@@ -26,6 +26,7 @@
         v-bind="$attrs"
         :type="type"
         :disabled="inputDisabled"
+        :readonly="readonly"
         :autocomplete="autoComplete"
         :value="currentValue"
         ref="input"
@@ -39,7 +40,7 @@
         :aria-label="label"
       >
       <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon" :style="prefixOffset">
+      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <i class="el-input__icon"
            v-if="prefixIcon"
@@ -49,8 +50,7 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon"
-        :style="suffixOffset">
+        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
           <template v-if="!showClear">
             <slot name="suffix"></slot>
@@ -86,6 +86,7 @@
       ref="textarea"
       v-bind="$attrs"
       :disabled="inputDisabled"
+      :readonly="readonly"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -126,8 +127,6 @@
           ? ''
           : this.value,
         textareaCalcStyle: {},
-        prefixOffset: null,
-        suffixOffset: null,
         hovering: false,
         focused: false,
         isOnComposition: false,
@@ -141,6 +140,7 @@
       resize: String,
       form: String,
       disabled: Boolean,
+      readonly: Boolean,
       type: {
         type: String,
         default: 'text'
@@ -192,9 +192,6 @@
       },
       inputDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
-      },
-      isGroup() {
-        return this.$slots.prepend || this.$slots.append;
       },
       showClear() {
         return this.clearable &&
@@ -294,16 +291,23 @@
         }
       },
       calcIconOffset(place) {
+        const el = this.$el.querySelector(`.el-input__${place}`);
+        if (!el || el.parentNode !== this.$el) return;
         const pendantMap = {
-          'suf': 'append',
-          'pre': 'prepend'
+          suffix: 'append',
+          prefix: 'prepend'
         };
 
         const pendant = pendantMap[place];
-
         if (this.$slots[pendant]) {
-          return { transform: `translateX(${place === 'suf' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)` };
+          el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)`;
+        } else {
+          el.removeAttribute('style');
         }
+      },
+      updateIconOffset() {
+        this.calcIconOffset('prefix');
+        this.calcIconOffset('suffix');
       },
       clear() {
         this.$emit('input', '');
@@ -320,10 +324,11 @@
 
     mounted() {
       this.resizeTextarea();
-      if (this.isGroup) {
-        this.prefixOffset = this.calcIconOffset('pre');
-        this.suffixOffset = this.calcIconOffset('suf');
-      }
+      this.updateIconOffset();
+    },
+
+    updated() {
+      this.$nextTick(this.updateIconOffset);
     }
   };
 </script>

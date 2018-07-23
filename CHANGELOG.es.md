@@ -1,12 +1,27 @@
 ## Changelog
 
+### 2.4.4
+
+*2018-07-13*
+
+- Corregido que se disparaba la validacion del Select después de reajustar el formulario, #11837
+- Corregida la posición incorrecta del slot Input `suffix`  cuando se usaba el slot `suffix` con el slot  `append`  , #11951
+- Corregido el clearable Input que muestraba el icono de borrado cuando era readonly, #11967
+- Arreglado el nodo Tree checked cuando estaba disabled, #11847
+- Corregido que  `default-checked-keys`  no funcionaba en Tree, #11971
+- Corregido que el `empty-text` no era visible cuando el nodo Tree se filtraba, #11971
+- Arreglada la posición de texto vacío sobredimensionado en Table, #11965
+- Corregido que la fila de la tabla no se modificado el resaltado cuando `current-row-key` era asignada a null, #11866
+- Arreglado que mostraba el filtro del dropdown cuando los filtros eran un array vacío, #11864
+- Corregido que el cambio de label de Radio no detenia propagacion de eventos, #11912
+
 ### 2.4.3
 
 *2018-07-03*
 
-- Fixed `allow-drop` not working properly when Tree nodes have a custom height, #11797
-- Now you can pass a parameter to the `clearValidate` method of Form, specifying which FormItems' validation results need to be cleared, #11821
-- Added `distinguishCancelAndClose` attribute for MessageBox, #11831
+- Corregido `allow-drop` que no funcionaba correctamente cuando los nodos de árbol tenian una altura personalizada, #11797
+- Ahora puede pasar un parámetro al método `clearValidate` de Form, especificando qué resultados de validación de `FormItems` necesita borrar, #11821
+- Añadido el atributo `distinguishCancelAndClose` para MessageBox, #11831
 
 ### 2.4.2
 

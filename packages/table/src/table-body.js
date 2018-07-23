@@ -58,55 +58,30 @@ export default {
                     if (!rowspan || !colspan) {
                       return '';
                     } else {
-                      if (rowspan === 1 && colspan === 1) {
-                        return (
-                          <td
-                            style={ this.getCellStyle($index, cellIndex, row, column) }
-                            class={ this.getCellClass($index, cellIndex, row, column) }
-                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                            on-mouseleave={ this.handleCellMouseLeave }>
-                            {
-                              column.renderCell.call(
-                                this._renderProxy,
-                                h,
-                                {
-                                  row,
-                                  column,
-                                  $index,
-                                  store: this.store,
-                                  _self: this.context || this.table.$vnode.context
-                                },
-                                columnsHidden[cellIndex]
-                              )
-                            }
-                          </td>
-                        );
-                      } else {
-                        return (
-                          <td
-                            style={ this.getCellStyle($index, cellIndex, row, column) }
-                            class={ this.getCellClass($index, cellIndex, row, column) }
-                            rowspan={ rowspan }
-                            colspan={ colspan }
-                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                            on-mouseleave={ this.handleCellMouseLeave }>
-                            {
-                              column.renderCell.call(
-                                this._renderProxy,
-                                h,
-                                {
-                                  row,
-                                  column,
-                                  $index,
-                                  store: this.store,
-                                  _self: this.context || this.table.$vnode.context
-                                },
-                                columnsHidden[cellIndex]
-                              )
-                            }
-                          </td>
-                        );
-                      }
+                      return (
+                        <td
+                          style={ this.getCellStyle($index, cellIndex, row, column) }
+                          class={ this.getCellClass($index, cellIndex, row, column) }
+                          rowspan={ rowspan }
+                          colspan={ colspan }
+                          on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                          on-mouseleave={ this.handleCellMouseLeave }>
+                          {
+                            column.renderCell.call(
+                              this._renderProxy,
+                              h,
+                              {
+                                row,
+                                column,
+                                $index,
+                                store: this.store,
+                                _self: this.context || this.table.$vnode.context
+                              },
+                              columnsHidden[cellIndex]
+                            )
+                          }
+                        </td>
+                      );
                     }
                   })
                 }
