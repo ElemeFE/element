@@ -49,6 +49,22 @@ describe('Menu', () => {
       done();
     }, 20);
   });
+  it('hover-background-color', done => {
+    vm = createVue({
+      template: `
+        <el-menu default-active="2"
+          hover-background-color="#fcc">
+          <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
+          <el-menu-item index="2" ref="item2">订单管理</el-menu-item>
+        </el-menu>
+      `
+    }, true);
+    triggerEvent(vm.$refs.item1.$el, 'mouseenter');
+    setTimeout(_ => {
+      expect(vm.$refs.item1.$el.style.backgroundColor).to.equal('rgb(255, 204, 204)');
+      done();
+    }, 20);
+  });
   it('menu-item click', done => {
     vm = createVue({
       template: `

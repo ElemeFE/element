@@ -59,7 +59,7 @@ Menu that provides navigation for your website.
 
 Top bar NavMenu can be used in a variety of scenarios.
 
-:::demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu. Menu provides `background-color`, `text-color` and `active-text-color` to customize the colors.
+:::demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu. Menu provides `background-color`, , `hover-background-color`, `text-color` and `active-text-color` to customize the colors.
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
@@ -301,6 +301,7 @@ Vertical NavMenu could be collapsed.
 | mode     | menu display mode   | string  |   horizontal / vertical   | vertical |
 | collapse  | whether the menu is collapsed (available only in vertical mode) | boolean  |   —   | false |
 | background-color  | background color of Menu (hex format) | string |   —   | #ffffff |
+| hover-background-color  | hover background color of Menu (hex format) | string |   —   | calculated by `background-color` |
 | text-color  | text color of Menu (hex format) | string |   —   | #303133 |
 | active-text-color  | text color of currently active menu item (hex format) | string |   —   | #409EFF |
 | default-active | index of currently active menu | string    | — | — |

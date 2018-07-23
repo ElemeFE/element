@@ -59,7 +59,7 @@ Menú que provee la navegación para tu sitio.
 
 Top bar NavMenu puede ser usado en distinto escenarios.
 
-:::demo Por defecto el menú es vertical, pero puede hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puede utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `text-color` y `active-text-color` para customizar los colores.
+:::demo Por defecto el menú es vertical, pero puede hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puede utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `hover-background-color`, `text-color` y `active-text-color` para customizar los colores.
 
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -303,6 +303,7 @@ NavMenu vertical puede ser colapsado.
 | mode              | modo de presentación del menú            | string  | horizontal / vertical | vertical    |
 | collapse          | si el menú está colapsado (solo en modo vertical) | boolean | —                     | false       |
 | background-color  | color de fondo del menú (formato hexadecimal) | string  | —                     | #ffffff     |
+| hover-background-color  | hover background color of Menu (hex format) | string |   —   | calculated by `background-color` |
 | text-color        | color de texto del menú (formato hexadecimal) | string  | —                     | #303133     |
 | active-text-color | color de text del menu-item activo (formato hexadecimal) | string  | —                     | #409EFF     |
 | default-active    | índice del menu-item activo              | string  | —                     | —           |

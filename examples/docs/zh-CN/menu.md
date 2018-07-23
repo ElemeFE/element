@@ -59,7 +59,7 @@
 
 适用广泛的基础用法。
 
-:::demo 导航菜单默认为垂直模式，通过`mode`属性可以使导航菜单变更为水平模式。另外，在菜单中通过`submenu`组件可以生成二级菜单。Menu 还提供了`background-color`、`text-color`和`active-text-color`，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
+:::demo 导航菜单默认为垂直模式，通过`mode`属性可以使导航菜单变更为水平模式。另外，在菜单中通过`submenu`组件可以生成二级菜单。Menu 还提供了`background-color`、, `hover-background-color`、`text-color`和`active-text-color`，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
 
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -302,6 +302,7 @@
 | mode     | 模式   | string  |   horizontal / vertical   | vertical |
 | collapse  | 是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）| boolean  |   —   | false |
 | background-color  | 菜单的背景色（仅支持 hex 格式） | string |   —   | #ffffff |
+| hover-background-color  | 菜单 hover 状态的背景色（仅支持 hex 格式） | string |   —   | 根据 `background-color` 自动计算 |
 | text-color  | 菜单的文字颜色（仅支持 hex 格式） | string |   —   | #303133 |
 | active-text-color  | 当前激活菜单的文字颜色（仅支持 hex 格式） | string |   —   | #409EFF |
 | default-active | 当前激活菜单的 index | string    | — | — |

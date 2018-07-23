@@ -14,6 +14,9 @@ export declare class ElMenu extends ElementUIComponent {
   /** Background color of Menu (hex format) */
   backgroundColor: string
 
+  /** Hover background color of Menu (hex format) */
+  hoverBackgroundColor: string
+
   /** Text color of Menu (hex format) */
   textColor: string
 
