@@ -1666,6 +1666,7 @@ Search and select options with a keyword.
 ### Attributes
 | Attribute | Description         | Type    | Options       | Default|
 |---------- |-------------------- |---------|-------------  |-------- |
+| value / v-model | binding value  | boolean / string / number | — | — |
 | options   | data of the options | array | — | — |
 | props | configuration options, see the following table | object | — | — |
 | value | selected value | array | — | — |

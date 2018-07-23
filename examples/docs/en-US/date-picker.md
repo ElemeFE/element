@@ -474,6 +474,7 @@ When picking a date range, you can assign the time part for start date and end d
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | binding value | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | size | size of Input | string | large/small/mini | — |

@@ -173,6 +173,7 @@ Can pick an arbitrary time range.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | binding value | date(TimePicker) / string(TimeSelect) | - | - |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
@@ -183,7 +184,6 @@ Can pick an arbitrary time range.
 | end-placeholder | placeholder for the end time in range mode | string | — | — |
 | is-range | whether to pick a time range, only works with `<el-time-picker>` | boolean | — | false |
 | arrow-control | whether to pick time using arrow buttons, only works with `<el-time-picker>` | boolean | — | false |
-| value | value of the picker | Date for Time Picker, and string for Time Select | - | - |
 | align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
