@@ -104,5 +104,8 @@
     & > .el-tree-node {
       padding: 0 10px;
     }
+    .el-tree-node.is-selected > .el-tree-node__content{
+      background-color: mix($--color-white, $--color-primary, 92%);
+    }
   }
 }

@@ -44,7 +44,7 @@
       :validate-event="false"
       :size="selectSize"
       :class="{ 'is-focus': visible }"
-      :placeholder="placeholder"
+      :placeholder="currentPlaceholder"
       @focus="handleFocus"
       @keyup.native="onInputChange"
       @mouseenter.native="inputHovering = true"
@@ -65,9 +65,11 @@
         <el-tree
           ref="tree"
           :data="data"
-          default-expand-all
+          :lazy="lazy"
+          :load="load"
           :check-on-click-node="checkOnClickNode"
-          highlight-current
+          :props="props"
+          default-expand-all
           node-key="value"
           :show-checkbox="showCheckbox"
           :empty-text="emptyText"
@@ -91,8 +93,6 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import { valueEquals } from 'element-ui/src/utils/util';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import emitter from 'element-ui/src/mixins/emitter';
-// import objectAssign from 'element-ui/src/utils/merge';
-// import debounce from 'throttle-debounce/debounce';
 import { t } from 'element-ui/src/locale';
 
 // todo: 等 vue-popper 合并后，这里还需要做出调整
@@ -128,6 +128,12 @@ export default {
 
   mixins: [popperMixin, emitter],
 
+  provide() {
+    return {
+      elTreeSelect: this
+    };
+  },
+
   inject: {
     elForm: {
       default: ''
@@ -147,13 +153,6 @@ export default {
       required: true
     },
     multiple: Boolean,
-    multipleLimit: {
-      type: Number,
-      default: 0,
-      validator(val) {
-        return val >= 0;
-      }
-    },
     disabled: Boolean,
     clearable: Boolean,
     size: {
@@ -169,18 +168,11 @@ export default {
         return t('el.select.placeholder');
       }
     },
-    // lazy: Boolean,
-    // load: Function,
-    showCheckbox: {
-      type: Boolean,
-      default: false
-    },
-    checkStrictly: {
-      type: Boolean,
-      default: false
-    },
+    lazy: Boolean,
+    load: Function,
+    showCheckbox: Boolean,
+    checkStrictly: Boolean,
     filterable: Boolean,
-    // filterMethod: Function,
     emptyText: String,
     showCheckedStrategy: {
       type: String,
@@ -224,7 +216,7 @@ export default {
           this.value !== '';
       if (criteria) {
         classes = [...classes, 'el-icon-circle-close', 'is-show-close'];
-      } else { //  if (!this.filterable)
+      } else {
         classes.push('el-icon-arrow-down');
         if (this.visible) {
           classes.push('is-reverse');
@@ -253,6 +245,13 @@ export default {
       } else {
         return [];
       }
+    },
+    currentPlaceholder() {
+      if (!this.value || (Array.isArray(this.value) && this.value.length === 0)) {
+        return this.placeholder;
+      } else {
+        return '';
+      }
     }
   },
 
@@ -262,6 +261,9 @@ export default {
         this.updatePopper();
         if (this.multiple && this.filterable) {
           this.$refs.input.focus();
+        }
+        if (!this.multiple && this.filterable) {
+          this.broadcast('ElInput', 'inputSelect');
         }
       } else {
         this.destroyPopper();
@@ -274,9 +276,11 @@ export default {
           this.selectedLabel = this.selected.label || '';
           if (this.filterable) this.query = this.selectedLabel;
         }
-        setTimeout(() => {
-          this.handleQueryChange('');
-        }, 100);
+        if (this.filterable) {
+          setTimeout(() => {
+            this.handleQueryChange('');
+          }, 100);
+        }
       }
     },
     value(val, oldVal) {
@@ -326,19 +330,16 @@ export default {
       this.$refs.tree.filter(val);
     },
     handleNodeClick(data, node, tree) {
-      // const input = this.$refs.input || this.$refs.reference;
-      // if (input && this.filterable) {
-      //   input.focus();
-      // }
       let { value } = node;
       if (this.multiple) {
         const valueCopy = this.value.slice();
         const index = this.getValueIndex(valueCopy, value);
         if (index > -1) {
           valueCopy.splice(index, 1);
-        } else if (this.multipleLimit === 0 || valueCopy.length < this.multipleLimit) {
+        } else {
           valueCopy.push(value);
         }
+        this.$refs.input.focus();
         this.$emit('input', valueCopy);
         this.emitChange(valueCopy);
       } else {
@@ -352,19 +353,20 @@ export default {
     },
     handleCheck(data, info) {
       const { checkedNodes } = info;
-      let values = [];
-      const map = (arr) => arr.map(({ value }) => value);
+      let nodes = [];
       switch (this.showCheckedStrategy) {
         case 'parent':
-          values = map(this.getTreeCheckedParentNodes());
+          nodes = this.getTreeCheckedParentNodes();
           break;
         case 'child':
-          values = map(checkedNodes.filter(({ children }) => !(children && children.length)));
+          nodes = checkedNodes.filter(({ children }) => !(children && children.length));
           break;
         default:
-          values = map(checkedNodes);
+          nodes = checkedNodes;
           break;
       }
+      const values = nodes.map(({ value }) => value);
+      if (this.filterable) this.$refs.input.focus();
       this.$emit('input', values);
       this.emitChange(values);
     },
@@ -467,23 +469,11 @@ export default {
     setSelected() {
       if (this.multiple) {
         const result = [];
-        if (this.showCheckbox) {
-          // 这里还要根据策略去判断一大堆的属性
-          // switch (this.showCheckedStrategy) {
-          //   case 'child':
-          //     break;
-          //   case '':
-          //     break;
-          //   default:
-          //     break;
-          // }
-        } else {
-          if (Array.isArray(this.value)) {
-            this.value.forEach(value => {
-              const node = this.getNodeData(value);
-              if (node) result.push(node);
-            });
-          }
+        if (Array.isArray(this.value)) {
+          this.value.forEach(value => {
+            const node = this.getNodeData(value);
+            if (node) result.push(node);
+          });
         }
         this.selected = result;
         this.$nextTick(this.resetInputHeight);

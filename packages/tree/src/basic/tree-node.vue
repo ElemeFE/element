@@ -9,7 +9,8 @@
       'is-current': tree.store.currentNode === node,
       'is-hidden': !node.visible,
       'is-focusable': !node.disabled,
-      'is-checked': !node.disabled && node.checked
+      'is-checked': !node.disabled && node.checked,
+      'is-selected': nodeSelected
     }"
     role="treeitem"
     tabindex="-1"
@@ -78,7 +79,7 @@
 
     mixins: [emitter],
 
-    inject: ['tree'],
+    inject: ['tree', 'elTreeSelect'],
 
     props: {
       node: {
@@ -110,6 +111,18 @@
       },
       renderAfterExpand() {
         return this.tree.renderAfterExpand;
+      },
+      nodeSelected() {
+        if (!this.elTreeSelect || this.tree.showCheckbox) {
+          return false;
+        }
+        const nodeValue = this.node.value;
+        const { value, multiple} = this.elTreeSelect;
+        if (multiple && Array.isArray(value)) {
+          return value.indexOf(nodeValue) > -1;
+        } else {
+          return value === nodeValue;
+        }
       }
     },
 
