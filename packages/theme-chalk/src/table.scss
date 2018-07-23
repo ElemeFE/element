@@ -107,7 +107,8 @@
   }
 
   th, td {
-    padding: 12px 0;
+    // 修改表格 padding
+    padding: 13px 0 13px 18px;
     min-width: 0;
     box-sizing: border-box;
     text-overflow: ellipsis;

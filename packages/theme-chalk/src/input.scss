@@ -211,6 +211,8 @@
     @include e(inner) {
       height: $--input-mini-height;
       line-height: $--input-mini-height;
+      // 0 15px -> 0 10px
+      padding: 0 10px;
     }
 
     .el-input__icon {

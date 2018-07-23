@@ -10,7 +10,8 @@
   border-color: $--border-color-lighter;
   position: fixed;
   left: 50%;
-  top: 20px;
+  // 距离顶部 20px -> 24px 
+  top: 24px;
   transform: translateX(-50%);
   background-color: $--message-background-color;
   transition: opacity 0.3s, transform .4s;

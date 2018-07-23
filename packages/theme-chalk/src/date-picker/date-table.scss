@@ -56,7 +56,8 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      border-radius: 50%;
+      // 50% -> 16px
+      border-radius: 16px;
     }
 
     &.next-month,
@@ -89,7 +90,7 @@
 
     &.current:not(.disabled) span {
       color: $--color-white;
-      background-color: $--datepicker-active-color;
+      background-color: $--color-primary;
     }
     &.start-date div,
     &.end-date div {

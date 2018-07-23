@@ -38,7 +38,13 @@
     }
 
     &.current:not(.disabled) .cell {
-      color: $--datepicker-active-color;
+      color: $--color-white;
+    }
+
+    // 设置年份选择器选中状态样式
+    &.current a.cell {
+      background-color: $--color-primary;
+      border-radius: 15px;
     }
   }
 }

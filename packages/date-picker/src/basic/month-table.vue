@@ -3,7 +3,7 @@
     <tbody>
     <tr>
       <td :class="getCellStyle(0)">
-        <a class="cell">{{ t('el.datepicker.months.jan') }}</a>
+        <span><a class="cell">{{ t('el.datepicker.months.jan') }}</a></span>
       </td>
       <td :class="getCellStyle(1)">
         <a class="cell">{{ t('el.datepicker.months.feb') }}</a>
