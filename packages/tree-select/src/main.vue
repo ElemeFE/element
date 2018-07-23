@@ -60,7 +60,7 @@
       <div
         v-show="visible"
         ref="popper"
-        :style="{'min-width': minWidth}"
+        :style="{minWidth: inputWidth + 'px'}"
         class="el-tree-select-dropdown el-popper">
         <el-tree
           ref="tree"
@@ -72,10 +72,9 @@
           default-expand-all
           node-key="value"
           :show-checkbox="showCheckbox"
-          :empty-text="emptyText"
           :expand-on-click-node="false"
           :check-strictly="checkStrictly"
-          :filter-node-method="filterMethod"
+          :filter-node-method="filterNodeMethod"
           :default-checked-keys="checkedKeys"
           @check="handleCheck"
           @node-click="handleNodeClick">
@@ -150,7 +149,8 @@ export default {
       required: true
     },
     value: {
-      required: true
+      required: true,
+      type: [String, Number, Array]
     },
     multiple: Boolean,
     disabled: Boolean,
@@ -173,7 +173,8 @@ export default {
     showCheckbox: Boolean,
     checkStrictly: Boolean,
     filterable: Boolean,
-    emptyText: String,
+    filterMethod: Function,
+    // emptyText: String,
     showCheckedStrategy: {
       type: String,
       default: 'child',
@@ -262,6 +263,7 @@ export default {
         if (this.multiple && this.filterable) {
           this.$refs.input.focus();
         }
+        this.$emit('focus', this);
         if (!this.multiple && this.filterable) {
           this.broadcast('ElInput', 'inputSelect');
         }
@@ -270,6 +272,7 @@ export default {
         if (this.$refs.input) {
           this.$refs.input.blur();
         }
+        this.$emit('blur', this);
         this.query = '';
         this.selectedLabel = '';
         if (!this.multiple) {
@@ -298,16 +301,18 @@ export default {
     handleFocus(event) {
       this.treeVisibleOnFocus = true;
       this.visible = true;
-      this.$emit('focus', event);
+      // this.$emit('focus', event);
     },
     handleClose() {
       this.visible = false;
     },
     toggleTree() {
-      if (this.treeVisibleOnFocus) {
-        this.treeVisibleOnFocus = false;
-      } else {
-        this.visible = !this.visible;
+      if (!this.selectDisabled) {
+        if (this.treeVisibleOnFocus) {
+          this.treeVisibleOnFocus = false;
+        } else {
+          this.visible = !this.visible;
+        }
       }
     },
     handleIconClick(event) {
@@ -339,7 +344,9 @@ export default {
         } else {
           valueCopy.push(value);
         }
-        this.$refs.input.focus();
+        if (this.$refs.input) {
+          this.$refs.input.focus();
+        }
         this.$emit('input', valueCopy);
         this.emitChange(valueCopy);
       } else {
@@ -385,7 +392,7 @@ export default {
           }
         });
       };
-      checkedNodes(this.$refs.tree.store);
+      traverse(this.$refs.tree.store);
       return checkedNodes;
     },
     getNodeData(value) {
@@ -415,9 +422,14 @@ export default {
         this.handleQueryChange(this.query);
       }
     },
-    filterMethod(value, data) {
+    filterNodeMethod(value, data) {
       if (!value) return true;
-      return data.label.indexOf(value) !== -1;
+      this.$nextTick(this.updatePopper);
+      if (typeof this.filterMethod === 'function') {
+        return this.filterMethod(value, data);
+      } else {
+        return data.label.indexOf(value) !== -1;
+      }
     },
     resetInputHeight() {
       this.$nextTick(() => {

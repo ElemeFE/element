@@ -92,7 +92,7 @@
 }
 
 @include b(tree-select-dropdown) {
-  min-width: 240px;
+  // min-width: 240px;
   // todo: 这里的变量需要调整
   border: $--select-dropdown-border;
   border-radius: $--border-radius-base;
