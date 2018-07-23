@@ -438,7 +438,7 @@
         dragState.showDropIndicator = dropType === 'before' || dropType === 'after';
         dragState.allowDrop = dragState.showDropIndicator || userAllowDropInner;
         dragState.dropType = dropType;
-        this.$emit('node-drag-over', draggingNode.node, dropNode.node,dropType, event);
+        this.$emit('node-drag-over', draggingNode.node, dropNode.node, dropType, event);
       });
 
       this.$on('tree-node-drag-end', (event) => {
