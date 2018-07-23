@@ -201,7 +201,7 @@
           this.value !== undefined &&
           this.value !== null &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+        return criteria ? 'circle-close is-show-close' : 'arrow-up';
       },
 
       debounce() {
@@ -392,7 +392,6 @@
             }
           }
         } else {
-          this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;

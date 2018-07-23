@@ -66,7 +66,13 @@
       this.referenceElm = this.$parent.$refs.reference.$el;
       this.$parent.popperElm = this.popperElm = this.$el;
       this.$on('updatePopper', () => {
-        if (this.$parent.visible) this.updatePopper();
+        const { visible, remote, query, options } = this.$parent;
+        if (visible) {
+          if (!(remote && query === '' && options.length === 0)) {
+            this.$parent.handleIconShow();
+          }
+          this.updatePopper();
+        }
       });
       this.$on('destroyPopper', this.destroyPopper);
     }
