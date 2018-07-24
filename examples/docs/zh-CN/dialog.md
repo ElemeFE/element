@@ -25,6 +25,7 @@
         outerVisible: false,
         innerVisible: false,
         centerDialogVisible: false,
+        centerVerticalDialogVisible: false,
         form: {
           name: '',
           region: '',
@@ -267,12 +268,48 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```
 :::
 
+弹窗可垂直居中
+
+:::demo 将 `vertical-center` 设置为 `true` 即可使弹窗垂直居中。
+
+```html
+<el-button type="text" @click="centerVerticalDialogVisible = true">点击打开垂直居中的 Dialog</el-button>
+
+<el-dialog
+  title="提示"
+  :visible.sync="centerVerticalDialogVisible"
+  width="30%"
+  :vertical-center="true"
+  center>
+  <span>我是垂直居中的弹窗</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="centerVerticalDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerVerticalDialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        centerVerticalDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 `center` 仅影响标题和底部区域。Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加 CSS。
 :::
 
 :::tip
 如果 `visible` 属性绑定的变量位于 Vuex 的 store 内，那么 `.sync` 不会正常工作。此时需要去除 `.sync` 修饰符，同时监听 Dialog 的 `open` 和 `close` 事件，在事件回调中执行 Vuex 中对应的 mutation 更新 `visible` 属性绑定的变量的值。
+:::
+
+:::tip
+`vertical-center` 仅对高度固定的弹窗有效，当动态改变弹窗的高度时，不会刷新居中状态。比如：你的弹窗里有使用 `v-if` 或 `v-show` 等语句控制的会改变弹窗高度的 dom 元素。
 :::
 
 ### Attributes

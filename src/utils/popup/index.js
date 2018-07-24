@@ -33,6 +33,10 @@ export default {
       type: Boolean,
       default: true
     },
+    verticalCenter: {
+      type: Boolean,
+      default: false
+    },
     modalClass: {},
     modalAppendToBody: {
       type: Boolean,
@@ -58,6 +62,9 @@ export default {
   },
 
   beforeDestroy() {
+    if (this.$refs.dialog && this.verticalCenter) {
+      window.removeEventListener('resize', this.setDialogVerticalCenter);
+    }
     PopupManager.deregister(this._popupId);
     PopupManager.closeModal(this._popupId);
 
@@ -139,6 +146,12 @@ export default {
           this._closing = false;
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
+        if (this.$refs.dialog && this.verticalCenter && window) {
+          setTimeout(() => {
+            this.setDialogVerticalCenter();
+          }, 0);
+          window.addEventListener('resize', this.setDialogVerticalCenter);
+        }
         if (props.lockScroll) {
           this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
           if (this.withoutHiddenClass) {
@@ -216,6 +229,17 @@ export default {
         document.body.style.paddingRight = this.bodyPaddingRight;
         removeClass(document.body, 'el-popup-parent--hidden');
       }
+    },
+
+    setDialogVerticalCenter() {
+      const wh = window.innerHeight;
+      const el = this.$refs.dialog;
+      const eh = el.offsetHeight;
+      var t = 50;
+      if (eh < wh - 100) {
+        t = (wh - eh) / 2;
+      };
+      el.style.marginTop = t + 'px';
     }
   }
 };
