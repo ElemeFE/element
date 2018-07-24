@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: '暂无数据'
     },
+    treeSelect: {
+      placeholder: '请选择'
+    },
     transfer: {
       noMatch: '无匹配数据',
       noData: '无数据',

@@ -32,7 +32,7 @@
 
   .el-input {
     &.is-focus .el-input__inner {
-      border-color: $--select-input-focus-background;
+      border-color: $--tree-select-input-focus-background;
     }
   }
 
@@ -41,8 +41,8 @@
     outline: none;
     padding: 0;
     margin-left: 15px;
-    color: $--select-multiple-input-color;
-    font-size: $--select-font-size;
+    color: $--tree-select-multiple-input-color;
+    font-size: $--tree-select-font-size;
     appearance: none;
     height: 28px;
     background-color: transparent;
@@ -92,12 +92,10 @@
 }
 
 @include b(tree-select-dropdown) {
-  // min-width: 240px;
-  // todo: 这里的变量需要调整
-  border: $--select-dropdown-border;
+  border: $--tree-select-dropdown-border;
   border-radius: $--border-radius-base;
-  background-color: $--select-dropdown-background;
-  box-shadow: $--select-dropdown-shadow;
+  background-color: $--tree-select-dropdown-background;
+  box-shadow: $--tree-select-dropdown-shadow;
 
   .el-tree {
     // 先不调整样式
@@ -106,6 +104,11 @@
     }
     .el-tree-node.is-selected > .el-tree-node__content{
       background-color: mix($--color-white, $--color-primary, 92%);
+      color: $--tree-select-node-selected;
+      font-weight: bold;
+    }
+    .el-tree__empty-block {
+      min-height: 40px;
     }
   }
 }

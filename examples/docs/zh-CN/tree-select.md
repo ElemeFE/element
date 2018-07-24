@@ -409,4 +409,27 @@ export default {
 ### Attributes
 | 参数                  | 说明                                      | 类型                                      | 可选值     | 默认值     |
 | --------------------- | ---------------------------------------- | ---------------------------------------- | --------- | --------- |
-| value(v-model)        | 
+| value(v-model)        | 绑定值                                    | number / string / array                  | —         |  —        |
+| data                  | 展示数据                                  | array                                     | —         |  —       |
+| disabled              | 是否禁用                                  | boolean                                   | —         |  false   |
+| multiple              | 是否多选                                  | boolean                                   | —         |  false   |
+| clearable             | 单选时是否可以清空选项                      | boolean                                    | —         |  false   |
+| filterable            | 是否可搜索                                | boolean                                    | —         |  false   |
+| filter-method         | 自定义搜索方法                             | function(querystring, nodeData)            | —         |  —       |
+| placeholder           | 占位符                                    | string                                     | —         | 请选择   |
+| size                  | 输入框尺寸                                 | string                                     | large/small/mini | —  |
+| show-checkbox | 是否显示 checkbox，当该值为 true 时，TreeSelect 自动支持多选 |boolean | —  |  false  |
+| show-checked-strategy | 定义选中项回填的方式，默认情况下只显示子节点，当值为 `all` 为时显示所有选中节点(包括父节点)，为 `parent` 时只显示父节点(当父节点下所有子节点都选中时)| string | all / parent / child  |  child  |
+| props                 | Tree 组件的 [props](https://element.faas.ele.me/#/zh-CN/component/tree#props) | object | —         |  —      |
+| lazy                  | 是否懒加载子节点，需与 load 方法结合使用        | boolean                                   | —         |  false  |
+| load                  | 加载子树数据的方法，仅当 lazy 属性为true 时生效 | function(node, resolve)                   | —          | —       |
+| check-strictly	      | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false | boolean                 | —          | false   |
+
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|---------|---------|
+| change | 选中值发生变化时触发 | 目前的选中值 |
+| blur   | 当组件失去焦点时触发 | 组件实例 |
+| focus  | 当组件获得焦点时触发 | 组件实例 |
+

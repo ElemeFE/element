@@ -64,6 +64,10 @@ export declare class ElTree extends ElementUIComponent {
   /** Configuration options, see the following table */
   props: object
 
+  /** Whether to lazy load leaf node*/
+  lazy: boolean
+
+
   /** Method for loading subtree data */
   load: (node: TreeNode, resolve: Function) => void
 
