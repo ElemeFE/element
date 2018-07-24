@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Agahî tune'
     },
+    treeSelect: {
+      placeholder: 'Bibijêre'
+    },
     transfer: {
       noMatch: 'Li hembere ve agahî tune',
       noData: 'Agahî tune',

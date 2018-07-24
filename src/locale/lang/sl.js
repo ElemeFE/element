@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Ni podatkov'
     },
+    treeSelect: {
+      placeholder: 'Izberi'
+    },
     transfer: {
       noMatch: 'Ni ustreznih podatkov',
       noData: 'Ni podatkov',

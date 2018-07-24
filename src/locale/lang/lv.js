@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Nav datu'
     },
+    treeSelect: {
+      placeholder: 'Izvēlēties'
+    },
     transfer: {
       noMatch: 'Nav atbilstošu datu',
       noData: 'Nav datu',

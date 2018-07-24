@@ -96,6 +96,9 @@ export default {
     tree: {
       emptyText: 'தரவு இல்லை'
     },
+    treeSelect: {
+      placeholder: 'தேர்வு செய்'
+    },
     transfer: {
       noMatch: 'பொருத்தமான தரவு கிடைக்கவில்லை',
       noData: 'தரவு இல்லை',

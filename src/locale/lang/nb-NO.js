@@ -96,6 +96,9 @@ export default {
     tree: {
       emptyText: 'Ingen Data'
     },
+    treeSelect: {
+      placeholder: 'Velg'
+    },
     transfer: {
       noMatch: 'Ingen samsvarende data',
       noData: 'Ingen data',

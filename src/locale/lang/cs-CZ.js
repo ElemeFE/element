@@ -99,6 +99,9 @@ export default {
     tree: {
       emptyText: 'Žádná data'
     },
+    treeSelect: {
+      placeholder: 'Vybrat'
+    },
     transfer: {
       noMatch: 'Žádná shoda',
       noData: 'Žádná data',

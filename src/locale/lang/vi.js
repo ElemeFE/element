@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Không có dữ liệu'
     },
+    treeSelect: {
+      placeholder: 'Chọn'
+    },
     transfer: {
       noMatch: 'Dữ liệu không phù hợp',
       noData: 'Không tìm thấy dữ liệu',

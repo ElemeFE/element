@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'اطلاعاتی وجود ندارد'
     },
+    treeSelect: {
+      placeholder: 'انتخاب کنید'
+    },
     transfer: {
       noMatch: 'هیچ داده‌ای پیدا نشد',
       noData: 'اطلاعاتی وجود ندارد',

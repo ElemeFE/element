@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Brak danych'
     },
+    treeSelect: {
+      placeholder: 'Wybierz'
+    },
     transfer: {
       noMatch: 'Brak dopasowań',
       noData: 'Brak danych',

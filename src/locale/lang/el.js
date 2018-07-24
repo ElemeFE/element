@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Χωρίς Δεδομένα'
     },
+    treeSelect: {
+      placeholder: 'Επιλογή'
+    },
     transfer: {
       noMatch: 'Δεν βρέθηκαν αποτελέσματα',
       noData: 'Χωρίς δεδομένα',

@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Maglumat ýok'
     },
+    treeSelect: {
+      placeholder: 'Saýlaň'
+    },
     transfer: {
       noMatch: 'Hiçzat tapylmady',
       noData: 'Hiçzat ýok',

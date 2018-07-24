@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Geen Data'
     },
+    treeSelect: {
+      placeholder: 'Kies'
+    },
     transfer: {
       noMatch: 'Geen toepaslike data',
       noData: 'Geen data',

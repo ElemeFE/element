@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Немає даних'
     },
+    treeSelect: {
+      placeholder: 'Обрати'
+    },
     transfer: {
       noMatch: 'Співпадінь не знайдено',
       noData: 'Обрати',

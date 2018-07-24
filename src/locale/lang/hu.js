@@ -96,6 +96,9 @@ export default {
     tree: {
       emptyText: 'Nincs adat'
     },
+    treeSelect: {
+      placeholder: 'Válassz'
+    },
     transfer: {
       noMatch: 'Nincs találat',
       noData: 'Nincs adat',

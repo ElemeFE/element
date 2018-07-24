@@ -99,6 +99,9 @@ export default {
     tree: {
       emptyText: 'Žiadne dáta'
     },
+    treeSelect: {
+      placeholder: 'Vybrať'
+    },
     transfer: {
       noMatch: 'Žiadna zhoda',
       noData: 'Žiadne dáta',

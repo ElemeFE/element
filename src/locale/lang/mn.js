@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Өгөгдөл байхгүй'
     },
+    treeSelect: {
+      placeholder: 'Сонгох'
+    },
     transfer: {
       noMatch: 'Тохирох өгөгдөл байхгүй',
       noData: 'Өгөгдөл байхгүй',

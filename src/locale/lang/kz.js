@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Деректер жоқ'
     },
+    treeSelect: {
+      placeholder: 'Таңдаңыз'
+    },
     transfer: {
       noMatch: 'Сәйкес деректер жоқ',
       noData: 'Деректер жоқ',

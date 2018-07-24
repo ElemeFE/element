@@ -96,6 +96,9 @@ export default {
     tree: {
       emptyText: 'لايوجد بيانات'
     },
+    treeSelect: {
+      placeholder: 'أختر'
+    },
     transfer: {
       noMatch: 'لايوجد بيانات مطابقة',
       noData: 'لايوجد بيانات',

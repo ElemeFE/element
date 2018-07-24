@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Nu există date'
     },
+    treeSelect: {
+      placeholder: 'Selectează'
+    },
     transfer: {
       noMatch: 'Nu există date potrivite',
       noData: 'Nu există date',

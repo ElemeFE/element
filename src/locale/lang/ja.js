@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'データなし'
     },
+    treeSelect: {
+      placeholder: '選択してください'
+    },
     transfer: {
       noMatch: 'データなし',
       noData: 'データなし',

@@ -165,7 +165,7 @@ export default {
     placeholder: {
       type: String,
       default() {
-        return t('el.select.placeholder');
+        return t('el.treeSelect.placeholder');
       }
     },
     lazy: Boolean,

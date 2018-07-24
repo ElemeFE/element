@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Andmed puuduvad'
     },
+    treeSelect: {
+      placeholder: 'Vali'
+    },
     transfer: {
       noMatch: 'Sobivad andmed puuduvad',
       noData: 'Andmed puuduvad',

@@ -96,6 +96,9 @@ export default {
     tree: {
       emptyText: 'Sin Datos'
     },
+    treeSelect: {
+      placeholder: 'Seleccionar'
+    },
     transfer: {
       noMatch: 'No hay datos que coincidan',
       noData: 'Sin datos',

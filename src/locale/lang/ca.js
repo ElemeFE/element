@@ -96,6 +96,9 @@ export default {
     tree: {
       emptyText: 'Sense Dades'
     },
+    treeSelect: {
+      placeholder: 'Seleccionar'
+    },
     transfer: {
       noMatch: 'No hi ha dades que coincideixin',
       noData: 'Sense Dades',

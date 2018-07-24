@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Veri yok'
     },
+    treeSelect: {
+      placeholder: 'Seç'
+    },
     transfer: {
       noMatch: 'Eşleşen veri bulunamadı',
       noData: 'Veri yok',

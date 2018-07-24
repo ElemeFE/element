@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Nėra duomenų'
     },
+    treeSelect: {
+      placeholder: 'Pasirink'
+    },
     transfer: {
       noMatch: 'Duomenų nerasta',
       noData: 'Nėra duomenų',

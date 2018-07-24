@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Inga Data'
     },
+    treeSelect: {
+      placeholder: 'Välj'
+    },
     transfer: {
       noMatch: 'Hittade inget',
       noData: 'Ingen data',

@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'Ei tietoja'
     },
+    treeSelect: {
+      placeholder: 'Valitse'
+    },
     transfer: {
       noMatch: 'Ei vastaavia tietoja',
       noData: 'Ei tietoja',

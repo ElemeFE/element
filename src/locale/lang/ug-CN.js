@@ -97,6 +97,9 @@ export default {
     tree: {
       emptyText: 'ئۇچۇر يوق'
     },
+    treeSelect: {
+      placeholder: 'تاللاڭ'
+    },
     transfer: {
       noMatch: 'ئۇچۇر تېپىلمىدى',
       noData: 'ئۇچۇر يوق',
