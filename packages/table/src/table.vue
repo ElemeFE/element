@@ -447,6 +447,10 @@
 
       sort(prop, order) {
         this.store.commit('sort', { prop, order });
+      },
+
+      toggleAllSelection() {
+        this.store.commit('toggleAllSelection');
       }
     },
 
