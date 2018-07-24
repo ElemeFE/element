@@ -297,6 +297,7 @@
         for (let i = 0; i < elList.length; i++) {
           if (elList[i].parentNode === this.$el) {
             el = elList[i];
+            break;
           }
         }
         if (!el) return;
