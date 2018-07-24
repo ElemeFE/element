@@ -1923,6 +1923,17 @@ describe('DatePicker', () => {
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
 
+          const {
+            minDate,
+            maxDate
+          } = vm.picker;
+          expect(minDate.getHours()).to.be.equal(10);
+          expect(minDate.getMinutes()).to.be.equal(10);
+          expect(minDate.getSeconds()).to.be.equal(0);
+          expect(maxDate.getHours()).to.be.equal(10);
+          expect(maxDate.getMinutes()).to.be.equal(10);
+          expect(maxDate.getSeconds()).to.be.equal(0);
+
           triggerEvent(leftCell, 'mousemove', true);
           setTimeout(_ => {
             triggerEvent(leftCell, 'click', true);
@@ -2023,6 +2034,17 @@ describe('DatePicker', () => {
           const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
+
+          const {
+            minDate,
+            maxDate
+          } = vm.picker;
+          expect(minDate.getHours()).to.be.equal(10);
+          expect(minDate.getMinutes()).to.be.equal(10);
+          expect(minDate.getSeconds()).to.be.equal(0);
+          expect(maxDate.getHours()).to.be.equal(10);
+          expect(maxDate.getMinutes()).to.be.equal(10);
+          expect(maxDate.getSeconds()).to.be.equal(0);
 
           triggerEvent(leftCell, 'mousemove', true);
           setTimeout(_ => {
