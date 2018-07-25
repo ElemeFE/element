@@ -433,6 +433,7 @@ export default {
     },
     resetInputHeight() {
       this.$nextTick(() => {
+        if (!this.$refs.reference) return;
         const inputEl = this.$refs.reference.$refs.input;
         const tags = this.$refs.tags;
         let height = sizeMap[this.selectSize] || 40;

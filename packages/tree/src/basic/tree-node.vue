@@ -79,7 +79,14 @@
 
     mixins: [emitter],
 
-    inject: ['tree', 'elTreeSelect'],
+    inject: {
+      tree: {
+        default: ''
+      },
+      elTreeSelect: {
+        default: ''
+      }
+    },
 
     props: {
       node: {

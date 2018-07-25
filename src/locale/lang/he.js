@@ -98,7 +98,7 @@ export default {
       emptyText: 'אין נתונים'
     },
     treeSelect: {
-      emptyText: 'אין נתונים'
+      placeholder: 'בחר'
     },
     transfer: {
       noMatch: 'אין נתונים מתאימים',

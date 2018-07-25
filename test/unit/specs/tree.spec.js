@@ -123,9 +123,6 @@ describe('Tree', () => {
     expect(document.querySelector('.el-tree')).to.exist;
     expect(document.querySelectorAll('.el-tree > .el-tree-node').length).to.equal(3);
     expect(document.querySelectorAll('.el-tree .el-tree-node').length).to.equal(ALL_NODE_COUNT);
-    vm.data[1].children = [{ label: '二级 2-1' }];
-    const tree = vm.$children[0];
-    expect(tree.children).to.deep.equal(vm.data);
   });
 
   it('click node', done => {
