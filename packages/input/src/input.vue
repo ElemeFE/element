@@ -291,8 +291,16 @@
         }
       },
       calcIconOffset(place) {
-        const el = this.$el.querySelector(`.el-input__${place}`);
-        if (!el || el.parentNode !== this.$el) return;
+        let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
+        if (!elList.length) return;
+        let el = null;
+        for (let i = 0; i < elList.length; i++) {
+          if (elList[i].parentNode === this.$el) {
+            el = elList[i];
+            break;
+          }
+        }
+        if (!el) return;
         const pendantMap = {
           suffix: 'append',
           prefix: 'prepend'
