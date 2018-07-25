@@ -197,8 +197,8 @@
         return path.reverse();
       },
 
-      getCheckedNodes(leafOnly) {
-        return this.store.getCheckedNodes(leafOnly);
+      getCheckedNodes(leafOnly, includeHalfChecked) {
+        return this.store.getCheckedNodes(leafOnly, includeHalfChecked);
       },
 
       getCheckedKeys(leafOnly) {
