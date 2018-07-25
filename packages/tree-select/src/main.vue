@@ -335,6 +335,7 @@ export default {
       this.$refs.tree.filter(val);
     },
     handleNodeClick(data, node, tree) {
+      if (this.showCheckbox) return;
       let { value } = node;
       if (this.multiple) {
         const valueCopy = this.value.slice();
