@@ -154,7 +154,7 @@
     },
     methods: {
       updateActiveIndex() {
-        const item = this.items[this.defaultActive];
+        const item = this.items[this.activeIndex] || this.items[this.defaultActive];
         if (item) {
           this.activeIndex = item.index;
           this.initOpenedMenu();
