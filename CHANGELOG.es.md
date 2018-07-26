@@ -4,14 +4,14 @@
 
 *2018-07-26*
 
-- Fixed Table setting `class-name` does not work for `expand` column, #12006
-- Added `toggleAllSelection` method for Table, #12047
-- Fixed wrong position of suffix slot when Input contains Select, #12108 
-- Fixed `line-height` of Option unable to set, #12120
-- Fixed TimeSelect with default value of `null` could not be assigned after executing `resetField`, #12010
-- Fixed keydown event which is not arrow key does not work in Tree, #12008
-- Fixed parent node checked in lazy mode, #12106
-- Added `includeHalfChecked` parameter for getCheckedNodes of Tree, #12014
+- Se ha corregido en Table que `class-name` no funcionaba para las columnas `expand`, #12006
+- Se ha añadido el método `toggleAllSelection` para Table, #12047
+- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108 
+- Corregido que el `line-height` de Option no se establecia, #12120
+- Corregido que TimeSelect con valor por defecto `null` no podia ser asignado después de ejecutar `resetField`, #12010
+- Arreglado el evento `keydown` que cuando no era una tecla de flecha no funciona en Tree, #12008
+- Corregido nodo padre checked en modo lazy, #12106
+- Añadido el parámetro `includeHalfChecked` para getCheckedNodes de Tree, #12014
 
 ### 2.4.4
 

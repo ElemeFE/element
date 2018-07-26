@@ -415,8 +415,8 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 ### Slot
 | Nombre       | Descripcion                              |
 | ------------ | ---------------------------------------- |
-| trigger | content which triggers file dialog |
-| tip | content of tips |
+| trigger | contenido que desencadena el diálogo de archivo |
+| tip | contenido de los tips |
 
 ### Métodos
 | Nombre del método | Descripción                              | Parametros                |
