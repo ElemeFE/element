@@ -172,3 +172,15 @@ export function setStyle(element, styleName, value) {
     }
   }
 };
+
+export let supportsPassive = false;
+if (!isServer) {
+  try {
+    const opts = Object.defineProperty({}, 'passive', ({
+      get() {
+        supportsPassive = true;
+      }
+    }));
+    window.addEventListener('test-passive', null, opts);
+  } catch (e) {}
+}
