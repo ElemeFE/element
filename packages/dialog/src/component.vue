@@ -32,6 +32,7 @@
 
 <script>
   import Popup from 'element-ui/src/utils/popup';
+  import { supportsPassive as passive } from 'element-ui/src/utils/dom';
   import Migrating from 'element-ui/src/mixins/migrating';
   import emitter from 'element-ui/src/mixins/emitter';
 
@@ -112,7 +113,7 @@
         if (val) {
           this.closed = false;
           this.$emit('open');
-          this.$el.addEventListener('scroll', this.updatePopper);
+          this.$el.addEventListener('scroll', this.updatePopper, passive ? { passive } : false);
           this.$nextTick(() => {
             this.$refs.dialog.scrollTop = 0;
           });

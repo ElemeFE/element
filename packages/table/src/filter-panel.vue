@@ -43,6 +43,7 @@
 </template>
 
 <script type="text/babel">
+  import { supportsPassive as passive } from 'element-ui/src/utils/dom';
   import Popper from 'element-ui/src/utils/vue-popper';
   import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
@@ -181,7 +182,7 @@
       this.referenceElm = this.cell;
       this.table.bodyWrapper.addEventListener('scroll', () => {
         this.updatePopper();
-      });
+      }, passive ? { passive } : false);
 
       this.$watch('showPopper', (value) => {
         if (this.column) this.column.filterOpened = value;
