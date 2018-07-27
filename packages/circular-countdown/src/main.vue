@@ -88,18 +88,18 @@ export default {
       }
     },
     percentToSize(percent) {
-      let c = Math.PI * (18 * 2);
-      var pct = ((100 - percent) / 100) * c;
+      const c = Math.PI * (18 * 2);
+      let pct = ((100 - percent) / 100) * c;
       return pct;
     },
     msToDateArray(ms) {
-      let days = Math.floor(ms / (24 * 60 * 60 * 1000));
+      const days = Math.floor(ms / (24 * 60 * 60 * 1000));
       let daysms = ms % (24 * 60 * 60 * 1000);
-      let hours = Math.floor((daysms) / (60 * 60 * 1000));
+      const hours = Math.floor((daysms) / (60 * 60 * 1000));
       let hoursms = ms % (60 * 60 * 1000);
-      let minutes = Math.floor((hoursms) / (60 * 1000));
+      const minutes = Math.floor((hoursms) / (60 * 1000));
       let minutesms = ms % (60 * 1000);
-      let sec = Math.floor((minutesms) / (1000));
+      const sec = Math.floor((minutesms) / (1000));
       return {
         d: days,
         h: hours,
