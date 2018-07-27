@@ -223,6 +223,10 @@
             {
               "path": "/date-picker-joined",
               "title": "DatePicker Joined"
+            },
+            {
+              "path": "/circular-countdown",
+              "title": "CircularCountdown"
             }
           ]
         }
