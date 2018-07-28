@@ -1,0 +1,23 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(circular-countdown) {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  &__time-info {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  &__time {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  &__time-type {
+    font-size: 11px;
+    line-height: 0.55;
+  }
+}
