@@ -5,6 +5,16 @@ import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
 import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
 
+const generatePopperVM = () => {
+  return new Vue({
+    data: () => ({ node: '' }),
+
+    render(h) {
+      return this.node;
+    }
+  }).$mount();
+};
+
 export default {
   name: 'ElTooltip',
 
@@ -66,12 +76,7 @@ export default {
   beforeCreate() {
     if (this.$isServer) return;
 
-    this.popperVM = new Vue({
-      data: { node: '' },
-      render(h) {
-        return this.node;
-      }
-    }).$mount();
+    this.popperVM = generatePopperVM();
 
     this.debounceClose = debounce(200, () => this.handleClosePopper());
   },
