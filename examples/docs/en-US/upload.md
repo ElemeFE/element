@@ -391,33 +391,34 @@ You can drag your file to a certain area to upload it.
 :::
 
 ### Attributes
-Attribute      | Description          | Type      | Accepted Values       | Default
-----| ----| ----| ----| ----
-action | required, request URL | string | — | —
-headers | request headers | object | — | —
-multiple | whether uploading multiple files is permitted | boolean | — | —
-data | additions options of request | object | — | —
-name | key name for uploaded file | string | — | file
-with-credentials | whether cookies are sent | boolean | — |false
-show-file-list | whether to show the uploaded file list | boolean | — | true
- drag | whether to activate drag and drop mode | boolean | — | false
-accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
-on-preview | hook function when clicking the uploaded files | function(file) | — | —
-on-remove | hook function when files are removed | function(file, fileList) | — | —
-on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
-on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
-on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
-on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
-before-remove | hook function before removing a file with the file and file list as its parameters. If `false` is returned or a `Promise` is returned and then is rejected, removing will be aborted. | function(file, fileList) | — | — |
-thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
-list-type | type of fileList | string | text/picture/picture-card | text |
-auto-upload | whether to auto upload file | boolean | — | true |
-http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
-disabled | whether to disable upload | boolean | — | false |
-limit | maximum number of uploads allowed | number | — | — |
-on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
+| Attribute      | Description          | Type      | Accepted Values       | Default |
+| ---- | ---- | ---- | ---- | ---- |
+| action | required, request URL | string | — | — |
+| headers | request headers | object | — | — |
+| multiple | whether uploading multiple files is permitted | boolean | — | — |
+| data | additions options of request | object | — | — |
+| name | key name for uploaded file | string | — | file |
+| with-credentials | whether cookies are sent | boolean | — |false |
+| show-file-list | whether to show the uploaded file list | boolean | — | true |
+| drag | whether to activate drag and drop mode | boolean | — | false |
+| accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | — |
+| on-preview | hook function when clicking the uploaded files | function(file) | — | — |
+| on-remove | hook function when files are removed | function(file, fileList) | — | — |
+| on-success | hook function when uploaded successfully | function(response, file, fileList) | — | — |
+| on-error | hook function when some errors occurs | function(err, file, fileList) | — | — |
+| on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
+| on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
+| before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | | function(file) | — | — |
+| before-remove | hook function before removing a file with the file and file list as its parameters. If `false` is returned or a `Promise` is returned and then is rejected, removing will be | aborted. | function(file, fileList) | — | — |
+| thumbnail-mode | whether thumbnail is displayed | boolean | — | false |
+| file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | [] |
+| list-type | type of fileList | string | text/picture/picture-card | text |
+| auto-upload | whether to auto upload file | boolean | — | true |
+| http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
+| disabled | whether to disable upload | boolean | — | false |
+| limit | maximum number of uploads allowed | number | — | — |
+| on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
+| hide-upload-after-exceed | whether to hide the upload area after the number of uploaded files exceeds the limit value | boolean | — | false |
 
 ### Slot
 | Name | Description |
