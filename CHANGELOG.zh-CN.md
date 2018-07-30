@@ -1,5 +1,18 @@
 ## 更新日志
 
+### 2.4.5
+
+*2018-07-26*
+
+- 修复 Table 设置 `class-name` 对 `expand` 列不生效的问题，#12006
+- 新增 Table 的 `toggleAllSelection` 方法，#12047
+- 修复 Input 包含 Select 时，suffix 插槽位置显示不正确的问题，#12108
+- 修复 Option 的 `line-height` 无法设置的问题，#12120
+- 修复初始值为 `null` 的 TimeSelect 在执行 `resetField` 后无法再赋值的问题，#12010
+- 修复 Tree 组件中不响应方向键以外 keydown 事件的问题，#12008
+- 修复 Tree 在懒加载情况下选中父节点的问题，#12106
+- Tree 的 `getCheckedNodes` 方法新增 `includeHalfChecked` 参数，#12014
+
 ### 2.4.4
 
 *2018-07-13*

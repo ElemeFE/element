@@ -314,7 +314,7 @@ export default class Node {
         if (data instanceof Array) {
           if (this.checked) {
             this.setChecked(true, true);
-          } else {
+          } else if (!this.store.checkStrictly) {
             reInitChecked(this);
           }
           done();

@@ -235,10 +235,6 @@
         if (newVal && !oldVal) {
           this.rangeState.selecting = false;
           this.markRange(newVal);
-          this.$emit('pick', {
-            minDate: this.minDate,
-            maxDate: this.maxDate
-          });
         }
       }
     },

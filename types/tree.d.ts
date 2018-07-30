@@ -133,9 +133,10 @@ export declare class ElTree extends ElementUIComponent {
   /**
    * If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes
    *
-   * @param subnodes If the `subnodes` is `true`, it only returns the currently selected array of sub-nodes
+   * @param leafOnly If the `leafOnly` is `true`, it only returns the currently selected array of sub-nodes
+   * @param includeHalfChecked If the `includeHalfChecked` is `true`, the return value contains halfchecked nodes
    */
-  getCheckedNodes (leafOnly?: boolean): TreeNode[]
+  getCheckedNodes (leafOnly?: boolean, includeHalfChecked?: boolean): TreeNode[]
 
   /**
    * Set certain nodes to be checked. Only works when `node-key` is assigned
@@ -148,7 +149,7 @@ export declare class ElTree extends ElementUIComponent {
   /**
    * If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes' keys
    *
-   * @param subnodes If the `subnodes` is `true`, it only returns the currently selected array of sub-nodes
+   * @param leafOnly If the `leafOnly` is `true`, it only returns the currently selected array of sub-nodes
    */
   getCheckedKeys (leafOnly?: boolean): any[]
 
