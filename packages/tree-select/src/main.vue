@@ -46,6 +46,7 @@
       :class="{ 'is-focus': visible }"
       :placeholder="currentPlaceholder"
       @focus="handleFocus"
+      @blur="handleBlur"
       @keyup.native="onInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
@@ -56,7 +57,7 @@
        :class="suffixIconClass"
        @click="handleIconClick"></i>
     </el-input>
-    <transition name="el-zoom-in-top">
+    <transition name="el-zoom-in-top" @after-leave="afterLeave">
       <div
         v-show="visible"
         ref="popper"
@@ -86,7 +87,7 @@
 
 <script>
 import ElInput from 'element-ui/packages/input';
-import ElTree from '../../tree/src/basic/basic-tree.vue';
+import { BasicTree as ElTree } from 'element-ui/packages/tree';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import Popper from 'element-ui/src/utils/vue-popper';
 import { valueEquals } from 'element-ui/src/utils/util';
@@ -263,7 +264,6 @@ export default {
         if (this.multiple && this.filterable) {
           this.$refs.input.focus();
         }
-        this.$emit('focus', this);
         if (!this.multiple && this.filterable) {
           this.broadcast('ElInput', 'inputSelect');
         }
@@ -272,17 +272,11 @@ export default {
         if (this.$refs.input) {
           this.$refs.input.blur();
         }
-        this.$emit('blur', this);
         this.query = '';
         this.selectedLabel = '';
         if (!this.multiple) {
           this.selectedLabel = this.selected.label || '';
           if (this.filterable) this.query = this.selectedLabel;
-        }
-        if (this.filterable) {
-          setTimeout(() => {
-            this.handleQueryChange('');
-          }, 100);
         }
       }
     },
@@ -299,9 +293,18 @@ export default {
 
   methods: {
     handleFocus(event) {
+      if (!this.visible) {
+        this.$emit('focus', event);
+      }
       this.treeVisibleOnFocus = true;
       this.visible = true;
-      // this.$emit('focus', event);
+    },
+    handleBlur(event) {
+      this.$nextTick(() => {
+        if (this.visible) {
+          this.$emit('blur', event);
+        }
+      });
     },
     handleClose() {
       this.visible = false;
@@ -449,14 +452,12 @@ export default {
     },
     getValueIndex(arr = [], value) {
       let index = -1;
-      arr.some((item, i) => {
-        if (item === value) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === value) {
           index = i;
-          return true;
-        } else {
-          return false;
+          break;
         }
-      });
+      }
       return index;
     },
     deletePrevTag(e) {
@@ -498,6 +499,11 @@ export default {
           this.selectedLabel = node.label;
           if (this.filterable) this.query = this.selectedLabel;
         }
+      }
+    },
+    afterLeave() {
+      if (this.filterable) {
+        this.handleQueryChange('');
       }
     }
   },

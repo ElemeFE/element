@@ -430,5 +430,5 @@ Using checkbox to enable multiple selection
 | Event Name     | Description                              | Parameters                               |
 | -------------- | ---------------------------------------- | ---------------------------------------- |
 | change         | triggers when the selected value changes | current selected value                   |
-| blur           | triggers when Input blurs                | component instance                       |
-| focus          | triggers when Input focuses              | component instance                       |
+| blur           | triggers when Input blurs                | (event: Event)                           |
+| focus          | triggers when Input focuses              | (event: Event)                           |
