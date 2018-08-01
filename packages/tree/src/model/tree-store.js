@@ -108,13 +108,16 @@ export default class TreeStore {
     const defaultCheckedKeys = this.defaultCheckedKeys || [];
     const nodesMap = this.nodesMap;
 
-    defaultCheckedKeys.forEach((checkedKey) => {
-      const node = nodesMap[checkedKey];
-
-      if (node) {
-        node.setChecked(true, !this.checkStrictly);
+    for (let nodeKey in nodesMap) {
+      if (!nodesMap.hasOwnProperty(nodeKey)) {
+        continue;
       }
-    });
+      if (defaultCheckedKeys.indexOf(nodeKey) >= 0) {
+        nodesMap[nodeKey].setChecked(true, !this.checkStrictly);
+        continue;
+      }
+      nodesMap[nodeKey].setChecked(false, !this.checkStrictly);
+    }
   }
 
   _initDefaultCheckedNode(node) {
