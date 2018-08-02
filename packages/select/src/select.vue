@@ -62,8 +62,7 @@
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
         v-model="query"
-        @input="e => handleQueryChange(e.target.value)"
-        :debounce="remote ? 300 : 0"
+        @input="debouncedQueryChange"
         v-if="filterable"
         :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
@@ -847,6 +846,10 @@
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
+      });
+
+      this.debouncedQueryChange = debounce(this.debounce, (e) => {
+        this.handleQueryChange(e.target.value);
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
