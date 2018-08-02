@@ -367,7 +367,8 @@
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
-  import { version } from 'main/index.js';
+  import Element from 'main/index.js';
+  const { version } = Element;
 
   export default {
     data() {

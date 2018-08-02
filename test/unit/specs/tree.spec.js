@@ -581,7 +581,7 @@ describe('Tree', () => {
     expect(firstNode.querySelector('.custom-content')).to.exist;
     const button = firstNode.querySelector('.custom-content .el-button');
     expect(button).to.exist;
-    expect(button.textContent).to.equal('一级 1');
+    expect(button.querySelector('span').textContent).to.equal('一级 1');
   });
 
   it('scoped slot', () => {
