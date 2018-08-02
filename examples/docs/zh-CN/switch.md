@@ -142,6 +142,7 @@
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | boolean / string / number | — | — |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | width  | switch 的宽度（像素）    | number   | — | 40 |
 | active-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `active-text`    | string   | — | — |

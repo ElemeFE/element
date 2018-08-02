@@ -18,7 +18,7 @@ const createElm = function() {
  * 回收 vm
  * @param  {Object} vm
  */
-exports.destroyVM = function(vm) {
+export const destroyVM = function(vm) {
   vm.$destroy && vm.$destroy();
   vm.$el &&
   vm.$el.parentNode &&
@@ -31,7 +31,7 @@ exports.destroyVM = function(vm) {
  * @param  {Boolean=false} mounted 是否添加到 DOM 上
  * @return {Object} vm
  */
-exports.createVue = function(Compo, mounted = false) {
+export const createVue = function(Compo, mounted = false) {
   if (Object.prototype.toString.call(Compo) === '[object String]') {
     Compo = { template: Compo };
   }
@@ -46,7 +46,7 @@ exports.createVue = function(Compo, mounted = false) {
  * @param  {Boolean=false} mounted  - 是否添加到 DOM 上
  * @return {Object} vm
  */
-exports.createTest = function(Compo, propsData = {}, mounted = false) {
+export const createTest = function(Compo, propsData = {}, mounted = false) {
   if (propsData === true || propsData === false) {
     mounted = propsData;
     propsData = {};
@@ -63,7 +63,7 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
  * @param  {String} name
  * @param  {*} opts
  */
-exports.triggerEvent = function(elm, name, ...opts) {
+export const triggerEvent = function(elm, name, ...opts) {
   let eventName;
 
   if (/^mouse|click/.test(name)) {
@@ -88,9 +88,9 @@ exports.triggerEvent = function(elm, name, ...opts) {
  * @param {Element} elm
  * @param {*} opts
  */
-exports.triggerClick = function(elm, ...opts) {
-  exports.triggerEvent(elm, 'mousedown', ...opts);
-  exports.triggerEvent(elm, 'mouseup', ...opts);
+export const triggerClick = function(elm, ...opts) {
+  triggerEvent(elm, 'mousedown', ...opts);
+  triggerEvent(elm, 'mouseup', ...opts);
 
   return elm;
 };
@@ -100,7 +100,7 @@ exports.triggerClick = function(elm, ...opts) {
  * @param {Element} elm
  * @param {keyCode} int
  */
-exports.triggerKeyDown = function(el, keyCode) {
+export const triggerKeyDown = function(el, keyCode) {
   const evt = document.createEvent('Events');
   evt.initEvent('keydown', true, true);
   evt.keyCode = keyCode;
