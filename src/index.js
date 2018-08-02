@@ -171,7 +171,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
+export default {
   version: '2.4.11',
   locale: locale.use,
   i18n: locale.i18n,
@@ -247,5 +247,3 @@ module.exports = {
   Main,
   Footer
 };
-
-module.exports.default = module.exports;
