@@ -411,6 +411,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | disabled         | especifica si se deshabilita la carga de archivos | boolean                            | —                         | false       |
 | limit            | número máximo de cargas permitidas       | number                             | —                         | —           |
 | on-exceed        | _hook_ lanzado cuando el límite ha sido excedido | function(files, fileList)          | —                         | -           |
+| hide-upload-after-exceed | whether to hide the upload area after the number of uploaded files exceeds the limit value | boolean | —  | false |
 
 ### Slot
 | Nombre       | Descripcion                              |

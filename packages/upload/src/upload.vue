@@ -45,7 +45,8 @@ export default {
     },
     disabled: Boolean,
     limit: Number,
-    onExceed: Function
+    onExceed: Function,
+    hideUploadAfterExceed: Boolean
   },
 
   data() {
@@ -187,17 +188,15 @@ export default {
       handleKeydown
     } = this;
     const data = {
-      class: {
-        'el-upload': true
-      },
+      staticClass: `el-upload el-upload--${listType}`,
       on: {
         click: handleClick,
         keydown: handleKeydown
       }
     };
-    data.class[`el-upload--${listType}`] = true;
+
     return (
-      <div {...data} tabindex="0" >
+      <div {...data} tabindex="0" v-show={!(this.hideUploadAfterExceed && this.limit && this.fileList.length >= this.limit)}>
         {
           drag
             ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>

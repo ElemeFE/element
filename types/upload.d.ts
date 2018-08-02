@@ -118,4 +118,8 @@ export declare class ElUpload extends ElementUIComponent {
 
   /** Abort specified file */
   abort (file: ElUploadInternalFileDetail): void
+
+  /** whether to hide the upload area after the number of uploaded files exceeds the limit value */
+  hideUploadAfterExceed: boolean
+
 }

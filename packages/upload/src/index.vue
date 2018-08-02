@@ -103,7 +103,8 @@ export default {
     onExceed: {
       type: Function,
       default: noop
-    }
+    },
+    hideUploadAfterExceed: Boolean
   },
 
   data() {
@@ -280,7 +281,8 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
-        'http-request': this.httpRequest
+        'http-request': this.httpRequest,
+        'hide-upload-after-exceed': this.hideUploadAfterExceed
       },
       ref: 'upload-inner'
     };
