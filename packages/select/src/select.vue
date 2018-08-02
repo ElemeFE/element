@@ -50,7 +50,6 @@
         :autocomplete="autoComplete"
         @focus="handleFocus"
         @blur="softFocus = false"
-        @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -565,6 +564,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
+          if (this.visible) return;
           if (this.automaticDropdown || this.filterable) {
             this.visible = true;
             this.menuVisibleOnFocus = true;
@@ -739,6 +739,8 @@
           }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
+          } else if (this.multiple) {
+            this.$refs.reference.blur();
           }
         }
       },
