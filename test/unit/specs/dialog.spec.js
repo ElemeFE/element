@@ -134,8 +134,10 @@ describe('Dialog', () => {
     };
 
     it('fullscreen', () => {
-      vm = getDialogVm('fullscreen');
-      expect(vm.$el.querySelector('.el-dialog').classList.contains('is-fullscreen')).to.true;
+      vm = getDialogVm('fullscreen width="40%"');
+      const dialogEl = vm.$el.querySelector('.el-dialog');
+      expect(dialogEl.classList.contains('is-fullscreen')).to.true;
+      expect(dialogEl.style.width).to.be.empty;
     });
 
     it('top', () => {
