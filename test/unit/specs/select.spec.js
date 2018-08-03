@@ -331,6 +331,32 @@ describe('Select', () => {
     }, 100);
   });
 
+  it('prefixed icon', () => {
+    vm = createTest({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [],
+          value: ''
+        };
+      }
+    });
+    expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
+  });
+
   it('custom el-option template', () => {
     vm = createVue({
       template: `
@@ -663,11 +689,11 @@ describe('Select', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
-    });
+    }, 100);
   });
 
   it('should return focus to input inside select after option select', done => {

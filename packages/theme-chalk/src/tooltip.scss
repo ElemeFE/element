@@ -12,6 +12,7 @@
     z-index: $--index-popper;
     font-size: $--tooltip-font-size;
     line-height: 1.2;
+    min-width: 10px;
 
     .popper__arrow,
     .popper__arrow::after {

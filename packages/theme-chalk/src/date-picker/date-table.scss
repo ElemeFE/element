@@ -120,6 +120,22 @@
       color: $--color-text-placeholder;
     }
 
+    &.selected div {
+      margin-left: 5px;
+      margin-right: 5px;
+      background-color: $--datepicker-inrange-color;
+      border-radius: 15px;
+      &:hover {
+        background-color: $--datepicker-inrange-hover-color;
+      }
+    }
+
+    &.selected span {
+      background-color: $--datepicker-active-color;
+      color: $--color-white;
+      border-radius: 15px;
+    }
+
     &.week {
       font-size: 80%;
       color: $--datepicker-header-color;

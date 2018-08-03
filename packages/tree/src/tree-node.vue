@@ -167,6 +167,11 @@
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
+        if (this.tree.checkOnClickNode && !this.node.disabled) {
+          this.handleCheckChange(null, {
+            target: { checked: !this.node.checked }
+          });
+        }
         this.tree.$emit('node-click', this.node.data, this.node, this);
       },
 
@@ -208,10 +213,12 @@
       },
 
       handleDragStart(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-start', event, this);
       },
 
       handleDragOver(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-over', event, this);
         event.preventDefault();
       },
@@ -221,6 +228,7 @@
       },
 
       handleDragEnd(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-end', event, this);
       }
     },

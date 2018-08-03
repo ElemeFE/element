@@ -639,7 +639,7 @@ This example shows how to customize your own validation rules to finish a two-fa
     label="Email"
     :rules="[
       { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -852,7 +852,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | validate | validate the whole form. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Returns a promise if callback is omitted | Function(callback: Function(boolean, object)) |
 | validateField | validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
-| clearValidate | clear validation message for all fields | -
+| clearValidate | clear validation message for certain fields. The parameter is an array of prop names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: array)
 
 ### Form Events
 | Event Name | Description | Parameters |
@@ -884,3 +884,4 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | resetField | reset current field and remove validation result | — |
+| clearValidate | remove validation status of the field | -

@@ -48,8 +48,18 @@
         </a>
       </td>
       <td align="center" valign="middle">
+        <a href="https://www.duotai.cn/?utm_source=element" target="_blank">
+          <img width="140px" src="https://user-images.githubusercontent.com/10095631/39403151-c42dbcee-4ba5-11e8-9c09-8e5283da4144.png">
+        </a>
+      </td>
+      <td align="center" valign="middle">
         <a href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
           <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://bitsrc.io/" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/10095631/41342907-e44e7196-6f2f-11e8-92f2-47702dc8f059.png">
         </a>
       </td>
     </tr>
@@ -67,7 +77,7 @@
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
-- [Element for React](https://github.com/eleme/element-react)
+- [Element for React](https://github.com/elemefe/element-react)
 - [Element for Angular](https://github.com/ElemeFE/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
 - [Visual Studio Code helper](https://github.com/ElemeFE/vscode-element-helper)
@@ -148,7 +158,7 @@ Spanish documentation is made possible by these community developers:
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 
-<img width="650" src="https://user-images.githubusercontent.com/10095631/37442034-3170a9e0-283f-11e8-8fdd-56748646fa43.jpg" alt="donation">
+<img width="650" src="https://user-images.githubusercontent.com/10095631/42198577-587063dc-7ebb-11e8-892b-91e08f99ce1e.jpg" alt="donation">
 
 ## Backers
 

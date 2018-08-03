@@ -640,7 +640,7 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
     label="Email"
     :rules="[
       { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -857,7 +857,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | validate      | el método para validar todo el formulario. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Devuelve una promesa si se omite el return | Function(callback: Function(boolean, object))    |
 | validateField | el método para validar un determinado form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields   | restablece todos los campos y elimina el resultado de validación | —                                        |
-| clearValidate | limpia mensaje de validación para todos los campos | -
+| clearValidate |limpieza de validación para determinados campos. El parámetro es un conjunto de nombres de propiedad de los elementos del formulario cuyos mensajes de validación se eliminarán. Si se omiten, se borrarán todos los mensajes de validación de los campos. | Function(props: array)
 
 ### Form Events
 | Nombre   | Descripción                                          | Parametros                                                   |
@@ -889,3 +889,4 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | Metodo     | Descripción                              | Parametros |
 | ---------- | ---------------------------------------- | ---------- |
 | resetField | restablecer campo actual y eliminar resultado de validación | —          |
+| clearValidate | elimina el estado de la validacion de un campo | - |

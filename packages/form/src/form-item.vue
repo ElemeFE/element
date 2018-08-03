@@ -8,10 +8,10 @@
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
-    <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
+    <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
         <div
@@ -156,7 +156,7 @@
         return this.size || this._formSize;
       },
       sizeClass() {
-        return (this.$ELEMENT || {}).size || this.elFormItemSize;
+        return this.elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
     data() {
@@ -224,10 +224,6 @@
         } else {
           prop.o[prop.k] = this.initialValue;
         }
-        /* Select 的值被代码改变时不会触发校验，
-           这里需要强行触发一次，刷新 validateDisabled 的值，
-           确保 Select 下一次值改变时能正确触发校验 */
-        this.broadcast('ElSelect', 'fieldReset');
 
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },

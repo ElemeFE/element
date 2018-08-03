@@ -134,8 +134,10 @@ describe('Dialog', () => {
     };
 
     it('fullscreen', () => {
-      vm = getDialogVm('fullscreen');
-      expect(vm.$el.querySelector('.el-dialog').classList.contains('is-fullscreen')).to.true;
+      vm = getDialogVm('fullscreen width="40%"');
+      const dialogEl = vm.$el.querySelector('.el-dialog');
+      expect(dialogEl.classList.contains('is-fullscreen')).to.true;
+      expect(dialogEl.style.width).to.be.empty;
     });
 
     it('top', () => {
@@ -190,5 +192,88 @@ describe('Dialog', () => {
         done();
       }, 50);
     }, 50);
+  });
+  it('click dialog to close', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible.sync="visible">
+            <span>这是一段信息</span>
+          </el-dialog>
+        </div>
+      `,
+
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+    const dialog = vm.$children[0];
+    setTimeout(() => {
+      dialog.$el.click();
+      setTimeout(() => {
+        expect(vm.visible).to.be.false;
+        done();
+      }, 400);
+    }, 50);
+  });
+  it('click header btn', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible.sync="visible">
+            <span>这是一段信息</span>
+          </el-dialog>
+        </div>
+      `,
+
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+    const dialog = vm.$children[0];
+    setTimeout(() => {
+      dialog.$el.querySelector('.el-dialog__headerbtn').click();
+      setTimeout(() => {
+        expect(vm.visible).to.be.false;
+        done();
+      }, 500);
+    }, 50);
+  });
+  it('before close', done => {
+    const spy = sinon.spy();
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible="visible" :before-close="beforeClose"></el-dialog>
+        </div>
+      `,
+
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      },
+      methods: {
+        beforeClose(done) {
+          spy();
+          done();
+        }
+      }
+    }, true);
+    const dialog = vm.$children[0];
+    setTimeout(() => {
+      dialog.$el.click();
+      setTimeout(() => {
+        expect(spy.called).to.be.true;
+        done();
+      }, 500);
+    }, 10);
   });
 });

@@ -19,12 +19,14 @@
   >
     <el-input
       ref="input"
-      :readonly="!filterable"
+      :readonly="readonly"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @compositionstart.native="handleComposition"
+      @compositionend.native="handleComposition"
       :validate-event="false"
       :size="size"
       :disabled="cascaderDisabled"
@@ -44,11 +46,11 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === ''">
+    <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> {{ separator }} </span>
+          <span v-if="index < currentLabels.length - 1" :key="index"> {{ separator }} </span>
         </template>
       </template>
       <template v-else>
@@ -178,7 +180,10 @@ export default {
       menuVisible: false,
       inputHover: false,
       inputValue: '',
-      flatOptions: null
+      flatOptions: null,
+      id: generateId(),
+      needFocus: true,
+      isOnComposition: false
     };
   },
 
@@ -191,6 +196,9 @@ export default {
     },
     childrenKey() {
       return this.props.children || 'children';
+    },
+    disabledKey() {
+      return this.props.disabled || 'disabled';
     },
     currentLabels() {
       let options = this.options;
@@ -213,8 +221,9 @@ export default {
     cascaderDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
     },
-    id() {
-      return generateId();
+    readonly() {
+      const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
+      return !this.filterable || (!isIE && !this.menuVisible);
     }
   },
 
@@ -277,7 +286,11 @@ export default {
     hideMenu() {
       this.inputValue = '';
       this.menu.visible = false;
-      this.$refs.input.focus();
+      if (this.needFocus) {
+        this.$refs.input.focus();
+      } else {
+        this.needFocus = true;
+      }
     },
     handleActiveItemChange(value) {
       this.$nextTick(_ => {
@@ -332,7 +345,8 @@ export default {
           return {
             __IS__FLAT__OPTIONS: true,
             value: optionStack.map(item => item[this.valueKey]),
-            label: this.renderFilteredOptionLabel(value, optionStack)
+            label: this.renderFilteredOptionLabel(value, optionStack),
+            disabled: optionStack.some(item => item[this.disabledKey])
           };
         });
       } else {
@@ -382,7 +396,10 @@ export default {
       ev.stopPropagation();
       this.handlePick([], true);
     },
-    handleClickoutside() {
+    handleClickoutside(pickFinished = false) {
+      if (this.menuVisible && !pickFinished) {
+        this.needFocus = false;
+      }
       this.menuVisible = false;
     },
     handleClick() {
@@ -399,6 +416,9 @@ export default {
     },
     handleBlur(event) {
       this.$emit('blur', event);
+    },
+    handleComposition(event) {
+      this.isOnComposition = event.type !== 'compositionend';
     }
   },
 

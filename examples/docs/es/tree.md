@@ -245,8 +245,12 @@
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
       },
-      allowDrop(draggingNode, dropNode) {
-        return dropNode.data.label !== 'Level two 3-1';
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === 'Level two 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
       },
       allowDrag(draggingNode) {
         return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
@@ -1059,7 +1063,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 
 ### Draggable
 
-You can drag and drop Tree nodes by adding a `draggable` attribute.
+Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 
 :::demo
 ```html
@@ -1142,8 +1146,12 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
       },
-      allowDrop(draggingNode, dropNode) {
-        return dropNode.data.label !== 'Level two 3-1';
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === 'Level two 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
       },
       allowDrag(draggingNode) {
         return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
@@ -1166,7 +1174,8 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | render-content        | Función de renderizado para los nodos    | Function(h, { node, data, store } | —                 | —           |
 | highlight-current     | Si el nodo actual está resaltado         | boolean                           | —                 | false       |
 | default-expand-all    | Expandir todos los nodos por defecto     | boolean                           | —                 | false       |
-| expand-on-click-node  | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | —                                 | true              | -           |
+| expand-on-click-node  | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | boolean | — | true |
+| check-on-click-node   | si marcar o desmarcar el nodo al hacer clic en el. Si es `false`, el nodo sólo se puede marcar o desmarcar haciendo clic en la casilla de verificación. | boolean | — | false |
 | auto-expand-parent    | Expandir un nodo padre si el hijo está seleccionado | boolean                           | —                 | true        |
 | default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array                             | —                 | —           |
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
@@ -1177,7 +1186,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
 | draggable             | si se habilita la función de drag and drop en los nodos | boolean            | —    | false |
 | allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
-| allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. | Function(Nodoquesearrastra, Nododestino) | —    | —     |
+| allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. `type` tiene tres valores posibles: 'prev' (insertar el nodo de arrastre antes del nodo de destino), 'inner' (insertar el nodo de arrastre en el nodo de destino) y 'next' (insertar el nodo de arrastre después del nodo de destino) | Function(Nodoquesearrastra, Nododestino, type) | —    | —     |
 
 ### props
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
@@ -1192,16 +1201,16 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | filter            | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
 | updateKeyChildren | Asocia un nuevo dato al nodo, solo funciona si `node-key` está asignado | (key, data)Acepta dos parámetros: 1. clave del nodo 2. nuevo dato |
-| getCheckedNodes   | Si los nodos puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos seleccionados | Acepta un booleano cuyo valor por defecto es `false` |
+| getCheckedNodes   | si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos actualmente seleccionada. | (leafOnly, includeHalfChecked) Acepta dos parámetros de tipo booleano: 1. El valor por defecto es `false`. Si el parámetro es `true`, sólo devuelve el array de subnodos actualmente seleccionado. 2. El valor por defecto es `false`. Si el parámetro es `true`, el valor de retorno contiene nodos halfchecked. |
 | setCheckedNodes   | Establece algunos nodos como seleccionados, solo funciona cuando `node-key` está asignado | Un array de nodos a seleccionar          |
 | getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
 | setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
 | setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
-| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de nodos actualmente seleccionada. | - |
-| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
+| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de nodos actualmente seleccionada. | - |
+| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
-| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
+| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
 | remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |

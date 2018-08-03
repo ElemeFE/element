@@ -229,8 +229,6 @@
       }
     },
     created() {
-      this.parentMenu.addSubmenu(this);
-      this.rootMenu.addSubmenu(this);
       this.$on('toggle-collapse', this.handleCollapseToggle);
       this.$on('mouse-enter-child', () => {
         this.mouseInChild = true;
@@ -242,6 +240,8 @@
       });
     },
     mounted() {
+      this.parentMenu.addSubmenu(this);
+      this.rootMenu.addSubmenu(this);
       this.initPopper();
     },
     beforeDestroy() {

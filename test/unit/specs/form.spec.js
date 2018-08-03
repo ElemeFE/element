@@ -102,6 +102,27 @@ describe('Form', () => {
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
     done();
   });
+  it('label size', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-form :model="form" size="mini" ref="labelMini">
+            <el-form-item>
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+      `,
+      data() {
+        return {
+          form: {
+            name: ''
+          }
+        };
+      }
+    }, true);
+    expect(vm.$refs.labelMini.$el.children[0].classList.contains('el-form-item--mini')).to.be.true;
+  });
   it('show message', done => {
     vm = createVue({
       template: `
@@ -190,6 +211,64 @@ describe('Form', () => {
       expect(vm.form.address).to.equal('');
       expect(vm.form.type.length).to.equal(0);
       done();
+    });
+  });
+  it('clear validate', done => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" :rules="rules">
+          <el-form-item label="活动名称" prop="name">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="活动地址" prop="address">
+            <el-input v-model="form.address"></el-input>
+          </el-form-item>
+          <el-form-item label="活动性质" prop="type">
+            <el-checkbox-group v-model="form.type">
+              <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+              <el-checkbox label="地推活动" name="type"></el-checkbox>
+              <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+              <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          form: {
+            name: '',
+            address: '',
+            type: []
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'blur' }
+            ],
+            address: [
+              { required: true, message: '请选择活动区域', trigger: 'change' }
+            ],
+            type: [
+              { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+            ]
+          }
+        };
+      }
+    }, true);
+    const form = vm.$refs.form;
+    const nameField = form.fields.filter(field => field.prop === 'name')[0];
+    const addressField = form.fields.filter(field => field.prop === 'address')[0];
+    form.validate();
+    vm.$nextTick(() => {
+      expect(nameField.validateMessage).to.equal('请输入活动名称');
+      form.clearValidate(['name']);
+      vm.$nextTick(() => {
+        expect(nameField.validateMessage).to.equal('');
+        form.clearValidate();
+        vm.$nextTick(() => {
+          expect(addressField.validateMessage).to.equal('');
+          done();
+        });
+      });
     });
   });
   it('form item nest', done => {
@@ -359,15 +438,19 @@ describe('Form', () => {
         expect(valid).to.false;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择活动区域');
-          // programatic modification of bound value does not triggers change validation
+          // programatic modification triggers change validation
           vm.form.region = 'shanghai';
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('请选择活动区域');
-            // user modification of bound value triggers change validation
-            vm.$refs.opt.$el.click();
+            expect(field.validateMessage).to.equal('');
+            vm.form.region = '';
             setTimeout(_ => {
-              expect(field.validateMessage).to.equal('');
-              done();
+              expect(field.validateMessage).to.equal('请选择活动区域');
+              // user modification of bound value triggers change validation
+              vm.$refs.opt.$el.click();
+              setTimeout(_ => {
+                expect(field.validateMessage).to.equal('');
+                done();
+              }, 100);
             }, 100);
           }, 100);
         }, 100);
@@ -474,6 +557,58 @@ describe('Form', () => {
             }, DELAY);
           }, DELAY);
         }, DELAY);
+      });
+    });
+    it('checkbox', done => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="是否接受协议" prop="accept" ref="field">
+              <el-checkbox v-model="form.accept">
+                <span>接受协议</span>
+              </el-checkbox>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              accept: true
+            },
+            rules: {
+              accept: [
+                {
+                  validator: (rule, value, callback) => {
+                    value ? callback() : callback(new Error('您需要接受用户协议'));
+                  },
+                  trigger: 'change'
+                }
+              ]
+            }
+          };
+        },
+        methods: {
+          setValue(value) {
+            this.form.accept = value;
+          }
+        }
+      }, true);
+      vm.form.accept = false;
+      vm.$nextTick(_ => {
+        expect(vm.$refs.field.validateMessage).to.equal('您需要接受用户协议');
+      });
+      vm.$refs.form.validate(valid => {
+        let field = vm.$refs.field;
+        expect(valid).to.not.true;
+        expect(field.validateMessage).to.equal('您需要接受用户协议');
+        vm.$refs.form.$nextTick(_ => {
+          vm.setValue(true);
+
+          vm.$refs.form.$nextTick(_ => {
+            expect(field.validateMessage).to.equal('');
+            done();
+          });
+        });
       });
     });
     it('checkbox group', done => {

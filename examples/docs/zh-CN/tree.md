@@ -255,11 +255,15 @@
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
       },
-      allowDrop(draggingNode, dropNode) {
-        return dropNode.data.label !== '二级 3-1';
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === '二级 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
       },
       allowDrag(draggingNode) {
-        return draggingNode.data.label.indexOf('三级 3-1-1') === -1;
+        return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -1161,11 +1165,15 @@
       handleDrop(draggingNode, dropNode, dropType, ev) {
         console.log('tree drop: ', dropNode.label, dropType);
       },
-      allowDrop(draggingNode, dropNode) {
-        return dropNode.data.label !== '二级 3-1';
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === '二级 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
       },
       allowDrag(draggingNode) {
-        return draggingNode.data.label.indexOf('三级 3-1-1') === -1;
+        return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
       }
     }
   };
@@ -1186,6 +1194,7 @@
 | highlight-current     | 是否高亮当前选中节点，默认值是 false。             | boolean                     | —    | false |
 | default-expand-all    | 是否默认展开所有节点                               | boolean                     | —    | false |
 | expand-on-click-node  | 是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean                     | —    | true  |
+| check-on-click-node   | 是否在点击节点的时候选中节点，默认值为 false，即只有在点击复选框时才会选中节点。 | boolean                     | —    | false |
 | auto-expand-parent    | 展开子节点的时候是否自动展开父节点                 | boolean                     | —    | true  |
 | default-expanded-keys | 默认展开的节点的 key 的数组                        | array                       | —    | —     |
 | show-checkbox         | 节点是否可被选择                                   | boolean                     | —    | false |
@@ -1197,7 +1206,7 @@
 | lazy                  | 是否懒加载子节点，需与 load 方法结合使用           | boolean                     | —    | false |
 | draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
 | allow-drag            | 判断节点能否被拖拽                  | Function(node)  | —  | —  |
-| allow-drop            | 拖拽时判定位置能否被放置             | Function(draggingNode, dropNode)  | —    | —     |
+| allow-drop            | 拖拽时判定目标节点能否被放置。`type` 参数有三种情况：'prev'、'inner' 和 'next'，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后 | Function(draggingNode, dropNode, type)  | —    | —     |
 
 ### props
 | 参数       | 说明                | 类型     | 可选值  | 默认值  |
@@ -1215,7 +1224,7 @@
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | 对树节点进行筛选操作                               | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
 | updateKeyChildren | 通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性 | (key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组 |
-| getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点，默认值为 `false` |
+| getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点所组成的数组 | (leafOnly, includeHalfChecked) 接收两个 boolean 类型的参数，1. 是否只是叶子节点，默认值为 `false` 2. 是否包含半选节点，默认值为 `false` |
 | setCheckedNodes | 设置目前勾选的节点，使用此方法必须设置 node-key 属性          | (nodes) 接收勾选节点数据的数组                      |
 | getCheckedKeys  | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点的 key 所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点的 keys，默认值为 `false` |
 | setCheckedKeys  | 通过 keys 设置目前勾选的节点，使用此方法必须设置 node-key 属性  | (keys, leafOnly) 接收两个参数，1. 勾选节点的 key 的数组 2. boolean 类型的参数，若为 `true` 则仅设置叶子节点的选中状态，默认值为 `false` |
@@ -1224,7 +1233,7 @@
 | getHalfCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前半选中的节点的 key 所组成的数组 | - |
 | getCurrentKey   | 获取当前被选中节点的 key，使用此方法必须设置 node-key 属性，若没有节点被选中则返回 null | — |
 | getCurrentNode  | 获取当前被选中节点的 node，若没有节点被选中则返回 null | — |
-| setCurrentKey   | 通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (key) 待被选节点的 key |
+| setCurrentKey   | 通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (key) 待被选节点的 key，若为 null 则取消当前高亮的节点 |
 | setCurrentNode  | 通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (node) 待被选节点的 node |
 | getNode         | 根据 data 或者 key 拿到 Tree 组件中的 node | (data) 要获得 node 的 key 或者 data |
 | remove          | 删除 Tree 中的一个节点 | (data) 要删除的节点的 data、key 或者 node |

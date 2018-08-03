@@ -27,6 +27,28 @@ describe('Container', () => {
     }, true);
     expect(vm.$children[0].$el.classList.contains('is-vertical')).to.true;
   });
+
+  it('direction', done => {
+    vm = createVue({
+      template: `
+        <el-container :direction="direction">
+          <el-header></el-header>
+          <el-main></el-main>
+        </el-container>
+      `,
+      data() {
+        return {
+          direction: 'horizontal'
+        };
+      }
+    }, true);
+    expect(vm.$children[0].$el.classList.contains('is-vertical')).not.to.true;
+    vm.direction = 'vertical';
+    vm.$nextTick(() => {
+      expect(vm.$children[0].$el.classList.contains('is-vertical')).to.true;
+      done();
+    });
+  });
 });
 
 describe('Header', () => {

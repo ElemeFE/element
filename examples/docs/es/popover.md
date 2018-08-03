@@ -1,21 +1,8 @@
-<style>
-  .demo-box.demo-popover {
-    .el-popover + .el-popover {
-      margin-left: 10px;
-    }
-    .el-input {
-      width: 360px;
-    }
-    .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 <script>
   export default {
     data() {
       return {
+        visible: false,
         visible2: false,
         gridData: [{
           date: '2016-05-02',
@@ -94,43 +81,78 @@
   };
 </script>
 
+<style>
+  .demo-box.demo-popover {
+    .el-popover + .el-popover {
+      margin-left: 10px;
+    }
+    .el-input {
+      width: 360px;
+    }
+    .el-button {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 ## Popover
 
 ### Uso básico
 
 Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para atributos duplicados, por favor refiérase a la documentación de Tooltip.
 
-:::demo Agrega `ref` al popover, luego en el botón usa la directiva `v-popover` para asociar el botón y el popover. El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click` o `focus`. De manera alternativa puede especificar la referencia utilizando un [slot con nombre](https://vuejs.org/v2/guide/components.html#Named-Slots).
+:::demo El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click`, `focus` o `manual`. As for the triggering element, you can write it in two different ways: use the `slot="reference"` [named slot](https://vuejs.org/v2/guide/components.html#Named-Slots), or use the `v-popover` directive and set it to Popover's `ref`.
 
 ```html
-<el-popover
-  ref="popover1"
-  placement="top-start"
-  title="Title"
-  width="200"
-  trigger="hover"
-  content="this is content, this is content, this is content">
-</el-popover>
+<template>
+  <el-popover
+    placement="top-start"
+    title="Title"
+    width="200"
+    trigger="hover"
+    content="this is content, this is content, this is content">
+    <el-button slot="reference">Hover to activate</el-button>
+  </el-popover>
 
-<el-popover
-  ref="popover2"
-  placement="bottom"
-  title="Title"
-  width="200"
-  trigger="click"
-  content="this is content, this is content, this is content">
-</el-popover>
+  <el-popover
+    placement="bottom"
+    title="Title"
+    width="200"
+    trigger="click"
+    content="this is content, this is content, this is content">
+    <el-button slot="reference">Click to activate</el-button>
+  </el-popover>
 
-<el-button v-popover:popover1>Hover to activate</el-button>
-<el-button v-popover:popover2>Click to activate</el-button>
-<el-popover
-  placement="right"
-  title="Title"
-  width="200"
-  trigger="focus"
-  content="this is content, this is content, this is content">
-  <el-button slot="reference">Focus to activate</el-button>
-</el-popover>
+  <el-popover
+    ref="popover"
+    placement="right"
+    title="Title"
+    width="200"
+    trigger="focus"
+    content="this is content, this is content, this is content">
+  </el-popover>
+  <el-button v-popover:popover>Focus to activate</el-button>
+
+  <el-popover
+    placement="bottom"
+    title="Title"
+    width="200"
+    trigger="manual"
+    content="this is content, this is content, this is content"
+    v-model="visible">
+    <el-button slot="reference" @click="visible = !visible">Manual to activate</el-button>
+  </el-popover>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        visible: false
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -141,7 +163,6 @@ Otros componentes pueden anidarse dentro de popover. A continuación un ejemplo 
 
 ```html
 <el-popover
-  ref="popover4"
   placement="right"
   width="400"
   trigger="click">
@@ -150,9 +171,8 @@ Otros componentes pueden anidarse dentro de popover. A continuación un ejemplo 
     <el-table-column width="100" property="name" label="name"></el-table-column>
     <el-table-column width="300" property="address" label="address"></el-table-column>
   </el-table>
+  <el-button slot="reference">Click to activate</el-button>
 </el-popover>
-
-<el-button v-popover:popover4>Click to activate</el-button>
 
 <script>
   export default {
@@ -189,7 +209,6 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 :::demo
 ```html
 <el-popover
-  ref="popover5"
   placement="top"
   width="160"
   v-model="visible2">
@@ -198,9 +217,8 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
     <el-button size="mini" type="text" @click="visible2 = false">cancel</el-button>
     <el-button type="primary" size="mini" @click="visible2 = false">confirm</el-button>
   </div>
+  <el-button slot="reference">Delete</el-button>
 </el-popover>
-
-<el-button v-popover:popover5>Delete</el-button>
 
 <script>
   export default {

@@ -180,6 +180,33 @@ describe('Input', () => {
     });
   });
 
+  it('Input contains Select and append slot', (done) => {
+    vm = createVue({
+      template: `
+      <el-input v-model="value" clearable class="input-with-select" ref="input">
+        <el-select v-model="select" slot="prepend" placeholder="请选择">
+          <el-option label="餐厅名" value="1"></el-option>
+          <el-option label="订单号" value="2"></el-option>
+          <el-option label="用户电话" value="3"></el-option>
+        </el-select>
+        <el-button slot="append" icon="el-icon-search"></el-button>
+      </el-input>
+      `,
+      data() {
+        return {
+          value: '1234'
+        };
+      }
+    }, true);
+    vm.$refs.input.hovering = true;
+    setTimeout(() => {
+      const suffixEl = document.querySelector('.input-with-select > .el-input__suffix');
+      expect(suffixEl).to.not.be.null;
+      expect(suffixEl.style.transform).to.not.be.empty;
+      done();
+    }, 20);
+  });
+
   describe('Input Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({

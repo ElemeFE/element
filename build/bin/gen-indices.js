@@ -6,7 +6,7 @@ const algoliasearch = require('algoliasearch');
 const slugify = require('transliteration').slugify;
 const key = require('./algolia-key');
 
-const client = algoliasearch('9NLTR1QH8B', key);
+const client = algoliasearch('4C63BTGP6S', key);
 const langs = {
   'zh-CN': 'element-zh',
   'en-US': 'element-en',

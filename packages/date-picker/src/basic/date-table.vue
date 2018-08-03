@@ -9,15 +9,17 @@
     <tbody>
     <tr>
       <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
-      <th v-for="week in WEEKS">{{ t('el.datepicker.weeks.' + week) }}</th>
+      <th v-for="(week, key) in WEEKS" :key="key">{{ t('el.datepicker.weeks.' + week) }}</th>
     </tr>
     <tr
       class="el-date-table__row"
-      v-for="row in rows"
-      :class="{ current: isWeekActive(row[1]) }">
+      v-for="(row, key) in rows"
+      :class="{ current: isWeekActive(row[1]) }"
+      :key="key">
       <td
-        v-for="cell in row"
-        :class="getCellClasses(cell)">
+        v-for="(cell, key) in row"
+        :class="getCellClasses(cell)"
+        :key="key">
         <div>
           <span>
             {{ cell.text }}
@@ -72,6 +74,10 @@
       },
 
       disabledDate: {},
+
+      selectedDate: {
+        type: Array
+      },
 
       minDate: {},
 
@@ -129,6 +135,7 @@
 
         const startDate = this.startDate;
         const disabledDate = this.disabledDate;
+        const selectedDate = this.selectedDate || this.value;
         const now = clearHours(new Date());
 
         for (let i = 0; i < 6; i++) {
@@ -181,7 +188,10 @@
               }
             }
 
-            cell.disabled = typeof disabledDate === 'function' && disabledDate(new Date(time));
+            let newDate = new Date(time);
+            cell.disabled = typeof disabledDate === 'function' && disabledDate(newDate);
+            cell.selected = Array.isArray(selectedDate) &&
+              selectedDate.filter(date => date.toString() === newDate.toString())[0];
 
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
@@ -225,10 +235,6 @@
         if (newVal && !oldVal) {
           this.rangeState.selecting = false;
           this.markRange(newVal);
-          this.$emit('pick', {
-            minDate: this.minDate,
-            maxDate: this.maxDate
-          });
         }
       }
     },
@@ -283,6 +289,10 @@
 
         if (cell.disabled) {
           classes.push('disabled');
+        }
+
+        if (cell.selected) {
+          classes.push('selected');
         }
 
         return classes.join(' ');
@@ -472,6 +482,20 @@
             value: value,
             date: newDate
           });
+        } else if (selectionMode === 'dates') {
+          let selectedDate = this.selectedDate;
+
+          if (!cell.selected) {
+            selectedDate.push(newDate);
+          } else {
+            selectedDate.forEach((date, index) => {
+              if (date.toString() === newDate.toString()) {
+                selectedDate.splice(index, 1);
+              }
+            });
+          }
+
+          this.$emit('select', selectedDate);
         }
       }
     }
