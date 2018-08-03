@@ -16,7 +16,9 @@
         value4: true,
         value5: '100',
         value6: true,
-        value7: false
+        value7: false,
+        value8: true,
+        value9: false
       }
     }
   };
@@ -137,12 +139,40 @@
 ```
 :::
 
+### 加载状态
+
+:::demo 设置`loading`属性，接受一个`Boolean`，设置`true`即加载中。
+
+
+```html
+<el-switch
+  v-model="value8"
+  loading>
+</el-switch>
+<el-switch
+  v-model="value9"
+  loading>
+</el-switch>
+<script>
+  export default {
+    data() {
+      return {
+        value8: true,
+        value9: true
+      }
+    }
+  };
+</script>
+```
+:::
+
 
 ### Attributes
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | disabled  | 是否禁用    | boolean   | — | false   |
+| loading  | 加载中    | boolean   | — | false   |
 | width  | switch 的宽度（像素）    | number   | — | 40 |
 | active-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `active-text`    | string   | — | — |
 | inactive-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `inactive-text`    | string   | — | — |

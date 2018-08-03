@@ -15,6 +15,12 @@
       cursor: not-allowed;
     }
   }
+  @include when(loading) {
+    & .el-switch__core,
+    & .el-switch__label {
+      cursor: not-allowed;
+    }
+  }
 
   @include e(label) {
     transition: .2s;
@@ -80,6 +86,25 @@
       height: $--switch-button-size;
       background-color: $--color-white;
     }
+
+    .circular {
+      height: $--switch-button-size - 2px;
+      width: $--switch-button-size - 2px;
+      animation: loading-rotate 2s linear infinite;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      z-index: 1;
+    }
+
+    .path {
+      animation: loading-dash 1.5s ease-in-out infinite;
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: 0;
+      stroke-width: 2;
+      stroke: $--color-primary;
+      stroke-linecap: round;
+    }
   }
 
   @include when(checked) {
@@ -91,9 +116,17 @@
         margin-left: -$--switch-button-size - 1px;
       }
     }
+    .circular {
+      left: inherit;
+      right: 2px;
+    }
   }
 
   @include when(disabled) {
+    opacity: 0.6;
+  }
+
+  @include when(loading) {
     opacity: 0.6;
   }
 
@@ -115,5 +148,26 @@
   & .label-fade-enter,
   & .label-fade-leave-active {
     opacity: 0;
+  }
+}
+
+@keyframes loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
   }
 }
