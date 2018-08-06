@@ -6,7 +6,7 @@
 @mixin menu-item {
   height: 56px;
   line-height: 56px;
-  font-size: 14px;
+  font-size: $--menu-item-font-size;
   color: $--menu-item-color;
   padding: 0 20px;
   list-style: none;
