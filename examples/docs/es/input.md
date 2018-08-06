@@ -691,6 +691,7 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
 | hide-loading | si se debe ocultar el icono de loading en la búsqueda remota | boolean | — | false |
+| popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
 
 ### Autocomplete Slots
 
