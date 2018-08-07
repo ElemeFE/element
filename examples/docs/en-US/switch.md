@@ -16,7 +16,9 @@
         value4: true,
         value5: '100',
         value6: true,
-        value7: false
+        value7: false,
+        value8: true,
+        value9: false
       }
     }
   };
@@ -135,6 +137,34 @@ Switch is used for switching between two opposing states.
   };
 </script>
 ```
+
+:::
+
+### Loading
+
+:::demo Adding the `loading` attribute sets Switch in loading status
+
+
+```html
+<el-switch
+  v-model="value8"
+  loading>
+</el-switch>
+<el-switch
+  v-model="value9"
+  loading>
+</el-switch>
+<script>
+  export default {
+    data() {
+      return {
+        value8: true,
+        value9: true
+      }
+    }
+  };
+</script>
+```
 :::
 
 ### Attributes
@@ -142,6 +172,7 @@ Switch is used for switching between two opposing states.
  Attribute      | Description          | Type      | Accepted Values       | Default
 ----| ----| ----| ----|----
 disabled | whether Switch is disabled | boolean | — | false
+loading | whether Switch is in loading status | boolean | — | false |
 width | width of Switch | number | — | 40
 active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | —
 inactive-icon-class |class name of the icon displayed when in `off` state, overrides `inactive-text`| string | — | —

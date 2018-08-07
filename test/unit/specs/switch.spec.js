@@ -127,6 +127,29 @@ describe('Switch', () => {
     });
   });
 
+  it('loading should show and switch should not respond to user click when in loading status', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch loading v-model="value"></el-switch>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: false
+        };
+      }
+    }, true);
+
+    vm.$el.querySelector('.el-switch__core').click();
+    expect(vm.$el.querySelector('.el-switch__core .circular')).to.exist;
+    Vue.nextTick(() => {
+      expect(vm.value).to.false;
+      done();
+    });
+  });
+
   it('expand switch value', done => {
     vm = createVue({
       template: `

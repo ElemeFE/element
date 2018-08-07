@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-switch"
-    :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
+    :class="{ 'is-disabled': switchDisabled, 'is-loading': loading, 'is-checked': checked }"
     role="switch"
     :aria-checked="checked"
     :aria-disabled="switchDisabled"
@@ -26,6 +26,9 @@
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
+      <svg v-if="loading" class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none"/>
+      </svg>
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
@@ -53,6 +56,10 @@
         default: false
       },
       disabled: {
+        type: Boolean,
+        default: false
+      },
+      loading: {
         type: Boolean,
         default: false
       },
@@ -107,7 +114,7 @@
         return this.value === this.activeValue;
       },
       switchDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled || this.loading || (this.elForm || {}).disabled;
       }
     },
     watch: {
