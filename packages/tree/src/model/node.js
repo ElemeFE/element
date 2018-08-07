@@ -285,11 +285,13 @@ export default class Node {
 
   removeChildByData(data) {
     let targetNode = null;
-    this.childNodes.forEach(node => {
-      if (node.data === data) {
-        targetNode = node;
+
+    for (let i = 0; i < this.childNodes.length; i++) {
+      if (this.childNodes[i] === data) {
+        targetNode = this.childNodes[i];
+        break;
       }
-    });
+    }
 
     if (targetNode) {
       this.removeChild(targetNode);
@@ -442,9 +444,11 @@ export default class Node {
       }
     });
 
-    oldData.forEach((item) => {
-      if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
-    });
+    if (!this.store.lazy) {
+      oldData.forEach((item) => {
+        if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
+      });
+    }
 
     newNodes.forEach(({ index, data }) => {
       this.insertChild({ data }, index);
