@@ -121,7 +121,7 @@ Allows you to define incremental steps.
 :::
 
 :::tip
-The value of `precision` must be an integer greater than or equal to 0 and should not be less than the decimal places of `step`.
+The value of `precision` must be a non negative integer and should not be less than the decimal places of `step`.
 :::
 
 ### Size
