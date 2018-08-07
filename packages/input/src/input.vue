@@ -203,7 +203,7 @@
     },
 
     watch: {
-      'value'(val, oldValue) {
+      value(val, oldValue) {
         this.setCurrentValue(val);
       }
     },
@@ -283,10 +283,8 @@
         if (this.isOnComposition && value === this.valueBeforeComposition) return;
         this.currentValue = value;
         if (this.isOnComposition) return;
-        this.$nextTick(_ => {
-          this.resizeTextarea();
-        });
-        if (this.validateEvent) {
+        this.$nextTick(this.resizeTextarea);
+        if (this.validateEvent && this.currentValue === this.value) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }
       },
