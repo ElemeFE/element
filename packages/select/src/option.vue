@@ -17,7 +17,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath } from 'element-ui/src/utils/util';
+  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -129,9 +129,7 @@
       },
 
       queryChange(query) {
-        // query 里如果有正则中的特殊字符，需要先将这些字符转义
-        let parsedQuery = String(query).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
-        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
+        this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }
