@@ -224,7 +224,7 @@ export default {
       components: { ElInput },
 
       watch: {
-        '$parent.internalPageSize'(newVal) {
+        '$parent.internalPageSize'() {
           this.$nextTick(() => {
             this.$refs.input.$el.querySelector('input').value = this.$parent.internalCurrentPage;
           });
