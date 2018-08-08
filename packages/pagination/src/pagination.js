@@ -206,6 +206,7 @@ export default {
             this.$parent.internalPageSize = val = parseInt(val, 10);
             this.$parent.userChangePageSize = true;
             this.$parent.$emit('size-change', val);
+            this.$parent.$emit('update:pageSize', val);
           }
         }
       }
@@ -223,7 +224,7 @@ export default {
       components: { ElInput },
 
       watch: {
-        '$parent.internalPageSize'() {
+        '$parent.internalPageSize'(newVal) {
           this.$nextTick(() => {
             this.$refs.input.$el.querySelector('input').value = this.$parent.internalCurrentPage;
           });
