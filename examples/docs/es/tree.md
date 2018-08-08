@@ -1213,7 +1213,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
-| remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
+| remove          | elimina un nodo, solo funciona si `node-key` está asignado  | (data) los datos del nodo o nodo a borrar |
 | append          | añadir un nodo hijo a un nodo determinado del árbol | (data, parentNode) 1. los datos del nodo hijo que se añadirán 2. los datos del nodo padre, clave o nodo |
 | insertBefore    | insertar un nodo antes de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
 | insertAfter     | insertar un nodo después de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
