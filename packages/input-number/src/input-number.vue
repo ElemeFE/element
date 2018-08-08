@@ -223,7 +223,9 @@
           return;
         }
         this.$emit('input', newVal);
-        this.$emit('change', newVal, oldVal);
+        this.$nextTick(() => {
+          this.$emit('change', newVal, oldVal);
+        });
         this.currentValue = newVal;
       },
       handleInputChange(value) {
