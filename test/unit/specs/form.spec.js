@@ -945,4 +945,83 @@ describe('Form', () => {
       }, DELAY);
     }, DELAY);
   });
+  it('change event', done => {
+    vm = createVue({
+      template: `
+          <el-form :model="form" ref="form" @change="onChange">
+            <el-form-item label="1" prop="radio">
+              <el-radio-group v-model="form.radio">
+                <el-radio label="test">test</el-radio>
+                <el-radio label="test1">test1</el-radio>
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="2" prop="checkbox">
+              <el-checkbox v-model="form.checkbox">备选项</el-checkbox>
+            </el-form-item>
+            <el-form-item label="3" prop="input">
+              <el-input v-model="form.input"></el-input>
+            </el-form-item>
+            <el-form-item label="4" prop="inputNumber">
+              <el-input-number v-model="form.inputNumber"></el-input-number>
+            </el-form-item>
+            <el-form-item label="5" prop="select">
+              <el-select v-model="form.select" placeholder="请选择">
+                <el-option value="test" label="test"></el-option>
+                <el-option value="test1" label="test1"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="6" prop="switch">
+              <el-switch v-model="form.switch"></el-switch>
+            </el-form-item>
+            <el-form-item label="7" prop="timeSelect">
+              <el-time-select v-model="form.timeSelect"></el-time-select>
+            </el-form-item>
+            <el-form-item label="8" prop="datePicker">
+              <el-date-picker v-model="form.datePicker"></el-date-picker>
+            </el-form-item>
+          </el-form>
+        `,
+      data() {
+        return {
+          form: {
+            radio: '',
+            checkbox: false,
+            input: '',
+            inputNumber: 0,
+            select: '',
+            switch: false,
+            timeSelect: '',
+            datePicker: ''
+          },
+          times: 0,
+          formValue: {}
+        };
+      },
+      methods: {
+        onChange(prop, value) {
+          this.times++;
+          this.formValue[prop] = value;
+        }
+      }
+    }, true);
+    let form = vm.form;
+    Object.keys(form).forEach(key => {
+      if (key === 'timeSelect') {
+        form.timeSelect = '09:00';
+      } else if (key === 'datePicker') {
+        form.datePicker = '2018-07-01';
+      } else if (key === 'inputNumber') {
+        form.inputNumber = 2;
+      } else if (typeof form[key] === 'boolean') {
+        form[key] = true;
+      } else {
+        form[key] = 'test';
+      }
+    });
+    setTimeout(() => {
+      expect(vm.times).to.equal(Object.keys(form).length);
+      expect(vm.formValue).to.deep.equal(form);
+      done();
+    }, DELAY);
+  });
 });

@@ -15,7 +15,7 @@
       <slot></slot>
       <transition name="el-zoom-in-top">
         <div
-          v-if="validateState === 'error' && showMessage && form.showMessage"
+          v-if="validateState === 'error' && showMessage && elForm.showMessage"
           class="el-form-item__error"
           :class="{
             'el-form-item__error--inline': typeof inlineMessage === 'boolean'
@@ -82,6 +82,9 @@
       },
       validateStatus(value) {
         this.validateState = value;
+      },
+      fieldValue(value) {
+        this.elForm && this.elForm.$emit('change', this.prop, value);
       }
     },
     computed: {
@@ -90,8 +93,8 @@
       },
       labelStyle() {
         const ret = {};
-        if (this.form.labelPosition === 'top') return ret;
-        const labelWidth = this.labelWidth || this.form.labelWidth;
+        if (this.elForm.labelPosition === 'top') return ret;
+        const labelWidth = this.labelWidth || this.elForm.labelWidth;
         if (labelWidth) {
           ret.width = labelWidth;
         }
@@ -100,28 +103,16 @@
       contentStyle() {
         const ret = {};
         const label = this.label;
-        if (this.form.labelPosition === 'top' || this.form.inline) return ret;
+        if (this.elForm.labelPosition === 'top' || this.elForm.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
-        const labelWidth = this.labelWidth || this.form.labelWidth;
+        const labelWidth = this.labelWidth || this.elForm.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;
         }
         return ret;
       },
-      form() {
-        let parent = this.$parent;
-        let parentName = parent.$options.componentName;
-        while (parentName !== 'ElForm') {
-          if (parentName === 'ElFormItem') {
-            this.isNested = true;
-          }
-          parent = parent.$parent;
-          parentName = parent.$options.componentName;
-        }
-        return parent;
-      },
       fieldValue() {
-        const model = this.form.model;
+        const model = this.elForm.model;
         if (!model || !this.prop) { return; }
 
         let path = this.prop;
@@ -206,7 +197,7 @@
         this.validateState = '';
         this.validateMessage = '';
 
-        let model = this.form.model;
+        let model = this.elForm.model;
         let value = this.fieldValue;
         let path = this.prop;
         if (path.indexOf(':') !== -1) {
@@ -225,7 +216,7 @@
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
-        let formRules = this.form.rules;
+        let formRules = this.elForm.rules;
         const selfRules = this.rules;
         const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
@@ -259,8 +250,19 @@
       }
     },
     mounted() {
+      let parent = this.$parent;
+      let parentName = parent.$options.componentName;
+
+      while (parentName !== 'ElForm') {
+        if (parentName === 'ElFormItem') {
+          this.isNested = true;
+        }
+        parent = parent.$parent;
+        parentName = parent.$options.componentName;
+      }
+
       if (this.prop) {
-        this.dispatch('ElForm', 'el.form.addField', [this]);
+        this.elForm && this.elForm.addField(this);
 
         let initialValue = this.fieldValue;
         if (Array.isArray(initialValue)) {
@@ -279,7 +281,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('ElForm', 'el.form.removeField', [this]);
+      this.elForm && this.elForm.removeField(this);
     }
   };
 </script>

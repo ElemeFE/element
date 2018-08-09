@@ -846,6 +846,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | 事件名称 | 说明    | 回调参数  |
 |--------- |-------- |---------- |
 | validate | 任一表单项被校验后触发 | 被校验的表单项 prop 值，校验是否通过 |
+| change   | 表单项的值改变后触发   | 表单项 prop 值，表单项绑定的值      |
 
 ### Form-Item Attributes
 

@@ -55,20 +55,17 @@
         fields: []
       };
     },
-    created() {
-      this.$on('el.form.addField', (field) => {
+    methods: {
+      addField(field) {
         if (field) {
           this.fields.push(field);
         }
-      });
-      /* istanbul ignore next */
-      this.$on('el.form.removeField', (field) => {
+      },
+      removeField(field) {
         if (field.prop) {
-          this.fields.splice(this.fields.indexOf(field), 1);
+          this.fields = this.fields.filter(item => item === field);
         }
-      });
-    },
-    methods: {
+      },
       resetFields() {
         if (!this.model) {
           process.env.NODE_ENV !== 'production' &&
