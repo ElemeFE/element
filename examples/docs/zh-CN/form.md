@@ -832,6 +832,8 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | validate-on-rule-change  | 是否在 `rules` 属性改变后立即触发一次验证 | boolean | — | true |
 | size  | 用于控制该表单内组件的尺寸 | string | medium / small / mini | — |
 | disabled | 是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效 | boolean | — | false |
+| error    | 表单验证错误信息   |  object  |              —                   |           |
+
 
 ### Form Methods
 
@@ -855,7 +857,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | label | 标签文本 | string | — | — |
 | label-width | 表单域标签的的宽度，例如 '50px' | string |       —       | — |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | — | false |
-| rules    | 表单验证规则 | object | — | — |
+| rules    | 表单域验证规则 | object | — | — |
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
 | inline-message  | 以行内形式展示校验信息 | boolean | — | false |

@@ -23,6 +23,7 @@
     props: {
       model: Object,
       rules: Object,
+      error: Object,
       labelPosition: String,
       labelWidth: String,
       labelSuffix: {

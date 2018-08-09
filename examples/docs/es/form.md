@@ -849,6 +849,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | validate-on-rule-change | si se dispara la validacion cuando el prop `rules` cambia | boolean | —                     | true        |
 | size                    | el tamaño de los componentes en este form | string  | medium / small / mini | —           |
 | disabled                | si se desactivan todos los componentes del formulario. Si esta en `true` no puede ser cambiado por el prop `disabled` individual de los componentes. | boolean | —                     | false       |
+| error                   | validation error messages of form        |  object  | —                    |              |
 
 ### Form Metodos
 
