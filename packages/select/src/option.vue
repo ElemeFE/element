@@ -86,8 +86,14 @@
       currentLabel() {
         if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
       },
-      value() {
-        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
+      value(val, oldVal) {
+        const { remote, valueKey } = this.select;
+        if (!this.created && !remote) {
+          if (valueKey && typeof val === 'object' && typeof oldVal === 'object' && val[valueKey] === oldVal[valueKey]) {
+            return;
+          }
+          this.dispatch('ElSelect', 'setSelected');
+        }
       }
     },
 
