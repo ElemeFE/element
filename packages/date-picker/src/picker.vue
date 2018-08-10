@@ -713,7 +713,7 @@ export default {
     },
 
     handleFieldReset(initialValue) {
-      this.userInput = initialValue;
+      this.userInput = initialValue === '' ? null : initialValue;
     },
 
     handleFocus() {

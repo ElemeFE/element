@@ -1,5 +1,61 @@
 ## 更新日志
 
+### 2.4.6
+
+*2018-08-09*
+
+- 修复 Table 的 filter 初始值为空数组时不显示筛选图标的问题，#12165
+- 修复 Menu 在更改 `collapse` 时不保存菜单激活状态的问题，#12178 (by @elfman)
+- 修复 Cascader 未转义特殊字符的问题，#12248
+- 修复禁用的 RadioButton 在点击时显示 box-shadow 的问题，#12262
+- 修复 Select 初始值为 `undefined` 时方向键失效的问题，#12322
+- 修复 Select 多选时输入的关键字消失的问题，#12304
+- 修复 Select 多选时查询函数没有去抖的问题，#12181
+- 修复 Dialog 在全屏显示时宽度不正确的问题，#12203
+- 修复 Main 在 IE 下的显示不正确的问题，#12237
+- 修复 Input 触发两次表单校验的问题，#12260
+- 修复 Tree 在懒加载时添加节点导致节点消失的问题，#12256
+- 修复 Tree 节点在拖拽后无法删除的问题，#12279
+- 修复 Popover 在 InputNumber 聚焦时不显示的问题，#12284
+- 添加 Autocomplete 的 popper-append-to-body 属性，#12241
+- 添加 Pagination 的 `page-size` 属性 `sync` 修饰符的支持，#12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- 修复 Table 设置 `class-name` 对 `expand` 列不生效的问题，#12006
+- 新增 Table 的 `toggleAllSelection` 方法，#12047
+- 修复 Input 包含 Select 时，suffix 插槽位置显示不正确的问题，#12108
+- 修复 Option 的 `line-height` 无法设置的问题，#12120
+- 修复初始值为 `null` 的 TimeSelect 在执行 `resetField` 后无法再赋值的问题，#12010
+- 修复 Tree 组件中不响应方向键以外 keydown 事件的问题，#12008
+- 修复 Tree 在懒加载情况下选中父节点的问题，#12106
+- Tree 的 `getCheckedNodes` 方法新增 `includeHalfChecked` 参数，#12014
+
+### 2.4.4
+
+*2018-07-13*
+
+- 修复重置表单后触发 Select 组件校验问题，#11837
+- 修复 Input 组件 `suffix` 与 `append` 共存时样式错乱问题，#11951
+- 修复可清空的只读 Input 仍会显示清空图标的问题，#11967
+- 修复 Tree 节点禁用时仍可以选中的问题，#11847
+- 修复 Tree `default-checked-keys` 属性不生效的问题，#11971
+- 修复 Tree 在过滤节点时下 `empty-text` 不显示的问题，#11971
+- 修复 Table 的 `empty-text` 过长时的位置样式问题，#11965
+- 修复 Table 的 `current-row-key` 设置为 `null` 时高亮行不清除的问题，#11866
+- 修复当 `filters` 为空数组时显示过滤器下拉列表的问题，#11864
+- 修复 Radio 的 label 不阻止事件冒泡的问题，#11912
+
+### 2.4.3
+
+*2018-07-03*
+
+- 修复当自定义 Tree 节点高度时，`allow-drop` 不能正常工作的问题，#11797
+- 现在 Form 的 `clearValidate` 方法支持传入参数，指定需要清空校验结果的 FormItem，#11821
+- 新增 MessageBox 的 `distinguishCancelAndClose` 属性，#11831
+
 ### 2.4.2
 
 *2018-06-26*

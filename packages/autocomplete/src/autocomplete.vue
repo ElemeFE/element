@@ -35,6 +35,7 @@
       visible-arrow
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
+      :append-to-body="popperAppendToBody"
       ref="suggestions"
       :placement="placement"
       :id="id">
@@ -116,7 +117,11 @@
         type: String,
         default: 'bottom-start'
       },
-      hideLoading: Boolean
+      hideLoading: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: true
+      }
     },
     data() {
       return {

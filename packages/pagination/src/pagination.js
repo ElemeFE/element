@@ -206,6 +206,7 @@ export default {
             this.$parent.internalPageSize = val = parseInt(val, 10);
             this.$parent.userChangePageSize = true;
             this.$parent.$emit('size-change', val);
+            this.$parent.$emit('update:pageSize', val);
           }
         }
       }

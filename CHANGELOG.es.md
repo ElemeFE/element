@@ -1,18 +1,74 @@
 ## Changelog
 
+### 2.4.6
+
+*2018-08-09*
+
+- Fixed Table not showing filter icon when `filters` is assigned empty array, #12165
+- Fixed Menu not saving active state when `collapse` is changed, #12178 (by @elfman)
+- Fixed Cascader not escaping special characters for Regexp, #12248
+- Fixed disabled RadioButton showing box-shadow when clicked, #12262
+- Fixed arrow key not effect when default value is `undefined`,#12322
+- Fixed query function of Select not debounced in multi mode, #12181
+- Fixed query keyword of Select disappearing in multi mode, #12304
+- Fixed incorrect width of Dialog when it is displayed in full screen, #12203
+- Fixed incorrect display of Main on IE, #12237
+- Fixed Input triggering two form validations, #12260
+- Fixed adding new Tree node causing nodes to disappear, #12256
+- Fixed Tree node not deleted after dragging, #12279
+- Fixed Popover not visible when InputNumber focuses, #12284
+- Added `popper-append-to-body` attribute for Autocomplete, #12241
+- Added `sync` modifier support for Pagination's `page-size` attribute, #12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- Se ha corregido en Table que `class-name` no funcionaba para las columnas `expand`, #12006
+- Se ha añadido el método `toggleAllSelection` para Table, #12047
+- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108 
+- Corregido que el `line-height` de Option no se establecia, #12120
+- Corregido que TimeSelect con valor por defecto `null` no podia ser asignado después de ejecutar `resetField`, #12010
+- Arreglado el evento `keydown` que cuando no era una tecla de flecha no funciona en Tree, #12008
+- Corregido nodo padre checked en modo lazy, #12106
+- Añadido el parámetro `includeHalfChecked` para getCheckedNodes de Tree, #12014
+
+### 2.4.4
+
+*2018-07-13*
+
+- Corregido que se disparaba la validacion del Select después de reajustar el formulario, #11837
+- Corregida la posición incorrecta del slot Input `suffix`  cuando se usaba el slot `suffix` con el slot  `append`  , #11951
+- Corregido el clearable Input que muestraba el icono de borrado cuando era readonly, #11967
+- Arreglado el nodo Tree checked cuando estaba disabled, #11847
+- Corregido que  `default-checked-keys`  no funcionaba en Tree, #11971
+- Corregido que el `empty-text` no era visible cuando el nodo Tree se filtraba, #11971
+- Arreglada la posición de texto vacío sobredimensionado en Table, #11965
+- Corregido que la fila de la tabla no se modificado el resaltado cuando `current-row-key` era asignada a null, #11866
+- Arreglado que mostraba el filtro del dropdown cuando los filtros eran un array vacío, #11864
+- Corregido que el cambio de label de Radio no detenia propagacion de eventos, #11912
+
+### 2.4.3
+
+*2018-07-03*
+
+- Corregido `allow-drop` que no funcionaba correctamente cuando los nodos de árbol tenian una altura personalizada, #11797
+- Ahora puede pasar un parámetro al método `clearValidate` de Form, especificando qué resultados de validación de `FormItems` necesita borrar, #11821
+- Añadido el atributo `distinguishCancelAndClose` para MessageBox, #11831
+
 ### 2.4.2
 
 *2018-06-26*
 
-- Now `class-name` and `label-class-name` of Table are reactive, #11626
-- Fixed Table still highlighting clicked row when `highlight-current-row` is `false`, #11646
-- Fixed a style bug of ButtonGroup when it has only one `round` or `circle` Button, #11605
-- Fixed style of page size Select of Pagination, #11622
-- Fixed Menu's `open` method error when `collapse` is dynamically changed, #11646
-- Added `activeName` and `oldActiveName` parameters to the before-leave hook of Tabs, #11713
-- Fixed Cascader focused after outside clicked, #11588
-- Fixed Cascader not closing when option is clicked when `change-on-select` is true, #11623
-- Now updating Select's value programmatically will trigger form validation, #11672
+- Ahora el `class-name` y el `label-class-name` de la tabla son reactivos, #11626
+- Arreglado que Table seguia resaltando la fila en la que se había hecho clic cuando  `highlight-current-row` era `false`, #11646
+- Corregido un error de estilo de ButtonGroup cuando sólo habia un botón `round` o `circle`, #11605
+- Arreglado estilo del tamaño de página del Select de Pagination, #11622
+- Corregido un error del método `open`  de los Menús cuando se cambiaba dinámicamente `collapse`, #11646
+- Añadidos los parámetros `activeName` y `oldActiveName` al gancho before-leave de Tabs, #11713
+- Arreglado el focus en Cascader después de hacer clic fuera, #11588
+- Arreglado que Cascader no se cerraba cuando se hacia clic en la opción estando `change-on-select` como `true`, #11623
+- Ahora la actualización del valor de Select programáticamente activará la validación de formulario, #11672
 
 ### 2.4.1
 

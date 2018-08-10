@@ -19,12 +19,14 @@
   >
     <el-input
       ref="input"
-      :readonly="!filterable"
+      :readonly="readonly"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @compositionstart.native="handleComposition"
+      @compositionend.native="handleComposition"
       :validate-event="false"
       :size="size"
       :disabled="cascaderDisabled"
@@ -44,7 +46,7 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === ''">
+    <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
@@ -68,7 +70,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
-import { generateId } from 'element-ui/src/utils/util';
+import { generateId, escapeRegexpString } from 'element-ui/src/utils/util';
 
 const popperMixin = {
   props: {
@@ -180,7 +182,8 @@ export default {
       inputValue: '',
       flatOptions: null,
       id: generateId(),
-      needFocus: true
+      needFocus: true,
+      isOnComposition: false
     };
   },
 
@@ -217,6 +220,10 @@ export default {
     },
     cascaderDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
+    },
+    readonly() {
+      const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
+      return !this.filterable || (!isIE && !this.menuVisible);
     }
   },
 
@@ -330,7 +337,8 @@ export default {
       }
 
       let filteredFlatOptions = flatOptions.filter(optionsStack => {
-        return optionsStack.some(option => new RegExp(value, 'i').test(option[this.labelKey]));
+        return optionsStack.some(option => new RegExp(escapeRegexpString(value), 'i')
+          .test(option[this.labelKey]));
       });
 
       if (filteredFlatOptions.length > 0) {
@@ -409,6 +417,9 @@ export default {
     },
     handleBlur(event) {
       this.$emit('blur', event);
+    },
+    handleComposition(event) {
+      this.isOnComposition = event.type !== 'compositionend';
     }
   },
 

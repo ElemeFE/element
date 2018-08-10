@@ -100,6 +100,28 @@
       },
     
       open6() {
+        this.$confirm('You have unsaved changes, save and proceed?', 'Confirm', {
+          distinguishCancelAndClose: true,
+          confirmButtonText: 'Save',
+          cancelButtonText: 'Discard Changes'
+        })
+          .then(() => {
+            this.$message({
+              type: 'info',
+              message: 'Changes saved. Proceeding to a new route.'
+            });
+          })
+          .catch(action => {
+            this.$message({
+              type: 'info',
+              message: action === 'cancel'
+                ? 'Changes discarded. Proceeding to a new route.'
+                : 'Stay in the current route'
+            })
+          });
+      },
+    
+      open7() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -295,6 +317,7 @@ El contenido de MessageBox puede ser `VNode`, permitiéndonos pasar componentes 
 :::
 
 ### Utiliza cadenas HTML
+
 `message` soporta cadenas HTML.
 
 :::demo Establezca el valor de `dangerouslyUseHTMLString` a true y `message` sera tratado como una cadena HTML.
@@ -322,10 +345,12 @@ El contenido de MessageBox puede ser `VNode`, permitiéndonos pasar componentes 
 Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinamico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir facilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegurece que el contendio de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
 :::
 
-### Centered content
-El contenido del componente MessageBox puede ser centrado.
+### Distinguir entre cancelar y cerrar
 
-:::demo Establecer `center` a `true` centrara el contenido
+En algunos casos, hacer clic en el botón Cancelar y en el botón Cerrar puede tener diferentes significados.
+
+:::demo Por defecto, los parámetros de `Promise's reject callback` y `callback` son `cancel` cuando el usuario cancela (haciendo clic en el botón de cancelación)  y cierra  (haciendo clic en el botón de cerrar o en la capa de máscara, pulsando la tecla ESC) el MessageBox. Si `distinguishCancelAndClose` está ajustado a `true`, los parámetros de las dos operaciones anteriores son `cancel` y `close` respectivamente.
+
 
 ```html
 <template>
@@ -336,6 +361,46 @@ El contenido del componente MessageBox puede ser centrado.
   export default {
     methods: {
       open6() {
+        this.$confirm('You have unsaved changes, save and proceed?', 'Confirm', {
+          distinguishCancelAndClose: true,
+          confirmButtonText: 'Save',
+          cancelButtonText: 'Discard Changes'
+        })
+          .then(() => {
+            this.$message({
+              type: 'info',
+              message: 'Changes saved. Proceeding to a new route.'
+            });
+          })
+          .catch(action => {
+            this.$message({
+              type: 'info',
+              message: action === 'cancel'
+                ? 'Changes discarded. Proceeding to a new route.'
+                : 'Stay in the current route'
+            })
+          });
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Centered content
+El contenido del componente MessageBox puede ser centrado.
+
+:::demo Establecer `center` a `true` centrara el contenido
+
+```html
+<template>
+  <el-button type="text" @click="open7">Click to open Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open7() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -387,8 +452,9 @@ Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.conf
 | type                     | tipo de mensaje , utilizado para mostrar el  icono | string                                   | success / info / warning / error | —                                        |
 | iconClass                | clase personalizada para el icono, sobreescribe `type` | string         | —                          | —           |
 | customClass              | nombre de la clase personzalida para el componente MessageBox | string                                   | —                                | —                                        |
-| callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm' o 'cancel', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
-| beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm' o 'cancel'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |
+| callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm', 'cancel' o 'close', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
+| beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm', 'cancel' o 'close'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |
+| distinguishCancelAndClose | si se debe distinguir entre cancelar y cerrar | boolean | — | false |
 | lockScroll               | utilizado para bloquear el desplazamiento del contenido del MessageBox prompts | boolean                                  | —                                | true                                     |
 | showCancelButton         | utlizado para mostrar un boton cancelar  | boolean                                  | —                                | false (true cuando es llamado con confirm y prompt) |
 | showConfirmButton        | utlizado para mostrar un boton confirmar | boolean                                  | —                                | true                                     |

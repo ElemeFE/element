@@ -91,7 +91,7 @@ export default class TreeStore {
 
   remove(data) {
     const node = this.getNode(data);
-    if (node) {
+    if (node && node.parent) {
       node.parent.removeChild(node);
     }
   }
@@ -144,22 +144,20 @@ export default class TreeStore {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
-    const childNodes = node.childNodes;
-    for (let i = 0, j = childNodes.length; i < j; i++) {
-      const child = childNodes[i];
+    node.childNodes.forEach(child => {
       this.deregisterNode(child);
-    }
+    });
 
     delete this.nodesMap[node.key];
   }
 
-  getCheckedNodes(leafOnly = false) {
+  getCheckedNodes(leafOnly = false, includeHalfChecked = false) {
     const checkedNodes = [];
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
       childNodes.forEach((child) => {
-        if (child.checked && (!leafOnly || (leafOnly && child.isLeaf))) {
+        if ((child.checked || (includeHalfChecked && child.indeterminate)) && (!leafOnly || (leafOnly && child.isLeaf))) {
           checkedNodes.push(child.data);
         }
 

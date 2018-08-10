@@ -2,6 +2,10 @@
 
 This part walks you through the process of using Element in a webpack project.
 
+### Use vue-cli@3
+
+We provide an [Element plugin](https://github.com/ElementUI/vue-cli-plugin-element) for vue-cli@3, which you can use to quickly build an Element-based project.
+
 ### Use Starter Kit
 
 We provide a general [project template](https://github.com/ElementUI/element-starter) for you. For Laravel users, we also have a [template](https://github.com/ElementUI/element-in-laravel-starter). You can download and use them directly.

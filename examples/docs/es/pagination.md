@@ -211,7 +211,7 @@ Agrega más modulos basados en su escenario.
 | Atributo     | Descripción                              | Tipo     | Valores aceptados                        | Por defecto                            |
 | ------------ | ---------------------------------------- | -------- | ---------------------------------------- | -------------------------------------- |
 | small        | usar paginación pequeña                  | boolean  | —                                        | false                                  |
-| page-size    | cantidad de elementos por página         | number   | —                                        | 10                                     |
+| page-size    | cantidad de elementos por página, soporta el modificador .sync         | number   | —                                        | 10                                     |
 | total        | total de elementos                       | number   | —                                        | —                                      |
 | page-count   | total de páginas. Asigna `total` o `page-count` y las páginas serán mostradas; si necesitas `page-sizes`, `total` es **requerido** | number   | —                                        | —                                      |
 | pager-count  | número de paginadores. La paginación colapsa cuando el número total de páginas excede este valor. | number | odd number between 5 and 21 | 7 |
