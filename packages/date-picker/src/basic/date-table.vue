@@ -400,7 +400,7 @@
         const selectionMode = this.selectionMode;
 
         if (selectionMode === 'week') {
-          target = target.parentNode.cells[1];
+          target = target.parentNode.cells[0];
         }
 
         let year = Number(this.year);

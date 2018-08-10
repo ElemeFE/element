@@ -100,7 +100,7 @@ export const getWeekNumber = function(src) {
   const date = new Date(src.getTime());
   date.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
-  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  date.setDate(date.getDate() + 3 - (date.getDay() + 5) % 7);
   // January 4 is always in week 1.
   const week1 = new Date(date.getFullYear(), 0, 4);
   // Adjust to Thursday in week 1 and count number of weeks from date to week 1.
