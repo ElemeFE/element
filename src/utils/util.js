@@ -83,4 +83,4 @@ export const valueEquals = (a, b) => {
   return true;
 };
 
-export const escapeRegexpString = value => String(value).replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+export const escapeRegexpString = (value = '') => String(value).replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
