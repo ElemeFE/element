@@ -15,7 +15,7 @@
 - 修复 Main 在 IE 下的显示不正确的问题，#12237
 - 修复 Input 触发两次表单校验的问题，#12260
 - 修复 Tree 在懒加载时添加节点导致节点消失的问题，#12256
-- 修复 Tree 组件在拖拽完成后无法删除节点的问题，#12279
+- 修复 Tree 节点在拖拽后无法删除的问题，#12279
 - 修复 Popover 在 InputNumber 聚焦时不显示的问题，#12284
 - 添加 Autocomplete 的 popper-append-to-body 属性，#12241
 - 添加 Pagination 的 `page-size` 属性 `sync` 修饰符的支持，#12281
