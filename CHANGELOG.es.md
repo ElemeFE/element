@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.4.6
+
+*2018-08-09*
+
+- Fixed Table not showing filter icon when `filters` is assigned empty array, #12165
+- Fixed Menu not saving active state when `collapse` is changed, #12178 (by @elfman)
+- Fixed Cascader not escaping special characters for Regexp, #12248
+- Fixed disabled RadioButton showing box-shadow when clicked, #12262
+- Fixed arrow key not effect when default value is `undefined`,#12322
+- Fixed query function of Select not debounced in multi mode, #12181
+- Fixed query keyword of Select disappearing in multi mode, #12304
+- Fixed incorrect width of Dialog when it is displayed in full screen, #12203
+- Fixed incorrect display of Main on IE, #12237
+- Fixed Input triggering two form validations, #12260
+- Fixed adding new Tree node causing nodes to disappear, #12256
+- Fixed Tree node not deleted after dragging, #12279
+- Fixed Popover not visible when InputNumber focuses, #12284
+- Added `popper-append-to-body` attribute for Autocomplete, #12241
+- Added `sync` modifier support for Pagination's `page-size` attribute, #12281
+
 ### 2.4.5
 
 *2018-07-26*
