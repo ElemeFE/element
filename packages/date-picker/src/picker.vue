@@ -428,6 +428,11 @@ export default {
       if (this.picker) {
         this.picker.defaultValue = val;
       }
+    },
+    value(val, oldVal) {
+      if (!valueEquals(val, oldVal)) {
+        this.dispatch('ElFormItem', 'el.form.change', val);
+      }
     }
   },
 
@@ -894,7 +899,6 @@ export default {
       // determine user real change only
       if (!valueEquals(val, this.valueOnOpen)) {
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
         this.valueOnOpen = val;
       }
     },
