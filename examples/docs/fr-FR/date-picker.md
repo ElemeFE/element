@@ -511,7 +511,6 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | text | Titre du raccourci. | string | — | — |
 | onClick | Callback se déclenchant quand le raccourci est cliqué, avec `vm` en paramètre. Vous pouvez changer la valeur du picker en émettant l'évènement `pick`. Exemple: `vm.$emit('pick', new Date())`| function | — | — |
 
-
 ### Évènements
 | Nom | Description | Paramètres |
 |---------|--------|---------|
