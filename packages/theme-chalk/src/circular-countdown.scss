@@ -2,6 +2,7 @@
 @import "mixins/mixins";
 
 @include b(circular-countdown) {
+  line-height: normal;
   position: relative;
   width: 40px;
   height: 40px;
