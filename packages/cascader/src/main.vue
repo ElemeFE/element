@@ -30,6 +30,7 @@
       :validate-event="false"
       :size="size"
       :disabled="cascaderDisabled"
+      :class="{ 'is-focus': menuVisible }"
     >
       <template slot="suffix">
         <i
