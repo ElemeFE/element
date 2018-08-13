@@ -235,7 +235,7 @@
 
       handleClear() {
         this.date = this.getDefaultValue();
-        this.$emit('pick', null);
+        this.$emit('pick', this.selectionMode === 'dates' ? [] : null);
       },
 
       emit(value, ...args) {
