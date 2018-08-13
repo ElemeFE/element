@@ -69,6 +69,7 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
+import ImagePreview from '../packages/image-preview/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -138,6 +139,7 @@ const components = [
   Aside,
   Main,
   Footer,
+  ImagePreview,
   CollapseTransition
 ];
 
@@ -163,6 +165,7 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
+  Vue.prototype.$imagePreview = ImagePreview;
 
 };
 
@@ -245,7 +248,8 @@ module.exports = {
   Header,
   Aside,
   Main,
-  Footer
+  Footer,
+  ImagePreview
 };
 
 module.exports.default = module.exports;

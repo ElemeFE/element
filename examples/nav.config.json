@@ -243,6 +243,10 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/image-preview",
+              "title": "ImagePreview 图片预览"
             }
           ]
         }
@@ -493,6 +497,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/image-preview",
+              "title": "ImagePreview"
             }
           ]
         }
@@ -743,6 +751,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/image-preview",
+              "title": "ImagePreview"
             }
           ]
         }
