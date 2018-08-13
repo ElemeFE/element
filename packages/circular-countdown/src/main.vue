@@ -1,6 +1,13 @@
 <template>
-  <div class="tm-circular-countdown">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="40" height="40" viewBox="0 0 40 40" class="circliful" role="img">
+  <div class="tm-circular-countdown"
+       v-show="deltaDate !== 0">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         version="1.1"
+         width="40"
+         height="40"
+         viewBox="0 0 40 40"
+         class="circliful"
+         role="img">
       <circle cx="20"
               cy="20"
               r="18"
@@ -58,6 +65,14 @@ export default {
     startDate: Date,
     endDate: Date
   },
+  watch: {
+    startDate() {
+      this.update();
+    },
+    endDate() {
+      this.update();
+    }
+  },
   created() {
     this.update();
     this.timer = setInterval(this.update, 1000 * 60);
@@ -71,7 +86,7 @@ export default {
       let currentDelta = this.endDate - new Date();
       let currentDateArray = this.msToDateArray(currentDelta);
       let percents = 100 - (100 / this.deltaDate * currentDelta);
-      this.circleSize = this.percentToSize(percents);
+      this.circleSize = this.percentToSize(currentDelta > 0 ? percents : 100);
 
       if (currentDateArray.d > 0) {
         this.status = 0;
@@ -93,13 +108,17 @@ export default {
       return pct;
     },
     msToDateArray(ms) {
-      const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+      let days = Math.floor(ms / (24 * 60 * 60 * 1000));
+      days = days < 0 ? 0 : days;
       let daysms = ms % (24 * 60 * 60 * 1000);
-      const hours = Math.floor((daysms) / (60 * 60 * 1000));
+      let hours = Math.floor((daysms) / (60 * 60 * 1000));
+      hours = hours < 0 ? 0 : hours;
       let hoursms = ms % (60 * 60 * 1000);
-      const minutes = Math.floor((hoursms) / (60 * 1000));
+      let minutes = Math.floor((hoursms) / (60 * 1000));
+      minutes = minutes < 0 ? 0 : minutes;
       let minutesms = ms % (60 * 1000);
-      const sec = Math.floor((minutesms) / (1000));
+      let sec = Math.floor((minutesms) / (1000));
+      sec = sec < 0 ? 0 : sec;
       return {
         d: days,
         h: hours,
