@@ -28,12 +28,7 @@
       reverse: {
         handler(newVal) {
           if (newVal) {
-            const slots = [];
-            const items = this.$slots.default;
-            for (let i = 0; i < items.length; i++) {
-              slots.splice(0, 0, items[i]);
-            }
-            this.$slots.default = slots;
+            this.$slots.default = [...this.$slots.default].reverse();
           }
         },
         immediate: true

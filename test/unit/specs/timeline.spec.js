@@ -1,9 +1,5 @@
 import { createVue, destroyVM } from '../util';
 
-const toArray = function(obj) {
-  return [].slice.call(obj);
-};
-
 describe('Timeline', () => {
   let vm;
   afterEach(() => {
@@ -124,7 +120,7 @@ describe('Timeline', () => {
     }, true);
 
     const timestampElm = vm.$el.querySelectorAll('.el-timeline-item__timestamp')[0];
-    expect(toArray(timestampElm.classList)).to.contain('is-top');
+    expect(timestampElm.classList.contains('is-top')).to.true;
   });
 
   it('hide-timestamp', () => {
@@ -193,7 +189,7 @@ describe('Timeline', () => {
     }, true);
 
     const nodeElm = vm.$el.querySelector('.el-timeline-item__node');
-    expect(toArray(nodeElm.classList)).to.contain('el-timeline-item__node--primary');
+    expect(nodeElm.classList.contains('el-timeline-item__node--primary')).to.true;
   });
 
   it('size', () => {
@@ -210,7 +206,7 @@ describe('Timeline', () => {
     }, true);
 
     const nodeElm = vm.$el.querySelector('.el-timeline-item__node');
-    expect(toArray(nodeElm.classList)).to.contain('el-timeline-item__node--large');
+    expect(nodeElm.classList.contains('el-timeline-item__node--large')).to.true;
   });
 
   it('icon', () => {
@@ -227,6 +223,6 @@ describe('Timeline', () => {
     }, true);
 
     const nodeElm = vm.$el.querySelector('.el-timeline-item__icon');
-    expect(toArray(nodeElm.classList)).to.contain('el-icon-more');
+    expect(nodeElm.classList.contains('el-icon-more')).to.true;
   });
 });

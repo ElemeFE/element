@@ -5,8 +5,8 @@
     <div v-if="!$slots.dot"
       class="el-timeline-item__node"
       :class="[
-        `el-timeline-item__node--${size}`,
-        `el-timeline-item__node--${type}`
+        `el-timeline-item__node--${size || ''}`,
+        `el-timeline-item__node--${type || ''}`
       ]"
       :style="{
         backgroundColor: color
