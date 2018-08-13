@@ -27,7 +27,7 @@
                 @input="val => userInputDate = val"
                 @change="handleVisibleDateChange" />
             </span>
-            <span class="el-date-picker__editor-wrap" v-clickoutside="() => timePickerVisible = false">
+            <span class="el-date-picker__editor-wrap" v-clickoutside="handleTimePickClose">
               <el-input
                 ref="input"
                 @focus="timePickerVisible = true"
@@ -315,6 +315,10 @@
         if (!first) {
           this.timePickerVisible = visible;
         }
+      },
+
+      handleTimePickClose() {
+        this.timePickerVisible = false;
       },
 
       handleMonthPick(month) {

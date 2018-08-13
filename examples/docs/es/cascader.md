@@ -1699,7 +1699,7 @@ Buscar y seleccionar opciones con una palabra clave.
 | Nombre             | Descripción                              | Parametros                |
 | ------------------ | ---------------------------------------- | ------------------------- |
 | change             | se dispara cuando el valor cambia        | valor                     |
-| active-item-change | se dispara cuando cambia la opción activa, sólo funciona cuando `change-on-select` es `false`. | array de opciones activas |
+| active-item-change | triggers when active option of its parent changes, sólo funciona cuando `change-on-select` es `false`. | array de opciones activas |
 | blur               | se dispara cuando Cascader pierde el foco | (event: Event)            |
 | focus              | se dispara cuando Cascader obtiene el foco | (event: Event)            |
 
