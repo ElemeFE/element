@@ -462,7 +462,7 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
-        firstDayOfWeek: 7,
+        firstDayOfWeek: 1,
         showWeekNumber: false,
         timePickerVisible: false,
         format: '',

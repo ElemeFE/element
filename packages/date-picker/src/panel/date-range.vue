@@ -324,7 +324,7 @@
         shortcuts: '',
         visible: '',
         disabledDate: '',
-        firstDayOfWeek: 7,
+        firstDayOfWeek: 1,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
         format: '',
