@@ -143,7 +143,6 @@
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
@@ -200,7 +199,7 @@
           this.value !== undefined &&
           this.value !== null &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up'));
       },
 
       debounce() {
@@ -362,7 +361,6 @@
 
       visible(val) {
         if (!val) {
-          this.handleIconHide();
           this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
@@ -391,7 +389,6 @@
             }
           }
         } else {
-          this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
@@ -472,20 +469,6 @@
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
-        }
-      },
-
-      handleIconHide() {
-        let icon = this.$el.querySelector('.el-input__icon');
-        if (icon) {
-          removeClass(icon, 'is-reverse');
-        }
-      },
-
-      handleIconShow() {
-        let icon = this.$el.querySelector('.el-input__icon');
-        if (icon && !hasClass(icon, 'el-icon-circle-close')) {
-          addClass(icon, 'is-reverse');
         }
       },
 
