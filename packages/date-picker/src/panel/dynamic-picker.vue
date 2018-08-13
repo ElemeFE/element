@@ -382,18 +382,21 @@
         shortcuts: '',
         visible: '',
         disabledDate: '',
-        firstDayOfWeek: 7,
+        firstDayOfWeek: 1,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
         unlinkPanels: false,
         date: new Date(),
-        panelSwitch: 'double'
+        panelSwitch: 'single'
       };
     },
 
     watch: {
+      visible() {
+        this.handlePanelChange(null);
+      },
       minDate(val) {
         this.$nextTick(() => {
           if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
@@ -480,12 +483,14 @@
     },
 
     methods: {
-      handleClear() {
+      handleClear(pick = true) {
         this.minDate = null;
         this.maxDate = null;
         this.leftDate = calcDefaultValue(this.defaultValue)[0];
         this.rightDate = nextMonth(this.leftDate);
-        this.$emit('pick', null);
+        if (pick) {
+          this.$emit('pick', null);
+        }
       },
 
       handleChangeRange(val) {
@@ -556,10 +561,12 @@
         }
       },
 
-      handlePanelChange() {
+      handlePanelChange(type) {
         this.$emit('dynamicChange', this.panelSwitch);
-        if (this.minDate) {
-          this.value = this.minDate;
+        if (type) {
+          this.handleClear(false);
+        } else if (this.panelSwitch === 'single') {
+          this.minDate = null;
         }
       },
 
