@@ -419,7 +419,6 @@ export default {
       handler(val) {
         if (this.picker) {
           this.picker.value = val;
-          this.picker.selectedDate = Array.isArray(val) ? val : [];
         }
       }
     },
@@ -705,15 +704,11 @@ export default {
     handleClose() {
       if (!this.pickerVisible) return;
       this.pickerVisible = false;
-      const {
-        type,
-        valueOnOpen,
-        valueFormat,
-        rangeSeparator
-      } = this;
-      if (type === 'dates' && this.picker) {
-        this.picker.selectedDate = parseAsFormatAndType(valueOnOpen, valueFormat, type, rangeSeparator) || valueOnOpen;
-        this.emitInput(this.picker.selectedDate);
+
+      if (this.type === 'dates') {
+        // restore to former value
+        const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.rangeSeparator) || this.valueOnOpen;
+        this.emitInput(oldValue);
       }
     },
 
@@ -828,7 +823,6 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
-      this.picker.selectedDate = Array.isArray(this.value) && this.value || [];
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
