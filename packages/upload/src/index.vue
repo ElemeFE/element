@@ -150,7 +150,6 @@ export default {
         file.url = URL.createObjectURL(rawFile);
       } catch (err) {
         console.error(err);
-        return;
       }
 
       this.uploadFiles.push(file);
