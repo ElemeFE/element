@@ -109,6 +109,7 @@
     z-index: $--index-normal;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
     align-items: center;
     flex-wrap: wrap;
   }

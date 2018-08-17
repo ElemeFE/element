@@ -28,7 +28,7 @@
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
         </el-tag>
       </span>
-      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
+      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags" style="display: contents;">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
