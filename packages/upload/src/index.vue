@@ -246,7 +246,6 @@ export default {
   beforeDestroy() {
     this.uploadFiles.forEach(file => {
       if (file.url && file.url.indexOf('blob:') === 0) {
-        console.log('blob');
         URL.revokeObjectURL(file.url);
       }
     });
