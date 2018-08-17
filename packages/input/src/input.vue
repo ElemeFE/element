@@ -330,7 +330,6 @@
         this.$emit('change', '');
         this.$emit('clear');
         this.setCurrentValue('');
-        this.focus();
       }
     },
 
