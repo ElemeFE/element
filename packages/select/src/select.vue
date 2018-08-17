@@ -64,7 +64,7 @@
         v-model="query"
         @input="debouncedQueryChange"
         v-if="filterable"
-        :style="{ 'flex-grow': '1', width: '30%' }"
+        :style="{ 'flex-grow': '1', width: inputLength / 208 + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
     <el-input
