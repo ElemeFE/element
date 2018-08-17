@@ -14,7 +14,7 @@ export declare class ElFormItem extends ElementUIComponent {
   /** Whether the field is required or not, will be determined by validation rules if omitted */
   required: boolean
 
-  /** Validation rules of form */
+  /** Validation rules of field */
   rules: object
 
   /** Field error message, set its value and the field will validate error and show this message immediately */

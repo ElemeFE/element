@@ -73,7 +73,7 @@
       size: String
     },
     watch: {
-      error: {
+      formItemError: {
         immediate: true,
         handler(value) {
           this.validateMessage = value;
@@ -154,6 +154,9 @@
       },
       sizeClass() {
         return this.elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      formItemError() {
+        return this.error || (this.form.error && this.form.error[this.prop]) || '';
       }
     },
     data() {

@@ -29,6 +29,9 @@ export declare class ElForm extends ElementUIComponent {
   /** Validation rules of form */
   rules: object
 
+  /** Validation error messages of form */
+  error: object
+
   /** Whether the form is inline */
   inline: boolean
 
