@@ -287,6 +287,7 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 ### Attributes
 | Attribute | Description | Type  | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | array | — | — |
 | data | data source | array[{ key, label, disabled }] | — | [ ] |
 | filterable | whether Transfer is filterable | boolean | — | false |
 | filter-placeholder | placeholder for the filter input | string | — | Enter keyword |

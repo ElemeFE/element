@@ -155,6 +155,7 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
 ### Atributos
 | Atributo                 | Descripción                              | Tipo    | Valores aceptado | Por defecto                              |
 | ------------------------ | ---------------------------------------- | ------- | ---------------- | ---------------------------------------- |
+| value / v-model           | valor enlazado                           | number  | —                | 0                                        |
 | max                      | puntuación máxima                        | number  | —                | 5                                        |
 | disabled                 | si la calificación es de solo lectura    | boolean | —                | false                                    |
 | allow-half               | si escoger media estrella está permitido | boolean | —                | false                                    |

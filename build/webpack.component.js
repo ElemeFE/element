@@ -1,11 +1,12 @@
 const path = require('path');
-const webpack = require('webpack');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const Components = require('../components.json');
 const config = require('./config');
 
 const webpackConfig = {
+  mode: 'production',
   entry: Components,
   output: {
     path: path.resolve(process.cwd(), './lib'),
@@ -20,6 +21,13 @@ const webpackConfig = {
     modules: ['node_modules']
   },
   externals: config.externals,
+  performance: {
+    hints: false
+  },
+  stats: 'none',
+  optimization: {
+    minimize: false
+  },
   module: {
     rules: [
       {
@@ -32,12 +40,10 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          preserveWhitespace: false
+          compilerOptions: {
+            preserveWhitespace: false
+          }
         }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       },
       {
         test: /\.css$/,
@@ -48,27 +54,7 @@ const webpackConfig = {
         loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.html$/,
-        loader: 'html-loader?minimize=false'
-      },
-      {
-        test: /\.otf|ttf|woff2?|eot(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.svg(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(gif|png|jpe?g)(\?\S*)?$/,
+        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
@@ -79,12 +65,7 @@ const webpackConfig = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
+    new VueLoaderPlugin()
   ]
 };
 

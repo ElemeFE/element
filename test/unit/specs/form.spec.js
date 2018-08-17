@@ -784,17 +784,24 @@ describe('Form', () => {
     it('error', done => {
       vm = createVue({
         template: `
-          <el-form :model="form" :rules="rules" ref="form">
+          <el-form :model="form" :rules="rules" ref="form" :error="formError">
             <el-form-item label="活动名称" prop="name" :error="error" ref="field">
               <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="活动地点" prop="address" ref="address">
+              <el-input v-model="form.address"></el-input>
             </el-form-item>
           </el-form>
         `,
         data() {
           return {
             error: 'dsad',
+            formError: {
+              address: '填写活动地点'
+            },
             form: {
-              name: 'sada'
+              name: 'sada',
+              address: ''
             },
             rules: {
               name: [
@@ -810,11 +817,13 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let field = vm.$refs.field;
         expect(valid).to.true;
-        vm.error = '输入不合法';
+        expect(vm.$refs.address.validateState).to.equal('error');
+        expect(vm.$refs.address.validateMessage).to.equal('填写活动地点');
 
-        vm.$refs.field.$nextTick(_ => {
+        vm.error = '输入不合法';
+        let field = vm.$refs.field;
+        field.$nextTick(_ => {
           expect(field.validateState).to.equal('error');
           expect(field.validateMessage).to.equal('输入不合法');
           done();
