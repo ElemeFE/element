@@ -199,6 +199,7 @@
         this.$emit('blur', event);
       },
       handleClear() {
+        this.activated = false;
         this.$emit('clear');
       },
       close(e) {
