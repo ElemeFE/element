@@ -180,6 +180,10 @@ export default {
       type: Boolean,
       default: true
     },
+    filterSearch: {
+      type: Boolean,
+      default: false
+    },
     index: [Number, Function],
     sortOrders: {
       type: Array,
@@ -272,6 +276,7 @@ export default {
       filters: this.filters,
       filterable: (this.filters && this.filters.length) || this.filterMethod,
       filterMultiple: this.filterMultiple,
+      filterSearch: this.filterSearch,
       filterOpened: false,
       filteredValue: this.filteredValue || [],
       filterPlacement: this.filterPlacement || '',
@@ -359,6 +364,12 @@ export default {
     filterMultiple(newVal) {
       if (this.columnConfig) {
         this.columnConfig.filterMultiple = newVal;
+      }
+    },
+
+    filterSearch(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.filterSearch = newVal;
       }
     },
 

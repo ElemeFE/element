@@ -47,6 +47,11 @@
 
   @include e(content) {
     min-width: 100px;
+
+    .el-input {
+      padding: 10px;
+      box-sizing: border-box;
+    }
   }
 
   @include e(bottom) {

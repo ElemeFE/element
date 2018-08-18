@@ -262,6 +262,11 @@
         return row[property] === value;
       },
     
+      filterIncludes(value, row, column) {
+        const property = column['property'];
+        return row[property].includes(value);
+      },
+
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -1355,7 +1360,9 @@ Filtra la tabla para encontrar la información que necesita.
     <el-table-column
       prop="address"
       label="Dirección"
-      :formatter="formatter">
+      :formatter="formatter"
+      :filter-method="filterIncludes"
+      :filter-search="true">
     </el-table-column>
     <el-table-column
       prop="tag"
@@ -1410,7 +1417,10 @@ Filtra la tabla para encontrar la información que necesita.
       filterHandler(value, row, column) {
         const property = column['property'];
         return row[property] === value;
-      }
+      },
+      filterIncludes(value, row, column) {
+        const property = column['property'];
+        return row[property].includes(value);
     }
   }
 </script>
@@ -2047,6 +2057,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
 | filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
+| filter-search | si el filtrado de datos usa la entrada de texto | Boolean | — | false |
 | filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)      | —                             | —           |
 | filtered-value        | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array                             | —                             | —           |
 

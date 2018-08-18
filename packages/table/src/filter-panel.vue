@@ -1,8 +1,17 @@
 <template>
   <transition name="el-zoom-in-top">
+    <div 
+      class="el-table-filter"
+      v-if="search"
+      v-clickoutside="handleOutsideClick"
+      v-show="showPopper">
+        <div class="el-table-filter__content">
+          <el-input v-model="searchText" ref="search" @input="handleSearch" />
+        </div>
+    </div>
     <div
       class="el-table-filter"
-      v-if="multiple"
+      v-else-if="multiple"
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
       <div class="el-table-filter__content">
@@ -117,6 +126,16 @@
         this.handleOutsideClick();
       },
 
+      handleSearch() {
+        if (this.searchText) {
+          this.filterValue = this.searchText;
+        } else {
+          this.filteredValue = [];
+        }
+
+        this.confirmFilter(this.filteredValue);
+      },
+
       confirmFilter(filteredValue) {
         this.table.store.commit('filterChange', {
           column: this.column,
@@ -130,7 +149,8 @@
       return {
         table: null,
         cell: null,
-        column: null
+        column: null,
+        searchText: ''
       };
     },
 
@@ -173,6 +193,13 @@
           return this.column.filterMultiple;
         }
         return true;
+      },
+
+      search() {
+        if (this.column) {
+          return this.column.filterSearch;
+        }
+        return false;
       }
     },
 
@@ -187,6 +214,9 @@
         if (this.column) this.column.filterOpened = value;
         if (value) {
           Dropdown.open(this);
+          if (this.$refs.search) {
+            this.$refs.search.$el.querySelector('input').focus();
+          }
         } else {
           Dropdown.close(this);
         }

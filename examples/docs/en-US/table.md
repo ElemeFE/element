@@ -264,6 +264,11 @@
         return row[property] === value;
       },
 
+      filterIncludes(value, row, column) {
+        const property = column['property'];
+        return row[property].includes(value);
+      },
+
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -1357,7 +1362,9 @@ Filter the table to find desired data.
     <el-table-column
       prop="address"
       label="Address"
-      :formatter="formatter">
+      :formatter="formatter"
+      :filter-method="filterIncludes"
+      :filter-search="true">
     </el-table-column>
     <el-table-column
       prop="tag"
@@ -1412,6 +1419,10 @@ Filter the table to find desired data.
       filterHandler(value, row, column) {
         const property = column['property'];
         return row[property] === value;
+      },
+      filterIncludes(value, row, column) {
+        const property = column['property'];
+        return row[property].includes(value);
       }
     }
   }
@@ -2044,6 +2055,7 @@ You can customize row index in `type=index` columns.
 | filters | an array of data filtering options. For each element in this array, `text` and `value` are required | Array[{ text, value }] | — | — |
 | filter-placement | placement for the filter dropdown | String | same as Tooltip's `placement` | — |
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
+| filter-search | whether data filtering uses text input | Boolean | — | false |
 | filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row, column) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |
 

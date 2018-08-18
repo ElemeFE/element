@@ -109,6 +109,9 @@ export declare class ElTableColumn extends ElementUIComponent {
   /** Whether data filtering supports multiple options */
   filterMultiple: Boolean
 
+  /** Whether data filtering supports text search */
+  filterSearch: Boolean
+
   /** Data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` */
   filterMethod: (value: any, row: object) => boolean
 
