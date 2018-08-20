@@ -33,7 +33,21 @@
     position: relative;
     top: -1px;
   }
-  
+
+  .tm-select {
+    &:after {
+      content: '';
+      position: absolute;
+      top: calc(50% + 1px);
+      height: 30px;
+      margin-top: -15px;
+      width: 1px;
+      background: $--color-pastel-gray;
+      z-index: 1;
+      right: 0;
+    }
+  }
+
   .tm-input {
     position: relative;
     width: auto;
@@ -49,6 +63,7 @@
       width: 1px;
       background: $--color-pastel-gray;
       z-index: 1;
+      right: 0;
     }
     &:hover, &:focus {
       &:after {
