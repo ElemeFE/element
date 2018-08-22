@@ -8,16 +8,17 @@
     const result = [];
     const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled'];
     const childrenProp = props.children || 'children';
+    configurableProps.forEach((prop, i) => {
+      let name = props[prop];
+      if (name !== undefined) {
+        configurableProps[i] = name;
+      }
+    });
     arr.forEach(item => {
       const itemCopy = {};
       configurableProps.forEach(prop => {
-        let name = props[prop];
-        let value = item[name];
-        if (value === undefined) {
-          name = prop;
-          value = item[name];
-        }
-        if (value !== undefined) itemCopy[name] = value;
+        let value = item[prop];
+        if (value !== undefined) itemCopy[prop] = value;
       });
       if (Array.isArray(item[childrenProp])) {
         itemCopy[childrenProp] = copyArray(item[childrenProp], props);
