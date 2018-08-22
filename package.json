@@ -46,7 +46,8 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "deepmerge": "^1.5.2",
     "normalize-wheel": "^1.0.1",
-    "throttle-debounce": "^1.0.1"
+    "throttle-debounce": "^1.0.1",
+    "v-calendar": "^0.9.7"
   },
   "peerDependencies": {
     "vue": "^2.5.2"

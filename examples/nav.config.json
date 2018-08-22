@@ -97,6 +97,10 @@
               "title": "DateTimePicker"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
               "path": "/upload",
               "title": "Upload"
             },
