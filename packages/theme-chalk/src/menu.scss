@@ -45,10 +45,12 @@
   padding-left: 0;
   background-color: $--menu-item-fill;
   @include utils-clearfix;
+  &.el-menu--horizontal {
+    border-bottom: solid 1px #e6e6e6;
+  }
 
   @include m(horizontal) {
     border-right: none;
-    border-bottom: solid 1px #e6e6e6;
     & > .el-menu-item {
       float: left;
       height: 60px;
