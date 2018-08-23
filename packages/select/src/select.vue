@@ -298,6 +298,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      widthType: {
+        type: String,
+        default: 'minWidth'
       }
     },
 
