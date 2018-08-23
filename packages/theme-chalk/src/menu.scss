@@ -113,10 +113,10 @@
         line-height: 36px;
         padding: 0 10px;
         color: $--color-text-secondary;
-
-        &.is-active {
-          color: $--color-text-primary;
-        }
+      }
+      & .el-menu-item.is-active,
+      & .el-submenu.is-active > .el-submenu__title {
+        color: $--color-text-primary;
       }
     }
     & .el-menu-item:not(.is-disabled):hover,
