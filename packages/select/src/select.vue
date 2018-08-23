@@ -196,6 +196,7 @@
           !this.selectDisabled &&
           this.inputHovering &&
           !this.multiple &&
+          !this.visible &&
           this.value !== undefined &&
           this.value !== null &&
           this.value !== '';
