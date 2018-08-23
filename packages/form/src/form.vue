@@ -8,6 +8,7 @@
 </template>
 <script>
   import objectAssign from 'element-ui/src/utils/merge';
+  import { noop } from '../../../src/utils/util';
 
   export default {
     name: 'ElForm',
@@ -131,6 +132,21 @@
         if (!field) { throw new Error('must call validateField with valid prop string!'); }
 
         field.validate('', cb);
+      },
+      validateSomeFields(props = [], cb = noop) {
+        let msgs = [];
+        let fieldsName = this.fields.map(f => f.prop);
+        props.forEach((propName, index) => {
+          if (fieldsName.indexOf(propName) === -1) {
+            throw new Error('must call validateField with valid prop string!');
+          } else {
+            this.fields[index].validate('', message=> msgs.push({
+              key: propName,
+              message
+            }));
+          }
+        });
+        cb(msgs);
       }
     }
   };
