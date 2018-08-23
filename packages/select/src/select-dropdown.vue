@@ -2,7 +2,7 @@
   <div
     class="el-select-dropdown el-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
-    :style="{ minWidth: minWidth }">
+    :style="{ [$parent.widthType]: width }">
     <slot></slot>
   </div>
 </template>
@@ -46,7 +46,7 @@
 
     data() {
       return {
-        minWidth: ''
+        width: ''
       };
     },
 
@@ -58,7 +58,7 @@
 
     watch: {
       '$parent.inputWidth'() {
-        this.minWidth = this.$parent.$el.getBoundingClientRect().width + 'px';
+        this.width = this.$parent.$el.getBoundingClientRect().width + 'px';
       }
     },
 
