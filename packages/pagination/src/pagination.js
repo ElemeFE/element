@@ -380,7 +380,10 @@ export default {
     currentPage: {
       immediate: true,
       handler(val) {
-        this.internalCurrentPage = val;
+        if (val != this.internalCurrentPage) {
+           this.internalCurrentPage = val;
+           this.lastEmittedPage = -1;
+        }
       }
     },
 
