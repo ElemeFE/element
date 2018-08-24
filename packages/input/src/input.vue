@@ -204,7 +204,7 @@
         return this.$slots.suffix ||
           this.suffixIcon ||
           this.showClear ||
-          (this.validateState && this.needStatusIcon)
+          (this.validateState && this.needStatusIcon);
       }
     },
 
