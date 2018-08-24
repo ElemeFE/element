@@ -8,7 +8,7 @@
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
       'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable
+      'el-input--suffix': showSuffix
     }
     ]"
     @mouseenter="hovering = true"
@@ -50,7 +50,7 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon">
+        v-if="showSuffix">
         <span class="el-input__suffix-inner">
           <template v-if="!showClear">
             <slot name="suffix"></slot>
@@ -199,6 +199,12 @@
           !this.readonly &&
           this.currentValue !== '' &&
           (this.focused || this.hovering);
+      },
+      showSuffix() {
+        return this.$slots.suffix ||
+          this.suffixIcon ||
+          this.showClear ||
+          (this.validateState && this.needStatusIcon)
       }
     },
 
