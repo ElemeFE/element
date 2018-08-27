@@ -27,7 +27,7 @@
         :type="type"
         :disabled="inputDisabled"
         :readonly="readonly"
-        :autocomplete="autoComplete"
+        :autocomplete="autocomplete"
         :value="currentValue"
         ref="input"
         @compositionstart="handleComposition"
@@ -149,7 +149,7 @@
         type: [Boolean, Object],
         default: false
       },
-      autoComplete: {
+      autocomplete: {
         type: String,
         default: 'off'
       },
