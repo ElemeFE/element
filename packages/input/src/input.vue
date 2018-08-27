@@ -157,7 +157,6 @@
       autoComplete: {
         type: String,
         validator(val) {
-          console.log('input value', val);
           process.env.NODE_ENV !== 'production' &&
             console.warn('[Element Warn][Input]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
           return true;
