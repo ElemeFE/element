@@ -47,7 +47,7 @@
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
-        :autocomplete="autoComplete"
+        :autocomplete="autocomplete || autoComplete"
         @focus="handleFocus"
         @blur="softFocus = false"
         @click.stop
@@ -74,7 +74,7 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :id="id"
-      :auto-complete="autoComplete"
+      :autocomplete="autocomplete || autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
       :readonly="readonly"
@@ -259,8 +259,19 @@
       value: {
         required: true
       },
+      autocomplete: {
+        type: String
+        // bring back when autoComplete deprecated
+        // default: 'off'
+      },
+      /** @Deprecated in next major version */
       autoComplete: {
         type: String,
+        validator(val) {
+          process.env.NODE_ENV !== 'production' &&
+            console.warn('[Element Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
+          return true;
+        },
         default: 'off'
       },
       automaticDropdown: Boolean,
