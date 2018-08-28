@@ -130,7 +130,7 @@ Switch is used for switching between two opposing states.
       return {
         value6: true,
         value7: false
-      }
+      } 
     }
   };
 </script>
