@@ -538,10 +538,10 @@ This example shows how to customize your own validation rules to finish a two-fa
 ```html
 <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
     <el-input v-model.number="ruleForm2.age"></el-input>
@@ -719,7 +719,7 @@ This example shows how to customize your own validation rules to finish a two-fa
       { type: 'number', message: 'age must be a number'}
     ]"
   >
-    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
+    <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>

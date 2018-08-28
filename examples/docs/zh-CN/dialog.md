@@ -144,7 +144,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="活动名称" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="活动区域" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="请选择活动区域">

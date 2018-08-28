@@ -633,7 +633,8 @@ Búsqueda de datos desde el servidor.
 | suffix-icon   | clase del icono de sufijo                | string           | —                                | —           |
 | rows          | número de filas, sólo funciona cuando `type` es 'textarea'. | number           | —                                | 2           |
 | autosize      | si textarea tiene una altura adaptativa, sólo funciona cuando el`type` es 'textarea'. Puede aceptar un objeto, p. ej. { minRows: 2, maxRows: 6 } | boolean / object | —                                | false       |
-| auto-complete | igual que `auto-complete` en el input nativo | string           | on/off                           | off         |
+| autocomplete | igual que `autocomplete` en el input nativo | string           | on/off                           | off         |
+| auto-complete | @DEPRECATED in next major version          | string           | on/off                           | off         |
 | name          | igual que `name` en el input nativo      | string           | —                                | —           |
 | readonly      | igual que `readonly` en el input nativo  | boolean          | —                                | false       |
 | max           | igual que `max` en el input nativo       | —                | —                                | —           |
