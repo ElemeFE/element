@@ -261,9 +261,9 @@ export default {
           }
         },
         reassignMaxValue(value) {
-          var internalPageCount = this.$parent.internalPageCount;
+          const { internalPageCount } = this.$parent;
           if (+value > internalPageCount) {
-            this.$refs.input.setCurrentValue(internalPageCount);
+            this.$refs.input.setCurrentValue(internalPageCount || 1);
           }
         }
       },
