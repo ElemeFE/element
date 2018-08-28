@@ -1,6 +1,6 @@
 <style>
   .demo-box.demo-switch {
-    .el-switch {
+    .tm-switch {
       margin: 20px 20px 20px 0;
     }
   }
@@ -30,13 +30,13 @@ Switch is used for switching between two opposing states.
 :::demo Bind `v-model` to a `Boolean` typed variable. The `active-color` and `inactive-color` attribute decides the background color in two states.
 
 ```html
-<el-switch v-model="value1">
-</el-switch>
-<el-switch
+<tm-switch v-model="value1">
+</tm-switch>
+<tm-switch
   v-model="value2"
   active-color="#13ce66"
   inactive-color="#ff4949">
-</el-switch>
+</tm-switch>
 
 <script>
   export default {
@@ -55,19 +55,19 @@ Switch is used for switching between two opposing states.
 :::demo You can add `active-text` and `inactive-text` attribute to show texts.
 
 ```html
-<el-switch
+<tm-switch
   v-model="value3"
   active-text="Pay by month"
   inactive-text="Pay by year">
-</el-switch>
-<el-switch
+</tm-switch>
+<tm-switch
   style="display: block"
   v-model="value4"
   active-color="#13ce66"
   inactive-color="#ff4949"
   active-text="Pay by month"
   inactive-text="Pay by year">
-</el-switch>
+</tm-switch>
 
 <script>
   export default {
@@ -87,15 +87,15 @@ Switch is used for switching between two opposing states.
 :::demo You can set `active-value` and `inactive-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
 
 ```html
-<el-tooltip :content="'Switch value: ' + value5" placement="top">
-  <el-switch
+<tm-tooltip :content="'Switch value: ' + value5" placement="top">
+  <tm-switch
     v-model="value5"
     active-color="#13ce66"
     inactive-color="#ff4949"
     active-value="100"
     inactive-value="0">
-  </el-switch>
-</el-tooltip>
+  </tm-switch>
+</tm-tooltip>
 
 <script>
   export default {
@@ -115,14 +115,14 @@ Switch is used for switching between two opposing states.
 :::demo Adding the `disabled` attribute disables Switch.
 
 ```html
-<el-switch
+<tm-switch
   v-model="value6"
   disabled>
-</el-switch>
-<el-switch
+</tm-switch>
+<tm-switch
   v-model="value7"
   disabled>
-</el-switch>
+</tm-switch>
 
 <script>
   export default {

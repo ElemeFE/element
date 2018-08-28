@@ -64,6 +64,7 @@ import Sidebar from '../packages/sidebar/index.js';
 import NavBar from '../packages/nav-bar/index.js';
 import Gallery from '../packages/gallery/index.js';
 import ValueSwitcher from '../packages/value-switcher/index.js';
+import Switch from '../packages/switch/index.js';
 import DatePickerJoined from '../packages/date-picker-joined/index.js';
 import CircularCountdown from '../packages/circular-countdown/index.js';
 import locale from 'tmconsulting-ui/src/locale';
@@ -133,6 +134,7 @@ const components = [
   NavBar,
   Gallery,
   ValueSwitcher,
+  Switch,
   DatePickerJoined,
   CircularCountdown,
   CollapseTransition

@@ -69,12 +69,13 @@
     transition: border-color .3s, background-color .3s;
     vertical-align: middle;
 
-    & .tm-switch__button {
+    &:after {
+      content: "";
       position: absolute;
       top: 1px;
       left: 1px;
       border-radius: $--border-radius-circle;
-      transition: transform .3s;
+      transition: all .3s;
       width: $--switch-button-size;
       height: $--switch-button-size;
       background-color: $--color-white;
@@ -85,6 +86,10 @@
     .tm-switch__core {
       border-color: $--switch-on-color;
       background-color: $--switch-on-color;
+      &::after {
+        left: 100%;
+        margin-left: -$--switch-button-size - 1px;
+      }
     }
   }
 
@@ -94,12 +99,12 @@
 
   @include m(wide) {
     .tm-switch__label {
-      &.tm-switch__label--left {
+      &.tm-switch__labtm--left {
         span {
           left: 10px;
         }
       }
-      &.tm-switch__label--right {
+      &.tm-switch__labtm--right {
         span {
           right: 10px;
         }
@@ -107,8 +112,8 @@
     }
   }
 
-  & .label-fade-enter,
-  & .label-fade-leave-active {
+  & .labtm-fade-enter,
+  & .labtm-fade-leave-active {
     opacity: 0;
   }
 }
