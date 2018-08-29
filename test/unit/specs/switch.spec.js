@@ -17,31 +17,31 @@ describe('Switch', () => {
       width: 100
     });
 
-    const core = vm.$el.querySelector('.el-switch__core');
+    const core = vm.$el.querySelector('.tm-switch__core');
     expect(core.style.backgroundColor).to.equal('rgb(255, 0, 0)');
     expect(core.style.width).to.equal('100px');
-    expect(vm.$el.querySelector('.el-switch__label--left').querySelector('span').textContent).to.equal('off');
+    expect(vm.$el.querySelector('.tm-switch__label--left').querySelector('span').textContent).to.equal('off');
   });
 
   it('switch with icons', () => {
     vm = createTest(Switch, {
-      activeIconClass: 'el-icon-check',
-      inactiveIconClass: 'el-icon-close'
+      activeIconClass: 'tm-icon-check',
+      inactiveIconClass: 'tm-icon-close'
     });
 
-    const icon = vm.$el.querySelector('.el-switch__label--left').querySelector('i');
-    expect(icon.classList.contains('el-icon-close')).to.true;
+    const icon = vm.$el.querySelector('.tm-switch__label--left').querySelector('i');
+    expect(icon.classList.contains('tm-icon-close')).to.true;
   });
 
   it('value correctly update', done => {
     vm = createVue({
       template: `
         <div>
-          <el-switch
+          <tm-switch
             v-model="value"
             activeColor="#0f0"
             inactiveColor="#f00">
-          </el-switch>
+          </tm-switch>
         </div>
       `,
 
@@ -52,7 +52,7 @@ describe('Switch', () => {
       }
     }, true);
 
-    const core = vm.$el.querySelector('.el-switch__core');
+    const core = vm.$el.querySelector('.tm-switch__core');
     expect(core.style.backgroundColor).to.equal('rgb(0, 255, 0)');
     core.click();
     setTimeout(() => {
@@ -70,10 +70,10 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch
+          <tm-switch
             v-model="value"
             @change="handleChange">  
-          </el-switch>
+          </tm-switch>
         </div>
       `,
       mounted() {
@@ -95,7 +95,7 @@ describe('Switch', () => {
     }, true);
 
     setTimeout(() => {
-      const core = vm.$el.querySelector('.el-switch__core');
+      const core = vm.$el.querySelector('.tm-switch__core');
       expect(vm.target).to.equal(1);
       core.click();
       setTimeout(() => {
@@ -109,7 +109,7 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch disabled v-model="value"></el-switch>
+          <tm-switch disabled v-model="value"></tm-switch>
         </div>
       `,
 
@@ -120,7 +120,7 @@ describe('Switch', () => {
       }
     }, true);
 
-    vm.$el.querySelector('.el-switch__core').click();
+    vm.$el.querySelector('.tm-switch__core').click();
     Vue.nextTick(() => {
       expect(vm.value).to.true;
       done();
@@ -131,7 +131,7 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch v-model="value" :active-value="onValue" :inactive-value="offValue"></el-switch>
+          <tm-switch v-model="value" :active-value="onValue" :inactive-value="offValue"></tm-switch>
         </div>
       `,
       data() {
@@ -143,7 +143,7 @@ describe('Switch', () => {
       }
     }, true);
 
-    const core = vm.$el.querySelector('.el-switch__core');
+    const core = vm.$el.querySelector('.tm-switch__core');
     core.click();
     setTimeout(() => {
       expect(vm.value).to.equal('0');
@@ -159,14 +159,14 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch :value="true"></el-switch>
+          <tm-switch :value="true"></tm-switch>
         </div>
       `
     }, true);
 
     const component = vm.$children[0];
     const input = vm.$el.querySelector('input');
-    const core = vm.$el.querySelector('.el-switch__core');
+    const core = vm.$el.querySelector('.tm-switch__core');
     core.click();
     setTimeout(() => {
       expect(component.checked).to.equal(true);
@@ -186,7 +186,7 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch v-model="value"></el-switch>
+          <tm-switch v-model="value"></tm-switch>
         </div>
       `,
       data() {

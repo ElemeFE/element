@@ -20,7 +20,7 @@
                 @keydown.enter="switchValue"
         >
         <span
-                :class="['tm-switch__label', 'tm-switch__labtm--left', !checked ? 'is-active' : '']"
+                :class="['tm-switch__label', 'tm-switch__label--left', !checked ? 'is-active' : '']"
                 v-if="inactiveIconClass || inactiveText">
       <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
