@@ -167,7 +167,7 @@ describe('Tree', () => {
     vm = getTreeVm(':props="defaultProps"');
     vm.data = [];
     vm.$nextTick(() => {
-      expect(vm.$el.querySelectorAll('.el-tree__empty-block').length).to.equal(1);
+      expect(vm.$el.querySelectorAll('.el-tree__empty-wrapper').length).to.equal(1);
       done();
     });
   });

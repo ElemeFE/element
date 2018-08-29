@@ -9,19 +9,23 @@
   background: $--color-white;
   color: $--tree-text-color;
 
+  @include e(empty-wrapper) {
+    display: flex;
+    flex-direction: column;
+  }
+
   @include e(empty-block) {
-    position: relative;
     min-height: 60px;
     text-align: center;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @include e(empty-text) {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    width: 50%;
     color: mix($--color-primary, rgb(158, 68, 0), 50%);
   }
 
