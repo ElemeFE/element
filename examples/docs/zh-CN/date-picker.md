@@ -66,8 +66,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: [],
-        value14: []
+        value13: '',
+        value14: ''
       };
     }
   };
@@ -89,7 +89,7 @@
       border-right: none;
     }
   }
-  
+
   .demo-date-picker .container {
     flex: 1;
     border-right: solid 1px #EFF2F6;
@@ -232,7 +232,7 @@
         value3: '',
         value4: '',
         value5: '',
-        value14: []
+        value14: ''
       };
     }
   };
@@ -418,7 +418,7 @@
   export default {
     data() {
       return {
-        value13: []
+        value13: ''
       };
     }
   };

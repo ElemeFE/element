@@ -633,7 +633,8 @@ Búsqueda de datos desde el servidor.
 | suffix-icon   | clase del icono de sufijo                | string           | —                                | —           |
 | rows          | número de filas, sólo funciona cuando `type` es 'textarea'. | number           | —                                | 2           |
 | autosize      | si textarea tiene una altura adaptativa, sólo funciona cuando el`type` es 'textarea'. Puede aceptar un objeto, p. ej. { minRows: 2, maxRows: 6 } | boolean / object | —                                | false       |
-| auto-complete | igual que `auto-complete` en el input nativo | string           | on/off                           | off         |
+| autocomplete | igual que `autocomplete` en el input nativo | string           | on/off                           | off         |
+| auto-complete | @DEPRECATED in next major version          | string           | on/off                           | off         |
 | name          | igual que `name` en el input nativo      | string           | —                                | —           |
 | readonly      | igual que `readonly` en el input nativo  | boolean          | —                                | false       |
 | max           | igual que `max` en el input nativo       | —                | —                                | —           |
@@ -691,7 +692,7 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
 | hide-loading | si se debe ocultar el icono de loading en la búsqueda remota | boolean | — | false |
-| popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
+| popper-append-to-body | si añadir el desplegable al cuerpo. Si la posición del menú desplegable es incorrecta, puede intentar establecer este prop a false | boolean | - | true |
 
 ### Autocomplete Slots
 

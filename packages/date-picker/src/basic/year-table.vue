@@ -46,6 +46,7 @@
 <script type="text/babel">
   import { hasClass } from 'element-ui/src/utils/dom';
   import { isDate, range, nextDate, getDayCountOfYear } from '../util';
+  import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
   const datesInYear = year => {
     const numOfDays = getDayCountOfYear(year);
@@ -80,7 +81,7 @@
         style.disabled = typeof this.disabledDate === 'function'
           ? datesInYear(year).every(this.disabledDate)
           : false;
-        style.current = this.value.getFullYear() === year;
+        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0;
         style.today = today.getFullYear() === year;
         style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
 

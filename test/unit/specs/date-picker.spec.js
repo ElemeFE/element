@@ -1517,22 +1517,11 @@ describe('DatePicker', () => {
       const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
       td.click();
       setTimeout(_ => {
-        expect(vm.$refs.compo.picker.selectedDate).to.exist;
+        expect(vm.$refs.compo.value).to.be.an('array');
+        expect(vm.$refs.compo.value.length).to.equal(1);
+        expect(vm.$refs.compo.value[0]).to.be.a('number');
         expect(vm.value.length).to.equal(1);
         done();
-      }, DELAY);
-    });
-
-    it('value format', done => {
-      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
-      td.click();
-      setTimeout(_ => {
-        vm.$refs.compo.picker.$el.querySelector('.el-button--default').click();
-        setTimeout(() => {
-          expect(vm.$refs.compo.picker.selectedDate).to.exist;
-          expect(vm.value.length).to.equal(1);
-          done();
-        }, DELAY);
       }, DELAY);
     });
 

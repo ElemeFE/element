@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.4.6
+
+*2018-08-09*
+
+- Arreglada la tabla que no mostraba el ícono del filtro cuando a  `filter` se les asignaba un array vacío, #12165
+- Arreglado Menu que no guardaba el estado activo cuando cambiaba `collapse` #12178 (por @elfman)
+- Se ha corregido que Cascader no escapaba a los caracteres especiales para Regexp, #12248
+- Se ha corregido que el RadioBotón deshabilitado mostraba la sombra de la caja cuando se hacía clic, #12262
+- Arreglado el efecto de la tecla de flecha en Select cuando el valor por defecto es `undefined`,#12322
+- Corregida la función de consulta de Select not debounced en modo multi, #12181
+- Corregida que la palabra clave de consulta de Select desaparecía en modo multi, #12304
+- Corregido el ancho incorrecto de Dialog cuando se muestra a pantalla completa, #12203
+- Corregida la visualización incorrecta de Main en IE, #12237
+- Corregido el trigger de Input con dos validaciones de Form, #12260
+- Arreglado el añadir un nuevo nodo de árbol que causaba que los nodos desaparecieran, #12256
+- Arreglado el nodo Tree no se borraba después de arrastrar, #12279
+- Popover corregido porque no era visible cuando InputNumber no enfocaba, #12284
+- Añadido el atributo `popper-append-to-body` para Autocompletar, #12241
+- Añadido el modificador `sync` para el atributo `page-size` de Pagination, #12281
+
 ### 2.4.5
 
 *2018-07-26*
