@@ -483,11 +483,11 @@ describe('Form', () => {
         expect(valid).to.not.true;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择日期');
-          // programatic modification does not trigger change
-          vm.value = new Date();
+          // programatic modification triggers change validation
+          vm.form.date = new Date();
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('请选择日期');
-            vm.value = '';
+            expect(field.validateMessage).to.equal('');
+            vm.form.date = '';
             // user modification triggers change
             const input = vm.$refs.picker.$el.querySelector('input');
             input.blur();

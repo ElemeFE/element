@@ -91,7 +91,7 @@ export default class TreeStore {
 
   remove(data) {
     const node = this.getNode(data);
-    if (node) {
+    if (node && node.parent) {
       node.parent.removeChild(node);
     }
   }
@@ -144,11 +144,9 @@ export default class TreeStore {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
-    const childNodes = node.childNodes;
-    for (let i = 0, j = childNodes.length; i < j; i++) {
-      const child = childNodes[i];
+    node.childNodes.forEach(child => {
       this.deregisterNode(child);
-    }
+    });
 
     delete this.nodesMap[node.key];
   }

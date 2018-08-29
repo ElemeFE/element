@@ -91,19 +91,17 @@
             <date-table
               v-show="currentView === 'date'"
               @pick="handleDatePick"
-              @select="handleDateSelect"
               :selection-mode="selectionMode"
               :first-day-of-week="firstDayOfWeek"
-              :value="new Date(value)"
+              :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate"
-              :selected-date="selectedDate">
+              :disabled-date="disabledDate">
             </date-table>
             <year-table
               v-show="currentView === 'year'"
               @pick="handleYearPick"
-              :value="new Date(value)"
+              :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :disabled-date="disabledDate">
@@ -111,7 +109,7 @@
             <month-table
               v-show="currentView === 'month'"
               @pick="handleMonthPick"
-              :value="new Date(value)"
+              :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :disabled-date="disabledDate">
@@ -333,12 +331,6 @@
         }
       },
 
-      handleDateSelect(value) {
-        if (this.selectionMode === 'dates') {
-          this.selectedDate = value;
-        }
-      },
-
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
           this.date = this.value
@@ -347,6 +339,8 @@
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
+        } else if (this.selectionMode === 'dates') {
+          this.emit(value, true); // set false to keep panel open
         }
       },
 
@@ -373,7 +367,7 @@
 
       confirm() {
         if (this.selectionMode === 'dates') {
-          this.emit(this.selectedDate);
+          this.emit(this.value);
         } else {
           // value were emitted in handle{Date,Time}Pick, nothing to update here
           // deal with the scenario where: user opens the picker, then confirm without doing anything
@@ -506,7 +500,6 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
-        selectedDate: [],
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,

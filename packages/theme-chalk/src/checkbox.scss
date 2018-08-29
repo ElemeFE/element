@@ -230,6 +230,7 @@
     width: 0;
     height: 0;
     z-index: -1;
+    left: 0;
   }
 
   @include e(label) {
