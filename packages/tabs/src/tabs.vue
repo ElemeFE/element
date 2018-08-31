@@ -168,6 +168,19 @@
       if (!this.currentName) {
         this.setCurrentName('0');
       }
+    },
+    updated() {
+      // Ensure the tab-pane order matches the slot order
+      this.$slots.default.filter(item => {
+        return item.elm.nodeType === 1 && /\bel-tab-pane\b/.test(item.elm.className);
+      }).forEach((slotVNode, index) => {
+        if (slotVNode !== this.panes[index].$vnode) {
+          const oldIndex = this.panes.findIndex((pane) => {
+            return pane.$vnode === slotVNode;
+          });
+          this.panes.splice(index, 0, this.panes.splice(oldIndex, 1)[0]);
+        }
+      });
     }
   };
 </script>
