@@ -274,9 +274,13 @@
     },
 
     mounted() {
+      const self = this;
       this.$nextTick(() => {
         if (this.closeOnHashChange) {
-          window.addEventListener('hashchange', this.close);
+          window.addEventListener('hashchange', function close(event) {
+            self.close();
+            event.currentTarget.removeEventListener(event.type, close);
+          });
         }
       });
     },
