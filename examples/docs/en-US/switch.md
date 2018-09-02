@@ -37,6 +37,13 @@ Switch is used for switching between two opposing states.
   active-color="#13ce66"
   inactive-color="#ff4949">
 </tm-switch>
+<tm-switch
+  v-model="value2"
+  inner-left-icon-name="check"
+  inner-left-icon-color="#fff"
+  inner-right-icon-name="cross-bold"
+  inner-right-icon-color="#fff">
+</tm-switch>
 
 <script>
   export default {

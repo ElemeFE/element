@@ -56,7 +56,10 @@
 
   @include e(core) {
     margin: 0;
-    display: inline-block;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 4px;
     position: relative;
     width: $--switch-width;
     height: $--switch-height;
@@ -67,7 +70,6 @@
     background: $--switch-off-color;
     cursor: pointer;
     transition: border-color .3s, background-color .3s;
-    vertical-align: middle;
 
     &:after {
       content: "";

@@ -26,6 +26,8 @@
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
         <span class="tm-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
+            <tm-icon class="tm-switch__core--icon-left" v-if="innerLeftIconName" :name="innerLeftIconName" :style="{ fill: innerLeftIconColor }"></tm-icon>
+            <tm-icon class="tm-switch__core--icon-right" v-if="innerRightIconName" :name="innerRightIconName" :style="{ fill: innerRightIconColor }"></tm-icon>
     </span>
         <span
                 :class="['tm-switch__label', 'tm-switch__labtm--right', checked ? 'is-active' : '']"
@@ -65,6 +67,22 @@
         default: ''
       },
       inactiveIconClass: {
+        type: String,
+        default: ''
+      },
+      innerRightIconName: {
+        type: String,
+        default: ''
+      },
+      innerLeftIconName: {
+        type: String,
+        default: ''
+      },
+      innerRightIconColor: {
+        type: String,
+        default: ''
+      },
+      innerLeftIconColor: {
         type: String,
         default: ''
       },

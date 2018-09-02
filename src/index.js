@@ -63,8 +63,8 @@ import PriceInfo from '../packages/price-info/index.js';
 import Sidebar from '../packages/sidebar/index.js';
 import NavBar from '../packages/nav-bar/index.js';
 import Gallery from '../packages/gallery/index.js';
-import ValueSwitcher from '../packages/value-switcher/index.js';
 import Switch from '../packages/switch/index.js';
+import ValueSwitcher from '../packages/value-switcher/index.js';
 import DatePickerJoined from '../packages/date-picker-joined/index.js';
 import CircularCountdown from '../packages/circular-countdown/index.js';
 import locale from 'tmconsulting-ui/src/locale';
@@ -133,8 +133,8 @@ const components = [
   Sidebar,
   NavBar,
   Gallery,
-  ValueSwitcher,
   Switch,
+  ValueSwitcher,
   DatePickerJoined,
   CircularCountdown,
   CollapseTransition
@@ -238,6 +238,7 @@ module.exports = {
   Sidebar,
   NavBar,
   Gallery,
+  Switch,
   ValueSwitcher,
   DatePickerJoined,
   CircularCountdown
