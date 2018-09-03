@@ -308,7 +308,7 @@ NavMenu vertical puede ser colapsado.
 | default-active    | índice del menu-item activo              | string  | —                     | —           |
 | default-openeds   | arreglo que contiene las llaves del sub-menus activo | Array   | —                     | —           |
 | unique-opened     | si solo un submenu puede ser activo      | boolean | —                     | false       |
-| menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | —                     | hover       |
+| menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | hover / click      | hover   |
 | router            | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
 | collapse-transition  | si se debe permitir collapse transition | boolean   | — | true   |
 

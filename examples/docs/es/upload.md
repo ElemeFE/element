@@ -412,6 +412,12 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | limit            | número máximo de cargas permitidas       | number                             | —                         | —           |
 | on-exceed        | _hook_ lanzado cuando el límite ha sido excedido | function(files, fileList)          | —                         | -           |
 
+### Slot
+| Nombre       | Descripcion                              |
+| ------------ | ---------------------------------------- |
+| trigger | contenido que desencadena el diálogo de archivo |
+| tip | contenido de los tips |
+
 ### Métodos
 | Nombre del método | Descripción                              | Parametros                |
 | ----------------- | ---------------------------------------- | ------------------------- |

@@ -94,8 +94,16 @@ export default {
           const fileType = Object.prototype.toString.call(processedFile);
 
           if (fileType === '[object File]' || fileType === '[object Blob]') {
-            processedFile.name = rawFile.name;
-            processedFile.uid = rawFile.uid;
+            if (fileType === '[object Blob]') {
+              processedFile = new File([processedFile], rawFile.name, {
+                type: rawFile.type
+              });
+            }
+            for (const p in rawFile) {
+              if (rawFile.hasOwnProperty(p)) {
+                processedFile[p] = rawFile[p];
+              }
+            }
             this.post(processedFile);
           } else {
             this.post(rawFile);

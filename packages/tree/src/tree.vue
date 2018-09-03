@@ -18,7 +18,7 @@
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
     </el-tree-node>
-    <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
+    <div class="el-tree__empty-block" v-if="isEmpty">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
     </div>
     <div
@@ -141,12 +141,16 @@
 
       treeItemArray() {
         return Array.prototype.slice.call(this.treeItems);
+      },
+
+      isEmpty() {
+        const { childNodes } = this.root;
+        return !childNodes || childNodes.length === 0 || childNodes.every(({visible}) => !visible);
       }
     },
 
     watch: {
       defaultCheckedKeys(newVal) {
-        this.store.defaultCheckedKeys = newVal;
         this.store.setDefaultCheckedKey(newVal);
       },
 
@@ -193,8 +197,8 @@
         return path.reverse();
       },
 
-      getCheckedNodes(leafOnly) {
-        return this.store.getCheckedNodes(leafOnly);
+      getCheckedNodes(leafOnly, includeHalfChecked) {
+        return this.store.getCheckedNodes(leafOnly, includeHalfChecked);
       },
 
       getCheckedKeys(leafOnly) {
@@ -285,15 +289,15 @@
         this.treeItems[0] && this.treeItems[0].setAttribute('tabindex', 0);
       },
 
-      handelKeydown(ev) {
+      handleKeydown(ev) {
         const currentItem = ev.target;
         if (currentItem.className.indexOf('el-tree-node') === -1) return;
-        ev.preventDefault();
         const keyCode = ev.keyCode;
         this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
         const currentIndex = this.treeItemArray.indexOf(currentItem);
         let nextIndex;
         if ([38, 40].indexOf(keyCode) > -1) { // up、down
+          ev.preventDefault();
           if (keyCode === 38) { // up
             nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
           } else {
@@ -302,10 +306,12 @@
           this.treeItemArray[nextIndex].focus(); // 选中
         }
         if ([37, 39].indexOf(keyCode) > -1) { // left、right 展开
+          ev.preventDefault();
           currentItem.click(); // 选中
         }
         const hasInput = currentItem.querySelector('[type="checkbox"]');
         if ([13, 32].indexOf(keyCode) > -1 && hasInput) { // space enter选中checkbox
+          ev.preventDefault();
           hasInput.click();
         }
       }
@@ -362,12 +368,12 @@
         let dropPrev = true;
         let dropInner = true;
         let dropNext = true;
+        let userAllowDropInner = true;
         if (typeof this.allowDrop === 'function') {
           dropPrev = this.allowDrop(draggingNode.node, dropNode.node, 'prev');
-          dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
+          userAllowDropInner = dropInner = this.allowDrop(draggingNode.node, dropNode.node, 'inner');
           dropNext = this.allowDrop(draggingNode.node, dropNode.node, 'next');
         }
-        dragState.allowDrop = dropInner;
         event.dataTransfer.dropEffect = dropInner ? 'move' : 'none';
         if ((dropPrev || dropInner || dropNext) && oldDropNode !== dropNode) {
           if (oldDropNode) {
@@ -395,12 +401,12 @@
           dropNext = false;
         }
 
-        const targetPosition = dropNode.$el.querySelector('.el-tree-node__expand-icon').getBoundingClientRect();
+        const targetPosition = dropNode.$el.getBoundingClientRect();
         const treePosition = this.$el.getBoundingClientRect();
 
         let dropType;
-        const prevPercent = dropPrev ? (dropInner ? 0.25 : (dropNext ? 0.5 : 1)) : -1;
-        const nextPercent = dropNext ? (dropInner ? 0.75 : (dropPrev ? 0.5 : 0)) : 1;
+        const prevPercent = dropPrev ? (dropInner ? 0.25 : (dropNext ? 0.45 : 1)) : -1;
+        const nextPercent = dropNext ? (dropInner ? 0.75 : (dropPrev ? 0.55 : 0)) : 1;
 
         let indicatorTop = -9999;
         const distance = event.clientY - targetPosition.top;
@@ -430,6 +436,7 @@
         }
 
         dragState.showDropIndicator = dropType === 'before' || dropType === 'after';
+        dragState.allowDrop = dragState.showDropIndicator || userAllowDropInner;
         dragState.dropType = dropType;
         this.$emit('node-drag-over', draggingNode.node, dropNode.node, event);
       });
@@ -440,17 +447,21 @@
         event.dataTransfer.dropEffect = 'move';
 
         if (draggingNode && dropNode) {
-          const data = draggingNode.node.data;
-          if (dropType === 'before') {
-            draggingNode.node.remove();
-            dropNode.node.parent.insertBefore({ data }, dropNode.node);
-          } else if (dropType === 'after') {
-            draggingNode.node.remove();
-            dropNode.node.parent.insertAfter({ data }, dropNode.node);
-          } else if (dropType === 'inner') {
-            dropNode.node.insertChild({ data });
+          const draggingNodeCopy = { data: draggingNode.node.data };
+          if (dropType !== 'none') {
             draggingNode.node.remove();
           }
+          if (dropType === 'before') {
+            dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
+          } else if (dropType === 'after') {
+            dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
+          } else if (dropType === 'inner') {
+            dropNode.node.insertChild(draggingNodeCopy);
+          }
+          if (dropType !== 'none') {
+            this.store.registerNode(draggingNodeCopy);
+          }
+
           removeClass(dropNode.$el, 'is-drop-inner');
 
           this.$emit('node-drag-end', draggingNode.node, dropNode.node, dropType, event);
@@ -471,7 +482,7 @@
 
     mounted() {
       this.initTabIndex();
-      this.$el.addEventListener('keydown', this.handelKeydown);
+      this.$el.addEventListener('keydown', this.handleKeydown);
     },
 
     updated() {

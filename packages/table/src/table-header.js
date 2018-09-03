@@ -124,7 +124,7 @@ export default {
                             : ''
                         }
                         {
-                          column.filterable
+                          (column.filters && column.filters.length) || column.filterMethod
                             ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
                             : ''
                         }
@@ -208,25 +208,8 @@ export default {
   },
 
   mounted() {
-    if (this.defaultSort.prop) {
-      const states = this.store.states;
-      states.sortProp = this.defaultSort.prop;
-      states.sortOrder = this.defaultSort.order || 'ascending';
-      this.$nextTick(_ => {
-        for (let i = 0, length = this.columns.length; i < length; i++) {
-          let column = this.columns[i];
-          if (column.property === states.sortProp) {
-            column.order = states.sortOrder;
-            states.sortingColumn = column;
-            break;
-          }
-        }
-
-        if (states.sortingColumn) {
-          this.store.commit('changeSortCondition');
-        }
-      });
-    }
+    const { prop, order } = this.defaultSort;
+    this.store.commit('sort', { prop, order });
   },
 
   beforeDestroy() {
@@ -356,7 +339,7 @@ export default {
     handleHeaderClick(event, column) {
       if (!column.filters && column.sortable) {
         this.handleSortClick(event, column);
-      } else if (column.filters && !column.sortable) {
+      } else if (column.filterable && !column.sortable) {
         this.handleFilterClick(event, column);
       }
 
@@ -475,13 +458,15 @@ export default {
       document.body.style.cursor = '';
     },
 
-    toggleOrder(order) {
-      return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
+    toggleOrder({ order, sortOrders }) {
+      if (order === '') return sortOrders[0];
+      const index = sortOrders.indexOf(order || null);
+      return sortOrders[index > sortOrders.length - 2 ? 0 : index + 1];
     },
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = givenOrder || this.toggleOrder(column.order);
+      let order = givenOrder || this.toggleOrder(column);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {

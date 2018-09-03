@@ -180,7 +180,16 @@ export default {
       type: Boolean,
       default: true
     },
-    index: [Number, Function]
+    index: [Number, Function],
+    sortOrders: {
+      type: Array,
+      default() {
+        return ['ascending', 'descending', null];
+      },
+      validator(val) {
+        return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
+      }
+    }
   },
 
   data() {
@@ -261,15 +270,26 @@ export default {
       fixed: this.fixed === '' ? true : this.fixed,
       filterMethod: this.filterMethod,
       filters: this.filters,
-      filterable: this.filters || this.filterMethod,
+      filterable: (this.filters && this.filters.length) || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
       filteredValue: this.filteredValue || [],
       filterPlacement: this.filterPlacement || '',
-      index: this.index
+      index: this.index,
+      sortOrders: this.sortOrders
     });
 
-    objectAssign(column, forced[type] || {});
+    let source = forced[type] || {};
+    for (let prop in source) {
+      if (source.hasOwnProperty(prop)) {
+        let value = source[prop];
+        if (value !== undefined) {
+          column[prop] = prop === 'className'
+            ? `${column[prop]} ${value}`
+            : value;
+        }
+      }
+    }
 
     this.columnConfig = column;
 
@@ -394,6 +414,18 @@ export default {
     formatter(newVal) {
       if (this.columnConfig) {
         this.columnConfig.formatter = newVal;
+      }
+    },
+
+    className(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.className = newVal;
+      }
+    },
+
+    labelClassName(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.labelClassName = newVal;
       }
     }
   },

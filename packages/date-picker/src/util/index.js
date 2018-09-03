@@ -144,7 +144,7 @@ export const modifyTime = function(date, h, m, s) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
 };
 
-export const modifyWithDefaultTime = (date, time) => {
+export const modifyWithTimeString = (date, time) => {
   if (date == null || !time) {
     return date;
   }

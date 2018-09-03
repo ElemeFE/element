@@ -1,5 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
+@import "common/transition";
 
 @include b(collapse) {
   border-top: 1px solid $--collapse-border-color;

@@ -77,6 +77,6 @@ export declare class ElForm extends ElementUIComponent {
   /** reset all the fields and remove validation result */
   resetFields (): void
   
-  /** clear validation message for all fields */
-  clearValidate (): void
+  /** clear validation message for certain fields */
+  clearValidate (props?: string[]): void
 }

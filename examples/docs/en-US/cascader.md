@@ -1694,6 +1694,6 @@ Search and select options with a keyword.
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | change  | triggers when the binding value changes | value |
-| active-item-change | triggers when active option changes, only works when `change-on-select` is `false` | an array of active options |
+| active-item-change | triggers when active option of its parent changes, only works when `change-on-select` is `false` | an array of active options |
 | blur | triggers when Cascader blurs | (event: Event) |
 | focus | triggers when Cascader focuses | (event: Event) |

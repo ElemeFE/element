@@ -111,7 +111,7 @@
 
 Puede buscar y filtrar los items.
 
-::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
+:::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer

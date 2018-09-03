@@ -217,7 +217,7 @@
       top: 1px;
       transform: rotate(45deg) scaleY(0);
       width: 3px;
-      transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+      transition: transform .15s ease-in .05s;
       transform-origin: center;
     }
   }

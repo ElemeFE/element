@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
 import merge from 'element-ui/src/utils/merge';
+import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import { orderBy, getColumnById, getRowIdentity } from './util';
 
 const sortData = (data, states) => {
@@ -192,6 +193,17 @@ TableStore.prototype.mutations = {
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
 
+    const { $el, highlightCurrentRow } = this.table;
+    if ($el && highlightCurrentRow) {
+      const data = states.data;
+      const tr = $el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
+      const row = rows[data.indexOf(states.currentRow)];
+
+      [].forEach.call(rows, row => removeClass(row, 'current-row'));
+      addClass(row, 'current-row');
+    }
+
     if (!options || !options.silent) {
       this.table.$emit('sort-change', {
         column: this.states.sortingColumn,
@@ -201,6 +213,28 @@ TableStore.prototype.mutations = {
     }
 
     Vue.nextTick(() => this.table.updateScrollY());
+  },
+
+  sort(states, options) {
+    const { prop, order } = options;
+    if (prop) {
+      states.sortProp = prop;
+      states.sortOrder = order || 'ascending';
+      Vue.nextTick(() => {
+        for (let i = 0, length = states.columns.length; i < length; i++) {
+          let column = states.columns[i];
+          if (column.property === states.sortProp) {
+            column.order = states.sortOrder;
+            states.sortingColumn = column;
+            break;
+          }
+        }
+
+        if (states.sortingColumn) {
+          this.commit('changeSortCondition');
+        }
+      });
+    }
   },
 
   filterChange(states, options) {
@@ -553,9 +587,7 @@ TableStore.prototype.setCurrentRowKey = function(key) {
   const data = states.data || [];
   const keysMap = getKeysMap(data, rowKey);
   const info = keysMap[key];
-  if (info) {
-    states.currentRow = info.row;
-  }
+  states.currentRow = info ? info.row : null;
 };
 
 TableStore.prototype.updateCurrentRow = function() {

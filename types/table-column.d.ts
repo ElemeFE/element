@@ -4,6 +4,7 @@ import { PopoverPlacement } from './popover'
 
 export type TableColumnType = 'default' | 'selection' | 'index' | 'expand'
 export type TableColumnFixedType = 'left' | 'right'
+export type SortOrders = 'ascending' | 'descending' | null
 
 export type TableColumn = {
   /** Label of the column */
@@ -68,6 +69,9 @@ export declare class ElTableColumn extends ElementUIComponent {
 
   /** Sorting method. Works when `sortable` is `true` */
   sortMethod: (a: any, b: any) => number
+
+  /** The order of the sorting strategies used when sorting the data. Works when `sortable` is `true`. */
+  sortOrders: SortOrders[]
 
   /** Whether column width can be resized. Works when border of `el-table` is `true` */
   resizable: boolean

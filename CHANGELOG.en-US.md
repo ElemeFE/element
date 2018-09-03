@@ -1,5 +1,137 @@
 ## Changelog
 
+### 2.4.6
+
+*2018-08-09*
+
+- Fixed Table not showing filter icon when `filters` is assigned empty array, #12165
+- Fixed Menu not saving active state when `collapse` is changed, #12178 (by @elfman)
+- Fixed Cascader not escaping special characters for Regexp, #12248
+- Fixed disabled RadioButton showing box-shadow when clicked, #12262
+- Fixed arrow key not effect when default value is `undefined`,#12322
+- Fixed query function of Select not debounced in multi mode, #12181
+- Fixed query keyword of Select disappearing in multi mode, #12304
+- Fixed incorrect width of Dialog when it is displayed in full screen, #12203
+- Fixed incorrect display of Main on IE, #12237
+- Fixed Input triggering two form validations, #12260
+- Fixed adding new Tree node causing nodes to disappear, #12256
+- Fixed Tree node not deleted after dragging, #12279
+- Fixed Popover not visible when InputNumber focuses, #12284
+- Added `popper-append-to-body` attribute for Autocomplete, #12241
+- Added `sync` modifier support for Pagination's `page-size` attribute, #12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- Fixed Table setting `class-name` does not work for `expand` column, #12006
+- Added `toggleAllSelection` method for Table, #12047
+- Fixed wrong position of suffix slot when Input contains Select, #12108 
+- Fixed `line-height` of Option unable to set, #12120
+- Fixed TimeSelect with default value of `null` could not be assigned after executing `resetField`, #12010
+- Fixed keydown event which is not arrow key does not work in Tree, #12008
+- Fixed parent node checked in lazy mode, #12106
+- Added `includeHalfChecked` parameter for getCheckedNodes of Tree, #12014
+
+### 2.4.4
+
+*2018-07-13*
+
+- Fixed triggering Select validation after Form resetting, #11837
+- Fixed wrong position of Input `suffix` slot when `suffix` slot with `append` slot, #11951
+- Fixed clearable Input still displaying the clear icon when readonly, #11967
+- Fixed Tree node checked when it's disabled, #11847
+- Fixed Tree's `default-checked-keys` not working, #11971
+- Fixed `empty-text` not visible when Tree node filtered, #11971
+- Fixed the position of oversized `empty-text` in Table, #11965
+- Fixed Table row not be unhighlighted when `current-row-key` is assigned to `null`, #11866
+- Fixed showing filter dropdown when `filters` is an empty array, #11864
+- Fixed Radio's label does not stop event propagation, #11912
+
+### 2.4.3
+
+*2018-07-03*
+
+- Fixed `allow-drop` not working properly when Tree nodes have a custom height, #11797
+- Now you can pass a parameter to the `clearValidate` method of Form, specifying which FormItems' validation results need to be cleared, #11821
+- Added `distinguishCancelAndClose` attribute for MessageBox, #11831
+
+### 2.4.2
+
+*2018-06-26*
+
+- Now `class-name` and `label-class-name` of Table are reactive, #11626
+- Fixed Table still highlighting clicked row when `highlight-current-row` is `false`, #11646
+- Fixed a style bug of ButtonGroup when it has only one `round` or `circle` Button, #11605
+- Fixed style of page size Select of Pagination, #11622
+- Fixed Menu's `open` method error when `collapse` is dynamically changed, #11646
+- Added `activeName` and `oldActiveName` parameters to the before-leave hook of Tabs, #11713
+- Fixed Cascader focused after outside clicked, #11588
+- Fixed Cascader not closing when option is clicked when `change-on-select` is true, #11623
+- Now updating Select's value programmatically will trigger form validation, #11672
+
+### 2.4.1
+
+*2018-06-08*
+
+- Removed Autocomplete's duplicate type declaration, #11388
+- Fixed Select's dropdown arrow style in FireFox when nested in Form, #11427
+- Fixed clear icon of Select still showing when the initial value is `null`, #11460
+- Fixed disabled radio showing box-shadow when clicked, #11462
+- Added `iconClass` attribute for MessageBox, #11499
+- Added `stretch` attribute for Tabs, #11476
+- Fixed rendering order issue of TabPane when Tabs is `lazy`, #11461
+- Fixed Table not retaining current highlight row when expanded, #11464
+- Fixed focusing state when `before-leave` returns a resolved promise, #11386
+- Fixed disabled Popover still creating poppers, #11426
+- Fixed Tree's endless loop when a new node is added in lazy mode, #11430 (by @wangjingf)
+- Added `closed` event for Dialog, #11490
+
+### 2.4.0 Fullerene
+
+*2018-05-28*
+
+#### New features
+- General
+  - Dev tool and bundler is switched to native webpack, #11216
+  - Now you can globally set the initial z-index of popups, #11257
+- Autocomplete
+  - Added `hide-loading` attribute, #11260
+- Button
+  - Now you can use the `size` attribute on circle buttons to control their sizes, #11275
+- InputNumber
+  - Added `precision` attribute, #11281
+- Tabs
+  - Added `before-leave` attribute, #11259
+  - Added `lazy` attribute, #11167（by @Kingwl）
+- Table
+  - Added `sort` method to manually sort the table, #11311
+
+#### Bug fixes
+- Input
+  - Fixed an issue that causes a re-render when using the Chinese IME to quickly input text, #11235 (by @STLighter)
+- Popover
+  - Fixed the console error when the triggering element is Radio or Checkbox, #11265
+- Breadcrumb
+  - Fixed the `to` attribute not supporting dynamic update, #11286
+- Upload
+  - Fixed the console error when a File is resolved in the returned Promise of the `beforeUpload` method, #11297 (by @qusiba)
+- Tooltip
+  - Fixed arrow not positioned correctly when content is empty, #11335
+- Autocomplete
+  - Fixed incorrect input suggestions after deleting keyword quickly, #11323
+- ColorPicker
+  - Fixed `active-change` event incorrectly triggering when picker dropdown is closed, #11304
+- Table
+  - Fixed style error of oversized filter panel, #11314
+  - Fixed currently selected row not retained when the table is sorted, #11348
+- Checkbox
+  - Fixed single checkbox not supporting validation, #11271
+- Radio
+  - Fixed disabled Radio still being selected when pressing space key, #11303
+- MessageBox
+  - Fixed the `el-popup-parent--hidden` class not removed when opening MessageBox in succession, #11371
+
 ### 2.3.9
 
 *2018-05-18*

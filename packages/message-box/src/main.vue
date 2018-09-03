@@ -12,8 +12,8 @@
         <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
             <div
-              :class="['el-message-box__status', typeClass]"
-              v-if="typeClass && center">
+              :class="['el-message-box__status', icon]"
+              v-if="icon && center">
             </div>
             <span>{{ title }}</span>
           </div>
@@ -22,15 +22,15 @@
             class="el-message-box__headerbtn"
             aria-label="Close"
             v-if="showClose"
-            @click="handleAction('cancel')"
-            @keydown.enter="handleAction('cancel')">
+            @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
+            @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
         <div class="el-message-box__content">
           <div
-            :class="['el-message-box__status', typeClass]"
-            v-if="typeClass && !center && message !== ''">
+            :class="['el-message-box__status', icon]"
+            v-if="icon && !center && message !== ''">
           </div>
           <div class="el-message-box__message" v-if="message !== ''">
             <slot>
@@ -132,8 +132,9 @@
     },
 
     computed: {
-      typeClass() {
-        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+      icon() {
+        const { type, iconClass } = this;
+        return iconClass || (type && typeMap[type] ? `el-icon-${ typeMap[type] }` : '');
       },
 
       confirmButtonClasses() {
@@ -172,7 +173,7 @@
 
       handleWrapperClick() {
         if (this.closeOnClickModal) {
-          this.handleAction('cancel');
+          this.handleAction(this.distinguishCancelAndClose ? 'close' : 'cancel');
         }
       },
 
@@ -295,6 +296,7 @@
         title: undefined,
         message: '',
         type: '',
+        iconClass: '',
         customClass: '',
         showInput: false,
         inputValue: null,
@@ -317,7 +319,8 @@
         callback: null,
         dangerouslyUseHTMLString: false,
         focusAfterClosed: null,
-        isOnComposition: false
+        isOnComposition: false,
+        distinguishCancelAndClose: false
       };
     }
   };
