@@ -1,6 +1,7 @@
 import AdvancedSearch from '../../packages/theme-chalk/src/icons/advanced-search.svg';
 import Aeroexpress from '../../packages/theme-chalk/src/icons/aeroexpress.svg';
 import Airplane from '../../packages/theme-chalk/src/icons/airplane.svg';
+import Alert from '../../packages/theme-chalk/src/icons/alert.svg';
 import ArrowBack from '../../packages/theme-chalk/src/icons/arrow-back.svg';
 import ArrowBoth from '../../packages/theme-chalk/src/icons/arrow-both.svg';
 import ArrowDownLong from '../../packages/theme-chalk/src/icons/arrow-down-long.svg';
@@ -77,12 +78,14 @@ import Pillows from '../../packages/theme-chalk/src/icons/pillows.svg';
 import Plus from '../../packages/theme-chalk/src/icons/plus.svg';
 import Pocket from '../../packages/theme-chalk/src/icons/pocket.svg';
 import Pram from '../../packages/theme-chalk/src/icons/pram.svg';
+import Question from '../../packages/theme-chalk/src/icons/question.svg';
 import Ramp from '../../packages/theme-chalk/src/icons/ramp.svg';
 import Repeat from '../../packages/theme-chalk/src/icons/repeat.svg';
 import SearchSmall from '../../packages/theme-chalk/src/icons/search-small.svg';
 import Search from '../../packages/theme-chalk/src/icons/search.svg';
 import SeatPerson from '../../packages/theme-chalk/src/icons/seat-person.svg';
 import Service from '../../packages/theme-chalk/src/icons/service.svg';
+import Settings from '../../packages/theme-chalk/src/icons/settings.svg';
 import Shower from '../../packages/theme-chalk/src/icons/shower.svg';
 import SingleBed from '../../packages/theme-chalk/src/icons/single-bed.svg';
 import Smoke from '../../packages/theme-chalk/src/icons/smoke.svg';
@@ -112,6 +115,7 @@ module.exports = {
   AdvancedSearch,
   Aeroexpress,
   Airplane,
+  Alert,
   ArrowBack,
   ArrowBoth,
   ArrowDownLong,
@@ -188,12 +192,14 @@ module.exports = {
   Plus,
   Pocket,
   Pram,
+  Question,
   Ramp,
   Repeat,
   SearchSmall,
   Search,
   SeatPerson,
   Service,
+  Settings,
   Shower,
   SingleBed,
   Smoke,
