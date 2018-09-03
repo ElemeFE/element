@@ -106,7 +106,7 @@
           left: 10px;
         }
       }
-      &.tm-switch__labtm--right {
+      &.tm-switch__label--right {
         span {
           right: 10px;
         }
@@ -114,8 +114,8 @@
     }
   }
 
-  & .labtm-fade-enter,
-  & .labtm-fade-leave-active {
+  & .label-fade-enter,
+  & .label-fade-leave-active {
     opacity: 0;
   }
 }
