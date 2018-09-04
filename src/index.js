@@ -63,6 +63,7 @@ import PriceInfo from '../packages/price-info/index.js';
 import Sidebar from '../packages/sidebar/index.js';
 import NavBar from '../packages/nav-bar/index.js';
 import Gallery from '../packages/gallery/index.js';
+import Switch from '../packages/switch/index.js';
 import ValueSwitcher from '../packages/value-switcher/index.js';
 import DatePickerJoined from '../packages/date-picker-joined/index.js';
 import CircularCountdown from '../packages/circular-countdown/index.js';
@@ -132,6 +133,7 @@ const components = [
   Sidebar,
   NavBar,
   Gallery,
+  Switch,
   ValueSwitcher,
   DatePickerJoined,
   CircularCountdown,
@@ -168,7 +170,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '1.2.5',
+  version: '1.2.6',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -236,6 +238,7 @@ module.exports = {
   Sidebar,
   NavBar,
   Gallery,
+  Switch,
   ValueSwitcher,
   DatePickerJoined,
   CircularCountdown
