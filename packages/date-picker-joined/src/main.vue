@@ -13,11 +13,8 @@
       ref="originPicker"
       :type="type"
       v-model="date">
-      <template slot="topBlock">
-        <slot name="topBlock"></slot>
-      </template>
-      <template slot="bottomBlock">
-        <slot name="bottomBlock"></slot>
+      <template v-for="(value, key) in $scopedSlots" slot-scope="props" :slot="key">
+        <slot v-bind="props" :name="key" />
       </template>
     </tm-date-picker>
   </div>

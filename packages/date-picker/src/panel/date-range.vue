@@ -113,6 +113,9 @@
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
+                <template v-for="(value, key) in $scopedSlots" slot-scope="props" :slot="key">
+                  <slot v-bind="props" :name="key" />
+                </template>
             </date-table>
           </div>
           <div class="tm-picker-panel__content tm-date-range-picker__content is-right">
@@ -145,6 +148,9 @@
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
+                <template v-for="(value, key) in $scopedSlots" slot-scope="props" :slot="key">
+                  <slot v-bind="props" :name="key" />
+                </template>
             </date-table>
           </div>
         </div>

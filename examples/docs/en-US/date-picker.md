@@ -106,6 +106,32 @@ Use Date Picker for date input.
 
 ```html
 <tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4"/>
+```
+
+:::
+
+Use slots `cell` to extend DatePicker's cell.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4">
+ /*
+  * @typedef {Object} props
+  *
+  * @prop {string} text - date
+  * @prop {number} row
+  * @prop {number} column
+  * @prop {'today'|'normal'|'prev-month'|'next-month'} type
+  * @prop {boolean} start
+  * @prop {boolean} end
+  * @prop {boolean} inRange
+  * @prop {boolean} disabled
+  */
+  <b slot="cell" slot-scope="props" style="color: red">
+    +{{ props.text }}
+  </b>
+</tm-date-picker>
 
 ```
 

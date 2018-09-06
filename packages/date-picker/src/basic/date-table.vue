@@ -20,7 +20,9 @@
         :class="getCellClasses(cell)">
         <div>
           <span>
-            {{ cell.text }}
+            <slot name="cell" v-bind="cell">
+              {{ cell.text }}
+            </slot>
           </span>
         </div>
       </td>
