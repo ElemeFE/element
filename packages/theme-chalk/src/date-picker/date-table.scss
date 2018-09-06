@@ -124,6 +124,8 @@
       left: 50%;
       transform: translateX(-50%);
       border-radius: 50%;
+      box-sizing: border-box;
+      border: $--datepicker-cell-border-width solid transparent;
     }
 
     &.next-month,
@@ -134,7 +136,7 @@
     &.today {
       position: relative;
       span {
-        color: $--color-primary;
+        color: $--color-blueberry;
         font-weight: bold;
       }
       &.start-date span,
@@ -144,10 +146,8 @@
     }
 
     &:not(.start-date):not(.end-date).available:hover {
-      color: $--color-white;
-
       span {
-        background-color: rgba($--datepicker-text-hover-color, 0.5);
+        border-color: $--datepicker-text-hover-color;
       }
     }
 
@@ -181,6 +181,7 @@
       height: $--datepicker-cell-size;
       width: $--datepicker-cell-size;
       background-color: $--datepicker-active-color;
+      box-sizing: border-box;
     }
 
     &.start-date div {
