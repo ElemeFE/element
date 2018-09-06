@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-tab-pane"
-    v-if="(!lazy || loaded) || active"
+    v-if="(!destroy && (!lazy || loaded)) || active"
     v-show="active"
     role="tabpanel"
     :aria-hidden="!active"
@@ -23,7 +23,8 @@
       name: String,
       closable: Boolean,
       disabled: Boolean,
-      lazy: Boolean
+      lazy: Boolean,
+      destroy: Boolean
     },
 
     data() {

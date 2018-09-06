@@ -529,6 +529,47 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('should work with destroy', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs">
+          <el-tab-pane label="用户管理" name="A" destroy>A</el-tab-pane>
+          <el-tab-pane label="配置管理" name="B" destroy>B</el-tab-pane>
+          <el-tab-pane label="角色管理" name="C" destroy>C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿"  name="D" destroy>D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      vm.$el.querySelector('.el-tabs__nav > #tab-D').click();
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(1);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-A')).to.be.equal(null);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-B')).to.be.equal(null);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-C')).to.be.equal(null);
+        expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).not.to.be.equal(null);
+
+        vm.$el.querySelector('.el-tabs__nav > #tab-B').click();
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(1);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-A')).to.be.equal(null);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).to.be.equal(null);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-C')).to.be.equal(null);
+          expect(vm.$el.querySelector('.el-tabs__content > #pane-B')).not.to.be.equal(null);
+          vm.$el.querySelector('.el-tabs__nav > #tab-D').click();
+          vm.$nextTick(() => {
+            expect(vm.$el.querySelector('.el-tabs__content').children.length).to.be.equal(1);
+            expect(vm.$el.querySelector('.el-tabs__content > #pane-A')).to.be.equal(null);
+            expect(vm.$el.querySelector('.el-tabs__content > #pane-B')).to.be.equal(null);
+            expect(vm.$el.querySelector('.el-tabs__content > #pane-C')).to.be.equal(null);
+            expect(vm.$el.querySelector('.el-tabs__content > #pane-D')).not.to.be.equal(null);
+            done();
+          });
+        });
+      });
+    }, 100);
+  });
   it('before leave', done => {
     vm = createVue({
       template: `
