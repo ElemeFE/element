@@ -155,6 +155,17 @@ Use slots `topBlock` and `bottomBlock` to extend DatePicker's popover.
 
 :::
 
+Use inline.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" inline default-value="2018-3-4"/>
+
+```
+
+:::
+
 ### DynamicPicker
 
 Use DynamicPicker for date input.

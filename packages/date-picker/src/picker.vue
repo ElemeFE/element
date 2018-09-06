@@ -1,4 +1,5 @@
 <template>
+  <div v-if="inline" ref="reference" />
   <tm-input
     class="tm-date-editor"
     :class="'tm-date-editor--' + type"
@@ -7,7 +8,7 @@
     :size="pickerSize"
     :id="inputId"
     :name="name"
-    v-if="!ranged"
+    v-else-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
@@ -352,6 +353,7 @@ export default {
   },
 
   props: {
+    inline: Boolean,
     size: String,
     format: String,
     valueFormat: String,
@@ -554,6 +556,11 @@ export default {
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
   },
 
+  mounted() {
+    if (this.inline) {
+      this.mountInlinePicker();
+    }
+  },
   methods: {
     disabledOldDateHandler(time) {
       return time.getTime() + 86400000 <= Date.now();
@@ -791,8 +798,14 @@ export default {
       });
     },
 
-    mountPicker() {
-      this.picker = new Vue(this.panel).$mount();
+    mountInlinePicker() {
+      this.mountPicker();
+      this.picker.value = this.parsedValue;
+      this.$el.appendChild(this.popperElm.children[0]);
+    },
+
+    mountPicker(el) {
+      this.picker = new Vue(this.panel).$mount(el);
       this.picker.$slots = this.$slots;
 
       // TODO: Danger! Do not do not repeat this trick, get fros vue sources https://git.io/fAE9Z
