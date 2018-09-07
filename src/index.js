@@ -36,7 +36,6 @@ import Breadcrumb from '../packages/breadcrumb/index.js';
 import BreadcrumbItem from '../packages/breadcrumb-item/index.js';
 import Form from '../packages/form/index.js';
 import FormItem from '../packages/form-item/index.js';
-import Help from '../packages/help/index.js';
 import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
@@ -70,6 +69,7 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
+import Help from '../packages/help/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -109,7 +109,6 @@ const components = [
   BreadcrumbItem,
   Form,
   FormItem,
-  Help,
   Tabs,
   TabPane,
   Tag,
@@ -140,6 +139,7 @@ const components = [
   Aside,
   Main,
   Footer,
+  Help,
   CollapseTransition
 ];
 
@@ -216,7 +216,6 @@ module.exports = {
   BreadcrumbItem,
   Form,
   FormItem,
-  Help,
   Tabs,
   TabPane,
   Tag,
@@ -248,7 +247,8 @@ module.exports = {
   Header,
   Aside,
   Main,
-  Footer
+  Footer,
+  Help
 };
 
 module.exports.default = module.exports;
