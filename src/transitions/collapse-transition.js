@@ -20,7 +20,7 @@ class Transition {
     } else {
       el.style.height = '';
     }
-    
+
     el.style.paddingTop = el.dataset.oldPaddingTop;
     el.style.paddingBottom = el.dataset.oldPaddingBottom;
     el.style.overflow = 'hidden';
