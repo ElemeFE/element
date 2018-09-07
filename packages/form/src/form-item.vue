@@ -9,7 +9,10 @@
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
     <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
-      <slot name="label">{{label + form.labelSuffix}}</slot>
+      <slot name="label">
+        {{label + form.labelSuffix}}
+      </slot>
+      <el-help :content="help"></el-help>
     </label>
     <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
@@ -34,9 +37,14 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
+  import ElHelp from 'element-ui/packages/help';
 
   export default {
     name: 'ElFormItem',
+
+    components: {
+      ElHelp
+    },
 
     componentName: 'ElFormItem',
 
@@ -70,7 +78,8 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      help: String
     },
     watch: {
       error: {

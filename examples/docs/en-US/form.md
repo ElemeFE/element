@@ -828,6 +828,20 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ```
 :::
 
+### Help
+
+`el-form-item` can use `help` attribute to add a `el-help` in the end of the label.
+
+:::demo The content of the `el-tooltip` is defined by the `help` attribute.
+```html
+<el-form label-width="120px">
+  <el-form-item label="Name" help="Your name on the ID card">
+    <el-input></el-input>
+  </el-form-item>
+</el-form>
+```
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -867,6 +881,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | boolean |  — | false |
+| help | suffix a help button with given string in tooltip | string | — | — |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |

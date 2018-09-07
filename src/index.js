@@ -36,6 +36,7 @@ import Breadcrumb from '../packages/breadcrumb/index.js';
 import BreadcrumbItem from '../packages/breadcrumb-item/index.js';
 import Form from '../packages/form/index.js';
 import FormItem from '../packages/form-item/index.js';
+import Help from '../packages/help/index.js';
 import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
@@ -108,6 +109,7 @@ const components = [
   BreadcrumbItem,
   Form,
   FormItem,
+  Help,
   Tabs,
   TabPane,
   Tag,
@@ -214,6 +216,7 @@ module.exports = {
   BreadcrumbItem,
   Form,
   FormItem,
+  Help,
   Tabs,
   TabPane,
   Tag,
