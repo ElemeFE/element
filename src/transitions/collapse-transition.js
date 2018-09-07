@@ -17,14 +17,12 @@ class Transition {
     el.dataset.oldOverflow = el.style.overflow;
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
-      el.style.paddingTop = el.dataset.oldPaddingTop;
-      el.style.paddingBottom = el.dataset.oldPaddingBottom;
     } else {
       el.style.height = '';
-      el.style.paddingTop = el.dataset.oldPaddingTop;
-      el.style.paddingBottom = el.dataset.oldPaddingBottom;
     }
-
+    
+    el.style.paddingTop = el.dataset.oldPaddingTop;
+    el.style.paddingBottom = el.dataset.oldPaddingBottom;
     el.style.overflow = 'hidden';
   }
 
