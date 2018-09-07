@@ -555,6 +555,7 @@ When picking a date range, you can assign the time part for start date and end d
 | prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
 | clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
 | disable-old-date | Disable select days before today | boolean | — | false |
+| inline | Render calendar without popover | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -583,3 +584,10 @@ When picking a date range, you can assign the time part for start date and end d
 |------|--------|-------|
 | focus | focus the Input component | — |
 | clear | clear data | — |
+
+### Slots and scopedSlots
+| name | type | Description |
+|------|--------|--------|-------|
+| cell | scopedSlot | Extends cell with calendar date<br><br>`@typedef {Object} props`<br>`@prop {string} text - date`<br>`@prop {number} row`<br>`@prop {number} column`<br>`@prop {'today'|'normal'|'prev-month'|'next-month'} type`<br>`@prop {boolean} start`<br>`@prop {boolean} end`<br>`@prop {boolean} inRange`<br>`@prop {boolean} disabled` |
+| topBlock | slot | Extends top place of popover |
+| bottomBlock | slot | Extends bottom place of popover |
