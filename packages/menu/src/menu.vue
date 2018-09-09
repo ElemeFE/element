@@ -306,6 +306,9 @@
         new Menubar(this.$el); // eslint-disable-line
       }
       this.$watch('items', this.updateActiveIndex);
+    },
+    beforeUpdate() {
+      this.items = {};
     }
   };
 </script>
