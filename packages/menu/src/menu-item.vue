@@ -104,6 +104,10 @@
       this.parentMenu.addItem(this);
       this.rootMenu.addItem(this);
     },
+    updated() {
+      this.parentMenu.addItem(this);
+      this.rootMenu.addItem(this);
+    },
     beforeDestroy() {
       this.parentMenu.removeItem(this);
       this.rootMenu.removeItem(this);
