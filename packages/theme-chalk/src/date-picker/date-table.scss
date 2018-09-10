@@ -8,23 +8,23 @@
   @include when(week-mode) {
     .tm-date-table__row {
       &:hover {
-        div {
+        & > div {
           background-color: $--datepicker-inrange-color;
         }
         td.available:hover {
           color: $--datepicker-color;
         }
-        td:first-child div {
+        td:first-child > div {
           margin-left: 5px;
           border-top-left-radius: 28px;
           border-bottom-left-radius: 28px;
         }
-        td:last-child div {
+        td:last-child > div {
           margin-right: 5px;
           border-top-right-radius: 28px;
           border-bottom-right-radius: 28px;
         }
-        .available ~ .available div {
+        .available ~ .available > div {
           &:before {
             content: '';
             position: absolute;
@@ -37,11 +37,11 @@
         }
       }
 
-      &.current div {
+      &.current > div {
         background-color: $--datepicker-inrange-color;
       }
 
-      .start-date ~ .available div {
+      .start-date ~ .available > div {
         &:before {
           content: '';
           position: absolute;
@@ -55,12 +55,12 @@
     }
   }
 
-  .prev-month + .in-range div {
+  .prev-month + .in-range > div {
     border-top-left-radius: 100%;
     border-bottom-left-radius: 100%;
   }
 
-  .in-range + .in-range div {
+  .in-range + .in-range > div {
     &:before {
       content: '';
       position: absolute;
@@ -72,7 +72,7 @@
     }
   }
 
-  .in-range + .next-month div {
+  .in-range + .next-month > div {
     &:before {
       content: '';
       position: absolute;
@@ -109,12 +109,12 @@
     position: relative;
     font-size: $--datepicker-cell-font;
 
-    & div {
+    & > div {
       height: $--datepicker-cell-size;
       box-sizing: border-box;
     }
 
-    & span {
+    & > div > span {
       display: inline-block;
       height: $--datepicker-cell-size;
       width: $--datepicker-cell-size;
@@ -135,48 +135,48 @@
 
     &.today {
       position: relative;
-      span {
+      & > div > span {
         color: $--color-blueberry;
         font-weight: bold;
       }
-      &.start-date span,
-      &.end-date span {
+      &.start-date > div > span,
+      &.end-date > div > span {
         color: $--color-white;
       }
     }
 
     &:not(.start-date):not(.end-date).available:hover {
-      span {
+      & > div > span {
         border-color: $--datepicker-text-hover-color;
       }
     }
 
     &.in-range {
-      div {
+      & > div {
         background-color: $--datepicker-inrange-color;
       }
-      &:first-of-type div {
+      &:first-of-type > div {
         border-top-left-radius: 100%;
         border-bottom-left-radius: 100%;
       }
-      &:last-of-type div {
+      &:last-of-type > div {
         border-top-right-radius: 100%;
         border-bottom-right-radius: 100%;
       }
     }
 
 
-    &.current:not(.disabled) span {
+    &.current:not(.disabled) > div > span {
       color: $--color-white;
       background-color: $--datepicker-active-color;
     }
-    &.start-date div,
-    &.end-date div {
+    &.start-date > div,
+    &.end-date > div {
       color: $--color-white;
     }
 
-    &.start-date span,
-    &.end-date span {
+    &.start-date > div > span,
+    &.end-date > div > span {
       display: inline-block;
       height: $--datepicker-cell-size;
       width: $--datepicker-cell-size;
@@ -184,19 +184,19 @@
       box-sizing: border-box;
     }
 
-    &.start-date div {
+    &.start-date > div {
       margin-left: 5px;
       border-top-left-radius: $--datepicker-cell-size;
       border-bottom-left-radius: $--datepicker-cell-size;
     }
 
-    &.end-date div {
+    &.end-date > div {
       margin-right: 5px;
       border-top-right-radius: $--datepicker-cell-size;
       border-bottom-right-radius: $--datepicker-cell-size;
     }
 
-    &.disabled div {
+    &.disabled > div {
       opacity: 1;
       cursor: not-allowed;
       color: $--color-text-placeholder;

@@ -809,7 +809,9 @@ export default {
       this.picker.$slots = this.$slots;
 
       // TODO: Danger! Do not do not repeat this trick, get fros vue sources https://git.io/fAE9Z
-      this.picker.$options._parentVnode = this.$options._parentVnode;
+      if (Object.keys(this.$scopedSlots || {}).length) {
+        this.picker.$options._parentVnode = this.$options._parentVnode;
+      }
 
       this.picker.defaultValue = this.defaultValue;
       this.picker.defaultTime = this.defaultTime;
