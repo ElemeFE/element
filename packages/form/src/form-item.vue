@@ -14,17 +14,21 @@
     <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div
-          v-if="validateState === 'error' && showMessage && form.showMessage"
-          class="el-form-item__error"
-          :class="{
-            'el-form-item__error--inline': typeof inlineMessage === 'boolean'
-              ? inlineMessage
-              : (elForm && elForm.inlineMessage || false)
-          }"
-        >
-          {{validateMessage}}
-        </div>
+        <slot 
+          v-if="validateState === 'error' && showMessage && form.showMessage" 
+          name="error" 
+          :error="validateMessage">
+          <div
+            class="el-form-item__error"
+            :class="{
+              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+                ? inlineMessage
+                : (elForm && elForm.inlineMessage || false)
+            }"
+          >
+            {{validateMessage}}
+          </div>
+        </slot>
       </transition>
     </div>
   </div>
