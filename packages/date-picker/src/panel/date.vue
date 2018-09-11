@@ -97,6 +97,9 @@
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :disabled-date="disabledDate">
+                <template v-for="(value, key) in $scopedSlots" slot-scope="props" :slot="key">
+                  <slot v-bind="props" :name="key" />
+                </template>
             </date-table>
             <year-table
               v-show="currentView === 'year'"

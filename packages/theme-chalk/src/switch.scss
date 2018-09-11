@@ -56,7 +56,10 @@
 
   @include e(core) {
     margin: 0;
-    display: inline-block;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 4px;
     position: relative;
     width: $--switch-width;
     height: $--switch-height;
@@ -67,14 +70,14 @@
     background: $--switch-off-color;
     cursor: pointer;
     transition: border-color .3s, background-color .3s;
-    vertical-align: middle;
 
-    & .tm-switch__button {
+    &:after {
+      content: "";
       position: absolute;
       top: 1px;
       left: 1px;
       border-radius: $--border-radius-circle;
-      transition: transform .3s;
+      transition: all .3s;
       width: $--switch-button-size;
       height: $--switch-button-size;
       background-color: $--color-white;
@@ -85,6 +88,10 @@
     .tm-switch__core {
       border-color: $--switch-on-color;
       background-color: $--switch-on-color;
+      &::after {
+        left: 100%;
+        margin-left: -$--switch-button-size - 1px;
+      }
     }
   }
 

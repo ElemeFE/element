@@ -221,6 +221,10 @@
               "title": "ValueSwitcher"
             },
             {
+              "path": "/switch",
+              "title": "Switch"
+            },
+            {
               "path": "/date-picker-joined",
               "title": "DatePicker Joined"
             },

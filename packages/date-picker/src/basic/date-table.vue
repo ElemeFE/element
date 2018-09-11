@@ -20,7 +20,9 @@
         :class="getCellClasses(cell)">
         <div>
           <span>
-            {{ cell.text }}
+            <slot name="cell" v-bind="cell">
+              {{ cell.text }}
+            </slot>
           </span>
         </div>
       </td>
@@ -40,6 +42,20 @@
     cloneDate.setHours(0, 0, 0, 0);
     return cloneDate.getTime();
   };
+
+// closest polifyll for IE
+  (function(e) {
+    e.closest = e.closest || function(css) {
+      let node = this;
+
+      while (node) {
+        if (node.matches(css)) return node;
+        else node = node.parentElement;
+      }
+
+      return null;
+    };
+  })(Element.prototype);
 
   export default {
     mixins: [Locale],
@@ -369,13 +385,7 @@
       },
 
       handleClick(event) {
-        let target = event.target;
-        if (target.tagName === 'SPAN') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
-          target = target.parentNode;
-        }
+        let target = event.target.closest('TD');
 
         if (target.tagName !== 'TD') return;
         if (hasClass(target, 'disabled') || hasClass(target, 'week')) return;
