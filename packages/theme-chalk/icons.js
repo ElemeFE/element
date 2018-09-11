@@ -92,6 +92,7 @@ import Smoke from '../../packages/theme-chalk/src/icons/smoke.svg';
 import Snow2 from '../../packages/theme-chalk/src/icons/snow-2.svg';
 import Snow from '../../packages/theme-chalk/src/icons/snow.svg';
 import Sofa from '../../packages/theme-chalk/src/icons/sofa.svg';
+import Square from '../../packages/theme-chalk/src/icons/square.svg';
 import Star from '../../packages/theme-chalk/src/icons/star.svg';
 import StatsPie from '../../packages/theme-chalk/src/icons/stats-pie.svg';
 import Success from '../../packages/theme-chalk/src/icons/success.svg';
@@ -206,6 +207,7 @@ module.exports = {
   Snow2,
   Snow,
   Sofa,
+  Square,
   Star,
   StatsPie,
   Success,
