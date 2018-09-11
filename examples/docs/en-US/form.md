@@ -882,7 +882,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ### Form-Item Scoped Slot
 | Name | Description |
 |------|--------|
-| — | error of form item, The scope parameter is { error } |
+| error | error of form item, The scope parameter is { error } |
 
 ### Form-Item Methods
 
