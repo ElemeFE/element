@@ -871,9 +871,9 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 
 ### Form Events
 
-| Nombre   | Descripción                                          | Parametros                                                                                             |
-| -------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| validate | se dispara después de validar un item del formulario | la propiedad (`prop name`) nombre del item del form que se esta validando, si la validacion paso o no. |
+| Nombre   | Descripción                                          | Parametros                                                   |
+| -------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| validate | se dispara después de validar un item del formulario | la propiedad (`prop name`) nombre del item del form que se esta validando, si la validacion paso o no, mensaje de error si existe. |
 
 ### Form-Item Atributos
 
