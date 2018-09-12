@@ -22,11 +22,8 @@ export declare class ElDrawer extends ElementUIComponent {
   /** Width of Dialog */
   width: string
 
-  /** Whether the Dialog takes up full screen */
-  fullscreen: boolean
-
-  /** Value for margin-top of Dialog CSS */
-  top: string
+  /** Position of Drawer */
+  placement: string
 
   /** Whether a mask is displayed */
   modal: boolean

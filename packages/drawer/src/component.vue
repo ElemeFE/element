@@ -1,28 +1,28 @@
 <template>
   <transition
-    name="dialog-fade"
+    :name="'drawer-move-' + placement"
     @after-leave="afterLeave">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-drawer__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
-        class="el-dialog"
-        :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
-        ref="dialog"
+        class="el-drawer"
+        :class="[{ 'el-drawer--center': center, 'el-drawer__placementleft': placement === 'left', 'el-drawer__placementright': placement === 'right' }, customClass]"
+        ref="drawer"
         :style="style">
-        <div class="el-dialog__header">
+        <div class="el-drawer__header">
           <slot name="title">
-            <span class="el-dialog__title">{{ title }}</span>
+            <span class="el-drawer__title">{{ title }}</span>
           </slot>
           <button
             type="button"
-            class="el-dialog__headerbtn"
+            class="el-drawer__headerbtn"
             aria-label="Close"
             v-if="showClose"
             @click="handleClose">
-            <i class="el-dialog__close el-icon el-icon-close"></i>
+            <i class="el-drawer__close el-icon el-icon-close"></i>
           </button>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
-        <div class="el-dialog__footer" v-if="$slots.footer">
+        <div class="el-drawer__body" v-if="rendered"><slot></slot></div>
+        <div class="el-drawer__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -81,9 +81,18 @@
         default: true
       },
 
-      width: String,
+      width: {
+        type: String,
+        default: '25%'
+      },
 
-      fullscreen: Boolean,
+      placement: {
+        type: String,
+        default: 'right',
+        validator(value) {
+          return ['left', 'right'].indexOf(value) !== -1;
+        }
+      },
 
       customClass: {
         type: String,
@@ -94,7 +103,9 @@
         type: String,
         default: '15vh'
       },
+
       beforeClose: Function,
+
       center: {
         type: Boolean,
         default: false
@@ -114,7 +125,7 @@
           this.$emit('open');
           this.$el.addEventListener('scroll', this.updatePopper);
           this.$nextTick(() => {
-            this.$refs.dialog.scrollTop = 0;
+            this.$refs.drawer.scrollTop = 0;
           });
           if (this.appendToBody) {
             document.body.appendChild(this.$el);
@@ -129,12 +140,7 @@
     computed: {
       style() {
         let style = {};
-        if (!this.fullscreen) {
-          style.marginTop = this.top;
-          if (this.width) {
-            style.width = this.width;
-          }
-        }
+        style.width = this.width;
         return style;
       }
     },

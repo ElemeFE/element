@@ -671,6 +671,16 @@ $--transfer-item-height: 30px !default;
 $--transfer-item-hover-background: $--color-text-secondary !default;
 $--transfer-filter-height: 32px !default;
 
+/* Drawer
+--------------------------*/
+$--drawer-background-color: $--color-primary-light-4 !default;
+$--drawer-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
+$--drawer-close-hover-color: $--color-primary !default;
+$--drawer-title-font-size: $--font-size-large !default;
+$--drawer-font-size: 14px !default;
+$--drawer-line-height: $--font-line-height-primary !default;
+$--drawer-padding-primary: 20px !default;
+
 /* Header
   --------------------------*/
 $--header-padding: 0 20px !default;
