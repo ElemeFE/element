@@ -106,6 +106,32 @@ Use Date Picker for date input.
 
 ```html
 <tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4"/>
+```
+
+:::
+
+Use slots `cell` to extend DatePicker's cell.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4">
+ /*
+  * @typedef {Object} props
+  *
+  * @prop {string} text - date
+  * @prop {number} row
+  * @prop {number} column
+  * @prop {'today'|'normal'|'prev-month'|'next-month'} type
+  * @prop {boolean} start
+  * @prop {boolean} end
+  * @prop {boolean} inRange
+  * @prop {boolean} disabled
+  */
+  <b slot="cell" slot-scope="props" style="color: red">
+    +{{ props.text }}
+  </b>
+</tm-date-picker>
 
 ```
 
@@ -124,6 +150,17 @@ Use slots `topBlock` and `bottomBlock` to extend DatePicker's popover.
         <tm-input value="What about bottom?">
     </div>
 </tm-date-picker>
+
+```
+
+:::
+
+Use inline.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" inline default-value="2018-3-4"/>
 
 ```
 
@@ -518,6 +555,7 @@ When picking a date range, you can assign the time part for start date and end d
 | prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
 | clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
 | disable-old-date | Disable select days before today | boolean | — | false |
+| inline | Render calendar without popover | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -546,3 +584,10 @@ When picking a date range, you can assign the time part for start date and end d
 |------|--------|-------|
 | focus | focus the Input component | — |
 | clear | clear data | — |
+
+### Slots and scopedSlots
+| name | type | Description |
+|------|--------|--------|-------|
+| cell | scopedSlot | Extends cell with calendar date<br><br>`@typedef {Object} props`<br>`@prop {string} text - date`<br>`@prop {number} row`<br>`@prop {number} column`<br>`@prop {'today'|'normal'|'prev-month'|'next-month'} type`<br>`@prop {boolean} start`<br>`@prop {boolean} end`<br>`@prop {boolean} inRange`<br>`@prop {boolean} disabled` |
+| topBlock | slot | Extends top place of popover |
+| bottomBlock | slot | Extends bottom place of popover |
