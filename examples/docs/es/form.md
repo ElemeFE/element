@@ -890,3 +890,8 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | ---------- | ---------------------------------------- | ---------- |
 | resetField | restablecer campo actual y eliminar resultado de validación | —          |
 | clearValidate | elimina el estado de la validacion de un campo | - |
+
+### Form-Item Events
+| Nombre   | Descripción                                          | Parametros                                                   |
+|----------- |------------ |----------- |
+| error   | se activa cuando se produce un error de validación en este elemento de formulario | una matriz de nombres de campo y errores registrados en ellos |
