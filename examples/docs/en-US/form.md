@@ -139,6 +139,9 @@
       onRuleFormSubmit() {
         console.log('onRuleFormSubmit');
       },
+      onError(errors) {
+        console.log('Field errors', errors)
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -418,12 +421,14 @@ Depending on your design, there are several different ways to align your label e
 ### Validation
 
 Form component allows you to verify your data, helping you find and correct errors.
+Can also listen to errors on a particular form element by listening to the error event on `Form-Item`.
 
-:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
+
+:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator). 
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-  <el-form-item label="Activity name" prop="name">
+  <el-form-item @error="onError" label="Activity name" prop="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone" prop="region">
@@ -523,7 +528,10 @@ Form component allows you to verify your data, helping you find and correct erro
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      }
+      },
+      onError(errors) {
+        console.log('Field errors', errors)
+      },
     }
   }
 </script>
@@ -885,3 +893,8 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | ---- | ---- | ---- |
 | resetField | reset current field and remove validation result | — |
 | clearValidate | remove validation status of the field | -
+
+### Form-Item Events
+| Event Name | Description | Parameters |
+|----------- |------------ |----------- |
+| error   | triggers when a validation error occurs on this form item | an array of field names and errors registered on them |
