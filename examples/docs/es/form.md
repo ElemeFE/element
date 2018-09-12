@@ -884,6 +884,12 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | —      | contenido del Form Item  |
 | label  | contenido de la etiqueta |
 
+### Form-Item Scoped Slot
+| Nombre | Descripción |
+|------|--------|
+| error | error del elemento del formulario, El parámetro del alcance es {error} |
+
+
 ### Form-Item Metodo
 
 | Metodo     | Descripción                              | Parametros |
