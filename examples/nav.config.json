@@ -243,6 +243,10 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer 抽屉"
             }
           ]
         }
@@ -493,6 +497,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
@@ -743,6 +751,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
