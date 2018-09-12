@@ -41,6 +41,10 @@
       validateOnRuleChange: {
         type: Boolean,
         default: true
+      },
+      requiredAsterisk: {
+        type: Boolean,
+        default: true
       }
     },
     watch: {
