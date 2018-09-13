@@ -879,9 +879,14 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | — | content of Form Item |
 | label | content of label |
 
+### Form-Item Scoped Slot
+|      Name     | Description |
+|---------------|-------------|
+|      error    | Custom content to display validation message. The scope parameter is { error } |
+
 ### Form-Item Methods
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | resetField | reset current field and remove validation result | — |
-| clearValidate | remove validation status of the field | -
+| clearValidate | remove validation status of the field | - |

@@ -867,6 +867,11 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | — | Form Item 的内容 |
 | label | 标签文本的内容 |
 
+### Form-Item Scoped Slot
+|  name  |   说明  |
+|--------|--------|
+|  error | 自定义表单校验信息的显示方式，参数为 { error } |
+
 ### Form-Item Methods
 
 | 方法名      | 说明          | 参数
