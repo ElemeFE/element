@@ -139,7 +139,7 @@
       }
     },
     watch: {
-      defaultActive: 'updateActiveIndex',
+      defaultActive: 'defaultActiveChanged',
 
       defaultOpeneds(value) {
         if (!this.collapse) {
@@ -153,8 +153,15 @@
       }
     },
     methods: {
+      defaultActiveChanged(val) {
+        const item = this.items[val];
+        this.setActiveItem(item);
+      },
       updateActiveIndex(val) {
         const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive];
+        this.setActiveItem(item);
+      },
+      setActiveItem(item) {
         if (item) {
           this.activeIndex = item.index;
           this.initOpenedMenu();
@@ -162,7 +169,6 @@
           this.activeIndex = null;
         }
       },
-
       getMigratingConfig() {
         return {
           props: {
