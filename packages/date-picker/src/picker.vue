@@ -48,6 +48,7 @@
     v-else>
     <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
     <input
+      autocomplete="off"
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
       :disabled="pickerDisabled"
@@ -60,6 +61,7 @@
       class="el-range-input">
     <span class="el-range-separator">{{ rangeSeparator }}</span>
     <input
+      autocomplete="off"
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
       :disabled="pickerDisabled"
