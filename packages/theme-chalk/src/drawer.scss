@@ -1,0 +1,164 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+@import "common/popup";
+
+@include b(drawer) {
+  position: fixed;
+  margin: 0;
+  background: $--color-white;
+  box-shadow: $--drawer-box-shadow;
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+
+  @include e(placementleft) {
+    left: 0;
+  }
+
+  @include e(placementright) {
+    right: 0;
+  }
+
+  @include e(wrapper) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    margin: 0;
+  }
+
+  @include e(header) {
+    padding: $--drawer-padding-primary;
+    padding-bottom: 10px;
+  }
+
+  @include e(headerbtn) {
+    position: absolute;
+    top: $--drawer-padding-primary;
+    right: $--drawer-padding-primary;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: $--message-close-size;
+
+    .el-drawer__close {
+      color: $--color-info;
+    }
+
+    &:focus, &:hover {
+      .el-drawer__close {
+        color: $--color-primary;
+      }
+    }
+  }
+
+  @include e(title) {
+    line-height: $--drawer-line-height;
+    font-size: $--drawer-title-font-size;
+    color: $--color-text-primary;
+  }
+
+  @include e(body) {
+    padding: 30px 20px;
+    color: $--color-text-regular;
+    font-size: $--drawer-font-size;
+  }
+
+  @include e(footer) {
+    padding: $--drawer-padding-primary;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-top: 10px;
+    text-align: right;
+    box-sizing: border-box;
+  }
+
+  // 内容居中布局
+  @include m(center) {
+    text-align: center;
+
+    @include e(body) {
+      text-align: initial;
+      padding: 25px ($--drawer-padding-primary + 5px) 30px;
+    }
+
+    @include e(footer) {
+      text-align: inherit;
+    }
+  }
+}
+
+.drawer-move-left-enter-active {
+  animation: drawer-move-left-in .5s ease-out;
+}
+
+.drawer-move-left-leave-active {
+  animation: drawer-move-left-out .5s ease-in;
+}
+
+.drawer-move-right-enter-active {
+  animation: drawer-move-right-in .5s ease-out;
+}
+
+.drawer-move-right-leave-active {
+  animation: drawer-move-right-out .5s ease-in;
+}
+
+@keyframes drawer-move-left-in {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes drawer-move-left-out {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes drawer-move-right-in {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes drawer-move-right-out {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
