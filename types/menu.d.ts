@@ -41,6 +41,12 @@ export declare class ElMenu extends ElementUIComponent {
   /** Open the specified sub-menu */
   open (index: string): void
 
+  /** Open all sub-menu */
+  openAll (): void
+
   /** Close the specified sub-menu */
   close (index: string): void
+
+  /** Close all sub-menu */
+  closeAll (): void
 }

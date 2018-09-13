@@ -294,8 +294,19 @@
         const { indexPath } = this.submenus[index.toString()];
         indexPath.forEach(i => this.openMenu(i, indexPath));
       },
+      openAll() {
+        for (const indindex in this.submenus) {
+          const { indexPath } = this.submenus[indindex];
+          indexPath.forEach(i => this.openMenu(i, indexPath));
+        }
+      },
       close(index) {
         this.closeMenu(index);
+      },
+      closeAll() {
+        for (const indindex in this.submenus) {
+          this.closeMenu(indindex);
+        }
       }
     },
     mounted() {

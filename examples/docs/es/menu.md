@@ -316,7 +316,9 @@ NavMenu vertical puede ser colapsado.
 | Nombre de evento | Descripción                   | Parámetros                             |
 | ---------------- | ----------------------------- | -------------------------------------- |
 | open             | abre un sub-menu específico   | index: índice del sub-menu para abrir  |
+| openAll          | Expand all submenus           | -                                      |
 | close            | cierra un sub-menu específico | index: índice del sub-menu para cerrar |
+| closeAll         | Collapse all submenus         | -                                      |
 
 ### Eventos Menu 
 | Nombre de evento | Descripción                              | Parámetros                               |

@@ -315,7 +315,9 @@
 | 事件名称      | 说明    | 参数      |
 |---------- |-------- |---------- |
 | open  | 展开指定的 sub-menu | index: 需要打开的 sub-menu 的 index |
+| openAll  | 展开所有子菜单 | - |
 | close  | 收起指定的 sub-menu | index: 需要收起的 sub-menu 的 index |
+| closeAll  | 收起所有子菜单 | - |
 
 ### Menu Events
 | 事件名称      | 说明    | 回调参数      |

@@ -314,7 +314,9 @@ Vertical NavMenu could be collapsed.
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open  | open a specific sub-menu | index: index of the sub-menu to open |
+| openAll | Expand all submenus | - |
 | close  | close a specific sub-menu | index: index of the sub-menu to close |
+| closeAll | Collapse all submenus | - |
 
 ### Menu Events
 | Event Name | Description | Parameters |
