@@ -11,8 +11,8 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 2px;
-    background-color: $--color-primary;
+    height: $--tab-border-line-size-active;
+    background-color: $--tab-border-line-active-color;
     z-index: 1;
     transition: transform .3s cubic-bezier(.645,.045,.355,1);
     list-style: none;
@@ -26,7 +26,7 @@
     margin: 12px 0 9px 10px;
     border-radius: 3px;
     text-align: center;
-    font-size: 12px;
+    font-size: $--tab-buttons-font-size;
     color: #d3dce6;
     cursor: pointer;
     transition: all .15s;
@@ -36,7 +36,7 @@
     }
 
     &:hover {
-      color: $--color-primary;
+      color: $--tab-border-line-active-color;
     }
   }
   @include e(nav-wrap) {
@@ -50,8 +50,8 @@
       left: 0;
       bottom: 0;
       width: 100%;
-      height: 2px;
-      background-color: $--border-color-light;
+      height: $--tab-border-line-size;
+      background-color: $--tab-border-line-color;
       z-index: $--index-normal;
     }
 
@@ -67,7 +67,7 @@
     position: absolute;
     cursor: pointer;
     line-height: 44px;
-    font-size: 12px;
+    font-size: $--tab-buttons-font-size;
     color: $--color-text-secondary;
   }
   @include e(nav-next) {
@@ -99,9 +99,9 @@
     line-height: 40px;
     display: inline-block;
     list-style: none;
-    font-size: 14px;
+    font-size: $--tab-font-size;
     font-weight: 500;
-    color: $--color-text-primary;
+    color: $--tab-header-color;
     position: relative;
 
     &:focus, &:focus:active {
@@ -109,7 +109,7 @@
     }
 
     &:focus.is-active.is-focus:not(:active) {
-      box-shadow: 0 0 2px 2px #409eff inset;
+      box-shadow: 0 0 2px 2px $--tab-border-line-active-color inset;
       border-radius: 3px;
     }
 
@@ -130,11 +130,12 @@
     }
 
     @include when(active) {
-      color: $--color-primary;
+      // Text color when active
+      color: $--tab-header-color-active;
     }
 
     &:hover {
-      color: $--color-primary;
+      color: $--tab-header-color-hover;
       cursor: pointer;
     }
 
@@ -149,13 +150,13 @@
   }
   @include m(card) {
     > .el-tabs__header {
-      border-bottom: 1px solid $--border-color-light;
+      border-bottom: $--tab-border-line;
     }
     > .el-tabs__header .el-tabs__nav-wrap::after {
       content: none;
     }
     > .el-tabs__header .el-tabs__nav {
-      border: 1px solid $--border-color-light;
+      border: $--tab-border-line;
       border-bottom: none;
       border-radius: 4px 4px 0 0;
       box-sizing: border-box;
@@ -165,7 +166,7 @@
     }
     > .el-tabs__header .el-tabs__item .el-icon-close {
       position: relative;
-      font-size: 12px;
+      font-size: $--tab-buttons-font-size;
       width: 0;
       height: 14px;
       vertical-align: middle;
@@ -177,7 +178,7 @@
     }
     > .el-tabs__header .el-tabs__item {
       border-bottom: 1px solid transparent;
-      border-left: 1px solid $--border-color-light;
+      border-left: $--tab-border-line;
       transition: color .3s cubic-bezier(.645,.045,.355,1), padding .3s cubic-bezier(.645,.045,.355,1);
       &:first-child {
         border-left: none;
@@ -216,7 +217,7 @@
     }
     >.el-tabs__header {
       background-color: $--background-color-base;
-      border-bottom: 1px solid $--border-color-light;
+      border-bottom: $--tab-border-line;
       margin: 0;
     }
     > .el-tabs__header .el-tabs__nav-wrap::after {
@@ -229,13 +230,13 @@
       color: $--color-text-secondary;
 
       &.is-active {
-        color: $--color-primary;
+        color: $--tab-header-color-active;
         background-color: $--color-white;
         border-right-color: $--border-color-base;
         border-left-color: $--border-color-base;
       }
       &:not(.is-disabled):hover {
-        color: $--color-primary;
+        color: $--tab-header-color-active;
       }
       &.is-disabled {
         color: $--disabled-color-base;
@@ -376,16 +377,16 @@
       }
       .el-tabs__item.is-left {
         border-left: none;
-        border-right: 1px solid $--border-color-light;
+        border-right: $--tab-border-line;
         border-bottom: none;
-        border-top: 1px solid $--border-color-light;
+        border-top: $--tab-border-line;
       }
       .el-tabs__item.is-left:first-child {
-        border-right: 1px solid $--border-color-light;
+        border-right: $--tab-border-line;
         border-top: none;
       }
       .el-tabs__item.is-left.is-active {
-        border: 1px solid $--border-color-light;
+        border: $--tab-border-line;
         border-right-color: #fff;
         border-left: none;
         border-bottom: none;
@@ -400,7 +401,7 @@
 
       .el-tabs__nav {
         border-radius: 4px 0 0 4px;
-        border-bottom: 1px solid $--border-color-light;
+        border-bottom: $--tab-border-line;
         border-right: none;
       }
 
@@ -450,14 +451,14 @@
       }
       .el-tabs__item.is-right {
         border-bottom: none;
-        border-top: 1px solid $--border-color-light;
+        border-top: $--tab-border-line;
       }
       .el-tabs__item.is-right:first-child {
-        border-left: 1px solid $--border-color-light;
+        border-left: $--tab-border-line;
         border-top: none;
       }
       .el-tabs__item.is-right.is-active {
-        border: 1px solid $--border-color-light;
+        border: $--tab-border-line;
         border-left-color: #fff;
         border-right: none;
         border-bottom: none;
@@ -472,7 +473,7 @@
 
       .el-tabs__nav {
         border-radius: 0 4px 4px 0;
-        border-bottom: 1px solid $--border-color-light;
+        border-bottom: $--tab-border-line;
         border-left: none;
       }
     }

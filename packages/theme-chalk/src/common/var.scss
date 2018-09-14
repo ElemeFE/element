@@ -380,11 +380,17 @@ $--group-title-width: 66px !default;
 
 /* Tab
 -------------------------- */
-$--tab-font-size: $--font-size-base !default;
-$--tab-border-line: 1px solid #e4e4e4 !default;
-$--tab-header-color-active: $--color-text-secondary !default;
-$--tab-header-color-hover: $--color-text-regular !default;
-$--tab-header-color: $--color-text-regular !default;
+$--tab-font-size: 14px !default;
+$--tab-buttons-font-size: 12px !default;
+$--tab-border-line-color: $--border-color-light !default;
+$--tab-border-card-size: 1px !default;
+$--tab-border-line-size: 2px !default;
+$--tab-border-line-size-active: $--tab-border-line-size !default;
+$--tab-border-line: $--tab-border-card-size solid $--tab-border-line-color !default;
+$--tab-border-line-active-color: $--color-primary !default;
+$--tab-header-color: $--color-text-primary !default;
+$--tab-header-color-active: $--color-primary !default;
+$--tab-header-color-hover: $--color-primary !default;
 $--tab-header-fill-active: rgba($--color-black, 0.06) !default;
 $--tab-header-fill-hover: rgba($--color-black, 0.06) !default;
 $--tab-vertical-header-width: 90px !default;
