@@ -4,24 +4,24 @@
 
 *2018-09-14*
 
-- Fixed DatePicker not triggering form validation, #12328 #12348 
-- Fixed DatePicker throwing errors in multiple mode, #12347 
-- Fixed incorrect position of DatePicker spinner, #12415 (by @rang-ali)
-- Fixed automatic filling of DatePicker input box, #12521 (by @abdallanayer)
-- Fixed Input not highlighted in Cascader, #12341
-- Fixed wrong order of Tabpane, #12346 
-- Fixed incorrect position of ColorPicker cursor, #12376 (by @cnwhy)
-- Fixed the style of Submenu, #2457
-- Fixed not highlighted after Submenu is selected, #12479
-- Fixed incorrect values selected by Cascader, #12508 (by @huangjinqiang)
-- Fixed incorrect value of Pagination input box, #12525 
-- Fixed order that Pagination triggers events, #12530
-- Fixed Table Filter not displayed, #12539
-- Fixed Tree unable to delete nodes, #12684
-- Fixed height of Select Input changing in single mode, #12719
-- Fixed style of FormItem label in nested Form, #12748
-- Added `autocomplete` attribute for Input, deprecated `auto-complete`, #12514 (by @axetroy)
-- Added slots-scope for Form to display validation information, #12715 (by @YamenSharaf)
+- Corregido que DatePicker no activaba la validación del Form, #12328 #12348 
+- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347 
+- Corregida la posición incorrecta del spinner del DatePicker, #12415 (por @rang-ali)
+- Se ha corregido el llenado automático del input del DatePicker, #12521 (por @abdallanayer)
+- Corregida el input no resaltada en Cascader, #12341
+- Corregido el orden incorrecto de Tabpane, #12346 
+- Corregida la posición incorrecta del cursor de ColorPicker, #12376 (por @cnwhy)
+- Corregido el estilo del Submenú, #2457
+- Corregido el resaltado después de seleccionar el Submenú, #12479
+- Corregidos los valores incorrectos seleccionados por Cascader, #12508 (por @huangjinqiang)
+- Corregido el valor incorrecto del input de Paginación, #12525 
+- Se ha corregido el orden en que la paginación desencadena los eventos, #12530
+- Corregido que no se mostraba el Table Filter, #12539
+- Corregido Tree que era incapaz de borrar nodos, #12684
+- Corregida la altura de los Select Input que cambiaba en modo simple, #12719
+- Arreglado el estilo de la etiqueta FormItem en Form anidado, #12748
+- Añadido el atributo `autocomplete` para Input, obsoleto `auto-complete`, #12514 (por @axetroy)
+- Añadido el slots-scope de Form para mostrar la información de validación, #12715 (por @YamenSharaf)
 
 ### 2.4.6
 
