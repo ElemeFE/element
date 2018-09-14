@@ -823,7 +823,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | model   | 表单数据对象 | object      |                  —                |  — |
 | rules    | 表单验证规则 | object | — | — |
 | inline    | 行内表单模式 | boolean | — | false |
-| label-position | 表单域标签的位置 | string |  right/left/top            | right |
+| label-position | 表单域标签的位置，如果值为 left 或者 right 时，则需要设置 `label-width` | string |  right/left/top            | right |
 | label-width | 表单域标签的宽度，作为 Form 直接子元素的 form-item 会继承该值 | string | — | — |
 | label-suffix | 表单域标签的后缀 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
