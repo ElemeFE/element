@@ -840,7 +840,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | model                   | Datos del componente                     | object  | —                     | —           |
 | rules                   | Reglas de validación                     | object  | —                     | —           |
 | inline                  | Si el form es inline                     | boolean | —                     | false       |
-| label-position          | Posicion de la etiqueta                  | string  | left / right / top    | right       |
+| label-position          | Posicion de la etiqueta. Si esta 'left' o 'right', también se necesita el prop `label-width`                  | string  | left / right / top    | right       |
 | label-width             | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
 | label-suffix            | sufijo de la etiqueta                    | string  | —                     | —           |
 | show-message            | si mostrar o no el mensaje de error      | boolean | —                     | true        |
