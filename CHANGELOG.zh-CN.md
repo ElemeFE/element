@@ -1,5 +1,28 @@
 ## 更新日志
 
+### 2.4.7
+
+*2018-09-14*
+
+- 修复 DatePicker 未触发表单检验的问题，#12328，#12348
+- 修复 DatePicker 多选时报错的问题，#12347
+- 修复 DatePicker 选择时间时 spinner 位置不正确的问题，#12415 （by @rang-ali）
+- 修复 Datepicker 输入框自动填充的问题，#12521 （by @abdallanayer）
+- 修复 Cascader 中 Input 未高亮的问题，#12341
+- 修复 Tabpane 顺序不正确的问题，#12346
+- 修复 ColorPicker 取色光标位置不正确的问题，#12376 （by @cnwhy）
+- 调整 Submenu 的样式，#12457
+- 修复 Submenu 选中后没有高亮的问题，#12479
+- 修复 Cascader 选择值不正确的问题，#12508 （by @huangjinqiang）
+- 修复 Pagination 输入框值不正确的问题，#12525
+- 调整 Pagination 触发事件的顺序，#12530
+- 修复 Table 的 filter 不显示的问题，#12539
+- 修复 Tree 无法删除节点的问题，#12684
+- 修复 Select 在单选时 Input 高度变化的问题，#12719
+- 修复 Form 在嵌套时 label 显示不正确的问题，#12748
+- 新增 Input 的 autocomplete 属性，废弃 auto-complete 属性，#12514 （by @axetroy）
+- 新增 Form 的 slot-scope 展示表单校验信息，#12715 （by @YamenSharaf）
+
 ### 2.4.6
 
 *2018-08-09*
