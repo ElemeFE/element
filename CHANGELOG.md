@@ -1,6 +1,6 @@
 ## Changelog
 
-### 1.2.10
+### 1.2.11
 
   - Вернул стили Datepicker (для фктивной даты, hover и range)
 
