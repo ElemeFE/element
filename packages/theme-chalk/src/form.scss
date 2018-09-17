@@ -123,7 +123,7 @@
   }
 
   @include when(required) {
-    @include pseudo('not(.no-asterisk)') {
+    @include pseudo('not(.is-no-asterisk)') {
       & > .el-form-item__label:before {
         content: '*';
         color: $--color-danger;
