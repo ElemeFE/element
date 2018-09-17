@@ -146,8 +146,9 @@
     }
 
     &:not(.start-date):not(.end-date).available:hover {
+      color: $--color-white;
       & > div > span {
-        border-color: $--datepicker-text-hover-color;
+        background-color: rgba($--datepicker-text-hover-color, 0.5);
       }
     }
 
