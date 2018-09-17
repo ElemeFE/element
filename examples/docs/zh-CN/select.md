@@ -660,6 +660,7 @@
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
+| label-key | unique identity key name for label. Use only when value is an object and the label doesn't display | string | — | label |
 | size | 输入框尺寸 | string | medium/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
