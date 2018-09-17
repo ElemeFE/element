@@ -284,6 +284,7 @@
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | array | — | — |
 | data | Transfer 的数据源 | array[{ key, label, disabled }] | — | [ ] |
 | filterable | 是否可搜索 | boolean | — | false |
 | filter-placeholder | 搜索框占位符 | string | — | 请输入搜索内容 |

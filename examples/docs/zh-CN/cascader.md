@@ -1666,6 +1666,7 @@
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | boolean / string / number | — | — |
 | options | 可选项数据源，键名可通过 `props` 属性配置 | array | — | — |
 | props | 配置选项，具体见下表 | object | — | — |
 | value | 选中项绑定值   | array | — | — |
