@@ -826,7 +826,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | label-position | 表单域标签的位置 | string |  right/left/top            | right |
 | label-width | 表单域标签的宽度，作为 Form 直接子元素的 form-item 会继承该值 | string | — | — |
 | label-suffix | 表单域标签的后缀 | string | — | — |
-| required-asterisk | 是否必填字段的标签旁边应该有一个红色的星号（星号）| boolean | — | true |
+| hide-required-asterisk | 是否必填字段的标签旁边应该有一个红色的星号（星号）| boolean | — | false |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
 | inline-message  | 是否以行内形式展示校验信息 | boolean | — | false |
 | status-icon  | 是否在输入框中显示校验结果反馈图标 | boolean | — | false |

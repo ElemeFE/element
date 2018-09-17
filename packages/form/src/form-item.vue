@@ -5,7 +5,7 @@
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
       'is-required': isRequired || required,
-      'no-asterisk': elForm && elForm.requiredAsterisk === false
+      'no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">

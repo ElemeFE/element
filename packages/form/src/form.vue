@@ -42,9 +42,9 @@
         type: Boolean,
         default: true
       },
-      requiredAsterisk: {
+      hideRequiredAsterisk: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
     watch: {

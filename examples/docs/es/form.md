@@ -843,7 +843,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | label-position          | Posicion de la etiqueta                  | string  | left / right / top    | right       |
 | label-width             | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
 | label-suffix            | sufijo de la etiqueta                    | string  | —                     | —           |
-| required-asterisk       | si los campos obligatorios deben tener un asterisco rojo (estrella) al lado de sus etiquetas | boolean | — | true |
+| hide-required-asterisk       | si los campos obligatorios deben tener un asterisco rojo (estrella) al lado de sus etiquetas | boolean | — | false |
 | show-message            | si mostrar o no el mensaje de error      | boolean | —                     | true        |
 | inline-message          | si desea visualizar el mensaje de error inline con la posición del form item | boolean | —                     | false       |
 | status-icon             | si desea visualizar un icono que indique el resultado de la validación | boolean | —                     | false       |
