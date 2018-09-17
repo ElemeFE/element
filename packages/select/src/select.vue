@@ -152,12 +152,6 @@
   import NavigationMixin from './navigation-mixin';
   import { isKorean } from 'element-ui/src/utils/shared';
 
-  const sizeMap = {
-    'medium': 36,
-    'small': 32,
-    'mini': 28
-  };
-
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
 
@@ -319,6 +313,7 @@
         selected: this.multiple ? [] : {},
         inputLength: 20,
         inputWidth: 0,
+        initialInputHeight: 0,
         cachedPlaceHolder: '',
         optionsCount: 0,
         filteredOptionsCount: 0,
@@ -655,7 +650,7 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
-          const sizeInMap = sizeMap[this.selectSize] || 40;
+          const sizeInMap = this.initialInputHeight || 40;
           input.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
             : Math.max(
@@ -870,12 +865,17 @@
         this.currentPlaceholder = '';
       }
       addResizeListener(this.$el, this.handleResize);
+
+      const reference = this.$refs.reference;
+      if (reference && reference.$el) {
+        this.initialInputHeight = reference.$el.getBoundingClientRect().height;
+      }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
       this.$nextTick(() => {
-        if (this.$refs.reference && this.$refs.reference.$el) {
-          this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+        if (reference && reference.$el) {
+          this.inputWidth = reference.$el.getBoundingClientRect().width;
         }
       });
       this.setSelected();

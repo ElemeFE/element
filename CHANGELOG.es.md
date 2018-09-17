@@ -1,5 +1,28 @@
 ## Changelog
 
+### 2.4.7
+
+*2018-09-14*
+
+- Corregido que DatePicker no activaba la validación del Form, #12328 #12348 
+- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347 
+- Corregida la posición incorrecta del spinner del DatePicker, #12415 (por @rang-ali)
+- Se ha corregido el llenado automático del input del DatePicker, #12521 (por @abdallanayer)
+- Corregida el input no resaltada en Cascader, #12341
+- Corregido el orden incorrecto de Tabpane, #12346 
+- Corregida la posición incorrecta del cursor de ColorPicker, #12376 (por @cnwhy)
+- Corregido el estilo del Submenú, #2457
+- Corregido el resaltado después de seleccionar el Submenú, #12479
+- Corregidos los valores incorrectos seleccionados por Cascader, #12508 (por @huangjinqiang)
+- Corregido el valor incorrecto del input de Paginación, #12525 
+- Se ha corregido el orden en que la paginación desencadena los eventos, #12530
+- Corregido que no se mostraba el Table Filter, #12539
+- Corregido Tree que era incapaz de borrar nodos, #12684
+- Corregida la altura de los Select Input que cambiaba en modo simple, #12719
+- Arreglado el estilo de la etiqueta FormItem en Form anidado, #12748
+- Añadido el atributo `autocomplete` para Input, obsoleto `auto-complete`, #12514 (por @axetroy)
+- Añadido el slots-scope de Form para mostrar la información de validación, #12715 (por @YamenSharaf)
+
 ### 2.4.6
 
 *2018-08-09*
