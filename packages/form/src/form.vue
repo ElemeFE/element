@@ -102,7 +102,7 @@
         if (typeof callback !== 'function' && window.Promise) {
           promise = new window.Promise((resolve, reject) => {
             callback = function(valid) {
-              valid ? resolve(valid) : reject(valid);
+              resolve(valid);
             };
           });
         }
