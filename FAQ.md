@@ -203,7 +203,7 @@
 <details>
   <summary>Hice un clon del repositorio de `Element` pero no arranca. ¿Como lo resuelvo?</summary>
   
-  Primero, pro favor, asegúrese de usar la versión más corriente en la rama  `master` y que los archivos están en orden. Después, revise sí la versión de `Nodejs` es 4.0+ y `npm` debe ser 3.0+. Finalmente active el modo desarrollo:
+  Primero, por favor, asegúrese de usar la versión más actual en la rama  `master` y que los archivos están en orden. Después, revise sí la versión de `Nodejs` es 4.0+ y `npm` debe ser 3.0+. Finalmente active el modo desarrollo:
   
   ```bash
   npm run dev
