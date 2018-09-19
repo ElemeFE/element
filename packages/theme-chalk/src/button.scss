@@ -237,7 +237,12 @@
     & > .el-button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-left-color: hsla(0,0%,100%,.5);
+      
+      @each $type in (primary, success, warning, danger, info) {
+        &.el-button--#{$type} {
+          border-left-color: rgba($--color-white, 0.5);
+        }
+      }
     }
   }
 
