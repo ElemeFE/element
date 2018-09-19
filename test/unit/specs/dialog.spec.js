@@ -157,7 +157,9 @@ describe('Dialog', () => {
         <div>
           <el-dialog
             @open="handleOpen"
+            @opened="handleOpened"
             @close="handleClose"
+            @closed="handleClosed"
             :title="title"
             :visible.sync="visible">
             <span>这是一段信息</span>
@@ -170,14 +172,23 @@ describe('Dialog', () => {
           this.state = 'open';
         },
 
+        handleOpened() {
+          this.animationState = 'opened';
+        },
+
         handleClose() {
-          this.state = 'closed';
+          this.state = 'close';
+        },
+
+        handleClosed() {
+          this.animationState = 'closed';
         }
       },
 
       data() {
         return {
           state: '',
+          animationState: '',
           title: 'dialog test',
           visible: false
         };
@@ -186,12 +197,14 @@ describe('Dialog', () => {
     vm.visible = true;
     setTimeout(() => {
       expect(vm.state).to.equal('open');
+      expect(vm.animationState).to.equal('opened');
       vm.visible = false;
       setTimeout(() => {
-        expect(vm.state).to.equal('closed');
+        expect(vm.state).to.equal('close');
+        expect(vm.animationState).to.equal('closed');
         done();
-      }, 50);
-    }, 50);
+      }, 400);
+    }, 400);
   });
   it('click dialog to close', done => {
     vm = createVue({
