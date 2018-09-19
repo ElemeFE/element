@@ -29,6 +29,9 @@ export declare class ElFormItem extends ElementUIComponent {
   /** Controls the size of components in this form */
   size: ElementUIComponentSize
 
+  /** The content of the el-help */
+  help: string
+
   /** Reset current field and remove validation result */
   resetField (): void
 

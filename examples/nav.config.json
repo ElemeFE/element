@@ -243,6 +243,10 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/help",
+              "title": "Help 帮助"
             }
           ]
         }
@@ -493,6 +497,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/help",
+              "title": "Help"
             }
           ]
         }
@@ -743,6 +751,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/help",
+              "title": "Help"
             }
           ]
         }
