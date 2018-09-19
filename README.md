@@ -158,7 +158,7 @@ Spanish documentation is made possible by these community developers:
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 
-<img width="650" src="https://user-images.githubusercontent.com/10095631/42198577-587063dc-7ebb-11e8-892b-91e08f99ce1e.jpg" alt="donation">
+<img width="650" src="https://user-images.githubusercontent.com/14025786/44833997-5d7c4d80-ac62-11e8-8445-1dffec0eb13c.png" alt="donation">
 
 ## Backers
 

@@ -670,7 +670,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
-| auto-complete | the autocomplete attribute of select input | string | — | off |
+| autocomplete | the autocomplete attribute of select input | string | — | off |
+| auto-complete | @DEPRECATED in next major version | string | — | off |
 | placeholder | placeholder | string | — | Select |
 | filterable | whether Select is filterable | boolean | — | false |
 | allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |

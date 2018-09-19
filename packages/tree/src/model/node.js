@@ -287,7 +287,7 @@ export default class Node {
     let targetNode = null;
 
     for (let i = 0; i < this.childNodes.length; i++) {
-      if (this.childNodes[i] === data) {
+      if (this.childNodes[i].data === data) {
         targetNode = this.childNodes[i];
         break;
       }

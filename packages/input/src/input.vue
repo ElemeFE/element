@@ -27,7 +27,7 @@
         :type="type"
         :disabled="inputDisabled"
         :readonly="readonly"
-        :autocomplete="autoComplete"
+        :autocomplete="autoComplete || autocomplete"
         :value="currentValue"
         ref="input"
         @compositionstart="handleComposition"
@@ -149,9 +149,18 @@
         type: [Boolean, Object],
         default: false
       },
-      autoComplete: {
+      autocomplete: {
         type: String,
         default: 'off'
+      },
+      /** @Deprecated in next major version */
+      autoComplete: {
+        type: String,
+        validator(val) {
+          process.env.NODE_ENV !== 'production' &&
+            console.warn('[Element Warn][Input]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
+          return true;
+        }
       },
       validateEvent: {
         type: Boolean,
