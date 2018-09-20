@@ -16,6 +16,9 @@ const Message = function(options) {
       message: options
     };
   }
+
+  options = Object.assign({}, options);
+
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
 
