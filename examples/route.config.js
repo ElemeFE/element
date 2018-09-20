@@ -1,5 +1,6 @@
 import navConfig from './nav.config.json';
 import langs from './i18n/route.json';
+import teste from './teste.vue'
 
 const LOAD_MAP = {
   'zh-CN': name => {
@@ -138,6 +139,9 @@ route.push({
   path: '/play',
   name: 'play',
   component: require('./play/index.vue')
+}, {
+  path: '/teste',
+  component: teste
 });
 
 let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';

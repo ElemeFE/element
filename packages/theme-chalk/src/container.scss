@@ -1,6 +1,7 @@
 @import "mixins/mixins";
 
 @include b(container) {
+  background: red !important;
   display: flex;
   flex-direction: row;
   flex: 1;
