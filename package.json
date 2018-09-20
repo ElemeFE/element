@@ -11,7 +11,7 @@
   ],
   "typings": "types/index.d.ts",
   "scripts": {
-    "bootstrap": "yarn || npm i",
+    "bootstrap": "npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
@@ -70,7 +70,7 @@
     "babel-plugin-transform-vue-jsx": "^3.3.0",
     "babel-preset-es2015": "^6.14.0",
     "chai": "^3.5.0",
-    "cheerio": "^0.18.0",
+    "cheerio": "^0.22.0",
     "chokidar": "^1.7.0",
     "copy-webpack-plugin": "^4.1.1",
     "coveralls": "^2.11.14",
