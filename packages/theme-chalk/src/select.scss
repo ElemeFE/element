@@ -28,6 +28,11 @@
   }
 
   .el-input {
+    &.is-focus {
+      .el-select__caret {
+        transform: rotateZ(0deg);
+      }
+    }
     & .el-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
