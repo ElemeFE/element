@@ -1,4 +1,4 @@
-import dateUtil from 'element-ui/src/utils/date';
+import dateUtil from 'fecha';
 import { t } from 'element-ui/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
