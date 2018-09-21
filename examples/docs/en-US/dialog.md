@@ -309,5 +309,6 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open | triggers when the Dialog opens | — |
+| opened | triggers when the Dialog opening animation ends | — |
 | close | triggers when the Dialog closes | — |
 | closed | triggers when the Dialog closing animation ends | — |
