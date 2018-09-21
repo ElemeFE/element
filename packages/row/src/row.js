@@ -22,7 +22,7 @@ export default {
 
   computed: {
     style() {
-      let ret = {};
+      const ret = {};
 
       if (this.gutter) {
         ret.marginLeft = `-${this.gutter / 2}px`;
