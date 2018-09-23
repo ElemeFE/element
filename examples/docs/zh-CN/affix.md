@@ -1,3 +1,14 @@
+<script>
+  export default {
+    methods: {
+      getTarget() {
+        const el = window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
+        return el;
+      }
+    }
+  }
+</script>
+
 ## Affix 固钉
 
 将元素钉在固定位置，常用于顶部菜单或者侧边菜单
@@ -6,9 +17,22 @@
 
 :::demo 最简单的用法
 ```html
-<el-affix>
-  <el-button type="primary">固定在顶部</el-button>
-</el-affix>
+<template>
+  <el-affix :target="getTarget">
+    <el-button type="primary">固定在顶部</el-button>
+  </el-affix>
+</template>
+<script>
+  export default {
+    methods: {
+      getRef() {
+        const el = document.getElementsByClassName('page-component__scroll el-scrollbar')[0];
+        console.log(el);
+        return el;
+      }
+    }
+  }
+</script>
 ```
 :::
 

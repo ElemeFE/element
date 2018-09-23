@@ -18,6 +18,10 @@ export default {
     },
     offsetBottom: {
       type: Number
+    },
+    target: {
+      type: Function,
+      default: () => window
     }
   },
   data() {
@@ -32,16 +36,13 @@ export default {
     getScroll(target, top) {
       const prop = top ? 'pageYOffset' : 'pageXOffset';
       const method = top ? 'scrollTop' : 'scrollLeft';
-      let ret = target[prop];
-      if (typeof ret !== 'number') {
-        ret = window.document.documentElement[method];
-      }
+      let ret = target[prop] || target[method];
       return ret;
     },
     getOffset(element) {
       const rect = element.getBoundingClientRect();
-      const scrollTop = this.getScroll(window, true);
-      const scrollLeft = this.getScroll(window);
+      const scrollTop = this.getScroll(this.el, true);
+      const scrollLeft = this.getScroll(this.el);
       const docEl = window.document.body;
       const clientTop = docEl.clientTop || 0;
       const clientLeft = docEl.clientLeft || 0;
@@ -52,7 +53,7 @@ export default {
     },
     handleScroll() {
       const affixed = this.affixed;
-      const scrollTop = this.getScroll(window, true);
+      const scrollTop = this.getScroll(this.el, true);
       const elOffset = this.getOffset(this.$el);
       const windowHeight = window.innerHeight;
       const elHeight = this.$el.getElementsByTagName('div')[0].offsetHeight;
@@ -116,18 +117,23 @@ export default {
         type = 'bottom';
       }
       return type;
+    },
+    el() {
+      console.log(this.target());
+      return this.target();
     }
   },
   mounted() {
-    on(window, 'scroll', this.handleScroll);
-    on(window, 'resize', this.handleScroll);
+    console.log(this.el);
+    on(this.el, 'scroll', this.handleScroll);
+    on(this.el, 'resize', this.handleScroll);
     if (this.offsetBottom >= 0) {
       this.handleScroll();
     };
   },
   beforeDestroy() {
-    off(window, 'scroll', this.handleScroll);
-    off(window, 'resize', this.handleScroll);
+    off(this.el, 'scroll', this.handleScroll);
+    off(this.el, 'resize', this.handleScroll);
   }
 };
 </script>
