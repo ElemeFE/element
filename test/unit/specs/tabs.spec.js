@@ -223,19 +223,19 @@ describe('Tabs', () => {
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
 
       tabList[1].querySelector('.el-icon-close').click();
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(tabList.length).to.be.equal(2);
         expect(paneList.length).to.be.equal(2);
         expect(tabList[1].classList.contains('is-active')).to.be.true;
 
         vm.$refs.tabs.$el.querySelector('.el-tabs__new-tab').click();
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(tabList.length).to.be.equal(3);
           expect(paneList.length).to.be.equal(3);
           expect(tabList[2].classList.contains('is-active')).to.be.true;
           done();
-        });
-      });
+        }, 100);
+      }, 100);
     }, 100);
   });
   it('addable & closable', done => {
@@ -310,19 +310,19 @@ describe('Tabs', () => {
 
       vm.$refs.tabs.$el.querySelector('.el-tabs__new-tab').click();
 
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(tabList.length).to.be.equal(3);
         expect(paneList.length).to.be.equal(3);
         expect(tabList[2].classList.contains('is-active')).to.be.true;
 
         tabList[2].querySelector('.el-icon-close').click();
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(tabList.length).to.be.equal(2);
           expect(paneList.length).to.be.equal(2);
           expect(tabList[1].classList.contains('is-active')).to.be.true;
           done();
-        });
-      });
+        }, 100);
+      }, 100);
     }, 100);
   });
   it('closable in tab-pane', (done) => {
