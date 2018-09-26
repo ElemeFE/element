@@ -11,9 +11,8 @@
   vertical-align: middle;
   background-color: $--color-white;
   border-radius: $--msgbox-border-radius;
-  border: 1px solid $--border-color-lighter;
   font-size: $--msgbox-font-size;
-  box-shadow: $--box-shadow-light;
+  box-shadow: $--box-shadow-base;
   text-align: left;
   overflow: hidden;
   backface-visibility: hidden;
@@ -37,16 +36,22 @@
 
   @include e(header) {
     position: relative;
-    padding: $--msgbox-padding-primary;
-    padding-bottom: 10px;
+    padding: 0 $--msgbox-padding-primary;
+  }
+
+  .divider-bottom-modal{
+    width: 100%;
+    border-bottom: $--msgbox-border-divisor;
+    margin-top: $--msgbox-border-margin-top;
+    margin-bottom: $--msgbox-border-margin-bottom;
   }
 
   @include e(title) {
     padding-left: 0;
     margin-bottom: 0;
-    font-size: $--msgbox-font-size;
+    font-size: #{$--font-size-base + 20px};
     line-height: 1;
-    color: $--color-text-primary;
+    color: $--color-primary;
   }
 
   @include e(headerbtn) {
@@ -61,7 +66,7 @@
     cursor: pointer;
 
     .el-message-box__close {
-      color: $--color-info;
+      color: $--msgbox-icon-color-gray;
     }
 
     &:focus, &:hover {
@@ -77,6 +82,8 @@
     padding: 10px $--msgbox-padding-primary;
     color: $--msgbox-content-color;
     font-size: $--msgbox-content-font-size;
+    letter-spacing: 0.5px;
+    line-height: 2.8;
   }
 
   @include e(input) {
@@ -140,7 +147,7 @@
   }
 
   @include e(btns) {
-    padding: 5px 15px 0;
+    padding: 20px 15px 0;
     text-align: right;
 
     & button:nth-child(2) {

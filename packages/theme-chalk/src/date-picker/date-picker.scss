@@ -43,7 +43,7 @@
   }
 
   @include e(header) {
-    margin: 12px;
+    margin: 20px 20px 0 20px;
     text-align: center;
 
     @include m(bordered) {
@@ -63,8 +63,9 @@
     padding: 0 5px;
     line-height: 22px;
     text-align: center;
+    text-transform: uppercase;
     cursor: pointer;
-    color: $--color-text-regular;
+    color: $--datepicker-header-year;
 
     &:hover {
       color: $--datepicker-text-hover-color;

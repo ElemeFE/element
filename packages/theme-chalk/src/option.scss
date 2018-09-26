@@ -25,6 +25,7 @@
     }
 
     &.hover, &:hover {
+      color: $--color-white;
       background-color: $--select-option-hover-background;
     }
 

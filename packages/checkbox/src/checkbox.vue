@@ -59,11 +59,6 @@
 
   export default {
 
-    customClass:{
-      type: String,
-      default: 'el-checkbox-secondary'
-    },
-
     name: 'ElCheckbox',
 
     mixins: [Emitter],

@@ -128,7 +128,7 @@
     @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
   }
   @include m(secondary) {
-    @include button-variant-secondary($--button-secondary-color, $--button-secondary-fill, $--button-secondary-border);
+    @include button-variant($--button-secondary-color, $--button-secondary-fill, $--button-secondary-border);
   }
   @include m(success) {
     @include button-variant($--button-success-color, $--button-success-fill, $--button-success-border);
@@ -141,6 +141,14 @@
   }
   @include m(info) {
     @include button-variant($--button-info-color, $--button-info-fill, $--button-info-border);
+  }
+
+  @include m(primary-outline) {
+    @include button-variant-outline($--button-primary-outline-color, $--button-primary-outline-fill, $--button-primary-outline-border);
+  }
+
+  @include m(secondary-outline) {
+    @include button-variant-outline($--button-secondary-outline-color, $--button-secondary-outline-fill, $--button-secondary-outline-border);
   }
 
   @include m(link-primary) {

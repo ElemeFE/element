@@ -37,7 +37,7 @@
     transition: .3s background-color;
 
     &:hover {
-      background-color: $--scrollbar-hover-background-color;
+      background-color: $--scrollbar-background-color;
     }
   }
 
@@ -51,7 +51,7 @@
     transition: opacity 120ms ease-out;
 
     @include when(vertical) {
-      width: 6px;
+      width: 2px;
       top: 2px;
 
       > div {
@@ -60,7 +60,7 @@
     }
 
     @include when(horizontal) {
-      height: 6px;
+      height: 2px;
       left: 2px;
 
       > div {

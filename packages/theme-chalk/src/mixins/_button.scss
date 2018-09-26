@@ -71,9 +71,9 @@
   }
 }
 
-/** BUTTON SECONDARY */
+/** BUTTON OUTLINE */
 
-@mixin button-variant-secondary($color, $background-color, $border-color) {
+@mixin button-variant-outline($color, $background-color, $border-color) {
   color: $color;
   background-color: transparent;
   border-color: $border-color;

@@ -41,7 +41,54 @@
 					<el-option v-for="item in options":key="item.value":label="item.label":value="item.value"></el-option>
 				</el-select>
 
+				<div class="content-padding"></div>
+
+  				<el-select v-model="value9" multiple filterable remote reserve-keyword placeholder="Seleção por pesquisa" :remote-method="remoteMethod" :loading="loading" >
+    				<el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value">
+    				</el-option>
+  				</el-select>
+
 			</el-row>
+
+			<div class="content-paddingx5"></div>
+
+			<el-row>
+			
+			<!-- MODALS -->
+
+				<el-button type="primary" round @click="open4">MODAL</el-button>
+
+			</el-row>
+
+			<div class="content-paddingx5"></div>
+
+			<el-row>
+
+			<!-- TOOLTIPS -->	
+				
+				<el-tooltip class="item" effect="dark" content="Tooltip preto? Ou cinza escuro?" placement="top">
+      				<el-button>Tooltip dark</el-button>
+    			</el-tooltip>
+
+    			<el-tooltip class="item" effect="light" content="Tooltip branco? Ou cinza claro?" placement="top">
+      				<el-button>Tooltip light</el-button>
+    			</el-tooltip>
+
+			</el-row>
+
+			<div class="content-paddingx5">
+				
+			<el-row>
+				
+			<!-- DATEPICKER -->
+
+				<el-date-picker v-model="value_datepicker" type="date" placeholder="Selecione o dia"></el-date-picker>
+
+				<el-date-picker v-model="value_datetimepicker" type="datetime" placeholder="Selecione o dia"></el-date-picker>
+
+			</el-row>
+
+			</div>
 
 		</el-col>
 
@@ -60,14 +107,6 @@
 				<div class="content-padding"></div>
 
 				<el-row>
-					<el-button type="success" round >SUCESSO</el-button>
-					<el-button type="warning" round >ALERTA</el-button>
-					<el-button type="danger" round >PERIGO</el-button>
-				</el-row>
-
-				<div class="content-padding"></div>
-
-				<el-row>
 					<el-button icon="el-icon-plus" type="primary" round>PRIMÁRIO</el-button>
 					<el-button icon="el-icon-plus" type="secondary" round >SECUNDÁRIO</el-button>
 					<el-button icon="el-icon-plus" disabled round>DESABILITADO</el-button>
@@ -75,10 +114,18 @@
 
 				<div class="content-padding"></div>
 
+			<!-- BUTTONS OUTLINE -->	
+
 				<el-row>
-					<el-button icon="el-icon-plus" type="success" round>SUCESSO</el-button>
-					<el-button icon="el-icon-plus" type="warning" round>ALERTA</el-button>
-					<el-button icon="el-icon-plus" type="danger" round>PERIGO</el-button>
+					<el-button type="primary-outline" round >PRIMÁRIO</el-button>
+					<el-button type="secondary-outline" round >SECUNDÁRIO</el-button>
+				</el-row>
+
+				<div class="content-padding"></div>
+
+				<el-row>
+					<el-button icon="el-icon-plus" type="primary-outline" round>PRIMÁRIO</el-button>
+					<el-button icon="el-icon-plus" type="secondary-outline" round >SECUNDÁRIO</el-button>
 				</el-row>
 
 				<div class="content-padding"></div>
@@ -291,7 +338,59 @@
           title: 'Erro',
           message: 'Mensagem de Erro'
         });
+      },
+
+      // SELECT SEARCH
+
+      remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.options4 = this.list.filter(item => {
+              return item.label.toLowerCase()
+                .indexOf(query.toLowerCase()) > -1;
+            });
+          }, 200);
+        } else {
+          this.options4 = [];
+        }
+      },
+
+      // MODAL
+
+      open4() {
+        const h = this.$createElement;
+        this.$msgbox({
+          title: 'Título do Modal',
+          message: 'You don’t need to have a full time ecommerce business to earn a little extra money through your website. You don’t even need to be there all the time. All you need to do is wait for the day your advertisers will pay you.',
+          center: true,
+          roundButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'BUTTON',
+          cancelButtonText: 'CANCEL',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              instance.confirmButtonText = 'Loading...';
+              setTimeout(() => {
+                done();
+                setTimeout(() => {
+                  instance.confirmButtonLoading = false;
+                }, 300);
+              }, 3000);
+            } else {
+              done();
+            }
+          }
+        }).then(action => {
+          this.$message({
+            type: 'info',
+            message: 'action: ' + action
+          });
+        });
       }
+
     },
 
     data() {
@@ -326,9 +425,73 @@
           value: 'Option5',
           label: 'Option5'
         }],
-        value: ''
+        value: '',
+
+        // SELECT SEARCH
+
+        options4: [],
+        value9: [],
+        list: [],
+        loading: false,
+        states: ["Alabama", "Alaska", "Arizona",
+        "Arkansas", "California", "Colorado",
+        "Connecticut", "Delaware", "Florida",
+        "Georgia", "Hawaii", "Idaho", "Illinois",
+        "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota",
+        "Mississippi", "Missouri", "Montana",
+        "Nebraska", "Nevada", "New Hampshire",
+        "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Ohio",
+        "Oklahoma", "Oregon", "Pennsylvania",
+        "Rhode Island", "South Carolina",
+        "South Dakota", "Tennessee", "Texas",
+        "Utah", "Vermont", "Virginia",
+        "Washington", "West Virginia", "Wisconsin",
+        "Wyoming"],
+
+      	// DATEPICKER
+
+      	value_datepicker: '',
+
+      	// DATETIMEPICKER
+
+      	pickerOptions1: {
+          shortcuts: [{
+            text: 'Today',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: 'Yesterday',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: 'A week ago',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
+        },
+        value_datetimepicker: ''
+
       }
-    }
+
+    },
+
+    mounted() {
+
+   	  // SELECT SEARCH	
+      this.list = this.states.map(item => {
+        return { value: item, label: item };
+      });
+    },
 
   };
 

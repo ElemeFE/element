@@ -1,12 +1,10 @@
 @import "mixins/mixins";
 @import "common/var";
-@import "./popper";
+/** @import "./popper"; */ // RETIRAR SETA SUPERIOR DO MENU DROPDOWN
 
 @include b(select-dropdown) {
   position: absolute;
   z-index: #{$--index-top + 1};
-  border: $--select-dropdown-border;
-  border-radius: $--border-radius-base;
   background-color: $--select-dropdown-background;
   box-shadow: $--select-dropdown-shadow;
   box-sizing: border-box;

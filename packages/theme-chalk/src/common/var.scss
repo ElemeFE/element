@@ -33,7 +33,7 @@ $--color-warning: #F1D149 !default;
 $--color-danger: #F74759 !default;
 $--color-info: #93BCE5 !default;
 $--color-disabled: rgba(185,185,185,0.8) !default;
-$--color-disabled-primary: #94A4AD !default;
+$--color-disabled-primary: #B9B9B9 !default;
 $--color-disabled-secondary: #E4E4E4 !default;
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
@@ -76,6 +76,7 @@ $--border-color-extra-light: #f2f6fc !default;
 $--border-color-slider: #979797;
 $--border-color-disabled: #E4E4E4;
 $--border-color-disabled-secondary: #B9B9B9;
+$--border-color-modal: #F0F0F0;
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
 $--border-small: $--border-width-small $--border-style-base $--border-color-base !default;
@@ -86,7 +87,7 @@ $--border-radius-circle: 100% !default;
 
 /* Box-shadow
 -------------------------- */
-$--box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
+$--box-shadow-base: 0 2px 5px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
 $--box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
 $--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
 
@@ -237,7 +238,7 @@ $--radio-button-disabled-checked-fill: $--border-color-extra-light !default;
 /* Select
 -------------------------- */
 $--select-border-color-hover: $--border-color-hover !default;
-$--select-disabled-border: $--disabled-border-base !default;
+$--select-disabled-border: $--border-width-base $--border-style-base $--border-color-disabled-secondary !default;
 $--select-font-size: $--font-size-base !default;
 $--select-close-hover-color: $--color-text-secondary !default;
 
@@ -250,8 +251,8 @@ $--select-option-color: $--color-text-primary !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
 $--select-option-disabled-background: $--color-white !default;
 $--select-option-height: 34px !default;
-$--select-option-hover-background: $--background-color-base !default;
-$--select-option-selected: $--color-primary !default;
+$--select-option-hover-background: $--color-primary !default;
+$--select-option-selected: $--color-white !default;
 $--select-option-selected-hover: $--background-color-base !default;
 
 $--select-group-color: $--color-info !default;
@@ -285,14 +286,18 @@ $--alert-icon-large-size: 28px !default;
 
 /* Message Box
 -------------------------- */
-$--msgbox-width: 420px !default;
+$--msgbox-width: 600px !default;
 $--msgbox-border-radius: 4px !default;
 $--msgbox-font-size: $--font-size-large !default;
-$--msgbox-content-font-size: $--font-size-base !default;
-$--msgbox-content-color: $--color-text-regular !default;
+$--msgbox-content-font-size: #{$--font-size-base + 2px} !default;
+$--msgbox-content-color: $--color-text-primary !default;
 $--msgbox-error-font-size: 12px !default;
-$--msgbox-padding-primary: 15px !default;
+$--msgbox-padding-primary: 25px !default;
+$--msgbox-border-divisor: $--border-width-base $--border-style-base  $--border-color-modal;;
+$--msgbox-border-margin-top: 15px !default;
+$--msgbox-border-margin-bottom: 15px !default;
 
+$--msgbox-icon-color-gray: $--color-disabled-primary !default;
 $--msgbox-success-color: $--color-success !default;
 $--msgbox-info-color: $--color-info !default;
 $--msgbox-warning-color: $--color-warning !default;
@@ -433,19 +438,19 @@ $--link-button-padding-horizontal: 6px !default;
 $--button-medium-font-size: 14px !default;
 $--button-medium-font-weight: $--font-weight-primary !default;
 $--button-medium-border-radius: $--border-radius-base !default;
-$--button-medium-padding-vertical: 10px !default;
-$--button-medium-padding-horizontal: 20px !default;
+$--button-medium-padding-vertical: 9px !default;
+$--button-medium-padding-horizontal: 60px !default;
 
 $--button-small-font-size: 12px !default;
 $--button-small-font-weight: $--font-weight-secondary !default;
 $--button-small-border-radius: #{$--border-radius-base - 1} !default;
 $--button-small-padding-vertical: 9px !default;
-$--button-small-padding-horizontal: 15px !default;
+$--button-small-padding-horizontal: 20px !default;
 
 $--button-mini-font-size: 12px !default;
 $--button-mini-font-weight: $--font-weight-secondary !default;
 $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
-$--button-mini-padding-vertical: 7px !default;
+$--button-mini-padding-vertical: 9px !default;
 $--button-mini-padding-horizontal: 15px !default;
 
 $--button-default-color: $--color-text-regular !default;
@@ -461,8 +466,16 @@ $--button-primary-color: $--color-text-terciary !default;
 $--button-primary-fill: $--color-primary !default;
 
 $--button-secondary-border: $--color-secondary !default;
-$--button-secondary-color: $--color-text-secondary !default;
+$--button-secondary-color: $--color-text-terciary !default;
 $--button-secondary-fill: $--color-secondary !default;
+
+$--button-primary-outline-border: $--color-primary !default;
+$--button-primary-outline-color: $--color-primary !default;
+$--button-primary-outline-fill: $--color-primary !default;
+
+$--button-secondary-outline-border: $--color-secondary !default;
+$--button-secondary-outline-color: $--color-secondary !default;
+$--button-secondary-outline-fill: $--color-secondary !default;
 
 $--button-success-border: $--color-success !default;
 $--button-success-color: $--color-text-terciary !default;
@@ -559,8 +572,8 @@ $--popover-title-color: $--color-text-primary !default;
 
 /* Tooltip
 -------------------------- */
-$--tooltip-fill: $--color-text-primary !default;
-$--tooltip-color: $--color-white !default;
+$--tooltip-fill: #464646 !default;
+$--tooltip-color: $--color-text-terciary !default;
 $--tooltip-font-size: 12px !default;
 $--tooltip-border-color: $--color-text-primary !default;
 $--tooltip-arrow-size: 6px !default;
@@ -647,7 +660,8 @@ $--steps-padding: 20px !default;
 $--menu-item-font-size: $--font-size-base !default;
 $--menu-item-color: $--color-text-primary !default;
 $--menu-item-fill: $--color-white !default;
-$--menu-item-hover-fill: $--color-primary-light-9 !default;
+$--menu-item-hover-fill: $--color-primary !default;
+$--menu-item-hover-color: $--color-primary !default;
 
 /* Rate
 --------------------------*/
@@ -660,9 +674,11 @@ $--rate-icon-color: $--color-text-placeholder !default;
 /* DatePicker
 --------------------------*/
 $--datepicker-color: $--color-text-regular !default;
-$--datepicker-off-color: $--color-text-placeholder !default;
+$--datepicker-off-color: $--color-disabled-primary !default;
+$--datepicker-number-default: $--color-text-primary !default;
+$--datepicker-header-year: $--color-primary !default;
 $--datepicker-header-color: $--color-text-regular !default;
-$--datepicker-icon-color: $--color-text-primary !default;
+$--datepicker-icon-color: $--color-disabled-primary !default;
 $--datepicker-border-color: $--disabled-border-base !default;
 $--datepicker-inner-border-color: #e4e4e4 !default;
 $--datepicker-inrange-color: $--border-color-extra-light !default;
@@ -678,7 +694,7 @@ $--loading-fullscreen-spinner-size: 50px !default;
 
 /* Scrollbar
 --------------------------*/
-$--scrollbar-background-color: rgba($--color-text-secondary, .3) !default;
+$--scrollbar-background-color: $--color-primary !default;
 $--scrollbar-hover-background-color: rgba($--color-text-secondary, .5) !default;
 
 /* Carousel

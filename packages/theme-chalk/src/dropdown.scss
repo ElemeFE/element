@@ -1,7 +1,7 @@
 @import "mixins/mixins";
 @import "common/var";
 @import "button";
-@import "./popper";
+/** @import "./popper"; */ // RETIRAR SETA SUPERIOR DO MENU DROPDOWN
 
 @include b(dropdown) {
   display: inline-block;
