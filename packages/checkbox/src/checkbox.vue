@@ -61,7 +61,7 @@
 
     customClass:{
       type: String,
-      default: 'checkbox-secondary'
+      default: 'el-checkbox-secondary'
     },
 
     name: 'ElCheckbox',

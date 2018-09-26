@@ -121,8 +121,8 @@
 					
 				<!-- CHECKBOX -->
 
-					<el-checkbox v-model="checked" >Checkbox</el-checkbox>
-					<el-checkbox v-model="checked" class="checkbox-secondary">Checkbox</el-checkbox> 
+					<el-checkbox v-model="checked" type="el-checkbox-secondary">Checkbox</el-checkbox>
+					<el-checkbox v-model="checked" >Checkbox</el-checkbox> 
 					<el-checkbox v-model="checked2" disabled >Checkbox</el-checkbox>
 
 				</el-row>
