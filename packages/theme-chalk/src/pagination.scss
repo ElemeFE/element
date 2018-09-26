@@ -7,7 +7,7 @@
   white-space: nowrap;
   padding: 2px 5px;
   color: $--pagination-color;
-  font-weight: bold;
+  font-weight: regular;
   @include utils-clearfix;
 
   span:not([class*=suffix]),
@@ -67,14 +67,16 @@
   .btn-next {
     background: center center no-repeat;
     background-size: 16px;
+    font-weight:bold;
     background-color: $--pagination-fill;
     cursor: pointer;
     margin: 0;
     color: $--pagination-button-color;
+    padding-top:8px;
 
     .el-icon {
       display: block;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: bold;
     }
   }
@@ -249,7 +251,7 @@
 
   li {
     padding: 0 4px;
-    background: $--pagination-fill;
+    background: transparent;
     vertical-align: top;
     display: inline-block;
     font-size: $--pagination-font-size;
@@ -260,6 +262,7 @@
     box-sizing: border-box;
     text-align: center;
     margin: 0;
+    line-height:36px;
 
     &.btn-quicknext,
     &.btn-quickprev {
@@ -288,7 +291,11 @@
     }
 
     &.active {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
+      background-color: $--pagination-hover-fill;
+      min-width:36px;
+      height:36px;
+      border-radius: $--border-radius-circle;
       cursor: default;
     }
   }

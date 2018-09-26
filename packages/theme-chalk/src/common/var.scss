@@ -14,7 +14,7 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 $--color-white: #fff !default;
 $--color-black: #000 !default;
 
-$--color-primary: #409EFF !default;
+$--color-primary: #04537E !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -25,10 +25,16 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
-$--color-success: #67c23a !default;
-$--color-warning: #e6a23c !default;
-$--color-danger: #f56c6c !default;
-$--color-info: #909399 !default;
+$--color-secondary: #53B7A8 !default;
+$--color-terciary: #85CFCA !default;
+
+$--color-success: #7EC894 !default;
+$--color-warning: #F1D149 !default;
+$--color-danger: #F74759 !default;
+$--color-info: #93BCE5 !default;
+$--color-disabled: rgba(185,185,185,0.8) !default;
+$--color-disabled-primary: #94A4AD !default;
+$--color-disabled-secondary: #E4E4E4 !default;
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
 $--color-warning-light: mix($--color-white, $--color-warning, 80%) !default;
@@ -40,10 +46,13 @@ $--color-warning-lighter: mix($--color-white, $--color-warning, 90%) !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 
-$--color-text-primary: #303133 !default;
-$--color-text-regular: #606266 !default;
-$--color-text-secondary: #909399 !default;
-$--color-text-placeholder: #c0c4cc !default;
+/* Colors Text */
+
+$--color-text-primary: #3C3C3C !default;
+$--color-text-regular: #919191 !default;
+$--color-text-secondary: #53B7A8 !default;
+$--color-text-placeholder: #919191 !default;
+$--color-text-terciary: #FAFAFA !default;
 
 /* Link
 -------------------------- */
@@ -57,13 +66,20 @@ $--background-color-base: #f5f7fa !default;
 /* Border
 -------------------------- */
 $--border-width-base: 1px !default;
+$--border-width-small: 2px !default;
+$--border-width-medium: 3px !default;
 $--border-style-base: solid !default;
-$--border-color-base: #dcdfe6 !default;
+$--border-color-base: rgba(185,185,185,0.8) !default;
 $--border-color-light: #e4e7ed !default;
 $--border-color-lighter: #ebeef5 !default;
 $--border-color-extra-light: #f2f6fc !default;
+$--border-color-slider: #979797;
+$--border-color-disabled: #E4E4E4;
+$--border-color-disabled-secondary: #B9B9B9;
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
+$--border-small: $--border-width-small $--border-style-base $--border-color-base !default;
+$--border-medium: $--border-width-medium $--border-style-base $--border-color-base !default;
 $--border-radius-base: 4px !default;
 $--border-radius-small: 2px !default;
 $--border-radius-circle: 100% !default;
@@ -85,7 +101,8 @@ $--font-size-base: 14px !default;
 $--font-size-small: 13px !default;
 $--font-size-large: 18px !default;
 $--font-color-disabled-base: #bbb !default;
-$--font-weight-primary: 500 !default;
+$--font-weight-primary: 400 !default;
+$--font-weight-secondary: 700 !default
 $--font-line-height-primary: 24px !default;
 
 /* Size
@@ -100,9 +117,9 @@ $--index-popper: 2000 !default;
 
 /* Disable base
 -------------------------- */
-$--disabled-fill-base: $--background-color-base !default;
-$--disabled-color-base: $--color-text-placeholder !default;
-$--disabled-border-base: $--border-color-light !default;
+$--disabled-fill-base: $--color-disabled !default;
+$--disabled-color-base: $--color-disabled !default;
+$--disabled-border-base: $--color-disabled !default;
 
 /* Icon
 -------------------------- */
@@ -113,22 +130,30 @@ $--icon-color-base: $--color-info !default;
 -------------------------- */
 $--checkbox-font-size: 14px !default;
 $--checkbox-font-weight: $--font-weight-primary !default;
-$--checkbox-color: $--color-text-regular !default;
-$--checkbox-input-height: 14px !default;
-$--checkbox-input-width: 14px !default;
+$--checkbox-color: $--color-primary !default;
+$--checkbox-input-height: 16px !default;
+$--checkbox-input-width: 16px !default;
 $--checkbox-input-border-radius: $--border-radius-small !default;
 $--checkbox-input-fill: $--color-white !default;
-$--checkbox-input-border: $--border-base !default;
-$--checkbox-input-border-color: $--border-color-base !default;
+$--checkbox-input-border: $--border-width-base $--border-style-base $--color-primary !default;
+$--checkbox-input-border-color: $--color-primary !default;
 $--checkbox-icon-color: $--color-white !default;
 
-$--checkbox-disabled-input-border-color: $--border-color-base !default;
-$--checkbox-disabled-input-fill: #edf2fc !default;
-$--checkbox-disabled-icon-color: $--color-text-placeholder !default;
+$--checkbox-disabled-input-border-color: $--color-disabled-primary !default;
+$--checkbox-disabled-input-fill: transparent !default;
+$--checkbox-disabled-icon-color: $--fill-base !default;
 
-$--checkbox-disabled-checked-input-fill: $--border-color-extra-light !default;
-$--checkbox-disabled-checked-input-border-color: $--border-color-base !default;
-$--checkbox-disabled-checked-icon-color: $--color-text-placeholder !default;
+$--checkbox-primary-color: $--color-text-terciary;
+$--checkbox-primary-fill: $--color-primary;
+$--checkbox-primary-border: $--color-primary;
+
+$--checkbox-secondary-color: $--color-text-terciary;
+$--checkbox-secondary-fill: $--color-secondary;
+$--checkbox-secondary-border: $--color-secondary;
+
+$--checkbox-disabled-checked-input-fill: $--color-disabled-primary !default;
+$--checkbox-disabled-checked-input-border-color: $--color-disabled-primary !default;
+$--checkbox-disabled-checked-icon-color: $--fill-base !default;
 
 $--checkbox-checked-text-color: $--color-primary !default;
 $--checkbox-checked-input-border-color: $--color-primary !default;
@@ -163,22 +188,23 @@ $--checkbox-button-checked-border-color: $--color-primary !default;
 -------------------------- */
 $--radio-font-size: 14px !default;
 $--radio-font-weight: $--font-weight-primary !default;
-$--radio-color: $--color-text-regular !default;
-$--radio-input-height: 14px !default;
-$--radio-input-width: 14px !default;
+$--radio-color: $--color-primary !default;
+$--radio-color-disabled: $--color-disabled-primary !default;
+$--radio-input-height: 16px !default;
+$--radio-input-width: 16px !default;
 $--radio-input-border-radius: $--border-radius-circle !default;
 $--radio-input-fill: $--color-white !default;
-$--radio-input-border: $--border-base !default;
+$--radio-input-border: $--border-width-small $--border-style-base $--color-primary !default;
 $--radio-input-border-color: $--border-color-base !default;
 $--radio-icon-color: $--color-white !default;
 
-$--radio-disabled-input-border-color: $--disabled-border-base !default;
-$--radio-disabled-input-fill: $--disabled-fill-base !default;
-$--radio-disabled-icon-color: $--disabled-fill-base !default;
+$--radio-disabled-input-border-color: $--color-disabled-primary !default;
+$--radio-disabled-input-fill: $--color-disabled-primary !default;
+$--radio-disabled-icon-color: $--color-disabled-primary !default;
 
-$--radio-disabled-checked-input-border-color: $--disabled-border-base !default;
-$--radio-disabled-checked-input-fill: $--disabled-fill-base !default;
-$--radio-disabled-checked-icon-color: $--color-text-placeholder !default;
+$--radio-disabled-checked-input-border-color: $--color-disabled-primary !default;
+$--radio-disabled-checked-input-fill: $--color-disabled-primary !default;
+$--radio-disabled-checked-icon-color: $--color-disabled-primary !default;
 
 $--radio-checked-text-color: $--color-primary !default;
 $--radio-checked-input-border-color: $--color-primary !default;
@@ -218,9 +244,9 @@ $--select-close-hover-color: $--color-text-secondary !default;
 $--select-input-color: $--color-text-placeholder !default;
 $--select-multiple-input-color: #666 !default;
 $--select-input-focus-background: $--color-primary !default;
-$--select-input-font-size: 14px !default;
+$--select-input-font-size: 20px !default;
 
-$--select-option-color: $--color-text-regular !default;
+$--select-option-color: $--color-text-primary !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
 $--select-option-disabled-background: $--color-white !default;
 $--select-option-height: 34px !default;
@@ -233,7 +259,7 @@ $--select-group-height: 30px !default;
 $--select-group-font-size: 12px !default;
 
 $--select-dropdown-background: $--color-white !default;
-$--select-dropdown-shadow: $--box-shadow-light !default;
+$--select-dropdown-shadow: $--box-shadow-base !default;
 $--select-dropdown-empty-color: #999 !default;
 $--select-dropdown-max-height: 274px !default;
 $--select-dropdown-padding: 6px 0 !default;
@@ -242,17 +268,17 @@ $--select-dropdown-border: solid 1px $--border-color-light !default;
 
 /* Alert
 -------------------------- */
-$--alert-padding: 8px 16px !default;
+$--alert-padding: 14px 18px !default;
 $--alert-border-radius: $--border-radius-base !default;
-$--alert-title-font-size: 13px !default;
+$--alert-title-font-size: #{$--font-size-base + 2px} !default;
 $--alert-description-font-size: 12px !default;
-$--alert-close-font-size: 12px !default;
-$--alert-close-customed-font-size: 13px !default;
+$--alert-close-font-size: #{$--font-size-base + 2px} !default;
+$--alert-close-customed-font-size: #{$--font-size-base + 3px} !default;
 
-$--alert-success-color: $--color-success-lighter !default;
-$--alert-info-color: $--color-info-lighter !default;
-$--alert-warning-color: $--color-warning-lighter !default;
-$--alert-danger-color: $--color-danger-lighter !default;
+$--alert-success-color: $--color-success !default;
+$--alert-info-color: $--color-info !default;
+$--alert-warning-color: $--color-warning !default;
+$--alert-danger-color: $--color-danger !default;
 
 $--alert-icon-size: 16px !default;
 $--alert-icon-large-size: 28px !default;
@@ -283,6 +309,7 @@ $--message-close-color: $--color-text-placeholder !default;
 $--message-close-size: 16px !default;
 $--message-close-hover-color: $--color-text-secondary !default;
 
+$--message-default-color: $--color-text-terciary !default;
 $--message-success-color: $--color-success !default;
 $--message-info-color: $--color-info !default;
 $--message-warning-color: $--color-warning !default;
@@ -306,6 +333,7 @@ $--notification-title-color: $--color-text-primary !default;
 $--notification-close-color: $--color-text-secondary !default;
 $--notification-close-hover-color: $--color-text-regular !default;
 
+$--notification-default-color: $--color-text-terciary !default; 
 $--notification-success-color: $--color-success !default;
 $--notification-info-color: $--color-info !default;
 $--notification-warning-color: $--color-warning !default;
@@ -314,18 +342,19 @@ $--notification-danger-color: $--color-danger !default;
 /* Input
 -------------------------- */
 $--input-font-size: $--font-size-base !default;
-$--input-color: $--color-text-regular !default;
+$--input-color: $--color-text-primary !default;
+$--input-color-secondary: $--color-secondary !default;
 $--input-width: 140px !default;
 $--input-height: 40px !default;
-$--input-border: $--border-base !default;
+$--input-border: $--border-width-base $--border-style-base $--border-color-disabled-secondary !default;
 $--input-border-color: $--border-color-base !default;
 $--input-border-radius: $--border-radius-base !default;
 $--input-border-color-hover: $--border-color-hover !default;
-$--input-fill: $--color-white !default;
+$--input-fill: transparent !default;
 $--input-fill-disabled: $--disabled-fill-base !default;
 $--input-color-disabled: $--font-color-disabled-base !default;
 $--input-icon-color: $--color-text-placeholder !default;
-$--input-placeholder-color: $--color-text-placeholder !default;
+$--input-placeholder-color: $--color-text-regular !default;
 $--input-max-width: 314px !default;
 
 $--input-hover-border: $--border-color-hover !default;
@@ -334,10 +363,10 @@ $--input-clear-hover-color: $--color-text-secondary !default;
 $--input-focus-border: $--color-primary !default;
 $--input-focus-fill: $--color-white !default;
 
-$--input-disabled-fill: $--disabled-fill-base !default;
-$--input-disabled-border: $--disabled-border-base !default;
-$--input-disabled-color: $--disabled-color-base !default;
-$--input-disabled-placeholder-color: $--color-text-placeholder !default;
+$--input-disabled-fill: transparent !default;
+$--input-disabled-border: $--border-width-base $--border-style-base $--border-color-disabled-secondary !default;
+$--input-disabled-color: $--color-text-regular !default;
+$--input-disabled-placeholder-color: $--color-text-regular !default;
 
 $--input-medium-font-size: 14px !default;
 $--input-medium-height: 36px !default;
@@ -396,51 +425,68 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 $--button-font-size: 14px !default;
 $--button-font-weight: $--font-weight-primary !default;
 $--button-border-radius: $--border-radius-base !default;
-$--button-padding-vertical: 12px !default;
-$--button-padding-horizontal: 20px !default;
+$--button-padding-vertical: 8px !default;
+$--button-padding-horizontal: 12px !default;
+$--link-button-padding-vertical: 3px !default;
+$--link-button-padding-horizontal: 6px !default;
 
 $--button-medium-font-size: 14px !default;
+$--button-medium-font-weight: $--font-weight-primary !default;
 $--button-medium-border-radius: $--border-radius-base !default;
 $--button-medium-padding-vertical: 10px !default;
 $--button-medium-padding-horizontal: 20px !default;
 
 $--button-small-font-size: 12px !default;
+$--button-small-font-weight: $--font-weight-secondary !default;
 $--button-small-border-radius: #{$--border-radius-base - 1} !default;
 $--button-small-padding-vertical: 9px !default;
 $--button-small-padding-horizontal: 15px !default;
 
 $--button-mini-font-size: 12px !default;
+$--button-mini-font-weight: $--font-weight-secondary !default;
 $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
 $--button-mini-padding-vertical: 7px !default;
 $--button-mini-padding-horizontal: 15px !default;
 
 $--button-default-color: $--color-text-regular !default;
-$--button-default-fill: $--color-white !default;
+$--button-default-fill: $--color-text-terciary !default;
 $--button-default-border: $--border-color-base !default;
 
-$--button-disabled-color: $--color-text-placeholder !default;
-$--button-disabled-fill: $--color-white !default;
+$--button-disabled-color: $--color-text-terciary !default;
+$--button-disabled-fill: $--color-disabled !default;
 $--button-disabled-border: $--border-color-lighter !default;
 
 $--button-primary-border: $--color-primary !default;
-$--button-primary-color: $--color-white !default;
+$--button-primary-color: $--color-text-terciary !default;
 $--button-primary-fill: $--color-primary !default;
 
+$--button-secondary-border: $--color-secondary !default;
+$--button-secondary-color: $--color-text-secondary !default;
+$--button-secondary-fill: $--color-secondary !default;
+
 $--button-success-border: $--color-success !default;
-$--button-success-color: $--color-white !default;
+$--button-success-color: $--color-text-terciary !default;
 $--button-success-fill: $--color-success !default;
 
 $--button-warning-border: $--color-warning !default;
-$--button-warning-color: $--color-white !default;
+$--button-warning-color: $--color-text-terciary !default;
 $--button-warning-fill: $--color-warning !default;
 
 $--button-danger-border: $--color-danger !default;
-$--button-danger-color: $--color-white !default;
+$--button-danger-color: $--color-text-terciary !default;
 $--button-danger-fill: $--color-danger !default;
 
 $--button-info-border: $--color-info !default;
-$--button-info-color: $--color-white !default;
+$--button-info-color: $--color-text-terciary !default;
 $--button-info-fill: $--color-info !default;
+
+$--link-button-primary-border: $--color-primary !default;
+$--link-button-primary-color: $--color-primary !default;
+$--link-button-primary-fill: $--color-primary !default;
+
+$--link-button-secondary-border: $--color-secondary !default;
+$--link-button-secondary-color: $--color-text-secondary !default;
+$--link-button-secondary-fill: $--color-secondary !default;
 
 $--button-hover-tint-percent: 20% !default;
 $--button-active-shade-percent: 10% !default;
@@ -453,15 +499,15 @@ $--cascader-height: 200px !default;
 /* Switch
 -------------------------- */
 $--switch-on-color: $--color-primary !default;
-$--switch-off-color: $--border-color-base !default;
-$--switch-disabled-color: $--border-color-lighter !default;
-$--switch-disabled-text-color: $--color-text-placeholder !default;
+$--switch-off-color: $--color-disabled-primary !default;
+$--switch-disabled-color: $--color-disabled !default;
+$--switch-disabled-text-color: $--color-disabled!default;
 
 $--switch-font-size: $--font-size-base !default;
 $--switch-core-border-radius: 10px !default;
-$--switch-width: 40px !default;
-$--switch-height: 20px !default;
-$--switch-button-size: 16px !default;
+$--switch-width: 29px !default;
+$--switch-height: 16px !default;
+$--switch-button-size: 14px !default;
 
 /* Dialog
 -------------------------- */
@@ -487,14 +533,15 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 
 /* Pagination
 -------------------------- */
-$--pagination-font-size: 13px !default;
+$--pagination-font-size: 14px !default;
 $--pagination-fill: $--color-white !default;
 $--pagination-color: $--color-text-primary !default;
 $--pagination-border-radius: 3px !default;
-$--pagination-button-color: $--color-text-primary !default;
-$--pagination-button-width: 35.5px !default;
+$--pagination-button-color: $--color-primary !default;
+$--pagination-button-width: 50px !default;
 $--pagination-button-height: 28px !default;
-$--pagination-button-disabled-color: $--color-text-placeholder !default;
+$--pagination-button-disabled-color: $--color-disabled !default;
+$--pagination-button-disabled-color-secondary: $--color-disabled-secondary !default;
 $--pagination-button-disabled-fill: $--color-white !default;
 $--pagination-hover-fill: $--color-primary !default;
 $--pagination-hover-color: $--color-white !default;
@@ -556,7 +603,7 @@ $--tree-expand-icon-color: $--color-text-placeholder !default;
 
 /* Dropdown
 -------------------------- */
-$--dropdown-menu-box-shadow: $--box-shadow-light !default;
+$--dropdown-menu-box-shadow: $--box-shadow-base !default;
 $--dropdown-menuItem-hover-fill: $--color-primary-light-9 !default;
 $--dropdown-menuItem-hover-color: $--link-color !default;
 
@@ -577,14 +624,14 @@ $--card-padding: 20px !default;
 /* Slider
 --------------------------*/
 $--slider-main-background-color: $--color-primary !default;
-$--slider-runway-background-color: $--border-color-light !default;
+$--slider-runway-background-color: $--border-color-slider !default;
 $--slider-button-hover-color: mix($--color-primary, black, 97%) !default;
 $--slider-stop-background-color: $--color-white !default;
-$--slider-disable-color: $--color-text-placeholder !default;
+$--slider-disable-color: $--border-color-disabled !default;
 
-$--slider-margin: 16px 0 !default;
-$--slider-border-radius: 3px !default;
-$--slider-height: 6px !default;
+$--slider-margin: 10px 0 !default;
+$--slider-border-radius: 0 !default;
+$--slider-height: 2px !default;
 $--slider-button-size: 16px !default;
 $--slider-button-wrapper-size: 36px !default;
 $--slider-button-wrapper-offset: -15px !default;

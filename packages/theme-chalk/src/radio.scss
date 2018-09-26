@@ -13,12 +13,13 @@
   white-space: nowrap;
   outline: none;
   font-size: $--font-size-base;
+
   @include utils-user-select(none);
 
   @include when(bordered) {
     padding: $--radio-bordered-padding;
     border-radius: $--border-radius-base;
-    border: $--border-base;
+    border: $--border-width-small $--border-style-base $--border-color-base; 
     box-sizing: border-box;
     height: $--radio-bordered-height;
 
@@ -28,7 +29,7 @@
 
     &.is-disabled {
       cursor: not-allowed;
-      border-color: $--border-color-lighter;
+      background-color:transparent;
     }
 
     & + .el-radio.is-bordered {
@@ -93,14 +94,16 @@
     vertical-align: middle;
 
     @include when(disabled) {
+
       .el-radio__inner {
-        background-color: $--radio-disabled-input-fill;
+        background-color: transparent;
         border-color: $--radio-disabled-input-border-color;
         cursor: not-allowed;
 
         &::after {
           cursor: not-allowed;
-          background-color: $--radio-disabled-icon-color;
+          background-color: $--radio-disabled-input-fill;
+          z-index:1000;
         }
 
         & + .el-radio__label {
@@ -109,16 +112,16 @@
       }
       &.is-checked {
         .el-radio__inner {
-          background-color: $--radio-disabled-checked-input-fill;
-          border-color: $--radio-disabled-checked-input-border-color;
+          background-color: transparent;
+          border: $--border-width-small $--border-style-base $--radio-disabled-input-border-color; 
 
           &::after {
-            background-color: $--radio-disabled-checked-icon-color;
+            background-color: $--radio-disabled-input-fill;
           }
         }
       }
       & + span.el-radio__label {
-        color: $--color-text-placeholder;
+        color: $--radio-color-disabled;
         cursor: not-allowed;
       }
     }
@@ -126,7 +129,7 @@
     @include when(checked) {
       .el-radio__inner {
         border-color: $--radio-checked-input-border-color;
-        background: $--radio-checked-icon-color;
+        background: transparent;
 
         &::after {
           transform: translate(-50%, -50%) scale(1);
@@ -160,10 +163,10 @@
     }
 
     &::after {
-      width: 4px;
-      height: 4px;
+      width: 9px;
+      height: 9px;
       border-radius: $--radio-input-border-radius;
-      background-color: $--color-white;
+      background-color: mix($--color-white, $--color-primary, $--button-active-shade-percent) ;
       content: "";
       position: absolute;
       left: 50%;
@@ -171,6 +174,7 @@
       transform: translate(-50%, -50%) scale(0);
       transition: transform .15s ease-in;
     }
+
   }
 
   @include e(original) {

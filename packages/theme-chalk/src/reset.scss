@@ -1,10 +1,18 @@
 @import 'common/var';
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700');
 
-body {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+@font-face{
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight:400;
+  color: $--color-text-primary;
+  font-size: $--font-size-base;
+}
+
+body,html {
+  font-family: 'Nunito Sans', sans-serif !important; 
   font-weight: 400;
   font-size: $--font-size-base;
-  color: $--color-black;
+  color: $--color-text-primary;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -23,7 +31,7 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $--color-text-regular;
+  color: $--color-text-primary;
   font-weight: inherit;
 
   &:first-child {
@@ -36,23 +44,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: #{$--font-size-base + 6px};
+  font-size: #{$--font-size-base + 66px};
 }
 
 h2 {
-  font-size: #{$--font-size-base + 4px};
+  font-size: #{$--font-size-base + 46px};
 }
 
 h3 {
-  font-size: #{$--font-size-base + 2px};
+  font-size: #{$--font-size-base + 34px};
 }
 
-h4, h5, h6, p {
-  font-size: inherit;
+h4{
+  font-size: #{$--font-size-base + 20px};
 }
+
+h5{
+  font-size: #{$--font-size-base + 10px};
+}
+
+h6{
+  font-size: #{$--font-size-base + 6px};
+  font-weight: 700;
+}
+
 
 p {
-  line-height: 1.8;
+  font-size: #{$--font-size-base + 2px};
+  line-height: 1.2;
 
   &:first-child {
     margin-top: 0;
@@ -68,7 +87,7 @@ sup, sub {
 }
 
 small {
-  font-size: #{$--font-size-base - 2px};
+  font-size: $--font-size-base;
 }
 
 hr {

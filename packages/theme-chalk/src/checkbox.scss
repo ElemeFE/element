@@ -78,7 +78,7 @@
 
       .el-checkbox__label {
         line-height: 12px;
-        font-size: $--button-mini-font-size;
+        font-size: $--checkbox-button-font-size;
       }
 
       .el-checkbox__inner {
@@ -141,7 +141,7 @@
       }
 
       & + span.el-checkbox__label {
-        color: $--disabled-color-base;
+        color: $--checkbox-disabled-checked-input-fill;
         cursor: not-allowed;
       }
     }
@@ -211,12 +211,12 @@
       border: 1px solid $--checkbox-checked-icon-color;
       border-left: 0;
       border-top: 0;
-      height: 7px;
-      left: 4px;
+      height: 11px;
+      left: 4.8px;
       position: absolute;
-      top: 1px;
+      top:-0.5px;
       transform: rotate(45deg) scaleY(0);
-      width: 3px;
+      width: 3.5px;
       transition: transform .15s ease-in .05s;
       transform-origin: center;
     }
@@ -268,7 +268,7 @@
     transition: $--all-transition;
     @include utils-user-select(none);
 
-    @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, 0);
+    @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-font-weight, 0);
 
     &:hover {
       color: $--color-primary;
@@ -338,21 +338,25 @@
   }
   @include m(medium) {
     .el-checkbox-button__inner {
-      @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, 0);
+      @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-font-weight, 0);
     }
   }
   @include m(small) {
     .el-checkbox-button__inner {
-      @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, 0);
+      @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-font-weight, 0);
     }
   }
   @include m(mini) {
     .el-checkbox-button__inner {
-      @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
+      @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-font-weight, 0);
     }
   }
 }
 
 @include b(checkbox-group) {
   font-size: 0;
+}
+
+.checkbox-secondary{
+  background-color: red;
 }

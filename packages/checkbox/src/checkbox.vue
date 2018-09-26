@@ -58,6 +58,12 @@
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
+
+    customClass:{
+      type: String,
+      default: 'checkbox-secondary'
+    },
+
     name: 'ElCheckbox',
 
     mixins: [Emitter],

@@ -8,12 +8,12 @@
   @include utils-clearfix;
 
   @include e(separator) {
-    margin: 0 9px;
+    margin: 0 16px;
     font-weight: bold;
-    color: $--color-text-placeholder;
+    color: $--color-text-regular;
 
     &[class*=icon] {
-      margin: 0 6px;
+      margin: 0 16px;
       font-weight: normal;
     }
   }
@@ -25,10 +25,10 @@
       color: $--color-text-regular;
 
       &.is-link, & a {
-        font-weight: bold;
+        font-weight: 400;
         text-decoration: none;
         transition: $--color-transition-base;
-        color: $--color-text-primary;
+        color: $--color-primary;
 
         &:hover {
           color: $--color-primary;
@@ -38,14 +38,14 @@
     }
 
     &:last-child {
-      .el-breadcrumb__inner,
-      .el-breadcrumb__inner a {
-        &, &:hover {
-          font-weight: normal;
-          color: $--color-text-regular;
-          cursor: text;
-        }
-      }
+      // .el-breadcrumb__inner,
+      // .el-breadcrumb__inner a {
+      //   &, &:hover {
+      //    font-weight: normal;
+      //    color: $--color-text-regular;
+      //    cursor: text;
+      //  }
+      // } < Desabilitada o último item, mesmo que esteja ativado >
 
       .el-breadcrumb__separator {
         display: none;

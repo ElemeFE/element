@@ -21,37 +21,37 @@
 
   @include m(success) {
     background-color: $--alert-success-color;
-    color: $--color-success;
+    color: $--message-default-color;
 
     .el-alert__description {
-      color: $--color-success;
+      color: $--message-default-color;
     }
   }
 
   @include m(info) {
     background-color: $--alert-info-color;
-    color: $--color-info;
+    color: $--message-default-color;
 
     .el-alert__description {
-      color: $--color-info;
+      color: $--message-default-color;
     }
   }
 
   @include m(warning) {
     background-color: $--alert-warning-color;
-    color: $--color-warning;
+    color: $--message-default-color;
 
     .el-alert__description {
-      color: $--color-warning;
+      color: $--message-default-color;
     }
   }
 
   @include m(error) {
     background-color: $--alert-danger-color;
-    color: $--color-danger;
+    color: $--message-default-color;
 
     .el-alert__description {
-      color: $--color-danger;
+      color: $--message-default-color;
     }
   }
 
@@ -79,16 +79,16 @@
 
   & .el-alert__description {
     font-size: $--alert-description-font-size;
-    margin: 5px 0 0 0;
+    margin: 2px 0 0 0;
   }
 
   @include e(closebtn) {
     font-size: $--alert-close-font-size;
-    color: $--color-text-placeholder;
+    color: $--message-default-color;
     opacity: 1;
     position: absolute;
-    top: 12px;
-    right: 15px;
+    top: 15px;
+    right: 18px;
     cursor: pointer;
 
     @include when(customed) {

@@ -23,6 +23,7 @@
     }
 
     &.disabled {
+      background-color: $--slider-disable-color;
       cursor: default;
 
       .el-slider__bar {
@@ -30,10 +31,11 @@
       }
 
       .el-slider__button {
-        border-color: $--slider-disable-color;
+        border: 4px solid $--color-white;
       }
 
       .el-slider__button-wrapper {
+
         &:hover,
         &.hover {
           cursor: not-allowed;
@@ -45,6 +47,8 @@
       }
 
       .el-slider__button {
+        background-color:$--slider-disable-color;
+
         &:hover,
         &.hover,
         &.dragging {
@@ -121,7 +125,7 @@
     width: $--slider-button-size;
     height: $--slider-button-size;
     border: solid 2px $--slider-main-background-color;
-    background-color: $--color-white;
+    background-color: $--color-primary;
     border-radius: 50%;
     transition: .2s;
     user-select: none;

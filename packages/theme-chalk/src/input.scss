@@ -8,9 +8,10 @@
   font-size: $--font-size-base;
 
   @include e(inner) {
+    margin-top:5px;
     display: block;
     resize: vertical;
-    padding: 5px 15px;
+    padding: 8px 16px;
     line-height: 1.5;
     box-sizing: border-box;
     width: 100%;
@@ -27,7 +28,8 @@
     }
 
     &:hover {
-      border-color: $--input-hover-border;
+      border: 1px solid transparent;
+      box-shadow: 0 0 3px rgba(0,0,0,0.2);
     }
 
     &:focus {
@@ -37,6 +39,7 @@
   }
 
   @include when(disabled) {
+
     .el-textarea__inner {
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
@@ -46,8 +49,14 @@
       &::placeholder {
         color: $--input-disabled-placeholder-color;
       }
+
+      &:hover {
+        border: $--input-disabled-border;
+        box-shadow: 0 0 0 rgba(255,255,255,0);
+      }
     }
   }
+
 }
 
 @include b(input) {
@@ -70,6 +79,7 @@
   }
 
   @include e(inner) {
+    margin-top:5px;
     -webkit-appearance: none;
     background-color: $--input-fill;
     background-image: none;
@@ -91,20 +101,22 @@
     }
 
     &:hover {
-      border-color: $--input-hover-border;
+      border: 1px solid transparent;
+      box-shadow: 0 0 3px rgba(0,0,0,0.2);
     }
 
     &:focus {
       outline: none;
       border-color: $--input-focus-border;
     }
+
   }
 
   @include e(suffix) {
     position: absolute;
     height: 100%;
     right: 5px;
-    top: 0;
+    top: 4px;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
@@ -153,6 +165,7 @@
   }
 
   @include when(disabled) {
+
     .el-input__inner {
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
@@ -161,6 +174,11 @@
 
       &::placeholder {
         color: $--input-disabled-placeholder-color;
+      }
+
+      &:hover {
+        border: $--input-disabled-border;
+        box-shadow: 0 0 0 rgba(255,255,255,0);
       }
     }
 
@@ -307,4 +325,28 @@
   display: none;
   width: 0;
   height: 0;
+}
+
+/** CUSTOMIZAÇÃO DO LABEL, QUANDO FOR NECESSÁRIO USAR O FORM */
+
+[class*="label-form-input"]{
+  font-size: $--input-font-size;
+  font-weight: 700;
+}
+
+.label-form-input-default{
+  color: $--input-color;
+}
+
+.label-form-input-primary{
+  color: $--input-color-secondary;
+}
+
+.label-form-input-secondary{
+  color: $--input-color-secondary;
+}
+
+.label-form-input-disabled{
+  color: $--input-disabled-color;
+  cursor: not-allowed;
 }

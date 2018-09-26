@@ -37,8 +37,8 @@
 
   &:hover,
   &:focus {
-    background: mix($--color-white, $background-color, $--button-hover-tint-percent);
-    border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
+    background: mix($--color-black, $background-color, $--button-hover-tint-percent);
+    border-color: mix($--color-black, $border-color, $--button-hover-tint-percent);
     color: $color;
   }
   
@@ -60,9 +60,9 @@
     &:hover,
     &:focus,
     &:active {
-      color: $--color-white;
-      background-color: mix($background-color, $--color-white);
-      border-color: mix($border-color, $--color-white);
+      color: $--disabled-color-base;
+      background-color: $--color-disabled-primary;
+      border-color: $--color-disabled-primary;
     }
   }
 
@@ -71,11 +71,105 @@
   }
 }
 
-@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
+/** BUTTON SECONDARY */
+
+@mixin button-variant-secondary($color, $background-color, $border-color) {
+  color: $color;
+  background-color: transparent;
+  border-color: $border-color;
+
+  &:hover,
+  &:focus {
+    background: transparent;
+    border-color: $border-color;
+    color: $color;
+  }
+  
+  &:active {
+    background: $background-color;
+    border-color: $border-color;
+    color: $--color-text-terciary;
+    outline: none;
+  }
+
+  &.is-active {
+    background: $background-color;
+    border-color: $border-color;
+    color: $--color-text-terciary;
+  }
+
+  &.is-disabled {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $--disabled-color-base;
+      background-color: $--color-disabled-primary;
+      border-color: $--color-disabled-primary;
+    }
+  }
+
+  &.is-plain {
+    @include button-plain($background-color);
+  }
+}
+
+@mixin link-button-variant($color, $background-color, $border-color) {
+  color: $color;
+  background-color: rgba(255,255,255,0);
+  border: 0;
+  text-decoration: underline $border-color;
+  border-radius:0;
+  padding:$--link-button-padding-vertical, $--link-button-padding-horizontal;
+
+  &:hover,
+  &:focus {
+    background-color: $--color-disabled;
+    text-decoration: underline $--color-text-terciary;
+    color: $--color-text-terciary;
+  }
+  
+  &:active {
+    background-color: $background-color;
+    text-decoration: underline $--color-text-terciary;
+    color: $--color-text-terciary;
+  }
+
+  &.is-active {
+    background-color: $background-color;
+    text-decoration: underline $--color-text-terciary;
+    color: $--color-text-terciary;
+  }
+
+}
+
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $font-weight, $border-radius) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
+  font-weight: $font-weight;
   border-radius: $border-radius;
   &.is-round {
     padding: $padding-vertical $padding-horizontal;
   }
+}
+
+@mixin checkbox-variant($color, $background-color, $border-color) {
+  color: $color;
+  background-color: $background-color;
+  border-color: $border-color;
+
+  &:hover,
+  &:focus {
+    background: mix($--color-black, $background-color, $--button-hover-tint-percent);
+    border-color: mix($--color-black, $border-color, $--button-hover-tint-percent);
+    color: $color;
+  }
+  
+  &:active {
+    background: mix($--color-black, $background-color, $--button-active-shade-percent);
+    border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
+    color: $color;
+    outline: none;
+  }
+
 }

@@ -1,6 +1,5 @@
 import navConfig from './nav.config.json';
 import langs from './i18n/route.json';
-import teste from './teste.vue'
 
 const LOAD_MAP = {
   'zh-CN': name => {
@@ -48,8 +47,10 @@ const loadDocs = function(lang, path) {
 
 const registerRoute = (navConfig) => {
   let route = [];
+
   Object.keys(navConfig).forEach((lang, index) => {
     let navs = navConfig[lang];
+
     route.push({
       path: `/${ lang }/component`,
       redirect: `/${ lang }/component/installation`,
@@ -138,10 +139,7 @@ langs.forEach(lang => {
 route.push({
   path: '/play',
   name: 'play',
-  component: require('./play/index.vue')
-}, {
-  path: '/teste',
-  component: teste
+  component: require('./play/index.vue').default
 });
 
 let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
@@ -158,6 +156,9 @@ route = route.concat([{
 }, {
   path: '*',
   redirect: defaultPath
-}]);
+}, {
+    path: '/teste',
+    component: require('./play/testes.vue')
+  }]);
 
 export default route;

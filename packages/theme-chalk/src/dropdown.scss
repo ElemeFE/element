@@ -68,7 +68,7 @@
   background-color: $--color-white;
   border: 1px solid $--border-color-lighter;
   border-radius: $--border-radius-base;
-  box-shadow: $--dropdown-menu-box-shadow;
+  box-shadow: $--select-dropdown-shadow;
 
   @include e(item) {
     list-style: none;

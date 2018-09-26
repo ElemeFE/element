@@ -7,7 +7,6 @@
   padding: $--notification-padding;
   border-radius: $--notification-radius;
   box-sizing: border-box;
-  border: 1px solid $--notification-border-color;
   position: fixed;
   background-color: $--color-white;
   box-shadow: $--notification-shadow;
@@ -56,7 +55,7 @@
     top: 18px;
     right: 15px;
     cursor: pointer;
-    color: $--notification-close-color;
+    color: $--notification-default-color;
     font-size: $--notification-close-font-size;
 
     &:hover {
@@ -64,21 +63,10 @@
     }
   }
 
-  .el-icon-success {
-    color: $--notification-success-color;
+  .el-icon-success, .el-icon-error, .el-icon-info, .el-icon-warning  {
+    color: $--notification-default-color;
   }
 
-  .el-icon-error {
-    color: $--notification-danger-color;
-  }
-
-  .el-icon-info {
-    color: $--notification-info-color;
-  }
-
-  .el-icon-warning {
-    color: $--notification-warning-color;
-  }
 }
 
 .el-notification-fade-enter {
@@ -96,3 +84,4 @@
 .el-notification-fade-leave-active {
   opacity: 0;
 }
+
