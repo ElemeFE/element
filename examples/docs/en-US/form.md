@@ -858,7 +858,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ### Form Events
 | Event Name | Description | Parameters |
 |----------- |------------ |----------- |
-| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed |
+| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed and the error message if not |
 
 ### Form-Item Attributes
 
