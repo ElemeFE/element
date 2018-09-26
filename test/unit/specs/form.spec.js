@@ -912,6 +912,10 @@ describe('Form', () => {
             name: null,
             addr: null
           },
+          error: {
+            name: null,
+            addr: null
+          },
           rules: {
             name: [
               { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
@@ -923,8 +927,9 @@ describe('Form', () => {
         };
       },
       methods: {
-        onValidate(prop, valid) {
+        onValidate(prop, valid, msg) {
           this.valid[prop] = valid;
+          this.error[prop] = msg;
         },
         setValue(prop, value) {
           this.form[prop] = value;
@@ -934,12 +939,15 @@ describe('Form', () => {
     vm.setValue('name', '1');
     setTimeout(() => {
       expect(vm.valid.name).to.equal(false);
+      expect(vm.error.name).to.equal('请输入活动名称');
       vm.setValue('addr', '1');
       setTimeout(() => {
         expect(vm.valid.addr).to.equal(true);
+        expect(vm.error.addr).to.equal(null);
         vm.setValue('name', '111');
         setTimeout(() => {
           expect(vm.valid.name).to.equal(true);
+          expect(vm.error.name).to.equal(null);
           done();
         }, DELAY);
       }, DELAY);
