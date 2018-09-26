@@ -52,7 +52,9 @@
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
+    "fecha": "^2.3.3",
     "normalize-wheel": "^1.0.1",
+    "popper.js": "^1.14.4",
     "resize-observer-polyfill": "^1.5.0",
     "throttle-debounce": "^1.0.1"
   },
