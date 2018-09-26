@@ -283,10 +283,10 @@ export default {
     for (let prop in source) {
       if (source.hasOwnProperty(prop)) {
         let value = source[prop];
-        if (value !== undefined) {
-          column[prop] = prop === 'className'
-            ? `${column[prop]} ${value}`
-            : value;
+        if (prop === 'className') {
+          column[prop] = `${column[prop]} ${value}`;
+        } else if (column[prop] === undefined || column[prop] === null) {
+          column[prop] = value;
         }
       }
     }
