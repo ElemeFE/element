@@ -87,6 +87,7 @@
       v-bind="$attrs"
       :disabled="inputDisabled"
       :readonly="readonly"
+      :autocomplete="autoComplete || autocomplete"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
