@@ -387,8 +387,6 @@
         } else if (Array.isArray(newVal)) {
           this.minDate = isDate(newVal[0]) ? new Date(newVal[0]) : null;
           this.maxDate = isDate(newVal[1]) ? new Date(newVal[1]) : null;
-          // NOTE: currently, maxDate = minDate + 1 month
-          //       should allow them to be set individually in the future
           if (this.minDate) {
             this.leftDate = this.minDate;
             if (this.unlinkPanels && this.maxDate) {
