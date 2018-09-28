@@ -330,6 +330,8 @@ export default {
         filterPanel.cell = cell;
         filterPanel.column = column;
         !this.$isServer && filterPanel.$mount(document.createElement('div'));
+      } else {
+        filterPanel.popperJS._reference = cell;
       }
 
       setTimeout(() => {
