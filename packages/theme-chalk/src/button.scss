@@ -186,7 +186,7 @@
   display: inline-block;
   vertical-align: middle;
 
-  & .el-button {
+  & > .el-button {
     float: left;
     position: relative;
     & + .el-button {
@@ -230,6 +230,14 @@
 
     @include when(active) {
       z-index: 1;
+    }
+  }
+  
+  & > .el-dropdown {
+    & > .el-button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-color: rgba($--color-white, 0.5);
     }
   }
 

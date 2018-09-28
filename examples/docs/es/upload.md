@@ -423,3 +423,4 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | ----------------- | ---------------------------------------- | ------------------------- |
 | clearFiles        | limpia la lista de archivos cargados (este método no esta soportado en el _hook_ `before-upload`) | —                         |
 | abort             | cancela la petición de carga             | （ file: fileList's item ） |
+| submit            | Upload the file list manually            |  —                         |

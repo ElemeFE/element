@@ -4,7 +4,8 @@
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
-      'is-required': isRequired || required
+      'is-required': isRequired || required,
+      'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
@@ -198,7 +199,7 @@
           this.validateMessage = errors ? errors[0].message : '';
 
           callback(this.validateMessage, invalidFields);
-          this.elForm && this.elForm.$emit('validate', this.prop, !errors);
+          this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
       },
       clearValidate() {
