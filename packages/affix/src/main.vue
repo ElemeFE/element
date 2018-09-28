@@ -1,6 +1,6 @@
 <template>
-  <div ref="affix" :style="wrapStyle">
-    <div :class="{'el-affix': affixed}" :style="styles">
+  <div :style="wrapStyle">
+    <div ref="affix" :class="{'el-affix': affixed}" :style="styles">
       <slot></slot>
     </div>
   </div>
@@ -8,6 +8,7 @@
 
 <script>
 import { on, off } from 'element-ui/src/utils/dom';
+import getScroll from 'element-ui/src/utils/get-scroll';
 
 export default {
   name: 'ElAffix',
@@ -33,30 +34,48 @@ export default {
     };
   },
   methods: {
-    getScroll(target, top) {
-      const prop = top ? 'pageYOffset' : 'pageXOffset';
-      const method = top ? 'scrollTop' : 'scrollLeft';
-      let ret = target[prop] || target[method];
-      return ret;
+    getTargetRect(target) {
+      if (target === window) {
+        return {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        };
+      } else {
+        return target.getBoundingClientRect();
+      }
     },
-    getOffset(element) {
+    getOffset(element, target) {
       const rect = element.getBoundingClientRect();
-      const scrollTop = this.getScroll(this.el, true);
-      const scrollLeft = this.getScroll(this.el);
-      const docEl = window.document.body;
-      const clientTop = docEl.clientTop || 0;
-      const clientLeft = docEl.clientLeft || 0;
+      const targetRect = this.getTargetRect(target);
+
+      const scrollTop = getScroll(this.el, true);
+      const scrollLeft = getScroll(this.el, false);
+
+      const docElem = window.document.body;
+      const clientTop = docElem.clientTop || 0;
+      const clientLeft = docElem.clientLeft || 0;
+
       return {
-        top: rect.top + scrollTop - clientTop,
-        left: rect.left + scrollLeft - clientLeft
+        top: rect.top - targetRect.top + scrollTop - clientTop,
+        left: rect.left - targetRect.left + scrollLeft - clientLeft,
+        width: rect.width,
+        height: rect.height
       };
     },
     handleScroll() {
       const affixed = this.affixed;
-      const scrollTop = this.getScroll(this.el, true);
-      const elOffset = this.getOffset(this.$el);
-      const windowHeight = window.innerHeight;
-      const elHeight = this.$el.getElementsByTagName('div')[0].offsetHeight;
+      const scrollTop = getScroll(this.el, true);
+      const elOffset = this.getOffset(this.$el, this.el);
+      const elSize = {
+        width: this.$refs.affix.offsetWidth,
+        height: this.$refs.affix.offsetHeight
+      };
+      const targetRect = this.getTargetRect(this.el);
+      const targetHeight = this.el.innerHeight || this.el.clientHeight;
       // Fixed Top
       if (
         elOffset.top - this.offsetTop < scrollTop &&
@@ -65,13 +84,13 @@ export default {
       ) {
         this.affixed = true;
         this.wrapStyle = {
-          width: this.$refs.affix.clientWidth + 'px',
-          height: this.$refs.affix.clientHeight + 'px'
+          width: elOffset.width + 'px',
+          height: elSize.height + 'px'
         };
         this.styles = {
-          top: `${this.offsetTop}px`,
-          left: `${elOffset.left}px`,
-          width: `${this.$el.offsetWidth}px`
+          top: `${this.offsetTop + targetRect.top}px`,
+          left: `${elOffset.left + targetRect.left}px`,
+          width: `${elOffset.width}px`
         };
         this.$emit('change', true);
       } else if (
@@ -86,27 +105,44 @@ export default {
       }
       // Fixed Bottom
       if (
-        elOffset.top + this.offsetBottom + elHeight >
-          scrollTop + windowHeight &&
+        elOffset.top + this.offsetBottom + elSize.height >
+          scrollTop + targetHeight &&
         this.offsetType === 'bottom' &&
         !affixed
       ) {
         this.affixed = true;
+        const targetBottomOffset = this.el === window ? 0 : (window.innerHeight - targetRect.bottom);
+        this.wrapStyle = {
+          width: elOffset.width + 'px',
+          height: elOffset.height + 'px'
+        };
         this.styles = {
-          bottom: `${this.offsetBottom}px`,
-          left: `${elOffset.left}px`,
-          width: `${this.$el.offsetWidth}px`
+          bottom: `${targetBottomOffset + this.offsetBottom}px`,
+          left: `${elOffset.left + targetRect.left}px`,
+          width: `${elOffset.width}px`
         };
         this.$emit('change', true);
       } else if (
-        elOffset.top + this.offsetBottom + elHeight <
-          scrollTop + windowHeight &&
+        elOffset.top + this.offsetBottom + elSize.height <
+          scrollTop + targetHeight &&
         this.offsetType === 'bottom' &&
         affixed
       ) {
         this.affixed = false;
         this.styles = null;
         this.$emit('change', false);
+      }
+    },
+    handleTargetScroll() {
+      const targetRect = this.getTargetRect(this.el);
+      const elOffset = this.getOffset(this.$el, this.el);
+      const windowHeight = window.innerHeight;
+      if (this.offsetType === 'top' && this.styles) {
+        this.styles.top = `${targetRect.top + this.offsetTop}px`;
+        this.styles.left = `${elOffset.left + targetRect.left}px`;
+      } else if (this.offsetType === 'bottom' && this.styles) {
+        this.styles.bottom = `${windowHeight - targetRect.bottom + this.offsetBottom}px`;
+        this.styles.left = `${elOffset.left + targetRect.left}px`;
       }
     }
   },
@@ -119,21 +155,27 @@ export default {
       return type;
     },
     el() {
-      console.log(this.target());
       return this.target();
     }
   },
   mounted() {
-    console.log(this.el);
     on(this.el, 'scroll', this.handleScroll);
     on(this.el, 'resize', this.handleScroll);
     if (this.offsetBottom >= 0) {
       this.handleScroll();
     };
+    if (this.el !== window) {
+      on(window, 'scroll', this.handleTargetScroll);
+      on(window, 'resize', this.handleTargetScroll);
+    }
   },
   beforeDestroy() {
     off(this.el, 'scroll', this.handleScroll);
     off(this.el, 'resize', this.handleScroll);
+    if (this.el !== window) {
+      off(window, 'scroll', this.handleTargetScroll);
+      off(window, 'resize', this.handleTargetScroll);
+    }
   }
 };
 </script>

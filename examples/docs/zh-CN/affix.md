@@ -22,17 +22,6 @@
     <el-button type="primary">固定在顶部</el-button>
   </el-affix>
 </template>
-<script>
-  export default {
-    methods: {
-      getRef() {
-        const el = document.getElementsByClassName('page-component__scroll el-scrollbar')[0];
-        console.log(el);
-        return el;
-      }
-    }
-  }
-</script>
 ```
 :::
 
@@ -40,8 +29,18 @@
 
 :::demo 设置距离顶部达到指定距离时触发
 ```html
-<el-affix :offset="200">
-  <el-button type="primary">固定距离顶部200px的位置</el-button>
+<el-affix  :target="getTarget" :offset-top="100">
+  <el-button type="primary">固定距离顶部100px的位置</el-button>
+</el-affix>
+```
+:::
+
+### 底部固定
+
+:::demo 设置距离顶部达到指定距离时触发
+```html
+<el-affix  :target="getTarget" :offset-bottom="100">
+  <el-button type="primary">固定距离底部100px的位置</el-button>
 </el-affix>
 ```
 :::
@@ -53,6 +52,7 @@
 |------------|----------------|--------------------|--------------|
 | offset-top    | 距离窗口顶部达到指定偏移量后触发   | Number |    0     |
 | offset-bottom | 距离窗口底部达到指定偏移量后触发   | Number |    -     |
+| target        | 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 | Function | () => window |
 
 
 ### Events
