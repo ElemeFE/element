@@ -1,1 +1,31 @@
-.el
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(back-top) {
+    z-index: $--index-back-top;
+    display: block;
+    position: fixed;
+    cursor: pointer;
+
+    @include e(wrap) {
+        background-color: #fff;
+        width: 40px;
+        height: 40px;
+        transition: .3s;
+        opacity: 0.85;
+        border-radius: 20px;
+        box-shadow: 0 0 6px rgba(0,0,0,.12);
+
+        & i {
+            color: #409eff;
+            display: block;
+            line-height: 40px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

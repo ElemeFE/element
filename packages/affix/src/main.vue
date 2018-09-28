@@ -38,11 +38,8 @@ export default {
       if (target === window) {
         return {
           top: 0,
-          right: 0,
           bottom: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight
+          left: 0
         };
       } else {
         return target.getBoundingClientRect();

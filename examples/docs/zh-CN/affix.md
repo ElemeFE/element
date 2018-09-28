@@ -15,7 +15,9 @@
 
 ### 基本
 
-:::demo 最简单的用法
+最简单的用法
+
+:::demo
 ```html
 <template>
   <el-affix :target="getTarget">
@@ -27,7 +29,9 @@
 
 ### 设置偏移量
 
-:::demo 设置距离顶部达到指定距离时触发
+设置距离顶部达到指定距离时触发
+
+:::demo
 ```html
 <el-affix  :target="getTarget" :offset-top="100">
   <el-button type="primary">固定距离顶部100px的位置</el-button>
@@ -37,7 +41,9 @@
 
 ### 底部固定
 
-:::demo 设置距离顶部达到指定距离时触发
+设置距离底部达到指定距离时触发
+
+:::demo
 ```html
 <el-affix  :target="getTarget" :offset-bottom="100">
   <el-button type="primary">固定距离底部100px的位置</el-button>
@@ -48,14 +54,14 @@
 
 ### Attributes
 
-| 成员        | 说明           | 类型               | 默认值       |
-|------------|----------------|--------------------|--------------|
-| offset-top    | 距离窗口顶部达到指定偏移量后触发   | Number |    0     |
-| offset-bottom | 距离窗口底部达到指定偏移量后触发   | Number |    -     |
-| target        | 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 | Function | () => window |
+| 参数        | 说明           | 类型               | 可选值 | 默认值       |
+|------------|----------------|--------------------|--------|--------------|
+| offset-top    | 距离窗口顶部达到指定偏移量后触发    | Number |  —  |    0     |
+| offset-bottom | 距离窗口底部达到指定偏移量后触发    | Number |  —  |    -     |
+| target        | 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 | Function |  —  | () => window |
 
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |
-|---------- |-------- |---------- |
+|----------|--------|----------|
 | change | 在固定状态发生改变时触发   | 固定则为true，否则为false |

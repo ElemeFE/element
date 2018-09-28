@@ -247,6 +247,14 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/back-top",
+              "title": "BackTop 返回顶部"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider 分割线"
             }
           ]
         }
