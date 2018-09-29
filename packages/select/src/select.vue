@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-select"
+    class="el-select test"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
