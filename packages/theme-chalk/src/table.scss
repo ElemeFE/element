@@ -112,13 +112,10 @@
     text-overflow: ellipsis;
     vertical-align: middle;
     position: relative;
+    text-align: left;
 
     @include when(center) {
       text-align: center;
-    }
-
-    @include when(left) {
-      text-align: left;
     }
 
     @include when(right) {
@@ -179,7 +176,6 @@
     white-space: nowrap;
     overflow: hidden;
     user-select: none;
-    text-align: left;
     background-color: $--table-header-background;
 
     div {
