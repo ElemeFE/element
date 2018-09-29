@@ -18,6 +18,11 @@
     overflow: scroll;
     height: 100%;
 
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
     @include m(hidden-default) {
       &::-webkit-scrollbar {
         width: 0;
