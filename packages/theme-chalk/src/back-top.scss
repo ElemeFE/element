@@ -6,6 +6,7 @@
     display: block;
     position: fixed;
     cursor: pointer;
+    box-sizing: border-box;
 
     @include e(wrap) {
         background-color: #fff;

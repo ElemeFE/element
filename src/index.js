@@ -2,6 +2,7 @@
 
 import Affix from '../packages/affix/index.js';
 import BackTop from '../packages/back-top/index.js';
+import Divider from '../packages/divider/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
 import Autocomplete from '../packages/autocomplete/index.js';
@@ -77,6 +78,7 @@ import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 const components = [
   Affix,
   BackTop,
+  Divider,
   Pagination,
   Dialog,
   Autocomplete,
@@ -184,6 +186,7 @@ module.exports = {
   Loading,
   Affix,
   BackTop,
+  Divider,
   Pagination,
   Dialog,
   Autocomplete,

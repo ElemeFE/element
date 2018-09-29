@@ -1,8 +1,13 @@
 <template>
-  <div :class='classes'>
-    <span :class='slotClasses'>
+  <div :class="[
+    'el-divider',
+    'el-divider--' + type,
+    hasSlot ? 'el-divider__text-' + orientation : '',
+    dashed ? 'is-dashed' : ''
+  ]">
+    <span v-if="hasSlot" class='el-divider__inner'>
       <slot></slot>
-    </span>}
+    </span>
   </div>
 </template>
 
@@ -13,7 +18,7 @@ export default {
     type: {
       type: String,
       default: 'horizontal',
-      validator: value => ['horizontal', 'vertica'].indexOf(value) > -1
+      validator: value => ['horizontal', 'vertical'].indexOf(value) > -1
     },
     orientation: {
       type: String,
@@ -28,21 +33,6 @@ export default {
   computed: {
     hasSlot() {
       return !!this.$slots.default;
-    },
-    classes() {
-      return [
-        `${prefixCls}`,
-        `${prefixCls}-${this.type}`,
-        {
-          [`${prefixCls}-with-text-${this.orientation}`]: this.hasSlot,
-          [`${prefixCls}-dashed`]: !!this.dashed
-        }
-      ];
-    },
-    slotClasses() {
-      return [
-        `${prefixCls}-inner-text`,
-      ];
     }
   }
 };
