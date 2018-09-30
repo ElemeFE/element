@@ -4,8 +4,16 @@ import { ElementUIComponent } from './component';
 export interface TreeData {
   id?: any;
   label?: string;
+  disabled?: boolean;
   isLeaf?: boolean;
   children?: TreeData[];
+}
+
+export interface TreeProps {
+  label: string;
+  disabled: string;
+  isLeaf: string;
+  children: string;
 }
 
 export interface TreeNode<K, D> {
@@ -25,6 +33,7 @@ export interface TreeNode<K, D> {
   disabled: boolean;
   icon: string;
   key: K;
+  label: string;
   nextSibling: TreeNode<K, D> | null;
   previousSibling: TreeNode<K, D> | null;
 }
@@ -49,7 +58,7 @@ export declare class ElTree<K = any, D = TreeData> extends ElementUIComponent {
   nodeKey: string;
 
   /** Configuration options, see the following table */
-  props: object;
+  props: TreeProps;
 
   /** Method for loading subtree data */
   load: (data: D, resolve: Function) => void;
@@ -216,7 +225,7 @@ export declare class ElTree<K = any, D = TreeData> extends ElementUIComponent {
    *
    * @param by node key or node data
    */
-  getNode(by: D | K): D;
+  getNode(by: D | K): TreeNode<K, D>;
 
   /**
    * Remove node by key or node data or node instance
