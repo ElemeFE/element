@@ -45,8 +45,10 @@
       },
       currentName(value) {
         if (this.$refs.nav) {
-          this.$nextTick(_ => {
-            this.$refs.nav.scrollToActiveTab();
+          this.$nextTick(() => {
+            this.$refs.nav.$nextTick(_ => {
+              this.$refs.nav.scrollToActiveTab();
+            });
           });
         }
       }
