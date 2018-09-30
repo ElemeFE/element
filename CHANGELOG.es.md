@@ -1,5 +1,17 @@
 ## Changelog
 
+### 2.4.8
+
+- Not displaying outline when Switch is focused, #12771
+- Fixed Dropdown's style in ButtonGroup, #12819 (by @bluejfox)
+- Added opened event for Dialog, #12828
+- Fixed the incorrect display order of TabNav, #12846
+- Fixed the problem that Tabs did not scroll to the selected tab, #12948
+- Fixed the problem that the identifier does not display when the Tree node is dragged, #12854
+- The validate event parameter of Form contains the validation message, #12860 (by @YamenSharaf)
+- Fixed DatePicker not to verify the validity of user input time, #12898
+- Fixed the problem that `render-header` attribute of Table header doesn't work, #12914
+
 ### 2.4.7
 
 *2018-09-14*
