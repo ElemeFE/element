@@ -2,7 +2,7 @@
 
 ### 2.4.8
 
-- Not display outline when Switch is focused, #12771
+- Not displaying outline when Switch is focused, #12771
 - Fixed Dropdown's style in ButtonGroup, #12819 (by @bluejfox)
 - Added opened event for Dialog, #12828
 - Fixed the incorrect display order of TabNav, #12846
