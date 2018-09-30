@@ -1,5 +1,17 @@
 ## 更新日志
 
+### 2.4.8
+
+- Switch 聚焦时不显示轮廓，#12771
+- 修复 Dropdown 在 ButtonGroup 中样式问题，#12819 （by @bluejfox）
+- Dialog 新增 opened 事件，#12828
+- 修复 TabNav 显示顺序不正确的问题，#12846
+- 修复 Tabs 没有滑动到选中 tab 的问题，#12948
+- 修复 Tree 节点在拖拽时标识符不显示的问题，#12854
+- Form 的 validate 事件参数中包含了校验的信息，#12860 （by @YamenSharaf）
+- 修复 DatePicker 没有校验用户输入时间的合法性问题，#12898
+- 修复 Table 表头的 `render-header`属性不生效的问题，#12914
+
 ### 2.4.7
 
 *2018-09-14*
