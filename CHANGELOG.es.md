@@ -2,15 +2,15 @@
 
 ### 2.4.8
 
-- Not displaying outline when Switch is focused, #12771
-- Fixed Dropdown's style in ButtonGroup, #12819 (by @bluejfox)
-- Added opened event for Dialog, #12828
-- Fixed the incorrect display order of TabNav, #12846
-- Fixed the problem that Tabs did not scroll to the selected tab, #12948
-- Fixed the problem that the identifier does not display when the Tree node is dragged, #12854
-- The validate event parameter of Form contains the validation message, #12860 (by @YamenSharaf)
-- Fixed DatePicker not to verify the validity of user input time, #12898
-- Fixed the problem that `render-header` attribute of Table header doesn't work, #12914
+- No se muestra el contorno cuando Switch está enfocado, #12771
+- Arreglado el estilo del Dropdown en ButtonGroup, #12819 (por @bluejfox)
+- Añadido evento opened para Dialog, #12828
+- Corregido el orden incorrecto de visualización de TabNav, #12846
+- Corregido el problema de que Tabs no se desplazaba a la pestaña seleccionada, #12948
+- Corregido el problema de que el identificador no se mostraba cuando se arrastraba el Tree node, #12854
+- El parámetro validar evento de Form contiene el mensaje de validación, #12860 (por @YamenSharaf)
+- Se ha corregido el DatePicker que no verificaba la validez de la hora de entrada del usuario, #12898
+- Arreglado el problema de que el atributo `render-header` del encabezado de Table no funcionaba, #12914
 
 ### 2.4.7
 
@@ -351,8 +351,10 @@
   - Corregido el layout que no se actualizaba cuando el ancho de columna era cambiado por el usuario arrastrando, #9668
   - Corregido problema de estilo cuando la fila de resumen coexistia con columnas fijas, #9667
 - Container
+
   - Corregido componentes del Container que no se estiraban en IE11, #9655
 - Loading
+
   - Corregido Loading no se mostraba cuando el valor de `v-loading` era cambiado a true en el `hook`  `mounted`, #9722
 - Switch
   - Corregido se disparaban los dos eventos nativos de click cuando se hacia click en el Switch, #9760
