@@ -73,6 +73,11 @@ export default {
         eur: '\u20AC',
         rub: '\u20BD',
         usd: '\u0024'
+      },
+      localeMap: {
+        usd: 'en-US',
+        rub: 'ru-RU',
+        eur: 'en-150'
       }
     };
   },
@@ -89,7 +94,8 @@ export default {
   computed: {
     labelSum() {
       if (this.sum) {
-        return this.parsingSum(this.sum)[0];
+        const parsedSum = this.parsingSum(this.sum)[0];
+        return Number(parsedSum).toLocaleString(this.locale);
       } else if (this.sum === 0) {
         return this.sum;
       }
@@ -103,7 +109,8 @@ export default {
     },
     labelPartSum() {
       if (this.partSum) {
-        return this.parsingSum(this.partSum)[0];
+        const parsedSum = this.parsingSum(this.partSum)[0];
+        return Number(parsedSum).toLocaleString(this.locale);
       } else if (this.partSum === 0) {
         return this.partSum;
       }
@@ -114,6 +121,9 @@ export default {
         return this.parsingSum(this.partSum)[1];
       }
       return null;
+    },
+    locale() {
+      return this.localeMap[this.currency];
     }
   }
 };
