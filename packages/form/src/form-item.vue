@@ -190,7 +190,7 @@
         descriptor[this.prop] = rules;
 
         const validator = new AsyncValidator(descriptor);
-        const model = {};
+        const model = objectAssign({}, this.form.model);
 
         model[this.prop] = this.fieldValue;
 
