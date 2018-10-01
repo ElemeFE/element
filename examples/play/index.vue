@@ -32,13 +32,13 @@
 			<!-- DROPSELECT -->	
 					
 				<el-select v-model="value" placeholder="Selecione uma Opção">
-					<el-option v-for="item in options":key="item.value":label="item.label":value="item.value"></el-option>
+					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
 				</el-select>
 
 				<div class="content-padding"></div>
 
 				<el-select v-model="value" placeholder="Desabilitado" disabled>
-					<el-option v-for="item in options":key="item.value":label="item.label":value="item.value"></el-option>
+					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
 				</el-select>
 
 				<div class="content-padding"></div>
