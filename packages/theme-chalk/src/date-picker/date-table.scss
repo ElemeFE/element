@@ -72,8 +72,10 @@
     }
   }
 
+
   .in-range + .next-month > div {
     &:before {
+      pointer-events: none;
       content: '';
       position: absolute;
       height: $--datepicker-cell-size;
@@ -86,6 +88,7 @@
       border-bottom-right-radius: 100%;
     }
     &:after {
+      pointer-events: none;
       content: '';
       position: absolute;
       height: $--datepicker-cell-size;
