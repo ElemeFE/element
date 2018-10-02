@@ -682,7 +682,8 @@ Search data from server-side.
 |----| ----| ----|
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
-| change | triggers when the icon inside Input value change | (value: string \| number) |
+| change | triggers when the Input value changes and loses focus | (value: string \| number) |
+| input | triggers when the Input value changes | (value: string \| number) |
 | clear | triggers when the Input is cleared by clicking the clear button | — |
 
 ### Input Methods
