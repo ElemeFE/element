@@ -75,6 +75,7 @@
 
   .in-range + .next-month > div {
     &:before {
+      box-sizing: content-box;
       pointer-events: none;
       content: '';
       position: absolute;
@@ -88,6 +89,7 @@
       border-bottom-right-radius: 100%;
     }
     &:after {
+      box-sizing: content-box;
       pointer-events: none;
       content: '';
       position: absolute;
