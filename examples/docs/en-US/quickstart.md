@@ -4,6 +4,12 @@ This part walks you through the process of using Element in a webpack project.
 
 ### Use vue-cli@3
 
+```
+vue create my-app   
+cd my-app   
+vue add element   
+```
+
 We provide an [Element plugin](https://github.com/ElementUI/vue-cli-plugin-element) for vue-cli@3, which you can use to quickly build an Element-based project.
 
 ### Use Starter Kit
