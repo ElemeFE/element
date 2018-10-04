@@ -15,14 +15,14 @@
     color: $--color-text-regular;
     display: inline-flex;
     border-bottom: 1px dashed $--color-dark-gunmetal;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   @include e(change) {
     display: inline-flex;
     margin: 0 2px;
     border-bottom: 1px dashed $--color-dark-gunmetal;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   @include e(taxes) {
@@ -38,7 +38,7 @@
     vertical-align: top;
     margin-left: 2px;
     color: $--color-text-primary;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   @include m(paid) {
@@ -56,7 +56,7 @@
   @include m(part-paid) {
     @include e(part-sum) {
       display: inline-flex;
-      font-weight: 500;
+      font-weight: 700;
       color: $--color-sunset-orange;
       border-bottom: 1px dashed $--color-dark-gunmetal;
     }
