@@ -123,9 +123,9 @@
       },
       iconClass() {
         if (this.type === 'line') {
-          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-close';
+          return this.status === 'success' ? 'siagri-icon-circle-check' : 'siagri-icon-circle-close';
         } else {
-          return this.status === 'success' ? 'el-icon-check' : 'el-icon-close';
+          return this.status === 'success' ? 'siagri-icon-check' : 'siagri-icon-close';
         }
       },
       progressTextSize() {

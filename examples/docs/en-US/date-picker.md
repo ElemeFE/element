@@ -493,8 +493,8 @@ When picking a date range, you can assign the time part for start date and end d
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
-| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
-| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| prefix-icon | Custom prefix icon class | string | — | siagri-icon-date |
+| clear-icon | Custom clear icon class | string | — | siagri-icon-circle-close |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

@@ -70,7 +70,7 @@
   position: relative;
   overflow: hidden;
 
-  .el-icon-upload {
+  .siagri-icon-upload {
     font-size: 67px;
     color: $--color-text-placeholder;
     margin: 40px 0 16px;
@@ -145,11 +145,11 @@
       margin-top: 10px;
     }
 
-    & .el-icon-upload-success {
+    & .siagri-icon-upload-success {
       color: $--color-success;
     }
 
-    .el-icon-close {
+    .siagri-icon-close {
       display: none;
       position: absolute;
       top: 5px;
@@ -164,7 +164,7 @@
       }
     }
 
-    & .el-icon-close-tip {
+    & .siagri-icon-close-tip {
       display: none;
       position: absolute;
       top: 5px;
@@ -178,7 +178,7 @@
     &:hover {
       background-color: $--background-color-base;
 
-      .el-icon-close {
+      .siagri-icon-close {
         display: inline-block;
       }
 
@@ -198,14 +198,14 @@
       }
 
       &:focus:not(:hover) {  /* 键盘focus */
-        .el-icon-close-tip {
+        .siagri-icon-close-tip {
           display: inline-block;
         }
       }
 
       &:not(.focusing):focus, &:active { /* click时 */
         outline-width: 0;
-        .el-icon-close-tip {
+        .siagri-icon-close-tip {
           display: none;
         }
       }
@@ -234,7 +234,7 @@
     transition: color .3s;
     white-space: nowrap;
 
-    [class^="el-icon"] {
+    [class^="siagri-icon"] {
       height: 100%;
       margin-right: 7px;
       color: $--color-text-secondary;
@@ -279,12 +279,12 @@
       margin: 0 8px 8px 0;
       display: inline-block;
 
-      .el-icon-check,
-      .el-icon-circle-check {
+      .siagri-icon-check,
+      .siagri-icon-circle-check {
         color: $--color-white;
       }
 
-      .el-icon-close {
+      .siagri-icon-close {
         display: none;
       }
       &:hover {
@@ -393,8 +393,8 @@
       padding: 10px 10px 10px 90px;
       height: 92px;
 
-      .el-icon-check,
-      .el-icon-circle-check {
+      .siagri-icon-check,
+      .siagri-icon-circle-check {
         color: $--color-white;
       }
 

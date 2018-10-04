@@ -92,7 +92,7 @@
       width: $--input-small-height;
       font-size: $--input-small-font-size;
 
-      [class*=el-icon] {
+      [class*=siagri-icon] {
         transform: scale(.9);
       }
     }
@@ -111,7 +111,7 @@
       width: $--input-mini-height;
       font-size: $--input-mini-font-size;
 
-      [class*=el-icon] {
+      [class*=siagri-icon] {
         transform: scale(.8);
       }
     }
@@ -139,7 +139,7 @@
       height: auto;
       line-height: #{($--input-height - 2) / 2};
 
-      [class*=el-icon] {
+      [class*=siagri-icon] {
         transform: scale(.8);
       }
     }

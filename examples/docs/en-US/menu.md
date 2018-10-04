@@ -138,7 +138,7 @@ Vertical NavMenu with sub-menus.
       @close="handleClose">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="siagri-icon-location"></i>
           <span>Navigator One</span>
         </template>
         <el-menu-item-group title="Group One">
@@ -154,15 +154,15 @@ Vertical NavMenu with sub-menus.
         </el-submenu>
       </el-submenu>
       <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
+        <i class="siagri-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
       <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
+        <i class="siagri-icon-document"></i>
         <span>Navigator Three</span>
       </el-menu-item>
       <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
+        <i class="siagri-icon-setting"></i>
         <span>Navigator Four</span>
       </el-menu-item>
     </el-menu>
@@ -179,7 +179,7 @@ Vertical NavMenu with sub-menus.
       active-text-color="#ffd04b">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="siagri-icon-location"></i>
           <span>Navigator One</span>
         </template>
         <el-menu-item-group title="Group One">
@@ -195,15 +195,15 @@ Vertical NavMenu with sub-menus.
         </el-submenu>
       </el-submenu>
       <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
+        <i class="siagri-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
       <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
+        <i class="siagri-icon-document"></i>
         <span>Navigator Three</span>
       </el-menu-item>
       <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
+        <i class="siagri-icon-setting"></i>
         <span>Navigator Four</span>
       </el-menu-item>
     </el-menu>
@@ -238,7 +238,7 @@ Vertical NavMenu could be collapsed.
 <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
   <el-submenu index="1">
     <template slot="title">
-      <i class="el-icon-location"></i>
+      <i class="siagri-icon-location"></i>
       <span slot="title">Navigator One</span>
     </template>
     <el-menu-item-group>
@@ -255,15 +255,15 @@ Vertical NavMenu could be collapsed.
     </el-submenu>
   </el-submenu>
   <el-menu-item index="2">
-    <i class="el-icon-menu"></i>
+    <i class="siagri-icon-menu"></i>
     <span slot="title">Navigator Two</span>
   </el-menu-item>
   <el-menu-item index="3" disabled>
-    <i class="el-icon-document"></i>
+    <i class="siagri-icon-document"></i>
     <span slot="title">Navigator Three</span>
   </el-menu-item>
   <el-menu-item index="4">
-    <i class="el-icon-setting"></i>
+    <i class="siagri-icon-setting"></i>
     <span slot="title">Navigator Four</span>
   </el-menu-item>
 </el-menu>

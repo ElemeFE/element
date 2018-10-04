@@ -25,12 +25,12 @@ describe('Switch', () => {
 
   it('switch with icons', () => {
     vm = createTest(Switch, {
-      activeIconClass: 'el-icon-check',
-      inactiveIconClass: 'el-icon-close'
+      activeIconClass: 'siagri-icon-check',
+      inactiveIconClass: 'siagri-icon-close'
     });
 
     const icon = vm.$el.querySelector('.el-switch__label--left').querySelector('i');
-    expect(icon.classList.contains('el-icon-close')).to.true;
+    expect(icon.classList.contains('siagri-icon-close')).to.true;
   });
 
   it('value correctly update', done => {

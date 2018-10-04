@@ -38,7 +38,7 @@
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
+          spinner: 'siagri-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
@@ -121,7 +121,7 @@
   <el-table
     v-loading="loading2"
     element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
+    element-loading-spinner="siagri-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
@@ -206,7 +206,7 @@
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
+          spinner: 'siagri-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {

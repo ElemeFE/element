@@ -16,10 +16,10 @@ describe('Button', () => {
   });
   it('icon', () => {
     vm = createTest(Button, {
-      icon: 'el-icon-search'
+      icon: 'siagri-icon-search'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;
+    expect(buttonElm.querySelector('.siagri-icon-search')).to.be.ok;
   });
   it('nativeType', () => {
     vm = createTest(Button, {
@@ -34,7 +34,7 @@ describe('Button', () => {
     }, true);
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-loading')).to.be.true;
-    expect(buttonElm.querySelector('.el-icon-loading')).to.be.ok;
+    expect(buttonElm.querySelector('.siagri-icon-loading')).to.be.ok;
   });
   it('disabled', () => {
     vm = createTest(Button, {

@@ -300,8 +300,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
-| prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
-| clear-icon         | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
+| prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | siagri-icon-date         |
+| clear-icon         | Clase personalizada para el icono `clear` | string            | —                                        | siagri-icon-circle-close |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |

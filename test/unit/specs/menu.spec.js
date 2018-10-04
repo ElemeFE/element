@@ -374,8 +374,8 @@ describe('Menu', () => {
       template: `
         <el-menu mode="vertical" default-active="1">
           <el-menu-item-group title="分组一" ref="group1">
-            <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-            <el-menu-item index="2"><i class="el-icon-message"></i>导航二</el-menu-item>
+            <el-menu-item index="1"><i class="siagri-icon-message"></i>导航一</el-menu-item>
+            <el-menu-item index="2"><i class="siagri-icon-message"></i>导航二</el-menu-item>
           </el-menu-item-group>
           <el-submenu index="5">
             <template slot="title">导航五</template>

@@ -177,7 +177,7 @@
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+  <i v-else class="siagri-icon-plus avatar-uploader-icon"></i>
 </el-upload>
 
 <style>
@@ -246,7 +246,7 @@
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
+  <i class="siagri-icon-plus"></i>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -353,7 +353,7 @@
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
   multiple>
-  <i class="el-icon-upload"></i>
+  <i class="siagri-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>

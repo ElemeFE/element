@@ -448,8 +448,8 @@
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
-| prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
-| clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
+| prefix-icon | 自定义头部图标的类名 | string | — | siagri-icon-date |
+| clear-icon | 自定义清空图标的类名 | string | — | siagri-icon-circle-close |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

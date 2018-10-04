@@ -18,7 +18,7 @@ Displays the amount of new messages.
 
 <el-dropdown trigger="click">
   <span class="el-dropdown-link">
-    Click Me<i class="el-icon-caret-bottom el-icon--right"></i>
+    Click Me<i class="siagri-icon-caret-bottom siagri-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item class="clearfix">
@@ -96,7 +96,7 @@ Use a red dot to mark content that needs to be noticed.
 ```html
 <el-badge is-dot class="item">query</el-badge>
 <el-badge is-dot class="item">
-  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
+  <el-button class="share-button" icon="siagri-icon-share" type="primary"></el-button>
 </el-badge>
 
 <style>

@@ -11,7 +11,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
             <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -44,7 +44,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="a">黄金糕</el-dropdown-item>
@@ -83,7 +83,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown trigger="click" ref="dropdown">
           <span class="el-dropdown-link">
-            下拉菜单trigger click<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单trigger click<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -153,7 +153,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown ref="dropdown" :hide-on-click="false">
           <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="a">黄金糕</el-dropdown-item>
@@ -187,7 +187,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
             <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -217,7 +217,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
             <el-dropdown-item command="a">黄金糕</el-dropdown-item>
@@ -253,7 +253,7 @@ describe('Dropdown', () => {
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+            下拉菜单<i class="siagri-icon-caret-bottom siagri-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
             <el-dropdown-item>黄金糕</el-dropdown-item>

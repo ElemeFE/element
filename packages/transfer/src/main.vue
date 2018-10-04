@@ -16,7 +16,7 @@
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToLeft"
         :disabled="rightChecked.length === 0">
-        <i class="el-icon-arrow-left"></i>
+        <i class="siagri-icon-arrow-left"></i>
         <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
       </el-button>
       <el-button
@@ -25,7 +25,7 @@
         @click.native="addToRight"
         :disabled="leftChecked.length === 0">
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <i class="el-icon-arrow-right"></i>
+        <i class="siagri-icon-arrow-right"></i>
       </el-button>
     </div>
     <transfer-panel

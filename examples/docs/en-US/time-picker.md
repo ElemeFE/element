@@ -191,8 +191,8 @@ Can pick an arbitrary time range.
 | default-value | optional, default date of the calendar | Date for TimePicker, string for TimeSelect | anything accepted by `new Date()` for TimePicker, selectable value for TimeSelect | — |
 | value-format | optional, only for TimePicker, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
-| prefix-icon | Custom prefix icon class | string | — | el-icon-time |
-| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| prefix-icon | Custom prefix icon class | string | — | siagri-icon-time |
+| clear-icon | Custom clear icon class | string | — | siagri-icon-circle-close |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

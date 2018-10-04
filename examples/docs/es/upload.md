@@ -170,7 +170,7 @@ Utilice el _hook_ `before-upload` para limitar el formato de archivo y su tamañ
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+  <i v-else class="siagri-icon-plus avatar-uploader-icon"></i>
 </el-upload>
 
 <style>
@@ -239,7 +239,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
+  <i class="siagri-icon-plus"></i>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -351,7 +351,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
   :on-remove="handleRemove"
   :file-list="fileList"
   multiple>
-  <i class="el-icon-upload"></i>
+  <i class="siagri-icon-upload"></i>
   <div class="el-upload__text">Suelta tu archivo aquí o <em>haz clic para cargar</em></div>
   <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>

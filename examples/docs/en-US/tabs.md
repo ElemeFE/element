@@ -217,7 +217,7 @@ You can use named slot to customize the tab label content.
 ```html
 <el-tabs type="border-card">
   <el-tab-pane>
-    <span slot="label"><i class="el-icon-date"></i> Route</span>
+    <span slot="label"><i class="siagri-icon-date"></i> Route</span>
     Route
   </el-tab-pane>
   <el-tab-pane label="Config">Config</el-tab-pane>

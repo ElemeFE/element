@@ -89,16 +89,16 @@
       iconClasses: {
         type: Array,
         default() {
-          return ['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on'];
+          return ['siagri-icon-star-on', 'siagri-icon-star-on', 'siagri-icon-star-on'];
         }
       },
       voidIconClass: {
         type: String,
-        default: 'el-icon-star-off'
+        default: 'siagri-icon-star-off'
       },
       disabledVoidIconClass: {
         type: String,
-        default: 'el-icon-star-on'
+        default: 'siagri-icon-star-on'
       },
       disabled: {
         type: Boolean,

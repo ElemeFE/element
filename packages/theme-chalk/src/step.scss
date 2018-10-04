@@ -84,7 +84,7 @@
     line-height: 1;
     color: inherit;
 
-    &[class*=el-icon]:not(.is-status) {
+    &[class*=siagri-icon]:not(.is-status) {
       font-size: 25px;
       font-weight: normal;
     }
@@ -253,7 +253,7 @@
     }
 
     @include e(icon-inner) {
-      &[class*=el-icon]:not(.is-status) {
+      &[class*=siagri-icon]:not(.is-status) {
         font-size: 18px;
       }
 

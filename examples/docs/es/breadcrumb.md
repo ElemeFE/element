@@ -22,7 +22,7 @@ Muestra la localización de la página actual, haciendo más fácil el poder ir 
 :::demo Setee `separator-class` para que utilice `iconfont` como separador，el mismo va a cubrir `separator`
 
 ```html
-<el-breadcrumb separator-class="el-icon-arrow-right">
+<el-breadcrumb separator-class="siagri-icon-arrow-right">
   <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
   <el-breadcrumb-item>promotion management</el-breadcrumb-item>
   <el-breadcrumb-item>promotion list</el-breadcrumb-item>

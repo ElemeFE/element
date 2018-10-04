@@ -314,7 +314,7 @@
               :class="{ 'is-active': verDropdownVisible }">
               <span>
                 {{ version }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                <i class="siagri-icon-arrow-down siagri-icon--right"></i>
               </span>
               <el-dropdown-menu
                 slot="dropdown"
@@ -338,7 +338,7 @@
               :class="{ 'is-active': langDropdownVisible }">
               <span>
                 {{ displayedLang }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                <i class="siagri-icon-arrow-down siagri-icon--right"></i>
               </span>
               <el-dropdown-menu
                 slot="dropdown"

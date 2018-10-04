@@ -222,7 +222,7 @@ describe('Tabs', () => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
 
-      tabList[1].querySelector('.el-icon-close').click();
+      tabList[1].querySelector('.siagri-icon-close').click();
       vm.$nextTick(_ => {
         expect(tabList.length).to.be.equal(2);
         expect(paneList.length).to.be.equal(2);
@@ -315,7 +315,7 @@ describe('Tabs', () => {
         expect(paneList.length).to.be.equal(3);
         expect(tabList[2].classList.contains('is-active')).to.be.true;
 
-        tabList[2].querySelector('.el-icon-close').click();
+        tabList[2].querySelector('.siagri-icon-close').click();
         vm.$nextTick(_ => {
           expect(tabList.length).to.be.equal(2);
           expect(paneList.length).to.be.equal(2);
@@ -338,7 +338,7 @@ describe('Tabs', () => {
     }, true);
 
     setTimeout(() => {
-      expect(vm.$el.querySelectorAll('.el-icon-close').length).to.equal(2);
+      expect(vm.$el.querySelectorAll('.siagri-icon-close').length).to.equal(2);
       done();
     }, 100);
   });

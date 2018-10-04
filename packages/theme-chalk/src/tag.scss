@@ -14,7 +14,7 @@
   border: 1px solid $--tag-border;
   white-space: nowrap;
 
-  .el-icon-close {
+  .siagri-icon-close {
     border-radius: 50%;
     text-align: center;
     position: relative;
@@ -118,7 +118,7 @@
     height: 28px;
     line-height: 26px;
 
-    .el-icon-close {
+    .siagri-icon-close {
       transform: scale(.8);
     }
   }
@@ -128,7 +128,7 @@
     padding: 0 8px;
     line-height: 22px;
 
-    .el-icon-close {
+    .siagri-icon-close {
       transform: scale(.8);
     }
   }
@@ -138,7 +138,7 @@
     padding: 0 5px;
     line-height: 19px;
 
-    .el-icon-close {
+    .siagri-icon-close {
       margin-left: -3px;
       transform: scale(.7);
     }

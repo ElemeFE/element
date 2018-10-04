@@ -208,7 +208,7 @@ describe('Upload', () => {
       const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
+        uploader.$el.querySelector('.el-upload-list .siagri-icon-close').click();
         uploader.$nextTick(_ => {
           expect(uploader.fileList.length).to.equal(0);
           done();
@@ -278,7 +278,7 @@ describe('Upload', () => {
       const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
+        uploader.$el.querySelector('.el-upload-list .siagri-icon-close').click();
         setTimeout(() => {
           expect(spy.calledOnce).to.equal(true);
           expect(uploader.uploadFiles.length).to.equal(1);

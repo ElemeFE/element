@@ -286,7 +286,7 @@ describe('Select', () => {
     select.inputHovering = true;
     setTimeout(() => {
       const icon = vm.$el.querySelector('.el-input__icon');
-      expect(icon.classList.contains('el-icon-circle-close')).to.true;
+      expect(icon.classList.contains('siagri-icon-circle-close')).to.true;
       icon.click();
       expect(vm.value).to.equal('');
       done();
@@ -342,7 +342,7 @@ describe('Select', () => {
               :key="item.value"
               :value="item.value">
             </el-option>
-            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+            <i slot="prefix" class="el-input__icon siagri-icon-search"></i>
           </el-select>
         </div>
       `,
@@ -354,7 +354,7 @@ describe('Select', () => {
         };
       }
     });
-    expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
+    expect(vm.$el.querySelector('.el-input__icon').classList.contains('siagri-icon-search')).to.be.true;
   });
 
   it('custom el-option template', () => {

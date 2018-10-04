@@ -59,12 +59,12 @@ Commonly used button.
 </el-row>
 
 <el-row>
-  <el-button icon="el-icon-search" circle></el-button>
-  <el-button type="primary" icon="el-icon-edit" circle></el-button>
-  <el-button type="success" icon="el-icon-check" circle></el-button>
-  <el-button type="info" icon="el-icon-message" circle></el-button>
-  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-  <el-button type="danger" icon="el-icon-delete" circle></el-button>
+  <el-button icon="siagri-icon-search" circle></el-button>
+  <el-button type="primary" icon="siagri-icon-edit" circle></el-button>
+  <el-button type="success" icon="siagri-icon-check" circle></el-button>
+  <el-button type="info" icon="siagri-icon-message" circle></el-button>
+  <el-button type="warning" icon="siagri-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="siagri-icon-delete" circle></el-button>
 </el-row>
 ```
 :::
@@ -114,11 +114,11 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 :::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
 
 ```html
-<el-button type="primary" icon="el-icon-edit"></el-button>
-<el-button type="primary" icon="el-icon-share"></el-button>
-<el-button type="primary" icon="el-icon-delete"></el-button>
-<el-button type="primary" icon="el-icon-search">Search</el-button>
-<el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
+<el-button type="primary" icon="siagri-icon-edit"></el-button>
+<el-button type="primary" icon="siagri-icon-share"></el-button>
+<el-button type="primary" icon="siagri-icon-delete"></el-button>
+<el-button type="primary" icon="siagri-icon-search">Search</el-button>
+<el-button type="primary">Upload<i class="siagri-icon-upload siagri-icon-right"></i></el-button>
 ```
 :::
 
@@ -130,13 +130,13 @@ Displayed as a button group, can be used to group a series of similar operations
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="el-icon-arrow-left">Previous Page</el-button>
-  <el-button type="primary">Next Page<i class="el-icon-arrow-right el-icon-right"></i></el-button>
+  <el-button type="primary" icon="siagri-icon-arrow-left">Previous Page</el-button>
+  <el-button type="primary">Next Page<i class="siagri-icon-arrow-right siagri-icon-right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="el-icon-edit"></el-button>
-  <el-button type="primary" icon="el-icon-share"></el-button>
-  <el-button type="primary" icon="el-icon-delete"></el-button>
+  <el-button type="primary" icon="siagri-icon-edit"></el-button>
+  <el-button type="primary" icon="siagri-icon-share"></el-button>
+  <el-button type="primary" icon="siagri-icon-delete"></el-button>
 </el-button-group>
 ```
 :::

@@ -99,9 +99,9 @@
 ```html
 
 <el-steps :active="1">
-  <el-step title="步骤 1" icon="el-icon-edit"></el-step>
-  <el-step title="步骤 2" icon="el-icon-upload"></el-step>
-  <el-step title="步骤 3" icon="el-icon-picture"></el-step>
+  <el-step title="步骤 1" icon="siagri-icon-edit"></el-step>
+  <el-step title="步骤 2" icon="siagri-icon-upload"></el-step>
+  <el-step title="步骤 3" icon="siagri-icon-picture"></el-step>
 </el-steps>
 ```
 :::
@@ -129,9 +129,9 @@
 ```html
 
 <el-steps :active="1" simple>
-  <el-step title="步骤 1" icon="el-icon-edit"></el-step>
-  <el-step title="步骤 2" icon="el-icon-upload"></el-step>
-  <el-step title="步骤 3" icon="el-icon-picture"></el-step>
+  <el-step title="步骤 1" icon="siagri-icon-edit"></el-step>
+  <el-step title="步骤 2" icon="siagri-icon-upload"></el-step>
+  <el-step title="步骤 3" icon="siagri-icon-picture"></el-step>
 </el-steps>
 
 <el-steps :active="1" finish-status="success" simple style="margin-top: 20px">

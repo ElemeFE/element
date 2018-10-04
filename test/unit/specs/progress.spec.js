@@ -37,14 +37,14 @@ describe('Progress', () => {
       `
     }, true);
     expect(vm.$refs.lineSuccess.$el.classList.contains('is-success')).to.be.true;
-    expect(vm.$refs.lineSuccess.$el.querySelector('.el-progress__text .el-icon-circle-check')).to.be.exist;
+    expect(vm.$refs.lineSuccess.$el.querySelector('.el-progress__text .siagri-icon-circle-check')).to.be.exist;
     expect(vm.$refs.lineException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-close')).to.be.exist;
+    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .siagri-icon-circle-close')).to.be.exist;
 
     expect(vm.$refs.circleSuccess.$el.classList.contains('is-success')).to.be.true;
-    expect(vm.$refs.circleSuccess.$el.querySelector('.el-progress__text .el-icon-check')).to.be.exist;
+    expect(vm.$refs.circleSuccess.$el.querySelector('.el-progress__text .siagri-icon-check')).to.be.exist;
     expect(vm.$refs.circleException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.circleException.$el.querySelector('.el-progress__text .el-icon-close')).to.be.exist;
+    expect(vm.$refs.circleException.$el.querySelector('.el-progress__text .siagri-icon-close')).to.be.exist;
   });
   it('text inside', () => {
     vm = createVue({

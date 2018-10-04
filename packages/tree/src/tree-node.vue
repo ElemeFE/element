@@ -26,7 +26,7 @@
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
-        class="el-tree-node__expand-icon el-icon-caret-right"
+        class="el-tree-node__expand-icon siagri-icon-caret-right"
         @click.stop="handleExpandIconClick"
         :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }">
       </span>
@@ -41,7 +41,7 @@
       </el-checkbox>
       <span
         v-if="node.loading"
-        class="el-tree-node__loading-icon el-icon-loading">
+        class="el-tree-node__loading-icon siagri-icon-loading">
       </span>
       <node-content :node="node"></node-content>
     </div>

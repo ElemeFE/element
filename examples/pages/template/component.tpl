@@ -179,7 +179,7 @@
         @mouseenter="hover = true"
         @mouseleave="hover = false"
         @click="toTop">
-        <i class="el-icon-caret-top"></i>
+        <i class="siagri-icon-caret-top"></i>
       </div>
     </transition>
   </div>

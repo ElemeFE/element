@@ -22,7 +22,7 @@
     transition: none;
   }
 
-  .el-icon-arrow-down {
+  .siagri-icon-arrow-down {
     transition: transform .3s;
     font-size: 14px;
 
@@ -31,7 +31,7 @@
     }
   }
 
-  .el-icon-circle-close {
+  .siagri-icon-circle-close {
     z-index: #{$--index-normal + 1};
     transition: $--color-transition-base;
 

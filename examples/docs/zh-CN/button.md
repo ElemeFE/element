@@ -60,12 +60,12 @@
 </el-row>
 
 <el-row>
-  <el-button icon="el-icon-search" circle></el-button>
-  <el-button type="primary" icon="el-icon-edit" circle></el-button>
-  <el-button type="success" icon="el-icon-check" circle></el-button>
-  <el-button type="info" icon="el-icon-message" circle></el-button>
-  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-  <el-button type="danger" icon="el-icon-delete" circle></el-button>
+  <el-button icon="siagri-icon-search" circle></el-button>
+  <el-button type="primary" icon="siagri-icon-edit" circle></el-button>
+  <el-button type="success" icon="siagri-icon-check" circle></el-button>
+  <el-button type="info" icon="siagri-icon-message" circle></el-button>
+  <el-button type="warning" icon="siagri-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="siagri-icon-delete" circle></el-button>
 </el-row>
 ```
 :::
@@ -115,11 +115,11 @@
 :::demo 设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
 
 ```html
-<el-button type="primary" icon="el-icon-edit"></el-button>
-<el-button type="primary" icon="el-icon-share"></el-button>
-<el-button type="primary" icon="el-icon-delete"></el-button>
-<el-button type="primary" icon="el-icon-search">搜索</el-button>
-<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+<el-button type="primary" icon="siagri-icon-edit"></el-button>
+<el-button type="primary" icon="siagri-icon-share"></el-button>
+<el-button type="primary" icon="siagri-icon-delete"></el-button>
+<el-button type="primary" icon="siagri-icon-search">搜索</el-button>
+<el-button type="primary">上传<i class="siagri-icon-upload siagri-icon--right"></i></el-button>
 ```
 :::
 
@@ -131,13 +131,13 @@
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
-  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+  <el-button type="primary" icon="siagri-icon-arrow-left">上一页</el-button>
+  <el-button type="primary">下一页<i class="siagri-icon-arrow-right siagri-icon--right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="el-icon-edit"></el-button>
-  <el-button type="primary" icon="el-icon-share"></el-button>
-  <el-button type="primary" icon="el-icon-delete"></el-button>
+  <el-button type="primary" icon="siagri-icon-edit"></el-button>
+  <el-button type="primary" icon="siagri-icon-share"></el-button>
+  <el-button type="primary" icon="siagri-icon-delete"></el-button>
 </el-button-group>
 ```
 :::

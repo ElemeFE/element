@@ -4,7 +4,7 @@
       v-if="leftNav"
       class="footer-nav-link footer-nav-left"
       @click="handleNavClick('prev')">
-      <i class="el-icon-arrow-left"></i>
+      <i class="siagri-icon-arrow-left"></i>
       {{ leftNav.title || leftNav.name }}
     </span>
     <span
@@ -12,7 +12,7 @@
       class="footer-nav-link footer-nav-right"
       @click="handleNavClick('next')">
       {{ rightNav.title || rightNav.name }}
-      <i class="el-icon-arrow-right"></i>
+      <i class="siagri-icon-arrow-right"></i>
     </span>
   </div>
 </template>
@@ -23,7 +23,7 @@
     color: #333;
     font-size: 14px;
     
-    &::after {
+    &:after {
       content: '';
       display: block;
       clear: both;

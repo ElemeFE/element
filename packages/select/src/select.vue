@@ -95,7 +95,7 @@
         <slot name="prefix"></slot>
       </template>
       <i slot="suffix"
-       :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
+       :class="['el-select__caret', 'el-input__icon', 'siagri-icon-' + iconClass]"
        @click="handleIconClick"
       ></i>
     </el-input>
@@ -488,7 +488,7 @@
 
       handleIconShow() {
         let icon = this.$el.querySelector('.el-input__icon');
-        if (icon && !hasClass(icon, 'el-icon-circle-close')) {
+        if (icon && !hasClass(icon, 'siagri-icon-circle-close')) {
           addClass(icon, 'is-reverse');
         }
       },

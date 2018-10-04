@@ -16,7 +16,7 @@
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
           class="el-carousel__arrow el-carousel__arrow--left">
-          <i class="el-icon-arrow-left"></i>
+          <i class="siagri-icon-arrow-left"></i>
         </button>
       </transition>
       <transition name="carousel-arrow-right">
@@ -28,7 +28,7 @@
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
           class="el-carousel__arrow el-carousel__arrow--right">
-          <i class="el-icon-arrow-right"></i>
+          <i class="siagri-icon-arrow-right"></i>
         </button>
       </transition>
       <slot></slot>

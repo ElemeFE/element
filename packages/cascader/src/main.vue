@@ -36,13 +36,13 @@
         <i
           key="1"
           v-if="clearable && inputHover && currentLabels.length"
-          class="el-input__icon el-icon-circle-close el-cascader__clearIcon"
+          class="el-input__icon siagri-icon-circle-close el-cascader__clearIcon"
           @click="clearValue"
         ></i>
         <i
           key="2"
           v-else
-          class="el-input__icon el-icon-arrow-down"
+          class="el-input__icon siagri-icon-arrow-down"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>

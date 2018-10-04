@@ -201,12 +201,12 @@ Añada un icono para indicar el tipo de Input.
   <span class="demo-input-label">Using attributes</span>
   <el-input
     placeholder="Pick a date"
-    suffix-icon="el-icon-date"
+    suffix-icon="siagri-icon-date"
     v-model="input2">
   </el-input>
   <el-input
     placeholder="Type something"
-    prefix-icon="el-icon-search"
+    prefix-icon="siagri-icon-search"
     v-model="input21">
   </el-input>
 </div>
@@ -215,12 +215,12 @@ Añada un icono para indicar el tipo de Input.
   <el-input
     placeholder="Pick a date"
     v-model="input22">
-    <i slot="suffix" class="el-input__icon el-icon-date"></i>
+    <i slot="suffix" class="el-input__icon siagri-icon-date"></i>
   </el-input>
   <el-input
     placeholder="Type something"
     v-model="input23">
-    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    <i slot="prefix" class="el-input__icon siagri-icon-search"></i>
   </el-input>
 </div>
 
@@ -333,7 +333,7 @@ Añade un elemento antes o después del input, generalmente una etiqueta o un bo
       <el-option label="Order No." value="2"></el-option>
       <el-option label="Tel" value="3"></el-option>
     </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
+    <el-button slot="append" icon="siagri-icon-search"></el-button>
   </el-input>
 </div>
 
@@ -493,7 +493,7 @@ Personalice cómo se muestran las sugerencias.
   placeholder="Please input"
   @select="handleSelect">
   <i
-    class="el-icon-edit el-input__icon"
+    class="siagri-icon-edit el-input__icon"
     slot="suffix"
     @click="handleIconClick">
   </i>

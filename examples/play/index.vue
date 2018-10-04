@@ -149,9 +149,9 @@
 				<div class="content-padding"></div>
 
 				<el-row>
-					<el-button icon="el-icon-plus" type="primary" round>PRIMÁRIO</el-button>
-					<el-button icon="el-icon-plus" type="secondary" round >SECUNDÁRIO</el-button>
-					<el-button icon="el-icon-plus" disabled round>DESABILITADO</el-button>
+					<el-button icon="siagri-icon-plus" type="primary" round>PRIMÁRIO</el-button>
+					<el-button icon="siagri-icon-plus" type="secondary" round >SECUNDÁRIO</el-button>
+					<el-button icon="siagri-icon-plus" disabled round>DESABILITADO</el-button>
 				</el-row>
 
 				<div class="content-padding"></div>
@@ -166,8 +166,8 @@
 				<div class="content-padding"></div>
 
 				<el-row>
-					<el-button icon="el-icon-plus" type="primary-outline" round>PRIMÁRIO</el-button>
-					<el-button icon="el-icon-plus" type="secondary-outline" round >SECUNDÁRIO</el-button>
+					<el-button icon="siagri-icon-plus" type="primary-outline" round>PRIMÁRIO</el-button>
+					<el-button icon="siagri-icon-plus" type="secondary-outline" round >SECUNDÁRIO</el-button>
 				</el-row>
 
 				<div class="content-padding"></div>
@@ -364,7 +364,7 @@
 
 				<!-- BREADCRUMB -->	
 					
-					<el-breadcrumb separator-class="el-icon-arrow-right">
+					<el-breadcrumb separator-class="siagri-icon-arrow-right">
 					    <el-breadcrumb-item>Nível 1</el-breadcrumb-item>
 					    <el-breadcrumb-item>Nível 2</el-breadcrumb-item>
 					    <el-breadcrumb-item>Nível 3</el-breadcrumb-item>
@@ -395,13 +395,13 @@
 					<el-form>	
 
 						<label class="label-form-input-default" >Formulário</label>
-						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question"></i></el-tooltip>
-						<el-input placeholder="Input Geral" v-model="input" clearable prefix-icon="el-icon-date"></el-input>
+						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="siagri-icon-question"></i></el-tooltip>
+						<el-input placeholder="Input Geral" v-model="input" clearable prefix-icon="siagri-icon-date"></el-input>
 
 						<div class="content-padding"></div>
 
 						<label class="label-form-input-default" >Formulário Textarea</label>
-						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question"></i></el-tooltip>
+						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="siagri-icon-question"></i></el-tooltip>
 						<el-input type="textarea":rows="2" placeholder="Input Textarea" v-model="textarea"></el-input>
 
 						<div class="content-padding"></div>
@@ -445,7 +445,7 @@
 						      	<el-option label="Order No." value="2"></el-option>
 						      	<el-option label="Tel" value="3"></el-option>
 						    </el-select>
-						    <el-button slot="append" icon="el-icon-search"></el-button>
+						    <el-button slot="append" icon="siagri-icon-search"></el-button>
 						</el-input>
 
 					</el-form>	

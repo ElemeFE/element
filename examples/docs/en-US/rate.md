@@ -162,9 +162,9 @@ Read-only Rate is for displaying rating score. Half star is supported.
 | colors | color array for icons. It should have 3 elements, each of which corresponds with a score level  | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
 | void-color | color of unselected icons | string | — | #C6D1DE |
 | disabled-void-color | color of unselected read-only icons | string | — | #EFF2F7 |
-| icon-classes |  array of class names of icons. It should have 3 elements, each of which corresponds with a score level | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
-| void-icon-class | class name of unselected icons | string | — | el-icon-star-off |
-| disabled-void-icon-class | class name of unselected read-only icons | string | — | el-icon-star-on |
+| icon-classes |  array of class names of icons. It should have 3 elements, each of which corresponds with a score level | array | — | ['siagri-icon-star-on', 'siagri-icon-star-on','siagri-icon-star-on'] |
+| void-icon-class | class name of unselected icons | string | — | siagri-icon-star-off |
+| disabled-void-icon-class | class name of unselected read-only icons | string | — | siagri-icon-star-on |
 | show-text | whether to display texts | boolean | — | false |
 | show-score | whether to display current score. show-score and show-text cannot be true at the same time | boolean | — | false |
 | text-color | color of texts | string | — | #1F2D3D |

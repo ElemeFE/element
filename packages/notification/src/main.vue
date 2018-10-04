@@ -23,7 +23,7 @@
           </slot>
         </div>
         <div
-          class="el-notification__closeBtn el-icon-close"
+          class="el-notification__closeBtn siagri-icon-close"
           v-if="showClose"
           @click.stop="close"></div>
       </div>
@@ -62,7 +62,7 @@
 
     computed: {
       typeClass() {
-        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+        return this.type && typeMap[this.type] ? `siagri-icon-${ typeMap[this.type] }` : '';
       },
 
       horizontalClass() {

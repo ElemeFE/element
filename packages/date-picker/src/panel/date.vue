@@ -53,14 +53,14 @@
               type="button"
               @click="prevYear"
               :aria-label="t(`el.datepicker.prevYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn siagri-icon-d-arrow-left">
             </button>
             <button
               type="button"
               @click="prevMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn siagri-icon-arrow-left">
             </button>
             <span
               @click="showYearPicker"
@@ -76,14 +76,14 @@
               type="button"
               @click="nextYear"
               :aria-label="t(`el.datepicker.nextYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
+              class="el-picker-panel__icon-btn el-date-picker__next-btn siagri-icon-d-arrow-right">
             </button>
             <button
               type="button"
               @click="nextMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
+              class="el-picker-panel__icon-btn el-date-picker__next-btn siagri-icon-arrow-right">
             </button>
           </div>
 

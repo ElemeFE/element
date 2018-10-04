@@ -9,7 +9,7 @@
       ]"
       :style="{backgroundColor: color}">
       <slot></slot>
-      <i class="el-tag__close el-icon-close"
+      <i class="el-tag__close siagri-icon-close"
         v-if="closable"
         @click.stop="handleClose"></i>
     </span>

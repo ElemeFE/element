@@ -191,8 +191,8 @@ Es posible escoger un rango de tiempo arbitrario.
 | default-value     | opcional, fecha por defecto del calendario | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | cualquier cosa aceptada por `new Date()` para el Selector de Tiempo,  Selector de Tiempo, valor seleccionable para el Seleccionador de Tiempo | —                    |
 | value-format      | opcional, solo para Time Picker, formato del valor vinculado. Si no se especifica, el valor vinculado será un objeto Date | string                                   | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name              | como `name` en input nativo              | string                                   | —                                        | —                    |
-| prefix-icon       | Clase personalizada para el icono de prefijado | string                                   | —                                        | el-icon-time         |
-| clear-icon        | Clase personalizada para el icono `clear` | string                                   | —                                        | el-icon-circle-close |
+| prefix-icon       | Clase personalizada para el icono de prefijado | string                                   | —                                        | siagri-icon-time         |
+| clear-icon        | Clase personalizada para el icono `clear` | string                                   | —                                        | siagri-icon-circle-close |
 
 ### Opciones para Time Picker
 | Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |

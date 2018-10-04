@@ -163,9 +163,9 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
 | colors                   | arreglo de colores para iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array   | —                | ['#F7BA2A', '#F7BA2A', '#F7BA2A']        |
 | void-color               | color para iconos no seleccionados       | string  | —                | #C6D1DE                                  |
 | disabled-void-color      | color para las iconos no seleccionados de solo lectura | string  | —                | #EFF2F7                                  |
-| icon-classes             | arreglo de nombres para clases de iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array   | —                | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
-| void-icon-class          | nombre de clase para iconos no seleccionados | string  | —                | el-icon-star-off                         |
-| disabled-void-icon-class | nombre de clase para elementos no seleccionados de solo lectura | string  | —                | el-icon-star-on                          |
+| icon-classes             | arreglo de nombres para clases de iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array   | —                | ['siagri-icon-star-on', 'siagri-icon-star-on','siagri-icon-star-on'] |
+| void-icon-class          | nombre de clase para iconos no seleccionados | string  | —                | siagri-icon-star-off                         |
+| disabled-void-icon-class | nombre de clase para elementos no seleccionados de solo lectura | string  | —                | siagri-icon-star-on                          |
 | show-text                | muestra el texto                         | boolean | —                | false                                    |
 | show-score               | muestra puntuación actual. `show-score` y `show-text` no pueden ser verdaderos al mismo tiempo | boolean | —                | false                                    |
 | text-color               | color del texto                          | string  | —                | #1F2D3D                                  |

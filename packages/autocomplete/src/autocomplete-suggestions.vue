@@ -10,7 +10,7 @@
         tag="ul"
         wrap-class="el-autocomplete-suggestion__wrap"
         view-class="el-autocomplete-suggestion__list">
-        <li v-if="!parent.hideLoading && parent.loading"><i class="el-icon-loading"></i></li>
+        <li v-if="!parent.hideLoading && parent.loading"><i class="siagri-icon-loading"></i></li>
         <slot v-else>
         </slot>
       </el-scrollbar>

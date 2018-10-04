@@ -156,10 +156,6 @@ route = route.concat([{
 }, {
   path: '*',
   redirect: defaultPath
-}, {
-  path: '/teste',
-  name: 'teste',
-  component: require('./play/testes.vue').default
 }]);
 
 export default route;

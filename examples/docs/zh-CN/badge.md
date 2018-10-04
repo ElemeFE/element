@@ -23,7 +23,7 @@
 
 <el-dropdown trigger="click">
   <span class="el-dropdown-link">
-    点我查看<i class="el-icon-caret-bottom el-icon--right"></i>
+    点我查看<i class="siagri-icon-caret-bottom siagri-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item class="clearfix">
@@ -98,7 +98,7 @@
 ```html
 <el-badge is-dot class="item">数据查询</el-badge>
 <el-badge is-dot class="item">
-  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
+  <el-button class="share-button" icon="siagri-icon-share" type="primary"></el-button>
 </el-badge>
 
 <style>

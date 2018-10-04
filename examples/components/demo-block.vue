@@ -261,7 +261,7 @@
       },
 
       iconClass() {
-        return this.isExpanded ? 'el-icon-caret-top' : 'el-icon-caret-bottom';
+        return this.isExpanded ? 'siagri-icon-caret-top' : 'siagri-icon-caret-bottom';
       },
 
       controlText() {

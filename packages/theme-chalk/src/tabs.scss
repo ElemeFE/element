@@ -31,7 +31,7 @@
     cursor: pointer;
     transition: all .15s;
 
-    .el-icon-plus {
+    .siagri-icon-plus {
       transform: scale(0.8, 0.8);
     }
 
@@ -113,7 +113,7 @@
       border-radius: 3px;
     }
 
-    & .el-icon-close {
+    & .siagri-icon-close {
       border-radius: 50%;
       text-align: center;
       transition: all .3s cubic-bezier(.645,.045,.355,1);
@@ -163,7 +163,7 @@
     > .el-tabs__header .el-tabs__active-bar {
       display: none;
     }
-    > .el-tabs__header .el-tabs__item .el-icon-close {
+    > .el-tabs__header .el-tabs__item .siagri-icon-close {
       position: relative;
       font-size: 12px;
       width: 0;
@@ -187,7 +187,7 @@
           padding-left: 13px;
           padding-right: 13px;
 
-          & .el-icon-close {
+          & .siagri-icon-close {
             width: 14px;
           }
         }
@@ -199,7 +199,7 @@
           padding-left: 20px;
           padding-right: 20px;
 
-          .el-icon-close {
+          .siagri-icon-close {
             width: 14px;
           }
         }

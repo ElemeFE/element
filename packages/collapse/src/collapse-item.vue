@@ -21,7 +21,7 @@
         @blur="focusing = false"
       >
         <i
-          class="el-collapse-item__arrow el-icon-arrow-right"
+          class="el-collapse-item__arrow siagri-icon-arrow-right"
           :class="{'is-active': isActive}">
         </i>
         <slot name="title">{{title}}</slot>

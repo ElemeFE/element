@@ -28,7 +28,7 @@
         </slot>
         <i
           v-else
-          :class="['el-icon-' + (currentStatus === 'success' ? 'check' : 'close')]"
+          :class="['siagri-icon-' + (currentStatus === 'success' ? 'check' : 'close')]"
           class="el-step__icon-inner is-status"
         >
         </i>

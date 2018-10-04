@@ -5,11 +5,11 @@
       v-if="pageCount > 0"
       class="number">1</li>
     <li
-      class="el-icon more btn-quickprev"
+      class="siagri-icon more btn-quickprev"
       :class="[quickprevIconClass, { disabled }]"
       v-if="showPrevMore"
       @mouseenter="onMouseenter('left')"
-      @mouseleave="quickprevIconClass = 'el-icon-more'">
+      @mouseleave="quickprevIconClass = 'siagri-icon-more'">
     </li>
     <li
       v-for="pager in pagers"
@@ -17,11 +17,11 @@
       :class="{ active: currentPage === pager, disabled }"
       class="number">{{ pager }}</li>
     <li
-      class="el-icon more btn-quicknext"
+      class="siagri-icon more btn-quicknext"
       :class="[quicknextIconClass, { disabled }]"
       v-if="showNextMore"
       @mouseenter="onMouseenter('right')"
-      @mouseleave="quicknextIconClass = 'el-icon-more'">
+      @mouseleave="quicknextIconClass = 'siagri-icon-more'">
     </li>
     <li
       :class="{ active: currentPage === pageCount, disabled }"
@@ -46,11 +46,11 @@
 
     watch: {
       showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'el-icon-more';
+        if (!val) this.quickprevIconClass = 'siagri-icon-more';
       },
 
       showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'el-icon-more';
+        if (!val) this.quicknextIconClass = 'siagri-icon-more';
       }
     },
 
@@ -93,9 +93,9 @@
       onMouseenter(direction) {
         if (this.disabled) return;
         if (direction === 'left') {
-          this.quickprevIconClass = 'el-icon-d-arrow-left';
+          this.quickprevIconClass = 'siagri-icon-d-arrow-left';
         } else {
-          this.quicknextIconClass = 'el-icon-d-arrow-right';
+          this.quicknextIconClass = 'siagri-icon-d-arrow-right';
         }
       }
     },
@@ -155,8 +155,8 @@
         current: null,
         showPrevMore: false,
         showNextMore: false,
-        quicknextIconClass: 'el-icon-more',
-        quickprevIconClass: 'el-icon-more'
+        quicknextIconClass: 'siagri-icon-more',
+        quickprevIconClass: 'siagri-icon-more'
       };
     }
   };

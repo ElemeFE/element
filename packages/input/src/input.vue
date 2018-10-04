@@ -60,7 +60,7 @@
             </i>
           </template>
           <i v-else
-            class="el-input__icon el-icon-circle-close el-input__clear"
+            class="el-input__icon siagri-icon-circle-close el-input__clear"
             @click="clear"
           ></i>
         </span>
@@ -188,9 +188,9 @@
       },
       validateIcon() {
         return {
-          validating: 'el-icon-loading',
-          success: 'el-icon-circle-check',
-          error: 'el-icon-circle-close'
+          validating: 'siagri-icon-loading',
+          success: 'siagri-icon-circle-check',
+          error: 'siagri-icon-circle-close'
         }[this.validateState];
       },
       textareaStyle() {
