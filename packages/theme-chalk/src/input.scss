@@ -8,7 +8,7 @@
   font-size: $--font-size-base;
 
   @include e(inner) {
-    margin-top:5px;
+    // margin-top:5px;
     display: block;
     resize: vertical;
     padding: 8px 16px;
@@ -79,7 +79,7 @@
   }
 
   @include e(inner) {
-    margin-top:5px;
+    // margin-top:5px;
     -webkit-appearance: none;
     background-color: $--input-fill;
     background-image: none;
@@ -131,7 +131,7 @@
     position: absolute;
     height: 100%;
     left: 5px;
-    top: 0;
+    top: 3px;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
@@ -142,7 +142,7 @@
     width: 25px;
     text-align: center;
     transition: all .3s;
-    line-height: $--input-height;
+    line-height: $--input-line-height;
 
     &:after {
       content: '';
@@ -195,7 +195,7 @@
 
   @include m(prefix) {
     .el-input__inner {
-      padding-left: 30px;
+      padding-left: 35px;
     }
   }
 
@@ -250,12 +250,12 @@
   }
 
   @include e((append, prepend)) {
-    background-color: $--background-color-base;
-    color: $--color-info;
+    background-color: $--color-primary;
+    color: $--color-white;
     vertical-align: middle;
     display: table-cell;
     position: relative;
-    border: $--border-base;
+    border: $--input-border-append-prepend;
     border-radius: $--input-border-radius;
     padding: 0 20px;
     width: 1px;
@@ -339,7 +339,7 @@
 }
 
 .label-form-input-primary{
-  color: $--input-color-secondary;
+  color: $--input-color-primary;
 }
 
 .label-form-input-secondary{

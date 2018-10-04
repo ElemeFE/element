@@ -23,9 +23,9 @@
     &:hover,
     &:focus,
     &:active {
-      color: mix($--color-white, $color, 40%);
-      background-color: mix($--color-white, $color, 90%);
-      border-color: mix($--color-white, $color, 80%);
+      color: $--button-disabled-color;
+      background-color: $--color-disabled-primary;
+      border-color: $--color-disabled-primary;
     }
   }
 }
@@ -60,7 +60,7 @@
     &:hover,
     &:focus,
     &:active {
-      color: $--disabled-color-base;
+      color: $--button-disabled-color;
       background-color: $--color-disabled-primary;
       border-color: $--color-disabled-primary;
     }

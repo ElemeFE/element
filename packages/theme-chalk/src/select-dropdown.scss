@@ -1,6 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
-/** @import "./popper"; */ // RETIRAR SETA SUPERIOR DO MENU DROPDOWN
+@import "./popper";
 
 @include b(select-dropdown) {
   position: absolute;

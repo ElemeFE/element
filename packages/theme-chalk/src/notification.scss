@@ -55,7 +55,7 @@
     top: 18px;
     right: 15px;
     cursor: pointer;
-    color: $--notification-default-color;
+    color: $--notification-close-color;
     font-size: $--notification-close-font-size;
 
     &:hover {
@@ -63,8 +63,20 @@
     }
   }
 
-  .el-icon-success, .el-icon-error, .el-icon-info, .el-icon-warning  {
-    color: $--notification-default-color;
+  .el-icon-success {
+    color: $--notification-success-color;
+  }
+
+  .el-icon-error{
+    color: $--notification-danger-color;
+  }
+
+  .el-icon-info{
+    color: $--notification-info-color;
+  }
+
+  .el-icon-warning{
+    color: $--notification-warning-color;
   }
 
 }

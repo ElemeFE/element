@@ -34,6 +34,7 @@
       font-size: $--select-input-font-size;
       transition: transform .3s;
       transform: rotateZ(180deg);
+      margin-top:-2px;
       cursor: pointer;
 
       @include when(reverse) {

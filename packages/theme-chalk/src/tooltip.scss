@@ -2,6 +2,8 @@
 @import "common/var";
 
 @include b(tooltip) {
+  margin-left:5px; // Margin entre o elemento esquerdo e o tooltip
+
   &:focus:not(.focusing), &:focus:hover {
     outline-width: 0;
   }

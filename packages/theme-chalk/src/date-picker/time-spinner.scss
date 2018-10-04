@@ -87,9 +87,9 @@
   }
 
   @include e(item) {
-    height: 32px;
-    line-height: 32px;
-    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
     color: $--color-text-regular;
 
     &:hover:not(.disabled):not(.active) {

@@ -96,7 +96,7 @@
 
   thead {
     color: $--table-header-color;
-    font-weight: 500;
+    font-weight: bold;
 
     &.is-group {
       th {
@@ -248,6 +248,7 @@
   // 拥有多级表头
   @include m((group, border)) {
     border: $--table-border;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
 
     @include share-rule(border-pseudo) {
       content: '';
@@ -458,22 +459,22 @@
     left: 7px;
 
     &.ascending {
-      border-bottom-color: $--color-text-placeholder;
+      border-bottom-color: $--border-color-disabled-secondary;
       top: 5px;
     }
 
     &.descending {
-      border-top-color: $--color-text-placeholder;
+      border-top-color: $--border-color-disabled-secondary;
       bottom: 7px;
     }
   }
 
   .ascending .sort-caret.ascending {
-    border-bottom-color: $--color-primary;
+    border-bottom-color: $--color-secondary;
   }
 
   .descending .sort-caret.descending {
-    border-top-color: $--color-primary;
+    border-top-color: $--color-secondary;
   }
 
   .hidden-columns {

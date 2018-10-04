@@ -16,7 +16,7 @@
   @include when(bordered) {
     padding: $--checkbox-bordered-padding;
     border-radius: $--border-radius-base;
-    border: $--border-base;
+    border: $--checkbox-button-border;
     box-sizing: border-box;
     line-height: normal;
     height: $--checkbox-bordered-height;
@@ -26,7 +26,7 @@
     }
 
     &.is-disabled {
-      border-color: $--border-color-lighter;
+      border-color: $--checkbox-button-disabled-border-color;
       cursor: not-allowed;
     }
 
@@ -47,6 +47,13 @@
       .el-checkbox__inner {
         height: $--checkbox-bordered-medium-input-height;
         width: $--checkbox-bordered-medium-input-width;
+
+        &::after {
+          height: 8px;
+          left: 4.5px;
+          top:1px;
+          width: 2px;
+        }
       }
     }
 
@@ -65,7 +72,9 @@
         width: $--checkbox-bordered-small-input-width;
 
         &::after {
-          height: 6px;
+          height: 7px;
+          left: 3.8px;
+          top: 0.2px;
           width: 2px;
         }
       }
@@ -78,14 +87,17 @@
 
       .el-checkbox__label {
         line-height: 12px;
-        font-size: $--checkbox-button-font-size;
+        font-size: $--checkbox-button-mini-font-size;
       }
 
       .el-checkbox__inner {
         height: $--checkbox-bordered-mini-input-height;
         width: $--checkbox-bordered-mini-input-width;
+        
         &::after {
-          height: 6px;
+          height: 7px;
+          left: 3.8px;
+          top: 0.2px;
           width: 2px;
         }
       }
@@ -256,7 +268,7 @@
     vertical-align: middle;
     cursor: pointer;
     background: $--button-default-fill;
-    border: $--border-base;
+    border: $--checkbox-button-border;
     border-left: 0;
     color: $--button-default-color;
     -webkit-appearance: none;
@@ -309,7 +321,7 @@
       cursor: not-allowed;
       background-image: none;
       background-color: $--button-disabled-fill;
-      border-color: $--button-disabled-border;
+      border-color: $--checkbox-button-disabled-border-color;
       box-shadow: none;
     }
     &:first-child .el-checkbox-button__inner {

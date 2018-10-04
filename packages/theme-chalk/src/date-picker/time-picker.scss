@@ -2,13 +2,13 @@
 
 @include b(time-panel) {
   margin: 5px 0;
-  border: solid 1px $--datepicker-border-color;
   background-color: $--color-white;
   box-shadow: $--box-shadow-light;
   border-radius: 2px;
   position: absolute;
   width: 180px;
   left: 0;
+  padding: 10px 5px;
   z-index: $--index-top;
   user-select: none;
 
@@ -29,8 +29,6 @@
       box-sizing: border-box;
       padding-top: 6px;
       text-align: left;
-      border-top: 1px solid $--border-color-light;
-      border-bottom: 1px solid $--border-color-light;
     }
 
     &::after {
@@ -57,8 +55,7 @@
   }
 
   @include e(footer) {
-    border-top: 1px solid $--datepicker-inner-border-color;
-    padding: 4px;
+    padding: 20px 10px 30px 0;
     height: 36px;
     line-height: 25px;
     text-align: right;

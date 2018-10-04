@@ -13,7 +13,7 @@
       float: none;
       display: inline-block;
       text-align: left;
-      padding: 0 0 10px 0;
+      margin-bottom: -10px;
     }
   }
   @include m(inline) {
@@ -89,7 +89,6 @@
     vertical-align: middle;
     float: left;
     font-size: 14px;
-    color: $--color-text-regular;
     line-height: 40px;
     padding: 0 12px 0 0;
     box-sizing: border-box;
@@ -106,9 +105,11 @@
   }
   @include e(error) {
     color: $--color-danger;
-    font-size: 12px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     line-height: 1;
-    padding-top: 4px;
+    padding-top: 5px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -136,7 +137,9 @@
     & .el-input__inner,
     & .el-textarea__inner {
       &, &:focus {
-        border-color: $--color-danger;
+        border: 1px solid transparent;
+        box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        border-bottom: 2px solid $--color-danger;
       }
     }
     & .el-input-group__append,
@@ -146,6 +149,7 @@
       }
     }
     .el-input__validateIcon {
+      font-size: 22px;
       color: $--color-danger;
     }
   }
@@ -153,7 +157,9 @@
     & .el-input__inner,
     & .el-textarea__inner {
       &, &:focus {
-        border-color: $--color-success;
+        border: 1px solid transparent;
+        box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        border-bottom: 2px solid $--color-success;
       }
     }
     & .el-input-group__append,
@@ -163,6 +169,7 @@
       }
     }
     .el-input__validateIcon {
+      font-size: 22px;
       color: $--color-success;
     }
   }

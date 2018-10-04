@@ -34,9 +34,8 @@
 
   @include e(time-header) {
     position: relative;
-    border-bottom: 1px solid $--datepicker-inner-border-color;
-    font-size: 12px;
-    padding: 8px 5px 5px 5px;
+    font-size: 14px;
+    padding: 20px 10px 5px 10px;
     display: table;
     width: 100%;
     box-sizing: border-box;

@@ -34,35 +34,38 @@
   }
 
   @include m(info) {
+    background-color: $--color-info;
+    border-color: $--color-info;
+
     .el-message__content {
-      color: $--message-info-color;
+      color: $--message-default-color;
     }
   }
 
   @include m(success) {
-    background-color: $--color-success-lighter;
-    border-color: $--color-success-light;
+    background-color: $--color-success;
+    border-color: $--color-success;
 
     .el-message__content {
-      color: $--message-success-color;
+      color: $--message-default-color;
     }
   }
 
   @include m(warning) {
-    background-color: $--color-warning-lighter;
-    border-color: $--color-warning-light;
+    background-color: $--color-warning;
+    border-color: $--color-warning;
 
     .el-message__content {
-      color: $--message-warning-color;
+      color: $--message-default-color;
     }
   }
 
   @include m(error) {
-    background-color: $--color-danger-lighter;
-    border-color: $--color-danger-light;
+    background-color: $--color-danger;
+    border-color: $--color-danger;
 
     .el-message__content {
-      color: $--message-danger-color;
+      color: $--message-default-color;
     }
   }
 
@@ -85,31 +88,28 @@
     right: 15px;
     transform: translateY(-50%);
     cursor: pointer;
-    color: $--message-close-color;
+    color: $--message-default-color;
     font-size: $--message-close-size;
 
     &:focus {
       outline-width: 0;
     }
-    &:hover {
-      color: $--message-close-hover-color;
-    }
   }
 
   & .el-icon-success {
-    color: $--message-success-color;
+    color: $--message-default-color;
   }
 
   & .el-icon-error {
-    color: $--message-danger-color;
+    color: $--message-default-color;
   }
 
   & .el-icon-info {
-    color: $--message-info-color;
+    color: $--message-default-color;
   }
 
   & .el-icon-warning {
-    color: $--message-warning-color;
+    color: $--message-default-color;
   }
 }
 
