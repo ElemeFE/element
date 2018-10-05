@@ -21,7 +21,7 @@
     box-sizing: border-box;
     overflow: auto;
     background-color: $--color-white;
-    border: 1px solid $--border-color-light;
+    // border: 1px solid $--border-color-light;
     border-radius: $--border-radius-base;
   }
 
@@ -35,7 +35,7 @@
     margin: 0;
     line-height: 34px;
     cursor: pointer;
-    color: $--color-text-regular;
+    color: $--color-text-primary;
     font-size: $--font-size-base;
     list-style: none;
     white-space: nowrap;
@@ -43,6 +43,7 @@
     text-overflow: ellipsis;
 
     &:hover {
+      color: $--color-text-terciary;
       background-color: $--select-option-hover-background;
     }
 

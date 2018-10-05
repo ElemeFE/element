@@ -86,6 +86,34 @@
 
 				</el-row>
 
+				<div class="content-padding"></div>
+
+				<el-row>
+					
+					<el-time-picker arrow-control v-model="value3" :picker-options="{selectableRange: '18:30:00 - 20:30:00'}" placeholder="Arbitrary time"></el-time-picker>
+
+					<div class="content-padding"></div>
+
+					<el-time-picker v-model="value3" :picker-options="{selectableRange: '18:30:00 - 20:30:00'}" placeholder="Arbitrary time"></el-time-picker>
+
+				</el-row>
+
+				<div class="content-padding"></div>
+
+				<el-row>
+					
+					<el-date-picker type="dates" v-model="value14" placeholder="Pick one or more dates"></el-date-picker>
+
+				</el-row>
+
+				<div class="content-padding"></div>
+
+				<el-row>
+					
+					<el-date-picker v-model="value13" type="daterange" start-placeholder="Start date"end-placeholder="End date" :default-time="['00:00:00', '23:59:59']"></el-date-picker>
+
+				</el-row>
+
 				<div class="content-paddingx5"></div>
 
 				<el-row>
@@ -113,6 +141,97 @@
 				<div class="content-paddingx5"></div>
 
 				<el-row>
+
+				<div class="content-paddingx5"></div>	
+
+				<!-- DROPDOWN -->
+				
+				<el-row>
+					
+					<el-dropdown :hide-on-click="false">
+					  <span class="el-dropdown-link">
+					    Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
+					  </span>
+					  <el-dropdown-menu slot="dropdown">
+					    <el-dropdown-item>Action 1</el-dropdown-item>
+					    <el-dropdown-item>Action 2</el-dropdown-item>
+					    <el-dropdown-item>Action 3</el-dropdown-item>
+					    <el-dropdown-item disabled>Action 4</el-dropdown-item>
+					    <el-dropdown-item divided>Action 5</el-dropdown-item>
+					  </el-dropdown-menu>
+					</el-dropdown>
+
+				</el-row>
+
+				<div class="content-paddingx5"></div>	
+
+				<el-row>
+					
+					<el-dropdown split-button type="primary">
+					  Default
+					  	<el-dropdown-menu slot="dropdown">
+					    	<el-dropdown-item>Action 1</el-dropdown-item>
+					    	<el-dropdown-item>Action 2</el-dropdown-item>
+					    	<el-dropdown-item>Action 3</el-dropdown-item>
+					    	<el-dropdown-item>Action 4</el-dropdown-item>
+					  	</el-dropdown-menu>
+					</el-dropdown>
+
+					<div class="content-padding"></div>
+
+					<el-dropdown size="medium" split-button type="primary">
+					  Default
+					  	<el-dropdown-menu slot="dropdown">
+					    	<el-dropdown-item>Action 1</el-dropdown-item>
+					    	<el-dropdown-item>Action 2</el-dropdown-item>
+					    	<el-dropdown-item>Action 3</el-dropdown-item>
+					    	<el-dropdown-item>Action 4</el-dropdown-item>
+					  	</el-dropdown-menu>
+					</el-dropdown>
+
+					<div class="content-padding"></div>
+
+					<el-dropdown size="small" split-button type="primary">
+					  Default
+					  	<el-dropdown-menu slot="dropdown">
+					    	<el-dropdown-item>Action 1</el-dropdown-item>
+					    	<el-dropdown-item>Action 2</el-dropdown-item>
+					    	<el-dropdown-item>Action 3</el-dropdown-item>
+					    	<el-dropdown-item>Action 4</el-dropdown-item>
+					  	</el-dropdown-menu>
+					</el-dropdown>
+
+					<div class="content-padding"></div>
+
+					<el-dropdown size="mini" split-button type="primary">
+					  Default
+					  	<el-dropdown-menu slot="dropdown">
+					    	<el-dropdown-item>Action 1</el-dropdown-item>
+					    	<el-dropdown-item>Action 2</el-dropdown-item>
+					    	<el-dropdown-item>Action 3</el-dropdown-item>
+					    	<el-dropdown-item>Action 4</el-dropdown-item>
+					  	</el-dropdown-menu>
+					</el-dropdown>
+
+				</el-row>
+
+				<div class="content-paddingx5"></div>	
+
+				<el-row>
+					
+					<el-cascader :options="options" v-model="selectedOptions" @change="handleChange"></el-cascader>
+
+				</el-row>
+
+				<div class="content-padding"></div>	
+
+				<el-row>
+					
+					<el-cascader :options="optionsWithDisabled"></el-cascader>
+
+				</el-row>
+
+				<div class="content-paddingx5"></div>	
 					
 				<!-- TABLE -->
 
@@ -386,6 +505,14 @@
 
 				</el-row>
 
+				<div class="content-padding"></div>	
+
+				<el-row>
+					
+					<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+
+				</el-row>
+
 				<div class="content-paddingx5"></div>
 
 				<el-row>
@@ -395,6 +522,7 @@
 					<el-form>	
 
 						<label class="label-form-input-default" >Formulário</label>
+<<<<<<< Updated upstream
 						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="siagri-icon-question"></i></el-tooltip>
 						<el-input placeholder="Input Geral" v-model="input" clearable prefix-icon="siagri-icon-date"></el-input>
 
@@ -402,6 +530,15 @@
 
 						<label class="label-form-input-default" >Formulário Textarea</label>
 						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="siagri-icon-question"></i></el-tooltip>
+=======
+						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question label-form-input-default"></i></el-tooltip>
+						<el-input placeholder="Input Geral" v-model="input" clearable prefix-icon="el-icon-date"></el-input>
+
+						<div class="content-padding"></div>
+
+						<label class="label-form-input-primary" >Formulário Textarea</label>
+						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question label-form-input-primary"></i></el-tooltip>
+>>>>>>> Stashed changes
 						<el-input type="textarea":rows="2" placeholder="Input Textarea" v-model="textarea"></el-input>
 
 						<div class="content-padding"></div>
@@ -417,6 +554,7 @@
 						<div class="content-padding"></div>
 
 						<label class="label-form-input-disabled" >Formulário Desabilitado</label>
+						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question label-form-input-disabled"></i></el-tooltip>
 						<el-input placeholder="Input Desabilitado" v-model="input1":disabled="true"></el-input>
 
 
@@ -448,9 +586,39 @@
 						    <el-button slot="append" icon="siagri-icon-search"></el-button>
 						</el-input>
 
+						<div class="content-padding"></div>
+
+						<el-autocomplete class="inline-input" v-model="state1":fetch-suggestions="querySearch"placeholder="Please Input" @select="handleSelect" placement="bottom"></el-autocomplete>
+
+						<div class="content-padding"></div>
+
+						<el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
+
+						<div class="content-padding"></div>
+
+						<el-input-number v-model="num2" @change="handleChange" :min="1" :max="10":disabled="true"></el-input-number>
+
+						<div class="content-padding"></div>
+
+						<el-input placeholder="Please Input" v-model="input6" suffix-icon="el-icon-date"></el-input>
+
+						<div class="content-padding"></div>
+
+						<el-input size="medium" placeholder="Please Input" v-model="input7" suffix-icon="el-icon-date" ></el-input>
+
+						<div class="content-padding"></div>
+
+						<el-input size="small" placeholder="Please Input" v-model="input7" suffix-icon="el-icon-date"></el-input>
+
+						<div class="content-padding"></div>
+
+						<el-input size="mini" placeholder="Please Input" v-model="input7" suffix-icon="el-icon-date"></el-input>
+
+						<div class="content-paddingx5"></div>
+
 					</el-form>	
 
-				</el-row>	 
+				</el-row>	
 
 			</div>
 
@@ -470,6 +638,43 @@
   export default {
 
   	methods: {
+
+  	  // INPUT NUMBER
+  	  handleChange(value) {
+        console.log(value)
+      },	
+
+  	  // CASCADER 
+  	  handleChange(value) {
+        console.log(value);
+      },	
+
+  	  // INPUT AUTOCOMPLETE
+  	  querySearch(queryString, cb) {
+        var links = this.links;
+        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
+        // call callback function to return suggestions
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (link) => {
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      loadAll() {
+        return [
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
+         ];
+      },
+      handleSelect(item) {
+        console.log(item);
+      }	,
 
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -614,6 +819,10 @@
       	
       return {
 
+      	// INPUT NUMBER
+      	num1: 1,
+      	num2: 1,
+
       	ruleForm2: {
           pass: '',
           checkPass: '',
@@ -653,6 +862,9 @@
 
       	// INPUT
       	select: '',
+      	links: [],
+        state1: '',
+        state2: '',
 
       	// SWITCH
         value1: true,
@@ -709,6 +921,8 @@
       	// DATEPICKER
 
       	value_datepicker: '',
+      	value13: '',
+      	value14: '',
 
       	// DATETIMEPICKER
 
@@ -735,6 +949,7 @@
           }]
         },
         value_datetimepicker: '',
+        value3: new Date(2016, 9, 10, 18, 40),
 
         // TABLE
 
@@ -755,13 +970,412 @@
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
         }],
-        currentRow: null
+        currentRow: null,
+
+        // CASCADER
+
+      options:[{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }],
+        selectedOptions: [],
+
+        optionsWithDisabled: [{
+          value: 'guide',
+          label: 'Guide',
+          disabled: true,
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }],
 
       }
 
     },
 
     mounted() {
+
+      //INPUT AUTOCOMPLETE
+      this.links = this.loadAll();	
 
    	  // SELECT SEARCH	
       this.list = this.states.map(item => {

@@ -31,6 +31,7 @@
 
     &.selected {
       color: $--select-option-selected;
+      background-color: $--color-primary;
       font-weight: bold;
     }
   }

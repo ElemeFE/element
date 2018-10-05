@@ -6,7 +6,7 @@
 @include b(dropdown) {
   display: inline-block;
   position: relative;
-  color: $--color-text-regular;
+  color: $--color-text-primary;
   font-size: $--font-size-base;
 
   .el-button-group {
@@ -76,7 +76,7 @@
     padding: 0 20px;
     margin: 0;
     font-size: $--font-size-base;
-    color: $--color-text-regular;
+    color: $--color-text-primary;
     cursor: pointer;
     outline: none;
     &:not(.is-disabled):hover, &:focus {
@@ -89,7 +89,7 @@
 
       position: relative;
       margin-top: $divided-offset;
-      border-top: 1px solid $--border-color-lighter;
+      border-top: 1px solid $--color-disabled-primary;
 
       &:before {
         content: '';
@@ -102,7 +102,7 @@
 
     @include when(disabled) {
       cursor: default;
-      color: $--font-color-disabled-base;
+      color: $--color-disabled-primary;
       pointer-events: none;
     }
   }

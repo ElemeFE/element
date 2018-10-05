@@ -252,14 +252,16 @@ $--select-close-hover-color: $--color-text-secondary !default;
 $--select-input-color: $--color-text-placeholder !default;
 $--select-multiple-input-color: #666 !default;
 $--select-input-focus-background: $--color-primary !default;
+$--select-input-icon-focus: $--color-primary !default;
 $--select-input-font-size: 20px !default;
 
 $--select-option-color: $--color-text-primary !default;
-$--select-option-disabled-color: $--color-text-placeholder !default;
+$--select-option-disabled-color: $--color-disabled-primary !default;
 $--select-option-disabled-background: $--color-white !default;
 $--select-option-height: 34px !default;
 $--select-option-hover-background: $--color-primary !default;
-$--select-option-selected: $--color-white !default;
+$--select-option-selected: $--color-text-terciary !default;
+$--select-option-selected-background: $--color-primary !default;
 $--select-option-selected-hover: $--background-color-base !default;
 
 $--select-group-color: $--color-info !default;
@@ -385,12 +387,15 @@ $--input-disabled-placeholder-color: $--color-text-regular !default;
 
 $--input-medium-font-size: 14px !default;
 $--input-medium-height: 36px !default;
+$--input-icon-medium-height: 32px !default;
 
 $--input-small-font-size: 13px !default;
 $--input-small-height: 32px !default;
+$--input-icon-small-height: 28px !default;
 
 $--input-mini-font-size: 12px !default;
 $--input-mini-height: 28px !default;
+$--input-icon-mini-height: 16px !default;
 
 /* Cascader
 -------------------------- */
@@ -558,7 +563,7 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 -------------------------- */
 $--pagination-font-size: 14px !default;
 $--pagination-fill: $--color-white !default;
-$--pagination-color: $--color-text-primary !default;
+$--pagination-color: $--color-primary!default;
 $--pagination-border-radius: 3px !default;
 $--pagination-button-color: $--color-primary !default;
 $--pagination-button-width: 50px !default;
@@ -567,7 +572,11 @@ $--pagination-button-disabled-color: $--color-disabled !default;
 $--pagination-button-disabled-color-secondary: $--color-disabled-secondary !default;
 $--pagination-button-disabled-fill: $--color-white !default;
 $--pagination-hover-fill: $--color-primary !default;
-$--pagination-hover-color: $--color-white !default;
+$--pagination-hover-fill-disabled: $--color-disabled-secondary !default;
+$--pagination-hover-text: $--color-text-terciary !default;
+$--pagination-hover-preenchimento: $--color-disabled-secondary !default;
+$--pagination-hover-color: $--color-primary !default;
+$--pagination-active-color: $--color-white !default;
 
 /* Popover
 -------------------------- */
@@ -588,6 +597,7 @@ $--tooltip-font-size: 12px !default;
 $--tooltip-border-color: $--color-text-primary !default;
 $--tooltip-arrow-size: 6px !default;
 $--tooltip-padding: 10px !default;
+$--tooltip-box-shadow: 0 0 3px rgba(0,0,0,0.2) !default;
 
 /* Tag
 -------------------------- */
@@ -627,8 +637,8 @@ $--tree-expand-icon-color: $--color-text-placeholder !default;
 /* Dropdown
 -------------------------- */
 $--dropdown-menu-box-shadow: $--box-shadow-base !default;
-$--dropdown-menuItem-hover-fill: $--color-primary-light-9 !default;
-$--dropdown-menuItem-hover-color: $--link-color !default;
+$--dropdown-menuItem-hover-fill: $--color-primary !default;
+$--dropdown-menuItem-hover-color: $--color-white !default;
 
 /* Badge
 -------------------------- */
@@ -655,7 +665,7 @@ $--slider-disable-color: $--border-color-disabled !default;
 $--slider-margin: 10px 0 !default;
 $--slider-border-radius: 0 !default;
 $--slider-height: 2px !default;
-$--slider-button-size: 16px !default;
+$--slider-button-size: 12px !default;
 $--slider-button-wrapper-size: 36px !default;
 $--slider-button-wrapper-offset: -15px !default;
 
@@ -692,7 +702,8 @@ $--datepicker-icon-color: $--color-disabled-primary !default;
 $--datepicker-border-color: $--disabled-border-base !default;
 $--datepicker-inner-border-color: #e4e4e4 !default;
 $--datepicker-inrange-color: $--border-color-extra-light !default;
-$--datepicker-inrange-hover-color: $--border-color-extra-light !default;
+$--datepicker-inrange-hover-text: $--color-text-terciary !default;
+$--datepicker-inrange-hover-color: $--color-primary !default;
 $--datepicker-active-color: $--color-primary !default;
 $--datepicker-text-hover-color: $--color-primary !default;
 $--datepicker-cell-hover-color: #fff !default;

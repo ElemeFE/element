@@ -116,7 +116,7 @@
     position: absolute;
     height: 100%;
     right: 5px;
-    top: 4px;
+    top: 3px;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
@@ -150,6 +150,7 @@
       width: 0;
       display: inline-block;
       vertical-align: middle;
+      margin-top:-6px;
     }
   }
 
@@ -208,7 +209,7 @@
     }
 
     .el-input__icon {
-      line-height: $--input-medium-height;
+      line-height: $--input-icon-medium-height;
     }
   }
   @include m(small) {
@@ -220,7 +221,7 @@
     }
 
     .el-input__icon {
-      line-height: $--input-small-height;
+      line-height: $--input-icon-small-height;
     }
   }
   @include m(mini) {
@@ -232,7 +233,7 @@
     }
 
     .el-input__icon {
-      line-height: $--input-mini-height;
+      line-height: $--input-icon-mini-height;
     }
   }
 }
@@ -269,6 +270,10 @@
     .el-button {
       display: inline-block;
       margin: -10px -20px;
+    }
+
+    .el-input .el-select__caret{
+      color: $--color-text-terciary;
     }
 
     button.el-button,
@@ -327,7 +332,7 @@
   height: 0;
 }
 
-/** CUSTOMIZAÇÃO DO LABEL, QUANDO FOR NECESSÁRIO USAR O FORM */
+/** CUSTOMIZAÇÃO DO LABEL E ÍCONE, QUANDO FOR NECESSÁRIO USAR O FORM */
 
 [class*="label-form-input"]{
   font-size: $--input-font-size;
@@ -350,3 +355,4 @@
   color: $--input-disabled-color;
   cursor: not-allowed;
 }
+

@@ -105,11 +105,13 @@
     }
 
     @include when(dark) {
+      box-shadow:$--tooltip-box-shadow;
       background: $--tooltip-fill;
       color: $--tooltip-color;
     }
 
     @include when(light) {
+      box-shadow:$--tooltip-box-shadow;
       background: $--tooltip-color;
       border: 1px solid $--tooltip-color;
 

@@ -81,7 +81,9 @@
     }
 
     &.in-range div {
-      background-color: $--datepicker-inrange-color;
+      color: $--datepicker-inrange-hover-text;
+      background-color: $--datepicker-inrange-hover-color;
+      
       &:hover {
         background-color: $--datepicker-inrange-hover-color;
       }

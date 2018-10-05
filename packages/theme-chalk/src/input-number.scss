@@ -26,44 +26,44 @@
     width: $--input-height;
     height: auto;
     text-align: center;
-    background: $--background-color-base;
-    color: $--color-text-regular;
+    background: $--input-color-primary;
+    color: $--color-text-terciary;
     cursor: pointer;
     font-size: 13px;
 
     &:hover {
-      color: $--color-primary;
+      background: mix($--color-black, $--color-primary, $--button-hover-tint-percent);
+      color: $--color-text-terciary;
 
       &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
-        border-color: $--input-focus-border;
       }
     }
 
     &.is-disabled {
-      color: $--disabled-color-base;
+      color: $--color-text-terciary;
+      background-color: $--color-disabled-primary;
       cursor: not-allowed;
     }
   }
 
   @include e(increase) {
-    right: 1px;
+    right: 0;
     border-radius: 0 $--border-radius-base $--border-radius-base 0;
-    border-left: $--border-base;
+    border-left: $--input-disabled-border;
   }
 
   @include e(decrease) {
-    left: 1px;
+    left: 0;
     border-radius: $--border-radius-base 0 0 $--border-radius-base;
-    border-right: $--border-base;
+    border-right: $--input-disabled-border;
   }
 
   @include when(disabled) {
     @include e((increase, decrease)) {
-      border-color: $--disabled-border-base;
-      color: $--disabled-border-base;
+      color: $--color-text-terciary;
+      background-color: $--color-disabled-primary;
 
       &:hover {
-        color: $--disabled-border-base;
         cursor: not-allowed;
       }
     }

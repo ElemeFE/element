@@ -28,6 +28,9 @@
 
     @include when(reverse) {
       transform: rotateZ(180deg);
+      position: relative;
+      top: -6px;
+      color: $--color-primary;
     }
   }
 
@@ -134,7 +137,7 @@
         font-family: 'element-icons';
         content: "\e604";
         font-size: 14px;
-        color: rgb(191, 203, 217);
+        color: $--color-disabled-primary;
         position: absolute;
         right: 15px;
       }
@@ -146,15 +149,18 @@
       cursor: not-allowed;
 
       &:hover {
+        color: $--select-option-disabled-color;
         background-color: $--color-white;
       }
     }
 
     @include when(active) {
       color: $--select-option-selected;
+      background-color: $--select-option-hover-background;
     }
 
     &:hover, &:focus:not(:active) {
+      color: $--color-text-terciary;
       background-color: $--select-option-hover-background;
     }
 

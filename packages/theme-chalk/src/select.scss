@@ -39,6 +39,7 @@
 
       @include when(reverse) {
         transform: rotateZ(0deg);
+        color: $--select-input-icon-focus;
       }
 
       @include when(show-close) {
