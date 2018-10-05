@@ -19,7 +19,7 @@ const components = [
   CollapseTransition
 ];
 
-const install = function(Vue, opts = {}) {
+const install = (Vue, opts = {}) => {
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
@@ -35,12 +35,12 @@ const install = function(Vue, opts = {}) {
   };
 
   Vue.prototype.$loading = Loading.service;
+  Vue.prototype.$message = Message;
   Vue.prototype.$msgbox = MessageBox;
   Vue.prototype.$alert = MessageBox.alert;
   Vue.prototype.$confirm = MessageBox.confirm;
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
-  Vue.prototype.$message = Message;
 
 };
 
@@ -49,7 +49,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
+const ElementUi = {
   version: '{{version}}',
   locale: locale.use,
   i18n: locale.i18n,
@@ -59,7 +59,7 @@ module.exports = {
 {{list}}
 };
 
-module.exports.default = module.exports;
+export default ElementUi
 `;
 
 delete Components.font;
