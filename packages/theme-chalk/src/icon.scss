@@ -42,7 +42,10 @@
   }
 }
 
-$selectorMap: (
-  selectorsFoo: ".module",
-  selectorsBar: ".moodulellee"
-);
+@each $key, $value in $siagriIcons {
+  .siagri-icon-#{$key} {
+    &:before {
+      content: $value;
+    }
+  }
+}

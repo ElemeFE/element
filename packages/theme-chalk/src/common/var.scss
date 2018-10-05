@@ -866,6 +866,6 @@ $siagriIcons: (
   'tarefas': '\e906',
   'usuario': '\e907',
   'producao': '\e908'
-);
+) !default;
 
-$--font-family: 'siagri';
+$--font-family: 'siagri' !default;
