@@ -1,124 +1,26 @@
 @import "common/var";
-
-$siagri-icons: (
-  x: "\78",
-  upload: "\e60d",
-  error: "\e62c",
-  success: "\e62d",
-  warning: "\e62e",
-  sort-down: "\e630",
-  sort-up: "\e631",
-  arrow-left: "\e600",
-  circle-plus: "\e601",
-  circle-plus-outline: "\e602",
-  arrow-down: "\e603",
-  arrow-right: "\e604",
-  arrow-up: "\e605",
-  back: "\e606",
-  circle-close: "\e607",
-  date: "\e608",
-  circle-close-outline: "\e609",
-  caret-left: "\e60a",
-  caret-bottom: "\e60b",
-  caret-top: "\e60c",
-  caret-right: "\e60e",
-  close: "\e60f",
-  d-arrow-left: "\e610",
-  check: "\e611",
-  delete: "\e612",
-  d-arrow-right: "\e613",
-  document: "\e614",
-  d-caret: "\e615",
-  edit-outline: "\e616",
-  download: "\e617",
-  goods: "\e618",
-  search1: "\e619",
-  info: "\e61a",
-  message: "\e61b",
-  edit: "\e61c",
-  location: "\e61d",
-  loading: "\e61e",
-  location-outline: "\e61f",
-  menu: "\e620",
-  minus: "\e621",
-  bell: "\e622",
-  mobile-phone: "\e624",
-  news: "\e625",
-  more-outline: "\e626",
-  phone: "\e627",
-  phone-outline: "\e628",
-  picture: "\e629",
-  picture-outline: "\e62a",
-  plus: "\e62b",
-  printer: "\e62f",
-  rank: "\e632",
-  refresh: "\e633",
-  question: "\e634",
-  remove: "\e635",
-  share: "\e636",
-  star-on: "\e637",
-  setting: "\e638",
-  circle-check: "\e639",
-  service: "\e63a",
-  sold-out: "\e63b",
-  remove-outline: "\e63c",
-  star-off: "\e63d",
-  circle-check-outline: "\e63e",
-  tickets: "\e63f",
-  sort: "\e640",
-  zoom-in: "\e641",
-  time: "\e642",
-  view: "\e643",
-  upload2: "\e644",
-  zoom-out: "\e645",
-  more: "\e646",
-  atividades: "\e900",
-  configuracoes: "\e901",
-  financeiro: "\e902",
-  maquinarios: "\e903",
-  search: "\e904",
-  suprimentos: "\e905",
-  tarefas: "\e906",
-  usuario: "\e907",
-  producao: "\e908"
-);
-
-$--font-family: "siagri" !default;
+@import "mixins/mixins";
 
 @font-face {
   font-family: '#{$--font-family}';
-  src:  url('#{$--font-path}/#{$--font-family}.eot?whdr99');
-  src:  url('#{$--font-path}/#{$--font-family}.eot?whdr99#iefix') format('embedded-opentype'),
-    url('#{$--font-path}/#{$--font-family}.ttf?whdr99') format('truetype'),
-    url('#{$--font-path}/#{$--font-family}.woff?whdr99') format('woff'),
-    url('#{$--font-path}/#{$--font-family}.svg?whdr99##{$--font-family}') format('svg');
+  src:  url('#{$--font-path}/#{$--font-family}.eot');
+  src:  url('#{$--font-path}/#{$--font-family}.eot') format('embedded-opentype'),
+        url('#{$--font-path}/#{$--font-family}.ttf') format('truetype'),
+        url('#{$--font-path}/#{$--font-family}.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="siagri-icon-"], [class*=" siagri-icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
+[class^="siagri-icon-"], [class*=" siagri-icon-"] {  
   font-family: '#{$--font-family}' !important;
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-@each $icon in $siagri-icons {
-  $key: nth($icon, 1);
-  $value: nth($icon, 2);
-  .siagri-icon-#{$key} {
-    &:before { content: $value; }
-  }
-}
-
 
 .siagri-icon-loading {
   animation: rotating 2s linear infinite;
@@ -139,3 +41,8 @@ $--font-family: "siagri" !default;
     transform: rotateZ(360deg);
   }
 }
+
+$selectorMap: (
+  selectorsFoo: ".module",
+  selectorsBar: ".moodulellee"
+);
