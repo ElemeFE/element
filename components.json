@@ -67,5 +67,9 @@
   "header": "./packages/header/index.js",
   "aside": "./packages/aside/index.js",
   "main": "./packages/main/index.js",
-  "footer": "./packages/footer/index.js"
+  "footer": "./packages/footer/index.js",
+  "slideout": "./packages/slideout/index.js",
+  "sidebar": "./packages/sidebar/index.js",
+  "sidebar-group": "./packages/sidebar-group/index.js",
+  "sidebar-item": "./packages/sidebar-item/index.js"
 }

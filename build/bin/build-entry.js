@@ -59,7 +59,7 @@ const ElementUi = {
 {{list}}
 };
 
-export default ElementUi
+export default ElementUi;
 `;
 
 delete Components.font;

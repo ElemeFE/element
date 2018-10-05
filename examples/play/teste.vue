@@ -1,27 +1,28 @@
 <template>
-  <div class="teste">
-    <a @click="toggle()">ABRIR</a>
-    <el-drawer-container>
-      <el-drawer ref="test" align="left"></el-drawer>
-    </el-drawer-container>
-  </div>
+  <el-slideout menu="#menu" panel="#panel" :toggleSelectors="['.toggle-button']" @on-open="open">
+    <nav id="menu">
+      <div>Menu</div>
+    </nav>
+    <main id="panel">
+      <header>
+        <div>
+          <button class="toggle-button">☰</button>
+          Panel
+        </div>
+      </header>
+    </main>
+  </el-slideout>
 </template>
 <script>
-  import ElDrawerContainer from 'element-ui/packages/drawer-container'
-  import ElDrawer from 'element-ui/packages/drawer'
-  import ElButton from 'element-ui/packages/button'
 	export default {
-    components: {
-      ElDrawerContainer,
-      ElDrawer,
-      ElButton
+    data() {
+      return {
+        active: false
+      }
     },
-		data () {
-			return {}
-    },
-    methods: {
-      toggle() {
-        this.$refs.test.toggle();
+     methods: {
+      open: function () {
+        console.log('slideoutOpen')
       }
     }
 	}

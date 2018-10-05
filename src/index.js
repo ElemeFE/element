@@ -69,6 +69,10 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
+import Slideout from '../packages/slideout/index.js';
+import Sidebar from '../packages/sidebar/index.js';
+import SidebarGroup from '../packages/sidebar-group/index.js';
+import SidebarItem from '../packages/sidebar-item/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -138,6 +142,10 @@ const components = [
   Aside,
   Main,
   Footer,
+  Slideout,
+  Sidebar,
+  SidebarGroup,
+  SidebarItem,
   CollapseTransition
 ];
 
@@ -245,7 +253,11 @@ const ElementUi = {
   Header,
   Aside,
   Main,
-  Footer
+  Footer,
+  Slideout,
+  Sidebar,
+  SidebarGroup,
+  SidebarItem
 };
 
-export default ElementUi
+export default ElementUi;
