@@ -5,13 +5,12 @@
   export default {
     name: 'TabBar',
 
-    props: {
-      tabs: Array
-    },
-
     inject: ['rootTabs'],
 
     computed: {
+      tabs() {
+        return this.rootTabs.panes;
+      },
       barStyle: {
         cache: false,
         get() {
