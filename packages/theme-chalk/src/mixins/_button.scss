@@ -35,27 +35,38 @@
   background-color: $background-color;
   border-color: $border-color;
 
+  .el-input-group & {
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+  }
+
   &:hover,
-  &:focus {
+  &:focus,
+  .el-input-group &:hover,
+  .el-input-group &:focus {
     background: mix($--color-white, $background-color, $--button-hover-tint-percent);
     border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
     color: $color;
   }
-  
-  &:active {
+
+  &:active,
+  .el-input-group &:active {
     background: mix($--color-black, $background-color, $--button-active-shade-percent);
     border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
     color: $color;
     outline: none;
   }
 
-  &.is-active {
+  &.is-active,
+  .el-input-group &.is-active {
     background: mix($--color-black, $background-color, $--button-active-shade-percent);
     border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
     color: $color;
   }
 
-  &.is-disabled {
+  &.is-disabled,
+  .el-input-group &.is-disabled {
     &,
     &:hover,
     &:focus,
@@ -66,7 +77,8 @@
     }
   }
 
-  &.is-plain {
+  &.is-plain,
+  .el-input-group &.is-plain {
     @include button-plain($background-color);
   }
 }

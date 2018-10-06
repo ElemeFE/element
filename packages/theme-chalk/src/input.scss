@@ -253,7 +253,7 @@
       margin: -10px -20px;
     }
 
-    button.el-button,
+    .el-button,
     div.el-select .el-input__inner,
     div.el-select:hover .el-input__inner {
       border-color: transparent;
@@ -273,12 +273,22 @@
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+
+    .el-button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 
   @include e(append) {
     border-left: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+
+    .el-button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
 
   @include m(prepend) {
