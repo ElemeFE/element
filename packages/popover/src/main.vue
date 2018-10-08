@@ -15,7 +15,9 @@
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
+        <i v-if='confirm' :class="icon"></i>
         <slot>{{ content }}</slot>
+        <el-button>{{ okText || t('el.popover.confirm') }}</el-button>
       </div>
     </transition>
     <slot name="reference"></slot>
@@ -25,6 +27,7 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
 import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { t } from 'element-ui/src/locale';
 import { generateId } from 'element-ui/src/utils/util';
 
 export default {
@@ -58,12 +61,27 @@ export default {
     transition: {
       type: String,
       default: 'fade-in-linear'
+    },
+    confirm: {
+      type: Boolean,
+      default: false
+    },
+    type: {
+      type: String,
+      default: 'warning',
+      validator: value => ['success', 'info', 'warning', 'error'].indexOf(value) > -1
+    },
+    icon: {
+      type: String
     }
   },
 
   computed: {
     tooltipId() {
       return `el-popover-${generateId()}`;
+    },
+    icon() {
+      return this.icon ? this.icon : ['el-icon-' + this.type, 'el-popover__' + this.type];
     }
   },
   watch: {

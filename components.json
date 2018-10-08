@@ -1,4 +1,7 @@
 {
+  "affix": "./packages/affix/index.js",
+  "back-top": "./packages/back-top/index.js",
+  "divider": "./packages/divider/index.js",
   "pagination": "./packages/pagination/index.js",
   "dialog": "./packages/dialog/index.js",
   "autocomplete": "./packages/autocomplete/index.js",

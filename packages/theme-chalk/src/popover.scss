@@ -26,7 +26,9 @@
     line-height: 1;
     margin-bottom: 12px;
   }
+  @include e(status) {
 
+  }
   @include e(reference) {
     &:focus:not(.focusing), &:focus:hover {
       outline-width: 0;
@@ -35,5 +37,21 @@
 
   &:focus:active, &:focus {
     outline-width: 0;
+  }
+
+  @include e(warning) {
+    color: $--color-warning;
+  }
+
+  @include e(success) {
+    color: $--color-warning;
+  }
+
+  @include e(info) {
+    color: $--color-warning;
+  }
+
+  @include e(error) {
+    color: $--color-warning;
   }
 }

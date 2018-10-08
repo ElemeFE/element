@@ -1,0 +1,98 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(divider) {
+  box-sizing: border-box;
+  background: $--border-color-light;
+
+  @include m(vertical){
+    margin: 0 8px;
+    display: inline-block;
+    height: 0.9em;
+    width: 1px;
+    vertical-align: middle;
+    position: relative;
+    top: -0.06em;
+  }
+
+  @include m(horizontal) {
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 24px 0;
+    clear: both;
+
+    &.el-divider__text-center,
+    &.el-divider__text-left,
+    &.el-divider__text-right {
+      display: table;
+      white-space: nowrap;
+      text-align: center;
+      background: transparent;
+      font-weight: 500;
+      color: $--color-text-primary;
+      font-size: 16px;
+      margin: 16px 0;
+
+      &:before,
+      &:after {
+        content: '';
+        display: table-cell;
+        position: relative;
+        top: 50%;
+        width: 50%;
+        border-top: 1px solid $--border-color-light;
+        transform: translateY(50%);
+      }
+
+      @include when(dashed) {
+        border-top: 0;
+
+        &:before,
+        &:after {
+          border-style: dashed none none;
+        }
+      }
+    }
+
+    &.el-divider__text-left,
+    &.el-divider__text-right {
+      @include e(inner) {
+        display: inline-block;
+        padding: 0 10px;
+      }
+    }
+
+    &.el-divider__text-left {
+      &:before {
+        top: 50%;
+        width: 5%;
+      }
+      &:after {
+        top: 50%;
+        width: 95%;
+      }
+    }
+
+    &.el-divider__text-right {
+      &:before {
+        top: 50%;
+        width: 95%;
+      }
+      &:after {
+        top: 50%;
+        width: 5%;
+      }
+    }
+  }
+
+  @include e(inner) {
+    display: inline-block;
+    padding: 0 24px;
+  }
+
+  @include when(dashed) {
+    background: none;
+    border-top: 1px dashed $--border-color-light;
+  }
+}

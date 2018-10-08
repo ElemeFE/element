@@ -1,0 +1,6 @@
+@import "common/var";
+
+.el-affix {
+    position: fixed;
+    z-index: $--index-affix;
+}

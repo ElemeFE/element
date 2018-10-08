@@ -6,7 +6,7 @@
     background: #fbfcfd;
     height: 204px;
     text-align: center;
-    
+
     img {
       margin: 40px auto 25px;
       width: 80px;
