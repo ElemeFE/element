@@ -176,7 +176,7 @@
     .el-form {
       width: 480px;
     }
-    
+
     .line {
       text-align: center;
     }
@@ -873,21 +873,21 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 
 | Nombre   | Descripción                                          | Parametros                                                   |
 | -------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| validate | se dispara después de validar un item del formulario | la propiedad (`prop name`) nombre del item del form que se esta validando, si la validacion paso o no, mensaje de error si existe. |
+| validate | se dispara después de validar un item del formulario | la propiedad (`prop name`) nombre del item del form que se esta validando, si la validacion paso o no, y el mensaje de error si existe. |
 
 ### Form-Item Atributos
 
-| Atributo       | Descripción                                                                                                         | Tipo    | Valores aceptados                   | Por defecto |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- | ------- | ----------------------------------- | ----------- |
-| prop           | un key de `model`. En el uso del método validate and resetFields, el atributo es obligatorio.                       | string  | keys of model that passed to `form` |             |
-| label          | etiqueta                                                                                                            | string  | —                                   | —           |
-| label-width    | ancho de la etiqueta, e.g. '50px'                                                                                   | string  | —                                   | —           |
-| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite.                       | boolean | —                                   | false       |
-| rules          | reglas de validacion del form                                                                                       | object  | —                                   | —           |
-| error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                   | —           |
-| show-message   | si mostrar o no el mensaje de error                                                                                 | boolean | —                                   | true        |
-| inline-message | mensaje de validación estilo inline                                                                                 | boolean | —                                   | false       |
-| size           | Tamaño de los componentes en este form item                                                                         | string  | medium / small / mini               | -           |
+| Atributo       | Descripción                                                  | Tipo    | Valores aceptados                           | Por defecto |
+| -------------- | ------------------------------------------------------------ | ------- | ------------------------------------------- | ----------- |
+| prop           | un clave del modelo. En el uso del método validate and resetFields, el atributo es obligatorio. | string  | Clave del modelo que se ha pasado a  `form` |             |
+| label          | etiqueta                                                     | string  | —                                           | —           |
+| label-width    | ancho de la etiqueta, e.g. '50px'                            | string  | —                                           | —           |
+| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | boolean | —                                           | false       |
+| rules          | reglas de validacion del form                                | object  | —                                           | —           |
+| error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                           | —           |
+| show-message   | si mostrar o no el mensaje de error                          | boolean | —                                           | true        |
+| inline-message | mensaje de validación estilo inline                          | boolean | —                                           | false       |
+| size           | Tamaño de los componentes en este form item                  | string  | medium / small / mini                       | -           |
 
 ### Form-Item Slot
 
