@@ -27,6 +27,7 @@ import Check from '../../packages/theme-chalk/src/icons/check.svg';
 import CircleAnglesSquare from '../../packages/theme-chalk/src/icons/circle-angles-square.svg';
 import CirclePlus from '../../packages/theme-chalk/src/icons/circle-plus.svg';
 import City from '../../packages/theme-chalk/src/icons/city.svg';
+import Comment from '../../packages/theme-chalk/src/icons/comment.svg';
 import Conductor from '../../packages/theme-chalk/src/icons/conductor.svg';
 import Cooler from '../../packages/theme-chalk/src/icons/cooler.svg';
 import Copy from '../../packages/theme-chalk/src/icons/copy.svg';
@@ -142,6 +143,7 @@ module.exports = {
   CircleAnglesSquare,
   CirclePlus,
   City,
+  Comment,
   Conductor,
   Cooler,
   Copy,
