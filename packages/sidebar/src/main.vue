@@ -60,8 +60,8 @@ export default {
       type: String
     },
     parent: {
-      default () {
-        return null
+      default() {
+        return null;
       },
       type: [String, HTMLElement]
     },
