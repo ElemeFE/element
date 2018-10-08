@@ -1,5 +1,5 @@
 <script>
-  var iconList = require('examples/icon.json');
+  var iconList = require('element-ui/examples/icon.json');
 
   export default {
     data() {

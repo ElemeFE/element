@@ -1,2 +1,10 @@
 @import "common/transition.scss";
 @import "icon.scss";
+
+@each $key, $value in $siagriIcons {
+  .siagri-icon-#{$key} {
+    &:before {
+      content: $value;
+    }
+  }
+}

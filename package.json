@@ -120,6 +120,7 @@
     "postcss": "^5.1.2",
     "postcss-loader": "0.11.1",
     "postcss-salad": "^1.0.8",
+    "postcss-scss": "^2.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^6.0.6",

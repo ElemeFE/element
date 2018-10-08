@@ -41,11 +41,3 @@
     transform: rotateZ(360deg);
   }
 }
-
-@each $key, $value in $siagriIcons {
-  .siagri-icon-#{$key} {
-    &:before {
-      content: $value;
-    }
-  }
-}
