@@ -87,6 +87,33 @@ Displays text content other than numbers.
 ```
 :::
 
+Change background color of badge.
+
+:::demo When `background-color` is a `String`, the badge can have a different color.
+
+```html
+<el-badge :value="100" :max="10" background-color="green" class="item">
+  <el-button size="small">comments</el-button>
+</el-badge>
+
+<el-badge value="new" background-color="green" class="item">
+  <el-button size="small">comments</el-button>
+</el-badge>
+
+<el-badge is-dot background-color="green" class="item">
+  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
+</el-badge>
+
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
+```
+:::
+
 ### Little red dot
 
 Use a red dot to mark content that needs to be noticed.
@@ -136,3 +163,4 @@ Use a red dot to mark content that needs to be noticed.
 | max          |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
 | is-dot       | if a little dot is displayed   | boolean  |  —  |  false |
 | hidden | hidden badge | boolean | — | false |
+| background-color | color of the badge | string | Any color code |  —  |

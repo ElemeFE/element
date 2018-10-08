@@ -6,7 +6,8 @@
         v-show="!hidden && (content || content === 0 || isDot)"
         v-text="content"
         class="el-badge__content"
-        :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }">
+        :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }"
+        :style="badgeContentStyle">
       </sup>
     </transition>
   </div>
@@ -20,7 +21,8 @@ export default {
     value: {},
     max: Number,
     isDot: Boolean,
-    hidden: Boolean
+    hidden: Boolean,
+    backgroundColor: String
   },
 
   computed: {
@@ -35,6 +37,15 @@ export default {
       }
 
       return value;
+    },
+
+    badgeContentStyle() {
+      if (this.backgroundColor) {
+        return {
+          'background-color': this.backgroundColor
+        };
+      }
+      return {};
     }
   }
 };
