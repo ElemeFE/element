@@ -1,36 +1,45 @@
 <template>
-  <transition name="vs-sidebar-animate">
+  <transition name="el-sidebar-animate">
     <div
       v-show="staticPosition || value"
       ref="sidebarbackground"
-      class="vs-content-sidebar">
+      class="el-content-sidebar">
       <div
         v-if="!hiddenBackground"
-        class="vs-sidebar-background"></div>
+        class="el-sidebar-background"></div>
       <div
         :class="[
-          `vs-sidebar-${color}`,
+          `el-sidebar-${color}`,
           {
-            'vs-sidebar-parent': parent != 'body',
-            'vs-sidebar-staticPosition': staticPosition,
-            'vs-sidebar-position-right': positionRight,
-            'vs-sidebar-reduce': reduce,
-            'vs-sidebar-reduceNotRebound': reduceNotRebound,
-            'vs-sidebar-reduceNotHoverExpand': reduceNotHoverExpand
+            'el-sidebar-parent': parent != 'body',
+            'el-sidebar-staticPosition': staticPosition,
+            'el-sidebar-position-right': positionRight,
+            'el-sidebar-reduce': reduce,
+            'el-sidebar-reduceNotRebound': reduceNotRebound,
+            'el-sidebar-reduceNotHoverExpand': reduceNotHoverExpand
           }
         ]"
-        class="vs-sidebar">
-        <header v-if="$slots.header">
-          <slot name="header"></slot>
-        </header>
+        class="el-sidebar">
 
-        <div class="vs-sidebar-items">
-          <slot></slot>
-        </div>
+        <template v-if="$props.fullSlot">
+          <div class="el-sidebar--full">
+            <slot></slot>
+          </div>
+        </template>
 
-        <footer v-if="$slots.footer">
-          <slot name="footer"></slot>
-        </footer>
+        <template v-else>
+          <header v-if="$slots.header">
+            <slot name="header"></slot>
+          </header>
+
+          <div class="el-sidebar-items">
+            <slot></slot>
+          </div>
+
+          <footer v-if="$slots.footer">
+            <slot name="footer"></slot>
+          </footer>
+        </template>
       </div>
     </div>
   </transition>
@@ -51,8 +60,10 @@ export default {
       type: String
     },
     parent: {
-      default: null,
-      type: [String, Object]
+      default () {
+        return null
+      },
+      type: [String, HTMLElement]
     },
     spacer: {
       default: false,
@@ -85,6 +96,10 @@ export default {
     hiddenBackground: {
       default: false,
       type: Boolean
+    },
+    fullSlot: {
+      default: false,
+      type: Boolean
     }
   },
   data: () => ({
@@ -114,7 +129,7 @@ export default {
       window.addEventListener('click', this.closeSidebar);
     },
     closeSidebar(evt) {
-      let parent = evt.target.closest('.vs-sidebar');
+      let parent = evt.target.closest('.el-sidebar');
       if (!parent) {
         this.$emit('input', false);
         window.removeEventListener('click', this.closeSidebar);

@@ -1,28 +1,2 @@
 @import "common/var";
 @import "mixins/mixins";
-
-@include b(drawer) {
-  position: relative;
-  display: flex;
-  background: green;
-  min-width: 320px;
-  transition: all .5s ease-in-out;
-
-  &__left {
-    right: 100%;
-  }
-
-  &__right {
-    left: 100%;
-  }
-
-  &--active {
-    &.el-drawer__left {
-      right: 0;
-    }
-  
-    &.el-drawer__right {
-      left: 0;
-    }
-  }
-}

@@ -1,15 +1,15 @@
 <template>
   <div
-    :class="{'vs-sidebar-group-open' : openItems}"
-    class="vs-sidebar-group"
+    :class="{'el-sidebar-group-open' : openItems}"
+    class="el-sidebar-group"
     @mouseover="mouseover"
     @mouseout="mouseout">
     <h4 @click="clickGroup">{{ title }}</h4>
-    <span class="vs-sidebar-tooltip">{{ title }}</span>
+    <span class="el-sidebar-tooltip">{{ title }}</span>
     <ul
       ref="items"
       :style="styleItems"
-      class="vs-sidebar-group-items">
+      class="el-sidebar-group-items">
       <slot></slot>
     </ul>
   </div>

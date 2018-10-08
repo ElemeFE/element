@@ -73,6 +73,7 @@ import Slideout from '../packages/slideout/index.js';
 import Sidebar from '../packages/sidebar/index.js';
 import SidebarGroup from '../packages/sidebar-group/index.js';
 import SidebarItem from '../packages/sidebar-item/index.js';
+import Drawer from '../packages/drawer/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -146,6 +147,7 @@ const components = [
   Sidebar,
   SidebarGroup,
   SidebarItem,
+  Drawer,
   CollapseTransition
 ];
 
@@ -257,7 +259,8 @@ const ElementUi = {
   Slideout,
   Sidebar,
   SidebarGroup,
-  SidebarItem
+  SidebarItem,
+  Drawer
 };
 
 export default ElementUi;

@@ -1,9 +1,9 @@
 .parentx-static {
-  .vs-sidebar-background {
+  .el-sidebar-background {
     display: none;
   }
 }
-.vs-sidebar-background {
+.el-sidebar-background {
   background: rgba(0,0,0,.2);
   width: 100%;
   height: 100%;
@@ -12,13 +12,14 @@
   transition: all .3s ease;
   opacity: 1;
 }
-.vs-sidebar {
+
+.el-sidebar {
   background: rgb(255,255,255);
   z-index: 3000;
   position: fixed;
   height: 100vh;
   width: 100%;
-  max-width: 260px;
+  max-width: 310px;
   top: 0px;
   display: flex;
   flex-direction: column;
@@ -26,7 +27,16 @@
   left: 0px;
   transition: all .25s ease;
   z-index: 40000;
-  &.vs-sidebar-reduce {
+  padding: 0;
+
+  &--full {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &.el-sidebar-reduce {
     max-width: 54px;
     border-radius: 0px 10px 10px 0px;
     h4 {
@@ -48,11 +58,11 @@
       width: 40px !important;
       height: 40px !important;
     }
-    &.vs-sidebar-reduceNotHoverExpand {
+    &.el-sidebar-reduceNotHoverExpand {
       h4 {
         text-align: center;
         &:hover {
-          ~.vs-sidebar-tooltip {
+          ~.el-sidebar-tooltip {
             opacity: 1;
             visibility: visible;
             transform: translate(5px, -110%);
@@ -60,10 +70,10 @@
         }
       }
     }
-    &:hover:not(.vs-sidebar-reduceNotRebound):not(.vs-sidebar-reduceNotHoverExpand) {
+    &:hover:not(.el-sidebar-reduceNotRebound):not(.el-sidebar-reduceNotHoverExpand) {
       animation: expand .4s ease .15s;
     }
-    &:hover:not(.vs-sidebar-reduceNotHoverExpand) {
+    &:hover:not(.el-sidebar-reduceNotHoverExpand) {
       max-width: 260px;
       h4 {
         i {
@@ -71,20 +81,20 @@
         }
       }
     }
-    .vs-sidebar-item {
+    .el-sidebar-item {
       overflow: hidden;
       i {
         padding: 10px;
       }
     }
   }
-  &.vs-sidebar-position-right {
+  &.el-sidebar-position-right {
     left: auto;
-    right: 0px;
-    &.vs-sidebar-reduce {
+    right: 17px;
+    &.el-sidebar-reduce {
       border-radius: 10px 0px 0px 10px;
     }
-    .vs-sidebar-tooltip {
+    .el-sidebar-tooltip {
       right: 70px;
       left: auto;
       &:after {
@@ -94,16 +104,16 @@
       }
     }
   }
-  &.vs-sidebar-parent {
-    position: absolute;
+  &.el-sidebar-parent {
+    // position: absolute;
+    // height: 100% !important;
+    // top: 0px;
+    position: fixed;
     height: 100% !important;
-    top: 0px;
+    top: auto;
   }
-  &.vs-sidebar-staticPosition {
+  &.el-sidebar-staticPosition {
     position: relative;
-  }
-  .vs-divider-text {
-    opacity: .7;
   }
   header {
     border-bottom: 1px solid rgba(0,0,0,.06);
@@ -112,11 +122,11 @@
   footer {
     border-top: 1px solid rgba(0,0,0,.06);
   }
-  .vs-sidebar-items {
+  .el-sidebar-items {
     padding: 10px 0px;
     background: inherit;
     overflow-y: auto;
-    .vs-sidebar-item {
+    .el-sidebar-item {
       transition: all .25s ease;
       i.material-icons {
         margin-right: 8px;
@@ -139,7 +149,7 @@
     }
   }
 }
-.vs-sidebar-group {
+.el-sidebar-group {
   background: inherit;
   position: relative;
   >ul {
@@ -161,7 +171,7 @@
       right: 10px;
     }
   }
-  .vs-sidebar-tooltip {
+  .el-sidebar-tooltip {
     opacity: 0;
     transition: all .25s ease;
     background: inherit;
@@ -186,7 +196,7 @@
       transform: translate(0,-50%) rotate(45deg);
     }
   }
-  .vs-sidebar-group-items {
+  .el-sidebar-group-items {
     padding: 0px;
     transition: all .25s ease;
     max-height: 0px;
@@ -197,11 +207,11 @@
     transition: all .2s ease;
     user-select: none;
   }
-  &.vs-sidebar-group-open {
+  &.el-sidebar-group-open {
     > ul {
       padding-left: 10px;
       opacity: 1;
-      .vs-sidebar-item:last-child {
+      .el-sidebar-item:last-child {
         border-bottom: 1px solid rgba(0,0,0,.05);
       }
     }
@@ -219,25 +229,25 @@
 
 // animations
 
-.vs-sidebar-animate-enter-active, .vs-sidebar-animate-leave-active {
+.el-sidebar-animate-enter-active, .el-sidebar-animate-leave-active {
   transition: all .25s ease;
-  .vs-sidebar {
+  .el-sidebar {
     transition: all .25s ease;
   }
 }
 
-.vs-sidebar-animate-enter:not(.vs-sidebar-position-right), .vs-sidebar-animate-leave-to:not(.vs-sidebar-position-right) {
-  .vs-sidebar {
+.el-sidebar-animate-enter:not(.el-sidebar-position-right), .el-sidebar-animate-leave-to:not(.el-sidebar-position-right) {
+  .el-sidebar {
     transform: translate(-100%);
   }
 }
 
-.vs-sidebar-animate-enter, .vs-sidebar-animate-leave-to {
-  .vs-sidebar-background {
+.el-sidebar-animate-enter, .el-sidebar-animate-leave-to {
+  .el-sidebar-background {
     opacity: 0 !important;
   }
-  .vs-sidebar {
-    &.vs-sidebar-position-right {
+  .el-sidebar {
+    &.el-sidebar-position-right {
       transform: translate(100%);
     }
   }

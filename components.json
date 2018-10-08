@@ -71,5 +71,6 @@
   "slideout": "./packages/slideout/index.js",
   "sidebar": "./packages/sidebar/index.js",
   "sidebar-group": "./packages/sidebar-group/index.js",
-  "sidebar-item": "./packages/sidebar-item/index.js"
+  "sidebar-item": "./packages/sidebar-item/index.js",
+  "drawer": "./packages/drawer/index.js"
 }
