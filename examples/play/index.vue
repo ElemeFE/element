@@ -522,7 +522,7 @@
 					<el-form>	
 
 						<label class="label-form-input-default" >Formulário</label>
-<<<<<<< Updated upstream
+
 						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="siagri-icon-question"></i></el-tooltip>
 						<el-input placeholder="Input Geral" v-model="input" clearable prefix-icon="siagri-icon-date"></el-input>
 
@@ -530,15 +530,7 @@
 
 						<label class="label-form-input-default" >Formulário Textarea</label>
 						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="siagri-icon-question"></i></el-tooltip>
-=======
-						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question label-form-input-default"></i></el-tooltip>
-						<el-input placeholder="Input Geral" v-model="input" clearable prefix-icon="el-icon-date"></el-input>
 
-						<div class="content-padding"></div>
-
-						<label class="label-form-input-primary" >Formulário Textarea</label>
-						<el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="top"><i class="el-icon-question label-form-input-primary"></i></el-tooltip>
->>>>>>> Stashed changes
 						<el-input type="textarea":rows="2" placeholder="Input Textarea" v-model="textarea"></el-input>
 
 						<div class="content-padding"></div>
