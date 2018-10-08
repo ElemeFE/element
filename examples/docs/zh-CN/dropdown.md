@@ -337,6 +337,13 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | show-timeout  | 展开下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 250 |
 | hide-timeout  | 收起下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 150 |
 
+### Dropdown Slots
+
+| Name | 说明 |
+|------|--------|
+| — | content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>, <button> etc.`) or `el-component`, to attach the trigger listener  |
+| dropdown | content of the Dropdown Menu, usually a `<el-dropdown-menu>` element |
+
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
