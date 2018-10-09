@@ -341,8 +341,8 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 
 | Name | 说明 |
 |------|--------|
-| — | content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>, <button> etc.`) or `el-component`, to attach the trigger listener  |
-| dropdown | content of the Dropdown Menu, usually a `<el-dropdown-menu>` element |
+| — | 触发下拉列表显示的元素。 注意： 必须是一个元素或者或者组件  |
+| dropdown | 下拉列表，通常是 `<el-dropdown-menu>` 组件     |
 
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |
