@@ -139,7 +139,7 @@ langs.forEach(lang => {
 route.push({
   path: '/play',
   name: 'play',
-  component: require('./play/index.vue').default
+  component: require('./play/teste.vue').default
 });
 
 let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Element from 'main/index.js';
-import App from './play/index.vue';
+import App from './play/teste.vue';
 import 'packages/theme-chalk/src/index.scss';
 
 import locale from 'element-ui/src/locale/lang/pt-br';

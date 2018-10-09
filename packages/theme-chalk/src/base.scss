@@ -1,5 +1,6 @@
-@import "common/transition.scss";
-@import "icon.scss";
+@import "mixins/mixins";
+@import "common/var";
+@import "iconList.scss";
 
 @each $key, $value in $siagriIcons {
   .siagri-icon-#{$key} {

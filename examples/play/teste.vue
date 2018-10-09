@@ -1,28 +1,20 @@
 <template>
-  <el-slideout menu="#menu" panel="#panel" :toggleSelectors="['.toggle-button']" @on-open="open">
-    <nav id="menu">
-      <div>Menu</div>
-    </nav>
-    <main id="panel">
-      <header>
-        <div>
-          <button class="toggle-button">☰</button>
-          Panel
-        </div>
-      </header>
-    </main>
-  </el-slideout>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col col-lg-12">
+        off corse
+      </div>
+      <div class="col col-lg-12">
+        what? are you serious?
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 	export default {
     data() {
       return {
         active: false
-      }
-    },
-     methods: {
-      open: function () {
-        console.log('slideoutOpen')
       }
     }
 	}
