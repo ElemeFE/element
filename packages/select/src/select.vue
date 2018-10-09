@@ -94,10 +94,10 @@
       <template slot="prefix" v-if="$slots.prefix">
         <slot name="prefix"></slot>
       </template>
-      <i slot="suffix"
-       :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
-       @click="handleIconClick"
-      ></i>
+      <template slot="suffix">
+        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
+        <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
+      </template>
     </el-input>
     <transition
       name="el-zoom-in-top"
@@ -191,16 +191,19 @@
         return !this.filterable || this.multiple || !isIE && !this.visible;
       },
 
-      iconClass() {
+      showClose() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&
           !this.multiple &&
-          !this.visible &&
           this.value !== undefined &&
           this.value !== null &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up'));
+        return criteria;
+      },
+
+      iconClass() {
+        return this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up');
       },
 
       debounce() {
@@ -574,10 +577,8 @@
         this.softFocus = false;
       },
 
-      handleIconClick(event) {
-        if (this.iconClass.indexOf('circle-close') > -1) {
-          this.deleteSelected(event);
-        }
+      handleClearClick(event) {
+        this.deleteSelected(event);
       },
 
       doDestroy() {
