@@ -142,4 +142,4 @@ Use a red dot to mark content that needs to be noticed.
 | max           |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
 | is-dot        | if a little dot is displayed | boolean   |    —           |  false  |
 | hidden        | hidden badge    | boolean         |          —            |  false  |
-| type          | button type     | string          | primary / success / warning / danger / info / text |   —  |
+| type          | button type     | string          | primary / success / warning / danger / info |   —  |
