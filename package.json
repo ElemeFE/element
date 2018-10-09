@@ -123,6 +123,7 @@
     "postcss-scss": "^2.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "rimraf": "^2.5.4",
+    "sass-extract": "^2.1.0",
     "sass-loader": "^6.0.6",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
