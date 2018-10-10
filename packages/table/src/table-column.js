@@ -444,6 +444,10 @@ export default {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
     }
 
+    if (this.$scopedSlots.header) {
+      this.columnConfig.renderHeader = this.$scopedSlots.header;
+    }
+
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
   }
 };
