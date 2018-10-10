@@ -20,7 +20,7 @@ export default {
       nextYear: 'كىيىنكى يىل',
       prevMonth: 'ئالدىنقى ئاي',
       nextMonth: 'كىيىنكى ئاي',
-      year: 'يىل',
+      year: '- يىل',
       month1: '1-ئاي',
       month2: '2-ئاي',
       month3: '3-ئاي',
