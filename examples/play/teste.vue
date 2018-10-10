@@ -1,14 +1,17 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col col-lg-12">
-        off corse
+  <el-container fluid>
+    <el-row type="flex">
+      <div class="el-col el-col-md-6 el-col-lg-12">
+        <label for="">teste</label>
+        <dl><dt>teste</dt></dl>
+        <ul><li>aaa</li></ul>
+        <a href="">aa</a>
       </div>
-      <div class="col col-lg-12">
+      <div class="el-col el-col-md-6 el-col-lg-12">
         what? are you serious?
       </div>
-    </div>
-  </div>
+    </el-row>
+  </el-container>
 </template>
 <script>
 	export default {

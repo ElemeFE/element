@@ -1,0 +1,16 @@
+@function colors($key) {
+    @return map-get($colors, $key);
+}
+
+@function font-family($key) {
+    @return map-get($font-family, $key);
+}
+
+@function font-size($key) {
+    @return map-get($font-size, $key);
+}
+
+@function font-weight($key) {
+    @return map-get($font-weight, $key);
+}
+  

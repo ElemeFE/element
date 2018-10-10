@@ -51,6 +51,7 @@
   "dependencies": {
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
+    "bootstrap": "^4.1.3",
     "deepmerge": "^1.2.0",
     "fecha": "^2.3.3",
     "normalize-wheel": "^1.0.1",

@@ -1,0 +1,42 @@
+$--grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$--breakpoints: $--grid-breakpoints;
+
+$--container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
+
+$--grid-columns: 24 !default;
+
+$--enable-grid-classes:         true !default;
+
+$--grid-gutter-width:           30px !default;
+
+$label-margin-bottom: 0;
+
+$font-family-base: 'Nunito Sans' !default;
+$font-size-base: 14px !default;
+$font-weight-base: normal !default;
+$line-height-base: 14px !default;
+$headings-margin-bottom: 0 !default;
+$paragraph-margin-bottom: 0 !default;
+$dt-font-weight: normal !default;
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+$font-family-monospace: 'sans serif' !default;
+$table-cell-padding: 0 !default;
+$table-cell-padding: 0 !default;
+$table-caption-color: gray !default;
+$label-margin-bottom: 0 !default;
+$body-color:#282828 !default;
+$body-bg: #fafafa !default;
+$link-color: red !default;

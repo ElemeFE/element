@@ -176,9 +176,14 @@
 <template>
   <div id="app" :class="{ 'is-component': isComponent }">
     <main-header v-if="lang !== 'play'"></main-header>
-    <div class="main-cnt">
+    <template v-if="lang === 'play'">
       <router-view></router-view>
-    </div>
+    </template>
+    <template v-else>
+      <div class="main-cnt">
+        <router-view></router-view>
+      </div>
+    </template>
     <main-footer v-if="lang !== 'play' && !isComponent"></main-footer>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <section class="el-container" :class="{ 'is-vertical': isVertical }">
+  <section :class="[(fluid) ? 'el-container-fluid' : 'el-container', { 'is-vertical': isVertical }]">
     <slot></slot>
   </section>
 </template>
@@ -11,7 +11,13 @@
     componentName: 'ElContainer',
 
     props: {
-      direction: String
+      direction: String,
+      fluid: {
+        type: [Boolean, String],
+        default (val) {
+          return Boolean(val);
+        }
+      }
     },
 
     computed: {

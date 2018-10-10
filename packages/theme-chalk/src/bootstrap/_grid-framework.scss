@@ -1,10 +1,6 @@
-// Framework grid generation
-//
-// Used only by Bootstrap to generate the correct number of grid classes given
-// any value of `$--grid-columns`.
 
 @mixin make-grid-columns($columns: $--grid-columns, $gutter: $--grid-gutter-width, $breakpoints: $--grid-breakpoints) {
-  // Common properties for all breakpoints
+
   %grid-column {
     position: relative;
     width: 100%;
@@ -17,30 +13,30 @@
 
     // Allow columns to stretch full width below their breakpoints
     @for $i from 1 through $columns {
-      .col#{$infix}-#{$i} {
+      .el-col#{$infix}-#{$i} {
         @extend %grid-column;
       }
     }
-    .col#{$infix},
-    .col#{$infix}-auto {
+    .el-col#{$infix},
+    .el-col#{$infix}-auto {
       @extend %grid-column;
     }
 
     @include media-breakpoint-up($breakpoint, $breakpoints) {
-      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
-      .col#{$infix} {
+      // Provide basic `.el-col-{bp}` classes for equal-width flexbox columns
+      .el-col#{$infix} {
         flex-basis: 0;
         flex-grow: 1;
         max-width: 100%;
       }
-      .col#{$infix}-auto {
+      .el-col#{$infix}-auto {
         flex: 0 0 auto;
         width: auto;
         max-width: 100%; // Reset earlier grid tiers
       }
 
       @for $i from 1 through $columns {
-        .col#{$infix}-#{$i} {
+        .el-col#{$infix}-#{$i} {
           @include make-col($i, $columns);
         }
       }

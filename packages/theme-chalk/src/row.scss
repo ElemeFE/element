@@ -5,7 +5,8 @@
 @include b(row) {
   position: relative;
   box-sizing: border-box;
-  @include utils-clearfix;
+  // remove old browser support
+  // @include utils-clearfix;
 
   @include m(flex) {
     display: flex;

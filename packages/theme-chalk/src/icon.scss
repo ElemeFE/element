@@ -2,17 +2,17 @@
 @import "iconList";
 
 @font-face {
-  font-family: '#{$--font-family}';
-  src:  url('#{$--font-path}/#{$--font-family}.eot');
-  src:  url('#{$--font-path}/#{$--font-family}.eot') format('embedded-opentype'),
-        url('#{$--font-path}/#{$--font-family}.ttf') format('truetype'),
-        url('#{$--font-path}/#{$--font-family}.woff') format('woff');
+  font-family: '#{$--siagri-font-family}';
+  src:  url('#{$--siagri-font-path}/#{$--siagri-font-family}.eot');
+  src:  url('#{$--siagri-font-path}/#{$--siagri-font-family}.eot') format('embedded-opentype'),
+        url('#{$--siagri-font-path}/#{$--siagri-font-family}.ttf') format('truetype'),
+        url('#{$--siagri-font-path}/#{$--siagri-font-family}.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="siagri-icon-"], [class*=" siagri-icon-"] {  
-  font-family: '#{$--font-family}' !important;
+  font-family: '#{$--siagri-font-family}' !important;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

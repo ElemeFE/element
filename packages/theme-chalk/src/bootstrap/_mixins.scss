@@ -1,0 +1,15 @@
+@mixin colors($key) {
+    color: colors($key);
+}
+
+@mixin font-family($key) {
+    font-family: font-family($key);
+}
+
+@mixin font-size($key) {
+    font-size: font-size($key);
+}
+
+@mixin font-weight($key) {  
+    font-weight: font-weight($key);
+}
