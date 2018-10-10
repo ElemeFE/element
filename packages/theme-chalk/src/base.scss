@@ -1,9 +1,13 @@
+// @import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+// @import "reboot";
 @import "icon.scss";
 @import "mixins/mixins";
 @import "common/var";
 @import "iconList.scss";
 
-@import "~bootstrap/scss/bootstrap-reboot";
 
 @import "bootstrap/variables";
 @import "bootstrap/breakpoints";
