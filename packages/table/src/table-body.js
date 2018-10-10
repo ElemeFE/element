@@ -22,6 +22,7 @@ export default {
     stripe: Boolean,
     context: {},
     rowClassName: [String, Function],
+    beforeRowClick: Function,
     rowStyle: [Object, Function],
     fixed: String,
     highlight: Boolean
@@ -367,6 +368,12 @@ export default {
     },
 
     handleClick(event, row) {
+      const beforeRowClick = this.table.beforeRowClick;
+      if (typeof beforeRowClick === 'function') {
+        if (!beforeRowClick.call(null, {row})) {
+          return;
+        }
+      }
       this.store.commit('setCurrentRow', row);
       this.handleEvent(event, row, 'click');
     },

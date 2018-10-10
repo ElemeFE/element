@@ -39,6 +39,7 @@
         :store="store"
         :stripe="stripe"
         :row-class-name="rowClassName"
+        :before-row-click="beforeRowClick"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
         :style="{
@@ -115,6 +116,7 @@
           :stripe="stripe"
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
+          :before-row-click="beforeRowClick"
           :row-style="rowStyle"
           :style="{
             width: bodyWidth
@@ -177,6 +179,7 @@
           :store="store"
           :stripe="stripe"
           :row-class-name="rowClassName"
+          :before-row-click="beforeRowClick"
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
           :style="{
@@ -311,7 +314,8 @@
       selectOnIndeterminate: {
         type: Boolean,
         default: true
-      }
+      },
+      beforeRowClick: Function
     },
 
     components: {
