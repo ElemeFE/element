@@ -2,6 +2,10 @@
 
 *2018-10-02*
 
+### 1.2.16
+
+  - Добавил сomment icon
+
 ### 1.2.15
 
   - Font-weight 700 для price-info
