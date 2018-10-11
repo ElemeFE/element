@@ -457,6 +457,23 @@
     created() {
       this.tableId = 'el-table_' + tableIdSeed++;
       this.debouncedUpdateLayout = debounce(50, () => this.doLayout());
+
+      this.store.updateColumns();
+      this.resizeState = {
+        width: this.width || 0,
+        height: this.height || 0
+      };
+
+      // init filters
+      this.store.states.columns.forEach(column => {
+        if (column.filteredValue && column.filteredValue.length) {
+          this.store.commit('filterChange', {
+            column,
+            values: column.filteredValue,
+            silent: true
+          });
+        }
+      });
     },
 
     computed: {

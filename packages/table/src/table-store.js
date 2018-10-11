@@ -276,11 +276,15 @@ TableStore.prototype.mutations = {
 
   insertColumn(states, column, index, parent) {
     let array = states._columns;
+
     if (parent) {
       array = parent.children;
       if (!array) array = parent.children = [];
     }
 
+    if (array.includes(column)) {
+      return;
+    }
     if (typeof index !== 'undefined') {
       array.splice(index, 0, column);
     } else {
@@ -292,8 +296,10 @@ TableStore.prototype.mutations = {
       states.reserveSelection = column.reserveSelection;
     }
 
+    // updateColumns is an safe operation for SSR
+    // do it unconditionally to enable SSR-compatibility
+    this.updateColumns(); // hack for dynamics insert column
     if (this.table.$ready) {
-      this.updateColumns(); // hack for dynamics insert column
       this.scheduleLayout();
     }
   },

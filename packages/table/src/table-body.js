@@ -54,35 +54,33 @@ export default {
                 class={ [this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) => {
-                    const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
-                    if (!rowspan || !colspan) {
-                      return '';
-                    } else {
-                      return (
-                        <td
-                          style={ this.getCellStyle($index, cellIndex, row, column) }
-                          class={ this.getCellClass($index, cellIndex, row, column) }
-                          rowspan={ rowspan }
-                          colspan={ colspan }
-                          on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                          on-mouseleave={ this.handleCellMouseLeave }>
-                          {
-                            column.renderCell.call(
-                              this._renderProxy,
-                              h,
-                              {
-                                row,
-                                column,
-                                $index,
-                                store: this.store,
-                                _self: this.context || this.table.$vnode.context
-                              },
-                              columnsHidden[cellIndex]
-                            )
-                          }
-                        </td>
-                      );
-                    }
+                    let { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
+                    rowspan = rowspan || 1;
+                    colspan = colspan || 1;
+                    return (
+                      <td
+                        style={ this.getCellStyle($index, cellIndex, row, column) }
+                        class={ this.getCellClass($index, cellIndex, row, column) }
+                        rowspan={ rowspan }
+                        colspan={ colspan }
+                        on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                        on-mouseleave={ this.handleCellMouseLeave }>
+                        {
+                          column.renderCell.call(
+                            this._renderProxy,
+                            h,
+                            {
+                              row,
+                              column,
+                              $index,
+                              store: this.store,
+                              _self: this.context || this.table.$vnode.context
+                            },
+                            columnsHidden[cellIndex]
+                          )
+                        }
+                      </td>
+                    );
                   })
                 }
               </tr>,
