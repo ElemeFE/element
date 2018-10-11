@@ -370,12 +370,23 @@ export default {
     handleClick(event, row) {
       const beforeRowClick = this.table.beforeRowClick;
       if (typeof beforeRowClick === 'function') {
-        if (!beforeRowClick.call(null, {row})) {
-          return;
+        let res = beforeRowClick.call(null, {row});
+        if (Object.prototype.toString.call(res) === '[object Promise]') {
+          let self = this;
+          res.then(val => {
+            if (val) {
+              self.store.commit('setCurrentRow', row);
+              self.handleEvent(event, row, 'click');
+            }
+          });
+        } else if (res) {
+          this.store.commit('setCurrentRow', row);
+          this.handleEvent(event, row, 'click');
         }
+      } else {
+        this.store.commit('setCurrentRow', row);
+        this.handleEvent(event, row, 'click');
       }
-      this.store.commit('setCurrentRow', row);
-      this.handleEvent(event, row, 'click');
     },
 
     handleEvent(event, row, name) {
