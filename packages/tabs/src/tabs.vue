@@ -64,6 +64,8 @@
           if (!(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]))) {
             this.panes = panes;
           }
+        } else if (this.panes.length !== 0) {
+          this.panes = [];
         }
       },
       handleTabClick(tab, tabName, event) {
