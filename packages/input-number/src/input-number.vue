@@ -39,6 +39,7 @@
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
       @focus="handleFocus"
+      @input="handleInputChange"
       @change="handleInputChange">
     </el-input>
   </div>
