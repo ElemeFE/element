@@ -202,7 +202,7 @@ describe('TimePicker', () => {
   it('selectableRange', done => {
     vm = createTest(TimePicker, {
       pickerOptions: {
-        selectableRange: '18:30:00 - 20:30:00'
+        selectableRange: ['17:30:00 - 18:30:00', '18:50:00 - 20:30:00', '21:00:00 - 22:00:00']
       }
     }, true);
     const input = vm.$el.querySelector('input');
@@ -218,8 +218,18 @@ describe('TimePicker', () => {
         .map(node => Number(node.textContent));
 
       hoursEl.querySelectorAll('.disabled')[0].click();
-      expect(disabledHours).to.not.include.members([18, 19, 20]);
-      done();
+      expect(disabledHours).to.not.include.members([17, 18, 19, 20, 21, 22]);
+
+      const minutesEl = list[1];
+      hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
+      setTimeout(_ => {
+        const disabledMinutes = [].slice
+          .call(minutesEl.querySelectorAll('.disabled'))
+          .map(node => Number(node.textContent));
+        expect(disabledMinutes.every(t => t > 30 && t < 50)).to.equal(true);
+        expect(disabledMinutes.length).to.equal(19);
+        done();
+      }, DELAY);
     }, DELAY);
   });
 
