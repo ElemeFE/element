@@ -1,7 +1,7 @@
 export default {
   el: {
     colorpicker: {
-      confirm: 'جەزىملەش',
+      confirm: 'جەزملەش',
       clear: 'قۇرۇقداش'
     },
     datepicker: {
@@ -9,7 +9,7 @@ export default {
       today: 'بۈگۈن',
       cancel: 'بىكار قىلىش',
       clear: 'قۇرۇقداش',
-      confirm: 'جەزىملەش',
+      confirm: 'جەزملەش',
       selectDate: 'چىسلا تاللاڭ',
       selectTime: 'ۋاقىت تاللاڭ',
       startDate: 'باشلانغان چىسلا',
@@ -77,7 +77,7 @@ export default {
     },
     messagebox: {
       title: 'ئەسكەرتىش',
-      confirm: 'جەزىملەش',
+      confirm: 'جەزملەش',
       cancel: 'بىكار قىلىش',
       error: 'كىرگۈزگەن ئۇچۇرىڭىزدا خاتالىق بار!'
     },
