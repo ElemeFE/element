@@ -312,7 +312,7 @@
 | collapse-transition  | 是否开启折叠动画 | boolean   | — | true   |
 
 ### Menu Methods
-| 事件名称      | 说明    | 参数      |
+| 方法名称      | 说明    | 参数      |
 |---------- |-------- |---------- |
 | open  | 展开指定的 sub-menu | index: 需要打开的 sub-menu 的 index |
 | close  | 收起指定的 sub-menu | index: 需要收起的 sub-menu 的 index |
