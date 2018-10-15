@@ -742,9 +742,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        let value;
-        if (this.multiple) value = [];
-        else value = '';
+        const value = this.multiple ? [] : '';
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;
