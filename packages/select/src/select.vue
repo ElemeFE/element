@@ -186,13 +186,13 @@
       },
 
       showClose() {
+        let hasValue = this.multiple
+          ? this.value.length > 0
+          : this.value !== undefined && this.value !== null && this.value !== '';
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&
-          !this.multiple &&
-          this.value !== undefined &&
-          this.value !== null &&
-          this.value !== '';
+          hasValue;
         return criteria;
       },
 
@@ -743,8 +743,9 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        this.$emit('input', '');
-        this.emitChange('');
+        const value = this.multiple ? [] : '';
+        this.$emit('input', value);
+        this.emitChange(value);
         this.visible = false;
         this.$emit('clear');
       },
