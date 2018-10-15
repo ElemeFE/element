@@ -85,11 +85,10 @@
       },
       clearValidate(props = []) {
         const fields = props.length
-          ? (typeof props === 'string' 
-              ? this.fields.filter(field => props === field.prop)
-              : this.fields.filter(field => props.indexOf(field.prop) > -1)
-            )
-          : this.fields;
+          ? (typeof props === 'string'
+            ? this.fields.filter(field => props === field.prop)
+            : this.fields.filter(field => props.indexOf(field.prop) > -1)
+          ) : this.fields;
         fields.forEach(field => {
           field.clearValidate();
         });
