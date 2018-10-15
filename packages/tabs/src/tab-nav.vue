@@ -2,10 +2,29 @@
   import TabBar from './tab-bar';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
-  function noop() {}
   const firstUpperCase = str => {
     return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
   };
+
+  // Properties inected from the provider from $parent
+  const injectableProps = [
+    'panes',
+    'currentName',
+    'editable',
+    ['onTabClick', 'handleTabClick'],
+    ['onTabRemove', 'handleTabRemove'],
+    'type',
+    'stretch'
+  ];
+
+  const injectComputed = injectableProps.reduce((proexies, item) => {
+    const [field, proxyTo] = typeof item === 'string' ? [item, item] : item;
+    return Object.assign(proexies, {
+      [field]() {
+        return this.rootTabs[proxyTo];
+      }
+    });
+  }, {});
 
   export default {
     name: 'TabNav',
@@ -16,22 +35,6 @@
 
     inject: ['rootTabs'],
 
-    props: {
-      panes: Array,
-      currentName: String,
-      editable: Boolean,
-      onTabClick: {
-        type: Function,
-        default: noop
-      },
-      onTabRemove: {
-        type: Function,
-        default: noop
-      },
-      type: String,
-      stretch: Boolean
-    },
-
     data() {
       return {
         scrollable: false,
@@ -41,7 +44,7 @@
       };
     },
 
-    computed: {
+    computed: Object.assign({
       navStyle() {
         const dir = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'X' : 'Y';
         return {
@@ -51,7 +54,7 @@
       sizeName() {
         return ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'width' : 'height';
       }
-    },
+    }, injectComputed),
 
     methods: {
       scrollPrev() {
@@ -254,7 +257,7 @@
               role="tablist"
               on-keydown={ changeTab }
             >
-              {!type ? <tab-bar tabs={panes}></tab-bar> : null}
+              {!type ? <tab-bar /> : null}
               {tabs}
             </div>
           </div>

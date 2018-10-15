@@ -108,15 +108,10 @@
     render(h) {
       let {
         type,
-        handleTabClick,
-        handleTabRemove,
         handleTabAdd,
-        currentName,
-        panes,
         editable,
         addable,
-        tabPosition,
-        stretch
+        tabPosition
       } = this;
 
       const newButton = editable || addable
@@ -132,22 +127,10 @@
         )
         : null;
 
-      const navData = {
-        props: {
-          currentName,
-          onTabClick: handleTabClick,
-          onTabRemove: handleTabRemove,
-          editable,
-          type,
-          panes,
-          stretch
-        },
-        ref: 'nav'
-      };
       const header = (
         <div class={['el-tabs__header', `is-${tabPosition}`]}>
           {newButton}
-          <tab-nav { ...navData }></tab-nav>
+          <tab-nav ref="nav"></tab-nav>
         </div>
       );
       const panels = (
