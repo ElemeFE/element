@@ -666,7 +666,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | disabled | whether Select is disabled | boolean | — | false |
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
-| clearable | whether single select can be cleared | boolean | — | false |
+| clearable | whether select can be cleared | boolean | — | false |
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
