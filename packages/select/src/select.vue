@@ -189,7 +189,6 @@
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&
-          !this.multiple &&
           this.value !== undefined &&
           this.value !== null &&
           this.value !== '';
@@ -743,8 +742,11 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        this.$emit('input', '');
-        this.emitChange('');
+        let value;
+        if (this.multiple) value = [];
+        else value = '';
+        this.$emit('input', value);
+        this.emitChange(value);
         this.visible = false;
         this.$emit('clear');
       },
