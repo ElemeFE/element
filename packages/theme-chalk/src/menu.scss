@@ -20,10 +20,6 @@
     vertical-align: middle;
   }
 
-  i {
-    color: $--color-text-secondary;
-  }
-
   &:hover,
   &:focus {
     outline: none;
@@ -245,8 +241,9 @@
     font-size: 12px;
   }
   @include when(active) {
-    .el-submenu__title {
+    > .el-submenu__title {
       border-bottom-color: $--color-primary;
+      color: $--color-primary;
     }
   }
   @include when(opened) {

@@ -119,11 +119,11 @@
         return this.rootMenu.isMenuPopup;
       },
       titleStyle() {
-        if (this.mode !== 'horizontal') {
-          return {
-            color: this.textColor
-          };
-        }
+//        if (this.mode !== 'horizontal') {
+//          return {
+//            color: this.textColor
+//          };
+//        }
         return {
           borderBottomColor: this.active
             ? (this.rootMenu.activeTextColor ? this.activeTextColor : '')
