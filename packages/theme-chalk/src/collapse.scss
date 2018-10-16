@@ -18,6 +18,8 @@
     transition: border-bottom-color .3s;
     outline: none;
     @include e(arrow) {
+      fill: currentColor;
+      height: 100%;
       margin-right: 8px;
       transition: transform .3s;
       float: right;

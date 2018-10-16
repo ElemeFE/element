@@ -155,7 +155,7 @@
       }
     },
     methods: {
-      onCustomLabelClick(e) {
+      onCustomLabelClick() {
         this.showCustomLabel = false;
         this.$refs.input.focus();
       },
