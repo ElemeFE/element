@@ -1,17 +1,20 @@
-// @import "~bootstrap/scss/bootstrap-reboot";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-// @import "reboot";
-@import "icon.scss";
 @import "mixins/mixins";
 @import "common/var";
+
+// @import "~bootstrap/scss/bootstrap-reboot";
+/* @import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins"; */
+
+@import "reset";
+@import "icon.scss";
 @import "iconList.scss";
 
 
 @import "bootstrap/variables";
 @import "bootstrap/breakpoints";
 @import "bootstrap/grid-framework";
+@import "bootstrap/grid";
 
 @each $key, $value in $siagriIcons {
   .siagri-icon-#{$key} {

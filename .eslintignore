@@ -9,3 +9,5 @@ coverage
 *.scss
 *.woff
 *.ttf
+*.eot
+siagri.svg
