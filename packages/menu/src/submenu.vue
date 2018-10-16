@@ -176,6 +176,7 @@
         ) {
           return;
         }
+        clearTimeout(this.timeout);
         this.dispatch('ElMenu', 'submenu-click', this);
       },
       handleMouseenter() {
@@ -222,6 +223,9 @@
           ? 'bottom-start'
           : 'right-start';
       },
+      handleSubItemClick() {
+        clearTimeout(this.timeout);
+      },
       initPopper() {
         this.referenceElm = this.$el;
         this.popperElm = this.$refs.menu;
@@ -242,6 +246,7 @@
       });
     },
     mounted() {
+      this.$on('item-click', this.handleSubItemClick);
       this.initPopper();
     },
     beforeDestroy() {
