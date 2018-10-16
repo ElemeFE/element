@@ -854,7 +854,12 @@
 
       const reference = this.$refs.reference;
       if (reference && reference.$el) {
-        this.initialInputHeight = reference.$el.getBoundingClientRect().height;
+        const sizeMap = {
+          medium: 36,
+          small: 32,
+          mini: 28
+        };
+        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
