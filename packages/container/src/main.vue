@@ -14,7 +14,7 @@
       direction: String,
       fluid: {
         type: [Boolean, String],
-        default (val) {
+        default(val) {
           return Boolean(val);
         }
       }
