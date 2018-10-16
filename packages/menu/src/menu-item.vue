@@ -96,6 +96,7 @@
       handleClick() {
         if (!this.disabled) {
           this.dispatch('ElMenu', 'item-click', this);
+          this.dispatch('ElSubmenu', 'item-click', this);
           this.$emit('click', this);
         }
       }
