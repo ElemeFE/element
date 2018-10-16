@@ -26,7 +26,8 @@
         v-bind="$attrs"
         :type="type"
         :disabled="inputDisabled"
-        :autocomplete="autoComplete"
+        :readonly="readonly"
+        :autocomplete="autoComplete || autocomplete"
         :value="currentValue"
         ref="input"
         @compositionstart="handleComposition"
@@ -39,7 +40,7 @@
         :aria-label="label"
       >
       <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon" :style="prefixOffset">
+      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <i class="el-input__icon"
            v-if="prefixIcon"
@@ -49,8 +50,7 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon"
-        :style="suffixOffset">
+        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
           <template v-if="!showClear">
             <slot name="suffix"></slot>
@@ -86,6 +86,8 @@
       ref="textarea"
       v-bind="$attrs"
       :disabled="inputDisabled"
+      :readonly="readonly"
+      :autocomplete="autoComplete || autocomplete"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -126,8 +128,6 @@
           ? ''
           : this.value,
         textareaCalcStyle: {},
-        prefixOffset: null,
-        suffixOffset: null,
         hovering: false,
         focused: false,
         isOnComposition: false,
@@ -141,6 +141,7 @@
       resize: String,
       form: String,
       disabled: Boolean,
+      readonly: Boolean,
       type: {
         type: String,
         default: 'text'
@@ -149,9 +150,18 @@
         type: [Boolean, Object],
         default: false
       },
-      autoComplete: {
+      autocomplete: {
         type: String,
         default: 'off'
+      },
+      /** @Deprecated in next major version */
+      autoComplete: {
+        type: String,
+        validator(val) {
+          process.env.NODE_ENV !== 'production' &&
+            console.warn('[Element Warn][Input]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
+          return true;
+        }
       },
       validateEvent: {
         type: Boolean,
@@ -193,9 +203,6 @@
       inputDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
       },
-      isGroup() {
-        return this.$slots.prepend || this.$slots.append;
-      },
       showClear() {
         return this.clearable &&
           !this.disabled &&
@@ -206,7 +213,7 @@
     },
 
     watch: {
-      'value'(val, oldValue) {
+      value(val, oldValue) {
         this.setCurrentValue(val);
       }
     },
@@ -286,24 +293,37 @@
         if (this.isOnComposition && value === this.valueBeforeComposition) return;
         this.currentValue = value;
         if (this.isOnComposition) return;
-        this.$nextTick(_ => {
-          this.resizeTextarea();
-        });
-        if (this.validateEvent) {
+        this.$nextTick(this.resizeTextarea);
+        if (this.validateEvent && this.currentValue === this.value) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }
       },
       calcIconOffset(place) {
+        let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
+        if (!elList.length) return;
+        let el = null;
+        for (let i = 0; i < elList.length; i++) {
+          if (elList[i].parentNode === this.$el) {
+            el = elList[i];
+            break;
+          }
+        }
+        if (!el) return;
         const pendantMap = {
-          'suf': 'append',
-          'pre': 'prepend'
+          suffix: 'append',
+          prefix: 'prepend'
         };
 
         const pendant = pendantMap[place];
-
         if (this.$slots[pendant]) {
-          return { transform: `translateX(${place === 'suf' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)` };
+          el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)`;
+        } else {
+          el.removeAttribute('style');
         }
+      },
+      updateIconOffset() {
+        this.calcIconOffset('prefix');
+        this.calcIconOffset('suffix');
       },
       clear() {
         this.$emit('input', '');
@@ -320,10 +340,11 @@
 
     mounted() {
       this.resizeTextarea();
-      if (this.isGroup) {
-        this.prefixOffset = this.calcIconOffset('pre');
-        this.suffixOffset = this.calcIconOffset('suf');
-      }
+      this.updateIconOffset();
+    },
+
+    updated() {
+      this.$nextTick(this.updateIconOffset);
     }
   };
 </script>

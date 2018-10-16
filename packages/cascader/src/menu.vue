@@ -42,7 +42,8 @@
         changeOnSelect: false,
         popperClass: '',
         hoverTimer: 0,
-        clicking: false
+        clicking: false,
+        id: generateId()
       };
     },
 
@@ -97,9 +98,6 @@
           formatOptions(optionsCopy);
           return loadActiveOptions(optionsCopy);
         }
-      },
-      id() {
-        return generateId();
       }
     },
 
@@ -232,14 +230,23 @@
                 hover: 'mouseenter'
               }[expandTrigger];
               const triggerHandler = () => {
-                this.activeItem(item, menuIndex);
-                this.$nextTick(() => {
-                  // adjust self and next level
-                  this.scrollMenu(this.$refs.menus[menuIndex]);
-                  this.scrollMenu(this.$refs.menus[menuIndex + 1]);
-                });
+                if (this.visible) {
+                  this.activeItem(item, menuIndex);
+                  this.$nextTick(() => {
+                    // adjust self and next level
+                    this.scrollMenu(this.$refs.menus[menuIndex]);
+                    this.scrollMenu(this.$refs.menus[menuIndex + 1]);
+                  });
+                }
               };
               events.on[triggerEvent] = triggerHandler;
+              if (triggerEvent === 'mouseenter' && this.changeOnSelect) {
+                events.on.click = () => {
+                  if (this.activeValue.indexOf(item.value) !== -1) {
+                    this.$emit('closeInside', true);
+                  }
+                };
+              }
               events.on['mousedown'] = () => {
                 this.clicking = true;
               };

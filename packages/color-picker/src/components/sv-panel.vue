@@ -47,9 +47,7 @@
         const value = this.color.get('value');
 
         const el = this.$el;
-        let { width, height } = el.getBoundingClientRect();
-
-        if (!height) height = width * 3 / 4;
+        let { clientWidth: width, clientHeight: height } = el;
 
         this.cursorLeft = saturation * width / 100;
         this.cursorTop = (100 - value) * height / 100;

@@ -654,7 +654,8 @@ Search data from server-side.
 | suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
 |autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean / object | — | false |
-|auto-complete | same as `auto-complete` in native input | string | on/off | off |
+|autocomplete | same as `autocomplete` in native input | string | on/off | off |
+|auto-complete | @DEPRECATED in next major version | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
 | readonly | same as `readonly` in native input | boolean | — | false |
 |max | same as `max` in native input | — | — | — |
@@ -712,6 +713,7 @@ Attribute | Description | Type | Options | Default
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
 | hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
+| popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
 
 ### Autocomplete Slots
 

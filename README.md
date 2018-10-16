@@ -57,6 +57,11 @@
           <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
         </a>
       </td>
+      <td align="center" valign="middle">
+        <a href="https://bitsrc.io/" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/10095631/41342907-e44e7196-6f2f-11e8-92f2-47702dc8f059.png">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -72,7 +77,7 @@
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
-- [Element for React](https://github.com/eleme/element-react)
+- [Element for React](https://github.com/elemefe/element-react)
 - [Element for Angular](https://github.com/ElemeFE/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
 - [Visual Studio Code helper](https://github.com/ElemeFE/vscode-element-helper)
@@ -153,7 +158,7 @@ Spanish documentation is made possible by these community developers:
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 
-<img width="650" src="https://user-images.githubusercontent.com/10095631/40616626-568895b2-62be-11e8-9fc3-dc54a2892515.jpg" alt="donation">
+<img width="650" src="https://user-images.githubusercontent.com/14025786/44833997-5d7c4d80-ac62-11e8-8445-1dffec0eb13c.png" alt="donation">
 
 ## Backers
 

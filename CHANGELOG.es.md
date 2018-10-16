@@ -1,21 +1,126 @@
 ## Changelog
 
+### 2.4.8
+
+- No se muestra el contorno cuando Switch está enfocado, #12771
+- Arreglado el estilo del Dropdown en ButtonGroup, #12819 (por @bluejfox)
+- Añadido evento opened para Dialog, #12828
+- Corregido el orden incorrecto de visualización de TabNav, #12846
+- Corregido el problema de que Tabs no se desplazaba a la pestaña seleccionada, #12948
+- Corregido el problema de que el identificador no se mostraba cuando se arrastraba el Tree node, #12854
+- El parámetro validar evento de Form contiene el mensaje de validación, #12860 (por @YamenSharaf)
+- Se ha corregido el DatePicker que no verificaba la validez de la hora de entrada del usuario, #12898
+- Arreglado el problema de que el atributo `render-header` del encabezado de Table no funcionaba, #12914
+
+### 2.4.7
+
+*2018-09-14*
+
+- Corregido que DatePicker no activaba la validación del Form, #12328 #12348 
+- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347 
+- Corregida la posición incorrecta del spinner del DatePicker, #12415 (por @rang-ali)
+- Se ha corregido el llenado automático del input del DatePicker, #12521 (por @abdallanayer)
+- Corregida el input no resaltada en Cascader, #12341
+- Corregido el orden incorrecto de Tabpane, #12346 
+- Corregida la posición incorrecta del cursor de ColorPicker, #12376 (por @cnwhy)
+- Corregido el estilo del Submenú, #2457
+- Corregido el resaltado después de seleccionar el Submenú, #12479
+- Corregidos los valores incorrectos seleccionados por Cascader, #12508 (por @huangjinqiang)
+- Corregido el valor incorrecto del input de Paginación, #12525 
+- Se ha corregido el orden en que la paginación desencadena los eventos, #12530
+- Corregido que no se mostraba el Table Filter, #12539
+- Corregido Tree que era incapaz de borrar nodos, #12684
+- Corregida la altura de los Select Input que cambiaba en modo simple, #12719
+- Arreglado el estilo de la etiqueta FormItem en Form anidado, #12748
+- Añadido el atributo `autocomplete` para Input, obsoleto `auto-complete`, #12514 (por @axetroy)
+- Añadido el slots-scope de Form para mostrar la información de validación, #12715 (por @YamenSharaf)
+
+### 2.4.6
+
+*2018-08-09*
+
+- Arreglada la tabla que no mostraba el ícono del filtro cuando a  `filter` se les asignaba un array vacío, #12165
+- Arreglado Menu que no guardaba el estado activo cuando cambiaba `collapse` #12178 (por @elfman)
+- Se ha corregido que Cascader no escapaba a los caracteres especiales para Regexp, #12248
+- Se ha corregido que el RadioBotón deshabilitado mostraba la sombra de la caja cuando se hacía clic, #12262
+- Arreglado el efecto de la tecla de flecha en Select cuando el valor por defecto es `undefined`,#12322
+- Corregida la función de consulta de Select not debounced en modo multi, #12181
+- Corregida que la palabra clave de consulta de Select desaparecía en modo multi, #12304
+- Corregido el ancho incorrecto de Dialog cuando se muestra a pantalla completa, #12203
+- Corregida la visualización incorrecta de Main en IE, #12237
+- Corregido el trigger de Input con dos validaciones de Form, #12260
+- Arreglado el añadir un nuevo nodo de árbol que causaba que los nodos desaparecieran, #12256
+- Arreglado el nodo Tree no se borraba después de arrastrar, #12279
+- Popover corregido porque no era visible cuando InputNumber no enfocaba, #12284
+- Añadido el atributo `popper-append-to-body` para Autocompletar, #12241
+- Añadido el modificador `sync` para el atributo `page-size` de Pagination, #12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- Se ha corregido en Table que `class-name` no funcionaba para las columnas `expand`, #12006
+- Se ha añadido el método `toggleAllSelection` para Table, #12047
+- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108 
+- Corregido que el `line-height` de Option no se establecia, #12120
+- Corregido que TimeSelect con valor por defecto `null` no podia ser asignado después de ejecutar `resetField`, #12010
+- Arreglado el evento `keydown` que cuando no era una tecla de flecha no funciona en Tree, #12008
+- Corregido nodo padre checked en modo lazy, #12106
+- Añadido el parámetro `includeHalfChecked` para getCheckedNodes de Tree, #12014
+
+### 2.4.4
+
+*2018-07-13*
+
+- Corregido que se disparaba la validacion del Select después de reajustar el formulario, #11837
+- Corregida la posición incorrecta del slot Input `suffix`  cuando se usaba el slot `suffix` con el slot  `append`  , #11951
+- Corregido el clearable Input que muestraba el icono de borrado cuando era readonly, #11967
+- Arreglado el nodo Tree checked cuando estaba disabled, #11847
+- Corregido que  `default-checked-keys`  no funcionaba en Tree, #11971
+- Corregido que el `empty-text` no era visible cuando el nodo Tree se filtraba, #11971
+- Arreglada la posición de texto vacío sobredimensionado en Table, #11965
+- Corregido que la fila de la tabla no se modificado el resaltado cuando `current-row-key` era asignada a null, #11866
+- Arreglado que mostraba el filtro del dropdown cuando los filtros eran un array vacío, #11864
+- Corregido que el cambio de label de Radio no detenia propagacion de eventos, #11912
+
+### 2.4.3
+
+*2018-07-03*
+
+- Corregido `allow-drop` que no funcionaba correctamente cuando los nodos de árbol tenian una altura personalizada, #11797
+- Ahora puede pasar un parámetro al método `clearValidate` de Form, especificando qué resultados de validación de `FormItems` necesita borrar, #11821
+- Añadido el atributo `distinguishCancelAndClose` para MessageBox, #11831
+
+### 2.4.2
+
+*2018-06-26*
+
+- Ahora el `class-name` y el `label-class-name` de la tabla son reactivos, #11626
+- Arreglado que Table seguia resaltando la fila en la que se había hecho clic cuando  `highlight-current-row` era `false`, #11646
+- Corregido un error de estilo de ButtonGroup cuando sólo habia un botón `round` o `circle`, #11605
+- Arreglado estilo del tamaño de página del Select de Pagination, #11622
+- Corregido un error del método `open`  de los Menús cuando se cambiaba dinámicamente `collapse`, #11646
+- Añadidos los parámetros `activeName` y `oldActiveName` al gancho before-leave de Tabs, #11713
+- Arreglado el focus en Cascader después de hacer clic fuera, #11588
+- Arreglado que Cascader no se cerraba cuando se hacia clic en la opción estando `change-on-select` como `true`, #11623
+- Ahora la actualización del valor de Select programáticamente activará la validación de formulario, #11672
+
 ### 2.4.1
 
 *2018-06-08*
 
-- Removed Autocomplete's duplicate type declaration, #11388
-- Fixed Select's dropdown arrow style in FireFox when nested in Form, #11427
-- Fixed clear icon of Select still showing when the initial value is `null`, #11460
-- Fixed disabled radio showing box-shadow when clicked, #11462
-- Added `iconClass` attribute for MessageBox, #11499
-- Added `stretch` attribute for Tabs, #11476
-- Fixed rendering order issue of TabPane when Tabs is `lazy`, #11461
-- Fixed Table not retaining current highlight row when expanded, #11464
-- Fixed focusing state when `before-leave` returns a resolved promise, #11386
-- Fixed disabled Popover still creating poppers, #11426
-- Fixed Tree's endless loop when a new node is added in lazy mode, #11430 (by @wangjingf)
-- Added `closed` event for Dialog, #11490
+- Removida la declaración duplicada de type en Autocompletar, #11388
+- Corregido el estilo de flecha en el dropdown de Select en FireFox cuando se anidaba en el formulario, #11427
+- Corregido que el ícono `clear` de Select seguia apareciendo cuando el valor inicial era `null`, #11460
+- Arreglado que cuando el radio estaba `disabled` mostraba el box-shadow al hacer click, #11462
+- Añadido el atributo `iconClass` para MessageBox, #11499
+- Añadido el atributo `stretch` para Tabs, #11476
+- Arreglado el problema de orden de renderizado de TabPane cuando Tabs es `lazy`, #11461
+- Arreglado que Table no retenia la fila actual de resaltados cuando se expandia, #11464
+- Arreglado que  focusing state cuando `before-leave` devolvia una promesa resuelta, #11386
+- Arreglado que Popover deshabilitado seguia creando poppers, #11426
+- Arreglado el bucle sin fin de Tree cuando se añadia un nuevo nodo en modo `lazy`, #11430 (por @wangjingf)
+- Añadido el evento `closed` para Dialog, #11490
 
 ### 2.4.0 Fullerene
 
@@ -246,8 +351,10 @@
   - Corregido el layout que no se actualizaba cuando el ancho de columna era cambiado por el usuario arrastrando, #9668
   - Corregido problema de estilo cuando la fila de resumen coexistia con columnas fijas, #9667
 - Container
+
   - Corregido componentes del Container que no se estiraban en IE11, #9655
 - Loading
+
   - Corregido Loading no se mostraba cuando el valor de `v-loading` era cambiado a true en el `hook`  `mounted`, #9722
 - Switch
   - Corregido se disparaban los dos eventos nativos de click cuando se hacia click en el Switch, #9760

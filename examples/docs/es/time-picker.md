@@ -216,3 +216,8 @@ Es posible escoger un rango de tiempo arbitrario.
 | change           | se lanza cuando el usuario confirma el valor | valor vinculado del componente |
 | blur             | se lanza cuando el input se difumina     | instancia del componente       |
 | focus            | se lanza cuando el input se enfoca       | instancia del componente       |
+
+### Metodos
+| Metodo | Descripción                | Parameteros |
+| ------ | -------------------------- | ----------- |
+| focus  | coloca el foco en el input | —           |

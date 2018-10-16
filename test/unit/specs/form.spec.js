@@ -213,6 +213,64 @@ describe('Form', () => {
       done();
     });
   });
+  it('clear validate', done => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" :rules="rules">
+          <el-form-item label="活动名称" prop="name">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="活动地址" prop="address">
+            <el-input v-model="form.address"></el-input>
+          </el-form-item>
+          <el-form-item label="活动性质" prop="type">
+            <el-checkbox-group v-model="form.type">
+              <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+              <el-checkbox label="地推活动" name="type"></el-checkbox>
+              <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+              <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          form: {
+            name: '',
+            address: '',
+            type: []
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'blur' }
+            ],
+            address: [
+              { required: true, message: '请选择活动区域', trigger: 'change' }
+            ],
+            type: [
+              { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+            ]
+          }
+        };
+      }
+    }, true);
+    const form = vm.$refs.form;
+    const nameField = form.fields.filter(field => field.prop === 'name')[0];
+    const addressField = form.fields.filter(field => field.prop === 'address')[0];
+    form.validate();
+    vm.$nextTick(() => {
+      expect(nameField.validateMessage).to.equal('请输入活动名称');
+      form.clearValidate(['name']);
+      vm.$nextTick(() => {
+        expect(nameField.validateMessage).to.equal('');
+        form.clearValidate();
+        vm.$nextTick(() => {
+          expect(addressField.validateMessage).to.equal('');
+          done();
+        });
+      });
+    });
+  });
   it('form item nest', done => {
     vm = createVue({
       template: `
@@ -380,15 +438,19 @@ describe('Form', () => {
         expect(valid).to.false;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择活动区域');
-          // programatic modification of bound value does not triggers change validation
+          // programatic modification triggers change validation
           vm.form.region = 'shanghai';
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('请选择活动区域');
-            // user modification of bound value triggers change validation
-            vm.$refs.opt.$el.click();
+            expect(field.validateMessage).to.equal('');
+            vm.form.region = '';
             setTimeout(_ => {
-              expect(field.validateMessage).to.equal('');
-              done();
+              expect(field.validateMessage).to.equal('请选择活动区域');
+              // user modification of bound value triggers change validation
+              vm.$refs.opt.$el.click();
+              setTimeout(_ => {
+                expect(field.validateMessage).to.equal('');
+                done();
+              }, 100);
             }, 100);
           }, 100);
         }, 100);
@@ -421,11 +483,11 @@ describe('Form', () => {
         expect(valid).to.not.true;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择日期');
-          // programatic modification does not trigger change
-          vm.value = new Date();
+          // programatic modification triggers change validation
+          vm.form.date = new Date();
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('请选择日期');
-            vm.value = '';
+            expect(field.validateMessage).to.equal('');
+            vm.form.date = '';
             // user modification triggers change
             const input = vm.$refs.picker.$el.querySelector('input');
             input.blur();
@@ -850,6 +912,10 @@ describe('Form', () => {
             name: null,
             addr: null
           },
+          error: {
+            name: null,
+            addr: null
+          },
           rules: {
             name: [
               { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
@@ -861,8 +927,9 @@ describe('Form', () => {
         };
       },
       methods: {
-        onValidate(prop, valid) {
+        onValidate(prop, valid, msg) {
           this.valid[prop] = valid;
+          this.error[prop] = msg;
         },
         setValue(prop, value) {
           this.form[prop] = value;
@@ -872,12 +939,15 @@ describe('Form', () => {
     vm.setValue('name', '1');
     setTimeout(() => {
       expect(vm.valid.name).to.equal(false);
+      expect(vm.error.name).to.equal('请输入活动名称');
       vm.setValue('addr', '1');
       setTimeout(() => {
         expect(vm.valid.addr).to.equal(true);
+        expect(vm.error.addr).to.equal(null);
         vm.setValue('name', '111');
         setTimeout(() => {
           expect(vm.valid.name).to.equal(true);
+          expect(vm.error.name).to.equal(null);
           done();
         }, DELAY);
       }, DELAY);

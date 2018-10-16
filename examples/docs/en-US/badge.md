@@ -15,6 +15,12 @@ Displays the amount of new messages.
 <el-badge :value="3" class="item">
   <el-button size="small">replies</el-button>
 </el-badge>
+<el-badge :value="1" class="item" type="primary">
+  <el-button size="small">comments</el-button>
+</el-badge>
+<el-badge :value="2" class="item" type="warning">
+  <el-button size="small">replies</el-button>
+</el-badge>
 
 <el-dropdown trigger="click">
   <span class="el-dropdown-link">
@@ -130,9 +136,10 @@ Use a red dot to mark content that needs to be noticed.
 </style>
 
 ### Attributes
-| Attribute          | Description            | Type            | Accepted Values                 | Default   |
+| Attribute     | Description     | Type            | Accepted Values       | Default |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| value          | display value      | string, number          |          —             |    —     |
-| max          |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
-| is-dot       | if a little dot is displayed   | boolean  |  —  |  false |
-| hidden | hidden badge | boolean | — | false |
+| value         | display value   | string, number  |          —            |    —    |
+| max           |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
+| is-dot        | if a little dot is displayed | boolean   |    —           |  false  |
+| hidden        | hidden badge    | boolean         |          —            |  false  |
+| type          | button type     | string          | primary / success / warning / danger / info |   —  |

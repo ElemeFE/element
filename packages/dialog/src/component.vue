@@ -1,6 +1,7 @@
 <template>
   <transition
     name="dialog-fade"
+    @after-enter="afterEnter"
     @after-leave="afterLeave">
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
@@ -129,11 +130,11 @@
     computed: {
       style() {
         let style = {};
-        if (this.width) {
-          style.width = this.width;
-        }
         if (!this.fullscreen) {
           style.marginTop = this.top;
+          if (this.width) {
+            style.width = this.width;
+          }
         }
         return style;
       }
@@ -168,6 +169,9 @@
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
         this.broadcast('ElDropdownMenu', 'updatePopper');
+      },
+      afterEnter() {
+        this.$emit('opened');
       },
       afterLeave() {
         this.$emit('closed');

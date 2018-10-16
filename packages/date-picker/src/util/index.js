@@ -131,6 +131,39 @@ export const getRangeHours = function(ranges) {
   return hours;
 };
 
+function setRangeData(arr, start, end, value) {
+  for (let i = start; i < end; i++) {
+    arr[i] = value;
+  }
+}
+
+export const getRangeMinutes = function(ranges, hour) {
+  const minutes = new Array(60);
+
+  if (ranges.length > 0) {
+    ranges.forEach(range => {
+      const start = range[0];
+      const end = range[1];
+      const startHour = start.getHours();
+      const startMinute = start.getMinutes();
+      const endHour = end.getHours();
+      const endMinute = end.getMinutes();
+      if (startHour === hour && endHour !== hour) {
+        setRangeData(minutes, startMinute, 60, true);
+      } else if (startHour === hour && endHour === hour) {
+        setRangeData(minutes, startMinute, endMinute + 1, true);
+      } else if (startHour !== hour && endHour === hour) {
+        setRangeData(minutes, 0, endMinute + 1, true);
+      } else if (startHour < hour && endHour > hour) {
+        setRangeData(minutes, 0, 60, true);
+      }
+    });
+  } else {
+    setRangeData(minutes, 0, 60, true);
+  }
+  return minutes;
+};
+
 export const range = function(n) {
   // see https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
   return Array.apply(null, {length: n}).map((_, n) => n);

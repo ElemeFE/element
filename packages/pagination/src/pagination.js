@@ -179,6 +179,7 @@ export default {
             <el-select
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
+              size="mini"
               on-input={ this.handleChange }
               disabled={ this.$parent.disabled }>
               {
@@ -204,6 +205,7 @@ export default {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
             this.$parent.userChangePageSize = true;
+            this.$parent.$emit('update:pageSize', val);
             this.$parent.$emit('size-change', val);
           }
         }
@@ -252,15 +254,16 @@ export default {
           const num = parseInt(value, 10);
           if (!isNaN(num)) {
             if (num < 1) {
-              this.$refs.input.$el.querySelector('input').value = 1;
+              this.$refs.input.setCurrentValue(1);
             } else {
               this.reassignMaxValue(value);
             }
           }
         },
         reassignMaxValue(value) {
-          if (+value > this.$parent.internalPageCount) {
-            this.$refs.input.$el.querySelector('input').value = this.$parent.internalPageCount;
+          const { internalPageCount } = this.$parent;
+          if (+value > internalPageCount) {
+            this.$refs.input.setCurrentValue(internalPageCount || 1);
           }
         }
       },

@@ -87,7 +87,7 @@
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const navBounding = nav.getBoundingClientRect();
+        const maxOffset = nav.offsetWidth - navScrollBounding.width;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
@@ -97,10 +97,9 @@
         if (activeTabBounding.right > navScrollBounding.right) {
           newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
         }
-        if (navBounding.right < navScrollBounding.right) {
-          newOffset = nav.offsetWidth - navScrollBounding.width;
-        }
-        this.navOffset = Math.max(newOffset, 0);
+
+        newOffset = Math.max(newOffset, 0);
+        this.navOffset = Math.min(newOffset, maxOffset);
       },
       update() {
         if (!this.$refs.nav) return;
@@ -249,7 +248,7 @@
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
             <div
-              class={['el-tabs__nav', stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              class={['el-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
               ref="nav"
               style={navStyle}
               role="tablist"
@@ -278,4 +277,3 @@
     }
   };
 </script>
-

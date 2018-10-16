@@ -121,7 +121,7 @@ Le permite definir el nivel de incremento de los saltos.
 :::
 
 :::tip
-The value of `precision` must be a positive integer and should not be less than the decimal places of `step`.
+The value of `precision` must be a non negative integer and should not be less than the decimal places of `step`.
 :::
 
 ### Tamaño

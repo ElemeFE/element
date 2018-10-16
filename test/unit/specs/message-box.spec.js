@@ -76,6 +76,24 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('distinguish cancel and close', done => {
+    let msgAction = '';
+    MessageBox({
+      title: '消息',
+      message: '这是一段内容',
+      distinguishCancelAndClose: true
+    }, action => {
+      msgAction = action;
+    });
+    setTimeout(() => {
+      document.querySelector('.el-message-box__close').click();
+      setTimeout(() => {
+        expect(msgAction).to.equal('close');
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('alert', done => {
     MessageBox.alert('这是一段内容', {
       title: '标题名称',

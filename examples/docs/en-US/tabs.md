@@ -377,7 +377,7 @@ Only card type Tabs support addable & closeable.
 | value  | name of the selected tab  | string   |  —  |  name of first tab |
 | tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
 | stretch  | whether width of tab automatically fits its container | boolean   |  -  |  false |
-| before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | function | — | — |
+| before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | Function(activeName, oldActiveName) | — | — |
 
 ### Tabs Events
 | Event Name | Description | Parameters |

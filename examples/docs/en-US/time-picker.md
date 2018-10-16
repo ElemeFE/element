@@ -216,3 +216,8 @@ Can pick an arbitrary time range.
 | change | triggers when user confirms the value | component's binding value |
 | blur | triggers when Input blurs | component instance |
 | focus | triggers when Input focuses | component instance |
+
+### Methods
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| focus | focus the Input component | - |

@@ -193,10 +193,10 @@ TableStore.prototype.mutations = {
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
 
-    const el = this.table.$el;
-    if (el) {
+    const { $el, highlightCurrentRow } = this.table;
+    if ($el && highlightCurrentRow) {
       const data = states.data;
-      const tr = el.querySelector('tbody').children;
+      const tr = $el.querySelector('tbody').children;
       const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
       const row = rows[data.indexOf(states.currentRow)];
 
@@ -587,9 +587,7 @@ TableStore.prototype.setCurrentRowKey = function(key) {
   const data = states.data || [];
   const keysMap = getKeysMap(data, rowKey);
   const info = keysMap[key];
-  if (info) {
-    states.currentRow = info.row;
-  }
+  states.currentRow = info ? info.row : null;
 };
 
 TableStore.prototype.updateCurrentRow = function() {

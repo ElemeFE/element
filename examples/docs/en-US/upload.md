@@ -419,8 +419,15 @@ disabled | whether to disable upload | boolean | — | false |
 limit | maximum number of uploads allowed | number | — | — |
 on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
 
+### Slot
+| Name | Description |
+|------|--------|
+| trigger | content which triggers file dialog |
+| tip | content of tips |
+
 ### Methods
 | Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
 | clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
-| abort | cancel upload request | （ file: fileList's item ） |
+| abort      | cancel upload request                    | （ file: fileList's item ） |
+| submit     | upload the file list manually            |  —                         |

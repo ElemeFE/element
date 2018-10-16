@@ -279,7 +279,20 @@ export default {
       sortOrders: this.sortOrders
     });
 
-    objectAssign(column, forced[type] || {});
+    let source = forced[type] || {};
+    Object.keys(source).forEach((prop) => {
+      let value = source[prop];
+      if (value !== undefined) {
+        if (prop === 'renderHeader') {
+          if (type === 'selection' && column[prop]) {
+            console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set render-header function.');
+          } else {
+            value = column[prop] || value;
+          }
+        }
+        column[prop] = prop === 'className' ? `${column[prop]} ${value}` : value;
+      }
+    });
 
     this.columnConfig = column;
 
@@ -404,6 +417,18 @@ export default {
     formatter(newVal) {
       if (this.columnConfig) {
         this.columnConfig.formatter = newVal;
+      }
+    },
+
+    className(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.className = newVal;
+      }
+    },
+
+    labelClassName(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.labelClassName = newVal;
       }
     }
   },

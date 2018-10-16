@@ -17,7 +17,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath } from 'element-ui/src/utils/util';
+  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -86,8 +86,14 @@
       currentLabel() {
         if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
       },
-      value() {
-        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
+      value(val, oldVal) {
+        const { remote, valueKey } = this.select;
+        if (!this.created && !remote) {
+          if (valueKey && typeof val === 'object' && typeof oldVal === 'object' && val[valueKey] === oldVal[valueKey]) {
+            return;
+          }
+          this.dispatch('ElSelect', 'setSelected');
+        }
       }
     },
 
@@ -129,9 +135,7 @@
       },
 
       queryChange(query) {
-        // query 里如果有正则中的特殊字符，需要先将这些字符转义
-        let parsedQuery = String(query).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
-        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
+        this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }
