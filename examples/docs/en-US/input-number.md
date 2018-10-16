@@ -99,6 +99,31 @@ Allows you to define incremental steps.
 ```
 :::
 
+### Precision
+
+:::demo Add `precision` attribute to set the precision of input value.
+
+```html
+<template>
+  <el-input-number v-model="num9" :precision="2" :step="0.1" :max="10"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num9: 1
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+:::tip
+The value of `precision` must be a positive integer and should not be less than the decimal places of `step`.
+:::
+
 ### Size
 
 Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
@@ -159,6 +184,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
+|precision | precision of input value | number | — | — |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |

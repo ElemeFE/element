@@ -151,6 +151,42 @@
     }]
   }];
 
+  const data6 = [{
+    label: 'Level one 1',
+    children: [{
+      label: 'Level two 1-1',
+      children: [{
+        label: 'Level three 1-1-1'
+      }]
+    }]
+  }, {
+    label: 'Level one 2',
+    children: [{
+      label: 'Level two 2-1',
+      children: [{
+        label: 'Level three 2-1-1'
+      }]
+    }, {
+      label: 'Level two 2-2',
+      children: [{
+        label: 'Level three 2-2-1'
+      }]
+    }]
+  }, {
+    label: 'Level one 3',
+    children: [{
+      label: 'Level two 3-1',
+      children: [{
+        label: 'Level three 3-1-1'
+      }]
+    }, {
+      label: 'Level two 3-2',
+      children: [{
+        label: 'Level three 3-2-1'
+      }]
+    }]
+  }];
+
   let id = 1000;
 
   const regions = [{
@@ -190,6 +226,34 @@
       },
       handleNodeClick(data) {
         console.log(data);
+      },
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
+      },
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
+      },
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
+      },
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
+      },
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === 'Level two 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
@@ -300,6 +364,7 @@
         data3,
         data4: JSON.parse(JSON.stringify(data2)),
         data5: JSON.parse(JSON.stringify(data2)),
+        data6,
         regions,
         defaultProps,
         props,
@@ -996,6 +1061,107 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 ```
 :::
 
+### Draggable
+
+Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
+
+:::demo
+```html
+<el-tree
+  :data="data6"
+  node-key="id"
+  default-expand-all
+  @node-drag-start="handleDragStart"
+  @node-drag-enter="handleDragEnter"
+  @node-drag-leave="handleDragLeave"
+  @node-drag-over="handleDragOver"
+  @node-drag-end="handleDragEnd"
+  @node-drop="handleDrop"
+  draggable
+  :allow-drop="allowDrop"
+  :allow-drag="allowDrag">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data6: [{
+          label: 'Level one 1',
+          children: [{
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 2',
+          children: [{
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
+          }, {
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 3',
+          children: [{
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
+          }, {
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleDragStart(node, ev) {
+        console.log('drag start', node);
+      },
+      handleDragEnter(draggingNode, dropNode, ev) {
+        console.log('tree drag enter: ', dropNode.label);
+      },
+      handleDragLeave(draggingNode, dropNode, ev) {
+        console.log('tree drag leave: ', dropNode.label);
+      },
+      handleDragOver(draggingNode, dropNode, ev) {
+        console.log('tree drag over: ', dropNode.label);
+      },
+      handleDragEnd(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
+      },
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+        console.log('tree drop: ', dropNode.label, dropType);
+      },
+      allowDrop(draggingNode, dropNode, type) {
+        if (dropNode.data.label === 'Level two 3-1') {
+          return type !== 'inner';
+        } else {
+          return true;
+        }
+      },
+      allowDrag(draggingNode) {
+        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Atributos
 | Atributo              | Descripción                              | Tipo                              | Valores aceptados | Por defecto |
 | --------------------- | ---------------------------------------- | --------------------------------- | ----------------- | ----------- |
@@ -1008,7 +1174,8 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | render-content        | Función de renderizado para los nodos    | Function(h, { node, data, store } | —                 | —           |
 | highlight-current     | Si el nodo actual está resaltado         | boolean                           | —                 | false       |
 | default-expand-all    | Expandir todos los nodos por defecto     | boolean                           | —                 | false       |
-| expand-on-click-node  | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | —                                 | true              | -           |
+| expand-on-click-node  | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | boolean | — | true |
+| check-on-click-node   | si marcar o desmarcar el nodo al hacer clic en el. Si es `false`, el nodo sólo se puede marcar o desmarcar haciendo clic en la casilla de verificación. | boolean | — | false |
 | auto-expand-parent    | Expandir un nodo padre si el hijo está seleccionado | boolean                           | —                 | true        |
 | default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array                             | —                 | —           |
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
@@ -1017,13 +1184,16 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
+| draggable             | si se habilita la función de drag and drop en los nodos | boolean            | —    | false |
+| allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
+| allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. `type` tiene tres valores posibles: 'prev' (insertar el nodo de arrastre antes del nodo de destino), 'inner' (insertar el nodo de arrastre en el nodo de destino) y 'next' (insertar el nodo de arrastre después del nodo de destino) | Function(Nodoquesearrastra, Nododestino, type) | —    | —     |
 
 ### props
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ----------------------------- | ----------------- | ----------- |
 | label    | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node)  | —                 | —           |
 | children | Especifica que objeto del nodo se utiliza como subárbol | string | —                 | —           |
-| isLeaf   | Especifica si el nodo es una hoja, only works when lazy load is enabled        | boolean, function(data, node) | —                 | —           |
+| isLeaf   | Especifica si el nodo es una hoja, sólo funciona cuando lazy load está activado | boolean, function(datos, nodo) | —                 | —           |
 
 ### Métodos
 `Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
@@ -1040,7 +1210,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
-| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
+| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
 | remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
@@ -1058,8 +1228,14 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
+| node-drag-start | se activa cuando se inicia el arrastre | dos parametros: el objeto del nodo que se arrastrara, evento. |
+| node-drag-enter | se desencadena cuando el nodo de arrastre entra en otro nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo en el que entra, evento. |
+| node-drag-leave | se desencadena cuando el nodo de arrastre sale de un nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo del cual se sale, evento. |
+| node-drag-over | se activa cuando se arrastra sobre un nodo (como el evento mouseover) | tres parametros: objeto del nodo que se arrastra, objeto del nodo sobre el que esta el arrastre, evento. |
+| node-drag-end  | se activa cuando se termina de arrastrar | cuatro parametros: objeto del nodo que se arrastra, objeto del nodo que corresponde al final del arrastre (puede ser `undefined` ), tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
+| node-drop  | después de soltar el nodo de arrastre | cuatro parametros: objeto del nodo que se esta arrastrando, objeto del nodo sobre el que se esta soltando, tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
 
-### Scoped slot
-| name | Description |
+### Scoped Slot
+| Name | Description |
 |------|--------|
 | — | Contenido personalizado para nodos de tree. El parámetro del scope es { node, data }. |

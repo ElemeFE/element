@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-rate"
-    @keydown="handelKey"
+    @keydown="handleKey"
     role="slider"
     :aria-valuenow="currentValue"
     :aria-valuetext="text"
@@ -277,7 +277,10 @@
         }
       },
 
-      handelKey(e) {
+      handleKey(e) {
+        if (this.rateDisabled) {
+          return;
+        }
         let currentValue = this.currentValue;
         const keyCode = e.keyCode;
         if (keyCode === 38 || keyCode === 39) { // left / down

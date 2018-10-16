@@ -102,6 +102,27 @@ describe('Form', () => {
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
     done();
   });
+  it('label size', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-form :model="form" size="mini" ref="labelMini">
+            <el-form-item>
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+      `,
+      data() {
+        return {
+          form: {
+            name: ''
+          }
+        };
+      }
+    }, true);
+    expect(vm.$refs.labelMini.$el.children[0].classList.contains('el-form-item--mini')).to.be.true;
+  });
   it('show message', done => {
     vm = createVue({
       template: `
@@ -476,6 +497,58 @@ describe('Form', () => {
         }, DELAY);
       });
     });
+    it('checkbox', done => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="是否接受协议" prop="accept" ref="field">
+              <el-checkbox v-model="form.accept">
+                <span>接受协议</span>
+              </el-checkbox>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              accept: true
+            },
+            rules: {
+              accept: [
+                {
+                  validator: (rule, value, callback) => {
+                    value ? callback() : callback(new Error('您需要接受用户协议'));
+                  },
+                  trigger: 'change'
+                }
+              ]
+            }
+          };
+        },
+        methods: {
+          setValue(value) {
+            this.form.accept = value;
+          }
+        }
+      }, true);
+      vm.form.accept = false;
+      vm.$nextTick(_ => {
+        expect(vm.$refs.field.validateMessage).to.equal('您需要接受用户协议');
+      });
+      vm.$refs.form.validate(valid => {
+        let field = vm.$refs.field;
+        expect(valid).to.not.true;
+        expect(field.validateMessage).to.equal('您需要接受用户协议');
+        vm.$refs.form.$nextTick(_ => {
+          vm.setValue(true);
+
+          vm.$refs.form.$nextTick(_ => {
+            expect(field.validateMessage).to.equal('');
+            done();
+          });
+        });
+      });
+    });
     it('checkbox group', done => {
       vm = createVue({
         template: `
@@ -686,6 +759,40 @@ describe('Form', () => {
         });
       });
     });
+    it('invalid fields', done => {
+      var checkName = (rule, value, callback) => {
+        if (value.length < 5) {
+          callback(new Error('长度至少为5'));
+        } else {
+          callback();
+        }
+      };
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { validator: checkName, trigger: 'change' }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate((valid, invalidFields) => {
+        expect(invalidFields.name.length).to.equal(1);
+        done();
+      });
+    });
     it('validate return promise', done => {
       var checkName = (rule, value, callback) => {
         if (value.length < 5) {
@@ -720,5 +827,60 @@ describe('Form', () => {
         done();
       });
     });
+  });
+  it('validate event', done => {
+    vm = createVue({
+      template: `
+          <el-form :model="form" :rules="rules" ref="form" @validate="onValidate">
+            <el-form-item label="活动名称" prop="name" ref="name">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="活动地点" prop="addr" ref="addr">
+              <el-input v-model="form.addr"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+      data() {
+        return {
+          form: {
+            name: '',
+            addr: ''
+          },
+          valid: {
+            name: null,
+            addr: null
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
+            ],
+            addr: [
+              { required: true, message: '请输入活动名称', trigger: 'change' }
+            ]
+          }
+        };
+      },
+      methods: {
+        onValidate(prop, valid) {
+          this.valid[prop] = valid;
+        },
+        setValue(prop, value) {
+          this.form[prop] = value;
+        }
+      }
+    }, true);
+    vm.setValue('name', '1');
+    setTimeout(() => {
+      expect(vm.valid.name).to.equal(false);
+      vm.setValue('addr', '1');
+      setTimeout(() => {
+        expect(vm.valid.addr).to.equal(true);
+        vm.setValue('name', '111');
+        setTimeout(() => {
+          expect(vm.valid.name).to.equal(true);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
   });
 });

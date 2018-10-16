@@ -288,6 +288,12 @@ Puede ser personalizado para mostrar diversos contenidos.
 ```
 :::
 
+:::tip
+
+El contenido de MessageBox puede ser `VNode`, permitiéndonos pasar componentes personalizados. Al abrir el MessageBox, Vue compara el nuevo `VNode` con el viejo `VNode`, y luego averigua cómo actualizar eficientemente la interfaz de usuario, de modo que es posible que los componentes no se vuelvan a procesar completamente ([#8931](https://github.com/ElemeFE/element/issues/8931)). En este caso, se puede añadir una clave única a `VNode` cada vez que se abre MessageBox: [ejemplo](https://jsfiddle.net/zhiyang/ezmhq2ef).
+
+:::
+
 ### Utiliza cadenas HTML
 `message` soporta cadenas HTML.
 
@@ -379,6 +385,7 @@ Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.conf
 | message                  | contenido del componente MessageBox      | string                                   | —                                | —                                        |
 | dangerouslyUseHTMLString | utilizado para que `message` sea tratado como una cadena HTML | boolean                                  | —                                | false                                    |
 | type                     | tipo de mensaje , utilizado para mostrar el  icono | string                                   | success / info / warning / error | —                                        |
+| iconClass                | clase personalizada para el icono, sobreescribe `type` | string         | —                          | —           |
 | customClass              | nombre de la clase personzalida para el componente MessageBox | string                                   | —                                | —                                        |
 | callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm' o 'cancel', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
 | beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm' o 'cancel'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |

@@ -1,4 +1,4 @@
-var webpackConfig = require('../../build/cooking.test');
+var webpackConfig = require('../../build/webpack.test');
 
 // no need for app entry during tests
 // delete webpackConfig.entry;

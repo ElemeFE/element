@@ -50,6 +50,25 @@ describe('Radio', () => {
       done();
     }, 10);
   });
+  it('border', () => {
+    vm = createVue({
+      template: `
+        <el-radio
+          v-model="radio"
+          label="3"
+          border
+        >
+        </el-radio>
+      `,
+      data() {
+        return {
+          radio: ''
+        };
+      }
+    }, true);
+    let radioElm = vm.$el;
+    expect(radioElm.classList.contains('is-bordered')).to.be.true;
+  });
   it('change event', done => {
     vm = createVue({
       template: `

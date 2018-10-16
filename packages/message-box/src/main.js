@@ -1,7 +1,8 @@
 const defaults = {
-  title: undefined,
+  title: null,
   message: '',
   type: '',
+  iconClass: '',
   showInput: false,
   showClose: true,
   modalFade: true,

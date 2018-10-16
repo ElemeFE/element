@@ -17,11 +17,13 @@ export declare class ElMessageBoxComponent extends Vue {
   title: string
   message: string
   type: MessageType
+  iconClass: string
   customClass: string
   showInput: boolean
   showClose: boolean
   inputValue: string
   inputPlaceholder: string
+  inputType: string
   inputPattern: RegExp
   inputValidator: MessageBoxInputValidator
   inputErrorMessage: string
@@ -49,6 +51,9 @@ export interface ElMessageBoxOptions {
 
   /** Message type, used for icon display */
   type?: MessageType
+
+  /** Custom icon's class */
+  iconClass?: string
 
   /** Custom class name for MessageBox */
   customClass?: string
@@ -110,6 +115,9 @@ export interface ElMessageBoxOptions {
   /** Regexp for the input */
   inputPattern?: RegExp
 
+  /** Input Type: text, textArea, password or number */
+  inputType?: string
+
   /** Validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage */
   inputValidator?: MessageBoxInputValidator
 
@@ -132,7 +140,7 @@ export interface ElMessageBox {
   /** Show an alert message box */
   alert: ElMessageBoxShortcutMethod
 
-  /** Show a comfirm message box */
+  /** Show a confirm message box */
   confirm: ElMessageBoxShortcutMethod
 
   /** Show a prompt message box */

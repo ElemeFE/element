@@ -28,14 +28,16 @@
         type: Function,
         default: noop
       },
-      type: String
+      type: String,
+      stretch: Boolean
     },
 
     data() {
       return {
         scrollable: false,
         navOffset: 0,
-        isFocus: false
+        isFocus: false,
+        focusable: true
       };
     },
 
@@ -81,6 +83,7 @@
         if (!this.scrollable) return;
         const nav = this.$refs.nav;
         const activeTab = this.$el.querySelector('.is-active');
+        if (!activeTab) return;
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
@@ -149,10 +152,30 @@
         this.setFocus();
       },
       setFocus() {
-        this.isFocus = true;
+        if (this.focusable) {
+          this.isFocus = true;
+        }
       },
       removeFocus() {
         this.isFocus = false;
+      },
+      visibilityChangeHandler() {
+        const visibility = document.visibilityState;
+        if (visibility === 'hidden') {
+          this.focusable = false;
+        } else if (visibility === 'visible') {
+          setTimeout(() => {
+            this.focusable = true;
+          }, 50);
+        }
+      },
+      windowBlurHandler() {
+        this.focusable = false;
+      },
+      windowFocusHandler() {
+        setTimeout(() => {
+          this.focusable = true;
+        }, 50);
       }
     },
 
@@ -165,6 +188,7 @@
         type,
         panes,
         editable,
+        stretch,
         onTabClick,
         onTabRemove,
         navStyle,
@@ -224,7 +248,13 @@
         <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
-            <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
+            <div
+              class={['el-tabs__nav', stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              ref="nav"
+              style={navStyle}
+              role="tablist"
+              on-keydown={ changeTab }
+            >
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}
             </div>
@@ -235,10 +265,16 @@
 
     mounted() {
       addResizeListener(this.$el, this.update);
+      document.addEventListener('visibilitychange', this.visibilityChangeHandler);
+      window.addEventListener('blur', this.windowBlurHandler);
+      window.addEventListener('focus', this.windowFocusHandler);
     },
 
     beforeDestroy() {
       if (this.$el && this.update) removeResizeListener(this.$el, this.update);
+      document.removeEventListener('visibilitychange', this.visibilityChangeHandler);
+      window.removeEventListener('blur', this.windowBlurHandler);
+      window.removeEventListener('focus', this.windowFocusHandler);
     }
   };
 </script>

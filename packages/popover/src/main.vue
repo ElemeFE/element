@@ -68,6 +68,9 @@ export default {
   },
   watch: {
     showPopper(val) {
+      if (this.disabled) {
+        return;
+      }
       val ? this.$emit('show') : this.$emit('hide');
     }
   },
@@ -90,7 +93,7 @@ export default {
         on(reference, 'focusin', () => {
           this.handleFocus();
           const instance = reference.__vue__;
-          if (instance && instance.focus) {
+          if (instance && typeof instance.focus === 'function') {
             instance.focus();
           }
         });

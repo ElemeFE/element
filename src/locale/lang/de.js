@@ -73,7 +73,7 @@ export default {
     },
     pagination: {
       goto: 'Gehe zu',
-      pagesize: 'pro Seite',
+      pagesize: ' pro Seite',
       total: 'Gesamt {total}',
       pageClassifier: ''
     },

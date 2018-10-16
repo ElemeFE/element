@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -46,7 +46,8 @@ describe('Select', () => {
             :filterMethod="filterMethod"
             :remote="remote"
             :loading="loading"
-            :remoteMethod="remoteMethod">
+            :remoteMethod="remoteMethod"
+            :automatic-dropdown="automaticDropdown">
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -68,6 +69,7 @@ describe('Select', () => {
           collapseTags: configs.collapseTags,
           allowCreate: configs.allowCreate,
           popperClass: configs.popperClass,
+          automaticDropdown: configs.automaticDropdown,
           loading: false,
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
@@ -327,6 +329,32 @@ describe('Select', () => {
       expect(vm.$el.querySelector('.el-select-dropdown__item').classList.contains('selected'));
       done();
     }, 100);
+  });
+
+  it('prefixed icon', () => {
+    vm = createTest({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [],
+          value: ''
+        };
+      }
+    });
+    expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
   });
 
   it('custom el-option template', () => {
@@ -661,14 +689,14 @@ describe('Select', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
-    });
+    }, 100);
   });
 
-  it('soft focus', done => {
+  it('should return focus to input inside select after option select', done => {
     vm = createVue({
       template: `
         <div>
@@ -697,6 +725,28 @@ describe('Select', () => {
     vm.$nextTick(_ => {
       expect(spyInputFocus.calledOnce).to.be.true;
       expect(spySelectFocus.calledOnce).not.to.be.true;
+      done();
+    });
+  });
+
+  it('should not open popper when automatic-dropdown not set', done => {
+    vm = getSelectVm();
+
+    vm.$refs.select.$refs.reference.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(vm.$refs.select.visible).to.be.false;
+      done();
+    });
+  });
+
+  it('should open popper when automatic-dropdown is set', done => {
+    vm = getSelectVm({ automaticDropdown: true });
+
+    vm.$refs.select.$refs.reference.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(vm.$refs.select.visible).to.be.true;
       done();
     });
   });

@@ -66,6 +66,19 @@
   @include e(input) {
     float: right;
     margin-top: 3px;
+    width: 130px;
+
+    &.el-input-number--mini {
+      margin-top: 5px;
+    }
+
+    &.el-input-number--medium {
+      margin-top: 0;
+    }
+
+    &.el-input-number--large {
+      margin-top: -2px;
+    }
   }
 
   @include e(bar) {

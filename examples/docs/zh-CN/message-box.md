@@ -285,6 +285,10 @@
 ```
 :::
 
+:::tip
+弹出层的内容可以是 `VNode`，所以我们能把一些自定义组件传入其中。每次弹出层打开后，Vue 会对新老 `VNode` 节点进行比对，然后将根据比较结果进行最小单位地修改视图。这也许会造成弹出层内容区域的组件没有重新渲染，例如 [#8931](https://github.com/ElemeFE/element/issues/8931)。当这类问题出现时，解决方案是给 `VNode` 加上一个不相同的 key，参考[这里](https://jsfiddle.net/zhiyang/ezmhq2ef/)。
+:::
+
 ### 使用 HTML 片段
 `message` 属性支持传入 HTML 片段
 
@@ -376,6 +380,7 @@ import { MessageBox } from 'element-ui';
 | message | MessageBox 消息正文内容 | string / VNode | — | — |
 | dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
 | type | 消息类型，用于显示图标 | string | success / info / warning / error | — |
+| iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm'或'cancel', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |
 | showClose | MessageBox 是否显示右上角关闭按钮 | boolean | — | true |

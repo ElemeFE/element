@@ -50,6 +50,19 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('custom icon', done => {
+    MessageBox({
+      type: 'warning',
+      iconClass: 'el-icon-question',
+      message: '这是一段内容'
+    });
+    setTimeout(() => {
+      const icon = document.querySelector('.el-message-box__status');
+      expect(icon.classList.contains('el-icon-question')).to.true;
+      done();
+    }, 300);
+  });
+
   it('html string', done => {
     MessageBox({
       title: 'html string',

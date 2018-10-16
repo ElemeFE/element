@@ -16,6 +16,12 @@
     :aria-expanded="expanded"
     :aria-disabled="node.disabled"
     :aria-checked="node.checked"
+    :draggable="tree.draggable"
+    @dragstart.stop="handleDragStart"
+    @dragover.stop="handleDragOver"
+    @dragend.stop="handleDragEnd"
+    @drop.stop="handleDrop"
+    ref="node"
   >
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
@@ -106,7 +112,7 @@
               ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
               : tree.$scopedSlots.default
                 ? tree.$scopedSlots.default({ node, data })
-                : <span class="el-tree-node__label">{ this.node.label }</span>
+                : <span class="el-tree-node__label">{ node.label }</span>
           );
         }
       }
@@ -161,10 +167,19 @@
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
+        if (this.tree.checkOnClickNode) {
+          this.handleCheckChange(null, {
+            target: { checked: !this.node.checked }
+          });
+        }
         this.tree.$emit('node-click', this.node.data, this.node, this);
       },
 
       handleContextMenu(event) {
+        if (this.tree._events['node-contextmenu'] && this.tree._events['node-contextmenu'].length > 0) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
         this.tree.$emit('node-contextmenu', event, this.node.data, this.node, this);
       },
 
@@ -195,6 +210,26 @@
       handleChildNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.tree.$emit('node-expand', nodeData, node, instance);
+      },
+
+      handleDragStart(event) {
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drag-start', event, this);
+      },
+
+      handleDragOver(event) {
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drag-over', event, this);
+        event.preventDefault();
+      },
+
+      handleDrop(event) {
+        event.preventDefault();
+      },
+
+      handleDragEnd(event) {
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drag-end', event, this);
       }
     },
 

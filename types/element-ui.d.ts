@@ -14,6 +14,7 @@ import { ElCarousel } from './carousel'
 import { ElCarouselItem } from './carousel-item'
 import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
+import { ElCheckboxButton } from './checkbox-button'
 import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElCollapse } from './collapse'
@@ -144,6 +145,9 @@ export class CarouselItem extends ElCarouselItem {}
 
 /** Checkbox Component */
 export class Checkbox extends ElCheckbox {}
+
+/** Checkbox Button Component */
+export class CheckboxButton extends ElCheckboxButton {}
 
 /** Checkbox Group Component */
 export class CheckboxGroup extends ElCheckboxGroup {}

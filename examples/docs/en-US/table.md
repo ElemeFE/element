@@ -1369,7 +1369,7 @@ Filter the table to find desired data.
       <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
+          disable-transitions>{{scope.row.tag}}</el-tag>
       </template>
     </el-table-column>
   </el-table>
@@ -1946,7 +1946,7 @@ You can customize row index in `type=index` columns.
 
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
+|----------------|----------------------|-----------|-----------------------|----------|
 | data | Table data | array | — | — |
 | height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the value will be assigned to element's style.height, the height is affected by external styles | string/number | — | — |
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
@@ -1975,6 +1975,7 @@ You can customize row index in `type=index` columns.
 | sum-text | displayed text for the first column of summary row | String | — | Sum |
 | summary-method | custom summary method | Function({ columns, data }) | — | — |
 | span-method | method that returns rowspan and colspan | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| select-on-indeterminate | controls the behavior of master checkbox in multi-select tables when only some rows are selected (but not all). If true, all rows will be selected, else deselected. | Boolean | — | true |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -2000,13 +2001,14 @@ You can customize row index in `type=index` columns.
 ### Table Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
+| clearSelection | used in multiple selection Table, clear user selection | — |
 | toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
 | toggleRowExpansion | used in expandable Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
 | clearFilter | clear filter | — |
-| doLayout | Refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
+| doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
+| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
 ### Table Slot
 | Name | Description |
@@ -2028,17 +2030,23 @@ You can customize row index in `type=index` columns.
 | sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
 | sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
 | sort-by | specify which property to sort by, works when `sortable` is `true` and `sort-method` is `undefined`. If set to an Array, the column will sequentially sort by the next property if the previous one is equal | Function(row, index)/String/Array | — | — |
+| sort-orders | the order of the sorting strategies used when sorting the data, works when `sortable` is `true`. Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array | array | the elements in the array need to be one of the following: `ascending`, `descending` and `null` (restores to the original order) | ['ascending', 'descending', null] |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
-| formatter | function that formats cell content | Function(row, column, cellValue) | — | — |
+| formatter | function that formats cell content | Function(row, column, cellValue, index) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
 | align | alignment | string | left/center/right | left |
 | header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |
 | class-name | class name of cells in the column | string | — | — |
 | label-class-name | class name of the label of this column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
-| reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection' | boolean | — | false |
+| reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection'. Note that `row-key` is required for this to work | boolean | — | false |
 | filters | an array of data filtering options. For each element in this array, `text` and `value` are required | Array[{ text, value }] | — | — |
 | filter-placement | placement for the filter dropdown | String | same as Tooltip's `placement` | — |
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
 | filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row, column) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |
+
+### Table-column Scoped Slot
+| Name | Description |
+|------|--------|
+| — | Custom content for table columns. The scope parameter is { row, column, $index } |

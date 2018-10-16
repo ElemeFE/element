@@ -70,12 +70,17 @@
       showText: {
         type: Boolean,
         default: true
+      },
+      color: {
+        type: String,
+        default: ''
       }
     },
     computed: {
       barStyle() {
         const style = {};
         style.width = this.percentage + '%';
+        style.backgroundColor = this.color;
         return style;
       },
       relativeStrokeWidth() {
@@ -100,21 +105,25 @@
       },
       stroke() {
         let ret;
-        switch (this.status) {
-          case 'success':
-            ret = '#13ce66';
-            break;
-          case 'exception':
-            ret = '#ff4949';
-            break;
-          default:
-            ret = '#20a0ff';
+        if (this.color) {
+          ret = this.color;
+        } else {
+          switch (this.status) {
+            case 'success':
+              ret = '#13ce66';
+              break;
+            case 'exception':
+              ret = '#ff4949';
+              break;
+            default:
+              ret = '#20a0ff';
+          }
         }
         return ret;
       },
       iconClass() {
         if (this.type === 'line') {
-          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-cross';
+          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-close';
         } else {
           return this.status === 'success' ? 'el-icon-check' : 'el-icon-close';
         }

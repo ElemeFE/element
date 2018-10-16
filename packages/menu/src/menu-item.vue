@@ -14,7 +14,7 @@
     @mouseleave="onMouseLeave"
   >
     <el-tooltip
-      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse"
+      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse && $slots.title"
       effect="dark"
       placement="right">
       <div slot="content"><slot name="title"></slot></div>
@@ -97,10 +97,10 @@
         if (!this.disabled) {
           this.dispatch('ElMenu', 'item-click', this);
           this.$emit('click', this);
-        };
+        }
       }
     },
-    created() {
+    mounted() {
       this.parentMenu.addItem(this);
       this.rootMenu.addItem(this);
     },
