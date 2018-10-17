@@ -12,6 +12,7 @@
     },
     methods: {
       handleClose(event) {
+        event.stopPropagation();
         this.$emit('close', event);
       }
     },
@@ -28,7 +29,7 @@
       const tagEl = (<span class={classes} style={{backgroundColor: this.color}}>
         { this.$slots.default }
         {
-          this.closable && <i class="el-tag__close el-icon-close" click="handleClose"></i>
+          this.closable && <i class="el-tag__close el-icon-close" on-click={this.handleClose}></i>
         }
       </span>);
 
