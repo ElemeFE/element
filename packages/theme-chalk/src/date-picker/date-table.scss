@@ -72,8 +72,11 @@
     }
   }
 
+
   .in-range + .next-month > div {
     &:before {
+      box-sizing: content-box;
+      pointer-events: none;
       content: '';
       position: absolute;
       height: $--datepicker-cell-size;
@@ -86,6 +89,8 @@
       border-bottom-right-radius: 100%;
     }
     &:after {
+      box-sizing: content-box;
+      pointer-events: none;
       content: '';
       position: absolute;
       height: $--datepicker-cell-size;
@@ -146,8 +151,9 @@
     }
 
     &:not(.start-date):not(.end-date).available:hover {
+      color: $--color-white;
       & > div > span {
-        border-color: $--datepicker-text-hover-color;
+        background-color: rgba($--datepicker-text-hover-color, 0.5);
       }
     }
 

@@ -27,6 +27,7 @@ import Check from '../../packages/theme-chalk/src/icons/check.svg';
 import CircleAnglesSquare from '../../packages/theme-chalk/src/icons/circle-angles-square.svg';
 import CirclePlus from '../../packages/theme-chalk/src/icons/circle-plus.svg';
 import City from '../../packages/theme-chalk/src/icons/city.svg';
+import Comment from '../../packages/theme-chalk/src/icons/comment.svg';
 import Conductor from '../../packages/theme-chalk/src/icons/conductor.svg';
 import Cooler from '../../packages/theme-chalk/src/icons/cooler.svg';
 import Copy from '../../packages/theme-chalk/src/icons/copy.svg';
@@ -56,6 +57,8 @@ import Hanger from '../../packages/theme-chalk/src/icons/hanger.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
 import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
 import Iron from '../../packages/theme-chalk/src/icons/iron.svg';
+import IconBlock from '../../packages/theme-chalk/src/icons/icon-block.svg';
+import IconHide from '../../packages/theme-chalk/src/icons/icon-hide.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
 import ItemSort from '../../packages/theme-chalk/src/icons/item-sort.svg';
 import KnifeFork2 from '../../packages/theme-chalk/src/icons/knife-fork-2.svg';
@@ -65,6 +68,7 @@ import Loader from '../../packages/theme-chalk/src/icons/loader.svg';
 import Location from '../../packages/theme-chalk/src/icons/location.svg';
 import Luggage from '../../packages/theme-chalk/src/icons/luggage.svg';
 import ManWoman from '../../packages/theme-chalk/src/icons/man-woman.svg';
+import ManUser from '../../packages/theme-chalk/src/icons/man-user.svg';
 import Message from '../../packages/theme-chalk/src/icons/message.svg';
 import Minus from '../../packages/theme-chalk/src/icons/minus.svg';
 import Negotiations from '../../packages/theme-chalk/src/icons/negotiations.svg';
@@ -142,6 +146,7 @@ module.exports = {
   CircleAnglesSquare,
   CirclePlus,
   City,
+  Comment,
   Conductor,
   Cooler,
   Copy,
@@ -171,6 +176,8 @@ module.exports = {
   Hotel,
   Insurance,
   Iron,
+  IconBlock,
+  IconHide,
   ItemList,
   ItemSort,
   KnifeFork2,
@@ -180,6 +187,7 @@ module.exports = {
   Location,
   Luggage,
   ManWoman,
+  ManUser,
   Message,
   Minus,
   Negotiations,

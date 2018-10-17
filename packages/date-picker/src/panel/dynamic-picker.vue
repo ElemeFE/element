@@ -374,7 +374,7 @@
     data() {
       return {
         popperClass: '',
-        value: [],
+        value: null,
         defaultValue: null,
         defaultTime: null,
         minDate: '',
@@ -404,7 +404,11 @@
 
     watch: {
       visible() {
-        this.handlePanelChange(null);
+        if (Array.isArray(this.value) && this.panelSwitch !== 'double') {
+          this.panelSwitch = 'double';
+        } else {
+          this.handlePanelChange(null);
+        }
       },
       minDate(val) {
         this.$nextTick(() => {
