@@ -107,7 +107,7 @@
 
 选项可以是离散的
 
-:::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
+:::demo 改变`step`的值可以改变步长，通过设置`show-stops`属性可以显示间断点
 ```html
 <template>
   <div class="block">

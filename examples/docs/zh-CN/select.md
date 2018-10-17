@@ -654,14 +654,14 @@
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
 :::
 
-### Select Attributes 
+### Select Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
 | size | 输入框尺寸 | string | medium/small/mini | — |
-| clearable | 单选时是否可以清空选项 | boolean | — | false |
+| clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
 | name | select input 的 name 属性 | string | — | — |

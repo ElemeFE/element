@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export function noop() {};
@@ -109,4 +111,12 @@ export const coerceTruthyValueToArray = function(val) {
   } else {
     return [];
   }
+};
+
+export const isIE = function() {
+  return !Vue.prototype.$isServer && !isNaN(Number(document.documentMode));
+};
+
+export const isEdge = function() {
+  return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Edge') > -1;
 };
