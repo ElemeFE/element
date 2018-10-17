@@ -294,6 +294,11 @@ export default {
       }
     });
 
+    // Deprecation warning for renderHeader property
+    if (this.renderHeader) {
+      console.warn('[Element Warn][Table Column]\'render-header\' property will be deprecated in next major version. please use scoped-slot \'header\' instead.');
+    }
+
     this.columnConfig = column;
 
     let renderCell = column.renderCell;
