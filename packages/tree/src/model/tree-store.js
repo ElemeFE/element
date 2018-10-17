@@ -37,8 +37,11 @@ export default class TreeStore {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
       childNodes.forEach((child) => {
-        child.visible = filterNodeMethod.call(child, value, child.data, child);
-
+        if (node.visible) {
+          child.visible = true;
+        } else {
+          child.visible = filterNodeMethod.call(child, value, child.data, child);
+        }
         traverse(child);
       });
 
@@ -59,7 +62,7 @@ export default class TreeStore {
 
       if (node.visible && !node.isLeaf && !lazy) node.expand();
     };
-
+    console.log(this);
     traverse(this);
   }
 
