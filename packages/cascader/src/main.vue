@@ -71,7 +71,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
-import { generateId, escapeRegexpString } from 'element-ui/src/utils/util';
+import { generateId, escapeRegexpString, isIE, isEdge } from 'element-ui/src/utils/util';
 
 const popperMixin = {
   props: {
@@ -223,8 +223,7 @@ export default {
       return this.disabled || (this.elForm || {}).disabled;
     },
     readonly() {
-      const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
-      return !this.filterable || (!isIE && !this.menuVisible);
+      return !this.filterable || (!isIE() && !isEdge() && !this.menuVisible);
     }
   },
 
