@@ -62,7 +62,6 @@ export default class TreeStore {
 
       if (node.visible && !node.isLeaf && !lazy) node.expand();
     };
-    console.log(this);
     traverse(this);
   }
 
