@@ -239,7 +239,14 @@
                     <tr>
                         <td>选择类型</td>
                         <td>
-                            <el-input v-model="update_file_cate_value" placeholder="请输入类型"></el-input>
+                            <el-select v-model="update_file_cate_value" placeholder="请输入类型" style="width:100%">
+                                <el-option
+                                        v-for="item in type_options_select"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                </el-option>
+                            </el-select>
                         </td>
                     </tr>
                     <!-- <tr>
@@ -297,7 +304,25 @@
         update_business_no: '',
         update_encrypt_value: '',
         current_edit_data: null,
-        selected_files_ids: []
+        selected_files_ids: [],
+        type_options_select: [
+          {
+            label: '客户文件',
+            value: 'KHWJ'
+          },
+          {
+            label: '样品文件',
+            value: 'YPWJ'
+          },
+          {
+            label: '设备文件',
+            value: 'SBWJ'
+          },
+          {
+            label: '其它文件',
+            value: 'QTWJ'
+          }
+        ]
       };
     },
     props: {

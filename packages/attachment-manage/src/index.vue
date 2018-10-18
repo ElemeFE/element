@@ -272,7 +272,7 @@
         file_cate_value: '',
         upload_dialog_visible: false,
         upload_business_no: '',
-        upload_category: '',
+        upload_category: 'KHWJ',
         upload_remark: '',
         upload_sample_value: '',
         upload_encrypt_value: '',
