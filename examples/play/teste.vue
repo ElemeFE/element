@@ -2,10 +2,7 @@
   <el-container fluid>
     <el-row type="flex">
       <div class="el-col el-col-md-6 el-col-lg-12">
-        <label for="">teste</label>
-        <dl><dt>teste</dt></dl>
-        <ul><li>aaa</li></ul>
-        <a href="">aa</a>
+        <el-checkbox v-model="checked" size="large">Option</el-checkbox>
       </div>
       <div class="el-col el-col-md-6 el-col-lg-12">
         what? are you serious?
@@ -17,7 +14,7 @@
 	export default {
     data() {
       return {
-        active: false
+        checked: false
       }
     }
 	}

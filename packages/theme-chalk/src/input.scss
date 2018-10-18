@@ -63,7 +63,9 @@
   position: relative;
   font-size: $--font-size-base;
   display: inline-block;
-  width: 100%;
+  width: 100%;  
+  line-height: initial;
+
   @include scroll-bar;
 
   & .el-input__clear {

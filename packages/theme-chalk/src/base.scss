@@ -18,6 +18,14 @@
 
 @each $key, $value in $siagriIcons {
   .siagri-icon-#{$key} {
+    font-family: '#{$--siagri-font-family}' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     &:before {
       content: $value;
     }

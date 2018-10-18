@@ -13,7 +13,8 @@
       float: none;
       display: inline-block;
       text-align: left;
-      margin-bottom: -10px;
+      // margin-bottom: -10px;
+      margin-bottom: 0;
     }
   }
   @include m(inline) {
@@ -89,14 +90,17 @@
     vertical-align: middle;
     float: left;
     font-size: 14px;
-    line-height: 40px;
+    // line-height: 40px;
+    line-height: inherit;
     padding: 0 12px 0 0;
     box-sizing: border-box;
   }
   @include e(content) {
     line-height: 40px;
     position: relative;
-    font-size: 14px;
+    // font-size: 14px;
+    font-size: 0;
+    line-height: initial;
     @include utils-clearfix;
 
     .el-input-group {
