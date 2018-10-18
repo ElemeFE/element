@@ -245,6 +245,15 @@
               "title": "Collapse 折叠面板"
             }
           ]
+        },
+        {
+          "groupName": "业务组件",
+          "list": [
+            {
+              "path": "/attachment-manage",
+              "title": "AttachmentManage 附件上传"
+            }
+          ]
         }
       ]
     }

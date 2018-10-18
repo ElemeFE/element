@@ -1,0 +1,280 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+
+@include b(attachment-manage) {
+    background-color: #fff;
+    height: 100%;
+    padding: 10px;
+    color:#3E3A39;
+    font-size: 14px;
+
+    .clear{
+        clear:both;
+    }
+
+    ul li.right{
+        float:right !important;
+    }
+
+    .cursor-icon{
+        cursor: pointer;
+    }
+
+    .remove-border{
+        border:0px !important;
+    }
+
+    &{
+
+    }
+
+    & ul{
+        margin-bottom: 20px !important;
+        display: inline-block;
+    }
+
+    & ul,
+    & ul li{
+        padding:0;
+        margin:0;
+    }
+
+    & ul li{
+        float:left;
+        list-style-type: none;
+        margin-right: 20px;
+    }
+
+    & ul li a{
+        cursor: pointer;
+    }
+
+    & .main-content{
+        min-height:400px;
+    }
+
+    & .tab{
+        padding:5px 15px;
+        border-radius: 5px;
+        border:1px solid #ccc;
+        font-size: 14px;
+    }
+
+    & .tab img{
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    & .tab-gray{
+        color:#ccc;
+    }
+
+    & .wt-list{
+        font-weight: bold;
+    }
+
+    & .capture-box{
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding-bottom: 10px;
+    }
+
+    & .capture-box-title{
+        font-size: 16px;
+        font-weight: bold;
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid #ccc;
+        padding: 0 15px;
+    }
+
+    & .capture-box-main{
+        padding: 0 15px;
+    }
+
+    & .capture-box-main-video{
+        margin: 20px 40px 0;
+    }
+
+    & .capture-box-main-video .tab{
+        background-color: #67BCFF;
+        cursor: pointer;
+        color:#fff;
+        padding: 10px 15px;
+        margin-left: 40%;
+    }
+
+    & .main-video_{
+        width: 640px;
+        height: 360px;
+        background-color: #67BCFF;
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    & .main-video_ .non-video{
+        position:absolute;
+        top:50%;
+        left: 50%;
+        /*margin:-82px 0 0 -82px;*/
+        color:#fff;
+        transform: translate(-50%,-50%);
+    }
+
+    & .main-video_ .non-video .title{
+        text-align: center;
+    }
+
+    & .capture-box-main .capture-box-main-video,
+    & .capture-box-main .pictures-box{
+        float:left;
+    }
+
+    & .capture-box-main .pictures-box{
+        max-width: 420px;
+        background-color: #FAFAFA;
+        min-height: 380px;
+    }
+
+    & .capture-box-main .pictures-box .picture{
+        width:200px;
+        float:left;
+        position: relative;
+    }
+
+    & .capture-box-main .pictures-box .link_button_box{
+        position: absolute;
+        bottom:12px;
+        width: 100%;
+        text-align: center;
+        background-color: #fff;
+        display: none;
+    }
+
+    & .capture-box-main .pictures-box .picture:hover .link_button_box{
+        display: block;
+    }
+
+    & .capture-box-main .pictures-box a{
+        margin-right:10px;
+        text-decoration: none;
+    }
+
+    & .capture-box .pictures-edit-dialog .left,
+    & .capture-box .pictures-edit-dialog .right{
+        width: 50%;
+        float: left;
+    }
+
+    & .pictures-edit-dialog .left .pic-list{
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    & .pictures-edit-dialog .left .pic-list a{
+        display:inline-block;
+        box-sizing: border-box;
+        margin-right:10px;
+    }
+
+    & .pictures-edit-dialog .right ul li{
+        float:none;
+    }
+
+    & .attachment-list table[class='el-table__body'] thead{
+        color:#929292;
+        font-size: 12px;
+    }
+
+    & .attachment-list table[class='el-table__body']  td{
+        /*text-align: center;*/
+        border-bottom: 1px solid #ccc;
+    }
+    & .attachment-list table[class='el-table__body'] thead tr:first-child td{
+        border-bottom: 0;
+        padding: 10px 0;
+    }
+
+    & .attachment-list table[class='el-table__body'] img{
+        vertical-align: middle;
+        margin: 0 5px 0;
+    }
+
+    & .attachment-list table[class='el-table__body']  td:first-child{
+        text-align: left;
+    }
+
+    & .attachment-list table[class='el-table__body'] tbody tr:hover td{
+        background-color: #F5F7FA;
+    }
+
+    & .attachment-list ul .file-name{
+        text-align: center;
+        max-width: 110px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    & .attachment-list .select-all-box{
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 15px;
+        color:#929292;
+        font-size: 12px;
+    }
+
+    & .attachment-list .attachments-view ul li{
+        position: relative;
+        border:1px solid #fff;
+        margin-bottom: 5px;
+    }
+
+    & .attachment-list .attachments-view ul li input,
+    & .attachment-list .attachments-view ul li .el-checkbox{
+        position: absolute;
+        display: none;
+    }
+
+    & .attachment-list .attachments-view ul li[type='folder'] input{
+        left: 5px;
+        top:15px;
+    }
+
+    & .attachment-list .attachments-view ul li[type='file'] input,
+    & .attachment-list .attachments-view ul li[type='file'] .el-checkbox{
+        left: 22px;
+        top:15px;
+    }
+
+    & .attachment-list .attachments-view .selected{
+        border:1px dashed ;
+    }
+
+    & .attachment-list .attachments-view .selected input{
+        display: block;
+    }
+
+    & .attachment-list .attachments-view ul li.selected{
+        border:1px dashed ;
+        border-radius: 10px;
+        display: block;
+    }
+
+    & .attachment-list .attachments-view ul li:hover{
+        border:1px dashed ;
+        border-radius: 10px;
+    }
+
+    & .attachment-list .attachments-view ul li:hover input,
+    & .attachment-list .attachments-view ul li:hover .el-checkbox{
+        display: block;
+    }
+
+    & .attachment-list .el-table__row .cell{
+        white-space: nowrap;
+    }
+}
+
