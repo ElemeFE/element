@@ -54,21 +54,23 @@ import Glass from '../../packages/theme-chalk/src/icons/glass.svg';
 import Gym from '../../packages/theme-chalk/src/icons/gym.svg';
 import HalfStar from '../../packages/theme-chalk/src/icons/half-star.svg';
 import Hanger from '../../packages/theme-chalk/src/icons/hanger.svg';
+import HelpCircle from '../../packages/theme-chalk/src/icons/help-circle.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
-import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
-import Iron from '../../packages/theme-chalk/src/icons/iron.svg';
 import IconBlock from '../../packages/theme-chalk/src/icons/icon-block.svg';
 import IconHide from '../../packages/theme-chalk/src/icons/icon-hide.svg';
+import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
+import Iron from '../../packages/theme-chalk/src/icons/iron.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
 import ItemSort from '../../packages/theme-chalk/src/icons/item-sort.svg';
 import KnifeFork2 from '../../packages/theme-chalk/src/icons/knife-fork-2.svg';
 import KnifeFork from '../../packages/theme-chalk/src/icons/knife-fork.svg';
 import Label from '../../packages/theme-chalk/src/icons/label.svg';
+import LinkVariant from '../../packages/theme-chalk/src/icons/link-variant.svg';
 import Loader from '../../packages/theme-chalk/src/icons/loader.svg';
 import Location from '../../packages/theme-chalk/src/icons/location.svg';
 import Luggage from '../../packages/theme-chalk/src/icons/luggage.svg';
-import ManWoman from '../../packages/theme-chalk/src/icons/man-woman.svg';
 import ManUser from '../../packages/theme-chalk/src/icons/man-user.svg';
+import ManWoman from '../../packages/theme-chalk/src/icons/man-woman.svg';
 import Message from '../../packages/theme-chalk/src/icons/message.svg';
 import Minus from '../../packages/theme-chalk/src/icons/minus.svg';
 import Negotiations from '../../packages/theme-chalk/src/icons/negotiations.svg';
@@ -173,21 +175,23 @@ module.exports = {
   Gym,
   HalfStar,
   Hanger,
+  HelpCircle,
   Hotel,
-  Insurance,
-  Iron,
   IconBlock,
   IconHide,
+  Insurance,
+  Iron,
   ItemList,
   ItemSort,
   KnifeFork2,
   KnifeFork,
   Label,
+  LinkVariant,
   Loader,
   Location,
   Luggage,
-  ManWoman,
   ManUser,
+  ManWoman,
   Message,
   Minus,
   Negotiations,

@@ -20,10 +20,10 @@
         @focus="handleFocus"
         @blur="focusing = false"
       >
-        <i
+        <tm-icon
+          name="arrow-right"
           class="tm-collapse-item__arrow tm-icon--arrow-right"
-          :class="{'is-active': isActive}">
-        </i>
+          :class="{'is-active': isActive}" />
         <slot name="title">{{title}}</slot>
       </div>
     </div>
