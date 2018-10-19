@@ -24,8 +24,9 @@
     width: 16px;
     line-height: 16px;
     vertical-align: middle;
-    top: -1px;
+    top: 7px;
     right: -5px;
+    float:right;
     color: $--tag-color;
 
     &::before {

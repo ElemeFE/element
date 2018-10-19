@@ -7,6 +7,7 @@
   color: $--checkbox-color;
   font-weight: $--checkbox-font-weight;
   font-size: $--font-size-base;
+  letter-spacing: 0.3px;
   position: relative;
   cursor: pointer;
   display: inline-block;
@@ -16,7 +17,7 @@
   @include when(bordered) {
     padding: $--checkbox-bordered-padding;
     border-radius: $--border-radius-base;
-    border: $--checkbox-button-border;
+    border: $--border-width-base $--border-style-base $--color-primary;
     box-sizing: border-box;
     line-height: normal;
     height: $--checkbox-bordered-height;
@@ -211,11 +212,11 @@
           position: absolute;
           display: block;
           background-color: $--checkbox-checked-icon-color;
-          height: 2px;
+          height: 3px;
           transform: scale(0.5);
           left: 0;
           right: 0;
-          top: 5px;
+          top: 6px;
         }
 
         &::after {
@@ -300,6 +301,7 @@
     box-sizing: border-box;
     outline: none;
     margin: 0;
+    letter-spacing: 0.3px;
     position: relative;
     transition: $--all-transition;
     @include utils-user-select(none);
@@ -308,6 +310,7 @@
 
     &:hover {
       color: $--color-primary;
+
     }
 
     & [class*="siagri-icon-"] {
@@ -364,6 +367,7 @@
   &.is-focus {
     & .el-checkbox-button__inner {
       border-color: $--checkbox-button-checked-border-color;
+      outline: none;
     }
   }
 

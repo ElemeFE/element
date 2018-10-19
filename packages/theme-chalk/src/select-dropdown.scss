@@ -16,14 +16,15 @@
       background-color: $--select-option-selected-background;
 
       &.hover {
+        color: $--select-option-selected;
         background-color: $--select-option-hover-background;
       }
 
       &::after {
         position: absolute;
         right: 20px;
-        font-family: 'element-icons';
-        content: "\E611";
+        font-family: '#{$--siagri-font-family}' !important;
+        content: "\e994";
         font-size: 12px;
         font-weight: bold;
         -webkit-font-smoothing: antialiased;

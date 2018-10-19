@@ -26,6 +26,7 @@
     cursor: pointer;
     transition: $--all-transition;
 
+
     @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-font-weight, 0);
 
     &:hover {
@@ -74,6 +75,7 @@
         box-shadow: none;
       }
       &:checked + .el-radio-button__inner {
+        color: $--radio-button-disabled-checked-color;
         background-color: $--radio-button-disabled-checked-fill;
       }
     }
@@ -107,7 +109,7 @@
     }
   }
 
-  &:focus:not(.is-focus):not(:active):not(.is-disabled){ /*获得焦点时 样式提醒*/
+  /* &:focus:not(.is-focus):not(:active):not(.is-disabled){ // FOCUS
     box-shadow: 0 0 2px 2px $--radio-button-checked-border-color;
-  }
+  } */
 }

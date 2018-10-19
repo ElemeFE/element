@@ -19,7 +19,7 @@
   @include when(bordered) {
     padding: $--radio-bordered-padding;
     border-radius: $--border-radius-base;
-    border: $--border-width-small $--border-style-base $--border-color-disabled-secondary; 
+    border: $--border-width-small $--border-style-base $--color-primary; 
     box-sizing: border-box;
     height: $--radio-bordered-height;
 
@@ -35,6 +35,15 @@
 
     & + .el-radio.is-bordered {
       margin-left: 10px;
+      border-color: $--color-primary;
+
+      &.is-checked {
+        border-color: $--color-primary;
+      }
+
+      &.is-disabled {
+        border-color:$--color-disabled-primary;
+      }
     }
   }
 

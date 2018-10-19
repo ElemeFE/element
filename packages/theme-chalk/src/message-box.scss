@@ -12,7 +12,7 @@
   background-color: $--color-white;
   border-radius: $--msgbox-border-radius;
   font-size: $--msgbox-font-size;
-  box-shadow: $--box-shadow-base;
+  box-shadow: $--box-shadow-modal;
   text-align: left;
   overflow: hidden;
   backface-visibility: hidden;
@@ -43,7 +43,7 @@
     width: 100%;
     border-bottom: $--msgbox-border-divisor;
     margin-top: $--msgbox-border-margin-top;
-    margin-bottom: $--msgbox-border-margin-bottom;
+    margin-bottom: 0;
   }
 
   @include e(title) {
@@ -52,13 +52,18 @@
     font-size: #{$--font-size-base + 20px};
     line-height: 1;
     color: $--color-primary;
+    letter-spacing: 0.3px;
+    padding: 40px 0 10px 0;
+    text-align:center;
   }
 
   @include e(headerbtn) {
     position: absolute;
-    top: $--msgbox-padding-primary;
-    right: $--msgbox-padding-primary;
+    top: $--msgbox-padding-primary-icon-close;
+    right: $--msgbox-padding-primary-icon-close;
     padding: 0;
+    font-size: #{$--font-size-base + 2px};
+    font-weight: bold;
     border: none;
     outline: none;
     background: transparent;
@@ -79,11 +84,13 @@
 
   @include e(content) {
     position: relative;
-    padding: 10px $--msgbox-padding-primary;
+    padding: 35px 45px;
+    font-size: #{$--font-size-base + 2px};
     color: $--msgbox-content-color;
     font-size: $--msgbox-content-font-size;
-    letter-spacing: 0.5px;
-    line-height: 2.8;
+    line-height: 1.75;
+    letter-spacing: 0.4px;
+    text-align:center;
   }
 
   @include e(input) {
@@ -147,7 +154,7 @@
   }
 
   @include e(btns) {
-    padding: 20px 15px 0;
+    padding: 0 34px 35px 34px;
     text-align: right;
 
     & button:nth-child(2) {

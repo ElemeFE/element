@@ -57,7 +57,7 @@
     margin: 0;
     display: inline-block;
     position: relative;
-    width: $--switch-width;
+    width: $--switch-width !important;
     height: $--switch-height;
     outline: none;
     border-radius: $--switch-core-border-radius;

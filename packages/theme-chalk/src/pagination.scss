@@ -39,7 +39,7 @@
 
     .el-input__inner {
       padding-right: 25px;
-      border-radius: $--pagination-border-radius;
+      border-radius: $--pagination-border-radius-select;
     }
   }
 
@@ -53,8 +53,7 @@
     }
 
     &:hover {
-      background-color: $--pagination-hover-fill;
-      color: $--pagination-hover-text;
+      color: $--pagination-color;
 
     }
 
@@ -69,6 +68,8 @@
   .btn-next {
     background: center center no-repeat;
     background-size: 16px;
+    min-width: $--pagination-button-geral;
+    height: $--pagination-button-geral;
     font-weight:bold;
     background-color: transparent;
     cursor: pointer;
@@ -80,15 +81,30 @@
       display: block;
       font-size: 14px;
       font-weight: bold;
+      position: relative;
+      top: -3px;
     }
+
+    &:hover:not(.el-pager li.disabled){
+      background-color: $--pagination-hover-fill-disabled;
+      color: $--pagination-hover-color;
+      border-radius: $--pagination-border-radius;
+    }
+
+    &:disabled {
+      background-color: transparent;
+      color: $--color-disabled-primary;
+      cursor: not-allowed;
+    }
+
   }
 
   .btn-prev {
-    padding-right: 12px;
+    margin-right: 12px;
   }
 
   .btn-next {
-    padding-left: 12px;    
+    margin-left: 12px;   
   }
 
   .el-pager li.disabled {
@@ -106,8 +122,24 @@
       border-color: transparent;
       font-size: 12px;
       line-height: 22px;
-      height: 22px;
-      min-width: 22px;
+      height: $--pagination-button-small;
+      min-width: $--pagination-button-small;
+
+      &:hover{
+        min-width: $--pagination-button-small;
+        height: $--pagination-button-small;
+      }
+
+      &.active{
+        height: $--pagination-button-small;
+        min-width: $--pagination-button-small;
+      }
+
+      .siagri-icon {
+        position: relative;
+        top: -6px;
+      }
+
     }
 
     .arrow.disabled {
@@ -200,10 +232,18 @@
       margin: 0 5px;
       background-color: transparent;
       color: $--color-primary;
-      min-width: 37px;
-      border-radius: 20px;
+      min-width: $--pagination-button-geral;
+      height: $--pagination-button-geral;
+      border-radius: $--pagination-border-radius;
+
+      &:hover:not(.el-pager li.disabled){
+        background-color: $--pagination-hover-fill-disabled;
+        color: $--pagination-hover-color;
+        border-radius: 100%;
+      }
 
       &.disabled {
+        background-color: transparent;
         color: $--color-disabled-primary;
       }
     }
@@ -212,8 +252,14 @@
       padding: 0;
 
       &:disabled {
+        background-color: transparent;
         color: $--color-disabled-primary;
       }
+    }
+
+    .siagri-icon {
+      position: relative;
+      top: 1px;
     }
 
     .el-pager li:not(.disabled) {

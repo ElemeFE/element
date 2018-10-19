@@ -23,9 +23,10 @@
     cursor: pointer;
     padding-right: 35px;
 
-    &:focus {
+    &:focus:not(.is-focus){
       border-color: $--select-input-focus-background;
     }
+
   }
 
   .el-input {
@@ -34,11 +35,15 @@
       font-size: $--select-input-font-size;
       transition: transform .3s;
       transform: rotateZ(180deg);
-      margin-top:-2px;
+      position: relative;
+      top: -3px;
       cursor: pointer;
+      display: block;
 
       @include when(reverse) {
-        transform: rotateZ(0deg);
+        transform: rotateZ(360deg);
+        position: relative;
+        top: 1px;
         color: $--select-input-icon-focus;
       }
 
@@ -67,10 +72,17 @@
         }
       }
     }
+    
+    &.is-focus{
+      .el-input__inner {
+        border-color: transparent;
+        box-shadow: $--select-shadow;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
 
-    &.is-focus .el-input__inner {
-      border-color: $--select-input-focus-background;
+      }
     }
+
   }
 
   > .el-input {
@@ -132,7 +144,7 @@
     &__close.siagri-icon-close {
       background-color: $--color-text-placeholder;
       right: -7px;
-      top: 0;
+      top: 4px;
       color: $--color-white;
 
       &:hover {

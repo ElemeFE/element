@@ -79,6 +79,7 @@
     color: $--color-text-primary;
     cursor: pointer;
     outline: none;
+    letter-spacing: 0.3px;
     &:not(.is-disabled):hover, &:focus {
       background-color: $--dropdown-menuItem-hover-fill;
       color: $--dropdown-menuItem-hover-color;

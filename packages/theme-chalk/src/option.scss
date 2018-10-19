@@ -12,6 +12,7 @@
     color: $--select-option-color;
     height: $--select-option-height;
     line-height: $--select-option-height;
+    letter-spacing: 0.3px;
     box-sizing: border-box;
     cursor: pointer;
 
@@ -20,6 +21,7 @@
       cursor: not-allowed;
 
       &:hover {
+        color: $--select-option-disabled-color;
         background-color: $--color-white;
       }
     }
@@ -32,7 +34,7 @@
     &.selected {
       color: $--select-option-selected;
       background-color: $--color-primary;
-      font-weight: bold;
+      font-weight: 400;
     }
   }
 }

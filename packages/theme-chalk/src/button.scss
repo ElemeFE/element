@@ -11,8 +11,8 @@
   cursor: pointer;
   background: $--color-white;
   border: $--border-base;
-  border-color: $--button-default-border;
-  color: $--button-default-color;
+  border-color: $--color-white;
+  color: $--color-primary;
   -webkit-appearance: none;
   text-align: center;
   box-sizing: border-box;
@@ -20,6 +20,8 @@
   margin: 0;
   transition: .1s;
   font-weight: $--button-font-weight;
+  letter-spacing: 0.8px;
+  
   @include utils-user-select(none);
   & + & {
     margin-left: 10px;
@@ -129,6 +131,9 @@
   }
   @include m(secondary) {
     @include button-variant($--button-secondary-color, $--button-secondary-fill, $--button-secondary-border);
+  }
+  @include m(b-white) {
+    @include button-white($--button-white-color, $--button-white-fill, $--button-white-border, $--button-white-shadow);
   }
   @include m(success) {
     @include button-variant($--button-success-color, $--button-success-fill, $--button-success-border);
@@ -257,7 +262,7 @@
     }
   }
 
-  @each $type in (primary, secondary, success, warning, danger, info) {
+  @each $type in (primary, secondary, b-white, success, warning, danger, info) {
     .el-button--#{$type} {
       &:first-child {
         border-right-color: rgba($--color-white, 0.5);

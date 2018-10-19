@@ -11,7 +11,7 @@
     // margin-top:5px;
     display: block;
     resize: vertical;
-    padding: 8px 16px;
+    padding: 8px 11px;
     line-height: 1.5;
     box-sizing: border-box;
     width: 100%;
@@ -94,7 +94,7 @@
     height: $--input-height;
     line-height: $--input-height;
     outline: none;
-    padding: 0 15px;
+    padding: 0 11px;
     transition: $--border-transition-base;
     width: 100%;
 
@@ -117,7 +117,7 @@
   @include e(suffix) {
     position: absolute;
     height: 100%;
-    right: 5px;
+    right: 15px;
     top: 3px;
     text-align: center;
     color: $--input-icon-color;
@@ -132,7 +132,7 @@
   @include e(prefix) {
     position: absolute;
     height: 100%;
-    left: 5px;
+    left: 15px;
     top: 3px;
     text-align: center;
     color: $--input-icon-color;
@@ -152,7 +152,7 @@
       width: 0;
       display: inline-block;
       vertical-align: middle;
-      margin-top:-6px;
+      margin-top:-4px;
     }
   }
 
@@ -192,7 +192,7 @@
 
   @include m(suffix) {
     .el-input__inner {
-      padding-right: 30px;
+      padding-right: 35px;
     }
   }
 
@@ -281,9 +281,11 @@
     button.el-button,
     div.el-select .el-input__inner,
     div.el-select:hover .el-input__inner {
-      border-color: transparent;
-      background-color: transparent;
-      color: inherit;
+      background-color: $--color-primary;
+      border-color: $--color-primary;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      color: $--color-text-terciary;
       border-top: 0;
       border-bottom: 0;
     }
@@ -310,6 +312,7 @@
     .el-input__inner {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+      border-left:0;
     }
     .el-select .el-input.is-focus .el-input__inner {
       border-color: transparent;
@@ -320,6 +323,7 @@
     .el-input__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      border-right:0;
     }
     .el-select .el-input.is-focus .el-input__inner {
       border-color: transparent;
@@ -339,6 +343,9 @@
 [class*="label-form-input"]{
   font-size: $--input-font-size;
   font-weight: 700;
+  letter-spacing: 0.1px;
+  line-height: 1.71;
+
 }
 
 .label-form-input-default{
@@ -357,4 +364,5 @@
   color: $--input-disabled-color;
   cursor: not-allowed;
 }
+
 

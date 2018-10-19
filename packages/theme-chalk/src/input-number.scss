@@ -19,6 +19,19 @@
     }
   }
 
+  .el-input__inner:not(.is-disabled){
+    border-color: transparent;
+      
+      &:hover{
+        box-shadow: 0 0 0 rgba(255,255,255,0);
+      }
+
+      &:focus{
+        border-color: transparent;
+        box-shadow: $--box-shadow-modal;
+      }
+  }
+
   @include e((increase, decrease)) {
     position: absolute;
     z-index: 1;
@@ -49,13 +62,13 @@
   @include e(increase) {
     right: 0;
     border-radius: 0 $--border-radius-base $--border-radius-base 0;
-    border-left: $--input-disabled-border;
+    // border-left: $--input-disabled-border;
   }
 
   @include e(decrease) {
     left: 0;
     border-radius: $--border-radius-base 0 0 $--border-radius-base;
-    border-right: $--input-disabled-border;
+    // border-right: $--input-disabled-border;
   }
 
   @include when(disabled) {

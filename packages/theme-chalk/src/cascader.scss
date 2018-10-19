@@ -15,7 +15,10 @@
   }
 
   .el-input.is-focus .el-input__inner {
-    border-color: $--input-focus-border;
+    border-color: transparent;
+    box-shadow: $--select-shadow;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .el-input__icon {
@@ -23,14 +26,16 @@
   }
 
   .siagri-icon-arrow-down {
+    transform: rotateZ(360deg);
     transition: transform .3s;
     font-size: 14px;
+    display:block;
+    position: relative;
 
     @include when(reverse) {
       transform: rotateZ(180deg);
-      position: relative;
-      top: -6px;
       color: $--color-primary;
+      top: -4px;
     }
   }
 
@@ -53,7 +58,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    padding: 0 25px 0 15px;
+    padding: 0 40px 0 11px;
     color: $--input-color;
     width: 100%;
     white-space: nowrap;
@@ -98,9 +103,9 @@
   position: absolute;
   margin: 5px 0;
   z-index: #{$--index-normal + 1};
-  border: $--select-dropdown-border;
   border-radius: $--border-radius-small;
   box-shadow: $--select-dropdown-shadow;
+
 }
 
 @include b(cascader-menu) {
@@ -121,25 +126,27 @@
 
   @include e(item) {
     font-size: $--select-font-size;
-    padding: 8px 20px;
+    padding: 10px 16px;
+    letter-spacing: 0.3px;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: $--select-option-color;
     height: $--select-option-height;
-    line-height: 1.5;
+    line-height: 1.43;
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
     @include m(extensible) {
       &:after {
-        font-family: 'element-icons';
-        content: "\e604";
-        font-size: 14px;
-        color: $--color-disabled-primary;
+        font-family:'#{$--siagri-font-family}' !important;
+        content: "\e9a3";
+        font-size: 8px;
+        color: $--color-white;
         position: absolute;
-        right: 15px;
+        right: 14px;
+        top: 15px;
       }
     }
 
