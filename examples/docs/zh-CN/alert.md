@@ -210,6 +210,11 @@
 | close-text | 关闭按钮自定义文本 | string | — | — |
 | show-icon | 是否显示图标 | boolean | — | false |
 
+### Slot
+
+| Name | Description |
+|------|--------|
+| title | 标题的内容 |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |
