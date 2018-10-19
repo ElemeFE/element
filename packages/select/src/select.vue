@@ -86,8 +86,8 @@
       @keydown.native.down.stop.prevent="navigateOptions('next')"
       @keydown.native.up.stop.prevent="navigateOptions('prev')"
       @keydown.native.enter.prevent="selectOption"
+      @keydown.native.tab="selectOptionTab"
       @keydown.native.esc.stop.prevent="visible = false"
-      @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
@@ -726,6 +726,15 @@
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
           }
+        }
+      },
+
+      selectOptionTab() {
+        if (this.options[this.hoverIndex]) {
+          this.handleOptionSelect(this.options[this.hoverIndex]);
+        }
+        if (this.visible) {
+          this.visible = false;
         }
       },
 
