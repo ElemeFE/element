@@ -2128,3 +2128,4 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | Name | Description |
 |------|--------|
 | — | Custom content for table columns. The scope parameter is { row, column, $index } |
+| header | Custom content for table header. The scope parameter is { column, $index } |
