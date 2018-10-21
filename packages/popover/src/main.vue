@@ -123,6 +123,14 @@ export default {
     }
   },
 
+  beforeDestroy: function beforeDestroy() {
+    this.cleanup();
+  },
+
+  deactivated: function deactivated() {
+    this.cleanup();
+  },
+
   methods: {
     doToggle() {
       this.showPopper = !this.showPopper;
@@ -134,15 +142,17 @@ export default {
       this.showPopper = false;
     },
     handleFocus() {
-      addClass(this.referenceElm, 'focusing');
-      if (this.trigger !== 'manual') this.showPopper = true;
+      addClass(this.referenceElm, "focusing");
+      if (this.trigger === "click" || this.trigger === "focus")
+        this.showPopper = true;
     },
     handleClick() {
       removeClass(this.referenceElm, 'focusing');
     },
     handleBlur() {
-      removeClass(this.referenceElm, 'focusing');
-      if (this.trigger !== 'manual') this.showPopper = false;
+      removeClass(this.referenceElm, "focusing");
+      if (this.trigger === "click" || this.trigger === "focus")
+        this.showPopper = false;
     },
     handleMouseEnter() {
       clearTimeout(this._timer);
@@ -186,6 +196,12 @@ export default {
     handleAfterLeave() {
       this.$emit('after-leave');
       this.doDestroy();
+    },
+    cleanup: function cleanup() {
+      if (this.openDelay) {
+        clearTimeout(this._timer);
+        this.showPopper = false;
+      }
     }
   },
 
