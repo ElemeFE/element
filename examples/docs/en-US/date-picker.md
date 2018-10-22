@@ -373,6 +373,8 @@ Pay attention to capitalization
 | `yyyy` | year | | 2017 |
 | `M`  | month | no leading 0 | 1 |
 | `MM` | month | | 01 |
+| `MMM` | month | | Jan |
+| `MMMM` | month | | January |
 | `W`  | week | only for week picker's `format`; no leading 0 | 1 |
 | `WW` | week | only for week picker's `format`| 01 |
 | `d`  | day | no leading 0 | 2 |
