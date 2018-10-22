@@ -1,6 +1,10 @@
 ## Changelog
 
-*2018-10-18*
+*2018-10-20*
+
+### 1.2.21
+
+  - Добавил иконки: slippers, toilet, transferV2, baby-places, blanket, hygienic-kit, icon-socket, showerV2, sink
 
 ### 1.2.20
 
