@@ -75,6 +75,8 @@ import SidebarGroup from '../packages/sidebar-group/index.js';
 import SidebarItem from '../packages/sidebar-item/index.js';
 import Drawer from '../packages/drawer/index.js';
 import Divider from '../packages/divider/index.js';
+import Swiper from '../packages/swiper/index.js';
+import SwiperSlide from '../packages/swiper-slide/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -150,6 +152,8 @@ const components = [
   SidebarItem,
   Drawer,
   Divider,
+  Swiper,
+  SwiperSlide,
   CollapseTransition
 ];
 
@@ -263,7 +267,9 @@ const ElementUi = {
   SidebarGroup,
   SidebarItem,
   Drawer,
-  Divider
+  Divider,
+  Swiper,
+  SwiperSlide
 };
 
 export default ElementUi;

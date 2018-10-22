@@ -58,6 +58,7 @@
     "popper.js": "^1.14.4",
     "resize-observer-polyfill": "^1.5.0",
     "slideout": "^1.0.1",
+    "swiper": "^4.4.1",
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {

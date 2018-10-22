@@ -73,5 +73,7 @@
   "sidebar-group": "./packages/sidebar-group/index.js",
   "sidebar-item": "./packages/sidebar-item/index.js",
   "drawer": "./packages/drawer/index.js",
-  "divider": "./packages/divider/index.js"
+  "divider": "./packages/divider/index.js",
+  "swiper": "./packages/swiper/index.js",
+  "swiper-slide": "./packages/swiper-slide/index.js"
 }
