@@ -25,14 +25,14 @@
       },
       size: {
         type: String,
-        default () {
-          return 'medium'
+        default() {
+          return 'medium';
         }
       }
     },
     computed: {
       avatarSize() {
-        return (AVATAR_SIZES.includes(this.size)) ? this.size : null
+        return (AVATAR_SIZES.includes(this.size)) ? this.size : null;
       }
     }
   };
