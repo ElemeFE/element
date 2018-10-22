@@ -75,5 +75,6 @@
   "drawer": "./packages/drawer/index.js",
   "divider": "./packages/divider/index.js",
   "swiper": "./packages/swiper/index.js",
-  "swiper-slide": "./packages/swiper-slide/index.js"
+  "swiper-slide": "./packages/swiper-slide/index.js",
+  "avatar": "./packages/avatar/index.js"
 }
