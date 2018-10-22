@@ -7,7 +7,12 @@
       }
     ]">
     <span class="el-avatar--wrapper">
-      <img v-bind:src="src">
+      <template v-if="src">
+        <img v-bind:src="src">
+      </template>
+      <template v-else>
+        <slot></slot>
+      </template>
     </span>
   </div>
 </template>
