@@ -7,7 +7,7 @@
       }
     ]">
     <span class="el-avatar--wrapper">
-      <img v-bind:src="source">
+      <img v-bind:src="src">
     </span>
   </div>
 </template>
@@ -19,7 +19,7 @@
     name: 'ElAvatar',
     props: {
       round: Boolean,
-      source: {
+      src: {
         type: String,
         default: 'https://expertfile.com/speakers/img/profileyourpeople_small.png'
       },
