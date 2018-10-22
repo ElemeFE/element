@@ -45,6 +45,7 @@ import DotsVertical from '../../packages/theme-chalk/src/icons/dots-vertical.svg
 import DoubleBed from '../../packages/theme-chalk/src/icons/double-bed.svg';
 import Download from '../../packages/theme-chalk/src/icons/download.svg';
 import Dryer from '../../packages/theme-chalk/src/icons/dryer.svg';
+import EregNotAvailable from '../../packages/theme-chalk/src/icons/ereg-not-available.svg';
 import Error from '../../packages/theme-chalk/src/icons/error.svg';
 import Extinguisher from '../../packages/theme-chalk/src/icons/extinguisher.svg';
 import Files from '../../packages/theme-chalk/src/icons/files.svg';
@@ -175,6 +176,7 @@ module.exports = {
   DoubleBed,
   Download,
   Dryer,
+  EregNotAvailable,
   Error,
   Extinguisher,
   Files,

@@ -1,10 +1,19 @@
 ## Changelog
 
+*2018-10-22*
+
+### 1.2.22
+
+  - Добавил иконку ereg-not-available
+
 *2018-10-20*
 
 ### 1.2.21
 
   - Добавил иконки: slippers, toilet, transferV2, baby-places, blanket, hygienic-kit, icon-socket, showerV2, sink
+  - Добавил иконку ereg-not-available
+
+*2018-10-18*
 
 ### 1.2.20
 
