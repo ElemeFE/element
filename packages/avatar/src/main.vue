@@ -24,10 +24,7 @@
     name: 'ElAvatar',
     props: {
       round: Boolean,
-      src: {
-        type: String,
-        default: 'https://expertfile.com/speakers/img/profileyourpeople_small.png'
-      },
+      src: String,
       size: {
         type: String,
         default() {
