@@ -86,6 +86,7 @@
   }
 
   @include e(label) {
+    font-weight: bold;
     text-align: right;
     vertical-align: middle;
     float: left;
