@@ -1,6 +1,6 @@
 <template>
   <div
-    v-show="ready"
+    v-show="ready && !cardLoopHide"
     class="el-carousel__item"
     :class="{
       'is-active': active,
@@ -45,7 +45,8 @@
         active: false,
         ready: false,
         inStage: false,
-        animating: false
+        animating: false,
+        cardLoopHide: false
       };
     },
 
@@ -74,6 +75,7 @@
       },
 
       translateItem(index, activeIndex, oldIndex) {
+        let _index = index;
         const parentWidth = this.$parent.$el.offsetWidth;
         const length = this.$parent.items.length;
         if (this.$parent.type !== 'card' && oldIndex !== undefined) {
@@ -87,6 +89,7 @@
           this.active = index === activeIndex;
           this.translate = this.calculateTranslate(index, activeIndex, parentWidth);
           this.scale = this.active ? 1 : CARD_SCALE;
+          this.cardLoopHide = (activeIndex === 0 && _index === length - 1) || (activeIndex === length - 1 && _index === 0);
         } else {
           this.active = index === activeIndex;
           this.translate = parentWidth * (index - activeIndex);

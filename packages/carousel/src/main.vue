@@ -10,7 +10,7 @@
       <transition name="carousel-arrow-left">
         <button
           type="button"
-          v-if="arrow !== 'never'"
+          v-if="leftArrowVisible"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
@@ -22,7 +22,7 @@
       <transition name="carousel-arrow-right">
         <button
           type="button"
-          v-if="arrow !== 'never'"
+          v-if="rightArrowVisible"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
@@ -70,6 +70,10 @@ export default {
       type: Boolean,
       default: true
     },
+    loop: {
+      type: Boolean,
+      default: false
+    },
     interval: {
       type: Number,
       default: 3000
@@ -99,6 +103,20 @@ export default {
   computed: {
     hasLabel() {
       return this.items.some(item => item.label.toString().length > 0);
+    },
+    leftArrowVisible() {
+      if (this.loop) {
+        return this.arrow !== 'never';
+      } else {
+        return this.arrow !== 'never' && this.activeIndex !== 0;
+      }
+    },
+    rightArrowVisible() {
+      if (this.loop) {
+        return this.arrow !== 'never';
+      } else {
+        return this.arrow !== 'never' && this.activeIndex !== this.items.length - 1;
+      }
     }
   },
 
@@ -167,7 +185,7 @@ export default {
     playSlides() {
       if (this.activeIndex < this.items.length - 1) {
         this.activeIndex++;
-      } else {
+      } else if (this.loop) {
         this.activeIndex = 0;
       }
     },
@@ -197,9 +215,13 @@ export default {
       let length = this.items.length;
       const oldIndex = this.activeIndex;
       if (index < 0) {
-        this.activeIndex = length - 1;
+        if (this.loop) {
+          this.activeIndex = length - 1;
+        }
       } else if (index >= length) {
-        this.activeIndex = 0;
+        if (this.loop) {
+          this.activeIndex = 0;
+        }
       } else {
         this.activeIndex = index;
       }
