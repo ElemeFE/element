@@ -106,7 +106,8 @@ export default {
                       on-click={ ($event) => this.handleHeaderClick($event, column) }
                       on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
                       style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
-                      class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
+                      class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
+                      key={ column.id }>
                       <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                         {
                           column.renderHeader
@@ -124,7 +125,7 @@ export default {
                             : ''
                         }
                         {
-                          (column.filters && column.filters.length) || column.filterMethod
+                          column.filterable
                             ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
                             : ''
                         }

@@ -143,7 +143,7 @@
         }
       },
       controlsAtRight() {
-        return this.controlsPosition === 'right';
+        return this.controls && this.controlsPosition === 'right';
       },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;

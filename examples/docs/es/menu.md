@@ -313,7 +313,7 @@ NavMenu vertical puede ser colapsado.
 | collapse-transition  | si se debe permitir collapse transition | boolean   | — | true   |
 
 ### Métodos Menu 
-| Nombre de evento | Descripción                   | Parámetros                             |
+| Métodos de evento | Descripción                   | Parámetros                             |
 | ---------------- | ----------------------------- | -------------------------------------- |
 | open             | abre un sub-menu específico   | index: índice del sub-menu para abrir  |
 | close            | cierra un sub-menu específico | index: índice del sub-menu para cerrar |

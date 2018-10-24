@@ -538,10 +538,10 @@ This example shows how to customize your own validation rules to finish a two-fa
 ```html
 <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
     <el-input v-model.number="ruleForm2.age"></el-input>
@@ -719,7 +719,7 @@ This example shows how to customize your own validation rules to finish a two-fa
       { type: 'number', message: 'age must be a number'}
     ]"
   >
-    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
+    <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
@@ -835,9 +835,10 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | model| data of form component | object | — | — |
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left / right / top | right |
+| label-position | position of label. If set to 'left' or 'right', `label-width` prop is also required | string | left / right / top | right |
 | label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
+| hide-required-asterisk | whether required fields should have a red asterisk (star) beside their labels | boolean | — | false |
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | whether to display the error message inline with the form item | boolean | — | false |
 | status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
@@ -857,7 +858,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ### Form Events
 | Event Name | Description | Parameters |
 |----------- |------------ |----------- |
-| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed |
+| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed and the error message if not |
 
 ### Form-Item Attributes
 
@@ -879,9 +880,14 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | — | content of Form Item |
 | label | content of label |
 
+### Form-Item Scoped Slot
+|      Name     | Description |
+|---------------|-------------|
+|      error    | Custom content to display validation message. The scope parameter is { error } |
+
 ### Form-Item Methods
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | resetField | reset current field and remove validation result | — |
-| clearValidate | remove validation status of the field | -
+| clearValidate | remove validation status of the field | - |

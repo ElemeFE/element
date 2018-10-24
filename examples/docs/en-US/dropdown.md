@@ -331,6 +331,13 @@ Besides default size, Dropdown component provides three additional sizes for you
 | show-timeout | Delay time before show a dropdown (only works when trigger is `hover`) | number | — | 250 |
 | hide-timeout | Delay time before hide a dropdown (only works when trigger is `hover`) | number | — | 150 |
 
+### Dropdown Slots
+
+| Name | Description |
+|------|--------|
+| — | content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>, <button> etc.`) or `el-component`, to attach the trigger listener  |
+| dropdown | content of the Dropdown Menu, usually a `<el-dropdown-menu>` element |
+
 ### Dropdown Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |

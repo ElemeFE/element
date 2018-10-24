@@ -311,7 +311,7 @@ Vertical NavMenu could be collapsed.
 | collapse-transition  | whether to enable the collapse transition | boolean   | — | true   |
 
 ### Menu Methods
-| Event Name | Description | Parameters |
+| Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open  | open a specific sub-menu | index: index of the sub-menu to open |
 | close  | close a specific sub-menu | index: index of the sub-menu to close |

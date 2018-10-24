@@ -435,6 +435,7 @@
 
 ### Methods
 | 方法名      | 说明          | 参数 |
-|---------- |-------------- | -- |
+|----------- |-------------- | -- |
 | clearFiles | 清空已上传的文件列表（该方法不支持在 before-upload 中调用） | — |
-| abort | 取消上传请求 | （ file: fileList 中的 file 对象 ） |
+| abort      | 取消上传请求    | （ file: fileList 中的 file 对象 ） |
+| submit     | 手动上传文件列表 |  —                                |
