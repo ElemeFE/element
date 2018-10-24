@@ -1535,13 +1535,6 @@ Customize table header so it can be even more customized.
       prop="name">
     </el-table-column>
     <el-table-column
-      v-for="header in extraColumns"
-      :key="header"
-      :label="header"
-      prop="name">
-    </el-table-column>
-    <el-table-column
-      label="Name"
       align="right">
       <template slot="header" slot-scope="slot">
         <el-input
