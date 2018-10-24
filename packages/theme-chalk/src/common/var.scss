@@ -690,6 +690,8 @@ $--md: 992px !default;
 $--lg: 1200px !default;
 $--xl: 1920px !default;
 
+$--sizes: xs sm md lg xl;
+
 $--breakpoints: (
   'xs' : (max-width: $--sm),
   'sm' : (min-width: $--sm),
