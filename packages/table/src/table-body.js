@@ -322,7 +322,7 @@ export default {
       const range = document.createRange();
       range.setStart(cellChild, 0);
       range.setEnd(cellChild, cellChild.childNodes.length);
-      const rangeWidth = range.getBoundingClientRect().width;
+      const rangeWidth = cellChild.childNodes.length ? range.getBoundingClientRect().width : 0;
       const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
         (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
       if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
