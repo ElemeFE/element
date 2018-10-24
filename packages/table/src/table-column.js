@@ -330,7 +330,7 @@ export default {
 
   destroyed() {
     if (!this.$parent) return;
-    const parent = this.$parent;
+    const parent = this.columnOrTableParent;
     this.owner.store.commit('removeColumn', this.columnConfig, this.isSubColumn ? parent.columnConfig : null);
   },
 
