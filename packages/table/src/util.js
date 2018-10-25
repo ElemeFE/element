@@ -84,6 +84,10 @@ export const getColumnById = function(table, columnId) {
   return column;
 };
 
+export const getColumnByKey = function(table, columnKey) {
+  return table.columns.find(item => item.columnKey === columnKey);
+};
+
 export const getColumnByCell = function(table, cell) {
   const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
   if (matches) {
