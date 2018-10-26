@@ -227,6 +227,7 @@
               'is-focus': this.isFocus
             }}
             id={`tab-${tabName}`}
+            key={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
             aria-selected={ pane.active }
