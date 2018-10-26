@@ -89,6 +89,7 @@ import Pillows from '../../packages/theme-chalk/src/icons/pillows.svg';
 import Plus from '../../packages/theme-chalk/src/icons/plus.svg';
 import Pocket from '../../packages/theme-chalk/src/icons/pocket.svg';
 import Pram from '../../packages/theme-chalk/src/icons/pram.svg';
+import PrintNotAvailable from '../../packages/theme-chalk/src/icons/print-not-available.svg';
 import Question from '../../packages/theme-chalk/src/icons/question.svg';
 import Ramp from '../../packages/theme-chalk/src/icons/ramp.svg';
 import Repeat from '../../packages/theme-chalk/src/icons/repeat.svg';
@@ -220,6 +221,7 @@ module.exports = {
   Plus,
   Pocket,
   Pram,
+  PrintNotAvailable,
   Question,
   Ramp,
   Repeat,
