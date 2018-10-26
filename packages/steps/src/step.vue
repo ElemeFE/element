@@ -137,24 +137,25 @@ export default {
   methods: {
     updateStatus(val) {
       const prevChild = this.$parent.$children[this.index - 1];
+      let currentProcessStatus = false;
 
       if (val > this.index) {
         this.internalStatus = this.$parent.finishStatus;
       } else if (val === this.index && this.prevStatus !== 'error') {
         this.internalStatus = this.$parent.processStatus;
+        currentProcessStatus = true;
       } else {
         this.internalStatus = 'wait';
       }
-
-      if (prevChild) prevChild.calcProgress(this.internalStatus);
+      if (prevChild) prevChild.calcProgress(this.internalStatus, currentProcessStatus);
     },
 
-    calcProgress(status) {
+    calcProgress(status, currentProcessStatus) {
       let step = 100;
       const style = {};
 
       style.transitionDelay = 150 * this.index + 'ms';
-      if (status === this.$parent.processStatus) {
+      if (currentProcessStatus) {
         step = this.currentStatus !== 'error' ? 0 : 0;
       } else if (status === 'wait') {
         step = 0;
