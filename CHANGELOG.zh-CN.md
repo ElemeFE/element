@@ -8,7 +8,7 @@
 - Badge 新增 type 属性，#12991
 - 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
 - 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
-- Select 多选时，选项不换行 @akki-jat #12329
+- Select 多选时，选项不换行，#12329 （by @akki-jat）
 - Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
 - 修复 Select 的 size 属性不生效的问题，#13070
 - 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
