@@ -2,6 +2,8 @@
 
 ### 2.4.9
 
+*2018-10-26*
+
 - Form 组件 clearValidate 方法参数支持字符串，#12990 （by @codinglobster）
 - Badge 新增 type 属性，#12991
 - 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
