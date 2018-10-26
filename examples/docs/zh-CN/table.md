@@ -227,20 +227,20 @@
         }],
         tableData7: [{
           date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-04',
-          name: 'John',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
         }, {
           date: '2016-05-01',
-          name: 'Morgan',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
         }, {
           date: '2016-05-03',
-          name: 'Jessy',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
         }],
         currentRow: null,
         multipleSelection: [],
@@ -1666,10 +1666,11 @@
 ```
 :::
 
-### Table with custom header
+### 自定义表头
 
-Customize table header so it can be even more customized.
-:::demo You can customize how the header looks by [Default slot content](https://vuejs.org/v2/guide/components-slots.html#Default-Slot-Content).
+表头支持自定义。
+
+:::demo 通过设置 [Scoped slot](https://cn.vuejs.org/v2/guide/components-slots.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD) 来自定义表头。
 ```html
 <template>
   <el-table
@@ -1710,20 +1711,20 @@ Customize table header so it can be even more customized.
       return {
         tableData: [{
           date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-04',
-          name: 'John',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
         }, {
           date: '2016-05-01',
-          name: 'Morgan',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
         }, {
           date: '2016-05-03',
-          name: 'Jessy',
-          address: 'No. 189, Grove St, Los Angeles',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
         }],
         search: ''
       }
@@ -2200,4 +2201,4 @@ Customize table header so it can be even more customized.
 | name | 说明 |
 |------|--------|
 | — | 自定义列的内容，参数为 { row, column, $index } |
-| header | Custom content for table header. The scope parameter is { column, $index } |
+| header | 自定义表头的内容. 参数为 { column, $index } |
