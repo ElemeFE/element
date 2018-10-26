@@ -296,7 +296,7 @@ export default {
 
     // Deprecation warning for renderHeader property
     if (this.renderHeader) {
-      console.warn('[Element Warn][Table Column] Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
+      console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
     }
 
     this.columnConfig = column;
@@ -451,7 +451,7 @@ export default {
 
     if (this.$scopedSlots.header) {
       if (this.type === 'selection') {
-        console.warn('[Element Warn][TableColumn] Selection column doesn\'t allow to set scoped-slot header.');
+        console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set scoped-slot header.');
       } else {
         this.columnConfig.renderHeader = this.$scopedSlots.header;
       }
