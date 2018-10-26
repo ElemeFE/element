@@ -1,6 +1,6 @@
 {
   "name": "element-theme-chalk",
-  "version": "2.4.8",
+  "version": "2.4.9",
   "description": "Element component chalk theme.",
   "main": "lib/index.css",
   "style": "lib/index.css",
