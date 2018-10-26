@@ -13,7 +13,7 @@
 - Fixed the last TabNav unable be deleted #13039
 - Fixed that TabNav label is not displayed correctly #13178
 - Added title slot for Alert, #13082 (by @Kingwl)
-- Fixed an issue where the tooltip content in Table was incorrect, #13159 @elfman
+- Fixed an issue where the tooltip content in Table was incorrect, #13159 (by @elfman)
 - Optimize the animation of Upload when file is deleted #12987
 - Adjusted style of  InputNumber when control button is not displayed #13052
 

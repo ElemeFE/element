@@ -7,12 +7,12 @@
 - 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
 - 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
 - Select 多选时，选项不换行 @akki-jat #12329
-- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（@firesh） 
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
 - 修复 Select 的 size 属性不生效的问题，#13070
-- 多选时可以清除 Select 已选中的值，#13049（@ZSkycat）
+- 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
 - 修复最后一个 TabNav 不能删除的问题，#13039
 - 修复 TabNav 中 label 显示不正确的问题，#13178
-- Alert 新增 title slot，#13082（不用@Kingwl）
+- Alert 新增 title slot，#13082（by @Kingwl）
 - 修复 Table 中的 tooltip 内容不正确的问题，#13159（by @elfman）
 - 优化 Upload 文件列表删除时的动画，#12987
 - 当 InputNumber 控制按钮不显示时，调整了边距，#13052
