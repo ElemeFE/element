@@ -185,8 +185,26 @@
           amount2: '4.1',
           amount3: 15
         }],
+        tableData7: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-01',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles',
+        }],
         currentRow: null,
-        multipleSelection: []
+        multipleSelection: [],
+        search: '',
       };
     },
 
@@ -1500,6 +1518,77 @@ Customize table column so it can be integrated with other components.
 ```
 :::
 
+### Table with custom header
+
+Customize table header so it can be even more customized.
+:::demo You can customize how the header looks by [Default slot content](https://vuejs.org/v2/guide/components-slots.html#Default-Slot-Content).
+```html
+<template>
+  <el-table
+    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%">
+    <el-table-column
+      label="Date"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="Name"
+      prop="name">
+    </el-table-column>
+    <el-table-column
+      align="right">
+      <template slot="header" slot-scope="slot">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"/>
+      </template>
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles'
+        }],
+        search: '',
+      }
+    },
+    methods: {
+      handleEdit(){},
+      handleDelete(){}
+    },
+  }
+</script>
+```
+:::
+
 ### Expandable row
 
 When the row content is too long and you do not want to display the horizontal scroll bar, you can use the expandable row feature.
@@ -2051,3 +2140,4 @@ You can customize row index in `type=index` columns.
 | Name | Description |
 |------|--------|
 | — | Custom content for table columns. The scope parameter is { row, column, $index } |
+| header | Custom content for table header. The scope parameter is { column, $index } |
