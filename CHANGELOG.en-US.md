@@ -1,5 +1,24 @@
 ## Changelog
 
+### 2.4.9
+
+*2018-10-26*
+
+- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
+- Added type attribute for Badge, #12991
+- Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
+- Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
+- Select option does not wrap when space is enough, #12329 (by @akki-jat)
+- When dropdown list of Select is expanded, the arrow icon will also display correctly, #12353 (by @firesh)
+- Fixed that the size attribute of Select does not work, #13070
+- Select multiple values can be cleared, #13049 (by @ZSkycat)
+- Fixed the last TabNav unable be deleted, #13039
+- Fixed that TabNav label is not displayed correctly, #13178
+- Added title slot for Alert, #13082 (by @Kingwl)
+- Fixed an issue where the tooltip content in Table was incorrect, #13159 (by @elfman)
+- Optimize the animation of Upload when file is deleted, #12987
+- Adjusted style of InputNumber when control button is not displayed, #13052
+
 ### 2.4.8
 
 - Not displaying outline when Switch is focused, #12771
