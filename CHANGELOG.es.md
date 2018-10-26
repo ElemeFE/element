@@ -2,20 +2,20 @@
 
 ### 2.4.9
 
-- Form 组件 clearValidate 方法参数支持字符串，#12990 （by @codinglobster）
-- Badge 新增 type 属性，#12991
-- 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
-- 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
-- Select 多选时，选项不换行 @akki-jat #12329
-- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（@firesh） 
-- 修复 Select 的 size 属性不生效的问题，#13070
-- 多选时可以清除 Select 已选中的值，#13049（@ZSkycat）
-- 修复最后一个 TabNav 不能删除的问题，#13039
-- 修复 TabNav 中 label 显示不正确的问题，#13178
-- Alert 新增 title slot，#13082（不用@Kingwl）
-- 修复 Table 中的 tooltip 内容不正确的问题，#13159（by @elfman）
-- 优化 Upload 文件列表删除时的动画，#12987
-- 当 InputNumber 控制按钮不显示时，调整了边距，#13052
+- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
+- Added type attribute for Badge, #12991
+- Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
+- Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
+- Select option does not wrap when space is enough, #12329 (by @akki-jat)
+- When dropdown list of Select is expanded, the arrow icon will also display correctly, #12353 (by @firesh)
+- Fixed that the size attribute of Select does not work #13070
+- Select multiple values can be cleared, #13049 (by @ZSkycat)
+- Fixed the last TabNav unable be deleted #13039
+- Fixed that TabNav label is not displayed correctly #13178
+- Added title slot for Alert, #13082 (by @Kingwl)
+- Fixed an issue where the tooltip content in Table was incorrect, #13159 @elfman
+- Optimize the animation of Upload when file is deleted #12987
+- Adjusted style of  InputNumber when control button is not displayed #13052
 
 ### 2.4.8
 
