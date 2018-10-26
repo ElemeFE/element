@@ -314,7 +314,7 @@ export default {
 
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
-      if (!hasClass(cellChild, 'el-tooltip')) {
+      if (!(hasClass(cellChild, 'el-tooltip') && cellChild.childNodes.length)) {
         return;
       }
       // use range width instead of scrollWidth to determine whether the text is overflowing
@@ -322,7 +322,7 @@ export default {
       const range = document.createRange();
       range.setStart(cellChild, 0);
       range.setEnd(cellChild, cellChild.childNodes.length);
-      const rangeWidth = cellChild.childNodes.length ? range.getBoundingClientRect().width : 0;
+      const rangeWidth = range.getBoundingClientRect().width;
       const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
         (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
       if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
