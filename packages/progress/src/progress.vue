@@ -33,7 +33,12 @@
       :style="{fontSize: progressTextSize + 'px'}"
     >
       <template v-if="!status">{{percentage}}%</template>
-      <i v-else :class="iconClass"></i>
+      <template v-if="status && status === 'text'">
+        <slot></slot>
+      </template>
+      <template v-if="status && status !== 'text'">
+        <i :class="iconClass"></i>
+      </template>
     </div>
   </div>
 </template>
@@ -53,7 +58,8 @@
         validator: val => val >= 0 && val <= 100
       },
       status: {
-        type: String
+        type: String,
+        validator: val => ['text', 'success', 'exception'].indexOf(val) > -1
       },
       strokeWidth: {
         type: Number,
