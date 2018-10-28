@@ -1,6 +1,16 @@
 import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import merge from 'element-ui/src/utils/merge';
 
 class Transition {
+  constructor(listeners) {
+    this.listeners = listeners;
+  }
+
+  emit(eventName) {
+    const event = this.listeners[eventName];
+    (event instanceof Function) && event();
+  }
+
   beforeEnter(el) {
     addClass(el, 'collapse-transition');
     if (!el.dataset) el.dataset = {};
@@ -11,6 +21,7 @@ class Transition {
     el.style.height = '0';
     el.style.paddingTop = 0;
     el.style.paddingBottom = 0;
+    this.emit('before-enter');
   }
 
   enter(el) {
@@ -26,6 +37,7 @@ class Transition {
     }
 
     el.style.overflow = 'hidden';
+    this.emit('enter');
   }
 
   afterEnter(el) {
@@ -33,6 +45,7 @@ class Transition {
     removeClass(el, 'collapse-transition');
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
+    this.emit('after-enter');
   }
 
   beforeLeave(el) {
@@ -43,6 +56,7 @@ class Transition {
 
     el.style.height = el.scrollHeight + 'px';
     el.style.overflow = 'hidden';
+    this.emit('before-leave');
   }
 
   leave(el) {
@@ -53,6 +67,7 @@ class Transition {
       el.style.paddingTop = 0;
       el.style.paddingBottom = 0;
     }
+    this.emit('leave');
   }
 
   afterLeave(el) {
@@ -61,15 +76,16 @@ class Transition {
     el.style.overflow = el.dataset.oldOverflow;
     el.style.paddingTop = el.dataset.oldPaddingTop;
     el.style.paddingBottom = el.dataset.oldPaddingBottom;
+    this.emit('after-leave');
   }
 }
 
 export default {
   name: 'ElCollapseTransition',
   functional: true,
-  render(h, { children }) {
+  render(h, {listeners, children}) {
     const data = {
-      on: new Transition()
+      on: merge({}, listeners, new Transition(listeners))
     };
 
     return h('transition', data, children);
