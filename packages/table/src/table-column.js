@@ -151,6 +151,7 @@ export default {
     prop: String,
     width: {},
     minWidth: {},
+    renderCell: Function,
     renderHeader: Function,
     sortable: {
       type: [String, Boolean],
@@ -251,7 +252,7 @@ export default {
       labelClassName: this.labelClassName,
       property: this.prop || this.property,
       type,
-      renderCell: null,
+      renderCell: this.renderCell,
       renderHeader: this.renderHeader,
       minWidth,
       width,
