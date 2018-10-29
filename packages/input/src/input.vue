@@ -204,6 +204,8 @@
         return this.disabled || (this.elForm || {}).disabled;
       },
       showClear() {
+        if (this.elForm && this.elForm.disabled) return false;
+
         return this.clearable &&
           !this.disabled &&
           !this.readonly &&
