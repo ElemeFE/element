@@ -20,7 +20,7 @@
         <div class="el-picker-panel__body">
           <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
-              <el-input
+              <el-input ref="dateInput"
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
@@ -52,35 +52,41 @@
             <button
               type="button"
               @click="prevYear"
+              @keyup.enter="prevYear"
               :aria-label="t(`el.datepicker.prevYear`)"
               class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
             </button>
             <button
               type="button"
               @click="prevMonth"
+              @keyup.enter="prevMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
             </button>
-            <span
+            <button
               @click="showYearPicker"
+              @keyup.enter="showYearPicker"
               role="button"
-              class="el-date-picker__header-label">{{ yearLabel }}</span>
-            <span
+              class="el-date-picker__header-label">{{ yearLabel }}</button>
+            <button
               @click="showMonthPicker"
+              @keyup.enter="showMonthPicker"
               v-show="currentView === 'date'"
               role="button"
               class="el-date-picker__header-label"
-              :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</span>
+              :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</button>
             <button
               type="button"
               @click="nextYear"
+              @keyup.enter="nextYear"
               :aria-label="t(`el.datepicker.nextYear`)"
               class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
             </button>
             <button
               type="button"
               @click="nextMonth"
+              @keyup.enter="nextMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
               class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
@@ -125,6 +131,7 @@
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
+          aria-haspopup="true" aria-expanded="false"
           @click="changeToNow"
           v-show="selectionMode !== 'dates'">
           {{ t('el.datepicker.now') }}
@@ -133,6 +140,7 @@
           plain
           size="mini"
           class="el-picker-panel__link-btn"
+          aria-haspopup="true" aria-expanded="false"
           @click="confirm">
           {{ t('el.datepicker.confirm') }}
         </el-button>
@@ -253,12 +261,14 @@
       //   this.date = new Date(this.date);
       // },
 
-      showMonthPicker() {
+      showMonthPicker(event) {
         this.currentView = 'month';
+        event.stopPropagation();
       },
 
-      showYearPicker() {
+      showYearPicker(event) {
         this.currentView = 'year';
+        event.stopPropagation();
       },
 
       // XXX: 没用到
@@ -270,28 +280,32 @@
       //   }
       // },
 
-      prevMonth() {
+      prevMonth(event) {
         this.date = prevMonth(this.date);
+        event.stopPropagation();
       },
 
-      nextMonth() {
+      nextMonth(event) {
         this.date = nextMonth(this.date);
+        event.stopPropagation();
       },
 
-      prevYear() {
+      prevYear(event) {
         if (this.currentView === 'year') {
           this.date = prevYear(this.date, 10);
         } else {
           this.date = prevYear(this.date);
         }
+        event.stopPropagation();
       },
 
-      nextYear() {
+      nextYear(event) {
         if (this.currentView === 'year') {
           this.date = nextYear(this.date, 10);
         } else {
           this.date = nextYear(this.date);
         }
+        event.stopPropagation();
       },
 
       handleShortcutClick(shortcut) {
@@ -407,6 +421,7 @@
             event.stopPropagation();
             event.preventDefault();
           }
+          // this.$refs.dateInput.focus();
           if (keyCode === 13 && this.userInputDate === null && this.userInputTime === null) { // Enter
             this.emit(this.date, false);
           }

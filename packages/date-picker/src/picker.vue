@@ -1,5 +1,6 @@
 <template>
-  <el-input
+  <el-input aria-haspopup="true"
+            :aria-expanded="pickerVisible"
     class="el-date-editor"
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly || type === 'dates'"
@@ -48,6 +49,8 @@
     v-else>
     <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
     <input
+            aria-haspopup="true"
+            :aria-expanded="pickerVisible"
       autocomplete="off"
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
@@ -61,6 +64,8 @@
       class="el-range-input">
     <span class="el-range-separator">{{ rangeSeparator }}</span>
     <input
+            aria-haspopup="true"
+            :aria-expanded="pickerVisible"
       autocomplete="off"
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
@@ -128,6 +133,9 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange',
   'dates'
 ];
+/**
+ * @return {number}
+ */
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
   return formatDate(value, format);
@@ -136,6 +144,9 @@ const DATE_PARSER = function(text, format) {
   if (format === 'timestamp') return new Date(Number(text));
   return parseDate(text, format);
 };
+/**
+ * @return {string}
+ */
 const RANGE_FORMATTER = function(value, format) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0];
@@ -412,8 +423,8 @@ export default {
         this.emitChange(this.value);
         this.userInput = null;
         this.dispatch('ElFormItem', 'el.form.blur');
-        this.$emit('blur', this);
-        this.blur();
+        // this.$emit('blur', this);
+        // this.blur();
       }
     },
     parsedValue: {
@@ -742,7 +753,7 @@ export default {
         if (!this.ranged) {
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
-          this.blur();
+          // this.blur();
           event.stopPropagation();
         } else {
           // user may change focus between two input
@@ -762,7 +773,7 @@ export default {
         if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
-          this.blur();
+          // this.blur();
         }
         event.stopPropagation();
         return;

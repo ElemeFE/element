@@ -64,6 +64,8 @@
     line-height: 22px;
     text-align: center;
     cursor: pointer;
+    background: none;
+    border:none;
     color: $--color-text-regular;
 
     &:hover {
