@@ -115,7 +115,7 @@
           : this.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
-        return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;
+        return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
       }
     },
 
