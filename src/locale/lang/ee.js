@@ -82,7 +82,7 @@ export default {
       error: 'Vigane sisend'
     },
     upload: {
-      deleteTip: 'Vajuta kustuta et eemaldada',
+      deleteTip: 'Vajuta "Kustuta", et eemaldada',
       delete: 'Kustuta',
       preview: 'Eelvaate',
       continue: 'Jätka'
