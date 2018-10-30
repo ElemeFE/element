@@ -457,6 +457,10 @@ export default {
       }
     }
 
+    if (this.$scopedSlots.filter) {
+      this.columnConfig.filterDropdown = this.$scopedSlots.filter;
+    }
+
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
   }
 };

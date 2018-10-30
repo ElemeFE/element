@@ -2,7 +2,18 @@
   <transition name="el-zoom-in-top">
     <div
       class="el-table-filter"
-      v-if="multiple"
+      v-if="dropdown"
+      v-clickoutside="handleOutsideClick"
+      v-show="showPopper">
+      <filter-dropdown
+        :render-dropdown="column.filterDropdown"
+        :setFilterValues="setFilterValues"
+        :hide-dropdown="handleOutsideClick">
+      </filter-dropdown>
+    </div>
+    <div
+      class="el-table-filter"
+      v-else-if="multiple"
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
       <div class="el-table-filter__content">
@@ -50,6 +61,7 @@
   import Dropdown from './dropdown';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
+  import FilterDropdown from './filter-dropdown';
 
   export default {
     name: 'ElTableFilterPanel',
@@ -62,7 +74,8 @@
 
     components: {
       ElCheckbox,
-      ElCheckboxGroup
+      ElCheckboxGroup,
+      FilterDropdown
     },
 
     props: {
@@ -123,6 +136,10 @@
           values: filteredValue
         });
         this.table.store.updateAllSelected();
+      },
+
+      setFilterValues(values) {
+        this.confirmFilter(values);
       }
     },
 
@@ -135,6 +152,9 @@
     },
 
     computed: {
+      dropdown() {
+        return this.column && this.column.filterDropdown;
+      },
       filters() {
         return this.column && this.column.filters;
       },

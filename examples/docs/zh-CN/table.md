@@ -2,12 +2,13 @@
   export default {
     data() {
       return {
+        inputText: '',
         tableData: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1516 弄',
           zip: 200333,
           tag: '家'
         }, {
@@ -15,7 +16,7 @@
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1517 弄',
           zip: 200333,
           tag: '公司'
         }, {
@@ -31,7 +32,7 @@
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1519 弄',
           zip: 200333,
           tag: '公司'
         }],
@@ -362,6 +363,16 @@
 
       indexMethod(index) {
         return index * 2;
+      },
+
+      findAddress(value, row) {
+        return row.address.indexOf(value) > -1;
+      },
+      filterAddress({ setFilterValues }) {
+        setFilterValues(this.inputText);
+      },
+      resetFilter(scope) {
+        scope.resetFilter();
       }
     },
 
@@ -395,6 +406,13 @@
       margin-right: 0;
       margin-bottom: 0;
       width: 50%;
+    }
+  }
+  .address-dropdown {
+    width: 100px;
+    padding: 8px;
+    .el-input {
+      margin-bottom: 8px;
     }
   }
 </style>
@@ -1414,7 +1432,14 @@
     <el-table-column
       prop="address"
       label="地址"
+      :filter-method="findAddress"
+      filter-placement="bottom"
       :formatter="formatter">
+        <div class="address-dropdown" slot="filter" slot-scope="scope">
+          <el-input v-model="inputText" size="mini"></el-input>
+          <el-button @click="filterAddress(scope)" type="primary" size="mini">确定</el-button>
+          <el-button @click="resetFilter(scope)" type="text" size="mini">重置</el-button>
+        </div>
     </el-table-column>
     <el-table-column
       prop="tag"
@@ -1473,6 +1498,11 @@
     }
   }
 </script>
+<style>
+  .address-dropdown {
+    padding: 8px;
+  }
+</style>
 ```
 :::
 
@@ -2202,3 +2232,4 @@
 |------|--------|
 | — | 自定义列的内容，参数为 { row, column, $index } |
 | header | 自定义表头的内容. 参数为 { column, $index } |
+| filter | 自定义过滤器下拉菜单，可用参数为 { setFilterValues, resetFilter, hideDropdown }，setFilterValues的参数会传给filter-method的函数，如果是数组会逐个传递 |
