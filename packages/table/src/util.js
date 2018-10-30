@@ -85,7 +85,15 @@ export const getColumnById = function(table, columnId) {
 };
 
 export const getColumnByKey = function(table, columnKey) {
-  return table.columns.find(item => item.columnKey === columnKey);
+  let column = null;
+  for (let i = 0; i < table.columns.length; i++) {
+    const item = table.columns[i];
+    if (item.columnKey === columnKey) {
+      column = item;
+      break;
+    }
+  }
+  return column;
 };
 
 export const getColumnByCell = function(table, cell) {

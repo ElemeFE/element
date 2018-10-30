@@ -217,6 +217,10 @@
         return sums;
       },
 
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+
       setCurrent(row) {
         this.$refs.singleTable.setCurrentRow(row);
       },
@@ -1337,7 +1341,9 @@ Filter the table to find desired data.
 :::demo Set attribute `filters` and `filter-method` in `el-table-column` makes this column filterable. `filters` is an array, and `filter-method` is a function deciding which rows are displayed. It has three parameters: `value`, `row` and `column`.
 ```html
 <template>
+  <el-button @click="resetDateFilter">reset date filter</el-button>
   <el-table
+    ref="filterTable"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -1345,6 +1351,7 @@ Filter the table to find desired data.
       label="Date"
       sortable
       width="180"
+      column-key="date"
       :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
       :filter-method="filterHandler"
     >

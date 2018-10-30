@@ -257,6 +257,9 @@
 
         return sums;
       },
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
       setCurrent(row) {
         this.$refs.singleTable.setCurrentRow(row);
       },
@@ -1376,7 +1379,9 @@
 :::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入三个参数：`value`, `row` 和 `column`。
 ```html
 <template>
+  <el-button @click="resetDateFilter">清除日期过滤器</el-button>
   <el-table
+    ref="filterTable"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -1384,6 +1389,7 @@
       label="日期"
       sortable
       width="180"
+      column-key="date"
       :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
       :filter-method="filterHandler"
     >
