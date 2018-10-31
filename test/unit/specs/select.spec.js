@@ -285,9 +285,9 @@ describe('Select', () => {
     vm.value = '选项1';
     select.inputHovering = true;
     setTimeout(() => {
-      const icon = vm.$el.querySelector('.el-input__icon');
-      expect(icon.classList.contains('el-icon-circle-close')).to.true;
-      icon.click();
+      const iconClear = vm.$el.querySelector('.el-input__icon.el-icon-circle-close');
+      expect(iconClear).to.exist;
+      iconClear.click();
       expect(vm.value).to.equal('');
       done();
     }, 100);

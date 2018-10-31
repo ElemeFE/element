@@ -223,6 +223,7 @@ Cuando una página es suficientemente ancha pero tiene una altura limitada, pued
 | indicator-position | Posición del indicador de paginación     | string  | outside/none       | —           |
 | arrow              | Cuando se muestran las flechas           | string  | always/hover/never | hover       |
 | type               | Tipo de carrusel                         | string  | card               | —           |
+| loop               | Si mostrar cíclicamente                  | boolean | —                  | true        |
 
 ### Eventos de Carousel
 | Nombre evento | Descripción                              | Parametros                               |

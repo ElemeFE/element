@@ -15,6 +15,12 @@ Muestra la cantidad de mensajes nuevos.
 <el-badge :value="3" class="item">
   <el-button size="small">replies</el-button>
 </el-badge>
+<el-badge :value="1" class="item" type="primary">
+  <el-button size="small">comments</el-button>
+</el-badge>
+<el-badge :value="2" class="item" type="warning">
+  <el-button size="small">replies</el-button>
+</el-badge>
 
 <el-dropdown trigger="click">
   <span class="el-dropdown-link">
@@ -136,3 +142,4 @@ Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 | max      | valor máximo, Muestra '{max}+' cuando se excede. Solo funciona si `value` es un `Number` | number         | —                 | —           |
 | is-dot   | si se debe mostrar un pequeño punto      | boolean        | —                 | false       |
 | hidden   | hidden badge                             | boolean        | —                 | false       |
+| type     | tipo de botón                            | string         | primary / success / warning / danger / info | — |

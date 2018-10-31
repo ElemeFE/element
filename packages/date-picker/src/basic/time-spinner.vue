@@ -27,9 +27,9 @@
         ref="minutes">
         <li
           @click="handleClick('minutes', { value: key, disabled: false })"
-          v-for="(minute, key) in 60"
+          v-for="(enabled, key) in minutesList"
           class="el-time-spinner__item"
-          :class="{ 'active': key === minutes }">{{ ('0' + key).slice(-2) }}</li>
+          :class="{ 'active': key === minutes, disabled: !enabled }">{{ ('0' + key).slice(-2) }}</li>
       </el-scrollbar>
       <el-scrollbar
         v-show="showSeconds"
@@ -45,7 +45,8 @@
           @click="handleClick('seconds', { value: key, disabled: false })"
           v-for="(second, key) in 60"
           class="el-time-spinner__item"
-          :class="{ 'active': key === seconds }">{{ ('0' + key).slice(-2) }}</li>
+          :class="{ 'active': key === seconds }"
+          :key="key">{{ ('0' + key).slice(-2) }}</li>
       </el-scrollbar>
     </template>
     <template v-if="arrowControl">
@@ -58,7 +59,8 @@
           <li
             class="el-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
-            v-for="hour in arrowHourList">{{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + amPm(hour) }}</li>
+            v-for="(hour, key) in arrowHourList"
+            :key="key">{{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + amPm(hour) }}</li>
         </ul>
       </div>
       <div
@@ -70,7 +72,8 @@
           <li
             class="el-time-spinner__item"
             :class="{ 'active': minute === minutes }"
-            v-for="minute in arrowMinuteList">
+            v-for="(minute, key) in arrowMinuteList"
+            :key="key">
             {{ minute === undefined ? '' : ('0' + minute).slice(-2) }}
           </li>
         </ul>
@@ -83,9 +86,10 @@
         <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
         <ul class="el-time-spinner__list" ref="seconds">
           <li
+            v-for="(second, key) in arrowSecondList"
             class="el-time-spinner__item"
             :class="{ 'active': second === seconds }"
-            v-for="second in arrowSecondList">
+            :key="key">
             {{ second === undefined ? '' : ('0' + second).slice(-2) }}
           </li>
         </ul>
@@ -95,7 +99,7 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, modifyTime } from '../util';
+  import { getRangeHours, getRangeMinutes, modifyTime } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
@@ -132,6 +136,9 @@
       },
       hoursList() {
         return getRangeHours(this.selectableRange);
+      },
+      minutesList() {
+        return getRangeMinutes(this.selectableRange, this.hours);
       },
       arrowHourList() {
         const hours = this.hours;
@@ -222,7 +229,7 @@
       },
 
       handleScroll(type) {
-        const value = Math.min(Math.floor((this.$refs[type].wrap.scrollTop - 80) / 32 + 3), (type === 'hours' ? 23 : 59));
+        const value = Math.min(Math.floor((this.$refs[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), (type === 'hours' ? 23 : 59));
         this.modifyDateField(type, value);
       },
 
@@ -243,7 +250,7 @@
         if (this.arrowControl) return;
         const el = this.$refs[type].wrap;
         if (el) {
-          el.scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
+          el.scrollTop = Math.max(0, value * this.typeItemHeight(type));
         }
       },
 
@@ -282,6 +289,12 @@
         let content = (hour < 12) ? ' am' : ' pm';
         if (isCapital) content = content.toUpperCase();
         return content;
+      },
+      typeItemHeight(type) {
+        return this.$refs[type].$el.querySelector('li').offsetHeight;
+      },
+      scrollBarHeight(type) {
+        return this.$refs[type].$el.offsetHeight;
       }
     }
   };

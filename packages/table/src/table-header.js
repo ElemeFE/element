@@ -106,7 +106,8 @@ export default {
                       on-click={ ($event) => this.handleHeaderClick($event, column) }
                       on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
                       style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
-                      class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
+                      class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
+                      key={ column.id }>
                       <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                         {
                           column.renderHeader
@@ -339,7 +340,7 @@ export default {
     handleHeaderClick(event, column) {
       if (!column.filters && column.sortable) {
         this.handleSortClick(event, column);
-      } else if (column.filters && !column.sortable) {
+      } else if (column.filterable && !column.sortable) {
         this.handleFilterClick(event, column);
       }
 

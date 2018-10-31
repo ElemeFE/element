@@ -40,12 +40,6 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @change="handleInputChange">
-      <template slot="prepend" v-if="$slots.prepend">
-        <slot name="prepend"></slot>
-      </template>
-      <template slot="append" v-if="$slots.append">
-        <slot name="append"></slot>
-      </template>
     </el-input>
   </div>
 </template>
@@ -149,7 +143,7 @@
         }
       },
       controlsAtRight() {
-        return this.controlsPosition === 'right';
+        return this.controls && this.controlsPosition === 'right';
       },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;

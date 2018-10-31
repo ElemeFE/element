@@ -185,8 +185,26 @@
           amount2: '4.1',
           amount3: 15
         }],
+        tableData7: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-01',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles',
+        }],
         currentRow: null,
-        multipleSelection: []
+        multipleSelection: [],
+        search: '',
       };
     },
 
@@ -1499,6 +1517,77 @@ Personalice la columna de la tabla para que pueda integrarse con otros component
 ```
 :::
 
+### Table with custom header
+
+Customize table header so it can be even more customized.
+:::demo You can customize how the header looks by [Default slot content](https://vuejs.org/v2/guide/components-slots.html#Default-Slot-Content).
+```html
+<template>
+  <el-table
+    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%">
+    <el-table-column
+      label="Date"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="Name"
+      prop="name">
+    </el-table-column>
+    <el-table-column
+      align="right">
+      <template slot="header" slot-scope="slot">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"/>
+      </template>
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-01',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles',
+        }],
+        search: ''
+      }
+    },
+    methods: {
+      handleEdit(){},
+      handleDelete(){}
+    },
+  }
+</script>
+```
+:::
+
 ### Fila expandible
 
 Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de desplazamiento horizontal, puede utilizar la caracteristica de fila expandible.
@@ -1966,8 +2055,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | cell-style             | función que devuelve estilos personalizados para una celda, o un objeto asignado a estilos personalizados para cada celda | Function({row, column, rowIndex, columnIndex})/Object | —                              | —                                        |
 | header-row-class-name  | función que devuelve nombre de clases personalizadas para una fila en la cabecera de la tabla, o una cadena asignando nombres de clases para cada fila en la cabecera de la tabla | Function({row, rowIndex})/String         | —                              | —                                        |
 | header-row-style       | función que devuelve estilos personalizados para una fila en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada fila en la cabecera de la tabla | Function({row, rowIndex})/Object         | —                              | —                                        |
-| header-cell-class-name | función que devuelve nombre de clases personalizadas para una celda en la cabecera de la tabla, o una cadena asignando nombres de clases para cada celda en la cabecera de la tabla | Function({row, rowIndex})/String         | —                              | —                                        |
-| header-cell-style      | función que devuelve estilos personalizados para una celda en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada celda en la cabecera de la tabla | Function({row, rowIndex})/Object         | —                              | —                                        |
+| header-cell-class-name | función que devuelve nombre de clases personalizadas para una celda en la cabecera de la tabla, o una cadena asignando nombres de clases para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/String         | —                              | —                                        |
+| header-cell-style      | función que devuelve estilos personalizados para una celda en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/Object         | —                              | —                                        |
 | row-key                | clave de datos de la fila, utilizada para optimizar la representación de los datos. Es obligatorio `reserve-selection` esta habilitado. Cuando su tipo es string, se permite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no es permitido, en cuyo caso se debe usar una `function` | Function(row)/String                     | —                              | —                                        |
 | empty-text             | Texto mostrado cuando no existen datos. Puede personalizar esta área con `slot="empty"` | String                                   | —                              | No Data                                  |
 | default-expand-all     | especifica si todas las filas se expanden por defeto, solo funciona cuando la tabla tiene una columna `type="expand"` | Boolean                                  | —                              | false                                    |
@@ -2006,12 +2095,13 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | ------------------ | ---------------------------------------- | ------------- |
 | clearSelection     | utilizado en selección múltiple de la tabla, limpiar selección | —     |
 | toggleRowSelection | utilizado en selección múltiple de la tabla, alterna si una cierta fila es seleccionada. Con el segundo parámetro, puede directamente establecer si la fila es seleccionada | row, selected |
+| toggleAllSelection | usado en Table de seleccion multiple, cambia los estados de seleccion de todas las filas. | - |
 | toggleRowExpansion | utilizado en tabla expandible, alterna si una cierta fila es expandida. Con el segundo parámetro, puede directamente establecer si esta fila es expandida o colapsada | row, expanded |
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
 | clearFilter        | limpiar filtros                          | —             |
-| doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
-| sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
+| doLayout | refresca el layout del Table. Cuando la visibilidad de Table cambia, puede que necesite llamar a este método para obtener un diseño correcto | — |
+| sort | Ordenar tabla manualmente. La propiedad `prop` se utiliza para establecer la columna de ordenación, la propiedad `order` se utiliza para establecer el orden. | prop: string, order: string |
 
 ### Slots de la tabla
 | Nombre | Descripción                              |
@@ -2052,4 +2142,5 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 ### Table-column Scoped Slot
 | Name | Description |
 |------|--------|
-| — | Custom content for table columns. The scope parameter is { row, column, $index } |
+| — | Contenido personalizado para las columnas de la tabla. El parámetro del scope es { row, column, $index } |
+| header | Contenido personalizado para el encabezado de la tabla. El parámetro del scope es { column, $index } |

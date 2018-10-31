@@ -1201,19 +1201,19 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | filter            | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
 | updateKeyChildren | Asocia un nuevo dato al nodo, solo funciona si `node-key` está asignado | (key, data)Acepta dos parámetros: 1. clave del nodo 2. nuevo dato |
-| getCheckedNodes   | Si los nodos puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos seleccionados | Acepta un booleano cuyo valor por defecto es `false` |
+| getCheckedNodes   | si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos actualmente seleccionada. | (leafOnly, includeHalfChecked) Acepta dos parámetros de tipo booleano: 1. El valor por defecto es `false`. Si el parámetro es `true`, sólo devuelve el array de subnodos actualmente seleccionado. 2. El valor por defecto es `false`. Si el parámetro es `true`, el valor de retorno contiene nodos halfchecked. |
 | setCheckedNodes   | Establece algunos nodos como seleccionados, solo funciona cuando `node-key` está asignado | Un array de nodos a seleccionar          |
 | getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
 | setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
 | setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
-| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de nodos actualmente seleccionada. | - |
-| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
+| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de nodos actualmente seleccionada. | - |
+| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
-| remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
+| remove          | elimina un nodo, solo funciona si `node-key` está asignado  | (data) los datos del nodo o nodo a borrar |
 | append          | añadir un nodo hijo a un nodo determinado del árbol | (data, parentNode) 1. los datos del nodo hijo que se añadirán 2. los datos del nodo padre, clave o nodo |
 | insertBefore    | insertar un nodo antes de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
 | insertAfter     | insertar un nodo después de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |

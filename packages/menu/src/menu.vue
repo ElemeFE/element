@@ -153,8 +153,8 @@
       }
     },
     methods: {
-      updateActiveIndex() {
-        const item = this.items[this.defaultActive];
+      updateActiveIndex(val) {
+        const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive];
         if (item) {
           this.activeIndex = item.index;
           this.initOpenedMenu();

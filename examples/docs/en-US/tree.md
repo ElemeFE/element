@@ -1203,7 +1203,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | filter all tree nodes, filtered nodes will be hidden | Accept a parameter which will be used as first parameter for filter-node-method |
 | updateKeyChildren | set new data to node, only works when `node-key` is assigned  | (key, data) Accept two parameters: 1. key of node 2. new data |
-| getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
+| getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | (leafOnly, includeHalfChecked) Accept two boolean type parameters: 1. default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. 2. default value is `false`. If the parameter is `true`, the return value contains halfchecked nodes |
 | setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked          |
 | getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setCheckedKeys  | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
@@ -1215,7 +1215,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted. If `null`, cancel the currently highlighted node |
 | setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
 | getNode         | get node by data or key | (data) the node's data or key |
-| remove          | remove a node | (data) the node's data or node to be deleted |
+| remove          | remove a node, only works when node-key is assigned | (data) the node's data or node to be deleted |
 | append          | append a child node to a given node in the tree | (data, parentNode) 1. child node's data to be appended 2. parent node's data, key or node |
 | insertBefore    | insert a node before a given node in the tree | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
 | insertAfter     | insert a node after a given node in the tree   | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |

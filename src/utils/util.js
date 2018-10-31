@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export function noop() {};
@@ -81,4 +83,40 @@ export const valueEquals = (a, b) => {
     if (a[i] !== b[i]) return false;
   }
   return true;
+};
+
+export const escapeRegexpString = (value = '') => String(value).replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+
+// TODO: use native Array.find, Array.findIndex when IE support is dropped
+export const arrayFindIndex = function(arr, pred) {
+  for (let i = 0; i !== arr.length; ++i) {
+    if (pred(arr[i])) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+export const arrayFind = function(arr, pred) {
+  const idx = arrayFindIndex(arr, pred);
+  return idx !== -1 ? arr[idx] : undefined;
+};
+
+// coerce truthy value to array
+export const coerceTruthyValueToArray = function(val) {
+  if (Array.isArray(val)) {
+    return val;
+  } else if (val) {
+    return [val];
+  } else {
+    return [];
+  }
+};
+
+export const isIE = function() {
+  return !Vue.prototype.$isServer && !isNaN(Number(document.documentMode));
+};
+
+export const isEdge = function() {
+  return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Edge') > -1;
 };

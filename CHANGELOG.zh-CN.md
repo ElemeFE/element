@@ -1,5 +1,191 @@
 ## 更新日志
 
+### 2.4.9
+
+*2018-10-26*
+
+- Form 组件 clearValidate 方法参数支持字符串，#12990 （by @codinglobster）
+- Badge 新增 type 属性，#12991
+- 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
+- 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
+- Select 多选时，选项不换行，#12329 （by @akki-jat）
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
+- 修复 Select 的 size 属性不生效的问题，#13070
+- 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
+- 修复最后一个 TabNav 不能删除的问题，#13039
+- 修复 TabNav 中 label 显示不正确的问题，#13178
+- Alert 新增 title slot，#13082（by @Kingwl）
+- 修复 Table 中的 tooltip 内容不正确的问题，#13159（by @elfman）
+- 优化 Upload 文件列表删除时的动画，#12987
+- 当 InputNumber 控制按钮不显示时，调整了边距，#13052
+
+### 2.4.8
+
+- Switch 聚焦时不显示轮廓，#12771
+- 修复 Dropdown 在 ButtonGroup 中样式问题，#12819 （by @bluejfox）
+- Dialog 新增 opened 事件，#12828
+- 修复 TabNav 显示顺序不正确的问题，#12846
+- 修复 Tabs 没有滑动到选中 tab 的问题，#12948
+- 修复 Tree 节点在拖拽时标识符不显示的问题，#12854
+- Form 的 validate 事件参数中包含了校验的信息，#12860 （by @YamenSharaf）
+- 修复 DatePicker 没有校验用户输入时间的合法性问题，#12898
+- 修复 Table 表头的 `render-header`属性不生效的问题，#12914
+
+### 2.4.7
+
+*2018-09-14*
+
+- 修复 DatePicker 未触发表单检验的问题，#12328，#12348
+- 修复 DatePicker 多选时报错的问题，#12347
+- 修复 DatePicker 选择时间时 spinner 位置不正确的问题，#12415 （by @rang-ali）
+- 修复 Datepicker 输入框自动填充的问题，#12521 （by @abdallanayer）
+- 修复 Cascader 中 Input 未高亮的问题，#12341
+- 修复 Tabpane 顺序不正确的问题，#12346
+- 修复 ColorPicker 取色光标位置不正确的问题，#12376 （by @cnwhy）
+- 调整 Submenu 的样式，#12457
+- 修复 Submenu 选中后没有高亮的问题，#12479
+- 修复 Cascader 选择值不正确的问题，#12508 （by @huangjinqiang）
+- 修复 Pagination 输入框值不正确的问题，#12525
+- 调整 Pagination 触发事件的顺序，#12530
+- 修复 Table 的 filter 不显示的问题，#12539
+- 修复 Tree 无法删除节点的问题，#12684
+- 修复 Select 在单选时 Input 高度变化的问题，#12719
+- 修复 Form 在嵌套时 label 显示不正确的问题，#12748
+- 新增 Input 的 autocomplete 属性，废弃 auto-complete 属性，#12514 （by @axetroy）
+- 新增 Form 的 slot-scope 展示表单校验信息，#12715 （by @YamenSharaf）
+
+### 2.4.6
+
+*2018-08-09*
+
+- 修复 Table 的 filter 初始值为空数组时不显示筛选图标的问题，#12165
+- 修复 Menu 在更改 `collapse` 时不保存菜单激活状态的问题，#12178 (by @elfman)
+- 修复 Cascader 未转义特殊字符的问题，#12248
+- 修复禁用的 RadioButton 在点击时显示 box-shadow 的问题，#12262
+- 修复 Select 初始值为 `undefined` 时方向键失效的问题，#12322
+- 修复 Select 多选时输入的关键字消失的问题，#12304
+- 修复 Select 多选时查询函数没有去抖的问题，#12181
+- 修复 Dialog 在全屏显示时宽度不正确的问题，#12203
+- 修复 Main 在 IE 下的显示不正确的问题，#12237
+- 修复 Input 触发两次表单校验的问题，#12260
+- 修复 Tree 在懒加载时添加节点导致节点消失的问题，#12256
+- 修复 Tree 节点在拖拽后无法删除的问题，#12279
+- 修复 Popover 在 InputNumber 聚焦时不显示的问题，#12284
+- 添加 Autocomplete 的 popper-append-to-body 属性，#12241
+- 添加 Pagination 的 `page-size` 属性 `sync` 修饰符的支持，#12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- 修复 Table 设置 `class-name` 对 `expand` 列不生效的问题，#12006
+- 新增 Table 的 `toggleAllSelection` 方法，#12047
+- 修复 Input 包含 Select 时，suffix 插槽位置显示不正确的问题，#12108
+- 修复 Option 的 `line-height` 无法设置的问题，#12120
+- 修复初始值为 `null` 的 TimeSelect 在执行 `resetField` 后无法再赋值的问题，#12010
+- 修复 Tree 组件中不响应方向键以外 keydown 事件的问题，#12008
+- 修复 Tree 在懒加载情况下选中父节点的问题，#12106
+- Tree 的 `getCheckedNodes` 方法新增 `includeHalfChecked` 参数，#12014
+
+### 2.4.4
+
+*2018-07-13*
+
+- 修复重置表单后触发 Select 组件校验问题，#11837
+- 修复 Input 组件 `suffix` 与 `append` 共存时样式错乱问题，#11951
+- 修复可清空的只读 Input 仍会显示清空图标的问题，#11967
+- 修复 Tree 节点禁用时仍可以选中的问题，#11847
+- 修复 Tree `default-checked-keys` 属性不生效的问题，#11971
+- 修复 Tree 在过滤节点时下 `empty-text` 不显示的问题，#11971
+- 修复 Table 的 `empty-text` 过长时的位置样式问题，#11965
+- 修复 Table 的 `current-row-key` 设置为 `null` 时高亮行不清除的问题，#11866
+- 修复当 `filters` 为空数组时显示过滤器下拉列表的问题，#11864
+- 修复 Radio 的 label 不阻止事件冒泡的问题，#11912
+
+### 2.4.3
+
+*2018-07-03*
+
+- 修复当自定义 Tree 节点高度时，`allow-drop` 不能正常工作的问题，#11797
+- 现在 Form 的 `clearValidate` 方法支持传入参数，指定需要清空校验结果的 FormItem，#11821
+- 新增 MessageBox 的 `distinguishCancelAndClose` 属性，#11831
+
+### 2.4.2
+
+*2018-06-26*
+
+- 修复 Table 的 `class-name` 和 `label-class-name` 属性不支持动态更新的问题，#11626
+- 修复 Table 在 `highlight-current-row` 为 `false` 时点击行也会触发高亮的问题，#11691 #11563
+- 修复 ButtonGroup 中只有一个 `round` 或 `circle` 的 Button 时的样式错误，#11605
+- 修复在某些情况下 Pagination 的条目数选择器的样式错误，#11622
+- 修复 Menu 的 `collapse` 属性变化后无法使用 `open` 方法的问题，#11646
+- Tabs 的 `before-leave` 钩子添加了 `activeName` 和 `oldActiveName` 参数，#11713
+- 修复 Cascader 关闭后的聚焦问题，#11588
+- 修复 Cascader 在 `change-on-select` 状态下点击选项不关闭的问题，#11623
+- 现在通过代码改变 Select 的值后会触发表单校验，与 Input 行为一致，#11672
+
+### 2.4.1
+
+*2018-06-08*
+
+- 移除 Autocomplete 的重复类型声明，#11388
+- 修复嵌套在 Form 内的 Select 在 FireFox 浏览器中下拉箭头错位的问题，#11427
+- 修复 Select 的初始值为 `null` 时仍然显示清除图标的问题，#11460
+- 修复禁用的 Radio 在点击时显示 box-shadow 的问题，#11462
+- 新增 MessageBox 的 `iconClass` 属性，#11499
+- 新增 Tabs 的 `stretch` 属性，#11476
+- 修复 Tabs 开启 `lazy` 时渲染顺序异常的问题，#11461
+- 修复 Table 展开行时无法保留选中行样式的问题，#11464
+- 修复 Tabs 调用 `before-leave` 并返回 Promise 的时候，Tabs 会存在 focus 状态的问题，#11386
+- 修复 Popover 禁用状态下创建弹出框的问题，#11426
+- 修复 Tree 在懒加载状态下添加新节点造成无限循环的问题，#11430 （by @wangjingf）
+- 新增 Dialog 的 `closed` 事件，#11490
+
+### 2.4.0 Fullerene
+
+*2018-05-28*
+
+#### 新特性
+- 综合
+  - 使用原生 webpack 作为构建和打包工具，#11216
+  - 可以全局配置弹出层的初始 z-index，#11257
+- Autocomplete
+  - 新增 `hide-loading` 属性，#11260
+- Button
+  - 现在圆形按钮也支持通过 `size` 属性改变其尺寸了，#11275
+- InputNumber
+  - 新增 `precision` 属性，#11281
+- Tabs
+  - 新增 `before-leave` 钩子，#11259
+  - 新增 `lazy` 属性，#11167（by @Kingwl）
+- Table
+  - 新增 `sort` 方法，支持手动排序，#11311
+
+#### 修复
+- Input
+  - 修复使用中文输入法快速输入文字时会导致视图重新渲染的问题，#11235（by @STLighter）
+- Popover
+  - 修复当触发元素为 Radio 或 Checkbox 时控制台报错的问题，#11265
+- Breadcrumb
+  - 修复 `to` 属性不支持动态更新的问题，#11286
+- Upload
+  - 修复在 `beforeUpload` 方法返回的 Promise 中 resolve 一个 File 时控制台报错的问题，#11297（by @qusiba）
+- Tooltip
+  - 修复内容为空时箭头错位的问题，#11335
+- Autocomplete
+  - 修复在快速删除搜索内容后输入建议不正确的问题，#11323
+- ColorPicker
+  - 修复关闭选色器时触发 `active-change` 事件的问题，#11304
+- Table
+  - 修复筛选列表过长导致样式超出的问题，#11314
+  - 修复排序后导致无法正常显示选中行样式的问题，#11348
+- Checkbox
+  - 修复单个 Checkbox 不支持表单验证的问题，#11271
+- Radio
+  - 修复通过空格可以选中被禁用的 Radio 的问题，#11303
+- MessageBox
+  - 修复连续打开两个 MessageBox 时 `el-popup-parent--hidden` 无法移除的问题，#11371
+
 ### 2.3.9
 
 *2018-05-18*

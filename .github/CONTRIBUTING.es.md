@@ -55,7 +55,7 @@ npm run dist
 ```
 
 ## Guía Para Desarrollo de Componentes
-- Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, configuración para armar, documentación y `package.json` están incluidos.
+- Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, archivo de entrada y documentación están incluidos.
 - Refiérase al `Button` para componentes anidados.
 - Refiérase al `Select` para componentes que dependen de otros componentes.
 

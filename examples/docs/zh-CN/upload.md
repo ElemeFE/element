@@ -427,8 +427,15 @@
 | limit | 最大允许上传个数 |  number | — | — |
 | on-exceed | 文件超出个数限制时的钩子 | function(files, fileList) | — | - |
 
+### Slot
+| name | 说明 |
+|------|--------|
+| trigger | 触发文件选择框的内容 |
+| tip | 提示说明文字 |
+
 ### Methods
 | 方法名      | 说明          | 参数 |
-|---------- |-------------- | -- |
+|----------- |-------------- | -- |
 | clearFiles | 清空已上传的文件列表（该方法不支持在 before-upload 中调用） | — |
-| abort | 取消上传请求 | （ file: fileList 中的 file 对象 ） |
+| abort      | 取消上传请求    | （ file: fileList 中的 file 对象 ） |
+| submit     | 手动上传文件列表 |  —                                |
