@@ -151,15 +151,15 @@
 <script>
   import childFlow from './child-flow.vue';
   import badge from './badge.vue';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import ElUpload from 'element-ui/packages/upload';
-  import ElDialog from 'element-ui/packages/dialog';
-  import ElRow from 'element-ui/packages/row';
-  import ElCol from 'element-ui/packages/col';
-  import ElPagination from 'element-ui/packages/pagination';
-  import ElTableColumn from 'element-ui/packages/table-column';
-  import ElTable from 'element-ui/packages/table';
+  import ElInput from 'element-ui-qz/packages/input';
+  import ElButton from 'element-ui-qz/packages/button';
+  import ElUpload from 'element-ui-qz/packages/upload';
+  import ElDialog from 'element-ui-qz/packages/dialog';
+  import ElRow from 'element-ui-qz/packages/row';
+  import ElCol from 'element-ui-qz/packages/col';
+  import ElPagination from 'element-ui-qz/packages/pagination';
+  import ElTableColumn from 'element-ui-qz/packages/table-column';
+  import ElTable from 'element-ui-qz/packages/table';
   export default {
     name: 'ElFlowRecord',
     components: {

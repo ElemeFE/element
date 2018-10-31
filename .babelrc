@@ -5,9 +5,9 @@
     "utils": {
       "plugins": [
         ["module-resolver", {
-          "root": ["element-ui"],
+          "root": ["element-ui-qz"],
           "alias": {
-            "element-ui/src": "element-ui/lib"
+            "element-ui-qz/src": "element-ui-qz/lib"
           }
         }]
       ]

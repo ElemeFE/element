@@ -1,6 +1,6 @@
-import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTag from 'element-ui/packages/tag';
+import { hasClass, addClass, removeClass } from 'element-ui-qz/src/utils/dom';
+import ElCheckbox from 'element-ui-qz/packages/checkbox';
+import ElTag from 'element-ui-qz/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';

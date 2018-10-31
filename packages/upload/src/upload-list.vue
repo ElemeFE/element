@@ -61,8 +61,8 @@
   </transition-group>
 </template>
 <script>
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElProgress from 'element-ui/packages/progress';
+  import Locale from 'element-ui-qz/src/mixins/locale';
+  import ElProgress from 'element-ui-qz/packages/progress';
 
   export default {
 

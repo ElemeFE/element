@@ -274,12 +274,12 @@
 </template>
 
 <script>
-  import ElTable from 'element-ui/packages/table';
-  import ElTableColumn from 'element-ui/packages/table-column';
-  import ElButton from 'element-ui/packages/button';
-  import ElInput from 'element-ui/packages/input';
-  import ElDialog from 'element-ui/packages/dialog';
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElTable from 'element-ui-qz/packages/table';
+  import ElTableColumn from 'element-ui-qz/packages/table-column';
+  import ElButton from 'element-ui-qz/packages/button';
+  import ElInput from 'element-ui-qz/packages/input';
+  import ElDialog from 'element-ui-qz/packages/dialog';
+  import ElCheckbox from 'element-ui-qz/packages/checkbox';
   import vueResource from 'vue-resource';
   import Vue from 'vue';
 

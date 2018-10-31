@@ -44,9 +44,9 @@
 </template>
 
 <script type="text/babel">
-  import { hasClass } from 'element-ui/src/utils/dom';
+  import { hasClass } from 'element-ui-qz/src/utils/dom';
   import { isDate, range, nextDate, getDayCountOfYear } from '../util';
-  import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
+  import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui-qz/src/utils/util';
 
   const datesInYear = year => {
     const numOfDays = getDayCountOfYear(year);

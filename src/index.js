@@ -71,8 +71,8 @@ import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import AttachmentManage from '../packages/attachment-manage/index.js';
 import FlowRecord from '../packages/flow-record/index.js';
-import locale from 'element-ui/src/locale';
-import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import locale from 'element-ui-qz/src/locale';
+import CollapseTransition from 'element-ui-qz/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
@@ -176,7 +176,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '2.4.8',
+  version: '1.2.3',
   locale: locale.use,
   i18n: locale.i18n,
   install,

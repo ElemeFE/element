@@ -14,15 +14,15 @@ Este sitio, le permitirá obtener una vista previa del tema con un nuevo color e
 $--color-primary: teal;
 
 /* Ubicación de la fuente, obligatoria */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
+$--font-path: '~element-ui-qz/lib/theme-chalk/fonts';
 
-@import "~element-ui/packages/theme-chalk/src/index";
+@import "~element-ui-qz/packages/theme-chalk/src/index";
 ```
 
 Entonces, en el archivo principal del proyecto, importe este archivo de estilos en lugar de los estilos de Element:
 ```JS
 import Vue from 'vue'
-import Element from 'element-ui'
+import Element from 'element-ui-qz'
 import './element-variables.scss'
 
 Vue.use(Element)
@@ -100,7 +100,7 @@ Por defecto, el archivo de tema construido es colocado dentro de `./theme`. Pued
 
 ```javascript
 import '../theme/index.css'
-import ElementUI from 'element-ui'
+import ElementUI from 'element-ui-qz'
 import Vue from 'vue'
 
 Vue.use(ElementUI)
@@ -112,7 +112,7 @@ Si esta utilizando `babel-plugin-component` para importar bajo demanda, solo deb
 {
   "plugins": [["component", [
     {
-      "libraryName": "element-ui",
+      "libraryName": "element-ui-qz",
       "styleLibraryName": "~theme"
     }
   ]]]

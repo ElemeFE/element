@@ -90,8 +90,8 @@
 </template>
 
 <script>
-  import ElButton from 'element-ui/packages/button';
-  import ElDialog from 'element-ui/packages/dialog';
+  import ElButton from 'element-ui-qz/packages/button';
+  import ElDialog from 'element-ui-qz/packages/dialog';
 
   export default {
     name: 'capture',

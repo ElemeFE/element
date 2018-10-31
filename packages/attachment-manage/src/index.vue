@@ -250,10 +250,10 @@
   import deleteIcon from '../images/delete-icon.png';
   import updateIcon from '../images/update-icon-.png';
 
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import ElUpload from 'element-ui/packages/upload';
-  import ElDialog from 'element-ui/packages/dialog';
+  import ElInput from 'element-ui-qz/packages/input';
+  import ElButton from 'element-ui-qz/packages/button';
+  import ElUpload from 'element-ui-qz/packages/upload';
+  import ElDialog from 'element-ui-qz/packages/dialog';
 
   export default {
     name: 'ElAttachmentManage',

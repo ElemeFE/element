@@ -1,4 +1,4 @@
-import { on, off } from 'element-ui/src/utils/dom';
+import { on, off } from 'element-ui-qz/src/utils/dom';
 import { renderThumbStyle, BAR_MAP } from './util';
 
 /* istanbul ignore next */

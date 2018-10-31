@@ -36,8 +36,8 @@
   </div>
 </template>
 <script>
-  import Focus from 'element-ui/src/mixins/focus';
-  import Migrating from 'element-ui/src/mixins/migrating';
+  import Focus from 'element-ui-qz/src/mixins/focus';
+  import Migrating from 'element-ui-qz/src/mixins/migrating';
 
   export default {
     name: 'ElSwitch',

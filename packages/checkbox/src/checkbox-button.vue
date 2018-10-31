@@ -35,7 +35,7 @@
       @focus="focus = true"
       @blur="focus = false">
 
-    <span class="el-checkbox-button__inner" 
+    <span class="el-checkbox-button__inner"
       v-if="$slots.default || label"
       :style="isChecked ? activeStyle : null">
       <slot>{{label}}</slot>
@@ -44,7 +44,7 @@
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui-qz/src/mixins/emitter';
 
   export default {
     name: 'ElCheckboxButton',

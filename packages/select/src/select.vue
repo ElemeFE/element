@@ -133,23 +133,23 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
+  import Emitter from 'element-ui-qz/src/mixins/emitter';
+  import Focus from 'element-ui-qz/src/mixins/focus';
+  import Locale from 'element-ui-qz/src/mixins/locale';
+  import ElInput from 'element-ui-qz/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElTag from 'element-ui-qz/packages/tag';
+  import ElScrollbar from 'element-ui-qz/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
+  import Clickoutside from 'element-ui-qz/src/utils/clickoutside';
+  import { addResizeListener, removeResizeListener } from 'element-ui-qz/src/utils/resize-event';
+  import { t } from 'element-ui-qz/src/locale';
+  import scrollIntoView from 'element-ui-qz/src/utils/scroll-into-view';
+  import { getValueByPath } from 'element-ui-qz/src/utils/util';
+  import { valueEquals, isIE, isEdge } from 'element-ui-qz/src/utils/util';
   import NavigationMixin from './navigation-mixin';
-  import { isKorean } from 'element-ui/src/utils/shared';
+  import { isKorean } from 'element-ui-qz/src/utils/shared';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],

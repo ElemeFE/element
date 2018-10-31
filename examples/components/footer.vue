@@ -17,7 +17,7 @@
         <a :href="gitterLink" class="footer-main-link" target="_blank">{{ langConfig.gitter }}</a>
         <a href="https://github.com/ElemeFE/element/issues" class="footer-main-link" target="_blank">{{ langConfig.feedback }}</a>
         <a :href="`https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.${ lang }.md`" class="footer-main-link" target="_blank">{{ langConfig.contribution }}</a>
-        <a href="https://segmentfault.com/t/element-ui" class="footer-main-link" target="_blank">SegmentFault</a>
+        <a href="https://segmentfault.com/t/element-ui-qz" class="footer-main-link" target="_blank">SegmentFault</a>
         <a href="https://github.com/ElementUI/awesome-element" class="footer-main-link" target="_blank">Awesome Element</a>
       </div>
       <div class="footer-social">
@@ -62,7 +62,7 @@
       display: inline-block;
       vertical-align: top;
       margin-right: 110px;
-    
+
       h4 {
         font-size: 18px;
         color: #333;
@@ -86,7 +86,7 @@
     .footer-social {
       float: right;
       text-align: right;
-    
+
       .footer-social-title {
         color: #666;
         font-size: 18px;
@@ -144,13 +144,13 @@
       height: auto;
     }
   }
-  
+
   @media (max-width: 1000px) {
     .footer-social {
       display: none;
     }
   }
-  
+
   @media (max-width: 768px) {
     .footer {
       .footer-main {

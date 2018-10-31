@@ -74,11 +74,11 @@ export interface InstallationOptions {
   size: string
 }
 
-/** The version of element-ui */
+/** The version of element-ui-qz */
 export const version: string
 
 /**
- * Install all element-ui components into Vue.
+ * Install all element-ui-qz components into Vue.
  * Please do not invoke this method directly.
  * Call `Vue.use(ElementUI)` to install.
  */

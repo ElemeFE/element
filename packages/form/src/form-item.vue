@@ -15,9 +15,9 @@
     <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <slot 
-          v-if="validateState === 'error' && showMessage && form.showMessage" 
-          name="error" 
+        <slot
+          v-if="validateState === 'error' && showMessage && form.showMessage"
+          name="error"
           :error="validateMessage">
           <div
             class="el-form-item__error"
@@ -36,9 +36,9 @@
 </template>
 <script>
   import AsyncValidator from 'async-validator';
-  import emitter from 'element-ui/src/mixins/emitter';
-  import objectAssign from 'element-ui/src/utils/merge';
-  import { noop, getPropByPath } from 'element-ui/src/utils/util';
+  import emitter from 'element-ui-qz/src/mixins/emitter';
+  import objectAssign from 'element-ui-qz/src/utils/merge';
+  import { noop, getPropByPath } from 'element-ui-qz/src/utils/util';
 
   export default {
     name: 'ElFormItem',
