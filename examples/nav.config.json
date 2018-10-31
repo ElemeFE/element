@@ -252,6 +252,10 @@
             {
               "path": "/attachment-manage",
               "title": "AttachmentManage 附件上传"
+            },
+            {
+              "path": "/flow-record",
+              "title": "FlowRecord 流转记录"
             }
           ]
         }
