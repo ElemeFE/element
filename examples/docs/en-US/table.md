@@ -220,6 +220,9 @@
       resetDateFilter() {
         this.$refs.filterTable.clearFilter('date');
       },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
+      },
 
       setCurrent(row) {
         this.$refs.singleTable.setCurrentRow(row);
@@ -1342,6 +1345,7 @@ Filter the table to find desired data.
 ```html
 <template>
   <el-button @click="resetDateFilter">reset date filter</el-button>
+  <el-button @click="clearFilter">reset all filters</el-button>
   <el-table
     ref="filterTable"
     :data="tableData"
@@ -1410,6 +1414,12 @@ Filter the table to find desired data.
       }
     },
     methods: {
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
+      },
       formatter(row, column) {
         return row.address;
       },
@@ -2014,7 +2024,7 @@ You can customize row index in `type=index` columns.
 | toggleRowExpansion | used in expandable Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
-| clearFilter | clear filters for the `columnKey` array passed in. If no params are passed, clear all filters | columnKeys |
+| clearFilter | clear filters of the columns whose `columnKey` are passed in. If no params, clear all filters | columnKeys |
 | doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
 | sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
