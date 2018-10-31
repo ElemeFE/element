@@ -347,9 +347,9 @@ export default class Node {
   close() {
     this.collapse();
     if (this.loaded) {
-      this.childNodes.forEach((node) => {
-        node.remove();
-      });
+      for (let i = this.childNodes.length - 1; i >= 0; i--) {
+        this.childNodes[i].remove();
+      }
       this.loaded = false;
       this.updateLeafState();
     }
@@ -409,8 +409,8 @@ export default class Node {
           handleDescendants();
           reInitChecked(this);
         }, {
-          checked: value !== false
-        });
+            checked: value !== false
+          });
         return;
       } else {
         handleDescendants();

@@ -260,6 +260,10 @@
         this.store.close(node);
       },
 
+      expand(node, callback, expandParent) {
+        this.store.expand(node, callback, expandParent);
+      },
+
       append(data, parentNode, callback) {
         this.store.append(data, parentNode, callback);
       },
@@ -466,7 +470,6 @@
         event.dataTransfer.dropEffect = 'move';
 
         if (draggingNode && dropNode) {
-<<<<<<< HEAD
           var value;
           if (this.store.lazy) {
             value = draggingNode.node;
@@ -487,28 +490,6 @@
               emitEvents();
             });
             return clrDragState();
-=======
-          const draggingNodeCopy = { data: draggingNode.node.data };
-          if (dropType !== 'none') {
-            draggingNode.node.remove();
-          }
-          if (dropType === 'before') {
-            dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
-          } else if (dropType === 'after') {
-            dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
-          } else if (dropType === 'inner') {
-            dropNode.node.insertChild(draggingNodeCopy);
-          }
-          if (dropType !== 'none') {
-            this.store.registerNode(draggingNodeCopy);
-          }
-
-          removeClass(dropNode.$el, 'is-drop-inner');
-
-          this.$emit('node-drag-end', draggingNode.node, dropNode.node, dropType, event);
-          if (dropType !== 'none') {
-            this.$emit('node-drop', draggingNode.node, dropNode.node, dropType, event);
->>>>>>> 933109fd5beadb7b5a48b08781d04fa484c01853
           }
           emitEvents();
         }
