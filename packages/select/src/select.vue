@@ -185,7 +185,7 @@
 
       showClose() {
         let hasValue = this.multiple
-          ? this.value.length > 0
+          ? Array.isArray(this.value) && this.value.length > 0
           : this.value !== undefined && this.value !== null && this.value !== '';
         let criteria = this.clearable &&
           !this.selectDisabled &&
