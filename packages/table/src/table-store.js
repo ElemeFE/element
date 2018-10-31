@@ -597,6 +597,20 @@ TableStore.prototype.updateCurrentRow = function() {
   const oldCurrentRow = states.currentRow;
 
   if (data.indexOf(oldCurrentRow) === -1) {
+    if (states.rowKey && oldCurrentRow) {
+      let newCurrentRow = null;
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        if (item && item[states.rowKey] === oldCurrentRow[states.rowKey]) {
+          newCurrentRow = item;
+          break;
+        }
+      }
+      if (newCurrentRow) {
+        states.currentRow = newCurrentRow;
+        return;
+      }
+    }
     states.currentRow = null;
 
     if (states.currentRow !== oldCurrentRow) {
