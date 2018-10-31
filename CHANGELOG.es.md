@@ -4,20 +4,20 @@
 
 *2018-10-26*
 
-- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
-- Added type attribute for Badge, #12991
-- Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
-- Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
-- Select option does not wrap when space is enough, #12329 (by @akki-jat)
-- When dropdown list of Select is expanded, the arrow icon will also display correctly, #12353 (by @firesh)
-- Fixed that the size attribute of Select does not work, #13070
-- Select multiple values can be cleared, #13049 (by @ZSkycat)
-- Fixed the last TabNav unable be deleted, #13039
-- Fixed that TabNav label is not displayed correctly, #13178
-- Added title slot for Alert, #13082 (by @Kingwl)
-- Fixed an issue where the tooltip content in Table was incorrect, #13159 (by @elfman)
-- Optimize the animation of Upload when file is deleted, #12987
-- Adjusted style of InputNumber when control button is not displayed, #13052
+- El parámetro de Form's `clearValidate` soporta cadenas, #12990 (by @codinglobster)
+- Se agregó el atributo `type` para Badge, #12991
+- Ser puede usar scoped-slot para personalizar el encabezado de la columna de Table #13012 (por @ivanseidel)
+- Arreglado que el input box de Select no se podia escrbir en IE, #13034 (by @GaliMU)
+- La opción Seleccionar no se cerraba cuando el espacio era insuficiente, #12329 (by @akki-jat)
+- Cuando se expande la lista desplegable de Seleccionar, el icono de flecha también se mostrará correctamente, #12353 (by @firesh)
+- Arreglado que el atributo size de Select no funcionaba, #13070
+- Select multiple values pueden ser limpiado en lote, #13049 (by @ZSkycat)
+- Arreglado el último TabNav que no se podía borrar, #13039
+- Arreglado que la etiqueta del TabNav no se mostraba correctamente, #13178
+- Añadido title slot para Alert, #13082 (by @Kingwl)
+- Corregido un problema por el cual el contenido del tooltip en Table era incorrecto, #13159 (by @elfman)
+- Optimizada la animación de Upload cuando el archivo es eliminado, #12987
+- Ajustado el estilo de InputNumber cuando no se muestra el botón de control, #13052
 
 ### 2.4.8
 
