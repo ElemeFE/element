@@ -70,6 +70,7 @@ import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import AttachmentManage from '../packages/attachment-manage/index.js';
+import FlowRecord from '../packages/flow-record/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -140,6 +141,7 @@ const components = [
   Main,
   Footer,
   AttachmentManage,
+  FlowRecord,
   CollapseTransition
 ];
 
@@ -248,7 +250,8 @@ module.exports = {
   Aside,
   Main,
   Footer,
-  AttachmentManage
+  AttachmentManage,
+  FlowRecord
 };
 
 module.exports.default = module.exports;
