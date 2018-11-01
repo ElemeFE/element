@@ -384,9 +384,8 @@
         if (oldRow !== row || oldColumn !== column) {
           this.rangeState.row = row;
           this.rangeState.column = column;
-
-          this.rangeState.endDate = this.getDateOfCell(row, column);
         }
+        this.rangeState.endDate = this.getDateOfCell(row, column);
       },
 
       handleClick(event) {
