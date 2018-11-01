@@ -31,7 +31,6 @@ class Transition {
   afterEnter(el) {
     // for safari: remove class then reset height is necessary
     removeClass(el, 'collapse-transition');
-    // el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
   }
 
