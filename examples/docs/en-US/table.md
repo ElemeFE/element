@@ -1521,7 +1521,7 @@ Customize table column so it can be integrated with other components.
 ### Table with custom header
 
 Customize table header so it can be even more customized.
-:::demo You can customize how the header looks by [Default slot content](https://vuejs.org/v2/guide/components-slots.html#Default-Slot-Content).
+:::demo You can customize how the header looks by header [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 ```html
 <template>
   <el-table
@@ -1537,7 +1537,7 @@ Customize table header so it can be even more customized.
     </el-table-column>
     <el-table-column
       align="right">
-      <template slot="header" slot-scope="slot">
+      <template slot="header" slot-scope="scope">
         <el-input
           v-model="search"
           size="mini"
@@ -1581,8 +1581,12 @@ Customize table header so it can be even more customized.
       }
     },
     methods: {
-      handleEdit(){},
-      handleDelete(){}
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
     },
   }
 </script>
