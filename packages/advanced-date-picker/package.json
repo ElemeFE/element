@@ -1,0 +1,16 @@
+{
+  "name": "tmc-advanced-date-picker",
+  "version": "0.0.1",
+  "description": "A datepicker component for Vue.",
+  "keywords": [
+    "element",
+    "vue",
+    "component",
+    "tmc24"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/tmconsulting/tmc24-components/tree/dev/packages/advanced-date-picker",
+  "author": "sergey@shoomakov.ru",
+  "license": "MIT",
+  "dependencies": {}
+}

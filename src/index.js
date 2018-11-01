@@ -67,8 +67,10 @@ import Switch from '../packages/switch/index.js';
 import ValueSwitcher from '../packages/value-switcher/index.js';
 import DatePickerJoined from '../packages/date-picker-joined/index.js';
 import CircularCountdown from '../packages/circular-countdown/index.js';
+import AdvancedDatePicker from '../packages/advanced-date-picker/index.js';
 import locale from 'tmconsulting-ui/src/locale';
 import CollapseTransition from 'tmconsulting-ui/src/transitions/collapse-transition';
+import VueTheMask from 'vue-the-mask';
 
 import '../packages/theme-chalk/icons.js';
 import 'svg-sprite-loader/runtime/sprite.build';
@@ -137,6 +139,7 @@ const components = [
   ValueSwitcher,
   DatePickerJoined,
   CircularCountdown,
+  AdvancedDatePicker,
   CollapseTransition
 ];
 
@@ -149,6 +152,7 @@ const install = function(Vue, opts = {}) {
   });
 
   Vue.use(Loading.directive);
+  Vue.use(VueTheMask);
 
   const ELEMENT = {};
   ELEMENT.size = opts.size || '';
@@ -170,7 +174,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '1.2.21',
+  version: '1.2.22',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -241,7 +245,8 @@ module.exports = {
   Switch,
   ValueSwitcher,
   DatePickerJoined,
-  CircularCountdown
+  CircularCountdown,
+  AdvancedDatePicker
 };
 
 module.exports.default = module.exports;

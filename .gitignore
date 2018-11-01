@@ -16,3 +16,5 @@ waiter.config.js
 build/bin/algolia-key.js
 .envrc
 yarn-error.log
+.bitmap
+bit.json

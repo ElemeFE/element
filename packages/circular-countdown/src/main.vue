@@ -75,7 +75,7 @@ export default {
   },
   created() {
     this.update();
-    this.timer = setInterval(this.update, 1000 * 60);
+    this.timer = setInterval(this.update, 1000);
   },
   beforeDestroy() {
     clearInterval(this.timer);
@@ -97,9 +97,12 @@ export default {
       } else if (currentDateArray.h >= 1 && currentDateArray.h <= 3) {
         this.status = 1;
         this.timeLeft = [currentDateArray.h, 'ч'];
-      } else if (currentDateArray.h < 1) {
+      } else if (currentDateArray.h < 1 && currentDateArray.m > 0) {
         this.status = 2;
         this.timeLeft = [currentDateArray.m, 'мин'];
+      } else {
+        this.status = 2;
+        this.timeLeft = [currentDateArray.s, 'сек'];
       }
     },
     percentToSize(percent) {

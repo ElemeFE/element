@@ -10,6 +10,8 @@
   export default {
     name: 'TmScrollbar',
 
+    componentName: 'TmScrollbar',
+
     components: { Bar },
 
     props: {

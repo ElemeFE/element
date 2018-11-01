@@ -1,7 +1,7 @@
 import { createTest, destroyVM, createVue } from '../util';
 import TimePicker from 'packages/time-picker';
 
-const DELAY = 100;
+const DELAY = 1000;
 
 describe('TimePicker', () => {
   let vm;

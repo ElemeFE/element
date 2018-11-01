@@ -202,8 +202,8 @@ describe('MessageBox', () => {
       setTimeout(() => {
         expect(msgAction).to.equal('confirm');
         done();
-      }, 10);
-    }, 10);
+      }, 100);
+    }, 100);
   });
 
   describe('promise', () => {

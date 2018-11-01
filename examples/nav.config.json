@@ -89,6 +89,10 @@
               "title": "TimePicker"
             },
             {
+              "path": "/advanced-date-picker",
+              "title": "AdvancedDatePicker"
+            },
+            {
               "path": "/date-picker",
               "title": "DatePicker"
             },

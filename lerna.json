@@ -7,5 +7,5 @@
       "log.*"
     ]
   },
-  "packages": ["packages/carousel", "packages/table", "packages/upload", "packages/date-picker", "packages/loading", "packages/pagination"]
+  "packages": ["packages/carousel", "packages/table", "packages/upload", "packages/advanced-date-picker", "packages/date-picker", "packages/loading", "packages/pagination"]
 }
