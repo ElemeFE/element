@@ -1686,11 +1686,11 @@
     </el-table-column>
     <el-table-column
       align="right">
-      <template slot="header" slot-scope="slot">
+      <template slot="header" slot-scope="scope">
         <el-input
           v-model="search"
           size="mini"
-          placeholder="Type to search"/>
+          placeholder="输入关键字搜索"/>
       </template>
       <template slot-scope="scope">
         <el-button
@@ -1730,8 +1730,12 @@
       }
     },
     methods: {
-      handleEdit(){},
-      handleDelete(){}
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
     },
   }
 </script>
