@@ -375,6 +375,7 @@
           this.previousQuery = null;
           this.selectedLabel = '';
           this.inputLength = 20;
+          this.menuVisibleOnFocus = false;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
