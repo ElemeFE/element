@@ -406,10 +406,6 @@ export default {
     handleClick() {
       if (this.cascaderDisabled) return;
       this.$refs.input.focus();
-      if (this.filterable) {
-        this.menuVisible = true;
-        return;
-      }
       this.menuVisible = !this.menuVisible;
     },
     handleFocus(event) {
