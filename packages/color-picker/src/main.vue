@@ -165,6 +165,7 @@
         enableAlpha: this.showAlpha,
         format: this.colorFormat
       });
+
       return {
         color,
         showPicker: false,
