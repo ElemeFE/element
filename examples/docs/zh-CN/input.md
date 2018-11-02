@@ -874,6 +874,8 @@ export default {
 | suffix | 输入框尾部内容 |
 | prepend | 输入框前置内容 |
 | append | 输入框后置内容 |
+| bodyprefix | autocomplete 查询建议头部内容 |
+| bodysuffix | autocomplete 查询建议尾部内容 |
 
 ### Autocomplete Scoped Slot
 | name | 说明 |

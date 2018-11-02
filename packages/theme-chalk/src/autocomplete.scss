@@ -30,6 +30,13 @@
     padding: 0;
   }
 
+  @include e(list-slot) {
+    color: $--color-text-regular;
+    padding: 0 20px;
+    line-height: 34px;
+    font-size: $--font-size-base;
+  }
+
   & li {
     padding: 0 20px;
     margin: 0;

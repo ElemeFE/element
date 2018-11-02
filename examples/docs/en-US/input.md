@@ -723,6 +723,8 @@ Attribute | Description | Type | Options | Default
 | suffix | content as Input suffix |
 | prepend | content to prepend before Input |
 | append | content to append after Input |
+| bodyprefix | content as AutoComplete Suggestions prefix |
+| bodysuffix | content as AutoComplete Suggestions suffix |
 
 ### Autocomplete Scoped Slot
 | Name | Description |

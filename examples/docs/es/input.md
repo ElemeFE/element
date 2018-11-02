@@ -713,6 +713,8 @@ Búsqueda de datos desde el servidor.
 | suffix  | contenido como sufijo del input      |
 | prepend | contenido antes del input            |
 | append  | contenido a añadir después del input |
+| bodyprefix | content as AutoComplete Suggestions prefix |
+| bodysuffix | content as AutoComplete Suggestions suffix |
 
 ### Autocomplete Scoped Slot
 

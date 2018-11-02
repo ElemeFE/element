@@ -39,6 +39,7 @@
       ref="suggestions"
       :placement="placement"
       :id="id">
+      <div class="el-autocomplete-suggestion__list-slot"><slot name="bodyPrepend"></slot></div>
       <li
         v-for="(item, index) in suggestions"
         :key="index"
@@ -52,6 +53,7 @@
           {{ item[valueKey] }}
         </slot>
       </li>
+      <div class="el-autocomplete-suggestion__list-slot"><slot name="bodyAppend" class="el-autocomplete__body-append"></slot></div>
     </el-autocomplete-suggestions>
   </div>
 </template>
