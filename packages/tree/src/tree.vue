@@ -37,6 +37,16 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import { addClass, removeClass } from 'element-ui/src/utils/dom';
 
+  function walkChildNodes(node, cb) {
+    for (let i = 0; i < node.childNodes.length; i++) {
+      const item = node.childNodes[i];
+      cb(item);
+      if (item.childNodes.length > 0) {
+        walkChildNodes(item, cb);
+      }
+    }
+  }
+
   export default {
     name: 'ElTree',
 
@@ -449,18 +459,45 @@
 
         if (draggingNode && dropNode) {
           const draggingNodeCopy = { data: draggingNode.node.data };
+          let newNode;
+          let nodeCheckStatus = null;
+          let checkedChildren = [];
+          let draggingNodeParent = draggingNode.node.parent;
           if (dropType !== 'none') {
+            if (draggingNode.node.indeterminate) {
+              nodeCheckStatus = 'half';
+              walkChildNodes(draggingNode.node, item => {
+                if (item.checked) {
+                  checkedChildren.push(item.data);
+                }
+              });
+            } else if (draggingNode.node.checked) {
+              nodeCheckStatus = 'all';
+            }
             draggingNode.node.remove();
           }
           if (dropType === 'before') {
-            dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
+            newNode = dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
           } else if (dropType === 'after') {
-            dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
+            newNode = dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
           } else if (dropType === 'inner') {
-            dropNode.node.insertChild(draggingNodeCopy);
+            newNode = dropNode.node.insertChild(draggingNodeCopy);
           }
           if (dropType !== 'none') {
             this.store.registerNode(draggingNodeCopy);
+            if (nodeCheckStatus === 'half') {
+              walkChildNodes(newNode, item => {
+                for (let i = 0; i < checkedChildren.length; i++) {
+                  if (item.data === checkedChildren[i]) {
+                    item.checked = true;
+                  }
+                }
+              });
+            } else if (nodeCheckStatus === 'all') {
+              newNode.setChecked(true, true);
+            }
+            draggingNodeParent.reInitChecked();
+            newNode.reInitChecked();
           }
 
           removeClass(dropNode.$el, 'is-drop-inner');

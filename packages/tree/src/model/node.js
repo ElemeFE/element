@@ -21,29 +21,6 @@ export const getChildState = node => {
   return { all, none, allWithoutDisable, half: !all && !none };
 };
 
-const reInitChecked = function(node) {
-  if (node.childNodes.length === 0) return;
-
-  const {all, none, half} = getChildState(node.childNodes);
-  if (all) {
-    node.checked = true;
-    node.indeterminate = false;
-  } else if (half) {
-    node.checked = false;
-    node.indeterminate = true;
-  } else if (none) {
-    node.checked = false;
-    node.indeterminate = false;
-  }
-
-  const parent = node.parent;
-  if (!parent || parent.level === 0) return;
-
-  if (!node.store.checkStrictly) {
-    reInitChecked(parent);
-  }
-};
-
 const getPropertyFromData = function(node, prop) {
   const props = node.store.props;
   const data = node.data || {};
@@ -216,6 +193,29 @@ export default class Node {
     }
   }
 
+  reInitChecked() {
+    if (this.childNodes.length === 0) return;
+
+    const {all, none, half} = getChildState(this.childNodes);
+    if (all) {
+      this.checked = true;
+      this.indeterminate = false;
+    } else if (half) {
+      this.checked = false;
+      this.indeterminate = true;
+    } else if (none) {
+      this.checked = false;
+      this.indeterminate = false;
+    }
+
+    const parent = this.parent;
+    if (!parent || parent.level === 0) return;
+
+    if (!this.store.checkStrictly) {
+      parent.reInitChecked();
+    }
+  }
+
   insertChild(child, index, batch) {
     if (!child) throw new Error('insertChild error: child is required.');
 
@@ -246,6 +246,7 @@ export default class Node {
     }
 
     this.updateLeafState();
+    return child;
   }
 
   insertBefore(child, ref) {
@@ -253,7 +254,7 @@ export default class Node {
     if (ref) {
       index = this.childNodes.indexOf(ref);
     }
-    this.insertChild(child, index);
+    return this.insertChild(child, index);
   }
 
   insertAfter(child, ref) {
@@ -262,7 +263,7 @@ export default class Node {
       index = this.childNodes.indexOf(ref);
       if (index !== -1) index += 1;
     }
-    this.insertChild(child, index);
+    return this.insertChild(child, index);
   }
 
   removeChild(child) {
@@ -317,7 +318,7 @@ export default class Node {
           if (this.checked) {
             this.setChecked(true, true);
           } else if (!this.store.checkStrictly) {
-            reInitChecked(this);
+            this.reInitChecked();
           }
           done();
         }
@@ -389,7 +390,7 @@ export default class Node {
         // Only work on lazy load data.
         this.loadData(() => {
           handleDescendants();
-          reInitChecked(this);
+          this.reInitChecked();
         }, {
           checked: value !== false
         });
@@ -403,7 +404,7 @@ export default class Node {
     if (!parent || parent.level === 0) return;
 
     if (!recursion) {
-      reInitChecked(parent);
+      parent.reInitChecked();
     }
   }
 
