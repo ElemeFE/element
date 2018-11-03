@@ -106,7 +106,7 @@
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
     },
-    
+
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
@@ -242,7 +242,7 @@
     </el-option>
   </el-select>
 </template>
-  
+
 <script>
   export default {
     data() {
@@ -688,6 +688,7 @@
 |---------|---------|---------|
 | change | 选中值发生变化时触发 | 目前的选中值 |
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
+| filter-change  |  |  |
 | remove-tag | 多选模式下移除tag时触发 | 移除的tag值 |
 | clear | 可清空的单选模式下用户点击清空按钮时触发 | — |
 | blur | 当 input 失去焦点时触发 | (event: Event) |

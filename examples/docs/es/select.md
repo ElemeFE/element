@@ -106,11 +106,11 @@
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
     },
-    
+
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
-    
+
     methods: {
       remoteMethod(query) {
         if (query !== '') {
@@ -699,6 +699,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | -------------- | ---------------------------------------- | ---------------------------------------- |
 | change         | se dispara cuando el valor del select cambia | valor actual del select                  |
 | visible-change | se dispara cuando el menu desplegable aparece o desaparece | true cuando aparece, y false en otro caso |
+| filter-change  |  |  |
 | remove-tag     | se dispara cuando un tag es removido en modo multiple | el valor del tag removido                |
 | clear          | se dispara cuando el icono se clickea en un Select limpiable | —                                        |
 | blur           | se dispara cuando el input pierde el foco | (event: Event)                           |

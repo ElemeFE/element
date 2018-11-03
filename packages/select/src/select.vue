@@ -365,6 +365,12 @@
         }
       },
 
+      query(val, oldVal) {
+        if (this.filterable && val !== oldVal) {
+          this.$emit('filter-change', val);
+        }
+      },
+
       visible(val) {
         if (!val) {
           this.broadcast('ElSelectDropdown', 'destroyPopper');

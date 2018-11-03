@@ -332,7 +332,7 @@ Multiple select uses tags to display selected options.
       :value="item.value">
     </el-option>
   </el-select>
-  
+
   <el-select
     v-model="value11"
     multiple
@@ -693,6 +693,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 |---------|---------|---------|
 | change | triggers when the selected value changes | current selected value |
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
+| filter-change | triggers when the search query changes is a filterable select | current search query |
 | remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
 | clear | triggers when the clear icon is clicked in a clearable Select | — |
 | blur | triggers when Input blurs | (event: Event) |

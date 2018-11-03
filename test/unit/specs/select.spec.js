@@ -479,6 +479,36 @@ describe('Select', () => {
     }, 10);
   });
 
+  it('emits filter-change', done => {
+    let callCount = 0;
+    vm = createVue({
+      template: `
+        <el-select v-model="value" filterable @filter-change="filterChange">
+          <el-option label="1" :value="1" />
+          <el-option label="2" :value="2" />
+          <el-option label="3" :value="3" />
+        </el-select>
+      `,
+      data() {
+        return {
+          value: 1,
+          filterChange: () => ++callCount
+        };
+      }
+    });
+
+    setTimeout(() => {
+      // first time is emitted when `value` is set
+      expect(callCount).to.equal(1);
+      vm.$children[0].selectedLabel = '面';
+      vm.$children[0].onInputChange();
+      setTimeout(() => {
+        expect(callCount).to.equal(2);
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('default-first-option', done => {
     vm = createVue({
       template: `
