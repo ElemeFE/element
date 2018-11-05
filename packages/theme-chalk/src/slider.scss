@@ -16,7 +16,7 @@
     position: relative;
     cursor: pointer;
     vertical-align: middle;
-
+    z-index: 1;
     &.show-input {
       margin-right: 160px;
       width: auto;
