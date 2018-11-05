@@ -207,6 +207,42 @@ describe('Input', () => {
     }, 20);
   });
 
+  it('validateEvent', done => {
+    const spy = sinon.spy();
+    vm = createVue({
+      template: `
+        <el-form :model="model" :rules="rules">
+          <el-form-item prop="input">
+            <el-input v-model="model.input" :validate-event="false">
+            </el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        const validator = (rule, value, callback) => {
+          spy();
+          callback();
+        };
+        return {
+          model: {
+            input: ''
+          },
+          rules: {
+            input: [
+              { validator }
+            ]
+          }
+        };
+      }
+    }, true);
+
+    vm.model.input = '123';
+    vm.$nextTick(() => {
+      expect(spy.called).to.be.false;
+      done();
+    });
+  });
+
   describe('Input Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({
