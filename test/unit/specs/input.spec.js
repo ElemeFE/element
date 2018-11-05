@@ -300,4 +300,30 @@ describe('Input', () => {
       });
     });
   });
+
+  describe('Input Methods', () => {
+    it('method:select', done => {
+      const testContent = 'test';
+
+      vm = createVue({
+        template: `
+          <el-input
+            ref="inputComp"
+            value="${testContent}"
+          />
+        `
+      }, true);
+
+      expect(vm.$refs.inputComp.$refs.input.selectionStart).to.equal(testContent.length);
+      expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
+
+      vm.$refs.inputComp.select();
+
+      vm.$nextTick(_ => {
+        expect(vm.$refs.inputComp.$refs.input.selectionStart).to.equal(0);
+        expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
+        done();
+      });
+    });
+  });
 });
