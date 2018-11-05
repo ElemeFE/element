@@ -109,8 +109,11 @@
         }
       },
 
-      currentColor(val) {
-        this.customInput = val;
+      currentColor: {
+        immediate: true,
+        handler(val) {
+          this.customInput = val;
+        }
       }
     }
   };
