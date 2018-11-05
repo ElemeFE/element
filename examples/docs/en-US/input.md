@@ -666,6 +666,7 @@ Search data from server-side.
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
 | tabindex | input tabindex | string | - | - |
+| validate-event | whether to trigger form validation | boolean | - | - |
 
 ### Input slots
 
