@@ -191,6 +191,8 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |controls-position | position of the control buttons | string | right | - |
 |name | same as `name` in native input | string | — | — |
 |label | label text | string | — | — |
+|placeholder | placeholder in input | string | - | - |
+
 ### Events
 
 | Event Name | Description | Parameters |

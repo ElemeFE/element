@@ -29,6 +29,7 @@
     <el-input
       ref="input"
       :value="currentInputValue"
+      :placeholder="placeholder"
       :disabled="inputNumberDisabled"
       :size="inputNumberSize"
       :max="max"
@@ -91,6 +92,7 @@
       },
       name: String,
       label: String,
+      placeholder: String,
       precision: {
         type: Number,
         validator(val) {
