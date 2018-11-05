@@ -233,6 +233,9 @@
         if (!isNaN(newVal) || value === '') {
           this.setCurrentValue(newVal);
         }
+      },
+      select() {
+        this.$refs.input.select();
       }
     },
     mounted() {
