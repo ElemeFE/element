@@ -192,6 +192,8 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | controls-position | posición de los botones de control       | string  | right             | -           |
 | name              | lo mismo que `name` en un input nativo   | string  | —                 | —           |
 | label             | texto de la etiqueta                     | string  | —                 | —           |
+| placeholder | placeholder in input | string | - | - |
+
 ### Eventos
 
 | Nombre | Descripción                              | Parámetros         |
