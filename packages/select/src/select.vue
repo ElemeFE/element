@@ -365,8 +365,8 @@
         }
       },
 
-      query(val, oldVal) {
-        if (this.filterable && val !== oldVal) {
+      query(val) {
+        if (this.filterable) {
           this.$emit('filter-change', val);
         }
       },
