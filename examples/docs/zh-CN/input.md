@@ -822,6 +822,7 @@ export default {
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
 | tabindex | 输入框的tabindex | string | - | - |
+| validate-event | 输入时是否触发表单的校验 | boolean | - | - |
 
 ### Input Slots
 | name | 说明 |
