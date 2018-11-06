@@ -502,7 +502,7 @@ export default {
           this.userInput[0] || (formattedValue && formattedValue[0]) || '',
           this.userInput[1] || (formattedValue && formattedValue[1]) || ''
         ];
-      } else if (this.userInput !== null) {
+      } else if (this.userInput) {
         return this.userInput;
       } else if (formattedValue) {
         return this.type === 'dates'
