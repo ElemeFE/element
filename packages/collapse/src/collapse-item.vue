@@ -20,11 +20,11 @@
         @focus="handleFocus"
         @blur="focusing = false"
       >
+        <slot name="title">{{title}}</slot>
         <i
           class="el-collapse-item__arrow el-icon-arrow-right"
           :class="{'is-active': isActive}">
         </i>
-        <slot name="title">{{title}}</slot>
       </div>
     </div>
     <el-collapse-transition>
