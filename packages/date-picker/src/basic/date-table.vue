@@ -94,7 +94,8 @@
             endDate: null,
             selecting: false,
             row: null,
-            column: null
+            column: null,
+            active: false
           };
         }
       }
@@ -362,12 +363,6 @@
       handleMouseMove(event) {
         if (!this.rangeState.selecting) return;
 
-        this.$emit('changerange', {
-          minDate: this.minDate,
-          maxDate: this.maxDate,
-          rangeState: this.rangeState
-        });
-
         let target = event.target;
         if (target.tagName === 'SPAN') {
           target = target.parentNode.parentNode;
@@ -376,16 +371,25 @@
           target = target.parentNode;
         }
         if (target.tagName !== 'TD') return;
-
         const column = target.cellIndex;
         const row = target.parentNode.rowIndex - 1;
-        const { row: oldRow, column: oldColumn } = this.rangeState;
+        const { row: oldRow, column: oldColumn, active: isActive } = this.rangeState;
+        if (!isActive) {
+          this.rangeState.endDate = this.getDateOfCell(row, column);
+          this.rangeState.active = true;
+        }
 
         if (oldRow !== row || oldColumn !== column) {
           this.rangeState.row = row;
           this.rangeState.column = column;
+          this.rangeState.active = false;
+
+          this.$emit('changerange', {
+            minDate: this.minDate,
+            maxDate: this.maxDate,
+            rangeState: this.rangeState
+          });
         }
-        this.rangeState.endDate = this.getDateOfCell(row, column);
       },
 
       handleClick(event) {
@@ -447,6 +451,7 @@
 
             this.$emit('pick', { minDate, maxDate }, false);
             this.rangeState.selecting = true;
+            this.rangeState.active = false;
             this.markRange(this.minDate);
             this.$nextTick(() => {
               this.handleMouseMove(event);
@@ -455,6 +460,7 @@
             if (newDate >= this.minDate) {
               const maxDate = new Date(newDate.getTime());
               this.rangeState.selecting = false;
+              this.rangeState.active = false;
 
               this.$emit('pick', {
                 minDate: this.minDate,
@@ -463,6 +469,7 @@
             } else {
               const minDate = new Date(newDate.getTime());
               this.rangeState.selecting = false;
+              this.rangeState.active = false;
 
               this.$emit('pick', { minDate, maxDate: this.minDate });
             }
@@ -471,6 +478,7 @@
 
             this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
             this.rangeState.selecting = true;
+            this.rangeState.active = false;
             this.markRange(this.minDate);
           }
         } else if (selectionMode === 'day') {
