@@ -95,7 +95,7 @@
               changeCurrentName();
 
               this.$refs.nav && this.$refs.nav.removeFocus();
-            });
+            }).catch(() => {});
           } else if (before !== false) {
             changeCurrentName();
           }
