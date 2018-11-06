@@ -462,13 +462,16 @@
           let newNode;
           let nodeCheckStatus = null;
           let checkedChildren = [];
-          let draggingNodeParent = draggingNode.node.parent;
+          let originNodeParent = draggingNode.node.parent;
           if (dropType !== 'none') {
             if (draggingNode.node.indeterminate) {
               nodeCheckStatus = 'half';
               walkChildNodes(draggingNode.node, item => {
-                if (item.checked) {
-                  checkedChildren.push(item.data);
+                if (item.checked || item.indeterminate) {
+                  checkedChildren.push({
+                    checked: item.checked,
+                    data: item.data
+                  });
                 }
               });
             } else if (draggingNode.node.checked) {
@@ -488,15 +491,17 @@
             if (nodeCheckStatus === 'half') {
               walkChildNodes(newNode, item => {
                 for (let i = 0; i < checkedChildren.length; i++) {
-                  if (item.data === checkedChildren[i]) {
-                    item.checked = true;
+                  const child = checkedChildren[i];
+                  if (item.data === child.data) {
+                    item.checked = child.checked;
+                    item.indeterminate = !child.checked;
                   }
                 }
               });
             } else if (nodeCheckStatus === 'all') {
               newNode.setChecked(true, true);
             }
-            draggingNodeParent.reInitChecked();
+            originNodeParent.reInitChecked();
             newNode.reInitChecked();
           }
 
