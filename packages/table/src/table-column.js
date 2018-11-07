@@ -158,6 +158,7 @@ export default {
     },
     sortMethod: Function,
     sortBy: [String, Function, Array],
+    sortMode: String,
     resizable: {
       type: Boolean,
       default: true
@@ -262,6 +263,7 @@ export default {
       sortable: this.sortable === '' ? true : this.sortable,
       sortMethod: this.sortMethod,
       sortBy: this.sortBy,
+      sortMode: this.sortMode,
       resizable: this.resizable,
       showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
       formatter: this.formatter,
