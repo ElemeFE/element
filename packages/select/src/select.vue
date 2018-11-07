@@ -49,7 +49,7 @@
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
         @focus="handleFocus"
-        @blur="softFocus = false"
+        @blur="handleBlur"
         @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
