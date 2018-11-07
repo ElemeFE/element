@@ -110,7 +110,6 @@
           return {
             children: 'children',
             label: 'label',
-            icon: 'icon',
             disabled: 'disabled'
           };
         }
@@ -126,7 +125,8 @@
       indent: {
         type: Number,
         default: 18
-      }
+      },
+      iconClass: String
     },
 
     computed: {

@@ -26,9 +26,13 @@
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
-        class="el-tree-node__expand-icon el-icon-caret-right"
         @click.stop="handleExpandIconClick"
-        :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }">
+        :class="[
+          { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
+          'el-tree-node__expand-icon',
+          tree.iconClass ? tree.iconClass : 'el-icon-caret-right'
+        ]"
+      >
       </span>
       <el-checkbox
         v-if="showCheckbox"

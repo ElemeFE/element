@@ -1203,6 +1203,7 @@
 | filter-node-method    | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | —    | —     |
 | accordion             | 是否每次只打开一个同级树节点展开                   | boolean                     | —    | false |
 | indent                | 相邻级节点间的水平缩进，单位为像素                 | number                     | —    | 16 |
+| icon-class            | 自定义树节点的图标                              |  string                     | -    | -     |
 | lazy                  | 是否懒加载子节点，需与 load 方法结合使用           | boolean                     | —    | false |
 | draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
 | allow-drag            | 判断节点能否被拖拽                  | Function(node)  | —  | —  |
