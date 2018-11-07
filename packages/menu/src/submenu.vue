@@ -231,7 +231,9 @@
         this.updatePlacement();
       },
       close() {
-        if (this.opened) this.rootMenu.closeMenu(this.index);
+        this.$nextTick(() => {
+          if (this.opened) this.rootMenu.closeMenu(this.index);
+        });
       }
     },
     created() {
@@ -268,8 +270,7 @@
         disabled,
         popperClass,
         $slots,
-        isFirstLevel,
-        close
+        isFirstLevel
       } = this;
 
       const popupMenu = (
@@ -322,7 +323,7 @@
           on-mouseenter={this.handleMouseenter}
           on-mouseleave={this.handleMouseleave}
           on-focus={this.handleMouseenter}
-          v-clickoutside={close}
+          v-clickoutside={this.close}
         >
           <div
             class="el-submenu__title"
