@@ -2,6 +2,8 @@
   <li
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
+    @mousedown="selectOptionMouseDown"
+    @mousemove="selectOptionMouseMove"
     class="el-select-dropdown__item"
     v-show="visible"
     :class="{
@@ -130,8 +132,16 @@
 
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
-          this.dispatch('ElSelect', 'handleOptionClick', [this, true]);
+          this.dispatch('ElSelect', 'handleOptionClick', [this]);
         }
+      },
+
+      selectOptionMouseDown() {
+        this.dispatch('ElSelect', 'handleOptionMouseDown');
+      },
+
+      selectOptionMouseMove() {
+        this.dispatch('ElSelect', 'handleOptionMouseMove');
       },
 
       queryChange(query) {

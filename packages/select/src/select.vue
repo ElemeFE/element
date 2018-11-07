@@ -570,13 +570,11 @@
       },
 
       handleBlur(event) {
-        setTimeout(() => {
-          if (this.isSilentBlur) {
-            this.isSilentBlur = false;
-          } else {
-            this.$emit('blur', event);
-          }
-        }, 50);
+        if (this.isSilentBlur) {
+          this.isSilentBlur = false;
+        } else {
+          this.$emit('blur', event);
+        }
         this.softFocus = false;
       },
 
@@ -661,7 +659,8 @@
         }, 300);
       },
 
-      handleOptionSelect(option, byClick) {
+      handleOptionSelect(option) {
+        console.log('handleOptionSelect');
         if (this.multiple) {
           const value = this.value.slice();
           const optionIndex = this.getValueIndex(value, option.value);
@@ -683,12 +682,19 @@
           this.emitChange(option.value);
           this.visible = false;
         }
-        this.isSilentBlur = byClick;
         this.setSoftFocus();
         if (this.visible) return;
         this.$nextTick(() => {
           this.scrollToOption(option);
         });
+      },
+
+      handleOptionMouseDown(option) {
+        this.isSilentBlur = true;
+      },
+
+      handleOptionMouseMove(option) {
+        this.isSilentBlur = false;
       },
 
       setSoftFocus() {
@@ -842,6 +848,8 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
+      this.$on('handleOptionMouseDown', this.handleOptionMouseDown);
+      this.$on('handleOptionMouseMove', this.handleOptionMouseMove);
       this.$on('setSelected', this.setSelected);
     },
 
