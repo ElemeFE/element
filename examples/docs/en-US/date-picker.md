@@ -522,3 +522,8 @@ When picking a date range, you can assign the time part for start date and end d
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | — |
+
+### Slots
+| Name    | Description |
+|---------|-------------|
+| range-separator  | costume range separator content |
