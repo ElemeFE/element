@@ -37,16 +37,6 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import { addClass, removeClass } from 'element-ui/src/utils/dom';
 
-  function walkChildNodes(node, cb) {
-    for (let i = 0; i < node.childNodes.length; i++) {
-      const item = node.childNodes[i];
-      cb(item);
-      if (item.childNodes.length > 0) {
-        walkChildNodes(item, cb);
-      }
-    }
-  }
-
   export default {
     name: 'ElTree',
 
@@ -458,51 +448,20 @@
         event.dataTransfer.dropEffect = 'move';
 
         if (draggingNode && dropNode) {
-          const draggingNodeCopy = { data: draggingNode.node.data };
-          let newNode;
-          let nodeCheckStatus = null;
-          let checkedChildren = [];
-          let originNodeParent = draggingNode.node.parent;
-          if (dropType !== 'none') {
-            if (draggingNode.node.indeterminate) {
-              nodeCheckStatus = 'half';
-              walkChildNodes(draggingNode.node, item => {
-                if (item.checked || item.indeterminate) {
-                  checkedChildren.push({
-                    checked: item.checked,
-                    data: item.data
-                  });
-                }
-              });
-            } else if (draggingNode.node.checked) {
-              nodeCheckStatus = 'all';
-            }
-            draggingNode.node.remove();
-          }
+          let index = -1;
+          let parent = null;
           if (dropType === 'before') {
-            newNode = dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
+            parent = dropNode.node.parent;
+            index = parent.childNodes.indexOf(dropNode.node);
           } else if (dropType === 'after') {
-            newNode = dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
+            parent = dropNode.node.parent;
+            index = parent.childNodes.indexOf(dropNode.node) + 1;
           } else if (dropType === 'inner') {
-            newNode = dropNode.node.insertChild(draggingNodeCopy);
+            parent = dropNode.node;
+            index = parent.childNodes.length;
           }
-          if (dropType !== 'none') {
-            this.store.registerNode(draggingNodeCopy);
-            if (nodeCheckStatus === 'half') {
-              walkChildNodes(newNode, item => {
-                for (let i = 0; i < checkedChildren.length; i++) {
-                  const child = checkedChildren[i];
-                  if (item.data === child.data) {
-                    item.checked = child.checked;
-                    item.indeterminate = !child.checked;
-                  }
-                }
-              });
-            } else if (nodeCheckStatus === 'all') {
-              newNode.setChecked(true, true);
-            }
-            originNodeParent.reInitChecked();
-            newNode.reInitChecked();
+          if (dropType !== 'none' && parent) {
+            draggingNode.node.moveToNode(parent, index);
           }
 
           removeClass(dropNode.$el, 'is-drop-inner');

@@ -216,6 +216,45 @@ export default class Node {
     }
   }
 
+  setNodeLevel(level) {
+    this.level = level;
+    for (let i = 0; i < this.childNodes.length; i++) {
+      const item = this.childNodes[i];
+      item.setNodeLevel(level + 1);
+    }
+  }
+
+  moveToNode(targetNode, index) {
+    const originParent = this.parent;
+
+    // move data
+    const dataIndex = originParent.data.children.indexOf(this.data);
+    if (dataIndex >= 0) {
+      originParent.data.children.splice(dataIndex, 1);
+    }
+    if (targetNode.data.children) {
+      targetNode.data.children.splice(index, 0, this.data);
+    } else {
+      targetNode.data.children = [this.data];
+    }
+
+    // move node
+    const nodeIndex = originParent.childNodes.indexOf(this);
+    if (nodeIndex >= 0) {
+      originParent.childNodes.splice(nodeIndex, 1);
+    }
+    targetNode.childNodes.splice(index, 0, this);
+    this.parent = targetNode;
+    this.setNodeLevel(this.parent.level + 1);
+    if (originParent.data.children.length === 0) {
+      originParent.data.children = null;
+      originParent.setChecked(false);
+    }
+
+    originParent.reInitChecked();
+    this.parent.reInitChecked();
+  }
+
   insertChild(child, index, batch) {
     if (!child) throw new Error('insertChild error: child is required.');
 
