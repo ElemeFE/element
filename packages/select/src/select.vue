@@ -660,7 +660,6 @@
       },
 
       handleOptionSelect(option) {
-        console.log('handleOptionSelect');
         if (this.multiple) {
           const value = this.value.slice();
           const optionIndex = this.getValueIndex(value, option.value);
