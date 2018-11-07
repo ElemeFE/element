@@ -257,4 +257,8 @@ export declare class ElTree<K = any, D = TreeData> extends ElementUIComponent {
    * @param ref key or node data or node instance of the reference node
    */
   insertAfter(data: D, ref: D | K): void;
+
+  /** Custom tree node icon */
+  iconClass?: string;
+
 }

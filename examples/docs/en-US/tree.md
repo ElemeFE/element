@@ -1184,6 +1184,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
+| icon-class            | custome tree node icon                                       | string                     | -    | -  |
 | lazy                  | whether to lazy load leaf node, used with `load` attribute  | boolean                     | —    | false |
 | draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
 | allow-drag            | this function will be executed before dragging a node. If `false` is returned, the node can not be dragged | Function(node)  | —  | —  |
