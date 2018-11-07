@@ -194,8 +194,8 @@
       handleBlur(event) {
         this.$emit('blur', event);
       },
-      handleClear(event) {
-        this.$emit('clear', event);
+      handleClear() {
+        this.$emit('clear');
       },
       close(e) {
         this.activated = false;
