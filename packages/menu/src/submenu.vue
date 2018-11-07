@@ -3,6 +3,7 @@
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   const poperMixins = {
     props: {
@@ -28,6 +29,8 @@
     mixins: [menuMixin, Emitter, poperMixins],
 
     components: { ElCollapseTransition },
+
+    directives: { Clickoutside },
 
     props: {
       index: {
@@ -226,6 +229,11 @@
         this.referenceElm = this.$el;
         this.popperElm = this.$refs.menu;
         this.updatePlacement();
+      },
+      close() {
+        this.$nextTick(() => {
+          if (this.opened) this.rootMenu.closeMenu(this.index);
+        });
       }
     },
     created() {
@@ -315,6 +323,7 @@
           on-mouseenter={this.handleMouseenter}
           on-mouseleave={this.handleMouseleave}
           on-focus={this.handleMouseenter}
+          v-clickoutside={this.close}
         >
           <div
             class="el-submenu__title"
