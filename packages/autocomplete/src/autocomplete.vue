@@ -13,6 +13,7 @@
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @clear="handleClear"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
@@ -192,6 +193,9 @@
       },
       handleBlur(event) {
         this.$emit('blur', event);
+      },
+      handleClear(event) {
+        this.$emit('clear', event);
       },
       close(e) {
         this.activated = false;
