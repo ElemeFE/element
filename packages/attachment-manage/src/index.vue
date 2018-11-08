@@ -4,8 +4,8 @@
             <div v-if="JSON.stringify(data) != '{}' && data.prn !==''" style="display: inline-block;">
                 <div v-if="!data.allButtonDisabled">
                     <ul>
-                        <!--<li v-if="data.capture" v-on:click="reset_child_com_state('capture')"><a class="tab"><img :src="list.captureIcon_"  />摄像</a></li>
-                        <li v-if="data.scan"><a class="tab"><img :src="list.scanningIcon_"  />扫描</a></li>-->
+                        <!--<li v-if="data.capture" v-on:click="reset_child_com_state('capture')"><a class="tab"><img :src="list.captureIcon_"  />摄像</a></li>-->
+                        <!--<li v-if="data.scan"><a class="tab"><img :src="list.scanningIcon_"  />扫描</a></li>-->
                         <li v-if="data.upload">
                             <a class="tab" @click="upload_dialog_visible = true"><img :src="list.uploadIcon_"/>上传</a>
                         </li>
@@ -370,7 +370,7 @@
       start_video: function() {
         const capture = navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
         const opt = {
-          audio: true,
+          audio: false,
           video: {
             width: 550,
             height: 386
@@ -465,10 +465,10 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$http.post(this.get_interface_url() + 'deleteAll', {
+          this.$http.post(this.get_interface_url() + 'deleteAll', Object.assign({
             ids: this.get_selected_ids(),
             JID: this.data.JID
-          }, {
+          }, this.data), {
             emulateJSON: true
           }).then(function(response) {
             this.$message({
@@ -521,9 +521,8 @@
       upload_submit_post: function(data, prn) {
         let dataLength = data.length;
         let upload_submit_url = this.get_interface_url() + '/add';
-
         for (let i = 0; i < dataLength; i++) {
-          this.$http.post(upload_submit_url, {
+          this.$http.post(upload_submit_url, Object.assign({
             file_name: data[i].name,
             busin_co: this.upload_business_no,
             bus_type: this.upload_category,
@@ -535,7 +534,7 @@
             prn: prn,
             source: '上传',
             JID: this.data.JID
-          }, {
+          }, this.data), {
             emulateJSON: true
           }).then(function(response) {
             let result = response.body.obj;
@@ -603,16 +602,15 @@
           });
           return;
         }
-        this.$http.post(this.get_interface_url() + 'update', {
+        this.$http.post(this.get_interface_url() + 'update', Object.assign({
           id: selected_ids,
           bus_type: this.update_file_cate_value,
           busin_co: this.update_business_no,
           up_ver: '0',
           JID: this.data.JID
-        }, {
+        }, this.data), {
           emulateJSON: true
         }).then(function(response) {
-          console.log(response);
           this.$message({
             showClose: true,
             message: '恭喜你，修改成功',
@@ -639,7 +637,6 @@
         return selection_ids;
       },
       search_files: function() {
-        console.log(this.search_keywords);
       },
       before_upload_validation: function() {
         let obj = document.getElementById('upload');

@@ -4,7 +4,7 @@
             <thead>
             <tr>
                 <td class="remove-border">全部文件</td>
-                <td class="remove-border" style="text-align: right">已全部加载，共{{files_list.length}}个</td>
+                <td class="remove-border" style="text-align: right">已全部加载，共{{files_list ? files_list.length : 0}}个</td>
             </tr>
             </thead>
         </table>
@@ -383,7 +383,6 @@
           }
         }
 
-        console.log(list);
       },
       file_selected_handle: function(checkboxID) {
         let checkbox_node = document.getElementById(checkboxID);
@@ -417,10 +416,10 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$http.post(this.preInterfaceUrl + 'deleteAll', {
+          this.$http.post(this.preInterfaceUrl + 'deleteAll', Object.assign({
             ids: ids,
             JID: this.data.JID
-          }, {
+          }, this.data), {
             emulateJSON: true
           }).then(function(response) {
             this.$message({
@@ -449,21 +448,19 @@
         return '';
       },
       table_selection_change_handle: function(selectionObjs) {
-        console.log(selectionObjs);
         let ids = [];
         selectionObjs.forEach(element => {
           ids.push(element.id);
         });
         this.selected_files_ids = ids;
         this.$emit('headCallBack', ids);
-        console.log(this.selected_files_ids);
       },
       download_file_handle: function(prn, file_name) {
         let url = this.preInterfaceUrl + 'downloadFile';
-        this.$http.post(url, {
+        this.$http.post(url, Object.assign({
           filePrn: prn,
           JID: this.data.JID
-        }, {
+        }, this.data), {
           emulateJSON: true
         }).then(function(response) {
           // let url = window.URL.createObjectURL(new Blob([response.body.obj]));
@@ -474,14 +471,12 @@
           document.body.appendChild(link);
           link.click();
         }, function(response) {
-          console.log(response);
         });
       },
       update_files_message_handle: function() {
-        console.log(this.current_edit_data);
         let original_rowData = this.current_edit_data;
 
-        this.$http.post(this.preInterfaceUrl + 'update', {
+        this.$http.post(this.preInterfaceUrl + 'update', Object.assign({
           id: original_rowData.id,
           bus_type: this.update_file_cate_value,
           busin_co: this.update_business_no,
@@ -496,10 +491,9 @@
           up_ver: original_rowData.up_ver,
           prn: this.data.prn,
           JID: this.data.JID
-        }, {
+        }, this.data), {
           emulateJSON: true
         }).then(function(response) {
-          console.log(response);
           this.$message({
             showClose: true,
             message: '恭喜你，修改成功',
@@ -542,13 +536,12 @@
           return;
         }
 
-        console.log('prn:' + this.data.prn);
-
-        this.$http.get(this.preInterfaceUrl + 'getListByPrn?prn=' + prn + '&JID=' + JID, {}, {
-          emulateJSON: true
-        }).then(function(response) {
+        this.$http.get(this.preInterfaceUrl + 'getListByPrn', { params: Object.assign(
+          {
+            prn: prn,
+            JID: JID
+          }, this.data)}).then(function(response) {
           // this.all_files = response.body.list;
-          console.log(response.body.list);
           this.files_list = response.body.list;
           this.files_list_full = response.body.list;
         }, function(response) {
