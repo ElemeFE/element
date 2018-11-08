@@ -94,6 +94,7 @@
       },
       defaultCheckedKeys: Array,
       defaultExpandedKeys: Array,
+      currentNodeKey: [String, Number],
       renderContent: Function,
       showCheckbox: {
         type: Boolean,
