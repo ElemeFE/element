@@ -73,6 +73,7 @@ import Label from '../../packages/theme-chalk/src/icons/label.svg';
 import LinkVariant from '../../packages/theme-chalk/src/icons/link-variant.svg';
 import Loader from '../../packages/theme-chalk/src/icons/loader.svg';
 import Location from '../../packages/theme-chalk/src/icons/location.svg';
+import Logout from '../../packages/theme-chalk/src/icons/logout.svg';
 import Luggage from '../../packages/theme-chalk/src/icons/luggage.svg';
 import ManUser from '../../packages/theme-chalk/src/icons/man-user.svg';
 import ManWoman from '../../packages/theme-chalk/src/icons/man-woman.svg';
@@ -205,6 +206,7 @@ module.exports = {
   LinkVariant,
   Loader,
   Location,
+  Logout,
   Luggage,
   ManUser,
   ManWoman,
