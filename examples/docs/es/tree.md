@@ -4,40 +4,40 @@
       width: 20px;
       background: #ddd;
     }
-    
+
     .folder {
       width: 20px;
       background: #888;
     }
-    
+
     .buttons {
       margin-top: 20px;
     }
-    
+
     .filter-tree {
       margin-top: 20px;
     }
-    
+
     .custom-tree-container {
       display: flex;
       margin: -24px;
     }
-      
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-      
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-      
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-      
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -219,7 +219,7 @@
         this.$refs.tree2.filter(val);
       }
     },
-    
+
     methods: {
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
@@ -268,7 +268,7 @@
         } else {
           hasChild = Math.random() > 0.5;
         }
-    
+
         setTimeout(function() {
           let data;
           if (hasChild) {
@@ -280,7 +280,7 @@
           } else {
             data = [];
           }
-    
+
           resolve(data);
         }, 500);
       },
@@ -289,7 +289,7 @@
           return resolve([{ name: 'region' }]);
         }
         if (node.level > 1) return resolve([]);
-    
+
         setTimeout(() => {
           const data = [{
             name: 'leaf',
@@ -297,7 +297,7 @@
           }, {
             name: 'zone'
           }];
-    
+
           resolve(data);
         }, 500);
       },
@@ -332,14 +332,14 @@
         }
         data.children.push(newChild);
       },
-    
+
       remove(node, data) {
         const parent = node.parent;
         const children = parent.data.children || parent.data;
         const index = children.findIndex(d => d.id === data.id);
         children.splice(index, 1);
       },
-    
+
       renderContent(h, { node, data, store }) {
         return (
           <span class="custom-tree-node">
@@ -350,13 +350,13 @@
             </span>
           </span>);
       },
-    
+
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
       }
     },
-    
+
     data() {
       return {
         data,
@@ -1181,6 +1181,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
 | check-strictly        | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
 | default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
+| current-node-key      | key of initially selected node | string, number                       | —               | —       |
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
