@@ -39,9 +39,7 @@
       ref="suggestions"
       :placement="placement"
       :id="id">
-      <slot name="suggestionsHeader">
-      
-      </slot>
+      <slot name="suggestionsHeader"></slot>
       <li
         v-for="(item, index) in suggestions"
         :key="index"
