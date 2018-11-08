@@ -22,22 +22,22 @@
       display: flex;
       margin: -24px;
     }
-  
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-  
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-  
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-  
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -150,7 +150,7 @@
       }]
     }]
   }];
-  
+
   const data6 = [{
     label: 'Level one 1',
     children: [{
@@ -1181,6 +1181,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | show-checkbox         | whether node is selectable               | boolean                     | —               | false   |
 | check-strictly        | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean                     | —               | false   |
 | default-checked-keys  | array of keys of initially checked nodes | array                       | —               | —       |
+| current-node-key      | key of initially selected node | string, number                       | —               | —       |
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
