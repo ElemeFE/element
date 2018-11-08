@@ -48,6 +48,9 @@
         role="option"
         :aria-selected="highlightedIndex === index"
       >
+        <slot name="suggestionsHeader">
+          
+        </slot>
         <slot :item="item">
           {{ item[valueKey] }}
         </slot>
