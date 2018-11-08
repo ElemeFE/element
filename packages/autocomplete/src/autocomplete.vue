@@ -39,6 +39,9 @@
       ref="suggestions"
       :placement="placement"
       :id="id">
+      <slot name="suggestionsHeader">
+      
+      </slot>
       <li
         v-for="(item, index) in suggestions"
         :key="index"
@@ -48,9 +51,6 @@
         role="option"
         :aria-selected="highlightedIndex === index"
       >
-        <slot name="suggestionsHeader">
-          
-        </slot>
         <slot :item="item">
           {{ item[valueKey] }}
         </slot>
