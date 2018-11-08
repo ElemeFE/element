@@ -82,6 +82,7 @@
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @blur="handleBlur"
+      :tabindex="filterable ? '-1' : '0'"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.stop.prevent="navigateOptions('next')"
       @keydown.native.up.stop.prevent="navigateOptions('prev')"
@@ -573,6 +574,7 @@
         if (this.isSilentBlur) {
           this.isSilentBlur = false;
         } else {
+          this.visible = false;
           this.$emit('blur', event);
         }
         this.softFocus = false;
