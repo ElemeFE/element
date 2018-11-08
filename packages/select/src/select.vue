@@ -3,6 +3,8 @@
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
     @click.stop="toggleMenu"
+    @mousedown="handleSelectMouseDown"
+    @mousemove="handleSelectMouseMove"
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
@@ -690,11 +692,11 @@
         });
       },
 
-      handleOptionMouseDown(option) {
+      handleSelectMouseDown(option) {
         this.isSilentBlur = true;
       },
 
-      handleOptionMouseMove(option) {
+      handleSelectMouseMove(option) {
         this.isSilentBlur = false;
       },
 
@@ -849,8 +851,8 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
-      this.$on('handleOptionMouseDown', this.handleOptionMouseDown);
-      this.$on('handleOptionMouseMove', this.handleOptionMouseMove);
+      this.$on('handleOptionMouseDown', this.handleSelectMouseDown);
+      this.$on('handleOptionMouseMove', this.handleSelectMouseMove);
       this.$on('setSelected', this.setSelected);
     },
 
