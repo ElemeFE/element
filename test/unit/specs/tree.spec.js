@@ -302,7 +302,7 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(1);
   });
 
-  it.only('defaultCheckedKeys & lazy, checked children length as expected', (done) => {
+  it('defaultCheckedKeys & lazy, checked children length as expected', (done) => {
     vm = getTreeVm(':load="loadNode" :props="defaultProps" :default-checked-keys="defaultCheckedKeys" node-key="id" :default-expanded-keys="[1]" lazy show-checkbox ', {
       data() {
         return {
@@ -334,11 +334,11 @@ describe('Tree', () => {
             }
           ]);
         }
-      },
-      mounted() {
-        expect(this.$el.querySelectorAll('.el-checkbox.is-checked').length).to.equal(2);
-        done();
       }
+    });
+    setTimeout(() => {
+      expect(vm.$el.querySelectorAll('.el-checkbox.is-checked').length).to.equal(2);
+      done();
     });
   });
 
