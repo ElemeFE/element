@@ -96,9 +96,7 @@
         default() {
           return {
             endDate: null,
-            selecting: false,
-            row: null,
-            column: null
+            selecting: false
           };
         }
       }
@@ -242,7 +240,9 @@
 
     data() {
       return {
-        tableRows: [ [], [], [], [], [], [] ]
+        tableRows: [ [], [], [], [], [], [] ],
+        lastRow: null,
+        lastColumn: null
       };
     },
 
@@ -361,17 +361,18 @@
         }
         if (target.tagName !== 'TD') return;
 
-        const column = target.cellIndex;
         const row = target.parentNode.rowIndex - 1;
-        const { row: oldRow, column: oldColumn } = this.rangeState;
+        const column = target.cellIndex;
 
-        if (oldRow !== row || oldColumn !== column) {
+        // only update rangeState when mouse moves to a new cell
+        // this avoids frequent Date object creation and improves performance
+        if (row !== this.lastRow || column !== this.lastColumn) {
+          this.lastRow = row;
+          this.lastColumn = column;
           this.$emit('changerange', {
             minDate: this.minDate,
             maxDate: this.maxDate,
             rangeState: {
-              row,
-              column,
               selecting: true,
               endDate: this.getDateOfCell(row, column)
             }
