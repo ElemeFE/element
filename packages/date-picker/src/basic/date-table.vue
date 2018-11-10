@@ -33,7 +33,6 @@
 
 <script>
   import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, nextDate, isDate, clearTime as _clearTime} from '../util';
-  import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
   import { arrayFindIndex, arrayFind, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
@@ -364,6 +363,9 @@
         const row = target.parentNode.rowIndex - 1;
         const column = target.cellIndex;
 
+        // can not select disabled date
+        if (this.rows[row][column].disabled) return;
+
         // only update rangeState when mouse moves to a new cell
         // this avoids frequent Date object creation and improves performance
         if (row !== this.lastRow || column !== this.lastColumn) {
@@ -390,47 +392,14 @@
         }
 
         if (target.tagName !== 'TD') return;
-        if (hasClass(target, 'disabled') || hasClass(target, 'week')) return;
 
-        const selectionMode = this.selectionMode;
+        const row = target.parentNode.rowIndex - 1;
+        const column = this.selectionMode === 'week' ? 1 : target.cellIndex;
+        const cell = this.rows[row][column];
 
-        if (selectionMode === 'week') {
-          target = target.parentNode.cells[1];
-        }
+        if (cell.disabled || cell.type === 'week') return;
 
-        let year = Number(this.year);
-        let month = Number(this.month);
-
-        const cellIndex = target.cellIndex;
-        const rowIndex = target.parentNode.rowIndex;
-
-        const cell = this.rows[rowIndex - 1][cellIndex];
-        const text = cell.text;
-        const className = target.className;
-
-        const newDate = new Date(year, month, 1);
-
-        if (className.indexOf('prev') !== -1) {
-          if (month === 0) {
-            year = year - 1;
-            month = 11;
-          } else {
-            month = month - 1;
-          }
-          newDate.setFullYear(year);
-          newDate.setMonth(month);
-        } else if (className.indexOf('next') !== -1) {
-          if (month === 11) {
-            year = year + 1;
-            month = 0;
-          } else {
-            month = month + 1;
-          }
-          newDate.setFullYear(year);
-          newDate.setMonth(month);
-        }
-
-        newDate.setDate(parseInt(text, 10));
+        const newDate = this.getDateOfCell(row, column);
 
         if (this.selectionMode === 'range') {
           if (!this.rangeState.selecting) {
@@ -444,11 +413,10 @@
             }
             this.rangeState.selecting = false;
           }
-        } else if (selectionMode === 'day') {
+        } else if (this.selectionMode === 'day') {
           this.$emit('pick', newDate);
-        } else if (selectionMode === 'week') {
+        } else if (this.selectionMode === 'week') {
           const weekNumber = getWeekNumber(newDate);
-
           const value = newDate.getFullYear() + 'w' + weekNumber;
           this.$emit('pick', {
             year: newDate.getFullYear(),
@@ -456,7 +424,7 @@
             value: value,
             date: newDate
           });
-        } else if (selectionMode === 'dates') {
+        } else if (this.selectionMode === 'dates') {
           const value = this.value || [];
           const newValue = cell.selected
             ? removeFromArray(value, date => date.getTime() === newDate.getTime())
