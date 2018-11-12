@@ -367,7 +367,7 @@ export default {
         const keywordIndex = label.toLowerCase().indexOf(inputValue.toLowerCase());
         const labelPart = label.slice(keywordIndex, inputValue.length + keywordIndex);
         const node = keywordIndex > -1 ? this.highlightKeyword(label, labelPart) : label;
-        return index === 0 ? node : [' / ', node];
+        return index === 0 ? node : [` ${this.separator} `, node];
       });
     },
     highlightKeyword(label, keyword) {
