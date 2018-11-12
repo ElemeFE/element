@@ -302,6 +302,9 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      defaultValue: {
+        default: null
       }
     },
 
@@ -742,7 +745,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        const value = this.multiple ? [] : '';
+        const value = this.defaultValue != null ? this.defaultValue : this.multiple ? [] : '';
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;
@@ -752,8 +755,11 @@
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.selectDisabled) {
-          const value = this.value.slice();
+          let value = this.value.slice();
           value.splice(index, 1);
+          if (value.length === 0 && this.defaultValue != null) {
+            value = this.defaultValue;
+          }
           this.$emit('input', value);
           this.emitChange(value);
           this.$emit('remove-tag', tag.value);
@@ -826,11 +832,19 @@
 
     created() {
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
-      if (this.multiple && !Array.isArray(this.value)) {
-        this.$emit('input', []);
+      if (this.multiple) {
+        if ((!Array.isArray(this.value) || this.value.length === 0) && this.defaultValue !== null && !this.remote) {
+          this.$emit('input', this.defaultValue);
+        } else if (!Array.isArray(this.value)) {
+          this.$emit('input', []);
+        }
       }
-      if (!this.multiple && Array.isArray(this.value)) {
-        this.$emit('input', '');
+      if (!this.multiple) {
+        if ((Array.isArray(this.value) || !this.value) && this.defaultValue !== null && !this.remote) {
+          this.$emit('input', this.defaultValue);
+        } else if (Array.isArray(this.value)) {
+          this.$emit('input', '');
+        }
       }
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
