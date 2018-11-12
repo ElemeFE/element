@@ -12,8 +12,12 @@
       const itemCopy = {};
       configurableProps.forEach(prop => {
         let name = props[prop];
-        let value = item[name];
-        if (value === undefined) {
+        let value = '';
+        if (typeof name === 'function') {
+          value = name(item);
+        } else if (typeof name === 'string') {
+          value = item[name];
+        } else if (name === undefined) {
           name = prop;
           value = item[name];
         }
