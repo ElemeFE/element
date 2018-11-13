@@ -1,12 +1,19 @@
 <template>
-  <div class="el-progress" :class="[
+  <div
+    class="el-progress"
+    :class="[
       'el-progress--' + type,
       status ? 'is-' + status : '',
       {
         'el-progress--without-text': !showText,
         'el-progress--text-inside': textInside,
       }
-    ]" role="progressbar" :aria-valuenow="percentage" aria-valuemin="0" aria-valuemax="100">
+    ]"
+    role="progressbar"
+    :aria-valuenow="percentage"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  >
     <div class="el-progress-bar" v-if="type === 'line'">
       <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px'}">
         <div class="el-progress-bar__inner" :style="barStyle">
