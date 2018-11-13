@@ -465,6 +465,7 @@ export default class Node {
         this.doCreateChildren(children, defaultProps);
 
         this.updateLeafState();
+        reInitChecked(this);
         if (callback) {
           callback.call(this, children);
         }
