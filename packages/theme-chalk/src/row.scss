@@ -5,6 +5,7 @@
 @include b(row) {
   position: relative;
   box-sizing: border-box;
+  width: inherit;
   // remove old browser support
   // @include utils-clearfix;
 
