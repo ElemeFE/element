@@ -145,13 +145,13 @@
         if (this.targetOrder === 'original') {
           return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
         } else {
-          const data = [];
-          this.value.forEach(key => {
-            if (this.dataObj.hasOwnProperty(key)) {
-              data.push(this.dataObj[key]);
+          return this.value.reduce((arr, cur) => {
+            const val = this.dataObj[cur];
+            if (val) {
+              arr.push(val);
             }
-          });
-          return data;
+            return arr;
+          }, []);
         }
       },
 
