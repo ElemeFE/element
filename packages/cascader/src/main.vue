@@ -231,6 +231,7 @@ export default {
     menuVisible(value) {
       this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
       value ? this.showMenu() : this.hideMenu();
+      this.$emit('visible-change', value);
     },
     value(value) {
       this.currentValue = value;
