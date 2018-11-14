@@ -1697,3 +1697,4 @@ Search and select options with a keyword.
 | active-item-change | triggers when active option of its parent changes, only works when `change-on-select` is `false` | an array of active options |
 | blur | triggers when Cascader blurs | (event: Event) |
 | focus | triggers when Cascader focuses | (event: Event) |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
