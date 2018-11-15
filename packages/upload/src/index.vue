@@ -285,7 +285,7 @@ export default {
         limit: this.limit,
         'on-exceed': this.onExceed,
         'on-start': this.handleStart,
-        'on-progress': this.handleProgress,
+        'on-progress': this.onProgress === noop ? null : this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
         'on-preview': this.onPreview,

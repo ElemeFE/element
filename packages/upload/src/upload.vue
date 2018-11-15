@@ -141,9 +141,9 @@ export default {
         data: this.data,
         filename: this.name,
         action: this.action,
-        onProgress: e => {
+        onProgress: this.onProgress ? e => {
           this.onProgress(e, rawFile);
-        },
+        } : null,
         onSuccess: res => {
           this.onSuccess(res, rawFile);
           delete this.reqs[uid];
