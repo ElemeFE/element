@@ -256,6 +256,10 @@
             {
               "path": "/flow-record",
               "title": "FlowRecord 流转记录"
+            },
+            {
+              "path": "/quality-control-chart",
+              "title": "qualityControlChart 质控图"
             }
           ]
         }

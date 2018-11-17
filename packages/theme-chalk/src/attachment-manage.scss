@@ -86,10 +86,26 @@
         line-height: 40px;
         border-bottom: 1px solid #ccc;
         padding: 0 15px;
+        position: relative;
+        i{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
     }
 
     & .capture-box-main{
         padding: 0 15px;
+        position: relative;
+        .submit_div {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: rgba(0,0,0,0.1);
+            padding: 10px;
+            width: 300px
+        }
     }
 
     & .capture-box-main-video{
@@ -125,22 +141,67 @@
         text-align: center;
     }
 
-    & .capture-box-main .capture-box-main-video,
-    & .capture-box-main .pictures-box{
-        float:left;
+    & .capture-box-main .capture-box-main-video{
+
     }
+    & .capture-box-main .pictures-box{
+        position: absolute;
+        right: 15px;
+        top: 0px;
+        width: 360px;
+        img{
+            border-radius: 8px;
+        }
+        .save {
+
+            position: absolute;
+            bottom: 5px;
+            left: 75px;
+            .btn {
+                background-color: #67bcff;
+                border-radius: 5px;
+                cursor: pointer;
+                padding: 2px 15px;
+                display: inline-block;
+                margin-left: 10px;
+                color: #fff;
+            }
+
+
+        }
+        .context{
+            height: 360px;
+            overflow: scroll;
+        }
+    }
+    & .capture-box-main .icon-scala{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 99;
+    }
+
 
     & .capture-box-main .pictures-box{
         max-width: 420px;
         background-color: #FAFAFA;
-        min-height: 380px;
+        min-height: 360px;
     }
 
+
     & .capture-box-main .pictures-box .picture{
-        width:200px;
+        width:160px;
+        padding: 10px;
         float:left;
         position: relative;
+        i{
+            position: absolute;
+            right: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
     }
+
 
     & .capture-box-main .pictures-box .link_button_box{
         position: absolute;
@@ -151,9 +212,9 @@
         display: none;
     }
 
-    & .capture-box-main .pictures-box .picture:hover .link_button_box{
-        display: block;
-    }
+    //& .capture-box-main .pictures-box .picture:hover .link_button_box{
+    //    display: block;
+    //}
 
     & .capture-box-main .pictures-box a{
         margin-right:10px;

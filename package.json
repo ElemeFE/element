@@ -1,6 +1,6 @@
 {
   "name": "element-ui-qz",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui-qz.common.js",
   "files": [
@@ -52,6 +52,7 @@
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
+    "echarts": "^4.2.0-rc.2",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",
     "throttle-debounce": "^1.0.1"

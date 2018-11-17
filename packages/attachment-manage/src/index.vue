@@ -4,7 +4,7 @@
             <div v-if="JSON.stringify(data) != '{}' && data.prn !==''" style="display: inline-block;">
                 <div v-if="!data.allButtonDisabled">
                     <ul>
-                        <!--<li v-if="data.capture" v-on:click="reset_child_com_state('capture')"><a class="tab"><img :src="list.captureIcon_"  />摄像</a></li>-->
+                        <li v-if="data.capture" v-on:click="reset_child_com_state('capture')"><a class="tab"><img :src="list.captureIcon_"  />摄像</a></li>
                         <!--<li v-if="data.scan"><a class="tab"><img :src="list.scanningIcon_"  />扫描</a></li>-->
                         <li v-if="data.upload">
                             <a class="tab" @click="upload_dialog_visible = true"><img :src="list.uploadIcon_"/>上传</a>
@@ -120,7 +120,7 @@
 
                     <tr>
                         <td>上传附件</td>
-                        <td>
+                        <td width="350" style="overflow: hidden;display: inline-block;">
                             <el-button size="small" type="primary" @click="before_upload_validation">选择文件</el-button>
                             <el-upload
                                     class="upload-demo"
@@ -357,7 +357,8 @@
             label: '其它文件',
             value: 'QTWJ'
           }
-        ]
+        ],
+        navigatorStream: undefined
       };
     },
     methods: {
@@ -372,10 +373,11 @@
         const opt = {
           audio: false,
           video: {
-            width: 550,
-            height: 386
+            width: 640,
+            height: 360
           }
         };
+        let self = this;
         if (capture) {
           navigator.getUserMedia(opt,
             function(stream) {
@@ -386,6 +388,7 @@
                 document.getElementById('non-video').style.display = 'none';
                 video.play();
               };
+              self.navigatorStream = stream;
             },
             function(err) {
               console.log('The following error occurred: ' + err.name);

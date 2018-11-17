@@ -69,5 +69,6 @@
   "main": "./packages/main/index.js",
   "footer": "./packages/footer/index.js",
   "attachment-manage": "./packages/attachment-manage/index.js",
-  "flow-record": "./packages/flow-record/index.js"
+  "flow-record": "./packages/flow-record/index.js",
+  "quality-control-chart": "./packages/quality-control-chart/index.js"
 }
