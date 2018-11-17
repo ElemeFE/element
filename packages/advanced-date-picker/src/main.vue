@@ -1,6 +1,7 @@
 <template>
   <div class="tm-advanced-date-picker">
     <tm-popover :width="popoverWidth"
+                popper-class="tm-advanced-date-picker__popover"
                 ref="popover"
                 trigger="click"
                 :offset="24">
@@ -14,8 +15,9 @@
                       placeholder="Когда"
                       size="extra-large"
                       :disable-old-date="disableOldDate" />
-      <div slot="reference" @keyup.enter="onEnterKeyUp">
-        <tm-input class="tm-advanced-date-picker__input"
+      <div slot="reference"
+           @keyup.enter="onEnterKeyUp">
+        <tm-input :class="inputClassName"
                   v-if="isEditable"
                   :readonly="false"
                   prefix-icon="calendar"
@@ -44,13 +46,18 @@
   import TmPopover from 'tmconsulting-ui/packages/popover/src/main.vue';
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmDatePicker from 'tmconsulting-ui/packages/date-picker/src/picker/date-picker';
+  import countBy from 'lodash/countBy';
 
   moment.locale('ru');
 
   const SINGLE = 'single';
   const DOUBLE = 'double';
   const DATE_LENGTH = 10;
-  const DATE_FORMAT = 'DD.MM.YYYY';
+  const DATE_FORMATS = {
+    EDIT: 'DD.MM.YYYY',
+    READ: 'D MMMM'
+  };
+
   const DEFAULT_PLACEHOLDER_TEXT = 'Выберите дату';
   const DEFAULT_POPOVER_WIDTH = 520;
 
@@ -67,8 +74,48 @@
   };
 
   const isDateValid = date => {
-    const selectedDate = moment(date, DATE_FORMAT);
+    const selectedDate = moment(date, DATE_FORMATS.EDIT);
     return selectedDate.isValid() && getValidity(selectedDate);
+  };
+
+  const countStringSymbols = (str, ch) => countBy(str)[ch] || 0;
+
+  /**
+   * @param {String[]} dates
+   * @returns {number}
+   */
+  const getSpacesLength = dates => dates.reduce((int, date) => int + countStringSymbols(date, ' '), 0);
+
+  /**
+   * @param {string[]|string} dates
+   * @param {'single'|'double'} mode
+   * @returns {number}
+   */
+  const getCorrectInputLength = (dates, mode) => {
+    switch (mode) {
+      case SINGLE:
+        return DATE_LENGTH;
+      case DOUBLE:
+        return (DATE_LENGTH * 2) + getSpacesLength(dates);
+    }
+  };
+
+  const validateRules = (dates, mode) => {
+    const dateLength = dates === null ? 0 : (mode === SINGLE ? dates.length : dates.join('').length);
+
+    return {
+      inputLength: mode === SINGLE
+        ? dateLength === DATE_LENGTH
+        : dateLength === (DATE_LENGTH * 2) + getSpacesLength(dates),
+      isDateValid: mode === SINGLE
+        ? isDateValid(dates)
+        : dates.reduce((curr, date) => curr && isDateValid(date.trim()), true)
+    };
+  };
+
+  const validateInput = (mode, dates) => {
+    const rules = Object.values(validateRules(dates, mode));
+    return rules.reduce((curr, next) => curr && next, true);
   };
 
   export default {
@@ -80,6 +127,16 @@
       TmDatePicker,
       TmInput,
       TmPopover
+    },
+
+    watch: {
+      date: {
+        handler(value) {
+          if (value) {
+            this.$emit('date-changed', value);
+          }
+        }
+      }
     },
 
     props: {
@@ -123,21 +180,35 @@
     },
 
     computed: {
+      isInputDateValid() {
+        const dates = this.type === SINGLE ? this.inputDate : this.inputDate.split('-');
+        return validateInput(this.type, dates);
+      },
+
+      inputClassName() {
+        const baseClass = 'tm-advanced-date-picker__input';
+
+        return this.isInputDateValid ? baseClass : `${baseClass}--error`;
+      },
+
       inputPlaceholder() {
         return this.date ? this.blurValue : this.placeholder;
       },
+
       blurValue() {
         if (Array.isArray(this.date)) {
           const [from, till] = this.date;
-          return `${moment(from).format('D MMMM')} - ${moment(till).format('D MMMM')}`;
+          return `${moment(from).format(DATE_FORMATS.READ)} - ${moment(till).format(DATE_FORMATS.READ)}`;
         } else {
-          return moment(this.date).format('D MMMM');
+          return moment(this.date).format(DATE_FORMATS.READ);
         }
       },
+
       dateMask() {
         const dateMask = 'D#.##.####';
         return Array.isArray(this.date) ? `${dateMask} - ${dateMask}` : dateMask;
       },
+
       customMask() {
         return {
           mask: this.dateMask,
@@ -170,36 +241,47 @@
           } else {
             this.inputDate = null;
           }
+
+          const picker = this.$refs.datePicker.picker;
+          picker.date = this.date;
+          picker.leftDate = this.date;
         }
       },
       handleDouble(value) {
         const results = [];
-        const dates = value.split('-').map(_ => _.trim());
+        const dates = value.split('-');
         const isTwo = dates.length === 2;
         if (!isTwo) this.inputDate = null;
 
         const totalLength = dates.reduce((curr, next) => curr + next.length, 0);
-        if (totalLength !== DATE_LENGTH * 2) this.inputDate = null;
+        if (totalLength !== getCorrectInputLength(dates, DOUBLE)) this.inputDate = null;
 
         const newRange = [];
-        dates.forEach(_ => {
-          const [day, month, year] = _.split('.');
-          if (isDateValid(_)) {
+        dates.forEach(dateItem => {
+          const dateString = dateItem.trim();
+          const [day, month, year] = dateString.split('.');
+          if (isDateValid(dateString)) {
             newRange.push(new Date(`${month}.${day}.${year}`));
           } else {
             this.inputDate = null;
           }
-          results.push(isDateValid(_));
+          results.push(isDateValid(dateString));
         });
+
         this.date = newRange;
         const isAvailableToClose = results.reduce(
           (curr, next) => curr && next,
           true
         );
+
+        const picker = this.$refs.datePicker.picker;
+        const [leftDate, rightDate] = newRange;
+        picker.leftDate = new Date(leftDate);
+        picker.rightDate = new Date(rightDate);
         if (isAvailableToClose) this.close();
       },
       onChange(value) {
-        const getDate = val => moment(val).format(DATE_FORMAT);
+        const getDate = val => moment(val).format(DATE_FORMATS.EDIT);
         this.inputDate = Array.isArray(value)
           ? value.map(_ => getDate(_)).join(' - ')
           : getDate(value);
@@ -215,7 +297,7 @@
         this.$emit('typechange', type);
       },
       focus() {
-        this.$refs.datePicker.focus();
+        this.$refs.popover.doShow();
       }
     }
   };

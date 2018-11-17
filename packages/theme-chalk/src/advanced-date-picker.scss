@@ -1,9 +1,24 @@
-.tm-picker-panel__content {
-  margin: 0;
-  padding: 16px 0;
+@import "common/var";
 
-  table {
-    table-layout: fixed;
-    width: 100%;
+.tm-advanced-date-picker {
+  &__popover {
+    .tm-picker-panel__content {
+      margin: 0;
+      padding: 16px 0;
+
+      table {
+        table-layout: fixed;
+        width: 100%;
+      }
+      table > tbody > tr > th {
+        text-align: center;
+      }
+    }
+  }
+  &__input {
+    &--error > input {
+      color: $--color-sunset-orange;
+      transition: $--color-transition-base;
+    }
   }
 }

@@ -58,6 +58,7 @@ import Gym from '../../packages/theme-chalk/src/icons/gym.svg';
 import HalfStar from '../../packages/theme-chalk/src/icons/half-star.svg';
 import Hanger from '../../packages/theme-chalk/src/icons/hanger.svg';
 import HelpCircle from '../../packages/theme-chalk/src/icons/help-circle.svg';
+import Home from '../../packages/theme-chalk/src/icons/home.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
 import HygienicKit from '../../packages/theme-chalk/src/icons/hygienic-kit.svg';
 import IconBlock from '../../packages/theme-chalk/src/icons/icon-block.svg';
@@ -94,6 +95,7 @@ import PrintNotAvailable from '../../packages/theme-chalk/src/icons/print-not-av
 import Question from '../../packages/theme-chalk/src/icons/question.svg';
 import Ramp from '../../packages/theme-chalk/src/icons/ramp.svg';
 import Repeat from '../../packages/theme-chalk/src/icons/repeat.svg';
+import SearchService from '../../packages/theme-chalk/src/icons/search-service.svg';
 import SearchSmall from '../../packages/theme-chalk/src/icons/search-small.svg';
 import Search from '../../packages/theme-chalk/src/icons/search.svg';
 import SeatPerson from '../../packages/theme-chalk/src/icons/seat-person.svg';
@@ -191,6 +193,7 @@ module.exports = {
   HalfStar,
   Hanger,
   HelpCircle,
+  Home,
   Hotel,
   HygienicKit,
   IconBlock,
@@ -227,6 +230,7 @@ module.exports = {
   Question,
   Ramp,
   Repeat,
+  SearchService,
   SearchSmall,
   Search,
   SeatPerson,
