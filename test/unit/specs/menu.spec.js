@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerClick, triggerEvent, triggerKeyDown, destroyVM } from '../util';
 
 describe('Menu', () => {
   let vm;
@@ -420,5 +420,58 @@ describe('Menu', () => {
         done();
       }, 20);
     }, 100);
+  });
+
+  it.only('outsideClosable', done => {
+    vm = createVue({
+      template: `
+          <el-menu menu-trigger="click" :outsideCloseable="outsideCloseable" ref="menu">
+            <el-menu-item index="1">
+                <el-input ref="input" />
+            </el-menu-item>
+            <el-submenu index="2" ref="submenu1">
+                <template slot="title">Workspace</template>
+                <el-menu-item index="2-1">item one</el-menu-item>
+                <el-menu-item index="2-2">item two</el-menu-item>
+                <el-menu-item index="2-3">item three</el-menu-item>
+                <el-submenu index="2-4" ref="submenu2">
+                  <template slot="title">item four</template>
+                  <el-menu-item index="2-4-1">item one</el-menu-item>
+                  <el-menu-item index="2-4-2">item two</el-menu-item>
+                  <el-menu-item index="2-4-3">item three</el-menu-item>
+                </el-submenu>
+            </el-submenu>
+          </el-menu>
+        `,
+      data() {
+        return {
+          outsideCloseable: false
+        };
+      }
+    }, true);
+    var menu = vm.$refs.menu;
+    var submenu = vm.$refs.submenu1;
+    var triggerElm = submenu.$el.querySelector('.el-submenu__title');
+    triggerEvent(submenu.$el, 'mouseenter');
+    triggerElm.click();
+    setTimeout(() => {
+      submenu = vm.$refs.submenu2;
+      triggerElm = submenu.$el.querySelector('.el-submenu__title');
+      triggerEvent(submenu.$el, 'mouseenter');
+      triggerElm.click();
+      triggerClick(document);
+
+      setTimeout(_ => {
+        expect(menu.openedMenus.length).to.equal(2);
+        vm.outsideCloseable = true;
+        setTimeout(() => {
+          triggerClick(document);
+          setTimeout(() => {
+            expect(menu.openedMenus.length).to.equal(0);
+            done();
+          }, 0);
+        }, 0);
+      }, 0);
+    }, 0);
   });
 });

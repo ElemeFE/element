@@ -120,6 +120,10 @@
       collapseTransition: {
         type: Boolean,
         default: true
+      },
+      outsideCloseable: {
+          type: Boolean,
+          default: false
       }
     },
     data() {

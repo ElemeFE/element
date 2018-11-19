@@ -231,9 +231,11 @@
         this.updatePlacement();
       },
       close() {
-        this.$nextTick(() => {
-          if (this.opened) this.rootMenu.closeMenu(this.index);
-        });
+        if(this.rootMenu.outsideCloseable){
+          this.$nextTick(() => {
+            if (this.opened) this.rootMenu.closeMenu(this.index);
+          });
+        }
       }
     },
     created() {
