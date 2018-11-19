@@ -262,9 +262,9 @@ Vertical NavMenu could be collapsed.
     <i class="el-icon-document"></i>
     <span slot="title">Navigator Three</span>
   </el-menu-item>
-  <el-menu-item index="4">
+  <el-menu-item tooltip-effect="light" index="4">
     <i class="el-icon-setting"></i>
-    <span slot="title">Navigator Four</span>
+    <span slot="title">Navigator light effect</span>
   </el-menu-item>
 </el-menu>
 
@@ -342,6 +342,7 @@ Vertical NavMenu could be collapsed.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | unique identification   | string  | — | — |
+| tooltip-effect | tooltip color scheme | string | dark / light | dark |
 | route     | Vue Router object   | object | — | — |
 | disabled | whether disabled | boolean | — | false |
 
