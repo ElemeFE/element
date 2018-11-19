@@ -208,7 +208,6 @@
       },
       handleBlur(event) {
         this.$emit('blur', event);
-        this.$refs.input.setCurrentValue(this.currentInputValue);
       },
       handleFocus(event) {
         this.$emit('focus', event);
@@ -220,10 +219,7 @@
         }
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
-        if (oldVal === newVal) {
-          this.$refs.input.setCurrentValue(this.currentInputValue);
-          return;
-        }
+        if (oldVal === newVal) return;
         this.$emit('input', newVal);
         this.$emit('change', newVal, oldVal);
         this.currentValue = newVal;
