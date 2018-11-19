@@ -9,7 +9,8 @@
         num5: 1,
         num6: 1,
         num7: 1,
-        num8: 1
+        num8: 1,
+        num9: 1
       }
     },
     methods: {
@@ -206,5 +207,5 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | Método | Descripción                          | Parámetro |
 | ------ | ------------------------------------ | --------- |
 | focus  | coloca el foco en el elemento actual | -         |
-| select | selecciona el texto del input        | -          |
+| select | selecciona el contenido del input        | -          |
 

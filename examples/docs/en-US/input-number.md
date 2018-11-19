@@ -9,7 +9,8 @@
         num5: 1,
         num6: 1,
         num7: 1,
-        num8: 1
+        num8: 1,
+        num9: 1
       }
     },
     methods: {

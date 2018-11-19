@@ -202,14 +202,11 @@ describe('Tree', () => {
     });
   });
 
-  it('current-node-key', done => {
-    vm = getTreeVm(':props="defaultProps" :current-node-key="1"');
-    const firstNode = document.querySelector('.el-tree-node');
-    firstNode.click();
-    vm.$nextTick(() => {
-      expect(firstNode.classList.contains('is-current')).to.true;
-      done();
-    });
+  it('current-node-key', () => {
+    vm = getTreeVm(':props="defaultProps" default-expand-all highlight-current node-key="id" :current-node-key="11"');
+    const currentNodeLabel = document.querySelector('.is-current .el-tree-node__label').textContent;
+
+    expect(currentNodeLabel).to.be.equal('二级 1-1');
   });
 
   it('defaultExpandAll', () => {
