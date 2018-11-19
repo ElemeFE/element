@@ -19,7 +19,7 @@
 - 可以通过点击 Menu 外部来关闭 Menu，#13296
 - Form 的 `validateField` 方法可以接收参数，#13319
 - Cascader 新增 `visible-change` 事件，#13415
-- DatePicker 新增 range-seprator slot， #13272 (by @milworm)
+- DatePicker 新增 range-separator slot， #13272 (by @milworm)
 - Tree 新增 `iconClass` 与 `currentNodeKey` 属性，#13337 #13197 (by @isnifer)
 - Progress 的 `status` 添加了 text #13198 (by @ali-master)
 - 修复 Tree 的 `defaultCheckedKeys` 导致显示的错误，#13349 (by @dive2Pro)
