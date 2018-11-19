@@ -19,7 +19,7 @@
 - You can close Menu by clicking on Menu outside, #13296
 - Form's `validateField` method can receive arguments, #13319
 - Cascader added `visible-change` event, #13415
-- DatePicker added range-seprator slot, #13272 (by @milworm)
+- DatePicker added range-separator slot, #13272 (by @milworm)
 - Tree adds `iconClass` and `currentNodeKey` properties, #13337 #13197 (by @isnifer)
 - Progress's` status` added text #13198 (by @ali-master)
 - Fixing tree's `defaultCheckedKeys` caused an error, #13349 (by @dive2Pro)
