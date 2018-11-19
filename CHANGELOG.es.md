@@ -2,27 +2,28 @@
 
 ### 2.4.10
 
-**2018-11-16**
+*2018-11-16*
 
-- Fixed multiple clicks on Select to display the drop-down list, #13268
-- The clear icon for input is not displayed when Form is disabled, #13208
-- Adjust the style of Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
-- Carousel component added `loop` attribute, #13217
-- When the data of Table changes, the highlighted line will remain, #13200
-- Table header scoped slot can receive parameters, #13263
-- Table's `clearFilter` method supports arguments, #13176
-- Tooltip is no longer created when there is no content in the Table cell, #13152 (by @rongxingsun)
-- The input box contents of the ColorPicker panel can be displayed correctly, #13278
-- ColorPicker no longer triggers form validation when dragging, #13299
-- InputNumber added `select `method, #13286 (by @st-sloth)
-- Autocomplete added `clear` event, #12171(by arthurdenner) #13326
-- You can close Menu by clicking on Menu outside, #13296
-- Form's `validateField` method can receive arguments, #13319
-- Cascader added `visible-change` event, #13415
-- DatePicker added range-seprator slot, #13272 (by @milworm)
-- Tree adds `iconClass` and `currentNodeKey` properties, #13337 #13197 (by @isnifer)
-- Progress's` status` added text #13198 (by @ali-master)
-- Fixing tree's `defaultCheckedKeys` caused an error, #13349 (by @dive2Pro)
+- Se corrigio que se necesitaban varios clics en Select para mostrar la lista desplegable, #13268
+- El icono de limpiado para el input no se muestraba cuando Form estaba deshabilitado, #13208
+- Ajustados los estilos de Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Se agregó el atributo `loop` al componente carrusel, #13217
+- Cuando los datos de Table cambian, la línea resaltada permanecerá, #13200
+- Table header scoped slot puede recibir parámetros, #13263
+- El método `clearFilter` de la tabla soporta argumentos, #13176
+- El tooltip ya no se crea cuando no hay contenido en la celda de Table, #13152 (por @rongxingsun)
+- El contenido del input del panel ColorPicker se muestra correctamente, #13278
+- ColorPicker ya no activa la validación de formularios al arrastrar, #13299
+- InputNumber se le ha añadido el método `select`, #13286 (por @st-sloth)
+- Autocompletar agregó el evento `clear`, #12171(by arthurdenner) #13326
+- Puede cerrar Menú haciendo clic fuera del Menú, #13296
+- El método `validateField` de Form puede recibir argumentos, #13319
+- Cascader añadió el evento `visible-change`, #13415
+- DatePicker agregó slot para separador de rango, #13272 (por @milworm)
+- Tree añade las propiedades `iconClass` y `currentNodeKey`, #13337 #13197 (por @isnifer)
+- Progress permite texto en el atributo `status` #13198 (por @ali-master)
+- Corregidas las `defaultCheckedKeys` de Tree que causaba un error, #13349 (por @dive2Pro)
+
 
 ### 2.4.9
 

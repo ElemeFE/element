@@ -2,7 +2,7 @@
 
 ### 2.4.10
 
-**2018-11-16**
+*2018-11-16*
 
 - Fixed multiple clicks on Select to display the drop-down list, #13268
 - The clear icon for input is not displayed when Form is disabled, #13208
