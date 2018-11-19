@@ -2,7 +2,7 @@
 
 ### 2.4.10
 
-**2018-11-16**
+*2018-11-16*
 
 - Se corrigio que se necesitaban varios clics en Select para mostrar la lista desplegable, #13268
 - El icono de limpiado para el input no se muestraba cuando Form estaba deshabilitado, #13208
