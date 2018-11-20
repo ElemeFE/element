@@ -231,7 +231,7 @@
         this.updatePlacement();
       },
       close() {
-        if(this.rootMenu.outsideCloseable){
+        if (this.rootMenu.outsideCloseable) {
           this.$nextTick(() => {
             if (this.opened) this.rootMenu.closeMenu(this.index);
           });

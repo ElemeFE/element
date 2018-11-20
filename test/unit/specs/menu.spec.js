@@ -1,4 +1,4 @@
-import { createVue, triggerClick, triggerEvent, triggerKeyDown, destroyVM } from '../util';
+import { createVue, triggerClick, triggerEvent, destroyVM } from '../util';
 
 describe('Menu', () => {
   let vm;
@@ -422,7 +422,7 @@ describe('Menu', () => {
     }, 100);
   });
 
-  it.only('outsideClosable', done => {
+  it('outsideClosable', done => {
     vm = createVue({
       template: `
           <el-menu menu-trigger="click" :outsideCloseable="outsideCloseable" ref="menu">
