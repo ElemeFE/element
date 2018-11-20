@@ -42,35 +42,35 @@
                                 :back="getBackStatus(item.processType)">
                                 <div v-if="item.type == 'flow'">
                                     <div v-if="item.flag == 1">
-                                        <img src="../images/icon-ywsl-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-ywsl-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-ywsl-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == 2">
-                                        <img src="../images/icon-htps-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-htps-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-htps-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == 3">
-                                        <img src="../images/icon-htps-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-htps-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-htps-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == 4">
-                                        <img src="../images/icon-htps-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-htps-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-htps-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == 5">
-                                        <img src="../images/icon-bgbz-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-bgbz-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-bgbz-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == 6">
-                                        <img src="../images/icon-bgsh-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-bgsh-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-bgsh-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == -1">
-                                        <img src="../images/icon-rwfp-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-rwfp-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-rwfp-gray.png" v-else/>
                                     </div>
                                     <div v-if="item.flag == 7">
-                                        <img src="../images/icon-bgqf-high.png" v-if="item.date != '----'"/>
+                                        <img src="../images/icon-bgqf-high.png" v-if="item.date != '----' || item.thisNode == true"/>
                                         <img src="../images/icon-bgqf-gray.png" v-else/>
                                     </div>
                                     <div>{{item.name}}</div>
@@ -78,7 +78,7 @@
                                     <div>{{item.date}}</div>
                                     <div>{{item.time}}</div>
                                 </div>
-                                <div v-if="item.type == 'time'" :class="main_flow_arrow_style(item.timeSpan)">
+                                <div v-if="item.type == 'time'" :class="main_flow_arrow_style(item.arrowStatus)">
                                     {{item.timeSpan}}
                                 </div>
                             </li>
@@ -100,12 +100,12 @@
                             <el-table-column
                                     prop="operator"
                                     label="操作人"
-                                    width="180">
+                                    width="100">
                             </el-table-column>
                             <el-table-column
                                     prop="task_node_name"
                                     label="操作环节"
-                                    width="180">
+                                    width="100">
                             </el-table-column>
                             <el-table-column
                                     prop="next_task_name"
@@ -129,6 +129,7 @@
                             </el-table-column>
                             <el-table-column
                                     prop="process_remark"
+                                    width="150px"
                                     label="备注">
                             </el-table-column>
                         </el-table>
@@ -183,7 +184,7 @@
                         <el-table-column
                                 label="检验人">
                             <el-table-column
-                                    prop="duty_persons"
+                                    prop="operator"
                                     :render-header="check_name_render">
                             </el-table-column>
                         </el-table-column>
@@ -217,12 +218,12 @@
                         <el-table-column
                                 prop="operator"
                                 label="操作人"
-                                width="180">
+                                width="100">
                         </el-table-column>
                         <el-table-column
                                 prop="task_node_name"
                                 label="操作环节"
-                                width="150">
+                                width="100">
                         </el-table-column>
                         <el-table-column
                                 prop="next_task_name"
@@ -247,6 +248,7 @@
                         </el-table-column>
                         <el-table-column
                                 prop="process_remark"
+                                width="150"
                                 label="备注">
                         </el-table-column>
                     </el-table>
@@ -382,7 +384,7 @@
         }
       },
       main_flow_arrow_style: function(val) {
-        if (val === '----') {
+        if (val === 0) {
           return 'arrow-line-gray';
         } else {
           return 'arrow-line-high';

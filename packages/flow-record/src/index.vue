@@ -107,7 +107,7 @@
                                 </el-table-column>
                                 <el-table-column
                                         label="操作时间"
-                                        min-width="150">
+                                        min-width="120">
                                     <template slot-scope="scope">
                                         <!--<i class="el-icon-time"></i>-->
                                         <div class="date-time-item">{{ scope.row.date }}</div>
@@ -116,6 +116,7 @@
                                 </el-table-column>
                                 <el-table-column
                                         prop="process_remark"
+                                        width="150"
                                         label="备注">
                                 </el-table-column>
                             </el-table>
