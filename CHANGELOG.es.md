@@ -4,8 +4,8 @@
 
 *2018-11-21*
 
-- Revert pr #13296. Fixed clicking on Menu external causing Submenu collapsed, #13478
-- Adjust small screen (xs) media query breakpoints, #13468 (by @alekoshen712)
+- Revertido pr #13296. Arreglado que al hacer clic fuera del Menú causaba que el Submenú colapsara, #13478
+- Ajustados los media query breakpoints de las pantallas pequeñas (xs), #13468 (por @alekoshen712)
 
 ### 2.4.10
 
