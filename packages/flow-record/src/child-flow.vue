@@ -151,14 +151,56 @@
         <div class="check-items">
             <div class="flow-title">项目预览<!--@current-change="handle_check_list_current_change"--></div>
             <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-table
                             rel="singleTable"
                             highlight-current-row
                             :data="getCheckListPageOrder"
-                            @current-change="handle_check_list_current_change"
                             style="width: 100%"
                             :header-cell-style="get_row_class">
+                        <el-table-column type="expand">
+                            <template slot-scope="props">
+                                <el-table
+                                        :data="props.row.transList"
+                                        style="width: 100%;padding-left: 20px;"
+                                        size="mini"
+                                        max-height="250"
+                                        :header-cell-style="get_row_class">
+                                    <el-table-column
+                                            prop="operator"
+                                            label="操作人"
+                                            width="100">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="task_node_name"
+                                            label="操作环节"
+                                            width="100">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="next_task_name"
+                                            label="目标环节">
+                                    </el-table-column>
+                                    <el-table-column
+                                            label="流转方式">
+                                        <template slot-scope="scope">
+                                            <div :style="get_error_type_style(scope.row.process_type)">{{
+                                                scope.row.process_type_desc }}
+                                            </div>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            label="操作时间"
+                                            prop="create_time"
+                                            min-width="100">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="process_remark"
+                                            width="150"
+                                            label="备注">
+                                    </el-table-column>
+                                </el-table>
+                            </template>
+                        </el-table-column>
                         <el-table-column
                                 prop="index"
                                 label="序号"
@@ -168,9 +210,10 @@
                         </el-table-column>
                         <el-table-column
                                 label="项目名称"
-                                width="180">
+                                >
                             <el-table-column
                                     prop="ti_name"
+                                    width="250%"
                                     :render-header="check_name_render">
                             </el-table-column>
                         </el-table-column>
@@ -192,6 +235,7 @@
                                 label="检验科室">
                             <el-table-column
                                     prop="duty_section_name"
+                                    width="150%"
                                     :render-header="check_name_render">
                             </el-table-column>
                         </el-table-column>
@@ -209,61 +253,6 @@
                                 layout="total, sizes, prev, pager, next, jumper">
                         </el-pagination>
                     </div>
-                </el-col>
-                <el-col :span="12">
-                    <el-table
-                            :data="getCheckFlowRecordsPageOrder"
-                            style="width: 100%;padding-left: 20px;"
-                            :header-cell-style="get_row_class">
-                        <el-table-column
-                                prop="operator"
-                                label="操作人"
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                prop="task_node_name"
-                                label="操作环节"
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                prop="next_task_name"
-                                label="目标环节">
-                        </el-table-column>
-                        <el-table-column
-                                label="流转方式">
-                            <template slot-scope="scope">
-                                <div :style="get_error_type_style(scope.row.process_type)">{{
-                                    scope.row.process_type_desc }}
-                                </div>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                label="操作时间"
-                                min-width="150">
-                            <template slot-scope="scope">
-                                <!--<i class="el-icon-time"></i>-->
-                                <div class="date-time-item">{{ scope.row.date }}</div>
-                                <div class="date-time-item">{{ scope.row.time }}</div>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                                prop="process_remark"
-                                width="150"
-                                label="备注">
-                        </el-table-column>
-                    </el-table>
-                    <div class="block">
-                        <el-pagination
-                                @size-change="handle_cfr_size_change"
-                                @current-change="handle_cfr_current_change"
-                                :current-page="cfr_page_index"
-                                :page-sizes="[10, 15, 20, 25]"
-                                :page-size="cfr_page_size"
-                                :total="getCfrDataLength"
-                                layout="total, sizes, prev, pager, next, jumper">
-                        </el-pagination>
-                    </div>
-
                 </el-col>
             </el-row>
         </div>
@@ -540,6 +529,9 @@
 </script>
 
 <style scoped>
+    abc {
+        background: red;
+    }
     ul,
     ul li {
         margin: 0;

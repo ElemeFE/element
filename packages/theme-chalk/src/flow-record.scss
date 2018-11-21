@@ -134,6 +134,9 @@
         margin-bottom: 16px;
         border: 1px #eee solid;
         border-radius: 10px;
+        .el-table__expanded-cell {
+            padding: 5px 5px 5px 0px !important;
+        }
     }
 
     & .main-flow:hover,
@@ -148,6 +151,7 @@
         text-align: center;
         padding: 32px 0;
         font-weight: bold;
+        display: none;
     }
 
     & .flow-items-padding{
