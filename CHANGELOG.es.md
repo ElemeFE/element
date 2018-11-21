@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2.4.11
+
+*2018-11-21*
+
+- Revert pr #13296. Fixed clicking on Menu external causing Submenu collapsed, #13478
+- Adjust small screen (xs) media query breakpoints, #13468 (by @alekoshen712)
+
 ### 2.4.10
 
 *2018-11-16*
