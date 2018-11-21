@@ -272,6 +272,7 @@
         }
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
+          this.handleInput(event);
         }
       },
       handleInput(event) {
