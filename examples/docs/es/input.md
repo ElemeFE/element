@@ -704,7 +704,7 @@ Búsqueda de datos desde el servidor.
 | suffix-icon           | suffix icon class                                                                                                                                  | string                          | —                                                              | —            |
 | hide-loading          | si se debe ocultar el icono de loading en la búsqueda remota                                                                                       | boolean                         | —                                                              | false        |
 | popper-append-to-body | si añadir el desplegable al cuerpo. Si la posición del menú desplegable es incorrecta, puede intentar establecer este prop a false                 | boolean                         | -                                                              | true         |
-| validate-event        | si se debe lanzar la validación de formulario                                                                                                                 | boolean                         | -                                                              | -            |
+| validate-event        | si se debe lanzar la validación de formulario                                                                                                                 | boolean                         | -                                                   | true         |
 
 ### Autocomplete Slots
 
