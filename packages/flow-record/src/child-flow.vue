@@ -16,7 +16,10 @@
                                     </li>
                                     <li class="sample-item-list">
                                         <ul>
-                                            <li class="sample-item-list-">{{item.sample_name}}</li>
+                                            <li class="sample-item-list-">
+                                                {{item.sample_name}}
+                                                <i style="color: red">{{item.proc_st == "PROC_ZF" ? ('作废') : ''}} </i>
+                                            </li>
                                             <li class="sample-item-list-">
                                                 <span>{{item.node_name}}</span>
                                                 <span style="margin: 0 10px;">{{item.tiCount}}检项</span>

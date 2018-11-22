@@ -205,7 +205,7 @@
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="upload_cancel_handle">取 消</el-button>
-                <el-button type="primary" @click="upload_submit_handle">确 定</el-button>
+                <el-button type="primary" @click="upload_submit_handle" :disabled="loadingSubmit" :loading="loadingSubmit">确 定</el-button>
              </span>
         </el-dialog>
 
@@ -358,7 +358,8 @@
             value: 'QTWJ'
           }
         ],
-        navigatorStream: undefined
+        navigatorStream: undefined,
+        loadingSubmit: false
       };
     },
     methods: {
@@ -443,10 +444,29 @@
       upload_success(response, file, fileList) {
         this.uploaded_response.push(file);
         console.log(file);
-
+        if (!response.status) {
+          this.$message({
+            showClose: true,
+            message: '提交失败',
+            type: 'error'
+          });
+          this.$refs.upload.clearFiles();
+          let loadingTimer = setTimeout(_ => {
+            this.loadingSubmit = false;
+            clearTimeout(loadingTimer);
+          }, 1000);
+          return;
+        }
+        this.$refs.upload.clearFiles();
         this.upload_submit_post([file], this.data.prn);
       },
       upload_error(error, file, filelist) {
+        this.$refs.upload.clearFiles();
+        let loadingTimer = setTimeout(_ => {
+          this.loadingSubmit = false;
+          clearTimeout(loadingTimer);
+        }, 1000);
+        this.upload_category = 'KHWJ';
         console.log(error);
       },
       files_delete: function() {
@@ -492,6 +512,9 @@
 
       },
       upload_submit_handle: function() {
+        if (this.loadingSubmit) {
+          return;
+        }
         let choose_file_length = document.getElementsByClassName('el-upload-list')[0].children.length;
         let uploaded_business_type = this.upload_category;
         console.log(choose_file_length);
@@ -512,9 +535,8 @@
           });
           return;
         }
-
+        this.loadingSubmit = true;
         this.$refs.upload.submit();
-
       },
       upload_files: function(callback) {
         this.$refs.upload.submit();
@@ -540,6 +562,7 @@
           }, this.data), {
             emulateJSON: true
           }).then(function(response) {
+            this.loadingSubmit = false;
             let result = response.body.obj;
             if (result) {
               this.$message({
@@ -550,12 +573,13 @@
               this.upload_dialog_visible = false;
               this.$refs.child.refresh_files_data();
               this.uploaded_response = [];
-              this.upload_category = '';
+              this.upload_category = 'KHWJ';
               this.upload_remark = '';
               this.fileList = [];
 
             }
           }, function(response) {
+            this.loadingSubmit = false;
             let result = response.body.obj;
             if (result) {
               this.$message({
@@ -571,7 +595,7 @@
       upload_cancel_handle: function() {
         this.upload_dialog_visible = false;
         this.uploaded_response = [];
-        this.upload_category = '';
+        this.upload_category = 'KHWJ';
         this.upload_remark = '';
         this.fileList = [];
       },

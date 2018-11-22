@@ -370,7 +370,9 @@
       get_main_flow_records: function() {
         this.$http.post(this.data.data_interface + 'getTransListByOrder', {
           orderNo: this.data.prn,
-          JID: this.data.JID
+          JID: this.data.JID,
+          pageNo: 1,
+          pageSize: 10000
         }, {
           emulateJSON: true
         }).then(function(response) {
