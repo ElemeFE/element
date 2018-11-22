@@ -28,7 +28,7 @@
     </span>
     <el-input
       ref="input"
-      :value="currentInputValue"
+      :value="displayValue"
       :placeholder="placeholder"
       :disabled="inputNumberDisabled"
       :size="inputNumberSize"
@@ -40,6 +40,7 @@
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
       @focus="handleFocus"
+      @input="handleInput"
       @change="handleInputChange">
     </el-input>
   </div>
@@ -102,7 +103,8 @@
     },
     data() {
       return {
-        currentValue: 0
+        currentValue: 0,
+        userInput: null
       };
     },
     watch: {
@@ -121,6 +123,7 @@
           if (newVal >= this.max) newVal = this.max;
           if (newVal <= this.min) newVal = this.min;
           this.currentValue = newVal;
+          this.userInput = null;
           this.$emit('input', newVal);
         }
       }
@@ -156,7 +159,10 @@
       inputNumberDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
       },
-      currentInputValue() {
+      displayValue() {
+        if (this.userInput !== null) {
+          return this.userInput;
+        }
         const currentValue = this.currentValue;
         if (typeof currentValue === 'number' && this.precision !== undefined) {
           return currentValue.toFixed(this.precision);
@@ -220,9 +226,13 @@
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
         if (oldVal === newVal) return;
+        this.userInput = null;
         this.$emit('input', newVal);
         this.$emit('change', newVal, oldVal);
         this.currentValue = newVal;
+      },
+      handleInput(value) {
+        this.userInput = value;
       },
       handleInputChange(value) {
         const newVal = value === '' ? undefined : Number(value);
