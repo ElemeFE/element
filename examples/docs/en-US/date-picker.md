@@ -495,6 +495,7 @@ When picking a date range, you can assign the time part for start date and end d
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
 | prefix-icon | Custom prefix icon class | string | — | el-icon-date |
 | clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| validate-event | whether to trigger form validation | boolean | - | true |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
