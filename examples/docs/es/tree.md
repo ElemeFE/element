@@ -1212,7 +1212,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de nodos actualmente seleccionada. | - |
 | getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
-| getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
+| getCurrentNode    | return the highlight node's data (null if no node is highlighted)         | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
