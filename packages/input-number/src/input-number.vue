@@ -239,6 +239,7 @@
         if (!isNaN(newVal) || value === '') {
           this.setCurrentValue(newVal);
         }
+        this.userInput = null;
       },
       select() {
         this.$refs.input.select();
