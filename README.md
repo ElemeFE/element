@@ -40,7 +40,7 @@
 
 ## Install
 ```shell
-npm install element-ui-qz-qz -S
+npm install element-ui-qz -S
 ```
 
 ## Quick Start
