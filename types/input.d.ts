@@ -78,6 +78,9 @@ export declare class ElInput extends ElementUIComponent {
   /** Same as form in native input */
   form: string
 
+  /** Whether to trigger form validatio */
+  validateEvent: boolean
+
   /**
    * Focus the Input component
    */

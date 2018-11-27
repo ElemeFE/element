@@ -26,6 +26,9 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** The placeholder of Autocomplete */
   placeholder: string
 
+  /** Whether to show clear button */
+  clearable: boolean
+
   /** Whether Autocomplete is disabled */
   disabled: boolean
 

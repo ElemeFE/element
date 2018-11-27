@@ -59,7 +59,9 @@
       @change="handleStartChange"
       @focus="handleFocus"
       class="el-range-input">
-    <span class="el-range-separator">{{ rangeSeparator }}</span>
+    <slot name="range-separator">
+      <span class="el-range-separator">{{ rangeSeparator }}</span>
+    </slot>
     <input
       autocomplete="off"
       :placeholder="endPlaceholder"
@@ -384,7 +386,11 @@ export default {
       default: '-'
     },
     pickerOptions: {},
-    unlinkPanels: Boolean
+    unlinkPanels: Boolean,
+    validateEvent: {
+      type: Boolean,
+      default: true
+    }
   },
 
   components: { ElInput },
@@ -411,7 +417,9 @@ export default {
         this.hidePicker();
         this.emitChange(this.value);
         this.userInput = null;
-        this.dispatch('ElFormItem', 'el.form.blur');
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur');
+        }
         this.$emit('blur', this);
         this.blur();
       }
@@ -431,7 +439,7 @@ export default {
       }
     },
     value(val, oldVal) {
-      if (!valueEquals(val, oldVal) && !this.pickerVisible) {
+      if (!valueEquals(val, oldVal) && !this.pickerVisible && this.validateEvent) {
         this.dispatch('ElFormItem', 'el.form.change', val);
       }
     }
@@ -895,8 +903,10 @@ export default {
       // determine user real change only
       if (!valueEquals(val, this.valueOnOpen)) {
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
         this.valueOnOpen = val;
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', val);
+        }
       }
     },
 

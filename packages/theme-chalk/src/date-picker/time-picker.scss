@@ -11,6 +11,7 @@
   left: 0;
   z-index: $--index-top;
   user-select: none;
+  box-sizing: content-box;
 
   @include e(content) {
     font-size: 0;

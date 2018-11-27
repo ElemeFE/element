@@ -450,6 +450,7 @@
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 | prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
+| validate-event | 输入时是否触发表单的校验 | boolean | - | true |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
