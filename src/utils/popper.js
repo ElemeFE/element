@@ -702,6 +702,7 @@
     Popper.prototype.modifiers.preventOverflow = function(data) {
         var order = this._options.preventOverflowOrder;
         var popper = getPopperClientRect(data.offsets.popper);
+        var reference = data.offsets.reference;
 
         var check = {
             left: function() {
@@ -727,8 +728,11 @@
             },
             bottom: function() {
                 var top = popper.top;
+                var checkPopperOnTopIsFull = reference.top - popper.height > data.boundaries.top;
                 if (popper.bottom > data.boundaries.bottom) {
-                    top = Math.min(popper.top, data.boundaries.bottom - popper.height);
+                    if (checkPopperOnTopIsFull) {
+                        top = Math.min(popper.top, data.boundaries.bottom - popper.height);
+                    }
                 }
                 return { top: top };
             }
