@@ -299,5 +299,38 @@ describe('Input', () => {
         });
       });
     });
+    it('event:changeclear', done => {
+      vm = createVue({
+        template: `
+          <el-input
+            ref="input"
+            placeholder="请输入内容"
+            clearable
+            :value="input">
+          </el-input>
+        `,
+        data() {
+          return {
+            input: 'a'
+          };
+        }
+      }, true);
+
+      const spyChangeClear = sinon.spy();
+      const inputElm = vm.$el.querySelector('input');
+
+      // should be emit clear change
+      vm.$refs.input.$on('changeClear', spyChangeClear);
+      inputElm.focus();
+      vm.$nextTick(_ => {
+        expect(spyChangeClear.calledOnce).to.be.true;
+        // blur use
+        document.querySelector('body').click();
+        vm.$nextTick(_ => {
+          expect(spyChangeClear.calledTwice).to.be.false;
+          done();
+        });
+      });
+    });
   });
 });

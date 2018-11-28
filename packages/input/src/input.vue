@@ -215,6 +215,9 @@
     watch: {
       value(val, oldValue) {
         this.setCurrentValue(val);
+      },
+      showClear(val) {
+        this.$emit('changeClear', Boolean(val));
       }
     },
 
