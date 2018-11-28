@@ -1,5 +1,55 @@
 ## 更新日志
 
+### 2.4.11
+
+*2018-11-21*
+
+- 撤销 pr #13296，修复点击 Menu 外部导致 Submenu 收起的问题，#13478
+- 调整小屏幕（xs）媒体查询断点，#13468 （by @alekoshen712）
+
+### 2.4.10
+
+*2018-11-16*
+
+- 修复多次点击 Select 才显示下拉列表的问题，#13268
+- Form 禁用时不显示 Input 的 clear 图标，#13208
+- 调整 Select，Progress，Autocomplete，Tooltip，Collaspe，TimePicker 的样式，#13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Carousel 组件新增 `loop` 属性，#13217
+- Table 的 data 改变时，高亮行会继续保留，#13200
+- Table 的 header slot 可以接收参数，#13263
+- Table 的 `clearFilter` 方法支持参数，#13176
+- Table 单元格内没有内容时不再创建 Tooltip，#13152 (by @rongxingsun)
+- ColorPicker 面板的输入框内容可以正常显示了，#13278
+- 在拖拽时，ColorPicker 不再触发表单校验，#13299
+- InputNumber 新增 `select` 方法，#13286 (by @st-sloth)
+- Autocomplete 新增 `clear` 事件，#12171(by arthurdenner) #13326
+- 可以通过点击 Menu 外部来关闭 Menu，#13296
+- Form 的 `validateField` 方法可以接收参数，#13319
+- Cascader 新增 `visible-change` 事件，#13415
+- DatePicker 新增 range-separator slot， #13272 (by @milworm)
+- Tree 新增 `iconClass` 与 `currentNodeKey` 属性，#13337 #13197 (by @isnifer)
+- Progress 的 `status` 添加了 text #13198 (by @ali-master)
+- 修复 Tree 的 `defaultCheckedKeys` 导致显示的错误，#13349 (by @dive2Pro)
+
+### 2.4.9
+
+*2018-10-26*
+
+- Form 组件 clearValidate 方法参数支持字符串，#12990 （by @codinglobster）
+- Badge 新增 type 属性，#12991
+- 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
+- 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
+- Select 多选时，选项不换行，#12329 （by @akki-jat）
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
+- 修复 Select 的 size 属性不生效的问题，#13070
+- 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
+- 修复最后一个 TabNav 不能删除的问题，#13039
+- 修复 TabNav 中 label 显示不正确的问题，#13178
+- Alert 新增 title slot，#13082（by @Kingwl）
+- 修复 Table 中的 tooltip 内容不正确的问题，#13159（by @elfman）
+- 优化 Upload 文件列表删除时的动画，#12987
+- 当 InputNumber 控制按钮不显示时，调整了边距，#13052
+
 ### 2.4.8
 
 - Switch 聚焦时不显示轮廓，#12771

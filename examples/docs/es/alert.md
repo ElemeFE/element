@@ -210,7 +210,7 @@ Descripción incluye un mensaje con información más detallada.
 ### Atributos
 | Atributo    | Descripción                              | Tipo    | Valores aceptados          | Por defecto |
 | ----------- | ---------------------------------------- | ------- | -------------------------- | ----------- |
-| title       | título. Requerido                        | string  | —                          | —           |
+| title       | título                                   | string  | —                          | —           |
 | type        | tipo de componente                       | string  | success/warning/info/error | info        |
 | description | texto descriptivo. También puede ser pasado con el slot por defecto | string  | —                          | —           |
 | closable    | si se puede cerrar o no                  | boolean | —                          | true        |
@@ -218,6 +218,11 @@ Descripción incluye un mensaje con información más detallada.
 | close-text  | texto de cerrado personalizado           | string  | —                          | —           |
 | show-icon   | si un icono del tipo de alerta se debe mostrar | boolean | —                          | false       |
 
+### Slot
+
+| Name | Description |
+|------|--------|
+| title | El contenido del título de alerta. |
 
 ### Eventos
 | Nombre del evento | Descripción                           | Parámetros |

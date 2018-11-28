@@ -8,7 +8,7 @@
       class="el-select__tags"
       v-if="multiple"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px' }">
+      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
@@ -64,7 +64,7 @@
         v-model="query"
         @input="debouncedQueryChange"
         v-if="filterable"
-        :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
+        :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
     <el-input
@@ -147,7 +147,7 @@
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals } from 'element-ui/src/utils/util';
+  import { valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
   import { isKorean } from 'element-ui/src/utils/shared';
 
@@ -180,19 +180,17 @@
       },
 
       readonly() {
-        // trade-off for IE input readonly problem: https://github.com/ElemeFE/element/issues/10403
-        const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
-        return !this.filterable || this.multiple || !isIE && !this.visible;
+        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
       },
 
       showClose() {
+        let hasValue = this.multiple
+          ? Array.isArray(this.value) && this.value.length > 0
+          : this.value !== undefined && this.value !== null && this.value !== '';
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&
-          !this.multiple &&
-          this.value !== undefined &&
-          this.value !== null &&
-          this.value !== '';
+          hasValue;
         return criteria;
       },
 
@@ -377,6 +375,7 @@
           this.previousQuery = null;
           this.selectedLabel = '';
           this.inputLength = 20;
+          this.menuVisibleOnFocus = false;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
@@ -743,8 +742,9 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        this.$emit('input', '');
-        this.emitChange('');
+        const value = this.multiple ? [] : '';
+        this.$emit('input', value);
+        this.emitChange(value);
         this.visible = false;
         this.$emit('clear');
       },
@@ -853,7 +853,12 @@
 
       const reference = this.$refs.reference;
       if (reference && reference.$el) {
-        this.initialInputHeight = reference.$el.getBoundingClientRect().height;
+        const sizeMap = {
+          medium: 36,
+          small: 32,
+          mini: 28
+        };
+        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();

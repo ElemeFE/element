@@ -294,6 +294,11 @@ export default {
       }
     });
 
+    // Deprecation warning for renderHeader property
+    if (this.renderHeader) {
+      console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
+    }
+
     this.columnConfig = column;
 
     let renderCell = column.renderCell;
@@ -442,6 +447,14 @@ export default {
       columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
     } else {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
+    }
+
+    if (this.$scopedSlots.header) {
+      if (this.type === 'selection') {
+        console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set scoped-slot header.');
+      } else {
+        this.columnConfig.renderHeader = (h, scope) => this.$scopedSlots.header(scope);
+      }
     }
 
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);

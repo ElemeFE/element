@@ -1,5 +1,55 @@
 ## Changelog
 
+### 2.4.11
+
+*2018-11-21*
+
+- Revert pr #13296. Fixed clicking on Menu external causing Submenu collapsed, #13478
+- Adjust small screen (xs) media query breakpoints, #13468 (by @alekoshen712)
+
+### 2.4.10
+
+*2018-11-16*
+
+- Fixed multiple clicks on Select to display the drop-down list, #13268
+- The clear icon for input is not displayed when Form is disabled, #13208
+- Adjust the style of Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Carousel component added `loop` attribute, #13217
+- When the data of Table changes, the highlighted line will remain, #13200
+- Table header scoped slot can receive parameters, #13263
+- Table's `clearFilter` method supports arguments, #13176
+- Tooltip is no longer created when there is no content in the Table cell, #13152 (by @rongxingsun)
+- The input box contents of the ColorPicker panel can be displayed correctly, #13278
+- ColorPicker no longer triggers form validation when dragging, #13299
+- InputNumber added `select `method, #13286 (by @st-sloth)
+- Autocomplete added `clear` event, #12171(by arthurdenner) #13326
+- You can close Menu by clicking on Menu outside, #13296
+- Form's `validateField` method can receive arguments, #13319
+- Cascader added `visible-change` event, #13415
+- DatePicker added range-separator slot, #13272 (by @milworm)
+- Tree adds `iconClass` and `currentNodeKey` properties, #13337 #13197 (by @isnifer)
+- Progress's` status` added text #13198 (by @ali-master)
+- Fixing tree's `defaultCheckedKeys` caused an error, #13349 (by @dive2Pro)
+
+### 2.4.9
+
+*2018-10-26*
+
+- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
+- Added type attribute for Badge, #12991
+- Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
+- Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
+- Select option does not wrap when space is enough, #12329 (by @akki-jat)
+- When dropdown list of Select is expanded, the arrow icon will also display correctly, #12353 (by @firesh)
+- Fixed that the size attribute of Select does not work, #13070
+- Select multiple values can be cleared, #13049 (by @ZSkycat)
+- Fixed the last TabNav unable be deleted, #13039
+- Fixed that TabNav label is not displayed correctly, #13178
+- Added title slot for Alert, #13082 (by @Kingwl)
+- Fixed an issue where the tooltip content in Table was incorrect, #13159 (by @elfman)
+- Optimize the animation of Upload when file is deleted, #12987
+- Adjusted style of InputNumber when control button is not displayed, #13052
+
 ### 2.4.8
 
 - Not displaying outline when Switch is focused, #12771

@@ -249,7 +249,6 @@ describe('Pagination', () => {
     const input = vm.inputer;
     const changeValue = (value) => {
       input.$emit('input', value);
-      input.setCurrentValue(value);
       input.$emit('change', value);
     };
 

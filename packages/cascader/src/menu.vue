@@ -285,7 +285,7 @@
               id = { itemId }
               aria-owns = { !item.children ? null : ownsId }
             >
-              {item.label}
+              <span>{item.label}</span>
             </li>
           );
         });

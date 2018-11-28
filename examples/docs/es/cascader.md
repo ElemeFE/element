@@ -1702,4 +1702,5 @@ Buscar y seleccionar opciones con una palabra clave.
 | active-item-change | se dispara cuando la opcion activa del parent cambia, sólo funciona cuando `change-on-select` es `false`. | array de opciones activas |
 | blur               | se dispara cuando Cascader pierde el foco                    | (event: Event)            |
 | focus              | se dispara cuando Cascader obtiene el foco                   | (event: Event)            |
+| visible-change     | se dispara cuando el menu desplegable aparece o desaparece   | true cuando aparece, y false en otro caso |
 

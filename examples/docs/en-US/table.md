@@ -185,8 +185,26 @@
           amount2: '4.1',
           amount3: 15
         }],
+        tableData7: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-01',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles',
+        }],
         currentRow: null,
-        multipleSelection: []
+        multipleSelection: [],
+        search: '',
       };
     },
 
@@ -215,6 +233,13 @@
         });
 
         return sums;
+      },
+
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
       },
 
       setCurrent(row) {
@@ -1337,7 +1362,10 @@ Filter the table to find desired data.
 :::demo Set attribute `filters` and `filter-method` in `el-table-column` makes this column filterable. `filters` is an array, and `filter-method` is a function deciding which rows are displayed. It has three parameters: `value`, `row` and `column`.
 ```html
 <template>
+  <el-button @click="resetDateFilter">reset date filter</el-button>
+  <el-button @click="clearFilter">reset all filters</el-button>
   <el-table
+    ref="filterTable"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -1345,6 +1373,7 @@ Filter the table to find desired data.
       label="Date"
       sortable
       width="180"
+      column-key="date"
       :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
       :filter-method="filterHandler"
     >
@@ -1403,6 +1432,12 @@ Filter the table to find desired data.
       }
     },
     methods: {
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
+      },
       formatter(row, column) {
         return row.address;
       },
@@ -1495,6 +1530,81 @@ Customize table column so it can be integrated with other components.
         console.log(index, row);
       }
     }
+  }
+</script>
+```
+:::
+
+### Table with custom header
+
+Customize table header so it can be even more customized.
+:::demo You can customize how the header looks by header [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+```html
+<template>
+  <el-table
+    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%">
+    <el-table-column
+      label="Date"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="Name"
+      prop="name">
+    </el-table-column>
+    <el-table-column
+      align="right">
+      <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"/>
+      </template>
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles'
+        }],
+        search: '',
+      }
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    },
   }
 </script>
 ```
@@ -2007,7 +2117,7 @@ You can customize row index in `type=index` columns.
 | toggleRowExpansion | used in expandable Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
-| clearFilter | clear filter | — |
+| clearFilter | clear filters of the columns whose `columnKey` are passed in. If no params, clear all filters | columnKeys |
 | doLayout | refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
 | sort | sort Table manually. Property `prop` is used to set sort column, property `order` is used to set sort order | prop: string, order: string |
 
@@ -2051,3 +2161,4 @@ You can customize row index in `type=index` columns.
 | Name | Description |
 |------|--------|
 | — | Custom content for table columns. The scope parameter is { row, column, $index } |
+| header | Custom content for table header. The scope parameter is { column, $index } |

@@ -526,3 +526,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | ------ | -------------------------- | ----------- |
 | focus  | coloca el foco en el input | —           |
 
+### Slots
+| Name             | Description                     |
+|------------------|-------------------------------- |
+| range-separator  | costume range separator content |
