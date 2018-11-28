@@ -211,9 +211,6 @@
     },
 
     watch: {
-      value(val, oldValue) {
-        this.setCurrentValue(val);
-      },
       value(val) {
         this.$nextTick(this.resizeTextarea);
         if (this.validateEvent) {
