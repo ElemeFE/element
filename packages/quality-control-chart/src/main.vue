@@ -1,22 +1,35 @@
 <template>
     <div class='el-quality-control-chart' :v-loading='!arrData.length && !lineBase'>
         <div class='block'>
-            <span class='demonstration'>选择日期：</span>
-            <el-date-picker
+            <span class='demonstration'>选择年份：</span>
+            <el-select v-model="timevalue" placeholder="请选择年份" @change='getChangeTime'> 
+              <el-option label="2018年" value="2018"></el-option>
+              <el-option label="2019年" value="2019"></el-option>
+              <el-option label="2020年" value="2020"></el-option>
+              <el-option label="2021年" value="2021"></el-option>
+              <el-option label="2022年" value="2022"></el-option>
+              <el-option label="2023年" value="2023"></el-option>
+              <el-option label="2024年" value="2024"></el-option>
+              <el-option label="2025年" value="2025"></el-option>
+              <el-option label="2026年" value="2026"></el-option>
+              <el-option label="2027年" value="2027"></el-option>
+            </el-select>
+            <!-- <el-date-picker
                     unlink-panels
                     v-model='timevalue'
                     type='daterange'
                     range-separator='至' start-placeholder='开始日期' end-placeholder='结束日期'
                     @change='getChangeTime'>
-            </el-date-picker>
+            </el-date-picker> -->
         </div>
 
-        <div v-show='!arrData.length || !lineBase' style='text-align: center;'>
+        <div v-show='having_data'>
+            <!-- <div id='myEchartsContainer' :style='{"width":echartsWidth + "px", "height":echartsHeight + "px"}'></div> -->
+            <div id='myEchartsContainer' style="width:900px;height:500px"></div>
+        </div>
+
+        <div v-show='!having_data' style='text-align: center;'>
             <img src='../img/nodata.jpg'/>
-        </div>
-
-        <div v-show='arrData.length && lineBase'>
-            <div id='myEchartsContainer' :style='{width:echartsWidth + "px", height:echartsHeight + "px"}'></div>
         </div>
     </div>
 </template>
@@ -60,7 +73,6 @@
         //  基准线
         lineBase: {},
         //  测量数据
-        arrTime: [],
         arrData: [],
         echartsWidth: 0,
         echartsHeight: 0
@@ -68,10 +80,10 @@
     },
 
     mounted() {
-      let _this = this;
       this.echartsWidth = this.$parent.$el.offsetWidth;
       this.echartsHeight = this.$parent.$el.offsetHeight;
-      setTimeout(function() {
+      let _this = this;
+      setTimeout(() => {
         _this.getEcharts();
       });
     },
@@ -100,7 +112,7 @@
       },
 
       // 获取基准线
-      getLineBase() {
+      getLineBase(e) {
         this.lineBase = {};
         this.$http
           .post(
@@ -117,8 +129,10 @@
                 this.lineBase = result.body.list[0];
               } else {
                 this.$message.error('基准线数据为空');
+                this.having_data = false;
               }
               console.log('基线', this.lineBase);
+              this.getEchartsData(e);
             },
             result => {
               this.$message.error('基准线获取失败');
@@ -128,8 +142,7 @@
       },
 
       // 获取测量数据
-      getEchartsData() {
-        this.arrTime = [];
+      getEchartsData(e) {
         this.arrData = [];
         this.$http
           .post(
@@ -137,10 +150,11 @@
             Object.assign(
               {
                 btnCode: this.data.getEchartsDataParamBtnCode,
-                begintime: this.timevalue
-                  ? this.dateFormat(this.timevalue[0])
-                  : '', // 筛选起时间
-                endtime: this.timevalue ? this.dateFormat(this.timevalue[1]) : '' // 筛选止时间
+                year: this.timevalue ? this.timevalue : ''// 筛选起时间
+                // begintime: this.timevalue
+                //   ? this.dateFormat(this.timevalue[0])
+                //   : '', // 筛选起时间
+                // endtime: this.timevalue ? this.dateFormat(this.timevalue[1]) : '' // 筛选止时间
               },
               this.data
             ),
@@ -149,16 +163,30 @@
           .then(
             result => {
               if (result.body.list && result.body.list.length) {
-                // 数据按时间排序
-                result.body.list.sort(sortDate);
-                // 获取x轴数据和测量数据
-                for (var i = 0; i < result.body.list.length; i++) {
-                  this.arrTime.push(result.body.list[i].qcs_date.substring(0, 10));
-                  this.arrData.push(result.body.list[i].qcs_test_value);
+                // 获取测量数据
+                var frequency = result.body.list.length > this.lineBase.qcs_frequency ? this.lineBase.qcs_frequency : result.body.list.length;
+                for (var i = 0; i < frequency; i++) {
+                  this.arrData[i] = [];
+                  this.arrData[i].push(result.body.list[i].dis_or);
+                  // 判断是否超出行动线
+                  if (Number(result.body.list[i].qcs_test_value) > Number(this.lineBase.retrospective_line_right)) {
+                    result.body.list[i].qcs_test_value = this.lineBase.retrospective_line_right;
+                  }
+                  if (Number(result.body.list[i].qcs_test_value) < Number(this.lineBase.retrospective_line_left)) {
+                    result.body.list[i].qcs_test_value = this.lineBase.retrospective_line_left;
+                  }
+                  this.arrData[i].push(result.body.list[i].qcs_test_value);
+                  this.arrData[i].push(result.body.list[i].tester);
+                  this.arrData[i].push(result.body.list[i].qcs_date.substring(0, 10));
                 }
-                console.log('封装后', this.arrTime, this.arrData);
+                this.having_data = true;
+                e.setOption(
+                  this.industryTableView(this.lineBase, this.arrData),
+                  true
+                );
               } else {
                 this.$message.error('测量数据为空');
+                this.having_data = false;
               }
             },
             result => {
@@ -166,20 +194,22 @@
               this.having_data = false;
             }
           );
-        // 数据按时间排序function
-        function sortDate(a, b) {
-          return new Date(a.qcs_date).getTime() - new Date(b.qcs_date).getTime();
-        }
       },
 
       // 图表的配置项
-      industryTableView(lineData, xAxisData, seriesData) {
+      industryTableView(lineData, seriesData) {
         var option = {
           //  title: {
-          //      text: 'Step Line'
+          //      text: '111'+"\n"+'222'
           //  },
           tooltip: {
-            trigger: 'axis'
+            // trigger: 'axios',
+            formatter: function(params) {
+              return '第' + params.data[0] + '次测量' +
+              '<br/>' + '测量值: ' + params.data[1] +
+              '<br/>' + '测量人: ' + params.data[2] +
+              '<br/>' + '测量日期: ' + params.data[3];
+            }
           },
           //  legend: {
           //      data:['测量值']
@@ -191,10 +221,14 @@
             containLabel: true
           },
           xAxis: {
-            type: 'category',
-            data: xAxisData,
+            type: 'value',
+            max: lineData.qcs_frequency,
+            min: 0,
+            maxInterval: 1,
+            splitLine: {
+              show: false // 去除垂直网格线
+            },
             axisLabel: {
-              rotate: xAxisData.length > 8 ? -45 : 0,
               interval: 0 // x轴刻度过多时不隐藏
             },
             axisTick: {
@@ -211,7 +245,6 @@
               },
               max: lineData.statistic_end_value,
               min: lineData.statistic_begin_value,
-              splitNumber: (lineData.statistic_end_value - lineData.statistic_begin_value) * 100, // 控制间隔数
               offset: 1,
               axisLabel: {
                 show: false
@@ -226,9 +259,8 @@
           ],
           series: [
             {
-              name: '测量值',
               type: 'line',
-              //  symbolSize:'17',
+              symbolSize: '10',
               symbol: 'circle',
               data: seriesData,
 
@@ -326,7 +358,7 @@
 
               markLine: {
                 // 基准线
-                silent: false,
+                silent: true,
                 data: [
                   {
                     yAxis: lineData.maintenanc_line_left,
@@ -468,14 +500,7 @@
       getEcharts() {
         //  页面初始化时渲染图表
         var myChart = echarts.init(document.getElementById('myEchartsContainer'));
-        this.getLineBase();
-        this.getEchartsData();
-        setTimeout(()=>{
-          myChart.setOption(
-            this.industryTableView(this.lineBase, this.arrTime, this.arrData),
-            true
-          );
-        }, 300);
+        this.getLineBase(myChart);
       }
     }
   };
