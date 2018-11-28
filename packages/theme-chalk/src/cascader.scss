@@ -129,6 +129,11 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
+
+    span {
+      padding-right: 10px;
+    }
+
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';
