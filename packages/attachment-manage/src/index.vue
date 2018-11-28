@@ -120,28 +120,29 @@
 
                     <tr>
                         <td>上传附件</td>
-                        <td width="350" style="overflow: hidden;display: inline-block;">
-                            <el-button size="small" type="primary" @click="before_upload_validation">选择文件</el-button>
-                            <el-upload
-                                    class="upload-demo"
-                                    :action="data.uploadUrl"
-                                    :on-preview="handlePreview"
-                                    :on-remove="handleRemove"
-                                    :before-remove="beforeRemove"
-                                    :before-upload="beforeUpload"
-                                    :on-success="upload_success"
-                                    :on-error="upload_error"
-                                    :data="{bus_type:upload_category, JID:data.JID}"
-                                    :accept="set_file_type"
-                                    multiple
-                                    :limit="3"
-                                    :on-exceed="handleExceed"
-                                    :file-list="fileList"
-                                    ref="upload"
-                                    :auto-upload="false">
-                                <el-button size="small" type="primary" id="upload">点击上传</el-button>
-                                <div slot="tip" class="el-upload__tip">支持格式xsl,pdf,doc,png,jpg文件; 且不超过20M</div>
-                            </el-upload>
+                        <td >
+                            <div class="upload-box">
+                                <el-button size="small" type="primary" @click="before_upload_validation">选择文件</el-button>
+                                <el-upload
+                                        :action="data.uploadUrl"
+                                        :on-preview="handlePreview"
+                                        :on-remove="handleRemove"
+                                        :before-remove="beforeRemove"
+                                        :before-upload="beforeUpload"
+                                        :on-success="upload_success"
+                                        :on-error="upload_error"
+                                        :data="{bus_type:upload_category, JID:data.JID}"
+                                        :accept="set_file_type"
+                                        multiple
+                                        :limit="3"
+                                        :on-exceed="handleExceed"
+                                        :file-list="fileList"
+                                        ref="upload"
+                                        :auto-upload="false">
+                                    <el-button size="small" type="primary" id="upload">点击上传</el-button>
+                                    <div slot="tip" class="el-upload__tip">支持格式xsl,pdf,doc,png,jpg文件; 且不超过20M</div>
+                                </el-upload>
+                            </div>
                         </td>
                     </tr>
                     <!--<tr>

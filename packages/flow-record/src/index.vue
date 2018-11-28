@@ -521,6 +521,9 @@
         }
       },
       change_sample_list: function(item) {
+        if (item.oth_id === '-1' || item.oth_id === 'ut_60' || item.oth_id === 'ut_50' || item.oth_id === 'ut_40') {
+          return;
+        }
         // console.log(item);
         if ((item.type === 'flow' && item.date !== '----') ||
           (item.type === 'flow' && item.thisNode)) {

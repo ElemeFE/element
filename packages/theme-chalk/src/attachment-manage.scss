@@ -32,6 +32,12 @@
         margin-bottom: 20px !important;
         display: inline-block;
     }
+    & .upload-box {
+        ul{
+            display: block;
+            width:350px;
+        }
+    }
 
     & ul,
     & ul li{

@@ -188,7 +188,7 @@
         this.modify_dialog = true;
       },
       cancel: function() {
-        this.$parent.navigatorStream.getTracks()[0].stop();
+        this.$parent.navigatorStream && this.$parent.navigatorStream.getTracks() && this.$parent.navigatorStream.getTracks()[0] && this.$parent.navigatorStream.getTracks()[0].stop();
         this.$parent.current_child_component = 'attachment-view';
       },
       delPicture: function(index) {
