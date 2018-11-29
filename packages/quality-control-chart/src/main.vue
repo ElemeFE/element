@@ -2,7 +2,7 @@
     <div class='el-quality-control-chart' :v-loading='!arrData.length && !lineBase'>
         <div class='block'>
             <span class='demonstration'>选择年份：</span>
-            <el-select v-model="timevalue" placeholder="请选择年份" @change='getChangeTime'> 
+            <el-select style="width:280px;display: inline-block" v-model="timevalue" placeholder="请选择年份" @change='getChangeTime'>
               <el-option label="2018年" value="2018"></el-option>
               <el-option label="2019年" value="2019"></el-option>
               <el-option label="2020年" value="2020"></el-option>
@@ -25,7 +25,7 @@
 
         <div v-show='having_data'>
             <!-- <div id='myEchartsContainer' :style='{"width":echartsWidth + "px", "height":echartsHeight + "px"}'></div> -->
-            <div id='myEchartsContainer' style="width:900px;height:500px"></div>
+            <div id='myEchartsContainer' style="width:1100px;height:500px"></div>
         </div>
 
         <div v-show='!having_data' style='text-align: center;'>
@@ -68,7 +68,7 @@
     },
     data: function() {
       return {
-        timevalue: '',
+        timevalue: (new Date().getYear() + 1900) + '',
         having_data: false,
         //  基准线
         lineBase: {},

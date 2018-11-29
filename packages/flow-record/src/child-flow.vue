@@ -213,34 +213,22 @@
                         </el-table-column>
                         <el-table-column
                                 label="项目名称"
+                                prop="ti_name"
+                                width="250%"
                                 >
-                            <el-table-column
-                                    prop="ti_name"
-                                    width="250%"
-                                    :render-header="check_name_render">
-                            </el-table-column>
                         </el-table-column>
                         <el-table-column
+                                prop="node_name"
                                 label="项目进度">
-                            <el-table-column
-                                    prop="node_name"
-                                    :render-header="check_name_render">
-                            </el-table-column>
                         </el-table-column>
                         <el-table-column
+                                prop="operator"
                                 label="检验人">
-                            <el-table-column
-                                    prop="operator"
-                                    :render-header="check_name_render">
-                            </el-table-column>
                         </el-table-column>
                         <el-table-column
+                                prop="duty_section_name"
+                                width="150%"
                                 label="检验科室">
-                            <el-table-column
-                                    prop="duty_section_name"
-                                    width="150%"
-                                    :render-header="check_name_render">
-                            </el-table-column>
                         </el-table-column>
                     </el-table>
                     <!--<a href="#" @click="clearData">claear data</a>-->
