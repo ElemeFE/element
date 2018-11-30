@@ -443,23 +443,28 @@
 
       },
       upload_success(response, file, fileList) {
-        this.uploaded_response.push(file);
-        console.log(file);
-        if (!response.status) {
-          this.$message({
-            showClose: true,
-            message: '提交失败',
-            type: 'error'
-          });
-          this.$refs.upload.clearFiles();
-          let loadingTimer = setTimeout(_ => {
-            this.loadingSubmit = false;
-            clearTimeout(loadingTimer);
-          }, 1000);
-          return;
-        }
+        this.uploaded_response = [...this.uploaded_response, ...fileList];
+        console.log(fileList);
+        let successItem = [];
+        fileList.forEach((item) => {
+          if (!item.response.status) {
+            this.$message({
+              showClose: true,
+              message: item.name + '提交失败',
+              type: 'error'
+            });
+            this.$refs.upload.clearFiles();
+            let loadingTimer = setTimeout(_ => {
+              this.loadingSubmit = false;
+              clearTimeout(loadingTimer);
+            }, 1000);
+            return;
+          } else {
+            successItem.push(item);
+          }
+        });
         this.$refs.upload.clearFiles();
-        this.upload_submit_post([file], this.data.prn);
+        this.upload_submit_post(successItem, this.data.prn);
       },
       upload_error(error, file, filelist) {
         this.$refs.upload.clearFiles();
