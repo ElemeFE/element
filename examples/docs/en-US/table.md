@@ -2130,7 +2130,7 @@ You can customize row index in `type=index` columns.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
-| index | customize indices for each row, works on columns with `type=index` | string, Function(index) | - | - |
+| index | customize indices for each row, works on columns with `type=index` | number, Function(index) | - | - |
 | label | column label | string | — | — |
 | column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
