@@ -128,14 +128,13 @@
               if (result.body.list && result.body.list.length) {
                 this.lineBase = result.body.list[0];
               } else {
-                this.$message.error('基准线数据为空');
                 this.having_data = false;
+                this.$message.error(result.data.error[0]);
               }
-              console.log('基线', this.lineBase);
               this.getEchartsData(e);
             },
             result => {
-              this.$message.error('基准线获取失败');
+              this.$message.error('基线加载错误');
               this.having_data = false;
             }
           );
@@ -164,20 +163,22 @@
             result => {
               if (result.body.list && result.body.list.length) {
                 // 获取测量数据
-                var frequency = result.body.list.length > this.lineBase.qcs_frequency ? this.lineBase.qcs_frequency : result.body.list.length;
-                for (var i = 0; i < frequency; i++) {
+                for (var i = 0; i < result.body.list.length; i++) {
                   this.arrData[i] = [];
                   this.arrData[i].push(result.body.list[i].dis_or);
                   // 判断是否超出行动线
+                  var tipTest_value = result.body.list[i].qcs_test_value;
                   if (Number(result.body.list[i].qcs_test_value) > Number(this.lineBase.retrospective_line_right)) {
-                    result.body.list[i].qcs_test_value = this.lineBase.retrospective_line_right;
-                  }
+                    result.body.list[i].qcs_test_value = (Number(this.lineBase.statistic_end_value) - Number(this.lineBase.retrospective_line_right)) / 2 + Number(this.lineBase.retrospective_line_right);
+                  };
                   if (Number(result.body.list[i].qcs_test_value) < Number(this.lineBase.retrospective_line_left)) {
-                    result.body.list[i].qcs_test_value = this.lineBase.retrospective_line_left;
-                  }
+                    result.body.list[i].qcs_test_value = (Number(this.lineBase.retrospective_line_left) - Number(this.lineBase.statistic_begin_value)) / 2 + Number(this.lineBase.statistic_begin_value);
+                  };
+                  result.body.list[i].tipTest_value = tipTest_value;
                   this.arrData[i].push(result.body.list[i].qcs_test_value);
                   this.arrData[i].push(result.body.list[i].tester);
                   this.arrData[i].push(result.body.list[i].qcs_date.substring(0, 10));
+                  this.arrData[i].push(result.body.list[i].tipTest_value);
                 }
                 this.having_data = true;
                 e.setOption(
@@ -185,7 +186,6 @@
                   true
                 );
               } else {
-                this.$message.error('测量数据为空');
                 this.having_data = false;
               }
             },
@@ -199,16 +199,17 @@
       // 图表的配置项
       industryTableView(lineData, seriesData) {
         var option = {
-          //  title: {
-          //      text: '111'+"\n"+'222'
-          //  },
+          // 换行"\n"
+          title: {
+            text: '质控样编号: ' + lineData.qcs_no + '   质控样名称: ' + lineData.qcs_name + '   质控样型号: ' + lineData.qcs_model + '   检验项目: ' + lineData.test_item
+          },
           tooltip: {
             // trigger: 'axios',
             formatter: function(params) {
               return '第' + params.data[0] + '次测量' +
-              '<br/>' + '测量值: ' + params.data[1] +
-              '<br/>' + '测量人: ' + params.data[2] +
-              '<br/>' + '测量日期: ' + params.data[3];
+              '<br/>' + '实际测试结果: ' + params.data[4] +
+              '<br/>' + '核查人: ' + params.data[2] +
+              '<br/>' + '核查日期: ' + params.data[3];
             }
           },
           //  legend: {
@@ -222,7 +223,7 @@
           },
           xAxis: {
             type: 'value',
-            max: lineData.qcs_frequency,
+            max: seriesData[0].length,
             min: 0,
             maxInterval: 1,
             splitLine: {
@@ -237,10 +238,11 @@
           },
           yAxis: [
             {
+              name: '单位: ' + lineData.unit,
               type: 'value',
               axisLine: {
                 lineStyle: {
-                  opacity: '1'
+                  opacity: '0.7'
                 }
               },
               max: lineData.statistic_end_value,
@@ -277,7 +279,8 @@
                       name: '禁用区',
                       yAxis: lineData.retrospective_line_right,
                       label: {
-                        color: '#f00'
+                        color: '#f00',
+                        fontSize: 15
                       },
                       itemStyle: {
                         color: '#FFFAFA'
@@ -292,7 +295,8 @@
                       name: '维修区',
                       yAxis: lineData.maintenanc_line_right,
                       label: {
-                        color: '#FE7F2F'
+                        color: '#FE7F2F',
+                        fontSize: 15
                       },
                       itemStyle: {
                         color: '#FFFFF0'
@@ -327,7 +331,8 @@
                       yAxis: lineData.retrospective_line_left,
                       label: {
                         // 文字颜色
-                        color: '#FE7F2F'
+                        color: '#FE7F2F',
+                        fontSize: 15
                       },
                       itemStyle: {
                         // 背景色
@@ -343,7 +348,8 @@
                       name: '禁用区',
                       yAxis: lineData.statistic_begin_value,
                       label: {
-                        color: '#f00'
+                        color: '#f00',
+                        fontSize: 15
                       },
                       itemStyle: {
                         color: '#FFFAFA'
