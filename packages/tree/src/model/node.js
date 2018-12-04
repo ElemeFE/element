@@ -405,8 +405,8 @@ export default class Node {
           handleDescendants();
           reInitChecked(this);
         }, {
-            checked: value !== false
-          });
+          checked: value !== false
+        });
         return;
       } else {
         handleDescendants();
