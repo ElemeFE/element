@@ -101,10 +101,6 @@ export default class TreeStore {
       node.close();
     }
   }
-  
-  expand(node, callback, expandParent) {
-    node.expand(callback, expandParent);
-  }
 
   expand(node, callback, expandParent) {
     node.expand(callback, expandParent);

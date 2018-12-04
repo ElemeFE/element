@@ -260,10 +260,6 @@
       close(node) {
         this.store.close(node);
       },
-      
-      expand(node, callback, expandParent) {
-        this.store.expand(node, callback, expandParent);
-      },
 
       expand(node, callback, expandParent) {
         this.store.expand(node, callback, expandParent);
