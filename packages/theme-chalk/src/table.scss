@@ -131,7 +131,9 @@
 
     &.is-hidden {
       > * {
-        visibility: hidden;
+          // visibility: hidden;
+          pointer-events:none;
+          opacity: 0;
       }
     }
   }
