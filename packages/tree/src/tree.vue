@@ -261,10 +261,6 @@
         this.store.close(node);
       },
 
-      expand(node, callback, expandParent) {
-        this.store.expand(node, callback, expandParent);
-      },
-
       append(data, parentNode, callback) {
         this.store.append(data, parentNode, callback);
       },
