@@ -94,6 +94,7 @@
       },
       defaultCheckedKeys: Array,
       defaultExpandedKeys: Array,
+      currentNodeKey: [String, Number],
       renderContent: Function,
       showCheckbox: {
         type: Boolean,
@@ -110,7 +111,6 @@
           return {
             children: 'children',
             label: 'label',
-            icon: 'icon',
             disabled: 'disabled'
           };
         }
@@ -126,7 +126,8 @@
       indent: {
         type: Number,
         default: 18
-      }
+      },
+      iconClass: String
     },
 
     computed: {

@@ -17,27 +17,27 @@
     .filter-tree {
       margin-top: 20px;
     }
-    
+
     .custom-tree-container {
       display: flex;
       margin: -24px;
     }
-    
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-      
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-      
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-    
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -274,7 +274,7 @@
         if (node.data.name === 'region1') {
           hasChild = true;
         } else if (node.data.name === 'region2') {
-          hasChild = false;          
+          hasChild = false;
         } else {
           hasChild = Math.random() > 0.5;
         }
@@ -1200,9 +1200,11 @@
 | show-checkbox         | 节点是否可被选择                                   | boolean                     | —    | false |
 | check-strictly        | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false   | boolean                     | —    | false |
 | default-checked-keys  | 默认勾选的节点的 key 的数组                        | array                       | —    | —     |
+| current-node-key      | 当前选中的节点                                   | string, number               | —    | —     |
 | filter-node-method    | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | —    | —     |
 | accordion             | 是否每次只打开一个同级树节点展开                   | boolean                     | —    | false |
 | indent                | 相邻级节点间的水平缩进，单位为像素                 | number                     | —    | 16 |
+| icon-class            | 自定义树节点的图标                              |  string                     | -    | -     |
 | lazy                  | 是否懒加载子节点，需与 load 方法结合使用           | boolean                     | —    | false |
 | draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
 | allow-drag            | 判断节点能否被拖拽                  | Function(node)  | —  | —  |

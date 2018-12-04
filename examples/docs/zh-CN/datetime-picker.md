@@ -325,3 +325,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | focus | 使 input 获取焦点 | — |
+
+### Slots
+| Name    | 说明         |
+|---------|-------------|
+| range-separator  | 自定义分隔符 |

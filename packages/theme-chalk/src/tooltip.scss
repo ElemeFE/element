@@ -13,6 +13,7 @@
     font-size: $--tooltip-font-size;
     line-height: 1.2;
     min-width: 10px;
+    word-wrap: break-word;
 
     .popper__arrow,
     .popper__arrow::after {

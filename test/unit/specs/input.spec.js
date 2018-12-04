@@ -207,6 +207,42 @@ describe('Input', () => {
     }, 20);
   });
 
+  it('validateEvent', done => {
+    const spy = sinon.spy();
+    vm = createVue({
+      template: `
+        <el-form :model="model" :rules="rules">
+          <el-form-item prop="input">
+            <el-input v-model="model.input" :validate-event="false">
+            </el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        const validator = (rule, value, callback) => {
+          spy();
+          callback();
+        };
+        return {
+          model: {
+            input: ''
+          },
+          rules: {
+            input: [
+              { validator }
+            ]
+          }
+        };
+      }
+    }, true);
+
+    vm.model.input = '123';
+    vm.$nextTick(() => {
+      expect(spy.called).to.be.false;
+      done();
+    });
+  });
+
   describe('Input Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({
@@ -297,6 +333,32 @@ describe('Input', () => {
           expect(spyClear.calledOnce).to.be.true;
           done();
         });
+      });
+    });
+  });
+
+  describe('Input Methods', () => {
+    it('method:select', done => {
+      const testContent = 'test';
+
+      vm = createVue({
+        template: `
+          <el-input
+            ref="inputComp"
+            value="${testContent}"
+          />
+        `
+      }, true);
+
+      expect(vm.$refs.inputComp.$refs.input.selectionStart).to.equal(testContent.length);
+      expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
+
+      vm.$refs.inputComp.select();
+
+      vm.$nextTick(_ => {
+        expect(vm.$refs.inputComp.$refs.input.selectionStart).to.equal(0);
+        expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
+        done();
       });
     });
   });
