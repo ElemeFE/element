@@ -10,14 +10,15 @@
         <div class="el-time-range-picker__cell">
           <div class="el-time-range-picker__header">{{ t('el.datepicker.startTime') }}</div>
           <div
-            :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
+            :class="{ columns, 'is-arrow': arrowControl }"
             class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
-              :show-seconds="showSeconds"
-              :am-pm-mode="amPmMode"
+              :mapping="minMapping"
+              :steps="parsedSteps"
               @change="handleMinChange"
               :arrow-control="arrowControl"
+              :selectable-range="minSelectableRange"
               @select-range="setMinSelectionRange"
               :date="minDate">
             </time-spinner>
@@ -26,14 +27,15 @@
         <div class="el-time-range-picker__cell">
           <div class="el-time-range-picker__header">{{ t('el.datepicker.endTime') }}</div>
           <div
-            :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
+            :class="{ columns, 'is-arrow': arrowControl }"
             class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
-              :show-seconds="showSeconds"
-              :am-pm-mode="amPmMode"
+              :mapping="maxMapping"
+              :steps="parsedSteps"
               @change="handleMaxChange"
               :arrow-control="arrowControl"
+              :selectable-range="maxSelectableRange"
               @select-range="setMaxSelectionRange"
               :date="maxDate">
             </time-spinner>
@@ -59,28 +61,12 @@
   import {
     parseDate,
     limitTimeRange,
-    modifyDate,
-    clearMilliseconds,
-    timeWithinRange
+    transformTime,
+    timeWithinRange,
+    getTimeMapping
   } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
-
-  const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
-  const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
-
-  const minTimeOfDay = function(date) {
-    return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate());
-  };
-  
-  const maxTimeOfDay = function(date) {
-    return modifyDate(MAX_TIME, date.getFullYear(), date.getMonth(), date.getDate());
-  };
-
-  // increase time by amount of milliseconds, but within the range of day
-  const advanceTime = function(date, amount) {
-    return new Date(Math.min(date.getTime() + amount, maxTimeOfDay(date).getTime()));
-  };
 
   export default {
     mixins: [Locale],
@@ -88,12 +74,9 @@
     components: { TimeSpinner },
 
     computed: {
-      showSeconds() {
-        return (this.format || '').indexOf('ss') !== -1;
-      },
-
       offset() {
-        return this.showSeconds ? 11 : 8;
+        let order = this.minMapping.order;
+        return this.minMapping[order[order.length - 1]][1] + 3;
       },
 
       spinner() {
@@ -103,10 +86,31 @@
       btnDisabled() {
         return this.minDate.getTime() > this.maxDate.getTime();
       },
-      amPmMode() {
-        if ((this.format || '').indexOf('A') !== -1) return 'A';
-        if ((this.format || '').indexOf('a') !== -1) return 'a';
-        return '';
+      MIN_TIME() {
+        return limitTimeRange(parseDate('00:00', 'HH:mm'), this.selectableRange, this.format);
+      },
+      MAX_TIME() {
+        return limitTimeRange(parseDate('23:59:59.999', 'HH:mm:ss.SSS'), this.selectableRange, this.format);
+      },
+      minMapping() {
+        return getTimeMapping(this.format, this.minDate);
+      },
+      maxMapping() {
+        return getTimeMapping(this.format, this.maxDate);
+      },
+      columns() {
+        let val = {};
+        val['columns' + this.minMapping.order.length] = true;
+        return val;
+      },
+      minSelectableRange() {
+        return [[this.MIN_TIME, this.maxDate]];
+      },
+      maxSelectableRange() {
+        return [[this.minDate, this.MAX_TIME]];
+      },
+      parsedSteps() {
+        return this.steps ? parseDate(this.steps, this.format) : null;
       }
     },
 
@@ -117,42 +121,61 @@
         maxDate: new Date(),
         value: [],
         oldValue: [new Date(), new Date()],
+        selectableRange: [],
         defaultValue: null,
         format: 'HH:mm:ss',
         visible: false,
         selectionRange: [0, 2],
-        arrowControl: false
+        arrowControl: false,
+        steps: ''
       };
     },
 
     watch: {
       value(value) {
+        var minDate;
+        var maxDate;
         if (Array.isArray(value)) {
-          this.minDate = new Date(value[0]);
-          this.maxDate = new Date(value[1]);
+          minDate = new Date(value[0]);
+          maxDate = new Date(value[1]);
         } else {
           if (Array.isArray(this.defaultValue)) {
-            this.minDate = new Date(this.defaultValue[0]);
-            this.maxDate = new Date(this.defaultValue[1]);
+            minDate = new Date(this.defaultValue[0]);
+            maxDate = new Date(this.defaultValue[1]);
           } else if (this.defaultValue) {
-            this.minDate = new Date(this.defaultValue);
-            this.maxDate = advanceTime(new Date(this.defaultValue), 60 * 60 * 1000);
+            minDate = new Date(this.defaultValue);
+            maxDate = this.advanceTime(new Date(this.defaultValue), 60 * 60 * 1000);
           } else {
-            this.minDate = new Date();
-            this.maxDate = advanceTime(new Date(), 60 * 60 * 1000);
+            minDate = new Date();
+            maxDate = this.advanceTime(new Date(), 60 * 60 * 1000);
           }
         }
+        this.minDate = this.transform(minDate);
+        this.maxDate = this.transform(maxDate);
+      },
+
+      format() {
+        this.minDate = this.transform(this.minDate);
+        this.maxDate = this.transform(this.maxDate);
+        this.handleChange();
       },
 
       visible(val) {
         if (val) {
           this.oldValue = this.value;
-          this.$nextTick(() => this.$refs.minSpinner.emitSelectRange('hours'));
+          this.$nextTick(() => this.$refs.minSpinner.emitSelectRange(this.minMapping.order[0]));
         }
       }
     },
 
     methods: {
+      transform(date) {
+        return transformTime(date, this.format);
+      },
+      advanceTime(date, amount) {
+        return new Date(Math.min(this.transform(date).getTime() + amount, this.MAX_TIME.getTime()));
+      },
+
       handleClear() {
         this.$emit('pick', null);
       },
@@ -162,19 +185,17 @@
       },
 
       handleMinChange(date) {
-        this.minDate = clearMilliseconds(date);
+        this.minDate = this.transform(date);
         this.handleChange();
       },
 
       handleMaxChange(date) {
-        this.maxDate = clearMilliseconds(date);
+        this.maxDate = this.transform(date);
         this.handleChange();
       },
 
       handleChange() {
         if (this.isValidValue([this.minDate, this.maxDate])) {
-          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
-          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
           this.$emit('pick', [this.minDate, this.maxDate], true);
         }
       },
@@ -190,12 +211,8 @@
       },
 
       handleConfirm(visible = false) {
-        const minSelectableRange = this.$refs.minSpinner.selectableRange;
-        const maxSelectableRange = this.$refs.maxSpinner.selectableRange;
-
-        this.minDate = limitTimeRange(this.minDate, minSelectableRange, this.format);
-        this.maxDate = limitTimeRange(this.maxDate, maxSelectableRange, this.format);
-
+        this.minDate = limitTimeRange(this.minDate, this.minSelectableRange, this.format);
+        this.maxDate = limitTimeRange(this.maxDate, this.maxSelectableRange, this.format);
         this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
 
@@ -205,22 +222,27 @@
       },
 
       changeSelectionRange(step) {
-        const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11];
-        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
+        const order = this.minMapping.order;
+
+        const getList = (mapping, delta) => {
+          return order.map(type => {return mapping[type][0] + delta;});
+        };
+
+        const list = getList(this.minMapping, 0).concat(getList(this.maxMapping, this.offset));
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         const half = list.length / 2;
         if (next < half) {
-          this.$refs.minSpinner.emitSelectRange(mapping[next]);
+          this.$refs.minSpinner.emitSelectRange(order[next]);
         } else {
-          this.$refs.maxSpinner.emitSelectRange(mapping[next - half]);
+          this.$refs.maxSpinner.emitSelectRange(order[next - half]);
         }
       },
 
       isValidValue(date) {
-        return Array.isArray(date) &&
-          timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange) &&
-          timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange);
+        return date.length === 2 &&
+          timeWithinRange(date[0], this.minSelectableRange, this.format) &&
+          timeWithinRange(date[1], this.maxSelectableRange, this.format);
       },
 
       handleKeydown(event) {

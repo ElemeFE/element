@@ -1,96 +1,43 @@
 <template>
-  <div class="el-time-spinner" :class="{ 'has-seconds': showSeconds }">
+  <div class="el-time-spinner" :class="columns">
     <template v-if="!arrowControl">
       <el-scrollbar
-        @mouseenter.native="emitSelectRange('hours')"
-        @mousemove.native="adjustCurrentSpinner('hours')"
+        v-for="(type, k) in mapping.order"
+        :key="k"
+        @mouseenter.native="emitSelectRange(type)"
+        @mousemove.native="adjustSpinner(type)"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
         noresize
         tag="ul"
-        ref="hours">
+        ref="scroll">
         <li
-          @click="handleClick('hours', { value: hour, disabled: disabled })"
-          v-for="(disabled, hour) in hoursList"
+          v-for="(disabled, val) in disabledList[type]"
+          :key="val"
+          @click="handleClick(type, { value: val, disabled: disabled })"
           class="el-time-spinner__item"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{ amPm(hour) }}</li>
-      </el-scrollbar>
-      <el-scrollbar
-        @mouseenter.native="emitSelectRange('minutes')"
-        @mousemove.native="adjustCurrentSpinner('minutes')"
-        class="el-time-spinner__wrapper"
-        wrap-style="max-height: inherit;"
-        view-class="el-time-spinner__list"
-        noresize
-        tag="ul"
-        ref="minutes">
-        <li
-          @click="handleClick('minutes', { value: key, disabled: false })"
-          v-for="(enabled, key) in minutesList"
-          class="el-time-spinner__item"
-          :class="{ 'active': key === minutes, disabled: !enabled }">{{ ('0' + key).slice(-2) }}</li>
-      </el-scrollbar>
-      <el-scrollbar
-        v-show="showSeconds"
-        @mouseenter.native="emitSelectRange('seconds')"
-        @mousemove.native="adjustCurrentSpinner('seconds')"
-        class="el-time-spinner__wrapper"
-        wrap-style="max-height: inherit;"
-        view-class="el-time-spinner__list"
-        noresize
-        tag="ul"
-        ref="seconds">
-        <li
-          @click="handleClick('seconds', { value: key, disabled: false })"
-          v-for="(second, key) in 60"
-          class="el-time-spinner__item"
-          :class="{ 'active': key === seconds }"
-          :key="key">{{ ('0' + key).slice(-2) }}</li>
+          :class="{ 'active': val === currVal(type), 'disabled': disabled }">
+            {{ valToStr(type, val) }}
+        </li>
       </el-scrollbar>
     </template>
     <template v-if="arrowControl">
       <div
-        @mouseenter="emitSelectRange('hours')"
-        class="el-time-spinner__wrapper is-arrow">
-        <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
-        <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
-        <ul class="el-time-spinner__list" ref="hours">
-          <li
-            class="el-time-spinner__item"
-            :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
-            v-for="(hour, key) in arrowHourList"
-            :key="key">{{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + amPm(hour) }}</li>
-        </ul>
-      </div>
-      <div
-        @mouseenter="emitSelectRange('minutes')"
-        class="el-time-spinner__wrapper is-arrow">
-        <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
-        <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
-        <ul class="el-time-spinner__list" ref="minutes">
-          <li
-            class="el-time-spinner__item"
-            :class="{ 'active': minute === minutes }"
-            v-for="(minute, key) in arrowMinuteList"
-            :key="key">
-            {{ minute === undefined ? '' : ('0' + minute).slice(-2) }}
-          </li>
-        </ul>
-      </div>
-      <div
-        @mouseenter="emitSelectRange('seconds')"
+        v-for="(type, k) in mapping.order"
+        @mouseenter="emitSelectRange(type)"
         class="el-time-spinner__wrapper is-arrow"
-        v-if="showSeconds">
+        :key="k"
+        ref="scroll">
         <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
         <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
-        <ul class="el-time-spinner__list" ref="seconds">
+        <ul class="el-time-spinner__list" ref=type>
           <li
-            v-for="(second, key) in arrowSecondList"
             class="el-time-spinner__item"
-            :class="{ 'active': second === seconds }"
+            v-for="(val, key) in arrowList[type]"
+            :class="{ 'active': val === currVal(type), 'disabled': disabled(type, val) }"
             :key="key">
-            {{ second === undefined ? '' : ('0' + second).slice(-2) }}
+            {{ valToStr(type, val) }}
           </li>
         </ul>
       </div>
@@ -99,9 +46,10 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from '../util';
+  import { modifyTime } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import normalizeWheel from 'normalize-wheel';
 
   export default {
     components: { ElScrollbar },
@@ -111,75 +59,135 @@
     },
 
     props: {
+      mapping: {
+        type: Object,
+        required: true
+      },
       date: {},
       defaultValue: {}, // reserved for future use
-      showSeconds: {
-        type: Boolean,
-        default: true
+      steps: {
+        type: Date,
+        default: null
       },
-      arrowControl: Boolean,
-      amPmMode: {
-        type: String,
-        default: '' // 'a': am/pm; 'A': AM/PM
-      }
+      selectableRange: {
+        type: Array,
+        defaultValue: []
+      },
+      arrowControl: Boolean
     },
 
     computed: {
-      hours() {
+      hour() {
         return this.date.getHours();
       },
-      minutes() {
+      minute() {
         return this.date.getMinutes();
       },
-      seconds() {
+      second() {
         return this.date.getSeconds();
       },
-      hoursList() {
-        return getRangeHours(this.selectableRange);
+      millisecond() {
+        return this.getConvertedMs(this.date.getMilliseconds(), this.maxMillisecs);
       },
-      minutesList() {
-        return getRangeMinutes(this.selectableRange, this.hours);
+      maxMillisecs() {
+        let len = this.mapping.millisecond;
+        if (!len) return 1000;
+        return Math.round(Math.pow(10, len[1] - len[0]));
       },
-      arrowHourList() {
-        const hours = this.hours;
-        return [
-          hours > 0 ? hours - 1 : undefined,
-          hours,
-          hours < 23 ? hours + 1 : undefined
-        ];
+      arrowList() {
+        var result = {};
+        this.mapping.order.forEach((type) => {
+          const val = this[type];
+          const step = this.numbSteps[type];
+          result[type] = [
+            val - step >= 0 ? val - step : undefined,
+            val,
+            val + step < this.maxOfType(type) ? val + step : undefined
+          ];
+        });
+        return result;
       },
-      arrowMinuteList() {
-        const minutes = this.minutes;
-        return [
-          minutes > 0 ? minutes - 1 : undefined,
-          minutes,
-          minutes < 59 ? minutes + 1 : undefined
-        ];
+      disabledList() {
+        return {
+          hour: this.getTypesList('hour', this.selectableRange),
+          minute: this.getTypesList('minute', this.selectableRange),
+          second: this.getTypesList('second', this.selectableRange),
+          millisecond: this.getTypesList('millisecond', this.selectableRange)
+        };
       },
-      arrowSecondList() {
-        const seconds = this.seconds;
-        return [
-          seconds > 0 ? seconds - 1 : undefined,
-          seconds,
-          seconds < 59 ? seconds + 1 : undefined
-        ];
+      el() {
+        var result = {};
+        this.mapping.order.forEach((type, idx) =>{
+          result[type] = this.$refs.scroll[idx];
+        });
+        return result;
+      },
+      columns() {
+        let val = {};
+        val['columns' + this.mapping.order.length] = true;
+        return val;
+      },
+      numbSteps() {
+        var result = {};
+        const steps = this.steps;
+        this.mapping.order.forEach((type) => {
+          let val = 0;
+          if (steps) {
+            switch (type) {
+              case 'hour': val = steps.getHours(); break;
+              case 'minute': val = steps.getMinutes(); break;
+              case 'second': val = steps.getSeconds(); break;
+              case 'millisecond': val = this.getConvertedMs(steps.getMilliseconds()); break;
+            }
+          }
+          if (!val) val = 1;
+          result[type] = val;
+        });
+        return result;
       }
     },
 
     data() {
       return {
-        selectableRange: [],
         currentScrollbar: null
       };
     },
 
+    watch: {
+      mapping() {
+        this.$nextTick(() => {
+          this.bindScrollEvent();
+        });
+      }
+    },
+
     mounted() {
       this.$nextTick(() => {
-        !this.arrowControl && this.bindScrollEvent();
+        this.bindScrollEvent();
       });
     },
 
     methods: {
+      disabled(type, val) {
+        var list = this.disabledList[type];
+        return list ? list[val] : false;
+      },
+
+      currVal(type) {
+        return this[type];
+      },
+      maxOfType(type) {
+        return type === 'hour' ? 24 : type === 'millisecond' ? this.maxMillisecs : 60;
+      },
+
+      valToStr(type, value) {
+        if (value === undefined) return '';
+        var result = (type === 'hour' && this.mapping.isPm) ? (value = value % 12 || 12) + '' : value + '';
+        var len = this.mapping[type][1] - this.mapping[type][0];
+        while (result.length < len) result = '0' + result;
+        if (type === 'hour') result += this.amPm(value);
+        return result;
+      },
       increase() {
         this.scrollDown(1);
       },
@@ -189,47 +197,108 @@
       },
 
       modifyDateField(type, value) {
+        const modTime = (hours, mins, secs, millis) => {
+          this.$emit('change', modifyTime(this.date, hours, mins, secs, Math.round(millis * 1000 / this.maxMillisecs)));
+          this.$nextTick(_ => {this.emitSelectRange(type);});
+        };
         switch (type) {
-          case 'hours': this.$emit('change', modifyTime(this.date, value, this.minutes, this.seconds)); break;
-          case 'minutes': this.$emit('change', modifyTime(this.date, this.hours, value, this.seconds)); break;
-          case 'seconds': this.$emit('change', modifyTime(this.date, this.hours, this.minutes, value)); break;
+          case 'hour': modTime(value, this.minute, this.second, this.millisecond); break;
+          case 'minute': modTime(this.hour, value, this.second, this.millisecond); break;
+          case 'second': modTime(this.hour, this.minute, value, this.millisecond); break;
+          case 'millisecond': modTime(this.hour, this.minute, this.second, value); break;
+        }
+      },
+      getConvertedMs(millisecond, max) {
+        return Math.round(millisecond / 1000 * (max || this.maxMillisecs));
+      },
+      getTypesList(type, ranges) {
+
+        const getVal = (rDate, idx) => {
+          var r_h = rDate.getHours();
+          var r_m = rDate.getMinutes();
+          var r_s = rDate.getSeconds();
+          switch (type) {
+            case 'hour':
+              return r_h;
+            case 'minute':
+              return r_h === this.hour ? r_m : idx ? 59 : 0;
+            case 'second':
+              return (r_h === this.hour && r_m === this.minute) ? r_s : idx ? 59 : 0;
+            case 'millisecond':
+              let r_ms = this.getConvertedMs(rDate.getMilliseconds());
+              let val = (r_h === this.hour && r_m === this.minute && r_s === this.second) ? r_ms : idx ? this.getConvertedMs(999) : 0;
+              return val;
+          };
+        };
+
+        const newArray = function(start, end) {
+          let result = [];
+          for (let i = start; i <= end; i++) {
+            result.push(i);
+          }
+          return result;
+        };
+
+        const list = [];
+        let enabled = [];
+
+        (ranges || []).forEach(range => {
+          const value = range.map(getVal);
+          enabled = enabled.concat(newArray(value[0], value[1]));
+        });
+        if (enabled.length) {
+          for (let i = 0; i < this.maxOfType(type); i++) {
+            list[i] = enabled.indexOf(i) === -1;
+          }
+          return list;
+        } else {
+          if (this.arrowControl) return null;
+          for (let i = 0; i < this.maxOfType(type); i++) {
+            list.push(false);
+          }
+          return list;
         }
       },
 
       handleClick(type, {value, disabled}) {
         if (!disabled) {
           this.modifyDateField(type, value);
-          this.emitSelectRange(type);
           this.adjustSpinner(type, value);
         }
       },
 
       emitSelectRange(type) {
-        if (type === 'hours') {
-          this.$emit('select-range', 0, 2);
-        } else if (type === 'minutes') {
-          this.$emit('select-range', 3, 5);
-        } else if (type === 'seconds') {
-          this.$emit('select-range', 6, 8);
+        var map = this.mapping[type];
+        if (map) {
+          this.$emit('select-range', map[0], map[1]);
+          this.currentScrollbar = type;
         }
-        this.currentScrollbar = type;
       },
 
       bindScrollEvent() {
-        const bindFuntion = (type) => {
-          this.$refs[type].wrap.onscroll = (e) => {
-            // TODO: scroll is emitted when set scrollTop programatically
-            // should find better solutions in the future!
-            this.handleScroll(type, e);
-          };
-        };
-        bindFuntion('hours');
-        bindFuntion('minutes');
-        bindFuntion('seconds');
+        if (this.arrowControl) {
+          const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+          const eventName = isFirefox ? 'DOMMouseScroll' : 'mousewheel';
+          this.mapping.order.forEach((type, idx) =>{
+            this.el[type].addEventListener(eventName, this.handleMouseWheel, {passive: true});
+          });
+        } else {
+          this.mapping.order.forEach((type, idx) =>{
+            this.el[type].wrap.onscroll = (e) => {
+              // TODO: scroll is emitted when set scrollTop programatically
+              // should find better solutions in the future!
+              this.handleScroll(type, e);
+            };
+          });
+        }
+      },
+
+      handleMouseWheel(ev) {
+        this.scrollDown(normalizeWheel(ev).spinY);
       },
 
       handleScroll(type) {
-        const value = Math.min(Math.floor((this.$refs[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), (type === 'hours' ? 23 : 59));
+        const value = Math.min(Math.floor((this.el[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), this.maxOfType(type) - 1);
         this.modifyDateField(type, value);
       },
 
@@ -237,18 +306,15 @@
       //       renamed from adjustScrollTop
       //       should try to refactory it
       adjustSpinners() {
-        this.adjustSpinner('hours', this.hours);
-        this.adjustSpinner('minutes', this.minutes);
-        this.adjustSpinner('seconds', this.seconds);
-      },
-
-      adjustCurrentSpinner(type) {
-        this.adjustSpinner(type, this[type]);
+        this.mapping.order.forEach((type) => {
+          this.adjustSpinner(type, this[type]);
+        });
       },
 
       adjustSpinner(type, value) {
+        if (!value) value = this[type];
         if (this.arrowControl) return;
-        const el = this.$refs[type].wrap;
+        const el = this.el[type].wrap;
         if (el) {
           el.scrollTop = Math.max(0, value * this.typeItemHeight(type));
         }
@@ -256,45 +322,39 @@
 
       scrollDown(step) {
         if (!this.currentScrollbar) {
-          this.emitSelectRange('hours');
+          this.emitSelectRange(this.mapping.order[0]);
         }
-
-        const label = this.currentScrollbar;
-        const hoursList = this.hoursList;
-        let now = this[label];
-
-        if (this.currentScrollbar === 'hours') {
-          let total = Math.abs(step);
-          step = step > 0 ? 1 : -1;
-          let length = hoursList.length;
-          while (length-- && total) {
-            now = (now + step + hoursList.length) % hoursList.length;
-            if (hoursList[now]) {
-              continue;
-            }
+        let type = this.currentScrollbar;
+        let now = this[type];
+        let list = this.disabledList[type];
+        let max = this.maxOfType(type);
+        let len = max;
+        let total = Math.abs(step);
+        step = step > 0 ? this.numbSteps[type] : -this.numbSteps[type];
+        while (len-- && total) {
+          now = (now + step + max) % max;
+          if (!list || !list[now]) {
             total--;
           }
-          if (hoursList[now]) return;
-        } else {
-          now = (now + step + 60) % 60;
         }
-
-        this.modifyDateField(label, now);
-        this.adjustSpinner(label, now);
+        if (list && list[now]) return;
+        this.modifyDateField(type, now);
+        this.adjustSpinner(type, now);
       },
+
       amPm(hour) {
-        let shouldShowAmPm = this.amPmMode.toLowerCase() === 'a';
-        if (!shouldShowAmPm) return '';
-        let isCapital = this.amPmMode === 'A';
+        var isPm = this.mapping.isPm;
+        if (!isPm) return '';
         let content = (hour < 12) ? ' am' : ' pm';
-        if (isCapital) content = content.toUpperCase();
+        if (isPm[2] === 'A') content = content.toUpperCase();
         return content;
       },
+
       typeItemHeight(type) {
-        return this.$refs[type].$el.querySelector('li').offsetHeight;
+        return this.el[type].$el.querySelector('li').offsetHeight;
       },
       scrollBarHeight(type) {
-        return this.$refs[type].$el.offsetHeight;
+        return this.el[type].$el.offsetHeight;
       }
     }
   };

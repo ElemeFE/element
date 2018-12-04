@@ -1,9 +1,24 @@
 @import "../common/var";
 
 @include b(time-spinner) {
-  &.has-seconds {
+  &.columns1 {
+    .el-time-spinner__wrapper {
+      width: 100%;
+    }
+  }
+  &.columns2 {
+    .el-time-spinner__wrapper {
+      width: 50%;
+    }
+  }
+  &.columns3 {
     .el-time-spinner__wrapper {
       width: 33.3%;
+    }
+  }
+  &.columns4 {
+    .el-time-spinner__wrapper {
+      width: 25%;
     }
   }
 

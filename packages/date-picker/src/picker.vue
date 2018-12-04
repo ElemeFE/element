@@ -399,7 +399,8 @@ export default {
       showClose: false,
       userInput: null,
       valueOnOpen: null, // value when picker opens, used to determine whether to emit change
-      unwatchPickerOptions: null
+      unwatchPickerOptions: null,
+      selectedInput: {}
     };
   },
 
@@ -762,6 +763,7 @@ export default {
       // Enter
       if (keyCode === 13) {
         if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
+          this.selectedInput = null;
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
           this.blur();
@@ -837,10 +839,10 @@ export default {
         if (options && options.selectableRange) {
           let ranges = options.selectableRange;
           const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
-          const format = DEFAULT_FORMATS.timerange;
+          const format = this.format || DEFAULT_FORMATS.timerange;
 
           ranges = Array.isArray(ranges) ? ranges : [ranges];
-          this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
+          this.picker.selectableRange = ranges.map(range => parser(range, format, '-')); // this.rangeSeparator used for display, not for options
         }
 
         for (const option in options) {
@@ -872,12 +874,13 @@ export default {
 
       this.picker.$on('select-range', (start, end, pos) => {
         if (this.refInput.length === 0) return;
-        if (!pos || pos === 'min') {
-          this.refInput[0].setSelectionRange(start, end);
-          this.refInput[0].focus();
-        } else if (pos === 'max') {
-          this.refInput[1].setSelectionRange(start, end);
-          this.refInput[1].focus();
+        var el = (!pos || pos === 'min') ? this.refInput[0] : (pos === 'max') ? this.refInput[1] : null;
+        if (el) {
+          el.setSelectionRange(start, end);
+          el.focus();
+          this.selectedInput = {el, start, end};
+        } else {
+          this.selectedInput = null;
         }
       });
     },
@@ -906,6 +909,15 @@ export default {
       const formatted = this.formatToValue(val);
       if (!valueEquals(this.value, formatted)) {
         this.$emit('input', formatted);
+        if (this.selectedInput) {
+          this.$nextTick(()=> {
+            var s = this.selectedInput;
+            if (s && s.el) {
+              s.el.setSelectionRange(s.start, s.end);
+              s.el.focus();
+            }
+          });
+        }
       }
     },
 

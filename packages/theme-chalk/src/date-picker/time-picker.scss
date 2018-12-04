@@ -45,14 +45,32 @@
       margin-right: 12%;
       margin-left: 12%;
     }
+    &.columns1 {
+      &::after {
+        left: 100%;
+      }
 
-    &.has-seconds {
+      &::before {
+        padding-left: 100%;
+      }
+    }
+
+    &.columns3 {
       &::after {
         left: calc(100% / 3 * 2);
       }
 
       &::before {
         padding-left: calc(100% / 3);
+      }
+    }
+    &.columns4 {
+      &::after {
+        left: calc(100% / 4 * 2);
+      }
+
+      &::before {
+        padding-left: calc(100% / 4);
       }
     }
   }

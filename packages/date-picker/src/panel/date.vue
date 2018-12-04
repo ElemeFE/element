@@ -150,7 +150,7 @@
     modifyDate,
     modifyTime,
     modifyWithTimeString,
-    clearMilliseconds,
+    transformTime,
     clearTime,
     prevYear,
     nextYear,
@@ -240,10 +240,10 @@
         if (!value) {
           this.$emit('pick', value, ...args);
         } else if (Array.isArray(value)) {
-          const dates = value.map(date => this.showTime ? clearMilliseconds(date) : clearTime(date));
+          const dates = value.map(date => this.showTime ? transformTime(date, this.timeFormat) : clearTime(date));
           this.$emit('pick', dates, ...args);
         } else {
-          this.$emit('pick', this.showTime ? clearMilliseconds(value) : clearTime(value), ...args);
+          this.$emit('pick', this.showTime ? transformTime(value, this.timeFormat) : clearTime(value), ...args);
         }
         this.userInputDate = null;
         this.userInputTime = null;

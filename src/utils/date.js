@@ -267,12 +267,48 @@
   };
 
   /**
+   * get types parameters: order, start and end position, key /
+   * @method getMapping
+   * @param {string} format Date parse format
+   * @returns { order:[ String, ... ], type1: [Number, Number, String], type2: [Number, Number, String] }
+   */
+  fecha.getMapping = function(format) {
+    var i18n = fecha.i18n;
+    format = fecha.masks[format] || format;
+
+    var result = {};
+    var order = [];
+    var delta = 0;
+    format.replace(token, function ($0, p1, offset) {
+      if (parseFlags[$0]) {
+        let info = parseFlags[$0];
+        var type = '';
+        if ($0 === 'a' || $0 === 'A') {
+          type = 'isPm';
+          delta += 1;
+        } else if (typeof info[1] === 'function') {
+          let val = {};
+          info[1](val, 0, i18n);
+          type = Object.keys(val)[0];
+        }
+        if (type) {
+          order.push(type);
+          result[type] = [offset + delta, offset + delta + $0.length, $0];
+        }
+      }
+    });
+    result.order = order;
+    return result;
+  };
+
+  /**
    * Parse a date string into an object, changes - into /
    * @method parse
    * @param {string} dateStr Date string
    * @param {string} format Date parse format
    * @returns {Date|boolean}
    */
+
   fecha.parse = function (dateStr, format, i18nSettings) {
     var i18n = i18nSettings || fecha.i18n;
 
@@ -312,7 +348,6 @@
       return false;
     }
 
-    var today = new Date();
     if (dateInfo.isPm === true && dateInfo.hour != null && +dateInfo.hour !== 12) {
       dateInfo.hour = +dateInfo.hour + 12;
     } else if (dateInfo.isPm === false && +dateInfo.hour === 12) {
@@ -322,10 +357,10 @@
     var date;
     if (dateInfo.timezoneOffset != null) {
       dateInfo.minute = +(dateInfo.minute || 0) - +dateInfo.timezoneOffset;
-      date = new Date(Date.UTC(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
+      date = new Date(Date.UTC(dateInfo.year || 1970, dateInfo.month || 0, dateInfo.day || 1,
         dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0));
     } else {
-      date = new Date(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
+      date = new Date(dateInfo.year || 1970, dateInfo.month || 0, dateInfo.day || 1,
         dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0);
     }
     return date;
