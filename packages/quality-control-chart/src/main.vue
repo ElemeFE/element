@@ -44,6 +44,7 @@
   require('echarts/lib/component/title');
   require('echarts/lib/component/markLine');
   require('echarts/lib/component/markArea');
+  require('echarts/lib/component/dataZoom');
 
   import ElDatePicker from 'element-ui-qz/packages/date-picker';
 
@@ -129,7 +130,6 @@
                 this.lineBase = result.body.list[0];
               } else {
                 this.having_data = false;
-                this.$message.error(result.data.error[0]);
               }
               this.getEchartsData(e);
             },
@@ -169,10 +169,10 @@
                   // 判断是否超出行动线
                   var tipTest_value = result.body.list[i].qcs_test_value;
                   if (Number(result.body.list[i].qcs_test_value) > Number(this.lineBase.retrospective_line_right)) {
-                    result.body.list[i].qcs_test_value = (Number(this.lineBase.statistic_end_value) - Number(this.lineBase.retrospective_line_right)) / 2 + Number(this.lineBase.retrospective_line_right);
+                    result.body.list[i].qcs_test_value = String((Number(this.lineBase.statistic_end_value) - Number(this.lineBase.retrospective_line_right)) / 2 + Number(this.lineBase.retrospective_line_right));
                   };
                   if (Number(result.body.list[i].qcs_test_value) < Number(this.lineBase.retrospective_line_left)) {
-                    result.body.list[i].qcs_test_value = (Number(this.lineBase.retrospective_line_left) - Number(this.lineBase.statistic_begin_value)) / 2 + Number(this.lineBase.statistic_begin_value);
+                    result.body.list[i].qcs_test_value = String((Number(this.lineBase.retrospective_line_left) - Number(this.lineBase.statistic_begin_value)) / 2 + Number(this.lineBase.statistic_begin_value));
                   };
                   result.body.list[i].tipTest_value = tipTest_value;
                   this.arrData[i].push(result.body.list[i].qcs_test_value);
@@ -190,7 +190,7 @@
               }
             },
             result => {
-              this.$message.error('测量数据获取失败');
+              this.$message.error('测量数据获取错误');
               this.having_data = false;
             }
           );
@@ -222,10 +222,9 @@
             containLabel: true
           },
           xAxis: {
-            type: 'value',
-            max: seriesData[0].length,
+            type: 'category',
+            max: seriesData.length - 1,
             min: 0,
-            maxInterval: 1,
             splitLine: {
               show: false // 去除垂直网格线
             },
@@ -247,7 +246,6 @@
               },
               max: lineData.statistic_end_value,
               min: lineData.statistic_begin_value,
-              offset: 1,
               axisLabel: {
                 show: false
               },
@@ -257,6 +255,25 @@
               axisTick: {
                 show: false // 隐藏纵坐标刻度
               }
+            }
+          ],
+          // 滚动条
+          dataZoom: [
+            {
+              type: 'slider',
+              realtime: true,
+              // backgroundColor:'#eee', // 组件的背景颜色
+              fillerColor: '#bababa', // 选中范围的填充颜色
+              handleSize: 0, // 滑动条的左右2个滑动条的大小
+              height: 25, // 组件高度
+              // zoomLock:true,
+              show: seriesData.length > 16,
+              xAxisIndex: [0],
+              textStyle: false,
+              left: '5%',
+              bottom: -10,
+              start: 0,
+              end: seriesData.length > 16 ? 20 : 100
             }
           ],
           series: [
