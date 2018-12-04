@@ -123,11 +123,11 @@ export default {
     }
   },
 
-  beforeDestroy: function beforeDestroy() {
+  beforeDestroy() {
     this.cleanup();
   },
 
-  deactivated: function deactivated() {
+  deactivated() {
     this.cleanup();
   },
 
@@ -195,10 +195,9 @@ export default {
       this.$emit('after-leave');
       this.doDestroy();
     },
-    cleanup: function cleanup() {
+    cleanup() {
       if (this.openDelay) {
         clearTimeout(this._timer);
-        this.showPopper = false;
       }
     }
   },
