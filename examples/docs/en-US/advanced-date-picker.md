@@ -6,6 +6,12 @@
           date: null
         }
       };
+    },
+    methods: {
+      d(date) {
+        console.log("D", date);
+        return false;
+      }
     }
   };
 </script>
@@ -29,7 +35,7 @@ Use Date Picker for date input with mask.
 :::demo
 
 ```html
-   <tm-advanced-date-picker :local-storage-date="form.date"
+   <tm-advanced-date-picker :local-storage-date="form.date" :disabled-date="d"
                             @typechange="$emit('to-parent', $event)" />                                    
 ```
 :::
@@ -40,6 +46,8 @@ Use Date Picker for date input with mask.
 | picker-type | type of child DatePicker | string | — | dinamic |
 | picker-class | class of child DatePicker | string | — | child-picker |
 | disable-old-date | same options as DatePicker have | boolean | — | true |
+| disabled-date | function to disable select date, more priority than disable-old-date | function | function | null |
+| default-value | defaults value to show | date | date | Date() |
 | local-storage-date | if app use a local storage, this prop be helpfull | array/date | — | null |
 
 ### shortcuts
@@ -60,4 +68,5 @@ Use Date Picker for date input with mask.
 |------|--------|-------|
 | focus | focus the Input component | — |
 | close | close popover | — |
+| clear | clear date | — |
 

@@ -399,6 +399,10 @@ export default {
     disableOldDate: {
       type: Boolean,
       default: false
+    },
+    disabledDate: {
+      type: Function,
+      default: null
     }
   },
 
@@ -845,7 +849,9 @@ export default {
             this.picker[option] = options[option];
           }
         }
-        if (this.disableOldDate) {
+        if (this.disabledDate) {
+          this.picker['disabledDate'] = this.disabledDate;
+        } else if (this.disableOldDate) {
           this.picker['disabledDate'] = this.disabledOldDateHandler;
         }
       };

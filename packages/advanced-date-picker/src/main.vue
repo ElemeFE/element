@@ -14,7 +14,9 @@
                       @typechange="onTypeChanged"
                       placeholder="Когда"
                       size="extra-large"
-                      :disable-old-date="disableOldDate" />
+                      :disable-old-date="disableOldDate"
+                      :disabled-date="disabledDate"
+                      :default-value="defaultValue"/>
       <div slot="reference"
            @keyup.enter="onEnterKeyUp">
         <tm-input :class="inputClassName"
@@ -152,6 +154,11 @@
         type: Boolean,
         default: true
       },
+      disabledDate: {
+        type: Function,
+        default: null
+      },
+      defaultValue: {},
       localStorageDate: {
         type: [Array, Date, String],
         default: null
@@ -298,6 +305,10 @@
       },
       focus() {
         this.$refs.popover.doShow();
+      },
+      clear() {
+        this.$refs.datePicker.clear();
+        this.inputDate = null;
       }
     }
   };

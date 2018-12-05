@@ -1,5 +1,13 @@
 ## Changelog
 
+*2018-12-04*
+
+### 1.2.27
+
+  - Правки по компоненту AdvancedDatePicker
+  - Добавил параметры disabled-date, default-value
+  - Добавил метод clear
+
 *2018-11-06*
 
 ### 1.2.23
