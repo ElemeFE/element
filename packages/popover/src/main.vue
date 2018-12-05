@@ -123,6 +123,14 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    this.cleanup();
+  },
+
+  deactivated() {
+    this.cleanup();
+  },
+
   methods: {
     doToggle() {
       this.showPopper = !this.showPopper;
@@ -135,14 +143,14 @@ export default {
     },
     handleFocus() {
       addClass(this.referenceElm, 'focusing');
-      if (this.trigger !== 'manual') this.showPopper = true;
+      if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = true;
     },
     handleClick() {
       removeClass(this.referenceElm, 'focusing');
     },
     handleBlur() {
       removeClass(this.referenceElm, 'focusing');
-      if (this.trigger !== 'manual') this.showPopper = false;
+      if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = false;
     },
     handleMouseEnter() {
       clearTimeout(this._timer);
@@ -186,6 +194,11 @@ export default {
     handleAfterLeave() {
       this.$emit('after-leave');
       this.doDestroy();
+    },
+    cleanup() {
+      if (this.openDelay) {
+        clearTimeout(this._timer);
+      }
     }
   },
 
