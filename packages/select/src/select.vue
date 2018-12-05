@@ -279,6 +279,10 @@
       loadingText: String,
       noMatchText: String,
       noDataText: String,
+      noShowDefaultValue: {
+        type: Boolean,
+        default: true
+      },
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
@@ -514,7 +518,7 @@
           }
         }
         if (option) return option;
-        const label = (!isObject && !isNull)
+        const label = (!isObject && !isNull && this.noShowDefaultValue)
           ? value : '';
         let newOption = {
           value: value,

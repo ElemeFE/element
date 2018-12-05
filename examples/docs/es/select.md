@@ -688,6 +688,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | loading-text         | texto mostrado durante la carga de datos del servidor | string   | —                 | Loading          |
 | no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. | string   | —                 | No matching data |
 | no-data-text         | texto mostrado cuando no hay opciones    | string   | —                 | No data          |
+| no-show-default-value | Si se debe usar el valor de valor para mostrar cuando la opción no coincide con el valor | boolean | — | true |
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
