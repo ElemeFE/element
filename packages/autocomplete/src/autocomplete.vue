@@ -17,7 +17,7 @@
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
-      @keydown.native.tab="close"
+      @keydown.native.tab="handleKeyTab"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -126,6 +126,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      selectOnTab: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -204,6 +208,13 @@
       },
       close(e) {
         this.activated = false;
+      },
+      handleKeyTab(e) {
+        if (this.selectOnTab) {
+          this.handleKeyEnter(e);
+        } else {
+          this.close(e);
+        }
       },
       handleKeyEnter(e) {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
