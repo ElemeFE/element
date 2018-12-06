@@ -126,9 +126,11 @@ export default {
       immediate: true,
       handler(fileList) {
         this.uploadFiles = fileList.map(item => {
-          item.uid = item.uid || (Date.now() + this.tempIndex++);
-          item.status = item.status || 'success';
-          return item;
+          return {
+            url: item.url,
+            uid: item.uid || (Date.now() + this.tempIndex++),
+            status: item.status || 'success'
+          }
         });
       }
     }
