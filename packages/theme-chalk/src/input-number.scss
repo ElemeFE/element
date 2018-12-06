@@ -12,6 +12,7 @@
     display: block;
 
     &__inner {
+      text-align: right !important;
       -webkit-appearance: none;
       padding-left: #{$--input-height + 10};
       padding-right: #{$--input-height + 10};
@@ -129,7 +130,7 @@
       }
     }
 
-    .el-input__inner {
+    .el-input__inner {      
       padding-left: #{$--input-mini-height + 7};
       padding-right: #{$--input-mini-height + 7};
     }
