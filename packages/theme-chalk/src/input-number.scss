@@ -17,6 +17,14 @@
       padding-left: #{$--input-height + 10};
       padding-right: #{$--input-height + 10};
       text-align: center;
+      border: 1px solid #B9B9B9;
+      &:hover {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+      }
+      &:focus {
+        outline: none;
+        border-color: #04537E;
+      }
     }
   }
 
