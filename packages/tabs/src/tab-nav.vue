@@ -268,6 +268,9 @@
       document.addEventListener('visibilitychange', this.visibilityChangeHandler);
       window.addEventListener('blur', this.windowBlurHandler);
       window.addEventListener('focus', this.windowFocusHandler);
+      setTimeout(() => {
+        this.scrollToActiveTab();
+      }, 0);
     },
 
     beforeDestroy() {
