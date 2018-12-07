@@ -287,7 +287,7 @@
                 silent: true,
                 label: {
                   show: true,
-                  position: ['50%', '50%'] // 标记居中显示
+                  position: ['50%', '30%'] // 标记居中显示
                 },
                 data: [
                   [
