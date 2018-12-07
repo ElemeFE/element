@@ -9,6 +9,7 @@
           ref="spinner"
           @change="handleChange"
           :mapping="mapping"
+          :format="format"
           :arrow-control="useArrow"
           :steps="parsedSteps"
           :selectable-range="selectableRange"

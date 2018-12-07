@@ -15,6 +15,7 @@
             <time-spinner
               ref="minSpinner"
               :mapping="minMapping"
+              :format="format"
               :steps="parsedSteps"
               @change="handleMinChange"
               :arrow-control="arrowControl"
@@ -32,6 +33,7 @@
             <time-spinner
               ref="maxSpinner"
               :mapping="maxMapping"
+              :format="format"
               :steps="parsedSteps"
               @change="handleMaxChange"
               :arrow-control="arrowControl"

@@ -22,7 +22,7 @@
     <i slot="prefix"
       class="el-input__icon"
       :class="triggerClass"
-      @click="handleFocus">
+      @click="handleClickPrefixIcon">
     </i>
     <i slot="suffix"
       class="el-input__icon"
@@ -353,6 +353,7 @@ export default {
     startPlaceholder: String,
     endPlaceholder: String,
     prefixIcon: String,
+    prefixIconClickable: Boolean,
     clearIcon: {
       type: String,
       default: 'el-icon-circle-close'
@@ -411,6 +412,7 @@ export default {
         this.showPicker();
         this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
       } else {
+        this.selectedInput = null;
         this.hidePicker();
         this.emitChange(this.value);
         this.userInput = null;
@@ -690,6 +692,15 @@ export default {
       }
     },
 
+    handleClickPrefixIcon(event) {
+      if (this.readonly || this.pickerDisabled) return;
+      if (this.prefixIconClickable) {
+        this.$emit('icon-click');
+      } else {
+        this.handleFocus();
+      }
+    },
+
     handleClickIcon(event) {
       if (this.readonly || this.pickerDisabled) return;
       if (this.showClose) {
@@ -763,7 +774,6 @@ export default {
       // Enter
       if (keyCode === 13) {
         if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
-          this.selectedInput = null;
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
           this.blur();

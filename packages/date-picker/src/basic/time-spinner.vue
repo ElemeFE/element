@@ -46,7 +46,7 @@
 </template>
 
 <script type="text/babel">
-  import { modifyTime } from '../util';
+  import { modifyTime, limitTimeRange, parseDate } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
   import normalizeWheel from 'normalize-wheel';
@@ -72,6 +72,10 @@
       selectableRange: {
         type: Array,
         defaultValue: []
+      },
+      format: {
+        type: String,
+        default: 'HH:mm:ss'
       },
       arrowControl: Boolean
     },
@@ -196,17 +200,20 @@
         this.scrollDown(-1);
       },
 
-      modifyDateField(type, value) {
+      getModifedDate(type, value) {
         const modTime = (hours, mins, secs, millis) => {
-          this.$emit('change', modifyTime(this.date, hours, mins, secs, Math.round(millis * 1000 / this.maxMillisecs)));
-          this.$nextTick(_ => {this.emitSelectRange(type);});
+          return modifyTime(this.date, hours, mins, secs, Math.round(millis * 1000 / this.maxMillisecs));
         };
         switch (type) {
-          case 'hour': modTime(value, this.minute, this.second, this.millisecond); break;
-          case 'minute': modTime(this.hour, value, this.second, this.millisecond); break;
-          case 'second': modTime(this.hour, this.minute, value, this.millisecond); break;
-          case 'millisecond': modTime(this.hour, this.minute, this.second, value); break;
+          case 'hour': return modTime(value, this.minute, this.second, this.millisecond);
+          case 'minute': return modTime(this.hour, value, this.second, this.millisecond);
+          case 'second': return modTime(this.hour, this.minute, value, this.millisecond);
+          case 'millisecond': return modTime(this.hour, this.minute, this.second, value);
         }
+      },
+      modifyDateField(type, value) {
+        this.$emit('change', this.getModifedDate(type, value));
+        this.$nextTick(_ => {this.emitSelectRange(type);});
       },
       getConvertedMs(millisecond, max) {
         return Math.round(millisecond / 1000 * (max || this.maxMillisecs));
@@ -321,25 +328,55 @@
       },
 
       scrollDown(step) {
+        const nextVal = (type, val, step) => {
+          let list = this.disabledList[type];
+          let max = this.maxOfType(type);
+          let len = max;
+          let total = Math.abs(step);
+          step = step > 0 ? this.numbSteps[type] : -this.numbSteps[type];
+          while (len-- && total) {
+            val = (val + step + max) % max;
+            if (!list || !list[val]) {
+              total--;
+            }
+          }
+          return { val, disabled: list && list[val]};
+        };
+
+        const getNextDate = type => {
+          let delta = step > 0 ? this.numbSteps[type] : -this.numbSteps[type];
+          switch (type) {
+            case 'hour': delta = delta * 60 * 60 * 1000;break;
+            case 'minute': delta = delta * 60 * 1000;break;
+            case 'second': delta = delta * 1000;break;
+            case 'millisecond': delta = Math.round(delta * 1000 / this.maxMillisecs);
+          }
+          const day = this.date.getDate();
+          let result = new Date(this.date.getTime() + delta);
+          return result.getDate() === day ? result : step > 0 ? parseDate('23:59:59.999', 'HH:mm:ss:SSS') : parseDate('0', 'H');
+        };
+
         if (!this.currentScrollbar) {
           this.emitSelectRange(this.mapping.order[0]);
         }
         let type = this.currentScrollbar;
-        let now = this[type];
-        let list = this.disabledList[type];
-        let max = this.maxOfType(type);
-        let len = max;
-        let total = Math.abs(step);
-        step = step > 0 ? this.numbSteps[type] : -this.numbSteps[type];
-        while (len-- && total) {
-          now = (now + step + max) % max;
-          if (!list || !list[now]) {
-            total--;
+        let prev = this[type];
+        let now = nextVal(type, prev, step);
+
+        if ((step > 0 && now.val < prev) || (step < 0 && now.val > prev) || prev === now.val) {
+          const nextDate = limitTimeRange(getNextDate(type), this.selectableRange, this.format);
+          if (nextDate.getTime() !== this.date.getTime()) {
+            this.$emit('change', nextDate);
+            this.$nextTick(_ => {
+              this.emitSelectRange(type);
+              this.adjustSpinners();
+            });
           }
+        } else {
+          if (now.disabled) return;
+          this.modifyDateField(type, now.val);
+          this.adjustSpinner(type, now.val);
         }
-        if (list && list[now]) return;
-        this.modifyDateField(type, now);
-        this.adjustSpinner(type, now);
       },
 
       amPm(hour) {
