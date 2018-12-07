@@ -59,7 +59,7 @@
         }
       },
       format(val) {
-        this.handleChange(this.date, true);
+        if (val !== this.format) this.handleChange(this.date, true);
       },
       value(newVal) {
         let date;
