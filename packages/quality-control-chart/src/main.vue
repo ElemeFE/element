@@ -265,15 +265,15 @@
               // backgroundColor:'#eee', // 组件的背景颜色
               fillerColor: '#bababa', // 选中范围的填充颜色
               handleSize: 0, // 滑动条的左右2个滑动条的大小
-              height: 25, // 组件高度
+              height: 30, // 组件高度
               // zoomLock:true,
               show: seriesData.length > 16,
               xAxisIndex: [0],
               textStyle: false,
               left: '5%',
-              bottom: -10,
+              bottom: -14,
               start: 0,
-              end: seriesData.length > 16 ? 20 : 100
+              end: seriesData.length > 16 ? (16 / seriesData.length * 100) - 1 : 100
             }
           ],
           series: [
@@ -282,7 +282,6 @@
               symbolSize: '10',
               symbol: 'circle',
               data: seriesData,
-
               markArea: {
                 // 标记区域
                 silent: true,
@@ -324,23 +323,18 @@
                     }
                   ],
 
-                  // [
-                  //   {
-                  //     name: '',
-                  //     yAxis: lineData.maintenanc_line_left,
-                  //     label: {
-                  //       // 文字颜色
-                  //       color: '#FE7F2F'
-                  //     },
-                  //     itemStyle: {
-                  //       // 背景色
-                  //       color: '#FFF'
-                  //     }
-                  //   },
-                  //   {
-                  //     yAxis: lineData.maintenanc_line_right
-                  //   }
-                  // ],
+                  [
+                    {
+                      yAxis: lineData.maintenanc_line_left,
+                      itemStyle: {
+                        // 背景色
+                        color: '#FFF'
+                      }
+                    },
+                    {
+                      yAxis: lineData.maintenanc_line_right
+                    }
+                  ],
 
                   [
                     {
