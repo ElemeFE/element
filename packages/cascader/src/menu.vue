@@ -63,7 +63,6 @@
 
     computed: {
       activeOptions: {
-        cache: false,
         get() {
           const activeValue = this.activeValue;
           const configurableProps = ['label', 'value', 'children', 'disabled'];
