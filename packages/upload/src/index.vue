@@ -60,6 +60,10 @@ export default {
     },
     beforeUpload: Function,
     beforeRemove: Function,
+    onFile: {
+      type: Function,
+      default: noop
+    },
     onRemove: {
       type: Function,
       default: noop
@@ -149,26 +153,33 @@ export default {
   },
 
   methods: {
-    handleStart(rawFile) {
-      rawFile.uid = Date.now() + this.tempIndex++;
-      let file = {
-        status: 'ready',
-        name: rawFile.name,
-        size: rawFile.size,
-        percentage: 0,
-        uid: rawFile.uid,
-        raw: rawFile
-      };
+    handleFile(rawFiles) {
+      const fileList = [];
+      rawFiles.forEach(rawFile => {
+        const file = {
+          uid: Date.now() + this.tempIndex++,
+          status: 'ready',
+          name: rawFile.name,
+          size: rawFile.size,
+          percentage: 0,
+          raw: rawFile
+        };
 
-      if (this.listType === 'picture-card' || this.listType === 'picture') {
-        try {
-          file.url = URL.createObjectURL(rawFile);
-        } catch (err) {
-          console.error('[Element Error][Upload]', err);
-          return;
+        if (this.listType === 'picture-card' || this.listType === 'picture') {
+          try {
+            file.url = URL.createObjectURL(rawFile);
+          } catch (err) {
+            console.error('[Element Error][Upload]', err);
+            return;
+          }
         }
-      }
+        fileList.push(file);
+      });
 
+      this.onFile(fileList);
+      return fileList;
+    },
+    handleStart(file) {
       this.uploadFiles.push(file);
       this.onChange(file, this.uploadFiles);
     },
@@ -299,6 +310,7 @@ export default {
         limit: this.limit,
         'on-exceed': this.onExceed,
         'on-start': this.handleStart,
+        'on-file': this.handleFile,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,

@@ -80,6 +80,9 @@
         }
         return true;
       },
+      handleFile(files) {
+        console.log(files);
+      },
       handlePreview(file) {
         console.log(file);
       },
@@ -282,6 +285,7 @@ Use `list-type` to change the fileList style.
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :on-file="handleFile"
   :file-list="fileList2"
   list-type="picture">
   <el-button size="small" type="primary">Click to upload</el-button>
@@ -300,6 +304,9 @@ Use `list-type` to change the fileList style.
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handleFile(files) {
+        console.log(files);
       }
     }
   }
@@ -356,12 +363,22 @@ You can drag your file to a certain area to upload it.
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :on-file="handleFile"
   :file-list="fileList"
   multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
+<script>
+  export default {
+    methods: {
+      handleFile(files) {
+        console.log(files);
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -402,6 +419,7 @@ with-credentials | whether cookies are sent | boolean | — |false
 show-file-list | whether to show the uploaded file list | boolean | — | true
  drag | whether to activate drag and drop mode | boolean | — | false
 accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
+on-file | hook function when add files to file-list | function(files) | - | -
 on-preview | hook function when clicking the uploaded files | function(file) | — | —
 on-remove | hook function when files are removed | function(file, fileList) | — | —
 on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —

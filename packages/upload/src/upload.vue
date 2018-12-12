@@ -22,6 +22,7 @@ export default {
     withCredentials: Boolean,
     multiple: Boolean,
     accept: String,
+    onFile: Function,
     onStart: Function,
     onProgress: Function,
     onSuccess: Function,
@@ -76,9 +77,11 @@ export default {
 
       if (postFiles.length === 0) { return; }
 
-      postFiles.forEach(rawFile => {
-        this.onStart(rawFile);
-        if (this.autoUpload) this.upload(rawFile);
+      postFiles = this.onFile(postFiles);
+
+      postFiles.forEach(file => {
+        this.onStart(file);
+        if (this.autoUpload) this.upload(file);
       });
     },
     upload(rawFile) {

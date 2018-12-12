@@ -79,6 +79,9 @@
         }
         return true;
       },
+      handleFile(files) {
+        console.log(files);
+      },
       handlePreview(file) {
         console.log(file);
       },
@@ -282,6 +285,7 @@
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :on-file="handleFile"
   :file-list="fileList2"
   list-type="picture">
   <el-button size="small" type="primary">点击上传</el-button>
@@ -300,6 +304,9 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handleFile(files) {
+        console.log(files);
       }
     }
   }
@@ -351,12 +358,22 @@
 <el-upload
   class="upload-demo"
   drag
+  :on-file="handleFile"
   action="https://jsonplaceholder.typicode.com/posts/"
   multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
+<script>
+  export default {
+    methods: {
+      handleFile(files) {
+        console.log(files);
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -411,6 +428,7 @@
 | show-file-list | 是否显示已上传文件列表 | boolean | — | true |
 | drag | 是否启用拖拽上传 | boolean | — | false |
 | accept | 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)（thumbnail-mode 模式下此参数无效）| string | — | — |
+| on-file | 添加文件到文件列表时的钩子 | function(files) | - | - |
 | on-preview | 点击文件列表中已上传的文件时的钩子 | function(file) | — | — |
 | on-remove | 文件列表移除文件时的钩子 | function(file, fileList) | — | — |
 | on-success | 文件上传成功时的钩子 | function(response, file, fileList) | — | — |

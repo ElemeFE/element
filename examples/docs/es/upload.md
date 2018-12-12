@@ -80,6 +80,9 @@
         }
         return true;
       },
+      handleFile(files) {
+        console.log(files);
+      },
       handlePreview(file) {
         console.log(file);
       },
@@ -275,6 +278,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :on-file="handleFile"
   :file-list="fileList2"
   list-type="picture">
   <el-button size="small" type="primary">Clic para subir archivo</el-button>
@@ -293,6 +297,9 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handleFile(files) {
+        console.log(files);
       }
     }
   }
@@ -349,12 +356,22 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :on-file="handleFile"
   :file-list="fileList"
   multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">Suelta tu archivo aquí o <em>haz clic para cargar</em></div>
   <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
+<script>
+  export default {
+    methods: {
+      handleFile(files) {
+        console.log(files);
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -395,6 +412,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | show-file-list   | especifica si se debe mostrar la lista de archivos cargados | boolean                            | —                         | true        |
 | drag             | se especifica si se activará el modo arrastrar y soltar | boolean                            | —                         | false       |
 | accept           | acepta [tipos de archivos](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), puede no funcionar cuando `thumbnail-mode` esta en `true` | string                             | —                         | —           |
+| on-file | 添加文件到文件列表时的钩子 | function(files) | - | - |
 | on-preview       | _hook_ lanzado al hacer clic en los archivos subidos | function(file)                     | —                         | —           |
 | on-remove        | _hook_ lanzado cuando los archivos son eliminados | function(file, fileList)           | —                         | —           |
 | on-success       | _hook_ lanzado cuando los archivos fueron cargados correctamente | function(response, file, fileList) | —                         | —           |
