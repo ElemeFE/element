@@ -4,7 +4,7 @@
     :class="[
       {
         'is-opened': menuVisible,
-        'is-disabled': disabled
+        'is-disabled': cascaderDisabled
       },
       cascaderSize ? 'el-cascader--' + cascaderSize : ''
     ]"
@@ -19,13 +19,18 @@
   >
     <el-input
       ref="input"
-      :readonly="!filterable"
+      :readonly="readonly"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @compositionstart.native="handleComposition"
+      @compositionend.native="handleComposition"
       :validate-event="false"
       :size="size"
-      :disabled="disabled"
+      :disabled="cascaderDisabled"
+      :class="{ 'is-focus': menuVisible }"
     >
       <template slot="suffix">
         <i
@@ -42,11 +47,11 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === ''">
+    <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> {{ separator }} </span>
+          <span v-if="index < currentLabels.length - 1" :key="index"> {{ separator }} </span>
         </template>
       </template>
       <template v-else>
@@ -66,7 +71,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
-import { generateId } from 'element-ui/src/utils/util';
+import { generateId, escapeRegexpString, isIE, isEdge } from 'element-ui/src/utils/util';
 
 const popperMixin = {
   props: {
@@ -75,6 +80,7 @@ const popperMixin = {
       default: 'bottom-start'
     },
     appendToBody: Popper.props.appendToBody,
+    arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     popperOptions: Popper.props.popperOptions
@@ -92,6 +98,9 @@ export default {
   mixins: [popperMixin, emitter, Locale],
 
   inject: {
+    elForm: {
+      default: ''
+    },
     elFormItem: {
       default: ''
     }
@@ -172,7 +181,10 @@ export default {
       menuVisible: false,
       inputHover: false,
       inputValue: '',
-      flatOptions: null
+      flatOptions: null,
+      id: generateId(),
+      needFocus: true,
+      isOnComposition: false
     };
   },
 
@@ -185,6 +197,9 @@ export default {
     },
     childrenKey() {
       return this.props.children || 'children';
+    },
+    disabledKey() {
+      return this.props.disabled || 'disabled';
     },
     currentLabels() {
       let options = this.options;
@@ -204,8 +219,11 @@ export default {
     cascaderSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
     },
-    id() {
-      return generateId();
+    cascaderDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
+    },
+    readonly() {
+      return !this.filterable || (!isIE() && !isEdge() && !this.menuVisible);
     }
   },
 
@@ -213,6 +231,7 @@ export default {
     menuVisible(value) {
       this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
       value ? this.showMenu() : this.hideMenu();
+      this.$emit('visible-change', value);
     },
     value(value) {
       this.currentValue = value;
@@ -268,7 +287,11 @@ export default {
     hideMenu() {
       this.inputValue = '';
       this.menu.visible = false;
-      this.$refs.input.focus();
+      if (this.needFocus) {
+        this.$refs.input.focus();
+      } else {
+        this.needFocus = true;
+      }
     },
     handleActiveItemChange(value) {
       this.$nextTick(_ => {
@@ -315,7 +338,8 @@ export default {
       }
 
       let filteredFlatOptions = flatOptions.filter(optionsStack => {
-        return optionsStack.some(option => new RegExp(value, 'i').test(option[this.labelKey]));
+        return optionsStack.some(option => new RegExp(escapeRegexpString(value), 'i')
+          .test(option[this.labelKey]));
       });
 
       if (filteredFlatOptions.length > 0) {
@@ -323,7 +347,8 @@ export default {
           return {
             __IS__FLAT__OPTIONS: true,
             value: optionStack.map(item => item[this.valueKey]),
-            label: this.renderFilteredOptionLabel(value, optionStack)
+            label: this.renderFilteredOptionLabel(value, optionStack),
+            disabled: optionStack.some(item => item[this.disabledKey])
           };
         });
       } else {
@@ -343,7 +368,7 @@ export default {
         const keywordIndex = label.toLowerCase().indexOf(inputValue.toLowerCase());
         const labelPart = label.slice(keywordIndex, inputValue.length + keywordIndex);
         const node = keywordIndex > -1 ? this.highlightKeyword(label, labelPart) : label;
-        return index === 0 ? node : [' / ', node];
+        return index === 0 ? node : [` ${this.separator} `, node];
       });
     },
     highlightKeyword(label, keyword) {
@@ -373,17 +398,29 @@ export default {
       ev.stopPropagation();
       this.handlePick([], true);
     },
-    handleClickoutside() {
+    handleClickoutside(pickFinished = false) {
+      if (this.menuVisible && !pickFinished) {
+        this.needFocus = false;
+      }
       this.menuVisible = false;
     },
     handleClick() {
-      if (this.disabled) return;
+      if (this.cascaderDisabled) return;
       this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;
         return;
       }
       this.menuVisible = !this.menuVisible;
+    },
+    handleFocus(event) {
+      this.$emit('focus', event);
+    },
+    handleBlur(event) {
+      this.$emit('blur', event);
+    },
+    handleComposition(event) {
+      this.isOnComposition = event.type !== 'compositionend';
     }
   },
 

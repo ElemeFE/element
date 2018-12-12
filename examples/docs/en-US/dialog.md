@@ -147,7 +147,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Zones" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="Please select a zone">
@@ -210,7 +210,7 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 <template>
   <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
   
-  <el-dialog title="Outter Dialog" :visible.sync="outerVisible">
+  <el-dialog title="Outer Dialog" :visible.sync="outerVisible">
     <el-dialog
         width="30%"
         title="Inner Dialog"
@@ -237,12 +237,10 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 ```
 :::
 
-:::
-
 ### Centered content
 Dialog's content can be centered.
 
-:::demo Setting `center` to `true` will center dialog's header and footer horizontally.
+:::demo Setting `center` to `true` will center dialog's header and footer horizontally. `center` only affects Dialog's header and footer. The body of Dialog can be anything, so sometimes it may not look good when centered. You need to write some CSS if you wish to center the body as well.
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -272,7 +270,7 @@ Dialog's content can be centered.
 :::
 
 :::tip
-`center` only affects Dialog's header and footer. The body of Dialog can be anything, so sometimes it may not look good when centered. You need to write some CSS if you wish to center the body as well.
+The content of Dialog is lazily rendered, which means the default slot is not rendered onto the DOM until it is firstly opened. Therefore, if you need to perform a DOM manipulation or access a component using `ref`, do it in the `open` event callback.
 :::
 
 :::tip
@@ -311,4 +309,6 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open | triggers when the Dialog opens | — |
+| opened | triggers when the Dialog opening animation ends | — |
 | close | triggers when the Dialog closes | — |
+| closed | triggers when the Dialog closing animation ends | — |

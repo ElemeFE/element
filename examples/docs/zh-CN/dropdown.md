@@ -334,8 +334,15 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | placement    | 菜单弹出位置     | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
 | hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | — | true |
-| show-timeout  | 展开下拉菜单的延时     | number          | — | 250 |
-| hide-timeout  | 收起下拉菜单的延时     | number          | — | 150 |
+| show-timeout  | 展开下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 250 |
+| hide-timeout  | 收起下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 150 |
+
+### Dropdown Slots
+
+| Name | 说明 |
+|------|--------|
+| — | 触发下拉列表显示的元素。 注意： 必须是一个元素或者或者组件  |
+| dropdown | 下拉列表，通常是 `<el-dropdown-menu>` 组件     |
 
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |

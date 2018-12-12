@@ -14,19 +14,15 @@
   margin: 5px 0;
   box-shadow: $--box-shadow-light;
   border-radius: $--border-radius-base;
-
-  &.el-popper .popper__arrow {
-    left: 24px !important;
-  }
+  border: 1px solid $--border-color-light;
+  overflow: hidden;
+  box-sizing: border-box;
 
   @include e(wrap) {
     max-height: 280px;
     padding: 10px 0;
     box-sizing: border-box;
-    overflow: auto;
     background-color: $--color-white;
-    border: 1px solid $--border-color-light;
-    border-radius: $--border-radius-base;
   }
 
   @include e(list) {

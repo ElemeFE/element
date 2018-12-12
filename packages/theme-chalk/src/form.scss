@@ -99,6 +99,10 @@
     position: relative;
     font-size: 14px;
     @include utils-clearfix;
+
+    .el-input-group {
+      vertical-align: middle;
+    }
   }
   @include e(error) {
     color: $--color-danger;
@@ -119,10 +123,12 @@
   }
 
   @include when(required) {
-    .el-form-item__label:before {
-      content: '*';
-      color: $--color-danger;
-      margin-right: 4px;
+    @include pseudo('not(.is-no-asterisk)') {
+      & > .el-form-item__label:before {
+        content: '*';
+        color: $--color-danger;
+        margin-right: 4px;
+      }
     }
   }
 

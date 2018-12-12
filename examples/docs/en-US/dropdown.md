@@ -328,8 +328,15 @@ Besides default size, Dropdown component provides three additional sizes for you
 | placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
 | hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
-| show-timeout | Delay time before show a dropdown     | number          | — | 250 |
-| hide-timeout | Delay time before hide a dropdown     | number          | — | 150 |
+| show-timeout | Delay time before show a dropdown (only works when trigger is `hover`) | number | — | 250 |
+| hide-timeout | Delay time before hide a dropdown (only works when trigger is `hover`) | number | — | 150 |
+
+### Dropdown Slots
+
+| Name | Description |
+|------|--------|
+| — | content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>, <button> etc.`) or `el-component`, to attach the trigger listener  |
+| dropdown | content of the Dropdown Menu, usually a `<el-dropdown-menu>` element |
 
 ### Dropdown Events
 | Event Name | Description | Parameters |

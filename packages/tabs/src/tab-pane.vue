@@ -1,6 +1,7 @@
 <template>
   <div
     class="el-tab-pane"
+    v-if="(!lazy || loaded) || active"
     v-show="active"
     role="tabpanel"
     :aria-hidden="!active"
@@ -21,12 +22,14 @@
       labelContent: Function,
       name: String,
       closable: Boolean,
-      disabled: Boolean
+      disabled: Boolean,
+      lazy: Boolean
     },
 
     data() {
       return {
-        index: null
+        index: null,
+        loaded: false
       };
     },
 
@@ -35,22 +38,15 @@
         return this.closable || this.$parent.closable;
       },
       active() {
-        return this.$parent.currentName === (this.name || this.index);
+        const active = this.$parent.currentName === (this.name || this.index);
+        if (active) {
+          this.loaded = true;
+        }
+        return active;
       },
       paneName() {
         return this.name || this.index;
       }
-    },
-
-    mounted() {
-      this.$parent.addPanes(this);
-    },
-
-    destroyed() {
-      if (this.$el && this.$el.parentNode) {
-        this.$el.parentNode.removeChild(this.$el);
-      }
-      this.$parent.removePanes(this);
     },
 
     watch: {

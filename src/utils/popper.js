@@ -71,6 +71,8 @@
 
         arrowElement: '[x-arrow]',
 
+        arrowOffset: 0,
+
         // list of functions used to modify the offsets before they are applied to the popper
         modifiers: [ 'shift', 'offset', 'preventOverflow', 'keepTogether', 'arrow', 'flip', 'applyStyle'],
 
@@ -238,7 +240,6 @@
         if (typeof this.state.updateCallback === 'function') {
             this.state.updateCallback(data);
         }
-
     };
 
     /**
@@ -436,7 +437,6 @@
         popperOffsets.width   = popperRect.width;
         popperOffsets.height  = popperRect.height;
 
-
         return {
             popper: popperOffsets,
             reference: referenceOffsets
@@ -462,6 +462,7 @@
                 target = root;
             }
             target.addEventListener('scroll', this.state.updateBound);
+            this.state.scrollTarget = target;
         }
     };
 
@@ -474,13 +475,9 @@
     Popper.prototype._removeEventListeners = function() {
         // NOTE: 1 DOM access here
         root.removeEventListener('resize', this.state.updateBound);
-        if (this._options.boundariesElement !== 'window') {
-            var target = getScrollParent(this._reference);
-            // here it could be both `body` or `documentElement` thanks to Firefox, we then check both
-            if (target === root.document.body || target === root.document.documentElement) {
-                target = root;
-            }
-            target.removeEventListener('scroll', this.state.updateBound);
+        if (this._options.boundariesElement !== 'window' && this.state.scrollTarget) {
+            this.state.scrollTarget.removeEventListener('scroll', this.state.updateBound);
+            this.state.scrollTarget = null;
         }
         this.state.updateBound = null;
     };
@@ -517,13 +514,13 @@
             var scrollParent = getScrollParent(this._popper);
             var offsetParentRect = getOffsetRect(offsetParent);
 
-			// Thanks the fucking native API, `document.body.scrollTop` & `document.documentElement.scrollTop`
-			var getScrollTopValue = function (element) {
-				return element == document.body ? Math.max(document.documentElement.scrollTop, document.body.scrollTop) : element.scrollTop;
-			}
-			var getScrollLeftValue = function (element) {
-				return element == document.body ? Math.max(document.documentElement.scrollLeft, document.body.scrollLeft) : element.scrollLeft;
-			}
+            // Thanks the fucking native API, `document.body.scrollTop` & `document.documentElement.scrollTop`
+            var getScrollTopValue = function (element) {
+                return element == document.body ? Math.max(document.documentElement.scrollTop, document.body.scrollTop) : element.scrollTop;
+            }
+            var getScrollLeftValue = function (element) {
+                return element == document.body ? Math.max(document.documentElement.scrollLeft, document.body.scrollLeft) : element.scrollLeft;
+            }
 
             // if the popper is fixed we don't have to substract scrolling from the boundaries
             var scrollTop = data.offsets.popper.position === 'fixed' ? 0 : getScrollTopValue(scrollParent);
@@ -878,6 +875,7 @@
      */
     Popper.prototype.modifiers.arrow = function(data) {
         var arrow  = this._options.arrowElement;
+        var arrowOffset = this._options.arrowOffset;
 
         // if the arrowElement is a string, suppose it's a CSS selector
         if (typeof arrow === 'string') {
@@ -928,7 +926,7 @@
         }
 
         // compute center of the popper
-        var center = reference[side] + (reference[len] / 2) - (arrowSize / 2);
+        var center = reference[side] + (arrowOffset || (reference[len] / 2) - (arrowSize / 2));
 
         var sideValue = center - popper[side];
 
@@ -1062,7 +1060,7 @@
         if (parent === root.document) {
             // Firefox puts the scrollTOp value on `documentElement` instead of `body`, we then check which of them is
             // greater than 0 and return the proper element
-            if (root.document.body.scrollTop) {
+            if (root.document.body.scrollTop || root.document.body.scrollLeft) {
                 return root.document.body;
             } else {
                 return root.document.documentElement;

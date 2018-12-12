@@ -5,7 +5,7 @@
   display: flex;
   width: $--notification-width;
   padding: $--notification-padding;
-  border-radius: $--notification-raduis;
+  border-radius: $--notification-radius;
   box-sizing: border-box;
   border: 1px solid $--notification-border-color;
   position: fixed;
@@ -49,12 +49,11 @@
     height: $--notification-icon-size;
     width: $--notification-icon-size;
     font-size: $--notification-icon-size;
-    transform: translateY(4px);
   }
 
   @include e(closeBtn) {
     position: absolute;
-    top: 15px;
+    top: 18px;
     right: 15px;
     cursor: pointer;
     color: $--notification-close-color;

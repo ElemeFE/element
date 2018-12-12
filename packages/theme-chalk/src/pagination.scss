@@ -24,6 +24,7 @@
   .el-input__inner {
     text-align: center;
     -moz-appearance: textfield;
+    line-height: normal;
   }
 
   // pagesize 的下拉 icon
@@ -39,7 +40,6 @@
     .el-input__inner {
       padding-right: 25px;
       border-radius: $--pagination-border-radius;
-      height: $--pagination-button-height;
     }
   }
 
@@ -56,7 +56,7 @@
       color: $--pagination-hover-fill;
     }
 
-    &.disabled {
+    &:disabled {
       color: $--pagination-button-disabled-color;
       background-color: $--pagination-button-disabled-fill;
       cursor: not-allowed;
@@ -87,10 +87,17 @@
     padding-left: 12px;    
   }
 
+  .el-pager li.disabled {
+    color: $--color-text-placeholder;
+    cursor: not-allowed;
+  }
+
   @include m(small) {
     .btn-prev,
     .btn-next,
     .el-pager li,
+    .el-pager li.btn-quicknext,
+    .el-pager li.btn-quickprev,
     .el-pager li:last-child {
       border-color: transparent;
       font-size: 12px;
@@ -101,6 +108,24 @@
 
     .arrow.disabled {
       visibility: hidden;
+    }
+
+    .more::before,
+    li.more::before {
+      line-height: 24px;
+    }
+
+    span:not([class*=suffix]),
+    button {
+      height: 22px;
+      line-height: 22px;
+    }
+
+    @include e(editor) {
+      height: 22px;
+      &.el-input .el-input__inner {
+        height: 22px;
+      }
     }
   }
 
@@ -173,17 +198,21 @@
       color: $--color-text-regular;
       min-width: 30px;
       border-radius: 2px;
-    }
-
-    .btn-prev, .btn-next {
-      padding: 0;
 
       &.disabled {
         color: $--color-text-placeholder;
       }
     }
 
-    .el-pager li {
+    .btn-prev, .btn-next {
+      padding: 0;
+
+      &:disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .el-pager li:not(.disabled) {
       &:hover {
         color: $--pagination-hover-fill;
       }
@@ -236,6 +265,10 @@
     &.btn-quickprev {
       line-height: 28px;
       color: $--pagination-button-color;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
     }
 
     &.btn-quickprev:hover {

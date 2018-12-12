@@ -1,7 +1,7 @@
 import { ElementUIComponent } from './component'
 
 export type ProgressType = 'line' | 'circle'
-export type ProgressStatus = 'success' | 'exception'
+export type ProgressStatus = 'success' | 'exception' | 'text'
 
 /** Progress Component */
 export declare class ElProgress extends ElementUIComponent {
@@ -19,6 +19,9 @@ export declare class ElProgress extends ElementUIComponent {
 
   /** The current status of progress bar */
   status: ProgressStatus
+
+  /** Background color of progress bar. Overrides `status` prop */
+  color: string
 
   /** The canvas width of circle progress bar */
   width: number

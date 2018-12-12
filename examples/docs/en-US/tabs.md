@@ -376,6 +376,8 @@ Only card type Tabs support addable & closeable.
 | editable  | whether Tab is addable and closable | boolean   | — |  false  |
 | value  | name of the selected tab  | string   |  —  |  name of first tab |
 | tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
+| stretch  | whether width of tab automatically fits its container | boolean   |  -  |  false |
+| before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | Function(activeName, oldActiveName) | — | — |
 
 ### Tabs Events
 | Event Name | Description | Parameters |
@@ -392,3 +394,4 @@ Only card type Tabs support addable & closeable.
 | disabled | whether Tab is disabled | boolean | — | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, e.g. the first tab-pane is '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |
+| lazy  | whether Tab is lazily rendered   | boolean   | — |  false  |

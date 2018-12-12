@@ -51,6 +51,7 @@
   import Locale from 'element-ui/src/mixins/locale';
   import { isDate, range, getDayCountOfMonth, nextDate } from '../util';
   import { hasClass } from 'element-ui/src/utils/dom';
+  import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
   const datesInMonth = (year, month) => {
     const numOfDays = getDayCountOfMonth(year, month);
@@ -80,7 +81,7 @@
         style.disabled = typeof this.disabledDate === 'function'
           ? datesInMonth(year, month).every(this.disabledDate)
           : false;
-        style.current = this.value.getFullYear() === year && this.value.getMonth() === month;
+        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
         style.today = today.getFullYear() === year && today.getMonth() === month;
         style.default = this.defaultValue &&
           this.defaultValue.getFullYear() === year &&

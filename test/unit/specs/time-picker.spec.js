@@ -26,6 +26,30 @@ describe('TimePicker', () => {
     expect(vm.$el.querySelector('input').value).to.equal('18-40-00');
   });
 
+  it('set AM/PM format', done => {
+    vm = createTest(TimePicker, {
+      format: 'hh:mm:ss A',
+      value: new Date(2016, 9, 10, 18, 40)
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    expect(vm.$el.querySelector('input').value).to.equal('06:40:00 PM');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
+      const hoursEl = list[0];
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[0].textContent).to.equal('12 AM');
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[1].textContent).to.equal('01 AM');
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[12].textContent).to.equal('12 PM');
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[15].textContent).to.equal('03 PM');
+      done();
+    }, DELAY);
+  });
+
   it('default value', done => {
     vm = createTest(TimePicker, {
       value: new Date(2016, 9, 10, 18, 40)
@@ -178,7 +202,7 @@ describe('TimePicker', () => {
   it('selectableRange', done => {
     vm = createTest(TimePicker, {
       pickerOptions: {
-        selectableRange: '18:30:00 - 20:30:00'
+        selectableRange: ['17:30:00 - 18:30:00', '18:50:00 - 20:30:00', '21:00:00 - 22:00:00']
       }
     }, true);
     const input = vm.$el.querySelector('input');
@@ -194,8 +218,18 @@ describe('TimePicker', () => {
         .map(node => Number(node.textContent));
 
       hoursEl.querySelectorAll('.disabled')[0].click();
-      expect(disabledHours).to.not.include.members([18, 19, 20]);
-      done();
+      expect(disabledHours).to.not.include.members([17, 18, 19, 20, 21, 22]);
+
+      const minutesEl = list[1];
+      hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
+      setTimeout(_ => {
+        const disabledMinutes = [].slice
+          .call(minutesEl.querySelectorAll('.disabled'))
+          .map(node => Number(node.textContent));
+        expect(disabledMinutes.every(t => t > 30 && t < 50)).to.equal(true);
+        expect(disabledMinutes.length).to.equal(19);
+        done();
+      }, DELAY);
     }, DELAY);
   });
 
@@ -216,12 +250,14 @@ describe('TimePicker', () => {
     vm.$refs.picker.$on('focus', spyFocus);
     vm.$refs.picker.$on('blur', spyBlur);
     vm.$el.querySelector('input').focus();
-    vm.$el.querySelector('input').blur();
 
     vm.$nextTick(_ => {
       expect(spyFocus.calledOnce).to.be.true;
-      expect(spyBlur.calledOnce).to.be.true;
-      done();
+      vm.$refs.picker.pickerVisible = false;
+      vm.$nextTick(_ => {
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
     });
   });
 

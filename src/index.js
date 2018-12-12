@@ -142,19 +142,19 @@ const components = [
 ];
 
 const install = function(Vue, opts = {}) {
-  /* istanbul ignore if */
-  if (install.installed) return;
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
-  components.map(component => {
+  components.forEach(component => {
     Vue.component(component.name, component);
   });
 
   Vue.use(Loading.directive);
 
-  const ELEMENT = {};
-  ELEMENT.size = opts.size || '';
+  Vue.prototype.$ELEMENT = {
+    size: opts.size || '',
+    zIndex: opts.zIndex || 2000
+  };
 
   Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
@@ -164,16 +164,15 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
 
-  Vue.prototype.$ELEMENT = ELEMENT;
 };
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
-};
+}
 
 module.exports = {
-  version: '2.0.7',
+  version: '2.4.11',
   locale: locale.use,
   i18n: locale.i18n,
   install,

@@ -28,14 +28,16 @@
         type: Function,
         default: noop
       },
-      type: String
+      type: String,
+      stretch: Boolean
     },
 
     data() {
       return {
         scrollable: false,
         navOffset: 0,
-        isFocus: false
+        isFocus: false,
+        focusable: true
       };
     },
 
@@ -81,10 +83,11 @@
         if (!this.scrollable) return;
         const nav = this.$refs.nav;
         const activeTab = this.$el.querySelector('.is-active');
+        if (!activeTab) return;
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const navBounding = nav.getBoundingClientRect();
+        const maxOffset = nav.offsetWidth - navScrollBounding.width;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
@@ -94,10 +97,9 @@
         if (activeTabBounding.right > navScrollBounding.right) {
           newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
         }
-        if (navBounding.right < navScrollBounding.right) {
-          newOffset = nav.offsetWidth - navScrollBounding.width;
-        }
-        this.navOffset = Math.max(newOffset, 0);
+
+        newOffset = Math.max(newOffset, 0);
+        this.navOffset = Math.min(newOffset, maxOffset);
       },
       update() {
         if (!this.$refs.nav) return;
@@ -146,12 +148,33 @@
         }
         tabList[nextIndex].focus(); // 改变焦点元素
         tabList[nextIndex].click(); // 选中下一个tab
+        this.setFocus();
       },
       setFocus() {
-        this.isFocus = true;
+        if (this.focusable) {
+          this.isFocus = true;
+        }
       },
       removeFocus() {
         this.isFocus = false;
+      },
+      visibilityChangeHandler() {
+        const visibility = document.visibilityState;
+        if (visibility === 'hidden') {
+          this.focusable = false;
+        } else if (visibility === 'visible') {
+          setTimeout(() => {
+            this.focusable = true;
+          }, 50);
+        }
+      },
+      windowBlurHandler() {
+        this.focusable = false;
+      },
+      windowFocusHandler() {
+        setTimeout(() => {
+          this.focusable = true;
+        }, 50);
       }
     },
 
@@ -164,6 +187,7 @@
         type,
         panes,
         editable,
+        stretch,
         onTabClick,
         onTabRemove,
         navStyle,
@@ -175,10 +199,10 @@
         removeFocus
       } = this;
       const scrollBtn = scrollable
-      ? [
-        <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
-        <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
-      ] : null;
+        ? [
+          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
+          <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+        ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
         let tabName = pane.name || pane.index || index;
@@ -196,20 +220,22 @@
           <div
             class={{
               'el-tabs__item': true,
+              [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
               'is-closable': closable,
               'is-focus': this.isFocus
             }}
             id={`tab-${tabName}`}
+            key={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
-            aria-selected= { pane.active }
+            aria-selected={ pane.active }
             ref="tabs"
-            tabindex= {tabindex}
+            tabindex={tabindex}
             refInFor
-            on-focus= { ()=> { setFocus(); }}
-            on-blur = { ()=> { removeFocus(); }}
+            on-focus={ ()=> { setFocus(); }}
+            on-blur ={ ()=> { removeFocus(); }}
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
@@ -219,10 +245,16 @@
         );
       });
       return (
-        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '']}>
+        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
-            <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
+            <div
+              class={['el-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              ref="nav"
+              style={navStyle}
+              role="tablist"
+              on-keydown={ changeTab }
+            >
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}
             </div>
@@ -233,11 +265,19 @@
 
     mounted() {
       addResizeListener(this.$el, this.update);
+      document.addEventListener('visibilitychange', this.visibilityChangeHandler);
+      window.addEventListener('blur', this.windowBlurHandler);
+      window.addEventListener('focus', this.windowFocusHandler);
+      setTimeout(() => {
+        this.scrollToActiveTab();
+      }, 0);
     },
 
     beforeDestroy() {
       if (this.$el && this.update) removeResizeListener(this.$el, this.update);
+      document.removeEventListener('visibilitychange', this.visibilityChangeHandler);
+      window.removeEventListener('blur', this.windowBlurHandler);
+      window.removeEventListener('focus', this.windowFocusHandler);
     }
   };
 </script>
-

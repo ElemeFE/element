@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -34,17 +34,20 @@ describe('Select', () => {
       template: `
         <div>
           <el-select
+            ref="select"
             v-model="value"
             :multiple="multiple"
             :multiple-limit="multipleLimit"
             :popper-class="popperClass"
             :clearable="clearable"
             :filterable="filterable"
+            :collapse-tags="collapseTags"
             :allow-create="allowCreate"
             :filterMethod="filterMethod"
             :remote="remote"
             :loading="loading"
-            :remoteMethod="remoteMethod">
+            :remoteMethod="remoteMethod"
+            :automatic-dropdown="automaticDropdown">
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -63,8 +66,10 @@ describe('Select', () => {
           multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
+          collapseTags: configs.collapseTags,
           allowCreate: configs.allowCreate,
           popperClass: configs.popperClass,
+          automaticDropdown: configs.automaticDropdown,
           loading: false,
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
@@ -280,9 +285,9 @@ describe('Select', () => {
     vm.value = '选项1';
     select.inputHovering = true;
     setTimeout(() => {
-      const icon = vm.$el.querySelector('.el-input__icon');
-      expect(icon.classList.contains('el-icon-circle-close')).to.true;
-      icon.click();
+      const iconClear = vm.$el.querySelector('.el-input__icon.el-icon-circle-close');
+      expect(iconClear).to.exist;
+      iconClear.click();
       expect(vm.value).to.equal('');
       done();
     }, 100);
@@ -324,6 +329,32 @@ describe('Select', () => {
       expect(vm.$el.querySelector('.el-select-dropdown__item').classList.contains('selected'));
       done();
     }, 100);
+  });
+
+  it('prefixed icon', () => {
+    vm = createTest({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [],
+          value: ''
+        };
+      }
+    });
+    expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
   });
 
   it('custom el-option template', () => {
@@ -437,7 +468,7 @@ describe('Select', () => {
     };
     vm = getSelectVm({ filterable: true, filterMethod });
     const select = vm.$children[0];
-    select.$el.querySelector('input').focus();
+    select.$el.click();
     setTimeout(() => {
       select.selectedLabel = '面';
       select.onInputChange();
@@ -476,7 +507,7 @@ describe('Select', () => {
 
     const select = vm.$children[0];
     setTimeout(() => {
-      select.$el.querySelector('input').focus();
+      select.$el.click();
       select.query = '3';
       select.handleQueryChange('3');
       select.selectOption();
@@ -623,6 +654,7 @@ describe('Select', () => {
       remoteMethod
     });
     const select = vm.$children[0];
+    select.handleQueryChange('');
     vm.$nextTick(() => {
       select.handleQueryChange('面');
       setTimeout(() => {
@@ -657,9 +689,64 @@ describe('Select', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
+      done();
+    }, 100);
+  });
+
+  it('should return focus to input inside select after option select', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" ref="select">
+            <el-option label="1" :value="1" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    const spyInputFocus = sinon.spy();
+    const spySelectFocus = sinon.spy();
+
+    vm.$refs.select.$on('focus', spySelectFocus);
+    vm.$refs.select.$refs.reference.$on('focus', spyInputFocus);
+
+    const option = vm.$el.querySelectorAll('.el-select-dropdown__item')[0];
+    triggerEvent(option, 'mouseenter');
+    option.click();
+
+    vm.$nextTick(_ => {
+      expect(spyInputFocus.calledOnce).to.be.true;
+      expect(spySelectFocus.calledOnce).not.to.be.true;
+      done();
+    });
+  });
+
+  it('should not open popper when automatic-dropdown not set', done => {
+    vm = getSelectVm();
+
+    vm.$refs.select.$refs.reference.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(vm.$refs.select.visible).to.be.false;
+      done();
+    });
+  });
+
+  it('should open popper when automatic-dropdown is set', done => {
+    vm = getSelectVm({ automaticDropdown: true });
+
+    vm.$refs.select.$refs.reference.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(vm.$refs.select.visible).to.be.true;
       done();
     });
   });
@@ -712,5 +799,33 @@ describe('Select', () => {
         done();
       }, 10);
     }, 10);
+  });
+
+  describe('resetInputHeight', () => {
+    const getSelectComponentVm = (configs) => {
+      vm = getSelectVm(configs || {});
+      return vm.$refs.select;
+    };
+
+    it('should reset height if collapse-tags option is disabled', () => {
+      const select = getSelectComponentVm();
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
+    });
+
+    it('should not reset height if collapse-tags option is enabled', () => {
+      const select = getSelectComponentVm({ collapseTags: true });
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(0);
+    });
+
+    it('should reset height if both collapse-tags and filterable are enabled', () => {
+      const select = getSelectComponentVm({ collapseTags: true, filterable: true });
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
+    });
   });
 });

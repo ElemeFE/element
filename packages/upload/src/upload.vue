@@ -81,7 +81,7 @@ export default {
         if (this.autoUpload) this.upload(rawFile);
       });
     },
-    upload(rawFile, file) {
+    upload(rawFile) {
       this.$refs.input.value = null;
 
       if (!this.beforeUpload) {
@@ -92,7 +92,18 @@ export default {
       if (before && before.then) {
         before.then(processedFile => {
           const fileType = Object.prototype.toString.call(processedFile);
+
           if (fileType === '[object File]' || fileType === '[object Blob]') {
+            if (fileType === '[object Blob]') {
+              processedFile = new File([processedFile], rawFile.name, {
+                type: rawFile.type
+              });
+            }
+            for (const p in rawFile) {
+              if (rawFile.hasOwnProperty(p)) {
+                processedFile[p] = rawFile[p];
+              }
+            }
             this.post(processedFile);
           } else {
             this.post(rawFile);
@@ -155,6 +166,7 @@ export default {
       }
     },
     handleKeydown(e) {
+      if (e.target !== e.currentTarget) return;
       if (e.keyCode === 13 || e.keyCode === 32) {
         this.handleClick();
       }
@@ -188,8 +200,8 @@ export default {
       <div {...data} tabindex="0" >
         {
           drag
-          ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
-          : this.$slots.default
+            ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+            : this.$slots.default
         }
         <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
       </div>

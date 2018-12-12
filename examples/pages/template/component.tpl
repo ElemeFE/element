@@ -112,6 +112,7 @@
       cursor: pointer;
       transition: .3s;
       box-shadow: 0 0 6px rgba(0,0,0, .12);
+      z-index: 5;
 
       i {
         color: #409EFF;

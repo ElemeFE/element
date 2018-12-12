@@ -12,7 +12,7 @@
     :aria-checked="model === label"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
-    @keydown.space.stop.prevent="model = label"
+    @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
       :class="{
@@ -25,6 +25,7 @@
         class="el-radio__original"
         :value="label"
         type="radio"
+        aria-hidden="true"
         v-model="model"
         @focus="focus = true"
         @blur="focus = false"
@@ -34,7 +35,7 @@
         tabindex="-1"
       >
     </span>
-    <span class="el-radio__label">
+    <span class="el-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
@@ -49,6 +50,10 @@
     mixins: [Emitter],
 
     inject: {
+      elForm: {
+        default: ''
+      },
+
       elFormItem: {
         default: ''
       }
@@ -106,11 +111,11 @@
       },
       isDisabled() {
         return this.isGroup
-          ? this._radioGroup.disabled || this.disabled
-          : this.disabled;
+          ? this._radioGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          : this.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
-        return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;
+        return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
       }
     },
 

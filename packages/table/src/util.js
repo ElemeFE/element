@@ -84,20 +84,24 @@ export const getColumnById = function(table, columnId) {
   return column;
 };
 
+export const getColumnByKey = function(table, columnKey) {
+  let column = null;
+  for (let i = 0; i < table.columns.length; i++) {
+    const item = table.columns[i];
+    if (item.columnKey === columnKey) {
+      column = item;
+      break;
+    }
+  }
+  return column;
+};
+
 export const getColumnByCell = function(table, cell) {
   const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
   if (matches) {
     return getColumnById(table, matches[0]);
   }
   return null;
-};
-
-const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-
-export const mousewheel = function(element, callback) {
-  if (element && element.addEventListener) {
-    element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', callback);
-  }
 };
 
 export const getRowIdentity = (row, rowKey) => {

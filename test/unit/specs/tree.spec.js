@@ -177,29 +177,36 @@ describe('Tree', () => {
     const firstNode = document.querySelector('.el-tree-node');
     firstNode.click();
     vm.$nextTick(() => {
-      expect(firstNode.className.indexOf('is-current') !== -1);
+      expect(firstNode.className.indexOf('is-current')).to.not.equal(-1);
       done();
     });
   });
 
   it('expandOnNodeClick', done => {
-    vm = getTreeVm(':props="defaultProps" :expand-on-node-click="false"');
+    vm = getTreeVm(':props="defaultProps" :expand-on-click-node="false"');
     const firstNode = document.querySelector('.el-tree-node');
     firstNode.click();
     vm.$nextTick(() => {
-      expect(firstNode.className.indexOf('is-expanded') === -1);
+      expect(firstNode.className.indexOf('is-expanded')).to.equal(-1);
       done();
     });
   });
 
-  it('current-node-key', done => {
-    vm = getTreeVm(':props="defaultProps" :current-node-key="1"');
+  it('checkOnNodeClick', done => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox check-on-click-node');
     const firstNode = document.querySelector('.el-tree-node');
     firstNode.click();
     vm.$nextTick(() => {
-      expect(firstNode.classList.contains('is-current')).to.true;
+      expect(firstNode.querySelector('input').checked).to.true;
       done();
     });
+  });
+
+  it('current-node-key', () => {
+    vm = getTreeVm(':props="defaultProps" default-expand-all highlight-current node-key="id" :current-node-key="11"');
+    const currentNodeLabel = document.querySelector('.is-current .el-tree-node__label').textContent;
+
+    expect(currentNodeLabel).to.be.equal('二级 1-1');
   });
 
   it('defaultExpandAll', () => {
@@ -292,6 +299,36 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(1);
   });
 
+  it('defaultCheckedKeys & lazy, checked children length as expected', () => {
+    vm = getTreeVm(':load="loadNode" :props="defaultProps" :default-checked-keys="defaultCheckedKeys" node-key="id" :default-expanded-keys="[1]" lazy show-checkbox ', {
+      created() {
+        this.defaultCheckedKeys = [2, 3];
+      },
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'head', id: 1} ]);
+          }
+          return resolve([
+            {
+              label: '#1',
+              id: 2
+            },
+            {
+              label: '#3',
+              id: 3
+            },
+            {
+              label: '$4',
+              id: 5
+            }
+          ]);
+        }
+      }
+    });
+    expect(vm.$el.querySelectorAll('.el-checkbox.is-checked').length).to.equal(2);
+  });
+
   it('show checkbox', done => {
     vm = getTreeVm(':props="defaultProps" show-checkbox');
     const tree = vm.$children[0];
@@ -312,6 +349,26 @@ describe('Tree', () => {
           done();
         }, 10);
       }, 10);
+    }, 10);
+  });
+
+  it('check', done => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox @check="handleCheck"', {
+      methods: {
+        handleCheck(data, args) {
+          this.data = data;
+          this.args = args;
+        }
+      }
+    });
+    const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
+    const nodeCheckbox = secondNode.querySelector('.el-checkbox');
+    expect(nodeCheckbox).to.be.exist;
+    nodeCheckbox.click();
+    setTimeout(() => {
+      expect(vm.args.checkedNodes.length).to.equal(3);
+      expect(vm.data.id).to.equal(2);
+      done();
     }, 10);
   });
 
@@ -418,7 +475,12 @@ describe('Tree', () => {
     tree.setCurrentKey(111);
     vm.$nextTick(() => {
       expect(tree.store.currentNode.data.id).to.equal(111);
-      done();
+      // cancel highlight
+      tree.setCurrentKey(null);
+      vm.$nextTick(() => {
+        expect(tree.store.currentNode).to.equal(null);
+        done();
+      });
     });
   });
 
@@ -453,6 +515,54 @@ describe('Tree', () => {
       expect(tree.getCurrentNode().id).to.equal(111);
       done();
     });
+  });
+
+  it('getNode', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const node = tree.getNode(111);
+    expect(node.data.id).to.equal(111);
+  });
+
+  it('remove', (done) => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    tree.remove(1);
+    vm.$nextTick(() => {
+      expect(vm.data[0].id).to.equal(2);
+      expect(tree.getNode(1)).to.equal(null);
+      done();
+    });
+  });
+
+  it('append', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const nodeData = { id: 88, label: '88' };
+    tree.append(nodeData, tree.getNode(1));
+
+    expect(vm.data[0].children.length).to.equal(2);
+    expect(tree.getNode(88).data).to.equal(nodeData);
+  });
+
+  it('insertBefore', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const nodeData = { id: 88, label: '88' };
+    tree.insertBefore(nodeData, tree.getNode(11));
+    expect(vm.data[0].children.length).to.equal(2);
+    expect(vm.data[0].children[0]).to.equal(nodeData);
+    expect(tree.getNode(88).data).to.equal(nodeData);
+  });
+
+  it('insertAfter', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const nodeData = { id: 88, label: '88' };
+    tree.insertAfter(nodeData, tree.getNode(11));
+    expect(vm.data[0].children.length).to.equal(2);
+    expect(vm.data[0].children[1]).to.equal(nodeData);
+    expect(tree.getNode(88).data).to.equal(nodeData);
   });
 
   it('set disabled checkbox', done => {
@@ -499,6 +609,63 @@ describe('Tree', () => {
     const button = firstNode.querySelector('.custom-content .el-button');
     expect(button).to.exist;
     expect(button.textContent).to.equal('一级 1');
+  });
+
+  it('scoped slot', () => {
+    vm = createVue({
+      template: `
+        <el-tree ref="tree" :data="data">
+          <div slot-scope="scope" class="custom-tree-template">
+            <span>{{ scope.node.label }}</span>
+            <el-button></el-button>
+          </div>
+        </el-tree>
+        `,
+
+      data() {
+        return {
+          data: [{
+            id: 1,
+            label: '一级 1',
+            children: [{
+              id: 11,
+              label: '二级 1-1',
+              children: [{
+                id: 111,
+                label: '三级 1-1'
+              }]
+            }]
+          }, {
+            id: 2,
+            label: '一级 2',
+            children: [{
+              id: 21,
+              label: '二级 2-1'
+            }, {
+              id: 22,
+              label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            children: [{
+              id: 31,
+              label: '二级 3-1'
+            }, {
+              id: 32,
+              label: '二级 3-2'
+            }]
+          }]
+        };
+      }
+    }, true);
+    const firstNode = document.querySelector('.custom-tree-template');
+    expect(firstNode).to.exist;
+    const span = firstNode.querySelector('span');
+    const button = firstNode.querySelector('.el-button');
+    expect(span).to.exist;
+    expect(span.innerText).to.equal('一级 1');
+    expect(button).to.exist;
   });
 
   it('load node', done => {

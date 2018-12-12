@@ -15,6 +15,7 @@
             <time-spinner
               ref="minSpinner"
               :show-seconds="showSeconds"
+              :am-pm-mode="amPmMode"
               @change="handleMinChange"
               :arrow-control="arrowControl"
               @select-range="setMinSelectionRange"
@@ -30,6 +31,7 @@
             <time-spinner
               ref="maxSpinner"
               :show-seconds="showSeconds"
+              :am-pm-mode="amPmMode"
               @change="handleMaxChange"
               :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
@@ -100,6 +102,11 @@
 
       btnDisabled() {
         return this.minDate.getTime() > this.maxDate.getTime();
+      },
+      amPmMode() {
+        if ((this.format || '').indexOf('A') !== -1) return 'A';
+        if ((this.format || '').indexOf('a') !== -1) return 'a';
+        return '';
       }
     },
 
@@ -220,7 +227,7 @@
         const keyCode = event.keyCode;
         const mapping = { 38: -1, 40: 1, 37: -1, 39: 1 };
 
-         // Left or Right
+        // Left or Right
         if (keyCode === 37 || keyCode === 39) {
           const step = mapping[keyCode];
           this.changeSelectionRange(step);

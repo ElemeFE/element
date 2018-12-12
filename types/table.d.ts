@@ -17,6 +17,18 @@ export interface SummaryMethodParams {
   data: object
 }
 
+export interface rowCallbackParams {
+  row: object,
+  rowIndex: number
+}
+
+export interface cellCallbackParams {
+  row: object,
+  rowIndex: number,
+  column: object,
+  columnIndex: number
+}
+
 /** Table Component */
 export declare class ElTable extends ElementUIComponent {
   /** Table data */
@@ -47,10 +59,28 @@ export declare class ElTable extends ElementUIComponent {
   currentRowKey: string | number
 
   /** Function that returns custom class names for a row, or a string assigning class names for every row */
-  rowClassName: string | ((row: object, index: number) => string)
+  rowClassName: string | ((param: rowCallbackParams) => string)
 
-  /** Function that returns custom style for a row, or a string assigning custom style for every row */
-  rowStyle: string | object | ((row: object, index: number) => object)
+  /** Function that returns custom style for a row, or an object assigning custom style for every row */
+  rowStyle: object | ((param: rowCallbackParams) => object)
+
+  /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
+  cellClassName: string | ((param: cellCallbackParams) => string)
+
+  /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
+  cellStyle: object | ((param: cellCallbackParams) => object)
+
+  /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
+  headerRowClassName: string | ((param: rowCallbackParams) => string)
+
+  /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
+  headerRowStyle: object | ((param: rowCallbackParams) => object)
+
+  /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
+  headerCellClassName: string | ((param: cellCallbackParams) => string)
+
+  /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
+  headerCellStyle: object | ((param: cellCallbackParams) => object)
 
   /** Key of row data, used for optimizing rendering. Required if reserve-selection is on */
   rowKey: (row: object) => any
@@ -79,6 +109,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Custom summary method */
   summaryMethod: (param: SummaryMethodParams) => any[]
 
+  /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
+  selectOnIndeterminate: boolean
+
   /** Clear selection. Might be useful when `reserve-selection` is on */
   clearSelection (): void
 
@@ -91,9 +124,34 @@ export declare class ElTable extends ElementUIComponent {
   toggleRowSelection (row: object, selected?: boolean): void
 
   /**
+   * Toggle or set all rows
+   */
+  toggleAllSelection (): void
+
+  /**
    * Set a certain row as selected
    *
    * @param row The row that is going to set as selected
    */
   setCurrentRow (row?: object): void
+  
+  /**
+   * Toggle or set if a certain row is expanded
+   *
+   * @param row The row that is going to set its expanded state
+   * @param expanded Whether the row is expanded. The expanded state will be toggled if not set
+   */
+  toggleRowExpansion (row: object, expanded?: boolean): void
+
+  /** Clear sort status, reset the table to unsorted  */
+  clearSort (): void
+
+  /** Clear filter, reset the table to unfiltered  */
+  clearFilter (): void
+
+  /** Relayout the table, maybe needed when change the table or it's ancestors visibility */
+  doLayout (): void
+
+  /** Sort Table manually */
+  sort (prop: string, order: string): void
 }

@@ -1,10 +1,10 @@
 <template>
   <div
     class="el-switch"
-    :class="{ 'is-disabled': disabled, 'is-checked': checked }"
+    :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
     role="switch"
     :aria-checked="checked"
-    :aria-disabled="disabled"
+    :aria-disabled="switchDisabled"
     @click="switchValue"
   >
     <input
@@ -12,10 +12,11 @@
       type="checkbox"
       @change="handleChange"
       ref="input"
+      :id="id"
       :name="name"
       :true-value="activeValue"
       :false-value="inactiveValue"
-      :disabled="disabled"
+      :disabled="switchDisabled"
       @keydown.enter="switchValue"
     >
     <span
@@ -25,7 +26,6 @@
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
-      <span class="el-switch__button" :style="{ transform }"></span>
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
@@ -42,6 +42,11 @@
   export default {
     name: 'ElSwitch',
     mixins: [Focus('input'), Migrating],
+    inject: {
+      elForm: {
+        default: ''
+      }
+    },
     props: {
       value: {
         type: [Boolean, String, Number],
@@ -53,7 +58,7 @@
       },
       width: {
         type: Number,
-        default: 0
+        default: 40
       },
       activeIconClass: {
         type: String,
@@ -84,7 +89,8 @@
       name: {
         type: String,
         default: ''
-      }
+      },
+      id: String
     },
     data() {
       return {
@@ -100,8 +106,8 @@
       checked() {
         return this.value === this.activeValue;
       },
-      transform() {
-        return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
+      switchDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
     watch: {
@@ -128,7 +134,7 @@
         this.$refs.core.style.backgroundColor = newColor;
       },
       switchValue() {
-        this.$refs.input.click();
+        !this.switchDisabled && this.handleChange();
       },
       getMigratingConfig() {
         return {

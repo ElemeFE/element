@@ -14,6 +14,10 @@
     cursor: pointer;
   }
 
+  .el-input.is-focus .el-input__inner {
+    border-color: $--input-focus-border;
+  }
+
   .el-input__icon {
     transition: none;
   }
@@ -94,10 +98,6 @@
   border: $--select-dropdown-border;
   border-radius: $--border-radius-small;
   box-shadow: $--select-dropdown-shadow;
-
-  .popper__arrow {
-    transform: translateX(-400%);
-  }
 }
 
 @include b(cascader-menu) {
@@ -129,6 +129,11 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
+
+    span {
+      padding-right: 10px;
+    }
+
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';

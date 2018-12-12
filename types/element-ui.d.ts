@@ -14,6 +14,7 @@ import { ElCarousel } from './carousel'
 import { ElCarouselItem } from './carousel-item'
 import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
+import { ElCheckboxButton } from './checkbox-button'
 import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElCollapse } from './collapse'
@@ -61,6 +62,7 @@ import { ElTag } from './tag'
 import { ElTabs } from './tabs'
 import { ElTabPane } from './tab-pane'
 import { ElTimePicker } from './time-picker'
+import { ElTimeSelect } from './time-select'
 import { ElTooltip } from './tooltip'
 import { ElTransfer } from './transfer'
 import { ElTree } from './tree'
@@ -143,6 +145,9 @@ export class CarouselItem extends ElCarouselItem {}
 
 /** Checkbox Component */
 export class Checkbox extends ElCheckbox {}
+
+/** Checkbox Button Component */
+export class CheckboxButton extends ElCheckboxButton {}
 
 /** Checkbox Group Component */
 export class CheckboxGroup extends ElCheckboxGroup {}
@@ -270,8 +275,11 @@ export class TabPane extends ElTabPane {}
 /** Tag Component */
 export class Tag extends ElTag {}
 
-/** Time Picker and Time Select Component */
+/** TimePicker Component */
 export class TimePicker extends ElTimePicker {}
+
+/** TimeSelect Component */
+export class TimeSelect extends ElTimeSelect {}
 
 /** Tooltip Component */
 export class Tooltip extends ElTooltip {}

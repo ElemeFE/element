@@ -3,6 +3,7 @@ import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
+import LayoutObserver from './layout-observer';
 
 const getAllColumns = (columns) => {
   const result = [];
@@ -65,13 +66,14 @@ const convertToRows = (originColumns) => {
 export default {
   name: 'ElTableHeader',
 
+  mixins: [LayoutObserver],
+
   render(h) {
     const originColumns = this.store.states.originColumns;
     const columnRows = convertToRows(originColumns, this.columns);
     // 是否拥有多级表头
     const isGroup = columnRows.length > 1;
     if (isGroup) this.$parent.isGroup = true;
-
     return (
       <table
         class="el-table__header"
@@ -80,16 +82,10 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column =>
-              <col
-                name={ column.id }
-                width={ column.realWidth || column.width }
-              />)
+            this._l(this.columns, column => <col name={ column.id } />)
           }
           {
-            !this.fixed && this.layout.gutterWidth
-              ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
-              : ''
+            this.hasGutter ? <col name="gutter" /> : ''
           }
         </colgroup>
         <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
@@ -99,47 +95,47 @@ export default {
                 style={ this.getHeaderRowStyle(rowIndex) }
                 class={ this.getHeaderRowClass(rowIndex) }
               >
-              {
-                this._l(columns, (column, cellIndex) =>
-                  <th
-                    colspan={ column.colSpan }
-                    rowspan={ column.rowSpan }
-                    on-mousemove={ ($event) => this.handleMouseMove($event, column) }
-                    on-mouseout={ this.handleMouseOut }
-                    on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                    on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
-                    class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
-                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
-                    {
-                      column.renderHeader
-                        ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
-                        : column.label
-                    }
-                    {
-                      column.sortable
-                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <i class="sort-caret ascending el-icon-caret-top" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
-                            </i>
-                            <i class="sort-caret descending el-icon-caret-bottom" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
-                            </i>
-                          </span>
-                        : ''
-                    }
-                    {
-                      column.filterable
-                         ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
-                        : ''
-                    }
-                    </div>
-                  </th>
-                )
-              }
-              {
-                this.hasGutter
-                  ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
-                  : ''
-              }
+                {
+                  this._l(columns, (column, cellIndex) =>
+                    <th
+                      colspan={ column.colSpan }
+                      rowspan={ column.rowSpan }
+                      on-mousemove={ ($event) => this.handleMouseMove($event, column) }
+                      on-mouseout={ this.handleMouseOut }
+                      on-mousedown={ ($event) => this.handleMouseDown($event, column) }
+                      on-click={ ($event) => this.handleHeaderClick($event, column) }
+                      on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
+                      style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
+                      class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
+                      key={ column.id }>
+                      <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
+                        {
+                          column.renderHeader
+                            ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
+                            : column.label
+                        }
+                        {
+                          column.sortable
+                            ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
+                              <i class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                              </i>
+                              <i class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                              </i>
+                            </span>
+                            : ''
+                        }
+                        {
+                          column.filterable
+                            ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                            : ''
+                        }
+                      </div>
+                    </th>
+                  )
+                }
+                {
+                  this.hasGutter ? <th class="gutter"></th> : ''
+                }
               </tr>
             )
           }
@@ -151,9 +147,6 @@ export default {
   props: {
     fixed: String,
     store: {
-      required: true
-    },
-    layout: {
       required: true
     },
     border: Boolean,
@@ -207,7 +200,7 @@ export default {
     },
 
     hasGutter() {
-      return !this.fixed && this.layout.gutterWidth;
+      return !this.fixed && this.tableLayout.gutterWidth;
     }
   },
 
@@ -216,25 +209,8 @@ export default {
   },
 
   mounted() {
-    if (this.defaultSort.prop) {
-      const states = this.store.states;
-      states.sortProp = this.defaultSort.prop;
-      states.sortOrder = this.defaultSort.order || 'ascending';
-      this.$nextTick(_ => {
-        for (let i = 0, length = this.columns.length; i < length; i++) {
-          let column = this.columns[i];
-          if (column.property === states.sortProp) {
-            column.order = states.sortOrder;
-            states.sortingColumn = column;
-            break;
-          }
-        }
-
-        if (states.sortingColumn) {
-          this.store.commit('changeSortCondition');
-        }
-      });
-    }
+    const { prop, order } = this.defaultSort;
+    this.store.commit('sort', { prop, order });
   },
 
   beforeDestroy() {
@@ -326,14 +302,16 @@ export default {
       return classes.join(' ');
     },
 
-    toggleAllSelection() {
+    toggleAllSelection(event) {
+      event.stopPropagation();
       this.store.commit('toggleAllSelection');
     },
 
     handleFilterClick(event, column) {
       event.stopPropagation();
       const target = event.target;
-      const cell = target.parentNode;
+      let cell = target.tagName === 'TH' ? target : target.parentNode;
+      cell = cell.querySelector('.el-table__column-filter-trigger') || cell;
       const table = this.$parent;
 
       let filterPanel = this.filterPanels[column.id];
@@ -363,11 +341,15 @@ export default {
     handleHeaderClick(event, column) {
       if (!column.filters && column.sortable) {
         this.handleSortClick(event, column);
-      } else if (column.filters && !column.sortable) {
+      } else if (column.filterable && !column.sortable) {
         this.handleFilterClick(event, column);
       }
 
       this.$parent.$emit('header-click', column, event);
+    },
+
+    handleHeaderContextMenu(event, column) {
+      this.$parent.$emit('header-contextmenu', column, event);
     },
 
     handleMouseDown(event, column) {
@@ -478,13 +460,17 @@ export default {
       document.body.style.cursor = '';
     },
 
-    toggleOrder(order) {
-      return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
+    toggleOrder({ order, sortOrders }) {
+      if (order === '') return sortOrders[0];
+      const index = sortOrders.indexOf(order || null);
+      return sortOrders[index > sortOrders.length - 2 ? 0 : index + 1];
     },
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = givenOrder || this.toggleOrder(column.order);
+      let order = column.order === givenOrder
+        ? null
+        : (givenOrder || this.toggleOrder(column));
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -505,7 +491,7 @@ export default {
       let sortOrder;
       const sortingColumn = states.sortingColumn;
 
-      if (sortingColumn !== column) {
+      if (sortingColumn !== column || (sortingColumn === column && sortingColumn.order === null)) {
         if (sortingColumn) {
           sortingColumn.order = null;
         }

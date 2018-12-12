@@ -1,5 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
+@import "common/transition";
 
 @include b(collapse) {
   border-top: 1px solid $--collapse-border-color;
@@ -7,6 +8,8 @@
 }
 @include b(collapse-item) {
   @include e(header) {
+    display: flex;
+    align-items: center;
     height: $--collapse-header-height;
     line-height: $--collapse-header-height;
     background-color: $--collapse-header-fill;
@@ -18,14 +21,18 @@
     transition: border-bottom-color .3s;
     outline: none;
     @include e(arrow) {
-      margin-right: 8px;
+      margin: 0 8px 0 auto;
       transition: transform .3s;
-      float: right;
-      line-height: 48px;
       font-weight: 300;
+      @include when(active) {
+        transform: rotate(90deg);
+      }
     }
     &.focusing:focus:not(:hover){
       color: $--color-primary;
+    }
+    @include when(active) {
+      border-bottom-color: transparent;
     }
   }
 
@@ -42,15 +49,6 @@
     font-size: $--collapse-content-size;
     color: $--collapse-content-color;
     line-height: 1.769230769230769;
-  }
-
-  @include when(active) {
-    .el-collapse-item__header {
-      border-bottom-color: transparent;
-      .el-collapse-item__arrow {
-        transform: rotate(90deg);
-      }
-    }
   }
 
   &:last-child {

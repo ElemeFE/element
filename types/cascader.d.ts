@@ -7,8 +7,8 @@ export type ExpandTrigger = 'click' | 'hover'
 export interface CascaderOption {
   label: string,
   value: any,
-  children: CascaderOption[],
-  disabled: boolean
+  children?: CascaderOption[],
+  disabled?: boolean
 }
 
 /** Cascader Component */

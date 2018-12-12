@@ -66,16 +66,14 @@
         menuItems: null,
         menuItemsArray: null,
         dropdownElm: null,
-        focusing: false
+        focusing: false,
+        listId: `dropdown-menu-${generateId()}`
       };
     },
 
     computed: {
       dropdownSize() {
         return this.size || (this.$ELEMENT || {}).size;
-      },
-      listId() {
-        return `dropdown-menu-${generateId()}`;
       }
     },
 
@@ -115,7 +113,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = true;
-        }, this.showTimeout);
+        }, this.trigger === 'click' ? 0 : this.showTimeout);
       },
       hide() {
         if (this.triggerElm.disabled) return;
@@ -124,11 +122,15 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = false;
-        }, this.hideTimeout);
+        }, this.trigger === 'click' ? 0 : this.hideTimeout);
       },
       handleClick() {
         if (this.triggerElm.disabled) return;
-        this.visible = !this.visible;
+        if (this.visible) {
+          this.hide();
+        } else {
+          this.show();
+        }
       },
       handleTriggerKeyDown(ev) {
         const keyCode = ev.keyCode;
@@ -165,7 +167,7 @@
         } else if (keyCode === 13) { // enter选中
           this.triggerElm.focus();
           target.click();
-          if (!this.hideOnClick) { // click关闭
+          if (this.hideOnClick) { // click关闭
             this.visible = false;
           }
         } else if ([9, 27].indexOf(keyCode) > -1) { // tab // esc
@@ -194,7 +196,7 @@
         if (!this.splitButton) { // 自定义
           this.triggerElm.setAttribute('role', 'button');
           this.triggerElm.setAttribute('tabindex', '0');
-          this.triggerElm.setAttribute('class', this.triggerElm.getAttribute('class') + ' el-dropdown-selfdefine'); // 控制
+          this.triggerElm.setAttribute('class', (this.triggerElm.getAttribute('class') || '') + ' el-dropdown-selfdefine'); // 控制
         }
       },
       initEvent() {
@@ -233,13 +235,16 @@
           this.visible = false;
         }
         this.$emit('command', command, instance);
+      },
+      focus() {
+        this.triggerElm.focus && this.triggerElm.focus();
       }
     },
 
     render(h) {
       let { hide, splitButton, type, dropdownSize } = this;
 
-      var handleMainButtonClick = (event) => {
+      const handleMainButtonClick = (event) => {
         this.$emit('click', event);
         hide();
       };
@@ -247,13 +252,13 @@
       let triggerElm = !splitButton
         ? this.$slots.default
         : (<el-button-group>
-            <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
-              {this.$slots.default}
-            </el-button>
-            <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
-              <i class="el-dropdown__icon el-icon-arrow-down"></i>
-            </el-button>
-          </el-button-group>);
+          <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
+            {this.$slots.default}
+          </el-button>
+          <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
+            <i class="el-dropdown__icon el-icon-arrow-down"></i>
+          </el-button>
+        </el-button-group>);
 
       return (
         <div class="el-dropdown" v-clickoutside={hide}>

@@ -72,7 +72,7 @@
 
 多选框不可用状态。
 
-::: demo 设置`disabled`属性即可。
+:::demo 设置`disabled`属性即可。
 
 ```html
 <template>

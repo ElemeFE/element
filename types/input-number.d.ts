@@ -33,4 +33,12 @@ export declare class ElInputNumber extends ElementUIComponent {
 
   /** Same as name in native input */
   name: string
+
+  /** Precision of input value */
+  precision: Number
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }

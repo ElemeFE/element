@@ -38,21 +38,10 @@ Estamos orgullosos de que usted esta interesado en contribuir al proyecto `Eleme
 
 
 ## Requerimientos Técnicos 
-`Node.js 4+` y `NPM 3+` son requisitos
+`Node.js 4+`, `yarn` y `npm 3+` son requisitos. Nota: Usamos yarn para bloquear versiones de dependencias, por lo que debería instalar dependencias usando `yarn` en lugar de `npm install`.
 .
 ```shell
 git clone git@github.com:ElemeFE/element.git
-npm run dev
-
-# abra http://localhost:8085
-```
-
-Para usuarios chinos, [yarn](https://github.com/yarnpkg/yarn) con `taobao registry` es recomendado, sí la instalación de dependencias es lenta.
-
-```shell
-npm i yarn -g
-yarn config set registry https://registry.npm.taobao.org
-yarn
 npm run dev
 
 # abra http://localhost:8085
@@ -66,7 +55,7 @@ npm run dist
 ```
 
 ## Guía Para Desarrollo de Componentes
-- Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, configuración para armar, documentación y `package.json` están incluidos.
+- Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, archivo de entrada y documentación están incluidos.
 - Refiérase al `Button` para componentes anidados.
 - Refiérase al `Select` para componentes que dependen de otros componentes.
 

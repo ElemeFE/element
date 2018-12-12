@@ -1,6 +1,7 @@
 @import "mixins/mixins";
 @import "checkbox";
 @import "tag";
+@import "tooltip";
 @import "common/var";
 
 @include b(table) {
@@ -16,19 +17,21 @@
 
   // 数据为空
   @include e(empty-block) {
-    position: relative;
     min-height: 60px;
     text-align: center;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @include e(empty-text) {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: color($--color-primary s(16%) l(44%));
+    // min-height doesn't work in IE10 and IE11 https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
+    // set empty text line height up to contrainer min-height as workaround.
+    line-height: 60px;
+    width: 50%;
+    color: $--color-text-secondary;
   }
 
   // 展开行
@@ -69,7 +72,7 @@
     }
 
     &:hover {
-      background-color: $--table-row-hover-background !important;
+      background-color: transparent !important;
     }
   }
 
@@ -79,6 +82,18 @@
 
     th.gutter, td.gutter {
       border-right-width: 1px;
+    }
+  }
+
+  @include m(scrollable-x) {
+    .el-table__body-wrapper {
+      overflow-x: auto;
+    }
+  }
+
+  @include m(scrollable-y) {
+    .el-table__body-wrapper {
+      overflow-y: auto;
     }
   }
 
@@ -100,13 +115,10 @@
     text-overflow: ellipsis;
     vertical-align: middle;
     position: relative;
+    text-align: left;
 
     @include when(center) {
       text-align: center;
-    }
-
-    @include when(left) {
-      text-align: left;
     }
 
     @include when(right) {
@@ -167,7 +179,7 @@
     white-space: nowrap;
     overflow: hidden;
     user-select: none;
-    text-align: left;
+    background-color: $--table-header-background;
 
     div {
       display: inline-block;
@@ -239,7 +251,7 @@
     @include share-rule(border-pseudo) {
       content: '';
       position: absolute;
-      background-color: $--border-color-lighter;
+      background-color: $--table-border-color;
       z-index: 1;
     }
 
@@ -267,17 +279,15 @@
     border-right: none;
     border-bottom: none;
 
+    &.el-loading-parent--relative {
+      border-color: transparent;
+    }
+
     th, td {
       border-right: $--table-border;
 
       &:first-child .cell {
         padding-left: 10px;
-      }
-    }
-
-    .has-gutter {
-      th:nth-last-of-type(2), td:nth-last-of-type(2) {
-        border-right: none;
       }
     }
 
@@ -300,6 +310,7 @@
     top: 0;
     left: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
     box-shadow: $--table-fixed-box-shadow;
 
     &::before {
@@ -376,6 +387,7 @@
 
   @include e((header, body, footer)) {
     table-layout: fixed;
+    border-collapse: separate;
   }
 
   @include e((header-wrapper, footer-wrapper)) {
@@ -388,36 +400,36 @@
   }
 
   @include e(body-wrapper) {
-    overflow: auto;
+    overflow: hidden;
     position: relative;
 
-    @include when(scroll-none) {
+    @include when(scrolling-none) {
       ~ .el-table__fixed,
       ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    @include when(scroll-left) {
+    @include when(scrolling-left) {
       ~ .el-table__fixed {
         box-shadow: none;
       }
     }
 
-    @include when(scroll-right) {
+    @include when(scrolling-right) {
       ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
     .el-table--border {
-      @include when(scroll-right) {
+      @include when(scrolling-right) {
         ~ .el-table__fixed-right {
           border-left: $--table-border;
         }
       }
 
-      @include when(scroll-left) {
+      @include when(scrolling-left) {
         ~ .el-table__fixed {
           border-right: $--table-border;
         }
@@ -434,30 +446,33 @@
     vertical-align: middle;
     cursor: pointer;
     overflow: initial;
+    position: relative;
   }
 
   .sort-caret {
-    color: $--color-text-placeholder;
-    width: 14px;
-    overflow: hidden;
-    font-size: 15px;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
     position: absolute;
+    left: 7px;
 
     &.ascending {
+      border-bottom-color: $--color-text-placeholder;
       top: 5px;
     }
 
     &.descending {
+      border-top-color: $--color-text-placeholder;
       bottom: 7px;
     }
   }
 
   .ascending .sort-caret.ascending {
-    color: $--color-primary;
+    border-bottom-color: $--color-primary;
   }
 
   .descending .sort-caret.descending {
-    color: $--color-primary;
+    border-top-color: $--color-primary;
   }
 
   .hidden-columns {

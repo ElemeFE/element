@@ -2,25 +2,38 @@
   <div
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
+    @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
       v-if="multiple"
-      @click.stop="toggleMenu"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <span
-        class="el-select__multiple-text"
-        v-show="multipleText"
-        v-if="collapseTags">
-        {{ multipleText }}
+      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
+      <span v-if="collapseTags && selected.length">
+        <el-tag
+          :closable="!selectDisabled"
+          :size="collapseTagSize"
+          :hit="selected[0].hitState"
+          type="info"
+          @close="deleteTag($event, selected[0])"
+          disable-transitions>
+          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+        </el-tag>
+        <el-tag
+          v-if="selected.length > 1"
+          :closable="false"
+          :size="collapseTagSize"
+          type="info"
+          disable-transitions>
+          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </el-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
-          :closable="!disabled"
-          size="small"
+          :closable="!selectDisabled"
+          :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
@@ -33,8 +46,10 @@
         type="text"
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
-        :disabled="disabled"
+        :disabled="selectDisabled"
+        :autocomplete="autoComplete || autocomplete"
         @focus="handleFocus"
+        @blur="softFocus = false"
         @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
@@ -43,11 +58,13 @@
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
+        @compositionstart="handleComposition"
+        @compositionupdate="handleComposition"
+        @compositionend="handleComposition"
         v-model="query"
-        @input="e => handleQueryChange(e.target.value)"
-        :debounce="remote ? 300 : 0"
+        @input="debouncedQueryChange"
         v-if="filterable"
-        :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
+        :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
     <el-input
@@ -57,14 +74,14 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :id="id"
+      :autocomplete="autoComplete || autocomplete"
       :size="selectSize"
-      :disabled="disabled"
-      :readonly="!filterable || multiple"
+      :disabled="selectDisabled"
+      :readonly="readonly"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @blur="handleBlur"
-      @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.stop.prevent="navigateOptions('next')"
       @keydown.native.up.stop.prevent="navigateOptions('prev')"
@@ -74,10 +91,13 @@
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
-      <i slot="suffix"
-       :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
-       @click="handleIconClick"
-      ></i>
+      <template slot="prefix" v-if="$slots.prefix">
+        <slot name="prefix"></slot>
+      </template>
+      <template slot="suffix">
+        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
+        <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
+      </template>
     </el-input>
     <transition
       name="el-zoom-in-top"
@@ -85,6 +105,7 @@
       @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
+        :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
@@ -100,7 +121,12 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
+        <p
+          class="el-select-dropdown__empty"
+          v-if="emptyText &&
+            (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+          {{ emptyText }}
+        </p>
       </el-select-menu>
     </transition>
   </div>
@@ -117,19 +143,13 @@
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals } from 'element-ui/src/utils/util';
+  import { valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
-
-  const sizeMap = {
-    'medium': 36,
-    'small': 32,
-    'mini': 28
-  };
+  import { isKorean } from 'element-ui/src/utils/shared';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
@@ -139,6 +159,10 @@
     componentName: 'ElSelect',
 
     inject: {
+      elForm: {
+        default: ''
+      },
+
       elFormItem: {
         default: ''
       }
@@ -154,14 +178,24 @@
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
-      iconClass() {
+
+      readonly() {
+        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
+      },
+
+      showClose() {
+        let hasValue = this.multiple
+          ? Array.isArray(this.value) && this.value.length > 0
+          : this.value !== undefined && this.value !== null && this.value !== '';
         let criteria = this.clearable &&
-          !this.disabled &&
+          !this.selectDisabled &&
           this.inputHovering &&
-          !this.multiple &&
-          this.value !== undefined &&
-          this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+          hasValue;
+        return criteria;
+      },
+
+      iconClass() {
+        return this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up');
       },
 
       debounce() {
@@ -193,12 +227,14 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
 
-      multipleText() {
-        const selected = this.selected;
-        if (!selected || !selected.length) return '';
-        const length = selected.length;
-        const countText = length > 1 ? `(+${ selected.length - 1 })` : '';
-        return `${ selected[0].currentLabel } ${ countText }`;
+      selectDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
+      },
+
+      collapseTagSize() {
+        return ['small', 'mini'].indexOf(this.selectSize) > -1
+          ? 'mini'
+          : 'small';
       }
     },
 
@@ -218,6 +254,20 @@
       value: {
         required: true
       },
+      autocomplete: {
+        type: String,
+        default: 'off'
+      },
+      /** @Deprecated in next major version */
+      autoComplete: {
+        type: String,
+        validator(val) {
+          process.env.NODE_ENV !== 'production' &&
+            console.warn('[Element Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
+          return true;
+        }
+      },
+      automaticDropdown: Boolean,
       size: String,
       disabled: Boolean,
       clearable: Boolean,
@@ -248,7 +298,11 @@
         type: String,
         default: 'value'
       },
-      collapseTags: Boolean
+      collapseTags: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: true
+      }
     },
 
     data() {
@@ -260,21 +314,26 @@
         selected: this.multiple ? [] : {},
         inputLength: 20,
         inputWidth: 0,
+        initialInputHeight: 0,
         cachedPlaceHolder: '',
         optionsCount: 0,
         filteredOptionsCount: 0,
         visible: false,
+        softFocus: false,
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        previousQuery: '',
+        previousQuery: null,
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        menuVisibleOnFocus: false,
+        isOnComposition: false,
+        isSilentBlur: false
       };
     },
 
     watch: {
-      disabled() {
+      selectDisabled() {
         this.$nextTick(() => {
           this.resetInputHeight();
         });
@@ -284,7 +343,7 @@
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
 
-      value(val) {
+      value(val, oldVal) {
         if (this.multiple) {
           this.resetInputHeight();
           if (val.length > 0 || (this.$refs.input && this.query !== '')) {
@@ -301,19 +360,22 @@
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
+        if (!valueEquals(val, oldVal)) {
+          this.dispatch('ElFormItem', 'el.form.change', val);
+        }
       },
 
       visible(val) {
         if (!val) {
-          this.$refs.reference.$el.querySelector('input').blur();
-          this.handleIconHide();
           this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
           }
           this.query = '';
+          this.previousQuery = null;
           this.selectedLabel = '';
           this.inputLength = 20;
+          this.menuVisibleOnFocus = false;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
@@ -325,7 +387,7 @@
           if (!this.multiple) {
             if (this.selected) {
               if (this.filterable && this.allowCreate &&
-                this.createdSelected && this.createdOption) {
+                this.createdSelected && this.createdLabel) {
                 this.selectedLabel = this.createdLabel;
               } else {
                 this.selectedLabel = this.selected.currentLabel;
@@ -334,7 +396,6 @@
             }
           }
         } else {
-          this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.remote ? '' : this.selectedLabel;
@@ -355,6 +416,9 @@
 
       options() {
         if (this.$isServer) return;
+        this.$nextTick(() => {
+          this.broadcast('ElSelectDropdown', 'updatePopper');
+        });
         if (this.multiple) {
           this.resetInputHeight();
         }
@@ -369,8 +433,25 @@
     },
 
     methods: {
+      handleComposition(event) {
+        const text = event.target.value;
+        if (event.type === 'compositionend') {
+          this.isOnComposition = false;
+          this.handleQueryChange(text);
+        } else {
+          const lastCharacter = text[text.length - 1] || '';
+          this.isOnComposition = !isKorean(lastCharacter);
+        }
+      },
       handleQueryChange(val) {
-        if (this.previousQuery === val) return;
+        if (this.previousQuery === val || this.isOnComposition) return;
+        if (
+          this.previousQuery === null &&
+          (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
+        ) {
+          this.previousQuery = val;
+          return;
+        }
         this.previousQuery = val;
         this.$nextTick(() => {
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -398,20 +479,6 @@
         }
       },
 
-      handleIconHide() {
-        let icon = this.$el.querySelector('.el-input__icon');
-        if (icon) {
-          removeClass(icon, 'is-reverse');
-        }
-      },
-
-      handleIconShow() {
-        let icon = this.$el.querySelector('.el-input__icon');
-        if (icon && !hasClass(icon, 'el-icon-circle-close')) {
-          addClass(icon, 'is-reverse');
-        }
-      },
-
       scrollToOption(option) {
         const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
         if (this.$refs.popper && target) {
@@ -428,13 +495,14 @@
       emitChange(val) {
         if (!valueEquals(this.value, val)) {
           this.$emit('change', val);
-          this.dispatch('ElFormItem', 'el.form.change', val);
         }
       },
 
       getOption(value) {
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
+        const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
+
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
           const isEqual = isObject
@@ -446,7 +514,7 @@
           }
         }
         if (option) return option;
-        const label = !isObject
+        const label = (!isObject && !isNull)
           ? value : '';
         let newOption = {
           value: value,
@@ -485,28 +553,35 @@
       },
 
       handleFocus(event) {
-        this.visible = true;
-        this.$emit('focus', event);
+        if (!this.softFocus) {
+          if (this.automaticDropdown || this.filterable) {
+            this.visible = true;
+            this.menuVisibleOnFocus = true;
+          }
+          this.$emit('focus', event);
+        } else {
+          this.softFocus = false;
+        }
+      },
+
+      blur() {
+        this.visible = false;
+        this.$refs.reference.blur();
       },
 
       handleBlur(event) {
-        this.$emit('blur', event);
+        setTimeout(() => {
+          if (this.isSilentBlur) {
+            this.isSilentBlur = false;
+          } else {
+            this.$emit('blur', event);
+          }
+        }, 50);
+        this.softFocus = false;
       },
 
-      handleIconClick(event) {
-        if (this.iconClass.indexOf('circle-close') > -1) {
-          this.deleteSelected(event);
-        } else {
-          this.toggleMenu();
-        }
-      },
-
-      handleMouseDown(event) {
-        if (event.target.tagName !== 'INPUT') return;
-        if (this.visible) {
-          this.handleClose();
-          event.preventDefault();
-        }
+      handleClearClick(event) {
+        this.deleteSelected(event);
       },
 
       doDestroy() {
@@ -553,15 +628,19 @@
       },
 
       resetInputHeight() {
-        if (this.collapseTags) return;
+        if (this.collapseTags && !this.filterable) return;
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
+          const sizeInMap = this.initialInputHeight || 40;
           input.style.height = this.selected.length === 0
-            ? (sizeMap[this.selectSize] || 40) + 'px'
-            : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
+            ? sizeInMap + 'px'
+            : Math.max(
+              tags ? (tags.clientHeight + (tags.clientHeight > sizeInMap ? 6 : 0)) : 0,
+              sizeInMap
+            ) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }
@@ -582,7 +661,7 @@
         }, 300);
       },
 
-      handleOptionSelect(option) {
+      handleOptionSelect(option, byClick) {
         if (this.multiple) {
           const value = this.value.slice();
           const optionIndex = this.getValueIndex(value, option.value);
@@ -604,7 +683,20 @@
           this.emitChange(option.value);
           this.visible = false;
         }
-        this.$nextTick(() => this.scrollToOption(option));
+        this.isSilentBlur = byClick;
+        this.setSoftFocus();
+        if (this.visible) return;
+        this.$nextTick(() => {
+          this.scrollToOption(option);
+        });
+      },
+
+      setSoftFocus() {
+        this.softFocus = true;
+        const input = this.$refs.input || this.$refs.reference;
+        if (input) {
+          input.focus();
+        }
       },
 
       getValueIndex(arr = [], value) {
@@ -626,8 +718,12 @@
       },
 
       toggleMenu() {
-        if (!this.disabled) {
-          this.visible = !this.visible;
+        if (!this.selectDisabled) {
+          if (this.menuVisibleOnFocus) {
+            this.menuVisibleOnFocus = false;
+          } else {
+            this.visible = !this.visible;
+          }
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
           }
@@ -635,27 +731,32 @@
       },
 
       selectOption() {
-        if (this.options[this.hoverIndex]) {
-          this.handleOptionSelect(this.options[this.hoverIndex]);
+        if (!this.visible) {
+          this.toggleMenu();
+        } else {
+          if (this.options[this.hoverIndex]) {
+            this.handleOptionSelect(this.options[this.hoverIndex]);
+          }
         }
       },
 
       deleteSelected(event) {
         event.stopPropagation();
-        this.$emit('input', '');
-        this.emitChange('');
+        const value = this.multiple ? [] : '';
+        this.$emit('input', value);
+        this.emitChange(value);
         this.visible = false;
         this.$emit('clear');
       },
 
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
-        if (index > -1 && !this.disabled) {
+        if (index > -1 && !this.selectDisabled) {
           const value = this.value.slice();
           value.splice(index, 1);
           this.$emit('input', value);
           this.emitChange(value);
-          this.$emit('remove-tag', tag);
+          this.$emit('remove-tag', tag.value);
         }
         event.stopPropagation();
       },
@@ -686,16 +787,26 @@
 
       checkDefaultFirstOption() {
         this.hoverIndex = -1;
+        // highlight the created option
+        let hasCreated = false;
+        for (let i = this.options.length - 1; i >= 0; i--) {
+          if (this.options[i].created) {
+            hasCreated = true;
+            this.hoverIndex = i;
+            break;
+          }
+        }
+        if (hasCreated) return;
         for (let i = 0; i !== this.options.length; ++i) {
           const option = this.options[i];
           if (this.query) {
-            // pick first options that passes the filter
+            // highlight first options that passes the filter
             if (!option.disabled && !option.groupDisabled && option.visible) {
               this.hoverIndex = i;
               break;
             }
           } else {
-            // pick currently selected option
+            // highlight currently selected option
             if (option.itemSelected) {
               this.hoverIndex = i;
               break;
@@ -726,6 +837,10 @@
         this.onInputChange();
       });
 
+      this.debouncedQueryChange = debounce(this.debounce, (e) => {
+        this.handleQueryChange(e.target.value);
+      });
+
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
     },
@@ -735,12 +850,22 @@
         this.currentPlaceholder = '';
       }
       addResizeListener(this.$el, this.handleResize);
+
+      const reference = this.$refs.reference;
+      if (reference && reference.$el) {
+        const sizeMap = {
+          medium: 36,
+          small: 32,
+          mini: 28
+        };
+        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
+      }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
       this.$nextTick(() => {
-        if (this.$refs.reference && this.$refs.reference.$el) {
-          this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+        if (reference && reference.$el) {
+          this.inputWidth = reference.$el.getBoundingClientRect().width;
         }
       });
       this.setSelected();

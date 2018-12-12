@@ -171,6 +171,25 @@ describe('Loading', () => {
         done();
       });
     });
+
+    it('customClass', done => {
+      vm = createVue({
+        template: `
+        <div v-loading="loading" element-loading-custom-class="loading-custom-class"></div>
+      `,
+
+        data() {
+          return {
+            loading: true
+          };
+        }
+      }, true);
+      Vue.nextTick(() => {
+        const mask = document.querySelector('.el-loading-mask');
+        expect(mask.classList.contains('loading-custom-class')).to.true;
+        done();
+      });
+    });
   });
 
   describe('as a service', () => {
@@ -252,6 +271,12 @@ describe('Loading', () => {
       const text = document.querySelector('.el-loading-text');
       expect(text).to.exist;
       expect(text.textContent).to.equal('Loading...');
+    });
+
+    it('customClass', () => {
+      loadingInstance = Loading({ customClass: 'el-loading-custom-class' });
+      const customClass = document.querySelector('.el-loading-custom-class');
+      expect(customClass).to.exist;
     });
   });
 });

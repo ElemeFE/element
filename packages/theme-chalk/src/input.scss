@@ -1,6 +1,55 @@
 @import "mixins/mixins";
 @import "common/var";
 
+@include b(textarea) {
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: $--font-size-base;
+
+  @include e(inner) {
+    display: block;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    color: $--input-color;
+    background-color: $--input-fill;
+    background-image: none;
+    border: $--input-border;
+    border-radius: $--input-border-radius;
+    transition: $--border-transition-base;
+
+    &::placeholder {
+      color: $--input-placeholder-color;
+    }
+
+    &:hover {
+      border-color: $--input-hover-border;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $--input-focus-border;
+    }
+  }
+
+  @include when(disabled) {
+    .el-textarea__inner {
+      background-color: $--input-disabled-fill;
+      border-color: $--input-disabled-border;
+      color: $--input-disabled-color;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+    }
+  }
+}
+
 @include b(input) {
   position: relative;
   font-size: $--font-size-base;
@@ -31,7 +80,7 @@
     display: inline-block;
     font-size: inherit;
     height: $--input-height;
-    line-height: 1;
+    line-height: $--input-height;
     outline: none;
     padding: 0 15px;
     transition: $--border-transition-base;
@@ -137,6 +186,7 @@
 
     @include e(inner) {
       height: $--input-medium-height;
+      line-height: $--input-medium-height;
     }
 
     .el-input__icon {
@@ -148,6 +198,7 @@
 
     @include e(inner) {
       height: $--input-small-height;
+      line-height: $--input-small-height;
     }
 
     .el-input__icon {
@@ -159,6 +210,7 @@
 
     @include e(inner) {
       height: $--input-mini-height;
+      line-height: $--input-mini-height;
     }
 
     .el-input__icon {
@@ -172,6 +224,7 @@
   display: inline-table;
   width: 100%;
   border-collapse: separate;
+  border-spacing:0;
 
   > .el-input__inner {
     vertical-align: middle;
@@ -197,7 +250,7 @@
     .el-select,
     .el-button {
       display: inline-block;
-      margin: -20px;
+      margin: -10px -20px;
     }
 
     button.el-button,
@@ -233,6 +286,9 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
+    .el-select .el-input.is-focus .el-input__inner {
+      border-color: transparent;
+    }
   }
 
   @include m(append) {
@@ -240,53 +296,15 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
+    .el-select .el-input.is-focus .el-input__inner {
+      border-color: transparent;
+    }
   }
 }
 
-@include b(textarea) {
-  display: inline-block;
-  width: 100%;
-  vertical-align: bottom;
-
-  @include e(inner) {
-    display: block;
-    resize: vertical;
-    padding: 5px 15px;
-    line-height: 1.5;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: $--font-size-base;
-    color: $--input-color;
-    background-color: $--input-fill;
-    background-image: none;
-    border: $--input-border;
-    border-radius: $--input-border-radius;
-    transition: $--border-transition-base;
-
-    &::placeholder {
-      color: $--input-placeholder-color;
-    }
-
-    &:hover {
-      border-color: $--input-hover-border;
-    }
-
-    &:focus {
-      outline: none;
-      border-color: $--input-focus-border;
-    }
-  }
-
-  @include when(disabled) {
-    .el-textarea__inner {
-      background-color: $--input-disabled-fill;
-      border-color: $--input-disabled-border;
-      color: $--input-disabled-color;
-      cursor: not-allowed;
-
-      &::placeholder {
-        color: $--input-disabled-placeholder-color;
-      }
-    }
-  }
+/** disalbe default clear on IE */
+.el-input__inner::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
 }
