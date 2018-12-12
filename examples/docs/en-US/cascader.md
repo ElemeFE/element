@@ -4,9 +4,11 @@
       return {
         options2: [{
           label: 'California',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }, {
           label: 'Florida',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }],
         props: {
@@ -1400,9 +1402,11 @@ Load child options when their parent option is clicked or hovered over.
       return {
         options2: [{
           label: 'California',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }, {
           label: 'Florida',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }],
         props: {
@@ -1689,6 +1693,7 @@ Search and select options with a keyword.
 | value     | specify which key of option object is used as the option's value | string | — | — |
 | children  | specify which key of option object is used as the option's child options | string | — | — |
 | disabled  | specify which key of option object indicates if the option is disabled | string | — | — |
+| icon     | specify which key of option object is used as the option's icon | string | - | - |
 
 ### Events
 | Event Name | Description | Parameters |

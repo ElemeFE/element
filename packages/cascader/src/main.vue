@@ -122,7 +122,8 @@ export default {
           children: 'children',
           label: 'label',
           value: 'value',
-          disabled: 'disabled'
+          disabled: 'disabled',
+          icon: 'icon'
         };
       }
     },

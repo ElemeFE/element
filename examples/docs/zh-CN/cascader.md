@@ -4,9 +4,11 @@
       return {
         options2: [{
           label: '江苏',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }, {
           label: '浙江',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }],
         props: {
@@ -1400,9 +1402,11 @@
       return {
         options2: [{
           label: '江苏',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }, {
           label: '浙江',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }],
         props: {
@@ -1689,6 +1693,7 @@
 | label    | 指定选项标签为选项对象的某个属性值 | string | — | — |
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | — |
 | disabled | 指定选项的禁用为选项对象的某个属性值 | string | — | — |
+| icon    | 指定选项图标为选项对象的某个属性值 | string | - | - |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

@@ -4,9 +4,11 @@
       return {
         options2: [{
           label: 'California',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }, {
           label: 'Florida',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }],
         props: {
@@ -1405,9 +1407,11 @@ Se puede hacer una carga dinamica de elementos hijos cuando se hace clic en el e
       return {
         options2: [{
           label: 'California',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }, {
           label: 'Florida',
+          icon: 'el-icon-d-arrow-right',
           cities: []
         }],
         props: {
@@ -1694,6 +1698,7 @@ Buscar y seleccionar opciones con una palabra clave.
 | value    | especifica qué clave del elemento de la opción se utiliza como valor | string | —                 | —           |
 | children | especifica qué clave del elemento de la opción se utiliza como hijo | string | —                 | —           |
 | disabled | especifica qué clave del elemento de la opción indica si está deshabilitada | string | —                 | —           |
+| icon    | 指定选项图标为选项对象的某个属性值 | string | - | - |
 
 ### Eventos
 | Nombre             | Descripción                                                  | Parametros                |

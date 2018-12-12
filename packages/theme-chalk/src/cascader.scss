@@ -145,6 +145,10 @@
       }
     }
 
+    @include m(icon) {
+      margin-right: 4px;
+    }
+
     @include when(disabled) {
       color: $--select-option-disabled-color;
       background-color: $--select-option-disabled-background;

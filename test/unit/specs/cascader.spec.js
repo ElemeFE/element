@@ -784,6 +784,66 @@ describe('Cascader', () => {
       done();
     }, 100);
   });
+
+  it('render icon of menu-item', done => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          ref="cascader"
+          :options="options"
+          :show-all-levels="false"
+          v-model="selectedOptions"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          options: [{
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            icon: 'el-icon-d-arrow-right',
+            children: [{
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              icon: 'el-icon-menu',
+              children: [{
+                value: 'xihu',
+                label: 'West Lake'
+              }]
+            }, {
+              value: 'ningbo',
+              label: 'NingBo',
+              children: [{
+                value: 'jiangbei',
+                label: 'Jiang Bei'
+              }]
+            }]
+          }, {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            icon: 'el-icon-d-arrow-right',
+            children: [{
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [{
+                value: 'zhonghuamen',
+                label: 'Zhong Hua Men'
+              }]
+            }]
+          }],
+          selectedOptions: ['zhejiang', 'ningbo', 'jiangbei']
+        };
+      }
+    }, true);
+
+    vm.$el.click();
+    setTimeout(() => {
+      const menu = vm.$refs.cascader.menu;
+      const menuElm = menu.$el;
+      const icons = menuElm.querySelectorAll('.el-icon-d-arrow-right.el-cascader-menu__item--icon');
+      expect(icons.length).to.equal(2);
+      done();
+    }, 100);
+  });
   describe('Cascader Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({
