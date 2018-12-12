@@ -956,12 +956,14 @@
     function getOuterSizes(element) {
         // NOTE: 1 DOM access here
         var _display = element.style.display, _visibility = element.style.visibility,
-            _parentDisplay = element.parentNode.style.display, _parentVisibility = element.parentNode.style.visibility,
+            _parentDisplay, _parentVisibility,
             parentElement = element.parentNode;
         element.style.display = 'block'; element.style.visibility = 'hidden';
         // solve arrow offset problem
         if(element.getAttribute('x-arrow') !== null) {
             // element is arrowElement
+            _parentDisplay = element.parentNode.style.display;
+            _parentVisibility = element.parentNode.style.visibility;
             parentElement.style.display = 'block';parentElement.style.visibility = 'hidden';
         }
 
@@ -973,7 +975,9 @@
 
         // reset element styles
         element.style.display = _display; element.style.visibility = _visibility;
-        parentElement.style.display = _parentDisplay;parentElement.style.visibility = _parentVisibility;
+        if(element.getAttribute('x-arrow') !== null) {
+            parentElement.style.display = _parentDisplay;parentElement.style.visibility = _parentVisibility;
+        }
         return result;
     }
 
