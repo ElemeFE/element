@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Main from './main.vue';
-import { PopupManager } from 'element-ui/src/utils/popup';
 import { isVNode } from 'element-ui/src/utils/vdom';
 let MessageConstructor = Vue.extend(Main);
 
@@ -12,9 +11,7 @@ const Message = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
   if (typeof options === 'string') {
-    options = {
-      message: options
-    };
+    options = { message: options };
   }
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
@@ -31,10 +28,20 @@ const Message = function(options) {
     instance.message = null;
   }
   instance.vm = instance.$mount();
-  document.body.appendChild(instance.vm.$el);
   instance.vm.visible = true;
   instance.dom = instance.vm.$el;
-  instance.dom.style.zIndex = PopupManager.nextZIndex();
+
+  const messageBox = document.getElementsByClassName('el-message-content')[0];
+  if (messageBox) {
+    messageBox.appendChild(instance.vm.$el);
+    document.body.appendChild(messageBox);
+  } else {
+    const messageBox = document.createElement('div');
+    messageBox.className = 'el-message-content';
+    messageBox.appendChild(instance.vm.$el);
+    document.body.appendChild(messageBox);
+  }
+
   instances.push(instance);
   return instance.vm;
 };
