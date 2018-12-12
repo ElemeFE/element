@@ -22,9 +22,9 @@
           <div
             class="el-form-item__error"
             :class="{
-              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+              'el-form-item__error--inline': typeof inlineMessage === 'boolean' && inlineMessage
                 ? inlineMessage
-                : (elForm && elForm.inlineMessage || false)
+                : elForm && elForm.inlineMessage
             }"
           >
             {{validateMessage}}
@@ -68,8 +68,8 @@
       validateStatus: String,
       for: String,
       inlineMessage: {
-        type: [String, Boolean],
-        default: ''
+        type: Boolean,
+        default: false
       },
       showMessage: {
         type: Boolean,
