@@ -1,19 +1,27 @@
 <template>
     <div class='el-quality-control-chart' :v-loading='!arrData.length && !lineBase'>
         <div class='block'>
-            <span class='demonstration'>选择年份：</span>
-            <el-select style="width:280px;display: inline-block" v-model="timevalue" placeholder="请选择年份" @change='getChangeTime'>
-              <el-option label="2018年" value="2018"></el-option>
-              <el-option label="2019年" value="2019"></el-option>
-              <el-option label="2020年" value="2020"></el-option>
-              <el-option label="2021年" value="2021"></el-option>
-              <el-option label="2022年" value="2022"></el-option>
-              <el-option label="2023年" value="2023"></el-option>
-              <el-option label="2024年" value="2024"></el-option>
-              <el-option label="2025年" value="2025"></el-option>
-              <el-option label="2026年" value="2026"></el-option>
-              <el-option label="2027年" value="2027"></el-option>
-            </el-select>
+            <div class='spanBox'>
+              <span>质控样编号:&nbsp;{{this.lineBase.qcs_no}}</span>
+              <span>质控样名称:&nbsp;{{this.lineBase.qcs_name}}</span>
+              <span>质控样型号:&nbsp;{{this.lineBase.qcs_model}}</span>
+              <span>检验项目:&nbsp;{{this.lineBase.test_item}}</span>
+            </div>
+            <div class='dateBox'>
+                <el-select v-model="timevalue" placeholder="请选择年份" @change='getChangeTime'>
+                  <el-option label="2018年" value="2018"></el-option>
+                  <el-option label="2019年" value="2019"></el-option>
+                  <el-option label="2020年" value="2020"></el-option>
+                  <el-option label="2021年" value="2021"></el-option>
+                  <el-option label="2022年" value="2022"></el-option>
+                  <el-option label="2023年" value="2023"></el-option>
+                  <el-option label="2024年" value="2024"></el-option>
+                  <el-option label="2025年" value="2025"></el-option>
+                  <el-option label="2026年" value="2026"></el-option>
+                  <el-option label="2027年" value="2027"></el-option>
+                </el-select>
+            </div>
+            
             <!-- <el-date-picker
                     unlink-panels
                     v-model='timevalue'
@@ -45,6 +53,7 @@
   require('echarts/lib/component/markLine');
   require('echarts/lib/component/markArea');
   require('echarts/lib/component/dataZoom');
+  require('echarts/lib/component/markPoint');
 
   import ElDatePicker from 'element-ui-qz/packages/date-picker';
 
@@ -199,22 +208,26 @@
       // 图表的配置项
       industryTableView(lineData, seriesData) {
         var option = {
-          // 换行"\n"
-          title: {
-            text: '质控样编号: ' + lineData.qcs_no + '   质控样名称: ' + lineData.qcs_name + '   质控样型号: ' + lineData.qcs_model + '   检验项目: ' + lineData.test_item
-          },
           tooltip: {
-            // trigger: 'axios',
+            trigger: 'item',
+            backgroundColor: 'transparent',
             formatter: function(params) {
-              return '第' + params.data[0] + '次测量' +
+              let yVal = +params.data[1];
+              var str = '第' + params.data[0] + '次测量' +
               '<br/>' + '实际测试结果: ' + params.data[4] +
               '<br/>' + '核查人: ' + params.data[2] +
               '<br/>' + '核查日期: ' + params.data[3];
+              if (yVal >= lineData.maintenanc_line_right && yVal < lineData.retrospective_line_right) {
+                return '<div style=' + 'background:' + '#f48A0D' + ';padding:10px;>' + str + '</div>';
+              } else if (yVal > lineData.maintenanc_line_left && yVal < lineData.maintenanc_line_right) {
+                return '<div style=' + 'background:' + '#30b06A' + ';padding:10px;>' + str + '</div>';
+              } else if (yVal > lineData.retrospective_line_left && yVal <= lineData.maintenanc_line_left) {
+                return '<div style=' + 'background:' + '#f48A0D' + ';padding:10px;>' + str + '</div>';
+              } else {
+                return '<div style=' + 'background:' + '#f04844' + ';padding:10px;>' + str + '</div>';
+              }
             }
           },
-          //  legend: {
-          //      data:['测量值']
-          //  },
           grid: {
             left: '5%',
             right: '11%',
@@ -223,21 +236,28 @@
           },
           xAxis: {
             type: 'category',
+            axisLine: {
+              lineStyle: {
+                color: '#bbb'
+              }
+            },
             max: seriesData.length - 1,
             min: 0,
             splitLine: {
               show: false // 去除垂直网格线
             },
             axisLabel: {
-              interval: 0 // x轴刻度过多时不隐藏
+              interval: 0, // x轴刻度过多时不隐藏
+              color: '#000'
             },
             axisTick: {
-              alignWithLabel: true // 刻度线和标签是否对齐
+              alignWithLabel: true, // 刻度线和标签是否对齐
+              show: false
             }
           },
           yAxis: [
             {
-              name: '单位: ' + lineData.unit,
+              name: '(' + lineData.unit + ')',
               type: 'value',
               axisLine: {
                 lineStyle: {
@@ -266,7 +286,6 @@
               fillerColor: '#bababa', // 选中范围的填充颜色
               handleSize: 0, // 滑动条的左右2个滑动条的大小
               height: 30, // 组件高度
-              // zoomLock:true,
               show: seriesData.length > 16,
               xAxisIndex: [0],
               textStyle: false,
@@ -279,9 +298,43 @@
           series: [
             {
               type: 'line',
-              symbolSize: '10',
+              symbolSize: '14',
               symbol: 'circle',
               data: seriesData,
+              markPoint: {
+                symbol: 'triangle'
+              },
+              label: {
+                show: true,
+                backgroundColor: '#fff',
+                borderColor: '#000',
+                color: '#000',
+                borderWidth: 0.5,
+                padding: 5,
+                formatter: function(params) {
+                  return params.data[3];
+                }
+              },
+              itemStyle: {
+                normal: {
+                  color: function(params) {
+                    let yVal = +params.data[1];
+                    if (yVal >= lineData.maintenanc_line_right && yVal < lineData.retrospective_line_right) {
+                      return '#f48A0D';
+                    } else if (yVal > lineData.maintenanc_line_left && yVal < lineData.maintenanc_line_right) {
+                      return '#30b06A';
+                    } else if (yVal > lineData.retrospective_line_left && yVal <= lineData.maintenanc_line_left) {
+                      return '#f48A0D';
+                    } else {
+                      return '#f04844';
+                    }
+                  },
+                  lineStyle: {
+                    color: '#000',
+                    width: 4
+                  }
+                }
+              },
               markArea: {
                 // 标记区域
                 silent: true,
@@ -376,6 +429,7 @@
               markLine: {
                 // 基准线
                 silent: true,
+                symbol: ['none', 'none'],
                 data: [
                   {
                     yAxis: lineData.maintenanc_line_left,
@@ -522,3 +576,24 @@
     }
   };
 </script>
+<style>
+.block .spanBox span{
+  width:25%;
+  display: inline-block;
+  text-align: center;
+}
+.block .dateBox{
+  text-align: center;
+  margin-top:20px;
+}
+.block .dateBox input{
+  height: 35px;
+}
+.block .dateBox .el-input{
+  line-height: 35px
+}
+.block .dateBox .el-select{
+  width:130px;
+  display: inline-block;
+}
+</style>
