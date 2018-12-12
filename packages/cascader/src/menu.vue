@@ -19,7 +19,7 @@
         }
         if (value !== undefined) itemCopy[name] = value;
       });
-      if (Array.isArray(item[childrenProp])) {
+      if (Array.isArray(item[childrenProp]) && item[childrenProp].length > 0) {
         itemCopy[childrenProp] = copyArray(item[childrenProp], props);
       }
       result.push(itemCopy);
