@@ -955,9 +955,15 @@
      */
     function getOuterSizes(element) {
         // NOTE: 1 DOM access here
-        var _display = element.style.display, _visibility = element.style.visibility;
+        var _display = element.style.display, _visibility = element.style.visibility,
+            _parentDisplay = element.parentNode.style.display, _parentVisibility = element.parentNode.style.visibility,
+            parentElement = element.parentNode;
         element.style.display = 'block'; element.style.visibility = 'hidden';
-        var calcWidthToForceRepaint = element.offsetWidth;
+        // solve arrow offset problem
+        if(element.getAttribute('x-arrow') !== null) {
+            // element is arrowElement
+            parentElement.style.display = 'block';parentElement.style.visibility = 'hidden';
+        }
 
         // original method
         var styles = root.getComputedStyle(element);
@@ -967,6 +973,7 @@
 
         // reset element styles
         element.style.display = _display; element.style.visibility = _visibility;
+        parentElement.style.display = _parentDisplay;parentElement.style.visibility = _parentVisibility;
         return result;
     }
 
