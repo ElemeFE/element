@@ -64,6 +64,10 @@
         }
       }
     }
+
+    &:last-of-type {
+      float:right;
+    }
   }
 
   @include e(editors-wrap) {

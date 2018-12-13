@@ -26,6 +26,7 @@ import Car from '../../packages/theme-chalk/src/icons/car.svg';
 import Cart from '../../packages/theme-chalk/src/icons/cart.svg';
 import Case from '../../packages/theme-chalk/src/icons/case.svg';
 import Check from '../../packages/theme-chalk/src/icons/check.svg';
+import Child from '../../packages/theme-chalk/src/icons/child.svg';
 import CircleAnglesSquare from '../../packages/theme-chalk/src/icons/circle-angles-square.svg';
 import CirclePlus from '../../packages/theme-chalk/src/icons/circle-plus.svg';
 import City from '../../packages/theme-chalk/src/icons/city.svg';
@@ -64,6 +65,7 @@ import HygienicKit from '../../packages/theme-chalk/src/icons/hygienic-kit.svg';
 import IconBlock from '../../packages/theme-chalk/src/icons/icon-block.svg';
 import IconHide from '../../packages/theme-chalk/src/icons/icon-hide.svg';
 import IconSocket from '../../packages/theme-chalk/src/icons/icon-socket.svg';
+import Infant from '../../packages/theme-chalk/src/icons/infant.svg';
 import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
 import Iron from '../../packages/theme-chalk/src/icons/iron.svg';
 import ItemList from '../../packages/theme-chalk/src/icons/item-list.svg';
@@ -161,6 +163,7 @@ module.exports = {
   Cart,
   Case,
   Check,
+  Child,
   CircleAnglesSquare,
   CirclePlus,
   City,
@@ -199,6 +202,7 @@ module.exports = {
   IconBlock,
   IconHide,
   IconSocket,
+  Infant,
   Insurance,
   Iron,
   ItemList,
