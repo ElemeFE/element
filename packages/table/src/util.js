@@ -1,4 +1,54 @@
+import Vue from 'vue';
 import { getValueByPath } from 'element-ui/src/utils/util';
+import ElTooltip from 'element-ui/packages/tooltip';
+import debounce from 'throttle-debounce/debounce';
+
+export const getToolTip = (function() {
+  let vm;
+  const init = () => {
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    vm = new Vue({
+      data: {
+        content: '',
+        effect: 'dark'
+      },
+      components: {
+        ElTooltip
+      },
+      render(h) {
+        const {effect, content} = this;
+        return (
+          <el-tooltip effect={ effect } placement="top" ref="tooltip" content={ content }>
+            <div style="display:none;">for $slots.default</div>
+          </el-tooltip>
+        );
+      },
+      methods: {
+        show(element, {content, effect}) {
+          this.effect = effect;
+          this.content = content;
+
+          const tooltip = this.$refs.tooltip;
+          tooltip.referenceElm = element;
+          tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
+          tooltip.doDestroy();
+          tooltip.setExpectedState(true);
+          this.activateTooltip(tooltip);
+        },
+        hide() {
+          const tooltip = this.$refs.tooltip;
+          tooltip.setExpectedState(false);
+          tooltip.handleClosePopper();
+        },
+        activateTooltip: debounce(50, tooltip => tooltip.handleShowPopper())
+      }
+    }).$mount(div);
+    return vm;
+  };
+
+  return () => (vm || init());
+})();
 
 export const getCell = function(event) {
   let cell = event.target;

@@ -1,8 +1,7 @@
-import { getCell, getColumnByCell, getRowIdentity } from './util';
+import { getCell, getColumnByCell, getRowIdentity, getToolTip } from './util';
 import { getStyle, hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTooltip from 'element-ui/packages/tooltip';
-import debounce from 'throttle-debounce/debounce';
+
 import LayoutObserver from './layout-observer';
 
 export default {
@@ -11,8 +10,7 @@ export default {
   mixins: [LayoutObserver],
 
   components: {
-    ElCheckbox,
-    ElTooltip
+    ElCheckbox
   },
 
   props: {
@@ -94,8 +92,6 @@ export default {
                 </tr>)
                 : ''
               ]
-            ).concat(
-              <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
           }
         </tbody>
@@ -175,12 +171,8 @@ export default {
 
   data() {
     return {
-      tooltipContent: ''
+      hasShowTooltip: false // for record whether tooltip has occured
     };
-  },
-
-  created() {
-    this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
   },
 
   methods: {
@@ -325,23 +317,20 @@ export default {
       const rangeWidth = range.getBoundingClientRect().width;
       const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
         (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
-      if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
-        const tooltip = this.$refs.tooltip;
-        // TODO 会引起整个 Table 的重新渲染，需要优化
-        this.tooltipContent = cell.innerText || cell.textContent;
-        tooltip.referenceElm = cell;
-        tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
-        tooltip.doDestroy();
-        tooltip.setExpectedState(true);
-        this.activateTooltip(tooltip);
+      if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth)) {
+        getToolTip()
+          .show(cell, {
+            content: cell.innerText || cell.textContent,
+            effect: this.tooltipEffect
+          });
+        this.hasShowTooltip = true;
       }
     },
 
     handleCellMouseLeave(event) {
-      const tooltip = this.$refs.tooltip;
-      if (tooltip) {
-        tooltip.setExpectedState(false);
-        tooltip.handleClosePopper();
+      if (this.hasShowTooltip) { // if tooltop has occured, then hide that
+        getToolTip().hide();
+        this.hasShowTooltip = false;
       }
       const cell = getCell(event);
       if (!cell) return;
