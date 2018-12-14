@@ -1,0 +1,4355 @@
+@font-face {
+  font-family: 'siagri';
+  src:  url('fonts/siagri.eot?vl5d8l');
+  src:  url('fonts/siagri.eot?vl5d8l#iefix') format('embedded-opentype'),
+    url('fonts/siagri.ttf?vl5d8l') format('truetype'),
+    url('fonts/siagri.woff?vl5d8l') format('woff'),
+    url('fonts/siagri.svg?vl5d8l#siagri') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="siagri-"], [class*=" siagri-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'siagri' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.siagri-grafico-vazio:before {
+  content: "\ee5a";
+}
+.siagri-chuva:before {
+  content: "\ee48";
+}
+.siagri-gas-pump1:before {
+  content: "\ee49";
+}
+.siagri-cultura-generico:before {
+  content: "\ee4a";
+}
+.siagri-luminosidade:before {
+  content: "\ee4b";
+}
+.siagri-milho:before {
+  content: "\ee4c";
+}
+.siagri-soja:before {
+  content: "\ee4d";
+}
+.siagri-temperatura:before {
+  content: "\ee4e";
+}
+.siagri-umidade:before {
+  content: "\ee4f";
+}
+.siagri-uminidade-do-solo:before {
+  content: "\ee50";
+}
+.siagri-vento:before {
+  content: "\ee51";
+}
+.siagri-wrench1:before {
+  content: "\ee52";
+}
+.siagri-implemento:before {
+  content: "\ee53";
+  color: #37474f;
+}
+.siagri-veiculo:before {
+  content: "\ee54";
+  color: #37474f;
+}
+.siagri-trator:before {
+  content: "\ee55";
+  color: #37474f;
+}
+.siagri-colheita:before {
+  content: "\ee56";
+}
+.siagri-manejo:before {
+  content: "\ee57";
+}
+.siagri-plantio:before {
+  content: "\ee58";
+}
+.siagri-preparacao-de-solo:before {
+  content: "\ee59";
+}
+.siagri-ad:before {
+  content: "\e909";
+}
+.siagri-address-book:before {
+  content: "\e90a";
+}
+.siagri-address-card:before {
+  content: "\e90b";
+}
+.siagri-adjust:before {
+  content: "\e90c";
+}
+.siagri-air-freshener:before {
+  content: "\e90d";
+}
+.siagri-align-center:before {
+  content: "\e90e";
+}
+.siagri-align-justify:before {
+  content: "\e90f";
+}
+.siagri-align-left:before {
+  content: "\e910";
+}
+.siagri-align-right:before {
+  content: "\e911";
+}
+.siagri-allergies:before {
+  content: "\e912";
+}
+.siagri-ambulance:before {
+  content: "\e913";
+}
+.siagri-american-sign-language-interpreting:before {
+  content: "\e914";
+}
+.siagri-anchor:before {
+  content: "\e915";
+}
+.siagri-angle-double-down:before {
+  content: "\e916";
+}
+.siagri-angle-double-left:before {
+  content: "\e917";
+}
+.siagri-angle-double-right:before {
+  content: "\e918";
+}
+.siagri-angle-double-up:before {
+  content: "\e919";
+}
+.siagri-angle-down:before {
+  content: "\e91a";
+}
+.siagri-angle-left:before {
+  content: "\e91b";
+}
+.siagri-angle-right:before {
+  content: "\e91c";
+}
+.siagri-angle-up:before {
+  content: "\e91d";
+}
+.siagri-angry:before {
+  content: "\e91e";
+}
+.siagri-ankh:before {
+  content: "\e91f";
+}
+.siagri-apple-alt:before {
+  content: "\e920";
+}
+.siagri-archive:before {
+  content: "\e921";
+}
+.siagri-archway:before {
+  content: "\e922";
+}
+.siagri-arrow-alt-circle-down:before {
+  content: "\e923";
+}
+.siagri-arrow-alt-circle-left:before {
+  content: "\e924";
+}
+.siagri-arrow-alt-circle-right:before {
+  content: "\e925";
+}
+.siagri-arrow-alt-circle-up:before {
+  content: "\e926";
+}
+.siagri-arrow-circle-down:before {
+  content: "\e927";
+}
+.siagri-arrow-circle-left:before {
+  content: "\e928";
+}
+.siagri-arrow-circle-right:before {
+  content: "\e929";
+}
+.siagri-arrow-circle-up:before {
+  content: "\e92a";
+}
+.siagri-arrow-down1:before {
+  content: "\e92b";
+}
+.siagri-arrow-left1:before {
+  content: "\e92c";
+}
+.siagri-arrow-right1:before {
+  content: "\e92d";
+}
+.siagri-arrow-up1:before {
+  content: "\e92e";
+}
+.siagri-arrows-alt-h:before {
+  content: "\e92f";
+}
+.siagri-arrows-alt-v:before {
+  content: "\e930";
+}
+.siagri-arrows-alt:before {
+  content: "\e931";
+}
+.siagri-assistive-listening-systems:before {
+  content: "\e932";
+}
+.siagri-asterisk:before {
+  content: "\e933";
+}
+.siagri-at:before {
+  content: "\e934";
+}
+.siagri-atlas:before {
+  content: "\e935";
+}
+.siagri-atom:before {
+  content: "\e936";
+}
+.siagri-audio-description:before {
+  content: "\e937";
+}
+.siagri-award:before {
+  content: "\e938";
+}
+.siagri-backspace:before {
+  content: "\e939";
+}
+.siagri-backward:before {
+  content: "\e93a";
+}
+.siagri-balance-scale:before {
+  content: "\e93b";
+}
+.siagri-ban:before {
+  content: "\e93c";
+}
+.siagri-band-aid:before {
+  content: "\e93d";
+}
+.siagri-barcode:before {
+  content: "\e93e";
+}
+.siagri-bars:before {
+  content: "\e93f";
+}
+.siagri-baseball-ball:before {
+  content: "\e940";
+}
+.siagri-basketball-ball:before {
+  content: "\e941";
+}
+.siagri-bath:before {
+  content: "\e942";
+}
+.siagri-battery-empty:before {
+  content: "\e943";
+}
+.siagri-battery-full:before {
+  content: "\e944";
+}
+.siagri-battery-half:before {
+  content: "\e945";
+}
+.siagri-battery-quarter:before {
+  content: "\e946";
+}
+.siagri-battery-three-quarters:before {
+  content: "\e947";
+}
+.siagri-bed:before {
+  content: "\e948";
+}
+.siagri-beer:before {
+  content: "\e949";
+}
+.siagri-bell-slash:before {
+  content: "\e94a";
+}
+.siagri-bell1:before {
+  content: "\e94b";
+}
+.siagri-bezier-curve:before {
+  content: "\e94c";
+}
+.siagri-bible:before {
+  content: "\e94d";
+}
+.siagri-bicycle:before {
+  content: "\e94e";
+}
+.siagri-binoculars:before {
+  content: "\e94f";
+}
+.siagri-birthday-cake:before {
+  content: "\e950";
+}
+.siagri-blender:before {
+  content: "\e951";
+}
+.siagri-blind:before {
+  content: "\e952";
+}
+.siagri-bold:before {
+  content: "\e953";
+}
+.siagri-bolt:before {
+  content: "\e954";
+}
+.siagri-bomb:before {
+  content: "\e955";
+}
+.siagri-bone:before {
+  content: "\e956";
+}
+.siagri-bong:before {
+  content: "\e957";
+}
+.siagri-book-open:before {
+  content: "\e958";
+}
+.siagri-book-reader:before {
+  content: "\e959";
+}
+.siagri-book:before {
+  content: "\e95a";
+}
+.siagri-bookmark:before {
+  content: "\e95b";
+}
+.siagri-bowling-ball:before {
+  content: "\e95c";
+}
+.siagri-box-open:before {
+  content: "\e95d";
+}
+.siagri-box:before {
+  content: "\e95e";
+}
+.siagri-boxes:before {
+  content: "\e95f";
+}
+.siagri-braille:before {
+  content: "\e960";
+}
+.siagri-brain:before {
+  content: "\e961";
+}
+.siagri-briefcase-medical:before {
+  content: "\e962";
+}
+.siagri-briefcase:before {
+  content: "\e963";
+}
+.siagri-broadcast-tower:before {
+  content: "\e964";
+}
+.siagri-broom:before {
+  content: "\e965";
+}
+.siagri-brush:before {
+  content: "\e966";
+}
+.siagri-bug:before {
+  content: "\e967";
+}
+.siagri-building:before {
+  content: "\e968";
+}
+.siagri-bullhorn:before {
+  content: "\e969";
+}
+.siagri-bullseye:before {
+  content: "\e96a";
+}
+.siagri-burn:before {
+  content: "\e96b";
+}
+.siagri-bus-alt:before {
+  content: "\e96c";
+}
+.siagri-bus:before {
+  content: "\e96d";
+}
+.siagri-business-time:before {
+  content: "\e96e";
+}
+.siagri-calculator:before {
+  content: "\e96f";
+}
+.siagri-calendar-alt:before {
+  content: "\e970";
+}
+.siagri-calendar-check:before {
+  content: "\e971";
+}
+.siagri-calendar-minus:before {
+  content: "\e972";
+}
+.siagri-calendar-plus:before {
+  content: "\e973";
+}
+.siagri-calendar-times:before {
+  content: "\e974";
+}
+.siagri-calendar:before {
+  content: "\e975";
+}
+.siagri-camera-retro:before {
+  content: "\e976";
+}
+.siagri-camera:before {
+  content: "\e977";
+}
+.siagri-cannabis:before {
+  content: "\e978";
+}
+.siagri-capsules:before {
+  content: "\e979";
+}
+.siagri-car-alt:before {
+  content: "\e97a";
+}
+.siagri-car-battery:before {
+  content: "\e97b";
+}
+.siagri-car-crash:before {
+  content: "\e97c";
+}
+.siagri-car-side:before {
+  content: "\e97d";
+}
+.siagri-car:before {
+  content: "\e97e";
+}
+.siagri-caret-down:before {
+  content: "\e97f";
+}
+.siagri-caret-left1:before {
+  content: "\e980";
+}
+.siagri-caret-right1:before {
+  content: "\e981";
+}
+.siagri-caret-square-down:before {
+  content: "\e982";
+}
+.siagri-caret-square-left:before {
+  content: "\e983";
+}
+.siagri-caret-square-right:before {
+  content: "\e984";
+}
+.siagri-caret-square-up:before {
+  content: "\e985";
+}
+.siagri-caret-up:before {
+  content: "\e986";
+}
+.siagri-cart-arrow-down:before {
+  content: "\e987";
+}
+.siagri-cart-plus:before {
+  content: "\e988";
+}
+.siagri-certificate:before {
+  content: "\e989";
+}
+.siagri-chalkboard-teacher:before {
+  content: "\e98a";
+}
+.siagri-chalkboard:before {
+  content: "\e98b";
+}
+.siagri-charging-station:before {
+  content: "\e98c";
+}
+.siagri-chart-area:before {
+  content: "\e98d";
+}
+.siagri-chart-bar:before {
+  content: "\e98e";
+}
+.siagri-chart-line:before {
+  content: "\e98f";
+}
+.siagri-chart-pie:before {
+  content: "\e990";
+}
+.siagri-check-circle:before {
+  content: "\e991";
+}
+.siagri-check-double:before {
+  content: "\e992";
+}
+.siagri-check-square:before {
+  content: "\e993";
+}
+.siagri-check1:before {
+  content: "\e994";
+}
+.siagri-chess-bishop:before {
+  content: "\e995";
+}
+.siagri-chess-board:before {
+  content: "\e996";
+}
+.siagri-chess-king:before {
+  content: "\e997";
+}
+.siagri-chess-knight:before {
+  content: "\e998";
+}
+.siagri-chess-pawn:before {
+  content: "\e999";
+}
+.siagri-chess-queen:before {
+  content: "\e99a";
+}
+.siagri-chess-rook:before {
+  content: "\e99b";
+}
+.siagri-chess:before {
+  content: "\e99c";
+}
+.siagri-chevron-circle-down:before {
+  content: "\e99d";
+}
+.siagri-chevron-circle-left:before {
+  content: "\e99e";
+}
+.siagri-chevron-circle-right:before {
+  content: "\e99f";
+}
+.siagri-chevron-circle-up:before {
+  content: "\e9a0";
+}
+.siagri-chevron-down:before {
+  content: "\e9a1";
+}
+.siagri-chevron-left:before {
+  content: "\e9a2";
+}
+.siagri-chevron-right:before {
+  content: "\e9a3";
+}
+.siagri-chevron-up:before {
+  content: "\e9a4";
+}
+.siagri-child:before {
+  content: "\e9a5";
+}
+.siagri-church:before {
+  content: "\e9a6";
+}
+.siagri-circle-notch:before {
+  content: "\e9a7";
+}
+.siagri-circle:before {
+  content: "\e9a8";
+}
+.siagri-city:before {
+  content: "\e9a9";
+}
+.siagri-clipboard-check:before {
+  content: "\e9aa";
+}
+.siagri-clipboard-list:before {
+  content: "\e9ab";
+}
+.siagri-clipboard:before {
+  content: "\e9ac";
+}
+.siagri-clock:before {
+  content: "\e9ad";
+}
+.siagri-clone:before {
+  content: "\e9ae";
+}
+.siagri-closed-captioning:before {
+  content: "\e9af";
+}
+.siagri-cloud-download-alt:before {
+  content: "\e9b0";
+}
+.siagri-cloud-upload-alt:before {
+  content: "\e9b1";
+}
+.siagri-cloud:before {
+  content: "\e9b2";
+}
+.siagri-cocktail:before {
+  content: "\e9b3";
+}
+.siagri-code-branch:before {
+  content: "\e9b4";
+}
+.siagri-code:before {
+  content: "\e9b5";
+}
+.siagri-coffee:before {
+  content: "\e9b6";
+}
+.siagri-cog:before {
+  content: "\e9b7";
+}
+.siagri-cogs:before {
+  content: "\e9b8";
+}
+.siagri-coins:before {
+  content: "\e9b9";
+}
+.siagri-columns:before {
+  content: "\e9ba";
+}
+.siagri-comment-alt:before {
+  content: "\e9bb";
+}
+.siagri-comment-dollar:before {
+  content: "\e9bc";
+}
+.siagri-comment-dots:before {
+  content: "\e9bd";
+}
+.siagri-comment-slash:before {
+  content: "\e9be";
+}
+.siagri-comment:before {
+  content: "\e9bf";
+}
+.siagri-comments-dollar:before {
+  content: "\e9c0";
+}
+.siagri-comments:before {
+  content: "\e9c1";
+}
+.siagri-compact-disc:before {
+  content: "\e9c2";
+}
+.siagri-compass:before {
+  content: "\e9c3";
+}
+.siagri-compress:before {
+  content: "\e9c4";
+}
+.siagri-concierge-bell:before {
+  content: "\e9c5";
+}
+.siagri-cookie-bite:before {
+  content: "\e9c6";
+}
+.siagri-cookie:before {
+  content: "\e9c7";
+}
+.siagri-copy:before {
+  content: "\e9c8";
+}
+.siagri-copyright:before {
+  content: "\e9c9";
+}
+.siagri-couch:before {
+  content: "\e9ca";
+}
+.siagri-credit-card:before {
+  content: "\e9cb";
+}
+.siagri-crop-alt:before {
+  content: "\e9cc";
+}
+.siagri-crop:before {
+  content: "\e9cd";
+}
+.siagri-cross:before {
+  content: "\e9ce";
+}
+.siagri-crosshairs:before {
+  content: "\e9cf";
+}
+.siagri-crow:before {
+  content: "\e9d0";
+}
+.siagri-crown:before {
+  content: "\e9d1";
+}
+.siagri-cube:before {
+  content: "\e9d2";
+}
+.siagri-cubes:before {
+  content: "\e9d3";
+}
+.siagri-cut:before {
+  content: "\e9d4";
+}
+.siagri-database:before {
+  content: "\e9d5";
+}
+.siagri-deaf:before {
+  content: "\e9d6";
+}
+.siagri-desktop:before {
+  content: "\e9d7";
+}
+.siagri-dharmachakra:before {
+  content: "\e9d8";
+}
+.siagri-diagnoses:before {
+  content: "\e9d9";
+}
+.siagri-dice-five:before {
+  content: "\e9da";
+}
+.siagri-dice-four:before {
+  content: "\e9db";
+}
+.siagri-dice-one:before {
+  content: "\e9dc";
+}
+.siagri-dice-six:before {
+  content: "\e9dd";
+}
+.siagri-dice-three:before {
+  content: "\e9de";
+}
+.siagri-dice-two:before {
+  content: "\e9df";
+}
+.siagri-dice:before {
+  content: "\e9e0";
+}
+.siagri-digital-tachograph:before {
+  content: "\e9e1";
+}
+.siagri-directions:before {
+  content: "\e9e2";
+}
+.siagri-divide:before {
+  content: "\e9e3";
+}
+.siagri-dizzy:before {
+  content: "\e9e4";
+}
+.siagri-dna:before {
+  content: "\e9e5";
+}
+.siagri-dollar-sign:before {
+  content: "\e9e6";
+}
+.siagri-dolly-flatbed:before {
+  content: "\e9e7";
+}
+.siagri-dolly:before {
+  content: "\e9e8";
+}
+.siagri-donate:before {
+  content: "\e9e9";
+}
+.siagri-door-closed:before {
+  content: "\e9ea";
+}
+.siagri-door-open:before {
+  content: "\e9eb";
+}
+.siagri-dot-circle:before {
+  content: "\e9ec";
+}
+.siagri-dove:before {
+  content: "\e9ed";
+}
+.siagri-download1:before {
+  content: "\e9ee";
+}
+.siagri-drafting-compass:before {
+  content: "\e9ef";
+}
+.siagri-draw-polygon:before {
+  content: "\e9f0";
+}
+.siagri-drum-steelpan:before {
+  content: "\e9f1";
+}
+.siagri-drum:before {
+  content: "\e9f2";
+}
+.siagri-dumbbell:before {
+  content: "\e9f3";
+}
+.siagri-edit1:before {
+  content: "\e9f4";
+}
+.siagri-eject:before {
+  content: "\e9f5";
+}
+.siagri-ellipsis-h:before {
+  content: "\e9f6";
+}
+.siagri-ellipsis-v:before {
+  content: "\e9f7";
+}
+.siagri-envelope-open-text:before {
+  content: "\e9f8";
+}
+.siagri-envelope-open:before {
+  content: "\e9f9";
+}
+.siagri-envelope-square:before {
+  content: "\e9fa";
+}
+.siagri-envelope:before {
+  content: "\e9fb";
+}
+.siagri-equals:before {
+  content: "\e9fc";
+}
+.siagri-eraser:before {
+  content: "\e9fd";
+}
+.siagri-euro-sign:before {
+  content: "\e9fe";
+}
+.siagri-exchange-alt:before {
+  content: "\e9ff";
+}
+.siagri-exclamation-circle:before {
+  content: "\ea00";
+}
+.siagri-exclamation-triangle:before {
+  content: "\ea01";
+}
+.siagri-exclamation:before {
+  content: "\ea02";
+}
+.siagri-expand-arrows-alt:before {
+  content: "\ea03";
+}
+.siagri-expand:before {
+  content: "\ea04";
+}
+.siagri-external-link-alt:before {
+  content: "\ea05";
+}
+.siagri-external-link-square-alt:before {
+  content: "\ea06";
+}
+.siagri-eye-dropper:before {
+  content: "\ea07";
+}
+.siagri-eye-slash:before {
+  content: "\ea08";
+}
+.siagri-eye:before {
+  content: "\ea09";
+}
+.siagri-fast-backward:before {
+  content: "\ea0a";
+}
+.siagri-fast-forward:before {
+  content: "\ea0b";
+}
+.siagri-fax:before {
+  content: "\ea0c";
+}
+.siagri-feather-alt:before {
+  content: "\ea0d";
+}
+.siagri-feather:before {
+  content: "\ea0e";
+}
+.siagri-female:before {
+  content: "\ea0f";
+}
+.siagri-fighter-jet:before {
+  content: "\ea10";
+}
+.siagri-file-alt:before {
+  content: "\ea11";
+}
+.siagri-file-archive:before {
+  content: "\ea12";
+}
+.siagri-file-audio:before {
+  content: "\ea13";
+}
+.siagri-file-code:before {
+  content: "\ea14";
+}
+.siagri-file-contract:before {
+  content: "\ea15";
+}
+.siagri-file-download:before {
+  content: "\ea16";
+}
+.siagri-file-excel:before {
+  content: "\ea17";
+}
+.siagri-file-export:before {
+  content: "\ea18";
+}
+.siagri-file-image:before {
+  content: "\ea19";
+}
+.siagri-file-import:before {
+  content: "\ea1a";
+}
+.siagri-file-invoice-dollar:before {
+  content: "\ea1b";
+}
+.siagri-file-invoice:before {
+  content: "\ea1c";
+}
+.siagri-file-medical-alt:before {
+  content: "\ea1d";
+}
+.siagri-file-medical:before {
+  content: "\ea1e";
+}
+.siagri-file-pdf:before {
+  content: "\ea1f";
+}
+.siagri-file-powerpoint:before {
+  content: "\ea20";
+}
+.siagri-file-prescription:before {
+  content: "\ea21";
+}
+.siagri-file-signature:before {
+  content: "\ea22";
+}
+.siagri-file-upload:before {
+  content: "\ea23";
+}
+.siagri-file-video:before {
+  content: "\ea24";
+}
+.siagri-file-word:before {
+  content: "\ea25";
+}
+.siagri-file:before {
+  content: "\ea26";
+}
+.siagri-fill-drip:before {
+  content: "\ea27";
+}
+.siagri-fill:before {
+  content: "\ea28";
+}
+.siagri-film:before {
+  content: "\ea29";
+}
+.siagri-filter:before {
+  content: "\ea2a";
+}
+.siagri-fingerprint:before {
+  content: "\ea2b";
+}
+.siagri-fire-extinguisher:before {
+  content: "\ea2c";
+}
+.siagri-fire:before {
+  content: "\ea2d";
+}
+.siagri-first-aid:before {
+  content: "\ea2e";
+}
+.siagri-fish:before {
+  content: "\ea2f";
+}
+.siagri-flag-checkered:before {
+  content: "\ea30";
+}
+.siagri-flag:before {
+  content: "\ea31";
+}
+.siagri-flask:before {
+  content: "\ea32";
+}
+.siagri-flushed:before {
+  content: "\ea33";
+}
+.siagri-folder-minus:before {
+  content: "\ea34";
+}
+.siagri-folder-open:before {
+  content: "\ea35";
+}
+.siagri-folder-plus:before {
+  content: "\ea36";
+}
+.siagri-folder:before {
+  content: "\ea37";
+}
+.siagri-font-awesome-logo-full:before {
+  content: "\ea38";
+}
+.siagri-font:before {
+  content: "\ea39";
+}
+.siagri-football-ball:before {
+  content: "\ea3a";
+}
+.siagri-forward:before {
+  content: "\ea3b";
+}
+.siagri-frog:before {
+  content: "\ea3c";
+}
+.siagri-frown-open:before {
+  content: "\ea3d";
+}
+.siagri-frown:before {
+  content: "\ea3e";
+}
+.siagri-funnel-dollar:before {
+  content: "\ea3f";
+}
+.siagri-futbol:before {
+  content: "\ea40";
+}
+.siagri-gamepad:before {
+  content: "\ea41";
+}
+.siagri-gas-pump:before {
+  content: "\ea42";
+}
+.siagri-gavel:before {
+  content: "\ea43";
+}
+.siagri-gem:before {
+  content: "\ea44";
+}
+.siagri-genderless:before {
+  content: "\ea45";
+}
+.siagri-gift:before {
+  content: "\ea46";
+}
+.siagri-glass-martini-alt:before {
+  content: "\ea47";
+}
+.siagri-glass-martini:before {
+  content: "\ea48";
+}
+.siagri-glasses:before {
+  content: "\ea49";
+}
+.siagri-globe-africa:before {
+  content: "\ea4a";
+}
+.siagri-globe-americas:before {
+  content: "\ea4b";
+}
+.siagri-globe-asia:before {
+  content: "\ea4c";
+}
+.siagri-globe:before {
+  content: "\ea4d";
+}
+.siagri-golf-ball:before {
+  content: "\ea4e";
+}
+.siagri-gopuram:before {
+  content: "\ea4f";
+}
+.siagri-graduation-cap:before {
+  content: "\ea50";
+}
+.siagri-greater-than-equal:before {
+  content: "\ea51";
+}
+.siagri-greater-than:before {
+  content: "\ea52";
+}
+.siagri-grimace:before {
+  content: "\ea53";
+}
+.siagri-grin-alt:before {
+  content: "\ea54";
+}
+.siagri-grin-beam-sweat:before {
+  content: "\ea55";
+}
+.siagri-grin-beam:before {
+  content: "\ea56";
+}
+.siagri-grin-hearts:before {
+  content: "\ea57";
+}
+.siagri-grin-squint-tears:before {
+  content: "\ea58";
+}
+.siagri-grin-squint:before {
+  content: "\ea59";
+}
+.siagri-grin-stars:before {
+  content: "\ea5a";
+}
+.siagri-grin-tears:before {
+  content: "\ea5b";
+}
+.siagri-grin-tongue-squint:before {
+  content: "\ea5c";
+}
+.siagri-grin-tongue-wink:before {
+  content: "\ea5d";
+}
+.siagri-grin-tongue:before {
+  content: "\ea5e";
+}
+.siagri-grin-wink:before {
+  content: "\ea5f";
+}
+.siagri-grin:before {
+  content: "\ea60";
+}
+.siagri-grip-horizontal:before {
+  content: "\ea61";
+}
+.siagri-grip-vertical:before {
+  content: "\ea62";
+}
+.siagri-h-square:before {
+  content: "\ea63";
+}
+.siagri-hamsa:before {
+  content: "\ea64";
+}
+.siagri-hand-holding-heart:before {
+  content: "\ea65";
+}
+.siagri-hand-holding-usd:before {
+  content: "\ea66";
+}
+.siagri-hand-holding:before {
+  content: "\ea67";
+}
+.siagri-hand-lizard:before {
+  content: "\ea68";
+}
+.siagri-hand-paper:before {
+  content: "\ea69";
+}
+.siagri-hand-peace:before {
+  content: "\ea6a";
+}
+.siagri-hand-point-down:before {
+  content: "\ea6b";
+}
+.siagri-hand-point-left:before {
+  content: "\ea6c";
+}
+.siagri-hand-point-right:before {
+  content: "\ea6d";
+}
+.siagri-hand-point-up:before {
+  content: "\ea6e";
+}
+.siagri-hand-pointer:before {
+  content: "\ea6f";
+}
+.siagri-hand-rock:before {
+  content: "\ea70";
+}
+.siagri-hand-scissors:before {
+  content: "\ea71";
+}
+.siagri-hand-spock:before {
+  content: "\ea72";
+}
+.siagri-hands-helping:before {
+  content: "\ea73";
+}
+.siagri-hands:before {
+  content: "\ea74";
+}
+.siagri-handshake:before {
+  content: "\ea75";
+}
+.siagri-hashtag:before {
+  content: "\ea76";
+}
+.siagri-haykal:before {
+  content: "\ea77";
+}
+.siagri-hdd:before {
+  content: "\ea78";
+}
+.siagri-heading:before {
+  content: "\ea79";
+}
+.siagri-headphones-alt:before {
+  content: "\ea7a";
+}
+.siagri-headphones:before {
+  content: "\ea7b";
+}
+.siagri-headset:before {
+  content: "\ea7c";
+}
+.siagri-heart:before {
+  content: "\ea7d";
+}
+.siagri-heartbeat:before {
+  content: "\ea7e";
+}
+.siagri-helicopter:before {
+  content: "\ea7f";
+}
+.siagri-highlighter:before {
+  content: "\ea80";
+}
+.siagri-history:before {
+  content: "\ea81";
+}
+.siagri-hockey-puck:before {
+  content: "\ea82";
+}
+.siagri-home:before {
+  content: "\ea83";
+}
+.siagri-hospital-alt:before {
+  content: "\ea84";
+}
+.siagri-hospital-symbol:before {
+  content: "\ea85";
+}
+.siagri-hospital:before {
+  content: "\ea86";
+}
+.siagri-hot-tub:before {
+  content: "\ea87";
+}
+.siagri-hotel:before {
+  content: "\ea88";
+}
+.siagri-hourglass-end:before {
+  content: "\ea89";
+}
+.siagri-hourglass-half:before {
+  content: "\ea8a";
+}
+.siagri-hourglass-start:before {
+  content: "\ea8b";
+}
+.siagri-hourglass:before {
+  content: "\ea8c";
+}
+.siagri-i-cursor:before {
+  content: "\ea8d";
+}
+.siagri-id-badge:before {
+  content: "\ea8e";
+}
+.siagri-id-card-alt:before {
+  content: "\ea8f";
+}
+.siagri-id-card:before {
+  content: "\ea90";
+}
+.siagri-image:before {
+  content: "\ea91";
+}
+.siagri-images:before {
+  content: "\ea92";
+}
+.siagri-inbox:before {
+  content: "\ea93";
+}
+.siagri-indent:before {
+  content: "\ea94";
+}
+.siagri-industry:before {
+  content: "\ea95";
+}
+.siagri-infinity:before {
+  content: "\ea96";
+}
+.siagri-info-circle:before {
+  content: "\ea97";
+}
+.siagri-info1:before {
+  content: "\ea98";
+}
+.siagri-italic:before {
+  content: "\ea99";
+}
+.siagri-jedi:before {
+  content: "\ea9a";
+}
+.siagri-joint:before {
+  content: "\ea9b";
+}
+.siagri-journal-whills:before {
+  content: "\ea9c";
+}
+.siagri-kaaba:before {
+  content: "\ea9d";
+}
+.siagri-key:before {
+  content: "\ea9e";
+}
+.siagri-keyboard:before {
+  content: "\ea9f";
+}
+.siagri-khanda:before {
+  content: "\eaa0";
+}
+.siagri-kiss-beam:before {
+  content: "\eaa1";
+}
+.siagri-kiss-wink-heart:before {
+  content: "\eaa2";
+}
+.siagri-kiss:before {
+  content: "\eaa3";
+}
+.siagri-kiwi-bird:before {
+  content: "\eaa4";
+}
+.siagri-landmark:before {
+  content: "\eaa5";
+}
+.siagri-language:before {
+  content: "\eaa6";
+}
+.siagri-laptop-code:before {
+  content: "\eaa7";
+}
+.siagri-laptop:before {
+  content: "\eaa8";
+}
+.siagri-laugh-beam:before {
+  content: "\eaa9";
+}
+.siagri-laugh-squint:before {
+  content: "\eaaa";
+}
+.siagri-laugh-wink:before {
+  content: "\eaab";
+}
+.siagri-laugh:before {
+  content: "\eaac";
+}
+.siagri-layer-group:before {
+  content: "\eaad";
+}
+.siagri-leaf:before {
+  content: "\eaae";
+}
+.siagri-lemon:before {
+  content: "\eaaf";
+}
+.siagri-less-than-equal:before {
+  content: "\eab0";
+}
+.siagri-less-than:before {
+  content: "\eab1";
+}
+.siagri-level-down-alt:before {
+  content: "\eab2";
+}
+.siagri-level-up-alt:before {
+  content: "\eab3";
+}
+.siagri-life-ring:before {
+  content: "\eab4";
+}
+.siagri-lightbulb:before {
+  content: "\eab5";
+}
+.siagri-link:before {
+  content: "\eab6";
+}
+.siagri-lira-sign:before {
+  content: "\eab7";
+}
+.siagri-list-alt:before {
+  content: "\eab8";
+}
+.siagri-list-ol:before {
+  content: "\eab9";
+}
+.siagri-list-ul:before {
+  content: "\eaba";
+}
+.siagri-list:before {
+  content: "\eabb";
+}
+.siagri-location-arrow:before {
+  content: "\eabc";
+}
+.siagri-lock-open:before {
+  content: "\eabd";
+}
+.siagri-lock:before {
+  content: "\eabe";
+}
+.siagri-long-arrow-alt-down:before {
+  content: "\eabf";
+}
+.siagri-long-arrow-alt-left:before {
+  content: "\eac0";
+}
+.siagri-long-arrow-alt-right:before {
+  content: "\eac1";
+}
+.siagri-long-arrow-alt-up:before {
+  content: "\eac2";
+}
+.siagri-low-vision:before {
+  content: "\eac3";
+}
+.siagri-luggage-cart:before {
+  content: "\eac4";
+}
+.siagri-magic:before {
+  content: "\eac5";
+}
+.siagri-magnet:before {
+  content: "\eac6";
+}
+.siagri-mail-bulk:before {
+  content: "\eac7";
+}
+.siagri-male:before {
+  content: "\eac8";
+}
+.siagri-map-marked-alt:before {
+  content: "\eac9";
+}
+.siagri-map-marked:before {
+  content: "\eaca";
+}
+.siagri-map-marker-alt:before {
+  content: "\eacb";
+}
+.siagri-map-marker:before {
+  content: "\eacc";
+}
+.siagri-map-pin:before {
+  content: "\eacd";
+}
+.siagri-map-signs:before {
+  content: "\eace";
+}
+.siagri-map:before {
+  content: "\eacf";
+}
+.siagri-marker:before {
+  content: "\ead0";
+}
+.siagri-mars-double:before {
+  content: "\ead1";
+}
+.siagri-mars-stroke-h:before {
+  content: "\ead2";
+}
+.siagri-mars-stroke-v:before {
+  content: "\ead3";
+}
+.siagri-mars-stroke:before {
+  content: "\ead4";
+}
+.siagri-mars:before {
+  content: "\ead5";
+}
+.siagri-medal:before {
+  content: "\ead6";
+}
+.siagri-medkit:before {
+  content: "\ead7";
+}
+.siagri-meh-blank:before {
+  content: "\ead8";
+}
+.siagri-meh-rolling-eyes:before {
+  content: "\ead9";
+}
+.siagri-meh:before {
+  content: "\eada";
+}
+.siagri-memory:before {
+  content: "\eadb";
+}
+.siagri-menorah:before {
+  content: "\eadc";
+}
+.siagri-mercury:before {
+  content: "\eadd";
+}
+.siagri-microchip:before {
+  content: "\eade";
+}
+.siagri-microphone-alt-slash:before {
+  content: "\eadf";
+}
+.siagri-microphone-alt:before {
+  content: "\eae0";
+}
+.siagri-microphone-slash:before {
+  content: "\eae1";
+}
+.siagri-microphone:before {
+  content: "\eae2";
+}
+.siagri-microscope:before {
+  content: "\eae3";
+}
+.siagri-minus-circle:before {
+  content: "\eae4";
+}
+.siagri-minus-square:before {
+  content: "\eae5";
+}
+.siagri-minus1:before {
+  content: "\eae6";
+}
+.siagri-mobile-alt:before {
+  content: "\eae7";
+}
+.siagri-mobile:before {
+  content: "\eae8";
+}
+.siagri-money-bill-alt:before {
+  content: "\eae9";
+}
+.siagri-money-bill-wave-alt:before {
+  content: "\eaea";
+}
+.siagri-money-bill-wave:before {
+  content: "\eaeb";
+}
+.siagri-money-bill:before {
+  content: "\eaec";
+}
+.siagri-money-check-alt:before {
+  content: "\eaed";
+}
+.siagri-money-check:before {
+  content: "\eaee";
+}
+.siagri-monument:before {
+  content: "\eaef";
+}
+.siagri-moon:before {
+  content: "\eaf0";
+}
+.siagri-mortar-pestle:before {
+  content: "\eaf1";
+}
+.siagri-mosque:before {
+  content: "\eaf2";
+}
+.siagri-motorcycle:before {
+  content: "\eaf3";
+}
+.siagri-mouse-pointer:before {
+  content: "\eaf4";
+}
+.siagri-music:before {
+  content: "\eaf5";
+}
+.siagri-neuter:before {
+  content: "\eaf6";
+}
+.siagri-newspaper:before {
+  content: "\eaf7";
+}
+.siagri-not-equal:before {
+  content: "\eaf8";
+}
+.siagri-notes-medical:before {
+  content: "\eaf9";
+}
+.siagri-object-group:before {
+  content: "\eafa";
+}
+.siagri-object-ungroup:before {
+  content: "\eafb";
+}
+.siagri-oil-can:before {
+  content: "\eafc";
+}
+.siagri-om:before {
+  content: "\eafd";
+}
+.siagri-outdent:before {
+  content: "\eafe";
+}
+.siagri-paint-brush:before {
+  content: "\eaff";
+}
+.siagri-paint-roller:before {
+  content: "\eb00";
+}
+.siagri-palette:before {
+  content: "\eb01";
+}
+.siagri-pallet:before {
+  content: "\eb02";
+}
+.siagri-paper-plane:before {
+  content: "\eb03";
+}
+.siagri-paperclip:before {
+  content: "\eb04";
+}
+.siagri-parachute-box:before {
+  content: "\eb05";
+}
+.siagri-paragraph:before {
+  content: "\eb06";
+}
+.siagri-parking:before {
+  content: "\eb07";
+}
+.siagri-passport:before {
+  content: "\eb08";
+}
+.siagri-pastafarianism:before {
+  content: "\eb09";
+}
+.siagri-paste:before {
+  content: "\eb0a";
+}
+.siagri-pause-circle:before {
+  content: "\eb0b";
+}
+.siagri-pause:before {
+  content: "\eb0c";
+}
+.siagri-paw:before {
+  content: "\eb0d";
+}
+.siagri-peace:before {
+  content: "\eb0e";
+}
+.siagri-pen-alt:before {
+  content: "\eb0f";
+}
+.siagri-pen-fancy:before {
+  content: "\eb10";
+}
+.siagri-pen-nib:before {
+  content: "\eb11";
+}
+.siagri-pen-square:before {
+  content: "\eb12";
+}
+.siagri-pen:before {
+  content: "\eb13";
+}
+.siagri-pencil-alt:before {
+  content: "\eb14";
+}
+.siagri-pencil-ruler:before {
+  content: "\eb15";
+}
+.siagri-people-carry:before {
+  content: "\eb16";
+}
+.siagri-percent:before {
+  content: "\eb17";
+}
+.siagri-percentage:before {
+  content: "\eb18";
+}
+.siagri-phone-slash:before {
+  content: "\eb19";
+}
+.siagri-phone-square:before {
+  content: "\eb1a";
+}
+.siagri-phone-volume:before {
+  content: "\eb1b";
+}
+.siagri-phone1:before {
+  content: "\eb1c";
+}
+.siagri-piggy-bank:before {
+  content: "\eb1d";
+}
+.siagri-pills:before {
+  content: "\eb1e";
+}
+.siagri-place-of-worship:before {
+  content: "\eb1f";
+}
+.siagri-plane-arrival:before {
+  content: "\eb20";
+}
+.siagri-plane-departure:before {
+  content: "\eb21";
+}
+.siagri-plane:before {
+  content: "\eb22";
+}
+.siagri-play-circle:before {
+  content: "\eb23";
+}
+.siagri-play:before {
+  content: "\eb24";
+}
+.siagri-plug:before {
+  content: "\eb25";
+}
+.siagri-plus-circle:before {
+  content: "\eb26";
+}
+.siagri-plus-square:before {
+  content: "\eb27";
+}
+.siagri-plus1:before {
+  content: "\eb28";
+}
+.siagri-podcast:before {
+  content: "\eb29";
+}
+.siagri-poll-h:before {
+  content: "\eb2a";
+}
+.siagri-poll:before {
+  content: "\eb2b";
+}
+.siagri-poo:before {
+  content: "\eb2c";
+}
+.siagri-poop:before {
+  content: "\eb2d";
+}
+.siagri-portrait:before {
+  content: "\eb2e";
+}
+.siagri-pound-sign:before {
+  content: "\eb2f";
+}
+.siagri-power-off:before {
+  content: "\eb30";
+}
+.siagri-pray:before {
+  content: "\eb31";
+}
+.siagri-praying-hands:before {
+  content: "\eb32";
+}
+.siagri-prescription-bottle-alt:before {
+  content: "\eb33";
+}
+.siagri-prescription-bottle:before {
+  content: "\eb34";
+}
+.siagri-prescription:before {
+  content: "\eb35";
+}
+.siagri-print:before {
+  content: "\eb36";
+}
+.siagri-procedures:before {
+  content: "\eb37";
+}
+.siagri-project-diagram:before {
+  content: "\eb38";
+}
+.siagri-puzzle-piece:before {
+  content: "\eb39";
+}
+.siagri-qrcode:before {
+  content: "\eb3a";
+}
+.siagri-question-circle:before {
+  content: "\eb3b";
+}
+.siagri-question1:before {
+  content: "\eb3c";
+}
+.siagri-quidditch:before {
+  content: "\eb3d";
+}
+.siagri-quote-left:before {
+  content: "\eb3e";
+}
+.siagri-quote-right:before {
+  content: "\eb3f";
+}
+.siagri-quran:before {
+  content: "\eb40";
+}
+.siagri-random:before {
+  content: "\eb41";
+}
+.siagri-receipt:before {
+  content: "\eb42";
+}
+.siagri-recycle:before {
+  content: "\eb43";
+}
+.siagri-redo-alt:before {
+  content: "\eb44";
+}
+.siagri-redo:before {
+  content: "\eb45";
+}
+.siagri-registered:before {
+  content: "\eb46";
+}
+.siagri-reply-all:before {
+  content: "\eb47";
+}
+.siagri-reply:before {
+  content: "\eb48";
+}
+.siagri-retweet:before {
+  content: "\eb49";
+}
+.siagri-ribbon:before {
+  content: "\eb4a";
+}
+.siagri-road:before {
+  content: "\eb4b";
+}
+.siagri-robot:before {
+  content: "\eb4c";
+}
+.siagri-rocket:before {
+  content: "\eb4d";
+}
+.siagri-route:before {
+  content: "\eb4e";
+}
+.siagri-rss-square:before {
+  content: "\eb4f";
+}
+.siagri-rss:before {
+  content: "\eb50";
+}
+.siagri-ruble-sign:before {
+  content: "\eb51";
+}
+.siagri-ruler-combined:before {
+  content: "\eb52";
+}
+.siagri-ruler-horizontal:before {
+  content: "\eb53";
+}
+.siagri-ruler-vertical:before {
+  content: "\eb54";
+}
+.siagri-ruler:before {
+  content: "\eb55";
+}
+.siagri-rupee-sign:before {
+  content: "\eb56";
+}
+.siagri-sad-cry:before {
+  content: "\eb57";
+}
+.siagri-sad-tear:before {
+  content: "\eb58";
+}
+.siagri-save:before {
+  content: "\eb59";
+}
+.siagri-school:before {
+  content: "\eb5a";
+}
+.siagri-screwdriver:before {
+  content: "\eb5b";
+}
+.siagri-search-dollar:before {
+  content: "\eb5c";
+}
+.siagri-search-location:before {
+  content: "\eb5d";
+}
+.siagri-search-minus:before {
+  content: "\eb5e";
+}
+.siagri-search-plus:before {
+  content: "\eb5f";
+}
+.siagri-search2:before {
+  content: "\eb60";
+}
+.siagri-seedling:before {
+  content: "\eb61";
+}
+.siagri-server:before {
+  content: "\eb62";
+}
+.siagri-shapes:before {
+  content: "\eb63";
+}
+.siagri-share-alt-square:before {
+  content: "\eb64";
+}
+.siagri-share-alt:before {
+  content: "\eb65";
+}
+.siagri-share-square:before {
+  content: "\eb66";
+}
+.siagri-share1:before {
+  content: "\eb67";
+}
+.siagri-shekel-sign:before {
+  content: "\eb68";
+}
+.siagri-shield-alt:before {
+  content: "\eb69";
+}
+.siagri-ship:before {
+  content: "\eb6a";
+}
+.siagri-shipping-fast:before {
+  content: "\eb6b";
+}
+.siagri-shoe-prints:before {
+  content: "\eb6c";
+}
+.siagri-shopping-bag:before {
+  content: "\eb6d";
+}
+.siagri-shopping-basket:before {
+  content: "\eb6e";
+}
+.siagri-shopping-cart:before {
+  content: "\eb6f";
+}
+.siagri-shower:before {
+  content: "\eb70";
+}
+.siagri-shuttle-van:before {
+  content: "\eb71";
+}
+.siagri-sign-in-alt:before {
+  content: "\eb72";
+}
+.siagri-sign-language:before {
+  content: "\eb73";
+}
+.siagri-sign-out-alt:before {
+  content: "\eb74";
+}
+.siagri-sign:before {
+  content: "\eb75";
+}
+.siagri-signal:before {
+  content: "\eb76";
+}
+.siagri-signature:before {
+  content: "\eb77";
+}
+.siagri-sitemap:before {
+  content: "\eb78";
+}
+.siagri-skull:before {
+  content: "\eb79";
+}
+.siagri-sliders-h:before {
+  content: "\eb7a";
+}
+.siagri-smile-beam:before {
+  content: "\eb7b";
+}
+.siagri-smile-wink:before {
+  content: "\eb7c";
+}
+.siagri-smile:before {
+  content: "\eb7d";
+}
+.siagri-smoking-ban:before {
+  content: "\eb7e";
+}
+.siagri-smoking:before {
+  content: "\eb7f";
+}
+.siagri-snowflake:before {
+  content: "\eb80";
+}
+.siagri-socks:before {
+  content: "\eb81";
+}
+.siagri-solar-panel:before {
+  content: "\eb82";
+}
+.siagri-sort-alpha-down:before {
+  content: "\eb83";
+}
+.siagri-sort-alpha-up:before {
+  content: "\eb84";
+}
+.siagri-sort-amount-down:before {
+  content: "\eb85";
+}
+.siagri-sort-amount-up:before {
+  content: "\eb86";
+}
+.siagri-sort-down1:before {
+  content: "\eb87";
+}
+.siagri-sort-numeric-down:before {
+  content: "\eb88";
+}
+.siagri-sort-numeric-up:before {
+  content: "\eb89";
+}
+.siagri-sort-up1:before {
+  content: "\eb8a";
+}
+.siagri-sort1:before {
+  content: "\eb8b";
+}
+.siagri-spa:before {
+  content: "\eb8c";
+}
+.siagri-space-shuttle:before {
+  content: "\eb8d";
+}
+.siagri-spinner:before {
+  content: "\eb8e";
+}
+.siagri-splotch:before {
+  content: "\eb8f";
+}
+.siagri-spray-can:before {
+  content: "\eb90";
+}
+.siagri-square-full:before {
+  content: "\eb91";
+}
+.siagri-square-root-alt:before {
+  content: "\eb92";
+}
+.siagri-square:before {
+  content: "\eb93";
+}
+.siagri-stamp:before {
+  content: "\eb94";
+}
+.siagri-star-and-crescent:before {
+  content: "\eb95";
+}
+.siagri-star-half-alt:before {
+  content: "\eb96";
+}
+.siagri-star-half:before {
+  content: "\eb97";
+}
+.siagri-star-of-david:before {
+  content: "\eb98";
+}
+.siagri-star-of-life:before {
+  content: "\eb99";
+}
+.siagri-star:before {
+  content: "\eb9a";
+}
+.siagri-step-backward:before {
+  content: "\eb9b";
+}
+.siagri-step-forward:before {
+  content: "\eb9c";
+}
+.siagri-stethoscope:before {
+  content: "\eb9d";
+}
+.siagri-sticky-note:before {
+  content: "\eb9e";
+}
+.siagri-stop-circle:before {
+  content: "\eb9f";
+}
+.siagri-stop:before {
+  content: "\eba0";
+}
+.siagri-stopwatch:before {
+  content: "\eba1";
+}
+.siagri-store-alt:before {
+  content: "\eba2";
+}
+.siagri-store:before {
+  content: "\eba3";
+}
+.siagri-stream:before {
+  content: "\eba4";
+}
+.siagri-street-view:before {
+  content: "\eba5";
+}
+.siagri-strikethrough:before {
+  content: "\eba6";
+}
+.siagri-stroopwafel:before {
+  content: "\eba7";
+}
+.siagri-subscript:before {
+  content: "\eba8";
+}
+.siagri-subway:before {
+  content: "\eba9";
+}
+.siagri-suitcase-rolling:before {
+  content: "\ebaa";
+}
+.siagri-suitcase:before {
+  content: "\ebab";
+}
+.siagri-sun:before {
+  content: "\ebac";
+}
+.siagri-superscript:before {
+  content: "\ebad";
+}
+.siagri-surprise:before {
+  content: "\ebae";
+}
+.siagri-swatchbook:before {
+  content: "\ebaf";
+}
+.siagri-swimmer:before {
+  content: "\ebb0";
+}
+.siagri-swimming-pool:before {
+  content: "\ebb1";
+}
+.siagri-synagogue:before {
+  content: "\ebb2";
+}
+.siagri-sync-alt:before {
+  content: "\ebb3";
+}
+.siagri-sync:before {
+  content: "\ebb4";
+}
+.siagri-syringe:before {
+  content: "\ebb5";
+}
+.siagri-table-tennis:before {
+  content: "\ebb6";
+}
+.siagri-table:before {
+  content: "\ebb7";
+}
+.siagri-tablet-alt:before {
+  content: "\ebb8";
+}
+.siagri-tablet:before {
+  content: "\ebb9";
+}
+.siagri-tablets:before {
+  content: "\ebba";
+}
+.siagri-tachometer-alt:before {
+  content: "\ebbb";
+}
+.siagri-tag:before {
+  content: "\ebbc";
+}
+.siagri-tags:before {
+  content: "\ebbd";
+}
+.siagri-tape:before {
+  content: "\ebbe";
+}
+.siagri-tasks:before {
+  content: "\ebbf";
+}
+.siagri-taxi:before {
+  content: "\ebc0";
+}
+.siagri-teeth-open:before {
+  content: "\ebc1";
+}
+.siagri-teeth:before {
+  content: "\ebc2";
+}
+.siagri-terminal:before {
+  content: "\ebc3";
+}
+.siagri-text-height:before {
+  content: "\ebc4";
+}
+.siagri-text-width:before {
+  content: "\ebc5";
+}
+.siagri-th-large:before {
+  content: "\ebc6";
+}
+.siagri-th-list:before {
+  content: "\ebc7";
+}
+.siagri-th:before {
+  content: "\ebc8";
+}
+.siagri-theater-masks:before {
+  content: "\ebc9";
+}
+.siagri-thermometer-empty:before {
+  content: "\ebca";
+}
+.siagri-thermometer-full:before {
+  content: "\ebcb";
+}
+.siagri-thermometer-half:before {
+  content: "\ebcc";
+}
+.siagri-thermometer-quarter:before {
+  content: "\ebcd";
+}
+.siagri-thermometer-three-quarters:before {
+  content: "\ebce";
+}
+.siagri-thermometer:before {
+  content: "\ebcf";
+}
+.siagri-thumbs-down:before {
+  content: "\ebd0";
+}
+.siagri-thumbs-up:before {
+  content: "\ebd1";
+}
+.siagri-thumbtack:before {
+  content: "\ebd2";
+}
+.siagri-ticket-alt:before {
+  content: "\ebd3";
+}
+.siagri-times-circle:before {
+  content: "\ebd4";
+}
+.siagri-times:before {
+  content: "\ebd5";
+}
+.siagri-tint-slash:before {
+  content: "\ebd6";
+}
+.siagri-tint:before {
+  content: "\ebd7";
+}
+.siagri-tired:before {
+  content: "\ebd8";
+}
+.siagri-toggle-off:before {
+  content: "\ebd9";
+}
+.siagri-toggle-on:before {
+  content: "\ebda";
+}
+.siagri-toolbox:before {
+  content: "\ebdb";
+}
+.siagri-tooth:before {
+  content: "\ebdc";
+}
+.siagri-torah:before {
+  content: "\ebdd";
+}
+.siagri-torii-gate:before {
+  content: "\ebde";
+}
+.siagri-trademark:before {
+  content: "\ebdf";
+}
+.siagri-traffic-light:before {
+  content: "\ebe0";
+}
+.siagri-train:before {
+  content: "\ebe1";
+}
+.siagri-transgender-alt:before {
+  content: "\ebe2";
+}
+.siagri-transgender:before {
+  content: "\ebe3";
+}
+.siagri-trash-alt:before {
+  content: "\ebe4";
+}
+.siagri-trash:before {
+  content: "\ebe5";
+}
+.siagri-tree:before {
+  content: "\ebe6";
+}
+.siagri-trophy:before {
+  content: "\ebe7";
+}
+.siagri-truck-loading:before {
+  content: "\ebe8";
+}
+.siagri-truck-monster:before {
+  content: "\ebe9";
+}
+.siagri-truck-moving:before {
+  content: "\ebea";
+}
+.siagri-truck-pickup:before {
+  content: "\ebeb";
+}
+.siagri-truck:before {
+  content: "\ebec";
+}
+.siagri-tshirt:before {
+  content: "\ebed";
+}
+.siagri-tty:before {
+  content: "\ebee";
+}
+.siagri-tv:before {
+  content: "\ebef";
+}
+.siagri-umbrella-beach:before {
+  content: "\ebf0";
+}
+.siagri-umbrella:before {
+  content: "\ebf1";
+}
+.siagri-underline:before {
+  content: "\ebf2";
+}
+.siagri-undo-alt:before {
+  content: "\ebf3";
+}
+.siagri-undo:before {
+  content: "\ebf4";
+}
+.siagri-universal-access:before {
+  content: "\ebf5";
+}
+.siagri-university:before {
+  content: "\ebf6";
+}
+.siagri-unlink:before {
+  content: "\ebf7";
+}
+.siagri-unlock-alt:before {
+  content: "\ebf8";
+}
+.siagri-unlock:before {
+  content: "\ebf9";
+}
+.siagri-upload1:before {
+  content: "\ebfa";
+}
+.siagri-user-alt-slash:before {
+  content: "\ebfb";
+}
+.siagri-user-alt:before {
+  content: "\ebfc";
+}
+.siagri-user-astronaut:before {
+  content: "\ebfd";
+}
+.siagri-user-check:before {
+  content: "\ebfe";
+}
+.siagri-user-circle:before {
+  content: "\ebff";
+}
+.siagri-user-clock:before {
+  content: "\ec00";
+}
+.siagri-user-cog:before {
+  content: "\ec01";
+}
+.siagri-user-edit:before {
+  content: "\ec02";
+}
+.siagri-user-friends:before {
+  content: "\ec03";
+}
+.siagri-user-graduate:before {
+  content: "\ec04";
+}
+.siagri-user-lock:before {
+  content: "\ec05";
+}
+.siagri-user-md:before {
+  content: "\ec06";
+}
+.siagri-user-minus:before {
+  content: "\ec07";
+}
+.siagri-user-ninja:before {
+  content: "\ec08";
+}
+.siagri-user-plus:before {
+  content: "\ec09";
+}
+.siagri-user-secret:before {
+  content: "\ec0a";
+}
+.siagri-user-shield:before {
+  content: "\ec0b";
+}
+.siagri-user-slash:before {
+  content: "\ec0c";
+}
+.siagri-user-tag:before {
+  content: "\ec0d";
+}
+.siagri-user-tie:before {
+  content: "\ec0e";
+}
+.siagri-user-times:before {
+  content: "\ec0f";
+}
+.siagri-user:before {
+  content: "\ec10";
+}
+.siagri-users-cog:before {
+  content: "\ec11";
+}
+.siagri-users:before {
+  content: "\ec12";
+}
+.siagri-utensil-spoon:before {
+  content: "\ec13";
+}
+.siagri-utensils:before {
+  content: "\ec14";
+}
+.siagri-vector-square:before {
+  content: "\ec15";
+}
+.siagri-venus-double:before {
+  content: "\ec16";
+}
+.siagri-venus-mars:before {
+  content: "\ec17";
+}
+.siagri-venus:before {
+  content: "\ec18";
+}
+.siagri-vial:before {
+  content: "\ec19";
+}
+.siagri-vials:before {
+  content: "\ec1a";
+}
+.siagri-video-slash:before {
+  content: "\ec1b";
+}
+.siagri-video:before {
+  content: "\ec1c";
+}
+.siagri-vihara:before {
+  content: "\ec1d";
+}
+.siagri-volleyball-ball:before {
+  content: "\ec1e";
+}
+.siagri-volume-down:before {
+  content: "\ec1f";
+}
+.siagri-volume-off:before {
+  content: "\ec20";
+}
+.siagri-volume-up:before {
+  content: "\ec21";
+}
+.siagri-walking:before {
+  content: "\ec22";
+}
+.siagri-wallet:before {
+  content: "\ec23";
+}
+.siagri-warehouse:before {
+  content: "\ec24";
+}
+.siagri-weight-hanging:before {
+  content: "\ec25";
+}
+.siagri-weight:before {
+  content: "\ec26";
+}
+.siagri-wheelchair:before {
+  content: "\ec27";
+}
+.siagri-wifi:before {
+  content: "\ec28";
+}
+.siagri-window-close:before {
+  content: "\ec29";
+}
+.siagri-window-maximize:before {
+  content: "\ec2a";
+}
+.siagri-window-minimize:before {
+  content: "\ec2b";
+}
+.siagri-window-restore:before {
+  content: "\ec2c";
+}
+.siagri-wine-glass-alt:before {
+  content: "\ec2d";
+}
+.siagri-wine-glass:before {
+  content: "\ec2e";
+}
+.siagri-won-sign:before {
+  content: "\ec2f";
+}
+.siagri-wrench:before {
+  content: "\ec30";
+}
+.siagri-x-ray:before {
+  content: "\ec31";
+}
+.siagri-yen-sign:before {
+  content: "\ec32";
+}
+.siagri-yin-yang:before {
+  content: "\ec33";
+}
+.siagri-address-book1:before {
+  content: "\ec34";
+}
+.siagri-address-card1:before {
+  content: "\ec35";
+}
+.siagri-angry1:before {
+  content: "\ec36";
+}
+.siagri-arrow-alt-circle-down1:before {
+  content: "\ec37";
+}
+.siagri-arrow-alt-circle-left1:before {
+  content: "\ec38";
+}
+.siagri-arrow-alt-circle-right1:before {
+  content: "\ec39";
+}
+.siagri-arrow-alt-circle-up1:before {
+  content: "\ec3a";
+}
+.siagri-bell-slash1:before {
+  content: "\ec3b";
+}
+.siagri-bell2:before {
+  content: "\ec3c";
+}
+.siagri-bookmark1:before {
+  content: "\ec3d";
+}
+.siagri-building1:before {
+  content: "\ec3e";
+}
+.siagri-calendar-alt1:before {
+  content: "\ec3f";
+}
+.siagri-calendar-check1:before {
+  content: "\ec40";
+}
+.siagri-calendar-minus1:before {
+  content: "\ec41";
+}
+.siagri-calendar-plus1:before {
+  content: "\ec42";
+}
+.siagri-calendar-times1:before {
+  content: "\ec43";
+}
+.siagri-calendar1:before {
+  content: "\ec44";
+}
+.siagri-caret-square-down1:before {
+  content: "\ec45";
+}
+.siagri-caret-square-left1:before {
+  content: "\ec46";
+}
+.siagri-caret-square-right1:before {
+  content: "\ec47";
+}
+.siagri-caret-square-up1:before {
+  content: "\ec48";
+}
+.siagri-chart-bar1:before {
+  content: "\ec49";
+}
+.siagri-check-circle1:before {
+  content: "\ec4a";
+}
+.siagri-check-square1:before {
+  content: "\ec4b";
+}
+.siagri-circle1:before {
+  content: "\ec4c";
+}
+.siagri-clipboard1:before {
+  content: "\ec4d";
+}
+.siagri-clock1:before {
+  content: "\ec4e";
+}
+.siagri-clone1:before {
+  content: "\ec4f";
+}
+.siagri-closed-captioning1:before {
+  content: "\ec50";
+}
+.siagri-comment-alt1:before {
+  content: "\ec51";
+}
+.siagri-comment-dots1:before {
+  content: "\ec52";
+}
+.siagri-comment1:before {
+  content: "\ec53";
+}
+.siagri-comments1:before {
+  content: "\ec54";
+}
+.siagri-compass1:before {
+  content: "\ec55";
+}
+.siagri-copy1:before {
+  content: "\ec56";
+}
+.siagri-copyright1:before {
+  content: "\ec57";
+}
+.siagri-credit-card1:before {
+  content: "\ec58";
+}
+.siagri-dizzy1:before {
+  content: "\ec59";
+}
+.siagri-dot-circle1:before {
+  content: "\ec5a";
+}
+.siagri-edit2:before {
+  content: "\ec5b";
+}
+.siagri-envelope-open1:before {
+  content: "\ec5c";
+}
+.siagri-envelope1:before {
+  content: "\ec5d";
+}
+.siagri-eye-slash1:before {
+  content: "\ec5e";
+}
+.siagri-eye1:before {
+  content: "\ec5f";
+}
+.siagri-file-alt1:before {
+  content: "\ec60";
+}
+.siagri-file-archive1:before {
+  content: "\ec61";
+}
+.siagri-file-audio1:before {
+  content: "\ec62";
+}
+.siagri-file-code1:before {
+  content: "\ec63";
+}
+.siagri-file-excel1:before {
+  content: "\ec64";
+}
+.siagri-file-image1:before {
+  content: "\ec65";
+}
+.siagri-file-pdf1:before {
+  content: "\ec66";
+}
+.siagri-file-powerpoint1:before {
+  content: "\ec67";
+}
+.siagri-file-video1:before {
+  content: "\ec68";
+}
+.siagri-file-word1:before {
+  content: "\ec69";
+}
+.siagri-file1:before {
+  content: "\ec6a";
+}
+.siagri-flag1:before {
+  content: "\ec6b";
+}
+.siagri-flushed1:before {
+  content: "\ec6c";
+}
+.siagri-folder-open1:before {
+  content: "\ec6d";
+}
+.siagri-folder1:before {
+  content: "\ec6e";
+}
+.siagri-font-awesome-logo-full1:before {
+  content: "\ec6f";
+}
+.siagri-frown-open1:before {
+  content: "\ec70";
+}
+.siagri-frown1:before {
+  content: "\ec71";
+}
+.siagri-futbol1:before {
+  content: "\ec72";
+}
+.siagri-gem1:before {
+  content: "\ec73";
+}
+.siagri-grimace1:before {
+  content: "\ec74";
+}
+.siagri-grin-alt1:before {
+  content: "\ec75";
+}
+.siagri-grin-beam-sweat1:before {
+  content: "\ec76";
+}
+.siagri-grin-beam1:before {
+  content: "\ec77";
+}
+.siagri-grin-hearts1:before {
+  content: "\ec78";
+}
+.siagri-grin-squint-tears1:before {
+  content: "\ec79";
+}
+.siagri-grin-squint1:before {
+  content: "\ec7a";
+}
+.siagri-grin-stars1:before {
+  content: "\ec7b";
+}
+.siagri-grin-tears1:before {
+  content: "\ec7c";
+}
+.siagri-grin-tongue-squint1:before {
+  content: "\ec7d";
+}
+.siagri-grin-tongue-wink1:before {
+  content: "\ec7e";
+}
+.siagri-grin-tongue1:before {
+  content: "\ec7f";
+}
+.siagri-grin-wink1:before {
+  content: "\ec80";
+}
+.siagri-grin1:before {
+  content: "\ec81";
+}
+.siagri-hand-lizard1:before {
+  content: "\ec82";
+}
+.siagri-hand-paper1:before {
+  content: "\ec83";
+}
+.siagri-hand-peace1:before {
+  content: "\ec84";
+}
+.siagri-hand-point-down1:before {
+  content: "\ec85";
+}
+.siagri-hand-point-left1:before {
+  content: "\ec86";
+}
+.siagri-hand-point-right1:before {
+  content: "\ec87";
+}
+.siagri-hand-point-up1:before {
+  content: "\ec88";
+}
+.siagri-hand-pointer1:before {
+  content: "\ec89";
+}
+.siagri-hand-rock1:before {
+  content: "\ec8a";
+}
+.siagri-hand-scissors1:before {
+  content: "\ec8b";
+}
+.siagri-hand-spock1:before {
+  content: "\ec8c";
+}
+.siagri-handshake1:before {
+  content: "\ec8d";
+}
+.siagri-hdd1:before {
+  content: "\ec8e";
+}
+.siagri-heart1:before {
+  content: "\ec8f";
+}
+.siagri-hospital1:before {
+  content: "\ec90";
+}
+.siagri-hourglass1:before {
+  content: "\ec91";
+}
+.siagri-id-badge1:before {
+  content: "\ec92";
+}
+.siagri-id-card1:before {
+  content: "\ec93";
+}
+.siagri-image1:before {
+  content: "\ec94";
+}
+.siagri-images1:before {
+  content: "\ec95";
+}
+.siagri-keyboard1:before {
+  content: "\ec96";
+}
+.siagri-kiss-beam1:before {
+  content: "\ec97";
+}
+.siagri-kiss-wink-heart1:before {
+  content: "\ec98";
+}
+.siagri-kiss1:before {
+  content: "\ec99";
+}
+.siagri-laugh-beam1:before {
+  content: "\ec9a";
+}
+.siagri-laugh-squint1:before {
+  content: "\ec9b";
+}
+.siagri-laugh-wink1:before {
+  content: "\ec9c";
+}
+.siagri-laugh1:before {
+  content: "\ec9d";
+}
+.siagri-lemon1:before {
+  content: "\ec9e";
+}
+.siagri-life-ring1:before {
+  content: "\ec9f";
+}
+.siagri-lightbulb1:before {
+  content: "\eca0";
+}
+.siagri-list-alt1:before {
+  content: "\eca1";
+}
+.siagri-map1:before {
+  content: "\eca2";
+}
+.siagri-meh-blank1:before {
+  content: "\eca3";
+}
+.siagri-meh-rolling-eyes1:before {
+  content: "\eca4";
+}
+.siagri-meh1:before {
+  content: "\eca5";
+}
+.siagri-minus-square1:before {
+  content: "\eca6";
+}
+.siagri-money-bill-alt1:before {
+  content: "\eca7";
+}
+.siagri-moon1:before {
+  content: "\eca8";
+}
+.siagri-newspaper1:before {
+  content: "\eca9";
+}
+.siagri-object-group1:before {
+  content: "\ecaa";
+}
+.siagri-object-ungroup1:before {
+  content: "\ecab";
+}
+.siagri-paper-plane1:before {
+  content: "\ecac";
+}
+.siagri-pause-circle1:before {
+  content: "\ecad";
+}
+.siagri-play-circle1:before {
+  content: "\ecae";
+}
+.siagri-plus-square1:before {
+  content: "\ecaf";
+}
+.siagri-question-circle1:before {
+  content: "\ecb0";
+}
+.siagri-registered1:before {
+  content: "\ecb1";
+}
+.siagri-sad-cry1:before {
+  content: "\ecb2";
+}
+.siagri-sad-tear1:before {
+  content: "\ecb3";
+}
+.siagri-save1:before {
+  content: "\ecb4";
+}
+.siagri-share-square1:before {
+  content: "\ecb5";
+}
+.siagri-smile-beam1:before {
+  content: "\ecb6";
+}
+.siagri-smile-wink1:before {
+  content: "\ecb7";
+}
+.siagri-smile1:before {
+  content: "\ecb8";
+}
+.siagri-snowflake1:before {
+  content: "\ecb9";
+}
+.siagri-square1:before {
+  content: "\ecba";
+}
+.siagri-star-half1:before {
+  content: "\ecbb";
+}
+.siagri-star1:before {
+  content: "\ecbc";
+}
+.siagri-sticky-note1:before {
+  content: "\ecbd";
+}
+.siagri-stop-circle1:before {
+  content: "\ecbe";
+}
+.siagri-sun1:before {
+  content: "\ecbf";
+}
+.siagri-surprise1:before {
+  content: "\ecc0";
+}
+.siagri-thumbs-down1:before {
+  content: "\ecc1";
+}
+.siagri-thumbs-up1:before {
+  content: "\ecc2";
+}
+.siagri-times-circle1:before {
+  content: "\ecc3";
+}
+.siagri-tired1:before {
+  content: "\ecc4";
+}
+.siagri-trash-alt1:before {
+  content: "\ecc5";
+}
+.siagri-user-circle1:before {
+  content: "\ecc6";
+}
+.siagri-user1:before {
+  content: "\ecc7";
+}
+.siagri-window-close1:before {
+  content: "\ecc8";
+}
+.siagri-window-maximize1:before {
+  content: "\ecc9";
+}
+.siagri-window-minimize1:before {
+  content: "\ecca";
+}
+.siagri-window-restore1:before {
+  content: "\eccb";
+}
+.siagri-px:before {
+  content: "\eccc";
+}
+.siagri-accessible-icon:before {
+  content: "\eccd";
+}
+.siagri-accusoft:before {
+  content: "\ecce";
+}
+.siagri-adn:before {
+  content: "\eccf";
+}
+.siagri-adversal:before {
+  content: "\ecd0";
+}
+.siagri-affiliatetheme:before {
+  content: "\ecd1";
+}
+.siagri-algolia:before {
+  content: "\ecd2";
+}
+.siagri-alipay:before {
+  content: "\ecd3";
+}
+.siagri-amazon-pay:before {
+  content: "\ecd4";
+}
+.siagri-amazon:before {
+  content: "\ecd5";
+}
+.siagri-amilia:before {
+  content: "\ecd6";
+}
+.siagri-android:before {
+  content: "\ecd7";
+}
+.siagri-angellist:before {
+  content: "\ecd8";
+}
+.siagri-angrycreative:before {
+  content: "\ecd9";
+}
+.siagri-angular:before {
+  content: "\ecda";
+}
+.siagri-app-store-ios:before {
+  content: "\ecdb";
+}
+.siagri-app-store:before {
+  content: "\ecdc";
+}
+.siagri-apper:before {
+  content: "\ecdd";
+}
+.siagri-apple-pay:before {
+  content: "\ecde";
+}
+.siagri-apple:before {
+  content: "\ecdf";
+}
+.siagri-asymmetrik:before {
+  content: "\ece0";
+}
+.siagri-audible:before {
+  content: "\ece1";
+}
+.siagri-autoprefixer:before {
+  content: "\ece2";
+}
+.siagri-avianex:before {
+  content: "\ece3";
+}
+.siagri-aviato:before {
+  content: "\ece4";
+}
+.siagri-aws:before {
+  content: "\ece5";
+}
+.siagri-bandcamp:before {
+  content: "\ece6";
+}
+.siagri-behance-square:before {
+  content: "\ece7";
+}
+.siagri-behance:before {
+  content: "\ece8";
+}
+.siagri-bimobject:before {
+  content: "\ece9";
+}
+.siagri-bitbucket:before {
+  content: "\ecea";
+}
+.siagri-bitcoin:before {
+  content: "\eceb";
+}
+.siagri-bity:before {
+  content: "\ecec";
+}
+.siagri-black-tie:before {
+  content: "\eced";
+}
+.siagri-blackberry:before {
+  content: "\ecee";
+}
+.siagri-blogger-b:before {
+  content: "\ecef";
+}
+.siagri-blogger:before {
+  content: "\ecf0";
+}
+.siagri-bluetooth-b:before {
+  content: "\ecf1";
+}
+.siagri-bluetooth:before {
+  content: "\ecf2";
+}
+.siagri-btc:before {
+  content: "\ecf3";
+}
+.siagri-buromobelexperte:before {
+  content: "\ecf4";
+}
+.siagri-buysellads:before {
+  content: "\ecf5";
+}
+.siagri-cc-amazon-pay:before {
+  content: "\ecf6";
+}
+.siagri-cc-amex:before {
+  content: "\ecf7";
+}
+.siagri-cc-apple-pay:before {
+  content: "\ecf8";
+}
+.siagri-cc-diners-club:before {
+  content: "\ecf9";
+}
+.siagri-cc-discover:before {
+  content: "\ecfa";
+}
+.siagri-cc-jcb:before {
+  content: "\ecfb";
+}
+.siagri-cc-mastercard:before {
+  content: "\ecfc";
+}
+.siagri-cc-paypal:before {
+  content: "\ecfd";
+}
+.siagri-cc-stripe:before {
+  content: "\ecfe";
+}
+.siagri-cc-visa:before {
+  content: "\ecff";
+}
+.siagri-centercode:before {
+  content: "\ed00";
+}
+.siagri-chrome:before {
+  content: "\ed01";
+}
+.siagri-cloudscale:before {
+  content: "\ed02";
+}
+.siagri-cloudsmith:before {
+  content: "\ed03";
+}
+.siagri-cloudversify:before {
+  content: "\ed04";
+}
+.siagri-codepen:before {
+  content: "\ed05";
+}
+.siagri-codiepie:before {
+  content: "\ed06";
+}
+.siagri-connectdevelop:before {
+  content: "\ed07";
+}
+.siagri-contao:before {
+  content: "\ed08";
+}
+.siagri-cpanel:before {
+  content: "\ed09";
+}
+.siagri-creative-commons-by:before {
+  content: "\ed0a";
+}
+.siagri-creative-commons-nc-eu:before {
+  content: "\ed0b";
+}
+.siagri-creative-commons-nc-jp:before {
+  content: "\ed0c";
+}
+.siagri-creative-commons-nc:before {
+  content: "\ed0d";
+}
+.siagri-creative-commons-nd:before {
+  content: "\ed0e";
+}
+.siagri-creative-commons-pd-alt:before {
+  content: "\ed0f";
+}
+.siagri-creative-commons-pd:before {
+  content: "\ed10";
+}
+.siagri-creative-commons-remix:before {
+  content: "\ed11";
+}
+.siagri-creative-commons-sa:before {
+  content: "\ed12";
+}
+.siagri-creative-commons-sampling-plus:before {
+  content: "\ed13";
+}
+.siagri-creative-commons-sampling:before {
+  content: "\ed14";
+}
+.siagri-creative-commons-share:before {
+  content: "\ed15";
+}
+.siagri-creative-commons:before {
+  content: "\ed16";
+}
+.siagri-css3-alt:before {
+  content: "\ed17";
+}
+.siagri-css3:before {
+  content: "\ed18";
+}
+.siagri-cuttlefish:before {
+  content: "\ed19";
+}
+.siagri-d-and-d:before {
+  content: "\ed1a";
+}
+.siagri-dashcube:before {
+  content: "\ed1b";
+}
+.siagri-delicious:before {
+  content: "\ed1c";
+}
+.siagri-deploydog:before {
+  content: "\ed1d";
+}
+.siagri-deskpro:before {
+  content: "\ed1e";
+}
+.siagri-deviantart:before {
+  content: "\ed1f";
+}
+.siagri-digg:before {
+  content: "\ed20";
+}
+.siagri-digital-ocean:before {
+  content: "\ed21";
+}
+.siagri-discord:before {
+  content: "\ed22";
+}
+.siagri-discourse:before {
+  content: "\ed23";
+}
+.siagri-dochub:before {
+  content: "\ed24";
+}
+.siagri-docker:before {
+  content: "\ed25";
+}
+.siagri-draft2digital:before {
+  content: "\ed26";
+}
+.siagri-dribbble-square:before {
+  content: "\ed27";
+}
+.siagri-dribbble:before {
+  content: "\ed28";
+}
+.siagri-dropbox:before {
+  content: "\ed29";
+}
+.siagri-drupal:before {
+  content: "\ed2a";
+}
+.siagri-dyalog:before {
+  content: "\ed2b";
+}
+.siagri-earlybirds:before {
+  content: "\ed2c";
+}
+.siagri-ebay:before {
+  content: "\ed2d";
+}
+.siagri-edge:before {
+  content: "\ed2e";
+}
+.siagri-elementor:before {
+  content: "\ed2f";
+}
+.siagri-ello:before {
+  content: "\ed30";
+}
+.siagri-ember:before {
+  content: "\ed31";
+}
+.siagri-empire:before {
+  content: "\ed32";
+}
+.siagri-envira:before {
+  content: "\ed33";
+}
+.siagri-erlang:before {
+  content: "\ed34";
+}
+.siagri-ethereum:before {
+  content: "\ed35";
+}
+.siagri-etsy:before {
+  content: "\ed36";
+}
+.siagri-expeditedssl:before {
+  content: "\ed37";
+}
+.siagri-facebook-f:before {
+  content: "\ed38";
+}
+.siagri-facebook-messenger:before {
+  content: "\ed39";
+}
+.siagri-facebook-square:before {
+  content: "\ed3a";
+}
+.siagri-facebook:before {
+  content: "\ed3b";
+}
+.siagri-firefox:before {
+  content: "\ed3c";
+}
+.siagri-first-order-alt:before {
+  content: "\ed3d";
+}
+.siagri-first-order:before {
+  content: "\ed3e";
+}
+.siagri-firstdraft:before {
+  content: "\ed3f";
+}
+.siagri-flickr:before {
+  content: "\ed40";
+}
+.siagri-flipboard:before {
+  content: "\ed41";
+}
+.siagri-fly:before {
+  content: "\ed42";
+}
+.siagri-font-awesome-alt:before {
+  content: "\ed43";
+}
+.siagri-font-awesome-flag:before {
+  content: "\ed44";
+}
+.siagri-font-awesome:before {
+  content: "\ed45";
+}
+.siagri-fonticons-fi:before {
+  content: "\ed46";
+}
+.siagri-fonticons:before {
+  content: "\ed47";
+}
+.siagri-fort-awesome-alt:before {
+  content: "\ed48";
+}
+.siagri-fort-awesome:before {
+  content: "\ed49";
+}
+.siagri-forumbee:before {
+  content: "\ed4a";
+}
+.siagri-foursquare:before {
+  content: "\ed4b";
+}
+.siagri-free-code-camp:before {
+  content: "\ed4c";
+}
+.siagri-freebsd:before {
+  content: "\ed4d";
+}
+.siagri-fulcrum:before {
+  content: "\ed4e";
+}
+.siagri-galactic-republic:before {
+  content: "\ed4f";
+}
+.siagri-galactic-senate:before {
+  content: "\ed50";
+}
+.siagri-get-pocket:before {
+  content: "\ed51";
+}
+.siagri-gg-circle:before {
+  content: "\ed52";
+}
+.siagri-gg:before {
+  content: "\ed53";
+}
+.siagri-git-square:before {
+  content: "\ed54";
+}
+.siagri-git:before {
+  content: "\ed55";
+}
+.siagri-github-alt:before {
+  content: "\ed56";
+}
+.siagri-github-square:before {
+  content: "\ed57";
+}
+.siagri-github:before {
+  content: "\ed58";
+}
+.siagri-gitkraken:before {
+  content: "\ed59";
+}
+.siagri-gitlab:before {
+  content: "\ed5a";
+}
+.siagri-gitter:before {
+  content: "\ed5b";
+}
+.siagri-glide-g:before {
+  content: "\ed5c";
+}
+.siagri-glide:before {
+  content: "\ed5d";
+}
+.siagri-gofore:before {
+  content: "\ed5e";
+}
+.siagri-goodreads-g:before {
+  content: "\ed5f";
+}
+.siagri-goodreads:before {
+  content: "\ed60";
+}
+.siagri-google-drive:before {
+  content: "\ed61";
+}
+.siagri-google-play:before {
+  content: "\ed62";
+}
+.siagri-google-plus-g:before {
+  content: "\ed63";
+}
+.siagri-google-plus-square:before {
+  content: "\ed64";
+}
+.siagri-google-plus:before {
+  content: "\ed65";
+}
+.siagri-google-wallet:before {
+  content: "\ed66";
+}
+.siagri-google:before {
+  content: "\ed67";
+}
+.siagri-gratipay:before {
+  content: "\ed68";
+}
+.siagri-grav:before {
+  content: "\ed69";
+}
+.siagri-gripfire:before {
+  content: "\ed6a";
+}
+.siagri-grunt:before {
+  content: "\ed6b";
+}
+.siagri-gulp:before {
+  content: "\ed6c";
+}
+.siagri-hacker-news-square:before {
+  content: "\ed6d";
+}
+.siagri-hacker-news:before {
+  content: "\ed6e";
+}
+.siagri-hackerrank:before {
+  content: "\ed6f";
+}
+.siagri-hips:before {
+  content: "\ed70";
+}
+.siagri-hire-a-helper:before {
+  content: "\ed71";
+}
+.siagri-hooli:before {
+  content: "\ed72";
+}
+.siagri-hornbill:before {
+  content: "\ed73";
+}
+.siagri-hotjar:before {
+  content: "\ed74";
+}
+.siagri-houzz:before {
+  content: "\ed75";
+}
+.siagri-html5:before {
+  content: "\ed76";
+}
+.siagri-hubspot:before {
+  content: "\ed77";
+}
+.siagri-imdb:before {
+  content: "\ed78";
+}
+.siagri-instagram:before {
+  content: "\ed79";
+}
+.siagri-internet-explorer:before {
+  content: "\ed7a";
+}
+.siagri-ioxhost:before {
+  content: "\ed7b";
+}
+.siagri-itunes-note:before {
+  content: "\ed7c";
+}
+.siagri-itunes:before {
+  content: "\ed7d";
+}
+.siagri-java:before {
+  content: "\ed7e";
+}
+.siagri-jedi-order:before {
+  content: "\ed7f";
+}
+.siagri-jenkins:before {
+  content: "\ed80";
+}
+.siagri-joget:before {
+  content: "\ed81";
+}
+.siagri-joomla:before {
+  content: "\ed82";
+}
+.siagri-js-square:before {
+  content: "\ed83";
+}
+.siagri-js:before {
+  content: "\ed84";
+}
+.siagri-jsfiddle:before {
+  content: "\ed85";
+}
+.siagri-kaggle:before {
+  content: "\ed86";
+}
+.siagri-keybase:before {
+  content: "\ed87";
+}
+.siagri-keycdn:before {
+  content: "\ed88";
+}
+.siagri-kickstarter-k:before {
+  content: "\ed89";
+}
+.siagri-kickstarter:before {
+  content: "\ed8a";
+}
+.siagri-korvue:before {
+  content: "\ed8b";
+}
+.siagri-laravel:before {
+  content: "\ed8c";
+}
+.siagri-lastfm-square:before {
+  content: "\ed8d";
+}
+.siagri-lastfm:before {
+  content: "\ed8e";
+}
+.siagri-leanpub:before {
+  content: "\ed8f";
+}
+.siagri-less:before {
+  content: "\ed90";
+}
+.siagri-line:before {
+  content: "\ed91";
+}
+.siagri-linkedin-in:before {
+  content: "\ed92";
+}
+.siagri-linkedin:before {
+  content: "\ed93";
+}
+.siagri-linode:before {
+  content: "\ed94";
+}
+.siagri-linux:before {
+  content: "\ed95";
+}
+.siagri-lyft:before {
+  content: "\ed96";
+}
+.siagri-magento:before {
+  content: "\ed97";
+}
+.siagri-mailchimp:before {
+  content: "\ed98";
+}
+.siagri-mandalorian:before {
+  content: "\ed99";
+}
+.siagri-markdown:before {
+  content: "\ed9a";
+}
+.siagri-mastodon:before {
+  content: "\ed9b";
+}
+.siagri-maxcdn:before {
+  content: "\ed9c";
+}
+.siagri-medapps:before {
+  content: "\ed9d";
+}
+.siagri-medium-m:before {
+  content: "\ed9e";
+}
+.siagri-medium:before {
+  content: "\ed9f";
+}
+.siagri-medrt:before {
+  content: "\eda0";
+}
+.siagri-meetup:before {
+  content: "\eda1";
+}
+.siagri-megaport:before {
+  content: "\eda2";
+}
+.siagri-microsoft:before {
+  content: "\eda3";
+}
+.siagri-mix:before {
+  content: "\eda4";
+}
+.siagri-mixcloud:before {
+  content: "\eda5";
+}
+.siagri-mizuni:before {
+  content: "\eda6";
+}
+.siagri-modx:before {
+  content: "\eda7";
+}
+.siagri-monero:before {
+  content: "\eda8";
+}
+.siagri-napster:before {
+  content: "\eda9";
+}
+.siagri-neos:before {
+  content: "\edaa";
+}
+.siagri-nimblr:before {
+  content: "\edab";
+}
+.siagri-nintendo-switch:before {
+  content: "\edac";
+}
+.siagri-node-js:before {
+  content: "\edad";
+}
+.siagri-node:before {
+  content: "\edae";
+}
+.siagri-npm:before {
+  content: "\edaf";
+}
+.siagri-ns8:before {
+  content: "\edb0";
+}
+.siagri-nutritionix:before {
+  content: "\edb1";
+}
+.siagri-odnoklassniki-square:before {
+  content: "\edb2";
+}
+.siagri-odnoklassniki:before {
+  content: "\edb3";
+}
+.siagri-old-republic:before {
+  content: "\edb4";
+}
+.siagri-opencart:before {
+  content: "\edb5";
+}
+.siagri-openid:before {
+  content: "\edb6";
+}
+.siagri-opera:before {
+  content: "\edb7";
+}
+.siagri-optin-monster:before {
+  content: "\edb8";
+}
+.siagri-osi:before {
+  content: "\edb9";
+}
+.siagri-page4:before {
+  content: "\edba";
+}
+.siagri-pagelines:before {
+  content: "\edbb";
+}
+.siagri-palfed:before {
+  content: "\edbc";
+}
+.siagri-patreon:before {
+  content: "\edbd";
+}
+.siagri-paypal:before {
+  content: "\edbe";
+}
+.siagri-periscope:before {
+  content: "\edbf";
+}
+.siagri-phabricator:before {
+  content: "\edc0";
+}
+.siagri-phoenix-framework:before {
+  content: "\edc1";
+}
+.siagri-phoenix-squadron:before {
+  content: "\edc2";
+}
+.siagri-php:before {
+  content: "\edc3";
+}
+.siagri-pied-piper-alt:before {
+  content: "\edc4";
+}
+.siagri-pied-piper-hat:before {
+  content: "\edc5";
+}
+.siagri-pied-piper-pp:before {
+  content: "\edc6";
+}
+.siagri-pied-piper:before {
+  content: "\edc7";
+}
+.siagri-pinterest-p:before {
+  content: "\edc8";
+}
+.siagri-pinterest-square:before {
+  content: "\edc9";
+}
+.siagri-pinterest:before {
+  content: "\edca";
+}
+.siagri-playstation:before {
+  content: "\edcb";
+}
+.siagri-product-hunt:before {
+  content: "\edcc";
+}
+.siagri-pushed:before {
+  content: "\edcd";
+}
+.siagri-python:before {
+  content: "\edce";
+}
+.siagri-qq:before {
+  content: "\edcf";
+}
+.siagri-quinscape:before {
+  content: "\edd0";
+}
+.siagri-quora:before {
+  content: "\edd1";
+}
+.siagri-r-project:before {
+  content: "\edd2";
+}
+.siagri-ravelry:before {
+  content: "\edd3";
+}
+.siagri-react:before {
+  content: "\edd4";
+}
+.siagri-readme:before {
+  content: "\edd5";
+}
+.siagri-rebel:before {
+  content: "\edd6";
+}
+.siagri-red-river:before {
+  content: "\edd7";
+}
+.siagri-reddit-alien:before {
+  content: "\edd8";
+}
+.siagri-reddit-square:before {
+  content: "\edd9";
+}
+.siagri-reddit:before {
+  content: "\edda";
+}
+.siagri-rendact:before {
+  content: "\eddb";
+}
+.siagri-renren:before {
+  content: "\eddc";
+}
+.siagri-replyd:before {
+  content: "\eddd";
+}
+.siagri-researchgate:before {
+  content: "\edde";
+}
+.siagri-resolving:before {
+  content: "\eddf";
+}
+.siagri-rev:before {
+  content: "\ede0";
+}
+.siagri-rocketchat:before {
+  content: "\ede1";
+}
+.siagri-rockrms:before {
+  content: "\ede2";
+}
+.siagri-safari:before {
+  content: "\ede3";
+}
+.siagri-sass:before {
+  content: "\ede4";
+}
+.siagri-schlix:before {
+  content: "\ede5";
+}
+.siagri-scribd:before {
+  content: "\ede6";
+}
+.siagri-searchengin:before {
+  content: "\ede7";
+}
+.siagri-sellcast:before {
+  content: "\ede8";
+}
+.siagri-sellsy:before {
+  content: "\ede9";
+}
+.siagri-servicestack:before {
+  content: "\edea";
+}
+.siagri-shirtsinbulk:before {
+  content: "\edeb";
+}
+.siagri-shopware:before {
+  content: "\edec";
+}
+.siagri-simplybuilt:before {
+  content: "\eded";
+}
+.siagri-sistrix:before {
+  content: "\edee";
+}
+.siagri-sith:before {
+  content: "\edef";
+}
+.siagri-skyatlas:before {
+  content: "\edf0";
+}
+.siagri-skype:before {
+  content: "\edf1";
+}
+.siagri-slack-hash:before {
+  content: "\edf2";
+}
+.siagri-slack:before {
+  content: "\edf3";
+}
+.siagri-slideshare:before {
+  content: "\edf4";
+}
+.siagri-snapchat-ghost:before {
+  content: "\edf5";
+}
+.siagri-snapchat-square:before {
+  content: "\edf6";
+}
+.siagri-snapchat:before {
+  content: "\edf7";
+}
+.siagri-soundcloud:before {
+  content: "\edf8";
+}
+.siagri-speakap:before {
+  content: "\edf9";
+}
+.siagri-spotify:before {
+  content: "\edfa";
+}
+.siagri-squarespace:before {
+  content: "\edfb";
+}
+.siagri-stack-exchange:before {
+  content: "\edfc";
+}
+.siagri-stack-overflow:before {
+  content: "\edfd";
+}
+.siagri-staylinked:before {
+  content: "\edfe";
+}
+.siagri-steam-square:before {
+  content: "\edff";
+}
+.siagri-steam-symbol:before {
+  content: "\ee00";
+}
+.siagri-steam:before {
+  content: "\ee01";
+}
+.siagri-sticker-mule:before {
+  content: "\ee02";
+}
+.siagri-strava:before {
+  content: "\ee03";
+}
+.siagri-stripe-s:before {
+  content: "\ee04";
+}
+.siagri-stripe:before {
+  content: "\ee05";
+}
+.siagri-studiovinari:before {
+  content: "\ee06";
+}
+.siagri-stumbleupon-circle:before {
+  content: "\ee07";
+}
+.siagri-stumbleupon:before {
+  content: "\ee08";
+}
+.siagri-superpowers:before {
+  content: "\ee09";
+}
+.siagri-supple:before {
+  content: "\ee0a";
+}
+.siagri-teamspeak:before {
+  content: "\ee0b";
+}
+.siagri-telegram-plane:before {
+  content: "\ee0c";
+}
+.siagri-telegram:before {
+  content: "\ee0d";
+}
+.siagri-tencent-weibo:before {
+  content: "\ee0e";
+}
+.siagri-the-red-yeti:before {
+  content: "\ee0f";
+}
+.siagri-themeco:before {
+  content: "\ee10";
+}
+.siagri-themeisle:before {
+  content: "\ee11";
+}
+.siagri-trade-federation:before {
+  content: "\ee12";
+}
+.siagri-trello:before {
+  content: "\ee13";
+}
+.siagri-tripadvisor:before {
+  content: "\ee14";
+}
+.siagri-tumblr-square:before {
+  content: "\ee15";
+}
+.siagri-tumblr:before {
+  content: "\ee16";
+}
+.siagri-twitch:before {
+  content: "\ee17";
+}
+.siagri-twitter-square:before {
+  content: "\ee18";
+}
+.siagri-twitter:before {
+  content: "\ee19";
+}
+.siagri-typo3:before {
+  content: "\ee1a";
+}
+.siagri-uber:before {
+  content: "\ee1b";
+}
+.siagri-uikit:before {
+  content: "\ee1c";
+}
+.siagri-uniregistry:before {
+  content: "\ee1d";
+}
+.siagri-untappd:before {
+  content: "\ee1e";
+}
+.siagri-usb:before {
+  content: "\ee1f";
+}
+.siagri-ussunnah:before {
+  content: "\ee20";
+}
+.siagri-vaadin:before {
+  content: "\ee21";
+}
+.siagri-viacoin:before {
+  content: "\ee22";
+}
+.siagri-viadeo-square:before {
+  content: "\ee23";
+}
+.siagri-viadeo:before {
+  content: "\ee24";
+}
+.siagri-viber:before {
+  content: "\ee25";
+}
+.siagri-vimeo-square:before {
+  content: "\ee26";
+}
+.siagri-vimeo-v:before {
+  content: "\ee27";
+}
+.siagri-vimeo:before {
+  content: "\ee28";
+}
+.siagri-vine:before {
+  content: "\ee29";
+}
+.siagri-vk:before {
+  content: "\ee2a";
+}
+.siagri-vnv:before {
+  content: "\ee2b";
+}
+.siagri-vuejs:before {
+  content: "\ee2c";
+}
+.siagri-weebly:before {
+  content: "\ee2d";
+}
+.siagri-weibo:before {
+  content: "\ee2e";
+}
+.siagri-weixin:before {
+  content: "\ee2f";
+}
+.siagri-whatsapp-square:before {
+  content: "\ee30";
+}
+.siagri-whatsapp:before {
+  content: "\ee31";
+}
+.siagri-whmcs:before {
+  content: "\ee32";
+}
+.siagri-wikipedia-w:before {
+  content: "\ee33";
+}
+.siagri-windows:before {
+  content: "\ee34";
+}
+.siagri-wix:before {
+  content: "\ee35";
+}
+.siagri-wolf-pack-battalion:before {
+  content: "\ee36";
+}
+.siagri-wordpress-simple:before {
+  content: "\ee37";
+}
+.siagri-wordpress:before {
+  content: "\ee38";
+}
+.siagri-wpbeginner:before {
+  content: "\ee39";
+}
+.siagri-wpexplorer:before {
+  content: "\ee3a";
+}
+.siagri-wpforms:before {
+  content: "\ee3b";
+}
+.siagri-xbox:before {
+  content: "\ee3c";
+}
+.siagri-xing-square:before {
+  content: "\ee3d";
+}
+.siagri-xing:before {
+  content: "\ee3e";
+}
+.siagri-y-combinator:before {
+  content: "\ee3f";
+}
+.siagri-yahoo:before {
+  content: "\ee40";
+}
+.siagri-yandex-international:before {
+  content: "\ee41";
+}
+.siagri-yandex:before {
+  content: "\ee42";
+}
+.siagri-yelp:before {
+  content: "\ee43";
+}
+.siagri-yoast:before {
+  content: "\ee44";
+}
+.siagri-youtube-square:before {
+  content: "\ee45";
+}
+.siagri-youtube:before {
+  content: "\ee46";
+}
+.siagri-zhihu:before {
+  content: "\ee47";
+}
+.siagri-x:before {
+  content: "\78";
+}
+.siagri-upload:before {
+  content: "\e60d";
+}
+.siagri-error:before {
+  content: "\e62c";
+}
+.siagri-success:before {
+  content: "\e62d";
+}
+.siagri-warning:before {
+  content: "\e62e";
+}
+.siagri-sort-down:before {
+  content: "\e630";
+}
+.siagri-sort-up:before {
+  content: "\e631";
+}
+.siagri-arrow-left:before {
+  content: "\e600";
+}
+.siagri-circle-plus:before {
+  content: "\e601";
+}
+.siagri-circle-plus-outline:before {
+  content: "\e602";
+}
+.siagri-arrow-down:before {
+  content: "\e603";
+}
+.siagri-arrow-right:before {
+  content: "\e604";
+}
+.siagri-arrow-up:before {
+  content: "\e605";
+}
+.siagri-back:before {
+  content: "\e606";
+}
+.siagri-circle-close:before {
+  content: "\e607";
+}
+.siagri-date:before {
+  content: "\e608";
+}
+.siagri-circle-close-outline:before {
+  content: "\e609";
+}
+.siagri-caret-left:before {
+  content: "\e60a";
+}
+.siagri-caret-bottom:before {
+  content: "\e60b";
+}
+.siagri-caret-top:before {
+  content: "\e60c";
+}
+.siagri-caret-right:before {
+  content: "\e60e";
+}
+.siagri-close:before {
+  content: "\e60f";
+}
+.siagri-d-arrow-left:before {
+  content: "\e610";
+}
+.siagri-check:before {
+  content: "\e611";
+}
+.siagri-delete:before {
+  content: "\e612";
+}
+.siagri-d-arrow-right:before {
+  content: "\e613";
+}
+.siagri-document:before {
+  content: "\e614";
+}
+.siagri-d-caret:before {
+  content: "\e615";
+}
+.siagri-edit-outline:before {
+  content: "\e616";
+}
+.siagri-download:before {
+  content: "\e617";
+}
+.siagri-goods:before {
+  content: "\e618";
+}
+.siagri-search1:before {
+  content: "\e619";
+}
+.siagri-info:before {
+  content: "\e61a";
+}
+.siagri-message:before {
+  content: "\e61b";
+}
+.siagri-edit:before {
+  content: "\e61c";
+}
+.siagri-location:before {
+  content: "\e61d";
+}
+.siagri-loading:before {
+  content: "\e61e";
+}
+.siagri-location-outline:before {
+  content: "\e61f";
+}
+.siagri-menu:before {
+  content: "\e620";
+}
+.siagri-minus:before {
+  content: "\e621";
+}
+.siagri-bell:before {
+  content: "\e622";
+}
+.siagri-mobile-phone:before {
+  content: "\e624";
+}
+.siagri-news:before {
+  content: "\e625";
+}
+.siagri-more-outline:before {
+  content: "\e626";
+}
+.siagri-phone:before {
+  content: "\e627";
+}
+.siagri-phone-outline:before {
+  content: "\e628";
+}
+.siagri-picture:before {
+  content: "\e629";
+}
+.siagri-picture-outline:before {
+  content: "\e62a";
+}
+.siagri-plus:before {
+  content: "\e62b";
+}
+.siagri-printer:before {
+  content: "\e62f";
+}
+.siagri-rank:before {
+  content: "\e632";
+}
+.siagri-refresh:before {
+  content: "\e633";
+}
+.siagri-question:before {
+  content: "\e634";
+}
+.siagri-remove:before {
+  content: "\e635";
+}
+.siagri-share:before {
+  content: "\e636";
+}
+.siagri-star-on:before {
+  content: "\e637";
+}
+.siagri-setting:before {
+  content: "\e638";
+}
+.siagri-circle-check:before {
+  content: "\e639";
+}
+.siagri-service:before {
+  content: "\e63a";
+}
+.siagri-sold-out:before {
+  content: "\e63b";
+}
+.siagri-remove-outline:before {
+  content: "\e63c";
+}
+.siagri-star-off:before {
+  content: "\e63d";
+}
+.siagri-circle-check-outline:before {
+  content: "\e63e";
+}
+.siagri-tickets:before {
+  content: "\e63f";
+}
+.siagri-sort:before {
+  content: "\e640";
+}
+.siagri-zoom-in:before {
+  content: "\e641";
+}
+.siagri-time:before {
+  content: "\e642";
+}
+.siagri-view:before {
+  content: "\e643";
+}
+.siagri-upload2:before {
+  content: "\e644";
+}
+.siagri-zoom-out:before {
+  content: "\e645";
+}
+.siagri-more:before {
+  content: "\e646";
+}
+.siagri-atividades:before {
+  content: "\e900";
+}
+.siagri-configuracoes:before {
+  content: "\e901";
+}
+.siagri-financeiro:before {
+  content: "\e902";
+}
+.siagri-maquinarios:before {
+  content: "\e903";
+}
+.siagri-search:before {
+  content: "\e904";
+}
+.siagri-suprimentos:before {
+  content: "\e905";
+}
+.siagri-tarefas:before {
+  content: "\e906";
+}
+.siagri-usuario:before {
+  content: "\e907";
+}
+.siagri-producao:before {
+  content: "\e908";
+}
