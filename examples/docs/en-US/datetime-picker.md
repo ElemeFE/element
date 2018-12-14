@@ -51,6 +51,10 @@
             }
           }]
         },
+        format1: {
+          date: 'yyyy/MM/dd',
+          time: 'HH:mm:ss'
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -186,6 +190,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
     <el-date-picker
       v-model="value5"
       type="datetimerange"
+      :format="format1"
       :picker-options="pickerOptions2"
       range-separator="To"
       start-placeholder="Start date"
@@ -225,6 +230,10 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
               picker.$emit('pick', [start, end]);
             }
           }]
+        },
+        format1: {
+          date: 'yyyy/MM/dd',
+          time: 'HH:mm:ss'
         },
         value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: ''
@@ -289,7 +298,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
 | time-arrow-control | whether to pick time using arrow buttons | boolean | — | false |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | see [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd HH:mm:ss |
+| format | format of the displayed value in the input box | string, Object({date, time}) | see [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd HH:mm:ss |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |

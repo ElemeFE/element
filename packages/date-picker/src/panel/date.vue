@@ -561,7 +561,7 @@
 
       timeFormat() {
         if (this.format) {
-          return extractTimeFormat(this.format);
+          return this.format.time || extractTimeFormat(this.format);
         } else {
           return 'HH:mm:ss';
         }
@@ -569,7 +569,7 @@
 
       dateFormat() {
         if (this.format) {
-          return extractDateFormat(this.format);
+          return this.format.date || extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
         }

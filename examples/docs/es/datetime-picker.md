@@ -51,6 +51,10 @@
             }
           }]
         },
+        format1: {
+          date: 'yyyy/MM/dd',
+          time: 'HH:mm:ss'
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -187,6 +191,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
     <el-date-picker
       v-model="value5"
       type="datetimerange"
+      :format="format1"
       :picker-options="pickerOptions2"
       range-separator="To"
       start-placeholder="Start date"
@@ -226,6 +231,10 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
               picker.$emit('pick', [start, end]);
             }
           }]
+        },
+        format1: {
+          date: 'yyyy/MM/dd',
+          time: 'HH:mm:ss'
         },
         value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: ''
@@ -290,7 +299,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —                    |
 | time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false                |
 | type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
-| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
+| format             | formato de valor mostrado en el input    | string, Object({date, time})  | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
 | align              | alineación                               | left/center/right | left                                     |                      |
 | popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —                    |
 | picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |

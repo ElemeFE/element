@@ -346,7 +346,7 @@ export default {
 
   props: {
     size: String,
-    format: String,
+    format: [String, Object],
     valueFormat: String,
     readonly: Boolean,
     placeholder: String,
@@ -504,7 +504,7 @@ export default {
     },
 
     displayValue() {
-      const formattedValue = formatAsFormatAndType(this.parsedValue, this.format, this.type, this.rangeSeparator);
+      const formattedValue = formatAsFormatAndType(this.parsedValue, this.fullFormat, this.type, this.rangeSeparator);
       if (Array.isArray(this.userInput)) {
         return [
           this.userInput[0] || (formattedValue && formattedValue[0]) || '',
@@ -571,6 +571,13 @@ export default {
       }
       if (id) obj.id = id;
       return obj;
+    },
+
+    fullFormat() {
+      if (this.format && (this.format.date || this.format.time)) {
+        return `${this.format.date} ${this.format.time}`.trim();
+      }
+      return this.format;
     }
   },
 
@@ -620,12 +627,12 @@ export default {
     // {parse, formatTo} String deals with user input
     parseString(value) {
       const type = Array.isArray(value) ? this.type : this.type.replace('range', '');
-      return parseAsFormatAndType(value, this.format, type);
+      return parseAsFormatAndType(value, this.fullFormat, type);
     },
 
     formatToString(value) {
       const type = Array.isArray(value) ? this.type : this.type.replace('range', '');
-      return formatAsFormatAndType(value, this.format, type);
+      return formatAsFormatAndType(value, this.fullFormat, type);
     },
 
     handleMouseEnter() {
@@ -834,7 +841,11 @@ export default {
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
       this.$watch('format', (format) => {
-        this.picker.format = format;
+        if (format && format.time && (this.type === 'time' || this.type === 'timerange' || this.type === 'time-select')) {
+          this.picker.format = format.time;
+        } else {
+          this.picker.format = format;
+        }
       });
 
       const updateOptions = () => {

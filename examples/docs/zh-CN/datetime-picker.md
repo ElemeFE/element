@@ -51,6 +51,10 @@
             }
           }]
         },
+        format1: {
+          date: 'yyyy年MM月dd日',
+          time: 'HH时mm分ss秒'
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -184,6 +188,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
     <span class="demonstration">带快捷选项</span>
     <el-date-picker
       v-model="value5"
+      :format="format1"
       type="datetimerange"
       :picker-options="pickerOptions2"
       range-separator="至"
@@ -224,6 +229,10 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
               picker.$emit('pick', [start, end]);
             }
           }]
+        },
+        format1: {
+          date: 'yyyy年MM月dd日',
+          time: 'HH时mm分ss秒'
         },
         value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value5: ''
@@ -288,7 +297,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
 | time-arrow-control | 是否使用箭头进行时间选择 | boolean | — | false |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
-| format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
+| format | 显示在输入框中的格式，可分别指定date与time的格式 | string, Object({date, time}) | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
