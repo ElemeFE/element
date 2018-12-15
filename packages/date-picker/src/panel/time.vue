@@ -44,10 +44,19 @@
 
     props: {
       visible: Boolean,
-      timeArrowControl: Boolean
+      timeArrowControl: Boolean,
+      timePickerOptions: Array
     },
 
     watch: {
+      // selectableRange changed while this components get another timePickerOptions
+      timePickerOptions(val) {
+        if (val.length > 0) {
+          this.selectableRange = this.timePickerOptions;
+        } else {
+          this.selectableRange = [];
+        }
+      },
       visible(val) {
         if (val) {
           this.oldValue = this.value;

@@ -30,7 +30,7 @@
             <span class="el-date-picker__editor-wrap" v-clickoutside="handleTimePickClose">
               <el-input
                 ref="input"
-                @focus="timePickerVisible = true"
+                @focus="getSelectRange"
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
@@ -38,6 +38,7 @@
                 @change="handleVisibleTimeChange" />
               <time-picker
                 ref="timepicker"
+                :timePickerOptions="timePickerOptions"
                 :time-arrow-control="arrowControl"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
@@ -126,7 +127,7 @@
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="selectionMode !== 'dates'">
+          v-show="selectionMode !== 'dates' && selectableRange.length == 0">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -142,6 +143,7 @@
 </template>
 
 <script type="text/babel">
+/* eslint-disable */
   import {
     formatDate,
     parseDate,
@@ -158,7 +160,9 @@
     nextMonth,
     changeYearMonthAndClampDate,
     extractDateFormat,
-    extractTimeFormat
+    extractTimeFormat,
+    getTimeHMS,
+    checkIsinRange
   } from '../util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
@@ -175,6 +179,12 @@
     directives: { Clickoutside },
 
     watch: {
+      selectableRange(val) {
+        console.log(val)
+        if (!val || val.length === 0) return;
+        this.resetDateWhileNeedselectable()
+      },
+
       showTime(val) {
         /* istanbul ignore if */
         if (!val) return;
@@ -218,6 +228,54 @@
     },
 
     methods: {
+      // 如果传入参数有对时分秒进行限制的，在时间改动时要考虑填充对应限制时间
+      // 我需要对比如若设置的时间小于了或者大于了限制时间，就对其赋值
+      // 由于在选定日期时会默认给当天的0点，而selectablerange可能会动态修改，需要watch跟踪seletablerange
+      // 还有手动修改时间和年月日的Input也要控制
+      resetDateWhileNeedselectable() {
+        debugger
+        if (this.selectableRange && this.selectableRange.length > 0) {
+          // 传递的是string类型，如12:00:00 - 18:00:00
+          // 若超出可选范围则修正为最小限制时间
+          let h = this.date.getHours()
+          let m = this.date.getMinutes()
+          let s = this.date.getSeconds()
+          let time1, time2, time3, time4, type
+          if (this.selectableRange.length === 1) {
+            time1 = getTimeHMS(this.selectableRange[0][0])
+            time2 = getTimeHMS(this.selectableRange[0][1])
+            type = 1
+          } else if (this.selectableRange.length === 2) {
+            // 传递的是Array
+            time1 = getTimeHMS(this.selectableRange[0][0])
+            time2 = getTimeHMS(this.selectableRange[0][1])
+            time3 = getTimeHMS(this.selectableRange[1][0])
+            time4 = getTimeHMS(this.selectableRange[1][1])
+            type = 2
+          }
+          if (type === 1) {
+            // 限制的最小时间，如果选中的时间比限制范围还低就只能取限制范围最小值，
+            if (!checkIsinRange(time1,time2,{h,m,s})) {
+              this.date.setHours(time1.h)
+              this.date.setMinutes(time1.m)
+              this.date.setSeconds(time1.s)
+              this.emit(this.date, this.showTime);
+            }
+          } else if (type === 2) {
+            if (!checkIsinRange(time1,time2,{h,m,s}) && !checkIsinRange(time3,time4,{h,m,s})) {
+              this.date.setHours(time1.h)
+              this.date.setMinutes(time1.m)
+              this.date.setSeconds(time1.s)
+              this.emit(this.date, this.showTime);
+            }
+          }
+        }
+      },
+      // change Time's SelectRange if focus
+      getSelectRange() {
+        this.timePickerVisible = true;
+        this.timePickerOptions = this.selectableRange || [];
+      },
       proxyTimePickerDataProperties() {
         const format = timeFormat => {this.$refs.timepicker.format = timeFormat;};
         const value = value => {this.$refs.timepicker.value = value;};
@@ -332,10 +390,12 @@
       },
 
       handleDatePick(value) {
+        // debugger
         if (this.selectionMode === 'day') {
           this.date = this.value
             ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
             : modifyWithTimeString(value, this.defaultTime);
+          this.resetDateWhileNeedselectable()
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
@@ -445,6 +505,8 @@
       },
 
       handleVisibleTimeChange(value) {
+        console.log(value)
+        debugger
         const time = parseDate(value, this.timeFormat);
         if (time) {
           this.date = modifyDate(time, this.year, this.month, this.monthDate);
@@ -456,6 +518,7 @@
       },
 
       handleVisibleDateChange(value) {
+        debugger
         const date = parseDate(value, this.dateFormat);
         if (date) {
           if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
@@ -465,6 +528,7 @@
           this.userInputDate = null;
           this.resetView();
           this.emit(this.date, true);
+          this.resetDateWhileNeedselectable()
         }
       },
 
@@ -500,13 +564,15 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
+        selectableRange: '',
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,
         format: '',
         arrowControl: false,
         userInputDate: null,
-        userInputTime: null
+        userInputTime: null,
+        timePickerOptions: [] // use this options for time's selectablerange
       };
     },
 
