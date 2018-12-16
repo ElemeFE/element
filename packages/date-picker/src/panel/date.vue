@@ -143,7 +143,6 @@
 </template>
 
 <script type="text/babel">
-/* eslint-disable */
   import {
     formatDate,
     parseDate,
@@ -179,10 +178,10 @@
     directives: { Clickoutside },
 
     watch: {
+      // 日期变化时selectableRange会根据业务发生变化，需要监听如果当前时间超出范围需要重新修正
       selectableRange(val) {
-        console.log(val)
         if (!val || val.length === 0) return;
-        this.resetDateWhileNeedselectable()
+        this.resetDateWhileNeedselectable();
       },
 
       showTime(val) {
@@ -229,43 +228,42 @@
 
     methods: {
       // 如果传入参数有对时分秒进行限制的，在时间改动时要考虑填充对应限制时间
-      // 我需要对比如若设置的时间小于了或者大于了限制时间，就对其赋值
+      // 我需要对比如若当前设置的时间小于了或者大于了限制时间，就对其重新赋值
       // 由于在选定日期时会默认给当天的0点，而selectablerange可能会动态修改，需要watch跟踪seletablerange
       // 还有手动修改时间和年月日的Input也要控制
       resetDateWhileNeedselectable() {
-        debugger
         if (this.selectableRange && this.selectableRange.length > 0) {
           // 传递的是string类型，如12:00:00 - 18:00:00
           // 若超出可选范围则修正为最小限制时间
-          let h = this.date.getHours()
-          let m = this.date.getMinutes()
-          let s = this.date.getSeconds()
-          let time1, time2, time3, time4, type
+          let h = this.date.getHours();
+          let m = this.date.getMinutes();
+          let s = this.date.getSeconds();
+          let time1, time2, time3, time4, type;
           if (this.selectableRange.length === 1) {
-            time1 = getTimeHMS(this.selectableRange[0][0])
-            time2 = getTimeHMS(this.selectableRange[0][1])
-            type = 1
+            time1 = getTimeHMS(this.selectableRange[0][0]);
+            time2 = getTimeHMS(this.selectableRange[0][1]);
+            type = 1;
           } else if (this.selectableRange.length === 2) {
-            // 传递的是Array
-            time1 = getTimeHMS(this.selectableRange[0][0])
-            time2 = getTimeHMS(this.selectableRange[0][1])
-            time3 = getTimeHMS(this.selectableRange[1][0])
-            time4 = getTimeHMS(this.selectableRange[1][1])
-            type = 2
+            // 传递的是Array，多个区间，如 12:00:00 - 13:00:00  14:00:00 - 15:00:00
+            time1 = getTimeHMS(this.selectableRange[0][0]);
+            time2 = getTimeHMS(this.selectableRange[0][1]);
+            time3 = getTimeHMS(this.selectableRange[1][0]);
+            time4 = getTimeHMS(this.selectableRange[1][1]);
+            type = 2;
           }
           if (type === 1) {
             // 限制的最小时间，如果选中的时间比限制范围还低就只能取限制范围最小值，
-            if (!checkIsinRange(time1,time2,{h,m,s})) {
-              this.date.setHours(time1.h)
-              this.date.setMinutes(time1.m)
-              this.date.setSeconds(time1.s)
+            if (!checkIsinRange(time1, time2, {h, m, s})) {
+              this.date.setHours(time1.h);
+              this.date.setMinutes(time1.m);
+              this.date.setSeconds(time1.s);
               this.emit(this.date, this.showTime);
             }
           } else if (type === 2) {
-            if (!checkIsinRange(time1,time2,{h,m,s}) && !checkIsinRange(time3,time4,{h,m,s})) {
-              this.date.setHours(time1.h)
-              this.date.setMinutes(time1.m)
-              this.date.setSeconds(time1.s)
+            if (!checkIsinRange(time1, time2, {h, m, s}) && !checkIsinRange(time3, time4, {h, m, s})) {
+              this.date.setHours(time1.h);
+              this.date.setMinutes(time1.m);
+              this.date.setSeconds(time1.s);
               this.emit(this.date, this.showTime);
             }
           }
@@ -395,7 +393,7 @@
           this.date = this.value
             ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
             : modifyWithTimeString(value, this.defaultTime);
-          this.resetDateWhileNeedselectable()
+          this.resetDateWhileNeedselectable();
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
@@ -505,8 +503,6 @@
       },
 
       handleVisibleTimeChange(value) {
-        console.log(value)
-        debugger
         const time = parseDate(value, this.timeFormat);
         if (time) {
           this.date = modifyDate(time, this.year, this.month, this.monthDate);
@@ -518,7 +514,6 @@
       },
 
       handleVisibleDateChange(value) {
-        debugger
         const date = parseDate(value, this.dateFormat);
         if (date) {
           if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
@@ -528,7 +523,7 @@
           this.userInputDate = null;
           this.resetView();
           this.emit(this.date, true);
-          this.resetDateWhileNeedselectable()
+          this.resetDateWhileNeedselectable();
         }
       },
 

@@ -222,10 +222,9 @@ export const limitTimeRange = function(date, ranges, format = 'HH:mm:ss') {
 export const getTimeHMS = function(date) {
   return { h: date.getHours(), m: date.getMinutes(), s: date.getSeconds() };
 };
-/* eslint-disable */
+
 // eg range = 12:00:00 - 15:00:00 ,check date is in range
 export const checkIsinRange = function(rangeDate1, rangeDate2, date) {
-  debugger
   let time1 = new Date(`2000-01-01 ${rangeDate1.h}:${rangeDate1.m}:${rangeDate1.s}`).getTime();
   let time2 = new Date(`2000-01-01 ${rangeDate2.h}:${rangeDate2.m}:${rangeDate2.s}`).getTime();
   let time = new Date(`2000-01-01 ${date.h}:${date.m}:${date.s}`).getTime();
