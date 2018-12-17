@@ -10,8 +10,7 @@
   @include e(header) {
     display: flex;
     align-items: center;
-    height: $--collapse-header-height;
-    line-height: $--collapse-header-height;
+    min-height: $--collapse-header-height;
     background-color: $--collapse-header-fill;
     color: $--collapse-header-color;
     cursor: pointer;
