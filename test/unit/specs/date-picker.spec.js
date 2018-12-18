@@ -2159,16 +2159,16 @@ describe('DatePicker', () => {
         triggerEvent(rightCell, 'click', true);
 
         setTimeout(_ => {
-          triggerEvent(input2, 'input');
           input2.value = '1988-6-4';
+          triggerEvent(input2, 'input');
           triggerEvent(input2, 'change');
 
           setTimeout(_ => {
-            triggerEvent(input, 'input');
             input.value = '1989-6-4';
+            triggerEvent(input, 'input');
             triggerEvent(input, 'change', true);
             setTimeout(_ => {
-              expect(vm.picker.maxDate > vm.picker.minDate).to.true;
+              expect(vm.picker.maxDate >= vm.picker.minDate).to.true;
               done();
             }, DELAY);
           }, DELAY);
@@ -2213,7 +2213,7 @@ describe('DatePicker', () => {
       input.focus();
       setTimeout(_ => {
         // simulate user input of invalid date
-        vm.$refs.compo.picker.handleDateChange({ target: { value: '2000-09-01'} }, 'min');
+        vm.$refs.compo.picker.handleDateChange('2000-09-01', 'min');
         setTimeout(_ => {
           expect(vm.$refs.compo.picker.btnDisabled).to.equal(true); // invalid input disables button
           vm.$refs.compo.picker.handleConfirm();

@@ -63,7 +63,6 @@
 
     computed: {
       activeOptions: {
-        cache: false,
         get() {
           const activeValue = this.activeValue;
           const configurableProps = ['label', 'value', 'children', 'disabled'];
@@ -285,7 +284,7 @@
               id = { itemId }
               aria-owns = { !item.children ? null : ownsId }
             >
-              {item.label}
+              <span>{item.label}</span>
             </li>
           );
         });

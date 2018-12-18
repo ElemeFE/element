@@ -142,9 +142,17 @@
       },
 
       targetData() {
-        return this.targetOrder === 'original'
-          ? this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1)
-          : this.value.map(key => this.dataObj[key]);
+        if (this.targetOrder === 'original') {
+          return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+        } else {
+          return this.value.reduce((arr, cur) => {
+            const val = this.dataObj[cur];
+            if (val) {
+              arr.push(val);
+            }
+            return arr;
+          }, []);
+        }
       },
 
       hasButtonTexts() {

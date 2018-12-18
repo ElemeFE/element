@@ -79,7 +79,7 @@
         if (this.$parent.type !== 'card' && oldIndex !== undefined) {
           this.animating = index === activeIndex || index === oldIndex;
         }
-        if (index !== activeIndex && length > 2) {
+        if (index !== activeIndex && length > 2 && this.$parent.loop) {
           index = this.processIndex(index, activeIndex, length);
         }
         if (this.$parent.type === 'card') {

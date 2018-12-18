@@ -9,7 +9,8 @@
         num5: 1,
         num6: 1,
         num7: 1,
-        num8: 1
+        num8: 1,
+        num9: 1
       }
     },
     methods: {
@@ -192,6 +193,8 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | controls-position | posición de los botones de control       | string  | right             | -           |
 | name              | lo mismo que `name` en un input nativo   | string  | —                 | —           |
 | label             | texto de la etiqueta                     | string  | —                 | —           |
+| placeholder | placeholder in input | string | - | - |
+
 ### Eventos
 
 | Nombre | Descripción                              | Parámetros         |
@@ -204,3 +207,5 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | Método | Descripción                          | Parámetro |
 | ------ | ------------------------------------ | --------- |
 | focus  | coloca el foco en el elemento actual | -         |
+| select | selecciona el contenido del input        | -          |
+

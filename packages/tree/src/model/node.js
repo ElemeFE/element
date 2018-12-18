@@ -156,10 +156,6 @@ export default class Node {
     return getPropertyFromData(this, 'label');
   }
 
-  get icon() {
-    return getPropertyFromData(this, 'icon');
-  }
-
   get key() {
     const nodeKey = this.store.key;
     if (this.data) return this.data[nodeKey];
@@ -469,6 +465,7 @@ export default class Node {
         this.doCreateChildren(children, defaultProps);
 
         this.updateLeafState();
+        reInitChecked(this);
         if (callback) {
           callback.call(this, children);
         }

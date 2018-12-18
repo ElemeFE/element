@@ -453,7 +453,7 @@ export default {
       if (this.type === 'selection') {
         console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set scoped-slot header.');
       } else {
-        this.columnConfig.renderHeader = this.$scopedSlots.header;
+        this.columnConfig.renderHeader = (h, scope) => this.$scopedSlots.header(scope);
       }
     }
 

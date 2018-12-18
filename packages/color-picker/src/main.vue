@@ -34,9 +34,12 @@
   import Color from './color';
   import PickerDropdown from './components/picker-dropdown.vue';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElColorPicker',
+
+    mixins: [Emitter],
 
     props: {
       value: String,
@@ -115,14 +118,19 @@
         if (this.colorDisabled) return;
         this.showPicker = !this.showPicker;
       },
-      confirmValue(value) {
-        this.$emit('input', this.color.value);
-        this.$emit('change', this.color.value);
+      confirmValue() {
+        const value = this.color.value;
+        this.$emit('input', value);
+        this.$emit('change', value);
+        this.dispatch('ElFormItem', 'el.form.change', value);
         this.showPicker = false;
       },
       clearValue() {
         this.$emit('input', null);
         this.$emit('change', null);
+        if (this.value !== null) {
+          this.dispatch('ElFormItem', 'el.form.change', null);
+        }
         this.showPanelColor = false;
         this.showPicker = false;
         this.resetColor();
@@ -165,6 +173,7 @@
         enableAlpha: this.showAlpha,
         format: this.colorFormat
       });
+
       return {
         color,
         showPicker: false,
