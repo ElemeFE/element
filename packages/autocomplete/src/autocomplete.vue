@@ -149,7 +149,10 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
+        let input = this.$refs.input.$refs.input || this.$refs.input.$refs.textarea;
+        if (input) {
+          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, input.offsetWidth]);
+        }
       }
     },
     methods: {
@@ -248,7 +251,8 @@
           suggestion.scrollTop -= highlightItem.scrollHeight;
         }
         this.highlightedIndex = index;
-        this.$el.querySelector('.el-input__inner').setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+        let $input = (this.$el.querySelector('.el-input__inner') || this.$el.querySelector('.el-textarea__inner'));
+        $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
       }
     },
     mounted() {
@@ -256,7 +260,7 @@
       this.$on('item-click', item => {
         this.select(item);
       });
-      let $input = this.$el.querySelector('.el-input__inner');
+      let $input = (this.$el.querySelector('.el-input__inner') || this.$el.querySelector('.el-textarea__inner'));
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
       $input.setAttribute('aria-controls', 'id');

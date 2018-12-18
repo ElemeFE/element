@@ -286,7 +286,10 @@
 
         // set input's value, in case parent refuses the change
         // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(() => { this.$refs.input.value = this.value; });
+        this.$nextTick(() => {
+          let input = this.$refs.input || this.$refs.textarea;
+          input.value = this.value;
+        });
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
