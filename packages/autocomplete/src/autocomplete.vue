@@ -149,7 +149,10 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
+        let input = this.$refs.input.$refs.input || this.$refs.input.$refs.textarea;
+        if (input) {
+          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, input.offsetWidth]);
+        }
       }
     },
     methods: {
