@@ -1,4 +1,2 @@
-export * from './'
-
-import * as TMui from './'
-export default TMui
+const TMui: any;
+export default TMui;
