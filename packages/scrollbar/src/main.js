@@ -59,7 +59,6 @@ export default {
     const view = h(this.tag, {
       class: ['el-scrollbar__view', this.viewClass],
       style: this.viewStyle,
-      ref: 'resize'
     }, this.$slots.default);
     const wrap = (
       <div
@@ -120,11 +119,11 @@ export default {
   mounted() {
     if (this.native) return;
     this.$nextTick(this.update);
-    !this.noresize && addResizeListener(this.$refs.resize, this.update);
+    !this.noresize && addResizeListener(this.$refs.wrap, this.update);
   },
 
   beforeDestroy() {
     if (this.native) return;
-    !this.noresize && removeResizeListener(this.$refs.resize, this.update);
+    !this.noresize && removeResizeListener(this.$refs.wrap, this.update);
   }
 };
