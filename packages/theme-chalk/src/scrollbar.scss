@@ -16,6 +16,7 @@
 
   @include e(wrap) {
     overflow: scroll;
+    overflow-x: hidden;
     height: 100%;
 
     @include m(hidden-default) {
