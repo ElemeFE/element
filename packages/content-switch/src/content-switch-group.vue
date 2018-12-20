@@ -1,5 +1,7 @@
 <template>
-  <div class="el-content-switch-group">
+  <div
+    class="el-content-switch-group"
+    :class="{ 'is-disabled': disabled }">
     <slot></slot>
   </div>
 </template>

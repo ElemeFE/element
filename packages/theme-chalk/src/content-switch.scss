@@ -12,6 +12,7 @@
   background-color: $--color-gray-1;
 
   @include when(active) {
+    position: relative;
     color: $--color-primary;
     background-color: $--color-white;
     box-shadow: 0px 0px 1px 0px $--color-gray-2;
@@ -35,4 +36,16 @@
   display: inline-block;
   background-color: $--color-gray-1;
   box-shadow: 0 0 1px 0 $--color-gray-2;
+
+  @include b(content-switch) {
+    &:not(:first-of-type) {
+      margin-left: -4px;
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    color: $--color-white;
+    background-color: $--color-gray-2;
+  }
 }

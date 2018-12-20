@@ -3,9 +3,11 @@
     data () {
       return {
         left: '1',
+        poli: '3',
         basic: '2',
         right: '3',
         center: '2',
+        couple: '1',
         disabled: '1',
       };
     },
@@ -89,6 +91,23 @@ Content switch
       <el-content-switch label="3">OPT 3</el-content-switch>
     </el-content-switch-group>
   </div>
+
+  <div style="margin-top: 20px">
+    <el-content-switch-group v-model="couple">
+      <el-content-switch label="1">OPT 1</el-content-switch>
+      <el-content-switch label="2">OPT 2</el-content-switch>
+    </el-content-switch-group>
+  </div>
+
+  <div style="margin-top: 20px">
+    <el-content-switch-group v-model="poli">
+      <el-content-switch label="1">OPT 1</el-content-switch>
+      <el-content-switch label="2">OPT 2</el-content-switch>
+      <el-content-switch label="3">OPT 3</el-content-switch>
+      <el-content-switch label="4">OPT 4</el-content-switch>
+      <el-content-switch label="5">OPT 5</el-content-switch>
+    </el-content-switch-group>
+  </div>
 </template>
 
 <script>
@@ -96,8 +115,10 @@ Content switch
     data () {
       return {
         left: '1',
+        poli: '3',
         right: '3',
         center: '2',
+        couple: '1',
         disabled: '1',
       };
     },
