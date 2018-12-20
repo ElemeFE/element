@@ -4,7 +4,9 @@
 
 <script>
   export default {
-    name: 'ElContentSwitchOption',
+    name: 'ElContentSwitchGroup',
+
+    componentName: 'ElContentSwitchGroup',
 
     props: {
       value: {
