@@ -1,5 +1,7 @@
 <template>
-  <p></p>
+  <div class="el-content-switch-group">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

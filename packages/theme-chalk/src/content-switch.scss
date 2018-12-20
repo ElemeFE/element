@@ -28,3 +28,11 @@
     background-color: $--color-gray-2;
   }
 }
+
+@include b(content-switch-group) {
+  padding: 6px;
+  border-radius: 50px;
+  display: inline-block;
+  background-color: $--color-gray-1;
+  box-shadow: 0 0 1px 0 $--color-gray-2;
+}

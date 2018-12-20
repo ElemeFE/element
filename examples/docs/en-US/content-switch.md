@@ -2,7 +2,11 @@
   module.exports = {
     data () {
       return {
+        left: '1',
         basic: '2',
+        right: '3',
+        center: '2',
+        disabled: '1',
       };
     },
   };
@@ -16,7 +20,7 @@ Content switch
 
 @todo sobre o component
 
-:::demo Esse componente é bem simples de usar, você precisa fazer o binding usando v-model. O valor da váriavel associadad vai ser igual ao da propriedade Label do component `ElContentSwitch`.
+:::demo Esse componente é bem simples de usar, você precisa fazer o binding usando v-model. O valor da váriavel associada vai ser igual ao da propriedade Label do component `ElContentSwitch`.
 
 ```html
 <template>
@@ -38,6 +42,63 @@ Content switch
     data () {
       return {
         basic: '2',
+      };
+    },
+  };
+</script>
+
+:::
+
+
+### Group
+
+@todo Content switch em grupo. A unica diferença é que os bindings são feitos no `ElContentSwitchGroup` em vez de diretamente no componente `ElContentSwitch`
+
+:::demo 
+
+```html
+<template>
+  <div>
+    <el-content-switch-group v-model="left">
+      <el-content-switch label="1">OPT 1</el-content-switch>
+      <el-content-switch label="2">OPT 2</el-content-switch>
+      <el-content-switch label="3">OPT 3</el-content-switch>
+    </el-content-switch-group>
+  </div>
+
+  <div style="margin-top: 20px">
+    <el-content-switch-group v-model="center">
+      <el-content-switch label="1">OPT 1</el-content-switch>
+      <el-content-switch label="2">OPT 2</el-content-switch>
+      <el-content-switch label="3">OPT 3</el-content-switch>
+    </el-content-switch-group>
+  </div>
+
+  <div style="margin-top: 20px">
+    <el-content-switch-group v-model="right">
+      <el-content-switch label="1">OPT 1</el-content-switch>
+      <el-content-switch label="2">OPT 2</el-content-switch>
+      <el-content-switch label="3">OPT 3</el-content-switch>
+    </el-content-switch-group>
+  </div>
+
+  <div style="margin-top: 20px">
+    <el-content-switch-group v-model="disabled" disabled>
+      <el-content-switch label="1">OPT 1</el-content-switch>
+      <el-content-switch label="2">OPT 2</el-content-switch>
+      <el-content-switch label="3">OPT 3</el-content-switch>
+    </el-content-switch-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        left: '1',
+        right: '3',
+        center: '2',
+        disabled: '1',
       };
     },
   };
