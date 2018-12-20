@@ -1,0 +1,30 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(content-switch) {
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  padding: 8px 24px;
+  border-radius: 50px;
+  color: $--color-text-regular;
+  font-size: $--font-size-base;
+  background-color: $--color-gray-1;
+
+  @include when(active) {
+    color: $--color-primary;
+    background-color: $--color-white;
+    box-shadow: 0px 0px 1px 0px $--color-gray-2;
+
+    &.is-disabled {
+      color: $--color-gray-2;
+      background-color: $--color-white;
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    color: $--color-white;
+    background-color: $--color-gray-2;
+  }
+}

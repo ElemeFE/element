@@ -1,6 +1,7 @@
 <template>
   <button
-    :class="{ active }">
+    class="el-content-switch"
+    :class="{ 'is-active': active, 'is-disabled': disabled }">
     <slot>{{ label }}</slot>
   </button>
 </template>

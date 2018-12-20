@@ -2,7 +2,7 @@
   module.exports = {
     data () {
       return {
-        basic: '1',
+        basic: '2',
       };
     },
   };
@@ -20,16 +20,24 @@ Content switch
 
 ```html
 <template>
-  <el-content-switch v-model="basic" label="1">Opção A</el-content-switch>
-  <el-content-switch v-model="basic" label="2">Opção B</el-content-switch>
-  <el-content-switch v-model="basic" label="3">Opção C</el-content-switch>
+  <!-- default -->
+  <el-content-switch v-model="basic" label="1">OPT 1</el-content-switch>
+
+  <!-- active -->
+  <el-content-switch v-model="basic" label="2">OPT 2</el-content-switch>
+
+  <!-- active and disabled -->
+  <el-content-switch v-model="basic" label="2" disabled>OPT 2</el-content-switch>
+
+  <!-- disabled -->
+  <el-content-switch v-model="basic" label="3" disabled>OPT 3</el-content-switch>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        basic: '1',
+        basic: '2',
       };
     },
   };
