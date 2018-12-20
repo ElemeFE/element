@@ -1,6 +1,6 @@
 <template>
-    <div class="badge">
-        <table style="width: 100%;">
+    <div class="badge" style="margin-bottom: 29px">
+        <table style="width: 100%;" >
             <tr>
                 <td style="width: 70px;font-weight: bold;">流转记录</td>
                 <td>

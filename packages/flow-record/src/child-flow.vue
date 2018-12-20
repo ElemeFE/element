@@ -36,8 +36,8 @@
                 </el-row>
             </div>
 
-            <div>
-                <flow_badge></flow_badge>
+            <flow_badge content-box-id="sub_badge_flow_show" v-if="getSfrPageOrder && getSfrPageOrder.length > 0"></flow_badge>
+            <div id="sub_badge_flow_show" show="1" v-if="getSfrPageOrder && getSfrPageOrder.length > 0">
                 <el-row>
                     <el-col :span="24">
                         <ul class="scroll flow-items-padding">
@@ -92,8 +92,8 @@
                 </el-row>
             </div>
 
-            <badge :content-box-id="main_flow_records_id"></badge>
-            <div id="sub-flow-records" show="1">
+            <badge :content-box-id="main_flow_records_id" v-if="getSfrPageOrder && getSfrPageOrder.length > 0"></badge>
+            <div id="sub-flow-records" show="1" v-if="getSfrPageOrder && getSfrPageOrder.length > 0">
                 <el-row>
                     <el-col :span="24">
                         <el-table
@@ -216,6 +216,37 @@
                                 prop="ti_name"
                                 width="250%"
                                 >
+                            <template slot-scope="scope">
+                                <div style="position: relative">
+
+                                    <div
+                                        style="position:absolute;right:0px; line-height: 18px;font-size: 12px;color:white;text-align: center;top:0px;"
+                                    >
+                                        <span style="background: red;
+                                        width: 18px;
+                                        height: 18px;
+                                        display: inline-block;
+                                        border-radius: 18px;"
+                                              v-if="scope.row.dhCount && scope.row.dhCount > 0"
+                                        >
+                                        {{scope.row.dhCount}}
+                                    </span>
+                                        <span style="background: green;
+                                        width: 18px;
+                                        height: 18px;
+                                        display: inline-block;
+                                        border-radius: 18px;
+                                        margin-left:2px"
+                                              v-if="scope.row.fgCount && scope.row.fgCount > 0"
+                                        >
+                                        {{scope.row.fgCount}}
+                                    </span>
+                                    </div>
+                                    <div :style="(scope.row.dhCount && scope.row.dhCount > 0) || (scope.row.fgCount && scope.row.fgCount > 0) ? 'color:red' : ''">
+                                        {{scope.row.ti_name}}
+                                    </div>
+                                </div>
+                            </template>
                         </el-table-column>
                         <el-table-column
                                 prop="node_name"
@@ -358,7 +389,7 @@
         console.log(this.samplesCount);
       },
       init_sample_style: function(item, list) {
-        if (item === list[0]) {
+        if (item.prn === this.$parent.child_prn_check) {
           // this.sample_item_selected_id = item.prn;
           return this.selectedStyle;
         }

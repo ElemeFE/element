@@ -159,11 +159,13 @@
     }
 
     & #main-flow-records[show='1'],
+    & #sub_badge_flow_show[show='1'],
     & #sub-flow-records[show='1']{
         display:none;
     }
 
     & #main-flow-records[show='0'],
+    & #sub_badge_flow_show[show='0'],
     & #sub-flow-records[show='0']{
         display:block;
     }

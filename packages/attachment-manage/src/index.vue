@@ -384,12 +384,14 @@
           navigator.getUserMedia(opt,
             function(stream) {
               let video = document.getElementById('video');
-              video.src = window.URL.createObjectURL(stream);
-              video.onloadedmetadata = function(e) {
-                console.log('capture started successfully');
-                document.getElementById('non-video').style.display = 'none';
-                video.play();
-              };
+              // video.src = window.URL.createObjectURL(stream);
+              video.srcObject = stream;
+              // video.onloadedmetadata = function(e) {
+              //   console.log('capture started successfully');
+              //   document.getElementById('non-video').style.display = 'none';
+              //   video.play();
+              // };
+              document.getElementById('non-video').style.display = 'none';
               self.navigatorStream = stream;
             },
             function(err) {
@@ -438,6 +440,7 @@
         const isFile20M = file.size / 1024 / 1024 < 20;
         if (!isFile20M) {
           this.$message.warning('上传文件不能超过20M！');
+          this.loadingSubmit = false;
           return false;
         }
 

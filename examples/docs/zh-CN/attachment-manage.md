@@ -4,8 +4,8 @@
     data() {
       return {
         propData:{
-            uploadUrl:'http://192.168.2.225:80/ks-prj/pic/fileUpload',
-            prn:'C1811214444',
+            uploadUrl:'http://192.168.4.48:30001/ks-prj/pic/fileUpload',
+            prn:'282487465832',
             capture:true,
             scan:true,
             edit:true,
@@ -13,7 +13,7 @@
             delete:true,
             upload:true,
             allButtonDisabled:false,
-            JID: '4991CE4DF1EC2B71a6-baff-9b8d2ab95281',
+            JID: '06002D08BF248524eb5f861a-4310-4807-9ef3-a1b0e9044684',
             m_code: 'abc',
             abc: 'bbb'
         },

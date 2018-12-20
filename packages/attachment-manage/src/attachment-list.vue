@@ -455,23 +455,50 @@
         this.selected_files_ids = ids;
         this.$emit('headCallBack', ids);
       },
-      download_file_handle: function(prn, file_name) {
+      funDownload: function(content, filename) {
+        // 创建隐藏的可下载链接
+        var eleLink = document.createElement('a');
+        eleLink.download = filename;
+        eleLink.style.display = 'none';
+        // 字符内容转变成blob地址
+        var blob = new Blob([content], {type: 'application/octet-stream'});
+        eleLink.href = URL.createObjectURL(blob);
+        // 触发点击
+        document.body.appendChild(eleLink);
+        eleLink.click();
+        // 然后移除
+        document.body.removeChild(eleLink);
+      },
+      funDownloadByGet: function(prn, filename) {
         let url = this.preInterfaceUrl + 'downloadFile';
-        this.$http.post(url, Object.assign({
-          filePrn: prn,
-          JID: this.data.JID
-        }, this.data), {
-          emulateJSON: true
-        }).then(function(response) {
-          // let url = window.URL.createObjectURL(new Blob([response.body.obj]));
-          let link = document.createElement('a');
-          link.style.display = 'none';
-          link.href = 'data:image/png;base64,' + response.body.obj;
-          link.setAttribute('download', file_name);
-          document.body.appendChild(link);
-          link.click();
-        }, function(response) {
-        });
+        url += `?filePrn=${prn}&JID=${this.data.JID}&fileName=${filename}`;
+        let eleLink = document.createElement('a');
+        eleLink.download = filename;
+        eleLink.style.display = 'none';
+        eleLink.href = url;
+        // 触发点击
+        document.body.appendChild(eleLink);
+        eleLink.click();
+      },
+      download_file_handle: function(prn, file_name) {
+        this.funDownloadByGet(prn, file_name);
+        // let url = this.preInterfaceUrl + 'downloadFile';
+        // this.$http.post(url, Object.assign({
+        //   filePrn: prn,
+        //   JID: this.data.JID
+        // }, this.data), {
+        //   emulateJSON: true
+        // }).then(function(response) {
+        //   // let url = window.URL.createObjectURL(new Blob([response.body.obj]));
+        //   this.funDownload(response, file_name);
+        //   // let link = document.createElement('a');
+        //   // link.style.display = 'none';
+        //   // link.href = 'data:image/png;base64,' + response.body.obj;
+        //   // link.setAttribute('download', file_name);
+        //   // document.body.appendChild(link);
+        //   // link.click();
+        // }, function(response) {
+        // });
       },
       update_files_message_handle: function() {
         let original_rowData = this.current_edit_data;

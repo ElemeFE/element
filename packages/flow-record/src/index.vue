@@ -24,8 +24,13 @@
                                 :id="item.prn"
                                 :class="main_flow_item_style(item.type)"
                                 :clickAble="getClickAble(item)"
+                                :style="item.thisNode == true ? (item.prevProcessType == '198922080024' ? 'border: 1px solid red' : item.prevProcessType == '198922138768' ? 'border: 1px solid green' : '') : ''"
                                 @click="change_sample_list(item)">
-                                <div v-if="item.type == 'flow'">
+                                <div v-if="item.type == 'flow'" style="position: relative">
+                                    <div style="position:absolute; height: 18px;right: -10px;top: -10px;color: white;line-height: 18px;font-style: 12px;">
+                                        <span v-if="item.dhCount && item.dhCount > 0" style=" background: red; width:18px;height: 18px;display: inline-block;border-radius:18px;">{{item.dhCount}}</span>
+                                        <span v-if="item.fgCount && item.fgCount > 0" style=" background: green; width:18px;height: 18px;display: inline-block;border-radius:18px;margin-left:2px;">{{item.fgCount}}</span>
+                                    </div>
                                     <div v-if="item.flag == 1">
                                         <img src="../images/icon-ywsl-high.png"
                                              v-if="item.date != '----' || item.thisNode == true"/>
@@ -212,7 +217,8 @@
         main_flow_records_id: 'main-flow-records',
         having_data: true,
         mft_page_index: 1,
-        mft_page_size: 10
+        mft_page_size: 10,
+        child_prn_check: ''
       };
     },
     props: {
@@ -293,6 +299,9 @@
           let temp = {
             name: data[i].descp,
             flag: data[i].disp_or,
+            dhCount: data[i].dhCount,
+            fgCount: data[i].fgCount,
+            prevProcessType: data[i].prevProcessType,
             prn: data[i].prn,
             date: startTimePre,
             time: startTimeLast,
@@ -460,6 +469,7 @@
         });
       },
       get_sample_check_list: function(prn) {
+        this.child_prn_check = prn;
         this.$http.post(this.data.data_interface + 'getTestItemsBySamplePrn', {
           pageNo: 1,
           pageSize: 10000,

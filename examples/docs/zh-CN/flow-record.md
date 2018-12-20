@@ -4,9 +4,9 @@
     data() {
       return {
         propData:{
-            prn:'C1811224488',
-            data_interface:'http://192.168.2.225/lcgl-prj/taskTrans/',
-            JID:'4991CE4DF1EC2B71ec-8efa-db5bf745ce5b'
+            prn:'XF1812185518',
+            data_interface:'http://192.168.2.20:30007/lcgl-prj/taskTrans/',
+            JID:'06002D082EA1699Fef0bf82b-9060-4906-adba-7060da522666'
         },
       }
         
