@@ -11,7 +11,7 @@
     <li
       v-for="(file, index) in files"
       :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
-      :key="index"
+      :key="`file-${index}`"
       tabindex="0"
       @keydown.delete="!disabled && $emit('remove', file)"
       @focus="focusing = true"

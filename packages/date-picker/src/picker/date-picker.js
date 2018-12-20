@@ -19,17 +19,22 @@ export default {
       type: String,
       default: 'date'
     },
+    allowHeader: Boolean,
     timeArrowControl: Boolean
   },
 
   watch: {
-    type(type) {
-      if (this.picker) {
-        this.unmountPicker();
-        this.panel = getPanel(type);
-        this.mountPicker();
-      } else {
-        this.panel = getPanel(type);
+    type: {
+      handler(type) {
+        let self = this;
+        if (self.picker) {
+          self.unmountPicker();
+          self.panel = getPanel(type);
+          self.mountPicker();
+        } else {
+          self.panel = getPanel(type);
+        }
+        document.activeElement.blur();
       }
     }
   },

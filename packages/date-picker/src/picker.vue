@@ -1,83 +1,85 @@
 <template>
-  <el-input
-    class="el-date-editor"
-    :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly || type === 'dates'"
-    :disabled="pickerDisabled"
-    :size="pickerSize"
-    :name="name"
-    v-bind="firstInputId"
-    v-if="!ranged"
-    v-clickoutside="handleClose"
-    :placeholder="placeholder"
-    @focus="handleFocus"
-    @keydown.native="handleKeydown"
-    :value="displayValue"
-    @input="value => userInput = value"
-    @change="handleChange"
-    @mouseenter.native="handleMouseEnter"
-    @mouseleave.native="showClose = false"
-    :validateEvent="false"
-    ref="reference">
-    <i slot="prefix"
-      class="el-input__icon"
-      :class="triggerClass"
-      @click="handleFocus">
-    </i>
-    <i slot="suffix"
-      class="el-input__icon"
-      @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon : '']"
-      v-if="haveTrigger">
-    </i>
-  </el-input>
-  <div
-    class="el-date-editor el-range-editor el-input__inner"
-    :class="[
-      'el-date-editor--' + type,
-      pickerSize ? `el-range-editor--${ pickerSize }` : '',
-      pickerDisabled ? 'is-disabled' : '',
-      pickerVisible ? 'is-active' : ''
-    ]"
-    @click="handleRangeClick"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="showClose = false"
-    @keydown="handleKeydown"
-    ref="reference"
-    v-clickoutside="handleClose"
-    v-else>
-    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
-    <input
-      autocomplete="off"
-      :placeholder="startPlaceholder"
-      :value="displayValue && displayValue[0]"
+  <div>
+    <el-input
+      class="el-date-editor"
+      :class="'el-date-editor--' + type"
+      :readonly="!editable || readonly || type === 'dates'"
       :disabled="pickerDisabled"
+      :size="pickerSize"
+      :name="name"
       v-bind="firstInputId"
-      :readonly="!editable || readonly"
-      :name="name && name[0]"
-      @input="handleStartInput"
-      @change="handleStartChange"
+      v-if="!ranged"
+      v-clickoutside="handleClose"
+      :placeholder="placeholder"
       @focus="handleFocus"
-      class="el-range-input">
-    <span class="el-range-separator">{{ rangeSeparator }}</span>
-    <input
-      autocomplete="off"
-      :placeholder="endPlaceholder"
-      :value="displayValue && displayValue[1]"
-      :disabled="pickerDisabled"
-      v-bind="secondInputId"
-      :readonly="!editable || readonly"
-      :name="name && name[1]"
-      @input="handleEndInput"
-      @change="handleEndChange"
-      @focus="handleFocus"
-      class="el-range-input">
-    <i
-      @click="handleClickIcon"
-      v-if="haveTrigger"
-      :class="[showClose ? '' + clearIcon : '']"
-      class="el-input__icon el-range__close-icon">
-    </i>
+      @keydown.native="handleKeydown"
+      :value="displayValue"
+      @input="value => userInput = value"
+      @change="handleChange"
+      @mouseenter.native="handleMouseEnter"
+      @mouseleave.native="showClose = false"
+      :validateEvent="false"
+      ref="reference">
+      <i slot="prefix"
+        class="el-input__icon"
+        :class="triggerClass"
+        @click="handleFocus">
+      </i>
+      <i slot="suffix"
+        class="el-input__icon"
+        @click="handleClickIcon"
+        :class="[showClose ? '' + clearIcon : '']"
+        v-if="haveTrigger">
+      </i>
+    </el-input>
+    <div
+      class="el-date-editor el-range-editor el-input__inner"
+      :class="[
+        'el-date-editor--' + type,
+        pickerSize ? `el-range-editor--${ pickerSize }` : '',
+        pickerDisabled ? 'is-disabled' : '',
+        pickerVisible ? 'is-active' : ''
+      ]"
+      @click="handleRangeClick"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="showClose = false"
+      @keydown="handleKeydown"
+      ref="reference"
+      v-clickoutside="handleClose"
+      v-else>    
+      <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
+      <input
+        autocomplete="off"
+        :placeholder="startPlaceholder"
+        :value="displayValue && displayValue[0]"
+        :disabled="pickerDisabled"
+        v-bind="firstInputId"
+        :readonly="!editable || readonly"
+        :name="name && name[0]"
+        @input="handleStartInput"
+        @change="handleStartChange"
+        @focus="handleFocus"
+        class="el-range-input">
+      <span class="el-range-separator">{{ rangeSeparator }}</span>
+      <input
+        autocomplete="off"
+        :placeholder="endPlaceholder"
+        :value="displayValue && displayValue[1]"
+        :disabled="pickerDisabled"
+        v-bind="secondInputId"
+        :readonly="!editable || readonly"
+        :name="name && name[1]"
+        @input="handleEndInput"
+        @change="handleEndChange"
+        @focus="handleFocus"
+        class="el-range-input">
+      <i
+        @click="handleClickIcon"
+        v-if="haveTrigger"
+        :class="[showClose ? '' + clearIcon : '']"
+        class="el-input__icon el-range__close-icon">
+      </i>
+    </div>
   </div>
 </template>
 
@@ -384,7 +386,11 @@ export default {
       default: '-'
     },
     pickerOptions: {},
-    unlinkPanels: Boolean
+    unlinkPanels: Boolean,
+    allowHeader: {
+      type: Boolean,
+      default: true
+    }
   },
 
   components: { ElInput },
@@ -719,8 +725,7 @@ export default {
     },
 
     handleFocus() {
-      const type = this.type;
-
+      let type = this.type;
       if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
         this.pickerVisible = true;
       }
@@ -825,6 +830,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.allowHeader = this.allowHeader || false;
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
@@ -854,9 +860,11 @@ export default {
           this.picker.format = this.format;
         }
       };
+      this.picker.$slots.header = this.$slots.header;
+      console.log(this.$slots.header, this.picker.$slots.header);
+
       updateOptions();
       this.unwatchPickerOptions = this.$watch('pickerOptions', () => updateOptions(), { deep: true });
-
       this.$el.appendChild(this.picker.$el);
       this.picker.resetView && this.picker.resetView();
 
@@ -882,6 +890,7 @@ export default {
 
     unmountPicker() {
       if (this.picker) {
+        this.pickerVisible = false;
         this.picker.$destroy();
         this.picker.$off();
         if (typeof this.unwatchPickerOptions === 'function') {

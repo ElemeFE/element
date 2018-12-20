@@ -9,7 +9,8 @@ export default {
 
   props: {
     isRange: Boolean,
-    arrowControl: Boolean
+    arrowControl: Boolean,
+    allowHeader: Boolean
   },
 
   data() {

@@ -7,6 +7,11 @@
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]">
+      <template class="" v-if="allowHeader">
+        <div class="el-picker-panel__header">
+          <slot name="header"></slot>
+        </div>
+      </template>
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">

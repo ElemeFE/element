@@ -12,7 +12,8 @@ export default {
     type: {
       type: String,
       default: 'time-select'
-    }
+    },
+    allowHeader: Boolean
   },
 
   beforeCreate() {
