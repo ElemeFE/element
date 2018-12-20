@@ -27,9 +27,12 @@ $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /
 
 $--color-secondary: #53B7A8 !default;
 $--color-terciary: #85CFCA !default;
+$--color-gray-1: #F0F0F0 !default;
+$--color-gray-2: #B9B9B9 !default;
+$--color-gray-3: #919191 !default;
 $--color-gray-4: #464646 !default;
 
-$--color-success: #7EC894 !default;
+$--color-success: rgb(20, 22, 21) !default;
 $--color-warning: #F1D149 !default;
 $--color-danger: #F74759 !default;
 $--color-info: #93BCE5 !default;
@@ -185,7 +188,7 @@ $--checkbox-bordered-mini-input-width: 12px !default;
 $--checkbox-bordered-mini-height: 28px !default;
 
 $--checkbox-button-font-size: $--font-size-base !default;
-$--checkbox-button-mini-font-size: #{$--font-size-base - 2px} !default; 
+$--checkbox-button-mini-font-size: #{$--font-size-base - 2px} !default;
 $--checkbox-button-checked-fill: $--color-primary !default;
 $--checkbox-button-checked-color: $--color-white !default;
 $--checkbox-button-checked-border-color: $--color-primary !default;
@@ -357,7 +360,7 @@ $--notification-title-color: $--color-text-primary !default;
 $--notification-close-color: $--color-text-regular !default;
 $--notification-close-hover-color: $--color-text-primary !default;
 
-$--notification-default-color: $--color-text-terciary !default; 
+$--notification-default-color: $--color-text-terciary !default;
 $--notification-success-color: $--color-success !default;
 $--notification-info-color: $--color-info !default;
 $--notification-warning-color: $--color-warning !default;
@@ -738,6 +741,12 @@ $--loading-fullscreen-spinner-size: 50px !default;
 --------------------------*/
 $--scrollbar-background-color: $--color-primary !default;
 $--scrollbar-hover-background-color: rgba($--color-text-secondary, .5) !default;
+
+/* Content Switch
+--------------------------*/
+$--content-switch-padding-y: 6px !default;
+$--content-switch-padding-x: 24px !default;
+$--content-switch-shadow: 0px 0px 1px 0px $--color-gray-2 !default;
 
 /* Carousel
 --------------------------*/
