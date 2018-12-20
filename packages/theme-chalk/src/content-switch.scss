@@ -1,0 +1,51 @@
+@import "common/var";
+@import "mixins/mixins";
+
+@include b(content-switch) {
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50px;
+  color: $--color-text-regular;
+  font-size: $--font-size-base;
+  background-color: $--color-gray-1;
+  padding: $--content-switch-padding-y $--content-switch-padding-x;
+
+  @include when(active) {
+    position: relative;
+    color: $--color-primary;
+    background-color: $--color-white;
+    box-shadow: $--content-switch-shadow;
+
+    &.is-disabled {
+      color: $--color-gray-2;
+      background-color: $--color-white;
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    color: $--color-white;
+    background-color: $--color-gray-2;
+  }
+}
+
+@include b(content-switch-group) {
+  border-radius: 50px;
+  display: inline-block;
+  background-color: $--color-gray-1;
+  box-shadow: $--content-switch-shadow;
+  padding: $--content-switch-padding-y;
+
+  @include b(content-switch) {
+    &:not(:first-of-type) {
+      margin-left: (-$--content-switch-padding-x / 4);
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    color: $--color-white;
+    background-color: $--color-gray-2;
+  }
+}

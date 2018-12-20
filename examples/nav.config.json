@@ -331,6 +331,10 @@
               "title": "Checkbox"
             },
             {
+              "path": "/content-switch",
+              "title": "Content Switch"
+            },
+            {
               "path": "/input",
               "title": "Input"
             },

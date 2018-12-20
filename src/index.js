@@ -6,6 +6,8 @@ import Autocomplete from '../packages/autocomplete/index.js';
 import Dropdown from '../packages/dropdown/index.js';
 import DropdownMenu from '../packages/dropdown-menu/index.js';
 import DropdownItem from '../packages/dropdown-item/index.js';
+import ContentSwitch from '../packages/content-switch/index.js';
+import ContentSwitchGroup from '../packages/content-switch-group/index.js';
 import Menu from '../packages/menu/index.js';
 import Submenu from '../packages/submenu/index.js';
 import MenuItem from '../packages/menu-item/index.js';
@@ -88,6 +90,8 @@ const components = [
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  ContentSwitch,
+  ContentSwitchGroup,
   Menu,
   Submenu,
   MenuItem,
@@ -202,6 +206,8 @@ const ElementUi = {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  ContentSwitch,
+  ContentSwitchGroup,
   Menu,
   Submenu,
   MenuItem,
