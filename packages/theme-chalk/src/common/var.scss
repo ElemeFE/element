@@ -742,6 +742,12 @@ $--loading-fullscreen-spinner-size: 50px !default;
 $--scrollbar-background-color: $--color-primary !default;
 $--scrollbar-hover-background-color: rgba($--color-text-secondary, .5) !default;
 
+/* Content Switch
+--------------------------*/
+$--content-switch-padding-y: 6px !default;
+$--content-switch-padding-x: 24px !default;
+$--content-switch-shadow: 0px 0px 1px 0px $--color-gray-2 !default;
+
 /* Carousel
 --------------------------*/
 $--carousel-arrow-font-size: 12px !default;
