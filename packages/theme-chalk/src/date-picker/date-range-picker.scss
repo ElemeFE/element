@@ -1,7 +1,7 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 646px;
+  width: 322px;
 
   &.has-sidebar {
     width: 756px;
@@ -13,11 +13,16 @@
   }
 
   .el-picker-panel__body {
-    min-width: 513px;
+    min-width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    flex-wrap: wrap;
   }
 
   .el-picker-panel__content {
-    margin: 0;
+    margin: 0;    
   }
 
   @include e(header) {
@@ -41,17 +46,18 @@
   }
 
   @include e(content) {
-    float: left;
-    width: 50%;
+    // float: left;
+    width: 100%;
     box-sizing: border-box;
     margin: 0;
     padding: 16px;
 
     @include when(left) {
-      border-right: 1px solid $--datepicker-inner-border-color;
+      // border-right: 1px solid $--datepicker-inner-border-color;
     }
 
     @include when(right) {
+      visibility: hidden;
       .el-date-range-picker__header {
 
         div {
