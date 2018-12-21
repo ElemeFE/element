@@ -127,7 +127,7 @@
               @pick="handleRangePick">
             </date-table>
           </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
+          <div class="el-picker-panel__content el-date-range-picker__content is-right" :style="{display: 'none'}">
             <div class="el-date-range-picker__header">
               <button
                 type="button"
