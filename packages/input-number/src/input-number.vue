@@ -99,6 +99,12 @@
         validator(val) {
           return val >= 0 && val === parseInt(val, 10);
         }
+      },
+      defaultVal: {
+        type: Number,
+        default: () => {
+          return void 0;
+        }
       }
     },
     data() {
@@ -235,7 +241,7 @@
         this.userInput = value;
       },
       handleInputChange(value) {
-        const newVal = value === '' ? undefined : Number(value);
+        const newVal = value === '' ? this.defaultVal : Number(value);
         if (!isNaN(newVal) || value === '') {
           this.setCurrentValue(newVal);
         }
