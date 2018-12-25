@@ -1,6 +1,6 @@
 <template>
   <div class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+     :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
      role="slider"
      :aria-valuemin="min"
      :aria-valuemax="max"
