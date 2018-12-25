@@ -321,8 +321,12 @@
 
         newDate.setDate(parseInt(cell.text, 10));
 
-        const valueYear = isDate(this.value) ? this.value.getFullYear() : null;
-        return year === valueYear && getWeekNumber(newDate) === getWeekNumber(this.value);
+        if (isDate(this.value)) {
+          const dayOffset = (this.value.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
+          const weekDate = new Date(this.value.getTime() - (dayOffset * 86400000));
+          return weekDate.getTime() === newDate.getTime();
+        }
+        return false;
       },
 
       markRange(minDate, maxDate) {
