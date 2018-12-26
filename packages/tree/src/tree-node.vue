@@ -228,7 +228,8 @@
       },
 
       handleDrop(event) {
-        event.preventDefault();
+        if (!this.tree.draggable) return;
+        this.tree.$emit('tree-node-drop', event, this);
       },
 
       handleDragEnd(event) {

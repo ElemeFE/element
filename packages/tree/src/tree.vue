@@ -261,6 +261,10 @@
         this.store.close(node);
       },
 
+      expand(node, callback, expandParent) {
+        this.store.expand(node, callback, expandParent);
+      },
+
       append(data, parentNode, callback) {
         this.store.append(data, parentNode, callback);
       },
@@ -355,7 +359,8 @@
         try {
           // setData is required for draggable to work in FireFox
           // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
-          event.dataTransfer.setData('text/plain', '');
+          var j = JSON.stringify(treeNode.node.data);
+          event.dataTransfer.setData('data', j);
         } catch (e) {}
         dragState.draggingNode = treeNode;
         this.$emit('node-drag-start', treeNode.node, event);
@@ -447,17 +452,10 @@
         this.$emit('node-drag-over', draggingNode.node, dropNode.node, event);
       });
 
-      this.$on('tree-node-drag-end', (event) => {
-        const clrDragState = () => {
-          dragState.showDropIndicator = false;
-          dragState.draggingNode = null;
-          dragState.dropNode = null;
-          dragState.allowDrop = true;
-        };
+      this.$on('tree-node-drop', (event) => {
         const emitEvents = () => {
           removeClass(dropNode.$el, 'is-drop-inner');
 
-          this.$emit('node-drag-end', draggingNode.node, dropNode.node, dropType, event);
           if (dropType !== 'none') {
             this.$emit('node-drop', draggingNode.node, dropNode.node, dropType, event);
           }
@@ -486,14 +484,21 @@
               dropNode.node.insertChild(value);
               emitEvents();
             });
-            return clrDragState();
+            return;
           }
           emitEvents();
         }
-        if (draggingNode && !dropNode) {
-          this.$emit('node-drag-end', draggingNode.node, null, dropType, event);
+      });
+      this.$on('tree-node-drag-end', (event) => {
+        const { draggingNode, dropType, dropNode } = dragState;
+        event.preventDefault();
+        if (draggingNode) {
+          this.$emit('node-drag-end', draggingNode.node, dropNode ? dropNode.node : null, dropType, event);
         }
-        clrDragState();
+        dragState.showDropIndicator = false;
+        dragState.draggingNode = null;
+        dragState.dropNode = null;
+        dragState.allowDrop = true;
       });
     },
 
