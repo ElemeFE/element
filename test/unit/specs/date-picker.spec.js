@@ -2289,6 +2289,55 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  describe('picker-options:selectableRange', () => {
+    let vm;
+    afterEach(() => destroyVM(vm));
+    it('selectableRange', done => {
+      vm = createVue({
+        template: `
+        <el-date-picker v-model="value" type="datetime" :picker-options="pickerOptions" ref="compo"></el-date-picker>
+        `,
+        data() {
+          return {
+            value: '',
+            pickerOptions: {
+              selectableRange: ['17:30:00 - 18:30:00', '18:50:00 - 20:30:00', '21:00:00 - 22:00:00']
+            }
+          };
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(() => {
+        const $el = vm.$refs.compo.picker.$el;
+        const input1 = $el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+        input1.blur();
+        input1.focus();
+        setTimeout(_ => {
+          const list = $el.querySelectorAll('.el-time-spinner__list');
+          const hoursEl = list[0];
+          const disabledHours = [].slice
+            .call(hoursEl.querySelectorAll('.disabled'))
+            .map(node => Number(node.textContent));
+          hoursEl.querySelectorAll('.disabled')[0].click();
+          expect(disabledHours).to.not.include.members([17, 18, 19, 20, 21, 22]);
+          const minutesEl = list[1];
+          hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
+          setTimeout(_ => {
+            const disabledMinutes = [].slice
+              .call(minutesEl.querySelectorAll('.disabled'))
+              .map(node => Number(node.textContent));
+            expect(disabledMinutes.every(t => t > 30 && t < 50)).to.equal(true);
+            expect(disabledMinutes.length).to.equal(19);
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+  });
+
   describe('picker-options:disabledDate', () => {
     let vm;
     beforeEach(done => {
