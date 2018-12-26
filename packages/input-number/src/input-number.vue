@@ -80,6 +80,10 @@
         type: Number,
         default: -Infinity
       },
+      defaultValue: {
+        type: Number,
+        default: 0
+      },
       value: {},
       disabled: Boolean,
       size: String,
@@ -122,6 +126,7 @@
           }
           if (newVal >= this.max) newVal = this.max;
           if (newVal <= this.min) newVal = this.min;
+          if (newVal === undefined) newVal = this.defaultValue;
           this.currentValue = newVal;
           this.userInput = null;
           this.$emit('input', newVal);
