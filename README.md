@@ -34,6 +34,9 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
   </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/easter%20egg-none-brightgreen.svg?style=flat-square">
+  </a>
 </p>
 
 <p align="center">
