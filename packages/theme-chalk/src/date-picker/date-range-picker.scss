@@ -1,7 +1,7 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 322px;
+  width: 646px;
 
   &.has-sidebar {
     width: 756px;
@@ -17,7 +17,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-flow: column;
+    // flex-flow: column;
+    flex-flow: row;
     flex-wrap: wrap;
   }
 
@@ -47,7 +48,8 @@
 
   @include e(content) {
     // float: left;
-    width: 100%;
+    // width: 100%;
+    width: 50%;
     box-sizing: border-box;
     margin: 0;
     padding: 16px;
@@ -57,7 +59,7 @@
     }
 
     @include when(right) {
-      visibility: hidden;
+      // visibility: hidden;
       .el-date-range-picker__header {
 
         div {
