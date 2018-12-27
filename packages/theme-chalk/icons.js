@@ -64,6 +64,7 @@ import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
 import HygienicKit from '../../packages/theme-chalk/src/icons/hygienic-kit.svg';
 import IconBlock from '../../packages/theme-chalk/src/icons/icon-block.svg';
 import IconHide from '../../packages/theme-chalk/src/icons/icon-hide.svg';
+import IconMoveArrows from '../../packages/theme-chalk/src/icons/icon-move-arrows.svg';
 import IconSocket from '../../packages/theme-chalk/src/icons/icon-socket.svg';
 import Infant from '../../packages/theme-chalk/src/icons/infant.svg';
 import Insurance from '../../packages/theme-chalk/src/icons/insurance.svg';
@@ -201,6 +202,7 @@ module.exports = {
   HygienicKit,
   IconBlock,
   IconHide,
+  IconMoveArrows,
   IconSocket,
   Infant,
   Insurance,
