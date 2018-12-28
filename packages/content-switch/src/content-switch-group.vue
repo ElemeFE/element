@@ -15,14 +15,14 @@
     props: {
       value: {
         type: String,
-        required: true,
+        required: true
       },
 
       disabled: {
         type: Boolean,
         default: false,
-        required: false,
-      },
-    },
+        required: false
+      }
+    }
   };
 </script>

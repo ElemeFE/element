@@ -13,22 +13,22 @@
 
     props: {
       value: {
-        required: false,
+        required: false
       },
 
       label: {
-        required: true,
+        required: true
       },
 
       disabled: {
         type: Boolean,
         default: false,
-        required: false,
-      },
+        required: false
+      }
     },
 
     computed: {
-      _active () {
+      _active() {
         const value = this._grouped
           ? this.$parent.value
           : this.value;
@@ -36,7 +36,7 @@
         return value === this.label;
       },
 
-      _disabled () {
+      _disabled() {
         if (this._grouped) {
           return this.$parent.disabled;
         }
@@ -44,15 +44,15 @@
         return this.disabled;
       },
 
-      _grouped () {
+      _grouped() {
         const parent = this.$parent;
 
         return parent.$options.componentName === 'ElContentSwitchGroup';
-      },
+      }
     },
 
     methods: {
-      click () {
+      click() {
         /**
          * Bail if it's disabled.
          */
@@ -67,7 +67,7 @@
         }
 
         this.$emit('input', this.label);
-      },
-    },
+      }
+    }
   };
 </script>
