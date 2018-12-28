@@ -7,23 +7,23 @@
   display: inline-block;
   text-align: left;
 
-  &.el-input,
+  /* &.el-input,
   &.el-input__inner {
     width: 220px;
-  }
+  } */
 
   @include m((daterange, timerange)) {
-    &.el-input,
+    /* &.el-input,
     &.el-input__inner {
       width: 350px;
-    }
+    } */
   }
 
   @include m(datetimerange) {
-    &.el-input,
+    /* &.el-input,
     &.el-input__inner {
       width: 400px;
-    }
+    } */
   }
 
   @include m(dates) {

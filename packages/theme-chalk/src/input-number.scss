@@ -5,7 +5,7 @@
 @include b(input-number) {
   position: relative;
   display: inline-block;
-  width: 180px;
+  width: 100%;
   line-height: #{$--input-height - 2};
 
   .el-input {
