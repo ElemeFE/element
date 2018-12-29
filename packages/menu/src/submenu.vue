@@ -273,7 +273,8 @@
             class={[`el-menu--${mode}`, popperClass]}
             on-mouseenter={this.handleMouseenter}
             on-mouseleave={this.handleMouseleave}
-            on-focus={this.handleMouseenter}>
+            on-focus={this.handleMouseenter}
+            on-blur={this.handleMouseleave}>
             <ul
               role="menu"
               class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
@@ -315,6 +316,7 @@
           on-mouseenter={this.handleMouseenter}
           on-mouseleave={this.handleMouseleave}
           on-focus={this.handleMouseenter}
+          on-blur={this.handleMouseleave}
         >
           <div
             class="el-submenu__title"
