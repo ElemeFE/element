@@ -801,6 +801,26 @@ describe('Select', () => {
     }, 10);
   });
 
+  it('render slot `empty`', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <div class="empty-slot" slot="empty">EmptySlot</div>
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 1
+        };
+      }
+    });
+
+    expect(vm.$el.querySelector('.empty-slot').innerText).to.be.equal('EmptySlot');
+    done();
+  });
+
   describe('resetInputHeight', () => {
     const getSelectComponentVm = (configs) => {
       vm = getSelectVm(configs || {});
