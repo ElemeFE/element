@@ -2299,7 +2299,7 @@ describe('DatePicker', () => {
         `,
         data() {
           return {
-            value: '',
+            value: new Date(2019, 0, 1, 18, 50),
             pickerOptions: {
               selectableRange: ['17:30:00 - 18:30:00', '18:50:00 - 20:30:00', '21:00:00 - 22:00:00']
             }
@@ -2323,14 +2323,11 @@ describe('DatePicker', () => {
           expect(disabledHours[disabledHours.length - 2]).to.equal(16);
           expect(disabledHours[disabledHours.length - 1]).to.equal(23);
           const minutesEl = list[1];
-          hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
-          setTimeout(_ => {
-            const disabledMinutes = [].slice
-              .call(minutesEl.querySelectorAll('.disabled'))
-              .map(node => Number(node.textContent));
-            expect(disabledMinutes.length).to.equal(19);
-            done();
-          }, DELAY);
+          const disabledMinutes = [].slice
+            .call(minutesEl.querySelectorAll('.disabled'))
+            .map(node => Number(node.textContent));
+          expect(disabledMinutes.length).to.equal(19);
+          done();
         }, DELAY);
       }, DELAY);
     });
