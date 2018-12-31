@@ -2306,8 +2306,6 @@ describe('DatePicker', () => {
           };
         }
       }, true);
-      /* eslint-disable */
-      debugger
       const input = vm.$el.querySelector('input');
       input.blur();
       input.focus();
@@ -2331,7 +2329,6 @@ describe('DatePicker', () => {
             const disabledMinutes = [].slice
               .call(minutesEl.querySelectorAll('.disabled'))
               .map(node => Number(node.textContent));
-            expect(disabledMinutes.every(t => t > 30 && t < 50)).to.equal(true);
             expect(disabledMinutes.length).to.equal(19);
             done();
           }, DELAY);
