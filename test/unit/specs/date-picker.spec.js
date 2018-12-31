@@ -2328,7 +2328,6 @@ describe('DatePicker', () => {
             const disabledMinutes = [].slice
               .call(minutesEl.querySelectorAll('.disabled'))
               .map(node => Number(node.textContent));
-            console.log(disabledMinutes)
             expect(disabledMinutes.length).to.equal(19);
             done();
           }, 2000);
