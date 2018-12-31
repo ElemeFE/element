@@ -2330,9 +2330,9 @@ describe('DatePicker', () => {
               .map(node => Number(node.textContent));
             expect(disabledMinutes.length).to.equal(19);
             done();
-          }, 2000);
-        }, 2000);
-      }, 2000);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
     });
 
   });
