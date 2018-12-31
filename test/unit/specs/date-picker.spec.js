@@ -2306,6 +2306,8 @@ describe('DatePicker', () => {
           };
         }
       }, true);
+      /* eslint-disable */
+      debugger
       const input = vm.$el.querySelector('input');
       input.blur();
       input.focus();
@@ -2321,7 +2323,8 @@ describe('DatePicker', () => {
             .call(hoursEl.querySelectorAll('.disabled'))
             .map(node => Number(node.textContent));
           hoursEl.querySelectorAll('.disabled')[0].click();
-          expect(disabledHours).to.not.include.members([17, 18, 19, 20, 21, 22]);
+          expect(disabledHours[disabledHours.length-2]).to.equal(16)
+          expect(disabledHours[disabledHours.length-1]).to.equal(23)
           const minutesEl = list[1];
           hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
           setTimeout(_ => {
