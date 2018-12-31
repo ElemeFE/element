@@ -2320,7 +2320,6 @@ describe('DatePicker', () => {
           const disabledHours = [].slice
             .call(hoursEl.querySelectorAll('.disabled'))
             .map(node => Number(node.textContent));
-          hoursEl.querySelectorAll('.disabled')[0].click();
           expect(disabledHours[disabledHours.length - 2]).to.equal(16);
           expect(disabledHours[disabledHours.length - 1]).to.equal(23);
           const minutesEl = list[1];
@@ -2329,11 +2328,12 @@ describe('DatePicker', () => {
             const disabledMinutes = [].slice
               .call(minutesEl.querySelectorAll('.disabled'))
               .map(node => Number(node.textContent));
+            console.log(disabledMinutes)
             expect(disabledMinutes.length).to.equal(19);
             done();
-          }, DELAY);
-        }, DELAY);
-      }, DELAY);
+          }, 2000);
+        }, 2000);
+      }, 2000);
     });
 
   });
