@@ -216,7 +216,7 @@ TableStore.prototype.mutations = {
   },
 
   sort(states, options) {
-    const { prop, order } = options;
+    const { prop, order, silent } = options;
     if (prop) {
       states.sortProp = prop;
       states.sortOrder = order || 'ascending';
@@ -231,7 +231,7 @@ TableStore.prototype.mutations = {
         }
 
         if (states.sortingColumn) {
-          this.commit('changeSortCondition');
+          this.commit('changeSortCondition', { silent });
         }
       });
     }
