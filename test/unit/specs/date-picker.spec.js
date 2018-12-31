@@ -2321,8 +2321,8 @@ describe('DatePicker', () => {
             .call(hoursEl.querySelectorAll('.disabled'))
             .map(node => Number(node.textContent));
           hoursEl.querySelectorAll('.disabled')[0].click();
-          expect(disabledHours[disabledHours.length-2]).to.equal(16)
-          expect(disabledHours[disabledHours.length-1]).to.equal(23)
+          expect(disabledHours[disabledHours.length - 2]).to.equal(16);
+          expect(disabledHours[disabledHours.length - 1]).to.equal(23);
           const minutesEl = list[1];
           hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
           setTimeout(_ => {
