@@ -2,6 +2,9 @@ import { createVue, destroyVM } from '../util.js';
 import ajax from 'packages/upload/src/ajax';
 const noop = () => {
 };
+
+const DELAY = 100;
+
 const option = {
   onSuccess: noop,
   data: { a: 'abc', b: 'bcd' },
@@ -154,7 +157,7 @@ describe('Upload', () => {
 
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
-      }, 100);
+      }, DELAY);
     });
 
     it('upload fail', done => {
@@ -174,7 +177,7 @@ describe('Upload', () => {
 
       setTimeout(() => {
         requests[0].respond(400, {}, 'error 400');
-      }, 100);
+      }, DELAY);
     });
     it('preview file', done => {
       const file = new Blob([JSON.stringify({}, null, 2)], {
@@ -189,16 +192,49 @@ describe('Upload', () => {
       };
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$nextTick(_ => {
+        setTimeout(_ => {
           uploader.$el.querySelector('.el-upload-list .is-success a').click();
-        });
+        }, DELAY);
       };
 
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
 
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
-      }, 100);
+      }, DELAY);
+    });
+
+    it('add files', done => {
+      const props = {
+        action: '/upload',
+        props: {
+          onFile: (files) => {
+            expect(files[0].name).to.equal('file0.png');
+            expect(files.length).to.equal(2);
+            done();
+          },
+          multiple: true
+        }
+      };
+      uploader = createVue({
+        render(h) {
+          return (
+            <el-upload {...props} ref="upload">
+              <el-button size="small" type="primary">点击上传</el-button>
+            </el-upload>
+          );
+        }
+      }, true).$refs.upload;
+      const files = [];
+      for (let i = 0; i < 2; i += 1) {
+        const file = new Blob([JSON.stringify({a: i}, null, 2)], {
+          type: 'application/json'
+        });
+        file.name = `file${i}.png`;
+        files.push(file);
+      }
+
+      uploader.$refs['upload-inner'].handleChange({ target: { files }});
     });
     it('file remove', done => {
       const file = new Blob([JSON.stringify({}, null, 2)], {
@@ -209,17 +245,17 @@ describe('Upload', () => {
 
       handlers.onSuccess = (res, file, fileList) => {
         uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
-        uploader.$nextTick(_ => {
+        setTimeout(_ => {
           expect(uploader.fileList.length).to.equal(0);
           done();
-        });
+        }, DELAY);
       };
 
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
 
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
-      }, 100);
+      }, DELAY);
     });
     it('clear files', done => {
       const file = new Blob([JSON.stringify({}, null, 2)], {
@@ -230,17 +266,17 @@ describe('Upload', () => {
 
       handlers.onSuccess = (res, file, fileList) => {
         uploader.clearFiles();
-        uploader.$nextTick(_ => {
+        setTimeout(_ => {
           expect(uploader.fileList.length).to.equal(0);
           done();
-        });
+        }, DELAY);
       };
 
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
 
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
-      }, 100);
+      }, DELAY);
     });
     it('beforeUpload return promise', done => {
       const spy = sinon.spy();
@@ -261,7 +297,7 @@ describe('Upload', () => {
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
-      }, 100);
+      }, DELAY);
     });
     it('beforeRemove return rejected promise', done => {
       const spy = sinon.spy();
@@ -288,7 +324,7 @@ describe('Upload', () => {
       uploader.$refs['upload-inner'].handleChange({ target: { files }});
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
-      }, 100);
+      }, DELAY);
     });
     it('limit files', done => {
       const files = [{
@@ -305,13 +341,13 @@ describe('Upload', () => {
       }];
 
       handlers.onExceed = (files, fileList) => {
-        uploader.$nextTick(_ => {
+        setTimeout(_ => {
           expect(uploader.uploadFiles.length).to.equal(1);
           done();
-        });
+        }, DELAY);
       };
 
-      uploader.$nextTick(_ => uploader.$refs['upload-inner'].handleChange({ target: { files }}));
+      setTimeout(_ => uploader.$refs['upload-inner'].handleChange({ target: { files }}), DELAY);
     });
   });
 });

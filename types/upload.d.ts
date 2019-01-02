@@ -68,6 +68,9 @@ export declare class ElUpload extends ElementUIComponent {
   /** Accepted file types, will not work when thumbnail-mode is true */
   accept: string
 
+  /** Hook function when adding files to the list */
+  onFile: (files: ElUploadInternalFileDetail[]) => void
+
   /** Hook function when clicking the uploaded files */
   onPreview: (file: ElUploadInternalFileDetail) => void
 
