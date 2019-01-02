@@ -126,7 +126,7 @@
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="selectionMode !== 'dates' && selectableRange.length == 0">
+          v-show="selectionMode !== 'dates'">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -223,9 +223,7 @@
         const format = timeFormat => {this.$refs.timepicker.format = timeFormat;};
         const value = value => {this.$refs.timepicker.value = value;};
         const date = date => {this.$refs.timepicker.date = date;};
-        const selectableRange = selectableRange => {
-          this.$refs.timepicker.selectableRange = selectableRange;
-        };
+        const selectableRange = selectableRange => {this.$refs.timepicker.selectableRange = selectableRange;};
 
         this.$watch('value', value);
         this.$watch('date', date);
@@ -513,8 +511,7 @@
         format: '',
         arrowControl: false,
         userInputDate: null,
-        userInputTime: null,
-        timePickerOptions: [] // use this options for time's selectablerange
+        userInputTime: null
       };
     },
 
