@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
 import merge from 'element-ui/src/utils/merge';
-import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import { orderBy, getColumnById, getRowIdentity, getColumnByKey } from './util';
 
 const sortData = (data, states) => {
@@ -192,17 +191,6 @@ TableStore.prototype.mutations = {
 
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
-
-    const { $el, highlightCurrentRow } = this.table;
-    if ($el && highlightCurrentRow) {
-      const data = states.data;
-      const tr = $el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const row = rows[data.indexOf(states.currentRow)];
-
-      [].forEach.call(rows, row => removeClass(row, 'current-row'));
-      addClass(row, 'current-row');
-    }
 
     if (!options || !options.silent) {
       this.table.$emit('sort-change', {
