@@ -117,12 +117,16 @@
   @include e(suffix) {
     position: absolute;
     height: 100%;
-    right: 15px;
-    top: 10px;
+    right: 10px;
+    top: 50%;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
     pointer-events: none;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @include e(suffix-inner) {
@@ -132,11 +136,15 @@
   @include e(prefix) {
     position: absolute;
     height: 100%;
-    left: 15px;
-    top: 3px;
+    left: 10px;
+    top: 50%;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @include e(icon) {
