@@ -36,6 +36,7 @@ import Breadcrumb from '../packages/breadcrumb/index.js';
 import BreadcrumbItem from '../packages/breadcrumb-item/index.js';
 import Form from '../packages/form/index.js';
 import FormItem from '../packages/form-item/index.js';
+import validatorMessages from '../packages/form/src/validatorMessages';
 import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
@@ -144,6 +145,7 @@ const components = [
 const install = function(Vue, opts = {}) {
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
+  validatorMessages.set(opts.validatorMessages);
 
   components.forEach(component => {
     Vue.component(component.name, component);

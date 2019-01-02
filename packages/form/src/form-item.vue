@@ -39,6 +39,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
+  import validatorMessages from './validatorMessages';
 
   export default {
     name: 'ElFormItem',
@@ -190,6 +191,7 @@
         descriptor[this.prop] = rules;
 
         const validator = new AsyncValidator(descriptor);
+        validator.messages(validatorMessages.fetch());
         const model = {};
 
         model[this.prop] = this.fieldValue;
