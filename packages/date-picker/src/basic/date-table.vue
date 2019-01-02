@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, nextDate, isDate, clearTime as _clearTime} from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, prevDate, nextDate, isDate, clearTime as _clearTime} from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import { arrayFindIndex, arrayFind, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
@@ -323,7 +323,7 @@
 
         if (isDate(this.value)) {
           const dayOffset = (this.value.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
-          const weekDate = new Date(this.value.getTime() - (dayOffset * 86400000));
+          const weekDate = prevDate(this.value, dayOffset);
           return weekDate.getTime() === newDate.getTime();
         }
         return false;
