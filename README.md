@@ -231,6 +231,11 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 <a href="https://opencollective.com/element/sponsor/28/website" target="_blank"><img src="https://opencollective.com/element/sponsor/28/avatar.svg"></a>
 <a href="https://opencollective.com/element/sponsor/29/website" target="_blank"><img src="https://opencollective.com/element/sponsor/29/avatar.svg"></a>
 
+## Join Discusion Group
+
+Scan the QR code using [Dingtalk App](https://www.dingtalk.com/) to join in discusion group :
+
+<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/50584519-07871300-0eab-11e9-91a6-685076d5ee13.png" width="300">
 
 
 ## LICENSE
