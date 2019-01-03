@@ -828,4 +828,68 @@ describe('Select', () => {
       expect(select.$nextTick.callCount).to.equal(1);
     });
   });
+
+  it('refresh tag when user focus on and data is changed', done => {
+    destroyVM(vm);
+    const options1 = [{
+      value: '选项1',
+      label: '黄金糕'
+    }, {
+      value: '选项2',
+      label: '双皮奶'
+    }, {
+      value: 'tag',
+      label: '蚵仔煎'
+    }, {
+      value: '选项4',
+      label: '龙须面'
+    }, {
+      value: '选项5',
+      label: '北京烤鸭'
+    }];
+    vm = createVue({
+      template: `
+        <div>
+          <el-select
+            ref="select"
+            v-model="value"
+            multiple
+            @focus="handleFocus"
+            allow-create>
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          options: [],
+          value: ['tag']
+        };
+      },
+      methods: {
+        handleFocus() {
+          this.options = options1;
+          setTimeout(() => {
+            expect(vm.$el.querySelector('.el-select__tags-text').innerText).to.equal('蚵仔煎');
+            const dropdownItems = vm.$el.querySelectorAll('.el-select-dropdown__item');
+            expect(dropdownItems.length).to.equal(options1.length);
+            for (let i = 0; i < options1.length; i += 1) {
+              expect(dropdownItems[i].innerText).to.equal(options1[i].label);
+            }
+            done();
+          }, 100);
+        }
+      }
+    }, true);
+
+    setTimeout(() => {
+      expect(vm.$el.querySelector('.el-select__tags-text').innerText).to.equal('tag');
+      vm.$el.querySelector('input').focus();
+    }, 100);
+  });
 });
