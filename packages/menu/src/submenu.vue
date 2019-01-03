@@ -275,8 +275,7 @@
             v-show={opened}
             class={[`el-menu--${mode}`, popperClass]}
             on-mouseenter={this.handleMouseenter}
-            on-mouseleave={this.handleMouseleave}
-            on-focus={this.handleMouseenter}>
+            on-mouseleave={this.handleMouseleave}>
             <ul
               role="menu"
               class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
@@ -317,7 +316,6 @@
           aria-expanded={opened}
           on-mouseenter={this.handleMouseenter}
           on-mouseleave={this.handleMouseleave}
-          on-focus={this.handleMouseenter}
         >
           <div
             class="el-submenu__title"
