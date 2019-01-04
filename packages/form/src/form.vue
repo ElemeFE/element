@@ -135,7 +135,7 @@
         props = [].concat(props);
         const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
         if (!fields.length) {
-          console.warn('[Element Warn]please pass correct props!');
+          confirm.warn('[Element Warn]please pass correct props!');
           return;
         }
 
