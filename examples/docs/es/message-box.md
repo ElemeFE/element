@@ -80,6 +80,7 @@
                 }, 300);
               }, 3000);
             } else {
+              instance.confirmButtonLoading = false;
               done();
             }
           }
@@ -294,6 +295,7 @@ Puede ser personalizado para mostrar diversos contenidos.
                 }, 300);
               }, 3000);
             } else {
+              instance.confirmButtonLoading = false;
               done();
             }
           }

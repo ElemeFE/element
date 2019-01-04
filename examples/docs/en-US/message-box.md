@@ -80,6 +80,7 @@
                 }, 300);
               }, 3000);
             } else {
+              instance.confirmButtonLoading = false;
               done();
             }
           }
@@ -293,6 +294,7 @@ Can be customized to show various content.
                 }, 300);
               }, 3000);
             } else {
+              instance.confirmButtonLoading = false;
               done();
             }
           }

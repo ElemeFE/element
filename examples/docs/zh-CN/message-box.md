@@ -81,6 +81,7 @@
                 }, 300);
               }, 3000);
             } else {
+              instance.confirmButtonLoading = false;
               done();
             }
           }
@@ -291,6 +292,7 @@
                 }, 300);
               }, 3000);
             } else {
+              instance.confirmButtonLoading = false;
               done();
             }
           }
