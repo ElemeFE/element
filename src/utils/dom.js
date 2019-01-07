@@ -21,9 +21,9 @@ const camelCase = function(name) {
 /* istanbul ignore next */
 export const on = (function() {
   if (!isServer && document.addEventListener) {
-    return function(element, event, handler) {
+    return function(element, event, handler, useCapture = false) {
       if (element && event && handler) {
-        element.addEventListener(event, handler, false);
+        element.addEventListener(event, handler, useCapture);
       }
     };
   } else {

@@ -106,7 +106,7 @@ export default {
     }
     if (this.trigger === 'click') {
       on(reference, 'click', this.doToggle);
-      on(document, 'click', this.handleDocumentClick);
+      on(document, 'click', this.handleDocumentClick, true);
     } else if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
       on(popper, 'mouseenter', this.handleMouseEnter);
