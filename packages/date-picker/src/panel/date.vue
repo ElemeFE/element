@@ -158,7 +158,8 @@
     nextMonth,
     changeYearMonthAndClampDate,
     extractDateFormat,
-    extractTimeFormat
+    extractTimeFormat,
+    timeWithinRange
   } from '../util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
@@ -175,7 +176,6 @@
     directives: { Clickoutside },
 
     watch: {
-
       showTime(val) {
         /* istanbul ignore if */
         if (!val) return;
@@ -337,9 +337,16 @@
 
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
-          this.date = this.value
+          let newDate = this.value
             ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
             : modifyWithTimeString(value, this.defaultTime);
+          // change default time while out of selectableRange
+          if (this.selectableRange.length > 0 && !timeWithinRange(newDate, this.selectableRange, this.format || 'HH:mm:ss')) {
+            newDate.setHours(this.selectableRange[0][0].getHours());
+            newDate.setMinutes(this.selectableRange[0][0].getMinutes());
+            newDate.setSeconds(this.selectableRange[0][0].getSeconds());
+          }
+          this.date = newDate;
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);
@@ -365,6 +372,10 @@
         //       consider disable "now" button in the future
         if (!this.disabledDate || !this.disabledDate(new Date())) {
           this.date = new Date();
+          // if currentTime is not in range, return
+          if (this.selectableRange.length > 0 && !timeWithinRange(this.date, this.selectableRange, this.format || 'HH:mm:ss')) {
+            return;
+          }
           this.emit(this.date);
         }
       },
@@ -451,6 +462,10 @@
       handleVisibleTimeChange(value) {
         const time = parseDate(value, this.timeFormat);
         if (time) {
+          // if input value is not in range, return
+          if (this.selectableRange.length > 0 && !timeWithinRange(time, this.selectableRange, this.format || 'HH:mm:ss')) {
+            return;
+          }
           this.date = modifyDate(time, this.year, this.month, this.monthDate);
           this.userInputTime = null;
           this.$refs.timepicker.value = this.date;
@@ -504,7 +519,7 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
-        selectableRange: '',
+        selectableRange: [],
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,
