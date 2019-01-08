@@ -290,20 +290,24 @@ export default {
       this.emitChange();
     },
 
-    prev() {
+    prev(event) {
+      event.stopPropagation();
       if (this.disabled) return;
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
       this.$emit('prev-click', this.internalCurrentPage);
       this.emitChange();
+      return false;
     },
 
-    next() {
+    next(event) {
+      event.stopPropagation();
       if (this.disabled) return;
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
       this.$emit('next-click', this.internalCurrentPage);
       this.emitChange();
+      return false;
     },
 
     getValidCurrentPage(value) {
