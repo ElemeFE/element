@@ -478,12 +478,11 @@
       },
 
       isValidValue(value) {
-        return value && !isNaN(value) && (
+        return value && !isNaN(value) && this.checkDateWithinRange(value) && (
           typeof this.disabledDate === 'function'
             ? !this.disabledDate(value)
             : true
-        ) && this.checkDateWithinRange(value)
-        ;
+        );
       },
 
       getDefaultValue() {
