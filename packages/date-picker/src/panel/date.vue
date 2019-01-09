@@ -341,10 +341,8 @@
             ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
             : modifyWithTimeString(value, this.defaultTime);
           // change default time while out of selectableRange
-          if (this.selectableRange.length > 0 && !timeWithinRange(newDate, this.selectableRange, this.format || 'HH:mm:ss')) {
-            newDate.setHours(this.selectableRange[0][0].getHours());
-            newDate.setMinutes(this.selectableRange[0][0].getMinutes());
-            newDate.setSeconds(this.selectableRange[0][0].getSeconds());
+          if (!this.checkDateWithinRange(newDate)) {
+            newDate = modifyDate(this.selectableRange[0][0], value.getFullYear(), value.getMonth(), value.getDate());
           }
           this.date = newDate;
           this.emit(this.date, this.showTime);
@@ -370,12 +368,8 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if (!this.disabledDate || !this.disabledDate(new Date())) {
+        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(this.date)) {
           this.date = new Date();
-          // if currentTime is not in range, return
-          if (this.selectableRange.length > 0 && !timeWithinRange(this.date, this.selectableRange, this.format || 'HH:mm:ss')) {
-            return;
-          }
           this.emit(this.date);
         }
       },
@@ -461,11 +455,7 @@
 
       handleVisibleTimeChange(value) {
         const time = parseDate(value, this.timeFormat);
-        if (time) {
-          // if input value is not in range, return
-          if (this.selectableRange.length > 0 && !timeWithinRange(time, this.selectableRange, this.format || 'HH:mm:ss')) {
-            return;
-          }
+        if (time && this.checkDateWithinRange(time)) {
           this.date = modifyDate(time, this.year, this.month, this.monthDate);
           this.userInputTime = null;
           this.$refs.timepicker.value = this.date;
@@ -499,6 +489,12 @@
         // if default-value is set, return it
         // otherwise, return now (the moment this method gets called)
         return this.defaultValue ? new Date(this.defaultValue) : new Date();
+      },
+
+      checkDateWithinRange(date) {
+        return this.selectableRange.length > 0
+          ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
+          : true;
       }
     },
 
