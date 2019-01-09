@@ -368,7 +368,7 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(this.date)) {
+        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
           this.date = new Date();
           this.emit(this.date);
         }
@@ -482,7 +482,8 @@
           typeof this.disabledDate === 'function'
             ? !this.disabledDate(value)
             : true
-        );
+        ) && this.checkDateWithinRange(value)
+        ;
       },
 
       getDefaultValue() {
