@@ -101,7 +101,7 @@ const NewPopper = {
   },
   methods: Popper.methods,
   data() {
-    return merge({ visibleArrow: true }, Popper.data);
+    return merge({ visibleArrow: true, referenceElm: null }, Popper.data);
   },
   beforeDestroy: Popper.beforeDestroy
 };
@@ -450,14 +450,9 @@ export default {
       return this.type.indexOf('range') > -1;
     },
 
-    reference() {
-      const reference = this.$refs.reference;
-      return reference.$el || reference;
-    },
-
     refInput() {
-      if (this.reference) {
-        return [].slice.call(this.reference.querySelectorAll('input'));
+      if (this.referenceElm) {
+        return [].slice.call(this.referenceElm.querySelectorAll('input'));
       }
       return [];
     },
@@ -828,7 +823,7 @@ export default {
       this.picker.defaultTime = this.defaultTime;
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
-      this.picker.width = this.reference.getBoundingClientRect().width;
+      this.picker.width = this.referenceElm.getBoundingClientRect().width;
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
@@ -926,7 +921,19 @@ export default {
       } else {
         return true;
       }
+    },
+
+    updateRef() {
+      this.referenceElm = this.$refs.reference.$el || this.$refs.reference;
     }
+  },
+
+  mounted() {
+    this.updateRef();
+  },
+
+  updated() {
+    this.updateRef();
   }
 };
 </script>
