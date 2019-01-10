@@ -105,6 +105,7 @@
       @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
+        :placement="popperPlacement"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
@@ -302,6 +303,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      popperPlacement: {
+        type: String,
+        default: 'bottom-start'
       }
     },
 

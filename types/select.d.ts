@@ -72,6 +72,9 @@ export declare class ElSelect extends ElementUIComponent {
   /** Custom class name for Select's dropdown */
   popperClass: string
 
+  /** Custom placement for Select's dropdown */
+  popperPlacement: string
+
   /** Select first matching option on enter key. Use with filterable or remote */
   defaultFirstOption: boolean
 

@@ -689,6 +689,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. | string   | —                 | No matching data |
 | no-data-text         | texto mostrado cuando no hay opciones    | string   | —                 | No data          |
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
+| popper-placement     | colocación del menú desplegable del Select | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom-start |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
 | popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | - | true |
