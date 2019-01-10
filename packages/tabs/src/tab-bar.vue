@@ -15,7 +15,7 @@
     computed: {
       barStyle: {
         get() {
-          if (!this.$parent.$refs.tabs) return {};
+          if (!this.tabs && !this.$parent.$refs.tabs) return {};
           let style = {};
           let offset = 0;
           let tabSize = 0;
