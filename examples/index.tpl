@@ -14,8 +14,8 @@
       }
     </script>
     <div id="app"></div><% if (process.env.NODE_ENV === 'production') { %>
-    <script src="//cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.runtime.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/vue-router@2.7.0/dist/vue-router.min.js"></script><% } %>
+    <script src="//shadow.elemecdn.com/npm/vue@2.5.2/dist/vue.runtime.min.js"></script>
+    <script src="//shadow.elemecdn.com/npm/vue-router@2.7.0/dist/vue-router.min.js"></script><% } %>
   </body>
   <% if (process.env.NODE_ENV === 'production') { %><script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
