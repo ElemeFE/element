@@ -359,8 +359,7 @@
         try {
           // setData is required for draggable to work in FireFox
           // the content has to be '' so dragging a node out of the tree won't open a new tab in FireFox
-          var j = JSON.stringify(treeNode.node.data);
-          event.dataTransfer.setData('data', j);
+          event.dataTransfer.setData('text/plain', '');
         } catch (e) {}
         dragState.draggingNode = treeNode;
         this.$emit('node-drag-start', treeNode.node, event);
