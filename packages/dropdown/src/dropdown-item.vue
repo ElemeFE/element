@@ -9,6 +9,7 @@
     :aria-disabled="disabled"
     :tabindex="disabled ? null : -1"
   >
+    <i :class="icon" v-if="icon"></i>
     <slot></slot>
   </li>
 </template>
@@ -23,7 +24,8 @@
     props: {
       command: {},
       disabled: Boolean,
-      divided: Boolean
+      divided: Boolean,
+      icon: String
     },
 
     methods: {
