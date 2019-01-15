@@ -91,6 +91,31 @@
           value: 'Guangzhou',
           label: 'Guangzhou'
         }],
+        options6: [{
+          label: 'Popular cities',
+          options: [{
+            value: 'Shanghai',
+            label: 'Shanghai'
+          }, {
+            value: 'Beijing',
+            label: 'Beijing'
+          }]
+        }, {
+          label: 'City Name',
+          options: [{
+            value: 'Chengdu',
+            label: 'Chengdu'
+          }, {
+            value: 'Shenzhen',
+            label: 'Shenzhen'
+          }, {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          }, {
+            value: 'Dalian',
+            label: 'Dalian'
+          }]
+        }],
         value: '',
         value2: '',
         value3: '',
@@ -102,6 +127,8 @@
         value9: [],
         value10: [],
         value11: [],
+        value12: '',
+        columns1: 2,
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -659,6 +686,71 @@ Crear y seleccionar nuevos items que no están incluidas en las opciones de sele
 ```
 :::
 
+### Varias columnas
+
+Establecer las opciones de varias columnas.
+
+:::demo Utilizando el atributo `columns-number`, los usuarios pueden configurar opciones de varias columnas. Atributo `dropdown-width` puede fijar la anchura de dropdown.
+
+```html
+<template>
+  <el-select
+    v-model="value12"
+    :columns-number="columns1"
+    dropdown-width="auto"
+    placeholder="Select">
+    <el-option-group
+      v-for="group in options6"
+      :key="group.label"
+      :label="group.label">
+      <el-option
+        v-for="item in group.options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-option-group>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        columns1: 2,
+        options6: [{
+          label: 'Popular cities',
+          options: [{
+            value: 'Shanghai',
+            label: 'Shanghai'
+          }, {
+            value: 'Beijing',
+            label: 'Beijing'
+          }]
+        }, {
+          label: 'City name',
+          options: [{
+            value: 'Chengdu',
+            label: 'Chengdu'
+          }, {
+            value: 'Shenzhen',
+            label: 'Shenzhen'
+          }, {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          }, {
+            value: 'Dalian',
+            label: 'Dalian'
+          }]
+        }],
+        value12: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 :::tip
 
 Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `value-key` como el nombre único de la clave de identidad.
@@ -693,6 +785,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
 | popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | - | true |
 | automatic-dropdown | para non-filterable Select, este `prop` decide si el menú de opciones aparece cuando la entrada está enfocada | boolean | - | false |
+| column-number | Número de columna de varias columnas | number | - | 1 |
+| dropdown-width | La anchura de dropdown. Solo es util cuando `column-number` mas grande entonces 1. La uso por `'200px'` o `200`. De lo contrario, será puesto a la entrada de "ancho". | string / number | 'auto' / '200px' / 200 | 'auto' |
 
 ### Eventos Select
 | Nombre         | Descripción                              | Parametros                               |

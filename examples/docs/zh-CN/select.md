@@ -91,6 +91,31 @@
           value: 'Guangzhou',
           label: '广州'
         }],
+        options6: [{
+          label: '热门城市',
+          options: [{
+            value: 'Shanghai',
+            label: '上海'
+          }, {
+            value: 'Beijing',
+            label: '北京'
+          }]
+        }, {
+          label: '城市名',
+          options: [{
+            value: 'Chengdu',
+            label: '成都'
+          }, {
+            value: 'Shenzhen',
+            label: '深圳'
+          }, {
+            value: 'Guangzhou',
+            label: '广州'
+          }, {
+            value: 'Dalian',
+            label: '大连'
+          }]
+        }],
         value: '',
         value2: '',
         value3: '',
@@ -102,6 +127,8 @@
         value9: '',
         value10: [],
         value11: [],
+        value12: '',
+        columns1: 2,
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -650,6 +677,70 @@
 ```
 :::
 
+### 多列选项
+
+对备选项进行分列展示
+
+:::demo 使用`column-number`属性对备选项进行分列，配合`dropdown-width`属性设置下拉框总宽度
+```html
+<template>
+  <el-select
+    v-model="value12"
+    :columns-number="columns1"
+    dropdown-width="auto"
+    placeholder="请选择">
+    <el-option-group
+      v-for="group in options6"
+      :key="group.label"
+      :label="group.label">
+      <el-option
+        v-for="item in group.options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-option-group>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        columns1: 2,
+        options6: [{
+          label: '热门城市',
+          options: [{
+            value: 'Shanghai',
+            label: '上海'
+          }, {
+            value: 'Beijing',
+            label: '北京'
+          }]
+        }, {
+          label: '城市名',
+          options: [{
+            value: 'Chengdu',
+            label: '成都'
+          }, {
+            value: 'Shenzhen',
+            label: '深圳'
+          }, {
+            value: 'Guangzhou',
+            label: '广州'
+          }, {
+            value: 'Dalian',
+            label: '大连'
+          }]
+        }],
+        value12: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 :::tip
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
 :::
@@ -682,6 +773,8 @@
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| column-number | 选项分列显示的列数 | number | - | 1 |
+| dropdown-width | 下拉框宽度，只有在`column-number`大于1时才会生效，支持`'200px'`或`200`，其他值为继承输入框的宽度 | string / number | 'auto' / '200px' / 200 | 'auto' |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

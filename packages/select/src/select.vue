@@ -105,6 +105,7 @@
       @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
+        :style="dropdownSize"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
@@ -235,6 +236,24 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
+      },
+
+      styleColumns() {
+        return this.columnsNumber > 1 ? {
+          width: (100 / this.columnsNumber) + '%',
+          display: 'inline-block'
+        } : {};
+      },
+
+      dropdownSize() {
+        if (this.columnsNumber > 1) {
+          let ddw = this.dropdownWidth || 'auto';
+          ddw = ddw.toString().toLowerCase();
+          ddw = ddw.match(/\d+$/) ? ddw + 'px' : ddw;
+          return ddw.match(/\d+px/) ? {width: ddw} : {width: this.inputWidth};
+        } else {
+          return {};
+        }
       }
     },
 
@@ -269,6 +288,11 @@
       },
       automaticDropdown: Boolean,
       size: String,
+      columnsNumber: {
+        type: Number,
+        default: 1
+      },
+      dropdownWidth: [String, Number],
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,

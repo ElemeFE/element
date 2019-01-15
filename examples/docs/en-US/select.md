@@ -91,6 +91,31 @@
           value: 'Guangzhou',
           label: 'Guangzhou'
         }],
+        options6: [{
+          label: 'Popular cities',
+          options: [{
+            value: 'Shanghai',
+            label: 'Shanghai'
+          }, {
+            value: 'Beijing',
+            label: 'Beijing'
+          }]
+        }, {
+          label: 'City Name',
+          options: [{
+            value: 'Chengdu',
+            label: 'Chengdu'
+          }, {
+            value: 'Shenzhen',
+            label: 'Shenzhen'
+          }, {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          }, {
+            value: 'Dalian',
+            label: 'Dalian'
+          }]
+        }],
         value: '',
         value2: '',
         value3: '',
@@ -102,6 +127,8 @@
         value9: [],
         value10: [],
         value11: [],
+        value12: '',
+        columns1: 2,
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -655,6 +682,71 @@ Create and select new items that are not included in select options
 ```
 :::
 
+### Multiple columns
+
+Set options to multiple columns.
+
+:::demo By using the `columns-number` attribute, users can set options to multiple columns. Attribute `dropdown-width` can set the width of dropdown.
+
+```html
+<template>
+  <el-select
+    v-model="value12"
+    :columns-number="columns1"
+    dropdown-width="auto"
+    placeholder="Select">
+    <el-option-group
+      v-for="group in options6"
+      :key="group.label"
+      :label="group.label">
+      <el-option
+        v-for="item in group.options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-option-group>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        columns1: 2,
+        options6: [{
+          label: 'Popular cities',
+          options: [{
+            value: 'Shanghai',
+            label: 'Shanghai'
+          }, {
+            value: 'Beijing',
+            label: 'Beijing'
+          }]
+        }, {
+          label: 'City name',
+          options: [{
+            value: 'Chengdu',
+            label: 'Chengdu'
+          }, {
+            value: 'Shenzhen',
+            label: 'Shenzhen'
+          }, {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          }, {
+            value: 'Dalian',
+            label: 'Dalian'
+          }]
+        }],
+        value12: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 :::tip
 If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
 :::
@@ -687,6 +779,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 | popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
 | automatic-dropdown | for non-filterable Select, this prop decides if the option menu pops up when the input is focused | boolean | - | false |
+| column-number | Column number of multiple columns | number | - | 1 |
+| dropdown-width | The width of dropdown. Only useful when `column-number` larger then 1. Use it by`'200px'` or `200`, otherwise it will be set to the input width. | string / number | 'auto' / '200px' / 200 | 'auto' |
 
 ### Select Events
 | Event Name | Description | Parameters |

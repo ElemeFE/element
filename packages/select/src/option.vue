@@ -4,6 +4,7 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
+    :style="styleColumns"
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
@@ -79,6 +80,10 @@
         } else {
           return false;
         }
+      },
+
+      styleColumns() {
+        return this.select.styleColumns;
       }
     },
 
