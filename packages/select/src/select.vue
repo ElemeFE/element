@@ -240,7 +240,7 @@
 
       styleColumns() {
         return this.columnsNumber > 1 ? {
-          width: (100 / this.columnsNumber) + '%',
+          width: Math.floor(100 / this.columnsNumber * 100) / 100 + '%',
           display: 'inline-block'
         } : {};
       },
