@@ -4,6 +4,7 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
+    :title="showTitle ? currentLabel : ''"
     :style="styleColumns"
     :class="{
       'selected': itemSelected,
@@ -84,6 +85,10 @@
 
       styleColumns() {
         return this.select.styleColumns;
+      },
+
+      showTitle() {
+        return this.select.columnsNumber > 1;
       }
     },
 
