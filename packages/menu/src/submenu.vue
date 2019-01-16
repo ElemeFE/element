@@ -179,7 +179,7 @@
         this.dispatch('ElMenu', 'submenu-click', this);
       },
       handleMouseenter(event) {
-        if (!(!!window.ActiveXObject || 'ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
+        if (!('ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
           return;
         }
         const { rootMenu, disabled } = this;
