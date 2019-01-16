@@ -36,7 +36,7 @@ export default {
             }
           }, 0);
           if (column.formatter) {
-            sums[index] = column.formatter(null, column, sums[index], null)
+            sums[index] = column.formatter(null, column, sums[index], null);
           }
         } else {
           sums[index] = '';
