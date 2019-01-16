@@ -35,6 +35,9 @@ export default {
               return prev;
             }
           }, 0);
+          if (column.formatter) {
+            sums[index] = column.formatter(null, column, sums[index], null)
+          }
         } else {
           sums[index] = '';
         }
