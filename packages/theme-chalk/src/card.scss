@@ -3,7 +3,7 @@
 
 @include b(card) {
   border-radius: $--card-border-radius;
-  border: 1px solid $--card-border-color;
+  border: $--card-border-width solid $--card-border-color;
   background-color: $--color-white;
   overflow: hidden;
   color: $--color-text-primary;
@@ -22,7 +22,7 @@
 
   @include e(header) {
     padding: #{$--card-padding - 2 $--card-padding};
-    border-bottom: 1px solid $--card-border-color;
+    border-bottom: $--card-border-width solid $--card-border-color;
     box-sizing: border-box;
   }
 
