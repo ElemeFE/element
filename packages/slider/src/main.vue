@@ -45,13 +45,14 @@
         ref="button2"
         v-if="range">
       </slider-button>
-      <div
-        class="el-slider__stop"
-        v-for="(item, key) in stops"
-        :key="key"
-        :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
-        v-if="showStops">
-      </div>
+      <template v-if="showStops">
+        <div
+          class="el-slider__stop"
+          v-for="(item, key) in stops"
+          :key="key"
+          :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }">
+        </div>
+      </template>
     </div>
   </div>
 </template>
