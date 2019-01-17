@@ -12,6 +12,7 @@
   display: inline-block;
   white-space: nowrap;
   user-select: none;
+  margin-right: 30px;
 
   @include when(bordered) {
     padding: $--checkbox-bordered-padding;
@@ -239,8 +240,8 @@
     font-size: $--checkbox-font-size;
   }
 
-  & + .el-checkbox {
-    margin-left: 30px;
+  &:last-child {
+    margin-right: 0;
   }
 }
 
