@@ -16,10 +16,10 @@ export default {
       startTime: 'Aloitusaika',
       endDate: 'Lopetuspäivä',
       endTime: 'Lopetusaika',
-      prevYear: 'Edellinen Vuosi',
-      nextYear: 'Seuraava Vuosi',
-      prevMonth: 'Edellinen Kuukausi',
-      nextMonth: 'Seuraava Kuukausi',
+      prevYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      prevMonth: 'Edellinen kuukausi',
+      nextMonth: 'Seuraava kuukausi',
       year: '',
       month1: 'tammikuu',
       month2: 'helmikuu',
@@ -44,18 +44,18 @@ export default {
         sat: 'la'
       },
       months: {
-        jan: 'tam',
-        feb: 'hel',
-        mar: 'maa',
-        apr: 'huh',
-        may: 'tou',
-        jun: 'kes',
-        jul: 'hei',
+        jan: 'tammi',
+        feb: 'helmi',
+        mar: 'maalis',
+        apr: 'huhti',
+        may: 'touko',
+        jun: 'kesä',
+        jul: 'heinä',
         aug: 'elo',
-        sep: 'syy',
-        oct: 'lok',
-        nov: 'mar',
-        dec: 'jou'
+        sep: 'syys',
+        oct: 'loka',
+        nov: 'marras',
+        dec: 'joulu'
       }
     },
     select: {
@@ -82,7 +82,7 @@ export default {
       error: 'Virheellinen syöte'
     },
     upload: {
-      deleteTip: 'Lehdistö Poista että poistaa',
+      deleteTip: 'Poista Delete-näppäimellä',
       delete: 'Poista',
       preview: 'Esikatsele',
       continue: 'Jatka'
@@ -101,7 +101,7 @@ export default {
       noMatch: 'Ei vastaavia tietoja',
       noData: 'Ei tietoja',
       titles: ['Luettelo 1', 'Luettelo 2'],
-      filterPlaceholder: 'Kirjoita avainsana',
+      filterPlaceholder: 'Syötä hakusana',
       noCheckedFormat: '{total} kohdetta',
       hasCheckedFormat: '{checked}/{total} valittu'
     }
