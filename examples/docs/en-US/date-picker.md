@@ -480,7 +480,7 @@ When picking a date range, you can assign the time part for start date and end d
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | size | size of Input | string | large/small/mini | — |
 | editable | whether the input is editable | boolean | — | true |
-| clearable | Whether to show clear button | boolean | — | true |
+| clearable | whether to show clear button | boolean | — | true |
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
