@@ -111,6 +111,35 @@ const TableStore = function(table, initialState = {}) {
     selectOnIndeterminate: false
   };
 
+  this._toggleAllSelection = debounce(10, function(states) {
+    const data = states.data || [];
+    if (data.length === 0) return;
+    const selection = this.states.selection;
+    // when only some rows are selected (but not all), select or deselect all of them
+    // depending on the value of selectOnIndeterminate
+    const value = states.selectOnIndeterminate
+      ? !states.isAllSelected
+      : !(states.isAllSelected || selection.length);
+    let selectionChanged = false;
+    data.forEach((item, index) => {
+      if (states.selectable) {
+        if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
+          selectionChanged = true;
+        }
+      } else {
+        if (toggleRowSelection(states, item, value)) {
+          selectionChanged = true;
+        }
+      }
+    });
+    const table = this.table;
+    if (selectionChanged) {
+      table.$emit('selection-change', selection ? selection.slice() : []);
+    }
+    table.$emit('select-all', selection);
+    states.isAllSelected = value;
+  });
+
   for (let prop in initialState) {
     if (initialState.hasOwnProperty(prop) && this.states.hasOwnProperty(prop)) {
       this.states[prop] = initialState[prop];
@@ -335,36 +364,9 @@ TableStore.prototype.mutations = {
     this.updateAllSelected();
   },
 
-  toggleAllSelection: debounce(10, function(states) {
-    const data = states.data || [];
-    if (data.length === 0) return;
-    const selection = this.states.selection;
-    // when only some rows are selected (but not all), select or deselect all of them
-    // depending on the value of selectOnIndeterminate
-    const value = states.selectOnIndeterminate
-      ? !states.isAllSelected
-      : !(states.isAllSelected || selection.length);
-    let selectionChanged = false;
-
-    data.forEach((item, index) => {
-      if (states.selectable) {
-        if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
-          selectionChanged = true;
-        }
-      } else {
-        if (toggleRowSelection(states, item, value)) {
-          selectionChanged = true;
-        }
-      }
-    });
-
-    const table = this.table;
-    if (selectionChanged) {
-      table.$emit('selection-change', selection ? selection.slice() : []);
-    }
-    table.$emit('select-all', selection);
-    states.isAllSelected = value;
-  })
+  toggleAllSelection(state) {
+    this._toggleAllSelection(state);
+  }
 };
 
 const doFlattenColumns = (columns) => {
