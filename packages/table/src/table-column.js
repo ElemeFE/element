@@ -442,11 +442,20 @@ export default {
     const owner = this.owner;
     const parent = this.columnOrTableParent;
     let columnIndex;
+    let columns;
 
     if (!this.isSubColumn) {
-      columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
+      columns = parent.$refs.hiddenColumns.children;
     } else {
-      columnIndex = [].indexOf.call(parent.$el.children, this.$el);
+      columns = parent.$el.children;
+    }
+
+    while (columns.length) {
+      columnIndex = [].indexOf.call(columns, this.$el);
+      if (columnIndex >= 0) {
+        break;
+      }
+      columns = columns[0].children;
     }
 
     if (this.$scopedSlots.header) {
