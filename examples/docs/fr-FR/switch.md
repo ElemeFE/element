@@ -89,7 +89,7 @@ Switch est utilisé pour choisir entre deux états opposés.
 :::demo Vous pouvez utiliser `active-value` et `inactive-value` pour déterminer la valeur de chaque état. Ils prennent un `Boolean`, `String` ou `Number`.
 
 ```html
-<el-tooltip :content="'Valeur de l'état: ' + value5" placement="top">
+<el-tooltip :content="'Valeur de l\'état: ' + value5" placement="top">
   <el-switch
     v-model="value5"
     active-color="#13ce66"
