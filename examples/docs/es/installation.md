@@ -28,4 +28,4 @@ Si esta usando un CDN, una página con Hello-World es fácil con Element. [Onlin
 
 <iframe width="100%" height="600" src="//jsfiddle.net/hzfpyvg6/1213/embedded/html,result/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-Si esta usando npm y desea combinarlo con webpack, por favor continue a la siguiente página: Quick Start
+Si esta usando npm y desea combinarlo con webpack, por favor continue a la siguiente página: [Quick Start](/#/es/component/quickstart)

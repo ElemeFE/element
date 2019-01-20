@@ -1517,22 +1517,11 @@ describe('DatePicker', () => {
       const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
       td.click();
       setTimeout(_ => {
-        expect(vm.$refs.compo.picker.selectedDate).to.exist;
+        expect(vm.$refs.compo.value).to.be.an('array');
+        expect(vm.$refs.compo.value.length).to.equal(1);
+        expect(vm.$refs.compo.value[0]).to.be.a('number');
         expect(vm.value.length).to.equal(1);
         done();
-      }, DELAY);
-    });
-
-    it('value format', done => {
-      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
-      td.click();
-      setTimeout(_ => {
-        vm.$refs.compo.picker.$el.querySelector('.el-button--default').click();
-        setTimeout(() => {
-          expect(vm.$refs.compo.picker.selectedDate).to.exist;
-          expect(vm.value.length).to.equal(1);
-          done();
-        }, DELAY);
       }, DELAY);
     });
 
@@ -1771,7 +1760,6 @@ describe('DatePicker', () => {
             picker.$el.querySelector('td.available ~ td.available').click();
             setTimeout(_ => {
               expect(spy.calledOnce).to.equal(true);
-              console.log('first assert passed');
               // change event is not emitted if used does not change value
               // datarange also requires proper array equality check
               input.blur();
@@ -1784,7 +1772,6 @@ describe('DatePicker', () => {
                   endCell.click();
                   setTimeout(_ => {
                     expect(spy.calledOnce).to.equal(true);
-                    console.log('second assert passed');
                     done();
                   }, DELAY);
                 }, DELAY);
@@ -1923,6 +1910,17 @@ describe('DatePicker', () => {
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
 
+          const {
+            minDate,
+            maxDate
+          } = vm.picker;
+          expect(minDate.getHours()).to.be.equal(10);
+          expect(minDate.getMinutes()).to.be.equal(10);
+          expect(minDate.getSeconds()).to.be.equal(0);
+          expect(maxDate.getHours()).to.be.equal(10);
+          expect(maxDate.getMinutes()).to.be.equal(10);
+          expect(maxDate.getSeconds()).to.be.equal(0);
+
           triggerEvent(leftCell, 'mousemove', true);
           setTimeout(_ => {
             triggerEvent(leftCell, 'click', true);
@@ -2023,6 +2021,17 @@ describe('DatePicker', () => {
           const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
+
+          const {
+            minDate,
+            maxDate
+          } = vm.picker;
+          expect(minDate.getHours()).to.be.equal(10);
+          expect(minDate.getMinutes()).to.be.equal(10);
+          expect(minDate.getSeconds()).to.be.equal(0);
+          expect(maxDate.getHours()).to.be.equal(10);
+          expect(maxDate.getMinutes()).to.be.equal(10);
+          expect(maxDate.getSeconds()).to.be.equal(0);
 
           triggerEvent(leftCell, 'mousemove', true);
           setTimeout(_ => {
@@ -2180,6 +2189,43 @@ describe('DatePicker', () => {
         setTimeout(_ => {
           expect(input.value).to.exist;
           done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('confirm honors disabledDate', done => {
+      vm = createVue({
+        template: '<el-date-picker type="datetimerange" value-format="yyyy-MM-dd HH:mm:ss" v-model="value" :picker-options="pickerOptions" ref="compo" />',
+        data() {
+          return {
+            pickerOptions: {
+              disabledDate(date) {
+                return date.getTime() < new Date(2000, 9, 1); // 2000-10-01
+              }
+            },
+            value: ['2000-10-02 00:00:00', '2000-10-03 00:00:00']
+          };
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+      setTimeout(_ => {
+        // simulate user input of invalid date
+        vm.$refs.compo.picker.handleDateChange({ target: { value: '2000-09-01'} }, 'min');
+        setTimeout(_ => {
+          expect(vm.$refs.compo.picker.btnDisabled).to.equal(true); // invalid input disables button
+          vm.$refs.compo.picker.handleConfirm();
+          setTimeout(_ => {
+            expect(vm.$refs.compo.pickerVisible).to.equal(true); // can not confirm, picker remains open
+            // simulate click outside to close picker
+            vm.$refs.compo.handleClose();
+            setTimeout(_ => {
+              expect(vm.value).to.eql(['2000-10-02 00:00:00', '2000-10-03 00:00:00']);
+              done();
+            }, DELAY);
+          }, DELAY);
         }, DELAY);
       }, DELAY);
     });

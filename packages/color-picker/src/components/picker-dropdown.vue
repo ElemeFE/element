@@ -15,6 +15,7 @@
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
             @blur="handleConfirm"
+            :validate-event="false"
             size="mini">
           </el-input>
         </span>
@@ -109,8 +110,11 @@
         }
       },
 
-      currentColor(val) {
-        this.customInput = val;
+      currentColor: {
+        immediate: true,
+        handler(val) {
+          this.customInput = val;
+        }
       }
     }
   };

@@ -270,7 +270,7 @@ export default {
       fixed: this.fixed === '' ? true : this.fixed,
       filterMethod: this.filterMethod,
       filters: this.filters,
-      filterable: (this.filters && this.filters.length) || this.filterMethod,
+      filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
       filteredValue: this.filteredValue || [],
@@ -280,15 +280,23 @@ export default {
     });
 
     let source = forced[type] || {};
-    for (let prop in source) {
-      if (source.hasOwnProperty(prop)) {
-        let value = source[prop];
-        if (value !== undefined) {
-          column[prop] = prop === 'className'
-            ? `${column[prop]} ${value}`
-            : value;
+    Object.keys(source).forEach((prop) => {
+      let value = source[prop];
+      if (value !== undefined) {
+        if (prop === 'renderHeader') {
+          if (type === 'selection' && column[prop]) {
+            console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set render-header function.');
+          } else {
+            value = column[prop] || value;
+          }
         }
+        column[prop] = prop === 'className' ? `${column[prop]} ${value}` : value;
       }
+    });
+
+    // Deprecation warning for renderHeader property
+    if (this.renderHeader) {
+      console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
     }
 
     this.columnConfig = column;
@@ -439,6 +447,14 @@ export default {
       columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
     } else {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
+    }
+
+    if (this.$scopedSlots.header) {
+      if (this.type === 'selection') {
+        console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set scoped-slot header.');
+      } else {
+        this.columnConfig.renderHeader = (h, scope) => this.$scopedSlots.header(scope);
+      }
     }
 
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);

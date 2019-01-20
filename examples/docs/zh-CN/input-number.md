@@ -120,7 +120,7 @@
 :::
 
 :::tip
-`precision` 的值必须是一个正整数，并且不能小于 `step` 的小数位数。
+`precision` 的值必须是一个非负整数，并且不能小于 `step` 的小数位数。
 :::
 
 ### 尺寸
@@ -189,6 +189,8 @@
 | controls-position | 控制按钮位置 | string | right | - |
 | name | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
+| placeholder | 输入框默认 placeholder | string | - | - |
+
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
@@ -200,3 +202,4 @@
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | focus | 使 input 获取焦点 | - |
+| select | 选中 input 中的文字 | — |

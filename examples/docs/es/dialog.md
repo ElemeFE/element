@@ -151,7 +151,7 @@ El contenido del Diálogo puede ser cualquier cosa, incluso una tabla o un formu
 <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Zones" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="Please select a zone">
@@ -317,6 +317,7 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 | Nombre de Evento | Descripcíon                              | Parámetros |
 | ---------------- | ---------------------------------------- | ---------- |
 | open             | se activa cuando se abre el cuadro de Diálogo | —          |
+| opened           | se activa cuando la animacion de apertura del Dialog termina. | — |
 | close            | se dispara cuando el Diálogo se cierra   | —          |
 | closed           | se activa cuando finaliza la animación de cierre del Diálog | — |
 

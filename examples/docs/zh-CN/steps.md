@@ -165,6 +165,6 @@
 ### Step Slot
 | name | 说明  |
 |----|----|
-| icon | 图标 |
-| title | 标题 |
-| description | 描述性文字 |
+| icon | 自定义图标 |
+| title | 自定义标题 |
+| description | 自定义描述性文字 |

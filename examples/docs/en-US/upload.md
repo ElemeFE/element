@@ -429,4 +429,5 @@ on-exceed | hook function when limit is exceeded | function(files, fileList) | �
 | Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
 | clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
-| abort | cancel upload request | （ file: fileList's item ） |
+| abort      | cancel upload request                    | （ file: fileList's item ） |
+| submit     | upload the file list manually            |  —                         |

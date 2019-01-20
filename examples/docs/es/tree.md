@@ -4,40 +4,40 @@
       width: 20px;
       background: #ddd;
     }
-    
+
     .folder {
       width: 20px;
       background: #888;
     }
-    
+
     .buttons {
       margin-top: 20px;
     }
-    
+
     .filter-tree {
       margin-top: 20px;
     }
-    
+
     .custom-tree-container {
       display: flex;
       margin: -24px;
     }
-      
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-      
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-      
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-      
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -219,7 +219,7 @@
         this.$refs.tree2.filter(val);
       }
     },
-    
+
     methods: {
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
@@ -268,7 +268,7 @@
         } else {
           hasChild = Math.random() > 0.5;
         }
-    
+
         setTimeout(function() {
           let data;
           if (hasChild) {
@@ -280,7 +280,7 @@
           } else {
             data = [];
           }
-    
+
           resolve(data);
         }, 500);
       },
@@ -289,7 +289,7 @@
           return resolve([{ name: 'region' }]);
         }
         if (node.level > 1) return resolve([]);
-    
+
         setTimeout(() => {
           const data = [{
             name: 'leaf',
@@ -297,7 +297,7 @@
           }, {
             name: 'zone'
           }];
-    
+
           resolve(data);
         }, 500);
       },
@@ -332,14 +332,14 @@
         }
         data.children.push(newChild);
       },
-    
+
       remove(node, data) {
         const parent = node.parent;
         const children = parent.data.children || parent.data;
         const index = children.findIndex(d => d.id === data.id);
         children.splice(index, 1);
       },
-    
+
       renderContent(h, { node, data, store }) {
         return (
           <span class="custom-tree-node">
@@ -350,13 +350,13 @@
             </span>
           </span>);
       },
-    
+
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
       }
     },
-    
+
     data() {
       return {
         data,
@@ -778,7 +778,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-:::demo There are two ways to customize template for tree nodes: `render-content` and scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. If you prefer scoped slot, you'll have access to `node` and `data` in the scope, standing for the TreeNode object and node data of the current node respectively. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <div class="custom-tree-container">
   <div class="block">
@@ -1181,9 +1181,12 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
 | check-strictly        | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
 | default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
+| current-node-key      | key of initially selected node | string, number                       | —               | —       |
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
+| icon-class            | Icono del nodo del árbol de cliente                                                | string                            | -                 | -           |
+| lazy                  | si se trata de un nodo de hoja lazy load, utilizado con el atributo `load`  | boolean                     | —    | false |
 | draggable             | si se habilita la función de drag and drop en los nodos | boolean            | —    | false |
 | allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
 | allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. `type` tiene tres valores posibles: 'prev' (insertar el nodo de arrastre antes del nodo de destino), 'inner' (insertar el nodo de arrastre en el nodo de destino) y 'next' (insertar el nodo de arrastre después del nodo de destino) | Function(Nodoquesearrastra, Nododestino, type) | —    | —     |
@@ -1201,19 +1204,19 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | filter            | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
 | updateKeyChildren | Asocia un nuevo dato al nodo, solo funciona si `node-key` está asignado | (key, data)Acepta dos parámetros: 1. clave del nodo 2. nuevo dato |
-| getCheckedNodes   | Si los nodos puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos seleccionados | Acepta un booleano cuyo valor por defecto es `false` |
+| getCheckedNodes   | si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos actualmente seleccionada. | (leafOnly, includeHalfChecked) Acepta dos parámetros de tipo booleano: 1. El valor por defecto es `false`. Si el parámetro es `true`, sólo devuelve el array de subnodos actualmente seleccionado. 2. El valor por defecto es `false`. Si el parámetro es `true`, el valor de retorno contiene nodos halfchecked. |
 | setCheckedNodes   | Establece algunos nodos como seleccionados, solo funciona cuando `node-key` está asignado | Un array de nodos a seleccionar          |
 | getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
 | setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
 | setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
-| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de nodos actualmente seleccionada. | - |
-| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
+| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de nodos actualmente seleccionada. | - |
+| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
-| remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
+| remove          | elimina un nodo, solo funciona si `node-key` está asignado  | (data) los datos del nodo o nodo a borrar |
 | append          | añadir un nodo hijo a un nodo determinado del árbol | (data, parentNode) 1. los datos del nodo hijo que se añadirán 2. los datos del nodo padre, clave o nodo |
 | insertBefore    | insertar un nodo antes de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
 | insertAfter     | insertar un nodo después de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |

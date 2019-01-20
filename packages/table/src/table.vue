@@ -347,8 +347,8 @@
         this.store.clearSelection();
       },
 
-      clearFilter() {
-        this.store.clearFilter();
+      clearFilter(columnKeys) {
+        this.store.clearFilter(columnKeys);
       },
 
       clearSort() {
@@ -447,6 +447,10 @@
 
       sort(prop, order) {
         this.store.commit('sort', { prop, order });
+      },
+
+      toggleAllSelection() {
+        this.store.commit('toggleAllSelection');
       }
     },
 

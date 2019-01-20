@@ -396,4 +396,35 @@ describe('InputNumber', () => {
       done();
     });
   });
+
+  describe('InputNumber Methods', () => {
+    it('method:select', done => {
+      const testContent = '123';
+
+      vm = createVue({
+        template: `
+          <el-input-number
+            ref="inputNumComp"
+            :value="${testContent}"
+          />
+        `
+      }, true);
+
+      expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionStart)
+        .to.equal(testContent.length);
+      expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionEnd)
+        .to.equal(testContent.length);
+
+      vm.$refs.inputNumComp.select();
+
+      vm.$nextTick(_ => {
+        expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionStart)
+          .to.equal(0);
+        expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionEnd)
+          .to.equal(testContent.length);
+
+        done();
+      });
+    });
+  });
 });

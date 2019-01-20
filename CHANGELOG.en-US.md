@@ -1,5 +1,123 @@
 ## Changelog
 
+### 2.4.11
+
+*2018-11-21*
+
+- Revert pr #13296. Fixed clicking on Menu external causing Submenu collapsed, #13478
+- Adjust small screen (xs) media query breakpoints, #13468 (by @alekoshen712)
+
+### 2.4.10
+
+*2018-11-16*
+
+- Fixed multiple clicks on Select to display the drop-down list, #13268
+- The clear icon for input is not displayed when Form is disabled, #13208
+- Adjust the style of Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Carousel component added `loop` attribute, #13217
+- When the data of Table changes, the highlighted line will remain, #13200
+- Table header scoped slot can receive parameters, #13263
+- Table's `clearFilter` method supports arguments, #13176
+- Tooltip is no longer created when there is no content in the Table cell, #13152 (by @rongxingsun)
+- The input box contents of the ColorPicker panel can be displayed correctly, #13278
+- ColorPicker no longer triggers form validation when dragging, #13299
+- InputNumber added `select `method, #13286 (by @st-sloth)
+- Autocomplete added `clear` event, #12171(by arthurdenner) #13326
+- You can close Menu by clicking on Menu outside, #13296
+- Form's `validateField` method can receive arguments, #13319
+- Cascader added `visible-change` event, #13415
+- DatePicker added range-separator slot, #13272 (by @milworm)
+- Tree adds `iconClass` and `currentNodeKey` properties, #13337 #13197 (by @isnifer)
+- Progress's` status` added text #13198 (by @ali-master)
+- Fixing tree's `defaultCheckedKeys` caused an error, #13349 (by @dive2Pro)
+
+### 2.4.9
+
+*2018-10-26*
+
+- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
+- Added type attribute for Badge, #12991
+- Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
+- Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
+- Select option does not wrap when space is enough, #12329 (by @akki-jat)
+- When dropdown list of Select is expanded, the arrow icon will also display correctly, #12353 (by @firesh)
+- Fixed that the size attribute of Select does not work, #13070
+- Select multiple values can be cleared, #13049 (by @ZSkycat)
+- Fixed the last TabNav unable be deleted, #13039
+- Fixed that TabNav label is not displayed correctly, #13178
+- Added title slot for Alert, #13082 (by @Kingwl)
+- Fixed an issue where the tooltip content in Table was incorrect, #13159 (by @elfman)
+- Optimize the animation of Upload when file is deleted, #12987
+- Adjusted style of InputNumber when control button is not displayed, #13052
+
+### 2.4.8
+
+- Not displaying outline when Switch is focused, #12771
+- Fixed Dropdown's style in ButtonGroup, #12819 (by @bluejfox)
+- Added opened event for Dialog, #12828
+- Fixed the incorrect display order of TabNav, #12846
+- Fixed the problem that Tabs did not scroll to the selected tab, #12948
+- Fixed the problem that the identifier does not display when the Tree node is dragged, #12854
+- The validate event parameter of Form contains the validation message, #12860 (by @YamenSharaf)
+- Fixed DatePicker not to verify the validity of user input time, #12898
+- Fixed the problem that `render-header` attribute of Table header doesn't work, #12914
+
+### 2.4.7
+
+*2018-09-14*
+
+- Fixed DatePicker not triggering form validation, #12328 #12348 
+- Fixed DatePicker throwing errors in multiple mode, #12347 
+- Fixed incorrect position of DatePicker spinner, #12415 (by @rang-ali)
+- Fixed automatic filling of DatePicker input box, #12521 (by @abdallanayer)
+- Fixed Input not highlighted in Cascader, #12341
+- Fixed wrong order of Tabpane, #12346 
+- Fixed incorrect position of ColorPicker cursor, #12376 (by @cnwhy)
+- Fixed the style of Submenu, #2457
+- Fixed not highlighted after Submenu is selected, #12479
+- Fixed incorrect values selected by Cascader, #12508 (by @huangjinqiang)
+- Fixed incorrect value of Pagination input box, #12525 
+- Fixed order that Pagination triggers events, #12530
+- Fixed Table Filter not displayed, #12539
+- Fixed Tree unable to delete nodes, #12684
+- Fixed height of Select Input changing in single mode, #12719
+- Fixed style of FormItem label in nested Form, #12748
+- Added `autocomplete` attribute for Input, deprecated `auto-complete`, #12514 (by @axetroy)
+- Added slots-scope for Form to display validation information, #12715 (by @YamenSharaf)
+
+### 2.4.6
+
+*2018-08-09*
+
+- Fixed Table not showing filter icon when `filters` is assigned empty array, #12165
+- Fixed Menu not saving active state when `collapse` is changed, #12178 (by @elfman)
+- Fixed Cascader not escaping special characters for Regexp, #12248
+- Fixed disabled RadioButton showing box-shadow when clicked, #12262
+- Fixed arrow key not effect when default value is `undefined`,#12322
+- Fixed query function of Select not debounced in multi mode, #12181
+- Fixed query keyword of Select disappearing in multi mode, #12304
+- Fixed incorrect width of Dialog when it is displayed in full screen, #12203
+- Fixed incorrect display of Main on IE, #12237
+- Fixed Input triggering two form validations, #12260
+- Fixed adding new Tree node causing nodes to disappear, #12256
+- Fixed Tree node not deleted after dragging, #12279
+- Fixed Popover not visible when InputNumber focuses, #12284
+- Added `popper-append-to-body` attribute for Autocomplete, #12241
+- Added `sync` modifier support for Pagination's `page-size` attribute, #12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- Fixed Table setting `class-name` does not work for `expand` column, #12006
+- Added `toggleAllSelection` method for Table, #12047
+- Fixed wrong position of suffix slot when Input contains Select, #12108 
+- Fixed `line-height` of Option unable to set, #12120
+- Fixed TimeSelect with default value of `null` could not be assigned after executing `resetField`, #12010
+- Fixed keydown event which is not arrow key does not work in Tree, #12008
+- Fixed parent node checked in lazy mode, #12106
+- Added `includeHalfChecked` parameter for getCheckedNodes of Tree, #12014
+
 ### 2.4.4
 
 *2018-07-13*

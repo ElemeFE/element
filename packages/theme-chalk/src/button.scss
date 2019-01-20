@@ -186,13 +186,15 @@
   display: inline-block;
   vertical-align: middle;
 
-  & .el-button {
+  & > .el-button {
     float: left;
     position: relative;
     & + .el-button {
       margin-left: 0;
     }
-
+    &.is-disabled {
+      z-index: 1;
+    }
     &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
@@ -230,6 +232,14 @@
 
     @include when(active) {
       z-index: 1;
+    }
+  }
+  
+  & > .el-dropdown {
+    & > .el-button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-color: rgba($--color-white, 0.5);
     }
   }
 

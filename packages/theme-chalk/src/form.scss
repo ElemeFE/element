@@ -123,10 +123,12 @@
   }
 
   @include when(required) {
-    .el-form-item__label:before {
-      content: '*';
-      color: $--color-danger;
-      margin-right: 4px;
+    @include pseudo('not(.is-no-asterisk)') {
+      & > .el-form-item__label:before {
+        content: '*';
+        color: $--color-danger;
+        margin-right: 4px;
+      }
     }
   }
 

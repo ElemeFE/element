@@ -66,8 +66,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: [],
-        value14: []
+        value13: '',
+        value14: ''
       };
     }
   };
@@ -232,7 +232,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
         value3: '',
         value4: '',
         value5: '',
-        value14: []
+        value14: ''
       };
     }
   };
@@ -463,7 +463,7 @@ When picking a date range, you can assign the time part for start date and end d
   export default {
     data() {
       return {
-        value13: []
+        value13: ''
       };
     }
   };
@@ -522,3 +522,8 @@ When picking a date range, you can assign the time part for start date and end d
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | — |
+
+### Slots
+| Name    | Description |
+|---------|-------------|
+| range-separator  | costume range separator content |

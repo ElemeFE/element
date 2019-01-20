@@ -66,8 +66,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: [],
-        value14: []
+        value13: '',
+        value14: ''
       };
     }
   };
@@ -234,7 +234,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
         value3: '',
         value4: '',
         value5: '',
-        value14: []
+        value14: ''
       };
     }
   };
@@ -466,7 +466,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
   export default {
     data() {
       return {
-        value12: []
+        value12: ''
       };
     }
   };
@@ -526,3 +526,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | ------ | -------------------------- | ----------- |
 | focus  | coloca el foco en el input | —           |
 
+### Slots
+| Name             | Description                     |
+|------------------|-------------------------------- |
+| range-separator  | costume range separator content |

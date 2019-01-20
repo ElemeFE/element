@@ -147,7 +147,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Zones" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="Please select a zone">
@@ -309,5 +309,6 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open | triggers when the Dialog opens | — |
+| opened | triggers when the Dialog opening animation ends | — |
 | close | triggers when the Dialog closes | — |
 | closed | triggers when the Dialog closing animation ends | — |

@@ -810,7 +810,8 @@ export default {
 | suffix-icon   | 输入框尾部图标    | string          | — | — |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
 | autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean / object | — |  false   |
-| auto-complete | 原生属性，自动补全 | string | on, off | off |
+| autocomplete | 原生属性，自动补全 | string | on, off | off |
+| auto-complete | 下个主版本弃用 | string | on, off | off |
 | name | 原生属性 | string | — | — |
 | readonly | 原生属性，是否只读 | boolean | — | false |
 | max | 原生属性，设置最大值 | — | — | — |
@@ -821,6 +822,7 @@ export default {
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
 | tabindex | 输入框的tabindex | string | - | - |
+| validate-event | 输入时是否触发表单的校验 | boolean | - | - |
 
 ### Input Slots
 | name | 说明 |
@@ -864,6 +866,7 @@ export default {
 | prefix-icon | 输入框头部图标 | string | — | — |
 | suffix-icon | 输入框尾部图标 | string | — | — |
 | hide-loading | 是否隐藏远程加载时的加载图标 | boolean | — | false |
+| popper-append-to-body | 是否将下拉列表插入至 body 元素。在下拉列表的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 
 ### Autocomplete Slots
 | name | 说明 |

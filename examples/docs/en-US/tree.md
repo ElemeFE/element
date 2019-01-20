@@ -22,22 +22,22 @@
       display: flex;
       margin: -24px;
     }
-  
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-  
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-  
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-  
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -150,7 +150,7 @@
       }]
     }]
   }];
-  
+
   const data6 = [{
     label: 'Level one 1',
     children: [{
@@ -1181,9 +1181,11 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | show-checkbox         | whether node is selectable               | boolean                     | —               | false   |
 | check-strictly        | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean                     | —               | false   |
 | default-checked-keys  | array of keys of initially checked nodes | array                       | —               | —       |
+| current-node-key      | key of initially selected node | string, number                       | —               | —       |
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
+| icon-class            | custome tree node icon                                       | string                     | -    | -  |
 | lazy                  | whether to lazy load leaf node, used with `load` attribute  | boolean                     | —    | false |
 | draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
 | allow-drag            | this function will be executed before dragging a node. If `false` is returned, the node can not be dragged | Function(node)  | —  | —  |
@@ -1203,7 +1205,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | filter all tree nodes, filtered nodes will be hidden | Accept a parameter which will be used as first parameter for filter-node-method |
 | updateKeyChildren | set new data to node, only works when `node-key` is assigned  | (key, data) Accept two parameters: 1. key of node 2. new data |
-| getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
+| getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | (leafOnly, includeHalfChecked) Accept two boolean type parameters: 1. default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. 2. default value is `false`. If the parameter is `true`, the return value contains halfchecked nodes |
 | setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked          |
 | getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setCheckedKeys  | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
@@ -1215,7 +1217,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted. If `null`, cancel the currently highlighted node |
 | setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
 | getNode         | get node by data or key | (data) the node's data or key |
-| remove          | remove a node | (data) the node's data or node to be deleted |
+| remove          | remove a node, only works when node-key is assigned | (data) the node's data or node to be deleted |
 | append          | append a child node to a given node in the tree | (data, parentNode) 1. child node's data to be appended 2. parent node's data, key or node |
 | insertBefore    | insert a node before a given node in the tree | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
 | insertAfter     | insert a node after a given node in the tree   | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |

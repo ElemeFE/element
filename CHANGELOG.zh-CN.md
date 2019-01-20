@@ -1,5 +1,123 @@
 ## 更新日志
 
+### 2.4.11
+
+*2018-11-21*
+
+- 撤销 pr #13296，修复点击 Menu 外部导致 Submenu 收起的问题，#13478
+- 调整小屏幕（xs）媒体查询断点，#13468 （by @alekoshen712）
+
+### 2.4.10
+
+*2018-11-16*
+
+- 修复多次点击 Select 才显示下拉列表的问题，#13268
+- Form 禁用时不显示 Input 的 clear 图标，#13208
+- 调整 Select，Progress，Autocomplete，Tooltip，Collaspe，TimePicker 的样式，#13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Carousel 组件新增 `loop` 属性，#13217
+- Table 的 data 改变时，高亮行会继续保留，#13200
+- Table 的 header slot 可以接收参数，#13263
+- Table 的 `clearFilter` 方法支持参数，#13176
+- Table 单元格内没有内容时不再创建 Tooltip，#13152 (by @rongxingsun)
+- ColorPicker 面板的输入框内容可以正常显示了，#13278
+- 在拖拽时，ColorPicker 不再触发表单校验，#13299
+- InputNumber 新增 `select` 方法，#13286 (by @st-sloth)
+- Autocomplete 新增 `clear` 事件，#12171(by arthurdenner) #13326
+- 可以通过点击 Menu 外部来关闭 Menu，#13296
+- Form 的 `validateField` 方法可以接收参数，#13319
+- Cascader 新增 `visible-change` 事件，#13415
+- DatePicker 新增 range-separator slot， #13272 (by @milworm)
+- Tree 新增 `iconClass` 与 `currentNodeKey` 属性，#13337 #13197 (by @isnifer)
+- Progress 的 `status` 添加了 text #13198 (by @ali-master)
+- 修复 Tree 的 `defaultCheckedKeys` 导致显示的错误，#13349 (by @dive2Pro)
+
+### 2.4.9
+
+*2018-10-26*
+
+- Form 组件 clearValidate 方法参数支持字符串，#12990 （by @codinglobster）
+- Badge 新增 type 属性，#12991
+- 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
+- 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
+- Select 多选时，选项不换行，#12329 （by @akki-jat）
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
+- 修复 Select 的 size 属性不生效的问题，#13070
+- 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
+- 修复最后一个 TabNav 不能删除的问题，#13039
+- 修复 TabNav 中 label 显示不正确的问题，#13178
+- Alert 新增 title slot，#13082（by @Kingwl）
+- 修复 Table 中的 tooltip 内容不正确的问题，#13159（by @elfman）
+- 优化 Upload 文件列表删除时的动画，#12987
+- 当 InputNumber 控制按钮不显示时，调整了边距，#13052
+
+### 2.4.8
+
+- Switch 聚焦时不显示轮廓，#12771
+- 修复 Dropdown 在 ButtonGroup 中样式问题，#12819 （by @bluejfox）
+- Dialog 新增 opened 事件，#12828
+- 修复 TabNav 显示顺序不正确的问题，#12846
+- 修复 Tabs 没有滑动到选中 tab 的问题，#12948
+- 修复 Tree 节点在拖拽时标识符不显示的问题，#12854
+- Form 的 validate 事件参数中包含了校验的信息，#12860 （by @YamenSharaf）
+- 修复 DatePicker 没有校验用户输入时间的合法性问题，#12898
+- 修复 Table 表头的 `render-header`属性不生效的问题，#12914
+
+### 2.4.7
+
+*2018-09-14*
+
+- 修复 DatePicker 未触发表单检验的问题，#12328，#12348
+- 修复 DatePicker 多选时报错的问题，#12347
+- 修复 DatePicker 选择时间时 spinner 位置不正确的问题，#12415 （by @rang-ali）
+- 修复 Datepicker 输入框自动填充的问题，#12521 （by @abdallanayer）
+- 修复 Cascader 中 Input 未高亮的问题，#12341
+- 修复 Tabpane 顺序不正确的问题，#12346
+- 修复 ColorPicker 取色光标位置不正确的问题，#12376 （by @cnwhy）
+- 调整 Submenu 的样式，#12457
+- 修复 Submenu 选中后没有高亮的问题，#12479
+- 修复 Cascader 选择值不正确的问题，#12508 （by @huangjinqiang）
+- 修复 Pagination 输入框值不正确的问题，#12525
+- 调整 Pagination 触发事件的顺序，#12530
+- 修复 Table 的 filter 不显示的问题，#12539
+- 修复 Tree 无法删除节点的问题，#12684
+- 修复 Select 在单选时 Input 高度变化的问题，#12719
+- 修复 Form 在嵌套时 label 显示不正确的问题，#12748
+- 新增 Input 的 autocomplete 属性，废弃 auto-complete 属性，#12514 （by @axetroy）
+- 新增 Form 的 slot-scope 展示表单校验信息，#12715 （by @YamenSharaf）
+
+### 2.4.6
+
+*2018-08-09*
+
+- 修复 Table 的 filter 初始值为空数组时不显示筛选图标的问题，#12165
+- 修复 Menu 在更改 `collapse` 时不保存菜单激活状态的问题，#12178 (by @elfman)
+- 修复 Cascader 未转义特殊字符的问题，#12248
+- 修复禁用的 RadioButton 在点击时显示 box-shadow 的问题，#12262
+- 修复 Select 初始值为 `undefined` 时方向键失效的问题，#12322
+- 修复 Select 多选时输入的关键字消失的问题，#12304
+- 修复 Select 多选时查询函数没有去抖的问题，#12181
+- 修复 Dialog 在全屏显示时宽度不正确的问题，#12203
+- 修复 Main 在 IE 下的显示不正确的问题，#12237
+- 修复 Input 触发两次表单校验的问题，#12260
+- 修复 Tree 在懒加载时添加节点导致节点消失的问题，#12256
+- 修复 Tree 节点在拖拽后无法删除的问题，#12279
+- 修复 Popover 在 InputNumber 聚焦时不显示的问题，#12284
+- 添加 Autocomplete 的 popper-append-to-body 属性，#12241
+- 添加 Pagination 的 `page-size` 属性 `sync` 修饰符的支持，#12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- 修复 Table 设置 `class-name` 对 `expand` 列不生效的问题，#12006
+- 新增 Table 的 `toggleAllSelection` 方法，#12047
+- 修复 Input 包含 Select 时，suffix 插槽位置显示不正确的问题，#12108
+- 修复 Option 的 `line-height` 无法设置的问题，#12120
+- 修复初始值为 `null` 的 TimeSelect 在执行 `resetField` 后无法再赋值的问题，#12010
+- 修复 Tree 组件中不响应方向键以外 keydown 事件的问题，#12008
+- 修复 Tree 在懒加载情况下选中父节点的问题，#12106
+- Tree 的 `getCheckedNodes` 方法新增 `includeHalfChecked` 参数，#12014
+
 ### 2.4.4
 
 *2018-07-13*

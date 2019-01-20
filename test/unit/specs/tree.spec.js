@@ -202,14 +202,11 @@ describe('Tree', () => {
     });
   });
 
-  it('current-node-key', done => {
-    vm = getTreeVm(':props="defaultProps" :current-node-key="1"');
-    const firstNode = document.querySelector('.el-tree-node');
-    firstNode.click();
-    vm.$nextTick(() => {
-      expect(firstNode.classList.contains('is-current')).to.true;
-      done();
-    });
+  it('current-node-key', () => {
+    vm = getTreeVm(':props="defaultProps" default-expand-all highlight-current node-key="id" :current-node-key="11"');
+    const currentNodeLabel = document.querySelector('.is-current .el-tree-node__label').textContent;
+
+    expect(currentNodeLabel).to.be.equal('二级 1-1');
   });
 
   it('defaultExpandAll', () => {
@@ -300,6 +297,36 @@ describe('Tree', () => {
       }
     });
     expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(1);
+  });
+
+  it('defaultCheckedKeys & lazy, checked children length as expected', () => {
+    vm = getTreeVm(':load="loadNode" :props="defaultProps" :default-checked-keys="defaultCheckedKeys" node-key="id" :default-expanded-keys="[1]" lazy show-checkbox ', {
+      created() {
+        this.defaultCheckedKeys = [2, 3];
+      },
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'head', id: 1} ]);
+          }
+          return resolve([
+            {
+              label: '#1',
+              id: 2
+            },
+            {
+              label: '#3',
+              id: 3
+            },
+            {
+              label: '$4',
+              id: 5
+            }
+          ]);
+        }
+      }
+    });
+    expect(vm.$el.querySelectorAll('.el-checkbox.is-checked').length).to.equal(2);
   });
 
   it('show checkbox', done => {

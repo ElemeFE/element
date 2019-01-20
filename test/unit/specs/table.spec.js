@@ -1693,6 +1693,21 @@ describe('Table', () => {
       destroyVM(vm);
     });
 
+    it('toggleAllSelection', done => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleAllSelection();
+      setTimeout(() => {
+        expect(vm.selection).to.length(5);
+
+        vm.$refs.table.toggleAllSelection();
+        setTimeout(() => {
+          expect(vm.selection).to.length(0);
+          destroyVM(vm);
+          done();
+        }, 50);
+      }, 50);
+    });
+
     it('clearSelection', () => {
       const vm = createTable('selection-change');
       vm.$refs.table.toggleRowSelection(vm.testData[0]);

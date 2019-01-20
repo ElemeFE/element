@@ -27,7 +27,7 @@
         :type="type"
         :disabled="inputDisabled"
         :readonly="readonly"
-        :autocomplete="autoComplete"
+        :autocomplete="autoComplete || autocomplete"
         :value="currentValue"
         ref="input"
         @compositionstart="handleComposition"
@@ -87,6 +87,7 @@
       v-bind="$attrs"
       :disabled="inputDisabled"
       :readonly="readonly"
+      :autocomplete="autoComplete || autocomplete"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -149,9 +150,18 @@
         type: [Boolean, Object],
         default: false
       },
-      autoComplete: {
+      autocomplete: {
         type: String,
         default: 'off'
+      },
+      /** @Deprecated in next major version */
+      autoComplete: {
+        type: String,
+        validator(val) {
+          process.env.NODE_ENV !== 'production' &&
+            console.warn('[Element Warn][Input]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
+          return true;
+        }
       },
       validateEvent: {
         type: Boolean,
@@ -195,7 +205,7 @@
       },
       showClear() {
         return this.clearable &&
-          !this.disabled &&
+          !this.inputDisabled &&
           !this.readonly &&
           this.currentValue !== '' &&
           (this.focused || this.hovering);
@@ -203,7 +213,7 @@
     },
 
     watch: {
-      'value'(val, oldValue) {
+      value(val, oldValue) {
         this.setCurrentValue(val);
       }
     },
@@ -283,16 +293,22 @@
         if (this.isOnComposition && value === this.valueBeforeComposition) return;
         this.currentValue = value;
         if (this.isOnComposition) return;
-        this.$nextTick(_ => {
-          this.resizeTextarea();
-        });
-        if (this.validateEvent) {
+        this.$nextTick(this.resizeTextarea);
+        if (this.validateEvent && this.currentValue === this.value) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }
       },
       calcIconOffset(place) {
-        const el = this.$el.querySelector(`.el-input__${place}`);
-        if (!el || el.parentNode !== this.$el) return;
+        let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
+        if (!elList.length) return;
+        let el = null;
+        for (let i = 0; i < elList.length; i++) {
+          if (elList[i].parentNode === this.$el) {
+            el = elList[i];
+            break;
+          }
+        }
+        if (!el) return;
         const pendantMap = {
           suffix: 'append',
           prefix: 'prepend'
@@ -314,7 +330,6 @@
         this.$emit('change', '');
         this.$emit('clear');
         this.setCurrentValue('');
-        this.focus();
       }
     },
 

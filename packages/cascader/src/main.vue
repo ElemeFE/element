@@ -30,6 +30,7 @@
       :validate-event="false"
       :size="size"
       :disabled="cascaderDisabled"
+      :class="{ 'is-focus': menuVisible }"
     >
       <template slot="suffix">
         <i
@@ -70,7 +71,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
-import { generateId } from 'element-ui/src/utils/util';
+import { generateId, escapeRegexpString, isIE, isEdge } from 'element-ui/src/utils/util';
 
 const popperMixin = {
   props: {
@@ -222,8 +223,7 @@ export default {
       return this.disabled || (this.elForm || {}).disabled;
     },
     readonly() {
-      const isIE = !this.$isServer && !isNaN(Number(document.documentMode));
-      return !this.filterable || (!isIE && !this.menuVisible);
+      return !this.filterable || (!isIE() && !isEdge() && !this.menuVisible);
     }
   },
 
@@ -231,6 +231,7 @@ export default {
     menuVisible(value) {
       this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
       value ? this.showMenu() : this.hideMenu();
+      this.$emit('visible-change', value);
     },
     value(value) {
       this.currentValue = value;
@@ -337,7 +338,8 @@ export default {
       }
 
       let filteredFlatOptions = flatOptions.filter(optionsStack => {
-        return optionsStack.some(option => new RegExp(value, 'i').test(option[this.labelKey]));
+        return optionsStack.some(option => new RegExp(escapeRegexpString(value), 'i')
+          .test(option[this.labelKey]));
       });
 
       if (filteredFlatOptions.length > 0) {
@@ -366,7 +368,7 @@ export default {
         const keywordIndex = label.toLowerCase().indexOf(inputValue.toLowerCase());
         const labelPart = label.slice(keywordIndex, inputValue.length + keywordIndex);
         const node = keywordIndex > -1 ? this.highlightKeyword(label, labelPart) : label;
-        return index === 0 ? node : [' / ', node];
+        return index === 0 ? node : [` ${this.separator} `, node];
       });
     },
     highlightKeyword(label, keyword) {

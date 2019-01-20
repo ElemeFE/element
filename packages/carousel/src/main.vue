@@ -11,7 +11,7 @@
         <button
           type="button"
           v-if="arrow !== 'never'"
-          v-show="arrow === 'always' || hover"
+          v-show="(arrow === 'always' || hover) && (loop || activeIndex > 0)"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
@@ -23,7 +23,7 @@
         <button
           type="button"
           v-if="arrow !== 'never'"
-          v-show="arrow === 'always' || hover"
+          v-show="(arrow === 'always' || hover) && (loop || activeIndex < items.length - 1)"
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
@@ -83,7 +83,11 @@ export default {
       type: String,
       default: 'hover'
     },
-    type: String
+    type: String,
+    loop: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data() {
@@ -114,6 +118,10 @@ export default {
 
     autoplay(val) {
       val ? this.startTimer() : this.pauseTimer();
+    },
+
+    loop() {
+      this.setActiveItem(this.activeIndex);
     }
   },
 
@@ -167,7 +175,7 @@ export default {
     playSlides() {
       if (this.activeIndex < this.items.length - 1) {
         this.activeIndex++;
-      } else {
+      } else if (this.loop) {
         this.activeIndex = 0;
       }
     },
@@ -197,9 +205,9 @@ export default {
       let length = this.items.length;
       const oldIndex = this.activeIndex;
       if (index < 0) {
-        this.activeIndex = length - 1;
+        this.activeIndex = this.loop ? length - 1 : 0;
       } else if (index >= length) {
-        this.activeIndex = 0;
+        this.activeIndex = this.loop ? 0 : length - 1;
       } else {
         this.activeIndex = index;
       }

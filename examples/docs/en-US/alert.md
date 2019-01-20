@@ -208,7 +208,7 @@ Description includes a message with more detailed information.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| **title** | title **REQUIRED** | string | — | — |
+| title     | title         | string | — | — |
 | type | component type | string | success/warning/info/error | info |
 | description | descriptive text. Can also be passed with the default slot | string | — | — |
 | closable | if closable or not | boolean | — | true |
@@ -216,6 +216,11 @@ Description includes a message with more detailed information.
 | close-text | customized close button text | string | — | — |
 | show-icon | if a type icon is displayed | boolean | — | false |
 
+### Slot
+
+| Name | Description |
+|------|--------|
+| title | content of the Alert title |
 
 ### Events
 | Event Name | Description | Parameters |

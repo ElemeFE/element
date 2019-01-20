@@ -1696,10 +1696,11 @@ Buscar y seleccionar opciones con una palabra clave.
 | disabled | especifica qué clave del elemento de la opción indica si está deshabilitada | string | —                 | —           |
 
 ### Eventos
-| Nombre             | Descripción                              | Parametros                |
-| ------------------ | ---------------------------------------- | ------------------------- |
-| change             | se dispara cuando el valor cambia        | valor                     |
-| active-item-change | triggers when active option of its parent changes, sólo funciona cuando `change-on-select` es `false`. | array de opciones activas |
-| blur               | se dispara cuando Cascader pierde el foco | (event: Event)            |
-| focus              | se dispara cuando Cascader obtiene el foco | (event: Event)            |
+| Nombre             | Descripción                                                  | Parametros                |
+| ------------------ | ------------------------------------------------------------ | ------------------------- |
+| change             | se dispara cuando el valor cambia                            | valor                     |
+| active-item-change | se dispara cuando la opcion activa del parent cambia, sólo funciona cuando `change-on-select` es `false`. | array de opciones activas |
+| blur               | se dispara cuando Cascader pierde el foco                    | (event: Event)            |
+| focus              | se dispara cuando Cascader obtiene el foco                   | (event: Event)            |
+| visible-change     | se dispara cuando el menu desplegable aparece o desaparece   | true cuando aparece, y false en otro caso |
 

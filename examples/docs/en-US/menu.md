@@ -306,12 +306,12 @@ Vertical NavMenu could be collapsed.
 | default-active | index of currently active menu | string    | — | — |
 | default-openeds | array that contains indexes of currently active sub-menus  | Array    | — | — |
 | unique-opened  |  whether only one sub-menu can be active  | boolean   | — | false   |
-| menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | — | hover |
+| menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | hover / click | hover |
 | router  | whether `vue-router` mode is activated. If true, index will be used as 'path' to activate the route action | boolean   | — | false   |
 | collapse-transition  | whether to enable the collapse transition | boolean   | — | true   |
 
 ### Menu Methods
-| Event Name | Description | Parameters |
+| Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open  | open a specific sub-menu | index: index of the sub-menu to open |
 | close  | close a specific sub-menu | index: index of the sub-menu to close |

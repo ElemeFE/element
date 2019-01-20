@@ -35,6 +35,16 @@ describe('Alert', () => {
       .to.equal('Unbowed, Unbent, Unbroken');
   });
 
+  it('title slot', () => {
+    vm = createVue(`
+      <el-alert>
+        <span slot="title">foo</span>
+      </el-alert>
+    `);
+
+    expect(vm.$el.querySelector('.el-alert__title').textContent).to.equal('foo');
+  });
+
   it('close', () => {
     vm = createVue({
       template: `

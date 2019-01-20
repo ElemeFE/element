@@ -1,5 +1,124 @@
 ## Changelog
 
+### 2.4.11
+
+*2018-11-21*
+
+- Revert pr #13296. Fixed clicking on Menu external causing Submenu collapsed, #13478
+- Adjust small screen (xs) media query breakpoints, #13468 (by @alekoshen712)
+
+### 2.4.10
+
+*2018-11-16*
+
+- Se corrigio que se necesitaban varios clics en Select para mostrar la lista desplegable, #13268
+- El icono de limpiado para el input no se muestraba cuando Form estaba deshabilitado, #13208
+- Ajustados los estilos de Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Se agregó el atributo `loop` al componente carrusel, #13217
+- Cuando los datos de Table cambian, la línea resaltada permanecerá, #13200
+- Table header scoped slot puede recibir parámetros, #13263
+- El método `clearFilter` de la tabla soporta argumentos, #13176
+- El tooltip ya no se crea cuando no hay contenido en la celda de Table, #13152 (por @rongxingsun)
+- El contenido del input del panel ColorPicker se muestra correctamente, #13278
+- ColorPicker ya no activa la validación de formularios al arrastrar, #13299
+- InputNumber se le ha añadido el método `select`, #13286 (por @st-sloth)
+- Autocompletar agregó el evento `clear`, #12171(by arthurdenner) #13326
+- Puede cerrar Menú haciendo clic fuera del Menú, #13296
+- El método `validateField` de Form puede recibir argumentos, #13319
+- Cascader añadió el evento `visible-change`, #13415
+- DatePicker agregó slot para separador de rango, #13272 (por @milworm)
+- Tree añade las propiedades `iconClass` y `currentNodeKey`, #13337 #13197 (por @isnifer)
+- Progress permite texto en el atributo `status` #13198 (por @ali-master)
+- Corregidas las `defaultCheckedKeys` de Tree que causaba un error, #13349 (por @dive2Pro)
+
+
+### 2.4.9
+
+*2018-10-26*
+
+- El parámetro de Form's `clearValidate` soporta cadenas, #12990 (by @codinglobster)
+- Se agregó el atributo `type` para Badge, #12991
+- Ser puede usar scoped-slot para personalizar el encabezado de la columna de Table #13012 (por @ivanseidel)
+- Arreglado que el input box de Select no se podia escrbir en IE, #13034 (by @GaliMU)
+- La opción Seleccionar no se cerraba cuando el espacio era insuficiente, #12329 (by @akki-jat)
+- Cuando se expande la lista desplegable de Seleccionar, el icono de flecha también se mostrará correctamente, #12353 (by @firesh)
+- Arreglado que el atributo size de Select no funcionaba, #13070
+- Select multiple values pueden ser limpiado en lote, #13049 (by @ZSkycat)
+- Arreglado el último TabNav que no se podía borrar, #13039
+- Arreglado que la etiqueta del TabNav no se mostraba correctamente, #13178
+- Añadido title slot para Alert, #13082 (by @Kingwl)
+- Corregido un problema por el cual el contenido del tooltip en Table era incorrecto, #13159 (by @elfman)
+- Optimizada la animación de Upload cuando el archivo es eliminado, #12987
+- Ajustado el estilo de InputNumber cuando no se muestra el botón de control, #13052
+
+### 2.4.8
+
+- No se muestra el contorno cuando Switch está enfocado, #12771
+- Arreglado el estilo del Dropdown en ButtonGroup, #12819 (por @bluejfox)
+- Añadido evento opened para Dialog, #12828
+- Corregido el orden incorrecto de visualización de TabNav, #12846
+- Corregido el problema de que Tabs no se desplazaba a la pestaña seleccionada, #12948
+- Corregido el problema de que el identificador no se mostraba cuando se arrastraba el Tree node, #12854
+- El parámetro validar evento de Form contiene el mensaje de validación, #12860 (por @YamenSharaf)
+- Se ha corregido el DatePicker que no verificaba la validez de la hora de entrada del usuario, #12898
+- Arreglado el problema de que el atributo `render-header` del encabezado de Table no funcionaba, #12914
+
+### 2.4.7
+
+*2018-09-14*
+
+- Corregido que DatePicker no activaba la validación del Form, #12328 #12348 
+- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347 
+- Corregida la posición incorrecta del spinner del DatePicker, #12415 (por @rang-ali)
+- Se ha corregido el llenado automático del input del DatePicker, #12521 (por @abdallanayer)
+- Corregida el input no resaltada en Cascader, #12341
+- Corregido el orden incorrecto de Tabpane, #12346 
+- Corregida la posición incorrecta del cursor de ColorPicker, #12376 (por @cnwhy)
+- Corregido el estilo del Submenú, #2457
+- Corregido el resaltado después de seleccionar el Submenú, #12479
+- Corregidos los valores incorrectos seleccionados por Cascader, #12508 (por @huangjinqiang)
+- Corregido el valor incorrecto del input de Paginación, #12525 
+- Se ha corregido el orden en que la paginación desencadena los eventos, #12530
+- Corregido que no se mostraba el Table Filter, #12539
+- Corregido Tree que era incapaz de borrar nodos, #12684
+- Corregida la altura de los Select Input que cambiaba en modo simple, #12719
+- Arreglado el estilo de la etiqueta FormItem en Form anidado, #12748
+- Añadido el atributo `autocomplete` para Input, obsoleto `auto-complete`, #12514 (por @axetroy)
+- Añadido el slots-scope de Form para mostrar la información de validación, #12715 (por @YamenSharaf)
+
+### 2.4.6
+
+*2018-08-09*
+
+- Arreglada la tabla que no mostraba el ícono del filtro cuando a  `filter` se les asignaba un array vacío, #12165
+- Arreglado Menu que no guardaba el estado activo cuando cambiaba `collapse` #12178 (por @elfman)
+- Se ha corregido que Cascader no escapaba a los caracteres especiales para Regexp, #12248
+- Se ha corregido que el RadioBotón deshabilitado mostraba la sombra de la caja cuando se hacía clic, #12262
+- Arreglado el efecto de la tecla de flecha en Select cuando el valor por defecto es `undefined`,#12322
+- Corregida la función de consulta de Select not debounced en modo multi, #12181
+- Corregida que la palabra clave de consulta de Select desaparecía en modo multi, #12304
+- Corregido el ancho incorrecto de Dialog cuando se muestra a pantalla completa, #12203
+- Corregida la visualización incorrecta de Main en IE, #12237
+- Corregido el trigger de Input con dos validaciones de Form, #12260
+- Arreglado el añadir un nuevo nodo de árbol que causaba que los nodos desaparecieran, #12256
+- Arreglado el nodo Tree no se borraba después de arrastrar, #12279
+- Popover corregido porque no era visible cuando InputNumber no enfocaba, #12284
+- Añadido el atributo `popper-append-to-body` para Autocompletar, #12241
+- Añadido el modificador `sync` para el atributo `page-size` de Pagination, #12281
+
+### 2.4.5
+
+*2018-07-26*
+
+- Se ha corregido en Table que `class-name` no funcionaba para las columnas `expand`, #12006
+- Se ha añadido el método `toggleAllSelection` para Table, #12047
+- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108 
+- Corregido que el `line-height` de Option no se establecia, #12120
+- Corregido que TimeSelect con valor por defecto `null` no podia ser asignado después de ejecutar `resetField`, #12010
+- Arreglado el evento `keydown` que cuando no era una tecla de flecha no funciona en Tree, #12008
+- Corregido nodo padre checked en modo lazy, #12106
+- Añadido el parámetro `includeHalfChecked` para getCheckedNodes de Tree, #12014
+
 ### 2.4.4
 
 *2018-07-13*
@@ -283,8 +402,10 @@
   - Corregido el layout que no se actualizaba cuando el ancho de columna era cambiado por el usuario arrastrando, #9668
   - Corregido problema de estilo cuando la fila de resumen coexistia con columnas fijas, #9667
 - Container
+
   - Corregido componentes del Container que no se estiraban en IE11, #9655
 - Loading
+
   - Corregido Loading no se mostraba cuando el valor de `v-loading` era cambiado a true en el `hook`  `mounted`, #9722
 - Switch
   - Corregido se disparaban los dos eventos nativos de click cuando se hacia click en el Switch, #9760

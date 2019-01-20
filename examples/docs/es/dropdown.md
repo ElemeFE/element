@@ -333,6 +333,13 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | show-timeout  | Tiempo de retardo antes de mostrar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 250         |
 | hide-timeout  | Tiempo de retardo antes de ocultar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 150         |
 
+### Dropdown Slots
+
+| Nombre | Descripción |
+|------|--------|
+| — | content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>, <button> etc.`) or `el-component`, to attach the trigger listener  |
+| dropdown | content of the Dropdown Menu, usually a `<el-dropdown-menu>` element |
+
 ### Dropdown Eventos
 | Nombre         | Descripción                              | Parametros                               |
 | -------------- | ---------------------------------------- | ---------------------------------------- |
