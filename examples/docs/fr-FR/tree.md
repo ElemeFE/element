@@ -1185,9 +1185,11 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 | show-checkbox         | Si un noeud est sélectionnable.           | boolean                     | —               | false   |
 | check-strictly        | Si la sélection d'un noeud affecte celle de son parent qaund `show-checkbox` est `true`. | boolean                     | —               | false   |
 | default-checked-keys  | Tableau des clés des noeuds initialement sélectionnés. | array                       | —               | —       |
+| current-node-key      | Clé du noeud initialement sélectionné. | string, number                       | —               | —       |
 | filter-node-method    | Fonction executée sur chaque noeud pour le filtrage. Si elle retourne `false`, les noeuds seront cachés. | Function(value, data, node) | —               | —       |
 | accordion             | Si les noeuds fonctionnent en mode accordéon. | boolean                     | —               | false   |
 | indent                | Indentation horizontale des noeuds en px. | number                     | —    | 16 |
+| icon-class            | Icône pour chaque noeud.                                       | string                     | -    | -  |
 | lazy                  | Si les noeuds sont chargés en mode lazy, utilisé avec l'attribut `load`.  | boolean                     | —    | false |
 | draggable             | Si les noeuds sont déplaçables par drag'n drop. | boolean            | —    | false |
 | allow-drag            | Fonction exécutée avant le déplacement d'un noeud. Si `false` est retourné, le noeud ne sera pas déplaçable. | Function(node)  | —  | —  |
@@ -1210,7 +1212,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | Filtre les noeuds. | Accepte un paramètre qui sera le premier paramètre de `filter-node-method`. |
 | updateKeyChildren | Ajoute de nouvelles données au noeud, ne marche que lorsque `node-key` est assigné.  | (key, data) Accepte deux paramètres: 1. clé du noeud 2. nouvelles données. |
-| getCheckedNodes | Si le noeud peut-être sélectionné (`show-checkbox` est `true`), il retourne un tableau des noeuds sélectionnés. | Booléen, défaut à `false`. Si à `true`, Il retourne seulement un tableau des sous-noeuds sélectionnés. |
+| getCheckedNodes | Si le noeud peut-être sélectionné (`show-checkbox` est `true`), il retourne un tableau des noeuds sélectionnés. | (leafOnly, includeHalfChecked) Accepte deux booléen: 1. Défaut à `false`. Si `true`, retourne seulement un tableau des sous-noeuds sélectionnés. 2. Défaut à `false`. Si `true`, retourne la moitié des noeuds sélectionnés. |
 | setCheckedNodes | Détermine quels noeuds sont sélectionnés, ne marche que si `node_key` est assigné. | Un tableau de noeuds qui doivent être sélectionnés.          |
 | getCheckedKeys  | Si le noeud peut être sélectionné (`show-checkbox` est `true`), retourne un tableau de clés des noeuds sélectionnés. | (leafOnly) Booléen, défaut à `false`. Si à `true`, Il retourne seulement un tableau des sous-noeuds sélectionnés. |
 | setCheckedKeys  | Détermine quels noeuds sont sélectionnés, ne marche que si `node_key` est assigné. | (keys, leafOnly) Accepte deux paramètres: 1. un tableau de clés de noeuds à sélectionner 2. un booléen avec pour défaut `false`. Si à `true`, Il retourne seulement un tableau des sous-noeuds sélectionnés. |
@@ -1222,7 +1224,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 | setCurrentKey   | Met un noeud en valeur par sa clé, ne marche que si `node_key` est assigné. | (key) la clé du noeud. Si `null`, annule la sélection actuelle. |
 | setCurrentNode  | Met un noeud en valeur, ne marche que si `node_key` est assigné. | (node) le noeud. |
 | getNode         | Retourne le noeud grâce à sa clé ou ses données. | (data) la clé ou les données du noeud. |
-| remove          | Supprime un noeud. | (data) le noeud ou ses données à supprimer. |
+| remove          | Supprime un noeud, ne marche que si node-key est assigné. | (data) le noeud ou ses données à supprimer. |
 | append          | Ajoute un noeud à un autre noeud. | (data, parentNode) 1. les données du noeud à ajouter 2. les données du parent, clé ou données. |
 | insertBefore    | Insère un noeud avant un autre noeud. | (data, refNode) 1. Les données du noeud à insérer 2. Clé ou noeud de référence. |
 | insertAfter     | Insère un noeud après un autre noeud. | (data, refNode) 1. Les données du noeud à insérer 2. Clé ou noeud de référence. |

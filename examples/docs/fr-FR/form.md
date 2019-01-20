@@ -538,10 +538,10 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 ```html
 <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
     <el-input v-model.number="ruleForm2.age"></el-input>
@@ -718,7 +718,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
       { type: 'number', message: 'age must be a number'}
     ]"
   >
-    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
+    <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
@@ -834,9 +834,10 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | model| Données du formulaire. | object | — | — |
 | rules | Règles de validation du formulaire. | object | — | — |
 | inline | Si le formulaire est horizontal. | boolean | — | false |
-| label-position | Position des labels. | string | left / right / top | right |
+| label-position | Position des labels. Si 'left' ou 'right', `label-width` est aussi requis. | string | left / right / top | right |
 | label-width | Largeur des labels, tout les enfants directs hériteront de cette valeur. | string | — | — |
 | label-suffix | Suffixe de labels. | string | — | — |
+| hide-required-asterisk | Si les champs obligatoires doivent avoir une astérisque rouge (étoile) à coté de leurs labels. | boolean | — | false |
 | show-message  | Si le message d'erreur doit apparaître. | boolean | — | true |
 | inline-message  | Si le message d'erreur doit apparaître en ligne avec son champ. | boolean | — | false |
 | status-icon  | Si une icône indiquant le résultat de validation doit apparaître. | boolean | — | false |
@@ -849,15 +850,15 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | Méthode | Description | Paramètres |
 | ---- | ---- | ---- |
 | validate | Valide le formulaire. Prends une callback en paramètre. Après la validation, la callback est exécutée avec deux paramètres: un boolean indiquant si la validation est bonne, et un objet contenant tout les champs qui ont échoués. Retourne une promesse si aucune callback n'est passée. | Function(callback: Function(boolean, object)) |
-| validateField | Valide un certain champ du formulaire. | Function(prop: string, callback: Function(errorMessage: string)) |
+| validateField | Valide un ou plusieurs champs du formulaire. | Function(props: string | array, callback: Function(errorMessage: string)) |
 | resetFields | Efface tout les champs et les résultats de validation. | — |
-| clearValidate | Efface les messages de validation de certains champs. Le paramètre est une liste des champs concernés. Si il est omis, tout les champs seront concernés. | Function(props: array)
+| clearValidate | Efface les messages de validation de certains champs. Le paramètre est le nom du champ ou une liste des champs concernés. Si il est omis, tout les champs seront concernés. | Function(props: string | array) |
 
 ### Évènnements de Form
 
 | Nom | Description | Paramètres |
 |----------- |------------ |----------- |
-| validate   | Se déclenche après la validation d'un champ. | Nom du champs qui a été validé, si la validation est bonne. |
+| validate   | Se déclenche après la validation d'un champ. | Nom du champs qui a été validé, si la validation est bonne et le message d'erreur sinon. |
 
 ### Attributs de FormItem
 
@@ -879,9 +880,14 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | — | Contenu de Form Item. |
 | label | Contenu du label. |
 
+### Slot avec portée de Form-Item
+|      Nom     | Description |
+|---------------|-------------|
+|      error    | Contenu personnalisé pour les messages de validation. Le paramètre du scope est { error }. |
+
 ### Méthodes de Form-Item
 
 | Méthode | Description | Paramètres |
 | ---- | ---- | ---- |
 | resetField | Efface le champ et les résultats de validation. | — |
-| clearValidate | Efface le status de validation du champ. | -
+| clearValidate | Efface le status de validation du champ. | - |

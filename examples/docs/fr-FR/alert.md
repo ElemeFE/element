@@ -208,14 +208,19 @@ Contient un message avec plus d'informations.
 ### Attributs
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| **title** | Titre **REQUIS** | string | — | — |
-| type | Type du composant | string | success/warning/info/error | info |
+| title     | Titre.         | string | — | — |
+| type | Type du composant. | string | success/warning/info/error | info |
 | description | Texte de description. Peut aussi être passé via le slot par défaut | string | — | — |
 | closable | Si peut être fermé ou non. | boolean | — | true |
 | center | Si le texte doit être centré ou non. | boolean | — | false |
 | close-text | Texte personnalisé pour le bouton de fermeture. | string | — | — |
 | show-icon | Si une icône s'affiche ou non. | boolean | — | false |
 
+### Slot
+
+| Nom | Description |
+|------|--------|
+| title | Le contenu du titre. |
 
 ### Évènements
 | Nom | Description | Paramètres |

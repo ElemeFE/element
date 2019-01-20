@@ -2,6 +2,10 @@
 
 Cette page vous guidera tout le long de l'installation d'Element au sein d'un projet webpack.
 
+### Use vue-cli@3
+
+Nous fournissons un [plugin Element](https://github.com/ElementUI/vue-cli-plugin-element) pour vue-cli@3, que vous pouvez utiliser pour créer rapidement un projet basé sur Element.
+
 ### Utiliser le Starter Kit
 
 Nous fournissons un [template de projet](https://github.com/ElementUI/element-starter) pour débuter rapidement. Pour les utilisateurs Laravel, il est aussi possible d'utiliser ce [template](https://github.com/ElementUI/element-in-laravel-starter). VOus pouvez les télécharger directement.
@@ -258,7 +262,7 @@ Maintenant que vous avez ajouté Vue et Element à votre projet, vous pouvez com
 
 ### Utiliser Nuxt.js
 
-Vous pouvez également commencer un projet avec [Nuxt.js](nuxtjs.org):
+Vous pouvez également commencer un projet avec [Nuxt.js](https://nuxtjs.org/):
 
 <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
   <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>

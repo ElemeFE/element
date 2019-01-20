@@ -15,6 +15,12 @@ Affiche le nombre de nouveaux messages.
 <el-badge :value="3" class="item">
   <el-button size="small">Réponses</el-button>
 </el-badge>
+<el-badge :value="1" class="item" type="primary">
+  <el-button size="small">Commentaires</el-button>
+</el-badge>
+<el-badge :value="2" class="item" type="warning">
+  <el-button size="small">Réponses</el-button>
+</el-badge>
 
 <el-dropdown trigger="click">
   <span class="el-dropdown-link">
@@ -130,9 +136,11 @@ Utilisez un point rouge pour signaler du contenu devant être remarqué.
 </style>
 
 ### Attributs
-| Attribut          | Description            | Type            | Valeurs acceptées                 | Défaut   |
+
+| Attribut     | Description     | Type            | Valeurs acceptées       | Défaut |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| value          | Valeur affichée.      | string, number          |          —             |    —     |
-| max          |  Valeur maximale, affiche '{max}+' quand elle est dépassée. Ne marche que si `value` est un `Number`.   | number  |         —              |     —    |
-| is-dot       | Affiche un point rouge.   | boolean  |  —  |  false |
-| hidden | Cache le badge. | boolean | — | false |
+| value         | Valeur affichée.   | string, number  |          —            |    —    |
+| max           |  Valeur maximale, affiche '{max}+' quand elle est dépassée. Ne marche que si `value` est un `Number`.   | number  |         —              |     —    |
+| is-dot        | Affiche un point rouge. | boolean   |    —           |  false  |
+| hidden        | Cache le badge.    | boolean         |          —            |  false  |
+| type          | Type du bouton.     | string          | primary / success / warning / danger / info |   —  |

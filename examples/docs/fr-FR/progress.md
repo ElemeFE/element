@@ -49,6 +49,7 @@ Dans ce cas le pourcentage ne prends pas de place en plus.
 <el-progress type="circle" :percentage="80" color="#8e71c7"></el-progress>
 <el-progress type="circle" :percentage="100" status="success"></el-progress>
 <el-progress type="circle" :percentage="50" status="exception"></el-progress>
+<el-progress type="circle" :percentage="100" status="text">Terminé</el-progress>
 ```
 :::
 
@@ -60,7 +61,7 @@ Dans ce cas le pourcentage ne prends pas de place en plus.
 | type | Le type de barre. | string | line/circle | line |
 | stroke-width | La largeur de la barre. | number | — | 6 |
 | text-inside | Si le pourcentage doit être à l'intérieur de la barre, ne marche que si `type` est 'line'. | boolean | — | false |
-| status | Le status actuel de la progression. | string | success/exception | — |
+| status | Le statut actuel de la progression. | string | success/exception/text | — |
 | color  | La couleur de fon de la barre. Écrase `status`. | string | — | — |
 | width | La largeur du canvas dans le cas d'une barre circulaire. | number | — | 126 |
 | show-text | Si le pourcentage doit être affiché. | boolean | — | true |

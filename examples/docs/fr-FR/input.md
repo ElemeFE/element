@@ -654,7 +654,8 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | suffix-icon   | Classe de l'iĉone de suffixe.  | string          | — | — |
 | rows | Nombre de ligne pour une zone de texte, ne marche que si `type` est 'textarea'. | number | — | 2 |
 | autosize | Si la zone de texte à une hauteur adaptative, ne marche que si `type` est 'textarea'. Peut accepter un objet, e.g. { minRows: 2, maxRows: 6 }  | boolean / object | — | false |
-| auto-complete | Identique à `auto-complete` dans l'input natif. | string | on / off | off |
+| autocomplete | Identique à `autocomplete` dans l'input natif. | string | on / off | off |
+| auto-complete | @DEPRECATED dans la prochaine version majeure. | string | on/off | off |
 | name | Identique à `name` dans l'input natif. | string | — | — |
 | readonly | Identique à `readonly` dans l'input natif. | boolean | — | false |
 | max | Identique à `max` dans l'input natif. | — | — | — |
@@ -665,6 +666,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | form | Identique à `form` dans l'input natif. | string | — | — |
 | label | Texte du label. | string | — | — |
 | tabindex | tabindex de l'input. | string | - | - |
+| validate-event | Si la validation doit avoir lieu. | boolean | - | - |
 
 ### Slots de l'Input
 
@@ -697,6 +699,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | Attribut | Description | Type | Options | Défaut |
 |----| ----| ----| ---- | -----|
 | placeholder| Le placeholder de l'autocomplétion. | string | — | — |
+| clearable | Si un bouton d'effacement doit apparaître. | boolean | — | false |
 | disabled | Si l'autocomplétion est déactivée. | boolean | — | false|
 | value-key | Nom de la clé de l'objet suggestion pour l'affichage. | string | — | value |
 | icon | Nom de l'icône. | string | — | — |
@@ -712,6 +715,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | prefix-icon | Classe de l'icône de préfixe. | string | — | — |
 | suffix-icon | Classe de l'iĉone de suffixe. | string | — | — |
 | hide-loading | Si l'icône de chargement doit être cachée dans le cas d'une recherche distante. | boolean | — | false |
+| popper-append-to-body | Si le menu doit être ajouter au body. Si le positionnement du menu est incorrect, essayez de mettre cette propriété à `false`. | boolean | - | true |
 
 ### Slots de l'autocomplétion
 

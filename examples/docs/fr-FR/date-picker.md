@@ -66,8 +66,8 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: [],
-        value14: []
+        value13: '',
+        value14: ''
       };
     }
   };
@@ -232,7 +232,7 @@ Vous pouvez sélectionner une semaine, un mois, une année ou plusieurs dates en
         value3: '',
         value4: '',
         value5: '',
-        value14: []
+        value14: ''
       };
     }
   };
@@ -464,7 +464,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
   export default {
     data() {
       return {
-        value13: []
+        value13: ''
       };
     }
   };
@@ -522,3 +522,8 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | Méthode | Description | Paramètres |
 |------|--------|-------|
 | focus | Focus sur le champ. | — |
+
+### Slots
+| Nom    | Description |
+|---------|-------------|
+| range-separator  | Séparateur d'intervalle personnalisé. |

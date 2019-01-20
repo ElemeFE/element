@@ -1697,3 +1697,4 @@ Recherchez une option particulière en entrant des mots-clé.
 | active-item-change | Se déclenche quand le parent de l'option active change, ne marche que si `change-on-select` est `false` | Un tableau des options actives |
 | blur | Se déclenche quand le Cascader perds le focus. | (event: Event) |
 | focus | Se déclenche quand le Cascader a le focus. | (event: Event) |
+| visible-change | Se déclenche quand le menu apparaît ou disparaît. | `true` quand il apparaît, `false` sinon. |

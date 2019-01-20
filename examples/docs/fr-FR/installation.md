@@ -29,4 +29,4 @@ Si vous utilisez un CDN, une page hello-world peut être obtenue facilement avec
 
 <iframe width="100%" height="600" src="//jsfiddle.net/hzfpyvg6/1213/embedded/html,result/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-Si vous utilisez npm et souhaitez ajouter webpack, continuez sur la page suivante: Quick Start.
+Si vous utilisez npm et souhaitez ajouter webpack, continuez sur la page suivante: [Quick Start](/#/fr-FR/component/quickstart).

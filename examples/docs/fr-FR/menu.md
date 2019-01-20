@@ -307,7 +307,7 @@ Le menu vertical peut être réduit.
 | default-active | Index du menu actif. | string    | — | — |
 | default-openeds | Liste contenant les index les sous-menus actifs.  | Array    | — | — |
 | unique-opened  | Si un seul sous-menu peut être actif.  | boolean   | — | false   |
-| menu-trigger | Comment les sous-menu sont déclenchés, uniquement en mode horizontal. | string    | — | hover |
+| menu-trigger | Comment les sous-menu sont déclenchés, uniquement en mode horizontal. | string    | hover / click | hover |
 | router  | Si le mode `vue-router` est activé. Si `true`, l'index sera utilisé comme 'path' pour activer la route. | boolean   | — | false   |
 | collapse-transition  | Si la transition de réduction doit être activée. | boolean   | — | true   |
 

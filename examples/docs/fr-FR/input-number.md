@@ -9,7 +9,8 @@
         num5: 1,
         num6: 1,
         num7: 1,
-        num8: 1
+        num8: 1,
+        num9: 1
       }
     },
     methods: {
@@ -121,7 +122,7 @@ Vous pouvez déterminer un pas pour le champs.
 :::
 
 :::tip
-La valeur de `precision` doit être un integer positif et ne doit pas être inférieure aux décimales de `step`.
+La valeur de `precision` doit être un integer non-négatif et ne doit pas être inférieure aux décimales de `step`.
 :::
 
 ### Taille
@@ -191,6 +192,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | controls-position | Position des boutons. | string | right | - |
 | name | Identique à `name` dans l'input natif. | string | — | — |
 | label | Texte du label. | string | — | — |
+| placeholder | Placeholder du champ. | string | - | - |
 
 ### Évènements
 
@@ -205,3 +207,4 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | Méthode | Description | Paramètres |
 |------|--------|-------|
 | focus | Met le focus sur le composant. | - |
+| select | Sélectionne le texte dans le champ. | — |

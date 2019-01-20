@@ -240,7 +240,7 @@ Prompt est utilisé lorsqu'un utilisateur.
           cancelButtonText: 'Annuler',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: 'E-mail invalide'
-        }).then(value => {
+        }).then(({ value }) => {
           this.$message({
             type: 'success',
             message: 'Votre e-mail est: ' + value

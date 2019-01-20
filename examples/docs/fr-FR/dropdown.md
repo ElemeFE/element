@@ -334,6 +334,13 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 | show-timeout | Délai avant d'afficher le menu (ne marche que si `trigger` est `hover`) | number | — | 250 |
 | hide-timeout | Délai avant de cacher le menu (ne marche que si `trigger` est `hover`) | number | — | 150 |
 
+### Dropdown Slots
+
+| Nom | Description |
+|------|--------|
+| — | Contenu du Dropdown. Note: doit être un élément du DOM valide (ex. `<span>, <button> etc.`) ou `el-component`, pour y attacher un évènement.  |
+| dropdown | Contenu du menu du Dropdown, en général un élément `<el-dropdown-menu>`. |
+
 ### Évènements du Dropdown
 
 | Nom | Description | Paramètres |

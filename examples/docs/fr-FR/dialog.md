@@ -147,7 +147,7 @@ Le contenu du modal peut être n'importe quoi, tableau ou formulaire compris.
 <el-dialog title="Adresse d'expédition" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Nom de promotion" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Zones" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="Sélectionnez une zone">
@@ -309,8 +309,10 @@ Si la variable liée à `visible` est gérée dans Vuex, le modificateur `.sync`
 | footer | Contenu du footer. |
 
 ### Évènements
+
 | Nom | Description | Paramètres |
 |---------- |-------- |---------- |
 | open | Se déclenche quand le Dialog s'ouvre. | — |
+| opened | Se déclenche quand l'animation d'ouverture est terminée. | — |
 | close | Se déclenche quand le Dialog se ferme. | — |
 | closed | Se déclenche quand l'animation de fermeture du Dialog est terminée. | — |

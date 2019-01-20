@@ -229,8 +229,8 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small | Si la pagination doit être petite. | boolean |      —       | false |
-| background | Si les boutons doivent avoir une couleur de fond. | Boolean | — | false |
-| page-size | Nombre d'entrées sur chaque page. | number |      —       | 10 |
+| background | Si les boutons doivent avoir une couleur de fond. | boolean | — | false |
+| page-size | Nombre d'entrées sur chaque page, supporte le modificateur .sync. | number |      —       | 10 |
 | total | Nombre total d'entrées. | number | — | — |
 | page-count | Nombre de pages. Réglez `total` ou `page-count` et le nombre de pages sera affiché; si vous avez besoin de `page-sizes`, `total` est requis. | number | — | — |
 | pager-count | Nombre de sélecteurs de pages. Pagination se réduit lorsque le nombre de pages dépasse cette valeur. | number | Nombre impair entre 5 et 21. | 7 |

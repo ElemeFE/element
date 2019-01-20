@@ -185,8 +185,26 @@
           amount2: '4.1',
           amount3: 15
         }],
+        tableData7: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-01',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles',
+        }],
         currentRow: null,
-        multipleSelection: []
+        multipleSelection: [],
+        search: '',
       };
     },
 
@@ -215,6 +233,13 @@
         });
 
         return sums;
+      },
+
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
       },
 
       setCurrent(row) {
@@ -704,7 +729,7 @@ Lorsque qu'il y a beaucoup de colonnes, il peut être utile d'en fixer certaines
       width="120">
       <template slot-scope="scope">
         <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-        <el-button type="text" size="small">Edit</el-button>
+        <el-button type="text" size="small">Editer</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -1337,7 +1362,10 @@ Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
 :::demo Réglez `filters` et `filter-method` dans `el-table-column` pour rendre la colonne filtrable. `filters` prends un tableau, et `filter-method` est une fonction déterminant comment les lignes s'affichent. Elle prend trois paramètres: `value`, `row` et `column`.
 ```html
 <template>
+  <el-button @click="resetDateFilter">Effacer le filtre date</el-button>
+  <el-button @click="clearFilter">Effacer tout les filtres</el-button>
   <el-table
+    ref="filterTable"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -1345,6 +1373,7 @@ Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
       label="Date"
       sortable
       width="180"
+      column-key="date"
       :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
       :filter-method="filterHandler"
     >
@@ -1403,6 +1432,12 @@ Vous pouvez filtrer la table pour obtenir rapidement les lignes désirées.
       }
     },
     methods: {
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
+      },
       formatter(row, column) {
         return row.address;
       },
@@ -1496,6 +1531,82 @@ Vous pouvez customiser le contenu des colonnes afin de pouvoir utiliser d'autres
         console.log(index, row);
       }
     }
+  }
+</script>
+```
+:::
+
+### Table avec header personnalisé
+
+Vous pouvez également personnaliser le header de la table.
+
+:::demo Vous pouvez personnaliser le header grâce aux [slots avec portée](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+```html
+<template>
+  <el-table
+    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%">
+    <el-table-column
+      label="Date"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="Name"
+      prop="name">
+    </el-table-column>
+    <el-table-column
+      align="right">
+      <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"/>
+      </template>
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">Editer</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">Supprimer</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles'
+        }],
+        search: '',
+      }
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    },
   }
 </script>
 ```
@@ -2011,10 +2122,11 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 |------|--------|-------|
 | clearSelection | Dans les tables avec sélection multiple, efface la sélection. | — |
 | toggleRowSelection | Dans les tables avec sélection multiple, change la sélection d'une ligne. Grâce au deuxième paramètre vous pouvez directement décider si cette ligne est sélectionnée. | row, selected |
+| toggleAllSelection | Utilisé dans les tables à sélection multiples, sélectionne toutes les lignes. | - |
 | toggleRowExpansion | Pour les lignes extensibles, change l'état de la ligne. Grâce au deuxième paramètre vous pouvez directement décider si cette ligne est étendue. | row, expanded |
 | setCurrentRow | Dans les tables à sélection simple, sélectionne une ligne. Sans paramètre la sélection est effacé. | row |
 | clearSort | Efface le tri. | — |
-| clearFilter | Efface le filtre. | — |
+| clearFilter | Efface les filtres des colonnes dont les `columnKey` sont passées. Si aucun paramètre, efface tout les filtres. | columnKeys |
 | doLayout | Rafraîchi le layout de la table. Quand la visibilité de la table change vous aurez peut-être besoin de cette méthode pour corriger le layout. | — |
 | sort | Tri la table manuellement. La proriété `prop` détermine la colonne, `order` détermine l'ordre de tri. | prop: string, order: string |
 
@@ -2061,3 +2173,4 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | Nom | Description |
 |------|--------|
 | — | Contenu personnalisé pour les colonnes. Les paramètres sont { row, column, $index } |
+| header | Contenu personnalisé pour le header. Le paramètre de scope est { column, $index } |

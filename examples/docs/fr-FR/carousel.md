@@ -220,6 +220,7 @@ Quand la page est suffisement large mais avec une hauteur limitée, vous pouvez 
 | indicator-position | Position des indicateurs. | string | outside/none | — |
 | arrow | Détermine quand les flèches sont affichés. | string | always/hover/never | hover |
 | type | Type du carousel. | string | card | — |
+| loop | Affiche les éléments en boucle. | boolean | - | true |
 
 ### Évènements du Carousel
 | Nom | Description | Paramètres |

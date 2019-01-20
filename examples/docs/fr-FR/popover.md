@@ -1,21 +1,8 @@
-<style>
-  .demo-box.demo-popover {
-    .el-popover + .el-popover {
-      margin-left: 10px;
-    }
-    .el-input {
-      width: 360px;
-    }
-    .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 <script>
   export default {
     data() {
       return {
+        visible: false,
         visible2: false,
         gridData: [{
           date: '2016-05-02',
@@ -94,6 +81,20 @@
   };
 </script>
 
+<style>
+  .demo-box.demo-popover {
+    .el-popover + .el-popover {
+      margin-left: 10px;
+    }
+    .el-input {
+      width: 360px;
+    }
+    .el-button {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 ## Popover
 
 ### Usage
@@ -103,34 +104,55 @@ Similaire à Tooltip, Popover est aussi construit avec `Vue-popper`. Certains at
 :::demo L'attribut `trigger` détermine comment le popover se déclenche: `hover`, `click`, `focus` ou `manual`. Concernant l'élément déclencheur, vous pouvez l'écrire de deux manières: en utilisant le slot `slot="reference"` ou bien la directive `v-popover` avec `ref` égal à popover.
 
 ```html
-<el-popover
-  placement="top-start"
-  title="Title"
-  width="200"
-  trigger="hover"
-  content="this is content, this is content, this is content">
-  <el-button slot="reference">S'active au passage du curseur</el-button>
-</el-popover>
+<template>
+  <el-popover
+    placement="top-start"
+    title="Title"
+    width="200"
+    trigger="hover"
+    content="this is content, this is content, this is content">
+    <el-button slot="reference">S'active au passage du curseur</el-button>
+  </el-popover>
 
-<el-popover
-  placement="bottom"
-  title="Title"
-  width="200"
-  trigger="click"
-  content="this is content, this is content, this is content">
-  <el-button slot="reference">S'active en cliquant</el-button>
-</el-popover>
+  <el-popover
+    placement="bottom"
+    title="Title"
+    width="200"
+    trigger="click"
+    content="this is content, this is content, this is content">
+    <el-button slot="reference">S'active en cliquant</el-button>
+  </el-popover>
 
-<el-popover
-  ref="popover"
-  placement="right"
-  title="Title"
-  width="200"
-  trigger="focus"
-  content="this is content, this is content, this is content">
-</el-popover>
-<el-button v-popover:popover>S'active au focus</el-button>
+  <el-popover
+    ref="popover"
+    placement="right"
+    title="Title"
+    width="200"
+    trigger="focus"
+    content="this is content, this is content, this is content">
+  </el-popover>
+  <el-button v-popover:popover>S'active au focus</el-button>
 
+  <el-popover
+    placement="bottom"
+    title="Title"
+    width="200"
+    trigger="manual"
+    content="this is content, this is content, this is content"
+    v-model="visible">
+    <el-button slot="reference" @click="visible = !visible">S'active manuellement</el-button>
+  </el-popover>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        visible: false
+      };
+    }
+  };
+</script>
 ```
 :::
 
