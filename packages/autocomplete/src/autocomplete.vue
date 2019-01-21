@@ -149,9 +149,9 @@
     },
     watch: {
       suggestionVisible(val) {
-        let input = this.$refs.input.$refs.input || this.$refs.input.$refs.textarea;
-        if (input) {
-          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, input.offsetWidth]);
+        let $input = this.getInput();
+        if ($input) {
+          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
         }
       }
     },
@@ -251,8 +251,11 @@
           suggestion.scrollTop -= highlightItem.scrollHeight;
         }
         this.highlightedIndex = index;
-        let $input = (this.$el.querySelector('.el-input__inner') || this.$el.querySelector('.el-textarea__inner'));
+        let $input = this.getInput();
         $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+      },
+      getInput() {
+        return this.$refs.input.$refs.input || this.$refs.input.$refs.textarea;
       }
     },
     mounted() {
@@ -260,7 +263,7 @@
       this.$on('item-click', item => {
         this.select(item);
       });
-      let $input = (this.$el.querySelector('.el-input__inner') || this.$el.querySelector('.el-textarea__inner'));
+      let $input = this.getInput();
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
       $input.setAttribute('aria-controls', 'id');
