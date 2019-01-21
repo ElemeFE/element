@@ -296,6 +296,13 @@
           <p>Next Generation API-first CMS</p>
         </div>
       </a>
+      <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
+        <img width="45px" src="~examples/assets/images/duohui.svg" alt="duohui">
+        <div>
+          <p>Sponsored by 多会</p>
+          <p>炫酷的新一代活动票务系统</p>
+        </div>
+      </a>
     </div>
     <div class="cards">
       <ul class="container">
