@@ -255,7 +255,7 @@
         $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
       },
       getInput() {
-        return this.$refs.input.$refs.input || this.$refs.input.$refs.textarea;
+        return this.$refs.input.getInput();
       }
     },
     mounted() {
