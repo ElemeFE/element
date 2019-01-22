@@ -106,4 +106,4 @@ export default {
       hasCheckedFormat: 'Тандалган {checked}/{total} сан'
     }
   }
-}
+};
