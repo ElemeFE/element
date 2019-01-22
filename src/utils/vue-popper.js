@@ -3,7 +3,8 @@ import {
   PopupManager
 } from 'element-ui/src/utils/popup';
 
-const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
+const PopperJS = Vue.prototype.$isServer ? function () {
+} : require('./popper');
 const stop = e => e.stopPropagation();
 
 /**
@@ -38,6 +39,9 @@ export default {
     arrowOffset: {
       type: Number,
       default: 35
+    },
+    arrowClass: {
+      type: String
     },
     appendToBody: {
       type: Boolean,
@@ -179,8 +183,9 @@ export default {
       if (hash) {
         arrow.setAttribute(hash, '');
       }
+
       arrow.setAttribute('x-arrow', '');
-      arrow.className = 'popper__arrow';
+      arrow.className = 'popper__arrow ' + (this.arrowClass || '');
       element.appendChild(arrow);
     }
   },
