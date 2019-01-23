@@ -127,7 +127,7 @@
         type: Boolean,
         default: true
       },
-      customKey: String,
+      customKey: String
     },
     data() {
       return {
