@@ -42,7 +42,7 @@
       :id="id">
       <li
         v-for="(item, index) in suggestions"
-        :key="index"
+        :key="customKey ? item[customKey] : index"
         :class="{'highlighted': highlightedIndex === index}"
         @click="select(item)"
         :id="`${id}-item-${index}`"
@@ -126,7 +126,8 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
-      }
+      },
+      customKey: String,
     },
     data() {
       return {
