@@ -81,6 +81,10 @@ The current value is displayed when the slider is being dragged.
     <span class="demonstration">Disabled</span>
     <el-slider v-model="value5" disabled></el-slider>
   </div>
+  <div class="block">
+      <span class="demonstration">Bi Directional Slider</span>
+      <el-slider bi-directional :min="-50" :max="50" v-model="value6"></el-slider>
+  </div>
 </template>
 
 <script>
@@ -91,7 +95,8 @@ The current value is displayed when the slider is being dragged.
         value2: 50,
         value3: 36,
         value4: 48,
-        value5: 42
+        value5: 42,
+        value6: 0
       }
     },
     methods: {
@@ -115,14 +120,14 @@ The options can be discrete.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value6"
+      v-model="value7"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value7"
+      v-model="value8"
       :step="10"
       show-stops>
     </el-slider>
@@ -133,8 +138,8 @@ The options can be discrete.
   export default {
     data() {
       return {
-        value6: 0,
-        value7: 0
+        value7: 0,
+        value8: 0
       }
     }
   }
@@ -152,7 +157,7 @@ Set value via a input box.
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value9"
       show-input>
     </el-slider>
   </div>
@@ -162,7 +167,7 @@ Set value via a input box.
   export default {
     data() {
       return {
-        value8: 0
+        value9: 0
       }
     }
   }
@@ -179,7 +184,7 @@ Selecting a range of values is supported.
 <template>
   <div class="block">
     <el-slider
-      v-model="value9"
+      v-model="value10"
       range
       show-stops
       :max="10">
@@ -191,7 +196,7 @@ Selecting a range of values is supported.
   export default {
     data() {
       return {
-        value9: [4, 8]
+        value10: [4, 8]
       }
     }
   }
@@ -228,7 +233,6 @@ Selecting a range of values is supported.
 ## Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value / v-model | binding value | number | — | 0 |
 | min | minimum value | number | — | 0 |
 | max | maximum value | number | — | 100 |
 | disabled | whether Slider is disabled | boolean | — | false |
@@ -245,6 +249,8 @@ Selecting a range of values is supported.
 | label | label for screen reader | string | — | — |
 | debounce | debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 | tooltip-class | custom class name for the tooltip | string | — | — |
+| bi-directional | slider extends right or left from the middle | boolean | — | false |
+
 
 ## Events
 | Event Name | Description | Parameters |
