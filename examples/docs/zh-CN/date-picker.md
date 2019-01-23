@@ -240,7 +240,7 @@
 ```
 :::
 
-###  选择日期范围
+### 选择日期范围
 
 可在一个选择器中便捷地选择一个时间范围
 
@@ -249,7 +249,6 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    {{value6}}
     <el-date-picker
       v-model="value6"
       type="daterange"
@@ -429,6 +428,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | 绑定值 | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |

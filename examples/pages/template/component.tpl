@@ -71,7 +71,7 @@
           }
 
           td, th {
-            border-bottom: 1px solid #d8d8d8;
+            border-bottom: 1px solid #dcdfe6;
             padding: 15px;
             max-width: 250px;
           }
@@ -79,12 +79,12 @@
           th {
             text-align: left;
             white-space: nowrap;
-            color: #666;
+            color: #909399;
             font-weight: normal;
           }
 
           td {
-            color: #333;
+            color: #606266;
           }
 
           th:first-child, td:first-child {

@@ -242,7 +242,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  width        |  popover width  | string, number            | — | Min width 150px |
 |  placement        |  popover placement  | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 |  disabled       |  whether Popover is disabled  | boolean    | — |  false |
-|  value(v-model)        |  whether popover is visible  | Boolean           | — |  false |
+|  value / v-model        |  whether popover is visible  | Boolean           | — |  false |
 |  offset        |  popover offset  | number           | — |  0 |
 |  transition     |  popover transition animation      | string             | — | el-fade-in-linear |
 |  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
