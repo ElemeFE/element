@@ -118,9 +118,7 @@
         const len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
-        if (this.changeOnSelect) {
-          this.$emit('pick', this.activeValue.slice(), false);
-        } else {
+        if (!this.changeOnSelect) {
           this.$emit('activeItemChange', this.activeValue);
         }
       },
@@ -241,9 +239,7 @@
               events.on[triggerEvent] = triggerHandler;
               if (triggerEvent === 'mouseenter' && this.changeOnSelect) {
                 events.on.click = () => {
-                  if (this.activeValue.indexOf(item.value) !== -1) {
-                    this.$emit('closeInside', true);
-                  }
+                  this.$emit('pick', this.activeValue.slice());
                 };
               }
               events.on['mousedown'] = () => {

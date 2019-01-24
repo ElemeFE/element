@@ -269,7 +269,6 @@ export default {
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
       this.menu.$on('menuLeave', this.doDestroy);
-      this.menu.$on('closeInside', this.handleClickoutside);
     },
     showMenu() {
       if (!this.menu) {
@@ -398,8 +397,8 @@ export default {
       ev.stopPropagation();
       this.handlePick([], true);
     },
-    handleClickoutside(pickFinished = false) {
-      if (this.menuVisible && !pickFinished) {
+    handleClickoutside() {
+      if (this.menuVisible) {
         this.needFocus = false;
       }
       this.menuVisible = false;
