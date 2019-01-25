@@ -1,5 +1,27 @@
 ## Changelog
 
+### 2.5.0
+
+*2019-01-25*
+
+#### New features
+- DatePicker
+  - Add `validate-event` attribute (by @ziyoung in #13531)
+- Tag
+  - Add `click` event (by @licdream in #14106)
+- DateTimePicker
+  - `pickerOptions` support `selectableRange` option (by @eeeeeeeason)
+- I18n
+  - support Kyrgyz language (by @zzjframework in #14174)
+
+#### Optimization
+- Upgrade to webpack@4 (by @jikkai in #14173)
+- Input
+  - Simplify implementation (by @wacky6 in #13471)
+- Update Axure file，add new components（by @ziyoung in #13773）
+
+A lot of bugfixes in Autocomplete, Table, Cascader, Tree and so on, [more info](https://github.com/ElemeFE/element/releases/tag/v2.5.0).
+
 ### 2.4.11
 
 *2018-11-21*
@@ -67,17 +89,17 @@
 
 *2018-09-14*
 
-- Corregido que DatePicker no activaba la validación del Form, #12328 #12348 
-- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347 
+- Corregido que DatePicker no activaba la validación del Form, #12328 #12348
+- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347
 - Corregida la posición incorrecta del spinner del DatePicker, #12415 (por @rang-ali)
 - Se ha corregido el llenado automático del input del DatePicker, #12521 (por @abdallanayer)
 - Corregida el input no resaltada en Cascader, #12341
-- Corregido el orden incorrecto de Tabpane, #12346 
+- Corregido el orden incorrecto de Tabpane, #12346
 - Corregida la posición incorrecta del cursor de ColorPicker, #12376 (por @cnwhy)
 - Corregido el estilo del Submenú, #2457
 - Corregido el resaltado después de seleccionar el Submenú, #12479
 - Corregidos los valores incorrectos seleccionados por Cascader, #12508 (por @huangjinqiang)
-- Corregido el valor incorrecto del input de Paginación, #12525 
+- Corregido el valor incorrecto del input de Paginación, #12525
 - Se ha corregido el orden en que la paginación desencadena los eventos, #12530
 - Corregido que no se mostraba el Table Filter, #12539
 - Corregido Tree que era incapaz de borrar nodos, #12684
@@ -112,7 +134,7 @@
 
 - Se ha corregido en Table que `class-name` no funcionaba para las columnas `expand`, #12006
 - Se ha añadido el método `toggleAllSelection` para Table, #12047
-- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108 
+- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108
 - Corregido que el `line-height` de Option no se establecia, #12120
 - Corregido que TimeSelect con valor por defecto `null` no podia ser asignado después de ejecutar `resetField`, #12010
 - Arreglado el evento `keydown` que cuando no era una tecla de flecha no funciona en Tree, #12008
@@ -375,7 +397,7 @@
 - Corregido Table con fila expandible no calculaba la altura cuando la fila era expandida, #9484
 - Corregido que cuando se escribia la fecha de forma manual en DateTimePicker no se disparaba el evento  `change`, #9913
 - Corregido que Select mostraba sus opciones cuando se hacia click con el botón derecho del mouse en el Input, #9894 (by @openks)
-- Agregado el atributo `tooltip-class` para Slider, #9957 
+- Agregado el atributo `tooltip-class` para Slider, #9957
 - Ahora Select permanecera enfocado despues de la selección, #9857 (by @Seebiscuit)
 - Agregado el atributo `target-order` para Transfer, #9960
 
@@ -734,7 +756,7 @@
   - Atributo `theme` eliminado. El color de Menu se puede configurar utilizando  `background-color`, `text-color` y `active-text-color`
 - Input
   - Atributo `icon` eliminado. Ahora el icono del sufijo puede configurarse usando el atributo  `suffix-icon`  o el slot con nombre `suffix`.
-  - Eliminado el atributo `on-icon-click` y el evento `click`. Ahora para añadir el manejador de clics en los iconos, por favor use los slots con nombre. 
+  - Eliminado el atributo `on-icon-click` y el evento `click`. Ahora para añadir el manejador de clics en los iconos, por favor use los slots con nombre.
   - El evento `change` se comporta ahora como el nativo, que se activa sólo en la perdida del foco o presionando enter. Si necesita responder a las entradas de usuario en tiempo real, puede utilizar el evento `input`.
 - Autocomplete
   - Atributo `custom-item` eliminado. Ahora la plantilla de sugerencias del input se puede personalizar utilizando `scoped slot`
