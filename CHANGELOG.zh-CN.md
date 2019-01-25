@@ -6,24 +6,75 @@
 
 #### 新特性
 - DatePicker
-  - 添加 `validate-event` 属性（by @ziyoung in #13531）
-- Tag
-  - 添加 `click` 事件 （by @licdream in #14106）
+  - 新增 `validate-event` 属性 (by @ziyoung in #13531)
 - DateTimePicker
-  - `pickerOptions` 支持 `selectableRange` 选项（by @eeeeeeeason）
+  - `pickerOptions` 支持 `selectableRange` 选项 (by @eeeeeeeason)
+- Tag
+  - 新增 `click` 事件 (by @licdream in #14106)
 - I18n
-  - 新增吉尔吉斯坦语（by @zzjframework in #14174）
+  - 新增 柯尔克孜语 (Kyrgyz) (by @zzjframework in #14174)
 
 #### 优化
-- 升级 Webpack 到 4.x （by @jikkai in #14173）
+- 升级到 webpack@4 (by @jikkai in #14173)
 - Input
-  - 简化 `el-input` 的实现 （by @wacky6 in #13471）
-- 更新 Axure 文件，新增组件（by @ziyoung in #13773）
+  - 简化内部实现，遵循单向数据流；修复若干相关 Bug (by @wacky6 in #13471)
+- 更新 Axure 文件，增加新组件 (by @ziyoung in #13773)
 
-#### 其他
-- `README.md` 新增钉钉群二维码，欢迎扫码加入！
-
-还有包括 Autocomplete、Table、Cascader、Tree 等等组件的问题修复和优化，[详情](https://github.com/ElemeFE/element/releases/tag/v2.5.0)。
+#### 修复
+- Autocomplete
+  - 修正下拉框最后一行显示不完整的问题 (#13597) (by @ziyoung)
+  - 修正下拉框箭头 (#13762) (by @liuchuzhang)
+- Carousel
+  - 组件销毁时释放内部 Timer (#13820) (by @elfman)
+- Cascader
+  - 移除已废弃的计算属性的 cache 属性 (#13737) (by @iamkun)
+  - 修正 TypeScript 中 CascaderOption 类型定义 (#13613) (by @NateScarlet)
+  - 修正图标覆盖文字的问题 (#13596) (by @ziyoung)
+- Checkbox
+  - 改进显示样式 (by @PanJiaChen)
+- DatePicker
+  - 修正 TimeSpinner 中缺失的 v-for `key` 属性 (#13547) (by @Ende93)
+  - 修正周选择器在跨年时的高亮行为 (#13883) (by @suyi91)
+- Input
+  - 修复 textarea 时的 DOM 节点引用 (#13803) (by @laomu1988 @island205)
+- Pagination
+  - 输入框的值不会小于 1 (#13727) (by @elfman)
+- Popover
+  - 修正 hover 的触发行为 (#13104) (by @goldengecko)
+  - 修正弹出框的内存泄漏 (#13988) (by @qpxtWhite)
+- Radio
+  - 改进显示样式 (by @ohhoney1)
+- Table
+  - 改进点击排序箭头时的行为 (#12890) (by @ohhoney1)
+  - 修正 IE10+ 中 “暂无数据” 提示的垂直布局 (#13638) (by @imzjy)
+  - 修正文档中 `index` 的类型说明 (#13628) (by @ilovefafa)
+  - 修正多级表头使用 `fixed` 属性时，表尾合计行的显示样式 (#13914) (by @luckyCao)
+- Tabs
+  - 修正自动滚动 (#13696) (by @iamkun)
+  - 通过面板名称查找面板 (#13705) (by @iamkun)
+  - 使用 `paneName` 计算面板样式 (#13733) (by @iamkun)
+- Tree
+  - 修正 `showCheckbox` 不能影响子节点的问题 (by @KidneyFlower)
+  - 更新文档和 TypeScript 定义 (#13540) (by @ziyoung)
+- Upload
+  - `list-type` 改变时，保留 `url` 属性 (#13771) (by @elfman)
+- Slider
+  - 修正源代码缩进 (#13955) (by @wacky6)
+- I18n
+  - 补充加泰罗尼亚语 (Catalan) 翻译 (by @jaumesala)
+  - 补充俄语 (Russian) 翻译 (#13658) (by @justlp)
+  - 补充芬兰语 (Finnish) 翻译 (#14137) (by @jenkrisu)
+- Doc
+  - 更新西班牙语文档至 2.4.11 (#13522) (by @Gonzalo2310)
+- 其它
+  - 移除多余的构建脚本 (by @ziyoung)
+  - 修正文档超链接 (#13753) (by @iamkun)
+  - 修正文档中不一致的大小写 (by @wonderjar)
+  - 增加钉钉群的二维码 (#13957) (by @iamkun)
+  - .gitignore 增加 yarn 日志文件 (#13922) (by @mimimi)
+  - 移除赞助商 多态 (#14156) (by @island205)
+  - Update readme qr code src (#13960) (by @iamkun)
+  - 更新 CDN 链接，修正错别字 (by @ziyoung)
 
 ### 2.4.11
 

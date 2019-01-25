@@ -7,20 +7,74 @@
 #### New features
 - DatePicker
   - Add `validate-event` attribute (by @ziyoung in #13531)
-- Tag
-  - Add `click` event (by @licdream in #14106)
 - DateTimePicker
   - `pickerOptions` support `selectableRange` option (by @eeeeeeeason)
+- Tag
+  - Add `click` event (by @licdream in #14106)
 - I18n
   - support Kyrgyz language (by @zzjframework in #14174)
 
 #### Optimization
 - Upgrade to webpack@4 (by @jikkai in #14173)
 - Input
-  - Simplify implementation (by @wacky6 in #13471)
-- Update Axure file，add new components(by @ziyoung in #13773)
+  - Simplify implementation, follow one-way data flow. Fix several related bugs. (by @wacky6 in #13471)
+- Update Axure file，add new components (by @ziyoung in #13773)
 
-A lot of bugfixes in Autocomplete, Table, Cascader, Tree and so on, [more info](https://github.com/ElemeFE/element/releases/tag/v2.5.0).
+#### Bug fixes
+- Autocomplete
+  - Fix dropdown's last line beging clipped (#13597) (by @ziyoung)
+  - Fix missing popper arrow (#13762) (by @liuchuzhang)
+- Carousel
+  - Cleanup timer when component is destroyed (#13820) (by @elfman)
+- Cascader
+  - Remove deprecated property of computed props (#13737) (by @iamkun)
+  - Fix CascaderOption's type definition in TypeScript (#13613) (by @NateScarlet)
+  - Fix icon covering the text (#13596) (by @ziyoung)
+- Checkbox
+  - Refine style (by @PanJiaChen)
+- DatePicker
+  - Add missing v-for `key` in TimeSpinner (#13547) (by @Ende93)
+  - Fix week highlight on year boundary (#13883) (by @suyi91)
+- Input
+  - Fix textarea DOM node reference (#13803) (by @laomu1988 @island205)
+- Pagination
+  - Input value won't be less than 1 (#13727) (by @elfman)
+- Popover
+  - Fix popover issues with hover trigger (#13104) (by @goldengecko)
+  - Fix popper instance memory leak (#13988) (by @qpxtWhite)
+- Radio
+  - Refine style (by @ohhoney1)
+- Table
+  - Enhanced table sorting when clicking on the sorting arrow (#12890) (by @ohhoney1)
+  - Fix empty text vertical alignment issue on IE10+ (#13638) (by @imzjy)
+  - Fix index type documentation (#13628) (by @ilovefafa)
+  - Fix `show-summary` display issue when multilevel header has fixed attr (#13914) (by @luckyCao)
+- Tabs
+  - Fix auto scroll bug (#13696) (by @iamkun)
+  - Get the correct tab through tab name (#13705) (by @iamkun)
+  - Use paneName instead of name to determine pane style (#13733) (by @iamkun)
+- Tree
+  - Fix `showCheckbox` prop on `Tree` can not affect their children `tree-node` (by @KidneyFlower)
+  - Update doc and definition file (#13540) (by @ziyoung)
+- Upload
+  - Add `url` prop to upload file when `list-type` changed (#13771) (by @elfman)
+- Slider
+  - Fix source code indentation (#13955) (by @wacky6)
+- I18n
+  - Add missing Catalan translations (by @jaumesala)
+  - Add missing ru translation (#13658) (by @justlp)
+  - Fix Finnish translations (#14137) (by @jenkrisu)
+- Doc
+  - Update Spanish doc 2.4.11 (#13522) (by @Gonzalo2310)
+- Others
+  - Remove unnecessary script (by @ziyoung)
+  - Fix error anchor link (#13753) (by @iamkun)
+  - Fix inconsistent capitalization in documentation (by @wonderjar)
+  - Add DingDing chat group qr code to readme (#13957) (by @iamkun)
+  - Add yarn logs to .gitignore (#13922) (by @mimimi)
+  - Remove sponsor duotai (#14156) (by @island205)
+  - Update readme qr code src (#13960) (by @iamkun)
+  - Update CDN link, fix typo (by @ziyoung)
 
 ### 2.4.11
 
