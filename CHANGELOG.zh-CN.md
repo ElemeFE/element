@@ -1,5 +1,30 @@
 ## 更新日志
 
+### 2.5.0
+
+*2019-01-25*
+
+#### 新特性
+- DatePicker
+  - 添加 `validate-event` 属性（by @ziyoung in #13531）
+- Tag
+  - 添加 `click` 事件 （by @licdream in #14106）
+- DateTimePicker
+  - `pickerOptions` 支持 `selectableRange` 选项（by @eeeeeeeason）
+- I18n
+  - 新增吉尔吉斯坦语（by @zzjframework in #14174）
+
+#### 优化
+- 升级 Webpack 到 4.x （by @jikkai in #14173）
+- Input
+  - 简化 `el-input` 的实现 （by @wacky6 in #13471）
+- 更新 Axure 文件，新增组件（by @ziyoung in #13773）
+
+#### 其他
+- `README.md` 新增钉钉群二维码，欢迎扫码加入！
+
+还有包括 Autocomplete、Table、Cascader、Tree 等等组件的问题修复和优化，[详情](https://github.com/ElemeFE/element/releases/tag/v2.5.0)。
+
 ### 2.4.11
 
 *2018-11-21*
@@ -40,7 +65,7 @@
 - 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
 - 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
 - Select 多选时，选项不换行，#12329 （by @akki-jat）
-- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh）
 - 修复 Select 的 size 属性不生效的问题，#13070
 - 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
 - 修复最后一个 TabNav 不能删除的问题，#13039
