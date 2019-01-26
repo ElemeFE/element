@@ -1,5 +1,19 @@
 ## 更新日志
 
+### 2.5.1
+
+*2019-01-26*
+
+#### 优化
+- DatePicker：添加月、年高亮的样式（by @Debiancc in #14211）
+- 更新 2.5.0 changelog （by @wacky6 in #14217）
+
+
+#### 修复
+- 修复升级 Webpack 4 产生的问题，无法具名 `import` 组件，`ELEMENT.locale()` 调用报错。（by @island205 in #14220）
+- 恢复 2.4.11 文档 (by @iamkun in #14222)
+
+
 ### 2.5.0
 
 *2019-01-25*

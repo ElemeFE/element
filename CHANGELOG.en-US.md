@@ -1,5 +1,17 @@
 ## Changelog
 
+### 2.5.1
+
+*2019-01-26*
+
+#### Optimization
+- DatePicker: highlight current month and year (by @Debiancc in #14211)
+- Update 2.5.0 changelog (by @wacky6 in #14217)
+
+#### Bug fixes
+- Fix export issue generate by webpack upgrading (by @island205 in #14220)
+- Keep 2.4.11 docs && new sub folder for 2.5+ (by @iamkun in #14222)
+
 ### 2.5.0
 
 *2019-01-25*
