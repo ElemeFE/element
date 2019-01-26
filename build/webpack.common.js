@@ -14,6 +14,8 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'element-ui.common.js',
     chunkFilename: '[id].js',
+    libraryExport: 'default',
+    library: 'ELEMENT',
     libraryTarget: 'commonjs2'
   },
   resolve: {
