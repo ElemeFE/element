@@ -16,16 +16,16 @@ then
   VERSION=$VERSION npm run dist
 
   # publish theme
-  echo "Releasing theme-chalk $VERSION ..."
-  cd packages/theme-chalk
-  npm version $VERSION --message "[release] $VERSION"
-  if [[ $VERSION =~ "beta" ]]
-  then
-    npm publish --tag beta
-  else
-    npm publish
-  fi
-  cd ../..
+  # echo "Releasing theme-chalk $VERSION ..."
+  # cd packages/theme-chalk
+  # npm version $VERSION --message "[release] $VERSION"
+  # if [[ $VERSION =~ "beta" ]]
+  # then
+  #   npm publish --tag beta
+  # else
+  #   npm publish
+  # fi
+  # cd ../..
 
   # commit
   git add -A
