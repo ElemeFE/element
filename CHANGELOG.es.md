@@ -5,72 +5,72 @@
 *2019-01-26*
 
 #### Optimization
-- DatePicker: highlight current month and year (by @Debiancc in #14211)
-- Update 2.5.0 changelog (by @wacky6 in #14217)
+- DatePicker: resalta el mes y año actual (por @Debiancc en #14211)
+- Actualizacion del changelog 2.5.0 (por @wacky6 en #14217)
 
 #### Bug fixes
-- Fix export issue generate by webpack upgrading (by @island205 in #14220)
-- Keep 2.4.11 docs && new sub folder for 2.5+ (by @iamkun in #14222)
+- Arreglado el problema de exportación generado por la actualización de webpack (por @island205 en #14220)
+- Guardados los documentos 2.4.11 y la nueva subcarpeta para 2.5+ (por @iamkun en #14222)
 
 ### 2.5.0
 
 *2019-01-25*
 
 #### Bug fixes
-- Autocomplete
-  - Fix dropdown's last line beging clipped (#13597) (by @ziyoung)
-  - Fix missing popper arrow (#13762) (by @liuchuzhang)
-- Carousel
-  - Cleanup timer when component is destroyed (#13820) (by @elfman)
+- Autocompletar
+  - Corregida la última línea del menú desplegable que comenzaba recortada (#13597) (por @ziyoung)
+  - Arreglada la popper arrow que faltaba (#13762) (por @liuchuzhang)
+- Carrusel
+  - Contador de limpieza cuando el componente es destruido (#13820) (por @elfman)
 - Cascader
-  - Remove deprecated property of computed props (#13737) (by @iamkun)
-  - Fix CascaderOption's type definition in TypeScript (#13613) (by @NateScarlet)
-  - Fix icon covering the text (#13596) (by @ziyoung)
+  - Retirada de los props computados obsoletos (#13737) (por @iamkun)
+  - Se corrigió la definición de tipo de las opciónes de Cascader en TypeScript (#13613) (por @NateScarlet)
+  - Corregido icono que cubre el texto (#13596) (por @ziyoung)
 - Checkbox
-  - Refine style (by @PanJiaChen)
+  - Refinado el estilo (por @PanJiaChen)
 - DatePicker
-  - Add missing v-for `key` in TimeSpinner (#13547) (by @Ende93)
-  - Fix week highlight on year boundary (#13883) (by @suyi91)
+  - Añade el `key` en v-for de TimeSpinner (#13547) (por @Ende93)
+  - Corregido el resaltado de la semana en el límite del año (#13883) (por @suyi91)
 - Input
-  - Fix textarea DOM node reference (#13803) (by @laomu1988 @island205)
+  - Corregida la referencia del nodo DOM del textarea (#13803) (por @laomu1988 @island205)
 - Pagination
-  - Input value won't be less than 1 (#13727) (by @elfman)
+  - El valor de entrada no será menor que 1 (#13727) (por @elfman)
 - Popover
-  - Fix popover issues with hover trigger (#13104) (by @goldengecko)
-  - Fix popper instance memory leak (#13988) (by @qpxtWhite)
+  - Corrección de problemas de popover con el disparador de hover (#13104) (por @goldengecko)
+  - Corregido el fallo de memoria de instancia de popper (#13988) (por @qpxtWhite)
 - Radio
-  - Refine style (by @ohhoney1)
+  - Refinado el estilo (por @ohhoney1)
 - Table
-  - Enhanced table sorting when clicking on the sorting arrow (#12890) (by @ohhoney1)
-  - Fix empty text vertical alignment issue on IE10+ (#13638) (by @imzjy)
-  - Fix index type documentation (#13628) (by @ilovefafa)
-  - Fix `show-summary` display issue when multilevel header has fixed attr (#13914) (by @luckyCao)
+  - Mejorada la ordenación de tablas al hacer clic en la flecha de ordenación (#12890) (por @ohhoney1)
+  - Solucionado el problema de alineación vertical de texto vacío en IE10+ (#13638) (por @imzjjy)
+  - Corregida la documentación del tipo de índice  (#13628) (por @ilovefafa)
+  - Corrección del problema de visualización de `show-summary` cuando el encabezado multinivel tiene el attr fixed (#13914) (por @luckyCao)
 - Tabs
-  - Fix auto scroll bug (#13696) (by @iamkun)
-  - Get the correct tab through tab name (#13705) (by @iamkun)
-  - Use paneName instead of name to determine pane style (#13733) (by @iamkun)
+  - Corregido error de autodesplazamiento (#13696) (por @iamkun)
+  - Obtener la tab correcta a través del nombre de tab (#13705) (por @iamkun)
+  - Uso de paneName en lugar de name para determinar el estilo del panel (#13733) (por @iamkun)
 - Tree
-  - Fix `showCheckbox` prop on `Tree` can not affect their children `tree-node` (by @KidneyFlower)
-  - Update doc and definition file (#13540) (by @ziyoung)
+  - Corregido que `showCheckbox` prop en `Tree` no puede afectar a los hijos `tree-node` (por @KidneyFlower)
+  - Actualizado documento y archivo de definición (#13540) (por @ziyoung)
 - Upload
-  - Add `url` prop to upload file when `list-type` changed (#13771) (by @elfman)
+  - Agregada la prop `url` para subir el archivo cuando `list-type` cambia (#13771) (por @elfman)
 - Slider
-  - Fix source code indentation (#13955) (by @wacky6)
+  - Corrección de la sangría del código fuente (#13955) (por @wacky6)
 - I18n
-  - Add missing Catalan translations (by @jaumesala)
-  - Add missing ru translation (#13658) (by @justlp)
-  - Fix Finnish translations (#14137) (by @jenkrisu)
+  - Añadidas las traducciones de catalán que faltaban (por @jaumesala)
+  - Añadidas las traducciónes de ruso que faltaban (#13658) (por @justlp)
+  - Corrección de las traducciones al finés (#14137) (por @jenkrisu)
 - Doc
-  - Update Spanish doc 2.4.11 (#13522) (by @Gonzalo2310)
-- Others
-  - Remove unnecessary script (by @ziyoung)
-  - Fix error anchor link (#13753) (by @iamkun)
-  - Fix inconsistent capitalization in documentation (by @wonderjar)
-  - Add DingDing chat group qr code to readme (#13957) (by @iamkun)
-  - Add yarn logs to .gitignore (#13922) (by @mimimi)
-  - Remove sponsor duotai (#14156) (by @island205)
-  - Update readme qr code src (#13960) (by @iamkun)
-  - Update CDN link, fix typo (by @ziyoung)
+  - Actualización del documento 2.4.11 (#13522) (por @Gonzalo2310)
+- Otros
+  - Eliminar  scripts innecesarios (por @ziyoung)
+  - Corregido el error de anchor link (#13753) (por @iamkun)
+  - Corrección de la capitalización inconsistente en la documentación (por @wonderjar)
+  - Añadido código qr del grupo de chat DingDing al readme (#13957) (by @iamkun)
+  - Añadido logs de hilo a .gitignore (#13922) (por @mimimi)
+  - Eliminada la cuota de patrocinadores (#14156) (por @island205)
+  - Actualizado readme qr code src (#13960) (por @iamkun)
+  - Actualizado enlace CDN, corregido error tipográfico (por @ziyoung)
 
 ### 2.4.11
 
@@ -825,4 +825,4 @@
 
 # #
 
-<i><sup>*</sup> El procesamiento dinámico de HTML arbitrario en su sitio web puede ser muy peligroso porque puede conducir fácilmente a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Por lo tanto, cuando `dangerouslyUseHTMLString` está encendido, por favor asegúrese de que el contenido de `message` es confiable, y **nunca** asigne el `message` al contenido proporcionado por el usuario.</i>
+<i><sup>*</sup> El procesamiento dinámico de HTML arbitrario en su sitio web puede ser muy peligroso porque puede conducir fácilmente a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Por lo tanto, cuando `dangerouslyUseHTMLString` está encendido, por favor asegúrese de que el contenido de `message` es confiable, y **nunca** asigne el `message` al contenido proporcionado por el usuario.</i>``
