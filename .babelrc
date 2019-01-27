@@ -15,6 +15,14 @@
   "plugins": ["transform-vue-jsx"],
   "env": {
     "utils": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": "commonjs",
+          }
+        ],
+      ],
       "plugins": [
         ["module-resolver", {
           "root": ["element-ui"],
