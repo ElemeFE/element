@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2.5.2
+
+*2019-01-27*
+
+#### Optimization
+- Docs:
+  - Update ChangeLog ES 2.5.1 (by @Gonzalo2310 in #14231)
+
+#### Bug fixes
+- Build:
+  - Delete unremoved comments in umd module `lib/index.js` (by @island205 in #14233)
+  - Fix export error fired in commonjs module used in nuxt.js (by @island205 in #14232)
+  - Fix 2.5.1 build issues  (by @iamkun in #14228)
+
 ### 2.5.1
 
 *2019-01-26*
