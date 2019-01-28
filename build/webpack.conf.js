@@ -18,7 +18,8 @@ module.exports = {
     libraryTarget: 'umd',
     libraryExport: 'default',
     library: 'ELEMENT',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    globalObject: 'typeof self !== \'undefined\' ? self : this'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
