@@ -129,6 +129,7 @@ export default {
 
   deactivated() {
     this.cleanup();
+    this.doClose();
   },
 
   methods: {
