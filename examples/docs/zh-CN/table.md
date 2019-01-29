@@ -1690,7 +1690,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Date"
