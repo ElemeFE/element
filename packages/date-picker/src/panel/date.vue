@@ -321,7 +321,7 @@
 
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
-          this.date = modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate());
+          this.date = value && modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate());
           this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
           this.emit(value.date);

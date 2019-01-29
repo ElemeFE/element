@@ -1,6 +1,6 @@
 {
   "name": "tmconsulting-ui",
-  "version": "1.2.34",
+  "version": "1.2.35",
   "author": "TeamcIO",
   "description": "A Component Library for Vue.js.",
   "main": "lib/tmconsulting-ui.common.js",
@@ -46,6 +46,7 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "deepmerge": "^1.5.2",
     "lodash": "^4.17.11",
+    "moment-timezone": "^0.5.23",
     "normalize-wheel": "^1.0.1",
     "throttle-debounce": "^1.1.0",
     "vue-the-mask": "^0.11.1"

@@ -4,7 +4,8 @@
                 popper-class="tm-advanced-date-picker__popover"
                 ref="popover"
                 trigger="click"
-                :offset="24">
+                :offset="24"
+                :visible-arrow="false">
       <tm-date-picker :class="pickerClass"
                       v-model="date"
                       @input="onChange"
@@ -44,7 +45,7 @@
 </template>
 
 <script>
-  import moment from 'moment';
+  import moment from 'moment-timezone';
   import TmPopover from 'tmconsulting-ui/packages/popover/src/main.vue';
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmDatePicker from 'tmconsulting-ui/packages/date-picker/src/picker/date-picker';
@@ -120,6 +121,10 @@
     return rules.reduce((curr, next) => curr && next, true);
   };
 
+  const getDate = value => moment
+    .tz(value, moment.tz.guess())
+    .format(DATE_FORMATS.EDIT);
+
   export default {
     name: 'TmAdvancedDatePicker',
 
@@ -183,6 +188,7 @@
 
     mounted() {
       this.date = this.localStorageDate;
+      if (Array.isArray(this.date)) this.type = DOUBLE;
       if (this.date) this.onChange(this.date);
     },
 
@@ -204,11 +210,10 @@
 
       blurValue() {
         if (Array.isArray(this.date)) {
-          const [from, till] = this.date;
-          return `${moment(from).format(DATE_FORMATS.READ)} - ${moment(till).format(DATE_FORMATS.READ)}`;
-        } else {
-          return moment(this.date).format(DATE_FORMATS.READ);
+          return this.date.map(getDate).join(' - ');
         }
+
+        return getDate(this.date);
       },
 
       dateMask() {
@@ -288,10 +293,10 @@
         if (isAvailableToClose) this.close();
       },
       onChange(value) {
-        const getDate = val => moment(val).format(DATE_FORMATS.EDIT);
         this.inputDate = Array.isArray(value)
-          ? value.map(_ => getDate(_)).join(' - ')
+          ? value.map(getDate).join(' - ')
           : getDate(value);
+
         this.isEditable = false;
         this.close();
       },

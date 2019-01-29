@@ -16,6 +16,10 @@
   font-size: $--popover-font-size;
   box-shadow: $--box-shadow-popover;
 
+  @include m(no-arrow) {
+    box-shadow: $--box-shadow-light;
+  }
+
   @include e(title) {
     color: $--popover-title-color;
     font-size: $--popover-title-font-size;

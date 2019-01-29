@@ -1,17 +1,18 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var uppercamelcase = require('uppercamelcase');
-var render = require('json-templater/string');
-var endOfLine = require('os').EOL;
+const fs = require('fs');
+const path = require('path');
+const uppercamelcase = require('uppercamelcase');
+const render = require('json-templater/string');
+const endOfLine = require('os').EOL;
 
-var iconsPath = '../../packages/theme-chalk/src/icons';
-var iconsDir = fs.readdirSync(path.resolve(__dirname, iconsPath));
-var iconsList = [];
-var importIconsList = [];
-var exportIconsList = [];
-var exportIconsTemplate = `{{importList}}
+const iconsPath = '../../packages/theme-chalk/src/icons';
+const iconsDir = fs.readdirSync(path.resolve(__dirname, iconsPath));
+
+let iconsList = [];
+let importIconsList = [];
+let exportIconsList = [];
+let exportIconsTemplate = `{{importList}}
 
 module.exports = {
 {{exportList}}
@@ -20,10 +21,10 @@ module.exports = {
 
 iconsDir.forEach(file => {
   // Collect icons name
-  var fileName = file.replace('.svg', '');
+  let fileName = file.replace('.svg', '');
   iconsList.push(fileName);
   // Preparing an import file
-  var componentName = uppercamelcase(fileName);
+  let componentName = uppercamelcase(fileName);
   importIconsList.push(render('import {{name}} from \'' + iconsPath + '/{{icon}}.svg\';', {
     name: componentName,
     icon: fileName
@@ -36,5 +37,17 @@ exportIconsTemplate = render(exportIconsTemplate, {
   exportList: exportIconsList.join(',' + endOfLine)
 });
 
-fs.writeFile(path.resolve(__dirname, '../../examples/icon.json'), JSON.stringify(iconsList));
-fs.writeFile(path.resolve(__dirname, '../../packages/theme-chalk/icons.js'), exportIconsTemplate);
+fs.writeFile(
+  path.resolve(__dirname, '../../examples/icon.json'),
+  JSON.stringify(iconsList),
+  error => {
+    if (error) console.error(error);
+  }
+);
+fs.writeFile(
+  path.resolve(__dirname, '../../packages/theme-chalk/icons.js'),
+  exportIconsTemplate,
+  error => {
+    if (error) console.error(error);
+  }
+);

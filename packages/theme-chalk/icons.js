@@ -21,6 +21,7 @@ import Blanket from '../../packages/theme-chalk/src/icons/blanket.svg';
 import Boiler from '../../packages/theme-chalk/src/icons/boiler.svg';
 import Book from '../../packages/theme-chalk/src/icons/book.svg';
 import Bucket from '../../packages/theme-chalk/src/icons/bucket.svg';
+import CalendarPageEmpty from '../../packages/theme-chalk/src/icons/calendar-page-empty.svg';
 import Calendar from '../../packages/theme-chalk/src/icons/calendar.svg';
 import Car from '../../packages/theme-chalk/src/icons/car.svg';
 import Cart from '../../packages/theme-chalk/src/icons/cart.svg';
@@ -63,6 +64,7 @@ import Home from '../../packages/theme-chalk/src/icons/home.svg';
 import Hotel from '../../packages/theme-chalk/src/icons/hotel.svg';
 import HygienicKit from '../../packages/theme-chalk/src/icons/hygienic-kit.svg';
 import IconBlock from '../../packages/theme-chalk/src/icons/icon-block.svg';
+import IconBookmarkOffer from '../../packages/theme-chalk/src/icons/icon-bookmark-offer.svg';
 import IconHide from '../../packages/theme-chalk/src/icons/icon-hide.svg';
 import IconMoveArrows from '../../packages/theme-chalk/src/icons/icon-move-arrows.svg';
 import IconSocket from '../../packages/theme-chalk/src/icons/icon-socket.svg';
@@ -159,6 +161,7 @@ module.exports = {
   Boiler,
   Book,
   Bucket,
+  CalendarPageEmpty,
   Calendar,
   Car,
   Cart,
@@ -201,6 +204,7 @@ module.exports = {
   Hotel,
   HygienicKit,
   IconBlock,
+  IconBookmarkOffer,
   IconHide,
   IconMoveArrows,
   IconSocket,

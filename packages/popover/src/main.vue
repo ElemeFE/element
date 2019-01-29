@@ -3,7 +3,11 @@
     <transition :name="transition" @after-leave="doDestroy">
       <div
         class="tm-popover tm-popper"
-        :class="[popperClass, content && 'tm-popover--plain']"
+        :class="[
+          popperClass,
+          content && 'tm-popover--plain',
+          !visibleArrow ? 'tm-popover--no-arrow' : ''
+        ]"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"

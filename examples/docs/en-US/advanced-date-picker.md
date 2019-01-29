@@ -9,7 +9,7 @@
     },
     methods: {
       d(date) {
-        console.log("D", date);
+        // console.log("D", date);
         return false;
       }
     }

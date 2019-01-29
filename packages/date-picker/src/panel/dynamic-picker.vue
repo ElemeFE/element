@@ -285,6 +285,8 @@
   };
 
   export default {
+    name: 'dynamic-picker',
+
     mixins: [Locale],
 
     computed: {
@@ -404,11 +406,7 @@
 
     watch: {
       visible() {
-        if (Array.isArray(this.value) && this.panelSwitch !== 'double') {
-          this.panelSwitch = 'double';
-        } else {
-          this.handlePanelChange(null);
-        }
+        this.handlePanelChange(null);
       },
       minDate(val) {
         this.$nextTick(() => {
@@ -456,6 +454,10 @@
       },
 
       value(newVal) {
+        if (Array.isArray(newVal) && this.panelSwitch !== 'double') {
+          this.panelSwitch = 'double';
+        }
+
         if (!newVal) {
           this.minDate = null;
           this.maxDate = null;
@@ -608,6 +610,9 @@
       handleDatePick(val) {
         this.date = modifyDate(this.date, val.getFullYear(), val.getMonth(), val.getDate());
         this.handleConfirm(this.date);
+
+        if (this.panelSwitch === 'single') return;
+
         this.minDate = new Date(this.date);
         this.leftDate = new Date(this.date);
         this.rightDate = nextMonth(this.date);
