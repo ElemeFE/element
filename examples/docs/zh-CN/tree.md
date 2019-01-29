@@ -17,27 +17,27 @@
     .filter-tree {
       margin-top: 20px;
     }
-    
+
     .custom-tree-container {
       display: flex;
       margin: -24px;
     }
-    
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-      
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-      
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-    
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -274,7 +274,7 @@
         if (node.data.name === 'region1') {
           hasChild = true;
         } else if (node.data.name === 'region2') {
-          hasChild = false;          
+          hasChild = false;
         } else {
           hasChild = Math.random() > 0.5;
         }
@@ -1200,9 +1200,11 @@
 | show-checkbox         | 节点是否可被选择                                   | boolean                     | —    | false |
 | check-strictly        | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false   | boolean                     | —    | false |
 | default-checked-keys  | 默认勾选的节点的 key 的数组                        | array                       | —    | —     |
+| current-node-key      | 当前选中的节点                                   | string, number               | —    | —     |
 | filter-node-method    | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | —    | —     |
 | accordion             | 是否每次只打开一个同级树节点展开                   | boolean                     | —    | false |
 | indent                | 相邻级节点间的水平缩进，单位为像素                 | number                     | —    | 16 |
+| icon-class            | 自定义树节点的图标                              |  string                     | -    | -     |
 | lazy                  | 是否懒加载子节点，需与 load 方法结合使用           | boolean                     | —    | false |
 | draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
 | allow-drag            | 判断节点能否被拖拽                  | Function(node)  | —  | —  |
@@ -1232,7 +1234,7 @@
 | getHalfCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前半选中的节点所组成的数组  | - |
 | getHalfCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前半选中的节点的 key 所组成的数组 | - |
 | getCurrentKey   | 获取当前被选中节点的 key，使用此方法必须设置 node-key 属性，若没有节点被选中则返回 null | — |
-| getCurrentNode  | 获取当前被选中节点的 node，若没有节点被选中则返回 null | — |
+| getCurrentNode  | 获取当前被选中节点的 data，若没有节点被选中则返回 null | — |
 | setCurrentKey   | 通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (key) 待被选节点的 key，若为 null 则取消当前高亮的节点 |
 | setCurrentNode  | 通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (node) 待被选节点的 node |
 | getNode         | 根据 data 或者 key 拿到 Tree 组件中的 node | (data) 要获得 node 的 key 或者 data |

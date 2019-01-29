@@ -1,5 +1,157 @@
 ## Changelog
 
+### 2.5.2
+
+*2019-01-27*
+
+#### Optimization
+- Docs:
+  - Update ChangeLog ES 2.5.1 (by @Gonzalo2310 in #14231)
+
+#### Bug fixes
+- Build:
+  - Delete unremoved comments in umd module `lib/index.js` (by @island205 in #14233)
+  - Fix export error fired in commonjs module used in nuxt.js (by @island205 in #14232)
+  - Fix 2.5.1 build issues  (by @iamkun in #14228)
+
+### 2.5.1
+
+*2019-01-26*
+
+#### Optimization
+- DatePicker: highlight current month and year (by @Debiancc in #14211)
+- Update 2.5.0 changelog (by @wacky6 in #14217)
+
+#### Bug fixes
+- Fix export issue generate by webpack upgrading (by @island205 in #14220)
+- Keep 2.4.11 docs && new sub folder for 2.5+ (by @iamkun in #14222)
+
+### 2.5.0
+
+*2019-01-25*
+
+#### New features
+- DatePicker
+  - Add `validate-event` attribute (by @ziyoung in #13531)
+- DateTimePicker
+  - `pickerOptions` support `selectableRange` option (by @eeeeeeeason)
+- Tag
+  - Add `click` event (by @licdream in #14106)
+- I18n
+  - support Kyrgyz language (by @zzjframework in #14174)
+
+#### Optimization
+- Upgrade to webpack@4 (by @jikkai in #14173)
+- Input
+  - Simplify implementation, follow one-way data flow. Fix several related bugs. (by @wacky6 in #13471)
+- Update Axure file，add new components (by @ziyoung in #13773)
+
+#### Bug fixes
+- Autocomplete
+  - Fix dropdown's last line beging clipped (#13597) (by @ziyoung)
+  - Fix missing popper arrow (#13762) (by @liuchuzhang)
+- Carousel
+  - Cleanup timer when component is destroyed (#13820) (by @elfman)
+- Cascader
+  - Remove deprecated property of computed props (#13737) (by @iamkun)
+  - Fix CascaderOption's type definition in TypeScript (#13613) (by @NateScarlet)
+  - Fix icon covering the text (#13596) (by @ziyoung)
+- Checkbox
+  - Refine style (by @PanJiaChen)
+- DatePicker
+  - Add missing v-for `key` in TimeSpinner (#13547) (by @Ende93)
+  - Fix week highlight on year boundary (#13883) (by @suyi91)
+- Input
+  - Fix textarea DOM node reference (#13803) (by @laomu1988 @island205)
+- Pagination
+  - Input value won't be less than 1 (#13727) (by @elfman)
+- Popover
+  - Fix popover issues with hover trigger (#13104) (by @goldengecko)
+  - Fix popper instance memory leak (#13988) (by @qpxtWhite)
+- Radio
+  - Refine style (by @ohhoney1)
+- Table
+  - Enhanced table sorting when clicking on the sorting arrow (#12890) (by @ohhoney1)
+  - Fix empty text vertical alignment issue on IE10+ (#13638) (by @imzjy)
+  - Fix index type documentation (#13628) (by @ilovefafa)
+  - Fix `show-summary` display issue when multilevel header has fixed attr (#13914) (by @luckyCao)
+- Tabs
+  - Fix auto scroll bug (#13696) (by @iamkun)
+  - Get the correct tab through tab name (#13705) (by @iamkun)
+  - Use paneName instead of name to determine pane style (#13733) (by @iamkun)
+- Tree
+  - Fix `showCheckbox` prop on `Tree` can not affect their children `tree-node` (by @KidneyFlower)
+  - Update doc and definition file (#13540) (by @ziyoung)
+- Upload
+  - Add `url` prop to upload file when `list-type` changed (#13771) (by @elfman)
+- Slider
+  - Fix source code indentation (#13955) (by @wacky6)
+- I18n
+  - Add missing Catalan translations (by @jaumesala)
+  - Add missing ru translation (#13658) (by @justlp)
+  - Fix Finnish translations (#14137) (by @jenkrisu)
+- Doc
+  - Update Spanish doc 2.4.11 (#13522) (by @Gonzalo2310)
+- Others
+  - Remove unnecessary script (by @ziyoung)
+  - Fix error anchor link (#13753) (by @iamkun)
+  - Fix inconsistent capitalization in documentation (by @wonderjar)
+  - Add DingDing chat group qr code to readme (#13957) (by @iamkun)
+  - Add yarn logs to .gitignore (#13922) (by @mimimi)
+  - Remove sponsor duotai (#14156) (by @island205)
+  - Update readme qr code src (#13960) (by @iamkun)
+  - Update CDN link, fix typo (by @ziyoung)
+
+### 2.4.11
+
+*2018-11-21*
+
+- Revert pr #13296. Fixed clicking on Menu external causing Submenu collapsed, #13478
+- Adjust small screen (xs) media query breakpoints, #13468 (by @alekoshen712)
+
+### 2.4.10
+
+*2018-11-16*
+
+- Fixed multiple clicks on Select to display the drop-down list, #13268
+- The clear icon for input is not displayed when Form is disabled, #13208
+- Adjust the style of Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Carousel component added `loop` attribute, #13217
+- When the data of Table changes, the highlighted line will remain, #13200
+- Table header scoped slot can receive parameters, #13263
+- Table's `clearFilter` method supports arguments, #13176
+- Tooltip is no longer created when there is no content in the Table cell, #13152 (by @rongxingsun)
+- The input box contents of the ColorPicker panel can be displayed correctly, #13278
+- ColorPicker no longer triggers form validation when dragging, #13299
+- InputNumber added `select `method, #13286 (by @st-sloth)
+- Autocomplete added `clear` event, #12171(by arthurdenner) #13326
+- You can close Menu by clicking on Menu outside, #13296
+- Form's `validateField` method can receive arguments, #13319
+- Cascader added `visible-change` event, #13415
+- DatePicker added range-separator slot, #13272 (by @milworm)
+- Tree adds `iconClass` and `currentNodeKey` properties, #13337 #13197 (by @isnifer)
+- Progress's` status` added text #13198 (by @ali-master)
+- Fixing tree's `defaultCheckedKeys` caused an error, #13349 (by @dive2Pro)
+
+### 2.4.9
+
+*2018-10-26*
+
+- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
+- Added type attribute for Badge, #12991
+- Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
+- Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
+- Select option does not wrap when space is enough, #12329 (by @akki-jat)
+- When dropdown list of Select is expanded, the arrow icon will also display correctly, #12353 (by @firesh)
+- Fixed that the size attribute of Select does not work, #13070
+- Select multiple values can be cleared, #13049 (by @ZSkycat)
+- Fixed the last TabNav unable be deleted, #13039
+- Fixed that TabNav label is not displayed correctly, #13178
+- Added title slot for Alert, #13082 (by @Kingwl)
+- Fixed an issue where the tooltip content in Table was incorrect, #13159 (by @elfman)
+- Optimize the animation of Upload when file is deleted, #12987
+- Adjusted style of InputNumber when control button is not displayed, #13052
+
 ### 2.4.8
 
 - Not displaying outline when Switch is focused, #12771
@@ -16,17 +168,17 @@
 
 *2018-09-14*
 
-- Fixed DatePicker not triggering form validation, #12328 #12348 
-- Fixed DatePicker throwing errors in multiple mode, #12347 
+- Fixed DatePicker not triggering form validation, #12328 #12348
+- Fixed DatePicker throwing errors in multiple mode, #12347
 - Fixed incorrect position of DatePicker spinner, #12415 (by @rang-ali)
 - Fixed automatic filling of DatePicker input box, #12521 (by @abdallanayer)
 - Fixed Input not highlighted in Cascader, #12341
-- Fixed wrong order of Tabpane, #12346 
+- Fixed wrong order of Tabpane, #12346
 - Fixed incorrect position of ColorPicker cursor, #12376 (by @cnwhy)
 - Fixed the style of Submenu, #2457
 - Fixed not highlighted after Submenu is selected, #12479
 - Fixed incorrect values selected by Cascader, #12508 (by @huangjinqiang)
-- Fixed incorrect value of Pagination input box, #12525 
+- Fixed incorrect value of Pagination input box, #12525
 - Fixed order that Pagination triggers events, #12530
 - Fixed Table Filter not displayed, #12539
 - Fixed Tree unable to delete nodes, #12684
@@ -61,7 +213,7 @@
 
 - Fixed Table setting `class-name` does not work for `expand` column, #12006
 - Added `toggleAllSelection` method for Table, #12047
-- Fixed wrong position of suffix slot when Input contains Select, #12108 
+- Fixed wrong position of suffix slot when Input contains Select, #12108
 - Fixed `line-height` of Option unable to set, #12120
 - Fixed TimeSelect with default value of `null` could not be assigned after executing `resetField`, #12010
 - Fixed keydown event which is not arrow key does not work in Tree, #12008
@@ -138,7 +290,7 @@
   - Added `precision` attribute, #11281
 - Tabs
   - Added `before-leave` attribute, #11259
-  - Added `lazy` attribute, #11167（by @Kingwl）
+  - Added `lazy` attribute, #11167(by @Kingwl)
 - Table
   - Added `sort` method to manually sort the table, #11311
 
@@ -293,7 +445,7 @@
 - Pagination
   - Fixed `current-change` event wrongly triggering without user interaction, #10247
 - DatePicker
-  - Now the date and time value in the dropdown panel are correctly formatted based on the `format` attribute, #10174（by @remizovvv）
+  - Now the date and time value in the dropdown panel are correctly formatted based on the `format` attribute, #10174(by @remizovvv)
 - Upload
   - Fixed `accept` attribute not working when `drag` is true, #10278
 
@@ -386,7 +538,7 @@
 - Dropdown
   - Fixed dropdown menu incorrect positioning when the page only has a horizontal scrollbar in some browsers, #9138 (by @banzhuanmei)
 - Table
-  - Fixed an error in calculating number of fixed columns after the column data changes, #9188（by @kolesoffac）
+  - Fixed an error in calculating number of fixed columns after the column data changes, #9188(by @kolesoffac)
   - Fixed the border of the last column of the grouped header not properly displayed, #9326
   - Fixed incorrect positioning of table header in Safari, #9327
   - Fixed expanded row collapsing when the table data changes, #9462

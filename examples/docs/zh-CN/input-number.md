@@ -178,7 +178,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |----------|-------------- |----------|--------------------------------  |-------- |
-| value    | 绑定值         | number | — | — |
+| value / v-model    | 绑定值         | number | — | 0 |
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
 | step     | 计数器步长           | number   | — | 1 |
@@ -189,6 +189,8 @@
 | controls-position | 控制按钮位置 | string | right | - |
 | name | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
+| placeholder | 输入框默认 placeholder | string | - | - |
+
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
@@ -200,3 +202,4 @@
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | focus | 使 input 获取焦点 | - |
+| select | 选中 input 中的文字 | — |

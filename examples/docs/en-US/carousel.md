@@ -219,6 +219,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | indicator-position | position of the indicators | string | outside/none | — |
 | arrow | when arrows are shown | string | always/hover/never | hover |
 | type | type of the Carousel | string | card | — |
+| loop | display the items in loop | boolean | - | true |
 
 ### Carousel Events
 | Event Name | Description | Parameters |
