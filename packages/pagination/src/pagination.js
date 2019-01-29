@@ -238,6 +238,9 @@ export default {
             this.handleChange(target.value);
           }
         },
+        handleChangeSure() {
+          this.handleChange(this.userInput);
+        },
         handleInput(value) {
           this.userInput = value;
         },
@@ -248,7 +251,7 @@ export default {
         }
       },
 
-      render(h) {
+    render(h) {
         return (
           <span class="el-pagination__jump">
             { this.t('el.pagination.goto') }
@@ -258,11 +261,12 @@ export default {
               max={ this.$parent.internalPageCount }
               value={ this.userInput !== null ? this.userInput : this.$parent.internalCurrentPage }
               type="number"
+              onkeypress='return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )'
               disabled={ this.$parent.disabled }
               nativeOnKeyup={ this.handleKeyup }
-              onInput={ this.handleInput }
-              onChange={ this.handleChange }/>
+              onInput={ this.handleInput }/>
             { this.t('el.pagination.pageClassifier') }
+            <button type="button" onClick={ this.handleChangeSure } style="vertical-align: middle; margin-left:10px;">跳转</button>
           </span>
         );
       }
