@@ -1,11 +1,12 @@
 <template>
-  <div class="el-slider"
+  <div
+    class="el-slider"
     :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
-     role="slider"
-     :aria-valuemin="min"
-     :aria-valuemax="max"
-     :aria-orientation="vertical ? 'vertical': 'horizontal'"
-     :aria-disabled="sliderDisabled"
+    role="slider"
+    :aria-valuemin="min"
+    :aria-valuemax="max"
+    :aria-orientation="vertical ? 'vertical': 'horizontal'"
+    :aria-disabled="sliderDisabled"
   >
     <el-input-number
       v-model="firstValue"
@@ -21,7 +22,8 @@
       :debounce="debounce"
       :size="inputSize">
     </el-input-number>
-    <div class="el-slider__runway"
+    <div
+      class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"

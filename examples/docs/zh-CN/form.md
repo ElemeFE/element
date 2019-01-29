@@ -839,9 +839,9 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | 方法名      | 说明          | 参数
 |---------- |-------------- | --------------
 | validate | 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise | Function(callback: Function(boolean, object))
-| validateField | 对部分表单字段进行校验的方法 | Function(prop: string, callback: Function(errorMessage: string))
+| validateField | 对部分表单字段进行校验的方法 | Function(props: array | string, callback: Function(errorMessage: string))
 | resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | —
-| clearValidate | 移除表单项的校验结果。传入待移除的表单项的 prop 属性组成的数组，如不传则移除整个表单的校验结果 | Function(props: array)
+| clearValidate | 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果 | Function(props: array | string)
 
 ### Form Events
 | 事件名称 | 说明    | 回调参数  |

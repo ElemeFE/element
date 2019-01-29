@@ -154,6 +154,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | number | — | 0 |
 | max | max rating score | number | — | 5 |
 | disabled | whether Rate is read-only | boolean | — | false |
 | allow-half | whether picking half start is allowed | boolean | — | false |

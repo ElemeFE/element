@@ -476,11 +476,12 @@ When picking a date range, you can assign the time part for start date and end d
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | binding value | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | size | size of Input | string | large/small/mini | — |
 | editable | whether the input is editable | boolean | — | true |
-| clearable | Whether to show clear button | boolean | — | true |
+| clearable | whether to show clear button | boolean | — | true |
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
@@ -497,6 +498,7 @@ When picking a date range, you can assign the time part for start date and end d
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
 | prefix-icon | Custom prefix icon class | string | — | el-icon-date |
 | clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| validate-event | whether to trigger form validation | boolean | - | true |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -524,3 +526,8 @@ When picking a date range, you can assign the time part for start date and end d
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | — |
+
+### Slots
+| Name    | Description |
+|---------|-------------|
+| range-separator  | costume range separator content |

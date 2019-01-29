@@ -799,7 +799,7 @@ export default {
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type         | 类型   | string  | text，textarea 和其他 [原生 input 的 type 值](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-| value         | 绑定值           | string / number  | — | — |
+| value / v-model | 绑定值           | string / number  | — | — |
 | maxlength     | 原生属性，最大输入长度      | number          |  —  | — |
 | minlength     | 原生属性，最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
@@ -822,6 +822,7 @@ export default {
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
 | tabindex | 输入框的tabindex | string | - | - |
+| validate-event | 输入时是否触发表单的校验 | boolean | - | true |
 
 ### Input Slots
 | name | 说明 |

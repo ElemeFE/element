@@ -13,6 +13,7 @@
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @clear="handleClear"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
@@ -89,6 +90,10 @@
       popperClass: String,
       popperOptions: Object,
       placeholder: String,
+      clearable: {
+        type: Boolean,
+        default: false
+      },
       disabled: Boolean,
       name: String,
       size: String,
@@ -144,7 +149,10 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
+        let $input = this.getInput();
+        if ($input) {
+          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
+        }
       }
     },
     methods: {
@@ -193,6 +201,10 @@
       handleBlur(event) {
         this.$emit('blur', event);
       },
+      handleClear() {
+        this.activated = false;
+        this.$emit('clear');
+      },
       close(e) {
         this.activated = false;
       },
@@ -239,7 +251,11 @@
           suggestion.scrollTop -= highlightItem.scrollHeight;
         }
         this.highlightedIndex = index;
-        this.$el.querySelector('.el-input__inner').setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+        let $input = this.getInput();
+        $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+      },
+      getInput() {
+        return this.$refs.input.getInput();
       }
     },
     mounted() {
@@ -247,7 +263,7 @@
       this.$on('item-click', item => {
         this.select(item);
       });
-      let $input = this.$el.querySelector('.el-input__inner');
+      let $input = this.getInput();
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
       $input.setAttribute('aria-controls', 'id');

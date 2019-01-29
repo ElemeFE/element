@@ -279,10 +279,11 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | binding value | date(DateTimePicker) / array(DateTimeRangePicker) | — | — |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
-| clearable | Whether to show clear button | boolean | — | true |
+| clearable | whether to show clear button | boolean | — | true |
 |size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |

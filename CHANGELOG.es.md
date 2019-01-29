@@ -1,5 +1,142 @@
 ## Changelog
 
+### 2.5.2
+
+*2019-01-27*
+
+#### Optimization
+- Docs:
+  - Update ChangeLog ES 2.5.1 (by @Gonzalo2310 in #14231)
+
+#### Bug fixes
+- Build:
+  - Delete unremoved comments in umd module `lib/index.js` (by @island205 in #14233)
+  - Fix export error fired in commonjs module used in nuxt.js (by @island205 in #14232)
+  - Fix 2.5.1 build issues  (by @iamkun in #14228)
+
+### 2.5.1
+
+*2019-01-26*
+
+#### Optimization
+- DatePicker: resalta el mes y año actual (por @Debiancc en #14211)
+- Actualizacion del changelog 2.5.0 (por @wacky6 en #14217)
+
+#### Bug fixes
+- Arreglado el problema de exportación generado por la actualización de webpack (por @island205 en #14220)
+- Guardados los documentos 2.4.11 y la nueva subcarpeta para 2.5+ (por @iamkun en #14222)
+
+### 2.5.0
+
+*2019-01-25*
+
+#### Bug fixes
+- Autocompletar
+  - Corregida la última línea del menú desplegable que comenzaba recortada (#13597) (por @ziyoung)
+  - Arreglada la popper arrow que faltaba (#13762) (por @liuchuzhang)
+- Carrusel
+  - Contador de limpieza cuando el componente es destruido (#13820) (por @elfman)
+- Cascader
+  - Retirada de los props computados obsoletos (#13737) (por @iamkun)
+  - Se corrigió la definición de tipo de las opciónes de Cascader en TypeScript (#13613) (por @NateScarlet)
+  - Corregido icono que cubre el texto (#13596) (por @ziyoung)
+- Checkbox
+  - Refinado el estilo (por @PanJiaChen)
+- DatePicker
+  - Añade el `key` en v-for de TimeSpinner (#13547) (por @Ende93)
+  - Corregido el resaltado de la semana en el límite del año (#13883) (por @suyi91)
+- Input
+  - Corregida la referencia del nodo DOM del textarea (#13803) (por @laomu1988 @island205)
+- Pagination
+  - El valor de entrada no será menor que 1 (#13727) (por @elfman)
+- Popover
+  - Corrección de problemas de popover con el disparador de hover (#13104) (por @goldengecko)
+  - Corregido el fallo de memoria de instancia de popper (#13988) (por @qpxtWhite)
+- Radio
+  - Refinado el estilo (por @ohhoney1)
+- Table
+  - Mejorada la ordenación de tablas al hacer clic en la flecha de ordenación (#12890) (por @ohhoney1)
+  - Solucionado el problema de alineación vertical de texto vacío en IE10+ (#13638) (por @imzjjy)
+  - Corregida la documentación del tipo de índice  (#13628) (por @ilovefafa)
+  - Corrección del problema de visualización de `show-summary` cuando el encabezado multinivel tiene el attr fixed (#13914) (por @luckyCao)
+- Tabs
+  - Corregido error de autodesplazamiento (#13696) (por @iamkun)
+  - Obtener la tab correcta a través del nombre de tab (#13705) (por @iamkun)
+  - Uso de paneName en lugar de name para determinar el estilo del panel (#13733) (por @iamkun)
+- Tree
+  - Corregido que `showCheckbox` prop en `Tree` no puede afectar a los hijos `tree-node` (por @KidneyFlower)
+  - Actualizado documento y archivo de definición (#13540) (por @ziyoung)
+- Upload
+  - Agregada la prop `url` para subir el archivo cuando `list-type` cambia (#13771) (por @elfman)
+- Slider
+  - Corrección de la sangría del código fuente (#13955) (por @wacky6)
+- I18n
+  - Añadidas las traducciones de catalán que faltaban (por @jaumesala)
+  - Añadidas las traducciónes de ruso que faltaban (#13658) (por @justlp)
+  - Corrección de las traducciones al finés (#14137) (por @jenkrisu)
+- Doc
+  - Actualización del documento 2.4.11 (#13522) (por @Gonzalo2310)
+- Otros
+  - Eliminar  scripts innecesarios (por @ziyoung)
+  - Corregido el error de anchor link (#13753) (por @iamkun)
+  - Corrección de la capitalización inconsistente en la documentación (por @wonderjar)
+  - Añadido código qr del grupo de chat DingDing al readme (#13957) (by @iamkun)
+  - Añadido logs de hilo a .gitignore (#13922) (por @mimimi)
+  - Eliminada la cuota de patrocinadores (#14156) (por @island205)
+  - Actualizado readme qr code src (#13960) (por @iamkun)
+  - Actualizado enlace CDN, corregido error tipográfico (por @ziyoung)
+
+### 2.4.11
+
+*2018-11-21*
+
+- Revertido pr #13296. Arreglado que al hacer clic fuera del Menú causaba que el Submenú colapsara, #13478
+- Ajustados los media query breakpoints de las pantallas pequeñas (xs), #13468 (por @alekoshen712)
+
+### 2.4.10
+
+*2018-11-16*
+
+- Se corrigio que se necesitaban varios clics en Select para mostrar la lista desplegable, #13268
+- El icono de limpiado para el input no se muestraba cuando Form estaba deshabilitado, #13208
+- Ajustados los estilos de Select, Progress, Autocomplete, Tooltip, Collaspe, TimePicker, #13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Se agregó el atributo `loop` al componente carrusel, #13217
+- Cuando los datos de Table cambian, la línea resaltada permanecerá, #13200
+- Table header scoped slot puede recibir parámetros, #13263
+- El método `clearFilter` de la tabla soporta argumentos, #13176
+- El tooltip ya no se crea cuando no hay contenido en la celda de Table, #13152 (por @rongxingsun)
+- El contenido del input del panel ColorPicker se muestra correctamente, #13278
+- ColorPicker ya no activa la validación de formularios al arrastrar, #13299
+- InputNumber se le ha añadido el método `select`, #13286 (por @st-sloth)
+- Autocompletar agregó el evento `clear`, #12171(by arthurdenner) #13326
+- Puede cerrar Menú haciendo clic fuera del Menú, #13296
+- El método `validateField` de Form puede recibir argumentos, #13319
+- Cascader añadió el evento `visible-change`, #13415
+- DatePicker agregó slot para separador de rango, #13272 (por @milworm)
+- Tree añade las propiedades `iconClass` y `currentNodeKey`, #13337 #13197 (por @isnifer)
+- Progress permite texto en el atributo `status` #13198 (por @ali-master)
+- Corregidas las `defaultCheckedKeys` de Tree que causaba un error, #13349 (por @dive2Pro)
+
+
+### 2.4.9
+
+*2018-10-26*
+
+- El parámetro de Form's `clearValidate` soporta cadenas, #12990 (by @codinglobster)
+- Se agregó el atributo `type` para Badge, #12991
+- Ser puede usar scoped-slot para personalizar el encabezado de la columna de Table #13012 (por @ivanseidel)
+- Arreglado que el input box de Select no se podia escrbir en IE, #13034 (by @GaliMU)
+- La opción Seleccionar no se cerraba cuando el espacio era insuficiente, #12329 (by @akki-jat)
+- Cuando se expande la lista desplegable de Seleccionar, el icono de flecha también se mostrará correctamente, #12353 (by @firesh)
+- Arreglado que el atributo size de Select no funcionaba, #13070
+- Select multiple values pueden ser limpiado en lote, #13049 (by @ZSkycat)
+- Arreglado el último TabNav que no se podía borrar, #13039
+- Arreglado que la etiqueta del TabNav no se mostraba correctamente, #13178
+- Añadido title slot para Alert, #13082 (by @Kingwl)
+- Corregido un problema por el cual el contenido del tooltip en Table era incorrecto, #13159 (by @elfman)
+- Optimizada la animación de Upload cuando el archivo es eliminado, #12987
+- Ajustado el estilo de InputNumber cuando no se muestra el botón de control, #13052
+
 ### 2.4.8
 
 - No se muestra el contorno cuando Switch está enfocado, #12771
@@ -16,17 +153,17 @@
 
 *2018-09-14*
 
-- Corregido que DatePicker no activaba la validación del Form, #12328 #12348 
-- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347 
+- Corregido que DatePicker no activaba la validación del Form, #12328 #12348
+- Corregidos el lanzamiento de errores del DatePicker en modo múltiple, #12347
 - Corregida la posición incorrecta del spinner del DatePicker, #12415 (por @rang-ali)
 - Se ha corregido el llenado automático del input del DatePicker, #12521 (por @abdallanayer)
 - Corregida el input no resaltada en Cascader, #12341
-- Corregido el orden incorrecto de Tabpane, #12346 
+- Corregido el orden incorrecto de Tabpane, #12346
 - Corregida la posición incorrecta del cursor de ColorPicker, #12376 (por @cnwhy)
 - Corregido el estilo del Submenú, #2457
 - Corregido el resaltado después de seleccionar el Submenú, #12479
 - Corregidos los valores incorrectos seleccionados por Cascader, #12508 (por @huangjinqiang)
-- Corregido el valor incorrecto del input de Paginación, #12525 
+- Corregido el valor incorrecto del input de Paginación, #12525
 - Se ha corregido el orden en que la paginación desencadena los eventos, #12530
 - Corregido que no se mostraba el Table Filter, #12539
 - Corregido Tree que era incapaz de borrar nodos, #12684
@@ -61,7 +198,7 @@
 
 - Se ha corregido en Table que `class-name` no funcionaba para las columnas `expand`, #12006
 - Se ha añadido el método `toggleAllSelection` para Table, #12047
-- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108 
+- Corregida la posición incorrecta del `suffix slot` cuando Input contiene Select, #12108
 - Corregido que el `line-height` de Option no se establecia, #12120
 - Corregido que TimeSelect con valor por defecto `null` no podia ser asignado después de ejecutar `resetField`, #12010
 - Arreglado el evento `keydown` que cuando no era una tecla de flecha no funciona en Tree, #12008
@@ -324,7 +461,7 @@
 - Corregido Table con fila expandible no calculaba la altura cuando la fila era expandida, #9484
 - Corregido que cuando se escribia la fecha de forma manual en DateTimePicker no se disparaba el evento  `change`, #9913
 - Corregido que Select mostraba sus opciones cuando se hacia click con el botón derecho del mouse en el Input, #9894 (by @openks)
-- Agregado el atributo `tooltip-class` para Slider, #9957 
+- Agregado el atributo `tooltip-class` para Slider, #9957
 - Ahora Select permanecera enfocado despues de la selección, #9857 (by @Seebiscuit)
 - Agregado el atributo `target-order` para Transfer, #9960
 
@@ -683,7 +820,7 @@
   - Atributo `theme` eliminado. El color de Menu se puede configurar utilizando  `background-color`, `text-color` y `active-text-color`
 - Input
   - Atributo `icon` eliminado. Ahora el icono del sufijo puede configurarse usando el atributo  `suffix-icon`  o el slot con nombre `suffix`.
-  - Eliminado el atributo `on-icon-click` y el evento `click`. Ahora para añadir el manejador de clics en los iconos, por favor use los slots con nombre. 
+  - Eliminado el atributo `on-icon-click` y el evento `click`. Ahora para añadir el manejador de clics en los iconos, por favor use los slots con nombre.
   - El evento `change` se comporta ahora como el nativo, que se activa sólo en la perdida del foco o presionando enter. Si necesita responder a las entradas de usuario en tiempo real, puede utilizar el evento `input`.
 - Autocomplete
   - Atributo `custom-item` eliminado. Ahora la plantilla de sugerencias del input se puede personalizar utilizando `scoped slot`
@@ -702,4 +839,4 @@
 
 # #
 
-<i><sup>*</sup> El procesamiento dinámico de HTML arbitrario en su sitio web puede ser muy peligroso porque puede conducir fácilmente a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Por lo tanto, cuando `dangerouslyUseHTMLString` está encendido, por favor asegúrese de que el contenido de `message` es confiable, y **nunca** asigne el `message` al contenido proporcionado por el usuario.</i>
+<i><sup>*</sup> El procesamiento dinámico de HTML arbitrario en su sitio web puede ser muy peligroso porque puede conducir fácilmente a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Por lo tanto, cuando `dangerouslyUseHTMLString` está encendido, por favor asegúrese de que el contenido de `message` es confiable, y **nunca** asigne el `message` al contenido proporcionado por el usuario.</i>``

@@ -82,9 +82,35 @@ describe('Tag', () => {
   it('color', () => {
     vm = createVue({
       template: `
-      <el-tag color="rgb(0, 0, 0)"></el-tag>
+      <el-tag ref="tag" color="rgb(0, 0, 0)"></el-tag>
       `
     }, true);
     expect(vm.$el.style.backgroundColor).to.equal('rgb(0, 0, 0)');
+  });
+
+  it('click', done => {
+    vm = createVue({
+      template: `
+      <el-tag ref="tag" @click="handleClick">点击标签</el-tag>
+      `,
+      data() {
+        return {
+          clicksCount: 0
+        };
+      },
+      methods: {
+        handleClick() {
+          this.clicksCount = this.clicksCount + 1;
+        }
+      }
+    }, true);
+
+    let tag = vm.$refs.tag;
+    tag.$el.click();
+
+    setTimeout(_ => {
+      expect(vm.clicksCount).to.be.equal(1);
+      done();
+    }, 20);
   });
 });

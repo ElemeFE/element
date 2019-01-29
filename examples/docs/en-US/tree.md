@@ -22,22 +22,22 @@
       display: flex;
       margin: -24px;
     }
-  
+
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-  
+
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-  
+
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-  
+
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -150,7 +150,7 @@
       }]
     }]
   }];
-  
+
   const data6 = [{
     label: 'Level one 1',
     children: [{
@@ -1181,9 +1181,11 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | show-checkbox         | whether node is selectable               | boolean                     | —               | false   |
 | check-strictly        | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean                     | —               | false   |
 | default-checked-keys  | array of keys of initially checked nodes | array                       | —               | —       |
+| current-node-key      | key of initially selected node | string, number                       | —               | —       |
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
+| icon-class            | custome tree node icon                                       | string                     | -    | -  |
 | lazy                  | whether to lazy load leaf node, used with `load` attribute  | boolean                     | —    | false |
 | draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
 | allow-drag            | this function will be executed before dragging a node. If `false` is returned, the node can not be dragged | Function(node)  | —  | —  |
@@ -1211,7 +1213,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
 | getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
 | getCurrentKey   | return the highlight node's key (null if no node is highlighted) | — |
-| getCurrentNode  | return the highlight node (null if no node is highlighted) | — |
+| getCurrentNode  | return the highlight node's data (null if no node is highlighted) | — |
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted. If `null`, cancel the currently highlighted node |
 | setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
 | getNode         | get node by data or key | (data) the node's data or key |

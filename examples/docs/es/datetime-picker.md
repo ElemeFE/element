@@ -280,6 +280,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 ### Atributos
 | Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto          |
 | ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | -------------------- |
+| value / v-model     | valor enlazado                           | date(DateTimePicker) / array(DateTimeRangePicker) | — | — |
 | readonly           | si DatePicker es solo de lectura         | boolean           | —                                        | false                |
 | disabled           | si DatePicker esta deshabilitada         | boolean           | —                                        | false                |
 | editable           | Si la entrada es editable                | boolean           | —                                        | true                 |
@@ -301,7 +302,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
 | prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
-| clear-icon         | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
+| clear-icon         | Clase personalizada para el icono `clear` | string              | —                                        | el-icon-circle-close |
+| validate-event     | whether to trigger form validation        | boolean             | -                                        | true                 |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |

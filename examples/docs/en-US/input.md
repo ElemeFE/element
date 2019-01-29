@@ -643,7 +643,7 @@ Search data from server-side.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----| ----| ----| ---- | ----- |
 |type| type of input | string | text, textarea and other [native input types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-|value| binding value | string / number| — | — |
+|value / v-model| binding value | string / number| — | — |
 |maxlength| same as `maxlength` in native input | number| — | — |
 |minlength| same as `minlength` in native input | number | — | — |
 |placeholder| placeholder of Input| string | — | — |
@@ -666,6 +666,7 @@ Search data from server-side.
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
 | tabindex | input tabindex | string | - | - |
+| validate-event | whether to trigger form validation | boolean | - | true |
 
 ### Input slots
 
@@ -698,6 +699,7 @@ Search data from server-side.
 Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
 | value-key | key name of the input suggestion object for display | string | — | value |
 |icon | icon name | string | — | — |

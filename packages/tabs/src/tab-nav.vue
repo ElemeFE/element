@@ -227,6 +227,7 @@
               'is-focus': this.isFocus
             }}
             id={`tab-${tabName}`}
+            key={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
             aria-selected={ pane.active }
@@ -267,6 +268,9 @@
       document.addEventListener('visibilitychange', this.visibilityChangeHandler);
       window.addEventListener('blur', this.windowBlurHandler);
       window.addEventListener('focus', this.windowFocusHandler);
+      setTimeout(() => {
+        this.scrollToActiveTab();
+      }, 0);
     },
 
     beforeDestroy() {

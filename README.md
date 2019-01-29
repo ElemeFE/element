@@ -48,11 +48,6 @@
         </a>
       </td>
       <td align="center" valign="middle">
-        <a href="https://www.duotai.cn/?utm_source=element" target="_blank">
-          <img width="140px" src="https://user-images.githubusercontent.com/10095631/39403151-c42dbcee-4ba5-11e8-9c09-8e5283da4144.png">
-        </a>
-      </td>
-      <td align="center" valign="middle">
         <a href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
           <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
         </a>
@@ -231,6 +226,11 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 <a href="https://opencollective.com/element/sponsor/28/website" target="_blank"><img src="https://opencollective.com/element/sponsor/28/avatar.svg"></a>
 <a href="https://opencollective.com/element/sponsor/29/website" target="_blank"><img src="https://opencollective.com/element/sponsor/29/avatar.svg"></a>
 
+## Join Discusion Group
+
+Scan the QR code using [Dingtalk App](https://www.dingtalk.com/) to join in discusion group :
+
+<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/50588415-d9aaca00-0ebc-11e9-92e2-f71960346f85.png" width="300">
 
 
 ## LICENSE

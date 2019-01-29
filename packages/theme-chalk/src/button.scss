@@ -192,7 +192,9 @@
     & + .el-button {
       margin-left: 0;
     }
-
+    &.is-disabled {
+      z-index: 1;
+    }
     &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;

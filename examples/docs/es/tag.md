@@ -212,4 +212,5 @@ Además del tamaño predeterminado, el componente Tag proporciona tres tamaños 
 ### Eventos
 | Nombre | Descripción                          | Parametros |
 | ------ | ------------------------------------ | ---------- |
+| click  | se disoara cuando el Tag es clic     | —          |
 | close  | se disoara cuando el Tag es removido | —          |
