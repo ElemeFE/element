@@ -114,11 +114,13 @@
       handleMenuLeave() {
         this.$emit('menuLeave');
       },
-      activeItem(item, menuIndex) {
+      activeItem(item, menuIndex, triggerEvent) {
         const len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
-        if (!this.changeOnSelect) {
+        if (this.changeOnSelect && triggerEvent === 'click') {
+          this.$emit('pick', this.activeValue.slice(), false);
+        } else {
           this.$emit('activeItemChange', this.activeValue);
         }
       },
@@ -228,7 +230,7 @@
               }[expandTrigger];
               const triggerHandler = () => {
                 if (this.visible) {
-                  this.activeItem(item, menuIndex);
+                  this.activeItem(item, menuIndex, triggerEvent);
                   this.$nextTick(() => {
                     // adjust self and next level
                     this.scrollMenu(this.$refs.menus[menuIndex]);
