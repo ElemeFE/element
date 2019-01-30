@@ -610,7 +610,7 @@ async-validator@~1.8.1:
   dependencies:
     babel-runtime "6.x"
 
-async@1.5.2, async@1.x, async@^1.5.2:
+async@1.x, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
@@ -2114,13 +2114,6 @@ collection-visit@^1.0.0:
   dependencies:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
-
-collections@^0.2.0:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/collections/-/collections-0.2.2.tgz#1f23026b2ef36f927eecc901e99c5f0d48fa334e"
-  integrity sha1-HyMCay7zb5J+7MkB6ZxfDUj6M04=
-  dependencies:
-    weak-map "1.0.0"
 
 color-convert@^1.3.0, color-convert@^1.9.0:
   version "1.9.3"
@@ -4224,19 +4217,6 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gh-pages@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/gh-pages/-/gh-pages-0.11.0.tgz#93313c6dcbfc74d426bc89a29ebff6420acc3c1b"
-  integrity sha1-kzE8bcv8dNQmvIminr/2QgrMPBs=
-  dependencies:
-    async "1.5.2"
-    commander "2.9.0"
-    globby "^4.0.0"
-    graceful-fs "4.1.2"
-    q "1.4.1"
-    q-io "1.13.2"
-    wrench "1.5.8"
-
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -4312,17 +4292,6 @@ glob@^5.0.15, glob@^5.0.3:
   version "5.0.15"
   resolved "https://registry.yarnpkg.com/glob/-/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
   integrity sha1-G8k2ueAvSmA/zCIuz3Yz0wuLk7E=
-  dependencies:
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "2 || 3"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
-glob@^6.0.1:
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-6.0.4.tgz#0f08860f6a155127b2fadd4f9ce24b1aab6e4d22"
-  integrity sha1-DwiGD2oVUSey+t1PnOJLGqtuTSI=
   dependencies:
     inflight "^1.0.4"
     inherits "2"
@@ -4406,18 +4375,6 @@ globby@^3.0.1:
     pify "^2.0.0"
     pinkie-promise "^1.0.0"
 
-globby@^4.0.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-4.1.0.tgz#080f54549ec1b82a6c60e631fc82e1211dbe95f8"
-  integrity sha1-CA9UVJ7BuCpsYOYx/ILhIR2+lfg=
-  dependencies:
-    array-union "^1.0.1"
-    arrify "^1.0.0"
-    glob "^6.0.1"
-    object-assign "^4.0.1"
-    pify "^2.0.0"
-    pinkie-promise "^2.0.0"
-
 globby@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
@@ -4465,11 +4422,6 @@ glogg@^1.0.0:
   integrity sha512-5mwUoSuBk44Y4EshyiqcH95ZntbDdTQqA3QYSrxmzj28Ai0vXBGMH1ApSANH14j2sIRtqCEyg6PfsuP7ElOEDA==
   dependencies:
     sparkles "^1.0.0"
-
-graceful-fs@4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.2.tgz#fe2239b7574972e67e41f808823f9bfa4a991e37"
-  integrity sha1-/iI5t1dJcuZ+QfgIgj+b+kqZHjc=
 
 graceful-fs@^3.0.0:
   version "3.0.11"
@@ -6616,11 +6568,6 @@ mime@^2.0.3, mime@^2.1.0, mime@^2.3.1:
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.0.tgz#e051fd881358585f3279df333fe694da0bcffdd6"
   integrity sha512-ikBcWwyqXQSHKtciCcctu9YfPbFYZ4+gbHEmE0Q8jzcTYQg5dHCr3g2wwAZjPoJfQVXZq6KXAjpXOTf5/cjT7w==
 
-mimeparse@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/mimeparse/-/mimeparse-0.1.4.tgz#dafb02752370fd226093ae3152c271af01ac254a"
-  integrity sha1-2vsCdSNw/SJgk64xUsJxrwGsJUo=
-
 mimic-fn@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
@@ -8605,24 +8552,7 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-q-io@1.13.2:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/q-io/-/q-io-1.13.2.tgz#eea130d481ddb5e1aa1bc5a66855f7391d06f003"
-  integrity sha1-7qEw1IHdteGqG8WmaFX3OR0G8AM=
-  dependencies:
-    collections "^0.2.0"
-    mime "^1.2.11"
-    mimeparse "^0.1.4"
-    q "^1.0.1"
-    qs "^1.2.1"
-    url2 "^0.0.0"
-
-q@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
-  integrity sha1-VXBbzZPF82c1MMLCy8DCs63cKG4=
-
-q@^1.0.1, q@^1.1.2:
+q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
@@ -8636,11 +8566,6 @@ qs@6.5.2, qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
-
-qs@^1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-1.2.2.tgz#19b57ff24dc2a99ce1f8bdf6afcda59f8ef61f88"
-  integrity sha1-GbV/8k3CqZzh+L32r82ln472H4g=
 
 qs@~6.3.0:
   version "6.3.2"
@@ -10394,11 +10319,6 @@ url-parse@^1.4.3:
     querystringify "^2.0.0"
     requires-port "^1.0.0"
 
-url2@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/url2/-/url2-0.0.0.tgz#4eaabd1d5c3ac90d62ab4485c998422865a04b1a"
-  integrity sha1-Tqq9HVw6yQ1iq0SFyZhCKGWgSxo=
-
 url@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -10666,11 +10586,6 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-weak-map@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/weak-map/-/weak-map-1.0.0.tgz#b66e56a9df0bd25a76bbf1b514db129080614a37"
-  integrity sha1-tm5Wqd8L0lp2u/G1FNsSkIBhSjc=
-
 webidl-conversions@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-2.0.1.tgz#3bf8258f7d318c7443c36f2e169402a1a6703506"
@@ -10893,11 +10808,6 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
-
-wrench@1.5.8:
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/wrench/-/wrench-1.5.8.tgz#7a31c97f7869246d76c5cf2f5c977a1c4c8e5ab5"
-  integrity sha1-ejHJf3hpJG12xc8vXJd6HEyOWrU=
 
 write@^0.2.1:
   version "0.2.1"
