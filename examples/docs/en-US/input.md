@@ -24,7 +24,8 @@
         state1: '',
         state2: '',
         state3: '',
-        state4: ''
+        state4: '',
+        state5: ''
       };
     },
     methods: {
@@ -638,6 +639,64 @@ Search data from server-side.
 ```
 :::
 
+### Select on tab
+
+Use tab for selection like enter.
+
+:::demo Use `select-on-tab` to use tab key for selection.
+```html
+<el-autocomplete
+      class="inline-input"
+      v-model="state5"
+      :fetch-suggestions="querySearch"
+      placeholder="Please Input"
+      @select="handleSelect"
+      select-on-tab="true"
+></el-autocomplete>
+
+<script>
+  export default {
+    data() {
+      return {
+        links: [],
+        state5: ''
+      };
+    },
+    methods: {
+      querySearch(queryString, cb) {
+        var links = this.links;
+        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
+        // call callback function to return suggestions
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (link) => {
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      loadAll() {
+        return [
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
+         ];
+      },
+      handleSelect(item) {
+        console.log(item);
+      }
+    },
+    mounted() {
+      this.links = this.loadAll();
+    }
+  }
+</script>
+```
+:::
+
 ### Input Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -716,6 +775,7 @@ Attribute | Description | Type | Options | Default
 | suffix-icon | suffix icon class | string | — | — |
 | hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
 | popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
+| select-on-tab | select item with tab like with enter | boolean | — | false |
 
 ### Autocomplete Slots
 
