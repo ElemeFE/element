@@ -137,7 +137,7 @@
         activated: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: this.getHighlightedItem(),
+        highlightedIndex: this.getHighlightedIndex(),
         suggestionDisabled: false
       };
     },
@@ -229,7 +229,7 @@
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];
-          this.highlightedIndex = this.getHighlightedItem();
+          this.highlightedIndex = this.getHighlightedIndex();
         });
       },
       highlight(index) {
@@ -261,7 +261,7 @@
       getInput() {
         return this.$refs.input.getInput();
       },
-      getHighlightedItem() {
+      getHighlightedIndex() {
         return this.highlightFirstItem ? 0 : -1;
       }
     },
