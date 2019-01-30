@@ -36,81 +36,81 @@
 </template>
 
 <style>
-.algolia-search {
-  width: 450px !important;
+  .algolia-search {
+    width: 450px !important;
+  
+    &.is-empty {
+      .el-autocomplete-suggestion__list {
+        padding-bottom: 0;
+      }
+    }
 
-  &.is-empty {
     .el-autocomplete-suggestion__list {
-      padding-bottom: 0;
+      position: static !important;
+      padding-bottom: 28px;
     }
-  }
 
-  .el-autocomplete-suggestion__list {
-    position: static !important;
-    padding-bottom: 28px;
-  }
-
-  li {
-    border-bottom: solid 1px #ebebeb;
-
-    &:last-child {
-      border-bottom: none;
+    li {
+      border-bottom: solid 1px #ebebeb;
+      
+      &:last-child {
+         border-bottom: none;
+       }
     }
-  }
-
-  .algolia-highlight {
-    color: #409eff;
-    font-weight: bold;
-  }
-
-  .algolia-search-title {
-    font-size: 14px;
-    margin: 6px 0;
-    line-height: 1.8;
-  }
-
-  .algolia-search-separator {
-    padding: 0 6px;
-  }
-
-  .algolia-search-content {
-    font-size: 12px;
-    margin: 6px 0;
-    line-height: 2.4;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .algolia-search-link {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding-right: 20px;
-    background-color: #e4e7ed;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-sizing: border-box;
-    text-align: right;
-
-    &:hover {
+    
+    .algolia-highlight {
+      color: #409EFF;
+      font-weight: bold;
+    }
+    
+    .algolia-search-title {
+      font-size: 14px;
+      margin: 6px 0;
+      line-height: 1.8;
+    }
+    
+    .algolia-search-separator {
+      padding: 0 6px;
+    }
+    
+    .algolia-search-content {
+      font-size: 12px;
+      margin: 6px 0;
+      line-height: 2.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .algolia-search-link {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding-right: 20px;
       background-color: #e4e7ed;
-    }
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      box-sizing: border-box;
+      text-align: right;
 
-    img {
-      display: inline-block;
-      height: 17px;
-      margin-top: 10px;
+      &:hover {
+         background-color: #e4e7ed;
+       }
+    
+      img {
+        display: inline-block;
+        height: 17px;
+        margin-top: 10px;
+      }
+    }
+  
+    .algolia-search-empty {
+      margin: 5px 0;
+      text-align: center;
+      color: #999;
     }
   }
-
-  .algolia-search-empty {
-    margin: 5px 0;
-    text-align: center;
-    color: #999;
-  }
-}
 </style>
 
 <script>
