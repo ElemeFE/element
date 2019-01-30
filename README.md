@@ -125,6 +125,8 @@ We have collected some [frequently asked questions](https://github.com/ElemeFE/e
 ## Contribution
 Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) before making a pull request.
 
+[![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/67274736)
+
 ## Special Thanks
 English documentation is brought to you by SwiftGG Translation Team:
 - [raychenfj](https://github.com/raychenfj)
