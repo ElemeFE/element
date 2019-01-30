@@ -6,7 +6,8 @@
     :fetch-suggestions="querySearch"
     :placeholder="placeholder"
     :trigger-on-focus="false"
-    @select="handleSelect">
+    @select="handleSelect"
+    highlight-first-item>
     <template slot-scope="props">
       <p class="algolia-search-title" v-if="props.item.title">
         <span v-html="props.item.highlightedCompo"></span>
