@@ -126,6 +126,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      highlightFirstItem: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -133,7 +137,7 @@
         activated: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: -1,
+        highlightedIndex: this.highlightFirstItem ? 0 : -1,
         suggestionDisabled: false
       };
     },
