@@ -121,10 +121,12 @@ export default {
     if (this.native) return;
     this.$nextTick(this.update);
     !this.noresize && addResizeListener(this.$refs.resize, this.update);
+    !this.noresize && addResizeListener(this.$refs.wrap, this.update);
   },
 
   beforeDestroy() {
     if (this.native) return;
     !this.noresize && removeResizeListener(this.$refs.resize, this.update);
+    !this.noresize && removeResizeListener(this.$refs.wrap, this.update);
   }
 };
