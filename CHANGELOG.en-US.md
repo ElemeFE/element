@@ -1,5 +1,21 @@
 ## Changelog
 
+### 2.5.3
+
+*2019-01-31*
+
+#### Optimization
+
+- Optimize code of Message (by @vok123 in #14029)
+- Retire gh-pages (by @ziyoung in #14266)
+- Add IssueHunt link (by @island205 in #14261)
+
+#### Bug fixes
+
+- Fix UMD module error on server side (by @island205 in #14242)
+- Fix active TabBar style (by @iamkun in #14240)
+- Fix Table demo code error (by @xunmeng in #14253)
+
 ### 2.5.2
 
 *2019-01-27*

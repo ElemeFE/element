@@ -1,5 +1,21 @@
 ## 更新日志
 
+### 2.5.3
+
+*2019-01-31*
+
+#### 优化
+
+- 优化 Message 的代码 (by @vok123 in #14029)
+- 移除 gh-pages (by @ziyoung in #14266)
+- 添加 IssueHunt 的链接 (by @island205 in #14261)
+
+#### 修复
+
+- 修复 UMD 包在服务器端运行出错的问题 (by @island205 in #14242)
+- 修复 Tabbar 高亮时的样式 (by @iamkun in #14240)
+- 修复 Table 示例代码的错误 (by @xunmeng in #14253)
+
 ### 2.5.2
 
 *2019-01-27*
