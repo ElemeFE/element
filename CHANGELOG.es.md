@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.5.3
+
+*2019-01-31*
+
+Need help form Element developers ? Go to [IssueHunt](https://issuehunt.io/repos/67274736) for more information.
+
+#### Bug fixes
+
+- Fix UMD module error on server side (#14242)
+- Fix active TabBar style (#14240)
+
 ### 2.5.2
 
 *2019-01-27*
