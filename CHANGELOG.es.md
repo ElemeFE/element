@@ -7,7 +7,7 @@
 #### Optimization
 
 - Optimize code of Message (by @vok123 in #14029)
-- Retire gh-pages (by @hetech in #14266)
+- Retire gh-pages (by @ziyoung in #14266)
 - Add IssueHunt link (by @island205 in #14261)
 
 #### Bug fixes

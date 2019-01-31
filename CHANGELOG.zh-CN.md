@@ -7,7 +7,7 @@
 #### 优化
 
 - 优化 Message 的代码 (by @vok123 in #14029)
-- 移除 gh-pages (by @hetech in #14266)
+- 移除 gh-pages (by @ziyoung in #14266)
 - 添加 IssueHunt 的链接 (by @island205 in #14261)
 
 #### 修复
