@@ -86,7 +86,6 @@
     "eslint-plugin-json": "^1.2.0",
     "file-loader": "^1.1.11",
     "file-save": "^0.2.0",
-    "gh-pages": "^0.11.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-cssmin": "^0.1.7",
