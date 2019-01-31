@@ -4,12 +4,20 @@
 
 *2019-01-31*
 
-Need help form Element developers ? Go to [IssueHunt](https://issuehunt.io/repos/67274736) for more information.
+#### Optimization
+
+- Optimize code of Message (by @vok123 in #14029)
+- Retire gh-pages (by @hetech in #14266)
+- Add IssueHunt link (by @island205 in #14261)
 
 #### Bug fixes
 
-- Fix UMD module error on server side (#14242)
-- Fix active TabBar style (#14240)
+- Fix UMD module error on server side (by @island205 in #14242)
+- Fix active TabBar style (by @iamkun in #14240)
+- Fix Table demo code error (by @xunmeng in #14253)
+
+#### Bug fixes
+
 
 ### 2.5.2
 

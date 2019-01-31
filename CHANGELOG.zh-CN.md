@@ -4,12 +4,17 @@
 
 *2019-01-31*
 
-想获得 Element 开发者的帮助吗? 登录[IssueHunt](https://issuehunt.io/repos/67274736)获取更多信息.
+#### 优化
+
+- 优化 Message 的代码 (by @vok123 in #14029)
+- 移除 gh-pages (by @hetech in #14266)
+- 添加 IssueHunt 的链接 (by @island205 in #14261)
 
 #### 修复
 
-- 修复 UMD 包在服务器端运行出错的问题 (#14242)
-- 修复 Tabbar 高亮时的样式 (#14240)
+- 修复 UMD 包在服务器端运行出错的问题 (by @island205 in #14242)
+- 修复 Tabbar 高亮时的样式 (by @iamkun in #14240)
+- 修复 Table 示例代码的错误 (by @xunmeng in #14253)
 
 ### 2.5.2
 
