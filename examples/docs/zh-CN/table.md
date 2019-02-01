@@ -2157,9 +2157,9 @@
 | cell-mouse-leave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
 | cell-dblclick | 当某个单元格被双击击时会触发该事件 | row, column, cell, event |
-| row-click | 当某一行被点击时会触发该事件 | row, event, column |
-| row-contextmenu | 当某一行被鼠标右键点击时会触发该事件 | row, event |
-| row-dblclick | 当某一行被双击时会触发该事件 | row, event |
+| row-click | 当某一行被点击时会触发该事件 | row, column, event |
+| row-contextmenu | 当某一行被鼠标右键点击时会触发该事件 | row, column, event |
+| row-dblclick | 当某一行被双击时会触发该事件 | row, column, event |
 | header-click | 当某一列的表头被点击时会触发该事件 | column, event |
 | header-contextmenu | 当某一列的表头被鼠标右键点击时触发该事件 | column, event |
 | sort-change | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |

@@ -381,7 +381,7 @@ export default {
           table.$emit(`cell-${name}`, row, column, cell, event);
         }
       }
-      table.$emit(`row-${name}`, row, event, column);
+      table.$emit(`row-${name}`, row, column, event);
     },
 
     handleExpandClick(row, e) {
