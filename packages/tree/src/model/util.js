@@ -12,7 +12,11 @@ export const markNodeData = function(node, data) {
 
 export const getNodeKey = function(key, data) {
   if (!key) return data[NODE_KEY];
-  return data[key];
+  let keys = key.split('.');
+  while (keys.length) {
+    data = data[keys.shift()]
+  }
+  return data;
 };
 
 export const findNearestComponent = (element, componentName) => {

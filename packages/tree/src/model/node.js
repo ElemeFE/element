@@ -1,5 +1,5 @@
 import objectAssign from 'element-ui/src/utils/merge';
-import { markNodeData, NODE_KEY } from './util';
+import { markNodeData, NODE_KEY, getNodeKey } from './util';
 
 export const getChildState = node => {
   let all = true;
@@ -158,7 +158,7 @@ export default class Node {
 
   get key() {
     const nodeKey = this.store.key;
-    if (this.data) return this.data[nodeKey];
+    if (this.data) return getNodeKey(nodeKey, this.data);
     return null;
   }
 

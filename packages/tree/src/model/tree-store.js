@@ -136,8 +136,8 @@ export default class TreeStore {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
-    const nodeKey = node.key;
-    if (nodeKey !== undefined) this.nodesMap[node.key] = node;
+    const nodeKey = getNodeKey(key, node);
+    if (nodeKey !== undefined) this.nodesMap[nodeKey] = node;
   }
 
   deregisterNode(node) {
@@ -148,7 +148,8 @@ export default class TreeStore {
       this.deregisterNode(child);
     });
 
-    delete this.nodesMap[node.key];
+    const nodeKey = getNodeKey(key, node);
+    if (nodeKey !== undefined) delete this.nodesMap[nodeKey];
   }
 
   getCheckedNodes(leafOnly = false, includeHalfChecked = false) {
@@ -171,7 +172,8 @@ export default class TreeStore {
   }
 
   getCheckedKeys(leafOnly = false) {
-    return this.getCheckedNodes(leafOnly).map((data) => (data || {})[this.key]);
+    
+    return this.getCheckedNodes(leafOnly).map((data) => getNodeKey(this.key, (data || {})));
   }
 
   getHalfCheckedNodes() {
@@ -194,7 +196,7 @@ export default class TreeStore {
   }
 
   getHalfCheckedKeys() {
-    return this.getHalfCheckedNodes().map((data) => (data || {})[this.key]);
+    return this.getHalfCheckedNodes().map((data) => getNodeKey(this.key, (data || {})));
   }
 
   _getAllNodes() {
@@ -230,7 +232,7 @@ export default class TreeStore {
     allNodes.forEach(node => node.setChecked(false, false));
     for (let i = 0, j = allNodes.length; i < j; i++) {
       const node = allNodes[i];
-      const nodeKey = node.data[key].toString();
+      const nodeKey = getNodeKey(key, node.data).toString();
       let checked = keys.indexOf(nodeKey) > -1;
       if (!checked) {
         if (node.checked && !cache[nodeKey]) {
@@ -241,7 +243,7 @@ export default class TreeStore {
 
       let parent = node.parent;
       while (parent && parent.level > 0) {
-        cache[parent.data[key]] = true;
+        cache[getNodeKey(key, parent.data)] = true;
         parent = parent.parent;
       }
 
@@ -271,7 +273,7 @@ export default class TreeStore {
     const key = this.key;
     const checkedKeys = {};
     array.forEach((item) => {
-      checkedKeys[(item || {})[key]] = true;
+      checkedKeys[getNodeKey(key, item || {})] = true;
     });
 
     this._setCheckedKeys(key, leafOnly, checkedKeys);
@@ -315,7 +317,7 @@ export default class TreeStore {
   }
 
   setUserCurrentNode(node) {
-    const key = node[this.key];
+    const key = getNodeKey(this.key, node);
     const currNode = this.nodesMap[key];
     this.setCurrentNode(currNode);
   }
