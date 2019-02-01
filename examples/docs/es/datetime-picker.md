@@ -291,7 +291,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —                    |
 | time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false                |
 | type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
-| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
+| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd HH:mm:ss           |
 | align              | alineación                               | left/center/right | left                                     |                      |
 | popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —                    |
 | picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |
