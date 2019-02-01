@@ -1,5 +1,13 @@
 ## Changelog
 
+### 2.5.4
+
+*2019-02-01*
+
+#### Bug fixes
+
+- Build: Fix babel config issue which lead to collapse transition broken (by @island205 in #14282)
+
 ### 2.5.3
 
 *2019-01-31*
