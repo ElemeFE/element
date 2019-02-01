@@ -289,7 +289,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
 | time-arrow-control | 是否使用箭头进行时间选择 | boolean | — | false |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
-| format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
+| format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd HH:mm:ss |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
