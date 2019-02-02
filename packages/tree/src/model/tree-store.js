@@ -172,7 +172,7 @@ export default class TreeStore {
   }
 
   getCheckedKeys(leafOnly = false) {
-    
+
     return this.getCheckedNodes(leafOnly).map((data) => getNodeKey(this.key, (data || {})));
   }
 

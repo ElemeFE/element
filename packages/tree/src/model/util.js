@@ -14,7 +14,7 @@ export const getNodeKey = function(key, data) {
   if (!key) return data[NODE_KEY];
   let keys = key.split('.');
   while (keys.length) {
-    data = data[keys.shift()]
+    data = data[keys.shift()];
   }
   return data;
 };
