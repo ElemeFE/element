@@ -36,8 +36,6 @@
     line-height: 120px;
     color: #666;
     font-size: 13px;
-    transition: color .15s linear;
-
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
     margin-right: -1px;
@@ -51,6 +49,7 @@
       vertical-align: middle;
       font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
       color: #99a9bf;
+      transition: color .15s linear;
     }
     
     i {
@@ -58,17 +57,17 @@
       font-size: 32px;
       margin-bottom: 15px;
       color: #606266;
+      transition: color .15s linear;
     }
     
     .icon-name {
       display: inline-block;
       padding: 0 3px;
       height: 1em;
-      color: #606266;
     }
     
     &:hover {
-      color: rgb(92, 182, 255);
+      span,i{color: rgb(92, 182, 255);}
     }
   }
 </style>
