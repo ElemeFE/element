@@ -1,4 +1,4 @@
-<h1>element-ue@2.3.9 pull request 11398</h1>
+<h1>element-ue@2.5.4 pull request 11398</h1>
 
 <p align="center">
   <img src="https://cdn.rawgit.com/abernov/element/dev/element_logo.svg">

@@ -14,6 +14,7 @@
       :node="child"
       :props="props"
       :render-after-expand="renderAfterExpand"
+      :show-checkbox="showCheckbox"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
@@ -106,6 +107,7 @@
       },
       allowDrag: Function,
       allowDrop: Function,
+      beforeNodeDrop: Function,
       props: {
         default() {
           return {
@@ -464,23 +466,24 @@
         event.dataTransfer.dropEffect = 'move';
 
         if (draggingNode && dropNode) {
-          var value;
-          if (this.store.lazy) {
-            value = draggingNode.node;
-          } else {
-            const data = draggingNode.node.data;
-            value = {data};
+          const action = typeof this.beforeNodeDrop !== 'function' ? 'move' : this.beforeNodeDrop(draggingNode.node, dropNode.node, dropType, event);
+          const doMove = action === 'move';
+          const draggingNodeCopy = { data: draggingNode.node.data };
+          if (action === 'remove') {
+            draggingNode.node.remove();
+            return emitEvents();
           }
+          if (!doMove && action !== 'copy') return emitEvents();
           if (dropType === 'before') {
-            draggingNode.node.remove();
-            dropNode.node.parent.insertBefore(value, dropNode.node);
+            if (doMove) draggingNode.node.remove();
+            dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
           } else if (dropType === 'after') {
-            draggingNode.node.remove();
-            dropNode.node.parent.insertAfter(value, dropNode.node);
+            if (doMove) draggingNode.node.remove();
+            dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
           } else if (dropType === 'inner') {
             dropNode.node.expand(() => {
-              draggingNode.node.remove();
-              dropNode.node.insertChild(value);
+              if (doMove) draggingNode.node.remove();
+              dropNode.node.insertChild(draggingNodeCopy);
               emitEvents();
             });
             return;
