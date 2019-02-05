@@ -194,7 +194,8 @@ describe('Input', () => {
       `,
       data() {
         return {
-          value: '1234'
+          value: '1234',
+          select: '1'
         };
       }
     }, true);

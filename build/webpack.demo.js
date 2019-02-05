@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const md = require('markdown-it')();
 const slugify = require('transliteration').slugify;
 
@@ -11,7 +12,6 @@ const striptags = require('./strip-tags');
 const config = require('./config');
 
 const isProd = process.env.NODE_ENV === 'production';
-const isDev = process.env.NODE_ENV === 'development';
 const isPlay = !!process.env.PLAY_ENV;
 
 function convert(str) {
@@ -30,6 +30,7 @@ function wrap(render) {
 }
 
 const webpackConfig = {
+  mode: process.env.NODE_ENV,
   entry: isProd ? {
     docs: './examples/entry.js',
     'element-ui': './src/index.js'
@@ -51,18 +52,18 @@ const webpackConfig = {
     publicPath: '/',
     noInfo: true
   },
+  performance: {
+    hints: false
+  },
+  stats: {
+    children: false
+  },
   module: {
     rules: [
       {
         enforce: 'pre',
-        test: /\.jsx?$/,
-        exclude: /node_modules|bower_components/,
-        loader: 'eslint-loader'
-      },
-      {
-        enforce: 'pre',
-        test: /\.vue$/,
-        exclude: /node_modules|bower_components/,
+        test: /\.(vue|jsx?)$/,
+        exclude: /node_modules/,
         loader: 'eslint-loader'
       },
       {
@@ -72,86 +73,92 @@ const webpackConfig = {
         loader: 'babel-loader'
       },
       {
-        test: /\.md$/,
-        loader: 'vue-markdown-loader',
+        test: /\.vue$/,
+        loader: 'vue-loader',
         options: {
-          use: [
-            [require('markdown-it-anchor'), {
-              level: 2,
-              slugify: slugify,
-              permalink: true,
-              permalinkBefore: true
-            }],
-            [require('markdown-it-container'), 'demo', {
-              validate: function(params) {
-                return params.trim().match(/^demo\s*(.*)$/);
-              },
-
-              render: function(tokens, idx) {
-                var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
-                if (tokens[idx].nesting === 1) {
-                  var description = (m && m.length > 1) ? m[1] : '';
-                  var content = tokens[idx + 1].content;
-                  var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
-                  var script = striptags.fetch(content, 'script');
-                  var style = striptags.fetch(content, 'style');
-                  var jsfiddle = { html: html, script: script, style: style };
-                  var descriptionHTML = description
-                    ? md.render(description)
-                    : '';
-
-                  jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
-
-                  return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
-                            <div class="source" slot="source">${html}</div>
-                            ${descriptionHTML}
-                            <div class="highlight" slot="highlight">`;
-                }
-                return '</div></demo-block>\n';
-              }
-            }],
-            [require('markdown-it-container'), 'tip'],
-            [require('markdown-it-container'), 'warning']
-          ],
-          preprocess: function(MarkdownIt, source) {
-            MarkdownIt.renderer.rules.table_open = function() {
-              return '<table class="table">';
-            };
-            MarkdownIt.renderer.rules.fence = wrap(MarkdownIt.renderer.rules.fence);
-            return source;
+          compilerOptions: {
+            preserveWhitespace: false
           }
         }
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader'
+        test: /\.css$/,
+        loaders: [
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ]
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
+        loaders: [
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
-        test: /\.html$/,
-        loader: 'html-loader?minimize=false'
+        test: /\.md$/,
+        loaders: [
+          {
+            loader: 'vue-loader'
+          },
+          {
+            loader: 'vue-markdown-loader/lib/markdown-compiler',
+            options: {
+              preventExtract: true,
+              raw: true,
+              preprocess: function(MarkdownIt, source) {
+                MarkdownIt.renderer.rules.table_open = function() {
+                  return '<table class="table">';
+                };
+                MarkdownIt.renderer.rules.fence = wrap(MarkdownIt.renderer.rules.fence);
+                return source;
+              },
+              use: [
+                [require('markdown-it-anchor'), {
+                  level: 2,
+                  slugify: slugify,
+                  permalink: true,
+                  permalinkBefore: true
+                }],
+                [require('markdown-it-container'), 'demo', {
+                  validate: function(params) {
+                    return params.trim().match(/^demo\s*(.*)$/);
+                  },
+
+                  render: function(tokens, idx) {
+                    var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
+                    if (tokens[idx].nesting === 1) {
+                      var description = (m && m.length > 1) ? m[1] : '';
+                      var content = tokens[idx + 1].content;
+                      var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
+                      var script = striptags.fetch(content, 'script');
+                      var style = striptags.fetch(content, 'style');
+                      var jsfiddle = { html: html, script: script, style: style };
+                      var descriptionHTML = description
+                        ? md.render(description)
+                        : '';
+
+                      jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
+
+                      return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
+                                <div class="source" slot="source">${html}</div>
+                                ${descriptionHTML}
+                                <div class="highlight" slot="highlight">`;
+                    }
+                    return '</div></demo-block>\n';
+                  }
+                }],
+                [require('markdown-it-container'), 'tip'],
+                [require('markdown-it-container'), 'warning']
+              ]
+            }
+          }
+        ]
       },
       {
-        test: /\.otf|ttf|woff2?|eot(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.svg(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(gif|png|jpe?g)(\?\S*)?$/,
+        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
@@ -170,80 +177,21 @@ const webpackConfig = {
       { from: 'examples/versions.json' }
     ]),
     new ProgressBarPlugin(),
+    new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({
-      minimize: true,
       vue: {
-        preserveWhitespace: false
+        compilerOptions: {
+          preserveWhitespace: false
+        }
       }
     })
   ]
 };
 
 if (isProd) {
-  webpackConfig.externals = {
-    vue: 'Vue',
-    'vue-router': 'VueRouter'
-  };
-  webpackConfig.module.rules.push(
-    {
-      test: /\.vue$/,
-      loader: 'vue-loader',
-      options: {
-        extractCSS: true,
-        preserveWhitespace: false
-      }
-    },
-    {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader'
-        ]
-      })
-    }
-  );
   webpackConfig.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: false
-    }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: '[name].[contenthash:7].css'
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['element-ui', 'manifest']
-    })
-  );
-}
-if (isDev) {
-  webpackConfig.module.rules.push(
-    {
-      test: /\.vue$/,
-      loader: 'vue-loader',
-      options: {
-        preserveWhitespace: false
-      }
-    },
-    {
-      test: /\.css$/,
-      loaders: ['style-loader', 'css-loader', 'postcss-loader']
-    }
-  );
-  webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
     })
   );
 }

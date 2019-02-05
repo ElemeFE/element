@@ -122,6 +122,20 @@ export default {
   },
 
   watch: {
+    listType(type) {
+      if (type === 'picture-card' || type === 'picture') {
+        this.uploadFiles.forEach(file => {
+          if (!file.url && file.raw) {
+            try {
+              file.url = URL.createObjectURL(file.raw);
+            } catch (err) {
+              console.error('[Element Error][Upload]', err);
+              return;
+            }
+          }
+        });
+      }
+    },
     fileList: {
       immediate: true,
       handler(fileList) {

@@ -1540,7 +1540,7 @@ Se puede personalizar el encabezado de la tabla para que se pueda adaptar aún m
 ```html
 <template>
   <el-table
-    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Date"
@@ -2132,7 +2132,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | Atributo              | Descripción                              | Tipo                              | Valores aceptados             | Por defecto |
 | --------------------- | ---------------------------------------- | --------------------------------- | ----------------------------- | ----------- |
 | type                  | tipo de la columna. Si se establece a `selection`, la columna puede mostrar un _checkbox_. Si se establece a `index`, la columna puede mostrar el índice de la fila (iniciando desde 1). Si se establece a `expand`, la columna puede mostrar un ícono para expandir. | string                            | selection/index/expand        | —           |
-| index                 | personalice los índices para cada fila, funciona en columnas con `type=index` | string, Function(index)           | -                             | -           |
+| index                 | personalice los índices para cada fila, funciona en columnas con `type=index` | number, Function(index)           | -                             | -           |
 | label                 | etiqueta de la columna                   | string                            | —                             | —           |
 | column-key            | clave de la columna. Si necesita utilizar el evento `filter-change`, necesita el atributo para identificar cual columna está siendo filtrada | string                            | string                        | —           |
 | prop                  | nombre del campo. También puede usar su alias: `property` | string                            | —                             | —           |

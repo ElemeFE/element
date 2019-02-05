@@ -61,6 +61,7 @@
           :render-content="renderContent"
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
+          :show-checkbox="showCheckbox"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
@@ -94,6 +95,10 @@
       renderAfterExpand: {
         type: Boolean,
         default: true
+      },
+      showCheckbox: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -127,7 +132,6 @@
         tree: null,
         expanded: false,
         childNodeRendered: false,
-        showCheckbox: false,
         oldChecked: null,
         oldIndeterminate: null
       };
@@ -258,8 +262,6 @@
       this.$watch(`node.data.${childrenKey}`, () => {
         this.node.updateChildren();
       });
-
-      this.showCheckbox = tree.showCheckbox;
 
       if (this.node.expanded) {
         this.expanded = true;
