@@ -137,7 +137,7 @@
 
 *2018-07-03*
 
-- Correction de `allow-drop` qui ne fonctionnait pas correctement lorsque les nœuds de l'arborescence avaient une hauteur personnalisée, #11797
+- Correction de `allow-drop` qui ne fonctionnait pas correctement lorsque les nœuds de Tree avaient une hauteur personnalisée, #11797
 - Maintenant vous pouvez passer un paramètre à la méthode `clearValidate` du formulaire, en spécifiant quels résultats de validation FormItems doivent être effacés, #11821
 - Ajout de l'attribut `distinguishCancelAndClose` pour MessageBox, #11831
 
@@ -246,7 +246,7 @@
 
 - Correction d'une table qui ne mettait pas à jour ses largeurs de headers lorsque la barre de défilement disparaissait à cause du filtrage, #10834
 - Correction de l'Input effaçable affichant toujours l'icône d'effacement lorsque sa valeur initiale est `null`, #10912
-- Correction d'un déclencheur incorrect de l'événement `active-change` après avoir changé la valeur de liaison de ColorPicker par programmation, #10903 (par @zhangbobell)
+- Correction d'un déclencheur incorrect de l'événement `active-change` après avoir changé la valeur liée de ColorPicker par programmation, #10903 (par @zhangbobell)
 - Correction du Select filtrable qui provoquait une boucle infinie lors de la navigation dans les options à l'aide du clavier si toutes les options sont désactivées, #10945
 
 ### 2.3.6
@@ -289,13 +289,13 @@
 
 - Ajout de l'attribut `shadow` pour Card, #10418 (par @YunYouJun)
 - Correction de Badge masqué lorsque `value` est `0`, #10470
-- Correction de quelques bogues de l'arborescence, #10474 #10494
+- Correction de quelques bogues de Tree, #10474 #10494
 - Ajout de `placement` pour Autocomplete, #10475
 - L'attribut `default-time` fonctionne également dans DateTimePicker, #10321 (par @RickMacTurk)
 - Suppression du contour bleu de TabItem après que le navigateur n'ait plus le focus ou soit minimisé, #10503
 - Ajout de l'attribut `popper-append-to-body` pour SubMenu, #10515
 - Suppression du feedback visuel lors du survol d'un élément BreadcrumbItem non lié, #10551
-- Correction de l'événement `change` d'InputNumber pour s'assurer que la valeur de liaison du composant est mise à jour dans le gestionnaire d'événements, #10553
+- Correction de l'événement `change` d'InputNumber pour s'assurer que la valeur liée du composant est mise à jour dans le gestionnaire d'événements, #10553
 
 ### 2.3.2
 
@@ -332,7 +332,7 @@
   - Ajout de l'événement `validate`, #10351
 - Progress
   - Ajout de l'attribut `color`, #10352 (par @YunYouJun)
-- Bouton
+- Button
   - Ajout de l'attribut `circle`, #10359 (par @YunYouJun)
 
 ##### Corrections de bugs
@@ -401,8 +401,347 @@
   - Correction de la mise en page non mise à jour lorsque la largeur des colonnes est modifiée par glisser-déposer de l'utilisateur, #9668
   - Correction d'un problème de style lorsque la ligne de résumé coexiste avec des colonnes fixes, #9667
 - Container
-  - Les composants fixes du conteneur ne s'étirent pas dans IE11, #9655
+  - Les composants fixes de Container ne s'étirent pas dans IE11, #9655
 - Loading
   - Correction du chargement n'apparaissant pas lorsque la valeur de `v-loading` est changée en true dans le hook `mounted`, #9722
 - Switch
   - Correction de deux événements de clics natifs déclenchés lorsque Switch est cliqué, #9760
+
+### 2.1.0 Charcoal
+
+*2018-01-31*
+
+##### Nouvelles fonctionnalités
+- Cascader
+  - Ajout des événements `focus` et `blur`, #9184 (par @viewweiwu)
+- Table
+  - La méthode `filter-method` a maintenant un troisième paramètre `column`, #9196 (par @liyanlong)
+- DatePicker
+  - Ajout des attributs `prefix-icon` et `clear-icon`, #9237 (par @AdamSGit)
+  - Ajout de l'attribut `default-time`, #9094 (par @nighca)
+  - Le format `value-format` supporte maintenant `timestamp`, #9319 (par @wacky6)
+- InputNumber
+  - Maintenant la valeur liée peut être `undefined`, #9361
+- Select
+  - Ajouté l'attribut `auto-complete`, #9388
+- Form
+ - Ajout de l'attribut `désactivé`, #9529
+ - Ajout de l'attribut `validateOnRuleChange`, #8141
+- Notification
+  - Ajout de la méthode `closeAll`, #9514
+
+##### Corrections de bugs
+- InputNumber
+  - Correstion du reset lors de la saisie du point des nombres décimaux, #9116
+- Dropdown
+  - Correction du mauvais positionnement du menu déroulant lorsque la page n'a qu'une barre de défilement horizontale dans certains navigateurs, #9138 (par @banzhuanmei)
+- Table
+  - Correction d'une erreur dans le calcul du nombre de colonnes fixes après les changements de données des colonnes, #9188（by @kolesoffac）
+  - Correction de la bordure de la dernière colonne de l'en-tête groupé qui n'était pas correctement affichée, #9326
+  - Correction d'un positionnement incorrect de l'en-tête du tableau dans Safari, #9327
+  - Correction de la réduction des lignes extensibles lorsque les données de la table changent, #9462
+  - Correction de rendus multiples inutiles dans certaines conditions, #9426
+  - Correction d'une erreur de calcul de la largeur de colonne lors de la modification de `width` de TableColumn, #9426
+- Loading
+  - Correction de Loading ne se cachant pas correctement dans certaines conditions, #9313
+- DatePicker
+  - Correction de la méthode `focus` qui ne fonctionnait pas en mode "range", #9437
+  - Correction du clic sur le bouton "now" qui sélectionnait toujours la date actuelle même si elle était désactivée, #9470 (par @wacky6)
+  - Correction d'une date trop serrée lors de la navigation, #9577 (par @wacky6)
+- Steps
+  - Correction d'une erreur de style dans IE 11, #9454
+
+##### Changements
+- Menu
+  - Le menu contextuel en mode `collapse` s'ajoute maintenant directement à `body`, de sorte qu'il est visible lorsqu'il est imbriqué dans Aside, #9263
+- Table
+  - Maintenant, cocher les cases dans la Table multi-sélection ne déclenche pas l'événement `row-click`, #9467
+- Loading
+  - Le `z-index` du masque de chargement non plein écran est changé à 2000. Le `z-index` du masque de chargement plein écran se mettra à jour dynamiquement avec les composants popup, #9522
+- Dropdown
+  - Les attributs `show-timeout` et `hide-timeout` ne fonctionnent maintenant que lorsque le déclencheur est `hover`, #9573
+
+### 2.0.11
+
+*2018-01-08*
+
+- Correction d'un problème de couleur de bordure de Select dans les slots `prepend` ou `append` de Input, #9089
+- Correction du paramètre `remove-tag` de l'événement Select, #909090
+- Ajout des attributs `show-timeout` et `hide-timeout` pour le sous-menu, #8934 (par @HugoLew)
+- Correction d'un style Tooltip manquant de `show-overflow-tooltip` lors de l'importation de Table sur demande, #9130
+- Correction d'un dysfonctionnement du tri des colonnes de la table après l'exécution de `clearSort` sur cette colonne, #9100 (par @zEmily)
+- Le fichier de configuration i18n pour le tchèque est renommé de `cz` en `cs-CZ`, #9164
+
+### 2.0.10
+
+*2017-12-29*
+
+- Calcul erroné de la hauteur du tableau lorsque la colonne fixe et la ligne de somme coexistent, #9026
+- Correction d'un style de couleur non compilé du texte vide dans le tableau, #9028
+- Maintenant, DatePicker n'émet que l'événement `change` quand la valeur est vraiment changée, #9029 (par @remizovvvv)
+- Ajout de l'attribut `tabindex` pour Input, #9041 (par @dicklwm)
+
+### 2.0.9🎄
+
+*2017-12-24*
+
+- Ajouté la fonction de hook "avant suppression" pour Upload, #8788 (par @firesh)
+- Correction de la valeur initiale de `error` qui ne fonctionnait pas pour FormItem, #8840
+- La directive Loading prend maintenant en charge le nom de classe personnalisé grâce à l'attribut `element-loading-custom-class`, #8826 (par @earlymeme)
+- Correction CarouselItem devenant invisible lorsque les données sont mises à jour de manière asynchrone, #8921
+- Ajout de l'attribut `renderAfterExpand` pour Tree, #8972
+
+### 2.0.8
+
+*2017-12-12*
+
+- Ajout de la documentation en espagnol
+- Correction du `show-timeout` de Dropdown qui ne fonctionnait pas quand le déclencheur est click, #8734 (par @presidenten)
+- Correction du temps de validation des formulaires pour les règles dont le déclencheur est blur, #8776
+- Correction d'un événement de blur de DatePicker avec intervalle, #8784
+- L'attribut `format` de TimePicker supporte maintenant AM/PM, #8620 (par @firesh)
+
+### 2.0.7
+
+*2017-11-29*
+
+- Correction du style du bouton de type texte désactivé, #8570
+
+### 2.0.6
+
+*2017-11-29*
+
+- Correction d'un bug de style des icônes de tri de la table, #8405
+- Correction du mécanisme de déclenchement de Popover lorsque son `trigger` est manuel, #8467
+- Ajout des attributs `prefix-icon` et `suffix-icon` pour Autocomplete, #8446 (par @liyanlong)
+- Ajout de l'attribut `separator` pour Cascader, #8501
+- Ajout de l'attribut `clearable` pour Input, #8509 (par @lbogdan)
+- Ajout de l'attribut `background` pour Pagination, #8553
+
+### 2.0.5
+
+*2017-11-17*
+
+- Correction de la régression Popover, Tree, Breadcrumb et Cascader dans 2.0.4, #8188 #8217 #8283
+- Correction d'une fuite de mémoire de la directive `clickoutside`, #8168 #8225 (par @badpunman @STLighter)
+- Correction de la hauteur du Select multiple lorsque sa valeur est effacée, #8317 (par @luciy)
+- Ajout de l'attribut `collapse-tags` pour plusieurs Sélectionner pour remplacer les balises par une ligne de texte, #8190
+- Correction d'une consommation CPU élevée causée par la table cachée, #8351
+- Maintenant vous pouvez utiliser la méthode `doLayout` de la Table pour mettre à jour sa disposition, #8351
+
+### 2.0.4
+
+*2017-11-10*
+
+- Accessibilité améliorée pour Cascader, Dropdown, Message, Notification, Popover, Tooltip et Tree.
+- Correction du redimensionnement de Container lorsque la largeur de la fenêtre d'affichage diminue, #8042
+- Correction de la suppression incorrecte de `updateKeyChildren` dans Tree, #8100
+- Correction de la hauteur de la CheckboxButton avec bordure lorsque le bouton est imbriqué dans un formulaire, #8100
+- Correction d'une erreur d'analyse du menu pour les couleurs personnalisées, #8153 (par @zhouyixiang)
+
+### 2.0.3
+
+*2017-11-03*
+
+- Correction des attributs `éditable` et `readonly` pour DatePicker avec intervalle, #7922
+- Correction d'une erreur de style des Tabs imbriqués, #7941
+- Correction d'une erreur de style de la dernière étape des Steps verticales, #7980
+- Correction de la synchronisation du déclenchement de l'événement `current-current-change` pour Pagination, #7995
+- Correction d'une infobulle non enregistrée dans Menu, #7995
+
+### 2.0.2
+
+*2017-10-31*
+
+- Un clic droit sur les boutons de InputNumber ne changera pas sa valeur, #7817
+- La méthode `validate` de Form peut maintenant attendre des validations asynchrones avant d'exécuter son callback, #7774 (par @Allenice)
+- Correction de la plage de sélection de DatePicker ne fonctionnant pas dans les navigateurs Chromium 53-57, #7838
+- Correction des icônes manquantes de prévisualisation et de suppression de Upload lorsque son `list-type` est picture-card, #7857
+- Ajout de l'attribut `sort-by` pour TableColumn, #7828 (par @wangfengming)
+- Correction de DatePicker affichant parfois un mauvais numéro d'année lors de la sélection de la première semaine en mode semaine, #7860 (par @hhh23485)
+- Correction d'une erreur de style d'icône des Steps verticales, #7891
+- La 'hot area' pour les flèches de nœud dans Tree est étendue, #7891
+
+### 2.0.1
+
+*2017-10-28*
+
+- Correction d'une erreur de style de RadioButton et CheckboxButton, #7793
+- Correction de TimePicker qui ne répondait pas au défilement de la souris dans certaines conditions, #7811
+- Correction des styles incomplets de certains composants lors de l'importation à la demande, #7811
+
+### 2.0.0 Carbon
+
+*2017-10-27*
+
+##### Nouvelles fonctionnalités
+- Général
+  - Un nouveau thème : `theme-chalk`.
+  - L'accessibilité des éléments suivants est améliorée : Alert, AutoComplete, Breadcrumb, Button, Checkbox, Collapse, Input, InputNumber, Menu, Progress, Radio, Rate, Slider, Switch, Upload
+  - Ajout du typage TypeScript
+  - Toutes les icônes existantes sont redessinées. De nouvelles icônes sont ajoutées
+  - Ajout d'une série de classes basées sur les breakpoints qui masquent les éléments lorsque la taille de la fenêtre remplit certaines conditions
+  - Ajout des composants de mise en page : Container, Header, Aside, Main, Footer
+  - Vous pouvez maintenant configurer la taille des composants de manière globale. Lors de l'importation d'un élément, vous pouvez ajouter un objet de configuration global avec une propriété `size` pour configurer les tailles par défaut pour tous les composants.
+- Button
+  - Ajout de l'attribut `round`. Il est utilisé pour les boutons à coins ronds #6643
+- TimeSelect
+  - Vous pouvez maintenant naviguer en appuyant sur les touches `Up` et `Down`, et en appuyant sur `Enter` vous sélectionnez l'heure #6023.
+- TimePicker
+  - Vous pouvez maintenant naviguer à l'aide des touches fléchées, et en appuyant sur `Entrée` vous sélectionnez l'heure #6050.
+  - Ajout de `start-placeholder` et de `end-placeholder`. Ce sont des placeholders pour les deux champs en mode intervalle #7169
+  - Ajout de l'attribut `farrow-control` pour faire tourner le temps avec les flèches #7438
+- Tree
+  - Maintenant les noeuds enfants ne font pas de rendu avant la première ouverture #6257
+  - Ajout de l'attribut `check-descendants`. Il détermine si les nœuds enfants sont vérifiés lors du contrôle de leur nœud parent en mode `lazy` #6235
+- Tag
+  - Ajouté l'attribut `size` #7203
+- Datepicker
+  - Maintenant `timeFormat` peut formater le TimePicker quand le type est réglé sur `datetimerange` #6052
+  - Ajout de `start-placeholder` et de `end-placeholder`. Ce sont des placeholders pour les deux champs en mode intervalle #7169
+  - Ajout de l'attribut `value-format` pour personnaliser le format de la valeur liée, #7367
+  - Ajout de l'attribut `unlink-panels` pour dissocier les deux panneaux de date lors de la sélection d'une plage de dates
+- MessageBox
+  - Ajout de l'attribut `closeOnHashChange` #6043
+  - Ajout de l'attribut `center` pour que le contenu puisse être centré #7029
+  - Ajout de l'attribut `roundButton` pour afficher les boutons ronds #7029
+  - Ajout de l'attribut `dangerouslyUseHTMLString`. Lorsqu'il est réglé sur `true`, `message` sera interprété comme une chaîne HTML<sup>\*</sup> #6043
+  - Ajout de l'attribut `inputType` pour assigner le type de l'input intérieur, #7651
+- Dialog
+  - Ajout des attributs `width`、`fullscreen`、`append-to-body`. La boîte de dialogue peut maintenant être imbriquée
+  - Ajout de l'attribut `center` pour que le contenu puisse être centré #7042
+  - Ajout de `focus-after-closed`、`focus-after-open` pour améliorer l'accessibilité #6511
+- ColorPicker
+  - Maintenant vous pouvez taper les couleurs dans le champ de saisie #6167
+  - Ajout des attributs `size` et `disabled` #7026
+  - Ajout de l'attribut `popper-class` #7351
+- Message
+  - Maintenant la couleur des icônes peut être modifiée par CSS #6207
+  - Ajout de l'attribut `dangerouslyUseHTMLString`. Lorsqu'il est réglé sur `true`, `message` sera interprété comme une chaîne HTML<sup>\*</sup> #6207
+  - Ajout de l'attribut `center` pour que le contenu puisse être centré #6875
+- Notification
+  - Ajout de l'attribut `position` pour configurer où Notification apparaît #6231
+  - Ajout de l'attribut `dangerouslyUseHTMLString`. Lorsqu'il est réglé sur `true`, `message` sera interprété comme une chaîne HTML<sup>\*</sup> #6231
+  - Ajout de l'attribut `showClose` pour cacher le bouton de fermeture #6402
+- Rate
+  - Ajout de l'attribut `show-score` pour déterminer si le score actuel est affiché #6295
+- Tabs
+  - Ajout de l'attribut `tab-position` #6096
+- Radio
+  - Ajout des attributs `border` et `size` #6690
+- Checkbox
+  - Ajout des attributs `border` et `size` #6690
+- Alert
+  - Ajout de l'attribut `center` pour que le contenu puisse être centré #6876
+- Menu
+  - Ajout des attributs `background-color`, `text-color` et `active-text-color` #7064
+  - Ajout des méthodes `open` et `close` pour ouvrir et fermer les sous-menus par programmation, #7412
+- Form
+  - Ajout de l'attribut `inline-message` pour déterminer si le message de validation est affiché en ligne #7032
+  - Ajout de l'attribut `status-icon` pour afficher une icône de feedback après validation #7032
+  - Form et FormItem ont maintenant un attribut `size`. Les composants internes hériteront de cette taille s'ils ne sont pas spécifiés sur eux-mêmes, #7428
+  - La méthode `validate` retournera maintenant une promesse si le rappel est omis, #7405
+  - Ajout de la méthode `clearValidate` pour la validation des résultats pour tous les éléments de formulaire, #7623
+- Input
+  - Ajout des attributs `suffixe` et `préfixe` des slots nommés, `suffixIcon` et `prefixIcon` pour ajouter du contenu dans la zone de saisie #7032
+- Breadcrumb
+  - Ajout de l'attribut `separator-class` pour supporter les icônes comme séparateurs d'éléments #7203
+- Steps
+  - Ajout de l'attribut `simple` pour activer les étapes de style simple #7274
+- Pagination
+  - Ajout des attributs `prev-text` et `next-text` pour personnaliser les textes des pages précédente et suivante #7005
+- Loading
+  - Maintenant vous pouvez personnaliser l'icône et la couleur de fond avec les propriétés `spinner` et `background` #7390
+- Autocomplete
+  - Ajout de l'attribut `debounce`, #7413
+- Upload
+  - Ajout des attributs `limit` et `on-exceed` pour limiter le nombre de fichiers, #7405
+- DateTimePicker
+  - Ajout de l'attribut `time-arrow-control` pour activer `arrow-control` du TimePicker imbriqué, #743838
+- Layout
+  - Ajout d'un nouveau point d'arrêt `xl` pour les fenêtres plus larges que 1920px
+- Table
+  - Ajout de l'attribut `span-method` pour la fusion de cellules
+  - Ajout de la méthode `clearSort` pour effacer le tri par programmation
+  - Ajout de la méthode `clearFilter` pour effacer le filtre par programmation
+  - Pour les lignes extensibles, lorsqu'une ligne est étendue, une classe `.expanded` sera ajoutée à sa liste de classes, afin que vous puissiez personnaliser son style
+  - Ajout de l'attribut `size`
+  - Ajout de la méthode `toggleRowExpansionRowExpansion` pour ouvrir ou réduire les lignes extensibles par programmation
+  - Ajout de l'attribut `cell-class-name` pour assigner un nom de classe aux cellules
+  - Ajout de l'attribut `cell-style` pour le style des cellules
+  - Ajout de l'attribut `header-row-class-name` pour assigner un nom de classe aux lignes d'en-tête
+  - Ajout de l'attribut `header-row-style` pour le style d'en-tête
+  - Ajout de l'attribut `header-cell-class-name` pour assigner un nom de classe aux cellules d'en-tête
+  - Ajout de l'attribut `header-cell-style` pour le style des cellules d'en-tête
+  - L'attribut `prop` de la tableColumn accepte maintenant les notations `object[key]`
+  - Ajout de l'attribut `index` pour TableColumn pour personnaliser les index de lignes
+- Select
+  - Ajout de l'attribut `reserve-keyword` pour réserver le mot-clé de la recherche courante après avoir sélectionné une option.
+
+##### Corrections de bugs
+- DatePicker
+  - Correction de `v-model` retournant le deuxième jour de la semaine sélectionnée en mode semaine #6038
+  - Correction de la première entrée effacée dans le type `daterange` #6021
+- DateTimePicker
+  - Correction de DateTimePicker et TimePicker s'affectant l'un l'autre lors de la sélection #6090
+  - Correction de l'heure et de la seconde qui peuvent être au-delà de la limite en sélectionnant l'heure #6076
+- TimePicker
+  - Correction de `v-model` qui ne se mettait pas à jour correctement lors du blur #6023
+- Dialog
+  - Correction des textes ayant des bords flous lors de l'ouverture et de la fermeture des listes déroulantes imbriquées #6088
+- Select
+  - Performances améliorées. Maintenant Vue dev-tool ne crashera pas quand un grand nombre de Select sont détruits #6151
+- Table
+  - Correction d'un bug ou la table reste masquée lorsque son élément parent apparaît depuis `display : none`
+  - Correction de l'extension de la largeur de la table lorsque l'élément parent a `display : flex`
+  - Correction d'un bug qui corrigeait le fait que les colonnes d'une table avec l'emplacement `append` disparaissaient lorsque les données étaient récupérées dynamiquement
+  - Correction de l'attribut `expand-row-keys` qui ne fonctionnait pas avec la valeur initiale
+  - Correction d'une défaillance du filtre lors de la mise à jour de `data`
+  - Correction d'une erreur de calcul dans la mise en page des colonnes fixes avec en-têtes groupés
+  - Correction d'un bug dynamique de `max-height`
+  - Correction de quelques erreurs de calcul de style
+
+##### Breaking changes
+- Général
+  - Suppression de `theme-default`.
+  - Compatible avec Vue 2.5.2+ et IE 10+
+  - L'événement `change` des composants de formulaire et l'événement `current-current-change` de la pagination ne se déclenchent plus que lors de l'interaction de l'utilisateur
+  - L'attribut `size` de Button et les composants de formulaire acceptent maintenant `medium`, `small` et `mini`
+  - Pour faciliter l'utilisation d'icônes tierces, les attributs `icon` du bouton et des étapes, `prefix-icon` et `suffix-icon` d'Input nécessitent maintenant un nom de classe complet
+- Dialog
+  - Suppression de l'attribut `taille`. Maintenant la taille de Dialog peut être configurée par `width` et `fullscreen`
+  - Maintenant la visibilité de Dialog ne peut plus être contrôlée par `v-model`
+- Rate
+  - Le `text-template` est renommé `score-template`
+- Dropdown
+  - `menu-align` est renommé en `placement`. Maintenant il supporte plus de positions
+- Transfert
+  - le `footer-format` est renommé en `format`
+- Switch
+  - Les attributs commençant par `on-**` seront analysés pour les événements dans JSX, ce qui rend tous les attributs `on-*` de Switch incapable de fonctionner en JSX. Ainsi, les attributs `on-**` sont renommés en `active-*`, et par conséquent les attributs `off-*` sont renommés en `inactive-*`. Cette modification affecte les attributs suivants: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`
+  - Les attributs `active-text` et `inactive-text` n'ont plus de valeurs par défaut
+- Tag
+  - L'attribut `type` accepte maintenant `success`, `info`, ` warning` et `danger`
+- Menu
+  - Suppression de l'attribut `theme`. La couleur du menu peut être configurée en utilisant `background-color`, `text-color` et `active-text-color`
+- Input
+  - Suppression de l'attribut `icon`. L'icône du suffixe peut maintenant être configurée à l'aide de l'attribut `suffix-icon` ou du slot `suffix-icon`
+  - Suppression de l'attribut `on-icon-click` et de l'événement `click`. Maintenant pour ajouter le gestionnaire de clic sur les icônes, veuillez utiliser les slots nommés
+  - L'événement `change` se comporte maintenant comme dans l'input natif, qui ne se déclenche qu'en cas de blur ou en appuyant sur Entrée. Si vous avez besoin de répondre à l'entrée de l'utilisateur en temps réel, vous pouvez utiliser l'événement `input`
+- Autocomplete
+  - Suppression de l'attribut `custom-item`. Le template de suggestions d'entrée peut maintenant être personnalisé en utilisant `scoped slot`.
+  - Suppression de l'attribut `props`. Vous pouvez maintenant utiliser l'attribut `value-key` pour désigner le nom de clé de l'objet de suggestion d'entrée pour l'affichage.
+- Steps
+  - Suppression de l'attribut `center`
+  - Maintenant le Steps va remplir son conteneur parent par défaut
+- DatePicker
+  - Le paramètre de l'événement `change` de DatePicker est maintenant la valeur liée elle-même. Son format est contrôlé par `value-format`
+- Table
+  - Suppression de la prise en charge de la personnalisation du modèle de colonne à l'aide de `inline-template`
+  - `sort-method` s'aligne maintenant avec `Array.sort`. Il devrait retourner un nombre au lieu d'un booléen
+  - L'emplacement `append` est déplacé à l'extérieur de l'élément `tbody` pour éviter les rendus multiples
+  - L'événement `expand` est renommé en `expand-change`
+  - Les paramètres de la méthode `row-class-name` et `row-style` sont maintenant un objet
+
+##
+<i><sup><sup>*</sup> Rendre du HTML arbitraire de façon dynamique sur votre site Web peut être très dangereux car cela peut facilement mener à[des attaques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Donc quand `dangerouslyUseHTMLString' est activé, assurez-vous que le contenu du `message' est fiable, et **ne jamais** assigner `message` au contenu fourni par l'utilisateur.</i>.
