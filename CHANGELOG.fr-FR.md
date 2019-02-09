@@ -1,5 +1,131 @@
 ## Changelog
 
+### 2.5.4
+
+*2019-02-01*
+
+##### Corrections de bugs
+
+- Build: Correction d'un problème de configuration de babel qui cassait la transition collapse (par @island205 dans #14282)
+
+### 2.5.3
+
+*2019-01-31*
+
+##### Optimisation
+
+- Optimisation du code de Message (par @vok123 dans #14029)
+- Suppression des gh-pages (par @ziyoung dans #14266)
+- Ajout du lien IssueHunt (par @island205 dans #14261)
+
+##### Corrections de bugs
+
+- Correction d'une erreur du module UMD côté serveur (par @island205 dans #14242)
+- Correction du style du TabBar actif (par @iamkun dans #14240)
+- Correction d'une erreur de code dans la démo de Table (par @xunmeng dans #14253)
+
+### 2.5.2
+
+*2019-01-27*
+
+##### Optimisation
+- Docs:
+  - Mise à jour du ChangeLog ES 2.5.1 (par @Gonzalo2310 dans #14231)
+
+##### Corrections de bugs
+- Build:
+  - Suppression des commentaires non supprimés dans le module umd `lib/index.js` (par @island205 dans #14233)
+  - Correction d'une erreur d'exportation dans le module commonjs utilisé dans nuxt.js (par @island205 dans #14232)
+  - Correction des problèmes de build 2.5.1 (par @iamkun dans #14228)
+
+### 2.5.1
+
+*2019-01-26*
+
+##### Optimisation
+- DatePicker: surbrillance du mois et de l'année courants (par @Debiancc dans #14211)
+- Mise à jour du changelog 2.5.0 (par @wacky6 dans #14217)
+
+##### Corrections de bugs
+- Correction d'un problème d'exportation due par la mise à jour du webpack (par @island205 dans #14220)
+- Conservation de la docs 2.4.11 && nouveau sous-dossier pour 2.5+ (par @iamkun dans #14222)
+
+### 2.5.0
+
+*2019-01-25*
+
+##### Nouvelles fonctionnalités
+- DatePicker
+  - Ajout de l'attribut `validate-event` (par @ziyoung dans #13531)
+- DateTimePicker
+  - `pickerOptions` supporte l'option `selectableRange` (par @eeeeeeeeeeeason)
+- Tag
+  - Ajout de l'événement `click` (par @licdream dans #14106)
+- I18n
+  - Support de la langue kirghize (par @zzjframework dans #14174)
+
+##### Optimisation
+- Mise à niveau vers webpack@4 (par @jikkai dans #14173)
+- Input
+  - Simplification de l'implémentation, suivant un flux de données à sens unique. Correction de plusieurs bugs liés. (par @wacky6 dans #13471)
+- Mise à jour du fichier Axure avec de nouveaux composants (par @ziyoung dans #13773)
+
+##### Corrections de bugs
+- Autocomplete
+  - Correction de la dernière ligne du menu déroulant qui était coupée (#13597) (par @ziyoung)
+  - Correction d'une flèche de popper manquante (#13762) (par @liuchuzhang)
+- Carrousel
+  - Nettoyage du timer lorsque le composant est détruit (#13820) (par @elfman)
+- Cascader
+  - Suppression de la propriété obsolète des props calculées (#13737) (par @iamkun)
+  - Correction de la définition du type CascaderOption dans TypeScript (#13613) (par @NateScarlet)
+  - Correction de l'icône couvrant le texte (#13596) (par @ziyoung)
+- Checkbox
+  - Refonte du style (par @PanJiaChen)
+- DatePicker
+  - Ajout d'un `key` de v-for manquant dans TimeSpinner (#13547) (par @Ende93)
+  - Correction du surlignage de la semaine dans la bordure de l'année (#13883) (par @suyi91)
+- Input
+  - Correction de la référence de textarea dans le DOM (#13803) (par @laomu1988 @island205)
+- Pagination
+  - La valeur d'entrée ne sera pas inférieure à 1 (#13727) (par @elfman)
+- Popover
+  - Correction d'un problème de popover avec le déclencheur de hover (#13104) (par @goldengecko)
+  - Correction d'une fuite de mémoire de l'instance popper (#13988) (par @qpxtWhite)
+- Radio
+  - Refonte du style (par @ohhhoney1)
+- Table
+  - Amélioration du tri des tables en cliquant sur la flèche de tri (#12890) (par @ohhoney1)
+  - Correction d'un problème d'alignement vertical du texte vide sur IE10+ (#13638) (par @imzjy)
+  - Correction de la documentation sur le type d'index (#13628) (par @ilovefafafa)
+  - Correction du problème d'affichage `show-summary` lorsque le header multi-niveaux est fixe (#13914) (par @luckyCao)
+- Tabs
+  - Correction d'un bug de défilement automatique (#13696) (par @iamkun)
+  - Obtenir l'onglet correct par le nom de l'onglet (#13705) (par @iamkun)
+  - Utilisez paneName au lieu de name pour déterminer le style du panneau (#13733) (par @iamkun)
+- Tree
+  - Correction de la propriété `showCheckbox` sur `Tree` qui ne pouvait pas affecter leurs `tree-node` enfants(par @KidneyFlower)
+  - Mise à jour des fichiers de doc et de définition (#13540) (par @ziyoung)
+- Upload
+  - Ajout de le propriété `url` au fichier uploadé lorsque `list-type` est modifié (#13771) (par @elfman)
+- Slider
+  - Correction de l'indentation du code source (#13955) (par @wacky6)
+- I18n
+  - Ajout des traductions manquantes en catalan (par @jaumesala)
+  - Ajout de la traduction russe manquante (#13658) (par @justlp)
+  - Correction des traductions en finnois (#14137) (par @jenkrisu)
+- Doc
+  - Mise à jour de la documentation espagnol depuis la 2.4.11 (#13522) (par @Gonzalo2310)
+- Autres
+  - Suppression d'un script inutile (par @ziyoung)
+  - Correction des ancres (#13753) (par @iamkun)
+  - Correction de l'incohérence des majuscules dans la documentation (par @wonderjar)
+  - Ajout du QR code du chat DingDing au readme (#13957) (par @iamkun)
+  - Ajout des logs yarn au .gitignore (#13922) (par @mimimi)
+  - Suppression du sponsor duotai (#14156) (par @island205)
+  - Mise à jour du QR code dans le readme (#13960) (par @iamkun)
+  - Mise à jour du lien CDN, correction d'une typo (par @ziyoung)
+
 ### 2.4.11
 
 *2018-11-21*
@@ -289,7 +415,7 @@
 
 - Ajout de l'attribut `shadow` pour Card, #10418 (par @YunYouJun)
 - Correction de Badge masqué lorsque `value` est `0`, #10470
-- Correction de quelques bogues de Tree, #10474 #10494
+- Correction de quelques bugs de Tree, #10474 #10494
 - Ajout de `placement` pour Autocomplete, #10475
 - L'attribut `default-time` fonctionne également dans DateTimePicker, #10321 (par @RickMacTurk)
 - Suppression du contour bleu de TabItem après que le navigateur n'ait plus le focus ou soit minimisé, #10503
