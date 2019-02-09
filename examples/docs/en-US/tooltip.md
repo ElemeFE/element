@@ -229,7 +229,7 @@ Disabled form elements are not supported for Tooltip, more information can be fo
 |  effect   |  Tooltip theme  | string   | dark/light  | dark  |
 |  content  | display content, can be overridden by `slot#content` | String   | — | — |
 |  placement | position of Tooltip   | string    |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  value(v-model) | visibility of Tooltip | boolean           | — |  false |
+|  value / v-model | visibility of Tooltip | boolean           | — |  false |
 |  disabled       |  whether Tooltip is disabled  | boolean    | — |  false |
 |  offset        |  offset of the Tooltip   | number    | — |  0 |
 |  transition     |  animation name | string             | — | el-fade-in-linear |

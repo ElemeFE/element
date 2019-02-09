@@ -14,6 +14,7 @@
       :node="child"
       :props="props"
       :render-after-expand="renderAfterExpand"
+      :show-checkbox="showCheckbox"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">

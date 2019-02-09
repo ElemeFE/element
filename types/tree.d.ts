@@ -209,7 +209,8 @@ export declare class ElTree<K = any, D = TreeData> extends ElementUIComponent {
   setCurrentKey(key: K): void;
 
   /**
-   * Return the highlight node (null if no node is highlighted)
+   * Return the highlight node data (null if no node is highlighted)
+   * @todo the name of methods should be getCurrentNodeData
    */
   getCurrentNode(): D;
 

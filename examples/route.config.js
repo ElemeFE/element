@@ -1,5 +1,5 @@
-import navConfig from './nav.config.json';
-import langs from './i18n/route.json';
+import navConfig from './nav.config';
+import langs from './i18n/route';
 
 const LOAD_MAP = {
   'zh-CN': name => {

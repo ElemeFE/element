@@ -1,5 +1,133 @@
 ## 更新日志
 
+### 2.5.4
+
+*2019-02-01*
+
+#### 修复
+
+- 构建: 修复 `.babelrc` 配置问题——导致 Tree 等组件没有动画 (by @island205 in #14282)
+
+### 2.5.3
+
+*2019-01-31*
+
+#### 优化
+
+- 优化 Message 的代码 (by @vok123 in #14029)
+- 移除 gh-pages (by @ziyoung in #14266)
+- 添加 IssueHunt 的链接 (by @island205 in #14261)
+
+#### 修复
+
+- 修复 UMD 包在服务器端运行出错的问题 (by @island205 in #14242)
+- 修复 Tabbar 高亮时的样式 (by @iamkun in #14240)
+- 修复 Table 示例代码的错误 (by @xunmeng in #14253)
+
+### 2.5.2
+
+*2019-01-27*
+
+#### 优化
+- 文档:
+  - 2.5.1 版本西班牙语文档更新 (by @Gonzalo2310 in #14231)
+
+#### 修复
+- 构建:
+  - 删除 umd 模块 `lib/index.js` 中本没有的注释 (by @island205 in #14233)
+  - 修复 nuxt.js 中关于 `export` 关键字的报错  (by @island205 in #14232)
+  - 修复发布 2.5.1 过程中的错误   (by @iamkun in #14228)
+
+### 2.5.1
+
+*2019-01-26*
+
+#### 优化
+- DatePicker：添加月、年高亮的样式（by @Debiancc in #14211）
+- 更新 2.5.0 changelog （by @wacky6 in #14217）
+
+
+#### 修复
+- 修复升级 Webpack 4 产生的问题，无法具名 `import` 组件，`ELEMENT.locale()` 调用报错。（by @island205 in #14220）
+- 恢复 2.4.11 文档 (by @iamkun in #14222)
+
+
+### 2.5.0
+
+*2019-01-25*
+
+#### 新特性
+- DatePicker
+  - 新增 `validate-event` 属性 (by @ziyoung in #13531)
+- DateTimePicker
+  - `pickerOptions` 支持 `selectableRange` 选项 (by @eeeeeeeason)
+- Tag
+  - 新增 `click` 事件 (by @licdream in #14106)
+- I18n
+  - 新增 柯尔克孜语 (Kyrgyz) (by @zzjframework in #14174)
+
+#### 优化
+- 升级到 webpack@4 (by @jikkai in #14173)
+- Input
+  - 简化内部实现，遵循单向数据流；修复若干相关 Bug (by @wacky6 in #13471)
+- 更新 Axure 文件，增加新组件 (by @ziyoung in #13773)
+
+#### 修复
+- Autocomplete
+  - 修正下拉框最后一行显示不完整的问题 (#13597) (by @ziyoung)
+  - 修正下拉框箭头 (#13762) (by @liuchuzhang)
+- Carousel
+  - 组件销毁时释放内部 Timer (#13820) (by @elfman)
+- Cascader
+  - 移除已废弃的计算属性的 cache 属性 (#13737) (by @iamkun)
+  - 修正 TypeScript 中 CascaderOption 类型定义 (#13613) (by @NateScarlet)
+  - 修正图标覆盖文字的问题 (#13596) (by @ziyoung)
+- Checkbox
+  - 改进显示样式 (by @PanJiaChen)
+- DatePicker
+  - 修正 TimeSpinner 中缺失的 v-for `key` 属性 (#13547) (by @Ende93)
+  - 修正周选择器在跨年时的高亮行为 (#13883) (by @suyi91)
+- Input
+  - 修复 textarea 时的 DOM 节点引用 (#13803) (by @laomu1988 @island205)
+- Pagination
+  - 输入框的值不会小于 1 (#13727) (by @elfman)
+- Popover
+  - 修正 hover 的触发行为 (#13104) (by @goldengecko)
+  - 修正弹出框的内存泄漏 (#13988) (by @qpxtWhite)
+- Radio
+  - 改进显示样式 (by @ohhoney1)
+- Table
+  - 改进点击排序箭头时的行为 (#12890) (by @ohhoney1)
+  - 修正 IE10+ 中 “暂无数据” 提示的垂直布局 (#13638) (by @imzjy)
+  - 修正文档中 `index` 的类型说明 (#13628) (by @ilovefafa)
+  - 修正多级表头使用 `fixed` 属性时，表尾合计行的显示样式 (#13914) (by @luckyCao)
+- Tabs
+  - 修正自动滚动 (#13696) (by @iamkun)
+  - 通过面板名称查找面板 (#13705) (by @iamkun)
+  - 使用 `paneName` 计算面板样式 (#13733) (by @iamkun)
+- Tree
+  - 修正 `showCheckbox` 不能影响子节点的问题 (by @KidneyFlower)
+  - 更新文档和 TypeScript 定义 (#13540) (by @ziyoung)
+- Upload
+  - `list-type` 改变时，保留 `url` 属性 (#13771) (by @elfman)
+- Slider
+  - 修正源代码缩进 (#13955) (by @wacky6)
+- I18n
+  - 补充加泰罗尼亚语 (Catalan) 翻译 (by @jaumesala)
+  - 补充俄语 (Russian) 翻译 (#13658) (by @justlp)
+  - 补充芬兰语 (Finnish) 翻译 (#14137) (by @jenkrisu)
+- Doc
+  - 更新西班牙语文档至 2.4.11 (#13522) (by @Gonzalo2310)
+- 其它
+  - 移除多余的构建脚本 (by @ziyoung)
+  - 修正文档超链接 (#13753) (by @iamkun)
+  - 修正文档中不一致的大小写 (by @wonderjar)
+  - 增加钉钉群的二维码 (#13957) (by @iamkun)
+  - .gitignore 增加 yarn 日志文件 (#13922) (by @mimimi)
+  - 移除赞助商 多态 (#14156) (by @island205)
+  - Update readme qr code src (#13960) (by @iamkun)
+  - 更新 CDN 链接，修正错别字 (by @ziyoung)
+
 ### 2.4.11
 
 *2018-11-21*
@@ -40,7 +168,7 @@
 - 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
 - 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
 - Select 多选时，选项不换行，#12329 （by @akki-jat）
-- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh） 
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh）
 - 修复 Select 的 size 属性不生效的问题，#13070
 - 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
 - 修复最后一个 TabNav 不能删除的问题，#13039

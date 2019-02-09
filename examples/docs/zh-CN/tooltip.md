@@ -205,7 +205,7 @@ tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozill
 |  effect        |  默认提供的主题  | String            | dark/light | dark  |
 |  content        |  显示的内容，也可以通过 `slot#content` 传入 DOM  | String            | — | — |
 |  placement        |  Tooltip 的出现位置  | String           |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  value(v-model) |  状态是否可见  | Boolean           | — |  false |
+|  value / v-model |  状态是否可见  | Boolean           | — |  false |
 |  disabled       |  Tooltip 是否可用  | Boolean           | — |  false |
 |  offset        |  出现位置的偏移量  | Number           | — |  0 |
 |  transition     |  定义渐变动画      | String             | — | el-fade-in-linear |

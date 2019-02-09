@@ -212,4 +212,5 @@ Besides default size, Tag component provides three additional sizes for you to c
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
+| click | triggers when Tag is clicked | — |
 | close | triggers when Tag is removed | — |
