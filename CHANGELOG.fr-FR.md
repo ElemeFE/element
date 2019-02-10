@@ -4,7 +4,7 @@
 
 *2019-02-01*
 
-##### Corrections de bugs
+#### Corrections de bugs
 
 - Build: Correction d'un problème de configuration de babel qui cassait la transition collapse (par @island205 dans #14282)
 
@@ -12,13 +12,13 @@
 
 *2019-01-31*
 
-##### Optimisation
+#### Optimisation
 
 - Optimisation du code de Message (par @vok123 dans #14029)
 - Suppression des gh-pages (par @ziyoung dans #14266)
 - Ajout du lien IssueHunt (par @island205 dans #14261)
 
-##### Corrections de bugs
+#### Corrections de bugs
 
 - Correction d'une erreur du module UMD côté serveur (par @island205 dans #14242)
 - Correction du style du TabBar actif (par @iamkun dans #14240)
@@ -28,11 +28,11 @@
 
 *2019-01-27*
 
-##### Optimisation
+#### Optimisation
 - Docs:
   - Mise à jour du ChangeLog ES 2.5.1 (par @Gonzalo2310 dans #14231)
 
-##### Corrections de bugs
+#### Corrections de bugs
 - Build:
   - Suppression des commentaires non supprimés dans le module umd `lib/index.js` (par @island205 dans #14233)
   - Correction d'une erreur d'exportation dans le module commonjs utilisé dans nuxt.js (par @island205 dans #14232)
@@ -42,11 +42,11 @@
 
 *2019-01-26*
 
-##### Optimisation
+#### Optimisation
 - DatePicker: surbrillance du mois et de l'année courants (par @Debiancc dans #14211)
 - Mise à jour du changelog 2.5.0 (par @wacky6 dans #14217)
 
-##### Corrections de bugs
+#### Corrections de bugs
 - Correction d'un problème d'exportation due par la mise à jour du webpack (par @island205 dans #14220)
 - Conservation de la docs 2.4.11 && nouveau sous-dossier pour 2.5+ (par @iamkun dans #14222)
 
@@ -54,7 +54,7 @@
 
 *2019-01-25*
 
-##### Nouvelles fonctionnalités
+#### Nouvelles fonctionnalités
 - DatePicker
   - Ajout de l'attribut `validate-event` (par @ziyoung dans #13531)
 - DateTimePicker
@@ -64,13 +64,13 @@
 - I18n
   - Support de la langue kirghize (par @zzjframework dans #14174)
 
-##### Optimisation
+#### Optimisation
 - Mise à niveau vers webpack@4 (par @jikkai dans #14173)
 - Input
   - Simplification de l'implémentation, suivant un flux de données à sens unique. Correction de plusieurs bugs liés. (par @wacky6 dans #13471)
 - Mise à jour du fichier Axure avec de nouveaux composants (par @ziyoung dans #13773)
 
-##### Corrections de bugs
+#### Corrections de bugs
 - Autocomplete
   - Correction de la dernière ligne du menu déroulant qui était coupée (#13597) (par @ziyoung)
   - Correction d'une flèche de popper manquante (#13762) (par @liuchuzhang)
@@ -318,7 +318,7 @@
 - Table
   - Ajout de la méthode `sort` pour trier manuellement la table, #11311
 
-##### Corrections de bugs
+#### Corrections de bugs
 - Input
   - Correction d'un problème qui provoquait un re-rendu lors de l'utilisation de l'IME chinois pour saisir rapidement du texte, #11235 (par @STLighter)
 - Popover
@@ -440,7 +440,7 @@
 
 *2018-03-28*
 
-##### Nouvelles fonctionnalités
+#### Nouvelles fonctionnalités
 - Table
   - Maintenant le `formatter` de TableColumn peut être mis à jour dynamiquement, #10184 (par @elfman)
   - Ajout de l'attribut `select-on-indeterminate`, #9924 (par @syn-zeta)
@@ -461,7 +461,7 @@
 - Button
   - Ajout de l'attribut `circle`, #10359 (par @YunYouJun)
 
-##### Corrections de bugs
+#### Corrections de bugs
 - Form
   - Correction du label de FormItem non aligné avec l'Input mixte, #10189
 - Menu
@@ -508,7 +508,7 @@
 
 *2018-02-12*
 
-##### Nouvelles fonctionnalités
+#### Nouvelles fonctionnalités
 - Menu
   - Ajout des attributs `popper-class` et `disabled` pour le sous-menu, #9604 #9771
   - Le menu horizontal prend maintenant en charge le sous-menu multicouche, #9741
@@ -521,7 +521,7 @@
 - Select
   - Ajout de l'attribut `popper-append-to-body`, #9782
 
-##### Corrections de bugs
+#### Corrections de bugs
 - Table
   - Correction d'un clic sur l'icône d'expansion d'une ligne extensible qui déclenche l'événement `row-click`, #9654
   - Correction de la mise en page non mise à jour lorsque la largeur des colonnes est modifiée par glisser-déposer de l'utilisateur, #9668
@@ -537,7 +537,7 @@
 
 *2018-01-31*
 
-##### Nouvelles fonctionnalités
+#### Nouvelles fonctionnalités
 - Cascader
   - Ajout des événements `focus` et `blur`, #9184 (par @viewweiwu)
 - Table
@@ -556,7 +556,7 @@
 - Notification
   - Ajout de la méthode `closeAll`, #9514
 
-##### Corrections de bugs
+#### Corrections de bugs
 - InputNumber
   - Correstion du reset lors de la saisie du point des nombres décimaux, #9116
 - Dropdown
@@ -577,7 +577,7 @@
 - Steps
   - Correction d'une erreur de style dans IE 11, #9454
 
-##### Changements
+#### Changements
 - Menu
   - Le menu contextuel en mode `collapse` s'ajoute maintenant directement à `body`, de sorte qu'il est visible lorsqu'il est imbriqué dans Aside, #9263
 - Table
@@ -700,7 +700,7 @@
 
 *2017-10-27*
 
-##### Nouvelles fonctionnalités
+#### Nouvelles fonctionnalités
 - Général
   - Un nouveau thème : `theme-chalk`.
   - L'accessibilité des éléments suivants est améliorée : Alert, AutoComplete, Breadcrumb, Button, Checkbox, Collapse, Input, InputNumber, Menu, Progress, Radio, Rate, Slider, Switch, Upload
@@ -804,7 +804,7 @@
 - Select
   - Ajout de l'attribut `reserve-keyword` pour réserver le mot-clé de la recherche courante après avoir sélectionné une option.
 
-##### Corrections de bugs
+#### Corrections de bugs
 - DatePicker
   - Correction de `v-model` retournant le deuxième jour de la semaine sélectionnée en mode semaine #6038
   - Correction de la première entrée effacée dans le type `daterange` #6021
@@ -827,7 +827,7 @@
   - Correction d'un bug dynamique de `max-height`
   - Correction de quelques erreurs de calcul de style
 
-##### Breaking changes
+#### Breaking changes
 - Général
   - Suppression de `theme-default`.
   - Compatible avec Vue 2.5.2+ et IE 10+
