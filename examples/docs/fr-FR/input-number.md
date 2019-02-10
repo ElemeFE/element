@@ -181,7 +181,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |----| ----| ---| ----| -----|
-| value | La variable liée. | number | — | — |
+| value / v-model | La valeur liée. | number | — | 0 |
 | min | La valeur minimale autorisée. | number | — | `-Infinity` |
 | max | La valeur maximale autorisée. | number | — | `Infinity` |
 | step | Le pas pour l'incrémentation. | number | — | 1 |

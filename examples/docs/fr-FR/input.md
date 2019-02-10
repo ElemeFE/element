@@ -643,7 +643,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 | ----| ----| ----| ---- | ----- |
 | type| Type de l'input. | string | text, textarea et autres [types d'input natifs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-| value| Variable liée. | string / number | — | — |
+| value / v-model | Variable liée. | string / number | — | — |
 | maxlength| Identique à `maxlength` dans l'input natif. | number| — | — |
 | minlength| Identique à `minlength` dans l'input natif. | number | — | — |
 | placeholder| Placeholder de l' Input. | string | — | — |
@@ -666,7 +666,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | form | Identique à `form` dans l'input natif. | string | — | — |
 | label | Texte du label. | string | — | — |
 | tabindex | tabindex de l'input. | string | - | - |
-| validate-event | Si la validation doit avoir lieu. | boolean | - | - |
+| validate-event | Si la validation doit avoir lieu. | boolean | - | true |
 
 ### Slots de l'Input
 

@@ -374,6 +374,8 @@ Attention à la capitalisation !
 | `yyyy` | Année | | 2017 |
 | `M`  | Mois | pas de 0 au début | 1 |
 | `MM` | Mois | | 01 |
+| `MMM` | Mois | | Jan |
+| `MMMM` | Mois | | Janvier |
 | `W`  | Semaine | uniquement pour les `format` des types 'semaine' ; pas de 0 au début | 1 |
 | `WW` | Semaine | uniquement pour les `format` des types 'semaine' | 01 |
 | `d`  | Jour | pas de 0 au début | 2 |
@@ -475,6 +477,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 ### Attributs
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | La valeur liée. | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | Si le DatePicker est en lecture seule. | boolean | — | false |
 | disabled | Si le DatePicker est désactivé. | boolean | — | false |
 | size | Taille du champs. | string | large/small/mini | — |
@@ -496,6 +499,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | unlink-panels | Rend indépendants les deux panneaux de plage de dates. | boolean | — | false |
 | prefix-icon | Icône de préfixe. | string | — | el-icon-date |
 | clear-icon | Icône de reset. | string | — | el-icon-circle-close |
+| validate-event | Si la validation doit être déclenchée. | boolean | - | true |
 
 ### Options du Picker
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |

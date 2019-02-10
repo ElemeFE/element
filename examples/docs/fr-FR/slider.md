@@ -229,6 +229,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | La valeur liée. | number | — | 0 |
 | min | Valeur minimale. | number | — | 0 |
 | max | Valeur maximale. | number | — | 100 |
 | disabled | Si le Slider est désactivé. | boolean | — | false |

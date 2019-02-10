@@ -155,6 +155,7 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | La valeur liée. | number | — | 0 |
 | max | Score maximum. | number | — | 5 |
 | disabled | Si le score est en lecture seule. | boolean | — | false |
 | allow-half | Si les demi-étoiles sont autorisées. | boolean | — | false |

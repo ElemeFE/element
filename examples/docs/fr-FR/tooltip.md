@@ -230,7 +230,7 @@ Les éléments de formulaire désactivés ne sont pas supportés par Tooltip, pl
 | effect | Thème du Tooltip.  | string   | dark/light  | dark  |
 | content | Contenu à afficher, écrasé par `slot#content`. | String   | — | — |
 | placement | Position du Tooltip. | string |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-| value(v-model) | Visibilité du Tooltip. | boolean | — |  false |
+| value / v-model | Visibilité du Tooltip. | boolean | — |  false |
 | disabled | Si le Tooltip est désactivé. | boolean | — |  false |
 | offset | Décalage du Tooltip. | number | — |  0 |
 | transition | Animation de transition. | string | — | el-fade-in-linear |

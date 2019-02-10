@@ -291,6 +291,7 @@ Par défaut, Transfer utilise `key`, `label` et `disabled` de vos objets. Si vos
 
 | Attribut | Description | Type  | Valeurs acceptées | Défaut |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | La valeur liée. | array | — | — |
 | data | Données principales. | array[{ key, label, disabled }] | — | [ ] |
 | filterable | Si Transfer est filtrable. | boolean | — | false |
 | filter-placeholder | Placeholder du champ de filtrage. | string | — | Enter keyword |

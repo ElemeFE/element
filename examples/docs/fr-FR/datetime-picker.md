@@ -279,6 +279,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 ### Attributs
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | La valeur liée. | date(DateTimePicker) / array(DateTimeRangePicker) | — | — |
 | readonly | Si le DatePicker est en lecture seule. | boolean | — | false |
 | disabled | Si le DatePicker est désactivé. | boolean | — | false |
 | editable | Si le champ est éditable. | boolean | — | true |

@@ -174,6 +174,7 @@ Vous pouvez également définir un intervalle libre.
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | La valeur liée. | date(TimePicker) / string(TimeSelect) | - | - |
 | readonly | Si TimePicker est en lecture seule. | boolean | — | false |
 | disabled | Si TimePicker est désactivé. | boolean | — | false |
 | editable | Si le champ d'input est éditable. | boolean | — | true |
@@ -184,7 +185,6 @@ Vous pouvez également définir un intervalle libre.
 | end-placeholder | Placeholder de l'horaire de fin en mode intervalle. | string | — | — |
 | is-range | Si le mode intervalle est activé, marche avec `<el-time-picker>`. | boolean | — | false |
 | arrow-control | Si les flèches directionnelles peuvent être utilisées, marche avec `<el-time-picker>`. | boolean | — | false |
-| value | Valeur du composant. | `Date` poue le TimePicker et `string` pour le TimeSelect. | - | - |
 | align | Alignement. | left / center / right | left |
 | popper-class | Classe du menu du TimePicker. | string | — | — |
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |

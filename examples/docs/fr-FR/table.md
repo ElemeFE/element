@@ -1544,7 +1544,7 @@ Vous pouvez également personnaliser le header de la table.
 ```html
 <template>
   <el-table
-    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Date"
@@ -2141,7 +2141,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | Type de la colonne. Si mis à `selection`, la colonne affichera des checkbox. Si mis à `index`, la colonne affichera l'indice de la ligne (début à 1). Si mis à `expand`, affichera l'icône d'extension.  | string | selection/index/expand | — |
-| index | Personnalise les indices de chaque ligne, marche avec les colonnes `type=index`. | string, Function(index) | - | - |
+| index | Personnalise les indices de chaque ligne, marche avec les colonnes `type=index`. | number, Function(index) | - | - |
 | label | Label de la colonne. | string | — | — |
 | column-key | La clé de la colonne. Si vous avez besoin d'utiliser l'évènement filter-change, vous aurez besoin de cet attribut pour savoir quelle colonne est filtrée. | string | string | — | — |
 | prop | Nom du champ de l'objet de données. Alias: `property`. | string | — | — |

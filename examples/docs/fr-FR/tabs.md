@@ -371,11 +371,11 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | La valeur liée, nom de l'onglet sélectionné. | string   |  —  | Nom du premier onglet. |
 | type     | Type de l'onglet. | string   | card/border-card  |     —    |
 | closable  | Si des onglets peuvent être supprimés. | boolean   | — |  false  |
 | addable  | Si des onglets peuvent être ajoutés. | boolean   | — |  false  |
 | editable  | Si des onglets peuvent être ajoutés et supprimés. | boolean   | — |  false  |
-| value  | Nom de l'onglet sélectionné. | string   |  —  |  name of first tab |
 | tab-position  | Position des onglets. | string   |  top/right/bottom/left  |  top |
 | stretch  | Si la largeur des onglets s'adapte au conteneur. | boolean   |  -  |  false |
 | before-leave | Fonction de hook avant de changer d'onglet. Si `false` est retourné ou qu'une `Promise` retournée et rejetée, le changement sera annulé. | Function(activeName, oldActiveName) | — | — |

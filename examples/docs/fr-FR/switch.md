@@ -143,6 +143,7 @@ Switch est utilisé pour choisir entre deux états opposés.
 
  Attribut      | Description          | Type      | Valeurs acceptées       | Défaut
 ----| ----| ----| ----|----
+value / v-model | La valeur liée. | boolean / string / number | — | —
 disabled | Si le switch est désactivé. | boolean | — | false
 width | Largeur du switch. | number | — | 40
 active-icon-class | Classe de l'icône de l'état `on`, écrase `active-text`. | string | — | —

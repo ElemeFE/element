@@ -1666,6 +1666,7 @@ Recherchez une option particulière en entrant des mots-clé.
 ### Attributs
 | Attribut | Description         | Type    | Options       | Défaut|
 |---------- |-------------------- |---------|-------------  |-------- |
+| value / v-model | La valeur liée.  | boolean / string / number | — | — |
 | options   | Données des options. | array | — | — |
 | props | Options de configuration, voir la table suivante. | object | — | — |
 | value | Valeur sélectionnée. | array | — | — |

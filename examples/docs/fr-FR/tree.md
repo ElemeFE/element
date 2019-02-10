@@ -1220,7 +1220,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 | getHalfCheckedNodes | Si le noeud peut être sélectionné (`show-checkbox` est `true`), retourne la moitié des noeuds sélectionnés. | - |
 | getHalfCheckedKeys | Si le noeud peut être sélectionné (`show-checkbox` est `true`), retourne les clés de la moitié des noeuds sélectionnés. | - |
 | getCurrentKey   | retourne la clé du noeud actuellement en valeur (`null` si aucun noeud n'est en valeur). | — |
-| getCurrentNode  | retourne le noeud actuellement en valeur (`null` si aucun noeud n'est en valeur). | — |
+| getCurrentNode  | retourne les données du noeud actuellement en valeur (`null` si aucun noeud n'est en valeur). | — |
 | setCurrentKey   | Met un noeud en valeur par sa clé, ne marche que si `node_key` est assigné. | (key) la clé du noeud. Si `null`, annule la sélection actuelle. |
 | setCurrentNode  | Met un noeud en valeur, ne marche que si `node_key` est assigné. | (node) le noeud. |
 | getNode         | Retourne le noeud grâce à sa clé ou ses données. | (data) la clé ou les données du noeud. |

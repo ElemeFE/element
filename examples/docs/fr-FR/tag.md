@@ -209,9 +209,9 @@ En plus de la taille par défaut, Tag fournit d'autres tailles pour vos composan
 | color | Couleur de fond du tag. | string | — | — |
 | size | Taille du tag. | string | medium / small / mini | — |
 
-
 ### Évènements
 
 | Nom | Description | Paramètres |
 |---------- |-------- |---------- |
+| click | Se déclenche quand le tag est cliqué. | — |
 | close | Se déclenche quand le tag est supprimé. | — |

@@ -243,7 +243,7 @@ Vous pouvez aussi imbriquer des opérations. Procéder ainsi est plus léger que
 | width | Largeur du popover. | string, number  | — | Min width 150px |
 | placement | Emplacement du popover. | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 | disabled | Si le popover est désactivé. | boolean | — |  false |
-| value(v-model) | Si le popover est visible. | Boolean | — |  false |
+| value / v-model | Si le popover est visible. | Boolean | — |  false |
 | offset | Décalage du popover. | number | — |  0 |
 | transition | Animation de transition du popover. | string | — | el-fade-in-linear |
 | visible-arrow | Si une flèche doit être affichée ou non. Pour plus d'informations, référez-vous à [Vue-popper](https://github.com/element-component/vue-popper). | boolean | — | true |

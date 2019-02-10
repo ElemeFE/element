@@ -286,6 +286,7 @@ Des checkbox avec une apparence de bouton.
 ### Attributs Checkbox
 | Attribut      | Description         | Type    | Options                         | Défaut|
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | La valeur liée. | string / number / boolean | — | — |
 | label     | Valeur de la checkbox quand utilisée dans un `checkbox-group`.   | string / number / boolean   |       —        |     —    |
 | true-label | Valeur de la checkbox si cochée.   | string / number    |       —        |     —    |
 | false-label | Valeur de la checkbox si non-cochée.   | string / number    |      —         |     —    |
@@ -304,6 +305,7 @@ Des checkbox avec une apparence de bouton.
 ### Attributs Checkbox-group
 | Attribut      | Description         | Type    | Options                         | Défaut|
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | La valeur liée. | array | — | — |
 |size | Taille des checkbox-boutons ou des checkbox avec bordure. | string | medium / small / mini | — |
 | disabled  | Si les checkbox imbriquées sont désactivées. | boolean   | — | false   |
 | min     | Nombre minimum de checkbox cochées.   | number    |       —        |     —    |
