@@ -1,4 +1,4 @@
-## Transitions intégrées
+## Transitions
 
 Vous pouvez utiliser les transitions d'Element directement. Mais avant ça, merci de lire la [documentation](https://vuejs.org/v2/api/#transition).
 

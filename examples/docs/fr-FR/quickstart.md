@@ -1,4 +1,4 @@
-## Quick start
+## Démarrer
 
 Cette page vous guidera tout le long de l'installation d'Element au sein d'un projet webpack.
 

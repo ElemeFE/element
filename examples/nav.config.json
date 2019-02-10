@@ -771,7 +771,7 @@
         },
         {
           "path": "/quickstart",
-          "name": "Quick Start"
+          "name": "Démarrer"
         },
         {
           "path": "/i18n",
@@ -779,7 +779,7 @@
         },
         {
           "path": "/custom-theme",
-          "name": "Thème personnalisé"
+          "name": "Thème"
         },
         {
           "path": "/transition",

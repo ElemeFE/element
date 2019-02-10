@@ -1,4 +1,4 @@
-## Thème personnalisé
+## Thème
 Element utlise le style BEM pour le CSS afin que vous puissiez écraser les règles prédéfinies facilement. Mais si vous avez besoin de remplacer des styles à une plus grande échelle , e.g. changer le thème de bleu à orange ou vert, les modifier une par une serait fastidieux. Nous fournissons trois méthodes pour changer les variables de style.
 
 ### Changer la couleur du thème
