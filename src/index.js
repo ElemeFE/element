@@ -73,6 +73,7 @@ import Timeline from '../packages/timeline/index.js';
 import TimelineItem from '../packages/timeline-item/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import { version } from '../package.json';
 
 const components = [
   Pagination,
@@ -176,7 +177,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.5.4',
+  version,
   locale: locale.use,
   i18n: locale.i18n,
   install,
