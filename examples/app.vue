@@ -13,6 +13,7 @@
   import zhLocale from 'main/locale/lang/zh-CN';
   import enLocale from 'main/locale/lang/en';
   import esLocale from 'main/locale/lang/es';
+  import frLocale from 'main/locale/lang/fr';
 
   const lang = location.hash.replace('#', '').split('/')[1] || 'zh-CN';
   const localize = lang => {
@@ -22,6 +23,9 @@
         break;
       case 'es':
         use(esLocale);
+        break;
+      case 'fr-FR':
+        use(frLocale);
         break;
       default:
         use(enLocale);
