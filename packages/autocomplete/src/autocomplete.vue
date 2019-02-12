@@ -137,7 +137,7 @@
         activated: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: this.getHighlightedIndex(),
+        highlightedIndex: -1,
         suggestionDisabled: false
       };
     },
@@ -180,6 +180,7 @@
           }
           if (Array.isArray(suggestions)) {
             this.suggestions = suggestions;
+            this.highlightedIndex = this.highlightFirstItem ? 0 : -1;
           } else {
             console.error('[Element Error][Autocomplete]autocomplete suggestions must be an array');
           }
@@ -229,7 +230,7 @@
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];
-          this.highlightedIndex = this.getHighlightedIndex();
+          this.highlightedIndex = -1;
         });
       },
       highlight(index) {
@@ -260,9 +261,6 @@
       },
       getInput() {
         return this.$refs.input.getInput();
-      },
-      getHighlightedIndex() {
-        return this.highlightFirstItem ? 0 : -1;
       }
     },
     mounted() {
