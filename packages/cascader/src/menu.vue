@@ -6,7 +6,7 @@
   const copyArray = (arr, props) => {
     if (!arr || !Array.isArray(arr) || !props) return arr;
     const result = [];
-    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled'];
+    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled', 'className'];
     const childrenProp = props.children || 'children';
     arr.forEach(item => {
       const itemCopy = {};
@@ -65,8 +65,7 @@
       activeOptions: {
         get() {
           const activeValue = this.activeValue;
-          const configurableProps = ['label', 'value', 'children', 'disabled'];
-
+          const configurableProps = ['label', 'value', 'children', 'disabled', 'className'];
           const formatOptions = options => {
             options.forEach(option => {
               if (option.__IS__FLAT__OPTIONS) return;
@@ -267,14 +266,23 @@
             itemId = `${menuId}-${itemIndex}`;
             itemIndex++;
           }
+          let classObj = {
+            'el-cascader-menu__item': true,
+            'el-cascader-menu__item--extensible': item.children,
+            'is-active': item.value === activeValue[menuIndex],
+            'is-disabled': item.disabled
+          };
+          if (item.className) {
+            if (typeof item.className === 'string') {
+              item.className = item.className.split(' ');
+            }
+            item.className.map((item1, index1) => {
+              classObj[item1] = true;
+            });
+          }
           return (
             <li
-              class={{
-                'el-cascader-menu__item': true,
-                'el-cascader-menu__item--extensible': item.children,
-                'is-active': item.value === activeValue[menuIndex],
-                'is-disabled': item.disabled
-              }}
+              class={classObj}
               ref={item.value === activeValue[menuIndex] ? 'activeItem' : null}
               {...events}
               tabindex= { item.disabled ? null : -1 }
