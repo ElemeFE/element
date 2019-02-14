@@ -21,7 +21,8 @@
       ref="tooltip"
       :popper-class="tooltipClass"
       :disabled="!showTooltip">
-      <span slot="content">{{ formatValue }}</span>
+      <span v-if="customValueState" slot="content">{{ customValue }}</span>
+      <span v-else slot="content">{{ formatValue }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
   </div>
@@ -38,6 +39,13 @@
     },
 
     props: {
+      customValueState: {
+        type: Boolean,
+        default: false
+      },
+      customValue: {
+        type: String
+      },
       value: {
         type: Number,
         default: 0

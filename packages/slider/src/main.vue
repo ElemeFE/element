@@ -1,11 +1,12 @@
 <template>
-  <div class="el-slider"
+  <div
+    class="el-slider"
     :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
-     role="slider"
-     :aria-valuemin="min"
-     :aria-valuemax="max"
-     :aria-orientation="vertical ? 'vertical': 'horizontal'"
-     :aria-disabled="sliderDisabled"
+    role="slider"
+    :aria-valuemin="min"
+    :aria-valuemax="max"
+    :aria-orientation="vertical ? 'vertical': 'horizontal'"
+    :aria-disabled="sliderDisabled"
   >
     <el-input-number
       v-model="firstValue"
@@ -21,7 +22,8 @@
       :debounce="debounce"
       :size="inputSize">
     </el-input-number>
-    <div class="el-slider__runway"
+    <div
+      class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
@@ -31,12 +33,16 @@
         :style="barStyle">
       </div>
       <slider-button
+        :custom-value-state="customValueState"
+        :custom-value="customValue"
         :vertical="vertical"
         v-model="firstValue"
         :tooltip-class="tooltipClass"
         ref="button1">
       </slider-button>
       <slider-button
+        :custom-value-state="customValueState"
+        :custom-value="customValue"
         :vertical="vertical"
         v-model="secondValue"
         :tooltip-class="tooltipClass"
@@ -82,6 +88,13 @@
       step: {
         type: Number,
         default: 1
+      },
+      customValueState: {
+        type: Boolean,
+        default: false
+      },
+      customValue: {
+        type: String
       },
       value: {
         type: [Number, Array],
