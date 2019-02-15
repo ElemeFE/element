@@ -22,7 +22,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    color: mix($--color-primary, rgb(158, 68, 0), 50%);
+    color: $--color-text-secondary;
   }
 
   @include e(drop-indicator) {
