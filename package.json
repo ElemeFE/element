@@ -117,7 +117,7 @@
     "progress-bar-webpack-plugin": "^1.11.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^6.0.6",
-    "select-version-cli": "^0.0.1",
+    "select-version-cli": "^0.0.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.19.0",

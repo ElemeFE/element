@@ -9232,10 +9232,10 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-select-version-cli@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/select-version-cli/-/select-version-cli-0.0.1.tgz#39cd50848ad99ad7688246da4fcfe63b58f14be0"
-  integrity sha512-CJoNqjJ4iseGAfRjV+f0w4ik0ro43zHdQCQaRkNSq5HgW62IlzPSvqnqPr5BpLgSJ4h7QfwWcBMcYKO6dX1nbg==
+select-version-cli@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/select-version-cli/-/select-version-cli-0.0.2.tgz#11f626f95cf7a4e2ddd59d66f51f6a5aedac87c0"
+  integrity sha512-1eKBU5kDoXmmkMAhZUa2L7fVb+lH4wfDKONSsfc9cQuVYmCzXtO14wijuHlFrx+2+/igmxlv5tt439726gfPaA==
   dependencies:
     commander "^2.19.0"
     inquirer "^6.2.2"
