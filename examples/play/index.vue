@@ -11,5 +11,5 @@
         input: 'Hello Element UI!'
       };
     }
-  }
+  };
 </script>
