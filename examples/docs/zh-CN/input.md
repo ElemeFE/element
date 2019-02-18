@@ -180,6 +180,13 @@
   }
 </style>
 
+:::warning
+**不建议使用 v-model 修饰符**。\
+如需使用，必须指定 `is-uncontrolled` 属性。这会让组件处于非受控状态，否则组件总会显示 Vue 数据模型的值。
+
+请注意，将来版本可能会移除对修饰符支持。
+:::
+
 ## Input 输入框
 
 通过鼠标或键盘输入字符
@@ -868,6 +875,7 @@ export default {
 | hide-loading | 是否隐藏远程加载时的加载图标 | boolean | — | false |
 | popper-append-to-body | 是否将下拉列表插入至 body 元素。在下拉列表的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | highlight-first-item | 是否默认突出显示远程搜索建议中的第一项 | boolean | — | false |
+| is-uncontrolled | 让组件处于非受控模式 | boolean | - | false |
 
 ### Autocomplete Slots
 | name | 说明 |

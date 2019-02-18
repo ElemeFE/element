@@ -47,7 +47,7 @@
       querySearchAsync(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
+
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
@@ -112,11 +112,11 @@
         font-size: 14px;
         color: #8492a6;
       }
-    
+
       .el-col:not(:last-child) {
         border-right: 1px solid rgba(224,230,237,0.50);
       }
-    
+
       .el-autocomplete {
         text-align: left;
       }
@@ -141,6 +141,13 @@
     }
   }
 </style>
+
+:::warning
+**v-model modifiers are discouraged.**\
+`is-uncontrolled` attribute must be set to use v-model modifiers. This will put Input into uncontrolled mode. Otherwise, it always shows Vue data model's value.
+
+Please note that support for v-model modifiers may be removed in future versions.
+:::
 
 ## Input
 

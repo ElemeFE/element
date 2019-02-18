@@ -143,6 +143,13 @@
   }
 </style>
 
+:::warning
+**v-model modifiers are discouraged.**\
+`is-uncontrolled` attribute must be set to use v-model modifiers. This will put Input into uncontrolled mode. Otherwise, it always shows Vue data model's value.
+
+Please note that support for v-model modifiers may be removed in future versions.
+:::
+
 ## Input
 
 Input data using mouse or keyboard.

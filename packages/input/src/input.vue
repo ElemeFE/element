@@ -169,7 +169,11 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      isUncontrolled: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -284,15 +288,22 @@
 
         this.$emit('input', event.target.value);
 
-        // set input's value, in case parent refuses the change
+        // component state is controlled by `value` prop,
+        // unless user explicitly requires it to be uncontrolled
         // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(() => {
-          let input = this.getInput();
-          input.value = this.value;
-        });
+        // TODO: remove `isUncontrolled` in next major version
+        if (!this.isUncontrolled) {
+          this.$nextTick(() => { this.getInput().value = this.value; });
+        }
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
+
+        // escape hatch for v-model modifier, to simulate native input's behavior
+        // TODO: remove `isUncontrolled` in next major version
+        if (this.isUncontrolled) {
+          this.$nextTick(() => { this.getInput().value = this.value; });
+        }
       },
       calcIconOffset(place) {
         let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
