@@ -36,6 +36,7 @@
     watch: {
       value(value) {
         this.dispatch('ElFormItem', 'el.form.change', [value]);
+        this.$emit('change', value);
       }
     }
   };

@@ -189,11 +189,6 @@
           value = this.falseLabel === undefined ? false : this.falseLabel;
         }
         this.$emit('change', value, ev);
-        this.$nextTick(() => {
-          if (this.isGroup) {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
-          }
-        });
       }
     },
 
