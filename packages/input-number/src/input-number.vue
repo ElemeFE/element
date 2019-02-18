@@ -228,8 +228,8 @@
         if (oldVal === newVal) return;
         this.userInput = null;
         this.$emit('input', newVal);
-        this.$emit('change', newVal, oldVal);
         this.currentValue = newVal;
+        this.$emit('change', newVal, oldVal);
       },
       handleInput(value) {
         this.userInput = value;
