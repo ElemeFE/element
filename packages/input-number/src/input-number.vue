@@ -202,13 +202,13 @@
       },
       increase() {
         if (this.inputNumberDisabled || this.maxDisabled) return;
-        const value = this.value || 0;
+        const value = this.currentValue || 0;
         const newVal = this._increase(value, this.step);
         this.setCurrentValue(newVal);
       },
       decrease() {
         if (this.inputNumberDisabled || this.minDisabled) return;
-        const value = this.value || 0;
+        const value = this.currentValue || 0;
         const newVal = this._decrease(value, this.step);
         this.setCurrentValue(newVal);
       },
