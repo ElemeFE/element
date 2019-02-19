@@ -11,7 +11,7 @@ let scrollBarWidth;
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
     dom = dom.nextElementSibling || dom.nextSibling;
-    getDOM(dom);
+    return getDOM(dom);
   }
   return dom;
 };
