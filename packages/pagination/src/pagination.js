@@ -365,6 +365,7 @@ export default {
       immediate: true,
       handler(val) {
         this.internalPageSize = isNaN(val) ? 10 : val;
+        this.internalCurrentPage = this.getValidCurrentPage(this.currentPage);
       }
     },
 
