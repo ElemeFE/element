@@ -686,8 +686,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | remote               | si las opciones se traeran desde el servidor | boolean  | —                 | false            |
 | remote-method        | metodo de busqueda remota personalizada  | function | —                 | —                |
 | loading              | si Select está cargando datos del servidor | boolean  | —                 | false            |
-| loading-text         | texto mostrado durante la carga de datos del servidor | string   | —                 | Loading          |
-| no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. | string   | —                 | No matching data |
+| loading-text         | texto mostrado durante la carga de datos del servidor, 也可以使用`slot="empty"`设置 | string   | —                 | Loading          |
+| no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. 也可以使用`slot="empty"`设置| string   | —                 | No matching data |
 | no-data-text         | texto mostrado cuando no hay opciones    | string   | —                 | No data          |
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
@@ -710,6 +710,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 |---------|-------------|
 |    —    | lista de los componentes Option |
 | prefix  | contenido prefix de un  Select |
+| empty | 无选项时的列表 |
 
 ### Atributos del grupo de opciones
 | Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |
