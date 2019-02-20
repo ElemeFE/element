@@ -684,8 +684,8 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | remote-method | Méthode pour la recherche distante. | function | — | — |
 | loading | Si le sélecteur est en train de charger des options. | boolean | — | false |
 | loading-text | Texte à afficher pendant le chargement. | string | — | Loading |
-| no-match-text | Texte à afficher quand le filtrage ne retourne aucune option. | string | — | No matching data |
-| no-data-text | Texte à afficher quand il n'y a aucune option. | string | — | No data |
+| no-match-text | Texte à afficher quand le filtrage ne retourne aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No matching data |
+| no-data-text | Texte à afficher quand il n'y a aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No data |
 | popper-class | Classe du menu déroulant. | string | — | — |
 | reserve-keyword | Quand `multiple` et `filter` sont activés, si il faut réserver le mot-clé courant après la sélection d'une option. | boolean | — | false |
 | default-first-option | Sélectionne la première option avec Entrée. Utilisable avec `filterable` ou `remote` | boolean | - | false |
@@ -709,6 +709,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 |---------|-------------|
 |    —    | Liste de options. |
 | prefix  | Contenu du préfixe du sélecteur. |
+| empty  | Contenu lorsqu'il n'y a aucune option. |
 
 ### Attributs du groupe d'options
 

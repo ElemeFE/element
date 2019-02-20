@@ -1005,6 +1005,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
             }
           ]
         }
