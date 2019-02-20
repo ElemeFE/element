@@ -128,6 +128,13 @@
         type: Number,
         default: 18
       },
+      indentionType: {
+        type: String,
+        default: 'padding',
+        validator: function(value) {
+          return ['padding', 'margin'].indexOf(value) !== -1;
+        }
+      },
       iconClass: String
     },
 
