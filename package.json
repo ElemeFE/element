@@ -123,6 +123,7 @@
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.19.0",
     "transliteration": "^1.1.11",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^1.0.1",
     "vue": "^2.5.16",
