@@ -130,13 +130,13 @@
     },
     computed: {
       minDisabled() {
-        return this._decrease(this.value, this.step) < this.min;
+        return this._decrease(this.currentValue, this.step) < this.min;
       },
       maxDisabled() {
-        return this._increase(this.value, this.step) > this.max;
+        return this._increase(this.currentValue, this.step) > this.max;
       },
       numPrecision() {
-        const { value, step, getPrecision, precision } = this;
+        const { currentValue, step, getPrecision, precision } = this;
         const stepPrecision = getPrecision(step);
         if (precision !== undefined) {
           if (stepPrecision > precision) {
@@ -144,7 +144,7 @@
           }
           return precision;
         } else {
-          return Math.max(getPrecision(value), stepPrecision);
+          return Math.max(getPrecision(currentValue), stepPrecision);
         }
       },
       controlsAtRight() {
@@ -202,13 +202,13 @@
       },
       increase() {
         if (this.inputNumberDisabled || this.maxDisabled) return;
-        const value = this.value || 0;
+        const value = this.currentValue || 0;
         const newVal = this._increase(value, this.step);
         this.setCurrentValue(newVal);
       },
       decrease() {
         if (this.inputNumberDisabled || this.minDisabled) return;
-        const value = this.value || 0;
+        const value = this.currentValue || 0;
         const newVal = this._decrease(value, this.step);
         this.setCurrentValue(newVal);
       },
