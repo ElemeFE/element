@@ -189,14 +189,7 @@ const webpackConfig = {
     })
   ],
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
+    minimizer: []
   }
 };
 
@@ -205,6 +198,14 @@ if (isProd) {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:7].css'
     })
+  );
+  webpackConfig.optimization.minimizer.push(
+    new UglifyJsPlugin({
+      cache: true,
+      parallel: true,
+      sourceMap: false
+    }),
+    new OptimizeCSSAssetsPlugin({})
   );
 }
 
