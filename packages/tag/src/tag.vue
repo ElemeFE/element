@@ -14,6 +14,10 @@
       handleClose(event) {
         event.stopPropagation();
         this.$emit('close', event);
+      },
+      handleClick(event) {
+        event.stopPropagation();
+        this.$emit('click', event);
       }
     },
     computed: {
@@ -26,7 +30,7 @@
         this.tagSize ? `el-tag--${this.tagSize}` : '',
         {'is-hit': this.hit}
       ];
-      const tagEl = (<span class={classes} style={{backgroundColor: this.color}}>
+      const tagEl = (<span class={classes} style={{backgroundColor: this.color}} on-click={this.handleClick}>
         { this.$slots.default }
         {
           this.closable && <i class="el-tag__close el-icon-close" on-click={this.handleClose}></i>

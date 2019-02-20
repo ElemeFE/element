@@ -141,6 +141,7 @@ Switch is used for switching between two opposing states.
 
  Attribute      | Description          | Type      | Accepted Values       | Default
 ----| ----| ----| ----|----
+value / v-model | binding value | boolean / string / number | — | —
 disabled | whether Switch is disabled | boolean | — | false
 width | width of Switch | number | — | 40
 active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | —

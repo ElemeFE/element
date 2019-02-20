@@ -174,6 +174,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | 绑定值 | date(TimePicker) / string(TimeSelect) | — | — |
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |
@@ -184,7 +185,6 @@
 | end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | is-range | 是否为时间范围选择，仅对`<el-time-picker>`有效 | boolean | — | false |
 | arrow-control | 是否使用箭头进行时间选择，仅对`<el-time-picker>`有效 | boolean | — | false |
-| value | 绑定值 | date(TimePicker) / string(TimeSelect) | — | — |
 | align | 对齐方式 | string | left / center / right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |

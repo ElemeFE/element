@@ -643,7 +643,7 @@ Search data from server-side.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----| ----| ----| ---- | ----- |
 |type| type of input | string | text, textarea and other [native input types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-|value| binding value | string / number| — | — |
+|value / v-model| binding value | string / number| — | — |
 |maxlength| same as `maxlength` in native input | number| — | — |
 |minlength| same as `minlength` in native input | number | — | — |
 |placeholder| placeholder of Input| string | — | — |
@@ -716,6 +716,7 @@ Attribute | Description | Type | Options | Default
 | suffix-icon | suffix icon class | string | — | — |
 | hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
 | popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
+| highlight-first-item | whether to highlight first item in remote search suggestions by default | boolean | — | false |
 
 ### Autocomplete Slots
 

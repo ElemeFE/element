@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-message-fade">
+  <transition name="el-message-fade" @after-leave="handleAfterLeave">
     <div
       :class="[
         'el-message',
@@ -61,14 +61,12 @@
       closed(newVal) {
         if (newVal) {
           this.visible = false;
-          this.$el.addEventListener('transitionend', this.destroyElement);
         }
       }
     },
 
     methods: {
-      destroyElement() {
-        this.$el.removeEventListener('transitionend', this.destroyElement);
+      handleAfterLeave() {
         this.$destroy(true);
         this.$el.parentNode.removeChild(this.$el);
       },

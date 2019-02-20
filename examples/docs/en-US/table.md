@@ -1542,7 +1542,7 @@ Customize table header so it can be even more customized.
 ```html
 <template>
   <el-table
-    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Date"
@@ -2097,9 +2097,9 @@ You can customize row index in `type=index` columns.
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
 | cell-dblclick | triggers when double clicking a cell | row, column, cell, event |
-| row-click | triggers when clicking a row | row, event, column |
-| row-contextmenu | triggers when user right clicks on a row | row, event |
-| row-dblclick | triggers when double clicking a row | row, event |
+| row-click | triggers when clicking a row | row, column, event |
+| row-contextmenu | triggers when user right clicks on a row | row, column, event |
+| row-dblclick | triggers when double clicking a row | row, column, event |
 | header-click | triggers when clicking a column header | column, event |
 | header-contextmenu | triggers when user right clicks on a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
