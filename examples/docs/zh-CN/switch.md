@@ -154,7 +154,7 @@
 | active-color  | switch 打开时的背景色    | string   | — | #409EFF |
 | inactive-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name            | switch 对应的 name 属性    | string   | — | — |
-| validate-event  | 输入时是否触发表单的校验     | boolean   | - | true |
+| validate-event  | 改变 switch 状态时是否触发表单的校验     | boolean   | - | true |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
