@@ -15,6 +15,7 @@
   text-align: justify;
   font-size: $--popover-font-size;
   box-shadow: $--box-shadow-light;
+  word-break: break-all;
 
   @include m(plain) {
     padding: $--popover-padding-large;

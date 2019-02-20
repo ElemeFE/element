@@ -36,12 +36,13 @@
   </div>
 </template>
 <script>
+  import emitter from 'element-ui/src/mixins/emitter';
   import Focus from 'element-ui/src/mixins/focus';
   import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
     name: 'ElSwitch',
-    mixins: [Focus('input'), Migrating],
+    mixins: [Focus('input'), Migrating, emitter],
     inject: {
       elForm: {
         default: ''
@@ -90,6 +91,10 @@
         type: String,
         default: ''
       },
+      validateEvent: {
+        type: Boolean,
+        default: true
+      },
       id: String
     },
     data() {
@@ -120,8 +125,12 @@
     },
     methods: {
       handleChange(event) {
-        this.$emit('input', !this.checked ? this.activeValue : this.inactiveValue);
-        this.$emit('change', !this.checked ? this.activeValue : this.inactiveValue);
+        const val = this.checked ? this.inactiveValue : this.activeValue;
+        this.$emit('input', val);
+        this.$emit('change', val);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', [val]);
+        }
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value
