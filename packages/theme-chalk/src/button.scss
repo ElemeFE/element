@@ -92,6 +92,10 @@
     &.tm-button--text {
       background-color: transparent;
     }
+
+    .tm-icon {
+      opacity: 0.5;
+    }
   }
 
   @include when(loading) {
@@ -289,7 +293,7 @@
       }
 
       .tm-icon {
-        fill: $--color-taupe-gray;
+        fill: $--color-pastel-gray;
       }
     }
     &.is-remove {

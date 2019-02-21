@@ -11,17 +11,26 @@
     margin-right: 4px;
   }
 
+  @include e(border-wrap) {
+    display: inline-block;
+    border-bottom: 1px dashed #1e1e28;
+
+    @include m(has-popover) {
+      &:hover {
+        border-bottom: 1px solid $--color-blueberry;
+      }
+    }
+  }
+
   @include e(sum) {
     color: $--color-text-regular;
     display: inline-flex;
-    border-bottom: 1px dashed $--color-dark-gunmetal;
     font-weight: 700;
   }
 
   @include e(change) {
     display: inline-flex;
-    margin: 0 2px;
-    border-bottom: 1px dashed $--color-dark-gunmetal;
+    margin-right: 2px;
     font-weight: 700;
   }
 

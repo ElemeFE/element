@@ -190,6 +190,10 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    this.popperVM && this.popperVM.$destroy();
+  },
+
   destroyed() {
     const reference = this.referenceElm;
     off(reference, 'mouseenter', this.show);

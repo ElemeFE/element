@@ -69,6 +69,9 @@ export default {
   },
   watch: {
     showPopper(val) {
+      if (this.disabled) {
+        return;
+      }
       val ? this.$emit('show') : this.$emit('hide');
     }
   },

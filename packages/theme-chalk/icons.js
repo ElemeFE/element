@@ -86,6 +86,7 @@ import ManWoman from '../../packages/theme-chalk/src/icons/man-woman.svg';
 import Message from '../../packages/theme-chalk/src/icons/message.svg';
 import Minus from '../../packages/theme-chalk/src/icons/minus.svg';
 import Negotiations from '../../packages/theme-chalk/src/icons/negotiations.svg';
+import NoSearchResults from '../../packages/theme-chalk/src/icons/no-search-results.svg';
 import NoSmoking from '../../packages/theme-chalk/src/icons/no-smoking.svg';
 import Parking from '../../packages/theme-chalk/src/icons/parking.svg';
 import Pencil from '../../packages/theme-chalk/src/icons/pencil.svg';
@@ -226,6 +227,7 @@ module.exports = {
   Message,
   Minus,
   Negotiations,
+  NoSearchResults,
   NoSmoking,
   Parking,
   Pencil,

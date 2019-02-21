@@ -598,7 +598,7 @@
       display: flex;
     }
     .tm-tabs__item {
-      padding: 24px 33px;
+      padding: 21px 33px;
       height: 64px;
       display: flex;
       align-items: center;
@@ -614,6 +614,22 @@
       @include when(active) {
         border-bottom: 3px solid $--color-blueberry;
         color: $--color-blueberry;
+      }
+
+      &:hover {
+        border-bottom-color: $--color-pastel-gray;
+      }
+
+      &.is-active {
+        border-bottom-color: $--color-blueberry;
+      }
+
+      .tm-tabs__close .tm-icon {
+        fill: $--color-pastel-gray;
+
+        &:hover {
+          fill: $--color-taupe-gray;
+        }
       }
 
       &.is-bottom, &.is-top {

@@ -9,9 +9,9 @@
     name="tm-list"
   >
     <li
-      v-for="(file, index) in files"
+      v-for="file in files"
       :class="['tm-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
-      :key="index"
+      :key="file.uid"
       tabindex="0"
       @keydown.delete="!disabled && $emit('remove', file)"
       @focus="focusing = true"
