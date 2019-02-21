@@ -8,7 +8,7 @@
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
       'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable
+      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }
     ]"
     @mouseenter="hovering = true"
@@ -24,7 +24,7 @@
         v-if="type !== 'textarea'"
         class="el-input__inner"
         v-bind="$attrs"
-        :type="type"
+        :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
         :disabled="inputDisabled"
         :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
@@ -50,7 +50,7 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon">
+        v-if="$slots.suffix || suffixIcon || showClear || showPassword || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
           <template v-if="!showClear">
             <slot name="suffix"></slot>
@@ -62,6 +62,17 @@
           <i v-else
             class="el-input__icon el-icon-circle-close el-input__clear"
             @click="clear"
+          ></i>
+          <template v-if="!showVisible">
+            <slot name="suffix"></slot>
+            <i class="el-input__icon"
+              v-if="suffixIcon"
+              :class="suffixIcon">
+            </i>
+          </template>
+          <i v-else
+            class="el-input__icon el-icon-view el-input__clear"
+            @click="handlePasswordVisible"
           ></i>
         </span>
         <i class="el-input__icon"
@@ -126,7 +137,8 @@
         textareaCalcStyle: {},
         hovering: false,
         focused: false,
-        isOnComposition: false
+        isOnComposition: false,
+        passwordVisible: false
       };
     },
 
@@ -169,6 +181,10 @@
         type: Boolean,
         default: false
       },
+      showPassword: {
+        type: Boolean,
+        default: false
+      },
       tabindex: String
     },
 
@@ -207,6 +223,12 @@
           !this.readonly &&
           this.nativeInputValue &&
           (this.focused || this.hovering);
+      },
+      showVisible() {
+        return this.showPassword &&
+          !this.inputDisabled &&
+          !this.readonly &&
+          (!!this.nativeInputValue || this.focused);
       }
     },
 
@@ -325,6 +347,10 @@
         this.$emit('input', '');
         this.$emit('change', '');
         this.$emit('clear');
+      },
+      handlePasswordVisible() {
+        this.passwordVisible = !this.passwordVisible;
+        this.focus();
       },
       getInput() {
         return this.$refs.input || this.$refs.textarea;
