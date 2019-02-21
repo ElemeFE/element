@@ -40,6 +40,10 @@ export default {
 
   methods: {
     clickThumbHandler(e) {
+      // prevent click event of right button
+      if (e.ctrlKey || e.button === 2) {
+        return;
+      }
       this.startDrag(e);
       this[this.bar.axis] = (e.currentTarget[this.bar.offset] - (e[this.bar.client] - e.currentTarget.getBoundingClientRect()[this.bar.direction]));
     },

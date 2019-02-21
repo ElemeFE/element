@@ -799,7 +799,7 @@ export default {
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type         | 类型   | string  | text，textarea 和其他 [原生 input 的 type 值](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-| value         | 绑定值           | string / number  | — | — |
+| value / v-model | 绑定值           | string / number  | — | — |
 | maxlength     | 原生属性，最大输入长度      | number          |  —  | — |
 | minlength     | 原生属性，最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
@@ -867,6 +867,7 @@ export default {
 | suffix-icon | 输入框尾部图标 | string | — | — |
 | hide-loading | 是否隐藏远程加载时的加载图标 | boolean | — | false |
 | popper-append-to-body | 是否将下拉列表插入至 body 元素。在下拉列表的定位出现问题时，可将该属性设置为 false | boolean | - | true |
+| highlight-first-item | 是否默认突出显示远程搜索建议中的第一项 | boolean | — | false |
 
 ### Autocomplete Slots
 | name | 说明 |

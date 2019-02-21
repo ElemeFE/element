@@ -243,10 +243,10 @@
 
     methods: {
       focus() {
-        (this.$refs.input || this.$refs.textarea).focus();
+        this.getInput().focus();
       },
       blur() {
-        (this.$refs.input || this.$refs.textarea).blur();
+        this.getInput().blur();
       },
       getMigratingConfig() {
         return {
@@ -267,7 +267,7 @@
         }
       },
       select() {
-        (this.$refs.input || this.$refs.textarea).select();
+        this.getInput().select();
       },
       resizeTextarea() {
         if (this.$isServer) return;
@@ -308,7 +308,10 @@
 
         // set input's value, in case parent refuses the change
         // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(() => { this.$refs.input.value = this.value; });
+        this.$nextTick(() => {
+          let input = this.getInput();
+          input.value = this.value;
+        });
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
@@ -348,6 +351,9 @@
       handlePasswordVisible() {
         this.passwordVisible = !this.passwordVisible;
         this.focus();
+      },
+      getInput() {
+        return this.$refs.input || this.$refs.textarea;
       }
     },
 

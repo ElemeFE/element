@@ -3,35 +3,35 @@
     data() {
       return {
         tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333,
-          tag: '家'
-        }, {
           date: '2016-05-02',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
           zip: 200333,
-          tag: '公司'
+          tag: '家'
         }, {
           date: '2016-05-04',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1517 弄',
           zip: 200333,
-          tag: '家'
+          tag: '公司'
         }, {
           date: '2016-05-01',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1519 弄',
+          zip: 200333,
+          tag: '家'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1516 弄',
           zip: 200333,
           tag: '公司'
         }],
@@ -784,13 +784,6 @@
     data() {
       return {
         tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
           date: '2016-05-02',
           name: '王小虎',
           province: '上海',
@@ -802,14 +795,21 @@
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1517 弄',
           zip: 200333
         }, {
           date: '2016-05-01',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1519 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1516 弄',
           zip: 200333
         }]
       }
@@ -1690,7 +1690,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Date"
@@ -2070,35 +2070,35 @@
     data() {
       return {
         tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333,
-          tag: '家'
-        }, {
           date: '2016-05-02',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
           zip: 200333,
-          tag: '公司'
+          tag: '家'
         }, {
           date: '2016-05-04',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1517 弄',
           zip: 200333,
-          tag: '家'
+          tag: '公司'
         }, {
           date: '2016-05-01',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '上海市普陀区金沙江路 1519 弄',
+          zip: 200333,
+          tag: '家'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1516 弄',
           zip: 200333,
           tag: '公司'
         }],
@@ -2157,9 +2157,9 @@
 | cell-mouse-leave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
 | cell-dblclick | 当某个单元格被双击击时会触发该事件 | row, column, cell, event |
-| row-click | 当某一行被点击时会触发该事件 | row, event, column |
-| row-contextmenu | 当某一行被鼠标右键点击时会触发该事件 | row, event |
-| row-dblclick | 当某一行被双击时会触发该事件 | row, event |
+| row-click | 当某一行被点击时会触发该事件 | row, column, event |
+| row-contextmenu | 当某一行被鼠标右键点击时会触发该事件 | row, column, event |
+| row-dblclick | 当某一行被双击时会触发该事件 | row, column, event |
 | header-click | 当某一列的表头被点击时会触发该事件 | column, event |
 | header-contextmenu | 当某一列的表头被鼠标右键点击时触发该事件 | column, event |
 | sort-change | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |

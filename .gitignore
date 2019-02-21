@@ -15,6 +15,7 @@ examples/element-ui
 examples/pages/en-US
 examples/pages/zh-CN
 examples/pages/es
+examples/pages/fr-FR
 fe.element/element-ui
 .npmrc
 coverage

@@ -91,5 +91,36 @@
     "nav": {
       "dropdown": "Versión: "
     }
+  },
+  {
+    "lang": "fr-FR",
+    "demo-block": {
+      "hide-text": "Réduire",
+      "show-text": "Agrandir",
+      "button-text": "Essayez!",
+      "tooltip-text": "Essayer cette démo sur jsfiddle.net"
+    },
+    "footer": {
+      "links": "Liens",
+      "repo": "GitHub",
+      "community": "Communauté",
+      "changelog": "Changelog",
+      "theme": "Générateur de thème (CLI)",
+      "preview": "Générateur de thème en ligne",
+      "faq": "FAQ",
+      "gitter": "Gitter",
+      "starter": "Kit de démarrage",
+      "feedback": "Commentaires",
+      "contribution": "Contribution",
+      "eleme": "Eleme"
+    },
+    "header": {
+      "guide": "Guide",
+      "components": "Composants",
+      "resource": "Ressources"
+    },
+    "nav": {
+      "dropdown": "Version: "
+    }
   }
 ]

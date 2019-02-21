@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
 import merge from 'element-ui/src/utils/merge';
-import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import { orderBy, getColumnById, getRowIdentity, getColumnByKey } from './util';
 
 const sortData = (data, states) => {
@@ -112,6 +111,35 @@ const TableStore = function(table, initialState = {}) {
     selectOnIndeterminate: false
   };
 
+  this._toggleAllSelection = debounce(10, function(states) {
+    const data = states.data || [];
+    if (data.length === 0) return;
+    const selection = this.states.selection;
+    // when only some rows are selected (but not all), select or deselect all of them
+    // depending on the value of selectOnIndeterminate
+    const value = states.selectOnIndeterminate
+      ? !states.isAllSelected
+      : !(states.isAllSelected || selection.length);
+    let selectionChanged = false;
+    data.forEach((item, index) => {
+      if (states.selectable) {
+        if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
+          selectionChanged = true;
+        }
+      } else {
+        if (toggleRowSelection(states, item, value)) {
+          selectionChanged = true;
+        }
+      }
+    });
+    const table = this.table;
+    if (selectionChanged) {
+      table.$emit('selection-change', selection ? selection.slice() : []);
+    }
+    table.$emit('select-all', selection);
+    states.isAllSelected = value;
+  });
+
   for (let prop in initialState) {
     if (initialState.hasOwnProperty(prop) && this.states.hasOwnProperty(prop)) {
       this.states[prop] = initialState[prop];
@@ -192,17 +220,6 @@ TableStore.prototype.mutations = {
 
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
-
-    const { $el, highlightCurrentRow } = this.table;
-    if ($el && highlightCurrentRow) {
-      const data = states.data;
-      const tr = $el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const row = rows[data.indexOf(states.currentRow)];
-
-      [].forEach.call(rows, row => removeClass(row, 'current-row'));
-      addClass(row, 'current-row');
-    }
 
     if (!options || !options.silent) {
       this.table.$emit('sort-change', {
@@ -347,36 +364,9 @@ TableStore.prototype.mutations = {
     this.updateAllSelected();
   },
 
-  toggleAllSelection: debounce(10, function(states) {
-    const data = states.data || [];
-    if (data.length === 0) return;
-    const selection = this.states.selection;
-    // when only some rows are selected (but not all), select or deselect all of them
-    // depending on the value of selectOnIndeterminate
-    const value = states.selectOnIndeterminate
-      ? !states.isAllSelected
-      : !(states.isAllSelected || selection.length);
-    let selectionChanged = false;
-
-    data.forEach((item, index) => {
-      if (states.selectable) {
-        if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
-          selectionChanged = true;
-        }
-      } else {
-        if (toggleRowSelection(states, item, value)) {
-          selectionChanged = true;
-        }
-      }
-    });
-
-    const table = this.table;
-    if (selectionChanged) {
-      table.$emit('selection-change', selection ? selection.slice() : []);
-    }
-    table.$emit('select-all', selection);
-    states.isAllSelected = value;
-  })
+  toggleAllSelection(state) {
+    this._toggleAllSelection(state);
+  }
 };
 
 const doFlattenColumns = (columns) => {

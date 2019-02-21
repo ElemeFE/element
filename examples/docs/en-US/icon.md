@@ -37,8 +37,6 @@
     line-height: 120px;
     color: #666;
     font-size: 13px;
-    transition: color .15s linear;
-
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
     margin-right: -1px;
@@ -58,15 +56,16 @@
       font-size: 32px;
       margin-bottom: 15px;
       color: #606266;
+      transition: color .15s linear;
     }
     .icon-name {
       display: inline-block;
       padding: 0 3px;
       height: 1em;
-      color: #606266;
+      transition: color .15s linear;
     }
     &:hover {
-      color: rgb(92, 182, 255);
+      i,span{color: rgb(92, 182, 255);}
     }
   }
 </style>
