@@ -422,7 +422,7 @@
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | [] |
-| http-request | 覆盖默认的上传行为，可以自定义上传的实现，function 返回 Promise 才能触发on-success和on-error | function | — | — |
+| http-request | 覆盖默认的上传行为，可以自定义上传的实现，function 返回 Promise 才能触发 on-success 和 on-error 钩子函数 | function | — | — |
 | disabled | 是否禁用 | boolean | — | false |
 | limit | 最大允许上传个数 |  number | — | — |
 | on-exceed | 文件超出个数限制时的钩子 | function(files, fileList) | — | - |
