@@ -90,8 +90,7 @@ class TableLayout {
     }
     this.fixedBodyHeight = this.scrollX ? this.bodyHeight - this.gutterWidth : this.bodyHeight;
 
-    const noData = !this.table.data || this.table.data.length === 0;
-    this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
+    this.viewportHeight = this.scrollX ? tableHeight - this.gutterWidth : tableHeight;
 
     this.updateScrollY();
     this.notifyObservers('scrollable');
