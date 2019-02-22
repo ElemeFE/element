@@ -17,6 +17,7 @@
         input8: '',
         input9: '',
         input10: '',
+        input11: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -208,6 +209,25 @@ export default {
     }
   }
 }
+</script>
+```
+:::
+
+### Password box
+
+:::demo Make a toggleable password Input with the `show-password` attribute.
+
+```html
+<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
 </script>
 ```
 :::
@@ -648,6 +668,7 @@ Search data from server-side.
 |minlength| same as `minlength` in native input | number | — | — |
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
+| show-password | whether to show toggleable password input| boolean         | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |

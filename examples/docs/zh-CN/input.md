@@ -17,6 +17,7 @@
         input8: '',
         input9: '',
         input10: '',
+        input11: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -241,6 +242,25 @@ export default {
     data() {
       return {
         input10: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 密码框
+
+:::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
+
+```html
+<el-input placeholder="请输入密码" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
       }
     }
   }
@@ -804,6 +824,7 @@ export default {
 | minlength     | 原生属性，最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
 | clearable     | 是否可清空        | boolean         | — | false |
+| show-password | 是否显示切换密码图标| boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |

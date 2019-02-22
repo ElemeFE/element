@@ -16,6 +16,8 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
+        input11: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -188,6 +190,48 @@ export default {
 </script>
 ```
 
+:::
+
+### Clearable
+
+:::demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Password box
+
+:::demo Make a toggleable password Input with the `show-password` attribute.
+
+```html
+<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
+</script>
+```
 :::
 
 ### Input con icono
@@ -638,6 +682,8 @@ Búsqueda de datos desde el servidor.
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
+| clearable | whether to show clear button | boolean | — | false |
+| show-password | whether to show toggleable password input| boolean         | — | false |
 | disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
 | size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
 | prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |
