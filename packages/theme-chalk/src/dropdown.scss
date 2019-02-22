@@ -69,6 +69,8 @@
   border: 1px solid $--border-color-lighter;
   border-radius: $--border-radius-base;
   box-shadow: $--dropdown-menu-box-shadow;
+  max-height: 400px;
+  overflow: auto;
 
   @include e(item) {
     list-style: none;
