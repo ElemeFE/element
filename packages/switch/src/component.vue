@@ -121,6 +121,9 @@
         if (this.activeColor || this.inactiveColor) {
           this.setBackgroundColor();
         }
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', [this.value]);
+        }
       }
     },
     methods: {
@@ -128,9 +131,6 @@
         const val = this.checked ? this.inactiveValue : this.activeValue;
         this.$emit('input', val);
         this.$emit('change', val);
-        if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.change', [val]);
-        }
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value
