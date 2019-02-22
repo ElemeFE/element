@@ -61,7 +61,7 @@
     </div>
     
     <span class="el-table__empty-text" v-if="!data || data.length === 0">
-      <slot name="empty">{{!data || data.length === 0}}{{ emptyText || t('el.table.emptyText') }}</slot>
+      <slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot>
     </span>
 
     <div
