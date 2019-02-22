@@ -42,7 +42,6 @@
   }
 
   .demo-pagination .last .demonstration + .el-pagination {
-    float: right;
     width: 70%;
     margin: 5px 20px 0 0;
   }
