@@ -333,7 +333,7 @@ NavMenu vertical puede ser colapsado.
 ### Atributos SubMenu 
 | Atributo     | Descripción                              | Tipo   | Valores aceptados | Por defecto |
 | ------------ | ---------------------------------------- | ------ | ----------------- | ----------- |
-| index        | identificador único                      | string | —                 | —           |
+| index        | identificador único                      | string/null | —            | null        |
 | popper-class | nombre personalizado de la clase del menu popup | string | —                 | —           |
 | show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
 | hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |
