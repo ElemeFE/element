@@ -530,4 +530,4 @@ When picking a date range, you can assign the time part for start date and end d
 ### Slots
 | Name    | Description |
 |---------|-------------|
-| range-separator  | costume range separator content |
+| range-separator  | custom range separator content |
