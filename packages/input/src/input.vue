@@ -52,25 +52,18 @@
         class="el-input__suffix"
         v-if="$slots.suffix || suffixIcon || showClear || showPassword || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
-          <template v-if="!showClear">
+          <template v-if="!showClear || !showVisible">
             <slot name="suffix"></slot>
             <i class="el-input__icon"
               v-if="suffixIcon"
               :class="suffixIcon">
             </i>
           </template>
-          <i v-else
+          <i v-if="showClear"
             class="el-input__icon el-icon-circle-close el-input__clear"
             @click="clear"
           ></i>
-          <template v-if="!showVisible">
-            <slot name="suffix"></slot>
-            <i class="el-input__icon"
-              v-if="suffixIcon"
-              :class="suffixIcon">
-            </i>
-          </template>
-          <i v-else
+          <i v-if="showVisible"
             class="el-input__icon el-icon-view el-input__clear"
             @click="handlePasswordVisible"
           ></i>
