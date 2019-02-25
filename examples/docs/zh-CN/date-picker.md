@@ -1,3 +1,4 @@
+
 ## DatePicker 日期选择器
 
 用于选择或输入日期
@@ -198,6 +199,76 @@
 ```
 :::
 
+
+### 选择月份范围
+
+可在一个选择器中便捷地选择一个月份范围
+
+:::demo 在选择月份范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用`unlink-panels`属性解除联动。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker
+      v-model="value15"
+      type="monthrange"
+      range-separator="至"
+      start-placeholder="开始月份"
+      end-placeholder="结束月份">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value16"
+      type="monthrange"
+      align="right"
+      unlink-panels
+      range-separator="至"
+      start-placeholder="开始月份"
+      end-placeholder="结束月份"
+      :picker-options="pickerOptions3">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions3: {
+          shortcuts: [{
+            text: '本月',
+            onClick(picker) {
+              picker.$emit('pick', [new Date(), new Date()]);
+            }
+          }, {
+            text: '今年至今',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date(new Date().getFullYear(), 0);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近六个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setMonth(start.getMonth() - 6);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value15: '',
+        value16: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+
 ###  日期格式
 
 使用`format`指定输入框的格式；使用`value-format`指定绑定值的格式。
@@ -323,7 +394,7 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/dates/ week/datetime/datetimerange/daterange | date |
+| type | 显示类型 | string | year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange | date |
 | format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
