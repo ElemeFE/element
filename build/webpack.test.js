@@ -22,7 +22,6 @@ const webpackConfig = {
     }),
     modules: ['node_modules']
   },
-  devtool: '#inline-source-map',
   module: {
     rules: [
       {
