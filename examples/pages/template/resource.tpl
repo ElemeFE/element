@@ -87,7 +87,7 @@
       height: 42px;
       width: 190px;
       display: inline-block;
-      line-height: @height;
+      line-height: 42px;
       font-size: 14px;
       background-color: #409EFF;
       color: #fff;

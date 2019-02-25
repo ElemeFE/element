@@ -10,7 +10,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    line-height: @height;
+    line-height: 80px;
     z-index: 100;
     position: relative;
 

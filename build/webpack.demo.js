@@ -9,6 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const md = require('markdown-it')();
 const slugify = require('transliteration').slugify;
+// const postcssNesting = require('postcss-nesting');
 
 const striptags = require('./strip-tags');
 const config = require('./config');
@@ -84,16 +85,8 @@ const webpackConfig = {
         }
       },
       {
-        test: /\.css$/,
-        loaders: [
-          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
+        test: /\.(scss|css)$/,
+        use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'sass-loader'

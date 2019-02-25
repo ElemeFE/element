@@ -158,7 +158,8 @@
   .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
-      padding: 7px *;
+      padding-top: 7px;
+      padding-bottom: 7px;
 
       .name {
         text-overflow: ellipsis;
