@@ -49,7 +49,7 @@
       querySearchAsync(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
+
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
@@ -114,11 +114,11 @@
         font-size: 14px;
         color: #8492a6;
       }
-    
+
       .el-col:not(:last-child) {
         border-right: 1px solid rgba(224,230,237,0.50);
       }
-    
+
       .el-autocomplete {
         text-align: left;
       }
@@ -147,6 +147,14 @@
 ## Input
 
 Ingresa datos usando el ratón o teclado.
+
+:::warning
+Input is a controlled component, it **always shows Vue binding value**.
+
+Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+
+Do not support `v-model` modifiers.
+:::
 
 ### Uso básico
 
