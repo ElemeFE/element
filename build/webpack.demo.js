@@ -9,7 +9,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const md = require('markdown-it')();
 const slugify = require('transliteration').slugify;
-// const postcssNesting = require('postcss-nesting');
 
 const striptags = require('./strip-tags');
 const config = require('./config');
