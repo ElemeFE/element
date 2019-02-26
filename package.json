@@ -111,7 +111,6 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "perspective.js": "^1.0.0",
     "postcss": "^7.0.14",
-    "postcss-loader": "^3.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^7.1.0",
