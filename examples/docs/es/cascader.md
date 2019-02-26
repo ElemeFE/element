@@ -1672,10 +1672,9 @@ Buscar y seleccionar opciones con una palabra clave.
 ### Atributos
 | Atributo         | Descripción                              | Tipo            | Opciones              | Por defecto |
 | ---------------- | ---------------------------------------- | --------------- | --------------------- | ----------- |
-| value / v-model   | valor enlazado                           | boolean / string / number | —                     | —           |
+| value / v-model   | valor seleccionado                           | array | —                     | —           |
 | options          | datos de las opciones                    | array           | —                     | —           |
 | props            | opciones de configuracion,  mire la tabla siguiente | object          | —                     | —           |
-| value            | valor seleccionado                       | array           | —                     | —           |
 | popper-class     | nombre de clase para el Cascader's dropdown | string          | —                     | —           |
 | placeholder      | input placeholder                        | string          | —                     | Select      |
 | disabled         | si Cascader esta disabled                | boolean         | —                     | false       |

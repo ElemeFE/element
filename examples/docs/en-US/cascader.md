@@ -1666,10 +1666,9 @@ Search and select options with a keyword.
 ### Attributes
 | Attribute | Description         | Type    | Options       | Default|
 |---------- |-------------------- |---------|-------------  |-------- |
-| value / v-model | binding value  | boolean / string / number | — | — |
+| value / v-model | binding value  | array | — | — |
 | options   | data of the options | array | — | — |
 | props | configuration options, see the following table | object | — | — |
-| value | selected value | array | — | — |
 | separator | option separator | string | — | / |
 | popper-class | custom class name for Cascader's dropdown | string | — | — |
 | placeholder | input placeholder | string | — | Select |
