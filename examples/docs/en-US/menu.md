@@ -341,7 +341,7 @@ Vertical NavMenu could be collapsed.
 ### Menu-Item Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | unique identification   | string  | — | — |
+| index     | unique identification   | string/null  | — | null |
 | route     | Vue Router object   | object | — | — |
 | disabled | whether disabled | boolean | — | false |
 

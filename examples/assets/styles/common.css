@@ -14,7 +14,7 @@ html, body {
 #app {
   height: 100%;
   
-  @when component {
+  &.is-component {
     overflow-y: hidden;
 
     .main-cnt {

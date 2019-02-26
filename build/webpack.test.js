@@ -22,7 +22,6 @@ const webpackConfig = {
     }),
     modules: ['node_modules']
   },
-  devtool: '#inline-source-map',
   module: {
     rules: [
       {
@@ -42,7 +41,7 @@ const webpackConfig = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader']
+        loaders: ['style-loader', 'css-loader']
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,

@@ -16,6 +16,8 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
+        input11: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -47,7 +49,7 @@
       querySearchAsync(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
+
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
@@ -112,11 +114,11 @@
         font-size: 14px;
         color: #8492a6;
       }
-    
+
       .el-col:not(:last-child) {
         border-right: 1px solid rgba(224,230,237,0.50);
       }
-    
+
       .el-autocomplete {
         text-align: left;
       }
@@ -125,7 +127,8 @@
   .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
-      padding: 7px *;
+      padding-top: 7px;
+      padding-bottom: 7px;
 
       .name {
         text-overflow: ellipsis;
@@ -145,6 +148,14 @@
 ## Input
 
 Ingresa datos usando el ratón o teclado.
+
+:::warning
+Input is a controlled component, it **always shows Vue binding value**.
+
+Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+
+Do not support `v-model` modifiers.
+:::
 
 ### Uso básico
 
@@ -188,6 +199,48 @@ export default {
 </script>
 ```
 
+:::
+
+### Clearable
+
+:::demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Password box
+
+:::demo Make a toggleable password Input with the `show-password` attribute.
+
+```html
+<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
+</script>
+```
 :::
 
 ### Input con icono
@@ -638,6 +691,8 @@ Búsqueda de datos desde el servidor.
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
+| clearable | whether to show clear button | boolean | — | false |
+| show-password | whether to show toggleable password input| boolean         | — | false |
 | disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
 | size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
 | prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |
