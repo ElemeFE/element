@@ -52,7 +52,7 @@
         class="el-input__suffix"
         v-if="$slots.suffix || suffixIcon || showClear || showPassword || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
-          <template v-if="!showClear || !showVisible">
+          <template v-if="!showClear || !showPwdVisible">
             <slot name="suffix"></slot>
             <i class="el-input__icon"
               v-if="suffixIcon"
@@ -217,7 +217,7 @@
           this.nativeInputValue &&
           (this.focused || this.hovering);
       },
-      showVisible() {
+      showPwdVisible() {
         return this.showPassword &&
           !this.inputDisabled &&
           !this.readonly &&
