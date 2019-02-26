@@ -63,7 +63,7 @@
             class="el-input__icon el-icon-circle-close el-input__clear"
             @click="clear"
           ></i>
-          <i v-if="showVisible"
+          <i v-if="showPwdVisible"
             class="el-input__icon el-icon-view el-input__clear"
             @click="handlePasswordVisible"
           ></i>
