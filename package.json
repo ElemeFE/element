@@ -73,7 +73,7 @@
     "chai": "^3.5.0",
     "cheerio": "^0.18.0",
     "chokidar": "^1.7.0",
-    "copy-webpack-plugin": "^4.5.2",
+    "copy-webpack-plugin": "^5.0.0",
     "coveralls": "^2.11.14",
     "cp-cli": "^1.0.2",
     "cross-env": "^3.1.3",
