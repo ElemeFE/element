@@ -84,16 +84,8 @@ const webpackConfig = {
         }
       },
       {
-        test: /\.css$/,
-        loaders: [
-          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
+        test: /\.(scss|css)$/,
+        use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'sass-loader'
