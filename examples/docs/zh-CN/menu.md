@@ -327,7 +327,7 @@
 ### SubMenu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | 唯一标志   | string  | — | — |
+| index     | 唯一标志   | string/null  | — | null |
 | popper-class | 弹出菜单的自定义类名 | string | — | — |
 | show-timeout | 展开 sub-menu 的延时 | number | — | 300 |
 | hide-timeout | 收起 sub-menu 的延时 | number | — | 300 |

@@ -35,7 +35,7 @@
           content: '';
           display: inline-block;
           width: 4px;
-          height: @width;
+          height: 4px;
           border-radius: 50%;
           vertical-align: middle;
           background-color: #5e6d82;

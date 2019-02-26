@@ -17,6 +17,7 @@
         input8: '',
         input9: '',
         input10: '',
+        input11: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -126,7 +127,8 @@
   .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
-      padding: 7px *;
+      padding-top: 7px;
+      padding-bottom: 7px;
 
       .name {
         text-overflow: ellipsis;
@@ -146,6 +148,15 @@
 ## Input
 
 Input data using mouse or keyboard.
+
+:::warning
+Input is a controlled component, it **always shows Vue binding value**.
+
+Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+
+Do not support `v-model` modifiers.
+:::
+
 
 ### Basic usage
 
@@ -208,6 +219,25 @@ export default {
     }
   }
 }
+</script>
+```
+:::
+
+### Password box
+
+:::demo Make a toggleable password Input with the `show-password` attribute.
+
+```html
+<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
 </script>
 ```
 :::
@@ -648,6 +678,7 @@ Search data from server-side.
 |minlength| same as `minlength` in native input | number | — | — |
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
+| show-password | whether to show toggleable password input| boolean         | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |

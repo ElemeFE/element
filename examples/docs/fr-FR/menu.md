@@ -347,7 +347,7 @@ Le menu vertical peut être réduit.
 
 | Attributs      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | Identificateur unique. | string  | — | — |
+| index     | Identificateur unique. | string/null  | — | null |
 | route     | Objet Vue Router. | object | — | — |
 | disabled | Si l'item est désactivé. | boolean | — | false |
 
