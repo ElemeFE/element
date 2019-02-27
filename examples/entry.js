@@ -2,6 +2,7 @@ import Vue from 'vue';
 import entry from './app';
 import VueRouter from 'vue-router';
 import Element from 'main/index.js';
+import hljs from 'highlight.js';
 import routes from './route.config';
 import demoBlock from './components/demo-block';
 import MainFooter from './components/footer';
@@ -30,6 +31,11 @@ const router = new VueRouter({
 });
 
 router.afterEach(route => {
+  // https://github.com/highlightjs/highlight.js/issues/909#issuecomment-131686186
+  setTimeout(() => {
+    var blocks = document.querySelectorAll('pre code:not(.hljs)');
+    Array.prototype.forEach.call(blocks, hljs.highlightBlock);
+  }, 100);
   const data = title[route.meta.lang];
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {

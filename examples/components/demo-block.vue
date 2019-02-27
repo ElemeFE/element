@@ -181,7 +181,6 @@
 </style>
 
 <script type="text/babel">
-  import highlight from 'highlight.js';
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
   import { stripScript, stripStyle, stripTemplate } from '../util';
@@ -310,8 +309,6 @@
         this.jsfiddle.script = stripScript(code);
         this.jsfiddle.style = stripStyle(code);
       }
-      // https://highlightjs.org/usage/
-      highlight.initHighlightingOnLoad();
 
       this.$nextTick(() => {
         let highlight = this.$el.getElementsByClassName('highlight')[0];
