@@ -12,11 +12,11 @@
     line-height: 1;
     white-space: nowrap;
     vertical-align: middle;
-    background: $--button-default-fill;
+    background: $--button-default-background-color;
     border: $--border-base;
     font-weight: $--button-font-weight;
     border-left: 0;
-    color: $--button-default-color;
+    color: $--button-default-font-color;
     -webkit-appearance: none;
     text-align: center;
     box-sizing: border-box;
@@ -57,8 +57,8 @@
 
     &:checked {
       & + .el-radio-button__inner {
-        color: $--radio-button-checked-color;
-        background-color: $--radio-button-checked-fill;
+        color: $--radio-button-checked-font-color;
+        background-color: $--radio-button-checked-background-color;
         border-color: $--radio-button-checked-border-color;
         box-shadow: -1px 0 0 0 $--radio-button-checked-border-color;
       }
@@ -66,11 +66,11 @@
 
     &:disabled {
       & + .el-radio-button__inner {
-        color: $--button-disabled-color;
+        color: $--button-disabled-font-color;
         cursor: not-allowed;
         background-image: none;
-        background-color: $--button-disabled-fill;
-        border-color: $--button-disabled-border;
+        background-color: $--button-disabled-background-color;
+        border-color: $--button-disabled-border-color;
         box-shadow: none;
       }
       &:checked + .el-radio-button__inner {
