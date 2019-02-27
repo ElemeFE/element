@@ -20,31 +20,18 @@
         <slot name="prepend"></slot>
       </div>
       <input
-        :tabindex="tabindex"
         v-if="type !== 'textarea'"
         class="el-input__inner"
-        v-bind="$attrs"
-        :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
-        :disabled="inputDisabled"
-        :readonly="readonly"
-        :autocomplete="autoComplete || autocomplete"
-        :value="nativeInputValue"
+        v-bind="inputAttrs"
         ref="input"
-        @compositionstart="handleComposition"
-        @compositionupdate="handleComposition"
-        @compositionend="handleComposition"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @change="handleChange"
-        :aria-label="label"
+        v-on="inputListeners"
       >
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <i class="el-input__icon"
-           v-if="prefixIcon"
-           :class="prefixIcon">
+          v-if="prefixIcon"
+          :class="prefixIcon">
         </i>
       </span>
       <!-- 后置内容 -->
@@ -80,23 +67,11 @@
     </template>
     <textarea
       v-else
-      :tabindex="tabindex"
       class="el-textarea__inner"
-      :value="nativeInputValue"
-      @compositionstart="handleComposition"
-      @compositionupdate="handleComposition"
-      @compositionend="handleComposition"
-      @input="handleInput"
       ref="textarea"
-      v-bind="$attrs"
-      :disabled="inputDisabled"
-      :readonly="readonly"
-      :autocomplete="autoComplete || autocomplete"
+      v-bind="inputAttrs"
       :style="textareaStyle"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @change="handleChange"
-      :aria-label="label"
+      v-on="inputListeners"
     >
     </textarea>
   </div>
@@ -182,6 +157,26 @@
     },
 
     computed: {
+      inputListeners() {
+        return merge(this.$listeners, {
+          input: this.handleInput,
+          change: this.handleChange,
+          focus: this.handleFocus,
+          blur: this.handleBlur,
+          compositionstart: this.handleComposition,
+          compositionupdate: this.handleComposition,
+          compositionend: this.handleComposition
+        });
+      },
+      inputAttrs() {
+        return merge(this.$attrs, {
+          type: this.showPassword ? (this.passwordVisible ? 'text' : 'password') : this.type,
+          disabled: this.inputDisabled,
+          value: this.nativeInputValue,
+          autocomplete: this.autoComplete || this.autocomplete,
+          'aria-label': this.label
+        });
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
