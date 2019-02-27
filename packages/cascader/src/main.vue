@@ -204,6 +204,9 @@ export default {
     currentLabels() {
       let options = this.options;
       let labels = [];
+      if (!this.currentValue) {
+        return labels;
+      }
       this.currentValue.forEach(value => {
         const targetOption = options && options.filter(option => option[this.valueKey] === value)[0];
         if (targetOption) {
