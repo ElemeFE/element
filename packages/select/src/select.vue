@@ -192,7 +192,7 @@
           !this.selectDisabled &&
           this.value !== undefined &&
           this.value !== '' &&
-          this.value.length > 0;
+          (this.value && this.value.length > 0);
         return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
       },
       showControlIcon() {

@@ -96,6 +96,10 @@
     font-size: 14px;
     margin-bottom: 20px;
   }
+
+  .demo-date-picker .tm-date-editor + .demonstration {
+    margin-top: 20px;
+  }
 </style>
 
 ## DatePicker
@@ -208,6 +212,19 @@ Basic date picker measured by 'day'.
       placeholder="Pick a day"
       :picker-options="pickerOptions1">
     </tm-date-picker>
+
+    <span class="demonstration">Picker with quick options with slot shortcut</span>
+    <tm-date-picker
+      v-model="value2"
+      type="date"
+      placeholder="Pick a day"
+      :picker-options="pickerOptions1">
+      <div slot="shortcut-inner" slot-scope="data">
+        {{data.text}}
+        <tm-icon name="check" />
+      </div>
+    </tm-date-picker>
+
   </div>
 </template>
 
@@ -589,5 +606,6 @@ When picking a date range, you can assign the time part for start date and end d
 | name | type | Description |
 |------|--------|--------|-------|
 | cell | scopedSlot | Extends cell with calendar date<br><br>`@typedef {Object} props`<br>`@prop {string} text - date`<br>`@prop {number} row`<br>`@prop {number} column`<br>`@prop {'today'|'normal'|'prev-month'|'next-month'} type`<br>`@prop {boolean} start`<br>`@prop {boolean} end`<br>`@prop {boolean} inRange`<br>`@prop {boolean} disabled` |
+| shortcut-inner | scopedSlot | Extends shortcut-inner button |
 | topBlock | slot | Extends top place of popover |
 | bottomBlock | slot | Extends bottom place of popover |
