@@ -110,12 +110,15 @@ Vue.use(ElementUI)
 If you are using `babel-plugin-component` for on-demand import, just modify `.babelrc` and specify `styleLibraryName` to the path where your custom theme is located relative to `.babelrc`. Note that `~` is required:
 ```json
 {
-  "plugins": [["component", [
-    {
-      "libraryName": "element-ui",
-      "styleLibraryName": "~theme"
-    }
-  ]]]
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "~theme"
+      }
+    ]
+  ]
 }
 ```
 

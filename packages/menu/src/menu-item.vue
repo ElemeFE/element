@@ -44,8 +44,8 @@
 
     props: {
       index: {
-        type: String,
-        required: true
+        default: null,
+        validator: val => typeof val === 'string' || val === null
       },
       route: [String, Object],
       disabled: Boolean

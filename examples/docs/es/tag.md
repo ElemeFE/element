@@ -47,7 +47,8 @@
       margin-left: 10px;
       height: 32px;
       line-height: 30px;
-      padding: 0 *;
+      padding-top: 0;
+      padding-bottom: 0;
     }
     .input-new-tag {
       width: 90px;
@@ -212,4 +213,5 @@ Además del tamaño predeterminado, el componente Tag proporciona tres tamaños 
 ### Eventos
 | Nombre | Descripción                          | Parametros |
 | ------ | ------------------------------------ | ---------- |
+| click  | se disoara cuando el Tag es clic     | —          |
 | close  | se disoara cuando el Tag es removido | —          |

@@ -228,6 +228,7 @@ Selecting a range of values is supported.
 ## Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | binding value | number | — | 0 |
 | min | minimum value | number | — | 0 |
 | max | maximum value | number | — | 100 |
 | disabled | whether Slider is disabled | boolean | — | false |

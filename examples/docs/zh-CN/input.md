@@ -17,6 +17,7 @@
         input8: '',
         input9: '',
         input10: '',
+        input11: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -157,7 +158,8 @@
   .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
-      padding: 7px *;
+      padding-top: 7px;
+      padding-bottom: 7px;
 
       .name {
         text-overflow: ellipsis;
@@ -183,6 +185,14 @@
 ## Input 输入框
 
 通过鼠标或键盘输入字符
+
+:::warning
+Input 为受控组件，它**总会显示 Vue 绑定值**。
+
+通常情况下，应当处理 `input` 事件，并更新组件的绑定值（或使用`v-model`）。否则，输入框内显示的值将不会改变。
+
+不支持 `v-model` 修饰符。
+:::
 
 ### 基础用法
 
@@ -241,6 +251,25 @@ export default {
     data() {
       return {
         input10: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 密码框
+
+:::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
+
+```html
+<el-input placeholder="请输入密码" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
       }
     }
   }
@@ -799,11 +828,12 @@ export default {
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type         | 类型   | string  | text，textarea 和其他 [原生 input 的 type 值](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-| value         | 绑定值           | string / number  | — | — |
+| value / v-model | 绑定值           | string / number  | — | — |
 | maxlength     | 原生属性，最大输入长度      | number          |  —  | — |
 | minlength     | 原生属性，最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
 | clearable     | 是否可清空        | boolean         | — | false |
+| show-password | 是否显示切换密码图标| boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
@@ -867,6 +897,7 @@ export default {
 | suffix-icon | 输入框尾部图标 | string | — | — |
 | hide-loading | 是否隐藏远程加载时的加载图标 | boolean | — | false |
 | popper-append-to-body | 是否将下拉列表插入至 body 元素。在下拉列表的定位出现问题时，可将该属性设置为 false | boolean | - | true |
+| highlight-first-item | 是否默认突出显示远程搜索建议中的第一项 | boolean | — | false |
 
 ### Autocomplete Slots
 | name | 说明 |

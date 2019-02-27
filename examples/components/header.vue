@@ -10,7 +10,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    line-height: @height;
+    line-height: 80px;
     z-index: 100;
     position: relative;
 
@@ -367,7 +367,8 @@
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
-  import { version } from 'main/index.js';
+  import Element from 'main/index.js';
+  const { version } = Element;
 
   export default {
     data() {
@@ -380,7 +381,8 @@
         langs: {
           'zh-CN': '中文',
           'en-US': 'English',
-          'es': 'Español'
+          'es': 'Español',
+          'fr-FR': 'Français'
         }
       };
     },

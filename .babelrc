@@ -1,8 +1,32 @@
 {
-  "presets": [["es2015", { "loose": true }]],
+  "presets": [
+    [
+      "env",
+      {
+        "loose": true,
+        "modules": false,
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+        }
+      }
+    ],
+    "stage-2"
+  ],
   "plugins": ["transform-vue-jsx"],
   "env": {
     "utils": {
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true,
+            "modules": "commonjs",
+            "targets": {
+              "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+            }
+          }
+        ],
+      ],
       "plugins": [
         ["module-resolver", {
           "root": ["element-ui"],
@@ -11,6 +35,9 @@
           }
         }]
       ]
+    },
+    "test": {
+      "plugins": ["istanbul"]
     }
   }
 }

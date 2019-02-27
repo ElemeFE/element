@@ -1,5 +1,5 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { getStyle, hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
+import { getStyle, hasClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
@@ -101,42 +101,6 @@ export default {
         </tbody>
       </table>
     );
-  },
-
-  watch: {
-    'store.states.hoverRow'(newVal, oldVal) {
-      if (!this.store.states.isComplex) return;
-      const el = this.$el;
-      if (!el) return;
-      const tr = el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const oldRow = rows[oldVal];
-      const newRow = rows[newVal];
-      if (oldRow) {
-        removeClass(oldRow, 'hover-row');
-      }
-      if (newRow) {
-        addClass(newRow, 'hover-row');
-      }
-    },
-    'store.states.currentRow'(newVal, oldVal) {
-      if (!this.highlight) return;
-      const el = this.$el;
-      if (!el) return;
-      const data = this.store.states.data;
-      const tr = el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const oldRow = rows[data.indexOf(oldVal)];
-      const newRow = rows[data.indexOf(newVal)];
-      if (oldRow) {
-        removeClass(oldRow, 'current-row');
-      } else {
-        [].forEach.call(rows, row => removeClass(row, 'current-row'));
-      }
-      if (newRow) {
-        addClass(newRow, 'current-row');
-      }
-    }
   },
 
   computed: {
@@ -245,6 +209,10 @@ export default {
       const classes = ['el-table__row'];
       if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
         classes.push('current-row');
+      }
+
+      if (rowIndex === this.store.states.hoverRow) {
+        classes.push('hover-row');
       }
 
       if (this.stripe && rowIndex % 2 === 1) {
@@ -381,7 +349,7 @@ export default {
           table.$emit(`cell-${name}`, row, column, cell, event);
         }
       }
-      table.$emit(`row-${name}`, row, event, column);
+      table.$emit(`row-${name}`, row, column, event);
     },
 
     handleExpandClick(row, e) {

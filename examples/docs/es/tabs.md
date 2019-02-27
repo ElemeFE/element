@@ -368,16 +368,16 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 :::
 
 ### Atributos de Pestañas
-| Atributo     | Descripción                          | Tipo    | Valores aceptados     | Por defecto                 |
-| ------------ | ------------------------------------ | ------- | --------------------- | --------------------------- |
-| type         | tipo de Pestaña                      | string  | card/border-card      | —                           |
-| closable     | si la Pestaña es cerrable            | boolean | —                     | false                       |
-| addable      | si la Pestaña es añadible            | boolean | —                     | false                       |
-| editable     | si la Pestaña es añadible y cerrable | boolean | —                     | false                       |
-| value        | nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
-| tab-position | posición de tabulación               | string  | top/right/bottom/left | top                         |
-| stretch      | si el ancho del tab se ajusta automáticamente a su contenedor | boolean | - | false |
-| before-leave | función `hook` antes de cambiar de pestaña. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se evitará el cambio. | Function(activeName, oldActiveName) | — | — |
+| Atributo       | Descripción                          | Tipo    | Valores aceptados     | Por defecto                 |
+| -------------- | ------------------------------------ | ------- | --------------------- | --------------------------- |
+| value / v-model | valor enlazado, nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
+| type           | tipo de Pestaña                      | string  | card/border-card      | —                           |
+| closable       | si la Pestaña es cerrable            | boolean | —                     | false                       |
+| addable        | si la Pestaña es añadible            | boolean | —                     | false                       |
+| editable       | si la Pestaña es añadible y cerrable | boolean | —                     | false                       |
+| tab-position   | posición de tabulación               | string  | top/right/bottom/left | top                         |
+| stretch        | si el ancho del tab se ajusta automáticamente a su contenedor | boolean | - | false |
+| before-leave   | función `hook` antes de cambiar de pestaña. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se evitará el cambio. | Function(activeName, oldActiveName)  | — | — |
 
 ### Eventos de Pestañas
 | Nombre de Evento | Descripción                              | Parámetros                    |

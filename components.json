@@ -67,5 +67,7 @@
   "header": "./packages/header/index.js",
   "aside": "./packages/aside/index.js",
   "main": "./packages/main/index.js",
-  "footer": "./packages/footer/index.js"
+  "footer": "./packages/footer/index.js",
+  "timeline": "./packages/timeline/index.js",
+  "timeline-item": "./packages/timeline-item/index.js"
 }

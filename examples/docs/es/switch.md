@@ -142,6 +142,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 | Atributo            | Descripción                              | Tipo                      | Valores aceptados | Por defecto |
 | ------------------- | ---------------------------------------- | ------------------------- | ----------------- | ----------- |
+| value / v-model      | valor enlazado                           | boolean / string / number | —                 | —           |
 | disabled            | si Switch esta deshabilitado             | boolean                   | —                 | false       |
 | width               | ancho del componente Switch              | number                    | —                 | 40          |
 | active-icon-class   | nombre de la clase del icono mostrado en el estado `on`, sobreescribe `active-text` | string                    | —                 | —           |

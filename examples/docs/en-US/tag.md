@@ -47,7 +47,8 @@
       margin-left: 10px;
       height: 32px;
       line-height: 30px;
-      padding: 0 *;
+      padding-top: 0;
+      padding-bottom: 0;
     }
     .input-new-tag {
       width: 90px;
@@ -212,4 +213,5 @@ Besides default size, Tag component provides three additional sizes for you to c
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
+| click | triggers when Tag is clicked | — |
 | close | triggers when Tag is removed | — |

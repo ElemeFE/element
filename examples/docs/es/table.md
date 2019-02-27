@@ -1540,7 +1540,7 @@ Se puede personalizar el encabezado de la tabla para que se pueda adaptar aún m
 ```html
 <template>
   <el-table
-    :data="tableData7.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
     <el-table-column
       label="Date"
@@ -2099,9 +2099,9 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | cell-mouse-leave   | se dispara cuando se desplaza fuera de una celda | row, column, cell, event          |
 | cell-click         | se dispara cuando se hace clic en una celda | row, column, cell, event          |
 | cell-dblclick      | se dispara cuando se hace doble clic en una celda | row, column, cell, event          |
-| row-click          | se dispara cuando se hace clic en una fila | row, event, column                |
-| row-contextmenu    | se dispara cuando el usuario hace clic derecho en una fila | row, event                        |
-| row-dblclick       | se dispara cuando se hace doble clic en una fila | row, event                        |
+| row-click          | se dispara cuando se hace clic en una fila | row, column, event                |
+| row-contextmenu    | se dispara cuando el usuario hace clic derecho en una fila | row, column, event                        |
+| row-dblclick       | se dispara cuando se hace doble clic en una fila | row, column, event                        |
 | header-click       | se dispara cuando se hace click en una cabecera de columna | column, event                     |
 | header-contextmenu | se dispara cuando el usuario hace clic derecho en una cabecera de columna | column, event                     |
 | sort-change        | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order }           |
