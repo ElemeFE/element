@@ -4,12 +4,16 @@
     :class="[blockClass, { 'hover': hovering }]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false">
-    <slot name="source"></slot>
+    <div class="source">
+      <slot name="source"></slot>
+    </div>
     <div class="meta" ref="meta">
       <div class="description" v-if="$slots.default">
         <slot></slot>
       </div>
-      <slot name="highlight"></slot>
+      <div class="highlight">
+        <slot name="highlight"></slot>
+      </div>
     </div>
     <div
       class="demo-block-control"
@@ -177,25 +181,25 @@
 </style>
 
 <script type="text/babel">
+  import highlight from 'highlight.js';
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
+  import { stripScript, stripStyle, stripTemplate } from '../util';
   const { version } = Element;
 
   export default {
     data() {
       return {
+        jsfiddle: {
+          script: '',
+          html: '',
+          style: ''
+        },
         hovering: false,
         isExpanded: false,
         fixedControl: false,
         scrollParent: null
       };
-    },
-
-    props: {
-      jsfiddle: Object,
-      default() {
-        return {};
-      }
     },
 
     methods: {
@@ -300,6 +304,15 @@
     },
 
     mounted() {
+      const code = this.$el.querySelector('pre code.html').innerText;
+      if (code) {
+        this.jsfiddle.html = stripTemplate(code);
+        this.jsfiddle.script = stripScript(code);
+        this.jsfiddle.style = stripStyle(code);
+      }
+      // https://highlightjs.org/usage/
+      highlight.initHighlightingOnLoad();
+
       this.$nextTick(() => {
         let highlight = this.$el.getElementsByClassName('highlight')[0];
         if (this.$el.getElementsByClassName('description').length === 0) {

@@ -4,7 +4,7 @@ module.exports = md => {
   md.renderer.rules.fence = (tokens, idx, options, env, self) => {
     const token = tokens[idx];
     if (token.info === 'html') {
-      return `<div class="source" slot="source" v-pre>${md.utils.escapeHtml(token.content)}</div>`;
+      return `<template slot="highlight"><pre v-pre><code class="html">${md.utils.escapeHtml(token.content)}</code></pre></template>`;
     }
     return defaultRender(tokens, idx, options, env, self);
   };

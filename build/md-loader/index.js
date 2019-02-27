@@ -17,13 +17,13 @@ module.exports = function(source) {
   let componenetsString = '';
   let styleSheets = ''; // md 提取的样式
   let id = 0; // demo 的 id
-  let output = ''; // 输出的内容
+  let output = []; // 输出的内容
   let start = 0; // 字符串开始位置
 
   let commentStart = content.indexOf(startTag);
   let commentEnd = content.indexOf(endTag, commentStart + startTagLen);
   while (commentStart !== -1 && commentEnd !== -1) {
-    output += content.slice(start, commentStart);
+    output.push(content.slice(start, commentStart));
 
     const commentContent = content.slice(commentStart + startTagLen, commentEnd);
     const html = stripTemplate(commentContent);
@@ -32,7 +32,7 @@ module.exports = function(source) {
     styleSheets += style;
     let demoComponentContent = genInlineComponentText(html, script);
     const demoComponentName = `element-demo${id}`;
-    output += `<${demoComponentName} />`;
+    output.push(`<${demoComponentName} slot="source" />`);
     componenetsString += `${JSON.stringify(demoComponentName)}: ${demoComponentContent},`;
 
     // 重新计算下一次的位置
@@ -42,7 +42,7 @@ module.exports = function(source) {
     commentEnd = content.indexOf(endTag, commentStart + startTagLen);
   }
 
-  output += content.slice(start);
+  output.push(content.slice(start));
   styleSheets = styleSheets.trim();
   if (styleSheets) {
     styleSheets = `<style>${styleSheets}</style>`;
@@ -50,7 +50,7 @@ module.exports = function(source) {
   return `
     <template>
       <section class="content element-doc">
-        ${output}
+        ${output.join('')}
       </section>
     </template>
     <script>

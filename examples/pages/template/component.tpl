@@ -107,6 +107,8 @@
       position: fixed;
       right: 100px;
       bottom: 150px;
+      width: 40px;
+      height: 40px;
       size: 40px;
       border-radius: 20px;
       cursor: pointer;
