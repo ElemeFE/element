@@ -21,7 +21,6 @@
     <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-```
 
 <style>
   .el-dropdown-link {
@@ -32,7 +31,7 @@
     font-size: 12px;
   }
 </style>
-
+```
 :::
 
 ### 触发对象
@@ -128,7 +127,6 @@
     </el-dropdown>
   </el-col>
 </el-row>
-```
 
 <style>
   .el-dropdown-link {
@@ -145,7 +143,7 @@
     margin-bottom: 20px;
   }
 </style>
-
+```
 :::
 
 ### 菜单隐藏方式

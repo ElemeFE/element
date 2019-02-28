@@ -55,9 +55,15 @@
       height: 100%;
       line-height: 80px;
       background: transparent;
-      @utils-clearfix;
       padding: 0;
       margin: 0;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
     }
 
     .nav-gap {

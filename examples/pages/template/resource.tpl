@@ -30,7 +30,13 @@
     margin: 35px auto 110px;
 
     .container {
-      @utils-clearfix;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
       padding: 0;
       margin: 0 -11px;
       width: auto;

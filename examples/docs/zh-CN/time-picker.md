@@ -147,22 +147,6 @@
 ```
 :::
 
-<script>
-  export default {
-    data() {
-      return {
-        value1: '',
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40),
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        startTime: '',
-        endTime: ''
-      };
-    }
-  }
-</script>
-
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |

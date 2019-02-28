@@ -130,11 +130,18 @@
     width: 1140px;
 
     .container {
-      @utils-clearfix;
       padding: 0;
       margin: 0 -11px;
       width: auto;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
     }
+
 
     li {
       width: 33.33333%;

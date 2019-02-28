@@ -4,7 +4,7 @@ Element fournit un ensemble d'icônes basiques.
 
 ### Usage
 
-Il vous suffit d'assigner le nom de classe `el-icon-iconName` à une balise <i>.
+Il vous suffit d'assigner le nom de classe `el-icon-iconName` à une balise `<i>`.
 
 :::demo
 

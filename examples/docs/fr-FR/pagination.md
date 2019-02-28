@@ -143,36 +143,6 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 </script>
 ```
 :::
-<script>
-  import { addClass } from 'element-ui/src/utils/dom';
-  export default {
-    data() {
-      return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
-      };
-    },
-    methods: {
-      handleSizeChange(val) {
-        console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        console.log(`current page: ${val}`);
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let demos = document.querySelectorAll('.source');
-        let firstDemo = demos[0];
-        let lastDemo = demos[demos.length - 1];
-        addClass(firstDemo, 'first');
-        addClass(lastDemo, 'last');
-      });
-    }
-  }
-</script>
 
 ### Attributs
 

@@ -7,6 +7,8 @@ const overWriteFenceRule = require('./fence');
 const config = new Config();
 
 config
+  .options.html(true).end()
+
   .plugin('anchor').use(anchorPlugin, [
     {
       level: 2,

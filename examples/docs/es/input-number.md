@@ -4,7 +4,7 @@ Input de  valores numéricos con un rango personalizable.
 
 ### Uso básico
 
-:::demo Vincule una variable con `v-model` en el elemento <el-input-number> y estará listo.
+:::demo Vincule una variable con `v-model` en el elemento `<el-input-number>` y estará listo.
 
 ```html
 <template>

@@ -1608,7 +1608,7 @@ Configuring rowspan and colspan allows you to merge cells
 ### Custom index
 
 You can customize row index in `type=index` columns.
-:::demo To customize row indices, use `index` attribute on <el-table-column> with `type=index`. If it is assigned to a number, all indices will have an offset of that number. It also accepts a method with each index (starting from `0`) as parameter, and the returned value will be displayed as index.
+:::demo To customize row indices, use `index` attribute on `el-table-column` with `type=index`. If it is assigned to a number, all indices will have an offset of that number. It also accepts a method with each index (starting from `0`) as parameter, and the returned value will be displayed as index.
 
 ```html
 <template>
