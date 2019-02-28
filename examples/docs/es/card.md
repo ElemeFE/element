@@ -1,14 +1,3 @@
-<script>
-  import dateUtil from 'main/utils/date'
-  export default {
-    data() {
-      return {
-        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
-      };
-    }
-  }
-</script>
-
 ## Card
 Muestra información dentro de un contenedor `card`
 
