@@ -1,14 +1,3 @@
-<script>
-  import dateUtil from 'main/utils/date'
-  export default {
-    data() {
-      return {
-        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
-      };
-    }
-  }
-</script>
-
 ## Card
 Integrate information in a card container.
 
