@@ -1,73 +1,73 @@
 .demo-color-box {
-    border-radius: 4px;
-    padding: 20px;
-    margin: 5px 0;
-    height: 74px;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 14px;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 5px 0;
+  height: 74px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 14px;
 
-    & .value {
-      font-size: 12px;
-      opacity: 0.69;
-      line-height: 24px;
-    }
+  & .value {
+    font-size: 12px;
+    opacity: 0.69;
+    line-height: 24px;
   }
-  .demo-color-box-group {
-    .demo-color-box {
-      border-radius: 0;
-      margin: 0;
-    }
-    .demo-color-box:first-child {
-      border-radius: 4px 4px 0 0;
-    }
-    .demo-color-box:last-child {
-      border-radius: 0 0 4px 4px;
-    }
+}
+.demo-color-box-group {
+  .demo-color-box {
+    border-radius: 0;
+    margin: 0;
   }
-  .bg-blue {
-    background-color: #409EFF;
+  .demo-color-box:first-child {
+    border-radius: 4px 4px 0 0;
   }
+  .demo-color-box:last-child {
+    border-radius: 0 0 4px 4px;
+  }
+}
+.bg-blue {
+  background-color: #409eff;
+}
 
-  .bg-success {
-    background-color: #67C23A;
-  }
-  .bg-warning {
-    background-color: #E6A23C;
-  }
-  .bg-danger {
-    background-color: #F56C6C;
-  }
-  .bg-info {
-    background-color: #909399;
-  }
+.bg-success {
+  background-color: #67c23a;
+}
+.bg-warning {
+  background-color: #e6a23c;
+}
+.bg-danger {
+  background-color: #f56c6c;
+}
+.bg-info {
+  background-color: #909399;
+}
 
-  .bg-text-primary {
-    background-color: #303133;
-  }
-  .bg-text-regular {
-    background-color: #606266;
-  }
-  .bg-text-secondary {
-    background-color: #909399;
-  }
-  .bg-text-placeholder {
-    background-color: #c0c4cc;
-  }
+.bg-text-primary {
+  background-color: #303133;
+}
+.bg-text-regular {
+  background-color: #606266;
+}
+.bg-text-secondary {
+  background-color: #909399;
+}
+.bg-text-placeholder {
+  background-color: #c0c4cc;
+}
 
-  .bg-border-base {
-    background-color: #dcdfe6;
-  }
-  .bg-border-light {
-    background-color: #e4e7ed;
-  }
-  .bg-border-lighter {
-    background-color: #ebeef5;
-  }
-  .bg-border-extra-light {
-    background-color: #f2f6fc;
-  }
+.bg-border-base {
+  background-color: #dcdfe6;
+}
+.bg-border-light {
+  background-color: #e4e7ed;
+}
+.bg-border-lighter {
+  background-color: #ebeef5;
+}
+.bg-border-extra-light {
+  background-color: #f2f6fc;
+}
 
-  [class*=" bg-border-"] {
-    color: #303133;
-  }
+[class*=" bg-border-"] {
+  color: #303133;
+}
