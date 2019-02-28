@@ -1,24 +1,3 @@
-<style>
-  .demo-badge.demo-box .el-dropdown {
-    vertical-align: middle;
-  }
-  .demo-badge.demo-box {
-    .share-button {
-      width: 36px;
-      padding: 10px;
-    }
-
-    .mark {
-      margin-top: 8px;
-      line-height: 1;
-      float: right;
-    }
-    
-    .item {
-      margin-right: 40px;
-    }
-  }
-</style>
 ## Badge 标记
 
 出现在按钮、图标旁的数字或状态标记。
