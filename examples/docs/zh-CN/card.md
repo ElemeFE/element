@@ -9,7 +9,8 @@
   }
 </script>
 
-<style scoped>
+<style>
+.demo-block.demo-card {
   .text {
     font-size: 14px;
   }
@@ -38,13 +39,10 @@
     display: block;
   }
 
-  .clearfix {
-    @utils-clearfix;
-  }
-
   .box-card {
     width: 480px;
   }
+}
 </style>
 ## Card 卡片
 将信息聚合在卡片容器中展示。

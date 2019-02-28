@@ -9,44 +9,6 @@
   }
 </script>
 
-<style scoped>
-  .text {
-    font-size: 14px;
-  }
-
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    display: block;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .box-card {
-    width: 480px;
-  }
-</style>
-
 ## Card
 
 Conteneur intégrant des informations.
