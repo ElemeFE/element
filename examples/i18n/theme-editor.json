@@ -1,0 +1,75 @@
+[
+  {
+    "lang": "zh-CN",
+    "display-name": {
+      "border-color": "边框颜色",
+      "font-color": "文字颜色",
+      "background-color": "背景颜色",
+      "font-weight": "文字粗细",
+      "font-size": "文字大小",
+      "font-line-height": "文字行高",
+      "border-radius": "边框圆角",
+      "color": "颜色"
+    },
+    "action": {
+      "theme-editor": "主题编辑器",
+      "no-config": "暂不可编辑，敬请期待",
+      "reset-theme": "重置",
+      "download-theme": "下载"
+    },
+    "category": {
+      "BrandColor": "品牌颜色",
+      "SecondaryColor": "辅助颜色",
+      "FontColor": "文字颜色",
+      "BorderColor": "边框颜色",
+      "BackgroundColor": "背景颜色",
+      "Other": "其他",
+      "Color": "颜色",
+      "Border": "边框",
+      "Font": "文字",
+      "Radius": "边框圆角",
+      "Shadow": "阴影",
+      "FontSize": "文字大小",
+      "FontWeight": "文字粗细",
+      "LineHeight": "文字行高"
+    }
+  },
+  {
+    "lang": "en-US",
+    "display-name": {
+      "border-color": "border color",
+      "font-color": "font color",
+      "background-color": "background color",
+      "font-weight": "font weight",
+      "font-size": "font size",
+      "font-line-height": "font line height",
+      "border-radius": "border radius"
+    },
+    "action": {
+      "theme-editor": "Theme Editor",
+      "no-config": "Please stay tuned",
+      "reset-theme": "Reset",
+      "download-theme": "Download"
+    },
+    "category": {
+      "BrandColor": "Brand Color",
+      "SecondaryColor": "Secondary Color",
+      "FontColor": "Font Color",
+      "BorderColor": "Border Color",
+      "BackgroundColor": "Background Color",
+      "FontSize": "Font Size",
+      "FontWeight": "Font Weight",
+      "LineHeight": "Line Height"
+    }
+  },
+  {
+    "lang": "es",
+    "display-name": {
+    }
+  },
+  {
+    "lang": "fr-FR",
+    "display-name": {
+    }
+  }
+]
