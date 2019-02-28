@@ -89,81 +89,6 @@
   }
 </script>
 
-<style>
-  .demo-color-box {
-    position: relative;
-    border-radius: 4px;
-    padding: 20px;
-    margin: 5px 0;
-    height: 114px;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 14px;
-
-    & .value {
-      font-size: 12px;
-      opacity: 0.69;
-      line-height: 24px;
-    }
-  }
-  .demo-color-box-other {
-    height: 74px;
-    margin: 10px 0!important;
-    border-radius: 4px 4px 4px 4px!important;
-    padding: 15px 20px;
-  }
-  .demo-color-box-group {
-    .demo-color-box {
-      border-radius: 0;
-      margin: 0;
-    }
-    .demo-color-box:first-child {
-      border-radius: 4px 4px 0 0;
-    }
-    .demo-color-box:last-child {
-      border-radius: 0 0 4px 4px;
-    }
-  }
-  .bg-color-sub {
-    width: 100%;
-    height: 40px;
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    border-radius: 0 0 4px 4px;
-  }
-  .bg-blue-sub-item {
-    width: 11.1111111%;
-    height: 100%;
-    display: inline-block;
-  }
-  .bg-blue-sub-item:first-child {
-    border-radius: 0 0 0 4px;
-  }
-  .bg-success-sub-item {
-    width: 50%;
-    height: 100%;
-    display: inline-block;
-  }
-  .bg-success-sub-item:first-child {
-    border-radius: 0 0 0 4px;
-  }
-  .bg-success-sub-item:last-child {
-    border-radius: 0 0 4px 0;
-  }
-  .bg-transparent {
-    border: 1px solid #FCC3C3;
-    color: #303133;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 98 L100 0 L100 1 L1 98' fill='%23FCC3C3' /></svg>");
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-size: 100% 100%, auto;
-  }
-  .demo-color-box-lite {
-    color: #303133;
-  }
-</style>
-
 ## Color 色彩
 
 Element 为了避免视觉传达差异，使用一套特定的调色板来规定颜色，为你所搭建的产品提供一致的外观视觉感受。
@@ -174,22 +99,16 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 
 <el-row :gutter="12">
   <el-col :span="10" :xs="{span: 12}">
-    <div 
-      class="demo-color-box"
-      :style="{ background: primary }"
-    >
-      Brand Color<div class="value">#409EFF</div>
-    <div 
-      class="bg-color-sub"
-      :style="{ background: tintColor(primary, 0.9) }"
-    >
-    <div 
-      class="bg-blue-sub-item" 
-      v-for="(item, key) in Array(8)"
-      :key="key"
-      :style="{ background: tintColor(primary, (key + 1) / 10) }"
-        >
-    </div>
+    <div class="demo-color-box" :style="{ background: primary }">Brand Color
+      <div class="value">#409EFF</div>
+      <div class="bg-color-sub" :style="{ background: tintColor(primary, 0.9) }">
+        <div
+          class="bg-blue-sub-item"
+          v-for="(item, key) in Array(8)"
+          :key="key"
+          :style="{ background: tintColor(primary, (key + 1) / 10) }"
+        ></div>
+      </div>
     </div>
   </el-col>
 </el-row>
@@ -318,6 +237,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
       :style="{ background: white, color: '#303133', border: '1px solid #eee' }"
       >基础白色<div class="value">{{white}}</div></div>
       <div class="demo-color-box demo-color-box-other bg-transparent">透明<div class="value">Transparent</div>
+      </div>
     </div>
   </el-col>
 </el-row>

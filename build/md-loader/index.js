@@ -38,6 +38,23 @@ module.exports = function(source) {
     commentEnd = content.indexOf(endTag, commentStart + startTagLen);
   }
 
+  // 仅允许在 demo 不存在时，才可以在 Markdown 中写 script 标签
+  // todo: 优化这段逻辑
+  let pageScript = '';
+  if (componenetsString) {
+    pageScript = `<script>
+      export default {
+        name: 'component-doc',
+        components: {
+          ${componenetsString}
+        }
+      }
+    </script>`;
+  } else if (content.indexOf('<script>') === 0) { // 硬编码，有待改善
+    start = content.indexOf('</script>') + '</script>'.length;
+    pageScript = content.slice(0, start);
+  }
+
   output.push(content.slice(start));
   return `
     <template>
@@ -45,13 +62,6 @@ module.exports = function(source) {
         ${output.join('')}
       </section>
     </template>
-    <script>
-      export default {
-        name: 'component-doc',
-        components: {
-          ${componenetsString}
-        }
-      }
-    </script>
+    ${pageScript}
   `;
 };
