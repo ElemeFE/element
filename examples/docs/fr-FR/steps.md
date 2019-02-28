@@ -1,19 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        active: 0
-      };
-    },
-
-    methods: {
-      next() {
-        if (this.active++ > 2) this.active = 0;
-      }
-    }
-  }
-</script>
-
 ## Steps
 
 Permet de guider l'utilisateur dans l'accomplissement de toutes les taches d'un processus. Les étapes peuvent être créées de manière à refléter le scénario en question et leur nombre ne peut être inférieur à 2.
