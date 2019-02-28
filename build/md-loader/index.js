@@ -1,6 +1,5 @@
 const {
   stripScript,
-  stripStyle,
   stripTemplate,
   genInlineComponentText
 } = require('./util');
@@ -15,7 +14,6 @@ module.exports = function(source) {
   const endTagLen = endTag.length;
 
   let componenetsString = '';
-  let styleSheets = ''; // md 提取的样式
   let id = 0; // demo 的 id
   let output = []; // 输出的内容
   let start = 0; // 字符串开始位置
@@ -28,8 +26,6 @@ module.exports = function(source) {
     const commentContent = content.slice(commentStart + startTagLen, commentEnd);
     const html = stripTemplate(commentContent);
     const script = stripScript(commentContent);
-    const style = stripStyle(commentContent);
-    styleSheets += style;
     let demoComponentContent = genInlineComponentText(html, script);
     const demoComponentName = `element-demo${id}`;
     output.push(`<${demoComponentName} slot="source" />`);
@@ -43,10 +39,6 @@ module.exports = function(source) {
   }
 
   output.push(content.slice(start));
-  styleSheets = styleSheets.trim();
-  if (styleSheets) {
-    styleSheets = `<style>${styleSheets}</style>`;
-  }
   return `
     <template>
       <section class="content element-doc">
@@ -61,6 +53,5 @@ module.exports = function(source) {
         }
       }
     </script>
-    ${styleSheets}
   `;
 };
