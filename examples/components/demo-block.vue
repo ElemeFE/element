@@ -302,14 +302,26 @@
       }
     },
 
-    mounted() {
-      const code = this.$el.querySelector('pre code.html').innerText;
-      if (code) {
-        this.jsfiddle.html = stripTemplate(code);
-        this.jsfiddle.script = stripScript(code);
-        this.jsfiddle.style = stripStyle(code);
+    created() {
+      const highlight = this.$slots.highlight;
+      if (highlight && highlight[0]) {
+        let code = '';
+        let cur = highlight[0];
+        if (cur.tag === 'pre' && (cur.children && cur.children[0])) {
+          cur = cur.children[0];
+          if (cur.tag === 'code') {
+            code = cur.children[0].text;
+          }
+        }
+        if (code) {
+          this.jsfiddle.html = stripTemplate(code);
+          this.jsfiddle.script = stripScript(code);
+          this.jsfiddle.style = stripStyle(code);
+        }
       }
+    },
 
+    mounted() {
       this.$nextTick(() => {
         let highlight = this.$el.getElementsByClassName('highlight')[0];
         if (this.$el.getElementsByClassName('description').length === 0) {

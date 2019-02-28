@@ -35,7 +35,7 @@ router.afterEach(route => {
   setTimeout(() => {
     var blocks = document.querySelectorAll('pre code:not(.hljs)');
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
-  }, 100);
+  }, 30);
   const data = title[route.meta.lang];
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
