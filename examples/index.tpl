@@ -18,7 +18,6 @@
     <% if (process.env.NODE_ENV === 'production') { %>
       <script src="//shadow.elemecdn.com/npm/vue@2.5.16/dist/vue.runtime.min.js"></script>
       <script src="//shadow.elemecdn.com/npm/vue-router@3.0.1/dist/vue-router.min.js"></script>
-      <script src="//shadow.elemecdn.com/npm/highlight.js@9.3.0/lib/highlight.js"></script>
     <% } %>
   </body>
   <% if (process.env.NODE_ENV === 'production') { %><script>
