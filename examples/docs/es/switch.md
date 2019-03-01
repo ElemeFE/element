@@ -1,27 +1,3 @@
-<style>
-  .demo-box.demo-switch {
-    .el-switch {
-      margin: 20px 20px 20px 0;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: true,
-        value2: true,
-        value3: true,
-        value4: true,
-        value5: '100',
-        value6: true,
-        value7: false
-      }
-    }
-  };
-</script>
-
 ## Switch
 
 Switch es utilizdo para realizar cambios entre dos estados opuestos.

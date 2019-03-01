@@ -1,0 +1,48 @@
+.demo-tree {
+  .leaf {
+    width: 20px;
+    background: #ddd;
+  }
+
+  .folder {
+    width: 20px;
+    background: #888;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  .filter-tree {
+    margin-top: 20px;
+  }
+
+  .custom-tree-container {
+    display: flex;
+    margin: -24px;
+  }
+
+  .block {
+    flex: 1;
+    padding: 8px 24px 24px;
+
+    &:first-child {
+      border-right: solid 1px #eff2f6;
+    }
+
+    > p {
+      text-align: center;
+      margin: 0;
+      line-height: 4;
+    }
+  }
+
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+  }
+}

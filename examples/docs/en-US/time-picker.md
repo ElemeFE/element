@@ -1,11 +1,3 @@
-<style>
-  .demo-box {
-    .el-date-editor + .el-date-editor {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## TimePicker
 
 Use Time Picker for time input.
@@ -153,22 +145,6 @@ Can pick an arbitrary time range.
 </script>
 ```
 :::
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: '',
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40),
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        startTime: '',
-        endTime: ''
-      };
-    }
-  }
-</script>
 
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

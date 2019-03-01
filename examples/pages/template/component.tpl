@@ -107,6 +107,8 @@
       position: fixed;
       right: 100px;
       bottom: 150px;
+      width: 40px;
+      height: 40px;
       size: 40px;
       border-radius: 20px;
       cursor: pointer;
@@ -141,12 +143,13 @@
       }
     }
     .page-container.page-component {
-      transition:width 0.3s ease;
+      transition:all 0.3s ease;
       &.theme-config {
         width: 98%;
-      }
-      .page-component__nav {
-        padding-left: 2%;
+        .page-component__nav {
+          animation-delay: 1s;
+          padding-left: 2%;
+        }
       }
     }
   }

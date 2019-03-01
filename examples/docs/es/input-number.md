@@ -1,41 +1,10 @@
-<script>
-  export default {
-    data() {
-      return {
-        num1: 1,
-        num2: 1,
-        num3: 5,
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1,
-        num8: 1,
-        num9: 1
-      }
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## InputNumber
 
 Input de  valores numéricos con un rango personalizable.
 
 ### Uso básico
 
-:::demo Vincule una variable con `v-model` en el elemento <el-input-number> y estará listo.
+:::demo Vincule una variable con `v-model` en el elemento `<el-input-number>` y estará listo.
 
 ```html
 <template>

@@ -1,23 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        radio: '1',
-        radio1: 'selected and disabled',
-        radio2: 3,
-        radio3: 'New York',
-        radio4: 'New York',
-        radio5: 'New York',
-        radio6: 'New York',
-        radio7: '1',
-        radio8: '1',
-        radio9: '1',
-        radio10: '1'
-      };
-    }
-  };
-</script>
-
 ## Radio
 Selección única entre múltiples opciones.
 

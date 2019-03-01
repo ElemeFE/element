@@ -114,27 +114,6 @@ Use a red dot to mark content that needs to be noticed.
 ```
 :::
 
-<style scoped>
-  .share-button {
-    width: 36px;
-    padding: 10px;
-  }
-
-  .mark {
-    margin-top: 8px;
-    line-height: 1;
-    float: right;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .item {
-    margin-right: 40px;
-  }
-</style>
-
 ### Attributes
 | Attribute     | Description     | Type            | Accepted Values       | Default |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
