@@ -52,7 +52,7 @@
 - MessageBox
   - 修复 TS 定义 (by @NateScarlet in #14278)
 - ScrollBar
-  - 修复点击鼠标中键导致拖动的问题 (by @xifeiwu in #14196)
+  - 修复点击鼠标右键导致拖动的问题 (by @xifeiwu in #14196)
 - Switch
   - 添加 `validate-event` 属性，设置改变 Switch 状态时是否触发表单的校验 (by @hetech in #14426)
 - Table
