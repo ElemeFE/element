@@ -41,9 +41,6 @@
       ]
     }
   ],
-  "engines": {
-    "node": "8"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:ElemeFE/element.git"
