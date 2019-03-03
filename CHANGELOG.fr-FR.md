@@ -4,80 +4,80 @@
 
 *2019-03-03*
 
-#### Bug fixes
+#### Corrections de bugs
 
-- **Don't specify node version** (by @iamkun in #14546)
-- Fix doc directory in `deloy-faas.sh` (by @ziyoung in #14553)
-- Fix date style issue in changelog for 2.6.0 (by @island205 in #14547)
-- Fix doc typo (by @wack6 in #14552)
+- **Ne pas spécifier la version de node** (par @iamkun dans #14546)
+- Correction du répertoire doc dans `deloy-faas.sh` (par @ziyoung dans #14553)
+- Correction d'un problème de style de date dans le changelog de la 2.6.0 (par @island205 dans #14547)
+- Correction d'une typo dans la doc (par @wack6 dans #14552)
 
 ### 2.6.0
 
 *2019-03-01*
 
-#### New features
+#### Nouvelles fonctionnalités
 - Timeline
-  - Add timeline component (by @jikkai in #14248)
+  - Ajout d'un composant timeline (par @jikkai dans #14248)
 - DropdownItem
-  - Add icon prop to `el-dropdown-item` (by @gabrielboliveira in #14088)
+  - Ajout de la propriété `icon` à `el-dropdown-item` (par @gabrielboliveira dans #14088)
 - Input
-  - Add show-password props (by @phshy0607 in #13966)
+  - Ajout de propriétés pour afficher les mots de passe (par @phshy0607 dans #13966)
 - Select
-  - Add slot `empty` (by @elfman in #13785)
+  - Ajout du slot `empty` (par @elfman au #13785)
 - Autocomplete
-  - Add highlight-first-item prop (by @YamenSharaf in #14269)
+  - Ajout de la propriété `highlight-first-item` (par @YamenSharaf dans #14269)
 - I18n
-  - Created Armenian locale (by @hamletbarsamyan in #14214)
+  - Création de la locale Arménienne (par @hamletbarsamyan dans #14214)
 - Docs
-  - French translation (by @smalesys in #12153, #14418, #14434)
+  - Traduction française (par @smalesys dans #12153, #14418, #14434)
 
-#### Optimization
+#### Optimisation
 - Alert
-  - Update alert description default slot class (by @iamkun in #14488)
+  - Mise à jour de la classe du slot par défaut de la description de Alert (par @iamkun dans #14488)
 - Input
-  - Update input password (by @iamkun in #14480)
+  - Mise à jour de l'input de type password (par @iamkun dans #14480)
 - InputNumber
-  - Remove unnecessary parseFloat (by @JuniorTour in #14172)
+  - Retrait d'un parseFloat inutile (par @JuniorTour au #14172)
 - Menu
-  - Add support for `el-menu-item` without index (by @georgyfarniev in #13298)
+  - Ajout du support de `el-menu-item` sans index (par @georgyfarniev dans #13298)
 - Table
-  - Remove some html DOM operations (by @elfman in #13643)
+  - Suppression de certaines opérations du DOM (par @elfman dans #13643)
 - Upload
-  - Optimize code (by @elfman in #13973)
+  - Optimisation du code (par @elfman dans #13973)
 - Popup
-  - Optimize code (by @KAionro in #14413)
+  - Optimisation du code (par @KAionro dans #14413)
 - Docs
-  - Add more detail about how to run play mode for contribution (by @island205 in #14355)
-  - Warn input as a controlled component. (by @wacky6 in #14463)
-  - Update Table doc (by @luguokong in #14329)
-  - Update input doc (by @iamkun in #14437)
-  - Update custom-theme docs (by @wangguohao in #14297)
-  - Make the icon style change when hover on it (by @tuxinghuan in #14295)
+  - Ajout de détails sur la façon d'exécuter le mode play pour les contributeurs (par @island205 dans #14355)
+  - Ajout d'un avertissement concernant Input (par @wacky6 dans #14463)
+  - Mise à jour de la doc de Table (par @luguokong dans #14329)
+  - Mise à jour de la doc d'Input (par @iamkun dans #14437)
+  - Mise à jour de la doc sur le thème (par @wangguohaohao dans #14297)
+  - Le style de l'icône change lorsque vous passez dessus (par @tuxinghuan dans #14295)
 - Build
-  - Minimizing css and js for Element doc site (by @iamkun in #14430)
-  - Speeding up webpack (by @hetech in #14484)
-  - Use cli to select release version (by @hetech in #14354)
-- Install stale for issue handling (by @island205 in #14392)
+  - Minification du CSS et du JS pour le site d'Element (par @iamkun dans #14430)
+  - Accélération de webpack (par @hetech dans #14484)
+  - Utilisation du cli pour sélectionner la version de publication (par @hetech dans #14354)
+- Installation de stale pour la gestion des issues (par @island205 dans #14392)
 
-#### Bug fixes
+#### Corrections de bugs
 - Menu
-  - Fix subMenu focus bug when switch browser tab (by @liupl in #13976)
+  - Correction d'un bug de focus des sous-menus lors du changement d'onglet du navigateur (par @liupl dans #13976)
 - MessageBox
-  - Fix type definition (by @NateScarlet in #14278)
+  - Correction de la définition du type (par @NateScarlet dans #14278)
 - ScrollBar
-  - Prevent right button click on thumb (by @xifeiwu in #14196)
+  - Empêche le clic droit sur le bouton du pouce (par @xifeiwu dans #14196)
 - Switch
-  - Trigger form validation if value changes (by @hetech in #14426)
+  - Déclenchement de la validation du formulaire si la valeur change (par @hetech dans #14426)
 - Table
-  - Make toggleAllSelection method an instance method (by @letanure in #14075)
+  - La méthode toggleAllSelection est maintenant une méthode d'instance (par @letanure dans #14075)
 - Tabs & Dropdown
-  - Fix style (by @hetech in #14452)
+  - Correction du style (par @hetech dans #14452)
 - Tree
-  - Empty-text tips are different from tables (by @ColinCll in #14331)
+  - Les tips sont différents des tableaux (par @ColinCll dans #14331)
 - Docs
-  - Fix  DatetimePicker format doc error (by @iamkun in #14290)
-  - Spelling issue in datepicker documentation (by @helmut in #14481)
-  - Fix pagination doc style (by @liuchuzhang in #14451)
+  - Correction d'une erreur de doc du DatetimePicker (par @iamkun dans #14290)
+  - Problème d'orthographe dans la documentation du DatePicker (par @helmut dans #14481)
+  - Correction du style de la doc de Pagination(par @liuchuzhang dans #14451)
 
 ### 2.5.4
 
