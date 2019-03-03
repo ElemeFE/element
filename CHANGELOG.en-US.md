@@ -442,7 +442,7 @@
 - Fixed closing the DatePicker panel without changing the value incorrectly triggering the `change` event, #11017
 - Fixed keyboard navigation not working properly when Select has grouped options, #11058
 - Added `prefix` named slot for Select, #11063
-- Added 'clearValidate` method for FormItem, #11076
+- Added `clearValidate` method for FormItem, #11076
 - Added `checkOnClickNode` attribute for Tree, #11111
 
 ### 2.3.7
