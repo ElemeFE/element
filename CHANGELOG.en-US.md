@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.6.1
+
+*2019-03-03*
+
+#### Bug fixes
+
+- **Don't specify node version** (by @iamkun in #14546)
+- Fix doc directory in `deloy-faas.sh` (by @ziyoung in #14553)
+- Fix date style issue in changelog for 2.6.0 (by @island205 in #14547)
+- Fix doc typo (by @wack6 in #14552)
+
 ### 2.6.0
 
 *2019-03-01*
