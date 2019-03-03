@@ -1,13 +1,13 @@
 ## Input
 
-Le champs d'input de base.
+Le champ d'input de base.
 
 :::warning
-Input is a controlled component, it **always shows Vue binding value**.
+Input est un composant controllé, il **affiche toujours la valeur liée de Vue**.
 
-Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+En règle générale, l'évènement `input` devrait être géré. Son handler devrait mettre à jour la valeur du composant (ou utilisez `v-model`). Dans le cas contraire, la valeur du champ ne sera pas modifiée.
 
-Do not support `v-model` modifiers.
+Les modificateurs de `v-model` ne sont pas supportés.
 :::
 
 ### Usage
@@ -75,12 +75,12 @@ export default {
 ```
 :::
 
-### Password box
+### Champ de mot de passe
 
-:::demo Make a toggleable password Input with the `show-password` attribute.
+:::demo Créez un champ de mot de passe avec icône de visualisation grâce à l'attribut `show-password`.
 
 ```html
-<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+<el-input placeholder="Entrez votre mot de passe" v-model="input11" show-password></el-input>
 
 <script>
   export default {
@@ -530,8 +530,8 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | minlength| Identique à `minlength` dans l'input natif. | number | — | — |
 | placeholder| Placeholder de l' Input. | string | — | — |
 | clearable | Si le bouton de reset apparaît. | boolean | — | false |
-| show-password | whether to show toggleable password input| boolean         | — | false |
-| disabled | Si le champs est désactivé. | boolean | — | false |
+| show-password | Si le champ doit un champ de mot de passe avec bouton de visualisation. | boolean         | — | false |
+| disabled | Si le champ est désactivé. | boolean | — | false |
 | size | Taille du champ, marche quand `type` n'est pas 'textarea'. | string | medium / small / mini | — |
 | prefix-icon   | Classe de l'icône de préfixe.  | string          | — | — |
 | suffix-icon   | Classe de l'iĉone de suffixe.  | string          | — | — |
@@ -567,15 +567,15 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | blur | Se déclenche quand Input perds le focus. | (event: Event) |
 | focus | Se déclenche quand Input a le focus. | (event: Event) |
 | change | Se déclenche quand la valeur change. | (value: string \ number) |
-| clear | Se déclenche quand le champs est effacé par le bouton de reset. | — |
+| clear | Se déclenche quand le champ est effacé par le bouton de reset. | — |
 
 ### Méthodes de l'Input
 
 | Méthode | Description | Paramètres |
 |------|--------|-------|
-| focus | Met le focus sur le champs. | — |
-| blur | Retire le focus de le champs. | — |
-| select | Sélectionne le texte du champs. | — |
+| focus | Met le focus sur le champ. | — |
+| blur | Retire le focus de le champ. | — |
+| select | Sélectionne le texte du champ. | — |
 
 ### Attributs de l'autocomplétion
 
@@ -607,8 +607,8 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 |------|--------|
 | prefix | Contenu du préfixe. |
 | suffix | Contenu du suffixe. |
-| prepend | Contenu à ajouter avant le champs. |
-| append | Contenu à ajouter après le champs. |
+| prepend | Contenu à ajouter avant le champ. |
+| append | Contenu à ajouter après le champ. |
 
 ### Template personnalisé pour l'autocomplétion
 
