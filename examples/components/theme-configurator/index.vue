@@ -143,6 +143,7 @@ export default {
         getVars()
           .then((res) => {
             defaultConfig = res;
+            ga('send', 'event', 'ThemeConfigurator', 'Init');
           })
           .catch((err) => {
             this.onError(err);
