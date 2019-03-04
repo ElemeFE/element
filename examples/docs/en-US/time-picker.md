@@ -150,8 +150,8 @@ Can pick an arbitrary time range.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | value / v-model | binding value | date(TimePicker) / string(TimeSelect) | - | - |
-| readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | — | false |
+| readonly | whether TimePicker is read only | boolean | — | false |
+| disabled | whether TimePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | whether to show clear button | boolean | — | true |
 | size | size of Input | string | medium / small / mini | — |

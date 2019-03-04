@@ -37,7 +37,7 @@ Upload files by clicking or drag-and-drop
         this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
       },
       beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+        return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
       }
     }
   }

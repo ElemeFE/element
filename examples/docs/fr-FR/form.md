@@ -381,7 +381,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 ```
 :::
 
-### DAjouter ou supprimer des champs dynamiquement
+### Ajouter ou supprimer des champs dynamiquement
 
 :::demo En plus de pouvoir passer toutes les règles de validation en une seule fois au formulaire, vous pouvez aussi ajouter ou supprimer des règles sur un seul champ de manière dynamique.
 ```html
