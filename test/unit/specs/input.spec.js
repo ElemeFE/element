@@ -1,4 +1,4 @@
-import { createVue, destroyVM, wait, waitImmediate } from '../util';
+import { createVue, destroyVM, triggerEvent, wait, waitImmediate } from '../util';
 
 describe('Input', () => {
   let vm;
@@ -6,7 +6,7 @@ describe('Input', () => {
     destroyVM(vm);
   });
 
-  it('create', () => {
+  it('create', async() => {
     vm = createVue({
       template: `
         <el-input
@@ -14,11 +14,12 @@ describe('Input', () => {
           :maxlength="5"
           placeholder="请输入内容"
           @focus="handleFocus"
-          value="input">
+          :value="input">
         </el-input>
       `,
       data() {
         return {
+          input: 'input',
           inputFocus: false
         };
       },
@@ -35,6 +36,18 @@ describe('Input', () => {
     expect(inputElm.value).to.equal('input');
     expect(inputElm.getAttribute('minlength')).to.equal('3');
     expect(inputElm.getAttribute('maxlength')).to.equal('5');
+
+    vm.input = 'text';
+    await waitImmediate();
+    expect(inputElm.value).to.equal('text');
+  });
+
+  it('default to empty', () => {
+    vm = createVue({
+      template: '<el-input/>'
+    }, true);
+    let inputElm = vm.$el.querySelector('input');
+    expect(inputElm.value).to.equal('');
   });
 
   it('disabled', () => {
@@ -236,7 +249,7 @@ describe('Input', () => {
   });
 
   describe('Input Events', () => {
-    it('event:focus & blur', done => {
+    it('event:focus & blur', async() => {
       vm = createVue({
         template: `
           <el-input
@@ -255,13 +268,11 @@ describe('Input', () => {
       vm.$el.querySelector('input').focus();
       vm.$el.querySelector('input').blur();
 
-      vm.$nextTick(_ => {
-        expect(spyFocus.calledOnce).to.be.true;
-        expect(spyBlur.calledOnce).to.be.true;
-        done();
-      });
+      await waitImmediate();
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
     });
-    it('event:change', done => {
+    it('event:change', async() => {
       // NOTE: should be same as native's change behavior
       vm = createVue({
         template: `
@@ -290,13 +301,11 @@ describe('Input', () => {
       // simplified test, component should emit change when native does
       simulateEvent('1', 'input');
       simulateEvent('2', 'change');
-      vm.$nextTick(_ => {
-        expect(spy.calledWith('2')).to.be.true;
-        expect(spy.calledOnce).to.be.true;
-        done();
-      });
+      await waitImmediate();
+      expect(spy.calledWith('2')).to.be.true;
+      expect(spy.calledOnce).to.be.true;
     });
-    it('event:clear', done => {
+    it('event:clear', async() => {
       vm = createVue({
         template: `
           <el-input
@@ -319,18 +328,51 @@ describe('Input', () => {
       // focus to show clear button
       inputElm.focus();
       vm.$refs.input.$on('clear', spyClear);
-      vm.$nextTick(_ => {
-        vm.$el.querySelector('.el-input__clear').click();
-        vm.$nextTick(_ => {
-          expect(spyClear.calledOnce).to.be.true;
-          done();
-        });
-      });
+      await waitImmediate();
+      vm.$el.querySelector('.el-input__clear').click();
+      await waitImmediate();
+      expect(spyClear.calledOnce).to.be.true;
+    });
+    it('event:input', async() => {
+      vm = createVue({
+        template: `
+          <el-input
+            ref="input"
+            placeholder="请输入内容"
+            clearable
+            :value="input">
+          </el-input>
+        `,
+        data() {
+          return {
+            input: 'a'
+          };
+        }
+      }, true);
+      const spy = sinon.spy();
+      vm.$refs.input.$on('input', spy);
+      const nativeInput = vm.$refs.input.$el.querySelector('input');
+      nativeInput.value = '1';
+      triggerEvent(nativeInput, 'compositionstart');
+      triggerEvent(nativeInput, 'input');
+      await waitImmediate();
+      nativeInput.value = '2';
+      triggerEvent(nativeInput, 'compositionupdate');
+      triggerEvent(nativeInput, 'input');
+      await waitImmediate();
+      triggerEvent(nativeInput, 'compositionend');
+      await waitImmediate();
+      // input event does not fire during composition
+      expect(spy.calledOnce).to.be.true;
+      // native input value is controlled
+      expect(vm.input).to.equal('a');
+      expect(nativeInput.value).to.equal('a');
+
     });
   });
 
   describe('Input Methods', () => {
-    it('method:select', done => {
+    it('method:select', async() => {
       const testContent = 'test';
 
       vm = createVue({
@@ -347,11 +389,9 @@ describe('Input', () => {
 
       vm.$refs.inputComp.select();
 
-      vm.$nextTick(_ => {
-        expect(vm.$refs.inputComp.$refs.input.selectionStart).to.equal(0);
-        expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
-        done();
-      });
+      await waitImmediate();
+      expect(vm.$refs.inputComp.$refs.input.selectionStart).to.equal(0);
+      expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
     });
   });
 });
