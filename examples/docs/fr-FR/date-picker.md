@@ -1,3 +1,4 @@
+
 ## DatePicker
 
 Utilisez le DatePicker pour les champs de dates.
@@ -202,6 +203,74 @@ Vous pouvez sélectionner une plage de dates.
 
 :::
 
+### Month Range
+
+Picking a month range is supported.
+
+:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current years independently, you can use the `unlink-panels` attribute.
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Default</span>
+    <el-date-picker
+      v-model="value15"
+      type="monthrange"
+      range-separator="To"
+      start-placeholder="Start month"
+      end-placeholder="End month">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">With quick options</span>
+    <el-date-picker
+      v-model="value16"
+      type="monthrange"
+      align="right"
+      unlink-panels
+      range-separator="To"
+      start-placeholder="Start month"
+      end-placeholder="End month"
+      :picker-options="pickerOptions3">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions3: {
+          shortcuts: [{
+            text: 'This month',
+            onClick(picker) {
+              picker.$emit('pick', [new Date(), new Date()]);
+            }
+          }, {
+            text: 'This year',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date(new Date().getFullYear(), 0);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: 'Last 6 months',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setMonth(start.getMonth() - 6);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value15: '',
+        value16: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Valeur par défaut
 
 Si l'utilisateur n'a pas sélectionné de date, vous pouvez montrer la date d'aujourd'hui par défaut. Utilisez `default-value` pour montrer une autre date. Sa valeur doit être parsable par `new Date()`.
@@ -373,7 +442,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | placeholder | Le placeholder en mode normal. | string | — | — |
 | start-placeholder | Le placeholder pour la date de début en mode plage de dates. | string | — | — |
 | end-placeholder | Le placeholder pour la date de fin en mode plage de dates. | string | — | — |
-| type | Type du picker. | string | year/month/date/dates/datetime/ week/datetimerange/daterange | date |
+| type | Type du picker. | string | year/month/date/dates/datetime/ week/datetimerange/daterange/ monthrange | date |
 | format | Format d'affichage dans le champ. | string | Voir [formats de date](#/fr-FR/component/date-picker#formats-de-date). | yyyy-MM-dd |
 | align | Alignement. | left/center/right | left |
 | popper-class | Nom de classe pour le menu déroulant du DatePicker. | string | — | — |
