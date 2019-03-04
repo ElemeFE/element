@@ -10,10 +10,11 @@ const client = algoliasearch('4C63BTGP6S', key);
 const langs = {
   'zh-CN': 'element-zh',
   'en-US': 'element-en',
-  'es': 'element-es'
+  'es': 'element-es',
+  'fr-FR': 'element-fr'
 };
 
-['zh-CN', 'en-US', 'es'].forEach(lang => {
+['zh-CN', 'en-US', 'es', 'fr-FR'].forEach(lang => {
   const indexName = langs[lang];
   const index = client.initIndex(indexName);
   index.clearIndex(err => {
