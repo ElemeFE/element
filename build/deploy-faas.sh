@@ -1,4 +1,5 @@
 #! /bin/sh
+set -ex
 mkdir temp_web
 npm run deploy:build
 cd temp_web
@@ -14,5 +15,5 @@ cp -rf ../../examples/element-ui/** $SUB_FOLDER/
 cd ../..
 
 # deploy domestic site
-faas deploy alpha
+faas deploy alpha -P element
 rm -rf temp_web
