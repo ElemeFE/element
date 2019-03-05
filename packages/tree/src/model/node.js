@@ -9,8 +9,10 @@ export const getChildState = node => {
     const n = node[i];
     if (n.checked !== true || n.indeterminate) {
       all = false;
-      if (!n.disabled) {
+      if (!n.disabled && n.childNodes.length === 0) {
         allWithoutDisable = false;
+      } else if (n.childNodes.length) {
+        allWithoutDisable = getChildState(n.childNodes).allWithoutDisable;
       }
     }
     if (n.checked !== false || n.indeterminate) {
