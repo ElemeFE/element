@@ -299,14 +299,6 @@
       bus.$on('user-theme-config-visible', val => {
         this.isThemeConfigVisible = val;
       });
-      window.addEventListener('hashchange', () => {
-        if (location.href.match(/#/g).length < 2) {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-          this.renderAnchorHref();
-        } else {
-          this.goAnchor();
-        }
-      });
     },
     mounted() {
       if (window.userThemeConfigVisible) {
@@ -325,6 +317,17 @@
     },
     beforeDestroy() {
       this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
+    },
+    beforeRouteUpdate(to, from, next) {
+      next();
+      setTimeout(() => {
+        if (location.href.match(/#/g).length < 2) {
+          document.documentElement.scrollTop = document.body.scrollTop = 0;
+          this.renderAnchorHref();
+        } else {
+          this.goAnchor();
+        }
+      }, 100);
     }
   };
 </script>
