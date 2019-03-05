@@ -60,6 +60,10 @@
               "title": "Typography 字体"
             },
             {
+              "path": "/border",
+              "title": "Border 边框"
+            },
+            {
               "path": "/icon",
               "title": "Icon 图标"
             },
@@ -312,6 +316,10 @@
             {
               "path": "/typography",
               "title": "Typography"
+            },
+            {
+              "path": "/border",
+              "title": "Border"
             },
             {
               "path": "/icon",
@@ -568,6 +576,10 @@
               "title": "Typography"
             },
             {
+              "path": "/border",
+              "title": "Border"
+            },
+            {
               "path": "/icon",
               "title": "Icon"
             },
@@ -822,6 +834,10 @@
               "title": "Typography"
             },
             {
+              "path": "/border",
+              "title": "Border"
+            },
+            {
               "path": "/icon",
               "title": "Icon"
             },
@@ -1005,6 +1021,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
             }
           ]
         }

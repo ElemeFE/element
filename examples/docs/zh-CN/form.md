@@ -1,243 +1,3 @@
-<script>
-  export default {
-    data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('年龄不能为空'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
-          } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        sizeForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formInline: {
-          user: '',
-          region: ''
-        },
-        labelPosition: 'right',
-        formLabelAlign: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        ruleForm2: {
-          pass: '',
-          checkPass: '',
-          age: ''
-        },
-        formLabelWidth: '80px',
-        rules: {
-          name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
-          ],
-          date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-          ],
-          date2: [
-            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-          ],
-          type: [
-            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-          ],
-          resource: [
-            { required: true, message: '请选择活动资源', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
-          ]
-        },
-        rules2: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
-          age: [
-            { validator: checkAge, trigger: 'blur' }
-          ]
-        },
-        dynamicValidateForm: {
-          domains: [{
-            value: '',
-            key: Date.now()
-          }],
-          email: ''
-        },
-        numberValidateForm: {
-          age: ''
-        }
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item)
-        if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1)
-        }
-      },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
-          value: '',
-          key: Date.now()
-        });
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-form.demo-zh-CN {
-    .el-select .el-input {
-      width: 380px;
-    }
-    .el-form {
-      width: 460px;
-    }
-
-    .line {
-      text-align: center;
-    }
-
-    .el-checkbox-group {
-      width: 320px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      &:after, &:before {
-        content: ' ';
-        display: table;
-      }
-      &:after {
-        clear: both;
-        visibility: hidden;
-        font-size: 0;
-        height: 0;
-      }
-
-      .el-checkbox {
-        float: left;
-        width: 160px;
-        padding-right: 20px;
-        margin: 0;
-        padding: 0;
-
-        + .el-checkbox {
-          margin-left: 0;
-        }
-      }
-    }
-    .demo-form-normal {
-      width: 460px;
-    }
-    .demo-form-inline {
-      width: auto;
-
-      .el-input {
-        width: 150px;
-      }
-      > * {
-        margin-right: 10px;
-      }
-    }
-    .demo-ruleForm {
-      width: 460px;
-
-      .el-select .el-input {
-        width: 360px;
-      }
-    }
-    .demo-dynamic {
-      .el-input {
-        margin-right: 10px;
-        width: 270px;
-        vertical-align: top;
-      }
-    }
-    .fr {
-      float: right;
-    }
-  }
-</style>
-
 ## Form 表单
 
 由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据
@@ -264,7 +24,7 @@
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送">
@@ -430,7 +190,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
       <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+        <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
       </el-form-item>
     </el-col>
   </el-form-item>
@@ -768,7 +528,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="选择时间" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="活动性质">

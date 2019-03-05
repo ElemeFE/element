@@ -10,4 +10,7 @@ export declare class ElDropdownItem extends ElementUIComponent {
 
   /** Whether a divider is displayed */
   divided: boolean
+
+  /** Icon to show on left side of text */
+  icon: string
 }

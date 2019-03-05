@@ -1,151 +1,14 @@
-<script>
-  export default {
-    data() {
-      return {
-        links: [],
-        input: '',
-        input1: '',
-        input2: '',
-        input21: '',
-        input22: '',
-        input23: '',
-        input3: '',
-        input4: '',
-        input5: '',
-        input6: '',
-        input7: '',
-        input8: '',
-        input9: '',
-        input10: '',
-        textarea: '',
-        textarea2: '',
-        textarea3: '',
-        select: '',
-        state1: '',
-        state2: '',
-        state3: '',
-        state4: ''
-      };
-    },
-    methods: {
-      loadAll() {
-        return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-        ];
-      },
-      querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-
-        cb(results);
-      },
-      querySearchAsync(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          cb(results);
-        }, 3000 * Math.random());
-      },
-      createStateFilter(queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item) {
-        console.log(item);
-      },
-      handleIconClick(ev) {
-        console.log(ev);
-      }
-    },
-    mounted() {
-      this.links = this.loadAll();
-    }
-  };
-</script>
-
-<style>
-  .demo-input.demo-en-US {
-    .el-select .el-input {
-      width: 130px;
-    }
-    .el-input {
-      width: 180px;
-    }
-    .el-textarea {
-      width: 414px;
-    }
-    .el-input-group {
-      width: 100%;
-    }
-    .demo-input-size {
-      .el-input {
-        vertical-align: top;
-        margin: 0 10px 10px 0;
-      }
-    }
-    .demo-input-suffix {
-      padding: 10px;
-    }
-    .demo-input-suffix .el-input {
-      margin-right: 15px;
-    }
-    .demo-input-label {
-      display: inline-block;
-      width: 130px;
-    }
-    .input-with-select .el-input-group__prepend {
-      background-color: #fff;
-    }
-    .demo-autocomplete {
-      text-align: center;
-
-      .sub-title {
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #8492a6;
-      }
-
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
-      }
-
-      .el-autocomplete {
-        text-align: left;
-      }
-    }
-  }
-  .el-autocomplete-suggestion.my-autocomplete {
-    li {
-      line-height: normal;
-      padding: 7px;
-
-      .name {
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .addr {
-        font-size: 12px;
-        color: #b4b4b4;
-      }
-      .highlighted .addr {
-        color: #ddd;
-      }
-    }
-  }
-</style>
-
 ## Input
 
-Le champs d'input de base.
+Le champ d'input de base.
+
+:::warning
+Input est un composant controllé, il **affiche toujours la valeur liée de Vue**.
+
+En règle générale, l'évènement `input` devrait être géré. Son handler devrait mettre à jour la valeur du composant (ou utilisez `v-model`). Dans le cas contraire, la valeur du champ ne sera pas modifiée.
+
+Les modificateurs de `v-model` ne sont pas supportés.
+:::
 
 ### Usage
 
@@ -208,6 +71,25 @@ export default {
     }
   }
 }
+</script>
+```
+:::
+
+### Champ de mot de passe
+
+:::demo Créez un champ de mot de passe avec icône de visualisation grâce à l'attribut `show-password`.
+
+```html
+<el-input placeholder="Entrez votre mot de passe" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
 </script>
 ```
 :::
@@ -648,7 +530,8 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | minlength| Identique à `minlength` dans l'input natif. | number | — | — |
 | placeholder| Placeholder de l' Input. | string | — | — |
 | clearable | Si le bouton de reset apparaît. | boolean | — | false |
-| disabled | Si le champs est désactivé. | boolean | — | false |
+| show-password | Si le champ doit un champ de mot de passe avec bouton de visualisation. | boolean         | — | false |
+| disabled | Si le champ est désactivé. | boolean | — | false |
 | size | Taille du champ, marche quand `type` n'est pas 'textarea'. | string | medium / small / mini | — |
 | prefix-icon   | Classe de l'icône de préfixe.  | string          | — | — |
 | suffix-icon   | Classe de l'iĉone de suffixe.  | string          | — | — |
@@ -684,15 +567,15 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | blur | Se déclenche quand Input perds le focus. | (event: Event) |
 | focus | Se déclenche quand Input a le focus. | (event: Event) |
 | change | Se déclenche quand la valeur change. | (value: string \ number) |
-| clear | Se déclenche quand le champs est effacé par le bouton de reset. | — |
+| clear | Se déclenche quand le champ est effacé par le bouton de reset. | — |
 
 ### Méthodes de l'Input
 
 | Méthode | Description | Paramètres |
 |------|--------|-------|
-| focus | Met le focus sur le champs. | — |
-| blur | Retire le focus de le champs. | — |
-| select | Sélectionne le texte du champs. | — |
+| focus | Met le focus sur le champ. | — |
+| blur | Retire le focus de le champ. | — |
+| select | Sélectionne le texte du champ. | — |
 
 ### Attributs de l'autocomplétion
 
@@ -716,6 +599,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | suffix-icon | Classe de l'iĉone de suffixe. | string | — | — |
 | hide-loading | Si l'icône de chargement doit être cachée dans le cas d'une recherche distante. | boolean | — | false |
 | popper-append-to-body | Si le menu doit être ajouter au body. Si le positionnement du menu est incorrect, essayez de mettre cette propriété à `false`. | boolean | - | true |
+| highlight-first-item | Si la première suggestion de la liste issue de la recherche distante doit être en surbrillance par défaut. | boolean | — | false |
 
 ### Slots de l'autocomplétion
 
@@ -723,8 +607,8 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 |------|--------|
 | prefix | Contenu du préfixe. |
 | suffix | Contenu du suffixe. |
-| prepend | Contenu à ajouter avant le champs. |
-| append | Contenu à ajouter après le champs. |
+| prepend | Contenu à ajouter avant le champ. |
+| append | Contenu à ajouter après le champ. |
 
 ### Template personnalisé pour l'autocomplétion
 

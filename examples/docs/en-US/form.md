@@ -1,250 +1,3 @@
-<script>
-  export default {
-    data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('Please input the age'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
-          } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password'));
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password again'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('Two inputs don\'t match!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        sizeForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formInline: {
-          user: '',
-          region: ''
-        },
-        labelPosition: 'right',
-        formLabelAlign: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        ruleForm2: {
-          pass: '',
-          checkPass: '',
-          age: ''
-        },
-        formLabelWidth: '80px',
-        options: [
-        ],
-        rules: {
-          name: [
-            { required: true, message: 'Please input Activity name', trigger: 'blur' },
-            { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: 'Please select Activity zone', trigger: 'change' }
-          ],
-          date1: [
-            { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
-          ],
-          date2: [
-            { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
-          ],
-          type: [
-            { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
-          ],
-          resource: [
-            { required: true, message: 'Please select activity resource', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: 'Please input activity form', trigger: 'blur' }
-          ]
-        },
-        rules2: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
-          age: [
-            { validator: checkAge, trigger: 'blur' }
-          ]
-        },
-        dynamicValidateForm: {
-          domains: [{
-            key: Date.now(),
-            value: ''
-          }],
-          email: ''
-        },
-        numberValidateForm: {
-          age: ''
-        }
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      },
-      onRuleFormSubmit() {
-        console.log('onRuleFormSubmit');
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item)
-        if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1)
-        }
-      },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
-          key: Date.now(),
-          value: ''
-        });
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-form.demo-en-US {
-    .el-select .el-input {
-      width: 360px;
-    }
-    .el-form {
-      width: 480px;
-    }
-
-    .line {
-      text-align: center;
-    }
-
-    .el-checkbox-group {
-      width: 320px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      &:after, &:before {
-        content: ' ';
-        display: table;
-      }
-      &:after {
-        clear: both;
-        visibility: hidden;
-        font-size: 0;
-        height: 0;
-      }
-
-      .el-checkbox {
-        float: left;
-        width: 160px;
-        padding-right: 20px;
-        margin: 0;
-        padding: 0;
-
-        + .el-checkbox {
-          margin-left: 0;
-        }
-      }
-    }
-    .demo-form-normal {
-      width: 480px;
-    }
-    .demo-form-inline {
-      width: auto;
-
-      .el-input {
-        width: 150px;
-      }
-      > * {
-        margin-right: 10px;
-      }
-    }
-    .demo-ruleForm {
-      width: 480px;
-
-      .el-select .el-input {
-        width: 360px;
-      }
-    }
-    .demo-dynamic {
-      width: 500px;
-
-      .el-input {
-        margin-right: 10px;
-        width: 270px;
-        vertical-align: top;
-      }
-    }
-    .fr {
-      float: right;
-    }
-  }
-</style>
-
 ## Form
 
 Form consists of `input`, `radio`, `select`, `checkbox` and so on. With form, you can collect, verify and submit data.
@@ -272,7 +25,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
@@ -441,7 +194,7 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
       <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+        <el-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
       </el-form-item>
     </el-col>
   </el-form-item>
@@ -781,7 +534,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Activity type">
@@ -851,7 +604,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | validate | validate the whole form. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Returns a promise if callback is omitted | Function(callback: Function(boolean, object)) |
-| validateField | validate one or serveral form items | Function(props: string | array, callback: Function(errorMessage: string)) |
+| validateField | validate one or several form items | Function(props: string | array, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
 | clearValidate | clear validation message for certain fields. The parameter is prop name or an array of prop names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string | array) |
 

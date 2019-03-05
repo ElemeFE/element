@@ -1,5 +1,82 @@
 ## 更新日志
 
+### 2.6.1
+
+*2019-03-03*
+
+#### 修复
+
+- **不再指定 node 版本** (by @iamkun in #14546)
+- 调整 `deloy-faas.sh` 中的文档目录 (by @ziyoung in #14553)
+- 调整 2.6.0 中 changelog 日期样式 (by @island205 in #14547)
+- 修复拼写错误 (by @wack6 in #14552)
+
+### 2.6.0
+
+*2019-03-01*
+
+#### 新特性
+- Timeline
+  - 添加 Timeline 组件 (by @jikkai in #14248)
+- DropdownItem
+  - `el-dropdown-item` 支持添加 icon (by @gabrielboliveira in #14088)
+- Input
+  - 添加 `show-password` 属性，支持配置显示密码按钮 (by @phshy0607 in #13966)
+- Select
+  - 添加 slot `empty` (by @elfman in #13785)
+- Autocomplete
+  - 添加 `highlight-first-item` 属性，控制是否默认突出显示远程搜索建议中的第一项 (by @YamenSharaf in #14269)
+- I18n
+  - 添加亚美尼亚语支持 (by @hamletbarsamyan in #14214)
+- Docs
+  - 新增法语文档 (by @smalesys in #12153, #14418, #14434)
+
+#### 优化
+- Alert
+  - 组件对通过 slot 传入的  description 也应用默认样式类 (by @iamkun in #14488)
+- InputNumber
+  -移除多余的 `parseFloat` (by @JuniorTour in #14172)
+- Menu
+  - 支持 `el-menu-item` 不添加 index (by @georgyfarniev in #13298)
+- Table
+  - 移除无用的 DOM 操作 (by @elfman in #13643)
+- Upload
+  - 代码优化 (by @elfman in #13973)
+- Popup
+  - 移除无用代码 (by @KAionro in #14413)
+- Docs
+  - 添加更多文档说明如何贡献代码 (by @island205 in #14355)
+  - 添加 `el-input` 是受控组件的警示 (by @wacky6 in #14463)
+  - 优化 Table 的文档 (by @luguokong in #14329)
+  - 更新 Input 文档 (by @iamkun in #14437)
+  - 优化自定义主题文档 (by @wangguohao in #14297)
+  - 为 Icon 文档添加 hover 效果 (by @tuxinghuan in #14295)
+- Build
+  - 压缩 Element 文档站的 JS 和 CSS 文件 (by @iamkun in #14430)
+  - 优化 Webpack 打包速度，从6分钟优化到1分多 (by @hetech in #14484)
+  - 添加 CLI 工具，选择版本号 (by @hetech in #14354)
+- 使用 Stale 来管理过时（暂定1年）的 Issue 和 PR (by @island205 in #14392)
+
+#### 问题修复
+- Menu
+  - 修复浏览器标签切换引起的 focus 问题 (by @liupl in #13976)
+- MessageBox
+  - 修复 TS 定义 (by @NateScarlet in #14278)
+- ScrollBar
+  - 修复点击鼠标右键导致拖动的问题 (by @xifeiwu in #14196)
+- Switch
+  - 添加 `validate-event` 属性，设置改变 Switch 状态时是否触发表单的校验 (by @hetech in #14426)
+- Table
+  - 修复多 Table 实例共享 `toggleAllSelection` 方法，造成无法切换问题 (by @letanure in #14075)
+- Tabs & Dropdown
+  - 修复样式问题 (by @hetech in #14452)
+- Tree
+  - 与 Table 统一占位文样式 (by @ColinCll in #14331)
+- Docs
+  - 修复 DatetimePicker 文档问题 (by @iamkun in #14290)
+  - 修复 DatePicker 文档拼写问题 (by @helmut in #14481)
+  - 修复分页组件文档样式问题 (by @liuchuzhang in #14451)
+
 ### 2.5.4
 
 *2019-02-01*
@@ -74,58 +151,58 @@
 
 #### 修复
 - Autocomplete
-  - 修正下拉框最后一行显示不完整的问题 (#13597) (by @ziyoung)
-  - 修正下拉框箭头 (#13762) (by @liuchuzhang)
+  - 修正下拉框最后一行显示不完整的问题 (by @ziyoung in #13597)
+  - 修正下拉框箭头 (by @liuchuzhang in #13762)
 - Carousel
-  - 组件销毁时释放内部 Timer (#13820) (by @elfman)
+  - 组件销毁时释放内部 Timer (by @elfman in #13820)
 - Cascader
-  - 移除已废弃的计算属性的 cache 属性 (#13737) (by @iamkun)
-  - 修正 TypeScript 中 CascaderOption 类型定义 (#13613) (by @NateScarlet)
-  - 修正图标覆盖文字的问题 (#13596) (by @ziyoung)
+  - 移除已废弃的计算属性的 cache 属性 (by @iamkun in #13737)
+  - 修正 TypeScript 中 CascaderOption 类型定义 (by @NateScarlet in #13613)
+  - 修正图标覆盖文字的问题 (by @ziyoung in #13596)
 - Checkbox
   - 改进显示样式 (by @PanJiaChen)
 - DatePicker
-  - 修正 TimeSpinner 中缺失的 v-for `key` 属性 (#13547) (by @Ende93)
-  - 修正周选择器在跨年时的高亮行为 (#13883) (by @suyi91)
+  - 修正 TimeSpinner 中缺失的 v-for `key` 属性 (by @Ende93 in #13547)
+  - 修正周选择器在跨年时的高亮行为 (by @suyi91 in #13883)
 - Input
-  - 修复 textarea 时的 DOM 节点引用 (#13803) (by @laomu1988 @island205)
+  - 修复 textarea 时的 DOM 节点引用 (by @laomu1988 @island205 in #13803)
 - Pagination
-  - 输入框的值不会小于 1 (#13727) (by @elfman)
+  - 输入框的值不会小于 1 (by @elfman in #13727)
 - Popover
-  - 修正 hover 的触发行为 (#13104) (by @goldengecko)
-  - 修正弹出框的内存泄漏 (#13988) (by @qpxtWhite)
+  - 修正 hover 的触发行为 (by @goldengecko in #13104)
+  - 修正弹出框的内存泄漏 (by @qpxtWhite in #13988)
 - Radio
   - 改进显示样式 (by @ohhoney1)
 - Table
-  - 改进点击排序箭头时的行为 (#12890) (by @ohhoney1)
-  - 修正 IE10+ 中 “暂无数据” 提示的垂直布局 (#13638) (by @imzjy)
-  - 修正文档中 `index` 的类型说明 (#13628) (by @ilovefafa)
-  - 修正多级表头使用 `fixed` 属性时，表尾合计行的显示样式 (#13914) (by @luckyCao)
+  - 改进点击排序箭头时的行为 (by @ohhoney1 in #12890)
+  - 修正 IE10+ 中 “暂无数据” 提示的垂直布局 (by @imzjy in #13638)
+  - 修正文档中 `index` 的类型说明 (by @ilovefafa in #13628)
+  - 修正多级表头使用 `fixed` 属性时，表尾合计行的显示样式 (by @luckyCao in #13914)
 - Tabs
-  - 修正自动滚动 (#13696) (by @iamkun)
-  - 通过面板名称查找面板 (#13705) (by @iamkun)
-  - 使用 `paneName` 计算面板样式 (#13733) (by @iamkun)
+  - 修正自动滚动 (by @iamkun in #13696)
+  - 通过面板名称查找面板 (by @iamkun in #13705)
+  - 使用 `paneName` 计算面板样式 (by @iamkun in #13733)
 - Tree
   - 修正 `showCheckbox` 不能影响子节点的问题 (by @KidneyFlower)
-  - 更新文档和 TypeScript 定义 (#13540) (by @ziyoung)
+  - 更新文档和 TypeScript 定义 (by @ziyoung in #13540)
 - Upload
-  - `list-type` 改变时，保留 `url` 属性 (#13771) (by @elfman)
+  - `list-type` 改变时，保留 `url` 属性 (by @elfman in #13771)
 - Slider
-  - 修正源代码缩进 (#13955) (by @wacky6)
+  - 修正源代码缩进 (by @wacky6 in #13955)
 - I18n
   - 补充加泰罗尼亚语 (Catalan) 翻译 (by @jaumesala)
-  - 补充俄语 (Russian) 翻译 (#13658) (by @justlp)
-  - 补充芬兰语 (Finnish) 翻译 (#14137) (by @jenkrisu)
+  - 补充俄语 (Russian) 翻译 (by @justlp in #13658)
+  - 补充芬兰语 (Finnish) 翻译 (by @jenkrisu in #14137)
 - Doc
-  - 更新西班牙语文档至 2.4.11 (#13522) (by @Gonzalo2310)
+  - 更新西班牙语文档至 2.4.11 (by @Gonzalo2310 in #13522)
 - 其它
   - 移除多余的构建脚本 (by @ziyoung)
-  - 修正文档超链接 (#13753) (by @iamkun)
+  - 修正文档超链接 (by @iamkun in #13753)
   - 修正文档中不一致的大小写 (by @wonderjar)
-  - 增加钉钉群的二维码 (#13957) (by @iamkun)
-  - .gitignore 增加 yarn 日志文件 (#13922) (by @mimimi)
-  - 移除赞助商 多态 (#14156) (by @island205)
-  - Update readme qr code src (#13960) (by @iamkun)
+  - 增加钉钉群的二维码 (by @iamkun in #13957)
+  - .gitignore 增加 yarn 日志文件 (by @mimimi in #13922)
+  - 移除赞助商 多态 (by @island205 in #14156)
+  - Update readme qr code src (by @iamkun in #13960)
   - 更新 CDN 链接，修正错别字 (by @ziyoung)
 
 ### 2.4.11

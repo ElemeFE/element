@@ -1,11 +1,3 @@
-<style>
-  .demo-box {
-    .el-date-editor + .el-date-editor {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## TimePicker 时间选择器
 
  用于选择或输入日期
@@ -154,22 +146,6 @@
 </script>
 ```
 :::
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: '',
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40),
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        startTime: '',
-        endTime: ''
-      };
-    }
-  }
-</script>
 
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

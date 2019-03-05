@@ -58,7 +58,7 @@
   }
 
   @include e(title) {
-    line-height: $--dialog-line-height;
+    line-height: $--dialog-font-line-height;
     font-size: $--dialog-title-font-size;
     color: $--color-text-primary;
   }

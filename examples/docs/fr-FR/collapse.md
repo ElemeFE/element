@@ -1,29 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        activeNames: ['1'],
-        activeName: '1'
-      };
-    },
-    methods: {
-      handleChange(val) {
-        console.log(val);
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-collapse {
-    .el-collapse-item__header {
-      .header-icon {
-        margin-left: 5px;
-      }
-    }
-  }
-</style>
-
 ## Collapse
 
 Utilisez Collapse pour stocker du contenu.

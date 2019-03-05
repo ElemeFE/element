@@ -1,138 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        list: null,
-        options: [{
-          value: 'Option1',
-          label: 'Option1'
-        }, {
-          value: 'Option2',
-          label: 'Option2'
-        }, {
-          value: 'Option3',
-          label: 'Option3'
-        }, {
-          value: 'Option4',
-          label: 'Option4'
-        }, {
-          value: 'Option5',
-          label: 'Option5'
-        }],
-        options2: [{
-          value: 'Option1',
-          label: 'Option1'
-        }, {
-          value: 'Option2',
-          label: 'Option2',
-          disabled: true
-        }, {
-          value: 'Option3',
-          label: 'Option3'
-        }, {
-          value: 'Option4',
-          label: 'Option4'
-        }, {
-          value: 'Option5',
-          label: 'Option5'
-        }],
-        options3: [{
-          label: 'Villes célèbres',
-          options: [{
-            value: 'Shanghai',
-            label: 'Shanghai'
-          }, {
-            value: 'Beijing',
-            label: 'Beijing'
-          }]
-        }, {
-          label: 'Nom de ville',
-          options: [{
-            value: 'Chengdu',
-            label: 'Chengdu'
-          }, {
-            value: 'Shenzhen',
-            label: 'Shenzhen'
-          }, {
-            value: 'Guangzhou',
-            label: 'Guangzhou'
-          }, {
-            value: 'Dalian',
-            label: 'Dalian'
-          }]
-        }],
-        options4: [],
-        options5: [{
-          value: 'HTML',
-          label: 'HTML'
-        }, {
-          value: 'CSS',
-          label: 'CSS'
-        }, {
-          value: 'JavaScript',
-          label: 'JavaScript'
-        }],
-        cities: [{
-          value: 'Beijing',
-          label: 'Beijing'
-        }, {
-          value: 'Shanghai',
-          label: 'Shanghai'
-        }, {
-          value: 'Nanjing',
-          label: 'Nanjing'
-        }, {
-          value: 'Chengdu',
-          label: 'Chengdu'
-        }, {
-          value: 'Shenzhen',
-          label: 'Shenzhen'
-        }, {
-          value: 'Guangzhou',
-          label: 'Guangzhou'
-        }],
-        value: '',
-        value2: '',
-        value3: '',
-        value4: '',
-        value5: [],
-        value6: '',
-        value7: '',
-        value8: '',
-        value9: [],
-        value10: [],
-        value11: [],
-        loading: false,
-        states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
-      };
-    },
-
-    mounted() {
-      this.list = this.states.map(item => { return { value: item, label: item }; });
-    },
-
-    methods: {
-      remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-            this.options4 = this.list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
-          }, 200);
-        } else {
-          this.options4 = [];
-        }
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-select .el-select {
-    width: 240px;
-  }
-</style>
-
 ## Select
 
 Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché grâce à un menu déroulant.
@@ -684,8 +549,8 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | remote-method | Méthode pour la recherche distante. | function | — | — |
 | loading | Si le sélecteur est en train de charger des options. | boolean | — | false |
 | loading-text | Texte à afficher pendant le chargement. | string | — | Loading |
-| no-match-text | Texte à afficher quand le filtrage ne retourne aucune option. | string | — | No matching data |
-| no-data-text | Texte à afficher quand il n'y a aucune option. | string | — | No data |
+| no-match-text | Texte à afficher quand le filtrage ne retourne aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No matching data |
+| no-data-text | Texte à afficher quand il n'y a aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No data |
 | popper-class | Classe du menu déroulant. | string | — | — |
 | reserve-keyword | Quand `multiple` et `filter` sont activés, si il faut réserver le mot-clé courant après la sélection d'une option. | boolean | — | false |
 | default-first-option | Sélectionne la première option avec Entrée. Utilisable avec `filterable` ou `remote` | boolean | - | false |
@@ -709,6 +574,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 |---------|-------------|
 |    —    | Liste de options. |
 | prefix  | Contenu du préfixe du sélecteur. |
+| empty  | Contenu lorsqu'il n'y a aucune option. |
 
 ### Attributs du groupe d'options
 

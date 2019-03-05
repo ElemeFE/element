@@ -1,5 +1,84 @@
 ## Changelog
 
+### 2.6.1
+
+*2019-03-03*
+
+#### Bug fixes
+
+- **Don't specify node version** (by @iamkun in #14546)
+- Fix doc directory in `deloy-faas.sh` (by @ziyoung in #14553)
+- Fix date style issue in changelog for 2.6.0 (by @island205 in #14547)
+- Fix doc typo (by @wack6 in #14552)
+
+### 2.6.0
+
+*2019-03-01*
+
+#### New features
+- Timeline
+  - Add timeline component (by @jikkai in #14248)
+- DropdownItem
+  - Add icon prop to `el-dropdown-item` (by @gabrielboliveira in #14088)
+- Input
+  - Add show-password props (by @phshy0607 in #13966)
+- Select
+  - Add slot `empty` (by @elfman in #13785)
+- Autocomplete
+  - Add highlight-first-item prop (by @YamenSharaf in #14269)
+- I18n
+  - Created Armenian locale (by @hamletbarsamyan in #14214)
+- Docs
+  - French translation (by @smalesys in #12153, #14418, #14434)
+
+#### Optimization
+- Alert
+  - Update alert description default slot class (by @iamkun in #14488)
+- Input
+  - Update input password (by @iamkun in #14480)
+- InputNumber
+  - Remove unnecessary parseFloat (by @JuniorTour in #14172)
+- Menu
+  - Add support for `el-menu-item` without index (by @georgyfarniev in #13298)
+- Table
+  - Remove some html DOM operations (by @elfman in #13643)
+- Upload
+  - Optimize code (by @elfman in #13973)
+- Popup
+  - Optimize code (by @KAionro in #14413)
+- Docs
+  - Add more detail about how to run play mode for contribution (by @island205 in #14355)
+  - Warn input as a controlled component. (by @wacky6 in #14463)
+  - Update Table doc (by @luguokong in #14329)
+  - Update input doc (by @iamkun in #14437)
+  - Update custom-theme docs (by @wangguohao in #14297)
+  - Make the icon style change when hover on it (by @tuxinghuan in #14295)
+- Build
+  - Minimizing css and js for Element doc site (by @iamkun in #14430)
+  - Speeding up webpack (by @hetech in #14484)
+  - Use cli to select release version (by @hetech in #14354)
+- Install stale for issue handling (by @island205 in #14392)
+
+#### Bug fixes
+- Menu
+  - Fix subMenu focus bug when switch browser tab (by @liupl in #13976)
+- MessageBox
+  - Fix type definition (by @NateScarlet in #14278)
+- ScrollBar
+  - Prevent right button click on thumb (by @xifeiwu in #14196)
+- Switch
+  - Trigger form validation if value changes (by @hetech in #14426)
+- Table
+  - Make toggleAllSelection method an instance method (by @letanure in #14075)
+- Tabs & Dropdown
+  - Fix style (by @hetech in #14452)
+- Tree
+  - Empty-text tips are different from tables (by @ColinCll in #14331)
+- Docs
+  - Fix  DatetimePicker format doc error (by @iamkun in #14290)
+  - Spelling issue in datepicker documentation (by @helmut in #14481)
+  - Fix pagination doc style (by @liuchuzhang in #14451)
+
 ### 2.5.4
 
 *2019-02-01*
@@ -107,7 +186,7 @@
   - Eliminar  scripts innecesarios (por @ziyoung)
   - Corregido el error de anchor link (#13753) (por @iamkun)
   - Corrección de la capitalización inconsistente en la documentación (por @wonderjar)
-  - Añadido código qr del grupo de chat DingDing al readme (#13957) (by @iamkun)
+  - Añadido código qr del grupo de chat DingDing al readme (by @iamkun in #13957)
   - Añadido logs de hilo a .gitignore (#13922) (por @mimimi)
   - Eliminada la cuota de patrocinadores (#14156) (por @island205)
   - Actualizado readme qr code src (#13960) (por @iamkun)

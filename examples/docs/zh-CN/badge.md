@@ -1,9 +1,3 @@
-<style>
-  .demo-badge.demo-box .el-dropdown {
-    vertical-align: middle;
-  }
-</style>
-
 ## Badge 标记
 
 出现在按钮、图标旁的数字或状态标记。
@@ -115,27 +109,6 @@
 </style>
 ```
 :::
-
-<style scoped>
-  .share-button {
-    width: 36px;
-    padding: 10px;
-  }
-
-  .mark {
-    margin-top: 8px;
-    line-height: 1;
-    float: right;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .item {
-    margin-right: 40px;
-  }
-</style>
 
 ### Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
