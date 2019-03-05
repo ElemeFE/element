@@ -43,6 +43,8 @@ npm run dev
 # open http://localhost:8085
 ```
 
+> **Notice**: modify `examples/play/index.vue` file, use the component you contribute, then run `npm run dev:play`, go ahead http://localhost:8085, get result, more quickly and friendly.
+
 To build:
 
 ```shell
@@ -50,7 +52,7 @@ npm run dist
 ```
 
 ## Component Developing Guidelines
-- Run `make new <component-name>` to create project directory for a new component. Test codes, entry file, cooking config, documentation and `package.json` are included.
+- Run `make new <component-name>` to create project directory for a new component. Test codes, entry file and documentation are included.
 - Refer to `Button` for nested components.
 - Refer to `Select` for components that depend on other components.
 

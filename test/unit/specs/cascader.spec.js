@@ -538,6 +538,76 @@ describe('Cascader', () => {
       });
     }, 300);
   });
+  it('hover and select', done => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          ref="cascader"
+          placeholder="请选择"
+          :options="options"
+          expand-trigger="hover"
+          change-on-select
+          v-model="selectedOptions"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          options: [{
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [{
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              children: [{
+                value: 'xihu',
+                label: 'West Lake'
+              }]
+            }, {
+              value: 'ningbo',
+              label: 'NingBo',
+              children: [{
+                value: 'jiangbei',
+                label: 'Jiang Bei'
+              }]
+            }]
+          }, {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [{
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [{
+                value: 'zhonghuamen',
+                label: 'Zhong Hua Men'
+              }]
+            }]
+          }],
+          selectedOptions: []
+        };
+      }
+    }, true);
+    vm.$el.click();
+    vm.$nextTick(() => {
+      const menu = vm.$refs.cascader.menu;
+      const menuElm = menu.$el;
+      const item1 = menuElm.querySelector('.el-cascader-menu__item');
+
+      triggerEvent(item1, 'mouseenter');
+      menu.$nextTick(() => {
+        expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
+
+        const spy = sinon.spy();
+        menu.$on('closeInside', spy);
+        item1.click();
+
+        menu.$nextTick(() => {
+          expect(spy.calledWith(true)).to.be.true;
+          expect(menu.visible).to.be.false;
+          done();
+        });
+      });
+    });
+  });
   it('filterable', done => {
     vm = createVue({
       template: `

@@ -98,4 +98,59 @@ describe('Tooltip', () => {
       done();
     });
   });
+  it('hide after', done => {
+    vm = createVue(`
+      <el-tooltip ref="tooltip" content="提示文字" :hide-after="300">
+        <button>click</button>
+      </el-tooltip>`);
+    const tooltip = vm.$refs.tooltip;
+    vm.$nextTick(_ => {
+      triggerEvent(tooltip.$el, 'mouseenter');
+      setTimeout(() => {
+        expect(tooltip.showPopper).to.be.true;
+        setTimeout(() => {
+          expect(tooltip.showPopper).to.be.false;
+          done();
+        }, 300);
+      }, 100);
+    });
+  });
+  it('remove focus', done => {
+    vm = createVue(`
+    <el-tooltip ref="tooltip" content="提示文字" :hide-after="300">
+      <button>click</button>
+    </el-tooltip>`);
+    const tooltip = vm.$refs.tooltip;
+    vm.$nextTick(_ => {
+      triggerEvent(tooltip.$el, 'mouseenter');
+      setTimeout(() => {
+        tooltip.focusing = true;
+        tooltip.$el.click();
+        setTimeout(() => {
+          expect(tooltip.showPopper).to.be.false;
+          done();
+        }, 300);
+      }, 100);
+    });
+  });
+  it('reference element focus', done => {
+    vm = createVue(`
+    <el-tooltip ref="tooltip" content="提示文字">
+      <button>click</button>
+    </el-tooltip>`);
+    const tooltip = vm.$refs.tooltip;
+    vm.$nextTick(_ => {
+      triggerEvent(tooltip.$el, 'focus');
+      setTimeout(() => {
+        expect(tooltip.showPopper).to.be.true;
+        expect(tooltip.focusing).to.be.true;
+        triggerEvent(tooltip.$el, 'blur');
+        setTimeout(() => {
+          expect(tooltip.showPopper).to.be.false;
+          expect(tooltip.focusing).to.be.false;
+          done();
+        }, 300);
+      }, 100);
+    });
+  });
 });

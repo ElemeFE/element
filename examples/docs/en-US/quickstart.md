@@ -2,6 +2,10 @@
 
 This part walks you through the process of using Element in a webpack project.
 
+### Use vue-cli@3
+
+We provide an [Element plugin](https://github.com/ElementUI/vue-cli-plugin-element) for vue-cli@3, which you can use to quickly build an Element-based project.
+
 ### Use Starter Kit
 
 We provide a general [project template](https://github.com/ElementUI/element-starter) for you. For Laravel users, we also have a [template](https://github.com/ElementUI/element-in-laravel-starter). You can download and use them directly.
@@ -230,14 +234,14 @@ Vue.prototype.$message = Message;
 
 ### Global config
 
-When importing Element, you can define a global config object. For now this object has only one property: `size`, which sets the default size for all components:
+When importing Element, you can define a global config object. For now this object has two properties: `size` and `zIndex`. The property `size` sets the default size for all components and the property `zIndex` sets the initial z-index (default: 2000) for modal boxes:
 
 Fully import Element：
 
 ```js
 import Vue from 'vue';
 import Element from 'element-ui';
-Vue.use(Element, { size: 'small' });
+Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
 Partial import Element：
@@ -246,11 +250,11 @@ Partial import Element：
 import Vue from 'vue';
 import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small' };
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);
 ```
 
-With the above config, the default size of all components that have size attribute will be 'small'.
+With the above config, the default size of all components that have size attribute will be 'small', and the initial z-index of modal boxes is 3000.
 
 ### Start coding
 
@@ -258,7 +262,7 @@ Now you have implemented Vue and Element to your project, and it's time to write
 
 ### Use Nuxt.js
 
-We can also start a project using [Nuxt.js](nuxtjs.org):
+We can also start a project using [Nuxt.js](https://nuxtjs.org/):
 
 <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
   <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>

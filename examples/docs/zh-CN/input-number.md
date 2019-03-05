@@ -1,32 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        num1: 1,
-        num2: 1,
-        num3: 5,
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1,
-        num8: 1
-      }
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
-</script>
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## InputNumber 计数器
 
 仅允许输入标准的数字值，可定义范围
@@ -97,6 +68,31 @@
 ```
 :::
 
+### 精度
+
+:::demo 设置 `precision` 属性可以控制数值精度，接收一个 `Number`。
+
+```html
+<template>
+  <el-input-number v-model="num9" :precision="2" :step="0.1" :max="10"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num9: 1
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+:::tip
+`precision` 的值必须是一个非负整数，并且不能小于 `step` 的小数位数。
+:::
+
 ### 尺寸
 
 额外提供了 `medium`、`small`、`mini` 三种尺寸的数字输入框
@@ -152,16 +148,19 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |----------|-------------- |----------|--------------------------------  |-------- |
-| value    | 绑定值         | number | — | — |
+| value / v-model    | 绑定值         | number | — | 0 |
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
 | step     | 计数器步长           | number   | — | 1 |
+| precision| 数值精度             | number   | — | — |
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
 | controls | 是否使用控制按钮        | boolean | — | true |
 | controls-position | 控制按钮位置 | string | right | - |
 | name | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
+| placeholder | 输入框默认 placeholder | string | - | - |
+
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
@@ -173,3 +172,4 @@
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | focus | 使 input 获取焦点 | - |
+| select | 选中 input 中的文字 | — |

@@ -1,126 +1,3 @@
-<script>
-  export default {
-    methods: {
-      open() {
-        this.$alert('This is a message', 'Title', {
-          confirmButtonText: 'OK',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
-          }
-        });
-      },
-    
-      open2() {
-        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          setTimeout(() => {
-            this.$message({
-              message: 'Delete completed',
-              type: 'success'
-            });
-          }, 200);
-        }).catch(() => {
-          setTimeout(() => {
-            this.$message({
-              message: 'Delete canceled',
-              type: 'info'
-            });  
-          }, 200);
-        });
-      },
-    
-      open3() {
-        this.$prompt('Please input your email', 'Tips', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
-          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: 'Invalid Email'
-        }).then(({ value }) => {
-          setTimeout(() => {
-            this.$message({
-              type: 'success',
-              message: 'Your email is:' + value
-            });
-          }, 200);
-        }).catch(() => {
-          setTimeout(() => {
-            this.$message({
-              type: 'info',
-              message: 'Input canceled'
-            });
-          }, 200);
-        });
-      },
-    
-      open4() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: 'Message',
-          message: h('p', null, [
-            h('span', null, 'Message can be '),
-            h('i', { style: 'color: teal' }, 'VNode')
-          ]),
-          showCancelButton: true,
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = 'Loading...';
-              setTimeout(() => {
-                done();
-                setTimeout(() => {
-                  instance.confirmButtonLoading = false;
-                }, 300);
-              }, 3000);
-            } else {
-              done();
-            }
-          }
-        }).then(action => {
-          setTimeout(() => {
-            this.$message({
-              type: 'info',
-              message: 'action: ' + action
-            });
-          }, 200);
-        });
-      },
-    
-      open5() {
-        this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
-          dangerouslyUseHTMLString: true
-        });
-      },
-    
-      open6() {
-        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
-          type: 'warning',
-          center: true
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: 'Delete completed'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: 'Delete canceled'
-          });
-        });
-      }
-    }
-  };
-</script>
-
 ## MessageBox
 
 Un conjunto de cajas modales simulando un sistema de message box, principalmente para alertar informacion, confirmar operaciones y  mostrar mensajes de aviso.
@@ -218,7 +95,7 @@ Prompt es utilizado cuando se requiere entrada de informacion del usuario.
           cancelButtonText: 'Cancel',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: 'Invalid Email'
-        }).then(value => {
+        }).then(({ value }) => {
           this.$message({
             type: 'success',
             message: 'Your email is:' + value
@@ -288,7 +165,14 @@ Puede ser personalizado para mostrar diversos contenidos.
 ```
 :::
 
+:::tip
+
+El contenido de MessageBox puede ser `VNode`, permitiéndonos pasar componentes personalizados. Al abrir el MessageBox, Vue compara el nuevo `VNode` con el viejo `VNode`, y luego averigua cómo actualizar eficientemente la interfaz de usuario, de modo que es posible que los componentes no se vuelvan a procesar completamente ([#8931](https://github.com/ElemeFE/element/issues/8931)). En este caso, se puede añadir una clave única a `VNode` cada vez que se abre MessageBox: [ejemplo](https://jsfiddle.net/zhiyang/ezmhq2ef).
+
+:::
+
 ### Utiliza cadenas HTML
+
 `message` soporta cadenas HTML.
 
 :::demo Establezca el valor de `dangerouslyUseHTMLString` a true y `message` sera tratado como una cadena HTML.
@@ -316,10 +200,12 @@ Puede ser personalizado para mostrar diversos contenidos.
 Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinamico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir facilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegurece que el contendio de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
 :::
 
-### Centered content
-El contenido del componente MessageBox puede ser centrado.
+### Distinguir entre cancelar y cerrar
 
-:::demo Establecer `center` a `true` centrara el contenido
+En algunos casos, hacer clic en el botón Cancelar y en el botón Cerrar puede tener diferentes significados.
+
+:::demo Por defecto, los parámetros de `Promise's reject callback` y `callback` son `cancel` cuando el usuario cancela (haciendo clic en el botón de cancelación)  y cierra  (haciendo clic en el botón de cerrar o en la capa de máscara, pulsando la tecla ESC) el MessageBox. Si `distinguishCancelAndClose` está ajustado a `true`, los parámetros de las dos operaciones anteriores son `cancel` y `close` respectivamente.
+
 
 ```html
 <template>
@@ -330,6 +216,46 @@ El contenido del componente MessageBox puede ser centrado.
   export default {
     methods: {
       open6() {
+        this.$confirm('You have unsaved changes, save and proceed?', 'Confirm', {
+          distinguishCancelAndClose: true,
+          confirmButtonText: 'Save',
+          cancelButtonText: 'Discard Changes'
+        })
+          .then(() => {
+            this.$message({
+              type: 'info',
+              message: 'Changes saved. Proceeding to a new route.'
+            });
+          })
+          .catch(action => {
+            this.$message({
+              type: 'info',
+              message: action === 'cancel'
+                ? 'Changes discarded. Proceeding to a new route.'
+                : 'Stay in the current route'
+            })
+          });
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Centered content
+El contenido del componente MessageBox puede ser centrado.
+
+:::demo Establecer `center` a `true` centrara el contenido
+
+```html
+<template>
+  <el-button type="text" @click="open7">Click to open Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open7() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -379,9 +305,11 @@ Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.conf
 | message                  | contenido del componente MessageBox      | string                                   | —                                | —                                        |
 | dangerouslyUseHTMLString | utilizado para que `message` sea tratado como una cadena HTML | boolean                                  | —                                | false                                    |
 | type                     | tipo de mensaje , utilizado para mostrar el  icono | string                                   | success / info / warning / error | —                                        |
+| iconClass                | clase personalizada para el icono, sobreescribe `type` | string         | —                          | —           |
 | customClass              | nombre de la clase personzalida para el componente MessageBox | string                                   | —                                | —                                        |
-| callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm' o 'cancel', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
-| beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm' o 'cancel'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |
+| callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm', 'cancel' o 'close', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
+| beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm', 'cancel' o 'close'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |
+| distinguishCancelAndClose | si se debe distinguir entre cancelar y cerrar | boolean | — | false |
 | lockScroll               | utilizado para bloquear el desplazamiento del contenido del MessageBox prompts | boolean                                  | —                                | true                                     |
 | showCancelButton         | utlizado para mostrar un boton cancelar  | boolean                                  | —                                | false (true cuando es llamado con confirm y prompt) |
 | showConfirmButton        | utlizado para mostrar un boton confirmar | boolean                                  | —                                | true                                     |

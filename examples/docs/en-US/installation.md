@@ -29,4 +29,4 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 
 <iframe width="100%" height="600" src="//jsfiddle.net/hzfpyvg6/1213/embedded/html,result/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-If you are using npm and wish to apply webpack, please continue to the next page: Quick Start.
+If you are using npm and wish to apply webpack, please continue to the next page: [Quick Start](/#/en-US/component/quickstart).

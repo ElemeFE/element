@@ -30,34 +30,6 @@ ${ComponentName}.install = function(Vue) {
 export default ${ComponentName};`
   },
   {
-    filename: 'cooking.conf.js',
-    content: `var cooking = require('cooking');
-var gen = require('../../build/gen-single-config');
-
-cooking.set(gen(__dirname, 'El${ComponentName}'));
-
-module.exports = cooking.resolve();
-`
-  },
-  {
-    filename: 'package.json',
-    content: `{
-  "name": "element-${componentname}",
-  "version": "0.0.0",
-  "description": "A ${componentname} component for Vue.js.",
-  "keywords": [
-    "element",
-    "vue",
-    "component"
-  ],
-  "main": "./lib/index.js",
-  "repository": "https://github.com/ElemeFE/element/tree/master/packages/${componentname}",
-  "author": "elemefe",
-  "license": "MIT",
-  "dependencies": {}
-}`
-  },
-  {
     filename: 'src/main.vue',
     content: `<template>
   <div class="el-${componentname}"></div>
@@ -78,6 +50,10 @@ export default {
     content: `## ${ComponentName}`
   },
   {
+    filename: path.join('../../examples/docs/es', `${componentname}.md`),
+    content: `## ${ComponentName}`
+  },
+  {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
     content: `import { createTest, destroyVM } from '../util';
 import ${ComponentName} from 'packages/${componentname}';
@@ -94,6 +70,22 @@ describe('${ComponentName}', () => {
   });
 });
 `
+  },
+  {
+    filename: path.join('../../packages/theme-chalk/src', `${componentname}.scss`),
+    content: `@import "mixins/mixins";
+@import "common/var";
+
+@include b(${componentname}) {
+}`
+  },
+  {
+    filename: path.join('../../types', `${componentname}.d.ts`),
+    content: `import { ElementUIComponent } from './component'
+
+/** ${ComponentName} Component */
+export declare class El${ComponentName} extends ElementUIComponent {
+}`
   }
 ];
 

@@ -18,7 +18,9 @@
       tabPosition: {
         type: String,
         default: 'top'
-      }
+      },
+      beforeLeave: Function,
+      stretch: Boolean
     },
 
     provide() {
@@ -43,14 +45,29 @@
       },
       currentName(value) {
         if (this.$refs.nav) {
-          this.$nextTick(_ => {
-            this.$refs.nav.scrollToActiveTab();
+          this.$nextTick(() => {
+            this.$refs.nav.$nextTick(_ => {
+              this.$refs.nav.scrollToActiveTab();
+            });
           });
         }
       }
     },
 
     methods: {
+      calcPaneInstances() {
+        if (this.$slots.default) {
+          const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
+            vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
+          // update indeed
+          const panes = paneSlots.map(({ componentInstance }) => componentInstance);
+          if (!(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]))) {
+            this.panes = panes;
+          }
+        } else if (this.panes.length !== 0) {
+          this.panes = [];
+        }
+      },
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
         this.setCurrentName(tabName);
@@ -67,23 +84,27 @@
         this.$emit('tab-add');
       },
       setCurrentName(value) {
-        this.currentName = value;
-        this.$emit('input', value);
-      },
-      addPanes(item) {
-        const index = this.$slots.default.filter(item => {
-          return item.elm.nodeType === 1 && /\bel-tab-pane\b/.test(item.elm.className);
-        }).indexOf(item.$vnode);
-        this.panes.splice(index, 0, item);
-      },
-      removePanes(item) {
-        const panes = this.panes;
-        const index = panes.indexOf(item);
-        if (index > -1) {
-          panes.splice(index, 1);
+        const changeCurrentName = () => {
+          this.currentName = value;
+          this.$emit('input', value);
+        };
+        if (this.currentName !== value && this.beforeLeave) {
+          const before = this.beforeLeave(value, this.currentName);
+          if (before && before.then) {
+            before.then(() => {
+              changeCurrentName();
+
+              this.$refs.nav && this.$refs.nav.removeFocus();
+            });
+          } else if (before !== false) {
+            changeCurrentName();
+          }
+        } else {
+          changeCurrentName();
         }
       }
     },
+
     render(h) {
       let {
         type,
@@ -94,7 +115,8 @@
         panes,
         editable,
         addable,
-        tabPosition
+        tabPosition,
+        stretch
       } = this;
 
       const newButton = editable || addable
@@ -117,7 +139,8 @@
           onTabRemove: handleTabRemove,
           editable,
           type,
-          panes
+          panes,
+          stretch
         },
         ref: 'nav'
       };
@@ -144,10 +167,19 @@
         </div>
       );
     },
+  
     created() {
       if (!this.currentName) {
         this.setCurrentName('0');
       }
+    },
+
+    mounted() {
+      this.calcPaneInstances();
+    },
+
+    updated() {
+      this.calcPaneInstances();
     }
   };
 </script>

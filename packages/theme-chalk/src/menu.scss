@@ -1,11 +1,12 @@
 @import "mixins/mixins";
 @import "mixins/utils";
 @import "common/var";
+@import "common/transition";
 
 @mixin menu-item {
   height: 56px;
   line-height: 56px;
-  font-size: 14px;
+  font-size: $--menu-item-font-size;
   color: $--menu-item-color;
   padding: 0 20px;
   list-style: none;
@@ -44,10 +45,12 @@
   padding-left: 0;
   background-color: $--menu-item-fill;
   @include utils-clearfix;
+  &.el-menu--horizontal {
+    border-bottom: solid 1px #e6e6e6;
+  }
 
   @include m(horizontal) {
     border-right: none;
-    border-bottom: solid 1px #e6e6e6;
     & > .el-menu-item {
       float: left;
       height: 60px;
@@ -110,10 +113,10 @@
         line-height: 36px;
         padding: 0 10px;
         color: $--color-text-secondary;
-
-        &.is-active {
-          color: $--color-text-primary;
-        }
+      }
+      & .el-menu-item.is-active,
+      & .el-submenu.is-active > .el-submenu__title {
+        color: $--color-text-primary;
       }
     }
     & .el-menu-item:not(.is-disabled):hover,

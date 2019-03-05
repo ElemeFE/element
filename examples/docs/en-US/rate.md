@@ -1,44 +1,3 @@
-<style>
-  .demo-rate .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    display: inline-block;
-    width: 50%;
-    box-sizing: border-box;
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-rate .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: null,
-        value2: null,
-        value3: null,
-        value4: null,
-        value5: 3.7
-      };
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let firstDemo = document.querySelector('.source');
-        firstDemo.style.padding = '0';
-      });
-    }
-  }
-</script>
-
 ## Rate
 
 Used for rating
@@ -154,6 +113,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | number | — | 0 |
 | max | max rating score | number | — | 5 |
 | disabled | whether Rate is read-only | boolean | — | false |
 | allow-half | whether picking half start is allowed | boolean | — | false |

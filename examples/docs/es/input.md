@@ -1,150 +1,14 @@
-<script>
-  export default {
-    data() {
-      return {
-        links: [],
-        input: '',
-        input1: '',
-        input2: '',
-        input21: '',
-        input22: '',
-        input23: '',
-        input3: '',
-        input4: '',
-        input5: '',
-        input6: '',
-        input7: '',
-        input8: '',
-        input9: '',
-        textarea: '',
-        textarea2: '',
-        textarea3: '',
-        select: '',
-        state1: '',
-        state2: '',
-        state3: '',
-        state4: ''
-      };
-    },
-    methods: {
-      loadAll() {
-        return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-        ];
-      },
-      querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-
-        cb(results);
-      },
-      querySearchAsync(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          cb(results);
-        }, 3000 * Math.random());
-      },
-      createStateFilter(queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item) {
-        console.log(item);
-      },
-      handleIconClick(ev) {
-        console.log(ev);
-      }
-    },
-    mounted() {
-      this.links = this.loadAll();
-    }
-  };
-</script>
-
-<style>
-  .demo-input.demo-es {
-    .el-select .el-input {
-      width: 130px;
-    }
-    .el-input {
-      width: 180px;
-    }
-    .el-textarea {
-      width: 414px;
-    }
-    .el-input-group {
-      width: 100%;
-    }
-    .demo-input-size {
-      .el-input {
-        vertical-align: top;
-        margin: 0 10px 10px 0;
-      }
-    }
-    .demo-input-suffix {
-      padding: 10px;
-    }
-    .demo-input-suffix .el-input {
-      margin-right: 15px;
-    }
-    .demo-input-label {
-      display: inline-block;
-      width: 130px;
-    }
-    .input-with-select .el-input-group__prepend {
-      background-color: #fff;
-    }
-    .demo-autocomplete {
-      text-align: center;
-
-      .sub-title {
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #8492a6;
-      }
-    
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
-      }
-    
-      .el-autocomplete {
-        text-align: left;
-      }
-    }
-  }
-  .el-autocomplete-suggestion.my-autocomplete {
-    li {
-      line-height: normal;
-      padding: 7px *;
-
-      .name {
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .addr {
-        font-size: 12px;
-        color: #b4b4b4;
-      }
-      .highlighted .addr {
-        color: #ddd;
-      }
-    }
-  }
-</style>
-
 ## Input
 
 Ingresa datos usando el ratón o teclado.
+
+:::warning
+Input is a controlled component, it **always shows Vue binding value**.
+
+Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+
+Do not support `v-model` modifiers.
+:::
 
 ### Uso básico
 
@@ -163,11 +27,12 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ### Disabled
 
-:::demo Deshabilite el Input con el atributo  `disabled`.
+:::demo Deshabilite el Input con el atributo `disabled`.
 
 ```html
 <el-input
@@ -184,6 +49,49 @@ export default {
     }
   }
 }
+</script>
+```
+
+:::
+
+### Clearable
+
+:::demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Password box
+
+:::demo Make a toggleable password Input with the `show-password` attribute.
+
+```html
+<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
 </script>
 ```
 :::
@@ -242,6 +150,7 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ### Textarea
@@ -268,6 +177,7 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ### Textarea tamaño automatico
@@ -302,6 +212,7 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ### Mezclando elementos con input
@@ -353,6 +264,7 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ### Tamaño
@@ -395,6 +307,7 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ### Autocompletado
@@ -469,13 +382,14 @@ Puede obtener algunas sugerencias basadas en la entrada actual.
   }
 </script>
 ```
+
 :::
 
 ### Template personalizado
 
 Personalice cómo se muestran las sugerencias.
 
-:::demo Utilice `scoped slot` para personalizar los elementos de sugerencias. En el scope, puede acceder al objeto de sugerencia mediante la clave  `item`.
+:::demo Utilice `scoped slot` para personalizar los elementos de sugerencias. En el scope, puede acceder al objeto de sugerencia mediante la clave `item`.
 
 ```html
 <el-autocomplete
@@ -557,6 +471,7 @@ Personalice cómo se muestran las sugerencias.
   }
 </script>
 ```
+
 :::
 
 ### Búsqueda remota
@@ -564,6 +479,7 @@ Personalice cómo se muestran las sugerencias.
 Búsqueda de datos desde el servidor.
 
 :::demo
+
 ```html
 <el-autocomplete
   v-model="state4"
@@ -616,34 +532,38 @@ Búsqueda de datos desde el servidor.
   };
 </script>
 ```
+
 :::
 
 ### Input atributos
 
-| Atributo      | Descripción                              | Tipo             | Valores aceptados                | Por defecto |
-| ------------- | ---------------------------------------- | ---------------- | -------------------------------- | ----------- |
-| type          | tipo de input                            | string           | text / textarea                  | text        |
-| value         | valor enlazado                           | string / number  | —                                | —           |
-| maxlength     | igual que `maxlength` en el input nativo | number           | —                                | —           |
-| minlength     | igual que `minlength` en el input nativo | number           | —                                | —           |
-| placeholder   | placeholder del Input                    | string           | —                                | —           |
-| disabled      | si esta deshabilitado                    | boolean          | —                                | false       |
-| size          | tamaño del input, esto no funciona cuando `type` no es textarea | string           | medium / small / mini            | —           |
-| prefix-icon   | clase del icono de prefijo               | string           | —                                | —           |
-| suffix-icon   | clase del icono de sufijo                | string           | —                                | —           |
-| rows          | número de filas, sólo funciona cuando `type` es 'textarea'. | number           | —                                | 2           |
-| autosize      | si textarea tiene una altura adaptativa, sólo funciona cuando el`type` es 'textarea'. Puede aceptar un objeto, p. ej. { minRows: 2, maxRows: 6 } | boolean / object | —                                | false       |
-| auto-complete | igual que `auto-complete` en el input nativo | string           | on/off                           | off         |
-| name          | igual que `name` en el input nativo      | string           | —                                | —           |
-| readonly      | igual que `readonly` en el input nativo  | boolean          | —                                | false       |
-| max           | igual que `max` en el input nativo       | —                | —                                | —           |
-| min           | igual que `min` en el input nativo       | —                | —                                | —           |
-| step          | igual que `step` en el input nativo      | —                | —                                | —           |
-| resize        | control para el dimensionamiento         | string           | none, both, horizontal, vertical | —           |
-| autofocus     | igual que `autofocus` en el input nativo | boolean          | —                                | false       |
-| form          | igual que `form` en el input nativo      | string           | —                                | —           |
-| label         | texto de la etiqueta                     | string           | —                                | —           |
-| tabindex      | orden de tabulacion para el Input        | string           | -                                | -           |
+| Atributo      | Descripción                                                                                                                                      | Tipo             | Valores aceptados                                                                                                                       | Por defecto |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| type          | tipo de input                                                                                                                                    | string           | text, textarea y otros [tipos de entrada nativos](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/input#Form_%3Cinput%3E_types) | text        |
+| value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |                                                                                                                                | —           |
+| maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
+| minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
+| placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
+| clearable | whether to show clear button | boolean | — | false |
+| show-password | whether to show toggleable password input| boolean         | — | false |
+| disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
+| size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
+| prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |
+| suffix-icon   | clase del icono de sufijo                                                                                                                        | string           | —                                                                                                                                       | —           |
+| rows          | número de filas, sólo funciona cuando `type` es 'textarea'.                                                                                      | number           | —                                                                                                                                       | 2           |
+| autosize      | si textarea tiene una altura adaptativa, sólo funciona cuando el`type` es 'textarea'. Puede aceptar un objeto, p. ej. { minRows: 2, maxRows: 6 } | boolean / object | —                                                                                                                                       | false       |
+| autocomplete  | igual que `autocomplete` en el input nativo                                                                                                      | string           | on/off                                                                                                                                  | off         |
+| auto-complete | @DEPRECATED en el proximo cambio mayor de version                                                                                                | string           | on/off                                                                                                                                  | off         |
+| name          | igual que `name` en el input nativo                                                                                                              | string           | —                                                                                                                                       | —           |
+| readonly      | igual que `readonly` en el input nativo                                                                                                          | boolean          | —                                                                                                                                       | false       |
+| max           | igual que `max` en el input nativo                                                                                                               | —                | —                                                                                                                                       | —           |
+| min           | igual que `min` en el input nativo                                                                                                               | —                | —                                                                                                                                       | —           |
+| step          | igual que `step` en el input nativo                                                                                                              | —                | —                                                                                                                                       | —           |
+| resize        | control para el dimensionamiento                                                                                                                 | string           | none, both, horizontal, vertical                                                                                                        | —           |
+| autofocus     | igual que `autofocus` en el input nativo                                                                                                         | boolean          | —                                                                                                                                       | false       |
+| form          | igual que `form` en el input nativo                                                                                                              | string           | —                                                                                                                                       | —           |
+| label         | texto de la etiqueta                                                                                                                             | string           | —                                                                                                                                       | —           |
+| tabindex      | orden de tabulacion para el Input                                                                                                                | string           | -                                                                                                                                       | -           |
 
 ### Input slots
 
@@ -656,38 +576,44 @@ Búsqueda de datos desde el servidor.
 
 ### Input eventos
 
-| Nombre | Descripción                              | Parametros                |
-| ------ | ---------------------------------------- | ------------------------- |
-| blur   | Se dispara cuando se pierde el foco      | (event: Event)            |
-| focus  | Se dispara cuando se obtiene el foco     | (event: Event)            |
-| change | se activa cuando cambia el valor de entrada | (value: string \| number) |
-| clear | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | — |
+| Nombre | Descripción                                                                                | Parametros                |
+| ------ | ------------------------------------------------------------------------------------------ | ------------------------- |
+| blur   | Se dispara cuando se pierde el foco                                                        | (event: Event)            |
+| focus  | Se dispara cuando se obtiene el foco                                                       | (event: Event)            |
+| change | se activa cuando cambia el valor de entrada                                                | (value: string \| number) |
+| clear  | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | —                         |
 
 ### Input Metodo
 
 | Metodo | Descripción                   | Parametros |
 | ------ | ----------------------------- | ---------- |
 | focus  | coloca el foco en el elemento | —          |
-| blur   | quita el foco del elemento | —          |
-| select | selecciona el texto del input | —       |
+| blur   | quita el foco del elemento    | —          |
+| select | selecciona el texto del input | —          |
 
 ### Autocomplete Atributos
 
-Atributo | Descripción | Tipo | Opciones | Por defecto
-|----| ----| ----| ---- | -----|
-|placeholder| el placeholder del Autocomplete| string | — | — |
-|disabled | si el Autocompete esta deshabilitado  | boolean | — | false|
-| value-key | nombre del campo del objeto de sugerencia del input para la visualización | string | — | value |
-|icon | nombre del icono | string | — | — |
-|value | valor enlazado | string | — | — |
-| debounce | retardo al escribir, en milisegundos | number | — | 300 |
-| placement | ubicación del menú emergente | string | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
-|fetch-suggestions | un método para obtener las sugerencias del input. Cuando las sugerencias estén listas, invocar `callback(data:[])` para devolverlas a Autocomplete | Function(queryString, callback) | — | — |
-| popper-class | nombre personalizado de clase para el dropdown de autocomplete | string | — | — |
-| trigger-on-focus | si se deben mostrar sugerencias cuando el input obtiene el foco | boolean | — | true |
-| name | igual que `name` en el input nativo | string | — | — |
-| select-when-unmatched | si se emite un evento `select` al pulsar enter cuando no hay coincidencia de Autocomplete | boolean | — | false |
-| label | texto de la etiqueta | string | — | — |
+| Atributo              | Descripción                                                                                                                                        | Tipo                            | Opciones                                                       | Por defecto  |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | -------------------------------------------------------------- | ------------ |
+| placeholder           | el placeholder del Autocomplete                                                                                                                    | string                          | —                                                              | —            |
+| disabled              | si el Autocompete esta deshabilitado                                                                                                               | boolean                         | —                                                              | false        |
+| value-key             | nombre del campo del objeto de sugerencia del input para la visualización                                                                          | string                          | —                                                              | value        |
+| icon                  | nombre del icono                                                                                                                                   | string                          | —                                                              | —            |
+| value                 | valor enlazado                                                                                                                                     | string                          | —                                                              | —            |
+| debounce              | retardo al escribir, en milisegundos                                                                                                               | number                          | —                                                              | 300          |
+| placement             | ubicación del menú emergente                                                                                                                       | string                          | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
+| fetch-suggestions     | un método para obtener las sugerencias del input. Cuando las sugerencias estén listas, invocar `callback(data:[])` para devolverlas a Autocomplete | Function(queryString, callback) | —                                                              | —            |
+| popper-class          | nombre personalizado de clase para el dropdown de autocomplete                                                                                     | string                          | —                                                              | —            |
+| trigger-on-focus      | si se deben mostrar sugerencias cuando el input obtiene el foco                                                                                    | boolean                         | —                                                              | true         |
+| name                  | igual que `name` en el input nativo                                                                                                                | string                          | —                                                              | —            |
+| select-when-unmatched | si se emite un evento `select` al pulsar enter cuando no hay coincidencia de Autocomplete                                                          | boolean                         | —                                                              | false        |
+| label                 | texto de la etiqueta                                                                                                                               | string                          | —                                                              | —            |
+| prefix-icon           | prefix icon class                                                                                                                                  | string                          | —                                                              | —            |
+| suffix-icon           | suffix icon class                                                                                                                                  | string                          | —                                                              | —            |
+| hide-loading          | si se debe ocultar el icono de loading en la búsqueda remota                                                                                       | boolean                         | —                                                              | false        |
+| popper-append-to-body | si añadir el desplegable al cuerpo. Si la posición del menú desplegable es incorrecta, puede intentar establecer este prop a false                 | boolean                         | -                                                              | true         |
+| validate-event        | si se debe lanzar la validación de formulario                                                                                                                 | boolean                         | -                                                   | true         |
+| highlight-first-item | si se debe resaltar el primer elemento en las sugerencias de búsqueda remota de forma predeterminada                 | boolean                         | -                                                              | false         |
 
 ### Autocomplete Slots
 
@@ -700,14 +626,14 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 
 ### Autocomplete Scoped Slot
 
-| Name | Description |
-|------|--------|
-| — | Custom content for input suggestions. The scope parameter is { item } |
+| Name | Description                                                                              |
+| ---- | ---------------------------------------------------------------------------------------- |
+| —    | Contenido personalizado para el input de sugerencias. El parametro del scope es { item } |
 
 ### Autocomplete Eventos
 
-| Nombre | Descripción                              | Parametros                               |
-| ------ | ---------------------------------------- | ---------------------------------------- |
+| Nombre | Descripción                                      | Parametros                                  |
+| ------ | ------------------------------------------------ | ------------------------------------------- |
 | select | se dispara cuando se hace click a una sugerencia | sugerencia en la que se está haciendo click |
 
 ### Autocomplete Metodo

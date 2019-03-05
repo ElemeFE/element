@@ -1,78 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        gridData: [{
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-03',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }],
-        dialogVisible: false,
-        dialogTableVisible: false,
-        dialogFormVisible: false,
-        outerVisible: false,
-        innerVisible: false,
-        centerDialogVisible: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
-      };
-    },
-    methods: {
-      handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-dialog {
-    .dialog-footer button:first-child {
-      margin-right: 10px;
-    }
-    .full-image {
-      width: 100%;
-    }
-    .el-dialog__wrapper {
-      margin: 0;
-    }
-    .el-select {
-      width: 300px;
-    }
-    .el-input {
-      width: 300px;
-    }
-    .el-button--text {
-      margin-right: 15px;
-    }
-  }
-</style>
-
 ## Dialog
 
 Informar a usuarios preservando el estado de la página actual.
@@ -151,7 +76,7 @@ El contenido del Diálogo puede ser cualquier cosa, incluso una tabla o un formu
 <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Zones" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="Please select a zone">
@@ -246,7 +171,7 @@ Si un diálogo está anidado en otro diálogo, se requiere append-to-body.
 ### Contenido centrado
 El contenido de Diálogo se puede centrar.
 
-:::demo Ajuste `center` en `true` para centrar el encabezado y el pie de página del cuadro de diálogo horizontalmente.
+:::demo Ajuste `center` en `true` para centrar el encabezado y el pie de página del cuadro de diálogo horizontalmente. `center` sólo afecta al encabezado y pie de página de Dialog. El cuerpo de Dialog puede ser cualquier cosa, así que a veces no se ve bien cuando está centrado. Necesitas escribir algún CSS si deseas centrar el cuerpo también.
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -276,7 +201,7 @@ El contenido de Diálogo se puede centrar.
 :::
 
 :::tip
-`center` sólo afecta al encabezado y pie de página de Dialog. El cuerpo de Dialog puede ser cualquier cosa, así que a veces no se ve bien cuando está centrado. Necesitas escribir algún CSS si deseas centrar el cuerpo también.
+The content of Dialog is lazily rendered, which means the default slot is not rendered onto the DOM until it is firstly opened. Therefore, if you need to perform a DOM manipulation or access a component using `ref`, do it in the `open` event callback.
 :::
 
 :::tip
@@ -317,4 +242,7 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 | Nombre de Evento | Descripcíon                              | Parámetros |
 | ---------------- | ---------------------------------------- | ---------- |
 | open             | se activa cuando se abre el cuadro de Diálogo | —          |
+| opened           | se activa cuando la animacion de apertura del Dialog termina. | — |
 | close            | se dispara cuando el Diálogo se cierra   | —          |
+| closed           | se activa cuando finaliza la animación de cierre del Diálog | — |
+

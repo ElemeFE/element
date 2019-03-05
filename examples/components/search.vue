@@ -6,7 +6,8 @@
     :fetch-suggestions="querySearch"
     :placeholder="placeholder"
     :trigger-on-focus="false"
-    @select="handleSelect">
+    @select="handleSelect"
+    highlight-first-item>
     <template slot-scope="props">
       <p class="algolia-search-title" v-if="props.item.title">
         <span v-html="props.item.highlightedCompo"></span>
@@ -37,7 +38,7 @@
 <style>
   .algolia-search {
     width: 450px !important;
-  
+
     &.is-empty {
       .el-autocomplete-suggestion__list {
         padding-bottom: 0;
@@ -51,27 +52,27 @@
 
     li {
       border-bottom: solid 1px #ebebeb;
-      
+
       &:last-child {
          border-bottom: none;
        }
     }
-    
+
     .algolia-highlight {
       color: #409EFF;
       font-weight: bold;
     }
-    
+
     .algolia-search-title {
       font-size: 14px;
       margin: 6px 0;
       line-height: 1.8;
     }
-    
+
     .algolia-search-separator {
       padding: 0 6px;
     }
-    
+
     .algolia-search-content {
       font-size: 12px;
       margin: 6px 0;
@@ -80,7 +81,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    
+
     .algolia-search-link {
       position: absolute;
       bottom: 0;
@@ -96,14 +97,14 @@
       &:hover {
          background-color: #e4e7ed;
        }
-    
+
       img {
         display: inline-block;
         height: 17px;
         margin-top: 10px;
       }
     }
-  
+
     .algolia-search-empty {
       margin: 5px 0;
       text-align: center;
@@ -136,6 +137,11 @@
             search: 'Buscar',
             empty: 'No hay datos que coincidan',
             index: 'es'
+          },
+          'fr-FR': {
+            search: 'Rechercher',
+            empty: 'Aucun résultat',
+            index: 'fr'
           }
         }
       };
@@ -163,7 +169,7 @@
 
     methods: {
       initIndex() {
-        const client = algoliasearch('9NLTR1QH8B', 'a75cbec97cda75ab7334fed9219ecc57');
+        const client = algoliasearch('4C63BTGP6S', '0729c3c7f4dc8db7395ad0b19c0748d2');
         this.index = client.initIndex(`element-${ this.lang ? this.langs[this.lang].index : 'zh' }`);
       },
 

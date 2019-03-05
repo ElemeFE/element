@@ -6,36 +6,40 @@ export default {
   mixins: [LayoutObserver],
 
   render(h) {
-    const sums = [];
-    this.columns.forEach((column, index) => {
-      if (index === 0) {
-        sums[index] = this.sumText;
-        return;
-      }
-      const values = this.store.states.data.map(item => Number(item[column.property]));
-      const precisions = [];
-      let notNumber = true;
-      values.forEach(value => {
-        if (!isNaN(value)) {
-          notNumber = false;
-          let decimal = ('' + value).split('.')[1];
-          precisions.push(decimal ? decimal.length : 0);
+    let sums = [];
+    if (this.summaryMethod) {
+      sums = this.summaryMethod({ columns: this.columns, data: this.store.states.data });
+    } else {
+      this.columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = this.sumText;
+          return;
+        }
+        const values = this.store.states.data.map(item => Number(item[column.property]));
+        const precisions = [];
+        let notNumber = true;
+        values.forEach(value => {
+          if (!isNaN(value)) {
+            notNumber = false;
+            let decimal = ('' + value).split('.')[1];
+            precisions.push(decimal ? decimal.length : 0);
+          }
+        });
+        const precision = Math.max.apply(null, precisions);
+        if (!notNumber) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
+            } else {
+              return prev;
+            }
+          }, 0);
+        } else {
+          sums[index] = '';
         }
       });
-      const precision = Math.max.apply(null, precisions);
-      if (!notNumber) {
-        sums[index] = values.reduce((prev, curr) => {
-          const value = Number(curr);
-          if (!isNaN(value)) {
-            return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
-          } else {
-            return prev;
-          }
-        }, 0);
-      } else {
-        sums[index] = '';
-      }
-    });
+    }
 
     return (
       <table
@@ -58,10 +62,10 @@ export default {
                 <td
                   colspan={ column.colSpan }
                   rowspan={ column.rowSpan }
-                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
+                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns, column) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
                   <div class={ ['cell', column.labelClassName] }>
                     {
-                      this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
+                      sums[cellIndex]
                     }
                   </div>
                 </td>
@@ -112,6 +116,14 @@ export default {
       return this.store.states.fixedColumns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     rightFixedCount() {
       return this.store.states.rightFixedColumns.length;
     },
@@ -126,15 +138,17 @@ export default {
   },
 
   methods: {
-    isCellHidden(index, columns) {
+    isCellHidden(index, columns, column) {
       if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
+        return index >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
         let before = 0;
         for (let i = 0; i < index; i++) {
           before += columns[i].colSpan;
         }
-        return before < this.columnsCount - this.rightFixedCount;
+        return before < this.columnsCount - this.rightFixedLeafCount;
+      } else if (!this.fixed && column.fixed) { // hide cell when footer instance is not fixed and column is fixed
+        return true;
       } else {
         return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
       }

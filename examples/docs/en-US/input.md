@@ -1,151 +1,15 @@
-﻿<script>
-  export default {
-    data() {
-      return {
-        links: [],
-        input: '',
-        input1: '',
-        input2: '',
-        input21: '',
-        input22: '',
-        input23: '',
-        input3: '',
-        input4: '',
-        input5: '',
-        input6: '',
-        input7: '',
-        input8: '',
-        input9: '',
-        input10: '',
-        textarea: '',
-        textarea2: '',
-        textarea3: '',
-        select: '',
-        state1: '',
-        state2: '',
-        state3: '',
-        state4: ''
-      };
-    },
-    methods: {
-      loadAll() {
-        return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-        ];
-      },
-      querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-
-        cb(results);
-      },
-      querySearchAsync(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          cb(results);
-        }, 3000 * Math.random());
-      },
-      createStateFilter(queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item) {
-        console.log(item);
-      },
-      handleIconClick(ev) {
-        console.log(ev);
-      }
-    },
-    mounted() {
-      this.links = this.loadAll();
-    }
-  };
-</script>
-
-<style>
-  .demo-input.demo-en-US {
-    .el-select .el-input {
-      width: 130px;
-    }
-    .el-input {
-      width: 180px;
-    }
-    .el-textarea {
-      width: 414px;
-    }
-    .el-input-group {
-      width: 100%;
-    }
-    .demo-input-size {
-      .el-input {
-        vertical-align: top;
-        margin: 0 10px 10px 0;
-      }
-    }
-    .demo-input-suffix {
-      padding: 10px;
-    }
-    .demo-input-suffix .el-input {
-      margin-right: 15px;
-    }
-    .demo-input-label {
-      display: inline-block;
-      width: 130px;
-    }
-    .input-with-select .el-input-group__prepend {
-      background-color: #fff;
-    }
-    .demo-autocomplete {
-      text-align: center;
-
-      .sub-title {
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #8492a6;
-      }
-
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
-      }
-
-      .el-autocomplete {
-        text-align: left;
-      }
-    }
-  }
-  .el-autocomplete-suggestion.my-autocomplete {
-    li {
-      line-height: normal;
-      padding: 7px *;
-
-      .name {
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .addr {
-        font-size: 12px;
-        color: #b4b4b4;
-      }
-      .highlighted .addr {
-        color: #ddd;
-      }
-    }
-  }
-</style>
-
 ## Input
 
 Input data using mouse or keyboard.
+
+:::warning
+Input is a controlled component, it **always shows Vue binding value**.
+
+Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+
+Do not support `v-model` modifiers.
+:::
+
 
 ### Basic usage
 
@@ -208,6 +72,25 @@ export default {
     }
   }
 }
+</script>
+```
+:::
+
+### Password box
+
+:::demo Make a toggleable password Input with the `show-password` attribute.
+
+```html
+<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input11: ''
+      }
+    }
+  }
 </script>
 ```
 :::
@@ -642,19 +525,21 @@ Search data from server-side.
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----| ----| ----| ---- | ----- |
-|type| type of input | string | text / textarea | text |
-|value| binding value | string / number| — | — |
+|type| type of input | string | text, textarea and other [native input types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
+|value / v-model| binding value | string / number| — | — |
 |maxlength| same as `maxlength` in native input | number| — | — |
 |minlength| same as `minlength` in native input | number | — | — |
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
+| show-password | whether to show toggleable password input| boolean         | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
 | suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
 |autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean / object | — | false |
-|auto-complete | same as `auto-complete` in native input | string | on/off | off |
+|autocomplete | same as `autocomplete` in native input | string | on/off | off |
+|auto-complete | @DEPRECATED in next major version | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
 | readonly | same as `readonly` in native input | boolean | — | false |
 |max | same as `max` in native input | — | — | — |
@@ -665,6 +550,7 @@ Search data from server-side.
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
 | tabindex | input tabindex | string | - | - |
+| validate-event | whether to trigger form validation | boolean | - | true |
 
 ### Input slots
 
@@ -697,6 +583,7 @@ Search data from server-side.
 Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
 | value-key | key name of the input suggestion object for display | string | — | value |
 |icon | icon name | string | — | — |
@@ -711,6 +598,9 @@ Attribute | Description | Type | Options | Default
 | label | label text | string | — | — |
 | prefix-icon | prefix icon class | string | — | — |
 | suffix-icon | suffix icon class | string | — | — |
+| hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
+| popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
+| highlight-first-item | whether to highlight first item in remote search suggestions by default | boolean | — | false |
 
 ### Autocomplete Slots
 

@@ -1,62 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tags: [
-          { name: 'Tag 1', type: '' },
-          { name: 'Tag 2', type: 'success' },
-          { name: 'Tag 3', type: 'info' },
-          { name: 'Tag 4', type: 'warning' },
-          { name: 'Tag 5', type: 'danger' }
-        ],
-        dynamicTags: ['Tag 1', 'Tag 2', 'Tag 3'],
-        inputVisible: false,
-        inputValue: ''
-      };
-    },
-    methods: {
-      handleClose(tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      },
-
-      showInput() {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
-      },
-
-      handleInputConfirm() {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicTags.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-box.demo-tag {
-    .el-tag + .el-tag {
-      margin-left: 10px;
-    }
-    .button-new-tag {
-      margin-left: 10px;
-      height: 32px;
-      line-height: 30px;
-      padding: 0 *;
-    }
-    .input-new-tag {
-      width: 90px;
-      margin-left: 10px;
-      vertical-align: bottom;
-    }
-  }
-</style>
-
 ## Tag
 
 Used for marking and selection.
@@ -212,4 +153,5 @@ Besides default size, Tag component provides three additional sizes for you to c
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
+| click | triggers when Tag is clicked | — |
 | close | triggers when Tag is removed | — |

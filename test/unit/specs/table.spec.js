@@ -959,17 +959,16 @@ describe('Table', () => {
             </el-table>
           `,
 
-            created() {
-              this.testData = getTestData();
-            },
-
             data() {
-              return { expandCount: 0, expandRowKeys: [] };
+              return { expandCount: 0, expandRowKeys: [], testData: getTestData() };
             },
 
             methods: {
               handleExpand() {
                 this.expandCount++;
+              },
+              refreshData() {
+                this.testData = getTestData();
               }
             }
           }, true);
@@ -1026,6 +1025,29 @@ describe('Table', () => {
             done();
           }, DELAY);
         });
+
+        it('should unexpand after refresh data and click', function(done) {
+          const vm = createInstance();
+          setTimeout(_ => {
+            vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+            setTimeout(_ => {
+              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+              expect(vm.expandCount).to.equal(1);
+              vm.refreshData();
+              setTimeout(_ => { // wait until refreshed
+                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+                vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+                setTimeout(_ => {
+                  // should unexpand
+                  expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(0);
+                  expect(vm.expandCount).to.equal(2);
+                  destroyVM(vm);
+                  done();
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        });
       });
     });
 
@@ -1037,6 +1059,22 @@ describe('Table', () => {
           expect(vm.$el.querySelectorAll('.caret-wrapper')).to.length(1);
           destroyVM(vm);
           done();
+        }, DELAY);
+      });
+
+      it('sortable orders', done => {
+        const vm = createTable('', '', '', 'sortable :sort-orders="[\'descending\', \'ascending\']"', {});
+
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+          elm.click();
+
+          setTimeout(_ => {
+            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
         }, DELAY);
       });
 
@@ -1655,6 +1693,21 @@ describe('Table', () => {
       destroyVM(vm);
     });
 
+    it('toggleAllSelection', done => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleAllSelection();
+      setTimeout(() => {
+        expect(vm.selection).to.length(5);
+
+        vm.$refs.table.toggleAllSelection();
+        setTimeout(() => {
+          expect(vm.selection).to.length(0);
+          destroyVM(vm);
+          done();
+        }, 50);
+      }, 50);
+    });
+
     it('clearSelection', () => {
       const vm = createTable('selection-change');
       vm.$refs.table.toggleRowSelection(vm.testData[0]);
@@ -1671,6 +1724,43 @@ describe('Table', () => {
 
       destroyVM(vm);
     });
+
+    it('sort', done => {
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
+            <el-table-column prop="name" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { testData: this.testData };
+        }
+      });
+
+      setTimeout(() => {
+        const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+        expect(toArray(lastCells).map(node => node.textContent))
+          .to.eql(['80', '92', '92', '95', '100']);
+
+        vm.$nextTick(() => {
+          vm.testData = vm.testData.map(data => Object.assign(data, { runtime: -data.runtime }));
+          vm.$refs.table.sort('runtime', 'ascending');
+          vm.$nextTick(() => {
+            expect(toArray(lastCells).map(node => node.textContent))
+              .to.eql(['-100', '-95', '-92', '-92', '-80']);
+            done();
+          });
+        });
+      }, DELAY);
+    });
   });
 
   it('hover', done => {
@@ -1683,9 +1773,10 @@ describe('Table', () => {
           <el-table-column prop="runtime" label="时长（分）" />
         </el-table>
       `,
-
-      created() {
-        this.testData = getTestData();
+      data() {
+        return {
+          testData: getTestData()
+        };
       }
     }, true);
     setTimeout(_ => {
@@ -1710,7 +1801,7 @@ describe('Table', () => {
           <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
-          <el-table-column prop="runtime" label="时长（分）" />
+          <el-table-column prop="runtime" label="时长（分）" sortable />
         </el-table>
       `,
 
@@ -1725,10 +1816,96 @@ describe('Table', () => {
         expect(tr.classList.contains('current-row')).to.be.true;
         const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
 
-        triggerEvent(rows[2], 'click', true, false);
+        triggerEvent(rows[1], 'click', true, false);
         setTimeout(_ => {
           expect(tr.classList.contains('current-row')).to.be.false;
-          expect(rows[2].classList.contains('current-row')).to.be.true;
+          expect(rows[1].classList.contains('current-row')).to.be.true;
+
+          const ths = vm.$el.querySelectorAll('.el-table__header-wrapper thead th');
+          triggerEvent(ths[3], 'click', true, false);
+
+          setTimeout(_ => {
+            const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+
+            expect(rows[1].classList.contains('current-row')).to.be.false;
+            expect(rows[3].classList.contains('current-row')).to.be.true;
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('keep highlight row when data change', done => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" highlight-current-row row-key="release">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" sortable />
+        </el-table>
+      `,
+      data() {
+        return {
+          testData: getTestData()
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+      triggerEvent(rows[2], 'click', true, false);
+      setTimeout(() => {
+        expect(rows[2].classList.contains('current-row')).to.be.true;
+        const data = getTestData();
+        data.splice(0, 0, {
+          id: 8,
+          name: 'Monsters, Inc.',
+          release: '2018-02-01',
+          director: 'Peter Docter',
+          runtime: 92
+        });
+        data[2].name = 'Modified Name';
+        vm.testData = data;
+
+        setTimeout(() => {
+          rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          expect(rows[3].classList.contains('current-row')).to.be.true;
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('keep highlight row after sort', done => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" highlight-current-row row-key="release">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" sortable />
+        </el-table>
+      `,
+      data() {
+        return {
+          testData: getTestData()
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+      triggerEvent(rows[1], 'click', true, false);
+      setTimeout(() => {
+        expect(rows[1].classList.contains('current-row')).to.be.true;
+        const cells = vm.$el.querySelectorAll('.el-table__header-wrapper thead th > .cell');
+        triggerEvent(cells[3], 'click', true, false);
+
+        setTimeout(() => {
+          rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          expect(rows[3].classList.contains('current-row')).to.be.true;
           destroyVM(vm);
           done();
         }, DELAY);

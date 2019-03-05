@@ -4,27 +4,32 @@
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
-      'is-required': isRequired || required
+      'is-required': isRequired || required,
+      'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
-    <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
+    <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div
-          v-if="validateState === 'error' && showMessage && form.showMessage"
-          class="el-form-item__error"
-          :class="{
-            'el-form-item__error--inline': typeof inlineMessage === 'boolean'
-              ? inlineMessage
-              : (elForm && elForm.inlineMessage || false)
-          }"
-        >
-          {{validateMessage}}
-        </div>
+        <slot 
+          v-if="validateState === 'error' && showMessage && form.showMessage" 
+          name="error" 
+          :error="validateMessage">
+          <div
+            class="el-form-item__error"
+            :class="{
+              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+                ? inlineMessage
+                : (elForm && elForm.inlineMessage || false)
+            }"
+          >
+            {{validateMessage}}
+          </div>
+        </slot>
       </transition>
     </div>
   </div>
@@ -120,19 +125,16 @@
         }
         return parent;
       },
-      fieldValue: {
-        cache: false,
-        get() {
-          const model = this.form.model;
-          if (!model || !this.prop) { return; }
+      fieldValue() {
+        const model = this.form.model;
+        if (!model || !this.prop) { return; }
 
-          let path = this.prop;
-          if (path.indexOf(':') !== -1) {
-            path = path.replace(/:/, '.');
-          }
-
-          return getPropByPath(model, path, true).v;
+        let path = this.prop;
+        if (path.indexOf(':') !== -1) {
+          path = path.replace(/:/, '.');
         }
+
+        return getPropByPath(model, path, true).v;
       },
       isRequired() {
         let rules = this.getRules();
@@ -156,7 +158,7 @@
         return this.size || this._formSize;
       },
       sizeClass() {
-        return (this.$ELEMENT || {}).size || this.elFormItemSize;
+        return this.elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
     data() {
@@ -197,7 +199,7 @@
           this.validateMessage = errors ? errors[0].message : '';
 
           callback(this.validateMessage, invalidFields);
-          this.elForm && this.elForm.$emit('validate', this.prop, !errors);
+          this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
       },
       clearValidate() {
@@ -224,10 +226,6 @@
         } else {
           prop.o[prop.k] = this.initialValue;
         }
-        /* Select 的值被代码改变时不会触发校验，
-           这里需要强行触发一次，刷新 validateDisabled 的值，
-           确保 Select 下一次值改变时能正确触发校验 */
-        this.broadcast('ElSelect', 'fieldReset');
 
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },

@@ -1,51 +1,3 @@
-<script>
-  import dateUtil from 'main/utils/date'
-  export default {
-    data() {
-      return {
-        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
-      };
-    }
-  }
-</script>
-
-<style scoped>
-  .text {
-    font-size: 14px;
-  }
-
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    display: block;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .box-card {
-    width: 480px;
-  }
-</style>
 ## Card
 Muestra información dentro de un contenedor `card`
 
@@ -187,9 +139,10 @@ export default {
 
 ### Shadow
 
-You can define when to show the card shadows
+Puede definir cuándo mostrar las sombras.
 
-:::demo The `shadow` attribute determines when the card shadows are displayed. It can be `always`, `hover` or `never`.
+:::demo El atributo de sombra determina cuándo se muestran las sombras. Puede ser `always`, `hover` o `never`.
+
 ```html
 <el-row :gutter="12">
   <el-col :span="8">

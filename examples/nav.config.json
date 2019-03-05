@@ -6,7 +6,7 @@
     },
     {
       "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
+      "href": "https://elemefe.github.io/element-react/"
     },
     {
       "name": "Element Angular",
@@ -58,6 +58,10 @@
             {
               "path": "/typography",
               "title": "Typography 字体"
+            },
+            {
+              "path": "/border",
+              "title": "Border 边框"
             },
             {
               "path": "/icon",
@@ -243,6 +247,10 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline 时间线"
             }
           ]
         }
@@ -256,7 +264,7 @@
     },
     {
       "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
+      "href": "https://elemefe.github.io/element-react/"
     },
     {
       "name": "Element Angular",
@@ -308,6 +316,10 @@
             {
               "path": "/typography",
               "title": "Typography"
+            },
+            {
+              "path": "/border",
+              "title": "Border"
             },
             {
               "path": "/icon",
@@ -493,6 +505,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
             }
           ]
         }
@@ -506,7 +522,7 @@
     },
     {
       "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
+      "href": "https://elemefe.github.io/element-react/"
     },
     {
       "name": "Element Angular",
@@ -558,6 +574,10 @@
             {
               "path": "/typography",
               "title": "Typography"
+            },
+            {
+              "path": "/border",
+              "title": "Border"
             },
             {
               "path": "/icon",
@@ -743,6 +763,268 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fr-FR": [
+    {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element pour React",
+      "href": "https://elemefe.github.io/element-react/"
+    },
+    {
+      "name": "Element pour Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
+    {
+      "name": "Développement",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation"
+        },
+        {
+          "path": "/quickstart",
+          "name": "Démarrer"
+        },
+        {
+          "path": "/i18n",
+          "name": "Internationalisation"
+        },
+        {
+          "path": "/custom-theme",
+          "name": "Thème"
+        },
+        {
+          "path": "/transition",
+          "name": "Transitions"
+        }
+      ]
+    },
+    {
+      "name": "Composants",
+      "groups": [
+        {
+          "groupName": "Basiques",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container"
+            },
+            {
+              "path": "/color",
+              "title": "Color"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography"
+            },
+            {
+              "path": "/border",
+              "title": "Border"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon"
+            },
+            {
+              "path": "/button",
+              "title": "Button"
+            }
+          ]
+        },
+        {
+          "groupName": "Formulaire",
+          "list": [
+            {
+              "path": "/radio",
+              "title": "Radio"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox"
+            },
+            {
+              "path": "/input",
+              "title": "Input"
+            },
+            {
+              "path": "/input-number",
+              "title": "InputNumber"
+            },
+            {
+              "path": "/select",
+              "title": "Select"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader"
+            },
+            {
+              "path": "/switch",
+              "title": "Switch"
+            },
+            {
+              "path": "/slider",
+              "title": "Slider"
+            },
+            {
+              "path": "/time-picker",
+              "title": "TimePicker"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker"
+            },
+            {
+              "path": "/datetime-picker",
+              "title": "DateTimePicker"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload"
+            },
+            {
+              "path": "/rate",
+              "title": "Rate"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer"
+            },
+            {
+              "path": "/form",
+              "title": "Form"
+            }
+          ]
+        },
+        {
+          "groupName": "Données",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table"
+            },
+            {
+              "path": "/tag",
+              "title": "Tag"
+            },
+            {
+              "path": "/progress",
+              "title": "Progress"
+            },
+            {
+              "path": "/tree",
+              "title": "Tree"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge"
+            }
+          ]
+        },
+        {
+          "groupName": "Notifier",
+          "list": [
+            {
+              "path": "/alert",
+              "title": "Alert"
+            },
+            {
+              "path": "/loading",
+              "title": "Loading"
+            },
+            {
+              "path": "/message",
+              "title": "Message"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification"
+            }
+          ]
+        },
+        {
+          "groupName": "Navigation",
+          "list": [
+            {
+              "path": "/menu",
+              "title": "NavMenu"
+            },
+            {
+              "path": "/tabs",
+              "title": "Tabs"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb"
+            },
+            {
+              "path": "/dropdown",
+              "title": "Dropdown"
+            },
+            {
+              "path": "/steps",
+              "title": "Steps"
+            }
+          ]
+        },
+        {
+          "groupName": "Autres",
+          "list": [
+            {
+              "path": "/dialog",
+              "title": "Dialog"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover"
+            },
+            {
+              "path": "/card",
+              "title": "Card"
+            },
+            {
+              "path": "/carousel",
+              "title": "Carousel"
+            },
+            {
+              "path": "/collapse",
+              "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
             }
           ]
         }

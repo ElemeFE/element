@@ -26,9 +26,13 @@
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
-        class="el-tree-node__expand-icon el-icon-caret-right"
         @click.stop="handleExpandIconClick"
-        :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }">
+        :class="[
+          { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
+          'el-tree-node__expand-icon',
+          tree.iconClass ? tree.iconClass : 'el-icon-caret-right'
+        ]"
+      >
       </span>
       <el-checkbox
         v-if="showCheckbox"
@@ -57,6 +61,7 @@
           :render-content="renderContent"
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
+          :show-checkbox="showCheckbox"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
@@ -90,6 +95,10 @@
       renderAfterExpand: {
         type: Boolean,
         default: true
+      },
+      showCheckbox: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -123,7 +132,6 @@
         tree: null,
         expanded: false,
         childNodeRendered: false,
-        showCheckbox: false,
         oldChecked: null,
         oldIndeterminate: null
       };
@@ -167,6 +175,11 @@
         if (this.tree.expandOnClickNode) {
           this.handleExpandIconClick();
         }
+        if (this.tree.checkOnClickNode && !this.node.disabled) {
+          this.handleCheckChange(null, {
+            target: { checked: !this.node.checked }
+          });
+        }
         this.tree.$emit('node-click', this.node.data, this.node, this);
       },
 
@@ -208,10 +221,12 @@
       },
 
       handleDragStart(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-start', event, this);
       },
 
       handleDragOver(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-over', event, this);
         event.preventDefault();
       },
@@ -221,6 +236,7 @@
       },
 
       handleDragEnd(event) {
+        if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-end', event, this);
       }
     },
@@ -245,8 +261,6 @@
       this.$watch(`node.data.${childrenKey}`, () => {
         this.node.updateChildren();
       });
-
-      this.showCheckbox = tree.showCheckbox;
 
       if (this.node.expanded) {
         this.expanded = true;

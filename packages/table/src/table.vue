@@ -347,8 +347,8 @@
         this.store.clearSelection();
       },
 
-      clearFilter() {
-        this.store.clearFilter();
+      clearFilter(columnKeys) {
+        this.store.clearFilter(columnKeys);
       },
 
       clearSort() {
@@ -443,6 +443,14 @@
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+      },
+
+      sort(prop, order) {
+        this.store.commit('sort', { prop, order });
+      },
+
+      toggleAllSelection() {
+        this.store.commit('toggleAllSelection');
       }
     },
 

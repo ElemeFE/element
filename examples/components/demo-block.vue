@@ -4,12 +4,16 @@
     :class="[blockClass, { 'hover': hovering }]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false">
-    <slot name="source"></slot>
+    <div class="source">
+      <slot name="source"></slot>
+    </div>
     <div class="meta" ref="meta">
       <div class="description" v-if="$slots.default">
         <slot></slot>
       </div>
-      <slot name="highlight"></slot>
+      <div class="highlight">
+        <slot name="highlight"></slot>
+      </div>
     </div>
     <div
       class="demo-block-control"
@@ -178,23 +182,23 @@
 
 <script type="text/babel">
   import compoLang from '../i18n/component.json';
-  import { version } from 'main/index.js';
+  import Element from 'main/index.js';
+  import { stripScript, stripStyle, stripTemplate } from '../util';
+  const { version } = Element;
 
   export default {
     data() {
       return {
+        jsfiddle: {
+          script: '',
+          html: '',
+          style: ''
+        },
         hovering: false,
         isExpanded: false,
         fixedControl: false,
         scrollParent: null
       };
-    },
-
-    props: {
-      jsfiddle: Object,
-      default() {
-        return {};
-      }
     },
 
     methods: {
@@ -295,6 +299,25 @@
           this.scrollParent && this.scrollParent.addEventListener('scroll', this.scrollHandler);
           this.scrollHandler();
         }, 200);
+      }
+    },
+
+    created() {
+      const highlight = this.$slots.highlight;
+      if (highlight && highlight[0]) {
+        let code = '';
+        let cur = highlight[0];
+        if (cur.tag === 'pre' && (cur.children && cur.children[0])) {
+          cur = cur.children[0];
+          if (cur.tag === 'code') {
+            code = cur.children[0].text;
+          }
+        }
+        if (code) {
+          this.jsfiddle.html = stripTemplate(code);
+          this.jsfiddle.script = stripScript(code);
+          this.jsfiddle.style = stripStyle(code);
+        }
       }
     },
 

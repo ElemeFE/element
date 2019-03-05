@@ -1,138 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        list: null,
-        options: [{
-          value: 'Option1',
-          label: 'Option1'
-        }, {
-          value: 'Option2',
-          label: 'Option2'
-        }, {
-          value: 'Option3',
-          label: 'Option3'
-        }, {
-          value: 'Option4',
-          label: 'Option4'
-        }, {
-          value: 'Option5',
-          label: 'Option5'
-        }],
-        options2: [{
-          value: 'Option1',
-          label: 'Option1'
-        }, {
-          value: 'Option2',
-          label: 'Option2',
-          disabled: true
-        }, {
-          value: 'Option3',
-          label: 'Option3'
-        }, {
-          value: 'Option4',
-          label: 'Option4'
-        }, {
-          value: 'Option5',
-          label: 'Option5'
-        }],
-        options3: [{
-          label: 'Popular cities',
-          options: [{
-            value: 'Shanghai',
-            label: 'Shanghai'
-          }, {
-            value: 'Beijing',
-            label: 'Beijing'
-          }]
-        }, {
-          label: 'City Name',
-          options: [{
-            value: 'Chengdu',
-            label: 'Chengdu'
-          }, {
-            value: 'Shenzhen',
-            label: 'Shenzhen'
-          }, {
-            value: 'Guangzhou',
-            label: 'Guangzhou'
-          }, {
-            value: 'Dalian',
-            label: 'Dalian'
-          }]
-        }],
-        options4: [],
-        options5: [{
-          value: 'HTML',
-          label: 'HTML'
-        }, {
-          value: 'CSS',
-          label: 'CSS'
-        }, {
-          value: 'JavaScript',
-          label: 'JavaScript'
-        }],
-        cities: [{
-          value: 'Beijing',
-          label: 'Beijing'
-        }, {
-          value: 'Shanghai',
-          label: 'Shanghai'
-        }, {
-          value: 'Nanjing',
-          label: 'Nanjing'
-        }, {
-          value: 'Chengdu',
-          label: 'Chengdu'
-        }, {
-          value: 'Shenzhen',
-          label: 'Shenzhen'
-        }, {
-          value: 'Guangzhou',
-          label: 'Guangzhou'
-        }],
-        value: '',
-        value2: '',
-        value3: '',
-        value4: '',
-        value5: [],
-        value6: '',
-        value7: '',
-        value8: '',
-        value9: [],
-        value10: [],
-        value11: [],
-        loading: false,
-        states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
-      };
-    },
-
-    mounted() {
-      this.list = this.states.map(item => { return { value: item, label: item }; });
-    },
-
-    methods: {
-      remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-            this.options4 = this.list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
-          }, 200);
-        } else {
-          this.options4 = [];
-        }
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-select .el-select {
-    width: 240px;
-  }
-</style>
-
 ## Select
 
 When there are plenty of options, use a drop-down menu to display and select desired ones.
@@ -662,15 +527,17 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 ### Select Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | binding value | boolean / string / number | — | — |
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
-| clearable | whether single select can be cleared | boolean | — | false |
+| clearable | whether select can be cleared | boolean | — | false |
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
-| auto-complete | the autocomplete attribute of select input | string | — | off |
+| autocomplete | the autocomplete attribute of select input | string | — | off |
+| auto-complete | @DEPRECATED in next major version | string | — | off |
 | placeholder | placeholder | string | — | Select |
 | filterable | whether Select is filterable | boolean | — | false |
 | allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |
@@ -679,8 +546,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | remote-method | custom remote search method | function | — | — |
 | loading | whether Select is loading data from server | boolean | — | false |
 | loading-text | displayed text while loading data from server | string | — | Loading |
-| no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
-| no-data-text | displayed text when there is no options | string | — | No data |
+| no-match-text | displayed text when no data matches the filtering query, you can also use slot `empty` | string | — | No matching data |
+| no-data-text | displayed text when there is no options, you can also use slot `empty` | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
@@ -696,6 +563,13 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | clear | triggers when the clear icon is clicked in a clearable Select | — |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
+
+### Select Slots
+| Name    | Description |
+|---------|-------------|
+|    —    | Option component list |
+| prefix  | content as Select prefix |
+| empty  | content when there is no options |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

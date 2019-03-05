@@ -1,53 +1,3 @@
-<style>
-  .demo-pagination .source.first {
-    padding: 0;
-  }
-
-  .demo-pagination .first .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    display: inline-block;
-    width: 50%;
-    box-sizing: border-box;
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-pagination .first .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-
-  .demo-pagination .source.last {
-    padding: 0;
-  }
-
-  .demo-pagination .last .block {
-    padding: 30px 24px;
-    border-bottom: solid 1px #EFF2F6;
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .demo-pagination .last .demonstration {
-    font-size: 14px;
-    color: #8492a6;
-    line-height: 44px;
-  }
-
-  .demo-pagination .last .demonstration + .el-pagination {
-    float: right;
-    width: 70%;
-    margin: 5px 20px 0 0;
-  }
-</style>
-
 ## Pagination
 
 If you have too much data to display in one page, use pagination.
@@ -189,43 +139,13 @@ Add more modules based on your scenario.
 </script>
 ```
 :::
-<script>
-  import { addClass } from 'element-ui/src/utils/dom';
-  export default {
-    data() {
-      return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
-      };
-    },
-    methods: {
-      handleSizeChange(val) {
-        console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        console.log(`current page: ${val}`);
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let demos = document.querySelectorAll('.source');
-        let firstDemo = demos[0];
-        let lastDemo = demos[demos.length - 1];
-        addClass(firstDemo, 'first');
-        addClass(lastDemo, 'last');
-      });
-    }
-  }
-</script>
 
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small              |   whether to use small pagination    | boolean |      —       | false |
-| background | whether the buttons have a background color | Boolean | — | false |
-| page-size              | item count of each page  | number |      —       | 10 |
+| background | whether the buttons have a background color | boolean | — | false |
+| page-size              | item count of each page, supports the .sync modifier  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
 | pager-count | number of pagers. Pagination collapses when the total page count exceeds this value | number | odd number between 5 and 21 | 7 |

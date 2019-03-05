@@ -1,17 +1,17 @@
 <template>
-  <transition name="el-message-fade">
+  <transition name="el-message-fade" @after-leave="handleAfterLeave">
     <div
       :class="[
         'el-message',
         type && !iconClass ? `el-message--${ type }` : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
-        customClass]"
+        customClass
+      ]"
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
-      role="alert"
-    >
+      role="alert">
       <i :class="iconClass" v-if="iconClass"></i>
       <i :class="typeClass" v-else></i>
       <slot>
@@ -50,14 +50,6 @@
     },
 
     computed: {
-      iconWrapClass() {
-        const classes = ['el-message__icon'];
-        if (this.type && !this.iconClass) {
-          classes.push(`el-message__icon--${ this.type }`);
-        }
-        return classes;
-      },
-
       typeClass() {
         return this.type && !this.iconClass
           ? `el-message__icon el-icon-${ typeMap[this.type] }`
@@ -69,14 +61,12 @@
       closed(newVal) {
         if (newVal) {
           this.visible = false;
-          this.$el.addEventListener('transitionend', this.destroyElement);
         }
       }
     },
 
     methods: {
-      destroyElement() {
-        this.$el.removeEventListener('transitionend', this.destroyElement);
+      handleAfterLeave() {
         this.$destroy(true);
         this.$el.parentNode.removeChild(this.$el);
       },

@@ -1,76 +1,3 @@
-<style>
-  .demo-transfer {
-    .transfer-footer {
-      margin-left: 15px;
-      padding: 6px 5px;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      const generateData = _ => {
-        const data = [];
-        for (let i = 1; i <= 15; i++) {
-          data.push({
-            key: i,
-            label: `备选项 ${ i }`,
-            disabled: i % 4 === 0
-          });
-        }
-        return data;
-      };
-      const generateData2 = _ => {
-        const data = [];
-        const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
-        const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
-        cities.forEach((city, index) => {
-          data.push({
-            label: city,
-            key: index,
-            pinyin: pinyin[index]
-          });
-        });
-        return data;
-      };
-      const generateData3 = _ => {
-        const data = [];
-        for (let i = 1; i <= 15; i++) {
-          data.push({
-            value: i,
-            desc: `备选项 ${ i }`,
-            disabled: i % 4 === 0
-          });
-        }
-        return data;
-      };
-      return {
-        data: generateData(),
-        data2: generateData2(),
-        data3: generateData3(),
-        value1: [1, 4],
-        value2: [],
-        value3: [1],
-        value4: [1],
-        value5: [],
-        filterMethod(query, item) {
-          return item.pinyin.indexOf(query) > -1;
-        },
-        renderFunc(h, option) {
-          return <span>{ option.key } - { option.label }</span>;
-        }
-      };
-    },
-
-    methods: {
-      handleChange(value, direction, movedKeys) {
-        console.log(value, direction, movedKeys);
-      }
-    }
-  };
-</script>
-
 ## Transfer 穿梭框
 
 ### 基础用法
@@ -284,6 +211,7 @@
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | array | — | — |
 | data | Transfer 的数据源 | array[{ key, label, disabled }] | — | [ ] |
 | filterable | 是否可搜索 | boolean | — | false |
 | filter-placeholder | 搜索框占位符 | string | — | 请输入搜索内容 |

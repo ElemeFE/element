@@ -74,9 +74,6 @@ describe('Upload', () => {
   });
 
   describe('ajax upload', () => {
-    if (typeof FormData === 'undefined') {
-      return;
-    }
 
     let uploader;
     let handlers = {};
@@ -103,6 +100,20 @@ describe('Upload', () => {
         onExceed(files, fileList) {
           if (handlers.onExceed) {
             handlers.onExceed(files, fileList);
+          }
+        },
+        beforeUpload(file) {
+          if (handlers.beforeUpload) {
+            return handlers.beforeUpload(file);
+          } else {
+            return true;
+          }
+        },
+        beforeRemove(file, fileList) {
+          if (handlers.beforeRemove) {
+            return handlers.beforeRemove(file);
+          } else {
+            return true;
           }
         }
       }
@@ -231,7 +242,54 @@ describe('Upload', () => {
         requests[0].respond(200, {}, `${files[0].name}`);
       }, 100);
     });
+    it('beforeUpload return promise', done => {
+      const spy = sinon.spy();
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      const files = [file];
+      handlers.onSuccess = () => {
+        expect(spy.calledOnce).to.equal(true);
+        done();
+      };
+      handlers.beforeUpload = (file) => {
+        return new window.Promise((resolve) => {
+          spy();
+          resolve(file);
+        });
+      };
+      uploader.$refs['upload-inner'].handleChange({ target: { files }});
+      setTimeout(() => {
+        requests[0].respond(200, {}, `${files[0].name}`);
+      }, 100);
+    });
+    it('beforeRemove return rejected promise', done => {
+      const spy = sinon.spy();
+      handlers.beforeRemove = (file) => {
+        return new window.Promise((resolve, reject) => {
+          spy();
+          reject();
+        });
+      };
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'success.png';
+      const files = [file];
 
+      handlers.onSuccess = (res, file, fileList) => {
+        uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
+        setTimeout(() => {
+          expect(spy.calledOnce).to.equal(true);
+          expect(uploader.uploadFiles.length).to.equal(1);
+          done();
+        }, 200);
+      };
+      uploader.$refs['upload-inner'].handleChange({ target: { files }});
+      setTimeout(() => {
+        requests[0].respond(200, {}, `${files[0].name}`);
+      }, 100);
+    });
     it('limit files', done => {
       const files = [{
         name: 'exceed2.png',

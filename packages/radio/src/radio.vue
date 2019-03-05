@@ -12,7 +12,7 @@
     :aria-checked="model === label"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
-    @keydown.space.stop.prevent="model = label"
+    @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
       :class="{
@@ -35,7 +35,7 @@
         tabindex="-1"
       >
     </span>
-    <span class="el-radio__label">
+    <span class="el-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
@@ -115,7 +115,7 @@
           : this.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
-        return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;
+        return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
       }
     },
 

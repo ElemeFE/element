@@ -12,6 +12,13 @@
     width: 220px;
   }
 
+  @include m((monthrange)) {
+    &.el-input,
+    &.el-input__inner {
+      width: 300px;
+    }
+  }
+
   @include m((daterange, timerange)) {
     &.el-input,
     &.el-input__inner {

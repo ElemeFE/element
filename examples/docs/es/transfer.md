@@ -1,76 +1,3 @@
-<style>
-  .demo-transfer {
-    .transfer-footer {
-      margin-left: 15px;
-      padding: 6px 5px;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      const generateData = _ => {
-        const data = [];
-        for (let i = 1; i <= 15; i++) {
-          data.push({
-            key: i,
-            label: `Option ${ i }`,
-            disabled: i % 4 === 0
-          });
-        }
-        return data;
-      };
-      const generateData2 = _ => {
-        const data = [];
-        const states = ['California', 'Illinois', 'Maryland', 'Texas', 'Florida', 'Colorado', 'Connecticut '];
-        const initials = ['CA', 'IL', 'MD', 'TX', 'FL', 'CO', 'CT'];
-        states.forEach((city, index) => {
-          data.push({
-            label: city,
-            key: index,
-            initial: initials[index]
-          });
-        });
-        return data;
-      };
-      const generateData3 = _ => {
-        const data = [];
-        for (let i = 1; i <= 15; i++) {
-          data.push({
-            value: i,
-            desc: `Option ${ i }`,
-            disabled: i % 4 === 0
-          });
-        }
-        return data;
-      };
-      return {
-        data: generateData(),
-        data2: generateData2(),
-        data3: generateData3(),
-        value1: [1, 4],
-        value2: [],
-        value3: [1],
-        value4: [1],
-        value5: [],
-        filterMethod(query, item) {
-          return item.initial.toLowerCase().indexOf(query.toLowerCase()) > -1;
-        },
-        renderFunc(h, option) {
-          return <span>{ option.key } - { option.label }</span>;
-        }
-      };
-    },
-    
-    methods: {
-      handleChange(value, direction, movedKeys) {
-        console.log(value, direction, movedKeys);
-      }
-    }
-  };
-</script>
-
 ## Transfer
 
 ### Uso básico
@@ -111,7 +38,7 @@
 
 Puede buscar y filtrar los items.
 
-::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
+:::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer
@@ -288,6 +215,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Atributos
 | Atriburo              | Descripcion                              | Tipo                            | Valores aceptados | Por defecto                              |
 | --------------------- | ---------------------------------------- | ------------------------------- | ----------------- | ---------------------------------------- |
+| value / v-model        | valor enlazado                           | array                           | —                 | —                                        |
 | data                  | Origen de datos                          | array[{ key, label, disabled }] | —                 | [ ]                                      |
 | filterable            | Si se puede filtrar                      | boolean                         | —                 | false                                    |
 | filter-placeholder    | Placeholder para el input del filtro     | string                          | —                 | Enter keyword                            |

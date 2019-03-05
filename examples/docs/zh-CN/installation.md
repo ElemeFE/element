@@ -29,4 +29,4 @@ npm i element-ui -S
 
 <iframe width="100%" height="600" src="//jsfiddle.net/hzfpyvg6/1213/embedded/html,result/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-如果是通过 npm 安装，并希望配合 webpack 使用，请阅读下一节：快速上手。
+如果是通过 npm 安装，并希望配合 webpack 使用，请阅读下一节：[快速上手](/#/zh-CN/component/quickstart)。

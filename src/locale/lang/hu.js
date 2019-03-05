@@ -70,7 +70,7 @@ export default {
     },
     pagination: {
       goto: 'Ugrás',
-      pagesize: '/page',
+      pagesize: '/oldal',
       total: 'Össz {total}',
       pageClassifier: ''
     },

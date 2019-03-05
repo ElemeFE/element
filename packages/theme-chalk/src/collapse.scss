@@ -1,5 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
+@import "common/transition";
 
 @include b(collapse) {
   border-top: 1px solid $--collapse-border-color;
@@ -7,6 +8,8 @@
 }
 @include b(collapse-item) {
   @include e(header) {
+    display: flex;
+    align-items: center;
     height: $--collapse-header-height;
     line-height: $--collapse-header-height;
     background-color: $--collapse-header-fill;
@@ -18,10 +21,8 @@
     transition: border-bottom-color .3s;
     outline: none;
     @include e(arrow) {
-      margin-right: 8px;
+      margin: 0 8px 0 auto;
       transition: transform .3s;
-      float: right;
-      line-height: 48px;
       font-weight: 300;
       @include when(active) {
         transform: rotate(90deg);

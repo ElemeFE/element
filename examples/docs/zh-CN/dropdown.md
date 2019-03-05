@@ -1,55 +1,3 @@
-<style>
-  .demo-box {
-    .el-dropdown {
-      vertical-align: top;
-
-      & + .el-dropdown {
-        margin-left: 15px;
-      }
-    }
-    .el-dropdown-link {
-      cursor: pointer;
-      color: #409EFF;
-    }
-    .el-icon-arrow-down {
-      font-size: 12px;
-    }
-  }
-
-  .block-col-2 {
-    margin: -24px;
-
-    .el-col {
-      padding: 30px 0;
-      text-align: center;
-      border-right: 1px solid #eff2f6;
-
-      &:last-child {
-        border-right: 0;
-      }
-    }
-  }
-
- .demo-dropdown .demonstration {
-   display: block;
-   color: #8492a6;
-   font-size: 14px;
-   margin-bottom: 20px;
- }
-</style>
-
-<script>
-  export default {
-    methods: {
-      handleClick() {
-        alert('button click');
-      },
-      handleCommand(command) {
-        this.$message('click on item ' + command);
-      }
-    }
-  }
-</script>
 ## Dropdown 下拉菜单
 
 将动作或菜单折叠到下拉菜单中。
@@ -73,7 +21,6 @@
     <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-```
 
 <style>
   .el-dropdown-link {
@@ -84,7 +31,7 @@
     font-size: 12px;
   }
 </style>
-
+```
 :::
 
 ### 触发对象
@@ -156,11 +103,11 @@
         下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>黄金糕</el-dropdown-item>
-        <el-dropdown-item>狮子头</el-dropdown-item>
-        <el-dropdown-item>螺蛳粉</el-dropdown-item>
-        <el-dropdown-item>双皮奶</el-dropdown-item>
-        <el-dropdown-item>蚵仔煎</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check-outline">蚵仔煎</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -171,16 +118,15 @@
         下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>黄金糕</el-dropdown-item>
-        <el-dropdown-item>狮子头</el-dropdown-item>
-        <el-dropdown-item>螺蛳粉</el-dropdown-item>
-        <el-dropdown-item>双皮奶</el-dropdown-item>
-        <el-dropdown-item>蚵仔煎</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check-outline">蚵仔煎</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
 </el-row>
-```
 
 <style>
   .el-dropdown-link {
@@ -197,7 +143,7 @@
     margin-bottom: 20px;
   }
 </style>
-
+```
 :::
 
 ### 菜单隐藏方式
@@ -337,6 +283,13 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | show-timeout  | 展开下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 250 |
 | hide-timeout  | 收起下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 150 |
 
+### Dropdown Slots
+
+| Name | 说明 |
+|------|--------|
+| — | 触发下拉列表显示的元素。 注意： 必须是一个元素或者或者组件  |
+| dropdown | 下拉列表，通常是 `<el-dropdown-menu>` 组件     |
+
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
@@ -350,3 +303,4 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | command       | 指令     | string/number/object          | — | — |
 | disabled      | 禁用     | boolean          | — | false |
 | divided       | 显示分割线     | boolean          | — | false |
+| icon          | 图标类名 | string   |  —  |  —  |

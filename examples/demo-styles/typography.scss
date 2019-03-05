@@ -1,0 +1,30 @@
+.demo-typo-size {
+  .color-dark-light {
+    color: #99a9bf;
+  }
+}
+.demo-term-box img {
+  width: 24%;
+  margin: 0 4% 20px 0;
+}
+
+.lineH-left {
+  display: inline-block;
+  height: 80px;
+}
+.lineH-right {
+  display: inline-block;
+  list-style: none;
+  padding: 0 0 0 90px;
+  margin: 0;
+  vertical-align: top;
+}
+.lineH-right li {
+  font-size: 13px;
+  color: #666;
+  height: 20px;
+  line-height: 20px;
+}
+.lineH-right li span {
+  padding-left: 40px;
+}

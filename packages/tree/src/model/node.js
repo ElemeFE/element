@@ -111,7 +111,9 @@ export default class Node {
     } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
       this.expand();
     }
-
+    if (!Array.isArray(this.data)) {
+      markNodeData(this, this.data);
+    }
     if (!this.data) return;
     const defaultExpandedKeys = store.defaultExpandedKeys;
     const key = store.key;
@@ -152,10 +154,6 @@ export default class Node {
 
   get label() {
     return getPropertyFromData(this, 'label');
-  }
-
-  get icon() {
-    return getPropertyFromData(this, 'icon');
   }
 
   get key() {
@@ -283,11 +281,13 @@ export default class Node {
 
   removeChildByData(data) {
     let targetNode = null;
-    this.childNodes.forEach(node => {
-      if (node.data === data) {
-        targetNode = node;
+
+    for (let i = 0; i < this.childNodes.length; i++) {
+      if (this.childNodes[i].data === data) {
+        targetNode = this.childNodes[i];
+        break;
       }
-    });
+    }
 
     if (targetNode) {
       this.removeChild(targetNode);
@@ -312,7 +312,7 @@ export default class Node {
         if (data instanceof Array) {
           if (this.checked) {
             this.setChecked(true, true);
-          } else {
+          } else if (!this.store.checkStrictly) {
             reInitChecked(this);
           }
           done();
@@ -440,9 +440,11 @@ export default class Node {
       }
     });
 
-    oldData.forEach((item) => {
-      if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
-    });
+    if (!this.store.lazy) {
+      oldData.forEach((item) => {
+        if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
+      });
+    }
 
     newNodes.forEach(({ index, data }) => {
       this.insertChild({ data }, index);
@@ -463,6 +465,7 @@ export default class Node {
         this.doCreateChildren(children, defaultProps);
 
         this.updateLeafState();
+        reInitChecked(this);
         if (callback) {
           callback.call(this, children);
         }

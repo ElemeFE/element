@@ -1,56 +1,3 @@
-<style>
-  .demo-box.demo-menu {
-    .el-menu-demo {
-      padding-left: 55px;
-    }
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-      width: 240px;
-      min-height: 400px;
-    }
-    .line {
-      height: 1px;
-      background-color: #e0e6ed;
-      margin: 35px -24px;
-    }
-    h5 {
-      font-size: 14px;
-      color: #8492a6;
-      margin-top: 10px;
-    }
-    .tac {
-      text-align: center;
-    
-      .el-menu-vertical-demo {
-        display: inline-block;
-        text-align: left;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1',
-        isCollapse: true
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>
-
 ## NavMenu
 
 Menú que provee la navegación para tu sitio.
@@ -308,12 +255,12 @@ NavMenu vertical puede ser colapsado.
 | default-active    | índice del menu-item activo              | string  | —                     | —           |
 | default-openeds   | arreglo que contiene las llaves del sub-menus activo | Array   | —                     | —           |
 | unique-opened     | si solo un submenu puede ser activo      | boolean | —                     | false       |
-| menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | —                     | hover       |
+| menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | hover / click      | hover   |
 | router            | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
 | collapse-transition  | si se debe permitir collapse transition | boolean   | — | true   |
 
 ### Métodos Menu 
-| Nombre de evento | Descripción                   | Parámetros                             |
+| Métodos de evento | Descripción                   | Parámetros                             |
 | ---------------- | ----------------------------- | -------------------------------------- |
 | open             | abre un sub-menu específico   | index: índice del sub-menu para abrir  |
 | close            | cierra un sub-menu específico | index: índice del sub-menu para cerrar |
@@ -333,7 +280,7 @@ NavMenu vertical puede ser colapsado.
 ### Atributos SubMenu 
 | Atributo     | Descripción                              | Tipo   | Valores aceptados | Por defecto |
 | ------------ | ---------------------------------------- | ------ | ----------------- | ----------- |
-| index        | identificador único                      | string | —                 | —           |
+| index        | identificador único                      | string/null | —            | null        |
 | popper-class | nombre personalizado de la clase del menu popup | string | —                 | —           |
 | show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
 | hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |

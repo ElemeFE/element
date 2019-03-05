@@ -1,64 +1,3 @@
-<script>
-  export default {
-    mounted() {
-      this.$nextTick(() => {
-        const demos = document.querySelectorAll('.source');
-        demos[0].style.padding = '0';
-        demos[0].className += ' small';
-        demos[3].className += ' medium';
-      });
-    }
-  }
-</script>
-<style>
-  .demo-carousel .block {
-    padding: 30px;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    display: inline-block;
-    width: 50%;
-    box-sizing: border-box;
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-carousel .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-
-  .demo-carousel .el-carousel__container {
-    text-align: center;
-  }
-
-  .demo-carousel .el-carousel__item {
-    h3 {
-      color: #fff;
-      font-size: 18px;
-      line-height: 300px;
-      margin: 0;
-    }
-    &:nth-child(2n) {
-      background-color: #99a9bf;
-    }
-    &:nth-child(2n+1) {
-      background-color: #d3dce6;
-    }
-  }
-
-  .demo-carousel .small h3 {
-    font-size: 14px;
-    line-height: 150px;
-  }
-
-  .demo-carousel .medium h3 {
-    font-size: 14px;
-    line-height: 200px;
-  }
-</style>
 ## Carousel
 
 Loop a series of images or texts in a limited space
@@ -219,6 +158,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | indicator-position | position of the indicators | string | outside/none | — |
 | arrow | when arrows are shown | string | always/hover/never | hover |
 | type | type of the Carousel | string | card | — |
+| loop | display the items in loop | boolean | - | true |
 
 ### Carousel Events
 | Event Name | Description | Parameters |

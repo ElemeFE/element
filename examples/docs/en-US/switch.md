@@ -1,27 +1,3 @@
-<style>
-  .demo-box.demo-switch {
-    .el-switch {
-      margin: 20px 20px 20px 0;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: true,
-        value2: true,
-        value3: true,
-        value4: true,
-        value5: '100',
-        value6: true,
-        value7: false
-      }
-    }
-  };
-</script>
-
 ## Switch
 
 Switch is used for switching between two opposing states.
@@ -139,27 +115,29 @@ Switch is used for switching between two opposing states.
 
 ### Attributes
 
- Attribute      | Description          | Type      | Accepted Values       | Default
-----| ----| ----| ----|----
-disabled | whether Switch is disabled | boolean | — | false
-width | width of Switch | number | — | 40
-active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | —
-inactive-icon-class |class name of the icon displayed when in `off` state, overrides `inactive-text`| string | — | —
-active-text | text displayed when in `on` state | string | — | —
-inactive-text | text displayed when in `off` state | string | — | —
-active-value  | switch value when in `on` state | boolean / string / number | — | true
-inactive-value  | switch value when in `off` state | boolean / string / number | — | false
-active-color | background color when in `on` state | string | — | #409EFF
-inactive-color | background color when in `off` state | string | — | #C0CCDA
-name| input name of Switch | string | — | —
+| Attribute      | Description          | Type      | Accepted Values       | Default |
+|-----| ----| ----| ----|---- |
+| value / v-model | binding value | boolean / string / number | — | — |
+| disabled | whether Switch is disabled | boolean | — | false |
+| width | width of Switch | number | — | 40 |
+| active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | — |
+| inactive-icon-class |class name of the icon displayed when in `off` state, overrides `inactive-text`| string | — | — |
+| active-text | text displayed when in `on` state | string | — | — |
+| inactive-text | text displayed when in `off` state | string | — | — |
+| active-value  | switch value when in `on` state | boolean / string / number | — | true |
+| inactive-value  | switch value when in `off` state | boolean / string / number | — | false |
+| active-color | background color when in `on` state | string | — | #409EFF |
+| inactive-color | background color when in `off` state | string | — | #C0CCDA |
+| name           | input name of Switch | string | — | — |
+| validate-event | whether to trigger form validation | boolean | - | true |
 
 ### Events
 
- Event Name | Description | Parameters
----- | ----| ----
-change | triggers when value changes | value after changing
+| Event Name | Description | Parameters |
+| ---- | ----| ---- |
+| change | triggers when value changes | value after changing |
 
 ### Methods
-Method | Description | Parameters
-------|--------|-------
-focus | focus the Switch component | —
+| Method | Description | Parameters |
+| ------|--------|------- |
+| focus | focus the Switch component | — |

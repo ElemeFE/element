@@ -153,8 +153,8 @@
       }
     },
     methods: {
-      updateActiveIndex() {
-        const item = this.items[this.defaultActive];
+      updateActiveIndex(val) {
+        const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive];
         if (item) {
           this.activeIndex = item.index;
           this.initOpenedMenu();
@@ -251,15 +251,19 @@
       handleItemClick(item) {
         const { index, indexPath } = item;
         const oldActiveIndex = this.activeIndex;
+        const hasIndex = item.index !== null;
 
-        this.activeIndex = item.index;
+        if (hasIndex) {
+          this.activeIndex = item.index;
+        }
+
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal' || this.collapse) {
           this.openedMenus = [];
         }
 
-        if (this.router) {
+        if (this.router && hasIndex) {
           this.routeToItem(item, (error) => {
             this.activeIndex = oldActiveIndex;
             if (error) console.error(error);

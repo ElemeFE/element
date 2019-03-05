@@ -41,6 +41,10 @@
       validateOnRuleChange: {
         type: Boolean,
         default: true
+      },
+      hideRequiredAsterisk: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -71,7 +75,6 @@
     methods: {
       resetFields() {
         if (!this.model) {
-          process.env.NODE_ENV !== 'production' &&
           console.warn('[Element Warn][Form]model is required for resetFields to work.');
           return;
         }
@@ -79,8 +82,13 @@
           field.resetField();
         });
       },
-      clearValidate() {
-        this.fields.forEach(field => {
+      clearValidate(props = []) {
+        const fields = props.length
+          ? (typeof props === 'string'
+            ? this.fields.filter(field => props === field.prop)
+            : this.fields.filter(field => props.indexOf(field.prop) > -1)
+          ) : this.fields;
+        fields.forEach(field => {
           field.clearValidate();
         });
       },
@@ -123,11 +131,17 @@
           return promise;
         }
       },
-      validateField(prop, cb) {
-        let field = this.fields.filter(field => field.prop === prop)[0];
-        if (!field) { throw new Error('must call validateField with valid prop string!'); }
+      validateField(props, cb) {
+        props = [].concat(props);
+        const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
+        if (!fields.length) {
+          console.warn('[Element Warn]please pass correct props!');
+          return;
+        }
 
-        field.validate('', cb);
+        fields.forEach(field => {
+          field.validate('', cb);
+        });
       }
     }
   };

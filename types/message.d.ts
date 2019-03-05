@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, {VNode} from 'vue'
 
 export type MessageType = 'success' | 'warning' | 'info' | 'error'
 
@@ -20,7 +20,7 @@ export interface CloseEventHandler {
 /** Options used in Message */
 export interface ElMessageOptions {
   /** Message text */
-  message: string
+  message: string | VNode
 
   /** Message type */
   type?: MessageType

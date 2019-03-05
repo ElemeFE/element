@@ -178,7 +178,10 @@
         }
         this.dispatch('ElMenu', 'submenu-click', this);
       },
-      handleMouseenter() {
+      handleMouseenter(event) {
+        if (!('ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
+          return;
+        }
         const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
@@ -229,8 +232,6 @@
       }
     },
     created() {
-      this.parentMenu.addSubmenu(this);
-      this.rootMenu.addSubmenu(this);
       this.$on('toggle-collapse', this.handleCollapseToggle);
       this.$on('mouse-enter-child', () => {
         this.mouseInChild = true;
@@ -242,6 +243,8 @@
       });
     },
     mounted() {
+      this.parentMenu.addSubmenu(this);
+      this.rootMenu.addSubmenu(this);
       this.initPopper();
     },
     beforeDestroy() {

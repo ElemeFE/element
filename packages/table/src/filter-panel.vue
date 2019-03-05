@@ -6,12 +6,14 @@
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
       <div class="el-table-filter__content">
-        <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
-          <el-checkbox
-            v-for="filter in filters"
-            :key="filter.value"
-            :label="filter.value">{{ filter.text }}</el-checkbox>
-        </el-checkbox-group>
+        <el-scrollbar wrap-class="el-table-filter__wrap">
+          <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
+            <el-checkbox
+              v-for="filter in filters"
+              :key="filter.value"
+              :label="filter.value">{{ filter.text }}</el-checkbox>
+          </el-checkbox-group>
+        </el-scrollbar>
       </div>
       <div class="el-table-filter__bottom">
         <button @click="handleConfirm"

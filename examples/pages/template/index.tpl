@@ -130,11 +130,18 @@
     width: 1140px;
 
     .container {
-      @utils-clearfix;
       padding: 0;
       margin: 0 -11px;
       width: auto;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
     }
+
 
     li {
       width: 33.33333%;
@@ -297,7 +304,7 @@
         </div>
       </a>
       <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
-        <img width="45px" src="~examples/assets/images/duohui.svg" alt="tipe.io">
+        <img width="45px" src="~examples/assets/images/duohui.svg" alt="duohui">
         <div>
           <p>Sponsored by 多会</p>
           <p>炫酷的新一代活动票务系统</p>
