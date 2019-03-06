@@ -494,7 +494,7 @@
 
       emitChange(val) {
         if (!valueEquals(this.value, val)) {
-          this.$emit('change', val);
+          this.$emit('change', val, this.getOption(val).currentLabel);
         }
       },
 
