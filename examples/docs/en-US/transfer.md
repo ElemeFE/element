@@ -5,7 +5,7 @@
 ```html
 <template>
   <el-transfer
-    v-model="value1"
+    v-model="value"
     :data="data">
   </el-transfer>
 </template>
@@ -26,7 +26,7 @@
       };
       return {
         data: generateData(),
-        value1: [1, 4]
+        value: [1, 4]
       };
     }
   };
@@ -45,15 +45,15 @@ You can search and filter data items.
     filterable
     :filter-method="filterMethod"
     filter-placeholder="State Abbreviations"
-    v-model="value2"
-    :data="data2">
+    v-model="value"
+    :data="data">
   </el-transfer>
 </template>
 
 <script>
   export default {
     data() {
-      const generateData2 = _ => {
+      const generateData = _ => {
         const data = [];
         const states = ['California', 'Illinois', 'Maryland', 'Texas', 'Florida', 'Colorado', 'Connecticut '];
         const initials = ['CA', 'IL', 'MD', 'TX', 'FL', 'CO', 'CT'];
@@ -67,8 +67,8 @@ You can search and filter data items.
         return data;
       };
       return {
-        data2: generateData2(),
-        value2: [],
+        data: generateData(),
+        value: [],
         filterMethod(query, item) {
           return item.initial.toLowerCase().indexOf(query.toLowerCase()) > -1;
         }
@@ -90,7 +90,7 @@ You can customize list titles, button texts, render function for data items, che
   <div style="text-align: center">
     <el-transfer
       style="text-align: left; display: inline-block"
-      v-model="value3"
+      v-model="value"
       filterable
       :left-default-checked="[2, 3]"
       :right-default-checked="[1]"
@@ -153,7 +153,7 @@ You can customize list titles, button texts, render function for data items, che
       };
       return {
         data: generateData(),
-        value3: [1],
+        value: [1],
         value4: [1],
         renderFunc(h, option) {
           return <span>{ option.key } - { option.label }</span>;
@@ -178,19 +178,19 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 ```html
 <template>
   <el-transfer
-    v-model="value5"
+    v-model="value"
     :props="{
       key: 'value',
       label: 'desc'
     }"
-    :data="data3">
+    :data="data">
   </el-transfer>
 </template>
 
 <script>
   export default {
     data() {
-      const generateData3 = _ => {
+      const generateData = _ => {
         const data = [];
         for (let i = 1; i <= 15; i++) {
           data.push({
@@ -202,8 +202,8 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
         return data;
       };
       return {
-        data3: generateData3(),
-        value5: []
+        data: generateData(),
+        value: []
       };
     }
   };

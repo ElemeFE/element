@@ -58,7 +58,7 @@ Size, color, and icons can be customized in node.
 <div class="block">
   <el-timeline>
     <el-timeline-item
-      v-for="(activity, index) in activities2"
+      v-for="(activity, index) in activities"
       :key="index"
       :icon="activity.icon"
       :type="activity.type"
@@ -74,7 +74,7 @@ Size, color, and icons can be customized in node.
   export default {
     data() {
       return {
-        activities2: [{
+        activities: [{
           content: 'Custom icon',
           timestamp: '2018-04-12 20:46',
           size: 'large',

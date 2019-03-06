@@ -138,7 +138,7 @@ Usado para la selección de nodos.
 :::demo Los datos de un nodo no son cargados hasta que no es pinchado, así que el árbol no puede predecir si es una hoja. Por eso a cada nodo se le añade el botón de desplegar, y si el nodo es una hoja el botón desaparecerá al pinchar en él. También puede decirle al árbol que el nodo es una hoja de antemano, y así evita que muestre el botón de desplegar.
 ```html
 <el-tree
-  :props="props1"
+  :props="props"
   :load="loadNode1"
   lazy
   show-checkbox>
@@ -148,7 +148,7 @@ Usado para la selección de nodos.
   export default {
     data() {
       return {
-        props1: {
+        props: {
           label: 'name',
           children: 'zones',
           isLeaf: 'leaf'
@@ -186,7 +186,7 @@ El checkbox de un nodo se puede poner como desactivado.
 :::demo En el ejemplo, la propiedad 'disabled' se declara en defaultProps, y algunos nodos se ponen como 'disabled:true'. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
 ```html
 <el-tree
-  :data="data3"
+  :data="data"
   :props="defaultProps"
   show-checkbox
   @check-change="handleCheckChange">
@@ -196,7 +196,7 @@ El checkbox de un nodo se puede poner como desactivado.
   export default {
     data() {
       return {
-        data3: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -242,7 +242,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 :::demo Utilice `default-expanded-keys` y `default-checked-keys` para establecer los nodos desplegados y seleccionados respectivamente. Tenga en cuenta que para que funcione es necesario que tengan `node-key`. Su valor es el nombre de una clave en el objeto data, y el valor de la clave debe ser único en todo el árbol.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   node-key="id"
   :default-expanded-keys="[2, 3]"
@@ -254,7 +254,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
   export default {
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -305,7 +305,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 :::demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo hace por claves el atributo `node-key` es necesario.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   default-expand-all
   node-key="id"
@@ -350,7 +350,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -405,7 +405,7 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
   <div class="block">
     <p>Using render-content</p>
     <el-tree
-      :data="data4"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -416,7 +416,7 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
   <div class="block">
     <p>Using scoped slot</p>
     <el-tree
-      :data="data5"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -483,8 +483,8 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
         }]
       }];
       return {
-        data4: JSON.parse(JSON.stringify(data)),
-        data5: JSON.parse(JSON.stringify(data))
+        data: JSON.parse(JSON.stringify(data)),
+        data: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -543,7 +543,7 @@ Los nodos del árbol se pueden filtrar.
 
 <el-tree
   class="filter-tree"
-  :data="data2"
+  :data="data"
   :props="defaultProps"
   default-expand-all
   :filter-node-method="filterNode"
@@ -568,7 +568,7 @@ Los nodos del árbol se pueden filtrar.
     data() {
       return {
         filterText: '',
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -689,7 +689,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 :::demo
 ```html
 <el-tree
-  :data="data6"
+  :data="data"
   node-key="id"
   default-expand-all
   @node-drag-start="handleDragStart"
@@ -707,7 +707,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
   export default {
     data() {
       return {
-        data6: [{
+        data: [{
           label: 'Level one 1',
           children: [{
             label: 'Level two 1-1',
