@@ -531,6 +531,7 @@ describe('Tree', () => {
     vm.$nextTick(() => {
       expect(vm.data[0].id).to.equal(2);
       expect(tree.getNode(1)).to.equal(null);
+      expect(tree.getCurrentNode()).to.equal(null);
       done();
     });
   });
