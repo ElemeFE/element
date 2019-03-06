@@ -858,7 +858,7 @@
           small: 32,
           mini: 28
         };
-        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
+        this.initialInputHeight = sizeMap[this.selectSize] || reference.$el.getBoundingClientRect().height;
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
