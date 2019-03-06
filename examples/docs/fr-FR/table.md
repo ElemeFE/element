@@ -177,7 +177,7 @@ Vous pouvez mettre en valeur certaines lignes du tableau suivant leur état, com
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -221,7 +221,7 @@ Vous pouvez mettre en valeur certaines lignes du tableau suivant leur état, com
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -253,7 +253,7 @@ Lorsqu'il y a beaucoup de lignes, il peut être utile d'avoir un header fixe afi
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -277,7 +277,7 @@ Lorsqu'il y a beaucoup de lignes, il peut être utile d'avoir un header fixe afi
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -423,7 +423,7 @@ Si vous avez un gros volume de données à afficher, vous pouvez fixer le header
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -464,7 +464,7 @@ Si vous avez un gros volume de données à afficher, vous pouvez fixer le header
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -529,7 +529,7 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -569,7 +569,7 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Supprimer
@@ -588,7 +588,7 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -653,7 +653,7 @@ Quand la structure du tableau est complexe, vous pouvez grouper les headers afin
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -696,7 +696,7 @@ Quand la structure du tableau est complexe, vous pouvez grouper les headers afin
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -838,7 +838,7 @@ Vous pouvez aussi sélectionner plusieurs lignes.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -862,7 +862,7 @@ Vous pouvez aussi sélectionner plusieurs lignes.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Sélectionner les deuxième et troisième lignes</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Sélectionner les deuxième et troisième lignes</el-button>
     <el-button @click="toggleSelection()">Effacer la sélection</el-button>
   </div>
 </template>
@@ -871,7 +871,7 @@ Vous pouvez aussi sélectionner plusieurs lignes.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1251,7 +1251,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1276,7 +1276,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1341,7 +1341,7 @@ Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour affiche
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1372,7 +1372,7 @@ Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour affiche
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1406,7 +1406,7 @@ Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour affiche
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1481,7 +1481,7 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1512,7 +1512,7 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1545,7 +1545,7 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
