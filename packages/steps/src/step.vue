@@ -161,7 +161,7 @@ export default {
         style.transitionDelay = (-150 * this.index) + 'ms';
       }
 
-      style.borderWidth = step ? '1px' : 0;
+      style.borderWidth = step && !this.isSimple ? '1px' : 0;
       this.$parent.direction === 'vertical'
         ? style.height = step + '%'
         : style.width = step + '%';
