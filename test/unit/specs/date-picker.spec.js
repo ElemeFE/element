@@ -2687,6 +2687,7 @@ describe('DatePicker', () => {
 
       setTimeout(done, DELAY);
     });
+
     afterEach(() => destroyVM(vm));
 
     it('set value equal to 2019-01-01', done => {
