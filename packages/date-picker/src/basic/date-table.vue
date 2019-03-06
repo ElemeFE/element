@@ -172,12 +172,12 @@
             }
 
             if (i >= 0 && i <= 1) {
-              const prevMonthElementsLength = day + offset < 0 ? 7 + day + offset : day + offset;
+              const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset;
 
-              if (j + i * 7 >= prevMonthElementsLength) {
+              if (j + i * 7 >= numberOfDaysFromPreviousMonth) {
                 cell.text = count++;
               } else {
-                cell.text = dateCountOfLastMonth - (prevMonthElementsLength - j % 7) + 1 + i * 7;
+                cell.text = dateCountOfLastMonth - (numberOfDaysFromPreviousMonth - j % 7) + 1 + i * 7;
                 cell.type = 'prev-month';
               }
             } else {
