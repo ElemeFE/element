@@ -59,6 +59,29 @@ describe('Steps', () => {
     });
   });
 
+  it('update processStatus', done => {
+    vm = createVue({
+      template: `
+        <el-steps :active="1" :process-status="processStatus">
+          <el-step title="abc"></el-step>
+          <el-step title="abc2"></el-step>
+        </el-steps>
+      `,
+      data() {
+        return { processStatus: 'error' };
+      }
+    });
+
+    vm.$nextTick(_ => {
+      expect(vm.$el.querySelectorAll('.el-step__head.is-error')).to.length(1);
+      vm.processStatus = 'process';
+      vm.$nextTick(_ => {
+        expect(vm.$el.querySelectorAll('.el-step__head.is-process')).to.length(1);
+        done();
+      });
+    });
+  });
+
   it('finishStatus', done => {
     vm = createVue(`
       <el-steps :active="1" finish-status="error">
