@@ -58,10 +58,6 @@ export default {
       this.$emit('change', newVal, oldVal);
     },
 
-    // processStatus(newVal) {
-    //   this.steps[this.active].internalStatus = newVal;
-    // },
-
     steps(steps) {
       steps.forEach((child, index) => {
         child.index = index;
