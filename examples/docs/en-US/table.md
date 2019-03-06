@@ -177,7 +177,7 @@ You can highlight your table content to distinguish between "success, informatio
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -221,7 +221,7 @@ You can highlight your table content to distinguish between "success, informatio
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -253,7 +253,7 @@ When there are too many rows, you can use a fixed header.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -277,7 +277,7 @@ When there are too many rows, you can use a fixed header.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -423,7 +423,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -464,7 +464,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -529,7 +529,7 @@ When the the data is dynamically changed, you might want the table to have a max
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -569,7 +569,7 @@ When the the data is dynamically changed, you might want the table to have a max
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Remove
@@ -588,7 +588,7 @@ When the the data is dynamically changed, you might want the table to have a max
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -653,7 +653,7 @@ When the data structure is complex, you can use group header to show the data hi
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -696,7 +696,7 @@ When the data structure is complex, you can use group header to show the data hi
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -838,7 +838,7 @@ You can also select multiple rows.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -862,7 +862,7 @@ You can also select multiple rows.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Toggle selection status of second and third rows</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Toggle selection status of second and third rows</el-button>
     <el-button @click="toggleSelection()">Clear selection</el-button>
   </div>
 </template>
@@ -871,7 +871,7 @@ You can also select multiple rows.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1248,7 +1248,7 @@ When the row content is too long and you do not want to display the horizontal s
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1273,7 +1273,7 @@ When the row content is too long and you do not want to display the horizontal s
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1337,7 +1337,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1368,7 +1368,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1402,7 +1402,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1476,7 +1476,7 @@ Configuring rowspan and colspan allows you to merge cells
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1507,7 +1507,7 @@ Configuring rowspan and colspan allows you to merge cells
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1540,7 +1540,7 @@ Configuring rowspan and colspan allows you to merge cells
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',

@@ -177,7 +177,7 @@ Puede destacar el contenido de la tabla para distinguir entre "success, informat
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -221,7 +221,7 @@ Puede destacar el contenido de la tabla para distinguir entre "success, informat
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -253,7 +253,7 @@ Cuando esta tiene demasiadas filas, puede utilizar una cabecera fija.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -277,7 +277,7 @@ Cuando esta tiene demasiadas filas, puede utilizar una cabecera fija.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -423,7 +423,7 @@ Cuando tienes grandes cantidades de datos para colocar en una tabla, puede fijar
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -464,7 +464,7 @@ Cuando tienes grandes cantidades de datos para colocar en una tabla, puede fijar
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -529,7 +529,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -569,7 +569,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Eliminar
@@ -588,7 +588,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -653,7 +653,7 @@ Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agru
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -696,7 +696,7 @@ Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agru
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -838,7 +838,7 @@ También puede seleccionar múltiples filas.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -862,7 +862,7 @@ También puede seleccionar múltiples filas.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
     <el-button @click="toggleSelection()">Limpiar selección</el-button>
   </div>
 </template>
@@ -871,7 +871,7 @@ También puede seleccionar múltiples filas.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1250,7 +1250,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1275,7 +1275,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1340,7 +1340,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1371,7 +1371,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1405,7 +1405,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1480,7 +1480,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1511,7 +1511,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1544,7 +1544,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
