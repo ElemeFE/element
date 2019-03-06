@@ -167,26 +167,28 @@
             cell.start = this.minDate && time === getDateTimestamp(this.minDate);
             cell.end = this.maxDate && time === getDateTimestamp(this.maxDate);
             const isToday = time === now;
+            const getFirstDayPosition = () => day + offset < 0 ? 7 + day + offset : i * 7 + j;
 
             if (isToday) {
               cell.type = 'today';
             }
 
             if (i >= 0 && i <= 1) {
-              if (j + i * 7 >= (day + offset)) {
+              const flag = day + offset < 0 ? 7 + day + offset : day + offset;
+              if (j + i * 7 >= flag) {
                 cell.text = count++;
                 if (count === 2) {
-                  firstDayPosition = i * 7 + j;
+                  firstDayPosition = getFirstDayPosition();
                 }
               } else {
-                cell.text = dateCountOfLastMonth - (day + offset - j % 7) + 1 + i * 7;
+                cell.text = dateCountOfLastMonth - (flag - j % 7) + 1 + i * 7;
                 cell.type = 'prev-month';
               }
             } else {
               if (count <= dateCountOfMonth) {
                 cell.text = count++;
                 if (count === 2) {
-                  firstDayPosition = i * 7 + j;
+                  firstDayPosition = getFirstDayPosition();
                 }
               } else {
                 cell.text = count++ - dateCountOfMonth;

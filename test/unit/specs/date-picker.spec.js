@@ -2670,4 +2670,49 @@ describe('DatePicker', () => {
       }, DELAY);
     });
   });
+
+  describe('picker-options:firstDayOfWeek especial', () => {
+    let vm;
+    beforeEach(done => {
+      vm = createTest(DatePicker, {
+        value: new Date(),
+        pickerOptions: {
+          firstDayOfWeek: 3
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(done, DELAY);
+    });
+    afterEach(() => destroyVM(vm));
+
+    it('set value equal to 2019-01-01', done => {
+      const date = new Date('2019-01-01');
+      vm.picker.value = date;
+
+      setTimeout(_ => {
+        const currentElement = vm.picker.$el.querySelector('tr:nth-child(2) td:nth-child(7) span');
+        const lastPrevMonthElement = vm.picker.$el.querySelector('tr:nth-child(2) td:nth-child(6) span');
+        expect(currentElement.innerText.trim()).to.equal('1');
+        expect(lastPrevMonthElement.innerText.trim()).to.equal('31');
+        done();
+      }, DELAY);
+    });
+
+    it('set value equal to 2018-01-01', done => {
+      const date = new Date('2018-01-01');
+      vm.picker.value = date;
+
+      setTimeout(_ => {
+        const currentElement = vm.picker.$el.querySelector('tr:nth-child(2) td:nth-child(6) span');
+        const lastPrevMonthElement = vm.picker.$el.querySelector('tr:nth-child(2) td:nth-child(5) span');
+        expect(currentElement.innerText.trim()).to.equal('1');
+        expect(lastPrevMonthElement.innerText.trim()).to.equal('31');
+        done();
+      }, DELAY);
+    });
+  });
 });
