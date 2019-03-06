@@ -137,7 +137,6 @@
         const offset = this.offsetDay;
         const rows = this.tableRows;
         let count = 1;
-        let firstDayPosition;
 
         const startDate = this.startDate;
         const disabledDate = this.disabledDate;
@@ -167,29 +166,23 @@
             cell.start = this.minDate && time === getDateTimestamp(this.minDate);
             cell.end = this.maxDate && time === getDateTimestamp(this.maxDate);
             const isToday = time === now;
-            const getFirstDayPosition = () => day + offset < 0 ? 7 + day + offset : i * 7 + j;
 
             if (isToday) {
               cell.type = 'today';
             }
 
             if (i >= 0 && i <= 1) {
-              const flag = day + offset < 0 ? 7 + day + offset : day + offset;
-              if (j + i * 7 >= flag) {
+              const prevMonthElementsLength = day + offset < 0 ? 7 + day + offset : day + offset;
+
+              if (j + i * 7 >= prevMonthElementsLength) {
                 cell.text = count++;
-                if (count === 2) {
-                  firstDayPosition = getFirstDayPosition();
-                }
               } else {
-                cell.text = dateCountOfLastMonth - (flag - j % 7) + 1 + i * 7;
+                cell.text = dateCountOfLastMonth - (prevMonthElementsLength - j % 7) + 1 + i * 7;
                 cell.type = 'prev-month';
               }
             } else {
               if (count <= dateCountOfMonth) {
                 cell.text = count++;
-                if (count === 2) {
-                  firstDayPosition = getFirstDayPosition();
-                }
               } else {
                 cell.text = count++ - dateCountOfMonth;
                 cell.type = 'next-month';
@@ -214,8 +207,6 @@
             row[end].end = isWeekActive;
           }
         }
-
-        rows.firstDayPosition = firstDayPosition;
 
         return rows;
       }
