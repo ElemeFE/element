@@ -224,6 +224,25 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
+  import { getRowIdentity } from './util';
+
+  const flattenData = function(data) {
+    let newData = [];
+    const flatten = arr => {
+      arr.forEach((item) => {
+        newData.push(item);
+        if (Array.isArray(item.children)) {
+          flatten(item.children);
+        }
+      });
+    };
+    flatten(data);
+    if (data.length === newData.length) {
+      return data;
+    } else {
+      return newData;
+    }
+  };
 
   let tableIdSeed = 1;
 
@@ -451,6 +470,49 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
+      },
+
+      getKeyOfRow(row) {
+        const rowKey = getRowIdentity(row, this.store.states.rowKey);
+        if (!rowKey) {
+          throw new Error('[ElementTable] rowKey is required.');
+        }
+        return rowKey;
+      },
+
+      getTableTreeData(data) {
+        const treeData = {};
+        const traverse = (children, parentData, level) => {
+          children.forEach(item => {
+            const rowKey = this.getKeyOfRow(item);
+            treeData[rowKey] = {
+              display: false,
+              level
+            };
+            parentData.children.push(rowKey);
+            if (Array.isArray(item.children) && item.children.length) {
+              treeData[rowKey].children = [];
+              treeData[rowKey].expanded = false;
+              traverse(item.children, treeData[rowKey], level + 1);
+            }
+          });
+        };
+        data.forEach(item => {
+          if (Array.isArray(item.children) && item.children.length) {
+            const rowKey = this.getKeyOfRow(item);
+            treeData[rowKey] = {
+              level: 0,
+              expanded: false,
+              display: true,
+              children: []
+            };
+            if (treeData[rowKey].display) {
+              console.warn(rowKey);
+            }
+            traverse(item.children, treeData[rowKey], 1);
+          }
+        });
+        return treeData;
       }
     },
 
@@ -582,6 +644,8 @@
       data: {
         immediate: true,
         handler(value) {
+          this.store.states.treeData = this.getTableTreeData(value);
+          value = flattenData(value);
           this.store.commit('setData', value);
           if (this.$ready) {
             this.$nextTick(() => {

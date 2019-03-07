@@ -108,7 +108,8 @@ const TableStore = function(table, initialState = {}) {
     filters: {},
     expandRows: [],
     defaultExpandAll: false,
-    selectOnIndeterminate: false
+    selectOnIndeterminate: false,
+    treeData: {}
   };
 
   this._toggleAllSelection = debounce(10, function(states) {
@@ -641,6 +642,41 @@ TableStore.prototype.commit = function(name, ...args) {
     mutations[name].apply(this, [this.states].concat(args));
   } else {
     throw new Error(`Action not found: ${name}`);
+  }
+};
+
+TableStore.prototype.toggleTreeExpansion = function(rowKey) {
+  const { treeData } = this.states;
+  const node = treeData[rowKey];
+  if (!node) return;
+  if (typeof node.expanded !== 'boolean') {
+    throw new Error('a leaf must have expanded property');
+  }
+  node.expanded = !node.expanded;
+
+  let traverse = null;
+  if (node.expanded) {
+    traverse = (children, parent) => {
+      if (children && parent.expanded) {
+        children.forEach(key => {
+          treeData[key].display = true;
+          traverse(treeData[key].children, treeData[key]);
+        });
+      }
+    };
+    node.children.forEach(key => {
+      treeData[key].display = true;
+      traverse(treeData[key].children, treeData[key]);
+    });
+  } else {
+    const traverse = (children) => {
+      if (!children) return;
+      children.forEach(key => {
+        treeData[key].display = false;
+        traverse(treeData[key].children);
+      });
+    };
+    traverse(node.children);
   }
 };
 
