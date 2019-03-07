@@ -15,7 +15,7 @@
         type="primary"
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToLeft"
-        :disabled="rightChecked.length === 0">
+        :disabled="rightChecked.length === 0 || buttonDisables[0]">
         <i class="el-icon-arrow-left"></i>
         <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
       </el-button>
@@ -23,7 +23,7 @@
         type="primary"
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToRight"
-        :disabled="leftChecked.length === 0">
+        :disabled="leftChecked.length === 0 || buttonDisables[1]">
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
         <i class="el-icon-arrow-right"></i>
       </el-button>
@@ -72,6 +72,12 @@
         }
       },
       buttonTexts: {
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      buttonDisables: {
         type: Array,
         default() {
           return [];

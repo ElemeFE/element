@@ -222,6 +222,7 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 | target-order | order strategy for elements in the target list. If set to `original`, the elements will keep the same order as the data source. If set to `push`, the newly added elements will be pushed to the bottom. If set to `unshift`, the newly added elements will be inserted on the top | string | original / push / unshift | original |
 | titles | custom list titles | array | — | ['List 1', 'List 2'] |
 | button-texts | custom button texts | array | — | [ ] |
+| button-disables | The button is disabled, the array item is Boolean, buttonDisables[0] is the left button, and the buttonDisables[1] is the left button. | array<Boolean left, Boolean right> | — | [ ] |
 | render-content | custom render function for data items | function(h, option) | — | — |
 | format | texts for checking status in list header | object{noChecked, hasChecked} | — | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |
 | props | prop aliases for data source | object{key, label, disabled} | — | — |
