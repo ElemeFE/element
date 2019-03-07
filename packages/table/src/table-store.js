@@ -259,7 +259,7 @@ TableStore.prototype.mutations = {
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
 
-    if (!options || !options.silent) {
+    if (!options || !options.silent && !options.isDefault) {
       this.table.$emit('sort-change', {
         column: this.states.sortingColumn,
         prop: this.states.sortProp,
@@ -284,9 +284,11 @@ TableStore.prototype.mutations = {
             break;
           }
         }
-
+        
         if (states.sortingColumn) {
-          this.commit('changeSortCondition');
+          this.commit('changeSortCondition', {
+            isDefault: true
+          });
         }
       });
     }
