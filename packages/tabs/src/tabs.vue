@@ -60,7 +60,8 @@
           const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
             vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
           // update indeed
-          const panes = paneSlots.map(({ componentInstance }) => componentInstance);
+          // const panes = paneSlots.map(({ componentInstance }) => componentInstance); // lost this VNode context?
+          const panes = paneSlots;
           if (!(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]))) {
             this.panes = panes;
           }
