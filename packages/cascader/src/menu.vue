@@ -40,6 +40,7 @@
         value: [],
         expandTrigger: 'click',
         changeOnSelect: false,
+        disabledHoverSelect: false,
         popperClass: '',
         hoverTimer: 0,
         clicking: false,
@@ -118,7 +119,7 @@
         const len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
-        if (this.changeOnSelect) {
+        if (this.changeOnSelect && !this.disabledSelectOnHover) {
           this.$emit('pick', this.activeValue.slice(), false);
         } else {
           this.$emit('activeItemChange', this.activeValue);
@@ -242,6 +243,10 @@
               if (triggerEvent === 'mouseenter' && this.changeOnSelect) {
                 events.on.click = () => {
                   if (this.activeValue.indexOf(item.value) !== -1) {
+                    if (this.disabledSelectOnHover) {
+                      this.select(item, menuIndex);
+                      this.$nextTick(() => this.scrollMenu(this.$refs.menus[menuIndex]));
+                    }
                     this.$emit('closeInside', true);
                   }
                 };

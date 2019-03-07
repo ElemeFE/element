@@ -170,6 +170,10 @@ export default {
     hoverThreshold: {
       type: Number,
       default: 500
+    },
+    disabledSelectOnHover: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -266,6 +270,7 @@ export default {
       this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
       this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
+      this.menu.disabledSelectOnHover = this.disabledSelectOnHover;
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
       this.menu.$on('menuLeave', this.doDestroy);

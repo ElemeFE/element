@@ -1400,6 +1400,7 @@ Search and select options with a keyword.
 | filterable  | whether the options can be searched | boolean | — | — |
 | debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | change-on-select | whether selecting an option of any level is permitted | boolean | — | false |
+| disabled-select-on-hover | Disable hover trigger menu-item selection, with `change-on-select="true"` (by default hover menu-item will trigger select) | boolean | true / false | false |
 | size  | size of Input | string | medium / small / mini | — |
 | before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 

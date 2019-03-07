@@ -1400,6 +1400,7 @@
 | filterable | 是否可搜索选项 | boolean | — | — |
 | debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | change-on-select | 是否允许选择任意一级的选项 | boolean | — | false |
+| disabled-select-on-hover | 禁用hover触发menu-item的选中，配合`change-on-select="true"`使用（默认情况下hover menu-item会触发select） | boolean | true / false | false |
 | size | 尺寸 | string | medium / small / mini | — |
 | before-filter | 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选 | function(value) | — | — |
 
