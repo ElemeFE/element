@@ -9,6 +9,10 @@
       "font-size": "文字大小",
       "font-line-height": "文字行高",
       "border-radius": "边框圆角",
+      "vertical": "纵向",
+      "horizontal": "横向",
+      "padding": "内间距",
+      "margin": "外间距",
       "color": "颜色"
     },
     "action": {
@@ -30,6 +34,7 @@
       "Font": "文字",
       "Radius": "边框圆角",
       "Shadow": "阴影",
+      "Spacing": "间距",
       "FontSize": "文字大小",
       "FontWeight": "文字粗细",
       "LineHeight": "文字行高"
