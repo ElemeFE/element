@@ -76,7 +76,7 @@ export default {
                         data.treeNode = {
                           isLeaf: treeNode.children && treeNode.children.length,
                           expanded: treeNode.expanded,
-                          indent: treeNode.level * 20,
+                          indent: treeNode.level * this.treeIndent,
                           rowKey
                         };
                       }
@@ -167,6 +167,10 @@ export default {
         }
       }
       return 0;
+    },
+
+    treeIndent() {
+      return this.store.states.indent;
     }
   },
 

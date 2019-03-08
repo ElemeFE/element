@@ -331,13 +331,7 @@ export default {
         ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
         : (<div class="cell">
           {
-            data.treeNode ? <span class="el-table__indent" style={{'padding-left': data.treeNode.indent + 'px'}}></span> : null
-          }
-          {
-            (data.treeNode && data.treeNode.isLeaf) ? (<div class={ ['el-table__expand-icon', data.treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
-              on-click={e => {e.stopPropagation();data.store.toggleTreeExpansion(data.treeNode.rowKey);}}>
-              <i class='el-icon el-icon-arrow-right'></i>
-            </div>) : null
+            _self.renderTreeCell(data)
           }
           { renderCell(h, data) }
         </div>);
@@ -446,6 +440,26 @@ export default {
       if (this.columnConfig) {
         this.columnConfig.labelClassName = newVal;
       }
+    }
+  },
+
+  methods: {
+    renderTreeCell(data) {
+      if (!data.treeNode) return null;
+      const ele = [];
+      ele.push(<span class="el-table__indent" style={{'padding-left': data.treeNode.indent + 'px'}}></span>);
+      if (data.treeNode.isLeaf) {
+        ele.push(<div class={ ['el-table__expand-icon', data.treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
+          on-click={this.handleTreeExpandIconClick.bind(this, data)}>
+          <i class='el-icon el-icon-arrow-right'></i>
+        </div>);
+      }
+      return ele;
+    },
+
+    handleTreeExpandIconClick(data, e) {
+      e.stopPropagation();
+      data.store.toggleTreeExpansion(data.treeNode.rowKey);
     }
   },
 

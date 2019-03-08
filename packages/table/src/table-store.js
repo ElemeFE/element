@@ -8,7 +8,41 @@ const sortData = (data, states) => {
   if (!sortingColumn || typeof sortingColumn.sortable === 'string') {
     return data;
   }
-  return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+  if (Object.keys(states.treeData).length === 0) {
+    return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+  }
+  // 存在嵌套类型的数据
+  const rowKey = states.rowKey;
+  const filteredData = [];
+  const treeDataMap = {};
+  let index = 0;
+  while (index < data.length) {
+    let cur = data[index];
+    const key = cur[rowKey];
+    let treeNode = states.treeData[key];
+    filteredData.push(cur);
+    index++;
+    if (!treeNode) {
+      continue;
+    }
+    treeDataMap[key] = [];
+    while (index < data.length) {
+      cur = data[index];
+      treeNode = states.treeData[cur[rowKey]];
+      index++;
+      if (treeNode && treeNode.level !== 0) {
+        treeDataMap[key].push(cur);
+      } else {
+        filteredData.push(cur);
+        break;
+      }
+    }
+  }
+  const sortedData = orderBy(filteredData, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+  return sortedData.reduce((prev, current) => {
+    const treeNodes = treeDataMap[current[rowKey]] || [];
+    return prev.concat(current, treeNodes);
+  }, []);
 };
 
 const getKeysMap = function(array, rowKey) {
@@ -109,7 +143,8 @@ const TableStore = function(table, initialState = {}) {
     expandRows: [],
     defaultExpandAll: false,
     selectOnIndeterminate: false,
-    treeData: {}
+    treeData: {},
+    indent: 16
   };
 
   this._toggleAllSelection = debounce(10, function(states) {

@@ -330,6 +330,11 @@
       selectOnIndeterminate: {
         type: Boolean,
         default: true
+      },
+
+      indent: {
+        type: Number,
+        default: 16
       }
     },
 
@@ -475,7 +480,7 @@
       getKeyOfRow(row) {
         const rowKey = getRowIdentity(row, this.store.states.rowKey);
         if (!rowKey) {
-          throw new Error('[ElementTable] rowKey is required.');
+          throw new Error('if there\'s nested data, rowKey is required.');
         }
         return rowKey;
       },
@@ -506,9 +511,6 @@
               display: true,
               children: []
             };
-            if (treeData[rowKey].display) {
-              console.warn(rowKey);
-            }
             traverse(item.children, treeData[rowKey], 1);
           }
         });
@@ -697,7 +699,8 @@
       const store = new TableStore(this, {
         rowKey: this.rowKey,
         defaultExpandAll: this.defaultExpandAll,
-        selectOnIndeterminate: this.selectOnIndeterminate
+        selectOnIndeterminate: this.selectOnIndeterminate,
+        indent: this.indent
       });
       const layout = new TableLayout({
         store,

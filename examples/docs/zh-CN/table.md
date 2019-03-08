@@ -1275,6 +1275,87 @@
 ```
 :::
 
+### 树形数据
+
+:::demo 支持树类型的数据。此时，必须要指定 `row-key`。
+```html
+<template>
+  <el-table
+    :data="tableData"
+    style="width: 100%"
+    row-key="id"
+    >
+    <el-table-column
+      prop="date"
+      label="日期"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址"
+      :formatter="formatter">
+    </el-table-column>
+  </el-table>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          id: 1,
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          children: [{
+              id: 31,
+              date: '2016-05-01',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1519 弄'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1519 弄'
+          }]
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }],
+        search: ''
+      }
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    },
+  }
+</script>
+```
+:::
+
 ### 自定义表头
 
 表头支持自定义。
@@ -1739,6 +1820,7 @@
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
 | select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true |
+| indent      | 展示树形数据时，树节点的缩进 | Number | — | 16 |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
