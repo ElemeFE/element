@@ -1,4 +1,4 @@
-# Guide de contribution à l'assurance-chômage par élément
+# Guide à destination des contributeurs d'Element UI
 
 Bonjour! Merci d'avoir choisi Element UI.
 
