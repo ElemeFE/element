@@ -101,19 +101,29 @@
 }
 
 @include b(cascader-menu) {
-  display: inline-block;
-  vertical-align: top;
-  height: 204px;
-  overflow: auto;
-  border-right: $--select-dropdown-border;
-  background-color: $--select-dropdown-background;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 6px 0;
-  min-width: 160px;
+  & {
+    display: inline-block;
+    vertical-align: top;
+  }
 
-  &:last-child {
-    border-right: 0;
+  @include e(wrap) {
+    & {
+      height: 204px;
+      border-right: $--select-dropdown-border;
+      background-color: $--select-dropdown-background;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 6px 0;
+      min-width: 160px;
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  @include e(view) {
+    padding-left: 0;
   }
 
   @include e(item) {

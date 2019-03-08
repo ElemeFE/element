@@ -265,7 +265,7 @@ export default {
       this.menu.popperClass = this.popperClass;
       this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
-      this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
+      this.menu.$refs.menus[0].$el.setAttribute('id', `cascader-menu-${this.id}`);
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
       this.menu.$on('menuLeave', this.doDestroy);

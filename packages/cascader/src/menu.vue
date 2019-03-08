@@ -125,7 +125,8 @@
         }
       },
       scrollMenu(menu) {
-        scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
+        const { wrap, resize: view } = menu.$refs;
+        scrollIntoView(wrap, view.getElementsByClassName('is-active')[0]);
       },
       handleMenuEnter() {
         this.$nextTick(() => this.$refs.menus.forEach(menu => this.scrollMenu(menu)));
@@ -305,11 +306,11 @@
         }
 
         return (
-          <ul
-            class={{
-              'el-cascader-menu': true,
-              'el-cascader-menu--flexible': isFlat
-            }}
+          <el-scrollbar
+            tag="ul"
+            class="el-cascader-menu"
+            wrap-class={`el-cascader-menu__wrap ${isFlat ? 'el-cascader-menu__wrap--flexible' : ''}`}
+            view-class="el-cascader-menu__view"
             {...hoverMenuEvent}
             style={menuStyle}
             refInFor
@@ -332,7 +333,7 @@
                   }}
                 ></svg>) : null
             }
-          </ul>
+          </el-scrollbar>
         );
       });
 
