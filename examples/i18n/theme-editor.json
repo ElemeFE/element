@@ -13,6 +13,17 @@
       "horizontal": "横向",
       "padding": "内间距",
       "margin": "外间距",
+      "icon": "图标",
+      "placeholder": "占位符",
+      "dropdown": "下拉菜单",
+      "max": "最大",
+      "min": "最小",
+      "focus": "聚焦",
+      "selected": "选中",
+      "height": "高度",
+      "group": "分组",
+      "radius": "圆角",
+      "width": "宽度",
       "color": "颜色"
     },
     "action": {
