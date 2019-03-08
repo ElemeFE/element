@@ -52,19 +52,19 @@
   }
 </script>
 
-## Border
+## Bordure
 
-We standardize the borders that can be used in buttons, cards, pop-ups and other components.
+Nous normalisons l'apparence des bordures qui peuvent être utilisées pour les boutons, les cartes, les pop-ups et d'autres composants.
 
-### Border
+### Bordure
 
-There are few border styles to choose.
+Il y a plusieurs styles de bordure que vous pouvez choisir.
 
 <table class="demo-border">
   <tbody>
     <tr>
-      <td class="text">Name</td>
-      <td class="text">Thickness</td>
+      <td class="text">Nom</td>
+      <td class="text">Épaisseur</td>
       <td class="line">Demo</td>
     </tr>
     <tr>
@@ -86,49 +86,49 @@ There are few border styles to choose.
 
 ### Radius
 
-There are few radius styles to choose.
+Il y a plusieurs styles de radius que vous pouvez choisir.
 
 <el-row :gutter="12" class="demo-radius">
   <el-col :span="6" :xs="{span: 12}">
-    <div class="title">No Radius</div>
+    <div class="title">Pas de radius</div>
     <div class="value">border-radius: 0px</div>
     <div class="radius"></div>
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
-    <div class="title">Small Radius</div>
+    <div class="title">Petit radius</div>
     <div class="value">border-radius: {{borderRadiusSmall}}</div>
-    <div 
-      class="radius" 
+    <div
+      class="radius"
       :style="{ borderRadius: borderRadiusSmall }"
     ></div>
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
-    <div class="title">Large Radius</div>
+    <div class="title">Grand radius</div>
     <div class="value">border-radius: {{borderRadiusBase}}</div>
-    <div 
+    <div
       class="radius"
       :style="{ borderRadius: borderRadiusBase }"
     ></div>
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
-    <div class="title">Round Radius</div>
+    <div class="title">Radius rond</div>
     <div class="value">border-radius: 30px</div>
     <div class="radius radius-30"></div>
   </el-col>
 </el-row>
 
-### Shadow
+### Ombres
 
-There are few shaodw styles to choose.
+Il y a plusieurs styles d'ombres que vous pouvez choisir.
 
-<div 
+<div
 class="demo-shadow"
 :style="{ boxShadow: boxShadowBase }"
 ></div>
-<span class="demo-shadow-text">Basic Shaodw box-shadow: {{boxShadowBase}}</span>
+<span class="demo-shadow-text">Ombre de base, box-shadow: {{boxShadowBase}}</span>
 
-<div 
+<div
 class="demo-shadow"
 :style="{ boxShadow: boxShadowLight }"
 ></div>
-<span class="demo-shadow-text">Light Shadow box-shadow: {{boxShadowLight}}</span>
+<span class="demo-shadow-text">Ombre légère, box-shadow: {{boxShadowLight}}</span>
