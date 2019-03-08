@@ -44,6 +44,7 @@ router.afterEach(route => {
     }
   }
   document.title = 'Element';
+  ga('send', 'event', 'PageView', route.name);
 });
 
 new Vue({ // eslint-disable-line

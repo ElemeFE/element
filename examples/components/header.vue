@@ -428,6 +428,7 @@
         getVars()
           .then(() => {
             this.showThemeConfigurator = true;
+            ga('send', 'event', 'DocView', 'Inner');
           })
           .catch((err) => {
             console.error(err);
