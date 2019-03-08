@@ -284,7 +284,7 @@ TableStore.prototype.mutations = {
             break;
           }
         }
-        
+
         if (states.sortingColumn) {
           this.commit('changeSortCondition', {
             isDefault: true
