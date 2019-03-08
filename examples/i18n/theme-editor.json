@@ -14,6 +14,7 @@
     "action": {
       "theme-editor": "主题编辑器",
       "no-config": "暂不可编辑，敬请期待",
+      "no-need-config": "本页无需编辑，看看其他页面吧",
       "reset-theme": "重置",
       "download-theme": "下载"
     },
@@ -48,6 +49,7 @@
     "action": {
       "theme-editor": "Theme Editor",
       "no-config": "Please stay tuned",
+      "no-need-config": "No config in this page",
       "reset-theme": "Reset",
       "download-theme": "Download"
     },
@@ -76,6 +78,7 @@
     "action": {
       "theme-editor": "Theme Editor",
       "no-config": "Please stay tuned",
+      "no-need-config": "No config in this page",
       "reset-theme": "Reset",
       "download-theme": "Download"
     },
@@ -104,6 +107,7 @@
     "action": {
       "theme-editor": "Theme Editor",
       "no-config": "Please stay tuned",
+      "no-need-config": "No config in this page",
       "reset-theme": "Reset",
       "download-theme": "Download"
     },

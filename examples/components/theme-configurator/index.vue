@@ -23,7 +23,8 @@
           </div>
           <div v-if="init && !currentConfig" class="no-config">
             <img src="../../assets/images/theme-no-config.png" alt>
-            <span>{{getActionDisplayName("no-config")}}</span>
+            <span v-if="pageCouldEdit">{{getActionDisplayName("no-config")}}</span>
+            <span v-else>{{getActionDisplayName("no-need-config")}}</span>
           </div>
           <download-area></download-area>
         </div>
@@ -124,6 +125,11 @@ export default {
   computed: {
     globalValue() {
       return filterGlobalValue(this.defaultConfig, this.userConfig);
+    },
+    pageCouldEdit() {
+      const noNeedEdit = ['installation', 'quickstart', 'i18n', 'custom-theme', 'transition'];
+      const lastPath = this.$route.path.split('/').slice(-1).pop();
+      return noNeedEdit.indexOf(lastPath) < 0;
     }
   },
   methods: {
