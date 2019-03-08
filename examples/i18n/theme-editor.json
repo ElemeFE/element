@@ -65,11 +65,57 @@
   {
     "lang": "es",
     "display-name": {
+      "border-color": "border color",
+      "font-color": "font color",
+      "background-color": "background color",
+      "font-weight": "font weight",
+      "font-size": "font size",
+      "font-line-height": "font line height",
+      "border-radius": "border radius"
+    },
+    "action": {
+      "theme-editor": "Theme Editor",
+      "no-config": "Please stay tuned",
+      "reset-theme": "Reset",
+      "download-theme": "Download"
+    },
+    "category": {
+      "BrandColor": "Brand Color",
+      "SecondaryColor": "Secondary Color",
+      "FontColor": "Font Color",
+      "BorderColor": "Border Color",
+      "BackgroundColor": "Background Color",
+      "FontSize": "Font Size",
+      "FontWeight": "Font Weight",
+      "LineHeight": "Line Height"
     }
   },
   {
     "lang": "fr-FR",
     "display-name": {
+      "border-color": "border color",
+      "font-color": "font color",
+      "background-color": "background color",
+      "font-weight": "font weight",
+      "font-size": "font size",
+      "font-line-height": "font line height",
+      "border-radius": "border radius"
+    },
+    "action": {
+      "theme-editor": "Theme Editor",
+      "no-config": "Please stay tuned",
+      "reset-theme": "Reset",
+      "download-theme": "Download"
+    },
+    "category": {
+      "BrandColor": "Brand Color",
+      "SecondaryColor": "Secondary Color",
+      "FontColor": "Font Color",
+      "BorderColor": "Border Color",
+      "BackgroundColor": "Background Color",
+      "FontSize": "Font Size",
+      "FontWeight": "Font Weight",
+      "LineHeight": "Line Height"
     }
   }
 ]
