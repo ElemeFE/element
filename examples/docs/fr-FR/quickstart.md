@@ -83,7 +83,7 @@ new Vue({
 });
 ```
 
-Exemple complet (Liste complète des composants dans [components.json](https://github.com/ElemeFE/element/blob/master/components.json)):
+Exemple complet (liste complète des composants dans [components.json](https://github.com/ElemeFE/element/blob/master/components.json)):
 
 ```javascript
 import Vue from 'vue';

@@ -114,7 +114,7 @@ La couleur principale d'Element est un bleu clair et agréable.
 
 ### Couleurs secondaires
 
-En plus de la couleur principale, vous devrez sans doute utiliser d'autres couleurs pour différents cas de figures, par exemple un couleur de danger pour indiquer une opération dangereuse.
+En plus de la couleur principale, vous devrez sans doute utiliser d'autres couleurs pour différents cas de figures, par exemple une couleur de danger pour indiquer une opération dangereuse.
 
 <el-row :gutter="12">
   <el-col :span="6" :xs="{span: 12}">
