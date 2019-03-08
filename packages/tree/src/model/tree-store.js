@@ -92,7 +92,10 @@ export default class TreeStore {
   remove(data) {
     const node = this.getNode(data);
     if (node && node.parent) {
+      const currentNode = this.getCurrentNode();
+      const isCurrentNode = node.key === currentNode.key;
       node.parent.removeChild(node);
+      isCurrentNode && this.setCurrentNode(null);
     }
   }
 
