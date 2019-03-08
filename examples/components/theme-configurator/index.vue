@@ -168,7 +168,7 @@ export default {
     },
     filterCurrentConfig() {
       this.currentConfig = this.defaultConfig.find((config) => {
-        return config.name === this.$route.path.split('/').pop().toLowerCase();
+        return config.name === this.$route.path.split('/').pop().toLowerCase().replace('-', '');
       });
     },
     userConfigChange(e) {
