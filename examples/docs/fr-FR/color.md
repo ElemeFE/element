@@ -98,7 +98,7 @@ La couleur principale d'Element est un bleu clair et agréable.
 
 <el-row :gutter="12">
   <el-col :span="10" :xs="{span: 12}">
-    <div class="demo-color-box" :style="{ background: primary }">Brand Color
+    <div class="demo-color-box" :style="{ background: primary }">Couleur principale
       <div class="value">#409EFF</div>
       <div class="bg-color-sub" :style="{ background: tintColor(primary, 0.9) }">
         <div
@@ -114,11 +114,11 @@ La couleur principale d'Element est un bleu clair et agréable.
 
 ### Couleurs secondaires
 
-En plus de la couleur principale, vous devrez sans doute utiliser d'autres couleurs pour différents cas de figures, par exemple un couleur de danger pour indiquer une opération dangereuse.
+En plus de la couleur principale, vous devrez sans doute utiliser d'autres couleurs pour différents cas de figures, par exemple une couleur de danger pour indiquer une opération dangereuse.
 
 <el-row :gutter="12">
   <el-col :span="6" :xs="{span: 12}">
-    <div class="demo-color-box" :style="{ background: success }">Success
+    <div class="demo-color-box" :style="{ background: success }">Succès
       <div class="value">#67C23A</div>
       <div class="bg-color-sub">
         <div
@@ -131,7 +131,7 @@ En plus de la couleur principale, vous devrez sans doute utiliser d'autres coule
     </div>
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
-    <div class="demo-color-box" :style="{ background: warning }">Warning
+    <div class="demo-color-box" :style="{ background: warning }">Avertissement
       <div class="value">#E6A23C</div>
       <div class="bg-color-sub">
         <div
@@ -211,14 +211,14 @@ Les couleurs neutres sont les couleurs du fond, du texte et des bordures. Vous p
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
-      <div 
+      <div
       class="demo-color-box demo-color-box-other"
       :style="{ background: black }"
-      >Basic Black<div class="value">{{black}}</div></div>
+      >Noir<div class="value">{{black}}</div></div>
       <div
       class="demo-color-box demo-color-box-other"
       :style="{ background: white, color: '#303133', border: '1px solid #eee' }"
-      >Basic White<div class="value">{{white}}</div></div>
+      >Blanc<div class="value">{{white}}</div></div>
       <div class="demo-color-box demo-color-box-other bg-transparent">Transparent<div class="value">Transparent</div>
       </div>
     </div>

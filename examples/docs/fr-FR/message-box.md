@@ -166,7 +166,7 @@ Il est possible d'afficher du contenu un peu plus varié et personnalisé.
 :::
 
 :::tip
-Le contenu de MessageBox peut être `VNode`, Vous permettant de passer des composants personnalisés. Lorsque vous ouvrer MessageBox, Vue compare le nouveau `VNode` avec l'ancien `VNode`, puis détermine comment rafraîchir efficacement l'UI, le composant peut donc ne pas être totalement re-rendu ([#8931](https://github.com/ElemeFE/element/issues/8931)). dans ce cas, Vous pouvez ajouter une clé unique à `VNode` à chaque fois que MessageBox s'ouvre: [example](https://jsfiddle.net/zhiyang/ezmhq2ef).
+Le contenu de MessageBox peut être `VNode`, Vous permettant de passer des composants personnalisés. Lorsque vous ouvrer MessageBox, Vue compare le nouveau `VNode` avec l'ancien `VNode`, puis détermine comment rafraîchir efficacement l'UI, le composant peut donc ne pas être totalement re-rendu ([#8931](https://github.com/ElemeFE/element/issues/8931)). Dans ce cas, Vous pouvez ajouter une clé unique à `VNode` à chaque fois que MessageBox s'ouvre: [exemple](https://jsfiddle.net/zhiyang/ezmhq2ef).
 :::
 
 ### Utiliser du HTML

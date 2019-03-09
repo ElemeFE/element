@@ -1737,10 +1737,10 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | cell-click | Se déclenche quand l'utilisateur clique sur une cellule. | row, column, cell, event |
 | cell-dblclick | Se déclenche quand l'utilisateur double-clique sur une cellule. | row, column, cell, event |
 | row-click | Se déclenche quand l'utilisateur clique sur une ligne. | row, column, event |
-| row-contextmenu | Se déclenche quand l'utilisateur fait un click droit sur une ligne. | row, column, event |
+| row-contextmenu | Se déclenche quand l'utilisateur fait un clic droit sur une ligne. | row, column, event |
 | row-dblclick | Se déclenche quand l'utilisateur double-clique sur une ligne. | row, column, event |
 | header-click | Se déclenche quand l'utilisateur clique sur une colonne du header. | column, event |
-| header-contextmenu | Se déclenche quand l'utilisateur fait un click droit sur une colonne du header. | column, event |
+| header-contextmenu | Se déclenche quand l'utilisateur fait un clic droit sur une colonne du header. | column, event |
 | sort-change | Se déclenche quand l'ordre de tri change. | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered. | filters |
 | current-change | Se déclenche quand la ligne sélectionnée change. | currentRow, oldCurrentRow |

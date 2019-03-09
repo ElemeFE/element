@@ -312,7 +312,7 @@ Se basant sur le design responsive de Bootstrap, il existe cinq breakpoints déj
 
 ### Classes pour cacher certains éléments
 
-Element fournit également une série de classes pour cacher des éléments dans certaines circonstances. Ces classes peuvent être ajoutée à n'importe quel élément du DOM ou composant. Vous devrez importer le fichier CSS suivant pour pouvoir les utiliser:
+Element fournit également une série de classes pour cacher des éléments dans certaines circonstances. Ces classes peuvent être ajoutées à n'importe quel élément du DOM ou composant. Vous devrez importer le fichier CSS suivant pour pouvoir les utiliser:
 
 ```js
 import 'element-ui/lib/theme-chalk/display.css';
