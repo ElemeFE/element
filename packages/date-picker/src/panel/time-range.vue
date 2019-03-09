@@ -137,7 +137,7 @@
 
     watch: {
       value(value) {
-        if (Array.isArray(value)) {
+        if (this.isValidRange(value)) {
           this.minDate = new Date(value[0]);
           this.maxDate = new Date(value[1]);
         } else {
@@ -163,6 +163,14 @@
     },
 
     methods: {
+      isValidDate(date) {
+        return !Number.isNaN(date.valueOf());
+      },
+
+      isValidRange(range) {
+        return Array.isArray(range) && range.length === 2 && this.isValidDate(range[0]) && this.isValidDate(range[1]);
+      },
+
       isLimitRange() {
         const { selectableRange } = this;
         const isValid = selectableRange && Array.isArray(selectableRange);
@@ -178,11 +186,17 @@
       },
 
       handleMinChange(date) {
+        if (!this.isValidDate(date)) {
+          return ;
+        }
         this.minDate = clearMilliseconds(date);
         this.handleChange();
       },
 
       handleMaxChange(date) {
+        if (!this.isValidDate(date)) {
+          return ;
+        }
         this.maxDate = clearMilliseconds(date);
         this.handleChange();
       },
