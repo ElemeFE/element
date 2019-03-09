@@ -93,6 +93,17 @@
       minTime: startTime
     }">
   </el-time-select>
+  <el-time-picker
+    is-range
+    v-model="value4"
+    range-separator="至"
+    start-placeholder="开始时间"
+    end-placeholder="结束时间"
+    placeholder="选择时间范围"
+    :picker-options="{
+      selectableRange: '08:30:00 至 20:30:00'
+    }">
+  </el-time-picker>
 </template>
 
 <script>
@@ -100,7 +111,8 @@
     data() {
       return {
         startTime: '',
-        endTime: ''
+        endTime: '',
+        value4: [new Date(2016, 9, 10, 10, 40), new Date(2016, 9, 10, 18, 40)]
       };
     }
   }
@@ -117,7 +129,7 @@
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value5"
     range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
@@ -126,7 +138,7 @@
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value6"
     range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
@@ -138,8 +150,8 @@
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value6: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
