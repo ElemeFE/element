@@ -87,6 +87,15 @@
 
     components: { TimeSpinner },
 
+    created() {
+      this.$nextTick(() => {
+        if (this.isLimitRange()) {
+          this.$refs.minSpinner.selectableRange = this.selectableRange;
+          this.$refs.maxSpinner.selectableRange = this.selectableRange;
+        }
+      });
+    },
+
     computed: {
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
@@ -121,7 +130,8 @@
         format: 'HH:mm:ss',
         visible: false,
         selectionRange: [0, 2],
-        arrowControl: false
+        arrowControl: false,
+        selectableRange: []
       };
     },
 
@@ -153,6 +163,12 @@
     },
 
     methods: {
+      isLimitRange() {
+        const { selectableRange } = this;
+        const isValid = selectableRange && Array.isArray(selectableRange);
+        return isValid && selectableRange[0] && Array.isArray(selectableRange[0]) && selectableRange[0].length === 2;
+      },
+
       handleClear() {
         this.$emit('pick', null);
       },
@@ -173,8 +189,14 @@
 
       handleChange() {
         if (this.isValidValue([this.minDate, this.maxDate])) {
-          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
-          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
+          if (this.isLimitRange()) {
+            const [ selectableMin, selectableMax ] = this.selectableRange[0];
+            this.$refs.minSpinner.selectableRange = [[selectableMin, this.maxDate]];
+            this.$refs.maxSpinner.selectableRange = [[this.minDate, selectableMax]];
+          } else {
+            this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
+            this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
+          }
           this.$emit('pick', [this.minDate, this.maxDate], true);
         }
       },
