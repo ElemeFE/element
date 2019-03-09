@@ -173,6 +173,10 @@ export default {
   mounted() {
     const unwatch = this.$watch('index', val => {
       this.$watch('$parent.active', this.updateStatus, { immediate: true });
+      this.$watch('$parent.processStatus', () => {
+        const activeIndex = this.$parent.active;
+        this.updateStatus(activeIndex);
+      }, { immediate: true });
       unwatch();
     });
   }
