@@ -94,6 +94,16 @@ If start time is picked at first, then the end time will change accordingly.
       minTime: startTime
     }">
   </el-time-select>
+  <el-time-picker
+    is-range
+    v-model="value4"
+    range-separator="To"
+    start-placeholder="Start time"
+    end-placeholder="End time"
+    :picker-options="{
+      selectableRange: ['17:30:00 To 18:30:00', '18:50:00 To 20:30:00', '21:00:00 To 22:00:00']
+    }">
+  </el-time-picker>
 </template>
 
 <script>
@@ -101,7 +111,8 @@ If start time is picked at first, then the end time will change accordingly.
     data() {
       return {
         startTime: '',
-        endTime: ''
+        endTime: '',
+        value4: [new Date(2016, 9, 10, 17, 40), new Date(2016, 9, 10, 21, 40)]
       };
     }
   }
@@ -118,7 +129,7 @@ Can pick an arbitrary time range.
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value5"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -126,7 +137,7 @@ Can pick an arbitrary time range.
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value6"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -137,8 +148,8 @@ Can pick an arbitrary time range.
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value6: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
