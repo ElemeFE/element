@@ -44,14 +44,14 @@ export default {
           {
             this._l(this.data, (row, $index) =>
               [<tr
-                style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
+                style={ this.rowStyle ? this.cachedRowStyle[$index] : null }
                 key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ [this.getRowClass(row, $index)] }>
+                class={ [this.cachedRowClass[$index], this.getRowHoverAndCurrentClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) => {
                     const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
@@ -60,8 +60,8 @@ export default {
                     } else {
                       return (
                         <td
-                          style={ this.getCellStyle($index, cellIndex, row, column) }
-                          class={ this.getCellClass($index, cellIndex, row, column) }
+                          style={ this.cachedCellStyle[$index][cellIndex] }
+                          class={ this.cachedCellClass[$index][cellIndex] }
                           rowspan={ rowspan }
                           colspan={ colspan }
                           on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
@@ -139,12 +139,37 @@ export default {
 
   data() {
     return {
-      tooltipContent: ''
+      tooltipContent: '',
+      cachedRowClass: [],
+      cachedRowStyle: [],
+      cachedCellClass: [],
+      cachedCellStyle: []
     };
   },
 
   created() {
     this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
+  },
+
+  watch: {
+    'data': {
+      handler: function(newData) {
+        this.cachedRowClass = newData.map((row, rowIndex) => this.getRowClass(row, rowIndex));
+        this.cachedRowStyle = newData.map((row, rowIndex) => this.getRowStyle(row, rowIndex));
+        this.cachedCellClass = newData.map((row, rowIndex) => this.columns.map((column, columnIndex) => this.getCellClass(rowIndex, columnIndex, row, column)));
+        this.cachedCellStyle = newData.map((row, rowIndex) => this.columns.map((column, columnIndex) => this.getCellStyle(rowIndex, columnIndex, row, column)));
+      },
+      deep: true,
+      immediate: true
+    },
+    'columns': {
+      handler: function(newColumns) {
+        this.cachedCellClass = this.data.map((row, rowIndex) => newColumns.map((column, columnIndex) => this.getCellClass(rowIndex, columnIndex, row, column)));
+        this.cachedCellStyle = this.data.map((row, rowIndex) => newColumns.map((column, columnIndex) => this.getCellStyle(rowIndex, columnIndex, row, column)));
+      },
+      deep: true,
+      immediate: true
+    }
   },
 
   methods: {
@@ -194,6 +219,19 @@ export default {
       };
     },
 
+    getRowHoverAndCurrentClass(row, rowIndex) {
+      const classes = [''];
+
+      if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
+        classes.push('current-row');
+      }
+
+      if (rowIndex === this.store.states.hoverRow) {
+        classes.push('hover-row');
+      }
+      return classes.join(' ');
+    },
+
     getRowStyle(row, rowIndex) {
       const rowStyle = this.table.rowStyle;
       if (typeof rowStyle === 'function') {
@@ -207,13 +245,6 @@ export default {
 
     getRowClass(row, rowIndex) {
       const classes = ['el-table__row'];
-      if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
-        classes.push('current-row');
-      }
-
-      if (rowIndex === this.store.states.hoverRow) {
-        classes.push('hover-row');
-      }
 
       if (this.stripe && rowIndex % 2 === 1) {
         classes.push('el-table__row--striped');
