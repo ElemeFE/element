@@ -89,9 +89,10 @@
 
     created() {
       this.$nextTick(() => {
-        if (this.isLimitRange()) {
-          this.$refs.minSpinner.selectableRange = this.selectableRange;
-          this.$refs.maxSpinner.selectableRange = this.selectableRange;
+        if (this.isSelectableRange()) {
+          const selectableRange = this.selectableRange.map(([min, max]) => [min, max]);
+          this.$refs.minSpinner.selectableRange = selectableRange;
+          this.$refs.maxSpinner.selectableRange = selectableRange;
         }
       });
     },
@@ -163,18 +164,61 @@
     },
 
     methods: {
+      getFormatDateVal(date) {
+        const currentDate = new Date();
+        date.setFullYear(currentDate.getFullYear());
+        date.setMonth(currentDate.getMonth());
+        date.setDate(currentDate.getDate());
+        return date.valueOf();
+      },
+
       isValidDate(date) {
         return !Number.isNaN(date.valueOf());
       },
 
       isValidRange(range) {
-        return Array.isArray(range) && range.length === 2 && this.isValidDate(range[0]) && this.isValidDate(range[1]);
+        return Array.isArray(range) && range.length === 2 && this.isValidDate(range[0]) && this.isValidDate(range[1]) && range[1] >= range[0];
       },
 
-      isLimitRange() {
+      isSelectableRange() {
         const { selectableRange } = this;
-        const isValid = selectableRange && Array.isArray(selectableRange);
-        return isValid && selectableRange[0] && Array.isArray(selectableRange[0]) && selectableRange[0].length === 2;
+        const isValid = selectableRange.every((item) => {
+          return this.isValidRange(item);
+        });
+        return isValid;
+      },
+
+      getSelectableRange() {
+        const minSelectable = [];
+        const maxSelectable = [];
+        this.selectableRange.forEach((item, index) => {
+          const minVal = this.getFormatDateVal(item[0]);
+          const maxVal = this.getFormatDateVal(item[1]);
+          const minDateVal = this.getFormatDateVal(this.minDate);
+          const maxDateVal = this.getFormatDateVal(this.maxDate);
+          if (maxDateVal >= minVal) {
+            let [min, max] = item;
+            if (maxDateVal === minVal) {
+              min = this.maxDate;
+            }
+            if (maxDateVal <= maxVal) {
+              max = this.maxDate;
+            }
+            minSelectable.push([min, max]);
+          }
+
+          if (minDateVal <= maxVal) {
+            let [min, max] = item;
+            if (minDateVal >= minVal) {
+              min = this.minDate;
+            }
+            if (minDateVal === maxVal) {
+              max = this.minDate;
+            }
+            maxSelectable.push([min, max]);
+          }
+        });
+        return [minSelectable, maxSelectable];
       },
 
       handleClear() {
@@ -203,10 +247,10 @@
 
       handleChange() {
         if (this.isValidValue([this.minDate, this.maxDate])) {
-          if (this.isLimitRange()) {
-            const [ selectableMin, selectableMax ] = this.selectableRange[0];
-            this.$refs.minSpinner.selectableRange = [[selectableMin, this.maxDate]];
-            this.$refs.maxSpinner.selectableRange = [[this.minDate, selectableMax]];
+          if (this.isSelectableRange()) {
+            const [minSelectable, maxSelectable] = this.getSelectableRange();
+            this.$refs.minSpinner.selectableRange = minSelectable;
+            this.$refs.maxSpinner.selectableRange = maxSelectable;
           } else {
             this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
             this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
