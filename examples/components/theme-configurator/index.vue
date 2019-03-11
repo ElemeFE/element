@@ -177,8 +177,9 @@ export default {
     },
     applyStyle(res, time) {
       if (time < this.lastApply) return;
-      this.updateDocs();
-      updateDomHeadStyle('chalk-style', res);
+      this.updateDocs(() => {
+        updateDomHeadStyle('chalk-style', res);
+      });
       this.lastApply = time;
     },
     onDownload() {
@@ -219,10 +220,10 @@ export default {
     triggerComponentLoading(val) {
       bus.$emit('user-theme-config-loading', val);
     },
-    updateDocs() {
+    updateDocs(cb) {
       window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
       bus.$emit('user-theme-config-update', this.userConfig);
-      this.updateDocStyle(this.userConfig);
+      this.updateDocStyle(this.userConfig, cb);
     }
   },
   watch: {
