@@ -84,6 +84,14 @@
         return this.parentMenu !== this.rootMenu;
       }
     },
+    watch: {
+      index(val, old) {
+        this.addInstance();
+        const key = { index: old };
+        this.parentMenu.removeItem(key);
+        this.rootMenu.removeItem(key);
+      }
+    },
     methods: {
       onMouseEnter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
@@ -98,11 +106,14 @@
           this.dispatch('ElMenu', 'item-click', this);
           this.$emit('click', this);
         }
+      },
+      addInstance() {
+        this.parentMenu.addItem(this);
+        this.rootMenu.addItem(this);
       }
     },
     mounted() {
-      this.parentMenu.addItem(this);
-      this.rootMenu.addItem(this);
+      this.addInstance();
     },
     beforeDestroy() {
       this.parentMenu.removeItem(this);
