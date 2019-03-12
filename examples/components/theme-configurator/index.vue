@@ -119,7 +119,9 @@ export default {
         global: {},
         local: {}
       },
-      lastApply: 0
+      lastApply: 0,
+      userConfigHistory: [],
+      userConfigRedoHistory: []
     };
   },
   mixins: [DocStyle, Loading, Shortcut],
@@ -174,6 +176,8 @@ export default {
       });
     },
     userConfigChange(e) {
+      this.userConfigHistory.push(JSON.stringify(this.userConfig));
+      this.userConfigRedoHistory = [];
       this.$set(this.userConfig[filterConfigType(this.currentConfig.name)], e.key, e.value);
       this.onAction();
     },
@@ -228,10 +232,18 @@ export default {
       this.updateDocStyle(this.userConfig, cb);
     },
     undo() {
-      console.log('undo');
+      if (this.userConfigHistory.length > 0) {
+        this.userConfigRedoHistory.push(JSON.stringify(this.userConfig));
+        this.userConfig = JSON.parse(this.userConfigHistory.pop());
+        this.onAction();
+      }
     },
     redo() {
-      console.log('redo');
+      if (this.userConfigRedoHistory.length > 0) {
+        this.userConfigHistory.push(JSON.stringify(this.userConfig));
+        this.userConfig = JSON.parse(this.userConfigRedoHistory.shift());
+        this.onAction();
+      }
     }
   },
   watch: {
