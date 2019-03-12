@@ -179,6 +179,7 @@ export default {
     checkLocalThemeConfig() {
       try {
         if (this.hasLocalConfig) {
+          this.$message(getActionDisplayName('load-local-theme-config'));
           this.onAction();
           return;
         }
