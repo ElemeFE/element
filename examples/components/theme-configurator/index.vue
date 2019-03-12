@@ -4,6 +4,7 @@
       round
       type="primary"
       size="mini"
+      style="background: #66b1ff;border-color: #66b1ff"
       @click.stop="showConfigurator"
     >{{getActionDisplayName("theme-editor")}}</el-button>
     <transition name="fade">
