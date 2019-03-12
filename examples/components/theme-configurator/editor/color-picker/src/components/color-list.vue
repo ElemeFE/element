@@ -10,9 +10,9 @@
         </span>
         <div class="color-list-item-label">
           {{item.info.label}} 
-        </div>
-        <div class="color-list-item-value">
-          {{item.info.value}} 
+          <div class="color-list-item-value">
+            {{item.info.value}} 
+          </div>
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
     width: 100%;
     cursor: pointer;
     margin: 2px 0;
+    position: relative;
   }
   .color-list-item:hover {
     background: #efefef;
@@ -44,22 +45,19 @@
     margin-top: 2px;
     margin-left: 5px;
     border-radius: 100%;
-    display: inline-block;
+    display: block;
+    position: absolute;
   }
   .color-list-item-label {
-    margin-left: 15px;
+    margin-left: 35px;
     font-size: 13px;
     line-height: 24px;
     display: inline-block;
-    vertical-align: super;
-    width: 30%;
+    width: 85%;
+    overflow: hidden;
   }
   .color-list-item-value { 
-    margin-left: 15px;
-    font-size: 13px;
-    line-height: 24px;
-    display: inline-block;
-    vertical-align: super;
+    float: right;
   }
 </style>
 
