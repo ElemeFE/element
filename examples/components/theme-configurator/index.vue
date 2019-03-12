@@ -105,6 +105,13 @@ import Loading from './loading';
 import Shortcut from './shortcut';
 import DownloadArea from './download';
 
+const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG';
+
+const DEFAULT_USER_CONFIG = {
+  global: {},
+  local: {}
+};
+
 export default {
   components: {
     mainPanel,
@@ -183,7 +190,7 @@ export default {
           this.onAction();
           return;
         }
-        const config = JSON.parse(localStorage.getItem('ELEMENT_THEME_USER_CONFIG'));
+        const config = JSON.parse(localStorage.getItem(ELEMENT_THEME_USER_CONFIG));
         if (config && config.global) {
           this.userConfig = config;
           this.hasLocalConfig = true;
@@ -226,7 +233,12 @@ export default {
     onAction() {
       this.triggerComponentLoading(true);
       const time = +new Date();
-      localStorage.setItem('ELEMENT_THEME_USER_CONFIG', JSON.stringify(this.userConfig));
+      const currentConfigString = JSON.stringify(this.userConfig);
+      if (JSON.stringify(DEFAULT_USER_CONFIG) === currentConfigString) {
+        localStorage.removeItem(ELEMENT_THEME_USER_CONFIG);
+      } else {
+        localStorage.setItem(ELEMENT_THEME_USER_CONFIG, currentConfigString);
+      }
       updateVars(this.userConfig)
         .then((res) => {
           this.applyStyle(res, time);
