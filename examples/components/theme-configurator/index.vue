@@ -121,7 +121,8 @@ export default {
       },
       lastApply: 0,
       userConfigHistory: [],
-      userConfigRedoHistory: []
+      userConfigRedoHistory: [],
+      hasLocalConfig: false
     };
   },
   mixins: [DocStyle, Loading, Shortcut],
@@ -134,6 +135,9 @@ export default {
       const lastPath = this.$route.path.split('/').slice(-1).pop();
       return noNeedEdit.indexOf(lastPath) < 0;
     }
+  },
+  mounted() {
+    this.checkLocalThemeConfig();
   },
   methods: {
     getActionDisplayName(key) {
@@ -164,11 +168,28 @@ export default {
                 this.defaultConfig = defaultConfig;
                 this.filterCurrentConfig();
                 this.init = true;
+                this.checkLocalThemeConfig();
               }
               loading.close();
             }, 300); // action after transition
           });
       });
+    },
+    checkLocalThemeConfig() {
+      try {
+        if (this.hasLocalConfig) {
+          this.onAction();
+          return;
+        }
+        const config = JSON.parse(localStorage.getItem('ELEMENT_THEME_USER_CONFIG'));
+        if (config && config.global) {
+          this.userConfig = config;
+          this.hasLocalConfig = true;
+          this.showConfigurator();
+        }
+      } catch (e) {
+        // bad local config
+      }
     },
     filterCurrentConfig() {
       this.currentConfig = this.defaultConfig.find((config) => {
@@ -203,6 +224,7 @@ export default {
     onAction() {
       this.triggerComponentLoading(true);
       const time = +new Date();
+      localStorage.setItem('ELEMENT_THEME_USER_CONFIG', JSON.stringify(this.userConfig));
       updateVars(this.userConfig)
         .then((res) => {
           this.applyStyle(res, time);
