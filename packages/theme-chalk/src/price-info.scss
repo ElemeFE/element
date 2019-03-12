@@ -83,10 +83,7 @@
 
   @include m(no-dash) {
 
-    @include e(sum) {
-      border: none;
-    }
-    @include e(change) {
+    @include e(border-wrap) {
       border: none;
     }
   }

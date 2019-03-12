@@ -164,7 +164,12 @@ Use inline.
 :::demo
 
 ```html
-<tm-date-picker v-model="value" ref="compo" type="date" inline default-value="2018-3-4"/>
+<tm-date-picker v-model="value" ref="compo" type="date" inline default-value="2018-3-4">
+  <template slot="cell" slot-scope="props">
+    <b v-if="props.text % 2">{{ props.text }}</b>
+    <template v-else>{{ props.text }}</template>
+  </template>
+</tm-date-picker>
 
 ```
 

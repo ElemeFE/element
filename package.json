@@ -1,6 +1,6 @@
 {
   "name": "tmconsulting-ui",
-  "version": "1.2.37",
+  "version": "1.2.38",
   "author": "TeamcIO",
   "description": "A Component Library for Vue.js.",
   "main": "lib/tmconsulting-ui.common.js",
@@ -52,7 +52,7 @@
     "vue-the-mask": "^0.11.1"
   },
   "peerDependencies": {
-    "vue": "^2.5.2"
+    "vue": "~2.5.22"
   },
   "devDependencies": {
     "algoliasearch": "^3.30.0",
@@ -126,11 +126,11 @@
     "transliteration": "^1.6.6",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.6.2",
-    "vue": "^2.5.17",
+    "vue": "~2.5.22",
     "vue-loader": "^13.7.3",
     "vue-markdown-loader": "1",
     "vue-router": "2.7.0",
-    "vue-template-compiler": "^2.5.17",
+    "vue-template-compiler": "~2.5.22",
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^3.12.0",
     "webpack-dev-server": "^2.11.3",
