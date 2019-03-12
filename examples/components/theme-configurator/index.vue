@@ -101,6 +101,7 @@ import {
 } from './utils/utils.js';
 import DocStyle from './docStyle';
 import Loading from './loading';
+import Shortcut from './shortcut';
 import DownloadArea from './download';
 
 export default {
@@ -121,7 +122,7 @@ export default {
       lastApply: 0
     };
   },
-  mixins: [DocStyle, Loading],
+  mixins: [DocStyle, Loading, Shortcut],
   computed: {
     globalValue() {
       return filterGlobalValue(this.defaultConfig, this.userConfig);
@@ -138,6 +139,7 @@ export default {
     },
     showConfigurator() {
       this.visible = !this.visible;
+      this.visible ? this.enableShortcut() : this.disableShortcut();
       bus.$emit('user-theme-config-visible', this.visible);
       window.userThemeConfigVisible = Boolean(this.visible);
       if (this.init) return;
@@ -224,6 +226,12 @@ export default {
       window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
       bus.$emit('user-theme-config-update', this.userConfig);
       this.updateDocStyle(this.userConfig, cb);
+    },
+    undo() {
+      console.log('undo');
+    },
+    redo() {
+      console.log('redo');
     }
   },
   watch: {
