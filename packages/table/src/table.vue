@@ -507,6 +507,10 @@
           });
         };
         data.forEach(item => {
+          const hasChildren = Array.isArray(item.children) && item.children.length;
+          const isLeaf = item.isLeaf;
+          if (!(hasChildren || isLeaf)) return;
+
           const rowKey = this.getRowKey(item);
           const treeNode = {
             level: 0,
@@ -514,10 +518,10 @@
             display: true,
             children: []
           };
-          if (Array.isArray(item.children) && item.children.length) {
+          if (hasChildren) {
             treeData[rowKey] = treeNode;
             traverse(item.children, treeData[rowKey], 1);
-          } else if (item.isLeaf) {
+          } else if (isLeaf) {
             treeNode.isLeaf = true;
             treeNode.loaded = false;
             treeData[rowKey] = treeNode;
