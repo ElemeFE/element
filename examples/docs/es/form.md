@@ -388,6 +388,10 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 
 :::
 
+:::tip
+See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+:::
+
 ### Eliminar o agregar validaciones dinamicamente
 
 :::demo Además de pasar todas las reglas de validación al mismo tiempo en el componente `form`, también puede pasar las reglas de validación o borrar reglas en un único campo de formulario de forma dinámica.
