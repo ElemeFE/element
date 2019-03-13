@@ -70,6 +70,7 @@ export default {
         .then(() => {
           this.downloading = false;
         });
+      ga('send', 'event', 'ThemeConfigurator', 'Download');
     }
   }
 };
