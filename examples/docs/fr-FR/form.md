@@ -381,6 +381,10 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 ```
 :::
 
+:::tip
+See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+:::
+
 ### Ajouter ou supprimer des champs dynamiquement
 
 :::demo En plus de pouvoir passer toutes les règles de validation en une seule fois au formulaire, vous pouvez aussi ajouter ou supprimer des règles sur un seul champ de manière dynamique.

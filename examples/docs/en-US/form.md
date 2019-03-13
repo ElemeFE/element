@@ -381,6 +381,10 @@ This example shows how to customize your own validation rules to finish a two-fa
 ```
 :::
 
+:::tip
+See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+:::
+
 ### Delete or add form items dynamically
 
 :::demo In addition to passing all validation rules at once on the form component, you can also pass the validation rules or delete rules on a single form field dynamically.
