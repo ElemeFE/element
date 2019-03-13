@@ -144,7 +144,9 @@ const TableStore = function(table, initialState = {}) {
     defaultExpandAll: false,
     selectOnIndeterminate: false,
     treeData: {},
-    indent: 16
+    indent: 16,
+    lazy: false,
+    lazyTreeNodeMap: {}
   };
 
   this._toggleAllSelection = debounce(10, function(states) {
@@ -712,6 +714,36 @@ TableStore.prototype.toggleTreeExpansion = function(rowKey) {
       });
     };
     traverse(node.children);
+  }
+};
+
+TableStore.prototype.loadData = function(row, treeNode) {
+  const table = this.table;
+  const parentRowKey = treeNode.rowKey;
+  if (table.lazy && table.load) {
+    table.load(row, treeNode, (data) => {
+      if (!Array.isArray(data)) {
+        throw new Error('data must be an array');
+      }
+      const treeData = this.states.treeData;
+      data.forEach(item => {
+        const rowKey = table.getRowKey(item);
+        const parent = treeData[parentRowKey];
+        parent.loaded = true;
+        parent.children.push(rowKey);
+        const child = {
+          display: true,
+          level: parent.level + 1
+        };
+        if (item.isLeaf) {
+          child.isLeaf = true;
+          child.children = [];
+        }
+        Vue.set(treeData, rowKey, child);
+        Vue.set(this.states.lazyTreeNodeMap, rowKey, item);
+      });
+      this.toggleTreeExpansion(parentRowKey);
+    });
   }
 };
 

@@ -459,7 +459,12 @@ export default {
 
     handleTreeExpandIconClick(data, e) {
       e.stopPropagation();
-      data.store.toggleTreeExpansion(data.treeNode.rowKey);
+      console.log('data.treeNode.loaded ', data.treeNode.loaded);
+      if (data.store.states.lazy && !data.treeNode.loaded) {
+        data.store.loadData(data.row, data.treeNode);
+      } else {
+        data.store.toggleTreeExpansion(data.treeNode.rowKey);
+      }
     }
   },
 

@@ -335,7 +335,11 @@
       indent: {
         type: Number,
         default: 16
-      }
+      },
+
+      lazy: Boolean,
+
+      load: Function
     },
 
     components: {
@@ -477,7 +481,7 @@
         this.store.commit('toggleAllSelection');
       },
 
-      getKeyOfRow(row) {
+      getRowKey(row) {
         const rowKey = getRowIdentity(row, this.store.states.rowKey);
         if (!rowKey) {
           throw new Error('if there\'s nested data, rowKey is required.');
@@ -489,7 +493,7 @@
         const treeData = {};
         const traverse = (children, parentData, level) => {
           children.forEach(item => {
-            const rowKey = this.getKeyOfRow(item);
+            const rowKey = this.getRowKey(item);
             treeData[rowKey] = {
               display: false,
               level
@@ -503,15 +507,20 @@
           });
         };
         data.forEach(item => {
+          const rowKey = this.getRowKey(item);
+          const treeNode = {
+            level: 0,
+            expanded: false,
+            display: true,
+            children: []
+          };
           if (Array.isArray(item.children) && item.children.length) {
-            const rowKey = this.getKeyOfRow(item);
-            treeData[rowKey] = {
-              level: 0,
-              expanded: false,
-              display: true,
-              children: []
-            };
+            treeData[rowKey] = treeNode;
             traverse(item.children, treeData[rowKey], 1);
+          } else if (item.isLeaf) {
+            treeNode.isLeaf = true;
+            treeNode.loaded = false;
+            treeData[rowKey] = treeNode;
           }
         });
         return treeData;
@@ -700,7 +709,8 @@
         rowKey: this.rowKey,
         defaultExpandAll: this.defaultExpandAll,
         selectOnIndeterminate: this.selectOnIndeterminate,
-        indent: this.indent
+        indent: this.indent,
+        lazy: this.lazy
       });
       const layout = new TableLayout({
         store,

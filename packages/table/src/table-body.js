@@ -29,6 +29,29 @@ export default {
 
   render(h) {
     const columnsHidden = this.columns.map((column, index) => this.isColumnHidden(index));
+    let rows = this.data;
+    if (this.store.states.lazy && Object.keys(this.store.states.lazyTreeNodeMap).length) {
+      rows = rows.reduce((prev, item) => {
+        prev.push(item);
+        const rowKey = this.store.table.getRowKey(item);
+        const parent = this.store.states.treeData[rowKey];
+        if (parent && parent.children) {
+          const tmp = [];
+          const traverse = (children) => {
+            if (!children) return;
+            children.forEach(key => {
+              tmp.push(this.store.states.lazyTreeNodeMap[key]);
+              if (this.store.states.treeData[key]) {
+                traverse(this.store.states.treeData[key].children);
+              }
+            });
+          };
+          traverse(parent.children);
+          prev = prev.concat(tmp);
+        }
+        return prev;
+      }, []);
+    }
     return (
       <table
         class="el-table__body"
@@ -42,7 +65,7 @@ export default {
         </colgroup>
         <tbody>
           {
-            this._l(this.data, (row, $index) => {
+            this._l(rows, (row, $index) => {
               const rowKey = this.table.rowKey ? this.getKeyOfRow(row, $index) : $index;
               const treeNode = this.treeData[rowKey];
               const rowClasses = this.getRowClass(row, $index);
@@ -74,9 +97,10 @@ export default {
                       };
                       if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
                         data.treeNode = {
-                          isLeaf: treeNode.children && treeNode.children.length,
+                          isLeaf: treeNode.isLeaf || (treeNode.children && treeNode.children.length),
                           expanded: treeNode.expanded,
                           indent: treeNode.level * this.treeIndent,
+                          loaded: treeNode.loaded,
                           rowKey
                         };
                       }
@@ -392,11 +416,6 @@ export default {
     handleExpandClick(row, e) {
       e.stopPropagation();
       this.store.toggleRowExpansion(row);
-    },
-
-    handleTreeExpandClick(rowKey, e) {
-      e.stopPropagation();
-      this.toggleTreeExpansion(rowKey);
     }
   }
 };
