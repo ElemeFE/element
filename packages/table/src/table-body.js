@@ -100,6 +100,7 @@ export default {
                           isLeaf: treeNode.isLeaf || (treeNode.children && treeNode.children.length),
                           expanded: treeNode.expanded,
                           indent: treeNode.level * this.treeIndent,
+                          level: treeNode.level,
                           loaded: treeNode.loaded,
                           rowKey
                         };

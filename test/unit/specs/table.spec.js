@@ -1882,7 +1882,7 @@ describe('Table', () => {
   it('keep highlight row after sort', done => {
     const vm = createVue({
       template: `
-        <el-table :data="testData" highlight-current-row row-key="release">
+        <el-table :data="testData" row-key="release">
           <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
@@ -1909,6 +1909,93 @@ describe('Table', () => {
           destroyVM(vm);
           done();
         }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('render tree structual data', (done) => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" row-key="release">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+      data() {
+        const testData = getTestData();
+        testData[1].children = [
+          {
+            name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+          },
+          {
+            name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+          }
+        ];
+        return {
+          testData: testData
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      const rows = vm.$el.querySelectorAll('.el-table__row');
+      expect(rows.length).to.be(7);
+
+      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      expect(childRows.length).to.be(2);
+      childRows.forEach(item => {
+        expect(item.style.display).to.be('none');
+      });
+
+      vm.$el.querySelector('.el-table__expand-icon').click();
+
+      setTimeout(() => {
+        childRows.forEach(item => {
+          expect(item.style.display).to.be('');
+        });
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('load substree row data', (done) => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" row-key="release" lazy :load="load">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+      data() {
+        const testData = getTestData();
+        testData[1].isLeaf = true;
+        return {
+          testData: getTestData()
+        };
+      },
+      methods: {
+        load(row, treeNode, resolve) {
+          resolve([
+            {
+              name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+            },
+            {
+              name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+            }
+          ]);
+        }
+      }
+    }, true);
+    setTimeout(() => {
+      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+      expandIcon.click();
+      setTimeout(() => {
+        expect(expandIcon.classList.contains('el-table__expand-icon--expanded'));
+        expect(vm.$el.querySelectorAll('.el-table__row').length).to.be(7);
+        done();
       }, DELAY);
     }, DELAY);
   });
