@@ -124,6 +124,7 @@
         <el-button
           size="mini"
           type="text"
+          disabled="typeof this.disabledDate === 'function' && this.disabledDate(new Date())"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
           v-show="selectionMode !== 'dates'">
@@ -131,6 +132,7 @@
         </el-button>
         <el-button
           plain
+          disabled="typeof this.disabledDate === 'function' && this.disabledDate(this.value)"
           size="mini"
           class="el-picker-panel__link-btn"
           @click="confirm">
@@ -241,6 +243,9 @@
       },
 
       emit(value, ...args) {
+        if (typeof this.disabledDate === 'function' && this.disabledDate(value)) {
+          return ;
+        }
         if (!value) {
           this.$emit('pick', value, ...args);
         } else if (Array.isArray(value)) {
