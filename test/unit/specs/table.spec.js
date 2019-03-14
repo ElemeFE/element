@@ -599,6 +599,42 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('min-width', done => {
+      const vm = createTable('min-width="123px"', ':min-width="102"', 'min-width="39"');
+      setTimeout(_ => {
+        const ths = toArray(vm.$el.querySelectorAll('.el-table__header-wrapper col'))
+          .map(node => node.width).filter(o => o);
+
+        expect(ths).to.include('123').include('102').include('39');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('width =< min-width', done => {
+      const vm = createTable('width="1px" min-width="123px"', ':width="1" :min-width="102"', 'width="1" min-width="39"');
+      setTimeout(_ => {
+        const ths = toArray(vm.$el.querySelectorAll('.el-table__header-wrapper col'))
+          .map(node => node.width).filter(o => o);
+
+        expect(ths).to.include('123').include('102').include('39');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('width > min-width', done => {
+      const vm = createTable('width="150px" min-width="123px"', ':width="110" :min-width="102"', 'width="50" min-width="39"');
+      setTimeout(_ => {
+        const ths = toArray(vm.$el.querySelectorAll('.el-table__header-wrapper col'))
+          .map(node => node.width).filter(o => o);
+
+        expect(ths).to.include('150').include('110').include('50');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('fixed', done => {
       const vm = createTable(
         'fixed label="test1"',

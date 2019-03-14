@@ -98,11 +98,15 @@ const getDefaultColumn = function(type, options) {
     }
   }
 
-  if (!column.minWidth) {
+  // if set width no need to set minWidth, because if user want set width less than 80, that will not work.
+  if (!column.minWidth && !column.width) {
     column.minWidth = 80;
   }
 
-  column.realWidth = column.width === undefined ? column.minWidth : column.width;
+  // if minWidth is set ant bigger than width, set realWidth to minWidth
+  column.realWidth = (column.minWidth !== undefined && column.minWidth > column.width)
+    ? column.minWidth
+    : column.width;
 
   return column;
 };

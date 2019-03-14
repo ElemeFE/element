@@ -46,7 +46,10 @@ export default {
         const name = col.getAttribute('name');
         const column = columnsMap[name];
         if (column) {
-          col.setAttribute('width', column.realWidth || column.width);
+          const realWidth = (column.minWidth !== undefined && column.minWidth > column.width)
+            ? column.minWidth
+            : column.width;
+          col.setAttribute('width', column.realWidth || realWidth || 80);
         }
       }
     },
