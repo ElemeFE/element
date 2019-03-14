@@ -124,7 +124,7 @@
         <el-button
           size="mini"
           type="text"
-          disabled="@this.checkTimeAvailable(new Date())"
+          disabled="!this.checkTimeAvailable(new Date())"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
           v-show="selectionMode !== 'dates'">
