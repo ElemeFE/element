@@ -227,6 +227,7 @@
   import { getRowIdentity } from './util';
 
   const flattenData = function(data) {
+    if (!data) return data;
     let newData = [];
     const flatten = arr => {
       arr.forEach((item) => {
@@ -506,27 +507,29 @@
             }
           });
         };
-        data.forEach(item => {
-          const hasChildren = Array.isArray(item.children) && item.children.length;
-          const isLeaf = item.isLeaf;
-          if (!(hasChildren || isLeaf)) return;
+        if (data) {
+          data.forEach(item => {
+            const hasChildren = Array.isArray(item.children) && item.children.length;
+            const isLeaf = item.isLeaf;
+            if (!(hasChildren || isLeaf)) return;
 
-          const rowKey = this.getRowKey(item);
-          const treeNode = {
-            level: 0,
-            expanded: false,
-            display: true,
-            children: []
-          };
-          if (hasChildren) {
-            treeData[rowKey] = treeNode;
-            traverse(item.children, treeData[rowKey], 1);
-          } else if (isLeaf) {
-            treeNode.isLeaf = true;
-            treeNode.loaded = false;
-            treeData[rowKey] = treeNode;
-          }
-        });
+            const rowKey = this.getRowKey(item);
+            const treeNode = {
+              level: 0,
+              expanded: false,
+              display: true,
+              children: []
+            };
+            if (hasChildren) {
+              treeData[rowKey] = treeNode;
+              traverse(item.children, treeData[rowKey], 1);
+            } else if (isLeaf) {
+              treeNode.isLeaf = true;
+              treeNode.loaded = false;
+              treeData[rowKey] = treeNode;
+            }
+          });
+        }
         return treeData;
       }
     },
