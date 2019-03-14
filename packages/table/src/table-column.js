@@ -326,14 +326,15 @@ export default {
       if (!renderCell) {
         renderCell = DEFAULT_RENDER_CELL;
       }
+      const children = [
+        _self.renderTreeCell(data),
+        renderCell(h, data)
+      ];
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
+        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ children }</div>
         : (<div class="cell">
-          {
-            _self.renderTreeCell(data)
-          }
-          { renderCell(h, data) }
+          { children }
         </div>);
     };
   },
@@ -453,13 +454,14 @@ export default {
           on-click={this.handleTreeExpandIconClick.bind(this, data)}>
           <i class='el-icon el-icon-arrow-right'></i>
         </div>);
+      } else {
+        ele.push(<span class="el-table__placeholder"></span>);
       }
       return ele;
     },
 
     handleTreeExpandIconClick(data, e) {
       e.stopPropagation();
-      console.log('data.treeNode.loaded ', data.treeNode.loaded);
       if (data.store.states.lazy && !data.treeNode.loaded) {
         data.store.loadData(data.row, data.treeNode);
       } else {

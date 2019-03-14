@@ -76,6 +76,11 @@
     }
   }
 
+  @include e(placeholder) {
+    display: inline-block;
+    width: 20px;
+  }
+
   @include m(fit) {
     border-right: 0;
     border-bottom: 0;
