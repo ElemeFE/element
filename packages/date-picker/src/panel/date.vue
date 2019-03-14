@@ -124,7 +124,7 @@
         <el-button
           size="mini"
           type="text"
-          disabled="typeof this.disabledDate === 'function' && this.disabledDate(new Date())"
+          disabled="@this.checkTimeAvailable(new Date())"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
           v-show="selectionMode !== 'dates'">
@@ -132,7 +132,7 @@
         </el-button>
         <el-button
           plain
-          disabled="typeof this.disabledDate === 'function' && this.disabledDate(this.value)"
+          disabled="!this.checkTimeAvailable(this.value)"
           size="mini"
           class="el-picker-panel__link-btn"
           @click="confirm">
@@ -243,9 +243,6 @@
       },
 
       emit(value, ...args) {
-        if (typeof this.disabledDate === 'function' && this.disabledDate(value)) {
-          return ;
-        }
         if (!value) {
           this.$emit('pick', value, ...args);
         } else if (Array.isArray(value)) {
@@ -373,10 +370,17 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+        if (this.checkTimeAvailable(new Date())) {
           this.date = new Date();
           this.emit(this.date);
         }
+      },
+
+      checkTimeAvailable(time) {
+        if ((!this.disabledDate || !this.disabledDate(time)) && this.checkDateWithinRange(time)) {
+          return true;
+        }
+        return false
       },
 
       confirm() {
