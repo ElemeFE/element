@@ -379,7 +379,7 @@
         if ((!this.disabledDate || !this.disabledDate(time)) && this.checkDateWithinRange(time)) {
           return true;
         }
-        return false
+        return false;
       },
 
       confirm() {
