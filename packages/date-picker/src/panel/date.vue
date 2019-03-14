@@ -132,7 +132,6 @@
         </el-button>
         <el-button
           plain
-          disabled="!this.checkTimeAvailable(this.value)"
           size="mini"
           class="el-picker-panel__link-btn"
           @click="confirm">
@@ -392,6 +391,9 @@
           const value = this.value
             ? this.value
             : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
+          if (!this.checkTimeAvailable(this.value)) {
+            return ;
+          }
           this.date = new Date(value); // refresh date
           this.emit(value);
         }
