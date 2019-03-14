@@ -6,17 +6,19 @@ export default {
   data() {
     return {
       docs: '', // content of docs css
-      theme: ORIGINAL_THEME
+      theme: ORIGINAL_THEME,
+      asyncCb: true
     };
   },
   methods: {
-    updateDocStyle(e) {
+    updateDocStyle(e, cb) {
       const val = e.global['$--color-primary'] || ORIGINAL_THEME;
       const oldVal = this.theme;
       const getHandler = (variable, id) => {
         return () => {
           let newStyle = this.updateStyle(this[variable], ORIGINAL_THEME, val);
           updateDomHeadStyle(id, newStyle);
+          this.asyncCb && cb();
         };
       };
       const docsHandler = getHandler('docs', 'docs-style');
@@ -24,11 +26,14 @@ export default {
         const links = [].filter.call(document.querySelectorAll('link'), link => {
           return /docs\..+\.css/.test(link.href || '');
         });
-        links[0] && this.getCSSString(links[0].href, docsHandler, 'docs');
+        if (links[0]) {
+          this.getCSSString(links[0].href, docsHandler, 'docs');
+        } else {
+          this.asyncCb = false;
+        }
       } else {
         docsHandler();
       }
-
       const styles = [].slice.call(document.querySelectorAll('style'))
         .filter(style => {
           const text = style.innerText;
@@ -40,6 +45,7 @@ export default {
         style.innerText = this.updateStyle(innerText, oldVal, val);
       });
       this.theme = val;
+      !this.asyncCb && cb();
     },
     updateStyle(style, oldColor, newColor) {
       return style.replace(new RegExp(oldColor, 'ig'), newColor);

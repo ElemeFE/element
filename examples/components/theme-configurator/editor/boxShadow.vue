@@ -74,6 +74,7 @@
 .plus-button {
   position: absolute;
   left: 90%;
+  margin-top: 4px;
 }
 .colorPicker {
   margin-left: 0;

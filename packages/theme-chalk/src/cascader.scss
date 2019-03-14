@@ -51,7 +51,7 @@
     top: 0;
     height: 100%;
     padding: 0 25px 0 15px;
-    color: $--input-color;
+    color: $--cascader-menu-font-color;
     width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -156,7 +156,7 @@
     }
 
     @include when(active) {
-      color: $--select-option-selected;
+      color: $--cascader-menu-selected-font-color;
     }
 
     &:hover, &:focus:not(:active) {

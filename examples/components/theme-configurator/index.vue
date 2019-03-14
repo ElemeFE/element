@@ -4,6 +4,7 @@
       round
       type="primary"
       size="mini"
+      style="background: #66b1ff;border-color: #66b1ff"
       @click.stop="showConfigurator"
     >{{getActionDisplayName("theme-editor")}}</el-button>
     <transition name="fade">
@@ -23,7 +24,8 @@
           </div>
           <div v-if="init && !currentConfig" class="no-config">
             <img src="../../assets/images/theme-no-config.png" alt>
-            <span>{{getActionDisplayName("no-config")}}</span>
+            <span v-if="pageCouldEdit">{{getActionDisplayName("no-config")}}</span>
+            <span v-else>{{getActionDisplayName("no-need-config")}}</span>
           </div>
           <download-area></download-area>
         </div>
@@ -100,7 +102,15 @@ import {
 } from './utils/utils.js';
 import DocStyle from './docStyle';
 import Loading from './loading';
+import Shortcut from './shortcut';
 import DownloadArea from './download';
+
+const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG';
+
+const DEFAULT_USER_CONFIG = {
+  global: {},
+  local: {}
+};
 
 export default {
   components: {
@@ -117,14 +127,25 @@ export default {
         global: {},
         local: {}
       },
-      lastApply: 0
+      lastApply: 0,
+      userConfigHistory: [],
+      userConfigRedoHistory: [],
+      hasLocalConfig: false
     };
   },
-  mixins: [DocStyle, Loading],
+  mixins: [DocStyle, Loading, Shortcut],
   computed: {
     globalValue() {
       return filterGlobalValue(this.defaultConfig, this.userConfig);
+    },
+    pageCouldEdit() {
+      const noNeedEdit = ['installation', 'quickstart', 'i18n', 'custom-theme', 'transition'];
+      const lastPath = this.$route.path.split('/').slice(-1).pop();
+      return noNeedEdit.indexOf(lastPath) < 0;
     }
+  },
+  mounted() {
+    this.checkLocalThemeConfig();
   },
   methods: {
     getActionDisplayName(key) {
@@ -132,6 +153,7 @@ export default {
     },
     showConfigurator() {
       this.visible = !this.visible;
+      this.visible ? this.enableShortcut() : this.disableShortcut();
       bus.$emit('user-theme-config-visible', this.visible);
       window.userThemeConfigVisible = Boolean(this.visible);
       if (this.init) return;
@@ -154,25 +176,46 @@ export default {
                 this.defaultConfig = defaultConfig;
                 this.filterCurrentConfig();
                 this.init = true;
+                this.checkLocalThemeConfig();
               }
               loading.close();
             }, 300); // action after transition
           });
       });
     },
+    checkLocalThemeConfig() {
+      try {
+        if (this.hasLocalConfig) {
+          this.$message(getActionDisplayName('load-local-theme-config'));
+          this.onAction();
+          return;
+        }
+        const config = JSON.parse(localStorage.getItem(ELEMENT_THEME_USER_CONFIG));
+        if (config && config.global) {
+          this.userConfig = config;
+          this.hasLocalConfig = true;
+          this.showConfigurator();
+        }
+      } catch (e) {
+        // bad local config
+      }
+    },
     filterCurrentConfig() {
       this.currentConfig = this.defaultConfig.find((config) => {
-        return config.name === this.$route.path.split('/').pop().toLowerCase();
+        return config.name === this.$route.path.split('/').pop().toLowerCase().replace('-', '');
       });
     },
     userConfigChange(e) {
+      this.userConfigHistory.push(JSON.stringify(this.userConfig));
+      this.userConfigRedoHistory = [];
       this.$set(this.userConfig[filterConfigType(this.currentConfig.name)], e.key, e.value);
       this.onAction();
     },
     applyStyle(res, time) {
       if (time < this.lastApply) return;
-      this.updateDocs();
-      updateDomHeadStyle('chalk-style', res);
+      this.updateDocs(() => {
+        updateDomHeadStyle('chalk-style', res);
+      });
       this.lastApply = time;
     },
     onDownload() {
@@ -190,6 +233,12 @@ export default {
     onAction() {
       this.triggerComponentLoading(true);
       const time = +new Date();
+      const currentConfigString = JSON.stringify(this.userConfig);
+      if (JSON.stringify(DEFAULT_USER_CONFIG) === currentConfigString) {
+        localStorage.removeItem(ELEMENT_THEME_USER_CONFIG);
+      } else {
+        localStorage.setItem(ELEMENT_THEME_USER_CONFIG, currentConfigString);
+      }
       updateVars(this.userConfig)
         .then((res) => {
           this.applyStyle(res, time);
@@ -213,10 +262,24 @@ export default {
     triggerComponentLoading(val) {
       bus.$emit('user-theme-config-loading', val);
     },
-    updateDocs() {
+    updateDocs(cb) {
       window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
       bus.$emit('user-theme-config-update', this.userConfig);
-      this.updateDocStyle(this.userConfig);
+      this.updateDocStyle(this.userConfig, cb);
+    },
+    undo() {
+      if (this.userConfigHistory.length > 0) {
+        this.userConfigRedoHistory.push(JSON.stringify(this.userConfig));
+        this.userConfig = JSON.parse(this.userConfigHistory.pop());
+        this.onAction();
+      }
+    },
+    redo() {
+      if (this.userConfigRedoHistory.length > 0) {
+        this.userConfigHistory.push(JSON.stringify(this.userConfig));
+        this.userConfig = JSON.parse(this.userConfigRedoHistory.shift());
+        this.onAction();
+      }
     }
   },
   watch: {

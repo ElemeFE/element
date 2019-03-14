@@ -46,12 +46,14 @@ const getNameFromI18N = (name) => {
   return constant.filter(config => config.lang === lang)[0][name];
 };
 
+export const getVariableDisplayName = (key) => {
+  return getNameFromI18N('variable-name')[key] || key;
+};
+
 export const getStyleDisplayName = (config, componentName) => {
   const displayNameMap = getNameFromI18N('display-name');
-  if (config.name !== '[]') {
-    const langIndex = {'zh-CN': '0', 'es': 2, 'fr-FR': 3}[getLang()] || 1;
-    const nameArr = config.name.replace(/\[?\]?/g, '').split(',');
-    return nameArr[langIndex] || nameArr[1];
+  if (config.name) {
+    return getVariableDisplayName(config.key.replace('$--', ''));
   }
   let displayName = config.key.replace(`$--${componentName}-`, '').replace();
   Object.keys(displayNameMap).forEach((name) => {
