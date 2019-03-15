@@ -1,6 +1,6 @@
-@import "mixins/mixins";
-@import "common/var";
-@import "./popper";
+@import "./mixins/mixins.scss";
+@import "./common/var.scss";
+@import "./popper.scss";
 
 @include b(popover) {
   position: absolute;

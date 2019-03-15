@@ -1,5 +1,5 @@
-@import "common/var";
-@import "mixins/mixins";
+@import "./common/var.scss";
+@import "./mixins/mixins.scss";
 
 .hidden {
   @each $break-point-name, $value in $--breakpoints-spec {

@@ -1,6 +1,6 @@
-@import "mixins/mixins";
-@import "progress";
-@import "common/var";
+@import "./mixins/mixins.scss";
+@import "./progress.scss";
+@import "./common/var.scss";
 
 @include b(upload) {
   display: inline-block;
@@ -174,7 +174,7 @@
       opacity: 1;
       color: $--color-primary;
     }
-    
+
     &:hover {
       background-color: $--background-color-base;
 

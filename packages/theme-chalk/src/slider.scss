@@ -1,8 +1,8 @@
-@import "mixins/mixins";
-@import "mixins/utils";
-@import "input-number";
-@import "tooltip";
-@import "common/var";
+@import "./mixins/mixins.scss";
+@import "./mixins/utils.scss";
+@import "./input-number.scss";
+@import "./tooltip.scss";
+@import "./common/var.scss";
 
 @include b(slider) {
   @include utils-clearfix;

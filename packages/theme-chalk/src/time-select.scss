@@ -1,8 +1,8 @@
-@import "common/var";
+@import "./common/var.scss";
 @import "./date-picker/picker.scss";
 @import "./date-picker/date-picker.scss";
 @import "./scrollbar.scss";
-@import "./popper";
+@import "./popper.scss";
 
 .time-select {
   margin: 5px 0;

@@ -1,7 +1,7 @@
-@import "mixins/mixins";
-@import "mixins/utils";
+@import "./mixins/mixins.scss";
+@import "./mixins/utils.scss";
 @import 'mixins/button';
-@import "common/var";
+@import "./common/var.scss";
 
 @include b(radio) {
   color: $--radio-font-color;

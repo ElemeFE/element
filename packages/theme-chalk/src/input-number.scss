@@ -1,6 +1,6 @@
-@import "mixins/mixins";
-@import "common/var";
-@import "input";
+@import "./mixins/mixins.scss";
+@import "./common/var.scss";
+@import "./input.scss";
 
 @include b(input-number) {
   position: relative;

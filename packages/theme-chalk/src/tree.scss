@@ -1,7 +1,7 @@
-@import "mixins/mixins";
-@import "common/var";
-@import "common/transition";
-@import "checkbox";
+@import "./mixins/mixins.scss";
+@import "./common/var.scss";
+@import "./common/transition.scss";
+@import "./checkbox.scss";
 
 @include b(tree) {
   position: relative;

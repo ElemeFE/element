@@ -1,7 +1,7 @@
-@import "mixins/mixins";
-@import "mixins/utils";
-@import "common/var";
-@import "common/transition";
+@import "./mixins/mixins.scss";
+@import "./mixins/utils.scss";
+@import "./common/var.scss";
+@import "./common/transition.scss";
 
 @mixin menu-item {
   height: 56px;
@@ -214,7 +214,7 @@
     }
   }
 }
-  
+
 @include b(submenu) {
   list-style: none;
   margin: 0;

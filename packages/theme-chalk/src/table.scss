@@ -1,8 +1,8 @@
-@import "mixins/mixins";
-@import "checkbox";
-@import "tag";
-@import "tooltip";
-@import "common/var";
+@import "./mixins/mixins.scss";
+@import "./checkbox.scss";
+@import "./tag.scss";
+@import "./tooltip.scss";
+@import "./common/var.scss";
 
 @include b(table) {
   position: relative;

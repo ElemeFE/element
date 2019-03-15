@@ -1,4 +1,4 @@
-@import "mixins/mixins";
+@import "./mixins/mixins.scss";
 
 @include b(container) {
   display: flex;

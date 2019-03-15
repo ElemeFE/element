@@ -1,7 +1,7 @@
-@import "mixins/mixins";
-@import "checkbox";
-@import "tag";
-@import "common/var";
+@import "./mixins/mixins.scss";
+@import "./checkbox.scss";
+@import "./tag.scss";
+@import "./common/var.scss";
 
 @include b(table-column) {
   @include m(selection) {

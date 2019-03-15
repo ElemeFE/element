@@ -1,5 +1,5 @@
-@import "mixins/mixins";
-@import "common/var";
+@import "./mixins/mixins.scss";
+@import "./common/var.scss";
 
 @include b(card) {
   border-radius: $--card-border-radius;

@@ -1,5 +1,5 @@
-@import "../common/var";
-@import "../mixins/mixins";
+@import "../common/var.scss";
+@import "../mixins/mixins.scss";
 @import "./picker-panel.scss";
 
 @include b(date-picker) {

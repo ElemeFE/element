@@ -1,12 +1,12 @@
-@import "mixins/mixins";
-@import "mixins/utils";
-@import "common/var";
-@import "select-dropdown";
-@import "input";
-@import "tag";
-@import "option";
-@import "option-group";
-@import "scrollbar";
+@import "./mixins/mixins.scss";
+@import "./mixins/utils.scss";
+@import "./common/var.scss";
+@import "./select-dropdown.scss";
+@import "./input.scss";
+@import "./tag.scss";
+@import "./option.scss";
+@import "./option-group.scss";
+@import "./scrollbar.scss";
 
 @include b(select) {
   display: inline-block;

@@ -1,4 +1,4 @@
-@import "../common/var";
+@import "../common/var.scss";
 
 @include b(picker-panel) {
   color: $--color-text-regular;
