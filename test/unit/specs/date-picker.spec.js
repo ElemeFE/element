@@ -1205,6 +1205,40 @@ describe('DatePicker', () => {
         }, DELAY);
       });
 
+      it('now time is not unavailable, emits on confirm', done => {
+        vm = createVue({
+          template: '<el-date-picker type="datetime" v-model="value" ref="compo" :picker-options="pickerOptions"/>',
+          data() {
+            return {
+              value: '',
+              pickerOptions: {
+                disabledDate: (date) => {
+                  return date.getTime() <= Date.now() + 24 * 3600 * 1000;
+                }
+              }
+            };
+          }
+        }, true);
+
+        const spy = sinon.spy();
+        vm.$refs.compo.$on('change', spy);
+
+        const input = vm.$refs.compo.$el.querySelector('input');
+        input.blur();
+        input.focus();
+
+        setTimeout(_ => {
+          expect(spy.called).to.equal(false);
+          expect(vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--mini.is-disabled')).to.be.ok;
+          vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--default').click();
+          setTimeout(_ => {
+            expect(vm.value).is.a('string');
+            expect(spy.calledOnce).to.equal(false);
+            done();
+          }, DELAY);
+        }, DELAY);
+      });
+
       it('input date, enter, emits on confirm', done => {
         vm = createVue({
           template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
