@@ -1232,8 +1232,7 @@ describe('DatePicker', () => {
           expect(vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--mini.is-disabled')).to.be.ok;
           vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--default').click();
           setTimeout(_ => {
-            expect(vm.value).is.a('string');
-            expect(spy.calledOnce).to.equal(false);
+            expect(spy.called).to.equal(false);
             done();
           }, DELAY);
         }, DELAY);

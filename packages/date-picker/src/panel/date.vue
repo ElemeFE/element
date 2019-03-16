@@ -388,7 +388,7 @@
           const value = this.value
             ? this.value
             : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
-          if (!this.checkDateTimeCanBeSelected(this.value)) {
+          if (!this.checkDateTimeCanBeSelected(value)) {
             return ;
           }
           this.date = new Date(value); // refresh date
