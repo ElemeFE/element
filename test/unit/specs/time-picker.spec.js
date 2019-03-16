@@ -344,7 +344,6 @@ describe('TimePicker(range)', () => {
       timePicker.picker.$el.querySelector('.el-time-panel__btn.cancel').click();
       setTimeout(_ => {
         expect(timePicker.picker.visible).to.false;
-        console.log(vm.value);
         expect(vm.value).to.equal('');
         done();
       }, DELAY);
