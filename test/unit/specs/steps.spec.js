@@ -1,6 +1,4 @@
-import { createVue, destroyVM } from '../util';
-
-const IMMEDIATE = 1;
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 describe('Steps', () => {
   let vm;
@@ -20,7 +18,7 @@ describe('Steps', () => {
     expect(vm.$el.querySelectorAll('.el-step')).to.length(3);
   });
 
-  it('space', done => {
+  it('space', async() => {
     vm = createVue(`
       <el-steps>
         <el-step title="step1"></el-step>
@@ -38,13 +36,11 @@ describe('Steps', () => {
       </el-steps>
     `, true);
 
-    setTimeout(_ => {
-      const stepElm = vm.$el.querySelector('.el-step');
-      const stepElm2 = vm2.$el.querySelector('.el-step');
-      expect(getComputedStyle(stepElm).flexBasis).to.equal('50%');
-      expect(getComputedStyle(stepElm2).flexBasis).to.equal('100px');
-      done();
-    }, IMMEDIATE);
+    await waitImmediate();
+    const stepElm = vm.$el.querySelector('.el-step');
+    const stepElm2 = vm2.$el.querySelector('.el-step');
+    expect(getComputedStyle(stepElm).flexBasis).to.equal('50%');
+    expect(getComputedStyle(stepElm2).flexBasis).to.equal('100px');
   });
 
   it('processStatus', done => {
@@ -134,7 +130,7 @@ describe('Steps', () => {
     expect(vm.$el.querySelector('.is-vertical')).to.exist;
   });
 
-  it('vertical:height', done => {
+  it('vertical:height', async() => {
     vm = createVue(`
       <el-steps direction="vertical" :space="200">
         <el-step title="aaa"></el-step>
@@ -142,11 +138,9 @@ describe('Steps', () => {
       </el-steps>
     `, true);
 
-    setTimeout(_ => {
-      const stepElm = vm.$el.querySelector('.el-step');
-      expect(getComputedStyle(stepElm).flexBasis).to.equal('200px');
-      done();
-    }, IMMEDIATE);
+    await waitImmediate();
+    const stepElm = vm.$el.querySelector('.el-step');
+    expect(getComputedStyle(stepElm).flexBasis).to.equal('200px');
   });
 
   it('step:status=error', done => {

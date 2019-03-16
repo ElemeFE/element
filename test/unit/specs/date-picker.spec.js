@@ -2,7 +2,8 @@ import {
   createTest,
   createVue,
   destroyVM,
-  triggerEvent
+  triggerEvent,
+  wait
 } from '../util';
 import DatePicker from 'packages/date-picker';
 
@@ -863,14 +864,14 @@ describe('DatePicker', () => {
   describe('nagivation', () => {
     afterEach(() => { destroyVM(vm); });
 
-    const click = (el, cbk = () => {}) => {
+    const clickAndWait = (el) => {
       el.click();
-      setTimeout(cbk, DELAY);
+      return wait();
     };
 
     let prevMonth, prevYear, nextMonth, nextYear, getYearLabel, getMonthLabel;
 
-    const navigationTest = (value, cbk) => {
+    const initNavigationTest = async(value) => {
       vm = createVue({
         template: '<el-date-picker v-model="value" ref="compo" />',
         data() {
@@ -880,80 +881,63 @@ describe('DatePicker', () => {
         }
       }, true);
       vm.$refs.compo.$el.querySelector('input').focus();
-      setTimeout(_ => {
-        const $el = vm.$refs.compo.picker.$el;
-        prevMonth = $el.querySelector('button.el-icon-arrow-left');
-        prevYear = $el.querySelector('button.el-icon-d-arrow-left');
-        nextMonth = $el.querySelector('button.el-icon-arrow-right');
-        nextYear = $el.querySelector('button.el-icon-d-arrow-right');
-        getYearLabel = () => $el.querySelectorAll('.el-date-picker__header-label')[0].textContent;
-        getMonthLabel = () => $el.querySelectorAll('.el-date-picker__header-label')[1].textContent;
-        cbk();
-      }, DELAY);
+      await wait();
+      const $el = vm.$refs.compo.picker.$el;
+      prevMonth = $el.querySelector('button.el-icon-arrow-left');
+      prevYear = $el.querySelector('button.el-icon-d-arrow-left');
+      nextMonth = $el.querySelector('button.el-icon-arrow-right');
+      nextYear = $el.querySelector('button.el-icon-d-arrow-right');
+      getYearLabel = () => $el.querySelectorAll('.el-date-picker__header-label')[0].textContent;
+      getMonthLabel = () => $el.querySelectorAll('.el-date-picker__header-label')[1].textContent;
     };
 
-    it('month, year', done => {
-      navigationTest(new Date(2000, 0, 1), _ => {
-        expect(getYearLabel()).to.include('2000');
-        expect(getMonthLabel()).to.include('1');
-        click(prevMonth, _ => {
-          expect(getYearLabel()).to.include('1999');
-          expect(getMonthLabel()).to.include('12');
-          click(prevYear, _ => {
-            expect(getYearLabel()).to.include('1998');
-            expect(getMonthLabel()).to.include('12');
-            click(nextMonth, _ => {
-              expect(getYearLabel()).to.include('1999');
-              expect(getMonthLabel()).to.include('1');
-              click(nextYear, _ => {
-                expect(getYearLabel()).to.include('2000');
-                expect(getMonthLabel()).to.include('1');
-                done();
-              });
-            });
-          });
-        });
-      });
+    it('month, year', async() => {
+      await initNavigationTest(new Date(2000, 0, 1));
+      expect(getYearLabel()).to.include('2000');
+      expect(getMonthLabel()).to.include('1');
+
+      await clickAndWait(prevMonth);
+      expect(getYearLabel()).to.include('1999');
+      expect(getMonthLabel()).to.include('12');
+
+      await clickAndWait(prevYear);
+      expect(getYearLabel()).to.include('1998');
+      expect(getMonthLabel()).to.include('12');
+
+      await clickAndWait(nextMonth);
+      expect(getYearLabel()).to.include('1999');
+      expect(getMonthLabel()).to.include('1');
+
+      await clickAndWait(nextYear);
+      expect(getYearLabel()).to.include('2000');
+      expect(getMonthLabel()).to.include('1');
     });
 
-    it('month with fewer dates', done => {
+    it('month with fewer dates', async() => {
       // July has 31 days, June has 30
-      navigationTest(new Date(2000, 6, 31), _ => {
-        click(prevMonth, _ => {
-          expect(getYearLabel()).to.include('2000');
-          expect(getMonthLabel()).to.include('6');
-          done();
-        });
-      });
+      await initNavigationTest(new Date(2000, 6, 31));
+      await clickAndWait(prevMonth);
+      expect(getYearLabel()).to.include('2000');
+      expect(getMonthLabel()).to.include('6');
     });
 
-    it('year with fewer Feburary dates', done => {
+    it('year with fewer Feburary dates', async() => {
       // Feburary 2008 has 29 days, Feburary 2007 has 28
-      navigationTest(new Date(2008, 1, 29), _ => {
-        click(prevYear, _ => {
-          expect(getYearLabel()).to.include('2007');
-          expect(getMonthLabel()).to.include('2');
-          done();
-        });
-      });
+      await initNavigationTest(new Date(2008, 1, 29));
+      await clickAndWait(prevYear);
+      expect(getYearLabel()).to.include('2007');
+      expect(getMonthLabel()).to.include('2');
     });
 
-    it('month label with fewer dates', done => {
-      navigationTest(new Date(2000, 6, 31), _ => {
-        const $el = vm.$refs.compo.picker.$el;
-        const monthLabel = $el.querySelectorAll('.el-date-picker__header-label')[1];
-        click(monthLabel, _ => {
-          setTimeout(_ => {
-            const juneLabel = $el.querySelectorAll('.el-month-table td a')[5];
-            juneLabel.click();
-            setTimeout(_ => {
-              expect(getYearLabel()).to.include('2000');
-              expect(getMonthLabel()).to.include('6');
-              done();
-            }, DELAY);
-          }, DELAY);
-        });
-      });
+    it('month label with fewer dates', async() => {
+      await initNavigationTest(new Date(2000, 6, 31));
+      const $el = vm.$refs.compo.picker.$el;
+      const monthLabel = $el.querySelectorAll('.el-date-picker__header-label')[1];
+      await clickAndWait(monthLabel);
+      const juneLabel = $el.querySelectorAll('.el-month-table td a')[5];
+      await clickAndWait(juneLabel);
+      expect(getYearLabel()).to.include('2000');
+      expect(getMonthLabel()).to.include('6');
     });
   });
 
