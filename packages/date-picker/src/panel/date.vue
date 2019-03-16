@@ -124,7 +124,7 @@
         <el-button
           size="mini"
           type="text"
-          disabled="!this.checkTimeAvailable(new Date())"
+          disabled="!this.checkDateTimeCanBeSelected (new Date())"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
           v-show="selectionMode !== 'dates'">
@@ -369,13 +369,13 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if (this.checkTimeAvailable(new Date())) {
+        if (this.checkDateTimeCanBeSelected (new Date())) {
           this.date = new Date();
           this.emit(this.date);
         }
       },
 
-      checkTimeAvailable(time) {
+      checkDateTimeCanBeSelected (time) {
         if ((!this.disabledDate || !this.disabledDate(time)) && this.checkDateWithinRange(time)) {
           return true;
         }
@@ -391,7 +391,7 @@
           const value = this.value
             ? this.value
             : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
-          if (!this.checkTimeAvailable(this.value)) {
+          if (!this.checkDateTimeCanBeSelected (this.value)) {
             return ;
           }
           this.date = new Date(value); // refresh date
