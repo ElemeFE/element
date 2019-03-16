@@ -21,16 +21,14 @@ const keyDown = (el, keyCode) => {
 
 describe('DatePicker', () => {
   let vm;
-  afterEach(() => {
-    destroyVM(vm);
-  });
+  afterEach(() => { destroyVM(vm); });
 
   it('create', () => {
     vm = createTest(DatePicker, {
       readonly: true,
       placeholder: '23333',
       format: 'HH-mm-ss'
-    });
+    }, true);
     const input = vm.$el.querySelector('input');
 
     expect(input.getAttribute('placeholder')).to.equal('23333');
@@ -319,9 +317,7 @@ describe('DatePicker', () => {
   describe('input event', () => {
     // mimic standard <select>'s behavior
     // emit input if and only if value changes
-    afterEach(() => {
-      destroyVM(vm);
-    });
+    afterEach(() => { destroyVM(vm); });
 
     it('works for type=date', done => {
       let emitted = false;
@@ -455,6 +451,8 @@ describe('DatePicker', () => {
   });
 
   describe('value-format', () => {
+    afterEach(() => { destroyVM(vm); });
+
     it('emits', done => {
       vm = createVue({
         template: `
@@ -655,7 +653,9 @@ describe('DatePicker', () => {
     });
   });
 
-  describe('default value', done => {
+  describe('default value', () => {
+    afterEach(() => { destroyVM(vm); });
+
     it('it works', done => {
       let defaultValue = '2000-01-01';
       let expectValue = new Date(2000, 0, 1);
@@ -799,6 +799,8 @@ describe('DatePicker', () => {
   });
 
   describe('can be cleared using keyboard', () => {
+    afterEach(() => { destroyVM(vm); });
+
     it('works for type=date, when blur', done => {
       vm = createVue({
         template: `
@@ -858,7 +860,9 @@ describe('DatePicker', () => {
     // TODO: implement the same feature for range panels
   });
 
-  describe('nagivation', _ => {
+  describe('nagivation', () => {
+    afterEach(() => { destroyVM(vm); });
+
     const click = (el, cbk = () => {}) => {
       el.click();
       setTimeout(cbk, DELAY);
@@ -1004,22 +1008,27 @@ describe('DatePicker', () => {
 
   describe('type:datetime', () => {
     let vm;
-    beforeEach(done => {
-      vm = createTest(DatePicker, {
-        type: 'datetime'
+
+    afterEach(() => destroyVM(vm));
+
+    it('create', done => {
+      vm = createVue({
+        template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: ''
+          };
+        }
       }, true);
-      const input = vm.$el.querySelector('input');
+      const input = vm.$refs.compo.$el.querySelector('input');
 
       input.blur();
       input.focus();
 
-      setTimeout(done, DELAY);
-    });
-
-    afterEach(() => destroyVM(vm));
-
-    it('create', () => {
-      expect(vm.picker.$el.querySelector('.el-time-panel')).to.ok;
+      setTimeout(_ => {
+        expect(vm.$refs.compo.picker.$el.querySelector('.el-time-panel')).to.ok;
+        done();
+      }, DELAY);
     });
 
     it('both picker show correct formated value (extract date-format and time-format from format property)', done => {
@@ -1053,7 +1062,7 @@ describe('DatePicker', () => {
             expect(dateInput.value).to.equal('5-3-18');
             expect(timeInput.value).to.equal('10 am');
 
-            // change not documented pickerOptions.format mustn't change picker format
+            // change undocumented pickerOptions.format won't change picker format
             vm.pickerOptions = { format: 'yyyy-MM-dd HH:mm:ss'};
             setTimeout(_ => {
               expect(dateInput.value).to.equal('5-3-18');
@@ -1111,69 +1120,122 @@ describe('DatePicker', () => {
     });
 
     it('click now button', done => {
-      const date = new Date(1999, 10, 10, 10, 10);
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
 
-      vm.picker.$el.querySelector('.el-picker-panel__link-btn').click();
-      setTimeout(_ => {
-        expect(vm.picker.date > date).to.true;
-        done();
-      }, DELAY);
-    });
-
-    it('click timepicker', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
-      triggerEvent(input, 'focus');
-
-      setTimeout(_ => {
-        expect(vm.picker.$el.querySelector('.el-time-panel')).to.have.deep.property('style.display').to.equal('');
-        done();
-      }, DELAY);
-    });
-
-    it('input timepicker', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
-
-      input.value = '20:30:33';
-      triggerEvent(input, 'change', true);
-      setTimeout(_ => {
-        expect(vm.picker.date.getHours()).to.equal(20);
-        expect(vm.picker.date.getMinutes()).to.equal(30);
-        expect(vm.picker.date.getSeconds()).to.equal(33);
-        done();
-      }, DELAY);
-    });
-
-    it('input date', done => {
-      const input = vm.picker.$el.querySelector('.el-date-picker__editor-wrap input');
-
-      input.value = '2017-2-2';
-      triggerEvent(input, 'change', true);
-      setTimeout(_ => {
-        expect(vm.picker.date.getFullYear()).to.equal(2017);
-        expect(vm.picker.date.getMonth()).to.equal(1);
-        expect(vm.picker.date.getDate()).to.equal(2);
-        done();
-      }, DELAY);
-    });
-
-    it('select time', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
       input.blur();
       input.focus();
-      input.blur();
 
       setTimeout(_ => {
-        const button = vm.picker.$el.querySelector('.el-time-panel .confirm');
-        button.click();
+        const date = new Date(1999, 10, 10, 10, 10);
 
+        vm.picker.$el.querySelector('.el-picker-panel__link-btn').click();
         setTimeout(_ => {
-          expect(input.value).to.exist;
+          expect(vm.picker.date > date).to.true;
           done();
         }, DELAY);
       }, DELAY);
     });
 
+    it('click timepicker', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+        triggerEvent(input, 'focus');
+
+        setTimeout(_ => {
+          const timePanel = vm.picker.$el.querySelector('.el-time-panel');
+          expect(window.getComputedStyle(timePanel)).to.not.equal('none');
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('input timepicker', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+
+        input.value = '20:30:33';
+        triggerEvent(input, 'change', true);
+        setTimeout(_ => {
+          expect(vm.picker.date.getHours()).to.equal(20);
+          expect(vm.picker.date.getMinutes()).to.equal(30);
+          expect(vm.picker.date.getSeconds()).to.equal(33);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('input date', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        const input = vm.picker.$el.querySelector('.el-date-picker__editor-wrap input');
+
+        input.value = '2017-2-2';
+        triggerEvent(input, 'change', true);
+        setTimeout(_ => {
+          expect(vm.picker.date.getFullYear()).to.equal(2017);
+          expect(vm.picker.date.getMonth()).to.equal(1);
+          expect(vm.picker.date.getDate()).to.equal(2);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('select time', done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+        input.blur();
+        input.focus();
+        input.blur();
+
+        setTimeout(_ => {
+          const button = vm.picker.$el.querySelector('.el-time-panel .confirm');
+          button.click();
+
+          setTimeout(_ => {
+            expect(input.value).to.exist;
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
     describe('change event', () => {
+      afterEach(() => destroyVM(vm));
+
       it('pick date, emits on confirm', done => {
         vm = createVue({
           template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
@@ -1242,6 +1304,8 @@ describe('DatePicker', () => {
     });
 
     describe('cancel time', () => {
+      afterEach(() => destroyVM(vm));
+
       it('cancel to empty', done => {
         vm = createVue({
           template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
@@ -1539,6 +1603,8 @@ describe('DatePicker', () => {
   });
 
   describe('type:daterange', () => {
+    afterEach(() => destroyVM(vm));
+
     it('works', done => {
       vm = createVue({
         template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
@@ -2194,6 +2260,8 @@ describe('DatePicker', () => {
     });
 
     it('confirm honors disabledDate', done => {
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+
       vm = createVue({
         template: '<el-date-picker type="datetimerange" value-format="yyyy-MM-dd HH:mm:ss" v-model="value" :picker-options="pickerOptions" ref="compo" />',
         data() {
@@ -2232,6 +2300,8 @@ describe('DatePicker', () => {
   });
 
   describe('type:monthrange', () => {
+    afterEach(() => destroyVM(vm));
+
     it('works', done => {
       vm = createVue({
         template: '<el-date-picker type="monthrange" v-model="value" ref="compo" />',
@@ -2472,6 +2542,8 @@ describe('DatePicker', () => {
     });
 
     describe('default value', () => {
+      afterEach(() => destroyVM(vm));
+
       it('single', done => {
         let defaultValue = '2000-10';
         let expectValue = [new Date(2000, 9), new Date(2000, 10)];
@@ -2671,7 +2743,7 @@ describe('DatePicker', () => {
     });
   });
 
-  describe('picker-options:firstDayOfWeek especial', () => {
+  describe('picker-options:firstDayOfWeek issue-14523', () => {
     let vm;
     beforeEach(done => {
       vm = createTest(DatePicker, {

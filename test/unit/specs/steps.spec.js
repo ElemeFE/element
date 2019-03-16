@@ -1,5 +1,6 @@
 import { createVue, destroyVM } from '../util';
-import Vue from 'vue';
+
+const IMMEDIATE = 1;
 
 describe('Steps', () => {
   let vm;
@@ -26,7 +27,7 @@ describe('Steps', () => {
         <el-step title="step2"></el-step>
         <el-step title="step3"></el-step>
       </el-steps>
-    `);
+    `, true);
 
     const vm2 = createVue(`
       <el-steps :space="100">
@@ -35,13 +36,15 @@ describe('Steps', () => {
         <el-step title="step3"></el-step>
         <el-step title="step4"></el-step>
       </el-steps>
-    `);
+    `, true);
 
-    Vue.nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('50%');
-      expect(vm2.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('100px');
+    setTimeout(_ => {
+      const stepElm = vm.$el.querySelector('.el-step');
+      const stepElm2 = vm2.$el.querySelector('.el-step');
+      expect(getComputedStyle(stepElm).flexBasis).to.equal('50%');
+      expect(getComputedStyle(stepElm2).flexBasis).to.equal('100px');
       done();
-    });
+    }, IMMEDIATE);
   });
 
   it('processStatus', done => {
@@ -137,12 +140,13 @@ describe('Steps', () => {
         <el-step title="aaa"></el-step>
         <el-step title="bbb"></el-step>
       </el-steps>
-    `);
+    `, true);
 
-    vm.$nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('200px');
+    setTimeout(_ => {
+      const stepElm = vm.$el.querySelector('.el-step');
+      expect(getComputedStyle(stepElm).flexBasis).to.equal('200px');
       done();
-    });
+    }, IMMEDIATE);
   });
 
   it('step:status=error', done => {
