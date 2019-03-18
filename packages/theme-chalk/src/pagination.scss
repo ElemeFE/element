@@ -64,7 +64,9 @@
   }
 
   .btn-prev,
-  .btn-next {
+  .btn-next,
+  .btn-first,
+  .btn-last {
     background: center center no-repeat;
     background-size: 16px;
     background-color: $--pagination-fill;
@@ -79,11 +81,13 @@
     }
   }
 
-  .btn-prev {
+  .btn-prev,
+  .btn-first {
     padding-right: 12px;
   }
 
-  .btn-next {
+  .btn-next,
+  .btn-last {
     padding-left: 12px;    
   }
 
@@ -95,6 +99,8 @@
   @include m(small) {
     .btn-prev,
     .btn-next,
+    .btn-first,
+    .btn-last,
     .el-pager li,
     .el-pager li.btn-quicknext,
     .el-pager li.btn-quickprev,
@@ -192,6 +198,8 @@
   @include when(background) {
     .btn-prev,
     .btn-next,
+    .btn-first,
+    .btn-last,
     .el-pager li {
       margin: 0 5px;
       background-color: $--color-info-lighter;
@@ -204,7 +212,7 @@
       }
     }
 
-    .btn-prev, .btn-next {
+    .btn-prev, .btn-next, .btn-first, .btn-last {
       padding: 0;
 
       &:disabled {
@@ -226,6 +234,8 @@
     &.el-pagination--small {
       .btn-prev,
       .btn-next,
+      .btn-first,
+      .btn-last,
       .el-pager li {
         margin: 0 3px;
         min-width: 22px;

@@ -112,7 +112,7 @@
       :current-page="currentPage4"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
-      layout="total, sizes, prev, pager, next, jumper"
+      layout="total, sizes, first, prev, pager, next, last, jumper"
       :total="400">
     </el-pagination>
   </div>
@@ -150,11 +150,13 @@
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
 | pager-count | 页码按钮的数量，当总页数超过该值时会折叠 | number | 大于等于 5 且小于等于 21 的奇数 | 7 |
 | current-page | 当前页数，支持 .sync 修饰符 | number | — | 1 |
-| layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
+| layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `first`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `last`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | number[] | — |  [10, 20, 30, 40, 50, 100] |
 | popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
 | prev-text | 替代图标显示的上一页文字 | string | — | — |
 | next-text | 替代图标显示的下一页文字 | string | — | — |
+| first-text | 替代图标显示的第一页文字 | string | — | — |
+| last-text | 替代图标显示的最后一页文字 | string | — | — |
 | disabled | 是否禁用 | boolean | — | false |
 
 ### Events
@@ -164,6 +166,8 @@
 | current-change | currentPage 改变时会触发 | 当前页 |
 | prev-click | 用户点击上一页按钮改变当前页后触发 | 当前页 |
 | next-click | 用户点击下一页按钮改变当前页后触发 | 当前页 |
+| first-click | 用户点击第一页按钮改变当前页后触发 | 当前页 |
+| last-click | 用户点击最后一页按钮改变当前页后触发 | 当前页 |
 
 ### Slot
 | name | 说明 |
