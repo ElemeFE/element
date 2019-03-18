@@ -160,7 +160,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 | reference | HTML element that triggers popover |
 
 ### Events
-| Event Name | Description | 回调参数 |
+| Event Name | Description | Parameters |
 |---------|--------|---------|
 | show | triggers when popover shows | — |
 | after-enter | triggers when the entering transition ends | — |
