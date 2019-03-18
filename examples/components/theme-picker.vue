@@ -5,11 +5,11 @@
     v-model="theme"></el-color-picker>
 </template>
 
-<style>
+<style lang="scss">
   .theme-picker {
     height: 80px;
     display: inline-block;
-    @utils-vertical-center;
+    // @utils-vertical-center;
   }
 
   .theme-picker .el-color-picker__trigger {
