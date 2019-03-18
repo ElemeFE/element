@@ -59,18 +59,21 @@
 }
 
 @include b(dropdown-menu) {
-  position: absolute;
-  top: 0;
-  left: 0;
   z-index: 10;
-  padding: 10px 0;
   margin: 5px 0;
   background-color: $--color-white;
   border: 1px solid $--border-color-lighter;
   border-radius: $--border-radius-base;
   box-shadow: $--dropdown-menu-box-shadow;
-  max-height: 400px;
-  overflow: auto;
+
+  @include e(wrap) {
+    max-height: 400px;
+  }
+
+  @include e(list) {
+    padding: 10px 0;
+    margin: 0;
+  }
 
   @include e(item) {
     list-style: none;
@@ -114,7 +117,9 @@
   }
 
   @include m(medium) {
-    padding: 6px 0;
+    @include e(list) {
+      padding: 6px 0;
+    }
 
     @include e(item) {
       line-height: 30px;
@@ -134,7 +139,9 @@
   }
 
   @include m(small) {
-    padding: 6px 0;
+    @include e(list) {
+      padding: 6px 0;
+    }
 
     @include e(item) {
       line-height: 27px;
@@ -154,7 +161,9 @@
   }
 
   @include m(mini) {
-    padding: 3px 0;
+    @include e(list) {
+      padding: 3px 0;
+    }
 
     @include e(item) {
       line-height: 24px;

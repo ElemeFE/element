@@ -1,8 +1,16 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <ul class="el-dropdown-menu el-popper" :class="[size && `el-dropdown-menu--${size}`]" v-show="showPopper">
+  <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="doDestroy">
+    <el-scrollbar
+      tag="ul"
+      class="el-dropdown-menu el-popper"
+      wrap-class="el-dropdown-menu__wrap"
+      view-class="el-dropdown-menu__list"
+      :class="[size && `el-dropdown-menu--${size}`]"
+      ref="scrollbar"
+      v-show="showPopper"
+    >
       <slot></slot>
-    </ul>
+    </el-scrollbar>
   </transition>
 </template>
 <script>
@@ -33,6 +41,12 @@
     },
 
     inject: ['dropdown'],
+
+    methods: {
+      handleMenuEnter() {
+        this.$nextTick(() => this.$refs.scrollbar && this.$refs.scrollbar.handleScroll());
+      }
+    },
 
     created() {
       this.$on('updatePopper', () => {
