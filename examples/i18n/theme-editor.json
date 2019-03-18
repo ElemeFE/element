@@ -84,7 +84,9 @@
       "font-weight-primary": "主要文字粗细",
       "font-weight-secondary": "次要文字粗细",
       "font-line-height-primary": "主要文字行高",
-      "font-line-height-secondary": "次要文字行高"
+      "font-line-height-secondary": "次要文字行高",
+      "tooltip-fill": "Dark 主题背景色",
+      "tooltip-color": "Light 主题背景色"
     }
   },
   {
