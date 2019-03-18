@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, wait, waitImmediate } from '../util';
 
 describe('Input', () => {
   let vm;
@@ -100,7 +100,7 @@ describe('Input', () => {
   });
 
   // Github issue #2836
-  it('resize', done => {
+  it('resize', async() => {
     vm = createVue({
       template: `
         <div>
@@ -111,17 +111,14 @@ describe('Input', () => {
         resize: 'none'
       }
     }, true);
-    vm.$nextTick(() => {
-      expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
-      vm.resize = 'horizontal';
-      vm.$nextTick(() => {
-        expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
-        done();
-      });
-    });
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+    vm.resize = 'horizontal';
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
   });
 
-  it('autosize', done => {
+  it('autosize', async() => {
     vm = createVue({
       template: `
         <div>
@@ -154,14 +151,13 @@ describe('Input', () => {
     expect(limitlessSizeInput.textareaStyle.height).to.be.equal('201px');
 
     vm.textareaValue = '';
-    setTimeout(_ => {
-      expect(limitSizeInput.textareaStyle.height).to.be.equal('75px');
-      expect(limitlessSizeInput.textareaStyle.height).to.be.equal('33px');
-      done();
-    }, 200);
+
+    await wait();
+    expect(limitSizeInput.textareaStyle.height).to.be.equal('75px');
+    expect(limitlessSizeInput.textareaStyle.height).to.be.equal('33px');
   });
 
-  it('focus', done => {
+  it('focus', async() => {
     vm = createVue({
       template: `
         <el-input ref="input">
@@ -174,13 +170,11 @@ describe('Input', () => {
     vm.$refs.input.$on('focus', spy);
     vm.$refs.input.focus();
 
-    vm.$nextTick(_ => {
-      expect(spy.calledOnce).to.be.true;
-      done();
-    });
+    await waitImmediate();
+    expect(spy.calledOnce).to.be.true;
   });
 
-  it('Input contains Select and append slot', (done) => {
+  it('Input contains Select and append slot', async() => {
     vm = createVue({
       template: `
       <el-input v-model="value" clearable class="input-with-select" ref="input">
@@ -200,15 +194,14 @@ describe('Input', () => {
       }
     }, true);
     vm.$refs.input.hovering = true;
-    setTimeout(() => {
-      const suffixEl = document.querySelector('.input-with-select > .el-input__suffix');
-      expect(suffixEl).to.not.be.null;
-      expect(suffixEl.style.transform).to.not.be.empty;
-      done();
-    }, 20);
+
+    await wait();
+    const suffixEl = document.querySelector('.input-with-select > .el-input__suffix');
+    expect(suffixEl).to.not.be.null;
+    expect(suffixEl.style.transform).to.not.be.empty;
   });
 
-  it('validateEvent', done => {
+  it('validateEvent', async() => {
     const spy = sinon.spy();
     vm = createVue({
       template: `
@@ -238,10 +231,8 @@ describe('Input', () => {
     }, true);
 
     vm.model.input = '123';
-    vm.$nextTick(() => {
-      expect(spy.called).to.be.false;
-      done();
-    });
+    await waitImmediate();
+    expect(spy.called).to.be.false;
   });
 
   describe('Input Events', () => {

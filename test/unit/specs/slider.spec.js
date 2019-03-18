@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 import Slider from 'packages/slider';
 
 describe('Slider', () => {
@@ -81,11 +81,11 @@ describe('Slider', () => {
     expect(slider.$refs.tooltip.disabled).to.true;
   });
 
-  it('format tooltip', () => {
+  it('format tooltip', async() => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" :format-tooltip="formatTooltip">
+          <el-slider ref="slider" v-model="value" :format-tooltip="formatTooltip">
           </el-slider>
         </div>
       `,
@@ -101,11 +101,9 @@ describe('Slider', () => {
         }
       }
     }, true);
-    const slider = vm.$children[0].$children[0];
-    expect(slider.formatTooltip).to.function;
-    vm.$nextTick(() => {
-      expect(slider.formatValue).to.equal('$0');
-    });
+    const sliderButton = vm.$refs.slider.$children[0];
+    await waitImmediate();
+    expect(sliderButton.formatValue).to.equal('$0');
   });
 
   it('drag', done => {

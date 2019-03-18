@@ -100,14 +100,14 @@ describe('Dialog', () => {
         };
       }
     }, true);
-    const dialog = vm.$children[0];
-    expect(dialog.$el.style.display).to.equal('none');
+    const dialogEl = vm.$children[0].$el;
+    expect(getComputedStyle(dialogEl).display).to.equal('none');
     vm.visible = true;
     setTimeout(() => {
-      expect(dialog.$el.style.display).to.not.equal('none');
+      expect(getComputedStyle(dialogEl).display).to.not.equal('none');
       vm.visible = false;
       setTimeout(() => {
-        expect(dialog.$el.style.display).to.equal('none');
+        expect(getComputedStyle(dialogEl).display).to.equal('none');
         done();
       }, 400);
     }, 50);
