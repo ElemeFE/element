@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="scss" scoped>
   .headerWrapper {
     height: 80px;
   }
@@ -180,7 +180,7 @@
       transform: translateY(-2px);
     }
 
-    @when active {
+    .is-active {
       span, i {
         color: #409EFF;
       }

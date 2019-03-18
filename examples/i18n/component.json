@@ -5,7 +5,7 @@
       "hide-text": "隐藏代码",
       "show-text": "显示代码",
       "button-text": "在线运行",
-      "tooltip-text": "前往 jsfiddle.net 运行此示例"
+      "tooltip-text": "前往 codepen.io 运行此示例"
     },
     "footer": {
       "links": "链接",
@@ -36,7 +36,7 @@
       "hide-text": "Hide",
       "show-text": "Expand",
       "button-text": "Try it!",
-      "tooltip-text": "Run this demo on jsfiddle.net"
+      "tooltip-text": "Run this demo on codepen.io"
     },
     "footer": {
       "links": "Links",
@@ -67,7 +67,7 @@
       "hide-text": "Ocultar",
       "show-text": "Mostrar",
       "button-text": "Probar",
-      "tooltip-text": "Prueba este ejemplo en jsfiddle.net"
+      "tooltip-text": "Prueba este ejemplo en codepen.io"
     },
     "footer": {
       "links": "Enlaces",
@@ -98,7 +98,7 @@
       "hide-text": "Réduire",
       "show-text": "Agrandir",
       "button-text": "Essayez!",
-      "tooltip-text": "Essayer cette démo sur jsfiddle.net"
+      "tooltip-text": "Essayer cette démo sur codepen.io"
     },
     "footer": {
       "links": "Liens",

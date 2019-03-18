@@ -43,7 +43,7 @@
   </footer>
 </template>
 
-<style>
+<style lang="scss">
   .footer {
     background-color: #F7FBFD;
     width: 100%;

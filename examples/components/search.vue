@@ -35,7 +35,7 @@
   </el-autocomplete>
 </template>
 
-<style>
+<style lang="scss">
   .algolia-search {
     width: 450px !important;
 
