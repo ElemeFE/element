@@ -7,7 +7,7 @@ Usado para la calificación
 :::demo Clasificación divide las puntuaciones en tres niveles y estos niveles pueden distinguirse usando diferentes colores de fondo. Por defecto los colores de fondo son iguales, pero puedes asignarlos para reflejar los tres niveles usando el atributo `colors` y sus dos umbrales pueden ser definidos con `low-treshold` y `high-treshold`.
 
 
-``` html
+```html
 <div class="block">
   <span class="demonstration">Default</span>
   <el-rate v-model="value1"></el-rate>
@@ -39,7 +39,7 @@ Usa texto para indicar la puntuación
 
 :::demo Agregar el atributo `show-text` para mostrar texto a la derecha del componente. Puede asignar textos para las distintas puntuaciones usando `texts`. `texts` es un arreglo cuya longitud debe ser igual a la máxima puntuación `max`.
 
-``` html
+```html
 <el-rate
   v-model="value3"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
@@ -64,7 +64,7 @@ Puede utilizar iconos para diferenciar cada componente.
 
 :::demo Puede customizar iconos para tres niveles diferentes usando `icon-classes`. En este ejemplo también usamos `void-icon-class` para asignar un icono si no está seleccionado.
 
-``` html
+```html
 <el-rate
   v-model="value4"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
@@ -90,7 +90,7 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
 
 :::demo Use el atributo `disabled` para hacer el componente de solo lectura. Agregar `show-score` para mostrar la puntuación en el lado derecho. Además, puede usar el atributo `score-template` para proveer una plantilla. Tiene que contener `{value}`, y `{value}` será sustituido por la puntuación.
 
-``` html
+```html
 <el-rate
   v-model="value5"
   disabled

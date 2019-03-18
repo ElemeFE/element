@@ -6,7 +6,7 @@ Used for rating
 
 :::demo Rate divides rating scores into three levels and these levels can be distinguished by using different background colors. By default background colors are the same, but you can assign them to reflect three levels using the `colors` attribute, and their two thresholds can be defined by `low-threshold` and `high-threshold`.
 
-``` html
+```html
 <div class="block">
   <span class="demonstration">Default</span>
   <el-rate v-model="value1"></el-rate>
@@ -38,7 +38,7 @@ Using text to indicate rating score
 
 :::demo Add attribute `show-text` to display text at the right of Rate. You can assign texts for different scores using `texts`. `texts` is an array whose length should be equal to the max score `max`.
 
-``` html
+```html
 <el-rate
   v-model="value3"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
@@ -63,7 +63,7 @@ You can use different icons to distinguish different rate components.
 
 :::demo You can customize icons for three different levels using `icon-classes`. In this example, we also use `void-icon-class` to set the icon if it is unselected.
 
-``` html
+```html
 <el-rate
   v-model="value4"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
@@ -89,7 +89,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
 
 :::demo Use attribute `disabled` to make the component read-only. Add `show-score` to display the rating score at the right side. Additionally, you can use attribute `score-template` to provide a score template. It must contain `{value}`, and `{value}` will be replaced with the rating score.
 
-``` html
+```html
 <el-rate
   v-model="value5"
   disabled

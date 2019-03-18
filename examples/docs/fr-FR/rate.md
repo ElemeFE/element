@@ -6,7 +6,7 @@ Utilisé pour donner une note sur cinq étoiles.
 
 :::demo Rate divise les scores en trois niveaux et ces niveaux peuvent être distingués en utilisant différentes couleurs de fond. Par défaut ces couleurs sont identiques, mais vous pouvez affecter un tableau des codes couleur à l'attribut `colors`, ainsi que les deux seuils via `low-threshold` et `high-threshold`.
 
-``` html
+```html
 <div class="block">
   <span class="demonstration">Défaut</span>
   <el-rate v-model="value1"></el-rate>
@@ -38,7 +38,7 @@ Vous pouvez ajouter du texte à chaque score.
 
 :::demo Ajoutez l'attribut `show-text` pour afficher du texte à droite des étoiles. Vous pouvez choisir les textes avec l'attribut `texts`. C'est un tableau dont la taille doit être égale au score max `max`.
 
-``` html
+```html
 <el-rate
   v-model="value3"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
@@ -63,7 +63,7 @@ Vous pouvez utiliser différentes icônes pour chaque
 
 :::demo Vous pouvez personnaliser les icônes de chaque niveau en utilisant `icon-classes`. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir l'icône des valeurs non-sélectionnées.
 
-``` html
+```html
 <el-rate
   v-model="value4"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
@@ -89,7 +89,7 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 
 :::demo Utilisez `disabled` pour mettre le composant en lecture seule. Ajoutez `show-score` pour afficher le score à droite des étoiles. De plus, vous pouvez utiliser `score-template` pour déterminer un template. Il doit contenir `{value}` qui sera remplacé par la valeur du score.
 
-``` html
+```html
 <el-rate
   v-model="value5"
   disabled
