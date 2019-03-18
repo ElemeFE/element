@@ -33,7 +33,7 @@
             size="small"
             type="text"
             class="control-button"
-            @click.stop="goJsfiddle">
+            @click.stop="goCodepen">
             {{ langConfig['button-text'] }}
           </el-button>
         </transition>
@@ -189,7 +189,7 @@
   export default {
     data() {
       return {
-        jsfiddle: {
+        codepen: {
           script: '',
           html: '',
           style: ''
@@ -202,8 +202,9 @@
     },
 
     methods: {
-      goJsfiddle() {
-        const { script, html, style } = this.jsfiddle;
+      goCodepen() {
+        // since 2.6.2 use code rather than jsfiddle https://blog.codepen.io/documentation/api/prefill/
+        const { script, html, style } = this.codepen;
         const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>' +
         '\n<scr' + `ipt src="//unpkg.com/element-ui@${ version }/lib/index.js"></scr` + 'ipt>';
         let jsTpl = (script || '').replace(/export default/, 'var Main =').trim();
@@ -215,25 +216,23 @@
         const data = {
           js: jsTpl,
           css: cssTpl,
-          html: htmlTpl,
-          panel_js: 3,
-          panel_css: 1
+          html: htmlTpl
         };
         const form = document.getElementById('fiddle-form') || document.createElement('form');
-        form.innerHTML = '';
-        const node = document.createElement('textarea');
-
-        form.method = 'post';
-        form.action = 'https://jsfiddle.net/api/post/library/pure/';
-        form.target = '_blank';
-
-        for (let name in data) {
-          node.name = name;
-          node.value = data[name].toString();
-          form.appendChild(node.cloneNode());
+        while (form.firstChild) {
+          form.removeChild(form.firstChild);
         }
-        form.setAttribute('id', 'fiddle-form');
+        form.method = 'POST';
+        form.action = 'https://codepen.io/pen/define/';
+        form.target = '_blank';
         form.style.display = 'none';
+
+        const input = document.createElement('input');
+        input.setAttribute('name', 'data');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('value', JSON.stringify(data));
+
+        form.appendChild(input);
         document.body.appendChild(form);
 
         form.submit();
@@ -314,9 +313,9 @@
           }
         }
         if (code) {
-          this.jsfiddle.html = stripTemplate(code);
-          this.jsfiddle.script = stripScript(code);
-          this.jsfiddle.style = stripStyle(code);
+          this.codepen.html = stripTemplate(code);
+          this.codepen.script = stripScript(code);
+          this.codepen.style = stripStyle(code);
         }
       }
     },
