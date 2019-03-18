@@ -233,7 +233,7 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 Scan the QR code using [Dingtalk App](https://www.dingtalk.com/) to join in discusion group :
 
-<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/50588415-d9aaca00-0ebc-11e9-92e2-f71960346f85.png" width="300">
+<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/54505885-e3e54c00-4974-11e9-94b9-4c13644fcd98.png" width="300">
 
 
 ## LICENSE
