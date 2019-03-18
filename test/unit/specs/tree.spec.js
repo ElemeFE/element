@@ -353,12 +353,10 @@ describe('Tree', () => {
   });
 
   it('check', done => {
+    const spy = sinon.spy();
     vm = getTreeVm(':props="defaultProps" show-checkbox @check="handleCheck"', {
       methods: {
-        handleCheck(data, args) {
-          this.data = data;
-          this.args = args;
-        }
+        handleCheck: spy
       }
     });
     const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
@@ -366,8 +364,10 @@ describe('Tree', () => {
     expect(nodeCheckbox).to.be.exist;
     nodeCheckbox.click();
     setTimeout(() => {
-      expect(vm.args.checkedNodes.length).to.equal(3);
-      expect(vm.data.id).to.equal(2);
+      expect(spy.calledOnce).to.be.true;
+      const [data, args] = spy.args[0];
+      expect(data.id).to.equal(2);
+      expect(args.checkedNodes.length).to.equal(3);
       done();
     }, 10);
   });
