@@ -1,16 +1,16 @@
 <template>
   <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="doDestroy">
-    <el-scrollbar
-      tag="ul"
-      class="el-dropdown-menu el-popper"
-      wrap-class="el-dropdown-menu__wrap"
-      view-class="el-dropdown-menu__list"
-      :class="[size && `el-dropdown-menu--${size}`]"
-      ref="scrollbar"
-      v-show="showPopper"
-    >
-      <slot></slot>
-    </el-scrollbar>
+    <div class="el-dropdown-menu el-popper" v-show="showPopper">
+      <el-scrollbar
+        tag="ul"
+        wrap-class="el-dropdown-menu__wrap"
+        view-class="el-dropdown-menu__list"
+        :class="[size && `el-dropdown-menu--${size}`]"
+        ref="scrollbar"
+      >
+        <slot></slot>
+      </el-scrollbar>
+    </div>
   </transition>
 </template>
 <script>
