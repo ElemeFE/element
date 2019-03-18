@@ -143,6 +143,16 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
   </el-tooltip>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
+
 <style>
   .slide-fade-enter-active {
     transition: all .3s ease;

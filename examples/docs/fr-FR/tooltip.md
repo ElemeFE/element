@@ -143,6 +143,16 @@ En réalité, Tooltip est une extension de [Vue-popper](https://github.com/eleme
   </el-tooltip>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
+
 <style>
   .slide-fade-enter-active {
     transition: all .3s ease;
