@@ -188,6 +188,12 @@ class TableLayout {
     }
 
     const rightFixedColumns = this.store.states.rightFixedColumns;
+
+    if (flexColumns.length === 0 && rightFixedColumns.length > 0 && bodyMinWidth < bodyWidth) {
+      rightFixedColumns[0].realWidth = (rightFixedColumns[0].realWidth || rightFixedColumns[0].width) + bodyWidth - bodyMinWidth;
+      this.bodyWidth = bodyWidth;
+    }
+
     if (rightFixedColumns.length > 0) {
       let rightFixedWidth = 0;
       rightFixedColumns.forEach(function(column) {
