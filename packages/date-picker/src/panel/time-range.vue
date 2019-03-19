@@ -280,7 +280,7 @@
         this.maxDate = limitTimeRange(this.maxDate, maxSelectableRange, this.format);
 
         // `picker-options` is used, but the selected timeRange is not within the selectableRange
-        if (this.isSelectableRange && !this.timeRangeWithinSelectableRange()) {
+        if (this.isSelectableRange() && !this.timeRangeWithinSelectableRange()) {
           return ;
         }
 
