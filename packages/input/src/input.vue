@@ -309,9 +309,7 @@
 
         // ensure native input value is controlled
         // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(_ => {
-          this.setNativeInputValue();
-        });
+        this.$nextTick(this.setNativeInputValue);
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
