@@ -61,7 +61,9 @@
     limitTimeRange,
     modifyDate,
     clearMilliseconds,
-    timeWithinRange
+    timeWithinRange,
+    formatDate,
+    isDate
   } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
@@ -138,7 +140,7 @@
 
     watch: {
       value(value) {
-        if (this.isValidRange(value)) {
+        if (Array.isArray(value)) {
           this.minDate = new Date(value[0]);
           this.maxDate = new Date(value[1]);
         } else {
@@ -164,20 +166,21 @@
     },
 
     methods: {
-      getFormatDateVal(date) {
-        const currentDate = new Date();
-        date.setFullYear(currentDate.getFullYear());
-        date.setMonth(currentDate.getMonth());
-        date.setDate(currentDate.getDate());
-        return date.valueOf();
-      },
-
-      isValidDate(date) {
-        return !Number.isNaN(date.valueOf());
-      },
-
       isValidRange(range) {
-        return Array.isArray(range) && range.length === 2 && this.isValidDate(range[0]) && this.isValidDate(range[1]) && range[1] >= range[0];
+        return Array.isArray(range) && range.length === 2 && isDate(range[0]) && isDate(range[1]) && range[1] >= range[0];
+      },
+
+      timeRangeWithinSelectableRange() {
+        const { minDate, maxDate } = this;
+        const isValid = this.selectableRange.some((item) => {
+          return timeWithinRange(minDate, [item]) && timeWithinRange(maxDate, [item]);
+        });
+        return isValid;
+      },
+
+      getFormatDateVal(date) {
+        const format = 'HHmmss';
+        return +formatDate(date, format);
       },
 
       isSelectableRange() {
@@ -230,7 +233,7 @@
       },
 
       handleMinChange(date) {
-        if (!this.isValidDate(date)) {
+        if (!isDate(date)) {
           return ;
         }
         this.minDate = clearMilliseconds(date);
@@ -238,7 +241,7 @@
       },
 
       handleMaxChange(date) {
-        if (!this.isValidDate(date)) {
+        if (!isDate(date)) {
           return ;
         }
         this.maxDate = clearMilliseconds(date);
@@ -275,6 +278,11 @@
 
         this.minDate = limitTimeRange(this.minDate, minSelectableRange, this.format);
         this.maxDate = limitTimeRange(this.maxDate, maxSelectableRange, this.format);
+
+        // `picker-options` is used, but the selected timeRange is not within the selectableRange
+        if (this.isSelectableRange && !this.timeRangeWithinSelectableRange()) {
+          return ;
+        }
 
         this.$emit('pick', [this.minDate, this.maxDate], visible);
       },

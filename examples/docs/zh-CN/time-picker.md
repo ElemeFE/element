@@ -101,7 +101,7 @@
     end-placeholder="结束时间"
     placeholder="选择时间范围"
     :picker-options="{
-      selectableRange: ['17:30:00 至 18:30:00', '18:50:00 至 20:30:00', '21:00:00 至 22:00:00']
+      selectableRange: ['09:30:00 至 12:30:00', '14:00:00 至 18:30:00', '20:00:00 至 22:30:00']
     }">
   </el-time-picker>
 </template>
@@ -112,7 +112,7 @@
       return {
         startTime: '',
         endTime: '',
-        value4: [new Date(2016, 9, 10, 17, 40), new Date(2016, 9, 10, 21, 40)]
+        value4: [new Date(2016, 9, 10, 10, 30), new Date(2016, 9, 10, 12, 30)]
       };
     }
   }

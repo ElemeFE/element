@@ -101,7 +101,7 @@ If start time is picked at first, then the end time will change accordingly.
     start-placeholder="Start time"
     end-placeholder="End time"
     :picker-options="{
-      selectableRange: ['17:30:00 To 18:30:00', '18:50:00 To 20:30:00', '21:00:00 To 22:00:00']
+      selectableRange: ['09:30:00 To 12:30:00', '14:00:00 To 18:30:00', '20:00:00 To 22:30:00']
     }">
   </el-time-picker>
 </template>
@@ -112,7 +112,7 @@ If start time is picked at first, then the end time will change accordingly.
       return {
         startTime: '',
         endTime: '',
-        value4: [new Date(2016, 9, 10, 17, 40), new Date(2016, 9, 10, 21, 40)]
+        value4: [new Date(2016, 9, 10, 10, 30), new Date(2016, 9, 10, 12, 30)]
       };
     }
   }
