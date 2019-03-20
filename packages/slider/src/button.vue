@@ -145,11 +145,13 @@
         if (this.disabled) return;
         this.newPosition = parseFloat(this.currentPosition) - this.step / (this.max - this.min) * 100;
         this.setPosition(this.newPosition);
+        this.$parent.emitChange();
       },
       onRightKeyDown() {
         if (this.disabled) return;
         this.newPosition = parseFloat(this.currentPosition) + this.step / (this.max - this.min) * 100;
         this.setPosition(this.newPosition);
+        this.$parent.emitChange();
       },
       onDragStart(event) {
         this.dragging = true;
