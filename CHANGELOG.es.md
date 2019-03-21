@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.6.3
+
+*2019-03-21*
+
+#### Bug fixes
+
+- Fix Cascader demo style (#14789 by @ziyoung)
+- Remove unnecessary DOM operation (#14788 by @ziyoung)
+- Fix DatePicker default-value DST (#14562 by @wacky6)
+
 ### 2.6.2
 
 *2019-03-21*
