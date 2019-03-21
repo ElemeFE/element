@@ -9,11 +9,13 @@
     margin-right: 15px;
   }
 }
+.demo-cascader .source div {
+  display: flex;
+}
 .demo-cascader .block {
   padding: 30px 0;
   text-align: center;
   border-right: solid 1px #eff2f6;
-  display: inline-block;
   width: 50%;
   box-sizing: border-box;
   &:last-child {
