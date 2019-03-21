@@ -1,5 +1,49 @@
 ## Changelog
 
+### 2.6.2
+
+*2019-03-21*
+
+#### New features
+
+- DatePicker
+  - Add monthrange for type attribute (#14487 by @zxyRealm)
+- i18n
+  - Add Croatian locale (#14360 by @danijelh)
+- Docs
+  - Update french doc for 2.6.1 and fix typos (#14555 by @smalesys)
+  - French translation update (#14643 by @smalesys)
+#### Bug fixes
+
+- Input
+  - Fix regression (#14572 by @wacky6)
+- DatePicker
+  - Fix first-day-of-week computation (#14523 by @sinchang)
+  - Fix week picker's value-format (#13754 by @wacky6)
+- Steps
+  - Fix issue #14502 (#14596 by @sinchang)
+  - Fix style with simple theme (#14610 by @sinchang)
+- Docs
+  - Rename variable in Table docs (#14587 by @likwotsing)
+  - Add french search index (#14565 by @iamkun)
+  - Fix TimePicker page style (#14579 by @ziyoung)
+  - Rename variable in Upload docs (#14593 by @liupl)
+  - Update Form async validator docs (#14694 by @iamkun)
+  - Fix tooltip doc error (#14748 by @iamkun)
+  - Fix typo (#14751 by @2bj)
+  - Fix highlighting control elements for Webkit touch (#14703 by @VladG0r)
+
+#### Optimization
+
+- Chore
+  - Update ci build script (#14600 by @ziyoung)
+  - Update ga tracking (#14560 by @iamkun)
+  - Add more ga event (#14633 by @iamkun)
+  - Update discusion group (#14741 by @iamkun)
+  - Update test deps and conf (#14735 by @wacky6)
+  - Upgrade gulp (#14745 by @ziyoung)
+  - Use codepen to display demo & fix doc error (#14747 by @ziyoung)
+
 ### 2.6.1
 
 *2019-03-03*
