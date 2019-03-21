@@ -736,6 +736,7 @@ TableStore.prototype.loadData = function(row, treeNode) {
           level: parent.level + 1
         };
         if (item.isLeaf) {
+          child.expanded = false;
           child.isLeaf = true;
           child.children = [];
         }
