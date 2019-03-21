@@ -43,16 +43,25 @@
 
     computed: {
       navStyle() {
-        const dir = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'X' : 'Y';
+        const dir = this.isHorizontal ? 'X' : 'Y';
         return {
           transform: `translate${dir}(-${this.navOffset}px)`
         };
       },
       sizeName() {
-        return ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'width' : 'height';
+        return this.isHorizontal ? 'width' : 'height';
+      },
+      isHorizontal() {
+        return ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1;
       }
     },
-
+    watch: {
+      'rootTabs.tabPosition'() {
+        this.$nextTick(() => {
+          this.scrollToActiveTab();
+        });
+      }
+    },
     methods: {
       scrollPrev() {
         const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
@@ -87,18 +96,22 @@
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const maxOffset = nav.offsetWidth - navScrollBounding.width;
+        const maxHorizontalOffset = nav.offsetWidth - navScrollBounding.width;
+        const maxVerticalOffset = nav.offsetHeight - navScrollBounding.height;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
-
         if (activeTabBounding.left < navScrollBounding.left) {
           newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
         }
         if (activeTabBounding.right > navScrollBounding.right) {
           newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
         }
+        if (activeTabBounding.top > navScrollBounding.top) {
+          newOffset = currentOffset + activeTabBounding.top - navScrollBounding.top;
+        }
 
         newOffset = Math.max(newOffset, 0);
+        const maxOffset = this.isHorizontal ? maxHorizontalOffset : maxVerticalOffset;
         this.navOffset = Math.min(newOffset, maxOffset);
       },
       update() {
