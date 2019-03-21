@@ -1386,10 +1386,9 @@
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | 绑定值 | boolean / string / number | — | — |
+| value / v-model | 选中项绑定值 | array | — | — |
 | options | 可选项数据源，键名可通过 `props` 属性配置 | array | — | — |
 | props | 配置选项，具体见下表 | object | — | — |
-| value | 选中项绑定值   | array | — | — |
 | separator | 选项分隔符 | string | — | 斜杠'/' |
 | popper-class | 自定义浮层类名   | string | —  | — |
 | placeholder | 输入框占位文本 | string | — | 请选择 |
