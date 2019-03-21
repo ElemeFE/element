@@ -239,10 +239,6 @@ export default {
     currentValue(value) {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
     },
-    currentLabels(value) {
-      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
-      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
-    },
     options: {
       deep: true,
       handler(value) {
