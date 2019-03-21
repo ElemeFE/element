@@ -1,5 +1,50 @@
 ## 更新日志
 
+### 2.6.2
+
+*2019-03-21*
+
+#### 新特性
+
+- DatePicker
+  - 支持 monthrange 类型 (#14487 by @zxyRealm)
+- i18n
+  - 添加 Croatian 语言包 (#14360 by @danijelh)
+- Docs
+  - 更新 2.6.1 法语文档，修复笔误 (#14555 by @smalesys)
+  - 更新法语翻译 (#14643 by @smalesys)
+
+#### 修复
+
+- Input
+  - Fix regression (#14572 by @wacky6)
+- DatePicker
+  - 修复 first-day-of-week 的计算 (#14523 by @sinchang)
+  - 修复 WeekPicker value-format 的问题 (#13754 by @wacky6)
+- Steps
+  - 修复 #14502 (#14596 by @sinchang)
+  - 修复简单模式下的样式 (#14610 by @sinchang)
+- Docs
+  - 重命名 Table 文档中的变量 (#14587 by @likwotsing)
+  - 添加法语文档索引 (#14565 by @iamkun)
+  - 修复 TimePicker 文档页的样式 (#14579 by @ziyoung)
+  - 重命名 Upload 文档中的变量 (#14593 by @liupl)
+  - 在 Form 文档中 添加的 async-validator 文档 (#14694 by @iamkun)
+  - 修复 Tooltip 文档的 bug (#14748 by @iamkun)
+  - 修复笔误 (#14751 by @2bj)
+  - 修复 Switch 在移动端 Webkit 浏览器的高亮问题 (#14703 by @VladG0r)
+
+#### 优化
+
+- Chore:
+  - 更新 ci 构建脚本 (#14600 by @ziyoung)
+  - 更新谷歌统计 (#14560 by @iamkun)
+  - 添加更多谷歌统计事件 (#14633 by @iamkun)
+  - 更新聊天组信息 (#14741 by @iamkun)
+  - 升级测试依赖 (#14735 by @wacky6)
+  - 升级 gulp (#14745 by @ziyoung)
+  - 使用 codepen 显示 demo，修复文档中的错误 (#14747 by @ziyoung)
+
 ### 2.6.1
 
 *2019-03-03*
