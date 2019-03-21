@@ -28,9 +28,8 @@
         :disabled="inputDisabled"
         :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
+        :value="value"
         ref="input"
-        @compositionstart="handleCompositionStart"
-        @compositionend="handleCompositionEnd"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -80,8 +79,6 @@
       v-else
       :tabindex="tabindex"
       class="el-textarea__inner"
-      @compositionstart="handleCompositionStart"
-      @compositionend="handleCompositionEnd"
       @input="handleInput"
       ref="textarea"
       v-bind="$attrs"
@@ -89,6 +86,7 @@
       :readonly="readonly"
       :autocomplete="autoComplete || autocomplete"
       :style="textareaStyle"
+      :value="value"
       @focus="handleFocus"
       @blur="handleBlur"
       @change="handleChange"
@@ -126,7 +124,6 @@
         textareaCalcStyle: {},
         hovering: false,
         focused: false,
-        isComposing: false,
         passwordVisible: false
       };
     },
@@ -227,12 +224,6 @@
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [val]);
         }
-      },
-      // native input value is set explicitly
-      // do not use v-model / :value in template
-      // see: https://github.com/ElemeFE/element/issues/14521
-      nativeInputValue() {
-        this.setNativeInputValue();
       }
     },
 
@@ -279,37 +270,15 @@
 
         this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
-      setNativeInputValue() {
-        const input = this.getInput();
-        if (!input) return;
-        if (input.value === this.nativeInputValue) return;
-        input.value = this.nativeInputValue;
-      },
       handleFocus(event) {
         this.focused = true;
         this.$emit('focus', event);
       },
-      handleCompositionStart() {
-        this.isComposing = true;
-      },
-      handleCompositionEnd(event) {
-        this.isComposing = false;
-        this.handleInput(event);
-      },
       handleInput(event) {
         // should not emit input during composition
         // see: https://github.com/ElemeFE/element/issues/10516
-        if (this.isComposing) return;
-
-        // hack for https://github.com/ElemeFE/element/issues/8548
-        // should remove the following line when we don't support IE
-        if (event.target.value === this.nativeInputValue) return;
-
+        if (event.isComposing) return;
         this.$emit('input', event.target.value);
-
-        // ensure native input value is controlled
-        // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(this.setNativeInputValue);
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
@@ -360,7 +329,6 @@
     },
 
     mounted() {
-      this.setNativeInputValue();
       this.resizeTextarea();
       this.updateIconOffset();
     },

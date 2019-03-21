@@ -340,7 +340,7 @@ describe('Input', () => {
             ref="input"
             placeholder="请输入内容"
             clearable
-            :value="input">
+            v-model="input">
           </el-input>
         `,
         data() {
@@ -349,25 +349,18 @@ describe('Input', () => {
           };
         }
       }, true);
-      const spy = sinon.spy();
-      vm.$refs.input.$on('input', spy);
       const nativeInput = vm.$refs.input.$el.querySelector('input');
       nativeInput.value = '1';
       triggerEvent(nativeInput, 'compositionstart');
-      triggerEvent(nativeInput, 'input');
+      triggerEvent(nativeInput, 'change');
       await waitImmediate();
       nativeInput.value = '2';
-      triggerEvent(nativeInput, 'compositionupdate');
-      triggerEvent(nativeInput, 'input');
+      triggerEvent(nativeInput, 'change');
       await waitImmediate();
       triggerEvent(nativeInput, 'compositionend');
       await waitImmediate();
-      // input event does not fire during composition
-      expect(spy.calledOnce).to.be.true;
-      // native input value is controlled
-      expect(vm.input).to.equal('a');
-      expect(nativeInput.value).to.equal('a');
-
+      // model not change while isCompositing
+      expect(vm._data.input).equal('a');
     });
   });
 
