@@ -91,11 +91,15 @@
         if (this.currentName !== value && this.beforeLeave) {
           const before = this.beforeLeave(value, this.currentName);
           if (before && before.then) {
-            before.then(() => {
-              changeCurrentName();
+            before
+              .then(() => {
+                changeCurrentName();
 
-              this.$refs.nav && this.$refs.nav.removeFocus();
-            });
+                this.$refs.nav && this.$refs.nav.removeFocus();
+              })
+              .catch(() => {
+                // Just to prevent error from hitting dev's application
+              });
           } else if (before !== false) {
             changeCurrentName();
           }
