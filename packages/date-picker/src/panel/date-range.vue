@@ -671,6 +671,7 @@
         //       an alternative would be resetView whenever picker becomes visible, should also investigate date-panel's resetView
         this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null;
         this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null;
+        this.rangeState.selecting = false;
       }
     },
 
