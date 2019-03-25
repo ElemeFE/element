@@ -132,6 +132,13 @@ export default {
       on(this.referenceElm, 'blur', this.handleBlur);
       on(this.referenceElm, 'click', this.removeFocusing);
     }
+    if (this.value && this.popperVM) {
+      this.popperVM.$nextTick(() => {
+        if (this.value) {
+          this.updatePopper();
+        }
+      });
+    }
   },
   watch: {
     focusing(val) {
