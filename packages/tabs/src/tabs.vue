@@ -61,7 +61,8 @@
             vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
           // update indeed
           const panes = paneSlots.map(({ componentInstance }) => componentInstance);
-          if (isLabelUpdated || !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]))) {
+          const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]));
+          if (isLabelUpdated || panesChanged) {
             this.panes = panes;
           }
         } else if (this.panes.length !== 0) {
@@ -173,23 +174,15 @@
         this.setCurrentName('0');
       }
 
-      this.$on('tabLabelChanged', () => this.calcPaneInstances(true));
+      this.$on('tabLabelChanged', this.calcPaneInstances.bind(null, true));
     },
 
     mounted() {
       this.calcPaneInstances();
     },
 
-    /**
-     * ? Is this method still needed - if this method's work is only update when label is chnaged,
-     * then should be removed becaused it's handled by event
-     */
     updated() {
       this.calcPaneInstances();
-    },
-
-    beforeDestroy() {
-      this.$off('tabLabelChanged');
     }
   };
 </script>
