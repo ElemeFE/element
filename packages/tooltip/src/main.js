@@ -132,6 +132,7 @@ export default {
       on(this.referenceElm, 'blur', this.handleBlur);
       on(this.referenceElm, 'click', this.removeFocusing);
     }
+    // fix issue https://github.com/ElemeFE/element/issues/14424
     if (this.value && this.popperVM) {
       this.popperVM.$nextTick(() => {
         if (this.value) {
