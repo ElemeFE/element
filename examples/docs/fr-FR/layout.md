@@ -1,34 +1,3 @@
-<style>
-  .demo-layout {
-    .el-row {
-      margin-bottom: 20px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-    .el-col {
-      border-radius: 4px;
-    }
-    .bg-purple-dark {
-      background: #99a9bf;
-    }
-    .bg-purple {
-      background: #d3dce6;
-    }
-    .bg-purple-light {
-      background: #e5e9f2;
-    }
-    .grid-content {
-      border-radius: 4px;
-      min-height: 36px;
-    }
-    .row-bg {
-      padding: 10px 0;
-      background-color: #f9fafc;
-    }
-  }
-</style>
-
 ## Layout
 
 Vous pouvez créer une mise en page facilement et rapidement grâce à une base de 24 colonnes.
@@ -343,7 +312,7 @@ Se basant sur le design responsive de Bootstrap, il existe cinq breakpoints déj
 
 ### Classes pour cacher certains éléments
 
-Element fournit également une série de classes pour cacher des éléments dans certaines circonstances. Ces classes peuvent être ajoutée à n'importe quel élément du DOM ou composant. Vous devrez importer le fichier CSS suivant pour pouvoir les utiliser:
+Element fournit également une série de classes pour cacher des éléments dans certaines circonstances. Ces classes peuvent être ajoutées à n'importe quel élément du DOM ou composant. Vous devrez importer le fichier CSS suivant pour pouvoir les utiliser:
 
 ```js
 import 'element-ui/lib/theme-chalk/display.css';

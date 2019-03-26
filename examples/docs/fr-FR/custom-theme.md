@@ -1,10 +1,10 @@
 ## Thème
-Element utlise le style BEM pour le CSS afin que vous puissiez écraser les règles prédéfinies facilement. Mais si vous avez besoin de remplacer des styles à une plus grande échelle , e.g. changer le thème de bleu à orange ou vert, les modifier une par une serait fastidieux. Nous fournissons trois méthodes pour changer les variables de style.
+Element utilise le style BEM pour le CSS afin que vous puissiez écraser les règles prédéfinies facilement. Mais si vous avez besoin de remplacer des styles à une plus grande échelle , e.g. changer le thème de bleu à orange ou vert, les modifier une par une serait fastidieux. Nous fournissons trois méthodes pour changer les variables de style.
 
 ### Changer la couleur du thème
-Si vous avez juste besoin de changer la couleur du thème, le [générateur de thème en ligne](https://elementui.github.io/theme-chalk-preview/#/en-US) est recommandé. La couleur du thème d'Element est un bleau clair et agréable. En le changeant, vous rendez Element visuellement plus adapté à vos projets.
+Si vous avez juste besoin de changer la couleur du thème, le [générateur de thème en ligne](https://elementui.github.io/theme-chalk-preview/#/en-US) est recommandé. La couleur du thème d'Element est un bleu clair et agréable. En le changeant, vous rendez Element visuellement plus adapté à vos projets.
 
-Le site précédent vous permet de visualiser et de télécharger un nouveau thème immédiatement (pour un importer un nouveau thème, référez-vous à la partie 'Importer un thème personnalisé' or 'Importer un thème de composant à la demande' de cette section).
+Le site précédent vous permet de visualiser et de télécharger un nouveau thème immédiatement (pour importer un nouveau thème, référez-vous à la partie 'Importer un thème personnalisé' or 'Importer un thème de composant à la demande' de cette section).
 
 ### Mettre à jour les variables SCSS de votre projet
 `theme-chalk` est écrit en SCSS. Si votre projet utilises SCSS, vous pouvez changer directement les variables d'Élément. Créez un nouveau fichier, e.g. `element-variables.scss`:
@@ -51,7 +51,7 @@ npm i https://github.com/ElementUI/theme-chalk -D
 ```
 
 #### <strong>Initialisation d'un fichier de variable</strong>
-Après l'installation des paquets ci-dessus, une commande appellée `et` devient disponible dans le CLI (si les paquets sont installés localement, utilisez `node_modules/.bin/et` à la place). Utilisez `-i` pour intialiser le fichier de variables, `element-variables.scss` par défaut. Vous pouvez spécifier n'importe quel dossier comme sortie.
+Après l'installation des paquets ci-dessus, une commande appelée `et` devient disponible dans le CLI (si les paquets sont installés localement, utilisez `node_modules/.bin/et` à la place). Utilisez `-i` pour initialiser le fichier de variables, `element-variables.scss` par défaut. Vous pouvez spécifier n'importe quel dossier comme sortie.
 
 ```shell
 et -i [nom du fichier]
@@ -88,7 +88,7 @@ $--color-primary: red;
 ```
 
 #### <strong>Générer le thème</strong>
-Après avoir sauvegarder le fichier de variables, utilisez `et` pour générer le thème. Vous pouvez activer le mode `watch` en ajoutant le paramètre `-w`. Si vous avez choisi le chemin du fichier de sortie, il vous faudra ajouter le paramètre `-c` avec le nom du fichier:
+Après avoir sauvegardé le fichier de variables, utilisez `et` pour générer le thème. Vous pouvez activer le mode `watch` en ajoutant le paramètre `-w`. Si vous avez choisi le chemin du fichier de sortie, il vous faudra ajouter le paramètre `-c` avec le nom du fichier:
 ```shell
 et
 

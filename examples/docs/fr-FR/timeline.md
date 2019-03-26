@@ -1,56 +1,10 @@
-<script>
-  export default {
-    data() {
-      return {
-        reverse: true,
-        activities: [{
-          content: 'Début de l\'évènement',
-          timestamp: '2018-04-15'
-        }, {
-          content: 'Approuvé',
-          timestamp: '2018-04-13'
-        }, {
-          content: 'Succès',
-          timestamp: '2018-04-11'
-        }],
-        activities2: [{
-          content: 'Icône',
-          timestamp: '2018-04-12 20:46',
-          size: 'large',
-          type: 'primary',
-          icon: 'el-icon-more'
-        }, {
-          content: 'Couleur',
-          timestamp: '2018-04-03 20:46',
-          color: '#0bbd87'
-        }, {
-          content: 'Taille',
-          timestamp: '2018-04-03 20:46',
-          size: 'large'
-        }, {
-          content: 'Défaut',
-          timestamp: '2018-04-03 20:46'
-        }]
-      };
-    }
-  };
-</script>
-<style>
-  .demo-timeline .source .radio {
-    margin-bottom: 20px;
-  }
-  .demo-timeline .source .radio .el-radio-group {
-    margin-left: 20px;
-  }
-</style>
-
 ## Timeline
 
 Affiche une suite d'évènements dans un ordre chronologique.
 
 ### Usage
 
-La ligne du temps peut être divisée en plusieurs activités en ordre ascendant ou descendant. Les timestamps sont des caractéristiques importantes qui les distinguent des autres composants. Notez la différence avec Steps.
+La timeline peut être divisée en plusieurs activités en ordre ascendant ou descendant. Les timestamps sont des caractéristiques importantes qui les distinguent des autres composants. Notez la différence avec Steps.
 
 :::demo
 ```html

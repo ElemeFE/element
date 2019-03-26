@@ -1,372 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }],
-        tableData2: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $positive: true
-        }],
-        tableData3: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData4: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData6: [{
-          id: '12987122',
-          name: 'Tom',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: 'Tom',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: 'Tom',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: 'Tom',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: 'Tom',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
-        }],
-        tableData7: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'John',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-01',
-          name: 'Morgan',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Jessy',
-          address: 'No. 189, Grove St, Los Angeles',
-        }],
-        currentRow: null,
-        multipleSelection: [],
-        search: '',
-      };
-    },
-
-    methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = 'Total Cost';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = '$ ' + values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
-
-        return sums;
-      },
-
-      resetDateFilter() {
-        this.$refs.filterTable.clearFilter('date');
-      },
-      clearFilter() {
-        this.$refs.filterTable.clearFilter();
-      },
-
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-
-      handleClick() {
-        console.log('click');
-      },
-
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-
-      handleCurrentChange(val) {
-        this.currentRow = val;
-      },
-
-      formatter(row, column) {
-        return row.address;
-      },
-
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-
-      filterHandler(value, row, column) {
-        const property = column['property'];
-        return row[property] === value;
-      },
-
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-
-      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (rowIndex % 2 === 0) {
-          if (columnIndex === 0) {
-            return [1, 2];
-          } else if (columnIndex === 1) {
-            return [0, 0];
-          }
-        }
-      },
-
-      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex === 0) {
-          if (rowIndex % 2 === 0) {
-            return {
-              rowspan: 2,
-              colspan: 1
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0
-            };
-          }
-        }
-      },
-
-      indexMethod(index) {
-        return index * 2;
-      }
-    },
-
-    watch: {
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    }
-  };
-</script>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-
-  .demo-table .name-wrapper {
-    display: inline-block;
-  }
-
-  .demo-table .demo-table-expand {
-    label {
-      width: 90px;
-      color: #99a9bf;
-    }
-    .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
-      width: 50%;
-    }
-  }
-</style>
-
 ## Table
 
 Display multiple data with similar format. You can sort, filter, compare your data in a table.
@@ -546,7 +177,7 @@ You can highlight your table content to distinguish between "success, informatio
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -590,7 +221,7 @@ You can highlight your table content to distinguish between "success, informatio
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -622,7 +253,7 @@ When there are too many rows, you can use a fixed header.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -646,7 +277,7 @@ When there are too many rows, you can use a fixed header.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -792,7 +423,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -833,7 +464,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -898,7 +529,7 @@ When the the data is dynamically changed, you might want the table to have a max
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -938,7 +569,7 @@ When the the data is dynamically changed, you might want the table to have a max
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Remove
@@ -957,7 +588,7 @@ When the the data is dynamically changed, you might want the table to have a max
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1022,7 +653,7 @@ When the data structure is complex, you can use group header to show the data hi
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1065,7 +696,7 @@ When the data structure is complex, you can use group header to show the data hi
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1207,7 +838,7 @@ You can also select multiple rows.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1231,7 +862,7 @@ You can also select multiple rows.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Toggle selection status of second and third rows</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Toggle selection status of second and third rows</el-button>
     <el-button @click="toggleSelection()">Clear selection</el-button>
   </div>
 </template>
@@ -1240,7 +871,7 @@ You can also select multiple rows.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1617,7 +1248,7 @@ When the row content is too long and you do not want to display the horizontal s
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1642,7 +1273,7 @@ When the row content is too long and you do not want to display the horizontal s
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1706,7 +1337,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1737,7 +1368,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1771,7 +1402,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1845,7 +1476,7 @@ Configuring rowspan and colspan allows you to merge cells
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1876,7 +1507,7 @@ Configuring rowspan and colspan allows you to merge cells
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1909,7 +1540,7 @@ Configuring rowspan and colspan allows you to merge cells
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1977,7 +1608,7 @@ Configuring rowspan and colspan allows you to merge cells
 ### Custom index
 
 You can customize row index in `type=index` columns.
-:::demo To customize row indices, use `index` attribute on <el-table-column> with `type=index`. If it is assigned to a number, all indices will have an offset of that number. It also accepts a method with each index (starting from `0`) as parameter, and the returned value will be displayed as index.
+:::demo To customize row indices, use `index` attribute on `el-table-column` with `type=index`. If it is assigned to a number, all indices will have an offset of that number. It also accepts a method with each index (starting from `0`) as parameter, and the returned value will be displayed as index.
 
 ```html
 <template>

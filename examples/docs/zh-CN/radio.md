@@ -1,23 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        radio: '1',
-        radio1: '选中且禁用',
-        radio2: 3,
-        radio3: '上海',
-        radio4: '上海',
-        radio5: '上海',
-        radio6: '上海',
-        radio7: '1',
-        radio8: '1',
-        radio9: '1',
-        radio10: '1'
-      };
-    }
-  };
-</script>
-
 ## Radio 单选框
 
 在一组备选项中进行单选

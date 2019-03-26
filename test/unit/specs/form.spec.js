@@ -284,7 +284,7 @@ describe('Form', () => {
             <el-col class="line" :span="2">-</el-col>
             <el-col :span="11">
               <el-form-item prop="date2">
-                <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
               </el-form-item>
             </el-col>
           </el-form-item>
@@ -517,7 +517,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-time-picker type="fixed-time" ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
+              <el-time-picker ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-form>
         `,

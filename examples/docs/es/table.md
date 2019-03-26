@@ -1,369 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }],
-        tableData2: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $positive: true
-        }],
-        tableData3: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData4: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData6: [{
-          id: '12987122',
-          name: 'Tom',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: 'Tom',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: 'Tom',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: 'Tom',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: 'Tom',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
-        }],
-        tableData7: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'John',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-01',
-          name: 'Morgan',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Jessy',
-          address: 'No. 189, Grove St, Los Angeles',
-        }],
-        currentRow: null,
-        multipleSelection: [],
-        search: '',
-      };
-    },
-
-    methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = 'Total Cost';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = '$ ' + values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
-    
-        return sums;
-      },
-      resetDateFilter() {
-        this.$refs.filterTable.clearFilter('date');
-      },
-      clearFilter() {
-        this.$refs.filterTable.clearFilter();
-      },
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-    
-      handleClick() {
-        console.log('click');
-      },
-    
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-    
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-    
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-    
-      handleCurrentChange(val) {
-        this.currentRow = val;
-      },
-    
-      formatter(row, column) {
-        return row.address;
-      },
-    
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-    
-      filterHandler(value, row, column) {
-        const property = column['property'];
-        return row[property] === value;
-      },
-    
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-    
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-    
-      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (rowIndex % 2 === 0) {
-          if (columnIndex === 0) {
-            return [1, 2];
-          } else if (columnIndex === 1) {
-            return [0, 0];
-          }
-        }
-      },
-    
-      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex === 0) {
-          if (rowIndex % 2 === 0) {
-            return {
-              rowspan: 2,
-              colspan: 1
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0
-            };
-          }
-        }
-      },
-    
-      indexMethod(index) {
-        return index * 2;
-      }
-    },
-    
-    watch: {
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    }
-  };
-</script>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-
-  .demo-table .name-wrapper {
-    display: inline-block;
-  }
-
-  .demo-table .demo-table-expand {
-    label {
-      width: 90px;
-      color: #99a9bf;
-    }
-    .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
-      width: 50%;
-    }
-  }
-</style>
-
 ## Tablas
 
 Visualiza múltiples datos con un formato en particular. Podrá ordenar, filtrar y comparar datos en una tabla.
@@ -543,7 +177,7 @@ Puede destacar el contenido de la tabla para distinguir entre "success, informat
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -587,7 +221,7 @@ Puede destacar el contenido de la tabla para distinguir entre "success, informat
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -619,7 +253,7 @@ Cuando esta tiene demasiadas filas, puede utilizar una cabecera fija.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -643,7 +277,7 @@ Cuando esta tiene demasiadas filas, puede utilizar una cabecera fija.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -789,7 +423,7 @@ Cuando tienes grandes cantidades de datos para colocar en una tabla, puede fijar
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -830,7 +464,7 @@ Cuando tienes grandes cantidades de datos para colocar en una tabla, puede fijar
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -895,7 +529,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -935,7 +569,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Eliminar
@@ -954,7 +588,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1019,7 +653,7 @@ Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agru
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1062,7 +696,7 @@ Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agru
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1204,7 +838,7 @@ También puede seleccionar múltiples filas.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1228,7 +862,7 @@ También puede seleccionar múltiples filas.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
     <el-button @click="toggleSelection()">Limpiar selección</el-button>
   </div>
 </template>
@@ -1237,7 +871,7 @@ También puede seleccionar múltiples filas.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1616,7 +1250,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1641,7 +1275,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1706,7 +1340,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1737,7 +1371,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1771,7 +1405,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1846,7 +1480,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1877,7 +1511,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1910,7 +1544,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',

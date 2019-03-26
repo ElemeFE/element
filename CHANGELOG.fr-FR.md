@@ -1,5 +1,138 @@
 ## Changelog
 
+### 2.6.2
+
+### 2.6.3
+
+*2019-03-21*
+
+#### Bug fixes
+
+- Fix Cascader demo style (#14789 by @ziyoung)
+- Remove unnecessary DOM operation (#14788 by @ziyoung)
+- Fix DatePicker default-value DST (#14562 by @wacky6)
+
+*2019-03-21*
+
+#### New features
+
+- DatePicker
+  - Add monthrange for type attribute (#14487 by @zxyRealm)
+- i18n
+  - Add Croatian locale (#14360 by @danijelh)
+
+#### Bug fixes
+
+- Input
+  - Fix regression (#14572 by @wacky6)
+- DatePicker
+  - Fix first-day-of-week computation (#14523 by @sinchang)
+  - Fix week picker's value-format (#13754 by @wacky6)
+- Steps
+  - Fix issue #14502 (#14596 by @sinchang)
+  - Fix style with simple theme (#14610 by @sinchang)
+- Docs
+  - Update french doc for 2.6.1 and fix typos (#14555 by @smalesys)
+  - Rename variable in Table docs (#14587 by @likwotsing)
+  - Add french search index (#14565 by @iamkun)
+  - Fix TimePicker page style (#14579 by @ziyoung)
+  - Rename variable in Upload docs (#14593 by @liupl)
+  - French translation update (#14643 by @smalesys)
+  - Update Form async validator docs (#14694 by @iamkun)
+  - Fix tooltip doc error (#14748 by @iamkun)
+  - Fix typo (#14751 by @2bj)
+  - Fix highlighting control elements for Webkit touch (#14703 by @VladG0r)
+
+#### Optimization
+
+- Chore
+  - Update ci build script (#14600 by @ziyoung)
+  - Update ga tracking (#14560 by @iamkun)
+  - Add more ga event (#14633 by @iamkun)
+  - Update discusion group (#14741 by @iamkun)
+  - Update test deps and conf (#14735 by @wacky6)
+  - Upgrade gulp (#14745 by @ziyoung)
+  - Use codepen to display demo & fix doc error (#14747 by @ziyoung)
+
+### 2.6.1
+
+*2019-03-03*
+
+#### Corrections de bugs
+
+- **Ne pas spécifier la version de node** (par @iamkun dans #14546)
+- Correction du répertoire doc dans `deloy-faas.sh` (par @ziyoung dans #14553)
+- Correction d'un problème de style de date dans le changelog de la 2.6.0 (par @island205 dans #14547)
+- Correction d'une typo dans la doc (par @wack6 dans #14552)
+
+### 2.6.0
+
+*2019-03-01*
+
+#### Nouvelles fonctionnalités
+- Timeline
+  - Ajout d'un composant timeline (par @jikkai dans #14248)
+- DropdownItem
+  - Ajout de la propriété `icon` à `el-dropdown-item` (par @gabrielboliveira dans #14088)
+- Input
+  - Ajout de propriétés pour afficher les mots de passe (par @phshy0607 dans #13966)
+- Select
+  - Ajout du slot `empty` (par @elfman au #13785)
+- Autocomplete
+  - Ajout de la propriété `highlight-first-item` (par @YamenSharaf dans #14269)
+- I18n
+  - Création de la locale Arménienne (par @hamletbarsamyan dans #14214)
+- Docs
+  - Traduction française (par @smalesys dans #12153, #14418, #14434)
+
+#### Optimisation
+- Alert
+  - Mise à jour de la classe du slot par défaut de la description de Alert (par @iamkun dans #14488)
+- Input
+  - Mise à jour de l'input de type password (par @iamkun dans #14480)
+- InputNumber
+  - Retrait d'un parseFloat inutile (par @JuniorTour au #14172)
+- Menu
+  - Ajout du support de `el-menu-item` sans index (par @georgyfarniev dans #13298)
+- Table
+  - Suppression de certaines opérations du DOM (par @elfman dans #13643)
+- Upload
+  - Optimisation du code (par @elfman dans #13973)
+- Popup
+  - Optimisation du code (par @KAionro dans #14413)
+- Docs
+  - Ajout de détails sur la façon d'exécuter le mode play pour les contributeurs (par @island205 dans #14355)
+  - Ajout d'un avertissement concernant Input (par @wacky6 dans #14463)
+  - Mise à jour de la doc de Table (par @luguokong dans #14329)
+  - Mise à jour de la doc d'Input (par @iamkun dans #14437)
+  - Mise à jour de la doc sur le thème (par @wangguohaohao dans #14297)
+  - Le style de l'icône change lorsque vous passez dessus (par @tuxinghuan dans #14295)
+- Build
+  - Minification du CSS et du JS pour le site d'Element (par @iamkun dans #14430)
+  - Accélération de webpack (par @hetech dans #14484)
+  - Utilisation du cli pour sélectionner la version de publication (par @hetech dans #14354)
+- Installation de stale pour la gestion des issues (par @island205 dans #14392)
+
+#### Corrections de bugs
+- Menu
+  - Correction d'un bug de focus des sous-menus lors du changement d'onglet du navigateur (par @liupl dans #13976)
+- MessageBox
+  - Correction de la définition du type (par @NateScarlet dans #14278)
+- ScrollBar
+  - Empêche le clic droit sur le bouton du pouce (par @xifeiwu dans #14196)
+- Switch
+  - Déclenchement de la validation du formulaire si la valeur change (par @hetech dans #14426)
+- Table
+  - La méthode toggleAllSelection est maintenant une méthode d'instance (par @letanure dans #14075)
+- Tabs & Dropdown
+  - Correction du style (par @hetech dans #14452)
+- Tree
+  - Les tips sont différents des tableaux (par @ColinCll dans #14331)
+- Docs
+  - Correction d'une erreur de doc du DatetimePicker (par @iamkun dans #14290)
+  - Problème d'orthographe dans la documentation du DatePicker (par @helmut dans #14481)
+  - Correction du style de la doc de Pagination(par @liuchuzhang dans #14451)
+
 ### 2.5.4
 
 *2019-02-01*
@@ -870,4 +1003,4 @@
   - Les paramètres de la méthode `row-class-name` et `row-style` sont maintenant un objet
 
 ##
-<i><sup><sup>*</sup> Rendre du HTML arbitraire de façon dynamique sur votre site Web peut être très dangereux car cela peut facilement mener à[des attaques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Donc quand `dangerouslyUseHTMLString' est activé, assurez-vous que le contenu du `message' est fiable, et **ne jamais** assigner `message` au contenu fourni par l'utilisateur.</i>.
+<i><sup>*</sup> Rendre du HTML arbitraire de façon dynamique sur votre site Web peut être très dangereux car cela peut facilement mener à[des attaques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Donc quand `dangerouslyUseHTMLString' est activé, assurez-vous que le contenu du `message' est fiable, et **ne jamais** assigner `message` au contenu fourni par l'utilisateur.</i>.

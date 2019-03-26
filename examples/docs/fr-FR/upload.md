@@ -1,123 +1,3 @@
-<style>
-  .upload-tip {
-    color: #8492a6;
-    font-size: 12px;
-    margin-top: 7px;
-  }
-  .demo-box {
-    margin-bottom: 24px;
-
-    .upload-demo {
-      width: 360px;
-    }
-    .avatar-uploader {
-      .el-upload {
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-
-        &:hover, &:focus {
-          border-color: #409EFF;
-        }
-      }
-      .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-      }
-      .avatar {
-        width: 178px;
-        height: 178px;
-        display: block;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
-        fileList2: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
-        fileList3: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
-        imageUrl: '',
-        dialogImageUrl: '',
-        dialogVisible: false
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      beforeUpload(file) {
-        if (file.size > 40000000) {
-          console.warn(file.name + ' is too large!');
-          return false;
-        }
-        return true;
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      submitUpload() {
-        this.$refs.upload.submit();
-      },
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('L\'avatar doit être en JPG !');
-        }
-        if (!isLt2M) {
-          this.$message.error('L\'avatar ne peut pas excéder 2Mb !');
-        }
-        return isJPG && isLt2M;
-      },
-      handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`La limite est 3, vous avez choisi ${files.length} fichiers, soit ${files.length + fileList.length} au total.`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`Supprimer le transfert de ${ file.name }？`);
-      }
-    }
-  }
-</script>
-
 ## Upload
 
 Permet d'uploader des fichiers en cliquant ou en les déplaçant sur le composant.
@@ -157,7 +37,7 @@ Permet d'uploader des fichiers en cliquant ou en les déplaçant sur le composan
         this.$message.warning(`La limite est 3, vous avez choisi ${files.length} fichiers, soit ${files.length + fileList.length} au total.`);
       },
       beforeRemove(file, fileList) {
-        return this.$confirm(`Supprimer le transfert de ${ file.name }？`);
+        return this.$confirm(`Supprimer le transfert de ${ file.name } ?`);
       }
     }
   }
@@ -283,7 +163,7 @@ Utilisez `list-type` pour changer le style de la liste de fichiers.
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :file-list="fileList2"
+  :file-list="fileList"
   list-type="picture">
   <el-button size="small" type="primary">Cliquer pour envoyer</el-button>
   <div slot="tip" class="el-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
@@ -292,7 +172,7 @@ Utilisez `list-type` pour changer le style de la liste de fichiers.
   export default {
     data() {
       return {
-        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -318,7 +198,7 @@ Utilisez `on-change` pour contrôler le comportement de la liste de fichiers.
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
-  :file-list="fileList3">
+  :file-list="fileList">
   <el-button size="small" type="primary">Cliquer pour envoyer</el-button>
   <div slot="tip" class="el-upload__tip">Fichiers jpg/png avec une taille inférieure à 500kb</div>
 </el-upload>
@@ -326,7 +206,7 @@ Utilisez `on-change` pour contrôler le comportement de la liste de fichiers.
   export default {
     data() {
       return {
-        fileList3: [{
+        fileList: [{
           name: 'food.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }, {
@@ -337,7 +217,7 @@ Utilisez `on-change` pour contrôler le comportement de la liste de fichiers.
     },
     methods: {
       handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
+        this.fileList = fileList.slice(-3);
       }
     }
   }

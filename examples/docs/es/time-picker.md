@@ -1,11 +1,3 @@
-<style>
-  .demo-box {
-    .el-date-editor + .el-date-editor {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## Selector de Tiempo
 
 Use el Time Picker para input de tipo time.
@@ -153,22 +145,6 @@ Es posible escoger un rango de tiempo arbitrario.
 </script>
 ```
 :::
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: '',
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40),
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        startTime: '',
-        endTime: ''
-      };
-    }
-  }
-</script>
 
 ### Atributos
 | Atributo          | Descripción                              | Tipo                                     | Valores aceptados                        | Por defecto          |

@@ -13,7 +13,7 @@
   max-width: 100%;
   background-color: $--color-white;
   font-size: 14px;
-  color: $--table-text-color;
+  color: $--table-font-color;
 
   // 数据为空
   @include e(empty-block) {
@@ -179,7 +179,7 @@
     white-space: nowrap;
     overflow: hidden;
     user-select: none;
-    background-color: $--table-header-background;
+    background-color: $--table-header-background-color;
 
     div {
       display: inline-block;
@@ -361,8 +361,8 @@
 
     & tbody td {
       border-top: $--table-border;
-      background-color: $--table-row-hover-background;
-      color: $--table-text-color;
+      background-color: $--table-row-hover-background-color;
+      color: $--table-font-color;
     }
   }
 
@@ -394,8 +394,8 @@
     overflow: hidden;
 
     & tbody td {
-      background-color: $--table-row-hover-background;
-      color: $--table-text-color;
+      background-color: $--table-row-hover-background-color;
+      color: $--table-font-color;
     }
   }
 
@@ -489,7 +489,7 @@
         }
 
         &.current-row td {
-          background-color: $--table-current-row-background;
+          background-color: $--table-current-row-background-color;
         }
       }
     }
@@ -500,14 +500,14 @@
       &, &.el-table__row--striped {
         &, &.current-row {
           > td {
-            background-color: $--table-current-row-background;
+            background-color: $--table-current-row-background-color;
           }
         }
       }
     }
 
     tr.current-row > td {
-      background-color: $--table-current-row-background;
+      background-color: $--table-current-row-background-color;
     }
   }
 
@@ -541,7 +541,7 @@
 
   @include m(enable-row-hover) {
     .el-table__body tr:hover > td {
-      background-color: $--table-row-hover-background;
+      background-color: $--table-row-hover-background-color;
     }
   }
 

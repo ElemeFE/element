@@ -1,410 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333,
-          tag: '家'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333,
-          tag: '公司'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1519 弄',
-          zip: 200333,
-          tag: '家'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333,
-          tag: '公司'
-        }],
-        tableData2: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          $positive: true
-        }],
-        tableData3: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          detailAddress: '金沙江路 1518 弄',
-          zip: 200333
-        }],
-        tableData4: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }],
-        tableData5: [{
-          id: '12987122',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987123',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987125',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987126',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }],
-        tableData6: [{
-          id: '12987122',
-          name: '王小虎',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: '王小虎',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: '王小虎',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: '王小虎',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: '王小虎',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
-        }],
-        tableData7: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
-        currentRow: null,
-        multipleSelection: [],
-        search: '',
-      };
-    },
-
-    methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = '总价';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-            sums[index] += ' 元';
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
-
-        return sums;
-      },
-      resetDateFilter() {
-        this.$refs.filterTable.clearFilter('date');
-      },
-      clearFilter() {
-        this.$refs.filterTable.clearFilter();
-      },
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-
-      handleClick(row) {
-        console.log(row);
-      },
-
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-
-      handleCurrentChange(val) {
-        this.currentRow = val;
-      },
-
-      formatter(row, column) {
-        return row.address;
-      },
-
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-
-      filterHandler(value, row, column) {
-        const property = column['property'];
-        return row[property] === value;
-      },
-
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-
-      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (rowIndex % 2 === 0) {
-          if (columnIndex === 0) {
-            return [1, 2];
-          } else if (columnIndex === 1) {
-            return [0, 0];
-          }
-        }
-      },
-
-      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex === 0) {
-          if (rowIndex % 2 === 0) {
-            return {
-              rowspan: 2,
-              colspan: 1
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0
-            };
-          }
-        }
-      },
-
-      indexMethod(index) {
-        return index * 2;
-      }
-    },
-
-    watch: {
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    }
-  };
-</script>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-
-  .demo-table .name-wrapper {
-    display: inline-block;
-  }
-
-  .demo-table .demo-table-expand {
-    label {
-      width: 90px;
-      color: #99a9bf;
-    }
-    .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
-      width: 50%;
-    }
-  }
-</style>
-
 ## Table 表格
 
 用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作。
@@ -582,7 +175,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -626,7 +219,7 @@
     },
     data() {
       return {
-        tableData2: [{
+        tableData: [{
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄',
@@ -658,7 +251,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     border
     style="width: 100%">
@@ -683,7 +276,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
@@ -827,7 +420,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -868,7 +461,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -933,7 +526,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -973,7 +566,7 @@
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           移除
@@ -992,7 +585,7 @@
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -1057,7 +650,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1100,7 +693,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -1242,7 +835,7 @@
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
@@ -1267,7 +860,7 @@
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
     <el-button @click="toggleSelection()">取消选择</el-button>
   </div>
 </template>
@@ -1276,7 +869,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
@@ -1579,7 +1172,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData5"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1642,7 +1235,7 @@
   export default {
     data() {
       return {
-        tableData5: [{
+        tableData: [{
           id: '12987122',
           name: '好滋好味鸡蛋仔',
           category: '江浙小吃、小吃零食',
@@ -1765,7 +1358,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1796,7 +1389,7 @@
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1830,7 +1423,7 @@
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: '王小虎',
           amount1: '234',
@@ -1905,7 +1498,7 @@
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1936,7 +1529,7 @@
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1969,7 +1562,7 @@
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: '王小虎',
           amount1: '234',

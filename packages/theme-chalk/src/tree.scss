@@ -7,7 +7,7 @@
   position: relative;
   cursor: default;
   background: $--color-white;
-  color: $--tree-text-color;
+  color: $--tree-font-color;
 
   @include e(empty-block) {
     position: relative;
@@ -39,7 +39,7 @@
   outline: none;
   &:focus { /* focus */
     > .el-tree-node__content {
-      background-color: $--tree-node-hover-color;
+      background-color: $--tree-node-hover-background-color;
     }
   }
 
@@ -63,7 +63,7 @@
       margin-right: 8px;
     }
     &:hover {
-      background-color: $--tree-node-hover-color;
+      background-color: $--tree-node-hover-background-color;
     }
 
     .el-tree.is-dragging & {

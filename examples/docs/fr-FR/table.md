@@ -1,372 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }],
-        tableData2: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $positive: true
-        }],
-        tableData3: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData4: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData6: [{
-          id: '12987122',
-          name: 'Tom',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: 'Tom',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: 'Tom',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: 'Tom',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: 'Tom',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
-        }],
-        tableData7: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'John',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-01',
-          name: 'Morgan',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Jessy',
-          address: 'No. 189, Grove St, Los Angeles',
-        }],
-        currentRow: null,
-        multipleSelection: [],
-        search: '',
-      };
-    },
-
-    methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = 'Coût total';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = '$ ' + values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
-
-        return sums;
-      },
-
-      resetDateFilter() {
-        this.$refs.filterTable.clearFilter('date');
-      },
-      clearFilter() {
-        this.$refs.filterTable.clearFilter();
-      },
-
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-
-      handleClick() {
-        console.log('click');
-      },
-
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-
-      handleCurrentChange(val) {
-        this.currentRow = val;
-      },
-
-      formatter(row, column) {
-        return row.address;
-      },
-
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-
-      filterHandler(value, row, column) {
-        const property = column['property'];
-        return row[property] === value;
-      },
-
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-
-      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (rowIndex % 2 === 0) {
-          if (columnIndex === 0) {
-            return [1, 2];
-          } else if (columnIndex === 1) {
-            return [0, 0];
-          }
-        }
-      },
-
-      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex === 0) {
-          if (rowIndex % 2 === 0) {
-            return {
-              rowspan: 2,
-              colspan: 1
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0
-            };
-          }
-        }
-      },
-
-      indexMethod(index) {
-        return index * 2;
-      }
-    },
-
-    watch: {
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    }
-  };
-</script>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-
-  .demo-table .name-wrapper {
-    display: inline-block;
-  }
-
-  .demo-table .demo-table-expand {
-    label {
-      width: 90px;
-      color: #99a9bf;
-    }
-    .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
-      width: 50%;
-    }
-  }
-</style>
-
 ## Table
 
 Permet d'afficher de nombreuses données possédant un format similaire. Vous pouvez ainsi trier, filtrer et comparer les données de votre tableau.
@@ -546,7 +177,7 @@ Vous pouvez mettre en valeur certaines lignes du tableau suivant leur état, com
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -590,7 +221,7 @@ Vous pouvez mettre en valeur certaines lignes du tableau suivant leur état, com
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -622,7 +253,7 @@ Lorsqu'il y a beaucoup de lignes, il peut être utile d'avoir un header fixe afi
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -646,7 +277,7 @@ Lorsqu'il y a beaucoup de lignes, il peut être utile d'avoir un header fixe afi
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -792,7 +423,7 @@ Si vous avez un gros volume de données à afficher, vous pouvez fixer le header
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -833,7 +464,7 @@ Si vous avez un gros volume de données à afficher, vous pouvez fixer le header
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -898,7 +529,7 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -938,7 +569,7 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Supprimer
@@ -957,7 +588,7 @@ Quand les données changent dynamiquement, vous pouvez avoir besoin d'une hauteu
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1022,7 +653,7 @@ Quand la structure du tableau est complexe, vous pouvez grouper les headers afin
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1065,7 +696,7 @@ Quand la structure du tableau est complexe, vous pouvez grouper les headers afin
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1207,7 +838,7 @@ Vous pouvez aussi sélectionner plusieurs lignes.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1231,7 +862,7 @@ Vous pouvez aussi sélectionner plusieurs lignes.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Sélectionner les deuxième et troisième lignes</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Sélectionner les deuxième et troisième lignes</el-button>
     <el-button @click="toggleSelection()">Effacer la sélection</el-button>
   </div>
 </template>
@@ -1240,7 +871,7 @@ Vous pouvez aussi sélectionner plusieurs lignes.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1620,7 +1251,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1645,7 +1276,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1710,7 +1341,7 @@ Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour affiche
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1741,7 +1372,7 @@ Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour affiche
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1775,7 +1406,7 @@ Pour les tableaux de nombres, vous pouvez ajouter une ligne en plus pour affiche
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1850,7 +1481,7 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1881,7 +1512,7 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1914,7 +1545,7 @@ Vous pouvez configurer l'étendue des lignes et colonnes afin de fusionner des c
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -2106,10 +1737,10 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | cell-click | Se déclenche quand l'utilisateur clique sur une cellule. | row, column, cell, event |
 | cell-dblclick | Se déclenche quand l'utilisateur double-clique sur une cellule. | row, column, cell, event |
 | row-click | Se déclenche quand l'utilisateur clique sur une ligne. | row, column, event |
-| row-contextmenu | Se déclenche quand l'utilisateur fait un click droit sur une ligne. | row, column, event |
+| row-contextmenu | Se déclenche quand l'utilisateur fait un clic droit sur une ligne. | row, column, event |
 | row-dblclick | Se déclenche quand l'utilisateur double-clique sur une ligne. | row, column, event |
 | header-click | Se déclenche quand l'utilisateur clique sur une colonne du header. | column, event |
-| header-contextmenu | Se déclenche quand l'utilisateur fait un click droit sur une colonne du header. | column, event |
+| header-contextmenu | Se déclenche quand l'utilisateur fait un clic droit sur une colonne du header. | column, event |
 | sort-change | Se déclenche quand l'ordre de tri change. | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered. | filters |
 | current-change | Se déclenche quand la ligne sélectionnée change. | currentRow, oldCurrentRow |

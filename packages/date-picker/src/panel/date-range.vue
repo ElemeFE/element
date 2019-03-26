@@ -197,6 +197,7 @@
     nextYear,
     prevMonth,
     nextMonth,
+    nextDate,
     extractDateFormat,
     extractTimeFormat
   } from '../util';
@@ -207,17 +208,13 @@
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
 
-  const advanceDate = (date, amount) => {
-    return new Date(new Date(date).getTime() + amount);
-  };
-
   const calcDefaultValue = (defaultValue) => {
     if (Array.isArray(defaultValue)) {
       return [new Date(defaultValue[0]), new Date(defaultValue[1])];
     } else if (defaultValue) {
-      return [new Date(defaultValue), advanceDate(defaultValue, 24 * 60 * 60 * 1000)];
+      return [new Date(defaultValue), nextDate(new Date(defaultValue), 1)];
     } else {
-      return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
+      return [new Date(), nextDate(new Date(), 1)];
     }
   };
 

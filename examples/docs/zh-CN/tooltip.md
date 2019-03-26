@@ -1,54 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        disabled: false
-      };
-    }
-  };
-</script>
-<style>
-  .demo-tooltip {
-    .el-tooltip + .el-tooltip {
-      margin-left: 15px;
-    }
-    .box {
-      width: 400px;
-
-      .top {
-        text-align: center;
-      }
-
-      .left {
-        float: left;
-        width: 60px;
-      }
-
-      .right {
-        float: right;
-        width: 60px;
-      }
-
-      .bottom {
-        clear: both;
-        text-align: center;
-      }
-
-      .item {
-        margin: 4px;
-      }
-
-      .left .el-tooltip__popper,
-      .right .el-tooltip__popper {
-        padding: 8px 10px;
-      }
-      .el-tooltip {
-        margin-left: 0;
-      }
-    }
-  }
-</style>
-
 ## Tooltip 文字提示
 
 常用于展示鼠标 hover 时的提示信息。
@@ -190,6 +139,15 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
     <el-button @click="disabled = !disabled">点击{{disabled ? '开启' : '关闭'}} tooltip 功能</el-button>
   </el-tooltip>
 </template>
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
 ```
 :::
 

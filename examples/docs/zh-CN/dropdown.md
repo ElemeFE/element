@@ -1,55 +1,3 @@
-<style>
-  .demo-box {
-    .el-dropdown {
-      vertical-align: top;
-
-      & + .el-dropdown {
-        margin-left: 15px;
-      }
-    }
-    .el-dropdown-link {
-      cursor: pointer;
-      color: #409EFF;
-    }
-    .el-icon-arrow-down {
-      font-size: 12px;
-    }
-  }
-
-  .block-col-2 {
-    margin: -24px;
-
-    .el-col {
-      padding: 30px 0;
-      text-align: center;
-      border-right: 1px solid #eff2f6;
-
-      &:last-child {
-        border-right: 0;
-      }
-    }
-  }
-
- .demo-dropdown .demonstration {
-   display: block;
-   color: #8492a6;
-   font-size: 14px;
-   margin-bottom: 20px;
- }
-</style>
-
-<script>
-  export default {
-    methods: {
-      handleClick() {
-        alert('button click');
-      },
-      handleCommand(command) {
-        this.$message('click on item ' + command);
-      }
-    }
-  }
-</script>
 ## Dropdown 下拉菜单
 
 将动作或菜单折叠到下拉菜单中。
@@ -73,7 +21,6 @@
     <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-```
 
 <style>
   .el-dropdown-link {
@@ -84,7 +31,7 @@
     font-size: 12px;
   }
 </style>
-
+```
 :::
 
 ### 触发对象
@@ -180,7 +127,6 @@
     </el-dropdown>
   </el-col>
 </el-row>
-```
 
 <style>
   .el-dropdown-link {
@@ -197,7 +143,7 @@
     margin-bottom: 20px;
   }
 </style>
-
+```
 :::
 
 ### 菜单隐藏方式

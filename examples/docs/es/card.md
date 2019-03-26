@@ -1,51 +1,3 @@
-<script>
-  import dateUtil from 'main/utils/date'
-  export default {
-    data() {
-      return {
-        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
-      };
-    }
-  }
-</script>
-
-<style scoped>
-  .text {
-    font-size: 14px;
-  }
-
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    display: block;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .box-card {
-    width: 480px;
-  }
-</style>
 ## Card
 Muestra información dentro de un contenedor `card`
 
@@ -129,12 +81,12 @@ Muestre un contenido más rico añadiendo algunas configuraciones.
 <el-row>
   <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
-      <img src="~examples/assets/images/hamburger.png" class="image">
+      <img src="../../examples/assets/images/hamburger.png" class="image">
       <div style="padding: 14px;">
         <span>Yummy hamburger</span>
         <div class="bottom clearfix">
           <time class="time">{{ currentDate }}</time>
-          <el-button type="text" class="button">Operating button</el-button>
+          <el-button type="text" class="button">Operating</el-button>
         </div>
       </div>
     </el-card>

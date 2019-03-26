@@ -1,115 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        pickerOptions1: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          },
-          shortcuts: [{
-            text: 'Today',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }, {
-            text: 'Yesterday',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
-            }
-          }, {
-            text: 'A week ago',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
-            }
-          }]
-        },
-        pickerOptions2: {
-          shortcuts: [{
-            text: 'Last week',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last month',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last 3 months',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value1: '',
-        value2: '',
-        value3: '',
-        value4: '',
-        value5: '',
-        value6: '',
-        value7: '',
-        value8: '',
-        value9: '',
-        value10: '',
-        value11: '',
-        value12: '',
-        value13: '',
-        value14: ''
-      };
-    }
-  };
-</script>
-
-<style>
-  .demo-block.demo-date-picker .source {
-    padding: 0;
-    display: flex;
-  }
-
-  .demo-date-picker .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    flex: 1;
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-date-picker .container {
-    flex: 1;
-    border-right: solid 1px #EFF2F6;
-    .block {
-      border-right: none;
-      &:last-child {
-        border-top: solid 1px #EFF2F6;
-      }
-    }
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-date-picker .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-</style>
 
 ## DatePicker
 
@@ -317,6 +205,74 @@ Se soporta la selección de un rango de fechas.
 
 :::
 
+### Month Range
+
+Picking a month range is supported.
+
+:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current years independently, you can use the `unlink-panels` attribute.
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Default</span>
+    <el-date-picker
+      v-model="value15"
+      type="monthrange"
+      range-separator="To"
+      start-placeholder="Start month"
+      end-placeholder="End month">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">With quick options</span>
+    <el-date-picker
+      v-model="value16"
+      type="monthrange"
+      align="right"
+      unlink-panels
+      range-separator="To"
+      start-placeholder="Start month"
+      end-placeholder="End month"
+      :picker-options="pickerOptions3">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions3: {
+          shortcuts: [{
+            text: 'This month',
+            onClick(picker) {
+              picker.$emit('pick', [new Date(), new Date()]);
+            }
+          }, {
+            text: 'This year',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date(new Date().getFullYear(), 0);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: 'Last 6 months',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setMonth(start.getMonth() - 6);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value15: '',
+        value16: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ###  Valor por defecto
 
 Si el usuario no ha escogido una fecha, muestra el calendario de hoy por defecto. Puede utilizar `default-value` para fijar otra fecha. Su valor debe ser definido por `new Date()`.
@@ -486,7 +442,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —                    |
 | start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —                    |
 | end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —                    |
-| type              | tipo de picker                           | string            | year/month/date/dates/datetime/ week/datetimerange/daterange | date                 |
+| type              | tipo de picker                           | string            | year/month/date/dates/datetime/ week/datetimerange/daterange/ monthrange | date                 |
 | format            | formato en que se muestra el valor en el input | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
 | align             | alineación                               | left/center/right | left                                     |                      |
 | popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —                    |

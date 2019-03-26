@@ -1,119 +1,3 @@
-<style>
-  .upload-tip {
-    color: #8492a6;
-    font-size: 12px;
-    margin-top: 7px;
-  }
-  .demo-box {
-    margin-bottom: 24px;
-
-    .upload-demo {
-      width: 360px;
-    }
-    .avatar-uploader {
-      .el-upload {
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    
-        &:hover, &:focus {
-          border-color: #409EFF;
-        }
-      }
-      .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-      }
-      .avatar {
-        width: 178px;
-        height: 178px;
-        display: block;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
-        fileList2: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
-        fileList3: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
-        imageUrl: '',
-        dialogImageUrl: '',
-        dialogVisible: false
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      beforeUpload(file) {
-        if (file.size > 40000000) {
-          console.warn(file.name + ' is too large!');
-          return false;
-        }
-        return true;
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      submitUpload() {
-        this.$refs.upload.submit();
-      },
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('Avatar picture must be JPG format!');
-        }
-        if (!isLt2M) {
-          this.$message.error('Avatar picture size can not exceed 2MB!');
-        }
-        return isJPG && isLt2M;
-      },
-      handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`You can upload up to 3 files. You selected ${files.length} files this time, and ${files.length + fileList.length} files totally`);
-      }
-    }
-  }
-</script>
 ## Carga de archivos
 
 Carga archivos haciendo clic o arrastrándolos.
@@ -275,7 +159,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :file-list="fileList2"
+  :file-list="fileList"
   list-type="picture">
   <el-button size="small" type="primary">Clic para subir archivo</el-button>
   <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
@@ -284,7 +168,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
   export default {
     data() {
       return {
-        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -310,7 +194,7 @@ Utilice el _hook_ `on-change` para controlar la funcionalidad de la lista de arc
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
-  :file-list="fileList3">
+  :file-list="fileList">
   <el-button size="small" type="primary">Clic para subir archivo</el-button>
   <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
@@ -318,7 +202,7 @@ Utilice el _hook_ `on-change` para controlar la funcionalidad de la lista de arc
   export default {
     data() {
       return {
-        fileList3: [{
+        fileList: [{
           name: 'food.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }, {
@@ -329,7 +213,7 @@ Utilice el _hook_ `on-change` para controlar la funcionalidad de la lista de arc
     },
     methods: {
       handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
+        this.fileList = fileList.slice(-3);
       }
     }
   }
