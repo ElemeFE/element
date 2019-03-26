@@ -884,8 +884,11 @@ describe('Form', () => {
           };
         }
       }, true);
-      vm.$refs.form.validate().catch(validFailed => {
-        expect(validFailed).to.false;
+      vm.$refs.form.validate().catch(({valid, invalidFields}) => {
+        expect(valid).to.false;
+        expect(invalidFields.name).to.exist;
+        expect(invalidFields.name).to.have.lengthOf(1);
+        expect(invalidFields.name[0].message).to.equal('长度至少为5');
         done();
       });
     });
