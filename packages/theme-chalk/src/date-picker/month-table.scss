@@ -10,6 +10,13 @@
     padding: 20px 3px;
     cursor: pointer;
 
+    &.today {
+      .cell {
+        color: $--color-blueberry;
+        font-weight: bold;
+      }
+    }
+
     &.disabled .cell {
       background-color: $--background-color-base;
       cursor: not-allowed;

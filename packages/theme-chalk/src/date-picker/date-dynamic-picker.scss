@@ -1,10 +1,10 @@
 @import "../common/var";
 
 @include b(date-dynamic-picker) {
-  width: 510px;
+  width: 508px;
 
   &.has-sidebar {
-    width: 756px;
+    width: 754px;
   }
 
   table {
@@ -15,12 +15,12 @@
   .tm-picker-panel__body {
     min-width: 0;
     margin: 0;
-    padding: 0 16px;
+    padding: 0 15px;
   }
 
   .tm-picker-panel__content {
     margin: 0;
-    padding: 16px 0;
+    padding: 23px 0 14px;
 
     &.is-full-width {
       width: 100%;
@@ -32,6 +32,11 @@
     text-align: center;
     height: 28px;
     margin-bottom: 5px;
+    padding: 0 3px;
+
+    .tm-picker-panel__icon-btn {
+      padding: 4px 0;
+    }
 
     [class*=arrow-left] {
       float: left;
