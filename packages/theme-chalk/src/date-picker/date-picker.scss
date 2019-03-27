@@ -42,9 +42,29 @@
     box-sizing: border-box;
   }
 
-  @include e(header) {
-    margin: 12px;
+  @include e(year-header) {
+    position: relative;
+    border-bottom: 1px solid $--datepicker-inner-border-color;
+    font-size: 15px;
+    line-height: 30px;
     text-align: center;
+    padding: 11px 11px 12px 11px;
+    box-sizing: border-box;
+
+    .tm-date-picker__header-label {
+      font-size: 15px;
+      line-height: inherit;
+      vertical-align: middle;
+    }
+    &:hover {
+      background: $--color-white-smoke;
+    }
+  }
+
+  @include e(header) {
+    margin: 16px 12px 8px;
+    text-align: center;
+    line-height: 25px;
 
     @include m(bordered) {
       margin-bottom: 0;
@@ -58,10 +78,10 @@
   }
 
   @include e(header-label) {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     padding: 0 5px;
-    line-height: 22px;
+    line-height: inherit;
     text-align: center;
     cursor: pointer;
     color: $--color-text-regular;

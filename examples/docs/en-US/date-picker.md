@@ -147,11 +147,11 @@ Use slots `topBlock` and `bottomBlock` to extend DatePicker's popover.
 
 ```html
 <tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4">
-    <div slot="topBlock">
-        <tm-input value="Am I at the top?">
+    <div slot="topBlock" style="text-align: center;">
+        DatePicker's TopBlock Slot
     </div>
-    <div slot="bottomBlock">
-        <tm-input value="What about bottom?">
+    <div slot="bottomBlock" style="text-align: center;">
+        DatePicker's BottomBlock Slot
     </div>
 </tm-date-picker>
 

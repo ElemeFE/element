@@ -21,7 +21,7 @@
           </button>
         </div>
         <div class="tm-picker-panel__body">
-          <div class="tm-date-picker__time-header" v-if="showTime">
+          <div v-if="showTime" class="tm-date-picker__time-header">
             <span class="tm-date-picker__editor-wrap">
               <tm-input
                 :placeholder="t('el.datepicker.selectDate')"
@@ -46,16 +46,27 @@
               </time-picker>
             </span>
           </div>
+          <div class="tm-date-picker__year-header">
+            <button type="button"
+                    @click="prevYear"
+                    :aria-label="t(`el.datepicker.prevYear`)"
+                    class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon--d-arrow-left">
+              <tm-icon name="arrow-left" />
+            </button>
+            <span @click="showYearPicker"
+                  role="button"
+                  class="tm-date-picker__header-label">{{ yearLabel }}</span>
+            <button type="button"
+                    @click="nextYear"
+                    :aria-label="t(`el.datepicker.nextYear`)"
+                    class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon--d-arrow-right">
+              <tm-icon name="arrow-right" />
+            </button>
+          </div>
           <div
             class="tm-date-picker__header"
-            :class="{ 'tm-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
-            v-show="currentView !== 'time'">
-            <button
-              type="button"
-              @click="prevYear"
-              :aria-label="t(`el.datepicker.prevYear`)"
-              class="tm-picker-panel__icon-btn tm-date-picker__prev-btn tm-icon--d-arrow-left">
-            </button>
+            :class="{ 'tm-date-picker__header--bordered': currentView === 'month' }"
+            v-show="defaultHeaderVisible">
             <button
               type="button"
               @click="prevMonth"
@@ -65,21 +76,11 @@
               <tm-icon name="arrow-left" />
             </button>
             <span
-              @click="showYearPicker"
-              role="button"
-              class="tm-date-picker__header-label">{{ yearLabel }}</span>
-            <span
               @click="showMonthPicker"
               v-show="currentView === 'date'"
               role="button"
               class="tm-date-picker__header-label"
               :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</span>
-            <button
-              type="button"
-              @click="nextYear"
-              :aria-label="t(`el.datepicker.nextYear`)"
-              class="tm-picker-panel__icon-btn tm-date-picker__next-btn tm-icon--d-arrow-right">
-            </button>
             <button
               type="button"
               @click="nextMonth"
@@ -495,6 +496,10 @@
 
       footerVisible() {
         return this.showTime;
+      },
+
+      defaultHeaderVisible() {
+        return this.currentView !== 'time' && this.currentView !== 'year' && this.currentView !== 'month';
       },
 
       visibleTime() {

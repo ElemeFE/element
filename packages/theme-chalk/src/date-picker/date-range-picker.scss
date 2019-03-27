@@ -1,10 +1,10 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 510px;
+  width: 508px;
 
   &.has-sidebar {
-    width: 756px;
+    width: 754px;
   }
 
   table {
@@ -30,6 +30,11 @@
     text-align: center;
     height: 28px;
     margin-bottom: 5px;
+    padding: 0 3px;
+
+    .tm-picker-panel__icon-btn {
+      padding: 4px 0;
+    }
 
     [class*=arrow-left] {
       float: left;
@@ -53,7 +58,7 @@
     width: calc(50% - 7px);
     box-sizing: border-box;
     margin: 0;
-    padding: 16px 0;
+    padding: 16px 0 14px;
 
     @include when(right) {
       .tm-date-range-picker__header {

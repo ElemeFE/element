@@ -24,17 +24,6 @@
           border-top-right-radius: 28px;
           border-bottom-right-radius: 28px;
         }
-        .available ~ .available > div {
-          &:before {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: $--datepicker-cell-size;
-            left: -3px;
-            top: 2px;
-            background-color: $--datepicker-inrange-color;
-          }
-        }
       }
 
       &.current > div {
@@ -42,6 +31,8 @@
       }
 
       .start-date ~ .available > div {
+        background-color: $--datepicker-inrange-color;
+
         &:before {
           content: '';
           position: absolute;

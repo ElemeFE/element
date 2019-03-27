@@ -36,7 +36,7 @@
 
   @include e(content) {
     position: relative;
-    margin: 15px;
+    margin: 8px 12px 18px;
 
     &.is-left {
       margin-right: $--datepicker-cell-size / 2;
