@@ -1277,7 +1277,7 @@
 
 ### 树形数据与懒加载
 
-:::demo 支持树类型的数据。此时，必须要指定 `row-key`。支持子节点数据异步加载。设置 Table 的 `lazy` 属性为 true 与 加载函数 `load` ，指定 row 中的 `isLeaf` 来确定哪些行是包含子节点。
+:::demo 支持树类型的数据。此时，必须要指定 `row-key`。支持子节点数据异步加载。设置 Table 的 `lazy` 属性为 true 与 加载函数 `load` ，指定 row 中的 `hasChildren` 来确定哪些行是包含子节点。
 
 ```html
 <template>
@@ -1381,7 +1381,7 @@
           date: '2016-05-01',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1519 弄',
-          isLeaf: true
+          hasChildren: true
         }, {
           id: 4,
           date: '2016-05-03',

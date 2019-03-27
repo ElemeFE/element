@@ -1335,7 +1335,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
 
 ### Tree data and lazy mode
 
-:::demo You can display tree structure data。When using it, the prop `row-key` is required。Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `isLeaf` attribute in row to determine which row contains children.
+:::demo You can display tree structure data。When using it, the prop `row-key` is required。Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `hasChildren` attribute in row to determine which row contains children.
 
 ```html
 <template>
@@ -1422,7 +1422,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
           id: 3,
           date: '2016-05-01',
           name: 'wangxiaohu',
-          isLeaf: true
+          hasChildren: true
         }, {
           id: 4,
           date: '2016-05-03',

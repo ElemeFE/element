@@ -97,7 +97,7 @@ export default {
                       };
                       if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
                         data.treeNode = {
-                          isLeaf: treeNode.isLeaf || (treeNode.children && treeNode.children.length),
+                          hasChildren: treeNode.hasChildren || (treeNode.children && treeNode.children.length),
                           expanded: treeNode.expanded,
                           indent: treeNode.level * this.treeIndent,
                           level: treeNode.level,

@@ -735,9 +735,9 @@ TableStore.prototype.loadData = function(row, treeNode) {
           display: true,
           level: parent.level + 1
         };
-        if (item.isLeaf) {
+        if (item.hasChildren) {
           child.expanded = false;
-          child.isLeaf = true;
+          child.hasChildren = true;
           child.children = [];
         }
         Vue.set(treeData, rowKey, child);
