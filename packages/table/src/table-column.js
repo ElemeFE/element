@@ -326,10 +326,16 @@ export default {
       if (!renderCell) {
         renderCell = DEFAULT_RENDER_CELL;
       }
+      const children = [
+        _self.renderTreeCell(data),
+        renderCell(h, data)
+      ];
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
-        : <div class="cell">{ renderCell(h, data) }</div>;
+        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ children }</div>
+        : (<div class="cell">
+          { children }
+        </div>);
     };
   },
 
@@ -434,6 +440,32 @@ export default {
     labelClassName(newVal) {
       if (this.columnConfig) {
         this.columnConfig.labelClassName = newVal;
+      }
+    }
+  },
+
+  methods: {
+    renderTreeCell(data) {
+      if (!data.treeNode) return null;
+      const ele = [];
+      ele.push(<span class="el-table__indent" style={{'padding-left': data.treeNode.indent + 'px'}}></span>);
+      if (data.treeNode.hasChildren) {
+        ele.push(<div class={ ['el-table__expand-icon', data.treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
+          on-click={this.handleTreeExpandIconClick.bind(this, data)}>
+          <i class='el-icon el-icon-arrow-right'></i>
+        </div>);
+      } else {
+        ele.push(<span class="el-table__placeholder"></span>);
+      }
+      return ele;
+    },
+
+    handleTreeExpandIconClick(data, e) {
+      e.stopPropagation();
+      if (data.store.states.lazy && !data.treeNode.loaded) {
+        data.store.loadData(data.row, data.treeNode);
+      } else {
+        data.store.toggleTreeExpansion(data.treeNode.rowKey);
       }
     }
   },

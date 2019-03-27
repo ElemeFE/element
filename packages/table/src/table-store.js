@@ -8,7 +8,41 @@ const sortData = (data, states) => {
   if (!sortingColumn || typeof sortingColumn.sortable === 'string') {
     return data;
   }
-  return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+  if (Object.keys(states.treeData).length === 0) {
+    return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+  }
+  // 存在嵌套类型的数据
+  const rowKey = states.rowKey;
+  const filteredData = [];
+  const treeDataMap = {};
+  let index = 0;
+  while (index < data.length) {
+    let cur = data[index];
+    const key = cur[rowKey];
+    let treeNode = states.treeData[key];
+    filteredData.push(cur);
+    index++;
+    if (!treeNode) {
+      continue;
+    }
+    treeDataMap[key] = [];
+    while (index < data.length) {
+      cur = data[index];
+      treeNode = states.treeData[cur[rowKey]];
+      index++;
+      if (treeNode && treeNode.level !== 0) {
+        treeDataMap[key].push(cur);
+      } else {
+        filteredData.push(cur);
+        break;
+      }
+    }
+  }
+  const sortedData = orderBy(filteredData, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
+  return sortedData.reduce((prev, current) => {
+    const treeNodes = treeDataMap[current[rowKey]] || [];
+    return prev.concat(current, treeNodes);
+  }, []);
 };
 
 const getKeysMap = function(array, rowKey) {
@@ -108,7 +142,11 @@ const TableStore = function(table, initialState = {}) {
     filters: {},
     expandRows: [],
     defaultExpandAll: false,
-    selectOnIndeterminate: false
+    selectOnIndeterminate: false,
+    treeData: {},
+    indent: 16,
+    lazy: false,
+    lazyTreeNodeMap: {}
   };
 
   this._toggleAllSelection = debounce(10, function(states) {
@@ -641,6 +679,72 @@ TableStore.prototype.commit = function(name, ...args) {
     mutations[name].apply(this, [this.states].concat(args));
   } else {
     throw new Error(`Action not found: ${name}`);
+  }
+};
+
+TableStore.prototype.toggleTreeExpansion = function(rowKey) {
+  const { treeData } = this.states;
+  const node = treeData[rowKey];
+  if (!node) return;
+  if (typeof node.expanded !== 'boolean') {
+    throw new Error('a leaf must have expanded property');
+  }
+  node.expanded = !node.expanded;
+
+  let traverse = null;
+  if (node.expanded) {
+    traverse = (children, parent) => {
+      if (children && parent.expanded) {
+        children.forEach(key => {
+          treeData[key].display = true;
+          traverse(treeData[key].children, treeData[key]);
+        });
+      }
+    };
+    node.children.forEach(key => {
+      treeData[key].display = true;
+      traverse(treeData[key].children, treeData[key]);
+    });
+  } else {
+    const traverse = (children) => {
+      if (!children) return;
+      children.forEach(key => {
+        treeData[key].display = false;
+        traverse(treeData[key].children);
+      });
+    };
+    traverse(node.children);
+  }
+};
+
+TableStore.prototype.loadData = function(row, treeNode) {
+  const table = this.table;
+  const parentRowKey = treeNode.rowKey;
+  if (table.lazy && table.load) {
+    table.load(row, treeNode, (data) => {
+      if (!Array.isArray(data)) {
+        throw new Error('data must be an array');
+      }
+      const treeData = this.states.treeData;
+      data.forEach(item => {
+        const rowKey = table.getRowKey(item);
+        const parent = treeData[parentRowKey];
+        parent.loaded = true;
+        parent.children.push(rowKey);
+        const child = {
+          display: true,
+          level: parent.level + 1
+        };
+        if (item.hasChildren) {
+          child.expanded = false;
+          child.hasChildren = true;
+          child.children = [];
+        }
+        Vue.set(treeData, rowKey, child);
+        Vue.set(this.states.lazyTreeNodeMap, rowKey, item);
+      });
+      this.toggleTreeExpansion(parentRowKey);
+    });
   }
 };
 

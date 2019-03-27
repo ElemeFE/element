@@ -676,19 +676,16 @@ describe('Table', () => {
       const vm = createVue({
         template: `
           <el-table :data="testData">
-            <el-table-column prop="name" :render-header="renderHeader" label="name">
+            <el-table-column prop="name" label="name">
+              <template slot="header" slot-scope="{ column, $index }">
+              {{ $index }}:{{column.label}}
+              </template>
             </el-table-column>
             <el-table-column prop="release"/>
             <el-table-column prop="director"/>
             <el-table-column prop="runtime"/>
           </el-table>
         `,
-
-        methods: {
-          renderHeader(h, { column, $index }) {
-            return '' + $index + ':' + column.label;
-          }
-        },
 
         created() {
           this.testData = getTestData();
@@ -697,7 +694,7 @@ describe('Table', () => {
 
       setTimeout(_ => {
         const headerCell = vm.$el.querySelector('.el-table__header-wrapper thead tr th:first-child .cell');
-        expect(headerCell.textContent).to.equal('0:name');
+        expect(headerCell.textContent.trim()).to.equal('0:name');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -1882,7 +1879,7 @@ describe('Table', () => {
   it('keep highlight row after sort', done => {
     const vm = createVue({
       template: `
-        <el-table :data="testData" highlight-current-row row-key="release">
+        <el-table :data="testData" row-key="release" highlight-current-row >
           <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
@@ -1909,6 +1906,93 @@ describe('Table', () => {
           destroyVM(vm);
           done();
         }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('render tree structual data', (done) => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" row-key="release">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+      data() {
+        const testData = getTestData();
+        testData[1].children = [
+          {
+            name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+          },
+          {
+            name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+          }
+        ];
+        return {
+          testData: testData
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      const rows = vm.$el.querySelectorAll('.el-table__row');
+      expect(rows.length).to.equal(7);
+
+      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      expect(childRows.length).to.equal(2);
+      childRows.forEach(item => {
+        expect(item.style.display).to.equal('none');
+      });
+
+      vm.$el.querySelector('.el-table__expand-icon').click();
+
+      setTimeout(() => {
+        childRows.forEach(item => {
+          expect(item.style.display).to.equal('');
+        });
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('load substree row data', (done) => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" row-key="release" lazy :load="load">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+      data() {
+        const testData = getTestData();
+        testData[1].hasChildren = true;
+        return {
+          testData: testData
+        };
+      },
+      methods: {
+        load(row, treeNode, resolve) {
+          resolve([
+            {
+              name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+            },
+            {
+              name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+            }
+          ]);
+        }
+      }
+    }, true);
+    setTimeout(() => {
+      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+      expandIcon.click();
+      setTimeout(() => {
+        expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
+        expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(7);
+        done();
       }, DELAY);
     }, DELAY);
   });
