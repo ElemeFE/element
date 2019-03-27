@@ -232,7 +232,7 @@
       // do not use v-model / :value in template
       // see: https://github.com/ElemeFE/element/issues/14521
       nativeInputValue() {
-        this.setNativeInputValue();
+        this.$nextTick(this.setNativeInputValue);
       }
     },
 
