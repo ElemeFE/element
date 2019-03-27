@@ -1968,7 +1968,7 @@ describe('Table', () => {
       `,
       data() {
         const testData = getTestData();
-        testData[1].isLeaf = true;
+        testData[1].hasChildren = true;
         return {
           testData: testData
         };
