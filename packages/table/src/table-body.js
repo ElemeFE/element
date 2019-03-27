@@ -201,7 +201,8 @@ export default {
 
   data() {
     return {
-      tooltipContent: ''
+      tooltipContent: '',
+      hoverRow: null
     };
   },
 
@@ -273,7 +274,7 @@ export default {
         classes.push('current-row');
       }
 
-      if (rowIndex === this.store.states.hoverRow) {
+      if (rowIndex === this.hoverRow) {
         classes.push('hover-row');
       }
 
@@ -381,11 +382,11 @@ export default {
     },
 
     handleMouseEnter(index) {
-      this.store.commit('setHoverRow', index);
+      this.hoverRow = index;
     },
 
     handleMouseLeave() {
-      this.store.commit('setHoverRow', null);
+      this.hoverRow = null;
     },
 
     handleContextMenu(event, row) {

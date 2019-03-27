@@ -111,6 +111,7 @@
         fixedBodyHeight]">
         <table-body
           fixed="left"
+          ref="tableBody"
           :store="store"
           :stripe="stripe"
           :highlight="highlightCurrentRow"
@@ -385,7 +386,7 @@
       },
 
       handleMouseLeave() {
-        this.store.commit('setHoverRow', null);
+        this.$refs.tableBody.hoverRow = null;
         if (this.hoverState) this.hoverState = null;
       },
 
