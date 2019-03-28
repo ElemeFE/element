@@ -84,7 +84,7 @@
     prevYear,
     nextYear,
     nextMonth
-  } from '../util';
+  } from 'element-ui/src/utils/date-util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import MonthTable from '../basic/month-table';

@@ -261,6 +261,10 @@
               "title": "Divider 分割线"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
               "path": "/image",
               "title": "Image 图片"
             }
@@ -529,6 +533,10 @@
             {
               "path": "/divider",
               "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
             },
             {
               "path": "/image",
@@ -801,6 +809,10 @@
               "title": "Divider"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
               "path": "/image",
               "title": "Image"
             }
@@ -1069,6 +1081,10 @@
             {
               "path": "/divider",
               "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
             },
             {
               "path": "/image",

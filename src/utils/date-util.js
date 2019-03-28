@@ -1,4 +1,4 @@
-import dateUtil from 'element-ui/src/utils/date';
+import fecha from 'element-ui/src/utils/date';
 import { t } from 'element-ui/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -39,11 +39,11 @@ export const isDateObject = function(val) {
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
-  return dateUtil.format(date, format || 'yyyy-MM-dd', getI18nSettings());
+  return fecha.format(date, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const parseDate = function(string, format) {
-  return dateUtil.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
+  return fecha.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const getDayCountOfMonth = function(year, month) {
@@ -196,7 +196,7 @@ export const clearMilliseconds = function(date) {
 export const limitTimeRange = function(date, ranges, format = 'HH:mm:ss') {
   // TODO: refactory a more elegant solution
   if (ranges.length === 0) return date;
-  const normalizeDate = date => dateUtil.parse(dateUtil.format(date, format), format);
+  const normalizeDate = date => fecha.parse(fecha.format(date, format), format);
   const ndate = normalizeDate(date);
   const nranges = ranges.map(range => range.map(normalizeDate));
   if (nranges.some(nrange => ndate >= nrange[0] && ndate <= nrange[1])) return date;
