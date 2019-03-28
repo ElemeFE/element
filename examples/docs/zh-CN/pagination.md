@@ -118,6 +118,7 @@
   </div>
 </template>
 <script>
+  const { addClass } = require('element-ui/src/utils/dom');
   export default {
     methods: {
       handleSizeChange(val) {
@@ -134,6 +135,15 @@
         currentPage3: 5,
         currentPage4: 4
       };
+    },
+    mounted() {
+      this.$nextTick(() => {
+        let demos = document.querySelectorAll('.source');
+        let firstDemo = demos[0];
+        let lastDemo = demos[demos.length - 1];
+        addClass(firstDemo, 'last');
+        addClass(lastDemo, 'last');
+      });
     }
   }
 </script>
