@@ -233,6 +233,16 @@
       // see: https://github.com/ElemeFE/element/issues/14521
       nativeInputValue() {
         this.setNativeInputValue();
+      },
+      // when change between <input> and <textarea>,
+      // update DOM dependent value and styles
+      // https://github.com/ElemeFE/element/issues/14857
+      type() {
+        this.$nextTick(() => {
+          this.setNativeInputValue();
+          this.resizeTextarea();
+          this.updateIconOffset();
+        });
       }
     },
 
