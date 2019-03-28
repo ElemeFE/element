@@ -29,7 +29,7 @@
 - Docs
   - 更新 Cascader 文档 (#14442 by @panhezeng)
 - Style
-  - 修复媒体查询 sm-only, md-only, lg-only 问题(#14611 by @sinchang)
+  - 修复媒体查询 sm-only, md-only, lg-only 问题 (#14611 by @sinchang)
 
 #### 优化
 
