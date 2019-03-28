@@ -94,11 +94,10 @@
             before
               .then(() => {
                 changeCurrentName();
-
                 this.$refs.nav && this.$refs.nav.removeFocus();
-              })
-              .catch(() => {
-                // Just to prevent error from hitting dev's application
+              }, () => {
+                // https://github.com/ElemeFE/element/pull/14816
+                // ignore promise rejection in `before-leave` hook
               });
           } else if (before !== false) {
             changeCurrentName();
