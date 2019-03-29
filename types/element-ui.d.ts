@@ -61,6 +61,8 @@ import { ElTableColumn } from './table-column'
 import { ElTag } from './tag'
 import { ElTabs } from './tabs'
 import { ElTabPane } from './tab-pane'
+import { ElTagSelect } from './tag-select'
+import { ElTagSelectItem } from './tag-select-item'
 import { ElTimeline } from './timeline'
 import { ElTimelineItem } from './timeline-item'
 import { ElTimePicker } from './time-picker'
@@ -279,6 +281,12 @@ export class TabPane extends ElTabPane {}
 
 /** Tag Component */
 export class Tag extends ElTag {}
+
+/** TagSelect Component */
+export class TagSelect extends ElTagSelect{}
+
+/** TagSelect Item Component */
+export class TagSelectItem extends ElTagSelectItem{}
 
 /** Timeline Component */
 export class Timeline extends ElTimeline {}

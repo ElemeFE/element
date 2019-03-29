@@ -1,0 +1,31 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(tag-select) {
+  display: inline-block;
+  margin: 0 0 10px 0;
+  padding: 0;
+  list-style: none;
+
+
+  @include m(medium) {
+    @include e(item) {
+      height: 28px;
+      line-height: 28px;
+    }
+  }
+
+  @include m(small) {
+    @include e(item) {
+      height: 24px;
+      line-height: 24px;
+    }
+  }
+
+  @include m(mini) {
+    @include e(item) {
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(tag-select) {
+  @include e(item) {
+    display: inline-block;
+    height: 32px;
+    padding: 0 15px;
+    margin-left: 14px;
+    line-height: 32px;
+    font-size: $--font-size-base;
+    color: $--color-text-regular;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      color: $--color-primary;
+    }
+    &.active {
+      background: $--color-primary;
+      border-radius:2px;
+      color: $--color-white;
+    }
+    @include when(disabled) {
+      color: $--font-color-disabled-base;
+      cursor: not-allowed;
+      &:hover {
+        color: $--font-color-disabled-base;
+      }
+    }
+  }
+}
