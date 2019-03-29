@@ -74,6 +74,7 @@ import TimelineItem from '../packages/timeline-item/index.js';
 import Link from '../packages/link/index.js';
 import Divider from '../packages/divider/index.js';
 import Image from '../packages/image/index.js';
+import Calendar from '../packages/calendar/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -148,6 +149,7 @@ const components = [
   Link,
   Divider,
   Image,
+  Calendar,
   CollapseTransition
 ];
 

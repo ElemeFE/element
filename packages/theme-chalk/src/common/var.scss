@@ -885,6 +885,12 @@ $--link-warning-font-color: $--color-warning !default;
 $--link-danger-font-color: $--color-danger !default;
 /// color||Color|0
 $--link-info-font-color: $--color-info !default;
+/* Calendar
+--------------------------*/
+/// border||Other|4
+$--calendar-border: $--table-border !default;
+/// color||Other|4
+$--calendar-selected-background-color: #F2F8FE !default;
 
 /* Break-point
 --------------------------*/

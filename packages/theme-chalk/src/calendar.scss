@@ -2,4 +2,71 @@
 @import "common/var";
 
 @include b(calendar) {
+  background-color:#fff;
+
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: $--table-border;
+  }
+
+  @include e(title) {
+    color: #000000;
+    align-self: center;
+  }
+
+  @include e(body) {
+    padding: 15px 20px 35px;
+  }
+}
+
+@include b(calendar-table) {
+  table-layout: fixed;
+  padding-top: 12px;
+  width: 100%;
+
+  thead th {
+    padding: 12px 0;
+    color: $--color-text-regular;
+    font-weight: normal;
+  }
+
+  td {
+    border-bottom: $--calendar-border;
+    border-right: $--calendar-border;
+    vertical-align: top;
+    transition: background-color 0.2s ease;
+
+    &.prev,
+    &.next {
+      color: $--color-text-placeholder;
+    }
+
+    @include when(selected) {
+      background-color: $--calendar-selected-background-color;
+    }
+
+    @include when(today) {
+      color: $--color-primary;
+    }
+  }
+
+  tr:first-child td {
+    border-top: $--calendar-border;
+  }
+
+  tr td:first-child {
+    border-left: $--calendar-border;
+  }
+
+  @include b(calendar-day) {
+    box-sizing: border-box;
+    padding: 8px;
+    height: 85px;
+    &:hover {
+      cursor: pointer;
+      background-color: $--calendar-selected-background-color;
+    }
+  }
 }
