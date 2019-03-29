@@ -2,7 +2,7 @@
   <div class="el-calendar">
     <div class="el-calendar__header">
       <div class="el-calendar__title">
-        {{ formatedDate }}
+        {{ i18nDate }}
       </div>
       <div
         class="el-calendar__button-group"
@@ -12,19 +12,19 @@
             type="plain"
             size="mini"
             @click="selectDate('prev-month')">
-            上月
+            {{ t('el.datepicker.prevMonth') }}
           </el-button>
           <el-button
             type="plain"
             size="mini"
             @click="selectDate('today')">
-            今天
+            {{ t('el.datepicker.today') }}
           </el-button>
           <el-button
             type="plain"
             size="mini"
             @click="selectDate('next-month')">
-            下月
+            {{ t('el.datepicker.nextMonth') }}
           </el-button>
         </el-button-group>
       </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-// import { t } from 'element-ui/src/locale';
+import Locale from 'element-ui/src/mixins/locale';
 import fecha from 'element-ui/src/utils/date';
 import DateTable from './date-table';
 
@@ -48,6 +48,8 @@ const validTypes = ['prev-month', 'today', 'next-month'];
 
 export default {
   name: 'ElCalendar',
+
+  mixins: [Locale],
 
   components: {
     DateTable
@@ -121,6 +123,12 @@ export default {
 
     formatedDate() {
       return fecha.format(this.date, 'yyyy-MM-dd');
+    },
+
+    i18nDate() {
+      const year = this.formatedDate.slice(0, 4);
+      const month = this.formatedDate.slice(5, 7).replace('0', '');
+      return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`;
     },
 
     formatedToday() {
