@@ -17,13 +17,12 @@
   }
 
   @include e(body) {
-    padding: 15px 20px 35px;
+    padding: 12px 20px 35px;
   }
 }
 
 @include b(calendar-table) {
   table-layout: fixed;
-  padding-top: 12px;
   width: 100%;
 
   thead th {

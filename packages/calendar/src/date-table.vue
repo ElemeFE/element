@@ -1,36 +1,9 @@
-<template>
-  <table
-    class="el-calendar-table"
-    cellspacing="0"
-    cellpadding="0">
-      <thead>
-        <th v-for="day in DAYS" :key="day">{{ day }}</th>
-      </thead>
-      <tbody>
-        <tr
-          class="el-calendar-table__row"
-          v-for="(row, index) in rows"
-          :key="index">
-          <td
-            v-for="(cell, key) in row"
-            :key="key"
-            :class="getCellClass(cell)"
-            @click="pickDay(cell, $event)">
-              <div class="el-calendar-day">
-                <span>{{ cell.text }}</span>
-              </div>
-          </td>
-        </tr>
-      </tbody>
-  </table>
-</template>
-
 <script>
 import { range, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings } from 'element-ui/src/utils/date-util';
 export default {
 
   props: {
-    highlightDay: String, // formated date yyyy-MM-dd
+    selectedDay: String, // formated date yyyy-MM-dd
     date: Date
   },
 
@@ -55,7 +28,7 @@ export default {
       const classes = [type];
       if (type === 'current') {
         const date = this.getFormateDate(text, type);
-        if (date === this.highlightDay) {
+        if (date === this.selectedDay) {
           classes.push('is-selected');
         }
         if (date === this.formatedToday) {
@@ -65,9 +38,25 @@ export default {
       return classes;
     },
 
-    pickDay({ text, type }, event) {
+    pickDay({ text, type }) {
       const date = this.getFormateDate(text, type);
       this.$emit('pick', date);
+    },
+
+    cellRenderProxy({ text, type }) {
+      let render = this.elCalendar.$scopedSlots.dateCell;
+      if (!render) return <span>{ text }</span>;
+
+      const day = this.getFormateDate(text, type);
+      const date = new Date(day);
+      const data = {
+        isSelected: this.selectedDay === day,
+        type: `${type}-month`,
+        day
+      };
+      return render({
+        date, data
+      });
     }
   },
 
@@ -118,6 +107,37 @@ export default {
     return {
       DAYS: dayNames.slice(1).concat(dayNames[0])
     };
+  },
+
+  render() {
+    return (
+      <table
+        class="el-calendar-table"
+        cellspacing="0"
+        cellpadding="0">
+        <thead>
+          {
+            this.DAYS.map(day => <th key={day}>{ day }</th>)
+          }
+        </thead>
+        <tbody>
+          {
+            this.rows.map((row, index) => <tr class="el-calendar-table__row" key={index}>
+              {
+                row.map((cell, key) => <td key={key}
+                  class={ this.getCellClass(cell) }
+                  onClick={this.pickDay.bind(this, cell)}>
+                  <div class="el-calendar-day">
+                    {
+                      this.cellRenderProxy(cell)
+                    }
+                  </div>
+                </td>)
+              }
+            </tr>)
+          }
+        </tbody>
+      </table>);
   }
 };
 </script>

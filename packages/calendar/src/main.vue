@@ -30,7 +30,7 @@
     <div class="el-calendar__body">
       <date-table
         :date="date"
-        :highlight-day="highlightDay"
+        :selected-day="selectedDay"
         @pick="pickDay" />
     </div>
   </div>
@@ -58,7 +58,7 @@ export default {
 
   methods: {
     pickDay(day) {
-      this.highlightDay = day;
+      this.selectedDay = day;
       this.date = new Date(day);
     },
 
@@ -109,7 +109,7 @@ export default {
     const now = new Date();
     return {
       date: now, // defualt value is now
-      highlightDay: '',
+      selectedDay: '',
       now
     };
   }
