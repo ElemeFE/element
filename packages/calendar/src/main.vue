@@ -4,7 +4,9 @@
       <div class="el-calendar__title">
         {{ formatedDate }}
       </div>
-      <div class="el-calendar__button-group">
+      <div
+        class="el-calendar__button-group"
+        v-if="validatedRange.length === 0">
         <el-button-group>
           <el-button
             type="plain"
@@ -30,7 +32,8 @@
     <div class="el-calendar__body">
       <date-table
         :date="date"
-        :selected-day="selectedDay"
+        :selected-day="realSelectedDay"
+        :range="validatedRange"
         @pick="pickDay" />
     </div>
   </div>
@@ -50,6 +53,20 @@ export default {
     DateTable
   },
 
+  props: {
+    value: [Date, String],
+    range: {
+      type: Array,
+      validator(range) {
+        if (Array.isArray(range)) {
+          return range.length === 2 && range.every(item => typeof item === 'string' || item instanceof Date);
+        } else {
+          return true;
+        }
+      }
+    }
+  },
+
   provide() {
     return {
       elCalendar: this
@@ -58,8 +75,7 @@ export default {
 
   methods: {
     pickDay(day) {
-      this.selectedDay = day;
-      this.date = new Date(day);
+      this.realSelectedDay = day;
     },
 
     selectDate(type) {
@@ -77,6 +93,13 @@ export default {
 
       if (day === this.formatedDate) return;
       this.pickDay(day);
+    },
+
+    toDate(val) {
+      if (!val) {
+        throw new Error('invalid val');
+      }
+      return val instanceof Date ? val : new Date(val);
     }
   },
 
@@ -102,15 +125,72 @@ export default {
 
     formatedToday() {
       return fecha.format(this.now, 'yyyy-MM-dd');
+    },
+
+    realSelectedDay: {
+      get() {
+        if (!this.value) return this.selectedDay;
+        return this.formatedDate;
+      },
+      set(val) {
+        this.selectedDay = val;
+        const date = new Date(val);
+        this.$emit('input', date);
+      }
+    },
+
+    date() {
+      if (!this.value) {
+        if (this.realSelectedDay) {
+          return new Date(this.selectedDay);
+        } else if (this.validatedRange.length) {
+          return this.validatedRange[0];
+        }
+        return this.now;
+      } else {
+        return this.toDate(this.value);
+      }
+    },
+
+    validatedRange() {
+      let range = this.range;
+      if (!range) return [];
+      const expetedMap = {
+        0: {
+          value: 1,
+          message: 'start of range should be Monday.'
+        },
+        1: {
+          value: 0,
+          message: 'end of range should be Sunday.'
+        }
+      };
+      range = range.reduce((prev, val, index) => {
+        const date = this.toDate(val);
+        if (date.getDay() !== expetedMap[index].value) {
+          console.warn('[ElementCalendar]', expetedMap[index].message, ' validRange will be ignored');
+        } else {
+          prev = prev.concat(date);
+        }
+        return prev;
+      }, []);
+      if (range.length === 2) {
+        if (range[0].getMonth() === range[1].getMonth() && range[0].getFullYear() === range[1].getFullYear()) {
+          return range;
+        } else {
+          console.warn('[ElementCalendar] range must be within one month');
+          return [];
+        }
+      } else {
+        return [];
+      }
     }
   },
 
   data() {
-    const now = new Date();
     return {
-      date: now, // defualt value is now
       selectedDay: '',
-      now
+      now: new Date()
     };
   }
 };

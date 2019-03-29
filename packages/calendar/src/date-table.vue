@@ -4,12 +4,20 @@ export default {
 
   props: {
     selectedDay: String, // formated date yyyy-MM-dd
+    range: Array,
     date: Date
   },
 
   inject: ['elCalendar'],
 
   methods: {
+    toNestedArr(days) {
+      return range(days.length / 7).map((_, index) => {
+        const start = index * 7;
+        return days.slice(start, start + 7);
+      });
+    },
+
     getFormateDate(day, type) {
       if (!day || ['prev', 'current', 'next'].indexOf(type) === -1) {
         throw new Error('invalid day or type');
@@ -54,9 +62,7 @@ export default {
         type: `${type}-month`,
         day
       };
-      return render({
-        date, data
-      });
+      return render({ date, data });
     }
   },
 
@@ -78,27 +84,35 @@ export default {
     },
 
     rows() {
-      const date = this.date;
       let days = [];
-      const firstDay = getFirstDayOfMonth(date);
-      const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map(day => ({
-        text: day,
-        type: 'prev'
-      }));
-      const currentMonthDays = getMonthDays(date).map(day => ({
-        text: day,
-        type: 'current'
-      }));;
-      days = [...prevMonthDays, ...currentMonthDays];
-      const nextMonthDays = range(42 - days.length).map((_, index) => ({
-        text: index + 1,
-        type: 'next'
-      }));
-      days = days.concat(nextMonthDays);
-      return range(days.length / 7).map((_, index) => {
-        const start = index * 7;
-        return days.slice(start, start + 7);
-      });
+      // if range exists, should render days in range
+      if (this.range && this.range.length) {
+        const [start, end] = this.range;
+        for (let index = start.getDate(); index <= end.getDate(); index++) {
+          days.push({
+            text: index,
+            type: 'current'
+          });
+        }
+      } else {
+        const date = this.date;
+        const firstDay = getFirstDayOfMonth(date);
+        const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map(day => ({
+          text: day,
+          type: 'prev'
+        }));
+        const currentMonthDays = getMonthDays(date).map(day => ({
+          text: day,
+          type: 'current'
+        }));;
+        days = [...prevMonthDays, ...currentMonthDays];
+        const nextMonthDays = range(42 - days.length).map((_, index) => ({
+          text: index + 1,
+          type: 'next'
+        }));
+        days = days.concat(nextMonthDays);
+      }
+      return this.toNestedArr(days);
     }
   },
 
