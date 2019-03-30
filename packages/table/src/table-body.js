@@ -1,6 +1,5 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
 import { getStyle, hasClass } from 'element-ui/src/utils/dom';
-import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
@@ -11,7 +10,6 @@ export default {
   mixins: [LayoutObserver],
 
   components: {
-    ElCheckbox,
     ElTooltip
   },
 
@@ -28,122 +26,16 @@ export default {
   },
 
   render(h) {
-    const columnsHidden = this.columns.map((column, index) => this.isColumnHidden(index));
-    let rows = this.data;
-    if (this.store.states.lazy && Object.keys(this.store.states.lazyTreeNodeMap).length) {
-      rows = rows.reduce((prev, item) => {
-        prev.push(item);
-        const rowKey = this.store.table.getRowKey(item);
-        const parent = this.store.states.treeData[rowKey];
-        if (parent && parent.children) {
-          const tmp = [];
-          const traverse = (children) => {
-            if (!children) return;
-            children.forEach(key => {
-              tmp.push(this.store.states.lazyTreeNodeMap[key]);
-              if (this.store.states.treeData[key]) {
-                traverse(this.store.states.treeData[key].children);
-              }
-            });
-          };
-          traverse(parent.children);
-          prev = prev.concat(tmp);
-        }
-        return prev;
-      }, []);
-    }
+    const rows = this.isTree && this.isLazy ? this.prepareTreeData(this.data) : this.data;
+
     return (
       <table
         class="el-table__body"
         cellspacing="0"
         cellpadding="0"
         border="0">
-        <colgroup>
-          {
-            this._l(this.columns, column => <col name={ column.id } />)
-          }
-        </colgroup>
-        <tbody>
-          {
-            this._l(rows, (row, $index) => {
-              const rowKey = this.table.rowKey ? this.getKeyOfRow(row, $index) : $index;
-              const treeNode = this.treeData[rowKey];
-              const rowClasses = this.getRowClass(row, $index);
-              if (treeNode) {
-                rowClasses.push('el-table__row--level-' + treeNode.level);
-              }
-              const tr = (<tr
-                v-show={ treeNode ? treeNode.display : true }
-                style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
-                key={ rowKey }
-                on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-                on-click={ ($event) => this.handleClick($event, row) }
-                on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
-                on-mouseenter={ _ => this.handleMouseEnter($index) }
-                on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ rowClasses }>
-                {
-                  this._l(this.columns, (column, cellIndex) => {
-                    const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
-                    if (!rowspan || !colspan) {
-                      return '';
-                    } else {
-                      const data = {
-                        store: this.store,
-                        _self: this.context || this.table.$vnode.context,
-                        row,
-                        column,
-                        $index
-                      };
-                      if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
-                        data.treeNode = {
-                          hasChildren: treeNode.hasChildren || (treeNode.children && treeNode.children.length),
-                          expanded: treeNode.expanded,
-                          indent: treeNode.level * this.treeIndent,
-                          level: treeNode.level,
-                          loaded: treeNode.loaded,
-                          rowKey
-                        };
-                      }
-                      return (
-                        <td
-                          style={ this.getCellStyle($index, cellIndex, row, column) }
-                          class={ this.getCellClass($index, cellIndex, row, column) }
-                          rowspan={ rowspan }
-                          colspan={ colspan }
-                          on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                          on-mouseleave={ this.handleCellMouseLeave }>
-                          {
-                            column.renderCell.call(
-                              this._renderProxy,
-                              h,
-                              data,
-                              columnsHidden[cellIndex]
-                            )
-                          }
-                        </td>
-                      );
-                    }
-                  })
-                }
-              </tr>);
-              if (this.hasExpandColumn && this.store.isRowExpanded(row)) {
-                return [
-                  tr,
-                  <tr>
-                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
-                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
-                    </td>
-                  </tr>
-                ];
-              } else {
-                return tr;
-              }
-            }).concat(
-              <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
-            )
-          }
-        </tbody>
+        { this.renderColGroup() }
+        { this.renderBody(rows) }
       </table>
     );
   },
@@ -200,6 +92,18 @@ export default {
 
     treeIndent() {
       return this.store.states.indent;
+    },
+
+    hiddenColumns() {
+      return this.columns.map((column, index) => this.isColumnHidden(index));
+    },
+
+    isTree() {
+      return Object.keys(this.store.states.lazyTreeNodeMap).length;
+    },
+
+    isLazy() {
+      return this.store.states.lazy;
     }
   },
 
@@ -271,7 +175,7 @@ export default {
       return rowStyle;
     },
 
-    getRowClass(row, rowIndex) {
+    getRowClass(row, rowIndex, rowKey) {
       const classes = ['el-table__row'];
       if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
         classes.push('current-row');
@@ -296,6 +200,10 @@ export default {
 
       if (this.store.states.expandRows.indexOf(row) > -1) {
         classes.push('expanded');
+      }
+
+      if (this.treeData[rowKey]) {
+        classes.push('el-table__row--level-' + this.treeData[rowKey].level);
       }
 
       return classes;
@@ -334,6 +242,30 @@ export default {
       }
 
       return classes.join(' ');
+    },
+
+    prepareTreeData(rows) {
+      const traverse = (children) => {
+        if (!children) return [];
+        return children.reduce((all, key) => {
+          all.push(this.store.states.lazyTreeNodeMap[key]);
+          if (this.store.states.treeData[key]) {
+            return all.concat(traverse(this.store.states.treeData[key].children));
+          }
+          return all;
+        }, []);
+      };
+
+      return rows.reduce((prev, item) => {
+        prev.push(item);
+        const rowKey = this.store.table.getRowKey(item);
+        const parent = this.store.states.treeData[rowKey];
+        if (parent && parent.children) {
+          const tmp = traverse(parent.children);
+          return prev.concat(tmp);
+        }
+        return prev;
+      }, []);
     },
 
     handleCellMouseEnter(event, row) {
@@ -421,6 +353,109 @@ export default {
     handleExpandClick(row, e) {
       e.stopPropagation();
       this.store.toggleRowExpansion(row);
+    },
+
+    renderColGroup() {
+      return <colgroup>
+        {this._l(this.columns, column => <col name={ column.id } />)}
+      </colgroup>;
+    },
+
+    renderRowColumns(row, $index, rowKey) {
+      const treeNode = this.treeData[rowKey];
+      return this._l(this.columns, (column, cellIndex) => {
+        const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
+        if (!rowspan || !colspan) {
+          return '';
+        }
+        const data = {
+          store: this.store,
+          _self: this.context || this.table.$vnode.context,
+          row,
+          column,
+          $index
+        };
+        if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
+          data.treeNode = {
+            hasChildren: treeNode.hasChildren || (treeNode.children && treeNode.children.length),
+            expanded: treeNode.expanded,
+            indent: treeNode.level * this.treeIndent,
+            level: treeNode.level,
+            loaded: treeNode.loaded,
+            rowKey
+          };
+        }
+        return (
+          <td
+            style={ this.getCellStyle($index, cellIndex, row, column) }
+            class={ this.getCellClass($index, cellIndex, row, column) }
+            rowspan={ rowspan }
+            colspan={ colspan }
+            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+            on-mouseleave={ this.handleCellMouseLeave }>
+            {
+              column.renderCell.call(
+                this._renderProxy,
+                this.$createElement,
+                data,
+                this.hiddenColumns[cellIndex]
+              )
+            }
+          </td>
+        );
+      });
+    },
+
+    renderExpandableRow(row, $index) {
+      const isExpanded = this.hasExpandColumn && this.store.isRowExpanded(row);
+
+      if (!isExpanded) {
+        return '';
+      }
+
+      return <tr>
+        <td colspan={ this.columns.length } class="el-table__expanded-cell">
+          { this.table.renderExpanded ? this.table.renderExpanded(this.$createElement, { row, $index, store: this.store }) : ''}
+        </td>
+      </tr>;
+    },
+
+    renderTableTooltip() {
+      return <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent } />;
+    },
+
+    renderRows(rows) {
+      return this._l(rows, (row, $index) => {
+        return [
+          this.renderRow(row, $index),
+          this.renderExpandableRow(row, $index)
+        ];
+      }).concat(
+        this.renderTableTooltip()
+      );
+    },
+
+    renderRow(row, $index) {
+      const rowKey = this.table.rowKey ? this.getKeyOfRow(row, $index) : $index;
+      const rowClasses = this.getRowClass(row, $index, rowKey);
+      const treeNode = this.treeData[rowKey];
+
+      return <tr
+        v-show={ treeNode ? treeNode.display : true }
+        style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
+        key={ rowKey }
+        on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
+        on-click={ ($event) => this.handleClick($event, row) }
+        on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
+        on-mouseenter={ _ => this.handleMouseEnter($index) }
+        on-mouseleave={ _ => this.handleMouseLeave() }
+        class={ rowClasses }>
+        { this.renderRowColumns(row, $index, rowKey) }
+      </tr>;
+    },
+
+    renderBody(rows) {
+      return <tbody>{ this.renderRows(rows) }</tbody>;
     }
   }
 };
