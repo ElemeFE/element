@@ -484,7 +484,7 @@
 
       getRowKey(row) {
         const rowKey = getRowIdentity(row, this.store.states.rowKey);
-        if (!rowKey) {
+        if (!rowKey && rowKey !== 0) {
           throw new Error('if there\'s nested data, rowKey is required.');
         }
         return rowKey;
