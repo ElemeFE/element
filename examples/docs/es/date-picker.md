@@ -72,7 +72,7 @@ Date Picker básico por "día".
 
 ### Otras mediciones
 
-You can choose week, month, year or multiple dates by extending the standard date picker component.
+Puede elegir la semana, el mes, el año o varias fechas ampliando el componente estándar del selector de fechas.
 
 :::demo
 
@@ -205,11 +205,11 @@ Se soporta la selección de un rango de fechas.
 
 :::
 
-### Month Range
+### Rango de mes
 
-Picking a month range is supported.
+Se admite la selección de un intervalo de un mes.
 
-:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current years independently, you can use the `unlink-panels` attribute.
+:::demo Cuando se encuentra en el modo de rango, los paneles izquierdo y derecho están enlazados de forma predeterminada. Si desea que los dos paneles cambien de año en curso de forma independiente, puede utilizar el atributo unlink-panels.
 ```html
 <template>
   <div class="block">
@@ -484,6 +484,6 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | focus  | coloca el foco en el input | —           |
 
 ### Slots
-| Name             | Description                     |
-|------------------|-------------------------------- |
-| range-separator  | costume range separator content |
+| Name            | Description                           |
+| --------------- | ------------------------------------- |
+| range-separator | Separador de los rangos personalizado |

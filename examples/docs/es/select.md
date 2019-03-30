@@ -539,11 +539,11 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | collapse-tags        | si se colapsan los tags a un texto cuando `multiple` es `true`. | boolean  | —                 | false            |
 | value-key            | nombre de clave de identidad única para el valor, necesario cuando el valor es un objeto. | string   | —                 | value            |
 | size                 | tamaño del Input                         | string   | large/small/mini  | —                |
-| clearable            | whether select can be cleared  | boolean  | —                 | false            |
+| clearable            | si el select puede ser limpiado | boolean  | —                 | false            |
 | multiple-limit       | maximo numero de opciones que el usuario puede seleccionar cuando `multiple` es `true`.  Sin límite cuando se fija a 0 | number   | —                 | 0                |
 | name                 | el atributo `name` del input seleccionado | string   | —                 | —                |
 | autocomplete         | el atributo `autocomplete` del input seleccionado | string   | —         | off              |
-| auto-complete         | @DEPRECATED in next major version | string   | —         | off              |
+| auto-complete         | @DEPRECATED en la proxima major version | string   | —         | off              |
 | placeholder          | placeholder                              | string   | —                 | Select           |
 | filterable           | si Select es filtrable                   | boolean  | —                 | false            |
 | allow-create         | si esta permitido crear nuevos items. Para usar esto, `filterable` debe ser `true`. | boolean  | —                 | false            |
@@ -551,8 +551,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | remote               | si las opciones se traeran desde el servidor | boolean  | —                 | false            |
 | remote-method        | metodo de busqueda remota personalizada  | function | —                 | —                |
 | loading              | si Select está cargando datos del servidor | boolean  | —                 | false            |
-| loading-text         | texto mostrado durante la carga de datos del servidor, 也可以使用`slot="empty"`设置 | string   | —                 | Loading          |
-| no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. 也可以使用`slot="empty"`设置| string   | —                 | No matching data |
+| loading-text         | texto mostrado durante la carga de datos del servidor, también puedes usar la configuración de slot = "empty" | string   | —                 | Loading          |
+| no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. También puedes usar la configuración de slot = "empty" | string   | —                 | No matching data |
 | no-data-text         | texto mostrado cuando no hay opciones    | string   | —                 | No data          |
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
@@ -575,7 +575,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 |---------|-------------|
 |    —    | lista de los componentes Option |
 | prefix  | contenido prefix de un  Select |
-| empty | 无选项时的列表 |
+| empty | Lista sin opciones |
 
 ### Atributos del grupo de opciones
 | Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |

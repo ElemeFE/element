@@ -399,7 +399,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en codepen.io ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <div class="custom-tree-container">
   <div class="block">
@@ -802,7 +802,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
 | check-strictly        | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
 | default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
-| current-node-key      | key of initially selected node | string, number                       | —               | —       |
+| current-node-key      | la clave del nodo inicialmente seleccionado | string, number                       | —               | —       |
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
@@ -834,7 +834,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | return the highlight node's data (null if no node is highlighted)         | —                                        |
-| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
+| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. Si es `null`, cancela los nodos actualmente resaltados |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
 | remove          | elimina un nodo, solo funciona si `node-key` está asignado  | (data) los datos del nodo o nodo a borrar |
