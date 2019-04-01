@@ -238,7 +238,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Scoped Slot
 | Name | Description |
 |------|--------|
-| — | Custom content for data items. The scope parameter is { option } |
+| — | Contenido personalizado para los datos de los items. El parametro del scope es { option } |
 
 ### Methods
 | Method | Description | Parameters |

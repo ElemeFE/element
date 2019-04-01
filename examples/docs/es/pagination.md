@@ -22,9 +22,9 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 ```
 :::
 
-### Number of pagers
+### Numeros de paginas
 
-:::demo By default, Pagination collapses extra pager buttons when it has more than 7 pages. This can be configured with the `pager-count` attribute.
+:::demo De forma predeterminada, Pagination colapsa los botones del paginador adicionales cuando tiene más de 7 páginas. Esto se puede configurar con el atributo `pager-count`.
 ```html
 <el-pagination
   :page-size="20"

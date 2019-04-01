@@ -120,5 +120,5 @@ Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 | value    | valor a mostrar                          | string, number | —                 | —           |
 | max      | valor máximo, Muestra '{max}+' cuando se excede. Solo funciona si `value` es un `Number` | number         | —                 | —           |
 | is-dot   | si se debe mostrar un pequeño punto      | boolean        | —                 | false       |
-| hidden   | hidden badge                             | boolean        | —                 | false       |
+| hidden   | oculta el badge                    | boolean        | —                 | false       |
 | type     | tipo de botón                            | string         | primary / success / warning / danger / info | — |
