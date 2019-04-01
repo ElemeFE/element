@@ -1281,54 +1281,56 @@
 
 ```html
 <template>
-<div>
-  <el-table
-    :data="tableData"
-    style="width: 100%;margin-bottom: 20px;"
-    border
-    row-key="id">
-    <el-table-column
-      prop="date"
-      label="日期"
-      sortable
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      sortable
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址">
-    </el-table-column>
-  </el-table>
+    <div>
+        <el-table
+                :data="tableData"
+                style="width: 100%;margin-bottom: 20px;"
+                border
+                row-key="id"
+                tree-children-prop="customChildren"
+        >
+            <el-table-column
+                    prop="date"
+                    label="日期"
+                    sortable
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    sortable
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="地址">
+            </el-table-column>
+        </el-table>
 
-  <el-table
-    :data="tableData1"
-    style="width: 100%"
-    row-key="id"
-    border
-    lazy
-    :load="load"
-    >
-    <el-table-column
-      prop="date"
-      label="日期"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址">
-    </el-table-column>
-  </el-table>
-</div>
+        <el-table
+                :data="tableData1"
+                style="width: 100%"
+                row-key="id"
+                border
+                lazy
+                :load="load"
+        >
+            <el-table-column
+                    prop="date"
+                    label="日期"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="地址">
+            </el-table-column>
+        </el-table>
+    </div>
 </template>
 <script>
   export default {
@@ -1349,16 +1351,16 @@
           date: '2016-05-01',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1519 弄',
-          children: [{
-              id: 31,
-              date: '2016-05-01',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-              id: 32,
-              date: '2016-05-01',
-              name: '王小虎',
-              address: '上海市普陀区金沙江路 1519 弄'
+          customChildren: [{
+            id: 31,
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            id: 32,
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
           }]
         }, {
           id: 4,
@@ -1875,7 +1877,8 @@
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
-| select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true |
+| select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true 
+| tree-children-prop | 获得树形子节点数据的属性名 | String | — | children |
 | indent      | 展示树形数据时，树节点的缩进 | Number | — | 16 |
 | lazy        | 是否懒加载子节点数据 | Boolean | — | — |
 | load        | 加载子节点数据的函数，lazy 为 true 时生效 | Function({ row, treeNode, resolve }) | — | — |

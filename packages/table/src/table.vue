@@ -226,14 +226,15 @@
   import TableFooter from './table-footer';
   import { getRowIdentity } from './util';
 
-  const flattenData = function(data) {
+  const flattenData = function(data, treeChildrenProp) {
     if (!data) return data;
     let newData = [];
     const flatten = arr => {
       arr.forEach((item) => {
         newData.push(item);
-        if (Array.isArray(item.children)) {
-          flatten(item.children);
+        const children = item[treeChildrenProp];
+        if (Array.isArray(children)) {
+          flatten(children);
         }
       });
     };
@@ -331,6 +332,11 @@
       selectOnIndeterminate: {
         type: Boolean,
         default: true
+      },
+
+      treeChildrenProp: {
+        type: String,
+        default: 'children'
       },
 
       indent: {
@@ -500,16 +506,18 @@
               level
             };
             parentData.children.push(rowKey);
-            if (Array.isArray(item.children) && item.children.length) {
+            const children = item[this.treeChildrenProp];
+            if (Array.isArray(children) && children.length) {
               treeData[rowKey].children = [];
               treeData[rowKey].expanded = false;
-              traverse(item.children, treeData[rowKey], level + 1);
+              traverse(children, treeData[rowKey], level + 1);
             }
           });
         };
         if (data) {
           data.forEach(item => {
-            const containChildren = Array.isArray(item.children) && item.children.length;
+            const children = item[this.treeChildrenProp];
+            const containChildren = Array.isArray(children) && children.length;
             if (!(containChildren || item.hasChildren)) return;
             const rowKey = this.getRowKey(item);
             const treeNode = {
@@ -520,7 +528,7 @@
             };
             if (containChildren) {
               treeData[rowKey] = treeNode;
-              traverse(item.children, treeData[rowKey], 1);
+              traverse(children, treeData[rowKey], 1);
             } else if (item.hasChildren && this.lazy) {
               treeNode.hasChildren = true;
               treeNode.loaded = false;
@@ -661,7 +669,7 @@
         immediate: true,
         handler(value) {
           this.store.states.treeData = this.getTableTreeData(value);
-          value = flattenData(value);
+          value = flattenData(value, this.treeChildrenProp);
           this.store.commit('setData', value);
           if (this.$ready) {
             this.$nextTick(() => {
