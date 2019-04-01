@@ -24,7 +24,7 @@ describe('Calendar', () => {
     expect(rows.length).to.equal(6);
     rows[5].firstElementChild.click();
 
-    waitImmediate();
+    await waitImmediate();
 
     expect(/2019.*5/.test(titleEl.innerText)).to.be.true;
     const value = vm.value;

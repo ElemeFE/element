@@ -62,7 +62,7 @@
   @include b(calendar-day) {
     box-sizing: border-box;
     padding: 8px;
-    height: 85px;
+    height: $--calendar-cell-width;
     &:hover {
       cursor: pointer;
       background-color: $--calendar-selected-background-color;
