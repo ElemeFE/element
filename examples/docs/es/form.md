@@ -389,7 +389,7 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 :::
 
 :::tip
-See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+Ver más sobre el uso avanzado de la validacion de reglas en [async-validator](https://github.com/yiminghe/async-validator).。
 :::
 
 ### Eliminar o agregar validaciones dinamicamente

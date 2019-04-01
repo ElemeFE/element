@@ -3,11 +3,11 @@
 Ingresa datos usando el ratón o teclado.
 
 :::warning
-Input is a controlled component, it **always shows Vue binding value**.
+Input es un componente controlado, **siempre muestra el valor de enlace Vue**.
 
-Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
+Bajo circunstancias normales, el evento "input" debe ser manejado. Su handler debe actualizar el valor de enlace del componente (o usar `v-model`). De lo contrario, el valor del cuadro de entrada no cambiará.
 
-Do not support `v-model` modifiers.
+No admite modificadores `v-model`.
 :::
 
 ### Uso básico
@@ -79,7 +79,7 @@ export default {
 
 ### Password box
 
-:::demo Make a toggleable password Input with the `show-password` attribute.
+:::demo Haga un input de contraseña conmutable con el atributo `show-password`.
 
 ```html
 <el-input placeholder="Please input password" v-model="input11" show-password></el-input>
@@ -540,12 +540,12 @@ Búsqueda de datos desde el servidor.
 | Atributo      | Descripción                                                                                                                                      | Tipo             | Valores aceptados                                                                                                                       | Por defecto |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | type          | tipo de input                                                                                                                                    | string           | text, textarea y otros [tipos de entrada nativos](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/input#Form_%3Cinput%3E_types) | text        |
-| value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |                                                                                                                                | —           |
+| value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
-| clearable | whether to show clear button | boolean | — | false |
-| show-password | whether to show toggleable password input| boolean         | — | false |
+| clearable | si debe mostrar el boton de limpieza | boolean | — | false |
+| show-password | si debe mostrar la posibilidad de conmutacion de password input | boolean         | — | false |
 | disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
 | size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
 | prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |

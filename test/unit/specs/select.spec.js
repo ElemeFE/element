@@ -288,7 +288,7 @@ describe('Select', () => {
       const iconClear = vm.$el.querySelector('.el-input__icon.el-icon-circle-close');
       expect(iconClear).to.exist;
       iconClear.click();
-      expect(vm.value).to.equal('');
+      expect(vm.value).to.equal(null);
       done();
     }, 100);
   });

@@ -1330,6 +1330,123 @@ When the row content is too long and you do not want to display the horizontal s
 ```
 :::
 
+### Tree data and lazy mode
+
+:::demo You can display tree structure data。When using it, the prop `row-key` is required。Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `hasChildren` attribute in row to determine which row contains children.
+
+```html
+<template>
+<div>
+  <el-table
+    :data="tableData"
+    style="width: 100%;margin-bottom: 20px;"
+    border
+    row-key="id">
+    <el-table-column
+      prop="date"
+      label="日期"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="name"
+      sortable
+      width="180">
+    </el-table-column>
+  </el-table>
+
+  <el-table
+    :data="tableData1"
+    style="width: 100%"
+    row-key="id"
+    border
+    lazy
+    :load="load"
+    >
+    <el-table-column
+      prop="date"
+      label="date"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="name"
+      width="180">
+    </el-table-column>
+  </el-table>
+</div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          id: 1,
+          date: '2016-05-02',
+          name: 'wangxiaohu'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: 'wangxiaohu'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: 'wangxiaohu',
+          children: [{
+              id: 31,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+          }]
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: 'wangxiaohu'
+        }],
+        tableData1: [{
+          id: 1,
+          date: '2016-05-02',
+          name: 'wangxiaohu'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: 'wangxiaohu'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: 'wangxiaohu',
+          hasChildren: true
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: 'wangxiaohu'
+        }]
+      }
+    },
+    methods: {
+      load(tree, treeNode, resolve) {
+        resolve([
+          {
+            id: 31,
+            date: '2016-05-01',
+            name: 'wangxiaohu'
+          }, {
+            id: 32,
+            date: '2016-05-01',
+            name: 'wangxiaohu'
+          }
+        ])
+      }
+    },
+  }
+</script>
+```
+:::
+
 ### Summary row
 
 For table of numbers, you can add an extra row at the table footer displaying each column's sum.
@@ -1706,7 +1823,7 @@ You can customize row index in `type=index` columns.
 | header-row-style | function that returns custom style for a row in table header, or an object assigning custom style for every row in table header | Function({row, rowIndex})/Object | — | — |
 | header-cell-class-name | function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header | Function({row, column, rowIndex, columnIndex})/String | — | — |
 | header-cell-style | function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header | Function({row, column, rowIndex, columnIndex})/Object | — | — |
-| row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
+| row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on or display tree data. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
@@ -1717,6 +1834,9 @@ You can customize row index in `type=index` columns.
 | summary-method | custom summary method | Function({ columns, data }) | — | — |
 | span-method | method that returns rowspan and colspan | Function({ row, column, rowIndex, columnIndex }) | — | — |
 | select-on-indeterminate | controls the behavior of master checkbox in multi-select tables when only some rows are selected (but not all). If true, all rows will be selected, else deselected. | Boolean | — | true |
+| indent      | horizontal indentation of tree data | Number | — | 16 |
+| lazy        | whether to lazy loading data           | Boolean| — | —  |
+| load        | method for loading child row data, only works when `lazy` is true | Function({ row, treeNode, resolve }) | — | — |
 
 ### Table Events
 | Event Name | Description | Parameters |

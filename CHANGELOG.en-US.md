@@ -1,5 +1,41 @@
 ## Changelog
 
+### 2.7.0
+
+*2019-03-28*
+
+#### New features
+
+- Table
+  - Add support tree structure data (#14632 by @ziyoung)
+
+#### Bug fixes
+
+- Tabs
+  - Use primary color as boxShadow color (#14558 by @Richard-Choooou)
+  - Rerender when label changes (#14496 by @akki-jat)
+- Table
+  - Footer follows body cell align (#14730 by @ziyoung)
+- NavMenu
+  - Fix click el-submenu trigger childMenu pop again bug (#14443 by @PanJiaChen)
+- Dropdown
+  - Make compatible with 2.6 new v-slot syntax (#14832 by @ziyoung)
+- ColorPicker
+  - Fix handle error hex color string (#14793 by @iamkun)
+- Tree
+  - Revert pr #13349 (#14847 by @ziyoung)
+- Tooltip
+  - Display when initial value is true (#14826 by @ziyoung)
+- Docs
+  - Update cascader docs (#14442 by @panhezeng)
+- Style
+  - Fix media query in sm-only, md-only, lg-only (#14611 by @sinchang)
+
+#### Optimization
+
+- Chore
+  - Add webpage description (#14802 by @iamkun)
+
 ### 2.6.3
 
 *2019-03-21*

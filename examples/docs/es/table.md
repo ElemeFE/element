@@ -1332,6 +1332,123 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 ```
 :::
 
+### Datos tree y modo lazy
+
+:::demo Puede mostrar la estructura de datos tipo tree。Cuando se usa, la prop`row-key` es requerida。Entonces, los datos de las filas de los hijos pueden ser cargados asincrónicamente. Poner la propiedad `lazy` de Table a true y la función `load`. Especifique el atributo `hasChildren` en la fila para determinar qué fila contiene hijos.
+
+```html
+<template>
+<div>
+  <el-table
+    :data="tableData"
+    style="width: 100%;margin-bottom: 20px;"
+    border
+    row-key="id">
+    <el-table-column
+      prop="date"
+      label="日期"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="name"
+      sortable
+      width="180">
+    </el-table-column>
+  </el-table>
+
+  <el-table
+    :data="tableData1"
+    style="width: 100%"
+    row-key="id"
+    border
+    lazy
+    :load="load"
+    >
+    <el-table-column
+      prop="date"
+      label="date"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="name"
+      width="180">
+    </el-table-column>
+  </el-table>
+</div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          id: 1,
+          date: '2016-05-02',
+          name: 'wangxiaohu'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: 'wangxiaohu'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: 'wangxiaohu',
+          children: [{
+              id: 31,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+          }]
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: 'wangxiaohu'
+        }],
+        tableData1: [{
+          id: 1,
+          date: '2016-05-02',
+          name: 'wangxiaohu'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: 'wangxiaohu'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: 'wangxiaohu',
+          hasChildren: true
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: 'wangxiaohu'
+        }]
+      }
+    },
+    methods: {
+      load(tree, treeNode, resolve) {
+        resolve([
+          {
+            id: 31,
+            date: '2016-05-01',
+            name: 'wangxiaohu'
+          }, {
+            id: 32,
+            date: '2016-05-01',
+            name: 'wangxiaohu'
+          }
+        ])
+      }
+    },
+  }
+</script>
+```
+:::
+
 ### Fila de resumen
 
 Para una tabla de números, puede agregar una fila extra en el pie de página de la tabla que muestra la suma de cada columna.
@@ -1711,7 +1828,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | header-row-style       | función que devuelve estilos personalizados para una fila en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada fila en la cabecera de la tabla | Function({row, rowIndex})/Object         | —                              | —                                        |
 | header-cell-class-name | función que devuelve nombre de clases personalizadas para una celda en la cabecera de la tabla, o una cadena asignando nombres de clases para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/String         | —                              | —                                        |
 | header-cell-style      | función que devuelve estilos personalizados para una celda en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/Object         | —                              | —                                        |
-| row-key                | clave de datos de la fila, utilizada para optimizar la representación de los datos. Es obligatorio `reserve-selection` esta habilitado. Cuando su tipo es string, se permite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no es permitido, en cuyo caso se debe usar una `function` | Function(row)/String                     | —                              | —                                        |
+| row-key | key de los datos de las filas, utilizada para optimizar el renderizado. Requerido si `reserve-selection` está activada o muestra los datos del árbol. Cuando su tipo es String, se admite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no se admite, en cuyo caso se debe utilizar la función. | Function(row)/String | — | — |
 | empty-text             | Texto mostrado cuando no existen datos. Puede personalizar esta área con `slot="empty"` | String                                   | —                              | No Data                                  |
 | default-expand-all     | especifica si todas las filas se expanden por defeto, solo funciona cuando la tabla tiene una columna `type="expand"` | Boolean                                  | —                              | false                                    |
 | expand-row-keys        | establece las filas expandidas a través de esta propiedad, este valor es la clave de filas expandidas, debería establecer `row-key` antes de usar esta propiedad | Array                                    | —                              |                                          |
@@ -1721,7 +1838,10 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sum-text               | texto a mostrar para la primer columna de la fila de resumen | String                                   | —                              | Sum                                      |
 | summary-method         | método personalizado para resumen        | Function({ columns, data })              | —                              | —                                        |
 | span-method            | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | —                              | —                                        |
-| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas. | Boolean | — | true |
+| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas.               | Boolean   | — | true |
+| indent                 | indentación horizontal de los datos en formato tree | Number    | — | 16   |
+| lazy                   | si se realiza un lazy loading de los datos | Boolean   | — | —    |
+| load                   | metodo para cargar las filas de los hijos, solamente funciona cuando `lazy`es true | Function({ row, treeNode, resolve }) | — | — |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |
@@ -1777,7 +1897,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sortable              | especifica que columna puede ser ordenado. El ordenamiento remoto puede ser hecho configurando el atributo `custom` y escucha al evento de tabla `sort-change` | boolean, string                   | true, false, custom           | false       |
 | sort-method           | método de ordenamiento, funciona cuando `sortable` está en `true`. Debería devolver un número, al igual que Array.sort | Function(a, b)                    | —                             | —           |
 | sort-by               | especifica por cual propiedad de va a ordenar, funciona cuando `sortable` es `true` y `sort-method` es `undefined`. Si se establece a un arreglo, la columna ordenara secuencialmente por la siguiente propiedad si la anterior es igual | Function(row, index)/String/Array | —                             | —           |
-| sort-orders           | the order of the sorting strategies used when sorting the data, works when `sortable` is `true`. Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array | array | the elements in the array need to be one of the following: `ascending`, `descending` and `null` (restores to the original order) | ['ascending', 'descending', null] |
+| sort-orders           | el orden de las estrategias de ordenación utilizadas al ordenar los datos, funciona cuando `sortable` es `true`. Acepta un array, a medida que el usuario hace clic en el encabezado, la columna se ordena en el orden de los elementos del array. | array | los elementos en el arreglo necesitan ser uno de los siguientes: `ascending`, `descending` y `null` (restaura el orden original) | ['ascending', 'descending', null] |
 | resizable             | especifica si el ancho de la columna puede ser redimensionado, funciona cuando `border` de `el-table` está en `true` | boolean                           | —                             | false       |
 | formatter             | función que formatea el contenido de la celda | Function(row, column, cellValue, index)  | —                             | —           |
 | show-overflow-tooltip | especifica si el _tooltip_ debe ocultarse o mostrarse al hacer _hover_ en la celda | boolean                           | —                             | false       |
@@ -1786,7 +1906,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | class-name            | nombre de clase de la celda en la columna | string                            | —                             | —           |
 | label-class-name      | nombre de clase de la etiqueta de esta columna | string                            | —                             | —           |
 | selectable            | función que determina si una cierta fila puede ser seleccionada, funciona cuando `type` esta en `selection` | Function(row, index)              | —                             | —           |
-| reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection`. Note that `row-key` is required for this to work | boolean                           | —                             | false       |
+| reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection`. Note que `row-key` es requerido para que esto funcione | boolean                           | —                             | false       |
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
 | filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |

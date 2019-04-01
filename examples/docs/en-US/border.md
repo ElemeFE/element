@@ -119,13 +119,13 @@ There are few radius styles to choose.
 
 ### Shadow
 
-There are few shaodw styles to choose.
+There are few shadow styles to choose.
 
 <div 
 class="demo-shadow"
 :style="{ boxShadow: boxShadowBase }"
 ></div>
-<span class="demo-shadow-text">Basic Shaodw box-shadow: {{boxShadowBase}}</span>
+<span class="demo-shadow-text">Basic Shadow box-shadow: {{boxShadowBase}}</span>
 
 <div 
 class="demo-shadow"

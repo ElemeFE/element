@@ -76,6 +76,11 @@
     }
   }
 
+  @include e(placeholder) {
+    display: inline-block;
+    width: 20px;
+  }
+
   @include m(fit) {
     border-right: 0;
     border-bottom: 0;
@@ -550,6 +555,15 @@
     .el-table__fixed-right {
       bottom: 0;
       overflow: hidden;
+    }
+  }
+
+  [class*=el-table__row--level] {
+    .el-table__expand-icon {
+      display: inline-block;
+      width: 14px;
+      vertical-align: middle;
+      margin-right: 5px;
     }
   }
 }
