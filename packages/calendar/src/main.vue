@@ -56,12 +56,15 @@ export default {
   },
 
   props: {
-    value: [Date, String],
+    value: [Date, String, Number],
     range: {
       type: Array,
       validator(range) {
         if (Array.isArray(range)) {
-          return range.length === 2 && range.every(item => typeof item === 'string' || item instanceof Date);
+          return range.length === 2 && range.every(
+            item => typeof item === 'string' ||
+            typeof item === 'number' ||
+            item instanceof Date);
         } else {
           return true;
         }

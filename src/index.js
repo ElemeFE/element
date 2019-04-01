@@ -262,5 +262,6 @@ export default {
   TimelineItem,
   Link,
   Divider,
-  Image
+  Image,
+  Calendar
 };
