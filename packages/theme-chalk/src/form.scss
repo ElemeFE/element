@@ -84,6 +84,10 @@
     }
   }
 
+  @include e(label-wrap) {
+    float: left;
+  }
+
   @include e(label) {
     text-align: right;
     vertical-align: middle;
