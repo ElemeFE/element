@@ -236,9 +236,7 @@ TableStore.prototype.mutations = {
 
     const defaultExpandAll = states.defaultExpandAll;
     if (defaultExpandAll) {
-      const containExpandRow = states.columns.some(({ type }) => type === 'expand');
-      const expandRows = containExpandRow ? [].concat(states.data) : [];
-      this.states.expandRows = expandRows;
+      this.states.expandRows = (states.data || []).slice(0);
     } else if (rowKey) {
       // update expandRows to new rows according to rowKey
       const ids = getKeysMap(this.states.expandRows, rowKey);
