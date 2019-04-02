@@ -394,4 +394,26 @@ describe('Input', () => {
       expect(vm.$refs.inputComp.$refs.input.selectionEnd).to.equal(testContent.length);
     });
   });
+
+  it('sets value on textarea / input type change', async() => {
+    vm = createVue({
+      template: `
+        <el-input :type="type" v-model="val" />
+      `,
+      data() {
+        return {
+          type: 'text',
+          val: '123'
+        };
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('input').value).to.equal('123');
+    vm.type = 'textarea';
+    await waitImmediate();
+    expect(vm.$el.querySelector('textarea').value).to.equal('123');
+    vm.type = 'password';
+    await waitImmediate();
+    expect(vm.$el.querySelector('input').value).to.equal('123');
+  });
 });
