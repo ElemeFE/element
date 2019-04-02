@@ -127,7 +127,7 @@ export default {
                   })
                 }
               </tr>);
-              if (this.store.isRowExpanded(row)) {
+              if (this.hasExpandColumn && this.store.isRowExpanded(row)) {
                 return [
                   tr,
                   <tr>
@@ -183,6 +183,10 @@ export default {
 
     columns() {
       return this.store.states.columns;
+    },
+
+    hasExpandColumn() {
+      return this.columns.some(({ type }) => type === 'expand');
     },
 
     firstDefaultColumnIndex() {

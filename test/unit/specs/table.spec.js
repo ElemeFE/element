@@ -949,7 +949,7 @@ describe('Table', () => {
                 <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
-            </el-table-column>
+              </el-table-column>
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
               <el-table-column prop="runtime" label="runtime" />
