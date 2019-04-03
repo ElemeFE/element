@@ -607,7 +607,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | rules                   | Reglas de validación                     | object  | —                     | —           |
 | inline                  | Si el form es inline                     | boolean | —                     | false       |
 | label-position          | Posicion de la etiqueta                  | string  | left / right / top    | right       |
-| label-width             | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
+| label-width             | width of label, e.g. '50px'. All its direct child form items will inherit this value. Width `auto` is supported.        | string | — | — |
 | label-suffix            | sufijo de la etiqueta                    | string  | —                     | —           |
 | hide-required-asterisk       | si los campos obligatorios deben tener un asterisco rojo (estrella) al lado de sus etiquetas | boolean | — | false |
 | show-message            | si mostrar o no el mensaje de error      | boolean | —                     | true        |
@@ -638,7 +638,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | -------------- | ------------------------------------------------------------ | ------- | ------------------------------------------- | ----------- |
 | prop           | un clave del modelo. En el uso del método validate and resetFields, el atributo es obligatorio. | string  | Clave del modelo que se ha pasado a  `form` |             |
 | label          | etiqueta                                                     | string  | —                                           | —           |
-| label-width    | ancho de la etiqueta, e.g. '50px'                            | string  | —                                           | —           |
+| label-width    | ancho de la etiqueta, e.g. '50px'. Width `auto` is supported | string  | —                                           | —           |
 | required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | boolean | —                                           | false       |
 | rules          | reglas de validacion del form                                | object  | —                                           | —           |
 | error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                           | —           |

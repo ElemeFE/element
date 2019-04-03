@@ -10,7 +10,6 @@
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
     <label-wrap
-      ref="labelWrap"
       :is-auto-width="labelStyle && labelStyle.width === 'auto'"
       :update-all="form.labelWidth === 'auto'">
       <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">

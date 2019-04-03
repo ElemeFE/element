@@ -86,6 +86,10 @@
 
   @include e(label-wrap) {
     float: left;
+    .el-form-item__label {
+      display: inline-block;
+      float: none;
+    }
   }
 
   @include e(label) {
