@@ -1282,11 +1282,13 @@
 ```html
 <template>
 <div>
-  <el-table
-    :data="tableData"
-    style="width: 100%;margin-bottom: 20px;"
-    border
-    row-key="id">
+    <el-table
+      :data="tableData"
+      style="width: 100%;margin-bottom: 20px;"
+      border
+      row-key="id"
+      tree-children-prop="customChildren"
+    >
     <el-table-column
       prop="date"
       label="日期"
@@ -1349,7 +1351,7 @@
           date: '2016-05-01',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1519 弄',
-          children: [{
+          customChildren: [{
               id: 31,
               date: '2016-05-01',
               name: '王小虎',
@@ -1876,6 +1878,7 @@
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
 | select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true |
+| tree-children-prop | 获得树形数据的子节点数据的属性名 | String | — | children |
 | indent      | 展示树形数据时，树节点的缩进 | Number | — | 16 |
 | lazy        | 是否懒加载子节点数据 | Boolean | — | — |
 | load        | 加载子节点数据的函数，lazy 为 true 时生效 | Function({ row, treeNode, resolve }) | — | — |
