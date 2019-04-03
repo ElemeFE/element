@@ -56,6 +56,7 @@
     },
     computed: {
       autoLabelWidth() {
+        if (!this.potentialLabelWidthArr.length) return 0;
         const max = Math.max(...this.potentialLabelWidthArr);
         return max ? `${max}px` : '';
       }
