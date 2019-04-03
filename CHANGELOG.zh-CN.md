@@ -1,5 +1,20 @@
 ## 更新日志
 
+### 2.7.2
+
+*2019-04-03*
+
+#### Bug fixes
+
+- Form
+  - 修复自动 `label-width` 的样式 (#14955 by @ziyoung)
+  
+#### Optimization
+- Docs
+  - 修复文档内图片链接错误 (#14957 by @iamkun)
+- Chore
+  - 修复发布时 mkdir 异常 (#14952 by @iamkun)
+
 ### 2.7.1
 
 *2019-04-03*
