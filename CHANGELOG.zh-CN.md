@@ -4,12 +4,12 @@
 
 *2019-04-03*
 
-#### Bug fixes
+#### 修复
 
 - Form
   - 修复 `label-width` 为 `auto` 的样式 (#14955 by @ziyoung)
   
-#### Optimization
+#### 优化
 - Docs
   - 修复文档内图片链接错误 (#14957 by @iamkun)
 - Chore
@@ -33,7 +33,7 @@
   - `label-width` 支持自动宽度 (#14944 by @ziyoung)
   
 #### 优化
-- 文档
+- Docs
   - 更新西班牙语文档 (#14913 by @Gonzalo2310)
   - 新增组件自动生成法语文档 (#14924 by @ziyoung)
   - 更新 Tabs 文档 (#14938 by @ziyoung)
