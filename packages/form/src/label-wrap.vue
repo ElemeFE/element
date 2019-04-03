@@ -15,7 +15,10 @@ export default {
       const autoLabelWidth = this.elForm.autoLabelWidth;
       const style = {};
       if (autoLabelWidth && autoLabelWidth !== 'auto') {
-        style.width = autoLabelWidth;
+        const marginLeft = parseInt(autoLabelWidth, 10) - this.computedWidth;
+        if (marginLeft) {
+          style.marginLeft = marginLeft + 'px';
+        }
       }
       return (<div class="el-form-item__label-wrap" style={style}>
         { slots }
@@ -64,10 +67,9 @@ export default {
     this.updateLabelWidth('update');
   },
 
-  // Is this necessary?
-  // updated() {
-  //   this.updateLabelWidth('update');
-  // },
+  updated() {
+    this.updateLabelWidth('update');
+  },
 
   beforeDestroy() {
     this.updateLabelWidth('remove');
