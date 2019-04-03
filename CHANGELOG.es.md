@@ -1,5 +1,28 @@
 ## Changelog
 
+### 2.7.1
+
+*2019-04-03*
+
+#### Bug fixes
+
+- Select
+  - Set value to null when cleared (#14322 by @aaronfulkerson)
+- Input
+  - Update DOM dependent values on type change (#14889 by @wacky6)
+- Table
+  - Make `defaultExpandAll` works when expanded column exists (#14935 by @ziyoung)
+- Dialog
+  - Background color can be configured (#14939 by @ziyoung)
+- Form
+  - `label-width` supports auto width (#14944 by @ziyoung)
+  
+#### Optimization
+- Docs
+  - Update Spanish docs (#14913 by @Gonzalo2310)
+  - Add French doc for new component (#14924 by @ziyoung)
+  - Optimize Tabs docs (#14938 by @ziyoung)
+
 ### 2.7.0
 
 *2019-03-28*
