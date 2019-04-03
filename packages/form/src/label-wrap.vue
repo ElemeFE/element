@@ -12,7 +12,12 @@ export default {
     const slots = this.$slots.default;
     if (!slots) return null;
     if (this.isAutoWidth) {
-      return (<div class="el-form-item__label-wrap">
+      const autoLabelWidth = this.elForm.autoLabelWidth;
+      const style = {};
+      if (autoLabelWidth && autoLabelWidth !== 'auto') {
+        style.width = autoLabelWidth;
+      }
+      return (<div class="el-form-item__label-wrap" style={style}>
         { slots }
       </div>);
     } else {
