@@ -1,5 +1,28 @@
 ## 更新日志
 
+### 2.7.1
+
+*2019-04-03*
+
+#### 修复
+
+- Select
+  - 清空时设置 value 为 null (#14322 by @aaronfulkerson)
+- Input
+  - 当类型改变时更新 DOM (#14889 by @wacky6)
+- Table
+  - 修复当有展开列时 `defaultExpandAll` 的行为 (#14935 by @ziyoung)
+- Dialog
+  - 可以设置背景色 (#14939 by @ziyoung)
+- Form
+  - `label-width` 支持自动宽度 (#14944 by @ziyoung)
+  
+#### 优化
+- 文档
+  - 更新西班牙语文档 (#14913 by @Gonzalo2310)
+  - 新增组件自动生成法语文档 (#14924 by @ziyoung)
+  - 更新 Tabs 文档 (#14938 by @ziyoung)
+
 ### 2.7.0
 
 *2019-03-28*
