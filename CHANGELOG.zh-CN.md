@@ -7,7 +7,7 @@
 #### Bug fixes
 
 - Form
-  - 修复自动 `label-width` 的样式 (#14955 by @ziyoung)
+  - 修复 `label-width` 为 `auto` 的样式 (#14955 by @ziyoung)
   
 #### Optimization
 - Docs
