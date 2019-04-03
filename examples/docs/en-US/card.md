@@ -79,7 +79,7 @@ Display richer content by adding some configs.
 <el-row>
   <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
-      <img src="../../examples/assets/images/hamburger.png" class="image">
+      <img src="~examples/assets/images/hamburger.png" class="image">
       <div style="padding: 14px;">
         <span>Yummy hamburger</span>
         <div class="bottom clearfix">
