@@ -649,8 +649,14 @@ TableStore.prototype.updateCurrentRow = function() {
   const table = this.table;
   const data = states.data || [];
   const oldCurrentRow = states.currentRow;
-
-  if (data.indexOf(oldCurrentRow) === -1) {
+  const notInTreeData = (row)=>{
+    if (!row || !states.rowKey || !states.treeData) {
+      return true;
+    }
+    let key = row[states.rowKey];
+    return !states.treeData[key];
+  };
+  if (data.indexOf(oldCurrentRow) === -1 && notInTreeData(oldCurrentRow)) {
     if (states.rowKey && oldCurrentRow) {
       let newCurrentRow = null;
       for (let i = 0; i < data.length; i++) {
@@ -733,7 +739,8 @@ TableStore.prototype.loadData = function(row, treeNode) {
         parent.children.push(rowKey);
         const child = {
           display: true,
-          level: parent.level + 1
+          level: parent.level + 1,
+          rowKey
         };
         if (item.hasChildren) {
           child.expanded = false;
@@ -742,6 +749,9 @@ TableStore.prototype.loadData = function(row, treeNode) {
         }
         Vue.set(treeData, rowKey, child);
         Vue.set(this.states.lazyTreeNodeMap, rowKey, item);
+        if ((this.table.expandRowKeys || []).indexOf(rowKey) !== -1) {
+          this.loadData(item, child);
+        }
       });
       this.toggleTreeExpansion(parentRowKey);
     });

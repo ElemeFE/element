@@ -489,46 +489,62 @@
         }
         return rowKey;
       },
-
       getTableTreeData(data) {
+        const originData = this.store.states.treeData || {};
+        const expandRowKeys = this.expandRowKeys || [];
+
         const treeData = {};
-        const traverse = (children, parentData, level) => {
+        const loadQueue = [];
+        // this.store.states.treeData = treeData;
+
+        const fillOrigin = (children) => {
+          if (children) {
+            children.forEach(rowKey => {
+              if (originData[rowKey]) {
+                treeData[rowKey] = originData[rowKey];
+                fillOrigin(treeData[rowKey].children);
+              }
+            });
+          }
+        };
+        const traverse = (children, parentData, level, display) => {
           children.forEach(item => {
+            const containChildren = Array.isArray(item.children) && item.children.length;
+            if (level === 0 && !containChildren && !item.hasChildren) {
+              return;
+            }
+
             const rowKey = this.getRowKey(item);
-            treeData[rowKey] = {
-              display: false,
-              level
+            const expanded = expandRowKeys.indexOf(rowKey) !== -1;
+            const treeNode = originData[rowKey] || {
+              children: [],
+              loaded: !!containChildren,
+              rowKey,
+              level,
+              display,
+              expanded
             };
-            parentData.children.push(rowKey);
-            if (Array.isArray(item.children) && item.children.length) {
-              treeData[rowKey].children = [];
-              treeData[rowKey].expanded = false;
-              traverse(item.children, treeData[rowKey], level + 1);
+            treeData[rowKey] = treeNode;
+            if (level > 0) {
+              parentData.children.push(rowKey);
+            }
+            if (treeNode.children.length) {
+              fillOrigin(treeNode.children, treeNode);
+            } else if (containChildren) {
+              traverse(item.children, treeNode, level + 1, display && expanded);
+            } else if (item.hasChildren && this.lazy) {
+              treeNode.hasChildren = true;
+              if (treeNode.expanded && !treeNode.loaded) {
+                treeNode.expanded = false;
+                loadQueue.push([item, treeNode]);
+              }
             }
           });
         };
         if (data) {
-          data.forEach(item => {
-            const containChildren = Array.isArray(item.children) && item.children.length;
-            if (!(containChildren || item.hasChildren)) return;
-            const rowKey = this.getRowKey(item);
-            const treeNode = {
-              level: 0,
-              expanded: false,
-              display: true,
-              children: []
-            };
-            if (containChildren) {
-              treeData[rowKey] = treeNode;
-              traverse(item.children, treeData[rowKey], 1);
-            } else if (item.hasChildren && this.lazy) {
-              treeNode.hasChildren = true;
-              treeNode.loaded = false;
-              treeData[rowKey] = treeNode;
-            }
-          });
+          traverse(data, treeData, 0, true);
         }
-        return treeData;
+        return {treeData, loadQueue};
       }
     },
 
@@ -660,9 +676,13 @@
       data: {
         immediate: true,
         handler(value) {
-          this.store.states.treeData = this.getTableTreeData(value);
+          const {treeData, loadQueue} = this.getTableTreeData(value);
+          this.store.states.treeData = treeData;
           value = flattenData(value);
           this.store.commit('setData', value);
+          loadQueue.forEach(param => {
+            this.store.loadData(param[0], param[1]);
+          });
           if (this.$ready) {
             this.$nextTick(() => {
               this.doLayout();

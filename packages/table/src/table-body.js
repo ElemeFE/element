@@ -40,9 +40,11 @@ export default {
           const traverse = (children) => {
             if (!children) return;
             children.forEach(key => {
-              tmp.push(this.store.states.lazyTreeNodeMap[key]);
-              if (this.store.states.treeData[key]) {
-                traverse(this.store.states.treeData[key].children);
+              if (this.store.states.lazyTreeNodeMap[key]) {
+                tmp.push(this.store.states.lazyTreeNodeMap[key]);
+                if (this.store.states.treeData[key]) {
+                  traverse(this.store.states.treeData[key].children);
+                }
               }
             });
           };
