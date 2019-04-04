@@ -384,7 +384,6 @@
               this.currentPlaceholder = this.cachedPlaceHolder;
             }
           });
-          this.currentPlaceholder = this.cachedPlaceHolder;
           if (!this.multiple) {
             if (this.selected) {
               if (this.filterable && this.allowCreate &&
@@ -394,6 +393,10 @@
                 this.selectedLabel = this.selected.currentLabel;
               }
               if (this.filterable) this.query = this.selectedLabel;
+            }
+
+            if (this.filterable) {
+              this.currentPlaceholder = this.cachedPlaceHolder;
             }
           }
         } else {
