@@ -120,9 +120,10 @@
     },
 
     methods: {
-      handleChange() {
+      handleChange(event) {
         this.$nextTick(() => {
-          this.$emit('change', this.model);
+          const value = this.model === event.target.value ? this.model : event.target.value;
+          this.$emit('change', value);
           this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
         });
       }
