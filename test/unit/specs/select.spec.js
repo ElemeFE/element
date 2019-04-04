@@ -821,6 +821,30 @@ describe('Select', () => {
     done();
   });
 
+  it('should set placeholder to label of selected option when filterable is true and multiple is false', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select ref="select" v-model="value" filterable>
+            <el-option label="test" value="test" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 'test'
+        };
+      }
+    });
+    vm.$refs.select.$el.click();
+    setTimeout(() => {
+      expect(vm.$refs.select.visible).to.be.equal(true);
+      expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
+      expect(vm.$el.querySelector('.el-input__inner').value).to.be.equal('');
+      done();
+    }, 100);
+  });
+
   describe('resetInputHeight', () => {
     const getSelectComponentVm = (configs) => {
       vm = getSelectVm(configs || {});

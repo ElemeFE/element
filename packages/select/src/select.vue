@@ -384,6 +384,7 @@
               this.currentPlaceholder = this.cachedPlaceHolder;
             }
           });
+          this.currentPlaceholder = this.cachedPlaceHolder;
           if (!this.multiple) {
             if (this.selected) {
               if (this.filterable && this.allowCreate &&
@@ -407,7 +408,11 @@
                 this.broadcast('ElOption', 'queryChange', '');
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
-              this.broadcast('ElInput', 'inputSelect');
+
+              if (this.selectedLabel) {
+                this.currentPlaceholder = this.selectedLabel;
+                this.selectedLabel = '';
+              }
             }
           }
         }

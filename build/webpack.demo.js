@@ -124,7 +124,8 @@ const webpackConfig = {
   ],
   optimization: {
     minimizer: []
-  }
+  },
+  devtool: '#eval-source-map'
 };
 
 if (isProd) {
@@ -146,6 +147,7 @@ if (isProd) {
     }),
     new OptimizeCSSAssetsPlugin({})
   );
+  webpackConfig.devtool = false;
 }
 
 module.exports = webpackConfig;
