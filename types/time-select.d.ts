@@ -48,4 +48,9 @@ export declare class TmTimeSelect extends TmUIComponent {
 
   /** Additional options, check the table below */
   pickerOptions: TimeSelectOptions
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }

@@ -56,6 +56,9 @@ export declare class TmInput extends TmUIComponent {
   /** Same as auto-complete in native input */
   autoComplete: string
 
+  /** Same as autocomplete in native input */
+  autocomplete: string
+
   /** Same as name in native input */
   name: string
 
@@ -82,4 +85,22 @@ export declare class TmInput extends TmUIComponent {
 
   /** Hook function when clicking on the input icon */
   onIconClick: IconClickEventHandler
+
+  /** Whether to trigger form validatio */
+  validateEvent: boolean
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
+
+  /**
+   * Blur the Input component
+   */
+  blur (): void
+
+  /**
+   * Select the text in input element
+   */
+  select (): void
 }
