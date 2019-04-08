@@ -501,8 +501,6 @@ export default {
 
       if (!order) {
         sortOrder = column.order = null;
-        states.sortingColumn = null;
-        sortProp = null;
       } else {
         sortOrder = column.order = order;
       }
