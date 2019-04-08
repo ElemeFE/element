@@ -41,7 +41,7 @@ Usa texto para indicar la puntuación
 
 ```html
 <el-rate
-  v-model="value3"
+  v-model="value"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
   show-text>
 </el-rate>
@@ -50,7 +50,7 @@ Usa texto para indicar la puntuación
   export default {
     data() {
       return {
-        value3: null
+        value: null
       }
     }
   }
@@ -66,7 +66,7 @@ Puede utilizar iconos para diferenciar cada componente.
 
 ```html
 <el-rate
-  v-model="value4"
+  v-model="value"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
@@ -76,7 +76,7 @@ Puede utilizar iconos para diferenciar cada componente.
   export default {
     data() {
       return {
-        value4: null
+        value: null
       }
     }
   }
@@ -92,7 +92,7 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
 
 ```html
 <el-rate
-  v-model="value5"
+  v-model="value"
   disabled
   show-score
   text-color="#ff9900"
@@ -103,7 +103,7 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
   export default {
     data() {
       return {
-        value5: 3.7
+        value: 3.7
       }
     }
   }
