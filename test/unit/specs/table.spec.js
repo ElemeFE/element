@@ -1996,4 +1996,43 @@ describe('Table', () => {
       }, DELAY);
     }, DELAY);
   });
+
+  it('remove nested data', (done) => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" row-key="release">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+      data() {
+        const testData = getTestData();
+        testData[1].children = [
+          {
+            name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+          },
+          {
+            name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+          }
+        ];
+        return {
+          testData: testData
+        };
+      },
+      methods: {
+        removeChild() {
+          this.testData[1].children.splice(0, 1);
+        }
+      },
+      mounted() {
+        this.removeChild();
+      }
+    }, true);
+    setTimeout(() => {
+      expect(vm.$el.querySelectorAll('.el-table__row--level-1').length).to.equal(1);
+      done();
+    }, DELAY);
+  });
 });
