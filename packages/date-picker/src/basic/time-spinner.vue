@@ -14,6 +14,7 @@
           @click="handleClick('hours', { value: hour, disabled: disabled })"
           v-for="(disabled, hour) in hoursList"
           class="el-time-spinner__item"
+          :key="hour"
           :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{ amPm(hour) }}</li>
       </el-scrollbar>
       <el-scrollbar
@@ -28,6 +29,7 @@
         <li
           @click="handleClick('minutes', { value: key, disabled: false })"
           v-for="(enabled, key) in minutesList"
+          :key="key"
           class="el-time-spinner__item"
           :class="{ 'active': key === minutes, disabled: !enabled }">{{ ('0' + key).slice(-2) }}</li>
       </el-scrollbar>

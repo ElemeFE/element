@@ -1,33 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        num1: 1,
-        num2: 1,
-        num3: 5,
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1,
-        num8: 1
-      }
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## InputNumber
 
 Input numerical values with a customizable range.
@@ -180,7 +150,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |----| ----| ---| ----| -----|
-|value | binding value| number | — | — |
+|value / v-model | binding value| number | — | 0 |
 |min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
@@ -191,6 +161,8 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |controls-position | position of the control buttons | string | right | - |
 |name | same as `name` in native input | string | — | — |
 |label | label text | string | — | — |
+|placeholder | placeholder in input | string | - | - |
+
 ### Events
 
 | Event Name | Description | Parameters |
@@ -203,3 +175,5 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 | Method | Description | Parameters |
 |------|--------|-------|
 | focus | focus the Input component | - |
+| select | select the text in input element | — |
+

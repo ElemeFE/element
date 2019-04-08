@@ -1,5 +1,389 @@
 ## 更新日志
 
+### 2.7.2
+
+*2019-04-03*
+
+#### 修复
+
+- Form
+  - 修复 `label-width` 为 `auto` 的样式 (#14955 by @ziyoung)
+  
+#### 优化
+- Docs
+  - 修复文档内图片链接错误 (#14957 by @iamkun)
+- Chore
+  - 修复发布时 mkdir 异常 (#14952 by @iamkun)
+
+### 2.7.1
+
+*2019-04-03*
+
+#### 修复
+
+- Select
+  - 清空时设置 value 为 null (#14322 by @aaronfulkerson)
+- Input
+  - 当类型改变时更新 DOM (#14889 by @wacky6)
+- Table
+  - 修复当有展开列时 `defaultExpandAll` 的行为 (#14935 by @ziyoung)
+- Dialog
+  - 可以设置背景色 (#14939 by @ziyoung)
+- Form
+  - `label-width` 支持自动宽度 (#14944 by @ziyoung)
+  
+#### 优化
+- Docs
+  - 更新西班牙语文档 (#14913 by @Gonzalo2310)
+  - 新增组件自动生成法语文档 (#14924 by @ziyoung)
+  - 更新 Tabs 文档 (#14938 by @ziyoung)
+
+### 2.7.0
+
+*2019-03-28*
+
+#### 新特性
+
+- Table
+  - 增加对树形结构数据的支持 (#14632 by @ziyoung)
+
+#### 修复
+
+- Tabs
+  - 阴影样式使用全局主颜色 (#14558 by @Richard-Choooou)
+  - 当 label 改变时触发更新 (#14496 by @akki-jat)
+- Table
+  - Table footer 与 body 的对齐一致 (#14730 by @ziyoung)
+- NavMenu
+  - 修复点击 el-submenu 多次触发 childMenu 问题 (#14443 by @PanJiaChen)
+- Dropdown
+  - 兼容 Vue 2.6 新 v-slot 语法 (#14832 by @ziyoung)
+- ColorPicker
+  - 修复十六进制颜色字符串解析问题 (#14793 by @iamkun)
+- Tree
+  - 恢复 pr #13349 (#14847 by @ziyoung)
+- Tooltip
+  - 当初始值为 true 时默认显示 (#14826 by @ziyoung)
+- Docs
+  - 更新 Cascader 文档 (#14442 by @panhezeng)
+- Style
+  - 修复媒体查询 sm-only, md-only, lg-only 问题 (#14611 by @sinchang)
+
+#### 优化
+
+- Chore
+  - 增加网页描述信息 (#14802 by @iamkun)
+
+### 2.6.3
+
+*2019-03-21*
+
+#### 修复
+
+- 修复 Cascader 文档页的样式 (#14789 by @ziyoung)
+- 移除 Cascader 中多余的 DOM 操作 (#14788 by @ziyoung)
+- DateRange 支持夏令时 (#14562 by @wacky6)
+
+### 2.6.2
+
+*2019-03-21*
+
+#### 新特性
+
+- DatePicker
+  - 支持 monthrange 类型 (#14487 by @zxyRealm)
+- i18n
+  - 添加 Croatian 语言包 (#14360 by @danijelh)
+- Docs
+  - 更新 2.6.1 法语文档，修复笔误 (#14555 by @smalesys)
+  - 更新法语翻译 (#14643 by @smalesys)
+
+#### 修复
+
+- Input
+  - Fix regression (#14572 by @wacky6)
+- DatePicker
+  - 修复 first-day-of-week 的计算 (#14523 by @sinchang)
+  - 修复 WeekPicker value-format 的问题 (#13754 by @wacky6)
+- Steps
+  - 修复 #14502 (#14596 by @sinchang)
+  - 修复简单模式下的样式 (#14610 by @sinchang)
+- Docs
+  - 重命名 Table 文档中的变量 (#14587 by @likwotsing)
+  - 添加法语文档索引 (#14565 by @iamkun)
+  - 修复 TimePicker 文档页的样式 (#14579 by @ziyoung)
+  - 重命名 Upload 文档中的变量 (#14593 by @liupl)
+  - 在 Form 文档中 添加的 async-validator 文档 (#14694 by @iamkun)
+  - 修复 Tooltip 文档的 bug (#14748 by @iamkun)
+  - 修复笔误 (#14751 by @2bj)
+  - 修复 Switch 在移动端 Webkit 浏览器的高亮问题 (#14703 by @VladG0r)
+
+#### 优化
+
+- Chore:
+  - 更新 ci 构建脚本 (#14600 by @ziyoung)
+  - 更新谷歌统计 (#14560 by @iamkun)
+  - 添加更多谷歌统计事件 (#14633 by @iamkun)
+  - 更新聊天组信息 (#14741 by @iamkun)
+  - 升级测试依赖 (#14735 by @wacky6)
+  - 升级 gulp (#14745 by @ziyoung)
+  - 使用 codepen 显示 demo，修复文档中的错误 (#14747 by @ziyoung)
+
+### 2.6.1
+
+*2019-03-03*
+
+#### 修复
+
+- **不再指定 node 版本** (by @iamkun in #14546)
+- 调整 `deloy-faas.sh` 中的文档目录 (by @ziyoung in #14553)
+- 调整 2.6.0 中 changelog 日期样式 (by @island205 in #14547)
+- 修复拼写错误 (by @wack6 in #14552)
+
+### 2.6.0
+
+*2019-03-01*
+
+#### 新特性
+- Timeline
+  - 添加 Timeline 组件 (by @jikkai in #14248)
+- DropdownItem
+  - `el-dropdown-item` 支持添加 icon (by @gabrielboliveira in #14088)
+- Input
+  - 添加 `show-password` 属性，支持配置显示密码按钮 (by @phshy0607 in #13966)
+- Select
+  - 添加 slot `empty` (by @elfman in #13785)
+- Autocomplete
+  - 添加 `highlight-first-item` 属性，控制是否默认突出显示远程搜索建议中的第一项 (by @YamenSharaf in #14269)
+- I18n
+  - 添加亚美尼亚语支持 (by @hamletbarsamyan in #14214)
+- Docs
+  - 新增法语文档 (by @smalesys in #12153, #14418, #14434)
+
+#### 优化
+- Alert
+  - 组件对通过 slot 传入的  description 也应用默认样式类 (by @iamkun in #14488)
+- InputNumber
+  -移除多余的 `parseFloat` (by @JuniorTour in #14172)
+- Menu
+  - 支持 `el-menu-item` 不添加 index (by @georgyfarniev in #13298)
+- Table
+  - 移除无用的 DOM 操作 (by @elfman in #13643)
+- Upload
+  - 代码优化 (by @elfman in #13973)
+- Popup
+  - 移除无用代码 (by @KAionro in #14413)
+- Docs
+  - 添加更多文档说明如何贡献代码 (by @island205 in #14355)
+  - 添加 `el-input` 是受控组件的警示 (by @wacky6 in #14463)
+  - 优化 Table 的文档 (by @luguokong in #14329)
+  - 更新 Input 文档 (by @iamkun in #14437)
+  - 优化自定义主题文档 (by @wangguohao in #14297)
+  - 为 Icon 文档添加 hover 效果 (by @tuxinghuan in #14295)
+- Build
+  - 压缩 Element 文档站的 JS 和 CSS 文件 (by @iamkun in #14430)
+  - 优化 Webpack 打包速度，从6分钟优化到1分多 (by @hetech in #14484)
+  - 添加 CLI 工具，选择版本号 (by @hetech in #14354)
+- 使用 Stale 来管理过时（暂定1年）的 Issue 和 PR (by @island205 in #14392)
+
+#### 问题修复
+- Menu
+  - 修复浏览器标签切换引起的 focus 问题 (by @liupl in #13976)
+- MessageBox
+  - 修复 TS 定义 (by @NateScarlet in #14278)
+- ScrollBar
+  - 修复点击鼠标右键导致拖动的问题 (by @xifeiwu in #14196)
+- Switch
+  - 添加 `validate-event` 属性，设置改变 Switch 状态时是否触发表单的校验 (by @hetech in #14426)
+- Table
+  - 修复多 Table 实例共享 `toggleAllSelection` 方法，造成无法切换问题 (by @letanure in #14075)
+- Tabs & Dropdown
+  - 修复样式问题 (by @hetech in #14452)
+- Tree
+  - 与 Table 统一占位文样式 (by @ColinCll in #14331)
+- Docs
+  - 修复 DatetimePicker 文档问题 (by @iamkun in #14290)
+  - 修复 DatePicker 文档拼写问题 (by @helmut in #14481)
+  - 修复分页组件文档样式问题 (by @liuchuzhang in #14451)
+
+### 2.5.4
+
+*2019-02-01*
+
+#### 修复
+
+- 构建: 修复 `.babelrc` 配置问题——导致 Tree 等组件没有动画 (by @island205 in #14282)
+
+### 2.5.3
+
+*2019-01-31*
+
+#### 优化
+
+- 优化 Message 的代码 (by @vok123 in #14029)
+- 移除 gh-pages (by @ziyoung in #14266)
+- 添加 IssueHunt 的链接 (by @island205 in #14261)
+
+#### 修复
+
+- 修复 UMD 包在服务器端运行出错的问题 (by @island205 in #14242)
+- 修复 Tabbar 高亮时的样式 (by @iamkun in #14240)
+- 修复 Table 示例代码的错误 (by @xunmeng in #14253)
+
+### 2.5.2
+
+*2019-01-27*
+
+#### 优化
+- 文档:
+  - 2.5.1 版本西班牙语文档更新 (by @Gonzalo2310 in #14231)
+
+#### 修复
+- 构建:
+  - 删除 umd 模块 `lib/index.js` 中本没有的注释 (by @island205 in #14233)
+  - 修复 nuxt.js 中关于 `export` 关键字的报错  (by @island205 in #14232)
+  - 修复发布 2.5.1 过程中的错误   (by @iamkun in #14228)
+
+### 2.5.1
+
+*2019-01-26*
+
+#### 优化
+- DatePicker：添加月、年高亮的样式（by @Debiancc in #14211）
+- 更新 2.5.0 changelog （by @wacky6 in #14217）
+
+
+#### 修复
+- 修复升级 Webpack 4 产生的问题，无法具名 `import` 组件，`ELEMENT.locale()` 调用报错。（by @island205 in #14220）
+- 恢复 2.4.11 文档 (by @iamkun in #14222)
+
+
+### 2.5.0
+
+*2019-01-25*
+
+#### 新特性
+- DatePicker
+  - 新增 `validate-event` 属性 (by @ziyoung in #13531)
+- DateTimePicker
+  - `pickerOptions` 支持 `selectableRange` 选项 (by @eeeeeeeason)
+- Tag
+  - 新增 `click` 事件 (by @licdream in #14106)
+- I18n
+  - 新增 柯尔克孜语 (Kyrgyz) (by @zzjframework in #14174)
+
+#### 优化
+- 升级到 webpack@4 (by @jikkai in #14173)
+- Input
+  - 简化内部实现，遵循单向数据流；修复若干相关 Bug (by @wacky6 in #13471)
+- 更新 Axure 文件，增加新组件 (by @ziyoung in #13773)
+
+#### 修复
+- Autocomplete
+  - 修正下拉框最后一行显示不完整的问题 (by @ziyoung in #13597)
+  - 修正下拉框箭头 (by @liuchuzhang in #13762)
+- Carousel
+  - 组件销毁时释放内部 Timer (by @elfman in #13820)
+- Cascader
+  - 移除已废弃的计算属性的 cache 属性 (by @iamkun in #13737)
+  - 修正 TypeScript 中 CascaderOption 类型定义 (by @NateScarlet in #13613)
+  - 修正图标覆盖文字的问题 (by @ziyoung in #13596)
+- Checkbox
+  - 改进显示样式 (by @PanJiaChen)
+- DatePicker
+  - 修正 TimeSpinner 中缺失的 v-for `key` 属性 (by @Ende93 in #13547)
+  - 修正周选择器在跨年时的高亮行为 (by @suyi91 in #13883)
+- Input
+  - 修复 textarea 时的 DOM 节点引用 (by @laomu1988 @island205 in #13803)
+- Pagination
+  - 输入框的值不会小于 1 (by @elfman in #13727)
+- Popover
+  - 修正 hover 的触发行为 (by @goldengecko in #13104)
+  - 修正弹出框的内存泄漏 (by @qpxtWhite in #13988)
+- Radio
+  - 改进显示样式 (by @ohhoney1)
+- Table
+  - 改进点击排序箭头时的行为 (by @ohhoney1 in #12890)
+  - 修正 IE10+ 中 “暂无数据” 提示的垂直布局 (by @imzjy in #13638)
+  - 修正文档中 `index` 的类型说明 (by @ilovefafa in #13628)
+  - 修正多级表头使用 `fixed` 属性时，表尾合计行的显示样式 (by @luckyCao in #13914)
+- Tabs
+  - 修正自动滚动 (by @iamkun in #13696)
+  - 通过面板名称查找面板 (by @iamkun in #13705)
+  - 使用 `paneName` 计算面板样式 (by @iamkun in #13733)
+- Tree
+  - 修正 `showCheckbox` 不能影响子节点的问题 (by @KidneyFlower)
+  - 更新文档和 TypeScript 定义 (by @ziyoung in #13540)
+- Upload
+  - `list-type` 改变时，保留 `url` 属性 (by @elfman in #13771)
+- Slider
+  - 修正源代码缩进 (by @wacky6 in #13955)
+- I18n
+  - 补充加泰罗尼亚语 (Catalan) 翻译 (by @jaumesala)
+  - 补充俄语 (Russian) 翻译 (by @justlp in #13658)
+  - 补充芬兰语 (Finnish) 翻译 (by @jenkrisu in #14137)
+- Doc
+  - 更新西班牙语文档至 2.4.11 (by @Gonzalo2310 in #13522)
+- 其它
+  - 移除多余的构建脚本 (by @ziyoung)
+  - 修正文档超链接 (by @iamkun in #13753)
+  - 修正文档中不一致的大小写 (by @wonderjar)
+  - 增加钉钉群的二维码 (by @iamkun in #13957)
+  - .gitignore 增加 yarn 日志文件 (by @mimimi in #13922)
+  - 移除赞助商 多态 (by @island205 in #14156)
+  - Update readme qr code src (by @iamkun in #13960)
+  - 更新 CDN 链接，修正错别字 (by @ziyoung)
+
+### 2.4.11
+
+*2018-11-21*
+
+- 撤销 pr #13296，修复点击 Menu 外部导致 Submenu 收起的问题，#13478
+- 调整小屏幕（xs）媒体查询断点，#13468 （by @alekoshen712）
+
+### 2.4.10
+
+*2018-11-16*
+
+- 修复多次点击 Select 才显示下拉列表的问题，#13268
+- Form 禁用时不显示 Input 的 clear 图标，#13208
+- 调整 Select，Progress，Autocomplete，Tooltip，Collaspe，TimePicker 的样式，#13188 (by @porcelainHeart) #13210 #13266 #13257 #13290 #13347 (by @PanJiaChen)
+- Carousel 组件新增 `loop` 属性，#13217
+- Table 的 data 改变时，高亮行会继续保留，#13200
+- Table 的 header slot 可以接收参数，#13263
+- Table 的 `clearFilter` 方法支持参数，#13176
+- Table 单元格内没有内容时不再创建 Tooltip，#13152 (by @rongxingsun)
+- ColorPicker 面板的输入框内容可以正常显示了，#13278
+- 在拖拽时，ColorPicker 不再触发表单校验，#13299
+- InputNumber 新增 `select` 方法，#13286 (by @st-sloth)
+- Autocomplete 新增 `clear` 事件，#12171(by arthurdenner) #13326
+- 可以通过点击 Menu 外部来关闭 Menu，#13296
+- Form 的 `validateField` 方法可以接收参数，#13319
+- Cascader 新增 `visible-change` 事件，#13415
+- DatePicker 新增 range-separator slot， #13272 (by @milworm)
+- Tree 新增 `iconClass` 与 `currentNodeKey` 属性，#13337 #13197 (by @isnifer)
+- Progress 的 `status` 添加了 text #13198 (by @ali-master)
+- 修复 Tree 的 `defaultCheckedKeys` 导致显示的错误，#13349 (by @dive2Pro)
+
+### 2.4.9
+
+*2018-10-26*
+
+- Form 组件 clearValidate 方法参数支持字符串，#12990 （by @codinglobster）
+- Badge 新增 type 属性，#12991
+- 用户可以使用 scoped-slot 来自定义表头，#13012（by @ivanseidel）
+- 修复 IE 下 Select 输入框不能输入的问题，#13034（by @GaliMU）
+- Select 多选时，选项不换行，#12329 （by @akki-jat）
+- Select 下拉列表展开后，箭头图标也可以正确显示，#12353（by @firesh）
+- 修复 Select 的 size 属性不生效的问题，#13070
+- 多选时可以清除 Select 已选中的值，#13049（by @ZSkycat）
+- 修复最后一个 TabNav 不能删除的问题，#13039
+- 修复 TabNav 中 label 显示不正确的问题，#13178
+- Alert 新增 title slot，#13082（by @Kingwl）
+- 修复 Table 中的 tooltip 内容不正确的问题，#13159（by @elfman）
+- 优化 Upload 文件列表删除时的动画，#12987
+- 当 InputNumber 控制按钮不显示时，调整了边距，#13052
+
 ### 2.4.8
 
 - Switch 聚焦时不显示轮廓，#12771

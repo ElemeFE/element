@@ -1,62 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tags: [
-          { name: '标签一', type: '' },
-          { name: '标签二', type: 'success' },
-          { name: '标签三', type: 'info' },
-          { name: '标签四', type: 'warning' },
-          { name: '标签五', type: 'danger' }
-        ],
-        dynamicTags: ['标签一', '标签二', '标签三'],
-        inputVisible: false,
-        inputValue: ''
-      };
-    },
-    methods: {
-      handleClose(tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      },
-
-      showInput() {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
-      },
-
-      handleInputConfirm() {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicTags.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-box.demo-tag {
-    .el-tag + .el-tag {
-      margin-left: 10px;
-    }
-    .button-new-tag {
-      margin-left: 10px;
-      height: 32px;
-      line-height: 30px;
-      padding: 0 *;
-    }
-    .input-new-tag {
-      width: 90px;
-      margin-left: 10px;
-      vertical-align: bottom;
-    }
-  }
-</style>
-
 ## Tag 标签
 
 用于标记和选择。
@@ -212,4 +153,5 @@ Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下�
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
+| click | 点击 Tag 时触发的事件 | — |
 | close | 关闭 Tag 时触发的事件 | — |

@@ -1,62 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        color1: '#409EFF',
-        color2: null,
-        color3: 'rgba(19, 206, 102, 0.8)',
-        color4: '#409EFF',
-        color5: 'rgba(255, 69, 0, 0.68)',
-        predefineColors: [
-          '#ff4500',
-          '#ff8c00',
-          '#ffd700',
-          '#90ee90',
-          '#00ced1',
-          '#1e90ff',
-          '#c71585',
-          'rgba(255, 69, 0, 0.68)',
-          'rgb(255, 120, 0)',
-          'hsv(51, 100, 98)',
-          'hsva(120, 40, 94, 0.5)',
-          'hsl(181, 100%, 37%)',
-          'hsla(209, 100%, 56%, 0.73)',
-          '#c7158577'
-        ]
-      };
-    },
-    mounted() {
-      this.$nextTick(() => {
-        const demos = document.querySelectorAll('.source');
-        demos[0].style.padding = '0';
-      });
-    },
-  }
-</script>
-
-<style>
-  .demo-color-picker .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    display: inline-block;
-    width: 50%;
-    box-sizing: border-box;
-    &:last-child {
-      border-right: none;
-    }
-  }
-  .demo-color-picker .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .demo-color-picker .el-color-picker + .el-color-picker {
-    margin-left: 20px;
-  }
-</style>
-
 ## ColorPicker
 
 ColorPicker is a color selector supporting multiple color formats.
@@ -168,6 +109,7 @@ ColorPicker is a color selector supporting multiple color formats.
 ### Attributes
 | Attribute | Description | Type | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | string | — | — |
 | disabled | whether to disable the ColorPicker | boolean | — | false |
 | size | size of ColorPicker | string | — | medium / small / mini |
 | show-alpha | whether to display the alpha slider | boolean | — | false |

@@ -1,60 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        disabled: false
-      };
-    }
-  };
-</script>
-
-<style>
-  .demo-tooltip.demo-es {
-    &:first-of-type .source {
-      .el-button {
-        width: 110px;
-      }
-    }
-    .el-tooltip + .el-tooltip {
-      margin-left: 15px;
-    }
-    .box {
-      width: 400px;
-    
-      .top {
-        text-align: center;
-      }
-      
-      .left {
-        float: left;
-        width: 110px;
-      }
-      
-      .right {
-        float: right;
-        width: 110px;
-      }
-      
-      .bottom {
-        clear: both;
-        text-align: center;
-      }
-      
-      .item {
-        margin: 4px;
-      }
-      
-      .left .el-tooltip__popper,
-      .right .el-tooltip__popper {
-        padding: 8px 10px;
-      }
-      .el-tooltip {
-        margin-left: 0;
-      }
-    }
-  }
-</style>
-
 ## Tooltip
 
 Mostrar aviso de información con el hover del mouse.
@@ -200,6 +143,16 @@ De hecho, Tooltip es una extension basada en [Vue-popper](https://github.com/ele
   </el-tooltip>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
+
 <style>
   .slide-fade-enter-active {
     transition: all .3s ease;
@@ -230,7 +183,7 @@ Es necesario envolver los elementos de forma deshabilitados en un elemento conte
 | effect         | tema del Tooltip                         | string  | dark/light                               | dark                                     |
 | content        | contenido a mostrar, puede ser sobre-escrito por `slot#content` | string  | —                                        | —                                        |
 | placement      | posición del Tooltip                     | string  | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                   |
-| value(v-model) | visibilidad del Tooltip                  | boolean | —                                        | false                                    |
+| value / v-model | visibilidad del Tooltip                  | boolean | —                                        | false                                    |
 | disabled       | saber si el Tooltip se encuentra deshabilitado | boolean | —                                        | false                                    |
 | offset         | offset del Tooltip                       | number  | —                                        | 0                                        |
 | transition     | nombre de animación                      | string  | —                                        | el-fade-in-linear                        |

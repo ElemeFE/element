@@ -15,8 +15,8 @@
     box-sizing: border-box;
     width: 100%;
     font-size: inherit;
-    color: $--input-color;
-    background-color: $--input-fill;
+    color: $--input-font-color;
+    background-color: $--input-background-color;
     background-image: none;
     border: $--input-border;
     border-radius: $--input-border-radius;
@@ -71,12 +71,12 @@
 
   @include e(inner) {
     -webkit-appearance: none;
-    background-color: $--input-fill;
+    background-color: $--input-background-color;
     background-image: none;
     border-radius: $--input-border-radius;
     border: $--input-border;
     box-sizing: border-box;
-    color: $--input-color;
+    color: $--input-font-color;
     display: inline-block;
     font-size: inherit;
     height: $--input-height;

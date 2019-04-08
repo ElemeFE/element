@@ -1,40 +1,10 @@
-<script>
-  export default {
-    data() {
-      return {
-        num1: 1,
-        num2: 1,
-        num3: 5,
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1,
-        num8: 1
-      }
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## InputNumber
 
 Input de  valores numéricos con un rango personalizable.
 
 ### Uso básico
 
-:::demo Vincule una variable con `v-model` en el elemento <el-input-number> y estará listo.
+:::demo Vincule una variable con `v-model` en el elemento `<el-input-number>` y estará listo.
 
 ```html
 <template>
@@ -181,7 +151,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 | Atributo          | Descripción                              | Tipo    | Valores aceptados | Por defecto |
 | ----------------- | ---------------------------------------- | ------- | ----------------- | ----------- |
-| value             | valor vinculado                          | number  | —                 | —           |
+| value / v-model    | valor vinculado                          | number  | —                 | 0           |
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
@@ -192,6 +162,8 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | controls-position | posición de los botones de control       | string  | right             | -           |
 | name              | lo mismo que `name` en un input nativo   | string  | —                 | —           |
 | label             | texto de la etiqueta                     | string  | —                 | —           |
+| placeholder | placeholder in input | string | - | - |
+
 ### Eventos
 
 | Nombre | Descripción                              | Parámetros         |
@@ -204,3 +176,5 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | Método | Descripción                          | Parámetro |
 | ------ | ------------------------------------ | --------- |
 | focus  | coloca el foco en el elemento actual | -         |
+| select | selecciona el contenido del input        | -          |
+

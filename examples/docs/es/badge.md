@@ -114,32 +114,11 @@ Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 ```
 :::
 
-<style scoped>
-  .share-button {
-    width: 36px;
-    padding: 10px;
-  }
-
-  .mark {
-    margin-top: 8px;
-    line-height: 1;
-    float: right;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .item {
-    margin-right: 40px;
-  }
-</style>
-
 ### Atributos
 | Atributo | Descripción                              | Tipo           | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | -------------- | ----------------- | ----------- |
 | value    | valor a mostrar                          | string, number | —                 | —           |
 | max      | valor máximo, Muestra '{max}+' cuando se excede. Solo funciona si `value` es un `Number` | number         | —                 | —           |
 | is-dot   | si se debe mostrar un pequeño punto      | boolean        | —                 | false       |
-| hidden   | hidden badge                             | boolean        | —                 | false       |
+| hidden   | oculta el badge                    | boolean        | —                 | false       |
 | type     | tipo de botón                            | string         | primary / success / warning / danger / info | — |

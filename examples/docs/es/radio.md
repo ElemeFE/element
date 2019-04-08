@@ -1,23 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        radio: '1',
-        radio1: 'selected and disabled',
-        radio2: 3,
-        radio3: 'New York',
-        radio4: 'New York',
-        radio5: 'New York',
-        radio6: 'New York',
-        radio7: '1',
-        radio8: '1',
-        radio9: '1',
-        radio10: '1'
-      };
-    }
-  };
-</script>
-
 ## Radio
 Selección única entre múltiples opciones.
 
@@ -193,6 +173,7 @@ Radio con estilo de botón.
 
 | Atributo | Descripción                              | Tipo                      | Valores Aceptado      | Por defecto |
 | -------- | ---------------------------------------- | ------------------------- | --------------------- | ----------- |
+| value / v-model | valor enlazado | string / number / boolean | — | — |
 | label    | el valor del Radio                       | string / number / boolean | —                     | —           |
 | disabled | si el Radio está deshabilitado           | boolean                   | —                     | false       |
 | border   | agregar borde alrededor del elemento Radio | boolean                   | —                     | false       |
@@ -211,6 +192,7 @@ Radio con estilo de botón.
 
 | Atributo   | Descripción                              | Tipo    | Valores Aceptado      | Valores por defecto |
 | ---------- | ---------------------------------------- | ------- | --------------------- | ------------------- |
+| value / v-model | valor enlazado | string / number / boolean | — | — |
 | size       | tamaño de los `radio buttons` o `bordered radios` | string  | medium / small / mini | —                   |
 | disabled   | si la anidación de radios está desahabilitada | boolean | —                     | false               |
 | text-color | color de las letras cuando el botón está activo | string  | —                     | #ffffff             |

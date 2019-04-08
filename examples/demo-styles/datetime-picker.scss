@@ -1,0 +1,21 @@
+.demo-block.demo-datetime-picker .source > div {
+  padding: 0;
+  display: flex;
+}
+
+.demo-datetime-picker .block {
+  padding: 30px 0;
+  text-align: center;
+  border-right: solid 1px #eff2f6;
+  flex: 1;
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.demo-datetime-picker .demonstration {
+  display: block;
+  color: #8492a6;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

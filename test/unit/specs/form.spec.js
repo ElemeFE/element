@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 const DELAY = 50;
 
@@ -42,6 +42,43 @@ describe('Form', () => {
     expect(vm.$el.querySelector('.el-form-item__label').style.width).to.equal('80px');
     expect(vm.$el.querySelector('.el-form-item__content').style.marginLeft).to.equal('80px');
     done();
+  });
+  it('auto label width', async() => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" label-width="auto">
+          <el-form-item label="活动名称">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="活动备注信息" v-if="display">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          display: true,
+          form: {
+            name: '',
+            intro: ''
+          }
+        };
+      }
+    }, true);
+
+    await waitImmediate();
+
+    const formItems = vm.$el.querySelectorAll('.el-form-item__content');
+    const marginLeft = parseInt(formItems[0].style.marginLeft, 10);
+    const marginLeft1 = parseInt(formItems[1].style.marginLeft, 10);
+    expect(marginLeft === marginLeft1).to.be.true;
+
+    vm.display = false;
+    await waitImmediate();
+
+    const formItem = vm.$el.querySelector('.el-form-item__content');
+    const newMarginLeft = parseInt(formItem.style.marginLeft, 10);
+    expect(newMarginLeft < marginLeft).to.be.true;
   });
   it('inline form', done => {
     vm = createVue({
@@ -284,7 +321,7 @@ describe('Form', () => {
             <el-col class="line" :span="2">-</el-col>
             <el-col :span="11">
               <el-form-item prop="date2">
-                <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
               </el-form-item>
             </el-col>
           </el-form-item>
@@ -517,7 +554,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-time-picker type="fixed-time" ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
+              <el-time-picker ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-form>
         `,

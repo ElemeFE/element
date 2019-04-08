@@ -1,29 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        activeNames: ['1'],
-        activeName: '1'
-      };
-    },
-    methods: {
-      handleChange(val) {
-        console.log(val);
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-collapse {
-    .el-collapse-item__header {
-      .header-icon {
-        margin-left: 5px;
-      }
-    }
-  }
-</style>
-
 ## Collapse
 
 Use Collapse to store contents.
@@ -141,13 +115,13 @@ Besides using the `title` attribute, you can customize panel title with named sl
 ### Collapse Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | currently active panel | string (accordion mode) / array (non-accordion mode) | — | — |
 | accordion | whether to activate accordion mode | boolean | — | false |
-| value | currently active panel | string (accordion mode)/array (non-accordion mode) | — | — |
 
 ### Collapse Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
-| change | triggers when active panels change | activeNames: array (non-accordion mode)/string (accordion mode) |
+| change | triggers when active panels change | (activeNames: array (non-accordion mode) / string (accordion mode)) |
 
 ### Collapse Item Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

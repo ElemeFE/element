@@ -1,22 +1,3 @@
-<script>
-  export default {
-    methods: {
-      hello() {
-        alert('Hello World!');
-      }
-    }
-  }
-</script>
-<style>
-  .demo-box.demo-alert .el-alert {
-    margin: 20px 0 0;
-  }
-
-  .demo-box.demo-alert .el-alert:first-child {
-    margin: 0;
-  }
-</style>
-
 ## Alert
 
 Mostrar mensajes de alertas importantes.
@@ -210,7 +191,7 @@ Descripción incluye un mensaje con información más detallada.
 ### Atributos
 | Atributo    | Descripción                              | Tipo    | Valores aceptados          | Por defecto |
 | ----------- | ---------------------------------------- | ------- | -------------------------- | ----------- |
-| title       | título. Requerido                        | string  | —                          | —           |
+| title       | título                                   | string  | —                          | —           |
 | type        | tipo de componente                       | string  | success/warning/info/error | info        |
 | description | texto descriptivo. También puede ser pasado con el slot por defecto | string  | —                          | —           |
 | closable    | si se puede cerrar o no                  | boolean | —                          | true        |

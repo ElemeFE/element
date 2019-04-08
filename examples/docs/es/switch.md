@@ -1,27 +1,3 @@
-<style>
-  .demo-box.demo-switch {
-    .el-switch {
-      margin: 20px 20px 20px 0;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: true,
-        value2: true,
-        value3: true,
-        value4: true,
-        value5: '100',
-        value6: true,
-        value7: false
-      }
-    }
-  };
-</script>
-
 ## Switch
 
 Switch es utilizdo para realizar cambios entre dos estados opuestos.
@@ -142,6 +118,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 | Atributo            | Descripción                              | Tipo                      | Valores aceptados | Por defecto |
 | ------------------- | ---------------------------------------- | ------------------------- | ----------------- | ----------- |
+| value / v-model      | valor enlazado                           | boolean / string / number | —                 | —           |
 | disabled            | si Switch esta deshabilitado             | boolean                   | —                 | false       |
 | width               | ancho del componente Switch              | number                    | —                 | 40          |
 | active-icon-class   | nombre de la clase del icono mostrado en el estado `on`, sobreescribe `active-text` | string                    | —                 | —           |
@@ -153,6 +130,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 | active-color        | color de fondo cuando se encuentra en el estado `on` | string                    | —                 | #409EFF     |
 | inactive-color      | color de fondo cuando se encuentra en el estado `off` | string                    | —                 | #C0CCDA     |
 | name                | nombre de entrada del componente Switch  | string                    | —                 | —           |
+| validate-event      | si se debe lanzar la validación de formulario | boolean              | -                 | true        |
 
 ### Eventos
 

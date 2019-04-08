@@ -570,4 +570,54 @@ describe('Autocomplete', () => {
       done();
     });
   });
+  it('can highlight first item', done => {
+    vm = createVue({
+      template: `
+        <el-autocomplete
+          ref="autocomplete"
+          v-model="state"
+          :fetch-suggestions="querySearch"
+          highlight-first-item
+        ></el-autocomplete>
+      `,
+      data() {
+        return {
+          restaurants: [],
+          state: ''
+        };
+      },
+      methods: {
+        querySearch(queryString, cb) {
+          const opts = [
+            { 'value': '1' },
+            { 'value': '11' },
+            { 'value': '2' },
+            { 'value': '22' }
+          ];
+          cb(
+            queryString
+              ? opts.filter(opt => opt.value.indexOf(queryString) >= 0)
+              : opts
+          );
+        }
+      }
+    }, true);
+    let elm = vm.$el;
+    let inputElm = elm.querySelector('input');
+    inputElm.focus();
+
+    const autocomplete = vm.$refs.autocomplete;
+    const input = autocomplete.$refs.input;
+    input.$emit('input', '1');
+
+    setTimeout(_ => {
+      const suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
+      const items = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+
+      expect(items.length).to.equal(2);
+      expect(items[0].classList.contains('highlighted')).to.be.true;
+
+      done();
+    }, 500);
+  });
 });

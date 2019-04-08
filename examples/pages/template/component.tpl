@@ -71,7 +71,7 @@
           }
 
           td, th {
-            border-bottom: 1px solid #d8d8d8;
+            border-bottom: 1px solid #dcdfe6;
             padding: 15px;
             max-width: 250px;
           }
@@ -79,12 +79,12 @@
           th {
             text-align: left;
             white-space: nowrap;
-            color: #666;
+            color: #909399;
             font-weight: normal;
           }
 
           td {
-            color: #333;
+            color: #606266;
           }
 
           th:first-child, td:first-child {
@@ -107,6 +107,8 @@
       position: fixed;
       right: 100px;
       bottom: 150px;
+      width: 40px;
+      height: 40px;
       size: 40px;
       border-radius: 20px;
       cursor: pointer;
@@ -130,6 +132,38 @@
     .back-top-fade-leave-active {
       transform: translateY(-30px);
       opacity: 0;
+    }
+  }
+
+  @media (min-width: 1140px) {
+    .page-component__content {
+      transition:padding-right 0.3s ease;
+      &.theme-config {
+        padding-right: 26%;  
+      }
+    }
+    .page-container.page-component {
+      transition:all 0.3s ease;
+      &.theme-config {
+        width: 98%;
+        .page-component__nav {
+          animation-delay: 1s;
+          padding-left: 2%;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .page-component__content {
+      &.theme-config {
+        padding-right: 25%;
+      }
+    }
+    .page-container.page-component {
+      &.theme-config {
+        width: 1600px;
+      }
     }
   }
 
@@ -163,11 +197,11 @@
 </style>
 <template>
   <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
-  <div class="page-container page-component">
+  <div class="page-container page-component" :class="{'theme-config': isThemeConfigVisible}">
     <el-scrollbar class="page-component__nav">
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
     </el-scrollbar>
-    <div class="page-component__content">
+    <div class="page-component__content" :class="{'theme-config': isThemeConfigVisible}">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
     </div>
@@ -200,7 +234,8 @@
         scrollTop: 0,
         showHeader: true,
         componentScrollBar: null,
-        componentScrollBoxElement: null
+        componentScrollBoxElement: null,
+        isThemeConfigVisible: false
       };
     },
     watch: {
@@ -215,7 +250,7 @@
     methods: {
       renderAnchorHref() {
         if (/changelog/g.test(location.href)) return;
-        const anchors = document.querySelectorAll('h2 a,h3 a');
+        const anchors = document.querySelectorAll('h2 a,h3 a,h4 a,h5 a');
         const basePath = location.href.split('#').splice(0, 2).join('#');
 
         [].slice.call(anchors).forEach(a => {
@@ -261,16 +296,14 @@
       bus.$on('navFade', val => {
         this.navFaded = val;
       });
-      window.addEventListener('hashchange', () => {
-        if (location.href.match(/#/g).length < 2) {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-          this.renderAnchorHref();
-        } else {
-          this.goAnchor();
-        }
+      bus.$on('user-theme-config-visible', val => {
+        this.isThemeConfigVisible = val;
       });
     },
     mounted() {
+      if (window.userThemeConfigVisible) {
+        this.isThemeConfigVisible = window.userThemeConfigVisible;
+      }
       this.componentScrollBar = this.$refs.componentScrollBar;
       this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
       this.throttledScrollHandler = throttle(300, this.handleScroll);
@@ -284,6 +317,17 @@
     },
     beforeDestroy() {
       this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
+    },
+    beforeRouteUpdate(to, from, next) {
+      next();
+      setTimeout(() => {
+        if (location.href.match(/#/g).length < 2) {
+          document.documentElement.scrollTop = document.body.scrollTop = 0;
+          this.renderAnchorHref();
+        } else {
+          this.goAnchor();
+        }
+      }, 100);
     }
   };
 </script>

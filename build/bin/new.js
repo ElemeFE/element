@@ -54,6 +54,10 @@ export default {
     content: `## ${ComponentName}`
   },
   {
+    filename: path.join('../../examples/docs/fr-FR', `${componentname}.md`),
+    content: `## ${ComponentName}`
+  },
+  {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
     content: `import { createTest, destroyVM } from '../util';
 import ${ComponentName} from 'packages/${componentname}';

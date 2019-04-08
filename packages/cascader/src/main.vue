@@ -231,16 +231,13 @@ export default {
     menuVisible(value) {
       this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
       value ? this.showMenu() : this.hideMenu();
+      this.$emit('visible-change', value);
     },
     value(value) {
       this.currentValue = value;
     },
     currentValue(value) {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
-    },
-    currentLabels(value) {
-      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
-      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
     },
     options: {
       deep: true,
@@ -367,7 +364,7 @@ export default {
         const keywordIndex = label.toLowerCase().indexOf(inputValue.toLowerCase());
         const labelPart = label.slice(keywordIndex, inputValue.length + keywordIndex);
         const node = keywordIndex > -1 ? this.highlightKeyword(label, labelPart) : label;
-        return index === 0 ? node : [' / ', node];
+        return index === 0 ? node : [` ${this.separator} `, node];
       });
     },
     highlightKeyword(label, keyword) {

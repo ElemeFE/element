@@ -5,7 +5,7 @@
       "hide-text": "隐藏代码",
       "show-text": "显示代码",
       "button-text": "在线运行",
-      "tooltip-text": "前往 jsfiddle.net 运行此示例"
+      "tooltip-text": "前往 codepen.io 运行此示例"
     },
     "footer": {
       "links": "链接",
@@ -36,7 +36,7 @@
       "hide-text": "Hide",
       "show-text": "Expand",
       "button-text": "Try it!",
-      "tooltip-text": "Run this demo on jsfiddle.net"
+      "tooltip-text": "Run this demo on codepen.io"
     },
     "footer": {
       "links": "Links",
@@ -67,7 +67,7 @@
       "hide-text": "Ocultar",
       "show-text": "Mostrar",
       "button-text": "Probar",
-      "tooltip-text": "Prueba este ejemplo en jsfiddle.net"
+      "tooltip-text": "Prueba este ejemplo en codepen.io"
     },
     "footer": {
       "links": "Enlaces",
@@ -90,6 +90,37 @@
     },
     "nav": {
       "dropdown": "Versión: "
+    }
+  },
+  {
+    "lang": "fr-FR",
+    "demo-block": {
+      "hide-text": "Réduire",
+      "show-text": "Agrandir",
+      "button-text": "Essayez!",
+      "tooltip-text": "Essayer cette démo sur codepen.io"
+    },
+    "footer": {
+      "links": "Liens",
+      "repo": "GitHub",
+      "community": "Communauté",
+      "changelog": "Changelog",
+      "theme": "Générateur de thème (CLI)",
+      "preview": "Générateur de thème en ligne",
+      "faq": "FAQ",
+      "gitter": "Gitter",
+      "starter": "Kit de démarrage",
+      "feedback": "Commentaires",
+      "contribution": "Contribution",
+      "eleme": "Eleme"
+    },
+    "header": {
+      "guide": "Guide",
+      "components": "Composants",
+      "resource": "Ressources"
+    },
+    "nav": {
+      "dropdown": "Version: "
     }
   }
 ]

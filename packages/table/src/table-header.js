@@ -302,7 +302,8 @@ export default {
       return classes.join(' ');
     },
 
-    toggleAllSelection() {
+    toggleAllSelection(event) {
+      event.stopPropagation();
       this.store.commit('toggleAllSelection');
     },
 
@@ -467,7 +468,9 @@ export default {
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = givenOrder || this.toggleOrder(column);
+      let order = column.order === givenOrder
+        ? null
+        : (givenOrder || this.toggleOrder(column));
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {

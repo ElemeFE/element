@@ -8,7 +8,7 @@
   height: 32px;
   line-height: 30px;
   font-size: $--tag-font-size;
-  color: $--tag-color;
+  color: $--tag-font-color;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   border: 1px solid $--tag-border;
@@ -26,14 +26,14 @@
     vertical-align: middle;
     top: -1px;
     right: -5px;
-    color: $--tag-color;
+    color: $--tag-font-color;
 
     &::before {
       display: block;
     }
 
     &:hover {
-      background-color: $--tag-color;
+      background-color: $--tag-background-color;
       color: $--color-white;
     }
   }
