@@ -1,14 +1,3 @@
-<style>
-  .demo-box.demo-progress {
-    .el-progress--line {
-      margin-bottom: 15px;
-      width: 350px;
-    }
-    .el-progress--circle {
-      margin-right: 15px;
-    }
-  }
-</style>
 ## Progress
 
 Progress is used to show the progress of current operation, and inform the user the current status.

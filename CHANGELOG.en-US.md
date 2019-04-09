@@ -1,5 +1,338 @@
 ## Changelog
 
+### 2.7.2
+
+*2019-04-03*
+
+#### Bug fixes
+
+- Form
+  - Fix auto `label-width` style (#14955 by @ziyoung)
+  
+#### Optimization
+- Docs
+  - Fix doc img link error (#14957 by @iamkun)
+- Chore
+  - Fix deploy mkdir error (#14952 by @iamkun)
+
+### 2.7.1
+
+*2019-04-03*
+
+#### Bug fixes
+
+- Select
+  - Set value to null when cleared (#14322 by @aaronfulkerson)
+- Input
+  - Update DOM dependent values on type change (#14889 by @wacky6)
+- Table
+  - Make `defaultExpandAll` works when expanded column exists (#14935 by @ziyoung)
+- Dialog
+  - Background color can be configured (#14939 by @ziyoung)
+- Form
+  - `label-width` supports auto width (#14944 by @ziyoung)
+  
+#### Optimization
+- Docs
+  - Update Spanish docs (#14913 by @Gonzalo2310)
+  - Add French doc for new component (#14924 by @ziyoung)
+  - Optimize Tabs docs (#14938 by @ziyoung)
+
+### 2.7.0
+
+*2019-03-28*
+
+#### New features
+
+- Table
+  - Add support tree structure data (#14632 by @ziyoung)
+
+#### Bug fixes
+
+- Tabs
+  - Use primary color as boxShadow color (#14558 by @Richard-Choooou)
+  - Rerender when label changes (#14496 by @akki-jat)
+- Table
+  - Footer follows body cell align (#14730 by @ziyoung)
+- NavMenu
+  - Fix click el-submenu trigger childMenu pop again bug (#14443 by @PanJiaChen)
+- Dropdown
+  - Make compatible with 2.6 new v-slot syntax (#14832 by @ziyoung)
+- ColorPicker
+  - Fix handle error hex color string (#14793 by @iamkun)
+- Tree
+  - Revert pr #13349 (#14847 by @ziyoung)
+- Tooltip
+  - Display when initial value is true (#14826 by @ziyoung)
+- Docs
+  - Update cascader docs (#14442 by @panhezeng)
+- Style
+  - Fix media query in sm-only, md-only, lg-only (#14611 by @sinchang)
+
+#### Optimization
+
+- Chore
+  - Add webpage description (#14802 by @iamkun)
+
+### 2.6.3
+
+*2019-03-21*
+
+#### Bug fixes
+
+- Fix Cascader demo style (#14789 by @ziyoung)
+- Remove unnecessary DOM operation (#14788 by @ziyoung)
+- Fix DatePicker default-value DST (#14562 by @wacky6)
+
+### 2.6.2
+
+*2019-03-21*
+
+#### New features
+
+- DatePicker
+  - Add monthrange for type attribute (#14487 by @zxyRealm)
+- i18n
+  - Add Croatian locale (#14360 by @danijelh)
+
+#### Bug fixes
+
+- Input
+  - Fix regression (#14572 by @wacky6)
+- DatePicker
+  - Fix first-day-of-week computation (#14523 by @sinchang)
+  - Fix week picker's value-format (#13754 by @wacky6)
+- Steps
+  - Fix issue #14502 (#14596 by @sinchang)
+  - Fix style with simple theme (#14610 by @sinchang)
+- Docs
+  - Update french doc for 2.6.1 and fix typos (#14555 by @smalesys)
+  - Rename variable in Table docs (#14587 by @likwotsing)
+  - Add french search index (#14565 by @iamkun)
+  - Fix TimePicker page style (#14579 by @ziyoung)
+  - Rename variable in Upload docs (#14593 by @liupl)
+  - French translation update (#14643 by @smalesys)
+  - Update Form async validator docs (#14694 by @iamkun)
+  - Fix tooltip doc error (#14748 by @iamkun)
+  - Fix typo (#14751 by @2bj)
+  - Fix highlighting control elements for Webkit touch (#14703 by @VladG0r)
+
+#### Optimization
+
+- Chore
+  - Update ci build script (#14600 by @ziyoung)
+  - Update ga tracking (#14560 by @iamkun)
+  - Add more ga event (#14633 by @iamkun)
+  - Update discusion group (#14741 by @iamkun)
+  - Update test deps and conf (#14735 by @wacky6)
+  - Upgrade gulp (#14745 by @ziyoung)
+  - Use codepen to display demo & fix doc error (#14747 by @ziyoung)
+
+### 2.6.1
+
+*2019-03-03*
+
+#### Bug fixes
+
+- **Don't specify node version** (by @iamkun in #14546)
+- Fix doc directory in `deloy-faas.sh` (by @ziyoung in #14553)
+- Fix date style issue in changelog for 2.6.0 (by @island205 in #14547)
+- Fix doc typo (by @wack6 in #14552)
+
+### 2.6.0
+
+*2019-03-01*
+
+#### New features
+- Timeline
+  - Add timeline component (by @jikkai in #14248)
+- DropdownItem
+  - Add icon prop to `el-dropdown-item` (by @gabrielboliveira in #14088)
+- Input
+  - Add show-password props (by @phshy0607 in #13966)
+- Select
+  - Add slot `empty` (by @elfman in #13785)
+- Autocomplete
+  - Add highlight-first-item prop (by @YamenSharaf in #14269)
+- I18n
+  - Created Armenian locale (by @hamletbarsamyan in #14214)
+- Docs
+  - French translation (by @smalesys in #12153, #14418, #14434)
+
+#### Optimization
+- Alert
+  - Update alert description default slot class (by @iamkun in #14488)
+- Input
+  - Update input password (by @iamkun in #14480)
+- InputNumber
+  - Remove unnecessary parseFloat (by @JuniorTour in #14172)
+- Menu
+  - Add support for `el-menu-item` without index (by @georgyfarniev in #13298)
+- Table
+  - Remove some html DOM operations (by @elfman in #13643)
+- Upload
+  - Optimize code (by @elfman in #13973)
+- Popup
+  - Optimize code (by @KAionro in #14413)
+- Docs
+  - Add more detail about how to run play mode for contribution (by @island205 in #14355)
+  - Warn input as a controlled component. (by @wacky6 in #14463)
+  - Update Table doc (by @luguokong in #14329)
+  - Update input doc (by @iamkun in #14437)
+  - Update custom-theme docs (by @wangguohao in #14297)
+  - Make the icon style change when hover on it (by @tuxinghuan in #14295)
+- Build
+  - Minimizing css and js for Element doc site (by @iamkun in #14430)
+  - Speeding up webpack (by @hetech in #14484)
+  - Use cli to select release version (by @hetech in #14354)
+- Install stale for issue handling (by @island205 in #14392)
+
+#### Bug fixes
+- Menu
+  - Fix subMenu focus bug when switch browser tab (by @liupl in #13976)
+- MessageBox
+  - Fix type definition (by @NateScarlet in #14278)
+- ScrollBar
+  - Prevent right button click on thumb (by @xifeiwu in #14196)
+- Switch
+  - Trigger form validation if value changes (by @hetech in #14426)
+- Table
+  - Make toggleAllSelection method an instance method (by @letanure in #14075)
+- Tabs & Dropdown
+  - Fix style (by @hetech in #14452)
+- Tree
+  - Empty-text tips are different from tables (by @ColinCll in #14331)
+- Docs
+  - Fix  DatetimePicker format doc error (by @iamkun in #14290)
+  - Spelling issue in datepicker documentation (by @helmut in #14481)
+  - Fix pagination doc style (by @liuchuzhang in #14451)
+
+### 2.5.4
+
+*2019-02-01*
+
+#### Bug fixes
+
+- Build: Fix babel config issue which lead to collapse transition broken (by @island205 in #14282)
+
+### 2.5.3
+
+*2019-01-31*
+
+#### Optimization
+
+- Optimize code of Message (by @vok123 in #14029)
+- Retire gh-pages (by @ziyoung in #14266)
+- Add IssueHunt link (by @island205 in #14261)
+
+#### Bug fixes
+
+- Fix UMD module error on server side (by @island205 in #14242)
+- Fix active TabBar style (by @iamkun in #14240)
+- Fix Table demo code error (by @xunmeng in #14253)
+
+### 2.5.2
+
+*2019-01-27*
+
+#### Optimization
+- Docs:
+  - Update ChangeLog ES 2.5.1 (by @Gonzalo2310 in #14231)
+
+#### Bug fixes
+- Build:
+  - Delete unremoved comments in umd module `lib/index.js` (by @island205 in #14233)
+  - Fix export error fired in commonjs module used in nuxt.js (by @island205 in #14232)
+  - Fix 2.5.1 build issues  (by @iamkun in #14228)
+
+### 2.5.1
+
+*2019-01-26*
+
+#### Optimization
+- DatePicker: highlight current month and year (by @Debiancc in #14211)
+- Update 2.5.0 changelog (by @wacky6 in #14217)
+
+#### Bug fixes
+- Fix export issue generate by webpack upgrading (by @island205 in #14220)
+- Keep 2.4.11 docs && new sub folder for 2.5+ (by @iamkun in #14222)
+
+### 2.5.0
+
+*2019-01-25*
+
+#### New features
+- DatePicker
+  - Add `validate-event` attribute (by @ziyoung in #13531)
+- DateTimePicker
+  - `pickerOptions` support `selectableRange` option (by @eeeeeeeason)
+- Tag
+  - Add `click` event (by @licdream in #14106)
+- I18n
+  - support Kyrgyz language (by @zzjframework in #14174)
+
+#### Optimization
+- Upgrade to webpack@4 (by @jikkai in #14173)
+- Input
+  - Simplify implementation, follow one-way data flow. Fix several related bugs. (by @wacky6 in #13471)
+- Update Axure file，add new components (by @ziyoung in #13773)
+
+#### Bug fixes
+- Autocomplete
+  - Fix dropdown's last line beging clipped (by @ziyoung in #13597)
+  - Fix missing popper arrow (by @liuchuzhang in #13762)
+- Carousel
+  - Cleanup timer when component is destroyed (by @elfman in #13820)
+- Cascader
+  - Remove deprecated property of computed props (by @iamkun in #13737)
+  - Fix CascaderOption's type definition in TypeScript (by @NateScarlet in #13613)
+  - Fix icon covering the text (by @ziyoung in #13596)
+- Checkbox
+  - Refine style (by @PanJiaChen)
+- DatePicker
+  - Add missing v-for `key` in TimeSpinner (by @Ende93 in #13547)
+  - Fix week highlight on year boundary (by @suyi91 in #13883)
+- Input
+  - Fix textarea DOM node reference (by @laomu1988 @island205 in #13803)
+- Pagination
+  - Input value won't be less than 1 (by @elfman in #13727)
+- Popover
+  - Fix popover issues with hover trigger (by @goldengecko in #13104)
+  - Fix popper instance memory leak (by @qpxtWhite in #13988)
+- Radio
+  - Refine style (by @ohhoney1)
+- Table
+  - Enhanced table sorting when clicking on the sorting arrow (by @ohhoney1 in #12890)
+  - Fix empty text vertical alignment issue on IE10+ (by @imzjy in #13638)
+  - Fix index type documentation (by @ilovefafa in #13628)
+  - Fix `show-summary` display issue when multilevel header has fixed attr (by @luckyCao in #13914)
+- Tabs
+  - Fix auto scroll bug (by @iamkun in #13696)
+  - Get the correct tab through tab name (by @iamkun in #13705)
+  - Use paneName instead of name to determine pane style (by @iamkun in #13733)
+- Tree
+  - Fix `showCheckbox` prop on `Tree` can not affect their children `tree-node` (by @KidneyFlower)
+  - Update doc and definition file (by @ziyoung in #13540)
+- Upload
+  - Add `url` prop to upload file when `list-type` changed (by @elfman in #13771)
+- Slider
+  - Fix source code indentation (by @wacky6 in #13955)
+- I18n
+  - Add missing Catalan translations (by @jaumesala)
+  - Add missing ru translation (by @justlp in #13658)
+  - Fix Finnish translations (by @jenkrisu in #14137)
+- Doc
+  - Update Spanish doc 2.4.11 (by @Gonzalo2310 in #13522)
+- Others
+  - Remove unnecessary script (by @ziyoung)
+  - Fix error anchor link (by @iamkun in #13753)
+  - Fix inconsistent capitalization in documentation (by @wonderjar)
+  - Add DingDing chat group qr code to readme (by @iamkun in #13957)
+  - Add yarn logs to .gitignore (by @mimimi in #13922)
+  - Remove sponsor duotai (by @island205 in #14156)
+  - Update readme qr code src (by @iamkun in #13960)
+  - Update CDN link, fix typo (by @ziyoung)
+
 ### 2.4.11
 
 *2018-11-21*
@@ -66,17 +399,17 @@
 
 *2018-09-14*
 
-- Fixed DatePicker not triggering form validation, #12328 #12348 
-- Fixed DatePicker throwing errors in multiple mode, #12347 
+- Fixed DatePicker not triggering form validation, #12328 #12348
+- Fixed DatePicker throwing errors in multiple mode, #12347
 - Fixed incorrect position of DatePicker spinner, #12415 (by @rang-ali)
 - Fixed automatic filling of DatePicker input box, #12521 (by @abdallanayer)
 - Fixed Input not highlighted in Cascader, #12341
-- Fixed wrong order of Tabpane, #12346 
+- Fixed wrong order of Tabpane, #12346
 - Fixed incorrect position of ColorPicker cursor, #12376 (by @cnwhy)
 - Fixed the style of Submenu, #2457
 - Fixed not highlighted after Submenu is selected, #12479
 - Fixed incorrect values selected by Cascader, #12508 (by @huangjinqiang)
-- Fixed incorrect value of Pagination input box, #12525 
+- Fixed incorrect value of Pagination input box, #12525
 - Fixed order that Pagination triggers events, #12530
 - Fixed Table Filter not displayed, #12539
 - Fixed Tree unable to delete nodes, #12684
@@ -111,7 +444,7 @@
 
 - Fixed Table setting `class-name` does not work for `expand` column, #12006
 - Added `toggleAllSelection` method for Table, #12047
-- Fixed wrong position of suffix slot when Input contains Select, #12108 
+- Fixed wrong position of suffix slot when Input contains Select, #12108
 - Fixed `line-height` of Option unable to set, #12120
 - Fixed TimeSelect with default value of `null` could not be assigned after executing `resetField`, #12010
 - Fixed keydown event which is not arrow key does not work in Tree, #12008
@@ -188,7 +521,7 @@
   - Added `precision` attribute, #11281
 - Tabs
   - Added `before-leave` attribute, #11259
-  - Added `lazy` attribute, #11167（by @Kingwl）
+  - Added `lazy` attribute, #11167(by @Kingwl)
 - Table
   - Added `sort` method to manually sort the table, #11311
 
@@ -237,7 +570,7 @@
 - Fixed closing the DatePicker panel without changing the value incorrectly triggering the `change` event, #11017
 - Fixed keyboard navigation not working properly when Select has grouped options, #11058
 - Added `prefix` named slot for Select, #11063
-- Added 'clearValidate` method for FormItem, #11076
+- Added `clearValidate` method for FormItem, #11076
 - Added `checkOnClickNode` attribute for Tree, #11111
 
 ### 2.3.7
@@ -343,7 +676,7 @@
 - Pagination
   - Fixed `current-change` event wrongly triggering without user interaction, #10247
 - DatePicker
-  - Now the date and time value in the dropdown panel are correctly formatted based on the `format` attribute, #10174（by @remizovvv）
+  - Now the date and time value in the dropdown panel are correctly formatted based on the `format` attribute, #10174(by @remizovvv)
 - Upload
   - Fixed `accept` attribute not working when `drag` is true, #10278
 
@@ -436,7 +769,7 @@
 - Dropdown
   - Fixed dropdown menu incorrect positioning when the page only has a horizontal scrollbar in some browsers, #9138 (by @banzhuanmei)
 - Table
-  - Fixed an error in calculating number of fixed columns after the column data changes, #9188（by @kolesoffac）
+  - Fixed an error in calculating number of fixed columns after the column data changes, #9188(by @kolesoffac)
   - Fixed the border of the last column of the grouped header not properly displayed, #9326
   - Fixed incorrect positioning of table header in Safari, #9327
   - Fixed expanded row collapsing when the table data changes, #9462

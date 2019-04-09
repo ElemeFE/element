@@ -274,5 +274,98 @@
         "placeholder2": "Se están desarrollando más recursos"
       }
     }
+  },
+  {
+    "lang": "fr-FR",
+    "pages": {
+      "index": {
+        "1": "Un kit de composants d'interface pour le web",
+        "2": "Element, une bibliothèque de composants web basée sur Vue 2.0 pour les développeurs, designers et chef de produits.",
+        "3": "Guide",
+        "4": "Comprendre le design, aider les designers à concevoir un produit adapté, structuré et facile d'utilisation.",
+        "5": "Détails",
+        "6": "Composants",
+        "7": "Découvrez les détails de chaque composant and parcourant les différentes démos. Utilisez l'encapsulation du code pour développer plus efficacement.",
+        "8": "Ressources",
+        "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
+        "9": "Téléchargez différents outils de prototypage ou de visualisation pour un design plus efficace.",
+        "lang": "fr-FR",
+        "titleSize": "34",
+        "paraSize": "18"
+      },
+      "component": {},
+      "changelog": {
+        "1": "Changelog",
+        "2": "fr-FR"
+      },
+      "design": {
+        "1": "Principes de conception",
+        "2": "Cohérence",
+        "3": "",
+        "4": "Feedback",
+        "5": "",
+        "6": "Efficacité",
+        "7": "",
+        "8": "Controlabilité",
+        "9": "",
+        "10": "Cohérence",
+        "11": "Cohérence avec la vraie vie: ",
+        "12": "en accord avec les processus habituels de la vie réelle, conforme aux langages et habitudes des utilisateurs.",
+        "13": "Cohérence au sein de l'interface: ",
+        "14": "tout les élements doivent être cohérents entre eux et suivre les même règles, par exemple: le style global, les icônes, la position des élements, etc.",
+        "15": "Feedback",
+        "16": "Retour d'expèrience: ",
+        "17": "permets aux utilisateurs de percevoir clairement leur opérations par le biais d'animations et d'effets interactifs.",
+        "18": "Retour visuel: ",
+        "19": "reflète l'état actuel de la page via le réarrangement ou la mise à jour des éléments.",
+        "20": "Efficacité",
+        "21": "Simplifier le processus: ",
+        "22": "garde chaque operation simple et intuitive.",
+        "23": "Clair et défini: ",
+        "24": "énonce clairement ses intentions afin que l'utilisateur puisse comprendre et prendre une décision rapidement.",
+        "25": "Facile à identifier: ",
+        "26": "l'interface devrait être simple et facile d'accès, afin que les utilisateurs n'ai pas d'efforts de mémorisation à faire.",
+        "27": "Controllabilité",
+        "28": "Prise de décision: ",
+        "29": "possibilité de donner des conseils sur les opérations, mais ne jamais prendre de décisions à la place des utilisateurs",
+        "30": "Contrôle des conséquences: ",
+        "31": "les utilisateurs devraient pouvoir controller l'exécution de leurs opérations, y compris l'annulation et la suppression des opérations courantes."
+      },
+      "guide": {
+        "1": "Principes de conception",
+        "2": "Navigation"
+      },
+      "nav": {
+        "1": "Navigation",
+        "2": "La navigation a pour but de guider les utilisateurs pour qu'ils sachent ou aller et comment y parvenir. En général on peut distinguer deux types de navigation: le menu latéral ou 'sidebar' et le menu en haut de page ou 'topbar'.",
+        "3": "Choisir la bonne navigation",
+        "4": "Une navigation appropriée procure à l'utilisation une expèrience facile et fluide, alors qu'une mauvaise navigation entraîne de la confusion. Voici les différences entre les navigations 'sidebar' et 'topbar'",
+        "5": "Menu latéral",
+        "6": "Fixe la navigation sur le coté gauche, améliorant ainsi sa visibilité et facilitant le passage d'une page à l'autre. Dans ce cas, la zone en haut de la page peut contenir une barre de recherche, des liens vers de la documentation, des contacts, des boutons d'aide, etc. Utile pour des interfaces de gestion ou des sites utilitaires.",
+        "7": "Catégories de niveau 1",
+        "8": "Appropriées pour des sites avec une structure simple et un seul niveau de page. L'affichage du chemin de navigation n'est pas néccessaire.",
+        "9": "Catégories de niveau 2",
+        "10": "Le menu affiche au moins deux niveaux de navigation. Dans ce cas l'affichage du chemin de navigation est recommandé, afin que l'utilisateur sache facilement ou il se trouve.",
+        "11": "Catégories de niveau 3",
+        "12": "Appropriées pour les sites web complexes. La barre la plus à gauche gère le premier niveau de navigation, tandis que celle à coté gère le deuxième niveau ansi que d'autres options.",
+        "13": "Menu en haut de page",
+        "14": "Conforme à l'ordre normal de navigation qui va de haut en bas, ce qui rends les choses plus naturelles. Les quantités de liens et de texte sont limités par la largeur de la barre.",
+        "15": "Approprié pour les sites ayant une navigation simple et un contenu large."
+      },
+      "resource": {
+        "1": "Resources",
+        "2": "En construction.",
+        "3": "Composants Axure",
+        "4": "En important ELement UI dans Axure, vous pourrez facilement utiliser les composants durant le design des interactions",
+        "5": "Téléchargement",
+        "6": "Modèle de croquis",
+        "7": "Applique des composants d'un template Element, afin d'améliorer l'efficacité du design tout en gardant un style visuel unifié.",
+        "8": "Documentation du design des interactions",
+        "9": "Jetez un oeil à la documentation du design des interactions. Obtenez des détails sur chaque composant.",
+        "paraHeight": "1.6",
+        "placeholder1": "En construction",
+        "placeholder2": "Plus de ressources sont en développement."
+      }
+    }
   }
 ]

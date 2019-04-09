@@ -1,48 +1,3 @@
-<script>
-  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
-  module.exports = {
-    data() {
-      return {
-        checkList: ['selected and disabled','Option A'],
-        // checkList2: ['Option A'],
-        checked: true,
-        checked1: false,
-        checked2: true,
-        checked3: true,
-        checked4: false,
-        checked5: false,
-        checked6: true,
-        isValid: 'valid',
-        checkAll: false,
-        cities: cityOptions,
-        checkedCities: ['Shanghai', 'Beijing'],
-        checkedCities1: ['Shanghai', 'Beijing'],
-        isIndeterminate: true,
-        checkboxGroup1: ['Shanghai'],
-        checkboxGroup2: ['Shanghai'],
-        checkboxGroup3: ['Shanghai'],
-        checkboxGroup4: ['Shanghai'],
-        checkboxGroup5: [],
-        checkboxGroup6: []
-      };
-    },
-    methods: {
-      handleChange(ev) {
-        console.log(ev);
-      },
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
-    }
-  };
-</script>
-
 ## Checkbox
 
 A group of options for multiple choices.
@@ -286,6 +241,7 @@ Checkbox with button styles.
 ### Checkbox Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | string / number / boolean | — | — |
 | label     | value of the Checkbox when used inside a `checkbox-group`   | string / number / boolean   |       —        |     —    |
 | true-label | value of the Checkbox if it's checked   | string / number    |       —        |     —    |
 | false-label | value of the Checkbox if it's not checked   | string / number    |      —         |     —    |
@@ -304,6 +260,7 @@ Checkbox with button styles.
 ### Checkbox-group Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | array | — | — |
 |size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini | — |
 | disabled  | whether the nesting checkboxes are disabled | boolean   | — | false   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |

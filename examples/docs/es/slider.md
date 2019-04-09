@@ -1,54 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        value1: 0,
-        value2: 50,
-        value3: 36,
-        value4: 48,
-        value5: 42,
-        value6: 0,
-        value7: 0,
-        value8: 0,
-        value9: [4, 8],
-        value10: 0
-      };
-    },
-    methods: {
-      formatTooltip(val) {
-        return val / 100;
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-box.demo-slider .source {
-    padding: 0;
-  }
-
-  .demo-box.demo-slider .block {
-    padding: 30px 24px;
-    overflow: hidden;
-    border-bottom: solid 1px #EFF2F6;
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .demo-box.demo-slider .demonstration {
-    font-size: 14px;
-    color: #8492a6;
-    line-height: 44px;
-  }
-
-  .demo-box.demo-slider .demonstration + .el-slider {
-    float: right;
-    width: 70%;
-    margin-right: 20px;
-  }
-</style>
-
 ## Slider
 
 Desliza el slider dentro de un rango fijo.
@@ -230,6 +179,7 @@ Se soporta la selección de un rango de valores.
 ## Atributos
 | Atributo            | Descripción                              | Tipo            | Valores aceptados | Por defecto |
 | ------------------- | ---------------------------------------- | --------------- | ----------------- | ----------- |
+| value / v-model      | valor enlazado                           | number          | —                 | 0           |
 | min                 | valor minimo                             | number          | —                 | 0           |
 | max                 | valor máximo                             | number          | —                 | 100         |
 | disabled            | si el Slider esta deshabitado            | boolean         | —                 | false       |

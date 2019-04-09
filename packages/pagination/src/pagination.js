@@ -345,9 +345,9 @@ export default {
   computed: {
     internalPageCount() {
       if (typeof this.total === 'number') {
-        return Math.ceil(this.total / this.internalPageSize);
+        return Math.max(1, Math.ceil(this.total / this.internalPageSize));
       } else if (typeof this.pageCount === 'number') {
-        return this.pageCount;
+        return Math.max(1, this.pageCount);
       }
       return null;
     }

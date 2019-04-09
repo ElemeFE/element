@@ -1,33 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        num1: 1,
-        num2: 1,
-        num3: 5,
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1,
-        num8: 1,
-        num9: 1
-      }
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
-</script>
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## InputNumber 计数器
 
 仅允许输入标准的数字值，可定义范围
@@ -178,7 +148,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |----------|-------------- |----------|--------------------------------  |-------- |
-| value    | 绑定值         | number | — | — |
+| value / v-model    | 绑定值         | number | — | 0 |
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
 | step     | 计数器步长           | number   | — | 1 |

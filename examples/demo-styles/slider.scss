@@ -1,0 +1,24 @@
+.demo-block.demo-slider .source {
+  padding: 0;
+}
+
+.demo-block.demo-slider .block {
+  padding: 30px 24px;
+  overflow: hidden;
+  border-bottom: solid 1px #eff2f6;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.demo-block.demo-slider .demonstration {
+  font-size: 14px;
+  color: #8492a6;
+  line-height: 44px;
+}
+
+.demo-block.demo-slider .demonstration + .el-slider {
+  float: right;
+  width: 70%;
+  margin-right: 20px;
+}

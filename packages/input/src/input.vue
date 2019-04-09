@@ -8,7 +8,7 @@
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
       'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable
+      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }
     ]"
     @mouseenter="hovering = true"
@@ -24,15 +24,13 @@
         v-if="type !== 'textarea'"
         class="el-input__inner"
         v-bind="$attrs"
-        :type="type"
+        :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
         :disabled="inputDisabled"
         :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
-        :value="nativeInputValue"
         ref="input"
-        @compositionstart="handleComposition"
-        @compositionupdate="handleComposition"
-        @compositionend="handleComposition"
+        @compositionstart="handleCompositionStart"
+        @compositionend="handleCompositionEnd"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -50,18 +48,22 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon">
+        v-if="$slots.suffix || suffixIcon || showClear || showPassword || validateState && needStatusIcon">
         <span class="el-input__suffix-inner">
-          <template v-if="!showClear">
+          <template v-if="!showClear || !showPwdVisible">
             <slot name="suffix"></slot>
             <i class="el-input__icon"
               v-if="suffixIcon"
               :class="suffixIcon">
             </i>
           </template>
-          <i v-else
+          <i v-if="showClear"
             class="el-input__icon el-icon-circle-close el-input__clear"
             @click="clear"
+          ></i>
+          <i v-if="showPwdVisible"
+            class="el-input__icon el-icon-view el-input__clear"
+            @click="handlePasswordVisible"
           ></i>
         </span>
         <i class="el-input__icon"
@@ -78,10 +80,8 @@
       v-else
       :tabindex="tabindex"
       class="el-textarea__inner"
-      :value="nativeInputValue"
-      @compositionstart="handleComposition"
-      @compositionupdate="handleComposition"
-      @compositionend="handleComposition"
+      @compositionstart="handleCompositionStart"
+      @compositionend="handleCompositionEnd"
       @input="handleInput"
       ref="textarea"
       v-bind="$attrs"
@@ -126,7 +126,8 @@
         textareaCalcStyle: {},
         hovering: false,
         focused: false,
-        isOnComposition: false
+        isComposing: false,
+        passwordVisible: false
       };
     },
 
@@ -169,6 +170,10 @@
         type: Boolean,
         default: false
       },
+      showPassword: {
+        type: Boolean,
+        default: false
+      },
       tabindex: String
     },
 
@@ -199,7 +204,7 @@
         return this.disabled || (this.elForm || {}).disabled;
       },
       nativeInputValue() {
-        return this.value === null || this.value === undefined ? '' : this.value;
+        return this.value === null || this.value === undefined ? '' : String(this.value);
       },
       showClear() {
         return this.clearable &&
@@ -207,6 +212,12 @@
           !this.readonly &&
           this.nativeInputValue &&
           (this.focused || this.hovering);
+      },
+      showPwdVisible() {
+        return this.showPassword &&
+          !this.inputDisabled &&
+          !this.readonly &&
+          (!!this.nativeInputValue || this.focused);
       }
     },
 
@@ -216,15 +227,31 @@
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [val]);
         }
+      },
+      // native input value is set explicitly
+      // do not use v-model / :value in template
+      // see: https://github.com/ElemeFE/element/issues/14521
+      nativeInputValue() {
+        this.setNativeInputValue();
+      },
+      // when change between <input> and <textarea>,
+      // update DOM dependent value and styles
+      // https://github.com/ElemeFE/element/issues/14857
+      type() {
+        this.$nextTick(() => {
+          this.setNativeInputValue();
+          this.resizeTextarea();
+          this.updateIconOffset();
+        });
       }
     },
 
     methods: {
       focus() {
-        (this.$refs.input || this.$refs.textarea).focus();
+        this.getInput().focus();
       },
       blur() {
-        (this.$refs.input || this.$refs.textarea).blur();
+        this.getInput().blur();
       },
       getMigratingConfig() {
         return {
@@ -245,7 +272,7 @@
         }
       },
       select() {
-        (this.$refs.input || this.$refs.textarea).select();
+        this.getInput().select();
       },
       resizeTextarea() {
         if (this.$isServer) return;
@@ -262,21 +289,27 @@
 
         this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
+      setNativeInputValue() {
+        const input = this.getInput();
+        if (!input) return;
+        if (input.value === this.nativeInputValue) return;
+        input.value = this.nativeInputValue;
+      },
       handleFocus(event) {
         this.focused = true;
         this.$emit('focus', event);
       },
-      handleComposition(event) {
-        if (event.type === 'compositionstart') {
-          this.isOnComposition = true;
-        }
-        if (event.type === 'compositionend') {
-          this.isOnComposition = false;
-          this.handleInput(event);
-        }
+      handleCompositionStart() {
+        this.isComposing = true;
+      },
+      handleCompositionEnd(event) {
+        this.isComposing = false;
+        this.handleInput(event);
       },
       handleInput(event) {
-        if (this.isOnComposition) return;
+        // should not emit input during composition
+        // see: https://github.com/ElemeFE/element/issues/10516
+        if (this.isComposing) return;
 
         // hack for https://github.com/ElemeFE/element/issues/8548
         // should remove the following line when we don't support IE
@@ -284,9 +317,9 @@
 
         this.$emit('input', event.target.value);
 
-        // set input's value, in case parent refuses the change
+        // ensure native input value is controlled
         // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(() => { this.$refs.input.value = this.value; });
+        this.$nextTick(this.setNativeInputValue);
       },
       handleChange(event) {
         this.$emit('change', event.target.value);
@@ -322,6 +355,13 @@
         this.$emit('input', '');
         this.$emit('change', '');
         this.$emit('clear');
+      },
+      handlePasswordVisible() {
+        this.passwordVisible = !this.passwordVisible;
+        this.focus();
+      },
+      getInput() {
+        return this.$refs.input || this.$refs.textarea;
       }
     },
 
@@ -330,6 +370,7 @@
     },
 
     mounted() {
+      this.setNativeInputValue();
       this.resizeTextarea();
       this.updateIconOffset();
     },

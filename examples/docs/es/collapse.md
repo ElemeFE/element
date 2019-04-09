@@ -1,29 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        activeNames: ['1'],
-        activeName: '1'
-      };
-    },
-    methods: {
-      handleChange(val) {
-        console.log(val);
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-collapse {
-    .el-collapse-item__header {
-      .header-icon {
-        margin-left: 5px;
-      }
-    }
-  }
-</style>
-
 ## Collapse
 
 Use Collapse para almacenar contenidos.
@@ -141,13 +115,13 @@ Además de usar el atributo `title`, se puede personalizar el título del panel 
 ### Atributos de Collapse
 | Atributo  | Descripción                           | Tipo                                     | Valores aceptados | Por defecto |
 | --------- | ------------------------------------- | ---------------------------------------- | ----------------- | ----------- |
+| value / v-model     | panel activo                          | string (modo acordeón) / array (No modo acordeón) | —                 | —           |
 | accordion | especifica si activa el modo acordeón | boolean                                  | —                 | false       |
-| value     | panel activo                          | string (modo acordeón)/array (No modo acordeón) | —                 | —           |
 
 ### Eventos de Collapse
 | Nombre de Evento | Descripción                              | Parametros                               |
 | ---------------- | ---------------------------------------- | ---------------------------------------- |
-| change           | se dispara cuando los paneles activos cambian | activeNames: array (No modo acordeón)/string (modo acordeón) |
+| change           | se dispara cuando los paneles activos cambian | (activeNames: array (No modo acordeón) / string (modo acordeón)) |
 
 
 ### Atributos de Collapse Item

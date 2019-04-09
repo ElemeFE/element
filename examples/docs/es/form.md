@@ -1,250 +1,3 @@
-<script>
-  export default {
-    data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('Please input the age'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
-          } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password'));
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password again'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('Two inputs don\'t match!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        sizeForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formInline: {
-          user: '',
-          region: ''
-        },
-        labelPosition: 'right',
-        formLabelAlign: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        ruleForm2: {
-          pass: '',
-          checkPass: '',
-          age: ''
-        },
-        formLabelWidth: '80px',
-        options: [
-        ],
-        rules: {
-          name: [
-            { required: true, message: 'Please input Activity name', trigger: 'blur' },
-            { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: 'Please select Activity zone', trigger: 'change' }
-          ],
-          date1: [
-            { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
-          ],
-          date2: [
-            { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
-          ],
-          type: [
-            { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
-          ],
-          resource: [
-            { required: true, message: 'Please select activity resource', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: 'Please input activity form', trigger: 'blur' }
-          ]
-        },
-        rules2: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
-          age: [
-            { validator: checkAge, trigger: 'blur' }
-          ]
-        },
-        dynamicValidateForm: {
-          domains: [{
-            key: Date.now(),
-            value: ''
-          }],
-          email: ''
-        },
-        numberValidateForm: {
-          age: ''
-        }
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      },
-      onRuleFormSubmit() {
-        console.log('onRuleFormSubmit');
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item)
-        if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1)
-        }
-      },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
-          key: Date.now(),
-          value: ''
-        });
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-form.demo-es {
-    .el-select .el-input {
-      width: 360px;
-    }
-    .el-form {
-      width: 480px;
-    }
-
-    .line {
-      text-align: center;
-    }
-    
-    .el-checkbox-group {
-      width: 320px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    
-      &:after, &:before {
-        content: ' ';
-        display: table;
-      }
-      &:after {
-        clear: both;
-        visibility: hidden;
-        font-size: 0;
-        height: 0;
-      }
-    
-      .el-checkbox {
-        float: left;
-        width: 160px;
-        padding-right: 20px;
-        margin: 0;
-        padding: 0;
-    
-        + .el-checkbox {
-          margin-left: 0;
-        }
-      }
-    }
-    .demo-form-normal {
-      width: 480px;
-    }
-    .demo-form-inline {
-      width: auto;
-    
-      .el-input {
-        width: 150px;
-      }
-      > * {
-        margin-right: 10px;
-      }
-    }
-    .demo-ruleForm {
-      width: 480px;
-    
-      .el-select .el-input {
-        width: 360px;
-      }
-    }
-    .demo-dynamic {
-      width: 500px;
-    
-      .el-input {
-        margin-right: 10px;
-        width: 270px;
-        vertical-align: top;
-      }
-    }
-    .fr {
-      float: right;
-    }
-  }
-</style>
-
 ## Form
 
 Form consiste en `input`, `radio`, `select`, `checkbox`, etcétera. Con el formulario, usted puede recopilar, verificar y enviar datos.
@@ -272,7 +25,7 @@ Incluye todo tipo de entradas, tales como `input`, `select`, `radio` y `checkbox
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
@@ -445,7 +198,7 @@ El componente `form` le permite verificar sus datos, ayudándole a encontrar y c
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
       <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+        <el-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
       </el-form-item>
     </el-col>
   </el-form-item>
@@ -635,6 +388,10 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 
 :::
 
+:::tip
+Ver más sobre el uso avanzado de la validacion de reglas en [async-validator](https://github.com/yiminghe/async-validator).。
+:::
+
 ### Eliminar o agregar validaciones dinamicamente
 
 :::demo Además de pasar todas las reglas de validación al mismo tiempo en el componente `form`, también puede pasar las reglas de validación o borrar reglas en un único campo de formulario de forma dinámica.
@@ -794,7 +551,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Activity type">
@@ -850,7 +607,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | rules                   | Reglas de validación                     | object  | —                     | —           |
 | inline                  | Si el form es inline                     | boolean | —                     | false       |
 | label-position          | Posicion de la etiqueta                  | string  | left / right / top    | right       |
-| label-width             | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
+| label-width             | width of label, e.g. '50px'. All its direct child form items will inherit this value. Width `auto` is supported.        | string | — | — |
 | label-suffix            | sufijo de la etiqueta                    | string  | —                     | —           |
 | hide-required-asterisk       | si los campos obligatorios deben tener un asterisco rojo (estrella) al lado de sus etiquetas | boolean | — | false |
 | show-message            | si mostrar o no el mensaje de error      | boolean | —                     | true        |
@@ -881,7 +638,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | -------------- | ------------------------------------------------------------ | ------- | ------------------------------------------- | ----------- |
 | prop           | un clave del modelo. En el uso del método validate and resetFields, el atributo es obligatorio. | string  | Clave del modelo que se ha pasado a  `form` |             |
 | label          | etiqueta                                                     | string  | —                                           | —           |
-| label-width    | ancho de la etiqueta, e.g. '50px'                            | string  | —                                           | —           |
+| label-width    | ancho de la etiqueta, e.g. '50px'. Width `auto` is supported | string  | —                                           | —           |
 | required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | boolean | —                                           | false       |
 | rules          | reglas de validacion del form                                | object  | —                                           | —           |
 | error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                           | —           |

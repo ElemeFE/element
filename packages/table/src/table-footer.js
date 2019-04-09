@@ -62,7 +62,7 @@ export default {
                 <td
                   colspan={ column.colSpan }
                   rowspan={ column.rowSpan }
-                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
+                  class={ this.getRowClasses(column, cellIndex) }>
                   <div class={ ['cell', column.labelClassName] }>
                     {
                       sums[cellIndex]
@@ -116,6 +116,14 @@ export default {
       return this.store.states.fixedColumns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     rightFixedCount() {
       return this.store.states.rightFixedColumns.length;
     },
@@ -130,18 +138,34 @@ export default {
   },
 
   methods: {
-    isCellHidden(index, columns) {
+    isCellHidden(index, columns, column) {
       if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
+        return index >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
         let before = 0;
         for (let i = 0; i < index; i++) {
           before += columns[i].colSpan;
         }
-        return before < this.columnsCount - this.rightFixedCount;
+        return before < this.columnsCount - this.rightFixedLeafCount;
+      } else if (!this.fixed && column.fixed) { // hide cell when footer instance is not fixed and column is fixed
+        return true;
       } else {
         return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
       }
+    },
+
+    getRowClasses(column, cellIndex) {
+      const classes = [column.id, column.align, column.labelClassName];
+      if (column.className) {
+        classes.push(column.className);
+      }
+      if (this.isCellHidden(cellIndex, this.columns, column)) {
+        classes.push('is-hidden');
+      }
+      if (!column.children) {
+        classes.push('is-leaf');
+      }
+      return classes;
     }
   }
 };

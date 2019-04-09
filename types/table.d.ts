@@ -29,6 +29,14 @@ export interface cellCallbackParams {
   columnIndex: number
 }
 
+export interface treeNode {
+  rowKey: string | number,
+  isLeaf: boolean,
+  level: number,
+  expanded: boolean,
+  loaded: boolean
+}
+
 /** Table Component */
 export declare class ElTable extends ElementUIComponent {
   /** Table data */
@@ -57,6 +65,12 @@ export declare class ElTable extends ElementUIComponent {
 
   /** Key of current row, a set only prop */
   currentRowKey: string | number
+
+  /** Whether to lazy load tree structure data, used with load attribute */
+  lazy: boolean
+
+  /** Horizontal indentation of nodes in adjacent levels in pixels */
+  indent: number
 
   /** Function that returns custom class names for a row, or a string assigning class names for every row */
   rowClassName: string | ((param: rowCallbackParams) => string)
@@ -154,4 +168,7 @@ export declare class ElTable extends ElementUIComponent {
 
   /** Sort Table manually */
   sort (prop: string, order: string): void
+
+  /** method for lazy load subtree data */
+  load (row: object, treeNode: treeNode, resolve: Function): void
 }

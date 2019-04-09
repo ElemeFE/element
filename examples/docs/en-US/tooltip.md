@@ -1,60 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        disabled: false
-      };
-    }
-  };
-</script>
-
-<style>
-  .demo-tooltip.demo-en-US {
-    &:first-of-type .source {
-      .el-button {
-        width: 110px;
-      }
-    }
-    .el-tooltip + .el-tooltip {
-      margin-left: 15px;
-    }
-    .box {
-      width: 400px;
-    
-      .top {
-        text-align: center;
-      }
-      
-      .left {
-        float: left;
-        width: 110px;
-      }
-      
-      .right {
-        float: right;
-        width: 110px;
-      }
-      
-      .bottom {
-        clear: both;
-        text-align: center;
-      }
-      
-      .item {
-        margin: 4px;
-      }
-      
-      .left .el-tooltip__popper,
-      .right .el-tooltip__popper {
-        padding: 8px 10px;
-      }
-      .el-tooltip {
-        margin-left: 0;
-      }
-    }
-  }
-</style>
-
 ## Tooltip
 
 Display prompt information for mouse hover.
@@ -200,6 +143,16 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
   </el-tooltip>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
+
 <style>
   .slide-fade-enter-active {
     transition: all .3s ease;
@@ -229,7 +182,7 @@ Disabled form elements are not supported for Tooltip, more information can be fo
 |  effect   |  Tooltip theme  | string   | dark/light  | dark  |
 |  content  | display content, can be overridden by `slot#content` | String   | — | — |
 |  placement | position of Tooltip   | string    |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  value(v-model) | visibility of Tooltip | boolean           | — |  false |
+|  value / v-model | visibility of Tooltip | boolean           | — |  false |
 |  disabled       |  whether Tooltip is disabled  | boolean    | — |  false |
 |  offset        |  offset of the Tooltip   | number    | — |  0 |
 |  transition     |  animation name | string             | — | el-fade-in-linear |

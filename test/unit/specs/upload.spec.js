@@ -4,6 +4,7 @@ const noop = () => {
 };
 const option = {
   onSuccess: noop,
+  onProgress: noop,
   data: { a: 'abc', b: 'bcd' },
   filename: 'file.png',
   file: 'foo',

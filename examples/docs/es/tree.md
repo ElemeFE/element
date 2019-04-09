@@ -1,382 +1,3 @@
-<style>
-  .demo-tree {
-    .leaf {
-      width: 20px;
-      background: #ddd;
-    }
-
-    .folder {
-      width: 20px;
-      background: #888;
-    }
-
-    .buttons {
-      margin-top: 20px;
-    }
-
-    .filter-tree {
-      margin-top: 20px;
-    }
-
-    .custom-tree-container {
-      display: flex;
-      margin: -24px;
-    }
-
-    .block {
-      flex: 1;
-      padding: 8px 24px 24px;
-
-      &:first-child {
-        border-right: solid 1px #eff2f6;
-      }
-
-      > p {
-        text-align: center;
-        margin: 0;
-        line-height: 4;
-      }
-    }
-
-    .custom-tree-node {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 14px;
-      padding-right: 8px;
-    }
-  }
-</style>
-
-<script>
-  const data = [{
-    label: 'Level one 1',
-    children: [{
-      label: 'Level two 1-1',
-      children: [{
-        label: 'Level three 1-1-1'
-      }]
-    }]
-  }, {
-    label: 'Level one 2',
-    children: [{
-      label: 'Level two 2-1',
-      children: [{
-        label: 'Level three 2-1-1'
-      }]
-    }, {
-      label: 'Level two 2-2',
-      children: [{
-        label: 'Level three 2-2-1'
-      }]
-    }]
-  }, {
-    label: 'Level one 3',
-    children: [{
-      label: 'Level two 3-1',
-      children: [{
-        label: 'Level three 3-1-1'
-      }]
-    }, {
-      label: 'Level two 3-2',
-      children: [{
-        label: 'Level three 3-2-1'
-      }]
-    }]
-  }];
-
-  const data2 = [{
-    id: 1,
-    label: 'Level one 1',
-    children: [{
-      id: 4,
-      label: 'Level two 1-1',
-      children: [{
-        id: 9,
-        label: 'Level three 1-1-1'
-      }, {
-        id: 10,
-        label: 'Level three 1-1-2'
-      }]
-    }]
-  }, {
-    id: 2,
-    label: 'Level one 2',
-    children: [{
-      id: 5,
-      label: 'Level two 2-1'
-    }, {
-      id: 6,
-      label: 'Level two 2-2'
-    }]
-  }, {
-    id: 3,
-    label: 'Level one 3',
-    children: [{
-      id: 7,
-      label: 'Level two 3-1'
-    }, {
-      id: 8,
-      label: 'Level two 3-2'
-    }]
-  }];
-
-  const data3 = [{
-    id: 1,
-    label: 'Level one 1',
-    children: [{
-      id: 3,
-      label: 'Level two 2-1',
-      children: [{
-        id: 4,
-        label: 'Level three 3-1-1'
-      }, {
-        id: 5,
-        label: 'Level three 3-1-2',
-        disabled: true
-      }]
-    }, {
-      id: 2,
-      label: 'Level two 2-2',
-      disabled: true,
-      children: [{
-        id: 6,
-        label: 'Level three 3-2-1'
-      }, {
-        id: 7,
-        label: 'Level three 3-2-2',
-        disabled: true
-      }]
-    }]
-  }];
-
-  const data6 = [{
-    label: 'Level one 1',
-    children: [{
-      label: 'Level two 1-1',
-      children: [{
-        label: 'Level three 1-1-1'
-      }]
-    }]
-  }, {
-    label: 'Level one 2',
-    children: [{
-      label: 'Level two 2-1',
-      children: [{
-        label: 'Level three 2-1-1'
-      }]
-    }, {
-      label: 'Level two 2-2',
-      children: [{
-        label: 'Level three 2-2-1'
-      }]
-    }]
-  }, {
-    label: 'Level one 3',
-    children: [{
-      label: 'Level two 3-1',
-      children: [{
-        label: 'Level three 3-1-1'
-      }]
-    }, {
-      label: 'Level two 3-2',
-      children: [{
-        label: 'Level three 3-2-1'
-      }]
-    }]
-  }];
-
-  let id = 1000;
-
-  const regions = [{
-    'name': 'region1'
-  }, {
-    'name': 'region2'
-  }];
-
-  let count = 1;
-
-  const props = {
-    label: 'name',
-    children: 'zones'
-  };
-
-  const props1 = {
-    label: 'name',
-    children: 'zones',
-    isLeaf: 'leaf'
-  };
-
-  const defaultProps = {
-    children: 'children',
-    label: 'label'
-  };
-
-  export default {
-    watch: {
-      filterText(val) {
-        this.$refs.tree2.filter(val);
-      }
-    },
-
-    methods: {
-      handleCheckChange(data, checked, indeterminate) {
-        console.log(data, checked, indeterminate);
-      },
-      handleNodeClick(data) {
-        console.log(data);
-      },
-      handleDragStart(node, ev) {
-        console.log('drag start', node);
-      },
-      handleDragEnter(draggingNode, dropNode, ev) {
-        console.log('tree drag enter: ', dropNode.label);
-      },
-      handleDragLeave(draggingNode, dropNode, ev) {
-        console.log('tree drag leave: ', dropNode.label);
-      },
-      handleDragOver(draggingNode, dropNode, ev) {
-        console.log('tree drag over: ', dropNode.label);
-      },
-      handleDragEnd(draggingNode, dropNode, dropType, ev) {
-        console.log('tree drag end: ', dropNode && dropNode.label, dropType);
-      },
-      handleDrop(draggingNode, dropNode, dropType, ev) {
-        console.log('tree drop: ', dropNode.label, dropType);
-      },
-      allowDrop(draggingNode, dropNode, type) {
-        if (dropNode.data.label === 'Level two 3-1') {
-          return type !== 'inner';
-        } else {
-          return true;
-        }
-      },
-      allowDrag(draggingNode) {
-        return draggingNode.data.label.indexOf('Level three 3-1-1') === -1;
-      },
-      loadNode(node, resolve) {
-        if (node.level === 0) {
-          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
-        }
-        if (node.level > 3) return resolve([]);
-        var hasChild;
-        if (node.data.name === 'region1') {
-          hasChild = true;
-        } else if (node.data.name === 'region2') {
-          hasChild = false;
-        } else {
-          hasChild = Math.random() > 0.5;
-        }
-
-        setTimeout(function() {
-          let data;
-          if (hasChild) {
-            data = [{
-              name: 'zone' + count++
-            }, {
-              name: 'zone' + count++
-            }];
-          } else {
-            data = [];
-          }
-
-          resolve(data);
-        }, 500);
-      },
-      loadNode1(node, resolve) {
-        if (node.level === 0) {
-          return resolve([{ name: 'region' }]);
-        }
-        if (node.level > 1) return resolve([]);
-
-        setTimeout(() => {
-          const data = [{
-            name: 'leaf',
-            leaf: true
-          }, {
-            name: 'zone'
-          }];
-
-          resolve(data);
-        }, 500);
-      },
-      getCheckedNodes() {
-        console.log(this.$refs.tree.getCheckedNodes());
-      },
-      getCheckedKeys() {
-        console.log(this.$refs.tree.getCheckedKeys());
-      },
-      setCheckedNodes() {
-        this.$refs.tree.setCheckedNodes([
-          {
-            id: 5,
-            label: 'Level two 2-1'
-          },
-          {
-            id: 9,
-            label: 'Level three 1-1-1'
-          }
-        ]);
-      },
-      setCheckedKeys() {
-        this.$refs.tree.setCheckedKeys([3]);
-      },
-      resetChecked() {
-        this.$refs.tree.setCheckedKeys([]);
-      },
-      append(data) {
-        const newChild = { id: id++, label: 'testtest', children: [] };
-        if (!data.children) {
-          this.$set(data, 'children', []);
-        }
-        data.children.push(newChild);
-      },
-
-      remove(node, data) {
-        const parent = node.parent;
-        const children = parent.data.children || parent.data;
-        const index = children.findIndex(d => d.id === data.id);
-        children.splice(index, 1);
-      },
-
-      renderContent(h, { node, data, store }) {
-        return (
-          <span class="custom-tree-node">
-            <span>{node.label}</span>
-            <span>
-              <el-button size="mini" type="text" on-click={ () => this.append(data) }>Append</el-button>
-              <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
-            </span>
-          </span>);
-      },
-
-      filterNode(value, data) {
-        if (!value) return true;
-        return data.label.indexOf(value) !== -1;
-      }
-    },
-
-    data() {
-      return {
-        data,
-        data2,
-        data3,
-        data4: JSON.parse(JSON.stringify(data2)),
-        data5: JSON.parse(JSON.stringify(data2)),
-        data6,
-        regions,
-        defaultProps,
-        props,
-        props1,
-        defaultCheckedKeys: [5],
-        defaultExpandedKeys: [2, 3],
-        filterText: ''
-      };
-    }
-  };
-</script>
-
 ## Tree
 
 Muestra un conjunto de datos jerárquicos.
@@ -517,7 +138,7 @@ Usado para la selección de nodos.
 :::demo Los datos de un nodo no son cargados hasta que no es pinchado, así que el árbol no puede predecir si es una hoja. Por eso a cada nodo se le añade el botón de desplegar, y si el nodo es una hoja el botón desaparecerá al pinchar en él. También puede decirle al árbol que el nodo es una hoja de antemano, y así evita que muestre el botón de desplegar.
 ```html
 <el-tree
-  :props="props1"
+  :props="props"
   :load="loadNode1"
   lazy
   show-checkbox>
@@ -527,7 +148,7 @@ Usado para la selección de nodos.
   export default {
     data() {
       return {
-        props1: {
+        props: {
           label: 'name',
           children: 'zones',
           isLeaf: 'leaf'
@@ -565,7 +186,7 @@ El checkbox de un nodo se puede poner como desactivado.
 :::demo En el ejemplo, la propiedad 'disabled' se declara en defaultProps, y algunos nodos se ponen como 'disabled:true'. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
 ```html
 <el-tree
-  :data="data3"
+  :data="data"
   :props="defaultProps"
   show-checkbox
   @check-change="handleCheckChange">
@@ -575,7 +196,7 @@ El checkbox de un nodo se puede poner como desactivado.
   export default {
     data() {
       return {
-        data3: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -621,7 +242,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 :::demo Utilice `default-expanded-keys` y `default-checked-keys` para establecer los nodos desplegados y seleccionados respectivamente. Tenga en cuenta que para que funcione es necesario que tengan `node-key`. Su valor es el nombre de una clave en el objeto data, y el valor de la clave debe ser único en todo el árbol.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   node-key="id"
   :default-expanded-keys="[2, 3]"
@@ -633,7 +254,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
   export default {
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -684,7 +305,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 :::demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo hace por claves el atributo `node-key` es necesario.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   default-expand-all
   node-key="id"
@@ -729,7 +350,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -778,13 +399,13 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en codepen.io ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <div class="custom-tree-container">
   <div class="block">
     <p>Using render-content</p>
     <el-tree
-      :data="data4"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -795,7 +416,7 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
   <div class="block">
     <p>Using scoped slot</p>
     <el-tree
-      :data="data5"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -862,8 +483,8 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
         }]
       }];
       return {
-        data4: JSON.parse(JSON.stringify(data)),
-        data5: JSON.parse(JSON.stringify(data))
+        data: JSON.parse(JSON.stringify(data)),
+        data: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -922,7 +543,7 @@ Los nodos del árbol se pueden filtrar.
 
 <el-tree
   class="filter-tree"
-  :data="data2"
+  :data="data"
   :props="defaultProps"
   default-expand-all
   :filter-node-method="filterNode"
@@ -947,7 +568,7 @@ Los nodos del árbol se pueden filtrar.
     data() {
       return {
         filterText: '',
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -1068,7 +689,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 :::demo
 ```html
 <el-tree
-  :data="data6"
+  :data="data"
   node-key="id"
   default-expand-all
   @node-drag-start="handleDragStart"
@@ -1086,7 +707,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
   export default {
     data() {
       return {
-        data6: [{
+        data: [{
           label: 'Level one 1',
           children: [{
             label: 'Level two 1-1',
@@ -1181,7 +802,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
 | check-strictly        | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
 | default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
-| current-node-key      | key of initially selected node | string, number                       | —               | —       |
+| current-node-key      | la clave del nodo inicialmente seleccionado | string, number                       | —               | —       |
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
@@ -1213,7 +834,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | return the highlight node's data (null if no node is highlighted)         | —                                        |
-| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. If `null`, cancel the currently highlighted node  |
+| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. Si es `null`, cancela los nodos actualmente resaltados |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
 | remove          | elimina un nodo, solo funciona si `node-key` está asignado  | (data) los datos del nodo o nodo a borrar |

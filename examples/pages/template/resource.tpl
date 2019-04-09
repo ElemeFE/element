@@ -30,7 +30,13 @@
     margin: 35px auto 110px;
 
     .container {
-      @utils-clearfix;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
       padding: 0;
       margin: 0 -11px;
       width: auto;
@@ -87,7 +93,7 @@
       height: 42px;
       width: 190px;
       display: inline-block;
-      line-height: @height;
+      line-height: 42px;
       font-size: 14px;
       background-color: #409EFF;
       color: #fff;
@@ -136,7 +142,10 @@
             <img src="~examples/assets/images/Axure-Components.svg" alt="">
             <h3><%= 3 ></h3>
             <p><%= 4 ></p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v2.0.0.rplib"><%= 5 ></a>
+            <a
+              onclick="ga('send', 'event', 'ResourceDownload', 'Download', 'Axure');" 
+              href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v2.0.0.rplib"
+            ><%= 5 ></a>
           </div>
         </li>
         <li>
@@ -144,7 +153,10 @@
             <img src="~examples/assets/images/Sketch-Template.svg" alt="">
             <h3><%= 6 ></h3>
             <p><%= 7 ></p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v2.0.sketch"><%= 5 ></a>
+            <a 
+              onclick="ga('send', 'event', 'ResourceDownload', 'Download', 'Sketch');"
+              href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v2.0.sketch"
+            ><%= 5 ></a>
           </div>
         </li>
         <!--<li>-->

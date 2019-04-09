@@ -9,10 +9,10 @@
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
-  background: $--button-default-fill;
+  background: $--button-default-background-color;
   border: $--border-base;
-  border-color: $--button-default-border;
-  color: $--button-default-color;
+  border-color: $--button-default-border-color;
+  color: $--button-default-font-color;
   -webkit-appearance: none;
   text-align: center;
   box-sizing: border-box;
@@ -75,11 +75,11 @@
     &,
     &:hover,
     &:focus {
-      color: $--button-disabled-color;
+      color: $--button-disabled-font-color;
       cursor: not-allowed;
       background-image: none;
-      background-color: $--button-disabled-fill;
-      border-color: $--button-disabled-border;
+      background-color: $--button-disabled-background-color;
+      border-color: $--button-disabled-border-color;
     }
 
     &.el-button--text {
@@ -91,8 +91,8 @@
       &:hover,
       &:focus {
         background-color: $--color-white;
-        border-color: $--button-disabled-border;
-        color: $--button-disabled-color;
+        border-color: $--button-disabled-border-color;
+        color: $--button-disabled-font-color;
       }
     }
   }
@@ -122,19 +122,19 @@
     padding: $--button-padding-vertical;
   }
   @include m(primary) {
-    @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
+    @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-border-color);
   }
   @include m(success) {
-    @include button-variant($--button-success-color, $--button-success-fill, $--button-success-border);
+    @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-border-color);
   }
   @include m(warning) {
-    @include button-variant($--button-warning-color, $--button-warning-fill, $--button-warning-border);
+    @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-border-color);
   }
   @include m(danger) {
-    @include button-variant($--button-danger-color, $--button-danger-fill, $--button-danger-border);
+    @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-border-color);
   }
   @include m(info) {
-    @include button-variant($--button-info-color, $--button-info-fill, $--button-info-border);
+    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
   }
   @include m(medium) {
     @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);

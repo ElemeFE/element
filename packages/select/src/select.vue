@@ -121,12 +121,12 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <p
-          class="el-select-dropdown__empty"
-          v-if="emptyText &&
-            (!allowCreate || loading || (allowCreate && options.length === 0 ))">
-          {{ emptyText }}
-        </p>
+        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+          <slot name="empty" v-if="$slots.empty"></slot>
+          <p class="el-select-dropdown__empty" v-else>
+            {{ emptyText }}
+          </p>
+        </template>
       </el-select-menu>
     </transition>
   </div>
@@ -742,7 +742,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        const value = this.multiple ? [] : '';
+        const value = this.multiple ? [] : null;
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;

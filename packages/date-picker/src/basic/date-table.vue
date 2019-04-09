@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, nextDate, isDate, clearTime as _clearTime} from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, prevDate, nextDate, isDate, clearTime as _clearTime} from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import { arrayFindIndex, arrayFind, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
@@ -137,7 +137,6 @@
         const offset = this.offsetDay;
         const rows = this.tableRows;
         let count = 1;
-        let firstDayPosition;
 
         const startDate = this.startDate;
         const disabledDate = this.disabledDate;
@@ -173,21 +172,17 @@
             }
 
             if (i >= 0 && i <= 1) {
-              if (j + i * 7 >= (day + offset)) {
+              const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset;
+
+              if (j + i * 7 >= numberOfDaysFromPreviousMonth) {
                 cell.text = count++;
-                if (count === 2) {
-                  firstDayPosition = i * 7 + j;
-                }
               } else {
-                cell.text = dateCountOfLastMonth - (day + offset - j % 7) + 1 + i * 7;
+                cell.text = dateCountOfLastMonth - (numberOfDaysFromPreviousMonth - j % 7) + 1 + i * 7;
                 cell.type = 'prev-month';
               }
             } else {
               if (count <= dateCountOfMonth) {
                 cell.text = count++;
-                if (count === 2) {
-                  firstDayPosition = i * 7 + j;
-                }
               } else {
                 cell.text = count++ - dateCountOfMonth;
                 cell.type = 'next-month';
@@ -212,8 +207,6 @@
             row[end].end = isWeekActive;
           }
         }
-
-        rows.firstDayPosition = firstDayPosition;
 
         return rows;
       }
@@ -321,8 +314,12 @@
 
         newDate.setDate(parseInt(cell.text, 10));
 
-        const valueYear = isDate(this.value) ? this.value.getFullYear() : null;
-        return year === valueYear && getWeekNumber(newDate) === getWeekNumber(this.value);
+        if (isDate(this.value)) {
+          const dayOffset = (this.value.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
+          const weekDate = prevDate(this.value, dayOffset);
+          return weekDate.getTime() === newDate.getTime();
+        }
+        return false;
       },
 
       markRange(minDate, maxDate) {

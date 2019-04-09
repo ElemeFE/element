@@ -54,9 +54,17 @@
         }
       }
     },
+    computed: {
+      autoLabelWidth() {
+        if (!this.potentialLabelWidthArr.length) return 0;
+        const max = Math.max(...this.potentialLabelWidthArr);
+        return max ? `${max}px` : '';
+      }
+    },
     data() {
       return {
-        fields: []
+        fields: [],
+        potentialLabelWidthArr: [] // use this array to calculate auto width
       };
     },
     created() {
@@ -135,13 +143,33 @@
         props = [].concat(props);
         const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
         if (!fields.length) {
-          confirm.warn('[Element Warn]please pass correct props!');
+          console.warn('[Element Warn]please pass correct props!');
           return;
         }
 
         fields.forEach(field => {
           field.validate('', cb);
         });
+      },
+      getLabelWidthIndex(width) {
+        const index = this.potentialLabelWidthArr.indexOf(width);
+        // it's impossible
+        if (index === -1) {
+          throw new Error('[ElementForm]unpected width ', width);
+        }
+        return index;
+      },
+      registerLabelWidth(val, oldVal) {
+        if (val && oldVal) {
+          const index = this.getLabelWidthIndex(oldVal);
+          this.potentialLabelWidthArr.splice(index, 1, val);
+        } else if (val) {
+          this.potentialLabelWidthArr.push(val);
+        }
+      },
+      deregisterLabelWidth(val) {
+        const index = this.getLabelWidthIndex(val);
+        this.potentialLabelWidthArr.splice(index, 1);
       }
     }
   };
