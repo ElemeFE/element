@@ -168,7 +168,6 @@
 - Menu
   - 支持 `el-menu-item` 不添加 index (by @georgyfarniev in #13298)
 - Table
-  - 修复 row 事件的参数顺序 (by @jikkai in #12086)
   - 移除无用的 DOM 操作 (by @elfman in #13643)
 - Upload
   - 代码优化 (by @elfman in #13973)
@@ -206,6 +205,10 @@
   - 修复 DatetimePicker 文档问题 (by @iamkun in #14290)
   - 修复 DatePicker 文档拼写问题 (by @helmut in #14481)
   - 修复分页组件文档样式问题 (by @liuchuzhang in #14451)
+
+#### 非兼容性更新
+- Table
+  - 修复 row 事件的参数顺序 (by @jikkai in #12086)
 
 ### 2.5.4
 

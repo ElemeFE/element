@@ -169,7 +169,6 @@
 - Menu
   - Add support for `el-menu-item` without index (by @georgyfarniev in #13298)
 - Table
-  - Fix params order of row events (by @jikkai in #12086)
   - Remove some html DOM operations (by @elfman in #13643)
 - Upload
   - Optimize code (by @elfman in #13973)
@@ -207,6 +206,10 @@
   - Fix  DatetimePicker format doc error (by @iamkun in #14290)
   - Spelling issue in datepicker documentation (by @helmut in #14481)
   - Fix pagination doc style (by @liuchuzhang in #14451)
+
+#### Breaking changes
+- Table
+  - Fix params order of row events (by @jikkai in #12086)
 
 ### 2.5.4
 

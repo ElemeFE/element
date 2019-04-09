@@ -171,7 +171,6 @@
 - Menu
   - Añadido soporte para `el-menu-item` sin índice (by @georgyfarniev in #13298)
 - Table
-  - Cambiar el orden de los parámetros enviados en los eventos de las filas (by @jikkai in #12086)
   - Eliminadas algunas operaciones DOM html (by @elfman in #13643)
 - Upload
   - Optimizado el código (by @elfman in #13973)
@@ -210,6 +209,9 @@
   - Problema de ortografía en la documentación de datepicker (by @helmut in #14481)
   - Arreglado estilo doc de paginación (by @liuchuzhang in #14451)
 
+#### Breaking changes
+- Table
+  - Cambiar el orden de los parámetros enviados en los eventos de las filas (by @jikkai in #12086)
 
 ### 2.5.4
 

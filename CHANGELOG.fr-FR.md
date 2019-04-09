@@ -169,7 +169,6 @@
 - Menu
   - Ajout du support de `el-menu-item` sans index (par @georgyfarniev dans #13298)
 - Table
-  - Fix params order of row events (by @jikkai in #12086)
   - Suppression de certaines opérations du DOM (par @elfman dans #13643)
 - Upload
   - Optimisation du code (par @elfman dans #13973)
@@ -208,6 +207,10 @@
   - Problème d'orthographe dans la documentation du DatePicker (par @helmut dans #14481)
   - Correction du style de la doc de Pagination(par @liuchuzhang dans #14451)
 
+#### Breaking changes
+- Table
+  - Fix params order of row events (by @jikkai in #12086)
+  
 ### 2.5.4
 
 *2019-02-01*
