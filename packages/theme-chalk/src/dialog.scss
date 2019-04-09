@@ -67,6 +67,7 @@
     padding: 30px 20px;
     color: $--color-text-regular;
     font-size: $--dialog-font-size;
+    word-break: break-all;
   }
 
   @include e(footer) {
