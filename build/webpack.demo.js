@@ -33,8 +33,7 @@ const webpackConfig = {
   devServer: {
     host: '0.0.0.0',
     port: 8085,
-    publicPath: '/',
-    noInfo: true
+    publicPath: '/'
   },
   performance: {
     hints: false
