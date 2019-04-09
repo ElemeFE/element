@@ -171,6 +171,7 @@
 - Menu
   - Añadido soporte para `el-menu-item` sin índice (by @georgyfarniev in #13298)
 - Table
+  - Fix params order of row events (by @jikkai in #12086)
   - Eliminadas algunas operaciones DOM html (by @elfman in #13643)
 - Upload
   - Optimizado el código (by @elfman in #13973)

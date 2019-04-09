@@ -169,6 +169,7 @@
 - Menu
   - Add support for `el-menu-item` without index (by @georgyfarniev in #13298)
 - Table
+  - Fix params order of row events (by @jikkai in #12086)
   - Remove some html DOM operations (by @elfman in #13643)
 - Upload
   - Optimize code (by @elfman in #13973)

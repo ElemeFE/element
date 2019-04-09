@@ -168,6 +168,7 @@
 - Menu
   - 支持 `el-menu-item` 不添加 index (by @georgyfarniev in #13298)
 - Table
+  - 修复 row 事件的参数顺序 (by @jikkai in #12086)
   - 移除无用的 DOM 操作 (by @elfman in #13643)
 - Upload
   - 代码优化 (by @elfman in #13973)
