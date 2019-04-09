@@ -31,7 +31,6 @@
     font-size: $--notification-title-font-size;
     color: $--notification-title-color;
     margin: 0;
-    word-break: break-all;
   }
 
   @include e(content) {
