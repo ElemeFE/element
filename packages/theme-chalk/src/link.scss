@@ -1,7 +1,12 @@
 @import "mixins/mixins";
 @import "common/var";
 
-$typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color-success, warning: $--color-warning, info: $--color-info);
+$typeMap: (
+  primary: $--link-primary-font-color, 
+  danger: $--link-danger-font-color, 
+  success: $--link-success-font-color, 
+  warning: $--link-warning-font-color, 
+  info: $--link-info-font-color);
 
 @include b(link) {
   display: inline-flex;
@@ -14,8 +19,8 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
   outline: none;
   cursor: pointer;
   padding: 0;
-  font-size: $--font-size-base;
-  font-weight: $--font-weight-primary;
+  font-size: $--link-font-size;
+  font-weight: $--link-font-weight;
 
   &.is-disabled {
     cursor: not-allowed;
@@ -39,15 +44,15 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
     
     
   &.el-link--default  {
-    color: $--button-default-font-color;
+    color: $--link-default-font-color;
     &:hover {
-      color: $--color-primary
+      color: $--link-default-active-color
     }
     .el-link__underline {
-      border-bottom: 1px solid $--color-primary
+      border-bottom: 1px solid $--link-default-active-color
     }
     &.is-disabled {
-      color: $--button-disabled-font-color
+      color: $--link-disabled-font-color
     }
   }
 
@@ -55,13 +60,13 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
     &.el-link--#{$type} {
       color: $primaryColor;
       &:hover {
-        color: mix($primaryColor, #FFF, 80%)
+        color: mix($primaryColor, $--color-white, 80%)
       }
       .el-link__underline {
         border-bottom: 1px solid $primaryColor
       }
       &.is-disabled {
-        color: mix($primaryColor, #FFF, 50%)
+        color: mix($primaryColor, $--color-white, 50%)
       }
     }
   }

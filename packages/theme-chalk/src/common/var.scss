@@ -862,6 +862,29 @@ $--timeline-node-size-normal: 12px !default;
 $--timeline-node-size-large: 14px !default;
 $--timeline-node-color: $--border-color-light !default;
 
+/* Link
+--------------------------*/
+/// fontSize||Font|1
+$--link-font-size: $--font-size-base !default;
+/// fontWeight||Font|1
+$--link-font-weight: $--font-weight-primary !default;
+/// color||Color|0
+$--link-default-font-color: $--color-text-regular !default;
+/// color||Color|0
+$--link-default-active-color: $--color-primary !default;
+/// color||Color|0
+$--link-disabled-font-color: $--color-text-placeholder !default;
+/// color||Color|0
+$--link-primary-font-color: $--color-primary !default;
+/// color||Color|0
+$--link-success-font-color: $--color-success !default;
+/// color||Color|0
+$--link-warning-font-color: $--color-warning !default;
+/// color||Color|0
+$--link-danger-font-color: $--color-danger !default;
+/// color||Color|0
+$--link-info-font-color: $--color-info !default;
+
 /* Break-point
 --------------------------*/
 $--sm: 768px !default;
