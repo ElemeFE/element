@@ -24,4 +24,7 @@ export declare class ElAlert extends ElementUIComponent {
 
   /** If a type icon is displayed */
   showIcon: boolean
+
+  /** Choose theme */
+  theme: string
 }
