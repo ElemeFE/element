@@ -251,6 +251,10 @@
             {
               "path": "/timeline",
               "title": "Timeline 时间线"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         }
@@ -509,6 +513,10 @@
             {
               "path": "/timeline",
               "title": "Timeline"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         }
@@ -767,6 +775,10 @@
             {
               "path": "/timeline",
               "title": "Timeline"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         }
@@ -1025,6 +1037,10 @@
             {
               "path": "/timeline",
               "title": "Timeline"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         }
