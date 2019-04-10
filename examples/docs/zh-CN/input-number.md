@@ -68,6 +68,26 @@
 ```
 :::
 
+### 步数的倍数
+
+:::demo `multiple-of-step`属性接受一个`Boolean`。如果这个属性被设置为`true`，则只能输入步数的倍数。
+
+```html
+<template>
+  <el-input-number v-model="num3" :step="2" multiple-of-step></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num3: 2
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 精度
 
 :::demo 设置 `precision` 属性可以控制数值精度，接收一个 `Number`。
@@ -152,6 +172,7 @@
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
 | step     | 计数器步长           | number   | — | 1 |
+| multiple-of-step | 是否只能输入 step 的倍数 | number   | — | false |
 | precision| 数值精度             | number   | — | — |
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |

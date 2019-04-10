@@ -142,6 +142,34 @@ describe('InputNumber', () => {
       });
     });
   });
+  it('multiple of step', done => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" :step="1.2" multiple-of-step>
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 5
+        };
+      }
+    }, true);
+
+    let input = vm.$el.querySelector('input');
+
+    vm.$nextTick(_ => {
+      expect(vm.value).to.be.equal(4.8);
+      expect(input.value).to.be.equal('4.8');
+
+      vm.value = '8';
+
+      vm.$nextTick(_ => {
+        expect(vm.value).to.be.equal(8.4);
+        expect(input.value).to.be.equal('8.4');
+        done();
+      });
+    });
+  });
   it('min', done => {
     vm = createVue({
       template: `
