@@ -370,13 +370,14 @@ $--message-danger-color: $--color-danger !default;
 /* Notification
 -------------------------- */
 $--notification-width: 330px !default;
-$--notification-padding: 14px 28px 14px 13px !default;
+$--notification-padding: 14px 26px 14px 13px !default;
 $--notification-radius: 8px !default;
 $--notification-shadow: $--box-shadow-light !default;
 $--notification-border-color: $--border-color-lighter !default;
 $--notification-icon-size: 24px !default;
 $--notification-close-font-size: $--message-close-size !default;
-$--notification-group-margin: 13px !default;
+$--notification-group-margin-left: 13px !default;
+$--notification-group-margin-right: 8px !default;
 $--notification-font-size: $--font-size-base !default;
 $--notification-color: $--color-text-regular !default;
 $--notification-title-font-size: 16px !default;

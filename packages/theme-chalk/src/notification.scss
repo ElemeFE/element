@@ -23,7 +23,8 @@
   }
 
   @include e(group) {
-    margin-left: $--notification-group-margin;
+    margin-left: $--notification-group-margin-left;
+    margin-right: $--notification-group-margin-right;
   }
 
   @include e(title) {
