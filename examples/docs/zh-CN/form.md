@@ -378,7 +378,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 :::
 
 :::tip
-校验规则更多高级用法可参考 [async-validator](https://github.com/yiminghe/async-validator)。
+自定义校验 callback 必须被调用。 更多高级用法可参考 [async-validator](https://github.com/yiminghe/async-validator)。
 :::
 
 ### 动态增减表单项

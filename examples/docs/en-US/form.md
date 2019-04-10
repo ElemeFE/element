@@ -382,7 +382,7 @@ This example shows how to customize your own validation rules to finish a two-fa
 :::
 
 :::tip
-See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
 ### Delete or add form items dynamically

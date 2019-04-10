@@ -389,7 +389,7 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 :::
 
 :::tip
-Ver más sobre el uso avanzado de la validacion de reglas en [async-validator](https://github.com/yiminghe/async-validator).。
+Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
 ### Eliminar o agregar validaciones dinamicamente
