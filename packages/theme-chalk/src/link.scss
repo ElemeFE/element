@@ -17,7 +17,7 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
   font-size: $--font-size-base;
   font-weight: $--font-weight-primary;
 
-  &.disabled {
+  &.is-disabled {
     cursor: not-allowed;
     .el-link__underline{
       display: none
@@ -38,7 +38,7 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
   }
     
     
-  &.el-link__default  {
+  &.el-link--default  {
     color: $--button-default-font-color;
     &:hover {
       color: $--color-primary
@@ -46,13 +46,13 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
     .el-link__underline {
       border-bottom: 1px solid $--color-primary
     }
-    &.disabled {
+    &.is-disabled {
       color: $--button-disabled-font-color
     }
   }
 
   @each $type, $primaryColor in $typeMap {
-    &.el-link__#{$type} {
+    &.el-link--#{$type} {
       color: $primaryColor;
       &:hover {
         color: mix($primaryColor, #FFF, 80%)
@@ -60,7 +60,7 @@ $typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color
       .el-link__underline {
         border-bottom: 1px solid $primaryColor
       }
-      &.disabled {
+      &.is-disabled {
         color: mix($primaryColor, #FFF, 50%)
       }
     }

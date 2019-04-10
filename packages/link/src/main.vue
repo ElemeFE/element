@@ -2,8 +2,8 @@
   <a
     :class="[
       'el-link',
-      type ? `el-link__${type}` : '',
-      disabled && 'disabled'
+      type ? `el-link--${type}` : '',
+      disabled && 'is-disabled'
     ]"
     :href="href"
     :target="target"
@@ -11,7 +11,7 @@
     @mouseenter="isHover = true"
     @mouseleave="isHover = false">
 
-    <el-icon :name="icon" v-if="icon"></el-icon>
+    <el-icon :class="icon" v-if="icon"></el-icon>
 
     <span v-if="$slots.default" class="el-link__inner">
       <slot></slot>
