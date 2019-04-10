@@ -69,6 +69,7 @@ import { ElTooltip } from './tooltip'
 import { ElTransfer } from './transfer'
 import { ElTree } from './tree'
 import { ElUpload } from './upload'
+import { ElDivider } from './divider'
 
 export interface InstallationOptions {
   locale: any,
@@ -300,3 +301,6 @@ export class Tree extends ElTree {}
 
 /** Upload Component */
 export class Upload extends ElUpload {}
+
+/** Divider Component */
+export class Divider extends ElDivider {}
