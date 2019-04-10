@@ -22,18 +22,19 @@ $typeMap: (
   font-size: $--link-font-size;
   font-weight: $--link-font-weight;
 
-  &.is-disabled {
+  @include when(disabled) {
     cursor: not-allowed;
     .el-link__underline{
       display: none
     }
   }
 
-  .el-link__underline {
+  @include m(underline) {
     position: absolute;
     left: 0;
     right: 0;
     height: 0;
+    border-bottom: 1px solid $--link-default-active-color
   }
 
   & [class*="el-icon-"] {
@@ -48,10 +49,10 @@ $typeMap: (
     &:hover {
       color: $--link-default-active-color
     }
-    .el-link__underline {
-      border-bottom: 1px solid $--link-default-active-color
+    .el-link--underline {
+      border-color: $--link-default-active-color
     }
-    &.is-disabled {
+    @include when(disabled) {
       color: $--link-disabled-font-color
     }
   }
@@ -62,10 +63,10 @@ $typeMap: (
       &:hover {
         color: mix($primaryColor, $--color-white, 80%)
       }
-      .el-link__underline {
-        border-bottom: 1px solid $primaryColor
+      .el-link--underline {
+        border-color: $primaryColor
       }
-      &.is-disabled {
+      @include when(disabled) {
         color: mix($primaryColor, $--color-white, 50%)
       }
     }

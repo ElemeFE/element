@@ -13,7 +13,7 @@
 
     <el-icon :class="icon" v-if="icon"></el-icon>
 
-    <span v-if="$slots.default" class="el-link__inner">
+    <span v-if="$slots.default" class="el-link--inner">
       <slot></slot>
     </span>
 
@@ -23,7 +23,7 @@
     <div
       :style="{ bottom: underlineBottom + 'px' }"
       v-if="showUnderline"
-      class="el-link__underline"></div>
+      class="el-link--underline"></div>
   </a>
 </template>
 
