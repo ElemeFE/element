@@ -1,5 +1,69 @@
 @import "mixins/mixins";
 @import "common/var";
 
+$typeMap: (primary: $--color-primary, danger: $--color-danger, success: $--color-success, warning: $--color-warning, info: $--color-info);
+
 @include b(link) {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: $--font-size-base;
+  font-weight: $--font-weight-primary;
+
+  &.disabled {
+    cursor: not-allowed;
+    .el-link__underline{
+      display: none
+    }
+  }
+
+  .el-link__underline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 0;
+  }
+
+  & [class*="el-icon-"] {
+    & + span {
+      margin-left: 5px;
+    }
+  }
+    
+    
+  &.el-link__default  {
+    color: $--button-default-font-color;
+    &:hover {
+      color: $--color-primary
+    }
+    .el-link__underline {
+      border-bottom: 1px solid $--color-primary
+    }
+    &.disabled {
+      color: $--button-disabled-font-color
+    }
+  }
+
+  @each $type, $primaryColor in $typeMap {
+    &.el-link__#{$type} {
+      color: $primaryColor;
+      &:hover {
+        color: mix($primaryColor, #FFF, 80%)
+      }
+      .el-link__underline {
+        border-bottom: 1px solid $primaryColor
+      }
+      &.disabled {
+        color: mix($primaryColor, #FFF, 50%)
+      }
+    }
+  }
+    
 }

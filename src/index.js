@@ -71,6 +71,7 @@ import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import Timeline from '../packages/timeline/index.js';
 import TimelineItem from '../packages/timeline-item/index.js';
+import Link from '../packages/link/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -142,6 +143,7 @@ const components = [
   Footer,
   Timeline,
   TimelineItem,
+  Link,
   CollapseTransition
 ];
 
@@ -251,5 +253,6 @@ export default {
   Main,
   Footer,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Link
 };
