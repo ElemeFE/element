@@ -36,6 +36,9 @@
   import { hasClass } from 'element-ui/src/utils/dom';
   import Migrating from 'element-ui/src/mixins/migrating';
 
+  const ExcludeSymbol = '<';
+  const discardExcludeSymbol = str => str.slice(0, 1) === ExcludeSymbol ? str.slice(1) : str;
+
   export default {
     name: 'ElRate',
 
@@ -73,7 +76,7 @@
         default: 5
       },
       colors: {
-        type: Array,
+        type: [Array, Object],
         default() {
           return ['#F7BA2A', '#F7BA2A', '#F7BA2A'];
         }
@@ -87,7 +90,7 @@
         default: '#EFF2F7'
       },
       iconClasses: {
-        type: Array,
+        type: [Array, Object],
         default() {
           return ['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on'];
         }
@@ -162,12 +165,21 @@
         return this.value * 100 - Math.floor(this.value) * 100;
       },
 
+      classMap() {
+        return Array.isArray(this.iconClasses)
+          ? {
+            [this.lowThreshold]: this.iconClasses[0],
+            [`${ExcludeSymbol}${this.highThreshold}`]: this.iconClasses[1], // trick, highThreshold will be included to high level
+            [this.max]: this.iconClasses[2]
+          } : this.iconClasses;
+      },
+
       decimalIconClass() {
         return this.getValueFromMap(this.value, this.classMap);
       },
 
       voidClass() {
-        return this.rateDisabled ? this.classMap.disabledVoidClass : this.classMap.voidClass;
+        return this.rateDisabled ? this.disabledVoidIconClass : this.voidIconClass;
       },
 
       activeClass() {
@@ -175,13 +187,12 @@
       },
 
       colorMap() {
-        return {
-          lowColor: this.colors[0],
-          mediumColor: this.colors[1],
-          highColor: this.colors[2],
-          voidColor: this.voidColor,
-          disabledVoidColor: this.disabledVoidColor
-        };
+        return Array.isArray(this.colors)
+          ? {
+            [this.lowThreshold]: this.colors[0],
+            [`${ExcludeSymbol}${this.highThreshold}`]: this.colors[1], // trick, highThreshold will be included to high level
+            [this.max]: this.colors[2]
+          } : this.colors;
       },
 
       activeColor() {
@@ -202,16 +213,6 @@
           result.push(this.voidClass);
         }
         return result;
-      },
-
-      classMap() {
-        return {
-          lowClass: this.iconClasses[0],
-          mediumClass: this.iconClasses[1],
-          highClass: this.iconClasses[2],
-          voidClass: this.voidIconClass,
-          disabledVoidClass: this.disabledVoidIconClass
-        };
       },
 
       rateDisabled() {
@@ -236,15 +237,10 @@
       },
 
       getValueFromMap(value, map) {
-        let result = '';
-        if (value <= this.lowThreshold) {
-          result = map.lowColor || map.lowClass;
-        } else if (value >= this.highThreshold) {
-          result = map.highColor || map.highClass;
-        } else {
-          result = map.mediumColor || map.mediumClass;
-        }
-        return result;
+        const matches = Object.keys(map)
+          .filter(key => key.slice(0, 1) === ExcludeSymbol ? value < discardExcludeSymbol(key) : value <= key)
+          .sort((a, b) => discardExcludeSymbol(a) - discardExcludeSymbol(b));
+        return map[matches[0]] || '';
       },
 
       showDecimalIcon(item) {
@@ -258,7 +254,7 @@
       },
 
       getIconStyle(item) {
-        const voidColor = this.rateDisabled ? this.colorMap.disabledVoidColor : this.colorMap.voidColor;
+        const voidColor = this.rateDisabled ? this.disabledVoidColor : this.voidColor;
         return {
           color: item <= this.currentValue ? this.activeColor : voidColor
         };

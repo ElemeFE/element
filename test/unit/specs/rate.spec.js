@@ -205,4 +205,25 @@ describe('Rate', () => {
     rate.resetCurrentValue();
     expect(vm.value).to.equal(0.5);
   });
+
+  it('custom icon classes by passing object', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-rate
+            v-model="value"
+            :icon-classes="{ 2: 'icon-rate-face-1', 3: 'icon-rate-face-2', 5: 'icon-rate-face-3' }"></el-rate>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 4
+        };
+      }
+    }, true);
+    const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[2].querySelector('.el-rate__icon');
+    expect(thirdIcon.classList.contains('icon-rate-face-3'));
+  });
+
 });
