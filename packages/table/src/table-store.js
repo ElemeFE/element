@@ -237,6 +237,12 @@ TableStore.prototype.mutations = {
     const defaultExpandAll = states.defaultExpandAll;
     if (defaultExpandAll) {
       this.states.expandRows = (states.data || []).slice(0);
+      // treeGrid all expand
+      const keys = Object.keys(this.states.treeData);
+      for (let i = 0;i < keys.length;i++) {
+        this.states.treeData[keys[i]].display = true;
+        this.states.treeData[keys[i]].expanded = true;
+      }
     } else if (rowKey) {
       // update expandRows to new rows according to rowKey
       const ids = getKeysMap(this.states.expandRows, rowKey);
@@ -476,7 +482,19 @@ TableStore.prototype.setExpandRowKeys = function(rowKeys) {
 
   this.states.expandRows = expandRows;
 };
-
+TableStore.prototype.setTreeExpandRowKeys = function(rowKeys) {
+  const keys = Object.keys(this.states.treeData);
+  keys.forEach((rowKey) => {
+    const row = this.states.treeData[rowKey];
+    if (row.children && row.children.length) {
+      // 如果存在子节点
+      row.expanded = rowKeys.indexOf(rowKey) !== -1;
+      row.children.forEach((childrenKey) => {
+        this.states.treeData[childrenKey].display = rowKeys.indexOf(rowKey) !== -1;
+      });
+    };
+  });
+};
 TableStore.prototype.toggleRowSelection = function(row, selected) {
   const changed = toggleRowSelection(this.states, row, selected);
   if (changed) {
@@ -716,7 +734,6 @@ TableStore.prototype.toggleTreeExpansion = function(rowKey) {
     traverse(node.children);
   }
 };
-
 TableStore.prototype.loadData = function(row, treeNode) {
   const table = this.table;
   const parentRowKey = treeNode.rowKey;

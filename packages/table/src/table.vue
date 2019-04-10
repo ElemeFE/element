@@ -676,6 +676,8 @@
         handler(newVal) {
           if (newVal) {
             this.store.setExpandRowKeys(newVal);
+            // treeTable expand
+            this.store.setTreeExpandRowKeys(newVal);
           }
         }
       }

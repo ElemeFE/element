@@ -1286,6 +1286,7 @@
     :data="tableData"
     style="width: 100%;margin-bottom: 20px;"
     border
+    :expand-row-keys = "expandRowKeys"
     row-key="id">
     <el-table-column
       prop="date"
@@ -1334,6 +1335,7 @@
   export default {
     data() {
       return {
+        expandRowKeys:["3"],
         tableData: [{
           id: 1,
           date: '2016-05-02',
