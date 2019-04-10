@@ -71,17 +71,17 @@ Vous pouvez déterminer un pas pour le champs.
 
 ### Multiple of Step
 
-:::demo The `multiple-of-step` attribute accepts a `boolean`. if this attribute is `true`, input value can not be anything but multiple of step.
+:::demo The `multiple-of-step` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
 
 ```html
 <template>
-  <el-input-number v-model="num3" :step="2" multiple-of-step></el-input-number>
+  <el-input-number v-model="num" :step="2" multiple-of-step></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num3: 2
+        num: 2
       }
     }
   };
@@ -174,7 +174,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | min | La valeur minimale autorisée. | number | — | `-Infinity` |
 | max | La valeur maximale autorisée. | number | — | `Infinity` |
 | step | Le pas pour l'incrémentation. | number | — | 1 |
-| multiple-of-step | whether input value can not be anything but multiple of step | number   | — | false |
+| multiple-of-step | whether input value can only be multiple of step | number   | — | false |
 | precision | La précision de la valeur. | number | — | — |
 | size | La taille du composant. | string | large/small| — |
 | disabled| Si le composant est désactivé. | boolean | — | false |

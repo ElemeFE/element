@@ -74,13 +74,13 @@
 
 ```html
 <template>
-  <el-input-number v-model="num3" :step="2" multiple-of-step></el-input-number>
+  <el-input-number v-model="num" :step="2" multiple-of-step></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num3: 2
+        num: 2
       }
     }
   };
