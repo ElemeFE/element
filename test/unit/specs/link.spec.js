@@ -11,36 +11,36 @@ describe('Link', () => {
     vm = createTest(Link, {
       type: 'primary'
     }, true);
-    let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('el-link--primary')).to.be.true;
+    let linkElm = vm.$el;
+    expect(linkElm.classList.contains('el-link--primary')).to.be.true;
   });
   it('icon', () => {
     vm = createTest(Link, {
       icon: 'el-icon-search'
     }, true);
-    let buttonElm = vm.$el;
-    expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;
+    let linkElm = vm.$el;
+    expect(linkElm.querySelector('.el-icon-search')).to.be.ok;
   });
   it('href', () => {
     vm = createTest(Link, {
       href: 'https://element.eleme.io/'
     }, true);
-    let buttonElm = vm.$el;
-    expect(buttonElm.getAttribute('href')).to.be.equal('https://element.eleme.io/');
+    let linkElm = vm.$el;
+    expect(linkElm.getAttribute('href')).to.be.equal('https://element.eleme.io/');
   });
   it('target', () => {
     vm = createTest(Link, {
       target: '_blank'
     }, true);
-    let buttonElm = vm.$el;
-    expect(buttonElm.getAttribute('target')).to.be.equal('_blank');
+    let linkElm = vm.$el;
+    expect(linkElm.getAttribute('target')).to.be.equal('_blank');
   });
   it('disabled', () => {
     vm = createTest(Link, {
       disabled: true
     }, true);
-    let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('is-disabled')).to.be.true;
+    let linkElm = vm.$el;
+    expect(linkElm.classList.contains('is-disabled')).to.be.true;
   });
   it('click', done => {
     let result;
