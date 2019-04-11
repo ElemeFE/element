@@ -25,7 +25,7 @@ Used for rating
       return {
         value1: null,
         value2: null,
-        colors: ['#99A9BF', '#F7BA2A', '#FF9900'] // same as { 2: '#99A9BF', 3: '#F7BA2A', 5: '#FF9900' }
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'] // same as { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
       }
     }
   }
@@ -77,7 +77,7 @@ You can use different icons to distinguish different rate components.
     data() {
       return {
         value: null,
-        iconClasses: ['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3'] // same as { 2: 'icon-rate-face-1', 3: 'icon-rate-face-2', 5: 'icon-rate-face-3' }
+        iconClasses: ['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3'] // same as { 2: 'icon-rate-face-1', 4: { value: 'icon-rate-face-2', excluded: true }, 5: 'icon-rate-face-3' }
       }
     }
   }

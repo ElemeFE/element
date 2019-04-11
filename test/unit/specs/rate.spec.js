@@ -212,7 +212,7 @@ describe('Rate', () => {
         <div>
           <el-rate
             v-model="value"
-            :icon-classes="{ 2: 'icon-rate-face-1', 3: 'icon-rate-face-2', 5: 'icon-rate-face-3' }"></el-rate>
+            :icon-classes="{ 2: 'icon-rate-face-1', 4: { value: 'icon-rate-face-2', excluded: true }, 5: 'icon-rate-face-3' }"></el-rate>
         </div>
       `,
 
@@ -222,8 +222,8 @@ describe('Rate', () => {
         };
       }
     }, true);
-    const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[2].querySelector('.el-rate__icon');
-    expect(thirdIcon.classList.contains('icon-rate-face-3'));
+    const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[3].querySelector('.el-rate__icon');
+    expect(thirdIcon.className).to.include('icon-rate-face-3');
   });
 
 });

@@ -1,7 +1,12 @@
 import { ElementUIComponent } from './component'
 
+interface Option {
+  value: string,
+  excluded?: boolean
+}
+
 interface Options {
-  [threshold: number]: string
+  [threshold: number]: string | Option
 }
 
 export type RateColors = Options

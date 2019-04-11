@@ -36,8 +36,7 @@
   import { hasClass } from 'element-ui/src/utils/dom';
   import Migrating from 'element-ui/src/mixins/migrating';
 
-  const ExcludeSymbol = '<';
-  const discardExcludeSymbol = str => str.slice(0, 1) === ExcludeSymbol ? str.slice(1) : str;
+  const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]';
 
   export default {
     name: 'ElRate',
@@ -169,7 +168,7 @@
         return Array.isArray(this.iconClasses)
           ? {
             [this.lowThreshold]: this.iconClasses[0],
-            [`${ExcludeSymbol}${this.highThreshold}`]: this.iconClasses[1], // trick, highThreshold will be included to high level
+            [this.highThreshold]: { value: this.iconClasses[1], excluded: true },
             [this.max]: this.iconClasses[2]
           } : this.iconClasses;
       },
@@ -190,7 +189,7 @@
         return Array.isArray(this.colors)
           ? {
             [this.lowThreshold]: this.colors[0],
-            [`${ExcludeSymbol}${this.highThreshold}`]: this.colors[1], // trick, highThreshold will be included to high level
+            [this.highThreshold]: { value: this.colors[1], excluded: true },
             [this.max]: this.colors[2]
           } : this.colors;
       },
@@ -237,10 +236,15 @@
       },
 
       getValueFromMap(value, map) {
-        const matches = Object.keys(map)
-          .filter(key => key.slice(0, 1) === ExcludeSymbol ? value < discardExcludeSymbol(key) : value <= key)
-          .sort((a, b) => discardExcludeSymbol(a) - discardExcludeSymbol(b));
-        return map[matches[0]] || '';
+        const matchedKeys = Object.keys(map)
+          .filter(key => {
+            const val = map[key];
+            const excluded = isObject(val) ? val.excluded : false;
+            return excluded ? value < key : value <= key;
+          })
+          .sort((a, b) => a - b);
+        const matchedValue = map[matchedKeys[0]];
+        return isObject(matchedValue) ? matchedValue.value : (matchedValue || '');
       },
 
       showDecimalIcon(item) {
