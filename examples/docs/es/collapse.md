@@ -129,3 +129,4 @@ Además de usar el atributo `title`, se puede personalizar el título del panel 
 | -------- | ----------------------------- | ------------- | ----------------- | ----------- |
 | name     | identificador único del panel | string/number | —                 | —           |
 | title    | título del panel              | string        | —                 | —           |
+| disabled | disable the collapse item     | boolean       | —                 | —           |
