@@ -552,7 +552,11 @@ TableStore.prototype.clearFilter = function(columnKeys) {
     });
     this.commit('filterChange', {
       column: columns,
+<<<<<<< HEAD
       values: [],
+=======
+      value: [],
+>>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
       multi: true
     });
   } else {
