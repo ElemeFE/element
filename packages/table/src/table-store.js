@@ -554,6 +554,7 @@ TableStore.prototype.clearFilter = function(columnKeys) {
       column: columns,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       values: [],
 <<<<<<< HEAD
 =======
@@ -568,6 +569,9 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 >>>>>>> Table: reset silent option.
 =======
 >>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
+=======
+      values: [],
+>>>>>>> Table: fix error variable name.
       multi: true
     });
   } else {
