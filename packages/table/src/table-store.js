@@ -553,10 +553,14 @@ TableStore.prototype.clearFilter = function(columnKeys) {
     this.commit('filterChange', {
       column: columns,
 <<<<<<< HEAD
+<<<<<<< HEAD
       values: [],
 =======
       value: [],
 >>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
+=======
+      values: [],
+>>>>>>> Table: fix error variable name.
       multi: true
     });
   } else {
