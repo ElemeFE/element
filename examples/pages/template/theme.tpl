@@ -31,7 +31,9 @@
       <h2>官方主题</h2>
       <ul>
         <li class="theme-card" v-for="item in [1,2,3,4,5,6,7,8]" :key="item">
-          <theme-card></theme-card>
+          <theme-card
+            type="official"
+          ></theme-card>
         </li>
       </ul>
     </section>
@@ -44,7 +46,9 @@
           ></theme-card>
         </li>
         <li class="theme-card" v-for="item in [1,2,3,4,5,6,7]" :key="item">
-          <theme-card></theme-card>
+          <theme-card
+            type="user"
+          ></theme-card>
         </li>
       </ul>
     </section>

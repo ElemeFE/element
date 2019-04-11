@@ -23,15 +23,16 @@
         <div class="action">
           <div class="action-mask"></div>
           <div class="action-block">
-            <div class="action-item">
+            <div
+              class="action-item"
+              :class="index && 'action-item-right'"
+              v-for="(item, index) in actionArray"
+              :key="index"
+              @click="iconClick(item.action)"
+            >
               <span class="circle"></span>
-              <i class="el-icon-view"></i>
-              <span class="name">查看</span>
-            </div>
-            <div class="action-item" style="margin-left: 40%;">
-              <span class="circle"></span>
-              <i class="el-icon-tickets"></i>
-              <span class="name">查看</span>
+              <i :class="item.icon"></i>
+              <span class="name">{{item.name}}</span>
             </div>
           </div>
         </div>
@@ -39,7 +40,16 @@
       <div class="info">
         <span class="title">
           Napos
-          <span class="right">by Element</span>
+          <span class="right" v-if="isOfficial">by Element</span>
+          <span class="right more" v-else>
+            <el-dropdown @command="actionClick">
+              <i class="el-icon-more"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="copy">复制主题</el-dropdown-item>
+                <el-dropdown-item command="delete" style="color: #F56C6C;">删除主题</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </span>
         </span>
         <div class="description">为商户提供的设计方案</div>
       </div>
@@ -106,7 +116,7 @@
         right: 0;
         bottom: 0;
         background: #000;
-        opacity: .5;
+        opacity: 0.5;
       }
       .action-block {
         position: absolute;
@@ -149,6 +159,9 @@
           text-align: center;
         }
       }
+      .action-item-right {
+        margin-left: 40%;
+      }
     }
   }
   .info {
@@ -164,6 +177,10 @@
       font-size: 12px;
       color: #909399;
       float: right;
+    }
+    .more {
+      font-size: 16px;
+      cursor: pointer;
     }
     .description {
       font-size: 14px;
@@ -188,6 +205,47 @@ export default {
     base: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    actionClick(e) {
+      console.log('actionClick: ', e);
+    },
+    iconClick(e) {
+      console.log('iconClick: ', e);
+    }
+  },
+  computed: {
+    isOfficial() {
+      return this.type === 'official';
+    },
+    actionArray() {
+      if (this.isOfficial) {
+        return [
+          {
+            icon: 'el-icon-view',
+            name: '查看',
+            action: 'preview'
+          },
+          {
+            icon: 'el-icon-tickets',
+            name: '复制',
+            action: 'copy'
+          }
+        ];
+      }
+      return [
+        {
+          icon: 'el-icon-edit',
+          name: '编辑',
+          action: 'edit'
+        },
+        {
+          icon: 'el-icon-download',
+          name: '下载',
+          action: 'download'
+        }
+      ];
     }
   }
 };
