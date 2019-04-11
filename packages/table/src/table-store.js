@@ -555,6 +555,7 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       values: [],
 <<<<<<< HEAD
 =======
@@ -572,6 +573,12 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 =======
       values: [],
 >>>>>>> Table: fix error variable name.
+=======
+      values: [],
+=======
+      value: [],
+>>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
+>>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
       multi: true
     });
   } else {
