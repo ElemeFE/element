@@ -322,10 +322,15 @@ $--select-dropdown-border: solid 1px $--border-color-light !default;
 /* Alert
 -------------------------- */
 $--alert-padding: 8px 16px !default;
+/// borderRadius||Border|2
 $--alert-border-radius: $--border-radius-base !default;
+/// fontSize||Font|1
 $--alert-title-font-size: 13px !default;
+/// fontSize||Font|1
 $--alert-description-font-size: 12px !default;
+/// fontSize||Font|1
 $--alert-close-font-size: 12px !default;
+/// fontSize||Font|1
 $--alert-close-customed-font-size: 13px !default;
 
 $--alert-success-color: $--color-success-lighter !default;
@@ -333,23 +338,32 @@ $--alert-info-color: $--color-info-lighter !default;
 $--alert-warning-color: $--color-warning-lighter !default;
 $--alert-danger-color: $--color-danger-lighter !default;
 
+/// height||Other|4
 $--alert-icon-size: 16px !default;
+/// height||Other|4
 $--alert-icon-large-size: 28px !default;
 
-/* Message Box
+/* MessageBox
 -------------------------- */
 $--msgbox-width: 420px !default;
 $--msgbox-border-radius: 4px !default;
-$--msgbox-font-size: $--font-size-large !default;
-$--msgbox-content-font-size: $--font-size-base !default;
-$--msgbox-content-color: $--color-text-regular !default;
-$--msgbox-error-font-size: 12px !default;
+/// fontSize||Font|1
+$--messagebox-font-size: $--font-size-large !default;
+/// fontSize||Font|1
+$--messagebox-content-font-size: $--font-size-base !default;
+/// color||Color|0
+$--messagebox-content-color: $--color-text-regular !default;
+/// fontSize||Font|1
+$--messagebox-error-font-size: 12px !default;
 $--msgbox-padding-primary: 15px !default;
-
-$--msgbox-success-color: $--color-success !default;
-$--msgbox-info-color: $--color-info !default;
-$--msgbox-warning-color: $--color-warning !default;
-$--msgbox-danger-color: $--color-danger !default;
+/// color||Color|0
+$--messagebox-success-color: $--color-success !default;
+/// color||Color|0
+$--messagebox-info-color: $--color-info !default;
+/// color||Color|0
+$--messagebox-warning-color: $--color-warning !default;
+/// color||Color|0
+$--messagebox-danger-color: $--color-danger !default;
 
 /* Message
 -------------------------- */
@@ -357,37 +371,57 @@ $--message-shadow: $--box-shadow-base !default;
 $--message-min-width: 380px !default;
 $--message-background-color: #edf2fc !default;
 $--message-padding: 15px 15px 15px 20px !default;
+/// color||Color|0
 $--message-content-color: $--color-text-regular !default;
+/// color||Color|0
 $--message-close-color: $--color-text-placeholder !default;
+/// height||Other|4
 $--message-close-size: 16px !default;
+/// color||Color|0
 $--message-close-hover-color: $--color-text-secondary !default;
 
+/// color||Color|0
 $--message-success-color: $--color-success !default;
+/// color||Color|0
 $--message-info-color: $--color-info !default;
+/// color||Color|0
 $--message-warning-color: $--color-warning !default;
+/// color||Color|0
 $--message-danger-color: $--color-danger !default;
 
 /* Notification
 -------------------------- */
 $--notification-width: 330px !default;
+/// padding||Spacing|3
 $--notification-padding: 14px 26px 14px 13px !default;
 $--notification-radius: 8px !default;
 $--notification-shadow: $--box-shadow-light !default;
+/// color||Color|0
 $--notification-border-color: $--border-color-lighter !default;
 $--notification-icon-size: 24px !default;
 $--notification-close-font-size: $--message-close-size !default;
 $--notification-group-margin: 13px !default;
+/// fontSize||Font|1
 $--notification-font-size: $--font-size-base !default;
+/// color||Color|0
 $--notification-color: $--color-text-regular !default;
+/// fontSize||Font|1
 $--notification-title-font-size: 16px !default;
+/// color||Color|0
 $--notification-title-color: $--color-text-primary !default;
 
+/// color||Color|0
 $--notification-close-color: $--color-text-secondary !default;
+/// color||Color|0
 $--notification-close-hover-color: $--color-text-regular !default;
 
+/// color||Color|0
 $--notification-success-color: $--color-success !default;
+/// color||Color|0
 $--notification-info-color: $--color-info !default;
+/// color||Color|0
 $--notification-warning-color: $--color-warning !default;
+/// color||Color|0
 $--notification-danger-color: $--color-danger !default;
 
 /* Input
@@ -603,11 +637,15 @@ $--switch-button-size: 16px !default;
 -------------------------- */
 $--dialog-background-color: $--color-white !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
+/// color||Color|0
 $--dialog-close-hover-color: $--color-primary !default;
+/// fontSize||Font|1
 $--dialog-title-font-size: $--font-size-large !default;
+/// fontSize||Font|1
 $--dialog-font-size: 14px !default;
-/// fontLineHeight|
+/// fontLineHeight||LineHeight|2
 $--dialog-font-line-height: $--font-line-height-primary !default;
+/// padding||Spacing|3
 $--dialog-padding-primary: 20px !default;
 
 /* Table
@@ -628,36 +666,57 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 
 /* Pagination
 -------------------------- */
+/// fontSize||Font|1
 $--pagination-font-size: 13px !default;
-$--pagination-fill: $--color-white !default;
-$--pagination-color: $--color-text-primary !default;
+/// color||Color|0
+$--pagination-background-color: $--color-white !default;
+/// color||Color|0
+$--pagination-font-color: $--color-text-primary !default;
 $--pagination-border-radius: 3px !default;
+/// color||Color|0
 $--pagination-button-color: $--color-text-primary !default;
+/// height||Other|4
 $--pagination-button-width: 35.5px !default;
+/// height||Other|4
 $--pagination-button-height: 28px !default;
+/// color||Color|0
 $--pagination-button-disabled-color: $--color-text-placeholder !default;
-$--pagination-button-disabled-fill: $--color-white !default;
-$--pagination-hover-fill: $--color-primary !default;
+/// color||Color|0
+$--pagination-button-disabled-background-color: $--color-white !default;
+/// color||Color|0
+$--pagination-hover-color: $--color-primary !default;
+/// color||Color|0
 $--pagination-hover-color: $--color-white !default;
 
 /* Popover
 -------------------------- */
-$--popover-fill: $--color-white !default;
+/// color||Color|0
+$--popover-background-color: $--color-white !default;
+/// fontSize||Font|1
 $--popover-font-size: $--font-size-base !default;
+/// color||Color|0
 $--popover-border-color: $--border-color-lighter !default;
 $--popover-arrow-size: 6px !default;
+/// padding||Spacing|3
 $--popover-padding: 12px !default;
 $--popover-padding-large: 18px 20px !default;
+/// fontSize||Font|1
 $--popover-title-font-size: 16px !default;
+/// color||Color|0
 $--popover-title-color: $--color-text-primary !default;
 
 /* Tooltip
 -------------------------- */
+/// color|1|Color|0
 $--tooltip-fill: $--color-text-primary !default;
+/// color|1|Color|0
 $--tooltip-color: $--color-white !default;
+/// fontSize||Font|1
 $--tooltip-font-size: 12px !default;
+/// color||Color|0
 $--tooltip-border-color: $--color-text-primary !default;
 $--tooltip-arrow-size: 6px !default;
+/// padding||Spacing|3
 $--tooltip-padding: 10px !default;
 
 /* Tag
@@ -710,16 +769,22 @@ $--dropdown-menuItem-hover-color: $--link-color !default;
 
 /* Badge
 -------------------------- */
+/// color||Color|0
 $--badge-fill: $--color-danger !default;
 $--badge-radius: 10px !default;
+/// fontSize||Font|1
 $--badge-font-size: 12px !default;
+/// padding||Spacing|3
 $--badge-padding: 6px !default;
+/// height||Other|4
 $--badge-size: 18px !default;
 
 /* Card
 --------------------------*/
+/// color||Color|0
 $--card-border-color: $--border-color-lighter !default;
 $--card-border-radius: 4px !default;
+/// padding||Spacing|3
 $--card-padding: 20px !default;
 
 /* Slider
@@ -752,9 +817,12 @@ $--steps-padding: 20px !default;
 
 /* Menu
 --------------------------*/
+/// fontSize||Font|1
 $--menu-item-font-size: $--font-size-base !default;
-$--menu-item-color: $--color-text-primary !default;
-$--menu-item-fill: $--color-white !default;
+/// color||Color|0
+$--menu-item-font-color: $--color-text-primary !default;
+/// color||Color|0
+$--menu-item-background-color: $--color-white !default;
 $--menu-item-hover-fill: $--color-primary-light-9 !default;
 
 /* Rate
@@ -793,7 +861,9 @@ $--datepicker-cell-hover-color: #fff !default;
 
 /* Loading
 --------------------------*/
+/// height||Other|4
 $--loading-spinner-size: 42px !default;
+/// height||Other|4
 $--loading-fullscreen-spinner-size: 50px !default;
 
 /* Scrollbar
@@ -803,11 +873,14 @@ $--scrollbar-hover-background-color: rgba($--color-text-secondary, .5) !default;
 
 /* Carousel
 --------------------------*/
+/// fontSize||Font|1
 $--carousel-arrow-font-size: 12px !default;
 $--carousel-arrow-size: 36px !default;
 $--carousel-arrow-background: rgba(31, 45, 61, 0.11) !default;
 $--carousel-arrow-hover-background: rgba(31, 45, 61, 0.23) !default;
+/// width||Other|4
 $--carousel-indicator-width: 30px !default;
+/// height||Other|4
 $--carousel-indicator-height: 2px !default;
 $--carousel-indicator-padding-horizontal: 4px !default;
 $--carousel-indicator-padding-vertical: 12px !default;
@@ -815,15 +888,24 @@ $--carousel-indicator-out-color: $--border-color-hover !default;
 
 /* Collapse
 --------------------------*/
+/// color||Color|0
 $--collapse-border-color: $--border-color-lighter !default;
+/// height||Other|4
 $--collapse-header-height: 48px !default;
+/// padding||Other|4
 $--collapse-header-padding: 20px !default;
-$--collapse-header-fill: $--color-white !default;
-$--collapse-header-color: $--color-text-primary !default;
+/// color||Color|0
+$--collapse-header-background-color: $--color-white !default;
+/// color||Color|0
+$--collapse-header-font-color: $--color-text-primary !default;
+/// fontSize||Font|1
 $--collapse-header-size: 13px !default;
-$--collapse-content-fill: $--color-white !default;
+/// color||Color|0
+$--collapse-content-background-color: $--color-white !default;
+/// fontSize||Font|1
 $--collapse-content-size: 13px !default;
-$--collapse-content-color: $--color-text-primary !default;
+/// color||Color|0
+$--collapse-content-font-color: $--color-text-primary !default;
 
 /* Transfer
 --------------------------*/
