@@ -416,4 +416,68 @@ describe('Input', () => {
     await waitImmediate();
     expect(vm.$el.querySelector('input').value).to.equal('123');
   });
+
+  it('limit input and show word count', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-input
+            class="test-text"
+            type="text"
+            v-model="input1"
+            maxlength="10"
+            :show-word-count="show">
+          </el-input>
+          <el-input
+            class="test-textarea"
+            type="textarea"
+            v-model="input2"
+            maxlength="10"
+            show-word-count>
+          </el-input>
+          <el-input
+            class="test-password"
+            type="password"
+            v-model="input3"
+            maxlength="10"
+            show-word-count>
+          </el-input>
+          <el-input
+            class="test-initial-exceed"
+            type="text"
+            v-model="input4"
+            maxlength="2"
+            show-word-count>
+          </el-input>
+        </div>
+      `,
+      data() {
+        return {
+          input1: '',
+          input2: '',
+          input3: '',
+          input4: 'exceed',
+          show: false
+        };
+      }
+    }, true);
+
+    const inputElm1 = vm.$el.querySelector('.test-text');
+    const inputElm2 = vm.$el.querySelector('.test-textarea');
+    const inputElm3 = vm.$el.querySelector('.test-password');
+    const inputElm4 = vm.$el.querySelector('.test-initial-exceed');
+
+    expect(inputElm1.querySelectorAll('.el-input__count').length).to.equal(0);
+    expect(inputElm2.querySelectorAll('.el-input__count').length).to.equal(1);
+    expect(inputElm3.querySelectorAll('.el-input__count').length).to.equal(0);
+    expect(inputElm4.classList.contains('is-exceed')).to.true;
+
+    vm.show = true;
+    await waitImmediate();
+    expect(inputElm1.querySelectorAll('.el-input__count').length).to.equal(1);
+
+    vm.input4 = '1';
+    await waitImmediate();
+    expect(inputElm4.classList.contains('is-exceed')).to.false;
+  });
 });
