@@ -237,6 +237,11 @@ TableStore.prototype.mutations = {
     const defaultExpandAll = states.defaultExpandAll;
     if (defaultExpandAll) {
       this.states.expandRows = (states.data || []).slice(0);
+      const keys = Object.keys(this.states.treeData);
+      for (let i = 0;i < keys.length;i++) {
+        this.states.treeData[keys[i]].display = true;
+        this.states.treeData[keys[i]].expanded = true;
+      }
     } else if (rowKey) {
       // update expandRows to new rows according to rowKey
       const ids = getKeysMap(this.states.expandRows, rowKey);
@@ -475,6 +480,28 @@ TableStore.prototype.setExpandRowKeys = function(rowKeys) {
   });
 
   this.states.expandRows = expandRows;
+};
+
+TableStore.prototype.setTreeExpandRowKeys = function(rowKeys) {
+  const treeChildrenKey = 'children';
+  const keys = Object.keys(this.states.treeData);
+  rowKeys = rowKeys.map(item => item.toString());
+  keys.forEach((rowKey => {
+    const rowAttr = this.states.treeData[rowKey];
+    if (!rowAttr) return false;
+    const isExpand = rowKeys.indexOf(rowKey) !== -1;
+    if (rowAttr[treeChildrenKey] && rowAttr[treeChildrenKey].length) {
+      rowAttr.expanded = isExpand;
+      rowAttr[treeChildrenKey].forEach((rowChildrenKey) => {
+        this.states.treeData[rowChildrenKey].display = isExpand;
+      });
+    } else {
+      if (isExpand) {
+        rowAttr.rowKey = rowKey;
+        this.loadData(this.states.data[rowKey], rowAttr);
+      }
+    }
+  }));
 };
 
 TableStore.prototype.toggleRowSelection = function(row, selected) {
@@ -733,7 +760,8 @@ TableStore.prototype.loadData = function(row, treeNode) {
         parent.children.push(rowKey);
         const child = {
           display: true,
-          level: parent.level + 1
+          level: parent.level + 1,
+          rowKey
         };
         if (item.hasChildren) {
           child.expanded = false;
@@ -742,6 +770,9 @@ TableStore.prototype.loadData = function(row, treeNode) {
         }
         Vue.set(treeData, rowKey, child);
         Vue.set(this.states.lazyTreeNodeMap, rowKey, item);
+        if ((this.table.expandRowKeys || []).indexOf(rowKey) !== -1) {
+          this.loadData(item, child);
+        }
       });
       this.toggleTreeExpansion(parentRowKey);
     });

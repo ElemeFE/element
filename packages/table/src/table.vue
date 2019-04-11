@@ -676,6 +676,7 @@
         handler(newVal) {
           if (newVal) {
             this.store.setExpandRowKeys(newVal);
+            this.store.setTreeExpandRowKeys(newVal);
           }
         }
       }
