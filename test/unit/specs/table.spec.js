@@ -369,7 +369,7 @@ describe('Table', () => {
           // reset button
           triggerEvent(filter.querySelectorAll('.el-table-filter__bottom button')[1], 'click', true, false);
           setTimeout(_ => {
-            expect(vm.filters['director']).to.be.eql([]);
+            expect(vm.filters['director']).to.be.eql(undefined);
             expect(filter.querySelector('.el-table-filter__bottom button').classList.contains('is-disabled')).to.true;
             document.body.removeChild(filter);
             destroyVM(vm);
