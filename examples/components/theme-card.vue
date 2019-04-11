@@ -11,16 +11,17 @@
     <template v-else>
       <div class="preview">
         <div class="line">
-          <span class="line-2" style="background: red"></span>
-          <span class="line-2" style="background: green"></span>
+          <span class="line-2" style="background: #1989FA"></span>
+          <span class="line-2" style="background: #303133"></span>
         </div>
         <div class="line">
-          <span class="line-4" style="background: yellow"></span>
-          <span class="line-4" style="background: purple"></span>
-          <span class="line-4" style="background: yellow"></span>
-          <span class="line-4" style="background: purple"></span>
+          <span class="line-4" style="background: #E6F1FC"></span>
+          <span class="line-4" style="background: #A2CFFC"></span>
+          <span class="line-4" style="background: #F0F2F5"></span>
+          <span class="line-4" style="background: #909399"></span>
         </div>
         <div class="action">
+          <div class="action-mask"></div>
           <div class="action-block">
             <div class="action-item">
               <span class="circle"></span>
@@ -52,13 +53,12 @@
   border-radius: 4px;
   overflow: hidden;
   background: #fff;
-  width: 90%;
   height: 90%;
-  margin: 5% auto;
+  margin: 5% 0;
   box-shadow: 0 0 1px 0 #666;
   .upload {
     cursor: pointer;
-    background: #F5F7FA;
+    background: #f5f7fa;
     height: 100%;
     width: 100%;
     .upload-action {
@@ -95,12 +95,19 @@
     .action {
       position: absolute;
       display: none;
-      background: #000;
-      opacity: 0.8;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
+      .action-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000;
+        opacity: .5;
+      }
       .action-block {
         position: absolute;
         width: 40%;

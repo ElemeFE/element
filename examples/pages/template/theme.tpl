@@ -8,12 +8,15 @@
       list-style: none;
       padding: 0;
       margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
     .theme-card {
       display: inline-block;
       height: 150px;
       height: 16vw;
-      width: 25%;
+      flex: 0 0 24%;
       cursor: default;
       vertical-align: bottom;
     }
