@@ -293,7 +293,7 @@ TableStore.prototype.mutations = {
   },
 
   filterChange(states, options) {
-    let { column, values, multi } = options;
+    let { column, values, silent, multi } = options;
     if (values && !Array.isArray(values)) {
       values = [values];
     }
@@ -328,7 +328,9 @@ TableStore.prototype.mutations = {
     states.filteredData = data;
     states.data = sortData(data, states);
 
-    this.table.$emit('filter-change', filters);
+    if (!silent) {
+      this.table.$emit('filter-change', filters);
+    }
 
     Vue.nextTick(() => this.table.updateScrollY());
   },
@@ -555,12 +557,16 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 <<<<<<< HEAD
 <<<<<<< HEAD
       values: [],
+<<<<<<< HEAD
 =======
       value: [],
 >>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
 =======
       values: [],
 >>>>>>> Table: fix error variable name.
+=======
+      silent: false,
+>>>>>>> Table: reset silent option.
       multi: true
     });
   } else {
@@ -572,7 +578,8 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 
     this.commit('filterChange', {
       column: {},
-      values: []
+      values: [],
+      silent: false
     });
   }
 };
