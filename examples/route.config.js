@@ -124,10 +124,21 @@ const generateMiscRoutes = function(lang) {
   };
 
   let themeRoute = {
-    path: `/${ lang }/theme`, // 主题
-    meta: { lang },
-    name: 'theme' + lang,
-    component: load(lang, 'theme')
+    path: `/${ lang }/theme`,
+    component: load(lang, 'theme-nav'),
+    children: [
+      {
+        path: '/', // 主题管理
+        name: 'theme' + lang,
+        meta: { lang },
+        component: load(lang, 'theme')
+      },
+      {
+        path: 'preview', // 主题预览编辑
+        name: 'theme-preview' + lang,
+        meta: { lang },
+        component: load(lang, 'theme-preview')
+      }]
   };
 
   let resourceRoute = {
