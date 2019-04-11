@@ -54,18 +54,18 @@ Utilice el _hook_ `before-upload` para limitar el formato de archivo y su tamañ
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+  <i v-else class="el-icon-plus avatar-uploader-icon el-upload-border"></i>
 </el-upload>
 
 <style>
-  .avatar-uploader .el-upload {
+  .avatar-uploader .el-upload-border {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
-  .avatar-uploader .el-upload:hover {
+  .avatar-uploader .el-upload-border:hover {
     border-color: #409EFF;
   }
   .avatar-uploader-icon {
