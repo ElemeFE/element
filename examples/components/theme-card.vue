@@ -46,7 +46,20 @@
               <i class="el-icon-more"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="copy">复制主题</el-dropdown-item>
-                <el-dropdown-item command="delete" style="color: #F56C6C;">删除主题</el-dropdown-item>
+                <el-popover placement="top" width="160" v-model="deleteVisible">
+                  <p>这是一段内容这是一段内容确定删除吗？</p>
+                  <div style="text-align: right; margin: 0">
+                    <el-button size="mini" type="text" @click="deleteVisible = false">取消</el-button>
+                    <el-button type="primary" size="mini" @click="deleteUserTheme">确定</el-button>
+                  </div>
+                  <el-dropdown-item 
+                    command="delete" 
+                    style="color: #F56C6C;"
+                    slot="reference"
+                  >
+                    删除主题
+                  </el-dropdown-item>
+                </el-popover>
               </el-dropdown-menu>
             </el-dropdown>
           </span>
@@ -207,12 +220,21 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      deleteVisible: false
+    };
+  },
   methods: {
     actionClick(e) {
       console.log('actionClick: ', e);
     },
     iconClick(e) {
       console.log('iconClick: ', e);
+    },
+    deleteUserTheme() {
+      this.deleteVisible = false;
+      console.log('deleteUserTheme');
     }
   },
   computed: {
