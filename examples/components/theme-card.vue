@@ -231,6 +231,17 @@ export default {
     },
     iconClick(e) {
       console.log('iconClick: ', e);
+      switch (e) {
+        case 'preview':
+        case 'edit':
+          this.$router.push({ path: 'preview', append: true });
+          this.$nextTick(() => {
+            window.scrollTo(0, 0);
+          });
+          break;
+        default:
+          return;
+      }
     },
     deleteUserTheme() {
       this.deleteVisible = false;

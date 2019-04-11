@@ -1,93 +1,26 @@
 <template>
-  <div>
-    <el-button
-      round
-      type="primary"
-      size="mini"
-      style="background: #66b1ff;border-color: #66b1ff"
-      @click.stop="showConfigurator"
-    >{{getActionDisplayName("theme-editor")}}</el-button>
-    <transition name="fade">
-      <div v-show="visible" class="configurator" ref="configurator">
-        <div 
-          class="main-configurator"
-          ref="mainConfigurator"
-        >
-          <div v-if="currentConfig">
-            <main-panel
-              :currentConfig="currentConfig"
-              :defaultConfig="defaultConfig"
-              :userConfig="userConfig"
-              :globalValue="globalValue"
-              @onChange="userConfigChange"
-            ></main-panel>
-          </div>
-          <div v-if="init && !currentConfig" class="no-config">
-            <img src="../../assets/images/theme-no-config.png" alt>
-            <span v-if="pageCouldEdit">{{getActionDisplayName("no-config")}}</span>
-            <span v-else>{{getActionDisplayName("no-need-config")}}</span>
-          </div>
-          <download-area></download-area>
-        </div>
-      </div>
-    </transition>
+  <div class="main-configurator" ref="mainConfigurator">
+    <div v-if="currentConfig">
+      <main-panel
+        :currentConfig="currentConfig"
+        :defaultConfig="defaultConfig"
+        :userConfig="userConfig"
+        :globalValue="globalValue"
+        @onChange="userConfigChange"
+      ></main-panel>
+    </div>
+    <div v-if="init && !currentConfig" class="no-config">
+      <img src="../../assets/images/theme-no-config.png" alt>
+      <span v-if="pageCouldEdit">{{getActionDisplayName("no-config")}}</span>
+      <span v-else>{{getActionDisplayName("no-need-config")}}</span>
+    </div>
   </div>
 </template>
 
-<style>
-.configurator {
+<style lang="scss">
+.main-configurator {
   height: 100%;
-  width: 24%;
-  max-width: 400px;
-  position: fixed;
-  overflow-y: auto;
-  top: 79px;
-  right: 0;
-  bottom: 0;
-  background: #fff;
-  color: #666;
-  line-height: 24px;
-  padding-right: 1%;
 }
-.configurator .main-configurator {
-  height: 100%;
-  overflow: auto;
-  background: #F5F7FA;
-  border: 1px solid #EBEEF5;
-  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.06);
-  border-radius: 8px;
-  width: 97%;
-  box-sizing: border-box;
-  margin: 0 .5% 0 5%;
-}
-.no-config {
-  margin-top: 130px;
-  text-align: center;
-  img {
-    width: 50%;
-    display: block;
-    margin: 0 auto;
-  }
-  span {
-    margin-top: 10px;
-    display: block;
-    color: #909399;
-    font-size: 14px;
-  }
-}
-.fade-enter,.fade-leave-to {
-    transform:translateX(100%);
-}
-.fade-enter-active ,.fade-leave-active {
-    transition:all 0.3s ease;
-}
-
-@media (min-width: 1600px) {
-  .configurator {
-    padding-right: calc((100% - 1600px) / 2);
-  }
-}
-
 </style>
 
 <script>
@@ -103,7 +36,6 @@ import {
 import DocStyle from './docStyle';
 import Loading from './loading';
 import Shortcut from './shortcut';
-import DownloadArea from './download';
 
 const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG';
 
@@ -114,13 +46,12 @@ const DEFAULT_USER_CONFIG = {
 
 export default {
   components: {
-    mainPanel,
-    DownloadArea
+    mainPanel
   },
   data() {
     return {
       init: false,
-      visible: false,
+      visible: true,
       defaultConfig: null,
       currentConfig: null,
       userConfig: {
@@ -139,13 +70,23 @@ export default {
       return filterGlobalValue(this.defaultConfig, this.userConfig);
     },
     pageCouldEdit() {
-      const noNeedEdit = ['installation', 'quickstart', 'i18n', 'custom-theme', 'transition'];
-      const lastPath = this.$route.path.split('/').slice(-1).pop();
+      const noNeedEdit = [
+        'installation',
+        'quickstart',
+        'i18n',
+        'custom-theme',
+        'transition'
+      ];
+      const lastPath = this.$route.path
+        .split('/')
+        .slice(-1)
+        .pop();
       return noNeedEdit.indexOf(lastPath) < 0;
     }
   },
   mounted() {
-    this.checkLocalThemeConfig();
+    // this.checkLocalThemeConfig();
+    this.showConfigurator();
   },
   methods: {
     getActionDisplayName(key) {
@@ -163,11 +104,11 @@ export default {
         });
         let defaultConfig;
         getVars()
-          .then((res) => {
+          .then(res => {
             defaultConfig = res;
             ga('send', 'event', 'ThemeConfigurator', 'Init');
           })
-          .catch((err) => {
+          .catch(err => {
             this.onError(err);
           })
           .then(() => {
@@ -190,7 +131,9 @@ export default {
           this.onAction();
           return;
         }
-        const config = JSON.parse(localStorage.getItem(ELEMENT_THEME_USER_CONFIG));
+        const config = JSON.parse(
+          localStorage.getItem(ELEMENT_THEME_USER_CONFIG)
+        );
         if (config && config.global) {
           this.userConfig = config;
           this.hasLocalConfig = true;
@@ -201,14 +144,20 @@ export default {
       }
     },
     filterCurrentConfig() {
-      this.currentConfig = this.defaultConfig.find((config) => {
-        return config.name === this.$route.path.split('/').pop().toLowerCase().replace('-', '');
+      this.currentConfig = this.defaultConfig.find(config => {
+        return (
+          config.name === 'button'
+        );
       });
     },
     userConfigChange(e) {
       this.userConfigHistory.push(JSON.stringify(this.userConfig));
       this.userConfigRedoHistory = [];
-      this.$set(this.userConfig[filterConfigType(this.currentConfig.name)], e.key, e.value);
+      this.$set(
+        this.userConfig[filterConfigType(this.currentConfig.name)],
+        e.key,
+        e.value
+      );
       this.onAction();
     },
     applyStyle(res, time) {
@@ -219,9 +168,12 @@ export default {
       this.lastApply = time;
     },
     onDownload() {
-      return updateVars(Object.assign({}, this.userConfig, {download: true}), (xhr) => {
-        xhr.responseType = 'blob';
-      });
+      return updateVars(
+        Object.assign({}, this.userConfig, { download: true }),
+        xhr => {
+          xhr.responseType = 'blob';
+        }
+      );
     },
     onReset() {
       this.userConfig = {
@@ -240,10 +192,10 @@ export default {
         localStorage.setItem(ELEMENT_THEME_USER_CONFIG, currentConfigString);
       }
       updateVars(this.userConfig)
-        .then((res) => {
+        .then(res => {
           this.applyStyle(res, time);
         })
-        .catch((err) => {
+        .catch(err => {
           this.onError(err);
         })
         .then(() => {
@@ -280,16 +232,6 @@ export default {
         this.userConfig = JSON.parse(this.userConfigRedoHistory.shift());
         this.onAction();
       }
-    }
-  },
-  watch: {
-    '$route.path'() {
-      this.defaultConfig && this.filterCurrentConfig();
-      if (!this.$refs.mainConfigurator) return;
-      this.$nextTick(() => {
-        this.$refs.mainConfigurator.scrollTop = 0;
-      });
-
     }
   }
 };
