@@ -301,6 +301,15 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
+          <li 
+            class="nav-item"
+            v-if="showThemeConfigurator"
+          >
+            <router-link
+              active-class="active"
+              :to="`/${ lang }/theme`">{{ langConfig.theme }}
+            </router-link>
+          </li>
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -364,8 +373,7 @@
           
           <!--theme picker-->
           <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-configurator :key="lang" v-if="showThemeConfigurator"></theme-configurator>
-            <theme-picker v-else></theme-picker>
+            <theme-picker v-if="!showThemeConfigurator"></theme-picker>
           </li>
         </ul>
       </div>

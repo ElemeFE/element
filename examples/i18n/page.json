@@ -17,6 +17,7 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {},
       "changelog": {
         "1": "更新日志",
         "2": "zh-CN"
@@ -109,6 +110,7 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {},
       "changelog": {
         "1": "Changelog",
         "2": "en-US"
@@ -201,6 +203,7 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {},
       "changelog": {
         "1": "Lista de cambios",
         "2": "es"
@@ -294,6 +297,7 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {},
       "changelog": {
         "1": "Changelog",
         "2": "fr-FR"
