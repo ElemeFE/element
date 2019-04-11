@@ -107,7 +107,10 @@
         }
       },
 
-      contains(arr = [], target) {
+      contains(arr, target) {
+        if (arr === null || arr === undefined) {
+          return false;
+        }
         if (!this.isObject) {
           return arr.indexOf(target) > -1;
         } else {
