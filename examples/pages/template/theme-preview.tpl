@@ -20,10 +20,8 @@
     .editor {
       background: #f5f7fa;
       border: 1px solid #ebeef5;
-      border-bottom: none;
-      height: 100vh;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      border-radius: 5px;
+      margin-bottom: 20px;
     }
   }
 }

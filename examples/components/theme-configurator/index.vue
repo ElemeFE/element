@@ -1,19 +1,13 @@
 <template>
-  <div class="main-configurator" ref="mainConfigurator">
-    <div v-if="currentConfig">
-      <main-panel
-        :currentConfig="currentConfig"
-        :defaultConfig="defaultConfig"
-        :userConfig="userConfig"
-        :globalValue="globalValue"
-        @onChange="userConfigChange"
-      ></main-panel>
-    </div>
-    <div v-if="init && !currentConfig" class="no-config">
-      <img src="../../assets/images/theme-no-config.png" alt>
-      <span v-if="pageCouldEdit">{{getActionDisplayName("no-config")}}</span>
-      <span v-else>{{getActionDisplayName("no-need-config")}}</span>
-    </div>
+  <div class="main-configurator">
+    <main-panel
+      v-if="defaultConfig"
+      :currentConfig="currentConfig"
+      :defaultConfig="defaultConfig"
+      :userConfig="userConfig"
+      :globalValue="globalValue"
+      @onChange="userConfigChange"
+    ></main-panel>
   </div>
 </template>
 
@@ -68,20 +62,6 @@ export default {
   computed: {
     globalValue() {
       return filterGlobalValue(this.defaultConfig, this.userConfig);
-    },
-    pageCouldEdit() {
-      const noNeedEdit = [
-        'installation',
-        'quickstart',
-        'i18n',
-        'custom-theme',
-        'transition'
-      ];
-      const lastPath = this.$route.path
-        .split('/')
-        .slice(-1)
-        .pop();
-      return noNeedEdit.indexOf(lastPath) < 0;
     }
   },
   mounted() {
@@ -95,8 +75,6 @@ export default {
     showConfigurator() {
       this.visible = !this.visible;
       this.visible ? this.enableShortcut() : this.disableShortcut();
-      bus.$emit('user-theme-config-visible', this.visible);
-      window.userThemeConfigVisible = Boolean(this.visible);
       if (this.init) return;
       this.$nextTick(() => {
         const loading = this.$loading({

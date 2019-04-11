@@ -23,7 +23,6 @@
 
 <style>
 .main {
-  margin-bottom: 140px;
   padding: 10px;
 }
 .category-name {
