@@ -207,6 +207,10 @@
   - Spelling issue in datepicker documentation (by @helmut in #14481)
   - Fix pagination doc style (by @liuchuzhang in #14451)
 
+#### Breaking changes
+- Table
+  - Fix params order of row events (by @jikkai in #12086)
+
 ### 2.5.4
 
 *2019-02-01*
