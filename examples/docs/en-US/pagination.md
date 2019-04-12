@@ -156,6 +156,7 @@ Add more modules based on your scenario.
 | prev-text | text for the prev button | string | — | — |
 | next-text | text for the next button | string | — | — |
 | disabled | whether Pagination is disabled | boolean | — | false |
+| hide-on-single-page | whether to hide when thers's only one page | boolean | — | - |
 
 ### Events
 | Event Name | Description | Parameters |

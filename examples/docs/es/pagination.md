@@ -141,7 +141,8 @@ Agrega más modulos basados en su escenario.
 | popper-class | clase propia para el `dropdown` del `select` del número de páginas | string   | —                                        | —                                      |
 | prev-text    | texto para el botón `prev`               | string   | —                                        | —                                      |
 | next-text    | texto para el botón `next`               | string   | —                                        | —                                      |
-| disabled | si Pagination esta disabled | boolean | — | false |
+| disabled     | si Pagination esta disabled              | boolean  | —                                        | false                                  |
+| hide-on-single-page | whether to hide when thers's only one page | boolean |—                                 | -                                      |
 
 ### Eventos
 | Nombre del evento | Descripción                             | Parámetros                    |

@@ -161,6 +161,7 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 | prev-text | Texte du bouton prev. | string | — | — |
 | next-text | Texte du bouton next. | string | — | — |
 | disabled | Si la pagination est désactivée. | boolean | — | false |
+| hide-on-single-page | whether to hide when thers's only one page | boolean | — | - |
 
 ### Évènements
 
