@@ -40,7 +40,7 @@ Vous pouvez ajouter du texte à chaque score.
 
 ```html
 <el-rate
-  v-model="value3"
+  v-model="value"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
   show-text>
 </el-rate>
@@ -49,7 +49,7 @@ Vous pouvez ajouter du texte à chaque score.
   export default {
     data() {
       return {
-        value3: null
+        value: null
       }
     }
   }
@@ -65,7 +65,7 @@ Vous pouvez utiliser différentes icônes pour chaque
 
 ```html
 <el-rate
-  v-model="value4"
+  v-model="value"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
@@ -75,7 +75,7 @@ Vous pouvez utiliser différentes icônes pour chaque
   export default {
     data() {
       return {
-        value4: null
+        value: null
       }
     }
   }
@@ -91,7 +91,7 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 
 ```html
 <el-rate
-  v-model="value5"
+  v-model="value"
   disabled
   show-score
   text-color="#ff9900"
@@ -102,7 +102,7 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
   export default {
     data() {
       return {
-        value5: 3.7
+        value: 3.7
       }
     }
   }
