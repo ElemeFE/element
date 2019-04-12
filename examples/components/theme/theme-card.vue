@@ -225,6 +225,7 @@
 
 <script>
 import { DEFAULT_THEME_CONFIG } from './constant.js';
+import { savePreviewToLocal } from './localstorage';
 
 export default {
   props: {
@@ -271,6 +272,12 @@ export default {
       switch (e) {
         case 'preview':
         case 'edit':
+          const { name, theme } = this.config;
+          savePreviewToLocal({
+            type: this.type,
+            name,
+            theme
+          });
           this.$router.push({ path: 'preview', append: true });
           this.$nextTick(() => {
             window.scrollTo(0, 0);

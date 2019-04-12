@@ -73,7 +73,8 @@
 </template>
 <script>
 import ThemeCard from '../../components/theme/theme-card.vue';
-import themeList from '../../components/theme/theme-list.js';
+import ThemeList from '../../components/theme/theme-list.js';
+import { saveUserThemeToLocal, loadUserThemeToLocal } from '../../components/theme/localstorage';
 
 const maxUserTheme = 8;
 
@@ -82,11 +83,11 @@ export default {
     ThemeCard
   },
   mounted() {
-    this.loadFromLocal();
+    this.userTheme = loadUserThemeToLocal() || [];
   },
   data() {
     return {
-      officialTheme: this.padEmpeyTheme(themeList),
+      officialTheme: this.padEmpeyTheme(ThemeList),
       userTheme: [],
       maxUserTheme,
       copyDialogVisible: false,
@@ -177,12 +178,7 @@ export default {
       });
     },
     saveToLocal() {
-      localStorage.setItem('ELEMENT_THEME_USER_CONFIG', JSON.stringify(this.userTheme));
-    },
-    loadFromLocal() {
-      try {
-        this.userTheme = JSON.parse(localStorage.getItem('ELEMENT_THEME_USER_CONFIG'));
-      } catch (e) {}
+      saveUserThemeToLocal(this.userTheme);
     }
   }
 };
