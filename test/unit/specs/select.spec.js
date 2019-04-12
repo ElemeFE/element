@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
@@ -821,7 +821,7 @@ describe('Select', () => {
     done();
   });
 
-  it('should set placeholder to label of selected option when filterable is true and multiple is false', done => {
+  it('should set placeholder to label of selected option when filterable is true and multiple is false', async() => {
     vm = createVue({
       template: `
         <div>
@@ -837,12 +837,10 @@ describe('Select', () => {
       }
     });
     vm.$refs.select.$el.click();
-    setTimeout(() => {
-      expect(vm.$refs.select.visible).to.be.equal(true);
-      expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
-      expect(vm.$el.querySelector('.el-input__inner').value).to.be.equal('');
-      done();
-    }, 100);
+    await waitImmediate();
+    expect(vm.$refs.select.visible).to.be.equal(true);
+    expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
+    expect(vm.value).to.be.equal('test');
   });
 
   describe('resetInputHeight', () => {
