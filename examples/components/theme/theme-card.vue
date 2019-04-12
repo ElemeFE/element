@@ -146,12 +146,19 @@
 <template>
   <section class="theme-card-item" :class="{'is-hidden': !config || !config.name}">
     <template v-if="type === 'upload'">
-      <div class="upload">
+      <div class="upload" @click="uploadClick">
         <div class="upload-action">
           <i class="el-icon-upload2"></i>
           <span>点击上传主题</span>
         </div>
       </div>
+      <input 
+        class="el-upload__input" 
+        type="file" 
+        ref="input"  
+        @change="uploadAction"
+        accept="application/json"
+      />
     </template>
     <template v-else>
       <div class="preview">
@@ -232,6 +239,29 @@ export default {
     };
   },
   methods: {
+    uploadClick() {
+      this.$refs.input.value = null;
+      this.$refs.input.click();
+    },
+    uploadAction(ev) {
+      const files = ev.target.files;
+      if (!files) return;
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const jsonString = e.target.result;
+          const jsonObject = JSON.parse(jsonString);
+          if (!jsonObject.global || !jsonObject.local) {
+            return this.$message.error('JSON format error');
+          }
+          this.$emit('action', 'upload', jsonString);
+        } catch (e) {
+          this.$message.error('Upload error');
+          console.error(e);
+        }
+      };
+      reader.readAsText(files[0]);
+    },
     actionClick(e) {
       this.$emit('action', e, this.config);
     },

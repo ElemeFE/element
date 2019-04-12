@@ -43,7 +43,11 @@
       <h2>我的主题 ({{userThemeCount}}/{{maxUserTheme}})</h2>
       <ul>
         <li class="theme-card" v-if="showUserUpload">
-          <theme-card type="upload" :config="{name: 'upload'}"></theme-card>
+          <theme-card 
+            type="upload" 
+            :config="{name: 'upload'}"
+            @action="onAction"
+          ></theme-card>
         </li>
         <li class="theme-card" v-for="item in displayUserTheme" :key="item.name">
           <theme-card 
@@ -54,7 +58,7 @@
         </li>
       </ul>
     </section>
-    <el-dialog title="复制成一个新主题" :visible.sync="copyDialogVisible">
+    <el-dialog :visible.sync="copyDialogVisible">
       <el-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
         <el-form-item label="主题名称" required prop="name">
           <el-input v-model="copyForm.name"></el-input>
@@ -129,6 +133,9 @@ export default {
       switch (name) {
         case 'copy':
           this.openCopyForm(item.theme);
+          break;
+        case 'upload':
+          this.openCopyForm(item);
           break;
         case 'delete':
           this.deleteUserThemeByName(item.name);
