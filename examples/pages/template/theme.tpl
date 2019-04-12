@@ -30,9 +30,10 @@
     <section class="theme-section">
       <h2>官方主题</h2>
       <ul>
-        <li class="theme-card" v-for="item in [1,2,3,4,5,6,7,8]" :key="item">
+        <li class="theme-card" v-for="item in officialTheme" :key="item.name">
           <theme-card
             type="official"
+            :config="item"
           ></theme-card>
         </li>
       </ul>
@@ -45,7 +46,7 @@
             type="upload"
           ></theme-card>
         </li>
-        <li class="theme-card" v-for="item in [1,2,3,4,5,6,7]" :key="item">
+        <li class="theme-card" v-for="item in []" :key="item">
           <theme-card
             type="user"
           ></theme-card>
@@ -55,15 +56,16 @@
   </div>
 </template>
 <script>
-  import ThemeCard from '../../components/theme-card.vue';
-
+  import ThemeCard from '../../components/theme/theme-card.vue';
+  import themeList from '../../components/theme/theme-list.js';
+  
   export default {
     components: {
       ThemeCard
     },
     data() {
       return {
-        count: 3
+        officialTheme: themeList
       };
     },
     mounted() {}

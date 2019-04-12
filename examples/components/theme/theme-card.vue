@@ -11,7 +11,7 @@
     <template v-else>
       <div class="preview">
         <div class="line">
-          <span class="line-2" style="background: #1989FA"></span>
+          <span class="line-2" :style="{background: mainColor}"></span>
           <span class="line-2" style="background: #303133"></span>
         </div>
         <div class="line">
@@ -39,8 +39,8 @@
       </div>
       <div class="info">
         <span class="title">
-          Napos
-          <span class="right" v-if="isOfficial">by Element</span>
+          {{config.name}}
+          <span class="right" v-if="isOfficial">by {{config.author}}</span>
           <span class="right more" v-else>
             <el-dropdown @command="actionClick">
               <i class="el-icon-more"></i>
@@ -64,7 +64,7 @@
             </el-dropdown>
           </span>
         </span>
-        <div class="description">为商户提供的设计方案</div>
+        <div class="description">{{config.description}}</div>
       </div>
     </template>
   </section>
@@ -116,8 +116,9 @@
       display: inline-block;
     }
     .action {
+      transition: all .3s;
       position: absolute;
-      display: none;
+      opacity: 0;
       top: 0;
       left: 0;
       right: 0;
@@ -205,7 +206,7 @@
   &:hover {
     box-shadow: 0 0 10px 0 #999;
     .action {
-      display: block;
+      opacity: 1;
     }
   }
 }
@@ -214,6 +215,7 @@
 <script>
 export default {
   props: {
+    config: Object,
     type: String,
     base: {
       type: String,
@@ -249,6 +251,16 @@ export default {
     }
   },
   computed: {
+    theme() {
+      if (this.config.theme) {
+        return JSON.parse(this.config.theme);
+      }
+      return {global: {}, local: {}};
+    },
+    mainColor() {
+
+      return this.theme.global['$--color-primary'] || '#1989FA';
+    },
     isOfficial() {
       return this.type === 'official';
     },
