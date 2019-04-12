@@ -1,5 +1,5 @@
 <template>
-  <div class="main-configurator">
+  <div class="main-configurator" ref='configurator'>
     <el-select v-model="selectedComponent">
       <el-option
         v-for="item in selectOptions"
@@ -39,7 +39,7 @@ import DocStyle from './docStyle';
 import Loading from './loading';
 import Shortcut from './shortcut';
 
-const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG';
+const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG1';
 
 const DEFAULT_USER_CONFIG = {
   global: {},

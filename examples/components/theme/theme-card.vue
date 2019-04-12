@@ -224,6 +224,8 @@
 </template>
 
 <script>
+import { DEFAULT_THEME_CONFIG } from './constant.js';
+
 export default {
   props: {
     config: Object,
@@ -289,7 +291,7 @@ export default {
       if (this.config.theme) {
         return JSON.parse(this.config.theme);
       }
-      return {global: {}, local: {}};
+      return DEFAULT_THEME_CONFIG;
     },
     mainColor() {
       return this.theme.global['$--color-primary'] || '#1989FA';
