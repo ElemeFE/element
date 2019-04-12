@@ -1,5 +1,13 @@
 <template>
   <div class="main-configurator">
+    <el-select v-model="selectedComponent">
+      <el-option
+        v-for="item in selectOptions"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
     <main-panel
       v-if="defaultConfig"
       :currentConfig="currentConfig"
@@ -55,7 +63,9 @@ export default {
       lastApply: 0,
       userConfigHistory: [],
       userConfigRedoHistory: [],
-      hasLocalConfig: false
+      hasLocalConfig: false,
+      selectedComponent: 'color',
+      selectOptions: []
     };
   },
   mixins: [DocStyle, Loading, Shortcut],
@@ -93,6 +103,7 @@ export default {
             setTimeout(() => {
               if (defaultConfig) {
                 this.defaultConfig = defaultConfig;
+                this.setSelectOption();
                 this.filterCurrentConfig();
                 this.init = true;
                 this.checkLocalThemeConfig();
@@ -101,6 +112,12 @@ export default {
             }, 300); // action after transition
           });
       });
+    },
+    setSelectOption() {
+      this.selectOptions = this.defaultConfig.map((config) => ({
+        label: config.name.charAt(0).toUpperCase() + config.name.slice(1),
+        value: config.name
+      }));
     },
     checkLocalThemeConfig() {
       try {
@@ -124,7 +141,7 @@ export default {
     filterCurrentConfig() {
       this.currentConfig = this.defaultConfig.find(config => {
         return (
-          config.name === 'button'
+          config.name === this.selectedComponent
         );
       });
     },
@@ -209,6 +226,13 @@ export default {
         this.userConfigHistory.push(JSON.stringify(this.userConfig));
         this.userConfig = JSON.parse(this.userConfigRedoHistory.shift());
         this.onAction();
+      }
+    }
+  },
+  watch: {
+    selectedComponent: {
+      handler() {
+        this.filterCurrentConfig();
       }
     }
   }
