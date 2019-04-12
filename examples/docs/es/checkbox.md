@@ -128,7 +128,7 @@ Las propiedades `min` y `max` pueden limitar la cantidad de elementos selecciona
 ```html
 <template>
   <el-checkbox-group 
-    v-model="checkedCities1"
+    v-model="checkedCities"
     :min="1"
     :max="2">
     <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
@@ -139,7 +139,7 @@ Las propiedades `min` y `max` pueden limitar la cantidad de elementos selecciona
   export default {
     data() {
       return {
-        checkedCities1: ['Shanghai', 'Beijing'],
+        checkedCities: ['Shanghai', 'Beijing'],
         cities: cityOptions
       };
     }
@@ -200,21 +200,21 @@ Checkbox con estilo tipo Botón.
 ```html
 <template>
   <div>
-    <el-checkbox v-model="checked3" label="Opción1" border></el-checkbox>
-    <el-checkbox v-model="checked4" label="Opción2" border></el-checkbox>
+    <el-checkbox v-model="checked1" label="Opción1" border></el-checkbox>
+    <el-checkbox v-model="checked2" label="Opción2" border></el-checkbox>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox v-model="checked5" label="Opción1" border size="medium"></el-checkbox>
-    <el-checkbox v-model="checked6" label="Opción2" border size="medium"></el-checkbox>
+    <el-checkbox v-model="checked3" label="Opción1" border size="medium"></el-checkbox>
+    <el-checkbox v-model="checked4" label="Opción2" border size="medium"></el-checkbox>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup5" size="small">
+    <el-checkbox-group v-model="checkboxGroup1" size="small">
       <el-checkbox label="Opción1" border></el-checkbox>
       <el-checkbox label="Opción2" border disabled></el-checkbox>
     </el-checkbox-group>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup6" size="mini" disabled>
+    <el-checkbox-group v-model="checkboxGroup2" size="mini" disabled>
       <el-checkbox label="Opción1" border></el-checkbox>
       <el-checkbox label="Opción2" border></el-checkbox>
     </el-checkbox-group>
@@ -225,12 +225,12 @@ Checkbox con estilo tipo Botón.
   export default {
     data () {
       return {
-        checked3: true,
-        checked4: false,
-        checked5: false,
-        checked6: true,
-        checkboxGroup5: [],
-        checkboxGroup6: []
+        checked1: true,
+        checked2: false,
+        checked3: false,
+        checked4: true,
+        checkboxGroup1: [],
+        checkboxGroup2: []
       };
     }
   }
