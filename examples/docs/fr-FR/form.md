@@ -382,7 +382,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 :::
 
 :::tip
-See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
 ### Ajouter ou supprimer des champs dynamiquement
