@@ -1,75 +1,3 @@
-<template>
-  <section class="theme-card-item">
-    <template v-if="type === 'upload'">
-      <div class="upload">
-        <div class="upload-action">
-          <i class="el-icon-upload2"></i>
-          <span>点击上传主题</span>
-        </div>
-      </div>
-    </template>
-    <template v-else>
-      <div class="preview">
-        <div class="line">
-          <span class="line-2" :style="{background: mainColor}"></span>
-          <span class="line-2" style="background: #303133"></span>
-        </div>
-        <div class="line">
-          <span class="line-4" style="background: #E6F1FC"></span>
-          <span class="line-4" style="background: #A2CFFC"></span>
-          <span class="line-4" style="background: #F0F2F5"></span>
-          <span class="line-4" style="background: #909399"></span>
-        </div>
-        <div class="action">
-          <div class="action-mask"></div>
-          <div class="action-block">
-            <div
-              class="action-item"
-              :class="index && 'action-item-right'"
-              v-for="(item, index) in actionArray"
-              :key="index"
-              @click="iconClick(item.action)"
-            >
-              <span class="circle"></span>
-              <i :class="item.icon"></i>
-              <span class="name">{{item.name}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="info">
-        <span class="title">
-          {{config.name}}
-          <span class="right" v-if="isOfficial">by {{config.author}}</span>
-          <span class="right more" v-else>
-            <el-dropdown @command="actionClick">
-              <i class="el-icon-more"></i>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="copy">复制主题</el-dropdown-item>
-                <el-popover placement="top" width="160" v-model="deleteVisible">
-                  <p>这是一段内容这是一段内容确定删除吗？</p>
-                  <div style="text-align: right; margin: 0">
-                    <el-button size="mini" type="text" @click="deleteVisible = false">取消</el-button>
-                    <el-button type="primary" size="mini" @click="deleteUserTheme">确定</el-button>
-                  </div>
-                  <el-dropdown-item 
-                    command="delete" 
-                    style="color: #F56C6C;"
-                    slot="reference"
-                  >
-                    删除主题
-                  </el-dropdown-item>
-                </el-popover>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </span>
-        </span>
-        <div class="description">{{config.description}}</div>
-      </div>
-    </template>
-  </section>
-</template>
-
 <style lang="scss">
 .theme-card-item {
   user-select: none;
@@ -79,6 +7,9 @@
   height: 90%;
   margin: 5% 0;
   box-shadow: 0 0 1px 0 #666;
+  &.is-hidden {
+    opacity: 0;
+  }
   .upload {
     cursor: pointer;
     background: #f5f7fa;
@@ -212,6 +143,79 @@
 }
 </style>
 
+<template>
+  <section class="theme-card-item" :class="{'is-hidden': !config || !config.name}">
+    <template v-if="type === 'upload'">
+      <div class="upload">
+        <div class="upload-action">
+          <i class="el-icon-upload2"></i>
+          <span>点击上传主题</span>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="preview">
+        <div class="line">
+          <span class="line-2" :style="{background: mainColor}"></span>
+          <span class="line-2" style="background: #303133"></span>
+        </div>
+        <div class="line">
+          <span class="line-4" style="background: #E6F1FC"></span>
+          <span class="line-4" style="background: #A2CFFC"></span>
+          <span class="line-4" style="background: #F0F2F5"></span>
+          <span class="line-4" style="background: #909399"></span>
+        </div>
+        <div class="action">
+          <div class="action-mask"></div>
+          <div class="action-block">
+            <div
+              class="action-item"
+              :class="index && 'action-item-right'"
+              v-for="(item, index) in actionArray"
+              :key="index"
+              @click="iconClick(item.action)"
+            >
+              <span class="circle"></span>
+              <i :class="item.icon"></i>
+              <span class="name">{{item.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <span class="title">
+          {{config.name}}
+          <span class="right" v-if="isOfficial">by {{config.author}}</span>
+          <span class="right more" v-else>
+            <el-dropdown @command="actionClick">
+              <i class="el-icon-more"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="copy">复制主题</el-dropdown-item>
+                <el-popover placement="top" width="160" v-model="deleteVisible">
+                  <p>这是一段内容这是一段内容确定删除吗？</p>
+                  <div style="text-align: right; margin: 0">
+                    <el-button size="mini" type="text" @click="deleteVisible = false">取消</el-button>
+                    <el-button type="primary" size="mini" @click="deleteUserTheme">确定</el-button>
+                  </div>
+                  <el-dropdown-item 
+                    command="delete" 
+                    style="color: #F56C6C;"
+                    slot="reference"
+                  >
+                    删除主题
+                  </el-dropdown-item>
+                </el-popover>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </span>
+        </span>
+        <div class="description" v-if="isOfficial">{{config.description}}</div>
+        <div class="description" v-else>最近修改 {{config.update}}</div>
+      </div>
+    </template>
+  </section>
+</template>
+
 <script>
 export default {
   props: {
@@ -229,10 +233,9 @@ export default {
   },
   methods: {
     actionClick(e) {
-      console.log('actionClick: ', e);
+      this.$emit('action', e, this.config);
     },
     iconClick(e) {
-      console.log('iconClick: ', e);
       switch (e) {
         case 'preview':
         case 'edit':
@@ -242,12 +245,13 @@ export default {
           });
           break;
         default:
+          this.$emit('action', e, this.config);
           return;
       }
     },
     deleteUserTheme() {
       this.deleteVisible = false;
-      console.log('deleteUserTheme');
+      this.$emit('action', 'delete', this.config);
     }
   },
   computed: {
@@ -258,7 +262,6 @@ export default {
       return {global: {}, local: {}};
     },
     mainColor() {
-
       return this.theme.global['$--color-primary'] || '#1989FA';
     },
     isOfficial() {

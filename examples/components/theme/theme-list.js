@@ -1,9 +1,15 @@
 const themeList = [
   {
+    name: 'Element',
+    description: '原版 需要 i18n',
+    author: 'Element',
+    theme: '{"global":{"$--color-primary":"#409EFF"},"local":{}}'
+  },
+  {
     name: 'Napos',
     description: '为商户 需要 i18n',
     author: 'Element',
-    theme: '{"global":{"$--color-primary":"#F0F0F0"},"local":{}}'
+    theme: '{"global":{"$--color-primary":"#1989FA"},"local":{}}'
   },
   {
     name: 'Shrine',
