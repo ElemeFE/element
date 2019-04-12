@@ -677,7 +677,7 @@ Le champ peut n'afficher que le dernier niveau au lieu de tous.
 ```html
 <el-cascader
   :options="options"
-  v-model="selectedOptions3"
+  v-model="selectedOptions"
 ></el-cascader>
 <script>
   export default {
@@ -878,7 +878,7 @@ Le champ peut n'afficher que le dernier niveau au lieu de tous.
             label: 'Design Documentation'
           }]
         }],
-        selectedOptions3: ['component', 'data', 'tag']
+        selectedOptions: ['component', 'data', 'tag']
       };
     }
   };
@@ -1109,7 +1109,7 @@ Il est possible de charger dynamiquement les options quand on clique ou passe la
 :::demo Dans cet exemple, les optionsn'ont pas de données de villes au moment de l'initialisation. Grâce à l'évènement `active-item-change` vous pouvez charger les villes de manière dynamique. De plus, cet exemple montre comment `props` peut être utilisé.
 ```html
 <el-cascader
-  :options="options2"
+  :options="options"
   @active-item-change="handleItemChange"
   :props="props"
 ></el-cascader>
@@ -1118,7 +1118,7 @@ Il est possible de charger dynamiquement les options quand on clique ou passe la
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           label: 'California',
           cities: []
         }, {
