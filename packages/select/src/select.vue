@@ -502,6 +502,7 @@
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
         const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
+        const isUndefined = Object.prototype.toString.call(value).toLowerCase() === '[object undefined]';
 
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
@@ -514,7 +515,7 @@
           }
         }
         if (option) return option;
-        const label = (!isObject && !isNull)
+        const label = (!isObject && !isNull && !isUndefined)
           ? value : '';
         let newOption = {
           value: value,
