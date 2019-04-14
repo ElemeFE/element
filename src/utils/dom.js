@@ -172,3 +172,33 @@ export function setStyle(element, styleName, value) {
     }
   }
 };
+
+export const isScroll = (el, vertical) => {
+  if (isServer) return;
+
+  const determinedDirection = vertical !== null || vertical !== undefined;
+  const overflow = determinedDirection
+    ? vertical
+      ? getStyle(el, 'overflow-y')
+      : getStyle(el, 'overflow-x')
+    : getStyle(el, 'overflow');
+
+  return overflow.match(/(scroll|auto)/);
+};
+
+export const getScrollContainer = (el, vertical) => {
+  if (isServer) return;
+
+  let parent = el;
+  while (parent) {
+    if ([window, document, document.documentElement].includes(parent)) {
+      return window;
+    }
+    if (isScroll(parent, vertical)) {
+      return parent;
+    }
+    parent = parent.parentNode;
+  }
+
+  return parent;
+};

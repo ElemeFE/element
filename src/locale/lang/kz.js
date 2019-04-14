@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Кілт сөзді енгізіңіз',
       noCheckedFormat: '{total} элэмэнт',
       hasCheckedFormat: '{checked}/{total} құсбелгісі қойылды'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

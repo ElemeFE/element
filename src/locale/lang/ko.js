@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: ' 입력하세요',
       noCheckedFormat: '{total} 항목',
       hasCheckedFormat: '{checked}/{total} 선택됨'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

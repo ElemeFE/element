@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Введите ключевое слово',
       noCheckedFormat: '{total} пунктов',
       hasCheckedFormat: '{checked}/{total} выбрано'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };
