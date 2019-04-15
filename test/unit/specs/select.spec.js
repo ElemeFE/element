@@ -357,6 +357,49 @@ describe('Select', () => {
     expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
   });
 
+  it('prefixed selected tags', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" multiple filterable :collapse-tags="false">
+            <template v-slot:multiprefix="selected"><div class="a-multiprefix">{{ selected.item.value }}</div></template>
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '1',
+            label: 'label1'
+          }, {
+            value: '2',
+            label: 'label2'
+          }, {
+            value: '3',
+            label: 'label3'
+          }],
+          value: [ '1', '2' ]
+        };
+      }
+    }, true);
+    expect(vm.value.length).to.equal(2);
+    setTimeout(() => {
+      const qsResult = vm.$el.querySelectorAll('.a-multiprefix');
+      expect(qsResult.length).to.equal(2);
+      const tags = Object.values(qsResult);
+      expect(tags.some(tag => tag.innerText === '1'));
+      expect(tags.some(tag => tag.innerText === '2'));
+      done();
+    }, 50);
+  });
+
   it('custom el-option template', () => {
     vm = createVue({
       template: `

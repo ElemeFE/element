@@ -242,7 +242,61 @@ Multiple select uses tags to display selected options.
 ```
 :::
 
-### Custom template
+### Custom template for multiple tags prefix
+
+You can customize the HTML template for selected values tag prefixes.
+
+The `item` property of the slot data scope holds data regarding the selected item.
+
+:::demo Insert customized HTML template into the `multiprefix` slot of `el-select`.
+
+```html
+<template>
+  <el-select v-model="value" placeholder="Select">
+    <template v-slot:multiprefix="selected">
+      {{ selected.item.label.substring(0, 1) }}
+    </template>
+    <el-option
+      v-for="item in cities"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        cities: [{
+          value: 'Beijing',
+          label: 'Beijing'
+        }, {
+          value: 'Shanghai',
+          label: 'Shanghai'
+        }, {
+          value: 'Nanjing',
+          label: 'Nanjing'
+        }, {
+          value: 'Chengdu',
+          label: 'Chengdu'
+        }, {
+          value: 'Shenzhen',
+          label: 'Shenzhen'
+        }, {
+          value: 'Guangzhou',
+          label: 'Guangzhou'
+        }],
+        value: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Custom template for options
 
 You can customize HTML templates for options.
 
@@ -569,6 +623,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 |---------|-------------|
 |    —    | Option component list |
 | prefix  | content as Select prefix |
+| multiprefix | in multiple mode, with no collapse, content that will be prefixed to each tag for selected values |
 | empty  | content when there is no options |
 
 ### Option Group Attributes
