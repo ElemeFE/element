@@ -489,6 +489,14 @@ export default {
       }
     }
 
+    if (this.$scopedSlots.footer) {
+      if (this.type === 'selection') {
+        console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set scoped-slot footer.');
+      } else {
+        this.columnConfig.renderFooter = (h, scope) => this.$scopedSlots.footer(scope);
+      }
+    }
+
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
   }
 };

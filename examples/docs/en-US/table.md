@@ -1913,3 +1913,4 @@ You can customize row index in `type=index` columns.
 |------|--------|
 | — | Custom content for table columns. The scope parameter is { row, column, $index } |
 | header | Custom content for table header. The scope parameter is { column, $index } |
+| footer | Custom content for table footer. The scope parameter is { column, $index, value } |
