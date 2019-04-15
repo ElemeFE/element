@@ -19,7 +19,7 @@
   <div class="component-preview">
     <h4>Color</h4>
     <el-row :gutter="12">
-      <el-col :span="4" v-for="(color, key) in colorLine1" :key="key">
+      <el-col :span="4" v-for="(color, key) in colorLine" :key="key">
         <div class="demo-color-box" :style="{ background: dataProxy(color) }">
           {{color}}
           <div class="value">{{dataProxy(color)}}</div>
@@ -36,27 +36,27 @@
     </el-row>
     <el-row :gutter="12">
       <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: textPrimary }">
+        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_primary }">
           Primary Text
-          <div class="value">{{textPrimary}}</div>
+          <div class="value">{{color_text_primary}}</div>
         </div>
       </el-col>
       <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: textRegular }">
+        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_regular }">
           Regular Text
-          <div class="value">{{textRegular}}</div>
+          <div class="value">{{color_text_regular}}</div>
         </div>
       </el-col>
       <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: textSecondary }">
+        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_secondary }">
           Secondary Text
-          <div class="value">{{textSecondary}}</div>
+          <div class="value">{{color_text_secondary}}</div>
         </div>
       </el-col>
       <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: textPlaceholder }">
+        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_placeholder }">
           Placeholder
-          <div class="value">{{textPlaceholder}}</div>
+          <div class="value">{{color_text_placeholder}}</div>
         </div>
       </el-col>
     </el-row>
@@ -65,55 +65,55 @@
       <el-col :span="4">
         <div
           class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: borderBase }"
+          :style="{ background: border_color_base }"
         >
           Border Base
-          <div class="value">{{borderBase}}</div>
+          <div class="value">{{border_color_base}}</div>
         </div>
       </el-col>
       <el-col :span="4">
         <div
           class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: borderLight }"
+          :style="{ background: border_color_light }"
         >
           Border Light
-          <div class="value">{{borderLight}}</div>
+          <div class="value">{{border_color_light}}</div>
         </div>
       </el-col>
       <el-col :span="4">
         <div
           class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: borderLighter }"
+          :style="{ background: border_color_lighter }"
         >
           Border Lighter
-          <div class="value">{{borderLighter}}</div>
+          <div class="value">{{border_color_lighter}}</div>
         </div>
       </el-col>
       <el-col :span="4">
         <div
           class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: borderExtraLight }"
+          :style="{ background: border_color_extra_light }"
         >
           Border Extralight
-          <div class="value">{{borderExtraLight}}</div>
+          <div class="value">{{border_color_extra_light}}</div>
         </div>
       </el-col>
     </el-row>
 
     <el-row :gutter="12">
       <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: black }">
+        <div class="demo-color-box demo-color-box-other" :style="{ background: color_black }">
           Background B
-          <div class="value">{{black}}</div>
+          <div class="value">{{color_black}}</div>
         </div>
       </el-col>
       <el-col :span="4">
         <div
           class="demo-color-box demo-color-box-other"
-          :style="{ background: white, color: '#303133', border: '1px solid #eee' }"
+          :style="{ background: color_white, color: '#303133', border: '1px solid #eee' }"
         >
           Background W
-          <div class="value">{{white}}</div>
+          <div class="value">{{color_white}}</div>
         </div>
       </el-col>
       <el-col :span="4">
@@ -149,46 +149,22 @@
 import bus from '../../bus';
 import { tintColor } from '../../color.js';
 
-const varMap = {
-  'primary': '$--color-primary',
-  'success': '$--color-success',
-  'warning': '$--color-warning',
-  'danger': '$--color-danger',
-  'info': '$--color-info',
-  'white': '$--color-white',
-  'black': '$--color-black',
-  'textPrimary': '$--color-text-primary',
-  'textRegular': '$--color-text-regular',
-  'textSecondary': '$--color-text-secondary',
-  'textPlaceholder': '$--color-text-placeholder',
-  'borderBase': '$--border-color-base',
-  'borderLight': '$--border-color-light',
-  'borderLighter': '$--border-color-lighter',
-  'borderExtraLight': '$--border-color-extra-light',
-  'font_size_extra_large': '$--font-size-extra-large',
-  'font_size_large': '$--font-size-large',
-  'font_size_medium': '$--font-size-medium',
-  'font_size_base': '$--font-size-base',
-  'font_size_small': '$--font-size-small',
-  'font_size_extra_small': '$--font-size-extra-small'
-};
-
 const original = {
-  primary: '#409EFF',
-  success: '#67C23A',
-  warning: '#E6A23C',
-  danger: '#F56C6C',
-  info: '#909399',
-  white: '#FFFFFF',
-  black: '#000000',
-  textPrimary: '#303133',
-  textRegular: '#606266',
-  textSecondary: '#909399',
-  textPlaceholder: '#C0C4CC',
-  borderBase: '#DCDFE6',
-  borderLight: '#E4E7ED',
-  borderLighter: '#EBEEF5',
-  borderExtraLight: '#F2F6FC',
+  'color_primary': '#409EFF',
+  'color_success': '#67C23A',
+  'color_warning': '#E6A23C',
+  'color_danger': '#F56C6C',
+  'color_info': '#909399',
+  'color_white': '#FFFFFF',
+  'color_black': '#000000',
+  'color_text_primary': '#303133',
+  'color_text_regular': '#606266',
+  'color_text_secondary': '#909399',
+  'color_text_placeholder': '#C0C4CC',
+  'border_color_base': '#DCDFE6',
+  'border_color_light': '#E4E7ED',
+  'border_color_lighter': '#EBEEF5',
+  'border_color_extra_light': '#F2F6FC',
   'font_size_extra_large': '20px',
   'font_size_large': '18px',
   'font_size_medium': '16px',
@@ -209,7 +185,7 @@ export default {
       return tintColor(a, b);
     },
     dataProxy(value) {
-      return this[value.toLowerCase()];
+      return this[`color_${value.toLowerCase()}`];
     },
     setGlobal() {
       if (window.userThemeConfig) {
@@ -221,11 +197,12 @@ export default {
     global: {
       immediate: true,
       handler(value) {
-        Object.keys(original).forEach((o) => {
-          if (value[varMap[o]]) {
-            this[o] = value[varMap[o]];
+        Object.keys(original).forEach((v) => {
+          const key = `$--${v.replace(/_/g, '-')}`;
+          if (value[key]) {
+            this[v] = value[key];
           } else {
-            this[o] = original[o];
+            this[v] = original[v];
           }
         });
       }
@@ -234,28 +211,28 @@ export default {
   data() {
     return {
       global: {},
-      colorLine1: ['Primary', 'Success', 'Warning', 'Danger', 'Info'],
-      primary: '#409EFF',
-      success: '#67C23A',
-      warning: '#E6A23C',
-      danger: '#F56C6C',
-      info: '#909399',
-      textPrimary: '#303133',
-      textRegular: '#606266',
-      textSecondary: '#909399',
-      textPlaceholder: '#C0C4CC',
-      borderBase: '#DCDFE6',
-      borderLight: '#E4E7ED',
-      borderLighter: '#EBEEF5',
-      borderExtraLight: '#F2F6FC',
-      white: '#FFFFFF',
-      black: '#000000',
-      'font_size_extra_large': '20px',
-      'font_size_large': '18px',
-      'font_size_medium': '16px',
-      'font_size_base': '14px',
-      'font_size_small': '13px',
-      'font_size_extra_small': '12px'
+      colorLine: ['Primary', 'Success', 'Warning', 'Danger', 'Info'],
+      'color_primary': '',
+      'color_success': '',
+      'color_warning': '',
+      'color_danger': '',
+      'color_info': '',
+      'color_white': '',
+      'color_black': '',
+      'color_text_primary': '',
+      'color_text_regular': '',
+      'color_text_secondary': '',
+      'color_text_placeholder': '',
+      'border_color_base': '',
+      'border_color_light': '',
+      'border_color_lighter': '',
+      'border_color_extra_light': '',
+      'font_size_extra_large': '',
+      'font_size_large': '',
+      'font_size_medium': '',
+      'font_size_base': '',
+      'font_size_small': '',
+      'font_size_extra_small': ''
     };
   }
 };
