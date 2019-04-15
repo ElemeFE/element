@@ -6,6 +6,13 @@
     font-size: 18px;
     margin: 25px 0;
   }
+  .heading>div{
+    margin-bottom: 15px;
+  }
+  .title {
+    font-size: 18px;
+    font-weight:400;
+  }
 }
 </style>
 <template>
@@ -57,69 +64,83 @@
     <el-row :gutter="12">
       <el-col :span="4">
         <div
-            class="demo-color-box demo-color-box-other demo-color-box-lite"
-            :style="{ background: borderBase }"
-          >
-            Border Base
-            <div class="value">{{borderBase}}</div>
-          </div>
+          class="demo-color-box demo-color-box-other demo-color-box-lite"
+          :style="{ background: borderBase }"
+        >
+          Border Base
+          <div class="value">{{borderBase}}</div>
+        </div>
       </el-col>
       <el-col :span="4">
         <div
-            class="demo-color-box demo-color-box-other demo-color-box-lite"
-            :style="{ background: borderLight }"
-          >
-            Border Light
-            <div class="value">{{borderLight}}</div>
-          </div>
+          class="demo-color-box demo-color-box-other demo-color-box-lite"
+          :style="{ background: borderLight }"
+        >
+          Border Light
+          <div class="value">{{borderLight}}</div>
+        </div>
       </el-col>
       <el-col :span="4">
         <div
-            class="demo-color-box demo-color-box-other demo-color-box-lite"
-            :style="{ background: borderLighter }"
-          >
-            Border Lighter
-            <div class="value">{{borderLighter}}</div>
-          </div>
+          class="demo-color-box demo-color-box-other demo-color-box-lite"
+          :style="{ background: borderLighter }"
+        >
+          Border Lighter
+          <div class="value">{{borderLighter}}</div>
+        </div>
       </el-col>
       <el-col :span="4">
         <div
-            class="demo-color-box demo-color-box-other demo-color-box-lite"
-            :style="{ background: borderExtraLight }"
-          >
-            Border Extralight
-            <div class="value">{{borderExtraLight}}</div>
-          </div>
+          class="demo-color-box demo-color-box-other demo-color-box-lite"
+          :style="{ background: borderExtraLight }"
+        >
+          Border Extralight
+          <div class="value">{{borderExtraLight}}</div>
+        </div>
       </el-col>
     </el-row>
 
     <el-row :gutter="12">
       <el-col :span="4">
         <div class="demo-color-box demo-color-box-other" :style="{ background: black }">
-            Background B
-            <div class="value">{{black}}</div>
-          </div>
+          Background B
+          <div class="value">{{black}}</div>
+        </div>
       </el-col>
       <el-col :span="4">
         <div
-            class="demo-color-box demo-color-box-other"
-            :style="{ background: white, color: '#303133', border: '1px solid #eee' }"
-          >
-            Background W
-            <div class="value">{{white}}</div>
-          </div>
+          class="demo-color-box demo-color-box-other"
+          :style="{ background: white, color: '#303133', border: '1px solid #eee' }"
+        >
+          Background W
+          <div class="value">{{white}}</div>
+        </div>
       </el-col>
       <el-col :span="4">
         <div class="demo-color-box demo-color-box-other bg-transparent">
-            Background
-            <div class="value">Transparent</div>
-          </div>
+          Background
+          <div class="value">Transparent</div>
+        </div>
       </el-col>
     </el-row>
     <h4>Text</h4>
-    <el-row>
-      <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
+    <el-row :gutter="12">
+      <el-col :span="6" class="heading">
+        <div :style="{ fontSize: font_size_extra_large }">Heading1</div>
+        <div :style="{ fontSize: font_size_large }">Heading2</div>
+        <div :style="{ fontSize: font_size_medium }">Heading3</div>
+        <div :style="{ fontSize: font_size_base }">Heading4</div>
+        <div :style="{ fontSize: font_size_small }">Heading5</div>
+        <div :style="{ fontSize: font_size_extra_small }">Heading6</div>
+      </el-col>
+      <el-col :span="8">
+        <div class="title">Example body text</div>
+        <p :style="{ fontSize: font_size_base }">With MySpace becoming more popular every day, there is the constant need to be different. There are millions of users, and there will be many who might even use the same layouts. If MySpace layouts are chosen well, then you can enhance your profile a great deal. This will help you get more contacts as well. But because of the demand, there will be the need to find unique layouts.</p>
+      </el-col>
+      <el-col :span="8">
+        <div class="title">Example small text</div>
+        <p :style="{ fontSize: font_size_small }" >Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch with the central office via their notebooks. At home, we rely on our desktops and notebooks to do our shopping, to entertain us, and to keep us abreast of world events. We may not see our email servers, but we count on them to deliver our email whenever and wherever we want it. Computer hardware weaves itself through the fabric of our lives.</p>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -153,7 +174,13 @@ export default {
       borderLighter: '#EBEEF5',
       borderExtraLight: '#F2F6FC',
       white: '#FFFFFF',
-      black: '#000000'
+      black: '#000000',
+      'font_size_extra_large': '20px',
+      'font_size_large': '18px',
+      'font_size_medium': '16px',
+      'font_size_base': '14px',
+      'font_size_small': '13px',
+      'font_size_extra_small': '12px'
     };
   }
 };
