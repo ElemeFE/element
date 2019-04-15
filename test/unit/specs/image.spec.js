@@ -26,14 +26,14 @@ describe('Image', () => {
     expect(error).to.be.null;
     expect(img).to.be.null;
 
-    await wait();
+    await wait(500);
     img = vm.$el.querySelector('.el-image__inner');
     expect(img.style.objectFit).to.equal('fill');
   });
 
   it('load failed', async() => {
     vm = createTest(Image, true);
-    await wait();
+    await wait(500);
     const error = vm.$el.querySelector('.el-image__error');
     expect(error).to.be.exist;
   });
@@ -60,12 +60,12 @@ describe('Image', () => {
     const { image, wrapper } = vm.$refs;
     const [image1, image2] = image;
 
-    await wait();
+    await wait(500);
     expect(image1.loading).to.be.false;
     expect(image2.loading).to.be.true;
     wrapper.scrollTop = 10;
 
-    await wait();
+    await wait(500);
     expect(image2.loading).to.be.false;
   });
 });
