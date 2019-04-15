@@ -24,6 +24,10 @@ export const loadPreviewToLocal = () => {
   return loadFromLocal(ELEMENT_THEME_PREVIEW_CONFIG);
 };
 
+export const removePreviewToLocal = () => {
+  return localStorage.removeItem(ELEMENT_THEME_PREVIEW_CONFIG);
+};
+
 export const saveUserThemeToLocal = (value) => {
   saveToLocal(ELEMENT_THEME_USER_CONFIG, value);
 };

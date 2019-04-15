@@ -26,9 +26,9 @@
   <div class="page-container page-theme-preview">
     <section class="display">
       <el-button type="text" icon="el-icon-back" @click="navBack">返回</el-button>
-      <h3>饿了么商户系统</h3>
-      <h4>颜色</h4>
-      <h4>文字</h4>
+      <h3>{{previewConfig.name}}</h3>
+      <basic-tokens-preview>
+      </basic-tokens-preview>
       <components-preview>
       </components-preview>
     </section>
@@ -42,15 +42,21 @@
 <script>
 import ThemeConfigurator from '../../components/theme-configurator';
 import ComponentsPreview from '../../components/theme/components-preview';
+import BasicTokensPreview from '../../components/theme/basic-tokens-preview';
+import {
+  loadPreviewToLocal,
+  removePreviewToLocal
+} from '../../components/theme/localstorage';
 
 export default {
   components: {
     ThemeConfigurator,
+    BasicTokensPreview,
     ComponentsPreview
   },
   data() {
     return {
-      count: 3
+      previewConfig: {}
     };
   },
   methods: {
@@ -61,6 +67,20 @@ export default {
       });
     }
   },
-  mounted() {}
+  mounted() {
+    const previewConfig = loadPreviewToLocal();
+    if (!previewConfig) {
+      this.$alert('No preview config', 'No preview config', {
+        confirmButtonText: 'OK',
+        callback: action => {
+          const newPath = this.$route.path.replace('/preview', '');
+          this.$router.replace(newPath);
+        }
+      });
+      return;
+    }
+    this.previewConfig = previewConfig;
+    removePreviewToLocal();
+  }
 };
 </script>
