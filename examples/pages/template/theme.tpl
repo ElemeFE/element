@@ -83,7 +83,10 @@ export default {
     ThemeCard
   },
   mounted() {
-    this.userTheme = loadUserThemeToLocal() || [];
+    this.userTheme = loadUserThemeToLocal();
+    if (!Array.isArray(this.userTheme)) {
+      this.userTheme = [];
+    }
   },
   data() {
     return {
