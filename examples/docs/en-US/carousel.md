@@ -11,7 +11,7 @@ Loop a series of images or texts in a limited space
     <span class="demonstration">Switch when indicator is hovered (default)</span>
     <el-carousel height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+        <h3 class="small">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -19,7 +19,7 @@ Loop a series of images or texts in a limited space
     <span class="demonstration">Switch when indicator is clicked</span>
     <el-carousel trigger="click" height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+        <h3 class="small">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -122,7 +122,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6" :key="item">
-      <h3>{{ item }}</h3>
+      <h3 class="medium">{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -147,6 +147,38 @@ When a page is wide enough but has limited height, you can activate card mode fo
 ```
 :::
 
+By default, `direction` is `horizontal`. Let carousel be displayed in the vertical direction by setting `direction` to `vertical`.
+
+:::demo
+```html
+<template>
+  <el-carousel height="200px" direction="vertical" :autoplay="false">
+    <el-carousel-item v-for="item in 4" :key="item">
+      <h3 class="medium">{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+</template>
+
+<style>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+</style>
+```
+:::
+
 ### Carousel Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -159,6 +191,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | arrow | when arrows are shown | string | always/hover/never | hover |
 | type | type of the Carousel | string | card | — |
 | loop | display the items in loop | boolean | - | true |
+| direction | display direction | string | horizontal/vertical | horizontal |
 
 ### Carousel Events
 | Event Name | Description | Parameters |
