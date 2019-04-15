@@ -362,7 +362,9 @@ describe('Select', () => {
       template: `
         <div>
           <el-select v-model="value" multiple filterable :collapse-tags="false">
-            <template v-slot:multiprefix="selected"><div class="a-multiprefix">{{ selected.item.value }}</div></template>
+            <template v-slot:multiprefix="selected">
+              <div class="a-multiprefix">{{ selected.item.value }}</div>
+            </template>
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -390,14 +392,14 @@ describe('Select', () => {
       }
     }, true);
     expect(vm.value.length).to.equal(2);
-    setTimeout(() => {
+    vm.$nextTick(() => {
       const qsResult = vm.$el.querySelectorAll('.a-multiprefix');
       expect(qsResult.length).to.equal(2);
       const tags = Object.values(qsResult);
       expect(tags.some(tag => tag.innerText === '1'));
       expect(tags.some(tag => tag.innerText === '2'));
       done();
-    }, 50);
+    });
   });
 
   it('custom el-option template', () => {
