@@ -123,7 +123,7 @@
         </div>
       </el-col>
     </el-row>
-    <h4>Text</h4>
+    <h4>Typography</h4>
     <el-row :gutter="12">
       <el-col :span="6" class="heading">
         <div :style="{ fontSize: font_size_extra_large }">Heading1</div>
@@ -146,19 +146,94 @@
 </template>
 
 <script>
+import bus from '../../bus';
 import { tintColor } from '../../color.js';
 
+const varMap = {
+  'primary': '$--color-primary',
+  'success': '$--color-success',
+  'warning': '$--color-warning',
+  'danger': '$--color-danger',
+  'info': '$--color-info',
+  'white': '$--color-white',
+  'black': '$--color-black',
+  'textPrimary': '$--color-text-primary',
+  'textRegular': '$--color-text-regular',
+  'textSecondary': '$--color-text-secondary',
+  'textPlaceholder': '$--color-text-placeholder',
+  'borderBase': '$--border-color-base',
+  'borderLight': '$--border-color-light',
+  'borderLighter': '$--border-color-lighter',
+  'borderExtraLight': '$--border-color-extra-light',
+  'font_size_extra_large': '$--font-size-extra-large',
+  'font_size_large': '$--font-size-large',
+  'font_size_medium': '$--font-size-medium',
+  'font_size_base': '$--font-size-base',
+  'font_size_small': '$--font-size-small',
+  'font_size_extra_small': '$--font-size-extra-small'
+};
+
+const original = {
+  primary: '#409EFF',
+  success: '#67C23A',
+  warning: '#E6A23C',
+  danger: '#F56C6C',
+  info: '#909399',
+  white: '#FFFFFF',
+  black: '#000000',
+  textPrimary: '#303133',
+  textRegular: '#606266',
+  textSecondary: '#909399',
+  textPlaceholder: '#C0C4CC',
+  borderBase: '#DCDFE6',
+  borderLight: '#E4E7ED',
+  borderLighter: '#EBEEF5',
+  borderExtraLight: '#F2F6FC',
+  'font_size_extra_large': '20px',
+  'font_size_large': '18px',
+  'font_size_medium': '16px',
+  'font_size_base': '14px',
+  'font_size_small': '13px',
+  'font_size_extra_small': '12px'
+};
+
 export default {
+  created() {
+    bus.$on('user-theme-config-update', this.setGlobal);
+  },
+  mounted() {
+    this.setGlobal();
+  },
   methods: {
     tintColor(a, b) {
       return tintColor(a, b);
     },
     dataProxy(value) {
       return this[value.toLowerCase()];
+    },
+    setGlobal() {
+      if (window.userThemeConfig) {
+        this.global = window.userThemeConfig.global;
+      }
+    }
+  },
+  watch: {
+    global: {
+      immediate: true,
+      handler(value) {
+        Object.keys(original).forEach((o) => {
+          if (value[varMap[o]]) {
+            this[o] = value[varMap[o]];
+          } else {
+            this[o] = original[o];
+          }
+        });
+      }
     }
   },
   data() {
     return {
+      global: {},
       colorLine1: ['Primary', 'Success', 'Warning', 'Danger', 'Info'],
       primary: '#409EFF',
       success: '#67C23A',
