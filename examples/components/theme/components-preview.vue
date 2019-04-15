@@ -22,7 +22,7 @@
 </style>
 <template>
   <div class="component-preview">
-    <h4>按钮</h4>
+    <h4>Button</h4>
     <el-row>
       <el-button>Default</el-button>
       <el-button type="primary">Primary</el-button>
@@ -31,7 +31,7 @@
       <el-button type="warning">Warning</el-button>
       <el-button type="danger">Danger</el-button>
     </el-row>
-    <h4>单选框</h4>
+    <h4>Radio</h4>
     <el-row>
       <el-radio v-model="radio" label="1">Option A</el-radio>
       <el-radio v-model="radio" label="2">Option B</el-radio>
@@ -125,7 +125,7 @@
       </el-badge>
     </el-row>
     <h4>Alert</h4>
-    <el-row>
+    <el-row style="width: 380px;">
       <el-alert class="demo-item" title="success alert" type="success"></el-alert>
       <el-alert class="demo-item" title="info alert" type="info"></el-alert>
       <el-alert class="demo-item" title="warning alert" type="warning"></el-alert>
@@ -153,7 +153,7 @@
     </el-row>
     <h4>Notification</h4>
     <el-row>
-      <div role="alert" class="el-notification right" style="position: relative"><!----><div class="el-notification__group"><h2 class="el-notification__title">Notification</h2><div class="el-notification__content"><p>This is a message </p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div>
+      <div role="alert" class="el-notification right" style="position: relative; left: 0;"><!----><div class="el-notification__group"><h2 class="el-notification__title">Notification</h2><div class="el-notification__content"><p>This is a message </p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div>
     </el-row>
     <h4>Menu</h4>
     <el-row>
@@ -230,11 +230,6 @@
 </template>
 <script>
 export default {
-  methods: {
-    handleChange(value) {
-      console.log(value);
-    }
-  },
   data() {
     return {
       radio: '1',

@@ -164,13 +164,13 @@
       <div class="preview">
         <div class="line">
           <span class="line-2" :style="{background: mainColor}"></span>
-          <span class="line-2" style="background: #303133"></span>
+          <span class="line-2" :style="{background: textPrimaryColor}"></span>
         </div>
         <div class="line">
-          <span class="line-4" style="background: #E6F1FC"></span>
-          <span class="line-4" style="background: #A2CFFC"></span>
-          <span class="line-4" style="background: #F0F2F5"></span>
-          <span class="line-4" style="background: #909399"></span>
+          <span class="line-4" :style="{background: mainColor50}"></span>
+          <span class="line-4" :style="{background: mainColor80}"></span>
+          <span class="line-4" :style="{background: borderBaseColor}"></span>
+          <span class="line-4" :style="{background: textSecondaryColor}"></span>
         </div>
         <div class="action">
           <div class="action-mask"></div>
@@ -226,6 +226,7 @@
 <script>
 import { DEFAULT_THEME_CONFIG } from './constant.js';
 import { savePreviewToLocal } from './localstorage';
+import { tintColor } from '../../color.js';
 
 export default {
   props: {
@@ -302,6 +303,21 @@ export default {
     },
     mainColor() {
       return this.theme.global['$--color-primary'] || '#1989FA';
+    },
+    mainColor50() {
+      return tintColor(this.mainColor, 0.5);
+    },
+    mainColor80() {
+      return tintColor(this.mainColor, 0.8);
+    },
+    textPrimaryColor() {
+      return this.theme.global['$--color-text-primary'] || '#303133';
+    },
+    borderBaseColor() {
+      return this.theme.global['$--border-color-base'] || '#DCDFE6';
+    },
+    textSecondaryColor() {
+      return this.theme.global['$--color-text-secondary'] || '#909399';
     },
     isOfficial() {
       return this.type === 'official';
