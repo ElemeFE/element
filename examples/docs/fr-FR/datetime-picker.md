@@ -26,7 +26,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
       v-model="value2"
       type="datetime"
       placeholder="Selectionnez date et horaire"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
   <div class="block">
@@ -44,7 +44,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   export default {
     data() {
       return {
-        pickerOptions1: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -85,7 +85,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   <div class="block">
     <span class="demonstration">Défaut</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value1"
       type="datetimerange"
       range-separator="à"
       start-placeholder="Date de début"
@@ -95,9 +95,9 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   <div class="block">
     <span class="demonstration">Avec raccourcis</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value2"
       type="datetimerange"
-      :picker-options="pickerOptions2"
+      :picker-options="pickerOptions"
       range-separator="à"
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
@@ -110,7 +110,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   export default {
     data() {
       return {
-        pickerOptions2: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Last week',
             onClick(picker) {
@@ -137,8 +137,8 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
             }
           }]
         },
-        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value5: ''
+        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value2: ''
       };
     }
   };
@@ -154,7 +154,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   <div class="block">
     <span class="demonstration">Heure de la date de début 12:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value1"
       type="datetimerange"
       start-placeholder="Date de début"
       end-placeholder="Date de fin"
@@ -164,7 +164,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   <div class="block">
     <span class="demonstration">Heure de la date de début 12:00:00, heure de la date de fin 08:00:00</span>
     <el-date-picker
-      v-model="value7"
+      v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="Date de début"
@@ -178,8 +178,8 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
   export default {
     data() {
       return {
-        value6: '',
-        value7: ''
+        value1: '',
+        value2: ''
       };
     }
   };

@@ -680,7 +680,7 @@ Puede mostrar sólo el último nivel en lugar de todos los niveles.
 ```html
 <el-cascader
   :options="options"
-  v-model="selectedOptions3"
+  v-model="selectedOptions"
 ></el-cascader>
 <script>
   export default {
@@ -881,7 +881,7 @@ Puede mostrar sólo el último nivel en lugar de todos los niveles.
             label: 'Design Documentation'
           }]
         }],
-        selectedOptions3: ['component', 'data', 'tag']
+        selectedOptions: ['component', 'data', 'tag']
       };
     }
   };
@@ -1114,7 +1114,7 @@ Se puede hacer una carga dinamica de elementos hijos cuando se hace clic en el e
 
 ```html
 <el-cascader
-  :options="options2"
+  :options="options"
   @active-item-change="handleItemChange"
   :props="props"
 ></el-cascader>
@@ -1123,7 +1123,7 @@ Se puede hacer una carga dinamica de elementos hijos cuando se hace clic en el e
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           label: 'California',
           cities: []
         }, {
