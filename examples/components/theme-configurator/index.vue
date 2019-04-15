@@ -117,7 +117,13 @@ export default {
       this.selectOptions = this.defaultConfig.map((config) => ({
         label: config.name.charAt(0).toUpperCase() + config.name.slice(1),
         value: config.name
-      }));
+      })).sort((a, b) => {
+        const A = a.label;
+        const B = b.label;
+        if (A < B) return -1;
+        if (A > B) return 1;
+        return 0;
+      });
     },
     checkLocalThemeConfig() {
       try {

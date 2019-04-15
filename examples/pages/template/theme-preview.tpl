@@ -9,10 +9,6 @@
       font-size: 22px;
       margin: 0 0 20px 0;
     }
-    h4 {
-      font-size: 18px;
-      margin: 10px 0;
-    }
   }
   .side {
     display: inline-block;
@@ -33,15 +29,8 @@
       <h3>饿了么商户系统</h3>
       <h4>颜色</h4>
       <h4>文字</h4>
-      <h4>按钮</h4>
-      <el-row>
-        <el-button>默认按钮</el-button>
-        <el-button type="primary">主要按钮</el-button>
-        <el-button type="success">成功按钮</el-button>
-        <el-button type="info">信息按钮</el-button>
-        <el-button type="warning">警告按钮</el-button>
-        <el-button type="danger">危险按钮</el-button>
-      </el-row>
+      <components-preview>
+      </components-preview>
     </section>
     <aside class="side">
       <section class="editor">
@@ -52,10 +41,12 @@
 </template>
 <script>
 import ThemeConfigurator from '../../components/theme-configurator';
+import ComponentsPreview from '../../components/theme/components-preview';
 
 export default {
   components: {
-    ThemeConfigurator
+    ThemeConfigurator,
+    ComponentsPreview
   },
   data() {
     return {
