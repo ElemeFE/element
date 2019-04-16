@@ -1,18 +1,30 @@
 <script>
-import { range, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings } from 'element-ui/src/utils/date-util';
+import fecha from 'element-ui/src/utils/date';
+import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
 export default {
 
   props: {
     selectedDay: String, // formated date yyyy-MM-dd
-    range: Array,
-    date: Date
+    range: {
+      type: Array,
+      validator(val) {
+        if (!(val && val.length)) return true;
+        const [start, end] = val;
+        return validateRangeInOneMonth(start, end);
+      }
+    },
+    date: Date,
+    hideHeader: {
+      type: Boolean,
+      default: true
+    }
   },
 
   inject: ['elCalendar'],
 
   methods: {
     toNestedArr(days) {
-      return range(days.length / 7).map((_, index) => {
+      return rangeArr(days.length / 7).map((_, index) => {
         const start = index * 7;
         return days.slice(start, start + 7);
       });
@@ -68,32 +80,44 @@ export default {
 
   computed: {
     prevMonthDatePrefix() {
-      return this.elCalendar.prevMonthDatePrefix;
+      const temp = new Date(this.date.getTime());
+      temp.setDate(0);
+      return fecha.format(temp, 'yyyy-MM');
     },
 
     curMonthDatePrefix() {
-      return this.elCalendar.curMonthDatePrefix;
+      return fecha.format(this.date, 'yyyy-MM');
     },
 
     nextMonthDatePrefix() {
-      return this.elCalendar.nextMonthDatePrefix;
+      const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
+      return fecha.format(temp, 'yyyy-MM');
     },
 
     formatedToday() {
       return this.elCalendar.formatedToday;
     },
 
+    isInRange() {
+      return this.range && this.range.length;
+    },
+
     rows() {
       let days = [];
-      // if range exists, should render days in range
-      if (this.range && this.range.length) {
+      // if range exists, should render days in range.
+      if (this.isInRange) {
         const [start, end] = this.range;
-        for (let index = start.getDate(); index <= end.getDate(); index++) {
-          days.push({
-            text: index,
-            type: 'current'
-          });
-        }
+        const currentMonthDays = rangeArr(end.getDate() - start.getDate() + 1).map((_, index) => ({
+          text: start.getDate() + index,
+          type: 'current'
+        }));
+        let remaining = currentMonthDays.length % 7;
+        remaining = remaining === 0 ? 0 : 7 - remaining;
+        const nextMonthDays = rangeArr(remaining).map((_, index) => ({
+          text: index + 1,
+          type: 'next'
+        }));
+        days = currentMonthDays.concat(nextMonthDays);
       } else {
         const date = this.date;
         const firstDay = getFirstDayOfMonth(date);
@@ -106,7 +130,7 @@ export default {
           type: 'current'
         }));;
         days = [...prevMonthDays, ...currentMonthDays];
-        const nextMonthDays = range(42 - days.length).map((_, index) => ({
+        const nextMonthDays = rangeArr(42 - days.length).map((_, index) => ({
           text: index + 1,
           type: 'next'
         }));
@@ -124,19 +148,30 @@ export default {
   },
 
   render() {
+    const thead = this.hideHeader ? null : (<thead>
+      {
+        this.DAYS.map(day => <th key={day}>{ day }</th>)
+      }
+    </thead>);
     return (
       <table
-        class="el-calendar-table"
+        class={{
+          'el-calendar-table': true,
+          'is-range': this.isInRange
+        }}
         cellspacing="0"
         cellpadding="0">
-        <thead>
-          {
-            this.DAYS.map(day => <th key={day}>{ day }</th>)
-          }
-        </thead>
+        {
+          thead
+        }
         <tbody>
           {
-            this.rows.map((row, index) => <tr class="el-calendar-table__row" key={index}>
+            this.rows.map((row, index) => <tr
+              class={{
+                'el-calendar-table__row': true,
+                'el-calendar-table__row--hide-border': index === 0 && this.hideHeader
+              }}
+              key={index}>
               {
                 row.map((cell, key) => <td key={key}
                   class={ this.getCellClass(cell) }

@@ -37,10 +37,13 @@
     vertical-align: top;
     transition: background-color 0.2s ease;
 
-    &.prev,
-    &.next {
-      color: $--color-text-placeholder;
+    &::not(.is-range) {
+      &.prev,
+      &.next {
+        color: $--color-text-placeholder;
+      }
     }
+    
 
     @include when(selected) {
       background-color: $--calendar-selected-background-color;
@@ -57,6 +60,10 @@
 
   tr td:first-child {
     border-left: $--calendar-border;
+  }
+
+  tr.el-calendar-table__row--hide-border td {
+    border-top: none;
   }
 
   @include b(calendar-day) {

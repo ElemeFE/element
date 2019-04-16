@@ -286,3 +286,7 @@ export const extractTimeFormat = function(format) {
     .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
     .trim();
 };
+
+export const validateRangeInOneMonth = function(start, end) {
+  return (start.getMonth() === end.getMonth()) && (start.getFullYear() === end.getFullYear());
+};

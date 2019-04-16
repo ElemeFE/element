@@ -29,11 +29,26 @@
         </el-button-group>
       </div>
     </div>
-    <div class="el-calendar__body">
+    <div
+      class="el-calendar__body"
+      v-if="validatedRange.length === 0"
+      key="no-range">
       <date-table
         :date="date"
         :selected-day="realSelectedDay"
-        :range="validatedRange"
+        @pick="pickDay" />
+    </div>
+    <div
+      v-else
+      class="el-calendar__body"
+      key="has-range">
+      <date-table
+        v-for="(rang, index) in validatedRange"
+        :key="index"
+        :date="rang[0]"
+        :selected-day="realSelectedDay"
+        :range="rang"
+        :hide-header="index !== 0"
         @pick="pickDay" />
     </div>
   </div>
@@ -43,8 +58,10 @@
 import Locale from 'element-ui/src/mixins/locale';
 import fecha from 'element-ui/src/utils/date';
 import DateTable from './date-table';
+import { validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
 
 const validTypes = ['prev-month', 'today', 'next-month'];
+const oneDay = 86400000;
 
 export default {
   name: 'ElCalendar',
@@ -155,7 +172,7 @@ export default {
         if (this.realSelectedDay) {
           return new Date(this.selectedDay);
         } else if (this.validatedRange.length) {
-          return this.validatedRange[0];
+          return this.validatedRange[0][0];
         }
         return this.now;
       } else {
@@ -163,6 +180,7 @@ export default {
       }
     },
 
+    // if range is valid, we get a two-digit array
     validatedRange() {
       let range = this.range;
       if (!range) return [];
@@ -179,22 +197,47 @@ export default {
       range = range.reduce((prev, val, index) => {
         const date = this.toDate(val);
         if (date.getDay() !== expetedMap[index].value) {
-          console.warn('[ElementCalendar]', expetedMap[index].message, ' validRange will be ignored');
+          console.warn('[ElementCalendar]', expetedMap[index].message, ' invalid range will be ignored');
         } else {
           prev = prev.concat(date);
         }
         return prev;
       }, []);
       if (range.length === 2) {
-        if (range[0].getMonth() === range[1].getMonth() && range[0].getFullYear() === range[1].getFullYear()) {
-          return range;
-        } else {
-          console.warn('[ElementCalendar] range must be within one month');
+        const [start, end] = range;
+        if (start > end) {
+          console.warn('[ElementCalendar]end time should be greater than start time');
           return [];
         }
-      } else {
-        return [];
+        // start time and end time in one month
+        if (validateRangeInOneMonth(start, end)) {
+          return [
+            [start, end]
+          ];
+        }
+        const data = [];
+        let startDay = new Date(start.getFullYear(), start.getMonth() + 1, 1);
+        const lastDay = this.toDate(startDay.getTime() - oneDay);
+        if (!validateRangeInOneMonth(startDay, end)) {
+          console.warn('[ElementCalendar]start time and end time interval must not exceed two months');
+          return [];
+        }
+        data.push([
+          start,
+          lastDay
+        ]);
+        let interval = startDay.getDay();
+        interval = interval <= 1 ? Math.abs(interval - 1) : (8 - interval);
+        startDay = this.toDate(startDay.getTime() + interval * oneDay);
+        if (startDay.getDate() < end.getDate()) {
+          data.push([
+            startDay,
+            end
+          ]);
+        }
+        return data;
       }
+      return [];
     }
   },
 
