@@ -52,6 +52,15 @@
         :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
         v-if="showStops">
       </div>
+      <div class="el-slider__marks">
+        <div v-for="(item, key) in markList"
+          class="el-slider__stop"
+          :key="key"
+          :style="vertical ? { 'bottom': item.position + '%' } : { 'left': item.position + '%' }">
+          <slider-marker :mark="item.mark">
+          </slider-marker>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +68,7 @@
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
+  import SliderMarker from './marker';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -132,12 +142,16 @@
       label: {
         type: String
       },
-      tooltipClass: String
+      tooltipClass: String,
+      marks: {
+        type: Object
+      }
     },
 
     components: {
       ElInputNumber,
-      SliderButton
+      SliderButton,
+      SliderMarker
     },
 
     data() {
@@ -300,6 +314,22 @@
         } else {
           return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
         }
+      },
+
+      markList() {
+        if (!this.marks) {
+          return [];
+        }
+
+        const marksKeys = Object.keys(this.marks);
+        return marksKeys.map(parseFloat)
+          .sort((a, b) => a - b)
+          .filter(point => point <= this.max && point >= this.min)
+          .map(point => ({
+            point,
+            position: (point - this.min) * 100 / (this.max - this.min),
+            mark: this.marks[point]
+          }));
       },
 
       minValue() {

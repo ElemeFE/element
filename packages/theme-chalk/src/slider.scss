@@ -151,6 +151,16 @@
     transform: translateX(-50%);
   }
 
+  @include e(marks) {
+    .el-slider__marks-text {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: $--color-info;
+      margin-top: 15px;
+    }
+  }
+
   @include when(vertical) {
     position: relative;
     .el-slider__runway {
