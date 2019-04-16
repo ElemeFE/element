@@ -26,7 +26,7 @@
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js && sh build/deploy-faas.sh",
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "prepare": "npm run dist"
+    "postinstall": "npm run dist"
   },
   "faas": [
     {
@@ -67,7 +67,7 @@
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
