@@ -50,6 +50,9 @@ import {
 import {
   getThemeConfigObject
 } from '../../components/theme/utils';
+import {
+  ACTION_APPLY_THEME
+} from '../../components/theme/constant.js';
 
 export default {
   components: {
@@ -86,7 +89,7 @@ export default {
     this.previewConfig = previewConfig;
     const themeConfig = getThemeConfigObject(previewConfig.theme);
     if (themeConfig) {
-      bus.$emit('applyNewStyleFromServer', themeConfig);
+      bus.$emit(ACTION_APPLY_THEME, themeConfig);
     }
   }
 };
