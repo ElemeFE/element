@@ -72,14 +72,18 @@ export default {
     }
   },
   mounted() {
+    ga('send', 'event', 'ThemeConfigurator', 'Init');
     this.showConfigurator();
+    this.enableShortcut();
+  },
+  destroyed() {
+    this.disableShortcut();
   },
   methods: {
     getActionDisplayName(key) {
       return getActionDisplayName(key);
     },
     showConfigurator() {
-      // this.visible ? this.enableShortcut() : this.disableShortcut();
       if (this.init) return;
       this.$nextTick(() => {
         const loading = this.$loading({
@@ -89,7 +93,6 @@ export default {
         getVars()
           .then(res => {
             defaultConfig = res;
-            ga('send', 'event', 'ThemeConfigurator', 'Init');
           })
           .catch(err => {
             this.onError(err);
