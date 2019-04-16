@@ -36,7 +36,6 @@ import {
   getActionDisplayName
 } from './utils/utils.js';
 import DocStyle from './docStyle';
-import Loading from './loading';
 import Shortcut from './shortcut';
 
 const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG1';
@@ -68,7 +67,7 @@ export default {
       selectOptions: []
     };
   },
-  mixins: [DocStyle, Loading, Shortcut],
+  mixins: [DocStyle, Shortcut],
   computed: {
     globalValue() {
       return filterGlobalValue(this.defaultConfig, this.userConfig);

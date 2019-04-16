@@ -385,6 +385,7 @@
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
+  import Loading from './theme/loading';
   import { getVars } from './theme-configurator/utils/api.js';
   import bus from '../bus';
 
@@ -407,6 +408,8 @@
         showThemeConfigurator: false
       };
     },
+
+    mixins: [Loading],
 
     components: {
       ThemePicker,
