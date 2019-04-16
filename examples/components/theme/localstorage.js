@@ -20,11 +20,11 @@ export const savePreviewToLocal = (value) => {
   saveToLocal(ELEMENT_THEME_PREVIEW_CONFIG, value);
 };
 
-export const loadPreviewToLocal = () => {
+export const loadPreviewFromLocal = () => {
   return loadFromLocal(ELEMENT_THEME_PREVIEW_CONFIG) || {};
 };
 
-export const removePreviewToLocal = () => {
+export const removePreviewFromLocal = () => {
   return localStorage.removeItem(ELEMENT_THEME_PREVIEW_CONFIG);
 };
 
@@ -32,7 +32,7 @@ export const saveUserThemeToLocal = (value) => {
   saveToLocal(ELEMENT_THEME_USER_CONFIG, value);
 };
 
-export const loadUserThemeToLocal = () => {
+export const loadUserThemeFromLocal = () => {
   return loadFromLocal(ELEMENT_THEME_USER_CONFIG);
 };
 

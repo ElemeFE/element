@@ -9,8 +9,8 @@ import {
   ACTION_DOWNLOAD_THEME
 } from '../constant.js';
 import {
-  loadUserThemeToLocal,
-  loadPreviewToLocal
+  loadUserThemeFromLocal,
+  loadPreviewFromLocal
 } from '../localstorage.js';
 
 export default {
@@ -88,9 +88,9 @@ export default {
     },
     checkLocalThemeConfig() {
       // load user local theme
-      const previewConfig = loadPreviewToLocal();
+      const previewConfig = loadPreviewFromLocal();
       if (previewConfig.type === 'user') {
-        const userConfig = loadUserThemeToLocal();
+        const userConfig = loadUserThemeFromLocal();
         this.$message('load-local-theme-config');
         const config = userConfig.filter(theme => (theme.name === previewConfig.name));
         if (config && config[0]) {

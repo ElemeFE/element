@@ -51,8 +51,8 @@ import ThemeConfigurator from '../../components/theme-configurator';
 import ComponentsPreview from '../../components/theme/components-preview';
 import BasicTokensPreview from '../../components/theme/basic-tokens-preview';
 import {
-  loadPreviewToLocal,
-  loadUserThemeToLocal,
+  loadPreviewFromLocal,
+  loadUserThemeFromLocal,
   saveUserThemeToLocal
 } from '../../components/theme/localstorage';
 import {
@@ -127,8 +127,8 @@ export default {
     }
   },
   mounted() {
-    this.userTheme = loadUserThemeToLocal();
-    const previewConfig = loadPreviewToLocal();
+    this.userTheme = loadUserThemeFromLocal();
+    const previewConfig = loadPreviewFromLocal();
     const pageRefer = this.$route.params.refer;
     if (!previewConfig || !pageRefer) {
       this.$alert('No preview config', 'No preview config', {

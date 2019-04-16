@@ -74,7 +74,7 @@
 <script>
 import ThemeCard from '../../components/theme/theme-card.vue';
 import ThemeList from '../../components/theme/theme-list.js';
-import { saveUserThemeToLocal, loadUserThemeToLocal } from '../../components/theme/localstorage';
+import { saveUserThemeToLocal, loadUserThemeFromLocal } from '../../components/theme/localstorage';
 
 const maxUserTheme = 8;
 
@@ -83,9 +83,10 @@ export default {
     ThemeCard
   },
   mounted() {
-    this.userTheme = loadUserThemeToLocal();
+    this.userTheme = loadUserThemeFromLocal();
     if (!Array.isArray(this.userTheme)) {
       this.userTheme = [];
+      saveUserThemeToLocal(this.userTheme);
     }
   },
   data() {
