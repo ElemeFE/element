@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" ref="mainPanel">
     <!-- <span>{{configName}}</span> -->
     <div v-for="(config, key) in configByOrder" :key="key">
       <span 
@@ -119,6 +119,15 @@ export default {
     return {
       categoryDisplay: {}
     };
+  },
+  watch: {
+    currentConfig: {
+      handler() {
+        this.$nextTick(() => {
+          this.$refs.mainPanel.scrollTo(0, 0);
+        });
+      }
+    }
   }
 };
 </script>
