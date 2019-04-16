@@ -1,13 +1,13 @@
 <template>
   <div class="main-configurator" ref='configurator'>
-    <el-select v-model="selectedComponent">
-      <el-option
-        v-for="item in selectOptions"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
+    <action-panel
+      :selectOptions="selectOptions"
+      :userConfigHistory="userConfigHistory"
+      :userConfigRedoHistory="userConfigRedoHistory"
+      :onUndo="undo"
+      :onRedo="redo"
+      @select="onSelectChange"
+    ></action-panel>
     <main-panel
       v-if="defaultConfig"
       :currentConfig="currentConfig"
@@ -29,6 +29,7 @@
 import bus from '../../bus.js';
 import { getVars } from './utils/api.js';
 import mainPanel from './main';
+import actionPanel from './action';
 import {
   filterConfigType,
   filterGlobalValue,
@@ -36,7 +37,8 @@ import {
 } from './utils/utils.js';
 import Shortcut from './shortcut';
 import {
-  ACTION_APPLY_THEME
+  ACTION_APPLY_THEME,
+  ACTION_DOWNLOAD_THEME
 } from '../theme/constant.js';
 
 export default {
@@ -44,7 +46,8 @@ export default {
     themeConfig: Object
   },
   components: {
-    mainPanel
+    mainPanel,
+    actionPanel
   },
   data() {
     return {
@@ -58,8 +61,8 @@ export default {
       userConfigHistory: [],
       userConfigRedoHistory: [],
       hasLocalConfig: false,
-      selectedComponent: 'color',
-      selectOptions: []
+      selectOptions: [],
+      selectedComponent: 'color'
     };
   },
   mixins: [Shortcut],
@@ -140,6 +143,9 @@ export default {
       };
       this.onAction();
     },
+    onDownload() {
+      bus.$emit(ACTION_DOWNLOAD_THEME, this.userConfig);
+    },
     onAction() {
       bus.$emit(ACTION_APPLY_THEME, this.userConfig);
     },
@@ -156,14 +162,13 @@ export default {
         this.userConfig = JSON.parse(this.userConfigRedoHistory.shift());
         this.onAction();
       }
+    },
+    onSelectChange(val) {
+      this.selectedComponent = val;
+      this.filterCurrentConfig();
     }
   },
   watch: {
-    selectedComponent: {
-      handler() {
-        this.filterCurrentConfig();
-      }
-    },
     themeConfig: {
       handler(val, oldVal) {
         if (!oldVal.globnal) {

@@ -23,7 +23,7 @@
 
 <style>
 .main {
-  padding: 10px;
+  padding: 0 10px;
 }
 .category-name {
   color: #C0C4CC;
