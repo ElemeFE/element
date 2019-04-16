@@ -253,7 +253,7 @@ The `item` property of the slot data scope holds data regarding the selected ite
 ```html
 <template>
   <el-select v-model="value" multiple :collapse-tags="false" placeholder="Select">
-    <template v-slot:multiprefix="selected">
+    <template slot="multiprefix" slot-scope="selected">
       {{ selected.item.label.substring(0, 1) }}
     </template>
     <el-option
