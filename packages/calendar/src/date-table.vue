@@ -14,10 +14,7 @@ export default {
       }
     },
     date: Date,
-    hideHeader: {
-      type: Boolean,
-      default: true
-    }
+    hideHeader: Boolean
   },
 
   inject: ['elCalendar'],

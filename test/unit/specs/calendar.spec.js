@@ -58,13 +58,13 @@ describe('Calendar', () => {
     expect(dateTables.length).to.be.equal(2);
     const rows = vm.$el.querySelectorAll('.el-calendar-table__row');
     expect(rows.length).to.equal(5);
-    const cell = rows[rows.length - 1].firstElementChild();
+    const cell = rows[rows.length - 1].firstElementChild;
     cell.click();
 
     await waitImmediate();
 
     expect(/2019.*5/.test(titleEl.innerText)).to.be.true;
-    expect(cell.classList.contains('.is-selected')).to.be.true;
+    expect(cell.classList.contains('is-selected')).to.be.true;
   });
 });
 
