@@ -43,7 +43,8 @@ import {
 
 export default {
   props: {
-    themeConfig: Object
+    themeConfig: Object,
+    onUserConfigUpdate: Function
   },
   components: {
     mainPanel,
@@ -150,6 +151,7 @@ export default {
       bus.$emit(ACTION_DOWNLOAD_THEME, this.userConfig);
     },
     onAction() {
+      this.onUserConfigUpdate(this.userConfig);
       bus.$emit(ACTION_APPLY_THEME, this.userConfig);
     },
     undo() {
