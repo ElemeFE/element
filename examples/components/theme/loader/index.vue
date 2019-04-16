@@ -8,10 +8,15 @@ import {
   ACTION_APPLY_THEME,
   ACTION_DOWNLOAD_THEME
 } from '../constant.js';
+import {
+  loadUserThemeToLocal,
+  loadPreviewToLocal
+} from '../localstorage.js';
 
 export default {
   mixins: [Loading, DocStyle],
   mounted() {
+    this.checkLocalThemeConfig();
     bus.$on(ACTION_APPLY_THEME, val => {
       this.userConfig = val;
       this.onAction();
@@ -82,22 +87,16 @@ export default {
       this.updateDocStyle(this.userConfig, cb);
     },
     checkLocalThemeConfig() {
-      try {
-        if (this.hasLocalConfig) {
-          // this.$message(getActionDisplayName('load-local-theme-config'));
+      // load user local theme
+      const previewConfig = loadPreviewToLocal();
+      if (previewConfig.type === 'user') {
+        const userConfig = loadUserThemeToLocal();
+        this.$message('load-local-theme-config');
+        const config = userConfig.filter(theme => (theme.name === previewConfig.name));
+        if (config && config[0]) {
+          this.userConfig = JSON.parse(config[0].theme);
           this.onAction();
-          return;
         }
-        const config = JSON.parse(
-          // localStorage.getItem(ELEMENT_THEME_USER_CONFIG)
-        );
-        if (config && config.global) {
-          this.userConfig = config;
-          this.hasLocalConfig = true;
-          this.showConfigurator();
-        }
-      } catch (e) {
-        // bad local config
       }
     }
   }

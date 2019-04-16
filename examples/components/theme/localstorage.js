@@ -21,7 +21,7 @@ export const savePreviewToLocal = (value) => {
 };
 
 export const loadPreviewToLocal = () => {
-  return loadFromLocal(ELEMENT_THEME_PREVIEW_CONFIG);
+  return loadFromLocal(ELEMENT_THEME_PREVIEW_CONFIG) || {};
 };
 
 export const removePreviewToLocal = () => {
