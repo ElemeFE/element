@@ -1,11 +1,5 @@
 <style lang="scss">
 .component-preview {
-  padding-right: 10px;
-  padding-bottom: 30px;
-  h4 {
-    font-size: 18px;
-    margin: 25px 0;
-  }
   .heading>div{
     margin-bottom: 15px;
   }
