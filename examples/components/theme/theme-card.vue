@@ -224,7 +224,11 @@
 </template>
 
 <script>
-import { DEFAULT_THEME_CONFIG } from './constant.js';
+import bus from '../../bus';
+import {
+  DEFAULT_THEME_CONFIG,
+  ACTION_DOWNLOAD_THEME
+} from './constant.js';
 import { savePreviewToLocal } from './localstorage';
 import { tintColor } from '../../color.js';
 
@@ -288,6 +292,9 @@ export default {
           this.$nextTick(() => {
             window.scrollTo(0, 0);
           });
+          break;
+        case 'download':
+          bus.$emit(ACTION_DOWNLOAD_THEME, this.theme);
           break;
         default:
           this.$emit('action', e, this.config);

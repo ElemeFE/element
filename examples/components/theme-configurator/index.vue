@@ -26,7 +26,7 @@
 </style>
 
 <script>
-import { getVars, updateVars } from './utils/api.js';
+import { getVars } from './utils/api.js';
 import mainPanel from './main';
 import {
   filterConfigType,
@@ -151,14 +151,6 @@ export default {
         e.value
       );
       this.onAction();
-    },
-    onDownload() {
-      return updateVars(
-        Object.assign({}, this.userConfig, { download: true }),
-        xhr => {
-          xhr.responseType = 'blob';
-        }
-      );
     },
     onReset() {
       this.userConfig = {

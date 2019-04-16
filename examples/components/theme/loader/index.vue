@@ -4,13 +4,20 @@ import Loading from './loading';
 import DocStyle from './docStyle';
 import { updateVars } from './api.js';
 import { updateDomHeadStyle } from '../utils.js';
+import {
+  ACTION_APPLY_THEME,
+  ACTION_DOWNLOAD_THEME
+} from '../constant.js';
 
 export default {
   mixins: [Loading, DocStyle],
   mounted() {
-    bus.$on('applyNewStyleFromServer', val => {
+    bus.$on(ACTION_APPLY_THEME, val => {
       this.userConfig = val;
       this.onAction();
+    });
+    bus.$on(ACTION_DOWNLOAD_THEME, val => {
+      this.onDownload(val);
     });
   },
   data() {
@@ -26,6 +33,21 @@ export default {
         updateDomHeadStyle('chalk-style', res);
       });
       this.lastApply = time;
+    },
+    onDownload(themeConfig) {
+      this.triggertProgressBar(true);
+      updateVars(
+        Object.assign({}, themeConfig, { download: true }),
+        xhr => {
+          xhr.responseType = 'blob';
+        }
+      ).then()
+        .catch((err) => {
+          this.onError(err);
+        })
+        .then(() => {
+          this.triggertProgressBar(false);
+        });
     },
     onAction() {
       this.triggertProgressBar(true);
