@@ -26,7 +26,7 @@
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js && sh build/deploy-faas.sh",
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "postinstall": "npm run clean && npm run build:file && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme"
+    "postinstall": "npm run dist"
   },
   "faas": [
     {
@@ -120,9 +120,7 @@
     "gulp-cssmin": "^0.2.0",
     "gulp-sass": "^4.0.2",
     "algoliasearch": "^3.24.5",
-    "highlight.js": "^9.3.0"
-  },
-  "devDependencies": {
+    "highlight.js": "^9.3.0",
     "chai": "^4.2.0",
     "chokidar": "^1.7.0",
     "eslint": "4.14.0",
