@@ -13,30 +13,22 @@
         ></i>
         <div class="button-group">
           <el-button 
+            class="reset"
             type="primary" 
             round 
             size="mini"
-            :disabled="resetDisabled"
+            :disabled="isOfficial"
             @click="onReset"
-            :style="{
-              background: '#E6F1FC',
-              color: '#1989FA',
-              borderColor: '#A2CFFC'
-            }"
           >
             Reset
           </el-button>
           <el-button 
+            class="download"
             type="primary" 
             round 
             size="mini"
             :disabled="downloadDisabled"
             @click="onDownload"
-            :style="{
-              background: '#1989FA',
-              color: '#FFF',
-              borderColor: '#1989FA'
-            }"
           >
             Download
           </el-button>
@@ -72,6 +64,21 @@
       float: right;
       .el-button {
         padding: 4px 6px;
+        &.is-disabled {
+          color: #C0C4CC;
+          background-color: #fff;
+          border-color: #EBEEF5;
+        }
+      }
+      .reset {
+        background: #E6F1FC;
+        color: #1989FA;
+        border-color: #A2CFFC;
+      }
+      .download {
+        background: #1989FA;
+        color: #FFF;
+        border-color: #1989FA
       }
     }
   }
@@ -93,14 +100,14 @@ export default {
     selectOptions: Array,
     userConfigHistory: Array,
     userConfigRedoHistory: Array,
+    isOfficial: Boolean,
     onUndo: Function,
     onRedo: Function
   },
   data() {
     return {
       selectedComponent: 'color',
-      downloadDisabled: false,
-      resetDisabled: false
+      downloadDisabled: false
     };
   },
   watch: {
@@ -119,7 +126,7 @@ export default {
       this.$parent.onDownload();
       setTimeout(() => {
         this.downloadDisabled = false;
-      }, 1000);
+      }, 2500);
     }
   }
 };

@@ -6,6 +6,7 @@
       :userConfigRedoHistory="userConfigRedoHistory"
       :onUndo="undo"
       :onRedo="redo"
+      :isOfficial="isOfficial"
       @select="onSelectChange"
     ></action-panel>
     <main-panel
@@ -44,6 +45,7 @@ import {
 export default {
   props: {
     themeConfig: Object,
+    isOfficial: Boolean,
     onUserConfigUpdate: Function
   },
   components: {

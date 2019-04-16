@@ -37,6 +37,7 @@
     <aside class="side">
       <section class="editor">
         <theme-configurator
+          :isOfficial="isOfficial"
           :themeConfig="themeConfig"
           :onUserConfigUpdate="onUserConfigUpdate"
         >
@@ -77,6 +78,11 @@ export default {
       userTheme: []
     };
   },
+  computed: {
+    isOfficial() {
+      return this.previewConfig.type === 'official';
+    }
+  },
   methods: {
     navBack() {
       this.$router.go(-1);
@@ -99,7 +105,7 @@ export default {
     onUserConfigUpdate(userConfig) {
       const themeConfig = JSON.stringify(userConfig);
       const { type, name } = this.previewConfig;
-      if (type === 'official') {
+      if (this.isOfficial) {
         if (this.userTheme.length >= maxUserTheme) {
           this.$message.error('Max user theme 8');
           return;
