@@ -23,6 +23,8 @@
 <style lang="scss">
 .main-configurator {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
 
@@ -79,7 +81,7 @@ export default {
     this.showConfigurator();
     this.enableShortcut();
   },
-  destroyed() {
+  beforeDestroy() {
     this.disableShortcut();
   },
   methods: {

@@ -14,7 +14,7 @@
     display: inline-block;
     width: 25%;
     .editor {
-      overflow: auto;
+      overflow: hidden;
       background: #f5f7fa;
       border: 1px solid #ebeef5;
       border-radius: 5px;
@@ -22,6 +22,7 @@
       &.fixed {
         position: fixed;
         width: 285px;
+        box-sizing: border-box;
       }
     }
   }
@@ -162,6 +163,9 @@ export default {
         this.editorTop = 0;
       }
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.throttledHandleScroll);
   },
   mounted() {
     this.editorHeight = window.innerHeight - 40;

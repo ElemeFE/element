@@ -23,7 +23,8 @@
 
 <style>
 .main {
-  padding: 0 10px;
+  padding: 0 10px 10px;
+  overflow-y: auto;
 }
 .category-name {
   color: #C0C4CC;
