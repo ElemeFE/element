@@ -40,12 +40,16 @@
   </div>
 </template>
 <script>
+import bus from '../../bus.js';
 import ThemeConfigurator from '../../components/theme-configurator';
 import ComponentsPreview from '../../components/theme/components-preview';
 import BasicTokensPreview from '../../components/theme/basic-tokens-preview';
 import {
   loadPreviewToLocal
 } from '../../components/theme/localstorage';
+import {
+  getThemeConfigObject
+} from '../../components/theme/utils';
 
 export default {
   components: {
@@ -80,6 +84,10 @@ export default {
       return;
     }
     this.previewConfig = previewConfig;
+    const themeConfig = getThemeConfigObject(previewConfig.theme);
+    if (themeConfig) {
+      bus.$emit('applyNewStyleFromServer', themeConfig);
+    }
   }
 };
 </script>
