@@ -12,3 +12,13 @@ export const getThemeConfigObject = (config) => {
     return false;
   }
 };
+
+export const updateDomHeadStyle = (id, styleContent) => {
+  let styleTag = document.getElementById(id);
+  if (!styleTag) {
+    styleTag = document.createElement('style');
+    styleTag.setAttribute('id', id);
+    document.head.appendChild(styleTag);
+  }
+  styleTag.innerText = styleContent.replace(/@font-face{[^}]+}/, '');
+};

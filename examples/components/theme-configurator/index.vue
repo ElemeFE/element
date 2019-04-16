@@ -26,24 +26,16 @@
 </style>
 
 <script>
-import bus from '../../bus';
 import { getVars, updateVars } from './utils/api.js';
 import mainPanel from './main';
 import {
   filterConfigType,
   filterGlobalValue,
-  updateDomHeadStyle,
   getActionDisplayName
 } from './utils/utils.js';
-import DocStyle from './docStyle';
 import Shortcut from './shortcut';
 
 const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG1';
-
-const DEFAULT_USER_CONFIG = {
-  global: {},
-  local: {}
-};
 
 export default {
   components: {
@@ -67,7 +59,7 @@ export default {
       selectOptions: []
     };
   },
-  mixins: [DocStyle, Shortcut],
+  mixins: [Shortcut],
   computed: {
     globalValue() {
       return filterGlobalValue(this.defaultConfig, this.userConfig);
@@ -160,13 +152,6 @@ export default {
       );
       this.onAction();
     },
-    applyStyle(res, time) {
-      if (time < this.lastApply) return;
-      this.updateDocs(() => {
-        updateDomHeadStyle('chalk-style', res);
-      });
-      this.lastApply = time;
-    },
     onDownload() {
       return updateVars(
         Object.assign({}, this.userConfig, { download: true }),
@@ -181,43 +166,6 @@ export default {
         local: {}
       };
       this.onAction();
-    },
-    onAction() {
-      this.triggerComponentLoading(true);
-      const time = +new Date();
-      const currentConfigString = JSON.stringify(this.userConfig);
-      if (JSON.stringify(DEFAULT_USER_CONFIG) === currentConfigString) {
-        localStorage.removeItem(ELEMENT_THEME_USER_CONFIG);
-      } else {
-        localStorage.setItem(ELEMENT_THEME_USER_CONFIG, currentConfigString);
-      }
-      updateVars(this.userConfig)
-        .then(res => {
-          this.applyStyle(res, time);
-        })
-        .catch(err => {
-          this.onError(err);
-        })
-        .then(() => {
-          this.triggerComponentLoading(false);
-        });
-    },
-    onError(err) {
-      let message;
-      try {
-        message = JSON.parse(err).message;
-      } catch (e) {
-        message = err;
-      }
-      this.$message.error(message);
-    },
-    triggerComponentLoading(val) {
-      bus.$emit('user-theme-config-loading', val);
-    },
-    updateDocs(cb) {
-      window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
-      bus.$emit('user-theme-config-update', this.userConfig);
-      this.updateDocStyle(this.userConfig, cb);
     },
     undo() {
       if (this.userConfigHistory.length > 0) {
