@@ -14,16 +14,21 @@
     display: inline-block;
     width: 25%;
     .editor {
+      overflow: auto;
       background: #f5f7fa;
       border: 1px solid #ebeef5;
       border-radius: 5px;
       margin-bottom: 20px;
+      &.fixed {
+        position: fixed;
+        width: 285px;
+      }
     }
   }
 }
 </style>
 <template>
-  <div class="page-container page-theme-preview">
+  <div class="page-container page-theme-preview" ref="themePreview">
     <section class="display">
       <el-button type="text" icon="el-icon-back" @click="navBack">
         返回
@@ -35,7 +40,7 @@
       </components-preview>
     </section>
     <aside class="side">
-      <section class="editor">
+      <section class="editor" :style="{top: `${editorTop}px`, height: `${editorHeight}px`}" :class="{'fixed': isFixed}">
         <theme-configurator
           :isOfficial="isOfficial"
           :themeConfig="themeConfig"
@@ -62,6 +67,7 @@ import {
 import {
   ACTION_APPLY_THEME
 } from '../../components/theme/constant.js';
+import throttle from 'throttle-debounce/throttle';
 
 const maxUserTheme = 8;
 
@@ -75,13 +81,21 @@ export default {
     return {
       previewConfig: {},
       themeConfig: {},
-      userTheme: []
+      userTheme: [],
+      editorTop: 0,
+      editorHeight: 1000,
+      isFixed: false
     };
   },
   computed: {
     isOfficial() {
       return this.previewConfig.type === 'official';
     }
+  },
+  created() {
+    this.throttledHandleScroll = throttle(10, true, index => {
+      this.handleScroll(index);
+    });
   },
   methods: {
     navBack() {
@@ -130,9 +144,28 @@ export default {
         });
         saveUserThemeToLocal(this.userTheme);
       }
+    },
+    handleScroll() {
+      const rect = this.$refs.themePreview.getBoundingClientRect();
+      let offsetTop = rect.top;
+      let offsetBottom = rect.bottom;
+      const calHeight = this.editorHeight + 25 + 20;
+      if (offsetTop < 0) {
+        this.isFixed = true;
+        if (offsetBottom < calHeight) {
+          this.editorTop = 25 - calHeight + offsetBottom;
+        } else {
+          this.editorTop = 25;
+        }
+      } else {
+        this.isFixed = false;
+        this.editorTop = 0;
+      }
     }
   },
   mounted() {
+    this.editorHeight = window.innerHeight - 40;
+    window.addEventListener('scroll', this.throttledHandleScroll);
     this.userTheme = loadUserThemeFromLocal();
     const previewConfig = loadPreviewFromLocal();
     const pageRefer = this.$route.params.refer;
