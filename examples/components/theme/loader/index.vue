@@ -48,6 +48,7 @@ export default {
         .then(() => {
           this.triggertProgressBar(false);
         });
+      ga('send', 'event', 'ThemeConfigurator', 'Download');
     },
     onAction() {
       this.triggertProgressBar(true);
@@ -76,9 +77,28 @@ export default {
       bus.$emit('user-theme-config-loading', isLoading);
     },
     updateDocs(cb) {
-      // window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
-      // bus.$emit('user-theme-config-update', this.userConfig);
+      window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
+      bus.$emit('user-theme-config-update', this.userConfig);
       this.updateDocStyle(this.userConfig, cb);
+    },
+    checkLocalThemeConfig() {
+      try {
+        if (this.hasLocalConfig) {
+          // this.$message(getActionDisplayName('load-local-theme-config'));
+          this.onAction();
+          return;
+        }
+        const config = JSON.parse(
+          // localStorage.getItem(ELEMENT_THEME_USER_CONFIG)
+        );
+        if (config && config.global) {
+          this.userConfig = config;
+          this.hasLocalConfig = true;
+          this.showConfigurator();
+        }
+      } catch (e) {
+        // bad local config
+      }
     }
   }
 };

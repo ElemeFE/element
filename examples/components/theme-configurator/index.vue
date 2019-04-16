@@ -26,6 +26,7 @@
 </style>
 
 <script>
+import bus from '../../bus.js';
 import { getVars } from './utils/api.js';
 import mainPanel from './main';
 import {
@@ -34,8 +35,9 @@ import {
   getActionDisplayName
 } from './utils/utils.js';
 import Shortcut from './shortcut';
-
-const ELEMENT_THEME_USER_CONFIG = 'ELEMENT_THEME_USER_CONFIG1';
+import {
+  ACTION_APPLY_THEME
+} from '../theme/constant.js';
 
 export default {
   components: {
@@ -44,14 +46,12 @@ export default {
   data() {
     return {
       init: false,
-      visible: true,
       defaultConfig: null,
       currentConfig: null,
       userConfig: {
         global: {},
         local: {}
       },
-      lastApply: 0,
       userConfigHistory: [],
       userConfigRedoHistory: [],
       hasLocalConfig: false,
@@ -66,7 +66,6 @@ export default {
     }
   },
   mounted() {
-    // this.checkLocalThemeConfig();
     this.showConfigurator();
   },
   methods: {
@@ -74,8 +73,7 @@ export default {
       return getActionDisplayName(key);
     },
     showConfigurator() {
-      this.visible = !this.visible;
-      this.visible ? this.enableShortcut() : this.disableShortcut();
+      // this.visible ? this.enableShortcut() : this.disableShortcut();
       if (this.init) return;
       this.$nextTick(() => {
         const loading = this.$loading({
@@ -97,7 +95,6 @@ export default {
                 this.setSelectOption();
                 this.filterCurrentConfig();
                 this.init = true;
-                this.checkLocalThemeConfig();
               }
               loading.close();
             }, 300); // action after transition
@@ -115,25 +112,6 @@ export default {
         if (A > B) return 1;
         return 0;
       });
-    },
-    checkLocalThemeConfig() {
-      try {
-        if (this.hasLocalConfig) {
-          this.$message(getActionDisplayName('load-local-theme-config'));
-          this.onAction();
-          return;
-        }
-        const config = JSON.parse(
-          localStorage.getItem(ELEMENT_THEME_USER_CONFIG)
-        );
-        if (config && config.global) {
-          this.userConfig = config;
-          this.hasLocalConfig = true;
-          this.showConfigurator();
-        }
-      } catch (e) {
-        // bad local config
-      }
     },
     filterCurrentConfig() {
       this.currentConfig = this.defaultConfig.find(config => {
@@ -158,6 +136,9 @@ export default {
         local: {}
       };
       this.onAction();
+    },
+    onAction() {
+      bus.$emit(ACTION_APPLY_THEME, this.userConfig);
     },
     undo() {
       if (this.userConfigHistory.length > 0) {
