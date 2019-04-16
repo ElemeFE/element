@@ -135,7 +135,7 @@ const generateMiscRoutes = function(lang) {
       },
       {
         path: 'preview', // 主题预览编辑
-        name: 'theme-preview' + lang,
+        name: 'theme-preview-' + lang,
         meta: { lang },
         component: load(lang, 'theme-preview')
       }]

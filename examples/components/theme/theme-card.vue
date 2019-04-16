@@ -279,7 +279,12 @@ export default {
             name,
             theme
           });
-          this.$router.push({ path: 'preview', append: true });
+          this.$router.push({
+            name: `theme-preview-${this.$route.meta.lang}`,
+            params: {
+              refer: 'theme'
+            }
+          });
           this.$nextTick(() => {
             window.scrollTo(0, 0);
           });

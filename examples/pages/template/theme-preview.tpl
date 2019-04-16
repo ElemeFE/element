@@ -6,7 +6,7 @@
     display: inline-block;
     vertical-align: top;
     h3 {
-      font-size: 22px;
+      font-size: 24px;
       margin: 0 0 20px 0;
     }
   }
@@ -44,8 +44,7 @@ import ThemeConfigurator from '../../components/theme-configurator';
 import ComponentsPreview from '../../components/theme/components-preview';
 import BasicTokensPreview from '../../components/theme/basic-tokens-preview';
 import {
-  loadPreviewToLocal,
-  removePreviewToLocal
+  loadPreviewToLocal
 } from '../../components/theme/localstorage';
 
 export default {
@@ -69,7 +68,8 @@ export default {
   },
   mounted() {
     const previewConfig = loadPreviewToLocal();
-    if (!previewConfig) {
+    const pageRefer = this.$route.params.refer;
+    if (!previewConfig || !pageRefer) {
       this.$alert('No preview config', 'No preview config', {
         confirmButtonText: 'OK',
         callback: action => {
@@ -80,7 +80,6 @@ export default {
       return;
     }
     this.previewConfig = previewConfig;
-    removePreviewToLocal();
   }
 };
 </script>
