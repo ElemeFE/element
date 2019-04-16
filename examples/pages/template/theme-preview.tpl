@@ -34,7 +34,10 @@
     </section>
     <aside class="side">
       <section class="editor">
-        <theme-configurator></theme-configurator>
+        <theme-configurator
+          :themeConfig="themeConfig"
+        >
+        </theme-configurator>
       </section>
     </aside>
   </div>
@@ -62,7 +65,8 @@ export default {
   },
   data() {
     return {
-      previewConfig: {}
+      previewConfig: {},
+      themeConfig: {}
     };
   },
   methods: {
@@ -89,6 +93,7 @@ export default {
     this.previewConfig = previewConfig;
     const themeConfig = getThemeConfigObject(previewConfig.theme);
     if (themeConfig) {
+      this.themeConfig = themeConfig;
       bus.$emit(ACTION_APPLY_THEME, themeConfig);
     }
   }

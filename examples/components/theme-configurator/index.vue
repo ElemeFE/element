@@ -40,6 +40,9 @@ import {
 } from '../theme/constant.js';
 
 export default {
+  props: {
+    themeConfig: Object
+  },
   components: {
     mainPanel
   },
@@ -159,6 +162,13 @@ export default {
     selectedComponent: {
       handler() {
         this.filterCurrentConfig();
+      }
+    },
+    themeConfig: {
+      handler(val, oldVal) {
+        if (!oldVal.globnal) {
+          this.userConfig = val;
+        }
       }
     }
   }
