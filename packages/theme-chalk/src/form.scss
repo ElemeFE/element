@@ -35,6 +35,20 @@
     }
   }
 }
+@include when(has-required-asterisk-shown) {
+  .el-form-item {
+    .el-form-item__label {
+      padding-right: 26px;
+    }
+  }
+  &.el-form--label-left .el-form-item .el-form-item__label {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+  &.el-form--label-top {
+    padding: 13px;
+  }
+}
 @include b(form-item) {
   margin-bottom: 22px;
   @include utils-clearfix;
@@ -101,6 +115,7 @@
     line-height: 40px;
     padding: 0 12px 0 0;
     box-sizing: border-box;
+    position: relative;
   }
   @include e(content) {
     line-height: 40px;
@@ -132,10 +147,31 @@
 
   @include when(required) {
     @include pseudo('not(.is-no-asterisk)') {
-      & > .el-form-item__label:before {
+      .el-form--label-right & > .el-form-item__label:after {
         content: '*';
         color: $--color-danger;
-        margin-right: 4px;
+        position: absolute;
+        width: 13px;
+        right: 13px;
+        text-align: center;
+      }
+
+      .el-form--label-left & > .el-form-item__label:before {
+        content: '*';
+        color: $--color-danger;
+        position: absolute;
+        width: 13px;
+        text-align: center;
+        left: 0;
+      }
+
+      .el-form--label-top & > .el-form-item__label:before {
+        content: '*';
+        color: $--color-danger;
+        position: absolute;
+        width: 13px;
+        text-align: center;
+        left: -13px;
       }
     }
   }

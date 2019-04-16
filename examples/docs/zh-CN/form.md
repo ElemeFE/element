@@ -171,7 +171,27 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 
 :::demo Form 组件提供了表单验证的功能，只需要通过 `rules` 属性传入约定的验证规则，并将 Form-Item 的 `prop` 属性设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
+对齐方式：
+<el-radio-group v-model="labelPosition" size="small">
+  <el-radio-button label="left">左对齐</el-radio-button>
+  <el-radio-button label="right">右对齐</el-radio-button>
+  <el-radio-button label="top">顶部对齐</el-radio-button>
+</el-radio-group>
+
+<div style="margin: 20px;"></div>
+
+尺寸控制：
+<el-radio-group v-model="formSize" size="small">
+  <el-radio-button label="medium">中</el-radio-button>
+  <el-radio-button label="small">小</el-radio-button>
+  <el-radio-button label="mini">超小</el-radio-button>
+</el-radio-group>
+
+
+<div style="margin: 20px;"></div>
+
+<el-form :model="ruleForm" :rules="rules" ref="ruleForm" :label-position="labelPosition" label-width="100px" class="demo-ruleForm" :size="formSize">
   <el-form-item label="活动名称" prop="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
@@ -223,6 +243,8 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
   export default {
     data() {
       return {
+        labelPosition: 'right',
+        formSize: 'medium',
         ruleForm: {
           name: '',
           region: '',

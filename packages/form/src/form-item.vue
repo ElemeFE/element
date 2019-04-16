@@ -19,9 +19,9 @@
     <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <slot 
-          v-if="validateState === 'error' && showMessage && form.showMessage" 
-          name="error" 
+        <slot
+          v-if="validateState === 'error' && showMessage && form.showMessage"
+          name="error"
           :error="validateMessage">
           <div
             class="el-form-item__error"
@@ -95,6 +95,9 @@
       },
       validateStatus(value) {
         this.validateState = value;
+      },
+      isRequired() {
+        this.dispatch('ElForm', 'el.form.fieldRequiredChanged');
       }
     },
     computed: {

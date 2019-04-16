@@ -1,6 +1,7 @@
 <template>
   <form class="el-form" :class="[
     labelPosition ? 'el-form--label-' + labelPosition : '',
+    !hideRequiredAsterisk && hasRequiredAsteriskShown ? 'is-has-required-asterisk-shown' : '',
     { 'el-form--inline': inline }
   ]">
     <slot></slot>
@@ -59,6 +60,11 @@
         if (!this.potentialLabelWidthArr.length) return 0;
         const max = Math.max(...this.potentialLabelWidthArr);
         return max ? `${max}px` : '';
+      },
+      hasRequiredAsteriskShown() {
+        return this.fields.some((field) => {
+          return field.isRequired;
+        });
       }
     },
     data() {
@@ -78,6 +84,12 @@
         if (field.prop) {
           this.fields.splice(this.fields.indexOf(field), 1);
         }
+      });
+
+      this.$on('el.form.fieldRequiredChanged', () => {
+        this.hasRequiredAsteriskShown = this.fields.some((field) => {
+          return field.isRequired;
+        });
       });
     },
     methods: {
