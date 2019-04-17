@@ -249,6 +249,7 @@ export default {
   },
   methods: {
     formatDate(timestamp) {
+      if (!timestamp) return '';
       return dateUtil.format(new Date(timestamp), 'yyyy-MM-dd HH:mm');
     },
     uploadClick() {
