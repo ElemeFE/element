@@ -271,7 +271,7 @@
             <li
               class={{
                 'el-cascader-menu__item': true,
-                'el-cascader-menu__item--extensible': item.children,
+                'el-cascader-menu__item--extensible': item.children && item.children.length,
                 'is-active': item.value === activeValue[menuIndex],
                 'is-disabled': item.disabled
               }}
