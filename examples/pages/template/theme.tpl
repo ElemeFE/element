@@ -1,5 +1,8 @@
 <style lang="scss">
 .page-theme {
+  &:last-child {
+    margin-bottom: 55px;
+  }
   h2 {
     font-size: 28px;
     margin: 0;

@@ -55,6 +55,7 @@
       cursor: not-allowed;
       font-size: 18px;
       vertical-align: middle;
+      color: #999;
       &.active {
         cursor: pointer;
         color: #1989FA

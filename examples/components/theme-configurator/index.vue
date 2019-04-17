@@ -145,6 +145,8 @@ export default {
       this.onAction();
     },
     onReset() {
+      this.userConfigRedoHistory = [];
+      this.userConfigHistory = [];
       this.userConfig = {
         global: {},
         local: {}
