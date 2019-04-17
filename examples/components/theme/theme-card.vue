@@ -128,7 +128,7 @@
       cursor: pointer;
     }
     .description {
-      font-size: 14px;
+      font-size: 13px;
       color: #606266;
       margin-top: 10px;
     }
@@ -217,7 +217,7 @@
           </span>
         </span>
         <div class="description" v-if="isOfficial">{{config.description}}</div>
-        <div class="description" v-else>最近修改 {{config.update}}</div>
+        <div class="description" v-else>最近修改 {{formatDate(config.update)}}</div>
       </div>
     </template>
   </section>
@@ -231,6 +231,7 @@ import {
 } from './constant.js';
 import { savePreviewToLocal } from './localstorage';
 import { tintColor } from '../../color.js';
+import dateUtil from 'element-ui/src/utils/date';
 
 export default {
   props: {
@@ -247,6 +248,9 @@ export default {
     };
   },
   methods: {
+    formatDate(timestamp) {
+      return dateUtil.format(new Date(timestamp), 'yyyy-MM-dd HH:mm');
+    },
     uploadClick() {
       this.$refs.input.value = null;
       this.$refs.input.click();
