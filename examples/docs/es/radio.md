@@ -30,15 +30,15 @@ El atributo `disabled` es utilizado para deshabilitar un Radio.
 :::demo Solo necesita agregar el atributo `disabled`.
 ```html
 <template>
-  <el-radio disabled v-model="radio1" label="disabled">Option A</el-radio>
-  <el-radio disabled v-model="radio1" label="selected and disabled">Option B</el-radio>
+  <el-radio disabled v-model="radio" label="disabled">Option A</el-radio>
+  <el-radio disabled v-model="radio" label="selected and disabled">Option B</el-radio>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        radio1: 'selected and disabled'
+        radio: 'selected and disabled'
       };
     }
   }
@@ -53,7 +53,7 @@ Recomendado para seleccionar opciones que se excluyen mutuamente.
 :::demo Combine `el-radio-group` con `el-radio` para mostrar un grupo de Radios. Enlace la variable con `v-model` del elemento `el-radio-group` y asigne el valor del `label` en `el-radio`. Se provee el evento `change` con el valor actual como parámetro.
 
 ```html
-<el-radio-group v-model="radio2">
+<el-radio-group v-model="radio">
   <el-radio :label="3">Option A</el-radio>
   <el-radio :label="6">Option B</el-radio>
   <el-radio :label="9">Option C</el-radio>
@@ -63,7 +63,7 @@ Recomendado para seleccionar opciones que se excluyen mutuamente.
   export default {
     data () {
       return {
-        radio2: 3
+        radio: 3
       };
     }
   }
@@ -79,7 +79,7 @@ Radio con estilo de botón.
 ```html
 <template>
   <div>
-    <el-radio-group v-model="radio3">
+    <el-radio-group v-model="radio1">
       <el-radio-button label="New York"></el-radio-button>
       <el-radio-button label="Washington"></el-radio-button>
       <el-radio-button label="Los Angeles"></el-radio-button>
@@ -87,7 +87,7 @@ Radio con estilo de botón.
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" size="medium">
+    <el-radio-group v-model="radio2" size="medium">
       <el-radio-button label="New York" ></el-radio-button>
       <el-radio-button label="Washington"></el-radio-button>
       <el-radio-button label="Los Angeles"></el-radio-button>
@@ -95,7 +95,7 @@ Radio con estilo de botón.
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio5" size="small">
+    <el-radio-group v-model="radio3" size="small">
       <el-radio-button label="New York"></el-radio-button>
       <el-radio-button label="Washington" disabled ></el-radio-button>
       <el-radio-button label="Los Angeles"></el-radio-button>
@@ -103,7 +103,7 @@ Radio con estilo de botón.
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio6" disabled size="mini">
+    <el-radio-group v-model="radio4" disabled size="mini">
       <el-radio-button label="New York"></el-radio-button>
       <el-radio-button label="Washington"></el-radio-button>
       <el-radio-button label="Los Angeles"></el-radio-button>
@@ -116,10 +116,10 @@ Radio con estilo de botón.
   export default {
     data () {
       return {
+        radio1: 'New York',
+        radio2: 'New York',
         radio3: 'New York',
-        radio4: 'New York',
-        radio5: 'New York',
-        radio6: 'New York'
+        radio4: 'New York'
       };
     }
   }
@@ -133,21 +133,21 @@ Radio con estilo de botón.
 ```html
 <template>
   <div>
-    <el-radio v-model="radio7" label="1" border>Option A</el-radio>
-    <el-radio v-model="radio7" label="2" border>Option B</el-radio>
+    <el-radio v-model="radio1" label="1" border>Option A</el-radio>
+    <el-radio v-model="radio1" label="2" border>Option B</el-radio>
   </div>
   <div style="margin-top: 20px">
-    <el-radio v-model="radio8" label="1" border size="medium">Option A</el-radio>
-    <el-radio v-model="radio8" label="2" border size="medium">Option B</el-radio>
+    <el-radio v-model="radio2" label="1" border size="medium">Option A</el-radio>
+    <el-radio v-model="radio2" label="2" border size="medium">Option B</el-radio>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio9" size="small">
+    <el-radio-group v-model="radio3" size="small">
       <el-radio label="1" border>Option A</el-radio>
       <el-radio label="2" border disabled>Option B</el-radio>
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio10" size="mini" disabled>
+    <el-radio-group v-model="radio4" size="mini" disabled>
       <el-radio label="1" border>Option A</el-radio>
       <el-radio label="2" border>Option B</el-radio>
     </el-radio-group>
@@ -158,10 +158,10 @@ Radio con estilo de botón.
   export default {
     data () {
       return {
-        radio7: '1',
-        radio8: '1',
-        radio9: '1',
-        radio10: '1'
+        radio1: '1',
+        radio2: '1',
+        radio3: '1',
+        radio4: '1'
       };
     }
   }

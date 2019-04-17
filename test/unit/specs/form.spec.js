@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 const DELAY = 50;
 
@@ -42,6 +42,43 @@ describe('Form', () => {
     expect(vm.$el.querySelector('.el-form-item__label').style.width).to.equal('80px');
     expect(vm.$el.querySelector('.el-form-item__content').style.marginLeft).to.equal('80px');
     done();
+  });
+  it('auto label width', async() => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" label-width="auto">
+          <el-form-item label="活动名称">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="活动备注信息" v-if="display">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          display: true,
+          form: {
+            name: '',
+            intro: ''
+          }
+        };
+      }
+    }, true);
+
+    await waitImmediate();
+
+    const formItems = vm.$el.querySelectorAll('.el-form-item__content');
+    const marginLeft = parseInt(formItems[0].style.marginLeft, 10);
+    const marginLeft1 = parseInt(formItems[1].style.marginLeft, 10);
+    expect(marginLeft === marginLeft1).to.be.true;
+
+    vm.display = false;
+    await waitImmediate();
+
+    const formItem = vm.$el.querySelector('.el-form-item__content');
+    const newMarginLeft = parseInt(formItem.style.marginLeft, 10);
+    expect(newMarginLeft < marginLeft).to.be.true;
   });
   it('inline form', done => {
     vm = createVue({

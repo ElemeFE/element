@@ -43,13 +43,13 @@
 
 ```html
 <template>
-  <el-button type="text" @click="open2">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open2() {
+      open() {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -80,13 +80,13 @@
 
 ```html
 <template>
-  <el-button type="text" @click="open3">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open3() {
+      open() {
         this.$prompt('请输入邮箱', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -118,13 +118,13 @@
 
 ```html
 <template>
-  <el-button type="text" @click="open4">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open4() {
+      open() {
         const h = this.$createElement;
         this.$msgbox({
           title: '消息',
@@ -174,13 +174,13 @@
 
 ```html
 <template>
-  <el-button type="text" @click="open5">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open5() {
+      open() {
         this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
           dangerouslyUseHTMLString: true
         });
@@ -203,13 +203,13 @@
 
 ```html
 <template>
-  <el-button type="text" @click="open6">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open6() {
+      open() {
         this.$confirm('检测到未保存的内容，是否在离开页面前保存修改？', '确认信息', {
           distinguishCancelAndClose: true,
           confirmButtonText: '保存',
@@ -243,13 +243,13 @@
 
 ```html
 <template>
-  <el-button type="text" @click="open7">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open7() {
+      open() {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',

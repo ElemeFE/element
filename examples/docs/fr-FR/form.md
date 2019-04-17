@@ -289,19 +289,19 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 
 :::demo Here we use `status-icon` to reflect validation result as an icon.
 ```html
-<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
-    <el-input v-model.number="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
-    <el-button @click="resetForm('ruleForm2')">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+    <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -327,8 +327,8 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
+          if (this.ruleForm.checkPass !== '') {
+            this.$refs.ruleForm.validateField('checkPass');
           }
           callback();
         }
@@ -336,19 +336,19 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
-        } else if (value !== this.ruleForm2.pass) {
+        } else if (value !== this.ruleForm.pass) {
           callback(new Error('Two inputs don\'t match!'));
         } else {
           callback();
         }
       };
       return {
-        ruleForm2: {
+        ruleForm: {
           pass: '',
           checkPass: '',
           age: ''
         },
-        rules2: {
+        rules: {
           pass: [
             { validator: validatePass, trigger: 'blur' }
           ],
@@ -382,7 +382,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 :::
 
 :::tip
-See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
 ### Ajouter ou supprimer des champs dynamiquement
@@ -592,7 +592,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | rules | Règles de validation du formulaire. | object | — | — |
 | inline | Si le formulaire est horizontal. | boolean | — | false |
 | label-position | Position des labels. Si 'left' ou 'right', `label-width` est aussi requis. | string | left / right / top | right |
-| label-width | Largeur des labels, tout les enfants directs hériteront de cette valeur. | string | — | — |
+| label-width | Largeur des labels, tout les enfants directs hériteront de cette valeur. Width `auto` is supported. | string | — | — |
 | label-suffix | Suffixe de labels. | string | — | — |
 | hide-required-asterisk | Si les champs obligatoires doivent avoir une astérisque rouge (étoile) à coté de leurs labels. | boolean | — | false |
 | show-message  | Si le message d'erreur doit apparaître. | boolean | — | true |
@@ -623,7 +623,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | ---- | ----| ---- | ---- | ---- |
 | prop | Une des clés de `model`. Utilisés par les méthodes validate et resetFields. Requis. | string | Clés du model passé à `form`. |
 | label | Le label. | string | — | — |
-| label-width | Largeur du label, e.g. '50px'. | string | — | — |
+| label-width | Largeur du label, e.g. '50px'. Width `auto` is supported. | string | — | — |
 | required | Si le champ est requis ou non. Si omis, sera déterminé par les règles de validation. | boolean |  — | false |
 | rules | Règles de validation du formulaire. | object | — | — |
 | error | Message d'erreur du champ. Si il est modifié, le champ l'affichera immédiatement. | string | — | — |

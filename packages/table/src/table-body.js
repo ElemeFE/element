@@ -35,7 +35,7 @@ export default {
         prev.push(item);
         const rowKey = this.store.table.getRowKey(item);
         const parent = this.store.states.treeData[rowKey];
-        if (parent && parent.children) {
+        if (parent && parent.children && parent.hasChildren) {
           const tmp = [];
           const traverse = (children) => {
             if (!children) return;
@@ -127,7 +127,7 @@ export default {
                   })
                 }
               </tr>);
-              if (this.store.isRowExpanded(row)) {
+              if (this.hasExpandColumn && this.store.isRowExpanded(row)) {
                 return [
                   tr,
                   <tr>
@@ -183,6 +183,10 @@ export default {
 
     columns() {
       return this.store.states.columns;
+    },
+
+    hasExpandColumn() {
+      return this.columns.some(({ type }) => type === 'expand');
     },
 
     firstDefaultColumnIndex() {

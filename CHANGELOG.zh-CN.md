@@ -1,5 +1,43 @@
 ## 更新日志
 
+### 2.7.2
+
+*2019-04-03*
+
+#### 修复
+
+- Form
+  - 修复 `label-width` 为 `auto` 的样式 (#14955 by @ziyoung)
+  
+#### 优化
+- Docs
+  - 修复文档内图片链接错误 (#14957 by @iamkun)
+- Chore
+  - 修复发布时 mkdir 异常 (#14952 by @iamkun)
+
+### 2.7.1
+
+*2019-04-03*
+
+#### 修复
+
+- Select
+  - 清空时设置 value 为 null (#14322 by @aaronfulkerson)
+- Input
+  - 当类型改变时更新 DOM (#14889 by @wacky6)
+- Table
+  - 修复当有展开列时 `defaultExpandAll` 的行为 (#14935 by @ziyoung)
+- Dialog
+  - 可以设置背景色 (#14939 by @ziyoung)
+- Form
+  - `label-width` 支持自动宽度 (#14944 by @ziyoung)
+  
+#### 优化
+- Docs
+  - 更新西班牙语文档 (#14913 by @Gonzalo2310)
+  - 新增组件自动生成法语文档 (#14924 by @ziyoung)
+  - 更新 Tabs 文档 (#14938 by @ziyoung)
+
 ### 2.7.0
 
 *2019-03-28*
@@ -167,6 +205,10 @@
   - 修复 DatetimePicker 文档问题 (by @iamkun in #14290)
   - 修复 DatePicker 文档拼写问题 (by @helmut in #14481)
   - 修复分页组件文档样式问题 (by @liuchuzhang in #14451)
+
+#### 非兼容性更新
+- Table
+  - 修复 row 事件的参数顺序 (by @jikkai in #12086)
 
 ### 2.5.4
 

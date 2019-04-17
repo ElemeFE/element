@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -140,7 +140,7 @@
     "vue-template-compiler": "^2.5.16",
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^4.14.0",
-    "webpack-cli": "^3.0.8",
+    "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.1.11",
     "webpack-node-externals": "^1.7.2"
   }

@@ -45,13 +45,13 @@ Confirm est utilisé pour demander une confirmation à l'utilisateur.
 
 ```html
 <template>
-  <el-button type="text" @click="open2">Cliquez pour ouvrir la MessageBox</el-button>
+  <el-button type="text" @click="open">Cliquez pour ouvrir la MessageBox</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open2() {
+      open() {
         this.$confirm('Ceci effacera le fichier. Continuer?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Annuler',
@@ -83,13 +83,13 @@ Prompt est utilisé lorsqu'un utilisateur.
 
 ```html
 <template>
-  <el-button type="text" @click="open3">Cliquez pour ouvrir la MessageBox</el-button>
+  <el-button type="text" @click="open">Cliquez pour ouvrir la MessageBox</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open3() {
+      open() {
         this.$prompt('Entrez votre e-mail', 'Astuce', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Annuler',
@@ -121,13 +121,13 @@ Il est possible d'afficher du contenu un peu plus varié et personnalisé.
 
 ```html
 <template>
-  <el-button type="text" @click="open4">Cliquez pour ouvrir la MessageBox</el-button>
+  <el-button type="text" @click="open">Cliquez pour ouvrir la MessageBox</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open4() {
+      open() {
         const h = this.$createElement;
         this.$msgbox({
           title: 'Message',
@@ -177,13 +177,13 @@ Le contenu de MessageBox peut être `VNode`, Vous permettant de passer des compo
 
 ```html
 <template>
-  <el-button type="text" @click="open5">Cliquez pour ouvrir la MessageBox</el-button>
+  <el-button type="text" @click="open">Cliquez pour ouvrir la MessageBox</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open5() {
+      open() {
         this.$alert('<strong>Ceci est du <i>HTML</i></strong>', 'HTML', {
           dangerouslyUseHTMLString: true
         });
@@ -206,13 +206,13 @@ Dans certains cas, les boutons fermer et annuler peuvent avoir des sens différe
 
 ```html
 <template>
-  <el-button type="text" @click="open6">Cliquez pour ouvrir la MessageBox</el-button>
+  <el-button type="text" @click="open">Cliquez pour ouvrir la MessageBox</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open6() {
+      open() {
         this.$confirm('Vous avez du travail non-enregistré, enregistrer et quitter?', 'Confirm', {
           distinguishCancelAndClose: true,
           confirmButtonText: 'Enregistrer',
@@ -247,13 +247,13 @@ le contenu de MessageBox peut être centré.
 
 ```html
 <template>
-  <el-button type="text" @click="open7">Cliquez pour ouvrir la MessageBox</el-button>
+  <el-button type="text" @click="open">Cliquez pour ouvrir la MessageBox</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open7() {
+      open() {
         this.$confirm('Ceci effacera le fichier, continuer?' , 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Annuler',

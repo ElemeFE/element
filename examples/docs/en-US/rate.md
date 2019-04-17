@@ -40,7 +40,7 @@ Using text to indicate rating score
 
 ```html
 <el-rate
-  v-model="value3"
+  v-model="value"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
   show-text>
 </el-rate>
@@ -49,7 +49,7 @@ Using text to indicate rating score
   export default {
     data() {
       return {
-        value3: null
+        value: null
       }
     }
   }
@@ -65,7 +65,7 @@ You can use different icons to distinguish different rate components.
 
 ```html
 <el-rate
-  v-model="value4"
+  v-model="value"
   :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
@@ -75,7 +75,7 @@ You can use different icons to distinguish different rate components.
   export default {
     data() {
       return {
-        value4: null
+        value: null
       }
     }
   }
@@ -91,7 +91,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
 
 ```html
 <el-rate
-  v-model="value5"
+  v-model="value"
   disabled
   show-score
   text-color="#ff9900"
@@ -102,7 +102,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
   export default {
     data() {
       return {
-        value5: 3.7
+        value: 3.7
       }
     }
   }

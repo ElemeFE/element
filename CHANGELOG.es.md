@@ -1,5 +1,43 @@
 ## Changelog
 
+### 2.7.2
+
+*2019-04-03*
+
+#### Bug fixes
+
+- Form
+  - Fix auto `label-width` style (#14955 by @ziyoung)
+  
+#### Optimization
+- Docs
+  - Fix doc img link error (#14957 by @iamkun)
+- Chore
+  - Fix deploy mkdir error (#14952 by @iamkun)
+
+### 2.7.1
+
+*2019-04-03*
+
+#### Bug fixes
+
+- Select
+  - Set value to null when cleared (#14322 by @aaronfulkerson)
+- Input
+  - Update DOM dependent values on type change (#14889 by @wacky6)
+- Table
+  - Make `defaultExpandAll` works when expanded column exists (#14935 by @ziyoung)
+- Dialog
+  - Background color can be configured (#14939 by @ziyoung)
+- Form
+  - `label-width` supports auto width (#14944 by @ziyoung)
+  
+#### Optimization
+- Docs
+  - Update Spanish docs (#14913 by @Gonzalo2310)
+  - Add French doc for new component (#14924 by @ziyoung)
+  - Optimize Tabs docs (#14938 by @ziyoung)
+
 ### 2.7.0
 
 *2019-03-28*
@@ -171,6 +209,9 @@
   - Problema de ortografía en la documentación de datepicker (by @helmut in #14481)
   - Arreglado estilo doc de paginación (by @liuchuzhang in #14451)
 
+#### Breaking changes
+- Table
+  - Cambiar el orden de los parámetros enviados en los eventos de las filas (by @jikkai in #12086)
 
 ### 2.5.4
 

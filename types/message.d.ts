@@ -56,15 +56,27 @@ export interface ElMessage {
 
   /** Show a success message */
   success (text: string): ElMessageComponent
+  
+  /** Show a success message with options */
+  success (options: ElMessageOptions): ElMessageComponent
 
   /** Show a warning message */
   warning (text: string): ElMessageComponent
+  
+  /** Show a warning message with options */
+  warning (options: ElMessageOptions): ElMessageComponent
 
   /** Show an info message */
   info (text: string): ElMessageComponent
+  
+  /** Show an info message with options */
+  info (options: ElMessageOptions): ElMessageComponent
 
   /** Show an error message */
   error (text: string): ElMessageComponent
+  
+  /** Show an error message with options */
+  error (options: ElMessageOptions): ElMessageComponent
 }
 
 declare module 'vue/types/vue' {

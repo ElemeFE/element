@@ -33,8 +33,7 @@ const webpackConfig = {
   devServer: {
     host: '0.0.0.0',
     port: 8085,
-    publicPath: '/',
-    noInfo: true
+    publicPath: '/'
   },
   performance: {
     hints: false
@@ -124,7 +123,8 @@ const webpackConfig = {
   ],
   optimization: {
     minimizer: []
-  }
+  },
+  devtool: '#eval-source-map'
 };
 
 if (isProd) {
@@ -146,6 +146,7 @@ if (isProd) {
     }),
     new OptimizeCSSAssetsPlugin({})
   );
+  webpackConfig.devtool = false;
 }
 
 module.exports = webpackConfig;

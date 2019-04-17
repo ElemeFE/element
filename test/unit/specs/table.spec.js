@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 
 const DELAY = 10;
 const testDataArr = [];
@@ -949,7 +949,7 @@ describe('Table', () => {
                 <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
-            </el-table-column>
+              </el-table-column>
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
               <el-table-column prop="runtime" label="runtime" />
@@ -1956,7 +1956,7 @@ describe('Table', () => {
     }, DELAY);
   });
 
-  it('load substree row data', (done) => {
+  it('load substree row data', async() => {
     const vm = createVue({
       template: `
         <el-table :data="testData" row-key="release" lazy :load="load">
@@ -1968,6 +1968,11 @@ describe('Table', () => {
       `,
       data() {
         const testData = getTestData();
+        testData[testData.length - 1].children = [
+          {
+            name: 'A Bug\'s Life copy 1', release: '2008-1-25-1', director: 'John Lasseter', runtime: 95
+          }
+        ];
         testData[1].hasChildren = true;
         return {
           testData: testData
@@ -1986,14 +1991,15 @@ describe('Table', () => {
         }
       }
     }, true);
-    setTimeout(() => {
-      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
-      expandIcon.click();
-      setTimeout(() => {
-        expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
-        expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(7);
-        done();
-      }, DELAY);
-    }, DELAY);
+
+    await waitImmediate();
+
+    const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+    expandIcon.click();
+
+    await waitImmediate();
+
+    expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
+    expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(8);
   });
 });
