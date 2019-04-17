@@ -17,6 +17,8 @@
       "placeholder": "占位符",
       "dropdown": "下拉菜单",
       "checked": "选中状态",
+      "active": "激活状态",
+      "hover": "鼠标悬停状态",
       "max": "最大",
       "medium": "中号",
       "small": "小号",
@@ -26,10 +28,12 @@
       "selected": "选中",
       "height": "高度",
       "size": "大小",
+      "header": "头部",
       "group": "分组",
       "radius": "圆角",
       "width": "宽度",
-      "color": "颜色"
+      "color": "颜色",
+      "inrange": "日期范围"
     },
     "action": {
       "theme-editor": "主题编辑器",
@@ -90,7 +94,8 @@
       "font-line-height-primary": "主要文字行高",
       "font-line-height-secondary": "次要文字行高",
       "tooltip-fill": "Dark 主题背景色",
-      "tooltip-color": "Light 主题背景色"
+      "tooltip-color": "Light 主题背景色",
+      "datepicker-off-font-color": "不是当前月份的日期文字颜色"
     }
   },
   {
