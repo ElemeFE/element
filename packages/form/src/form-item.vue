@@ -210,7 +210,8 @@
         model[this.prop] = this.fieldValue;
 
         validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
-          this.validateState = !errors ? 'success' : 'error';
+
+          this.validateState = !errors ? '' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 
           callback(this.validateMessage, invalidFields);
