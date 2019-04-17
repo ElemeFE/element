@@ -109,6 +109,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
+  import { countSymbols } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElInput',
@@ -242,11 +243,15 @@
         return this.$attrs.maxlength;
       },
       textLength() {
+        let textStr;
+
         if (typeof this.value === 'number') {
-          return String(this.value).length;
+          textStr = String(this.value);
+        } else {
+          textStr = this.value || '';
         }
 
-        return (this.value || '').length;
+        return countSymbols(textStr);
       },
       inputExceed() {
         // show exceed style if length of initial value greater then maxlength
