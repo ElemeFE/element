@@ -1,5 +1,5 @@
 <style lang="scss">
-.page-theme-preview {
+.page-container.page-theme-preview {
   padding-top: 25px;
   .display {
     width: 75%;
