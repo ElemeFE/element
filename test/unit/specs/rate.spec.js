@@ -181,7 +181,7 @@ describe('Rate', () => {
 
     const fourthStar = vm2.$el.querySelectorAll('.el-rate__item')[3];
     const halfStar = fourthStar.querySelector('.el-rate__decimal');
-    expect(halfStar.style.width).to.equal('0%');
+    expect(halfStar.style.width).to.equal('40%');
   });
 
   it('allow half', () => {

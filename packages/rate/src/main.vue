@@ -148,9 +148,8 @@
       decimalStyle() {
         let width = '';
         if (this.rateDisabled) {
-          width = `${ this.valueDecimal < 50 ? 0 : 50 }%`;
-        }
-        if (this.allowHalf) {
+          width = `${ this.valueDecimal }%`;
+        } else if (this.allowHalf) {
           width = '50%';
         }
         return {
