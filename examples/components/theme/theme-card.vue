@@ -72,8 +72,8 @@
       }
       .action-item {
         cursor: pointer;
-        position: relative;
         display: inline-block;
+        height: 100%;
         width: 30%;
         color: #eee;
         &:hover {
@@ -82,26 +82,34 @@
             border-color: #fff;
           }
         }
-        i {
+        .icon {
+          height: 50%;
           font-size: 22px;
-          display: block;
           text-align: center;
-          margin-top: 5px;
+          display: flex;
+          justify-content:center;
+          align-items:center;
+          i {
+            position: relative;
+          }
         }
         .circle {
           position: absolute;
-          left: -5px;
-          top: -5px;
-          width: 40px;
-          height: 40px;
+          left: -12px;
+          top: -12px;
+          width: 44px;
+          height: 44px;
           border-radius: 100%;
           border: 1px solid #eee;
         }
         .name {
-          display: block;
           font-size: 12px;
-          margin-top: 15px;
+          height: 50%;
           text-align: center;
+          display: flex;
+          justify-content:center;
+          align-items:center;
+          margin-top: 6px;
         }
       }
       .action-item-right {
@@ -182,9 +190,14 @@
               :key="index"
               @click="iconClick(item.action)"
             >
-              <span class="circle"></span>
-              <i :class="item.icon"></i>
-              <span class="name">{{item.name}}</span>
+              <div class="icon">
+                <i :class="item.icon">
+                  <span class="circle"></span>
+                </i>
+              </div>
+              <div class="name">
+                <span>{{item.name}}</span>
+              </div>
             </div>
           </div>
         </div>
