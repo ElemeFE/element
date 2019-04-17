@@ -37,7 +37,7 @@
     },
     "category": {
       "BrandColor": "品牌颜色",
-      "SecondaryColor": "辅助颜色",
+      "FunctionalColor": "辅助颜色",
       "FontColor": "文字颜色",
       "BorderColor": "边框颜色",
       "BackgroundColor": "背景颜色",
@@ -144,7 +144,7 @@
     },
     "category": {
       "BrandColor": "Brand Color",
-      "SecondaryColor": "Secondary Color",
+      "FunctionalColor": "Functional Color",
       "FontColor": "Font Color",
       "BorderColor": "Border Color",
       "BackgroundColor": "Background Color",
@@ -174,7 +174,7 @@
     },
     "category": {
       "BrandColor": "Brand Color",
-      "SecondaryColor": "Secondary Color",
+      "FunctionalColor": "Functional Color",
       "FontColor": "Font Color",
       "BorderColor": "Border Color",
       "BackgroundColor": "Background Color",
@@ -204,7 +204,7 @@
     },
     "category": {
       "BrandColor": "Brand Color",
-      "SecondaryColor": "Secondary Color",
+      "FunctionalColor": "Functional Color",
       "FontColor": "Font Color",
       "BorderColor": "Border Color",
       "BackgroundColor": "Background Color",

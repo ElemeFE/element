@@ -129,11 +129,21 @@
       </el-col>
       <el-col :span="8">
         <div class="title">Example body text</div>
-        <p :style="{ fontSize: font_size_base }">With MySpace becoming more popular every day, there is the constant need to be different. There are millions of users, and there will be many who might even use the same layouts. If MySpace layouts are chosen well, then you can enhance your profile a great deal. This will help you get more contacts as well. But because of the demand, there will be the need to find unique layouts.</p>
+        <p :style="{ 
+          fontSize: font_size_base,
+          fontWeight: font_weight_primary, 
+          lineHeight: font_line_height_primary
+        }" >
+          With MySpace becoming more popular every day, there is the constant need to be different. There are millions of users, and there will be many who might even use the same layouts. If MySpace layouts are chosen well, then you can enhance your profile a great deal. This will help you get more contacts as well. But because of the demand, there will be the need to find unique layouts.</p>
       </el-col>
       <el-col :span="8">
         <div class="title">Example small text</div>
-        <p :style="{ fontSize: font_size_small }" >Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch with the central office via their notebooks. At home, we rely on our desktops and notebooks to do our shopping, to entertain us, and to keep us abreast of world events. We may not see our email servers, but we count on them to deliver our email whenever and wherever we want it. Computer hardware weaves itself through the fabric of our lives.</p>
+        <p :style="{ 
+          fontSize: font_size_small,
+          fontWeight: font_weight_secondary, 
+          lineHeight: font_line_height_secondary
+        }" >
+          Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch with the central office via their notebooks. At home, we rely on our desktops and notebooks to do our shopping, to entertain us, and to keep us abreast of world events. We may not see our email servers, but we count on them to deliver our email whenever and wherever we want it. Computer hardware weaves itself through the fabric of our lives.</p>
       </el-col>
     </el-row>
   </div>
@@ -164,7 +174,11 @@ const original = {
   'font_size_medium': '16px',
   'font_size_base': '14px',
   'font_size_small': '13px',
-  'font_size_extra_small': '12px'
+  'font_size_extra_small': '12px',
+  'font_weight_primary': 500,
+  'font_weight_secondary': 100,
+  'font_line_height_primary': '24px',
+  'font_line_height_secondary': '16px'
 };
 
 export default {
@@ -226,7 +240,11 @@ export default {
       'font_size_medium': '',
       'font_size_base': '',
       'font_size_small': '',
-      'font_size_extra_small': ''
+      'font_size_extra_small': '',
+      'font_weight_primary': 0,
+      'font_weight_secondary': 0,
+      'font_line_height_primary': '',
+      'font_line_height_secondary': ''
     };
   }
 };
