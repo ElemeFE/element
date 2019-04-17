@@ -33,6 +33,16 @@
       "radius": "圆角",
       "width": "宽度",
       "color": "颜色",
+      "title": "标题",
+      "content": "内容",
+      "success": "成功状态",
+      "danger": "危险状态",
+      "warning": "警告状态",
+      "info": "提示状态",
+      "customed": "客制化的",
+      "disabled": "禁用状态",
+      "default": "默认",
+      "primary": "主要",
       "inrange": "日期范围"
     },
     "action": {
@@ -95,6 +105,7 @@
       "font-line-height-secondary": "次要文字行高",
       "tooltip-fill": "Dark 主题背景色",
       "tooltip-color": "Light 主题背景色",
+      "slider-height": "滑块轨道高度",
       "datepicker-off-font-color": "不是当前月份的日期文字颜色"
     }
   },
