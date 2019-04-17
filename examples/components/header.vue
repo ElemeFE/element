@@ -386,7 +386,7 @@
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
   import themeLoader from './theme/loader';
-  import { getVars } from './theme-configurator/utils/api.js';
+  import { getVars } from './theme/loader/api.js';
   import bus from '../bus';
 
   const { version } = Element;

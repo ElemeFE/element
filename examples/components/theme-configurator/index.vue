@@ -30,7 +30,7 @@
 
 <script>
 import bus from '../../bus.js';
-import { getVars } from './utils/api.js';
+import { getVars } from '../theme/loader/api.js';
 import mainPanel from './main';
 import actionPanel from './action';
 import {

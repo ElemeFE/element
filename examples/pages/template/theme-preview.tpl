@@ -168,7 +168,7 @@ export default {
     window.removeEventListener('scroll', this.throttledHandleScroll);
   },
   mounted() {
-    this.editorHeight = window.innerHeight - 40;
+    this.editorHeight = window.innerHeight - 40 - 5;
     window.addEventListener('scroll', this.throttledHandleScroll);
     this.userTheme = loadUserThemeFromLocal();
     const previewConfig = loadPreviewFromLocal();
