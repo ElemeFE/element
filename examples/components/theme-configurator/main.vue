@@ -6,7 +6,7 @@
         v-if="showCategory(config.category, key + 1)"
         class="category-name"
       >
-        {{getCategoryDisplayName(config.category)}}
+        {{config.category}}
       </span>
       <component 
         :is="editorComponent(config.type)"
@@ -42,7 +42,7 @@ import fontLineHeightEditor from './editor/fontLineHeight';
 import borderRadiusEditor from './editor/borderRadius';
 import boxShadowEditor from './editor/boxShadow';
 import simpleTextEditor from './editor/simpleText';
-import { filterConfigType, getCategoryDisplayName } from './utils/utils.js';
+import { filterConfigType } from './utils/utils.js';
 
 export default {
   components: {
@@ -80,9 +80,6 @@ export default {
     }
   },
   methods: {
-    getCategoryDisplayName(key) {
-      return getCategoryDisplayName(key);
-    },
     editorComponent(type) {
       switch (type) {
         case 'color':

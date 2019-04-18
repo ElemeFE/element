@@ -1,16 +1,20 @@
 <template>
   <div class="configurator-action">
       <div class="action-group">
-        <i 
-          @click="onUndo"
-          class="el-icon-arrow-left"
-          :class="{ 'active': userConfigHistory.length > 0 }"
-        ></i>
-        <i 
-          @click="onRedo"
-          class="el-icon-arrow-right"
-          :class="{ 'active': userConfigRedoHistory.length > 0 }"
-        ></i>
+        <el-tooltip content="Undo">
+          <i 
+            @click="onUndo"
+            class="el-icon-arrow-left"
+            :class="{ 'active': userConfigHistory.length > 0 }"
+          ></i>
+        </el-tooltip>
+        <el-tooltip content="Redo">
+          <i 
+            @click="onRedo"
+            class="el-icon-arrow-right"
+            :class="{ 'active': userConfigRedoHistory.length > 0 }"
+          ></i>
+        </el-tooltip>
         <div class="button-group">
           <el-button 
             class="reset"

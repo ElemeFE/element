@@ -55,7 +55,7 @@ export const getStyleDisplayName = (config, componentName) => {
   if (config.name) {
     return getVariableDisplayName(config.key.replace('$--', ''));
   }
-  let displayName = config.key.replace(`$--${componentName}-`, '').replace();
+  let displayName = config.key.replace(`$--${componentName}-`, '');
   Object.keys(displayNameMap).forEach((name) => {
     displayName = displayName.replace(name, displayNameMap[name]);
   });
@@ -65,8 +65,4 @@ export const getStyleDisplayName = (config, componentName) => {
 
 export const getActionDisplayName = (key) => {
   return getNameFromI18N('action')[key] || key;
-};
-
-export const getCategoryDisplayName = (key) => {
-  return getNameFromI18N('category')[key] || key;
 };
