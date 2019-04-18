@@ -29,6 +29,7 @@
       v-show="showPopper">
       <ul class="el-table-filter__list">
         <li class="el-table-filter__list-item"
+            v-if="!hideFilterFirstItem"
             :class="{ 'is-active': filterValue === undefined || filterValue === null }"
             @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
         <li class="el-table-filter__list-item"
@@ -66,6 +67,10 @@
     },
 
     props: {
+      hideFilterFirstItem: {
+        type: Boolean,
+        default: false
+      },
       placement: {
         type: String,
         default: 'bottom-end'
