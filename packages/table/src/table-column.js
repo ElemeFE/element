@@ -175,6 +175,7 @@ export default {
     filterMethod: Function,
     filteredValue: Array,
     filters: Array,
+    hideFilterFirstItem: Boolean,
     filterPlacement: String,
     filterMultiple: {
       type: Boolean,
@@ -274,6 +275,7 @@ export default {
       filterMultiple: this.filterMultiple,
       filterOpened: false,
       filteredValue: this.filteredValue || [],
+      hideFilterFirstItem: this.hideFilterFirstItem,
       filterPlacement: this.filterPlacement || '',
       index: this.index,
       sortOrders: this.sortOrders
