@@ -73,6 +73,8 @@
         if (tab.disabled) return;
         this.setCurrentName(tabName);
         this.$emit('tab-click', tab, event);
+        // https://github.com/ElemeFE/element/issues/15138
+        this.$refs.nav.$forceUpdate();
       },
       handleTabRemove(pane, ev) {
         if (pane.disabled) return;
