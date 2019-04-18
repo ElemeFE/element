@@ -15,17 +15,22 @@
     background: #f5f7fa;
     height: 100%;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
     .upload-action {
       width: 40%;
       margin: 0 auto;
-      padding-top: 25%;
       text-align: center;
       color: #606266;
-      font-size: 30px;
+      img {
+        display: block;
+        margin: 0 auto;
+      }
       span {
         display: block;
         font-size: 14px;
-        margin-top: 5px;
+        margin-top: 8px;
       }
     }
   }
@@ -132,6 +137,13 @@
       margin-top: 10px;
     }
   }
+  &.is-upload {
+    box-shadow: none;
+    border: 1px dashed #DCDFE6;
+  }
+  &.is-upload:hover {
+    box-shadow: none;
+  } 
 
   &:hover {
     box-shadow: 0 0 10px 0 #999;
@@ -143,11 +155,11 @@
 </style>
 
 <template>
-  <section class="theme-card-item" :class="{'is-hidden': !config || !config.name}">
-    <template v-if="type === 'upload'">
+  <section class="theme-card-item" :class="{'is-hidden': !config || !config.name, 'is-upload': isUpload}">
+    <template v-if="isUpload">
       <div class="upload" @click="uploadClick">
         <div class="upload-action">
-          <i class="el-icon-upload2"></i>
+          <img src="../../assets/images/icon-upload.svg"/>
           <span>点击上传主题</span>
         </div>
       </div>
@@ -316,6 +328,9 @@ export default {
     }
   },
   computed: {
+    isUpload() {
+      return this.type === 'upload';
+    },
     theme() {
       if (this.config.theme) {
         return JSON.parse(this.config.theme);
