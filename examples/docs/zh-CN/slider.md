@@ -198,7 +198,7 @@
             style: {
               color: '#1989FA'
             },
-            label: <strong>50°C</strong>
+            label: this.$createElement('strong', '50%')
           }
         }
       }

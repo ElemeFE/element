@@ -3,22 +3,16 @@ export default {
 
   props: {
     mark: {
-      type: String | Object
+      type: [String, Object]
     }
   },
-  render(h) {
-    if (typeof this.mark === 'string') {
-      return h('span', { class: 'el-slider__marks-text' }, [ this.mark ]);
-    }
+  render() {
+    let label = typeof this.mark === 'string' ? this.mark : this.mark.label;
 
-    if (typeof this.mark === 'object') {
-      return h('div',
-        {
-          class: 'el-slider__marks-text',
-          style: this.mark.style
-        },
-        [ this.mark.label ]
-      );
-    }
+    return (
+      <div class="el-slider__marks-text" style={ this.mark.style || {} }>
+        { label }
+      </div>
+    );
   }
 };

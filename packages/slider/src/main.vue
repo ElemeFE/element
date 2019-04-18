@@ -49,18 +49,26 @@
         class="el-slider__stop"
         v-for="(item, key) in stops"
         :key="key"
-        :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
+        :style="getStopStyle(item)"
         v-if="showStops">
       </div>
-      <div class="el-slider__marks">
-        <div v-for="(item, key) in markList"
-          class="el-slider__stop"
-          :key="key"
-          :style="vertical ? { 'bottom': item.position + '%' } : { 'left': item.position + '%' }">
-          <slider-marker :mark="item.mark">
+      <template v-if="markList.length > 0">
+        <div>
+          <div
+            v-for="(item, key) in markList"
+            :style="getStopStyle(item.position)"
+            class="el-slider__stop el-slider__marks-stop"
+            :key="key">
+          </div>
+        </div>
+        <div class="el-slider__marks">
+          <slider-marker
+            :mark="item.mark" v-for="(item, key) in markList"
+            :key="key"
+            :style="getStopStyle(item.position)">
           </slider-marker>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -143,9 +151,7 @@
         type: String
       },
       tooltipClass: String,
-      marks: {
-        type: Object
-      }
+      marks: Object
     },
 
     components: {
@@ -289,6 +295,10 @@
         this.$nextTick(() => {
           this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
         });
+      },
+
+      getStopStyle(position) {
+        return this.vertical ? { 'bottom': position + '%' } : { 'left': position + '%' };
       }
     },
 

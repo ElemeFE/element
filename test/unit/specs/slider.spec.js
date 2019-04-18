@@ -459,7 +459,7 @@ describe('Slider', () => {
       }, 10);
     });
 
-    it('marks', done => {
+    it('marks', async() => {
       vm = createVue({
         template: `
         <div>
@@ -490,11 +490,12 @@ describe('Slider', () => {
           };
         }
       }, true);
-      setTimeout(() => {
-        const stops = vm.$el.querySelectorAll('.el-slider__marks .el-slider__stop');
-        expect(stops.length).to.equal(2);
-        done();
-      }, 10);
+
+      waitImmediate();
+      const stops = vm.$el.querySelectorAll('.el-slider__marks-stop.el-slider__stop');
+      const marks = vm.$el.querySelectorAll('.el-slider__marks .el-slider__marks-text');
+      expect(marks.length).to.equal(2);
+      expect(stops.length).to.equal(2);
     });
   });
 });
