@@ -105,7 +105,7 @@
           display: flex;
           justify-content:center;
           align-items:center;
-          margin-top: 2px;
+          margin-top: 4px;
         }
       }
       .action-item-right {

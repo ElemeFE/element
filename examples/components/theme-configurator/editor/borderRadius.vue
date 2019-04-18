@@ -12,6 +12,7 @@
         @change="onChange"
       ></theme-input>
       <el-select 
+        size="medium"
         v-if="!isGlobal"
         v-model="value" 
         class="select"

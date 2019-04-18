@@ -8,6 +8,7 @@
     <div class="config-content">
       <div class="content-80">
         <el-input
+          size="medium"
           :value=displayValue
           readonly
           slot="reference"
@@ -16,6 +17,7 @@
       </div>
       <div class="content-20">
         <color-picker 
+          size="medium"
           ref="colorPicker"
           class="colorPicker"
           v-model="pickerColor" 

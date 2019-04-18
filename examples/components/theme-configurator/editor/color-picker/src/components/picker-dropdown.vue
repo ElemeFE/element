@@ -29,6 +29,7 @@
         <el-button
           plain
           size="mini"
+          type="primary"
           class="el-color-dropdown__btn"
           @click="confirmValue">
           {{ t('el.colorpicker.confirm') }}

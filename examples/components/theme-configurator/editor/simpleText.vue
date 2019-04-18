@@ -8,6 +8,7 @@
     <div class="config-content">
       <theme-input 
         :val="value"
+        size="medium"
         @change="onChange"
       ></theme-input>
     </div>

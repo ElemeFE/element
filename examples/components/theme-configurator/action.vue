@@ -2,18 +2,18 @@
   <div class="configurator-action">
       <div class="action-group">
         <el-tooltip content="Undo">
-          <i 
+          <img 
+            src="../../assets/images/icon-undo.svg"
             @click="onUndo"
-            class="el-icon-arrow-left"
             :class="{ 'active': userConfigHistory.length > 0 }"
-          ></i>
+          />
         </el-tooltip>
         <el-tooltip content="Redo">
-          <i 
+          <img 
+            src="../../assets/images/icon-redo.svg"
             @click="onRedo"
-            class="el-icon-arrow-right"
             :class="{ 'active': userConfigRedoHistory.length > 0 }"
-          ></i>
+          />
         </el-tooltip>
         <div class="button-group">
           <el-button 
@@ -54,21 +54,24 @@
 .configurator-action {
   padding: 10px 10px 0;
   .action-group {
-    padding: 5px 0 15px;
-    i {
+    padding: 5px 0;
+    img {
       cursor: not-allowed;
-      font-size: 18px;
-      vertical-align: middle;
-      color: #999;
+      width: 16px;
+      height: 16px;
+      padding: 7px 0;
+      margin-left: 5px;
       &.active {
         cursor: pointer;
-        color: #1989FA
+      }
+      &:last-of-type {
+        margin-left: 5px;
       }
     }
     .button-group {
       float: right;
       .el-button {
-        padding: 4px 6px;
+        padding: 6px 15px;
         &.is-disabled {
           color: #C0C4CC;
           background-color: #fff;

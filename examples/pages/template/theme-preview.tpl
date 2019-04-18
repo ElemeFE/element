@@ -1,6 +1,6 @@
 <style lang="scss">
 .page-container.page-theme-preview {
-  padding-top: 25px;
+  padding-top: 30px;
   .display {
     width: 75%;
     display: inline-block;
@@ -150,13 +150,13 @@ export default {
       const rect = this.$refs.themePreview.getBoundingClientRect();
       let offsetTop = rect.top;
       let offsetBottom = rect.bottom;
-      const calHeight = this.editorHeight + 25 + 20;
+      const calHeight = this.editorHeight + 30 + 20;
       if (offsetTop < 0) {
         this.isFixed = true;
         if (offsetBottom < calHeight) {
-          this.editorTop = 25 - calHeight + offsetBottom;
+          this.editorTop = 30 - calHeight + offsetBottom;
         } else {
-          this.editorTop = 25;
+          this.editorTop = 30;
         }
       } else {
         this.isFixed = false;
