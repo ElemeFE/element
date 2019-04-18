@@ -23,7 +23,7 @@ export default {
     pagerCount: {
       type: Number,
       validator(value) {
-        return (value | 0) === value && value > 4 && value < 22 && (value % 2) === 1;
+        return (value | 0) === value && value > 1 && value < 22 && (value % 2) === 1;
       },
       default: 7
     },
