@@ -146,7 +146,7 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 
 ### Hide pagination when there is only one page
 
-When there is only one page, hide the page by setting the `hide-on-single-page` attribute.
+When there is only one page, hide the pagination by setting the `hide-on-single-page` attribute.
 
 :::demo
 ```html
