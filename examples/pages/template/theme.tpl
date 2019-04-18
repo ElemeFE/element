@@ -145,6 +145,9 @@ export default {
         case 'upload':
           this.openCopyForm(item);
           break;
+        case 'rename':
+          this.openRenameForm(item.name);
+          break;
         case 'delete':
           this.$confirm('此操作将永久删除该主题, 是否继续?', '提示', {
             confirmButtonText: '确定',
@@ -161,6 +164,10 @@ export default {
     deleteUserThemeByName(name) {
       this.userTheme = this.filterUserThemeByName(name, false);
       this.saveToLocal();
+    },
+    openRenameForm(name) {
+      this.copyForm.oldname = name;
+      this.copyDialogVisible = true;
     },
     openCopyForm(theme) {
       if (this.userTheme.length >= 8) {
@@ -179,12 +186,23 @@ export default {
     copyToUser() {
       this.$refs.copyForm.validate((valid) => {
         if (valid) {
-          const { theme, name } = this.copyForm;
-          this.userTheme.push({
-            update: Date.now(),
-            name,
-            theme
-          });
+          const { theme, name, oldname } = this.copyForm;
+          if (theme) {
+            // copy
+            this.userTheme.push({
+              update: Date.now(),
+              name,
+              theme
+            });
+          } else {
+            // rename
+            this.userTheme.forEach((config) => {
+              if (config.name === oldname) {
+                config.update = Date.now();
+                config.name = name;
+              }
+            });
+          }
           this.saveToLocal();
           this.closeCopyForm();
         }

@@ -210,6 +210,7 @@
             <el-dropdown @command="actionClick">
               <i class="el-icon-more"></i>
               <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="rename">修改命名</el-dropdown-item>
                 <el-dropdown-item command="copy">复制主题</el-dropdown-item>
                 <el-popover placement="top" width="160" v-model="deleteVisible">
                   <p>这是一段内容这是一段内容确定删除吗？</p>
