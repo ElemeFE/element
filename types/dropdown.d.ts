@@ -23,4 +23,7 @@ export declare class ElDropdown extends ElementUIComponent {
 
   /** Whether to hide menu after clicking menu-item */
   hideOnClick: boolean
+
+  /** Dropdown tabindex */
+  tabindex: number
 }

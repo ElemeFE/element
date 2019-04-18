@@ -58,6 +58,10 @@ export default {
     transition: {
       type: String,
       default: 'fade-in-linear'
+    },
+    tabindex: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -86,7 +90,7 @@ export default {
     if (reference) {
       addClass(reference, 'el-popover__reference');
       reference.setAttribute('aria-describedby', this.tooltipId);
-      reference.setAttribute('tabindex', 0); // tab序列
+      reference.setAttribute('tabindex', this.tabindex); // tab序列
       popper.setAttribute('tabindex', 0);
 
       if (this.trigger !== 'click') {
@@ -113,7 +117,27 @@ export default {
       on(reference, 'mouseleave', this.handleMouseLeave);
       on(popper, 'mouseleave', this.handleMouseLeave);
     } else if (this.trigger === 'focus') {
-      if (reference.querySelector('input, textarea')) {
+      if (this.tabindex < 0) {
+        console.warn('[Element Warn][Popover]a negative taindex means that the element cannot be focused by tab key');
+      }
+      let found = false;
+
+      if ([].slice.call(reference.children).length) {
+        const children = reference.childNodes;
+        const len = children.length;
+        for (let i = 0; i < len; i++) {
+          if (children[i].nodeName === 'INPUT' ||
+              children[i].nodeName === 'TEXTAREA') {
+            on(children[i], 'focusin', this.doShow);
+            on(children[i], 'focusout', this.doClose);
+            found = true;
+            break;
+          }
+        }
+      }
+      if (found) return;
+      if (reference.nodeName === 'INPUT' ||
+        reference.nodeName === 'TEXTAREA') {
         on(reference, 'focusin', this.doShow);
         on(reference, 'focusout', this.doClose);
       } else {

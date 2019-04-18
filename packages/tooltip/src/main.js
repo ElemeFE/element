@@ -48,6 +48,10 @@ export default {
     hideAfter: {
       type: Number,
       default: 0
+    },
+    tabindex: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -55,7 +59,8 @@ export default {
     return {
       tooltipId: `el-tooltip-${generateId()}`,
       timeoutPending: null,
-      focusing: false
+      focusing: false,
+      tooltipId: `el-tooltip-${generateId()}`
     };
   },
   beforeCreate() {
@@ -91,6 +96,11 @@ export default {
             { this.$slots.content || this.content }
           </div>
         </transition>);
+    }
+    const defaultSlot = this.$slots.default;
+    if (!defaultSlot || defaultSlot.length !== 1 || !defaultSlot[0].tag) {
+      console.error('[Element Error][Tooltip]default slot is required and must be an element.');
+      return null;
     }
 
     const firstElement = this.getFirstElement();
@@ -153,8 +163,13 @@ export default {
       this.debounceClose();
     },
     handleFocus() {
-      this.focusing = true;
-      this.show();
+      const instance = this.$slots.default[0].componentInstance;
+      if (instance && instance.focus) {
+        instance.focus();
+      } else {
+        this.focusing = true;
+        this.show();
+      }
     },
     handleBlur() {
       this.focusing = false;
@@ -220,16 +235,43 @@ export default {
     }
   },
 
+<<<<<<< Updated upstream
   beforeDestroy() {
     this.popperVM && this.popperVM.$destroy();
+=======
+  beforeCreate() {
+    if (this.$isServer) return;
+
+    this.popperVM = new Vue({
+      data: { node: '' },
+      render(h) {
+        return this.node;
+      }
+    }).$mount();
+
+    this.debounceClose = debounce(200, () => this.handleClosePopper());
+  },
+
+  mounted() {
+    this.referenceElm = this.$el;
+    if (this.$el.nodeType === 1) {
+      on(this.referenceElm, 'mouseenter', this.show);
+      on(this.referenceElm, 'mouseleave', this.hide);
+      on(this.referenceElm, 'focus', this.handleFocus);
+      on(this.referenceElm, 'blur', this.handleBlur);
+      on(this.referenceElm, 'click', this.removeFocusing);
+    }
+>>>>>>> Stashed changes
   },
 
   destroyed() {
     const reference = this.referenceElm;
-    off(reference, 'mouseenter', this.show);
-    off(reference, 'mouseleave', this.hide);
-    off(reference, 'focus', this.handleFocus);
-    off(reference, 'blur', this.handleBlur);
-    off(reference, 'click', this.removeFocusing);
+    if (reference.nodeType === 1) {
+      off(reference, 'mouseenter', this.show);
+      off(reference, 'mouseleave', this.hide);
+      off(reference, 'focus', this.handleFocus);
+      off(reference, 'blur', this.handleBlur);
+      off(reference, 'click', this.removeFocusing);
+    }
   }
 };
