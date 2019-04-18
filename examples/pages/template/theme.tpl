@@ -5,6 +5,7 @@
   }
   h2 {
     font-size: 28px;
+    line-height: 28px;
     margin: 0;
   }
   ul {
@@ -26,6 +27,9 @@
   .theme-section {
     margin-bottom: 20px;
   }
+  .second-section {
+    margin-top: 60px;
+  }
 }
 </style>
 <template>
@@ -42,7 +46,7 @@
         </li>
       </ul>
     </section>
-    <section class="theme-section">
+    <section class="theme-section second-section">
       <h2>我的主题 ({{userThemeCount}}/{{maxUserTheme}})</h2>
       <ul>
         <li class="theme-card" v-if="showUserUpload">

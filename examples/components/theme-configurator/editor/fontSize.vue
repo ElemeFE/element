@@ -36,6 +36,7 @@ const defaultFontSize = [
   '16px',
   '18px',
   '20px',
+  '22px',
   '28px',
   '36px',
   '48px'

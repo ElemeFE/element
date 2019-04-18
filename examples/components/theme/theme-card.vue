@@ -5,7 +5,7 @@
   overflow: hidden;
   background: #fff;
   height: 90%;
-  margin: 5% 0;
+  margin: 25px 0;
   box-shadow: 0 0 1px 0 #666;
   &.is-hidden {
     opacity: 0;
@@ -61,13 +61,13 @@
         right: 0;
         bottom: 0;
         background: #000;
-        opacity: 0.5;
+        opacity: 0.4;
       }
       .action-block {
         position: absolute;
-        width: 40%;
+        width: 50%;
         height: 50%;
-        left: 30%;
+        left: 25%;
         top: 25%;
       }
       .action-item {
@@ -89,18 +89,9 @@
           display: flex;
           justify-content:center;
           align-items:center;
-          i {
-            position: relative;
+          img {
+            width: 130%;
           }
-        }
-        .circle {
-          position: absolute;
-          left: -12px;
-          top: -12px;
-          width: 44px;
-          height: 44px;
-          border-radius: 100%;
-          border: 1px solid #eee;
         }
         .name {
           font-size: 12px;
@@ -109,7 +100,7 @@
           display: flex;
           justify-content:center;
           align-items:center;
-          margin-top: 6px;
+          margin-top: 2px;
         }
       }
       .action-item-right {
@@ -118,7 +109,7 @@
     }
   }
   .info {
-    padding: 10px 15px 0;
+    padding: 10px 10px 0;
     line-height: 16px;
     .title {
       font-weight: bold;
@@ -127,7 +118,7 @@
     }
     .right {
       font-weight: normal;
-      font-size: 12px;
+      font-size: 14px;
       color: #909399;
       float: right;
     }
@@ -136,7 +127,7 @@
       cursor: pointer;
     }
     .description {
-      font-size: 13px;
+      font-size: 14px;
       color: #606266;
       margin-top: 10px;
     }
@@ -191,9 +182,8 @@
               @click="iconClick(item.action)"
             >
               <div class="icon">
-                <i :class="item.icon">
-                  <span class="circle"></span>
-                </i>
+                <img :src="item.icon"/>
+                <span class="circle"></span>
               </div>
               <div class="name">
                 <span>{{item.name}}</span>
@@ -357,12 +347,12 @@ export default {
       if (this.isOfficial) {
         return [
           {
-            icon: 'el-icon-view',
+            icon: require('../../assets/images/icon-check.png'),
             name: '查看',
             action: 'preview'
           },
           {
-            icon: 'el-icon-tickets',
+            icon: require('../../assets/images/icon-copy.png'),
             name: '复制',
             action: 'copy'
           }
@@ -370,12 +360,12 @@ export default {
       }
       return [
         {
-          icon: 'el-icon-edit',
+          icon: require('../../assets/images/icon-edit.png'),
           name: '编辑',
           action: 'edit'
         },
         {
-          icon: 'el-icon-download',
+          icon: require('../../assets/images/icon-download.png'),
           name: '下载',
           action: 'download'
         }
