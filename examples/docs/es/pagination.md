@@ -125,6 +125,34 @@ Agrega más modulos basados en su escenario.
   }
 </script>
 ```
+
+:::
+### Hide pagination when there is only one page
+
+When there is only one page, hide the page by setting the `hide-on-single-page` attribute.
+
+:::demo
+```html
+<div>
+ <el-switch v-model="value">
+ </el-switch>
+ <el-pagination
+  :hide-on-single-page="value"
+  :total="5"
+  layout="prev, pager, next">
+</el-pagination>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: false
+      }
+    }
+  }
+</script>
+```
 :::
 
 ### Atributos
@@ -142,7 +170,7 @@ Agrega más modulos basados en su escenario.
 | prev-text    | texto para el botón `prev`               | string   | —                                        | —                                      |
 | next-text    | texto para el botón `next`               | string   | —                                        | —                                      |
 | disabled     | si Pagination esta disabled              | boolean  | —                                        | false                                  |
-| hide-on-single-page | whether to hide when thers's only one page | boolean |—                                 | -                                      |
+| hide-on-single-page | whether to hide when there's only one page | boolean |—                                 | -                                      |
 
 ### Eventos
 | Nombre del evento | Descripción                             | Parámetros                    |
