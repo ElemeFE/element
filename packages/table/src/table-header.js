@@ -327,6 +327,7 @@ export default {
         if (column.filterPlacement) {
           filterPanel.placement = column.filterPlacement;
         }
+        filterPanel.hideFilterFirstItem = column.hideFilterFirstItem
         filterPanel.table = table;
         filterPanel.cell = cell;
         filterPanel.column = column;
