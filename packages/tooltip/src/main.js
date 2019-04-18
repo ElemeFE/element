@@ -59,8 +59,7 @@ export default {
     return {
       tooltipId: `el-tooltip-${generateId()}`,
       timeoutPending: null,
-      focusing: false,
-      tooltipId: `el-tooltip-${generateId()}`
+      focusing: false
     };
   },
   beforeCreate() {
@@ -235,33 +234,8 @@ export default {
     }
   },
 
-<<<<<<< Updated upstream
   beforeDestroy() {
     this.popperVM && this.popperVM.$destroy();
-=======
-  beforeCreate() {
-    if (this.$isServer) return;
-
-    this.popperVM = new Vue({
-      data: { node: '' },
-      render(h) {
-        return this.node;
-      }
-    }).$mount();
-
-    this.debounceClose = debounce(200, () => this.handleClosePopper());
-  },
-
-  mounted() {
-    this.referenceElm = this.$el;
-    if (this.$el.nodeType === 1) {
-      on(this.referenceElm, 'mouseenter', this.show);
-      on(this.referenceElm, 'mouseleave', this.hide);
-      on(this.referenceElm, 'focus', this.handleFocus);
-      on(this.referenceElm, 'blur', this.handleBlur);
-      on(this.referenceElm, 'click', this.removeFocusing);
-    }
->>>>>>> Stashed changes
   },
 
   destroyed() {
