@@ -44,13 +44,13 @@ Confirm is used to ask users' confirmation.
 
 ```html
 <template>
-  <el-button type="text" @click="open2">Click to open the Message Box</el-button>
+  <el-button type="text" @click="open">Click to open the Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open2() {
+      open() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -82,13 +82,13 @@ Prompt is used when user input is required.
 
 ```html
 <template>
-  <el-button type="text" @click="open3">Click to open Message Box</el-button>
+  <el-button type="text" @click="open">Click to open Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open3() {
+      open() {
         this.$prompt('Please input your e-mail', 'Tip', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -120,13 +120,13 @@ Can be customized to show various content.
 
 ```html
 <template>
-  <el-button type="text" @click="open4">Click to open Message Box</el-button>
+  <el-button type="text" @click="open">Click to open Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open4() {
+      open() {
         const h = this.$createElement;
         this.$msgbox({
           title: 'Message',
@@ -176,13 +176,13 @@ The content of MessageBox can be `VNode`, allowing us to pass custom components.
 
 ```html
 <template>
-  <el-button type="text" @click="open5">Click to open Message Box</el-button>
+  <el-button type="text" @click="open">Click to open Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open5() {
+      open() {
         this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
           dangerouslyUseHTMLString: true
         });
@@ -205,13 +205,13 @@ In some cases, clicking the cancel button and close button may have different me
 
 ```html
 <template>
-  <el-button type="text" @click="open6">Click to open Message Box</el-button>
+  <el-button type="text" @click="open">Click to open Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open6() {
+      open() {
         this.$confirm('You have unsaved changes, save and proceed?', 'Confirm', {
           distinguishCancelAndClose: true,
           confirmButtonText: 'Save',
@@ -245,13 +245,13 @@ Content of MessageBox can be centered.
 
 ```html
 <template>
-  <el-button type="text" @click="open7">Click to open Message Box</el-button>
+  <el-button type="text" @click="open">Click to open Message Box</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open7() {
+      open() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',

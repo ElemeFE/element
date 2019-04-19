@@ -35,7 +35,7 @@ export default {
 ```html
 <el-input
   placeholder="请输入内容"
-  v-model="input1"
+  v-model="input"
   :disabled="true">
 </el-input>
 
@@ -43,7 +43,7 @@ export default {
 export default {
   data() {
     return {
-      input1: ''
+      input: ''
     }
   }
 }
@@ -58,7 +58,7 @@ export default {
 ```html
 <el-input
   placeholder="请输入内容"
-  v-model="input10"
+  v-model="input"
   clearable>
 </el-input>
 
@@ -66,7 +66,7 @@ export default {
   export default {
     data() {
       return {
-        input10: ''
+        input: ''
       }
     }
   }
@@ -79,13 +79,13 @@ export default {
 :::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
 
 ```html
-<el-input placeholder="请输入密码" v-model="input11" show-password></el-input>
+<el-input placeholder="请输入密码" v-model="input" show-password></el-input>
 
 <script>
   export default {
     data() {
       return {
-        input11: ''
+        input: ''
       }
     }
   }
@@ -104,24 +104,24 @@ export default {
   <el-input
     placeholder="请选择日期"
     suffix-icon="el-icon-date"
-    v-model="input2">
+    v-model="input1">
   </el-input>
   <el-input
     placeholder="请输入内容"
     prefix-icon="el-icon-search"
-    v-model="input21">
+    v-model="input2">
   </el-input>
 </div>
 <div class="demo-input-suffix">
   slot 方式：
   <el-input
     placeholder="请选择日期"
-    v-model="input22">
+    v-model="input3">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
   </el-input>
   <el-input
     placeholder="请输入内容"
-    v-model="input23">
+    v-model="input4">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
@@ -130,10 +130,10 @@ export default {
 export default {
   data() {
     return {
+      input1: '',
       input2: '',
-      input21: '',
-      input22: '',
-      input23: ''
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -176,22 +176,22 @@ export default {
   type="textarea"
   autosize
   placeholder="请输入内容"
-  v-model="textarea2">
+  v-model="textarea1">
 </el-input>
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="请输入内容"
-  v-model="textarea3">
+  v-model="textarea2">
 </el-input>
 
 <script>
 export default {
   data() {
     return {
-      textarea2: '',
-      textarea3: ''
+      textarea1: '',
+      textarea2: ''
     }
   }
 }
@@ -206,17 +206,17 @@ export default {
 :::demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
-  <el-input placeholder="请输入内容" v-model="input3">
+  <el-input placeholder="请输入内容" v-model="input1">
     <template slot="prepend">Http://</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input4">
+  <el-input placeholder="请输入内容" v-model="input2">
     <template slot="append">.com</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
+  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="请选择">
       <el-option label="餐厅名" value="1"></el-option>
       <el-option label="订单号" value="2"></el-option>
@@ -237,9 +237,9 @@ export default {
 export default {
   data() {
     return {
+      input1: '',
+      input2: '',
       input3: '',
-      input4: '',
-      input5: '',
       select: ''
     }
   }
@@ -256,25 +256,25 @@ export default {
   <el-input
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input6">
+    v-model="input1">
   </el-input>
   <el-input
     size="medium"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input7">
+    v-model="input2">
   </el-input>
   <el-input
     size="small"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input8">
+    v-model="input3">
   </el-input>
   <el-input
     size="mini"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input9">
+    v-model="input4">
   </el-input>
 </div>
 
@@ -282,10 +282,10 @@ export default {
 export default {
   data() {
     return {
-      input6: '',
-      input7: '',
-      input8: '',
-      input9: ''
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -415,7 +415,7 @@ export default {
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
-  v-model="state3"
+  v-model="state"
   :fetch-suggestions="querySearch"
   placeholder="请输入内容"
   @select="handleSelect">
@@ -457,7 +457,7 @@ export default {
     data() {
       return {
         restaurants: [],
-        state3: ''
+        state: ''
       };
     },
     methods: {
@@ -546,7 +546,7 @@ export default {
 :::demo
 ```html
 <el-autocomplete
-  v-model="state4"
+  v-model="state"
   :fetch-suggestions="querySearchAsync"
   placeholder="请输入内容"
   @select="handleSelect"
@@ -556,7 +556,7 @@ export default {
     data() {
       return {
         restaurants: [],
-        state4: '',
+        state: '',
         timeout:  null
       };
     },

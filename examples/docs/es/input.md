@@ -37,7 +37,7 @@ export default {
 ```html
 <el-input
   placeholder="Please input"
-  v-model="input1"
+  v-model="input"
   :disabled="true">
 </el-input>
 
@@ -45,7 +45,7 @@ export default {
 export default {
   data() {
     return {
-      input1: ''
+      input: ''
     }
   }
 }
@@ -61,7 +61,7 @@ export default {
 ```html
 <el-input
   placeholder="Please input"
-  v-model="input10"
+  v-model="input"
   clearable>
 </el-input>
 
@@ -69,7 +69,7 @@ export default {
 export default {
   data() {
     return {
-      input10: ''
+      input: ''
     }
   }
 }
@@ -82,13 +82,13 @@ export default {
 :::demo Haga un input de contraseña conmutable con el atributo `show-password`.
 
 ```html
-<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+<el-input placeholder="Please input password" v-model="input" show-password></el-input>
 
 <script>
   export default {
     data() {
       return {
-        input11: ''
+        input: ''
       }
     }
   }
@@ -108,24 +108,24 @@ Añada un icono para indicar el tipo de Input.
   <el-input
     placeholder="Pick a date"
     suffix-icon="el-icon-date"
-    v-model="input2">
+    v-model="input1">
   </el-input>
   <el-input
     placeholder="Type something"
     prefix-icon="el-icon-search"
-    v-model="input21">
+    v-model="input2">
   </el-input>
 </div>
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using slots</span>
   <el-input
     placeholder="Pick a date"
-    v-model="input22">
+    v-model="input3">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
   </el-input>
   <el-input
     placeholder="Type something"
-    v-model="input23">
+    v-model="input4">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
@@ -141,10 +141,10 @@ Añada un icono para indicar el tipo de Input.
 export default {
   data() {
     return {
+      input1: '',
       input2: '',
-      input21: '',
-      input22: '',
-      input23: ''
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -191,22 +191,22 @@ El ajuste del prop `autosize` en el tipo de Input textarea hace que la altura se
   type="textarea"
   autosize
   placeholder="Please input"
-  v-model="textarea2">
+  v-model="textarea1">
 </el-input>
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="Please input"
-  v-model="textarea3">
+  v-model="textarea2">
 </el-input>
 
 <script>
 export default {
   data() {
     return {
-      textarea2: '',
-      textarea3: ''
+      textarea1: '',
+      textarea2: ''
     }
   }
 }
@@ -223,17 +223,17 @@ Añade un elemento antes o después del input, generalmente una etiqueta o un bo
 
 ```html
 <div>
-  <el-input placeholder="Please input" v-model="input3">
+  <el-input placeholder="Please input" v-model="input1">
     <template slot="prepend">Http://</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input4">
+  <el-input placeholder="Please input" v-model="input2">
     <template slot="append">.com</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
+  <el-input placeholder="Please input" v-model="input3" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="Select">
       <el-option label="Restaurant" value="1"></el-option>
       <el-option label="Order No." value="2"></el-option>
@@ -255,9 +255,9 @@ Añade un elemento antes o después del input, generalmente una etiqueta o un bo
 export default {
   data() {
     return {
+      input1: '',
+      input2: '',
       input3: '',
-      input4: '',
-      input5: '',
       select: ''
     }
   }
@@ -275,22 +275,22 @@ export default {
 <div class="demo-input-size">
   <el-input
     placeholder="Please Input"
-    v-model="input6">
+    v-model="input1">
   </el-input>
   <el-input
     size="medium"
     placeholder="Please Input"
-    v-model="input7">
+    v-model="input2">
   </el-input>
   <el-input
     size="small"
     placeholder="Please Input"
-    v-model="input8">
+    v-model="input2">
   </el-input>
   <el-input
     size="mini"
     placeholder="Please Input"
-    v-model="input9">
+    v-model="input4">
   </el-input>
 </div>
 
@@ -298,10 +298,10 @@ export default {
 export default {
   data() {
     return {
-      input6: '',
-      input7: '',
-      input8: '',
-      input9: ''
+      input1: '',
+      input2: '',
+      input2: '',
+      input4: ''
     }
   }
 }
@@ -394,7 +394,7 @@ Personalice cómo se muestran las sugerencias.
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
-  v-model="state3"
+  v-model="state"
   :fetch-suggestions="querySearch"
   placeholder="Please input"
   @select="handleSelect">
@@ -432,7 +432,7 @@ Personalice cómo se muestran las sugerencias.
     data() {
       return {
         links: [],
-        state3: ''
+        state: ''
       };
     },
     methods: {
@@ -482,7 +482,7 @@ Búsqueda de datos desde el servidor.
 
 ```html
 <el-autocomplete
-  v-model="state4"
+  v-model="state"
   :fetch-suggestions="querySearchAsync"
   placeholder="Please input"
   @select="handleSelect"
@@ -492,7 +492,7 @@ Búsqueda de datos desde el servidor.
     data() {
       return {
         links: [],
-        state4: '',
+        state: '',
         timeout:  null
       };
     },

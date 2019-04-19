@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Αναζήτηση',
       noCheckedFormat: '{total} Αντικείμενα',
       hasCheckedFormat: '{checked}/{total} επιλεγμένα'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

@@ -70,7 +70,7 @@ You can customize loading text, loading spinner and background color.
 ```html
 <template>
   <el-table
-    v-loading="loading2"
+    v-loading="loading"
     element-loading-text="Loading..."
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -110,7 +110,7 @@ You can customize loading text, loading spinner and background color.
           name: 'John Smith',
           address: 'No.1518,  Jinshajiang Road, Putuo District'
         }],
-        loading2: true
+        loading: true
       };
     }
   };
@@ -134,7 +134,7 @@ Show a full screen animation while loading data.
   </el-button>
   <el-button
     type="primary"
-    @click="openFullScreen2">
+    @click="openFullScreen">
     As a service
   </el-button>
 </template>
@@ -153,7 +153,7 @@ Show a full screen animation while loading data.
           this.fullscreenLoading = false;
         }, 2000);
       },
-      openFullScreen2() {
+      openFullScreen() {
         const loading = this.$loading({
           lock: true,
           text: 'Loading',

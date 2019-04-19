@@ -2,7 +2,7 @@
   <transition name="el-alert-fade">
     <div
       class="el-alert"
-      :class="[typeClass, center ? 'is-center' : '']"
+      :class="[typeClass, center ? 'is-center' : '', 'is-' + effect]"
       v-show="visible"
       role="alert"
     >
@@ -50,7 +50,14 @@
         default: ''
       },
       showIcon: Boolean,
-      center: Boolean
+      center: Boolean,
+      effect: {
+        type: String,
+        default: 'light',
+        validator: function(value) {
+          return ['light', 'dark'].indexOf(value) !== -1;
+        }
+      }
     },
 
     data() {

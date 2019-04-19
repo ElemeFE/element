@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Masukan kata kunci',
       noCheckedFormat: '{total} butir',
       hasCheckedFormat: '{checked}/{total} terpilih'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

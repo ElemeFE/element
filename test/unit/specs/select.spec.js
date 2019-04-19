@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
@@ -819,6 +819,28 @@ describe('Select', () => {
 
     expect(vm.$el.querySelector('.empty-slot').innerText).to.be.equal('EmptySlot');
     done();
+  });
+
+  it('should set placeholder to label of selected option when filterable is true and multiple is false', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select ref="select" v-model="value" filterable>
+            <el-option label="test" value="test" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 'test'
+        };
+      }
+    });
+    vm.$refs.select.$el.click();
+    await waitImmediate();
+    expect(vm.$refs.select.visible).to.be.equal(true);
+    expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
+    expect(vm.value).to.be.equal('test');
   });
 
   describe('resetInputHeight', () => {
