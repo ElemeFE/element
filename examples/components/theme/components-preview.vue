@@ -69,13 +69,33 @@
       <el-button size="mini">Mini</el-button>
     </el-row>
     <h4>Radio</h4>
-    <el-row>
+    <el-row class="demo-line">
       <el-radio v-model="radio" label="1">Option A</el-radio>
       <el-radio v-model="radio" label="2">Option B</el-radio>
     </el-row>
+    <el-row class="demo-line">
+      <el-radio-group v-model="radio1">
+        <el-radio-button label="New York"></el-radio-button>
+        <el-radio-button label="Washington"></el-radio-button>
+        <el-radio-button label="Los Angeles"></el-radio-button>
+        <el-radio-button label="Chicago"></el-radio-button>
+      </el-radio-group>
+    </el-row>
+    <el-row class="demo-line">
+      <el-radio v-model="radio2" label="1" border>Option A</el-radio>
+      <el-radio v-model="radio2" label="2" border>Option B</el-radio>
+    </el-row>
     <h4>Checkbox</h4>
-    <el-row>
+    <el-row class="demo-line">
       <el-checkbox v-model="checked">Option</el-checkbox>
+    </el-row>
+    <el-row class="demo-line">
+      <el-checkbox-group v-model="checked1">
+        <el-checkbox-button v-for="city in ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen']" :label="city" :key="city">{{city}}</el-checkbox-button>
+      </el-checkbox-group>
+    </el-row>
+    <el-row class="demo-line">
+      <el-checkbox v-model="checked2" label="Option1" border></el-checkbox>
     </el-row>
     <h4>Input</h4>
     <el-row style="width: 180px">
@@ -281,7 +301,11 @@ export default {
   data() {
     return {
       radio: '1',
+      radio1: 'Washington',
+      radio2: '1',
       checked: true,
+      checked1: ['Shanghai'],
+      checked2: true,
       input: 'Element',
       inputNumber: 1,
       selectOptions: [
