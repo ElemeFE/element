@@ -46,7 +46,7 @@
     margin-bottom: 0;
     font-size: $--messagebox-font-size;
     line-height: 1;
-    color: $--color-text-primary;
+    color: $--messagebox-title-color;
   }
 
   @include e(headerbtn) {

@@ -105,7 +105,7 @@
     @include when(disabled) {
       .el-checkbox__inner {
         background-color: $--checkbox-disabled-input-fill;
-        border-color: $--checkbox-disabled-input-border-color;
+        border-color: $--checkbox-disabled-border-color;
         cursor: not-allowed;
 
         &::after {
@@ -149,7 +149,7 @@
 
     @include when(checked) {
       .el-checkbox__inner {
-        background-color: $--checkbox-checked-input-background-color;
+        background-color: $--checkbox-checked-background-color;
         border-color: $--checkbox-checked-input-border-color;
 
         &::after {
@@ -168,7 +168,7 @@
     }
     @include when(indeterminate) {
       .el-checkbox__inner {
-        background-color: $--checkbox-checked-input-background-color;
+        background-color: $--checkbox-checked-background-color;
         border-color: $--checkbox-checked-input-border-color;
 
         &::before {
@@ -193,11 +193,11 @@
     display: inline-block;
     position: relative;
     border: $--checkbox-input-border;
-    border-radius: $--checkbox-input-border-radius;
+    border-radius: $--checkbox-border-radius;
     box-sizing: border-box;
     width: $--checkbox-input-width;
     height: $--checkbox-input-height;
-    background-color: $--checkbox-input-background-color;
+    background-color: $--checkbox-background-color;
     z-index: $--index-normal;
     transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),
     background-color .25s cubic-bezier(.71,-.46,.29,1.46);

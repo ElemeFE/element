@@ -16,7 +16,7 @@
     color: $--collapse-header-font-color;
     cursor: pointer;
     border-bottom: 1px solid $--collapse-border-color;
-    font-size: $--collapse-header-size;
+    font-size: $--collapse-header-font-size;
     font-weight: 500;
     transition: border-bottom-color .3s;
     outline: none;
@@ -46,7 +46,7 @@
 
   @include e(content) {
     padding-bottom: 25px;
-    font-size: $--collapse-content-size;
+    font-size: $--collapse-content-font-size;
     color: $--collapse-content-font-color;
     line-height: 1.769230769230769;
   }

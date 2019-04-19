@@ -43,7 +43,7 @@
   position: relative;
   margin: 0;
   padding-left: 0;
-  background-color: $--menu-item-background-color;
+  background-color: $--menu-background-color;
   @include utils-clearfix;
   &.el-menu--horizontal {
     border-bottom: solid 1px #e6e6e6;

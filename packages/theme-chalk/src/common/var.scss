@@ -15,11 +15,11 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 
 /* Color
 -------------------------- */
-/// color|1|BrandColor|0
+/// color|1|Brand Color|0
 $--color-primary: #409EFF !default;
-/// color|1|BackgroundColor|4
+/// color|1|Background Color|4
 $--color-white: #FFFFFF !default;
-/// color|1|BackgroundColor|4
+/// color|1|Background Color|4
 $--color-black: #000000 !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
@@ -30,13 +30,13 @@ $--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /
 $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
-/// color|1|SecondaryColor|1
+/// color|1|Functional Color|1
 $--color-success: #67C23A !default;
-/// color|1|SecondaryColor|1
+/// color|1|Functional Color|1
 $--color-warning: #E6A23C !default;
-/// color|1|SecondaryColor|1
+/// color|1|Functional Color|1
 $--color-danger: #F56C6C !default;
-/// color|1|SecondaryColor|1
+/// color|1|Functional Color|1
 $--color-info: #909399 !default;
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
@@ -48,25 +48,25 @@ $--color-success-lighter: mix($--color-white, $--color-success, 90%) !default;
 $--color-warning-lighter: mix($--color-white, $--color-warning, 90%) !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
-/// color|1|FontColor|2
+/// color|1|Font Color|2
 $--color-text-primary: #303133 !default;
-/// color|1|FontColor|2
+/// color|1|Font Color|2
 $--color-text-regular: #606266 !default;
-/// color|1|FontColor|2
+/// color|1|Font Color|2
 $--color-text-secondary: #909399 !default;
-/// color|1|FontColor|2
+/// color|1|Font Color|2
 $--color-text-placeholder: #C0C4CC !default;
-/// color|1|BorderColor|3
+/// color|1|Border Color|3
 $--border-color-base: #DCDFE6 !default;
-/// color|1|BorderColor|3
+/// color|1|Border Color|3
 $--border-color-light: #E4E7ED !default;
-/// color|1|BorderColor|3
+/// color|1|Border Color|3
 $--border-color-lighter: #EBEEF5 !default;
-/// color|1|BorderColor|3
+/// color|1|Border Color|3
 $--border-color-extra-light: #F2F6FC !default;
 
 // Background
-/// color|1|BackgroundColor|4
+/// color|1|Background Color|4
 $--background-color-base: #F5F7FA !default;
 
 /* Link
@@ -102,25 +102,25 @@ $--fill-base: $--color-white !default;
 /* Typography
 -------------------------- */
 $--font-path: 'fonts' !default;
-/// fontSize|1|FontSize|0
+/// fontSize|1|Font Size|0
 $--font-size-extra-large: 20px !default;
-/// fontSize|1|FontSize|0
+/// fontSize|1|Font Size|0
 $--font-size-large: 18px !default;
-/// fontSize|1|FontSize|0
+/// fontSize|1|Font Size|0
 $--font-size-medium: 16px !default;
-/// fontSize|1|FontSize|0
+/// fontSize|1|Font Size|0
 $--font-size-base: 14px !default;
-/// fontSize|1|FontSize|0
+/// fontSize|1|Font Size|0
 $--font-size-small: 13px !default;
-/// fontSize|1|FontSize|0
+/// fontSize|1|Font Size|0
 $--font-size-extra-small: 12px !default;
-/// fontWeight|1|FontWeight|1
+/// fontWeight|1|Font Weight|1
 $--font-weight-primary: 500 !default;
-/// fontWeight|1|FontWeight|1
+/// fontWeight|1|Font Weight|1
 $--font-weight-secondary: 100 !default;
-/// fontLineHeight|1|LineHeight|2
+/// fontLineHeight|1|Line Height|2
 $--font-line-height-primary: 24px !default;
-/// fontLineHeight|1|LineHeight|2
+/// fontLineHeight|1|Line Height|2
 $--font-line-height-secondary: 16px !default;
 $--font-color-disabled-base: #bbb !default;
 /* Size
@@ -155,17 +155,13 @@ $--checkbox-font-color: $--color-text-regular !default;
 $--checkbox-input-height: 14px !default;
 $--checkbox-input-width: 14px !default;
 /// borderRadius||Border|2
-$--checkbox-input-border-radius: $--border-radius-small !default;
+$--checkbox-border-radius: $--border-radius-small !default;
 /// color||Color|0
-$--checkbox-input-background-color: $--color-white !default;
+$--checkbox-background-color: $--color-white !default;
 $--checkbox-input-border: $--border-base !default;
-/// color||Color|0
-$--checkbox-input-border-color: $--border-color-base !default;
-/// color||Color|0
-$--checkbox-icon-color: $--color-white !default;
 
 /// color||Color|0
-$--checkbox-disabled-input-border-color: $--border-color-base !default;
+$--checkbox-disabled-border-color: $--border-color-base !default;
 $--checkbox-disabled-input-fill: #edf2fc !default;
 $--checkbox-disabled-icon-color: $--color-text-placeholder !default;
 
@@ -177,7 +173,7 @@ $--checkbox-disabled-checked-icon-color: $--color-text-placeholder !default;
 $--checkbox-checked-font-color: $--color-primary !default;
 $--checkbox-checked-input-border-color: $--color-primary !default;
 /// color||Color|0
-$--checkbox-checked-input-background-color: $--color-primary !default;
+$--checkbox-checked-background-color: $--color-primary !default;
 $--checkbox-checked-icon-color: $--fill-base !default;
 
 $--checkbox-input-border-color-hover: $--color-primary !default;
@@ -204,8 +200,6 @@ $--checkbox-bordered-mini-input-width: 12px !default;
 /// height||Other|4
 $--checkbox-bordered-mini-height: 28px !default;
 
-/// fontSize||Font|1
-$--checkbox-button-font-size: $--font-size-base !default;
 /// color||Color|0
 $--checkbox-button-checked-background-color: $--color-primary !default;
 /// color||Color|0
@@ -305,7 +299,6 @@ $--select-option-selected-font-color: $--color-primary !default;
 $--select-option-selected-hover: $--background-color-base !default;
 
 $--select-group-color: $--color-info !default;
-/// height||Other|4
 $--select-group-height: 30px !default;
 $--select-group-font-size: 12px !default;
 
@@ -314,7 +307,6 @@ $--select-dropdown-shadow: $--box-shadow-light !default;
 $--select-dropdown-empty-color: #999 !default;
 /// height||Other|4
 $--select-dropdown-max-height: 274px !default;
-/// padding||Spacing|3
 $--select-dropdown-padding: 6px 0 !default;
 $--select-dropdown-empty-padding: 10px 0 !default;
 $--select-dropdown-border: solid 1px $--border-color-light !default;
@@ -345,6 +337,8 @@ $--alert-icon-large-size: 28px !default;
 
 /* MessageBox
 -------------------------- */
+/// color||Color|0
+$--messagebox-title-color: $--color-text-primary !default;
 $--msgbox-width: 420px !default;
 $--msgbox-border-radius: 4px !default;
 /// fontSize||Font|1
@@ -372,22 +366,20 @@ $--message-min-width: 380px !default;
 $--message-background-color: #edf2fc !default;
 $--message-padding: 15px 15px 15px 20px !default;
 /// color||Color|0
-$--message-content-color: $--color-text-regular !default;
-/// color||Color|0
-$--message-close-color: $--color-text-placeholder !default;
+$--message-close-icon-color: $--color-text-placeholder !default;
 /// height||Other|4
 $--message-close-size: 16px !default;
 /// color||Color|0
 $--message-close-hover-color: $--color-text-secondary !default;
 
 /// color||Color|0
-$--message-success-color: $--color-success !default;
+$--message-success-font-color: $--color-success !default;
 /// color||Color|0
-$--message-info-color: $--color-info !default;
+$--message-info-font-color: $--color-info !default;
 /// color||Color|0
-$--message-warning-color: $--color-warning !default;
+$--message-warning-font-color: $--color-warning !default;
 /// color||Color|0
-$--message-danger-color: $--color-danger !default;
+$--message-danger-font-color: $--color-danger !default;
 
 /* Notification
 -------------------------- */
@@ -402,9 +394,9 @@ $--notification-icon-size: 24px !default;
 $--notification-close-font-size: $--message-close-size !default;
 $--notification-group-margin: 13px !default;
 /// fontSize||Font|1
-$--notification-font-size: $--font-size-base !default;
+$--notification-content-font-size: $--font-size-base !default;
 /// color||Color|0
-$--notification-color: $--color-text-regular !default;
+$--notification-content-color: $--color-text-regular !default;
 /// fontSize||Font|1
 $--notification-title-font-size: 16px !default;
 /// color||Color|0
@@ -416,17 +408,16 @@ $--notification-close-color: $--color-text-secondary !default;
 $--notification-close-hover-color: $--color-text-regular !default;
 
 /// color||Color|0
-$--notification-success-color: $--color-success !default;
+$--notification-success-icon-color: $--color-success !default;
 /// color||Color|0
-$--notification-info-color: $--color-info !default;
+$--notification-info-icon-color: $--color-info !default;
 /// color||Color|0
-$--notification-warning-color: $--color-warning !default;
+$--notification-warning-icon-color: $--color-warning !default;
 /// color||Color|0
-$--notification-danger-color: $--color-danger !default;
+$--notification-danger-icon-color: $--color-danger !default;
 
 /* Input
 -------------------------- */
-/// fontSize||Font|1
 $--input-font-size: $--font-size-base !default;
 /// color||Color|0
 $--input-font-color: $--color-text-regular !default;
@@ -480,13 +471,7 @@ $--cascader-menu-font-color: $--color-text-regular !default;
 /// color||Color|0
 $--cascader-menu-selected-font-color: $--color-primary !default;
 $--cascader-menu-fill: $--fill-base !default;
-/// fontSize||Font|1
-$--cascader-menu-font-size: $--font-size-base !default;
-/// borderRadius||Border|2
-$--cascader-menu-radius: $--border-radius-base !default;
 $--cascader-menu-border: $--border-base !default;
-/// color||Color|0
-$--cascader-menu-border-color: $--border-color-base !default;
 $--cascader-menu-border-width: $--border-width-base !default;
 $--cascader-menu-color: $--color-text-regular !default;
 $--cascader-menu-option-color-active: $--color-text-secondary !default;
@@ -496,8 +481,6 @@ $--cascader-menu-option-fill-hover: rgba($--color-text-primary, 0.06) !default;
 $--cascader-menu-option-color-disabled: #999 !default;
 $--cascader-menu-option-fill-disabled: rgba($--color-black, 0.06) !default;
 $--cascader-menu-option-empty-color: #666 !default;
-/// color||Color|0
-$--cascader-menu-group-color: #999 !default;
 $--cascader-menu-shadow: 0 1px 2px rgba($--color-black, 0.14), 0 0 3px rgba($--color-black, 0.14) !default;
 $--cascader-menu-option-pinyin-color: #999 !default;
 $--cascader-menu-submenu-shadow: 1px 1px 2px rgba($--color-black, 0.14), 1px 0 2px rgba($--color-black, 0.14) !default;
@@ -620,11 +603,8 @@ $--cascader-height: 200px !default;
 $--switch-on-color: $--color-primary !default;
 /// color||Color|0
 $--switch-off-color: $--border-color-base !default;
-/// color||Color|0
-$--switch-disabled-color: $--border-color-lighter !default;
 /// fontSize||Font|1
 $--switch-font-size: $--font-size-base !default;
-/// borderRadius||Border|2
 $--switch-core-border-radius: 10px !default;
 /// height||Other|4
 $--switch-width: 40px !default;
@@ -637,12 +617,10 @@ $--switch-button-size: 16px !default;
 -------------------------- */
 $--dialog-background-color: $--color-white !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
-/// color||Color|0
-$--dialog-close-hover-color: $--color-primary !default;
 /// fontSize||Font|1
 $--dialog-title-font-size: $--font-size-large !default;
 /// fontSize||Font|1
-$--dialog-font-size: 14px !default;
+$--dialog-content-font-size: 14px !default;
 /// fontLineHeight||LineHeight|2
 $--dialog-font-line-height: $--font-line-height-primary !default;
 /// padding||Spacing|3
@@ -656,7 +634,7 @@ $--table-border: 1px solid $--table-border-color !default;
 /// color||Color|0
 $--table-font-color: $--color-text-regular !default;
 /// color||Color|0
-$--table-header-color: $--color-text-secondary !default;
+$--table-header-font-color: $--color-text-secondary !default;
 /// color||Color|0
 $--table-row-hover-background-color: $--background-color-base !default;
 $--table-current-row-background-color: $--color-primary-light-9 !default;
@@ -685,8 +663,6 @@ $--pagination-button-disabled-color: $--color-text-placeholder !default;
 $--pagination-button-disabled-background-color: $--color-white !default;
 /// color||Color|0
 $--pagination-hover-color: $--color-primary !default;
-/// color||Color|0
-$--pagination-hover-color: $--color-white !default;
 
 /* Popover
 -------------------------- */
@@ -703,7 +679,7 @@ $--popover-padding-large: 18px 20px !default;
 /// fontSize||Font|1
 $--popover-title-font-size: 16px !default;
 /// color||Color|0
-$--popover-title-color: $--color-text-primary !default;
+$--popover-title-font-color: $--color-text-primary !default;
 
 /* Tooltip
 -------------------------- */
@@ -726,7 +702,7 @@ $--tag-fill: rgba($--color-primary, 0.10) !default;
 /// color||Color|0
 $--tag-font-color: $--color-primary !default;
 /// color||Color|0
-$--tag-background-color: $--color-primary !default;
+$--tag-default-hover-background-color: $--color-primary !default;
 $--tag-border: rgba($--color-primary, 0.20) !default;
 /// fontSize||Font|1
 $--tag-font-size: 12px !default;
@@ -770,7 +746,7 @@ $--dropdown-menuItem-hover-color: $--link-color !default;
 /* Badge
 -------------------------- */
 /// color||Color|0
-$--badge-fill: $--color-danger !default;
+$--badge-background-color: $--color-danger !default;
 $--badge-radius: 10px !default;
 /// fontSize||Font|1
 $--badge-font-size: 12px !default;
@@ -794,15 +770,11 @@ $--slider-main-background-color: $--color-primary !default;
 /// color||Color|0
 $--slider-runway-background-color: $--border-color-light !default;
 $--slider-button-hover-color: mix($--color-primary, black, 97%) !default;
-/// color||Color|0
 $--slider-stop-background-color: $--color-white !default;
-/// color||Color|0
 $--slider-disable-color: $--color-text-placeholder !default;
-
-/// margin||Spacing|3
 $--slider-margin: 16px 0 !default;
 $--slider-border-radius: 3px !default;
-/// height||Other|4
+/// height|1|Other|4
 $--slider-height: 6px !default;
 /// height||Other|4
 $--slider-button-size: 16px !default;
@@ -822,12 +794,11 @@ $--menu-item-font-size: $--font-size-base !default;
 /// color||Color|0
 $--menu-item-font-color: $--color-text-primary !default;
 /// color||Color|0
-$--menu-item-background-color: $--color-white !default;
+$--menu-background-color: $--color-white !default;
 $--menu-item-hover-fill: $--color-primary-light-9 !default;
 
 /* Rate
 --------------------------*/
-/// height||Other|3
 $--rate-height: 20px !default;
 /// fontSize||Font|1
 $--rate-font-size: $--font-size-base !default;
@@ -835,14 +806,12 @@ $--rate-font-size: $--font-size-base !default;
 $--rate-icon-size: 18px !default;
 /// margin||Spacing|2
 $--rate-icon-margin: 6px !default;
-/// color||Color|0
 $--rate-icon-color: $--color-text-placeholder !default;
 
 /* DatePicker
 --------------------------*/
-/// color||Color|0
 $--datepicker-font-color: $--color-text-regular !default;
-/// color||Color|0
+/// color|1|Color|0
 $--datepicker-off-font-color: $--color-text-placeholder !default;
 /// color||Color|0
 $--datepicker-header-font-color: $--color-text-regular !default;
@@ -850,13 +819,13 @@ $--datepicker-icon-color: $--color-text-primary !default;
 $--datepicker-border-color: $--disabled-border-base !default;
 $--datepicker-inner-border-color: #e4e4e4 !default;
 /// color||Color|0
-$--datepicker-inrange-color: $--border-color-extra-light !default;
+$--datepicker-inrange-background-color: $--border-color-extra-light !default;
 /// color||Color|0
-$--datepicker-inrange-hover-color: $--border-color-extra-light !default;
+$--datepicker-inrange-hover-background-color: $--border-color-extra-light !default;
 /// color||Color|0
 $--datepicker-active-color: $--color-primary !default;
 /// color||Color|0
-$--datepicker-text-hover-color: $--color-primary !default;
+$--datepicker-hover-font-color: $--color-primary !default;
 $--datepicker-cell-hover-color: #fff !default;
 
 /* Loading
@@ -892,18 +861,16 @@ $--carousel-indicator-out-color: $--border-color-hover !default;
 $--collapse-border-color: $--border-color-lighter !default;
 /// height||Other|4
 $--collapse-header-height: 48px !default;
-/// padding||Other|4
-$--collapse-header-padding: 20px !default;
 /// color||Color|0
 $--collapse-header-background-color: $--color-white !default;
 /// color||Color|0
 $--collapse-header-font-color: $--color-text-primary !default;
 /// fontSize||Font|1
-$--collapse-header-size: 13px !default;
+$--collapse-header-font-size: 13px !default;
 /// color||Color|0
 $--collapse-content-background-color: $--color-white !default;
 /// fontSize||Font|1
-$--collapse-content-size: 13px !default;
+$--collapse-content-font-size: 13px !default;
 /// color||Color|0
 $--collapse-content-font-color: $--color-text-primary !default;
 

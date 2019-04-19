@@ -7,7 +7,7 @@
   display: inline-block;
 
   @include e(content) {
-    background-color: $--badge-fill;
+    background-color: $--badge-background-color;
     border-radius: $--badge-radius;
     color: $--color-white;
     display: inline-block;
