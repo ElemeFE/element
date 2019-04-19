@@ -258,7 +258,7 @@
             },
             {
               "path": "/image",
-              "title": "Image"
+              "title": "Image 图片"
             }
           ]
         }
@@ -1056,7 +1056,7 @@
             },
             {
               "path": "/image",
-              "title": "Image 图片"
+              "title": "Image"
             }
           ]
         }
