@@ -23,14 +23,14 @@
 
 <style>
 .main {
-  padding: 0 10px 10px;
+  padding: 0 18px 15px;
   overflow-y: auto;
 }
 .category-name {
   color: #C0C4CC;
   font-size: 18px;
   display: block;
-  margin: 8px 0 4px 0;
+  margin: 13px 0 3px 0;
 }
 </style>
 

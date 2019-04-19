@@ -7,116 +7,124 @@
     font-size: 18px;
     font-weight:400;
   }
+  .demo-color-box {
+    margin: 0;
+  }
+  .color {
+    margin-right: -12%;
+  }
 }
 </style>
 <template>
   <div class="component-preview">
     <h4>Color</h4>
-    <el-row :gutter="12">
-      <el-col :span="4" v-for="(color, key) in colorLine" :key="key">
-        <div class="demo-color-box" :style="{ background: dataProxy(color) }">
-          {{color}}
-          <div class="value">{{dataProxy(color)}}</div>
-          <div class="bg-color-sub">
-            <div
-              class="bg-success-sub-item"
-              v-for="(item, key) in Array(2)"
-              :key="key"
-              :style="{ background: tintColor(dataProxy(color), (key + 8) / 10) }"
-            ></div>
+    <div class="color">
+      <el-row :gutter="12">
+        <el-col :span="4" v-for="(color, key) in colorLine" :key="key">
+          <div class="demo-color-box" :style="{ background: dataProxy(color) }">
+            {{color}}
+            <div class="value">{{dataProxy(color)}}</div>
+            <div class="bg-color-sub">
+              <div
+                class="bg-success-sub-item"
+                v-for="(item, key) in Array(2)"
+                :key="key"
+                :style="{ background: tintColor(dataProxy(color), (key + 8) / 10) }"
+              ></div>
+            </div>
           </div>
-        </div>
-      </el-col>
-    </el-row>
-    <el-row :gutter="12">
-      <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_primary }">
-          Primary Text
-          <div class="value">{{color_text_primary}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_regular }">
-          Regular Text
-          <div class="value">{{color_text_regular}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_secondary }">
-          Secondary Text
-          <div class="value">{{color_text_secondary}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_placeholder }">
-          Placeholder
-          <div class="value">{{color_text_placeholder}}</div>
-        </div>
-      </el-col>
-    </el-row>
+        </el-col>
+      </el-row>
+      <el-row :gutter="12">
+        <el-col :span="4">
+          <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_primary }">
+            Primary Text
+            <div class="value">{{color_text_primary}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_regular }">
+            Regular Text
+            <div class="value">{{color_text_regular}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_secondary }">
+            Secondary Text
+            <div class="value">{{color_text_secondary}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div class="demo-color-box demo-color-box-other" :style="{ background: color_text_placeholder }">
+            Placeholder
+            <div class="value">{{color_text_placeholder}}</div>
+          </div>
+        </el-col>
+      </el-row>
 
-    <el-row :gutter="12">
-      <el-col :span="4">
-        <div
-          class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: border_color_base }"
-        >
-          Border Base
-          <div class="value">{{border_color_base}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div
-          class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: border_color_light }"
-        >
-          Border Light
-          <div class="value">{{border_color_light}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div
-          class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: border_color_lighter }"
-        >
-          Border Lighter
-          <div class="value">{{border_color_lighter}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div
-          class="demo-color-box demo-color-box-other demo-color-box-lite"
-          :style="{ background: border_color_extra_light }"
-        >
-          Border Extralight
-          <div class="value">{{border_color_extra_light}}</div>
-        </div>
-      </el-col>
-    </el-row>
+      <el-row :gutter="12">
+        <el-col :span="4">
+          <div
+            class="demo-color-box demo-color-box-other demo-color-box-lite"
+            :style="{ background: border_color_base }"
+          >
+            Border Base
+            <div class="value">{{border_color_base}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div
+            class="demo-color-box demo-color-box-other demo-color-box-lite"
+            :style="{ background: border_color_light }"
+          >
+            Border Light
+            <div class="value">{{border_color_light}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div
+            class="demo-color-box demo-color-box-other demo-color-box-lite"
+            :style="{ background: border_color_lighter }"
+          >
+            Border Lighter
+            <div class="value">{{border_color_lighter}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div
+            class="demo-color-box demo-color-box-other demo-color-box-lite"
+            :style="{ background: border_color_extra_light }"
+          >
+            Border Extralight
+            <div class="value">{{border_color_extra_light}}</div>
+          </div>
+        </el-col>
+      </el-row>
 
-    <el-row :gutter="12">
-      <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other" :style="{ background: color_black }">
-          Background B
-          <div class="value">{{color_black}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div
-          class="demo-color-box demo-color-box-other"
-          :style="{ background: color_white, color: '#303133', border: '1px solid #eee' }"
-        >
-          Background W
-          <div class="value">{{color_white}}</div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="demo-color-box demo-color-box-other bg-transparent">
-          Background
-          <div class="value">Transparent</div>
-        </div>
-      </el-col>
-    </el-row>
+      <el-row :gutter="12">
+        <el-col :span="4">
+          <div class="demo-color-box demo-color-box-other" :style="{ background: color_black }">
+            Background B
+            <div class="value">{{color_black}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div
+            class="demo-color-box demo-color-box-other"
+            :style="{ background: color_white, color: '#303133', border: '1px solid #eee' }"
+          >
+            Background W
+            <div class="value">{{color_white}}</div>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div class="demo-color-box demo-color-box-other bg-transparent">
+            Background
+            <div class="value">Transparent</div>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
     <h4>Typography</h4>
     <el-row :gutter="12">
       <el-col :span="6" class="heading">

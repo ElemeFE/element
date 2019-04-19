@@ -6,8 +6,8 @@
     display: inline-block;
     vertical-align: top;
     h3 {
-      font-size: 24px;
-      margin: 0 0 20px 0;
+      font-size: 28px;
+      margin: 15px 0 30px;
     }
   }
   .side {

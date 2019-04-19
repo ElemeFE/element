@@ -3,8 +3,9 @@
   padding-right: 10px;
   padding-bottom: 20px;
   h4 {
-    font-size: 18px;
-    margin: 25px 0;
+    font-size: 20px;
+    margin: 40px 0 20px;
+    color: #606266
   }
   .demo-item {
     margin-top: 10px;

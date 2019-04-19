@@ -52,7 +52,7 @@
 
 <style lang="scss">
 .configurator-action {
-  padding: 10px 10px 0;
+  padding: 15px 18px 0;
   .action-group {
     padding: 5px 0;
     img {
