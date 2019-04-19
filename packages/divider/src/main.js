@@ -7,28 +7,29 @@ export default {
     direction: {
       type: String,
       default: 'horizontal',
-      validator: function(value) {
-        return ['horizontal', 'vertical'].indexOf(value) !== -1;
+      validator(val) {
+        return ['horizontal', 'vertical'].indexOf(val) !== -1;
       }
     },
 
     contentPosition: {
       type: String,
       default: 'center',
-      validator: val => {
+      validator(val) {
         return ['left', 'center', 'right'].indexOf(val) !== -1;
       }
     }
   },
 
-  render: function(h, context) {
-    let $slots = context.slots();
+  render(h, context) {
+    const $slots = context.slots();
+    const { direction, contentPosition } = context.props;
     return (
-      <div class={['el-divider', `el-divider--${context.props.direction}`]}>
+      <div class={['el-divider', `el-divider--${direction}`]}>
         {
-          $slots.default && context.props.direction !== 'vertical'
-            ? <div class={['el-divider__text', `is-${context.props.contentPosition}`]}>{$slots.default}</div>
-            : []
+          $slots.default && direction !== 'vertical'
+            ? <div class={['el-divider__text', `is-${contentPosition}`]}>{$slots.default}</div>
+            : null
         }
       </div>
     );
