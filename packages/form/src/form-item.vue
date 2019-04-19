@@ -281,7 +281,7 @@
         this.computedLabelWidth = width ? `${width}px` : '';
       },
       addValidateEvents() {
-        let rules = this.getRules();
+        const rules = this.getRules();
 
         if (rules.length || this.required !== undefined) {
           this.$on('el.form.blur', this.onFieldBlur);
