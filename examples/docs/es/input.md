@@ -285,7 +285,7 @@ export default {
   <el-input
     size="small"
     placeholder="Please Input"
-    v-model="input2">
+    v-model="input3">
   </el-input>
   <el-input
     size="mini"
@@ -300,7 +300,7 @@ export default {
     return {
       input1: '',
       input2: '',
-      input2: '',
+      input3: '',
       input4: ''
     }
   }
@@ -535,6 +535,42 @@ Búsqueda de datos desde el servidor.
 
 :::
 
+### Limit length
+
+:::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+
+```html
+<el-input
+  type="text"
+  placeholder="Please input"
+  v-model="text"
+  maxlength="10"
+  show-word-limit
+>
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  placeholder="Please input"
+  v-model="textarea"
+  maxlength="30"
+  show-word-limit
+>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      text: '',
+      textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Input atributos
 
 | Atributo      | Descripción                                                                                                                                      | Tipo             | Valores aceptados                                                                                                                       | Por defecto |
@@ -543,6 +579,7 @@ Búsqueda de datos desde el servidor.
 | value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
+| show-word-limit | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
 | clearable | si debe mostrar el boton de limpieza | boolean | — | false |
 | show-password | si debe mostrar la posibilidad de conmutacion de password input | boolean         | — | false |
