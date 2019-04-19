@@ -61,11 +61,13 @@
       height: 16px;
       padding: 7px 0;
       margin-left: 5px;
+      opacity: .5;
       &.active {
+        opacity: 1;
         cursor: pointer;
       }
       &:last-of-type {
-        margin-left: 5px;
+        margin-left: 10px;
       }
     }
     .button-group {
