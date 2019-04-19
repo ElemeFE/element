@@ -36,7 +36,7 @@
   }
   .preview {
     position: relative;
-    height: 65%;
+    height: 70%;
     width: 100%;
     .line {
       height: 50%;
@@ -114,7 +114,7 @@
     }
   }
   .info {
-    height: 35%;
+    height: 30%;
     line-height: 16px;
     display: flex;
     align-items: center;
@@ -125,7 +125,7 @@
       font-weight: bold;
       font-size: 16px;
       color: #303133;
-      padding: 0 10px;
+      padding: 0 12px;
       justify-content: space-between;
     }
     .right {
@@ -139,7 +139,7 @@
       cursor: pointer;
     }
     .description {
-      padding: 0 10px;
+      padding: 0 12px;
       font-size: 14px;
       color: #606266;
       margin-top: 10px;
