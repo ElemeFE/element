@@ -52,7 +52,9 @@ export default {
 
     background: Boolean,
 
-    disabled: Boolean
+    disabled: Boolean,
+
+    hideOnSinglePage: Boolean
   },
 
   data() {
@@ -65,12 +67,14 @@ export default {
   },
 
   render(h) {
+    const layout = this.layout;
+    if (!layout) return null;
+    if (this.hideOnSinglePage && (!this.internalPageCount || this.internalPageCount === 1)) return null;
+
     let template = <div class={['el-pagination', {
       'is-background': this.background,
       'el-pagination--small': this.small
     }] }></div>;
-    const layout = this.layout || '';
-    if (!layout) return;
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,

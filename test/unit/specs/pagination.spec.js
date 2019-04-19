@@ -421,6 +421,17 @@ describe('Pagination', () => {
     expect(vm.page).to.equal(1);
   });
 
+  it('hideOnSinglePage', () => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          hide-on-single-page
+          :total="1" />
+      `
+    });
+    expect(vm.$el.nodeType).to.be.equal(window.Node.COMMENT_NODE);
+  });
+
   describe('click pager', () => {
     it('click ul', () => {
       vm = createTest(Pagination, {
