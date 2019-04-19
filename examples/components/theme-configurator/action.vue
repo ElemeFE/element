@@ -93,13 +93,19 @@
     }
   }
   .selector {
-    width: 100%;;
+    width: 100%;
+    input {
+      background: #f5f7fa;
+      border: none;
+      font-size: 18px;
+      padding-left: 0;
+      color: #606266;
+    }
   }
   .line {
-    margin-top: 10px;
     width: 100%;
     height: 0;
-    border: 1px solid #DCDFE6;
+    border-bottom: 1px solid #DCDFE6;
   }
 }
 </style>
