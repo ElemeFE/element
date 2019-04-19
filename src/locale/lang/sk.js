@@ -106,6 +106,9 @@ export default {
       filterPlaceholder: 'Filtrovať podľa',
       noCheckedFormat: '{total} položiek',
       hasCheckedFormat: '{checked}/{total} označených'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

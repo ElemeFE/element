@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Sisesta märksõna',
       noCheckedFormat: '{total} objekti',
       hasCheckedFormat: '{checked}/{total} valitud'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };
