@@ -114,27 +114,36 @@
     }
   }
   .info {
-    padding: 10px 10px 0;
+    height: 35%;
     line-height: 16px;
+    display: flex;
+    flex-direction: column;
     .title {
+      flex: 1;
       font-weight: bold;
       font-size: 16px;
       color: #303133;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     .right {
       font-weight: normal;
       font-size: 14px;
       color: #909399;
-      float: right;
     }
     .more {
       font-size: 16px;
       cursor: pointer;
     }
     .description {
+      padding: 0 10px;
+      flex: 1;
       font-size: 14px;
       color: #606266;
-      margin-top: 10px;
+      display: flex;
+      align-items: center;
     }
   }
   &.is-upload {
@@ -205,8 +214,8 @@
         </div>
       </div>
       <div class="info">
-        <span class="title">
-          {{config.name}}
+        <div class="title">
+          <span>{{config.name}}</span>
           <span class="right" v-if="isOfficial">by {{config.author}}</span>
           <span class="right more" v-else>
             <el-dropdown @command="actionClick">
@@ -231,7 +240,7 @@
               </el-dropdown-menu>
             </el-dropdown>
           </span>
-        </span>
+        </div>
         <div class="description" v-if="isOfficial">{{config.description}}</div>
         <div class="description" v-else>最近修改 {{formatDate(config.update)}}</div>
       </div>

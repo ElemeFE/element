@@ -7,7 +7,7 @@
     vertical-align: top;
     h3 {
       font-size: 28px;
-      margin: 15px 0 30px;
+      margin: 30px 0 0 0;
     }
   }
   .side {

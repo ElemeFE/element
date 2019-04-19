@@ -1,11 +1,13 @@
 <style lang="scss">
 .component-preview {
   padding-right: 10px;
-  padding-bottom: 20px;
+  &:last-of-type {
+    padding-bottom: 20px;
+  }
   h4 {
     font-size: 20px;
     margin: 40px 0 20px;
-    color: #606266
+    color: #909399
   }
   .demo-item {
     margin-top: 10px;
@@ -236,11 +238,9 @@
     </el-row>
     <h4>Tooltip</h4>
     <el-row>
-      <div role="tooltip" x-placement="top" class="el-tooltip__popper is-dark" style="position: relative; width: 40px;">Dark
-        <div x-arrow="" class="popper__arrow"></div>
+      <div role="tooltip" x-placement="top" class="el-tooltip__popper is-dark" style="position: relative; width: 40px;text-align: center;">Dark<div x-arrow="" class="popper__arrow"></div>
       </div>
-      <div role="tooltip" x-placement="top" class="el-tooltip__popper is-light" style="margin-top: 10px;position: relative; width: 40px;">Light
-        <div x-arrow="" class="popper__arrow"></div>
+      <div role="tooltip" x-placement="top" class="el-tooltip__popper is-light" style="margin-top: 10px;position: relative; width: 40px;text-align: center;">Light<div x-arrow="" class="popper__arrow"></div>
       </div>
     </el-row>
     <h4>Popover</h4>
