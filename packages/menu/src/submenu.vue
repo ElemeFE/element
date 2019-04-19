@@ -76,7 +76,7 @@
           : this.popperAppendToBody;
       },
       menuTransitionName() {
-        return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
+        return this.rootMenu.collapse ? 'collapse-transition' : 'el-zoom-in-top';
       },
       opened() {
         return this.rootMenu.openedMenus.indexOf(this.index) > -1;
@@ -228,7 +228,6 @@
       },
       initPopper() {
         this.referenceElm = this.$el;
-        this.popperElm = this.$refs.menu;
         this.updatePlacement();
       }
     },
