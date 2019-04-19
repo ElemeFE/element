@@ -117,18 +117,19 @@
     height: 35%;
     line-height: 16px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    .info-center {
+      width: 100%;
+    }
     .title {
-      flex: 1;
       font-weight: bold;
       font-size: 16px;
       color: #303133;
       padding: 0 10px;
-      display: flex;
-      align-items: center;
       justify-content: space-between;
     }
     .right {
+      float: right;
       font-weight: normal;
       font-size: 14px;
       color: #909399;
@@ -139,11 +140,9 @@
     }
     .description {
       padding: 0 10px;
-      flex: 1;
       font-size: 14px;
       color: #606266;
-      display: flex;
-      align-items: center;
+      margin-top: 10px;
     }
   }
   &.is-upload {
@@ -214,35 +213,37 @@
         </div>
       </div>
       <div class="info">
-        <div class="title">
-          <span>{{config.name}}</span>
-          <span class="right" v-if="isOfficial">by {{config.author}}</span>
-          <span class="right more" v-else>
-            <el-dropdown @command="actionClick">
-              <i class="el-icon-more"></i>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="rename">修改命名</el-dropdown-item>
-                <el-dropdown-item command="copy">复制主题</el-dropdown-item>
-                <el-popover placement="top" width="160" v-model="deleteVisible">
-                  <p>这是一段内容这是一段内容确定删除吗？</p>
-                  <div style="text-align: right; margin: 0">
-                    <el-button size="mini" type="text" @click="deleteVisible = false">取消</el-button>
-                    <el-button type="primary" size="mini" @click="deleteUserTheme">确定</el-button>
-                  </div>
-                  <el-dropdown-item 
-                    command="delete" 
-                    style="color: #F56C6C;"
-                    slot="reference"
-                  >
-                    删除主题
-                  </el-dropdown-item>
-                </el-popover>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </span>
+        <div class="info-center">
+          <div class="title">
+            <span>{{config.name}}</span>
+            <span class="right" v-if="isOfficial">by {{config.author}}</span>
+            <span class="right more" v-else>
+              <el-dropdown @command="actionClick">
+                <i class="el-icon-more"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item command="rename">修改命名</el-dropdown-item>
+                  <el-dropdown-item command="copy">复制主题</el-dropdown-item>
+                  <el-popover placement="top" width="160" v-model="deleteVisible">
+                    <p>这是一段内容这是一段内容确定删除吗？</p>
+                    <div style="text-align: right; margin: 0">
+                      <el-button size="mini" type="text" @click="deleteVisible = false">取消</el-button>
+                      <el-button type="primary" size="mini" @click="deleteUserTheme">确定</el-button>
+                    </div>
+                    <el-dropdown-item 
+                      command="delete" 
+                      style="color: #F56C6C;"
+                      slot="reference"
+                    >
+                      删除主题
+                    </el-dropdown-item>
+                  </el-popover>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </span>
+          </div>
+          <div class="description" v-if="isOfficial">{{config.description}}</div>
+          <div class="description" v-else>最近修改 {{formatDate(config.update)}}</div>
         </div>
-        <div class="description" v-if="isOfficial">{{config.description}}</div>
-        <div class="description" v-else>最近修改 {{formatDate(config.update)}}</div>
       </div>
     </template>
   </section>
