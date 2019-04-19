@@ -1,4 +1,4 @@
-import { createTest, createVue, destroyVM } from '../util';
+import { createTest, createVue, destroyVM, wait } from '../util';
 import Link from 'packages/link';
 
 describe('Link', () => {
@@ -44,7 +44,8 @@ describe('Link', () => {
     let linkElm = vm.$el;
     expect(linkElm.classList.contains('is-disabled')).to.be.true;
   });
-  it('click', done => {
+
+  it('click', async() => {
     let result;
     vm = createVue({
       template: `
@@ -57,11 +58,8 @@ describe('Link', () => {
       }
     }, true);
     vm.$el.click();
-
-    setTimeout(_ => {
-      expect(result).to.exist;
-      done();
-    }, 20);
+    await wait();
+    expect(result).to.exist;
   });
 
 });
