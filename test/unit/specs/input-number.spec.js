@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
+import {createVue, triggerEvent, triggerClick, destroyVM, waitImmediate} from '../util';
 
 const DELAY = 1;
 
@@ -142,10 +142,10 @@ describe('InputNumber', () => {
       });
     });
   });
-  it('multiple of step', done => {
+  it('step strictly', async() => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :step="1.2" multiple-of-step>
+        <el-input-number v-model="value" :step="1.2" step-strictly>
         </el-input-number>
       `,
       data() {
@@ -156,19 +156,14 @@ describe('InputNumber', () => {
     }, true);
 
     let input = vm.$el.querySelector('input');
+    await waitImmediate();
+    expect(vm.value).to.be.equal(4.8);
+    expect(input.value).to.be.equal('4.8');
+    vm.value = '8';
 
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(4.8);
-      expect(input.value).to.be.equal('4.8');
-
-      vm.value = '8';
-
-      vm.$nextTick(_ => {
-        expect(vm.value).to.be.equal(8.4);
-        expect(input.value).to.be.equal('8.4');
-        done();
-      });
-    });
+    await waitImmediate();
+    expect(vm.value).to.be.equal(8.4);
+    expect(input.value).to.be.equal('8.4');
   });
   it('min', done => {
     vm = createVue({

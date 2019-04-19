@@ -72,7 +72,7 @@
         type: Number,
         default: 1
       },
-      multipleOfStep: {
+      stepStrictly: {
         type: Boolean,
         default: false
       },
@@ -121,7 +121,7 @@
               return;
             }
 
-            if (this.multipleOfStep) {
+            if (this.stepStrictly) {
               const stepPrecision = this.getPrecision(this.step);
               const precisionFactor = Math.pow(10, stepPrecision);
               newVal = Math.round(newVal / this.step) * precisionFactor * this.step / precisionFactor;
@@ -178,7 +178,7 @@
         let currentValue = this.currentValue;
 
         if (typeof currentValue === 'number') {
-          if (this.multipleOfStep) {
+          if (this.stepStrictly) {
             const stepPrecision = this.getPrecision(this.step);
             const precisionFactor = Math.pow(10, stepPrecision);
             currentValue = Math.round(currentValue / this.step) * precisionFactor * this.step / precisionFactor;

@@ -69,13 +69,13 @@ Le permite definir el nivel de incremento de los saltos.
 ```
 :::
 
-### Multiple of Step
+### Step strictly
 
-:::demo The `multiple-of-step` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
+:::demo The `step-strictly` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2" multiple-of-step></el-input-number>
+  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
 </template>
 <script>
   export default {
@@ -175,7 +175,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
-| multiple-of-step  | whether input value can can only be multiple of step | number  | —                 | false       |
+| step-strictly  | whether input value can can only be multiple of step | number  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
