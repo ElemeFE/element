@@ -34,9 +34,8 @@
 
 <script>
   import { hasClass } from 'element-ui/src/utils/dom';
+  import { isObject } from 'element-ui/src/utils/types';
   import Migrating from 'element-ui/src/mixins/migrating';
-
-  const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]';
 
   export default {
     name: 'ElRate',
