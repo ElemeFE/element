@@ -12,6 +12,10 @@
     margin-right: 40px;
   }
 
+  .demo-line {
+    margin: 15px 0;
+  }
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
@@ -24,13 +28,43 @@
 <template>
   <div class="component-preview">
     <h4>Button</h4>
-    <el-row>
+    <el-row class="demo-line">
       <el-button>Default</el-button>
       <el-button type="primary">Primary</el-button>
       <el-button type="success">Success</el-button>
       <el-button type="info">Info</el-button>
       <el-button type="warning">Warning</el-button>
       <el-button type="danger">Danger</el-button>
+    </el-row>
+    <el-row class="demo-line">
+      <el-button plain>Plain</el-button>
+      <el-button type="primary" plain>Primary</el-button>
+      <el-button type="success" plain>Success</el-button>
+      <el-button type="info" plain>Info</el-button>
+      <el-button type="warning" plain>Warning</el-button>
+      <el-button type="danger" plain>Danger</el-button>
+    </el-row>
+    <el-row class="demo-line">
+      <el-button round>Round</el-button>
+      <el-button type="primary" round>Primary</el-button>
+      <el-button type="success" round>Success</el-button>
+      <el-button type="info" round>Info</el-button>
+      <el-button type="warning" round>Warning</el-button>
+      <el-button type="danger" round>Danger</el-button>
+    </el-row>
+    <el-row class="demo-line">
+      <el-button icon="el-icon-search" circle></el-button>
+      <el-button type="primary" icon="el-icon-edit" circle></el-button>
+      <el-button type="success" icon="el-icon-check" circle></el-button>
+      <el-button type="info" icon="el-icon-message" circle></el-button>
+      <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+    </el-row>
+    <el-row class="demo-line">
+      <el-button>Default</el-button>
+      <el-button size="medium">Medium</el-button>
+      <el-button size="small">Small</el-button>
+      <el-button size="mini">Mini</el-button>
     </el-row>
     <h4>Radio</h4>
     <el-row>
@@ -142,7 +176,10 @@
     </el-row>
     <h4>Message</h4>
     <el-row>
-      <div role="alert" class="el-message el-message--info el-message-fade-leave-active el-message-fade-leave-to" style="top: 0;left: 0;width: 100px; opacity: 1; position: relative;transform: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">This is a message.</p><!----></div>
+      <div role="alert" class="demo-item el-message el-message--success el-message-fade-leave-active el-message-fade-leave-to" style="top: 0;left: 0;width: 100px; opacity: 1; position: relative;transform: none;"><i class="el-message__icon el-icon-success"></i><p class="el-message__content">Congrats, this is a success message.</p><!----></div>
+      <div role="alert" class="demo-item el-message el-message--warning el-message-fade-leave-active el-message-fade-leave-to" style="top: 0;left: 0;width: 100px; opacity: 1; position: relative;transform: none;"><i class="el-message__icon el-icon-warning"></i><p class="el-message__content">Warning, this is a warning message.</p><!----></div>
+      <div role="alert" class="demo-item el-message el-message--info el-message-fade-leave-active el-message-fade-leave-to" style="top: 0;left: 0;width: 100px; opacity: 1; position: relative;transform: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">This is a message.</p><!----></div>
+      <div role="alert" class="demo-item el-message el-message--error el-message-fade-leave-active el-message-fade-leave-to" style="top: 0;left: 0;width: 100px; opacity: 1; position: relative;transform: none;"><i class="el-message__icon el-icon-error"></i><p class="el-message__content">Oops, this is a error message.</p><!----></div>
     </el-row>
     <h4>MessageBox</h4>
     <el-row>
@@ -180,11 +217,17 @@
     </el-row>
     <h4>Tabs</h4>
     <el-row>
-      <el-tabs v-model="tab">
+      <el-tabs v-model="tab" class="demo-item">
         <el-tab-pane label="User" name="first">User</el-tab-pane>
         <el-tab-pane label="Config" name="second">Config</el-tab-pane>
         <el-tab-pane label="Role" name="third">Role</el-tab-pane>
         <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
+      </el-tabs>
+      <el-tabs type="card" class="demo-item">
+        <el-tab-pane label="User">User</el-tab-pane>
+        <el-tab-pane label="Config">Config</el-tab-pane>
+        <el-tab-pane label="Role">Role</el-tab-pane>
+        <el-tab-pane label="Task">Task</el-tab-pane>
       </el-tabs>
     </el-row>
     <h4>Dialog</h4>

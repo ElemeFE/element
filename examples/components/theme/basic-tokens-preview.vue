@@ -6,6 +6,10 @@
   .title {
     font-size: 18px;
     font-weight:400;
+    padding: 0 20px
+  }
+  .paragraph {
+    padding: 0 20px
   }
   .demo-color-box {
     margin: 0;
@@ -135,23 +139,27 @@
         <div :style="{ fontSize: font_size_small }">Heading5</div>
         <div :style="{ fontSize: font_size_extra_small }">Heading6</div>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="9">
         <div class="title">Example body text</div>
-        <p :style="{ 
-          fontSize: font_size_base,
-          fontWeight: font_weight_primary, 
-          lineHeight: font_line_height_primary
-        }" >
-          With MySpace becoming more popular every day, there is the constant need to be different. There are millions of users, and there will be many who might even use the same layouts. If MySpace layouts are chosen well, then you can enhance your profile a great deal. This will help you get more contacts as well. But because of the demand, there will be the need to find unique layouts.</p>
+        <p 
+          class="paragraph"
+          :style="{ 
+            fontSize: font_size_base,
+            fontWeight: font_weight_primary, 
+            lineHeight: font_line_height_primary
+          }" >
+          With MySpace becoming more popular every day, there is the constant need to be different. There are millions of users. If MySpace layouts are chosen well, then you can enhance your profile a great deal.</p>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="9">
         <div class="title">Example small text</div>
-        <p :style="{ 
-          fontSize: font_size_small,
-          fontWeight: font_weight_secondary, 
-          lineHeight: font_line_height_secondary
-        }" >
-          Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch with the central office via their notebooks. At home, we rely on our desktops and notebooks to do our shopping, to entertain us, and to keep us abreast of world events. We may not see our email servers, but we count on them to deliver our email whenever and wherever we want it. Computer hardware weaves itself through the fabric of our lives.</p>
+        <p 
+          class="paragraph"
+          :style="{ 
+            fontSize: font_size_small,
+            fontWeight: font_weight_secondary, 
+            lineHeight: font_line_height_secondary
+          }" >
+          Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch with the central office via their notebooks. Computer hardware weaves itself through the fabric of our lives.</p>
       </el-col>
     </el-row>
   </div>
