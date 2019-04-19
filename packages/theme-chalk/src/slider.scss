@@ -5,6 +5,7 @@
 @import "common/var";
 
 @include b(slider) {
+
   @include utils-clearfix;
 
   @include e(runway) {
@@ -151,6 +152,21 @@
     transform: translateX(-50%);
   }
 
+  @include e(marks) {
+    top: 0;
+    left: 12px;
+    width: 18px;
+    height: 100%;
+
+    @include e(marks-text) {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: $--color-info;
+      margin-top: 15px;
+    }
+  }
+
   @include when(vertical) {
     position: relative;
     .el-slider__runway {
@@ -223,6 +239,12 @@
           }
         }
       }
+    }
+
+    @include e(marks-text) {
+      margin-top: 0;
+      left: 15px;
+      transform: translateY(50%);
     }
   }
 }
