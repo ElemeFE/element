@@ -3,13 +3,13 @@
     :class="[
       'el-link',
       type ? `el-link--${type}` : '',
-      disabled && 'is-disabled'
+      disabled && 'is-disabled',
+      underline && !disabled && 'is-underline'
     ]"
     :href="href"
     :target="target"
     @click="handleClick"
-    @mouseenter="isHover = true"
-    @mouseleave="isHover = false">
+  >
 
     <el-icon :class="icon" v-if="icon"></el-icon>
 
@@ -18,12 +18,6 @@
     </span>
 
     <template v-if="$slots.icon"><slot v-if="$slots.icon" name="icon"></slot></template>
-
-    <!-- underline -->
-    <div
-      :style="{ bottom: underlineBottom + 'px' }"
-      v-if="showUnderline"
-      class="el-link--underline"></div>
   </a>
 </template>
 
@@ -45,19 +39,6 @@ export default {
     href: String,
     target: String,
     icon: String
-  },
-
-  data() {
-    return {
-      isHover: false,
-      underlineBottom: -2
-    };
-  },
-
-  computed: {
-    showUnderline() {
-      return this.isHover && this.underline && !this.disabled;
-    }
   },
 
   methods: {
