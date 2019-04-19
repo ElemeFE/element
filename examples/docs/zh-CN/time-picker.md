@@ -9,7 +9,7 @@
 :::demo 使用 el-time-select 标签，分别通过`star`、`end`和`step`指定可选的起始时间、结束时间和步长
 ```html
 <el-time-select
-  v-model="value1"
+  v-model="value"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -22,7 +22,7 @@
   export default {
     data() {
       return {
-        value1: ''
+        value: ''
       };
     }
   }
@@ -38,7 +38,7 @@
 ```html
 <template>
   <el-time-picker
-    v-model="value2"
+    v-model="value1"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -46,7 +46,7 @@
   </el-time-picker>
   <el-time-picker
     arrow-control
-    v-model="value3"
+    v-model="value2"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -58,8 +58,8 @@
   export default {
     data() {
       return {
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40)
+        value1: new Date(2016, 9, 10, 18, 40),
+        value2: new Date(2016, 9, 10, 18, 40)
       };
     }
   }
@@ -117,7 +117,7 @@
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value1"
     range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
@@ -126,7 +126,7 @@
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value2"
     range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
@@ -138,8 +138,8 @@
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value2: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }

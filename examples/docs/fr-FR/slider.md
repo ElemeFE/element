@@ -64,14 +64,14 @@ Les valeurs peuvent être discrètes.
   <div class="block">
     <span class="demonstration">Points absents</span>
     <el-slider
-      v-model="value6"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Points affichés</span>
     <el-slider
-      v-model="value7"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -82,8 +82,8 @@ Les valeurs peuvent être discrètes.
   export default {
     data() {
       return {
-        value6: 0,
-        value7: 0
+        value1: 0,
+        value2: 0
       }
     }
   }
@@ -101,7 +101,7 @@ Vous pouvez afficher un champ d'input synchronisé pour entrer une valeur préci
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value"
       show-input>
     </el-slider>
   </div>
@@ -111,7 +111,7 @@ Vous pouvez afficher un champ d'input synchronisé pour entrer une valeur préci
   export default {
     data() {
       return {
-        value8: 0
+        value: 0
       }
     }
   }
@@ -128,7 +128,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 <template>
   <div class="block">
     <el-slider
-      v-model="value9"
+      v-model="value"
       range
       show-stops
       :max="10">
@@ -140,7 +140,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
   export default {
     data() {
       return {
-        value9: [4, 8]
+        value: [4, 8]
       }
     }
   }
@@ -155,7 +155,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 <template>
   <div class="block">
     <el-slider
-      v-model="value10"
+      v-model="value"
       vertical
       height="200px">
     </el-slider>
@@ -166,7 +166,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
   export default {
     data() {
       return {
-        value10: 0
+        value: 0
       }
     }
   }

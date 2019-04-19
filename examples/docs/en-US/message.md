@@ -45,14 +45,14 @@ Used to show the feedback of Success, Warning, Message and Error activities.
 <template>
   <el-button :plain="true" @click="open2">success</el-button>
   <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open">message</el-button>
+  <el-button :plain="true" @click="open1">message</el-button>
   <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open() {
+      open1() {
         this.$message('This is a message.');
       },
       open2() {
@@ -85,23 +85,23 @@ A close button can be added.
 :::demo A default Message cannot be closed manually. If you need a closable message, you can set `showClose` field. Besides, same as notification, message has a controllable `duration`. Default duration is 3000 ms, and it won't disappear when set to `0`.
 ```html
 <template>
-  <el-button :plain="true" @click="open5">message</el-button>
-  <el-button :plain="true" @click="open6">success</el-button>
-  <el-button :plain="true" @click="open7">warning</el-button>
-  <el-button :plain="true" @click="open8">error</el-button>
+  <el-button :plain="true" @click="open1">message</el-button>
+  <el-button :plain="true" @click="open2">success</el-button>
+  <el-button :plain="true" @click="open3">warning</el-button>
+  <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open5() {
+      open1() {
         this.$message({
           showClose: true,
           message: 'This is a message.'
         });
       },
 
-      open6() {
+      open2() {
         this.$message({
           showClose: true,
           message: 'Congrats, this is a success message.',
@@ -109,7 +109,7 @@ A close button can be added.
         });
       },
 
-      open7() {
+      open3() {
         this.$message({
           showClose: true,
           message: 'Warning, this is a warning message.',
@@ -117,7 +117,7 @@ A close button can be added.
         });
       },
 
-      open8() {
+      open4() {
         this.$message({
           showClose: true,
           message: 'Oops, this is a error message.',

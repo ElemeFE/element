@@ -64,14 +64,14 @@ The options can be discrete.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value6"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value7"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -82,8 +82,8 @@ The options can be discrete.
   export default {
     data() {
       return {
-        value6: 0,
-        value7: 0
+        value1: 0,
+        value2: 0
       }
     }
   }
@@ -101,7 +101,7 @@ Set value via a input box.
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value"
       show-input>
     </el-slider>
   </div>
@@ -111,7 +111,7 @@ Set value via a input box.
   export default {
     data() {
       return {
-        value8: 0
+        value: 0
       }
     }
   }
@@ -128,7 +128,7 @@ Selecting a range of values is supported.
 <template>
   <div class="block">
     <el-slider
-      v-model="value9"
+      v-model="value"
       range
       show-stops
       :max="10">
@@ -140,7 +140,7 @@ Selecting a range of values is supported.
   export default {
     data() {
       return {
-        value9: [4, 8]
+        value: [4, 8]
       }
     }
   }
@@ -155,7 +155,7 @@ Selecting a range of values is supported.
 <template>
   <div class="block">
     <el-slider
-      v-model="value10"
+      v-model="value"
       vertical
       height="200px">
     </el-slider>
@@ -166,7 +166,7 @@ Selecting a range of values is supported.
   export default {
     data() {
       return {
-        value10: 0
+        value: 0
       }
     }
   }
