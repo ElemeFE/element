@@ -29,6 +29,39 @@
 ```
 :::
 
+### 主题
+
+Alert 组件提供了两个不同的主题：`light`和`dark`。
+
+:::demo 通过设置`effect`属性来改变主题，默认为`light`。
+```html
+<template>
+  <el-alert
+    title="成功提示的文案"
+    type="success"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="消息提示的文案"
+    type="info"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="警告提示的文案"
+    type="warning"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="错误提示的文案"
+    type="error"
+    effect="dark">
+  </el-alert>
+</template>
+```
+:::
+
+
+
 ### 自定义关闭按钮
 
 自定义关闭按钮为文字或其他符号。
@@ -190,6 +223,7 @@
 | center | 文字是否居中 | boolean | — | true |
 | close-text | 关闭按钮自定义文本 | string | — | — |
 | show-icon | 是否显示图标 | boolean | — | false |
+| effect | 选择提供的主题 | string | light/dark | light |
 
 ### Slot
 
