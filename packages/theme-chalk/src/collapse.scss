@@ -7,6 +7,12 @@
   border-bottom: 1px solid $--collapse-border-color;
 }
 @include b(collapse-item) {
+  @include when(disabled) {
+    .el-collapse-item__header {
+      color: $--font-color-disabled-base;
+      cursor: not-allowed;
+    }
+  }
   @include e(header) {
     display: flex;
     align-items: center;

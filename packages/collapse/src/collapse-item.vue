@@ -1,5 +1,6 @@
 <template>
-  <div class="el-collapse-item" :class="{'is-active': isActive}">
+  <div class="el-collapse-item"
+    :class="{'is-active': isActive, 'is-disabled': disabled }">
     <div
       role="tab"
       :aria-expanded="isActive"
@@ -11,7 +12,7 @@
         @click="handleHeaderClick"
         role="button"
         :id="`el-collapse-head-${id}`"
-        tabindex="0"
+        :tabindex="disabled ? undefined : 0"
         @keyup.space.enter.stop="handleEnterClick"
         :class="{
           'focusing': focusing,
@@ -65,7 +66,8 @@
         },
         contentHeight: 0,
         focusing: false,
-        isClick: false
+        isClick: false,
+        id: generateId()
       };
     },
 
@@ -78,15 +80,13 @@
         default() {
           return this._uid;
         }
-      }
+      },
+      disabled: Boolean
     },
 
     computed: {
       isActive() {
         return this.collapse.activeNames.indexOf(this.name) > -1;
-      },
-      id() {
-        return generateId();
       }
     },
 
@@ -101,6 +101,7 @@
         }, 50);
       },
       handleHeaderClick() {
+        if (this.disabled) return;
         this.dispatch('ElCollapse', 'item-click', this);
         this.focusing = false;
         this.isClick = true;
