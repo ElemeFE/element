@@ -7,7 +7,7 @@
       underline && !disabled && 'is-underline'
     ]"
     :href="href"
-    :target="target"
+    v-bind="$attrs"
     @click="handleClick"
   >
 
@@ -37,7 +37,6 @@ export default {
     },
     disabled: Boolean,
     href: String,
-    target: String,
     icon: String
   },
 

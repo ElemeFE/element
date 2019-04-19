@@ -7,7 +7,7 @@
 :::demo
 ```html
 <div>
-  <el-link href="https://element.eleme.io">default</el-link>
+  <el-link href="https://element.eleme.io" target="_blank">default</el-link>
   <el-link type="primary">primary</el-link>
   <el-link type="success">success</el-link>
   <el-link type="warning">warning</el-link>
@@ -63,5 +63,4 @@
 | underline      | 是否下划线                         | boolean | —                                    | true    |
 | disabled       | 是否禁用状态                       | boolean | —                                    | false   |
 | href           | 原生 href 属性                     | string  | —                                    | -       |
-| target         |原生 target 属性 | string  | —                                    | -       |
 | icon           | 图标类名                       | string  | —                                    | -       |

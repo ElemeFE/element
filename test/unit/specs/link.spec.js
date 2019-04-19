@@ -29,9 +29,11 @@ describe('Link', () => {
     expect(linkElm.getAttribute('href')).to.be.equal('https://element.eleme.io/');
   });
   it('target', () => {
-    vm = createTest(Link, {
-      target: '_blank'
-    }, true);
+    vm = createVue(`
+    <el-link href="https://element.eleme.io" target="_blank">
+      default
+    </el-link>
+    `);
     let linkElm = vm.$el;
     expect(linkElm.getAttribute('target')).to.be.equal('_blank');
   });
