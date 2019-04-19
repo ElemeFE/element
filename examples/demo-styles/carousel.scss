@@ -3,7 +3,7 @@
   text-align: center;
   border-right: solid 1px #eff2f6;
   display: inline-block;
-  width: 50%;
+  width: 49%;
   box-sizing: border-box;
   &:last-child {
     border-right: none;
@@ -27,6 +27,14 @@
     font-size: 18px;
     line-height: 300px;
     margin: 0;
+    &.small {
+      font-size: 14px;
+      line-height: 150px;
+    }
+    &.medium {
+      font-size: 14px;
+      line-height: 200px;
+    }
   }
   &:nth-child(2n) {
     background-color: #99a9bf;
@@ -36,12 +44,3 @@
   }
 }
 
-.demo-carousel .small h3 {
-  font-size: 14px;
-  line-height: 150px;
-}
-
-.demo-carousel .medium h3 {
-  font-size: 14px;
-  line-height: 200px;
-}
