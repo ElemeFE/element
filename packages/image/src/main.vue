@@ -17,35 +17,9 @@
 
 <script>
   import Locale from 'element-ui/src/mixins/locale';
-  import { on, off, getScrollContainer } from 'element-ui/src/utils/dom';
+  import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
+  import { isString, isHtmlElement } from 'element-ui/src/utils/types';
   import throttle from 'throttle-debounce/throttle';
-
-  const isInContainer = (el, container) => {
-    if (!el || !container) return false;
-
-    const elRect = el.getBoundingClientRect();
-    let containerRect;
-
-    if ([window, document, document.documentElement, null, undefined].includes(container)) {
-      containerRect = {
-        top: 0,
-        right: window.innerWidth,
-        bottom: window.innerHeight,
-        left: 0
-      };
-    } else {
-      containerRect = container.getBoundingClientRect();
-    }
-
-    return elRect.top < containerRect.bottom &&
-      elRect.bottom > containerRect.top &&
-      elRect.right > containerRect.left &&
-      elRect.left < containerRect.right;
-  };
-
-  const isHtmlElement = obj => obj && obj.nodeType === Node.ELEMENT_NODE;
-
-  const isString = obj => Object.prototype.toString.call(obj) === '[object String]';
 
   export default {
     name: 'ElImage',
@@ -70,7 +44,7 @@
 
     watch: {
       src: {
-        handler: function(val) {
+        handler(val) {
           this.show && this.loadImage(val);
         },
         immediate: true
