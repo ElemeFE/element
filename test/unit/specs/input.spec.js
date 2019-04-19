@@ -426,28 +426,28 @@ describe('Input', () => {
             type="text"
             v-model="input1"
             maxlength="10"
-            :show-word-count="show">
+            :show-word-limit="show">
           </el-input>
           <el-input
             class="test-textarea"
             type="textarea"
             v-model="input2"
             maxlength="10"
-            show-word-count>
+            show-word-limit>
           </el-input>
           <el-input
             class="test-password"
             type="password"
             v-model="input3"
             maxlength="10"
-            show-word-count>
+            show-word-limit>
           </el-input>
           <el-input
             class="test-initial-exceed"
             type="text"
             v-model="input4"
             maxlength="2"
-            show-word-count>
+            show-word-limit>
           </el-input>
         </div>
       `,

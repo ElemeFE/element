@@ -521,16 +521,17 @@ Search data from server-side.
 ```
 :::
 
-### Limit length and show word count
+### Limit length
 
-:::demo Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-count` to `true` at the same time.
+:::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+
 ```html
 <el-input
   type="text"
   placeholder="Please input"
   v-model="text"
   maxlength="10"
-  show-word-count
+  show-word-limit
 >
 </el-input>
 <div style="margin: 20px 0;"></div>
@@ -539,7 +540,7 @@ Search data from server-side.
   placeholder="Please input"
   v-model="textarea"
   maxlength="30"
-  show-word-count
+  show-word-limit
 >
 </el-input>
 
@@ -564,7 +565,7 @@ export default {
 |value / v-model| binding value | string / number| — | — |
 |maxlength| same as `maxlength` in native input | number| — | — |
 |minlength| same as `minlength` in native input | number | — | — |
-|show-word-count | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
+|show-word-limit | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
 | show-password | whether to show toggleable password input| boolean         | — | false |

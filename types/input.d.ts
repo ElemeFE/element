@@ -82,13 +82,13 @@ export declare class ElInput extends ElementUIComponent {
   validateEvent: boolean
 
   /** Whether the input is clearable */
-  clearable?: boolean
+  clearable: boolean
 
   /** Whether to show password */
-  showPassword?: boolean
+  showPassword: boolean
 
   /** Whether to show wordCount when setting maxLength */
-  showWordCount?: boolean
+  showWordLimit: boolean
 
   /**
    * Focus the Input component
