@@ -133,6 +133,7 @@ const TableStore = function(table, initialState = {}) {
     sortingColumn: null,
     sortProp: null,
     sortOrder: null,
+    init: null,
     isAllSelected: false,
     selection: [],
     reserveSelection: false,
@@ -259,7 +260,7 @@ TableStore.prototype.mutations = {
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
 
-    if (!options || !options.silent && !options.isDefault) {
+    if (!options || !options.silent && !options.init) {
       this.table.$emit('sort-change', {
         column: this.states.sortingColumn,
         prop: this.states.sortProp,
@@ -271,10 +272,11 @@ TableStore.prototype.mutations = {
   },
 
   sort(states, options) {
-    const { prop, order } = options;
+    const { prop, order, init } = options;
     if (prop) {
       states.sortProp = prop;
       states.sortOrder = order || 'ascending';
+      states.init = init;
       Vue.nextTick(() => {
         for (let i = 0, length = states.columns.length; i < length; i++) {
           let column = states.columns[i];
@@ -287,7 +289,7 @@ TableStore.prototype.mutations = {
 
         if (states.sortingColumn) {
           this.commit('changeSortCondition', {
-            isDefault: true
+            init: states.init
           });
         }
       });

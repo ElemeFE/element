@@ -210,7 +210,8 @@ export default {
 
   mounted() {
     const { prop, order } = this.defaultSort;
-    this.store.commit('sort', { prop, order });
+    let init = true;
+    this.store.commit('sort', { prop, order, init });
   },
 
   beforeDestroy() {
