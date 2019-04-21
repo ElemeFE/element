@@ -53,7 +53,7 @@ export default function upload(option) {
     });
   }
 
-  formData.append(option.filename, option.file, option.file.name);
+  formData.append(option.filename, option.media, option.media.name);
 
   xhr.onerror = function error(e) {
     option.onError(e);
