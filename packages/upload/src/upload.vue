@@ -137,7 +137,7 @@ export default {
       const options = {
         headers: this.headers,
         withCredentials: this.withCredentials,
-        file: rawFile,
+        media: rawFile,
         data: this.data,
         filename: this.name,
         action: this.action,

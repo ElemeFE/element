@@ -3,7 +3,6 @@
       'el-form-item--feedback': elForm && elForm.statusIcon,
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
-      'is-success': validateState === 'success',
       'is-required': isRequired || required,
       'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },

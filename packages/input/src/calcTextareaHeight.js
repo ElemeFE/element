@@ -1,4 +1,5 @@
 let hiddenTextarea;
+let hiddenInput;
 
 const HIDDEN_STYLE = `
   height:0 !important;
@@ -48,13 +49,10 @@ function calculateNodeStyling(targetElement) {
     .join(';');
 
   return { contextStyle, paddingSize, borderSize, boxSizing };
-}
+};
 
-export default function calcTextareaHeight(
-  targetElement,
-  minRows = 1,
-  maxRows = null
-) {
+function calcTextareaHeight(targetElement, minRows = 1, maxRows = null) {
+
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
@@ -102,3 +100,67 @@ export default function calcTextareaHeight(
   hiddenTextarea = null;
   return result;
 };
+
+function newCalculateNodeStyling(targetElement) {
+
+  const style = window.getComputedStyle(targetElement);
+
+  const boxSizing = style.getPropertyValue('box-sizing');
+
+  const paddingSize = (
+    parseFloat(style.getPropertyValue('padding-left')) +
+    parseFloat(style.getPropertyValue('padding-right'))
+  );
+
+  const borderSize = (
+    parseFloat(style.getPropertyValue('border-left-width')) +
+    parseFloat(style.getPropertyValue('border-right-width'))
+  );
+
+  const contextStyle = CONTEXT_STYLE
+    .map(name => `${name}:${style.getPropertyValue(name)}`)
+    .join(';');
+
+  return { contextStyle, paddingSize, borderSize, boxSizing };
+};
+
+function calcInputWidth(targetElement, minWidth) {
+  if (!hiddenInput) {
+    hiddenInput = document.createElement('input');
+    document.body.appendChild(hiddenInput);
+  }
+
+  let {
+    paddingSize,
+    borderSize,
+    boxSizing,
+    contextStyle
+  } = newCalculateNodeStyling(targetElement);
+
+  hiddenInput.setAttribute('style', `${contextStyle};${HIDDEN_STYLE}`);
+  hiddenInput.value = targetElement.value || targetElement.placeholder || '';
+
+  let width = hiddenInput.width;
+  if (width < minWidth) {
+
+    width = minWidth;
+  }
+
+  if (boxSizing === 'border-box') {
+    width = width + borderSize;
+  } else if (boxSizing === 'content-box') {
+    width = width - paddingSize;
+  }
+
+  hiddenInput.value = '';
+  hiddenInput.parentNode && hiddenTextarea.parentNode.removeChild(hiddenInput);
+  hiddenInput = null;
+  return `${ width }px`;
+};
+
+export default {
+
+  calcTextareaHeight: calcTextareaHeight,
+  calcInputWidth: calcInputWidth
+};
+
