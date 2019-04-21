@@ -29,13 +29,13 @@
   /* 照片墙模式 */
   @include m(picture-card) {
     background-color: #fbfdff;
-    border: 1px dashed #c0ccda;
-    border-radius: 6px;
+    border: 1px dashed #e0e0e0;
+    border-radius: 1px;
     box-sizing: border-box;
-    width: 148px;
-    height: 148px;
+    width: 118px;
+    height: 118px;
     cursor: pointer;
-    line-height: 146px;
+    line-height: 136px;
     vertical-align: top;
 
     i {
@@ -271,11 +271,11 @@
     .el-upload-list__item {
       overflow: hidden;
       background-color: #fff;
-      border: 1px solid #c0ccda;
-      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      border-radius: 1px;
       box-sizing: border-box;
-      width: 148px;
-      height: 148px;
+      width: 118px;
+      height: 118px;
       margin: 0 8px 8px 0;
       display: inline-block;
 
