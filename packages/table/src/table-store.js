@@ -133,7 +133,6 @@ const TableStore = function(table, initialState = {}) {
     sortingColumn: null,
     sortProp: null,
     sortOrder: null,
-    init: null,
     isAllSelected: false,
     selection: [],
     reserveSelection: false,
@@ -260,7 +259,7 @@ TableStore.prototype.mutations = {
   changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
 
-    if (!options || !options.silent && !options.init) {
+    if (!options || !(options.silent || options.init)) {
       this.table.$emit('sort-change', {
         column: this.states.sortingColumn,
         prop: this.states.sortProp,
