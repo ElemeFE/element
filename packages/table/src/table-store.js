@@ -275,7 +275,6 @@ TableStore.prototype.mutations = {
     if (prop) {
       states.sortProp = prop;
       states.sortOrder = order || 'ascending';
-      states.init = init;
       Vue.nextTick(() => {
         for (let i = 0, length = states.columns.length; i < length; i++) {
           let column = states.columns[i];
@@ -288,7 +287,7 @@ TableStore.prototype.mutations = {
 
         if (states.sortingColumn) {
           this.commit('changeSortCondition', {
-            init: states.init
+            init: init
           });
         }
       });
