@@ -31,19 +31,18 @@
     font-weight: normal;
   }
 
+  &:not(.is-range) {
+    td.prev,
+    td.next {
+      color: $--color-text-placeholder;
+    }
+  }
+
   td {
     border-bottom: $--calendar-border;
     border-right: $--calendar-border;
     vertical-align: top;
     transition: background-color 0.2s ease;
-
-    &::not(.is-range) {
-      &.prev,
-      &.next {
-        color: $--color-text-placeholder;
-      }
-    }
-    
 
     @include when(selected) {
       background-color: $--calendar-selected-background-color;
