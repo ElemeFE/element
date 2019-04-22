@@ -167,17 +167,21 @@
     </el-row>
     <h4>Tag</h4>
     <el-row>
-      <el-tag class="demo-item">Tag One</el-tag>
-      <el-tag class="demo-item" type="success">Tag Two</el-tag>
-      <el-tag class="demo-item" type="info">Tag Three</el-tag>
-      <el-tag class="demo-item" type="warning">Tag Four</el-tag>
-      <el-tag class="demo-item" type="danger">Tag Five</el-tag>
+      <el-tag class="demo-item" closable>Tag One</el-tag>
+      <el-tag class="demo-item" closable type="success">Tag Two</el-tag>
+      <el-tag class="demo-item" closable type="info">Tag Three</el-tag>
+      <el-tag class="demo-item" closable type="warning">Tag Four</el-tag>
+      <el-tag class="demo-item" closable type="danger">Tag Five</el-tag>
     </el-row>
     <h4>Progress</h4>
     <el-row style="width: 380px">
       <el-progress :percentage="20"></el-progress>
       <el-progress :percentage="60" status="exception"></el-progress>
       <el-progress :percentage="100" status="success"></el-progress>
+    </el-row>
+    <h4>Tree</h4>
+    <el-row style="width: 380px">
+      <el-tree :data="treeData" :props="defaultTreeProps" ></el-tree>
     </el-row>
     <h4>Pagination</h4>
     <el-row>
@@ -429,7 +433,46 @@ export default {
       ],
       menu: '1',
       tab: 'first',
-      collapse: ['1']
+      collapse: ['1'],
+      treeData: [{
+        label: 'Level one 1',
+        children: [{
+          label: 'Level two 1-1',
+          children: [{
+            label: 'Level three 1-1-1'
+          }]
+        }]
+      }, {
+        label: 'Level one 2',
+        children: [{
+          label: 'Level two 2-1',
+          children: [{
+            label: 'Level three 2-1-1'
+          }]
+        }, {
+          label: 'Level two 2-2',
+          children: [{
+            label: 'Level three 2-2-1'
+          }]
+        }]
+      }, {
+        label: 'Level one 3',
+        children: [{
+          label: 'Level two 3-1',
+          children: [{
+            label: 'Level three 3-1-1'
+          }]
+        }, {
+          label: 'Level two 3-2',
+          children: [{
+            label: 'Level three 3-2-1'
+          }]
+        }]
+      }],
+      defaultTreeProps: {
+        children: 'children',
+        label: 'label'
+      }
     };
   }
 };
