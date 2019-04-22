@@ -9,6 +9,7 @@
   box-shadow: 0 0 1px 0 #666;
   &.is-hidden {
     opacity: 0;
+    height: 0;
   }
   .upload {
     cursor: pointer;
