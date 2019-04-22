@@ -203,7 +203,11 @@
       },
 
       handleCheckChange(value, ev) {
+        if(this.tree.store.withoutChildren && this.node.indeterminate === true){
+          this.tree.store.setCheckedKeys([]);
+        }
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
+        const path = this.getNodePath(this.node.data);
         this.$nextTick(() => {
           const store = this.tree.store;
           this.tree.$emit('check', this.node.data, {
@@ -211,8 +215,21 @@
             checkedKeys: store.getCheckedKeys(),
             halfCheckedNodes: store.getHalfCheckedNodes(),
             halfCheckedKeys: store.getHalfCheckedKeys(),
-          });
+          }, path);
         });
+      },
+
+      getNodePath(data) {
+        if (!this.tree.nodeKey) throw new Error("[Tree] nodeKey is required in getNodePath");
+        const node = this.tree.store.getNode(data);
+        if (!node) return [];
+        const path = [node.data];
+        let parent = node.parent;
+        while (parent && parent !== this.tree.store.root) {
+          path.push(parent.data);
+          parent = parent.parent;
+        }
+        return path.reverse();
       },
 
       handleChildNodeExpand(nodeData, node, instance) {

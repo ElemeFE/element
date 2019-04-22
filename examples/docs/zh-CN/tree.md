@@ -810,6 +810,7 @@
 | default-expanded-keys | 默认展开的节点的 key 的数组                        | array                       | —    | —     |
 | show-checkbox         | 节点是否可被选择                                   | boolean                     | —    | false |
 | check-strictly        | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false   | boolean                     | —    | false |
+| without-children        | 在显示复选框的情况下，当前节点的子节点状态与其不关联，默认为 false   | boolean                     | —    | false |
 | default-checked-keys  | 默认勾选的节点的 key 的数组                        | array                       | —    | —     |
 | current-node-key      | 当前选中的节点                                   | string, number               | —    | —     |
 | filter-node-method    | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | —    | —     |

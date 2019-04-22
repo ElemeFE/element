@@ -364,8 +364,9 @@ export default class Node {
         value = false;
       }
 
+      const setChildrenFlag = deep && (this.store.withoutChildren ? !value : true);
       const handleDescendants = () => {
-        if (deep) {
+        if (setChildrenFlag) {
           const childNodes = this.childNodes;
           for (let i = 0, j = childNodes.length; i < j; i++) {
             const child = childNodes[i];

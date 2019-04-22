@@ -128,7 +128,11 @@
         type: Number,
         default: 18
       },
-      iconClass: String
+      iconClass: String,
+      withoutChildren: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -328,6 +332,7 @@
         lazy: this.lazy,
         props: this.props,
         load: this.load,
+        withoutChildren: this.withoutChildren,
         currentNodeKey: this.currentNodeKey,
         checkStrictly: this.checkStrictly,
         checkDescendants: this.checkDescendants,
