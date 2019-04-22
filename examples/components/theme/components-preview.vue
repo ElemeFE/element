@@ -144,7 +144,6 @@
       <el-rate
         class="demo-line"
         v-model="rate"
-        disabled
         show-score
         text-color="#ff9900"
         score-template="{value} points">
