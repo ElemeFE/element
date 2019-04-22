@@ -20,6 +20,7 @@
     display: inline-block;
     height: 150px;
     height: 16vw;
+    max-height: 230px;
     flex: 0 0 24%;
     cursor: default;
     vertical-align: bottom;
