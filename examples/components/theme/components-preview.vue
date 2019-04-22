@@ -152,7 +152,10 @@
     </el-row>
     <h4>Transfer</h4>
     <el-row>
-      <el-transfer v-model="transfer" :data="transferData"></el-transfer>
+      <el-transfer v-model="transfer" filterable :data="transferData">
+        <el-button class="transfer-footer" slot="left-footer" size="small">Operation</el-button>
+        <el-button class="transfer-footer" slot="right-footer" size="small">Operation</el-button>
+      </el-transfer>
     </el-row>
     <h4>Table</h4>
     <el-row>
