@@ -124,7 +124,7 @@
     <el-row>
       <el-switch v-model="switchValue"></el-switch>
       <el-switch
-        style="margin-left: 30px"
+        style="margin-left: 40px"
         v-model="switchValue"
         active-text="Pay by month"
         inactive-text="Pay by year">
@@ -140,7 +140,15 @@
     </el-row>
     <h4>Rate</h4>
     <el-row>
-      <el-rate v-model="rate"></el-rate>
+      <el-rate class="demo-line" v-model="rate"></el-rate> 
+      <el-rate
+        class="demo-line"
+        v-model="rate"
+        disabled
+        show-score
+        text-color="#ff9900"
+        score-template="{value} points">
+      </el-rate>
     </el-row>
     <h4>Transfer</h4>
     <el-row>
