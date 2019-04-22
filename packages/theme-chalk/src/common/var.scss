@@ -606,11 +606,11 @@ $--switch-off-color: $--border-color-base !default;
 /// fontSize||Font|1
 $--switch-font-size: $--font-size-base !default;
 $--switch-core-border-radius: 10px !default;
-/// height||Other|4
+// height||Other|4 TODO: width 代码写死的40px 所以下面这三个属性都没意义
 $--switch-width: 40px !default;
-/// height||Other|4
+// height||Other|4
 $--switch-height: 20px !default;
-/// height||Other|4
+// height||Other|4
 $--switch-button-size: 16px !default;
 
 /* Dialog
