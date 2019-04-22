@@ -31,7 +31,7 @@ Display date.
     slot="dateCell"
     slot-scope="{date, data}">
     <p :class="data.isSelected ? 'is-selected' : ''">
-      {{ data.day }} is {{ data.isSelected ? '✔️' : ''}}
+      {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}}
     </p>
   </template>
 </el-calendar>
