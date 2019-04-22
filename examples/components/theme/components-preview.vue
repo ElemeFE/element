@@ -203,10 +203,16 @@
     </el-row>
     <h4>Alert</h4>
     <el-row style="width: 380px;">
-      <el-alert class="demo-item" title="success alert" type="success"></el-alert>
-      <el-alert class="demo-item" title="info alert" type="info"></el-alert>
-      <el-alert class="demo-item" title="warning alert" type="warning"></el-alert>
-      <el-alert class="demo-item" title="error alert" type="error"></el-alert>
+      <el-alert class="demo-item" title="success alert" type="success" show-icon></el-alert>
+      <el-alert class="demo-item" title="info alert" type="info" close-text="Gotcha" show-icon></el-alert>
+      <el-alert class="demo-item" title="warning alert" type="warning" show-icon></el-alert>
+      <el-alert
+        class="demo-item"
+        title="error alert"
+        type="error"
+        description="more text description"
+        show-icon>
+      </el-alert>
     </el-row>
     <h4>Loading</h4>
     <el-row>
