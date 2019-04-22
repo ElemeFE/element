@@ -227,7 +227,7 @@
                       command="delete" 
                       style="color: #F56C6C;"
                     >
-                      {{getActionDisplayName('delete-theme')}
+                      {{getActionDisplayName('delete-theme')}}
                     </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
