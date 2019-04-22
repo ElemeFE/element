@@ -123,6 +123,12 @@
     <h4>Switch</h4>
     <el-row>
       <el-switch v-model="switchValue"></el-switch>
+      <el-switch
+        style="margin-left: 30px"
+        v-model="switchValue"
+        active-text="Pay by month"
+        inactive-text="Pay by year">
+      </el-switch>
     </el-row>
     <h4>Slider</h4>
     <el-row style="width: 380px">
