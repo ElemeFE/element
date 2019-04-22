@@ -32,7 +32,7 @@
   <div class="page-container page-theme-preview" ref="themePreview">
     <section class="display">
       <el-button type="text" icon="el-icon-back" @click="navBack">
-        返回
+        <%= 1 >
       </el-button>
       <h3>{{previewConfig.name}}</h3>
       <basic-tokens-preview>
@@ -69,6 +69,7 @@ import {
   ACTION_APPLY_THEME
 } from '../../components/theme/constant.js';
 import throttle from 'throttle-debounce/throttle';
+import { getActionDisplayName } from '../../components/theme-configurator/utils/utils';
 
 const maxUserTheme = 8;
 
@@ -122,7 +123,7 @@ export default {
       const { type, name } = this.previewConfig;
       if (this.isOfficial) {
         if (this.userTheme.length >= maxUserTheme) {
-          this.$message.error('Max user theme 8');
+          this.$message.error(getActionDisplayName('max-user-theme'));
           return;
         }
         const autoUserName = this.getNewUserThemeName(name);
@@ -174,8 +175,8 @@ export default {
     const previewConfig = loadPreviewFromLocal();
     const pageRefer = this.$route.params.refer;
     if (!previewConfig || !pageRefer) {
-      this.$alert('No preview config', 'No preview config', {
-        confirmButtonText: 'OK',
+      this.$alert(getActionDisplayName('no-preview-config'), getActionDisplayName('notice'), {
+        confirmButtonText: getActionDisplayName('confirm'),
         callback: action => {
           const newPath = this.$route.path.replace('/preview', '');
           this.$router.replace(newPath);
