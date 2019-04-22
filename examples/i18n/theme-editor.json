@@ -46,10 +46,14 @@
       "inrange": "日期范围"
     },
     "action": {
-      "theme-editor": "主题编辑器",
-      "no-config": "暂不可编辑，敬请期待",
-      "no-need-config": "本页无需编辑，看看其他页面吧",
-      "load-local-theme-config": "正在恢复您上次自定义的主题",
+      "require-them-name": "主题名称是必填项",
+      "duplicate-them-name": "主题名称重复",
+      "confirm-delete-theme": "确定要删除这个主题?",
+      "max-user-theme": "已达自定义主题上限",
+      "notice": "提示",
+      "confirm": "确定",
+      "cancel": "取消",
+      "load-local-theme-config": "正在恢复您上次编辑的自定义主题",
       "reset-theme": "重置",
       "download-theme": "下载"
     },
@@ -155,10 +159,14 @@
       "border-radius": "border radius"
     },
     "action": {
-      "theme-editor": "Theme Editor",
-      "no-config": "Please stay tuned",
-      "load-local-theme-config": "Loading your last edit theme config",
-      "no-need-config": "No config in this page",
+      "require-them-name": "Theme name is required",
+      "duplicate-them-name": "Duplicate them name",
+      "confirm-delete-theme": "Are you sure you want to delete this theme?",
+      "max-user-theme": "Maxium user theme limit",
+      "notice": "Notice",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "load-local-theme-config": "Loading your last saved theme config",
       "reset-theme": "Reset",
       "download-theme": "Download"
     },

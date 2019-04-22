@@ -17,7 +17,11 @@
         "paraSize": "18"
       },
       "component": {},
-      "theme": {},
+      "theme": {
+        "1": "官方主题",
+        "2": "我的主题",
+        "3": "主题名称"
+      },
       "theme-preview": {},
       "theme-nav": {},
       "changelog": {
@@ -112,7 +116,11 @@
         "paraSize": "18"
       },
       "component": {},
-      "theme": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
       "theme-preview": {},
       "theme-nav": {},
       "changelog": {
@@ -207,7 +215,11 @@
         "paraSize": "18"
       },
       "component": {},
-      "theme": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
       "theme-preview": {},
       "theme-nav": {},
       "changelog": {
@@ -303,7 +315,11 @@
         "paraSize": "18"
       },
       "component": {},
-      "theme": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
       "theme-preview": {},
       "theme-nav": {},
       "changelog": {

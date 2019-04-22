@@ -35,7 +35,7 @@
 <template>
   <div class="page-container page-theme">
     <section class="theme-section">
-      <h2>官方主题</h2>
+      <h2><%= 1 ></h2>
       <ul>
         <li class="theme-card" v-for="item in officialTheme" :key="item.name">
           <theme-card 
@@ -47,7 +47,7 @@
       </ul>
     </section>
     <section class="theme-section second-section">
-      <h2>我的主题 ({{userThemeCount}}/{{maxUserTheme}})</h2>
+      <h2><%= 2 > ({{userThemeCount}}/{{maxUserTheme}})</h2>
       <ul>
         <li class="theme-card" v-if="showUserUpload">
           <theme-card 
@@ -67,13 +67,13 @@
     </section>
     <el-dialog :visible.sync="copyDialogVisible">
       <el-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
-        <el-form-item label="主题名称" required prop="name">
+        <el-form-item label="<%= 3 >" prop="name">
           <el-input v-model="copyForm.name"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="closeCopyForm">取 消</el-button>
-        <el-button type="primary" @click="copyToUser">确 定</el-button>
+        <el-button @click="closeCopyForm">{{getActionDisplayName('cancel')}}</el-button>
+        <el-button type="primary" @click="copyToUser">{{getActionDisplayName('confirm')}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -82,6 +82,7 @@
 import ThemeCard from '../../components/theme/theme-card.vue';
 import ThemeList from '../../components/theme/theme-list.js';
 import { saveUserThemeToLocal, loadUserThemeFromLocal } from '../../components/theme/localstorage';
+import { getActionDisplayName } from '../../components/theme-configurator/utils/utils';
 
 const maxUserTheme = 8;
 
@@ -123,11 +124,14 @@ export default {
     }
   },
   methods: {
+    getActionDisplayName(key) {
+      return getActionDisplayName(key);
+    },
     validateCopyName(rule, value, callback) {
       if (!value) {
-        callback(new Error('Name is required'));
+        callback(new Error(this.getActionDisplayName('require-them-name')));
       } else if (this.filterUserThemeByName(value).length > 0) {
-        callback(new Error('Already has same name'));
+        callback(new Error(this.getActionDisplayName('duplicate-them-name')));
       } else {
         callback();
       }
@@ -153,9 +157,9 @@ export default {
           this.openRenameForm(item.name);
           break;
         case 'delete':
-          this.$confirm('此操作将永久删除该主题, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm(this.getActionDisplayName('confirm-delete-theme'), this.getActionDisplayName('notice'), {
+            confirmButtonText: this.getActionDisplayName('confirm'),
+            cancelButtonText: this.getActionDisplayName('cancel'),
             type: 'warning'
           }).then(() => {
             this.deleteUserThemeByName(item.name);
@@ -175,7 +179,7 @@ export default {
     },
     openCopyForm(theme) {
       if (this.userTheme.length >= 8) {
-        this.$message.error('Max user theme 8');
+        this.$message.error(this.getActionDisplayName('max-user-theme'));
         return;
       }
       this.copyForm.theme = theme;
