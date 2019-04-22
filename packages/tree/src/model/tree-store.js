@@ -311,10 +311,12 @@ export default class TreeStore {
   }
 
   setCurrentNode(currentNode) {
-    const nodes = this._getAllNodes();
-    nodes.forEach((node) => {node.isCurrent = false;});
-    currentNode.isCurrent = true;
+    const prevCurrentNode = this.currentNode;
+    if (prevCurrentNode) {
+      prevCurrentNode.isCurrent = false;
+    }
     this.currentNode = currentNode;
+    this.currentNode.isCurrent = true;
   }
 
   setUserCurrentNode(node) {
