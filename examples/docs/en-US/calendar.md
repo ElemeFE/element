@@ -30,11 +30,16 @@ Display date.
   <template
     slot="dateCell"
     slot-scope="{date, data}">
-    <p>
-      {{ data.day }} is {{ data.isSelected ? '' : 'not'}} seleced
+    <p :class="data.isSelected ? 'is-selected' : ''">
+      {{ data.day }} is {{ data.isSelected ? '✔️' : ''}}
     </p>
   </template>
 </el-calendar>
+<style>
+  .is-selected {
+    color: #1989FA;
+  }
+</style>
 ```
 :::
 
