@@ -203,7 +203,7 @@
       },
 
       handleCheckChange(value, ev) {
-        if(this.tree.store.withoutChildren && this.node.indeterminate === true){
+        if(this.tree.store.withoutChildren && this.node.indeterminate){
           this.tree.store.setCheckedKeys([]);
         }
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
@@ -220,7 +220,6 @@
       },
 
       getNodePath(data) {
-        if (!this.tree.nodeKey) throw new Error("[Tree] nodeKey is required in getNodePath");
         const node = this.tree.store.getNode(data);
         if (!node) return [];
         const path = [node.data];
