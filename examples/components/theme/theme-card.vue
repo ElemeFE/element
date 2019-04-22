@@ -168,7 +168,7 @@
       <div class="upload" @click="uploadClick">
         <div class="upload-action">
           <img src="../../assets/images/icon-upload.svg"/>
-          <span>点击上传主题</span>
+          <span>{{getActionDisplayName('upload-theme')}}</span>
         </div>
       </div>
       <input 
@@ -221,20 +221,20 @@
               <el-dropdown @command="actionClick">
                 <i class="el-icon-more"></i>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="rename">修改命名</el-dropdown-item>
-                  <el-dropdown-item command="copy">复制主题</el-dropdown-item>
+                  <el-dropdown-item command="rename">{{getActionDisplayName('rename-theme')}}</el-dropdown-item>
+                  <el-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</el-dropdown-item>
                   <el-dropdown-item 
                       command="delete" 
                       style="color: #F56C6C;"
                     >
-                      删除主题
+                      {{getActionDisplayName('delete-theme')}
                     </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </span>
           </div>
-          <div class="description" v-if="isOfficial">{{config.description}}</div>
-          <div class="description" v-else>最近修改 {{formatDate(config.update)}}</div>
+          <div class="description" v-if="isOfficial">{{getActionDisplayName(getDescriptionKey(config.name))}} </div>
+          <div class="description" v-else>{{getActionDisplayName('last-modified')}} {{formatDate(config.update)}}</div>
         </div>
       </div>
     </template>
@@ -250,6 +250,7 @@ import {
 import { savePreviewToLocal } from './localstorage';
 import { tintColor } from '../../color.js';
 import dateUtil from 'element-ui/src/utils/date';
+import { getActionDisplayName } from '../theme-configurator/utils/utils';
 
 export default {
   props: {
@@ -266,6 +267,12 @@ export default {
     };
   },
   methods: {
+    getActionDisplayName(key) {
+      return getActionDisplayName(key);
+    },
+    getDescriptionKey(name) {
+      return name ? `description-${name.toLowerCase()}` : '';
+    },
     formatDate(timestamp) {
       if (!timestamp) return '';
       return dateUtil.format(new Date(timestamp), 'yyyy-MM-dd HH:mm');
@@ -365,12 +372,12 @@ export default {
         return [
           {
             icon: require('../../assets/images/icon-check.png'),
-            name: '查看',
+            name: getActionDisplayName('theme-check'),
             action: 'preview'
           },
           {
             icon: require('../../assets/images/icon-copy.png'),
-            name: '复制',
+            name: getActionDisplayName('theme-copy'),
             action: 'copy'
           }
         ];
@@ -378,12 +385,12 @@ export default {
       return [
         {
           icon: require('../../assets/images/icon-edit.png'),
-          name: '编辑',
+          name: getActionDisplayName('theme-edit'),
           action: 'edit'
         },
         {
           icon: require('../../assets/images/icon-download.png'),
-          name: '下载',
+          name: getActionDisplayName('download-theme'),
           action: 'download'
         }
       ];

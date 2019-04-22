@@ -57,8 +57,18 @@
       "confirm": "确定",
       "cancel": "取消",
       "load-local-theme-config": "正在恢复您上次编辑的自定义主题",
+      "upload-theme": "点击上传主题",
+      "rename-theme": "修改命名",
+      "copy-theme": "复制主题",
+      "last-modified": "最近修改",
       "reset-theme": "重置",
-      "download-theme": "下载"
+      "delete-theme": "删除主题",
+      "download-theme": "下载",
+      "theme-check": "查看",
+      "theme-copy": "复制",
+      "theme-edit": "编辑",
+      "description-element": "默认主题",
+      "description-napos": "深色主题"
     },
     "category": {
       "BrandColor": "品牌颜色",
@@ -173,8 +183,18 @@
       "confirm": "Confirm",
       "cancel": "Cancel",
       "load-local-theme-config": "Loading your last saved theme config",
+      "last-modified": "Last modified",
+      "upload-theme": "Click to upload theme",
       "reset-theme": "Reset",
-      "download-theme": "Download"
+      "rename-theme": "Rename",
+      "copy-theme": "Copy",
+      "delete-theme": "Delete",
+      "download-theme": "Download",
+      "theme-check": "Preview",
+      "theme-copy": "Copy",
+      "theme-edit": "Edit",
+      "description-element": "Default theme",
+      "description-napos": "Dark theme"
     },
     "category": {
       "BrandColor": "Brand Color",
