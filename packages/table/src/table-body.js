@@ -88,11 +88,15 @@ export default {
                     if (!rowspan || !colspan) {
                       return '';
                     } else {
+                      const columnData = { ...column };
+                      if (colspan !== 1) {
+                        columnData.realWidth = columnData.realWidth * colspan;
+                      }
                       const data = {
                         store: this.store,
                         _self: this.context || this.table.$vnode.context,
+                        column: columnData,
                         row,
-                        column,
                         $index
                       };
                       if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
