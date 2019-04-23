@@ -96,11 +96,6 @@ export default {
           </div>
         </transition>);
     }
-    const defaultSlot = this.$slots.default;
-    if (!defaultSlot || defaultSlot.length !== 1 || !defaultSlot[0].tag) {
-      console.error('[Element Error][Tooltip]default slot is required and must be an element.');
-      return null;
-    }
 
     const firstElement = this.getFirstElement();
     if (!firstElement) return null;
@@ -162,13 +157,8 @@ export default {
       this.debounceClose();
     },
     handleFocus() {
-      const instance = this.$slots.default[0].componentInstance;
-      if (instance && instance.focus) {
-        instance.focus();
-      } else {
-        this.focusing = true;
-        this.show();
-      }
+      this.focusing = true;
+      this.show();
     },
     handleBlur() {
       this.focusing = false;
