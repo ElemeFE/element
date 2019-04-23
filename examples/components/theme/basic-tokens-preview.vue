@@ -168,6 +168,10 @@
 <script>
 import bus from '../../bus';
 import { tintColor } from '../../color.js';
+import {
+  ACTION_COMPONECT_SELECT,
+  ACTION_USER_CONFIG_UPDATE
+} from './constant.js';
 
 const original = {
   'color_primary': '#409EFF',
@@ -199,7 +203,16 @@ const original = {
 
 export default {
   created() {
-    bus.$on('user-theme-config-update', this.setGlobal);
+    bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
+    bus.$on(ACTION_COMPONECT_SELECT, (val) => {
+      this.$nextTick(() => {
+        const getSelectElement = Array.from(document.querySelectorAll('h4')).filter((el) => (el.innerText.toLowerCase() === val));
+        if (getSelectElement[0]) {
+          const elementTop = getSelectElement[0].getBoundingClientRect().top;
+          window.scrollTo(0, window.pageYOffset + elementTop - 20); // 20 for padding
+        }
+      });
+    });
   },
   mounted() {
     this.setGlobal();

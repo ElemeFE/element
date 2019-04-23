@@ -388,6 +388,7 @@
   import themeLoader from './theme/loader';
   import { getVars } from './theme/loader/api.js';
   import bus from '../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
 
   const { version } = Element;
 
@@ -479,7 +480,7 @@
       xhr.open('GET', '/versions.json');
       xhr.send();
       let primaryLast = '#409EFF';
-      bus.$on('user-theme-config-update', (val) => {
+      bus.$on(ACTION_USER_CONFIG_UPDATE, (val) => {
         let primaryColor = val.global['$--color-primary'];
         if (!primaryColor) primaryColor = '#409EFF';
         const base64svg = 'data:image/svg+xml;base64,';

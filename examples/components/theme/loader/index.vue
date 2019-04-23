@@ -6,7 +6,8 @@ import { updateVars } from './api.js';
 import { updateDomHeadStyle } from '../utils.js';
 import {
   ACTION_APPLY_THEME,
-  ACTION_DOWNLOAD_THEME
+  ACTION_DOWNLOAD_THEME,
+  ACTION_USER_CONFIG_UPDATE
 } from '../constant.js';
 import {
   loadUserThemeFromLocal,
@@ -84,7 +85,7 @@ export default {
     },
     updateDocs(cb) {
       window.userThemeConfig = JSON.parse(JSON.stringify(this.userConfig));
-      bus.$emit('user-theme-config-update', this.userConfig);
+      bus.$emit(ACTION_USER_CONFIG_UPDATE, this.userConfig);
       this.updateDocStyle(this.userConfig, cb);
     },
     checkLocalThemeConfig() {

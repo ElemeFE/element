@@ -1,6 +1,7 @@
 <script>
   import bus from '../../bus';
   import { tintColor } from '../../color.js';
+  import { ACTION_USER_CONFIG_UPDATE } from '../../components/theme/constant.js';
   const varMap = {
     'primary': '$--color-primary',
     'success': '$--color-success',
@@ -37,7 +38,7 @@
   }
   export default {
     created() {
-      bus.$on('user-theme-config-update', this.setGlobal);
+      bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
     },
     mounted() {
       this.setGlobal();

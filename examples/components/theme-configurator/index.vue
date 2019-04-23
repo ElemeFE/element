@@ -41,7 +41,8 @@ import {
 import Shortcut from './shortcut';
 import {
   ACTION_APPLY_THEME,
-  ACTION_DOWNLOAD_THEME
+  ACTION_DOWNLOAD_THEME,
+  ACTION_COMPONECT_SELECT
 } from '../theme/constant.js';
 
 export default {
@@ -175,6 +176,7 @@ export default {
       }
     },
     onSelectChange(val) {
+      bus.$emit(ACTION_COMPONECT_SELECT, val);
       this.selectedComponent = val;
       this.filterCurrentConfig();
     }
