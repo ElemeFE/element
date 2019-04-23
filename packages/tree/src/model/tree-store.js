@@ -332,7 +332,7 @@ export default class TreeStore {
     }
     const node = this.getNode(key);
     if (node) {
-      this.currentNode = node;
+      this.setCurrentNode(node);
     }
   }
 };
