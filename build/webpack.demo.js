@@ -33,7 +33,8 @@ const webpackConfig = {
   devServer: {
     host: '0.0.0.0',
     port: 8085,
-    publicPath: '/'
+    publicPath: '/',
+    hot: true
   },
   performance: {
     hints: false
@@ -100,6 +101,7 @@ const webpackConfig = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './examples/index.tpl',
       filename: './index.html',
