@@ -203,7 +203,7 @@
       },
 
       handleCheckChange(value, ev) {
-        if(this.tree.store.withoutChildren && this.node.indeterminate){
+        if(this.tree.withoutChildren && this.node.indeterminate && this.tree.nodeKey){
           this.tree.store.setCheckedKeys([]);
         }
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
