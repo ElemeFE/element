@@ -239,7 +239,7 @@
     </el-row>
     <h4>Notification</h4>
     <el-row>
-      <div role="alert" class="el-notification right" style="position: relative; left: 0;"><!----><div class="el-notification__group"><h2 class="el-notification__title">Notification</h2><div class="el-notification__content"><p>This is a message </p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div>
+      <div role="alert" class="el-notification right" style="position: relative; left: 0;"><!----><div class="el-notification__group"><span class="el-notification__title">Notification</span><div class="el-notification__content"><p>This is a message </p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div>
     </el-row>
     <h4>Menu</h4>
     <el-row>
