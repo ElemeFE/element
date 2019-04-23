@@ -239,7 +239,7 @@
     </el-row>
     <h4>Notification</h4>
     <el-row>
-      <div role="alert" class="el-notification right" style="position: relative; left: 0;"><!----><div class="el-notification__group"><span class="el-notification__title">Notification</span><div class="el-notification__content"><p>This is a message </p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div>
+      <div role="alert" class="el-notification right" style="position: relative; left: 0;"><!----><div class="el-notification__group"><span class="el-notification__title">Notification</span><div class="el-notification__content"><div>This is a message </div></div><div class="el-notification__closeBtn el-icon-close"></div></div></div>
     </el-row>
     <h4>Menu</h4>
     <el-row>
@@ -260,6 +260,40 @@
         <el-menu-item index="3" disabled>Info</el-menu-item>
         <el-menu-item index="4">
           <a href="https://www.ele.me" target="_blank">Orders</a>
+        </el-menu-item>
+      </el-menu>
+      <el-menu
+        default-active="2"
+        class="demo-line"
+      >
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>Navigator One</span>
+          </template>
+          <el-menu-item-group title="Group One">
+            <el-menu-item index="1-1">item one</el-menu-item>
+            <el-menu-item index="1-2">item one</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="Group Two">
+            <el-menu-item index="1-3">item three</el-menu-item>
+          </el-menu-item-group>
+          <el-submenu index="1-4">
+            <template slot="title">item four</template>
+            <el-menu-item index="1-4-1">item one</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="2">
+          <i class="el-icon-menu"></i>
+          <span>Navigator Two</span>
+        </el-menu-item>
+        <el-menu-item index="3" disabled>
+          <i class="el-icon-document"></i>
+          <span>Navigator Three</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-setting"></i>
+          <span>Navigator Four</span>
         </el-menu-item>
       </el-menu>
     </el-row>
