@@ -48,6 +48,10 @@ export default {
     hideAfter: {
       type: Number,
       default: 0
+    },
+    tabindex: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -226,10 +230,12 @@ export default {
 
   destroyed() {
     const reference = this.referenceElm;
-    off(reference, 'mouseenter', this.show);
-    off(reference, 'mouseleave', this.hide);
-    off(reference, 'focus', this.handleFocus);
-    off(reference, 'blur', this.handleBlur);
-    off(reference, 'click', this.removeFocusing);
+    if (reference.nodeType === 1) {
+      off(reference, 'mouseenter', this.show);
+      off(reference, 'mouseleave', this.hide);
+      off(reference, 'focus', this.handleFocus);
+      off(reference, 'blur', this.handleBlur);
+      off(reference, 'click', this.removeFocusing);
+    }
   }
 };

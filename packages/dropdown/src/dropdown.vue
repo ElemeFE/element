@@ -55,6 +55,10 @@
       hideTimeout: {
         type: Number,
         default: 150
+      },
+      tabindex: {
+        type: Number,
+        default: 0
       }
     },
 
@@ -116,7 +120,9 @@
       hide() {
         if (this.triggerElm.disabled) return;
         this.removeTabindex();
-        this.resetTabindex(this.triggerElm);
+        if (this.tabindex >= 0) {
+          this.resetTabindex(this.triggerElm);
+        }
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = false;
@@ -162,14 +168,14 @@
           ev.preventDefault();
           ev.stopPropagation();
         } else if (keyCode === 13) { // enter选中
-          this.triggerElm.focus();
+          this.triggerElmFocus();
           target.click();
           if (this.hideOnClick) { // click关闭
             this.visible = false;
           }
         } else if ([9, 27].indexOf(keyCode) > -1) { // tab // esc
           this.hide();
-          this.triggerElm.focus();
+          this.triggerElmFocus();
         }
       },
       resetTabindex(ele) { // 下次tab时组件聚焦元素
@@ -189,7 +195,7 @@
 
         if (!this.splitButton) { // 自定义
           this.triggerElm.setAttribute('role', 'button');
-          this.triggerElm.setAttribute('tabindex', '0');
+          this.triggerElm.setAttribute('tabindex', this.tabindex);
           this.triggerElm.setAttribute('class', (this.triggerElm.getAttribute('class') || '') + ' el-dropdown-selfdefine'); // 控制
         }
       },
@@ -230,7 +236,7 @@
         }
         this.$emit('command', command, instance);
       },
-      focus() {
+      triggerElmFocus() {
         this.triggerElm.focus && this.triggerElm.focus();
       },
       initDomOperation() {

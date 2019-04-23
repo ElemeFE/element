@@ -280,6 +280,7 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | hide-on-click | si se oculta el menú después de hacer clic en el elemento | boolean | —                                        | true        |
 | show-timeout  | Tiempo de retardo antes de mostrar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 250         |
 | hide-timeout  | Tiempo de retardo antes de ocultar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 150         |
+| tabindex      | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Dropdown   | number              |          —         | 0           |
 
 ### Dropdown Slots
 
