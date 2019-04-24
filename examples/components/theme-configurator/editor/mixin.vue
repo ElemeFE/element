@@ -5,7 +5,7 @@
     .config-label {
       color: #606266;;
       font-size: 14px;
-      padding-bottom: 5px;
+      padding-bottom: 8px;
       position: relative;
     }
     .config-content {
@@ -58,6 +58,12 @@ export default {
     },
     displayName() {
       return getStyleDisplayName(this.config, this.componentName);
+    },
+    displayKeyName() {
+      if (this.config.name) {
+        return this.config.key.replace('$--', '');
+      }
+      return this.config.key.replace(`$--${this.componentName}-`, '');
     },
     isGlobal() {
       return !this.config.value.startsWith('$');

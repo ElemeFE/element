@@ -1,12 +1,12 @@
 <template>
-  <div class="main">
+  <div class="main" ref="mainPanel">
     <!-- <span>{{configName}}</span> -->
     <div v-for="(config, key) in configByOrder" :key="key">
       <span 
         v-if="showCategory(config.category, key + 1)"
         class="category-name"
       >
-        {{getCategoryDisplayName(config.category)}}
+        {{config.category}}
       </span>
       <component 
         :is="editorComponent(config.type)"
@@ -23,14 +23,14 @@
 
 <style>
 .main {
-  margin-bottom: 140px;
-  padding: 10px;
+  padding: 0 18px 15px;
+  overflow-y: auto;
 }
 .category-name {
   color: #C0C4CC;
   font-size: 18px;
   display: block;
-  margin: 8px 0 4px 0;
+  margin: 13px 0 3px 0;
 }
 </style>
 
@@ -42,7 +42,7 @@ import fontLineHeightEditor from './editor/fontLineHeight';
 import borderRadiusEditor from './editor/borderRadius';
 import boxShadowEditor from './editor/boxShadow';
 import simpleTextEditor from './editor/simpleText';
-import { filterConfigType, getCategoryDisplayName } from './utils/utils.js';
+import { filterConfigType } from './utils/utils.js';
 
 export default {
   components: {
@@ -80,9 +80,6 @@ export default {
     }
   },
   methods: {
-    getCategoryDisplayName(key) {
-      return getCategoryDisplayName(key);
-    },
     editorComponent(type) {
       switch (type) {
         case 'color':
@@ -119,6 +116,15 @@ export default {
     return {
       categoryDisplay: {}
     };
+  },
+  watch: {
+    currentConfig: {
+      handler() {
+        this.$nextTick(() => {
+          this.$refs.mainPanel.scrollTo(0, 0);
+        });
+      }
+    }
   }
 };
 </script>

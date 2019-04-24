@@ -66,7 +66,7 @@
   @include e(body) {
     padding: 30px 20px;
     color: $--color-text-regular;
-    font-size: $--dialog-font-size;
+    font-size: $--dialog-content-font-size;
     word-break: break-all;
   }
 
