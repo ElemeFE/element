@@ -458,5 +458,44 @@ describe('Slider', () => {
         done();
       }, 10);
     });
+
+    it('marks', async() => {
+      vm = createVue({
+        template: `
+        <div>
+          <el-slider
+            v-model="value"
+            range
+            :step="10"
+            :marks="marks"
+            :min="20"
+            show-stops></el-slider>
+        </div>
+      `,
+
+        data() {
+          return {
+            value: [30, 60],
+            marks: {
+              0: '0°C',
+              8: '8°C',
+              37: '37°C',
+              50: {
+                style: {
+                  color: '#f50'
+                },
+                label: <strong>50°C</strong>
+              }
+            }
+          };
+        }
+      }, true);
+
+      waitImmediate();
+      const stops = vm.$el.querySelectorAll('.el-slider__marks-stop.el-slider__stop');
+      const marks = vm.$el.querySelectorAll('.el-slider__marks .el-slider__marks-text');
+      expect(marks.length).to.equal(2);
+      expect(stops.length).to.equal(2);
+    });
   });
 });

@@ -346,7 +346,7 @@
       value(val, oldVal) {
         if (this.multiple) {
           this.resetInputHeight();
-          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
+          if ((val && val.length > 0) || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
@@ -394,6 +394,10 @@
               }
               if (this.filterable) this.query = this.selectedLabel;
             }
+
+            if (this.filterable) {
+              this.currentPlaceholder = this.cachedPlaceHolder;
+            }
           }
         } else {
           this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -407,7 +411,11 @@
                 this.broadcast('ElOption', 'queryChange', '');
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
-              this.broadcast('ElInput', 'inputSelect');
+
+              if (this.selectedLabel) {
+                this.currentPlaceholder = this.selectedLabel;
+                this.selectedLabel = '';
+              }
             }
           }
         }
@@ -663,7 +671,7 @@
 
       handleOptionSelect(option, byClick) {
         if (this.multiple) {
-          const value = this.value.slice();
+          const value = (this.value || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);

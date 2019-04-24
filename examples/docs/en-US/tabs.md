@@ -109,7 +109,7 @@ You can use `tab-position` attribute to set the tab's position.
   export default {
     data() {
       return {
-        tabPosition: 'top'
+        tabPosition: 'left'
       };
     }
   };

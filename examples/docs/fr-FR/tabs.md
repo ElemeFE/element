@@ -109,7 +109,7 @@ Vous pouvez utiliser `tab-position` pour régler la position des onglets.
   export default {
     data() {
       return {
-        tabPosition: 'top'
+        tabPosition: 'left'
       };
     }
   };

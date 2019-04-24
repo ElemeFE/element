@@ -52,9 +52,9 @@ Cuando haya muchas opciones, utilice un menú desplegable para mostrar y selecci
 
 ```html
 <template>
-  <el-select v-model="value2" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option
-      v-for="item in options2"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -67,7 +67,7 @@ Cuando haya muchas opciones, utilice un menú desplegable para mostrar y selecci
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           value: 'Option1',
           label: 'Option1'
         }, {
@@ -84,7 +84,7 @@ Cuando haya muchas opciones, utilice un menú desplegable para mostrar y selecci
           value: 'Option5',
           label: 'Option5'
         }],
-        value2: ''
+        value: ''
       }
     }
   }
@@ -100,7 +100,7 @@ Desactivar todo el componente.
 
 ```html
 <template>
-  <el-select v-model="value3" disabled placeholder="Select">
+  <el-select v-model="value" disabled placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -130,7 +130,7 @@ Desactivar todo el componente.
           value: 'Option5',
           label: 'Option5'
         }],
-        value3: ''
+        value: ''
       }
     }
   }
@@ -146,7 +146,7 @@ Puede limpiar un Select con un icono.
 
 ```html
 <template>
-  <el-select v-model="value4" clearable placeholder="Select">
+  <el-select v-model="value" clearable placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -176,7 +176,7 @@ Puede limpiar un Select con un icono.
           value: 'Option5',
           label: 'Option5'
         }],
-        value4: ''
+        value: ''
       }
     }
   }
@@ -236,7 +236,8 @@ Selección multiple utiliza tags para mostrar las opciones seleccionadas.
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: []
+        value5: [],
+        value11: []
       }
     }
   }
@@ -252,7 +253,7 @@ Puede personalizar templates HTML para las opciones.
 
 ```html
 <template>
-  <el-select v-model="value6" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option
       v-for="item in cities"
       :key="item.value"
@@ -287,7 +288,7 @@ Puede personalizar templates HTML para las opciones.
           value: 'Guangzhou',
           label: 'Guangzhou'
         }],
-        value6: ''
+        value: ''
       }
     }
   }
@@ -303,9 +304,9 @@ Mostrar opciones en grupos.
 
 ```html
 <template>
-  <el-select v-model="value7" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option-group
-      v-for="group in options3"
+      v-for="group in options"
       :key="group.label"
       :label="group.label">
       <el-option
@@ -322,7 +323,7 @@ Mostrar opciones en grupos.
   export default {
     data() {
       return {
-        options3: [{
+        options: [{
           label: 'Popular cities',
           options: [{
             value: 'Shanghai',
@@ -347,7 +348,7 @@ Mostrar opciones en grupos.
             label: 'Dalian'
           }]
         }],
-        value7: ''
+        value: ''
       }
     }
   }
@@ -363,7 +364,7 @@ Puede filtrar opciones como lo desee.
 
 ```html
 <template>
-  <el-select v-model="value8" filterable placeholder="Select">
+  <el-select v-model="value" filterable placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -393,7 +394,7 @@ Puede filtrar opciones como lo desee.
           value: 'Option5',
           label: 'Option5'
         }],
-        value8: ''
+        value: ''
       }
     }
   }
@@ -410,7 +411,7 @@ Introduzca palabras y datos para buscar desde el servidor.
 ```html
 <template>
   <el-select
-    v-model="value9"
+    v-model="value"
     multiple
     filterable
     remote
@@ -419,7 +420,7 @@ Introduzca palabras y datos para buscar desde el servidor.
     :remote-method="remoteMethod"
     :loading="loading">
     <el-option
-      v-for="item in options4"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -431,8 +432,8 @@ Introduzca palabras y datos para buscar desde el servidor.
   export default {
     data() {
       return {
-        options4: [],
-        value9: [],
+        options: [],
+        value: [],
         list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona",
@@ -465,13 +466,13 @@ Introduzca palabras y datos para buscar desde el servidor.
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options4 = this.list.filter(item => {
+            this.options = this.list.filter(item => {
               return item.label.toLowerCase()
                 .indexOf(query.toLowerCase()) > -1;
             });
           }, 200);
         } else {
-          this.options4 = [];
+          this.options = [];
         }
       }
     }
@@ -488,13 +489,13 @@ Crear y seleccionar nuevos items que no están incluidas en las opciones de sele
 ```html
 <template>
   <el-select
-    v-model="value10"
+    v-model="value"
     multiple
     filterable
     allow-create
     placeholder="Choose tags for your article">
     <el-option
-      v-for="item in options5"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -506,7 +507,7 @@ Crear y seleccionar nuevos items que no están incluidas en las opciones de sele
   export default {
     data() {
       return {
-        options5: [{
+        options: [{
           value: 'HTML',
           label: 'HTML'
         }, {
@@ -516,7 +517,7 @@ Crear y seleccionar nuevos items que no están incluidas en las opciones de sele
           value: 'JavaScript',
           label: 'JavaScript'
         }],
-        value10: []
+        value: []
       }
     }
   }

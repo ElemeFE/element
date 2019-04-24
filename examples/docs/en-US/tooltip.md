@@ -193,3 +193,4 @@ Disabled form elements are not supported for Tooltip, more information can be fo
 |  popper-class  |  custom class name for Tooltip's popper | string | — | — |
 | enterable | whether the mouse can enter the tooltip | Boolean | — | true |
 | hide-after | timeout in milliseconds to hide tooltip | number | — | 0 |
+| tabindex   | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Tooltip | number | — | 0 |

@@ -677,7 +677,7 @@
 ```html
 <el-cascader
   :options="options"
-  v-model="selectedOptions3"
+  v-model="selectedOptions"
 ></el-cascader>
 <script>
   export default {
@@ -878,7 +878,7 @@
             label: '组件交互文档'
           }]
         }],
-        selectedOptions3: ['zujian', 'data', 'tag']
+        selectedOptions: ['zujian', 'data', 'tag']
       };
     }
   };
@@ -1109,7 +1109,7 @@
 :::demo 本例的选项数据源在初始化时不包含城市数据。利用`active-item-change`事件，可以在用户点击某个省份时拉取该省份下的城市数据。此外，本例还展示了`props`属性的用法。
 ```html
 <el-cascader
-  :options="options2"
+  :options="options"
   @active-item-change="handleItemChange"
   :props="props"
 ></el-cascader>
@@ -1118,7 +1118,7 @@
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           label: '江苏',
           cities: []
         }, {

@@ -1,4 +1,4 @@
-## Input
+﻿## Input
 
 Input data using mouse or keyboard.
 
@@ -37,7 +37,7 @@ export default {
 ```html
 <el-input
   placeholder="Please input"
-  v-model="input1"
+  v-model="input"
   :disabled="true">
 </el-input>
 
@@ -45,7 +45,7 @@ export default {
 export default {
   data() {
     return {
-      input1: ''
+      input: ''
     }
   }
 }
@@ -60,7 +60,7 @@ export default {
 ```html
 <el-input
   placeholder="Please input"
-  v-model="input10"
+  v-model="input"
   clearable>
 </el-input>
 
@@ -68,7 +68,7 @@ export default {
 export default {
   data() {
     return {
-      input10: ''
+      input: ''
     }
   }
 }
@@ -81,13 +81,13 @@ export default {
 :::demo Make a toggleable password Input with the `show-password` attribute.
 
 ```html
-<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+<el-input placeholder="Please input password" v-model="input" show-password></el-input>
 
 <script>
   export default {
     data() {
       return {
-        input11: ''
+        input: ''
       }
     }
   }
@@ -106,24 +106,24 @@ Add an icon to indicate input type.
   <el-input
     placeholder="Pick a date"
     suffix-icon="el-icon-date"
-    v-model="input2">
+    v-model="input1">
   </el-input>
   <el-input
     placeholder="Type something"
     prefix-icon="el-icon-search"
-    v-model="input21">
+    v-model="input2">
   </el-input>
 </div>
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using slots</span>
   <el-input
     placeholder="Pick a date"
-    v-model="input22">
+    v-model="input3">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
   </el-input>
   <el-input
     placeholder="Type something"
-    v-model="input23">
+    v-model="input4">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
@@ -139,10 +139,10 @@ Add an icon to indicate input type.
 export default {
   data() {
     return {
+      input1: '',
       input2: '',
-      input21: '',
-      input22: '',
-      input23: ''
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -187,22 +187,22 @@ Setting the `autosize` prop for a textarea type of Input makes the height to aut
   type="textarea"
   autosize
   placeholder="Please input"
-  v-model="textarea2">
+  v-model="textarea1">
 </el-input>
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="Please input"
-  v-model="textarea3">
+  v-model="textarea2">
 </el-input>
 
 <script>
 export default {
   data() {
     return {
-      textarea2: '',
-      textarea3: ''
+      textarea1: '',
+      textarea2: ''
     }
   }
 }
@@ -218,17 +218,17 @@ Prepend or append an element, generally a label or a button.
 
 ```html
 <div>
-  <el-input placeholder="Please input" v-model="input3">
+  <el-input placeholder="Please input" v-model="input1">
     <template slot="prepend">Http://</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input4">
+  <el-input placeholder="Please input" v-model="input2">
     <template slot="append">.com</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
+  <el-input placeholder="Please input" v-model="input3" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="Select">
       <el-option label="Restaurant" value="1"></el-option>
       <el-option label="Order No." value="2"></el-option>
@@ -250,9 +250,9 @@ Prepend or append an element, generally a label or a button.
 export default {
   data() {
     return {
+      input1: '',
+      input2: '',
       input3: '',
-      input4: '',
-      input5: '',
       select: ''
     }
   }
@@ -268,22 +268,22 @@ export default {
 <div class="demo-input-size">
   <el-input
     placeholder="Please Input"
-    v-model="input6">
+    v-model="input1">
   </el-input>
   <el-input
     size="medium"
     placeholder="Please Input"
-    v-model="input7">
+    v-model="input2">
   </el-input>
   <el-input
     size="small"
     placeholder="Please Input"
-    v-model="input8">
+    v-model="input3">
   </el-input>
   <el-input
     size="mini"
     placeholder="Please Input"
-    v-model="input9">
+    v-model="input4">
   </el-input>
 </div>
 
@@ -291,10 +291,10 @@ export default {
 export default {
   data() {
     return {
-      input6: '',
-      input7: '',
-      input8: '',
-      input9: ''
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -383,7 +383,7 @@ Customize how suggestions are displayed.
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
-  v-model="state3"
+  v-model="state"
   :fetch-suggestions="querySearch"
   placeholder="Please input"
   @select="handleSelect">
@@ -421,7 +421,7 @@ Customize how suggestions are displayed.
     data() {
       return {
         links: [],
-        state3: ''
+        state: ''
       };
     },
     methods: {
@@ -469,7 +469,7 @@ Search data from server-side.
 :::demo
 ```html
 <el-autocomplete
-  v-model="state4"
+  v-model="state"
   :fetch-suggestions="querySearchAsync"
   placeholder="Please input"
   @select="handleSelect"
@@ -479,7 +479,7 @@ Search data from server-side.
     data() {
       return {
         links: [],
-        state4: '',
+        state: '',
         timeout:  null
       };
     },
@@ -521,6 +521,42 @@ Search data from server-side.
 ```
 :::
 
+### Limit length
+
+:::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+
+```html
+<el-input
+  type="text"
+  placeholder="Please input"
+  v-model="text"
+  maxlength="10"
+  show-word-limit
+>
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  placeholder="Please input"
+  v-model="textarea"
+  maxlength="30"
+  show-word-limit
+>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      text: '',
+      textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Input Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -529,6 +565,7 @@ Search data from server-side.
 |value / v-model| binding value | string / number| — | — |
 |maxlength| same as `maxlength` in native input | number| — | — |
 |minlength| same as `minlength` in native input | number | — | — |
+|show-word-limit | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
 |placeholder| placeholder of Input| string | — | — |
 | clearable | whether to show clear button | boolean | — | false |
 | show-password | whether to show toggleable password input| boolean         | — | false |

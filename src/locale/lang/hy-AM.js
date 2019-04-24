@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Մուտքագրեք բանալի բառ',
       noCheckedFormat: '{total} միաւոր',
       hasCheckedFormat: '{checked}/{total} ընտրուած է'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

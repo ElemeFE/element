@@ -72,6 +72,10 @@
         type: Number,
         default: 1
       },
+      stepStrictly: {
+        type: Boolean,
+        default: false
+      },
       max: {
         type: Number,
         default: Infinity
@@ -116,6 +120,13 @@
             if (isNaN(newVal)) {
               return;
             }
+
+            if (this.stepStrictly) {
+              const stepPrecision = this.getPrecision(this.step);
+              const precisionFactor = Math.pow(10, stepPrecision);
+              newVal = Math.round(newVal / this.step) * precisionFactor * this.step / precisionFactor;
+            }
+
             if (this.precision !== undefined) {
               newVal = this.toPrecision(newVal, this.precision);
             }
@@ -163,12 +174,22 @@
         if (this.userInput !== null) {
           return this.userInput;
         }
-        const currentValue = this.currentValue;
-        if (typeof currentValue === 'number' && this.precision !== undefined) {
-          return currentValue.toFixed(this.precision);
-        } else {
-          return currentValue;
+
+        let currentValue = this.currentValue;
+
+        if (typeof currentValue === 'number') {
+          if (this.stepStrictly) {
+            const stepPrecision = this.getPrecision(this.step);
+            const precisionFactor = Math.pow(10, stepPrecision);
+            currentValue = Math.round(currentValue / this.step) * precisionFactor * this.step / precisionFactor;
+          }
+
+          if (this.precision !== undefined) {
+            currentValue = currentValue.toFixed(this.precision);
+          }
         }
+
+        return currentValue;
       }
     },
     methods: {

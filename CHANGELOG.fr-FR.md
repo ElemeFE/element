@@ -207,6 +207,10 @@
   - Problème d'orthographe dans la documentation du DatePicker (par @helmut dans #14481)
   - Correction du style de la doc de Pagination(par @liuchuzhang dans #14451)
 
+#### Breaking changes
+- Table
+  - Fix params order of row events (by @jikkai in #12086)
+  
 ### 2.5.4
 
 *2019-02-01*

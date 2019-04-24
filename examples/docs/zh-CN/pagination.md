@@ -140,6 +140,34 @@
 ```
 :::
 
+### 当只有一页时隐藏分页
+
+当只有一页时，通过设置 `hide-on-single-page` 属性来隐藏分页。
+
+:::demo
+```html
+<div>
+ <el-switch v-model="value">
+ </el-switch>
+ <el-pagination
+  :hide-on-single-page="value"
+  :total="5"
+  layout="prev, pager, next">
+</el-pagination>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: false
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
@@ -156,6 +184,7 @@
 | prev-text | 替代图标显示的上一页文字 | string | — | — |
 | next-text | 替代图标显示的下一页文字 | string | — | — |
 | disabled | 是否禁用 | boolean | — | false |
+| hide-on-single-page | 只有一页时是否隐藏 | boolean | — | - |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

@@ -27,7 +27,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
       v-model="value2"
       type="datetime"
       placeholder="Select date and time"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
   <div class="block">
@@ -45,7 +45,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        pickerOptions1: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -86,7 +86,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value1"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
@@ -96,9 +96,9 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">With shortcuts</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value2"
       type="datetimerange"
-      :picker-options="pickerOptions2"
+      :picker-options="pickerOptions"
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
@@ -111,7 +111,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        pickerOptions2: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Last week',
             onClick(picker) {
@@ -138,8 +138,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
             }
           }]
         },
-        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value5: ''
+        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value2: ''
       };
     }
   };
@@ -155,7 +155,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Start date time 12:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value1"
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
@@ -165,7 +165,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
     <el-date-picker
-      v-model="value7"
+      v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="Start Date"
@@ -179,8 +179,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        value6: '',
-        value7: ''
+        value1: '',
+        value2: ''
       };
     }
   };

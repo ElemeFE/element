@@ -109,7 +109,7 @@ Es posible usar el atributo `tab-position` para establecer la posición de la ta
   export default {
     data() {
       return {
-        tabPosition: 'top'
+        tabPosition: 'left'
       };
     }
   };

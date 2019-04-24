@@ -6,7 +6,7 @@
     v-show="node.visible"
     :class="{
       'is-expanded': expanded,
-      'is-current': tree.store.currentNode === node,
+      'is-current': node.isCurrent,
       'is-hidden': !node.visible,
       'is-focusable': !node.disabled,
       'is-checked': !node.disabled && node.checked

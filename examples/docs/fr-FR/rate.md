@@ -4,7 +4,7 @@ Utilisé pour donner une note sur cinq étoiles.
 
 ### Usage
 
-:::demo Rate divise les scores en trois niveaux et ces niveaux peuvent être distingués en utilisant différentes couleurs de fond. Par défaut ces couleurs sont identiques, mais vous pouvez affecter un tableau des codes couleur à l'attribut `colors`, ainsi que les deux seuils via `low-threshold` et `high-threshold`.
+:::demo Rate divise les scores en trois niveaux et ces niveaux peuvent être distingués en utilisant différentes couleurs de fond. Par défaut ces couleurs sont identiques, mais vous pouvez affecter un tableau des codes couleur à l'attribut `colors`, ainsi que les deux seuils via `low-threshold` et `high-threshold`. Or you can assign them with a object which key is the threshold between two levels and value is the corresponding color.
 
 ```html
 <div class="block">
@@ -15,7 +15,7 @@ Utilisé pour donner une note sur cinq étoiles.
   <span class="demonstration">Couleurs pour chaque niveau</span>
   <el-rate
     v-model="value2"
-    :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
+    :colors="colors">
   </el-rate>
 </div>
 
@@ -24,7 +24,8 @@ Utilisé pour donner une note sur cinq étoiles.
     data() {
       return {
         value1: null,
-        value2: null
+        value2: null,
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'] // same as { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
       }
     }
   }
@@ -40,7 +41,7 @@ Vous pouvez ajouter du texte à chaque score.
 
 ```html
 <el-rate
-  v-model="value3"
+  v-model="value"
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
   show-text>
 </el-rate>
@@ -49,7 +50,7 @@ Vous pouvez ajouter du texte à chaque score.
   export default {
     data() {
       return {
-        value3: null
+        value: null
       }
     }
   }
@@ -61,12 +62,12 @@ Vous pouvez ajouter du texte à chaque score.
 
 Vous pouvez utiliser différentes icônes pour chaque
 
-:::demo Vous pouvez personnaliser les icônes de chaque niveau en utilisant `icon-classes`. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir l'icône des valeurs non-sélectionnées.
+:::demo You can customize icons by passing `icon-classes` an array with three elements or a object which key is the threshold between two levels and value is the corresponding icon class. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir l'icône des valeurs non-sélectionnées.
 
 ```html
 <el-rate
-  v-model="value4"
-  :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
+  v-model="value"
+  :icon-classes="iconClasses"
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
 </el-rate>
@@ -75,9 +76,10 @@ Vous pouvez utiliser différentes icônes pour chaque
   export default {
     data() {
       return {
-        value4: null
+        value: null,
+        iconClasses: ['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3'] // same as { 2: 'icon-rate-face-1', 4: { value: 'icon-rate-face-2', excluded: true }, 5: 'icon-rate-face-3' }
       }
-    }
+  }
   }
 </script>
 ```
@@ -91,7 +93,7 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 
 ```html
 <el-rate
-  v-model="value5"
+  v-model="value"
   disabled
   show-score
   text-color="#ff9900"
@@ -102,7 +104,7 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
   export default {
     data() {
       return {
-        value5: 3.7
+        value: 3.7
       }
     }
   }
@@ -120,10 +122,10 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 | allow-half | Si les demi-étoiles sont autorisées. | boolean | — | false |
 | low-threshold | Seuil entre les niveaux bas et moyen. La valeur sera incluse dans le niveau bas. | number | — | 2 |
 | high-threshold | Seuil entre les niveaux moyen et haut. La valeur sera incluse entre dans le niveau haut. | number | — | 4 |
-| colors | Couleurs des icônes. Doit en contenir trois, correspondants à chaque niveau. | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
+| colors | colors for icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding color. | array/object | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
 | void-color | Couleur des icônes non-sélectionnées. | string | — | #C6D1DE |
 | disabled-void-color | Couleur des icônes non-sélectionnées en lecture seule. | string | — | #EFF2F7 |
-| icon-classes | Liste des classes des icônes. Doit en contenir trois, correspondants à chaque niveau. | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
+| icon-classes | class names of icons. If array, ot should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding icon class. | array/object | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
 | void-icon-class | Classe des icônes non-sélectionnées. | string | — | el-icon-star-off |
 | disabled-void-icon-class | Classe des icônes non-sélectionnées en lecture seule. | string | — | el-icon-star-on |
 | show-text | Si du texte doit apparaître à droite des étoiles. | boolean | — | false |

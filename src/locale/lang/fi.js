@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Syötä hakusana',
       noCheckedFormat: '{total} kohdetta',
       hasCheckedFormat: '{checked}/{total} valittu'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

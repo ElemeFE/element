@@ -35,7 +35,7 @@ export default {
         prev.push(item);
         const rowKey = this.store.table.getRowKey(item);
         const parent = this.store.states.treeData[rowKey];
-        if (parent && parent.children) {
+        if (parent && parent.children && parent.hasChildren) {
           const tmp = [];
           const traverse = (children) => {
             if (!children) return;
@@ -88,11 +88,15 @@ export default {
                     if (!rowspan || !colspan) {
                       return '';
                     } else {
+                      const columnData = { ...column };
+                      if (colspan !== 1) {
+                        columnData.realWidth = columnData.realWidth * colspan;
+                      }
                       const data = {
                         store: this.store,
                         _self: this.context || this.table.$vnode.context,
+                        column: columnData,
                         row,
-                        column,
                         $index
                       };
                       if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
