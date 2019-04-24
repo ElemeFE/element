@@ -49,10 +49,8 @@
       }
     },
 
-    watch: {
-      label() {
-        this.$parent.$emit('tabLabelChanged');
-      }
+    updated() {
+      this.$parent.$emit('tab-nav-update');
     }
   };
 </script>
