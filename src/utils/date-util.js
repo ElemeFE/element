@@ -1,17 +1,8 @@
-import dateUtil from 'element-ui/src/utils/date';
+import fecha from 'element-ui/src/utils/date';
 import { t } from 'element-ui/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-const getI18nSettings = () => {
-  return {
-    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-    dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-    monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
-    monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`)),
-    amPm: ['am', 'pm']
-  };
-};
 
 const newArray = function(start, end) {
   let result = [];
@@ -19,6 +10,16 @@ const newArray = function(start, end) {
     result.push(i);
   }
   return result;
+};
+
+export const getI18nSettings = () => {
+  return {
+    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+    dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+    monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
+    monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`)),
+    amPm: ['am', 'pm']
+  };
 };
 
 export const toDate = function(date) {
@@ -39,11 +40,11 @@ export const isDateObject = function(val) {
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
-  return dateUtil.format(date, format || 'yyyy-MM-dd', getI18nSettings());
+  return fecha.format(date, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const parseDate = function(string, format) {
-  return dateUtil.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
+  return fecha.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const getDayCountOfMonth = function(year, month) {
@@ -131,6 +132,20 @@ export const getRangeHours = function(ranges) {
   return hours;
 };
 
+export const getPrevMonthLastDays = (date, amount) => {
+  if (amount <= 0) return [];
+  const temp = new Date(date.getTime());
+  temp.setDate(0);
+  const lastDay = temp.getDate();
+  return range(amount).map((_, index) => lastDay - (amount - index - 1));
+};
+
+export const getMonthDays = (date) => {
+  const temp = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  const days = temp.getDate();
+  return range(days).map((_, index) => index + 1);
+};
+
 function setRangeData(arr, start, end, value) {
   for (let i = start; i < end; i++) {
     arr[i] = value;
@@ -196,7 +211,7 @@ export const clearMilliseconds = function(date) {
 export const limitTimeRange = function(date, ranges, format = 'HH:mm:ss') {
   // TODO: refactory a more elegant solution
   if (ranges.length === 0) return date;
-  const normalizeDate = date => dateUtil.parse(dateUtil.format(date, format), format);
+  const normalizeDate = date => fecha.parse(fecha.format(date, format), format);
   const ndate = normalizeDate(date);
   const nranges = ranges.map(range => range.map(normalizeDate));
   if (nranges.some(nrange => ndate >= nrange[0] && ndate <= nrange[1])) return date;
@@ -270,4 +285,8 @@ export const extractTimeFormat = function(format) {
   return format
     .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
     .trim();
+};
+
+export const validateRangeInOneMonth = function(start, end) {
+  return (start.getMonth() === end.getMonth()) && (start.getFullYear() === end.getFullYear());
 };

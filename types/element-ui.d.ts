@@ -70,6 +70,8 @@ import { ElTransfer } from './transfer'
 import { ElTree } from './tree'
 import { ElUpload } from './upload'
 import { ElDivider } from './divider'
+import { ElCalendar } from './calendar'
+import { ElImage } from './image'
 
 export interface InstallationOptions {
   locale: any,

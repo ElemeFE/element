@@ -200,7 +200,7 @@
     nextDate,
     extractDateFormat,
     extractTimeFormat
-  } from '../util';
+  } from 'element-ui/src/utils/date-util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';

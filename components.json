@@ -72,5 +72,6 @@
   "timeline-item": "./packages/timeline-item/index.js",
   "link": "./packages/link/index.js",
   "divider": "./packages/divider/index.js",
-  "image": "./packages/image/index.js"
+  "image": "./packages/image/index.js",
+  "calendar": "./packages/calendar/index.js"
 }
