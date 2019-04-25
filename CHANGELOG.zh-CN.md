@@ -75,6 +75,8 @@
   - RepeatClick: 使用 Date.now 提升性能 (#14776 by @pavelmash)
 - Upload
   - 修复 Upload 的背景颜色 (#15039 by @iamkun)
+- Theme
+  - 添加无圆角变量 (#15256 by @iamkun)
 
 #### Optimization
 
@@ -85,7 +87,6 @@
   - 修复 2.6 changelog 的 bug (#15026 by @iamkun)
   - 更新构建脚本 (#14821 by @abc3660170)
   - 本次开发时支持热更新 (#15221 by @SimonaliaChen)
-  - 支持主题配置功能 (#15190 by @iamkun)
   - 本地开发时，加载 sourcemap (#15087 by @ibufu)
 Docs
   - 重命名 demo 中的变量 (#14602 #15003 #15094 #15105 by @liupl)

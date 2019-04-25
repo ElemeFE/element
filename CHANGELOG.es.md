@@ -75,6 +75,8 @@
   - RepeatClick: use Date.now() instead of new Date() (#14776 by @pavelmash)
 - Upload
   - Fix Upload transparent picture display style (#15039 by @iamkun)
+- Theme
+  - Add zero border (#15256 by @iamkun)
 
 #### Optimization
 
@@ -85,7 +87,6 @@
   - Fix 2.6.0 changelog error (#15026 by @iamkun)
   - Update build config (#14821 by @abc3660170)
   - Add hmr (#15221 by @SimonaliaChen)
-  - Support theme configuration (#15190 by @iamkun)
   - Use sourcemap in dev environment (#15087 by @ibufu)
 Docs
   - Rename variable in docs (#14602 #15003 #15094 #15105 by @liupl)
