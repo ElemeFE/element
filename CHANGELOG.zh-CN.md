@@ -17,7 +17,7 @@
 - Icon
   - 新增图标 (#15214 by @iamkun)
 - Alert
-  - 新增黑色主题 (#15041 by @island205)
+  - 新增高饱和度主题 (#15041 by @island205)
 - Image
   - 新增 Image 组件 (#15117 by @SimonaliaChen)
 - Collapse
