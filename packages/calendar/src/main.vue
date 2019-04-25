@@ -43,11 +43,11 @@
       class="el-calendar__body"
       key="has-range">
       <date-table
-        v-for="(rang, index) in validatedRange"
+        v-for="(range, index) in validatedRange"
         :key="index"
-        :date="rang[0]"
+        :date="range[0]"
         :selected-day="realSelectedDay"
-        :range="rang"
+        :range="range"
         :hide-header="index !== 0"
         @pick="pickDay" />
     </div>

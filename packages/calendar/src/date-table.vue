@@ -104,17 +104,17 @@ export default {
       // if range exists, should render days in range.
       if (this.isInRange) {
         const [start, end] = this.range;
-        const currentMonthDays = rangeArr(end.getDate() - start.getDate() + 1).map((_, index) => ({
+        const currentMonthRange = rangeArr(end.getDate() - start.getDate() + 1).map((_, index) => ({
           text: start.getDate() + index,
           type: 'current'
         }));
-        let remaining = currentMonthDays.length % 7;
+        let remaining = currentMonthRange.length % 7;
         remaining = remaining === 0 ? 0 : 7 - remaining;
-        const nextMonthDays = rangeArr(remaining).map((_, index) => ({
+        const nextMonthRange = rangeArr(remaining).map((_, index) => ({
           text: index + 1,
           type: 'next'
         }));
-        days = currentMonthDays.concat(nextMonthDays);
+        days = currentMonthRange.concat(nextMonthRange);
       } else {
         const date = this.date;
         const firstDay = getFirstDayOfMonth(date);
@@ -125,7 +125,7 @@ export default {
         const currentMonthDays = getMonthDays(date).map(day => ({
           text: day,
           type: 'current'
-        }));;
+        }));
         days = [...prevMonthDays, ...currentMonthDays];
         const nextMonthDays = rangeArr(42 - days.length).map((_, index) => ({
           text: index + 1,
