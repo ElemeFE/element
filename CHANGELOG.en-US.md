@@ -21,7 +21,7 @@
 - Image
   - Add image component (#15117 by @SimonaliaChen)
 - Collapse
-  - collapse item can be disabled (#15076 by @ziyoung)
+  - CollapseItem can be disabled (#15076 by @ziyoung)
 - Carousel
   - Add direction attribute and support vertical direction (#15122 by @ziyoung)
 - Pagination
