@@ -30,7 +30,7 @@
       src: String,
       fit: String,
       lazy: Boolean,
-      scrollContainer: [String, HTMLElement],
+      scrollContainer: {},
       alt: String
     },
 
