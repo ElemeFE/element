@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.8.2
+
+*2019-04-25*
+
+#### Bug fixes
+
+- Icon
+  - Update icon (#15272 by @iamkun)
+- Docs
+  - Fix Form and Input doc style (#15273 by @ziyoung)
+
 ### 2.8.1
 
 *2019-04-25*
