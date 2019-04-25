@@ -106,6 +106,7 @@
       "background-color-base": "基础背景色",
       "border-radius-base": "大圆角",
       "border-radius-small": "小圆角",
+      "border-radius-zero": "无圆角",
       "border-radius-circle": "圆形圆角",
       "box-shadow-base": "基础投影",
       "box-shadow-dark": "深色投影",
