@@ -212,5 +212,9 @@ MessageBox.close = () => {
   currentMsg = null;
 };
 
+MessageBox.instance = () => {
+  return instance
+}
+
 export default MessageBox;
 export { MessageBox };
