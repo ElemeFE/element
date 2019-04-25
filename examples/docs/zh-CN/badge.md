@@ -8,6 +8,7 @@
 :::demo 定义`value`属性，它接受`Number`或者`String`。
 
 ```html
+<template>
 <el-badge :value="12" class="item">
   <el-button size="small">评论</el-button>
 </el-badge>
@@ -36,6 +37,7 @@
     </el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+</template>
 
 <style>
 .item {
