@@ -1,5 +1,24 @@
 ## Changelog
 
+### 2.8.1
+
+*2019-04-25*
+
+#### Bug fixes
+
+- Icon
+  - Update icon of cascader and select (#15264 by @SimonaliaChen)
+  - Update icon (#15258 #15268 by @iamkun)
+
+#### Optimization
+
+- Chore
+  - Update build script (#15267 by @ziyoung)
+- Docs
+  - Fix link underline color (#15265 by @iamkun)
+- Other
+  - Fix migrating config not compatible with camel case props and events (#15260 by @SimonaliaChen)
+
 ### 2.8.0
 
 *2019-04-25*
