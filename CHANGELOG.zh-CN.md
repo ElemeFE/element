@@ -1,5 +1,108 @@
 ## 更新日志
 
+### 2.8.0
+
+*2019-04-25*
+
+#### 新特性
+
+- Divider
+  - 新增 Divider 组件 (#15055 by @island205)
+- Rate
+  - 支持通过对象自定义 colors 与 icon-classes 属性 (#15051 by @SimonaliaChen)
+- Link
+  - 新增 Link 组件 (#15052 by @iamkun)
+- Calendar
+  - 新增 Calendar 组件 (#14908 by @ziyoung)
+- Icon
+  - 新增图标 (#15214 by @iamkun)
+- Alert
+  - 新增黑色主题 (#15041 by @island205)
+- Image
+  - 新增 Image 组件 (#15117 by @SimonaliaChen)
+- Collapse
+  - CollapseItem 支持禁用 (#15076 by @ziyoung)
+- Carousel
+  - 新增 direction 属性，支持垂直方向切换 (#15122 by @ziyoung)
+- Pagination
+  - 新增 hide-on-single-page 属性 (#15096 by @ziyoung)
+- Slider
+  - 新增 marks 属性 (#15133 by @luckyCao)
+- Input
+  - 新增 show-word-count 属性 (#15075 by @luckyCao)
+- InputNumber
+  - 新增 step-strictly 属性 (#15050 by @luckyCao)
+- Tooltip, Dropdown, Popover
+  - 新增 tabindex 属性 (#15167 by @ziyoung)
+
+#### Bug fixes
+
+- Notification
+  - 修复标题不换行的问题 (#15008 by @iamkun)
+- Form
+  - 修复动态表单校验规则不生效的问题 (#14985 by @luckyCao)
+  - 修复 label 的样式 (#14969 by @ziyoung)
+  - 当 required 为 true 时，显示星号 (#15144 by @ziyoung)
+- Pagination
+  - 修复 slot 未更新的问题 (#14711 by @lucyhao)
+- Table
+  - 修复懒加载时加载数据的 bug (#15101 by @ziyoung)
+  - 在合并单元格时，修复单元格的宽度计算不正确的问题 (#15196 by @ziyoung)
+  - 提升表格的性能 (#14868 by @ziyoung)
+  - 初始化时不再触发 sort-change 事件 (#14625 by @PeanutWatson)
+  - 让 height 与 max-height 属性的行为保持一致 (#14660 by @arthurdenner)
+- Dialog
+  - 修复内容不换行的问题 (#15027 by @iamkun)
+- Alert
+  - 更新 typescript 定义文件 (#15186 by @ziyoung)
+- Tabs
+  - Fix issue where Promise rejection was hitting application (#14816 by @ffxsam)
+  - slot 改变时，重新渲染 (#15238 by @ziyoung)
+- Message
+  - 修复 typescript 定义文件 (#14968 by @agoni1212)
+- Select
+  - 修复当 value 为 undefined 或者 null 的报错 (#15022 by @luckyCao)
+- Tree
+  - 当前节点被删除后，选中的节点也应该删除 (#14604 by @sinchang)
+  - 提升性能 (#14881 by @ChenZhuoSteve)
+- Dropdown
+  - 修复样式 (#14907 by @doing123)
+- Slider
+  - 修复可访问性问题 (#14792 by @erezsob)
+- Menu
+  - 如果 defaultIndex 不存在，activeIndex 应该为空 (#14074 by @hoythan)
+- Directive
+  - RepeatClick: 使用 Date.now 提升性能 (#14776 by @pavelmash)
+- Upload
+  - 修复 Upload 的背景颜色 (#15039 by @iamkun)
+
+#### Optimization
+
+- Chore
+  - 更新中文 changelog (#14965 by @iamkun)
+  - 当 demo 描述为空时，不再显示 (#15014 by @ziyoung)
+  - 显示 DevServer 的信息 (#15028 by @iamkun)
+  - 修复 2.6 changelog 的 bug (#15026 by @iamkun)
+  - 更新构建脚本 (#14821 by @abc3660170)
+  - 本次开发时支持热更新 (#15221 by @SimonaliaChen)
+  - 支持主题配置功能 (#15190 by @iamkun)
+  - 本地开发时，加载 sourcemap (#15087 by @ibufu)
+Docs
+  - 重命名 demo 中的变量 (#14602 #15003 #15094 #15105 by @liupl)
+  - 修复 upload 文档中的错误 (#15023 by @iamkun)
+  - 更新 Form 文档 (#15040 by @iamkun)
+  - 更新 Tabs 文档 (#15053 by @iamkun)
+  - 使用 eleme.cn 作为新域名 (#15139 by @ziyoung)
+  - 修复 Image 组件的路由名 (#15194 by @iamkun)
+  - 删除多余的法语翻译 (#15207 by @iamkun)
+
+#### Breaking changes
+
+- Rate
+  - 禁用情况下，显示小位数 (#15089 by @haoranyu)
+- Select
+  - 过滤情况下，placeholder 为选中选项的 label (#14989 by @ibufu)
+
 ### 2.7.2
 
 *2019-04-03*

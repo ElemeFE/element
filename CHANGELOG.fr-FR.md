@@ -1,5 +1,108 @@
 ## Changelog
 
+### 2.8.0
+
+*2019-04-25*
+
+#### New features
+
+- Divider
+  - Add divider component (#15055 by @island205)
+- Rate
+  - Add custom colors and icon-classes by passing a object (#15051 by @SimonaliaChen)
+- Link
+  - Add link component (#15052 by @iamkun)
+- Calendar
+  - Add calendar component (#14908 by @ziyoung)
+- Icon
+  - Add icon (#15214 by @iamkun)
+- Alert
+  - Add dark theme (#15041 by @island205)
+- Image
+  - Add image component (#15117 by @SimonaliaChen)
+- Collapse
+  - collapse item can be disabled (#15076 by @ziyoung)
+- Carousel
+  - Add direction attribute and support vertical direction (#15122 by @ziyoung)
+- Pagination
+  - Add hide-on-single-page attribute (#15096 by @ziyoung)
+- Slider
+  - Add marks attribute (#15133 by @luckyCao)
+- Input
+  - Add show-word-count attribute (#15075 by @luckyCao)
+- InputNumber
+  - Add step-strictly attribute (#15050 by @luckyCao)
+- Tooltip, Dropdown, Popover
+  - Support tabindex attribute (#15167 by @ziyoung)
+
+#### Bug fixes
+
+- Notification
+  - Fix title word break (#15008 by @iamkun)
+- Form
+  - Fix switching the rules in el-form not work (#14985 by @luckyCao)
+  - Fix label style (#14969 by @ziyoung)
+  - Required FormItem displays asterisk when label is auto (#15144 by @ziyoung)
+- Pagination
+  -  Fix slot not updated (#14711 by @lucyhao)
+- Table
+  - Fix load bug in lazy mode (#15101 by @ziyoung)
+  - Fix cell width when colspan is grater than 1 (#15196 by @ziyoung)
+  - Improve performance (#14868 by @ziyoung)
+  - Don't emit triggers sort-change during initialization (#14625 by @PeanutWatson)
+  - Equal behaviour for height and max-height (#14660 by @arthurdenner)
+- Dialog
+  - Fix dialog body correctly break long words (#15027 by @iamkun)
+- Alert
+  - update type definition (#15186 by @ziyoung)
+- Tabs
+  - Fix issue where Promise rejection was hitting application (#14816 by @ffxsam)
+  - Rerender when slot changes (#15238 by @ziyoung)
+- Message
+  - Fix type definition (#14968 by @agoni1212)
+- Select
+  - Fix error when value is undefined or null (#15022 by @luckyCao)
+- Tree
+  - Delete current node after it removed (#14604 by @sinchang)
+  - Improve performance (#14881 by @ChenZhuoSteve)
+- Dropdown
+  - Fix style (#14907 by @doing123)
+- Slider
+  - Fix broken keyboard a11y bug (#14792 by @erezsob)
+- Menu
+  - ActiveIndex value shall be null if defaultIndex does not exist(#14074 by @hoythan)
+- Directive
+  - RepeatClick: use Date.now() instead of new Date() (#14776 by @pavelmash)
+- Upload
+  - Fix Upload transparent picture display style (#15039 by @iamkun)
+
+#### Optimization
+
+- Chore
+  - Update changelog zh-cn (#14965 by @iamkun)
+  - Hide demo description when it's empty (#15014 by @ziyoung)
+  - Display dev server info by default by @iamkun)
+  - Fix 2.6.0 changelog error (#15026 by @iamkun)
+  - Update build config (#14821 by @abc3660170)
+  - Add hmr (#15221 by @SimonaliaChen)
+  - Support theme configuration (#15190 by @iamkun)
+  - Use sourcemap in dev environment (#15087 by @ibufu)
+Docs
+  - Rename variable in docs (#14602 #15003 #15094 #15105 by @liupl)
+  - Fix upload doc error (#15023 by @iamkun)
+  - Update Form custom validator doc (#15040 by @iamkun)
+  - Update Tabs docs to display vertical tabs (#15053 by @iamkun)
+  - Use eleme.cn as domain (#15139 by @ziyoung)
+  - Fix Image route name (#15194 by @iamkun)
+  - Remove duplicated fr translation (#15207 by @iamkun)
+
+#### Breaking changes
+
+- Rate
+  - Fix decimal display support in disabled mode (#15089 by @haoranyu)
+- Select
+  - Use placeholder option label to set placeholder in filter mode (#14989 by @ibufu)
+
 ### 2.7.2
 
 *2019-04-03*
