@@ -8,6 +8,12 @@ export declare class TmBadge extends TmUIComponent {
   /** badge special color */
   color: BadgeColor
 
+  /** Display value */
+  value: string | number
+
+  /** Maximum value, shows '{max}+' when exceeded. Only works if `value` is a number */
+  max: number
+
   /** determine whether it's a hollow badge */
   hollow: boolean
 
@@ -16,4 +22,7 @@ export declare class TmBadge extends TmUIComponent {
 
   /** determine whether badge has no hover */
   noHover: boolean
+
+  /** Hidden badge */
+  hidden: boolean
 }

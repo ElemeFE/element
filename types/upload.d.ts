@@ -108,4 +108,10 @@ export declare class TmUpload extends TmUIComponent {
 
   /** Hook function when limit is exceeded */
   onExceed: (file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail[]) => void
+
+  /** Clear the upload file list */
+  clearFiles (): void;
+
+  /** Abort specified file */
+  abort (file: TmUploadInternalFileDetail): void
 }

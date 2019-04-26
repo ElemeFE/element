@@ -17,11 +17,13 @@ export declare class TmMessageBoxComponent extends Vue {
   title: string
   message: string
   type: MessageType
+  iconClass: string
   customClass: string
   showInput: boolean
   showClose: boolean
   inputValue: string
   inputPlaceholder: string
+  inputType: string
   inputPattern: RegExp
   inputValidator: MessageBoxInputValidator
   inputErrorMessage: string
@@ -50,6 +52,9 @@ export interface TmMessageBoxOptions {
   /** Message type, used for icon display */
   type?: MessageType
 
+  /** Custom icon's class */
+  iconClass?: string
+
   /** Custom class name for MessageBox */
   customClass?: string
 
@@ -67,6 +72,9 @@ export interface TmMessageBoxOptions {
 
   /** Whether to show a confirm button */
   showConfirmButton?: boolean
+
+  /** Whether to show a close button */
+  showClose?: boolean
 
   /** Text content of cancel button */
   cancelButtonText?: string
@@ -110,11 +118,17 @@ export interface TmMessageBoxOptions {
   /** Regexp for the input */
   inputPattern?: RegExp
 
+  /** Input Type: text, textArea, password or number */
+  inputType?: string
+
   /** Validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage */
   inputValidator?: MessageBoxInputValidator
 
   /** Error message when validation fails */
   inputErrorMessage?: string
+
+  /** Whether to distinguish canceling and closing */
+  distinguishCancelAndClose?: boolean
 }
 
 export interface TmMessageBoxShortcutMethod {

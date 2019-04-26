@@ -116,4 +116,9 @@ export declare class TmDatePicker extends TmUIComponent {
 
   /** name for the inner native input */
   name: string
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }
