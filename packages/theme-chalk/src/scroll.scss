@@ -1,0 +1,18 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(scroll) {
+  background-color: $--color-white;
+
+  @include e(loading) {
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: center;
+    color: $--color-primary;
+    font-size: $--font-size-base;
+
+    .el-scroll__loading__text {
+      display: block;
+    }
+  }
+}

@@ -271,6 +271,10 @@
             {
               "path": "/image",
               "title": "Image 图片"
+            },
+            {
+              "path": "/scroll",
+              "title": "Scroll 无限滚动"
             }
           ]
         }
@@ -549,6 +553,10 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/scroll",
+              "title": "Scroll"
             }
           ]
         }
@@ -827,6 +835,10 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/scroll",
+              "title": "Scroll"
             }
           ]
         }
@@ -1105,6 +1117,10 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/scroll",
+              "title": "Scroll"
             }
           ]
         }

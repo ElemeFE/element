@@ -74,6 +74,7 @@ import { ElUpload } from './upload'
 import { ElDivider } from './divider'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
+import { ElScroll } from './scroll'
 
 export interface InstallationOptions {
   locale: any,
@@ -314,3 +315,6 @@ export class Upload extends ElUpload {}
 
 /** Divider Component */
 export class Divider extends ElDivider {}
+
+/** Scroll Component */
+export class Scroll extends ElScroll {}
