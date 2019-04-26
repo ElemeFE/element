@@ -13,4 +13,7 @@ export declare class TmTabPane extends TmUIComponent {
 
   /** Whether Tab is closable */
   closable: boolean
+
+  /** Whether Tab is lazily rendered */
+  lazy: boolean
 }

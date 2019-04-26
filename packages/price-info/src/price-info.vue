@@ -66,10 +66,6 @@ export default {
       type: String,
       default: 'rub'
     },
-    currencyFormatter: {
-      type: [Object, Boolean],
-      default: false
-    },
     size: {
       type: String,
       default: 'default'

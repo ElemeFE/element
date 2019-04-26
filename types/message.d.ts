@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, {VNode} from 'vue'
 
 export type MessageType = 'success' | 'warning' | 'info' | 'error'
 
@@ -20,7 +20,7 @@ export interface CloseEventHandler {
 /** Options used in Message */
 export interface TmMessageOptions {
   /** Message text */
-  message: string
+  message: string | VNode
 
   /** Message type */
   type?: MessageType
@@ -57,14 +57,26 @@ export interface TmMessage {
   /** Show a success message */
   success (text: string): TmMessageComponent
 
+  /** Show a success message with options */
+  success (options: TmMessageOptions): TmMessageComponent
+
   /** Show a warning message */
   warning (text: string): TmMessageComponent
+
+  /** Show a warning message with options */
+  warning (options: TmMessageOptions): TmMessageComponent
 
   /** Show an info message */
   info (text: string): TmMessageComponent
 
+  /** Show an info message with options */
+  info (options: TmMessageOptions): TmMessageComponent
+
   /** Show an error message */
   error (text: string): TmMessageComponent
+
+  /** Show an error message with options */
+  error (options: TmMessageOptions): TmMessageComponent
 }
 
 declare module 'vue/types/vue' {

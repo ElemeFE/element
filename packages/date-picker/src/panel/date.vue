@@ -46,7 +46,8 @@
               </time-picker>
             </span>
           </div>
-          <div class="tm-date-picker__year-header">
+          <div v-if="!hideYearHeader"
+               class="tm-date-picker__year-header">
             <button type="button"
                     @click="prevYear"
                     :aria-label="t(`el.datepicker.prevYear`)"
@@ -473,7 +474,8 @@
         showWeekNumber: false,
         timePickerVisible: false,
         format: '',
-        arrowControl: false
+        arrowControl: false,
+        hideYearHeader: false
       };
     },
 

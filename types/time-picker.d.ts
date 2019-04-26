@@ -55,4 +55,9 @@ export declare class TmTimePicker extends TmUIComponent {
 
   /** Range separator */
   rangeSeparator: string
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
 }

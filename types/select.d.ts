@@ -30,6 +30,9 @@ export declare class TmSelect extends TmUIComponent {
   /** Maximum number of options user can select when multiple is true. No limit when set to 0 */
   multipleLimit: number
 
+  /** Same as autocomplete in native input */
+  autocomplete: string
+
   /** The name attribute of select input */
   name: string
 
@@ -68,4 +71,17 @@ export declare class TmSelect extends TmUIComponent {
 
   /** Select first matching option on enter key. Use with filterable or remote */
   defaultFirstOption: boolean
+
+  /** Whether to append the popper menu to body */
+  popperAppendToBody: boolean
+
+  /**
+   * Focus the Input component
+   */
+  focus (): void
+
+  /**
+   * Blur the Input component, and hide the dropdown
+   */
+  blur (): void
 }

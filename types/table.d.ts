@@ -17,6 +17,14 @@ export interface SummaryMethodParams {
   data: object
 }
 
+export interface treeNode {
+  rowKey: string | number,
+  isLeaf: boolean,
+  level: number,
+  expanded: boolean,
+  loaded: boolean
+}
+
 /** Table Component */
 export declare class TmTable extends TmUIComponent {
   /** Table data */
@@ -45,6 +53,12 @@ export declare class TmTable extends TmUIComponent {
 
   /** Key of current row, a set only prop */
   currentRowKey: string | number
+
+  /** Whether to lazy load tree structure data, used with load attribute */
+  lazy: boolean
+
+  /** Horizontal indentation of nodes in adjacent levels in pixels */
+  indent: number
 
   /** Function that returns custom class names for a row, or a string assigning class names for every row */
   rowClassName: string | ((row: object, index: number) => string)
@@ -79,6 +93,9 @@ export declare class TmTable extends TmUIComponent {
   /** Custom summary method */
   summaryMethod: (param: SummaryMethodParams) => any[]
 
+  /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
+  selectOnIndeterminate: boolean
+
   /** Clear selection. Might be useful when `reserve-selection` is on */
   clearSelection (): void
 
@@ -91,9 +108,37 @@ export declare class TmTable extends TmUIComponent {
   toggleRowSelection (row: object, selected?: boolean): void
 
   /**
+   * Toggle or set all rows
+   */
+  toggleAllSelection (): void
+
+  /**
    * Set a certain row as selected
    *
    * @param row The row that is going to set as selected
    */
   setCurrentRow (row?: object): void
+
+  /**
+   * Toggle or set if a certain row is expanded
+   *
+   * @param row The row that is going to set its expanded state
+   * @param expanded Whether the row is expanded. The expanded state will be toggled if not set
+   */
+  toggleRowExpansion (row: object, expanded?: boolean): void
+
+  /** Clear sort status, reset the table to unsorted  */
+  clearSort (): void
+
+  /** Clear filter, reset the table to unfiltered  */
+  clearFilter (): void
+
+  /** Relayout the table, maybe needed when change the table or it's ancestors visibility */
+  doLayout (): void
+
+  /** Sort Table manually */
+  sort (prop: string, order: string): void
+
+  /** method for lazy load subtree data */
+  load (row: object, treeNode: treeNode, resolve: Function): void
 }

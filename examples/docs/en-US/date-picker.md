@@ -578,6 +578,7 @@ When picking a date range, you can assign the time part for start date and end d
 | clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
 | disable-old-date | Disable select days before today | boolean | — | false |
 | inline | Render calendar without popover | boolean | — | false |
+| hide-year-header | Hide block with year select | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
