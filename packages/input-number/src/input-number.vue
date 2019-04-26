@@ -115,7 +115,7 @@
       value: {
         immediate: true,
         handler(value) {
-          let newVal = value === undefined ? value : Number(value);
+          let newVal = (value === undefined || value === null) ? value : Number(value);
           if (newVal !== undefined) {
             if (isNaN(newVal)) {
               return;
