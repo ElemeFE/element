@@ -403,6 +403,10 @@ export default {
     disabledDate: {
       type: Function,
       default: null
+    },
+    hideYearHeader: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -826,6 +830,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.hideYearHeader = this.hideYearHeader;
       if (this.format) {
         this.picker.format = this.format;
       }
