@@ -86,7 +86,7 @@ class TableLayout {
     const tableHeight = this.tableHeight = this.table.$el.clientHeight;
     if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
       const footerHeight = this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0;
-      this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
+      this.bodyHeight = parseInt(this.height, 10) - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
     }
     this.fixedBodyHeight = this.scrollX ? this.bodyHeight - this.gutterWidth : this.bodyHeight;
 
