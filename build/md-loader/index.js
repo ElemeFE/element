@@ -28,7 +28,7 @@ module.exports = function(source) {
     const script = stripScript(commentContent);
     let demoComponentContent = genInlineComponentText(html, script);
     const demoComponentName = `element-demo${id}`;
-    output.push(`<${demoComponentName} slot="source" />`);
+    output.push(`<template slot="source"><${demoComponentName} /></template>`);
     componenetsString += `${JSON.stringify(demoComponentName)}: ${demoComponentContent},`;
 
     // 重新计算下一次的位置
