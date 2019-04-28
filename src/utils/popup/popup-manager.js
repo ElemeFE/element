@@ -162,6 +162,7 @@ Object.defineProperty(PopupManager, 'zIndex', {
   },
   set(value) {
     zIndex = value;
+    hasInitZIndex = true;
   }
 });
 
