@@ -35,6 +35,8 @@
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
       :style="[bodyHeight]">
       <table-body
+        @mouse-enter-row="onMouseEnterRow"
+        @mouse-leave-row="onMouseLeaveRow"
         :context="context"
         :store="store"
         :stripe="stripe"
@@ -110,6 +112,8 @@
         },
         fixedBodyHeight]">
         <table-body
+          @mouse-enter-row="onMouseEnterRow"
+          @mouse-leave-row="onMouseLeaveRow"
           fixed="left"
           :store="store"
           :stripe="stripe"
@@ -173,6 +177,8 @@
         },
         fixedBodyHeight]">
         <table-body
+          @mouse-enter-row="onMouseEnterRow"
+          @mouse-leave-row="onMouseLeaveRow"
           fixed="right"
           :store="store"
           :stripe="stripe"
@@ -215,6 +221,7 @@
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
   import debounce from 'throttle-debounce/debounce';
+  import throttle from 'throttle-debounce/throttle';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Mousewheel from 'element-ui/src/directives/mousewheel';
   import Locale from 'element-ui/src/mixins/locale';
@@ -225,6 +232,7 @@
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
   import { getRowIdentity } from './util';
+  import { addClass, removeClass } from 'element-ui/src/utils/dom';
 
   const flattenData = function(data) {
     if (!data) return data;
@@ -351,6 +359,24 @@
     },
 
     methods: {
+      onMouseEnterRow(index) {
+        setTimeout(() => {
+          this.tableBodys.forEach((table) => {
+            const el = table.$el.querySelectorAll('tr')[index];
+            addClass(el, 'hover-row');
+          });
+        });
+      },
+      onMouseLeaveRow() {
+        setTimeout(() => {
+          this.tableBodys.forEach((table) => {
+            const els = table.$el.querySelectorAll('tr');
+            els.forEach((e) => {
+              removeClass(e, 'hover-row');
+            });
+          });
+        });
+      },
       getMigratingConfig() {
         return {
           events: {
@@ -463,7 +489,10 @@
         if (shouldUpdateLayout) {
           this.resizeState.width = width;
           this.resizeState.height = height;
-          this.doLayout();
+          const { height, width } = this.$el.getBoundingClientRect();
+          if (height > 0 && width > 0) {
+            this.throttledUpdateLayout();
+          }
         }
       },
 
@@ -535,9 +564,16 @@
     created() {
       this.tableId = 'el-table_' + tableIdSeed++;
       this.debouncedUpdateLayout = debounce(50, () => this.doLayout());
+      this.throttledUpdateLayout = throttle(100, () => this.doLayout());
     },
 
     computed: {
+      tableBodys() {
+        return this.$children.filter((item) => {
+          return item.$options.name === 'ElTableBody';
+        });
+      },
+
       tableSize() {
         return this.size || (this.$ELEMENT || {}).size;
       },

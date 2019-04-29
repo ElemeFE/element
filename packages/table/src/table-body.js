@@ -402,11 +402,11 @@ export default {
     },
 
     handleMouseEnter(index) {
-      this.store.commit('setHoverRow', index);
+      this.$emit('mouse-enter-row', index);
     },
 
     handleMouseLeave() {
-      this.store.commit('setHoverRow', null);
+      this.$emit('mouse-leave-row');
     },
 
     handleContextMenu(event, row) {
