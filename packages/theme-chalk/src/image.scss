@@ -7,11 +7,13 @@
 }
 
 @include b(image) {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 
   @include e(inner) {
     @extend %size;
-    vertical-align: top;
   }
 
   @include e(placeholder) {
