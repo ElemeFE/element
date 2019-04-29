@@ -356,4 +356,7 @@
 
 @include b(checkbox-group) {
   font-size: 0;
+  .el-checkbox {
+    vertical-align: bottom;
+  }
 }
