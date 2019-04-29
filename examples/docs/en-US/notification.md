@@ -279,7 +279,7 @@ Element has added a global method `$notify` for Vue.prototype. So in a vue insta
 
 ### Local import
 
-Import `Notification`:
+Import `Notification` into `*.vue` instance:
 
 ```javascript
 import { Notification } from 'element-ui';
