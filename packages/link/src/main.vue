@@ -6,7 +6,7 @@
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline'
     ]"
-    :href="href"
+    :href="disabled ? null : href"
     v-bind="$attrs"
     @click="handleClick"
   >
