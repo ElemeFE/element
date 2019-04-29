@@ -43,19 +43,20 @@
     },
 
     watch: {
-      src: {
-        handler(val) {
-          this.show && this.loadImage(val);
-        },
-        immediate: true
+      src(val) {
+        this.show && this.loadImage();
       },
       show(val) {
-        val && this.loadImage(this.src);
+        val && this.loadImage();
       }
     },
 
     mounted() {
-      this.lazy && this.addLazyLoadListener();
+      if (this.lazy) {
+        this.addLazyLoadListener();
+      } else {
+        this.loadImage();
+      }
     },
 
     beforeDestroy() {
@@ -63,7 +64,9 @@
     },
 
     methods: {
-      loadImage(val) {
+      loadImage() {
+        if (this.$isServer) return;
+
         // reset status
         this.loading = true;
         this.error = false;
@@ -71,7 +74,7 @@
         const img = new Image();
         img.onload = this.handleLoad.bind(this);
         img.onerror = this.handleError.bind(this);
-        img.src = val;
+        img.src = this.src;
       },
       handleLoad(e) {
         this.loading = false;
