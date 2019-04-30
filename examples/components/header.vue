@@ -303,7 +303,7 @@
           </li>
           <li 
             class="nav-item"
-            v-if="showThemeConfigurator"
+            v-if="$isEle"
           >
             <router-link
               active-class="active"
@@ -373,7 +373,7 @@
           
           <!--theme picker-->
           <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-picker v-if="!showThemeConfigurator"></theme-picker>
+            <theme-picker v-if="!$isEle"></theme-picker>
           </li>
         </ul>
       </div>
@@ -381,6 +381,7 @@
   </div>
 </template>
 <script>
+  import Vue from 'vue';
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
@@ -405,8 +406,7 @@
           'en-US': 'English',
           'es': 'Español',
           'fr-FR': 'Français'
-        },
-        showThemeConfigurator: false
+        }
       };
     },
 
@@ -432,18 +432,14 @@
       }
     },
     mounted() {
-      const host = location.hostname;
-      this.showThemeConfigurator = host.match('localhost') || host.match('elenet');
-      if (!this.showThemeConfigurator) {
-        getVars()
-          .then(() => {
-            this.showThemeConfigurator = true;
-            ga('send', 'event', 'DocView', 'Inner');
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
+      getVars()
+        .then(() => {
+          Vue.prototype.$isEle = true;
+          ga('send', 'event', 'DocView', 'Inner');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     methods: {
       switchVersion(version) {

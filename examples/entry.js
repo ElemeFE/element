@@ -26,6 +26,7 @@ Vue.component('side-nav', SideNav);
 Vue.component('footer-nav', FooterNav);
 
 Vue.prototype.$icon = icon; // Icon 列表页用
+Vue.prototype.$isEle = false; // 是否 ele 用户
 
 const router = new VueRouter({
   mode: 'hash',
