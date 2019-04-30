@@ -278,9 +278,9 @@
 
 Element 为 `Vue.prototype` 添加了全局方法 `$notify`。因此在 vue instance 中可以采用本页面中的方式调用 Notification。
 
-### 单独引用
+### 单独使用
 
-单独引入 Notification 到 `*.vue` 实例：
+单独使用 Notification 到 `*.vue` 实例：
 
 ```javascript
 import { Notification } from 'element-ui';
