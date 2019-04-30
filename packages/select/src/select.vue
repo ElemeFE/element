@@ -21,7 +21,7 @@
         <span class="tm-select__tags-text row-collapser__item"
               v-for="item in selected"
               :key="getValueKey(item)">
-          {{ item.currentLabel }};
+          {{ item.currentLabel }}<span v-show="selected.length > 1">;</span>
         </span>
       </transition-group>
       <tm-popover v-if="isCollapsed"
