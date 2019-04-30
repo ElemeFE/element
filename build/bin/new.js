@@ -30,34 +30,6 @@ ${ComponentName}.install = function(Vue) {
 export default ${ComponentName};`
   },
   {
-    filename: 'cooking.conf.js',
-    content: `var cooking = require('cooking');
-var gen = require('../../build/gen-single-config');
-
-cooking.set(gen(__dirname, 'El${ComponentName}'));
-
-module.exports = cooking.resolve();
-`
-  },
-  {
-    filename: 'package.json',
-    content: `{
-  "name": "element-${componentname}",
-  "version": "0.0.0",
-  "description": "A ${componentname} component for Vue.js.",
-  "keywords": [
-    "element",
-    "vue",
-    "component"
-  ],
-  "main": "./lib/index.js",
-  "repository": "https://github.com/ElemeFE/element/tree/master/packages/${componentname}",
-  "author": "elemefe",
-  "license": "MIT",
-  "dependencies": {}
-}`
-  },
-  {
     filename: 'src/main.vue',
     content: `<template>
   <div class="el-${componentname}"></div>
@@ -71,11 +43,19 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
-    content: `## ${chineseName}`
+    content: `## ${ComponentName} ${chineseName}`
   },
   {
     filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
-    content: `## ${componentname}`
+    content: `## ${ComponentName}`
+  },
+  {
+    filename: path.join('../../examples/docs/es', `${componentname}.md`),
+    content: `## ${ComponentName}`
+  },
+  {
+    filename: path.join('../../examples/docs/fr-FR', `${componentname}.md`),
+    content: `## ${ComponentName}`
   },
   {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
@@ -94,6 +74,22 @@ describe('${ComponentName}', () => {
   });
 });
 `
+  },
+  {
+    filename: path.join('../../packages/theme-chalk/src', `${componentname}.scss`),
+    content: `@import "mixins/mixins";
+@import "common/var";
+
+@include b(${componentname}) {
+}`
+  },
+  {
+    filename: path.join('../../types', `${componentname}.d.ts`),
+    content: `import { ElementUIComponent } from './component'
+
+/** ${ComponentName} Component */
+export declare class El${ComponentName} extends ElementUIComponent {
+}`
   }
 ];
 
@@ -111,20 +107,20 @@ fileSave(path.join(__dirname, '../../components.json'))
 // 创建 package
 Files.forEach(file => {
   fileSave(path.join(PackagePath, file.filename))
-  .write(file.content, 'utf8')
-  .end('\n');
+    .write(file.content, 'utf8')
+    .end('\n');
 });
 
 // 添加到 nav.config.json
 const navConfigFile = require('../../examples/nav.config.json');
 
 Object.keys(navConfigFile).forEach(lang => {
-  let groups = navConfigFile[lang][2].groups;
+  let groups = navConfigFile[lang][4].groups;
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
     title: lang === 'zh-CN' && componentname !== chineseName
-        ? `${ComponentName} ${chineseName}`
-        : ComponentName
+      ? `${ComponentName} ${chineseName}`
+      : ComponentName
   });
 });
 

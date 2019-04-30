@@ -8,6 +8,7 @@ Progress is used to show the progress of current operation, and inform the user 
 ```html
 <el-progress :percentage="0"></el-progress>
 <el-progress :percentage="70"></el-progress>
+<el-progress :percentage="80" color="#8e71c7"></el-progress>
 <el-progress :percentage="100" status="success"></el-progress>
 <el-progress :percentage="50" status="exception"></el-progress>
 ```
@@ -21,6 +22,7 @@ In this case the percentage takes no additional space.
 ```html
 <el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>
 <el-progress :text-inside="true" :stroke-width="18" :percentage="70"></el-progress>
+<el-progress :text-inside="true" :stroke-width="18" :percentage="80" color="rgba(142, 113, 199, 0.7)"></el-progress>
 <el-progress :text-inside="true" :stroke-width="18" :percentage="100" status="success"></el-progress>
 <el-progress :text-inside="true" :stroke-width="18" :percentage="50" status="exception"></el-progress>
 ```
@@ -32,9 +34,11 @@ In this case the percentage takes no additional space.
 ```html
 <el-progress type="circle" :percentage="0"></el-progress>
 <el-progress type="circle" :percentage="25"></el-progress>
+<el-progress type="circle" :percentage="80" color="#8e71c7"></el-progress>
 <el-progress type="circle" :percentage="100" status="success"></el-progress>
 <el-progress type="circle" :percentage="50" status="exception"></el-progress>
-``` 
+<el-progress type="circle" :percentage="100" status="text">Done</el-progress>
+```
 :::
 
 ### Attributes
@@ -44,7 +48,7 @@ In this case the percentage takes no additional space.
 | type | the type of progress bar | string | line/circle | line |
 | stroke-width | the width of progress bar | number | — | 6 |
 | text-inside | whether to place the percentage inside progress bar, only works when `type` is 'line' | boolean | — | false |
-| status | the current status of progress bar | string | success/exception | — |
+| status | the current status of progress bar | string | success/exception/text | — |
+| color  | background color of progress bar. Overrides `status` prop | string | — | — |
 | width | the canvas width of circle progress bar | number | — | 126 |
 | show-text | whether to show percentage | boolean | — | true |
-

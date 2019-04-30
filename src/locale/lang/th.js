@@ -16,6 +16,10 @@ export default {
       startTime: 'เวลาเริ่มต้น',
       endDate: 'วันที่สิ้นสุด',
       endTime: 'เวลาสิ้นสุด',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'ปี',
       month1: 'มกราคม',
       month2: 'กุมภาพันธ์',
@@ -31,7 +35,7 @@ export default {
       month12: 'ธันวาคม',
       // week: 'week',
       weeks: {
-        sun: 'อ',
+        sun: 'อา',
         mon: 'จ',
         tue: 'อ',
         wed: 'พ',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      loading: 'กำลังโหลด',
       placeholder: 'เลือก'
     },
     pagination: {
@@ -77,6 +82,7 @@ export default {
       error: 'คุณป้อนข้อมูลไม่ถูกต้อง'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'ลบ',
       preview: 'ตัวอย่าง',
       continue: 'ทำต่อ'
@@ -85,10 +91,22 @@ export default {
       emptyText: 'ไม่พบข้อมูล',
       confirmFilter: 'ยืนยัน',
       resetFilter: 'รีเซ็ต',
-      clearFilter: 'ทั้งหมด'
+      clearFilter: 'ทั้งหมด',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'ไม่พบข้อมูล'
+    },
+    transfer: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      noData: 'ไม่พบข้อมูล',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

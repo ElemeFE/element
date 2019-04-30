@@ -16,6 +16,10 @@ export default {
       startTime: 'Час початку',
       endDate: 'Дата завершення',
       endTime: 'Час завершення',
+      prevYear: 'Попередній Рік',
+      nextYear: 'Наступний Рік',
+      prevMonth: 'Попередній Місяць',
+      nextMonth: 'Наступний Місяць',
       year: '',
       month1: 'Січень',
       month2: 'Лютий',
@@ -29,7 +33,7 @@ export default {
       month10: 'Жовтень',
       month11: 'Листопад',
       month12: 'Грудень',
-            // week: 'week',
+      week: 'тиждень',
       weeks: {
         sun: 'Нд',
         mon: 'Пн',
@@ -57,11 +61,12 @@ export default {
     select: {
       loading: 'Завантаження',
       noMatch: 'Співпадінь не знайдено',
-      noData: 'Нема даних',
+      noData: 'Немає даних',
       placeholder: 'Обрати'
     },
     cascader: {
       noMatch: 'Співпадінь не знайдено',
+      loading: 'Завантаження',
       placeholder: 'Обрати'
     },
     pagination: {
@@ -77,18 +82,31 @@ export default {
       error: 'Неприпустимий ввід даних'
     },
     upload: {
+      deleteTip: 'натисніть кнопку щоб видалити',
       delete: 'Видалити',
       preview: 'Перегляд',
       continue: 'Продовжити'
     },
     table: {
-      emptyText: 'Нема даних',
+      emptyText: 'Немає даних',
       confirmFilter: 'Підтвердити',
       resetFilter: 'Скинути',
-      clearFilter: 'Все'
+      clearFilter: 'Все',
+      sumText: 'Сума'
     },
     tree: {
-      emptyText: 'Нема даних'
+      emptyText: 'Немає даних'
+    },
+    transfer: {
+      noMatch: 'Співпадінь не знайдено',
+      noData: 'Обрати',
+      titles: ['Список 1', 'Список 2'],
+      filterPlaceholder: 'Введіть ключове слово',
+      noCheckedFormat: '{total} пунктів',
+      hasCheckedFormat: '{checked}/{total} вибрано'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

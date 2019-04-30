@@ -32,12 +32,12 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       const msgbox = document.querySelector('.el-message-box__wrapper');
-      expect(msgbox.__vue__.$parent.value).to.true;
-      expect(msgbox.querySelector('.el-message-box__title').textContent).to.equal('消息');
+      expect(msgbox.__vue__.$parent.visible).to.true;
+      expect(msgbox.querySelector('.el-message-box__title span').textContent).to.equal('消息');
       expect(msgbox.querySelector('.el-message-box__message')
         .querySelector('p').textContent).to.equal('这是一段内容');
       MessageBox.close();
-      expect(msgbox.__vue__.$parent.value).to.false;
+      expect(msgbox.__vue__.$parent.visible).to.false;
       done();
     }, 300);
   });
@@ -50,6 +50,50 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('custom icon', done => {
+    MessageBox({
+      type: 'warning',
+      iconClass: 'el-icon-question',
+      message: '这是一段内容'
+    });
+    setTimeout(() => {
+      const icon = document.querySelector('.el-message-box__status');
+      expect(icon.classList.contains('el-icon-question')).to.true;
+      done();
+    }, 300);
+  });
+
+  it('html string', done => {
+    MessageBox({
+      title: 'html string',
+      dangerouslyUseHTMLString: true,
+      message: '<strong>html string</strong>'
+    });
+    setTimeout(() => {
+      const message = document.querySelector('.el-message-box__message strong');
+      expect(message.textContent).to.equal('html string');
+      done();
+    }, 300);
+  });
+
+  it('distinguish cancel and close', done => {
+    let msgAction = '';
+    MessageBox({
+      title: '消息',
+      message: '这是一段内容',
+      distinguishCancelAndClose: true
+    }, action => {
+      msgAction = action;
+    });
+    setTimeout(() => {
+      document.querySelector('.el-message-box__close').click();
+      setTimeout(() => {
+        expect(msgAction).to.equal('close');
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('alert', done => {
     MessageBox.alert('这是一段内容', {
       title: '标题名称',
@@ -58,7 +102,7 @@ describe('MessageBox', () => {
     setTimeout(() => {
       document.querySelector('.v-modal').click();
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.$parent.value).to.true;
+        .__vue__.$parent.visible).to.true;
       expect(document.querySelector('.el-message-box__wrapper')
         .__vue__.$parent.type).to.equal('warning');
       done();
@@ -74,7 +118,7 @@ describe('MessageBox', () => {
       document.querySelector('.el-message-box__wrapper')
         .querySelector('.el-button--primary').click();
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.$parent.value).to.false;
+        .__vue__.$parent.visible).to.false;
       done();
     }, 200);
   });
@@ -86,15 +130,30 @@ describe('MessageBox', () => {
       inputErrorMessage: 'validation failed'
     });
     setTimeout(() => {
-      expect(document.querySelector('.el-message-box__input')).to.exist;
       const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+      expect(messageBox.$el.querySelector('.el-message-box__input')).to.exist;
+      const haveFocus = messageBox.$el.querySelector('input').isSameNode(document.activeElement);
+      expect(haveFocus).to.true;
       messageBox.inputValue = 'no';
       setTimeout(() => {
-        expect(document.querySelector('.el-message-box__errormsg')
+        expect(messageBox.$el.querySelector('.el-message-box__errormsg')
           .textContent).to.equal('validation failed');
         done();
       }, 100);
-    }, 200);
+    }, 700);
+  });
+
+  it('prompt: focus on textarea', done => {
+    MessageBox.prompt('这是一段内容', {
+      inputType: 'textarea',
+      title: '标题名称'
+    });
+    setTimeout(() => {
+      const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+      const haveFocus = messageBox.$el.querySelector('textarea').isSameNode(document.activeElement);
+      expect(haveFocus).to.true;
+      done();
+    }, 700);
   });
 
   describe('custom validator', () => {
@@ -151,9 +210,11 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__close').click();
-      expect(msgAction).to.equal('cancel');
-      done();
-    }, 50);
+      setTimeout(() => {
+        expect(msgAction).to.equal('cancel');
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('beforeClose', done => {

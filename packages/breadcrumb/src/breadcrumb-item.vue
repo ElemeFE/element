@@ -1,6 +1,13 @@
 <template>
   <span class="el-breadcrumb__item">
-    <span class="el-breadcrumb__item__inner" ref="link"><slot></slot></span><span class="el-breadcrumb__separator">{{separator}}</span>
+    <span
+      :class="['el-breadcrumb__inner', to ? 'is-link' : '']"
+      ref="link"
+      role="link">
+      <slot></slot>
+    </span>
+    <i v-if="separatorClass" class="el-breadcrumb__separator" :class="separatorClass"></i>
+    <span v-else class="el-breadcrumb__separator" role="presentation">{{separator}}</span>
   </span>
 </template>
 <script>
@@ -12,20 +19,23 @@
     },
     data() {
       return {
-        separator: ''
+        separator: '',
+        separatorClass: ''
       };
     },
+
+    inject: ['elBreadcrumb'],
+
     mounted() {
-      this.separator = this.$parent.separator;
-      var self = this;
-      if (this.to) {
-        let link = this.$refs.link;
-        link.addEventListener('click', _ => {
-          let to = this.to;
-          self.replace ? self.$router.replace(to)
-                       : self.$router.push(to);
-        });
-      }
+      this.separator = this.elBreadcrumb.separator;
+      this.separatorClass = this.elBreadcrumb.separatorClass;
+      const link = this.$refs.link;
+      link.setAttribute('role', 'link');
+      link.addEventListener('click', _ => {
+        const { to, $router } = this;
+        if (!to || !$router) return;
+        this.replace ? $router.replace(to) : $router.push(to);
+      });
     }
   };
 </script>

@@ -23,6 +23,31 @@ If you have too much data to display in one page, use pagination.
 ```
 :::
 
+### Number of pagers
+
+:::demo By default, Pagination collapses extra pager buttons when it has more than 7 pages. This can be configured with the `pager-count` attribute.
+```html
+<el-pagination
+  :page-size="20"
+  :pager-count="11"
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
+### Buttons with background color
+
+:::demo Set the `background` attribute and the buttons will have a background color.
+```html
+<el-pagination
+  background
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### Small Pagination
 
 Use small pagination in the case of limited space.
@@ -50,7 +75,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage1"
+      :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -61,7 +86,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage2"
+      :current-page.sync="currentPage2"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -73,7 +98,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage3"
+      :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -84,7 +109,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page.sync="currentPage4"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
@@ -99,7 +124,6 @@ Add more modules based on your scenario.
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
-        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
     },
@@ -115,54 +139,60 @@ Add more modules based on your scenario.
 </script>
 ```
 :::
+
+### Hide pagination when there is only one page
+
+When there is only one page, hide the pagination by setting the `hide-on-single-page` attribute.
+
+:::demo
+```html
+<div>
+ <el-switch v-model="value">
+ </el-switch>
+ <el-pagination
+  :hide-on-single-page="value"
+  :total="5"
+  layout="prev, pager, next">
+</el-pagination>
+</div>
+
 <script>
-  import { addClass } from 'element-ui/src/utils/dom';
   export default {
     data() {
       return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
-      };
-    },
-    methods: {
-      handleSizeChange(val) {
-        console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        this.currentPage = val;
-        console.log(`current page: ${val}`);
+        value: false
       }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let demos = document.querySelectorAll('.source');
-        let firstDemo = demos[0];
-        let lastDemo = demos[demos.length - 1];
-        addClass(firstDemo, 'first');
-        addClass(lastDemo, 'last');
-      });
     }
   }
 </script>
+```
+:::
 
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small              |   whether to use small pagination    | boolean |      —       | false |
-| page-size              | item count of each page  | number |      —       | 10 |
+| background | whether the buttons have a background color | boolean | — | false |
+| page-size              | item count of each page, supports the .sync modifier  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
-| current-page | current page number | number | — | 1 |
+| pager-count | number of pagers. Pagination collapses when the total page count exceeds this value | number | odd number between 5 and 21 | 7 |
+| current-page | current page number, supports the .sync modifier | number | — | 1 |
 | layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | custom class name for the page size Select's dropdown | string | — | — |
+| prev-text | text for the prev button | string | — | — |
+| next-text | text for the next button | string | — | — |
+| disabled | whether Pagination is disabled | boolean | — | false |
+| hide-on-single-page | whether to hide when there's only one page | boolean | — | - |
 
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| size-change | triggers when `page-size` changes | the new `page-size` |
-| current-change | triggers when `current-page` changes | the new `current-page` |
+| size-change | triggers when `page-size` changes | the new page size |
+| current-change | triggers when `current-page` changes | the new current page |
+| prev-click | triggers when the prev button is clicked and current page changes | the new current page |
+| next-click | triggers when the next button is clicked and current page changes | the new current page |
 
 ### Slot
 | Name | Description |

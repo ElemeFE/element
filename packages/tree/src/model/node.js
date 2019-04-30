@@ -1,28 +1,46 @@
 import objectAssign from 'element-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 
-const reInitChecked = function(node) {
-  const siblings = node.childNodes;
-
+export const getChildState = node => {
   let all = true;
   let none = true;
-
-  for (let i = 0, j = siblings.length; i < j; i++) {
-    const sibling = siblings[i];
-    if (sibling.checked !== true || sibling.indeterminate) {
+  let allWithoutDisable = true;
+  for (let i = 0, j = node.length; i < j; i++) {
+    const n = node[i];
+    if (n.checked !== true || n.indeterminate) {
       all = false;
+      if (!n.disabled) {
+        allWithoutDisable = false;
+      }
     }
-    if (sibling.checked !== false || sibling.indeterminate) {
+    if (n.checked !== false || n.indeterminate) {
       none = false;
     }
   }
 
+  return { all, none, allWithoutDisable, half: !all && !none };
+};
+
+const reInitChecked = function(node) {
+  if (node.childNodes.length === 0) return;
+
+  const {all, none, half} = getChildState(node.childNodes);
   if (all) {
-    node.setChecked(true);
-  } else if (!all && !none) {
-    node.setChecked('half');
+    node.checked = true;
+    node.indeterminate = false;
+  } else if (half) {
+    node.checked = false;
+    node.indeterminate = true;
   } else if (none) {
-    node.setChecked(false);
+    node.checked = false;
+    node.indeterminate = false;
+  }
+
+  const parent = node.parent;
+  if (!parent || parent.level === 0) return;
+
+  if (!node.store.checkStrictly) {
+    reInitChecked(parent);
   }
 };
 
@@ -36,7 +54,8 @@ const getPropertyFromData = function(node, prop) {
   } else if (typeof config === 'string') {
     return data[config];
   } else if (typeof config === 'undefined') {
-    return '';
+    const dataProp = data[prop];
+    return dataProp === undefined ? '' : dataProp;
   }
 };
 
@@ -52,6 +71,7 @@ export default class Node {
     this.expanded = false;
     this.parent = null;
     this.visible = true;
+    this.isCurrent = false;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -92,7 +112,9 @@ export default class Node {
     } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
       this.expand();
     }
-
+    if (!Array.isArray(this.data)) {
+      markNodeData(this, this.data);
+    }
     if (!this.data) return;
     const defaultExpandedKeys = store.defaultExpandedKeys;
     const key = store.key;
@@ -100,8 +122,9 @@ export default class Node {
       this.expand(null, store.autoExpandParent);
     }
 
-    if (key && store.currentNodeKey && this.key === store.currentNodeKey) {
+    if (key && store.currentNodeKey !== undefined && this.key === store.currentNodeKey) {
       store.currentNode = this;
+      store.currentNode.isCurrent = true;
     }
 
     if (store.lazy) {
@@ -135,20 +158,76 @@ export default class Node {
     return getPropertyFromData(this, 'label');
   }
 
-  get icon() {
-    return getPropertyFromData(this, 'icon');
-  }
-
   get key() {
     const nodeKey = this.store.key;
     if (this.data) return this.data[nodeKey];
     return null;
   }
 
-  insertChild(child, index) {
+  get disabled() {
+    return getPropertyFromData(this, 'disabled');
+  }
+
+  get nextSibling() {
+    const parent = this.parent;
+    if (parent) {
+      const index = parent.childNodes.indexOf(this);
+      if (index > -1) {
+        return parent.childNodes[index + 1];
+      }
+    }
+    return null;
+  }
+
+  get previousSibling() {
+    const parent = this.parent;
+    if (parent) {
+      const index = parent.childNodes.indexOf(this);
+      if (index > -1) {
+        return index > 0 ? parent.childNodes[index - 1] : null;
+      }
+    }
+    return null;
+  }
+
+  contains(target, deep = true) {
+    const walk = function(parent) {
+      const children = parent.childNodes || [];
+      let result = false;
+      for (let i = 0, j = children.length; i < j; i++) {
+        const child = children[i];
+        if (child === target || (deep && walk(child))) {
+          result = true;
+          break;
+        }
+      }
+      return result;
+    };
+
+    return walk(this);
+  }
+
+  remove() {
+    const parent = this.parent;
+    if (parent) {
+      parent.removeChild(this);
+    }
+  }
+
+  insertChild(child, index, batch) {
     if (!child) throw new Error('insertChild error: child is required.');
 
     if (!(child instanceof Node)) {
+      if (!batch) {
+        const children = this.getChildren(true);
+        if (children.indexOf(child.data) === -1) {
+          if (typeof index === 'undefined' || index < 0) {
+            children.push(child.data);
+          } else {
+            children.splice(index, 0, child.data);
+          }
+        }
+      }
       objectAssign(child, {
         parent: this,
         store: this.store
@@ -185,6 +264,12 @@ export default class Node {
   }
 
   removeChild(child) {
+    const children = this.getChildren() || [];
+    const dataIndex = children.indexOf(child.data);
+    if (dataIndex > -1) {
+      children.splice(dataIndex, 1);
+    }
+
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
@@ -198,11 +283,13 @@ export default class Node {
 
   removeChildByData(data) {
     let targetNode = null;
-    this.childNodes.forEach(node => {
-      if (node.data === data) {
-        targetNode = node;
+
+    for (let i = 0; i < this.childNodes.length; i++) {
+      if (this.childNodes[i].data === data) {
+        targetNode = this.childNodes[i];
+        break;
       }
-    });
+    }
 
     if (targetNode) {
       this.removeChild(targetNode);
@@ -225,6 +312,11 @@ export default class Node {
     if (this.shouldLoadData()) {
       this.loadData((data) => {
         if (data instanceof Array) {
+          if (this.checked) {
+            this.setChecked(true, true);
+          } else if (!this.store.checkStrictly) {
+            reInitChecked(this);
+          }
           done();
         }
       });
@@ -235,7 +327,7 @@ export default class Node {
 
   doCreateChildren(array, defaultProps = {}) {
     array.forEach((item) => {
-      this.insertChild(objectAssign({ data: item }, defaultProps));
+      this.insertChild(objectAssign({ data: item }, defaultProps), undefined, true);
     });
   }
 
@@ -260,40 +352,61 @@ export default class Node {
     this.isLeaf = false;
   }
 
-  setChecked(value, deep) {
+  setChecked(value, deep, recursion, passValue) {
     this.indeterminate = value === 'half';
     this.checked = value === true;
 
-    const handleDescendants = () => {
-      if (deep) {
-        const childNodes = this.childNodes;
-        for (let i = 0, j = childNodes.length; i < j; i++) {
-          const child = childNodes[i];
-          child.setChecked(value !== false, deep);
-        }
-      }
-    };
+    if (this.store.checkStrictly) return;
 
-    if (!this.store.checkStrictly && this.shouldLoadData()) {
-      // Only work on lazy load data.
-      this.loadData(() => {
+    if (!(this.shouldLoadData() && !this.store.checkDescendants)) {
+      let { all, allWithoutDisable } = getChildState(this.childNodes);
+
+      if (!this.isLeaf && (!all && allWithoutDisable)) {
+        this.checked = false;
+        value = false;
+      }
+
+      const handleDescendants = () => {
+        if (deep) {
+          const childNodes = this.childNodes;
+          for (let i = 0, j = childNodes.length; i < j; i++) {
+            const child = childNodes[i];
+            passValue = passValue || value !== false;
+            const isCheck = child.disabled ? child.checked : passValue;
+            child.setChecked(isCheck, deep, true, passValue);
+          }
+          const { half, all } = getChildState(childNodes);
+          if (!all) {
+            this.checked = all;
+            this.indeterminate = half;
+          }
+        }
+      };
+
+      if (this.shouldLoadData()) {
+        // Only work on lazy load data.
+        this.loadData(() => {
+          handleDescendants();
+          reInitChecked(this);
+        }, {
+          checked: value !== false
+        });
+        return;
+      } else {
         handleDescendants();
-      }, {
-        checked: value !== false
-      });
-    } else {
-      handleDescendants();
+      }
     }
 
     const parent = this.parent;
     if (!parent || parent.level === 0) return;
 
-    if (!this.store.checkStrictly) {
+    if (!recursion) {
       reInitChecked(parent);
     }
   }
 
-  getChildren() { // this is data
+  getChildren(forceInit = false) { // this is data
+    if (this.level === 0) return this.data;
     const data = this.data;
     if (!data) return null;
 
@@ -305,6 +418,10 @@ export default class Node {
 
     if (data[children] === undefined) {
       data[children] = null;
+    }
+
+    if (forceInit && !data[children]) {
+      data[children] = [];
     }
 
     return data[children];
@@ -325,9 +442,11 @@ export default class Node {
       }
     });
 
-    oldData.forEach((item) => {
-      if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
-    });
+    if (!this.store.lazy) {
+      oldData.forEach((item) => {
+        if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
+      });
+    }
 
     newNodes.forEach(({ index, data }) => {
       this.insertChild({ data }, index);
@@ -337,7 +456,7 @@ export default class Node {
   }
 
   loadData(callback, defaultProps = {}) {
-    if (this.store.lazy === true && this.store.load && !this.loaded && !this.loading) {
+    if (this.store.lazy === true && this.store.load && !this.loaded && (!this.loading || Object.keys(defaultProps).length)) {
       this.loading = true;
 
       const resolve = (children) => {

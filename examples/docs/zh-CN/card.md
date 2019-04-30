@@ -1,51 +1,3 @@
-<script>
-  import dateUtil from 'main/utils/date'
-  export default {
-    data() {
-      return {
-        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
-      };
-    }
-  }
-</script>
-
-<style scoped>
-  .text {
-    font-size: 14px;
-  }
-
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .item {
-    padding: 18px 0;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    display: block;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .box-card {
-    width: 480px;
-  }
-</style>
 ## Card 卡片
 将信息聚合在卡片容器中展示。
 
@@ -58,10 +10,10 @@
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">
-    <span style="line-height: 36px;">卡片名称</span>
-    <el-button style="float: right;" type="primary">操作按钮</el-button>
+    <span>卡片名称</span>
+    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
   </div>
-  <div v-for="o in 4" class="text item">
+  <div v-for="o in 4" :key="o" class="text item">
     {{'列表内容 ' + o }}
   </div>
 </el-card>
@@ -72,16 +24,16 @@
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .clearfix:before,
   .clearfix:after {
-      display: table;
-      content: "";
+    display: table;
+    content: "";
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
 
   .box-card {
@@ -98,7 +50,7 @@
 :::demo
 ```html
 <el-card class="box-card">
-  <div v-for="o in 4" class="text item">
+  <div v-for="o in 4" :key="o" class="text item">
     {{'列表内容 ' + o }}
   </div>
 </el-card>
@@ -126,9 +78,9 @@
 :::demo 配置`body-style`属性来自定义`body`部分的`style`，我们还使用了布局组件。
 ```html
 <el-row>
-  <el-col :span="8" v-for="(o, index) in 2" :offset="index > 0 ? 2 : 0">
+  <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
-      <img src="~examples/assets/images/hamburger.png" class="image">
+      <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
       <div style="padding: 14px;">
         <span>好吃的汉堡</span>
         <div class="bottom clearfix">
@@ -184,8 +136,35 @@ export default {
 ```
 :::
 
+### 卡片阴影
+
+可对阴影的显示进行配置。
+
+:::demo 通过`shadow`属性设置卡片阴影出现的时机：`always`、`hover`或`never`。
+```html
+<el-row :gutter="12">
+  <el-col :span="8">
+    <el-card shadow="always">
+      总是显示
+    </el-card>
+  </el-col>
+  <el-col :span="8">
+    <el-card shadow="hover">
+      鼠标悬浮时显示
+    </el-card>
+  </el-col>
+  <el-col :span="8">
+    <el-card shadow="never">
+      从不显示
+    </el-card>
+  </el-col>
+</el-row>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | header | 设置 header，也可以通过 `slot#header` 传入 DOM | string| — | — |
 | body-style | 设置 body 的样式| object| — | { padding: '20px' } |
+| shadow | 设置阴影显示时机 | string | always / hover / never | always |

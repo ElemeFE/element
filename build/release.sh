@@ -1,10 +1,10 @@
+#!/usr/bin/env sh
+set -e
+
 git checkout master
 git merge dev
 
-#!/usr/bin/env sh
-set -e
-echo "Enter release version: "
-read VERSION
+VERSION=`npx select-version-cli`
 
 read -p "Releasing $VERSION - are you sure? (y/n)" -n 1 -r
 echo    # (optional) move to a new line
@@ -16,10 +16,15 @@ then
   VERSION=$VERSION npm run dist
 
   # publish theme
-  echo "Releasing theme-default $VERSION ..."
-  cd packages/theme-default
+  echo "Releasing theme-chalk $VERSION ..."
+  cd packages/theme-chalk
   npm version $VERSION --message "[release] $VERSION"
-  npm publish
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
   cd ../..
 
   # commit
@@ -34,5 +39,10 @@ then
   git rebase master
   git push eleme dev
 
-  npm publish
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
 fi

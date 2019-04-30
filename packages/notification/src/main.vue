@@ -1,13 +1,14 @@
 <template>
   <transition name="el-notification-fade">
     <div
-      class="el-notification"
-      :class="customClass"
+      :class="['el-notification', customClass, horizontalClass]"
       v-show="visible"
-      :style="{ top: top ? top + 'px' : 'auto' }"
+      :style="positionStyle"
       @mouseenter="clearTimer()"
       @mouseleave="startTimer()"
-      @click="click">
+      @click="click"
+      role="alert"
+    >
       <i
         class="el-notification__icon"
         :class="[ typeClass, iconClass ]"
@@ -15,8 +16,16 @@
       </i>
       <div class="el-notification__group" :class="{ 'is-with-icon': typeClass || iconClass }">
         <h2 class="el-notification__title" v-text="title"></h2>
-        <div class="el-notification__content"><slot>{{ message }}</slot></div>
-        <div class="el-notification__closeBtn el-icon-close" @click.stop="close"></div>
+        <div class="el-notification__content" v-show="message">
+          <slot>
+            <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+            <p v-else v-html="message"></p>
+          </slot>
+        </div>
+        <div
+          class="el-notification__closeBtn el-icon-close"
+          v-if="showClose"
+          @click.stop="close"></div>
       </div>
     </div>
   </transition>
@@ -24,10 +33,10 @@
 
 <script type="text/babel">
   let typeMap = {
-    success: 'circle-check',
-    info: 'information',
+    success: 'success',
+    info: 'info',
     warning: 'warning',
-    error: 'circle-cross'
+    error: 'error'
   };
 
   export default {
@@ -38,19 +47,36 @@
         message: '',
         duration: 4500,
         type: '',
+        showClose: true,
         customClass: '',
         iconClass: '',
         onClose: null,
         onClick: null,
         closed: false,
-        top: null,
-        timer: null
+        verticalOffset: 0,
+        timer: null,
+        dangerouslyUseHTMLString: false,
+        position: 'top-right'
       };
     },
 
     computed: {
       typeClass() {
         return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+      },
+
+      horizontalClass() {
+        return this.position.indexOf('right') > -1 ? 'right' : 'left';
+      },
+
+      verticalProperty() {
+        return /^top-/.test(this.position) ? 'top' : 'bottom';
+      },
+
+      positionStyle() {
+        return {
+          [this.verticalProperty]: `${ this.verticalOffset }px`
+        };
       }
     },
 
@@ -95,9 +121,19 @@
             }
           }, this.duration);
         }
+      },
+      keydown(e) {
+        if (e.keyCode === 46 || e.keyCode === 8) {
+          this.clearTimer(); // detele 取消倒计时
+        } else if (e.keyCode === 27) { // esc关闭消息
+          if (!this.closed) {
+            this.close();
+          }
+        } else {
+          this.startTimer(); // 恢复倒计时
+        }
       }
     },
-
     mounted() {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
@@ -106,6 +142,11 @@
           }
         }, this.duration);
       }
+      document.addEventListener('keydown', this.keydown);
+    },
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.keydown);
     }
   };
 </script>
+

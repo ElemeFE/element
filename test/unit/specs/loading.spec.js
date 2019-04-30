@@ -1,3 +1,4 @@
+import { getStyle } from '../../../src/utils/dom';
 import { createVue, destroyVM } from '../util';
 import Vue from 'vue';
 import LoadingRaw from 'packages/loading';
@@ -142,7 +143,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        expect(document.body.style.overflow).to.equal('hidden');
+        expect(getStyle(document.body, 'overflow')).to.equal('hidden');
         vm.loading = false;
         document.body.removeChild(document.querySelector('.el-loading-mask'));
         document.body.removeChild(vm.$el);
@@ -170,6 +171,25 @@ describe('Loading', () => {
         done();
       });
     });
+
+    it('customClass', done => {
+      vm = createVue({
+        template: `
+        <div v-loading="loading" element-loading-custom-class="loading-custom-class"></div>
+      `,
+
+        data() {
+          return {
+            loading: true
+          };
+        }
+      }, true);
+      Vue.nextTick(() => {
+        const mask = document.querySelector('.el-loading-mask');
+        expect(mask.classList.contains('loading-custom-class')).to.true;
+        done();
+      });
+    });
   });
 
   describe('as a service', () => {
@@ -184,7 +204,7 @@ describe('Loading', () => {
       expect(loadingInstance.visible).to.false;
     });
 
-    it('target', () => {
+    it('target', done => {
       vm = createVue({
         template: `
         <div class="loading-container"></div>
@@ -192,8 +212,14 @@ describe('Loading', () => {
       }, true);
       loadingInstance = Loading({ target: '.loading-container' });
       let mask = document.querySelector('.el-loading-mask');
+      let container = document.querySelector('.loading-container');
       expect(mask).to.exist;
-      expect(mask.parentNode).to.equal(document.querySelector('.loading-container'));
+      expect(mask.parentNode).to.equal(container);
+      loadingInstance.close();
+      setTimeout(() => {
+        expect(getStyle(container, 'position')).to.equal('relative');
+        done();
+      }, 200);
     });
 
     it('body', () => {
@@ -231,13 +257,13 @@ describe('Loading', () => {
             expect(masks.length).to.equal(0);
             done();
           }, 350);
-        }, 10);
-      }, 10);
+        }, 50);
+      }, 50);
     });
 
     it('lock', () => {
       loadingInstance = Loading({ lock: true });
-      expect(document.body.style.overflow).to.equal('hidden');
+      expect(getStyle(document.body, 'overflow')).to.equal('hidden');
     });
 
     it('text', () => {
@@ -245,6 +271,12 @@ describe('Loading', () => {
       const text = document.querySelector('.el-loading-text');
       expect(text).to.exist;
       expect(text.textContent).to.equal('Loading...');
+    });
+
+    it('customClass', () => {
+      loadingInstance = Loading({ customClass: 'el-loading-custom-class' });
+      const customClass = document.querySelector('.el-loading-custom-class');
+      expect(customClass).to.exist;
     });
   });
 });

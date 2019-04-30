@@ -32,6 +32,7 @@ export default class TreeStore {
 
   filter(value) {
     const filterNodeMethod = this.filterNodeMethod;
+    const lazy = this.lazy;
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
@@ -54,8 +55,9 @@ export default class TreeStore {
           node.visible = allHidden === false;
         }
       }
+      if (!value) return;
 
-      if (node.visible && !node.isLeaf) node.expand();
+      if (node.visible && !node.isLeaf && !lazy) node.expand();
     };
 
     traverse(this);
@@ -63,15 +65,18 @@ export default class TreeStore {
 
   setData(newVal) {
     const instanceChanged = newVal !== this.root.data;
-    this.root.setData(newVal);
     if (instanceChanged) {
+      this.root.setData(newVal);
       this._initDefaultCheckedNodes();
+    } else {
+      this.root.updateChildren();
     }
   }
 
   getNode(data) {
+    if (data instanceof Node) return data;
     const key = typeof data !== 'object' ? data : getNodeKey(this.key, data);
-    return this.nodesMap[key];
+    return this.nodesMap[key] || null;
   }
 
   insertBefore(data, refData) {
@@ -86,7 +91,11 @@ export default class TreeStore {
 
   remove(data) {
     const node = this.getNode(data);
-    if (node) {
+
+    if (node && node.parent) {
+      if (node === this.currentNode) {
+        this.currentNode = null;
+      }
       node.parent.removeChild(node);
     }
   }
@@ -132,23 +141,27 @@ export default class TreeStore {
     if (!key || !node || !node.data) return;
 
     const nodeKey = node.key;
-    if (nodeKey) this.nodesMap[node.key] = node;
+    if (nodeKey !== undefined) this.nodesMap[node.key] = node;
   }
 
   deregisterNode(node) {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
+    node.childNodes.forEach(child => {
+      this.deregisterNode(child);
+    });
+
     delete this.nodesMap[node.key];
   }
 
-  getCheckedNodes(leafOnly = false) {
+  getCheckedNodes(leafOnly = false, includeHalfChecked = false) {
     const checkedNodes = [];
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
       childNodes.forEach((child) => {
-        if ((!leafOnly && child.checked) || (leafOnly && child.isLeaf && child.checked)) {
+        if ((child.checked || (includeHalfChecked && child.indeterminate)) && (!leafOnly || (leafOnly && child.isLeaf))) {
           checkedNodes.push(child.data);
         }
 
@@ -162,17 +175,30 @@ export default class TreeStore {
   }
 
   getCheckedKeys(leafOnly = false) {
-    const key = this.key;
-    const allNodes = this._getAllNodes();
-    const keys = [];
-    allNodes.forEach((node) => {
-      if (!leafOnly || (leafOnly && node.isLeaf)) {
-        if (node.checked) {
-          keys.push((node.data || {})[key]);
+    return this.getCheckedNodes(leafOnly).map((data) => (data || {})[this.key]);
+  }
+
+  getHalfCheckedNodes() {
+    const nodes = [];
+    const traverse = function(node) {
+      const childNodes = node.root ? node.root.childNodes : node.childNodes;
+
+      childNodes.forEach((child) => {
+        if (child.indeterminate) {
+          nodes.push(child.data);
         }
-      }
-    });
-    return keys;
+
+        traverse(child);
+      });
+    };
+
+    traverse(this);
+
+    return nodes;
+  }
+
+  getHalfCheckedKeys() {
+    return this.getHalfCheckedNodes().map((data) => (data || {})[this.key]);
   }
 
   _getAllNodes() {
@@ -187,62 +213,62 @@ export default class TreeStore {
     return allNodes;
   }
 
+  updateChildren(key, data) {
+    const node = this.nodesMap[key];
+    if (!node) return;
+    const childNodes = node.childNodes;
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+      const child = childNodes[i];
+      this.remove(child.data);
+    }
+    for (let i = 0, j = data.length; i < j; i++) {
+      const child = data[i];
+      this.append(child, node.data);
+    }
+  }
+
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
-    const allNodes = this._getAllNodes();
-    allNodes.sort((a, b) => b.level - a.level);
-
+    const allNodes = this._getAllNodes().sort((a, b) => b.level - a.level);
+    const cache = Object.create(null);
     const keys = Object.keys(checkedKeys);
-    allNodes.forEach((node) => {
-      let checked = keys.indexOf(node.data[key] + '') > -1;
-
-      if (!node.isLeaf) {
-        if (!this.checkStrictly) {
-          const childNodes = node.childNodes;
-
-          let all = true;
-          let none = true;
-
-          for (let i = 0, j = childNodes.length; i < j; i++) {
-            const child = childNodes[i];
-            if (child.checked !== true || child.indeterminate) {
-              all = false;
-            }
-            if (child.checked !== false || child.indeterminate) {
-              none = false;
-            }
-          }
-
-          if (all) {
-            node.setChecked(true, !this.checkStrictly);
-          } else if (!all && !none) {
-            checked = checked ? true : 'half';
-            node.setChecked(checked, !this.checkStrictly && checked === true);
-          } else if (none) {
-            node.setChecked(checked, !this.checkStrictly);
-          }
-        } else {
-          node.setChecked(checked, false);
-        }
-
-        if (leafOnly) {
+    allNodes.forEach(node => node.setChecked(false, false));
+    for (let i = 0, j = allNodes.length; i < j; i++) {
+      const node = allNodes[i];
+      const nodeKey = node.data[key].toString();
+      let checked = keys.indexOf(nodeKey) > -1;
+      if (!checked) {
+        if (node.checked && !cache[nodeKey]) {
           node.setChecked(false, false);
-          const traverse = function(node) {
-            const childNodes = node.childNodes;
-
-            childNodes.forEach((child) => {
-              if (!child.isLeaf) {
-                child.setChecked(false, false);
-              }
-              traverse(child);
-            });
-          };
-
-          traverse(node);
         }
-      } else {
-        node.setChecked(checked, false);
+        continue;
       }
-    });
+
+      let parent = node.parent;
+      while (parent && parent.level > 0) {
+        cache[parent.data[key]] = true;
+        parent = parent.parent;
+      }
+
+      if (node.isLeaf || this.checkStrictly) {
+        node.setChecked(true, false);
+        continue;
+      }
+      node.setChecked(true, true);
+
+      if (leafOnly) {
+        node.setChecked(false, false);
+        const traverse = function(node) {
+          const childNodes = node.childNodes;
+          childNodes.forEach((child) => {
+            if (!child.isLeaf) {
+              child.setChecked(false, false);
+            }
+            traverse(child);
+          });
+        };
+        traverse(node);
+      }
+    }
   }
 
   setCheckedNodes(array, leafOnly = false) {
@@ -288,14 +314,29 @@ export default class TreeStore {
     return this.currentNode;
   }
 
-  setCurrentNode(node) {
-    this.currentNode = node;
+  setCurrentNode(currentNode) {
+    const prevCurrentNode = this.currentNode;
+    if (prevCurrentNode) {
+      prevCurrentNode.isCurrent = false;
+    }
+    this.currentNode = currentNode;
+    this.currentNode.isCurrent = true;
+  }
+
+  setUserCurrentNode(node) {
+    const key = node[this.key];
+    const currNode = this.nodesMap[key];
+    this.setCurrentNode(currNode);
   }
 
   setCurrentNodeKey(key) {
+    if (key === null) {
+      this.currentNode = null;
+      return;
+    }
     const node = this.getNode(key);
     if (node) {
-      this.currentNode = node;
+      this.setCurrentNode(node);
     }
   }
 };

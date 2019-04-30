@@ -45,39 +45,47 @@
 
 <script type="text/babel">
   import { hasClass } from 'element-ui/src/utils/dom';
+  import { isDate, range, nextDate, getDayCountOfYear } from 'element-ui/src/utils/date-util';
+  import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
+
+  const datesInYear = year => {
+    const numOfDays = getDayCountOfYear(year);
+    const firstDay = new Date(year, 0, 1);
+    return range(numOfDays).map(n => nextDate(firstDay, n));
+  };
 
   export default {
     props: {
       disabledDate: {},
-      date: {},
-      year: {}
+      value: {},
+      defaultValue: {
+        validator(val) {
+          // null or valid Date Object
+          return val === null || (val instanceof Date && isDate(val));
+        }
+      },
+      date: {}
     },
 
     computed: {
       startYear() {
-        return Math.floor(this.year / 10) * 10;
+        return Math.floor(this.date.getFullYear() / 10) * 10;
       }
     },
 
     methods: {
       getCellStyle(year) {
         const style = {};
-        const date = new Date(this.date);
+        const today = new Date();
 
-        date.setFullYear(year);
-        style.disabled = typeof this.disabledDate === 'function' &&
-          this.disabledDate(date);
-        style.current = Number(this.year) === year;
+        style.disabled = typeof this.disabledDate === 'function'
+          ? datesInYear(year).every(this.disabledDate)
+          : false;
+        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0;
+        style.today = today.getFullYear() === year;
+        style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
 
         return style;
-      },
-
-      nextTenYear() {
-        this.$emit('pick', Number(this.year) + 10, false);
-      },
-
-      prevTenYear() {
-        this.$emit('pick', Number(this.year) - 10, false);
       },
 
       handleYearTableClick(event) {
@@ -85,7 +93,7 @@
         if (target.tagName === 'A') {
           if (hasClass(target.parentNode, 'disabled')) return;
           const year = target.textContent || target.innerText;
-          this.$emit('pick', year);
+          this.$emit('pick', Number(year));
         }
       }
     }

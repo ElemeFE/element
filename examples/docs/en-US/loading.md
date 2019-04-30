@@ -1,37 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }],
-        loading: true,
-        loading2: true,
-        fullscreenLoading: false
-      }
-    },
-
-    methods: {
-      openFullScreen() {
-        this.fullscreenLoading = true;
-        setTimeout(() => {
-          this.fullscreenLoading = false;
-        }, 3000);
-      }
-    }
-  }
-</script>
-
 ## Loading
 
 Show animation while loading data.
@@ -45,7 +11,7 @@ Displays animation in a container (such as a table) while loading data.
 ```html
 <template>
   <el-table
-    v-loading.body="loading"
+    v-loading="loading"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -96,16 +62,18 @@ Displays animation in a container (such as a table) while loading data.
 ```
 :::
 
-### Loading text
+### Customization
 
-You can customize a text message.
+You can customize loading text, loading spinner and background color.
 
-:::demo Add attribute `element-loading-text` to the element on which `v-loading` is bound, and its value will be displayed under the spinner.
+:::demo Add attribute `element-loading-text` to the element on which `v-loading` is bound, and its value will be displayed under the spinner. Similarly, `element-loading-spinner` and `element-loading-background` are for customizing loading spinner class name and background color.
 ```html
 <template>
   <el-table
-    v-loading="loading2"
+    v-loading="loading"
     element-loading-text="Loading..."
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -142,7 +110,7 @@ You can customize a text message.
           name: 'John Smith',
           address: 'No.1518,  Jinshajiang Road, Putuo District'
         }],
-        loading2: true
+        loading: true
       };
     }
   };
@@ -154,7 +122,7 @@ You can customize a text message.
 
 Show a full screen animation while loading data.
 
-:::demo Add the `fullscreen` modifier to create a full screen mask, and it will append to body. In this case, if you disable scrolling on body, you add another modifier `lock`.
+:::demo When used as a directive, a full screen Loading requires the `fullscreen` modifier, and it will be appended to body. In this case, if you wish to disable scrolling on body, you can add another modifier `lock`. When used as a service, Loading will be full screen by default.
 
 ```html
 <template>
@@ -162,7 +130,12 @@ Show a full screen animation while loading data.
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
-    Full screen loading for 3 seconds
+    As a directive
+  </el-button>
+  <el-button
+    type="primary"
+    @click="openFullScreen">
+    As a service
   </el-button>
 </template>
 
@@ -178,7 +151,18 @@ Show a full screen animation while loading data.
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
-        }, 3000);
+        }, 2000);
+      },
+      openFullScreen() {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
       }
     }
   }
@@ -198,7 +182,9 @@ Loading.service(options);
 The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
 ```javascript
 let loadingInstance = Loading.service(options);
-loadingInstance.close();
+this.$nextTick(() => { // Loading should be closed asynchronously
+  loadingInstance.close();
+});
 ```
 Note that in this case the full screen Loading is singleton. If a new full screen Loading is invoked before an existing one is closed, the existing full screen Loading instance will be returned instead of actually creating another Loading instance:
 ```javascript
@@ -218,4 +204,6 @@ If Element is imported entirely, a globally method `$loading` will be registered
 | fullscreen | same as the `fullscreen` modifier of `v-loading` | boolean | — | true |
 | lock | same as the `lock` modifier of `v-loading` | boolean | — | false |
 | text | loading text that displays under the spinner | string | — | — |
+| spinner | class name of the custom spinner | string | — | — |
+| background | background color of the mask | string | — | — |
 | customClass | custom class name for Loading | string | — | — |

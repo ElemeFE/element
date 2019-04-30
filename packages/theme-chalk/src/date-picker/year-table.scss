@@ -1,0 +1,51 @@
+@import "../common/var";
+
+@include b(year-table) {
+  font-size: 12px;
+  margin: -1px;
+  border-collapse: collapse;
+
+  .el-icon {
+    color: $--datepicker-icon-color;
+  }
+
+  td {
+    text-align: center;
+    padding: 20px 3px;
+    cursor: pointer;
+
+    &.today {
+      .cell {
+        color: $--color-primary;
+        font-weight: bold;
+      }
+    }
+
+    &.disabled .cell {
+      background-color: $--background-color-base;
+      cursor: not-allowed;
+      color: $--color-text-placeholder;
+
+      &:hover {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .cell {
+      width: 48px;
+      height: 32px;
+      display: block;
+      line-height: 32px;
+      color: $--datepicker-font-color;
+      margin: 0 auto;
+
+      &:hover {
+        color: $--datepicker-hover-font-color;
+      }
+    }
+
+    &.current:not(.disabled) .cell {
+      color: $--datepicker-active-color;
+    }
+  }
+}

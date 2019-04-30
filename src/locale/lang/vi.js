@@ -16,6 +16,10 @@ export default {
       startTime: 'Thời gian bắt đầu',
       endDate: 'Ngày kết thúc',
       endTime: 'Thời gian kết thúc',
+      prevYear: 'Năm trước',
+      nextYear: 'Năm tới',
+      prevMonth: 'Tháng trước',
+      nextMonth: 'Tháng tới',
       year: 'Năm',
       month1: 'Tháng 1',
       month2: 'Tháng 2',
@@ -55,13 +59,14 @@ export default {
       }
     },
     select: {
-      loading: 'Loading',
+      loading: 'Đang tải',
       noMatch: 'Dữ liệu không phù hợp',
       noData: 'Không tìm thấy dữ liệu',
       placeholder: 'Chọn'
     },
     cascader: {
       noMatch: 'Dữ liệu không phù hợp',
+      loading: 'Đang tải',
       placeholder: 'Chọn'
     },
     pagination: {
@@ -77,6 +82,7 @@ export default {
       error: 'Dữ liệu không hợp lệ'
     },
     upload: {
+      deleteTip: 'Nhấn xoá để xoá',
       delete: 'Xóa',
       preview: 'Xem trước',
       continue: 'Tiếp tục'
@@ -85,10 +91,22 @@ export default {
       emptyText: 'Không có dữ liệu',
       confirmFilter: 'Xác nhận',
       resetFilter: 'Làm mới',
-      clearFilter: 'Xóa hết'
+      clearFilter: 'Xóa hết',
+      sumText: 'Tổng'
     },
     tree: {
       emptyText: 'Không có dữ liệu'
+    },
+    transfer: {
+      noMatch: 'Dữ liệu không phù hợp',
+      noData: 'Không tìm thấy dữ liệu',
+      titles: ['Danh sách 1', 'Danh sách 2'],
+      filterPlaceholder: 'Nhập từ khóa',
+      noCheckedFormat: '{total} mục',
+      hasCheckedFormat: '{checked}/{total} đã chọn '
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

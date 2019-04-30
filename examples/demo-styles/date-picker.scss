@@ -1,0 +1,36 @@
+.demo-block.demo-date-picker .source > div {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.demo-date-picker .block {
+  padding: 30px 0;
+  text-align: center;
+  border-right: solid 1px #eff2f6;
+  flex: 1;
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.demo-date-picker .container {
+  flex: 1;
+  border-right: solid 1px #eff2f6;
+  .block {
+    border-right: none;
+    &:last-child {
+      border-top: solid 1px #eff2f6;
+    }
+  }
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.demo-date-picker .demonstration {
+  display: block;
+  color: #8492a6;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

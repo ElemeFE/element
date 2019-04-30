@@ -1,94 +1,99 @@
-<script>
-  import { addClass } from 'element-ui/src/utils/dom';
-  export default {
-    data() {
-      return {
-        isLoading: false,
-        isLoading2: false
-      };
-    },
-    methods: {
-      handleClick(event) {
-        console.log(event);
-        alert('button clicked!');
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let demos = document.querySelectorAll('.source');
-        let thirdDemo = demos[2];
-        addClass(thirdDemo, 'intro-block');
-      });
-    }
-  }
-</script>
-
 ## Button
 
 Commonly used button.
 
 ### Basic usage
 
-::: demo Button provides 7 themes defined by the `type` attribute.
+:::demo Use `type`, `plain`, `round` and `circle` to define Button's style.
 
 ```html
-<el-button>Default Button</el-button>
-<el-button type="primary">Primary Button</el-button>
-<el-button type="text">Text Button</el-button>
+<el-row>
+  <el-button>Default</el-button>
+  <el-button type="primary">Primary</el-button>
+  <el-button type="success">Success</el-button>
+  <el-button type="info">Info</el-button>
+  <el-button type="warning">Warning</el-button>
+  <el-button type="danger">Danger</el-button>
+</el-row>
+
+<el-row>
+  <el-button plain>Plain</el-button>
+  <el-button type="primary" plain>Primary</el-button>
+  <el-button type="success" plain>Success</el-button>
+  <el-button type="info" plain>Info</el-button>
+  <el-button type="warning" plain>Warning</el-button>
+  <el-button type="danger" plain>Danger</el-button>
+</el-row>
+
+<el-row>
+  <el-button round>Round</el-button>
+  <el-button type="primary" round>Primary</el-button>
+  <el-button type="success" round>Success</el-button>
+  <el-button type="info" round>Info</el-button>
+  <el-button type="warning" round>Warning</el-button>
+  <el-button type="danger" round>Danger</el-button>
+</el-row>
+
+<el-row>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button type="success" icon="el-icon-check" circle></el-button>
+  <el-button type="info" icon="el-icon-message" circle></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle></el-button>
+</el-row>
 ```
 :::
 
 ### Disabled Button
 
-The `disableds` attribute determines if the button is disabled.
+The `disabled` attribute determines if the button is disabled.
 
 :::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
 
 ```html
-<el-button :plain="true" :disabled="true">Default Button</el-button>
-<el-button type="primary" disabled>Primary Button</el-button>
-<el-button type="text" disabled>Text Button</el-button>
+<el-row>
+  <el-button disabled>Default</el-button>
+  <el-button type="primary" disabled>Primary</el-button>
+  <el-button type="success" disabled>Success</el-button>
+  <el-button type="info" disabled>Info</el-button>
+  <el-button type="warning" disabled>Warning</el-button>
+  <el-button type="danger" disabled>Danger</el-button>
+</el-row>
+
+<el-row>
+  <el-button plain disabled>Plain</el-button>
+  <el-button type="primary" plain disabled>Primary</el-button>
+  <el-button type="success" plain disabled>Success</el-button>
+  <el-button type="info" plain disabled>Info</el-button>
+  <el-button type="warning" plain disabled>Warning</el-button>
+  <el-button type="danger" plain disabled>Danger</el-button>
+</el-row>
 ```
 :::
 
-### Color Indication
+### Text Button
 
-Different colors represent different meanings.
+Buttons without border and background.
 
-:::demo Use `plain` attribute to create a plain button, and it accepts a `Boolean` value. You can assign different `type` to a plain button as mentioned above. **Note**: When using the plain button, you still can set `type` to `text`, but it makes no difference. A plain button will be styled like a `text button` by default.
+:::demo
 ```html
-<div class="block">
-  <span class="demonstration">Default</span>
-  <span class="wrapper">
-    <el-button type="success">Success</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-    <el-button type="info">Info</el-button>
-  </span>
-</div>
-<div class="block">
-  <span class="demonstration">Hover to display color</span>
-  <span class="wrapper">
-    <el-button :plain="true" type="success">Success</el-button>
-    <el-button :plain="true" type="warning">Warning</el-button>
-    <el-button :plain="true" type="danger">Danger</el-button>
-    <el-button :plain="true" type="info">Info</el-button>
-  </span>
-</div>
+<el-button type="text">Text Button</el-button>
+<el-button type="text" disabled>Text Button</el-button>
 ```
 :::
 
 ### Icon Button
 
-Use icons to add more meaning to Button. You can use icon alone to save some space, or with text together.
+Use icons to add more meaning to Button. You can use icon alone to save some space, or use it with text.
 
 :::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
 
 ```html
-<el-button type="primary" icon="edit"></el-button>
-<el-button type="primary" icon="share"></el-button>
-<el-button type="primary" icon="delete"></el-button>
-<el-button type="primary" icon="search">Search</el-button>
+<el-button type="primary" icon="el-icon-edit"></el-button>
+<el-button type="primary" icon="el-icon-share"></el-button>
+<el-button type="primary" icon="el-icon-delete"></el-button>
+<el-button type="primary" icon="el-icon-search">Search</el-button>
 <el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
 ```
 :::
@@ -101,13 +106,13 @@ Displayed as a button group, can be used to group a series of similar operations
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="arrow-left">Previous Page</el-button>
+  <el-button type="primary" icon="el-icon-arrow-left">Previous Page</el-button>
   <el-button type="primary">Next Page<i class="el-icon-arrow-right el-icon-right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="edit"></el-button>
-  <el-button type="primary" icon="share"></el-button>
-  <el-button type="primary" icon="delete"></el-button>
+  <el-button type="primary" icon="el-icon-edit"></el-button>
+  <el-button type="primary" icon="el-icon-share"></el-button>
+  <el-button type="primary" icon="el-icon-delete"></el-button>
 </el-button-group>
 ```
 :::
@@ -127,24 +132,34 @@ Click the button to load data, then the button displays a loading state.
 
 Besides default size, Button component provides three additional sizes for you to choose among different scenarios.
 
-:::demo Use attribute `size` to set additional sizes with `large`, `small` or `mini`.
+:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
-<el-button type="primary" size="large">Large Button</el-button>
-<el-button type="primary">Default Button</el-button>
-<el-button type="primary" size="small">Small Button</el-button>
-<el-button type="primary" size="mini">Mini Button</el-button>
+<el-row>
+  <el-button>Default</el-button>
+  <el-button size="medium">Medium</el-button>
+  <el-button size="small">Small</el-button>
+  <el-button size="mini">Mini</el-button>
+</el-row>
+<el-row>
+  <el-button round>Default</el-button>
+  <el-button size="medium" round>Medium</el-button>
+  <el-button size="small" round>Small</el-button>
+  <el-button size="mini" round>Mini</el-button>
+</el-row>
 ```
 :::
 
 ### Attributes
 | Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | button size   | string  |   large/small/mini            |    —     |
-| type     | button type   | string    |   primary/success/warning/danger/info/text |     —    |
-| plain     | determine whether it's a plain button   | Boolean    | — | false   |
-| loading   | determine whether it's loading   | Boolean    | — | false   |
+| size     | button size   | string  |   medium / small / mini            |    —     |
+| type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
+| plain     | determine whether it's a plain button   | boolean    | — | false   |
+| round     | determine whether it's a round button   | boolean    | — | false   |
+| circle     | determine whether it's a circle button   | boolean    | — | false   |
+| loading   | determine whether it's loading   | boolean    | — | false   |
 | disabled  | disable the button    | boolean   | —   | false   |
-| icon  | button icon, accepts an icon name of Element icon component | string   |  —  |  —  |
+| icon  | icon class name | string   |  —  |  —  |
 | autofocus  | same as native button's `autofocus` | boolean   |  —  |  false  |
-| native-type | same as native button's `type` | string | button/submit/reset | button |
+| native-type | same as native button's `type` | string | button / submit / reset | button |

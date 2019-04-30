@@ -2,6 +2,8 @@ import Vue from 'vue';
 import { addClass, removeClass } from 'element-ui/src/utils/dom';
 
 let hasModal = false;
+let hasInitZIndex = false;
+let zIndex = 2000;
 
 const getModal = function() {
   if (Vue.prototype.$isServer) return;
@@ -29,8 +31,6 @@ const getModal = function() {
 const instances = {};
 
 const PopupManager = {
-  zIndex: 2000,
-
   modalFade: true,
 
   getInstance: function(id) {
@@ -103,6 +103,7 @@ const PopupManager = {
     if (zIndex) {
       modalDom.style.zIndex = zIndex;
     }
+    modalDom.tabIndex = 0;
     modalDom.style.display = '';
 
     this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
@@ -149,17 +150,45 @@ const PopupManager = {
     }
   }
 };
-!Vue.prototype.$isServer && window.addEventListener('keydown', function(event) {
-  if (event.keyCode === 27) { // ESC
-    if (PopupManager.modalStack.length > 0) {
-      const topItem = PopupManager.modalStack[PopupManager.modalStack.length - 1];
-      if (!topItem) return;
-      const instance = PopupManager.getInstance(topItem.id);
-      if (instance.closeOnPressEscape) {
-        instance.close();
-      }
+
+Object.defineProperty(PopupManager, 'zIndex', {
+  configurable: true,
+  get() {
+    if (!hasInitZIndex) {
+      zIndex = (Vue.prototype.$ELEMENT || {}).zIndex || zIndex;
+      hasInitZIndex = true;
     }
+    return zIndex;
+  },
+  set(value) {
+    zIndex = value;
   }
 });
+
+const getTopPopup = function() {
+  if (Vue.prototype.$isServer) return;
+  if (PopupManager.modalStack.length > 0) {
+    const topPopup = PopupManager.modalStack[PopupManager.modalStack.length - 1];
+    if (!topPopup) return;
+    const instance = PopupManager.getInstance(topPopup.id);
+
+    return instance;
+  }
+};
+
+if (!Vue.prototype.$isServer) {
+  // handle `esc` key when the popup is shown
+  window.addEventListener('keydown', function(event) {
+    if (event.keyCode === 27) {
+      const topPopup = getTopPopup();
+
+      if (topPopup && topPopup.closeOnPressEscape) {
+        topPopup.handleClose
+          ? topPopup.handleClose()
+          : (topPopup.handleAction ? topPopup.handleAction('cancel') : topPopup.close());
+      }
+    }
+  });
+}
 
 export default PopupManager;

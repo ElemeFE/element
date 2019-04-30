@@ -16,6 +16,10 @@ export default {
       startTime: 'Godzina początkowa',
       endDate: 'Data końcowa',
       endTime: 'Czas końcowa',
+      prevYear: 'Poprzedni rok',
+      nextYear: 'Następny rok',
+      prevMonth: 'Poprzedni miesiąc',
+      nextMonth: 'Następny miesiąc',
       year: 'rok',
       month1: 'styczeń',
       month2: 'luty',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: 'Brak dopasowań',
+      loading: 'Ładowanie',
       placeholder: 'Wybierz'
     },
     pagination: {
@@ -77,6 +82,7 @@ export default {
       error: 'Wiadomość zawiera niedozwolone znaki'
     },
     upload: {
+      deleteTip: 'kliknij kasuj aby usunąć',
       delete: 'Kasuj',
       preview: 'Podgląd',
       continue: 'Kontynuuj'
@@ -85,10 +91,22 @@ export default {
       emptyText: 'Brak danych',
       confirmFilter: 'Potwierdź',
       resetFilter: 'Resetuj',
-      clearFilter: 'Wszystko'
+      clearFilter: 'Wszystko',
+      sumText: 'Razem'
     },
     tree: {
       emptyText: 'Brak danych'
+    },
+    transfer: {
+      noMatch: 'Brak dopasowań',
+      noData: 'Brak danych',
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Wpisz szukaną frazę',
+      noCheckedFormat: 'razem: {total}',
+      hasCheckedFormat: 'wybranych: {checked}/{total}'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

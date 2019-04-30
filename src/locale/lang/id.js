@@ -1,7 +1,7 @@
 export default {
   el: {
     colorpicker: {
-      confirm: 'YA',
+      confirm: 'Pilih',
       clear: 'Kosongkan'
     },
     datepicker: {
@@ -9,13 +9,17 @@ export default {
       today: 'Hari ini',
       cancel: 'Batal',
       clear: 'Kosongkan',
-      confirm: 'YA',
+      confirm: 'Ya',
       selectDate: 'Pilih tanggal',
       selectTime: 'Pilih waktu',
       startDate: 'Tanggal Mulai',
       startTime: 'Waktu Mulai',
       endDate: 'Tanggal Selesai',
       endTime: 'Waktu Selesai',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'Tahun',
       month1: 'Januari',
       month2: 'Februari',
@@ -56,39 +60,53 @@ export default {
     },
     select: {
       loading: 'Memuat',
-      noMatch: 'Tidak ada data yang cocok',
+      noMatch: 'Tidak ada data yg cocok',
       noData: 'Tidak ada data',
       placeholder: 'Pilih'
     },
     cascader: {
-      noMatch: 'Tidak ada data yang cocok',
+      noMatch: 'Tidak ada data yg cocok',
+      loading: 'Memuat',
       placeholder: 'Pilih'
     },
     pagination: {
       goto: 'Pergi ke',
-      pagesize: '/page',
+      pagesize: '/laman',
       total: 'Total {total}',
       pageClassifier: ''
     },
     messagebox: {
       title: 'Pesan',
-      confirm: 'YA',
+      confirm: 'Ya',
       cancel: 'Batal',
       error: 'Masukan ilegal'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Hapus',
       preview: 'Pratinjau',
       continue: 'Lanjutkan'
     },
     table: {
-      emptyText: 'Tidak Ada Data',
+      emptyText: 'Tidak ada data',
       confirmFilter: 'Konfirmasi',
-      resetFilter: 'Atur Ulang',
-      clearFilter: 'Semua'
+      resetFilter: 'Atur ulang',
+      clearFilter: 'Semua',
+      sumText: 'Jml'
     },
     tree: {
-      emptyText: 'Tidak Ada Data'
+      emptyText: 'Tidak ada data'
+    },
+    transfer: {
+      noMatch: 'Tidak ada data yg cocok',
+      noData: 'Tidak ada data',
+      titles: ['Senarai 1', 'Senarai 2'],
+      filterPlaceholder: 'Masukan kata kunci',
+      noCheckedFormat: '{total} butir',
+      hasCheckedFormat: '{checked}/{total} terpilih'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

@@ -10,6 +10,20 @@ Displays the location of the current page, making it easier to browser back.
 ```html
 <el-breadcrumb separator="/">
   <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
+  <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
+  <el-breadcrumb-item>promotion list</el-breadcrumb-item>
+  <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+</el-breadcrumb>
+```
+:::
+
+### Icon separator
+
+:::demo Set `separator-class` to use `iconfont` as the separator，it will cover `separator`
+
+```html
+<el-breadcrumb separator-class="el-icon-arrow-right">
+  <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
   <el-breadcrumb-item>promotion management</el-breadcrumb-item>
   <el-breadcrumb-item>promotion list</el-breadcrumb-item>
   <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
@@ -21,6 +35,7 @@ Displays the location of the current page, making it easier to browser back.
 | Attribute      | Description          | Type      | Accepted Values            | Default|
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | separator | separator character | string | — | / |
+| separator-class | class name of icon separator | string | — | - |
 
 ### Breadcrumb Item Attributes
 | Attribute      | Description          | Type      | Accepted Values            | Default|

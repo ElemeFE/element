@@ -16,6 +16,10 @@ export default {
       startTime: '开始时间',
       endDate: '结束日期',
       endTime: '结束时间',
+      prevYear: '前一年',
+      nextYear: '后一年',
+      prevMonth: '上个月',
+      nextMonth: '下个月',
       year: '年',
       month1: '1 月',
       month2: '2 月',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: '无匹配数据',
+      loading: '加载中',
       placeholder: '请选择'
     },
     pagination: {
@@ -77,6 +82,7 @@ export default {
       error: '输入的数据不合法!'
     },
     upload: {
+      deleteTip: '按 delete 键可删除',
       delete: '删除',
       preview: '查看图片',
       continue: '继续上传'
@@ -85,10 +91,22 @@ export default {
       emptyText: '暂无数据',
       confirmFilter: '筛选',
       resetFilter: '重置',
-      clearFilter: '全部'
+      clearFilter: '全部',
+      sumText: '合计'
     },
     tree: {
       emptyText: '暂无数据'
+    },
+    transfer: {
+      noMatch: '无匹配数据',
+      noData: '无数据',
+      titles: ['列表 1', '列表 2'],
+      filterPlaceholder: '请输入搜索内容',
+      noCheckedFormat: '共 {total} 项',
+      hasCheckedFormat: '已选 {checked}/{total} 项'
+    },
+    image: {
+      error: '加载失败'
     }
   }
 };

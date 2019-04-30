@@ -15,6 +15,7 @@
   "radio-group": "./packages/radio-group/index.js",
   "radio-button": "./packages/radio-button/index.js",
   "checkbox": "./packages/checkbox/index.js",
+  "checkbox-button": "./packages/checkbox-button/index.js",
   "checkbox-group": "./packages/checkbox-group/index.js",
   "switch": "./packages/switch/index.js",
   "select": "./packages/select/index.js",
@@ -60,5 +61,17 @@
   "collapse": "./packages/collapse/index.js",
   "collapse-item": "./packages/collapse-item/index.js",
   "cascader": "./packages/cascader/index.js",
-  "color-picker": "./packages/color-picker/index.js"
+  "color-picker": "./packages/color-picker/index.js",
+  "transfer": "./packages/transfer/index.js",
+  "container": "./packages/container/index.js",
+  "header": "./packages/header/index.js",
+  "aside": "./packages/aside/index.js",
+  "main": "./packages/main/index.js",
+  "footer": "./packages/footer/index.js",
+  "timeline": "./packages/timeline/index.js",
+  "timeline-item": "./packages/timeline-item/index.js",
+  "link": "./packages/link/index.js",
+  "divider": "./packages/divider/index.js",
+  "image": "./packages/image/index.js",
+  "calendar": "./packages/calendar/index.js"
 }

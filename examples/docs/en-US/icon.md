@@ -1,16 +1,4 @@
-<script>
-  var iconList = require('examples/icon.json');
-
-  export default {
-    data() {
-      return {
-        icons: iconList
-      };
-    }
-  }
-</script>
-
-## Icon 
+## Icon
 
 Element provides a set of common icons.
 
@@ -24,7 +12,7 @@ Just assign the class name to `el-icon-iconName`.
 <i class="el-icon-edit"></i>
 <i class="el-icon-share"></i>
 <i class="el-icon-delete"></i>
-<el-button type="primary" icon="search">Search</el-button>
+<el-button type="primary" icon="el-icon-search">Search</el-button>
 
 ```
 :::
@@ -32,10 +20,10 @@ Just assign the class name to `el-icon-iconName`.
 ### Icons
 
 <ul class="icon-list">
-  <li v-for="name in icons">
+  <li v-for="name in $icon" :key="name">
     <span>
       <i :class="'el-icon-' + name"></i>
-      {{'el-icon-' + name}}
+      <span class="icon-name">{{'el-icon-' + name}}</span>
     </span>
   </li>
 </ul>

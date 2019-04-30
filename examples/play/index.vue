@@ -1,14 +1,15 @@
 <template>
   <div style="margin: 20px;">
-    <!-- Write your component in component.vue -->
-    <play-component></play-component>
+    <el-input v-model="input" placeholder="请输入内容"></el-input>
   </div>
 </template>
+
 <script>
-  import PlayComponent from './component.vue';
   export default {
-    components: {
-      PlayComponent
+    data() {
+      return {
+        input: 'Hello Element UI!'
+      };
     }
   };
 </script>

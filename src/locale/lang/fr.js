@@ -16,7 +16,11 @@ export default {
       startTime: 'Horaire début',
       endDate: 'Date fin',
       endTime: 'Horaire fin',
-      year: '',
+      prevYear: 'Année précédente',
+      nextYear: 'Année suivante',
+      prevMonth: 'Mois précédent',
+      nextMonth: 'Mois suivant',
+      year: '', // In french, like in english, we don't say "Année" after the year number.
       month1: 'Janvier',
       month2: 'Février',
       month3: 'Mars',
@@ -57,11 +61,12 @@ export default {
     select: {
       loading: 'Chargement',
       noMatch: 'Aucune correspondance',
-      noData: 'Aucun résultat',
+      noData: 'Aucune donnée',
       placeholder: 'Choisir'
     },
     cascader: {
       noMatch: 'Aucune correspondance',
+      loading: 'Chargement',
       placeholder: 'Choisir'
     },
     pagination: {
@@ -76,6 +81,7 @@ export default {
       error: 'Erreur'
     },
     upload: {
+      deleteTip: 'Cliquer sur supprimer pour retirer le fichier',
       delete: 'Supprimer',
       preview: 'Aperçu',
       continue: 'Continuer'
@@ -84,10 +90,22 @@ export default {
       emptyText: 'Aucune donnée',
       confirmFilter: 'Confirmer',
       resetFilter: 'Réinitialiser',
-      clearFilter: 'Tous'
+      clearFilter: 'Tous',
+      sumText: 'Somme'
     },
     tree: {
       emptyText: 'Aucune donnée'
+    },
+    transfer: {
+      noMatch: 'Aucune correspondance',
+      noData: 'Aucune donnée',
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Entrer un mot clef',
+      noCheckedFormat: '{total} elements',
+      hasCheckedFormat: '{checked}/{total} coché(s)'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

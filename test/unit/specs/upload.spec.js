@@ -4,6 +4,7 @@ const noop = () => {
 };
 const option = {
   onSuccess: noop,
+  onProgress: noop,
   data: { a: 'abc', b: 'bcd' },
   filename: 'file.png',
   file: 'foo',
@@ -41,7 +42,7 @@ describe('ajax', () => {
   });
   it('40x code should be error', done => {
     option.onError = e => {
-      expect(e.toString()).to.contain('404 Not found');
+      expect(e.toString()).to.contain('Not found');
       done();
     };
 
@@ -74,9 +75,6 @@ describe('Upload', () => {
   });
 
   describe('ajax upload', () => {
-    if (typeof FormData === 'undefined') {
-      return;
-    }
 
     let uploader;
     let handlers = {};
@@ -85,21 +83,38 @@ describe('Upload', () => {
       props: {
         action: '/upload',
         onSuccess(res, file, fileList) {
-          console.log('onSuccess', res);
           if (handlers.onSuccess) {
             handlers.onSuccess(res, file, fileList);
           }
         },
         onError(err, file, fileList) {
-          console.log('onError', err, file, fileList);
           if (handlers.onError) {
             handlers.onError(err, file, fileList);
           }
         },
         onPreview(file) {
-          console.log('onPreview', file);
           if (handlers.onPreview) {
             handlers.onPreview(file);
+          }
+        },
+        limit: 2,
+        onExceed(files, fileList) {
+          if (handlers.onExceed) {
+            handlers.onExceed(files, fileList);
+          }
+        },
+        beforeUpload(file) {
+          if (handlers.beforeUpload) {
+            return handlers.beforeUpload(file);
+          } else {
+            return true;
+          }
+        },
+        beforeRemove(file, fileList) {
+          if (handlers.beforeRemove) {
+            return handlers.beforeRemove(file);
+          } else {
+            return true;
           }
         }
       }
@@ -123,10 +138,11 @@ describe('Upload', () => {
     });
 
     it('upload success', done => {
-      const files = [{
-        name: 'success.png',
-        type: 'xml'
-      }];
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'success.png';
+      const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
         expect(file.name).to.equal('success.png');
@@ -143,10 +159,11 @@ describe('Upload', () => {
     });
 
     it('upload fail', done => {
-      const files = [{
-        name: 'fail.png',
-        type: 'xml'
-      }];
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'fail.png';
+      const files = [file];
 
       handlers.onError = (err, file, fileList) => {
         expect(err instanceof Error).to.equal(true);
@@ -161,10 +178,11 @@ describe('Upload', () => {
       }, 100);
     });
     it('preview file', done => {
-      const files = [{
-        name: 'success.png',
-        type: 'xml'
-      }];
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'success.png';
+      const files = [file];
 
       handlers.onPreview = (file) => {
         expect(file.response).to.equal('success.png');
@@ -184,10 +202,11 @@ describe('Upload', () => {
       }, 100);
     });
     it('file remove', done => {
-      const files = [{
-        name: 'success.png',
-        type: 'xml'
-      }];
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'success.png';
+      const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
         uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
@@ -204,10 +223,11 @@ describe('Upload', () => {
       }, 100);
     });
     it('clear files', done => {
-      const files = [{
-        name: 'success.png',
-        type: 'xml'
-      }];
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'success.png';
+      const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
         uploader.clearFiles();
@@ -222,6 +242,77 @@ describe('Upload', () => {
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
       }, 100);
+    });
+    it('beforeUpload return promise', done => {
+      const spy = sinon.spy();
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      const files = [file];
+      handlers.onSuccess = () => {
+        expect(spy.calledOnce).to.equal(true);
+        done();
+      };
+      handlers.beforeUpload = (file) => {
+        return new window.Promise((resolve) => {
+          spy();
+          resolve(file);
+        });
+      };
+      uploader.$refs['upload-inner'].handleChange({ target: { files }});
+      setTimeout(() => {
+        requests[0].respond(200, {}, `${files[0].name}`);
+      }, 100);
+    });
+    it('beforeRemove return rejected promise', done => {
+      const spy = sinon.spy();
+      handlers.beforeRemove = (file) => {
+        return new window.Promise((resolve, reject) => {
+          spy();
+          reject();
+        });
+      };
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      file.name = 'success.png';
+      const files = [file];
+
+      handlers.onSuccess = (res, file, fileList) => {
+        uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
+        setTimeout(() => {
+          expect(spy.calledOnce).to.equal(true);
+          expect(uploader.uploadFiles.length).to.equal(1);
+          done();
+        }, 200);
+      };
+      uploader.$refs['upload-inner'].handleChange({ target: { files }});
+      setTimeout(() => {
+        requests[0].respond(200, {}, `${files[0].name}`);
+      }, 100);
+    });
+    it('limit files', done => {
+      const files = [{
+        name: 'exceed2.png',
+        type: 'xml'
+      }, {
+        name: 'exceed3.png',
+        type: 'xml'
+      }];
+
+      uploader.uploadFiles = [{
+        name: 'exceed1.png',
+        type: 'xml'
+      }];
+
+      handlers.onExceed = (files, fileList) => {
+        uploader.$nextTick(_ => {
+          expect(uploader.uploadFiles.length).to.equal(1);
+          done();
+        });
+      };
+
+      uploader.$nextTick(_ => uploader.$refs['upload-inner'].handleChange({ target: { files }}));
     });
   });
 });

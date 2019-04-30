@@ -23,6 +23,7 @@ export default function() {
 
   const widthWithScroll = inner.offsetWidth;
   outer.parentNode.removeChild(outer);
+  scrollBarWidth = widthNoScroll - widthWithScroll;
 
-  return widthNoScroll - widthWithScroll;
+  return scrollBarWidth;
 };

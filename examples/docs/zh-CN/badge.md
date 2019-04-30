@@ -1,9 +1,3 @@
-<style>
-  .demo-badge.demo-box .el-dropdown {
-    vertical-align: middle;
-  }
-</style>
-
 ## Badge 标记
 
 出现在按钮、图标旁的数字或状态标记。
@@ -18,6 +12,12 @@
   <el-button size="small">评论</el-button>
 </el-badge>
 <el-badge :value="3" class="item">
+  <el-button size="small">回复</el-button>
+</el-badge>
+<el-badge :value="1" class="item" type="primary">
+  <el-button size="small">评论</el-button>
+</el-badge>
+<el-badge :value="2" class="item" type="warning">
   <el-button size="small">回复</el-button>
 </el-badge>
 
@@ -98,7 +98,7 @@
 ```html
 <el-badge is-dot class="item">数据查询</el-badge>
 <el-badge is-dot class="item">
-  <el-button class="share-button" icon="share" type="primary"></el-button>
+  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
 </el-badge>
 
 <style>
@@ -110,31 +110,11 @@
 ```
 :::
 
-<style scoped>
-  .share-button {
-    width: 36px;
-    padding: 10px;
-  }
-
-  .mark {
-    margin-top: 8px;
-    line-height: 1;
-    float: right;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .item {
-    margin-right: 40px;
-  }
-</style>
-
 ### Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
-|-------------  |---------------- |---------------- |---------------------- |-------- |
-| value          | 显示值      | string, number          |          —             |    —     |
-| max          |  最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型    | number  |         —              |     —    |
-| is-dot       | 小圆点    | boolean  |  —  |  false |
-| hidden | 隐藏 badge | boolean | — | false |
+|------------- |---------------- |---------------- |---------------------- |-------- |
+| value        | 显示值           | string, number  |          —            |    —    |
+| max          | 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型    | number  |         —              |     —    |
+| is-dot       | 小圆点           | boolean         |         —             |  false  |
+| hidden       | 隐藏 badge       | boolean         |         —             |  false  |
+| type         | 类型             | string          | primary / success / warning / danger / info |    —    |

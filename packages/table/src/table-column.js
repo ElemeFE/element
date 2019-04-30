@@ -1,7 +1,7 @@
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import objectAssign from 'element-ui/src/utils/merge';
-import { getValueByPath } from './util';
+import { getPropByPath } from 'element-ui/src/utils/util';
 
 let columnIdSeed = 1;
 
@@ -32,14 +32,17 @@ const defaults = {
 
 const forced = {
   selection: {
-    renderHeader: function(h) {
+    renderHeader: function(h, { store }) {
       return <el-checkbox
+        disabled={ store.states.data && store.states.data.length === 0 }
+        indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
         nativeOn-click={ this.toggleAllSelection }
-        domProps-value={ this.isAllSelected } />;
+        value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
       return <el-checkbox
-        domProps-value={ store.isSelected(row) }
+        nativeOn-click={ (event) => event.stopPropagation() }
+        value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
         on-input={ () => { store.commit('rowSelectedChanged', row); } } />;
     },
@@ -50,19 +53,28 @@ const forced = {
     renderHeader: function(h, { column }) {
       return column.label || '#';
     },
-    renderCell: function(h, { $index }) {
-      return <div>{ $index + 1 }</div>;
+    renderCell: function(h, { $index, column }) {
+      let i = $index + 1;
+      const index = column.index;
+
+      if (typeof index === 'number') {
+        i = $index + index;
+      } else if (typeof index === 'function') {
+        i = index($index);
+      }
+
+      return <div>{ i }</div>;
     },
     sortable: false
   },
   expand: {
-    renderHeader: function(h, {}) {
-      return '';
+    renderHeader: function(h, { column }) {
+      return column.label || '';
     },
     renderCell: function(h, { row, store }, proxy) {
       const expanded = store.states.expandRows.indexOf(row) > -1;
       return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
-                  on-click={ () => proxy.handleExpandClick(row) }>
+        on-click={ e => proxy.handleExpandClick(row, e) }>
         <i class='el-icon el-icon-arrow-right'></i>
       </div>;
     },
@@ -90,22 +102,38 @@ const getDefaultColumn = function(type, options) {
     column.minWidth = 80;
   }
 
-  column.realWidth = column.width || column.minWidth;
+  column.realWidth = column.width === undefined ? column.minWidth : column.width;
 
   return column;
 };
 
-const DEFAULT_RENDER_CELL = function(h, { row, column }) {
+const DEFAULT_RENDER_CELL = function(h, { row, column, $index }) {
   const property = column.property;
+  const value = property && getPropByPath(row, property).v;
   if (column && column.formatter) {
-    return column.formatter(row, column);
+    return column.formatter(row, column, value, $index);
   }
+  return value;
+};
 
-  if (property && property.indexOf('.') === -1) {
-    return row[property];
+const parseWidth = (width) => {
+  if (width !== undefined) {
+    width = parseInt(width, 10);
+    if (isNaN(width)) {
+      width = null;
+    }
   }
+  return width;
+};
 
-  return getValueByPath(row, property);
+const parseMinWidth = (minWidth) => {
+  if (minWidth !== undefined) {
+    minWidth = parseInt(minWidth, 10);
+    if (isNaN(minWidth)) {
+      minWidth = 80;
+    }
+  }
+  return minWidth;
 };
 
 export default {
@@ -129,6 +157,7 @@ export default {
       default: false
     },
     sortMethod: Function,
+    sortBy: [String, Function, Array],
     resizable: {
       type: Boolean,
       default: true
@@ -146,9 +175,20 @@ export default {
     filterMethod: Function,
     filteredValue: Array,
     filters: Array,
+    filterPlacement: String,
     filterMultiple: {
       type: Boolean,
       default: true
+    },
+    index: [Number, Function],
+    sortOrders: {
+      type: Array,
+      default() {
+        return ['ascending', 'descending', null];
+      },
+      validator(val) {
+        return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
+      }
     }
   },
 
@@ -177,35 +217,29 @@ export default {
         parent = parent.$parent;
       }
       return parent;
+    },
+    columnOrTableParent() {
+      let parent = this.$parent;
+      while (parent && !parent.tableId && !parent.columnId) {
+        parent = parent.$parent;
+      }
+      return parent;
     }
   },
 
   created() {
     this.customRender = this.$options.render;
     this.$options.render = h => h('div', this.$slots.default);
-    this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
-    let parent = this.$parent;
+    let parent = this.columnOrTableParent;
     let owner = this.owner;
     this.isSubColumn = owner !== parent;
+    this.columnId = (parent.tableId || parent.columnId) + '_column_' + columnIdSeed++;
 
     let type = this.type;
 
-    let width = this.width;
-    if (width !== undefined) {
-      width = parseInt(width, 10);
-      if (isNaN(width)) {
-        width = null;
-      }
-    }
-
-    let minWidth = this.minWidth;
-    if (minWidth !== undefined) {
-      minWidth = parseInt(minWidth, 10);
-      if (isNaN(minWidth)) {
-        minWidth = 80;
-      }
-    }
+    const width = parseWidth(this.width);
+    const minWidth = parseMinWidth(this.minWidth);
 
     let isColumnGroup = false;
 
@@ -227,6 +261,7 @@ export default {
       headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
       sortable: this.sortable === '' ? true : this.sortable,
       sortMethod: this.sortMethod,
+      sortBy: this.sortBy,
       resizable: this.resizable,
       showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
       formatter: this.formatter,
@@ -238,10 +273,31 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: this.filteredValue || []
+      filteredValue: this.filteredValue || [],
+      filterPlacement: this.filterPlacement || '',
+      index: this.index,
+      sortOrders: this.sortOrders
     });
 
-    objectAssign(column, forced[type] || {});
+    let source = forced[type] || {};
+    Object.keys(source).forEach((prop) => {
+      let value = source[prop];
+      if (value !== undefined) {
+        if (prop === 'renderHeader') {
+          if (type === 'selection' && column[prop]) {
+            console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set render-header function.');
+          } else {
+            value = column[prop] || value;
+          }
+        }
+        column[prop] = prop === 'className' ? `${column[prop]} ${value}` : value;
+      }
+    });
+
+    // Deprecation warning for renderHeader property
+    if (this.renderHeader) {
+      console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
+    }
 
     this.columnConfig = column;
 
@@ -263,39 +319,30 @@ export default {
     }
 
     column.renderCell = function(h, data) {
-      // 未来版本移除
-      if (_self.$vnode.data.inlineTemplate) {
-        renderCell = function() {
-          data._self = _self.context || data._self;
-          if (Object.prototype.toString.call(data._self) === '[object Object]') {
-            for (let prop in data._self) {
-              if (!data.hasOwnProperty(prop)) {
-                data[prop] = data._self[prop];
-              }
-            }
-          }
-          // 静态内容会缓存到 _staticTrees 内，不改的话获取的静态数据就不是内部 context
-          data._staticTrees = _self._staticTrees;
-          data.$options.staticRenderFns = _self.$options.staticRenderFns;
-          return _self.customRender.call(data);
-        };
-      } else if (_self.$scopedSlots.default) {
+      if (_self.$scopedSlots.default) {
         renderCell = () => _self.$scopedSlots.default(data);
       }
 
       if (!renderCell) {
         renderCell = DEFAULT_RENDER_CELL;
       }
+      const children = [
+        _self.renderTreeCell(data),
+        renderCell(h, data)
+      ];
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <div class="cell el-tooltip">{ renderCell(h, data) }</div>
-        : <div class="cell">{ renderCell(h, data) }</div>;
+        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ children }</div>
+        : (<div class="cell">
+          { children }
+        </div>);
     };
   },
 
   destroyed() {
     if (!this.$parent) return;
-    this.owner.store.commit('removeColumn', this.columnConfig);
+    const parent = this.$parent;
+    this.owner.store.commit('removeColumn', this.columnConfig, this.isSubColumn ? parent.columnConfig : null);
   },
 
   watch: {
@@ -347,14 +394,14 @@ export default {
 
     width(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.width = newVal;
+        this.columnConfig.width = parseWidth(newVal);
         this.owner.store.scheduleLayout();
       }
     },
 
     minWidth(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.minWidth = newVal;
+        this.columnConfig.minWidth = parseMinWidth(newVal);
         this.owner.store.scheduleLayout();
       }
     },
@@ -362,20 +409,84 @@ export default {
     fixed(newVal) {
       if (this.columnConfig) {
         this.columnConfig.fixed = newVal;
-        this.owner.store.scheduleLayout();
+        this.owner.store.scheduleLayout(true);
+      }
+    },
+
+    sortable(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.sortable = newVal;
+      }
+    },
+
+    index(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.index = newVal;
+      }
+    },
+
+    formatter(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.formatter = newVal;
+      }
+    },
+
+    className(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.className = newVal;
+      }
+    },
+
+    labelClassName(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.labelClassName = newVal;
+      }
+    }
+  },
+
+  methods: {
+    renderTreeCell(data) {
+      if (!data.treeNode) return null;
+      const ele = [];
+      ele.push(<span class="el-table__indent" style={{'padding-left': data.treeNode.indent + 'px'}}></span>);
+      if (data.treeNode.hasChildren) {
+        ele.push(<div class={ ['el-table__expand-icon', data.treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
+          on-click={this.handleTreeExpandIconClick.bind(this, data)}>
+          <i class='el-icon el-icon-arrow-right'></i>
+        </div>);
+      } else {
+        ele.push(<span class="el-table__placeholder"></span>);
+      }
+      return ele;
+    },
+
+    handleTreeExpandIconClick(data, e) {
+      e.stopPropagation();
+      if (data.store.states.lazy && !data.treeNode.loaded) {
+        data.store.loadData(data.row, data.treeNode);
+      } else {
+        data.store.toggleTreeExpansion(data.treeNode.rowKey);
       }
     }
   },
 
   mounted() {
     const owner = this.owner;
-    const parent = this.$parent;
+    const parent = this.columnOrTableParent;
     let columnIndex;
 
     if (!this.isSubColumn) {
       columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
     } else {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
+    }
+
+    if (this.$scopedSlots.header) {
+      if (this.type === 'selection') {
+        console.warn('[Element Warn][TableColumn]Selection column doesn\'t allow to set scoped-slot header.');
+      } else {
+        this.columnConfig.renderHeader = (h, scope) => this.$scopedSlots.header(scope);
+      }
     }
 
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);

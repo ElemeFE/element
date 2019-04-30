@@ -1,94 +1,20 @@
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }],
-        fileList2: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }],
-        fileList3: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
-        }],
-        imageUrl: '',
-        dialogImageUrl: '',
-        dialogVisible: false
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      beforeUpload(file) {
-        if (file.size > 40000000) {
-          console.warn(file.name + ' is too large!');
-          return false;
-        }
-        return true;
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
-      submitUpload() {
-        this.$refs.upload.submit();
-      },
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('Avatar picture must be JPG format!');
-        }
-        if (!isLt2M) {
-          this.$message.error('Avatar picture size can not exceed 2MB!');
-        }
-        return isJPG && isLt2M;
-      },
-      handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
-      }
-    }
-  }
-</script>
 ## Upload
 
 Upload files by clicking or drag-and-drop
 
 ### Click to upload files
 
-:::demo Customize upload button type and text using `slot`.
+:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded. Plus, you can abort removing a file in the `before-remove` hook.
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :before-remove="beforeRemove"
+  multiple
+  :limit="3"
+  :on-exceed="handleExceed"
   :file-list="fileList">
   <el-button size="small" type="primary">Click to upload</el-button>
   <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
@@ -106,6 +32,12 @@ Upload files by clicking or drag-and-drop
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
       }
     }
   }
@@ -117,7 +49,7 @@ Upload files by clicking or drag-and-drop
 
 Use `before-upload` hook to limit the upload file format and size.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="avatar-uploader"
@@ -138,7 +70,7 @@ Use `before-upload` hook to limit the upload file format and size.
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
+    border-color: #409EFF;
   }
   .avatar-uploader-icon {
     font-size: 28px;
@@ -188,7 +120,7 @@ Use `before-upload` hook to limit the upload file format and size.
 
 Use `list-type` to change the fileList style.
 
-::: demo
+:::demo
 ```html
 <el-upload
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -197,7 +129,7 @@ Use `list-type` to change the fileList style.
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog v-model="dialogVisible" size="tiny">
+<el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
 </el-dialog>
 <script>
@@ -224,14 +156,14 @@ Use `list-type` to change the fileList style.
 
 ### FileList with thumbnail
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :file-list="fileList2"
+  :file-list="fileList"
   list-type="picture">
   <el-button size="small" type="primary">Click to upload</el-button>
   <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
@@ -240,7 +172,7 @@ Use `list-type` to change the fileList style.
   export default {
     data() {
       return {
-        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -260,13 +192,13 @@ Use `list-type` to change the fileList style.
 
 Use `on-change` hook function to control upload file list
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
-  :file-list="fileList3">
+  :file-list="fileList">
   <el-button size="small" type="primary">Click to upload</el-button>
   <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
@@ -274,20 +206,18 @@ Use `on-change` hook function to control upload file list
   export default {
     data() {
       return {
-        fileList3: [{
+        fileList: [{
           name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }, {
           name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-          status: 'finished'
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }]
       };
     },
     methods: {
       handleChange(file, fileList) {
-        this.fileList3 = fileList.slice(-3);
+        this.fileList = fileList.slice(-3);
       }
     }
   }
@@ -299,7 +229,7 @@ Use `on-change` hook function to control upload file list
 
 You can drag your file to a certain area to upload it.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -318,7 +248,7 @@ You can drag your file to a certain area to upload it.
 
 ### Manual upload
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -350,7 +280,7 @@ multiple | whether uploading multiple files is permitted | boolean | — | —
 data | additions options of request | object | — | —
 name | key name for uploaded file | string | — | file
 with-credentials | whether cookies are sent | boolean | — |false
-show-upload-list | whether to show the uploaded file list | boolean | — | true
+show-file-list | whether to show the uploaded file list | boolean | — | true
  drag | whether to activate drag and drop mode | boolean | — | false
 accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
 on-preview | hook function when clicking the uploaded files | function(file) | — | —
@@ -358,15 +288,27 @@ on-remove | hook function when files are removed | function(file, fileList) | �
 on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
 on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
 on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
-on-change | hook function when file status change | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` is returned, uploading will be aborted | function(file) | — | —
+on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
+before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
+before-remove | hook function before removing a file with the file and file list as its parameters. If `false` is returned or a `Promise` is returned and then is rejected, removing will be aborted. | function(file, fileList) | — | — |
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
+file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
+disabled | whether to disable upload | boolean | — | false |
+limit | maximum number of uploads allowed | number | — | — |
+on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
 
-### Events
-| Event Name | Description | Parameters |
+### Slot
+| Name | Description |
+|------|--------|
+| trigger | content which triggers file dialog |
+| tip | content of tips |
+
+### Methods
+| Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
-| clearFiles | clear the uploaded file list | — |
+| clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
+| abort      | cancel upload request                    | （ file: fileList's item ） |
+| submit     | upload the file list manually            |  —                         |

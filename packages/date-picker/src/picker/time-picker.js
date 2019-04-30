@@ -8,13 +8,28 @@ export default {
   name: 'ElTimePicker',
 
   props: {
-    isRange: Boolean
+    isRange: Boolean,
+    arrowControl: Boolean
   },
 
   data() {
     return {
       type: ''
     };
+  },
+
+  watch: {
+    isRange(isRange) {
+      if (this.picker) {
+        this.unmountPicker();
+        this.type = isRange ? 'timerange' : 'time';
+        this.panel = isRange ? TimeRangePanel : TimePanel;
+        this.mountPicker();
+      } else {
+        this.type = isRange ? 'timerange' : 'time';
+        this.panel = isRange ? TimeRangePanel : TimePanel;
+      }
+    }
   },
 
   created() {

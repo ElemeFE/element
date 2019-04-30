@@ -33,18 +33,20 @@ describe('Progress', () => {
           <el-progress ref="lineException" :percentage="0" status="exception"></el-progress>
           <el-progress type="circle" ref="circleSuccess" :percentage="100" status="success"></el-progress>
           <el-progress type="circle" ref="circleException" :percentage="0" status="exception"></el-progress>
+          <el-progress type="circle" ref="textException" :percentage="100" status="text">Done</el-progress>
         </div>
       `
     }, true);
     expect(vm.$refs.lineSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.lineSuccess.$el.querySelector('.el-progress__text .el-icon-circle-check')).to.be.exist;
     expect(vm.$refs.lineException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-cross')).to.be.exist;
+    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-close')).to.be.exist;
 
     expect(vm.$refs.circleSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.circleSuccess.$el.querySelector('.el-progress__text .el-icon-check')).to.be.exist;
     expect(vm.$refs.circleException.$el.classList.contains('is-exception')).to.be.true;
     expect(vm.$refs.circleException.$el.querySelector('.el-progress__text .el-icon-close')).to.be.exist;
+    expect(vm.$refs.textException.$el.querySelector('.el-progress__text').innerText).to.be.equal('Done');
   });
   it('text inside', () => {
     vm = createVue({
@@ -86,5 +88,21 @@ describe('Progress', () => {
     }, true);
     expect(vm.$el.querySelector('.el-progress-circle').style.height).to.be.equal('120px');
     expect(vm.$el.querySelector('.el-progress-circle').style.width).to.be.equal('120px');
+  });
+  it('should work with stroke-width', () => {
+    vm = createVue({
+      template: `
+        <el-progress :text-inside="true" :stroke-width="36" :percentage="0"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(12);
+  });
+  it('color', () => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="50" color="rgb(0, 0, 0)"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(0, 0, 0)');
   });
 });

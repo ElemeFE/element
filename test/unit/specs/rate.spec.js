@@ -95,6 +95,40 @@ describe('Rate', () => {
     expect(thirdIcon.style.color).to.equal('rgb(255, 153, 0)');
   });
 
+  it('colors are updated after prop is changed', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-rate v-model="value" :colors="colors"></el-rate>
+        </div>
+      `,
+
+      computed: {
+        colors() {
+          if (this.muted) {
+            return ['#999', '#999', '#999'];
+          } else {
+            return ['#99A9BF', '#F7BA2A', '#FF9900'];
+          }
+        }
+      },
+      data() {
+        return {
+          value: 4,
+          muted: false
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      vm.muted = true;
+      vm.$nextTick(() => {
+        const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[2].querySelector('.el-rate__icon');
+        expect(thirdIcon.style.color).to.equal('rgb(153, 153, 153)');
+        done();
+      });
+    }, 10);
+  });
+
   it('threshold', () => {
     vm = createVue({
       template: `
@@ -147,7 +181,7 @@ describe('Rate', () => {
 
     const fourthStar = vm2.$el.querySelectorAll('.el-rate__item')[3];
     const halfStar = fourthStar.querySelector('.el-rate__decimal');
-    expect(halfStar.style.width).to.equal('0%');
+    expect(halfStar.style.width).to.equal('40%');
   });
 
   it('allow half', () => {
@@ -171,4 +205,25 @@ describe('Rate', () => {
     rate.resetCurrentValue();
     expect(vm.value).to.equal(0.5);
   });
+
+  it('custom icon classes by passing object', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-rate
+            v-model="value"
+            :icon-classes="{ 2: 'icon-rate-face-1', 4: { value: 'icon-rate-face-2', excluded: true }, 5: 'icon-rate-face-3' }"></el-rate>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 4
+        };
+      }
+    }, true);
+    const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[3].querySelector('.el-rate__icon');
+    expect(thirdIcon.className).to.include('icon-rate-face-3');
+  });
+
 });

@@ -47,9 +47,20 @@ describe('Notification', () => {
     });
     const group = document.querySelector('.el-notification__group');
     const title = group.querySelector('.el-notification__title');
-    const message = group.querySelector('.el-notification__content');
+    const message = group.querySelector('.el-notification__content p');
     expect(document.querySelector('.el-notification')).to.exist;
     expect(title.textContent).to.equal('狮子');
+    expect(message.textContent).to.equal('狮鹫');
+  });
+
+  it('html string as message', () => {
+    Notification({
+      title: '狮子',
+      message: '<strong>狮鹫</strong>',
+      dangerouslyUseHTMLString: true,
+      duration: 0
+    });
+    const message = document.querySelector('.el-notification__content strong');
     expect(message.textContent).to.equal('狮鹫');
   });
 
@@ -94,6 +105,17 @@ describe('Notification', () => {
         expect(document.querySelector('.el-notification')).to.exist;
         done();
       }, 700);
+    }, 500);
+  });
+
+  it('no close button', done => {
+    Notification({
+      message: 'Hello',
+      showClose: false
+    });
+    setTimeout(() => {
+      expect(document.querySelector('.el-notification__closeBtn')).to.not.exist;
+      done();
     }, 500);
   });
 });

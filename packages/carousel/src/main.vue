@@ -1,16 +1,17 @@
 <template>
   <div
-    class="el-carousel"
-    :class="{ 'el-carousel--card': type === 'card' }"
+    :class="carouselClasses"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
     <div
       class="el-carousel__container"
       :style="{ height: height }">
-      <transition name="carousel-arrow-left">
+      <transition
+        v-if="arrowDisplay"
+        name="carousel-arrow-left">
         <button
-          v-if="arrow !== 'never'"
-          v-show="arrow === 'always' || hover"
+          type="button"
+          v-show="(arrow === 'always' || hover) && (loop || activeIndex > 0)"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
@@ -18,10 +19,12 @@
           <i class="el-icon-arrow-left"></i>
         </button>
       </transition>
-      <transition name="carousel-arrow-right">
+      <transition
+        v-if="arrowDisplay"
+        name="carousel-arrow-right">
         <button
-          v-if="arrow !== 'never'"
-          v-show="arrow === 'always' || hover"
+          type="button"
+          v-show="(arrow === 'always' || hover) && (loop || activeIndex < items.length - 1)"
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
@@ -32,16 +35,20 @@
       <slot></slot>
     </div>
     <ul
-      class="el-carousel__indicators"
       v-if="indicatorPosition !== 'none'"
-      :class="{ 'el-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
+      :class="indicatorsClasses">
       <li
         v-for="(item, index) in items"
-        class="el-carousel__indicator"
-        :class="{ 'is-active': index === activeIndex }"
+        :key="index"
+        :class="[
+          'el-carousel__indicator',
+          'el-carousel__indicator--' + direction,
+          { 'is-active': index === activeIndex }]"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button"></button>
+        <button class="el-carousel__button">
+          <span v-if="hasLabel">{{ item.label }}</span>
+        </button>
       </li>
     </ul>
   </div>
@@ -49,7 +56,6 @@
 
 <script>
 import throttle from 'throttle-debounce/throttle';
-import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {
@@ -82,7 +88,18 @@ export default {
       type: String,
       default: 'hover'
     },
-    type: String
+    type: String,
+    loop: {
+      type: Boolean,
+      default: true
+    },
+    direction: {
+      type: String,
+      default: 'horizontal',
+      validator(val) {
+        return ['horizontal', 'vertical'].indexOf(val) !== -1;
+      }
+    }
   },
 
   data() {
@@ -95,14 +112,51 @@ export default {
     };
   },
 
+  computed: {
+    arrowDisplay() {
+      return this.arrow !== 'never' && this.direction !== 'vertical';
+    },
+
+    hasLabel() {
+      return this.items.some(item => item.label.toString().length > 0);
+    },
+
+    carouselClasses() {
+      const classes = ['el-carousel', 'el-carousel--' + this.direction];
+      if (this.type === 'card') {
+        classes.push('el-carousel--card');
+      }
+      return classes;
+    },
+
+    indicatorsClasses() {
+      const classes = ['el-carousel__indicators', 'el-carousel__indicators--' + this.direction];
+      if (this.hasLabel) {
+        classes.push('el-carousel__indicators--labels');
+      }
+      if (this.indicatorPosition === 'outside' || this.type === 'card') {
+        classes.push('el-carousel__indicators--outside');
+      }
+      return classes;
+    }
+  },
+
   watch: {
     items(val) {
-      if (val.length > 0) this.setActiveItem(0);
+      if (val.length > 0) this.setActiveItem(this.initialIndex);
     },
 
     activeIndex(val, oldVal) {
-      this.resetItemPosition();
+      this.resetItemPosition(oldVal);
       this.$emit('change', val, oldVal);
+    },
+
+    autoplay(val) {
+      val ? this.startTimer() : this.pauseTimer();
+    },
+
+    loop() {
+      this.setActiveItem(this.activeIndex);
     }
   },
 
@@ -130,6 +184,7 @@ export default {
     },
 
     handleButtonEnter(arrow) {
+      if (this.direction === 'vertical') return;
       this.items.forEach((item, index) => {
         if (arrow === this.itemInStage(item, index)) {
           item.hover = true;
@@ -138,6 +193,7 @@ export default {
     },
 
     handleButtonLeave() {
+      if (this.direction === 'vertical') return;
       this.items.forEach(item => {
         item.hover = false;
       });
@@ -147,26 +203,29 @@ export default {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
     },
 
-    resetItemPosition() {
+    resetItemPosition(oldIndex) {
       this.items.forEach((item, index) => {
-        item.translateItem(index, this.activeIndex);
+        item.translateItem(index, this.activeIndex, oldIndex);
       });
     },
 
     playSlides() {
       if (this.activeIndex < this.items.length - 1) {
         this.activeIndex++;
-      } else {
+      } else if (this.loop) {
         this.activeIndex = 0;
       }
     },
 
     pauseTimer() {
-      clearInterval(this.timer);
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
     },
 
     startTimer() {
-      if (this.interval <= 0 || !this.autoplay) return;
+      if (this.interval <= 0 || !this.autoplay || this.timer) return;
       this.timer = setInterval(this.playSlides, this.interval);
     },
 
@@ -179,17 +238,20 @@ export default {
       }
       index = Number(index);
       if (isNaN(index) || index !== Math.floor(index)) {
-        process.env.NODE_ENV !== 'production' &&
         console.warn('[Element Warn][Carousel]index must be an integer.');
         return;
       }
       let length = this.items.length;
+      const oldIndex = this.activeIndex;
       if (index < 0) {
-        this.activeIndex = length - 1;
+        this.activeIndex = this.loop ? length - 1 : 0;
       } else if (index >= length) {
-        this.activeIndex = 0;
+        this.activeIndex = this.loop ? 0 : length - 1;
       } else {
         this.activeIndex = index;
+      }
+      if (oldIndex === this.activeIndex) {
+        this.resetItemPosition(oldIndex);
       }
     },
 
@@ -213,7 +275,6 @@ export default {
   },
 
   created() {
-    this.handleItemChange = debounce(100, this.updateItems);
     this.throttledArrowClick = throttle(300, true, index => {
       this.setActiveItem(index);
     });
@@ -235,6 +296,7 @@ export default {
 
   beforeDestroy() {
     if (this.$el) removeResizeListener(this.$el, this.resetItemPosition);
+    this.pauseTimer();
   }
 };
 </script>

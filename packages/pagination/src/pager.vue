@@ -1,29 +1,30 @@
 <template>
   <ul @click="onPagerClick" class="el-pager">
     <li
-      :class="{ active: currentPage === 1 }"
+      :class="{ active: currentPage === 1, disabled }"
       v-if="pageCount > 0"
       class="number">1</li>
     <li
       class="el-icon more btn-quickprev"
-      :class="[quickprevIconClass]"
+      :class="[quickprevIconClass, { disabled }]"
       v-if="showPrevMore"
-      @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
+      @mouseenter="onMouseenter('left')"
       @mouseleave="quickprevIconClass = 'el-icon-more'">
     </li>
     <li
       v-for="pager in pagers"
-      :class="{ active: currentPage === pager }"
+      :key="pager"
+      :class="{ active: currentPage === pager, disabled }"
       class="number">{{ pager }}</li>
     <li
       class="el-icon more btn-quicknext"
-      :class="[quicknextIconClass]"
+      :class="[quicknextIconClass, { disabled }]"
       v-if="showNextMore"
-      @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
+      @mouseenter="onMouseenter('right')"
       @mouseleave="quicknextIconClass = 'el-icon-more'">
     </li>
     <li
-      :class="{ active: currentPage === pageCount }"
+      :class="{ active: currentPage === pageCount, disabled }"
       class="number"
       v-if="pageCount > 1">{{ pageCount }}</li>
   </ul>
@@ -36,7 +37,11 @@
     props: {
       currentPage: Number,
 
-      pageCount: Number
+      pageCount: Number,
+
+      pagerCount: Number,
+
+      disabled: Boolean
     },
 
     watch: {
@@ -52,19 +57,20 @@
     methods: {
       onPagerClick(event) {
         const target = event.target;
-        if (target.tagName === 'UL') {
+        if (target.tagName === 'UL' || this.disabled) {
           return;
         }
 
         let newPage = Number(event.target.textContent);
         const pageCount = this.pageCount;
         const currentPage = this.currentPage;
+        const pagerCountOffset = this.pagerCount - 2;
 
         if (target.className.indexOf('more') !== -1) {
           if (target.className.indexOf('quickprev') !== -1) {
-            newPage = currentPage - 5;
+            newPage = currentPage - pagerCountOffset;
           } else if (target.className.indexOf('quicknext') !== -1) {
-            newPage = currentPage + 5;
+            newPage = currentPage + pagerCountOffset;
           }
         }
 
@@ -82,12 +88,22 @@
         if (newPage !== currentPage) {
           this.$emit('change', newPage);
         }
+      },
+
+      onMouseenter(direction) {
+        if (this.disabled) return;
+        if (direction === 'left') {
+          this.quickprevIconClass = 'el-icon-d-arrow-left';
+        } else {
+          this.quicknextIconClass = 'el-icon-d-arrow-right';
+        }
       }
     },
 
     computed: {
       pagers() {
-        const pagerCount = 7;
+        const pagerCount = this.pagerCount;
+        const halfPagerCount = (pagerCount - 1) / 2;
 
         const currentPage = Number(this.currentPage);
         const pageCount = Number(this.pageCount);
@@ -96,11 +112,11 @@
         let showNextMore = false;
 
         if (pageCount > pagerCount) {
-          if (currentPage > pagerCount - 2) {
+          if (currentPage > pagerCount - halfPagerCount) {
             showPrevMore = true;
           }
 
-          if (currentPage < pageCount - 2) {
+          if (currentPage < pageCount - halfPagerCount) {
             showNextMore = true;
           }
         }
