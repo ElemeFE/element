@@ -81,7 +81,7 @@
 </template>
 <script>
 import ThemeCard from '../../components/theme/theme-card.vue';
-import ThemeList from '../../components/theme/theme-list.js';
+import { themeList } from '../../components/theme/theme-list.js';
 import { saveUserThemeToLocal, loadUserThemeFromLocal } from '../../components/theme/localstorage';
 import { getActionDisplayName } from '../../components/theme-configurator/utils/utils';
 
@@ -100,7 +100,7 @@ export default {
   },
   data() {
     return {
-      officialTheme: this.padEmpeyTheme(ThemeList),
+      officialTheme: this.padEmpeyTheme(themeList),
       userTheme: [],
       maxUserTheme,
       copyDialogVisible: false,
