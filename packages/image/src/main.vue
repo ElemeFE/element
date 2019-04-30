@@ -11,7 +11,8 @@
       class="el-image__inner"
       :src="src"
       :alt="alt"
-      :style="imageStyle">
+      :style="imageStyle"
+      :class="{ 'el-image__inner--center': alignCenter }">
   </div>
 </template>
 
@@ -63,6 +64,9 @@
             : this.getImageStyle(fit);
         }
         return {};
+      },
+      alignCenter() {
+        return !this.$isServer && !isSupportObjectFit() && this.fit !== ObjectFit.FILL;
       }
     },
 
