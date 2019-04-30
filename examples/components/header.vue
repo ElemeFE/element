@@ -381,7 +381,6 @@
   </div>
 </template>
 <script>
-  import Vue from 'vue';
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
@@ -434,7 +433,7 @@
     mounted() {
       getVars()
         .then(() => {
-          Vue.prototype.$isEle = true;
+          this.$isEle = true;
           ga('send', 'event', 'DocView', 'Inner');
         })
         .catch((err) => {
