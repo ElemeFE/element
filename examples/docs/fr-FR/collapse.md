@@ -128,4 +128,4 @@ En plus de l'utilisation de l'attribut `title`, vous pouvez configurer les titre
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | name      | Identifiant unique du panneau. | string/number | — | — |
 | title     | Titre du panneau.              | string        | — | — |
-| disabled  | disable the collapse item      | boolean       | — | — |
+| disabled  | Désactive le panneau.          | boolean       | — | — |
