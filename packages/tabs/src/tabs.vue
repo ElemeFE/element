@@ -18,7 +18,9 @@
       tabPosition: {
         type: String,
         default: 'top'
-      }
+      },
+      listClass: String,
+      listItemClass: String
     },
 
     provide() {
