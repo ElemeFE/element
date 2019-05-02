@@ -28,18 +28,19 @@
                   :placeholder="t('el.datepicker.startDate')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleDate"
-                  @input.native="handleDateInput($event, 'min')"
-                  @change.native="handleDateChange($event, 'min')" />
+                  @input="val => handleDateInput(val, 'min')"
+                  @change="val => handleDateChange(val, 'min')" />
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMinTimeClose">
                 <el-input
                   size="small"
+                  class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
-                  class="el-date-range-picker__editor"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = true"
-                  @change.native="handleTimeChange($event, 'min')" />
+                  @input="val => handleTimeInput(val, 'min')"
+                  @change="val => handleTimeChange(val, 'min')" />
                 <time-picker
                   ref="minTimePicker"
                   @pick="handleMinTimePick"
@@ -54,25 +55,25 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
                   size="small"
+                  class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endDate')"
-                  class="el-date-range-picker__editor"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
-                  @input.native="handleDateInput($event, 'max')"
-                  @change.native="handleDateChange($event, 'max')" />
+                  @input="val => handleDateInput(val, 'max')"
+                  @change="val => handleDateChange(val, 'max')" />
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMaxTimeClose">
                 <el-input
                   size="small"
-                  :disabled="rangeState.selecting"
-                  ref="maxInput"
-                  :placeholder="t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
+                  :disabled="rangeState.selecting"
+                  :placeholder="t('el.datepicker.endTime')"
                   :value="maxVisibleTime"
-                  @focus="minDate && (maxTimePickerVisible = true)"
                   :readonly="!minDate"
-                  @change.native="handleTimeChange($event, 'max')" />
+                  @focus="minDate && (maxTimePickerVisible = true)"
+                  @input="val => handleTimeInput(val, 'max')"
+                  @change="val => handleTimeChange(val, 'max')" />
                 <time-picker
                   ref="maxTimePicker"
                   @pick="handleMaxTimePick"
@@ -196,9 +197,10 @@
     nextYear,
     prevMonth,
     nextMonth,
+    nextDate,
     extractDateFormat,
     extractTimeFormat
-  } from '../util';
+  } from 'element-ui/src/utils/date-util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
@@ -206,17 +208,13 @@
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
 
-  const advanceDate = (date, amount) => {
-    return new Date(new Date(date).getTime() + amount);
-  };
-
   const calcDefaultValue = (defaultValue) => {
     if (Array.isArray(defaultValue)) {
       return [new Date(defaultValue[0]), new Date(defaultValue[1])];
     } else if (defaultValue) {
-      return [new Date(defaultValue), advanceDate(defaultValue, 24 * 60 * 60 * 1000)];
+      return [new Date(defaultValue), nextDate(new Date(defaultValue), 1)];
     } else {
-      return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
+      return [new Date(), nextDate(new Date(), 1)];
     }
   };
 
@@ -263,19 +261,27 @@
       },
 
       minVisibleDate() {
-        return this.minDate ? formatDate(this.minDate, this.dateFormat) : '';
+        if (this.dateUserInput.min !== null) return this.dateUserInput.min;
+        if (this.minDate) return formatDate(this.minDate, this.dateFormat);
+        return '';
       },
 
       maxVisibleDate() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.dateFormat) : '';
+        if (this.dateUserInput.max !== null) return this.dateUserInput.max;
+        if (this.maxDate || this.minDate) return formatDate(this.maxDate || this.minDate, this.dateFormat);
+        return '';
       },
 
       minVisibleTime() {
-        return this.minDate ? formatDate(this.minDate, this.timeFormat) : '';
+        if (this.timeUserInput.min !== null) return this.timeUserInput.min;
+        if (this.minDate) return formatDate(this.minDate, this.timeFormat);
+        return '';
       },
 
       maxVisibleTime() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.timeFormat) : '';
+        if (this.timeUserInput.max !== null) return this.timeUserInput.max;
+        if (this.maxDate || this.minDate) return formatDate(this.maxDate || this.minDate, this.timeFormat);
+        return '';
       },
 
       timeFormat() {
@@ -330,12 +336,22 @@
         maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
-        unlinkPanels: false
+        unlinkPanels: false,
+        dateUserInput: {
+          min: null,
+          max: null
+        },
+        timeUserInput: {
+          min: null,
+          max: null
+        }
       };
     },
 
     watch: {
       minDate(val) {
+        this.dateUserInput.min = null;
+        this.timeUserInput.min = null;
         this.$nextTick(() => {
           if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
             const format = 'HH:mm:ss';
@@ -354,6 +370,8 @@
       },
 
       maxDate(val) {
+        this.dateUserInput.max = null;
+        this.timeUserInput.max = null;
         if (val && this.$refs.maxTimePicker) {
           this.$refs.maxTimePicker.date = val;
           this.$refs.maxTimePicker.value = val;
@@ -433,8 +451,8 @@
         this.rangeState = val.rangeState;
       },
 
-      handleDateInput(event, type) {
-        const value = event.target.value;
+      handleDateInput(value, type) {
+        this.dateUserInput[type] = value;
         if (value.length !== this.dateFormat.length) return;
         const parsedValue = parseDate(value, this.dateFormat);
 
@@ -444,19 +462,22 @@
             return;
           }
           if (type === 'min') {
-            this.minDate = new Date(parsedValue);
+            this.minDate = modifyDate(this.minDate || new Date(), parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
             this.leftDate = new Date(parsedValue);
-            this.rightDate = nextMonth(this.leftDate);
+            if (!this.unlinkPanels) {
+              this.rightDate = nextMonth(this.leftDate);
+            }
           } else {
-            this.maxDate = new Date(parsedValue);
-            this.leftDate = prevMonth(parsedValue);
+            this.maxDate = modifyDate(this.maxDate || new Date(), parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
             this.rightDate = new Date(parsedValue);
+            if (!this.unlinkPanels) {
+              this.leftDate = prevMonth(parsedValue);
+            }
           }
         }
       },
 
-      handleDateChange(event, type) {
-        const value = event.target.value;
+      handleDateChange(value, type) {
         const parsedValue = parseDate(value, this.dateFormat);
         if (parsedValue) {
           if (type === 'min') {
@@ -473,8 +494,23 @@
         }
       },
 
-      handleTimeChange(event, type) {
-        const value = event.target.value;
+      handleTimeInput(value, type) {
+        this.timeUserInput[type] = value;
+        if (value.length !== this.timeFormat.length) return;
+        const parsedValue = parseDate(value, this.timeFormat);
+
+        if (parsedValue) {
+          if (type === 'min') {
+            this.minDate = modifyTime(this.minDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
+            this.$nextTick(_ => this.$refs.minTimePicker.adjustSpinners());
+          } else {
+            this.maxDate = modifyTime(this.maxDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
+            this.$nextTick(_ => this.$refs.maxTimePicker.adjustSpinners());
+          }
+        }
+      },
+
+      handleTimeChange(value, type) {
         const parsedValue = parseDate(value, this.timeFormat);
         if (parsedValue) {
           if (type === 'min') {

@@ -121,6 +121,7 @@ loadingDirective.install = Vue => {
         el.mask.parentNode.removeChild(el.mask);
         toggleLoading(el, { value: false, modifiers: binding.modifiers });
       }
+      el.instance && el.instance.$destroy();
     }
   });
 };

@@ -13,7 +13,7 @@
   max-width: 100%;
   background-color: $--color-white;
   font-size: 14px;
-  color: $--table-text-color;
+  color: $--table-font-color;
 
   // 数据为空
   @include e(empty-block) {
@@ -27,6 +27,9 @@
   }
 
   @include e(empty-text) {
+    // min-height doesn't work in IE10 and IE11 https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
+    // set empty text line height up to contrainer min-height as workaround.
+    line-height: 60px;
     width: 50%;
     color: $--color-text-secondary;
   }
@@ -73,6 +76,11 @@
     }
   }
 
+  @include e(placeholder) {
+    display: inline-block;
+    width: 20px;
+  }
+
   @include m(fit) {
     border-right: 0;
     border-bottom: 0;
@@ -95,7 +103,7 @@
   }
 
   thead {
-    color: $--table-header-color;
+    color: $--table-header-font-color;
     font-weight: 500;
 
     &.is-group {
@@ -176,7 +184,7 @@
     white-space: nowrap;
     overflow: hidden;
     user-select: none;
-    background-color: $--table-header-background;
+    background-color: $--table-header-background-color;
 
     div {
       display: inline-block;
@@ -358,8 +366,8 @@
 
     & tbody td {
       border-top: $--table-border;
-      background-color: $--table-row-hover-background;
-      color: $--table-text-color;
+      background-color: $--table-row-hover-background-color;
+      color: $--table-font-color;
     }
   }
 
@@ -391,8 +399,8 @@
     overflow: hidden;
 
     & tbody td {
-      background-color: $--table-row-hover-background;
-      color: $--table-text-color;
+      background-color: $--table-row-hover-background-color;
+      color: $--table-font-color;
     }
   }
 
@@ -486,7 +494,7 @@
         }
 
         &.current-row td {
-          background-color: $--table-current-row-background;
+          background-color: $--table-current-row-background-color;
         }
       }
     }
@@ -497,14 +505,14 @@
       &, &.el-table__row--striped {
         &, &.current-row {
           > td {
-            background-color: $--table-current-row-background;
+            background-color: $--table-current-row-background-color;
           }
         }
       }
     }
 
     tr.current-row > td {
-      background-color: $--table-current-row-background;
+      background-color: $--table-current-row-background-color;
     }
   }
 
@@ -538,7 +546,7 @@
 
   @include m(enable-row-hover) {
     .el-table__body tr:hover > td {
-      background-color: $--table-row-hover-background;
+      background-color: $--table-row-hover-background-color;
     }
   }
 
@@ -547,6 +555,15 @@
     .el-table__fixed-right {
       bottom: 0;
       overflow: hidden;
+    }
+  }
+
+  [class*=el-table__row--level] {
+    .el-table__expand-icon {
+      display: inline-block;
+      width: 14px;
+      vertical-align: middle;
+      margin-right: 5px;
     }
   }
 }

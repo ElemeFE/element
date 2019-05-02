@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export function noop() {};
@@ -109,4 +111,35 @@ export const coerceTruthyValueToArray = function(val) {
   } else {
     return [];
   }
+};
+
+export const isIE = function() {
+  return !Vue.prototype.$isServer && !isNaN(Number(document.documentMode));
+};
+
+export const isEdge = function() {
+  return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Edge') > -1;
+};
+
+export const autoprefixer = function(style) {
+  if (typeof style !== 'object') return style;
+  const rules = ['transform', 'transition', 'animation'];
+  const prefixes = ['ms-', 'webkit-'];
+  rules.forEach(rule => {
+    const value = style[rule];
+    if (rule && value) {
+      prefixes.forEach(prefix => {
+        style[prefix + rule] = value;
+      });
+    }
+  });
+  return style;
+};
+
+export const kebabCase = function(str) {
+  const hyphenateRE = /([^-])([A-Z])/g;
+  return str
+    .replace(hyphenateRE, '$1-$2')
+    .replace(hyphenateRE, '$1-$2')
+    .toLowerCase();
 };

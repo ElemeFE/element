@@ -1,56 +1,3 @@
-<style>
-  .demo-box.demo-menu {
-    .el-menu-demo {
-      padding-left: 55px;
-    }
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-      width: 240px;
-      min-height: 400px;
-    }
-    .line {
-      height: 1px;
-      background-color: #e0e6ed;
-      margin: 35px -24px;
-    }
-    h5 {
-      font-size: 14px;
-      color: #8492a6;
-      margin-top: 10px;
-    }
-    .tac {
-      text-align: center;
-
-      .el-menu-vertical-demo {
-        display: inline-block;
-        text-align: left;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1',
-        isCollapse: true
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>
-
 ## NavMenu 导航菜单
 
 为网站提供导航功能的菜单。
@@ -312,7 +259,7 @@
 | collapse-transition  | 是否开启折叠动画 | boolean   | — | true   |
 
 ### Menu Methods
-| 事件名称      | 说明    | 参数      |
+| 方法名称      | 说明    | 参数      |
 |---------- |-------- |---------- |
 | open  | 展开指定的 sub-menu | index: 需要打开的 sub-menu 的 index |
 | close  | 收起指定的 sub-menu | index: 需要收起的 sub-menu 的 index |
@@ -327,7 +274,7 @@
 ### SubMenu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | 唯一标志   | string  | — | — |
+| index     | 唯一标志   | string/null  | — | null |
 | popper-class | 弹出菜单的自定义类名 | string | — | — |
 | show-timeout | 展开 sub-menu 的延时 | number | — | 300 |
 | hide-timeout | 收起 sub-menu 的延时 | number | — | 300 |

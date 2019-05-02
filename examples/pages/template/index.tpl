@@ -130,11 +130,18 @@
     width: 1140px;
 
     .container {
-      @utils-clearfix;
       padding: 0;
       margin: 0 -11px;
       width: auto;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
     }
+
 
     li {
       width: 33.33333%;
@@ -294,13 +301,6 @@
         <div>
           <p>Sponsored by Tipe.io</p>
           <p>Next Generation API-first CMS</p>
-        </div>
-      </a>
-      <a class="sponsor" href="https://www.duotai.net/?utm_source=element" target="_blank">
-        <img width="42px" src="~examples/assets/images/duotai.svg" alt="duotai">
-        <div>
-          <p>Sponsored by 多态</p>
-          <p>多元化的数据收集和整理工具</p>
         </div>
       </a>
       <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">

@@ -1,150 +1,14 @@
-<script>
-  export default {
-    data() {
-      return {
-        links: [],
-        input: '',
-        input1: '',
-        input2: '',
-        input21: '',
-        input22: '',
-        input23: '',
-        input3: '',
-        input4: '',
-        input5: '',
-        input6: '',
-        input7: '',
-        input8: '',
-        input9: '',
-        textarea: '',
-        textarea2: '',
-        textarea3: '',
-        select: '',
-        state1: '',
-        state2: '',
-        state3: '',
-        state4: ''
-      };
-    },
-    methods: {
-      loadAll() {
-        return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-        ];
-      },
-      querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-
-        cb(results);
-      },
-      querySearchAsync(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          cb(results);
-        }, 3000 * Math.random());
-      },
-      createStateFilter(queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item) {
-        console.log(item);
-      },
-      handleIconClick(ev) {
-        console.log(ev);
-      }
-    },
-    mounted() {
-      this.links = this.loadAll();
-    }
-  };
-</script>
-
-<style>
-  .demo-input.demo-es {
-    .el-select .el-input {
-      width: 130px;
-    }
-    .el-input {
-      width: 180px;
-    }
-    .el-textarea {
-      width: 414px;
-    }
-    .el-input-group {
-      width: 100%;
-    }
-    .demo-input-size {
-      .el-input {
-        vertical-align: top;
-        margin: 0 10px 10px 0;
-      }
-    }
-    .demo-input-suffix {
-      padding: 10px;
-    }
-    .demo-input-suffix .el-input {
-      margin-right: 15px;
-    }
-    .demo-input-label {
-      display: inline-block;
-      width: 130px;
-    }
-    .input-with-select .el-input-group__prepend {
-      background-color: #fff;
-    }
-    .demo-autocomplete {
-      text-align: center;
-
-      .sub-title {
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #8492a6;
-      }
-    
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
-      }
-    
-      .el-autocomplete {
-        text-align: left;
-      }
-    }
-  }
-  .el-autocomplete-suggestion.my-autocomplete {
-    li {
-      line-height: normal;
-      padding: 7px *;
-
-      .name {
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .addr {
-        font-size: 12px;
-        color: #b4b4b4;
-      }
-      .highlighted .addr {
-        color: #ddd;
-      }
-    }
-  }
-</style>
-
 ## Input
 
 Ingresa datos usando el ratón o teclado.
+
+:::warning
+Input es un componente controlado, **siempre muestra el valor de enlace Vue**.
+
+Bajo circunstancias normales, el evento "input" debe ser manejado. Su handler debe actualizar el valor de enlace del componente (o usar `v-model`). De lo contrario, el valor del cuadro de entrada no cambiará.
+
+No admite modificadores `v-model`.
+:::
 
 ### Uso básico
 
@@ -173,7 +37,7 @@ export default {
 ```html
 <el-input
   placeholder="Please input"
-  v-model="input1"
+  v-model="input"
   :disabled="true">
 </el-input>
 
@@ -181,13 +45,55 @@ export default {
 export default {
   data() {
     return {
-      input1: ''
+      input: ''
     }
   }
 }
 </script>
 ```
 
+:::
+
+### Clearable
+
+:::demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input"
+  clearable>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Password box
+
+:::demo Haga un input de contraseña conmutable con el atributo `show-password`.
+
+```html
+<el-input placeholder="Please input password" v-model="input" show-password></el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input: ''
+      }
+    }
+  }
+</script>
+```
 :::
 
 ### Input con icono
@@ -202,24 +108,24 @@ Añada un icono para indicar el tipo de Input.
   <el-input
     placeholder="Pick a date"
     suffix-icon="el-icon-date"
-    v-model="input2">
+    v-model="input1">
   </el-input>
   <el-input
     placeholder="Type something"
     prefix-icon="el-icon-search"
-    v-model="input21">
+    v-model="input2">
   </el-input>
 </div>
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using slots</span>
   <el-input
     placeholder="Pick a date"
-    v-model="input22">
+    v-model="input3">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
   </el-input>
   <el-input
     placeholder="Type something"
-    v-model="input23">
+    v-model="input4">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
@@ -235,10 +141,10 @@ Añada un icono para indicar el tipo de Input.
 export default {
   data() {
     return {
+      input1: '',
       input2: '',
-      input21: '',
-      input22: '',
-      input23: ''
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -285,22 +191,22 @@ El ajuste del prop `autosize` en el tipo de Input textarea hace que la altura se
   type="textarea"
   autosize
   placeholder="Please input"
-  v-model="textarea2">
+  v-model="textarea1">
 </el-input>
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="Please input"
-  v-model="textarea3">
+  v-model="textarea2">
 </el-input>
 
 <script>
 export default {
   data() {
     return {
-      textarea2: '',
-      textarea3: ''
+      textarea1: '',
+      textarea2: ''
     }
   }
 }
@@ -317,17 +223,17 @@ Añade un elemento antes o después del input, generalmente una etiqueta o un bo
 
 ```html
 <div>
-  <el-input placeholder="Please input" v-model="input3">
+  <el-input placeholder="Please input" v-model="input1">
     <template slot="prepend">Http://</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input4">
+  <el-input placeholder="Please input" v-model="input2">
     <template slot="append">.com</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
+  <el-input placeholder="Please input" v-model="input3" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="Select">
       <el-option label="Restaurant" value="1"></el-option>
       <el-option label="Order No." value="2"></el-option>
@@ -349,9 +255,9 @@ Añade un elemento antes o después del input, generalmente una etiqueta o un bo
 export default {
   data() {
     return {
+      input1: '',
+      input2: '',
       input3: '',
-      input4: '',
-      input5: '',
       select: ''
     }
   }
@@ -369,22 +275,22 @@ export default {
 <div class="demo-input-size">
   <el-input
     placeholder="Please Input"
-    v-model="input6">
+    v-model="input1">
   </el-input>
   <el-input
     size="medium"
     placeholder="Please Input"
-    v-model="input7">
+    v-model="input2">
   </el-input>
   <el-input
     size="small"
     placeholder="Please Input"
-    v-model="input8">
+    v-model="input3">
   </el-input>
   <el-input
     size="mini"
     placeholder="Please Input"
-    v-model="input9">
+    v-model="input4">
   </el-input>
 </div>
 
@@ -392,10 +298,10 @@ export default {
 export default {
   data() {
     return {
-      input6: '',
-      input7: '',
-      input8: '',
-      input9: ''
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: ''
     }
   }
 }
@@ -488,7 +394,7 @@ Personalice cómo se muestran las sugerencias.
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
-  v-model="state3"
+  v-model="state"
   :fetch-suggestions="querySearch"
   placeholder="Please input"
   @select="handleSelect">
@@ -526,7 +432,7 @@ Personalice cómo se muestran las sugerencias.
     data() {
       return {
         links: [],
-        state3: ''
+        state: ''
       };
     },
     methods: {
@@ -576,7 +482,7 @@ Búsqueda de datos desde el servidor.
 
 ```html
 <el-autocomplete
-  v-model="state4"
+  v-model="state"
   :fetch-suggestions="querySearchAsync"
   placeholder="Please input"
   @select="handleSelect"
@@ -586,7 +492,7 @@ Búsqueda de datos desde el servidor.
     data() {
       return {
         links: [],
-        state4: '',
+        state: '',
         timeout:  null
       };
     },
@@ -629,15 +535,54 @@ Búsqueda de datos desde el servidor.
 
 :::
 
+### Limit length
+
+:::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+
+```html
+<el-input
+  type="text"
+  placeholder="Please input"
+  v-model="text"
+  maxlength="10"
+  show-word-limit
+>
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  placeholder="Please input"
+  v-model="textarea"
+  maxlength="30"
+  show-word-limit
+>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      text: '',
+      textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Input atributos
 
 | Atributo      | Descripción                                                                                                                                      | Tipo             | Valores aceptados                                                                                                                       | Por defecto |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | type          | tipo de input                                                                                                                                    | string           | text, textarea y otros [tipos de entrada nativos](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/input#Form_%3Cinput%3E_types) | text        |
-| value         | valor enlazado                                                                                                                                   | string / number  | —                                                                                                                                       | —           |
+| value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
+| show-word-limit | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
+| clearable | si debe mostrar el boton de limpieza | boolean | — | false |
+| show-password | si debe mostrar la posibilidad de conmutacion de password input | boolean         | — | false |
 | disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
 | size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
 | prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |
@@ -704,6 +649,8 @@ Búsqueda de datos desde el servidor.
 | suffix-icon           | suffix icon class                                                                                                                                  | string                          | —                                                              | —            |
 | hide-loading          | si se debe ocultar el icono de loading en la búsqueda remota                                                                                       | boolean                         | —                                                              | false        |
 | popper-append-to-body | si añadir el desplegable al cuerpo. Si la posición del menú desplegable es incorrecta, puede intentar establecer este prop a false                 | boolean                         | -                                                              | true         |
+| validate-event        | si se debe lanzar la validación de formulario                                                                                                                 | boolean                         | -                                                   | true         |
+| highlight-first-item | si se debe resaltar el primer elemento en las sugerencias de búsqueda remota de forma predeterminada                 | boolean                         | -                                                              | false         |
 
 ### Autocomplete Slots
 

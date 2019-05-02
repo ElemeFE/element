@@ -61,12 +61,17 @@ import { ElTableColumn } from './table-column'
 import { ElTag } from './tag'
 import { ElTabs } from './tabs'
 import { ElTabPane } from './tab-pane'
+import { ElTimeline } from './timeline'
+import { ElTimelineItem } from './timeline-item'
 import { ElTimePicker } from './time-picker'
 import { ElTimeSelect } from './time-select'
 import { ElTooltip } from './tooltip'
 import { ElTransfer } from './transfer'
 import { ElTree } from './tree'
 import { ElUpload } from './upload'
+import { ElDivider } from './divider'
+import { ElCalendar } from './calendar'
+import { ElImage } from './image'
 
 export interface InstallationOptions {
   locale: any,
@@ -275,6 +280,12 @@ export class TabPane extends ElTabPane {}
 /** Tag Component */
 export class Tag extends ElTag {}
 
+/** Timeline Component */
+export class Timeline extends ElTimeline {}
+
+/** Timeline Item Component */
+export class TimelineItem extends ElTimelineItem {}
+
 /** TimePicker Component */
 export class TimePicker extends ElTimePicker {}
 
@@ -292,3 +303,6 @@ export class Tree extends ElTree {}
 
 /** Upload Component */
 export class Upload extends ElUpload {}
+
+/** Divider Component */
+export class Divider extends ElDivider {}

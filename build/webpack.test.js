@@ -1,9 +1,11 @@
 const path = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const config = require('./config');
 
 const webpackConfig = {
+  mode: 'development',
   entry: {
     app: ['./src/index.js']
   },
@@ -20,17 +22,8 @@ const webpackConfig = {
     }),
     modules: ['node_modules']
   },
-  devtool: '#inline-source-map',
   module: {
     rules: [
-      {
-        enforce: 'post',
-        test: /\.jsx?$/,
-        loader: 'isparta-loader',
-        options: { esModules: true },
-        exclude: config.jsexclude,
-        include: /src|packages/
-      },
       {
         test: /\.(jsx?|babel|es6)$/,
         include: process.cwd(),
@@ -41,42 +34,17 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-            js: process.env.CI_ENV ? 'isparta-loader' : 'isparta-loader!eslint-loader'
-          },
-          preserveWhitespace: false
+          compilerOptions: {
+            preserveWhitespace: false
+          }
         }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader']
+        loaders: ['style-loader', 'css-loader']
       },
       {
-        test: /\.html$/,
-        loader: 'html-loader?minimize=false'
-      },
-      {
-        test: /\.otf|ttf|woff2?|eot(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.svg(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(gif|png|jpe?g)(\?\S*)?$/,
+        test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
@@ -86,6 +54,7 @@ const webpackConfig = {
     ]
   },
   plugins: [
+    new VueLoaderPlugin()
   ]
 };
 

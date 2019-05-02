@@ -103,6 +103,9 @@ export default {
       filterPlaceholder: 'Indtast søgeord',
       noCheckedFormat: '{total} emner',
       hasCheckedFormat: '{checked}/{total} valgt'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

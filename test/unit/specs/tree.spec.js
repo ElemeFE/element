@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 const DELAY = 10;
 
@@ -202,14 +202,11 @@ describe('Tree', () => {
     });
   });
 
-  it('current-node-key', done => {
-    vm = getTreeVm(':props="defaultProps" :current-node-key="1"');
-    const firstNode = document.querySelector('.el-tree-node');
-    firstNode.click();
-    vm.$nextTick(() => {
-      expect(firstNode.classList.contains('is-current')).to.true;
-      done();
-    });
+  it('current-node-key', () => {
+    vm = getTreeVm(':props="defaultProps" default-expand-all highlight-current node-key="id" :current-node-key="11"');
+    const currentNodeLabel = document.querySelector('.is-current .el-tree-node__label').textContent;
+
+    expect(currentNodeLabel).to.be.equal('二级 1-1');
   });
 
   it('defaultExpandAll', () => {
@@ -326,12 +323,10 @@ describe('Tree', () => {
   });
 
   it('check', done => {
+    const spy = sinon.spy();
     vm = getTreeVm(':props="defaultProps" show-checkbox @check="handleCheck"', {
       methods: {
-        handleCheck(data, args) {
-          this.data = data;
-          this.args = args;
-        }
+        handleCheck: spy
       }
     });
     const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
@@ -339,8 +334,10 @@ describe('Tree', () => {
     expect(nodeCheckbox).to.be.exist;
     nodeCheckbox.click();
     setTimeout(() => {
-      expect(vm.args.checkedNodes.length).to.equal(3);
-      expect(vm.data.id).to.equal(2);
+      expect(spy.calledOnce).to.be.true;
+      const [data, args] = spy.args[0];
+      expect(data.id).to.equal(2);
+      expect(args.checkedNodes.length).to.equal(3);
       done();
     }, 10);
   });
@@ -362,31 +359,31 @@ describe('Tree', () => {
     }, 10);
   });
 
-  it('setCheckedKeys', () => {
+  it('setCheckedKeys', async() => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([111]);
+    await waitImmediate();
     expect(tree.getCheckedNodes().length).to.equal(3);
     expect(tree.getCheckedKeys().length).to.equal(3);
 
     tree.setCheckedKeys([1]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(3);
-      expect(tree.getCheckedKeys().length).to.equal(3);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
 
     tree.setCheckedKeys([2]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(3);
-      expect(tree.getCheckedKeys().length).to.equal(3);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
 
     tree.setCheckedKeys([21]);
+    await waitImmediate();
     expect(tree.getCheckedNodes().length).to.equal(1);
     expect(tree.getCheckedKeys().length).to.equal(1);
   });
 
-  it('setCheckedKeys with checkStrictly', () => {
+  it('setCheckedKeys with checkStrictly', async() => {
     vm = getTreeVm(':props="defaultProps" checkStrictly show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([111]);
@@ -394,18 +391,17 @@ describe('Tree', () => {
     expect(tree.getCheckedKeys().length).to.equal(1);
 
     tree.setCheckedKeys([1]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(1);
-      expect(tree.getCheckedKeys().length).to.equal(1);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(1);
+    expect(tree.getCheckedKeys().length).to.equal(1);
 
     tree.setCheckedKeys([2]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(1);
-      expect(tree.getCheckedKeys().length).to.equal(1);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(1);
+    expect(tree.getCheckedKeys().length).to.equal(1);
 
     tree.setCheckedKeys([21, 22]);
+    await waitImmediate();
     expect(tree.getCheckedNodes().length).to.equal(2);
     expect(tree.getCheckedKeys().length).to.equal(2);
   });
@@ -422,24 +418,22 @@ describe('Tree', () => {
     expect(tree.getCheckedKeys().length).to.equal(0);
   });
 
-  it('setCheckedKeys with leafOnly=false', () => {
+  it('setCheckedKeys with leafOnly=false', async() => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([1, 11, 111, 2], false);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(6);
-      expect(tree.getCheckedKeys().length).to.equal(6);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(6);
+    expect(tree.getCheckedKeys().length).to.equal(6);
   });
 
-  it('setCheckedKeys with leafOnly=true', () => {
+  it('setCheckedKeys with leafOnly=true', async() => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([2], true);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(2);
-      expect(tree.getCheckedKeys().length).to.equal(2);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(2);
+    expect(tree.getCheckedKeys().length).to.equal(2);
   });
 
   it('setCurrentKey', (done) => {
@@ -500,10 +494,13 @@ describe('Tree', () => {
   it('remove', (done) => {
     vm = getTreeVm(':props="defaultProps" node-key="id"');
     const tree = vm.$children[0];
+    tree.setCurrentKey(1);
+    expect(tree.getCurrentNode().id).to.equal(1);
     tree.remove(1);
     vm.$nextTick(() => {
       expect(vm.data[0].id).to.equal(2);
       expect(tree.getNode(1)).to.equal(null);
+      expect(tree.getCurrentNode()).to.equal(null);
       done();
     });
   });
@@ -581,7 +578,7 @@ describe('Tree', () => {
     expect(firstNode.querySelector('.custom-content')).to.exist;
     const button = firstNode.querySelector('.custom-content .el-button');
     expect(button).to.exist;
-    expect(button.textContent).to.equal('一级 1');
+    expect(button.querySelector('span').textContent).to.equal('一级 1');
   });
 
   it('scoped slot', () => {

@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Įvesk raktažodį',
       noCheckedFormat: 'Viso: {total}',
       hasCheckedFormat: 'Pažymėta {checked} iš {total}'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

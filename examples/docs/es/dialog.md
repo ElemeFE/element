@@ -1,78 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        gridData: [{
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-03',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }],
-        dialogVisible: false,
-        dialogTableVisible: false,
-        dialogFormVisible: false,
-        outerVisible: false,
-        innerVisible: false,
-        centerDialogVisible: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
-      };
-    },
-    methods: {
-      handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-dialog {
-    .dialog-footer button:first-child {
-      margin-right: 10px;
-    }
-    .full-image {
-      width: 100%;
-    }
-    .el-dialog__wrapper {
-      margin: 0;
-    }
-    .el-select {
-      width: 300px;
-    }
-    .el-input {
-      width: 300px;
-    }
-    .el-button--text {
-      margin-right: 15px;
-    }
-  }
-</style>
-
 ## Dialog
 
 Informar a usuarios preservando el estado de la página actual.
@@ -276,7 +201,7 @@ El contenido de Diálogo se puede centrar.
 :::
 
 :::tip
-The content of Dialog is lazily rendered, which means the default slot is not rendered onto the DOM until it is firstly opened. Therefore, if you need to perform a DOM manipulation or access a component using `ref`, do it in the `open` event callback.
+El contenido de Dialog se renderiza en modo lazy, lo que significa que la ranura por defecto no se renderiza en el DOM hasta que se abre por primera vez. Por lo tanto, si necesita realizar una manipulación DOM o acceder a un componente mediante ref, hágalo en el callback del evento `open`.
 :::
 
 :::tip

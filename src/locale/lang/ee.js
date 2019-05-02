@@ -82,7 +82,7 @@ export default {
       error: 'Vigane sisend'
     },
     upload: {
-      deleteTip: 'Vajuta kustuta et eemaldada',
+      deleteTip: 'Vajuta "Kustuta", et eemaldada',
       delete: 'Kustuta',
       preview: 'Eelvaate',
       continue: 'Jätka'
@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Sisesta märksõna',
       noCheckedFormat: '{total} objekti',
       hasCheckedFormat: '{checked}/{total} valitud'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };
