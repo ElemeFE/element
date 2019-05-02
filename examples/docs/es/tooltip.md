@@ -190,6 +190,7 @@ Es necesario envolver los elementos de forma deshabilitados en un elemento conte
 | visible-arrow  | si una flecha es mostrada. Para mayor información, revisar la página de [Vue-popper](https://github.com/element-component/vue-popper) | boolean | —                                        | true                                     |
 | popper-options | parámetros de [popper.js](https://popper.js.org/documentation.html) | Object  | referirse a la documentación de [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | open-delay     | retraso de la apariencia, en milisegundos | number  | —                                        | 0                                        |
+| close-delay    | retraso de la desapariencia, en milisegundos | number  | —                                        | 0                                        |
 | manual         | si el Tooltipo será controlado de forma manual. `mouseenter` y `mouseleave` no tendrán efecto si fue establecido como `true` | boolean | —                                        | false                                    |
 | popper-class   | nombre de clase personalizada para el popper del Tooltip | string  | —                                        | —                                        |
 | enterable      | si el mouse puede entrar al Tooltip      | Boolean | —                                        | true                                     |

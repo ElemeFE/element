@@ -152,6 +152,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  popper-options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 |  popper-class        |  custom class name for popover | string | — | — |
 |  open-delay        | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
+|  close-delay       | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
 |  tabindex          | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Popover | number | — | 0 |
 
 ### Slot
