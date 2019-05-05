@@ -212,8 +212,7 @@
         validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
-
-          callback(this.validateMessage, invalidFields);
+          callback(this.validateMessage, invalidFields, errors);
           this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
       },
