@@ -116,8 +116,8 @@
         // if no callback, return promise
         if (typeof callback !== 'function' && window.Promise) {
           promise = new window.Promise((resolve, reject) => {
-            callback = function(valid, invalidFields, errorList) {
-              valid ? resolve([valid, null, null]) : reject([valid, invalidFields, errorList]);
+            callback = function(valid) {
+              valid ? resolve(valid) : reject(valid);
             };
           });
         }
