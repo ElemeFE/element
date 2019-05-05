@@ -306,3 +306,6 @@ export class Upload extends ElUpload {}
 
 /** Divider Component */
 export class Divider extends ElDivider {}
+
+/** Divider Component */
+export class Link extends ElLink {}
