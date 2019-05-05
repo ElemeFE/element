@@ -185,7 +185,7 @@ if (!Vue.prototype.$isServer) {
       if (topPopup && topPopup.closeOnPressEscape) {
         topPopup.handleClose
           ? topPopup.handleClose()
-          : (topPopup.handleAction ? topPopup.handleAction('cancel') : topPopup.close());
+          : (topPopup.handleAction ? topPopup.handleAction('close') : topPopup.close());
       }
     }
   });
