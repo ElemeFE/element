@@ -116,8 +116,8 @@
         // if no callback, return promise
         if (typeof callback !== 'function' && window.Promise) {
           promise = new window.Promise((resolve, reject) => {
-            callback = function(valid) {
-              valid ? resolve(valid) : reject(valid);
+            callback = function(valid, invalidFields, errorList) {
+              valid ? resolve([valid, null, null]) : reject([valid, invalidFields, errorList]);
             };
           });
         }
@@ -129,14 +129,21 @@
           callback(true);
         }
         let invalidFields = {};
+        let errorList = [];
         this.fields.forEach(field => {
-          field.validate('', (message, field) => {
+          field.validate('', (message, field, error) => {
+            // only collect error-related info when necessary
             if (message) {
               valid = false;
+              if (Array.isArray(error)) {
+                errorList = errorList.concat(error);
+              } else {
+                errorList.push(error);
+              }
+              invalidFields = objectAssign({}, invalidFields, field);
             }
-            invalidFields = objectAssign({}, invalidFields, field);
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid, invalidFields);
+              callback(valid, invalidFields, errorList);
             }
           });
         });
