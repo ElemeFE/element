@@ -146,8 +146,8 @@ export default {
     },
 
     i18nDate() {
-      const year = this.formatedDate.slice(0, 4);
-      const month = Number(this.formatedDate.slice(5, 7));
+      const year = this.date.getFullYear();
+      const month = this.date.getMonth() + 1;
       return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`;
     },
 
