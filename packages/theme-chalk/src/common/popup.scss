@@ -1,3 +1,4 @@
+@import "./var.scss";
 @import "../mixins/mixins";
 
 .v-modal-enter {
@@ -31,7 +32,7 @@
   width: 100%;
   height: 100%;
   opacity: 0.5;
-  background: #000;
+  background: $--popup-modal-background-color;
 }
 
 @include b(popup-parent) {
