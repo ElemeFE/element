@@ -58,14 +58,11 @@
     },
 
     computed: {
-      _elFormItemSize() {
-        return (this.elFormItem || {}).elFormItemSize;
-      },
       buttonSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this.elFormItem.elFormItemSize || (this.$ELEMENT || {}).size;
       },
       buttonDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled || this.elForm.disabled;
       }
     },
 
