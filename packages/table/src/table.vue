@@ -367,6 +367,7 @@
           });
         });
       },
+
       onMouseLeaveRow() {
         setTimeout(() => {
           this.tableBodys.forEach((table) => {
@@ -377,6 +378,7 @@
           });
         });
       },
+      
       getMigratingConfig() {
         return {
           events: {
@@ -411,8 +413,7 @@
       },
 
       handleMouseLeave() {
-        this.store.commit('setHoverRow', null);
-        if (this.hoverState) this.hoverState = null;
+        this.onMouseLeaveRow();
       },
 
       updateScrollY() {

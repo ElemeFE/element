@@ -138,7 +138,6 @@ const TableStore = function(table, initialState = {}) {
     reserveSelection: false,
     selectable: null,
     currentRow: null,
-    hoverRow: null,
     filters: {},
     expandRows: [],
     defaultExpandAll: false,
@@ -376,10 +375,6 @@ TableStore.prototype.mutations = {
       this.updateColumns(); // hack for dynamics remove column
       this.scheduleLayout();
     }
-  },
-
-  setHoverRow(states, row) {
-    states.hoverRow = row;
   },
 
   setCurrentRow(states, row) {
