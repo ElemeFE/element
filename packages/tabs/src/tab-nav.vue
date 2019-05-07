@@ -207,6 +207,7 @@
           <div
             class={{
               'tm-tabs__item': true,
+              [this.rootTabs.listItemClass]: this.rootTabs.listItemClass,
               [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
@@ -235,7 +236,11 @@
         <div class={['tm-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
           <div class={['tm-tabs__nav-scroll']} ref="navScroll">
-            <div class="tm-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
+            <div class={['tm-tabs__nav', this.rootTabs.listClass ? this.rootTabs.listClass : '']}
+              ref="nav"
+              style={navStyle}
+              role="tablist"
+              on-keydown={ changeTab }>
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}
             </div>
