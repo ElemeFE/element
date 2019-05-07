@@ -1,9 +1,10 @@
 ## Image
-Besides the native features of img, support lazy load, custom placeholder and load failure, etc.
 
-### Basic Usage
+En plus des propriétés natives de img, ce composant supporte le lazy loading, les placeholder personnalisés, les échecs de téléchargement, etc.
 
-:::demo Indicate how the image should be resized to fit its container by `fit`, same as native [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)。
+### Usage basique
+
+:::demo Indique comment l'image devrait être redimmensionnée pour s'adapter à son conteneur grâce à `fit`, identique au [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) natif.
 ```html
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
@@ -30,18 +31,18 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 
 ### Placeholder
 
-:::demo Custom placeholder content when image hasn't loaded yet by `slot = placeholder`
+:::demo Placeholder personnalisé qui s'affiche lorsque l'image n'est pas encore chargée, grâce à `slot = placeholder`.
 ```html
 <div class="demo-image__placeholder">
   <div class="block">
-    <span class="demonstration">Default</span>
+    <span class="demonstration">Défaut</span>
     <el-image :src="src"></el-image>
   </div>
   <div class="block">
-    <span class="demonstration">Custom</span>
+    <span class="demonstration">Personnalisé</span>
     <el-image :src="src">
       <div slot="placeholder" class="image-slot">
-        Loading<span class="dot">...</span>
+        Chargement<span class="dot">...</span>
       </div>
     </el-image>
   </div>
@@ -59,17 +60,17 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 ```
 :::
 
-### Load Failed
+### Échec du chargement
 
-:::demo Custom failed content when error occurs to image load by `slot = error`
+:::demo Contenu personnalisé qui s'affiche lorsque le chargement a échoué, grâce à `slot = error`.
 ```html
 <div class="demo-image__error">
   <div class="block">
-    <span class="demonstration">Default</span>
+    <span class="demonstration">Défaut</span>
     <el-image></el-image>
   </div>
   <div class="block">
-    <span class="demonstration">Custom</span>
+    <span class="demonstration">Personnalisé</span>
     <el-image>
       <div slot="error" class="image-slot">
         <i class="el-icon-picture-outline"></i>
@@ -80,9 +81,9 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 ```
 :::
 
-### Lazy Load
+### Lazy Loading
 
-:::demo Use lazy load by `lazy = true`. Image will load until scroll into view when set. You can indicate scroll container that adds scroll listener to by `scroll-container`. If undefined, will be the nearest parent container whose overflow property is auto or scroll.
+:::demo Utilisez le lazy loading avec `lazy = true`. Les images ne se chargeront que lorsque le scrolling les atteindra. Vous pouvez indiquer le conteneur grâce à `scroll-container`. Si undefined, ce sera le conteneur parent le plus proche avec la propriété overflow à auto ou scroll.
 ```html
 <div class="demo-image__lazy">
   <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
@@ -108,25 +109,23 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 ```
 :::
 
-### Attributes
-| Attribute | Description | Type  | Accepted values | Default   |
+### Attributs
+| Attribut | Description | Type  | Valeurs acceptées | Défaut   |
 |---------- |-------- |---------- |-------------  |-------- |
-| src | Image source, same as native | string | — | - |
-| fit | Indicate how the image should be resized to fit its container, same as [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | fill / contain / cover / none / scale-down | — | - |
-| alt | Native alt | string | - | - |
-| lazy | Whether to use lazy load | boolean | — | false |
-| scroll-container | The container to add scroll listener when using lazy load | string / HTMLElement | — | The nearest parent container whose overflow property is auto or scroll |
+| src | Source de l'image, identique au natif. | string | — | - |
+| fit | Indique comment l'image devrait être redimmensionnée pour s'adapter à son conteneur, identique à [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | fill / contain / cover / none / scale-down | — | - |
+| alt | Attribut alt natif.| string | - | - |
+| lazy | Si le lazy loading doit être utilisé. | boolean | — | false |
+| scroll-container | Le conteneur auquel ajouter le listener du scroll en mode lazy loading. | string / HTMLElement | — | Le conteneur parent le plus proche avec la propriété overflow à auto ou scroll. |
 
-### Events
-| Event Name | Description | Parameters |
+### Évènements
+| Nom | Description | Paramètres |
 |---------- |-------- |---------- |
-| load | Same as native load | (e: Event) |
-| error | Same as native error | (e: Error) |
+| load | Identique au load natif. | (e: Event) |
+| error | Identique au error natif. | (e: Error) |
 
 ### Slots
-| Slot Name | Description |
+| Nom | Description |
 |---------|-------------|
-| placeholder | Triggers when image load |
-| error | Triggers when image load failed |
-
-
+| placeholder | Se déclenche quand l'image charge. |
+| error | Se déclenche quand le chargement de l'image a échoué. |

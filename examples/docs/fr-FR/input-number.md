@@ -1,6 +1,6 @@
 ## InputNumber
 
-Un champs d'input de valeurs numériques, avec un domaine personnalisable.
+Un champ d'input de valeurs numériques, avec un domaine personnalisable.
 
 ### Usage
 
@@ -69,9 +69,9 @@ Vous pouvez déterminer un pas pour le champs.
 ```
 :::
 
-### Step strictly
+### Pas strict
 
-:::demo The `step-strictly` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
+:::demo L'attribut `step-strictly` accepte un `boolean`. Si cet attribut est `true`, la valeur de l'input ne peut être qu'un multiple de `step`.
 
 ```html
 <template>
@@ -174,7 +174,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | min | La valeur minimale autorisée. | number | — | `-Infinity` |
 | max | La valeur maximale autorisée. | number | — | `Infinity` |
 | step | Le pas pour l'incrémentation. | number | — | 1 |
-| step-strictly | whether input value can only be multiple of step | number   | — | false |
+| step-strictly | Si la valeur ne peut être qu'un multiple du pas. | number   | — | false |
 | precision | La précision de la valeur. | number | — | — |
 | size | La taille du composant. | string | large/small| — |
 | disabled| Si le composant est désactivé. | boolean | — | false |
