@@ -47,7 +47,6 @@
     border: none;
     padding: 0 6px;
     background: transparent;
-
     font-size: 13px;
     letter-spacing: -0.1px;
     text-align: left;
@@ -57,13 +56,13 @@
       outline: none;
     }
 
-    &:hover {
-    }
-
     &.disabled {
-      /*color: $--pagination-button-disabled-color;
-      background-color: $--pagination-button-disabled-fill;*/
       cursor: not-allowed;
+      opacity: 0.5;
+
+      &:hover {
+        color: $--color-dark-gunmetal;
+      }
     }
   }
 
@@ -80,6 +79,18 @@
     }
     .tm-icon {
       fill: $--pagination-icon-fill;
+
+      &:hover {
+        fill: $--color-blueberry;
+      }
+    }
+
+    &:hover {
+      color: $--color-blueberry;
+
+      .tm-icon {
+        fill: $--color-blueberry;
+      }
     }
   }
 
@@ -153,7 +164,7 @@
     line-height: 18px;
     padding: 0 2px;
     height: $--pagination-button-height;
-      
+
     text-align: center;
     margin: 0 2px;
     box-sizing: border-box;
@@ -241,6 +252,7 @@
     cursor: pointer;
     box-sizing: border-box;
     text-align: center;
+    border-radius: 50%;
 
     &.btn-quicknext,
     &.btn-quickprev {
@@ -270,6 +282,7 @@
     }
 
     &:hover {
+      background: $--color-carriage-grey;
     }
 
     &.active {
