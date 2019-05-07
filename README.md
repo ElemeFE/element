@@ -153,6 +153,9 @@ Spanish documentation is made possible by these community developers:
 - [sigfriedCub1990](https://github.com/sigfriedCub1990)
 - [thechosenjuan](https://github.com/thechosenjuan)
 
+French documentation is made possible by these community developers:
+- [smalesys](https://github.com/smalesys)
+
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 

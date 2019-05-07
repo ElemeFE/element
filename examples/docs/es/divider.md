@@ -1,10 +1,10 @@
 ## Divider
 
-The dividing line that separates the content.
+La línea divisoria que separa el contenido.
 
-### Basic usage
+### Uso básico
 
-Divide the text of different paragraphs.
+Divide el texto de los diferentes párrafos.
 
 :::demo
 ```html
@@ -18,9 +18,9 @@ Divide the text of different paragraphs.
 ```
 :::
 
-### Custom content
+### Contenido personalizado
 
-You can customize the content on the divider line.
+Puede personalizar el contenido en la línea divisoria.
 
 
 :::demo
@@ -38,7 +38,7 @@ You can customize the content on the divider line.
 ```
 :::
 
-### Vertical divider
+### División vertical
 
 :::demo
 ```html
@@ -54,8 +54,8 @@ You can customize the content on the divider line.
 ```
 :::
 
-### Divider Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Divider Atributos
+| Atributo     | Descripción        | Tipo   | Valores aceptados | Por defecto |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| direction      | Set divider's direction  | string  |          horizontal / vertical           |    horizontal     |
-| content-position      | customize the content on the divider line | String  |  left / right / center  |  center |
+| direction      | indica la dirección del separador | string  |          horizontal / vertical           |    horizontal     |
+| content-position      | personaliza el contenido en la línea divisoria | String  |  left / right / center  |  center |

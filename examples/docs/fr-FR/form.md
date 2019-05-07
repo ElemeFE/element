@@ -382,7 +382,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
 :::
 
 :::tip
-Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
+Les callback de validations personnalisées doivent être appelées. Un usage plus avancé se trouve ici: [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
 ### Ajouter ou supprimer des champs dynamiquement
@@ -512,7 +512,7 @@ Custom validate callback function must be called. See more advanced usage at [as
 :::
 
 :::tip
-When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
+Lorsqu'un `el-form-item` est imbriqué dans un autre `el-form-item`, la largeur de son label sera `0`. Utilisez `label-width` sur ce `el-form-item` si besoin.
 :::
 
 ### Taille
@@ -592,7 +592,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | rules | Règles de validation du formulaire. | object | — | — |
 | inline | Si le formulaire est horizontal. | boolean | — | false |
 | label-position | Position des labels. Si 'left' ou 'right', `label-width` est aussi requis. | string | left / right / top | right |
-| label-width | Largeur des labels, tout les enfants directs hériteront de cette valeur. Width `auto` is supported. | string | — | — |
+| label-width | Largeur des labels, tout les enfants directs hériteront de cette valeur. La largeur `auto` est supportée. | string | — | — |
 | label-suffix | Suffixe de labels. | string | — | — |
 | hide-required-asterisk | Si les champs obligatoires doivent avoir une astérisque rouge (étoile) à coté de leurs labels. | boolean | — | false |
 | show-message  | Si le message d'erreur doit apparaître. | boolean | — | true |
@@ -623,7 +623,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | ---- | ----| ---- | ---- | ---- |
 | prop | Une des clés de `model`. Utilisés par les méthodes validate et resetFields. Requis. | string | Clés du model passé à `form`. |
 | label | Le label. | string | — | — |
-| label-width | Largeur du label, e.g. '50px'. Width `auto` is supported. | string | — | — |
+| label-width | Largeur du label, e.g. '50px'. La largeur `auto` est supportée. | string | — | — |
 | required | Si le champ est requis ou non. Si omis, sera déterminé par les règles de validation. | boolean |  — | false |
 | rules | Règles de validation du formulaire. | object | — | — |
 | error | Message d'erreur du champ. Si il est modifié, le champ l'affichera immédiatement. | string | — | — |

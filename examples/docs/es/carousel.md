@@ -151,7 +151,7 @@ Cuando una página es suficientemente ancha pero tiene una altura limitada, pued
 ```
 :::
 
-By default, `direction` is `horizontal`. Let carousel be displayed in the vertical direction by setting `direction` to `vertical`.
+Por defecto, `direction` es `horizontal`. El carousel puede ser mostrado de forma vertical cambiando `direction` a `vertical`.
 
 :::demo
 ```html
@@ -184,18 +184,18 @@ By default, `direction` is `horizontal`. Let carousel be displayed in the vertic
 :::
 
 ### Atributos de Carousel
-| Atributo           | Descripcion                              | Tipo    | Valores aceptados  | Por defecto |
-| ------------------ | ---------------------------------------- | ------- | ------------------ | ----------- |
-| height             | Alto del carrusel                        | string  | —                  | —           |
-| initial-index      | Indice del slider inicial activo (empieza desde 0) | number  | —                  | 0           |
-| trigger            | Evento que muestra los indicadores       | string  | hover/click        | hover       |
-| autoplay           | Si se enlazan automáticamente las diapositivas | boolean | —                  | true        |
-| interval           | Intervalo del auto loop, en milisegundos | number  | —                  | 3000        |
-| indicator-position | Posición del indicador de paginación     | string  | outside/none       | —           |
-| arrow              | Cuando se muestran las flechas           | string  | always/hover/never | hover       |
-| type               | Tipo de carrusel                         | string  | card               | —           |
-| loop               | Si se muestra cíclicamente               | boolean | —                  | true        |
-| direction          | display direction                        | string  | horizontal/vertical| horizontal  |
+| Atributo           | Descripcion                                        | Tipo    | Valores aceptados   | Por defecto |
+| ------------------ | -------------------------------------------------- | ------- | ------------------- | ----------- |
+| height             | Alto del carrusel                                  | string  | —                   | —           |
+| initial-index      | Indice del slider inicial activo (empieza desde 0) | number  | —                   | 0           |
+| trigger            | Evento que muestra los indicadores                 | string  | hover/click         | hover       |
+| autoplay           | Si se enlazan automáticamente las diapositivas     | boolean | —                   | true        |
+| interval           | Intervalo del auto loop, en milisegundos           | number  | —                   | 3000        |
+| indicator-position | Posición del indicador de paginación               | string  | outside/none        | —           |
+| arrow              | Cuando se muestran las flechas                     | string  | always/hover/never  | hover       |
+| type               | Tipo de carrusel                                   | string  | card                | —           |
+| loop               | Si se muestra cíclicamente                         | boolean | —                   | true        |
+| direction          | direccion en la que se muestra el contenido        | string  | horizontal/vertical | horizontal  |
 
 ### Eventos de Carousel
 | Nombre evento | Descripción                              | Parametros                               |
