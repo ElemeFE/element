@@ -17,8 +17,7 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
+    <i :class="iconClass" v-if="isShowIcon"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
@@ -66,6 +65,12 @@
       },
       buttonDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
+      },
+      iconClass() {
+        return loading ? "el-icon-loading" : icon;
+      },
+      isShowIcon() {
+        return loading || icon;
       }
     },
 
