@@ -2,14 +2,24 @@
 
 .tm-advanced-date-picker {
   &__popover {
+    width: 510px;
+    padding: 0;
+
+    .tm-picker-panel__body {
+      padding: 0 15px;
+    }
     .tm-picker-panel__content {
-      margin: 0;
+      margin: 0 auto;
       padding: 16px 0;
 
-      table {
+      .tm-date-table {
         table-layout: fixed;
         width: 100%;
+        th {
+          text-transform: uppercase;
+        }
       }
+
       table > tbody > tr > th {
         text-align: center;
       }

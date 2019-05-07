@@ -517,6 +517,8 @@ Only card type Tabs support addable & closeable.
 | editable  | whether Tab is addable and closable | boolean   | — |  false  |
 | value  | name of the selected tab  | string   |  —  |  name of first tab |
 | tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
+| list-class  | class name of the tabs list  | string   |  —  |
+| list-item-class  | class name of the tabs list items | string   |  —  |
 
 ### Tabs Events
 | Event Name | Description | Parameters |
