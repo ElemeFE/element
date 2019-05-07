@@ -3,27 +3,42 @@
 @import "./picker-panel.scss";
 
 @include b(date-picker) {
-  width: 322px;
+  width: 261px;
 
+  &.has-sidebar,
   &.has-sidebar.has-time {
-    width: 434px;
-  }
-
-  &.has-sidebar {
-    width: 438px;
+    width: 371px;
   }
 
   &.has-time .tm-picker-panel__body-wrapper {
     position: relative;
   }
 
-  .tm-picker-panel__content {
-    width: 292px;
+  &.tm-inline-picker-panel {
+    border: none;
+    box-shadow: none;
+    margin: 0 auto;
+    line-height: normal;
   }
 
-  table {
+  .tm-picker-panel__content {
+    width: 238px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tm-date-table {
     table-layout: fixed;
     width: 100%;
+    th {
+      text-transform: uppercase;
+    }
+  }
+
+  .tm-year-table,
+  .tm-month-table {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @include e(editor-wrap) {
