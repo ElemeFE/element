@@ -1,5 +1,5 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { getStyle, hasClass, removeClass, addClass } from 'element-ui/src/utils/dom';
+import { getStyle, hasClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
@@ -204,23 +204,6 @@ export default {
 
     treeIndent() {
       return this.store.states.indent;
-    }
-  },
-
-  watch: {
-    // don't trigger getter of currentRow in getCellClass. see https://jsfiddle.net/oe2b4hqt/
-    // update DOM manually. see https://github.com/ElemeFE/element/pull/13954/files#diff-9b450c00d0a9dec0ffad5a3176972e40
-    'store.states.hoverRow'(newVal, oldVal) {
-      if (!this.store.states.isComplex) return;
-      const rows = this.$el.querySelectorAll('.el-table__row');
-      const oldRow = rows[oldVal];
-      const newRow = rows[newVal];
-      if (oldRow) {
-        removeClass(oldRow, 'hover-row');
-      }
-      if (newRow) {
-        addClass(newRow, 'hover-row');
-      }
     }
   },
 

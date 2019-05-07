@@ -378,7 +378,7 @@
           });
         });
       },
-      
+
       getMigratingConfig() {
         return {
           events: {
