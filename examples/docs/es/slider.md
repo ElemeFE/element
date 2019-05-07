@@ -176,9 +176,9 @@ Se soporta la selección de un rango de valores.
 ```
 :::
 
-### Show marks
+### Mostrar marcas
 
-:::demo Setting this `marks` attribute can show mark on slider.
+:::demo Use el atributo `marks`  para mostrar marcas en el slider.
 ```html
 <template>
   <div class="block">
@@ -233,7 +233,7 @@ Se soporta la selección de un rango de valores.
 | label               | etiqueta para screen reader              | string          | —                 | —           |
 | debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 | tooltip-class       | nombre personalizado de clase para el tooltip | string | — | — |
-| marks | marks， type of key must be `number` and must in closed interval `[min, max]`, each mark can custom style| object | — | — |
+| marks | marcas, tipo de clave debe ser `number` y debe estar en intervalo cerrado [min, max], cada marca puede tener estilo personalizado | object | — | — |
 
 ## Eventos
 | Nombre | Descripción                              | Parametros               |
