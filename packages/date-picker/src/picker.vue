@@ -809,7 +809,12 @@ export default {
     mountInlinePicker() {
       this.mountPicker();
       this.picker.value = this.parsedValue;
-      this.$el.appendChild(this.popperElm.children[0]);
+      const inlinePickerContent = this.popperElm.children[0];
+      const inlinePickerWrapper = document.createElement('div');
+      inlinePickerWrapper.classList = this.picker.$el.classList;
+      inlinePickerWrapper.classList.replace('tm-popper', 'tm-inline-picker-panel');
+      inlinePickerWrapper.append(inlinePickerContent);
+      this.$el.appendChild(inlinePickerWrapper);
     },
 
     mountPicker(el) {

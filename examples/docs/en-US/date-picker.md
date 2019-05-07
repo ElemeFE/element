@@ -114,6 +114,16 @@ Use Date Picker for date input.
 
 :::
 
+Use `hide-year-header` attribute to hide the year selector in the header.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4" hide-year-header/>
+```
+
+:::
+
 Use slots `cell` to extend DatePicker's cell.
 
 :::demo

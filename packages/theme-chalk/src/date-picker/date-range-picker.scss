@@ -1,15 +1,25 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 508px;
+  width: 510px;
 
   &.has-sidebar {
-    width: 754px;
+    width: 620px;
   }
 
-  table {
+  &.tm-inline-picker-panel {
+    border: none;
+    box-shadow: none;
+    margin: 0 auto;
+    line-height: normal;
+  }
+
+  .tm-date-table {
     table-layout: fixed;
     width: 100%;
+    th {
+      text-transform: uppercase;
+    }
   }
 
   .tm-picker-panel__body {
@@ -18,7 +28,7 @@
   }
 
   .tm-picker-panel__content {
-    margin: 0;
+    margin: 0 auto;
 
     &.is-full-width {
       width: 100%;
