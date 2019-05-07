@@ -17,8 +17,7 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
+    <i :class="iconClass" v-if="isShowIcon"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
@@ -58,14 +57,17 @@
     },
 
     computed: {
-      _elFormItemSize() {
-        return (this.elFormItem || {}).elFormItemSize;
-      },
       buttonSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.size || this.elFormItem.elFormItemSize || (this.$ELEMENT || {}).size;
       },
       buttonDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled || this.elForm.disabled;
+      },
+      iconClass() {
+        return this.loading ? 'el-icon-loading' : this.icon;
+      },
+      isShowIcon() {
+        return this.loading || this.icon;
       }
     },
 
