@@ -9,7 +9,7 @@ Provide a list of fixed time for users to choose.
 :::demo Use `el-time-select` label, then assign start time, end time and time step with `start`, `end` and `step`.
 ```html
 <el-time-select
-  v-model="value1"
+  v-model="value"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -22,7 +22,7 @@ Provide a list of fixed time for users to choose.
   export default {
     data() {
       return {
-        value1: ''
+        value: ''
       };
     }
   }
@@ -39,7 +39,7 @@ Can pick an arbitrary time.
 ```html
 <template>
   <el-time-picker
-    v-model="value2"
+    v-model="value1"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -47,7 +47,7 @@ Can pick an arbitrary time.
   </el-time-picker>
   <el-time-picker
     arrow-control
-    v-model="value3"
+    v-model="value2"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -59,8 +59,8 @@ Can pick an arbitrary time.
   export default {
     data() {
       return {
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40)
+        value1: new Date(2016, 9, 10, 18, 40),
+        value2: new Date(2016, 9, 10, 18, 40)
       };
     }
   }
@@ -118,7 +118,7 @@ Can pick an arbitrary time range.
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value1"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -126,7 +126,7 @@ Can pick an arbitrary time range.
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value2"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -137,8 +137,8 @@ Can pick an arbitrary time range.
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value2: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }

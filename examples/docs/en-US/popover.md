@@ -115,11 +115,11 @@ Of course, you can nest other operations. It's more light-weight than using a di
 <el-popover
   placement="top"
   width="160"
-  v-model="visible2">
+  v-model="visible">
   <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible2 = false">cancel</el-button>
-    <el-button type="primary" size="mini" @click="visible2 = false">confirm</el-button>
+    <el-button size="mini" type="text" @click="visible = false">cancel</el-button>
+    <el-button type="primary" size="mini" @click="visible = false">confirm</el-button>
   </div>
   <el-button slot="reference">Delete</el-button>
 </el-popover>
@@ -128,7 +128,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
   export default {
     data() {
       return {
-        visible2: false,
+        visible: false,
       };
     }
   }

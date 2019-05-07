@@ -32,9 +32,9 @@ Los componentes de alertas no son elementos overlay de la página y no desaparec
 
 ### Theme
 
-Alert provide two different themes, `light` and `dark`.
+Alert provee dos diferentes temas  `light` y `dark`.
 
-:::demo Set `effect` to change theme, default is `light`.
+:::demo Use `effect` para cambiar el tema, por defecto es `light`.
 ```html
 <template>
   <el-alert

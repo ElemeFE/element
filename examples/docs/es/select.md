@@ -192,7 +192,7 @@ Selección multiple utiliza tags para mostrar las opciones seleccionadas.
 
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="Select">
+  <el-select v-model="value1" multiple placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -202,7 +202,7 @@ Selección multiple utiliza tags para mostrar las opciones seleccionadas.
   </el-select>
 
   <el-select
-    v-model="value11"
+    v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
@@ -236,8 +236,8 @@ Selección multiple utiliza tags para mostrar las opciones seleccionadas.
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: [],
-        value11: []
+        value1: [],
+        value2: []
       }
     }
   }

@@ -28,7 +28,7 @@ function pad(source) {
 }
 
 function genInlineComponentText(template, script) {
-  // https://github.com/vuejs/vue-loader/blob/master/lib/loaders/templateLoader.js#L29
+  // https://github.com/vuejs/vue-loader/blob/423b8341ab368c2117931e909e2da9af74503635/lib/loaders/templateLoader.js#L46
   const finalOptions = {
     source: `<div>${template}</div>`,
     filename: 'inline-component', // TODO：这里有待调整
@@ -59,13 +59,13 @@ function genInlineComponentText(template, script) {
   } else {
     script = 'const democomponentExport = {}';
   }
-  demoComponentContent = `(function demo() {
+  demoComponentContent = `(function() {
     ${demoComponentContent}
     ${script}
     return {
-      ...democomponentExport,
       render,
-      staticRenderFns
+      staticRenderFns,
+      ...democomponentExport
     }
   })()`;
   return demoComponentContent;

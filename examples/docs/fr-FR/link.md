@@ -1,18 +1,19 @@
 ## Link
 
-Text hyperlink
+Un hyperlien textuel.
 
-### Basic
+### Usage basique
 
-Basic text link
+Lien texte basique.
+
 :::demo
 
 ```html
 <div>
-  <el-link href="https://element.eleme.io" target="_blank">default</el-link>
-  <el-link type="primary">primary</el-link>
-  <el-link type="success">success</el-link>
-  <el-link type="warning">warning</el-link>
+  <el-link href="https://element.eleme.io" target="_blank">défaut</el-link>
+  <el-link type="primary">primaire</el-link>
+  <el-link type="success">succès</el-link>
+  <el-link type="warning">avertissement</el-link>
   <el-link type="danger">danger</el-link>
   <el-link type="info">info</el-link>
 </div>
@@ -20,17 +21,18 @@ Basic text link
 
 :::
 
-### Disabled
+### Désactivé
 
-Disabled state of link
+Lien désactivé.
+
 :::demo
 
 ```html
 <div>
-  <el-link disabled>default</el-link>
-  <el-link type="primary" disabled>primary</el-link>
-  <el-link type="success" disabled>success</el-link>
-  <el-link type="warning" disabled>warning</el-link>
+  <el-link disabled>défaut</el-link>
+  <el-link type="primary" disabled>primaire</el-link>
+  <el-link type="success" disabled>succès</el-link>
+  <el-link type="warning" disabled>avertissement</el-link>
   <el-link type="danger" disabled>danger</el-link>
   <el-link type="info" disabled>info</el-link>
 </div>
@@ -38,40 +40,42 @@ Disabled state of link
 
 :::
 
-### Underline
+### Souligné
 
-Underline of link
+Lien souligné.
+
 :::demo
 
 ```html
 <div>
-  <el-link :underline="false">Without Underline</el-link>
-  <el-link>With Underline</el-link>
+  <el-link :underline="false">Non-souligné</el-link>
+  <el-link>Souligné</el-link>
 </div>
 ```
 
 :::
 
-### Icon
+### Icône
 
-Link with icon
+Lien avec icône.
+
 :::demo
 
 ```html
 <div>
-  <el-link icon="el-icon-edit">Edit</el-link>
-  <el-link>Check<i class="el-icon-view el-icon--right"></i> </el-link>
+  <el-link icon="el-icon-edit">Éditer</el-link>
+  <el-link>Vérifier<i class="el-icon-view el-icon--right"></i> </el-link>
 </div>
 ```
 
 :::
 
-### Attributes
+### Attributs
 
-| Attribute | Description                         | Type    | Options                                     | Default |
-| --------- | ----------------------------------- | ------- | ------------------------------------------- | ------- |
-| type      | type                                | string  | primary / success / warning / danger / info | default |
-| underline | whether the component has underline | boolean | —                                           | true    |
-| disabled  | whether the component is disabled   | boolean | —                                           | false   |
-| href      | same as native hyperlink's `href`   | string  | —                                           | -       |
-| icon      | class name of icon                  | string  | —                                           | -       |
+| Attribut  | Description                     | Type    | Options                                     | Défaut  |
+| --------- | ------------------------------- | ------- | ------------------------------------------- | ------- |
+| type      | Type du lien.                   | string  | primary / success / warning / danger / info | défaut  |
+| underline | Si le composant est souligné.   | boolean | —                                           | true    |
+| disabled  | Si le composant est désactivé.  | boolean | —                                           | false   |
+| href      | Identique au `href` natif.      | string  | —                                           | -       |
+| icon      | Nom de classe de l'icône.       | string  | —                                           | -       |

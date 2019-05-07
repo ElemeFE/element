@@ -1,10 +1,10 @@
 ## Link
 
-Text hyperlink
+Texto con hipervinculo
 
-### Basic
+### Básico
 
-Basic text link
+Texto con hipervinculo básico
 :::demo
 
 ```html
@@ -20,9 +20,9 @@ Basic text link
 
 :::
 
-### Disabled
+### Deshabilitar
 
-Disabled state of link
+Deshabilita el hipervinculo
 :::demo
 
 ```html
@@ -38,9 +38,9 @@ Disabled state of link
 
 :::
 
-### Underline
+### Subrayado
 
-Underline of link
+Subrayado del hipervinculo
 :::demo
 
 ```html
@@ -52,9 +52,9 @@ Underline of link
 
 :::
 
-### Icon
+### Icono
 
-Link with icon
+Hipervinculo con icono
 :::demo
 
 ```html
@@ -66,12 +66,12 @@ Link with icon
 
 :::
 
-### Attributes
+### Atributos
 
-| Attribute | Description                         | Type    | Options                                     | Default |
-| --------- | ----------------------------------- | ------- | ------------------------------------------- | ------- |
-| type      | type                                | string  | primary / success / warning / danger / info | default |
-| underline | whether the component has underline | boolean | —                                           | true    |
-| disabled  | whether the component is disabled   | boolean | —                                           | false   |
-| href      | same as native hyperlink's `href`   | string  | —                                           | -       |
-| icon      | class name of icon                  | string  | —                                           | -       |
+| Atributo  | Descripción                                          | Tipo    | Opciones                                    | Por defecto |
+| --------- | ---------------------------------------------------- | ------- | ------------------------------------------- | ----------- |
+| type      | tipo                                                 | string  | primary / success / warning / danger / info | default     |
+| underline | si el hipervinculo estara subrayado                  | boolean | —                                           | true        |
+| disabled  | si el componente esta deshabilitado                  | boolean | —                                           | false       |
+| href      | lo mismo que el valor nativo del hipervinculo `href` | string  | —                                           | -           |
+| icon      | nombre de clase del icono                            | string  | —                                           | -           |

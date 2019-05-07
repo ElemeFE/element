@@ -69,9 +69,9 @@ Le permite definir el nivel de incremento de los saltos.
 ```
 :::
 
-### Step strictly
+### Step estrictamente
 
-:::demo The `step-strictly` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
+:::demo El atributo `step-strictly` acepta `boolean`. Si este atributo es `true`, el valor de entrada sólo puede ser múltiplo de step.
 
 ```html
 <template>
@@ -89,9 +89,9 @@ Le permite definir el nivel de incremento de los saltos.
 ```
 :::
 
-### Precision
+### Precisión
 
-:::demo Add `precision` attribute to set the precision of input value.
+:::demo El atributo `precision` aplica presicion al valor del value.
 
 ```html
 <template>
@@ -111,7 +111,8 @@ Le permite definir el nivel de incremento de los saltos.
 :::
 
 :::tip
-The value of `precision` must be a non negative integer and should not be less than the decimal places of `step`.
+El valor de `precision` debe ser un numero entero positivo que no debe ser inferior a los decimales del `step`.
+
 :::
 
 ### Tamaño
@@ -175,7 +176,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
-| step-strictly  | whether input value can can only be multiple of step | number  | —                 | false       |
+| step-strictly  | si el valor del input puede ser solo un multiplo de step | number  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |

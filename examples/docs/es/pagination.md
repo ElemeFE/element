@@ -127,9 +127,9 @@ Agrega más modulos basados en su escenario.
 ```
 
 :::
-### Hide pagination when there is only one page
+### Oculte la paginación cuando el resultado es solo una pagina simple
 
-When there is only one page, hide the pagination by setting the `hide-on-single-page` attribute.
+Cuando sólo hay una página, oculte la paginación configurando el atributo `hide-on-single-page`.
 
 :::demo
 ```html
@@ -170,7 +170,7 @@ When there is only one page, hide the pagination by setting the `hide-on-single-
 | prev-text    | texto para el botón `prev`               | string   | —                                        | —                                      |
 | next-text    | texto para el botón `next`               | string   | —                                        | —                                      |
 | disabled     | si Pagination esta disabled              | boolean  | —                                        | false                                  |
-| hide-on-single-page | whether to hide when there's only one page | boolean |—                                 | -                                      |
+| hide-on-single-page | si ocultar cuando sólo hay una página | boolean |—                                 | -                                      |
 
 ### Eventos
 | Nombre del evento | Descripción                             | Parámetros                    |

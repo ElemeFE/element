@@ -1,10 +1,10 @@
-## Calendar
+## Calendrier
 
-Display date.
+Affiche un calendrier.
 
-### Basic
+### Usage basique
 
-:::demo Set `value` to specify the currently displayed month. If `value` is not specified, current month is displayed. `value` supports two-way binding.
+:::demo Réglez `value` pour spécifier le mois à afficher. Si `value` n'est pas sépcifié, le mois actuel sera affiché. `value` supporte le two-way binding.
 ```html
 <el-calendar v-model="value">
 </el-calendar>
@@ -21,9 +21,9 @@ Display date.
 ```
 :::
 
-### Custom Content
+### Contenu personnalisé
 
-:::demo Customize what is displayed in the calendar cell by setting `scoped-slot` named `dateCell`. In `scoped-slot` you can get the date (the date of the current cell), data (including the type, isSelected, day attribute). For details, please refer to the API documentation below.
+:::demo Personnalisez le contenu du calendrier en utilisant le `scoped-slot` appelé `dateCell`. Dans ce `scoped-slot` vous aurez accès au paramètres date (date de la cellule courante), data (incluant les attributs type, isSelected et day). pour plus d'informations, référez-vous à la documentation ci-dessous.
 ```html
 <el-calendar>
   <!-- Use 2.5 slot syntax. If you use Vue 2.6, please use new slot syntax-->
@@ -43,23 +43,25 @@ Display date.
 ```
 :::
 
-### Range
+### Intervalle
 
-:::demo Set the `range` attribute to specify the display range of the calendar. Start time must be Monday, end time must be Sunday, and the time span cannot exceed two months.
+:::demo Utilisez l'attribut `range` pour afficher un intervalle particulier. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois.
 ```html
 <el-calendar :range="['2019-03-04', '2019-03-24']">
 </el-calendar>
 ```
 :::
 
-### Attributes
-| Attribute       | Description   | Type      | Accepted Values       | Default  |
-|-----------------|-------------- |---------- |---------------------- |--------- |
-| value / v-model | binding value | Date/string/number | —            | —        |
-| range           | time range, including start time and end time. Start time must be Monday, end time must be Sunday, the time span cannot exceed two months | Array     | —           | —      |
+### Attributs
 
-### dateCell scoped slot 参数
-| Attribute       | Description   | Type      | Accepted Values       | Default  |
+| Attribut       | Description   | Type      | Valeurs acceptées       | Défaut  |
 |-----------------|-------------- |---------- |---------------------- |--------- |
-| date            | date the cell represents  | Date      | —                     | —        |
-| data            | { type, isSelected, day}. `type` indicates which month the date belongs, optional values are prev-month, current-month, next-month; `isSelected` indicates whether the date is selected; `day` is the formatted date in the format yyyy-MM-dd    | Object      | —           | —      |
+| value / v-model | Valeur liée. | Date/string/number | —            | —        |
+| range           | Intervalle de dates, début et fin inclus. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois. | Array     | —           | —      |
+
+### Slot dateCell
+
+| Attribut       | Description   | Type      | Valeurs acceptées       | Défaut  |
+|-----------------|-------------- |---------- |---------------------- |--------- |
+| date            | Date de la cellule courante.  | Date      | —                     | —        |
+| data            | { type, isSelected, day }. `type` indique le mois de la date courante, les valeurs prev-month, current-month et next-month pouvant être utilisées; `isSelected` indique si la date est sélectionnée; `day` est la date formattée en yyyy-MM-dd.    | Object      | —           | —      |

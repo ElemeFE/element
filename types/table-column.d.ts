@@ -65,7 +65,7 @@ export declare class ElTableColumn extends ElementUIComponent {
   renderHeader: (h: CreateElement, data: RenderHeaderData) => VNode | string
 
   /** Whether column can be sorted */
-  sortable: boolean
+  sortable: boolean | 'custom'
 
   /** Sorting method. Works when `sortable` is `true` */
   sortMethod: (a: any, b: any) => number
