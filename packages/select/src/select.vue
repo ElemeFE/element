@@ -104,6 +104,7 @@
       @after-leave="doDestroy">
       <tm-select-menu
         ref="popper"
+        placement="bottom-end"
         v-show="visible && emptyText !== false">
         <tm-scrollbar
           tag="ul"
