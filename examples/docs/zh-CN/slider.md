@@ -171,6 +171,43 @@
 ```
 :::
 
+### 展示标记
+
+:::demo 设置 `marks` 属性可以展示标记
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -191,6 +228,7 @@
 | label | 屏幕阅读器标签 | string | — | — |
 | debounce | 输入时的去抖延迟，毫秒，仅在`show-input`等于true时有效 | number | — | 300 |
 | tooltip-class | tooltip 的自定义类名 | string | — | — |
+| marks | 标记， key 的类型必须为 number 且取值在闭区间 `[min, max]` 内，每个标记可以单独设置样式 | object | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

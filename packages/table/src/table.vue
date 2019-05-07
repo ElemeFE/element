@@ -585,9 +585,7 @@
           };
         } else if (this.maxHeight) {
           return {
-            'max-height': (this.showHeader
-              ? this.maxHeight - this.layout.headerHeight - this.layout.footerHeight
-              : this.maxHeight - this.layout.footerHeight) + 'px'
+            'max-height': this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
           };
         }
         return {};

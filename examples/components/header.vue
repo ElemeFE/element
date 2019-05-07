@@ -301,6 +301,15 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
+          <li 
+            class="nav-item"
+            v-if="$isEle"
+          >
+            <router-link
+              active-class="active"
+              :to="`/${ lang }/theme`">{{ langConfig.theme }}
+            </router-link>
+          </li>
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -364,8 +373,7 @@
           
           <!--theme picker-->
           <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-configurator :key="lang" v-if="showThemeConfigurator"></theme-configurator>
-            <theme-picker v-else></theme-picker>
+            <theme-picker v-if="!$isEle"></theme-picker>
           </li>
         </ul>
       </div>
@@ -374,12 +382,13 @@
 </template>
 <script>
   import ThemePicker from './theme-picker.vue';
-  import ThemeConfigurator from './theme-configurator';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
-  import { getVars } from './theme-configurator/utils/api.js';
+  import themeLoader from './theme/loader';
+  import { getVars } from './theme/loader/api.js';
   import bus from '../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
 
   const { version } = Element;
 
@@ -396,14 +405,14 @@
           'en-US': 'English',
           'es': 'Español',
           'fr-FR': 'Français'
-        },
-        showThemeConfigurator: false
+        }
       };
     },
 
+    mixins: [themeLoader],
+
     components: {
       ThemePicker,
-      ThemeConfigurator,
       AlgoliaSearch
     },
 
@@ -422,18 +431,14 @@
       }
     },
     mounted() {
-      const host = location.hostname;
-      this.showThemeConfigurator = host.match('localhost') || host.match('elenet');
-      if (!this.showThemeConfigurator) {
-        getVars()
-          .then(() => {
-            this.showThemeConfigurator = true;
-            ga('send', 'event', 'DocView', 'Inner');
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
+      getVars()
+        .then(() => {
+          this.$isEle = true;
+          ga('send', 'event', 'DocView', 'Inner');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     methods: {
       switchVersion(version) {
@@ -470,7 +475,7 @@
       xhr.open('GET', '/versions.json');
       xhr.send();
       let primaryLast = '#409EFF';
-      bus.$on('user-theme-config-update', (val) => {
+      bus.$on(ACTION_USER_CONFIG_UPDATE, (val) => {
         let primaryColor = val.global['$--color-primary'];
         if (!primaryColor) primaryColor = '#409EFF';
         const base64svg = 'data:image/svg+xml;base64,';

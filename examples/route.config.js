@@ -123,6 +123,24 @@ const generateMiscRoutes = function(lang) {
     }]
   };
 
+  let themeRoute = {
+    path: `/${ lang }/theme`,
+    component: load(lang, 'theme-nav'),
+    children: [
+      {
+        path: '/', // 主题管理
+        name: 'theme' + lang,
+        meta: { lang },
+        component: load(lang, 'theme')
+      },
+      {
+        path: 'preview', // 主题预览编辑
+        name: 'theme-preview-' + lang,
+        meta: { lang },
+        component: load(lang, 'theme-preview')
+      }]
+  };
+
   let resourceRoute = {
     path: `/${ lang }/resource`, // 资源
     meta: { lang },
@@ -137,7 +155,7 @@ const generateMiscRoutes = function(lang) {
     component: load(lang, 'index')
   };
 
-  return [guideRoute, resourceRoute, indexRoute];
+  return [guideRoute, resourceRoute, themeRoute, indexRoute];
 };
 
 langs.forEach(lang => {

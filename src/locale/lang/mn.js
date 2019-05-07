@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Утга оруул',
       noCheckedFormat: '{total} өгөгдөл',
       hasCheckedFormat: '{checked}/{total} сонгосон'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

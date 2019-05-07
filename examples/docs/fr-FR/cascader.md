@@ -1136,12 +1136,12 @@ Il est possible de charger dynamiquement les options quand on clique ou passe la
       handleItemChange(val) {
         console.log('active item:', val);
         setTimeout(_ => {
-          if (val.indexOf('California') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
+          if (val.indexOf('California') > -1 && !this.options[0].cities.length) {
+            this.options[0].cities = [{
               label: 'Los Angeles'
             }];
-          } else if (val.indexOf('Florida') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
+          } else if (val.indexOf('Florida') > -1 && !this.options[1].cities.length) {
+            this.options[1].cities = [{
               label: 'Orlando'
             }];
           }

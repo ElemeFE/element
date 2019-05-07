@@ -520,6 +520,42 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 ```
 :::
 
+### Taille limite
+
+:::demo `maxlength` et `minlength` sont des attributs natifs, indiquant la taille limite de l'input. Le nombre de caractères est mesuré par la taille de la chaine Javascript. Si vous utilisez `maxlength`, vous pourrez montrer le nombre de caractères en mettant `show-word-limit` à `true`.
+
+```html
+<el-input
+  type="text"
+  placeholder="Please input"
+  v-model="text"
+  maxlength="10"
+  show-word-limit
+>
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  placeholder="Please input"
+  v-model="textarea"
+  maxlength="30"
+  show-word-limit
+>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      text: '',
+      textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Attributs de l'Input
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -528,6 +564,7 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 | value / v-model | Variable liée. | string / number | — | — |
 | maxlength| Identique à `maxlength` dans l'input natif. | number| — | — |
 | minlength| Identique à `minlength` dans l'input natif. | number | — | — |
+| show-word-limit | Affiche le nombre de caractères restant， ne marche que lorsque `type` est 'text' ou 'textarea'. | boolean    |  —  | false |
 | placeholder| Placeholder de l' Input. | string | — | — |
 | clearable | Si le bouton de reset apparaît. | boolean | — | false |
 | show-password | Si le champ doit un champ de mot de passe avec bouton de visualisation. | boolean         | — | false |

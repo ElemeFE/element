@@ -1,5 +1,6 @@
 <script>
   import bus from '../../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from '../../components/theme/constant.js';
   const varMap = {
     '$--box-shadow-light': 'boxShadowLight',
     '$--box-shadow-base': 'boxShadowBase',
@@ -14,7 +15,7 @@
   }
   export default {
     created() {
-      bus.$on('user-theme-config-update', this.setGlobal);
+      bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
     },
     mounted() {
       this.setGlobal();
@@ -58,7 +59,7 @@
 
 ### 边框
 
-我们提供了一下几种边框样式，以供选择。
+我们提供了以下几种边框样式，以供选择。
 
 <table class="demo-border">
   <tbody>
@@ -86,7 +87,7 @@
 
 ### 圆角
 
-我们提供了一下几种圆角样式，以供选择。
+我们提供了以下几种圆角样式，以供选择。
 
 <el-row :gutter="12" class="demo-radius">
   <el-col :span="6" :xs="{span: 12}">
@@ -119,7 +120,7 @@
 
 ### 投影
 
-我们提供了一下几种投影样式，以供选择。
+我们提供了以下几种投影样式，以供选择。
 
 <div 
 class="demo-shadow"

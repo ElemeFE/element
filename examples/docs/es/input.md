@@ -54,9 +54,9 @@ export default {
 
 :::
 
-### Clearable
+### Limpiable
 
-:::demo Make the Input clearable with the `clearable` attribute.
+:::demo Marque que el input puede ser limpiable con el atributo `clearable`.
 
 ```html
 <el-input
@@ -285,7 +285,7 @@ export default {
   <el-input
     size="small"
     placeholder="Please Input"
-    v-model="input2">
+    v-model="input3">
   </el-input>
   <el-input
     size="mini"
@@ -300,7 +300,7 @@ export default {
     return {
       input1: '',
       input2: '',
-      input2: '',
+      input3: '',
       input4: ''
     }
   }
@@ -535,6 +535,42 @@ Búsqueda de datos desde el servidor.
 
 :::
 
+### Limitar el tamaño
+
+:::demo `maxlength` y `minlength` son atributos de la entrada nativa, declaran un límite en el número de caracteres que un usuario puede introducir. La configuración de la pro `maxlength` para un tipo de entrada de texto o de área de texto puede limitar la longitud del valor de entrada y le permite mostrar el recuento de palabras al establecer `show-word-limit` a `true` al mismo tiempo.
+
+```html
+<el-input
+  type="text"
+  placeholder="Please input"
+  v-model="text"
+  maxlength="10"
+  show-word-limit
+>
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  placeholder="Please input"
+  v-model="textarea"
+  maxlength="30"
+  show-word-limit
+>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      text: '',
+      textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Input atributos
 
 | Atributo      | Descripción                                                                                                                                      | Tipo             | Valores aceptados                                                                                                                       | Por defecto |
@@ -543,6 +579,7 @@ Búsqueda de datos desde el servidor.
 | value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
+| show-word-limit | Si se muesta el contador de palabras, solamente funciona con los tipos 'text' o 'textarea' | boolean    |  —  | false |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
 | clearable | si debe mostrar el boton de limpieza | boolean | — | false |
 | show-password | si debe mostrar la posibilidad de conmutacion de password input | boolean         | — | false |

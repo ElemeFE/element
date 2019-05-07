@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "2.7.2",
+  "version": "2.8.2",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -66,7 +66,7 @@
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.5.17"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
@@ -134,10 +134,10 @@
     "uglifyjs-webpack-plugin": "^2.1.1",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^1.0.1",
-    "vue": "^2.5.16",
-    "vue-loader": "^15.2.4",
+    "vue": "2.5.21",
+    "vue-loader": "^15.7.0",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.16",
+    "vue-template-compiler": "2.5.21",
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^4.14.0",
     "webpack-cli": "^3.0.8",

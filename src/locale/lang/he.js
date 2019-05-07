@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'הקלד',
       noCheckedFormat: 'פריטים {total}',
       hasCheckedFormat: ' אישור {checked}/{total}'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

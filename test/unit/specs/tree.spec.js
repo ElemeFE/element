@@ -494,10 +494,13 @@ describe('Tree', () => {
   it('remove', (done) => {
     vm = getTreeVm(':props="defaultProps" node-key="id"');
     const tree = vm.$children[0];
+    tree.setCurrentKey(1);
+    expect(tree.getCurrentNode().id).to.equal(1);
     tree.remove(1);
     vm.$nextTick(() => {
       expect(vm.data[0].id).to.equal(2);
       expect(tree.getNode(1)).to.equal(null);
+      expect(tree.getCurrentNode()).to.equal(null);
       done();
     });
   });

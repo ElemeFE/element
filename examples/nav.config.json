@@ -70,6 +70,10 @@
             {
               "path": "/button",
               "title": "Button 按钮"
+            },
+            {
+              "path": "/link",
+              "title": "Link 文字链接"
             }
           ]
         },
@@ -251,6 +255,18 @@
             {
               "path": "/timeline",
               "title": "Timeline 时间线"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider 分割线"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar 日历"
+            },
+            {
+              "path": "/image",
+              "title": "Image 图片"
             }
           ]
         }
@@ -328,6 +344,10 @@
             {
               "path": "/button",
               "title": "Button"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         },
@@ -509,6 +529,18 @@
             {
               "path": "/timeline",
               "title": "Timeline"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
+              "path": "/image",
+              "title": "Image"
             }
           ]
         }
@@ -586,6 +618,10 @@
             {
               "path": "/button",
               "title": "Button"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         },
@@ -767,6 +803,18 @@
             {
               "path": "/timeline",
               "title": "Timeline"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
+              "path": "/image",
+              "title": "Image"
             }
           ]
         }
@@ -844,6 +892,10 @@
             {
               "path": "/button",
               "title": "Button"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         },
@@ -1025,6 +1077,18 @@
             {
               "path": "/timeline",
               "title": "Timeline"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
+              "path": "/image",
+              "title": "Image"
             }
           ]
         }

@@ -30,7 +30,38 @@ Los componentes de alertas no son elementos overlay de la página y no desaparec
 ```
 :::
 
-### Personalización del botón de cerrar 
+### Theme
+
+Alert provee dos diferentes temas  `light` y `dark`.
+
+:::demo Use `effect` para cambiar el tema, por defecto es `light`.
+```html
+<template>
+  <el-alert
+    title="success alert"
+    type="success"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="info alert"
+    type="info"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="warning alert"
+    type="warning"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="error alert"
+    type="error"
+    effect="dark">
+  </el-alert>
+</template>
+```
+:::
+
+### Personalización del botón de cerrar
 
 Personalizar el botón de cerrar como texto u otros símbolos.
 
@@ -198,6 +229,7 @@ Descripción incluye un mensaje con información más detallada.
 | center      | si el texto debe estar centrado          | boolean | —                          | false       |
 | close-text  | texto de cerrado personalizado           | string  | —                          | —           |
 | show-icon   | si un icono del tipo de alerta se debe mostrar | boolean | —                          | false       |
+| effect | Choose theme  | string | light/dark | light |
 
 ### Slot
 

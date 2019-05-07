@@ -17,6 +17,15 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "官方主题",
+        "2": "我的主题",
+        "3": "主题名称"
+      },
+      "theme-preview": {
+        "1": "返回"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "更新日志",
         "2": "zh-CN"
@@ -109,6 +118,15 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
+      "theme-preview": {
+        "1": "Back"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "Changelog",
         "2": "en-US"
@@ -201,6 +219,15 @@
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
+      "theme-preview": {
+        "1": "Back"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "Lista de cambios",
         "2": "es"
@@ -287,13 +314,21 @@
         "6": "Composants",
         "7": "Découvrez les détails de chaque composant and parcourant les différentes démos. Utilisez l'encapsulation du code pour développer plus efficacement.",
         "8": "Ressources",
-        "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
         "9": "Téléchargez différents outils de prototypage ou de visualisation pour un design plus efficace.",
         "lang": "fr-FR",
         "titleSize": "34",
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
+      "theme-preview": {
+        "1": "Back"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "Changelog",
         "2": "fr-FR"

@@ -1,11 +1,14 @@
 <template>
   <section class="config" :key="displayName">
     <div class="config-label">
-      {{displayName}}
+      <el-tooltip :content="displayName">
+        <span>{{displayKeyName}}</span>
+      </el-tooltip>
     </div>
     <div class="config-content">
       <theme-input 
         :val="value"
+        size="medium"
         @change="onChange"
       ></theme-input>
     </div>

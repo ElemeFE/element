@@ -174,6 +174,41 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 ```
 :::
 
+:::demo Vous pouvez afficher des marqueurs sur le slider grâce à l'attribut `marks`.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ## Attributs
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -195,6 +230,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 | label | Label pour les lecteurs d'écran. | string | — | — |
 | debounce | Délai après écriture en millisecondes, marche quand `show-input` est `true`. | number | — | 300 |
 | tooltip-class | Classe du tooltip. | string | — | — |
+| marks | Marqueurs， les clés doivent être des `number` et être comprises dans l'intervalle `[min, max]`. Chaque marqueur peut avoir un style particulier. | object | — | — |
 
 ## Évènements
 

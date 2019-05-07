@@ -30,6 +30,37 @@ Alert components are non-overlay elements in the page that does not disappear au
 ```
 :::
 
+### Theme
+
+Alert provide two different themes, `light` and `dark`.
+
+:::demo Set `effect` to change theme, default is `light`.
+```html
+<template>
+  <el-alert
+    title="success alert"
+    type="success"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="info alert"
+    type="info"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="warning alert"
+    type="warning"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="error alert"
+    type="error"
+    effect="dark">
+  </el-alert>
+</template>
+```
+:::
+
 ### Customizable close button
 
 Customize the close button as texts or other symbols.
@@ -190,12 +221,13 @@ Description includes a message with more detailed information.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title     | title         | string | — | — |
-| type | component type | string | success/warning/info/error | info |
-| description | descriptive text. Can also be passed with the default slot | string | — | — |
-| closable | if closable or not | boolean | — | true |
-| center | whether to center the text | boolean | — | false |
-| close-text | customized close button text | string | — | — |
-| show-icon | if a type icon is displayed | boolean | — | false |
+| type | Component type | string | success/warning/info/error | info |
+| description | Descriptive text. Can also be passed with the default slot | string | — | — |
+| closable | If closable or not | boolean | — | true |
+| center | Whether to center the text | boolean | — | false |
+| close-text | Customized close button text | string | — | — |
+| show-icon | If a type icon is displayed | boolean | — | false |
+| effect | Choose theme  | string | light/dark | light |
 
 ### Slot
 

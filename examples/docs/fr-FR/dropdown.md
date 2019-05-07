@@ -280,6 +280,7 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 | hide-on-click | Si le menu doit disparaître après avoir cliqué sur un élément.     | boolean          | — | true |
 | show-timeout | Délai avant d'afficher le menu (ne marche que si `trigger` est `hover`) | number | — | 250 |
 | hide-timeout | Délai avant de cacher le menu (ne marche que si `trigger` est `hover`) | number | — | 150 |
+| tabindex     | [tabindex](https://developer.mozilla.org/fr/docs/Web/HTML/Attributs_universels/tabindex) de Dropdown | number | — | 0 |
 
 ### Dropdown Slots
 

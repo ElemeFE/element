@@ -52,7 +52,9 @@ export default {
 
     background: Boolean,
 
-    disabled: Boolean
+    disabled: Boolean,
+
+    hideOnSinglePage: Boolean
   },
 
   data() {
@@ -65,19 +67,21 @@ export default {
   },
 
   render(h) {
+    const layout = this.layout;
+    if (!layout) return null;
+    if (this.hideOnSinglePage && (!this.internalPageCount || this.internalPageCount === 1)) return null;
+
     let template = <div class={['el-pagination', {
       'is-background': this.background,
       'el-pagination--small': this.small
     }] }></div>;
-    const layout = this.layout || '';
-    if (!layout) return;
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
       next: <next></next>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
-      slot: <my-slot></my-slot>,
+      slot: <slot>{ this.$slots.default ? this.$slots.default : '' }</slot>,
       total: <total></total>
     };
     const components = layout.split(',').map((item) => item.trim());
@@ -107,15 +111,6 @@ export default {
   },
 
   components: {
-    MySlot: {
-      render(h) {
-        return (
-          this.$parent.$slots.default
-            ? this.$parent.$slots.default[0]
-            : ''
-        );
-      }
-    },
     Prev: {
       render(h) {
         return (

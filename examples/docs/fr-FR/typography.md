@@ -1,5 +1,6 @@
 <script>
   import bus from '../../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from '../../components/theme/constant.js';
   const varMap = [
     '$--font-size-extra-large',
     '$--font-size-large',
@@ -18,7 +19,7 @@
   }
   export default {
     created() {
-      bus.$on('user-theme-config-update', this.setGlobal);
+      bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
     },
     mounted() {
       this.setGlobal();

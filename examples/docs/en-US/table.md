@@ -1332,7 +1332,7 @@ When the row content is too long and you do not want to display the horizontal s
 
 ### Tree data and lazy mode
 
-:::demo You can display tree structure data。When using it, the prop `row-key` is required。Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `hasChildren` attribute in row to determine which row contains children.
+:::demo You can display tree structure data. When using it, the prop `row-key` is required. Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `hasChildren` attribute in row to determine which row contains children.
 
 ```html
 <template>
@@ -1344,13 +1344,13 @@ When the row content is too long and you do not want to display the horizontal s
     row-key="id">
     <el-table-column
       prop="date"
-      label="日期"
+      label="Date"
       sortable
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="name"
+      label="Name"
       sortable
       width="180">
     </el-table-column>
@@ -1366,12 +1366,12 @@ When the row content is too long and you do not want to display the horizontal s
     >
     <el-table-column
       prop="date"
-      label="date"
+      label="Date"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="name"
+      label="Name"
       width="180">
     </el-table-column>
   </el-table>

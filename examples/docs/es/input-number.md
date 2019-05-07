@@ -69,9 +69,29 @@ Le permite definir el nivel de incremento de los saltos.
 ```
 :::
 
-### Precision
+### Step estrictamente
 
-:::demo Add `precision` attribute to set the precision of input value.
+:::demo El atributo `step-strictly` acepta `boolean`. Si este atributo es `true`, el valor de entrada sólo puede ser múltiplo de step.
+
+```html
+<template>
+  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num: 2
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Precisión
+
+:::demo El atributo `precision` aplica presicion al valor del value.
 
 ```html
 <template>
@@ -91,7 +111,8 @@ Le permite definir el nivel de incremento de los saltos.
 :::
 
 :::tip
-The value of `precision` must be a non negative integer and should not be less than the decimal places of `step`.
+El valor de `precision` debe ser un numero entero positivo que no debe ser inferior a los decimales del `step`.
+
 :::
 
 ### Tamaño
@@ -155,6 +176,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
+| step-strictly  | si el valor del input puede ser solo un multiplo de step | number  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |

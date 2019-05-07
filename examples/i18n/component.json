@@ -24,6 +24,7 @@
     "header": {
       "guide": "指南",
       "components": "组件",
+      "theme": "主题",
       "resource": "资源"
     },
     "nav": {
@@ -55,6 +56,7 @@
     "header": {
       "guide": "Guide",
       "components": "Component",
+      "theme": "Theme",
       "resource": "Resource"
     },
     "nav": {
@@ -86,6 +88,7 @@
     "header": {
       "guide": "Guía",
       "components": "Componentes",
+      "theme": "Theme",
       "resource": "Recursos"
     },
     "nav": {
@@ -117,6 +120,7 @@
     "header": {
       "guide": "Guide",
       "components": "Composants",
+      "theme": "Theme",
       "resource": "Ressources"
     },
     "nav": {

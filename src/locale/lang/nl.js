@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Geef zoekwoerd',
       noCheckedFormat: '{total} items',
       hasCheckedFormat: '{checked}/{total} geselecteerd'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

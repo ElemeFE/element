@@ -135,38 +135,6 @@
     }
   }
 
-  @media (min-width: 1140px) {
-    .page-component__content {
-      transition:padding-right 0.3s ease;
-      &.theme-config {
-        padding-right: 26%;  
-      }
-    }
-    .page-container.page-component {
-      transition:all 0.3s ease;
-      &.theme-config {
-        width: 98%;
-        .page-component__nav {
-          animation-delay: 1s;
-          padding-left: 2%;
-        }
-      }
-    }
-  }
-
-  @media (min-width: 1600px) {
-    .page-component__content {
-      &.theme-config {
-        padding-right: 25%;
-      }
-    }
-    .page-container.page-component {
-      &.theme-config {
-        width: 1600px;
-      }
-    }
-  }
-
   @media (max-width: 768px) {
     .page-component {
       .page-component__nav {
@@ -197,11 +165,11 @@
 </style>
 <template>
   <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
-  <div class="page-container page-component" :class="{'theme-config': isThemeConfigVisible}">
+  <div class="page-container page-component">
     <el-scrollbar class="page-component__nav">
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
     </el-scrollbar>
-    <div class="page-component__content" :class="{'theme-config': isThemeConfigVisible}">
+    <div class="page-component__content">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
     </div>
@@ -234,8 +202,7 @@
         scrollTop: 0,
         showHeader: true,
         componentScrollBar: null,
-        componentScrollBoxElement: null,
-        isThemeConfigVisible: false
+        componentScrollBoxElement: null
       };
     },
     watch: {
@@ -296,14 +263,8 @@
       bus.$on('navFade', val => {
         this.navFaded = val;
       });
-      bus.$on('user-theme-config-visible', val => {
-        this.isThemeConfigVisible = val;
-      });
     },
     mounted() {
-      if (window.userThemeConfigVisible) {
-        this.isThemeConfigVisible = window.userThemeConfigVisible;
-      }
       this.componentScrollBar = this.$refs.componentScrollBar;
       this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
       this.throttledScrollHandler = throttle(300, this.handleScroll);

@@ -11,7 +11,7 @@
     <template slot-scope="props">
       <p class="algolia-search-title" v-if="props.item.title">
         <span v-html="props.item.highlightedCompo"></span>
-        <span class="algolia-search-separator">></span>
+        <span class="algolia-search-separator"></span>
         <span v-html="props.item.title"></span>
       </p>
       <p

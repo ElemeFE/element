@@ -19,9 +19,9 @@
     <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <slot 
-          v-if="validateState === 'error' && showMessage && form.showMessage" 
-          name="error" 
+        <slot
+          v-if="validateState === 'error' && showMessage && form.showMessage"
+          name="error"
           :error="validateMessage">
           <div
             class="el-form-item__error"
@@ -279,6 +279,17 @@
       },
       updateComputedLabelWidth(width) {
         this.computedLabelWidth = width ? `${width}px` : '';
+      },
+      addValidateEvents() {
+        const rules = this.getRules();
+
+        if (rules.length || this.required !== undefined) {
+          this.$on('el.form.blur', this.onFieldBlur);
+          this.$on('el.form.change', this.onFieldChange);
+        }
+      },
+      removeValidateEvents() {
+        this.$off();
       }
     },
     mounted() {
@@ -293,12 +304,7 @@
           value: initialValue
         });
 
-        let rules = this.getRules();
-
-        if (rules.length || this.required !== undefined) {
-          this.$on('el.form.blur', this.onFieldBlur);
-          this.$on('el.form.change', this.onFieldChange);
-        }
+        this.addValidateEvents();
       }
     },
     beforeDestroy() {

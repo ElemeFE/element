@@ -280,13 +280,14 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | hide-on-click | si se oculta el menú después de hacer clic en el elemento | boolean | —                                        | true        |
 | show-timeout  | Tiempo de retardo antes de mostrar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 250         |
 | hide-timeout  | Tiempo de retardo antes de ocultar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 150         |
+| tabindex      | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) de Dropdown | number              |          —         | 0           |
 
 ### Dropdown Slots
 
 | Nombre | Descripción |
 |------|--------|
-| — | content of Dropdown. Notice: Must be a valid html dom element (ex. `<span>, <button> etc.`) or `el-component`, to attach the trigger listener  |
-| dropdown | content of the Dropdown Menu, usually a `<el-dropdown-menu>` element |
+| — | contenido del Dropdown. Aviso: Debe ser un elemento html dom válido (ej. `<span>, <button>` etc.) o `el-component`, para adjuntar el listener trigger |
+| dropdown | contenido del menu Dropdown, normalmente es un elemento `<el-dropdown-menu>` |
 
 ### Dropdown Eventos
 | Nombre         | Descripción                              | Parametros                               |

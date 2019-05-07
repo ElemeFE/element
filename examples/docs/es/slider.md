@@ -176,6 +176,43 @@ Se soporta la selección de un rango de valores.
 ```
 :::
 
+### Mostrar marcas
+
+:::demo Use el atributo `marks`  para mostrar marcas en el slider.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ## Atributos
 | Atributo            | Descripción                              | Tipo            | Valores aceptados | Por defecto |
 | ------------------- | ---------------------------------------- | --------------- | ----------------- | ----------- |
@@ -196,6 +233,7 @@ Se soporta la selección de un rango de valores.
 | label               | etiqueta para screen reader              | string          | —                 | —           |
 | debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 | tooltip-class       | nombre personalizado de clase para el tooltip | string | — | — |
+| marks | marcas, tipo de clave debe ser `number` y debe estar en intervalo cerrado [min, max], cada marca puede tener estilo personalizado | object | — | — |
 
 ## Eventos
 | Nombre | Descripción                              | Parametros               |

@@ -174,6 +174,43 @@ Selecting a range of values is supported.
 ```
 :::
 
+### Show marks
+
+:::demo Setting this `marks` attribute can show mark on slider.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ## Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -194,6 +231,7 @@ Selecting a range of values is supported.
 | label | label for screen reader | string | — | — |
 | debounce | debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 | tooltip-class | custom class name for the tooltip | string | — | — |
+| marks | marks， type of key must be `number` and must in closed interval `[min, max]`, each mark can custom style| object | — | — |
 
 ## Events
 | Event Name | Description | Parameters |

@@ -4,6 +4,7 @@
     inputSize ? 'el-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,
+      'is-exceed': inputExceed,
       'el-input-group': $slots.prepend || $slots.append,
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
@@ -48,9 +49,9 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || showClear || showPassword || validateState && needStatusIcon">
+        v-if="getSuffixVisible()">
         <span class="el-input__suffix-inner">
-          <template v-if="!showClear || !showPwdVisible">
+          <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
             <i class="el-input__icon"
               v-if="suffixIcon"
@@ -65,6 +66,11 @@
             class="el-input__icon el-icon-view el-input__clear"
             @click="handlePasswordVisible"
           ></i>
+          <span v-if="isWordLimitVisible" class="el-input__count">
+            <span class="el-input__count-inner">
+              {{ textLength }}/{{ upperLimit }}
+            </span>
+          </span>
         </span>
         <i class="el-input__icon"
           v-if="validateState"
@@ -95,6 +101,7 @@
       :aria-label="label"
     >
     </textarea>
+    <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
   </div>
 </template>
 <script>
@@ -174,6 +181,10 @@
         type: Boolean,
         default: false
       },
+      showWordLimit: {
+        type: Boolean,
+        default: false
+      },
       tabindex: String
     },
 
@@ -218,6 +229,29 @@
           !this.inputDisabled &&
           !this.readonly &&
           (!!this.nativeInputValue || this.focused);
+      },
+      isWordLimitVisible() {
+        return this.showWordLimit &&
+          this.$attrs.maxlength &&
+          (this.type === 'text' || this.type === 'textarea') &&
+          !this.inputDisabled &&
+          !this.readonly &&
+          !this.showPassword;
+      },
+      upperLimit() {
+        return this.$attrs.maxlength;
+      },
+      textLength() {
+        if (typeof this.value === 'number') {
+          return String(this.value).length;
+        }
+
+        return (this.value || '').length;
+      },
+      inputExceed() {
+        // show exceed style if length of initial value greater then maxlength
+        return this.isWordLimitVisible &&
+          (this.textLength > this.upperLimit);
       }
     },
 
@@ -362,6 +396,14 @@
       },
       getInput() {
         return this.$refs.input || this.$refs.textarea;
+      },
+      getSuffixVisible() {
+        return this.$slots.suffix ||
+          this.suffixIcon ||
+          this.showClear ||
+          this.showPassword ||
+          this.isWordLimitVisible ||
+          (this.validateState && this.needStatusIcon);
       }
     },
 
