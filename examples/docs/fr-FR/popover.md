@@ -115,11 +115,11 @@ Vous pouvez aussi imbriquer des opérations. Procéder ainsi est plus léger que
 <el-popover
   placement="top"
   width="160"
-  v-model="visible2">
+  v-model="visible">
   <p>Voulez-vous vraiment supprimer ceci?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible2 = false">Annuler</el-button>
-    <el-button type="primary" size="mini" @click="visible2 = false">Confirmer</el-button>
+    <el-button size="mini" type="text" @click="visible = false">Annuler</el-button>
+    <el-button type="primary" size="mini" @click="visible = false">Confirmer</el-button>
   </div>
   <el-button slot="reference">Supprimer</el-button>
 </el-popover>
@@ -128,7 +128,7 @@ Vous pouvez aussi imbriquer des opérations. Procéder ainsi est plus léger que
   export default {
     data() {
       return {
-        visible2: false,
+        visible: false,
       };
     }
   }

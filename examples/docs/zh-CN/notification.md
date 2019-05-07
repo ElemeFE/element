@@ -11,7 +11,7 @@
 <template>
   <el-button
     plain
-    @click="open">
+    @click="open1">
     可自动关闭
   </el-button>
   <el-button
@@ -24,7 +24,7 @@
 <script>
   export default {
     methods: {
-      open() {
+      open1() {
         const h = this.$createElement;
 
         this.$notify({
@@ -50,27 +50,27 @@
 
 带有 icon，常用来显示「成功、警告、消息、错误」类的系统消息
 
-:::demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过`type`字段来设置，除此以外的值将被忽略。同时，我们也为 Notification 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open5`和`open6`那样直接调用。
+:::demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过`type`字段来设置，除此以外的值将被忽略。同时，我们也为 Notification 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open3`和`open4`那样直接调用。
 ```html
 <template>
   <el-button
     plain
-    @click="open3">
+    @click="open1">
     成功
   </el-button>
   <el-button
     plain
-    @click="open4">
+    @click="open2">
     警告
   </el-button>
   <el-button
     plain
-    @click="open5">
+    @click="open3">
     消息
   </el-button>
   <el-button
     plain
-    @click="open6">
+    @click="open4">
     错误
   </el-button>
 </template>
@@ -78,7 +78,7 @@
 <script>
   export default {
     methods: {
-      open3() {
+      open1() {
         this.$notify({
           title: '成功',
           message: '这是一条成功的提示消息',
@@ -86,7 +86,7 @@
         });
       },
 
-      open4() {
+      open2() {
         this.$notify({
           title: '警告',
           message: '这是一条警告的提示消息',
@@ -94,14 +94,14 @@
         });
       },
 
-      open5() {
+      open3() {
         this.$notify.info({
           title: '消息',
           message: '这是一条消息的提示消息'
         });
       },
 
-      open6() {
+      open4() {
         this.$notify.error({
           title: '错误',
           message: '这是一条错误的提示消息'
@@ -122,22 +122,22 @@
 <template>
   <el-button
     plain
-    @click="open7">
+    @click="open1">
     右上角
   </el-button>
   <el-button
     plain
-    @click="open8">
+    @click="open2">
     右下角
   </el-button>
   <el-button
     plain
-    @click="open9">
+    @click="open3">
     左下角
   </el-button>
   <el-button
     plain
-    @click="open10">
+    @click="open4">
     左上角
   </el-button>
 </template>
@@ -145,14 +145,14 @@
 <script>
   export default {
     methods: {
-      open7() {
+      open1() {
         this.$notify({
           title: '自定义位置',
           message: '右上角弹出的消息'
         });
       },
 
-      open8() {
+      open2() {
         this.$notify({
           title: '自定义位置',
           message: '右下角弹出的消息',
@@ -160,7 +160,7 @@
         });
       },
 
-      open9() {
+      open3() {
         this.$notify({
           title: '自定义位置',
           message: '左下角弹出的消息',
@@ -168,7 +168,7 @@
         });
       },
 
-      open10() {
+      open4() {
         this.$notify({
           title: '自定义位置',
           message: '左上角弹出的消息',
@@ -190,7 +190,7 @@
 <template>
   <el-button
     plain
-    @click="open11">
+    @click="open">
     偏移的消息
   </el-button>
 </template>
@@ -198,7 +198,7 @@
 <script>
   export default {
     methods: {
-      open11() {
+      open() {
         this.$notify({
           title: '偏移',
           message: '这是一条带有偏移的提示消息',
@@ -219,7 +219,7 @@
 <template>
   <el-button
     plain
-    @click="open12">
+    @click="open">
     使用 HTML 片段
   </el-button>
 </template>
@@ -227,7 +227,7 @@
 <script>
   export default {
     methods: {
-      open12() {
+      open() {
         this.$notify({
           title: 'HTML 片段',
           dangerouslyUseHTMLString: true,
@@ -253,7 +253,7 @@
 <template>
   <el-button
     plain
-    @click="open13">
+    @click="open">
     隐藏关闭按钮
   </el-button>
 </template>
@@ -261,7 +261,7 @@
 <script>
   export default {
     methods: {
-      open13() {
+      open() {
         this.$notify.success({
           title: 'Info',
           message: '这是一条没有关闭按钮的消息',

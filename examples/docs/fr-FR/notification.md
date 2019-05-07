@@ -10,7 +10,7 @@ Affiche une notification globale dans un coin de la page.
 <template>
   <el-button
     plain
-    @click="open">
+    @click="open1">
     Se ferme automatiquement
   </el-button>
   <el-button
@@ -23,7 +23,7 @@ Affiche une notification globale dans un coin de la page.
 <script>
   export default {
     methods: {
-      open() {
+      open1() {
         const h = this.$createElement;
 
         this.$notify({
@@ -49,27 +49,27 @@ Affiche une notification globale dans un coin de la page.
 
 We provide four types: success, warning, info and error.
 
-:::demo Element fournit quatre types de notifications: `success`, `warning`, `info` et `error`. Il sont choisis grâce au champs `type`, et n'importe quelle autre valeur sera ignorée. Il existe des méthodes  enregistrées pour chaque type, comme dans `open5` et `open6`, qui ne nécessitent donc pas le champs `type`.
+:::demo Element fournit quatre types de notifications: `success`, `warning`, `info` et `error`. Il sont choisis grâce au champs `type`, et n'importe quelle autre valeur sera ignorée. Il existe des méthodes  enregistrées pour chaque type, comme dans `open3` et `open4`, qui ne nécessitent donc pas le champs `type`.
 ```html
 <template>
   <el-button
     plain
-    @click="open3">
+    @click="open1">
     Success
   </el-button>
   <el-button
     plain
-    @click="open4">
+    @click="open2">
     Warning
   </el-button>
   <el-button
     plain
-    @click="open5">
+    @click="open3">
     Info
   </el-button>
   <el-button
     plain
-    @click="open6">
+    @click="open4">
     Error
   </el-button>
 </template>
@@ -77,7 +77,7 @@ We provide four types: success, warning, info and error.
 <script>
   export default {
     methods: {
-      open3() {
+      open1() {
         this.$notify({
           title: 'Success',
           message: 'Ceci est un message de succès',
@@ -85,7 +85,7 @@ We provide four types: success, warning, info and error.
         });
       },
 
-      open4() {
+      open2() {
         this.$notify({
           title: 'Warning',
           message: 'Ceci est un avertissement',
@@ -93,14 +93,14 @@ We provide four types: success, warning, info and error.
         });
       },
 
-      open5() {
+      open3() {
         this.$notify.info({
           title: 'Info',
           message: 'Ceci est une information'
         });
       },
 
-      open6() {
+      open4() {
         this.$notify.error({
           title: 'Error',
           message: 'Ceci est une erreur'
@@ -121,22 +121,22 @@ La notification peut apparaître dans le coin de votre choix.
 <template>
   <el-button
     plain
-    @click="open7">
+    @click="open1">
     Top Right
   </el-button>
   <el-button
     plain
-    @click="open8">
+    @click="open2">
     Bottom Right
   </el-button>
   <el-button
     plain
-    @click="open9">
+    @click="open3">
     Bottom Left
   </el-button>
   <el-button
     plain
-    @click="open10">
+    @click="open4">
     Top Left
   </el-button>
 </template>
@@ -144,14 +144,14 @@ La notification peut apparaître dans le coin de votre choix.
 <script>
   export default {
     methods: {
-      open7() {
+      open1() {
         this.$notify({
           title: 'Custom Position',
           message: 'Je suis dans le coin supérieur droit'
         });
       },
 
-      open8() {
+      open2() {
         this.$notify({
           title: 'Custom Position',
           message: 'Je suis dans le coin inférieur droit',
@@ -159,7 +159,7 @@ La notification peut apparaître dans le coin de votre choix.
         });
       },
 
-      open9() {
+      open3() {
         this.$notify({
           title: 'Custom Position',
           message: 'Je suis dans le coin inférieur gauche',
@@ -167,7 +167,7 @@ La notification peut apparaître dans le coin de votre choix.
         });
       },
 
-      open10() {
+      open4() {
         this.$notify({
           title: 'Custom Position',
           message: 'Je suis dans le coin supérieur gauche',
@@ -189,7 +189,7 @@ Vous pouvez décaler l'emplacement de la notification par rapport au bord de la 
 <template>
   <el-button
     plain
-    @click="open11">
+    @click="open">
     Notification avec décalage
   </el-button>
 </template>
@@ -197,7 +197,7 @@ Vous pouvez décaler l'emplacement de la notification par rapport au bord de la 
 <script>
   export default {
     methods: {
-      open11() {
+      open() {
         this.$notify.success({
           title: 'Success',
           message: 'Ceci est un message de succès',
@@ -220,7 +220,7 @@ L'attribut `message` supporte le HTML.
 <template>
   <el-button
     plain
-    @click="open12">
+    @click="open">
     Utiliser du HTML
   </el-button>
 </template>
@@ -228,7 +228,7 @@ L'attribut `message` supporte le HTML.
 <script>
   export default {
     methods: {
-      open12() {
+      open() {
         this.$notify({
           title: 'HTML String',
           dangerouslyUseHTMLString: true,
@@ -255,7 +255,7 @@ Il est possible de cacher le bouton de fermeture.
 <template>
   <el-button
     plain
-    @click="open13">
+    @click="open">
     Bouton de fermeture caché
     </el-button>
 </template>
@@ -263,7 +263,7 @@ Il est possible de cacher le bouton de fermeture.
 <script>
   export default {
     methods: {
-      open13() {
+      open() {
         this.$notify.success({
           title: 'Info',
           message: 'Ceci est un message sans bouton de fermeture',

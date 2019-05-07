@@ -64,14 +64,14 @@ Las opciones pueden ser discretas.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -82,8 +82,8 @@ Las opciones pueden ser discretas.
   export default {
     data() {
       return {
-        value: 0,
-        value: 0
+        value1: 0,
+        value2: 0
       }
     }
   }

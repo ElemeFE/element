@@ -139,7 +139,7 @@
 ```html
 <el-tree
   :props="props"
-  :load="loadNode1"
+  :load="loadNode"
   lazy
   show-checkbox>
 </el-tree>
@@ -156,7 +156,7 @@
       };
     },
     methods: {
-      loadNode1(node, resolve) {
+      loadNode(node, resolve) {
         if (node.level === 0) {
           return resolve([{ name: 'region' }]);
         }
@@ -546,14 +546,14 @@
   :props="defaultProps"
   default-expand-all
   :filter-node-method="filterNode"
-  ref="tree2">
+  ref="tree">
 </el-tree>
 
 <script>
   export default {
     watch: {
       filterText(val) {
-        this.$refs.tree2.filter(val);
+        this.$refs.tree.filter(val);
       }
     },
 
