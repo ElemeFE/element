@@ -24,7 +24,7 @@
     <div class="el-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
       <svg viewBox="0 0 100 100">
         <path class="el-progress-circle__track" :d="trackPath" stroke="#e5e9f2" :stroke-width="relativeStrokeWidth" fill="none"></path>
-        <path class="el-progress-circle__path" :d="trackPath" stroke-linecap="round" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
+        <path class="el-progress-circle__path" :d="trackPath" :stroke-linecap="linecap" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
       </svg>
     </div>
     <div class="el-progress__text" v-if="showText && !textInside" :style="{fontSize: progressTextSize + 'px'}">
@@ -74,6 +74,11 @@
       color: {
         type: String,
         default: ''
+      },
+      linecap: {
+        type: String,
+        default: 'round',
+        validator: val => ['round', 'butt'].indexOf(val) > -1
       }
     },
     computed: {
