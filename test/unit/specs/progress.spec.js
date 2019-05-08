@@ -105,4 +105,12 @@ describe('Progress', () => {
     }, true);
     expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(0, 0, 0)');
   });
+  it('linecap', () => {
+    vm = createVue({
+      template: `
+      <el-progress type="circle" :width="80" :stroke-width="15" :precentage="50" linecap="butt"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-circle__path:last-child').getAttribute('stroke-linecap')).to.equal('butt');
+  });
 });
