@@ -108,6 +108,9 @@ export declare class ElDatePicker extends ElementUIComponent {
   /** Range separator */
   rangeSeparator: string
 
+  /** Timezone of date. Allowed 'local', 'UTC', or UTC +- an offset ('UTC-5:00')
+  timezone: string
+
   /** Default date of the calendar */
   defaultValue: Date | number | string
 

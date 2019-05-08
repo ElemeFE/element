@@ -56,6 +56,9 @@ export declare class ElTimePicker extends ElementUIComponent {
   /** Range separator */
   rangeSeparator: string
 
+  /** Timezone of date. Allowed 'local', 'UTC', or UTC +- an offset ('UTC-5:00')
+  timezone: string
+
   /**
    * Focus the Input component
    */

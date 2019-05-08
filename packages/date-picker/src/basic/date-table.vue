@@ -32,16 +32,16 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, prevDate, nextDate, isDate, clearTime as _clearTime} from 'element-ui/src/utils/date-util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, prevDate, nextDate, isDate, clearTime as _clearTime, getFullYear, getMonth, getDate, getDay, setDate, setFullYear, setMonth, newDate} from 'element-ui/src/utils/date-util';
   import Locale from 'element-ui/src/mixins/locale';
   import { arrayFindIndex, arrayFind, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
   const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-  const getDateTimestamp = function(time) {
+  const getDateTimestamp = function(time, timezone) {
     if (typeof time === 'number' || typeof time === 'string') {
-      return _clearTime(new Date(time)).getTime();
+      return _clearTime(new Date(time), timezone).getTime();
     } else if (time instanceof Date) {
-      return _clearTime(time).getTime();
+      return _clearTime(time, timezone).getTime();
     } else {
       return NaN;
     }
@@ -98,6 +98,10 @@
             selecting: false
           };
         }
+      },
+
+      timezone: {
+        default: 'local'
       }
     },
 
@@ -114,23 +118,23 @@
       },
 
       year() {
-        return this.date.getFullYear();
+        return getFullYear(this.date, this.timezone);
       },
 
       month() {
-        return this.date.getMonth();
+        return getMonth(this.date, this.timezone);
       },
 
       startDate() {
-        return getStartDateOfMonth(this.year, this.month);
+        return getStartDateOfMonth(this.year, this.month, this.timezone);
       },
 
       rows() {
         // TODO: refactory rows / getCellClasses
-        const date = new Date(this.year, this.month, 1);
-        let day = getFirstDayOfMonth(date); // day of first day
-        const dateCountOfMonth = getDayCountOfMonth(date.getFullYear(), date.getMonth());
-        const dateCountOfLastMonth = getDayCountOfMonth(date.getFullYear(), (date.getMonth() === 0 ? 11 : date.getMonth() - 1));
+        const date = newDate([this.year, this.month, 1], this.timezone);
+        let day = getFirstDayOfMonth(date, this.timezone); // day of first day
+        const dateCountOfMonth = getDayCountOfMonth(getFullYear(date, this.timezone), getMonth(date, this.timezone));
+        const dateCountOfLastMonth = getDayCountOfMonth(getFullYear(date, this.timezone), (getMonth(date, this.timezone) === 0 ? 11 : getMonth(date, this.timezone) - 1));
 
         day = (day === 0 ? 7 : day);
 
@@ -141,14 +145,14 @@
         const startDate = this.startDate;
         const disabledDate = this.disabledDate;
         const selectedDate = this.selectionMode === 'dates' ? coerceTruthyValueToArray(this.value) : [];
-        const now = getDateTimestamp(new Date());
+        const now = getDateTimestamp(new Date(), this.timezone);
 
         for (let i = 0; i < 6; i++) {
           const row = rows[i];
 
           if (this.showWeekNumber) {
             if (!row[0]) {
-              row[0] = { type: 'week', text: getWeekNumber(nextDate(startDate, i * 7 + 1)) };
+              row[0] = { type: 'week', text: getWeekNumber(nextDate(startDate, this.timezone, i * 7 + 1), this.timezone) };
             }
           }
 
@@ -161,10 +165,10 @@
             cell.type = 'normal';
 
             const index = i * 7 + j;
-            const time = nextDate(startDate, index - offset).getTime();
-            cell.inRange = time >= getDateTimestamp(this.minDate) && time <= getDateTimestamp(this.maxDate);
-            cell.start = this.minDate && time === getDateTimestamp(this.minDate);
-            cell.end = this.maxDate && time === getDateTimestamp(this.maxDate);
+            const time = nextDate(startDate, this.timezone, index - offset).getTime();
+            cell.inRange = time >= getDateTimestamp(this.minDate, this.timezone) && time <= getDateTimestamp(this.maxDate, this.timezone);
+            cell.start = this.minDate && time === getDateTimestamp(this.minDate, this.timezone);
+            cell.end = this.maxDate && time === getDateTimestamp(this.maxDate, this.timezone);
             const isToday = time === now;
 
             if (isToday) {
@@ -218,13 +222,13 @@
       },
 
       minDate(newVal, oldVal) {
-        if (getDateTimestamp(newVal) !== getDateTimestamp(oldVal)) {
+        if (getDateTimestamp(newVal, this.timezone) !== getDateTimestamp(oldVal, this.timezone)) {
           this.markRange(this.minDate, this.maxDate);
         }
       },
 
       maxDate(newVal, oldVal) {
-        if (getDateTimestamp(newVal) !== getDateTimestamp(oldVal)) {
+        if (getDateTimestamp(newVal, this.timezone) !== getDateTimestamp(oldVal, this.timezone)) {
           this.markRange(this.minDate, this.maxDate);
         }
       }
@@ -241,9 +245,9 @@
     methods: {
       cellMatchesDate(cell, date) {
         const value = new Date(date);
-        return this.year === value.getFullYear() &&
-          this.month === value.getMonth() &&
-          Number(cell.text) === value.getDate();
+        return this.year === getFullYear(value, this.timezone) &&
+          this.month === getMonth(value, this.timezone) &&
+          Number(cell.text) === getDate(value, this.timezone);
       },
 
       getCellClasses(cell) {
@@ -293,38 +297,38 @@
 
       getDateOfCell(row, column) {
         const offsetFromStart = row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay;
-        return nextDate(this.startDate, offsetFromStart);
+        return nextDate(this.startDate, this.timezone, offsetFromStart);
       },
 
       isWeekActive(cell) {
         if (this.selectionMode !== 'week') return false;
-        const newDate = new Date(this.year, this.month, 1);
-        const year = newDate.getFullYear();
-        const month = newDate.getMonth();
+        const newDateObj = newDate([this.year, this.month, 1], this.timezone);
+        const year = getFullYear(newDateObj, this.timezone);
+        const month = getMonth(newDateObj, this.timezone);
 
         if (cell.type === 'prev-month') {
-          newDate.setMonth(month === 0 ? 11 : month - 1);
-          newDate.setFullYear(month === 0 ? year - 1 : year);
+          setMonth(newDateObj, month === 0 ? 11 : month - 1, this.timezone);
+          setFullYear(newDateObj, month === 0 ? year - 1 : year, this.timezone);
         }
 
         if (cell.type === 'next-month') {
-          newDate.setMonth(month === 11 ? 0 : month + 1);
-          newDate.setFullYear(month === 11 ? year + 1 : year);
+          setMonth(newDateObj, month === 11 ? 0 : month + 1, this.timezone);
+          setFullYear(newDateObj, month === 11 ? year + 1 : year, this.timezone);
         }
 
-        newDate.setDate(parseInt(cell.text, 10));
+        setDate(newDateObj, parseInt(cell.text, 10), this.timezone);
 
         if (isDate(this.value)) {
-          const dayOffset = (this.value.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
-          const weekDate = prevDate(this.value, dayOffset);
-          return weekDate.getTime() === newDate.getTime();
+          const dayOffset = (getDay(this.value, this.timezone) - this.firstDayOfWeek + 7) % 7 - 1;
+          const weekDate = prevDate(this.value, this.timezone, dayOffset);
+          return weekDate.getTime() === newDateObj.getTime();
         }
         return false;
       },
 
       markRange(minDate, maxDate) {
-        minDate = getDateTimestamp(minDate);
-        maxDate = getDateTimestamp(maxDate) || minDate;
+        minDate = getDateTimestamp(minDate, this.timezone);
+        maxDate = getDateTimestamp(maxDate, this.timezone) || minDate;
         [minDate, maxDate] = [Math.min(minDate, maxDate), Math.max(minDate, maxDate)];
 
         const startDate = this.startDate;
@@ -336,7 +340,7 @@
 
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
-            const time = nextDate(startDate, index - this.offsetDay).getTime();
+            const time = nextDate(startDate, this.timezone, index - this.offsetDay).getTime();
 
             cell.inRange = minDate && time >= minDate && time <= maxDate;
             cell.start = minDate && time === minDate;
@@ -396,36 +400,36 @@
 
         if (cell.disabled || cell.type === 'week') return;
 
-        const newDate = this.getDateOfCell(row, column);
+        const newDateObj = this.getDateOfCell(row, column);
 
         if (this.selectionMode === 'range') {
           if (!this.rangeState.selecting) {
-            this.$emit('pick', {minDate: newDate, maxDate: null});
+            this.$emit('pick', {minDate: newDateObj, maxDate: null});
             this.rangeState.selecting = true;
           } else {
-            if (newDate >= this.minDate) {
-              this.$emit('pick', {minDate: this.minDate, maxDate: newDate});
+            if (newDateObj >= this.minDate) {
+              this.$emit('pick', {minDate: this.minDate, maxDate: newDateObj});
             } else {
-              this.$emit('pick', {minDate: newDate, maxDate: this.minDate});
+              this.$emit('pick', {minDate: newDateObj, maxDate: this.minDate});
             }
             this.rangeState.selecting = false;
           }
         } else if (this.selectionMode === 'day') {
-          this.$emit('pick', newDate);
+          this.$emit('pick', newDateObj);
         } else if (this.selectionMode === 'week') {
-          const weekNumber = getWeekNumber(newDate);
-          const value = newDate.getFullYear() + 'w' + weekNumber;
+          const weekNumber = getWeekNumber(newDateObj, this.timezone);
+          const value = getFullYear(newDateObj, this.timezone) + 'w' + weekNumber;
           this.$emit('pick', {
-            year: newDate.getFullYear(),
+            year: getFullYear(newDateObj, this.timezone),
             week: weekNumber,
             value: value,
-            date: newDate
+            date: newDateObj
           });
         } else if (this.selectionMode === 'dates') {
           const value = this.value || [];
           const newValue = cell.selected
-            ? removeFromArray(value, date => date.getTime() === newDate.getTime())
-            : [...value, newDate];
+            ? removeFromArray(value, date => date.getTime() === newDateObj.getTime())
+            : [...value, newDateObj];
           this.$emit('pick', newValue);
         }
       }

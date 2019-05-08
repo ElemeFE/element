@@ -86,7 +86,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
+import { formatDate, parseDate, isDateObject, getWeekNumber, getMonth, getDay, getDate, setDate, setHours } from 'element-ui/src/utils/date-util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -132,34 +132,35 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange',
   'dates'
 ];
-const DATE_FORMATTER = function(value, format) {
+const DATE_FORMATTER = function(value, format, timezone) {
   if (format === 'timestamp') return value.getTime();
-  return formatDate(value, format);
+  return formatDate(value, format, timezone);
 };
-const DATE_PARSER = function(text, format) {
+const DATE_PARSER = function(text, format, params) {
   if (format === 'timestamp') return new Date(Number(text));
-  return parseDate(text, format);
+  return parseDate(text, format, params.timezone);
 };
-const RANGE_FORMATTER = function(value, format) {
+const RANGE_FORMATTER = function(value, format, timezone) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0];
     const end = value[1];
 
     if (start && end) {
-      return [DATE_FORMATTER(start, format), DATE_FORMATTER(end, format)];
+      return [DATE_FORMATTER(start, format, timezone), DATE_FORMATTER(end, format, timezone)];
     }
   }
   return '';
 };
-const RANGE_PARSER = function(array, format, separator) {
+const RANGE_PARSER = function(array, format, params) {
   if (!Array.isArray(array)) {
-    array = array.split(separator);
+    array = array.split(params.rangeSeparator);
   }
+
   if (array.length === 2) {
     const range1 = array[0];
     const range2 = array[1];
 
-    return [DATE_PARSER(range1, format), DATE_PARSER(range2, format)];
+    return [DATE_PARSER(range1, format, params), DATE_PARSER(range2, format, params)];
   }
   return [];
 };
@@ -175,24 +176,25 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   week: {
-    formatter(value, format) {
-      let week = getWeekNumber(value);
-      let month = value.getMonth();
+    formatter(value, format, timezone) {
+      let week = getWeekNumber(value, timezone);
+      let month = getMonth(value, timezone);
       const trueDate = new Date(value);
+
       if (week === 1 && month === 11) {
-        trueDate.setHours(0, 0, 0, 0);
-        trueDate.setDate(trueDate.getDate() + 3 - (trueDate.getDay() + 6) % 7);
+        setHours(trueDate, [0, 0, 0, 0], timezone);
+        setDate(trueDate, getDate(trueDate, timezone) + 3 - (getDay(trueDate, timezone) + 6) % 7, timezone);
       }
-      let date = formatDate(trueDate, format);
+      let date = formatDate(trueDate, format, timezone);
 
       date = /WW/.test(date)
         ? date.replace(/WW/, week < 10 ? '0' + week : week)
         : date.replace(/W/, week);
       return date;
     },
-    parser(text, format) {
+    parser(text, format, params) {
       // parse as if a normal date
-      return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format);
+      return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format, params);
     }
   },
   date: {
@@ -247,12 +249,12 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   dates: {
-    formatter(value, format) {
-      return value.map(date => DATE_FORMATTER(date, format));
+    formatter(value, format, timezone) {
+      return value.map(date => DATE_FORMATTER(date, format, timezone));
     },
-    parser(value, format) {
+    parser(value, format, params) {
       return (typeof value === 'string' ? value.split(', ') : value)
-        .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+        .map(date => date instanceof Date ? date : DATE_PARSER(date, format, params));
     }
   }
 };
@@ -262,24 +264,24 @@ const PLACEMENT_MAP = {
   right: 'bottom-end'
 };
 
-const parseAsFormatAndType = (value, customFormat, type, rangeSeparator = '-') => {
+const parseAsFormatAndType = (value, customFormat, type, timezone, rangeSeparator = '-') => {
   if (!value) return null;
   const parser = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
   ).parser;
   const format = customFormat || DEFAULT_FORMATS[type];
-  return parser(value, format, rangeSeparator);
+  return parser(value, format, {rangeSeparator, timezone});
 };
 
-const formatAsFormatAndType = (value, customFormat, type) => {
+const formatAsFormatAndType = (value, customFormat, type, timezone = 'local') => {
   if (!value) return null;
   const formatter = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
   ).formatter;
   const format = customFormat || DEFAULT_FORMATS[type];
-  return formatter(value, format);
+  return formatter(value, format, timezone);
 };
 
 /*
@@ -382,6 +384,9 @@ export default {
     defaultTime: {},
     rangeSeparator: {
       default: '-'
+    },
+    timezone: {
+      default: 'local'
     },
     pickerOptions: {},
     unlinkPanels: Boolean,
@@ -502,7 +507,7 @@ export default {
     },
 
     displayValue() {
-      const formattedValue = formatAsFormatAndType(this.parsedValue, this.format, this.type, this.rangeSeparator);
+      const formattedValue = formatAsFormatAndType(this.parsedValue, this.format, this.type, this.timezone);
       if (Array.isArray(this.userInput)) {
         return [
           this.userInput[0] || (formattedValue && formattedValue[0]) || '',
@@ -529,7 +534,7 @@ export default {
       }
 
       if (this.valueFormat) {
-        return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.rangeSeparator) || this.value;
+        return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.timezone, this.rangeSeparator) || this.value;
       }
 
       // NOTE: deal with common but incorrect usage, should remove in next major version
@@ -600,7 +605,7 @@ export default {
     parseValue(value) {
       const isParsed = isDateObject(value) || (Array.isArray(value) && value.every(isDateObject));
       if (this.valueFormat && !isParsed) {
-        return parseAsFormatAndType(value, this.valueFormat, this.type, this.rangeSeparator) || value;
+        return parseAsFormatAndType(value, this.valueFormat, this.type, this.timezone, this.rangeSeparator) || value;
       } else {
         return value;
       }
@@ -609,7 +614,7 @@ export default {
     formatToValue(date) {
       const isFormattable = isDateObject(date) || (Array.isArray(date) && date.every(isDateObject));
       if (this.valueFormat && isFormattable) {
-        return formatAsFormatAndType(date, this.valueFormat, this.type, this.rangeSeparator);
+        return formatAsFormatAndType(date, this.valueFormat, this.type, this.timezone);
       } else {
         return date;
       }
@@ -618,12 +623,12 @@ export default {
     // {parse, formatTo} String deals with user input
     parseString(value) {
       const type = Array.isArray(value) ? this.type : this.type.replace('range', '');
-      return parseAsFormatAndType(value, this.format, type);
+      return parseAsFormatAndType(value, this.format, type, this.timezone);
     },
 
     formatToString(value) {
       const type = Array.isArray(value) ? this.type : this.type.replace('range', '');
-      return formatAsFormatAndType(value, this.format, type);
+      return formatAsFormatAndType(value, this.format, type, this.timezone);
     },
 
     handleMouseEnter() {
@@ -715,7 +720,7 @@ export default {
 
       if (this.type === 'dates') {
         // restore to former value
-        const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.rangeSeparator) || this.valueOnOpen;
+        const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.timezone, this.rangeSeparator) || this.valueOnOpen;
         this.emitInput(oldValue);
       }
     },
@@ -825,6 +830,7 @@ export default {
       this.picker.defaultValue = this.defaultValue;
       this.picker.defaultTime = this.defaultTime;
       this.picker.popperClass = this.popperClass;
+      this.picker.timezone = this.timezone;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
@@ -844,7 +850,7 @@ export default {
           const format = DEFAULT_FORMATS.timerange;
 
           ranges = Array.isArray(ranges) ? ranges : [ranges];
-          this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
+          this.picker.selectableRange = ranges.map(range => parser(range, format, {rangeSeparator: this.rangeSeparator, timezone: this.timezone}));
         }
 
         for (const option in options) {

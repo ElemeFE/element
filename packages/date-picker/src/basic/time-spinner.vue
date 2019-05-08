@@ -101,7 +101,7 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from 'element-ui/src/utils/date-util';
+  import { getRangeHours, getRangeMinutes, modifyTime, getHours, getMinutes, getSeconds } from 'element-ui/src/utils/date-util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
@@ -123,24 +123,27 @@
       amPmMode: {
         type: String,
         default: '' // 'a': am/pm; 'A': AM/PM
+      },
+      timezone: {
+        default: 'local'
       }
     },
 
     computed: {
       hours() {
-        return this.date.getHours();
+        return getHours(this.date, this.timezone);
       },
       minutes() {
-        return this.date.getMinutes();
+        return getMinutes(this.date, this.timezone);
       },
       seconds() {
-        return this.date.getSeconds();
+        return getSeconds(this.date, this.timezone);
       },
       hoursList() {
-        return getRangeHours(this.selectableRange);
+        return getRangeHours(this.selectableRange, this.timezone);
       },
       minutesList() {
-        return getRangeMinutes(this.selectableRange, this.hours);
+        return getRangeMinutes(this.selectableRange, this.hours, this.timezone);
       },
       arrowHourList() {
         const hours = this.hours;
@@ -192,9 +195,9 @@
 
       modifyDateField(type, value) {
         switch (type) {
-          case 'hours': this.$emit('change', modifyTime(this.date, value, this.minutes, this.seconds)); break;
-          case 'minutes': this.$emit('change', modifyTime(this.date, this.hours, value, this.seconds)); break;
-          case 'seconds': this.$emit('change', modifyTime(this.date, this.hours, this.minutes, value)); break;
+          case 'hours': this.$emit('change', modifyTime(this.date, value, this.minutes, this.seconds, this.timezone)); break;
+          case 'minutes': this.$emit('change', modifyTime(this.date, this.hours, value, this.seconds, this.timezone)); break;
+          case 'seconds': this.$emit('change', modifyTime(this.date, this.hours, this.minutes, value, this.timezone)); break;
         }
       },
 

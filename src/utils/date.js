@@ -23,6 +23,10 @@
  * SOFTWARE.
  */
 
+/* Added UTC date methods to support time conversion to UTC and UTC offsets
+ * Changes licensed under the ElemeFE project license
+ */
+
 /*eslint-disable*/
 // 把 YYYY-MM-DD 改成了 yyyy-MM-dd
 (function (main) {
@@ -38,6 +42,7 @@
   var threeDigits = /\d{3}/;
   var fourDigits = /\d{4}/;
   var word = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
+  var UTCOffset = /^UTC([-+])(\d{1,2}):(\d\d)$/;
   var noop = function () {
   };
 
@@ -50,7 +55,7 @@
   }
 
   function monthUpdate(arrName) {
-    return function (d, v, i18n) {
+    return function (d, v, timezone, i18n) {
       var index = i18n[arrName].indexOf(v.charAt(0).toUpperCase() + v.substr(1).toLowerCase());
       if (~index) {
         d.month = index;
@@ -77,91 +82,92 @@
     monthNamesShort: monthNamesShort,
     monthNames: monthNames,
     amPm: ['am', 'pm'],
+    timezone: 'local',
     DoFn: function DoFn(D) {
       return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : (D - D % 10 !== 10) * D % 10];
     }
   };
 
   var formatFlags = {
-    D: function(dateObj) {
-      return dateObj.getDay();
+    D: function(dateObj, timezone) {
+      return fecha.dates.getDay(dateObj, timezone);
     },
-    DD: function(dateObj) {
-      return pad(dateObj.getDay());
+    DD: function(dateObj, timezone) {
+      return pad(fecha.dates.getDay(dateObj, timezone));
     },
-    Do: function(dateObj, i18n) {
-      return i18n.DoFn(dateObj.getDate());
+    Do: function(dateObj, timezone, i18n) {
+      return i18n.DoFn(fecha.dates.getDate(dateObj, timezone));
     },
-    d: function(dateObj) {
-      return dateObj.getDate();
+    d: function(dateObj, timezone) {
+      return fecha.dates.getDate(dateObj, timezone);
     },
-    dd: function(dateObj) {
-      return pad(dateObj.getDate());
+    dd: function(dateObj, timezone) {
+      return pad(fecha.dates.getDate(dateObj, timezone));
     },
-    ddd: function(dateObj, i18n) {
-      return i18n.dayNamesShort[dateObj.getDay()];
+    ddd: function(dateObj, timezone, i18n) {
+      return i18n.dayNamesShort[fecha.dates.getDay(dateObj, timezone)];
     },
-    dddd: function(dateObj, i18n) {
-      return i18n.dayNames[dateObj.getDay()];
+    dddd: function(dateObj, timezone, i18n) {
+      return i18n.dayNames[fecha.dates.getDay(dateObj, timezone)];
     },
-    M: function(dateObj) {
-      return dateObj.getMonth() + 1;
+    M: function(dateObj, timezone) {
+      return fecha.dates.getMonth(dateObj, timezone) + 1;
     },
-    MM: function(dateObj) {
-      return pad(dateObj.getMonth() + 1);
+    MM: function(dateObj, timezone) {
+      return pad(fecha.dates.getMonth(dateObj, timezone) + 1);
     },
-    MMM: function(dateObj, i18n) {
-      return i18n.monthNamesShort[dateObj.getMonth()];
+    MMM: function(dateObj, timezone, i18n) {
+      return i18n.monthNamesShort[fecha.dates.getMonth(dateObj, timezone)];
     },
-    MMMM: function(dateObj, i18n) {
-      return i18n.monthNames[dateObj.getMonth()];
+    MMMM: function(dateObj, timezone, i18n) {
+      return i18n.monthNames[fecha.dates.getMonth(dateObj, timezone)];
     },
-    yy: function(dateObj) {
-      return String(dateObj.getFullYear()).substr(2);
+    yy: function(dateObj, timezone) {
+      return String(fecha.dates.getFullYear(dateObj, timezone)).substr(2);
     },
-    yyyy: function(dateObj) {
-      return dateObj.getFullYear();
+    yyyy: function(dateObj, timezone) {
+      return fecha.dates.getFullYear(dateObj, timezone);
     },
-    h: function(dateObj) {
-      return dateObj.getHours() % 12 || 12;
+    h: function(dateObj, timezone) {
+      return fecha.dates.getHours(dateObj, timezone) % 12 || 12;
     },
-    hh: function(dateObj) {
-      return pad(dateObj.getHours() % 12 || 12);
+    hh: function(dateObj, timezone) {
+      return pad(fecha.dates.getHours(dateObj, timezone) % 12 || 12);
     },
-    H: function(dateObj) {
-      return dateObj.getHours();
+    H: function(dateObj, timezone) {
+      return fecha.dates.getHours(dateObj, timezone);
     },
-    HH: function(dateObj) {
-      return pad(dateObj.getHours());
+    HH: function(dateObj, timezone) {
+      return pad(fecha.dates.getHours(dateObj, timezone));
     },
-    m: function(dateObj) {
-      return dateObj.getMinutes();
+    m: function(dateObj, timezone) {
+      return fecha.dates.getMinutes(dateObj, timezone);
     },
-    mm: function(dateObj) {
-      return pad(dateObj.getMinutes());
+    mm: function(dateObj, timezone) {
+      return pad(fecha.dates.getMinutes(dateObj, timezone));
     },
-    s: function(dateObj) {
-      return dateObj.getSeconds();
+    s: function(dateObj, timezone) {
+      return fecha.dates.getSeconds(dateObj, timezone);
     },
-    ss: function(dateObj) {
-      return pad(dateObj.getSeconds());
+    ss: function(dateObj, timezone) {
+      return pad(fecha.dates.getSeconds(dateObj, timezone));
     },
-    S: function(dateObj) {
-      return Math.round(dateObj.getMilliseconds() / 100);
+    S: function(dateObj, timezone) {
+      return Math.round(fecha.dates.getMilliseconds(dateObj, timezone) / 100);
     },
-    SS: function(dateObj) {
-      return pad(Math.round(dateObj.getMilliseconds() / 10), 2);
+    SS: function(dateObj, timezone) {
+      return pad(Math.round(fecha.dates.getMilliseconds(dateObj, timezone) / 10), 2);
     },
-    SSS: function(dateObj) {
-      return pad(dateObj.getMilliseconds(), 3);
+    SSS: function(dateObj, timezone) {
+      return pad(fecha.dates.getMilliseconds(dateObj, timezone), 3);
     },
-    a: function(dateObj, i18n) {
-      return dateObj.getHours() < 12 ? i18n.amPm[0] : i18n.amPm[1];
+    a: function(dateObj, timezone, i18n) {
+      return fecha.dates.getHours(dateObj, timezone) < 12 ? i18n.amPm[0] : i18n.amPm[1];
     },
-    A: function(dateObj, i18n) {
-      return dateObj.getHours() < 12 ? i18n.amPm[0].toUpperCase() : i18n.amPm[1].toUpperCase();
+    A: function(dateObj, timezone, i18n) {
+      return fecha.dates.getHours(dateObj, timezone) < 12 ? i18n.amPm[0].toUpperCase() : i18n.amPm[1].toUpperCase();
     },
-    ZZ: function(dateObj) {
+    ZZ: function(dateObj, timezone) {
       var o = dateObj.getTimezoneOffset();
       return (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4);
     }
@@ -174,8 +180,8 @@
     M: [twoDigits, function (d, v) {
       d.month = v - 1;
     }],
-    yy: [twoDigits, function (d, v) {
-      var da = new Date(), cent = +('' + da.getFullYear()).substr(0, 2);
+    yy: [twoDigits, function (d, v, timezone) {
+      var da = new Date(), cent = +('' + fecha.dates.getFullYear(da, timezone)).substr(0, 2);
       d.year = '' + (v > 68 ? cent - 1 : cent) + v;
     }],
     h: [twoDigits, function (d, v) {
@@ -203,7 +209,7 @@
     ddd: [word, noop],
     MMM: [word, monthUpdate('monthNamesShort')],
     MMMM: [word, monthUpdate('monthNames')],
-    a: [word, function (d, v, i18n) {
+    a: [word, function (d, v, timezone, i18n) {
       var val = v.toLowerCase();
       if (val === i18n.amPm[0]) {
         d.isPm = false;
@@ -249,7 +255,7 @@
    * @param {string} mask Format of the date, i.e. 'mm-dd-yy' or 'shortDate'
    */
   fecha.format = function (dateObj, mask, i18nSettings) {
-    var i18n = i18nSettings || fecha.i18n;
+    var i18n = Object.assign({}, fecha.i18n, i18nSettings);
 
     if (typeof dateObj === 'number') {
       dateObj = new Date(dateObj);
@@ -262,7 +268,7 @@
     mask = fecha.masks[mask] || mask || fecha.masks['default'];
 
     return mask.replace(token, function ($0) {
-      return $0 in formatFlags ? formatFlags[$0](dateObj, i18n) : $0.slice(1, $0.length - 1);
+      return $0 in formatFlags ? formatFlags[$0](dateObj, i18n.timezone, i18n) : $0.slice(1, $0.length - 1);
     });
   };
 
@@ -274,7 +280,7 @@
    * @returns {Date|boolean}
    */
   fecha.parse = function (dateStr, format, i18nSettings) {
-    var i18n = i18nSettings || fecha.i18n;
+    var i18n = Object.assign({}, fecha.i18n, i18nSettings);
 
     if (typeof format !== 'string') {
       throw new Error('Invalid format in fecha.parse');
@@ -298,7 +304,7 @@
           isValid = false;
         } else {
           dateStr.replace(info[0], function (result) {
-            info[1](dateInfo, result, i18n);
+            info[1](dateInfo, result, i18n.timezone, i18n);
             dateStr = dateStr.substr(index + result.length);
             return result;
           });
@@ -322,13 +328,276 @@
     var date;
     if (dateInfo.timezoneOffset != null) {
       dateInfo.minute = +(dateInfo.minute || 0) - +dateInfo.timezoneOffset;
-      date = new Date(Date.UTC(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
+      date = new Date(Date.UTC(dateInfo.year || fecha.dates.getFullYear(today, i18n.timezone), dateInfo.month || 0, dateInfo.day || 1,
         dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0));
     } else {
-      date = new Date(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
-        dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0);
+      date = fecha.dates.newDate([dateInfo.year || fecha.dates.getFullYear(today, i18n.timezone), dateInfo.month || 0, dateInfo.day || 1,
+        dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0], i18n.timezone);
     }
     return date;
+  };
+
+  fecha.dates = {};
+
+  fecha.dates.newDate = function newDate(toSet, timezone) {
+    if (Array.isArray(toSet)) {
+      if (timezone === 'UTC') {
+        return new Date(Date.UTC(...toSet));
+      }
+
+      const result = timezone.match(UTCOffset);
+
+      if (result) {
+        const direction = result[1];
+        const hours = Number(result[2]);
+        const minutes = Number(result[3]);
+
+        if (direction === '+') {
+          toSet[1] = Number(toSet[1]) || 0;
+          toSet[2] = Number(toSet[2]) || Number(toSet[2]) === 0 ? Number(toSet[2]) : 1;
+          toSet[3] = Number(toSet[3]) || Number(toSet[3]) === 0 ? Number(toSet[3]) - hours : -hours;
+          toSet[4] = Number(toSet[4]) || Number(toSet[4]) === 0 ? Number(toSet[4]) - minutes : -minutes;
+        } else {
+          toSet[1] = Number(toSet[1]) || 0;
+          toSet[2] = Number(toSet[2]) || Number(toSet[2]) === 0 ? Number(toSet[2]) : 1;
+          toSet[3] = Number(toSet[3]) || Number(toSet[3]) === 0 ? Number(toSet[3]) + hours : hours;
+          toSet[4] = Number(toSet[4]) || Number(toSet[4]) === 0 ? Number(toSet[4]) + minutes : minutes;
+        }
+
+        return new Date(Date.UTC(...toSet));
+      }
+
+      return new Date(...toSet);
+    }
+
+    return new Date(toSet);
+  };
+
+  fecha.dates.getDate = function getDate(date, timezone) {
+    return getDateProperty(date, timezone, 'date');
+  };
+
+  fecha.dates.getDay = function getDay(date, timezone) {
+    return getDateProperty(date, timezone, 'day');
+  };
+
+  fecha.dates.getFullYear = function getFullYear(date, timezone) {
+    return getDateProperty(date, timezone, 'fullYear');
+  };
+
+  fecha.dates.getHours = function getHours(date, timezone) {
+    return getDateProperty(date, timezone, 'hours');
+  };
+
+  fecha.dates.getMilliseconds = function getMilliseconds(date, timezone) {
+    return getDateProperty(date, timezone, 'milliseconds');
+  };
+
+  fecha.dates.getMinutes = function getMinutes(date, timezone) {
+    return getDateProperty(date, timezone, 'minutes');
+  };
+
+  fecha.dates.getMonth = function getMonth(date, timezone) {
+    return getDateProperty(date, timezone, 'month');
+  };
+
+  fecha.dates.getSeconds = function getSeconds(date, timezone) {
+    return getDateProperty(date, timezone, 'seconds');
+  };
+
+  fecha.dates.setDate = function setDate(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'date');
+  };
+
+  fecha.dates.setFullYear = function setFullYear(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'fullYear');
+  };
+
+  fecha.dates.setHours = function setHours(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'hours');
+  };
+
+  fecha.dates.setMilliseconds = function setMilliseconds(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'milliseconds');
+  };
+
+  fecha.dates.setMinutes = function setMinutes(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'minutes');
+  };
+
+  fecha.dates.setMonth = function setMonth(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'month');
+  };
+
+  fecha.dates.setSeconds = function setSeconds(date, toSet, timezone) {
+    return setDateProperty(date, toSet, timezone, 'seconds');
+  };
+
+  function getDateProperty(date, timezone, funct) {
+    const copiedDate = new Date(date.getTime());
+
+    if (timezone === 'UTC') {
+      return getDateFunction(copiedDate, 'UTC', funct);
+    }
+
+    const result = timezone.match(UTCOffset);
+
+    if (result) {
+      const direction = result[1];
+      let hours = Number(result[2]);
+      let minutes = Number(result[3]);
+
+      if (direction === '+') {
+        hours += copiedDate.getUTCHours();
+        minutes += copiedDate.getUTCMinutes();
+      } else {
+        hours = copiedDate.getUTCHours() - hours;
+        minutes = copiedDate.getUTCMinutes() - minutes;
+      }
+
+      copiedDate.setUTCHours(hours);
+      copiedDate.setUTCMinutes(minutes);
+
+      return getDateFunction(copiedDate, 'UTC', funct);
+    }
+
+    return getDateFunction(copiedDate, 'local', funct);
+  };
+
+  function setDateProperty(date, toSet, timezone, funct) {
+    toSet = Array.isArray(toSet) ? toSet : [toSet];
+
+    if (timezone === 'UTC') {
+      return setDateFunction(date, toSet, 'UTC', funct);
+    }
+
+    const result = timezone.match(UTCOffset);
+
+    if (result) {
+      const direction = result[1];
+      const tempDate = fecha.dates.newDate([fecha.dates.getFullYear(date, timezone), fecha.dates.getMonth(date, timezone), fecha.dates.getDate(date, timezone), fecha.dates.getHours(date, timezone), fecha.dates.getMinutes(date, timezone), fecha.dates.getSeconds(date, timezone), fecha.dates.getMilliseconds(date, timezone)], 'UTC');
+      let oppositeOffset = direction === '+' ? timezone.replace('+', '-') : timezone.replace('-', '+');
+
+      switch (funct) {
+        case 'date':
+          setDateFunction(tempDate, toSet, 'UTC', 'date');
+          break;
+        case 'fullYear':
+          setDateFunction(tempDate, toSet, 'UTC', 'fullYear');
+          break;
+        case 'hours':
+          setDateFunction(tempDate, toSet, 'UTC', 'hours');
+          break;
+        case 'milliseconds':
+          setDateFunction(tempDate, toSet, 'UTC', 'milliseconds');
+          break;
+        case 'minutes':
+          setDateFunction(tempDate, toSet, 'UTC', 'minutes');
+          break;
+        case 'month':
+          setDateFunction(tempDate, toSet, 'UTC', 'month');
+          break;
+        case 'seconds':
+          setDateFunction(tempDate, toSet, 'UTC', 'seconds');
+          break;
+      };
+
+      setDateFunction(date, [fecha.dates.getHours(tempDate, oppositeOffset), fecha.dates.getMinutes(tempDate, oppositeOffset), fecha.dates.getSeconds(tempDate, oppositeOffset), fecha.dates.getMilliseconds(tempDate, oppositeOffset)], 'UTC', 'hours');
+      return setDateFunction(date, [fecha.dates.getFullYear(tempDate, oppositeOffset), fecha.dates.getMonth(tempDate, oppositeOffset), fecha.dates.getDate(tempDate, oppositeOffset)], 'UTC', 'fullYear');
+    }
+
+    return setDateFunction(date, toSet, 'local', funct);
+  };
+
+
+  function getDateFunction(date, timezone, funct) {
+    if (timezone === 'UTC') {
+      switch (funct) {
+        case 'date':
+          return date.getUTCDate();
+        case 'day':
+          return date.getUTCDay();
+        case 'fullYear':
+          return date.getUTCFullYear();
+        case 'hours':
+          return date.getUTCHours();
+        case 'milliseconds':
+          return date.getUTCMilliseconds();
+        case 'minutes':
+          return date.getUTCMinutes();
+        case 'month':
+          return date.getUTCMonth();
+        case 'seconds':
+          return date.getUTCSeconds();
+        default:
+          return;
+      }
+    } else {
+      switch (funct) {
+        case 'date':
+          return date.getDate();
+        case 'day':
+          return date.getDay();
+        case 'fullYear':
+          return date.getFullYear();
+        case 'hours':
+          return date.getHours();
+        case 'milliseconds':
+          return date.getMilliseconds();
+        case 'minutes':
+          return date.getMinutes();
+        case 'month':
+          return date.getMonth();
+        case 'seconds':
+          return date.getSeconds();
+        default:
+          return;
+      }
+    }
+  };
+
+  function setDateFunction(date, toSet, timezone, funct) {
+    toSet = Array.isArray(toSet) ? toSet : [toSet];
+
+    if (timezone === 'UTC') {
+      switch (funct) {
+        case 'date':
+          return date.setUTCDate(...toSet);
+        case 'fullYear':
+          return date.setUTCFullYear(...toSet);
+        case 'hours':
+          return date.setUTCHours(...toSet);
+        case 'milliseconds':
+          return date.setUTCMilliseconds(...toSet);
+        case 'minutes':
+          return date.setUTCMinutes(...toSet);
+        case 'month':
+          return date.setUTCMonth(...toSet);
+        case 'seconds':
+          return date.setUTCSeconds(...toSet);
+        default:
+          return;
+      }
+    } else {
+      switch (funct) {
+        case 'date':
+          return date.setDate(...toSet);
+        case 'fullYear':
+          return date.setFullYear(...toSet);
+        case 'hours':
+          return date.setHours(...toSet);
+        case 'milliseconds':
+          return date.setMilliseconds(...toSet);
+        case 'minutes':
+          return date.setMinutes(...toSet);
+        case 'month':
+          return date.setMonth(...toSet);
+        case 'seconds':
+          return date.setSeconds(...toSet);
+        default:
+          return;
+      }
+    }
   };
 
   /* istanbul ignore next */
@@ -342,3 +611,4 @@
     main.fecha = fecha;
   }
 })(this);
+

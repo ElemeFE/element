@@ -19,7 +19,8 @@
               @change="handleMinChange"
               :arrow-control="arrowControl"
               @select-range="setMinSelectionRange"
-              :date="minDate">
+              :date="minDate"
+              :timezone="timezone">
             </time-spinner>
           </div>
         </div>
@@ -35,7 +36,8 @@
               @change="handleMaxChange"
               :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
-              :date="maxDate">
+              :date="maxDate"
+              :timezone="timezone">
             </time-spinner>
           </div>
         </div>
@@ -61,25 +63,33 @@
     limitTimeRange,
     modifyDate,
     clearMilliseconds,
-    timeWithinRange
+    timeWithinRange,
+    getFullYear,
+    getMonth,
+    getDate
   } from 'element-ui/src/utils/date-util';
   import Locale from 'element-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
-  const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
-  const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
-
-  const minTimeOfDay = function(date) {
-    return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate());
+  const MIN_TIME = function(timezone) {
+    return parseDate('00:00:00', 'HH:mm:ss', timezone);
   };
-  
-  const maxTimeOfDay = function(date) {
-    return modifyDate(MAX_TIME, date.getFullYear(), date.getMonth(), date.getDate());
+
+  const MAX_TIME = function(timezone) {
+    return parseDate('23:59:59', 'HH:mm:ss', timezone);
+  };
+
+  const minTimeOfDay = function(date, timezone) {
+    return modifyDate(MIN_TIME(timezone), getFullYear(date, timezone), getMonth(date, timezone), getDate(date, timezone), timezone);
+  };
+
+  const maxTimeOfDay = function(date, timezone) {
+    return modifyDate(MAX_TIME(timezone), getFullYear(date, timezone), getMonth(date, timezone), getDate(date, timezone), timezone);
   };
 
   // increase time by amount of milliseconds, but within the range of day
-  const advanceTime = function(date, amount) {
-    return new Date(Math.min(date.getTime() + amount, maxTimeOfDay(date).getTime()));
+  const advanceTime = function(date, amount, timezone) {
+    return new Date(Math.min(date.getTime() + amount, maxTimeOfDay(date, timezone).getTime()));
   };
 
   export default {
@@ -121,7 +131,8 @@
         format: 'HH:mm:ss',
         visible: false,
         selectionRange: [0, 2],
-        arrowControl: false
+        arrowControl: false,
+        timezone: 'local'
       };
     },
 
@@ -136,10 +147,10 @@
             this.maxDate = new Date(this.defaultValue[1]);
           } else if (this.defaultValue) {
             this.minDate = new Date(this.defaultValue);
-            this.maxDate = advanceTime(new Date(this.defaultValue), 60 * 60 * 1000);
+            this.maxDate = advanceTime(new Date(this.defaultValue), 60 * 60 * 1000, this.timezone);
           } else {
             this.minDate = new Date();
-            this.maxDate = advanceTime(new Date(), 60 * 60 * 1000);
+            this.maxDate = advanceTime(new Date(), 60 * 60 * 1000, this.timezone);
           }
         }
       },
@@ -162,19 +173,19 @@
       },
 
       handleMinChange(date) {
-        this.minDate = clearMilliseconds(date);
+        this.minDate = clearMilliseconds(date, this.timezone);
         this.handleChange();
       },
 
       handleMaxChange(date) {
-        this.maxDate = clearMilliseconds(date);
+        this.maxDate = clearMilliseconds(date, this.timezone);
         this.handleChange();
       },
 
       handleChange() {
         if (this.isValidValue([this.minDate, this.maxDate])) {
-          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
-          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
+          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate, this.timezone), this.maxDate]];
+          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate, this.timezone)]];
           this.$emit('pick', [this.minDate, this.maxDate], true);
         }
       },
@@ -193,8 +204,8 @@
         const minSelectableRange = this.$refs.minSpinner.selectableRange;
         const maxSelectableRange = this.$refs.maxSpinner.selectableRange;
 
-        this.minDate = limitTimeRange(this.minDate, minSelectableRange, this.format);
-        this.maxDate = limitTimeRange(this.maxDate, maxSelectableRange, this.format);
+        this.minDate = limitTimeRange(this.minDate, minSelectableRange, this.timezone, this.format);
+        this.maxDate = limitTimeRange(this.maxDate, maxSelectableRange, this.timezone, this.format);
 
         this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
@@ -219,8 +230,8 @@
 
       isValidValue(date) {
         return Array.isArray(date) &&
-          timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange) &&
-          timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange);
+          timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange, this.timezone) &&
+          timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange, this.timezone);
       },
 
       handleKeydown(event) {

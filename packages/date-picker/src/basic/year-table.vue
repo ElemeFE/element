@@ -45,13 +45,13 @@
 
 <script type="text/babel">
   import { hasClass } from 'element-ui/src/utils/dom';
-  import { isDate, range, nextDate, getDayCountOfYear } from 'element-ui/src/utils/date-util';
+  import { isDate, range, nextDate, getDayCountOfYear, getFullYear, newDate } from 'element-ui/src/utils/date-util';
   import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
-  const datesInYear = year => {
+  const datesInYear = (year, timezone) => {
     const numOfDays = getDayCountOfYear(year);
-    const firstDay = new Date(year, 0, 1);
-    return range(numOfDays).map(n => nextDate(firstDay, n));
+    const firstDay = newDate([year, 0, 1], timezone);
+    return range(numOfDays).map(n => nextDate(firstDay, timezone, n));
   };
 
   export default {
@@ -64,12 +64,15 @@
           return val === null || (val instanceof Date && isDate(val));
         }
       },
-      date: {}
+      date: {},
+      timezone: {
+        default: 'local'
+      }
     },
 
     computed: {
       startYear() {
-        return Math.floor(this.date.getFullYear() / 10) * 10;
+        return Math.floor(getFullYear(this.date, this.timezone) / 10) * 10;
       }
     },
 
@@ -79,11 +82,11 @@
         const today = new Date();
 
         style.disabled = typeof this.disabledDate === 'function'
-          ? datesInYear(year).every(this.disabledDate)
+          ? datesInYear(year, this.timezone).every(this.disabledDate)
           : false;
-        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0;
-        style.today = today.getFullYear() === year;
-        style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
+        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => getFullYear(date, this.timezone) === year) >= 0;
+        style.today = getFullYear(today, this.timezone) === year;
+        style.default = this.defaultValue && getFullYear(this.defaultValue, this.timezone) === year;
 
         return style;
       },

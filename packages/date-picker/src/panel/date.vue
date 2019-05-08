@@ -96,7 +96,8 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate"
+              :timezone="timezone">
             </date-table>
             <year-table
               v-show="currentView === 'year'"
@@ -104,7 +105,8 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate"
+              :timezone="timezone">
             </year-table>
             <month-table
               v-show="currentView === 'month'"
@@ -112,7 +114,8 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate"
+              :timezone="timezone">
             </month-table>
           </div>
         </div>
@@ -159,7 +162,16 @@
     changeYearMonthAndClampDate,
     extractDateFormat,
     extractTimeFormat,
-    timeWithinRange
+    timeWithinRange,
+    getFullYear,
+    getMonth,
+    getDate,
+    getHours,
+    getMinutes,
+    getSeconds,
+    setDate,
+    setFullYear,
+    setMonth
   } from 'element-ui/src/utils/date-util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
@@ -224,15 +236,18 @@
         const value = value => {this.$refs.timepicker.value = value;};
         const date = date => {this.$refs.timepicker.date = date;};
         const selectableRange = selectableRange => {this.$refs.timepicker.selectableRange = selectableRange;};
+        const timezone = timezone => {this.$refs.timepicker.timezone = timezone;};
 
         this.$watch('value', value);
         this.$watch('date', date);
         this.$watch('selectableRange', selectableRange);
+        this.$watch('timezone', timezone);
 
         format(this.timeFormat);
         value(this.value);
         date(this.date);
         selectableRange(this.selectableRange);
+        timezone(this.timezone);
       },
 
       handleClear() {
@@ -244,10 +259,10 @@
         if (!value) {
           this.$emit('pick', value, ...args);
         } else if (Array.isArray(value)) {
-          const dates = value.map(date => this.showTime ? clearMilliseconds(date) : clearTime(date));
+          const dates = value.map(date => this.showTime ? clearMilliseconds(date, this.timezone) : clearTime(date, this.timezone));
           this.$emit('pick', dates, ...args);
         } else {
-          this.$emit('pick', this.showTime ? clearMilliseconds(value) : clearTime(value), ...args);
+          this.$emit('pick', this.showTime ? clearMilliseconds(value, this.timezone) : clearTime(value, this.timezone), ...args);
         }
         this.userInputDate = null;
         this.userInputTime = null;
@@ -275,26 +290,26 @@
       // },
 
       prevMonth() {
-        this.date = prevMonth(this.date);
+        this.date = prevMonth(this.date, this.timezone);
       },
 
       nextMonth() {
-        this.date = nextMonth(this.date);
+        this.date = nextMonth(this.date, this.timezone);
       },
 
       prevYear() {
         if (this.currentView === 'year') {
-          this.date = prevYear(this.date, 10);
+          this.date = prevYear(this.date, this.timezone, 10);
         } else {
-          this.date = prevYear(this.date);
+          this.date = prevYear(this.date, this.timezone);
         }
       },
 
       nextYear() {
         if (this.currentView === 'year') {
-          this.date = nextYear(this.date, 10);
+          this.date = nextYear(this.date, this.timezone, 10);
         } else {
-          this.date = nextYear(this.date);
+          this.date = nextYear(this.date, this.timezone);
         }
       },
 
@@ -307,8 +322,8 @@
       handleTimePick(value, visible, first) {
         if (isDate(value)) {
           const newDate = this.value
-            ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
-            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
+            ? modifyTime(this.value, getHours(value, this.timezone), getMinutes(value, this.timezone), getSeconds(value, this.timezone), this.timezone)
+            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime, this.timezone);
           this.date = newDate;
           this.emit(this.date, true);
         } else {
@@ -325,10 +340,10 @@
 
       handleMonthPick(month) {
         if (this.selectionMode === 'month') {
-          this.date = modifyDate(this.date, this.year, month, 1);
+          this.date = modifyDate(this.date, this.year, month, 1, this.timezone);
           this.emit(this.date);
         } else {
-          this.date = changeYearMonthAndClampDate(this.date, this.year, month);
+          this.date = changeYearMonthAndClampDate(this.date, this.year, month, this.timezone);
           // TODO: should emit intermediate value ??
           // this.emit(this.date);
           this.currentView = 'date';
@@ -338,11 +353,11 @@
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
           let newDate = this.value
-            ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
-            : modifyWithTimeString(value, this.defaultTime);
+            ? modifyDate(this.value, getFullYear(value, this.timezone), getMonth(value, this.timezone), getDate(value, this.timezone), this.timezone)
+            : modifyWithTimeString(value, this.defaultTime, this.timezone);
           // change default time while out of selectableRange
           if (!this.checkDateWithinRange(newDate)) {
-            newDate = modifyDate(this.selectableRange[0][0], value.getFullYear(), value.getMonth(), value.getDate());
+            newDate = modifyDate(this.selectableRange[0][0], getFullYear(value, this.timezone), getMonth(value, this.timezone), getDate(value, this.timezone), this.timezone);
           }
           this.date = newDate;
           this.emit(this.date, this.showTime);
@@ -355,10 +370,10 @@
 
       handleYearPick(year) {
         if (this.selectionMode === 'year') {
-          this.date = modifyDate(this.date, year, 0, 1);
+          this.date = modifyDate(this.date, year, 0, 1, this.timezone);
           this.emit(this.date);
         } else {
-          this.date = changeYearMonthAndClampDate(this.date, year, this.month);
+          this.date = changeYearMonthAndClampDate(this.date, year, this.month, this.timezone);
           // TODO: should emit intermediate value ??
           // this.emit(this.date, true);
           this.currentView = 'month';
@@ -382,7 +397,7 @@
           // deal with the scenario where: user opens the picker, then confirm without doing anything
           const value = this.value
             ? this.value
-            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
+            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime, this.timezone);
           this.date = new Date(value); // refresh date
           this.emit(value);
         }
@@ -425,16 +440,16 @@
       handleKeyControl(keyCode) {
         const mapping = {
           'year': {
-            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setFullYear(date.getFullYear() + step)
+            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => setFullYear(date, getFullYear(date, this.timezone) + step, this.timezone)
           },
           'month': {
-            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setMonth(date.getMonth() + step)
+            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => setMonth(date, getMonth(date, this.timezone) + step, this.timezone)
           },
           'week': {
-            38: -1, 40: 1, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step * 7)
+            38: -1, 40: 1, 37: -1, 39: 1, offset: (date, step) => setDate(date, getDate(date, this.timezone) + step * 7, this.timezone)
           },
           'day': {
-            38: -7, 40: 7, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step)
+            38: -7, 40: 7, 37: -1, 39: 1, offset: (date, step) => setDate(date, getDate(date, this.timezone) + step, this.timezone)
           }
         };
         const mode = this.selectionMode;
@@ -454,9 +469,9 @@
       },
 
       handleVisibleTimeChange(value) {
-        const time = parseDate(value, this.timeFormat);
+        const time = parseDate(value, this.timeFormat, this.timezone);
         if (time && this.checkDateWithinRange(time)) {
-          this.date = modifyDate(time, this.year, this.month, this.monthDate);
+          this.date = modifyDate(time, this.year, this.month, this.monthDate, this.timezone);
           this.userInputTime = null;
           this.$refs.timepicker.value = this.date;
           this.timePickerVisible = false;
@@ -465,12 +480,12 @@
       },
 
       handleVisibleDateChange(value) {
-        const date = parseDate(value, this.dateFormat);
+        const date = parseDate(value, this.dateFormat, this.timezone);
         if (date) {
           if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
             return;
           }
-          this.date = modifyTime(date, this.date.getHours(), this.date.getMinutes(), this.date.getSeconds());
+          this.date = modifyTime(date, getHours(this.date, this.timezone), getMinutes(this.date, this.timezone), getSeconds(this.date, this.timezone), this.timezone);
           this.userInputDate = null;
           this.resetView();
           this.emit(this.date, true);
@@ -493,7 +508,7 @@
 
       checkDateWithinRange(date) {
         return this.selectableRange.length > 0
-          ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
+          ? timeWithinRange(date, this.selectableRange, this.timezone, this.format || 'HH:mm:ss')
           : true;
       }
     },
@@ -519,6 +534,7 @@
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,
+        timezone: 'local',
         format: '',
         arrowControl: false,
         userInputDate: null,
@@ -528,19 +544,19 @@
 
     computed: {
       year() {
-        return this.date.getFullYear();
+        return getFullYear(this.date, this.timezone);
       },
 
       month() {
-        return this.date.getMonth();
+        return getMonth(this.date, this.timezone);
       },
 
       week() {
-        return getWeekNumber(this.date);
+        return getWeekNumber(this.date, this.timezone);
       },
 
       monthDate() {
-        return this.date.getDate();
+        return getDate(this.date, this.timezone);
       },
 
       footerVisible() {
@@ -551,7 +567,7 @@
         if (this.userInputTime !== null) {
           return this.userInputTime;
         } else {
-          return formatDate(this.value || this.defaultValue, this.timeFormat);
+          return formatDate(this.value || this.defaultValue, this.timeFormat, this.timezone);
         }
       },
 
@@ -559,7 +575,7 @@
         if (this.userInputDate !== null) {
           return this.userInputDate;
         } else {
-          return formatDate(this.value || this.defaultValue, this.dateFormat);
+          return formatDate(this.value || this.defaultValue, this.dateFormat, this.timezone);
         }
       },
 

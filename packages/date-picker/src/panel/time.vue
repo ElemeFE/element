@@ -12,7 +12,8 @@
           :show-seconds="showSeconds"
           :am-pm-mode="amPmMode"
           @select-range="setSelectionRange"
-          :date="date">
+          :date="date"
+          :timezone="timezone">
         </time-spinner>
       </div>
       <div class="el-time-panel__footer">
@@ -60,7 +61,7 @@
       value(newVal) {
         let date;
         if (newVal instanceof Date) {
-          date = limitTimeRange(newVal, this.selectableRange, this.format);
+          date = limitTimeRange(newVal, this.selectableRange, this.timezone, this.format);
         } else if (!newVal) {
           date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         }
@@ -95,7 +96,8 @@
         selectionRange: [0, 2],
         disabled: false,
         arrowControl: false,
-        needInitAdjust: true
+        needInitAdjust: true,
+        timezone: 'local'
       };
     },
 
@@ -121,7 +123,7 @@
       handleChange(date) {
         // this.visible avoids edge cases, when use scrolls during panel closing animation
         if (this.visible) {
-          this.date = clearMilliseconds(date);
+          this.date = clearMilliseconds(date, this.timezone);
           // if date is out of range, do not emit
           if (this.isValidValue(this.date)) {
             this.$emit('pick', this.date, true);
@@ -136,7 +138,7 @@
 
       handleConfirm(visible = false, first) {
         if (first) return;
-        const date = clearMilliseconds(limitTimeRange(this.date, this.selectableRange, this.format));
+        const date = clearMilliseconds(limitTimeRange(this.date, this.selectableRange, this.timezone, this.format), this.timezone);
         this.$emit('pick', date, visible, first);
       },
 
@@ -162,7 +164,7 @@
       },
 
       isValidValue(date) {
-        return timeWithinRange(date, this.selectableRange, this.format);
+        return timeWithinRange(date, this.selectableRange, this.timezone, this.format);
       },
 
       adjustSpinners() {

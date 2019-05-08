@@ -40,6 +40,7 @@
               :max-date="maxDate"
               :range-state="rangeState"
               :disabled-date="disabledDate"
+              :timezone="timezone"
               @changerange="handleChangeRange"
               @pick="handleRangePick">
             </month-table>
@@ -67,6 +68,7 @@
               :max-date="maxDate"
               :range-state="rangeState"
               :disabled-date="disabledDate"
+              :timezone="timezone"
               @changerange="handleChangeRange"
               @pick="handleRangePick">
             </month-table>
@@ -83,7 +85,8 @@
     modifyWithTimeString,
     prevYear,
     nextYear,
-    nextMonth
+    nextMonth,
+    getFullYear
   } from 'element-ui/src/utils/date-util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
@@ -91,13 +94,13 @@
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
 
-  const calcDefaultValue = (defaultValue) => {
+  const calcDefaultValue = (defaultValue, timezone) => {
     if (Array.isArray(defaultValue)) {
       return [new Date(defaultValue[0]), new Date(defaultValue[1])];
     } else if (defaultValue) {
-      return [new Date(defaultValue), nextMonth(new Date(defaultValue))];
+      return [new Date(defaultValue), nextMonth(new Date(defaultValue), timezone)];
     } else {
-      return [new Date(), nextMonth(new Date())];
+      return [new Date(), nextMonth(new Date(), timezone)];
     }
   };
   export default {
@@ -111,19 +114,19 @@
       },
 
       leftLabel() {
-        return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year');
+        return getFullYear(this.leftDate, this.timezone) + ' ' + this.t('el.datepicker.year');
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year');
+        return getFullYear(this.rightDate, this.timezone) + ' ' + this.t('el.datepicker.year');
       },
 
       leftYear() {
-        return this.leftDate.getFullYear();
+        return getFullYear(this.leftDate, this.timezone);
       },
 
       rightYear() {
-        return this.rightDate.getFullYear() === this.leftDate.getFullYear() ? this.leftDate.getFullYear() + 1 : this.rightDate.getFullYear();
+        return getFullYear(this.rightDate, this.timezone) === getFullYear(this.leftDate, this.timezone) ? getFullYear(this.leftDate, this.timezone) + 1 : getFullYear(this.rightDate, this.timezone);
       },
 
       enableYearArrow() {
@@ -140,7 +143,7 @@
         minDate: '',
         maxDate: '',
         leftDate: new Date(),
-        rightDate: nextYear(new Date()),
+        rightDate: nextYear(new Date(), 'local'),
         rangeState: {
           endDate: null,
           selecting: false,
@@ -152,8 +155,13 @@
         disabledDate: '',
         format: '',
         arrowControl: false,
+        timezone: 'local',
         unlinkPanels: false
       };
+    },
+
+    mounted() {
+      this.rightDate = nextYear(new Date(), this.timezone);
     },
 
     watch: {
@@ -167,28 +175,28 @@
           if (this.minDate) {
             this.leftDate = this.minDate;
             if (this.unlinkPanels && this.maxDate) {
-              const minDateYear = this.minDate.getFullYear();
-              const maxDateYear = this.maxDate.getFullYear();
+              const minDateYear = getFullYear(this.minDate, this.timezone);
+              const maxDateYear = getFullYear(this.maxDate, this.timezone);
               this.rightDate = minDateYear === maxDateYear
-                ? nextYear(this.maxDate)
+                ? nextYear(this.maxDate, this.timezone)
                 : this.maxDate;
             } else {
-              this.rightDate = nextYear(this.leftDate);
+              this.rightDate = nextYear(this.leftDate, this.timezone);
             }
           } else {
-            this.leftDate = calcDefaultValue(this.defaultValue)[0];
-            this.rightDate = nextYear(this.leftDate);
+            this.leftDate = calcDefaultValue(this.defaultValue, this.timezone)[0];
+            this.rightDate = nextYear(this.leftDate, this.timezone);
           }
         }
       },
 
       defaultValue(val) {
         if (!Array.isArray(this.value)) {
-          const [left, right] = calcDefaultValue(val);
+          const [left, right] = calcDefaultValue(val, this.timezone);
           this.leftDate = left;
-          this.rightDate = val && val[1] && left.getFullYear() !== right.getFullYear() && this.unlinkPanels
+          this.rightDate = val && val[1] && getFullYear(left, this.timezone) !== getFullYear(right, this.timezone) && this.unlinkPanels
             ? right
-            : nextYear(this.leftDate);
+            : nextYear(this.leftDate, this.timezone);
         }
       }
     },
@@ -197,8 +205,8 @@
       handleClear() {
         this.minDate = null;
         this.maxDate = null;
-        this.leftDate = calcDefaultValue(this.defaultValue)[0];
-        this.rightDate = nextYear(this.leftDate);
+        this.leftDate = calcDefaultValue(this.defaultValue, this.timezone)[0];
+        this.rightDate = nextYear(this.leftDate, this.timezone);
         this.$emit('pick', null);
       },
 
@@ -210,8 +218,8 @@
 
       handleRangePick(val, close = true) {
         const defaultTime = this.defaultTime || [];
-        const minDate = modifyWithTimeString(val.minDate, defaultTime[0]);
-        const maxDate = modifyWithTimeString(val.maxDate, defaultTime[1]);
+        const minDate = modifyWithTimeString(val.minDate, defaultTime[0], this.timezone);
+        const maxDate = modifyWithTimeString(val.maxDate, defaultTime[1], this.timezone);
         if (this.maxDate === maxDate && this.minDate === minDate) {
           return;
         }
@@ -236,26 +244,26 @@
 
       // leftPrev*, rightNext* need to take care of `unlinkPanels`
       leftPrevYear() {
-        this.leftDate = prevYear(this.leftDate);
+        this.leftDate = prevYear(this.leftDate, this.timezone);
         if (!this.unlinkPanels) {
-          this.rightDate = prevYear(this.rightDate);
+          this.rightDate = prevYear(this.rightDate, this.timezone);
         }
       },
 
       rightNextYear() {
         if (!this.unlinkPanels) {
-          this.leftDate = nextYear(this.leftDate);
+          this.leftDate = nextYear(this.leftDate, this.timezone);
         }
-        this.rightDate = nextYear(this.rightDate);
+        this.rightDate = nextYear(this.rightDate, this.timezone);
       },
 
       // leftNext*, rightPrev* are called when `unlinkPanels` is true
       leftNextYear() {
-        this.leftDate = nextYear(this.leftDate);
+        this.leftDate = nextYear(this.leftDate, this.timezone);
       },
 
       rightPrevYear() {
-        this.rightDate = prevYear(this.rightDate);
+        this.rightDate = prevYear(this.rightDate, this.timezone);
       },
 
       handleConfirm(visible = false) {

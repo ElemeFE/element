@@ -2772,4 +2772,104 @@ describe('DatePicker', () => {
       }, DELAY);
     });
   });
+
+  describe('timezone', () => {
+    afterEach(() => { destroyVM(vm); });
+
+    it('works for local timezone', done => {
+      vm = createVue({
+        template: '<el-date-picker ref="compo" v-model="value" timezone="local"></el-date-picker>',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+      const datePicker = vm.$refs.compo;
+      const input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+
+      input.value = '2000-10-1';
+      triggerEvent(input, 'input');
+      vm.$nextTick(_ => {
+        keyDown(input, ENTER);
+        setTimeout(_ => {
+          expect(datePicker.pickerVisible).to.false;
+          expect(datePicker.picker.date.getFullYear()).to.equal(2000);
+          expect(datePicker.picker.date.getMonth()).to.equal(9);
+          expect(datePicker.picker.date.getDate()).to.equal(1);
+          expect(datePicker.picker.date.getHours()).to.equal(0);
+          expect(datePicker.picker.date.getMinutes()).to.equal(0);
+          expect(datePicker.picker.date.getSeconds()).to.equal(0);
+          done();
+        }, DELAY);
+      });
+    });
+
+    it('works for UTC timezone', done => {
+      vm = createVue({
+        template: '<el-date-picker ref="compo" v-model="value" timezone="UTC"></el-date-picker>',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+      const datePicker = vm.$refs.compo;
+      const input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+
+      input.value = '2000-10-1';
+      triggerEvent(input, 'input');
+      vm.$nextTick(_ => {
+        keyDown(input, ENTER);
+        setTimeout(_ => {
+          expect(datePicker.pickerVisible).to.false;
+          expect(datePicker.picker.date.getUTCFullYear()).to.equal(2000);
+          expect(datePicker.picker.date.getUTCMonth()).to.equal(9);
+          expect(datePicker.picker.date.getUTCDate()).to.equal(1);
+          expect(datePicker.picker.date.getUTCHours()).to.equal(0);
+          expect(datePicker.picker.date.getUTCMinutes()).to.equal(0);
+          expect(datePicker.picker.date.getUTCSeconds()).to.equal(0);
+          done();
+        }, DELAY);
+      });
+    });
+
+    it('works for UTC offset timezone', done => {
+      vm = createVue({
+        template: '<el-date-picker ref="compo" v-model="value" timezone="UTC+19:00"></el-date-picker>',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+      const datePicker = vm.$refs.compo;
+      const input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+
+      input.value = '2000-10-1';
+      triggerEvent(input, 'input');
+      vm.$nextTick(_ => {
+        keyDown(input, ENTER);
+        setTimeout(_ => {
+          expect(datePicker.pickerVisible).to.false;
+          expect(datePicker.picker.date.getUTCFullYear()).to.equal(2000);
+          expect(datePicker.picker.date.getUTCMonth()).to.equal(8);
+          expect(datePicker.picker.date.getUTCDate()).to.equal(30);
+          expect(datePicker.picker.date.getUTCHours()).to.equal(24 - 19);
+          expect(datePicker.picker.date.getUTCMinutes()).to.equal(0);
+          expect(datePicker.picker.date.getUTCSeconds()).to.equal(0);
+          done();
+        }, DELAY);
+      });
+    });
+  });
 });
