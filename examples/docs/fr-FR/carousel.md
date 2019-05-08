@@ -147,7 +147,7 @@ Quand la page est suffisement large mais avec une hauteur limitée, vous pouvez 
 ```
 :::
 
-By default, `direction` is `horizontal`. Let carousel be displayed in the vertical direction by setting `direction` to `vertical`.
+Par défaut, `direction` est `horizontal`. Vous pouvez faire en sorte que le défilement soit vertical em mettant `direction` à `vertical`.
 
 :::demo
 ```html
@@ -191,7 +191,7 @@ By default, `direction` is `horizontal`. Let carousel be displayed in the vertic
 | arrow | Détermine quand les flèches sont affichés. | string | always/hover/never | hover |
 | type | Type du carousel. | string | card | — |
 | loop | Affiche les éléments en boucle. | boolean | - | true |
-| direction | display direction | string | horizontal/vertical | horizontal |
+| direction | Détermine la direction du défilement. | string | horizontal/vertical | horizontal |
 
 ### Évènements du Carousel
 | Nom | Description | Paramètres |

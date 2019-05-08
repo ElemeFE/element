@@ -1136,12 +1136,12 @@
       handleItemChange(val) {
         console.log('active item:', val);
         setTimeout(_ => {
-          if (val.indexOf('江苏') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
+          if (val.indexOf('江苏') > -1 && !this.options[0].cities.length) {
+            this.options[0].cities = [{
               label: '南京'
             }];
-          } else if (val.indexOf('浙江') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
+          } else if (val.indexOf('浙江') > -1 && !this.options[1].cities.length) {
+            this.options[1].cities = [{
               label: '杭州'
             }];
           }
