@@ -74,6 +74,11 @@
         this.setCurrentName(tabName);
         this.$emit('tab-click', tab, event);
       },
+      handleTabContextMenu(tab, tabName, event){
+        if (tab.disabled) return;
+        event.stopPropagation();
+        this.$emit('tab-contextmenu', tab, event);
+      },
       handleTabRemove(pane, ev) {
         if (pane.disabled) return;
         ev.stopPropagation();
@@ -110,6 +115,7 @@
       let {
         type,
         handleTabClick,
+        handleTabContextMenu,
         handleTabRemove,
         handleTabAdd,
         currentName,
@@ -137,6 +143,7 @@
         props: {
           currentName,
           onTabClick: handleTabClick,
+          onTabContextMenu: handleTabContextMenu,
           onTabRemove: handleTabRemove,
           editable,
           type,
