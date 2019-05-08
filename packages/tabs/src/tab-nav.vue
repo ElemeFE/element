@@ -24,6 +24,10 @@
         type: Function,
         default: noop
       },
+      onTabContextMenu: {
+        type: Function,
+        default: noop
+      },
       onTabRemove: {
         type: Function,
         default: noop
@@ -189,6 +193,7 @@
         editable,
         stretch,
         onTabClick,
+        onTabContextMenu,
         onTabRemove,
         navStyle,
         scrollable,
@@ -237,6 +242,7 @@
             on-focus={ ()=> { setFocus(); }}
             on-blur ={ ()=> { removeFocus(); }}
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
+            on-contextmenu={(ev) => { removeFocus(); onTabContextMenu(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
             {tabLabelContent}
