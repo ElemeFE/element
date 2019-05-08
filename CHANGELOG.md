@@ -6,6 +6,16 @@
 
   - Обновлены типы `TmForm` и `TmFormItem`
 
+*2019-05-08*
+
+  - Добавлен параметр `clear-as-suffix-icon` для `Input`
+  - Внесены правки по стилям `DatePicker`
+  - Изменена структура `DatePicker` с параметром `inline`. Теперь компонент оборачивается в `div` с классами, аналогичны обычному DatePicker'у.
+  - Добавлена возможность указывать `prefix` и `suffix` иконки в инпуте у `DatePicker`
+  - Добавлены аттрибуты `clearable`, `prefix-icon` и `suffix-icon` компоненту `AdvancedDatePicker`
+  - Компоненту `AdvancedDatePicker` добавлена возможнось стирать выбраное значение
+  - Параметр `clearable` компонента `DatePickerJoined` по-умолчанию установлен на `true`
+
 ### 1.2.41
 
 *2019-05-07*

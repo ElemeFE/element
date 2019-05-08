@@ -1694,7 +1694,7 @@ describe('DatePicker', () => {
 
     setTimeout(() => {
       const firstWeek = vm.picker.$el.querySelector('tr th');
-      expect(firstWeek.innerText).to.equal(chineseWeek[i - 1]);
+      expect(firstWeek.innerText.toLowerCase()).to.equal(chineseWeek[i - 1].toLowerCase());
       done();
     });
   });

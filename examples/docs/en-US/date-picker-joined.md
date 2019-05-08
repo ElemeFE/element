@@ -15,22 +15,19 @@
 :::demo default
 
 ```html
-<tm-date-picker-joined
-  suffix-icon="calendar"
-  v-model="date"></tm-date-picker-joined>
+<tm-date-picker-joined v-model="date"></tm-date-picker-joined>
 
 ```
 :::
 
-### Range - clearable
+### Range - non-clearable
 
 :::demo default
 
 ```html
 <tm-date-picker-joined
-  suffix-icon="calendar"
-  :clearable="true"
-  v-model="date"></tm-date-picker-joined>
+    :clearable="false"
+    v-model="date"></tm-date-picker-joined>
 
 ```
 :::
@@ -41,9 +38,9 @@
 :::demo 
 ```html
 <tm-date-picker-joined
-  type="date"
-  v-model="dateSingle"
-  suffix-icon="calendar"></tm-date-picker-joined>
+    type="date"
+    v-model="dateSingle"
+    suffix-icon="calendar"></tm-date-picker-joined>
 ```
 :::
 
@@ -52,10 +49,9 @@
 :::demo 
 ```html
 <tm-date-picker-joined
-  size="extra-large"
-  type="date"
-  v-model="dateSingle"
-  suffix-icon="calendar"></tm-date-picker-joined>
+    size="extra-large"
+    type="date"
+    v-model="dateSingle"></tm-date-picker-joined>
 ```
 :::
 
