@@ -11,6 +11,7 @@
       class="el-image__inner"
       :src="src"
       :alt="alt"
+      :referrerpolicy="referrerPolicy"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter }">
   </div>
@@ -42,7 +43,8 @@
       fit: String,
       lazy: Boolean,
       scrollContainer: {},
-      alt: String
+      alt: String,
+      referrerPolicy: String
     },
 
     data() {

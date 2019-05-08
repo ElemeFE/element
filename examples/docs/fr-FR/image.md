@@ -115,6 +115,7 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
 | src | Source de l'image, identique au natif. | string | — | - |
 | fit | Indique comment l'image devrait être redimmensionnée pour s'adapter à son conteneur, identique à [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | fill / contain / cover / none / scale-down | — | - |
 | alt | Attribut alt natif.| string | - | - |
+| referrer-policy | Attribut referrerPolicy natif.| string | - | - |
 | lazy | Si le lazy loading doit être utilisé. | boolean | — | false |
 | scroll-container | Le conteneur auquel ajouter le listener du scroll en mode lazy loading. | string / HTMLElement | — | Le conteneur parent le plus proche avec la propriété overflow à auto ou scroll. |
 

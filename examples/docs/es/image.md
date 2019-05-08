@@ -116,6 +116,7 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 | src | origen de la imagen, igual que en nativo | string | — | - |
 | fit | Indica como la imagen debe adaptarse al contenendor, lo mismo que [object-fit](https://developer.mozilla.org/es/docs/Web/CSS/object-fit) | fill / contain / cover / none / scale-down | — | - |
 | alt | alt nativo | string | - | - |
+| referrer-policy | referrerPolicy nativo | string | - | - |
 | lazy | si se usara lazy load | boolean | — | false |
 | scroll-container | El contenedor para añadir el scroll listener cuando se utiliza lazy load | string / HTMLElement | — | El contenedor padre más cercano cuya propiedad de desbordamiento es auto o scroll |
 
