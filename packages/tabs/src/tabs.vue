@@ -74,7 +74,7 @@
         this.setCurrentName(tabName);
         this.$emit('tab-click', tab, event);
       },
-      handleTabContextMenu(tab, tabName, event){
+      handleTabContextMenu(tab, tabName, event) {
         if (tab.disabled) return;
         event.stopPropagation();
         this.$emit('tab-contextmenu', tab, event);
