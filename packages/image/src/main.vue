@@ -50,6 +50,7 @@
         loading: true,
         error: false,
         show: !this.lazy,
+        inCarousel: null,
         imageWidth: 0,
         imageHeight: 0
       };
@@ -80,15 +81,20 @@
     },
 
     mounted() {
-      if (this.lazy) {
-        this.addLazyLoadListener();
+      const parent = this.$parent;
+      const inCarousel = parent.$el.className.indexOf('el-carousel__item') !== -1;
+
+      if (inCarousel) {
+        this.removeLazyLoadListener();
+        this.lazy ? this.addLazyLoadInCarousel(parent) : this.loadImage();
       } else {
-        this.loadImage();
+        this.lazy ? this.addLazyLoadListener() : this.loadImage();
       }
     },
 
     beforeDestroy() {
       this.lazy && this.removeLazyLoadListener();
+      this.removeLazyLoadInCarousel();
     },
 
     methods: {
@@ -120,6 +126,15 @@
           this.show = true;
           this.removeLazyLoadListener();
         }
+      },
+      addLazyLoadInCarousel(parent) {
+        this.inCarousel = this.$watch(() => parent.active, function(active) {
+          active && (this.show = true);
+          this.removeLazyLoadInCarousel();
+        });
+      },
+      removeLazyLoadInCarousel() {
+        typeof this.inCarousel === 'function' && this.inCarousel.call();
       },
       addLazyLoadListener() {
         if (this.$isServer) return;

@@ -1,0 +1,5 @@
+[*]
+indent_style = space
+
+[{*.vue,*.js,*.json,*.yml,*.md}]
+indent_size = 2

@@ -76,3 +76,15 @@
     }
   }
 }
+
+.demo-image__carousel_lazy {
+  .el-carousel{
+    height: 400px;
+  }
+  .el-carousel__container {
+    height: 100%;
+  }
+  .el-image {
+    height: 100%;
+  }
+}

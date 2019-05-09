@@ -108,11 +108,43 @@
 ```
 :::
 
+### 走马灯懒加载
+
+:::demo 在`el-carousel-item`中的`el-image`可通过`lazy`开启懒加载功能，当`el-carousel-item`的`active`为`true`时，才会加载图片。
+```html
+<div class="demo-image__carousel_lazy">
+  <el-carousel trigger="click">
+    <el-carousel-item v-for="(url, key) in list" :key="key">
+      <el-image :src="url" lazy></el-image>
+    </el-carousel-item>
+  </el-carousel>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        list: [
+          'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+          'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
+          'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
+          'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+          'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
+          'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | src | 图片源，同原生 | string | — | - |
-| fit | 确定图片如何适应容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | fill / contain / cover / none / scale-down | — | - |
+| fit | 确定图片如何适应容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | string | fill / contain / cover / none / scale-down | - |
 | alt | 原生 alt | string | - | - |
 | lazy | 是否开启懒加载 | boolean | — | false |
 | scroll-container | 开启懒加载后，监听 scroll 事件的容器 | string / HTMLElement | — | 最近一个 overflow 值为 auto 或 scroll 的父元素 |
