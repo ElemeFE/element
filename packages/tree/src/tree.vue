@@ -469,7 +469,7 @@
 
           this.$emit('node-drag-end', draggingNode.node, dropNode.node, dropType, event);
           if (dropType !== 'none') {
-            this.$emit('node-drop', draggingNode.node, dropNode.node, dropType, event);
+            this.$emit('node-drop', draggingNode, dropNode, dropType, event);
           }
         }
         if (draggingNode && !dropNode) {
