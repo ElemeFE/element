@@ -50,7 +50,7 @@
         v-show="expanded"
         role="group"
         :aria-expanded="expanded"            
-        :style="{ 'margin-left': (node.level - 1) * tree.indent + 'px' }"
+        :style="{ 'margin-left': tree.indent + 'px' }"
       >
         <el-tree-node
           :render-content="renderContent"
