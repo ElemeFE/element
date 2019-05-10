@@ -4,7 +4,7 @@ Utilisé pour donner une note sur cinq étoiles.
 
 ### Usage
 
-:::demo Rate divise les scores en trois niveaux et ces niveaux peuvent être distingués en utilisant différentes couleurs de fond. Par défaut ces couleurs sont identiques, mais vous pouvez affecter un tableau des codes couleur à l'attribut `colors`, ainsi que les deux seuils via `low-threshold` et `high-threshold`. Or you can assign them with a object which key is the threshold between two levels and value is the corresponding color.
+:::demo Rate divise les scores en trois niveaux et ces niveaux peuvent être distingués en utilisant différentes couleurs de fond. Par défaut ces couleurs sont identiques, mais vous pouvez affecter un tableau des codes couleur à l'attribut `colors`, ainsi que les deux seuils via `low-threshold` et `high-threshold`. Vous pouvez aussi les affecter avec un objet dont la clé est le seuil et la valeur est la couleur correspondante.
 
 ```html
 <div class="block">
@@ -122,10 +122,10 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 | allow-half | Si les demi-étoiles sont autorisées. | boolean | — | false |
 | low-threshold | Seuil entre les niveaux bas et moyen. La valeur sera incluse dans le niveau bas. | number | — | 2 |
 | high-threshold | Seuil entre les niveaux moyen et haut. La valeur sera incluse entre dans le niveau haut. | number | — | 4 |
-| colors | colors for icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding color. | array/object | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
+| colors | colors for icons. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est la couleur correspondante. | array/object | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
 | void-color | Couleur des icônes non-sélectionnées. | string | — | #C6D1DE |
 | disabled-void-color | Couleur des icônes non-sélectionnées en lecture seule. | string | — | #EFF2F7 |
-| icon-classes | class names of icons. If array, ot should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding icon class. | array/object | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
+| icon-classes | Noms de classe des icônes. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est le nom de classe de l'icône. | array/object | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
 | void-icon-class | Classe des icônes non-sélectionnées. | string | — | el-icon-star-off |
 | disabled-void-icon-class | Classe des icônes non-sélectionnées en lecture seule. | string | — | el-icon-star-on |
 | show-text | Si du texte doit apparaître à droite des étoiles. | boolean | — | false |

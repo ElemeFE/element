@@ -10,6 +10,7 @@
       @select="onSelectChange"
     ></action-panel>
     <main-panel
+      ref='configuratorMain'
       v-if="defaultConfig"
       :currentConfig="currentConfig"
       :defaultConfig="defaultConfig"
@@ -179,6 +180,7 @@ export default {
       bus.$emit(ACTION_COMPONECT_SELECT, val);
       this.selectedComponent = val;
       this.filterCurrentConfig();
+      this.$refs.configuratorMain.focus();
     }
   },
   watch: {

@@ -54,9 +54,9 @@ export default {
 
 :::
 
-### Clearable
+### Limpiable
 
-:::demo Make the Input clearable with the `clearable` attribute.
+:::demo Marque que el input puede ser limpiable con el atributo `clearable`.
 
 ```html
 <el-input
@@ -535,9 +535,9 @@ Búsqueda de datos desde el servidor.
 
 :::
 
-### Limit length
+### Limitar el tamaño
 
-:::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+:::demo `maxlength` y `minlength` son atributos de la entrada nativa, declaran un límite en el número de caracteres que un usuario puede introducir. La configuración de la pro `maxlength` para un tipo de entrada de texto o de área de texto puede limitar la longitud del valor de entrada y le permite mostrar el recuento de palabras al establecer `show-word-limit` a `true` al mismo tiempo.
 
 ```html
 <el-input
@@ -579,7 +579,7 @@ export default {
 | value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
-| show-word-limit | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
+| show-word-limit | Si se muesta el contador de palabras, solamente funciona con los tipos 'text' o 'textarea' | boolean    |  —  | false |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
 | clearable | si debe mostrar el boton de limpieza | boolean | — | false |
 | show-password | si debe mostrar la posibilidad de conmutacion de password input | boolean         | — | false |
