@@ -301,7 +301,7 @@ import { MessageBox } from 'element-ui';
 | type | 消息类型，用于显示图标 | string | success / info / warning / error | — |
 | iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
-| callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm', 'cancel'或'close', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |
+| callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm', 'cancel'或'close', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法，若 showInput 为 true , callback 的第一个参数则是用户输入的值 inputValue ，第二和第三个参数则为action 和 instance  | — | — |
 | showClose | MessageBox 是否显示右上角关闭按钮 | boolean | — | true |
 | beforeClose | MessageBox 关闭前的回调，会暂停实例的关闭 | function(action, instance, done)，action 的值为'confirm', 'cancel'或'close'；instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法；done 用于关闭 MessageBox 实例 | — | — |
 | distinguishCancelAndClose | 是否将取消（点击取消按钮）与关闭（点击关闭按钮或遮罩层、按下 ESC 键）进行区分 | boolean | — | false |
