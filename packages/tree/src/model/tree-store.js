@@ -331,6 +331,10 @@ export default class TreeStore {
 
   setCurrentNodeKey(key) {
     if (key === null) {
+      const prevCurrentNode = this.currentNode;
+      if (prevCurrentNode) {
+        prevCurrentNode.isCurrent = false;
+      }
       this.currentNode = null;
       return;
     }
