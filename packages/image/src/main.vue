@@ -22,7 +22,7 @@
   import { isString, isHtmlElement } from 'element-ui/src/utils/types';
   import throttle from 'throttle-debounce/throttle';
 
-  const isSupportObjectFit = () => document.documentElement.style.objectFit !== undefined;
+  const hasStyleObjectFit = dom => dom.style.hasOwnProperty('objectFit');
 
   const ObjectFit = {
     NONE: 'none',
@@ -60,14 +60,12 @@
       imageStyle() {
         const { fit } = this;
         if (!this.$isServer && fit) {
-          return isSupportObjectFit()
-            ? { 'object-fit': fit }
-            : this.getImageStyle(fit);
+          return hasStyleObjectFit(this.$el) ? { 'object-fit': fit } : this.getImageStyle(fit);
         }
         return {};
       },
       alignCenter() {
-        return !this.$isServer && !isSupportObjectFit() && this.fit !== ObjectFit.FILL;
+        return !this.$isServer && !hasStyleObjectFit(this.$el) && this.fit !== ObjectFit.FILL;
       }
     },
 
@@ -81,20 +79,20 @@
     },
 
     mounted() {
-      const parent = this.$parent;
-      const inCarousel = parent.$el.className.indexOf('el-carousel__item') !== -1;
+      const inCarousel = this.$el.parentElement.className.indexOf('el-carousel__item') !== -1;
 
       if (inCarousel) {
-        this.removeLazyLoadListener();
-        this.lazy ? this.addLazyLoadInCarousel(parent) : this.loadImage();
+        this.lazy ? this.addLazyLoadInCarousel(this.$parent) : this.loadImage();
       } else {
         this.lazy ? this.addLazyLoadListener() : this.loadImage();
       }
     },
 
     beforeDestroy() {
-      this.lazy && this.removeLazyLoadListener();
-      this.removeLazyLoadInCarousel();
+      if (this.lazy) {
+        this.removeLazyLoadListener();
+        this.removeLazyLoadInCarousel();
+      }
     },
 
     methods: {
@@ -129,8 +127,11 @@
       },
       addLazyLoadInCarousel(parent) {
         this.inCarousel = this.$watch(() => parent.active, function(active) {
-          active && (this.show = true);
-          this.removeLazyLoadInCarousel();
+          if (active) {
+            this.show = true;
+            this.removeLazyLoadInCarousel();
+          }
+
         });
       },
       removeLazyLoadInCarousel() {
