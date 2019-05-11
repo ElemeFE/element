@@ -48,9 +48,9 @@ const defaultCallback = action => {
     let callback = currentMsg.callback;
     if (typeof callback === 'function') {
       if (instance.showInput) {
-        callback(instance.inputValue, action);
+        callback(instance.inputValue, action, instance);
       } else {
-        callback(action);
+        callback(action, instance);
       }
     }
     if (currentMsg.resolve) {
@@ -87,7 +87,7 @@ const showNextMsg = () => {
 
       let options = currentMsg.options;
       for (let prop in options) {
-        if (options.hasOwnProperty(prop)) {
+        if (options.hasOwnProperty(prop) && prop !== 'callback') {
           instance[prop] = options[prop];
         }
       }
