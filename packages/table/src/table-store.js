@@ -544,12 +544,14 @@ TableStore.prototype.clearFilter = function(columnKeys) {
   if (typeof columnKeys === 'string') {
     columnKeys = [columnKeys];
   }
+  let filterChanged = false;
   if (Array.isArray(columnKeys)) {
     const columns = columnKeys.map(key => getColumnByKey(states, key));
     keys.forEach(key => {
       const column = columns.find(col => col.id === key);
-      if (column) {
+      if (column && column.filteredValue.length) {
         panels[key].filteredValue = [];
+        filterChanged = true;
       }
     });
     this.commit('filterChange', {
@@ -561,6 +563,7 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 <<<<<<< HEAD
       values: [],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       value: [],
 <<<<<<< HEAD
@@ -586,11 +589,17 @@ TableStore.prototype.clearFilter = function(columnKeys) {
       values: [],
       silent: false,
 >>>>>>> Table: reset silent option.
+=======
+      silent: !filterChanged,
+>>>>>>> Table: fix silent filter-change event issue.
       multi: true
     });
   } else {
     keys.forEach(key => {
-      panels[key].filteredValue = [];
+      if (panels[key].filteredValue.length) {
+        panels[key].filteredValue = [];
+        filterChanged = true;
+      }
     });
 
     states.filters = {};
@@ -606,8 +615,12 @@ TableStore.prototype.clearFilter = function(columnKeys) {
 >>>>>>> Table: fix silent filter-change event while calling clearFilter method issue (#15021)
 =======
       values: [],
+<<<<<<< HEAD
       silent: false
 >>>>>>> Table: reset silent option.
+=======
+      silent: !filterChanged
+>>>>>>> Table: fix silent filter-change event issue.
     });
   }
 };
