@@ -29,6 +29,12 @@ export declare class TmFormItem extends TmUIComponent {
   /** Controls the size of components in this form */
   size: TmUIComponentSize
 
+  /** Validate helpers */
+  validateState: string
+
+  validateMessage: string
+
+  validateDisabled: boolean
 
   /** Reset current field and remove validation result */
   resetField (): void
