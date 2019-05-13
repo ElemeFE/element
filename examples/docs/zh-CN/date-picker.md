@@ -299,6 +299,7 @@
 | `A`  | AM/PM | 仅 `format` 可用，大写 | AM |
 | `a`  | am/pm | 仅 `format` 可用，小写 | am |
 | `timestamp` | JS时间戳 | 仅 `value-format` 可用；组件绑定值为`number`类型 | 1483326245000 |
+| `[MM]` | 不需要格式化字符 | 使用方括号标识不需要格式化的字符 (如  [A] [MM])  | MM |
 
 :::demo
 ```html

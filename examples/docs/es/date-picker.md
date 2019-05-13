@@ -346,6 +346,7 @@ Preste atención a la capitalización
 | `A`         | AM/PM        | solamente para `format`, mayusculas      | AM            |
 | `a`         | am/pm        | solamente para `format`, minúsculas      | am            |
 | `timestamp` | JS timestamp | solamente para `value-format`; valor vinculado debe ser un `number` | 1483326245000 |
+| `[MM]` | No escape characters | To escape characters, wrap them in square brackets (e.g. [A] [MM]) | MM |
 
 :::demo
 ```html

@@ -489,6 +489,37 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('with literal string', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker
+            ref="compo"
+            v-model="value"
+            type="date"
+            value-format="dd/MM yyyy [Element]" />`,
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+
+      vm.$refs.compo.$el.querySelector('input').focus();
+
+      setTimeout(_ => {
+        vm.$refs.compo.picker.$el.querySelector('.el-date-table td.available').click();
+        setTimeout(_ => {
+          const today = new Date();
+          const yyyy = today.getFullYear();
+          const MM = ('0' + (today.getMonth() + 1)).slice(-2);
+          const dd = '01'; // first available one should be first day of month
+          const expectValue = `${dd}/${MM} ${yyyy} Element`;
+          expect(vm.value).to.equal(expectValue);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('accepts', done => {
       vm = createVue({
         template: `
@@ -544,6 +575,34 @@ describe('DatePicker', () => {
         keyDown(input, ENTER);
         setTimeout(_ => {
           expect(vm.value).to.equal('01/10 2000');
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('translates format to value-format with literal string', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker
+            ref="compo"
+            v-model="value"
+            type="date"
+            format="[Element] yyyy-MM-dd"
+            value-format="dd/MM yyyy [UI]" />`,
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+      const input = vm.$refs.compo.$el.querySelector('input');
+      input.focus();
+      setTimeout(_ => {
+        input.value = 'Element 2000-10-01';
+        triggerEvent(input, 'input');
+        keyDown(input, ENTER);
+        setTimeout(_ => {
+          expect(vm.value).to.equal('01/10 2000 UI');
           done();
         }, DELAY);
       }, DELAY);
