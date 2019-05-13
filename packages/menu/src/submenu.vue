@@ -212,21 +212,6 @@
           this.rootMenu.openMenu(this.index, this.indexPath);
         }, 100);
       },
-      popperBodyMenuMouseenter() {
-        const { rootMenu, disabled } = this;
-        if (
-          (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
-          (!rootMenu.collapse && rootMenu.mode === 'vertical') ||
-          disabled
-        ) {
-          return;
-        }
-        this.dispatch('ElSubmenu', 'mouse-enter-child');
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          this.rootMenu.openMenu(this.index, this.indexPath);
-        }, 100);
-      },
       handleMouseleave() {
         const {rootMenu} = this;
         if (
