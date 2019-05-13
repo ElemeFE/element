@@ -73,5 +73,6 @@
   "link": "./packages/link/index.js",
   "divider": "./packages/divider/index.js",
   "image": "./packages/image/index.js",
-  "calendar": "./packages/calendar/index.js"
+  "calendar": "./packages/calendar/index.js",
+  "backtop": "./packages/backtop/index.js"
 }

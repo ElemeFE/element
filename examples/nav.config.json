@@ -267,6 +267,10 @@
             {
               "path": "/image",
               "title": "Image 图片"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
             }
           ]
         }
@@ -541,6 +545,10 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
             }
           ]
         }
@@ -815,6 +823,10 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
             }
           ]
         }
@@ -1089,6 +1101,10 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
             }
           ]
         }
