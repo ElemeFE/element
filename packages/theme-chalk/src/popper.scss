@@ -59,6 +59,14 @@
     margin-left: #{$--popover-arrow-size + 6};
   }
 
+  &[x-placement$="start"] {
+    margin-left: -1px;
+  }
+
+  &[x-placement$="end"] {
+    margin-left: 1px;
+  }
+
   &[x-placement^="right"] .popper__arrow {
     top: 50%;
     left: -#{$--popover-arrow-size + $--popover-arrow-size / 2};
