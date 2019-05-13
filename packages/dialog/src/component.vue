@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="dialog-fade"
+    :name="transitionName"
     @after-enter="afterEnter"
     @after-leave="afterLeave">
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
@@ -102,6 +102,10 @@
       center: {
         type: Boolean,
         default: false
+      },
+      transitionName: {
+        type: String,
+        default: 'dialog-fade'
       }
     },
 
