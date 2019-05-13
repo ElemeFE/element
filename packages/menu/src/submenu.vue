@@ -197,6 +197,21 @@
           this.rootMenu.openMenu(this.index, this.indexPath);
         }, showTimeout);
       },
+      popperBodyMenuMouseenter() {
+        const { rootMenu, disabled } = this;
+        if (
+          (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
+          (!rootMenu.collapse && rootMenu.mode === 'vertical') ||
+          disabled
+        ) {
+          return;
+        }
+        this.dispatch('ElSubmenu', 'mouse-enter-child');
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          this.rootMenu.openMenu(this.index, this.indexPath);
+        }, 100);
+      },
       handleMouseleave() {
         const {rootMenu} = this;
         if (
@@ -237,10 +252,18 @@
       this.$on('mouse-enter-child', () => {
         this.mouseInChild = true;
         clearTimeout(this.timeout);
+        if (this.rootMenu.mode === 'vertical' && this.rootMenu.collapse && this.popperAppendToBody) {
+          this.popperBodyMenuMouseenter();
+        }
       });
       this.$on('mouse-leave-child', () => {
         this.mouseInChild = false;
         clearTimeout(this.timeout);
+        if (this.rootMenu.mode === 'vertical' && this.rootMenu.collapse && this.popperAppendToBody && !this.rootMenu.enterItem) {
+          this.timeout = setTimeout(() => {
+            this.handleMouseleave();
+          }, 150);
+        }
       });
     },
     mounted() {
