@@ -86,10 +86,12 @@
     },
     methods: {
       onMouseEnter() {
+        this.rootMenu.enterItem = true;
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         this.$el.style.backgroundColor = this.hoverBackground;
       },
       onMouseLeave() {
+        this.rootMenu.enterItem = false;
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         this.$el.style.backgroundColor = this.backgroundColor;
       },

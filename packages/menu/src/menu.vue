@@ -127,7 +127,8 @@
         activeIndex: this.defaultActive,
         openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
         items: {},
-        submenus: {}
+        submenus: {},
+        enterItem: false
       };
     },
     computed: {
