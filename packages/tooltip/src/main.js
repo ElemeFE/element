@@ -113,16 +113,24 @@ export default {
       this.$el.setAttribute('tabindex', 0);
       on(this.referenceElm, 'mouseenter', this.show);
       on(this.referenceElm, 'mouseleave', this.hide);
-      on(this.referenceElm, 'focus', () => {
-        if (!this.$slots.default || !this.$slots.default.length) {
-          this.handleFocus();
-          return;
-        }
-        const instance = this.$slots.default[0].componentInstance;
-        if (instance && instance.focus) {
-          instance.focus();
-        } else {
-          this.handleFocus();
+      on(this.referenceElm, 'focus', (event) => {
+        // By checking this we avoid case when user returns to window
+        // with focused element by a browser
+        //
+        // @reference
+        // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
+        const isEventEmittedByUser = Boolean(event.sourceCapabilities);
+        if (isEventEmittedByUser) {
+          if (!this.$slots.default || !this.$slots.default.length) {
+            this.handleFocus();
+            return;
+          }
+          const instance = this.$slots.default[0].componentInstance;
+          if (instance && instance.focus) {
+            instance.focus();
+          } else {
+            this.handleFocus();
+          }
         }
       });
       on(this.referenceElm, 'blur', this.handleBlur);
