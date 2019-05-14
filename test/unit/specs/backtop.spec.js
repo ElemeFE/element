@@ -1,5 +1,4 @@
-import { createTest, destroyVM } from '../util';
-import Backtop from 'packages/backtop';
+import { createVue, destroyVM, wait } from '../util';
 
 describe('Backtop', () => {
   let vm;
@@ -7,9 +6,23 @@ describe('Backtop', () => {
     destroyVM(vm);
   });
 
-  it('create', () => {
-    vm = createTest(Backtop, true);
+  it('create', async() => {
+    vm = createVue({
+      template: `
+        <div ref="scrollTarget" class="test-scroll"  style="height: 100px; overflow: auto">
+          <div style="height: 10000px; width: 100%">
+            <el-backtop target=".test-scroll">
+              <span>test_up_text</span>
+            </el-backtop>
+          </div>
+        </div>
+      `
+    }, true);
     expect(vm.$el).to.exist;
+    expect(vm.$el.innerText).to.be.equal('');
+    vm.$refs.scrollTarget.scrollTop = 2000;
+    await wait();
+    expect(vm.$el.innerText).to.be.equal('test_up_text');
   });
 });
 
