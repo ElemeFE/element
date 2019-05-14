@@ -25,10 +25,15 @@
       }
     }
   }
+
   &__input {
     &--error > input {
       color: $--color-sunset-orange;
       transition: $--color-transition-base;
+    }
+
+    input::placeholder {
+      color: $--color-dark-gunmetal;
     }
   }
 }

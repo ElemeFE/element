@@ -28,16 +28,16 @@
   }
   &.tm-popper {
     &[x-placement^="top"] {
-      margin-bottom: #{$--popover-arrow-size};
+      margin-bottom: 8px;
     }
     &[x-placement^="bottom"] {
-      margin-top: #{$--popover-arrow-size};
+      margin-top: 8px;
     }
     &[x-placement^="right"] {
-      margin-left: #{$--popover-arrow-size};
+      margin-left: 8px;
     }
     &[x-placement^="left"] {
-      margin-right: #{$--popover-arrow-size};
+      margin-right: 8px;
     }
   }
 }

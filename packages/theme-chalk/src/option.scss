@@ -40,6 +40,16 @@
 
     &.hover, &:hover {
       background-color: $--select-option-hover-background;
+
+      &:first-child {
+        border-top-left-radius: $--border-radius-base;
+        border-top-right-radius: $--border-radius-base;
+      }
+
+      &:nth-last-child(2) {
+        border-bottom-left-radius: $--border-radius-base;
+        border-bottom-right-radius: $--border-radius-base;
+      }
     }
 
     &.selected {
