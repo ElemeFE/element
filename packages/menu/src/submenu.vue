@@ -259,11 +259,13 @@
       this.$on('mouse-leave-child', () => {
         this.mouseInChild = false;
         clearTimeout(this.timeout);
-        if (this.rootMenu.mode === 'vertical' && this.rootMenu.collapse && this.popperAppendToBody && !this.rootMenu.enterItem) {
-          this.timeout = setTimeout(() => {
+        this.timeout = setTimeout(() => {
+          if (this.rootMenu.mode === 'vertical' && this.rootMenu.collapse && this.popperAppendToBody && !this.rootMenu.enterItem) {
             this.handleMouseleave();
-          }, 150);
-        }
+          } else {
+            clearTimeout(this.timeout);
+          }
+        }, 150);
       });
     },
     mounted() {
