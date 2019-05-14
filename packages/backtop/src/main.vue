@@ -22,16 +22,16 @@ export default {
 
   props: {
     triggerHeight: {
-      type: [Number],
+      type: [String, Number],
       default: 200
     },
     target: [String],
     right: {
-      type: [Number],
+      type: [String, Number],
       default: 40
     },
     bottom: {
-      type: [Number],
+      type: [String, Number],
       default: 40
     }
   },
