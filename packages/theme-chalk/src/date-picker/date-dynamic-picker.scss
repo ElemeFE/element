@@ -7,13 +7,6 @@
     width: 618px;
   }
 
-  &.tm-inline-picker-panel {
-    border: none;
-    box-shadow: none;
-    margin: 0 auto;
-    line-height: normal;
-  }
-
   .tm-date-table {
     table-layout: fixed;
     width: 100%;
@@ -42,7 +35,6 @@
     text-align: center;
     height: 28px;
     margin-bottom: 5px;
-    padding: 0 3px;
 
     .tm-picker-panel__icon-btn {
       padding: 4px 0;

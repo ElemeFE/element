@@ -8,6 +8,7 @@ $--fade-linear-transition: opacity 200ms linear !default;
 $--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
 $--border-transition-base: border-color .2s cubic-bezier(.645,.045,.355,1) !default;
 $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
+$--fill-transition-base: fill .2s cubic-bezier(.645,.045,.355,1) !default;
 
 /* Colors
 -------------------------- */
@@ -23,6 +24,7 @@ $--color-white-smoke: #f4f5f9 !default;
 $--color-dark-gunmetal: #1e1e28 !default;
 $--color-taupe-gray: #909090 !default;
 $--color-pastel-gray: #ccc !default;
+$--color-carriage-grey: #e5e6ec !default;
 
 $--color-primary: $--color-mantis !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default;
@@ -265,7 +267,7 @@ $--select-input-font-size: 14px !default;
 $--select-option-color: $--color-text-primary !default;
 $--select-option-disabled-color: $--color-pastel-gray !default;
 $--select-option-disabled-background: $--color-white !default;
-$--select-option-height: 34px !default;
+$--select-option-height: 56px !default;
 $--select-option-hover-background: $--background-color-base !default;
 $--select-option-selected: $--color-text-regular !default;
 $--select-option-selected-hover: $--background-color-base !default;

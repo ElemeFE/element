@@ -48,18 +48,32 @@
         v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon"
         :style="suffixOffset">
         <span class="tm-input__suffix-inner">
-          <template v-if="!showClear">
+          <template v-if="clearAsSuffixIcon">
+            <template v-if="!showClear">
+              <slot name="suffix"></slot>
+              <tm-icon class="tm-input__icon"
+                       v-if="suffixIcon"
+                       :name="suffixIcon">
+              </tm-icon>
+            </template>
+            <tm-icon v-else
+                     name="cross-bold"
+                     class="tm-input__icon tm-input__clear"
+                     @click="clear">
+            </tm-icon>
+          </template>
+          <template v-else>
+            <tm-icon v-if="showClear"
+                     name="cross-bold"
+                     class="tm-input__icon tm-input__clear"
+                     @click="clear">
+            </tm-icon>
             <slot name="suffix"></slot>
             <tm-icon class="tm-input__icon"
                      v-if="suffixIcon"
                      :name="suffixIcon">
             </tm-icon>
           </template>
-          <tm-icon v-else
-                   name="cross-bold"
-                   class="tm-input__icon tm-input__clear"
-                   @click="clear">
-          </tm-icon>
         </span>
         <tm-icon class="tm-input__validateIcon tm-input__icon"
                  v-if="validateState"
@@ -167,6 +181,10 @@
       prefixIcon: String,
       label: String,
       clearable: {
+        type: Boolean,
+        default: false
+      },
+      clearAsSuffixIcon: {
         type: Boolean,
         default: false
       },

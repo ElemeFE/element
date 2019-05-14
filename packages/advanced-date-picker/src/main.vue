@@ -20,22 +20,28 @@
                       :default-value="defaultValue"/>
       <div slot="reference"
            @keyup.enter="onEnterKeyUp">
-        <tm-input :class="inputClassName"
-                  v-if="isEditable"
+        <tm-input v-if="isEditable"
+                  :class="inputClassName"
                   :readonly="false"
-                  prefix-icon="calendar"
+                  :prefix-icon="prefixIconName"
+                  :suffix-icon="suffixIcon"
+                  :clearable="!!date && clearable"
                   size="extra-large"
                   v-model="inputDate"
                   @blur="isEditable = false"
                   @focus="$refs.datePicker.focus()"
+                  @clear="date = null; inputDate = null"
                   v-mask="customMask">
           <tm-icon name="calendar"></tm-icon>
         </tm-input>
-        <tm-input class="tm-advanced-date-picker__input"
-                  v-if="!isEditable"
-                  prefix-icon="calendar"
+        <tm-input v-else
+                  class="tm-advanced-date-picker__input"
+                  :prefix-icon="prefixIconName"
+                  :suffix-icon="suffixIcon"
+                  :clearable="!!date && clearable"
                   size="extra-large"
                   @focus="isEditable = true"
+                  @clear="date = null; inputDate = null"
                   :placeholder="inputPlaceholder">
           <tm-icon name="calendar"></tm-icon>
         </tm-input>
@@ -175,6 +181,18 @@
       placeholder: {
         type: String,
         default: DEFAULT_PLACEHOLDER_TEXT
+      },
+      clearable: {
+        type: Boolean,
+        default: true
+      },
+      prefixIcon: {
+        type: String,
+        default: 'calendar'
+      },
+      suffixIcon: {
+        type: String,
+        default: ''
       }
     },
 
@@ -193,6 +211,10 @@
     },
 
     computed: {
+      prefixIconName() {
+        return this.suffixIcon ? '' : this.prefixIcon;
+      },
+
       isInputDateValid() {
         const dates = this.type === SINGLE ? this.inputDate : this.inputDate.split('-');
         return validateInput(this.type, dates);

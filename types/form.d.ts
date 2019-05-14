@@ -1,4 +1,5 @@
 import { TmUIComponent, TmUIComponentSize } from './component'
+import {TmFormItem} from "./form-item";
 
 export type FormItemLabelPosition = 'left' | 'right' | 'top'
 
@@ -57,6 +58,9 @@ export declare class TmForm extends TmUIComponent {
 
   /** Controls the size of components in this form */
   size: TmUIComponentSize
+
+  /** Form fields */
+  fields: TmFormItem[]
 
   /**
    * Validate the whole form

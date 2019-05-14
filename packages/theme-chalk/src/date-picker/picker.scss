@@ -34,14 +34,6 @@
     cursor: pointer;
   }
 
-  .tm-range__icon {
-    font-size: 14px;
-    margin-left: -5px;
-    color: $--color-text-placeholder;
-    float: left;
-    line-height: 32px;
-  }
-
   .tm-range-input {
     appearance: none;
     border: none;
@@ -72,19 +64,47 @@
     color: $--color-text-primary;
   }
 
+  .tm-range__icon,
   .tm-range__close-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 14px;
-    color: $--color-text-placeholder;
-    width: 25px;
-    display: inline-block;
-    float: right;
-    line-height: 32px;
+    fill: $--color-pastel-gray;
+  }
+
+  .tm-range__icon {
+    left: 8px;
+  }
+
+  .tm-range__close-icon {
+    right: 8px;
+    cursor: pointer;
+    &:hover {
+      fill: $--input-icon-focus-color;
+    }
+  }
+
+  &:hover {
+    .tm-range__icon,
+    .tm-range__close-icon {
+      fill: $--color-taupe-gray;
+    }
+    .tm-range__close-icon:hover {
+      fill: $--input-icon-focus-color;
+    }
+  }
+
+  &:focus {
+    .tm-range__icon {
+      fill: $--color-blueberry;
+    }
   }
 }
 
 @include b(range-editor) {
   &.tm-input__inner {
-    padding: 3px 10px;
+    padding: 3px 30px;
   }
 
   @include when(active) {

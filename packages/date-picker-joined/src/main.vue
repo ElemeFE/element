@@ -2,7 +2,7 @@
   <div class="tm-date-picker-joined" @click.stop="onDateFocus">
     <tm-input
       :suffix-icon="suffixIcon"
-      :prefix-icon="prefixIcon"
+      :prefix-icon="prefixIconName"
       :required="required"
       :clearable="clearable"
       :size="size"
@@ -37,11 +37,11 @@ export default {
     },
     suffixIcon: {
       type: String,
-      default: null
+      default: ''
     },
     prefixIcon: {
       type: String,
-      default: null
+      default: 'calendar'
     },
     value: {
       type: [Array, Date, String],
@@ -65,10 +65,13 @@ export default {
     },
     clearable: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   computed: {
+    prefixIconName() {
+      return this.suffixIcon ? '' : this.prefixIcon;
+    },
     date: {
       get() {
         return this.value;

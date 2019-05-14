@@ -870,6 +870,7 @@ Search data from server-side.
 | label | label text | string | — | — |
 | tabindex | input tabindex | string | - | - |
 |focusAfterClear | set focus after clear input or not | boolean | — | true |
+| clear-as-suffix-icon | place clear button instead of suffix icon when input isn't empty | boolean | — | false |
 
 ### Input slots
 
