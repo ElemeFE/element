@@ -19,15 +19,25 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
-    :prefix-icon="triggerClass"
+    :prefix-icon="prefixIconName"
     ref="reference">
-    <tm-icon :name="clearIcon"
-             class="tm-date-editor__clear"
-             slot="suffix"
-             @click="handleClickIcon"
-             v-show="showClose"
-             v-if="haveTrigger">
-    </tm-icon>
+    <template slot="suffix">
+      <template v-if="suffixIcon">
+        <tm-icon v-if="haveTrigger && clearable"
+                 v-show="!!value"
+                 :name="clearIcon"
+                 class="tm-input__icon tm-input__clear tm-date-editor__clear"
+                 @click="handleClickIcon">
+        </tm-icon>
+        <tm-icon :name="suffixIcon" class="tm-input__icon"></tm-icon>
+      </template>
+      <tm-icon v-else-if="haveTrigger && clearable"
+               v-show="!!value"
+               :name="clearIcon"
+               class="tm-input__icon tm-input__clear tm-date-editor__clear"
+               @click="handleClickIcon">
+      </tm-icon>
+    </template>
     <!--<tm-icon slot="suffix"-->
        <!--name="cross"-->
        <!--@click="handleClickIcon"-->
@@ -51,7 +61,6 @@
     ref="reference"
     v-clickoutside="handleClose"
     v-else>
-    <i :class="['tm-input__icon', 'tm-range__icon', triggerClass]"></i>
     <input
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
@@ -75,12 +84,15 @@
       @change="handleEndChange"
       @focus="handleFocus"
       class="tm-range-input">
-    <i
-      @click="handleClickIcon"
+    <tm-icon
+      class="tm-input__icon tm-range__icon"
+      :name="prefixIcon"></tm-icon>
+    <tm-icon
       v-if="haveTrigger"
-      :class="[showClose ? '' + clearIcon : '']"
-      class="tm-input__icon tm-range__close-icon">
-    </i>
+      v-show="!!value"
+      @click="handleClickIcon"
+      class="tm-input__clear tm-input__icon tm-range__close-icon"
+      :name="clearIcon"></tm-icon>
   </div>
 </template>
 
@@ -361,7 +373,11 @@ export default {
     placeholder: String,
     startPlaceholder: String,
     endPlaceholder: String,
-    prefixIcon: String,
+    prefixIcon: {
+      type: String,
+      default: 'calendar'
+    },
+    suffixIcon: String,
     clearIcon: {
       type: String,
       default: 'cross-bold'
@@ -498,8 +514,8 @@ export default {
       return true;
     },
 
-    triggerClass() {
-      return this.prefixIcon || 'calendar';
+    prefixIconName() {
+      return this.suffixIcon ? '' : this.prefixIcon;
     },
 
     selectionMode() {
@@ -809,12 +825,11 @@ export default {
     mountInlinePicker() {
       this.mountPicker();
       this.picker.value = this.parsedValue;
-      const inlinePickerContent = this.popperElm.children[0];
-      const inlinePickerWrapper = document.createElement('div');
-      inlinePickerWrapper.classList = this.picker.$el.classList;
-      inlinePickerWrapper.classList.replace('tm-popper', 'tm-inline-picker-panel');
-      inlinePickerWrapper.append(inlinePickerContent);
-      this.$el.appendChild(inlinePickerWrapper);
+
+      const pickerContent = this.popperElm.children[0];
+      this.$el.classList = this.picker.$el.classList;
+      this.$el.classList.replace('tm-popper', 'tm-picker-panel--inline');
+      this.$el.appendChild(pickerContent);
     },
 
     mountPicker(el) {

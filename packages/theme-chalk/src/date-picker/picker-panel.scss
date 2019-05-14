@@ -9,6 +9,12 @@
   line-height: $--datepicker-cell-size;
   margin: 5px 0;
 
+  @include m(inline) {
+    border: none;
+    box-shadow: none;
+    margin: 0 auto;
+  }
+
   @include e((body, body-wrapper)) {
     &::after {
       content: "";

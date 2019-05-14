@@ -90,6 +90,7 @@
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
       :suffix-icon="suffixIcon"
+      clear-as-suffix-icon
       :prefix-icon="prefixIcon">
       <tm-icon v-if="showControlIcon"
                slot="suffix"
