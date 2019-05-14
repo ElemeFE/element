@@ -1,17 +1,10 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 510px;
+  width: 508px;
 
   &.has-sidebar {
-    width: 620px;
-  }
-
-  &.tm-inline-picker-panel {
-    border: none;
-    box-shadow: none;
-    margin: 0 auto;
-    line-height: normal;
+    width: 618px;
   }
 
   .tm-date-table {

@@ -114,6 +114,16 @@ Use Date Picker for date input.
 
 :::
 
+Use `suffix-icon` attribute to change input icon position from left to right.
+
+:::demo
+
+```html
+<tm-date-picker v-model="value" ref="compo" type="date" default-value="2018-3-4" suffix-icon="calendar"/>
+```
+
+:::
+
 Use `hide-year-header` attribute to hide the year selector in the header.
 
 :::demo
@@ -584,7 +594,8 @@ When picking a date range, you can assign the time part for start date and end d
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
-| prefix-icon | Custom prefix icon class | string | — | tm-icon--date |
+| prefix-icon | Custom prefix icon class | string | — | calendar |
+| suffix-icon | Custom prefix icon class | string | — |  — |
 | clear-icon | Custom clear icon class | string | — | tm-icon--circle-close |
 | disable-old-date | Disable select days before today | boolean | — | false |
 | inline | Render calendar without popover | boolean | — | false |

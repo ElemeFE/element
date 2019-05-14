@@ -57,14 +57,30 @@
   width: 100%;
   @include scroll-bar;
 
-  & .tm-input__clear {
+  & .tm-icon.tm-input__clear {
     fill: $--color-pastel-gray;
-    font-size: 18px;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
     cursor: pointer;
-    transition: $--color-transition-base;
+    transition: $--fill-transition-base;
 
     &:hover {
       fill: $--input-icon-focus-color;
+    }
+  }
+
+  &:hover {
+    .tm-input__suffix,
+    .tm-input__prefix {
+      color: $--input-icon-hover-color;
+
+      .tm-icon {
+        fill: $--input-icon-hover-color;
+        &.tm-input__clear:hover {
+          fill: $--input-icon-focus-color;
+        }
+      }
     }
   }
 
