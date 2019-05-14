@@ -49,6 +49,9 @@ Use Date Picker for date input with mask.
 | disabled-date | function to disable select date, more priority than disable-old-date | function | function | null |
 | default-value | defaults value to show | date | date | Date() |
 | local-storage-date | if app use a local storage, this prop be helpfull | array/date | — | null |
+| clearable | Whether to show clear button | boolean | — | true |
+| prefix-icon | Custom prefix icon class | string | — | calendar |
+| suffix-icon | Custom prefix icon class | string | — |  — |
 
 ### shortcuts
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
