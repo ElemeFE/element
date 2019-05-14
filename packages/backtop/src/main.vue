@@ -21,7 +21,7 @@ export default {
   name: 'ElBacktop',
 
   props: {
-    triggerHeight: {
+    visibilityHeight: {
       type: [String, Number],
       default: 200
     },
@@ -73,7 +73,7 @@ export default {
     },
     onScroll() {
       const scrollTop = this.el.scrollTop;
-      this.visible = scrollTop >= this.triggerHeight;
+      this.visible = scrollTop >= this.visibilityHeight;
     },
     handleClick(e) {
       this.scrollToTop();
