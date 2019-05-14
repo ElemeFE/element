@@ -108,9 +108,24 @@ fileSave(path.join(__dirname, '../../components.json'))
 // 添加到 index.scss
 const sassPath = path.join(__dirname, '../../packages/theme-chalk/src/index.scss');
 const sassImportText = `${fs.readFileSync(sassPath)}@import "./${componentname}.scss";`;
-console.log(sassImportText);
 fileSave(sassPath)
   .write(sassImportText, 'utf8')
+  .end('\n');
+
+// 添加到 element-ui.d.ts
+const elementTsPath = path.join(__dirname, '../../types/element-ui.d.ts');
+
+let elementTsText = `${fs.readFileSync(elementTsPath)}
+/** ${ComponentName} Component */
+export class ${ComponentName} extends El${ComponentName} {}`;
+
+const index = elementTsText.indexOf('export') - 1;
+const importString = `import { El${ComponentName} } from './${componentname}'`;
+
+elementTsText = elementTsText.slice(0, index) + importString + '\n' + elementTsText.slice(index);
+
+fileSave(elementTsPath)
+  .write(elementTsText, 'utf8')
   .end('\n');
 
 // 创建 package
