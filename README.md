@@ -12,6 +12,9 @@ yarn dev
 
 #构建网站
 yarn deploy:build
+
+#部署到github-pages
+./deploy.sh
 ```
 
 ## LICENSE
