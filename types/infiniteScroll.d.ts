@@ -1,5 +1,6 @@
-import { ElementUIComponent } from './component'
+import { VNodeDirective } from 'vue'
 
-/** InfiniteScroll Component */
-export declare class ElInfiniteScroll extends ElementUIComponent {
+export interface ElLoadingDirective extends VNodeDirective {
+  name: 'infinite-scroll',
+  value: Function
 }
