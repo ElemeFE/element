@@ -73,6 +73,7 @@ import { ElLink } from './link'
 import { ElDivider } from './divider'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
+import { ElInfiniteScroll } from './infiniteScroll'
 
 export interface InstallationOptions {
   locale: any,
@@ -316,3 +317,6 @@ export class Image extends ElImage {}
 
 /** Calendar Component */
 export class Calendar extends ElCalendar {}
+
+/** InfiniteScroll Component */
+export class InfiniteScroll extends ElInfiniteScroll {}
