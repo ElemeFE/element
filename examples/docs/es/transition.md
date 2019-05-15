@@ -35,7 +35,7 @@ Puede usar directamente las transiciones incorporadas en Element. Antes de hacer
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -84,7 +84,7 @@ Puede usar directamente las transiciones incorporadas en Element. Antes de hacer
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -129,7 +129,7 @@ Para efectos de colapsado usar el componente `el-collapse-transition`.
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -158,7 +158,7 @@ Vue.component(CollapseTransition.name, CollapseTransition)
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;

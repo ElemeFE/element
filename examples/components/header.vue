@@ -111,11 +111,11 @@
           color: #888;
 
           &:hover {
-            color: #409EFF;
+            color: #5D81F9;
           }
           &.active {
              font-weight: bold;
-             color: #409EFF;
+             color: #5D81F9;
            }
         }
       }
@@ -139,7 +139,7 @@
           left: calc(50% - 7px);
           width: 14px;
           height: 4px;
-          background: #409EFF;
+          background: #5D81F9;
         }
       }
     }
@@ -174,7 +174,7 @@
 
     @when active {
       span, i {
-        color: #409EFF;
+        color: #5D81F9;
       }
       i {
         transform: rotateZ(180deg) translateY(3px);
@@ -183,7 +183,7 @@
 
     &:hover {
       span, i {
-        color: #409EFF;
+        color: #5D81F9;
       }
     }
   }
@@ -355,9 +355,9 @@
           </li>
           
           <!--theme picker-->
-          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
+          <!-- <li class="nav-item nav-theme-switch" v-show="isComponentPage">
             <theme-picker></theme-picker>
-          </li>
+          </li> -->
         </ul>
       </div>
     </header>
@@ -379,8 +379,8 @@
         langDropdownVisible: true,
         langs: {
           'zh-CN': '中文',
-          'en-US': 'English',
-          'es': 'Español'
+          'en-US': 'English'
+          // 'es': 'Español'
         }
       };
     },

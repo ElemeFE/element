@@ -150,7 +150,7 @@
 | inactive-text  | switch 关闭时的文字描述    | string   | — | — |
 | active-value  | switch 打开时的值    | boolean / string / number | — | true |
 | inactive-value  | switch 关闭时的值    | boolean / string / number | — | false |
-| active-color  | switch 打开时的背景色    | string   | — | #409EFF |
+| active-color  | switch 打开时的背景色    | string   | — | #5D81F9 |
 | inactive-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name  | switch 对应的 name 属性    | string   | — | — |
 

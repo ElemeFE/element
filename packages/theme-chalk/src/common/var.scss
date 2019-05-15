@@ -11,10 +11,12 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 
 /* Colors
 -------------------------- */
-$--color-white: #fff !default;
-$--color-black: #000 !default;
-
-$--color-primary: #409EFF !default;
+/// color|1|Brand Color|0
+$--color-primary: #5D81F9 !default; // 409EFF
+/// color|1|Background Color|4
+$--color-white: #FFFFFF !default;
+/// color|1|Background Color|4
+$--color-black: #000000 !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -24,11 +26,14 @@ $--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /
 $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
-
-$--color-success: #67c23a !default;
-$--color-warning: #e6a23c !default;
-$--color-danger: #f56c6c !default;
-$--color-info: #909399 !default;
+/// color|1|Functional Color|1
+$--color-success: #02C5E2 !default; // 67C23A
+/// color|1|Functional Color|1
+$--color-warning: #F5A623 !default; // E6A23C
+/// color|1|Functional Color|1
+$--color-danger: #E24156 !default; // F56C6C
+/// color|1|Functional Color|1
+$--color-info: #6A6E7B !default; // 909399
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
 $--color-warning-light: mix($--color-white, $--color-warning, 80%) !default;
@@ -39,11 +44,26 @@ $--color-success-lighter: mix($--color-white, $--color-success, 90%) !default;
 $--color-warning-lighter: mix($--color-white, $--color-warning, 90%) !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
+/// color|1|Font Color|2
+$--color-text-primary: #2D303B !default; // 303133
+/// color|1|Font Color|2
+$--color-text-regular: #2D303B !default; // 606266
+/// color|1|Font Color|2
+$--color-text-secondary: #93959b !default; // 909399
+/// color|1|Font Color|2
+$--color-text-placeholder: #9CA6C7 !default; // C0C4CC
+/// color|1|Border Color|3
+$--border-color-base: #CAD1E8 !default; // DCDFE6
+/// color|1|Border Color|3
+$--border-color-light: #CAD1E8 !default; // E4E7ED
+/// color|1|Border Color|3
+$--border-color-lighter: #EBEEF5 !default;
+/// color|1|Border Color|3
+$--border-color-extra-light: #F2F6FC !default;
 
-$--color-text-primary: #303133 !default;
-$--color-text-regular: #606266 !default;
-$--color-text-secondary: #909399 !default;
-$--color-text-placeholder: #c0c4cc !default;
+// Background
+/// color|1|Background Color|4
+$--background-color-base: #f5f7fa !default; // F5F7FA
 
 /* Link
 -------------------------- */
@@ -224,9 +244,11 @@ $--select-option-color: $--color-text-regular !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
 $--select-option-disabled-background: $--color-white !default;
 $--select-option-height: 34px !default;
-$--select-option-hover-background: $--background-color-base !default;
+$--select-option-hover-background: #F7F8FE !default; // $--background-color-base
+/// color||Color|0
 $--select-option-selected: $--color-primary !default;
-$--select-option-selected-hover: $--background-color-base !default;
+$--select-option-selected-font-color: $--color-primary !default;
+$--select-option-selected-hover: #F7F8FE !default; // $--background-color-base
 
 $--select-group-color: $--color-info !default;
 $--select-group-height: 30px !default;
@@ -261,10 +283,18 @@ $--alert-icon-large-size: 28px !default;
 -------------------------- */
 $--msgbox-width: 420px !default;
 $--msgbox-border-radius: 4px !default;
-$--msgbox-font-size: $--font-size-large !default;
+/// fontSize||Font|1
+$--msgbox-font-size: 16px !default; // $--font-size-large
+$--messagebox-font-size: 16px !default; // $--font-size-large
+/// fontSize||Font|1
 $--msgbox-content-font-size: $--font-size-base !default;
+$--messagebox-content-font-size: $--font-size-base !default;
+/// color||Color|0
 $--msgbox-content-color: $--color-text-regular !default;
+$--messagebox-content-color: $--color-text-regular !default;
+/// fontSize||Font|1
 $--msgbox-error-font-size: 12px !default;
+$--messagebox-error-font-size: 12px !default;
 $--msgbox-padding-primary: 15px !default;
 
 $--msgbox-success-color: $--color-success !default;
@@ -465,7 +495,7 @@ $--switch-button-size: 16px !default;
 
 /* Dialog
 -------------------------- */
-$--dialog-background-color: $--color-primary-light-4 !default;
+$--dialog-background-color: $--color-primary-light-4 !default; // $--color-white
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 $--dialog-close-hover-color: $--color-primary !default;
 $--dialog-title-font-size: $--font-size-large !default;
@@ -477,12 +507,20 @@ $--dialog-padding-primary: 20px !default;
 -------------------------- */
 $--table-border-color: $--border-color-lighter !default;
 $--table-border: 1px solid $--table-border-color !default;
+/// color||Color|0
 $--table-text-color: $--color-text-regular !default;
+$--table-font-color: $--color-text-regular !default;
+/// color||Color|0
 $--table-header-color: $--color-text-secondary !default;
-$--table-row-hover-background: $--background-color-base !default;
+$--table-header-font-color: $--color-text-secondary !default;
+/// color||Color|0
+$--table-row-hover-background: #f6f8fb !default; // $--background-color-base
+$--table-row-hover-background-color: #f6f8fb !default; // $--background-color-base
 $--table-current-row-background: $--color-primary-light-9 !default;
+$--table-current-row-background-color: $--color-primary-light-9 !default;
+/// color||Color|0
 $--table-header-background: $--color-white !default;
-$--table-footer-background: $--color-text-placeholder !default;
+$--table-header-background-color: $--color-white !default;
 $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 
 /* Pagination
@@ -550,9 +588,14 @@ $--tag-danger-color: $--color-danger !default;
 
 /* Tree
 -------------------------- */
-$--tree-node-hover-color: $--background-color-base !default;
+/// color||Color|0
+$--tree-node-hover-color: #f6f8fb !default; // $--background-color-base
+$--tree-node-hover-background-color: #f6f8fb !default; // $--background-color-base
+/// color||Color|0
 $--tree-text-color: $--color-text-regular !default;
-$--tree-expand-icon-color: $--color-text-placeholder !default;
+$--tree-font-color: $--color-text-regular !default;
+/// color||Color|0
+$--tree-expand-icon-color: #9CA6C7 !default; // $--color-text-placeholder
 
 /* Dropdown
 -------------------------- */
@@ -649,14 +692,26 @@ $--carousel-indicator-out-color: $--border-color-hover !default;
 /* Collapse
 --------------------------*/
 $--collapse-border-color: $--border-color-lighter !default;
-$--collapse-header-height: 48px !default;
-$--collapse-header-padding: 20px !default;
+/// height||Other|4
+$--collapse-header-height: 50px !default; // 48
+/// color||Color|0
 $--collapse-header-fill: $--color-white !default;
+$--collapse-header-background-color: $--color-white !default;
+/// color||Color|0
 $--collapse-header-color: $--color-text-primary !default;
-$--collapse-header-size: 13px !default;
+$--collapse-header-font-color: $--color-text-primary !default;
+/// fontSize||Font|1
+$--collapse-header-size: 14px !default; // 13
+$--collapse-header-font-size: 14px !default; // 13
+/// color||Color|0
 $--collapse-content-fill: $--color-white !default;
+$--collapse-content-background-color: $--color-white !default;
+/// fontSize||Font|1
 $--collapse-content-size: 13px !default;
+$--collapse-content-font-size: 13px !default;
+/// color||Color|0
 $--collapse-content-color: $--color-text-primary !default;
+$--collapse-content-font-color: $--color-text-primary !default;
 
 /* Transfer
 --------------------------*/

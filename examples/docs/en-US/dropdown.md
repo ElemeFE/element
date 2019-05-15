@@ -9,7 +9,7 @@
     }
     .el-dropdown-link {
       cursor: pointer;
-      color: #409EFF;
+      color: #5D81F9;
     }
     .el-icon-arrow-down {
       font-size: 12px;
@@ -75,7 +75,7 @@ Hover on the dropdown menu to unfold it for more actions.
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -182,7 +182,7 @@ Click the triggering element or hover on it.
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -219,7 +219,7 @@ Use `hide-on-click` to define if menu closes on clicking.
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -250,7 +250,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;

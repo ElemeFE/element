@@ -302,7 +302,7 @@ Vertical NavMenu could be collapsed.
 | collapse  | whether the menu is collapsed (available only in vertical mode) | boolean  |   —   | false |
 | background-color  | background color of Menu (hex format) | string |   —   | #ffffff |
 | text-color  | text color of Menu (hex format) | string |   —   | #303133 |
-| active-text-color  | text color of currently active menu item (hex format) | string |   —   | #409EFF |
+| active-text-color  | text color of currently active menu item (hex format) | string |   —   | #5D81F9 |
 | default-active | index of currently active menu | string    | — | — |
 | default-openeds | array that contains indexes of currently active sub-menus  | Array    | — | — |
 | unique-opened  |  whether only one sub-menu can be active  | boolean   | — | false   |

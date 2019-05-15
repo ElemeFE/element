@@ -19,7 +19,7 @@
         overflow: hidden;
     
         &:hover, &:focus {
-          border-color: #409EFF;
+          border-color: #5D81F9;
         }
       }
       .avatar-uploader-icon {
@@ -182,7 +182,7 @@ Utilice el _hook_ `before-upload` para limitar el formato de archivo y su tamañ
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
+    border-color: #5D81F9;
   }
   .avatar-uploader-icon {
     font-size: 28px;

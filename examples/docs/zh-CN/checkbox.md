@@ -307,7 +307,7 @@
 | min     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
 | text-color  | 按钮形式的 Checkbox 激活时的文本颜色    | string   | — | #ffffff   |
-| fill  | 按钮形式的 Checkbox 激活时的填充色和边框色    | string   | — | #409EFF   |
+| fill  | 按钮形式的 Checkbox 激活时的填充色和边框色    | string   | — | #5D81F9   |
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |

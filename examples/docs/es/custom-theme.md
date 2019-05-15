@@ -61,7 +61,7 @@ et -i [custom output file]
 
 En el archivo `element-variables.scss` podrá encontrar todas las variables que utiliza Element para definir los estilos y estos están definidos en SCSS. Aquí un ejemplo:
 ```css
-$--color-primary: #409EFF !default;
+$--color-primary: #5D81F9 !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -72,10 +72,10 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
-$--color-success: #67c23a !default;
-$--color-warning: #e6a23c !default;
-$--color-danger: #f56c6c !default;
-$--color-info: #909399 !default;
+$--color-success: #02C5E2 !default;
+$--color-warning: #F5A623 !default;
+$--color-danger: #E24156 !default;
+$--color-info: #6A6E7B !default;
 
 ...
 ```

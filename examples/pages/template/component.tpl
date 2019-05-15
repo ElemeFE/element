@@ -115,7 +115,7 @@
       z-index: 5;
 
       i {
-        color: #409EFF;
+        color: #5D81F9;
         display: block;
         line-height: 40px;
         text-align: center;

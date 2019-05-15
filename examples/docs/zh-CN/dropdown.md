@@ -9,7 +9,7 @@
     }
     .el-dropdown-link {
       cursor: pointer;
-      color: #409EFF;
+      color: #5D81F9;
     }
     .el-icon-arrow-down {
       font-size: 12px;
@@ -78,7 +78,7 @@
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -185,7 +185,7 @@
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -222,7 +222,7 @@
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -253,7 +253,7 @@
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;

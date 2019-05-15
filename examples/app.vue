@@ -44,7 +44,7 @@
   }
 
   a {
-    color: #409EFF;
+    color: #5D81F9;
     text-decoration: none;
   }
 
@@ -249,9 +249,9 @@
 
     mounted() {
       localize(this.lang);
-      if (this.lang === 'zh-CN') {
-        this.suggestJump();
-      }
+      // if (this.lang === 'zh-CN') {
+      //   this.suggestJump();
+      // }
       // setTimeout(() => {
       //   const notified = localStorage.getItem('ES_NOTIFIED_2');
       //   if (!notified && this.lang !== 'es') {

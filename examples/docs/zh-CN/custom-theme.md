@@ -60,7 +60,7 @@ et -i [可以自定义变量文件]
 
 如果使用默认配置，执行后当前目录会有一个 `element-variables.scss` 文件。内部包含了主题所用到的所有变量，它们使用 SCSS 的格式定义。大致结构如下：
 ```css
-$--color-primary: #409EFF !default;
+$--color-primary: #5D81F9 !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -71,10 +71,10 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
-$--color-success: #67c23a !default;
-$--color-warning: #e6a23c !default;
-$--color-danger: #f56c6c !default;
-$--color-info: #909399 !default;
+$--color-success: #02C5E2 !default;
+$--color-warning: #F5A623 !default;
+$--color-danger: #E24156 !default;
+$--color-info: #6A6E7B !default;
 
 ...
 ```

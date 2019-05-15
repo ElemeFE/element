@@ -88,7 +88,7 @@
       display: inline-block;
       line-height: @height;
       font-size: 14px;
-      background-color: #409EFF;
+      background-color: #5D81F9;
       color: #fff;
       text-align: center;
       border: 0;
