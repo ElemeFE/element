@@ -17,3 +17,5 @@ deploy:
   keep-history: true
   local-dir: examples/element-ui
   github-token: $GITHUB_TOKEN
+  on:
+    branch: feature-theme-deepexi
