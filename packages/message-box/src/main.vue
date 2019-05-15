@@ -206,22 +206,33 @@
           }
           const inputValidator = this.inputValidator;
           if (typeof inputValidator === 'function') {
-            const validateResult = inputValidator(this.inputValue);
-            if (validateResult === false) {
-              this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
-              addClass(this.getInputElement(), 'invalid');
-              return false;
-            }
-            if (typeof validateResult === 'string') {
-              this.editorErrorMessage = validateResult;
-              addClass(this.getInputElement(), 'invalid');
-              return false;
-            }
+            Promise.resolve(
+              inputValidator(this.inputValue)
+            ).then(validateResult=>{
+              if (validateResult === false) {
+                this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
+                addClass(this.getInputElement(), 'invalid');
+                return false;
+              }
+              if (typeof validateResult === 'string') {
+                this.editorErrorMessage = validateResult;
+                addClass(this.getInputElement(), 'invalid');
+                return false;
+              }
+              this.editorErrorMessage = '';
+              removeClass(this.getInputElement(), 'invalid');
+              return true;
+            })
+          }else{
+            this.editorErrorMessage = '';
+            removeClass(this.getInputElement(), 'invalid');
+            return true;
           }
+        }else{
+          this.editorErrorMessage = '';
+          removeClass(this.getInputElement(), 'invalid');
+          return true;
         }
-        this.editorErrorMessage = '';
-        removeClass(this.getInputElement(), 'invalid');
-        return true;
       },
       getFirstFocus() {
         const btn = this.$el.querySelector('.el-message-box__btns .el-button');
