@@ -18,4 +18,33 @@
 }
   
 }
+
+.infinite-list-wrapper {
+  height: 300px;
+  overflow: auto;
+  text-align: center;
+
+.list{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+  
+
+.list-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background: #fff6f6;
+  color: #ff8484;
+  & + .list-item {
+    margin-top: 10px
+  }
+    
+}
+  
+}
+   
+
  
