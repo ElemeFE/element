@@ -1,0 +1,21 @@
+.infinite-list {
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: auto;
+
+.infinite-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background: #e8f3fe;
+  color: lighten(#1989fa, 20%);
+  & + .list-item {
+    margin-top: 10px
+  }
+}
+  
+}
+ 

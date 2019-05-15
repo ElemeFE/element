@@ -151,7 +151,6 @@ const components = [
   Divider,
   Image,
   Calendar,
-  InfiniteScroll,
   CollapseTransition
 ];
 
@@ -163,6 +162,7 @@ const install = function(Vue, opts = {}) {
     Vue.component(component.name, component);
   });
 
+  Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
 
   Vue.prototype.$ELEMENT = {
