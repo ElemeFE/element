@@ -136,6 +136,7 @@
   @include e(suffix) {
     position: absolute;
     height: 100%;
+    line-height: 1;
     right: 5px;
     top: 0;
     text-align: center;
