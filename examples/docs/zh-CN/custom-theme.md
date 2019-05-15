@@ -1,6 +1,28 @@
 ## 自定义主题
 Element 默认提供一套主题，CSS 命名采用 BEM 的风格，方便使用者覆盖样式。我们提供了三种方法，可以进行不同程度的样式自定义。
 
+### 使用deepexi主题
+
+安装主题
+```sh
+yarn add @femessage/theme-deepexi --registry http://levy.ren:4873
+```
+
+修改nuxt.config.js
+```sh
+babel: {
+  plugins: [
+    [
+      'component',
+      {
+        libraryName: 'element-ui',
+        styleLibraryName: '~node_modules/@femessage/theme-deepexi/lib'
+      }
+    ]
+  ]
+}
+```
+
 ### 仅替换主题色
 如果仅希望更换 Element 的主题色，推荐使用[在线主题生成工具](https://elementui.github.io/theme-chalk-preview)。Element 默认的主题色是鲜艳、友好的蓝色。通过替换主题色，能够让 Element 的视觉更加符合具体项目的定位。
 
