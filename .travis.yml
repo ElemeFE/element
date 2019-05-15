@@ -1,13 +1,19 @@
-sudo: false
+branches:
+  only:
+    - feature-theme-deepexi
 language: node_js
-node_js: 8
-before_install:
-- export CHROME_BIN=chromium-browser
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- export TRAVIS_COMMIT_MSG="[deploy] $(git log --format='%h - %B' --no-merges -n 1)"
-- export TRAVIS_COMMIT_USER="$(git log --no-merges -n 1 --format=%an)"
-- export TRAVIS_COMMIT_EMAIL="$(git log --no-merges -n 1 --format=%ae)"
-after_success:
-- sh build/deploy-ci.sh
-- cat ./test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls
+node_js:
+- lts/*
+git:
+  depth: 3
+install:
+- yarn --frozen-lockfile
+script:
+- yarn deploy:build
+cache: yarn
+deploy:
+  provider: pages
+  skip-cleanup: true
+  keep-history: true
+  local-dir: examples/element-ui
+  github-token: $GITHUB_TOKEN
