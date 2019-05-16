@@ -102,6 +102,14 @@
         const img = new Image();
         img.onload = e => this.handleLoad(e, img);
         img.onerror = this.handleError.bind(this);
+
+        // bind html attrs
+        // so it can behave consistently
+        Object.keys(this.$attrs)
+          .forEach((key) => {
+            const value = this.$attrs[key];
+            img.setAttribute(key, value);
+          });
         img.src = this.src;
       },
       handleLoad(e, img) {
