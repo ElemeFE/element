@@ -10,8 +10,8 @@
     role="tree"
   >
     <el-tree-node
-      v-for="child in root.childNodes"
-      :node="child"
+  v-for="(child,index) in root.childNodes"
+      :class="{'el-tree-node-first' : index == 0 , 'el-tree-node-last' : (index+1) == root.childNodes.length}"      :node="child"
       :props="props"
       :render-after-expand="renderAfterExpand"
       :show-checkbox="showCheckbox"
