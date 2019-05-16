@@ -7,15 +7,24 @@ element-ui版本为2.4.11
 #如果是windows用户, 请先删除yarn.lock再安装，注意不要提交yarn.lock
 yarn
 
-#开发
+#修改packages/theme-chalk/common/var.scss，定制主题
+#开发预览
 yarn dev
 
 #构建网站
 yarn deploy:build
 
-#部署到github-pages
-./deploy.sh
+#构建主题
+yarn build:theme
 ```
+
+## 部署
+
+### 网站
+在feature-theme-deepexi分支提交即会自动构建网站，并发布至github pages
+
+### 主题
+执行`publish-theme.sh`即可发布主题
 
 ## LICENSE
 [MIT](LICENSE)
