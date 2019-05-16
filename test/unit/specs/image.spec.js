@@ -71,7 +71,7 @@ describe('Image', () => {
         <el-image
           alt="$attrs test"
           referrerpolicy="origin"
-          ref="image"></el-image>
+          :src="src"></el-image>
       `,
       data() {
         return {
@@ -79,18 +79,17 @@ describe('Image', () => {
         };
       }
     }, true);
-    const { image } = vm.$refs;
 
     await wait();
-    expect(image.$el.getAttribute('alt')).to.be.equal('$attrs test');
-    expect(image.$el.getAttribute('referrerpolicy')).to.be.equal('origin');
+    expect(vm.$el.getAttribute('alt')).to.be.equal('$attrs test');
+    expect(vm.$el.getAttribute('referrerpolicy')).to.be.equal('origin');
   });
 
   it('pass event listeners', (done) => {
     let result;
     vm = createVue({
       template: `
-        <el-image @click="handleClick" ref="image"></el-image>
+        <el-image @click="handleClick" :src="src"></el-image>
       `,
       data() {
         return {
@@ -99,17 +98,17 @@ describe('Image', () => {
       },
       methods: {
         handleClick(e) {
-          result = e;
+          result = 'test';
         }
       }
     }, true);
-    const { image } = vm.$refs;
 
-    image.$el.click();
-
-    setTimeout(_ => {
-      expect(result).to.exist;
-      done();
+    setTimeout(() => {
+      vm.$el.querySelector('.el-image__inner').click();
+      setTimeout(()=>{
+        expect(result).to.exist;
+        done();
+      }, 20);
     }, 20);
   });
 });
