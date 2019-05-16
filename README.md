@@ -26,5 +26,9 @@ yarn build:theme
 ### 主题
 执行`publish-theme.sh`即可发布主题
 
+## 安装主题
+
+[在nuxt框架中使用自定义主题](https://femessage.github.io/element/#/zh-CN/component/custom-theme)
+
 ## LICENSE
 [MIT](LICENSE)
