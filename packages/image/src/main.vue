@@ -9,8 +9,9 @@
     <img
       v-else
       class="el-image__inner"
+      v-bind="$attrs"
+      v-on="$listeners"
       :src="src"
-      :alt="alt"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter }">
   </div>
@@ -41,8 +42,7 @@
       src: String,
       fit: String,
       lazy: Boolean,
-      scrollContainer: {},
-      alt: String
+      scrollContainer: {}
     },
 
     data() {
