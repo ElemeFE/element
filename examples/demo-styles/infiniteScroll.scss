@@ -5,18 +5,17 @@
   list-style: none;
   overflow: auto;
 
-.infinite-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  background: #e8f3fe;
-  color: lighten(#1989fa, 20%);
-  & + .list-item {
-    margin-top: 10px
-  }
-}
-  
+  .infinite-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: #e8f3fe;
+    color: lighten(#1989fa, 20%);
+    & + .list-item {
+      margin-top: 10px
+    }
+  } 
 }
 
 .infinite-list-wrapper {
@@ -24,26 +23,24 @@
   overflow: auto;
   text-align: center;
 
-.list{
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-  
-
-.list-item{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  background: #fff6f6;
-  color: #ff8484;
-  & + .list-item {
-    margin-top: 10px
+  .list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
     
-}
-  
+
+  .list-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: #fff6f6;
+    color: #ff8484;
+    & + .list-item {
+      margin-top: 10px
+    }
+  }
 }
    
 
