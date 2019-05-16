@@ -8,20 +8,16 @@
       "name": "开发指南",
       "children": [
         {
-          "path": "/installation",
-          "name": "安装"
-        },
-        {
           "path": "/quickstart",
           "name": "快速上手"
         },
         {
-          "path": "/i18n",
-          "name": "国际化"
+          "path": "/custom-theme",
+          "name": "deepexi主题"
         },
         {
-          "path": "/custom-theme",
-          "name": "自定义主题"
+          "path": "/i18n",
+          "name": "国际化"
         },
         {
           "path": "/transition",
