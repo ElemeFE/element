@@ -109,7 +109,7 @@
     @include utils-clearfix;
 
     .el-input-group {
-      vertical-align: middle;
+      vertical-align: top;
     }
   }
   @include e(error) {
