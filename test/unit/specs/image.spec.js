@@ -85,7 +85,7 @@ describe('Image', () => {
     expect(vm.$el.getAttribute('referrerpolicy')).to.be.equal('origin');
   });
 
-  it('pass event listeners', (done) => {
+  it('pass event listeners', async() => {
     let result;
     vm = createVue({
       template: `
@@ -98,18 +98,14 @@ describe('Image', () => {
       },
       methods: {
         handleClick(e) {
-          result = 'test';
+          result = e;
         }
       }
     }, true);
-
-    setTimeout(() => {
-      vm.$el.querySelector('.el-image__inner').click();
-      setTimeout(()=>{
-        expect(result).to.exist;
-        done();
-      }, 20);
-    }, 20);
+    await wait();
+    vm.$el.querySelector('.el-image__inner').click();
+    await wait();
+    expect(result).to.exist;
   });
 });
 
