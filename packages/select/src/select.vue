@@ -95,7 +95,7 @@
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
-        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
+        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]" @click="!(filterable && remote) && setSoftFocus"></i>
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
     </el-input>
@@ -701,6 +701,9 @@
 
       setSoftFocus() {
         this.softFocus = true;
+        if (this.menuVisibleOnFocus) {
+          this.menuVisibleOnFocus = false;
+        }
         const input = this.$refs.input || this.$refs.reference;
         if (input) {
           input.focus();
