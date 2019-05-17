@@ -81,8 +81,9 @@ describe('Image', () => {
     }, true);
 
     await wait();
-    expect(vm.$el.getAttribute('alt')).to.be.equal('$attrs test');
-    expect(vm.$el.getAttribute('referrerpolicy')).to.be.equal('origin');
+    const $img = vm.$el.querySelector('.el-image__inner');
+    expect($img.getAttribute('alt')).to.be.equal('$attrs test');
+    expect($img.getAttribute('referrerpolicy')).to.be.equal('origin');
   });
 
   it('pass event listeners', async() => {

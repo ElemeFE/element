@@ -37,6 +37,8 @@
     name: 'ElImage',
 
     mixins: [Locale],
+    
+    inheritAttrs: false,
 
     props: {
       src: String,
