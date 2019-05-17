@@ -1,7 +1,7 @@
 import { ElementUIComponent } from './component'
 
 export type ProgressType = 'line' | 'circle'
-export type ProgressStatus = 'success' | 'exception' | 'text'
+export type ProgressStatus = 'success' | 'exception'
 
 /** Progress Component */
 export declare class ElProgress extends ElementUIComponent {
