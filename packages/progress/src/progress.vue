@@ -27,12 +27,13 @@
         <path class="el-progress-circle__path" :d="trackPath" stroke-linecap="round" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
       </svg>
     </div>
-    <div class="el-progress__text" v-if="showText && !textInside" :style="{fontSize: progressTextSize + 'px'}">
+    <div
+      class="el-progress__text"
+      v-if="showText && !textInside"
+      :style="{fontSize: progressTextSize + 'px'}"
+    >
       <template v-if="!status">{{percentage}}%</template>
-      <template v-else>
-        <slot v-if="status === 'text'"></slot>
-        <i v-else :class="iconClass"></i>
-      </template>
+      <i v-else :class="iconClass"></i>
     </div>
   </div>
 </template>
@@ -52,8 +53,7 @@
         validator: val => val >= 0 && val <= 100
       },
       status: {
-        type: String,
-        validator: val => ['text', 'success', 'exception'].indexOf(val) > -1
+        type: String
       },
       strokeWidth: {
         type: Number,
