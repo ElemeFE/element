@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Nu există date potrivite',
       loading: 'Se încarcă',
-      placeholder: 'Selectează'
+      placeholder: 'Selectează',
+      noData: 'Nu există date'
     },
     pagination: {
       goto: 'Go to',

@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Дал келген маалыматтар',
       loading: 'Жүктөлүүдө',
-      placeholder: 'тандоо'
+      placeholder: 'тандоо',
+      noData: 'маалымат жок'
     },
     pagination: {
       goto: 'Мурунку',

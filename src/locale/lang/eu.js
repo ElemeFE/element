@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Bat datorren daturik ez',
       loading: 'Kargatzen',
-      placeholder: 'Hautatu'
+      placeholder: 'Hautatu',
+      noData: 'Daturik ez'
     },
     pagination: {
       goto: 'Joan',

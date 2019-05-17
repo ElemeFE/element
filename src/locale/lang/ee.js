@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Sobivad andmed puuduvad',
       loading: 'Laadimine',
-      placeholder: 'Vali'
+      placeholder: 'Vali',
+      noData: 'Andmed puuduvad'
     },
     pagination: {
       goto: 'Mine lehele',

@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Ingen samsvarende data',
       loading: 'Laster',
-      placeholder: 'Velg'
+      placeholder: 'Velg',
+      noData: 'Ingen data'
     },
     pagination: {
       goto: 'Gå til',

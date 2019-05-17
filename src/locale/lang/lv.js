@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Nav atbilstošu datu',
       loading: 'Ielādē',
-      placeholder: 'Izvēlēties'
+      placeholder: 'Izvēlēties',
+      noData: 'Nav datu'
     },
     pagination: {
       goto: 'Iet uz',

@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Δεν βρέθηκαν αποτελέσματα',
       loading: 'Φόρτωση',
-      placeholder: 'Επιλογή'
+      placeholder: 'Επιλογή',
+      noData: 'Χωρίς δεδομένα'
     },
     pagination: {
       goto: 'Μετάβαση σε',

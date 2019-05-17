@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Li hembere ve agahî tune',
       loading: 'Bardibe',
-      placeholder: 'Bibijêre'
+      placeholder: 'Bibijêre',
+      noData: 'Agahî tune'
     },
     pagination: {
       goto: 'Biçe',

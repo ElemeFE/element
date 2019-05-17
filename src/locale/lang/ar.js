@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'لايوجد بيانات مطابقة',
       loading: 'جار التحميل',
-      placeholder: 'أختر'
+      placeholder: 'أختر',
+      noData: 'لايوجد بيانات'
     },
     pagination: {
       goto: 'أذهب إلى',

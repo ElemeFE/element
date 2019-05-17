@@ -1,14 +1,14 @@
 import { createTest, destroyVM } from '../util';
-import Cascader from 'packages/cascader';
+import CascaderPanel from 'packages/cascader-panel';
 
-describe('Cascader', () => {
+describe('CascaderPanel', () => {
   let vm;
   afterEach(() => {
     destroyVM(vm);
   });
 
   it('create', () => {
-    vm = createTest(Cascader, true);
+    vm = createTest(CascaderPanel, true);
     expect(vm.$el).to.exist;
   });
 });

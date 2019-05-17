@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Няма намерени',
       loading: 'Зареждане',
-      placeholder: 'Избери'
+      placeholder: 'Избери',
+      noData: 'Няма данни'
     },
     pagination: {
       goto: 'Иди на',
