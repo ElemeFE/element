@@ -37,6 +37,7 @@
         @blur="handleBlur"
         @change="handleChange"
         :aria-label="label"
+        :style="inputStyle"
       >
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
@@ -109,6 +110,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
+  import { isSafari } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElInput',
@@ -207,6 +209,14 @@
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
+      },
+      inputStyle() {
+        if (isSafari()) {
+          return {
+            'line-height': 'normal'
+          };
+        }
+        return {};
       },
       inputSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;

@@ -121,6 +121,10 @@ export const isEdge = function() {
   return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Edge') > -1;
 };
 
+export const isSafari = function() {
+  return !Vue.prototype.$isServer && (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('Mac') > -1);
+};
+
 export const autoprefixer = function(style) {
   if (typeof style !== 'object') return style;
   const rules = ['transform', 'transition', 'animation'];
