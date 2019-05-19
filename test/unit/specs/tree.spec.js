@@ -832,7 +832,7 @@ describe('Tree', () => {
     });
   });
 
-  it('update multi tree data', async () => {
+  it('update multi tree data', async() => {
     const vm = createVue({
       template: `
         <div>
