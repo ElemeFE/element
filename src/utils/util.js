@@ -97,6 +97,10 @@ export const arrayFindIndex = function(arr, pred) {
   return -1;
 };
 
+export const arrayContains = function(arr, pred) {
+  return arrayFindIndex(arr, pred) >= 0;
+};
+
 export const arrayFind = function(arr, pred) {
   const idx = arrayFindIndex(arr, pred);
   return idx !== -1 ? arr[idx] : undefined;
