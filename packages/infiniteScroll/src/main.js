@@ -1,4 +1,4 @@
-
+import throttle from 'throttle-debounce/debounce';
 import {
   isHtmlElement,
   isFunction,
@@ -8,7 +8,6 @@ import {
 import {
   getScrollContainer
 } from 'element-ui/src/utils/dom';
-import throttle from 'throttle-debounce/debounce';
 
 const getStyleComputedProperty = (element, property) => {
   if (element === window) {
@@ -85,7 +84,6 @@ const getScrollOptions = (el, vm) => {
   }, {});
 };
 
-// 得到距离视口顶部的距离
 const getElementTop = el => el.getBoundingClientRect().top;
 
 const handleScroll = function(cb) {
