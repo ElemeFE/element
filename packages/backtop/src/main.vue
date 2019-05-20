@@ -22,16 +22,16 @@ export default {
 
   props: {
     visibilityHeight: {
-      type: [String, Number],
+      type: Number,
       default: 200
     },
     target: [String],
     right: {
-      type: [String, Number],
+      type: Number,
       default: 40
     },
     bottom: {
-      type: [String, Number],
+      type: Number,
       default: 40
     }
   },
