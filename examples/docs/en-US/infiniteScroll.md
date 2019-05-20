@@ -79,7 +79,7 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 
 ### Attributes
 
-| Attribute | Description | Type  | Accepted values | Default   ||
+| Attribute | Description | Type  | Accepted values | Default   |
 | -------------- | ------------------------------ | --------- | ------------------------------------ | ------- |
 | infinite-scroll-disabled | is disabled           | boolean      | - |false |
 | infinite-scroll-delay   | throttle delay (ms)   | number       |   - |200   |
