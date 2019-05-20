@@ -1,18 +1,16 @@
 
 import {
-  isHtmlElement
+  isHtmlElement,
+  isFunction,
+  isUndefined,
+  isDefined
 } from 'element-ui/src/utils/types';
 import {
   getScrollContainer
 } from 'element-ui/src/utils/dom';
 import throttle from 'throttle-debounce/debounce';
 
-const isFunction = (functionToCheck) => {
-  var getType = {};
-  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-};
-
-export const getStyleComputedProperty = (element, property) => {
+const getStyleComputedProperty = (element, property) => {
   if (element === window) {
     element = document.documentElement;
   }
@@ -28,13 +26,6 @@ export const getStyleComputedProperty = (element, property) => {
 const entries = (obj) => {
   return Object.keys(obj || {})
     .map(key => ([key, obj[key]]));
-};
-const isUndefined = (val)=> {
-  return val === void 0;
-};
-
-const isDefined = (val) => {
-  return val !== undefined && val !== null;
 };
 
 const getPositionSize = (el, prop) => {
