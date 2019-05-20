@@ -117,7 +117,6 @@
         this.imageWidth = img.width;
         this.imageHeight = img.height;
         this.loading = false;
-        this.$emit('load', e);
       },
       handleError(e) {
         this.loading = false;
