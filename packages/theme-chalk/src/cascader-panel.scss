@@ -17,7 +17,7 @@
 
 @include b(cascader-menu) {
   height: 204px;
-  width: 180px;
+  min-width: 180px;
   box-sizing: border-box;
   color: $--cascader-menu-font-color;
   border-right: $--cascader-menu-border;
@@ -99,7 +99,8 @@
     right: 10px;
   }
 
-  > span {
+  @include e(label) {
+    flex: 1;
     padding-left: 10px;
     white-space: nowrap;
     overflow: hidden;

@@ -178,15 +178,14 @@
       },
 
       renderContent(h) {
-        let { panel, node } = this;
-        const wrapper = panel.cascaderWrapper;
-        const defScopedSlots = wrapper
-          ? wrapper.$scopedSlots.default
-          : panel.$scopedSlots.default;
-        const vnode = defScopedSlots ? defScopedSlots({ option: node }) : null;
+        const { panel, node } = this;
+        const render = panel.renderLabelFn;
+        const vnode = render
+          ? render({ node, data: node.data })
+          : null;
 
         return (
-          vnode || <span>{ node.label }</span>
+          <span class="el-cascader-node__label">{ vnode || node.label }</span>
         );
       }
     },

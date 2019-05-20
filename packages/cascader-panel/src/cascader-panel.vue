@@ -93,7 +93,8 @@ export default {
     border: {
       type: Boolean,
       default: true
-    }
+    },
+    renderLabel: Function
   },
 
   provide() {
@@ -113,16 +114,6 @@ export default {
   },
 
   computed: {
-    cascaderWrapper() {
-      let parent = this.$parent;
-      while (parent) {
-        if (parent.$data.__cascader) {
-          return parent;
-        }
-        parent = parent.$parent;
-      }
-      return false;
-    },
     config() {
       return merge({ ...DefaultProps }, this.props || {});
     },
@@ -137,6 +128,9 @@ export default {
     },
     isHoverMenu() {
       return this.config.expandTrigger === 'hover';
+    },
+    renderLabelFn() {
+      return this.renderLabel || this.$scopedSlots.default;
     }
   },
 
