@@ -8,8 +8,9 @@
         'bottom': styleBottom
       }"
       class="el-backtop">
-      <slot v-if="$slots.default"></slot>
-      <el-icon name="caret-top" v-else></el-icon>
+      <slot>
+        <el-icon name="caret-top"></el-icon>
+      </slot>
     </div>
   </transition>
 </template>

@@ -24,7 +24,7 @@ Display area is 40px \* 40px.
 ```html
 <template>
   Scroll down to see the bottom-right button.
-  <el-backtop target=".page-component__scroll .el-scrollbar__wrap" bottom="100">
+  <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100">
     <div
       style="{
         height: 100%;
