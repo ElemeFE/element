@@ -4,6 +4,7 @@ export type CarouselIndicatorTrigger = 'hover' | 'click'
 export type CarouselIndicatorPosition = 'outside' | 'none'
 export type CarouselArrowVisibility = 'always' | 'hover' | 'never'
 export type CarouselType = 'card'
+export type CarouselDirection = 'horizontal' | 'vertical'
 
 /** Loop a series of images or texts in a limited space */
 export declare class ElCarousel extends ElementUIComponent {
@@ -30,6 +31,9 @@ export declare class ElCarousel extends ElementUIComponent {
 
   /** Type of the Carousel */
   type: CarouselType
+
+  /** Display direction */
+  direction: CarouselDirection
 
   /**
    * Manually switch slide by index

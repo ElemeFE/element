@@ -1,345 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Home'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036',
-          tag: 'Office'
-        }],
-        tableData2: [{
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        }, {
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          $positive: true
-        }],
-        tableData3: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData4: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          state: 'California',
-          city: 'Los Angeles',
-          address: 'No. 189, Grove St, Los Angeles',
-          zip: 'CA 90036'
-        }],
-        tableData6: [{
-          id: '12987122',
-          name: 'Tom',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: 'Tom',
-          amount1: '165',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          name: 'Tom',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: 'Tom',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        }, {
-          id: '12987126',
-          name: 'Tom',
-          amount1: '539',
-          amount2: '4.1',
-          amount3: 15
-        }],
-        currentRow: null,
-        multipleSelection: []
-      };
-    },
-
-    methods: {
-      getSummaries(param) {
-        const { columns, data } = param;
-        const sums = [];
-        columns.forEach((column, index) => {
-          if (index === 0) {
-            sums[index] = 'Total Cost';
-            return;
-          }
-          const values = data.map(item => Number(item[column.property]));
-          if (!values.every(value => isNaN(value))) {
-            sums[index] = '$ ' + values.reduce((prev, curr) => {
-              const value = Number(curr);
-              if (!isNaN(value)) {
-                return prev + curr;
-              } else {
-                return prev;
-              }
-            }, 0);
-          } else {
-            sums[index] = 'N/A';
-          }
-        });
-    
-        return sums;
-      },
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-    
-      handleClick() {
-        console.log('click');
-      },
-    
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-    
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-    
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-    
-      handleCurrentChange(val) {
-        this.currentRow = val;
-      },
-    
-      formatter(row, column) {
-        return row.address;
-      },
-    
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-    
-      filterHandler(value, row, column) {
-        const property = column['property'];
-        return row[property] === value;
-      },
-    
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-    
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-    
-      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (rowIndex % 2 === 0) {
-          if (columnIndex === 0) {
-            return [1, 2];
-          } else if (columnIndex === 1) {
-            return [0, 0];
-          }
-        }
-      },
-    
-      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex === 0) {
-          if (rowIndex % 2 === 0) {
-            return {
-              rowspan: 2,
-              colspan: 1
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0
-            };
-          }
-        }
-      },
-    
-      indexMethod(index) {
-        return index * 2;
-      }
-    },
-    
-    watch: {
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    }
-  };
-</script>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-
-  .demo-table .name-wrapper {
-    display: inline-block;
-  }
-
-  .demo-table .demo-table-expand {
-    label {
-      width: 90px;
-      color: #99a9bf;
-    }
-    .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
-      width: 50%;
-    }
-  }
-</style>
-
 ## Tablas
 
 Visualiza múltiples datos con un formato en particular. Podrá ordenar, filtrar y comparar datos en una tabla.
@@ -519,7 +177,7 @@ Puede destacar el contenido de la tabla para distinguir entre "success, informat
 ```html
 <template>
   <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     :row-class-name="tableRowClassName">
     <el-table-column
@@ -563,7 +221,7 @@ Puede destacar el contenido de la tabla para distinguir entre "success, informat
     },
     data() {
       return {
-        tableData2:  [{
+        tableData:  [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -595,7 +253,7 @@ Cuando esta tiene demasiadas filas, puede utilizar una cabecera fija.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     height="250"
     style="width: 100%">
     <el-table-column
@@ -619,7 +277,7 @@ Cuando esta tiene demasiadas filas, puede utilizar una cabecera fija.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -765,7 +423,7 @@ Cuando tienes grandes cantidades de datos para colocar en una tabla, puede fijar
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     height="250">
     <el-table-column
@@ -806,7 +464,7 @@ Cuando tienes grandes cantidades de datos para colocar en una tabla, puede fijar
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -871,7 +529,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData"
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -911,7 +569,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
           size="small">
           Eliminar
@@ -930,7 +588,7 @@ Cuando los datos se modifican dinámicamente, es posible que necesite que la tab
     },
     data() {
       return {
-        tableData4: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -995,7 +653,7 @@ Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agru
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1038,7 +696,7 @@ Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agru
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1180,7 +838,7 @@ También puede seleccionar múltiples filas.
 <template>
   <el-table
     ref="multipleTable"
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1204,7 +862,7 @@ También puede seleccionar múltiples filas.
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
     <el-button @click="toggleSelection()">Limpiar selección</el-button>
   </div>
 </template>
@@ -1213,7 +871,7 @@ También puede seleccionar múltiples filas.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1335,7 +993,10 @@ Filtra la tabla para encontrar la información que necesita.
 :::demo Establezca el atributo `filters` y `filter-method` en `el-table-column` haciendo esta columna filtrable. `filters` es un arreglo, y `filter-method` es una función que decide que filas se muestra. Esta tiene tres parámetros: `value`, `row` y `column`.
 ```html
 <template>
+  <el-button @click="resetDateFilter">清除日期过滤器</el-button>
+  <el-button @click="clearFilter">清除所有过滤器</el-button>
   <el-table
+    ref="filterTable"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -1343,6 +1004,7 @@ Filtra la tabla para encontrar la información que necesita.
       label="Fecha"
       sortable
       width="180"
+      column-key="date"
       :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
       :filter-method="filterHandler"
     >
@@ -1401,6 +1063,12 @@ Filtra la tabla para encontrar la información que necesita.
       }
     },
     methods: {
+      resetDateFilter() {
+        this.$refs.filterTable.clearFilter('date');
+      },
+      clearFilter() {
+        this.$refs.filterTable.clearFilter();
+      },
       formatter(row, column) {
         return row.address;
       },
@@ -1499,6 +1167,81 @@ Personalice la columna de la tabla para que pueda integrarse con otros component
 ```
 :::
 
+### Table con cabecera personalizada
+
+Se puede personalizar el encabezado de la tabla para que se pueda adaptar aún más.
+:::demo Puede personalizar el aspecto del encabezado con header [scoped slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+```html
+<template>
+  <el-table
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%">
+    <el-table-column
+      label="Date"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="Name"
+      prop="name">
+    </el-table-column>
+    <el-table-column
+      align="right">
+      <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"/>
+      </template>
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'John',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-01',
+          name: 'Morgan',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Jessy',
+          address: 'No. 189, Grove St, Los Angeles',
+        }],
+        search: ''
+      }
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    },
+  }
+</script>
+```
+:::
+
 ### Fila expandible
 
 Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de desplazamiento horizontal, puede utilizar la caracteristica de fila expandible.
@@ -1507,7 +1250,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData"
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -1532,7 +1275,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1589,6 +1332,123 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 ```
 :::
 
+### Datos tree y modo lazy
+
+:::demo Puede mostrar la estructura de datos tipo tree。Cuando se usa, la prop`row-key` es requerida。Entonces, los datos de las filas de los hijos pueden ser cargados asincrónicamente. Poner la propiedad `lazy` de Table a true y la función `load`. Especifique el atributo `hasChildren` en la fila para determinar qué fila contiene hijos.
+
+```html
+<template>
+<div>
+  <el-table
+    :data="tableData"
+    style="width: 100%;margin-bottom: 20px;"
+    border
+    row-key="id">
+    <el-table-column
+      prop="date"
+      label="日期"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="name"
+      sortable
+      width="180">
+    </el-table-column>
+  </el-table>
+
+  <el-table
+    :data="tableData1"
+    style="width: 100%"
+    row-key="id"
+    border
+    lazy
+    :load="load"
+    >
+    <el-table-column
+      prop="date"
+      label="date"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="name"
+      width="180">
+    </el-table-column>
+  </el-table>
+</div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          id: 1,
+          date: '2016-05-02',
+          name: 'wangxiaohu'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: 'wangxiaohu'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: 'wangxiaohu',
+          children: [{
+              id: 31,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+          }]
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: 'wangxiaohu'
+        }],
+        tableData1: [{
+          id: 1,
+          date: '2016-05-02',
+          name: 'wangxiaohu'
+        }, {
+          id: 2,
+          date: '2016-05-04',
+          name: 'wangxiaohu'
+        }, {
+          id: 3,
+          date: '2016-05-01',
+          name: 'wangxiaohu',
+          hasChildren: true
+        }, {
+          id: 4,
+          date: '2016-05-03',
+          name: 'wangxiaohu'
+        }]
+      }
+    },
+    methods: {
+      load(tree, treeNode, resolve) {
+        resolve([
+          {
+            id: 31,
+            date: '2016-05-01',
+            name: 'wangxiaohu'
+          }, {
+            id: 32,
+            date: '2016-05-01',
+            name: 'wangxiaohu'
+          }
+        ])
+      }
+    },
+  }
+</script>
+```
+:::
+
 ### Fila de resumen
 
 Para una tabla de números, puede agregar una fila extra en el pie de página de la tabla que muestra la suma de cada columna.
@@ -1597,7 +1457,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
 ```html
 <template>
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     show-summary
     style="width: 100%">
@@ -1628,7 +1488,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
   </el-table>
 
   <el-table
-    :data="tableData6"
+    :data="tableData"
     border
     height="200"
     :summary-method="getSummaries"
@@ -1662,7 +1522,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1737,7 +1597,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
 <template>
   <div>
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="arraySpanMethod"
       border
       style="width: 100%">
@@ -1768,7 +1628,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
     </el-table>
 
     <el-table
-      :data="tableData6"
+      :data="tableData"
       :span-method="objectSpanMethod"
       border
       style="width: 100%; margin-top: 20px">
@@ -1801,7 +1661,7 @@ Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
   export default {
     data() {
       return {
-        tableData6: [{
+        tableData: [{
           id: '12987122',
           name: 'Tom',
           amount1: '234',
@@ -1968,7 +1828,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | header-row-style       | función que devuelve estilos personalizados para una fila en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada fila en la cabecera de la tabla | Function({row, rowIndex})/Object         | —                              | —                                        |
 | header-cell-class-name | función que devuelve nombre de clases personalizadas para una celda en la cabecera de la tabla, o una cadena asignando nombres de clases para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/String         | —                              | —                                        |
 | header-cell-style      | función que devuelve estilos personalizados para una celda en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/Object         | —                              | —                                        |
-| row-key                | clave de datos de la fila, utilizada para optimizar la representación de los datos. Es obligatorio `reserve-selection` esta habilitado. Cuando su tipo es string, se permite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no es permitido, en cuyo caso se debe usar una `function` | Function(row)/String                     | —                              | —                                        |
+| row-key | key de los datos de las filas, utilizada para optimizar el renderizado. Requerido si `reserve-selection` está activada o muestra los datos del árbol. Cuando su tipo es String, se admite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no se admite, en cuyo caso se debe utilizar la función. | Function(row)/String | — | — |
 | empty-text             | Texto mostrado cuando no existen datos. Puede personalizar esta área con `slot="empty"` | String                                   | —                              | No Data                                  |
 | default-expand-all     | especifica si todas las filas se expanden por defeto, solo funciona cuando la tabla tiene una columna `type="expand"` | Boolean                                  | —                              | false                                    |
 | expand-row-keys        | establece las filas expandidas a través de esta propiedad, este valor es la clave de filas expandidas, debería establecer `row-key` antes de usar esta propiedad | Array                                    | —                              |                                          |
@@ -1978,7 +1838,10 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sum-text               | texto a mostrar para la primer columna de la fila de resumen | String                                   | —                              | Sum                                      |
 | summary-method         | método personalizado para resumen        | Function({ columns, data })              | —                              | —                                        |
 | span-method            | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | —                              | —                                        |
-| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas. | Boolean | — | true |
+| select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas.               | Boolean   | — | true |
+| indent                 | indentación horizontal de los datos en formato tree | Number    | — | 16   |
+| lazy                   | si se realiza un lazy loading de los datos | Boolean   | — | —    |
+| load                   | metodo para cargar las filas de los hijos, solamente funciona cuando `lazy`es true | Function({ row, treeNode, resolve }) | — | — |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |
@@ -1990,9 +1853,9 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | cell-mouse-leave   | se dispara cuando se desplaza fuera de una celda | row, column, cell, event          |
 | cell-click         | se dispara cuando se hace clic en una celda | row, column, cell, event          |
 | cell-dblclick      | se dispara cuando se hace doble clic en una celda | row, column, cell, event          |
-| row-click          | se dispara cuando se hace clic en una fila | row, event, column                |
-| row-contextmenu    | se dispara cuando el usuario hace clic derecho en una fila | row, event                        |
-| row-dblclick       | se dispara cuando se hace doble clic en una fila | row, event                        |
+| row-click          | se dispara cuando se hace clic en una fila | row, column, event                |
+| row-contextmenu    | se dispara cuando el usuario hace clic derecho en una fila | row, column, event                        |
+| row-dblclick       | se dispara cuando se hace doble clic en una fila | row, column, event                        |
 | header-click       | se dispara cuando se hace click en una cabecera de columna | column, event                     |
 | header-contextmenu | se dispara cuando el usuario hace clic derecho en una cabecera de columna | column, event                     |
 | sort-change        | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order }           |
@@ -2010,7 +1873,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | toggleRowExpansion | utilizado en tabla expandible, alterna si una cierta fila es expandida. Con el segundo parámetro, puede directamente establecer si esta fila es expandida o colapsada | row, expanded |
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
-| clearFilter        | limpiar filtros                          | —             |
+| clearFilter        | Se utiliza para borrar todas las condiciones de filtro cuando no se pasan parámetros, los datos se restaurarán a un estado sin filtrar, o se puede pasar una matriz de columnas para borrar las condiciones de filtro de la columna especificada.  | columnKey |
 | doLayout | refresca el layout del Table. Cuando la visibilidad de Table cambia, puede que necesite llamar a este método para obtener un diseño correcto | — |
 | sort | Ordenar tabla manualmente. La propiedad `prop` se utiliza para establecer la columna de ordenación, la propiedad `order` se utiliza para establecer el orden. | prop: string, order: string |
 
@@ -2023,7 +1886,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | Atributo              | Descripción                              | Tipo                              | Valores aceptados             | Por defecto |
 | --------------------- | ---------------------------------------- | --------------------------------- | ----------------------------- | ----------- |
 | type                  | tipo de la columna. Si se establece a `selection`, la columna puede mostrar un _checkbox_. Si se establece a `index`, la columna puede mostrar el índice de la fila (iniciando desde 1). Si se establece a `expand`, la columna puede mostrar un ícono para expandir. | string                            | selection/index/expand        | —           |
-| index                 | personalice los índices para cada fila, funciona en columnas con `type=index` | string, Function(index)           | -                             | -           |
+| index                 | personalice los índices para cada fila, funciona en columnas con `type=index` | number, Function(index)           | -                             | -           |
 | label                 | etiqueta de la columna                   | string                            | —                             | —           |
 | column-key            | clave de la columna. Si necesita utilizar el evento `filter-change`, necesita el atributo para identificar cual columna está siendo filtrada | string                            | string                        | —           |
 | prop                  | nombre del campo. También puede usar su alias: `property` | string                            | —                             | —           |
@@ -2034,7 +1897,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | sortable              | especifica que columna puede ser ordenado. El ordenamiento remoto puede ser hecho configurando el atributo `custom` y escucha al evento de tabla `sort-change` | boolean, string                   | true, false, custom           | false       |
 | sort-method           | método de ordenamiento, funciona cuando `sortable` está en `true`. Debería devolver un número, al igual que Array.sort | Function(a, b)                    | —                             | —           |
 | sort-by               | especifica por cual propiedad de va a ordenar, funciona cuando `sortable` es `true` y `sort-method` es `undefined`. Si se establece a un arreglo, la columna ordenara secuencialmente por la siguiente propiedad si la anterior es igual | Function(row, index)/String/Array | —                             | —           |
-| sort-orders           | the order of the sorting strategies used when sorting the data, works when `sortable` is `true`. Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array | array | the elements in the array need to be one of the following: `ascending`, `descending` and `null` (restores to the original order) | ['ascending', 'descending', null] |
+| sort-orders           | el orden de las estrategias de ordenación utilizadas al ordenar los datos, funciona cuando `sortable` es `true`. Acepta un array, a medida que el usuario hace clic en el encabezado, la columna se ordena en el orden de los elementos del array. | array | los elementos en el arreglo necesitan ser uno de los siguientes: `ascending`, `descending` y `null` (restaura el orden original) | ['ascending', 'descending', null] |
 | resizable             | especifica si el ancho de la columna puede ser redimensionado, funciona cuando `border` de `el-table` está en `true` | boolean                           | —                             | false       |
 | formatter             | función que formatea el contenido de la celda | Function(row, column, cellValue, index)  | —                             | —           |
 | show-overflow-tooltip | especifica si el _tooltip_ debe ocultarse o mostrarse al hacer _hover_ en la celda | boolean                           | —                             | false       |
@@ -2043,7 +1906,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | class-name            | nombre de clase de la celda en la columna | string                            | —                             | —           |
 | label-class-name      | nombre de clase de la etiqueta de esta columna | string                            | —                             | —           |
 | selectable            | función que determina si una cierta fila puede ser seleccionada, funciona cuando `type` esta en `selection` | Function(row, index)              | —                             | —           |
-| reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection`. Note that `row-key` is required for this to work | boolean                           | —                             | false       |
+| reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection`. Note que `row-key` es requerido para que esto funcione | boolean                           | —                             | false       |
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
 | filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
@@ -2053,4 +1916,5 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 ### Table-column Scoped Slot
 | Name | Description |
 |------|--------|
-| — | Custom content for table columns. The scope parameter is { row, column, $index } |
+| — | Contenido personalizado para las columnas de la tabla. El parámetro del scope es { row, column, $index } |
+| header | Contenido personalizado para el encabezado de la tabla. El parámetro del scope es { column, $index } |

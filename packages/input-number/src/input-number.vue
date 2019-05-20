@@ -28,7 +28,8 @@
     </span>
     <el-input
       ref="input"
-      :value="currentInputValue"
+      :value="displayValue"
+      :placeholder="placeholder"
       :disabled="inputNumberDisabled"
       :size="inputNumberSize"
       :max="max"
@@ -39,6 +40,7 @@
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
       @focus="handleFocus"
+      @input="handleInput"
       @change="handleInputChange">
     </el-input>
   </div>
@@ -70,6 +72,10 @@
         type: Number,
         default: 1
       },
+      stepStrictly: {
+        type: Boolean,
+        default: false
+      },
       max: {
         type: Number,
         default: Infinity
@@ -91,6 +97,7 @@
       },
       name: String,
       label: String,
+      placeholder: String,
       precision: {
         type: Number,
         validator(val) {
@@ -100,7 +107,8 @@
     },
     data() {
       return {
-        currentValue: 0
+        currentValue: 0,
+        userInput: null
       };
     },
     watch: {
@@ -112,6 +120,13 @@
             if (isNaN(newVal)) {
               return;
             }
+
+            if (this.stepStrictly) {
+              const stepPrecision = this.getPrecision(this.step);
+              const precisionFactor = Math.pow(10, stepPrecision);
+              newVal = Math.round(newVal / this.step) * precisionFactor * this.step / precisionFactor;
+            }
+
             if (this.precision !== undefined) {
               newVal = this.toPrecision(newVal, this.precision);
             }
@@ -119,6 +134,7 @@
           if (newVal >= this.max) newVal = this.max;
           if (newVal <= this.min) newVal = this.min;
           this.currentValue = newVal;
+          this.userInput = null;
           this.$emit('input', newVal);
         }
       }
@@ -143,7 +159,7 @@
         }
       },
       controlsAtRight() {
-        return this.controlsPosition === 'right';
+        return this.controls && this.controlsPosition === 'right';
       },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
@@ -154,19 +170,32 @@
       inputNumberDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
       },
-      currentInputValue() {
-        const currentValue = this.currentValue;
-        if (typeof currentValue === 'number' && this.precision !== undefined) {
-          return currentValue.toFixed(this.precision);
-        } else {
-          return currentValue;
+      displayValue() {
+        if (this.userInput !== null) {
+          return this.userInput;
         }
+
+        let currentValue = this.currentValue;
+
+        if (typeof currentValue === 'number') {
+          if (this.stepStrictly) {
+            const stepPrecision = this.getPrecision(this.step);
+            const precisionFactor = Math.pow(10, stepPrecision);
+            currentValue = Math.round(currentValue / this.step) * precisionFactor * this.step / precisionFactor;
+          }
+
+          if (this.precision !== undefined) {
+            currentValue = currentValue.toFixed(this.precision);
+          }
+        }
+
+        return currentValue;
       }
     },
     methods: {
       toPrecision(num, precision) {
         if (precision === undefined) precision = this.numPrecision;
-        return parseFloat(parseFloat(Number(num).toFixed(precision)));
+        return parseFloat(Number(num).toFixed(precision));
       },
       getPrecision(value) {
         if (value === undefined) return 0;
@@ -206,7 +235,6 @@
       },
       handleBlur(event) {
         this.$emit('blur', event);
-        this.$refs.input.setCurrentValue(this.currentInputValue);
       },
       handleFocus(event) {
         this.$emit('focus', event);
@@ -218,19 +246,24 @@
         }
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
-        if (oldVal === newVal) {
-          this.$refs.input.setCurrentValue(this.currentInputValue);
-          return;
-        }
+        if (oldVal === newVal) return;
+        this.userInput = null;
         this.$emit('input', newVal);
         this.$emit('change', newVal, oldVal);
         this.currentValue = newVal;
+      },
+      handleInput(value) {
+        this.userInput = value;
       },
       handleInputChange(value) {
         const newVal = value === '' ? undefined : Number(value);
         if (!isNaN(newVal) || value === '') {
           this.setCurrentValue(newVal);
         }
+        this.userInput = null;
+      },
+      select() {
+        this.$refs.input.select();
       }
     },
     mounted() {

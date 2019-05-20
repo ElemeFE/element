@@ -16,10 +16,10 @@ export default {
       startTime: 'Hora Inici',
       endDate: 'Data Final',
       endTime: 'Hora Final',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
+      prevYear: 'Any anterior',
+      nextYear: 'Pròxim Any',
+      prevMonth: 'Mes anterior',
+      nextMonth: 'Pròxim Mes',
       year: 'Any',
       month1: 'Gener',
       month2: 'Febrer',
@@ -81,7 +81,7 @@ export default {
       error: 'Entrada invàlida'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'premi eliminar per descartar',
       delete: 'Eliminar',
       preview: 'Vista Prèvia',
       continue: 'Continuar'
@@ -103,6 +103,9 @@ export default {
       filterPlaceholder: 'Introdueix la paraula clau',
       noCheckedFormat: '{total} ítems',
       hasCheckedFormat: '{checked}/{total} seleccionats'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

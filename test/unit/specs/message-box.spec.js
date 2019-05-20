@@ -33,7 +33,7 @@ describe('MessageBox', () => {
     setTimeout(() => {
       const msgbox = document.querySelector('.el-message-box__wrapper');
       expect(msgbox.__vue__.$parent.visible).to.true;
-      expect(msgbox.querySelector('.el-message-box__title').textContent).to.equal('消息');
+      expect(msgbox.querySelector('.el-message-box__title span').textContent).to.equal('消息');
       expect(msgbox.querySelector('.el-message-box__message')
         .querySelector('p').textContent).to.equal('这是一段内容');
       MessageBox.close();

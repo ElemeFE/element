@@ -33,7 +33,7 @@ export default {
       month10: 'October',
       month11: 'November',
       month12: 'December',
-      // week: 'week',
+      week: 'week',
       weeks: {
         sun: 'Sun',
         mon: 'Mon',
@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Enter keyword', // to be translated
       noCheckedFormat: '{total} items', // to be translated
       hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    },
+    image: {
+      error: 'FAILED'
     }
   }
 };

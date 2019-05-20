@@ -70,7 +70,7 @@ export default {
     },
     pagination: {
       goto: 'Ugrás',
-      pagesize: '/page',
+      pagesize: '/oldal',
       total: 'Össz {total}',
       pageClassifier: ''
     },
@@ -103,6 +103,9 @@ export default {
       filterPlaceholder: 'Kulcsszó',
       noCheckedFormat: '{total} elem',
       hasCheckedFormat: '{checked}/{total} kiválasztva'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

@@ -82,6 +82,7 @@ describe('Cascader', () => {
             expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
             expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
             expect(vm.selectedOptions[2]).to.be.equal('xihu');
+            expect(vm.$refs.cascader.$el.querySelector('.el-input__inner').value).to.be.equal('');
 
             triggerEvent(vm.$refs.cascader.$el, 'mouseenter');
             vm.$nextTick(_ => {

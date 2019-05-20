@@ -1,100 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        visible: false,
-        visible2: false,
-        gridData: [{
-          date: '2016-05-02',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          date: '2016-05-04',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          date: '2016-05-01',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          date: '2016-05-03',
-          name: 'Jack',
-          address: 'New York City'
-        }],
-        gridData2: [{
-          date: '2016-05-02',
-          name: 'Jack',
-          address: 'New York City',
-        }, {
-          date: '2016-05-04',
-          name: 'Jack',
-          address: 'New York City',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: 'Jack',
-          address: 'New York City',
-        }, {
-          date: '2016-05-03',
-          name: 'Jack',
-          address: 'New York City',
-          $positive: true
-        }],
-        gridData3: [{
-          tag: 'Home',
-          date: '2016-05-03',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-02',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-04',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Home',
-          date: '2016-05-01',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-08',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Home',
-          date: '2016-05-06',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-07',
-          name: 'Jack',
-          address: 'New York City'
-        }]
-      };
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-popover {
-    .el-popover + .el-popover {
-      margin-left: 10px;
-    }
-    .el-input {
-      width: 360px;
-    }
-    .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## Popover
 
 ### Basic usage
@@ -242,13 +145,14 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  width        |  popover width  | string, number            | — | Min width 150px |
 |  placement        |  popover placement  | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 |  disabled       |  whether Popover is disabled  | boolean    | — |  false |
-|  value(v-model)        |  whether popover is visible  | Boolean           | — |  false |
+|  value / v-model        |  whether popover is visible  | Boolean           | — |  false |
 |  offset        |  popover offset  | number           | — |  0 |
 |  transition     |  popover transition animation      | string             | — | el-fade-in-linear |
 |  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
 |  popper-options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 |  popper-class        |  custom class name for popover | string | — | — |
 |  open-delay        | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
+|  tabindex          | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Popover | number | — | 0 |
 
 ### Slot
 | Name | Description |
@@ -257,7 +161,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 | reference | HTML element that triggers popover |
 
 ### Events
-| Event Name | Description | 回调参数 |
+| Event Name | Description | Parameters |
 |---------|--------|---------|
 | show | triggers when popover shows | — |
 | after-enter | triggers when the entering transition ends | — |

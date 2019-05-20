@@ -35,6 +35,24 @@ describe('Alert', () => {
       .to.equal('Unbowed, Unbent, Unbroken');
   });
 
+  it('theme', () => {
+    vm = createTest(Alert, {
+      title: 'test',
+      effect: 'dark'
+    }, true);
+    expect(vm.$el.classList.contains('is-dark')).to.true;
+  });
+
+  it('title slot', () => {
+    vm = createVue(`
+      <el-alert>
+        <span slot="title">foo</span>
+      </el-alert>
+    `);
+
+    expect(vm.$el.querySelector('.el-alert__title').textContent).to.equal('foo');
+  });
+
   it('close', () => {
     vm = createVue({
       template: `

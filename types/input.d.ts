@@ -78,6 +78,18 @@ export declare class ElInput extends ElementUIComponent {
   /** Same as form in native input */
   form: string
 
+  /** Whether to trigger form validatio */
+  validateEvent: boolean
+
+  /** Whether the input is clearable */
+  clearable: boolean
+
+  /** Whether to show password */
+  showPassword: boolean
+
+  /** Whether to show wordCount when setting maxLength */
+  showWordLimit: boolean
+
   /**
    * Focus the Input component
    */

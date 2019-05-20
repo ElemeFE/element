@@ -5,6 +5,9 @@
     @after-leave="afterLeave">
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
+        role="dialog"
+        aria-modal="true"
+        :aria-label="title || 'dialog'"
         class="el-dialog"
         :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"

@@ -37,4 +37,7 @@ export declare class ElPagination extends ElementUIComponent {
 
   /** Text for the prev button */
   nextText: string
+
+  /** Whether to hide when thers's only one page */ 
+  hideOnSinglePage: boolean
 }

@@ -9,9 +9,9 @@
     name="el-list"
   >
     <li
-      v-for="(file, index) in files"
+      v-for="file in files"
       :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
-      :key="index"
+      :key="file.uid"
       tabindex="0"
       @keydown.delete="!disabled && $emit('remove', file)"
       @focus="focusing = true"
@@ -65,6 +65,9 @@
   import ElProgress from 'element-ui/packages/progress';
 
   export default {
+
+    name: 'ElUploadList',
+
     mixins: [Locale],
 
     data() {

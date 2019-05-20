@@ -1,50 +1,20 @@
-<script>
-  export default {
-    data() {
-      return {
-        num1: 1,
-        num2: 1,
-        num3: 5,
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1,
-        num8: 1
-      }
-    },
-    methods: {
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## InputNumber
 
 Input de  valores numéricos con un rango personalizable.
 
 ### Uso básico
 
-:::demo Vincule una variable con `v-model` en el elemento <el-input-number> y estará listo.
+:::demo Vincule una variable con `v-model` en el elemento `<el-input-number>` y estará listo.
 
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num1: 1
+        num: 1
       };
     },
     methods: {
@@ -63,13 +33,13 @@ Input de  valores numéricos con un rango personalizable.
 
 ```html
 <template>
-  <el-input-number v-model="num2" :disabled="true"></el-input-number>
+  <el-input-number v-model="num" :disabled="true"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num2: 1
+        num: 1
       }
     }
   };
@@ -85,13 +55,33 @@ Le permite definir el nivel de incremento de los saltos.
 
 ```html
 <template>
-  <el-input-number v-model="num3" :step="2"></el-input-number>
+  <el-input-number v-model="num" :step="2"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num3: 5
+        num: 5
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Step strictly
+
+:::demo The `step-strictly` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
+
+```html
+<template>
+  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num: 2
       }
     }
   };
@@ -105,13 +95,13 @@ Le permite definir el nivel de incremento de los saltos.
 
 ```html
 <template>
-  <el-input-number v-model="num9" :precision="2" :step="0.1" :max="10"></el-input-number>
+  <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num9: 1
+        num: 1
       }
     }
   };
@@ -132,19 +122,19 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 ```html
 <template>
-  <el-input-number v-model="num4"></el-input-number>
-    <el-input-number size="medium" v-model="num5"></el-input-number>
-    <el-input-number size="small" v-model="num6"></el-input-number>
-    <el-input-number size="mini" v-model="num7"></el-input-number>
+  <el-input-number v-model="num1"></el-input-number>
+    <el-input-number size="medium" v-model="num2"></el-input-number>
+    <el-input-number size="small" v-model="num3"></el-input-number>
+    <el-input-number size="mini" v-model="num4"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1
+        num1: 1,
+        num2: 1,
+        num3: 1,
+        num4: 1
       }
     }
   };
@@ -158,13 +148,13 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 ```html
 <template>
-  <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num8: 1
+        num: 1
       };
     },
     methods: {
@@ -181,10 +171,11 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 | Atributo          | Descripción                              | Tipo    | Valores aceptados | Por defecto |
 | ----------------- | ---------------------------------------- | ------- | ----------------- | ----------- |
-| value             | valor vinculado                          | number  | —                 | —           |
+| value / v-model    | valor vinculado                          | number  | —                 | 0           |
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
+| step-strictly  | whether input value can can only be multiple of step | number  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
@@ -192,6 +183,8 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | controls-position | posición de los botones de control       | string  | right             | -           |
 | name              | lo mismo que `name` en un input nativo   | string  | —                 | —           |
 | label             | texto de la etiqueta                     | string  | —                 | —           |
+| placeholder | placeholder in input | string | - | - |
+
 ### Eventos
 
 | Nombre | Descripción                              | Parámetros         |
@@ -204,3 +197,5 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | Método | Descripción                          | Parámetro |
 | ------ | ------------------------------------ | --------- |
 | focus  | coloca el foco en el elemento actual | -         |
+| select | selecciona el contenido del input        | -          |
+

@@ -81,7 +81,7 @@ export default {
       error: 'Entrada inválida'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'Pulse Eliminar para retirar',
       delete: 'Eliminar',
       preview: 'Vista Previa',
       continue: 'Continuar'
@@ -103,6 +103,9 @@ export default {
       filterPlaceholder: 'Ingresar palabra clave',
       noCheckedFormat: '{total} artículos',
       hasCheckedFormat: '{checked}/{total} revisados'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };

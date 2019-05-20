@@ -9,10 +9,10 @@
     .el-date-table__row {
       &:hover {
         div {
-          background-color: $--datepicker-inrange-color;
+          background-color: $--datepicker-inrange-background-color;
         }
         td.available:hover {
-          color: $--datepicker-color;
+          color: $--datepicker-font-color;
         }
         td:first-child div {
           margin-left: 5px;
@@ -27,7 +27,7 @@
       }
 
       &.current div {
-        background-color: $--datepicker-inrange-color;
+        background-color: $--datepicker-inrange-background-color;
       }
     }
   }
@@ -61,7 +61,7 @@
 
     &.next-month,
     &.prev-month {
-      color: $--datepicker-off-color;
+      color: $--datepicker-off-font-color;
     }
 
     &.today {
@@ -77,13 +77,13 @@
     }
 
     &.available:hover {
-      color: $--datepicker-text-hover-color;
+      color: $--datepicker-hover-font-color;
     }
 
     &.in-range div {
-      background-color: $--datepicker-inrange-color;
+      background-color: $--datepicker-inrange-background-color;
       &:hover {
-        background-color: $--datepicker-inrange-hover-color;
+        background-color: $--datepicker-inrange-hover-background-color;
       }
     }
 
@@ -123,10 +123,10 @@
     &.selected div {
       margin-left: 5px;
       margin-right: 5px;
-      background-color: $--datepicker-inrange-color;
+      background-color: $--datepicker-inrange-background-color;
       border-radius: 15px;
       &:hover {
-        background-color: $--datepicker-inrange-hover-color;
+        background-color: $--datepicker-inrange-hover-background-color;
       }
     }
 
@@ -138,13 +138,13 @@
 
     &.week {
       font-size: 80%;
-      color: $--datepicker-header-color;
+      color: $--datepicker-header-font-color;
     }
   }
 
   th {
     padding: 5px;
-    color: $--datepicker-header-color;
+    color: $--datepicker-header-font-color;
     font-weight: 400;
     border-bottom: solid 1px $--border-color-lighter;
   }

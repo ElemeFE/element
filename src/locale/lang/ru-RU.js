@@ -33,7 +33,7 @@ export default {
       month10: 'Октябрь',
       month11: 'Ноябрь',
       month12: 'Декабрь',
-      // week: 'week',
+      week: 'неделя',
       weeks: {
         sun: 'Вс',
         mon: 'Пн',
@@ -104,6 +104,9 @@ export default {
       filterPlaceholder: 'Введите ключевое слово',
       noCheckedFormat: '{total} пунктов',
       hasCheckedFormat: '{checked}/{total} выбрано'
+    },
+    image: {
+      error: 'FAILED' // to be translated
     }
   }
 };
