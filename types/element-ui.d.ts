@@ -317,3 +317,6 @@ export class Image extends ElImage {}
 
 /** Calendar Component */
 export class Calendar extends ElCalendar {}
+
+/** InfiniteScroll Component */
+export class InfiniteScroll extends ElInfiniteScroll {}
