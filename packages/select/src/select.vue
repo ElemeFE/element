@@ -866,7 +866,8 @@
           small: 32,
           mini: 28
         };
-        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
+        let input = [].filter.call(reference.$el.childNodes, item => item.tagName === 'INPUT')[0];
+        this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize];
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
