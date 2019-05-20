@@ -110,7 +110,7 @@ export default {
     this.referenceElm = this.$el;
     if (this.$el.nodeType === 1) {
       this.$el.setAttribute('aria-describedby', this.tooltipId);
-      this.$el.setAttribute('tabindex', 0);
+      this.$el.setAttribute('tabindex', this.tabindex);
       on(this.referenceElm, 'mouseenter', this.show);
       on(this.referenceElm, 'mouseleave', this.hide);
       on(this.referenceElm, 'focus', () => {
