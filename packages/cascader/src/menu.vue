@@ -13,7 +13,7 @@
       configurableProps.forEach(prop => {
         let name = props[prop];
         let value = item[name];
-        if (value === undefined) {
+        if (value === undefined || configurableProps.indexOf(name) !== -1) {
           name = prop;
           value = item[name];
         }
