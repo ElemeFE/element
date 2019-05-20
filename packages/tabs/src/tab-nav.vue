@@ -87,7 +87,7 @@
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const maxOffset = nav.offsetWidth - navScrollBounding.width;
+        const maxOffset = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? nav.offsetWidth - navScrollBounding.width : nav.offsetHeight - navScrollBounding.height;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
