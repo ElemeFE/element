@@ -71,6 +71,7 @@ import { ElTree } from './tree'
 import { ElUpload } from './upload'
 import { ElLink } from './link'
 import { ElDivider } from './divider'
+import { ElIcon } from './icon'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
 
@@ -313,6 +314,9 @@ export class Link extends ElLink {}
 
 /** Image Component */
 export class Image extends ElImage {}
+
+/** Icon Component */
+export class Icon extends ElIcon {}
 
 /** Calendar Component */
 export class Calendar extends ElCalendar {}
