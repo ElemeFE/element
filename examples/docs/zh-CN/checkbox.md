@@ -175,6 +175,11 @@
       <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
     </el-checkbox-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup5" size="compact" disabled>
+      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
 </template>
 <script>
   const cityOptions = ['上海', '北京', '广州', '深圳'];
@@ -185,6 +190,7 @@
         checkboxGroup2: ['上海'],
         checkboxGroup3: ['上海'],
         checkboxGroup4: ['上海'],
+        checkboxGroup5: ['上海'],
         cities: cityOptions
       };
     }
@@ -218,6 +224,12 @@
       <el-checkbox label="备选项2" border></el-checkbox>
     </el-checkbox-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup3" size="compact" disabled>
+      <el-checkbox label="备选项1" border></el-checkbox>
+      <el-checkbox label="备选项2" border></el-checkbox>
+    </el-checkbox-group>
+  </div>
 </template>
 
 <script>
@@ -229,7 +241,8 @@
         checked3: false,
         checked4: true,
         checkboxGroup1: [],
-        checkboxGroup2: []
+        checkboxGroup2: [],
+        checkboxGroup3: []
       };
     }
   }
@@ -246,7 +259,7 @@
 | false-label | 没有选中时的值   | string / number    |      —         |     —    |
 | disabled  | 是否禁用    | boolean   |  — | false   |
 | border  | 是否显示边框  | boolean   | — | false   |
-| size  | Checkbox 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini | — |
+| size  | Checkbox 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini / compact | — |
 | name | 原生 name 属性 | string    |      —         |     —    |
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
@@ -260,7 +273,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | array | — | — |
-| size     | 多选框组尺寸，仅对按钮形式的 Checkbox 或带有边框的 Checkbox 有效   | string  | medium / small / mini  |    —     |
+| size     | 多选框组尺寸，仅对按钮形式的 Checkbox 或带有边框的 Checkbox 有效   | string  | medium / small / mini / compact  |    —     |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | min     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |

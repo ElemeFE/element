@@ -189,6 +189,8 @@ $--checkbox-bordered-medium-padding: 7px 20px 7px 10px !default;
 $--checkbox-bordered-small-padding: 5px 15px 5px 10px !default;
 /// padding||Spacing|3
 $--checkbox-bordered-mini-padding: 3px 15px 3px 10px !default;
+/// padding||Spacing|3
+$--checkbox-bordered-compact-padding: 2px 13px 2px 10px !default;
 $--checkbox-bordered-medium-input-height: 14px !default;
 $--checkbox-bordered-medium-input-width: 14px !default;
 /// height||Other|4
@@ -201,6 +203,10 @@ $--checkbox-bordered-mini-input-height: 12px !default;
 $--checkbox-bordered-mini-input-width: 12px !default;
 /// height||Other|4
 $--checkbox-bordered-mini-height: 28px !default;
+$--checkbox-bordered-compact-input-height: 12px !default;
+$--checkbox-bordered-compact-input-width: 12px !default;
+/// height||Other|4
+$--checkbox-bordered-compact-height: 26px !default;
 
 /// color||Color|0
 $--checkbox-button-checked-background-color: $--color-primary !default;

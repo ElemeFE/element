@@ -175,6 +175,11 @@ Checkbox with button styles.
       <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
     </el-checkbox-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup5" size="compact" disabled>
+      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
 </template>
 <script>
   const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
@@ -186,6 +191,7 @@ Checkbox with button styles.
         checkboxGroup2: ['Shanghai'],
         checkboxGroup3: ['Shanghai'],
         checkboxGroup4: ['Shanghai'],
+        checkboxGroup5: ['Shanghai'],
         cities: cityOptions
       };
     }
@@ -219,6 +225,12 @@ Checkbox with button styles.
       <el-checkbox label="Option2" border></el-checkbox>
     </el-checkbox-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup3" size="compact" disabled>
+      <el-checkbox label="Option1" border></el-checkbox>
+      <el-checkbox label="Option2" border></el-checkbox>
+    </el-checkbox-group>
+  </div>
 </template>
 
 <script>
@@ -230,7 +242,8 @@ Checkbox with button styles.
         checked3: false,
         checked4: true,
         checkboxGroup1: [],
-        checkboxGroup2: []
+        checkboxGroup2: [],
+        checkboxGroup3: []
       };
     }
   }
@@ -247,7 +260,7 @@ Checkbox with button styles.
 | false-label | value of the Checkbox if it's not checked   | string / number    |      —         |     —    |
 | disabled  | whether the Checkbox is disabled   | boolean   |  — | false   |
 | border  | whether to add a border around Checkbox  | boolean   | — | false   |
-| size  | size of the Checkbox, only works when `border` is true  | string  | medium / small / mini | — |
+| size  | size of the Checkbox, only works when `border` is true  | string  | medium / small / mini / compact | — |
 | name | native 'name' attribute | string    |      —         |     —    |
 | checked  | if the Checkbox is checked   | boolean   |  — | false   |
 | indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
@@ -261,7 +274,7 @@ Checkbox with button styles.
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | binding value | array | — | — |
-|size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini | — |
+|size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini / compact | — |
 | disabled  | whether the nesting checkboxes are disabled | boolean   | — | false   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |

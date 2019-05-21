@@ -175,6 +175,11 @@ Des checkbox avec une apparence de bouton.
       <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
     </el-checkbox-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup5" size="compact" disabled>
+      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
 </template>
 <script>
   const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
@@ -186,6 +191,7 @@ Des checkbox avec une apparence de bouton.
         checkboxGroup2: ['Shanghai'],
         checkboxGroup3: ['Shanghai'],
         checkboxGroup4: ['Shanghai'],
+        checkboxGroup5: ['Shanghai'],
         cities: cityOptions
       };
     }
@@ -219,6 +225,12 @@ Des checkbox avec une apparence de bouton.
       <el-checkbox label="Option2" border></el-checkbox>
     </el-checkbox-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup3" size="compact" disabled>
+      <el-checkbox label="Option1" border></el-checkbox>
+      <el-checkbox label="Option2" border></el-checkbox>
+    </el-checkbox-group>
+  </div>
 </template>
 
 <script>
@@ -230,7 +242,8 @@ Des checkbox avec une apparence de bouton.
         checked3: false,
         checked4: true,
         checkboxGroup1: [],
-        checkboxGroup2: []
+        checkboxGroup2: [],
+        checkboxGroup3: []
       };
     }
   }
@@ -247,7 +260,7 @@ Des checkbox avec une apparence de bouton.
 | false-label | Valeur de la checkbox si non-cochée.   | string / number    |      —         |     —    |
 | disabled  | Désactive la checkbox.   | boolean   |  — | false   |
 | border  | Ajoute une bordure à la checkbox.  | boolean   | — | false   |
-| size  | taille de la checkbox, ne marche que si `border` est 'true'  | string  | medium / small / mini | — |
+| size  | taille de la checkbox, ne marche que si `border` est 'true'  | string  | medium / small / mini / compact | — |
 | name | Attribut 'name' natif. | string    |      —         |     —    |
 | checked  | Si la checkbox est cochée.   | boolean   |  — | false   |
 | indeterminate  | Identique à `indeterminate` dans les checkbox natives. | boolean   |  — | false   |
@@ -261,7 +274,7 @@ Des checkbox avec une apparence de bouton.
 | Attribut      | Description         | Type    | Options                         | Défaut|
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | La valeur liée. | array | — | — |
-|size | Taille des checkbox-boutons ou des checkbox avec bordure. | string | medium / small / mini | — |
+|size | Taille des checkbox-boutons ou des checkbox avec bordure. | string | medium / small / mini / compact | — |
 | disabled  | Si les checkbox imbriquées sont désactivées. | boolean   | — | false   |
 | min     | Nombre minimum de checkbox cochées.   | number    |       —        |     —    |
 | max     | Nombre maximum de checkbox cochées.   | number    |       —        |     —    |
