@@ -124,6 +124,7 @@ export default {
         role="menu"
         id={ menuId }
         class="el-cascader-menu"
+        wrap-class="el-cascader-menu__wrap"
         view-class={{
           'el-cascader-menu__list': true,
           'is-empty': isEmpty

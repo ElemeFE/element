@@ -16,7 +16,6 @@
 }
 
 @include b(cascader-menu) {
-  height: 204px;
   min-width: 180px;
   box-sizing: border-box;
   color: $--cascader-menu-font-color;
@@ -27,6 +26,10 @@
     .el-cascader-node {
       padding-right: 20px;
     }
+  }
+
+  @include e(wrap) {
+    height: 204px;
   }
 
   @include e(list) {

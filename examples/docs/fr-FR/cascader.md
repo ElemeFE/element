@@ -1,35 +1,34 @@
 ## Cascader
 
-Si les options ont une structure hiérarchique claire, un Cascader peut être utilisé pour les afficher et les selectionner.
+If the options have a clear hierarchical structure, Cascader can be used to view and select them.
 
-### Usage
+### Basic usage
 
-Il y a deux manières de dérouler la liste des options.
+There are two ways to expand child option items.
 
-:::demo Assigner un tableau à l'attribut `options` génère un Cascader. L'attribut `expand-trigger` détermine comment les options suivantes sont affichées. Cet exemple utilises aussi l'évènement `change`, qui a pour paramètre la valeur du Cascader, c'est à dire un tableau constitué de chaque niveau jusqu'à la valeur selectionnée, comme un chemin.
+:::demo Assigning the `options` attribute to an array of options renders a Cascader. The `props.expandTrigger` attribute defines how child options are expanded.
 ```html
 <div class="block">
-  <span class="demonstration">Les options se déroulent après un clic (défaut)</span>
+  <span class="demonstration">Child options expand when clicked (default)</span>
   <el-cascader
+    v-model="value"
     :options="options"
-    v-model="selectedOptions"
-    @change="handleChange">
-  </el-cascader>
+    @change="handleChange"></el-cascader>
 </div>
 <div class="block">
-  <span class="demonstration">Les options se déroulent au passage de la souris</span>
+  <span class="demonstration">Child options expand when hovered</span>
   <el-cascader
-    expand-trigger="hover"
+    v-model="value"
     :options="options"
-    v-model="selectedOptions2"
-    @change="handleChange">
-  </el-cascader>
+    :props="{ expandTrigger: 'hover' }"
+    @change="handleChange"></el-cascader>
 </div>
 
 <script>
   export default {
     data() {
       return {
+        value: [],
         options: [{
           value: 'guide',
           label: 'Guide',
@@ -224,9 +223,7 @@ Il y a deux manières de dérouler la liste des options.
             value: 'docs',
             label: 'Design Documentation'
           }]
-        }],
-        selectedOptions: [],
-        selectedOptions2: []
+        }]
       };
     },
     methods: {
@@ -239,20 +236,19 @@ Il y a deux manières de dérouler la liste des options.
 ```
 :::
 
-### Options désactivées
+### Disabled option
 
-Désactivez une option en configurant `disabled` dans l'objet option.
+Disable an option by setting a `disabled` field in the option object.
 
-:::demo Dans cet exemple, le premier item dans le tableau `options` est configuré avec `disabled: true`, il est donc désactivé. Par défaut, Cascader recherche le champ `disabled` dans chaque option; si vous utilisez un autre nom de champ pour indiquer que l'option est désactivée, vous pouvez l'assigner dans l'attribut `props` (voir la table de l'API ci-dessous). Les champs `value`, `label` et `children` peuvent être personnalisés de la même manière.
+:::demo In this example, the first item in `options` array has a `disabled: true` field, so it is disabled. By default, Cascader checks the `disabled` field in each option object; if you are using another field name to indicate whether an option is disabled, you can assign it in the `props.disabled` attribute (see the API table below for details). And of course, field name `value`, `label` and `children` can also be customized in the same way.
 ```html
-<el-cascader
-  :options="optionsWithDisabled"
-></el-cascader>
+<el-cascader :options="options"></el-cascader>
+
 <script>
   export default {
     data() {
       return {
-        optionsWithDisabled: [{
+        options: [{
           value: 'guide',
           label: 'Guide',
           disabled: true,
@@ -455,16 +451,14 @@ Désactivez une option en configurant `disabled` dans l'objet option.
 ```
 :::
 
-### Afficher uniquement le dernier niveau
+### Clearable
 
-Le champ peut n'afficher que le dernier niveau au lieu de tous.
+Set `clearable` attribute for `el-cascader` and a clear icon will appear when selected and hovered
 
-:::demo L'attribut `show-all-levels` détermine si tous les niveaux sont affichés. Si il est à `false`, seul le dernier niveau est affiché.
+:::demo
 ```html
-<el-cascader
-    :options="options"
-    :show-all-levels="false"
-></el-cascader>
+<el-cascader :options="options" clearable></el-cascader>
+
 <script>
   export default {
     data() {
@@ -664,517 +658,475 @@ Le champ peut n'afficher que le dernier niveau au lieu de tous.
             label: 'Design Documentation'
           }]
         }]
-      };
-    }
-  };
-</script>
-```
-:::
-
-### Valeur par défaut
-
-:::demo La valeur par défaut peut être définit grâce à un tableau.
-```html
-<el-cascader
-  :options="options"
-  v-model="selectedOptions"
-></el-cascader>
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: 'guide',
-          label: 'Guide',
-          children: [{
-            value: 'disciplines',
-            label: 'Disciplines',
-            children: [{
-              value: 'consistency',
-              label: 'Consistency'
-            }, {
-              value: 'feedback',
-              label: 'Feedback'
-            }, {
-              value: 'efficiency',
-              label: 'Efficiency'
-            }, {
-              value: 'controllability',
-              label: 'Controllability'
-            }]
-          }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'side nav',
-              label: 'Side Navigation'
-            }, {
-              value: 'top nav',
-              label: 'Top Navigation'
-            }]
-          }]
-        }, {
-          value: 'component',
-          label: 'Component',
-          children: [{
-            value: 'basic',
-            label: 'Basic',
-            children: [{
-              value: 'layout',
-              label: 'Layout'
-            }, {
-              value: 'color',
-              label: 'Color'
-            }, {
-              value: 'typography',
-              label: 'Typography'
-            }, {
-              value: 'icon',
-              label: 'Icon'
-            }, {
-              value: 'button',
-              label: 'Button'
-            }]
-          }, {
-            value: 'form',
-            label: 'Form',
-            children: [{
-              value: 'radio',
-              label: 'Radio'
-            }, {
-              value: 'checkbox',
-              label: 'Checkbox'
-            }, {
-              value: 'input',
-              label: 'Input'
-            }, {
-              value: 'input-number',
-              label: 'InputNumber'
-            }, {
-              value: 'select',
-              label: 'Select'
-            }, {
-              value: 'cascader',
-              label: 'Cascader'
-            }, {
-              value: 'switch',
-              label: 'Switch'
-            }, {
-              value: 'slider',
-              label: 'Slider'
-            }, {
-              value: 'time-picker',
-              label: 'TimePicker'
-            }, {
-              value: 'date-picker',
-              label: 'DatePicker'
-            }, {
-              value: 'datetime-picker',
-              label: 'DateTimePicker'
-            }, {
-              value: 'upload',
-              label: 'Upload'
-            }, {
-              value: 'rate',
-              label: 'Rate'
-            }, {
-              value: 'form',
-              label: 'Form'
-            }]
-          }, {
-            value: 'data',
-            label: 'Data',
-            children: [{
-              value: 'table',
-              label: 'Table'
-            }, {
-              value: 'tag',
-              label: 'Tag'
-            }, {
-              value: 'progress',
-              label: 'Progress'
-            }, {
-              value: 'tree',
-              label: 'Tree'
-            }, {
-              value: 'pagination',
-              label: 'Pagination'
-            }, {
-              value: 'badge',
-              label: 'Badge'
-            }]
-          }, {
-            value: 'notice',
-            label: 'Notice',
-            children: [{
-              value: 'alert',
-              label: 'Alert'
-            }, {
-              value: 'loading',
-              label: 'Loading'
-            }, {
-              value: 'message',
-              label: 'Message'
-            }, {
-              value: 'message-box',
-              label: 'MessageBox'
-            }, {
-              value: 'notification',
-              label: 'Notification'
-            }]
-          }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'menu',
-              label: 'NavMenu'
-            }, {
-              value: 'tabs',
-              label: 'Tabs'
-            }, {
-              value: 'breadcrumb',
-              label: 'Breadcrumb'
-            }, {
-              value: 'dropdown',
-              label: 'Dropdown'
-            }, {
-              value: 'steps',
-              label: 'Steps'
-            }]
-          }, {
-            value: 'others',
-            label: 'Others',
-            children: [{
-              value: 'dialog',
-              label: 'Dialog'
-            }, {
-              value: 'tooltip',
-              label: 'Tooltip'
-            }, {
-              value: 'popover',
-              label: 'Popover'
-            }, {
-              value: 'card',
-              label: 'Card'
-            }, {
-              value: 'carousel',
-              label: 'Carousel'
-            }, {
-              value: 'collapse',
-              label: 'Collapse'
-            }]
-          }]
-        }, {
-          value: 'resource',
-          label: 'Resource',
-          children: [{
-            value: 'axure',
-            label: 'Axure Components'
-          }, {
-            value: 'sketch',
-            label: 'Sketch Templates'
-          }, {
-            value: 'docs',
-            label: 'Design Documentation'
-          }]
-        }],
-        selectedOptions: ['component', 'data', 'tag']
-      };
-    }
-  };
-</script>
-```
-:::
-
-### Changement après sélection
-
-Les options parentes peuvent aussi être sélectionnées.
-
-:::demo Par défaut seules les options de dernier niveau peuvent être sélectionnées. En réglant `change-on-select` à `true`, les options parentes peuvent aussi être sélectionnées.
-```html
-<el-cascader
-  :options="options"
-  change-on-select
-></el-cascader>
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: 'guide',
-          label: 'Guide',
-          children: [{
-            value: 'disciplines',
-            label: 'Disciplines',
-            children: [{
-              value: 'consistency',
-              label: 'Consistency'
-            }, {
-              value: 'feedback',
-              label: 'Feedback'
-            }, {
-              value: 'efficiency',
-              label: 'Efficiency'
-            }, {
-              value: 'controllability',
-              label: 'Controllability'
-            }]
-          }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'side nav',
-              label: 'Side Navigation'
-            }, {
-              value: 'top nav',
-              label: 'Top Navigation'
-            }]
-          }]
-        }, {
-          value: 'component',
-          label: 'Component',
-          children: [{
-            value: 'basic',
-            label: 'Basic',
-            children: [{
-              value: 'layout',
-              label: 'Layout'
-            }, {
-              value: 'color',
-              label: 'Color'
-            }, {
-              value: 'typography',
-              label: 'Typography'
-            }, {
-              value: 'icon',
-              label: 'Icon'
-            }, {
-              value: 'button',
-              label: 'Button'
-            }]
-          }, {
-            value: 'form',
-            label: 'Form',
-            children: [{
-              value: 'radio',
-              label: 'Radio'
-            }, {
-              value: 'checkbox',
-              label: 'Checkbox'
-            }, {
-              value: 'input',
-              label: 'Input'
-            }, {
-              value: 'input-number',
-              label: 'InputNumber'
-            }, {
-              value: 'select',
-              label: 'Select'
-            }, {
-              value: 'cascader',
-              label: 'Cascader'
-            }, {
-              value: 'switch',
-              label: 'Switch'
-            }, {
-              value: 'slider',
-              label: 'Slider'
-            }, {
-              value: 'time-picker',
-              label: 'TimePicker'
-            }, {
-              value: 'date-picker',
-              label: 'DatePicker'
-            }, {
-              value: 'datetime-picker',
-              label: 'DateTimePicker'
-            }, {
-              value: 'upload',
-              label: 'Upload'
-            }, {
-              value: 'rate',
-              label: 'Rate'
-            }, {
-              value: 'form',
-              label: 'Form'
-            }]
-          }, {
-            value: 'data',
-            label: 'Data',
-            children: [{
-              value: 'table',
-              label: 'Table'
-            }, {
-              value: 'tag',
-              label: 'Tag'
-            }, {
-              value: 'progress',
-              label: 'Progress'
-            }, {
-              value: 'tree',
-              label: 'Tree'
-            }, {
-              value: 'pagination',
-              label: 'Pagination'
-            }, {
-              value: 'badge',
-              label: 'Badge'
-            }]
-          }, {
-            value: 'notice',
-            label: 'Notice',
-            children: [{
-              value: 'alert',
-              label: 'Alert'
-            }, {
-              value: 'loading',
-              label: 'Loading'
-            }, {
-              value: 'message',
-              label: 'Message'
-            }, {
-              value: 'message-box',
-              label: 'MessageBox'
-            }, {
-              value: 'notification',
-              label: 'Notification'
-            }]
-          }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'menu',
-              label: 'NavMenu'
-            }, {
-              value: 'tabs',
-              label: 'Tabs'
-            }, {
-              value: 'breadcrumb',
-              label: 'Breadcrumb'
-            }, {
-              value: 'dropdown',
-              label: 'Dropdown'
-            }, {
-              value: 'steps',
-              label: 'Steps'
-            }]
-          }, {
-            value: 'others',
-            label: 'Others',
-            children: [{
-              value: 'dialog',
-              label: 'Dialog'
-            }, {
-              value: 'tooltip',
-              label: 'Tooltip'
-            }, {
-              value: 'popover',
-              label: 'Popover'
-            }, {
-              value: 'card',
-              label: 'Card'
-            }, {
-              value: 'carousel',
-              label: 'Carousel'
-            }, {
-              value: 'collapse',
-              label: 'Collapse'
-            }]
-          }]
-        }, {
-          value: 'resource',
-          label: 'Resource',
-          children: [{
-            value: 'axure',
-            label: 'Axure Components'
-          }, {
-            value: 'sketch',
-            label: 'Sketch Templates'
-          }, {
-            value: 'docs',
-            label: 'Design Documentation'
-          }]
-        }]
-      };
-    }
-  };
-</script>
-```
-:::
-
-### Charger les options dynamiquement
-
-Il est possible de charger dynamiquement les options quand on clique ou passe la souris sur leurs parent.
-
-:::demo Dans cet exemple, les optionsn'ont pas de données de villes au moment de l'initialisation. Grâce à l'évènement `active-item-change` vous pouvez charger les villes de manière dynamique. De plus, cet exemple montre comment `props` peut être utilisé.
-```html
-<el-cascader
-  :options="options"
-  @active-item-change="handleItemChange"
-  :props="props"
-></el-cascader>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          label: 'California',
-          cities: []
-        }, {
-          label: 'Florida',
-          cities: []
-        }],
-        props: {
-          value: 'label',
-          children: 'cities'
-        }
-      };
-    },
-
-    methods: {
-      handleItemChange(val) {
-        console.log('active item:', val);
-        setTimeout(_ => {
-          if (val.indexOf('California') > -1 && !this.options[0].cities.length) {
-            this.options[0].cities = [{
-              label: 'Los Angeles'
-            }];
-          } else if (val.indexOf('Florida') > -1 && !this.options[1].cities.length) {
-            this.options[1].cities = [{
-              label: 'Orlando'
-            }];
-          }
-        }, 300);
       }
     }
+  }
+</script>
+```
+:::
+
+### Display only the last level
+
+The input can display only the last level instead of all levels.
+
+:::demo The `show-all-levels` attribute defines if all levels are displayed. If it is `false`, only the last level is displayed.
+```html
+<el-cascader :options="options" :show-all-levels="false"></el-cascader>
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }]
+      };
+    }
   };
 </script>
 ```
 :::
 
-### Filtres
+### Multiple Selection
 
-Recherchez une option particulière en entrant des mots-clé.
+Set `props.multiple = true` to use multiple selection.
 
-:::demo Ajouter `filterable` à `el-cascader` active le filtrage.
+:::demo When using multiple selection, all selected tags will display by default, You can set `collapse-tags = true` to fold selected tags.
 ```html
 <div class="block">
-  <span class="demonstration">Only options of the last level can be selected</span>
+  <span class="demonstration">Display all tags (default)</span>
   <el-cascader
-    placeholder="Try searching: Guide"
     :options="options"
-    filterable
-  ></el-cascader>
+    :props="props"
+    clearable></el-cascader>
 </div>
 <div class="block">
-  <span class="demonstration">Options of all levels can be selected</span>
+  <span class="demonstration">Collapse tags</span>
   <el-cascader
-    placeholder="Try searching: Guide"
     :options="options"
-    filterable
-    change-on-select
-  ></el-cascader>
+    :props="props"
+    collapse-tags
+    clearable></el-cascader>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        props: { multiple: true },
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
+
+### Select any level of options
+
+In single selection, only the leaf nodes can be checked, and in multiple selection, check parent nodes will lead to leaf nodes be checked eventually. When enable this feature, it can make parent and child nodes unlinked and you can select any level of options.
+
+:::demo Set `props.checkStrictly = true` to make checked state of a node not affects its parent nodes and child nodes, and then you can select any level of options.
+```html
+<div class="block">
+  <span class="demonstration">Select any level of options (Single selection)</span>
+  <el-cascader
+    :options="options"
+    :props="{ checkStrictly: true }"
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">Select any level of options (Multiple selection)</span>
+  <el-cascader
+    :options="options"
+    :props="{ multiple: true, checkStrictly: true }"
+    clearable></el-cascader>
 </div>
 
 <script>
@@ -1383,38 +1335,766 @@ Recherchez une option particulière en entrant des mots-clé.
 ```
 :::
 
-### Attributs
-| Attribut | Description         | Type    | Options       | Défaut|
-|---------- |-------------------- |---------|-------------  |-------- |
-| value / v-model | Valeur sélectionnée. | array | — | — |
-| options   | Données des options. | array | — | — |
-| props | Options de configuration, voir la table suivante. | object | — | — |
-| separator | Séparateur des options. | string | — | / |
-| popper-class | Classe personnalisée pour le menu déroulant du Cascader | string | — | — |
-| placeholder | Placeholder du champ. | string | — | Select |
-| disabled  | Désactive le Cascader. | boolean |  — | false |
-| clearable  | Détermine si la valeur peut être effacée. | boolean | — | false |
-| expand-trigger  | Mode de déclenchement du menu suivant. | string | click / hover | click |
-| show-all-levels | Détermine si tout les niveaux doivent être affichés dans le champ. | boolean | — | true |
-| filterable  | Active la recherche par mots-clé. | boolean | — | — |
-| debounce | Délai d'attente après avoir entré un mot-clé, en millisecondes. | number | — | 300 |
-| change-on-select | Détermine si il est possible de sélectionner une option de n'importe quel niveau. | boolean | — | false |
-| size  | taille du champ | string | medium / small / mini | — |
-| before-filter | Fonction de hook qui s'active avant le filtrage, le paramètre étant la valeur entrée. Si `false` est retourné ou bien une `Promise` est retournée puis rejetée, le filtrage sera annulé. | function(value) | — | — |
+### Dynamic loading
 
-### props
-| Attribut | Description | Type | Valeurs acceptées | Défaut |
-| --------- | ----------------- | ------ | ------ | ------ |
-| label     | Détermine quelle clé d'option est utilisé comme label. | string | — | — |
-| value     | Détermine quelle clé d'option est utilisé comme valeur. | string | — | — |
-| children  | Détermine quelle clé d'option est utilisé en tant que sous-options. | string | — | — |
-| disabled  | Détermine quelle clé d'option est utilisé pour indiquer si l'option est désactivée. | string | — | — |
+Dynamic load its child nodes when checked a node.
 
-### Évènements
-| Nom | Description | Paramètres |
+:::demo Set `lazy = true` to use dynamic loading, and you have to specify how to load the data source by `lazyload`. There are two parameters of `lazyload`,the first parameter `node` is the node currently clicked, and the `resolve` is a callback that indicate loading is finished which must invoke. To display the status of node more accurately, you can add a `leaf` field (can be modified by `props.leaf`) to indicate whether it is a leaf node. Otherwise, it will be inferred by if has any child nodes.
+```html
+<el-cascader :props="props"></el-cascader>
+
+<script>
+  let id = 0;
+
+  export default {
+    data() {
+      return {
+        props: {
+          lazy: true,
+          lazyLoad (node, resolve) {
+            const { level } = node;
+            setTimeout(() => {
+              const nodes = Array.from({ length: level + 1 })
+                .map(item => ({
+                  value: ++id,
+                  label: `Option - ${id}`,
+                  leaf: level >= 2
+                }))
+              // Invoke `resolve` callback to return the child nodes data and indicate the loading is finished.
+              resolve(nodes)
+            }, 1000)
+          }
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
+### Filterable
+
+Search and select options with a keyword.
+
+:::demo Adding `filterable` to `el-cascader` enables filtering.
+```html
+<div class="block">
+  <span class="demonstration">Filterable (Single selection)</span>
+  <el-cascader
+    placeholder="Try searchingL Guide"
+    :options="options"
+    filterable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">Filterable (Multiple selection)</span>
+  <el-cascader
+    placeholder="Try searchingL Guide"
+    :options="options"
+    :props="{ multiple: true }"
+    filterable></el-cascader>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
+### Custom option content
+
+You can customize the content of cascader node.
+
+:::demo You can customize the content of cascader node by `scoped slot`. You'll have access to `node` and `data` in the scope,  standing for the Node object and node data of the current node respectively。
+```html
+<el-cascader :options="options">
+  <template slot-scope="{ node, data }">
+    <span>{{ data.label }}</span>
+    <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
+  </template>
+</el-cascader>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Cascader panel
+
+`CascaderPanel` is the core component of `Cascader` which has various of features such as single selection, multiple selection, dynamic loading and so on.
+
+:::demo Just like `el-cascader`, you can set alternative options by `options`, and enable other features by `props`, see the API form below for details.
+```html
+<el-cascader-panel :options="options"></el-cascader-panel>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'guide',
+          label: 'Guide',
+          children: [{
+            value: 'disciplines',
+            label: 'Disciplines',
+            children: [{
+              value: 'consistency',
+              label: 'Consistency'
+            }, {
+              value: 'feedback',
+              label: 'Feedback'
+            }, {
+              value: 'efficiency',
+              label: 'Efficiency'
+            }, {
+              value: 'controllability',
+              label: 'Controllability'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'side nav',
+              label: 'Side Navigation'
+            }, {
+              value: 'top nav',
+              label: 'Top Navigation'
+            }]
+          }]
+        }, {
+          value: 'component',
+          label: 'Component',
+          children: [{
+            value: 'basic',
+            label: 'Basic',
+            children: [{
+              value: 'layout',
+              label: 'Layout'
+            }, {
+              value: 'color',
+              label: 'Color'
+            }, {
+              value: 'typography',
+              label: 'Typography'
+            }, {
+              value: 'icon',
+              label: 'Icon'
+            }, {
+              value: 'button',
+              label: 'Button'
+            }]
+          }, {
+            value: 'form',
+            label: 'Form',
+            children: [{
+              value: 'radio',
+              label: 'Radio'
+            }, {
+              value: 'checkbox',
+              label: 'Checkbox'
+            }, {
+              value: 'input',
+              label: 'Input'
+            }, {
+              value: 'input-number',
+              label: 'InputNumber'
+            }, {
+              value: 'select',
+              label: 'Select'
+            }, {
+              value: 'cascader',
+              label: 'Cascader'
+            }, {
+              value: 'switch',
+              label: 'Switch'
+            }, {
+              value: 'slider',
+              label: 'Slider'
+            }, {
+              value: 'time-picker',
+              label: 'TimePicker'
+            }, {
+              value: 'date-picker',
+              label: 'DatePicker'
+            }, {
+              value: 'datetime-picker',
+              label: 'DateTimePicker'
+            }, {
+              value: 'upload',
+              label: 'Upload'
+            }, {
+              value: 'rate',
+              label: 'Rate'
+            }, {
+              value: 'form',
+              label: 'Form'
+            }]
+          }, {
+            value: 'data',
+            label: 'Data',
+            children: [{
+              value: 'table',
+              label: 'Table'
+            }, {
+              value: 'tag',
+              label: 'Tag'
+            }, {
+              value: 'progress',
+              label: 'Progress'
+            }, {
+              value: 'tree',
+              label: 'Tree'
+            }, {
+              value: 'pagination',
+              label: 'Pagination'
+            }, {
+              value: 'badge',
+              label: 'Badge'
+            }]
+          }, {
+            value: 'notice',
+            label: 'Notice',
+            children: [{
+              value: 'alert',
+              label: 'Alert'
+            }, {
+              value: 'loading',
+              label: 'Loading'
+            }, {
+              value: 'message',
+              label: 'Message'
+            }, {
+              value: 'message-box',
+              label: 'MessageBox'
+            }, {
+              value: 'notification',
+              label: 'Notification'
+            }]
+          }, {
+            value: 'navigation',
+            label: 'Navigation',
+            children: [{
+              value: 'menu',
+              label: 'NavMenu'
+            }, {
+              value: 'tabs',
+              label: 'Tabs'
+            }, {
+              value: 'breadcrumb',
+              label: 'Breadcrumb'
+            }, {
+              value: 'dropdown',
+              label: 'Dropdown'
+            }, {
+              value: 'steps',
+              label: 'Steps'
+            }]
+          }, {
+            value: 'others',
+            label: 'Others',
+            children: [{
+              value: 'dialog',
+              label: 'Dialog'
+            }, {
+              value: 'tooltip',
+              label: 'Tooltip'
+            }, {
+              value: 'popover',
+              label: 'Popover'
+            }, {
+              value: 'card',
+              label: 'Card'
+            }, {
+              value: 'carousel',
+              label: 'Carousel'
+            }, {
+              value: 'collapse',
+              label: 'Collapse'
+            }]
+          }]
+        }, {
+          value: 'resource',
+          label: 'Resource',
+          children: [{
+            value: 'axure',
+            label: 'Axure Components'
+          }, {
+            value: 'sketch',
+            label: 'Sketch Templates'
+          }, {
+            value: 'docs',
+            label: 'Design Documentation'
+          }]
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
+### Cascader Attributes
+| Attribute | Description | Type  | Accepted Values | Default |
+|---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | array / string / number | — | — |
+| options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
+| props | configuration options, see the following table. | object | — | — |
+| size | size of input | string | medium / small / mini | — |
+| placeholder | placeholder of input | string | — | Select |
+| disabled | whether Cascader is disabled | boolean | — | false |
+| clearable | whether selected value can be cleared | boolean | — | false |
+| show-all-levels | whether to display all levels of the selected value in the input | boolean | — | true |
+| collapse-tags | whether to collapse tags in multiple selection mode | boolean | - | false |
+| separator | option label separator | string | — | 斜杠' / ' |
+| filterable | whether the options can be searched | boolean | — | — |
+| debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
+| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
+| popper-class | custom class name for Cascader's dropdown   | string | —  | — |
+
+### Cascader Events
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change  | Se déclecnhe lorsque la valeur change. | La valeur |
-| active-item-change | Se déclenche quand le parent de l'option active change, ne marche que si `change-on-select` est `false` | Un tableau des options actives |
-| blur | Se déclenche quand le Cascader perds le focus. | (event: Event) |
-| focus | Se déclenche quand le Cascader a le focus. | (event: Event) |
-| visible-change | Se déclenche quand le menu apparaît ou disparaît. | `true` quand il apparaît, `false` sinon. |
+| change | triggers when the binding value changes | value |
+| expand-change | triggers when expand option changes | an array of the expanding node's parent nodes |
+| blur | triggers when Cascader blurs | (event: Event) |
+| focus | triggers when Cascader focuses | (event: Event) |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
+| remove-tag | triggers when remove tag in multiple selection mode | the value of the tag which is removed |
+
+### Cascader Slots
+| Slot Name | Description |
+|---------|-------------|
+| - | the custom content of cascader node, the parameter is { node, data }, which are current Node object and node data respectively. |
+| empty  | content when there is no matched options. |
+
+### CascaderPanel Attributes
+| Attribute | Description | Type  | Accepted Values | Default |
+|---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | array / string / number | — | — |
+| options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
+| props | configuration options, see the following table. | object | — | — |
+
+### CascaderPanel Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| change | triggers when the binding value changes | value |
+| expand-change | triggers when expand option changes | an array of the expanding node's parent nodes |
+
+### CascaderPanel Slots
+| Slot Name | Description |
+|---------|-------------|
+| - | the custom content of cascader node, the parameter is { node, data }, which are current Node object and node data respectively. |
+
+### Props
+| Attribute | Description | Type  | Accepted Values | Default |
+| -------- | ----------------- | ------ | ------ | ------ |
+| expandTrigger | trigger mode of expanding options | string | click / hover | 'click' |
+| multiple | whether multiple selection is enabled | boolean | - | false |
+| checkStrictly | whether checked state of a node not affects its parent and child nodes | boolean | - | false |
+| emitPath | when checked nodes change, whether to emit an array of node's path, if false, only emit the value of node. | boolean | - | true |
+| lazy | whether to dynamic load child nodes, use with `lazyload` attribute | boolean | - | false |
+| lazyLoad | method for loading child nodes data, only works when `lazy` is true | function(node, resolve) | - | - |
+| value    | specify which key of node object is used as the node's value | string | — | 'value' |
+| label    | specify which key of node object is used as the node's label | string | — | 'label' |
+| children | specify which key of node object is used as the node's children | string | — | 'children' |
+| disabled | specify which key of node object is used as the node's disabled | string | — | 'disabled' |

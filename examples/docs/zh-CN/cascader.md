@@ -243,6 +243,7 @@
 :::demo 本例中，`options`指定的数组中的第一个元素含有`disabled: true`键值对，因此是禁用的。在默认情况下，Cascader 会检查数据中每一项的`disabled`字段是否为`true`，如果你的数据中表示禁用含义的字段名不为`disabled`，可以通过`props.disabled`属性来指定（详见下方 API 表格）。当然，`value`、`label`和`children`这三个字段名也可以通过同样的方式指定。
 ```html
 <el-cascader :options="options"></el-cascader>
+
 <script>
   export default {
     data() {
@@ -457,6 +458,7 @@
 :::demo
 ```html
 <el-cascader :options="options" clearable></el-cascader>
+
 <script>
   export default {
     data() {
@@ -670,6 +672,7 @@
 :::demo 属性`show-all-levels`定义了是否显示完整的路径，将其赋值为`false`则仅显示最后一级
 ```html
 <el-cascader :options="options" :show-all-levels="false"></el-cascader>
+
 <script>
   export default {
     data() {
@@ -1108,9 +1111,9 @@
 
 ### 选择任意一级选项
 
-可通过`props.checkStrictly = true`来设置父子节点不互相关联，从而达到选择任意一级选项的目的。
+在单选模式下，你只能选择叶子节点；而在多选模式下，勾选父节点真正选中的都是叶子节点。启用该功能后，可让父子节点取消关联，选择任意一级选项。
 
-:::demo 默认情况下，无论是单选还是多选，勾选父节点真正选中的都是叶子节点，开启该选项后，可让父子节点取消关联，选择任意一级选项。
+:::demo 可通过 `props.checkStrictly = true` 来设置父子节点取消选中关联，从而达到选择任意一级选项的目的。
 ```html
 <div class="block">
   <span class="demonstration">单选选择任意一级选项</span>
@@ -1337,7 +1340,7 @@
 
 当选中某一级时，动态加载该级下的选项。
 
-:::demo 通过`lazy`开启动态加载，并通过`lazyload`来设置加载数据源的方法，对节点数据添加是否为叶子节点的标志位 (默认字段为`leaf`，可通过`props.leaf`修改)，可更准确的显示节点的状态，否则会简单的以有无子节点来判断是否为叶子节点。
+:::demo 通过`lazy`开启动态加载，并通过`lazyload`来设置加载数据源的方法。`lazyload`方法有两个参数，第一个参数`node`为当前点击的节点，第二个`resolve`为数据加载完成的回调(必须调用)。为了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为`leaf`，可通过`props.leaf`修改)，否则会简单的以有无子节点来判断是否为叶子节点。
 ```html
 <el-cascader :props="props"></el-cascader>
 
@@ -1351,20 +1354,16 @@
           lazy: true,
           lazyLoad (node, resolve) {
             const { level } = node;
-            // 通过resolve将子节点数据返回
-            if (level < 3) {
-              setTimeout(() => {
-                const nodes = Array.from({ length: level + 1 })
-                  .map(item => ({
-                    value: ++id,
-                    label: `选项${id}`,
-                    leaf: level >= 2
-                  }))
-                resolve(nodes)
-              }, 1000)
-            } else {
-              setTimeout(resolve, 1000)
-            }
+            setTimeout(() => {
+              const nodes = Array.from({ length: level + 1 })
+                .map(item => ({
+                  value: ++id,
+                  label: `选项${id}`,
+                  leaf: level >= 2
+                }))
+              // 通过调用resolve将子节点数据返回，通知组件数据加载完成
+              resolve(nodes)
+            }, 1000)
           }
         }
       };
@@ -1606,7 +1605,7 @@
 
 可以自定义备选项的节点内容
 
-:::demo 可以通过scroped slot对级联选择器的备选项的节点内容进行自定义，scoped slot会传入两个参数 `node` 和 `data`，分别表示当前节点的 Node 对象和数据。
+:::demo 可以通过`scoped slot`对级联选择器的备选项的节点内容进行自定义，scoped slot会传入两个字段 `node` 和 `data`，分别表示当前节点的 Node 对象和数据。
 ```html
 <el-cascader :options="options">
   <template slot-scope="{ node, data }">
@@ -2066,7 +2065,7 @@
 ### Cascader Slots
 | 名称     | 说明 |
 |---------|-------------|
-| - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据
+| - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据 |
 | empty  | 无匹配选项时的内容 |
 
 ### CascaderPanel Attributes
@@ -2085,7 +2084,7 @@
 ### CascaderPanel Slots
 | 名称     | 说明 |
 |---------|-------------|
-| - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据
+| - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据 |
 
 ### Props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
@@ -2093,9 +2092,9 @@
 | expandTrigger | 次级菜单的展开方式 | string | click / hover | 'click' |
 | multiple | 是否多选 | boolean | - | false |
 | checkStrictly | 是否严格的遵守父子节点不互相关联 | boolean | - | false |
-| emitPath | 在选中节点改变时，是否抛出由该节点所在的各级菜单的值所组成的数组，若设置 false，则只抛出该节点的值 | boolean | - | true |
+| emitPath | 在选中节点改变时，是否返回由该节点所在的各级菜单的值所组成的数组，若设置 false，则只返回该节点的值 | boolean | - | true |
 | lazy | 是否动态加载子节点，需与 lazyLoad 方法结合使用 | boolean | - | false |
-| lazyLoad | 加载动态数据的方法，仅在 lazy 为 true 时有效 | function(node, resolve) | - | - |
+| lazyLoad | 加载动态数据的方法，仅在 lazy 为 true 时有效 | function(node, resolve)，`node`为当前点击的节点，`resolve`为数据加载完成的回调(必须调用) | - | - |
 | value    | 指定选项的值为选项对象的某个属性值 | string | — | 'value' |
 | label    | 指定选项标签为选项对象的某个属性值 | string | — | 'label' |
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | 'children' |
