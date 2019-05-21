@@ -91,6 +91,26 @@
         }
       }
     }
+
+    &.el-checkbox--compact {
+      padding: $--checkbox-bordered-compact-padding;
+      border-radius: $--button-compact-border-radius;
+      height: $--checkbox-bordered-compact-height;
+
+      .el-checkbox__label {
+        line-height: 12px;
+        font-size: $--button-compact-font-size;
+      }
+
+      .el-checkbox__inner {
+        height: $--checkbox-bordered-compact-input-height;
+        width: $--checkbox-bordered-compact-input-width;
+        &::after {
+          height: 6px;
+          width: 2px;
+        }
+      }
+    }
   }
 
   @include e(input) {
@@ -350,6 +370,11 @@
   @include m(mini) {
     .el-checkbox-button__inner {
       @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
+    }
+  }
+  @include m(compact) {
+    .el-checkbox-button__inner {
+      @include button-size($--button-compact-padding-vertical, $--button-compact-padding-horizontal, $--button-compact-font-size, 0);
     }
   }
 }
