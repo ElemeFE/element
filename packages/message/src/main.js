@@ -30,13 +30,17 @@ const Message = function(options) {
     instance.$slots.default = [instance.message];
     instance.message = null;
   }
-  instance.vm = instance.$mount();
-  document.body.appendChild(instance.vm.$el);
-  instance.vm.visible = true;
-  instance.dom = instance.vm.$el;
-  instance.dom.style.zIndex = PopupManager.nextZIndex();
+  instance.$mount();
+  document.body.appendChild(instance.$el);
+  let verticalOffset = options.offset || 20;
+  instances.forEach(item => {
+    verticalOffset += item.$el.offsetHeight + 16;
+  });
+  instance.verticalOffset = verticalOffset;
+  instance.visible = true;
+  instance.$el.style.zIndex = PopupManager.nextZIndex();
   instances.push(instance);
-  return instance.vm;
+  return instance;
 };
 
 ['success', 'warning', 'info', 'error'].forEach(type => {
@@ -52,14 +56,24 @@ const Message = function(options) {
 });
 
 Message.close = function(id, userOnClose) {
-  for (let i = 0, len = instances.length; i < len; i++) {
+  let len = instances.length;
+  let index = -1;
+  for (let i = 0; i < len; i++) {
     if (id === instances[i].id) {
+      index = i;
       if (typeof userOnClose === 'function') {
         userOnClose(instances[i]);
       }
       instances.splice(i, 1);
       break;
     }
+  }
+  if (len <= 1 || index === -1 || index > instances.length - 1) return;
+  const removedHeight = instances[index].$el.offsetHeight;
+  for (let i = index; i < len - 1 ; i++) {
+    let dom = instances[i].$el;
+    dom.style['top'] =
+      parseInt(dom.style['top'], 10) - removedHeight - 16 + 'px';
   }
 };
 

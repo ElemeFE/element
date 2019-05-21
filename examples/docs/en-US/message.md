@@ -20,7 +20,7 @@ Displays at the top, and disappears after 3 seconds.
       open() {
         this.$message('This is a message.');
       },
-      
+
       openVn() {
         const h = this.$createElement;
         this.$message({
@@ -210,6 +210,7 @@ In this case you should call `Message(options)`. We have also registered methods
 | showClose | whether to show a close button | boolean | — | false |
 | center | whether to center the text | boolean | — | false |
 | onClose | callback function when closed with the message instance as the parameter | function | — | — |
+| offset | set the distance to the top of viewport | number | — | 20 |
 
 ### Methods
 `Message` and `this.$message` returns the current Message instance. To manually close the instance, you can call `close` on it.
