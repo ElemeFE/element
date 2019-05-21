@@ -132,7 +132,7 @@ Cuando se hace clic en un botón para descargar datos, el botón muestra un esta
 
 Además del tamaño por defecto, el componente Button provee tres tamaños adicionales para utilizar en diferentes escenarios.
 
-:::demo Use el atributo `size` para setear tamaños adicionales con `medium`, `small` o `mini`.
+:::demo Use el atributo `size` para setear tamaños adicionales con `medium`, `small`, `mini` o `compact`.
 
 ```html
 <el-row>
@@ -140,12 +140,14 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
   <el-button size="medium">Medium</el-button>
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
+  <el-button size="compact">Compact</el-button>
 </el-row>
 <el-row>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
   <el-button size="mini" round>Mini</el-button>
+  <el-button size="compact" round>Compact</el-button>
 </el-row>
 ```
 :::
@@ -153,7 +155,7 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
 ### Atributos
 | Atributo    | Descripción                                   | Tipo    | Valores aceptados                                  | Por defecto |
 | ----------- | --------------------------------------------- | ------- | -------------------------------------------------- | ----------- |
-| size        | tamaño del botón                              | string  | medium / small / mini                              | —           |
+| size        | tamaño del botón                              | string  | medium / small / mini / compact                    | —           |
 | type        | tipo de botón                                 | string  | primary / success / warning / danger / info / text | —           |
 | plain       | determinar si es o no un botón plano          | boolean | —                                                  | false       |
 | round       | determinar si es o no un botón redondo        | boolean | —                                                  | false       |
