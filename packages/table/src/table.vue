@@ -664,6 +664,7 @@
           if (this.$ready) {
             this.$nextTick(() => {
               this.doLayout();
+              this.store.updateAllDisabled();
             });
           }
         }

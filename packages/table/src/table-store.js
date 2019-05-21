@@ -146,12 +146,13 @@ const TableStore = function(table, initialState = {}) {
     treeData: {},
     indent: 16,
     lazy: false,
-    lazyTreeNodeMap: {}
+    lazyTreeNodeMap: {},
+    isAllDisabled: false
   };
 
   this._toggleAllSelection = debounce(10, function(states) {
     const data = states.data || [];
-    if (data.length === 0) return;
+    if (data.length === 0 || states.isAllDisabled) return;
     const selection = this.states.selection;
     // when only some rows are selected (but not all), select or deselect all of them
     // depending on the value of selectOnIndeterminate
@@ -354,6 +355,7 @@ TableStore.prototype.mutations = {
     if (column.type === 'selection') {
       states.selectable = column.selectable;
       states.reserveSelection = column.reserveSelection;
+      this.updateAllDisabled();
     }
 
     if (this.table.$ready) {
@@ -748,6 +750,27 @@ TableStore.prototype.loadData = function(row, treeNode) {
       this.toggleTreeExpansion(parentRowKey);
     });
   }
+};
+
+TableStore.prototype.updateAllDisabled = function() {
+  const states = this.states;
+  const { selectable, data } = states;
+  if (!data || data.length === 0) {
+    states.isAllDisabled = true;
+    return;
+  }
+  if (!selectable) {
+    states.isAllDisabled = false;
+    return;
+  }
+  let selectableCount = 0;
+  data.forEach((item, index) => {
+    const isRowSelectable = selectable.call(null, item, index);
+    if (isRowSelectable) {
+      selectableCount++;
+    }
+  });
+  states.isAllDisabled = selectableCount === 0;
 };
 
 export default TableStore;
