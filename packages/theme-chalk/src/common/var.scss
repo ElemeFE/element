@@ -255,6 +255,7 @@ $--radio-bordered-padding: 12px 20px 0 10px !default;
 $--radio-bordered-medium-padding: 10px 20px 0 10px !default;
 $--radio-bordered-small-padding: 8px 15px 0 10px !default;
 $--radio-bordered-mini-padding: 6px 15px 0 10px !default;
+$--radio-bordered-compact-padding: 5px 15px 0 10px !default;
 $--radio-bordered-medium-input-height: 14px !default;
 $--radio-bordered-medium-input-width: 14px !default;
 $--radio-bordered-medium-height: 36px !default;
@@ -264,6 +265,9 @@ $--radio-bordered-small-height: 32px !default;
 $--radio-bordered-mini-input-height: 12px !default;
 $--radio-bordered-mini-input-width: 12px !default;
 $--radio-bordered-mini-height: 28px !default;
+$--radio-bordered-compact-input-height: 12px !default;
+$--radio-bordered-compact-input-width: 12px !default;
+$--radio-bordered-compact-height: 24px !default;
 
 /// fontSize||Font|1
 $--radio-button-font-size: $--font-size-base !default;
