@@ -87,7 +87,7 @@ export default {
   },
 
   props: {
-    value: [Array, String, Number],
+    value: {},
     options: Array,
     props: Object,
     border: {

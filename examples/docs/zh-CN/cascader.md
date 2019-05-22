@@ -2037,7 +2037,7 @@
 ### Cascader Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | 选中项绑定值 | array / string / number | — | — |
+| value / v-model | 选中项绑定值 | - | — | — |
 | options | 可选项数据源，键名可通过 `Props` 属性配置 | array | — | — |
 | props | 配置选项，具体见下表 | object | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
@@ -2071,7 +2071,7 @@
 ### CascaderPanel Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | 选中项绑定值 | array / string / number | — | — |
+| value / v-model | 选中项绑定值 | - | — | — |
 | options | 可选项数据源，键名可通过 `Props` 属性配置 | array | — | — |
 | props | 配置选项，具体见下表 | object | — | — |
 
@@ -2099,3 +2099,4 @@
 | label    | 指定选项标签为选项对象的某个属性值 | string | — | 'label' |
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | 'children' |
 | disabled | 指定选项的禁用为选项对象的某个属性值 | string | — | 'disabled' |
+| leaf     | 指定选项的叶子节点的标志位为选项对象的某个属性值 | string | — | 'leaf' |

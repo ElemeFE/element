@@ -2036,7 +2036,7 @@ You can customize the content of cascader node.
 ### Cascader Attributes
 | Attribute | Description | Type  | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | array / string / number | — | — |
+| value / v-model | binding value | - | — | — |
 | options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
 | props | configuration options, see the following table. | object | — | — |
 | size | size of input | string | medium / small / mini | — |
@@ -2070,7 +2070,7 @@ You can customize the content of cascader node.
 ### CascaderPanel Attributes
 | Attribute | Description | Type  | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | array / string / number | — | — |
+| value / v-model | binding value | - | — | — |
 | options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
 | props | configuration options, see the following table. | object | — | — |
 
@@ -2098,3 +2098,4 @@ You can customize the content of cascader node.
 | label    | specify which key of node object is used as the node's label | string | — | 'label' |
 | children | specify which key of node object is used as the node's children | string | — | 'children' |
 | disabled | specify which key of node object is used as the node's disabled | string | — | 'disabled' |
+| leaf     | specify which key of node object is used as the node's leaf field | string | — | 'leaf' |
