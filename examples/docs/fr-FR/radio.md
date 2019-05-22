@@ -112,6 +112,14 @@ Des radios affichés comme des boutons standards.
       <el-radio-button label="Chicago"></el-radio-button>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" disabled size="compact">
+      <el-radio-button label="New York"></el-radio-button>
+      <el-radio-button label="Washington"></el-radio-button>
+      <el-radio-button label="Los Angeles"></el-radio-button>
+      <el-radio-button label="Chicago"></el-radio-button>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -121,7 +129,8 @@ Des radios affichés comme des boutons standards.
         radio1: 'New York',
         radio2: 'New York',
         radio3: 'New York',
-        radio4: 'New York'
+        radio4: 'New York',
+        radio5: 'New York'
       };
     }
   }
@@ -154,6 +163,12 @@ Des radios affichés comme des boutons standards.
       <el-radio label="2" border>Option B</el-radio>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" size="compact" disabled>
+      <el-radio label="1" border>Option A</el-radio>
+      <el-radio label="2" border>Option B</el-radio>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -163,7 +178,8 @@ Des radios affichés comme des boutons standards.
         radio1: '1',
         radio2: '1',
         radio3: '1',
-        radio4: '1'
+        radio4: '1',
+        radio5: '1'
       };
     }
   }
@@ -179,7 +195,7 @@ Des radios affichés comme des boutons standards.
 | label | La valeur du radio. | string / number / boolean | — | — |
 | disabled | Si le radio est désactivé. | boolean | — | false |
 | border  | Si une bordure doit être affichée autour du radio. | boolean   | — | false |
-| size  | Taille du radio, ne marche que si `border` est `true`. | string  | medium / small / mini | — |
+| size  | Taille du radio, ne marche que si `border` est `true`. | string  | medium / small / mini / compact | — |
 | name | Attribut 'name' natif. | string | — | — |
 
 ### Évènements de Radio
@@ -193,7 +209,7 @@ Des radios affichés comme des boutons standards.
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut
 | ---- | ---- | ---- | ---- | ---- |
 | value / v-model | La valeur liée. | string / number / boolean | — | — |
-| size | Taille des radios. | string | medium / small / mini | —
+| size | Taille des radios. | string | medium / small / mini / compact | —
 | disabled  | Si les radios sont désactivés. | boolean   | — | false
 | text-color | Couleur du texte quand le bouton est actif. | string | — | #ffffff   |
 | fill  | Bordure et couleur de fond quand le bouton est actif. | string | — | #409EFF |

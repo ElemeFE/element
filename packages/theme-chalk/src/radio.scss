@@ -79,6 +79,20 @@
       }
     }
   }
+  @include m(compact) {
+    &.is-bordered {
+      padding: $--radio-bordered-compact-padding;
+      border-radius: $--button-compact-border-radius;
+      height: $--radio-bordered-compact-height;
+      .el-radio__label {
+        font-size: $--button-compact-font-size;
+      }
+      .el-radio__inner {
+        height: $--radio-bordered-compact-input-height;
+        width: $--radio-bordered-compact-input-width;
+      }
+    }
+  }
 
   &:last-child {
     margin-right: 0;

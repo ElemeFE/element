@@ -110,6 +110,14 @@ Radio con estilo de botón.
       <el-radio-button label="Chicago"></el-radio-button>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" disabled size="compact">
+      <el-radio-button label="New York"></el-radio-button>
+      <el-radio-button label="Washington"></el-radio-button>
+      <el-radio-button label="Los Angeles"></el-radio-button>
+      <el-radio-button label="Chicago"></el-radio-button>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -119,7 +127,8 @@ Radio con estilo de botón.
         radio1: 'New York',
         radio2: 'New York',
         radio3: 'New York',
-        radio4: 'New York'
+        radio4: 'New York',
+        radio5: 'New York'
       };
     }
   }
@@ -152,6 +161,12 @@ Radio con estilo de botón.
       <el-radio label="2" border>Option B</el-radio>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" size="compact" disabled>
+      <el-radio label="1" border>Option A</el-radio>
+      <el-radio label="2" border>Option B</el-radio>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -161,7 +176,8 @@ Radio con estilo de botón.
         radio1: '1',
         radio2: '1',
         radio3: '1',
-        radio4: '1'
+        radio4: '1',
+        radio5: '1'
       };
     }
   }
@@ -177,7 +193,7 @@ Radio con estilo de botón.
 | label    | el valor del Radio                       | string / number / boolean | —                     | —           |
 | disabled | si el Radio está deshabilitado           | boolean                   | —                     | false       |
 | border   | agregar borde alrededor del elemento Radio | boolean                   | —                     | false       |
-| size     | tamaño del elemento Radio, solo funciona si `border` es verdadero | string                    | medium / small / mini | —           |
+| size     | tamaño del elemento Radio, solo funciona si `border` es verdadero | string                    | medium / small / mini / compact | —           |
 | name     | atributo nativo `name`                 | string                    | —                     | —           |
 
 ### Atributos de Radio-button
@@ -193,7 +209,7 @@ Radio con estilo de botón.
 | Atributo   | Descripción                              | Tipo    | Valores Aceptado      | Valores por defecto |
 | ---------- | ---------------------------------------- | ------- | --------------------- | ------------------- |
 | value / v-model | valor enlazado | string / number / boolean | — | — |
-| size       | tamaño de los `radio buttons` o `bordered radios` | string  | medium / small / mini | —                   |
+| size       | tamaño de los `radio buttons` o `bordered radios` | string  | medium / small / mini / compact | —                   |
 | disabled   | si la anidación de radios está deshabilitada | boolean | —                     | false               |
 | text-color | color de las letras cuando el botón está activo | string  | —                     | #ffffff             |
 | fill       | color del borde y fondo cuando el botón está activo | string  | —                     | #409EFF             |

@@ -115,6 +115,14 @@
       <el-radio-button label="深圳"></el-radio-button>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" disabled size="compact">
+      <el-radio-button label="上海"></el-radio-button>
+      <el-radio-button label="北京"></el-radio-button>
+      <el-radio-button label="广州"></el-radio-button>
+      <el-radio-button label="深圳"></el-radio-button>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -124,7 +132,8 @@
         radio1: '上海',
         radio2: '上海',
         radio3: '上海',
-        radio4: '上海'
+        radio4: '上海',
+        radio5: '上海'
       };
     }
   }
@@ -157,6 +166,12 @@
       <el-radio label="2" border>备选项2</el-radio>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" size="compact" disabled>
+      <el-radio label="1" border>备选项1</el-radio>
+      <el-radio label="2" border>备选项2</el-radio>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -166,7 +181,8 @@
         radio1: '1',
         radio2: '1',
         radio3: '1',
-        radio4: '1'
+        radio4: '1',
+        radio5: '1'
       };
     }
   }
@@ -181,7 +197,7 @@
 | label     | Radio 的 value   | string / number / boolean    |       —        |      —   |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | border  | 是否显示边框  | boolean   | — | false   |
-| size  | Radio 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini | — |
+| size  | Radio 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini / compact | — |
 | name | 原生 name 属性 | string    |      —         |     —    |
 
 ### Radio Events
@@ -193,7 +209,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | string / number / boolean | — | — |
-| size     | 单选框组尺寸，仅对按钮形式的 Radio 或带有边框的 Radio 有效   | string  | medium / small / mini |    —     |
+| size     | 单选框组尺寸，仅对按钮形式的 Radio 或带有边框的 Radio 有效   | string  | medium / small / mini / compact |    —     |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | text-color  | 按钮形式的 Radio 激活时的文本颜色    | string   | — | #ffffff   |
 | fill  | 按钮形式的 Radio 激活时的填充色和边框色    | string   | — | #409EFF   |

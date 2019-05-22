@@ -112,6 +112,14 @@ Radio with button styles.
       <el-radio-button label="Chicago"></el-radio-button>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" disabled size="compact">
+      <el-radio-button label="New York"></el-radio-button>
+      <el-radio-button label="Washington"></el-radio-button>
+      <el-radio-button label="Los Angeles"></el-radio-button>
+      <el-radio-button label="Chicago"></el-radio-button>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -121,7 +129,8 @@ Radio with button styles.
         radio1: 'New York',
         radio2: 'New York',
         radio3: 'New York',
-        radio4: 'New York'
+        radio4: 'New York',
+        radio5: 'New York'
       };
     }
   }
@@ -154,6 +163,12 @@ Radio with button styles.
       <el-radio label="2" border>Option B</el-radio>
     </el-radio-group>
   </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio5" size="compact" disabled>
+      <el-radio label="1" border>Option A</el-radio>
+      <el-radio label="2" border>Option B</el-radio>
+    </el-radio-group>
+  </div>
 </template>
 
 <script>
@@ -163,7 +178,8 @@ Radio with button styles.
         radio1: '1',
         radio2: '1',
         radio3: '1',
-        radio4: '1'
+        radio4: '1',
+        radio5: '1'
       };
     }
   }
@@ -179,7 +195,7 @@ value / v-model | binding value | string / number / boolean | — | —
 label | the value of Radio | string / number / boolean | — | —
 disabled | whether Radio is disabled | boolean | — | false
 border  | whether to add a border around Radio  | boolean   | — | false
-size  | size of the Radio, only works when `border` is true  | string  | medium / small / mini | —
+size  | size of the Radio, only works when `border` is true  | string  | medium / small / mini / compact | —
 name | native 'name' attribute | string    |      —         |     —
 
 ### Radio Events
@@ -193,7 +209,7 @@ name | native 'name' attribute | string    |      —         |     —
  Attribute      | Description          | Type      | Accepted Values       | Default
 ---- | ---- | ---- | ---- | ----
 value / v-model | binding value | string / number / boolean | — | —
-size | the size of radio buttons or bordered radios | string | medium / small / mini | —
+size | the size of radio buttons or bordered radios | string | medium / small / mini / compact | —
 disabled  | whether the nesting radios are disabled | boolean   | — | false
 text-color | font color when button is active | string   | — | #ffffff   |
 fill  | border and background color when button is active | string   | — | #409EFF   |
