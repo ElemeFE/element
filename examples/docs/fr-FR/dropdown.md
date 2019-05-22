@@ -222,7 +222,7 @@ Le paramètre de cet évènement peut être assigné à chaque élément de la l
 
 En plus de la taille par défaut, le composant Dropdown propose trois autres tailles différentes.
 
-:::demo Utilisez `size` pour déterminer une autre taille parmi `medium`, `small` ou `mini`.
+:::demo Utilisez `size` pour déterminer une autre taille parmi `medium`, `small`, `mini` ou `compact`.
 
 ```html
 <el-dropdown split-button type="primary">
@@ -264,6 +264,16 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
     <el-dropdown-item>Action 4</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<el-dropdown size="compact" split-button type="primary">
+  Compact
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
 ```
 :::
 
@@ -273,7 +283,7 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | Type du bouton, se référer au composant `Button`. Ne marche que si `split-button` est `true`.  | string  |  —   |    —     |
-| size          | Taille du menu, marche aussi avec `split button`.  | string  | medium / small / mini  |    —     |
+| size          | Taille du menu, marche aussi avec `split button`.  | string  | medium / small / mini / compact  |    —     |
 | split-button | Si le bouton est séparé en deux. | boolean         |     —       | false   |
 | placement    | Emplacement du menu déroulant | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | Comment déclencher l'ouverture du menu.     | string  |    hover/click  |  hover |

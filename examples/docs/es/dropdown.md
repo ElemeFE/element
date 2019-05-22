@@ -223,7 +223,7 @@ Al hacer clic en cada elemento desplegable se detona un evento cuyo parámetro e
 
 Además del tamaño predeterminado, el componente Dropdown proporciona tres tamaños adicionales para que pueda elegir entre diferentes escenarios
 
-:::demo Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
+:::demo Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small`, `mini` o `compact`.
 
 ```html
 <el-dropdown split-button type="primary">
@@ -265,6 +265,16 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
     <el-dropdown-item>Action 4</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<el-dropdown size="compact" split-button type="primary">
+  Compact
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
 ```
 :::
 
@@ -273,7 +283,7 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | Atributo      | Descripción                              | Tipo    | Valores aceptados                        | Por defecto |
 | ------------- | ---------------------------------------- | ------- | ---------------------------------------- | ----------- |
 | type          | tipo de botón de menú, consulte Componente`Button`, sólo funciona cuando `split-button` es true. | string  | —                                        | —           |
-| size          | tamaño del menú, también funciona en `split-button` | string  | medium / small / mini                    | —           |
+| size          | tamaño del menú, también funciona en `split-button` | string  | medium / small / mini / compact                   | —           |
 | split-button  | si se visualiza un grupo de botones      | boolean | —                                        | false       |
 | placement     | colocación del menú                      | string  | top/top-start/top-end/bottom/bottom-start/bottom-end | bottom-end  |
 | trigger       | cómo detonar                             | string  | hover/click                              | hover       |

@@ -222,7 +222,7 @@
 
 Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。
 
-:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+:::demo 额外的尺寸：`medium`、`small`、`mini`、`compact`，通过设置`size`属性来配置它们。
 
 ```html
 <el-dropdown split-button type="primary">
@@ -268,6 +268,17 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
     <el-dropdown-item>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<el-dropdown size="compact" split-button type="primary">
+  極小尺寸
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
 ```
 :::
 
@@ -275,7 +286,7 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | 菜单按钮类型，同 Button 组件(只在`split-button`为 true 的情况下有效)   | string  |          —             |    —     |
-| size          | 菜单尺寸，在`split-button`为 true 的情况下也对触发按钮生效  | string | medium / small / mini | — |
+| size          | 菜单尺寸，在`split-button`为 true 的情况下也对触发按钮生效  | string | medium / small / mini / compact | — |
 | split-button  | 下拉触发元素呈现为按钮组    | boolean  |    —  |  false |
 | placement    | 菜单弹出位置     | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
