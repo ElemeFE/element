@@ -437,7 +437,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | value / v-model | La valeur liée. | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly | Si le DatePicker est en lecture seule. | boolean | — | false |
 | disabled | Si le DatePicker est désactivé. | boolean | — | false |
-| size | Taille du champs. | string | large/small/mini | — |
+| size | Taille du champs. | string | large/small/mini/compact | — |
 | editable | Si le champ est éditable. | boolean | — | true |
 | clearable | Si la croix de reset doit apparaître. | boolean | — | true |
 | placeholder | Le placeholder en mode normal. | string | — | — |

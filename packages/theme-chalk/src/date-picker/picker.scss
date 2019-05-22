@@ -171,6 +171,26 @@
     }
   }
 
+  @include m(compact) {
+    &.el-input__inner {
+      height: $--input-compact-height;
+    }
+
+    .el-range-separator {
+      line-height: 16px;
+      font-size: $--input-compact-font-size;
+    }
+
+    .el-range-input {
+      font-size: $--input-compact-font-size;
+    }
+
+    .el-range__icon,
+    .el-range__close-icon {
+      line-height: 16px;
+    }
+  }
+
   @include when(disabled) {
     background-color: $--input-disabled-fill;
     border-color: $--input-disabled-border;
