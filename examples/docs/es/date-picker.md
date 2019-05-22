@@ -437,7 +437,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | value / v-model    | valor enlazado | date(DatePicker) / array(DateRangePicker) | — | — |
 | readonly          | si DatePicker es solo de lectura         | boolean           | —                                        | false                |
 | disabled          | si DatePicker esta deshabilitado         | boolean           | —                                        | false                |
-| size              | tamaño del input                         | string            | large/small/mini                         | —                    |
+| size              | tamaño del input                         | string            | large/small/mini/compact                 | —                    |
 | editable          | si el input es editable                  | boolean           | —                                        | true                 |
 | clearable         | si se muestra el botón de borrado   | boolean           | —                                        | true                 |
 | placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —                    |

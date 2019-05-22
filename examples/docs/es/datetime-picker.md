@@ -196,7 +196,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | disabled           | si DatePicker esta deshabilitada         | boolean           | —                                        | false                |
 | editable           | Si la entrada es editable                | boolean           | —                                        | true                 |
 | clearable          | Si mostrar el botón de `clear`           | boolean           | —                                        | true                 |
-| size               | tamaño del input                         | string            | large/small/mini                         | —                    |
+| size               | tamaño del input                         | string            | large/small/mini/compact                 | —                    |
 | placeholder        | placeholder cuando el modo NO es Range   | string            | —                                        | —                    |
 | start-placeholder  | placeholder para el inicio de fecha en el modo Range | string            | —                                        | —                    |
 | end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —                    |

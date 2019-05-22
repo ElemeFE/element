@@ -195,7 +195,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 | disabled | Si le DatePicker est désactivé. | boolean | — | false |
 | editable | Si le champ est éditable. | boolean | — | true |
 | clearable | Si la croix de reset doit apparaître. | boolean | — | true |
-|size | Taille du champ. | string | large/small/mini | — |
+|size | Taille du champ. | string | large/small/mini/compact | — |
 | placeholder | Le placeholder en mode normal. | string | — | — |
 | start-placeholder | Le placeholder de la date de début en mode plage de dates. | string | — | — |
 | end-placeholder | Le placeholder de la date de fin en mode plage de dates. | string | — | — |
