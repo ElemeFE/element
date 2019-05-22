@@ -116,7 +116,7 @@ La valeur de `precision` doit être un integer non-négatif et ne doit pas être
 
 ### Taille
 
-Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `mini`.
+Utilisez l'attribut `size` pour régler la taille avec `medium`, `small`, `mini` ou `compact`.
 
 :::demo
 
@@ -126,6 +126,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
     <el-input-number size="medium" v-model="num2"></el-input-number>
     <el-input-number size="small" v-model="num3"></el-input-number>
     <el-input-number size="mini" v-model="num4"></el-input-number>
+    <el-input-number size="compact" v-model="num5"></el-input-number>
 </template>
 <script>
   export default {
@@ -134,7 +135,8 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
         num1: 1,
         num2: 1,
         num3: 1,
-        num4: 1
+        num4: 1,
+        num5: 1
       }
     }
   };

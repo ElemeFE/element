@@ -116,7 +116,7 @@ The value of `precision` must be a non negative integer and should not be less t
 
 ### Size
 
-Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+Use attribute `size` to set additional sizes with `medium`, `small`, `mini` or `compact`.
 
 :::demo
 
@@ -126,6 +126,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
     <el-input-number size="medium" v-model="num2"></el-input-number>
     <el-input-number size="small" v-model="num3"></el-input-number>
     <el-input-number size="mini" v-model="num4"></el-input-number>
+    <el-input-number size="compact" v-model="num5"></el-input-number>
 </template>
 <script>
   export default {
@@ -134,7 +135,8 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
         num1: 1,
         num2: 1,
         num3: 1,
-        num4: 1
+        num4: 1,
+        num5: 1
       }
     }
   };
