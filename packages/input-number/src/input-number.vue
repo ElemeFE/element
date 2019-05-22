@@ -34,6 +34,7 @@
       :size="inputNumberSize"
       :max="max"
       :min="min"
+      :type="type"
       :name="name"
       :label="label"
       @keydown.up.native.prevent="increase"
@@ -94,6 +95,10 @@
       controlsPosition: {
         type: String,
         default: ''
+      },
+      type: {
+        type: String,
+        default: 'text'
       },
       name: String,
       label: String,
