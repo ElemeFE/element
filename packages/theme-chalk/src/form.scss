@@ -83,6 +83,20 @@
       padding-top: 1px;
     }
   }
+  @include m(compact) {
+    .el-form-item__label {
+      line-height: 24px;
+    }
+    .el-form-item__content {
+      line-height: 24px;
+    }
+    &.el-form-item {
+      margin-bottom: 18px;
+    }
+    .el-form-item__error {
+      padding-top: 1px;
+    }
+  }
 
   @include e(label-wrap) {
     float: left;

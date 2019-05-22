@@ -599,7 +599,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | inline-message  | Si le message d'erreur doit apparaître en ligne avec son champ. | boolean | — | false |
 | status-icon  | Si une icône indiquant le résultat de validation doit apparaître. | boolean | — | false |
 | validate-on-rule-change  | Si la validation doit se déclencher lorsque `rules` est modifié. | boolean | — | true |
-| size  | Contrôle la taille des champs du formulaire. | string | medium / small / mini | — |
+| size  | Contrôle la taille des champs du formulaire. | string | medium / small / mini / compact | — |
 | disabled | Si tout les champs du formulaire doivent être désactivés. Si `true`, il ne peut pas être modifié par l'attribut `disabled` des enfants. | boolean | — | false |
 
 ### Méthodes de Form
@@ -629,7 +629,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | error | Message d'erreur du champ. Si il est modifié, le champ l'affichera immédiatement. | string | — | — |
 | show-message  | Si le message d'erreur doit apparaître. | boolean | — | true |
 | inline-message  | Si le message d'erreur doit être en ligne avec le champ. | boolean | — | false |
-| size  | Contrôle la taille du FormItem. | string | medium / small / mini | - |
+| size  | Contrôle la taille du FormItem. | string | medium / small / mini / compact | - |
 
 ### Slot de Form-Item
 | Nom | Description |

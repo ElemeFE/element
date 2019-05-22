@@ -600,7 +600,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | inline-message  | whether to display the error message inline with the form item | boolean | — | false |
 | status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
 | validate-on-rule-change  | whether to trigger validation when the `rules` prop is changed | boolean | — | true |
-| size  | control the size of components in this form | string | medium / small / mini | — |
+| size  | control the size of components in this form | string | medium / small / mini / compact | — |
 | disabled | whether to disabled all components in this form. If set to true, it cannot be overridden by its inner components' `disabled` prop | boolean | — | false |
 
 ### Form Methods
@@ -629,7 +629,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | inline style validate message | boolean | — | false |
-| size  | control the size of components in this form-item | string | medium / small / mini | - |
+| size  | control the size of components in this form-item | string | medium / small / mini / compact | - |
 
 ### Form-Item Slot
 | Name | Description |
