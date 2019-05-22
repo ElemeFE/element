@@ -20,6 +20,10 @@ MenuItem.prototype.addListeners = function() {
   const keys = Utils.keys;
   this.domNode.addEventListener('keydown', event => {
     let prevDef = false;
+
+    // fix issue https://github.com/ElemeFE/element/issues/13106
+    if (event.target.tagName === 'INPUT') return;
+
     switch (event.keyCode) {
       case keys.down:
         Utils.triggerEvent(event.currentTarget, 'mouseenter');
