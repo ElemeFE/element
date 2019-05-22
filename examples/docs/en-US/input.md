@@ -263,7 +263,7 @@ export default {
 
 ### Sizes
 
-:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
+:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small`, `mini` and `compact`.
 ```html
 <div class="demo-input-size">
   <el-input
@@ -285,6 +285,11 @@ export default {
     placeholder="Please Input"
     v-model="input4">
   </el-input>
+    <el-input
+    size="compact"
+    placeholder="Please Input"
+    v-model="input5">
+  </el-input>
 </div>
 
 <script>
@@ -294,7 +299,8 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      input4: ''
+      input4: '',
+      input5: ''
     }
   }
 }
@@ -570,7 +576,7 @@ export default {
 | clearable | whether to show clear button | boolean | — | false |
 | show-password | whether to show toggleable password input| boolean         | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
-|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
+|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini / compact | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
 | suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |

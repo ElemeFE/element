@@ -269,7 +269,7 @@ export default {
 
 ### Tamaño
 
-:::demo Añada el atributo `size` para cambiar el tamaño del Input. Además del tamaño predeterminado, hay otras tres opciones: `large`, `small` y `mini`.
+:::demo Añada el atributo `size` para cambiar el tamaño del Input. Además del tamaño predeterminado, hay otras tres opciones: `large`, `small`, `mini` y `compact`.
 
 ```html
 <div class="demo-input-size">
@@ -292,6 +292,11 @@ export default {
     placeholder="Please Input"
     v-model="input4">
   </el-input>
+  <el-input
+    size="compact"
+    placeholder="Please Input"
+    v-model="input5">
+  </el-input>
 </div>
 
 <script>
@@ -301,7 +306,8 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      input4: ''
+      input4: '',
+      input5: ''
     }
   }
 }
@@ -584,7 +590,7 @@ export default {
 | clearable | si debe mostrar el botón de limpieza | boolean | — | false |
 | show-password | si debe mostrar la posibilidad de conmutación de password input | boolean         | — | false |
 | disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
-| size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
+| size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini / compact                                                                                                        | —           |
 | prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |
 | suffix-icon   | clase del icono de sufijo                                                                                                                        | string           | —                                                                                                                                       | —           |
 | rows          | número de filas, sólo funciona cuando `type` es `textarea`.                                                                                    | number           | —                                                                                                                                       | 2           |
