@@ -1,4 +1,5 @@
 import LayoutObserver from './layout-observer';
+import { mapStates } from './store/helper';
 
 export default {
   name: 'ElTableFooter',
@@ -104,37 +105,19 @@ export default {
       return this.$parent;
     },
 
-    isAllSelected() {
-      return this.store.states.isAllSelected;
-    },
-
-    columnsCount() {
-      return this.store.states.columns.length;
-    },
-
-    leftFixedCount() {
-      return this.store.states.fixedColumns.length;
-    },
-
-    leftFixedLeafCount() {
-      return this.store.states.fixedLeafColumnsLength;
-    },
-
-    rightFixedLeafCount() {
-      return this.store.states.rightFixedLeafColumnsLength;
-    },
-
-    rightFixedCount() {
-      return this.store.states.rightFixedColumns.length;
-    },
-
-    columns() {
-      return this.store.states.columns;
-    },
-
     hasGutter() {
       return !this.fixed && this.tableLayout.gutterWidth;
-    }
+    },
+
+    ...mapStates({
+      columns: 'columns',
+      isAllSelected: 'isAllSelected',
+      leftFixedLeafCount: 'fixedLeafColumnsLength',
+      rightFixedLeafCount: 'rightFixedLeafColumnsLength',
+      columnsCount: states => states.columns.length,
+      leftFixedCount: states => states.fixedColumns.length,
+      rightFixedCount: states => states.rightFixedColumns.length
+    })
   },
 
   methods: {

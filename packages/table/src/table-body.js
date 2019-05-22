@@ -4,6 +4,7 @@ import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
+import { mapStates } from './store/helper';
 
 export default {
   name: 'ElTableBody',
@@ -92,41 +93,16 @@ export default {
       return this.$parent;
     },
 
-    data() {
-      return this.store.states.data;
-    },
-
-    // treeData() {
-    //   return this.store.states.treeData;
-    // },
-
-    columnsCount() {
-      return this.store.states.columns.length;
-    },
-
-    leftFixedLeafCount() {
-      return this.store.states.fixedLeafColumnsLength;
-    },
-
-    rightFixedLeafCount() {
-      return this.store.states.rightFixedLeafColumnsLength;
-    },
-
-    leftFixedCount() {
-      return this.store.states.fixedColumns.length;
-    },
-
-    rightFixedCount() {
-      return this.store.states.rightFixedColumns.length;
-    },
-
-    columns() {
-      return this.store.states.columns;
-    },
-
-    hasExpandColumn() {
-      return this.columns.some(({ type }) => type === 'expand');
-    }
+    ...mapStates({
+      data: 'data',
+      columns: 'columns',
+      leftFixedLeafCount: 'fixedLeafColumnsLength',
+      rightFixedLeafCount: 'rightFixedLeafColumnsLength',
+      columnsCount: states => states.columns.length,
+      leftFixedCount: states => states.fixedColumns.length,
+      rightFixedCount: states => states.rightFixedColumns.length,
+      hasExpandColumn: states => states.columns.some(({ type }) => type === 'expand')
+    })
 
     // firstDefaultColumnIndex() {
     //   for (let index = 0; index < this.columns.length; index++) {

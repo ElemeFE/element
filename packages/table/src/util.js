@@ -211,27 +211,6 @@ export function toggleRowStatus(statusArr, row, newVal) {
   return changed;
 }
 
-export function traverse(root, cb, childrenKey = 'children') {
-  const isNil = (array) => !(Array.isArray(array) && array.length);
-  if (isNil(root)) return;
-
-  function _walker(parent, level) {
-    parent.forEach(node => {
-      cb(node, parent, level);
-      if (!isNil(node[childrenKey])) {
-        _walker(node[childrenKey], level + 1);
-      }
-    });
-  }
-
-  root.forEach(item => {
-    const parent = item[childrenKey];
-    if (!isNil(parent)) {
-      _walker(parent, 1);
-    }
-  });
-}
-
 export function walkTreeNode(root, cb, childrenKey = 'children') {
   const isNil = (array) => !(Array.isArray(array) && array.length);
 

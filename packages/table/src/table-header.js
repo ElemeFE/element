@@ -1,9 +1,9 @@
+import Vue from 'vue';
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTag from 'element-ui/packages/tag';
-import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
+import { mapStates } from './store/helper';
 
 const getAllColumns = (columns) => {
   const result = [];
@@ -160,8 +160,7 @@ export default {
   },
 
   components: {
-    ElCheckbox,
-    ElTag
+    ElCheckbox
   },
 
   computed: {
@@ -169,37 +168,19 @@ export default {
       return this.$parent;
     },
 
-    isAllSelected() {
-      return this.store.states.isAllSelected;
-    },
-
-    columnsCount() {
-      return this.store.states.columns.length;
-    },
-
-    leftFixedCount() {
-      return this.store.states.fixedColumns.length;
-    },
-
-    rightFixedCount() {
-      return this.store.states.rightFixedColumns.length;
-    },
-
-    leftFixedLeafCount() {
-      return this.store.states.fixedLeafColumnsLength;
-    },
-
-    rightFixedLeafCount() {
-      return this.store.states.rightFixedLeafColumnsLength;
-    },
-
-    columns() {
-      return this.store.states.columns;
-    },
-
     hasGutter() {
       return !this.fixed && this.tableLayout.gutterWidth;
-    }
+    },
+
+    ...mapStates({
+      columns: 'columns',
+      isAllSelected: 'isAllSelected',
+      leftFixedLeafCount: 'fixedLeafColumnsLength',
+      rightFixedLeafCount: 'rightFixedLeafColumnsLength',
+      columnsCount: states => states.columns.length,
+      leftFixedCount: states => states.fixedColumns.length,
+      rightFixedCount: states => states.rightFixedColumns.length
+    })
   },
 
   created() {

@@ -219,7 +219,7 @@
   import Mousewheel from 'element-ui/src/directives/mousewheel';
   import Locale from 'element-ui/src/mixins/locale';
   import Migrating from 'element-ui/src/mixins/migrating';
-  import { createStore } from './store/index';
+  import { createStore, mapStates } from './store/helper';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
   import TableHeader from './table-header';
@@ -480,26 +480,6 @@
           this.rightFixedColumns.length > 0;
       },
 
-      selection() {
-        return this.store.states.selection;
-      },
-
-      columns() {
-        return this.store.states.columns;
-      },
-
-      tableData() {
-        return this.store.states.data;
-      },
-
-      fixedColumns() {
-        return this.store.states.fixedColumns;
-      },
-
-      rightFixedColumns() {
-        return this.store.states.rightFixedColumns;
-      },
-
       bodyWidth() {
         const { bodyWidth, scrollY, gutterWidth } = this.layout;
         return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : '';
@@ -560,7 +540,15 @@
             height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
           };
         }
-      }
+      },
+
+      ...mapStates({
+        selection: 'selection',
+        columns: 'columns',
+        tableData: 'data',
+        fixedColumns: 'fixedColumns',
+        rightFixedColumns: 'rightFixedColumns'
+      })
     },
 
     watch: {

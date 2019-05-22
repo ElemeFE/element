@@ -8,11 +8,10 @@ Wachter.prototype.mutations = {
     states._data = data;
 
     this.execQuery();
-    // currentRow 更新
+    // 数据变化，更新部分数据。
+    // 没有使用 computed，而是手动更新部分数据 https://github.com/vuejs/vue/issues/6660#issuecomment-331417140
     this.updateCurrentRow();
-    // expandRows 更新
     this.updateExpandRows();
-    // 选择
     if (!states.reserveSelection) {
       if (dataInstanceChanged) {
         this.clearSelection();
@@ -145,7 +144,7 @@ Wachter.prototype.commit = function(name, ...args) {
   }
 };
 
-// 这样做是否
+// 额外的 DOM 操作都放在 modifiers 中
 Wachter.prototype.modifiers = {
   updateScrollY() {
     Vue.nextTick(() => {
@@ -158,23 +157,4 @@ Wachter.prototype.modifiers = {
   }
 };
 
-export function createStore(table, initialState = {}) {
-  if (!table) {
-    throw new Error('Table is required.');
-  }
-
-  const store = new Wachter();
-
-  store.table = table;
-  Object.keys(initialState).forEach(key => {
-    store.states[key] = initialState[key];
-  });
-
-  // 绑定一下 this
-  Object.keys(store.modifiers).forEach(key => {
-    store.modifiers[key] = store.modifiers[key].bind(store);
-  });
-
-  return store;
-}
-
+export default Wachter;
