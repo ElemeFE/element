@@ -35,6 +35,7 @@
       :max="max"
       :min="min"
       :type="type"
+      :readonly="readonly"
       :name="name"
       :label="label"
       @keydown.up.native.prevent="increase"
@@ -87,6 +88,7 @@
       },
       value: {},
       disabled: Boolean,
+      readonly: Boolean,
       size: String,
       controls: {
         type: Boolean,
