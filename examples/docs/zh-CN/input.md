@@ -250,7 +250,7 @@ export default {
 
 ### 尺寸
 
-:::demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
+:::demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small、mini 和 compact 三种尺寸。
 ```html
 <div class="demo-input-size">
   <el-input
@@ -276,6 +276,12 @@ export default {
     suffix-icon="el-icon-date"
     v-model="input4">
   </el-input>
+  <el-input
+    size="compact"
+    placeholder="请输入内容"
+    suffix-icon="el-icon-date"
+    v-model="input5">
+  </el-input>
 </div>
 
 <script>
@@ -285,7 +291,8 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      input4: ''
+      input4: '',
+      input5: ''
     }
   }
 }
@@ -687,7 +694,7 @@ export default {
 | clearable     | 是否可清空        | boolean         | — | false |
 | show-password | 是否显示切换密码图标| boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
-| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
+| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini / compact | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
 | suffix-icon   | 输入框尾部图标    | string          | — | — |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |

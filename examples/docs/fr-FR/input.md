@@ -262,7 +262,7 @@ export default {
 
 ### Tailles
 
-:::demo Ajoutez l'attribut `size` pour changer la taille de l'input. En plus de la taille par défaut, il y a trois autres options: `large`, `small` et `mini`.
+:::demo Ajoutez l'attribut `size` pour changer la taille de l'input. En plus de la taille par défaut, il y a trois autres options: `large`, `small`, `mini` et `compact`.
 ```html
 <div class="demo-input-size">
   <el-input
@@ -284,6 +284,11 @@ export default {
     placeholder="Entrez quelque chose"
     v-model="input4">
   </el-input>
+  <el-input
+    size="compact"
+    placeholder="Entrez quelque chose"
+    v-model="input5">
+  </el-input>
 </div>
 
 <script>
@@ -293,7 +298,8 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      input4: ''
+      input4: '',
+      input5: ''
     }
   }
 }
@@ -569,7 +575,7 @@ export default {
 | clearable | Si le bouton de reset apparaît. | boolean | — | false |
 | show-password | Si le champ doit un champ de mot de passe avec bouton de visualisation. | boolean         | — | false |
 | disabled | Si le champ est désactivé. | boolean | — | false |
-| size | Taille du champ, marche quand `type` n'est pas 'textarea'. | string | medium / small / mini | — |
+| size | Taille du champ, marche quand `type` n'est pas 'textarea'. | string | medium / small / mini / compact | — |
 | prefix-icon   | Classe de l'icône de préfixe.  | string          | — | — |
 | suffix-icon   | Classe de l'iĉone de suffixe.  | string          | — | — |
 | rows | Nombre de ligne pour une zone de texte, ne marche que si `type` est 'textarea'. | number | — | 2 |

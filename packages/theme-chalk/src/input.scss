@@ -263,6 +263,18 @@
       line-height: $--input-mini-height;
     }
   }
+  @include m(compact) {
+    font-size: $--input-compact-font-size;
+
+    @include e(inner) {
+      height: $--input-compact-height;
+      line-height: $--input-compact-height;
+    }
+
+    .el-input__icon {
+      line-height: $--input-compact-height;
+    }
+  }
 }
 
 @include b(input-group) {
