@@ -97,3 +97,22 @@ export function defaultRenderCell(h, { row, column, $index }) {
   }
   return value;
 }
+
+export function treeCellPrefix(h, { row, treeNode, store }) {
+  if (!treeNode) return null;
+  const ele = [];
+  const callback = function(e) {
+    e.stopPropagation();
+    store.toggleTreeExpansion(row);
+  };
+  ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
+  if (treeNode.hasChildren) {
+    ele.push(<div class={ ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
+      on-click={callback}>
+      <i class='el-icon el-icon-arrow-right'></i>
+    </div>);
+  } else {
+    ele.push(<span class="el-table__placeholder"></span>);
+  }
+  return ele;
+}

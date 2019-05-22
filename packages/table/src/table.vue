@@ -318,6 +318,16 @@
         default: 16
       },
 
+      treeProps: {
+        type: Object,
+        default() {
+          return {
+            hasChildren: 'hasChildren',
+            children: 'children'
+          };
+        }
+      },
+
       lazy: Boolean,
 
       load: Function

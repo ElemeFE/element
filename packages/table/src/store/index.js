@@ -19,7 +19,7 @@ Wachter.prototype.mutations = {
         this.cleanSelection();
       }
     } else {
-      this.assertRowkey();
+      this.assertRowKey();
       this.updateSelectionByRowKey();
     }
     this.updateAllSelected();

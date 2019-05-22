@@ -360,7 +360,7 @@ export default {
         on-click={ ($event) => this.handleClick($event, row) }
         on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
         on-mouseenter={ _ => this.handleMouseEnter($index) }
-        on-mouseleave={ _ => this.handleMouseLeave() }
+        on-mouseleave={ this.handleMouseLeave }
         class={ [this.getRowClass(row, $index)] }>
         {
           this.columns.map((column, cellIndex) => {

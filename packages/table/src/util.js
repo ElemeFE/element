@@ -227,7 +227,7 @@ export function walkTreeNode(root, cb, childrenKey = 'children') {
   root.forEach(item => {
     const children = item[childrenKey];
     if (!isNil(children)) {
-      _walker(item, children, 1);
+      _walker(item, children, 0);
     }
   });
 }

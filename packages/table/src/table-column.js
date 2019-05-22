@@ -1,4 +1,4 @@
-import { cellStarts, cellForced, defaultRenderCell } from './config';
+import { cellStarts, cellForced, defaultRenderCell, treeCellPrefix } from './config';
 import { mergeOptions, parseWidth, parseMinWidth, compose } from './util';
 import ElCheckbox from 'element-ui/packages/checkbox';
 
@@ -177,6 +177,7 @@ export default {
           } else {
             children = originRenderCell(h, data);
           }
+          const prefix = treeCellPrefix(h, data);
           const props = {
             class: 'cell',
             style: {}
@@ -186,7 +187,7 @@ export default {
             props.style = {width: (data.column.realWidth || data.column.width) - 1 + 'px'};
           }
           return (<div { ...props }>
-            { this.renderTreeCell(data) }
+            { prefix }
             { children }
           </div>);
         };
@@ -237,32 +238,6 @@ export default {
           this.owner.store.scheduleLayout(updateColumns);
         });
       });
-    },
-
-    // TODO: 移除这里的实现
-    renderTreeCell(data) {
-      if (!data.treeNode) return null;
-      console.warn('tree 的相关逻辑要调整');
-      const ele = [];
-      ele.push(<span class="el-table__indent" style={{'padding-left': data.treeNode.indent + 'px'}}></span>);
-      if (data.treeNode.hasChildren) {
-        ele.push(<div class={ ['el-table__expand-icon', data.treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
-          on-click={this.handleTreeExpandIconClick.bind(this, data)}>
-          <i class='el-icon el-icon-arrow-right'></i>
-        </div>);
-      } else {
-        ele.push(<span class="el-table__placeholder"></span>);
-      }
-      return ele;
-    },
-
-    handleTreeExpandIconClick(data, e) {
-      e.stopPropagation();
-      if (data.store.states.lazy && !data.treeNode.loaded) {
-        data.store.loadData(data.row, data.treeNode);
-      } else {
-        data.store.toggleTreeExpansion(data.treeNode.rowKey);
-      }
     }
   },
 

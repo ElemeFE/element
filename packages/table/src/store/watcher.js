@@ -4,6 +4,7 @@ import merge from 'element-ui/src/utils/merge';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
 import current from './current';
+import tree from './tree';
 
 // import
 const sortData = (data, states) => {
@@ -74,7 +75,7 @@ export default Vue.extend({
     };
   },
 
-  mixins: [expand, current],
+  mixins: [expand, current, tree],
 
   methods: {
     // 检查 rowKey 是否存在
