@@ -50,7 +50,7 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this.columns.map(column => <col name={ column.id } key={column.id} />)
           }
           {
             this.hasGutter ? <col name="gutter" /> : ''
@@ -59,18 +59,17 @@ export default {
         <tbody class={ [{ 'has-gutter': this.hasGutter }] }>
           <tr>
             {
-              this._l(this.columns, (column, cellIndex) =>
-                <td
-                  colspan={ column.colSpan }
-                  rowspan={ column.rowSpan }
-                  class={ this.getRowClasses(column, cellIndex) }>
-                  <div class={ ['cell', column.labelClassName] }>
-                    {
-                      sums[cellIndex]
-                    }
-                  </div>
-                </td>
-              )
+              this.columns.map((column, cellIndex) => <td
+                key={cellIndex}
+                colspan={ column.colSpan }
+                rowspan={ column.rowSpan }
+                class={ this.getRowClasses(column, cellIndex) }>
+                <div class={ ['cell', column.labelClassName] }>
+                  {
+                    sums[cellIndex]
+                  }
+                </div>
+              </td>)
             }
             {
               this.hasGutter ? <th class="gutter"></th> : ''

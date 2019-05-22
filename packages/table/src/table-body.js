@@ -61,7 +61,7 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this.columns.map(column => <col name={ column.id } key={column.id} />)
           }
         </colgroup>
         <tbody>

@@ -34,7 +34,7 @@ export default {
     toggleRowExpansion(row, expanded) {
       const changed = toggleRowStatus(this.states.expandRows, row, expanded);
       if (changed) {
-        this.table.$emit('expand-change', row, this.states.expandRows);
+        this.table.$emit('expand-change', row, this.states.expandRows.slice());
         this.scheduleLayout();
       }
     },
