@@ -170,4 +170,24 @@
       }
     }
   }
+
+  @include m(compact) {
+    padding: 3px 0;
+
+    @include e(item) {
+      line-height: 22px;
+      padding: 0 10px;
+      font-size: 12px;
+
+      &.el-dropdown-menu__item--divided {
+        $divided-offset: 2px;
+        margin-top: $divided-offset;
+
+        &:before {
+          height: $divided-offset;
+          margin: 0 -10px;
+        }
+      }
+    }
+  }
 }

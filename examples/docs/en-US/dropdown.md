@@ -221,7 +221,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 
 Besides default size, Dropdown component provides three additional sizes for you to choose among different scenarios.
 
-:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+:::demo Use attribute `size` to set additional sizes with `medium`, `small`, `mini` or `compact`.
 
 ```html
 <el-dropdown split-button type="primary">
@@ -263,6 +263,16 @@ Besides default size, Dropdown component provides three additional sizes for you
     <el-dropdown-item>Action 4</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<el-dropdown size="compact" split-button type="primary">
+  Compact
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
 ```
 :::
 
@@ -271,7 +281,7 @@ Besides default size, Dropdown component provides three additional sizes for you
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |  —   |    —     |
-| size          | menu size, also works on the split button  | string  | medium / small / mini  |    —     |
+| size          | menu size, also works on the split button  | string  | medium / small / mini / compact  |    —     |
 | split-button | whether a button group is displayed | boolean         |     —       | false   |
 | placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
