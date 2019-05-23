@@ -534,7 +534,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | multiple | Si la sélection multiple est activée. | boolean | — | false |
 | disabled | Si le sélecteur est désactivé. | boolean | — | false |
 | value-key | Identifiant unique pour la valeur, requis quand la valeur est un objet. | string | — | value |
-| size | Taille de l'Input. | string | large/small/mini | — |
+| size | Taille de l'Input. | string | large/small/mini/compact | — |
 | clearable | Si la sélection est effaçable. | boolean | — | false |
 | collapse-tags | Si les tags peuvent être réduits, dans le cas d'une sélection multiple. | boolean | — | false |
 | multiple-limit | Nombre maximum d'options multiples sélectionnable. Pas de limites quand est à 0. | number | — | 0 |
