@@ -47,16 +47,19 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
+    <span
+      class="el-cascader__label"
+      :class="{'is-before-ellipsis': beforeEllipsis}"
+      v-show="inputValue === '' && !isOnComposition"
+    >
       <template v-if="showAllLevels">
+        <i v-if="beforeEllipsis && currentLabels.length" class="before-ellipsis">...</i>
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1" :key="index"> {{ separator }} </span>
+          <span v-if="index < currentLabels.length - 1" :key="index">{{ separator }}</span>
         </template>
       </template>
-      <template v-else>
-        {{ currentLabels[currentLabels.length - 1] }}
-      </template>
+      <template v-else>{{ currentLabels[currentLabels.length - 1] }}</template>
     </span>
   </span>
 </template>
@@ -159,13 +162,17 @@ export default {
       type: Boolean,
       default: true
     },
+    beforeEllipsis: {
+      type: Boolean,
+      default: false
+    },
     debounce: {
       type: Number,
       default: 300
     },
     beforeFilter: {
       type: Function,
-      default: () => (() => {})
+      default: () => (() => { })
     },
     hoverThreshold: {
       type: Number,
@@ -177,7 +184,7 @@ export default {
     return {
       currentValue: this.value || [],
       menu: null,
-      debouncedInputChange() {},
+      debouncedInputChange() { },
       menuVisible: false,
       inputHover: false,
       inputValue: '',
@@ -371,7 +378,7 @@ export default {
       const h = this._c;
       return label.split(keyword)
         .map((node, index) => index === 0 ? node : [
-          h('span', { class: { 'el-cascader-menu__item__keyword': true }}, [this._v(keyword)]),
+          h('span', { class: { 'el-cascader-menu__item__keyword': true } }, [this._v(keyword)]),
           node
         ]);
     },

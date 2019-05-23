@@ -1,7 +1,7 @@
-@import "mixins/mixins";
-@import "common/var";
-@import "./input.scss";
-@import "./popper";
+@import 'mixins/mixins';
+@import 'common/var';
+@import './input.scss';
+@import './popper';
 
 @include b(cascader) {
   display: inline-block;
@@ -23,7 +23,7 @@
   }
 
   .el-icon-arrow-down {
-    transition: transform .3s;
+    transition: transform 0.3s;
     font-size: 14px;
 
     @include when(reverse) {
@@ -37,6 +37,27 @@
 
     &:hover {
       color: $--color-text-secondary;
+    }
+  }
+
+  .el-cascader__label.is-before-ellipsis {
+    text-overflow: initial;
+    left: auto;
+    right: 30px;
+    width: calc(100% - 40px);
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0;
+    & > span {
+      padding: 0 5px;
+    }
+    & > .before-ellipsis {
+      position: absolute;
+      background: #fff;
+      left: 0;
+      top: 1px;
+      width: 18px;
+      height: calc(100% - 2px);
     }
   }
 
@@ -137,7 +158,7 @@
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';
-        content: "\e6e0";
+        content: '\e6e0';
         font-size: 14px;
         color: rgb(191, 203, 217);
         position: absolute;
@@ -159,7 +180,8 @@
       color: $--cascader-menu-selected-font-color;
     }
 
-    &:hover, &:focus:not(:active) {
+    &:hover,
+    &:focus:not(:active) {
       background-color: $--select-option-hover-background;
     }
 
