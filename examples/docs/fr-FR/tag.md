@@ -136,6 +136,7 @@ En plus de la taille par défaut, Tag fournit d'autres tailles pour vos composan
 <el-tag size="medium">Medium</el-tag>
 <el-tag size="small">Small</el-tag>
 <el-tag size="mini">Mini</el-tag>
+<el-tag size="compact">Compact</el-tag>
 ```
 :::
 
@@ -193,7 +194,7 @@ Tag provide three different themes: `dark`、`light` and `plain`
 | disable-transitions | Si les animations sont désactivées. | boolean | — | false |
 | hit | Si le tag à une bordure mise en valeur. | boolean | — | false |
 | color | Couleur de fond du tag. | string | — | — |
-| size | Taille du tag. | string | medium / small / mini | — |
+| size | Taille du tag. | string | medium / small / mini / compact | — |
 | effect | component theme | string | dark / light / plain | light |
 
 ### Évènements

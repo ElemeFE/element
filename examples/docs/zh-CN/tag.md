@@ -136,6 +136,7 @@ Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下�
 <el-tag size="medium" closable>中等标签</el-tag>
 <el-tag size="small" closable>小型标签</el-tag>
 <el-tag size="mini" closable>超小标签</el-tag>
+<el-tag size="compact" closable>極小标签</el-tag>
 ```
 :::
 
@@ -192,7 +193,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | color | 背景色 | string | — | — |
-| size | 尺寸 | string | medium / small / mini | — |
+| size | 尺寸 | string | medium / small / mini / compact | — |
 | effect | 主题 | string | dark / light / plain | light |
 
 
