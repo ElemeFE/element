@@ -52,77 +52,8 @@
     height: 465px;
     margin: 30px auto;
     position: relative;
-
-    div {
-      width: 100%;
-      height: 100%;
-      background-color: transparent;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
     img {
-      position: absolute;
-    }
-
-    .jumbotron-cloud-1 {
-      right: 0;
-      top: 0;
-      height: 55px;
-    }
-
-    .jumbotron-plant-2 {
-      left: 60px;
-      top: 200px;
-    }
-
-    .jumbotron-web {
-      height: 385px;
-      top: 35px;
-      left: 110px;
-    }
-
-    .jumbotron-cloud-2 {
-      left: 0;
-      top: 50px;
-      height: 55px;
-    }
-
-    .jumbotron-compo-1 {
-      left: 94px;
-      height: 90px;
-      top: 220px;
-    }
-
-    .jumbotron-compo-2 {
-      right: 73px;
-      top: 60px;
-      height: 124px;
-    }
-
-    .jumbotron-compo-3 {
-      right: 42px;
-      top: 200px;
-      height: 120px;
-    }
-
-    .jumbotron-plant-1 {
-      bottom: 0;
-      left: 30px;
-      height: 185px;
-    }
-
-    .jumbotron-figure-1 {
-      bottom: 0;
-      right: 180px;
-      height: 140px;
-    }
-
-    .jumbotron-figure-2 {
-      bottom: 0;
-      right: 10px;
-      height: 68px;
+      width: 100%;
     }
   }
   .cards {
@@ -144,7 +75,7 @@
 
 
     li {
-      width: 33.33333%;
+      width: 25%;
       padding: 0 19px;
       box-sizing: border-box;
       float: left;
@@ -278,22 +209,7 @@
       </div>
     </div>
     <div class="jumbotron">
-      <div>
-        <img class="jumbotron-plant-2" src="~examples/assets/images/plant-2.png" alt="">
-        <img class="jumbotron-web" src="~examples/assets/images/web.png" alt="">
-        <img class="jumbotron-plant-1" src="~examples/assets/images/plant-1.png" alt="">
-        <img class="jumbotron-figure-1" src="~examples/assets/images/figure-1.png" alt="">
-        <img class="jumbotron-figure-2" src="~examples/assets/images/figure-2.png" alt="">
-      </div>
-      <div data-hover-layer="0">
-        <img class="jumbotron-cloud-1" src="~examples/assets/images/cloud-1.png" alt="">
-        <img class="jumbotron-cloud-2" src="~examples/assets/images/cloud-2.png" alt="">
-      </div>
-      <div data-hover-layer="1">
-        <img class="jumbotron-compo-1" src="~examples/assets/images/compo-1.png" alt="">
-        <img class="jumbotron-compo-2" src="~examples/assets/images/compo-2.png" alt="">
-        <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
-      </div>
+      <img src="~examples/assets/images/theme-index-blue.png" alt="">
     </div>
     <div class="sponsors">
       <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
@@ -339,6 +255,18 @@
         </li>
         <li>
           <div class="card">
+            <img src="~examples/assets/images/theme-index-icon.svg" alt="">
+            <h3><%= 10 ></h3>
+            <p><%= 11 ></p>
+            <router-link
+              active-class="active"
+              to="/<%= lang >/theme"
+              exact><%= 5 >
+            </router-link>
+          </div>
+        </li>
+        <li>
+          <div class="card">
             <img src="~examples/assets/images/resource.png" alt="">
             <h3><%= 8 ></h3>
             <p><%= 9 ></p>
@@ -354,8 +282,6 @@
   </div>
 </template>
 <script>
-  import { Hover } from 'perspective.js';
-
   export default {
     data() {
       return {
@@ -363,18 +289,6 @@
       };
     },
     mounted() {
-      new Hover('.jumbotron', { // eslint-disable-line
-        max: 3,
-        scale: 1,
-        perspective: 700,
-        layers: [{
-          multiple: 0.01,
-          reverseTranslate: true
-        }, {
-          multiple: 0.02,
-          reverseTranslate: true
-        }]
-      });
     }
   };
 </script>

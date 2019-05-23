@@ -12,6 +12,8 @@
         "7": "使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。",
         "8": "资源",
         "9": "下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。",
+        "10": "主题",
+        "11": "在线主题编辑器，可视化定制和管理站点主题、组件样式",
         "lang": "zh-CN",
         "titleSize": "34",
         "paraSize": "18"
@@ -113,6 +115,8 @@
         "7": "Experience interaction details by strolling through component demos. Use encapsulated code to improve developing efficiency.",
         "8": "Resource",
         "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
+        "10": "Theme",
+        "11": "Online theme roller, visualize custom and manage site themes and component styles",
         "lang": "en-US",
         "titleSize": "34",
         "paraSize": "18"
@@ -214,6 +218,8 @@
         "7": "Experimenta la interacción al pasear con los ejemplos de los componentes. Utiliza el código encapsulado para mejorar la eficiencia en el desarrollo.",
         "8": "Recursos",
         "9": "Descarga los recursos de diseño relevantes para dar forma a un prototipo o borrador, aumentando la eficiencia del diseño.",
+        "10": "Theme",
+        "11": "Online theme roller, visualize custom and manage site themes and component styles",
         "lang": "es",
         "titleSize": "34",
         "paraSize": "18"
@@ -315,6 +321,8 @@
         "7": "Découvrez les détails de chaque composant and parcourant les différentes démos. Utilisez l'encapsulation du code pour développer plus efficacement.",
         "8": "Ressources",
         "9": "Téléchargez différents outils de prototypage ou de visualisation pour un design plus efficace.",
+        "10": "Theme",
+        "11": "Online theme roller, visualize custom and manage site themes and component styles",
         "lang": "fr-FR",
         "titleSize": "34",
         "paraSize": "18"
