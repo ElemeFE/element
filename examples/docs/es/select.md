@@ -539,7 +539,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | disabled             | si Select esta deshabilitado             | boolean  | —                 | false            |
 | collapse-tags        | si se colapsan los tags a un texto cuando `multiple` es `true`. | boolean  | —                 | false            |
 | value-key            | nombre de clave de identidad única para el valor, necesario cuando el valor es un objeto. | string   | —                 | value            |
-| size                 | tamaño del Input                         | string   | large/small/mini  | —                |
+| size                 | tamaño del Input                         | string   | large/small/mini/compact  | —                |
 | clearable            | si el select puede ser limpiado | boolean  | —                 | false            |
 | multiple-limit       | máximo numero de opciones que el usuario puede seleccionar cuando `multiple` es `true`.  Sin límite cuando se fija a 0 | number   | —                 | 0                |
 | name                 | el atributo `name` del input seleccionado | string   | —                 | —                |
