@@ -164,6 +164,13 @@
     }
   }
 
+  @include m(compact) {
+    font-size: 12px;
+    th, td {
+      padding: 4px 0;
+    }
+  }
+
   tr {
     background-color: $--color-white;
 

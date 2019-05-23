@@ -1856,7 +1856,7 @@
 | max-height | Table 的最大高度 | string/number | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
-| size | Table 的尺寸 | string | medium / small / mini | — |
+| size | Table 的尺寸 | string | medium / small / mini / compact | — |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |

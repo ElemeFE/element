@@ -1813,7 +1813,7 @@ You can customize row index in `type=index` columns.
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
 | stripe | whether Table is striped | boolean | — | false |
 | border | whether Table has vertical border | boolean | — | false |
-| size | size of Table | string | medium / small / mini | — |
+| size | size of Table | string | medium / small / mini / compact | — |
 | fit | whether width of column automatically fits its container | boolean | — | true |
 | show-header | whether Table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
