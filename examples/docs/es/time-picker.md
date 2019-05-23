@@ -154,7 +154,7 @@ Es posible escoger un rango de tiempo arbitrario.
 | disabled          | si el Time Picker se encuentra deshabilitado | boolean                                  | —                                        | false                |
 | editable          | si el input puede ser editado            | boolean                                  | —                                        | true                 |
 | clearable         | si mostrar el botón de borrado           | boolean                                  | —                                        | true                 |
-| size              | tamaño del input                         | string                                   | medium / small / mini                    | —                    |
+| size              | tamaño del input                         | string                                   | medium / small / mini / compact          | —                    |
 | placeholder       | placeholder en un modo fuera de rango    | string                                   | —                                        | —                    |
 | start-placeholder | placeholder para el tiempo de inicio en modo de rango | string                                   | —                                        | —                    |
 | end-placeholder   | placeholder para el tiempo de finalización en modo de rango | string                                   | —                                        | —                    |
