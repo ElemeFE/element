@@ -1820,7 +1820,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | max-height | La hauteur maximale de la table. La hauteur commence à `auto` jusqu'à atteindre la limite. La `maxHeight` est en px. | string/number | — | — |
 | stripe | Si la table est rayée. | boolean | — | false |
 | border | Si la table à une bordure verticale. | boolean | — | false |
-| size | Taille de la table. | string | medium / small / mini | — |
+| size | Taille de la table. | string | medium / small / mini / compact | — |
 | fit | Si la largeur des colonnes s'adapte au conteneur. | boolean | — | true |
 | show-header | Si le header de la table est visible. | boolean | — | true |
 | highlight-current-row | Si la ligne courante est mise en valeur. | boolean | — | false |
