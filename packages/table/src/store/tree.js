@@ -24,7 +24,7 @@ export default {
     // 嵌入型的数据，watch 无法是检测到变化 https://github.com/ElemeFE/element/issues/14998
     // TODO: 使用 computed 解决该问题，是否会造成性能问题？
     simpleNestedData() {
-      const { childrenColumnName, rowKey } = this.states;
+      const { childrenColumnName, lazyColumnIndentifier, rowKey, lazy } = this.states;
       if (!rowKey) {
         return {};
       }
@@ -51,7 +51,15 @@ export default {
           children: childrenIdArr,
           level
         };
-      }, childrenColumnName);
+        // 当 childrenIdArr 为空时标明该 row 需要加载数据
+        if (lazy) {
+          res[parentId] = {
+            ...res[parentId],
+            loaded: false,
+            loading: false
+          };
+        }
+      }, childrenColumnName, lazyColumnIndentifier);
       if (invalid) {
         console.warn('[Element Warn]for nested data, rowKey of every row should be specified.');
         return {};
@@ -79,28 +87,12 @@ export default {
         const newValue = { ...nested[key] };
         const oldValue = oldTreeData[key];
         if (newValue.children) {
-          // 这里 children 不可能为空数组的
-          if (newValue.children.length === 0) {
-            throw new Error('children should not be an empty array.');
-          }
           const included = defaultExpandAll || (expandRowKeys && expandRowKeys.indexOf(key) !== -1);
           newValue.expanded = (oldValue && oldValue.expanded) || included;
         }
         newTreeData[key] = newValue;
       });
       this.states.treeData = newTreeData;
-    },
-
-    toggleTreeExpansion(row, expanded) {
-      this.assertRowKey();
-
-      const { rowKey, treeData } = this.states;
-      const id = getRowIdentity(row, rowKey);
-      const data = id && treeData[id];
-      if (id && data && ('expanded' in data)) {
-        expanded = typeof expanded === 'undefined' ? !data.expanded : expanded;
-        treeData[id].expanded = expanded;
-      }
     },
 
     updateTreeExpandKeys(value) {
@@ -111,8 +103,36 @@ export default {
       }
     },
 
-    loadData() {
-      console.log('todo');
+    toggleTreeExpansion(row, expanded) {
+      this.assertRowKey();
+
+      const { rowKey, treeData } = this.states;
+      const id = getRowIdentity(row, rowKey);
+      const data = id && treeData[id];
+      const oldExpanded = treeData[id].expanded;
+      if (id && data && ('expanded' in data)) {
+        expanded = typeof expanded === 'undefined' ? !data.expanded : expanded;
+        treeData[id].expanded = expanded;
+        if (oldExpanded !== expanded) {
+          this.table.$emit('expand-change', row);
+        }
+      }
+    },
+
+    loadOrToggle(row) {
+      this.assertRowKey();
+      const { lazy, treeData, rowKey } = this.states;
+      const id = getRowIdentity(row, rowKey);
+      const data = treeData[id];
+      if (lazy && data && !data.loaded) {
+        this.loadData(row, data);
+      } else {
+        this.toggleTreeExpansion(row);
+      }
+    },
+
+    loadData(row, loadData) {
+      console.log('todo ==>');
     }
   }
 };

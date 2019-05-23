@@ -211,12 +211,16 @@ export function toggleRowStatus(statusArr, row, newVal) {
   return changed;
 }
 
-export function walkTreeNode(root, cb, childrenKey = 'children') {
+export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasChildren') {
   const isNil = (array) => !(Array.isArray(array) && array.length);
 
   function _walker(parent, children, level) {
     cb(parent, children, level);
     children.forEach(item => {
+      if (item[lazyKey]) {
+        cb(item, [], level + 1);
+        return;
+      }
       const children = item[childrenKey];
       if (!isNil(children)) {
         _walker(item, children, level + 1);
@@ -225,6 +229,10 @@ export function walkTreeNode(root, cb, childrenKey = 'children') {
   }
 
   root.forEach(item => {
+    if (item[lazyKey]) {
+      cb(item, [], 0);
+      return;
+    }
     const children = item[childrenKey];
     if (!isNil(children)) {
       _walker(item, children, 0);

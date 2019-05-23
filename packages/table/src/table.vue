@@ -359,7 +359,7 @@
       },
 
       toggleRowExpansion(row, expanded) {
-        this.store.toggleRowExpansion(row, expanded);
+        this.store.toggleRowExpansionAdapter(row, expanded);
       },
 
       clearSelection() {
@@ -596,7 +596,7 @@
         immediate: true,
         handler(newVal) {
           if (newVal) {
-            this.store.setExpandRowKeysAdpter(newVal);
+            this.store.setExpandRowKeysAdapter(newVal);
           }
         }
       }

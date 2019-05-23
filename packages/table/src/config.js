@@ -103,7 +103,7 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
   const ele = [];
   const callback = function(e) {
     e.stopPropagation();
-    store.toggleTreeExpansion(row);
+    store.loadOrToggle(row);
   };
   ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
   if (typeof treeNode.expanded === 'boolean') {
