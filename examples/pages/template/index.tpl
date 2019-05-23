@@ -307,7 +307,7 @@
         const ele = this.$refs.indexMainImg;
         const rect = ele.getBoundingClientRect();
         const eleHeight = ele.clientHeight + 40;
-        let calHeight = (150 - rect.top) * 1.2;
+        let calHeight = (180 - rect.top) * 1.2;
         if (calHeight < 0) calHeight = 0;
         if (calHeight > eleHeight) calHeight = eleHeight;
         this.mainImgOffset = calHeight;
