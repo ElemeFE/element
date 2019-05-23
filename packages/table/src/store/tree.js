@@ -86,8 +86,6 @@ export default {
           const included = defaultExpandAll || (expandRowKeys && expandRowKeys.indexOf(key) !== -1);
           newValue.expanded = (oldValue && oldValue.expanded) || included;
         }
-        // const isParentExpaned =
-        // newValue.display = (newValue.level === 0) || (oldValue && oldValue.display) ||;
         newTreeData[key] = newValue;
       });
       this.states.treeData = newTreeData;
@@ -100,8 +98,16 @@ export default {
       const id = getRowIdentity(row, rowKey);
       const data = id && treeData[id];
       if (id && data && ('expanded' in data)) {
-        expanded = typeof expanded !== 'undefined' ? !data.expanded : expanded;
+        expanded = typeof expanded === 'undefined' ? !data.expanded : expanded;
         treeData[id].expanded = expanded;
+      }
+    },
+
+    updateTreeExpandKeys(value) {
+      // 仅仅在包含嵌套数据时才去更新
+      if (Object.keys(this.simpleNestedData).length) {
+        this.states.expandRowKeys = value;
+        this.updateTreeData();
       }
     },
 

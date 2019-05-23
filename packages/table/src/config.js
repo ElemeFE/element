@@ -106,7 +106,7 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
     store.toggleTreeExpansion(row);
   };
   ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
-  if (treeNode.hasChildren) {
+  if (typeof treeNode.expanded === 'boolean') {
     ele.push(<div class={ ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
       on-click={callback}>
       <i class='el-icon el-icon-arrow-right'></i>

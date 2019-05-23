@@ -596,7 +596,7 @@
         immediate: true,
         handler(newVal) {
           if (newVal) {
-            this.store.setExpandRowKeys(newVal);
+            this.store.setExpandRowKeysAdpter(newVal);
           }
         }
       }
@@ -636,20 +636,17 @@
     },
 
     data() {
+      const { hasChildren = 'hasChildren', children = 'children' } = this.treeProps;
       this.store = createStore(this, {
         rowKey: this.rowKey,
         defaultExpandAll: this.defaultExpandAll,
         selectOnIndeterminate: this.selectOnIndeterminate,
+        // TreeTable 的相关配置
         indent: this.indent,
-        lazy: this.lazy
+        lazy: this.lazy,
+        lazyColumnIndentifier: hasChildren,
+        childrenColumnName: children
       });
-      // const store = new TableStore(this, {
-      //   rowKey: this.rowKey,
-      //   defaultExpandAll: this.defaultExpandAll,
-      //   selectOnIndeterminate: this.selectOnIndeterminate,
-      //   indent: this.indent,
-      //   lazy: this.lazy
-      // });
       const layout = new TableLayout({
         // store,
         store: this.store,
@@ -659,7 +656,6 @@
       });
       return {
         layout,
-        // store,
         isHidden: false,
         renderExpanded: null,
         resizeProxyVisible: false,
