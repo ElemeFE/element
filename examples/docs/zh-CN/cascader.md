@@ -1647,6 +1647,7 @@
 | change-on-select | 是否允许选择任意一级的选项 | boolean | — | false |
 | size | 尺寸 | string | medium / small / mini | — |
 | before-filter | 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选 | function(value) | — | — |
+| before-ellipsis | 是否在选中项内容超出时前面显示省略号 | boolean | — | false |
 
 ### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
