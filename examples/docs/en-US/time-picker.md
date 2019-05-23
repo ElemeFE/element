@@ -154,7 +154,7 @@ Can pick an arbitrary time range.
 | disabled | whether TimePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | whether to show clear button | boolean | — | true |
-| size | size of Input | string | medium / small / mini | — |
+| size | size of Input | string | medium / small / mini / compact | — |
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start time in range mode | string | — | — |
 | end-placeholder | placeholder for the end time in range mode | string | — | — |

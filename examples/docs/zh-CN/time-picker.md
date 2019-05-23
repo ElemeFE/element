@@ -155,7 +155,7 @@
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
-| size          | 输入框尺寸     | string          | medium / small / mini  | — |
+| size          | 输入框尺寸     | string          | medium / small / mini / compact | — |
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |

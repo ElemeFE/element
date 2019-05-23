@@ -155,7 +155,7 @@ Vous pouvez également définir un intervalle libre.
 | disabled | Si TimePicker est désactivé. | boolean | — | false |
 | editable | Si le champ d'input est éditable. | boolean | — | true |
 | clearable | Si un bouton d'effacement doit être affiché. | boolean | — | true |
-| size | Taille du champ. | string | medium / small / mini | — |
+| size | Taille du champ. | string | medium / small / mini / compact | — |
 | placeholder | Placeholder en mode non-intervalle. | string | — | — |
 | start-placeholder | Placeholder de l'horaire de début en mode intervalle. | string | — | — |
 | end-placeholder | Placeholder de l'horaire de fin en mode intervalle. | string | — | — |
