@@ -328,7 +328,7 @@
         width: 100%;
         text-align: center;
         cursor: pointer;
-  
+
         i {
           transform: rotateZ(90deg);
         }
@@ -393,6 +393,7 @@
         border-right: 1px solid $--border-color-light;
         border-bottom: none;
         border-top: 1px solid $--border-color-light;
+        text-align: left;
       }
       .el-tabs__item.is-left:first-child {
         border-right: 1px solid $--border-color-light;
