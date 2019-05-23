@@ -1916,7 +1916,7 @@ Puede personalizar el contenido del nodo de cascada.
 | value / v-model | valor ligado | - | — | — |
 | options | datos de las opciones，las claves `value` y `label` pueden ser personalizadas por `Props`. | array | — | — |
 | props | opciones de configuración, consulte la siguiente tabla. | object | — | — |
-| size | tamaño del input | string | medium / small / mini | — |
+| size | tamaño del input | string | medium / small / mini / compact | — |
 | placeholder | placeholder del input | string | — | Select |
 | disabled | si Cascader esta deshabilitada | boolean | — | false |
 | clearable | si el valor seleccionado puede ser borrado | boolean | — | false |

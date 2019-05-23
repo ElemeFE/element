@@ -1892,7 +1892,7 @@
 | value / v-model | 选中项绑定值 | - | — | — |
 | options | 可选项数据源，键名可通过 `Props` 属性配置 | array | — | — |
 | props | 配置选项，具体见下表 | object | — | — |
-| size | 尺寸 | string | medium / small / mini | — |
+| size | 尺寸 | string | medium / small / mini / compact | — |
 | placeholder | 输入框占位文本 | string | — | 请选择 |
 | disabled | 是否禁用 | boolean | — | false |
 | clearable | 是否支持清空选项 | boolean | — | false |

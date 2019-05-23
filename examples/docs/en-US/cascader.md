@@ -1913,7 +1913,7 @@ You can customize the content of cascader node.
 | value / v-model | binding value | - | — | — |
 | options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
 | props | configuration options, see the following table. | object | — | — |
-| size | size of input | string | medium / small / mini | — |
+| size | size of input | string | medium / small / mini / compact | — |
 | placeholder | placeholder of input | string | — | Select |
 | disabled | whether Cascader is disabled | boolean | — | false |
 | clearable | whether selected value can be cleared | boolean | — | false |
