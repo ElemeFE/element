@@ -55,6 +55,14 @@
     img {
       width: 100%;
     }
+    .jumbotron-red {
+      transition: height .1s;
+      background: #FFF;
+      position: absolute;
+      left: 0;
+      top:0;
+      overflow: hidden;
+    }
   }
   .cards {
     margin: 0 auto 110px;
@@ -208,8 +216,13 @@
         <p><%= 2 ></p>
       </div>
     </div>
-    <div class="jumbotron">
+    <div class="jumbotron" ref="indexMainImg">
       <img src="~examples/assets/images/theme-index-blue.png" alt="">
+      <div class="jumbotron-red" :style="{
+           height: mainImgOffset + 'px'
+         }">
+        <img src="~examples/assets/images/theme-index-red.png" alt="">
+      </div>
     </div>
     <div class="sponsors">
       <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
@@ -282,13 +295,35 @@
   </div>
 </template>
 <script>
+  import throttle from 'throttle-debounce/throttle';
   export default {
+    created() {
+      this.throttledHandleScroll = throttle(10, true, index => {
+        this.handleScroll(index);
+      });
+    },
+    methods: {
+      handleScroll(index) {
+        const ele = this.$refs.indexMainImg;
+        const rect = ele.getBoundingClientRect();
+        const eleHeight = ele.clientHeight + 40;
+        let calHeight = (150 - rect.top) * 1.2;
+        if (calHeight < 0) calHeight = 0;
+        if (calHeight > eleHeight) calHeight = eleHeight;
+        this.mainImgOffset = calHeight;
+      }
+    },
     data() {
       return {
-        lang: this.$route.meta.lang
+        lang: this.$route.meta.lang,
+        mainImgOffset: 0
       };
     },
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.throttledHandleScroll);
+    },
     mounted() {
+      window.addEventListener('scroll', this.throttledHandleScroll);
     }
   };
 </script>
