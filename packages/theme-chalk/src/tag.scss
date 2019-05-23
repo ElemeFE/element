@@ -160,4 +160,15 @@
       transform: scale(.7);
     }
   }
+
+  @include m(compact) {
+    height: 18px;
+    padding: 0 5px;
+    line-height: 17px;
+
+    .el-icon-close {
+      margin-left: -3px;
+      transform: scale(.7);
+    }
+  }
 }
