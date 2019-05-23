@@ -40,6 +40,30 @@
     }
   }
 
+  .el-cascader__label.is-before-ellipsis {
+    text-overflow: initial;
+    &:not(.not-text-overflow){
+      left: auto;
+      right: 30px;
+      width: calc(100% - 40px);
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 0;
+      & > span {
+        padding: 0 5px;
+      }
+      & > .before-ellipsis {
+        position: absolute;
+        background: #fff;
+        left: 0;
+        top: 1px;
+        width: 18px;
+        height: calc(100% - 2px);
+        text-align: right;
+      }
+    }
+  }
+
   @include e(clearIcon) {
     z-index: 2;
     position: relative;

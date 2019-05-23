@@ -47,8 +47,14 @@
         ></i>
       </template>
     </el-input>
-    <span class="el-cascader__label" v-show="inputValue === '' && !isOnComposition">
+    <span
+      ref="cascaderLabel"
+      class="el-cascader__label"
+      :class="{'is-before-ellipsis': beforeEllipsis, 'not-text-overflow': !isShowBeforeEllipsis}"
+      v-show="inputValue === '' && !isOnComposition"
+    >
       <template v-if="showAllLevels">
+        <i v-if="beforeEllipsis && isShowBeforeEllipsis" class="before-ellipsis">...</i>
         <template v-for="(label, index) in currentLabels">
           {{ label }}
           <span v-if="index < currentLabels.length - 1" :key="index"> {{ separator }} </span>
@@ -72,6 +78,7 @@ import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
 import { generateId, escapeRegexpString, isIE, isEdge } from 'element-ui/src/utils/util';
+import { getStyle, hasClass } from 'element-ui/src/utils/dom';
 
 const popperMixin = {
   props: {
@@ -159,6 +166,10 @@ export default {
       type: Boolean,
       default: true
     },
+    beforeEllipsis: {
+      type: Boolean,
+      default: false
+    },
     debounce: {
       type: Number,
       default: 300
@@ -184,7 +195,8 @@ export default {
       flatOptions: null,
       id: generateId(),
       needFocus: true,
-      isOnComposition: false
+      isOnComposition: false,
+      isShowBeforeEllipsis: false
     };
   },
 
@@ -211,6 +223,7 @@ export default {
           options = targetOption[this.childrenKey];
         }
       });
+      this.cascaderWidthCalc();
       return labels;
     },
     _elFormItemSize() {
@@ -417,6 +430,24 @@ export default {
     },
     handleComposition(event) {
       this.isOnComposition = event.type !== 'compositionend';
+    },
+    cascaderWidthCalc() {
+      this.$nextTick(() => {
+        const cascaderBox = this.$refs.cascaderLabel;
+        if (hasClass(cascaderBox, 'is-before-ellipsis') && cascaderBox.childNodes.length) {
+          const range = document.createRange();
+          range.setStart(cascaderBox, 1);
+          range.setEnd(cascaderBox, cascaderBox.childNodes.length);
+          const rangeWidth = range.getBoundingClientRect().width;
+          const padding = (parseInt(getStyle(cascaderBox, 'paddingLeft'), 10) || 0) +
+        (parseInt(getStyle(cascaderBox, 'paddingRight'), 10) || 0);
+          if (rangeWidth + padding > cascaderBox.offsetWidth) {
+            this.isShowBeforeEllipsis = true;
+          } else {
+            this.isShowBeforeEllipsis = false;
+          }
+        }
+      });
     }
   },
 
