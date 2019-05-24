@@ -105,7 +105,9 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
     e.stopPropagation();
     store.loadOrToggle(row);
   };
-  ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
+  if (treeNode.indent) {
+    ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
+  }
   if (typeof treeNode.expanded === 'boolean') {
     ele.push(<div class={ ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
       on-click={callback}>

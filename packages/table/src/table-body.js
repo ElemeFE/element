@@ -349,7 +349,7 @@ export default {
               if (typeof treeRowData.expanded === 'boolean') {
                 data.treeNode.expanded = treeRowData.expanded;
               }
-              console.log('data treeNode ', data.treeNode);
+              // console.log('data treeNode ', data.treeNode);
             }
             return (
               <td
@@ -377,7 +377,7 @@ export default {
     wrappedRowRender(row, $index) {
       const store = this.store;
       const { isRowExpanded, assertRowKey } = store;
-      const { treeData, childrenColumnName, rowKey } = store.states;
+      const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
       if (this.hasExpandColumn && isRowExpanded(row)) {
         const renderExpanded = this.table.renderExpanded;
         // 因为展开行是成倍增加的，把 index 的数量减半
@@ -412,7 +412,7 @@ export default {
         const tmp = [this.rowRender(row, $index, treeRowData)];
         // 渲染嵌套数据
         if (cur) {
-          // 对 TreeTable 中的 row 的 index 做一下特殊处理
+          // currentRow 记录的是 index，所以还需主动增加 TreeTable 的 index
           let i = 0;
           const traverse = (children, parent) => {
             if (!(children && children.length && parent)) return;
@@ -421,30 +421,33 @@ export default {
               const innerTreeRowData = {
                 display: parent.display && parent.expanded,
                 level: parent.level + 1
-                // loaded: false
               };
               const childKey = getRowIdentity(node, rowKey);
-              if (typeof childKey === 'undefined') {
+              if (childKey === undefined || childKey === null) {
                 throw new Error('for nested data item, row-key is required.');
               }
-              cur = treeData[childKey];
+              cur = { ...treeData[childKey] };
               // 对于当前节点，分成有无子节点两种情况。
               // 如果包含子节点的，设置 expanded 属性。
-              // 对于它子节点的 display 属性由它本身的 expanded 与 display 共同决定
+              // 对于它子节点的 display 属性由它本身的 expanded 与 display 共同决定。
               if (cur) {
                 innerTreeRowData.expanded = cur.expanded;
-                cur.display = cur.expanded && innerTreeRowData.display;
+                // 懒加载的某些节点，level 未知
+                cur.level = cur.level || innerTreeRowData.level;
+                cur.display = !!(cur.expanded && innerTreeRowData.display);
               }
               i++;
               tmp.push(this.rowRender(node, $index + i, innerTreeRowData));
               if (cur) {
-                traverse(node[childrenColumnName], cur);
+                const nodes = lazyTreeNodeMap[childKey] || node[childrenColumnName];
+                traverse(nodes, cur);
               }
             });
           };
-          // 对于 root 节点，display 为 true
+          // 对于 root 节点，display 一定为 true
           cur.display = true;
-          traverse(row[childrenColumnName], cur);
+          const nodes = lazyTreeNodeMap[key] || row[childrenColumnName];
+          traverse(nodes, cur);
         }
         return tmp;
       } else {

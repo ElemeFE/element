@@ -150,10 +150,6 @@ Wachter.prototype.modifiers = {
     Vue.nextTick(() => {
       this.table.updateScrollY();
     });
-  },
-
-  updateCurrentRow() {
-    console.log('todo ===> ');
   }
 };
 

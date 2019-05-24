@@ -10,7 +10,6 @@ export function createStore(table, initialState = {}) {
   Object.keys(initialState).forEach(key => {
     store.states[key] = initialState[key];
   });
-  // 为 modifiers 中的函数绑定一下 this
   Object.keys(store.modifiers).forEach(key => {
     store.modifiers[key] = store.modifiers[key].bind(store);
   });
@@ -31,7 +30,7 @@ export function mapStates(mapper) {
         return value.call(this, this.store.states);
       };
     } else {
-      console.error('unexpected value type');
+      console.error('invalid value type');
     }
     if (fn) {
       res[key] = fn;

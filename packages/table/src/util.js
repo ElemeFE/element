@@ -218,7 +218,7 @@ export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasC
     cb(parent, children, level);
     children.forEach(item => {
       if (item[lazyKey]) {
-        cb(item, [], level + 1);
+        cb(item, null, level + 1);
         return;
       }
       const children = item[childrenKey];
@@ -230,7 +230,7 @@ export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasC
 
   root.forEach(item => {
     if (item[lazyKey]) {
-      cb(item, [], 0);
+      cb(item, null, 0);
       return;
     }
     const children = item[childrenKey];
