@@ -133,6 +133,9 @@
             : this.textColor
         };
       },
+      lineStyle() {
+        return { left: `${12 + this.paddingLeft}px` };
+      },
       isFirstLevel() {
         let isFirstLevel = true;
         let parent = this.$parent;
@@ -320,6 +323,11 @@
           on-mouseleave={this.handleMouseleave}
           on-focus={this.handleMouseenter}
         >
+          {
+            opened && rootMenu.mode === 'vertical' && <div
+              style={[this.lineStyle]}
+              class="el-submenu__line"></div>
+          }
           <div
             class="el-submenu__title"
             ref="submenu-title"

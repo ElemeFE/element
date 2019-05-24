@@ -22,9 +22,7 @@ export default {
       }
       return parent;
     },
-    paddingStyle() {
-      if (this.rootMenu.mode !== 'vertical') return {};
-
+    paddingLeft() {
       let padding = 20;
       let parent = this.$parent;
 
@@ -38,7 +36,11 @@ export default {
           parent = parent.$parent;
         }
       }
-      return {paddingLeft: padding + 'px'};
+      return padding;
+    },
+    paddingStyle() {
+      if (this.rootMenu.mode !== 'vertical') return {};
+      return { paddingLeft: this.paddingLeft + 'px' };
     }
   }
 };
