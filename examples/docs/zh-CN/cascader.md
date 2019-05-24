@@ -1360,10 +1360,10 @@
                   value: ++id,
                   label: `选项${id}`,
                   leaf: level >= 2
-                }))
+                }));
               // 通过调用resolve将子节点数据返回，通知组件数据加载完成
-              resolve(nodes)
-            }, 1000)
+              resolve(nodes);
+            }, 1000);
           }
         }
       };

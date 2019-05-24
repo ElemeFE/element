@@ -327,6 +327,9 @@ export default {
       if (this.multiple && (val.length || oldVal.length)) {
         this.$nextTick(this.updateStyle);
       }
+    },
+    filtering(val) {
+      this.$nextTick(this.updatePopper);
     }
   },
 
@@ -341,8 +344,14 @@ export default {
     }
 
     this.filterHandler = debounce(this.debounce, () => {
-      const before = this.beforeFilter(this.inputValue);
+      const { inputValue } = this;
 
+      if (!inputValue) {
+        this.filtering = false;
+        return;
+      }
+
+      const before = this.beforeFilter(inputValue);
       if (before && before.then) {
         before.then(this.getSuggestions);
       } else if (before !== false) {
@@ -420,7 +429,6 @@ export default {
       !this.dropDownVisible && this.toggleDropDownVisible(true);
 
       if (event && event.isComposing) return;
-
       if (val) {
         this.filterHandler();
       } else {
@@ -538,6 +546,7 @@ export default {
 
       this.filtering = true;
       this.suggestions = suggestions;
+      this.$nextTick(this.updatePopper);
     },
     handleSuggestionKeyDown(event) {
       const { keyCode, target } = event;

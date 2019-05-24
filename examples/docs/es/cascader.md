@@ -1359,10 +1359,10 @@ Dynamic load its child nodes when checked a node.
                   value: ++id,
                   label: `Option - ${id}`,
                   leaf: level >= 2
-                }))
+                }));
               // Invoke `resolve` callback to return the child nodes data and indicate the loading is finished.
-              resolve(nodes)
-            }, 1000)
+              resolve(nodes);
+            }, 1000);
           }
         }
       };
