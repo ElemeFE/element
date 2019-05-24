@@ -76,6 +76,7 @@ import { ElCalendar } from './calendar'
 import { ElImage } from './image'
 import { ElBacktop } from './backtop'
 import { ElInfiniteScroll } from './infiniteScroll'
+import { ElPageHeader } from './page-header'
 
 export interface InstallationOptions {
   locale: any,
@@ -329,3 +330,5 @@ export class Backtop extends ElBacktop {}
 /** InfiniteScroll Component */
 export class InfiniteScroll extends ElInfiniteScroll {}
 
+/** PageHeader Component */
+export class PageHeader extends ElPageHeader {}

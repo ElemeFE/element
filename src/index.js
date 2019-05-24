@@ -77,6 +77,7 @@ import Image from '../packages/image/index.js';
 import Calendar from '../packages/calendar/index.js';
 import Backtop from '../packages/backtop/index.js';
 import InfiniteScroll from '../packages/infiniteScroll/index.js';
+import PageHeader from '../packages/page-header/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -153,6 +154,7 @@ const components = [
   Image,
   Calendar,
   Backtop,
+  PageHeader,
   CollapseTransition
 ];
 
@@ -268,6 +270,10 @@ export default {
   Divider,
   Image,
   Calendar,
+<<<<<<< HEAD
   Backtop,
   InfiniteScroll
+=======
+  PageHeader
+>>>>>>> PageHeader: add page-header component
 };
