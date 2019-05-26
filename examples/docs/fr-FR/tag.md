@@ -139,6 +139,51 @@ En plus de la taille par défaut, Tag fournit d'autres tailles pour vos composan
 ```
 :::
 
+### Theme
+
+Tag provide three different themes: `dark`、`light` and `plain`
+
+:::demo Using `effect` to change, default is `light`
+```html
+<div class="tag-group">
+  <span class="tag-group__title">Dark</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="dark">
+    {{ item.label }}
+  </el-tag>
+</div>
+<div class="tag-group">
+  <span class="tag-group__title">Plain</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="plain">
+    {{ item.label }}
+  </el-tag>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        items: [
+          { type: '', label: 'Tag 1' },
+          { type: 'success', label: 'Tag 2' },
+          { type: 'info', label: 'Tag 3' },
+          { type: 'danger', label: 'Tag 4' },
+          { type: 'warning', label: 'Tag 5' }
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributs
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -149,6 +194,7 @@ En plus de la taille par défaut, Tag fournit d'autres tailles pour vos composan
 | hit | Si le tag à une bordure mise en valeur. | boolean | — | false |
 | color | Couleur de fond du tag. | string | — | — |
 | size | Taille du tag. | string | medium / small / mini | — |
+| effect | component theme | string | dark / light / plain | light |
 
 ### Évènements
 
