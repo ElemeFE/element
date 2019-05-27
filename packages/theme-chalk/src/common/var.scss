@@ -667,6 +667,13 @@ $--pagination-button-disabled-background-color: $--color-white !default;
 /// color||Color|0
 $--pagination-hover-color: $--color-primary !default;
 
+/* Popup
+-------------------------- */
+/// color||Color|0
+$--popup-modal-background-color: $--color-black !default;
+/// opacity||Other|1
+$--popup-modal-opacity: 0.5 !default;
+
 /* Popover
 -------------------------- */
 /// color||Color|0
@@ -700,36 +707,20 @@ $--tooltip-padding: 10px !default;
 
 /* Tag
 -------------------------- */
-$--tag-padding: 0 10px !default;
-$--tag-fill: rgba($--color-primary, 0.10) !default;
 /// color||Color|0
-$--tag-font-color: $--color-primary !default;
+$--tag-info-color: $--color-info !default;
 /// color||Color|0
-$--tag-default-hover-background-color: $--color-primary !default;
-$--tag-border: rgba($--color-primary, 0.20) !default;
+$--tag-primary-color: $--color-primary !default;
+/// color||Color|0
+$--tag-success-color: $--color-success !default;
+/// color||Color|0
+$--tag-warning-color: $--color-warning !default;
+/// color||Color|0
+$--tag-danger-color: $--color-danger !default;
 /// fontSize||Font|1
 $--tag-font-size: 12px !default;
 $--tag-border-radius: 4px !default;
-
-$--tag-info-fill: rgba($--color-info, 0.10) !default;
-$--tag-info-border: rgba($--color-info, 0.20) !default;
-$--tag-info-color: $--color-info !default;
-
-$--tag-primary-fill: rgba($--color-primary, 0.10) !default;
-$--tag-primary-border: rgba($--color-primary, 0.20) !default;
-$--tag-primary-color: $--color-primary !default;
-
-$--tag-success-fill: rgba($--color-success, 0.10) !default;
-$--tag-success-border: rgba($--color-success, 0.20) !default;
-$--tag-success-color: $--color-success !default;
-
-$--tag-warning-fill: rgba($--color-warning, 0.10) !default;
-$--tag-warning-border: rgba($--color-warning, 0.20) !default;
-$--tag-warning-color: $--color-warning !default;
-
-$--tag-danger-fill: rgba($--color-danger, 0.10) !default;
-$--tag-danger-border: rgba($--color-danger, 0.20) !default;
-$--tag-danger-color: $--color-danger !default;
+$--tag-padding: 0 10px !default;
 
 /* Tree
 -------------------------- */

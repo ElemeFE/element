@@ -5,7 +5,7 @@
     role="switch"
     :aria-checked="checked"
     :aria-disabled="switchDisabled"
-    @click="switchValue"
+    @click.prevent="switchValue"
   >
     <input
       class="el-switch__input"

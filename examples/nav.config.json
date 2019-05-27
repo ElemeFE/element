@@ -271,6 +271,10 @@
             {
               "path": "/backtop",
               "title": "Backtop 回到顶部"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll 无限滚动"
             }
           ]
         }
@@ -549,6 +553,10 @@
             {
               "path": "/backtop",
               "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
             }
           ]
         }
@@ -827,6 +835,10 @@
             {
               "path": "/backtop",
               "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
             }
           ]
         }
@@ -1105,6 +1117,10 @@
             {
               "path": "/backtop",
               "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
             }
           ]
         }

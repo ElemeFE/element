@@ -266,11 +266,13 @@
 
     &.el-tabs--border-card, &.el-tabs--card,
     .el-tabs--left, .el-tabs--right {
-      .el-tabs__item:nth-child(2) {
-        padding-left: 20px;
-      }
-      .el-tabs__item:last-child {
-        padding-right: 20px;
+      > .el-tabs__header {
+        .el-tabs__item:nth-child(2) {
+          padding-left: 20px;
+        }
+        .el-tabs__item:last-child {
+          padding-right: 20px;
+        }
       }
     }
   }
