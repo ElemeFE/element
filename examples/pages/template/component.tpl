@@ -3,7 +3,7 @@
     height: calc(100% - 80px);
     margin-top: 80px;
 
-    .el-scrollbar__wrap {
+    > .el-scrollbar__wrap {
       overflow-x: auto;
     }
   }
@@ -24,8 +24,9 @@
       margin-top: 80px;
       transition: padding-top .3s;
 
-      .el-scrollbar__wrap {
+      > .el-scrollbar__wrap {
         height: 100%;
+        overflow-x: auto;
       }
 
       &.is-extended {
