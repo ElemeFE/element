@@ -49,9 +49,9 @@ Display area is 40px \* 40px.
 | Attribute         | Description                                                         | Type            | Accepted Values | Default |
 | ----------------- | ------------------------------------------------------------------- | --------------- | --------------- | ------- |
 | target            | the target to trigger scroll                                        | string          |                 |         |
-| visibility-height | the button will not show until the scroll height reaches this value | string / number |                 | 200     |
-| right             | right distance                                                      | string / number |                 | 40      |
-| bottom            | bottom distance                                                     | string / number |                 | 40      |
+| visibility-height | the button will not show until the scroll height reaches this value |  number |                 | 200     |
+| right             | right distance                                                      | number |                 | 40      |
+| bottom            | bottom distance                                                     | number |                 | 40      |
 
 ### Events
 
