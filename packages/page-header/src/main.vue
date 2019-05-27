@@ -6,8 +6,8 @@
         <slot name="title">{{ title }}</slot>
       </div>
     </div>
-    <div class="el-page-header__subtitle">
-      <slot name="subTitle">{{ subTitle }}</slot>
+    <div class="el-page-header__content">
+      <slot name="content">{{ content }}</slot>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
         return t('el.pageHeader.title');
       }
     },
-    subTitle: String
+    content: String
   }
 };
 </script>

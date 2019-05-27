@@ -9,8 +9,7 @@ describe('PageHeader', () => {
 
   it('render well and trigger back event', async() => {
     vm = createVue(PageHeader, {
-      title: 'title',
-      subTitle: 'SubTitle'
+      content: 'content'
     });
     expect(vm.$el).to.exist;
     const spy = sinon.spy();

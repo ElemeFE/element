@@ -6,7 +6,7 @@
 
 :::demo
 ```html
-<el-page-header @back="goBack" title="返回" sub-title="详情页面">
+<el-page-header @back="goBack" content="详情页面">
 </el-page-header>
 
 <script>
@@ -25,7 +25,7 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |------------------------------ | ------ |
 | title     | 标题           | string    |  —                            | 返回   |
-| sub-title | 副标题         | string    |  —                            | —      |
+| content   | 内容           | string    |  —                            | —      |
 
 
 ### Events
@@ -37,4 +37,4 @@
 | 事件名称    | 说明         |
 |---------- |------------- |
 | title     | 标题内容      |
-| subTitle  | 副标题内容    |
+| content   | 内容         |

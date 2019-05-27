@@ -6,7 +6,7 @@ If path of the page is simple, it is recommended to use PageHeader instead of th
 
 :::demo
 ```html
-<el-page-header @back="goBack" title="back" sub-title="detail">
+<el-page-header @back="goBack" content="detail">
 </el-page-header>
 
 <script>
@@ -18,14 +18,14 @@ If path of the page is simple, it is recommended to use PageHeader instead of th
     }
   }
 </script>
-```
+```html
 :::
 
 ### Attributes
 | Attribute | Description   | Type      | Accepted Values               | Default |
 |---------- |-------------- |---------- |------------------------------ | ------ |
-| title     | main title    | string    |  —                            | back   |
-| sub-title | sub title     | string    |  —                            | —      |
+| title     | main title    | string    |  —                            | Back   |
+| content   | content       | string    |  —                            | —      |
 
 ### Events
 | Event Name | Description   | Parameters |
@@ -36,4 +36,4 @@ If path of the page is simple, it is recommended to use PageHeader instead of th
 | slot      | Description            |
 |---------- | ---------------------- |
 | title     | title content          |
-| subTitle  | sub title content      |
+| content   | content                |

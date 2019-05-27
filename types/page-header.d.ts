@@ -5,6 +5,6 @@ export declare class ElPageHeader extends ElementUIComponent {
   /** title */
   title: String
 
-  /** sub title */
-  subTitle: String
+  /** content */
+  content: String
 }
