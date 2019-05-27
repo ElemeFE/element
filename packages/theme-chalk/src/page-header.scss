@@ -3,6 +3,7 @@
 
 @include b(page-header) {
   display: flex;
+  line-height: 24px;
 
   @include e(left) {
     display: flex;
