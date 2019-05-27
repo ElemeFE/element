@@ -1,4 +1,4 @@
-import { createVue, destroyVM,waitImmediate } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 import PageHeader from 'packages/page-header';
 
 describe('PageHeader', () => {
