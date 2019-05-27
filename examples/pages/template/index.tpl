@@ -49,7 +49,6 @@
   }
   .jumbotron {
     width: 890px;
-    height: 465px;
     margin: 30px auto;
     position: relative;
     img {
