@@ -104,7 +104,7 @@
 
   @include e(label) {
     flex: 1;
-    padding-left: 10px;
+    padding: 0 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

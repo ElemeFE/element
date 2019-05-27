@@ -906,198 +906,72 @@ Set `props.multiple = true` to use multiple selection.
       return {
         props: { multiple: true },
         options: [{
-          value: 'guide',
-          label: 'Guide',
+          value: 1,
+          label: 'Asia',
           children: [{
-            value: 'disciplines',
-            label: 'Disciplines',
-            children: [{
-              value: 'consistency',
-              label: 'Consistency'
-            }, {
-              value: 'feedback',
-              label: 'Feedback'
-            }, {
-              value: 'efficiency',
-              label: 'Efficiency'
-            }, {
-              value: 'controllability',
-              label: 'Controllability'
-            }]
+            value: 2,
+            label: 'China',
+            children: [
+              { value: 3, label: 'Beijing' },
+              { value: 4, label: 'Shanghai' },
+              { value: 5, label: 'Hangzhou' }
+            ]
           }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'side nav',
-              label: 'Side Navigation'
-            }, {
-              value: 'top nav',
-              label: 'Top Navigation'
-            }]
+            value: 6,
+            label: 'Japan',
+            children: [
+              { value: 7, label: 'Tokyo' },
+              { value: 8, label: 'Osaka' },
+              { value: 9, label: 'Kyoto' }
+            ]
+          }, {
+            value: 10,
+            label: 'Korea',
+            children: [
+              { value: 11, label: 'Seoul' },
+              { value: 12, label: 'Busan' },
+              { value: 13, label: 'Taegu' }
+            ]
           }]
         }, {
-          value: 'component',
-          label: 'Component',
+          value: 14,
+          label: 'Europe',
           children: [{
-            value: 'basic',
-            label: 'Basic',
-            children: [{
-              value: 'layout',
-              label: 'Layout'
-            }, {
-              value: 'color',
-              label: 'Color'
-            }, {
-              value: 'typography',
-              label: 'Typography'
-            }, {
-              value: 'icon',
-              label: 'Icon'
-            }, {
-              value: 'button',
-              label: 'Button'
-            }]
+            value: 15,
+            label: 'France',
+            children: [
+              { value: 16, label: 'Paris' },
+              { value: 17, label: 'Marseille' },
+              { value: 18, label: 'Lyon' }
+            ]
           }, {
-            value: 'form',
-            label: 'Form',
-            children: [{
-              value: 'radio',
-              label: 'Radio'
-            }, {
-              value: 'checkbox',
-              label: 'Checkbox'
-            }, {
-              value: 'input',
-              label: 'Input'
-            }, {
-              value: 'input-number',
-              label: 'InputNumber'
-            }, {
-              value: 'select',
-              label: 'Select'
-            }, {
-              value: 'cascader',
-              label: 'Cascader'
-            }, {
-              value: 'switch',
-              label: 'Switch'
-            }, {
-              value: 'slider',
-              label: 'Slider'
-            }, {
-              value: 'time-picker',
-              label: 'TimePicker'
-            }, {
-              value: 'date-picker',
-              label: 'DatePicker'
-            }, {
-              value: 'datetime-picker',
-              label: 'DateTimePicker'
-            }, {
-              value: 'upload',
-              label: 'Upload'
-            }, {
-              value: 'rate',
-              label: 'Rate'
-            }, {
-              value: 'form',
-              label: 'Form'
-            }]
-          }, {
-            value: 'data',
-            label: 'Data',
-            children: [{
-              value: 'table',
-              label: 'Table'
-            }, {
-              value: 'tag',
-              label: 'Tag'
-            }, {
-              value: 'progress',
-              label: 'Progress'
-            }, {
-              value: 'tree',
-              label: 'Tree'
-            }, {
-              value: 'pagination',
-              label: 'Pagination'
-            }, {
-              value: 'badge',
-              label: 'Badge'
-            }]
-          }, {
-            value: 'notice',
-            label: 'Notice',
-            children: [{
-              value: 'alert',
-              label: 'Alert'
-            }, {
-              value: 'loading',
-              label: 'Loading'
-            }, {
-              value: 'message',
-              label: 'Message'
-            }, {
-              value: 'message-box',
-              label: 'MessageBox'
-            }, {
-              value: 'notification',
-              label: 'Notification'
-            }]
-          }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'menu',
-              label: 'NavMenu'
-            }, {
-              value: 'tabs',
-              label: 'Tabs'
-            }, {
-              value: 'breadcrumb',
-              label: 'Breadcrumb'
-            }, {
-              value: 'dropdown',
-              label: 'Dropdown'
-            }, {
-              value: 'steps',
-              label: 'Steps'
-            }]
-          }, {
-            value: 'others',
-            label: 'Others',
-            children: [{
-              value: 'dialog',
-              label: 'Dialog'
-            }, {
-              value: 'tooltip',
-              label: 'Tooltip'
-            }, {
-              value: 'popover',
-              label: 'Popover'
-            }, {
-              value: 'card',
-              label: 'Card'
-            }, {
-              value: 'carousel',
-              label: 'Carousel'
-            }, {
-              value: 'collapse',
-              label: 'Collapse'
-            }]
+            value: 19,
+            label: 'UK',
+            children: [
+              { value: 20, label: 'London' },
+              { value: 21, label: 'Birmingham' },
+              { value: 22, label: 'Manchester' }
+            ]
           }]
         }, {
-          value: 'resource',
-          label: 'Resource',
+          value: 23,
+          label: 'North America',
           children: [{
-            value: 'axure',
-            label: 'Axure Components'
+            value: 24,
+            label: 'US',
+            children: [
+              { value: 25, label: 'New York' },
+              { value: 26, label: 'Los Angeles' },
+              { value: 27, label: 'Washington' }
+            ]
           }, {
-            value: 'sketch',
-            label: 'Sketch Templates'
-          }, {
-            value: 'docs',
-            label: 'Design Documentation'
+            value: 28,
+            label: 'Canada',
+            children: [
+              { value: 29, label: 'Toronto' },
+              { value: 30, label: 'Montreal' },
+              { value: 31, label: 'Ottawa' }
+            ]
           }]
         }]
       };
