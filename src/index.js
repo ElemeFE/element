@@ -270,10 +270,7 @@ export default {
   Divider,
   Image,
   Calendar,
-<<<<<<< HEAD
   Backtop,
-  InfiniteScroll
-=======
+  InfiniteScroll,
   PageHeader
->>>>>>> PageHeader: add page-header component
 };
