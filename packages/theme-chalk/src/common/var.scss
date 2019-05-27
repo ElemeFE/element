@@ -905,6 +905,15 @@ $--timeline-node-size-normal: 12px !default;
 $--timeline-node-size-large: 14px !default;
 $--timeline-node-color: $--border-color-light !default;
 
+/* Backtop
+--------------------------*/
+/// color||Color|0
+$--backtop-background-color: $--color-white !default;
+/// color||Color|0
+$--backtop-font-color: $--color-primary !default;
+/// color||Color|0
+$--backtop-hover-background-color: $--border-color-extra-light !default;
+
 /* Link
 --------------------------*/
 /// fontSize||Font|1
