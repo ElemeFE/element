@@ -107,6 +107,9 @@ export default {
     },
     image: {
       error: 'FAILED'
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

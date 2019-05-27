@@ -5,6 +5,7 @@ If path of the page is simple, it is recommended to use PageHeader instead of th
 ### Basic
 
 :::demo
+```html
 <el-page-header @back="goBack" title="back" sub-title="detail">
 </el-page-header>
 
@@ -17,6 +18,7 @@ If path of the page is simple, it is recommended to use PageHeader instead of th
     }
   }
 </script>
+```
 :::
 
 ### Attributes

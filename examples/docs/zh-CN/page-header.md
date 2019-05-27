@@ -5,6 +5,7 @@
 ### 基础
 
 :::demo
+```html
 <el-page-header @back="goBack" title="返回" sub-title="详情页面">
 </el-page-header>
 
@@ -17,6 +18,7 @@
     }
   }
 </script>
+```
 :::
 
 ### Attributes
