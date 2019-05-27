@@ -306,7 +306,7 @@
       handleScroll(index) {
         const ele = this.$refs.indexMainImg;
         const rect = ele.getBoundingClientRect();
-        const eleHeight = ele.clientHeight + 70;
+        const eleHeight = ele.clientHeight + 55;
         let calHeight = (180 - rect.top) * 1.1;
         if (calHeight < 0) calHeight = 0;
         if (calHeight > eleHeight) calHeight = eleHeight;
