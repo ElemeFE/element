@@ -7,11 +7,11 @@ Used for marking and selection.
 :::demo Use the `type` attribute to define Tag's type. In addition, the `color` attribute can be used to set the background color of the Tag.
 
 ```html
-<el-tag>Tag One</el-tag>
-<el-tag type="success">Tag Two</el-tag>
-<el-tag type="info">Tag Three</el-tag>
-<el-tag type="warning">Tag Four</el-tag>
-<el-tag type="danger">Tag Five</el-tag>
+<el-tag>Tag 1</el-tag>
+<el-tag type="success">Tag 2</el-tag>
+<el-tag type="info">Tag 3</el-tag>
+<el-tag type="warning">Tag 4</el-tag>
+<el-tag type="danger">Tag 5</el-tag>
 ```
 :::
 
@@ -139,15 +139,62 @@ Besides default size, Tag component provides three additional sizes for you to c
 ```
 :::
 
+
+### Theme
+
+Tag provide three different themes: `dark`、`light` and `plain`
+
+:::demo Using `effect` to change, default is `light`
+```html
+<div class="tag-group">
+  <span class="tag-group__title">Dark</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="dark">
+    {{ item.label }}
+  </el-tag>
+</div>
+<div class="tag-group">
+  <span class="tag-group__title">Plain</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="plain">
+    {{ item.label }}
+  </el-tag>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        items: [
+          { type: '', label: 'Tag 1' },
+          { type: 'success', label: 'Tag 2' },
+          { type: 'info', label: 'Tag 3' },
+          { type: 'danger', label: 'Tag 4' },
+          { type: 'warning', label: 'Tag 5' }
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | theme | string | success/info/warning/danger | — |
+| type | component type | string | success/info/warning/danger | — |
 | closable | whether Tag can be removed | boolean | — | false |
 | disable-transitions | whether to disable animations | boolean | — | false |
 | hit | whether Tag has a highlighted border | boolean | — | false |
 | color | background color of the Tag | string | — | — |
 | size | tag size | string | medium / small / mini | — |
+| effect | component theme | string | dark / light / plain | light |
 
 
 ### Events
