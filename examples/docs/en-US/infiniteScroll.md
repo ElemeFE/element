@@ -41,8 +41,8 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
       infinite-scroll-disabled="disabled">
       <li v-for="i in count" class="list-item">{{ i }}</li>
     </ul>
-    <p v-if="loading">loading...</p>
-    <p v-if="noMore">Mo more</p>
+    <p v-if="loading">Loading...</p>
+    <p v-if="noMore">No more</p>
   </div>
 </template>
 
