@@ -21,11 +21,14 @@ export declare class ElProgress extends ElementUIComponent {
   status: ProgressStatus
 
   /** Background color of progress bar. Overrides `status` prop */
-  color: string
+  color: string | Function | Array<string | { color: string, percentage: number }>
 
   /** The canvas width of circle progress bar */
   width: number
 
   /** Whether to show percentage */
   showText: boolean
+
+  /** Template function of the content	*/
+  format(percentage: number): string
 }
