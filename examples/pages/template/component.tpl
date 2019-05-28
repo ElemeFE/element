@@ -141,8 +141,8 @@
     <el-backtop 
       v-if="showBackToTop"
       target=".page-component__scroll .el-scrollbar__wrap"
-      right="100"
-      bottom="150"
+      :right="100"
+      :bottom="150"
     ></el-backtop>
   </div>
   </el-scrollbar>
