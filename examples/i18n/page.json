@@ -14,6 +14,9 @@
         "9": "下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。",
         "10": "主题",
         "11": "在线主题编辑器，可视化定制和管理站点主题、组件样式",
+        "12": "主题定制功能上线",
+        "13": "点击编辑开始",
+        "14": "尝试您的新主题",
         "lang": "zh-CN",
         "titleSize": "34",
         "paraSize": "18"
@@ -117,6 +120,9 @@
         "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
         "10": "Theme",
         "11": "Online theme roller, visualize custom and manage site themes and component styles",
+        "12": "Theme customization is available!",
+        "13": "Click here",
+        "14": "Make your own theme",
         "lang": "en-US",
         "titleSize": "34",
         "paraSize": "18"
@@ -220,6 +226,9 @@
         "9": "Descarga los recursos de diseño relevantes para dar forma a un prototipo o borrador, aumentando la eficiencia del diseño.",
         "10": "Theme",
         "11": "Online theme roller, visualize custom and manage site themes and component styles",
+        "12": "Theme customization is available!",
+        "13": "Click here",
+        "14": "Make your own theme",
         "lang": "es",
         "titleSize": "34",
         "paraSize": "18"
@@ -323,6 +332,9 @@
         "9": "Téléchargez différents outils de prototypage ou de visualisation pour un design plus efficace.",
         "10": "Theme",
         "11": "Online theme roller, visualize custom and manage site themes and component styles",
+        "12": "Theme customization is available!",
+        "13": "Click here",
+        "14": "Make your own theme",
         "lang": "fr-FR",
         "titleSize": "34",
         "paraSize": "18"

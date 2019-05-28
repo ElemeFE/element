@@ -370,7 +370,7 @@
       <div class="intro-banner">
         <img src="~examples/assets/images/theme-intro.png" alt="">
         <div class="intro-text">
-          <p>主题定制功能上线</p>
+          <p><%= 12 ></p>
         </div>
       </div>
       <div class="mask"></div>
@@ -389,8 +389,8 @@
         <img src="~examples/assets/images/intro-theme-b.png" alt="">
           <div class="title">
             <div>
-              <p>点击编辑开始</p>
-              <p>尝试您的新主题</p>
+              <p><%= 13 ></p>
+              <p><%= 14 ></p>
             </div>
           </div>
       </div>
