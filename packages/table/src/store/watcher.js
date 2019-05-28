@@ -6,7 +6,6 @@ import expand from './expand';
 import current from './current';
 import tree from './tree';
 
-// import
 const sortData = (data, states) => {
   const sortingColumn = states.sortingColumn;
   if (!sortingColumn || typeof sortingColumn.sortable === 'string') {

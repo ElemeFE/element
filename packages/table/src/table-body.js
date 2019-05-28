@@ -344,12 +344,13 @@ export default {
               data.treeNode = {
                 indent: treeRowData.level * treeIndent,
                 level: treeRowData.level
-                // loaded: treeNode.loaded
               };
               if (typeof treeRowData.expanded === 'boolean') {
                 data.treeNode.expanded = treeRowData.expanded;
+                if (typeof treeRowData.loading === 'boolean') {
+                  data.treeNode.loading = treeRowData.loading;
+                }
               }
-              // console.log('data treeNode ', data.treeNode);
             }
             return (
               <td
@@ -408,6 +409,9 @@ export default {
             level: cur.level,
             display: true
           };
+          if (typeof cur.loading === 'boolean') {
+            treeRowData.loading = cur.loading;
+          }
         }
         const tmp = [this.rowRender(row, $index, treeRowData)];
         // 渲染嵌套数据

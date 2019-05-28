@@ -20,13 +20,13 @@ export default {
   computed: {
     // 嵌入型的数据，watch 无法是检测到变化 https://github.com/ElemeFE/element/issues/14998
     // TODO: 使用 computed 解决该问题，是否会造成性能问题？
-    // @return { id: { level, children, loaded? }}
+    // @return { id: { level, children } }
     normalizedData() {
       if (!this.states.rowKey) return {};
       const data = this.states.data || [];
       return this.normalize(data);
     },
-    // @return { id: { level, children, loaded? } }
+    // @return { id: { children } }
     // 针对懒加载的情形，不处理嵌套数据
     normalizedLazyNode() {
       const { rowKey, lazyTreeNodeMap, lazyColumnIndentifier } = this.states;
@@ -98,7 +98,9 @@ export default {
         const newValue = { ...nested[key] };
         newValue.expanded = getExpanded(oldValue, key);
         if (newValue.lazy) {
-          newValue.loaded = !!(oldValue && oldValue.loaded);
+          const { loaded = false, loading = false } = oldValue || {};
+          newValue.loaded = !!loaded;
+          newValue.loading = !!loading;
           rootLazyRowKeys.push(key);
         }
         newTreeData[key] = newValue;
@@ -116,8 +118,10 @@ export default {
             }
             newTreeData[key].children = lazyNodeChildren;
           } else {
+            const { loaded = false, loading = false } = oldValue || {};
             newTreeData[key] = {
-              loaded: !!(oldValue && oldValue.loaded),
+              loaded: !!loaded,
+              loading: !!loading,
               expanded: getExpanded(oldValue, key),
               children: lazyNodeChildren,
               level: ''
@@ -126,6 +130,7 @@ export default {
         });
       }
       this.states.treeData = newTreeData;
+      this.updateTableScrollY();
     },
 
     updateTreeExpandKeys(value) {
@@ -149,6 +154,7 @@ export default {
         if (oldExpanded !== expanded) {
           this.table.$emit('expand-change', row);
         }
+        this.updateTableScrollY();
       }
     },
 
@@ -168,10 +174,12 @@ export default {
       const { load } = this.table;
       const { lazyTreeNodeMap, treeData } = this.states;
       if (load && !treeData[key].loaded) {
+        treeData[key].loading = true;
         load(row, treeNode, (data) => {
           if (!Array.isArray(data)) {
             throw new Error('[ElTable] data must be an array');
           }
+          treeData[key].loading = false;
           treeData[key].loaded = true;
           treeData[key].expanded = true;
           if (data.length) {

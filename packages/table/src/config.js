@@ -11,7 +11,6 @@ export const cellStarts = {
     order: '',
     className: 'el-table-column--selection'
   },
-  // TODO: 考虑移除
   expand: {
     width: 48,
     minWidth: 48,
@@ -64,7 +63,6 @@ export const cellForced = {
     },
     sortable: false
   },
-  // TODO: 考虑移除
   expand: {
     renderHeader: function(h, { column }) {
       return column.label || '';
@@ -109,9 +107,14 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
     ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
   }
   if (typeof treeNode.expanded === 'boolean') {
-    ele.push(<div class={ ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : '']}
-      on-click={callback}>
-      <i class='el-icon el-icon-arrow-right'></i>
+    const expandClasses = ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : ''];
+    let iconClasses = ['el-icon-arrow-right'];
+    if (treeNode.loading) {
+      iconClasses = ['el-icon-loading'];
+    }
+    ele.push(<div class={ expandClasses }
+      on-click={ callback }>
+      <i class={ iconClasses }></i>
     </div>);
   } else {
     ele.push(<span class="el-table__placeholder"></span>);

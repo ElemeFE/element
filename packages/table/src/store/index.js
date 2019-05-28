@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import Wachter from './watcher';
+import Watcher from './watcher';
 import { arrayFind } from 'element-ui/src/utils/util';
 
-Wachter.prototype.mutations = {
+Watcher.prototype.mutations = {
   setData(states, data) {
     const dataInstanceChanged = states._data !== data;
     states._data = data;
@@ -24,7 +24,7 @@ Wachter.prototype.mutations = {
     }
     this.updateAllSelected();
 
-    this.modifiers.updateScrollY();
+    this.updateTableScrollY();
   },
 
   insertColumn(states, column, index, parent) {
@@ -94,7 +94,7 @@ Wachter.prototype.mutations = {
       });
     }
 
-    this.modifiers.updateScrollY();
+    this.updateTableScrollY();
   },
 
   filterChange(states, options) {
@@ -107,7 +107,7 @@ Wachter.prototype.mutations = {
       this.table.$emit('filter-change', newFilters);
     }
 
-    this.modifiers.updateScrollY();
+    this.updateTableScrollY();
   },
 
   toggleAllSelection() {
@@ -119,12 +119,10 @@ Wachter.prototype.mutations = {
     this.updateAllSelected();
   },
 
-  // throttle
   setHoverRow(states, row) {
     states.hoverRow = row;
   },
 
-  // throttle
   setCurrentRow(states, row) {
     const oldCurrentRow = states.currentRow;
     states.currentRow = row;
@@ -135,7 +133,7 @@ Wachter.prototype.mutations = {
   }
 };
 
-Wachter.prototype.commit = function(name, ...args) {
+Watcher.prototype.commit = function(name, ...args) {
   const mutations = this.mutations;
   if (mutations[name]) {
     mutations[name].apply(this, [this.states].concat(args));
@@ -144,12 +142,8 @@ Wachter.prototype.commit = function(name, ...args) {
   }
 };
 
-// 额外的 DOM 操作都放在 modifiers 中
-Wachter.prototype.modifiers = {
-  updateScrollY() {
-    console.log('this.id', this.id);
-    Vue.nextTick(this.table.updateScrollY);
-  }
+Watcher.prototype.updateTableScrollY = function() {
+  Vue.nextTick(this.table.updateScrollY);
 };
 
-export default Wachter;
+export default Watcher;
