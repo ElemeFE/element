@@ -91,9 +91,9 @@ describe('Table', () => {
     });
 
     it('height as string', done => {
-      const vm = createTable('height="100pt"');
+      const vm = createTable('height="100px"');
       setTimeout(_ => {
-        expect(vm.$el.style.height).to.equal('100pt');
+        expect(vm.$el.style.height).to.equal('100px');
         destroyVM(vm);
         done();
       }, DELAY);
