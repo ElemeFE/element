@@ -18,6 +18,8 @@
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
+      @compositionstart="handleCompositionStart"
+      @compositionend="handleCompositionEnd"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -138,7 +140,8 @@
         suggestions: [],
         loading: false,
         highlightedIndex: -1,
-        suggestionDisabled: false
+        suggestionDisabled: false,
+        isComposing: false
       };
     },
     computed: {
@@ -214,16 +217,24 @@
         this.activated = false;
       },
       handleKeyEnter(e) {
-        if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
-          e.preventDefault();
-          this.select(this.suggestions[this.highlightedIndex]);
-        } else if (this.selectWhenUnmatched) {
-          this.$emit('select', {value: this.value});
-          this.$nextTick(_ => {
-            this.suggestions = [];
-            this.highlightedIndex = -1;
-          });
+        if (!this.isComposing) {
+          if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
+            e.preventDefault();
+            this.select(this.suggestions[this.highlightedIndex]);
+          } else if (this.selectWhenUnmatched) {
+            this.$emit('select', {value: this.value});
+            this.$nextTick(_ => {
+              this.suggestions = [];
+              this.highlightedIndex = -1;
+            });
+          }
         }
+      },
+      handleCompositionStart() {
+        this.isComposing = true;
+      },
+      handleCompositionEnd() {
+        this.isComposing = false;
       },
       select(item) {
         this.$emit('input', item[this.valueKey]);

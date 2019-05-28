@@ -333,11 +333,13 @@
         this.focused = true;
         this.$emit('focus', event);
       },
-      handleCompositionStart() {
+      handleCompositionStart(event) {
         this.isComposing = true;
+        this.$emit('compositionstart', event);
       },
       handleCompositionEnd(event) {
         this.isComposing = false;
+        this.$emit('compositionend', event);
         this.handleInput(event);
       },
       handleInput(event) {
