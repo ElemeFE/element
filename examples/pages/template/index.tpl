@@ -206,6 +206,81 @@
       }
     }
   }
+  .theme-intro-b {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    .intro-banner {
+      position: absolute
+    }
+    img {
+      width: 300px;
+    }
+    .title {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #FFF;
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        padding: 0;
+        margin: 10px 0;
+      }
+    }
+  }
+  .theme-intro-a {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    .mask{
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: #000;
+      opacity: .5;
+    }
+    .intro-banner {
+      top: 50%;
+      left: 50%;
+      position: fixed;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      text-align: center;
+      z-index: 100;
+      img {
+        width: 100%;
+      }
+      .intro-text {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        p {
+          padding: 0;
+          margin: 0;
+          font-size: 48px;
+          font-weight: bold;
+          color: #FFF;
+        }
+      }
+    }
+  }
 </style>
 <template>
   <div>
@@ -291,10 +366,41 @@
         </li>
       </ul>
     </div>
+    <div class="theme-intro-a" v-if="showIntroA" @click="hideIntroA">
+      <div class="intro-banner">
+        <img src="~examples/assets/images/theme-intro.png" alt="">
+        <div class="intro-text">
+          <p>主题定制功能上线</p>
+        </div>
+      </div>
+      <div class="mask"></div>
+    </div>
+    <div 
+      class="theme-intro-b"
+      @click="hideIntroB"
+      v-if="showIntroB"
+    >
+      <div class="intro-banner"
+      :style="{
+        left: introBX + 'px',
+        top: introBY + 'px'
+      }"
+      >
+        <img src="~examples/assets/images/intro-theme-b.png" alt="">
+          <div class="title">
+            <div>
+              <p>点击编辑开始</p>
+              <p>尝试您的新主题</p>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
   import throttle from 'throttle-debounce/throttle';
+  import { addClass, removeClass } from 'element-ui/src/utils/dom';
+  
   export default {
     created() {
       this.throttledHandleScroll = throttle(10, true, index => {
@@ -310,12 +416,25 @@
         if (calHeight < 0) calHeight = 0;
         if (calHeight > eleHeight) calHeight = eleHeight;
         this.mainImgOffset = calHeight;
+      },
+      hideIntroB() {
+        removeClass(document.body, 'el-loading-parent--hidden');
+        localStorage.setItem('KNOW_THEME', 'true');
+        this.showIntroB = false
+      },
+      hideIntroA() {
+        this.showIntroA = false
+        this.showIntroB = true
       }
     },
     data() {
       return {
         lang: this.$route.meta.lang,
-        mainImgOffset: 0
+        mainImgOffset: 0,
+        showIntroA: false,
+        showIntroB: false,
+        introBY: 0,
+        introBX: 0
       };
     },
     beforeDestroy() {
@@ -323,6 +442,12 @@
     },
     mounted() {
       window.addEventListener('scroll', this.throttledHandleScroll);
+      if (localStorage.getItem('KNOW_THEME')) return
+      const themeTab = document.querySelector('.nav-item-theme')
+      this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2)
+      this.introBY = themeTab.offsetTop + 40
+      this.showIntroA = true
+      addClass(document.body, 'el-loading-parent--hidden');
     }
   };
 </script>

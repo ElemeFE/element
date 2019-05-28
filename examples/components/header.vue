@@ -302,7 +302,7 @@
             </router-link>
           </li>
           <li 
-            class="nav-item"
+            class="nav-item nav-item-theme"
           >
             <router-link
               active-class="active"
