@@ -242,6 +242,11 @@
           prop.o[prop.k] = this.initialValue;
         }
 
+        // reset validateDisabled after onFieldChange triggered
+        this.$nextTick(() => {
+          this.validateDisabled = false;
+        });
+
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
