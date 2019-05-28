@@ -147,9 +147,8 @@ Wachter.prototype.commit = function(name, ...args) {
 // 额外的 DOM 操作都放在 modifiers 中
 Wachter.prototype.modifiers = {
   updateScrollY() {
-    Vue.nextTick(() => {
-      this.table.updateScrollY();
-    });
+    console.log('this.id', this.id);
+    Vue.nextTick(this.table.updateScrollY);
   }
 };
 

@@ -158,7 +158,7 @@ export function parseWidth(width) {
     }
   }
   return width;
-};
+}
 
 export function parseMinWidth(minWidth) {
   if (typeof minWidth !== 'undefined') {
@@ -169,6 +169,19 @@ export function parseMinWidth(minWidth) {
   }
   return minWidth;
 };
+
+export function parseHeight(height) {
+  if (typeof height === 'number') {
+    return height;
+  }
+  if (typeof height === 'string') {
+    if (/^\d+(?:px)?/.test(height)) {
+      return parseInt(height, 10);
+    }
+    console.warn('[Element Warn][ElTable]invalid height and it will be ignored.');
+  }
+  return null;
+}
 
 // https://github.com/reduxjs/redux/blob/master/src/compose.js
 export function compose(...funcs) {

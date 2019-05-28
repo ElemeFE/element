@@ -224,6 +224,7 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
+  import { parseHeight } from './util';
 
   let tableIdSeed = 1;
 
@@ -496,14 +497,18 @@
       },
 
       bodyHeight() {
+        const { headerHeight = 0, bodyHeight, footerHeight = 0} = this.layout;
         if (this.height) {
           return {
-            height: this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
+            height: bodyHeight ? bodyHeight + 'px' : ''
           };
         } else if (this.maxHeight) {
-          return {
-            'max-height': this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
-          };
+          const maxHeight = parseHeight(this.maxHeight);
+          if (maxHeight) {
+            return {
+              'max-height': (maxHeight - footerHeight - (this.showHeader ? headerHeight : 0)) + 'px'
+            };
+          }
         }
         return {};
       },
@@ -514,19 +519,18 @@
             height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight + 'px' : ''
           };
         } else if (this.maxHeight) {
-          let maxHeight = this.layout.scrollX ? this.maxHeight - this.layout.gutterWidth : this.maxHeight;
-
-          if (this.showHeader) {
-            maxHeight -= this.layout.headerHeight;
+          let maxHeight = parseHeight(this.maxHeight);
+          if (maxHeight) {
+            maxHeight = this.layout.scrollX ? maxHeight - this.layout.gutterWidth : maxHeight;
+            if (this.showHeader) {
+              maxHeight -= this.layout.headerHeight;
+            }
+            maxHeight -= this.layout.footerHeight;
+            return {
+              'max-height': maxHeight + 'px'
+            };
           }
-
-          maxHeight -= this.layout.footerHeight;
-
-          return {
-            'max-height': maxHeight + 'px'
-          };
         }
-
         return {};
       },
 
@@ -648,7 +652,6 @@
         childrenColumnName: children
       });
       const layout = new TableLayout({
-        // store,
         store: this.store,
         table: this,
         fit: this.fit,
