@@ -420,11 +420,11 @@
       hideIntroB() {
         removeClass(document.body, 'el-loading-parent--hidden');
         localStorage.setItem('KNOW_THEME', 'true');
-        this.showIntroB = false
+        this.showIntroB = false;
       },
       hideIntroA() {
-        this.showIntroA = false
-        this.showIntroB = true
+        this.showIntroA = false;
+        this.showIntroB = true;
       }
     },
     data() {
@@ -442,11 +442,11 @@
     },
     mounted() {
       window.addEventListener('scroll', this.throttledHandleScroll);
-      if (localStorage.getItem('KNOW_THEME')) return
-      const themeTab = document.querySelector('.nav-item-theme')
-      this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2)
-      this.introBY = themeTab.offsetTop + 40
-      this.showIntroA = true
+      if (localStorage.getItem('KNOW_THEME')) return;
+      const themeTab = document.querySelector('.nav-item-theme');
+      this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2);
+      this.introBY = themeTab.offsetTop + 40;
+      this.showIntroA = true;
       addClass(document.body, 'el-loading-parent--hidden');
     }
   };
