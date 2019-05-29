@@ -107,6 +107,9 @@ export default {
     },
     image: {
       error: '加載失敗'
+    },
+    pageHeader: {
+      title: '返回'
     }
   }
 };
