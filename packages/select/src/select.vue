@@ -466,10 +466,12 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          const length = this.$refs.input.value.length * 15 + 20;
-          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
-          this.managePlaceholder();
-          this.resetInputHeight();
+          this.$nextTick(() => {
+            const length = this.$refs.input.value.length * 15 + 20;
+            this.inputLength = this.collapseTags ? Math.min(50, length) : length;
+            this.managePlaceholder();
+            this.resetInputHeight();
+          });
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
