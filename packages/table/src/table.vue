@@ -648,7 +648,7 @@
         // TreeTable 的相关配置
         indent: this.indent,
         lazy: this.lazy,
-        lazyColumnIndentifier: hasChildren,
+        lazyColumnIdentifier: hasChildren,
         childrenColumnName: children
       });
       const layout = new TableLayout({

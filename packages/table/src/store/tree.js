@@ -11,7 +11,7 @@ export default {
         indent: 16,
         lazy: false,
         lazyTreeNodeMap: {},
-        lazyColumnIndentifier: 'hasChildren',
+        lazyColumnIdentifier: 'hasChildren',
         childrenColumnName: 'children'
       }
     };
@@ -29,7 +29,7 @@ export default {
     // @return { id: { children } }
     // 针对懒加载的情形，不处理嵌套数据
     normalizedLazyNode() {
-      const { rowKey, lazyTreeNodeMap, lazyColumnIndentifier } = this.states;
+      const { rowKey, lazyTreeNodeMap, lazyColumnIdentifier } = this.states;
       const keys = Object.keys(lazyTreeNodeMap);
       const res = {};
       if (!keys.length) return res;
@@ -39,7 +39,7 @@ export default {
           lazyTreeNodeMap[key].forEach(row => {
             const currentRowKey = getRowIdentity(row, rowKey);
             item.children.push(currentRowKey);
-            if (row[lazyColumnIndentifier] && !res[currentRowKey]) {
+            if (row[lazyColumnIdentifier] && !res[currentRowKey]) {
               res[currentRowKey] = { children: [] };
             }
           });
@@ -59,7 +59,7 @@ export default {
 
   methods: {
     normalize(data) {
-      const { childrenColumnName, lazyColumnIndentifier, rowKey, lazy } = this.states;
+      const { childrenColumnName, lazyColumnIdentifier, rowKey, lazy } = this.states;
       const res = {};
       walkTreeNode(data, (parent, children, level) => {
         const parentId = getRowIdentity(parent, rowKey);
@@ -76,7 +76,7 @@ export default {
             level
           };
         }
-      }, childrenColumnName, lazyColumnIndentifier);
+      }, childrenColumnName, lazyColumnIdentifier);
       return res;
     },
 
@@ -152,7 +152,7 @@ export default {
         expanded = typeof expanded === 'undefined' ? !data.expanded : expanded;
         treeData[id].expanded = expanded;
         if (oldExpanded !== expanded) {
-          this.table.$emit('expand-change', row);
+          this.table.$emit('expand-change', row, expanded);
         }
         this.updateTableScrollY();
       }
@@ -163,7 +163,7 @@ export default {
       const { lazy, treeData, rowKey } = this.states;
       const id = getRowIdentity(row, rowKey);
       const data = treeData[id];
-      if (lazy && data && !data.loaded) {
+      if (lazy && data && ('loaded' in data) && !data.loaded) {
         this.loadData(row, id, data);
       } else {
         this.toggleTreeExpansion(row);
@@ -185,6 +185,7 @@ export default {
           if (data.length) {
             this.$set(lazyTreeNodeMap, key, data);
           }
+          this.table.$emit('expand-change', row, true);
         });
       }
     }

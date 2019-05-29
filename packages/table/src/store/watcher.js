@@ -381,7 +381,7 @@ export default Vue.extend({
       if (hasExpandColumn) {
         this.toggleRowExpansion(row, expanded);
       } else {
-        this.toggleTreeRowExpansion(row, expanded);
+        this.toggleTreeExpansion(row, expanded);
       }
     }
   }
