@@ -101,7 +101,7 @@ export default class Node {
 
     this.children.forEach(child => {
       if (child) {
-        // 自底向上
+        // bottom up
         child.broadcast(event, ...args);
         child[handlerName] && child[handlerName](...args);
       }
@@ -156,7 +156,7 @@ export default class Node {
       if (this.config.checkStrictly) {
         this.checked = checked;
       } else {
-        // 自底向上 为了统一半选状态的计算方式
+        // bottom up to unify the calculation of the indeterminate state
         this.broadcast('check', checked);
         this.setCheckState(checked);
         this.emit('check');

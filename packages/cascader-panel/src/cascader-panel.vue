@@ -32,8 +32,8 @@ const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {
   expandTrigger: 'click', // or hover
   multiple: false,
-  checkStrictly: false, // 是否严格的遵循父子不互相关联
-  emitPath: true, // 是否抛出由该节点所在的各级菜单的值所组成的数组
+  checkStrictly: false, // whether all nodes can be selected
+  emitPath: true, // wether to emit an array of all levels value in which node is located
   lazy: false,
   lazyLoad: noop,
   value: 'value',
