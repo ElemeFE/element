@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Сәйкес деректер жоқ',
       loading: 'Жүктелуде',
-      placeholder: 'Таңдаңыз'
+      placeholder: 'Таңдаңыз',
+      noData: 'Деректер жоқ'
     },
     pagination: {
       goto: 'Бару',

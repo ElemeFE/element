@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Ni ustreznih podatkov',
       loading: 'Nalaganje',
-      placeholder: 'Izberi'
+      placeholder: 'Izberi',
+      noData: 'Ni podatkov'
     },
     pagination: {
       goto: 'Pojdi na',

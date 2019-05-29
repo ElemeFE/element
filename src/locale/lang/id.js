@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Tidak ada data yg cocok',
       loading: 'Memuat',
-      placeholder: 'Pilih'
+      placeholder: 'Pilih',
+      noData: 'Tidak ada data'
     },
     pagination: {
       goto: 'Pergi ke',

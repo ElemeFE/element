@@ -69,7 +69,8 @@ export default {
     cascader: {
       noMatch: 'Žiadna zhoda',
       loading: 'Načítavanie',
-      placeholder: 'Vybrať'
+      placeholder: 'Vybrať',
+      noData: 'Žiadne dáta'
     },
     pagination: {
       goto: 'Choď na',

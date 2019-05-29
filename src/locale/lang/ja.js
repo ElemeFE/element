@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'データなし',
       loading: 'ロード中',
-      placeholder: '選択してください'
+      placeholder: '選択してください',
+      noData: 'データなし'
     },
     pagination: {
       goto: '',

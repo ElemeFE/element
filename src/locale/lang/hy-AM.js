@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Համապատասխան տուեալներ չկան',
       loading: 'Բեռնում',
-      placeholder: 'Ընտրել'
+      placeholder: 'Ընտրել',
+      noData: 'Տվյալներ չկան'
     },
     pagination: {
       goto: 'Անցնել',

@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'គ្មានទិន្ន័យដូច',
       loading: 'កំពុងផ្ទុក',
-      placeholder: 'ជ្រើសរើស'
+      placeholder: 'ជ្រើសរើស',
+      noData: 'គ្មានទិន្ន័យ'
     },
     pagination: {
       goto: 'ទៅកាន់',

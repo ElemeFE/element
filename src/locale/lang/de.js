@@ -69,7 +69,8 @@ export default {
     cascader: {
       noMatch: 'Nichts gefunden.',
       loading: 'Lädt.',
-      placeholder: 'Daten wählen'
+      placeholder: 'Daten wählen',
+      noData: 'Keine Daten'
     },
     pagination: {
       goto: 'Gehe zu',

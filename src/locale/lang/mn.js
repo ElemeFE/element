@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Тохирох өгөгдөл байхгүй',
       loading: 'Ачаалж байна',
-      placeholder: 'Сонгох'
+      placeholder: 'Сонгох',
+      noData: 'Өгөгдөл байхгүй'
     },
     pagination: {
       goto: 'Очих',
