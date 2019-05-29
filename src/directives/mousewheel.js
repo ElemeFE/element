@@ -7,7 +7,7 @@ const mousewheel = function(element, callback) {
     element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', function(event) {
       const normalized = normalizeWheel(event);
       callback && callback.apply(this, [event, normalized]);
-    });
+    }, { passive: true });
   }
 };
 

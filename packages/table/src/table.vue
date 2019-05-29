@@ -214,7 +214,7 @@
 
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
-  import debounce from 'throttle-debounce/debounce';
+  import { debounce, throttle } from 'throttle-debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Mousewheel from 'element-ui/src/directives/mousewheel';
   import Locale from 'element-ui/src/mixins/locale';
@@ -409,29 +409,35 @@
         }
       },
 
+      // TODO 性能优化
+      syncPostion: throttle(20, function() {
+        const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
+        const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
+        if (headerWrapper) headerWrapper.scrollLeft = scrollLeft;
+        if (footerWrapper) footerWrapper.scrollLeft = scrollLeft;
+        if (fixedBodyWrapper) fixedBodyWrapper.scrollTop = scrollTop;
+        if (rightFixedBodyWrapper) rightFixedBodyWrapper.scrollTop = scrollTop;
+        const maxScrollLeftPosition = scrollWidth - offsetWidth - 1;
+        if (scrollLeft >= maxScrollLeftPosition) {
+          this.scrollPosition = 'right';
+        } else if (scrollLeft === 0) {
+          this.scrollPosition = 'left';
+        } else {
+          this.scrollPosition = 'middle';
+        }
+      }),
+
       bindEvents() {
-        const { headerWrapper, footerWrapper } = this.$refs;
-        const refs = this.$refs;
-        let self = this;
-
-        this.bodyWrapper.addEventListener('scroll', function() {
-          if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
-          if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
-          if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
-          if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
-          const maxScrollLeftPosition = this.scrollWidth - this.offsetWidth - 1;
-          const scrollLeft = this.scrollLeft;
-          if (scrollLeft >= maxScrollLeftPosition) {
-            self.scrollPosition = 'right';
-          } else if (scrollLeft === 0) {
-            self.scrollPosition = 'left';
-          } else {
-            self.scrollPosition = 'middle';
-          }
-        });
-
+        this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
+        }
+      },
+
+      unbindEvents() {
+        this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
+        if (this.fit) {
+          removeResizeListener(this.$el, this.resizeListener);
         }
       },
 
@@ -636,7 +642,7 @@
     },
 
     destroyed() {
-      if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener);
+      this.unbindEvents();
     },
 
     data() {

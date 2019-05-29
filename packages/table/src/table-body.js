@@ -81,15 +81,17 @@ export default {
     // update DOM manually. see https://github.com/ElemeFE/element/pull/13954/files#diff-9b450c00d0a9dec0ffad5a3176972e40
     'store.states.hoverRow'(newVal, oldVal) {
       if (!this.store.states.isComplex) return;
-      const rows = this.$el.querySelectorAll('.el-table__row');
-      const oldRow = rows[oldVal];
-      const newRow = rows[newVal];
-      if (oldRow) {
-        removeClass(oldRow, 'hover-row');
-      }
-      if (newRow) {
-        addClass(newRow, 'hover-row');
-      }
+      requestAnimationFrame(() => {
+        const rows = this.$el.querySelectorAll('.el-table__row');
+        const oldRow = rows[oldVal];
+        const newRow = rows[newVal];
+        if (oldRow) {
+          removeClass(oldRow, 'hover-row');
+        }
+        if (newRow) {
+          addClass(newRow, 'hover-row');
+        }
+      });
     }
   },
 
@@ -272,13 +274,13 @@ export default {
       this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
-    handleMouseEnter(index) {
+    handleMouseEnter: debounce(30, function(index) {
       this.store.commit('setHoverRow', index);
-    },
+    }),
 
-    handleMouseLeave() {
+    handleMouseLeave: debounce(30, function() {
       this.store.commit('setHoverRow', null);
-    },
+    }),
 
     handleContextMenu(event, row) {
       this.handleEvent(event, row, 'contextmenu');
