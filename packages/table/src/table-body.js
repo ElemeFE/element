@@ -381,21 +381,19 @@ export default {
       const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
       if (this.hasExpandColumn && isRowExpanded(row)) {
         const renderExpanded = this.table.renderExpanded;
-        // 因为展开行是成倍增加的，把 index 的数量减半
-        $index = $index / 2;
         const tr = this.rowRender(row, $index);
         if (!renderExpanded) {
           console.error('[Element Error]renderExpanded is required.');
           return tr;
         }
-        return [
+        // 使用二维数组，避免修改 $index
+        return [[
           tr,
-          <tr key={'expanded-row-' + tr.key}>
+          <tr key={'expanded-row__' + tr.key}>
             <td colspan={ this.columnsCount } class="el-table__expanded-cell">
               { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
             </td>
-          </tr>
-        ];
+          </tr>]];
       } else if (Object.keys(treeData).length) {
         assertRowKey();
         // TreeTable 时，rowKey 必须由用户设定，不使用 getKeyOfRow 计算
