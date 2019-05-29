@@ -23,7 +23,6 @@
         this.$emit('close', event);
       },
       handleClick(event) {
-        event.stopPropagation();
         this.$emit('click', event);
       }
     },
