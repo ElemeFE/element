@@ -1250,7 +1250,7 @@ Dynamic load its child nodes when checked a node.
 
 Search and select options with a keyword.
 
-:::demo Adding `filterable` to `el-cascader` enables filtering.
+:::demo Adding `filterable` to `el-cascader` enables filtering. Cascader will match nodes whose label or parent's label (according to `show-all-levels`) includes input keyword. Of course, you can customize search logic by `filter-method` which accepts a function, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits.
 ```html
 <div class="block">
   <span class="demonstration">Filterable (Single selection)</span>
@@ -1919,8 +1919,9 @@ You can customize the content of cascader node.
 | clearable | whether selected value can be cleared | boolean | — | false |
 | show-all-levels | whether to display all levels of the selected value in the input | boolean | — | true |
 | collapse-tags | whether to collapse tags in multiple selection mode | boolean | - | false |
-| separator | option label separator | string | — | 斜杠' / ' |
+| separator | option label separator | string | — | ' / ' |
 | filterable | whether the options can be searched | boolean | — | — |
+| filter-method | customize search logic, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits. | function | - | - |
 | debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 | popper-class | custom class name for Cascader's dropdown   | string | —  | — |

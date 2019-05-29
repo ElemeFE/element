@@ -1229,7 +1229,7 @@
 
 可以快捷地搜索选项并选择。
 
-:::demo 将`filterable`赋值为`true`即可打开搜索功能。
+:::demo 将`filterable`赋值为`true`即可打开搜索功能，默认会匹配节点的`label`或所有父节点的`label`(由`show-all-levels`决定)中包含输入值的选项。你也可以用`filter-method`自定义搜索逻辑，接受一个函数，第一个参数是节点`node`，第二个参数是搜索关键词`keyword`，通过返回布尔值表示是否命中。
 ```html
 <div class="block">
   <span class="demonstration">单选可搜索</span>
@@ -1900,6 +1900,7 @@
 | collapse-tags | 多选模式下是否折叠Tag | boolean | - | false |
 | separator | 选项分隔符 | string | — | 斜杠' / ' |
 | filterable | 是否可搜索选项 | boolean | — | — |
+| filter-method | 自定义搜索逻辑，第一个参数是节点`node`，第二个参数是搜索关键词`keyword`，通过返回布尔值表示是否命中 | function | - | - |
 | debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | before-filter | 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选 | function(value) | — | — |
 | popper-class | 自定义浮层类名   | string | —  | — |

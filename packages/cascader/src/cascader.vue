@@ -65,7 +65,7 @@
         @keydown.delete="handleDelete">
     </div>
 
-    <transition name="el-zoom-in-top">
+    <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
       <div
         v-show="dropDownVisible"
         ref="popper"
@@ -124,7 +124,7 @@ import ElCascaderPanel from 'element-ui/packages/cascader-panel';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
 import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
-import { isUndefined } from 'element-ui/src/utils/types';
+import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
@@ -207,6 +207,7 @@ export default {
     disabled: Boolean,
     clearable: Boolean,
     filterable: Boolean,
+    filterMethod: Function,
     separator: {
       type: String,
       default: ' / '
@@ -394,14 +395,14 @@ export default {
             this.updatePopper();
             this.panel.scrollIntoView();
           });
-        } else {
-          // reset filter state
-          this.filtering = false;
-          this.inputValue = this.presentText;
         }
         input.$refs.input.setAttribute('aria-expanded', visible);
         this.$emit('visible-change', visible);
       }
+    },
+    handleDropdownLeave() {
+      this.filtering = false;
+      this.inputValue = this.presentText;
     },
     handleKeyDown(event) {
       switch (event.keyCode) {
@@ -523,15 +524,17 @@ export default {
       this.presentTags = tags;
     },
     getSuggestions() {
+      let { filterMethod } = this;
+
+      if (!isFunction(filterMethod)) {
+        filterMethod = (node, keyword) => node.text.includes(keyword);
+      }
+
       const suggestions = this.panel.getFlattedNodes(this.leafOnly)
         .filter(node => {
           if (node.isDisabled) return false;
-
-          const text = node.getText(this.showAllLevels, this.separator) || '';
-          const hit = text.includes(this.inputValue);
-          hit && (node.text = text);
-
-          return hit;
+          node.text = node.getText(this.showAllLevels, this.separator) || '';
+          return filterMethod(node, this.inputValue);
         });
 
       if (this.multiple) {

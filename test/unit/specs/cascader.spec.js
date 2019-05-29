@@ -368,4 +368,41 @@ describe('Cascader', () => {
     await waitImmediate();
     expect(vm.value).to.deep.equal(selectedValue);
   });
+
+  it('filter method', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :filter-method="filterMethod"
+          filterable></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options
+        };
+      },
+      methods: {
+        filterMethod(node, keyword) {
+          const { text, path } = node;
+          return text.includes(keyword) || path.includes(keyword);
+        }
+      }
+    }, true);
+    const el = vm.$el;
+    const { body } = document;
+    const input = el.querySelector('input');
+    el.click();
+    await waitImmediate();
+    input.value = 'Zhejiang';
+    triggerEvent(input, 'input');
+    await wait(300);
+    expect(body.querySelectorAll('.el-cascader__suggestion-item').length).to.equal(3);
+    input.value = 'xihu';
+    triggerEvent(input, 'input');
+    await wait(300);
+    expect(body.querySelector('.el-cascader__suggestion-item').textContent).to.equal('Zhejiang / Hangzhou / West Lake');
+  });
 });

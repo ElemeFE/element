@@ -75,13 +75,10 @@ import Link from '../packages/link/index.js';
 import Divider from '../packages/divider/index.js';
 import Image from '../packages/image/index.js';
 import Calendar from '../packages/calendar/index.js';
-<<<<<<< HEAD
 import Backtop from '../packages/backtop/index.js';
 import InfiniteScroll from '../packages/infiniteScroll/index.js';
 import PageHeader from '../packages/page-header/index.js';
-=======
 import CascaderPanel from '../packages/cascader-panel/index.js';
->>>>>>> feat(Cascader): major functions done.
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -275,11 +272,8 @@ export default {
   Divider,
   Image,
   Calendar,
-<<<<<<< HEAD
   Backtop,
   InfiniteScroll,
-  PageHeader
-=======
+  PageHeader,
   CascaderPanel
->>>>>>> feat(Cascader): major functions done.
 };
