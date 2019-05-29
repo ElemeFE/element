@@ -1921,7 +1921,7 @@ You can customize the content of cascader node.
 | collapse-tags | whether to collapse tags in multiple selection mode | boolean | - | false |
 | separator | option label separator | string | — | ' / ' |
 | filterable | whether the options can be searched | boolean | — | — |
-| filter-method | customize search logic, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits. | function | - | - |
+| filter-method | customize search logic, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits. | function(node, keyword) | - | - |
 | debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 | popper-class | custom class name for Cascader's dropdown   | string | —  | — |
