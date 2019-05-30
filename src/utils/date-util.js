@@ -276,14 +276,14 @@ export const nextYear = function(date, amount = 1) {
 
 export const extractDateFormat = function(format) {
   return format
-    .replace(/\W?m{1,2}|\W?ZZ/g, '')
-    .replace(/\W?h{1,2}|\W?s{1,3}|\W?a/gi, '')
+    .replace(/\W?m{1,2}\W?|\W?ZZ/g, '')
+    .replace(/\W?h{1,2}\W?|\W?s{1,3}\W?|\W?a/gi, '')
     .trim();
 };
 
 export const extractTimeFormat = function(format) {
   return format
-    .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
+    .replace(/\W?D{1,2}\W?|\W?Do|\W?d{1,4}\W?|\W?M{1,4}\W?|\W?y{2,4}\W?/g, '')
     .trim();
 };
 
