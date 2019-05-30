@@ -83,14 +83,20 @@ Watcher.prototype.mutations = {
   },
 
   changeSortCondition(states, options) {
+    // 修复 pr https://github.com/ElemeFE/element/pull/15012 导致的 bug
+    const { sortingColumn: column, sortProp: prop, sortOrder: order } = states;
+    if (order === null) {
+      states.sortingColumn = null;
+      states.sortProp = null;
+    }
     const ingore = { filter: true };
     this.execQuery(ingore);
 
     if (!options || !options.silent) {
       this.table.$emit('sort-change', {
-        column: this.states.sortingColumn,
-        prop: this.states.sortProp,
-        order: this.states.sortOrder
+        column,
+        prop,
+        order
       });
     }
 
