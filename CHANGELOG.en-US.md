@@ -7,11 +7,11 @@
 #### New features
 
 - Backtop
-  - Add backtop component (#15541 by @iamkun)"
+  - Add Backtop component (#15541 by @iamkun)
 - PageHeader
-  - Add page-header component (#15714 by @ziyoung )
+  - Add PageHeader component (#15714 by @ziyoung)
 - InfiniteScroll
-  - Add infiniteScroll directive (#15567 by @iamkun) 
+  - Add InfiniteScroll directive (#15567 by @iamkun) 
 - Cascader
   - Add multiple mode (#15611 by @SimonaliaChen)
 - Message
@@ -27,7 +27,7 @@
 - Theme
   - Add popup background (#15412 by @iamkun)  
 - Chore
-  - update new 2.9.0 index page (#15682 by @iamkun)
+  - Update new 2.9.0 index page (#15682 by @iamkun)
 
 #### Bug fixes
 
@@ -64,9 +64,6 @@
   - Fix issue 14808 (#14809 by @OverTree)
 - Form
   - Fix resetFields issue (15181 by @luckyCao)
-- Docs
-  - Fix image attribute type and default value (#15423 by @haoranyu)
-  - Fix form doc bug (#15228 by @SHERlocked93)
 - Chore
   - Upgrade dependencies and fix demo bug (#15324 by ziyoung)
 - Type
@@ -82,6 +79,8 @@
   - Update make new component logic (by @iamkun)
 - Docs
   - Rename variable in docs (#15185 by @liupl)
+  - Fix image attribute type and default value (#15423 by @haoranyu)
+  - Fix form doc bug (#15228 by @SHERlocked93)
  
 ### 2.8.2
 
