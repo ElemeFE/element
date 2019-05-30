@@ -1,5 +1,26 @@
 ## 更新日志
 
+### 2.9.1
+
+*2019-05-30*
+
+#### 新特性
+
+- Table
+  - Tree Table 支持 tree-props，default-expand-all，expand-row-keys 属性, toggle-row-expansion 方法，expand-change 事件 (#15709 by @ziyoung)
+
+#### Bug 修复
+
+- Table
+  - 修复了一些问题 (#15709 by @ziyoung)
+- Theme
+  - 更新接口域名 (#15784 by @iamkun)
+
+#### 优化
+
+- Chore
+  - 更新 InfiniteScroll 组件定义文件 (#15794 by @iamkun)
+
 ### 2.9.0
 
 *2019-05-30*

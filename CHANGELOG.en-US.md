@@ -1,5 +1,26 @@
 ## Changelog
 
+## 2.9.1
+
+*2019-05-30*
+
+#### New features
+
+- Table
+  - default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event are supported in Tree Table (#15709 by @ziyoung)
+
+#### Bug fixes
+
+- Table
+  - Fix some bugs (#15709 by @ziyoung)
+- Theme
+  - Update api host (#15784 by @iamkun)
+
+#### Optimization
+
+- Chore
+  - Update InfiniteScroll type (#15794 by @iamkun)
+
 ### 2.9.0
 
 *2019-05-30*
