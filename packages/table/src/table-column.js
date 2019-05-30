@@ -274,7 +274,9 @@ export default {
       isColumnGroup: false,
       filterOpened: false,
       // sort 相关属性
-      sortable: sortable
+      sortable: sortable,
+      // index 列
+      index: this.index
     };
 
     const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'resizable', 'formatter', 'fixed', 'resizable'];
