@@ -13,7 +13,7 @@
 - InfiniteScroll
   - Add InfiniteScroll directive (#15567 by @iamkun) 
 - Cascader
-  - Add multiple mode (#15611 by @SimonaliaChen)
+  - Add multiple mode and filter-method (#15611 by @SimonaliaChen)
 - Message
   - Display in stack mode (#15639 by @island205)
 - Tag

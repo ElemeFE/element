@@ -4,7 +4,7 @@
 
 *2019-05-30*
 
-#### New features
+#### 新特性
 
 - Backtop
   - 新增 Backtop 组件 (#15541 by @iamkun)
@@ -13,7 +13,7 @@
 - InfiniteScroll
   - 新增 InfiniteScroll 指令 (#15567 by @iamkun) 
 - Cascader
-  - 新增多选模式 (#15611 by @SimonaliaChen)
+  - 新增多选模式和 filter-method 方法 (#15611 by @SimonaliaChen)
 - Message
   - 信息依次展示 (#15639 by @island205)
 - Tag
@@ -29,7 +29,7 @@
 - Chore
   - 更新文档首页 (#15682 by @iamkun)
 
-#### Bug 
+#### Bug 修复
 
 - Table
   - 修复排序条件为空时的排序问题 (#15012 by @joelxr)
@@ -71,7 +71,7 @@
   - 修复 Icon 定义文件 (#15634 by @iamkun)
   - 修复 Link 定义文件 (#15402 by @iamkun)
 
-#### Optimization
+#### 优化
 
 - Cascader
   - 重构 (#15611 by @SimonaliaChen)
