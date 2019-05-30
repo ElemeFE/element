@@ -106,7 +106,7 @@ export function treeCellPrefix(h, { row, treeNode, store }) {
   if (treeNode.indent) {
     ele.push(<span class="el-table__indent" style={{'padding-left': treeNode.indent + 'px'}}></span>);
   }
-  if (typeof treeNode.expanded === 'boolean') {
+  if (typeof treeNode.expanded === 'boolean' && !treeNode.noLazyChildren) {
     const expandClasses = ['el-table__expand-icon', treeNode.expanded ? 'el-table__expand-icon--expanded' : ''];
     let iconClasses = ['el-icon-arrow-right'];
     if (treeNode.loading) {

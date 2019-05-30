@@ -355,8 +355,11 @@ export default {
               if (typeof treeRowData.expanded === 'boolean') {
                 data.treeNode.expanded = treeRowData.expanded;
                 // 表明是懒加载
-                if (typeof treeRowData.loading === 'boolean') {
+                if ('loading' in treeRowData) {
                   data.treeNode.loading = treeRowData.loading;
+                }
+                if ('noLazyChildren' in treeRowData) {
+                  data.treeNode.noLazyChildren = treeRowData.noLazyChildren;
                 }
               }
             }
@@ -415,6 +418,9 @@ export default {
             level: cur.level,
             display: true
           };
+          if (typeof cur.loaded === 'boolean' && cur.loaded) {
+            treeRowData.noLazyChildren = !(cur.children && cur.children.length);
+          }
           if (typeof cur.loading === 'boolean') {
             treeRowData.loading = cur.loading;
           }
@@ -445,6 +451,9 @@ export default {
                 // 懒加载的某些节点，level 未知
                 cur.level = cur.level || innerTreeRowData.level;
                 cur.display = !!(cur.expanded && innerTreeRowData.display);
+                if (typeof cur.loaded === 'boolean' && cur.loaded) {
+                  innerTreeRowData.noLazyChildren = !(cur.children && cur.children.length);
+                }
                 if (typeof cur.lazy === 'boolean') {
                   innerTreeRowData.loading = cur.loading;
                 }
