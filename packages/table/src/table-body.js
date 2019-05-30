@@ -351,8 +351,10 @@ export default {
                 indent: treeRowData.level * treeIndent,
                 level: treeRowData.level
               };
+              // TODO: 优化这里的逻辑
               if (typeof treeRowData.expanded === 'boolean') {
                 data.treeNode.expanded = treeRowData.expanded;
+                // 表明是懒加载
                 if (typeof treeRowData.loading === 'boolean') {
                   data.treeNode.loading = treeRowData.loading;
                 }
@@ -443,6 +445,9 @@ export default {
                 // 懒加载的某些节点，level 未知
                 cur.level = cur.level || innerTreeRowData.level;
                 cur.display = !!(cur.expanded && innerTreeRowData.display);
+                if (typeof cur.lazy === 'boolean') {
+                  innerTreeRowData.loading = cur.loading;
+                }
               }
               i++;
               tmp.push(this.rowRender(node, $index + i, innerTreeRowData));

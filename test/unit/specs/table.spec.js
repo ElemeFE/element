@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
+import { createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
 
 const DELAY = 10;
 const testDataArr = [];
@@ -1760,7 +1760,7 @@ describe('Table', () => {
     });
   });
 
-  it('hover', done => {
+  it('hover', async() => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
@@ -1776,19 +1776,17 @@ describe('Table', () => {
         };
       }
     }, true);
-    setTimeout(_ => {
-      const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
-      triggerEvent(tr, 'mouseenter', true, false);
-      setTimeout(_ => {
-        expect(tr.classList.contains('hover-row')).to.true;
-        triggerEvent(tr, 'mouseleave', true, false);
-        setTimeout(_ => {
-          expect(tr.classList.contains('hover-row')).to.false;
-          destroyVM(vm);
-          done();
-        }, DELAY);
-      }, DELAY);
-    }, DELAY);
+    await waitImmediate();
+    const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+    triggerEvent(tr, 'mouseenter', true, false);
+
+    await wait(50);
+    expect(tr.classList.contains('hover-row')).to.true;
+    triggerEvent(tr, 'mouseleave', true, false);
+
+    await wait(50);
+    expect(tr.classList.contains('hover-row')).to.false;
+    destroyVM(vm);
   });
 
   it('highlight-current-row', done => {
