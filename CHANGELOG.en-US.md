@@ -1,5 +1,88 @@
 ## Changelog
 
+### 2.9.0
+
+*2019-05-30*
+
+#### New features
+
+- Backtop
+  - Add backtop component (#15541 by @iamkun)"
+- PageHeader
+  - Add page-header component (#15714 by @ziyoung )
+- InfiniteScroll
+  - Add infiniteScroll directive (#15567 by @iamkun) 
+- Cascader
+  - Add multiple mode (#15611 by @SimonaliaChen)
+- Message
+  - Display in stack mode (#15639 by @island205)
+- Tag
+  - Add prop effect (#15725 by @SimonaliaChen)
+- Tabs
+  - Left align title when type is card (#15695 by @luckyCao)
+- DatePicker
+  - Support literal strings (#15525 by island205)
+- Image
+  - Add support for transmit attrs and listeners (#15578 by @VanMess)
+- Theme
+  - Add popup background (#15412 by @iamkun)  
+- Chore
+  - update new 2.9.0 index page (#15682 by @iamkun)
+
+#### Bug fixes
+
+- Table
+  - Fix sort-change behaviour when sort condition is null (#15012 by @joelxr)
+- Image
+  - Fix ssr and object-fit compatibility (#15346 by @SimonaliaChen)
+- Input
+  - Fix show-word-count style in el-form (#15359 by @lvjiaxuan) 
+  - Fix clear icon is not centered (#15354 by @YiiGuxing)
+- Calendar
+  - Fix not correct day of week when the day is Sunday (#15399 by @qingdengyue)
+  - Fix October disappear bug (#15394 by @qingdengyue)
+- Tabs
+  - Fix basic tab nested in card tab padding error (#15461 by @SimonaliaChen)
+- Tag
+  - Fix stop propagation problem (#15150 by @infjer)
+- Form
+  - Fix input-group within form-item height error (#15457 by @SimonaliaChen)
+  - Fix resetFields issue (15181 by @luckyCao)
+- Tooltip
+  - Fix custom tabindex not work (#15619 by @SimonaliaChen )
+- Link
+  - Fix link icon style class (#15752 by @iamkun)
+- Select  
+  - Revert set value to null when cleared (#15447 by @iamkun)
+- Loading
+  - Fix dom not change when loading state change quickly (#15123 by @FAKER-A)
+- Switch
+  - Label with el-switch repeating event (#15178 by @FAKER-A)
+- Slider
+  - Fix style problem when clicking slider bar(#15561 by @luckyCao)
+- Radio
+  - Fix issue 14808 (#14809 by @OverTree)
+- Form
+  - Fix resetFields issue (15181 by @luckyCao)
+- Docs
+  - Fix image attribute type and default value (#15423 by @haoranyu)
+  - Fix form doc bug (#15228 by @SHERlocked93)
+- Chore
+  - Upgrade dependencies and fix demo bug (#15324 by ziyoung)
+- Type
+  - Fix loading type definition (#15635 by @iamkun)
+  - Fix Icon type (#15634 by @iamkun)
+  - Fix Link type definition (#15402 by @iamkun)
+
+#### Optimization
+
+- Cascader
+  - Refactor (#15611 by @SimonaliaChen)
+- Chore
+  - Update make new component logic (by @iamkun)
+- Docs
+  - Rename variable in docs (#15185 by @liupl)
+ 
 ### 2.8.2
 
 *2019-04-25*

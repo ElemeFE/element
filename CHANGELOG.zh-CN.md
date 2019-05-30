@@ -1,5 +1,89 @@
 ## 更新日志
 
+### 2.9.0
+
+*2019-05-30*
+
+#### New features
+
+- Backtop
+  - 新增 backtop 组件 (#15541 by @iamkun)"
+- PageHeader
+  - 新增 PageHeader 组件 (#15714 by @ziyoung)
+- InfiniteScroll
+  - 新增 infiniteScroll 指令 (#15567 by @iamkun) 
+- Cascader
+  - 新增多选模式 (#15611 by @SimonaliaChen)
+- Message
+  - 信息依次展示 (#15639 by @island205)
+- Tag
+  - 新增 effect 属性 (#15725 by @SimonaliaChen)
+- Tabs
+  - 卡片模式下 title 左对齐 (#15695 by @luckyCao)
+- DatePicker
+  - 支持 literal strings (#15525 by island205)
+- Image
+  - 支持 attrs 和 listeners (#15578 by @VanMess)
+- Theme
+  - 新增 popup 背景配置 (#15412 by @iamkun)  
+- Chore
+  - 更新文档首页 (#15682 by @iamkun)
+
+#### Bug 
+
+- Table
+  - 修复排序条件为空时的排序问题 (#15012 by @joelxr)
+- Image
+  - 修复 ssr 问题和 object-fit 的兼容性 (#15346 by @SimonaliaChen)
+- Input
+  - 修复 show-word-count 样式问题 (#15359 by @lvjiaxuan) 
+  - 修复删除图标样式 (#15354 by @YiiGuxing)
+- Calendar
+  - 修复星期天的星期错误 (#15399 by @qingdengyue)
+  - 修复十月问题 (#15394 by @qingdengyue)
+- Tabs
+  - 修复 padding 问题 (#15461 by @SimonaliaChen)
+- Tag
+  - 修复阻止冒泡问题 (#15150 by @infjer)
+- Form
+  - 修复 form-item 的高度错误 (#15457 by @SimonaliaChen)
+  - 修复 resetFields 问题 (15181 by @luckyCao)
+- Tooltip
+  - 修复自定义 tabindex 不生效问题 (#15619 by @SimonaliaChen )
+- Link
+  - 修复图标 class 问题 (#15752 by @iamkun)
+- Select  
+  - 回滚清除时设置 value 为 null 的修改 (#15447 by @iamkun)
+- Loading
+  - 修复状态变化太快时 dom 不更新的问题 (#15123 by @FAKER-A)
+- Switch
+  - 修复事件重复触发 (#15178 by @FAKER-A)
+- Slider
+  - 修复点击时样式问题 (#15561 by @luckyCao)
+- Radio
+  - 修复 issue 14808 (#14809 by @OverTree)
+- Form
+  - 修复 resetFields issue (15181 by @luckyCao)
+- Docs
+  - 修复图片属性 (#15423 by @haoranyu)
+  - 修复 form 文档错误 (#15228 by @SHERlocked93)
+- Chore
+  - 更新依赖 (#15324 by ziyoung)
+- Type
+  - 修复 loading type 定义 (#15635 by @iamkun)
+  - 修复 Icon type (#15634 by @iamkun)
+  - 修复 Link type (#15402 by @iamkun)
+
+#### Optimization
+
+- Cascader
+  - 重构 (#15611 by @SimonaliaChen)
+- Chore
+  - 更新新建组件标本 (by @iamkun)
+- Docs
+  - 重新命名文档变量 (#15185 by @liupl)
+ 
+
 ### 2.8.2
 
 *2019-04-25*
