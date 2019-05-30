@@ -1911,8 +1911,10 @@ describe('Table', () => {
   });
 
   describe('tree', () => {
+    let vm;
+    afterEach(() => destroyVM(vm));
     it('render tree structual data', async() => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-table :data="testData" row-key="release">
             <el-table-column prop="name" label="片名" />
@@ -1954,7 +1956,7 @@ describe('Table', () => {
     });
 
     it('load substree row data', async() => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-table :data="testData" row-key="release" lazy :load="load">
             <el-table-column prop="name" label="片名" />
@@ -2001,7 +2003,7 @@ describe('Table', () => {
 
     it('tree-props & default-expand-all & expand-change', async() => {
       const spy = sinon.spy();
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-table
             :data="testData" lazy default-expand-all row-key="release" :tree-props="{children: 'childrenTest', hasChildren: 'hasChildrenTest'}"
@@ -2055,7 +2057,7 @@ describe('Table', () => {
     });
 
     it('expand-row-keys & toggleRowExpansion', async() => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-table :data="testData" row-key="release" lazy :load="load" :expand-row-keys="['2003-5-30']" ref="table">
             <el-table-column prop="name" label="片名" />

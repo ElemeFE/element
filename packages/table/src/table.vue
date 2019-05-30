@@ -404,7 +404,6 @@
       handleHeaderFooterMousewheel(event, data) {
         const { pixelX, pixelY } = data;
         if (Math.abs(pixelX) >= Math.abs(pixelY)) {
-          event.preventDefault();
           this.bodyWrapper.scrollLeft += data.pixelX / 5;
         }
       },

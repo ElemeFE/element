@@ -80,8 +80,12 @@ export default {
     // don't trigger getter of currentRow in getCellClass. see https://jsfiddle.net/oe2b4hqt/
     // update DOM manually. see https://github.com/ElemeFE/element/pull/13954/files#diff-9b450c00d0a9dec0ffad5a3176972e40
     'store.states.hoverRow'(newVal, oldVal) {
-      if (!this.store.states.isComplex) return;
-      requestAnimationFrame(() => {
+      if (!this.store.states.isComplex || this.$isServer) return;
+      let raf = window.requestAnimationFrame;
+      if (!raf) {
+        raf = (fn) => setTimeout(fn, 16);
+      }
+      raf(() => {
         const rows = this.$el.querySelectorAll('.el-table__row');
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
