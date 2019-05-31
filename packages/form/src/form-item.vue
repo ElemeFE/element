@@ -145,7 +145,7 @@
 
         let path = this.prop;
         if (path.indexOf(':') !== -1) {
-          path = path.replace(/:/, '.');
+          path = path.replace(/:/g, '.');
         }
 
         return getPropByPath(model, path, true).v;
@@ -230,7 +230,7 @@
         let value = this.fieldValue;
         let path = this.prop;
         if (path.indexOf(':') !== -1) {
-          path = path.replace(/:/, '.');
+          path = path.replace(/:/g, '.');
         }
 
         let prop = getPropByPath(model, path, true);
