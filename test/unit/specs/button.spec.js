@@ -43,6 +43,13 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-disabled')).to.be.true;
   });
+  it('hover', () => {
+    vm = createTest(Button, {
+      hover: true
+    }, true);
+    let buttonElm = vm.$el;
+    expect(buttonElm.classList.contains('is-hover')).to.be.true;
+  });
   it('size', () => {
     vm = createTest(Button, {
       size: 'medium'

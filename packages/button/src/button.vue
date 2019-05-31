@@ -11,6 +11,7 @@
       {
         'is-disabled': buttonDisabled,
         'is-loading': loading,
+        'is-hover': hover,
         'is-plain': plain,
         'is-round': round,
         'is-circle': circle
@@ -51,6 +52,7 @@
       },
       loading: Boolean,
       disabled: Boolean,
+      hover: Boolean,
       plain: Boolean,
       autofocus: Boolean,
       round: Boolean,

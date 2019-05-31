@@ -27,6 +27,7 @@
 
   @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
 
+  &.is-hover,
   &:hover,
   &:focus {
     color: $--color-primary;
@@ -51,6 +52,7 @@
   }
 
   @include when(plain) {
+    &.is-hover,
     &:hover,
     &:focus {
       background: $--color-white;
@@ -73,6 +75,7 @@
 
   @include when(disabled) {
     &,
+    &.is-hover,
     &:hover,
     &:focus {
       color: $--button-disabled-font-color;
@@ -88,6 +91,7 @@
 
     &.is-plain {
       &,
+      &.is-hover,
       &:hover,
       &:focus {
         background-color: $--color-white;
@@ -161,6 +165,7 @@
     padding-left: 0;
     padding-right: 0;
 
+    &.is-hover,
     &:hover,
     &:focus {
       color: mix($--color-white, $--color-primary, $--button-hover-tint-percent);
@@ -174,6 +179,7 @@
     }
 
     &.is-disabled,
+    &.is-disabled.is-hover,
     &.is-disabled:hover,
     &.is-disabled:focus {
       border-color: transparent;
@@ -224,6 +230,7 @@
       margin-right: -1px;
     }
 
+    &.is-hover,
     &:hover,
     &:focus,
     &:active {

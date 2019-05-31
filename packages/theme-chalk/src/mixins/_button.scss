@@ -4,6 +4,7 @@
   background: mix($--color-white, $color, 90%);
   border-color: mix($--color-white, $color, 60%);
 
+  &.is-hover,
   &:hover,
   &:focus {
     background: $color;
@@ -20,6 +21,7 @@
 
   &.is-disabled {
     &,
+    &.is-hover,
     &:hover,
     &:focus,
     &:active {
@@ -35,6 +37,7 @@
   background-color: $background-color;
   border-color: $border-color;
 
+  &.is-hover,
   &:hover,
   &:focus {
     background: mix($--color-white, $background-color, $--button-hover-tint-percent);
@@ -57,6 +60,7 @@
 
   &.is-disabled {
     &,
+    &.is-hover,
     &:hover,
     &:focus,
     &:active {

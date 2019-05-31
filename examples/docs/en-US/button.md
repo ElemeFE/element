@@ -160,6 +160,7 @@ Besides default size, Button component provides three additional sizes for you t
 | circle     | determine whether it's a circle button   | boolean    | — | false   |
 | loading   | determine whether it's loading   | boolean    | — | false   |
 | disabled  | disable the button    | boolean   | —   | false   |
+| hover     | highlight the button  | boolean   | —   | false   |
 | icon  | icon class name | string   |  —  |  —  |
 | autofocus  | same as native button's `autofocus` | boolean   |  —  |  false  |
 | native-type | same as native button's `type` | string | button / submit / reset | button |

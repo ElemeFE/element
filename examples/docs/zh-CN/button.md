@@ -161,6 +161,7 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | circle     | 是否圆形按钮   | boolean    | — | false   |
 | loading     | 是否加载中状态   | boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |
+| hover     | 是否高亮状态    | boolean   | —   | false   |
 | icon  | 图标类名 | string   |  —  |  —  |
 | autofocus  | 是否默认聚焦 | boolean   |  —  |  false  |
 | native-type | 原生 type 属性 | string | button / submit / reset | button |
