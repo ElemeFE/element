@@ -426,7 +426,7 @@
         }
       }),
 
-      bindEvents() {
+      bindEvents() { // ++
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
