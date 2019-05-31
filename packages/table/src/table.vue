@@ -657,6 +657,7 @@
 
       data: {
         immediate: true,
+        deep: true,
         handler(value) {
           this.store.states.treeData = this.getTableTreeData(value);
           value = flattenData(value);
