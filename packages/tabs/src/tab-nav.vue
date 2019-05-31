@@ -178,7 +178,7 @@
       }
     },
 
-    updated() {
+    beforeUpdate() {
       this.update();
     },
 
