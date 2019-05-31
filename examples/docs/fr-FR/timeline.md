@@ -58,7 +58,7 @@ Vous pouvez personnaliser la taille, la couleur et les icônes de chaque Noeud.
 <div class="block">
   <el-timeline>
     <el-timeline-item
-      v-for="(activity, index) in activities2"
+      v-for="(activity, index) in activities"
       :key="index"
       :icon="activity.icon"
       :type="activity.type"
@@ -74,7 +74,7 @@ Vous pouvez personnaliser la taille, la couleur et les icônes de chaque Noeud.
   export default {
     data() {
       return {
-        activities2: [{
+        activities: [{
           content: 'Icône',
           timestamp: '2018-04-12 20:46',
           size: 'large',

@@ -285,19 +285,19 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 
 :::demo 本例还使用`status-icon`属性为输入框添加了表示校验结果的反馈图标。
 ```html
-<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
   <el-form-item label="密码" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="确认密码" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="年龄" prop="age">
-    <el-input v-model.number="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
-    <el-button @click="resetForm('ruleForm2')">重置</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+    <el-button @click="resetForm('ruleForm')">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -323,8 +323,8 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
+          if (this.ruleForm.checkPass !== '') {
+            this.$refs.ruleForm.validateField('checkPass');
           }
           callback();
         }
@@ -332,19 +332,19 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm2.pass) {
+        } else if (value !== this.ruleForm.pass) {
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
         }
       };
       return {
-        ruleForm2: {
+        ruleForm: {
           pass: '',
           checkPass: '',
           age: ''
         },
-        rules2: {
+        rules: {
           pass: [
             { validator: validatePass, trigger: 'blur' }
           ],
@@ -378,7 +378,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 :::
 
 :::tip
-校验规则更多高级用法可参考 [async-validator](https://github.com/yiminghe/async-validator)。
+自定义校验 callback 必须被调用。 更多高级用法可参考 [async-validator](https://github.com/yiminghe/async-validator)。
 :::
 
 ### 动态增减表单项
@@ -588,7 +588,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | rules    | 表单验证规则 | object | — | — |
 | inline    | 行内表单模式 | boolean | — | false |
 | label-position | 表单域标签的位置，如果值为 left 或者 right 时，则需要设置 `label-width` | string |  right/left/top            | right |
-| label-width | 表单域标签的宽度，作为 Form 直接子元素的 form-item 会继承该值 | string | — | — |
+| label-width | 表单域标签的宽度，例如 '50px'。作为 Form 直接子元素的 form-item 会继承该值。支持 `auto`。 | string | — | — |
 | label-suffix | 表单域标签的后缀 | string | — | — |
 | hide-required-asterisk | 是否显示必填字段的标签旁边的红色星号 | boolean | — | false |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
@@ -603,9 +603,9 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | 方法名      | 说明          | 参数
 |---------- |-------------- | --------------
 | validate | 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise | Function(callback: Function(boolean, object))
-| validateField | 对部分表单字段进行校验的方法 | Function(props: array | string, callback: Function(errorMessage: string))
+| validateField | 对部分表单字段进行校验的方法 | Function(props: array \| string, callback: Function(errorMessage: string))
 | resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | —
-| clearValidate | 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果 | Function(props: array | string)
+| clearValidate | 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果 | Function(props: array \| string)
 
 ### Form Events
 | 事件名称 | 说明    | 回调参数  |
@@ -618,7 +618,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | prop    | 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的 | string    | 传入 Form 组件的 `model` 中的字段 | — |
 | label | 标签文本 | string | — | — |
-| label-width | 表单域标签的的宽度，例如 '50px' | string |       —       | — |
+| label-width | 表单域标签的的宽度，例如 '50px'。支持 `auto`。 | string |       —       | — |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | — | false |
 | rules    | 表单验证规则 | object | — | — |
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |

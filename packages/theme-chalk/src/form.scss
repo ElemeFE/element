@@ -84,6 +84,14 @@
     }
   }
 
+  @include e(label-wrap) {
+    float: left;
+    .el-form-item__label {
+      display: inline-block;
+      float: none;
+    }
+  }
+
   @include e(label) {
     text-align: right;
     vertical-align: middle;
@@ -101,7 +109,7 @@
     @include utils-clearfix;
 
     .el-input-group {
-      vertical-align: middle;
+      vertical-align: top;
     }
   }
   @include e(error) {
@@ -124,7 +132,8 @@
 
   @include when(required) {
     @include pseudo('not(.is-no-asterisk)') {
-      & > .el-form-item__label:before {
+      & > .el-form-item__label:before,
+      & .el-form-item__label-wrap > .el-form-item__label:before {
         content: '*';
         color: $--color-danger;
         margin-right: 4px;

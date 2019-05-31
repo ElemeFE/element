@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: '无匹配数据',
       loading: '加载中',
-      placeholder: '请选择'
+      placeholder: '请选择',
+      noData: '暂无数据'
     },
     pagination: {
       goto: '前往',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: '请输入搜索内容',
       noCheckedFormat: '共 {total} 项',
       hasCheckedFormat: '已选 {checked}/{total} 项'
+    },
+    image: {
+      error: '加载失败'
+    },
+    pageHeader: {
+      title: '返回'
     }
   }
 };

@@ -22,9 +22,9 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 ```
 :::
 
-### Number of pagers
+### Numeros de paginas
 
-:::demo By default, Pagination collapses extra pager buttons when it has more than 7 pages. This can be configured with the `pager-count` attribute.
+:::demo De forma predeterminada, Pagination colapsa los botones del paginador adicionales cuando tiene más de 7 páginas. Esto se puede configurar con el atributo `pager-count`.
 ```html
 <el-pagination
   :page-size="20"
@@ -125,6 +125,34 @@ Agrega más modulos basados en su escenario.
   }
 </script>
 ```
+
+:::
+### Oculte la paginación cuando el resultado es solo una pagina simple
+
+Cuando sólo hay una página, oculte la paginación configurando el atributo `hide-on-single-page`.
+
+:::demo
+```html
+<div>
+ <el-switch v-model="value">
+ </el-switch>
+ <el-pagination
+  :hide-on-single-page="value"
+  :total="5"
+  layout="prev, pager, next">
+</el-pagination>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: false
+      }
+    }
+  }
+</script>
+```
 :::
 
 ### Atributos
@@ -141,7 +169,8 @@ Agrega más modulos basados en su escenario.
 | popper-class | clase propia para el `dropdown` del `select` del número de páginas | string   | —                                        | —                                      |
 | prev-text    | texto para el botón `prev`               | string   | —                                        | —                                      |
 | next-text    | texto para el botón `next`               | string   | —                                        | —                                      |
-| disabled | si Pagination esta disabled | boolean | — | false |
+| disabled     | si Pagination esta disabled              | boolean  | —                                        | false                                  |
+| hide-on-single-page | si ocultar cuando sólo hay una página | boolean |—                                 | -                                      |
 
 ### Eventos
 | Nombre del evento | Descripción                             | Parámetros                    |

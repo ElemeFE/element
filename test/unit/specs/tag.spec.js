@@ -1,4 +1,5 @@
-import { createVue, destroyVM } from '../util';
+import { createTest, createVue, destroyVM } from '../util';
+import Tag from 'packages/tag';
 
 describe('Tag', () => {
   let vm;
@@ -112,5 +113,13 @@ describe('Tag', () => {
       expect(vm.clicksCount).to.be.equal(1);
       done();
     }, 20);
+  });
+
+  it('theme', () => {
+    vm = createTest(Tag, { effect: 'dark' }, true);
+    const el = vm.$el;
+    expect(el.className).to.includes('el-tag--dark');
+    expect(el.className).to.not.includes('el-tag--light');
+    expect(el.className).to.not.includes('el-tag--plain');
   });
 });

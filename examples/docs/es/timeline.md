@@ -1,10 +1,10 @@
 ## Timeline
 
-Visually display timeline.
+Línea de tiempo visual.
 
-### Basic usage
+### Uso básico
 
-Timeline can be split into multiple activities in ascending or descending. Timestamps are important features that distinguish them from other components. Note the difference with Steps.
+El Timeline puede ser dividido en múltiples actividades en forma ascendente o descendente. Las marcas de tiempo son características importantes que los distinguen de otros componentes. Observe la diferencia con Steps.
 
 :::demo
 ```html
@@ -49,16 +49,16 @@ Timeline can be split into multiple activities in ascending or descending. Times
 ```
 :::
 
-### Custom node
+### Nodo personalizado
 
-Size, color, and icons can be customized in node.
+El tamaño, el color y los iconos se pueden personalizar en el nodo.
 
 :::demo
 ```html
 <div class="block">
   <el-timeline>
     <el-timeline-item
-      v-for="(activity, index) in activities2"
+      v-for="(activity, index) in activities"
       :key="index"
       :icon="activity.icon"
       :type="activity.type"
@@ -74,7 +74,7 @@ Size, color, and icons can be customized in node.
   export default {
     data() {
       return {
-        activities2: [{
+        activities: [{
           content: 'Custom icon',
           timestamp: '2018-04-12 20:46',
           size: 'large',
@@ -99,9 +99,9 @@ Size, color, and icons can be customized in node.
 ```
 :::
 
-### Custom timestamp
+### Marcas de tiempo personalizadas
 
-Timestamp can be placed on top of content when content is too high.
+Las marcas de tiempo ( timestamp )  puede colocarse encima del contenido cuando éste es demasiado alto.
 
 :::demo
 ```html
@@ -130,24 +130,24 @@ Timestamp can be placed on top of content when content is too high.
 ```
 :::
 
-### Timeline Attributes
-| Attribute      | Description    | Type      | Accepted Values | Default   |
+### Timeline Atributos
+| Atributo | Descripción | Tipo    | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| reverse | whether the node is ascending or descending, default is ascending | boolean | — | false |
+| reverse | Si el node es ascendente o descendente. Por defecto es ascendente | boolean | — | false |
 
-### Timeline-item Attributes
-| Attribute      | Description    | Type      | Accepted Values | Default   |
+### Timeline-item Atributos
+| Atributo    | Descripción | Tipo    | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| timestamp     | timestamp content | string  | - | — |
-| hide-timestamp  | whether to show timestamp | boolean | — | false |
-| placement | position of timestamp | string | top / bottom | bottom |
-| type | node type | string | primary / success / warning / danger / info | - |
-| color | background color of node | string | hsl / hsv / hex / rgb | - |
-| size | node size | string | normal / large | normal |
-| icon | icon class name | string | — | - |
+| timestamp     | Contenido de las marcas de tiempo | string  | - | — |
+| hide-timestamp  | Si se muestra o no timestamp | boolean | — | false |
+| placement | la posicion de timestamp | string | top / bottom | bottom |
+| type | tipo de nodo | string | primary / success / warning / danger / info | - |
+| color | color de fondo del nodo | string | hsl / hsv / hex / rgb | - |
+| size | tamaño del nodo | string | normal / large | normal |
+| icon | nombre de la clase del icono | string | — | - |
 
 ### Timeline-Item Slot
 | name | Description |
 |------|--------|
-| — | Custom content for timeline item |
-| dot | Custom defined node |
+| — | Contenido personalizado del item del timeline |
+| dot | Definicion personalizada del nodo |

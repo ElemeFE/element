@@ -51,9 +51,9 @@
 :::demo 在`el-option`中，设定`disabled`值为 true，即可禁用该选项
 ```html
 <template>
-  <el-select v-model="value2" placeholder="请选择">
+  <el-select v-model="value" placeholder="请选择">
     <el-option
-      v-for="item in options2"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -66,7 +66,7 @@
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           value: '选项1',
           label: '黄金糕'
         }, {
@@ -83,7 +83,7 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value2: ''
+        value: ''
       }
     }
   }
@@ -98,7 +98,7 @@
 :::demo 为`el-select`设置`disabled`属性，则整个选择器不可用
 ```html
 <template>
-  <el-select v-model="value3" disabled placeholder="请选择">
+  <el-select v-model="value" disabled placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -128,7 +128,7 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value3: ''
+        value: ''
       }
     }
   }
@@ -143,7 +143,7 @@
 :::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
 ```html
 <template>
-  <el-select v-model="value4" clearable placeholder="请选择">
+  <el-select v-model="value" clearable placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -173,7 +173,7 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value4: ''
+        value: ''
       }
     }
   }
@@ -188,7 +188,7 @@
 :::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="请选择">
+  <el-select v-model="value1" multiple placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -198,7 +198,7 @@
   </el-select>
 
   <el-select
-    v-model="value11"
+    v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
@@ -232,8 +232,8 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value5: [],
-        value11: []
+        value1: [],
+        value2: []
       }
     }
   }
@@ -248,7 +248,7 @@
 :::demo 将自定义的 HTML 模板插入`el-option`的 slot 中即可。
 ```html
 <template>
-  <el-select v-model="value6" placeholder="请选择">
+  <el-select v-model="value" placeholder="请选择">
     <el-option
       v-for="item in cities"
       :key="item.value"
@@ -283,7 +283,7 @@
           value: 'Guangzhou',
           label: '广州'
         }],
-        value6: ''
+        value: ''
       }
     }
   }
@@ -298,9 +298,9 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <el-select v-model="value7" placeholder="请选择">
+  <el-select v-model="value" placeholder="请选择">
     <el-option-group
-      v-for="group in options3"
+      v-for="group in options"
       :key="group.label"
       :label="group.label">
       <el-option
@@ -317,7 +317,7 @@
   export default {
     data() {
       return {
-        options3: [{
+        options: [{
           label: '热门城市',
           options: [{
             value: 'Shanghai',
@@ -342,7 +342,7 @@
             label: '大连'
           }]
         }],
-        value7: ''
+        value: ''
       }
     }
   }
@@ -357,7 +357,7 @@
 :::demo 为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 ```html
 <template>
-  <el-select v-model="value8" filterable placeholder="请选择">
+  <el-select v-model="value" filterable placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -387,7 +387,7 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value8: ''
+        value: ''
       }
     }
   }
@@ -402,7 +402,7 @@
 ```html
 <template>
   <el-select
-    v-model="value9"
+    v-model="value"
     multiple
     filterable
     remote
@@ -411,7 +411,7 @@
     :remote-method="remoteMethod"
     :loading="loading">
     <el-option
-      v-for="item in options4"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -423,8 +423,8 @@
   export default {
     data() {
       return {
-        options4: [],
-        value9: [],
+        options: [],
+        value: [],
         list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona",
@@ -457,13 +457,13 @@
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options4 = this.list.filter(item => {
+            this.options = this.list.filter(item => {
               return item.label.toLowerCase()
                 .indexOf(query.toLowerCase()) > -1;
             });
           }, 200);
         } else {
-          this.options4 = [];
+          this.options = [];
         }
       }
     }
@@ -478,14 +478,14 @@
 ```html
 <template>
   <el-select
-    v-model="value10"
+    v-model="value"
     multiple
     filterable
     allow-create
     default-first-option
     placeholder="请选择文章标签">
     <el-option
-      v-for="item in options5"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -497,7 +497,7 @@
   export default {
     data() {
       return {
-        options5: [{
+        options: [{
           value: 'HTML',
           label: 'HTML'
         }, {
@@ -507,7 +507,7 @@
           value: 'JavaScript',
           label: 'JavaScript'
         }],
-        value10: []
+        value: []
       }
     }
   }

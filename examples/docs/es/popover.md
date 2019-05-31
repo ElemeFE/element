@@ -114,11 +114,11 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 <el-popover
   placement="top"
   width="160"
-  v-model="visible2">
+  v-model="visible">
   <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible2 = false">cancel</el-button>
-    <el-button type="primary" size="mini" @click="visible2 = false">confirm</el-button>
+    <el-button size="mini" type="text" @click="visible = false">cancel</el-button>
+    <el-button type="primary" size="mini" @click="visible = false">confirm</el-button>
   </div>
   <el-button slot="reference">Delete</el-button>
 </el-popover>
@@ -127,7 +127,7 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
   export default {
     data() {
       return {
-        visible2: false,
+        visible: false,
       };
     }
   }
@@ -151,6 +151,7 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | popper-options | parámetros para [popper.js](https://popper.js.org/documentation.html) | object         | por favor, refiérase a [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | popper-class   | clase propia para popover                | string         | —                                        | —                                        |
 | open-delay     | retraso de la aparición cuando `trigger` es hover, en milisegundos | number         | —                                        | —                                        |
+| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Popover  |   number           |      —      |  0    |
 
 ### Slot
 | Nombre    | Descripción                          |

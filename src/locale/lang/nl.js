@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Geen overeenkomende resultaten',
       loading: 'Laden',
-      placeholder: 'Selecteer'
+      placeholder: 'Selecteer',
+      noData: 'Geen data'
     },
     pagination: {
       goto: 'Ga naar',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Geef zoekwoerd',
       noCheckedFormat: '{total} items',
       hasCheckedFormat: '{checked}/{total} geselecteerd'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

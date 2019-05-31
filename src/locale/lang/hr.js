@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Nema pronađenih podataka',
       loading: 'Učitavanje',
-      placeholder: 'Izaberi'
+      placeholder: 'Izaberi',
+      noData: 'Nema podataka'
     },
     pagination: {
       goto: 'Idi na',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Unesite ključnu riječ', // to be translated
       noCheckedFormat: '{total} stavki', // to be translated
       hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

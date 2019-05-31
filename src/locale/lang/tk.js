@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Hiçzat tapylmady',
       loading: 'Indirilýär',
-      placeholder: 'Saýlaň'
+      placeholder: 'Saýlaň',
+      noData: 'Hiçzat ýok'
     },
     pagination: {
       goto: 'Git',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Gözleg sözlerini giriziň',
       noCheckedFormat: '{total} sany',
       hasCheckedFormat: '{checked}/{total} saýlanan'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

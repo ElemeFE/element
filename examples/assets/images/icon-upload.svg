@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>icon_upload</title>
+    <desc>Created with Sketch.</desc>
+    <g id="theme" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="element-theme" transform="translate(-207.000000, -662.000000)" fill="#909399">
+            <g id="section" transform="translate(70.000000, 511.000000)">
+                <g id="card" transform="translate(0.000000, 60.000000)">
+                    <g id="btn" transform="translate(108.000000, 91.000000)">
+                        <g id="icon-upload" transform="translate(29.000000, 0.000000)">
+                            <path d="M13,-0.000600000001 L3.015,9.9854 L4.429,11.3984 L12,3.8284 L12,20.4854 L14.001,20.4854 L14.001,3.8284 L21.572,11.3984 L22.986,9.9854 L14.415,1.4144 L13,-0.000600000001 Z M13,2.8284 L13.158,2.9844 L12.843,2.9844 L13,2.8284 Z M24.001,19.9854 L24.001,23.9854 L2,23.9854 L2,19.9854 L0,19.9854 L0,25.9854 L26.001,25.9854 L26.001,19.9854 L24.001,19.9854 Z" id="icon_upload"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

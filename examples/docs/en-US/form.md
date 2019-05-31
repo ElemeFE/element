@@ -289,19 +289,19 @@ This example shows how to customize your own validation rules to finish a two-fa
 
 :::demo Here we use `status-icon` to reflect validation result as an icon.
 ```html
-<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
-    <el-input v-model.number="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
-    <el-button @click="resetForm('ruleForm2')">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+    <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -327,8 +327,8 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
+          if (this.ruleForm.checkPass !== '') {
+            this.$refs.ruleForm.validateField('checkPass');
           }
           callback();
         }
@@ -336,19 +336,19 @@ This example shows how to customize your own validation rules to finish a two-fa
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
-        } else if (value !== this.ruleForm2.pass) {
+        } else if (value !== this.ruleForm.pass) {
           callback(new Error('Two inputs don\'t match!'));
         } else {
           callback();
         }
       };
       return {
-        ruleForm2: {
+        ruleForm: {
           pass: '',
           checkPass: '',
           age: ''
         },
-        rules2: {
+        rules: {
           pass: [
             { validator: validatePass, trigger: 'blur' }
           ],
@@ -382,7 +382,7 @@ This example shows how to customize your own validation rules to finish a two-fa
 :::
 
 :::tip
-See more advanced usage of validation rules at [async-validator](https://github.com/yiminghe/async-validator)。
+Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
 ### Delete or add form items dynamically
@@ -593,7 +593,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
 | label-position | position of label. If set to 'left' or 'right', `label-width` prop is also required | string | left / right / top | right |
-| label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
+| label-width    | width of label, e.g. '50px'. All its direct child form items will inherit this value. Width `auto` is supported.        | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
 | hide-required-asterisk | whether required fields should have a red asterisk (star) beside their labels | boolean | — | false |
 | show-message  | whether to show the error message | boolean | — | true |
@@ -608,9 +608,9 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | validate | validate the whole form. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Returns a promise if callback is omitted | Function(callback: Function(boolean, object)) |
-| validateField | validate one or several form items | Function(props: string | array, callback: Function(errorMessage: string)) |
+| validateField | validate one or several form items | Function(props: string \| array, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
-| clearValidate | clear validation message for certain fields. The parameter is prop name or an array of prop names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string | array) |
+| clearValidate | clear validation message for certain fields. The parameter is prop name or an array of prop names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string \| array) |
 
 ### Form Events
 | Event Name | Description | Parameters |
@@ -623,7 +623,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | ---- | ----| ---- | ---- | ---- |
 | prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
-| label-width | width of label, e.g. '50px' | string | — | — |
+| label-width | width of label, e.g. '50px'. Width `auto` is supported. | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | boolean |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |

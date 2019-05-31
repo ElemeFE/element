@@ -34,7 +34,7 @@ const webpackConfig = {
     host: '0.0.0.0',
     port: 8085,
     publicPath: '/',
-    noInfo: true
+    hot: true
   },
   performance: {
     hints: false
@@ -101,6 +101,7 @@ const webpackConfig = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: './examples/index.tpl',
       filename: './index.html',
@@ -124,7 +125,8 @@ const webpackConfig = {
   ],
   optimization: {
     minimizer: []
-  }
+  },
+  devtool: '#eval-source-map'
 };
 
 if (isProd) {
@@ -146,6 +148,7 @@ if (isProd) {
     }),
     new OptimizeCSSAssetsPlugin({})
   );
+  webpackConfig.devtool = false;
 }
 
 module.exports = webpackConfig;

@@ -45,14 +45,14 @@ Utilisé pour montrer un retour d'activités Success, Warning, Message ou Error.
 <template>
   <el-button :plain="true" @click="open2">success</el-button>
   <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open">message</el-button>
+  <el-button :plain="true" @click="open1">message</el-button>
   <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open() {
+      open1() {
         this.$message('Ceci est un message.');
       },
       open2() {
@@ -85,23 +85,23 @@ Un bouton de fermeture peut être ajouté.
 :::demo Un Message ne peut être fermé par défaut. Utiliséez `showClose` si vous avez besoin de pouvoir le fermer. De plus, tout comme Notification, Message possède une `duration` réglable. La durée par défaut est de 3000 ms, et infinie si à `0`.
 ```html
 <template>
-  <el-button :plain="true" @click="open5">message</el-button>
-  <el-button :plain="true" @click="open6">success</el-button>
-  <el-button :plain="true" @click="open7">warning</el-button>
-  <el-button :plain="true" @click="open8">error</el-button>
+  <el-button :plain="true" @click="open1">message</el-button>
+  <el-button :plain="true" @click="open2">success</el-button>
+  <el-button :plain="true" @click="open3">warning</el-button>
+  <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open5() {
+      open1() {
         this.$message({
           showClose: true,
           message: 'Ceci est un message.'
         });
       },
 
-      open6() {
+      open2() {
         this.$message({
           showClose: true,
           message: 'Félicitations, ceci est un message de succès.',
@@ -109,7 +109,7 @@ Un bouton de fermeture peut être ajouté.
         });
       },
 
-      open7() {
+      open3() {
         this.$message({
           showClose: true,
           message: 'Attention, ceci est un avertissement.',
@@ -117,7 +117,7 @@ Un bouton de fermeture peut être ajouté.
         });
       },
 
-      open8() {
+      open4() {
         this.$message({
           showClose: true,
           message: 'Ouups, ceci est une erreur.',
@@ -213,6 +213,7 @@ Dans ce cas il faudra appeler `Message(options)`. Les méthodes des différents 
 | showClose | Si un bouton de fermeture doit être affiché. | boolean | — | false |
 | center | Si le texte doit être centré. | boolean | — | false |
 | onClose | Callback de fermeture avec en paramètre l'instance de Message. | function | — | — |
+| offset | set the distance to the top of viewport | number | — | 20 |
 
 ### Méthodes
 

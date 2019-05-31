@@ -138,8 +138,8 @@ Used for node selection.
 :::demo A node's data is not fetched until it is clicked, so the Tree cannot predict whether a node is a leaf node. That's why a drop-down button is added to each node, and if it is a leaf node, the drop-down button will disappear when clicked. That being said, you can also tell the Tree in advance whether the node is a leaf node, avoiding the render of the drop-down button before a leaf node.
 ```html
 <el-tree
-  :props="props1"
-  :load="loadNode1"
+  :props="props"
+  :load="loadNode"
   lazy
   show-checkbox>
 </el-tree>
@@ -148,7 +148,7 @@ Used for node selection.
   export default {
     data() {
       return {
-        props1: {
+        props: {
           label: 'name',
           children: 'zones',
           isLeaf: 'leaf'
@@ -156,7 +156,7 @@ Used for node selection.
       };
     },
     methods: {
-      loadNode1(node, resolve) {
+      loadNode(node, resolve) {
         if (node.level === 0) {
           return resolve([{ name: 'region' }]);
         }
@@ -186,7 +186,7 @@ The checkbox of a node can be set as disabled.
 :::demo In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkboxes are disabled and can't be clicked.
 ```html
 <el-tree
-  :data="data3"
+  :data="data"
   :props="defaultProps"
   show-checkbox
   @check-change="handleCheckChange">
@@ -196,7 +196,7 @@ The checkbox of a node can be set as disabled.
   export default {
     data() {
       return {
-        data3: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -242,7 +242,7 @@ Tree nodes can be initially expanded or checked
 :::demo Use `default-expanded-keys` and `default-checked-keys` to set initially expanded and initially checked nodes respectively. Note that for them to work, `node-key` is required. Its value is the name of a key in the data object, and the value of that key should be unique across the whole tree.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   node-key="id"
   :default-expanded-keys="[2, 3]"
@@ -254,7 +254,7 @@ Tree nodes can be initially expanded or checked
   export default {
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -305,7 +305,7 @@ Tree nodes can be initially expanded or checked
 :::demo This example shows how to get and set checked nodes. They both can be done in two approaches: node and key. If you are taking the key approach, `node-key` is required.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   default-expand-all
   node-key="id"
@@ -350,7 +350,7 @@ Tree nodes can be initially expanded or checked
 
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -405,7 +405,7 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
   <div class="block">
     <p>Using render-content</p>
     <el-tree
-      :data="data4"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -416,7 +416,7 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
   <div class="block">
     <p>Using scoped slot</p>
     <el-tree
-      :data="data5"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -483,8 +483,8 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
         }]
       }];
       return {
-        data4: JSON.parse(JSON.stringify(data)),
-        data5: JSON.parse(JSON.stringify(data))
+        data: JSON.parse(JSON.stringify(data)),
+        data: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -543,18 +543,18 @@ Tree nodes can be filtered
 
 <el-tree
   class="filter-tree"
-  :data="data2"
+  :data="data"
   :props="defaultProps"
   default-expand-all
   :filter-node-method="filterNode"
-  ref="tree2">
+  ref="tree">
 </el-tree>
 
 <script>
   export default {
     watch: {
       filterText(val) {
-        this.$refs.tree2.filter(val);
+        this.$refs.tree.filter(val);
       }
     },
 
@@ -568,7 +568,7 @@ Tree nodes can be filtered
     data() {
       return {
         filterText: '',
-        data2: [{
+        data: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -689,7 +689,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 :::demo
 ```html
 <el-tree
-  :data="data6"
+  :data="data"
   node-key="id"
   default-expand-all
   @node-drag-start="handleDragStart"
@@ -707,7 +707,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
   export default {
     data() {
       return {
-        data6: [{
+        data: [{
           label: 'Level one 1',
           children: [{
             label: 'Level two 1-1',

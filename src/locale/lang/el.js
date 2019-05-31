@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Δεν βρέθηκαν αποτελέσματα',
       loading: 'Φόρτωση',
-      placeholder: 'Επιλογή'
+      placeholder: 'Επιλογή',
+      noData: 'Χωρίς δεδομένα'
     },
     pagination: {
       goto: 'Μετάβαση σε',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Αναζήτηση',
       noCheckedFormat: '{total} Αντικείμενα',
       hasCheckedFormat: '{checked}/{total} επιλεγμένα'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

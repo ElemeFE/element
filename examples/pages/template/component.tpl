@@ -3,7 +3,7 @@
     height: calc(100% - 80px);
     margin-top: 80px;
 
-    .el-scrollbar__wrap {
+    > .el-scrollbar__wrap {
       overflow-x: auto;
     }
   }
@@ -24,8 +24,9 @@
       margin-top: 80px;
       transition: padding-top .3s;
 
-      .el-scrollbar__wrap {
+      > .el-scrollbar__wrap {
         height: 100%;
+        overflow-x: auto;
       }
 
       &.is-extended {
@@ -101,70 +102,6 @@
         }
       }
     }
-
-    .page-component-up {
-      background-color: #fff;
-      position: fixed;
-      right: 100px;
-      bottom: 150px;
-      width: 40px;
-      height: 40px;
-      size: 40px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: .3s;
-      box-shadow: 0 0 6px rgba(0,0,0, .12);
-      z-index: 5;
-
-      i {
-        color: #409EFF;
-        display: block;
-        line-height: 40px;
-        text-align: center;
-        font-size: 18px;
-      }
-
-      &.hover {
-        opacity: 1;
-      }
-    }
-    .back-top-fade-enter,
-    .back-top-fade-leave-active {
-      transform: translateY(-30px);
-      opacity: 0;
-    }
-  }
-
-  @media (min-width: 1140px) {
-    .page-component__content {
-      transition:padding-right 0.3s ease;
-      &.theme-config {
-        padding-right: 26%;  
-      }
-    }
-    .page-container.page-component {
-      transition:all 0.3s ease;
-      &.theme-config {
-        width: 98%;
-        .page-component__nav {
-          animation-delay: 1s;
-          padding-left: 2%;
-        }
-      }
-    }
-  }
-
-  @media (min-width: 1600px) {
-    .page-component__content {
-      &.theme-config {
-        padding-right: 25%;
-      }
-    }
-    .page-container.page-component {
-      &.theme-config {
-        width: 1600px;
-      }
-    }
   }
 
   @media (max-width: 768px) {
@@ -189,33 +126,25 @@
         overflow: auto;
         display: block;
       }
-      .page-component-up {
-        display: none;
-      }
     }
   }
 </style>
 <template>
   <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
-  <div class="page-container page-component" :class="{'theme-config': isThemeConfigVisible}">
+  <div class="page-container page-component">
     <el-scrollbar class="page-component__nav">
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
     </el-scrollbar>
-    <div class="page-component__content" :class="{'theme-config': isThemeConfigVisible}">
+    <div class="page-component__content">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
     </div>
-    <transition name="back-top-fade">
-      <div
-        class="page-component-up"
-        :class="{ 'hover': hover }"
-        v-show="showBackToTop"
-        @mouseenter="hover = true"
-        @mouseleave="hover = false"
-        @click="toTop">
-        <i class="el-icon-caret-top"></i>
-      </div>
-    </transition>
+    <el-backtop 
+      v-if="showBackToTop"
+      target=".page-component__scroll .el-scrollbar__wrap"
+      :right="100"
+      :bottom="150"
+    ></el-backtop>
   </div>
   </el-scrollbar>
 </template>
@@ -229,13 +158,10 @@
       return {
         lang: this.$route.meta.lang,
         navsData,
-        hover: false,
-        showBackToTop: false,
         scrollTop: 0,
         showHeader: true,
         componentScrollBar: null,
-        componentScrollBoxElement: null,
-        isThemeConfigVisible: false
+        componentScrollBoxElement: null
       };
     },
     watch: {
@@ -271,15 +197,9 @@
           }, 50);
         }
       },
-      toTop() {
-        this.hover = false;
-        this.showBackToTop = false;
-        this.componentScrollBox.scrollTop = 0;
-      },
 
       handleScroll() {
         const scrollTop = this.componentScrollBox.scrollTop;
-        this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
         if (this.showHeader !== this.scrollTop > scrollTop) {
           this.showHeader = this.scrollTop > scrollTop;
         }
@@ -292,18 +212,17 @@
         this.scrollTop = scrollTop;
       }
     },
+    computed: {
+      showBackToTop() {
+        return !this.$route.path.match(/backtop/);
+      }
+    },
     created() {
       bus.$on('navFade', val => {
         this.navFaded = val;
       });
-      bus.$on('user-theme-config-visible', val => {
-        this.isThemeConfigVisible = val;
-      });
     },
     mounted() {
-      if (window.userThemeConfigVisible) {
-        this.isThemeConfigVisible = window.userThemeConfigVisible;
-      }
       this.componentScrollBar = this.$refs.componentScrollBar;
       this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
       this.throttledScrollHandler = throttle(300, this.handleScroll);

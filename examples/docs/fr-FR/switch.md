@@ -34,13 +34,13 @@ Switch est utilisé pour choisir entre deux états opposés.
 
 ```html
 <el-switch
-  v-model="value3"
+  v-model="value1"
   active-text="Paiement mensuel"
   inactive-text="Paiement annuel">
 </el-switch>
 <el-switch
   style="display: block"
-  v-model="value4"
+  v-model="value2"
   active-color="#13ce66"
   inactive-color="#ff4949"
   active-text="Paiement mensuel"
@@ -51,8 +51,8 @@ Switch est utilisé pour choisir entre deux états opposés.
   export default {
     data() {
       return {
-        value3: true,
-        value4: true
+        value1: true,
+        value2: true
       }
     }
   };
@@ -65,9 +65,9 @@ Switch est utilisé pour choisir entre deux états opposés.
 :::demo Vous pouvez utiliser `active-value` et `inactive-value` pour déterminer la valeur de chaque état. Ils prennent un `Boolean`, `String` ou `Number`.
 
 ```html
-<el-tooltip :content="'Valeur de l\'état: ' + value5" placement="top">
+<el-tooltip :content="'Valeur de l\'état: ' + value" placement="top">
   <el-switch
-    v-model="value5"
+    v-model="value"
     active-color="#13ce66"
     inactive-color="#ff4949"
     active-value="100"
@@ -79,7 +79,7 @@ Switch est utilisé pour choisir entre deux états opposés.
   export default {
     data() {
       return {
-        value5: '100'
+        value: '100'
       }
     }
   };
@@ -94,11 +94,11 @@ Switch est utilisé pour choisir entre deux états opposés.
 
 ```html
 <el-switch
-  v-model="value6"
+  v-model="value1"
   disabled>
 </el-switch>
 <el-switch
-  v-model="value7"
+  v-model="value2"
   disabled>
 </el-switch>
 
@@ -106,8 +106,8 @@ Switch est utilisé pour choisir entre deux états opposés.
   export default {
     data() {
       return {
-        value6: true,
-        value7: false
+        value1: true,
+        value2: false
       }
     }
   };

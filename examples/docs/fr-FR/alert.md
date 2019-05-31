@@ -1,4 +1,4 @@
-## Alerte
+## Alert
 
 Affiche des messages importants.
 
@@ -25,6 +25,37 @@ Les Alertes sont des composants non-superposés qui ne disparaissent pas automat
   <el-alert
     title="erreur"
     type="error">
+  </el-alert>
+</template>
+```
+:::
+
+### Thème
+
+Alert fournit deux thèmes différents, `light` et `dark`.
+
+:::demo Réglez `effect` pour changer le thème, le défaut étant `light`.
+```html
+<template>
+  <el-alert
+    title="succès"
+    type="success"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="info"
+    type="info"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="avertissement"
+    type="warning"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="erreur"
+    type="error"
+    effect="dark">
   </el-alert>
 </template>
 ```
@@ -144,7 +175,7 @@ Contient un message avec plus d'informations.
 ```html
 <template>
   <el-alert
-    title="avec description"
+    title="Titre"
     type="success"
     description="Ceci est la description.">
   </el-alert>
@@ -196,6 +227,7 @@ Contient un message avec plus d'informations.
 | center | Si le texte doit être centré ou non. | boolean | — | false |
 | close-text | Texte personnalisé pour le bouton de fermeture. | string | — | — |
 | show-icon | Si une icône s'affiche ou non. | boolean | — | false |
+| effect | Détermine le thème.  | string | light/dark | light |
 
 ### Slot
 

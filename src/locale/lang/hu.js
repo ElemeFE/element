@@ -66,7 +66,8 @@ export default {
     cascader: {
       noMatch: 'Nincs találat',
       loading: 'Betöltés',
-      placeholder: 'Válassz'
+      placeholder: 'Válassz',
+      noData: 'Nincs adat'
     },
     pagination: {
       goto: 'Ugrás',
@@ -103,6 +104,12 @@ export default {
       filterPlaceholder: 'Kulcsszó',
       noCheckedFormat: '{total} elem',
       hasCheckedFormat: '{checked}/{total} kiválasztva'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

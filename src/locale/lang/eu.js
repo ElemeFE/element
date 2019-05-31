@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Bat datorren daturik ez',
       loading: 'Kargatzen',
-      placeholder: 'Hautatu'
+      placeholder: 'Hautatu',
+      noData: 'Daturik ez'
     },
     pagination: {
       goto: 'Joan',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Sartu gako-hitza', // to be translated
       noCheckedFormat: '{total} elementu', // to be translated
       hasCheckedFormat: '{checked}/{total} hautatuta' // to be translated
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

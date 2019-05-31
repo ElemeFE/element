@@ -109,7 +109,7 @@ You can use `tab-position` attribute to set the tab's position.
   export default {
     data() {
       return {
-        tabPosition: 'top'
+        tabPosition: 'left'
       };
     }
   };
@@ -210,14 +210,14 @@ Only card type Tabs support addable & closeable.
 <div style="margin-bottom: 20px;">
   <el-button
     size="small"
-    @click="addTab(editableTabsValue2)"
+    @click="addTab(editableTabsValue)"
   >
     add tab
   </el-button>
 </div>
-<el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
+<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
   <el-tab-pane
-    v-for="(item, index) in editableTabs2"
+    v-for="(item, index) in editableTabs"
     :key="item.name"
     :label="item.title"
     :name="item.name"
@@ -229,8 +229,8 @@ Only card type Tabs support addable & closeable.
   export default {
     data() {
       return {
-        editableTabsValue2: '2',
-        editableTabs2: [{
+        editableTabsValue: '2',
+        editableTabs: [{
           title: 'Tab 1',
           name: '1',
           content: 'Tab 1 content'
@@ -245,16 +245,16 @@ Only card type Tabs support addable & closeable.
     methods: {
       addTab(targetName) {
         let newTabName = ++this.tabIndex + '';
-        this.editableTabs2.push({
+        this.editableTabs.push({
           title: 'New Tab',
           name: newTabName,
           content: 'New Tab content'
         });
-        this.editableTabsValue2 = newTabName;
+        this.editableTabsValue = newTabName;
       },
       removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
             if (tab.name === targetName) {
@@ -266,8 +266,8 @@ Only card type Tabs support addable & closeable.
           });
         }
         
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
   }
@@ -300,6 +300,6 @@ Only card type Tabs support addable & closeable.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | title of the tab   | string   | — |    —     |
 | disabled | whether Tab is disabled | boolean | — | false |
-| name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, e.g. the first tab-pane is '1' |
+| name      | identifier corresponding to the name of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, e.g. the first tab-pane is '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |
 | lazy  | whether Tab is lazily rendered   | boolean   | — |  false  |

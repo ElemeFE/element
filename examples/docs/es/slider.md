@@ -64,14 +64,14 @@ Las opciones pueden ser discretas.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value6"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value7"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -82,8 +82,8 @@ Las opciones pueden ser discretas.
   export default {
     data() {
       return {
-        value6: 0,
-        value7: 0
+        value1: 0,
+        value2: 0
       }
     }
   }
@@ -101,7 +101,7 @@ Inserte el valor a traves de un input
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value"
       show-input>
     </el-slider>
   </div>
@@ -111,7 +111,7 @@ Inserte el valor a traves de un input
   export default {
     data() {
       return {
-        value8: 0
+        value: 0
       }
     }
   }
@@ -129,7 +129,7 @@ Se soporta la selección de un rango de valores.
 <template>
   <div class="block">
     <el-slider
-      v-model="value9"
+      v-model="value"
       range
       show-stops
       :max="10">
@@ -141,7 +141,7 @@ Se soporta la selección de un rango de valores.
   export default {
     data() {
       return {
-        value9: [4, 8]
+        value: [4, 8]
       }
     }
   }
@@ -157,7 +157,7 @@ Se soporta la selección de un rango de valores.
 <template>
   <div class="block">
     <el-slider
-      v-model="value10"
+      v-model="value"
       vertical
       height="200px">
     </el-slider>
@@ -168,7 +168,44 @@ Se soporta la selección de un rango de valores.
   export default {
     data() {
       return {
-        value10: 0
+        value: 0
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Mostrar marcas
+
+:::demo Use el atributo `marks`  para mostrar marcas en el slider.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
       }
     }
   }
@@ -196,6 +233,7 @@ Se soporta la selección de un rango de valores.
 | label               | etiqueta para screen reader              | string          | —                 | —           |
 | debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 | tooltip-class       | nombre personalizado de clase para el tooltip | string | — | — |
+| marks | marcas, tipo de clave debe ser `number` y debe estar en intervalo cerrado [min, max], cada marca puede tener estilo personalizado | object | — | — |
 
 ## Eventos
 | Nombre | Descripción                              | Parametros               |

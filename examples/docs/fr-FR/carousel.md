@@ -11,7 +11,7 @@ Affiche en boucle une série d'images ou de textes dans un espace limité.
     <span class="demonstration">Défile quand la souris passe sur l'indicateur (défaut)</span>
     <el-carousel height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+        <h3 class="small">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -19,7 +19,7 @@ Affiche en boucle une série d'images ou de textes dans un espace limité.
     <span class="demonstration">Défile quand on clique sur l'indicateur</span>
     <el-carousel trigger="click" height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+        <h3 class="small">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -122,7 +122,7 @@ Quand la page est suffisement large mais avec une hauteur limitée, vous pouvez 
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6" :key="item">
-      <h3>{{ item }}</h3>
+      <h3 class="medium">{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -147,6 +147,38 @@ Quand la page est suffisement large mais avec une hauteur limitée, vous pouvez 
 ```
 :::
 
+Par défaut, `direction` est `horizontal`. Vous pouvez faire en sorte que le défilement soit vertical em mettant `direction` à `vertical`.
+
+:::demo
+```html
+<template>
+  <el-carousel height="200px" direction="vertical" :autoplay="false">
+    <el-carousel-item v-for="item in 4" :key="item">
+      <h3 class="medium">{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+</template>
+
+<style>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+</style>
+```
+:::
+
 ### Attributs du Carousel
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -159,6 +191,7 @@ Quand la page est suffisement large mais avec une hauteur limitée, vous pouvez 
 | arrow | Détermine quand les flèches sont affichés. | string | always/hover/never | hover |
 | type | Type du carousel. | string | card | — |
 | loop | Affiche les éléments en boucle. | boolean | - | true |
+| direction | Détermine la direction du défilement. | string | horizontal/vertical | horizontal |
 
 ### Évènements du Carousel
 | Nom | Description | Paramètres |

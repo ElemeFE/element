@@ -62,14 +62,14 @@
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
-      v-model="value6"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
-      v-model="value7"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -80,8 +80,8 @@
   export default {
     data() {
       return {
-        value6: 0,
-        value7: 0
+        value1: 0,
+        value2: 0
       }
     }
   }
@@ -98,7 +98,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value"
       show-input>
     </el-slider>
   </div>
@@ -108,7 +108,7 @@
   export default {
     data() {
       return {
-        value8: 0
+        value: 0
       }
     }
   }
@@ -125,7 +125,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value9"
+      v-model="value"
       range
       show-stops
       :max="10">
@@ -137,7 +137,7 @@
   export default {
     data() {
       return {
-        value9: [4, 8]
+        value: [4, 8]
       }
     }
   }
@@ -152,7 +152,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value10"
+      v-model="value"
       vertical
       height="200px">
     </el-slider>
@@ -163,7 +163,44 @@
   export default {
     data() {
       return {
-        value10: 0
+        value: 0
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 展示标记
+
+:::demo 设置 `marks` 属性可以展示标记
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
       }
     }
   }
@@ -191,6 +228,7 @@
 | label | 屏幕阅读器标签 | string | — | — |
 | debounce | 输入时的去抖延迟，毫秒，仅在`show-input`等于true时有效 | number | — | 300 |
 | tooltip-class | tooltip 的自定义类名 | string | — | — |
+| marks | 标记， key 的类型必须为 number 且取值在闭区间 `[min, max]` 内，每个标记可以单独设置样式 | object | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

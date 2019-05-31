@@ -32,13 +32,13 @@ Switch is used for switching between two opposing states.
 
 ```html
 <el-switch
-  v-model="value3"
+  v-model="value1"
   active-text="Pay by month"
   inactive-text="Pay by year">
 </el-switch>
 <el-switch
   style="display: block"
-  v-model="value4"
+  v-model="value2"
   active-color="#13ce66"
   inactive-color="#ff4949"
   active-text="Pay by month"
@@ -49,8 +49,8 @@ Switch is used for switching between two opposing states.
   export default {
     data() {
       return {
-        value3: true,
-        value4: true
+        value1: true,
+        value2: true
       }
     }
   };
@@ -63,9 +63,9 @@ Switch is used for switching between two opposing states.
 :::demo You can set `active-value` and `inactive-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
 
 ```html
-<el-tooltip :content="'Switch value: ' + value5" placement="top">
+<el-tooltip :content="'Switch value: ' + value" placement="top">
   <el-switch
-    v-model="value5"
+    v-model="value"
     active-color="#13ce66"
     inactive-color="#ff4949"
     active-value="100"
@@ -77,7 +77,7 @@ Switch is used for switching between two opposing states.
   export default {
     data() {
       return {
-        value5: '100'
+        value: '100'
       }
     }
   };
@@ -92,11 +92,11 @@ Switch is used for switching between two opposing states.
 
 ```html
 <el-switch
-  v-model="value6"
+  v-model="value1"
   disabled>
 </el-switch>
 <el-switch
-  v-model="value7"
+  v-model="value2"
   disabled>
 </el-switch>
 
@@ -104,8 +104,8 @@ Switch is used for switching between two opposing states.
   export default {
     data() {
       return {
-        value6: true,
-        value7: false
+        value1: true,
+        value2: false
       }
     }
   };

@@ -52,9 +52,9 @@ When there are plenty of options, use a drop-down menu to display and select des
 
 ```html
 <template>
-  <el-select v-model="value2" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option
-      v-for="item in options2"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -67,7 +67,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           value: 'Option1',
           label: 'Option1'
         }, {
@@ -84,7 +84,7 @@ When there are plenty of options, use a drop-down menu to display and select des
           value: 'Option5',
           label: 'Option5'
         }],
-        value2: ''
+        value: ''
       }
     }
   }
@@ -99,7 +99,7 @@ Disable the whole component.
 :::demo Set `disabled` of `el-select` to make it disabled.
 ```html
 <template>
-  <el-select v-model="value3" disabled placeholder="Select">
+  <el-select v-model="value" disabled placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -129,7 +129,7 @@ Disable the whole component.
           value: 'Option5',
           label: 'Option5'
         }],
-        value3: ''
+        value: ''
       }
     }
   }
@@ -144,7 +144,7 @@ You can clear Select using a clear icon.
 :::demo Set `clearable` attribute for `el-select` and a clear icon will appear. Note that `clearable` is only for single select.
 ```html
 <template>
-  <el-select v-model="value4" clearable placeholder="Select">
+  <el-select v-model="value" clearable placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -174,7 +174,7 @@ You can clear Select using a clear icon.
           value: 'Option5',
           label: 'Option5'
         }],
-        value4: ''
+        value: ''
       }
     }
   }
@@ -189,7 +189,7 @@ Multiple select uses tags to display selected options.
 :::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="Select">
+  <el-select v-model="value1" multiple placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -199,7 +199,7 @@ Multiple select uses tags to display selected options.
   </el-select>
   
   <el-select
-    v-model="value11"
+    v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
@@ -233,8 +233,8 @@ Multiple select uses tags to display selected options.
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: [],
-        value11: []
+        value1: [],
+        value2: []
       }
     }
   }
@@ -250,7 +250,7 @@ You can customize HTML templates for options.
 
 ```html
 <template>
-  <el-select v-model="value6" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option
       v-for="item in cities"
       :key="item.value"
@@ -285,7 +285,7 @@ You can customize HTML templates for options.
           value: 'Guangzhou',
           label: 'Guangzhou'
         }],
-        value6: ''
+        value: ''
       }
     }
   }
@@ -301,9 +301,9 @@ Display options in groups.
 
 ```html
 <template>
-  <el-select v-model="value7" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option-group
-      v-for="group in options3"
+      v-for="group in options"
       :key="group.label"
       :label="group.label">
       <el-option
@@ -320,7 +320,7 @@ Display options in groups.
   export default {
     data() {
       return {
-        options3: [{
+        options: [{
           label: 'Popular cities',
           options: [{
             value: 'Shanghai',
@@ -345,7 +345,7 @@ Display options in groups.
             label: 'Dalian'
           }]
         }],
-        value7: ''
+        value: ''
       }
     }
   }
@@ -360,7 +360,7 @@ You can filter options for your desired ones.
 :::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value.
 ```html
 <template>
-  <el-select v-model="value8" filterable placeholder="Select">
+  <el-select v-model="value" filterable placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -390,7 +390,7 @@ You can filter options for your desired ones.
           value: 'Option5',
           label: 'Option5'
         }],
-        value8: ''
+        value: ''
       }
     }
   }
@@ -407,7 +407,7 @@ Enter keywords and search data from server.
 ```html
 <template>
   <el-select
-    v-model="value9"
+    v-model="value"
     multiple
     filterable
     remote
@@ -416,7 +416,7 @@ Enter keywords and search data from server.
     :remote-method="remoteMethod"
     :loading="loading">
     <el-option
-      v-for="item in options4"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -428,8 +428,8 @@ Enter keywords and search data from server.
   export default {
     data() {
       return {
-        options4: [],
-        value9: [],
+        options: [],
+        value: [],
         list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona",
@@ -462,13 +462,13 @@ Enter keywords and search data from server.
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options4 = this.list.filter(item => {
+            this.options = this.list.filter(item => {
               return item.label.toLowerCase()
                 .indexOf(query.toLowerCase()) > -1;
             });
           }, 200);
         } else {
-          this.options4 = [];
+          this.options = [];
         }
       }
     }
@@ -483,14 +483,14 @@ Create and select new items that are not included in select options
 ```html
 <template>
   <el-select
-    v-model="value10"
+    v-model="value"
     multiple
     filterable
     allow-create
     default-first-option
     placeholder="Choose tags for your article">
     <el-option
-      v-for="item in options5"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -502,7 +502,7 @@ Create and select new items that are not included in select options
   export default {
     data() {
       return {
-        options5: [{
+        options: [{
           value: 'HTML',
           label: 'HTML'
         }, {
@@ -512,7 +512,7 @@ Create and select new items that are not included in select options
           value: 'JavaScript',
           label: 'JavaScript'
         }],
-        value10: []
+        value: []
       }
     }
   }

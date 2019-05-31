@@ -1,5 +1,6 @@
 <script>
   import bus from '../../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from '../../components/theme/constant.js';
   const varMap = {
     '$--box-shadow-light': 'boxShadowLight',
     '$--box-shadow-base': 'boxShadowBase',
@@ -14,7 +15,7 @@
   }
   export default {
     created() {
-      bus.$on('user-theme-config-update', this.setGlobal);
+      bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
     },
     mounted() {
       this.setGlobal();
@@ -119,13 +120,13 @@ There are few radius styles to choose.
 
 ### Shadow
 
-There are few shaodw styles to choose.
+There are few shadow styles to choose.
 
 <div 
 class="demo-shadow"
 :style="{ boxShadow: boxShadowBase }"
 ></div>
-<span class="demo-shadow-text">Basic Shaodw box-shadow: {{boxShadowBase}}</span>
+<span class="demo-shadow-text">Basic Shadow box-shadow: {{boxShadowBase}}</span>
 
 <div 
 class="demo-shadow"

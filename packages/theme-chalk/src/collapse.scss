@@ -7,16 +7,22 @@
   border-bottom: 1px solid $--collapse-border-color;
 }
 @include b(collapse-item) {
+  @include when(disabled) {
+    .el-collapse-item__header {
+      color: $--font-color-disabled-base;
+      cursor: not-allowed;
+    }
+  }
   @include e(header) {
     display: flex;
     align-items: center;
     height: $--collapse-header-height;
     line-height: $--collapse-header-height;
-    background-color: $--collapse-header-fill;
-    color: $--collapse-header-color;
+    background-color: $--collapse-header-background-color;
+    color: $--collapse-header-font-color;
     cursor: pointer;
     border-bottom: 1px solid $--collapse-border-color;
-    font-size: $--collapse-header-size;
+    font-size: $--collapse-header-font-size;
     font-weight: 500;
     transition: border-bottom-color .3s;
     outline: none;
@@ -38,7 +44,7 @@
 
   @include e(wrap) {
     will-change: height;
-    background-color: $--collapse-content-fill;
+    background-color: $--collapse-content-background-color;
     overflow: hidden;
     box-sizing: border-box;
     border-bottom: 1px solid $--collapse-border-color;
@@ -46,8 +52,8 @@
 
   @include e(content) {
     padding-bottom: 25px;
-    font-size: $--collapse-content-size;
-    color: $--collapse-content-color;
+    font-size: $--collapse-content-font-size;
+    color: $--collapse-content-font-color;
     line-height: 1.769230769230769;
   }
 

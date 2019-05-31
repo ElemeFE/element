@@ -138,8 +138,8 @@ Vous pouvez activer la sélection des noeuds.
 :::demo Les données d'un noeud ne sont pas accessibles tant que la noeud n'est pas cliqué, l'arbre ne peut donc pas prédire si un noeud sera une feuille. C'est pourquoi un bouton de menu est ajouté à chaque noeud, et si c'est  une feuille il disparaîtra après le clic. Vous pouvez également dire par avance à l'arbre si un noeud est une feuille, pour éviter l'apparition du bouton de menu.
 ```html
 <el-tree
-  :props="props1"
-  :load="loadNode1"
+  :props="props"
+  :load="loadNode"
   lazy
   show-checkbox>
 </el-tree>
@@ -148,7 +148,7 @@ Vous pouvez activer la sélection des noeuds.
   export default {
     data() {
       return {
-        props1: {
+        props: {
           label: 'name',
           children: 'zones',
           isLeaf: 'leaf'
@@ -156,7 +156,7 @@ Vous pouvez activer la sélection des noeuds.
       };
     },
     methods: {
-      loadNode1(node, resolve) {
+      loadNode(node, resolve) {
         if (node.level === 0) {
           return resolve([{ name: 'region' }]);
         }
@@ -186,7 +186,7 @@ Les checkbox des noeuds peuvent être désactivées individuellement.
 :::demo Dans cet exemple, la propriété `disabled` est ajoutée à `defaultProps`, et certains noeuds ont `disabled:true`. Les checkbox correspondantes sont donc désactivées.
 ```html
 <el-tree
-  :data="data3"
+  :data="data"
   :props="defaultProps"
   show-checkbox
   @check-change="handleCheckChange">
@@ -196,7 +196,7 @@ Les checkbox des noeuds peuvent être désactivées individuellement.
   export default {
     data() {
       return {
-        data3: [{
+        data: [{
           id: 1,
           label: 'Niveau un 1',
           children: [{
@@ -243,7 +243,7 @@ Certains noeuds peuvent être ouverts et/ou sélectionnés par défaut.
 :::demo Utilisez `default-expanded-keys` et `default-checked-keys` pour réglez respectivement les noeuds ouverts et les noeuds sélectionnés par défaut. Notez que `node-key` est requis dans ce cas. Sa valeurs est le nom d'une clé dans l'objets data, et sa valeur devrait être unique dans tout l'arbre.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   node-key="id"
   :default-expanded-keys="[2, 3]"
@@ -255,7 +255,7 @@ Certains noeuds peuvent être ouverts et/ou sélectionnés par défaut.
   export default {
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Niveau un 1',
           children: [{
@@ -306,7 +306,7 @@ Certains noeuds peuvent être ouverts et/ou sélectionnés par défaut.
 :::demo Cet exemple montre comment récupérer et sélectionner des noeuds. Vous pouvez utiliser deux approches: les noeuds ou les clés. Dans le cas des clés, `node-key` est requis.
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   default-expand-all
   node-key="id"
@@ -351,7 +351,7 @@ Certains noeuds peuvent être ouverts et/ou sélectionnés par défaut.
 
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: 'Niveau un 1',
           children: [{
@@ -407,7 +407,7 @@ Le contenu des noeuds peut être personnalisé, afin de pouvoir ajouter des icô
   <div class="block">
     <p>Avec render-content</p>
     <el-tree
-      :data="data4"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -418,7 +418,7 @@ Le contenu des noeuds peut être personnalisé, afin de pouvoir ajouter des icô
   <div class="block">
     <p>Avec un slot</p>
     <el-tree
-      :data="data5"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -485,8 +485,8 @@ Le contenu des noeuds peut être personnalisé, afin de pouvoir ajouter des icô
         }]
       }];
       return {
-        data4: JSON.parse(JSON.stringify(data)),
-        data5: JSON.parse(JSON.stringify(data))
+        data: JSON.parse(JSON.stringify(data)),
+        data: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -546,18 +546,18 @@ Les noeuds peuvent être filtrés par mot-clé.
 
 <el-tree
   class="filter-tree"
-  :data="data2"
+  :data="data"
   :props="defaultProps"
   default-expand-all
   :filter-node-method="filterNode"
-  ref="tree2">
+  ref="tree">
 </el-tree>
 
 <script>
   export default {
     watch: {
       filterText(val) {
-        this.$refs.tree2.filter(val);
+        this.$refs.tree.filter(val);
       }
     },
 
@@ -571,7 +571,7 @@ Les noeuds peuvent être filtrés par mot-clé.
     data() {
       return {
         filterText: '',
-        data2: [{
+        data: [{
           id: 1,
           label: 'Niveau un 1',
           children: [{
@@ -692,7 +692,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 :::demo
 ```html
 <el-tree
-  :data="data6"
+  :data="data"
   node-key="id"
   default-expand-all
   @node-drag-start="handleDragStart"
@@ -710,7 +710,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
   export default {
     data() {
       return {
-        data6: [{
+        data: [{
           label: 'Niveau un 1',
           children: [{
             label: 'Niveau deux 1-1',

@@ -1,5 +1,6 @@
 <script>
   import bus from '../../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from '../../components/theme/constant.js';
   const varMap = {
     '$--box-shadow-light': 'boxShadowLight',
     '$--box-shadow-base': 'boxShadowBase',
@@ -14,7 +15,7 @@
   }
   export default {
     created() {
-      bus.$on('user-theme-config-update', this.setGlobal);
+      bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
     },
     mounted() {
       this.setGlobal();
@@ -54,11 +55,11 @@
 
 ## Border
 
-We standardize the borders that can be used in buttons, cards, pop-ups and other components.
+Estandarizamos los bordes que se pueden utilizar en botones, tarjetas, pop-ups y otros componentes.
 
 ### Border
 
-There are few border styles to choose.
+Hay pocos estilos de borde para elegir.
 
 <table class="demo-border">
   <tbody>
@@ -86,7 +87,7 @@ There are few border styles to choose.
 
 ### Radius
 
-There are few radius styles to choose.
+Hay pocos estilos de radio para elegir.
 
 <el-row :gutter="12" class="demo-radius">
   <el-col :span="6" :xs="{span: 12}">
@@ -119,13 +120,13 @@ There are few radius styles to choose.
 
 ### Shadow
 
-There are few shaodw styles to choose.
+Hay pocos estilos de sombra para elegir.
 
 <div 
 class="demo-shadow"
 :style="{ boxShadow: boxShadowBase }"
 ></div>
-<span class="demo-shadow-text">Basic Shaodw box-shadow: {{boxShadowBase}}</span>
+<span class="demo-shadow-text">Basic Shadow box-shadow: {{boxShadowBase}}</span>
 
 <div 
 class="demo-shadow"

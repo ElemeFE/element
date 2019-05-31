@@ -126,5 +126,6 @@ En plus de l'utilisation de l'attribut `title`, vous pouvez configurer les titre
 ### Attributs de Collapse-Item
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| name | Identifiant unique du panneau. | string/number | — | — |
-| title | Titre du panneau. | string | — | — |
+| name      | Identifiant unique du panneau. | string/number | — | — |
+| title     | Titre du panneau.              | string        | — | — |
+| disabled  | Désactive le panneau.          | boolean       | — | — |

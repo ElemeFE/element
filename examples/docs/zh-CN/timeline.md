@@ -58,7 +58,7 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 <div class="block">
   <el-timeline>
     <el-timeline-item
-      v-for="(activity, index) in activities2"
+      v-for="(activity, index) in activities"
       :key="index"
       :icon="activity.icon"
       :type="activity.type"
@@ -74,7 +74,7 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
   export default {
     data() {
       return {
-        activities2: [{
+        activities: [{
           content: '支持使用图标',
           timestamp: '2018-04-12 20:46',
           size: 'large',

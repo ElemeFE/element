@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Sobivad andmed puuduvad',
       loading: 'Laadimine',
-      placeholder: 'Vali'
+      placeholder: 'Vali',
+      noData: 'Andmed puuduvad'
     },
     pagination: {
       goto: 'Mine lehele',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Sisesta märksõna',
       noCheckedFormat: '{total} objekti',
       hasCheckedFormat: '{checked}/{total} valitud'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

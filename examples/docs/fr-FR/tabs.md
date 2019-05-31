@@ -109,7 +109,7 @@ Vous pouvez utiliser `tab-position` pour régler la position des onglets.
   export default {
     data() {
       return {
-        tabPosition: 'top'
+        tabPosition: 'left'
       };
     }
   };
@@ -210,14 +210,14 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 <div style="margin-bottom: 20px;">
   <el-button
     size="small"
-    @click="addTab(editableTabsValue2)"
+    @click="addTab(editableTabsValue)"
   >
     Ajouter un onglet
   </el-button>
 </div>
-<el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
+<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
   <el-tab-pane
-    v-for="(item, index) in editableTabs2"
+    v-for="(item, index) in editableTabs"
     :key="item.name"
     :label="item.title"
     :name="item.name"
@@ -229,8 +229,8 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
   export default {
     data() {
       return {
-        editableTabsValue2: '2',
-        editableTabs2: [{
+        editableTabsValue: '2',
+        editableTabs: [{
           title: 'Onglet 1',
           name: '1',
           content: 'Contenu de l\'onglet 1'
@@ -245,16 +245,16 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
     methods: {
       addTab(targetName) {
         let newTabName = ++this.tabIndex + '';
-        this.editableTabs2.push({
+        this.editableTabs.push({
           title: 'Nouvel onglet',
           name: newTabName,
           content: 'Contenu du nouvel onglet'
         });
-        this.editableTabsValue2 = newTabName;
+        this.editableTabsValue = newTabName;
       },
       removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
             if (tab.name === targetName) {
@@ -266,8 +266,8 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
           });
         }
 
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
   }
@@ -303,6 +303,6 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Titre de l'onglet. | string   | — |    —     |
 | disabled | Si l'onglet est désactivé. | boolean | — | false |
-| name      | Identifiant de l'onglet, utilisé par Tabs pour savoir quel est l'onglet actif. | string | — | Numéro de l'onglet dans l'ordre d'apparition, e.g. le premier est '1'. |
+| name      | Identifiant correspondant au nom des onglets, utilisé par Tabs pour savoir quel est l'onglet actif. | string | — | Numéro de l'onglet dans l'ordre d'apparition, e.g. le premier est '1'. |
 | closable  | Si l'onglet est supprimable. | boolean   | — |  false  |
 | lazy  | Si le contenu de l'onglet bénéficie du lazy-loading.  | boolean   | — |  false  |

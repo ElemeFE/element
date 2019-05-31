@@ -91,7 +91,11 @@ export default class TreeStore {
 
   remove(data) {
     const node = this.getNode(data);
+
     if (node && node.parent) {
+      if (node === this.currentNode) {
+        this.currentNode = null;
+      }
       node.parent.removeChild(node);
     }
   }
@@ -310,8 +314,13 @@ export default class TreeStore {
     return this.currentNode;
   }
 
-  setCurrentNode(node) {
-    this.currentNode = node;
+  setCurrentNode(currentNode) {
+    const prevCurrentNode = this.currentNode;
+    if (prevCurrentNode) {
+      prevCurrentNode.isCurrent = false;
+    }
+    this.currentNode = currentNode;
+    this.currentNode.isCurrent = true;
   }
 
   setUserCurrentNode(node) {
@@ -327,7 +336,7 @@ export default class TreeStore {
     }
     const node = this.getNode(key);
     if (node) {
-      this.currentNode = node;
+      this.setCurrentNode(node);
     }
   }
 };

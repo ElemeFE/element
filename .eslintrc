@@ -1,11 +1,6 @@
 {
-  "env": {
-    "mocha": true
-  },
   "globals": {
-    "ga": true,
-    "expect": true,
-    "sinon": true
+    "ga": true
   },
   "plugins": ["html", "json"],
   "extends": "elemefe",

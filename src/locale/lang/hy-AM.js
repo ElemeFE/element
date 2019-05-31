@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Համապատասխան տուեալներ չկան',
       loading: 'Բեռնում',
-      placeholder: 'Ընտրել'
+      placeholder: 'Ընտրել',
+      noData: 'Տվյալներ չկան'
     },
     pagination: {
       goto: 'Անցնել',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Մուտքագրեք բանալի բառ',
       noCheckedFormat: '{total} միաւոր',
       hasCheckedFormat: '{checked}/{total} ընտրուած է'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

@@ -45,14 +45,14 @@ Utilizados para mostrar retroalimentacion de Success, Warning, Message y Error a
 <template>
   <el-button :plain="true" @click="open2">success</el-button>
   <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open">message</el-button>
+  <el-button :plain="true" @click="open1">message</el-button>
   <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open() {
+      open1() {
         this.$message('This is a message.');
       },
       open2() {
@@ -85,23 +85,23 @@ Un boton para cerrar que puede ser agregado.
 :::demo Un componente Message predeterminado no se puede cerrar manualmente. Si necesitas un componente message que pueda cerrarse, puedes establecer el campo `showClose`. Ademas, al igual que las notificaciones, message tiene un atriubuto `duration` que puede ser controlado. Por defecto la duracion es de 3000 ms, y no desaparecera al llegar a `0`.
 ```html
 <template>
-  <el-button :plain="true" @click="open5">message</el-button>
-  <el-button :plain="true" @click="open6">success</el-button>
-  <el-button :plain="true" @click="open7">warning</el-button>
-  <el-button :plain="true" @click="open8">error</el-button>
+  <el-button :plain="true" @click="open1">message</el-button>
+  <el-button :plain="true" @click="open2">success</el-button>
+  <el-button :plain="true" @click="open3">warning</el-button>
+  <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open5() {
+      open1() {
         this.$message({
           showClose: true,
           message: 'This is a message.'
         });
       },
 
-      open6() {
+      open2() {
         this.$message({
           showClose: true,
           message: 'Congrats, this is a success message.',
@@ -109,7 +109,7 @@ Un boton para cerrar que puede ser agregado.
         });
       },
 
-      open7() {
+      open3() {
         this.$message({
           showClose: true,
           message: 'Warning, this is a warning message.',
@@ -117,7 +117,7 @@ Un boton para cerrar que puede ser agregado.
         });
       },
 
-      open8() {
+      open4() {
         this.$message({
           showClose: true,
           message: 'Oops, this is a error message.',
@@ -210,6 +210,7 @@ En este caso deberia llamar al metodo `Message(options)`. Tambien se han registr
 | showClose                | utilizado para mostrar un boton para cerrar | boolean        | —                          | false       |
 | center                   | utilizado para centrar el texto          | boolean        | —                          | false       |
 | onClose                  | funcion callback ejecutada cuando se cierra con una instancia de mensaje como parametro | function       | —                          | —           |
+| offset | set the distance to the top of viewport | number | — | 20 |
 
 ### Metodos
 `Message` y `this.$message` regresan una instancia del componente Message. Para cerrar manualmente la instancia, puede llamar al metodo `close`.

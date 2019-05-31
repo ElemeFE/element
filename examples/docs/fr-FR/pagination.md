@@ -144,6 +144,34 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 ```
 :::
 
+### Cacher la pagination si il n'y a qu'une seule page
+
+Lorsqu'il n'y a qu'une seule page, il est possible de cacher la pagination avec l'attribut `hide-on-single-page`.
+
+:::demo
+```html
+<div>
+ <el-switch v-model="value">
+ </el-switch>
+ <el-pagination
+  :hide-on-single-page="value"
+  :total="5"
+  layout="prev, pager, next">
+</el-pagination>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: false
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributs
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
@@ -161,6 +189,7 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 | prev-text | Texte du bouton prev. | string | — | — |
 | next-text | Texte du bouton next. | string | — | — |
 | disabled | Si la pagination est désactivée. | boolean | — | false |
+| hide-on-single-page | Si la pagination doit être cachée quand il n'y a qu'une seule page. | boolean | — | - |
 
 ### Évènements
 

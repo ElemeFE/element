@@ -25,7 +25,7 @@ Basic date picker measured by 'day'.
       v-model="value2"
       type="date"
       placeholder="Pick a day"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
 </template>
@@ -34,7 +34,7 @@ Basic date picker measured by 'day'.
   export default {
     data() {
       return {
-        pickerOptions1: {
+        pickerOptions: {
           disabledDate(time) {
             return time.getTime() > Date.now();
           },
@@ -79,7 +79,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
   <div class="block">
     <span class="demonstration">Week</span>
     <el-date-picker
-      v-model="value3"
+      v-model="value1"
       type="week"
       format="Week WW"
       placeholder="Pick a week">
@@ -88,7 +88,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
   <div class="block">
     <span class="demonstration">Month</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value2"
       type="month"
       placeholder="Pick a month">
     </el-date-picker>
@@ -98,7 +98,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
   <div class="block">
     <span class="demonstration">Year</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value3"
       type="year"
       placeholder="Pick a year">
     </el-date-picker>
@@ -107,7 +107,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
     <span class="demonstration">Dates</span>
     <el-date-picker
       type="dates"
-      v-model="value14"
+      v-model="value4"
       placeholder="Pick one or more dates">
     </el-date-picker>
   </div>
@@ -117,10 +117,10 @@ You can choose week, month, year or multiple dates by extending the standard dat
   export default {
     data() {
       return {
+        value1: '',
+        value2: '',
         value3: '',
-        value4: '',
-        value5: '',
-        value14: ''
+        value4: ''
       };
     }
   };
@@ -140,7 +140,7 @@ Picking a date range is supported.
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value1"
       type="daterange"
       range-separator="To"
       start-placeholder="Start date"
@@ -150,14 +150,14 @@ Picking a date range is supported.
   <div class="block">
     <span class="demonstration">With quick options</span>
     <el-date-picker
-      v-model="value7"
+      v-model="value2"
       type="daterange"
       align="right"
       unlink-panels
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
-      :picker-options="pickerOptions2">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
 </template>
@@ -166,7 +166,7 @@ Picking a date range is supported.
   export default {
     data() {
       return {
-        pickerOptions2: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Last week',
             onClick(picker) {
@@ -193,8 +193,8 @@ Picking a date range is supported.
             }
           }]
         },
-        value6: '',
-        value7: ''
+        value1: '',
+        value2: ''
       };
     }
   };
@@ -213,7 +213,7 @@ Picking a month range is supported.
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value15"
+      v-model="value1"
       type="monthrange"
       range-separator="To"
       start-placeholder="Start month"
@@ -223,14 +223,14 @@ Picking a month range is supported.
   <div class="block">
     <span class="demonstration">With quick options</span>
     <el-date-picker
-      v-model="value16"
+      v-model="value2"
       type="monthrange"
       align="right"
       unlink-panels
       range-separator="To"
       start-placeholder="Start month"
       end-placeholder="End month"
-      :picker-options="pickerOptions3">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
 </template>
@@ -239,7 +239,7 @@ Picking a month range is supported.
   export default {
     data() {
       return {
-        pickerOptions3: {
+        pickerOptions: {
           shortcuts: [{
             text: 'This month',
             onClick(picker) {
@@ -262,8 +262,8 @@ Picking a month range is supported.
             }
           }]
         },
-        value15: '',
-        value16: ''
+        value1: '',
+        value2: ''
       };
     }
   };
@@ -283,7 +283,7 @@ If type is `daterange`, `default-value` sets the left side calendar.
   <div class="block">
     <span class="demonstration">date</span>
     <el-date-picker
-      v-model="value8"
+      v-model="value1"
       type="date"
       placeholder="Pick a date"
       default-value="2010-10-01">
@@ -292,7 +292,7 @@ If type is `daterange`, `default-value` sets the left side calendar.
   <div class="block">
     <span class="demonstration">daterange</span>
     <el-date-picker
-      v-model="value9"
+      v-model="value2"
       type="daterange"
       align="right"
       start-placeholder="Start Date"
@@ -306,8 +306,8 @@ If type is `daterange`, `default-value` sets the left side calendar.
   export default {
     data() {
       return {
-        value8: '',
-        value9: ''
+        value1: '',
+        value2: ''
       };
     }
   };
@@ -346,15 +346,16 @@ Pay attention to capitalization
 | `A`  | AM/PM | only for `format`, uppercased | AM |
 | `a`  | am/pm | only for `format`, lowercased | am |
 | `timestamp` | JS timestamp | only for `value-format`; binding value will be a `number` | 1483326245000 |
+| `[MM]` | No escape characters | To escape characters, wrap them in square brackets (e.g. [A] [MM]) | MM |
 
 :::demo
 ```html
 <template>
   <div class="block">
     <span class="demonstration">Emits Date object</span>
-    <div class="demonstration">Value: {{ value10 }}</div>
+    <div class="demonstration">Value: {{ value1 }}</div>
     <el-date-picker
-      v-model="value10"
+      v-model="value1"
       type="date"
       placeholder="Pick a Date"
       format="yyyy/MM/dd">
@@ -362,9 +363,9 @@ Pay attention to capitalization
   </div>
   <div class="block">
     <span class="demonstration">Use value-format</span>
-    <div class="demonstration">Value: {{ value11 }}</div>
+    <div class="demonstration">Value: {{ value2 }}</div>
     <el-date-picker
-      v-model="value11"
+      v-model="value2"
       type="date"
       placeholder="Pick a Date"
       format="yyyy/MM/dd"
@@ -373,9 +374,9 @@ Pay attention to capitalization
   </div>
   <div class="block">
     <span class="demonstration">Timestamp</span>
-    <div class="demonstration">Value：{{ value12 }}</div>
+    <div class="demonstration">Value：{{ value3 }}</div>
     <el-date-picker
-      v-model="value12"
+      v-model="value3"
       type="date"
       placeholder="Pick a Date"
       format="yyyy/MM/dd"
@@ -388,9 +389,9 @@ Pay attention to capitalization
   export default {
     data() {
       return {
-        value10: '',
-        value11: '',
-        value12: ''
+        value1: '',
+        value2: '',
+        value3: ''
       };
     }
   };
@@ -406,9 +407,9 @@ When picking a date range, you can assign the time part for start date and end d
 ```html
 <template>
   <div class="block">
-    <p>Component value：{{ value13 }}</p>
+    <p>Component value：{{ value }}</p>
     <el-date-picker
-      v-model="value13"
+      v-model="value"
       type="daterange"
       start-placeholder="Start date"
       end-placeholder="End date"
@@ -421,7 +422,7 @@ When picking a date range, you can assign the time part for start date and end d
   export default {
     data() {
       return {
-        value13: ''
+        value: ''
       };
     }
   };

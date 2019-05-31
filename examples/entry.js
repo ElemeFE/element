@@ -15,6 +15,7 @@ import 'packages/theme-chalk/src/index.scss';
 import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
+import icon from './icon.json';
 
 Vue.use(Element);
 Vue.use(VueRouter);
@@ -23,6 +24,21 @@ Vue.component('main-footer', MainFooter);
 Vue.component('main-header', MainHeader);
 Vue.component('side-nav', SideNav);
 Vue.component('footer-nav', FooterNav);
+
+const globalEle = new Vue({
+  data: { $isEle: false } // 是否 ele 用户
+});
+
+Vue.mixin({
+  computed: {
+    $isEle: {
+      get: () => (globalEle.$data.$isEle),
+      set: (data) => {globalEle.$data.$isEle = data;}
+    }
+  }
+});
+
+Vue.prototype.$icon = icon; // Icon 列表页用
 
 const router = new VueRouter({
   mode: 'hash',

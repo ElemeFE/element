@@ -42,7 +42,7 @@
 
 ```html
 <template>
-  <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
+  <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
@@ -53,7 +53,7 @@
   export default {
     data() {
       return {
-        activeName2: 'first'
+        activeName: 'first'
       };
     },
     methods: {
@@ -107,7 +107,7 @@
   export default {
     data() {
       return {
-        tabPosition: 'top'
+        tabPosition: 'left'
       };
     }
   };
@@ -208,14 +208,14 @@
 <div style="margin-bottom: 20px;">
   <el-button
     size="small"
-    @click="addTab(editableTabsValue2)"
+    @click="addTab(editableTabsValue)"
   >
     add tab
   </el-button>
 </div>
-<el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
+<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
   <el-tab-pane
-    v-for="(item, index) in editableTabs2"
+    v-for="(item, index) in editableTabs"
     :key="item.name"
     :label="item.title"
     :name="item.name"
@@ -227,8 +227,8 @@
   export default {
     data() {
       return {
-        editableTabsValue2: '2',
-        editableTabs2: [{
+        editableTabsValue: '2',
+        editableTabs: [{
           title: 'Tab 1',
           name: '1',
           content: 'Tab 1 content'
@@ -243,16 +243,16 @@
     methods: {
       addTab(targetName) {
         let newTabName = ++this.tabIndex + '';
-        this.editableTabs2.push({
+        this.editableTabs.push({
           title: 'New Tab',
           name: newTabName,
           content: 'New Tab content'
         });
-        this.editableTabsValue2 = newTabName;
+        this.editableTabsValue = newTabName;
       },
       removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
             if (tab.name === targetName) {
@@ -264,8 +264,8 @@
           });
         }
         
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
   }
@@ -298,6 +298,6 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | 选项卡标题   | string   | — |    —     |
 | disabled | 是否禁用 | boolean | — | false |
-| name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
+| name      | 与选项卡绑定值 value 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
 | lazy  | 标签是否延迟渲染   | boolean   | — |  false  |

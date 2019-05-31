@@ -138,8 +138,8 @@
 :::demo 由于在点击节点时才进行该层数据的获取，默认情况下 Tree 无法预知某个节点是否为叶子节点，所以会为每个节点添加一个下拉按钮，如果节点没有下层数据，则点击后下拉按钮会消失。同时，你也可以提前告知 Tree 某个节点是否为叶子节点，从而避免在叶子节点前渲染下拉按钮。
 ```html
 <el-tree
-  :props="props1"
-  :load="loadNode1"
+  :props="props"
+  :load="loadNode"
   lazy
   show-checkbox>
 </el-tree>
@@ -148,7 +148,7 @@
   export default {
     data() {
       return {
-        props1: {
+        props: {
           label: 'name',
           children: 'zones',
           isLeaf: 'leaf'
@@ -156,7 +156,7 @@
       };
     },
     methods: {
-      loadNode1(node, resolve) {
+      loadNode(node, resolve) {
         if (node.level === 0) {
           return resolve([{ name: 'region' }]);
         }
@@ -185,7 +185,7 @@
 :::demo 分别通过`default-expanded-keys`和`default-checked-keys`设置默认展开和默认选中的节点。需要注意的是，此时必须设置`node-key`，其值为节点数据中的一个字段名，该字段在整棵树中是唯一的。
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   node-key="id"
   :default-expanded-keys="[2, 3]"
@@ -197,7 +197,7 @@
   export default {
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: '一级 1',
           children: [{
@@ -249,7 +249,7 @@
 :::demo 通过`disabled`设置禁用状态。
 ```html
 <el-tree
-  :data="data3"
+  :data="data"
   show-checkbox
   node-key="id"
   :default-expanded-keys="[2, 3]"
@@ -260,7 +260,7 @@
   export default {
     data() {
       return {
-        data3: [{
+        data: [{
           id: 1,
           label: '一级 2',
           children: [{
@@ -304,7 +304,7 @@
 :::demo 本例展示如何获取和设置选中节点。获取和设置各有两种方式：通过 node 或通过 key。如果需要通过 key 来获取或设置，则必须设置`node-key`。
 ```html
 <el-tree
-  :data="data2"
+  :data="data"
   show-checkbox
   default-expand-all
   node-key="id"
@@ -349,7 +349,7 @@
 
     data() {
       return {
-        data2: [{
+        data: [{
           id: 1,
           label: '一级 1',
           children: [{
@@ -404,7 +404,7 @@
   <div class="block">
     <p>使用 render-content</p>
     <el-tree
-      :data="data4"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -415,7 +415,7 @@
   <div class="block">
     <p>使用 scoped slot</p>
     <el-tree
-      :data="data5"
+      :data="data"
       show-checkbox
       node-key="id"
       default-expand-all
@@ -482,8 +482,8 @@
         }]
       }];
       return {
-        data4: JSON.parse(JSON.stringify(data)),
-        data5: JSON.parse(JSON.stringify(data))
+        data: JSON.parse(JSON.stringify(data)),
+        data: JSON.parse(JSON.stringify(data))
       }
     },
 
@@ -542,18 +542,18 @@
 
 <el-tree
   class="filter-tree"
-  :data="data2"
+  :data="data"
   :props="defaultProps"
   default-expand-all
   :filter-node-method="filterNode"
-  ref="tree2">
+  ref="tree">
 </el-tree>
 
 <script>
   export default {
     watch: {
       filterText(val) {
-        this.$refs.tree2.filter(val);
+        this.$refs.tree.filter(val);
       }
     },
 
@@ -567,7 +567,7 @@
     data() {
       return {
         filterText: '',
-        data2: [{
+        data: [{
           id: 1,
           label: '一级 1',
           children: [{
@@ -688,7 +688,7 @@
 :::demo
 ```html
 <el-tree
-  :data="data6"
+  :data="data"
   node-key="id"
   default-expand-all
   @node-drag-start="handleDragStart"
@@ -706,7 +706,7 @@
   export default {
     data() {
       return {
-        data6: [{
+        data: [{
           id: 1,
           label: '一级 1',
           children: [{

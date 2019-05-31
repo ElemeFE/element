@@ -27,7 +27,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
       v-model="value2"
       type="datetime"
       placeholder="Select date and time"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
   <div class="block">
@@ -45,7 +45,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        pickerOptions1: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -86,7 +86,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value1"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
@@ -96,9 +96,9 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">With shortcuts</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value2"
       type="datetimerange"
-      :picker-options="pickerOptions2"
+      :picker-options="pickerOptions"
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
@@ -111,7 +111,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        pickerOptions2: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Last week',
             onClick(picker) {
@@ -138,8 +138,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
             }
           }]
         },
-        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value5: ''
+        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value2: ''
       };
     }
   };
@@ -147,15 +147,15 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 ```
 :::
 
-###  Default time value for start date and end date
+###  Valor de la hora por defecto para la fecha de inicio y la fecha final
 
-:::demo When picking date range on the date panel with type `datetimerange`, `00:00:00` will be used as the default time value for start and end date. We can control it with the `default-time` attribute. `default-time` accepts an array of up to two strings. The first item controls time value of the start date and the second item controls time value of the end date.
+:::demo Cuando se selecciona el rango de fechas en el panel con el tipo datetimerange, 00:00:00:00 se usará como el valor de tiempo predeterminado para la fecha de inicio y fin. Podemos controlarlo con el atributo default-time. default-time acepta una matriz de hasta dos cadenas. La primera posición controla el valor de tiempo de la fecha de inicio y la segunda el valor de tiempo de la fecha de fin.
 ```html
 <template>
   <div class="block">
     <span class="demonstration">Start date time 12:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value1"
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
@@ -165,7 +165,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
     <el-date-picker
-      v-model="value7"
+      v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="Start Date"
@@ -179,8 +179,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        value6: '',
-        value7: ''
+        value1: '',
+        value2: ''
       };
     }
   };
@@ -214,7 +214,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
 | prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
 | clear-icon         | Clase personalizada para el icono `clear` | string              | —                                        | el-icon-circle-close |
-| validate-event     | whether to trigger form validation        | boolean             | -                                        | true                 |
+| validate-event     | si se debe disparar la validacion | boolean             | -                                        | true                 |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |

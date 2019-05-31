@@ -26,7 +26,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       type="datetime"
       placeholder="选择日期时间"
       align="right"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions">
     </el-date-picker>
   </div>
   <div class="block">
@@ -44,7 +44,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   export default {
     data() {
       return {
-        pickerOptions1: {
+        pickerOptions: {
           shortcuts: [{
             text: '今天',
             onClick(picker) {
@@ -84,7 +84,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">默认</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value1"
       type="datetimerange"
       range-separator="至"
       start-placeholder="开始日期"
@@ -94,9 +94,9 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">带快捷选项</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value2"
       type="datetimerange"
-      :picker-options="pickerOptions2"
+      :picker-options="pickerOptions"
       range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
@@ -109,7 +109,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   export default {
     data() {
       return {
-        pickerOptions2: {
+        pickerOptions: {
           shortcuts: [{
             text: '最近一周',
             onClick(picker) {
@@ -136,8 +136,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
             }
           }]
         },
-        value4: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value5: ''
+        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value2: ''
       };
     }
   };
@@ -153,7 +153,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value1"
       type="datetimerange"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
@@ -163,7 +163,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   <div class="block">
     <span class="demonstration">起始日期时刻为 12:00:00，结束日期时刻为 08:00:00</span>
     <el-date-picker
-      v-model="value7"
+      v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="开始日期"
@@ -177,8 +177,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
   export default {
     data() {
       return {
-        value6: '',
-        value7: ''
+        value1: '',
+        value2: ''
       };
     }
   };

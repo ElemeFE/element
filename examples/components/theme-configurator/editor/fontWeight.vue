@@ -1,12 +1,15 @@
 <template>
   <section class="config" :key="displayName">
     <div class="config-label">
-      {{displayName}}
+      <el-tooltip :content="displayName">
+        <span>{{displayKeyName}}</span>
+      </el-tooltip>
     </div>
     <div class="config-content">
       <el-select 
         v-model="value" 
         class="select"
+        size="medium"
         @change="onSelectChange"
       >
         <el-option

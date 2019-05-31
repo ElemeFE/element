@@ -52,9 +52,9 @@ Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché gr
 
 ```html
 <template>
-  <el-select v-model="value2" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option
-      v-for="item in options2"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -67,7 +67,7 @@ Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché gr
   export default {
     data() {
       return {
-        options2: [{
+        options: [{
           value: 'Option1',
           label: 'Option1'
         }, {
@@ -84,7 +84,7 @@ Utile lorsqu'il faut sélectionner des options parmi un large choix, affiché gr
           value: 'Option5',
           label: 'Option5'
         }],
-        value2: ''
+        value: ''
       }
     }
   }
@@ -99,7 +99,7 @@ Vous pouvez désactiver le composant lui-même.
 :::demo Ajoutez `disabled` à `el-select` pour le désactiver.
 ```html
 <template>
-  <el-select v-model="value3" disabled placeholder="Select">
+  <el-select v-model="value" disabled placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -129,7 +129,7 @@ Vous pouvez désactiver le composant lui-même.
           value: 'Option5',
           label: 'Option5'
         }],
-        value3: ''
+        value: ''
       }
     }
   }
@@ -144,7 +144,7 @@ Vous pouvez ajouter un bouton pour effacer la sélection.
 :::demo Ajoutez l'attribut `clearable` à `el-select` et l'icône de fermeture s'affichera après une sélection. Notez que `clearable` ne marche qu'avec les sélecteurs à choix unique.
 ```html
 <template>
-  <el-select v-model="value4" clearable placeholder="Select">
+  <el-select v-model="value" clearable placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -174,7 +174,7 @@ Vous pouvez ajouter un bouton pour effacer la sélection.
           value: 'Option5',
           label: 'Option5'
         }],
-        value4: ''
+        value: ''
       }
     }
   }
@@ -189,7 +189,7 @@ Les sélecteurs multiples utilisent des tags pour afficher les différentes opti
 :::demo Ajoutez `multiple` à `el-select` pour le changer en sélecteur multiple. La valeur de `v-model` devient un tableau contenant toutes les options. Par défaut les différents choix sont affichés sous forme de tags. Vous pouvez réduire leur nombre en utilisant l'attribut `collapse-tags`.
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="Select">
+  <el-select v-model="value1" multiple placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -199,7 +199,7 @@ Les sélecteurs multiples utilisent des tags pour afficher les différentes opti
   </el-select>
 
   <el-select
-    v-model="value11"
+    v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
@@ -233,8 +233,8 @@ Les sélecteurs multiples utilisent des tags pour afficher les différentes opti
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: [],
-        value11: []
+        value1: [],
+        value2: []
       }
     }
   }
@@ -250,7 +250,7 @@ Vous pouvez définir un template HTML pour l'affichage des options.
 
 ```html
 <template>
-  <el-select v-model="value6" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option
       v-for="item in cities"
       :key="item.value"
@@ -285,7 +285,7 @@ Vous pouvez définir un template HTML pour l'affichage des options.
           value: 'Guangzhou',
           label: 'Guangzhou'
         }],
-        value6: ''
+        value: ''
       }
     }
   }
@@ -301,9 +301,9 @@ Vous pouvez définir des groupes pour les options du menu.
 
 ```html
 <template>
-  <el-select v-model="value7" placeholder="Select">
+  <el-select v-model="value" placeholder="Select">
     <el-option-group
-      v-for="group in options3"
+      v-for="group in options"
       :key="group.label"
       :label="group.label">
       <el-option
@@ -320,7 +320,7 @@ Vous pouvez définir des groupes pour les options du menu.
   export default {
     data() {
       return {
-        options3: [{
+        options: [{
           label: 'Villes célèbres',
           options: [{
             value: 'Shanghai',
@@ -345,7 +345,7 @@ Vous pouvez définir des groupes pour les options du menu.
             label: 'Dalian'
           }]
         }],
-        value7: ''
+        value: ''
       }
     }
   }
@@ -360,7 +360,7 @@ Vous pouvez ajouter un mode de filtrage pour trouver les options désirées plus
 :::demo Ajoutez `filterable` à `el-select` pour activer le filtrage. Par défaut, Select cherchera les options dont le `label` contient la valeur du filtre. Si vous préférez une autre stratégie de filtrage, utilisez `filter-method`. C'est une `Function` qui est appelée quand la valeur change, avec pour paramètre la valeur courante.
 ```html
 <template>
-  <el-select v-model="value8" filterable placeholder="Select">
+  <el-select v-model="value" filterable placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -390,7 +390,7 @@ Vous pouvez ajouter un mode de filtrage pour trouver les options désirées plus
           value: 'Option5',
           label: 'Option5'
         }],
-        value8: ''
+        value: ''
       }
     }
   }
@@ -407,7 +407,7 @@ Vous pouvez aller chercher les options sur le serveur de manière dynamique.
 ```html
 <template>
   <el-select
-    v-model="value9"
+    v-model="value"
     multiple
     filterable
     remote
@@ -416,7 +416,7 @@ Vous pouvez aller chercher les options sur le serveur de manière dynamique.
     :remote-method="remoteMethod"
     :loading="loading">
     <el-option
-      v-for="item in options4"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -428,8 +428,8 @@ Vous pouvez aller chercher les options sur le serveur de manière dynamique.
   export default {
     data() {
       return {
-        options4: [],
-        value9: [],
+        options: [],
+        value: [],
         list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona",
@@ -462,13 +462,13 @@ Vous pouvez aller chercher les options sur le serveur de manière dynamique.
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options4 = this.list.filter(item => {
+            this.options = this.list.filter(item => {
               return item.label.toLowerCase()
                 .indexOf(query.toLowerCase()) > -1;
             });
           }, 200);
         } else {
-          this.options4 = [];
+          this.options = [];
         }
       }
     }
@@ -485,14 +485,14 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
 ```html
 <template>
   <el-select
-    v-model="value10"
+    v-model="value"
     multiple
     filterable
     allow-create
     default-first-option
     placeholder="Choisissez les tags de vos articles">
     <el-option
-      v-for="item in options5"
+      v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -504,7 +504,7 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
   export default {
     data() {
       return {
-        options5: [{
+        options: [{
           value: 'HTML',
           label: 'HTML'
         }, {
@@ -514,7 +514,7 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
           value: 'JavaScript',
           label: 'JavaScript'
         }],
-        value10: []
+        value: []
       }
     }
   }

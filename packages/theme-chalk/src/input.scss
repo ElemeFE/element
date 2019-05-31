@@ -2,6 +2,7 @@
 @import "common/var";
 
 @include b(textarea) {
+  position: relative;
   display: inline-block;
   width: 100%;
   vertical-align: bottom;
@@ -36,6 +37,15 @@
     }
   }
 
+  & .el-input__count {
+    color: $--color-info;
+    background: $--color-white;
+    position: absolute;
+    font-size: 12px;
+    bottom: 5px;
+    right: 10px;
+  }
+
   @include when(disabled) {
     .el-textarea__inner {
       background-color: $--input-disabled-fill;
@@ -46,6 +56,16 @@
       &::placeholder {
         color: $--input-disabled-placeholder-color;
       }
+    }
+  }
+
+  @include when(exceed) {
+    .el-textarea__inner {
+      border-color: $--color-danger;
+    }
+
+    .el-input__count {
+      color: $--color-danger;
     }
   }
 }
@@ -60,12 +80,26 @@
   & .el-input__clear {
     color: $--input-icon-color;
     font-size: $--input-font-size;
-    line-height: 16px;
     cursor: pointer;
     transition: $--color-transition-base;
 
     &:hover {
       color: $--input-clear-hover-color;
+    }
+  }
+
+  & .el-input__count {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    color: $--color-info;
+    font-size: 12px;
+
+    .el-input__count-inner {
+      background: $--color-white;
+      line-height: initial;
+      display: inline-block;
+      padding: 0 5px;
     }
   }
 
@@ -166,6 +200,18 @@
 
     .el-input__icon {
       cursor: not-allowed;
+    }
+  }
+
+  @include when(exceed) {
+    .el-input__inner {
+      border-color: $--color-danger;
+    }
+
+    .el-input__suffix {
+      .el-input__count {
+        color: $--color-danger;
+      }
     }
   }
 

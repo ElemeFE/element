@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Дал келген маалыматтар',
       loading: 'Жүктөлүүдө',
-      placeholder: 'тандоо'
+      placeholder: 'тандоо',
+      noData: 'маалымат жок'
     },
     pagination: {
       goto: 'Мурунку',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'Сураныч, издөө кирет',
       noCheckedFormat: 'бүтүндөй {total} сан',
       hasCheckedFormat: 'Тандалган {checked}/{total} сан'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

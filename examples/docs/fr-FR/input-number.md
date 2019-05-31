@@ -1,6 +1,6 @@
 ## InputNumber
 
-Un champs d'input de valeurs numériques, avec un domaine personnalisable.
+Un champ d'input de valeurs numériques, avec un domaine personnalisable.
 
 ### Usage
 
@@ -8,13 +8,13 @@ Un champs d'input de valeurs numériques, avec un domaine personnalisable.
 
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num1: 1
+        num: 1
       };
     },
     methods: {
@@ -33,13 +33,13 @@ Un champs d'input de valeurs numériques, avec un domaine personnalisable.
 
 ```html
 <template>
-  <el-input-number v-model="num2" :disabled="true"></el-input-number>
+  <el-input-number v-model="num" :disabled="true"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num2: 1
+        num: 1
       }
     }
   };
@@ -55,13 +55,33 @@ Vous pouvez déterminer un pas pour le champs.
 
 ```html
 <template>
-  <el-input-number v-model="num3" :step="2"></el-input-number>
+  <el-input-number v-model="num" :step="2"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num3: 5
+        num: 5
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Pas strict
+
+:::demo L'attribut `step-strictly` accepte un `boolean`. Si cet attribut est `true`, la valeur de l'input ne peut être qu'un multiple de `step`.
+
+```html
+<template>
+  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num: 2
       }
     }
   };
@@ -75,13 +95,13 @@ Vous pouvez déterminer un pas pour le champs.
 
 ```html
 <template>
-  <el-input-number v-model="num9" :precision="2" :step="0.1" :max="10"></el-input-number>
+  <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num9: 1
+        num: 1
       }
     }
   };
@@ -102,19 +122,19 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 
 ```html
 <template>
-  <el-input-number v-model="num4"></el-input-number>
-    <el-input-number size="medium" v-model="num5"></el-input-number>
-    <el-input-number size="small" v-model="num6"></el-input-number>
-    <el-input-number size="mini" v-model="num7"></el-input-number>
+  <el-input-number v-model="num1"></el-input-number>
+    <el-input-number size="medium" v-model="num2"></el-input-number>
+    <el-input-number size="small" v-model="num3"></el-input-number>
+    <el-input-number size="mini" v-model="num4"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num4: 1,
-        num5: 1,
-        num6: 1,
-        num7: 1
+        num1: 1,
+        num2: 1,
+        num3: 1,
+        num4: 1
       }
     }
   };
@@ -127,13 +147,13 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 :::demo Réglez `controls-position` pour déterminer la position des boutons.
 ```html
 <template>
-  <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
     data() {
       return {
-        num8: 1
+        num: 1
       };
     },
     methods: {
@@ -154,6 +174,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | min | La valeur minimale autorisée. | number | — | `-Infinity` |
 | max | La valeur maximale autorisée. | number | — | `Infinity` |
 | step | Le pas pour l'incrémentation. | number | — | 1 |
+| step-strictly | Si la valeur ne peut être qu'un multiple du pas. | number   | — | false |
 | precision | La précision de la valeur. | number | — | — |
 | size | La taille du composant. | string | large/small| — |
 | disabled| Si le composant est désactivé. | boolean | — | false |

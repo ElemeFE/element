@@ -136,9 +136,17 @@
         return this._checkboxGroup ? this._checkboxGroup.value : this.value;
       },
 
+      /* used to make the isDisabled judgment under max/min props */
+      isLimitDisabled() {
+        const { max, min } = this._checkboxGroup;
+        return !!(max || min) &&
+          (this.model.length >= max && !this.isChecked) ||
+          (this.model.length <= min && this.isChecked);
+      },
+
       isDisabled() {
         return this.isGroup
-          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled || this.isLimitDisabled
           : this.disabled || (this.elForm || {}).disabled;
       },
 
