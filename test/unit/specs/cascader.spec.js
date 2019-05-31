@@ -1,4 +1,55 @@
-import { createVue, destroyVM, triggerEvent, triggerClick } from '../util';
+import {
+  createTest,
+  createVue,
+  destroyVM,
+  waitImmediate,
+  wait,
+  triggerEvent
+} from '../util';
+import Cascader from 'packages/cascader';
+
+const options = [{
+  value: 'zhejiang',
+  label: 'Zhejiang',
+  children: [{
+    value: 'hangzhou',
+    label: 'Hangzhou',
+    children: [{
+      value: 'xihu',
+      label: 'West Lake'
+    }, {
+      value: 'binjiang',
+      label: 'Bin Jiang'
+    }]
+  }, {
+    value: 'ningbo',
+    label: 'NingBo',
+    children: [{
+      value: 'jiangbei',
+      label: 'Jiang Bei'
+    }, {
+      value: 'jiangdong',
+      label: 'Jiang Dong',
+      disabled: true
+    }]
+  }]
+}, {
+  value: 'jiangsu',
+  label: 'Jiangsu',
+  disabled: true,
+  children: [{
+    value: 'nanjing',
+    label: 'Nanjing',
+    children: [{
+      value: 'zhonghuamen',
+      label: 'Zhong Hua Men'
+    }]
+  }]
+}];
+
+const getMenus = el => el.querySelectorAll('.el-cascader-menu');
+const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node');
+const selectedValue = ['zhejiang', 'hangzhou', 'xihu'];
 
 describe('Cascader', () => {
   let vm;
@@ -6,847 +57,352 @@ describe('Cascader', () => {
     destroyVM(vm);
   });
 
-  it('create', done => {
-    vm = createVue({
-      template: `
-        <el-cascader
-          ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          clearable
-          v-model="selectedOptions"
-        ></el-cascader>
-      `,
-      data() {
-        return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
-        };
-      }
-    }, true);
-    expect(vm.$el).to.be.exist;
+  it('create', () => {
+    vm = createTest(Cascader, true);
+    expect(vm.$el).to.exist;
+  });
+
+  it('toggle dropdown visible', async() => {
+    vm = createTest(Cascader, true);
+    expect(vm.$refs.popper.style.display).to.equal('none');
     vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
-
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-      item1.click();
-      menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(3); // two menus and an arrow
-        expect(item1.classList.contains('is-active')).to.be.true;
-
-        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
-        item2.click();
-
-        menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(4);
-          expect(item2.classList.contains('is-active')).to.be.true;
-
-          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
-          item3.click();
-
-          setTimeout(_ => {
-            expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-            expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-            expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
-            expect(vm.selectedOptions[2]).to.be.equal('xihu');
-            expect(vm.$refs.cascader.$el.querySelector('.el-input__inner').value).to.be.equal('');
-
-            triggerEvent(vm.$refs.cascader.$el, 'mouseenter');
-            vm.$nextTick(_ => {
-              vm.$refs.cascader.$el.querySelector('.el-cascader__clearIcon').click();
-              vm.$nextTick(_ => {
-                expect(vm.selectedOptions.length).to.be.equal(0);
-                done();
-              });
-            });
-          }, 500);
-        });
-      });
-    }, 300);
-  });
-  // Github issue #3470
-  it('should work with zero', done => {
-    vm = createVue({
-      template: `
-        <el-cascader
-          ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          clearable
-          v-model="selectedOptions"
-        ></el-cascader>
-      `,
-      data() {
-        return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 0,
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
-        };
-      }
-    }, true);
-    expect(vm.$el).to.be.exist;
+    await waitImmediate();
+    expect(vm.$refs.popper.style.display).to.includes('');
     vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
-
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-      item1.click();
-      menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(3);
-        expect(item1.classList.contains('is-active')).to.be.true;
-
-        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
-        item2.click();
-
-        menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(4);
-          expect(item2.classList.contains('is-active')).to.be.true;
-
-          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
-          item3.click();
-
-          setTimeout(_ => {
-            expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-            expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-            expect(vm.selectedOptions[1]).to.be.equal(0);
-            expect(vm.selectedOptions[2]).to.be.equal('xihu');
-
-            triggerEvent(vm.$refs.cascader.$el, 'mouseenter');
-            vm.$nextTick(_ => {
-              vm.$refs.cascader.$el.querySelector('.el-cascader__clearIcon').click();
-              vm.$nextTick(_ => {
-                expect(vm.selectedOptions.length).to.be.equal(0);
-                done();
-              });
-            });
-          }, 500);
-        });
-      });
-    }, 300);
+    await wait(500);
+    expect(vm.$refs.popper.style.display).to.includes('none');
   });
-  it('not allow clearable', done => {
-    vm = createVue({
+
+  it('expand and check', async() => {
+    vm = createTest({
       template: `
         <el-cascader
           ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          :clearable="false"
-          v-model="selectedOptions"
-        ></el-cascader>
+          v-model="value"
+          :options="options"></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
+          value: [],
+          options
         };
       }
     }, true);
-    expect(vm.$el).to.be.exist;
-    triggerEvent(vm.$refs.cascader.$el, 'mouseenter');
-    vm.$nextTick(_ => {
-      expect(vm.$refs.cascader.$el.querySelector('.el-cascader__clearIcon')).to.not.exist;
-      done();
-    });
+
+    const { body } = document;
+    const expandHandler = sinon.spy();
+    const changeHandler = sinon.spy();
+
+    vm.$refs.cascader.$on('expand-change', expandHandler);
+    vm.$refs.cascader.$on('change', changeHandler);
+
+    getOptions(body, 0)[0].click();
+    await waitImmediate();
+    expect(expandHandler.calledOnceWith(['zhejiang'])).to.be.true;
+    getOptions(body, 1)[0].click();
+    await waitImmediate();
+    const checkedOption = getOptions(body, 2)[0];
+    checkedOption.click();
+    await waitImmediate();
+    expect(changeHandler.calledOnceWith(selectedValue)).to.be.true;
+    expect(vm.value).to.deep.equal(selectedValue);
+    expect(checkedOption.querySelector('i.el-icon-check')).to.exist;
+    expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
-  it('disabled options', done => {
-    vm = createVue({
-      template: `
-        <el-cascader
-          ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          v-model="selectedOptions"
-        ></el-cascader>
-      `,
-      data() {
-        return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            disabled: true,
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
-        };
-      }
+
+  it('disabled', async() => {
+    vm = createTest(Cascader, {
+      disabled: true
     }, true);
-    expect(vm.$el).to.be.exist;
+    expect(vm.$el.className).to.includes('is-disabled');
     vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
-
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-      item1.click();
-      menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(2);
-        expect(item1.classList.contains('is-active')).to.be.false;
-        done();
-      });
-    }, 300);
+    await waitImmediate();
+    expect(vm.$refs.popper.style.display).to.includes('none');
   });
-  it('default value', done => {
+
+  it('with default value', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          v-model="selectedOptions"
-        ></el-cascader>
+          v-model="value"
+          :options="options"></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: ['zhejiang', 'hangzhou', 'xihu']
+          value: selectedValue,
+          options
         };
       }
     }, true);
-    expect(vm.$el).to.be.exist;
-    vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.children[1].querySelector('.el-cascader-menu__item');
-      const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
-      const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
 
-      expect(menuElm.children.length).to.be.equal(4);
-      expect(item1.classList.contains('is-active')).to.be.true;
-      expect(item2.classList.contains('is-active')).to.be.true;
-      expect(item3.classList.contains('is-active')).to.be.true;
-      triggerClick(document, 'mouseup');
-      setTimeout(_ => {
-        expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-        done();
-      }, 500);
-    }, 300);
+    const el = vm.$el;
+    await waitImmediate();
+    expect(getMenus(el).length).to.equal(3);
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
-  it('expand by hover', done => {
+
+  it('async set selected value', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          expand-trigger="hover"
-          v-model="selectedOptions"
-        ></el-cascader>
+          v-model="value"
+          :options="options"></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
+          value: [],
+          options
         };
       }
     }, true);
-    expect(vm.$el).to.be.exist;
-    vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
 
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-      triggerEvent(item1, 'mouseenter');
-      menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(3);
-        expect(item1.classList.contains('is-active')).to.be.true;
-
-        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
-        triggerEvent(item2, 'mouseenter');
-
-        menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(4);
-          expect(item2.classList.contains('is-active')).to.be.true;
-
-          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
-          item3.click();
-
-          setTimeout(_ => {
-            expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-            expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-            expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
-            expect(vm.selectedOptions[2]).to.be.equal('xihu');
-            done();
-          }, 500);
-        });
-      });
-    }, 300);
+    const el = vm.$el;
+    vm.value = selectedValue;
+    await waitImmediate();
+    expect(getMenus(el).length).to.equal(3);
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
-  it('change on select', done => {
+
+  it('default value with async options', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
-          placeholder="请选择"
-          :options="options"
-          change-on-select
-          v-model="selectedOptions"
-        ></el-cascader>
+          v-model="value"
+          :options="options"></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
+          value: selectedValue,
+          options: []
         };
       }
     }, true);
-    expect(vm.$el).to.be.exist;
-    vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
 
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-      item1.click();
-      menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(3);
-        expect(item1.classList.contains('is-active')).to.be.true;
-        expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-
-        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
-        item2.click();
-
-        menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(4);
-          expect(item2.classList.contains('is-active')).to.be.true;
-          expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
-
-          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
-          item3.click();
-
-          setTimeout(_ => {
-            expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-            expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-            expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
-            expect(vm.selectedOptions[2]).to.be.equal('xihu');
-            done();
-          }, 500);
-        });
-      });
-    }, 300);
+    const el = vm.$el;
+    vm.options = options;
+    await waitImmediate();
+    expect(getMenus(el).length).to.equal(3);
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(vm.$el.querySelector('input').value).to.equal('Zhejiang / Hangzhou / West Lake');
   });
-  it('hover and select', done => {
+
+  it('clearable', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
-          placeholder="请选择"
+          v-model="value"
           :options="options"
-          expand-trigger="hover"
-          change-on-select
-          v-model="selectedOptions"
-        ></el-cascader>
+          clearable></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
+          value: selectedValue,
+          options
         };
       }
     }, true);
-    vm.$el.click();
-    vm.$nextTick(() => {
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
 
-      triggerEvent(item1, 'mouseenter');
-      menu.$nextTick(() => {
-        expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-
-        const spy = sinon.spy();
-        menu.$on('closeInside', spy);
-        item1.click();
-
-        menu.$nextTick(() => {
-          expect(spy.calledWith(true)).to.be.true;
-          expect(menu.visible).to.be.false;
-          done();
-        });
-      });
-    });
+    triggerEvent(vm.$el, 'mouseenter');
+    await waitImmediate();
+    const closeBtn = vm.$el.querySelector('i.el-input__icon');
+    expect(closeBtn).to.exist;
+    closeBtn.click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal([]);
   });
-  it('filterable', done => {
+
+  it('show last level label', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
-          placeholder="请选择"
+          v-model="value"
           :options="options"
-          filterable
-          :debounce="0"
-          v-model="selectedOptions"
-        ></el-cascader>
+          :show-all-levels="false"></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: []
+          value: selectedValue,
+          options
         };
       }
     }, true);
-    expect(vm.$el).to.be.exist;
-    vm.$el.click();
-    vm.$nextTick(_ => {
-      vm.$refs.cascader.handleInputChange('z');
-      setTimeout(_ => {
-        expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
 
-        const menu = vm.$refs.cascader.menu;
-        const menuElm = menu.$el;
-        const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-        expect(menuElm.children.length).to.be.equal(2);
-        expect(menuElm.children[1].children.length).to.be.equal(3);
-
-        item1.click();
-
-        setTimeout(_ => {
-          expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-          expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-          expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
-          expect(vm.selectedOptions[2]).to.be.equal('xihu');
-          done();
-        }, 500);
-      }, 300);
-    });
+    const el = vm.$el;
+    await waitImmediate();
+    expect(getMenus(el).length).to.equal(3);
+    expect(getOptions(el, 2)[0].querySelector('i').className).to.includes('el-icon-check');
+    expect(vm.$el.querySelector('input').value).to.equal('West Lake');
   });
-  it('props', done => {
+
+  it('multiple mode', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
+          v-model="value"
+          :options="options"
+          :props="props"></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options,
+          props: {
+            multiple: true
+          }
+        };
+      }
+    }, true);
+
+    getOptions(document.body, 0)[0].querySelector('.el-checkbox input').click();
+    await waitImmediate();
+    expect(vm.value.length).to.equal(3);
+
+    const tags = vm.$el.querySelectorAll('.el-tag');
+    const closeBtn = tags[0].querySelector('.el-tag__close');
+    expect(tags.length).to.equal(3);
+    expect(closeBtn).to.exist;
+    closeBtn.click();
+    await waitImmediate();
+    expect(vm.value.length).to.equal(2);
+    expect(vm.$el.querySelectorAll('.el-tag').length).to.equal(2);
+  });
+
+  it('clearable in multiple mode', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
           :options="options"
           :props="props"
-          v-model="selectedOptions"
-        ></el-cascader>
+          clearable></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            label: 'Zhejiang',
-            cities: [{
-              label: 'Hangzhou'
-            }, {
-              label: 'NingBo'
-            }]
-          }, {
-            label: 'Jiangsu',
-            cities: [{
-              label: 'Nanjing'
-            }]
-          }],
+          value: [],
+          options,
           props: {
-            value: 'label',
-            children: 'cities'
-          },
-          selectedOptions: []
+            multiple: true,
+            emitPath: false
+          }
         };
       }
     }, true);
-    vm.$el.click();
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
-
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      let items = menuElm.querySelectorAll('.el-cascader-menu__item');
-      expect(items.length).to.equal(2);
-      items[0].click();
-      setTimeout(_ => {
-        items = menuElm.querySelectorAll('.el-cascader-menu__item');
-        expect(items.length).to.equal(4);
-        expect(items[items.length - 1].innerText).to.equal('NingBo');
-        done();
-      }, 100);
-    }, 100);
+    vm.value = ['xihu', 'binjiang', 'jiangbei', 'jiangdong'];
+    await waitImmediate();
+    expect(getOptions(document.body, 0)[0].querySelector('.el-checkbox.is-checked')).to.exist;
+    triggerEvent(vm.$el, 'mouseenter');
+    await waitImmediate();
+    const closeBtn = vm.$el.querySelector('i.el-input__icon');
+    expect(closeBtn).to.exist;
+    closeBtn.click();
+    await waitImmediate();
+    expect(vm.value.length).to.equal(1);
   });
-  it('show last level', done => {
+
+  it('collapse tags', async() => {
     vm = createVue({
       template: `
         <el-cascader
-          ref="cascader"
+          v-model="value"
           :options="options"
-          :show-all-levels="false"
-          v-model="selectedOptions"
-        ></el-cascader>
+          :props="props"
+          collapse-tags></el-cascader>
       `,
       data() {
         return {
-          options: [{
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [{
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [{
-                value: 'xihu',
-                label: 'West Lake'
-              }]
-            }, {
-              value: 'ningbo',
-              label: 'NingBo',
-              children: [{
-                value: 'jiangbei',
-                label: 'Jiang Bei'
-              }]
-            }]
-          }, {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [{
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [{
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men'
-              }]
-            }]
-          }],
-          selectedOptions: ['zhejiang', 'ningbo', 'jiangbei']
+          value: ['xihu', 'binjiang', 'jiangbei', 'jiangdong'],
+          options,
+          props: {
+            multiple: true,
+            emitPath: false
+          }
         };
       }
     }, true);
-    setTimeout(_ => {
-      const span = vm.$el.querySelector('.el-cascader__label');
-      expect(span.innerText).to.equal('Jiang Bei');
-      done();
-    }, 100);
+    await waitImmediate();
+    const tags = vm.$el.querySelectorAll('.el-tag');
+    expect(tags.length).to.equal(2);
+    expect(tags[0].querySelector('.el-tag__close')).to.exist;
+    expect(tags[1].querySelector('.el-tag__close')).to.be.null;
+    tags[0].querySelector('.el-tag__close').click();
+    expect(tags[1].textContent).to.equal('+ 3');
+    await waitImmediate();
+    expect(vm.value.length).to.equal(3);
+    vm.$el.querySelector('.el-tag .el-tag__close').click();
+    await waitImmediate();
+    vm.$el.querySelector('.el-tag .el-tag__close').click();
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-tag')).to.exist;
+    // disabled tag can not be closed
+    expect(vm.$el.querySelector('.el-tag .el-tag__close')).to.be.null;
   });
-  describe('Cascader Events', () => {
-    it('event:focus & blur', done => {
-      vm = createVue({
-        template: `
-          <el-cascader
-            ref="cascader"
-            placeholder="请选择"
-            :options="options"
-            clearable
-            v-model="selectedOptions"
-          ></el-cascader>
-        `,
-        data() {
-          return {
-            options: [{
-              value: 'zhejiang',
-              label: 'Zhejiang',
-              children: [{
-                value: 'hangzhou',
-                label: 'Hangzhou',
-                children: [{
-                  value: 'xihu',
-                  label: 'West Lake'
-                }]
-              }, {
-                value: 'ningbo',
-                label: 'NingBo',
-                children: [{
-                  value: 'jiangbei',
-                  label: 'Jiang Bei'
-                }]
-              }]
-            }, {
-              value: 'jiangsu',
-              label: 'Jiangsu',
-              children: [{
-                value: 'nanjing',
-                label: 'Nanjing',
-                children: [{
-                  value: 'zhonghuamen',
-                  label: 'Zhong Hua Men'
-                }]
-              }]
-            }],
-            selectedOptions: []
-          };
+
+  it('filterable', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          filterable></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options
+        };
+      }
+    }, true);
+    const el = vm.$el;
+    const { body } = document;
+    const input = el.querySelector('input');
+    el.click();
+    await waitImmediate();
+    input.value = 'Zhejiang';
+    triggerEvent(input, 'input');
+    await wait(300);
+    expect(body.querySelector('.el-cascader__suggestion-list')).to.exist;
+    expect(body.querySelectorAll('.el-cascader__suggestion-item').length).to.equal(3);
+    body.querySelectorAll('.el-cascader__suggestion-item')[0].click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal(selectedValue);
+  });
+
+  it('filter method', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :filter-method="filterMethod"
+          filterable></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options
+        };
+      },
+      methods: {
+        filterMethod(node, keyword) {
+          const { text, path } = node;
+          return text.includes(keyword) || path.includes(keyword);
         }
-      }, true);
-
-      const spyFocus = sinon.spy();
-      const spyBlur = sinon.spy();
-
-      vm.$refs.cascader.$on('focus', spyFocus);
-      vm.$refs.cascader.$on('blur', spyBlur);
-      vm.$el.querySelector('input').focus();
-      vm.$el.querySelector('input').blur();
-
-      vm.$nextTick(_ => {
-        expect(spyFocus.calledOnce).to.be.true;
-        expect(spyBlur.calledOnce).to.be.true;
-        done();
-      });
-    });
+      }
+    }, true);
+    const el = vm.$el;
+    const { body } = document;
+    const input = el.querySelector('input');
+    el.click();
+    await waitImmediate();
+    input.value = 'Zhejiang';
+    triggerEvent(input, 'input');
+    await wait(300);
+    expect(body.querySelectorAll('.el-cascader__suggestion-item').length).to.equal(3);
+    input.value = 'xihu';
+    triggerEvent(input, 'input');
+    await wait(300);
+    expect(body.querySelector('.el-cascader__suggestion-item').textContent).to.equal('Zhejiang / Hangzhou / West Lake');
   });
 });

@@ -607,9 +607,9 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | Méthode | Description | Paramètres |
 | ---- | ---- | ---- |
 | validate | Valide le formulaire. Prends une callback en paramètre. Après la validation, la callback est exécutée avec deux paramètres: un boolean indiquant si la validation est bonne, et un objet contenant tout les champs qui ont échoués. Retourne une promesse si aucune callback n'est passée. | Function(callback: Function(boolean, object)) |
-| validateField | Valide un ou plusieurs champs du formulaire. | Function(props: string | array, callback: Function(errorMessage: string)) |
+| validateField | Valide un ou plusieurs champs du formulaire. | Function(props: string \| array, callback: Function(errorMessage: string)) |
 | resetFields | Efface tout les champs et les résultats de validation. | — |
-| clearValidate | Efface les messages de validation de certains champs. Le paramètre est le nom du champ ou une liste des champs concernés. Si il est omis, tout les champs seront concernés. | Function(props: string | array) |
+| clearValidate | Efface les messages de validation de certains champs. Le paramètre est le nom du champ ou une liste des champs concernés. Si il est omis, tout les champs seront concernés. | Function(props: string \| array) |
 
 ### Évènnements de Form
 

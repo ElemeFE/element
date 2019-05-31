@@ -216,6 +216,10 @@
               "title": "Breadcrumb 面包屑"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader 页头"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown 下拉菜单"
             },
@@ -267,6 +271,14 @@
             {
               "path": "/image",
               "title": "Image 图片"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop 回到顶部"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll 无限滚动"
             }
           ]
         }
@@ -490,6 +502,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -541,6 +557,14 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
             }
           ]
         }
@@ -764,6 +788,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -815,6 +843,14 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
             }
           ]
         }
@@ -1038,6 +1074,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -1089,6 +1129,14 @@
             {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
             }
           ]
         }

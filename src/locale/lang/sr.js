@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Нема резултата',
       loading: 'Учитавање',
-      placeholder: 'Изабери'
+      placeholder: 'Изабери',
+      noData: 'Нема података'
     },
     pagination: {
       goto: 'Иди на',
@@ -107,6 +108,9 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

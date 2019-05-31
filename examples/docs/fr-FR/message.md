@@ -213,6 +213,7 @@ Dans ce cas il faudra appeler `Message(options)`. Les méthodes des différents 
 | showClose | Si un bouton de fermeture doit être affiché. | boolean | — | false |
 | center | Si le texte doit être centré. | boolean | — | false |
 | onClose | Callback de fermeture avec en paramètre l'instance de Message. | function | — | — |
+| offset | set the distance to the top of viewport | number | — | 20 |
 
 ### Méthodes
 

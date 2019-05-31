@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'ללא נתונים מתאימים',
       loading: 'טוען',
-      placeholder: 'בחר'
+      placeholder: 'בחר',
+      noData: 'ללא נתונים'
     },
     pagination: {
       goto: 'עבור ל',
@@ -107,6 +108,9 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

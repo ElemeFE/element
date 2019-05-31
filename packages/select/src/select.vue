@@ -466,10 +466,12 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          const length = this.$refs.input.value.length * 15 + 20;
-          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
-          this.managePlaceholder();
-          this.resetInputHeight();
+          this.$nextTick(() => {
+            const length = this.$refs.input.value.length * 15 + 20;
+            this.inputLength = this.collapseTags ? Math.min(50, length) : length;
+            this.managePlaceholder();
+            this.resetInputHeight();
+          });
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
@@ -510,6 +512,7 @@
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
         const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
+        const isUndefined = Object.prototype.toString.call(value).toLowerCase() === '[object undefined]';
 
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
@@ -522,7 +525,7 @@
           }
         }
         if (option) return option;
-        const label = (!isObject && !isNull)
+        const label = (!isObject && !isNull && !isUndefined)
           ? value : '';
         let newOption = {
           value: value,
@@ -750,7 +753,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        const value = this.multiple ? [] : null;
+        const value = this.multiple ? [] : '';
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;

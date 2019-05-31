@@ -1334,7 +1334,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 
 ### Datos tree y modo lazy
 
-:::demo Puede mostrar la estructura de datos tipo tree。Cuando se usa, la prop`row-key` es requerida。Entonces, los datos de las filas de los hijos pueden ser cargados asincrónicamente. Poner la propiedad `lazy` de Table a true y la función `load`. Especifique el atributo `hasChildren` en la fila para determinar qué fila contiene hijos.
+:::demo You can display tree structure data. When row contains the `children` field, it is treated as nested data. For rendering nested data, the prop `row-key` is required。Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `hasChildren` attribute in row to determine which row contains children. Both `children` and `hasChildren` can be configured via `tree-props`.
 
 ```html
 <template>
@@ -1342,8 +1342,9 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
   <el-table
     :data="tableData"
     style="width: 100%;margin-bottom: 20px;"
+    row-key="id"
     border
-    row-key="id">
+    default-expand-all>
     <el-table-column
       prop="date"
       label="日期"
@@ -1365,7 +1366,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
     border
     lazy
     :load="load"
-    >
+    :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
     <el-table-column
       prop="date"
       label="date"
@@ -1431,17 +1432,19 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
     },
     methods: {
       load(tree, treeNode, resolve) {
-        resolve([
-          {
-            id: 31,
-            date: '2016-05-01',
-            name: 'wangxiaohu'
-          }, {
-            id: 32,
-            date: '2016-05-01',
-            name: 'wangxiaohu'
-          }
-        ])
+        setTimeout(() => {
+          resolve([
+            {
+              id: 31,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }
+          ])
+        }, 1000)
       }
     },
   }
@@ -1841,7 +1844,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas.               | Boolean   | — | true |
 | indent                 | indentación horizontal de los datos en formato tree | Number    | — | 16   |
 | lazy                   | si se realiza un lazy loading de los datos | Boolean   | — | —    |
-| load                   | metodo para cargar las filas de los hijos, solamente funciona cuando `lazy`es true | Function({ row, treeNode, resolve }) | — | — |
+| load                   | metodo para cargar las filas de los hijos, solamente funciona cuando `lazy`es true | Function(row, treeNode, resolve) | — | — |
+| tree-props             | configuration for rendering nested data    | Object    | — | { hasChildren: 'hasChildren', children: 'children' } |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |
@@ -1862,7 +1866,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | filter-change      | clave de la columna. Si necesitas utilizar el evento filter-change, este atributo es obligatorio para identificar cuál columna está siendo filtrada | filters                           |
 | current-change     | se dispara cuando la fila actual cambia  | currentRow, oldCurrentRow         |
 | header-dragend     | se dispara después de modificar el ancho de una columna arrastrando el borde de la cabecera. | newWidth, oldWidth, column, event |
-| expand-change      | se dispara cuando el usuario expande o colapsa una fila | row, expandedRows                 |
+| expand-change      | triggers when user expands or collapses a row (for expandable table, second param is expandedRows; for tree Table, second param is expanded) | row, (expandedRows \| expanded) |
 
 ### Métodos de la tabla
 | Metodo             | Descripción                              | Parametros    |
@@ -1870,7 +1874,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | clearSelection     | utilizado en selección múltiple de la tabla, limpiar selección | —     |
 | toggleRowSelection | utilizado en selección múltiple de la tabla, alterna si una cierta fila es seleccionada. Con el segundo parámetro, puede directamente establecer si la fila es seleccionada | row, selected |
 | toggleAllSelection | usado en Table de seleccion multiple, cambia los estados de seleccion de todas las filas. | - |
-| toggleRowExpansion | utilizado en tabla expandible, alterna si una cierta fila es expandida. Con el segundo parámetro, puede directamente establecer si esta fila es expandida o colapsada | row, expanded |
+| toggleRowExpansion | used in expandable Table or tree Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
 | clearFilter        | Se utiliza para borrar todas las condiciones de filtro cuando no se pasan parámetros, los datos se restaurarán a un estado sin filtrar, o se puede pasar una matriz de columnas para borrar las condiciones de filtro de la columna especificada.  | columnKey |

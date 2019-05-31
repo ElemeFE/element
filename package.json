@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "2.8.2",
+  "version": "2.9.1",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [

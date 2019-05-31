@@ -139,15 +139,61 @@ Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下�
 ```
 :::
 
+### 不同主题
+
+Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
+
+:::demo 通过设置`effect`属性来改变主题，默认为 `light`
+```html
+<div class="tag-group">
+  <span class="tag-group__title">Dark</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="dark">
+    {{ item.label }}
+  </el-tag>
+</div>
+<div class="tag-group">
+  <span class="tag-group__title">Plain</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="plain">
+    {{ item.label }}
+  </el-tag>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        items: [
+          { type: '', label: '标签一' },
+          { type: 'success', label: '标签二' },
+          { type: 'info', label: '标签三' },
+          { type: 'danger', label: '标签四' },
+          { type: 'warning', label: '标签五' }
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 主题 | string | success/info/warning/danger | — |
+| type | 类型 | string | success/info/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
 | disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | color | 背景色 | string | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
+| effect | 主题 | string | dark / light / plain | light |
 
 
 ### Events

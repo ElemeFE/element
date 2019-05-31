@@ -20,7 +20,7 @@
     }
   }
 
-  @include m(circle) {
+  @include m((circle,dashboard)) {
     display: inline-block;
 
     .el-progress__text {
@@ -38,6 +38,7 @@
       }
     }
   }
+
 
   @include m(without-text) {
     .el-progress__text {
@@ -65,6 +66,16 @@
 
     .el-progress__text {
       color: $--color-success;
+    }
+  }
+
+  @include when(warning) {
+    .el-progress-bar__inner {
+      background-color: $--color-warning;
+    }
+
+    .el-progress__text {
+      color: $--color-warning;
     }
   }
 

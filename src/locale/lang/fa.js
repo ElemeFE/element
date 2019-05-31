@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'هیچ داده‌ای پیدا نشد',
       loading: 'بارگیری',
-      placeholder: 'انتخاب کنید'
+      placeholder: 'انتخاب کنید',
+      noData: 'اطلاعاتی وجود ندارد'
     },
     pagination: {
       goto: 'برو به',
@@ -107,6 +108,9 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

@@ -210,6 +210,7 @@ En este caso deberia llamar al metodo `Message(options)`. Tambien se han registr
 | showClose                | utilizado para mostrar un boton para cerrar | boolean        | —                          | false       |
 | center                   | utilizado para centrar el texto          | boolean        | —                          | false       |
 | onClose                  | funcion callback ejecutada cuando se cierra con una instancia de mensaje como parametro | function       | —                          | —           |
+| offset | set the distance to the top of viewport | number | — | 20 |
 
 ### Metodos
 `Message` y `this.$message` regresan una instancia del componente Message. Para cerrar manualmente la instancia, puede llamar al metodo `close`.

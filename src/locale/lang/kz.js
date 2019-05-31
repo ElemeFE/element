@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Сәйкес деректер жоқ',
       loading: 'Жүктелуде',
-      placeholder: 'Таңдаңыз'
+      placeholder: 'Таңдаңыз',
+      noData: 'Деректер жоқ'
     },
     pagination: {
       goto: 'Бару',
@@ -107,6 +108,9 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

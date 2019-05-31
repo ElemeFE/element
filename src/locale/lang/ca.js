@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'No hi ha dades que coincideixin',
       loading: 'Carregant',
-      placeholder: 'Seleccionar'
+      placeholder: 'Seleccionar',
+      noData: 'Sense Dades'
     },
     pagination: {
       goto: 'Anar a',
@@ -106,6 +107,9 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

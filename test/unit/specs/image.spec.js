@@ -64,5 +64,49 @@ describe('Image', () => {
     await wait();
     expect(image2.loading).to.be.false;
   });
+
+  it('$attrs', async() => {
+    vm = createVue({
+      template: `
+        <el-image
+          alt="$attrs test"
+          referrerpolicy="origin"
+          :src="src"></el-image>
+      `,
+      data() {
+        return {
+          src
+        };
+      }
+    }, true);
+
+    await wait();
+    const $img = vm.$el.querySelector('.el-image__inner');
+    expect($img.getAttribute('alt')).to.be.equal('$attrs test');
+    expect($img.getAttribute('referrerpolicy')).to.be.equal('origin');
+  });
+
+  it('pass event listeners', async() => {
+    let result;
+    vm = createVue({
+      template: `
+        <el-image @click="handleClick" :src="src"></el-image>
+      `,
+      data() {
+        return {
+          src
+        };
+      },
+      methods: {
+        handleClick(e) {
+          result = e;
+        }
+      }
+    }, true);
+    await wait();
+    vm.$el.querySelector('.el-image__inner').click();
+    await wait();
+    expect(result).to.exist;
+  });
 });
 

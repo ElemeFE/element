@@ -9,8 +9,9 @@
     <img
       v-else
       class="el-image__inner"
+      v-bind="$attrs"
+      v-on="$listeners"
       :src="src"
-      :alt="alt"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter }">
   </div>
@@ -36,13 +37,13 @@
     name: 'ElImage',
 
     mixins: [Locale],
+    inheritAttrs: false,
 
     props: {
       src: String,
       fit: String,
       lazy: Boolean,
-      scrollContainer: {},
-      alt: String
+      scrollContainer: {}
     },
 
     data() {
@@ -102,13 +103,20 @@
         const img = new Image();
         img.onload = e => this.handleLoad(e, img);
         img.onerror = this.handleError.bind(this);
+
+        // bind html attrs
+        // so it can behave consistently
+        Object.keys(this.$attrs)
+          .forEach((key) => {
+            const value = this.$attrs[key];
+            img.setAttribute(key, value);
+          });
         img.src = this.src;
       },
       handleLoad(e, img) {
         this.imageWidth = img.width;
         this.imageHeight = img.height;
         this.loading = false;
-        this.$emit('load', e);
       },
       handleError(e) {
         this.loading = false;

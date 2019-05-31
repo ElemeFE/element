@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Ni ustreznih podatkov',
       loading: 'Nalaganje',
-      placeholder: 'Izberi'
+      placeholder: 'Izberi',
+      noData: 'Ni podatkov'
     },
     pagination: {
       goto: 'Pojdi na',
@@ -107,6 +108,9 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };
