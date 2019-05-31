@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
-import { parseHeight } from './util';
 
 class TableLayout {
   constructor(options) {
@@ -42,7 +41,7 @@ class TableLayout {
 
   updateScrollY() {
     const height = this.height;
-    if (height === null) return;
+    if (typeof height !== 'string' && typeof height !== 'number') return;
     const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
@@ -53,13 +52,19 @@ class TableLayout {
   setHeight(value, prop = 'height') {
     if (Vue.prototype.$isServer) return;
     const el = this.table.$el;
-    value = parseHeight(value);
+    if (typeof value === 'string' && /^\d+$/.test(value)) {
+      value = Number(value);
+    }
     this.height = value;
 
     if (!el && (value || value === 0)) return Vue.nextTick(() => this.setHeight(value, prop));
 
-    if (value) {
-      el.style[prop] = `${value}px`;
+    if (typeof value === 'number') {
+      el.style[prop] = value + 'px';
+
+      this.updateElsHeight();
+    } else if (typeof value === 'string') {
+      el.style[prop] = value;
       this.updateElsHeight();
     }
   }
