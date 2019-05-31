@@ -93,17 +93,22 @@
   }
 
   @include e(item) {
-    height: $--transfer-item-height;
-    line-height: $--transfer-item-height;
+    min-height: $--transfer-item-height;
     padding-left: 15px;
-    display: block;
 
     & + .el-transfer-panel__item {
       margin-left: 0;
     }
 
     &.el-checkbox {
+      display: flex;
+      align-items: center;
       color: $--color-text-regular;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 10px;
+      }
     }
 
     &:hover {
@@ -115,13 +120,7 @@
       @include utils-ellipsis;
       display: block;
       box-sizing: border-box;
-      padding-left: 24px;
-      line-height: $--transfer-item-height;
-    }
-
-    .el-checkbox__input {
-      position: absolute;
-      top: 8px;
+      padding-left: 10px;
     }
   }
 
