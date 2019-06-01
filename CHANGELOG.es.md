@@ -4,31 +4,31 @@
 
 *2019-05-30*
 
-#### New features
+#### Nuevas características
 
 - Table
-  - tree-props，default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event are supported in Tree Table (#15709 by @ziyoung)
+  - tree-props，default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event son compatibles con Tree Table (#15709 by @ziyoung)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Table
-  - Fix some bugs (#15709 by @ziyoung)
+  - Corrección de algunos errores (#15709 by @ziyoung)
 - Theme
-  - Update api host (#15784 by @iamkun)
+  - Actualización del host de la api (#15784 by @iamkun)
 
-#### Optimization
+#### Optimización
 
-- Chore
-  - Update InfiniteScroll type (#15794 by @iamkun)
+- Tarea
+  - Una actualización del tipo InfiniteScroll (#15794 by @iamkun)
 
 ### 2.9.0
 
 *2019-05-30*
 
-#### New features
+#### Nuevas características
 
 - Backtop
-  - Add Backtop component (#15541 by @iamkun)
+  - Añadido componente Backtop (#15541 by @iamkun)
 - PageHeader
   - Add PageHeader component (#15714 by @ziyoung)
 - InfiniteScroll
