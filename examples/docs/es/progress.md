@@ -3,7 +3,7 @@ Progreso es usado para mostrar el estado de la operación actual e informar al u
 
 ### Barra de progreso lineal
 
-:::demo Usa el atributo `percentage` para asignar el porcentage. Este es **requerido** y tiene que ser un valor entre `0-100`. You can custom text format by setting `format`.
+:::demo Usa el atributo `percentage` para asignar el porcentaje. Este es **requerido** y tiene que ser un valor entre `0-100`. Puede personalizar el formato de texto estableciendo `format`.
 
 ```html
 <el-progress :percentage="50"></el-progress>
@@ -24,8 +24,8 @@ Progreso es usado para mostrar el estado de la operación actual e informar al u
 ```
 :::
 
-### Pporcentage interno
-En este caso el porcentage no toma espacio adicional.
+### Porcentaje interno
+En este caso el porcentaje no toma espacio adicional.
 
 :::demo El atributo `stroke-width` decide el ancho de la barra de progreso, y usa el atributo `text-inside` para poner la descripción dentro de la misma.
 ```html
@@ -36,9 +36,9 @@ En este caso el porcentage no toma espacio adicional.
 ```
 :::
 
-### Custom color
+### Color personalizado
 
-You can use `color` attr to set the progress bar color. it accepts color string, function, or array.
+Puede utilizar el atributo `color` para establecer el color de la barra de progreso.
 
 :::demo
 
@@ -110,9 +110,9 @@ You can use `color` attr to set the progress bar color. it accepts color string,
 ```
 :::
 
-### Dashboard progress bar
+### Barra de progreso del panel de control
 
-:::demo You also can specify `type` attribute to `dashboard` to use dashboard progress bar.
+:::demo También puede especificar el atributo `type` a `dashboard` para usar la barra de progreso del panel de control.
 
 ```html
 <el-progress type="dashboard" :percentage="percentage" :color="colors"></el-progress>

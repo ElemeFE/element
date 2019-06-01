@@ -4,7 +4,7 @@ Usado para la calificación
 
 ### Uso básico
 
-:::demo Clasificación divide las puntuaciones en tres niveles y estos niveles pueden distinguirse usando diferentes colores de fondo. Por defecto los colores de fondo son iguales, pero puedes asignarlos para reflejar los tres niveles usando el atributo `colors` y sus dos umbrales pueden ser definidos con `low-treshold` y `high-treshold`. Or you can assign them with a object which key is the threshold between two levels and value is the corresponding color.
+:::demo Clasificación divide las puntuaciones en tres niveles y estos niveles pueden distinguirse usando diferentes colores de fondo. Por defecto los colores de fondo son iguales, pero puedes asignarlos para reflejar los tres niveles usando el atributo `colors` y sus dos umbrales pueden ser definidos con `low-treshold` y `high-treshold`. O puede asignarlos con un objeto cuya clave es el umbral entre dos niveles y cuyo valor es el color correspondiente.
 
 
 ```html
@@ -122,7 +122,7 @@ La calificación de solo lectura es para mostrar la puntuación. Soporta media e
 | allow-half               | si escoger media estrella está permitido | boolean | —                | false                                    |
 | low-threshold            | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel bajo | number  | —                | 2                                        |
 | high-threshold           | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel alto | number  | —                | 4                                        |
-| colors                   | colors for icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding color | array/object   | —         | ['#F7BA2A', '#F7BA2A', '#F7BA2A']        |
+| colors                   | colores para los iconos. Si se trata de una matriz, debe tener 3 elementos, cada uno de los cuales corresponde a un nivel de puntuación, si se trata de un objeto, la clave debe ser el valor umbral entre dos niveles, y el valor debe ser el color correspondiente. | array/object   | —         | ['#F7BA2A', '#F7BA2A', '#F7BA2A']        |
 | void-color               | color para iconos no seleccionados       | string  | —                | #C6D1DE                                  |
 | disabled-void-color      | color para las iconos no seleccionados de solo lectura | string  | —                | #EFF2F7                                  |
 | icon-classes             | nombres de clase de los iconos. Si es array, debe tener 3 elementos, cada uno de los cuales corresponde a un nivel de puntuación, en caso contrario, si es objeto, la clave debe ser el valor umbral entre dos niveles, y el valor debe ser la clase de icono correspondiente. | array/object   | —                | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
