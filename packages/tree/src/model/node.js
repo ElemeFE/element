@@ -72,6 +72,7 @@ export default class Node {
     this.parent = null;
     this.visible = true;
     this.isCurrent = false;
+    this.isHover = false;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {

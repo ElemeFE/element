@@ -7,6 +7,8 @@
       'is-drop-not-allow': !dragState.allowDrop,
       'is-drop-inner': dragState.dropType === 'inner'
     }"
+    @mouseleave="handleMouseout"
+    @mouseover="($event)=>handleMouseover($event)"
     role="tree"
   >
     <el-tree-node
@@ -177,6 +179,27 @@
     },
 
     methods: {
+      handleMouseover(event) {
+        if (!this.nodeKey) return;
+        if (event.target.isEqualNode(this.$el)) {
+          this.store.setHoverNodeKey(null);
+          return;
+        }
+        const key = getDataKey(event.target);
+        this.store.setHoverNodeKey(key);
+
+        function getDataKey(el) {
+          const key = el.dataset.key;
+          if (key) return key;
+          return getDataKey(el.parentNode);
+        }
+      },
+
+      handleMouseout() {
+        if (!this.nodeKey) return;
+        this.store.setHoverNodeKey(null);
+      },
+
       filter(value) {
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
         this.store.filter(value);

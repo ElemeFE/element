@@ -9,13 +9,15 @@
       'is-current': node.isCurrent,
       'is-hidden': !node.visible,
       'is-focusable': !node.disabled,
-      'is-checked': !node.disabled && node.checked
+      'is-checked': !node.disabled && node.checked,
+      'is-hover':node.isHover
     }"
     role="treeitem"
     tabindex="-1"
     :aria-expanded="expanded"
     :aria-disabled="node.disabled"
     :aria-checked="node.checked"
+    :data-key="tree.nodeKey&&node.key"
     :draggable="tree.draggable"
     @dragstart.stop="handleDragStart"
     @dragover.stop="handleDragOver"
@@ -150,6 +152,14 @@
         this.$nextTick(() => this.expanded = val);
         if (val) {
           this.childNodeRendered = true;
+        }
+      },
+      
+      'node.isHover'(val) {
+        if (val) {
+          this.tree.$emit('node-mouse-enter', this.node.data,this.node,this);
+        } else {
+          this.tree.$emit('node-mouse-leave', this.node.data,this.node,this);
         }
       }
     },

@@ -5,6 +5,7 @@ export default class TreeStore {
   constructor(options) {
     this.currentNode = null;
     this.currentNodeKey = null;
+    this.hoverNode = null;
 
     for (let option in options) {
       if (options.hasOwnProperty(option)) {
@@ -329,6 +330,15 @@ export default class TreeStore {
     this.setCurrentNode(currNode);
   }
 
+  setHoverNode(node) {
+    const prevCurrentNode = this.hoverNode;
+    if (prevCurrentNode) {
+      prevCurrentNode.isHover = false;
+    }
+    this.hoverNode = node;
+    this.hoverNode.isHover = true;
+  }
+
   setCurrentNodeKey(key) {
     if (key === null) {
       this.currentNode = null;
@@ -337,6 +347,20 @@ export default class TreeStore {
     const node = this.getNode(key);
     if (node) {
       this.setCurrentNode(node);
+    }
+  }
+
+  setHoverNodeKey(key) {
+    if (key === null) {
+      if (this.hoverNode) {
+        this.hoverNode.isHover = false;
+        this.hoverNode = null;
+      }
+      return;
+    }
+    const node = this.getNode(key);
+    if (node) {
+      this.setHoverNode(node);
     }
   }
 };
