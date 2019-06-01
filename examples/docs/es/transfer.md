@@ -1,7 +1,7 @@
 ## Transfer
 
 ### Uso básico
-:::demo Los datos se pasan a Transfer a través del atributo `data`. Los datos tienen que ser un array de objetos, y cada objeto debe tener estos atributos: `key` que será el identificador del item, `label` que será el texto a mostrar, y `disabled` que indicará si el elemento esta desactivado. Los items dentro de la lista destino están sincronizados con la variable asociada a `v-model`, y el valor de esa variable es un array de claves de los elementos de la lista destino. Así que si no quiere que la lista destino esté vacía inicialmente puede inicializar el `v-model` con un array.
+:::demo Los datos se pasan a Transfer a través del atributo `data`. Los datos tienen que ser un array de objetos, y cada objeto debe tener estos atributos: `key` que será el identificador del ítem, `label` que será el texto a mostrar, y `disabled` que indicará si el elemento esta desactivado. Los items dentro de la lista destino están sincronizados con la variable asociada a `v-model`, y el valor de esa variable es un array de claves de los elementos de la lista destino. Así que si no quiere que la lista destino esté vacía inicialmente puede inicializar el `v-model` con un array.
 ```html
 <template>
   <el-transfer
@@ -38,7 +38,7 @@
 
 Puede buscar y filtrar los items.
 
-:::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
+:::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del ítem contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada ítem. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer
@@ -81,9 +81,9 @@ Puede buscar y filtrar los items.
 
 ### Personalizable
 
-Puede personalizar los títulos, botones, la función de renderizado de los items, el texto de status de la cabecera y el contenido del pie.
+Puede personalizar los títulos, botones, la función de renderizado de los items, el texto de estatus de la cabecera y el contenido del pie.
 
-:::demo Use `titles`, `button-texts`, `render-content` y `format` respectivamente para personalizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Plus, you can also use scoped slot to customize data items. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quiere algunos items marcados inicialmente puede usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Tenga en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
+:::demo Use `titles`, `button-texts`, `render-content` y `format` respectivamente para personalizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Además, también puede utilizar el scoped-slot para personalizar los elementos de datos. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quiere algunos items marcados inicialmente puede usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Tenga en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
 ```html
 <template>
   <p style="text-align: center; margin: 0 0 20px">Customize data items using render-content</p>
@@ -238,7 +238,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Scoped Slot
 | Name | Description |
 |------|--------|
-| — | Contenido personalizado para los datos de los items. El parametro del scope es { option } |
+| — | Contenido personalizado para los datos de los items. El parámetro del scope es { option } |
 
 ### Methods
 | Method | Description | Parameters |
@@ -248,6 +248,6 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Eventos
 | Nombre | Descripcion                              | Parametros                               |
 | ------ | ---------------------------------------- | ---------------------------------------- |
-| change | se lanzá cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
+| change | se lanza cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
 | left-check-change | se dispara cuando el usuario final cambia el estado verificado de cualquier elemento de datos en la lista izquierda | array clave de ítems actualmente verificados, array clave de ítems cuyo estado verificado ha cambiado |
 | right-check-change | se dispara cuando el usuario final cambia el estado verificado de cualquier elemento de datos en la lista derecha. | array clave de ítems actualmente verificados, array clave de ítems cuyo estado verificado ha cambiado |

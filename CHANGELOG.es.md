@@ -30,9 +30,9 @@
 - Backtop
   - Añadido componente Backtop (#15541 by @iamkun)
 - PageHeader
-  - Add PageHeader component (#15714 by @ziyoung)
+  - Añadido el componente PageHeader  (#15714 by @ziyoung)
 - InfiniteScroll
-  - Add InfiniteScroll directive (#15567 by @iamkun) 
+  - Añadida la directiva InfiniteScroll (#15567 by @iamkun) 
 - Cascader
   - Add multiple mode and filter-method (#15611 by @SimonaliaChen)
 - Message
