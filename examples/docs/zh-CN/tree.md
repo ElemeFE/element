@@ -422,7 +422,7 @@
       :expand-on-click-node="false">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
-        <span>
+        <span v-if="node.isHover">
           <el-button
             type="text"
             size="mini"
