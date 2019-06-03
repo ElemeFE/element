@@ -2999,7 +2999,7 @@ dom-serializer@0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-dom-walk@^0.1.0, dom-walk@^0.1.1:
+dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
   integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
@@ -7269,15 +7269,6 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
-
-perspective.js@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/perspective.js/-/perspective.js-1.0.0.tgz#b14aca449043fcfd21297fabd2dfa184f42cb26c"
-  integrity sha1-sUrKRJBD/P0hKX+r0t+hhPQssmw=
-  dependencies:
-    color-convert "^1.9.0"
-    dom-walk "^0.1.1"
-    throttle-debounce "^1.0.1"
 
 pify@^2.0.0:
   version "2.3.0"
