@@ -26,7 +26,7 @@
 
 *2019-06-25*
 
-#### New features
+#### Nuevas características
 
 - I18n
   - Added Uzbek language (#15796 by @ogabek96)
@@ -37,7 +37,7 @@
 - Upload:
   - Add capability to customize thumbnail template (#13192 by @victorzhuk)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Tree
   - Not highlight tree node when currentKey is null (#15668 by @yyjjqq94)
@@ -75,7 +75,7 @@
 - Chore
   - Update test api host (#15807 by @iamkun)
 
-#### Optimization
+#### Optimización
 
 - Tree
   - Modify loop conditions to improve performance (#15699 by @KingJeason)
