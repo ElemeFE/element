@@ -302,8 +302,7 @@
             </router-link>
           </li>
           <li 
-            class="nav-item"
-            v-if="$isEle"
+            class="nav-item nav-item-theme"
           >
             <router-link
               active-class="active"
@@ -369,11 +368,6 @@
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </li>
-          
-          <!--theme picker-->
-          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-picker v-if="!$isEle"></theme-picker>
           </li>
         </ul>
       </div>

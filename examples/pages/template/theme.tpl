@@ -97,6 +97,9 @@ export default {
       this.userTheme = [];
       saveUserThemeToLocal(this.userTheme);
     }
+    this.$nextTick(() => {
+      window.scrollTo(0, 0);
+    });
   },
   data() {
     return {
