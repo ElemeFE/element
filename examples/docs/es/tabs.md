@@ -288,14 +288,14 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | before-leave   | función `hook` antes de cambiar de pestaña. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se evitará el cambio. | Function(activeName, oldActiveName)  | — | — |
 
 ### Eventos de Pestañas
-| Nombre de Evento | Descripción                              | Parámetros                    |
-| ---------------- | ---------------------------------------- | ----------------------------- |
-| tab-click        | se lanza cuando se hace click a una pestaña | pestaña clickeada             |
-| tab-remove       | se lanza cuando se hace click al botón tab-remove | nombre de la pestaña removida |
-| tab-add          | se lanza cuando se hace click al botón tab-add | —                             |
+| Nombre de Evento | Descripción                                                  | Parámetros                    |
+| ---------------- | ------------------------------------------------------------ | ----------------------------- |
+| tab-click        | se lanza cuando se hace clic a una pestaña                   | pestaña clickeada             |
+| tab-remove       | se lanza cuando se hace clic al botón tab-remove             | nombre de la pestaña removida |
+| tab-add          | se lanza cuando se hace clic al botón tab-add                | —                             |
 | edit             | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action)          |
 
-### Attributos del Tab-pane
+### Atributos del Tab-pane
 | Atributo | Descripción                                                  | Tipo    | Valores Aceptados | Default                                                      |
 | -------- | ------------------------------------------------------------ | ------- | ----------------- | ------------------------------------------------------------ |
 | label    | título de la pestaña                                         | string  | —                 | —                                                            |

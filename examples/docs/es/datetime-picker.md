@@ -224,10 +224,10 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | firstDayOfWeek | primera día de semana                    | Número   | 1 to 7            | 7           |
 
 ### Accesos directos
-| Atributo | Descripción                              | Tipo     | Valores aceptados | Por defecto |
-| -------- | ---------------------------------------- | -------- | ----------------- | ----------- |
-| text     | título del acceso directo                | string   | —                 | —           |
-| onClick  | la funcion se dispara cuando se hace clic en el acceso directo, con el `vm` como parámetro. Puede modificar el valor del picker emitiendo el evento`pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
+| Atributo | Descripción                                                  | Tipo     | Valores aceptados | Por defecto |
+| -------- | ------------------------------------------------------------ | -------- | ----------------- | ----------- |
+| text     | título del acceso directo                                    | string   | —                 | —           |
+| onClick  | la función se dispara cuando se hace clic en el acceso directo, con el `vm` como parámetro. Puede modificar el valor del picker emitiendo el evento`pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
 
 ### Eventos
 | Nombre de evento | Descripción                              | Parámetros                    |

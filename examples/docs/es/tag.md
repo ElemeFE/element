@@ -187,13 +187,13 @@ Tag provide three different themes: `dark`、`light` and `plain`
 ### Atributos
 | Atributo            | Descripción                         | Tipo    | Valores aceptados           | Por defecto |
 | ------------------- | ----------------------------------- | ------- | --------------------------- | ----------- |
-| type                | component type                      | string  | success/info/warning/danger | —           |
+| type                | tipo de Tag | string  | success/info/warning/danger | —           |
 | closable            | si el Tag puede ser removido        | boolean | —                           | false       |
 | disable-transitions | si se deshabilitan las animaciones  | boolean | —                           | false       |
 | hit                 | si el  Tag tiene un borde resaltado | boolean | —                           | false       |
 | color               | color de fondo del Tag              | string  | —                           | —           |
 | size                | tamaño del Tag                      | string  | medium / small / mini       | —           |
-| effect | component theme | string | dark / light / plain | light |
+| effect | Tema del Tag | string | dark / light / plain | light |
 
 
 ### Eventos

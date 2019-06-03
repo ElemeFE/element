@@ -1,7 +1,7 @@
 ## Card
 Muestra información dentro de un contenedor `card`
 
-### Uso Basico
+### Uso Básico
 
 `Card` incluye titulo, contenido y operaciones.
 

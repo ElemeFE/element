@@ -140,7 +140,7 @@ Las marcas de tiempo ( timestamp )  puede colocarse encima del contenido cuando 
 |---------- |-------- |---------- |-------------  |-------- |
 | timestamp     | Contenido de las marcas de tiempo | string  | - | — |
 | hide-timestamp  | Si se muestra o no timestamp | boolean | — | false |
-| placement | la posicion de timestamp | string | top / bottom | bottom |
+| placement | la posición de timestamp | string | top / bottom | bottom |
 | type | tipo de nodo | string | primary / success / warning / danger / info | - |
 | color | color de fondo del nodo | string | hsl / hsv / hex / rgb | - |
 | size | tamaño del nodo | string | normal / large | normal |
@@ -149,5 +149,5 @@ Las marcas de tiempo ( timestamp )  puede colocarse encima del contenido cuando 
 ### Timeline-Item Slot
 | name | Description |
 |------|--------|
-| — | Contenido personalizado del item del timeline |
-| dot | Definicion personalizada del nodo |
+| — | Contenido personalizado del ítem del timeline |
+| dot | Definición personalizada del nodo |

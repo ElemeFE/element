@@ -4,104 +4,104 @@
 
 *2019-05-30*
 
-#### New features
+#### Nuevas características
 
 - Table
-  - tree-props，default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event are supported in Tree Table (#15709 by @ziyoung)
+  - tree-props，default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event son compatibles con Tree Table (#15709 by @ziyoung)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Table
-  - Fix some bugs (#15709 by @ziyoung)
+  - Corrección de algunos errores (#15709 by @ziyoung)
 - Theme
-  - Update api host (#15784 by @iamkun)
+  - Actualización del host de la api (#15784 by @iamkun)
 
-#### Optimization
+#### Optimización
 
-- Chore
-  - Update InfiniteScroll type (#15794 by @iamkun)
+- Tarea
+  - Una actualización del tipo InfiniteScroll (#15794 by @iamkun)
 
 ### 2.9.0
 
 *2019-05-30*
 
-#### New features
+#### Nuevas características
 
 - Backtop
-  - Add Backtop component (#15541 by @iamkun)
+  - Añadido componente Backtop (#15541 by @iamkun)
 - PageHeader
-  - Add PageHeader component (#15714 by @ziyoung)
+  - Añadido el componente PageHeader  (#15714 by @ziyoung)
 - InfiniteScroll
-  - Add InfiniteScroll directive (#15567 by @iamkun) 
+  - Añadida la directiva InfiniteScroll (#15567 by @iamkun) 
 - Cascader
-  - Add multiple mode and filter-method (#15611 by @SimonaliaChen)
+  - Agregado modo múltiple y método de filtro (#15611 by @SimonaliaChen)
 - Message
-  - Display in stack mode (#15639 by @island205)
+  - Visualización en modo stack (#15639 by @island205)
 - Tag
-  - Add prop effect (#15725 by @SimonaliaChen)
+  - Añadido prop effect  (#15725 by @SimonaliaChen)
 - Tabs
-  - Left align title when type is card (#15695 by @luckyCao)
+  - Alinea el título a la izquierda cuando el tipo es card (#15695 by @luckyCao)
 - DatePicker
-  - Support literal strings (#15525 by island205)
+  - Soporta cadenas literales (#15525 by island205)
 - Image
-  - Add support for transmit attrs and listeners (#15578 by @VanMess)
+  - Añadido soporte para transmitir attrs y listeners (#15578 by @VanMess)
 - Theme
-  - Add popup background (#15412 by @iamkun)  
-- Chore
-  - Update new 2.9.0 index page (#15682 by @iamkun)
+  - Añadido fondo al popup (#15412 by @iamkun)  
+- Tarea
+  - Actualizada la nueva página de índice 2.9.0 (#15682 by @iamkun)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Table
-  - Fix sort-change behaviour when sort condition is null (#15012 by @joelxr)
+  - Corregido el comportamiento de cambio de orden cuando la condición de orden es nula (#15012 by @joelxr)
 - Image
-  - Fix ssr and object-fit compatibility (#15346 by @SimonaliaChen)
+  - Corregido ssr y compatibilidad de ajuste de objetos (#15346 by @SimonaliaChen)
 - Input
-  - Fix show-word-count style in el-form (#15359 by @lvjiaxuan) 
-  - Fix clear icon is not centered (#15354 by @YiiGuxing)
+  - Corregido estilo show-word-count en el-form (#15359 by @lvjiaxuan) 
+  - Corregido el icono de borrar que no estaba centrado (#15354 by @YiiGuxing)
 - Calendar
-  - Fix not correct day of week when the day is Sunday (#15399 by @qingdengyue)
-  - Fix October disappear bug (#15394 by @qingdengyue)
+  - Corregido día de la semana no correcto cuando el día es domingo  (#15399 by @qingdengyue)
+  - Corregido error de desaparición de octubre (#15394 by @qingdengyue)
 - Tabs
-  - Fix basic tab nested in card tab padding error (#15461 by @SimonaliaChen)
+  -  Corrección de la pestaña básica anidada en el error de relleno de la pestaña de la tarjeta (#15461 by @SimonaliaChen)
 - Tag
-  - Fix stop propagation problem (#15150 by @infjer)
+  - Corregido problema de propagación de stop (#15150 by @infjer)
 - Form
-  - Fix input-group within form-item height error (#15457 by @SimonaliaChen)
-  - Fix resetFields issue (15181 by @luckyCao)
+  - Corregido el error de grupo de entrada dentro de la altura del elemento de formulario (#15457 by @SimonaliaChen)
+  - Solucionado el problema de resetFields (15181 by @luckyCao)
 - Tooltip
-  - Fix custom tabindex not work (#15619 by @SimonaliaChen )
+  - Corregido tabindex personalizado no funcionaba (#15619 by @SimonaliaChen )
 - Link
-  - Fix link icon style class (#15752 by @iamkun)
+  - Arreglada la clase de estilo del icono de enlace (#15752 by @iamkun)
 - Select  
-  - Revert set value to null when cleared (#15447 by @iamkun)
+  - Revertir el valor establecido a nulo cuando se borra (#15447 by @iamkun)
 - Loading
-  - Fix dom not change when loading state change quickly (#15123 by @FAKER-A)
+  - Corregido dom no cambia cuando el estado de carga cambia rápidamente (#15123 by @FAKER-A)
 - Switch
-  - Label with el-switch repeating event (#15178 by @FAKER-A)
+  - Etiqueta con el evento de repetición del interruptor (#15178 by @FAKER-A)
 - Slider
-  - Fix style problem when clicking slider bar(#15561 by @luckyCao)
+  - Arreglado el problema de estilo al hacer clic en la barra deslizante (#15561 by @luckyCao)
 - Radio
-  - Fix issue 14808 (#14809 by @OverTree)
+  - Solucionado el problema 14808 (#14809 by @OverTree)
 - Form
-  - Fix resetFields issue (15181 by @luckyCao)  
-- Chore
-  - Upgrade dependencies and fix demo bug (#15324 by ziyoung)
+  - Solucionado el problema de resetFields (15181 by @luckyCao)  
+- Tarea
+  - Se actualizaron las dependencias y se corrigió el error de demostración (#15324 by ziyoung)
  - Type
-   - Fix loading type definition (#15635 by @iamkun)
-   - Fix Icon type (#15634 by @iamkun)
-   - Fix Link type definition (#15402 by @iamkun)
+   - Corregida la definición del tipo de carga (#15635 by @iamkun)
+   - Corregido tipo Icono (#15634 by @iamkun)
+   - Corregida la definición del tipo de enlace (#15402 by @iamkun)
 
-#### Optimization
+#### Optimización
 
 - Cascader
-  - Refactor (#15611 by @SimonaliaChen)
-- Chore
-  - Update make new component logic (by @iamkun)
-- Docs
-  - Rename variable in docs (#15185 by @liupl)
-  - Fix image attribute type and default value (#15423 by @haoranyu)
-  - Fix form doc bug (#15228 by @SHERlocked93)
+  - Refractorización (#15611 by @SimonaliaChen)
+- Tarea
+  - Actualización hacer nueva lógica de componentes (by @iamkun)
+- Documentación
+  - Renombrar variable en docs (#15185 by @liupl)
+  - Corregido el atributo type de imagen y el valor por defecto (#15423 by @haoranyu)
+  - Corregido error en la doc de form (#15228 by @SHERlocked93)
 
 ### 2.8.2
 
@@ -177,7 +177,7 @@
   - Arreglado el estilo del label (#14969 by @ziyoung)
   - Los FormItem requeridos muestran astericos cuando el label es auto (#15144 by @ziyoung)
 - Pagination
-  -  Arreglaod que el slot no se actualizaba (#14711 by @lucyhao)
+  -  Arreglado que el slot no se actualizaba (#14711 by @lucyhao)
 - Table
   - Arreglado un bug del load en el modo lazy (#15101 by @ziyoung)
   - Arreglado el ancho de la celda cuando colspan es mayor que 1 (#15196 by @ziyoung)
