@@ -385,10 +385,10 @@
         this.calcIconOffset('prefix');
         this.calcIconOffset('suffix');
       },
-      clear() {
+      clear(event) {
         this.$emit('input', '');
         this.$emit('change', '');
-        this.$emit('clear');
+        this.$emit('clear', event);
       },
       handlePasswordVisible() {
         this.passwordVisible = !this.passwordVisible;
