@@ -48,7 +48,7 @@ Presenta una serie de imágenes o textos en un espacio limitado
 
 ### Indicadores
 
-Los indicadores de paginacion pueden mostrarse fuera del carrusel
+Los indicadores de paginación pueden mostrarse fuera del carrusel
 
 :::demo El atributo  `indicator-position`  determina dónde se encuentran los indicadores de paginación. Por defecto están dentro del carrusel, y el ajuste de `indicator-position`  a `outside`  los mueve hacia fuera; en cambio `indicator-position`  a `none`  los oculta.
 
@@ -184,7 +184,7 @@ Por defecto, `direction` es `horizontal`. El carousel puede ser mostrado de form
 :::
 
 ### Atributos de Carousel
-| Atributo           | Descripcion                                        | Tipo    | Valores aceptados   | Por defecto |
+| Atributo           | Descripción                                        | Tipo    | Valores aceptados   | Por defecto |
 | ------------------ | -------------------------------------------------- | ------- | ------------------- | ----------- |
 | height             | Alto del carrusel                                  | string  | —                   | —           |
 | initial-index      | Indice del slider inicial activo (empieza desde 0) | number  | —                   | 0           |
@@ -198,16 +198,16 @@ Por defecto, `direction` es `horizontal`. El carousel puede ser mostrado de form
 | direction          | direccion en la que se muestra el contenido        | string  | horizontal/vertical | horizontal  |
 
 ### Eventos de Carousel
-| Nombre evento | Descripción                              | Parametros                               |
-| ------------- | ---------------------------------------- | ---------------------------------------- |
+| Nombre evento | Descripción                               | Parámetros                                                   |
+| ------------- | ----------------------------------------- | ------------------------------------------------------------ |
 | change        | Se dispara cuando el slider activo cambia | Indice del nuevo slider activo, indice del anterior slider activo. |
 
 ### Metodos de Carousel
-| Metodos       | Descripción                | Parametros                               |
-| ------------- | -------------------------- | ---------------------------------------- |
+| Metodos       | Descripción                | Parámetros                                                   |
+| ------------- | -------------------------- | ------------------------------------------------------------ |
 | setActiveItem | Cambio manual de slider    | indice del slider al que se va a cambiar, empezando por 0; o el `name` del `el-carousel-item` correspondiente |
-| prev          | Cambia al slider anterior  | —                                        |
-| next          | Cambia al slider siguiente | —                                        |
+| prev          | Cambia al slider anterior  | —                                                            |
+| next          | Cambia al slider siguiente | —                                                            |
 
 ### Atributos de Carousel-Item
 | Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |

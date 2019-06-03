@@ -1,10 +1,10 @@
 ## Backtop
 
-A button to back to top
+Un botón para volver a la parte superior
 
-### Basic usage
+### Uso básico
 
-Scroll down to see the bottom-right button.
+Desplácese hacia abajo para ver el botón en el lado inferior derecho.
 :::demo
 
 ```html
@@ -16,9 +16,9 @@ Scroll down to see the bottom-right button.
 
 :::
 
-### Customizations
+### Personalización
 
-Display area is 40px \* 40px.
+Área de visualización de 40px \* 40px.
 :::demo
 
 ```html
@@ -44,17 +44,17 @@ Display area is 40px \* 40px.
 
 :::
 
-### Attributes
+### Atributos
 
-| Attribute         | Description                                                         | Type            | Accepted Values | Default |
+| Atributos | Descripción                                    | Tipo         | Valores aceptados | Por defecto |
 | ----------------- | ------------------------------------------------------------------- | --------------- | --------------- | ------- |
-| target            | the target to trigger scroll                                        | string          |                 |         |
-| visibility-height | the button will not show until the scroll height reaches this value | number |                 | 200     |
-| right             | right distance                                                      | number |                 | 40      |
-| bottom            | bottom distance                                                     | number |                 | 40      |
+| target            | el objetivo para activar el scroll      | string          |                 |         |
+| visibility-height | el botón no se mostrará hasta que la altura de desplazamiento alcance este valor | number |                 | 200     |
+| right             | separación desde la derecha              | number |                 | 40      |
+| bottom            | separación desde abajo                                       | number |                 | 40      |
 
-### Events
+### Eventos
 
-| Event Name | Description         | Parameters  |
-| ---------- | ------------------- | ----------- |
-| click      | triggers when click | click event |
+| Nombre del evento | Descripción             | Parámetros  |
+| ----------------- | ----------------------- | ----------- |
+| click             | se activa al hacer clic | click event |

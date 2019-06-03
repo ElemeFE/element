@@ -34,7 +34,7 @@ Vue.use(Element)
 ```
 
 :::tip
-Nota es necesario sobreescribir la ruta de la fuente por una ruta relativa de las fuentes de Element.
+Nota es necesario sobrescribir la ruta de la fuente por una ruta relativa de las fuentes de Element.
 :::
 
 ### CLI para generar temas
@@ -56,7 +56,7 @@ npm i https://github.com/ElementUI/theme-chalk -D
 ```
 
 #### <strong>Inicializar archivo de variables</strong>
-Después de haber instalado correctamente los paquetes, el comando `et` estará disponible en su CLI (si instalo el paquete de manera local, utilize `node_modules/.bin/et` en su lugar). Ejecute `-i` para inicializar un archivo de variables, puede especificar un nombre distinto, pero por defecto, el archivo se llama `element-variables.scss`. También puede especificar un directorio distinto.
+Después de haber instalado correctamente los paquetes, el comando `et` estará disponible en su CLI (si instalo el paquete de manera local, utilice `node_modules/.bin/et` en su lugar). Ejecute `-i` para inicializar un archivo de variables, puede especificar un nombre distinto, pero por defecto, el archivo se llama `element-variables.scss`. También puede especificar un directorio distinto.
 
 ```shell
 et -i [custom output file]
