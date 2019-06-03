@@ -37,3 +37,7 @@ Si la ruta de la página es simple, se recomienda utilizar  PageHeader en lugar 
 | --------------- | ----------- |
 | title           | titulo      |
 | content         | contenido   |
+
+```
+
+```
