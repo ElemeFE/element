@@ -49,6 +49,12 @@
         type: String,
         default: ''
       },
+    
+      visible: {
+        sync: true,
+        required: true,
+        type: Boolean
+      },
 
       modal: {
         type: Boolean,
