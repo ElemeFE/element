@@ -1,5 +1,6 @@
 var cooking = require('cooking');
 var config = require('./config');
+var path = require('path');
 
 cooking.set({
   entry: './src/index.js',
@@ -21,6 +22,13 @@ cooking.add('loader.scss', {
 cooking.add('vue.preserveWhitespace', false);
 cooking.add('loader.svg', {
   test: /\.svg$/,
-  loader: 'svg-sprite-loader'
+  loader: 'svg-sprite-loader',
+  options: {
+    symbolId: filePath => {
+      const prefix = 'tmc24c-icon';
+      const fileName = path.basename(filePath).replace('.svg', '');
+      return `${prefix}-${fileName}`;
+    }
+  }
 });
 module.exports = cooking.resolve();
