@@ -821,6 +821,7 @@ export default {
     },
 
     mountPicker() {
+      if (this.popperJS) this.popperJS = null;
       this.picker = new Vue(this.panel).$mount();
       this.picker.defaultValue = this.defaultValue;
       this.picker.defaultTime = this.defaultTime;
