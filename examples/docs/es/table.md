@@ -1089,7 +1089,7 @@ Filtra la tabla para encontrar la información que necesita.
 
 Personalice la columna de la tabla para que pueda integrarse con otros componentes.
 
-:::demo Tiene acceso a la siguiente informacion: row, column, $index, store (gestor de estados de la tabla) por [Scoped slots](https://vuejs.org/v2/guide/components.html#Scoped-Slots).
+:::demo Tiene acceso a la siguiente información: row, column, $index, store (gestor de estados de la tabla) por [Scoped slots](https://vuejs.org/v2/guide/components.html#Scoped-Slots).
 ```html
 <template>
   <el-table
@@ -1244,7 +1244,7 @@ Se puede personalizar el encabezado de la tabla para que se pueda adaptar aún m
 
 ### Fila expandible
 
-Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de desplazamiento horizontal, puede utilizar la caracteristica de fila expandible.
+Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de desplazamiento horizontal, puede utilizar la característica de fila expandible.
 
 :::demo Puede activar la fila expandible estableciendo la propiedad `type` a `expand` y Scoped Slots. La plantilla para `el-table-column` se representará como el contenido de la fila expandible, y puede acceder a algunos atributos cuando está usando `Scoped Slots` en plantillas de columna personalizadas.
 ```html
@@ -1334,7 +1334,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
 
 ### Datos tree y modo lazy
 
-:::demo Puede mostrar la estructura de datos tipo tree。Cuando se usa, la prop`row-key` es requerida。Entonces, los datos de las filas de los hijos pueden ser cargados asincrónicamente. Poner la propiedad `lazy` de Table a true y la función `load`. Especifique el atributo `hasChildren` en la fila para determinar qué fila contiene hijos.
+:::demo Puede visualizar datos de estructura de árbol. Cuando la fila contiene el campo `children`, se trata como datos anidados. Para renderizar datos anidados, la `row-key` es requerida。Ademas, los datos de las filas secundarias pueden ser cargados asincrónicamente. Poner la propiedad `lazy` de Table a true y la función `load`. Especifique el atributo `hasChildren` en la fila para determinar qué fila contiene descendencia. Tanto `children` como `hasChildren` pueden configurarse a través de `tree-props`.
 
 ```html
 <template>
@@ -1342,8 +1342,9 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
   <el-table
     :data="tableData"
     style="width: 100%;margin-bottom: 20px;"
+    row-key="id"
     border
-    row-key="id">
+    default-expand-all>
     <el-table-column
       prop="date"
       label="日期"
@@ -1365,7 +1366,7 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
     border
     lazy
     :load="load"
-    >
+    :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
     <el-table-column
       prop="date"
       label="date"
@@ -1431,17 +1432,19 @@ Cuando el contenido de la fila es demasiado largo y busca no mostrar la barra de
     },
     methods: {
       load(tree, treeNode, resolve) {
-        resolve([
-          {
-            id: 31,
-            date: '2016-05-01',
-            name: 'wangxiaohu'
-          }, {
-            id: 32,
-            date: '2016-05-01',
-            name: 'wangxiaohu'
-          }
-        ])
+        setTimeout(() => {
+          resolve([
+            {
+              id: 31,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }
+          ])
+        }, 1000)
       }
     },
   }
@@ -1591,7 +1594,7 @@ Para una tabla de números, puede agregar una fila extra en el pie de página de
 
 Configurar _rowspan_ y _colspan_ le permite fusionar celdas.
 
-:::demo Utilice el atributo `span-method` para configurar rowspan y colspan. Este acepta un método, y pasa un objeto a ese método incluyedo la fila actual `row`, columna actual `column`, índice de fila actual `rowIndex` y índice de columna actual `columnIndex`. El método debe devolver un arreglo de dos números, el primer número siendo `rowspan` y el segundo `colspan`. También puede devolver un objeto con las propiedades `rowspan` y `colspan`.
+:::demo Utilice el atributo `span-method` para configurar rowspan y colspan. Este acepta un método, y pasa un objeto a ese método incluyendo la fila actual `row`, columna actual `column`, índice de fila actual `rowIndex` y índice de columna actual `columnIndex`. El método debe devolver un arreglo de dos números, el primer número siendo `rowspan` y el segundo `colspan`. También puede devolver un objeto con las propiedades `rowspan` y `colspan`.
 
 ```html
 <template>
@@ -1830,7 +1833,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | header-cell-style      | función que devuelve estilos personalizados para una celda en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada celda en la cabecera de la tabla | Function({row, column, rowIndex, columnIndex})/Object         | —                              | —                                        |
 | row-key | key de los datos de las filas, utilizada para optimizar el renderizado. Requerido si `reserve-selection` está activada o muestra los datos del árbol. Cuando su tipo es String, se admite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no se admite, en cuyo caso se debe utilizar la función. | Function(row)/String | — | — |
 | empty-text             | Texto mostrado cuando no existen datos. Puede personalizar esta área con `slot="empty"` | String                                   | —                              | No Data                                  |
-| default-expand-all     | especifica si todas las filas se expanden por defeto, solo funciona cuando la tabla tiene una columna `type="expand"` | Boolean                                  | —                              | false                                    |
+| default-expand-all     | especifica si todas las filas se expanden por defecto, solo funciona cuando la tabla tiene una columna `type="expand"` | Boolean                                  | —                              | false                                    |
 | expand-row-keys        | establece las filas expandidas a través de esta propiedad, este valor es la clave de filas expandidas, debería establecer `row-key` antes de usar esta propiedad | Array                                    | —                              |                                          |
 | default-sort           | establece la columna y orden por defecto. La propiedad `prop` es utilizada para establecer la columna de ordenamiento por defecto, la propiedad `order` es utilizada para definir el tipo de orden por defecto | Object                                   | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
 | tooltip-effect         | propiedad `effect` para efectos en tooltip | String                                   | dark/light                     |                                          |
@@ -1841,7 +1844,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | select-on-indeterminate | controla el comportamiento del checkbox maestro en tablas de selección múltiple cuando sólo se seleccionan algunas filas (pero no todas). Si es true, todas las filas serán seleccionadas, de lo contrario deseleccionadas.               | Boolean   | — | true |
 | indent                 | indentación horizontal de los datos en formato tree | Number    | — | 16   |
 | lazy                   | si se realiza un lazy loading de los datos | Boolean   | — | —    |
-| load                   | metodo para cargar las filas de los hijos, solamente funciona cuando `lazy`es true | Function({ row, treeNode, resolve }) | — | — |
+| load                   | método para cargar las filas de los hijos, solamente funciona cuando `lazy`es true | Function(row, treeNode, resolve) | — | — |
+| tree-props             | configuración para renderizar datos anidados | Object    | — | { hasChildren: 'hasChildren', children: 'children' } |
 
 ### Eventos de la tabla
 | Nombre del evento  | Descripción                              | Parámetros                        |
@@ -1856,21 +1860,21 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | row-click          | se dispara cuando se hace clic en una fila | row, column, event                |
 | row-contextmenu    | se dispara cuando el usuario hace clic derecho en una fila | row, column, event                        |
 | row-dblclick       | se dispara cuando se hace doble clic en una fila | row, column, event                        |
-| header-click       | se dispara cuando se hace click en una cabecera de columna | column, event                     |
+| header-click       | se dispara cuando se hace clic en una cabecera de columna | column, event                     |
 | header-contextmenu | se dispara cuando el usuario hace clic derecho en una cabecera de columna | column, event                     |
 | sort-change        | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order }           |
 | filter-change      | clave de la columna. Si necesitas utilizar el evento filter-change, este atributo es obligatorio para identificar cuál columna está siendo filtrada | filters                           |
 | current-change     | se dispara cuando la fila actual cambia  | currentRow, oldCurrentRow         |
 | header-dragend     | se dispara después de modificar el ancho de una columna arrastrando el borde de la cabecera. | newWidth, oldWidth, column, event |
-| expand-change      | se dispara cuando el usuario expande o colapsa una fila | row, expandedRows                 |
+| expand-change      | se activa cuando el usuario expande o colapsa una fila (para la tabla expansible, el segundo parámetro es expandedRows; para la tabla de árbol, el segundo parámetro es expanded) | row, (expandedRows \| expanded) |
 
 ### Métodos de la tabla
 | Metodo             | Descripción                              | Parametros    |
 | ------------------ | ---------------------------------------- | ------------- |
 | clearSelection     | utilizado en selección múltiple de la tabla, limpiar selección | —     |
 | toggleRowSelection | utilizado en selección múltiple de la tabla, alterna si una cierta fila es seleccionada. Con el segundo parámetro, puede directamente establecer si la fila es seleccionada | row, selected |
-| toggleAllSelection | usado en Table de seleccion multiple, cambia los estados de seleccion de todas las filas. | - |
-| toggleRowExpansion | utilizado en tabla expandible, alterna si una cierta fila es expandida. Con el segundo parámetro, puede directamente establecer si esta fila es expandida o colapsada | row, expanded |
+| toggleAllSelection | usado en Table de selección múltiple, cambia los estados de selección de todas las filas. | - |
+| toggleRowExpansion | utilizado en la Tabla expandible o en la Tabla de árbol, conmutar si se desglosa una determinada línea. Con el segundo parámetro, se puede fijar directamente si esta línea se desglosa o se pliega | row, expanded |
 | setCurrentRow      | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row           |
 | clearSort          | limpiar ordenamiento, restaurar datos a orden original | —             |
 | clearFilter        | Se utiliza para borrar todas las condiciones de filtro cuando no se pasan parámetros, los datos se restaurarán a un estado sin filtrar, o se puede pasar una matriz de columnas para borrar las condiciones de filtro de la columna especificada.  | columnKey |
@@ -1908,7 +1912,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | selectable            | función que determina si una cierta fila puede ser seleccionada, funciona cuando `type` esta en `selection` | Function(row, index)              | —                             | —           |
 | reserve-selection     | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection`. Note que `row-key` es requerido para que esto funcione | boolean                           | —                             | false       |
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
-| filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
+| filter-placement      | colocación para el menú desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
 | filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)      | —                             | —           |
 | filtered-value        | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array                             | —                             | —           |

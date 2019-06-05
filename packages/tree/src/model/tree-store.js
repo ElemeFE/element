@@ -44,10 +44,7 @@ export default class TreeStore {
 
       if (!node.visible && childNodes.length) {
         let allHidden = true;
-
-        childNodes.forEach((child) => {
-          if (child.visible) allHidden = false;
-        });
+        allHidden = !childNodes.some(child => child.visible);
 
         if (node.root) {
           node.root.visible = allHidden === false;
@@ -331,6 +328,7 @@ export default class TreeStore {
 
   setCurrentNodeKey(key) {
     if (key === null) {
+      this.currentNode.isCurrent = false;
       this.currentNode = null;
       return;
     }

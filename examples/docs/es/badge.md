@@ -122,3 +122,4 @@ Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 | is-dot   | si se debe mostrar un pequeño punto      | boolean        | —                 | false       |
 | hidden   | oculta el badge                    | boolean        | —                 | false       |
 | type     | tipo de botón                            | string         | primary / success / warning / danger / info | — |
+

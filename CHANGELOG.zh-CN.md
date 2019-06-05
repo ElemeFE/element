@@ -1,27 +1,48 @@
 ## 更新日志
 
+### 2.9.1
+
+*2019-05-30*
+
+#### 新特性
+
+- Table
+  - Tree Table 支持 tree-props，default-expand-all，expand-row-keys 属性, toggle-row-expansion 方法，expand-change 事件 (#15709 by @ziyoung)
+
+#### Bug 修复
+
+- Table
+  - 修复了一些问题 (#15709 by @ziyoung)
+- Theme
+  - 更新接口域名 (#15784 by @iamkun)
+
+#### 优化
+
+- Chore
+  - 更新 InfiniteScroll 组件定义文件 (#15794 by @iamkun)
+
 ### 2.9.0
 
 *2019-05-30*
 
-#### New features
+#### 新特性
 
 - Backtop
-  - 新增 backtop 组件 (#15541 by @iamkun)"
+  - 新增 Backtop 组件 (#15541 by @iamkun)
 - PageHeader
   - 新增 PageHeader 组件 (#15714 by @ziyoung)
 - InfiniteScroll
-  - 新增 infiniteScroll 指令 (#15567 by @iamkun) 
+  - 新增 InfiniteScroll 指令 (#15567 by @iamkun) 
 - Cascader
-  - 新增多选模式 (#15611 by @SimonaliaChen)
+  - 新增多选模式和 filter-method 方法 (#15611 by @SimonaliaChen)
 - Message
   - 信息依次展示 (#15639 by @island205)
 - Tag
   - 新增 effect 属性 (#15725 by @SimonaliaChen)
 - Tabs
-  - 卡片模式下 title 左对齐 (#15695 by @luckyCao)
+  - 卡片模式下标题左对齐 (#15695 by @luckyCao)
 - DatePicker
-  - 支持 literal strings (#15525 by island205)
+  - 支持字符串常量 (#15525 by island205)
 - Image
   - 支持 attrs 和 listeners (#15578 by @VanMess)
 - Theme
@@ -29,7 +50,7 @@
 - Chore
   - 更新文档首页 (#15682 by @iamkun)
 
-#### Bug 
+#### Bug 修复
 
 - Table
   - 修复排序条件为空时的排序问题 (#15012 by @joelxr)
@@ -39,8 +60,8 @@
   - 修复 show-word-count 样式问题 (#15359 by @lvjiaxuan) 
   - 修复删除图标样式 (#15354 by @YiiGuxing)
 - Calendar
-  - 修复星期天的星期错误 (#15399 by @qingdengyue)
-  - 修复十月问题 (#15394 by @qingdengyue)
+  - 修复星期展示错误 (#15399 by @qingdengyue)
+  - 修复十月展示问题 (#15394 by @qingdengyue)
 - Tabs
   - 修复 padding 问题 (#15461 by @SimonaliaChen)
 - Tag
@@ -49,41 +70,39 @@
   - 修复 form-item 的高度错误 (#15457 by @SimonaliaChen)
   - 修复 resetFields 问题 (15181 by @luckyCao)
 - Tooltip
-  - 修复自定义 tabindex 不生效问题 (#15619 by @SimonaliaChen )
+  - 修复自定义 tabindex 不生效问题 (#15619 by @SimonaliaChen)
 - Link
   - 修复图标 class 问题 (#15752 by @iamkun)
 - Select  
-  - 回滚清除时设置 value 为 null 的修改 (#15447 by @iamkun)
+  - 回滚清除时，设置 value 为 null 的修改 (#15447 by @iamkun)
 - Loading
-  - 修复状态变化太快时 dom 不更新的问题 (#15123 by @FAKER-A)
+  - 修复 Dom 不更新的问题 (#15123 by @FAKER-A)
 - Switch
-  - 修复事件重复触发 (#15178 by @FAKER-A)
+  - 修复事件重复触发问题 (#15178 by @FAKER-A)
 - Slider
   - 修复点击时样式问题 (#15561 by @luckyCao)
 - Radio
-  - 修复 issue 14808 (#14809 by @OverTree)
+  - 修复 value 不更新的问题 (#14809 by @OverTree)
 - Form
-  - 修复 resetFields issue (15181 by @luckyCao)
-- Docs
-  - 修复图片属性 (#15423 by @haoranyu)
-  - 修复 form 文档错误 (#15228 by @SHERlocked93)
+  - 修复 resetFields 问题 (15181 by @luckyCao)
 - Chore
   - 更新依赖 (#15324 by ziyoung)
 - Type
-  - 修复 loading type 定义 (#15635 by @iamkun)
-  - 修复 Icon type (#15634 by @iamkun)
-  - 修复 Link type (#15402 by @iamkun)
+  - 修复 Loading 定义文件 (#15635 by @iamkun)
+  - 修复 Icon 定义文件 (#15634 by @iamkun)
+  - 修复 Link 定义文件 (#15402 by @iamkun)
 
-#### Optimization
+#### 优化
 
 - Cascader
   - 重构 (#15611 by @SimonaliaChen)
 - Chore
-  - 更新新建组件标本 (by @iamkun)
+  - 更新新建组件的脚本 (by @iamkun)
 - Docs
   - 重新命名文档变量 (#15185 by @liupl)
+  - 更新 Image 组件文档 (#15423 by @haoranyu)
+  - 修复 Form 组件文档错误 (#15228 by @SHERlocked93)
  
-
 ### 2.8.2
 
 *2019-04-25*

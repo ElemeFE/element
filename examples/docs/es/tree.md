@@ -133,7 +133,7 @@ Usado para la selección de nodos.
 ```
 :::
 
-### Nodos hoja en modo perezoso
+### Nodos hoja en modo perezoso (lazy load)
 
 :::demo Los datos de un nodo no son cargados hasta que no es pinchado, así que el árbol no puede predecir si es una hoja. Por eso a cada nodo se le añade el botón de desplegar, y si el nodo es una hoja el botón desaparecerá al pinchar en él. También puede decirle al árbol que el nodo es una hoja de antemano, y así evita que muestre el botón de desplegar.
 ```html
@@ -183,7 +183,7 @@ Usado para la selección de nodos.
 
 El checkbox de un nodo se puede poner como desactivado.
 
-:::demo En el ejemplo, la propiedad 'disabled' se declara en defaultProps, y algunos nodos se ponen como 'disabled:true'. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
+:::demo En el ejemplo, la propiedad `disabled` se declara en `defaultProps`, y algunos nodos se ponen como `disabled:true`. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
 ```html
 <el-tree
   :data="data"
@@ -399,7 +399,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en codepen.io ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+:::demo Hay dos maneras de personalizar la plantilla para los nodos de árbol: `render-content` y scoped slot. Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciones de renderizado. Si prefiere scoped slot, tendrá acceso a los `nodos` y `datos` en el ámbito de aplicación, representando el objeto TreeNode y los datos del nodo actual respectivamente. Tenga en cuenta que este ejemplo no puede ejecutarse en codepen.io ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <div class="custom-tree-container">
   <div class="block">
@@ -534,7 +534,7 @@ El contenido de los nodos puede ser personalizado, así que puede añadir iconos
 ### Filtrado de nodos
 Los nodos del árbol se pueden filtrar.
 
-:::demo Invoque el método `filter` de la instancia de Tree para filtrar los nodos. Su parametro es la palabra de filtrado. Tenga en cuenta que para que funcione es necesario `filter-node-method`, y su valor el método de filtrado.
+:::demo Invoque el método `filter` de la instancia de Tree para filtrar los nodos. Su parámetro es la palabra de filtrado. Tenga en cuenta que para que funcione es necesario `filter-node-method`, y su valor el método de filtrado.
 ```html
 <el-input
   placeholder="Filter keyword"
@@ -800,15 +800,15 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | auto-expand-parent    | Expandir un nodo padre si el hijo está seleccionado | boolean                           | —                 | true        |
 | default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array                             | —                 | —           |
 | show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
-| check-strictly        | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
+| check-strictly        | El estado de selección de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
 | default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
 | current-node-key      | la clave del nodo inicialmente seleccionado | string, number                       | —               | —       |
-| filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
+| filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
 | icon-class            | Icono del nodo del árbol de cliente                                                | string                            | -                 | -           |
 | lazy                  | si se trata de un nodo de hoja lazy load, utilizado con el atributo `load`  | boolean                     | —    | false |
-| draggable             | si se habilita la función de drag and drop en los nodos | boolean            | —    | false |
+| draggable             | si se habilita la función de drag & drop en los nodos | boolean            | —    | false |
 | allow-drag            | esta función se ejecutará antes de arrastrar un nodo. si devuelve `false`, el nodo no puede ser arrastrado. | Function(nodo) | —  | —  |
 | allow-drop            | esta función se ejecutará al arrastrar y soltar un nodo. si devuelve false, el nodo arrastrando no se puede soltar en el nodo destino. `type` tiene tres valores posibles: 'prev' (insertar el nodo de arrastre antes del nodo de destino), 'inner' (insertar el nodo de arrastre en el nodo de destino) y 'next' (insertar el nodo de arrastre después del nodo de destino) | Function(Nodoquesearrastra, Nododestino, type) | —    | —     |
 
@@ -821,6 +821,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 
 ### Métodos
 `Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
+
 | Método            | Descripción                              | Parámetros                               |
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | filter            | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
@@ -833,7 +834,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de nodos actualmente seleccionada. | - |
 | getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad del array de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
-| getCurrentNode    | return the highlight node's data (null if no node is highlighted)         | —                                        |
+| getCurrentNode    | devuelve los datos del nodo de resaltado (nulo si no hay ningún nodo resaltado) | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado. Si es `null`, cancela los nodos actualmente resaltados |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
@@ -846,20 +847,20 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | Nombre del evento | Descripción                              | Parámetros                               |
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
-| node-contextmenu     | se lanza cuando en un nodo se hace click con el boton derecho | cuatro parámetros: evento, el objeto nodo sobre el que se hizo click, la propiedad `node`  del TreeNode, el TreeNode en si mismo |
+| node-contextmenu     | se lanza cuando en un nodo se hace clic con el botón derecho | cuatro parámetros: evento, el objeto nodo sobre el que se hizo clic, la propiedad `node`  del TreeNode, el TreeNode en si mismo |
 | check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
-| check   | se activa al hacer clic en la casilla de selección de un nodo | dos parámetros: objeto de nodo correspondiente al nodo que se marca/desmarca, objeto de status de árbol verificado que tiene cuatro puntales: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
+| check   | se activa al hacer clic en la casilla de selección de un nodo | dos parámetros: objeto de nodo correspondiente al nodo que se marca/desmarca, objeto de estatus de árbol verificado que tiene cuatro puntales: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
-| node-drag-start | se activa cuando se inicia el arrastre | dos parametros: el objeto del nodo que se arrastrara, evento. |
-| node-drag-enter | se desencadena cuando el nodo de arrastre entra en otro nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo en el que entra, evento. |
-| node-drag-leave | se desencadena cuando el nodo de arrastre sale de un nodo | tres parametros: objeto del nodo que se arrastra, objeto del nodo del cual se sale, evento. |
-| node-drag-over | se activa cuando se arrastra sobre un nodo (como el evento mouseover) | tres parametros: objeto del nodo que se arrastra, objeto del nodo sobre el que esta el arrastre, evento. |
-| node-drag-end  | se activa cuando se termina de arrastrar | cuatro parametros: objeto del nodo que se arrastra, objeto del nodo que corresponde al final del arrastre (puede ser `undefined` ), tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
-| node-drop  | después de soltar el nodo de arrastre | cuatro parametros: objeto del nodo que se esta arrastrando, objeto del nodo sobre el que se esta soltando, tipo de integracion (antes (before), despues (after), dentro (inner) ), evento. |
+| node-drag-start | se activa cuando se inicia el arrastre | dos parámetros: el objeto del nodo que se arrastrara, evento. |
+| node-drag-enter | se desencadena cuando el nodo de arrastre entra en otro nodo | tres parámetros: objeto del nodo que se arrastra, objeto del nodo en el que entra, evento. |
+| node-drag-leave | se desencadena cuando el nodo de arrastre sale de un nodo | tres parámetros: objeto del nodo que se arrastra, objeto del nodo del cual se sale, evento. |
+| node-drag-over | se activa cuando se arrastra sobre un nodo (como el evento mouseover) | tres parámetros: objeto del nodo que se arrastra, objeto del nodo sobre el que esta el arrastre, evento. |
+| node-drag-end  | se activa cuando se termina de arrastrar | cuatro parámetros: objeto del nodo que se arrastra, objeto del nodo que corresponde al final del arrastre (puede ser `undefined` ), tipo de integración (antes (before), después (after), dentro (inner) ), evento. |
+| node-drop  | después de soltar el nodo de arrastre | cuatro parámetros: objeto del nodo que se esta arrastrando, objeto del nodo sobre el que se esta soltando, tipo de integración (antes (before), después (after), dentro (inner) ), evento. |
 
 ### Scoped Slot
-| Name | Description |
+| Nombre | Descripción |
 |------|--------|
 | — | Contenido personalizado para nodos de tree. El parámetro del scope es { node, data }. |

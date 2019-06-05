@@ -1335,7 +1335,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
 
 ### Arborescence et lazy loading
 
-:::demo Vous pouvez afficher les données en arborescence, la propriété `row-key` devenant dans ce cas obligatoire. Les données enfants peuvent aussi être chargées de manière asynchrone. Mettez la propriété `lazy` à `true` and utilisez la fonction `load`. Spécifiez l'attribut `hasChildren` pour déterminer quelle ligne contient les enfants.
+:::demo You can display tree structure data. When row contains the `children` field, it is treated as nested data. For rendering nested data, the prop `row-key` is required。Also, child row data can be loaded asynchronously. Set `lazy` property of Table to true and the function `load`. Specify `hasChildren` attribute in row to determine which row contains children. Both `children` and `hasChildren` can be configured via `tree-props`.
 
 ```html
 <template>
@@ -1343,11 +1343,12 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
   <el-table
     :data="tableData"
     style="width: 100%;margin-bottom: 20px;"
+    row-key="id"
     border
-    row-key="id">
+    default-expand-all>
     <el-table-column
       prop="date"
-      label="Date"
+      label="date"
       sortable
       width="180">
     </el-table-column>
@@ -1366,7 +1367,7 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
     border
     lazy
     :load="load"
-    >
+    :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
     <el-table-column
       prop="date"
       label="Date"
@@ -1432,17 +1433,19 @@ Lorsque le contenu d'une ligne est trop long et que vous ne souhaitez pas affich
     },
     methods: {
       load(tree, treeNode, resolve) {
-        resolve([
-          {
-            id: 31,
-            date: '2016-05-01',
-            name: 'wangxiaohu'
-          }, {
-            id: 32,
-            date: '2016-05-01',
-            name: 'wangxiaohu'
-          }
-        ])
+        setTimeout(() => {
+          resolve([
+            {
+              id: 31,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }, {
+              id: 32,
+              date: '2016-05-01',
+              name: 'wangxiaohu'
+            }
+          ])
+        }, 1000)
       }
     },
   }
@@ -1832,7 +1835,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | header-cell-style | Fonction qui retourne un style pour chaque cellule de header. Peut aussi être un objet assignant un style à chaque cellule de header. | Function({row, column, rowIndex, columnIndex})/Object | — | — |
 | row-key | Clé de chaque ligne, utilisée pour optimiser le rendu. Requise si `reserve-selection` est activé. Quand c'est un `String`, l'accès multi-niveaux est supporté, e.g. `user.info.id`, mais `user.info[0].id` n'est pas supporté. Dans ce dernier cas une `Function` devrait être utilisée. | Function(row)/String | — | — |
 | empty-text | Texte à afficher quand il n'y a pas de données. Vous pouvez changer cette zone grâce à `slot="empty"`. | String | — | No Data |
-| default-expand-all | Si toutes les lignes sont étendues par défaut, ne marche que si des lignes ont type="expand". | Boolean | — | false |
+| default-expand-all | whether expand all rows by default, works when the table has a column type="expand" or contains tree structure data | Boolean | — | false |
 | expand-row-keys | Détermine les lignes qui sont étendues, contient les clés des lignes correspondantes. Vous devriez configurer `row-key` avant celle-ci. | Array | — | |
 | default-sort | Détermine l'ordre de tri par défaut. La propriété `prop` détermine la colonne par défaut, `order` détermine l'ordre par défaut. | Object | `order`: ascending, descending | Si `order` est absent, son défaut sera `ascending`. |
 | tooltip-effect | Propriété `effect` de Tooltip. | String | dark/light | | dark |
@@ -1841,9 +1844,10 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | summary-method | La méthode pour calculer la somme. | Function({ columns, data }) | — | — |
 | span-method | Méthode qui retourne les valeurs de colspan et rowspan. | Function({ row, column, rowIndex, columnIndex }) | — | — |
 | select-on-indeterminate | Contrôle le comportement de la checkbox globale dans les tables avec sélection multiple lorsque seulement certaines lignes sont sélectionnées. Si `true`, toutes les lignes sont sélectionnées. | Boolean | — | true |
-| indent | Indentation horizontale de l'arborescence. | Number    | — | 16   |
-| lazy | Si le lazy loading doit être utilisé. | Boolean   | — | —    |
-| load | Méthode a utiliser pour le lazy loading, ne fonctionne que lorsque `lazy` est `true`. | Function({ row, treeNode, resolve }) | — | — |
+| indent                  | horizontal indentation of tree data      | Number    | — | 16   |
+| lazy                    | whether to lazy loading data             | Boolean   | — | —    |
+| load                    | method for loading child row data, only works when `lazy` is true | Function({ row, treeNode, resolve }) | — | — |
+| tree-props              | configuration for rendering nested data | Object | — | { hasChildren: 'hasChildren', children: 'children' } |
 
 ### Évènements de Table
 
@@ -1865,7 +1869,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered. | filters |
 | current-change | Se déclenche quand la ligne sélectionnée change. | currentRow, oldCurrentRow |
 | header-dragend | Se déclenche après un changement de taille de colonne en déplaçant la ligne verticale du header. | newWidth, oldWidth, column, event |
-| expand-change | Se déclenche quand l'utilisateur étend ou réduit une ligne. | row, expandedRows |
+| expand-change  | triggers when user expands or collapses a row (for expandable table, second param is expandedRows; for tree Table, second param is expanded) | row, (expandedRows \| expanded) |
 
 ### Méthodes de Table
 
@@ -1874,7 +1878,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 | clearSelection | Dans les tables avec sélection multiple, efface la sélection. | — |
 | toggleRowSelection | Dans les tables avec sélection multiple, change la sélection d'une ligne. Grâce au deuxième paramètre vous pouvez directement décider si cette ligne est sélectionnée. | row, selected |
 | toggleAllSelection | Utilisé dans les tables à sélection multiples, sélectionne toutes les lignes. | - |
-| toggleRowExpansion | Pour les lignes extensibles, change l'état de la ligne. Grâce au deuxième paramètre vous pouvez directement décider si cette ligne est étendue. | row, expanded |
+| toggleRowExpansion | used in expandable Table or tree Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
 | setCurrentRow | Dans les tables à sélection simple, sélectionne une ligne. Sans paramètre la sélection est effacé. | row |
 | clearSort | Efface le tri. | — |
 | clearFilter | Efface les filtres des colonnes dont les `columnKey` sont passées. Si aucun paramètre, efface tout les filtres. | columnKeys |

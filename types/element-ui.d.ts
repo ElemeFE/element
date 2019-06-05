@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue, { PluginObject } from 'vue'
 import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
 import { ElAlert } from './alert'
@@ -327,8 +327,8 @@ export class Calendar extends ElCalendar {}
 /** Backtop Component */
 export class Backtop extends ElBacktop {}
 
-/** InfiniteScroll Component */
-export class InfiniteScroll extends ElInfiniteScroll {}
+/** InfiniteScroll Directive */
+export const InfiniteScroll: PluginObject<ElInfiniteScroll>;
 
 /** PageHeader Component */
 export class PageHeader extends ElPageHeader {}

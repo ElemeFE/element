@@ -13,7 +13,7 @@ De lo contrario, de forma horizontal.
 `<el-footer>`: Contenedor para pie de página.
 
 :::tip
-Estos componentes utilizan flex para el diseño, así que asegurese que el navegador lo soporta. Además, los elementos directos de `<el-container>` tienen que ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
+Estos componentes utilizan flex para el diseño, así que asegúrese que el navegador lo soporta. Además, los elementos directos de `<el-container>` tienen que ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
 :::
 
 ### Diseños comunes

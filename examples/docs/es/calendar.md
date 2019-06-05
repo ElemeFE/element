@@ -2,7 +2,7 @@
 
 Muestra fechas.
 
-### Basico
+### Básico
 
 :::demo Configure el valor para especificar el mes que se muestra actualmente. Si no se especifica el valor, se muestra el mes actual. el valor soporta la vinculación bidireccional.
 ```html
@@ -64,3 +64,4 @@ Muestra fechas.
 |-----------------|-------------- |---------- |---------------------- |--------- |
 | date            | fecha que la celda representa | Date      | —                     | —        |
 | data            | { type, isSelected, day}. `type` indica el mes al que pertenece la fecha, los valores opcionales son mes anterior, mes actual, mes siguiente; `isSelected` indica si la fecha está seleccionada; `day` es la fecha formateada en el formato yyyy-MM-dd | Object      | —           | —      |
+

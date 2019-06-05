@@ -72,17 +72,6 @@
       }
     },
 
-    customRender(h) {
-      return (<div class="el-table-filter">
-        <div class="el-table-filter__content">
-        </div>
-        <div class="el-table-filter__bottom">
-          <button on-click={ this.handleConfirm }>{ this.t('el.table.confirmFilter') }</button>
-          <button on-click={ this.handleReset }>{ this.t('el.table.resetFilter') }</button>
-        </div>
-      </div>);
-    },
-
     methods: {
       isActive(filter) {
         return filter.value === this.filterValue;

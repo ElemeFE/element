@@ -4,7 +4,7 @@
 
 Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para atributos duplicados, por favor refiérase a la documentación de Tooltip.
 
-:::demo El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click`, `focus` o `manual`. As for the triggering element, you can write it in two different ways: use the `slot="reference"` [named slot](https://vuejs.org/v2/guide/components.html#Named-Slots), or use the `v-popover` directive and set it to Popover's `ref`.
+:::demo El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click`, `focus` o `manual`. En cuanto al elemento desencadenante, puedes escribirlo de dos maneras diferentes: usando el `slot="reference"`[named slot](https://vuejs.org/v2/guide/components.html#Named-Slots), o usando la directiva `v-popover` y poniendo  el `ref` de Popover.
 
 ```html
 <template>
@@ -146,12 +146,12 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | disabled       | si el popover está deshabilitado         | boolean        | —                                        | false                                    |
 | value / v-model | si el popover está visible               | Boolean        | —                                        | false                                    |
 | offset         | popover offset                           | number         | —                                        | 0                                        |
-| transition     | popover transition animation             | string         | —                                        | el-fade-in-linear                        |
+| transition     | animación de transición del popover | string         | —                                        | el-fade-in-linear                        |
 | visible-arrow  | si una flecha del tooltip es mostrada o no. Para más información, por favor refiérase a [Vue-popper](https://github.com/element-component/vue-popper) | boolean        | —                                        | true                                     |
 | popper-options | parámetros para [popper.js](https://popper.js.org/documentation.html) | object         | por favor, refiérase a [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | popper-class   | clase propia para popover                | string         | —                                        | —                                        |
 | open-delay     | retraso de la aparición cuando `trigger` es hover, en milisegundos | number         | —                                        | —                                        |
-| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Popover  |   number           |      —      |  0    |
+| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) de Popover |   number           |      —      |  0    |
 
 ### Slot
 | Nombre    | Descripción                          |
@@ -163,6 +163,6 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | Nombre del evento | Descripción                             | Parámetros |
 | ----------------- | --------------------------------------- | ---------- |
 | show              | se dispara cuando se muestra el popover | —          |
-| after-enter       | se dispara cuando la transicion de entrada termina | —       |
+| after-enter       | se dispara cuando la transición de entrada termina | —       |
 | hide              | se dispara cuando se oculta el popover  | —          |
-| after-leave       | se dispara cuando la transicion de salida termina | —        |
+| after-leave       | se dispara cuando la transición de salida termina | —        |

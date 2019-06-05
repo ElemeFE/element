@@ -1,12 +1,12 @@
 ## Cascader
 
-If the options have a clear hierarchical structure, Cascader can be used to view and select them.
+Si las opciones tienen una estructura jerárquica clara, se puede utilizar Cascader para verlas y seleccionarlas.
 
-### Basic usage
+### Uso básico
 
-There are two ways to expand child option items.
+Hay dos maneras de ampliar los elementos de opción hijos.
 
-:::demo Assigning the `options` attribute to an array of options renders a Cascader. The `props.expandTrigger` attribute defines how child options are expanded.
+:::demo Asignar el atributo `options` a un array de opciones genera un Cascader. El atributo `props.expandTrigger` define cómo se expanden las opciones hijo.
 ```html
 <div class="block">
   <span class="demonstration">Child options expand when clicked (default)</span>
@@ -236,11 +236,12 @@ There are two ways to expand child option items.
 ```
 :::
 
-### Disabled option
+### Opción Disabled
 
-Disable an option by setting a `disabled` field in the option object.
+Deshabilite una opción estableciendo el campo  `disabled` en las opciones del objeto.
 
-:::demo In this example, the first item in `options` array has a `disabled: true` field, so it is disabled. By default, Cascader checks the `disabled` field in each option object; if you are using another field name to indicate whether an option is disabled, you can assign it in the `props.disabled` attribute (see the API table below for details). And of course, field name `value`, `label` and `children` can also be customized in the same way.
+:::demo En este ejemplo, el primer ítem en el array `options` tiene un campo `disabled: true`, por lo que está deshabilitado. De forma predeterminada, Cascader comprueba el campo `disabled` en cada objeto de las opciones; si está utilizando otro nombre de campo para indicar si una opción está deshabilitada, puede asignarla en el atributo `props.disabled` (consulte la tabla de la API a continuación para obtener más detalles). Y por supuesto, el nombre de campo `value`, `label` y `children` también se pueden personalizar de la misma manera.
+
 ```html
 <el-cascader :options="options"></el-cascader>
 
@@ -451,9 +452,9 @@ Disable an option by setting a `disabled` field in the option object.
 ```
 :::
 
-### Clearable
+### Limpiable
 
-Set `clearable` attribute for `el-cascader` and a clear icon will appear when selected and hovered
+Establezca el atributo `clearable` para `el-cascader` y aparecerá un icono de borrado cuando se seleccione y se pase el ratón por encima.
 
 :::demo
 ```html
@@ -665,11 +666,11 @@ Set `clearable` attribute for `el-cascader` and a clear icon will appear when se
 ```
 :::
 
-### Display only the last level
+### Visualizar sólo el último nivel
 
-The input can display only the last level instead of all levels.
+La entrada puede mostrar sólo el último nivel en lugar de todos los niveles.
 
-:::demo The `show-all-levels` attribute defines if all levels are displayed. If it is `false`, only the last level is displayed.
+:::demo El atributo `show-all-levels` define si se muestran todos los niveles. Si es `false`, sólo se muestra el último nivel.
 ```html
 <el-cascader :options="options" :show-all-levels="false"></el-cascader>
 <script>
@@ -878,11 +879,11 @@ The input can display only the last level instead of all levels.
 ```
 :::
 
-### Multiple Selection
+### Selección múltiple
 
-Set `props.multiple = true` to use multiple selection.
+Establezca `props.multiple = true` para usar la selección múltiple.
 
-:::demo When using multiple selection, all selected tags will display by default, You can set `collapse-tags = true` to fold selected tags.
+:::demo Cuando se utiliza la selección múltiple, todas las etiquetas seleccionadas se mostrarán de forma predeterminada, usted puede establecer `collapse-tags = true` para plegar las etiquetas seleccionadas.
 ```html
 <div class="block">
   <span class="demonstration">Display all tags (default)</span>
@@ -982,11 +983,11 @@ Set `props.multiple = true` to use multiple selection.
 :::
 
 
-### Select any level of options
+### Seleccione cualquier nivel de opciones
 
-In single selection, only the leaf nodes can be checked, and in multiple selection, check parent nodes will lead to leaf nodes be checked eventually. When enable this feature, it can make parent and child nodes unlinked and you can select any level of options.
+En la selección única, sólo se pueden comprobar los nodos de la hoja, y en la selección múltiple, los nodos padres de la comprobación conducirán a que los nodos de la hoja se comprueben con el tiempo. Cuando se activa esta función, puede hacer que los nodos padre e hijo se desacoplen y usted puede seleccionar cualquier nivel de opciones.
 
-:::demo Set `props.checkStrictly = true` to make checked state of a node not affects its parent nodes and child nodes, and then you can select any level of options.
+:::demo Establezca `props.checkStrictly = true` para que el estado comprobado de un nodo no afecte a sus nodos padre y nodos hijos, y entonces podrá seleccionar cualquier nivel de opciones.
 ```html
 <div class="block">
   <span class="demonstration">Select any level of options (Single selection)</span>
@@ -1209,11 +1210,12 @@ In single selection, only the leaf nodes can be checked, and in multiple selecti
 ```
 :::
 
-### Dynamic loading
+### Carga dinámica
 
-Dynamic load its child nodes when checked a node.
+Carga dinámica de sus nodos hijos cuando se selecciona un nodo.
 
-:::demo Set `lazy = true` to use dynamic loading, and you have to specify how to load the data source by `lazyload`. There are two parameters of `lazyload`,the first parameter `node` is the node currently clicked, and the `resolve` is a callback that indicate loading is finished which must invoke. To display the status of node more accurately, you can add a `leaf` field (can be modified by `props.leaf`) to indicate whether it is a leaf node. Otherwise, it will be inferred by if has any child nodes.
+:::demo Establezca `lazy = true` para utilizar la carga dinámica, y deberá especificar cómo cargar la fuente de datos mediante `lazyload`. Hay dos parámetros de `lazyload`, el primer parámetro `node` es el nodo en el que se hace clic actualmente, y el `resolve` es una llamada de retorno que indica que la carga ha terminado y que debe invocarse. Para mostrar el estado del nodo con mayor precisión, puede añadir un campo `leaf` (puede ser modificado por `props.leaf`) para indicar si se trata de un nodo de hoja. De lo contrario, se deducirá verificando si tiene algún nodo hijo.
+
 ```html
 <el-cascader :props="props"></el-cascader>
 
@@ -1246,11 +1248,12 @@ Dynamic load its child nodes when checked a node.
 ```
 :::
 
-### Filterable
+### Filtrable
 
-Search and select options with a keyword.
+Buscar y seleccionar opciones con una palabra clave.
 
-:::demo Adding `filterable` to `el-cascader` enables filtering. Cascader will match nodes whose label or parent's label (according to `show-all-levels`) includes input keyword. Of course, you can customize search logic by `filter-method` which accepts a function, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits.
+:::demo Añadir `filtrable` a `el-cascader` permite el filtrado. Cascader hará coincidir los nodos cuya etiqueta o etiqueta de padre (de acuerdo con `show-all-levels`) incluya una palabra clave de entrada. Por supuesto, puedes personalizar la lógica de búsqueda mediante el `filter-method` que acepta una función, el primer parámetro es `nodo`, el segundo es `keyword`, y necesitas devolver un valor booleano que indique si da en el blanco.
+
 ```html
 <div class="block">
   <span class="demonstration">Filterable (Single selection)</span>
@@ -1474,11 +1477,11 @@ Search and select options with a keyword.
 ```
 :::
 
-### Custom option content
+### Contenido de opciones personalizadas
 
-You can customize the content of cascader node.
+Puede personalizar el contenido del nodo de cascada.
 
-:::demo You can customize the content of cascader node by `scoped slot`. You'll have access to `node` and `data` in the scope,  standing for the Node object and node data of the current node respectively。
+:::demo Puede personalizar el contenido del nodo del cascader mediante `scoped slot`. Tendrá acceso a `node` y `data` en el ámbito de aplicación, representando el objeto Node y los datos del nodo actual respectivamente.
 ```html
 <el-cascader :options="options">
   <template slot-scope="{ node, data }">
@@ -1693,11 +1696,11 @@ You can customize the content of cascader node.
 ```
 :::
 
-### Cascader panel
+### Panel cascader
 
-`CascaderPanel` is the core component of `Cascader` which has various of features such as single selection, multiple selection, dynamic loading and so on.
+`CascaderPanel` es el componente central de `Cascader` que tiene varias características como selección única, selección múltiple, carga dinámica, etc.
 
-:::demo Just like `el-cascader`, you can set alternative options by `options`, and enable other features by `props`, see the API form below for details.
+:::demo Al igual que `el-cascader`, puede establecer opciones alternativas mediante `options`, y habilitar otras características mediante `props`, consulte el formulario de la API a continuación para obtener más detalles.
 ```html
 <el-cascader-panel :options="options"></el-cascader-panel>
 
@@ -1907,70 +1910,70 @@ You can customize the content of cascader node.
 ```
 :::
 
-### Cascader Attributes
-| Attribute | Description | Type  | Accepted Values | Default |
+### Atributos de Cascader
+| Atributo | Descripción | Tipo | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | - | — | — |
-| options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
-| props | configuration options, see the following table. | object | — | — |
-| size | size of input | string | medium / small / mini | — |
-| placeholder | placeholder of input | string | — | Select |
-| disabled | whether Cascader is disabled | boolean | — | false |
-| clearable | whether selected value can be cleared | boolean | — | false |
-| show-all-levels | whether to display all levels of the selected value in the input | boolean | — | true |
-| collapse-tags | whether to collapse tags in multiple selection mode | boolean | - | false |
-| separator | option label separator | string | — | ' / ' |
-| filterable | whether the options can be searched | boolean | — | — |
-| filter-method | customize search logic, the first parameter is `node`, the second is `keyword`, and need return a boolean value indicating whether it hits. | function(node, keyword) | - | - |
-| debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
-| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
-| popper-class | custom class name for Cascader's dropdown   | string | —  | — |
+| value / v-model | valor ligado | - | — | — |
+| options | datos de las opciones，las claves `value` y `label` pueden ser personalizadas por `Props`. | array | — | — |
+| props | opciones de configuración, consulte la siguiente tabla. | object | — | — |
+| size | tamaño del input | string | medium / small / mini | — |
+| placeholder | placeholder del input | string | — | Select |
+| disabled | si Cascader esta deshabilitada | boolean | — | false |
+| clearable | si el valor seleccionado puede ser borrado | boolean | — | false |
+| show-all-levels | si muestra todos los niveles del valor seleccionado en el input | boolean | — | true |
+| collapse-tags | si se colapsan los tags en la selección múltiple | boolean | - | false |
+| separator | separador de las etiquetas de las opciones | string | — | ' / ' |
+| filterable | si las opciones pueden ser usadas para la busqueda | boolean | — | — |
+| filter-method | lógica de búsqueda personalizable. El primer parámetro es `node`, el segundo es `keyword`, y es necesario devolver un valor boolean que indique si se ha tenido éxito. | function(node, keyword) | - | - |
+| debounce | retraso en milisegundos para el tipeo de los datos de filtro | number | — | 300 |
+| before-filter | hook antes de filtrar con el valor a filtrar como parámetro. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se abortará el filtrado. | function(value) | — | — |
+| popper-class | nombre de clase personalizado para el menú desplegable de Cascader | string | —  | — |
 
-### Cascader Events
-| Event Name | Description | Parameters |
+### Eventos de Cascader
+| Nombre del evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| change | triggers when the binding value changes | value |
-| expand-change | triggers when expand option changes | an array of the expanding node's parent nodes |
-| blur | triggers when Cascader blurs | (event: Event) |
-| focus | triggers when Cascader focuses | (event: Event) |
-| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
-| remove-tag | triggers when remove tag in multiple selection mode | the value of the tag which is removed |
+| change | se desencadena cuando cambia el valor ligado. | valor |
+| expand-change | se desencadena cuando las opciones expandidas cambian | un array de los nodos padres del nodo en expansión |
+| blur | se desencadena cuando Cascader se desenfoca | (event: Event) |
+| focus | se activa cuando Cascader se enfoca | (event: Event) |
+| visible-change | se activa cuando aparece/desaparece el menú desplegable | verdadero cuando aparece, y falso de otra manera |
+| remove-tag | se activa cuando se quita la etiqueta en modo de selección múltiple | el valor de la etiqueta que se quita |
 
-### Cascader Slots
-| Slot Name | Description |
+### Slots de Cascader
+| Nombre del slot | Descripción |
 |---------|-------------|
-| - | the custom content of cascader node, the parameter is { node, data }, which are current Node object and node data respectively. |
-| empty  | content when there is no matched options. |
+| - | el contenido personalizado del nodo cascader, el parámetro es { node, data }, que son el actual objeto Node y los datos del nodo respectivamente. |
+| empty  | cuando no hay opciones coincidentes. |
 
-### CascaderPanel Attributes
-| Attribute | Description | Type  | Accepted Values | Default |
+### Atributos del CascaderPanel
+| Atributos | Descripción | Tipo | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | - | — | — |
-| options | data of the options，the key of `value` and `label` can be customize by `Props`.| array | — | — |
-| props | configuration options, see the following table. | object | — | — |
+| value / v-model | valor ligado | - | — | — |
+| options | datos de las opciones，las claves `value` y `label` pueden ser personalizadas por `Props`. | array | — | — |
+| props | opciones de configuración, consulte la siguiente tabla. | object | — | — |
 
-### CascaderPanel Events
-| Event Name | Description | Parameters |
+### Eventos de CascaderPanel
+| Nombre de los evetos | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| change | triggers when the binding value changes | value |
-| expand-change | triggers when expand option changes | an array of the expanding node's parent nodes |
+| change | se desencadena cuando cambia el valor ligado.         | valor |
+| expand-change | se desencadena cuando las opciones expandidas cambian | un array de los nodos padres del nodo en expansión |
 
-### CascaderPanel Slots
-| Slot Name | Description |
+### Slots de CascaderPanel
+| Nombre del slot | Descripción |
 |---------|-------------|
-| - | the custom content of cascader node, the parameter is { node, data }, which are current Node object and node data respectively. |
+| - | el contenido personalizado del nodo cascader, el parámetro es { node, data }, que son el actual objeto Node y los datos del nodo respectivamente. |
 
 ### Props
-| Attribute | Description | Type  | Accepted Values | Default |
+| Atributos | Descripción | Tipo | Valores aceptados | Por defecto |
 | -------- | ----------------- | ------ | ------ | ------ |
-| expandTrigger | trigger mode of expanding options | string | click / hover | 'click' |
-| multiple | whether multiple selection is enabled | boolean | - | false |
-| checkStrictly | whether checked state of a node not affects its parent and child nodes | boolean | - | false |
-| emitPath | when checked nodes change, whether to emit an array of node's path, if false, only emit the value of node. | boolean | - | true |
-| lazy | whether to dynamic load child nodes, use with `lazyload` attribute | boolean | - | false |
-| lazyLoad | method for loading child nodes data, only works when `lazy` is true | function(node, resolve) | - | - |
-| value    | specify which key of node object is used as the node's value | string | — | 'value' |
-| label    | specify which key of node object is used as the node's label | string | — | 'label' |
-| children | specify which key of node object is used as the node's children | string | — | 'children' |
-| disabled | specify which key of node object is used as the node's disabled | string | — | 'disabled' |
-| leaf     | specify which key of node object is used as the node's leaf field | string | — | 'leaf' |
+| expandTrigger | modo de disparo de las opciones de ampliación | string | click / hover | 'click' |
+| multiple | si la selección múltiple esta activada | boolean | - | false |
+| checkStrictly | si el estado verificado de un nodo no afecta a sus nodos padre e hijo | boolean | - | false |
+| emitPath | cuando los nodos marcados cambian, si emitir o no un array de la ruta de un nodo, si es falso, sólo emite el valor del nodo. | boolean | - | true |
+| lazy | si se deben cargar dinámicamente nodos hijo, usarlo con el atributo `lazyload`. | boolean | - | false |
+| lazyLoad | para cargar datos de nodos hijo, sólo funciona cuando `lazy` es verdadero | function(node, resolve) | - | - |
+| value    | especificar qué clave de objeto de nodo se utiliza como valor del nodo | string | — | 'value' |
+| label    | especificar qué clave de objeto de nodo se utiliza como etiqueta del nodo | string | — | 'label' |
+| children | especificar qué clave de objeto de nodo se utiliza como hijo del nodo | string | — | 'children' |
+| disabled | especificar qué clave de objeto de nodo se utiliza como nodo desactivado | string | — | 'disabled' |
+| leaf     | especificar qué clave de objeto de nodo se utiliza como campo de hoja del nodo | string | — | 'leaf' |
