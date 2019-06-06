@@ -1,5 +1,5 @@
 {
-  "name": "element-ui",
+  "name": "element-fix",
   "version": "2.9.1",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
