@@ -120,6 +120,7 @@ export default {
           } else {
             const { loaded = false, loading = false } = oldValue || {};
             newTreeData[key] = {
+              lazy: true,
               loaded: !!loaded,
               loading: !!loading,
               expanded: getExpanded(oldValue, key),
