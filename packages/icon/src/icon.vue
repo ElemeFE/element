@@ -20,7 +20,7 @@
         return className;
       },
       iconHref() {
-        return '#' + this.name;
+        return '#tmc24c-icon-' + this.name;
       }
     },
     methods: {
