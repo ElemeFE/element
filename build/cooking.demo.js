@@ -6,6 +6,7 @@ var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
 var isPlay = !!process.env.PLAY_ENV;
+var path = require('path');
 
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function($0) {
@@ -131,7 +132,14 @@ cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
 ]));
 cooking.add('loader.svg', {
   test: /\.svg$/,
-  loader: 'svg-sprite-loader'
+  loader: 'svg-sprite-loader',
+  options: {
+    symbolId: filePath => {
+      const prefix = 'tmc24c-icon';
+      const fileName = path.basename(filePath).replace('.svg', '');
+      return `${prefix}-${fileName}`;
+    }
+  }
 });
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();
