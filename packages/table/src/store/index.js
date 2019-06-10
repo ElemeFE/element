@@ -130,12 +130,7 @@ Watcher.prototype.mutations = {
   },
 
   setCurrentRow(states, row) {
-    const oldCurrentRow = states.currentRow;
-    states.currentRow = row;
-
-    if (oldCurrentRow !== row) {
-      this.table.$emit('current-change', row, oldCurrentRow);
-    }
+    this.updateCurrentRow(row);
   }
 };
 

@@ -68,8 +68,7 @@ export default Vue.extend({
         sortProp: null,
         sortOrder: null,
 
-        hoverRow: null,
-        currentRow: null
+        hoverRow: null
       }
     };
   },
@@ -165,11 +164,14 @@ export default Vue.extend({
       }
     },
 
-    toggleRowSelection(row, selected) {
+    toggleRowSelection(row, selected, emitChange = true) {
       const changed = toggleRowStatus(this.states.selection, row, selected);
       if (changed) {
         const newSelection = this.states.selection ? this.states.selection.slice() : [];
-        this.table.$emit('select', newSelection, row);
+        // 调用 API 修改选中值，不触发 select 事件
+        if (emitChange) {
+          this.table.$emit('select', newSelection, row);
+        }
         this.table.$emit('selection-change', newSelection);
       }
     },
