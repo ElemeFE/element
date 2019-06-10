@@ -298,7 +298,6 @@ export default Vue.extend({
       });
 
       states.filteredData = data;
-      // states.data = data;
     },
 
     execSort() {

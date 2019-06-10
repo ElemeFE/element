@@ -31,7 +31,7 @@ export default {
       if (rowKey) {
         currentRow = arrayFind(data, item => getRowIdentity(item, rowKey) === key);
       }
-      states.currentRow = currentRow || null;
+      states.currentRow = currentRow;
     },
 
     updateCurrentRow(currentRow) {
