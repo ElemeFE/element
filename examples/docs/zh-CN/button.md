@@ -148,7 +148,7 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
   <el-button size="medium" round>中等按钮</el-button>
   <el-button size="small" round>小型按钮</el-button>
   <el-button size="mini" round>超小按钮</el-button>
-  <el-button size="compact" round>極小按钮</el-button>
+  <el-button size="compact" round>极小按钮</el-button>
 </el-row>
 ```
 :::
