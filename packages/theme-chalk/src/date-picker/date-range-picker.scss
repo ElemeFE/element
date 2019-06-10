@@ -2,6 +2,8 @@
 
 @include b(date-range-picker) {
   width: 646px;
+  max-width: 100vw;
+  overflow: auto;
 
   &.has-sidebar {
     width: 756px;
