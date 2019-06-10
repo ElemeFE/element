@@ -7,7 +7,7 @@ const option = {
   onProgress: noop,
   data: { a: 'abc', b: 'bcd' },
   filename: 'file.png',
-  file: new Blob(JSON.stringify('foo'), {type: 'image/png'}),
+  file: new File(JSON.stringify('foo'), {type: 'image/png'}),
   action: '/upload',
   headers: { region: 'shanghai' }
 };
