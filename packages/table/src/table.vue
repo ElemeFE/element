@@ -588,6 +588,7 @@
       currentRowKey: {
         immediate: true,
         handler(value) {
+          if (!this.rowKey) return;
           this.store.setCurrentRowKey(value);
         }
       },
