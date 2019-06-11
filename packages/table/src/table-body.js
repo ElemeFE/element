@@ -219,7 +219,7 @@ export default {
         }));
       }
 
-      return classes.join(' ');
+      return classes.filter(t => t).join(' ');
     },
 
     getColspanRealWidth(columns, colspan, index) {

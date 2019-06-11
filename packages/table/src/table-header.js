@@ -243,7 +243,7 @@ export default {
         classes.push(headerRowClassName.call(null, { rowIndex }));
       }
 
-      return classes.join(' ');
+      return classes.filter(t => t).join(' ');
     },
 
     getHeaderCellStyle(rowIndex, columnIndex, row, column) {
@@ -286,7 +286,7 @@ export default {
         }));
       }
 
-      return classes.join(' ');
+      return classes.filter(t => t).join(' ');
     },
 
     toggleAllSelection(event) {
