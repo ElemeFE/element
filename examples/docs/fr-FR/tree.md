@@ -403,9 +403,7 @@ Les icônes précédant les étiquettes peuvent être personnalisées avec le r�
 
 :::demo
 ```html
-<el-tree
-  :data="data">
-</el-tree>
+<el-tree :data="data"></el-tree>
 
 <script>
   export default {

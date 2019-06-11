@@ -402,9 +402,7 @@
 
 :::demo
 ```html
-<el-tree
-  :data="data">
-</el-tree>
+<el-tree :data="data"></el-tree>
 
 <script>
   export default {

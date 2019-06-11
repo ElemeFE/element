@@ -402,9 +402,7 @@ El icono antes de la etiqueta se puede personalizar con la configuración del va
 
 :::demo
 ```html
-<el-tree
-  :data="data">
-</el-tree>
+<el-tree :data="data"></el-tree>
 
 <script>
   export default {

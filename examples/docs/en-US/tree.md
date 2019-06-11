@@ -402,9 +402,7 @@ Icon before label can be customized with setting on value of `icon`. You can pas
 
 :::demo
 ```html
-<el-tree
-  :data="data">
-</el-tree>
+<el-tree :data="data"></el-tree>
 
 <script>
   export default {
