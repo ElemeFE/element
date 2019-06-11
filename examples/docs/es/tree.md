@@ -396,6 +396,40 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ```
 :::
 
+### Icono personalizado en los nodos
+
+El icono antes de la etiqueta se puede personalizar con la configuración del valor de `icon`. Puede pasar una cadena de clases de iconos para determinar el icono. O puede utilizar una lista de clases de iconos. La primera es la clase de iconos predeterminada y la segunda es la clase de iconos que se usa si el nodo se expande.
+
+:::demo
+```html
+<el-tree
+  :data="data">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: 'Expandir para cambiar el icono',
+          icon: ['el-icon-folder', 'el-icon-folder-opened'],
+          children: [{
+            label: 'Icono fijo',
+            icon: 'el-icon-document'
+          }]
+        }, {
+          label: 'Icono fijo',
+          icon: 'el-icon-document'
+        }, {
+          label: 'Sin icono'
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 

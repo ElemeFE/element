@@ -397,6 +397,40 @@ Certains noeuds peuvent être ouverts et/ou sélectionnés par défaut.
 ```
 :::
 
+### Icône personnalisé
+
+Les icônes précédant les étiquettes peuvent être personnalisées avec le réglage de la valeur de `icon`. Vous pouvez passer une chaîne de classe d'icônes pour déterminer l'icône. Ou vous pouvez utiliser une liste de classes d'icônes. La première est la classe d'icônes par défaut et la seconde est la classe d'icônes utilisée si le nœud est développé.
+
+:::demo
+```html
+<el-tree
+  :data="data">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: 'Développer pour changer icône',
+          icon: ['el-icon-folder', 'el-icon-folder-opened'],
+          children: [{
+            label: 'Icône fixe',
+            icon: 'el-icon-document'
+          }]
+        }, {
+          label: 'Icône fixe',
+          icon: 'el-icon-document'
+        }, {
+          label: 'Pas icône'
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Contenu personnalisé
 
 Le contenu des noeuds peut être personnalisé, afin de pouvoir ajouter des icônes ou des boutons par exemple.

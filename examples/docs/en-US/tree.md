@@ -396,6 +396,40 @@ Tree nodes can be initially expanded or checked
 ```
 :::
 
+### Custom node icon
+
+Icon before label can be customized with setting on value of `icon`. You can pass a string of icon class to determine the icon. Or you can use a list of icon class. The first is the default icon class and the second is the icon class used if the node is expanded.
+
+:::demo
+```html
+<el-tree
+  :data="data">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: 'Expand to change icon',
+          icon: ['el-icon-folder', 'el-icon-folder-opened'],
+          children: [{
+            label: 'Fixed icon',
+            icon: 'el-icon-document'
+          }]
+        }, {
+          label: 'Fixed icon',
+          icon: 'el-icon-document'
+        }, {
+          label: 'No icon'
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Custom node content
 The content of tree nodes can be customized, so you can add icons or buttons as you will
 

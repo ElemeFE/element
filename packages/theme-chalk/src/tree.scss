@@ -107,6 +107,10 @@
     color: $--tree-expand-icon-color;
   }
 
+  @include e(icon) {
+    margin-right: 4px;
+  }
+
   & > .el-tree-node__children {
     overflow: hidden;
     background-color: transparent;

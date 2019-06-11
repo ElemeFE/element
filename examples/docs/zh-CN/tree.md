@@ -395,6 +395,41 @@
 ```
 :::
 
+
+### 自定义图标
+
+节点前可以自定义图标，既可以是字符串表示的图标类名也可以是两个图标类名组成的列表。使用字符串表示的图标类名时，为固定的某一种图标；使用两个图标类名组成的列表时，第一个为默认状态时的图标，第二个是节点展开时的图标。
+
+:::demo
+```html
+<el-tree
+  :data="data">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: '节点图标可变',
+          icon: ['el-icon-folder', 'el-icon-folder-opened'],
+          children: [{
+            label: '节点图标固定',
+            icon: 'el-icon-document'
+          }]
+        }, {
+          label: '节点图标固定',
+          icon: 'el-icon-document'
+        }, {
+          label: '没有图标'
+        }]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 自定义节点内容
 节点的内容支持自定义，可以在节点区添加按钮或图标等内容
 

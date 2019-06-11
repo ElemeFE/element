@@ -121,7 +121,22 @@
               ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
               : tree.$scopedSlots.default
                 ? tree.$scopedSlots.default({ node, data })
-                : <span class="el-tree-node__label">{ node.label }</span>
+                : <span>
+                    {
+                      node.data.icon
+                        ? <i class={[
+                          'el-tree-node__icon',
+                          Array.isArray(data.icon)
+                            ? node.expanded
+                              ? data.icon[1]
+                              : data.icon[0]
+                            : data.icon
+                        ]}></i> : ''
+                    }
+                    <span class="el-tree-node__label">
+                    { node.label }
+                    </span>
+                  </span>
           );
         }
       }
