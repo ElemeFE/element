@@ -7,8 +7,7 @@
         <a href="https://github.com/ElemeFE/element/releases" class="footer-main-link" target="_blank">{{ langConfig.changelog }}</a>
         <a href="https://github.com/ElemeFE/element/blob/dev/FAQ.md" class="footer-main-link" target="_blank">{{ langConfig.faq }}</a>
         <a href="https://github.com/ElementUI/element-starter" class="footer-main-link" target="_blank">{{ langConfig.starter }}</a>
-        <a href="https://github.com/ElementUI/element-theme" class="footer-main-link" target="_blank">{{ langConfig.theme }}</a>
-        <a href="https://github.com/ElementUI/theme-chalk-preview" class="footer-main-link" target="_blank">{{ langConfig.preview }}</a>
+        <a :href="'/#/' + lang + '/component/custom-theme'" class="footer-main-link" target="_blank">{{ langConfig.theme }}</a>
         <a href="https://github.com/elemefe/element-react" class="footer-main-link" target="_blank">Element-React</a>
         <a href="https://github.com/ElemeFE/element-angular" class="footer-main-link" target="_blank">Element-Angular</a>
       </div>
@@ -62,7 +61,7 @@
       display: inline-block;
       vertical-align: top;
       margin-right: 110px;
-    
+
       h4 {
         font-size: 18px;
         color: #333;
@@ -86,7 +85,7 @@
     .footer-social {
       float: right;
       text-align: right;
-    
+
       .footer-social-title {
         color: #666;
         font-size: 18px;
@@ -144,13 +143,13 @@
       height: auto;
     }
   }
-  
+
   @media (max-width: 1000px) {
     .footer-social {
       display: none;
     }
   }
-  
+
   @media (max-width: 768px) {
     .footer {
       .footer-main {
