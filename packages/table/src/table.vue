@@ -381,8 +381,10 @@
       },
 
       updateScrollY() {
-        this.layout.updateScrollY();
-        // this.layout.updateColumnsWidth();
+        const changed = this.layout.updateScrollY();
+        if (changed) {
+          this.layout.updateColumnsWidth();
+        }
       },
 
       handleFixedMousewheel(event, data) {
@@ -464,10 +466,10 @@
       },
 
       doLayout() {
-        this.layout.updateColumnsWidth();
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+        this.layout.updateColumnsWidth();
       },
 
       sort(prop, order) {

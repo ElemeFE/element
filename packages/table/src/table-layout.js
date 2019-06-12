@@ -42,12 +42,16 @@ class TableLayout {
 
   updateScrollY() {
     const height = this.height;
-    if (height === null) return;
+    if (height === null) return false;
     const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
-      this.scrollY = body.offsetHeight > this.bodyHeight;
+      const prevScrollY = this.scrollY;
+      const scrollY = body.offsetHeight > this.bodyHeight;
+      this.scrollY = scrollY;
+      return prevScrollY !== scrollY;
     }
+    return false;
   }
 
   setHeight(value, prop = 'height') {
