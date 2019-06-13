@@ -1,7 +1,6 @@
 <template>
   <div class="tm-advanced-date-picker">
-    <tm-popover :width="popoverWidth"
-                popper-class="tm-advanced-date-picker__popover"
+    <tm-popover :popper-class="popoverClassName"
                 ref="popover"
                 trigger="click"
                 :offset="24"
@@ -68,7 +67,6 @@
   };
 
   const DEFAULT_PLACEHOLDER_TEXT = 'Выберите дату';
-  const DEFAULT_POPOVER_WIDTH = 520;
 
   const getValidity = selectedDate => {
     const isYear = moment().isSame(selectedDate, 'year')
@@ -174,10 +172,6 @@
         type: [Array, Date, String],
         default: null
       },
-      popoverWidth: {
-        type: Number,
-        default: DEFAULT_POPOVER_WIDTH
-      },
       placeholder: {
         type: String,
         default: DEFAULT_PLACEHOLDER_TEXT
@@ -224,6 +218,14 @@
         const baseClass = 'tm-advanced-date-picker__input';
 
         return this.isInputDateValid ? baseClass : `${baseClass}--error`;
+      },
+
+      popoverClassName() {
+        const baseClass = 'tm-advanced-date-picker__popover';
+        const widePickerTypes = ['datetimerange', 'daterange', 'dynamic'];
+        return widePickerTypes.includes(this.pickerType)
+          ? `${baseClass} ${baseClass}--wide`
+          : baseClass;
       },
 
       inputPlaceholder() {

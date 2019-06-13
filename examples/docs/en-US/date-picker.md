@@ -583,7 +583,7 @@ When picking a date range, you can assign the time part for start date and end d
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
-| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
+| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange/dynamic | date |
 | format | format of the displayed value in the input box | string | see [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |

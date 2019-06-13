@@ -1,6 +1,6 @@
 {
   "name": "tmconsulting-ui",
-  "version": "1.2.45",
+  "version": "1.2.46",
   "author": "TeamcIO",
   "description": "A Component Library for Vue.js.",
   "main": "lib/tmconsulting-ui.common.js",
