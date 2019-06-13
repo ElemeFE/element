@@ -2,12 +2,13 @@
 
 .tm-advanced-date-picker {
   &__popover {
-    width: 508px;
+    width: 261px;
     padding: 0;
 
-    .tm-picker-panel__body {
-      padding: 0 15px;
+    &--wide {
+      width: 508px;
     }
+    
     .tm-picker-panel__content {
       margin: 0 auto;
       padding: 16px 0;
