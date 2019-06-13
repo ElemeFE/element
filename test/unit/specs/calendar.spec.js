@@ -66,5 +66,24 @@ describe('Calendar', () => {
     expect(/2019.*5/.test(titleEl.innerText)).to.be.true;
     expect(cell.classList.contains('is-selected')).to.be.true;
   });
+
+  it('firstDayOfWeek', async() => {
+    vm = createVue({
+      template: `
+      <el-calendar v-model="value" :first-day-of-week="0"></el-calendar>
+      `,
+      data() {
+        return {
+          value: new Date('2019-04-01')
+        };
+      }
+    }, true);
+    const head = vm.$el.querySelector('.el-calendar-table thead');
+    expect(head.firstElementChild.innerText).to.be.equal('日');
+    expect(head.lastElementChild.innerText).to.be.equal('六');
+    const firstRow = vm.$el.querySelector('.el-calendar-table__row');
+    expect(firstRow.firstElementChild.innerText).to.be.equal('31');
+    expect(firstRow.lastElementChild.innerText).to.be.equal('6');
+  });
 });
 

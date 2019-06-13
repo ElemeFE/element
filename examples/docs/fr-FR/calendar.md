@@ -54,10 +54,11 @@ Affiche un calendrier.
 
 ### Attributs
 
-| Attribut       | Description   | Type      | Valeurs acceptées       | Défaut  |
-|-----------------|-------------- |---------- |---------------------- |--------- |
-| value / v-model | Valeur liée. | Date/string/number | —            | —        |
-| range           | Intervalle de dates, début et fin inclus. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois. | Array     | —           | —      |
+| Attribut          | Description   | Type      | Valeurs acceptées     | Défaut   |
+|------------------ |-------------- |---------- |---------------------- |--------- |
+| value / v-model   | Valeur liée.  | Date/string/number | —            | —        |
+| range             | Intervalle de dates, début et fin inclus. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois. | Array     | —           | —      |
+| first-day-of-week | fisrt day of week| Number | 1 to 7                |  1       |
 
 ### Slot dateCell
 

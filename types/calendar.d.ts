@@ -9,4 +9,7 @@ export declare class ElCalendar extends ElementUIComponent {
 
   /** Specify the display range of the calendar */
   range: DateType[]
+
+  /** First day of week */
+  firstDayOfWeek: number
 }
