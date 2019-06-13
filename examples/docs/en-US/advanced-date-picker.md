@@ -32,18 +32,33 @@
 
 Use Date Picker for date input with mask.
 
+Default (dynamic) Advanced Date Picker
+
 :::demo
 
 ```html
-   <tm-advanced-date-picker :local-storage-date="form.date" :disabled-date="d"
+   <tm-advanced-date-picker :local-storage-date="form.date"
+                            :disabled-date="d"
                             @typechange="$emit('to-parent', $event)" />                                    
+```
+:::
+
+Single (date) Advanced Date Picker
+
+:::demo
+
+```html
+   <tm-advanced-date-picker :local-storage-date="form.date"
+                            picker-type="date"
+                            :disabled-date="d"
+                            @typechange="$emit('to-parent', $event)" />
 ```
 :::
 
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| picker-type | type of child DatePicker | string | — | dinamic |
+| picker-type | type of child DatePicker | string | year/month/date/datetime/ week/datetimerange/daterange/dynamic | dynamic |
 | picker-class | class of child DatePicker | string | — | child-picker |
 | disable-old-date | same options as DatePicker have | boolean | — | true |
 | disabled-date | function to disable select date, more priority than disable-old-date | function | function | null |
