@@ -141,7 +141,6 @@ import {
   Steps,
   Step,
   Carousel,
-  Scrollbar,
   CarouselItem,
   Collapse,
   CollapseItem,
@@ -221,7 +220,6 @@ Vue.use(Rate);
 Vue.use(Steps);
 Vue.use(Step);
 Vue.use(Carousel);
-Vue.use(Scrollbar);
 Vue.use(CarouselItem);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
