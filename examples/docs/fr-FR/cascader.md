@@ -1936,6 +1936,11 @@ Vous pouvez personnaliser le contenu du noeud cascader.
 | visible-change | Se déclenche lorsque le menu déroulant apparaît / disparaît | vrai quand il apparaît, et faux sinon |
 | remove-tag | Se déclenche lors de la suppression d'une balise en mode de sélection multiple | la valeur de la balise qui est supprimée |
 
+### Cascader Methods
+| Method Name | Description | Parameters |
+| ---- | ---- | ---- |
+| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+
 ### Cascader Slots
 | Slot Name | Description |
 |---------|-------------|
@@ -1954,6 +1959,12 @@ Vous pouvez personnaliser le contenu du noeud cascader.
 |---------- |-------- |---------- |
 | change | Se déclenche lorsque la valeur de liaison change | value |
 | expand-change | Se déclenche lorsque l'option d'agrandissement change | an array of the expanding node's parent nodes |
+
+### CascaderPanel Methods
+| Method Name | Description | Parameters |
+| ---- | ---- | ---- |
+| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+| clearCheckedNodes | clear checked nodes | - |
 
 ### CascaderPanel Slots
 | Slot Name | Description |
