@@ -1,7 +1,4 @@
-'use strict';
-
-exports.__esModule = true;
-exports.default = {
+export default {
   el: {
     colorpicker: {
       confirm: 'Qabul qilish',
@@ -70,7 +67,8 @@ exports.default = {
     cascader: {
       noMatch: 'Mos ma`lumot yo`q',
       loading: 'Yuklanmoqda',
-      placeholder: 'Tanladingiz'
+      placeholder: 'Tanladingiz',
+      noData: 'Ma`lumot yo`q'
     },
     pagination: {
       goto: 'Borish',
@@ -107,6 +105,12 @@ exports.default = {
       filterPlaceholder: 'Kalit so`zni kiriting',
       noCheckedFormat: '{total} ta element',
       hasCheckedFormat: '{checked}/{total} belgilandi'
+    },
+    image: {
+      error: 'Xatolik'
+    },
+    pageHeader: {
+      title: 'Orqaga'
     }
   }
 };
