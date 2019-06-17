@@ -22,7 +22,7 @@
         'is-reverse': reverse
       };
       let slots = this.$slots.default || [];
-      if (slots.length && reverse) {
+      if (reverse) {
         slots = slots.reverse();
       }
       return (<ul class={ classes }>
