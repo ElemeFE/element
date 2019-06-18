@@ -1,12 +1,3 @@
-<template>
-  <ul class="el-timeline"
-    :class="{
-      'is-reverse': reverse
-    }">
-    <slot></slot>
-  </ul>
-</template>
-
 <script>
   export default {
     name: 'ElTimeline',
@@ -24,15 +15,19 @@
       };
     },
 
-    watch: {
-      reverse: {
-        handler(newVal) {
-          if (newVal) {
-            this.$slots.default = [...this.$slots.default].reverse();
-          }
-        },
-        immediate: true
+    render() {
+      const reverse = this.reverse;
+      const classes = {
+        'el-timeline': true,
+        'is-reverse': reverse
+      };
+      let slots = this.$slots.default || [];
+      if (reverse) {
+        slots = slots.reverse();
       }
+      return (<ul class={ classes }>
+        { slots }
+      </ul>);
     }
   };
 </script>
