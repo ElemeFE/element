@@ -170,7 +170,7 @@ export default Vue.extend({
 
     toggleAllSelection: debounce(10, function() {
       const states = this.states;
-      const { data = [], selection } = states;
+      const { data = [], selection, lazyTreeNodeMap } = states;
       // when only some rows are selected (but not all), select or deselect all of them
       // depending on the value of selectOnIndeterminate
       const value = states.selectOnIndeterminate
@@ -179,18 +179,29 @@ export default Vue.extend({
       states.isAllSelected = value;
 
       let selectionChanged = false;
-      data.forEach((row, index) => {
-        if (states.selectable) {
-          if (states.selectable.call(null, row, index) && toggleRowStatus(selection, row, value)) {
-            selectionChanged = true;
-          }
-        } else {
-          if (toggleRowStatus(selection, row, value)) {
-            selectionChanged = true;
-          }
-        }
+      const allData = [].concat(data);
+      Object.keys(lazyTreeNodeMap).forEach(key => {
+        lazyTreeNodeMap[key].forEach(item => {
+          allData.push(item);
+        });
       });
-
+      const toggle = data => {
+        data.forEach((row, index) => {
+          if (states.selectable) {
+            if (states.selectable.call(null, row, index) && toggleRowStatus(selection, row, value)) {
+              selectionChanged = true;
+            }
+          } else {
+            if (toggleRowStatus(selection, row, value)) {
+              selectionChanged = true;
+            }
+          }
+          if (row.children) {
+            toggle(row.children);
+          }
+        });
+      };
+      toggle(allData);
       if (selectionChanged) {
         this.table.$emit('selection-change', selection ? selection.slice() : []);
       }
@@ -212,14 +223,26 @@ export default Vue.extend({
 
     updateAllSelected() {
       const states = this.states;
-      const { selection, rowKey, selectable } = states;
+      const { selection, rowKey, selectable, lazyTreeNodeMap } = states;
       // data 为 null 时，结构时的默认值会被忽略
-      const data = states.data || [];
-      if (data.length === 0) {
+      if (states.data.length === 0) {
         states.isAllSelected = false;
         return;
       }
-
+      const data = [];
+      const improveData = arr => {
+        arr.forEach(item => {
+          data.push(item);
+          if (item.children) {
+            improveData(item.children);
+          }
+        });
+      };
+      improveData(states.data);
+      Object.keys(lazyTreeNodeMap).forEach(key => {
+        const dataArr = lazyTreeNodeMap[key];
+        improveData(dataArr);
+      });
       let selectedMap;
       if (rowKey) {
         selectedMap = getKeysMap(selection, rowKey);

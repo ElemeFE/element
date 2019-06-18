@@ -1,4 +1,4 @@
-import { walkTreeNode, getRowIdentity } from '../util';
+import { walkTreeNode, getRowIdentity, toggleRowStatus } from '../util';
 
 export default {
   data() {
@@ -173,7 +173,7 @@ export default {
 
     loadData(row, key, treeNode) {
       const { load } = this.table;
-      const { lazyTreeNodeMap, treeData } = this.states;
+      const { lazyTreeNodeMap, treeData, selection, isAllSelected, selectable } = this.states;
       if (load && !treeData[key].loaded) {
         treeData[key].loading = true;
         load(row, treeNode, (data) => {
@@ -185,6 +185,13 @@ export default {
           treeData[key].expanded = true;
           if (data.length) {
             this.$set(lazyTreeNodeMap, key, data);
+            if (isAllSelected) {
+              data.forEach(item => {
+                // TODO: selectable 不应该提供index这个参数
+                if (selectable && !selectable.call(null, item, 0)) return;
+                toggleRowStatus(selection, item, true);
+              });
+            }
           }
           this.table.$emit('expand-change', row, true);
         });
