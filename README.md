@@ -61,7 +61,7 @@
   </tbody>
 </table>
 
-> A Vue.js 2.0 UI Toolkit for Web.111
+> A Vue.js 2.0 UI Toolkit for Web.
 
 ## Links
 - Homepage and documentation
