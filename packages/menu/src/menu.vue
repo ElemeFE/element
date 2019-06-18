@@ -120,7 +120,8 @@
       collapseTransition: {
         type: Boolean,
         default: true
-      }
+      },
+      autoActiveRoute: Boolean
     },
     data() {
       return {
