@@ -116,7 +116,7 @@ class TableLayout {
   updateColumnsWidth() {
     if (Vue.prototype.$isServer) return;
     const fit = this.fit;
-    const bodyWidth = this.table.$el.clientWidth;
+    const bodyWidth = this.scrollY ? this.table.$el.clientWidth - this.gutterWidth : this.table.$el.clientWidth;
     let bodyMinWidth = 0;
 
     const flattenColumns = this.getFlattenColumns();
