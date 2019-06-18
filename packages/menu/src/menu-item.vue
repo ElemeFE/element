@@ -52,6 +52,19 @@
     },
     computed: {
       active() {
+        if (this.route && this.rootMenu.router && this.rootMenu.autoActiveRoute) {
+          const matchedRoute = this.$route.matched[0];
+
+          if (!matchedRoute) return false;
+
+          const pattern = new RegExp(matchedRoute.regex);
+          const matchedFromPath = pattern.test(this.route.path);
+
+          const matchedFromName = this.route.name === matchedRoute.name;
+
+          return this.route && (matchedFromPath || matchedFromName);
+        }
+
         return this.index === this.rootMenu.activeIndex;
       },
       hoverBackground() {
