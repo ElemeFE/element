@@ -355,7 +355,7 @@
       },
 
       toggleRowSelection(row, selected) {
-        this.store.toggleRowSelection(row, selected);
+        this.store.toggleRowSelection(row, selected, false);
         this.store.updateAllSelected();
       },
 
@@ -585,8 +585,12 @@
         }
       },
 
-      currentRowKey(newVal) {
-        this.store.setCurrentRowKey(newVal);
+      currentRowKey: {
+        immediate: true,
+        handler(value) {
+          if (!this.rowKey) return;
+          this.store.setCurrentRowKey(value);
+        }
       },
 
       data: {
