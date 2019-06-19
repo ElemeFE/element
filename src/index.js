@@ -76,7 +76,7 @@ import Divider from '../packages/divider/index.js';
 import Image from '../packages/image/index.js';
 import Calendar from '../packages/calendar/index.js';
 import Backtop from '../packages/backtop/index.js';
-import InfiniteScroll from '../packages/infinite-scroll/index.js';
+import InfiniteScroll from '../packages/infiniteScroll/index.js';
 import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
 import locale from 'element-ui/src/locale';
