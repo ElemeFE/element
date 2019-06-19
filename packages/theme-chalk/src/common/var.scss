@@ -939,6 +939,16 @@ $--calendar-border: $--table-border !default;
 $--calendar-selected-background-color: #F2F8FE !default;
 $--calendar-cell-width: 85px !default;
 
+/* Avatar
+--------------------------*/
+$--avatar-color: #fff;
+$--avatar-background: #ddd;
+$--avatar-border-color-base: $--border-color-base;
+$--avatar-size: 40px;
+$--avatar-large-size: $--avatar-size;
+$--avatar-medium-size: 36px;
+$--avatar-mini-size: 28px;
+
 /* Break-point
 --------------------------*/
 $--sm: 768px !default;

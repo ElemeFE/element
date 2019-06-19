@@ -79,6 +79,7 @@ import Backtop from '../packages/backtop/index.js';
 import InfiniteScroll from '../packages/infiniteScroll/index.js';
 import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
+import Avatar from '../packages/avatar/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -157,6 +158,7 @@ const components = [
   Backtop,
   PageHeader,
   CascaderPanel,
+  Avatar,
   CollapseTransition
 ];
 
@@ -275,5 +277,6 @@ export default {
   Backtop,
   InfiniteScroll,
   PageHeader,
-  CascaderPanel
+  CascaderPanel,
+  Avatar
 };

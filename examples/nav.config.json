@@ -279,6 +279,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll 无限滚动"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }
@@ -565,6 +569,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }
@@ -851,6 +859,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }
@@ -1137,6 +1149,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }
