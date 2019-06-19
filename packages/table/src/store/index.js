@@ -12,15 +12,15 @@ Watcher.prototype.mutations = {
     // 没有使用 computed，而是手动更新部分数据 https://github.com/vuejs/vue/issues/6660#issuecomment-331417140
     this.updateCurrentRow();
     this.updateExpandRows();
-    if (!states.reserveSelection) {
+    if (states.reserveSelection) {
+      this.assertRowKey();
+      this.updateSelectionByRowKey();
+    } else {
       if (dataInstanceChanged) {
         this.clearSelection();
       } else {
         this.cleanSelection();
       }
-    } else {
-      this.assertRowKey();
-      this.updateSelectionByRowKey();
     }
     this.updateAllSelected();
 

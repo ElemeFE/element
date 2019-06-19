@@ -127,18 +127,15 @@ export default Vue.extend({
       const states = this.states;
       states.isAllSelected = false;
       const oldSelection = states.selection;
-      if (states.selection.length) {
+      if (oldSelection.length) {
         states.selection = [];
-      }
-      if (oldSelection.length > 0) {
-        this.table.$emit('selection-change', states.selection ? states.selection.slice() : []);
+        this.table.$emit('selection-change', []);
       }
     },
 
     cleanSelection() {
-      const selection = this.states.selection || [];
-      const data = this.states.data;
-      const rowKey = this.states.rowKey;
+      const states = this.states;
+      const { data, rowKey, selection } = states;
       let deleted;
       if (rowKey) {
         deleted = [];
@@ -150,17 +147,11 @@ export default Vue.extend({
           }
         }
       } else {
-        deleted = selection.filter((item) => {
-          return data.indexOf(item) === -1;
-        });
+        deleted = selection.filter(item => data.indexOf(item) === -1);
       }
-
-      deleted.forEach((deletedItem) => {
-        selection.splice(selection.indexOf(deletedItem), 1);
-      });
-
       if (deleted.length) {
-        this.table.$emit('selection-change', selection ? selection.slice() : []);
+        states.selection = selection.filter(item => deleted.indexOf(item) === -1);
+        this.table.$emit('selection-change', selection.slice());
       }
     },
 
@@ -207,17 +198,15 @@ export default Vue.extend({
 
     updateSelectionByRowKey() {
       const states = this.states;
-      const { selection, rowKey, data = [] } = states;
+      const { selection, rowKey, data } = states;
       const selectedMap = getKeysMap(selection, rowKey);
-      // TODO：这里的代码可以优化
-      states.selection = data.reduce((prev, row) => {
+      data.forEach(row => {
         const rowId = getRowIdentity(row, rowKey);
         const rowInfo = selectedMap[rowId];
         if (rowInfo) {
-          prev.push(row);
+          selection[rowInfo.index] = row;
         }
-        return prev;
-      }, []);
+      });
     },
 
     updateAllSelected() {
