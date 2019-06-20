@@ -172,6 +172,10 @@
             {
               "path": "/badge",
               "title": "Badge 标记"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar 头像"
             }
           ]
         },
@@ -279,10 +283,6 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll 无限滚动"
-            },
-            {
-              "path": "/avatar",
-              "title": "Avatar"
             }
           ]
         }

@@ -1,6 +1,6 @@
 ## Avatar 头像
 
-用图标、图片或者字符的形式展示用户或事物信息
+用图标、图片或者字符的形式展示用户或事物信息。
 
 ### 基本用法
 
@@ -102,6 +102,9 @@
 | size              | 设置头像的大小                     | number/string | number/large/medium/small | large  |
 | shape             | 设置头像的形状  | string |    circle/square     |   circle  |
 | src               | 图片头像的资源地址 | string |        |      |
+| srcSet            | 以逗号分隔的一个或多个字符串列表表明一系列用户代理使用的可能的图像 | string |        |      |
+| alt               | 描述图像的替换文本 | string |        |      |
+
 
 ### Events
 
