@@ -64,7 +64,7 @@
           ></i>
           <i v-if="showPwdVisible"
             class="el-input__icon el-icon-view el-input__clear"
-            @click="handlePasswordVisible"
+            @mousedown="handlePasswordVisible"
           ></i>
           <span v-if="isWordLimitVisible" class="el-input__count">
             <span class="el-input__count-inner">
@@ -392,7 +392,9 @@
       },
       handlePasswordVisible() {
         this.passwordVisible = !this.passwordVisible;
-        this.focus();
+        setTimeout(() => {
+          this.focus();
+        }, 0);
       },
       getInput() {
         return this.$refs.input || this.$refs.textarea;
