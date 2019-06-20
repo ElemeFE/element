@@ -154,6 +154,12 @@
       padding: $--button-mini-padding-vertical;
     }
   }
+  @include m(compact) {
+    @include button-size($--button-compact-padding-vertical, $--button-compact-padding-horizontal, $--button-compact-font-size, $--button-compact-border-radius);
+    @include when(circle) {
+      padding: $--button-compact-padding-vertical;
+    }
+  }
   @include m(text) {
     border-color: transparent;
     color: $--color-primary;

@@ -534,6 +534,7 @@ $--button-small-border-radius: #{$--border-radius-base - 1} !default;
 $--button-small-padding-vertical: 9px !default;
 /// padding||Spacing|3
 $--button-small-padding-horizontal: 15px !default;
+
 /// fontSize||Font|1
 $--button-mini-font-size: 12px !default;
 $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
@@ -541,6 +542,14 @@ $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
 $--button-mini-padding-vertical: 7px !default;
 /// padding||Spacing|3
 $--button-mini-padding-horizontal: 15px !default;
+
+/// fontSize||Font|1
+$--button-compact-font-size: 12px !default;
+$--button-compact-border-radius: #{$--border-radius-base - 1} !default;
+/// padding||Spacing|3
+$--button-compact-padding-vertical: 5px !default;
+/// padding||Spacing|3
+$--button-compact-padding-horizontal: 12px !default;
 
 /// color||Color|0
 $--button-default-font-color: $--color-text-regular !default;
