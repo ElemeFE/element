@@ -229,6 +229,7 @@ Alert 组件提供了两个不同的主题：`light`和`dark`。
 
 | Name | Description |
 |------|--------|
+| — | 描述 |
 | title | 标题的内容 |
 
 ### Events

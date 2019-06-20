@@ -233,6 +233,7 @@ Contient un message avec plus d'informations.
 
 | Nom | Description |
 |------|--------|
+| — | la description |
 | title | Le contenu du titre. |
 
 ### Évènements
