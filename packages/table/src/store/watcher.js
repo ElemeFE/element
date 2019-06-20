@@ -150,15 +150,16 @@ export default Vue.extend({
         deleted = selection.filter(item => data.indexOf(item) === -1);
       }
       if (deleted.length) {
-        states.selection = selection.filter(item => deleted.indexOf(item) === -1);
-        this.table.$emit('selection-change', selection.slice());
+        const newSelection = selection.filter(item => deleted.indexOf(item) === -1);
+        states.selection = newSelection;
+        this.table.$emit('selection-change', newSelection.slice());
       }
     },
 
     toggleRowSelection(row, selected, emitChange = true) {
       const changed = toggleRowStatus(this.states.selection, row, selected);
       if (changed) {
-        const newSelection = this.states.selection ? this.states.selection.slice() : [];
+        const newSelection = (this.states.selection || []).slice();
         // 调用 API 修改选中值，不触发 select 事件
         if (emitChange) {
           this.table.$emit('select', newSelection, row);
