@@ -2,7 +2,8 @@ import throttle from 'throttle-debounce/debounce';
 import {
   isHtmlElement,
   isFunction,
-  isUndefined
+  isUndefined,
+  isDefined
 } from 'element-ui/src/utils/types';
 import {
   getScrollContainer
@@ -73,7 +74,7 @@ const getScrollOptions = (el, vm) => {
         value = Number.isNaN(value) ? defaultValue : value;
         break;
       case Boolean:
-        value = value === 'true';
+        value = isDefined ? defaultValue : value === 'true';
         break;
       default:
         value = type(value);
