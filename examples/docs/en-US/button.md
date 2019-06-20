@@ -132,7 +132,7 @@ Click the button to load data, then the button displays a loading state.
 
 Besides default size, Button component provides three additional sizes for you to choose among different scenarios.
 
-:::demo Use attribute `size` to set additional sizes with `medium`, `small`, `mini` or `compact`.
+:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
 <el-row>
@@ -140,14 +140,12 @@ Besides default size, Button component provides three additional sizes for you t
   <el-button size="medium">Medium</el-button>
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
-  <el-button size="compact">Compact</el-button>
 </el-row>
 <el-row>
   <el-button round>Default</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
   <el-button size="mini" round>Mini</el-button>
-  <el-button size="compact" round>Compact</el-button>
 </el-row>
 ```
 :::
@@ -155,7 +153,7 @@ Besides default size, Button component provides three additional sizes for you t
 ### Attributes
 | Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | button size   | string  |   medium / small / mini / compact           |    —     |
+| size     | button size   | string  |   medium / small / mini            |    —     |
 | type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | determine whether it's a plain button   | boolean    | — | false   |
 | round     | determine whether it's a round button   | boolean    | — | false   |
