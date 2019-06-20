@@ -132,7 +132,7 @@ Cliquez sur le bouton pour charger des données et il affichera un état de char
 
 En plus de la taille par défaut, le composant Button fournit trois tailles supplémentaires pour différents scénarios.
 
-:::demo Utilisez l'attribut `size` pour choisir d'autres tailles parmi `medium`, `small` ou `mini`.
+:::demo Utilisez l'attribut `size` pour choisir d'autres tailles parmi `medium`, `small`, `mini` ou `compact`.
 
 ```html
 <el-row>
@@ -140,12 +140,14 @@ En plus de la taille par défaut, le composant Button fournit trois tailles supp
   <el-button size="medium">Medium</el-button>
   <el-button size="small">Small</el-button>
   <el-button size="mini">Mini</el-button>
+  <el-button size="compact">Compact</el-button>
 </el-row>
 <el-row>
   <el-button round>Défaut</el-button>
   <el-button size="medium" round>Medium</el-button>
   <el-button size="small" round>Small</el-button>
   <el-button size="mini" round>Mini</el-button>
+  <el-button size="compact" round>Compact</el-button>
 </el-row>
 ```
 :::
@@ -153,7 +155,7 @@ En plus de la taille par défaut, le composant Button fournit trois tailles supp
 ### Attributs
 | Attribut      | Description    | Type      | Valeurs acceptées       | Défaut   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | Taille du bouton.   | string  |   medium / small / mini            |    —     |
+| size     | Taille du bouton.   | string  |   medium / small / mini / compact           |    —     |
 | type     | Type du bouton.   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | Détermine si le bouton est plein.   | boolean    | — | false   |
 | round     | Détermine si le bouton est arrondi.   | boolean    | — | false   |
