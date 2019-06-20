@@ -22,6 +22,8 @@ export default {
     },
     icon: String,
     src: String,
+    alt: String,
+    srcSet: String,
     error: Function
   },
 
@@ -61,10 +63,10 @@ export default {
       }
     },
     renderAvatar() {
-      const { icon, src, alt, isImageExist } = this;
+      const { icon, src, alt, isImageExist, srcSet } = this;
 
       if (isImageExist && src) {
-        return <img src={src} onError={this.handleError} alt={alt} />;
+        return <img src={src} onError={this.handleError} alt={alt} srcSet={srcSet} />;
       }
 
       if (icon) {

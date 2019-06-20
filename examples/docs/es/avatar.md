@@ -88,15 +88,6 @@ fallback when image load error
     <el-avatar style="background-color: #409eff; color: #fff;" icon="el-icon-user-solid"></el-avatar>
   </div>
 </template>
-<script>
-  export default {
-    methods: {
-      errorHandler() {
-        return true
-      }
-    }
-  }
-</script>
 
 ```
 :::

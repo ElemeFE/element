@@ -66,15 +66,6 @@ fallback when image load error
     <el-avatar :size="60" src="https://empty" @error="errorHandler"> fallback </el-avatar>
   </div>
 </template>
-<script>
-  export default {
-    methods: {
-      errorHandler() {
-        return true
-      }
-    }
-  }
-</script>
 
 ```
 :::

@@ -35,7 +35,7 @@
 
 ### 展示类型
 
-支持三种类型：图标、图标和字符
+支持三种类型：图标、图片和字符
 
 :::demo
 ```html
@@ -90,15 +90,6 @@
     <el-avatar style="background-color: #409eff; color: #fff;" icon="el-icon-user-solid"></el-avatar>
   </div>
 </template>
-<script>
-  export default {
-    methods: {
-      errorHandler() {
-        return true
-      }
-    }
-  }
-</script>
 
 ```
 :::
