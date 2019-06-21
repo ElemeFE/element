@@ -25,7 +25,7 @@ export default {
     const $slots = context.slots();
     const { direction, contentPosition } = context.props;
     return (
-      <div class={['el-divider', `el-divider--${direction}`]}>
+      <div class={['el-divider', `el-divider--${direction}`]} {...context.data}>
         {
           $slots.default && direction !== 'vertical'
             ? <div class={['el-divider__text', `is-${contentPosition}`]}>{$slots.default}</div>
