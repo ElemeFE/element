@@ -90,5 +90,34 @@ describe('Avatar', () => {
       done();
     }, 3000);
   });
+
+  it('image fit', (done) => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-avatar :src="url"></el-avatar>
+          <el-avatar :src="url" v-for="fit in fits" :fit="fit" :key="fit"></el-avatar>
+        </div>
+        
+      `,
+      data() {
+        return {
+          fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+          url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      const containerElm = vm.$el;
+      expect(containerElm.children[0].children[0].style.objectFit).to.equal('cover');
+      expect(containerElm.children[1].children[0].style.objectFit).to.equal('fill');
+      expect(containerElm.children[2].children[0].style.objectFit).to.equal('contain');
+      expect(containerElm.children[3].children[0].style.objectFit).to.equal('cover');
+      expect(containerElm.children[4].children[0].style.objectFit).to.equal('none');
+      expect(containerElm.children[5].children[0].style.objectFit).to.equal('scale-down');
+
+      done();
+    }, 3000);
+  });
 });
 

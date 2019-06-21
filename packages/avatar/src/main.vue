@@ -9,7 +9,6 @@ export default {
         if (typeof val === 'string') {
           return ['large', 'medium', 'small'].includes(val);
         }
-
         return typeof val === 'number';
       }
     },
@@ -24,7 +23,11 @@ export default {
     src: String,
     alt: String,
     srcSet: String,
-    error: Function
+    error: Function,
+    fit: {
+      type: String,
+      default: 'cover'
+    }
   },
 
   data() {
@@ -63,10 +66,15 @@ export default {
       }
     },
     renderAvatar() {
-      const { icon, src, alt, isImageExist, srcSet } = this;
+      const { icon, src, alt, isImageExist, srcSet, fit } = this;
 
       if (isImageExist && src) {
-        return <img src={src} onError={this.handleError} alt={alt} srcSet={srcSet} />;
+        return <img
+          src={src}
+          onError={this.handleError}
+          alt={alt}
+          srcSet={srcSet}
+          style={{ 'object-fit': fit }}/>;
       }
 
       if (icon) {

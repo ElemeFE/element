@@ -15,4 +15,6 @@ export declare class ElAvatar extends ElementUIComponent {
   srcSet: string;
 
   alt: string;
+
+  fit: string;
 }
