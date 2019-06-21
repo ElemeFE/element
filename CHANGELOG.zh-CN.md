@@ -1,5 +1,14 @@
 ## 更新日志
 
+### 2.9.2
+
+*2019-06-21*
+
+#### Bug 修复
+
+- Chore
+  - 修复 TS 定义文件 (#15805 by @NateScarlet)
+
 ### 2.9.1
 
 *2019-05-30*
@@ -32,7 +41,7 @@
 - PageHeader
   - 新增 PageHeader 组件 (#15714 by @ziyoung)
 - InfiniteScroll
-  - 新增 InfiniteScroll 指令 (#15567 by @iamkun) 
+  - 新增 InfiniteScroll 指令 (#15567 by @iamkun)
 - Cascader
   - 新增多选模式和 filter-method 方法 (#15611 by @SimonaliaChen)
 - Message
@@ -46,7 +55,7 @@
 - Image
   - 支持 attrs 和 listeners (#15578 by @VanMess)
 - Theme
-  - 新增 popup 背景配置 (#15412 by @iamkun)  
+  - 新增 popup 背景配置 (#15412 by @iamkun)
 - Chore
   - 更新文档首页 (#15682 by @iamkun)
 
@@ -57,7 +66,7 @@
 - Image
   - 修复 ssr 问题和 object-fit 的兼容性 (#15346 by @SimonaliaChen)
 - Input
-  - 修复 show-word-count 样式问题 (#15359 by @lvjiaxuan) 
+  - 修复 show-word-count 样式问题 (#15359 by @lvjiaxuan)
   - 修复删除图标样式 (#15354 by @YiiGuxing)
 - Calendar
   - 修复星期展示错误 (#15399 by @qingdengyue)
@@ -73,7 +82,7 @@
   - 修复自定义 tabindex 不生效问题 (#15619 by @SimonaliaChen)
 - Link
   - 修复图标 class 问题 (#15752 by @iamkun)
-- Select  
+- Select
   - 回滚清除时，设置 value 为 null 的修改 (#15447 by @iamkun)
 - Loading
   - 修复 Dom 不更新的问题 (#15123 by @FAKER-A)
@@ -102,7 +111,7 @@
   - 重新命名文档变量 (#15185 by @liupl)
   - 更新 Image 组件文档 (#15423 by @haoranyu)
   - 修复 Form 组件文档错误 (#15228 by @SHERlocked93)
- 
+
 ### 2.8.2
 
 *2019-04-25*
@@ -245,7 +254,7 @@ Docs
 
 - Form
   - 修复 `label-width` 为 `auto` 的样式 (#14955 by @ziyoung)
-  
+
 #### 优化
 - Docs
   - 修复文档内图片链接错误 (#14957 by @iamkun)
@@ -268,7 +277,7 @@ Docs
   - 可以设置背景色 (#14939 by @ziyoung)
 - Form
   - `label-width` 支持自动宽度 (#14944 by @ziyoung)
-  
+
 #### 优化
 - Docs
   - 更新西班牙语文档 (#14913 by @Gonzalo2310)
