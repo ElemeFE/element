@@ -93,28 +93,6 @@ fallback when image load error
 ```
 :::
 
-### Customize style
-
-:::demo
-```html
-<template>
-  <div class="demo-type">
-    <el-avatar style="background-color: #409eff; color: #fff;" icon="el-icon-user-solid"></el-avatar>
-  </div>
-</template>
-<script>
-  export default {
-    methods: {
-      errorHandler() {
-        return true
-      }
-    }
-  }
-</script>
-
-```
-:::
-
 ### How the image fit its container
 
 Set how the image fit its container for an image avatar, same as [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).

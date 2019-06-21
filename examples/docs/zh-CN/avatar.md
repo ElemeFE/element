@@ -93,21 +93,6 @@
 ```
 :::
 
-### 通过 style 自定义样式
-
-当展示类型为图片的时候，图片加载失败的 fallback 行为
-
-:::demo
-```html
-<template>
-  <div class="demo-type">
-    <el-avatar style="background-color: #409eff; color: #fff;" icon="el-icon-user-solid"></el-avatar>
-  </div>
-</template>
-
-```
-:::
-
 ### 图片如何适应容器框
 
 当展示类型为图片的时候，使用 `fit` 属性定义图片如何适应容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)。
