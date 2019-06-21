@@ -37,9 +37,10 @@ Default (dynamic) Advanced Date Picker
 :::demo
 
 ```html
-   <tm-advanced-date-picker :local-storage-date="form.date"
+   <tm-advanced-date-picker :value="form.date"
+                            @date-picked="form.date = $event"
                             :disabled-date="d"
-                            @typechange="$emit('to-parent', $event)" />                                    
+                            @typechange="$emit('to-parent', $event)" />
 ```
 :::
 
@@ -48,7 +49,7 @@ Single (date) Advanced Date Picker
 :::demo
 
 ```html
-   <tm-advanced-date-picker :local-storage-date="form.date"
+   <tm-advanced-date-picker :value="form.date"
                             picker-type="date"
                             :disabled-date="d"
                             @typechange="$emit('to-parent', $event)" />
@@ -60,10 +61,11 @@ Single (date) Advanced Date Picker
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | picker-type | type of child DatePicker | string | year/month/date/datetime/ week/datetimerange/daterange/dynamic | dynamic |
 | picker-class | class of child DatePicker | string | — | child-picker |
+| value | value of date-picker | array/date/string | — | null |
+| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | disable-old-date | same options as DatePicker have | boolean | — | true |
 | disabled-date | function to disable select date, more priority than disable-old-date | function | function | null |
-| default-value | defaults value to show | date | date | Date() |
-| local-storage-date | if app use a local storage, this prop be helpfull | array/date | — | null |
+| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
 | clearable | Whether to show clear button | boolean | — | true |
 | prefix-icon | Custom prefix icon class | string | — | calendar |
 | suffix-icon | Custom prefix icon class | string | — |  — |

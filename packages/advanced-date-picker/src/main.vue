@@ -16,7 +16,8 @@
                       size="extra-large"
                       :disable-old-date="disableOldDate"
                       :disabled-date="disabledDate"
-                      :default-value="defaultValue"/>
+                      :default-value="defaultValue"
+                      :value-format="valueFormat"/>
       <div slot="reference"
            @keyup.enter="onEnterKeyUp">
         <tm-input v-if="isEditable"
@@ -55,6 +56,7 @@
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmDatePicker from 'tmconsulting-ui/packages/date-picker/src/picker/date-picker';
   import countBy from 'lodash/countBy';
+  import difference from 'lodash/difference';
 
   moment.locale('ru');
 
@@ -141,12 +143,26 @@
     },
 
     watch: {
+      value: {
+        handler(value, oldValue) {
+          if (!this.comparePickerValue(value, oldValue)) {
+            this.date = value;
+          }
+        },
+        deep: true
+      },
       date: {
         handler(value) {
           if (value) {
+            this.type = Array.isArray(value) ? DOUBLE : SINGLE;
+            this.updateInputDate(value);
             this.$emit('date-changed', value);
           }
-        }
+        },
+        deep: true
+      },
+      type(value) {
+        this.$emit('typechange', value);
       }
     },
 
@@ -168,7 +184,7 @@
         default: null
       },
       defaultValue: {},
-      localStorageDate: {
+      value: {
         type: [Array, Date, String],
         default: null
       },
@@ -187,6 +203,16 @@
       suffixIcon: {
         type: String,
         default: ''
+      },
+      valueFormat: {
+        type: String,
+        default: ''
+      }
+    },
+
+    mounted() {
+      if (this.value) {
+        this.date = this.value;
       }
     },
 
@@ -194,15 +220,8 @@
       type: SINGLE,
       date: null,
       inputDate: null,
-      value: null,
       isEditable: false
     }),
-
-    mounted() {
-      this.date = this.localStorageDate;
-      if (Array.isArray(this.date)) this.type = DOUBLE;
-      if (this.date) this.onChange(this.date);
-    },
 
     computed: {
       prefixIconName() {
@@ -210,7 +229,10 @@
       },
 
       isInputDateValid() {
-        const dates = this.type === SINGLE ? this.inputDate : this.inputDate.split('-');
+        if (this.type === SINGLE) {
+          return validateInput(this.type, this.inputDate);
+        }
+        const dates = this.inputDate ? this.inputDate.split('-') : [];
         return validateInput(this.type, dates);
       },
 
@@ -257,6 +279,12 @@
     },
 
     methods: {
+      comparePickerValue(value1, value2) {
+        if (Array.isArray(value1) && Array.isArray(value2)) {
+          return difference(value1, value2).length === 0;
+        }
+        return value1 === value2;
+      },
       onEnterKeyUp() {
         switch (this.type) {
           case SINGLE:
@@ -316,11 +344,13 @@
         picker.rightDate = new Date(rightDate);
         if (isAvailableToClose) this.close();
       },
-      onChange(value) {
+      updateInputDate(value) {
         this.inputDate = Array.isArray(value)
           ? value.map(getDate).join(' - ')
           : getDate(value);
-
+      },
+      onChange(value) {
+        this.updateInputDate(value);
         this.isEditable = false;
         this.close();
       },
@@ -330,7 +360,6 @@
       },
       onTypeChanged(type) {
         this.type = type;
-        this.$emit('typechange', type);
       },
       focus() {
         this.$refs.popover.doShow();
