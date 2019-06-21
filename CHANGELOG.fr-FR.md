@@ -1,6 +1,15 @@
 ## Changelog
 
-## 2.9.1
+### 2.9.2
+
+*2019-06-21*
+
+#### Bug fixes
+
+- Chore
+  - Fix TS definitions file (#15805 by @NateScarlet)
+
+### 2.9.1
 
 *2019-05-30*
 
