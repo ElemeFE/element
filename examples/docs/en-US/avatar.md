@@ -22,9 +22,9 @@ use `shape` and `size` prop to set avatar's shape and size
     <el-col :span="12">
       <div class="sub-title">square</div>
       <div class="demo-basic--circle">
-        <div class="block"><el-avatar :size="50" :src="squareUrl"></el-avatar></div>
+        <div class="block"><el-avatar shape="square" :size="50" :src="squareUrl"></el-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
-          <el-avatar :size="size" :src="squareUrl"></el-avatar>
+          <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
         </div>
       </div>
     </el-col> 
