@@ -213,7 +213,7 @@ Dans certains cas, les boutons fermer et annuler peuvent avoir des sens différe
   export default {
     methods: {
       open() {
-        this.$confirm('Vous avez du travail non-enregistré, enregistrer et quitter?', 'Confirm', {
+        this.$confirm('Vous avez du travail non enregistré, enregistrer et quitter?', 'Confirm', {
           distinguishCancelAndClose: true,
           confirmButtonText: 'Enregistrer',
           cancelButtonText: 'Ne pas enregistrer'

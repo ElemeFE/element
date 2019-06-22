@@ -1,13 +1,13 @@
 
 ## DatePicker
 
-Utilisez le DatePicker pour les champs de dates.
+Utilisez DatePicker pour les champs de dates.
 
 ### Entrez la date
 
 L'unité de base du DatePicker est le jour.
 
-:::demo L'unité est déterminée par l'attribut `type`. Vous pouvez  ajouter des options de raccourcis en créant un objet `picker-options` avec la propriété `shortcuts`. L'état désactivé est controllé par `disabledDate` qui prend une function.
+:::demo L'unité est déterminée par l'attribut `type`. Vous pouvez ajouter des options en créant un objet `picker-options` avec la propriété `shortcuts`. L'état désactivé est contrôlé par `disabledDate` qui est une fonction.
 
 ```html
 <template>
@@ -148,7 +148,7 @@ Vous pouvez sélectionner une plage de dates.
     </el-date-picker>
   </div>
   <div class="block">
-    <span class="demonstration">Avec raccourcis</span>
+    <span class="demonstration">Avec des options</span>
     <el-date-picker
       v-model="value2"
       type="daterange"
@@ -203,33 +203,33 @@ Vous pouvez sélectionner une plage de dates.
 
 :::
 
-### Month Range
+### Plage de mois
 
-Picking a month range is supported.
+Vous pouvez sélectionner une plage de mois.
 
-:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current years independently, you can use the `unlink-panels` attribute.
+:::demo Lorsque ce mode est activé, les panneaux gauche et droit sont liés par défaut. Si vous voulez que les deux panneaux switch indépendamment les années en cours, vous pouvez utiliser l'attribut `unlink-panels`.
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">Default</span>
+    <span class="demonstration">Défaut</span>
     <el-date-picker
       v-model="value1"
       type="monthrange"
-      range-separator="To"
-      start-placeholder="Start month"
-      end-placeholder="End month">
+      range-separator="à"
+      start-placeholder="Mois de début"
+      end-placeholder="Mois de fin">
     </el-date-picker>
   </div>
   <div class="block">
-    <span class="demonstration">With quick options</span>
+    <span class="demonstration">Avec options</span>
     <el-date-picker
       v-model="value2"
       type="monthrange"
       align="right"
       unlink-panels
-      range-separator="To"
-      start-placeholder="Start month"
-      end-placeholder="End month"
+      range-separator="à"
+      start-placeholder="Mois de début"
+      end-placeholder="Mois de fin"
       :picker-options="pickerOptions">
     </el-date-picker>
   </div>
@@ -241,19 +241,19 @@ Picking a month range is supported.
       return {
         pickerOptions: {
           shortcuts: [{
-            text: 'This month',
+            text: 'Ce mois',
             onClick(picker) {
               picker.$emit('pick', [new Date(), new Date()]);
             }
           }, {
-            text: 'This year',
+            text: 'Cette année',
             onClick(picker) {
               const end = new Date();
               const start = new Date(new Date().getFullYear(), 0);
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'Last 6 months',
+            text: 'Les derniers 6 mois',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -347,7 +347,7 @@ Attention à la capitalisation !
 | `A`  | AM/PM | uniquement pour `format`, majuscules | AM |
 | `a`  | am/pm | uniquement pour `format`, minuscules | am |
 | `timestamp` | timestamp JS | uniquement pour `value-format`; la variable stockée sera un `number` | 1483326245000 |
-| `[MM]` | No escape characters | To escape characters, wrap them in square brackets (e.g. [A] [MM]) | MM |
+| `[MM]` | Pas de caractère d'échappement | Pour échapper des caractères, placez-les entre crochets (ex: [A] [MM]) | MM |
 
 :::demo
 ```html
@@ -449,9 +449,9 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | popper-class | Nom de classe pour le menu déroulant du DatePicker. | string | — | — |
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |
 | range-separator | Séparateur de plage de dates. | string | — | '-' |
-| default-value | Date par défaut du calendrier, optionnelle. | Date | anything accepted by `new Date()` | — |
+| default-value | Date par défaut du calendrier, optionnelle. | Date | Tout ce qui est accepté par `new Date()` | — |
 | default-time | Horaire par défaut quand on sélectionne une plage dates, optionnel. | string[] | Tableau de taille 2, chaque valeur est au format `12:00:00`. La première pour la date de début, la deuxième pour la date de fin. | — |
-| value-format | Format de la variable stockée, optionnel. Si non spécifié, la valeur dsera un objet Date. | string | Voir [formats de date](#/en-US/component/date-picker#formats-de-date) | — |
+| value-format | Format de la variable stockée, optionnel. Si non spécifié, la valeur sera un objet Date. | string | Voir [formats de date](#/en-US/component/date-picker#formats-de-date) | — |
 | name | Identique au `name` de l'input natif | string | — | — |
 | unlink-panels | Rend indépendants les deux panneaux de plage de dates. | boolean | — | false |
 | prefix-icon | Icône de préfixe. | string | — | el-icon-date |
@@ -461,10 +461,10 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 ### Options du Picker
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | UN tableau d'objets { text, onClick } pour configurer les raccourcis, voir table ci-dessous. | object[] | — | — |
-| disabledDate | Une function qui détermine si une date est désactivée ou pas, avec cette date en paramètre. Doit retourner un booléen. | function | — | — |
+| shortcuts | Un tableau d'objets { text, onClick } pour configurer les raccourcis, voir table ci-dessous. | object[] | — | — |
+| disabledDate | Une fonction qui détermine si une date est désactivée ou pas, avec cette date en paramètre. Doit retourner un booléen. | function | — | — |
 | firstDayOfWeek | Premier jour du mois. | Number | 1 to 7 | 7 |
-| onPick | Callbacl se déclenchant quand la date sélectionnée change. Uniquement pour `daterange` et `datetimerange`. | Function({ maxDate, minDate }) | - | - |
+| onPick | Callback se déclenchant quand la date sélectionnée change. Uniquement pour `daterange` et `datetimerange`. | Function({ maxDate, minDate }) | - | - |
 
 ### Raccourcis
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |

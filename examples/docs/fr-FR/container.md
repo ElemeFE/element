@@ -1,18 +1,18 @@
 ## Container
 Les composants Container servent à structurer la page:
 
-`<el-container>`: Conteneur de wrapping. QUand iil est placé à l'intérieur de `<el-header>` ou `<el-footer>`, tout les éléments enfants seront placés verticalement. Dans le cas contraire ils seront placés horizontalement.
+`<el-container>`: Conteneur de wrapping. Quand il est placé à l'intérieur de `<el-header>` ou `<el-footer>`, tous les éléments enfants seront placés verticalement. Dans le cas contraire ils seront placés horizontalement.
 
 `<el-header>`: Conteneur pour headers.
 
 `<el-aside>`: Conteneur pour section latérale (en général un menu).
 
-`<el-main>`: Conteneur pour le contenu principal.
+`<el-main>`: Conteneur pour la section principal.
 
 `<el-footer>`: Conteneur pour footers.
 
 :::tip
-Ces composants utlisent flexbox, assurez vous que le navigateur supporte cette fonctionnalité. De plus, les éléments enfants directs de `<el-container>` doivent être un des quatres éléments précédents, leur élément père devant obligatoirement être `<el-container>`.
+Ces composants utilisent flexbox, assurez vous que le navigateur supporte cette fonctionnalité. De plus, les éléments enfants directs de `<el-container>` doivent être un des quatre éléments précédents, leur élément père devant obligatoirement être `<el-container>`.
 :::
 
 ### Mises en page habituelles

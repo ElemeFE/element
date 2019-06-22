@@ -833,7 +833,7 @@ Vous pouvez activer la sélection d'une ligne.
 
 Vous pouvez aussi sélectionner plusieurs lignes.
 
-:::demo Ajoutez une `el-table-column` avec son `type` à `selection`. Cet exemple utilise aussi `show-overflow-tooltip`: par défaut, si le contenu est trop long, il se séparera en plusieurs lignes. Si vous souhaitez conserver une seule ligne, utilisez `show-overflow-tooltip`, qui accepte un `Boolean`. Si `true`, le contenu non-affiché s'affichera dans le tooltip lorsque la souris passera sur la case.
+:::demo Ajoutez une `el-table-column` avec son `type` à `selection`. Cet exemple utilise aussi `show-overflow-tooltip`: par défaut, si le contenu est trop long, il se séparera en plusieurs lignes. Si vous souhaitez conserver une seule ligne, utilisez `show-overflow-tooltip`, qui accepte un `Boolean`. Si `true`, le contenu non affiché s'affichera dans le tooltip lorsque la souris passera sur la case.
 ```html
 <template>
   <el-table

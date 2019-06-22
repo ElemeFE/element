@@ -207,8 +207,8 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |
 | range-separator | Séparateur de plage. | string | - | '-' |
 | default-value | Date par défaut du calendrier, optionnelle. | Date | N'importe quelle valeur acceptée par `new Date()` | — |
-| default-time | L'horaire par défaut après avoir choisi une date. | normal: string / plage de dates: string[] | normal: un string tel que `12:00:00`, range: tableau de deux strings, le premier pour la date de début, le deuxième pour la date de fin. Si non-spécifié, `00:00:00` est utilisé. | — |
-| value-format | Format de la variable stockée, optionnel. Si non-spécifié, La valeur sera un objet Date. | string | Voir [formats de date](#/fr-FR/component/date-picker#formats-de-date) | — |
+| default-time | L'horaire par défaut après avoir choisi une date. | normal: string / plage de dates: string[] | normal: un string tel que `12:00:00`, range: tableau de deux strings, le premier pour la date de début, le deuxième pour la date de fin. Si non spécifié, `00:00:00` est utilisé. | — |
+| value-format | Format de la variable stockée, optionnel. Si non spécifié, La valeur sera un objet Date. | string | Voir [formats de date](#/fr-FR/component/date-picker#formats-de-date) | — |
 | name | Identique au `name` de l'input natif | string | — | — |
 | unlink-panels | Rend indépendants les deux panneaux de plage de dates | boolean | — | false |
 | prefix-icon | Icône de préfixe. | string | — | el-icon-date |

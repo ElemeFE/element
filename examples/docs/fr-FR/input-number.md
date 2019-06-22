@@ -111,7 +111,7 @@ Vous pouvez déterminer un pas pour le champs.
 :::
 
 :::tip
-La valeur de `precision` doit être un integer non-négatif et ne doit pas être inférieure aux décimales de `step`.
+La valeur de `precision` doit être un integer non négatif et ne doit pas être inférieure aux décimales de `step`.
 :::
 
 ### Taille

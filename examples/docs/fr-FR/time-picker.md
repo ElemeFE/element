@@ -166,7 +166,7 @@ Vous pouvez également définir un intervalle libre.
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |
 | range-separator | Séparateur d'intervalle. | string | - | '-' |
 | default-value | Optionnel, date d'aujourd'hui par défaut. | `Date` pour le TimePicker, `string` pour le TimeSelect | Toute valeur acceptée par `new Date()` pour le TimePicker, une valeur sélectionnable pour TimeSelect. | — |
-| value-format | Optionnel, uniquement pour TimePicker, format de la valeur. Si non-spécifié, la valeur sera un objet `Date`. | string | Voir [date formats](#/en-US/component/date-picker#date-formats) | — |
+| value-format | Optionnel, uniquement pour TimePicker, format de la valeur. Si non spécifié, la valeur sera un objet `Date`. | string | Voir [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | Attribut `name` natif de l'input. | string | — | — |
 | prefix-icon | Classe de l'icône de préfixe. | string | — | el-icon-time |
 | clear-icon | Classe de l'icône d'effacement. | string | — | el-icon-circle-close |
