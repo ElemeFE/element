@@ -70,7 +70,7 @@ Vous pouvez aussi laisser l'utilisateur choisir librement un horaire.
 
 ### Intervalle de temps fixe
 
-Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélectionné en premier, certains horaires de fins seront désactivés si ils ont lieu avant l'horaire de début.
+Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélectionné en premier, certains horaires de fins seront désactivés s'ils ont lieu avant l'horaire de début.
 
 :::demo
 ```html

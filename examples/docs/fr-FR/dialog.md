@@ -45,7 +45,7 @@ Le Dialog ouvre un modal personnalisable.
 :::
 
 :::tip
-`before-close` ne fonctionne que quand l'utilisateur clique sur l'icône de fermeture en dehors du modal. Si il y a des boutons dans le `footer`, vous pouvez configurer `before-close` grâce à leur évènement click.
+`before-close` ne fonctionne que quand l'utilisateur clique sur l'icône de fermeture en dehors du modal. S'il y a des boutons dans le `footer`, vous pouvez configurer `before-close` grâce à leur évènement click.
 :::
 
 ### Personalisation
@@ -56,7 +56,7 @@ Le contenu du modal peut être n'importe quoi, tableau ou formulaire compris.
 
 ```html
 <!-- Table -->
-<el-button type="text" @click="dialogTableVisible = true">Ouvir un modal avec tableau</el-button>
+<el-button type="text" @click="dialogTableVisible = true">Ouvrir un modal avec tableau</el-button>
 
 <el-dialog title="Adresse d'expédition" :visible.sync="dialogTableVisible">
   <el-table :data="gridData">
@@ -132,7 +132,7 @@ Le contenu du modal peut être n'importe quoi, tableau ou formulaire compris.
 
 Si un Dialog est imbriqué dans un autre Dialog, `append-to-body` est requis.
 
-:::demo Normalement l'utilisation de Dialog imbriqué est déconseillée. Si vous avez besoin de plusieurs Dialogs sur la page, vous pouvez les aplatir afin qu'ils soit au même niveau. SI vous devez absolument utiliser un Dialog imbriqué, configurez l'attribut `append-to-body` du Dialog imbriqué à `true` et il sera ajouté au body au lieu de son noeud parent, afin d'avoir un affichage correct.
+:::demo Normalement l'utilisation de Dialog imbriqué est déconseillée. Si vous avez besoin de plusieurs Dialogs sur la page, vous pouvez les aplatir afin qu'ils soit au même niveau. Si vous devez absolument utiliser un Dialog imbriqué, configurez l'attribut `append-to-body` du Dialog imbriqué à `true` et il sera ajouté au body au lieu de son noeud parent, afin d'avoir un affichage correct.
 ```html
 <template>
   <el-button type="text" @click="outerVisible = true">Ouvrir le modal extérieur</el-button>
@@ -202,7 +202,7 @@ Le contenu de Dialog bénéficie du lazy loading, ce qui signifie que le slot pa
 :::
 
 :::tip
-Si la variable liée à `visible` est gérée dans Vuex, le modificateur `.sync` ne peut pas fonctionner. Dans ce cas retirez-le, écouter les évènements `open` et `close`, et commité les mutations Vuex pour mettre à jour la valeur de cette variable.
+Si la variable liée à `visible` est gérée dans Vuex, le modificateur `.sync` ne peut pas fonctionner. Dans ce cas retirez-le, écoutez les évènements `open` et `close`, et commitez les mutations Vuex pour mettre à jour la valeur de cette variable.
 :::
 
 ### Attributs
@@ -215,8 +215,8 @@ Si la variable liée à `visible` est gérée dans Vuex, le modificateur `.sync`
 | fullscreen     | Si le Dialog doit être en plein écran. | boolean    | — | false |
 | top      | Valeur du `margin-top` du CSS du Dialog. | string    | — | 15vh |
 | modal     | Si un masque est affiché. | boolean   | — | true |
-| modal-append-to-body     | Si il faut ajouter le modal au body. Si `false`, le modal sera ajouter à l'élément parent du Dialog. | boolean   | — | true |
-| append-to-body     | Si il faut ajouter le Dialog au body. Un Dialog imbriqué doit avoir cet attribut à `true`. | boolean   | — | false |
+| modal-append-to-body     | S'il faut ajouter le modal au body. Si `false`, le modal sera ajouter à l'élément parent du Dialog. | boolean   | — | true |
+| append-to-body     | S'il faut ajouter le Dialog au body. Un Dialog imbriqué doit avoir cet attribut à `true`. | boolean   | — | false |
 | lock-scroll     | Si le défilement du body est désactivé. | boolean   | — | true |
 | custom-class      | Nom de classe pour le Dialog | string    | — | — |
 | close-on-click-modal | Si le Dialog peut être fermé en cliquant sur le masque. | boolean    | — | true |
