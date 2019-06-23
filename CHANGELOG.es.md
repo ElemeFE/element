@@ -1,6 +1,15 @@
 ## Changelog
 
-## 2.9.1
+### 2.9.2
+
+*2019-06-21*
+
+#### Bug fixes
+
+- Chore
+  - Fix TS definitions file (#15805 by @NateScarlet)
+
+### 2.9.1
 
 *2019-05-30*
 
@@ -215,34 +224,34 @@
 
 - Tareas
   - Actualizado changelog zh-cn (#14965 by @iamkun)
-  
+
   - Ocultar la descripcion de la demo cuando esta vacia (#15014 by @ziyoung)
-  
+
   - Muestra la info dev del server por defecto @iamkun)
-  
+
   - Arreglado un error del changelog v2.6.0 (#15026 by @iamkun)
 
   - Actualizado build config (#14821 by @abc3660170)
-  
+
   - Agregado hmr (#15221 by @SimonaliaChen)
-  
+
   - Uso de sourcemap en entorno dev (#15087 by @ibufu) Docs
-  
+
   - Cambio de nombre de variable en docs (#14602 #15003 #15094 #15105 by @liupl)
-  
+
   - Arreglado un error en la documentacion de upload (#15023 by @iamkun)
-  
+
   - Actualizada la documentacion del custom validator del Form (#15040 by @iamkun)
-  
+
   - Actualizada la documentacion de Tabs de como mostrar tabs verticales (#15053 by @iamkun)
-  
+
   - Uso del dominio eleme.cn (#15139 by @ziyoung)
-  
+
   - Arreglado el nombre de la ruta de imágenes (#15194 by @iamkun)
-  
+
   - Eliminada la traducción duplicada en francés (#15207 by @iamkun)
-  
-    
+
+
 
 #### Breaking changes
 
@@ -259,7 +268,7 @@
 
 - Form
   - Arreglado el estilo auto `label-width` (#14955 by @ziyoung)
-  
+
 #### Optimización
 - Docs
   - Arreglado un error de link de una imagen (#14957 by @iamkun)
@@ -282,7 +291,7 @@
   - El color de fondo puede ser configurado (#14939 by @ziyoung)
 - Form
   - `label-width` soporta auto width (#14944 by @ziyoung)
-  
+
 #### Optimización
 - Docs
   - Actualización de la documentación en español  (#14913 by @Gonzalo2310)
@@ -985,7 +994,7 @@
 - Switch
   - Corregido se disparaban los dos eventos nativos de click cuando se hacia click en el Switch, #9760
 
-    
+
 
 ### 2.1.0 Charcoal
 

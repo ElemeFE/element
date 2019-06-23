@@ -1,6 +1,15 @@
 ## Changelog
 
-## 2.9.1
+### 2.9.2
+
+*2019-06-21*
+
+#### Bug fixes
+
+- Chore
+  - Fix TS definitions file (#15805 by @NateScarlet)
+
+### 2.9.1
 
 *2019-05-30*
 
@@ -32,7 +41,7 @@
 - PageHeader
   - Add PageHeader component (#15714 by @ziyoung)
 - InfiniteScroll
-  - Add InfiniteScroll directive (#15567 by @iamkun) 
+  - Add InfiniteScroll directive (#15567 by @iamkun)
 - Cascader
   - Add multiple mode and filter-method (#15611 by @SimonaliaChen)
 - Message
@@ -46,7 +55,7 @@
 - Image
   - Add support for transmit attrs and listeners (#15578 by @VanMess)
 - Theme
-  - Add popup background (#15412 by @iamkun)  
+  - Add popup background (#15412 by @iamkun)
 - Chore
   - Update new 2.9.0 index page (#15682 by @iamkun)
 
@@ -57,7 +66,7 @@
 - Image
   - Fix ssr and object-fit compatibility (#15346 by @SimonaliaChen)
 - Input
-  - Fix show-word-count style in el-form (#15359 by @lvjiaxuan) 
+  - Fix show-word-count style in el-form (#15359 by @lvjiaxuan)
   - Fix clear icon is not centered (#15354 by @YiiGuxing)
 - Calendar
   - Fix not correct day of week when the day is Sunday (#15399 by @qingdengyue)
@@ -73,7 +82,7 @@
   - Fix custom tabindex not work (#15619 by @SimonaliaChen )
 - Link
   - Fix link icon style class (#15752 by @iamkun)
-- Select  
+- Select
   - Revert set value to null when cleared (#15447 by @iamkun)
 - Loading
   - Fix dom not change when loading state change quickly (#15123 by @FAKER-A)
@@ -102,7 +111,7 @@
   - Rename variable in docs (#15185 by @liupl)
   - Fix image attribute type and default value (#15423 by @haoranyu)
   - Fix form doc bug (#15228 by @SHERlocked93)
- 
+
 ### 2.8.2
 
 *2019-04-25*
@@ -245,7 +254,7 @@ Docs
 
 - Form
   - Fix auto `label-width` style (#14955 by @ziyoung)
-  
+
 #### Optimization
 - Docs
   - Fix doc img link error (#14957 by @iamkun)
@@ -268,7 +277,7 @@ Docs
   - Background color can be configured (#14939 by @ziyoung)
 - Form
   - `label-width` supports auto width (#14944 by @ziyoung)
-  
+
 #### Optimization
 - Docs
   - Update Spanish docs (#14913 by @Gonzalo2310)
