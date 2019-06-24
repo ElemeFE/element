@@ -3,7 +3,7 @@
     name="dialog-fade"
     @after-enter="afterEnter"
     @after-leave="afterLeave">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick" @mouseup="handleMouseup">
+    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         role="dialog"
         aria-modal="true"
@@ -11,8 +11,7 @@
         class="el-dialog"
         :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
-        :style="style"
-        @mousedown="handleMousedown">
+        :style="style">
         <div class="el-dialog__header">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
@@ -39,8 +38,6 @@
   import Popup from 'element-ui/src/utils/popup';
   import Migrating from 'element-ui/src/mixins/migrating';
   import emitter from 'element-ui/src/mixins/emitter';
-
-  let dialogMouseDown = false;
 
   export default {
     name: 'ElDialog',
@@ -155,18 +152,8 @@
         };
       },
       handleWrapperClick() {
-        if (!this.closeOnClickModal || dialogMouseDown) return;
+        if (!this.closeOnClickModal) return;
         this.handleClose();
-      },
-      handleMousedown() {
-        dialogMouseDown = true;
-      },
-      handleMouseup() {
-        if (dialogMouseDown) {
-          this.$nextTick(_ => {
-            dialogMouseDown = false;
-          });
-        }
       },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
