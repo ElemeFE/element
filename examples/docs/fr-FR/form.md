@@ -21,7 +21,7 @@ Il peut contenir toutes sortes de champs tels que `input`, `select`, `radio` et 
   </el-form-item>
   <el-form-item label="Activity time">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
+      <el-date-picker type="date" placeholder="Choisissez une date" v-model="form.date1" style="width: 100%;"></el-date-picker>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
@@ -49,8 +49,8 @@ Il peut contenir toutes sortes de champs tels que `input`, `select`, `radio` et 
     <el-input type="textarea" v-model="form.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit">Create</el-button>
-    <el-button>Cancel</el-button>
+    <el-button type="primary" @click="onSubmit">Créer</el-button>
+    <el-button>Annuler</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -188,7 +188,7 @@ Le composant Form vous permet d'effectuer des vérifications, afin de détecter 
   <el-form-item label="Activity time" required>
     <el-col :span="11">
       <el-form-item prop="date1">
-        <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+        <el-date-picker type="date" placeholder="Choisissez une date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
       </el-form-item>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
@@ -219,8 +219,8 @@ Le composant Form vous permet d'effectuer des vérifications, afin de détecter 
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
-    <el-button @click="resetForm('ruleForm')">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">Créer</el-button>
+    <el-button @click="resetForm('ruleForm')">Réinitialiser</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -287,7 +287,7 @@ Le composant Form vous permet d'effectuer des vérifications, afin de détecter 
 
 Cet exemple montre comment vous pouvez personnaliser vos règles de validation pour effectuer une identification à deux facteurs.
 
-:::demo Here we use `status-icon` to reflect validation result as an icon.
+:::demo Ici, nous utilisons `status-icon` pour afficher le résultat de la validation sous forme d'icône.
 ```html
 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
@@ -301,7 +301,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-    <el-button @click="resetForm('ruleForm')">Reset</el-button>
+    <el-button @click="resetForm('ruleForm')">Réinitialiser</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -309,14 +309,14 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
     data() {
       var checkAge = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('Please input the age'));
+          return callback(new Error('Veuillez entrer l\'âge'));
         }
         setTimeout(() => {
           if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+            callback(new Error('Veuillez entrer des chiffres'));
           } else {
             if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
+              callback(new Error('L\'âge doit être supérieur à 18 ans'));
             } else {
               callback();
             }
@@ -325,7 +325,7 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('Please input the password'));
+          callback(new Error('Veuillez entrer le mot de passe'));
         } else {
           if (this.ruleForm.checkPass !== '') {
             this.$refs.ruleForm.validateField('checkPass');
@@ -335,9 +335,9 @@ Cet exemple montre comment vous pouvez personnaliser vos règles de validation p
       };
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('Please input the password again'));
+          callback(new Error('Veuillez entrer à nouveau le mot de passe'));
         } else if (value !== this.ruleForm.pass) {
-          callback(new Error('Two inputs don\'t match!'));
+          callback(new Error('Les deux entrées ne correspondent pas!'));
         } else {
           callback();
         }
@@ -394,8 +394,8 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
     prop="email"
     label="Email"
     :rules="[
-      { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
+      { required: true, message: 'Veuillez entrer l'adresse e-mail', trigger: 'blur' },
+      { type: 'email', message: 'Veuillez entrer une adresse e-mail valide', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -406,15 +406,15 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
     :key="domain.key"
     :prop="'domains.' + index + '.value'"
     :rules="{
-      required: true, message: 'domain can not be null', trigger: 'blur'
+      required: true, message: 'domain ne peut pas être null', trigger: 'blur'
     }"
   >
-    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
+    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Supprimer</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</el-button>
-    <el-button @click="addDomain">New domain</el-button>
-    <el-button @click="resetForm('dynamicValidateForm')">Reset</el-button>
+    <el-button type="primary" @click="submitForm('dynamicValidateForm')">Soumettre</el-button>
+    <el-button @click="addDomain">Nouveau domaine</el-button>
+    <el-button @click="resetForm('dynamicValidateForm')">Réinitialiser</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -471,15 +471,15 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
     label="age"
     prop="age"
     :rules="[
-      { required: true, message: 'age is required'},
-      { type: 'number', message: 'age must be a number'}
+      { required: true, message: 'l\'âge est requis'},
+      { type: 'number', message: 'l\'âge doit être un nombre'}
     ]"
   >
     <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
-    <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
+    <el-button type="primary" @click="submitForm('numberValidateForm')">Soumettre</el-button>
+    <el-button @click="resetForm('numberValidateForm')">Réinitialiser</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -526,18 +526,18 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
     <el-input v-model="sizeForm.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone">
-    <el-select v-model="sizeForm.region" placeholder="please select your zone">
+    <el-select v-model="sizeForm.region" placeholder="veuillez sélectionner votre zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="Activity time">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
+      <el-date-picker type="date" placeholder="Choisissez une date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Choisissez une heure" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Activity type">
@@ -553,8 +553,8 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
     </el-radio-group>
   </el-form-item>
   <el-form-item size="large">
-    <el-button type="primary" @click="onSubmit">Create</el-button>
-    <el-button>Cancel</el-button>
+    <el-button type="primary" @click="onSubmit">Créer</el-button>
+    <el-button>Annuler</el-button>
   </el-form-item>
 </el-form>
 
@@ -609,7 +609,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | validate | Valide le formulaire. Prends une callback en paramètre. Après la validation, la callback est exécutée avec deux paramètres: un boolean indiquant si la validation est bonne, et un objet contenant tout les champs qui ont échoués. Retourne une promesse si aucune callback n'est passée. | Function(callback: Function(boolean, object)) |
 | validateField | Valide un ou plusieurs champs du formulaire. | Function(props: string \| array, callback: Function(errorMessage: string)) |
 | resetFields | Efface tout les champs et les résultats de validation. | — |
-| clearValidate | Efface les messages de validation de certains champs. Le paramètre est le nom du champ ou une liste des champs concernés. Si il est omis, tout les champs seront concernés. | Function(props: string \| array) |
+| clearValidate | Efface les messages de validation de certains champs. Le paramètre est le nom du champ ou une liste des champs concernés. S'il est omis, tout les champs seront concernés. | Function(props: string \| array) |
 
 ### Évènnements de Form
 
@@ -626,7 +626,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | label-width | Largeur du label, e.g. '50px'. La largeur `auto` est supportée. | string | — | — |
 | required | Si le champ est requis ou non. Si omis, sera déterminé par les règles de validation. | boolean |  — | false |
 | rules | Règles de validation du formulaire. | object | — | — |
-| error | Message d'erreur du champ. Si il est modifié, le champ l'affichera immédiatement. | string | — | — |
+| error | Message d'erreur du champ. S'il est modifié, le champ l'affichera immédiatement. | string | — | — |
 | show-message  | Si le message d'erreur doit apparaître. | boolean | — | true |
 | inline-message  | Si le message d'erreur doit être en ligne avec le champ. | boolean | — | false |
 | size  | Contrôle la taille du FormItem. | string | medium / small / mini | - |
