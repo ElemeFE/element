@@ -942,13 +942,13 @@ $--calendar-cell-width: 85px !default;
 /* Avatar
 --------------------------*/
 /// color||Color|0
-$--avatar-font-color: #fff;
+$--avatar-font-color: #fff !default;
 /// color||Color|0
-$--avatar-background-color: #C0C4CC;
-$--avatar-size: 40px;
-$--avatar-large-size: $--avatar-size;
-$--avatar-medium-size: 36px;
-$--avatar-small-size: 28px;
+$--avatar-background-color: #C0C4CC !default;
+$--avatar-size: 40px !default;
+$--avatar-large-size: $--avatar-size !default;
+$--avatar-medium-size: 36px !default;
+$--avatar-small-size: 28px !default;
 
 /* Break-point
 --------------------------*/
