@@ -36,6 +36,7 @@
       <date-table
         :date="date"
         :selected-day="realSelectedDay"
+        :first-day-of-week="realFirstDayOfWeek"
         @pick="pickDay" />
     </div>
     <div
@@ -86,6 +87,10 @@ export default {
           return true;
         }
       }
+    },
+    firstDayOfWeek: {
+      type: Number,
+      default: 1
     }
   },
 
@@ -238,6 +243,13 @@ export default {
         return data;
       }
       return [];
+    },
+
+    realFirstDayOfWeek() {
+      if (this.firstDayOfWeek < 1 || this.firstDayOfWeek > 6) {
+        return 0;
+      }
+      return Math.floor(this.firstDayOfWeek);
     }
   },
 
