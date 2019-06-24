@@ -70,15 +70,12 @@ Watcher.prototype.mutations = {
   sort(states, options) {
     const { prop, order } = options;
     if (prop) {
-      // TODO：nextTick 是否有必要？
-      Vue.nextTick(() => {
-        const column = arrayFind(states.columns, column => column.property === prop);
-        if (column) {
-          column.order = order;
-          this.updateSort(column, prop, order);
-          this.commit('changeSortCondition');
-        }
-      });
+      const column = arrayFind(states.columns, column => column.property === prop);
+      if (column) {
+        column.order = order;
+        this.updateSort(column, prop, order);
+        this.commit('changeSortCondition');
+      }
     }
   },
 

@@ -1817,7 +1817,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 |----------------|----------------------|-----------|-----------------------|----------|
 | data | Les données de la table. | array | — | — |
 | height | La hauteur de la table. Par défaut la hauteur est `auto`. Si sa valeur est un nombre, la hauteur est en px; si c'est un string, la valeur est assigné au style.height de l'élement. La hauteur est affectée par les styles externes. | string/number | — | — |
-| max-height | La hauteur maximale de la table. La hauteur commence à `auto` jusqu'à atteindre la limite. La `maxHeight` est en px. | string/number | — | — |
+| max-height | Table's max-height. The legal value is a number or the height in px. | string/number | — | — |
 | stripe | Si la table est rayée. | boolean | — | false |
 | border | Si la table à une bordure verticale. | boolean | — | false |
 | size | Taille de la table. | string | medium / small / mini | — |
