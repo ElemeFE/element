@@ -158,23 +158,7 @@
       color: $--color-danger;
     }
   }
-  @include when(success) {
-    & .el-input__inner,
-    & .el-textarea__inner {
-      &, &:focus {
-        border-color: $--color-success;
-      }
-    }
-    & .el-input-group__append,
-    & .el-input-group__prepend {
-      & .el-input__inner {
-        border-color: transparent;
-      }
-    }
-    .el-input__validateIcon {
-      color: $--color-success;
-    }
-  }
+
   @include m(feedback) {
     .el-input__validateIcon {
       display: inline-block;
