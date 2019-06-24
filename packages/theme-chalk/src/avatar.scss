@@ -8,9 +8,10 @@
   overflow: hidden;
   color: $--avatar-font-color;
   background: $--avatar-background-color;
-  width: $--avatar-size;
-  height: $--avatar-size;
-  line-height: $--avatar-size;
+  width: $--avatar-large-size;
+  height: $--avatar-large-size;
+  line-height: $--avatar-large-size;
+  font-size: $--avatar-text-font-size;
 
   >img {
     width: 100%;
@@ -22,11 +23,11 @@
   }
 
   @include m(square) {
-    border-radius: 4px;
+    border-radius: $--avatar-border-radius;
   }
 
   @include m(icon) {
-    font-size: 18px;
+    font-size: $--avatar-icon-font-size;
   }
 
   @include m(large) {

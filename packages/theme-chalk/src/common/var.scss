@@ -942,13 +942,21 @@ $--calendar-cell-width: 85px !default;
 /* Avatar
 --------------------------*/
 /// color||Color|0
-$--avatar-font-color: #fff;
+$--avatar-font-color: #fff !default;
 /// color||Color|0
-$--avatar-background-color: #C0C4CC;
-$--avatar-size: 40px;
-$--avatar-large-size: $--avatar-size;
-$--avatar-medium-size: 36px;
-$--avatar-small-size: 28px;
+$--avatar-background-color: #C0C4CC !default;
+/// fontSize||Font Size|1
+$--avatar-text-font-size: 14px !default;
+/// fontSize||Font Size|1
+$--avatar-icon-font-size: 18px !default;
+/// borderRadius||Border|2
+$--avatar-border-radius: $--border-radius-base !default;
+/// size|1|Avatar Size|3
+$--avatar-large-size: 40px !default;
+/// size|1|Avatar Size|3
+$--avatar-medium-size: 36px !default;
+/// size|1|Avatar Size|3
+$--avatar-small-size: 28px !default;
 
 /* Break-point
 --------------------------*/
