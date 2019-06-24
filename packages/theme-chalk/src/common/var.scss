@@ -942,13 +942,10 @@ $--calendar-cell-width: 85px !default;
 /* Avatar
 --------------------------*/
 /// color||Color|0
-$--avatar-color: #fff;
+$--avatar-font-color: #fff;
 /// color||Color|0
-$--avatar-background: #C0C4CC;
-/// color||Color|0
-$--avatar-border-color-base: $--border-color-base;
+$--avatar-background-color: #C0C4CC;
 $--avatar-size: 40px;
-/// color|1|Functional Size|1
 $--avatar-large-size: $--avatar-size;
 $--avatar-medium-size: 36px;
 $--avatar-small-size: 28px;
