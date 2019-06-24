@@ -29,6 +29,11 @@
   .el-avatar:not(:last-child) {
     margin-right: 20px;
   }
+
+  .avatar-demo {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>
 <template>
@@ -359,10 +364,13 @@
       </el-collapse>
     </el-row>
     <h4>Avatar</h4>
-    <el-row>
+    <el-row class="demo-line avatar-demo">
       <el-avatar icon="el-icon-user-solid"/>
       <el-avatar> avatar </el-avatar>
-      <el-avatar shape="square" :size="60" fit="contain" :src="avatarData.url"></el-avatar>
+      <el-avatar shape="square" fit="contain" :src="avatarData.url"></el-avatar>
+      <el-avatar size="large"> large </el-avatar>
+      <el-avatar size="medium"> medium </el-avatar>
+      <el-avatar size="small"> small </el-avatar>
     </el-row>
   </div>
 </template>
