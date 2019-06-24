@@ -140,7 +140,7 @@
     </el-row>
     <h4>Rate</h4>
     <el-row>
-      <el-rate class="demo-line" v-model="rate"></el-rate> 
+      <el-rate class="demo-line" v-model="rate"></el-rate>
       <el-rate
         class="demo-line"
         v-model="rate"
@@ -353,6 +353,10 @@
           <div>Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;</div>
         </el-collapse-item>
       </el-collapse>
+    </el-row>
+    <h4>Avatar</h4>
+    <el-row>
+      <el-avatar icon="el-icon-user-solid"/>
     </el-row>
   </div>
 </template>
