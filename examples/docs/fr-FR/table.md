@@ -62,7 +62,7 @@ Un tableau de base pour afficher seulement.
 
 Ajouter des couleurs différentes pour les lignes paires et impaires permet de lire le tableau plus facilement.
 
-:::demo L'attribut `stripe` accepte un `Boolean`. Si `true`, le tabelau sera rayé.
+:::demo L'attribut `stripe` accepte un `Boolean`. Si `true`, le tableau sera rayé.
 ```html
 <template>
   <el-table

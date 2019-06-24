@@ -4,7 +4,7 @@ Affiche une notification globale dans un coin de la page.
 
 ### Usage
 
-:::demo Element enregistre la méthode `$notify` qui reçoit un objet en paramètre. Dans le cas le plus simple, vous pouvez simplement configure les champs `title` et` message`. Par défaut, la notification se ferme automatiquement après 4500ms, mais vous pouvez régler une autre durée avec `duration`. Si la durée est mise à `0`, la notification ne se fermera pas. `duration` prends donc un `Number` in millisecondes.
+:::demo Element enregistre la méthode `$notify` qui reçoit un objet en paramètre. Dans le cas le plus simple, vous pouvez simplement configurer les champs `title` et` message`. Par défaut, la notification se ferme automatiquement après 4500ms, mais vous pouvez régler une autre durée avec `duration`. Si la durée est mise à `0`, la notification ne se fermera pas. `duration` prends donc un `Number` en millisecondes.
 
 ```html
 <template>
@@ -47,7 +47,7 @@ Affiche une notification globale dans un coin de la page.
 
 ### Types
 
-We provide four types: success, warning, info and error.
+Nous fournissons quatre types: succès, avertissement, information et erreur.
 
 :::demo Element fournit quatre types de notifications: `success`, `warning`, `info` et `error`. Il sont choisis grâce au champs `type`, et n'importe quelle autre valeur sera ignorée. Il existe des méthodes  enregistrées pour chaque type, comme dans `open3` et `open4`, qui ne nécessitent donc pas le champs `type`.
 ```html

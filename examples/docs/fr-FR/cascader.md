@@ -1,4 +1,4 @@
-## Cascader
+| Se## Cascader
 
 Si les options ont une structure hiérarchique claire, Le composant Cascader peut être utilisé pour les afficher et les sélectionner.
 
@@ -1213,7 +1213,7 @@ Dans la sélection simple, seuls les noeuds terminaux peuvent être coché, et d
 
 Charge dynamiquement ses noeuds enfants lorsque un noeud est sélectionné.
 
-:::demo Définissez `lazy = true` pour utiliser le chargement dynamique. Vous devez spécifier comment charger la source de données avec` lazyload`. Il existe deux paramètres de `lazyload`, le premier paramètre` node` est le noeud sur lequel l'utilisateur a cliqué, et `resolution` est un callback indiquant que le chargement est terminé et qu'il doit être appelé. Pour afficher le statut du noeud plus précisément, vous pouvez ajouter un champ `leaf` (modifiable par` props.leaf`) pour indiquer s'il s'agit d'un noeud feuille. Sinon, il sera déduit par ses noeuds enfants.
+:::demo Définissez `lazy = true` pour utiliser le chargement dynamique. Vous devez Spécifier comment charger la source de données avec` lazyload`. Il existe deux paramètres de `lazyload`, le premier paramètre` node` est le noeud sur lequel l'utilisateur a cliqué, et `resolution` est un callback indiquant que le chargement est terminé et qu'il doit être appelé. Pour afficher le statut du noeud plus précisément, vous pouvez ajouter un champ `leaf` (modifiable par` props.leaf`) pour indiquer s'il s'agit d'un noeud feuille. Sinon, il sera déduit par ses noeuds enfants.
 ```html
 <el-cascader :props="props"></el-cascader>
 
@@ -1910,67 +1910,67 @@ Vous pouvez personnaliser le contenu du noeud cascader.
 ### Cascader Attributs
 | Attribut | Description | Type  | Valeurs acceptées | Défaut |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | - | — | — |
-| options | les données des options，la clé de `value` et `label` peuvent être personnalisées par `Props`.| array | — | — |
-| props | options de configuration, voir le tableau suivant. | object | — | — |
-| size | taille de l'entrée | string | medium / small / mini | — |
-| placeholder | placeholder de l'input | string | — | Select |
-| disabled | si Cascader est désactivé | boolean | — | false |
-| clearable | si la valeur sélectionnée peut être effacée | boolean | — | false |
-| show-all-levels | afficher ou non tous les niveaux de la valeur sélectionnée dans l'entrée | boolean | — | true |
-| collapse-tags | réduire ou non les balises en mode de sélection multiple | boolean | - | false |
-| separator | option label separator | string | — | ' / ' |
-| filterable | si les options peuvent être recherchées | boolean | — | — |
-| filter-method | personnaliser la logique de recherche, le premier paramètre est `node`, le second est `keyword`, et doit renvoyer une valeur booléenne indiquant si le résultat est positif. | function(node, keyword) | - | - |
-| debounce | délai de réponse lors de la saisie du mot clé de filtre, en millisecondes | number | — | 300 |
-| before-filter | hook fonction avant de filtrer avec la valeur à filtrer en tant que paramètre. Si `false` est renvoyé ou si une `Promise` est renvoyée puis rejetée, le filtrage sera annulé | function(value) | — | — |
-| popper-class | nom de classe personnalisé pour la liste déroulante de Cascader   | string | —  | — |
+| value / v-model | Valeur de liaison | - | — | — |
+| options | Les données des options，la clé de `value` et `label` peuvent être personnalisées par `Props`.| array | — | — |
+| props | Options de configuration, voir le tableau suivant. | object | — | — |
+| size | Taille de l'entrée | string | medium / small / mini | — |
+| placeholder | Placeholder de l'input | string | — | Select |
+| disabled | Si Cascader est désactivé | boolean | — | false |
+| clearable | Si la valeur sélectionnée peut être effacée | boolean | — | false |
+| show-all-levels | Afficher ou non tous les niveaux de la valeur sélectionnée dans l'entrée | boolean | — | true |
+| collapse-tags | Réduire ou non les balises en mode de sélection multiple | boolean | - | false |
+| separator | Option label separator | string | — | ' / ' |
+| filterable | Si les options peuvent être recherchées | boolean | — | — |
+| filter-method | Personnaliser la logique de recherche, le premier paramètre est `node`, le second est `keyword`, et doit renvoyer une valeur booléenne indiquant si le résultat est positif. | function(node, keyword) | - | - |
+| debounce | Délai de réponse lors de la saisie du mot clé de filtre, en millisecondes | number | — | 300 |
+| before-filter | Hook fonction avant de filtrer avec la valeur à filtrer en tant que paramètre. Si `false` est renvoyé ou si une `Promise` est renvoyée puis rejetée, le filtrage sera annulé | function(value) | — | — |
+| popper-class | Nom de classe personnalisé pour la liste déroulante de Cascader   | string | —  | — |
 
 ### Cascader Events
 | Event Name | Description | Paramètres |
 |---------- |-------- |---------- |
-| change | se déclenche lorsque la valeur de liaison change | value |
-| expand-change | se déclenche lorsque l'option d'agrandissement change | an array of the expanding node's parent nodes |
-| blur | se déclenche lorsque Cascader blurs | (event: Event) |
-| focus | se déclenche lorsque Cascader à le focus | (event: Event) |
-| visible-change | se déclenche lorsque le menu déroulant apparaît / disparaît | vrai quand il apparaît, et faux sinon |
-| remove-tag | se déclenche lors de la suppression d'une balise en mode de sélection multiple | la valeur de la balise qui est supprimée |
+| change | Se déclenche lorsque la valeur de liaison change | value |
+| expand-change | Se déclenche lorsque l'option d'agrandissement change | an array of the expanding node's parent nodes |
+| blur | Se déclenche lorsque Cascader blurs | (event: Event) |
+| focus | Se déclenche lorsque Cascader à le focus | (event: Event) |
+| visible-change | Se déclenche lorsque le menu déroulant apparaît / disparaît | vrai quand il apparaît, et faux sinon |
+| remove-tag | Se déclenche lors de la suppression d'une balise en mode de sélection multiple | la valeur de la balise qui est supprimée |
 
 ### Cascader Slots
 | Slot Name | Description |
 |---------|-------------|
-| - | le contenu personnalisé du noeud cascader, le paramètre est { node, data }, qui sont respectivement les objets de noeud et les données de noeud actuels. |
-| empty  | contenu quand il n'y a pas d'options correspondantes. |
+| - | Le contenu personnalisé du noeud cascader, le paramètre est { node, data }, qui sont respectivement les objets de noeud et les données de noeud actuels. |
+| empty  | Contenu quand il n'y a pas d'options correspondantes. |
 
 ### CascaderPanel Attributes
 | Attribut | Description | Type  | Valeurs acceptées | Défaut |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | valeur de liaison | - | — | — |
-| options | les données des options, la clé de `value` et `label` peuvent être personnalisées par `Props`.| array | — | — |
-| props | options de configuration, voir le tableau suivant. | object | — | — |
+| value / v-model | Baleur de liaison | - | — | — |
+| options | Les données des options, la clé de `value` et `label` peuvent être personnalisées par `Props`.| array | — | — |
+| props | Options de configuration, voir le tableau suivant. | object | — | — |
 
 ### CascaderPanel Events
 | Event Name | Description | Paramètres |
 |---------- |-------- |---------- |
-| change | se déclenche lorsque la valeur de liaison change | value |
-| expand-change | se déclenche lorsque l'option d'agrandissement change | an array of the expanding node's parent nodes |
+| change | Se déclenche lorsque la valeur de liaison change | value |
+| expand-change | Se déclenche lorsque l'option d'agrandissement change | an array of the expanding node's parent nodes |
 
 ### CascaderPanel Slots
 | Slot Name | Description |
 |---------|-------------|
-| - | le contenu personnalisé du noeud cascader, le paramètre est { node, data }, qui sont respectivement les objets de noeud et les données de noeud actuels. |
+| - | Le contenu personnalisé du noeud cascader, le paramètre est { node, data }, qui sont respectivement les objets de noeud et les données de noeud actuels. |
 
 ### Props
-| Attribute | Description | Type  | Accepted Values | Default |
+| Attribute | Description | Type  | Valeurs acceptées | Défaut |
 | -------- | ----------------- | ------ | ------ | ------ |
-| expandTrigger | mode de déclenchement des options de développement | string | click / hover | 'click' |
-| multiple |si la sélection multiple est activée | boolean | - | false |
-| checkStrictly | si l'état coché d'un noeud n'affecte pas ses noeuds parents et enfants | boolean | - | false |
+| expandTrigger | Mode de déclenchement des options de développement | string | click / hover | 'click' |
+| multiple | Si la sélection multiple est activée | boolean | - | false |
+| checkStrictly | Si l'état coché d'un noeud n'affecte pas ses noeuds parents et enfants | boolean | - | false |
 | emitPath | Lorsque les noeuds cochés changent, émet ou non un tableau du chemin du noeud. Si la valeur est false, n'émet que la valeur du noeud. | boolean | - | true |
-| lazy | s'il faut charger dynamiquement les noeuds enfants, utiliser avec l'attribut `lazyload` | boolean | - | false |
-| lazyLoad | méthode de chargement de données de noeuds enfants, ne fonctionne que lorsque `lazy` est vrai | function(node, resolve) | - | - |
-| value    | spécifie quelle clé de l'objet noeud est utilisée comme valeur du noeud | string | — | 'value' |
-| label    | spécifie quelle clé de l'objet noeud est utilisée comme label du noeud | string | — | 'label' |
-| children | spécifie quelle clé de l'objet noeud est utilisée en tant qu'enfant du noeud | string | — | 'children' |
-| disabled | spécifie quelle clé de l'objet noeud est utilisée comme noeud désactivé | string | — | 'disabled' |
-| leaf     | spécifie quelle clé de l'objet est noeud utilisée comme champ feuille du noeud | string | — | 'leaf' |
+| lazy | S'il faut charger dynamiquement les noeuds enfants, utiliser avec l'attribut `lazyload` | boolean | - | false |
+| lazyLoad | Méthode de chargement de données de noeuds enfants, ne fonctionne que lorsque `lazy` est vrai | function(node, resolve) | - | - |
+| value    | Spécifie quelle clé de l'objet noeud est utilisée comme valeur du noeud | string | — | 'value' |
+| label    | Spécifie quelle clé de l'objet noeud est utilisée comme label du noeud | string | — | 'label' |
+| children | Spécifie quelle clé de l'objet noeud est utilisée en tant qu'enfant du noeud | string | — | 'children' |
+| disabled | Spécifie quelle clé de l'objet noeud est utilisée comme noeud désactivé | string | — | 'disabled' |
+| leaf     | Spécifie quelle clé de l'objet est noeud utilisée comme champ feuille du noeud | string | — | 'leaf' |

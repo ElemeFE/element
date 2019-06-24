@@ -275,14 +275,14 @@ Vous pouvez déposer les fichiers par drag'n drop sur l'espace dédié.
 
 Attribut      | Description          | Type      | Valeurs acceptées       | Défaut
 ----| ----| ----| ----| ----
-action | Requis, l'url de requète. | string | — | —
-headers | Les headers de la requète. | object | — | —
+action | Requis, l'url de requête. | string | — | —
+headers | Les headers de la requête. | object | — | —
 multiple | Si envoyer de multiples fichiers est autorisé. | boolean | — | —
-data | Options additionnelles de la requète. | object | — | —
+data | Options additionnelles de la requête. | object | — | —
 name | Identifiant du fichier. | string | — | file
 with-credentials | Si les cookies sont aussi envoyés. | boolean | — |false
 show-file-list | Si la liste des fichiers est affichée. | boolean | — | true
- drag | SI le mode drag'n drop est activé. | boolean | — | false
+ drag | Si le mode drag'n drop est activé. | boolean | — | false
 accept | [Types de fichiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept) acceptés, ne marche pas si `thumbnail-mode` est `true`. | string | — | —
 on-preview | Fonction pour quand le fichier est cliqué. | function(file) | — | —
 on-remove | Fonction pour quand des fichiers sont supprimés. | function(file, fileList) | — | —

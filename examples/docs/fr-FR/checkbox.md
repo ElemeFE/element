@@ -281,4 +281,4 @@ Des checkbox avec une apparence de bouton.
 | false-label | Valeur de la checkbox si non cochée. | string / number    |      —         |     —    |
 | disabled  | Si la checkbox est désactivée. | boolean   |  — | false   |
 | name | Attribut 'name' natif. | string    |      —         |     —    |
-| checked  | SI la checkbox est cochée. | boolean   |  — | false   |
+| checked  | Si la checkbox est cochée. | boolean   |  — | false   |

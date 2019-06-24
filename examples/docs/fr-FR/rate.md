@@ -62,7 +62,7 @@ Vous pouvez ajouter du texte à chaque score.
 
 Vous pouvez utiliser différentes icônes pour chaque
 
-:::demo You can customize icons by passing `icon-classes` an array with three elements or a object which key is the threshold between two levels and value is the corresponding icon class. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir l'icône des valeurs non sélectionnées.
+:::demo Vous pouvez personnaliser les icônes en passant à `icon-classes` un tableau avec trois éléments ou un objet dont la clé est le seuil entre deux niveaux et la valeur la classe d'icônes correspondante. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir d'autres valeurs non sélectionnées.
 
 ```html
 <el-rate

@@ -69,7 +69,7 @@ Voici la structure basique.
 
 Vous pouvez activer la sélection des noeuds.
 
-:::demo cate exemple montre également comment charger des données de manière asynchrone.
+:::demo cet exemple montre également comment charger des données de manière asynchrone.
 ```html
 <el-tree
   :props="props"
@@ -135,7 +135,7 @@ Vous pouvez activer la sélection des noeuds.
 
 ### Noeud-feuille personnalisés en mode lazy
 
-:::demo Les données d'un noeud ne sont pas accessibles tant que la noeud n'est pas cliqué, l'arbre ne peut donc pas prédire si un noeud sera une feuille. C'est pourquoi un bouton de menu est ajouté à chaque noeud, et si c'est  une feuille il disparaîtra après le clic. Vous pouvez également dire par avance à l'arbre si un noeud est une feuille, pour éviter l'apparition du bouton de menu.
+:::demo Les données d'un noeud ne sont pas accessibles tant que la noeud n'est pas cliqué, l'arbre ne peut donc pas prédire si un noeud sera une feuille. C'est pourquoi un bouton de menu est ajouté à chaque noeud, et si c'est une feuille il disparaîtra après le clic. Vous pouvez également dire par avance à l'arbre si un noeud est une feuille, pour éviter l'apparition du bouton de menu.
 ```html
 <el-tree
   :props="props"
@@ -818,7 +818,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 
 ### props
 
-| Attribut | Description                              | Type   | Accepted Values | Défaut |
+| Attribut | Description                              | Type   | Valeurs acceptées | Défaut |
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |
 | label     | Détermine quelle clé de l'objet noeud représente le label. | string, function(data, node) | —               | —       |
 | children | Détermine quelle clé de l'objet noeud représente les noeuds enfants. | string | —               | —       |

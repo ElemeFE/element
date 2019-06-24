@@ -4,7 +4,7 @@ Un champ d'input de valeurs numériques, avec un domaine personnalisable.
 
 ### Usage
 
-:::demo Liez une variable à `v-model` dans l'element `<el-input-number>` et c'est tout !
+:::demo Liez une variable à `v-model` dans l'élément `<el-input-number>` et c'est tout !
 
 ```html
 <template>
