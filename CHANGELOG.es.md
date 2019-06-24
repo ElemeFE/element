@@ -4,10 +4,10 @@
 
 *2019-06-21*
 
-#### Bug fixes
+#### Corrección de errores
 
-- Chore
-  - Fix TS definitions file (#15805 by @NateScarlet)
+- Tareas
+  - Solucionadas las definiciones  de archivos TS (#15805 by @NateScarlet)
 
 ### 2.9.1
 
@@ -16,7 +16,7 @@
 #### Nuevas características
 
 - Table
-  - tree-props，default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event son compatibles con Tree Table (#15709 by @ziyoung)
+  - Los metodos tree-props，default-expand-all, expand-row-keys, toggle-row-expansion y el evento expand-change son compatibles con Tree Table (#15709 by @ziyoung)
 
 #### Corrección de errores
 
