@@ -156,7 +156,7 @@ Use `list-type` to change the fileList style.
 
 ### Custom file thumbnail
 
-Use `slot="file" slot-scope="{file}"` to change default thumbnail template.
+Use `scoped-slot` to change default thumbnail template.
 
 :::demo
 ```html
@@ -202,7 +202,8 @@ Use `slot="file" slot-scope="{file}"` to change default thumbnail template.
     data() {
       return {
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        disabled: false
       };
     },
     methods: {

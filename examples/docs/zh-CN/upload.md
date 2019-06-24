@@ -156,9 +156,9 @@
 
 ### 文件缩略图
 
- 使用 `slot="file" slot-scope="{file}"` 默认的缩略图模版.
+使用 `scoped-slot` 去设置缩略图模版。
 
- :::demo
+:::demo
 ```html
 <el-upload
   action="#"
@@ -202,7 +202,8 @@
     data() {
       return {
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        disabled: false
       };
     },
     methods: {

@@ -152,7 +152,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
 
 ### Custom file thumbnail
 
-Use `slot="file" slot-scope="{file}"` to change default thumbnail template.
+Use `scoped-slot` to change default thumbnail template.
 
 :::demo
 ```html
@@ -198,7 +198,8 @@ Use `slot="file" slot-scope="{file}"` to change default thumbnail template.
     data() {
       return {
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        disabled: false
       };
     },
     methods: {
