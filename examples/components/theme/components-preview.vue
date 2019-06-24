@@ -25,6 +25,10 @@
   .el-carousel__item:nth-child(2n + 1) {
     background-color: #d3dce6;
   }
+
+  .el-avatar:not(:last-child) {
+    margin-right: 20px;
+  }
 }
 </style>
 <template>
@@ -140,7 +144,7 @@
     </el-row>
     <h4>Rate</h4>
     <el-row>
-      <el-rate class="demo-line" v-model="rate"></el-rate> 
+      <el-rate class="demo-line" v-model="rate"></el-rate>
       <el-rate
         class="demo-line"
         v-model="rate"
@@ -354,6 +358,12 @@
         </el-collapse-item>
       </el-collapse>
     </el-row>
+    <h4>Avatar</h4>
+    <el-row>
+      <el-avatar icon="el-icon-user-solid"/>
+      <el-avatar> avatar </el-avatar>
+      <el-avatar shape="square" :size="60" fit="contain" :src="avatarData.url"></el-avatar>
+    </el-row>
   </div>
 </template>
 <script>
@@ -511,6 +521,9 @@ export default {
       defaultTreeProps: {
         children: 'children',
         label: 'label'
+      },
+      avatarData: {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
       }
     };
   }

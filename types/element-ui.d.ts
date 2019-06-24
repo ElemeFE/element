@@ -77,6 +77,7 @@ import { ElImage } from './image'
 import { ElBacktop } from './backtop'
 import { ElInfiniteScroll } from './infiniteScroll'
 import { ElPageHeader } from './page-header'
+import { ElAvatar } from './avatar'
 
 export interface InstallationOptions {
   locale: any,
@@ -332,3 +333,6 @@ export const InfiniteScroll: PluginObject<ElInfiniteScroll>;
 
 /** PageHeader Component */
 export class PageHeader extends ElPageHeader {}
+
+/** Avatar Component */
+export class Avatar extends ElAvatar {}

@@ -77,5 +77,6 @@
   "backtop": "./packages/backtop/index.js",
   "infinite-scroll": "./packages/infinite-scroll/index.js",
   "page-header": "./packages/page-header/index.js",
-  "cascader-panel": "./packages/cascader-panel/index.js"
+  "cascader-panel": "./packages/cascader-panel/index.js",
+  "avatar": "./packages/avatar/index.js"
 }
