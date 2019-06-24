@@ -48,10 +48,10 @@ La zone d'affichage est de 40px \* 40px.
 
 | Attribut          | Description                                                         | Type            | Valeurs acceptées | Défaut |
 | ----------------- | ------------------------------------------------------------------- | --------------- | --------------- | ------- |
-| target            | la cible pour déclencher le scroll                                  | string          |                 |         |
-| visibility-height | le bouton ne s'affichera pas tant que la hauteur de défilement n'aura pas atteint cette valeur. |  number |    | 200     |
-| right             | la distance du bord droit                                           | number |                 | 40      |
-| bottom            | la distance du bord gauche                                          | number |                 | 40      |
+| target            | La cible pour déclencher le scroll                                  | string          |                 |         |
+| visibility-height | Le bouton ne s'affichera pas tant que la hauteur de défilement n'aura pas atteint cette valeur. |  number |    | 200     |
+| right             | La distance du bord droit                                           | number |                 | 40      |
+| bottom            | La distance du bord gauche                                          | number |                 | 40      |
 
 ### Events
 

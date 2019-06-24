@@ -155,6 +155,7 @@ Spanish documentation is made possible by these community developers:
 
 French documentation is made possible by these community developers:
 - [smalesys](https://github.com/smalesys)
+- [blombard](https://github.com/blombard)
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
