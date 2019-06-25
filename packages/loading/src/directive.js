@@ -26,7 +26,11 @@ loadingDirective.install = Vue => {
 
             ['top', 'left'].forEach(property => {
               const scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
-              el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[scroll] + document.documentElement[scroll] + 'px';
+              el.maskStyle[property] = el.getBoundingClientRect()[property] +
+                document.body[scroll] +
+                document.documentElement[scroll] -
+                parseInt(getStyle(document.body, `margin-${ property }`), 10) +
+                'px';
             });
             ['height', 'width'].forEach(property => {
               el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
@@ -41,6 +45,7 @@ loadingDirective.install = Vue => {
       });
     } else {
       afterLeave(el.instance, _ => {
+        if (!el.instance.hiding) return;
         el.domVisible = false;
         const target = binding.modifiers.fullscreen || binding.modifiers.body
           ? document.body
@@ -76,6 +81,9 @@ loadingDirective.install = Vue => {
         }
       });
       el.domInserted = true;
+    } else if (el.domVisible && el.instance.hiding === true) {
+      el.instance.visible = true;
+      el.instance.hiding = false;
     }
   };
 
@@ -100,7 +108,7 @@ loadingDirective.install = Vue => {
       el.mask = mask.$el;
       el.maskStyle = {};
 
-      toggleLoading(el, binding);
+      binding.value && toggleLoading(el, binding);
     },
 
     update: function(el, binding) {
@@ -117,6 +125,7 @@ loadingDirective.install = Vue => {
         el.mask.parentNode.removeChild(el.mask);
         toggleLoading(el, { value: false, modifiers: binding.modifiers });
       }
+      el.instance && el.instance.$destroy();
     }
   });
 };

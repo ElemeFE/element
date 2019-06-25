@@ -20,4 +20,7 @@ export declare class ElCollapseItem extends ElementUIComponent {
   title: string
 
   $slots: CollapseItemSlots
+
+  /** Disable the collapse item */
+  disabled: boolean
 }

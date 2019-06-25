@@ -2,6 +2,7 @@
   <div class="el-tabs__active-bar" :class="`is-${ rootTabs.tabPosition }`" :style="barStyle"></div>
 </template>
 <script>
+  import { arrayFind } from 'element-ui/src/utils/util';
   export default {
     name: 'TabBar',
 
@@ -13,9 +14,7 @@
 
     computed: {
       barStyle: {
-        cache: false,
         get() {
-          if (!this.$parent.$refs.tabs) return {};
           let style = {};
           let offset = 0;
           let tabSize = 0;
@@ -25,7 +24,7 @@
             return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
           };
           this.tabs.every((tab, index) => {
-            let $el = this.$parent.$refs.tabs[index];
+            let $el = arrayFind(this.$parent.$refs.tabs || [], t => t.id.replace('tab-', '') === tab.paneName);
             if (!$el) { return false; }
 
             if (!tab.active) {

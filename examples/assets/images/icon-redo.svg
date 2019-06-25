@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="12px" viewBox="0 0 13 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>icon-redo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="theme" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="element-theme-editor" transform="translate(-1118.000000, -167.000000)" fill="#606266" fill-rule="nonzero">
+            <g id="custom" transform="translate(1060.000000, 146.000000)">
+                <g id="Group-2" transform="translate(30.000000, 15.000000)">
+                    <g id="Group" transform="translate(0.000000, 4.000000)">
+                        <g id="icon-clockwise" transform="translate(26.000000, 0.000000)">
+                            <path d="M12.2585,3.59833136 L12.2585,2.3085 L13.2585,2.3085 L13.2585,5.6365 L9.9295,5.6365 L9.9295,4.6365 L11.8833737,4.6365 C10.9510824,3.62012881 9.6272717,3.0179 8.2,3.0179 C5.43814237,3.0179 3.2,5.25604237 3.2,8.0179 C3.2,10.7797576 5.43814237,13.0179 8.2,13.0179 C10.9618576,13.0179 13.2,10.7797576 13.2,8.0179 L14.2,8.0179 C14.2,11.3320424 11.5141424,14.0179 8.2,14.0179 C4.88585763,14.0179 2.2,11.3320424 2.2,8.0179 C2.2,4.70375763 4.88585763,2.0179 8.2,2.0179 C9.73531163,2.0179 11.1716793,2.59926473 12.2585,3.59833136 Z" id="icon-redo"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

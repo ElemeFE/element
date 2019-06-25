@@ -61,5 +61,8 @@ export declare class ElPopover extends ElementUIComponent {
   /** Delay of appearance when trigger is hover, in milliseconds */
   openDelay: number
 
+  /** Popover tabindex */
+  tabindex: number
+
   $slots: PopoverSlots
 }

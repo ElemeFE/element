@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 describe('Progress', () => {
   let vm;
@@ -39,7 +39,7 @@ describe('Progress', () => {
     expect(vm.$refs.lineSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.lineSuccess.$el.querySelector('.el-progress__text .el-icon-circle-check')).to.be.exist;
     expect(vm.$refs.lineException.$el.classList.contains('is-exception')).to.be.true;
-    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-cross')).to.be.exist;
+    expect(vm.$refs.lineException.$el.querySelector('.el-progress__text .el-icon-circle-close')).to.be.exist;
 
     expect(vm.$refs.circleSuccess.$el.classList.contains('is-success')).to.be.true;
     expect(vm.$refs.circleSuccess.$el.querySelector('.el-progress__text .el-icon-check')).to.be.exist;
@@ -78,6 +78,14 @@ describe('Progress', () => {
     }, true);
     expect(vm.$el.classList.contains('el-progress--circle')).to.be.true;
   });
+  it('dashboard', () => {
+    vm = createVue({
+      template: `
+        <el-progress type="dashboard" :percentage="50"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.classList.contains('el-progress--dashboard')).to.be.true;
+  });
   it('width', () => {
     vm = createVue({
       template: `
@@ -94,5 +102,90 @@ describe('Progress', () => {
       `
     }, true);
     expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(12);
+  });
+  it('color', () => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="50" color="rgb(0, 0, 0)"></el-progress>
+      `
+    }, true);
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(0, 0, 0)');
+  });
+  it('color is function', async() => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="percentage" :color="customColor"></el-progress>
+      `,
+      data() {
+        return {
+          percentage: 50
+        };
+      },
+      methods: {
+        customColor(percentage) {
+          if (percentage > 50) {
+            return '#13ce66';
+          } else {
+            return '#20a0ff';
+          }
+        },
+        increase() {
+          this.percentage = 60;
+        }
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(32, 160, 255)');
+    vm.increase();
+
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(19, 206, 102)');
+  });
+
+  it('color is array', async() => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="percentage" :color="colors"></el-progress>
+      `,
+      data() {
+        return {
+          percentage: 50,
+          colors: [
+            {color: '#f56c6c', percentage: 20},
+            {color: '#e6a23c', percentage: 40},
+            {color: '#20a0ff', percentage: 60},
+            {color: '#13ce66', percentage: 80},
+            {color: '#6f7ad3', percentage: 100}
+          ]
+        };
+      },
+      methods: {
+        increase() {
+          this.percentage = 70;
+        }
+      }
+    }, true);
+
+    // #20a0ff
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(32, 160, 255)');
+
+    vm.increase();
+    await waitImmediate();
+    // #13ce66
+    expect(vm.$el.querySelector('.el-progress-bar__inner').style.backgroundColor).to.equal('rgb(19, 206, 102)');
+  });
+
+  it('format content', () => {
+    vm = createVue({
+      template: `
+      <el-progress :percentage="50" :format="format"></el-progress>
+      `,
+      methods: {
+        format(percentage) {
+          return `占比${percentage}%`;
+        }
+      }
+    }, true);
+    expect(vm.$el.querySelector('.el-progress__text').innerHTML).to.equal('占比50%');
   });
 });

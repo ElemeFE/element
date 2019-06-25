@@ -36,6 +36,11 @@
 
       visibleArrow: {
         default: true
+      },
+
+      appendToBody: {
+        type: Boolean,
+        default: true
       }
     },
 

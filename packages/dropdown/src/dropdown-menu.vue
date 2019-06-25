@@ -19,6 +19,10 @@
       visibleArrow: {
         type: Boolean,
         default: true
+      },
+      arrowOffset: {
+        type: Number,
+        default: 0
       }
     },
 
@@ -40,8 +44,11 @@
     },
 
     mounted() {
-      this.$parent.popperElm = this.popperElm = this.$el;
-      this.referenceElm = this.$parent.$el;
+      this.dropdown.popperElm = this.popperElm = this.$el;
+      this.referenceElm = this.dropdown.$el;
+      // compatible with 2.6 new v-slot syntax
+      // issue link https://github.com/ElemeFE/element/issues/14345
+      this.dropdown.initDomOperation();
     },
 
     watch: {

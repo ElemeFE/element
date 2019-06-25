@@ -14,6 +14,9 @@ export declare class ElPagination extends ElementUIComponent {
   /** Total page count. Set either total or page-count and pages will be displayed; if you need page-sizes, total is required */
   pageCount: number
 
+  /** Number of pagers */
+  pagerCount: number
+
   /** Current page number */
   currentPage: number
 
@@ -34,4 +37,7 @@ export declare class ElPagination extends ElementUIComponent {
 
   /** Text for the prev button */
   nextText: string
+
+  /** Whether to hide when thers's only one page */ 
+  hideOnSinglePage: boolean
 }

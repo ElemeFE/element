@@ -1,12 +1,13 @@
 @import "mixins/mixins";
 @import "mixins/utils";
 @import "common/var";
+@import "common/transition";
 
 @mixin menu-item {
   height: 56px;
   line-height: 56px;
-  font-size: 14px;
-  color: $--menu-item-color;
+  font-size: $--menu-item-font-size;
+  color: $--menu-item-font-color;
   padding: 0 20px;
   list-style: none;
   cursor: pointer;
@@ -14,6 +15,26 @@
   transition: border-color .3s, background-color .3s, color .3s;
   box-sizing: border-box;
   white-space: nowrap;
+
+  * {
+    vertical-align: middle;
+  }
+
+  i {
+    color: $--color-text-secondary;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: $--menu-item-hover-fill;
+  }
+
+  @include when(disabled) {
+    opacity: 0.25;
+    cursor: not-allowed;
+    background: none !important;
+  }
 }
 
 @include b(menu) {
@@ -22,12 +43,14 @@
   position: relative;
   margin: 0;
   padding-left: 0;
-  background-color: $--menu-item-fill;
+  background-color: $--menu-background-color;
   @include utils-clearfix;
+  &.el-menu--horizontal {
+    border-bottom: solid 1px #e6e6e6;
+  }
 
   @include m(horizontal) {
     border-right: none;
-    border-bottom: solid 1px #e6e6e6;
     & > .el-menu-item {
       float: left;
       height: 60px;
@@ -41,7 +64,8 @@
         color: inherit;
       }
 
-      &:hover, &:focus{
+      &:not(.is-disabled):hover,
+      &:not(.is-disabled):focus{
         background-color: #fff;
       }
     }
@@ -81,21 +105,22 @@
       }
     }
     & .el-menu {
-      & .el-menu-item {
+      & .el-menu-item,
+      & .el-submenu__title {
         background-color: $--color-white;
         float: none;
         height: 36px;
         line-height: 36px;
         padding: 0 10px;
         color: $--color-text-secondary;
-
-        &.is-active {
-          color: $--color-text-primary;
-        }
+      }
+      & .el-menu-item.is-active,
+      & .el-submenu.is-active > .el-submenu__title {
+        color: $--color-text-primary;
       }
     }
-    & .el-menu-item:hover,
-    & .el-menu-item:focus {
+    & .el-menu-item:not(.is-disabled):hover,
+    & .el-menu-item:not(.is-disabled):focus {
       outline: none;
       color: $--color-text-primary;
     }
@@ -168,6 +193,7 @@
     }
     &-right-start {
       margin-left: 5px;
+      margin-right: 5px;
     }
   }
 }
@@ -180,22 +206,6 @@
     text-align: center;
     font-size: 18px;
     vertical-align: middle;
-  }
-  & * {
-    vertical-align: middle;
-  }
-  &:first-child {
-    margin-left: 0;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
-  &:hover, &:focus {
-    outline: none;
-    background-color: $--menu-item-hover-fill;
-  }
-  i {
-    color: $--color-text-secondary;
   }
   @include when(active) {
     color: $--color-primary;
@@ -211,16 +221,7 @@
   padding-left: 0;
 
   @include e(title) {
-    position: relative;
     @include menu-item;
-
-    & * {
-      vertical-align: middle;
-    }
-
-    i {
-      color: $--color-text-secondary;
-    }
 
     &:hover {
       background-color: $--menu-item-hover-fill;
@@ -251,6 +252,14 @@
   @include when(opened) {
     > .el-submenu__title .el-submenu__icon-arrow {
       transform: rotateZ(180deg);
+    }
+  }
+  @include when(disabled) {
+    .el-submenu__title,
+    .el-menu-item {
+      opacity: 0.25;
+      cursor: not-allowed;
+      background: none !important;
     }
   }
   [class^="el-icon-"] {

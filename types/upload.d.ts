@@ -9,13 +9,17 @@ export interface FileListItem {
   status?: FileUploadStatus
 }
 
+export interface ElUploadInternalRawFile extends File {
+  uid: number
+}
+
 export interface ElUploadInternalFileDetail {
   status: FileUploadStatus,
   name: string,
   size: number,
   percentage: number,
   uid: number,
-  raw: File,
+  raw: ElUploadInternalRawFile,
   url?: string
 }
 
@@ -71,19 +75,19 @@ export declare class ElUpload extends ElementUIComponent {
   onRemove: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when uploaded successfully */
-  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when some errors occurs */
-  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when some progress occurs */
-  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when file status change */
   onChange: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function before uploading with the file to be uploaded as its parameter. If false or a Promise is returned, uploading will be aborted */
-  beforeUpload: (file: ElUploadInternalFileDetail) => boolean | Promise<File | boolean>
+  beforeUpload: (file: ElUploadInternalRawFile) => boolean | Promise<File | Blob | boolean>
 
   /** Whether thumbnail is displayed */
   thumbnailMode: boolean
@@ -108,4 +112,13 @@ export declare class ElUpload extends ElementUIComponent {
 
   /** Hook function when limit is exceeded */
   onExceed: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
+
+  /** Clear the upload file list */
+  clearFiles (): void;
+
+  /** Abort specified file */
+  abort (file: ElUploadInternalFileDetail): void
+
+  /** Upload the file list manually */
+  submit ():void;
 }

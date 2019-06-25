@@ -1,20 +1,3 @@
-<template>
-  <transition :name="disableTransitions ? '' : 'el-zoom-in-center'">
-    <span
-      class="el-tag"
-      :class="[
-        type ? 'el-tag--' + type : '',
-        tagSize && `el-tag--${tagSize}`,
-        {'is-hit': hit}
-      ]"
-      :style="{backgroundColor: color}">
-      <slot></slot>
-      <i class="el-tag__close el-icon-close"
-        v-if="closable"
-        @click.stop="handleClose"></i>
-    </span>
-  </transition>
-</template>
 <script>
   export default {
     name: 'ElTag',
@@ -25,17 +8,51 @@
       hit: Boolean,
       disableTransitions: Boolean,
       color: String,
-      size: String
+      size: String,
+      effect: {
+        type: String,
+        default: 'light',
+        validator(val) {
+          return ['dark', 'light', 'plain'].includes(val);
+        }
+      }
     },
     methods: {
       handleClose(event) {
+        event.stopPropagation();
         this.$emit('close', event);
+      },
+      handleClick(event) {
+        this.$emit('click', event);
       }
     },
     computed: {
       tagSize() {
         return this.size || (this.$ELEMENT || {}).size;
       }
+    },
+    render(h) {
+      const { type, tagSize, hit, effect } = this;
+      const classes = [
+        'el-tag',
+        type ? `el-tag--${type}` : '',
+        tagSize ? `el-tag--${tagSize}` : '',
+        effect ? `el-tag--${effect}` : '',
+        hit && 'is-hit'
+      ];
+      const tagEl = (
+        <span
+          class={ classes }
+          style={{ backgroundColor: this.color }}
+          on-click={ this.handleClick }>
+          { this.$slots.default }
+          {
+            this.closable && <i class="el-tag__close el-icon-close" on-click={ this.handleClose }></i>
+          }
+        </span>
+      );
+
+      return this.disableTransitions ? tagEl : <transition name="el-zoom-in-center">{ tagEl }</transition>;
     }
   };
 </script>

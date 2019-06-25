@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: '맞는 데이터가 없습니다',
       loading: '불러오는 중',
-      placeholder: '선택'
+      placeholder: '선택',
+      noData: '데이터 없음'
     },
     pagination: {
       goto: '이동',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: ' 입력하세요',
       noCheckedFormat: '{total} 항목',
       hasCheckedFormat: '{checked}/{total} 선택됨'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Brak dopasowań',
       loading: 'Ładowanie',
-      placeholder: 'Wybierz'
+      placeholder: 'Wybierz',
+      noData: 'Brak danych'
     },
     pagination: {
       goto: 'Idź do',
@@ -82,7 +83,7 @@ export default {
       error: 'Wiadomość zawiera niedozwolone znaki'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'kliknij kasuj aby usunąć',
       delete: 'Kasuj',
       preview: 'Podgląd',
       continue: 'Kontynuuj'
@@ -92,7 +93,7 @@ export default {
       confirmFilter: 'Potwierdź',
       resetFilter: 'Resetuj',
       clearFilter: 'Wszystko',
-      sumText: 'Sum' // to be translated
+      sumText: 'Razem'
     },
     tree: {
       emptyText: 'Brak danych'
@@ -100,10 +101,16 @@ export default {
     transfer: {
       noMatch: 'Brak dopasowań',
       noData: 'Brak danych',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Wpisz szukaną frazę',
+      noCheckedFormat: 'razem: {total}',
+      hasCheckedFormat: 'wybranych: {checked}/{total}'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

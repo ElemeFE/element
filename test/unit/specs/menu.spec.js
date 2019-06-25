@@ -27,6 +27,28 @@ describe('Menu', () => {
       }, 20);
     }, 20);
   });
+  it('background-color', done => {
+    vm = createVue({
+      template: `
+        <el-menu default-active="2"
+          background-color="#f00"
+          text-color="#000"
+          active-text-color="#0f0">
+          <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
+          <el-menu-item index="2" ref="item2">订单管理</el-menu-item>
+        </el-menu>
+      `
+    }, true);
+    expect(vm.$el.style.backgroundColor).to.equal('rgb(255, 0, 0)');
+    expect(vm.$refs.item1.$el.style.backgroundColor).to.equal('rgb(255, 0, 0)');
+    expect(vm.$refs.item1.$el.style.color).to.equal('rgb(0, 0, 0)');
+    expect(vm.$refs.item2.$el.style.color).to.equal('rgb(0, 255, 0)');
+    triggerEvent(vm.$refs.item1.$el, 'mouseenter');
+    setTimeout(_ => {
+      expect(vm.$refs.item1.$el.style.backgroundColor).to.equal('rgb(204, 0, 0)');
+      done();
+    }, 20);
+  });
   it('menu-item click', done => {
     vm = createVue({
       template: `
@@ -55,6 +77,22 @@ describe('Menu', () => {
       done();
     }, 20);
 
+  });
+  it('menu-item disabled', done => {
+    vm = createVue({
+      template: `
+        <el-menu default-active="2">
+          <el-menu-item index="1" ref="item1" disabled>处理中心</el-menu-item>
+          <el-menu-item index="2" ref="item2">订单管理</el-menu-item>
+        </el-menu>
+      `
+    }, true);
+    expect(vm.$refs.item2.$el.classList.contains('is-active')).to.be.true;
+    vm.$refs.item1.$el.click();
+    setTimeout(_ => {
+      expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.false;
+      done();
+    }, 20);
   });
   describe('default active', () => {
     it('normal active', done => {
@@ -216,6 +254,28 @@ describe('Menu', () => {
         done();
       }, 20);
     });
+    it('disabled', done => {
+      vm = createVue({
+        template: `
+          <el-menu>
+            <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
+            <el-submenu index="2" ref="submenu" disabled>
+              <template slot="title">我的工作台</template>
+              <el-menu-item index="2-1">选项1</el-menu-item>
+              <el-menu-item index="2-2" ref="submenuItem2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="3">订单管理</el-menu-item>
+          </el-menu>
+        `
+      }, true);
+      var submenu = vm.$refs.submenu;
+      submenu.$el.querySelector('.el-submenu__title').click();
+      setTimeout(_ => {
+        expect(submenu.$el.classList.contains('is-opened')).to.be.false;
+        done();
+      }, 20);
+    });
   });
   it('unique-opened', done => {
     vm = createVue({
@@ -334,7 +394,6 @@ describe('Menu', () => {
       template: `
           <el-menu :default-active="active">
             <el-menu-item
-              v-ref="menus"
               v-for="menu in menus"
               :index="menu.name"
               :key="menu.name">

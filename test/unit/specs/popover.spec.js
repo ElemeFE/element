@@ -162,7 +162,8 @@ describe('Popover', () => {
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
       vm.$nextTick(_ => {
-        expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
+        const popperElm = compo.popperElm;
+        expect(getComputedStyle(popperElm).display).to.not.equal('none');
         done();
       });
     });
@@ -194,7 +195,8 @@ describe('Popover', () => {
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
       vm.$nextTick(_ => {
-        expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
+        const popperElm = compo.popperElm;
+        expect(getComputedStyle(popperElm).display).to.not.equal('none');
         done();
       });
     });

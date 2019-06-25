@@ -1,56 +1,3 @@
-<style>
-  .demo-box.demo-menu {
-    .el-menu-demo {
-      padding-left: 55px;
-    }
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-      width: 240px;
-      min-height: 400px;
-    }
-    .line {
-      height: 1px;
-      background-color: #e0e6ed;
-      margin: 35px -24px;
-    }
-    h5 {
-      font-size: 14px;
-      color: #8492a6;
-      margin-top: 10px;
-    }
-    .tac {
-      text-align: center;
-
-      .el-menu-vertical-demo {
-        display: inline-block;
-        text-align: left;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1',
-        isCollapse: true
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>
-
 ## NavMenu 导航菜单
 
 为网站提供导航功能的菜单。
@@ -69,8 +16,15 @@
     <el-menu-item index="2-1">选项1</el-menu-item>
     <el-menu-item index="2-2">选项2</el-menu-item>
     <el-menu-item index="2-3">选项3</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">选项4</template>
+      <el-menu-item index="2-4-1">选项1</el-menu-item>
+      <el-menu-item index="2-4-2">选项2</el-menu-item>
+      <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu
@@ -87,8 +41,15 @@
     <el-menu-item index="2-1">选项1</el-menu-item>
     <el-menu-item index="2-2">选项2</el-menu-item>
     <el-menu-item index="2-3">选项3</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">选项4</template>
+      <el-menu-item index="2-4-1">选项1</el-menu-item>
+      <el-menu-item index="2-4-2">选项2</el-menu-item>
+      <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 
 <script>
@@ -145,9 +106,13 @@
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -183,9 +148,13 @@
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -237,9 +206,13 @@
     <i class="el-icon-menu"></i>
     <span slot="title">导航二</span>
   </el-menu-item>
-  <el-menu-item index="3">
-    <i class="el-icon-setting"></i>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
     <span slot="title">导航三</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">导航四</span>
   </el-menu-item>
 </el-menu>
 
@@ -279,13 +252,14 @@
 | text-color  | 菜单的文字颜色（仅支持 hex 格式） | string |   —   | #303133 |
 | active-text-color  | 当前激活菜单的文字颜色（仅支持 hex 格式） | string |   —   | #409EFF |
 | default-active | 当前激活菜单的 index | string    | — | — |
-| default-openeds | 当前打开的sub-menu的 key 数组 | Array    | — | — |
+| default-openeds | 当前打开的 sub-menu 的 index 的数组 | Array    | — | — |
 | unique-opened  | 是否只保持一个子菜单的展开 | boolean   | — | false   |
-| menu-trigger  | 子菜单打开的触发方式(只在 mode 为 horizontal 时有效) | string   | — | hover   |
+| menu-trigger  | 子菜单打开的触发方式(只在 mode 为 horizontal 时有效) | string   | hover / click | hover |
 | router  | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 | boolean   | — | false   |
+| collapse-transition  | 是否开启折叠动画 | boolean   | — | true   |
 
 ### Menu Methods
-| 事件名称      | 说明    | 参数      |
+| 方法名称      | 说明    | 参数      |
 |---------- |-------- |---------- |
 | open  | 展开指定的 sub-menu | index: 需要打开的 sub-menu 的 index |
 | close  | 收起指定的 sub-menu | index: 需要收起的 sub-menu 的 index |
@@ -300,16 +274,19 @@
 ### SubMenu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | 唯一标志   | string  | — | — |
+| index     | 唯一标志   | string/null  | — | null |
 | popper-class | 弹出菜单的自定义类名 | string | — | — |
 | show-timeout | 展开 sub-menu 的延时 | number | — | 300 |
 | hide-timeout | 收起 sub-menu 的延时 | number | — | 300 |
+| disabled  | 是否禁用 | boolean | — | false |
+| popper-append-to-body | 是否将弹出菜单插入至 body 元素。在菜单的定位出现问题时，可尝试修改该属性 | boolean | — | 一级子菜单：true / 非一级子菜单：false |
 
 ### Menu-Item Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | 唯一标志   | string  | — | — |
 | route     | Vue Router 路径对象 | Object | — | — |
+| disabled  | 是否禁用 | boolean | — | false |
 
 ### Menu-Group Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |

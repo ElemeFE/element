@@ -1,139 +1,61 @@
-<style>
-  .demo-box.demo-popover {
-    .el-popover + .el-popover {
-      margin-left: 10px;
-    }
-    .el-input {
-      width: 360px;
-    }
-    .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        visible2: false,
-        gridData: [{
-          date: '2016-05-02',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          date: '2016-05-04',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          date: '2016-05-01',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          date: '2016-05-03',
-          name: 'Jack',
-          address: 'New York City'
-        }],
-        gridData2: [{
-          date: '2016-05-02',
-          name: 'Jack',
-          address: 'New York City',
-        }, {
-          date: '2016-05-04',
-          name: 'Jack',
-          address: 'New York City',
-          $info: true
-        }, {
-          date: '2016-05-01',
-          name: 'Jack',
-          address: 'New York City',
-        }, {
-          date: '2016-05-03',
-          name: 'Jack',
-          address: 'New York City',
-          $positive: true
-        }],
-        gridData3: [{
-          tag: 'Home',
-          date: '2016-05-03',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-02',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-04',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Home',
-          date: '2016-05-01',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-08',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Home',
-          date: '2016-05-06',
-          name: 'Jack',
-          address: 'New York City'
-        }, {
-          tag: 'Company',
-          date: '2016-05-07',
-          name: 'Jack',
-          address: 'New York City'
-        }],
-        singleSelection: {},
-        multipleSelection: [],
-        model: ''
-      };
-    }
-  };
-</script>
-
 ## Popover
 
 ### Uso básico
 
 Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para atributos duplicados, por favor refiérase a la documentación de Tooltip.
 
-:::demo Agrega `ref` al popover, luego en el botón usa la directiva `v-popover` para asociar el botón y el popover. El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click` o `focus`. De manera alternativa puede especificar la referencia utilizando un [slot con nombre](https://vuejs.org/v2/guide/components.html#Named-Slots).
+:::demo El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click`, `focus` o `manual`. En cuanto al elemento desencadenante, puedes escribirlo de dos maneras diferentes: usando el `slot="reference"`[named slot](https://vuejs.org/v2/guide/components.html#Named-Slots), o usando la directiva `v-popover` y poniendo  el `ref` de Popover.
 
 ```html
-<el-popover
-  ref="popover1"
-  placement="top-start"
-  title="Title"
-  width="200"
-  trigger="hover"
-  content="this is content, this is content, this is content">
-</el-popover>
+<template>
+  <el-popover
+    placement="top-start"
+    title="Title"
+    width="200"
+    trigger="hover"
+    content="this is content, this is content, this is content">
+    <el-button slot="reference">Hover to activate</el-button>
+  </el-popover>
 
-<el-popover
-  ref="popover2"
-  placement="bottom"
-  title="Title"
-  width="200"
-  trigger="click"
-  content="this is content, this is content, this is content">
-</el-popover>
+  <el-popover
+    placement="bottom"
+    title="Title"
+    width="200"
+    trigger="click"
+    content="this is content, this is content, this is content">
+    <el-button slot="reference">Click to activate</el-button>
+  </el-popover>
 
-<el-button v-popover:popover1>Hover to activate</el-button>
-<el-button v-popover:popover2>Click to activate</el-button>
-<el-popover
-  placement="right"
-  title="Title"
-  width="200"
-  trigger="focus"
-  content="this is content, this is content, this is content">
-  <el-button slot="reference">Focus to activate</el-button>
-</el-popover>
+  <el-popover
+    ref="popover"
+    placement="right"
+    title="Title"
+    width="200"
+    trigger="focus"
+    content="this is content, this is content, this is content">
+  </el-popover>
+  <el-button v-popover:popover>Focus to activate</el-button>
+
+  <el-popover
+    placement="bottom"
+    title="Title"
+    width="200"
+    trigger="manual"
+    content="this is content, this is content, this is content"
+    v-model="visible">
+    <el-button slot="reference" @click="visible = !visible">Manual to activate</el-button>
+  </el-popover>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        visible: false
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -144,7 +66,6 @@ Otros componentes pueden anidarse dentro de popover. A continuación un ejemplo 
 
 ```html
 <el-popover
-  ref="popover4"
   placement="right"
   width="400"
   trigger="click">
@@ -153,9 +74,8 @@ Otros componentes pueden anidarse dentro de popover. A continuación un ejemplo 
     <el-table-column width="100" property="name" label="name"></el-table-column>
     <el-table-column width="300" property="address" label="address"></el-table-column>
   </el-table>
+  <el-button slot="reference">Click to activate</el-button>
 </el-popover>
-
-<el-button v-popover:popover4>Click to activate</el-button>
 
 <script>
   export default {
@@ -192,30 +112,28 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 :::demo
 ```html
 <el-popover
-  ref="popover5"
   placement="top"
   width="160"
-  v-model="visible2">
+  v-model="visible">
   <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible2 = false">cancel</el-button>
-    <el-button type="primary" size="mini" @click="visible2 = false">confirm</el-button>
+    <el-button size="mini" type="text" @click="visible = false">cancel</el-button>
+    <el-button type="primary" size="mini" @click="visible = false">confirm</el-button>
   </div>
+  <el-button slot="reference">Delete</el-button>
 </el-popover>
-
-<el-button v-popover:popover5>Delete</el-button>
 
 <script>
   export default {
     data() {
       return {
-        visible2: false,
+        visible: false,
       };
     }
   }
 </script>
 ```
-
+:::
 
 ### Atributos
 | Atributo       | Descripción                              | Tipo           | Valores aceptados                        | Por defecto                              |
@@ -226,13 +144,14 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | width          | ancho del popover                        | string, number | —                                        | Min width 150px                          |
 | placement      | posición del popover en la pantalla      | string         | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                   |
 | disabled       | si el popover está deshabilitado         | boolean        | —                                        | false                                    |
-| value(v-model) | si el popover está visible               | Boolean        | —                                        | false                                    |
+| value / v-model | si el popover está visible               | Boolean        | —                                        | false                                    |
 | offset         | popover offset                           | number         | —                                        | 0                                        |
-| transition     | popover transition animation             | string         | —                                        | el-fade-in-linear                        |
+| transition     | animación de transición del popover | string         | —                                        | el-fade-in-linear                        |
 | visible-arrow  | si una flecha del tooltip es mostrada o no. Para más información, por favor refiérase a [Vue-popper](https://github.com/element-component/vue-popper) | boolean        | —                                        | true                                     |
 | popper-options | parámetros para [popper.js](https://popper.js.org/documentation.html) | object         | por favor, refiérase a [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | popper-class   | clase propia para popover                | string         | —                                        | —                                        |
 | open-delay     | retraso de la aparición cuando `trigger` es hover, en milisegundos | number         | —                                        | —                                        |
+| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) de Popover |   number           |      —      |  0    |
 
 ### Slot
 | Nombre    | Descripción                          |
@@ -244,4 +163,6 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | Nombre del evento | Descripción                             | Parámetros |
 | ----------------- | --------------------------------------- | ---------- |
 | show              | se dispara cuando se muestra el popover | —          |
+| after-enter       | se dispara cuando la transición de entrada termina | —       |
 | hide              | se dispara cuando se oculta el popover  | —          |
+| after-leave       | se dispara cuando la transición de salida termina | —        |

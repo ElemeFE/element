@@ -1,5 +1,10 @@
 ## Tema personalizado
-Element utiliza la metodología BEM en CSS con la finalidad de que puedas sobrescribir los estilos fácilmente. Pero, si necesita remplazar estilos a gran escala, por ejemplo, cambiar el color del tema de azul a naranja o verde, quizás reemplazarlos uno a uno no sea lo más adecuado, para ello hay 3 maneras de modificar los estilos.
+Element utiliza la metodología BEM en CSS con la finalidad de que puedas sobrescribir los estilos fácilmente. Pero, si necesita remplazar estilos a gran escala, por ejemplo, cambiar el color del tema de azul a naranja o verde, quizás reemplazarlos uno a uno no sea lo más adecuado, para ello hay 4 maneras de modificar los estilos.
+
+### Online Theme Roller
+Use [Online Theme Roller](./#/es/theme) to customize all Design Tokens of global variables and components，and preview the new theme in real-time.and it can generate a complete style package based on the new theme for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or 'Import component theme on demand' part of this section).
+
+<img src="https://shadow.elemecdn.com/app/sns-client/element-theme-editor2.e16c6a01-806d-11e9-bc23-21435c54c509.png" style="width: 70%;margin: 30px auto 0;display: block;">
 
 ### Cambiando el color del tema
 Si lo que se busca es cambiar el color del tema de Element, se recomienda utilizar el [sitio de visualización de temas](https://elementui.github.io/theme-chalk-preview/#/en-US). Element utiliza un color azul brillante y amigable como tema principal. Al cambiarlo, puede hacer que Element este más conectado visualmente a proyectos específicos.
@@ -29,7 +34,7 @@ Vue.use(Element)
 ```
 
 :::tip
-Nota es necesario sobreescribir la ruta de la fuente por una ruta relativa de las fuentes de Element.
+Nota es necesario sobrescribir la ruta de la fuente por una ruta relativa de las fuentes de Element.
 :::
 
 ### CLI para generar temas
@@ -51,7 +56,7 @@ npm i https://github.com/ElementUI/theme-chalk -D
 ```
 
 #### <strong>Inicializar archivo de variables</strong>
-Después de haber instalado correctamente los paquetes, el comando `et` estará disponible en su CLI (si instalo el paquete de manera local, utilize `node_modules/.bin/et` en su lugar). Ejecute `-i` para inicializar un archivo de variables, puede especificar un nombre distinto, pero por defecto, el archivo se llama `element-variables.scss`. También puede especificar un directorio distinto.
+Después de haber instalado correctamente los paquetes, el comando `et` estará disponible en su CLI (si instalo el paquete de manera local, utilice `node_modules/.bin/et` en su lugar). Ejecute `-i` para inicializar un archivo de variables, puede especificar un nombre distinto, pero por defecto, el archivo se llama `element-variables.scss`. También puede especificar un directorio distinto.
 
 ```shell
 et -i [custom output file]
@@ -110,12 +115,15 @@ Vue.use(ElementUI)
 Si esta utilizando `babel-plugin-component` para importar bajo demanda, solo debe modificar el archivo `.babelrc` y especificar en la propiedad `styleLibraryName` la ruta en donde se encuentra localizado su tema personalizado relativo a `.babelrc`. **Nota** el carácter `~` es obligatorio:
 ```json
 {
-  "plugins": [["component", [
-    {
-      "libraryName": "element-ui",
-      "styleLibraryName": "~theme"
-    }
-  ]]]
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "~theme"
+      }
+    ]
+  ]
 }
 ```
 

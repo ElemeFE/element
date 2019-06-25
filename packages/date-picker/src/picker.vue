@@ -2,11 +2,11 @@
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly"
+    :readonly="!editable || readonly || type === 'dates' || type === 'week'"
     :disabled="pickerDisabled"
     :size="pickerSize"
-    :id="id"
     :name="name"
+    v-bind="firstInputId"
     v-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
@@ -18,8 +18,12 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
-    :prefix-icon="triggerClass"
     ref="reference">
+    <i slot="prefix"
+      class="el-input__icon"
+      :class="triggerClass"
+      @click="handleFocus">
+    </i>
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
@@ -44,22 +48,26 @@
     v-else>
     <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
     <input
+      autocomplete="off"
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
       :disabled="pickerDisabled"
-      :id="id && id[0]"
+      v-bind="firstInputId"
       :readonly="!editable || readonly"
       :name="name && name[0]"
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
       class="el-range-input">
-    <span class="el-range-separator">{{ rangeSeparator }}</span>
+    <slot name="range-separator">
+      <span class="el-range-separator">{{ rangeSeparator }}</span>
+    </slot>
     <input
+      autocomplete="off"
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
       :disabled="pickerDisabled"
-      :id="id && id[1]"
+      v-bind="secondInputId"
       :readonly="!editable || readonly"
       :name="name && name[1]"
       @input="handleEndInput"
@@ -78,7 +86,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
+import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -106,6 +114,7 @@ const DEFAULT_FORMATS = {
   week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
+  monthrange: 'yyyy-MM',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy'
 };
@@ -118,8 +127,10 @@ const HAVE_TRIGGER_TYPES = [
   'month',
   'year',
   'daterange',
+  'monthrange',
   'timerange',
-  'datetimerange'
+  'datetimerange',
+  'dates'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -179,17 +190,9 @@ const TYPE_VALUE_RESOLVER_MAP = {
         : date.replace(/W/, week);
       return date;
     },
-    parser(text) {
-      const array = (text || '').split('w');
-      if (array.length === 2) {
-        const year = Number(array[0]);
-        const month = Number(array[1]);
-
-        if (!isNaN(year) && !isNaN(month) && month < 54) {
-          return text;
-        }
-      }
-      return null;
+    parser(text, format) {
+      // parse as if a normal date
+      return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format);
     }
   },
   date: {
@@ -201,6 +204,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser: DATE_PARSER
   },
   daterange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
+  },
+  monthrange: {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
   },
@@ -238,6 +245,15 @@ const TYPE_VALUE_RESOLVER_MAP = {
         return null;
       }
     }
+  },
+  dates: {
+    formatter(value, format) {
+      return value.map(date => DATE_FORMATTER(date, format));
+    },
+    parser(value, format) {
+      return (typeof value === 'string' ? value.split(', ') : value)
+        .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+    }
   }
 };
 const PLACEMENT_MAP = {
@@ -266,16 +282,36 @@ const formatAsFormatAndType = (value, customFormat, type) => {
   return formatter(value, format);
 };
 
-// only considers date-picker's value: Date or [Date, Date]
+/*
+ * Considers:
+ *   1. Date object
+ *   2. date string
+ *   3. array of 1 or 2
+ */
 const valueEquals = function(a, b) {
+  // considers Date object and string
+  const dateEquals = function(a, b) {
+    const aIsDate = a instanceof Date;
+    const bIsDate = b instanceof Date;
+    if (aIsDate && bIsDate) {
+      return a.getTime() === b.getTime();
+    }
+    if (!aIsDate && !bIsDate) {
+      return a === b;
+    }
+    return false;
+  };
+
   const aIsArray = a instanceof Array;
   const bIsArray = b instanceof Array;
   if (aIsArray && bIsArray) {
-    return new Date(a[0]).getTime() === new Date(b[0]).getTime() &&
-           new Date(a[1]).getTime() === new Date(b[1]).getTime();
+    if (a.length !== b.length) {
+      return false;
+    }
+    return a.every((item, index) => dateEquals(item, b[index]));
   }
   if (!aIsArray && !bIsArray) {
-    return new Date(a).getTime() === new Date(b).getTime();
+    return dateEquals(a, b);
   }
   return false;
 };
@@ -348,7 +384,11 @@ export default {
       default: '-'
     },
     pickerOptions: {},
-    unlinkPanels: Boolean
+    unlinkPanels: Boolean,
+    validateEvent: {
+      type: Boolean,
+      default: true
+    }
   },
 
   components: { ElInput },
@@ -370,17 +410,14 @@ export default {
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
-        this.valueOnOpen = this.value;
+        this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
       } else {
         this.hidePicker();
         this.emitChange(this.value);
-        // flush user input if it is parsable
-        // this.displayValue here is not a typo, it merges text for both panels in range mode
-        const parsedValue = this.parseString(this.displayValue);
-        if (this.userInput && parsedValue && this.isValidValue(parsedValue)) {
-          this.userInput = null;
+        this.userInput = null;
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur');
         }
-        this.dispatch('ElFormItem', 'el.form.blur');
         this.$emit('blur', this);
         this.blur();
       }
@@ -397,6 +434,11 @@ export default {
       // NOTE: should eventually move to jsx style picker + panel ?
       if (this.picker) {
         this.picker.defaultValue = val;
+      }
+    },
+    value(val, oldVal) {
+      if (!valueEquals(val, oldVal) && !this.pickerVisible && this.validateEvent) {
+        this.dispatch('ElFormItem', 'el.form.change', val);
       }
     }
   },
@@ -445,6 +487,8 @@ export default {
         return 'month';
       } else if (this.type === 'year') {
         return 'year';
+      } else if (this.type === 'dates') {
+        return 'dates';
       }
 
       return 'day';
@@ -464,18 +508,33 @@ export default {
           this.userInput[0] || (formattedValue && formattedValue[0]) || '',
           this.userInput[1] || (formattedValue && formattedValue[1]) || ''
         ];
+      } else if (this.userInput !== null) {
+        return this.userInput;
+      } else if (formattedValue) {
+        return this.type === 'dates'
+          ? formattedValue.join(', ')
+          : formattedValue;
       } else {
-        return this.userInput !== null ? this.userInput : formattedValue || '';
+        return '';
       }
     },
 
     parsedValue() {
-      const isParsed = isDateObject(this.value) || (Array.isArray(this.value) && this.value.every(isDateObject));
-      if (this.valueFormat && !isParsed) {
-        return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.rangeSeparator) || this.value;
-      } else {
+      if (!this.value) return this.value; // component value is not set
+      if (this.type === 'time-select') return this.value; // time-select does not require parsing, this might change in next major version
+
+      const valueIsDateObject = isDateObject(this.value) || (Array.isArray(this.value) && this.value.every(isDateObject));
+      if (valueIsDateObject) {
         return this.value;
       }
+
+      if (this.valueFormat) {
+        return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.rangeSeparator) || this.value;
+      }
+
+      // NOTE: deal with common but incorrect usage, should remove in next major version
+      // user might provide string / timestamp without value-format, coerce them into date (or array of date)
+      return Array.isArray(this.value) ? this.value.map(val => new Date(val)) : new Date(this.value);
     },
 
     _elFormItemSize() {
@@ -488,6 +547,28 @@ export default {
 
     pickerDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
+    },
+
+    firstInputId() {
+      const obj = {};
+      let id;
+      if (this.ranged) {
+        id = this.id && this.id[0];
+      } else {
+        id = this.id;
+      }
+      if (id) obj.id = id;
+      return obj;
+    },
+
+    secondInputId() {
+      const obj = {};
+      let id;
+      if (this.ranged) {
+        id = this.id && this.id[1];
+      }
+      if (id) obj.id = id;
+      return obj;
     }
   },
 
@@ -498,6 +579,8 @@ export default {
       gpuAcceleration: false
     };
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+
+    this.$on('fieldReset', this.handleFieldReset);
   },
 
   methods: {
@@ -613,6 +696,7 @@ export default {
     handleClickIcon(event) {
       if (this.readonly || this.pickerDisabled) return;
       if (this.showClose) {
+        this.valueOnOpen = this.value;
         event.stopPropagation();
         this.emitInput(null);
         this.emitChange(null);
@@ -626,7 +710,18 @@ export default {
     },
 
     handleClose() {
+      if (!this.pickerVisible) return;
       this.pickerVisible = false;
+
+      if (this.type === 'dates') {
+        // restore to former value
+        const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.rangeSeparator) || this.valueOnOpen;
+        this.emitInput(oldValue);
+      }
+    },
+
+    handleFieldReset(initialValue) {
+      this.userInput = initialValue === '' ? null : initialValue;
     },
 
     handleFocus() {
@@ -736,9 +831,9 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
-      if (this.format) {
-        this.picker.format = this.format;
-      }
+      this.$watch('format', (format) => {
+        this.picker.format = format;
+      });
 
       const updateOptions = () => {
         const options = this.pickerOptions;
@@ -759,10 +854,14 @@ export default {
             this.picker[option] = options[option];
           }
         }
+
+        // main format must prevail over undocumented pickerOptions.format
+        if (this.format) {
+          this.picker.format = this.format;
+        }
       };
       updateOptions();
       this.unwatchPickerOptions = this.$watch('pickerOptions', () => updateOptions(), { deep: true });
-
       this.$el.appendChild(this.picker.$el);
       this.picker.resetView && this.picker.resetView();
 
@@ -799,10 +898,12 @@ export default {
 
     emitChange(val) {
       // determine user real change only
-      if (val !== this.valueOnOpen) {
+      if (!valueEquals(val, this.valueOnOpen)) {
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
         this.valueOnOpen = val;
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', val);
+        }
       }
     },
 

@@ -1,8 +1,8 @@
-import Vue from 'vue'
+import Vue, { VNode } from 'vue'
 import { MessageType } from './message'
 
-export type MessageBoxCloseAction = 'confirm' | 'cancel'
-export type MessageBoxData = MessageBoxCloseAction | MessageBoxInputData
+export type MessageBoxCloseAction = 'confirm' | 'cancel' | 'close'
+export type MessageBoxData = MessageBoxInputData | MessageBoxCloseAction
 
 export interface MessageBoxInputData {
   value: string,
@@ -17,11 +17,13 @@ export declare class ElMessageBoxComponent extends Vue {
   title: string
   message: string
   type: MessageType
+  iconClass: string
   customClass: string
   showInput: boolean
   showClose: boolean
   inputValue: string
   inputPlaceholder: string
+  inputType: string
   inputPattern: RegExp
   inputValidator: MessageBoxInputValidator
   inputErrorMessage: string
@@ -45,10 +47,13 @@ export interface ElMessageBoxOptions {
   title?: string
 
   /** Content of the MessageBox */
-  message?: string
+  message?: string | VNode
 
   /** Message type, used for icon display */
   type?: MessageType
+
+  /** Custom icon's class */
+  iconClass?: string
 
   /** Custom class name for MessageBox */
   customClass?: string
@@ -67,6 +72,9 @@ export interface ElMessageBoxOptions {
 
   /** Whether to show a confirm button */
   showConfirmButton?: boolean
+
+  /** Whether to show a close button */
+  showClose?: boolean
 
   /** Text content of cancel button */
   cancelButtonText?: string
@@ -110,11 +118,17 @@ export interface ElMessageBoxOptions {
   /** Regexp for the input */
   inputPattern?: RegExp
 
+  /** Input Type: text, textArea, password or number */
+  inputType?: string
+
   /** Validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage */
   inputValidator?: MessageBoxInputValidator
 
   /** Error message when validation fails */
   inputErrorMessage?: string
+
+  /** Whether to distinguish canceling and closing */
+  distinguishCancelAndClose?: boolean
 }
 
 export interface ElMessageBoxShortcutMethod {
@@ -132,7 +146,7 @@ export interface ElMessageBox {
   /** Show an alert message box */
   alert: ElMessageBoxShortcutMethod
 
-  /** Show a comfirm message box */
+  /** Show a confirm message box */
   confirm: ElMessageBoxShortcutMethod
 
   /** Show a prompt message box */

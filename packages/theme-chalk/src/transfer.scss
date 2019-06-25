@@ -155,7 +155,7 @@
   .el-transfer-panel__header {
     height: $--transfer-panel-header-height;
     line-height: $--transfer-panel-header-height;
-    background: $--transfer-panel-header-background;
+    background: $--transfer-panel-header-background-color;
     margin: 0;
     padding-left: 15px;
     border-bottom: 1px solid $--transfer-border-color;
@@ -207,6 +207,7 @@
     line-height: $--transfer-item-height;
     padding: 6px 15px 0;
     color: $--color-text-secondary;
+    text-align: center;
   }
 
   .el-checkbox__label {

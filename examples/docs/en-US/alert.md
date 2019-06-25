@@ -1,22 +1,3 @@
-<script>
-  export default {
-    methods: {
-      hello() {
-        alert('Hello World!');
-      }
-    }
-  }
-</script>
-<style>
-  .demo-box.demo-alert .el-alert {
-    margin: 20px 0 0;
-  }
-
-  .demo-box.demo-alert .el-alert:first-child {
-    margin: 0;
-  }
-</style>
-
 ## Alert
 
 Displays important alert messages.
@@ -44,6 +25,37 @@ Alert components are non-overlay elements in the page that does not disappear au
   <el-alert
     title="error alert"
     type="error">
+  </el-alert>
+</template>
+```
+:::
+
+### Theme
+
+Alert provide two different themes, `light` and `dark`.
+
+:::demo Set `effect` to change theme, default is `light`.
+```html
+<template>
+  <el-alert
+    title="success alert"
+    type="success"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="info alert"
+    type="info"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="warning alert"
+    type="warning"
+    effect="dark">
+  </el-alert>
+  <el-alert
+    title="error alert"
+    type="error"
+    effect="dark">
   </el-alert>
 </template>
 ```
@@ -208,14 +220,20 @@ Description includes a message with more detailed information.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| **title** | title **REQUIRED** | string | — | — |
-| type | component type | string | success/warning/info/error | info |
-| description | descriptive text. Can also be passed with the default slot | string | — | — |
-| closable | if closable or not | boolean | — | true |
-| center | whether to center the text | boolean | — | false |
-| close-text | customized close button text | string | — | — |
-| show-icon | if a type icon is displayed | boolean | — | false |
+| title     | title         | string | — | — |
+| type | Component type | string | success/warning/info/error | info |
+| description | Descriptive text. Can also be passed with the default slot | string | — | — |
+| closable | If closable or not | boolean | — | true |
+| center | Whether to center the text | boolean | — | false |
+| close-text | Customized close button text | string | — | — |
+| show-icon | If a type icon is displayed | boolean | — | false |
+| effect | Choose theme  | string | light/dark | light |
 
+### Slot
+
+| Name | Description |
+|------|--------|
+| title | content of the Alert title |
 
 ### Events
 | Event Name | Description | Parameters |

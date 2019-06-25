@@ -23,12 +23,12 @@ MenuItem.prototype.addListeners = function() {
     switch (event.keyCode) {
       case keys.down:
         Utils.triggerEvent(event.currentTarget, 'mouseenter');
-        this.submenu.gotoSubIndex(0);
+        this.submenu && this.submenu.gotoSubIndex(0);
         prevDef = true;
         break;
       case keys.up:
         Utils.triggerEvent(event.currentTarget, 'mouseenter');
-        this.submenu.gotoSubIndex(this.submenu.subMenuItems.length - 1);
+        this.submenu && this.submenu.gotoSubIndex(this.submenu.subMenuItems.length - 1);
         prevDef = true;
         break;
       case keys.tab:
