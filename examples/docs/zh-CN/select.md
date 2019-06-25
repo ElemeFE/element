@@ -530,6 +530,7 @@
 | clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
+| multiple-selected-hidden | 多选状态下点击下拉框中的某一项后，下拉框是否隐藏 | boolean | - | false |
 | name | select input 的 name 属性 | string | — | — |
 | autocomplete | select input 的 autocomplete 属性 | string | — | off |
 | auto-complete | 下个主版本弃用 | string | — | off |

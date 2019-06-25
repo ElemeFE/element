@@ -285,6 +285,10 @@
         type: Number,
         default: 0
       },
+      multipleSelectedHidden: {
+        type: Boolean,
+        default: false
+      },
       placeholder: {
         type: String,
         default() {
@@ -688,6 +692,7 @@
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
+          if (this.multipleSelectedHidden) this.visible = false;
         } else {
           this.$emit('input', option.value);
           this.emitChange(option.value);
