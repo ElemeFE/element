@@ -1,5 +1,86 @@
 ## Changelog
 
+### 2.10.0
+
+*2019-06-25*
+
+#### New features
+
+- I18n
+  - Added Uzbek language (#15796 by @ogabek96)
+- Calendar
+  - Add first-day-of-week attribute (#16047 by @ziyoung)
+- Avatar
+  - Add avatar component (#16144 by @luckyCao)
+- Upload:
+  - Add capability to customize thumbnail template (#13192 by @victorzhuk)
+
+
+#### Bug fixes
+
+- Tree
+  - Not highlight tree node when currentKey is null (#15668 by @yyjjqq94)
+  - Fix issue #15538 caused by two Tree sharing the same data (#15615 by @VanMess)
+- Upload
+  - Update the parameter `fileList` type (#15716 by @underfin)
+- Table
+  - Fix loading icon not display (#15868 by @ziyoung)
+  - Fix background color of complex table when hovering (#15504 by @cnlon)
+  - Fix current-row-key and select event bug (#15983 by @ziyoung)
+  - Height accepts more units (#16013 by @ziyoung)
+  - Fix reserve-selection not work (#16135 by @ziyoung)
+- Docs
+  - Fix Divider attribute type in zh-cn (#15889 by @haoranyu)
+- Menu
+  - Fixed submenu hidden bug after adding popper-append-to-body (#15391 by @PanJiaChen)
+- Select
+  - Fix initialInputHeight (#15989 by @yyjjqq94)
+  - Fix default-first-option behavior when typing Chinese (#15431 by @VanMess)
+  - fix double import problem (#16215 by @lengband)
+- Message
+  - Add type def for offset option (#16027 by @matjaz)
+- Timeline
+  - Fix reverse broken (#16091 by @ziyoung)
+- Slider
+  - Fix #15545 by adding explains about "input" event in Chinese (#15588 by @VanMess)
+- InfiniteScroll
+  - Update package name (#16125 by @iamkun)
+- MessageBox
+  - Fix  distinguishCancelAndClose action not same as docs bug (#15438 by @qingdengyue)
+- PopupManager
+  - Fix z-index cannot be rewritten at first using (#15738 by @luckyCao)
+- Docs
+  - Delete an incorrect closing html tag and empty block code (#16194 by @Alexeykhr)
+- Chore
+  - Update test api host (#15807 by @iamkun)
+
+#### Optimization
+
+
+- Tree
+  - Modify loop conditions to improve performance (#15699 by @KingJeason)
+- Theme
+  - Refine GA track & Update footer link forward to online theme roller (#16007 by @island205)
+- Badge
+  - Update badge prop check (#16198 by @iamkun)
+- Avatar
+  - Update theme config var (#16202 by @luckyCao)
+- I18n
+  - Update pt-br.js (#15776 by @gigioSouza)
+  - Update Farsi translation (#15881 by @pamenary)
+- Docs
+  - Add missing components in quickstart (#16063 by @pape2016)
+  - Update french translation (#16208 by @blombard)
+  - Add description $slots.default (#15444 by @Alexeykhr)
+  - Update Spanish Doc 2.9.1 (#15840 by @Gonzalo2310)
+  - Fix spelling mistakes in fr (#15837 by @blombard)
+  - Update changelog 2.9.2 Spanish (#16185 by @Gonzalo2310)
+
+#### Breaking changes
+
+- Form
+  - Remove success status (#16159 by @ziyoung)
+
 ### 2.9.2
 
 *2019-06-21*
@@ -186,7 +267,7 @@
   - Fix label style (#14969 by @ziyoung)
   - Required FormItem displays asterisk when label is auto (#15144 by @ziyoung)
 - Pagination
-  -  Fix slot not updated (#14711 by @lucyhao)
+  - Fix slot not updated (#14711 by @lucyhao)
 - Table
   - Fix load bug in lazy mode (#15101 by @ziyoung)
   - Fix cell width when colspan is grater than 1 (#15196 by @ziyoung)
@@ -422,7 +503,7 @@ Docs
   - Optimize code (by @KAionro in #14413)
 - Docs
   - Add more detail about how to run play mode for contribution (by @island205 in #14355)
-  - Warn input as a controlled component. (by @wacky6 in #14463)
+  - Warn input as a controlled component (by @wacky6 in #14463)
   - Update Table doc (by @luguokong in #14329)
   - Update input doc (by @iamkun in #14437)
   - Update custom-theme docs (by @wangguohao in #14297)
@@ -449,7 +530,7 @@ Docs
 - Tree
   - Empty-text tips are different from tables (by @ColinCll in #14331)
 - Docs
-  - Fix  DatetimePicker format doc error (by @iamkun in #14290)
+  - Fix DatetimePicker format doc error (by @iamkun in #14290)
   - Spelling issue in datepicker documentation (by @helmut in #14481)
   - Fix pagination doc style (by @liuchuzhang in #14451)
 
@@ -493,7 +574,7 @@ Docs
 - Build:
   - Delete unremoved comments in umd module `lib/index.js` (by @island205 in #14233)
   - Fix export error fired in commonjs module used in nuxt.js (by @island205 in #14232)
-  - Fix 2.5.1 build issues  (by @iamkun in #14228)
+  - Fix 2.5.1 build issues (by @iamkun in #14228)
 
 ### 2.5.1
 
@@ -524,7 +605,7 @@ Docs
 #### Optimization
 - Upgrade to webpack@4 (by @jikkai in #14173)
 - Input
-  - Simplify implementation, follow one-way data flow. Fix several related bugs. (by @wacky6 in #13471)
+  - Simplify implementation, follow one-way data flow. Fix several related bugs (by @wacky6 in #13471)
 - Update Axure file，add new components (by @ziyoung in #13773)
 
 #### Bug fixes
@@ -618,7 +699,7 @@ Docs
 
 *2018-10-26*
 
-- The parameter of Form's  `clearValidate`  supports string, #12990 (by @codinglobster)
+- The parameter of Form's `clearValidate` supports string, #12990 (by @codinglobster)
 - Added type attribute for Badge, #12991
 - Users can use scoped-slot to customize table column header #13012 (by @ivanseidel)
 - Fixed the input box of Select unable to type text under IE, #13034 (by @GaliMU)
