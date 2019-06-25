@@ -263,6 +263,23 @@ describe('Upload', () => {
         requests[0].respond(200, {}, `${files[0].name}`);
       }, 100);
     });
+    it('beforeUpload return promise<false>', done => {
+      const spy = sinon.spy();
+      handlers.beforeRemove = (file) => {
+        expect(spy.calledOnce).to.equal(true);
+        expect(uploader.uploadFiles.length).to.equal(1);
+        done();
+      };
+      const file = new Blob([JSON.stringify({}, null, 2)], {
+        type: 'application/json'
+      });
+      const files = [file];
+      handlers.beforeUpload = (file) => {
+        spy();
+        return Promise.resolve(false);
+      };
+      uploader.$refs['upload-inner'].handleChange({ target: { files }});
+    });
     it('beforeRemove return rejected promise', done => {
       const spy = sinon.spy();
       handlers.beforeRemove = (file) => {

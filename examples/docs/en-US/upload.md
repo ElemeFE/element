@@ -358,7 +358,7 @@ on-success | hook function when uploaded successfully | function(response, file,
 on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
 on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
 on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
+before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` resolves with `false` or a `Promise` rejected is returned, uploading will be aborted | function(file) | — | —
 before-remove | hook function before removing a file with the file and file list as its parameters. If `false` is returned or a `Promise` is returned and then is rejected, removing will be aborted. | function(file, fileList) | — | — |
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []

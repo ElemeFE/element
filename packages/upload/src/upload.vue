@@ -93,7 +93,9 @@ export default {
         before.then(processedFile => {
           const fileType = Object.prototype.toString.call(processedFile);
 
-          if (fileType === '[object File]' || fileType === '[object Blob]') {
+          if (processedFile === false) {
+            this.onRemove(null, rawFile);
+          } else if (fileType === '[object File]' || fileType === '[object Blob]') {
             if (fileType === '[object Blob]') {
               processedFile = new File([processedFile], rawFile.name, {
                 type: rawFile.type
