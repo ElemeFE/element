@@ -52,6 +52,10 @@
               "title": "Container 布局容器"
             },
             {
+              "path": "/frame",
+              "title": "Frame 骨架"
+            },
+            {
               "path": "/color",
               "title": "Color 色彩"
             },
