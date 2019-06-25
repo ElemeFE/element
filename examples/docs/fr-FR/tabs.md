@@ -68,7 +68,7 @@ Les onglets peuvent être stylisés comme des cartes.
 
 ### Style carte avec bordure
 
-ONglets avec style de carte et bordure.
+Onglets avec style de carte et bordure.
 
 :::demo Mettez `type` à `border-card`.
 

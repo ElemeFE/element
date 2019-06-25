@@ -144,7 +144,7 @@ Vous pouvez ajouter plus de modules suivant vos besoins.
 ```
 :::
 
-### Cacher la pagination si il n'y a qu'une seule page
+### Cacher la pagination s'il n'y a qu'une seule page
 
 Lorsqu'il n'y a qu'une seule page, il est possible de cacher la pagination avec l'attribut `hide-on-single-page`.
 

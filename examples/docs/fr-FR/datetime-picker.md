@@ -1,6 +1,6 @@
 ## DateTimePicker
 
-Selectionnez une date et un heure dans un seul picker.
+Sélectionnez une date et une heure dans un seul picker.
 
 :::tip
 DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'informations sur `pickerOptions` et d'autres attributs, vous pouvez vous référer à DatePicker et TimePicker.
@@ -46,19 +46,19 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
       return {
         pickerOptions: {
           shortcuts: [{
-            text: 'Today',
+            text: 'Aujourdh\'ui',
             onClick(picker) {
               picker.$emit('pick', new Date());
             }
           }, {
-            text: 'Yesterday',
+            text: 'Hier',
             onClick(picker) {
               const date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24);
               picker.$emit('pick', date);
             }
           }, {
-            text: 'A week ago',
+            text: 'Il y a une semaine',
             onClick(picker) {
               const date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
@@ -112,7 +112,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
       return {
         pickerOptions: {
           shortcuts: [{
-            text: 'Last week',
+            text: 'La semaine passée',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -120,7 +120,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'Last month',
+            text: 'Le mois dernier',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -128,7 +128,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'Last 3 months',
+            text: 'Les 2 derniers mois',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -207,8 +207,8 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |
 | range-separator | Séparateur de plage. | string | - | '-' |
 | default-value | Date par défaut du calendrier, optionnelle. | Date | N'importe quelle valeur acceptée par `new Date()` | — |
-| default-time | L'horaire par défaut après avoir choisi une date. | normal: string / plage de dates: string[] | normal: un string tel que `12:00:00`, range: tableau de deux strings, le premier pour la date de début, le deuxième pour la date de fin. Si non-spécifié, `00:00:00` est utilisé. | — |
-| value-format | Format de la variable stockée, optionnel. Si non-spécifié, La valeur sera un objet Date. | string | Voir [formats de date](#/fr-FR/component/date-picker#formats-de-date) | — |
+| default-time | L'horaire par défaut après avoir choisi une date. | normal: string / plage de dates: string[] | normal: un string tel que `12:00:00`, range: tableau de deux strings, le premier pour la date de début, le deuxième pour la date de fin. Si non spécifié, `00:00:00` est utilisé. | — |
+| value-format | Format de la variable stockée, optionnel. Si non spécifié, La valeur sera un objet Date. | string | Voir [formats de date](#/fr-FR/component/date-picker#formats-de-date) | — |
 | name | Identique au `name` de l'input natif | string | — | — |
 | unlink-panels | Rend indépendants les deux panneaux de plage de dates | boolean | — | false |
 | prefix-icon | Icône de préfixe. | string | — | el-icon-date |
@@ -217,9 +217,9 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
 ### Options du Picker
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
-| disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
-| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
+| shortcuts | Un tableau d'objets { text, onClick } pour mettre en place des raccourcis, vérifier le tableau ci-dessous | object[] | — | — |
+| disabledDate | Une fonction déterminant si une date est désactivée avec cette date en paramètre. Retourne un Boolean | function | — | — |
+| firstDayOfWeek | Le premier jour de la semaine | Number | 1 à 7 | 7 |
 
 ### Raccourcis
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |

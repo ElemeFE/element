@@ -1,6 +1,6 @@
 ## Message
 
-Utilisé pour avoir un retour après une action particulière. La différence avec Notification est que ce-dernier est surtout utilisé pour afficher des notifications système passives.
+Utilisé pour avoir un retour après une action particulière. La différence avec Notification est que ce dernier est surtout utilisé pour afficher des notifications système passives.
 
 ### Usage
 

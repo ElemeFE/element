@@ -1,9 +1,9 @@
 ## InfiniteScroll
 
-Load more data while reach bottom of the page
+Charge plus de données quand le bas de la page est atteint
 
-### Basic usage
-Add `v-infinite-scroll` to the list to automatically execute loading method when scrolling to the bottom.
+### Utilisation de base
+Ajoutez `v-infinite-scroll` à la liste pour exécuter automatiquement la méthode de chargement lors du défilement vers le bas.
 :::demo
 ```html
 <template>
@@ -29,7 +29,7 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 ```
 :::
 
-### Disable Loading
+### Désactiver le chargement
 
 :::demo
 ```html
@@ -42,7 +42,7 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
       <li v-for="i in count" class="list-item">{{ i }}</li>
     </ul>
     <p v-if="loading">Loading...</p>
-    <p v-if="noMore">No more</p>
+    <p v-if="noMore">Pas plus</p>
   </div>
 </template>
 
@@ -77,11 +77,11 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 :::
 
 
-### Attributes
+### Attributs
 
-| Attribute | Description | Type  | Accepted values | Default   |
+| Attribut | Description | Type  | Valeur acceptées | Défaut   |
 | -------------- | ------------------------------ | --------- | ------------------------------------ | ------- |
-| infinite-scroll-disabled | is disabled           | boolean      | - |false |
-| infinite-scroll-delay   | throttle delay (ms)   | number       |   - |200   |
-| infinite-scroll-distance| trigger distance (px) | number   |- |0 |
-| infinite-scroll-immediate |Whether to execute the loading method immediately, in case the content cannot be filled up in the initial state. | boolean | - |true |
+| infinite-scroll-disabled | Est désactivé           | boolean      | - |false |
+| infinite-scroll-delay   | Throttle le delais (ms)   | number       |   - |200   |
+| infinite-scroll-distance| Distance de déclenchement (px) | number   |- |0 |
+| infinite-scroll-immediate | S'il faut exécuter la méthode de chargement immédiatement, au cas où le contenu ne pourrait pas être set à l'état initial. | boolean | - |true |

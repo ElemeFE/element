@@ -230,7 +230,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 | label | Label pour les lecteurs d'écran. | string | — | — |
 | debounce | Délai après écriture en millisecondes, marche quand `show-input` est `true`. | number | — | 300 |
 | tooltip-class | Classe du tooltip. | string | — | — |
-| marks | Marqueurs， les clés doivent être des `number` et être comprises dans l'intervalle `[min, max]`. Chaque marqueur peut avoir un style particulier. | object | — | — |
+| marks | Marqueurs, les clés doivent être des `number` et être comprises dans l'intervalle `[min, max]`. Chaque marqueur peut avoir un style particulier. | object | — | — |
 
 ## Évènements
 
