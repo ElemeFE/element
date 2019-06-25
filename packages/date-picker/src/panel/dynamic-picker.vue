@@ -457,8 +457,10 @@
       },
 
       value(newVal) {
-        if (Array.isArray(newVal) && this.panelSwitch !== 'double') {
+        if (Array.isArray(newVal)) {
           this.panelSwitch = 'double';
+        } else {
+          this.panelSwitch = 'single';
         }
 
         if (!newVal) {
@@ -486,6 +488,14 @@
             this.leftDate = calcDefaultValue(this.defaultValue)[0];
             this.rightDate = nextMonth(this.leftDate);
           }
+        } else {
+          this.minDate = null;
+          this.maxDate = null;
+
+          const singleValue = new Date(newVal);
+          this.leftDate = calcDefaultValue(singleValue)[0];
+          this.rightDate = nextMonth(this.leftDate);
+          this.date = modifyDate(this.date, singleValue.getFullYear(), singleValue.getMonth(), singleValue.getDate());
         }
       },
 

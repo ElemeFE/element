@@ -170,7 +170,7 @@ const DYNAMIC_FORMATTER = function(value, format) {
     const end = value[1];
 
     if (start && end) {
-      return DATE_FORMATTER(start, format) + ' - ' + DATE_FORMATTER(end, format);
+      return [DATE_FORMATTER(start, format), DATE_FORMATTER(end, format)];
     }
   } else {
     return DATE_FORMATTER(value, format);
@@ -189,17 +189,17 @@ const RANGE_PARSER = function(array, format, separator) {
   }
   return [];
 };
-const DYNAMIC_PARSER = function(array, format, separator) {
-  if (!Array.isArray(array)) {
-    array = array.split(separator);
+const DYNAMIC_PARSER = function(value, format) {
+  if (!Array.isArray(value)) {
+    return DATE_PARSER(value, format);
   }
-  if (array.length === 2) {
-    const range1 = array[0];
-    const range2 = array[1];
+  if (value.length === 2) {
+    const range1 = value[0];
+    const range2 = value[1];
 
     return [DATE_PARSER(range1, format), DATE_PARSER(range2, format)];
   }
-  return [];
+  return '';
 };
 const TYPE_VALUE_RESOLVER_MAP = {
   default: {

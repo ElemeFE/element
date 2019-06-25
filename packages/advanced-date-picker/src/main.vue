@@ -16,7 +16,9 @@
                       size="extra-large"
                       :disable-old-date="disableOldDate"
                       :disabled-date="disabledDate"
-                      :default-value="defaultValue"/>
+                      :default-value="defaultValue"
+                      :format="format"
+                      :value-format="valueFormat" />
       <div slot="reference"
            @keyup.enter="onEnterKeyUp">
         <tm-input v-if="isEditable"
@@ -30,6 +32,7 @@
                   @blur="isEditable = false"
                   @focus="$refs.datePicker.focus()"
                   @clear="date = null; inputDate = null"
+                  @change="onReferenceChange"
                   v-mask="customMask">
           <tm-icon name="calendar"></tm-icon>
         </tm-input>
@@ -55,34 +58,34 @@
   import TmInput from 'tmconsulting-ui/packages/input';
   import TmDatePicker from 'tmconsulting-ui/packages/date-picker/src/picker/date-picker';
   import countBy from 'lodash/countBy';
+  import isEqual from 'lodash/isEqual';
 
   moment.locale('ru');
 
   const SINGLE = 'single';
   const DOUBLE = 'double';
   const DATE_LENGTH = 10;
-  const DATE_FORMATS = {
-    EDIT: 'DD.MM.YYYY',
-    READ: 'D MMMM'
-  };
+  const RANGE_SEPARATOR = ' - ';
 
   const DEFAULT_PLACEHOLDER_TEXT = 'Выберите дату';
 
-  const getValidity = selectedDate => {
-    const isYear = moment().isSame(selectedDate, 'year')
-      ? true
-      : moment().isBefore(selectedDate, 'year');
-    const isMonth = moment().isSame(selectedDate, 'month')
-      ? true
-      : moment().isBefore(selectedDate, 'month');
+  const MASK_TOKENS = {
+    '#': { pattern: /\d/ }
+  };
+
+  const getOldDateValidity = selectedDate => {
+    const isYear = moment().isSame(selectedDate, 'year') || moment().isBefore(selectedDate, 'year');
+    const isMonth = moment().isSame(selectedDate, 'month') || moment().isBefore(selectedDate, 'month');
     const isDay = moment().isBefore(selectedDate, 'day');
 
     return isDay && isMonth && isYear;
   };
 
-  const isDateValid = date => {
-    const selectedDate = moment(date, DATE_FORMATS.EDIT);
-    return selectedDate.isValid() && getValidity(selectedDate);
+  const isDateValid = (date, format, isOldDateDisabled) => {
+    const selectedDate = moment(date, format);
+    return isOldDateDisabled
+      ? selectedDate.isValid() && getOldDateValidity(selectedDate)
+      : selectedDate.isValid();
   };
 
   const countStringSymbols = (str, ch) => countBy(str)[ch] || 0;
@@ -107,7 +110,7 @@
     }
   };
 
-  const validateRules = (dates, mode) => {
+  const validateRules = (dates, mode, format, isOldDateDisabled) => {
     const dateLength = dates === null ? 0 : (mode === SINGLE ? dates.length : dates.join('').length);
 
     return {
@@ -115,19 +118,28 @@
         ? dateLength === DATE_LENGTH
         : dateLength === (DATE_LENGTH * 2) + getSpacesLength(dates),
       isDateValid: mode === SINGLE
-        ? isDateValid(dates)
-        : dates.reduce((curr, date) => curr && isDateValid(date.trim()), true)
+        ? isDateValid(dates, format, isOldDateDisabled)
+        : dates.reduce((curr, date) => curr && isDateValid(date.trim(), format, isOldDateDisabled), true)
     };
   };
 
-  const validateInput = (mode, dates) => {
-    const rules = Object.values(validateRules(dates, mode));
+  const validateInput = (mode, dates, format, isOldDateDisabled) => {
+    const rules = Object.values(validateRules(dates, mode, format, isOldDateDisabled));
     return rules.reduce((curr, next) => curr && next, true);
   };
 
-  const getDate = value => moment
-    .tz(value, moment.tz.guess())
-    .format(DATE_FORMATS.EDIT);
+  const getDate = (value, resultFormat, originFormat) => {
+    let date;
+    if (moment.isDate(value)) {
+      date = moment.tz(value, moment.tz.guess());
+    } else if (originFormat) {
+      date = moment.tz(value, originFormat, moment.tz.guess());
+    } else {
+      date = moment.tz(value, resultFormat, moment.tz.guess());
+    }
+
+    return date.format(resultFormat);
+  };
 
   export default {
     name: 'TmAdvancedDatePicker',
@@ -141,12 +153,27 @@
     },
 
     watch: {
+      value: {
+        handler(value, oldValue) {
+          if (!isEqual(value, oldValue)) {
+            this.date = value;
+          }
+        },
+        deep: true
+      },
       date: {
         handler(value) {
           if (value) {
+            this.type = Array.isArray(value) ? DOUBLE : SINGLE;
+            this.updateInputDate(value);
             this.$emit('date-changed', value);
+            this.$emit('input', value);
           }
-        }
+        },
+        deep: true
+      },
+      type(value) {
+        this.$emit('typechange', value);
       }
     },
 
@@ -161,14 +188,14 @@
       },
       disableOldDate: {
         type: Boolean,
-        default: true
+        default: false
       },
       disabledDate: {
         type: Function,
         default: null
       },
       defaultValue: {},
-      localStorageDate: {
+      value: {
         type: [Array, Date, String],
         default: null
       },
@@ -187,6 +214,20 @@
       suffixIcon: {
         type: String,
         default: ''
+      },
+      format: {
+        type: String,
+        default: 'yyyy-MM-dd'
+      },
+      valueFormat: {
+        type: String,
+        default: ''
+      }
+    },
+
+    mounted() {
+      if (this.value) {
+        this.date = this.value;
       }
     },
 
@@ -194,24 +235,28 @@
       type: SINGLE,
       date: null,
       inputDate: null,
-      value: null,
       isEditable: false
     }),
-
-    mounted() {
-      this.date = this.localStorageDate;
-      if (Array.isArray(this.date)) this.type = DOUBLE;
-      if (this.date) this.onChange(this.date);
-    },
 
     computed: {
       prefixIconName() {
         return this.suffixIcon ? '' : this.prefixIcon;
       },
 
+      momentFormat() {
+        return this.format.replace(/d/g, 'D').replace(/y/g, 'Y');
+      },
+
+      momentValueFormat() {
+        return this.valueFormat.replace(/d/g, 'D').replace(/y/g, 'Y');
+      },
+
       isInputDateValid() {
-        const dates = this.type === SINGLE ? this.inputDate : this.inputDate.split('-');
-        return validateInput(this.type, dates);
+        if (this.type === SINGLE) {
+          return this.doValidateInput(this.type, this.inputDate);
+        }
+        const dates = this.inputDate ? this.inputDate.split(RANGE_SEPARATOR) : [];
+        return this.doValidateInput(this.type, dates);
       },
 
       inputClassName() {
@@ -234,29 +279,41 @@
 
       blurValue() {
         if (Array.isArray(this.date)) {
-          return this.date.map(getDate).join(' - ');
+          return this.date.map(this.getMomentFormatDate).join(RANGE_SEPARATOR);
         }
-
-        return getDate(this.date);
+        return this.getMomentFormatDate(this.date);
       },
 
       dateMask() {
-        const dateMask = 'D#.##.####';
-        return Array.isArray(this.date) ? `${dateMask} - ${dateMask}` : dateMask;
+        let dateMask = this.format.toLowerCase();
+        dateMask = dateMask.replace(/\w/g, '#');
+
+        return Array.isArray(this.date)
+          ? `${dateMask} - ${dateMask}`
+          : dateMask;
       },
 
       customMask() {
         return {
           mask: this.dateMask,
-          tokens: {
-            D: { pattern: /[0-3]/ },
-            '#': { pattern: /\d/ }
-          }
+          tokens: MASK_TOKENS
         };
       }
     },
 
     methods: {
+      checkDataValid(value) {
+        return isDateValid(value, this.momentFormat, this.disableOldDate);
+      },
+      doValidateInput(type, value) {
+        return validateInput(type, value, this.momentFormat, this.disableOldDate);
+      },
+      getConvertedMomentToDate(value) {
+        return moment(value, this.momentFormat).toDate();
+      },
+      getMomentFormatDate(value) {
+        return getDate(value, this.momentFormat, this.momentValueFormat);
+      },
       onEnterKeyUp() {
         switch (this.type) {
           case SINGLE:
@@ -268,24 +325,33 @@
         }
         this.isEditable = false;
       },
-      handleSingle(value) {
-        if (value.length === DATE_LENGTH) {
-          const [month, day, year] = value.split('.');
-          if (isDateValid(value)) {
-            this.date = new Date(`${day}.${month}.${year}`);
-            this.close();
-          } else {
-            this.inputDate = null;
-          }
-
-          const picker = this.$refs.datePicker.picker;
-          picker.date = this.date;
-          picker.leftDate = this.date;
+      onReferenceChange() {
+        switch (this.type) {
+          case SINGLE:
+            this.handleSingle(this.inputDate);
+            break;
+          case DOUBLE:
+            this.handleDouble(this.inputDate);
+            break;
         }
+      },
+      handleSingle(value) {
+        if (value.length !== DATE_LENGTH) { return; }
+        if (!this.checkDataValid(value)) {
+          this.clear();
+          return;
+        }
+
+        this.date = this.getConvertedMomentToDate(value);
+        this.close();
+
+        const picker = this.$refs.datePicker.picker;
+        picker.date = this.date;
+        picker.leftDate = this.date;
       },
       handleDouble(value) {
         const results = [];
-        const dates = value.split('-');
+        const dates = value.split(RANGE_SEPARATOR);
         const isTwo = dates.length === 2;
         if (!isTwo) this.inputDate = null;
 
@@ -295,13 +361,12 @@
         const newRange = [];
         dates.forEach(dateItem => {
           const dateString = dateItem.trim();
-          const [day, month, year] = dateString.split('.');
-          if (isDateValid(dateString)) {
-            newRange.push(new Date(`${month}.${day}.${year}`));
+          if (this.checkDataValid(dateString)) {
+            newRange.push(this.getConvertedMomentToDate(dateItem));
           } else {
             this.inputDate = null;
           }
-          results.push(isDateValid(dateString));
+          results.push(this.checkDataValid(dateString));
         });
 
         this.date = newRange;
@@ -316,11 +381,13 @@
         picker.rightDate = new Date(rightDate);
         if (isAvailableToClose) this.close();
       },
-      onChange(value) {
+      updateInputDate(value) {
         this.inputDate = Array.isArray(value)
-          ? value.map(getDate).join(' - ')
-          : getDate(value);
-
+          ? value.map(this.getMomentFormatDate).join(RANGE_SEPARATOR)
+          : this.getMomentFormatDate(value);
+      },
+      onChange(value) {
+        this.updateInputDate(value);
         this.isEditable = false;
         this.close();
       },
@@ -330,7 +397,6 @@
       },
       onTypeChanged(type) {
         this.type = type;
-        this.$emit('typechange', type);
       },
       focus() {
         this.$refs.popover.doShow();
