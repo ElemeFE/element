@@ -47,6 +47,9 @@
       },
       value() {
         return this.node.getValueByOption();
+      },
+      uids() {
+        return this.node.uids;
       }
     },
 
@@ -75,8 +78,8 @@
       },
 
       handleCheckChange() {
-        const { panel, value } = this;
-        panel.handleCheckChange(value);
+        const { panel, value, uids } = this;
+        panel.handleCheckChange(value, uids);
       },
 
       handleMultiCheckChange(checked) {
