@@ -228,7 +228,7 @@
       color: #FFF;
       text-align: center;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -423,6 +423,9 @@
         this.showIntroB = false;
       },
       hideIntroA() {
+        const themeTab = document.querySelector('.nav-item-theme');
+        this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2);
+        this.introBY = themeTab.offsetTop + 40;
         this.showIntroA = false;
         this.showIntroB = true;
       }
@@ -443,9 +446,6 @@
     mounted() {
       window.addEventListener('scroll', this.throttledHandleScroll);
       if (localStorage.getItem('KNOW_THEME')) return;
-      const themeTab = document.querySelector('.nav-item-theme');
-      this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2);
-      this.introBY = themeTab.offsetTop + 40;
       this.showIntroA = true;
       addClass(document.body, 'el-loading-parent--hidden');
     }
