@@ -106,6 +106,7 @@ export default {
   data() {
     return {
       checkedValue: null,
+      uids: null,
       checkedNodePaths: [],
       store: [],
       menus: [],
@@ -151,6 +152,7 @@ export default {
         this.checkStrictly && this.calculateCheckedNodePaths();
         this.$emit('input', val);
         this.$emit('change', val);
+        this.$emit('trigger-uid-change', this.uids);
       }
     }
   },
@@ -278,8 +280,9 @@ export default {
         this.$emit('expand-change', pathValues);
       }
     },
-    handleCheckChange(value) {
+    handleCheckChange(value, uids) {
       this.checkedValue = value;
+      this.uids = uids;
     },
     lazyLoad(node, onFullfiled) {
       const { config } = this;
@@ -321,6 +324,9 @@ export default {
     },
     getNodeByValue(val) {
       return this.store.getNodeByValue(val);
+    },
+    getNodeByUid(uid) {
+      return this.store.getNodeByUid(uid);
     },
     getFlattedNodes(leafOnly) {
       const cached = !this.config.lazy;

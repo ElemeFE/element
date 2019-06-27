@@ -24,6 +24,7 @@ export default class Node {
     this.pathNodes = this.calculatePathNodes();
     this.path = this.pathNodes.map(node => node.value);
     this.pathLabels = this.pathNodes.map(node => node.label);
+    this.uids = this.pathNodes.map(node => node.uid);
 
     // lazy load
     this.loading = false;

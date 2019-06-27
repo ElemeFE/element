@@ -79,6 +79,7 @@
           :border="false"
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
+          @trigger-uid-change="handleUidChange"
           @close="toggleDropDownVisible(false)"></el-cascader-panel>
         <el-scrollbar
           ref="suggestionPanel"
@@ -232,6 +233,7 @@ export default {
     return {
       dropDownVisible: false,
       checkedValue: this.value || null,
+      uids: null,
       inputHover: false,
       inputValue: null,
       presentText: null,
@@ -445,6 +447,9 @@ export default {
       this.$emit('expand-change', value);
       this.$emit('active-item-change', value); // Deprecated
     },
+    handleUidChange(uids) {
+      this.uids = uids;
+    },
     focusFirstNode() {
       this.$nextTick(() => {
         const { filtering } = this;
@@ -481,7 +486,13 @@ export default {
     computePresentText() {
       const { checkedValue, config } = this;
       if (!isEmpty(checkedValue)) {
-        const node = this.panel.getNodeByValue(checkedValue);
+        let node;
+        if (this.uids && this.uids.length) {
+          node = this.panel.getNodeByUid(this.uids[this.uids.length - 1]);
+        } else {
+          node = this.panel.getNodeByValue(checkedValue);
+        }
+
         if (node && (config.checkStrictly || node.isLeaf)) {
           this.presentText = node.getText(this.showAllLevels, this.separator);
           return;

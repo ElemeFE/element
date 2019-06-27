@@ -60,4 +60,13 @@ export default class Store {
     return null;
   }
 
+  getNodeByUid(uid) {
+    if (uid) {
+      const nodes = this.getFlattedNodes(false, !this.config.lazy)
+        .filter(node => node.uid === uid);
+      return nodes && nodes.length ? nodes[0] : null;
+    }
+    return null;
+  }
+
 }
