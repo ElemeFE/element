@@ -4,7 +4,7 @@
 
 安装主题
 ```sh
-yarn add @femessage/theme-deepexi --registry http://levy.ren:4873
+yarn add @femessage/theme-deepexi 
 ```
 
 修改nuxt.config.js
