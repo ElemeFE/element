@@ -106,7 +106,7 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
-        v-show="visible && emptyText !== false">
+        v-show="keepDropdown || visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
@@ -293,6 +293,7 @@
       },
       defaultFirstOption: Boolean,
       reserveKeyword: Boolean,
+      keepDropdown: Boolean,
       valueKey: {
         type: String,
         default: 'value'
@@ -842,6 +843,7 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
+      if (this.keepDropdown) this.visible = true;
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
