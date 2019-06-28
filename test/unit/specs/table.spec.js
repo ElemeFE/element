@@ -1753,6 +1753,7 @@ describe('Table', () => {
           vm.$nextTick(() => {
             expect(toArray(lastCells).map(node => node.textContent))
               .to.eql(['-100', '-95', '-92', '-92', '-80']);
+            destroyVM(vm);
             done();
           });
         });
