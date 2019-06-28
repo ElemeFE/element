@@ -13,6 +13,7 @@ export default {
   methods: {
     updateExpandRows() {
       const { data = [], rowKey, defaultExpandAll, expandRows } = this.states;
+      if (!data) return;
       if (defaultExpandAll) {
         this.states.expandRows = data.slice();
       } else if (rowKey) {
