@@ -376,7 +376,9 @@
           this.selectedLabel = '';
           this.inputLength = 20;
           this.menuVisibleOnFocus = false;
-          this.resetHoverIndex();
+          if (!this.keepDropdown) {
+            this.resetHoverIndex();
+          }
           this.$nextTick(() => {
             if (this.$refs.input &&
               this.$refs.input.value === '' &&
@@ -843,7 +845,9 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
-      if (this.keepDropdown) this.visible = true;
+      if (this.keepDropdown) {
+        this.visible = true;
+      }
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
