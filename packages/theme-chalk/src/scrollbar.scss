@@ -4,6 +4,7 @@
 @include b(scrollbar) {
   overflow: hidden;
   position: relative;
+  display: flex;
 
   &:hover,
   &:active,
@@ -16,7 +17,7 @@
 
   @include e(wrap) {
     overflow: scroll;
-    height: 100%;
+    flex-grow: 1;
 
     @include m(hidden-default) {
       &::-webkit-scrollbar {
