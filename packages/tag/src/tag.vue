@@ -13,7 +13,7 @@
         type: String,
         default: 'light',
         validator(val) {
-          return ['dark', 'light', 'plain'].includes(val);
+          return ['dark', 'light', 'plain'].indexOf(val) !== -1;
         }
       }
     },
