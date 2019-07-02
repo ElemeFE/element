@@ -52,10 +52,6 @@ Display date.
 ```
 :::
 
-:::tip
-The `first-day-of-week` attribute is not supported when using custom ranges.
-:::
-
 ### Attributes
 | Attribute       | Description        | Type      | Accepted Values       | Default  |
 |-----------------|------------------- |---------- |---------------------- |--------- |

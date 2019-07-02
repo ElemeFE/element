@@ -394,7 +394,7 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
     prop="email"
     label="Email"
     :rules="[
-      { required: true, message: 'Veuillez entrer l\'adresse e-mail', trigger: 'blur' },
+      { required: true, message: 'Veuillez entrer l'adresse e-mail', trigger: 'blur' },
       { type: 'email', message: 'Veuillez entrer une adresse e-mail valide', trigger: ['blur', 'change'] }
     ]"
   >

@@ -52,10 +52,6 @@ Affiche un calendrier.
 ```
 :::
 
-:::tip
-The `first-day-of-week` attribute is not supported when using custom ranges.
-:::
-
 ### Attributs
 
 | Attribut          | Description   | Type      | Valeurs acceptées     | Défaut   |
