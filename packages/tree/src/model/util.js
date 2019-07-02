@@ -15,10 +15,6 @@ export const getNodeKey = function(key, data) {
   return data[key];
 };
 
-export const clickDocment = function() {
-  document.documentElement.click();
-};
-
 export const findNearestComponent = (element, componentName) => {
   let target = element;
   while (target && target.tagName !== 'BODY') {

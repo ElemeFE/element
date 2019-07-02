@@ -32,7 +32,7 @@
 
 <script>
   import TreeStore from './model/tree-store';
-  import { getNodeKey, findNearestComponent, clickDocment } from './model/util';
+  import { getNodeKey, findNearestComponent } from './model/util';
   import ElTreeNode from './tree-node.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from 'element-ui/src/mixins/emitter';
@@ -300,7 +300,6 @@
         let nextIndex;
         if ([38, 40].indexOf(keyCode) > -1) { // up、down
           ev.preventDefault();
-          clickDocment();
           if (keyCode === 38) { // up
             nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
           } else {
@@ -310,13 +309,11 @@
         }
         if ([37, 39].indexOf(keyCode) > -1) { // left、right 展开
           ev.preventDefault();
-          clickDocment();
           currentItem.click(); // 选中
         }
         const hasInput = currentItem.querySelector('[type="checkbox"]');
         if ([13, 32].indexOf(keyCode) > -1 && hasInput) { // space enter选中checkbox
           ev.preventDefault();
-          clickDocment();
           hasInput.click();
         }
       }
@@ -347,7 +344,6 @@
       this.$on('tree-node-drag-start', (event, treeNode) => {
         if (typeof this.allowDrag === 'function' && !this.allowDrag(treeNode.node)) {
           event.preventDefault();
-          clickDocment();
           return false;
         }
         event.dataTransfer.effectAllowed = 'move';
@@ -451,7 +447,6 @@
       this.$on('tree-node-drag-end', (event) => {
         const { draggingNode, dropType, dropNode } = dragState;
         event.preventDefault();
-        clickDocment();
         event.dataTransfer.dropEffect = 'move';
 
         if (draggingNode && dropNode) {
