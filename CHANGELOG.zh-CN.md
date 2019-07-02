@@ -15,7 +15,6 @@
 
 #### 优化
 
-- Calendar
 - Tag
   - 兼容 IE (#16334 by @ziyoung)
 - Chore
