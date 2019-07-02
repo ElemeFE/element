@@ -107,10 +107,10 @@ export default {
       hasCheckedFormat: '{checked}/{total} ta belgilandi'
     },
     image: {
-      error: 'FAILED'
+      error: 'Xatolik'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Orqaga'
     }
   }
 };
