@@ -1,5 +1,28 @@
 ## 更新日志
 
+### 2.10.1
+
+#### Bug 修复
+
+- Table
+  - 排序 icon 问题修复 (#15439 by @bezany)
+  - 修复 `append` slot 存在时布局错位问题 (#16332 by @ziyoung)
+  - 修复 `showOverflowTooltip` 更新无效的问题 (#16295 by @a631807682)
+  - 修复 `FilterPanel` 中 `Scrollbar` 未注册问题  (#16246 by @ziyoung)
+- Chore
+  - 更新版本号，修复文档问题 (#16233 by @ziyoung)
+  - 修复英文首页样式问题 (#16254 by @iamkun)
+
+#### 优化
+
+- Calendar
+- Tag
+  - 兼容 IE (#16334 by @ziyoung)
+- Chore
+  - 更新钉钉3群二维码 (#16236 by @iamkun)
+- Doc
+  - 更新主题编辑器文档 (#16244 by @iamkun)
+
 ### 2.10.0
 
 *2019-06-25*
