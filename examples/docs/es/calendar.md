@@ -53,10 +53,6 @@ Muestra fechas.
 ```
 :::
 
-:::tip
-The `first-day-of-week` attribute is not supported when using custom ranges.
-:::
-
 ### Atributos
 | Atributo        | Descripción        | Tipo      | Valores aceptados     | Por defecto |
 |-----------------|------------------- |---------- |---------------------- |------------ |

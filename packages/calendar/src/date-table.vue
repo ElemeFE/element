@@ -141,10 +141,7 @@ export default {
     },
 
     weekDays() {
-      let start = this.firstDayOfWeek;
-      if (this.isInRange) {
-        start = 1;
-      }
+      const start = this.firstDayOfWeek;
       if (typeof start !== 'number' || start === 0) {
         return WEEK_DAYS.slice();
       } else {
