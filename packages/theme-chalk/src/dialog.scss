@@ -64,7 +64,7 @@
   }
 
   @include e(body) {
-    padding: 30px 20px;
+    padding: ($--dialog-padding-primary + 10px) $--dialog-padding-primary;
     color: $--color-text-regular;
     font-size: $--dialog-content-font-size;
     word-break: break-all;
