@@ -1,5 +1,27 @@
 ## Changelog
 
+### 2.10.1
+
+#### Bug fixes
+
+- Table
+  - Fix sort icon (#15439 by @bezany)
+  - Fix layout breaks when append slot exists (#16332 by @ziyoung)
+  - Fix showOverflowTooltip not reactive (#16295 by @a631807682)
+  - Register scrollbar in filter-panel (#16246 by @ziyoung)
+- Chore
+  - Fix 2.9 docs (#16233 by @ziyoung)
+  - Fix index page theme intro english css style issue (#16254 by @iamkun)
+
+#### Optimization
+
+- Tag
+  - Compatible with IE (#16334 by @ziyoung)
+- Chore
+  - Update Dingtalk Group QR image (#16236 by @iamkun)
+- Doc
+  - Update online theme roller doc (#16244 by @iamkun)
+
 ### 2.10.0
 
 *2019-06-25*
@@ -14,7 +36,6 @@
   - Add avatar component (#16144 by @luckyCao)
 - Upload:
   - Add capability to customize thumbnail template (#13192 by @victorzhuk)
-
 
 #### Bug fixes
 
@@ -55,7 +76,6 @@
   - Update test api host (#15807 by @iamkun)
 
 #### Optimization
-
 
 - Tree
   - Modify loop conditions to improve performance (#15699 by @KingJeason)
