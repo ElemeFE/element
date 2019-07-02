@@ -4,7 +4,7 @@ Affiche un calendrier.
 
 ### Usage basique
 
-:::demo Réglez `value` pour spécifier le mois à afficher. Si `value` n'est pas sépcifié, le mois actuel sera affiché. `value` supporte le two-way binding.
+:::demo Réglez `value` pour spécifier le mois à afficher. Si `value` n'est pas spécifiée, le mois actuel sera affiché. `value` supporte le two-way binding.
 ```html
 <el-calendar v-model="value">
 </el-calendar>
@@ -23,7 +23,7 @@ Affiche un calendrier.
 
 ### Contenu personnalisé
 
-:::demo Personnalisez le contenu du calendrier en utilisant le `scoped-slot` appelé `dateCell`. Dans ce `scoped-slot` vous aurez accès au paramètres date (date de la cellule courante), data (incluant les attributs type, isSelected et day). pour plus d'informations, référez-vous à la documentation ci-dessous.
+:::demo Personnalisez le contenu du calendrier en utilisant le `scoped-slot` appelé `dateCell`. Dans ce `scoped-slot` vous aurez accès au paramètres date (date de la cellule courante), data (incluant les attributs type, isSelected et day). Pour plus d'informations, référez-vous à la documentation ci-dessous.
 ```html
 <el-calendar>
   <!-- Use 2.5 slot syntax. If you use Vue 2.6, please use new slot syntax-->
@@ -54,10 +54,11 @@ Affiche un calendrier.
 
 ### Attributs
 
-| Attribut       | Description   | Type      | Valeurs acceptées       | Défaut  |
-|-----------------|-------------- |---------- |---------------------- |--------- |
-| value / v-model | Valeur liée. | Date/string/number | —            | —        |
-| range           | Intervalle de dates, début et fin inclus. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois. | Array     | —           | —      |
+| Attribut          | Description   | Type      | Valeurs acceptées     | Défaut   |
+|------------------ |-------------- |---------- |---------------------- |--------- |
+| value / v-model   | Valeur liée.  | Date/string/number | —            | —        |
+| range             | Intervalle de dates, début et fin inclus. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois. | Array     | —           | —      |
+| first-day-of-week | fisrt day of week| Number | 1 to 7                |  1       |
 
 ### Slot dateCell
 

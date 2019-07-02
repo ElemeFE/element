@@ -53,10 +53,11 @@ Display date.
 :::
 
 ### Attributes
-| Attribute       | Description   | Type      | Accepted Values       | Default  |
-|-----------------|-------------- |---------- |---------------------- |--------- |
-| value / v-model | binding value | Date/string/number | —            | —        |
-| range           | time range, including start time and end time. Start time must be Monday, end time must be Sunday, the time span cannot exceed two months | Array     | —           | —      |
+| Attribute       | Description        | Type      | Accepted Values       | Default  |
+|-----------------|------------------- |---------- |---------------------- |--------- |
+| value / v-model | binding value      | Date/string/number | —            | —        |
+| range           | time range, including start time and end time. Start time must be Monday, end time must be Sunday, the time span cannot exceed two months | Array  | —  | —  |
+| first-day-of-week | fisrt day of week| Number    | 1 to 7                |  1       |
 
 ### dateCell scoped slot 参数
 | Attribute       | Description   | Type      | Accepted Values       | Default  |

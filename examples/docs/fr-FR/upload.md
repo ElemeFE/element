@@ -154,6 +154,75 @@ Utilisez `list-type` pour changer le style de la liste de fichiers.
 ```
 :::
 
+### Custom file thumbnail
+
+Use `scoped-slot` to change default thumbnail template.
+
+:::demo
+```html
+<el-upload
+  action="#"
+  list-type="picture-card"
+  :auto-upload="false">
+    <i slot="default" class="el-icon-plus"></i>
+    <div slot="file" slot-scope="{file}">
+      <img
+        class="el-upload-list__item-thumbnail"
+        :src="file.url" alt=""
+      >
+      <span class="el-upload-list__item-actions">
+        <span
+          class="el-upload-list__item-preview"
+          @click="handlePictureCardPreview(file)"
+        >
+          <i class="el-icon-zoom-in"></i>
+        </span>
+        <span
+          v-if="!disabled"
+          class="el-upload-list__item-delete"
+          @click="handleDownload(file)"
+        >
+          <i class="el-icon-download"></i>
+        </span>
+        <span
+          v-if="!disabled"
+          class="el-upload-list__item-delete"
+          @click="handleRemove(file)"
+        >
+          <i class="el-icon-delete"></i>
+        </span>
+      </span>
+    </div>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
+<script>
+  export default {
+    data() {
+      return {
+        dialogImageUrl: '',
+        dialogVisible: false,
+        disabled: false
+      };
+    },
+    methods: {
+      handleRemove(file) {
+        console.log(file);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
+      handleDownload(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Liste de fichiers avec miniatures
 
 :::demo
@@ -275,14 +344,14 @@ Vous pouvez déposer les fichiers par drag'n drop sur l'espace dédié.
 
 Attribut      | Description          | Type      | Valeurs acceptées       | Défaut
 ----| ----| ----| ----| ----
-action | Requis, l'url de requète. | string | — | —
-headers | Les headers de la requète. | object | — | —
+action | Requis, l'url de requête. | string | — | —
+headers | Les headers de la requête. | object | — | —
 multiple | Si envoyer de multiples fichiers est autorisé. | boolean | — | —
-data | Options additionnelles de la requète. | object | — | —
+data | Options additionnelles de la requête. | object | — | —
 name | Identifiant du fichier. | string | — | file
 with-credentials | Si les cookies sont aussi envoyés. | boolean | — |false
 show-file-list | Si la liste des fichiers est affichée. | boolean | — | true
- drag | SI le mode drag'n drop est activé. | boolean | — | false
+ drag | Si le mode drag'n drop est activé. | boolean | — | false
 accept | [Types de fichiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept) acceptés, ne marche pas si `thumbnail-mode` est `true`. | string | — | —
 on-preview | Fonction pour quand le fichier est cliqué. | function(file) | — | —
 on-remove | Fonction pour quand des fichiers sont supprimés. | function(file, fileList) | — | —

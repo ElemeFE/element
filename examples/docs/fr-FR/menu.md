@@ -288,7 +288,7 @@ Le menu vertical peut être réduit.
 | show-timeout | Délai avant de montrer un sous-menu. | number | — | 300 |
 | hide-timeout | Délai avant de cacher un sous-menu. | number | — | 300 |
 | disabled | Si le sous-menu est désactivé. | boolean | — | false |
-| popper-append-to-body | Si il faut ajouter un menu popup au body. Si le positionnement du body n'est pas bon, vous pouvez essayer de régler cette propriété. | boolean | - | Sous-menus de niveau 1: true / autres sous-menus: false |
+| popper-append-to-body | S'il faut ajouter un menu popup au body. Si le positionnement du body n'est pas bon, vous pouvez essayer de régler cette propriété. | boolean | - | Sous-menus de niveau 1: true / autres sous-menus: false |
 
 ### Attributs des items du menu
 

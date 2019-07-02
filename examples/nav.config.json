@@ -172,6 +172,10 @@
             {
               "path": "/badge",
               "title": "Badge 标记"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar 头像"
             }
           ]
         },
@@ -565,6 +569,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }
@@ -851,6 +859,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }
@@ -1137,6 +1149,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
             }
           ]
         }

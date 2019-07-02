@@ -239,4 +239,5 @@ Se soporta la selección de un rango de valores.
 | Nombre | Descripción                              | Parametros               |
 | ------ | ---------------------------------------- | ------------------------ |
 | change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor despues del cambio |
+| input | triggers when the data changes (It'll be emitted in real time during sliding) | value after changing |
 

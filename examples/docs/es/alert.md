@@ -235,6 +235,7 @@ Descripción incluye un mensaje con información más detallada.
 
 | Name | Description |
 |------|--------|
+| — | descripción |
 | title | El contenido del título de alerta. |
 
 ### Eventos

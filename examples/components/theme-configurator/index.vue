@@ -48,6 +48,7 @@ import {
 export default {
   props: {
     themeConfig: Object,
+    previewConfig: Object,
     isOfficial: Boolean,
     onUserConfigUpdate: Function
   },
@@ -155,7 +156,7 @@ export default {
       this.onAction();
     },
     onDownload() {
-      bus.$emit(ACTION_DOWNLOAD_THEME, this.userConfig);
+      bus.$emit(ACTION_DOWNLOAD_THEME, this.userConfig, this.previewConfig.name);
     },
     onAction() {
       this.onUserConfigUpdate(this.userConfig);

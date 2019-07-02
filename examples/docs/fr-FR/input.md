@@ -3,7 +3,7 @@
 Le champ d'input de base.
 
 :::warning
-Input est un composant controllé, il **affiche toujours la valeur liée de Vue**.
+Input est un composant contrôlé, il **affiche toujours la valeur liée de Vue**.
 
 En règle générale, l'évènement `input` devrait être géré. Son handler devrait mettre à jour la valeur du composant (ou utilisez `v-model`). Dans le cas contraire, la valeur du champ ne sera pas modifiée.
 

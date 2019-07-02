@@ -75,7 +75,8 @@
   "image": "./packages/image/index.js",
   "calendar": "./packages/calendar/index.js",
   "backtop": "./packages/backtop/index.js",
-  "infiniteScroll": "./packages/infiniteScroll/index.js",
+  "infinite-scroll": "./packages/infinite-scroll/index.js",
   "page-header": "./packages/page-header/index.js",
-  "cascader-panel": "./packages/cascader-panel/index.js"
+  "cascader-panel": "./packages/cascader-panel/index.js",
+  "avatar": "./packages/avatar/index.js"
 }

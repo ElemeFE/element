@@ -23,8 +23,8 @@ export default {
       this.userConfig = val;
       this.onAction();
     });
-    bus.$on(ACTION_DOWNLOAD_THEME, val => {
-      this.onDownload(val);
+    bus.$on(ACTION_DOWNLOAD_THEME, (themeConfig, themeName) => {
+      this.onDownload(themeConfig, themeName);
     });
   },
   data() {
@@ -41,7 +41,7 @@ export default {
       });
       this.lastApply = time;
     },
-    onDownload(themeConfig) {
+    onDownload(themeConfig, themeName) {
       this.triggertProgressBar(true);
       updateVars(
         Object.assign({}, themeConfig, { download: true }),
@@ -55,7 +55,7 @@ export default {
         .then(() => {
           this.triggertProgressBar(false);
         });
-      ga('send', 'event', 'ThemeConfigurator', 'Download');
+      ga('send', 'event', 'ThemeConfigurator', 'Download', themeName);
     },
     onAction() {
       this.triggertProgressBar(true);

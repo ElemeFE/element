@@ -37,9 +37,9 @@ Dans ce cas le pourcentage ne prends pas de place en plus.
 ```
 :::
 
-### Custom color
+### Couleur personnalisée
 
-You can use `color` attr to set the progress bar color. it accepts color string, function, or array.
+Vous pouvez utiliser l'attribut `color` pour définir la couleur de la barre de progression. il accepte une couleur, une fonction ou un tableau.
 
 :::demo
 
@@ -111,9 +111,9 @@ You can use `color` attr to set the progress bar color. it accepts color string,
 ```
 :::
 
-### Dashboard progress bar
+### Barre de progression du tableau de bord
 
-You also can specify `type` attribute to `dashboard` to use dashboard progress bar.
+Vous pouvez également spécifier l'attribut `type` de `dashboard` pour utiliser la barre de progression du tableau de bord.
 
 :::demo
 

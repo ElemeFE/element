@@ -45,6 +45,7 @@
         <theme-configurator
           :isOfficial="isOfficial"
           :themeConfig="themeConfig"
+          :previewConfig="previewConfig"
           :onUserConfigUpdate="onUserConfigUpdate"
         >
         </theme-configurator>

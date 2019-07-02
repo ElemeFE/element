@@ -123,9 +123,7 @@
         <div
           v-if="$slots.append"
           class="el-table__append-gutter"
-          :style="{
-            height: layout.appendHeight + 'px'
-          }"></div>
+          :style="{ height: layout.appendHeight + 'px'}"></div>
       </div>
       <div
         v-if="showSummary"
@@ -183,6 +181,10 @@
             width: bodyWidth
           }">
         </table-body>
+         <div
+          v-if="$slots.append"
+          class="el-table__append-gutter"
+          :style="{ height: layout.appendHeight + 'px' }"></div>
       </div>
       <div
         v-if="showSummary"
@@ -355,7 +357,7 @@
       },
 
       toggleRowSelection(row, selected) {
-        this.store.toggleRowSelection(row, selected);
+        this.store.toggleRowSelection(row, selected, false);
         this.store.updateAllSelected();
       },
 
@@ -381,8 +383,10 @@
       },
 
       updateScrollY() {
-        this.layout.updateScrollY();
-        this.layout.updateColumnsWidth();
+        const changed = this.layout.updateScrollY();
+        if (changed) {
+          this.layout.updateColumnsWidth();
+        }
       },
 
       handleFixedMousewheel(event, data) {
@@ -408,7 +412,7 @@
         }
       },
 
-      // TODO 性能优化
+      // TODO 使用 CSS transform
       syncPostion: throttle(20, function() {
         const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
         const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
@@ -464,10 +468,10 @@
       },
 
       doLayout() {
-        this.layout.updateColumnsWidth();
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+        this.layout.updateColumnsWidth();
       },
 
       sort(prop, order) {
@@ -509,7 +513,7 @@
           };
         } else if (this.maxHeight) {
           const maxHeight = parseHeight(this.maxHeight);
-          if (maxHeight) {
+          if (typeof maxHeight === 'number') {
             return {
               'max-height': (maxHeight - footerHeight - (this.showHeader ? headerHeight : 0)) + 'px'
             };
@@ -525,7 +529,7 @@
           };
         } else if (this.maxHeight) {
           let maxHeight = parseHeight(this.maxHeight);
-          if (maxHeight) {
+          if (typeof maxHeight === 'number') {
             maxHeight = this.layout.scrollX ? maxHeight - this.layout.gutterWidth : maxHeight;
             if (this.showHeader) {
               maxHeight -= this.layout.headerHeight;
@@ -585,19 +589,18 @@
         }
       },
 
-      currentRowKey(newVal) {
-        this.store.setCurrentRowKey(newVal);
+      currentRowKey: {
+        immediate: true,
+        handler(value) {
+          if (!this.rowKey) return;
+          this.store.setCurrentRowKey(value);
+        }
       },
 
       data: {
         immediate: true,
         handler(value) {
           this.store.commit('setData', value);
-          if (this.$ready) {
-            this.$nextTick(() => {
-              this.doLayout();
-            });
-          }
         }
       },
 

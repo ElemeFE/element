@@ -13,7 +13,7 @@
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
-      @change="$nextTick(emitChange)"
+      @change="emitChange"
       :step="step"
       :disabled="sliderDisabled"
       :controls="showInputControls"

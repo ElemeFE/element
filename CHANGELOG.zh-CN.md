@@ -1,5 +1,115 @@
 ## 更新日志
 
+### 2.10.1
+
+#### Bug 修复
+
+- Table
+  - 排序 icon 问题修复 (#15439 by @bezany)
+  - 修复 `append` slot 存在时布局错位问题 (#16332 by @ziyoung)
+  - 修复 `showOverflowTooltip` 更新无效的问题 (#16295 by @a631807682)
+  - 修复 `FilterPanel` 中 `Scrollbar` 未注册问题  (#16246 by @ziyoung)
+- Chore
+  - 更新版本号，修复文档问题 (#16233 by @ziyoung)
+  - 修复英文首页样式问题 (#16254 by @iamkun)
+
+#### 优化
+
+- Tag
+  - 兼容 IE (#16334 by @ziyoung)
+- Chore
+  - 更新钉钉3群二维码 (#16236 by @iamkun)
+- Doc
+  - 更新主题编辑器文档 (#16244 by @iamkun)
+
+### 2.10.0
+
+*2019-06-25*
+
+#### 新特性
+
+- I18n
+  - 支持乌兹别克语 (#15796 by @ogabek96)
+- Calendar
+  - 支持 `first-day-of-week` 配置 (#16047 by @ziyoung)
+- Avatar
+  - 新增 `Avatar` 组件 (#16144 by @luckyCao)
+- Upload:
+  - 支持自定义缩略图模版 (#13192 by @victorzhuk)
+
+
+#### Bug 修复
+
+- Tree
+  - 当 `currentKey` 为 `null` 时取消对树节点的高亮 (#15668 by @yyjjqq94)
+  - 修复多实例共享数据的问题 #15538 (#15615 by @VanMess)
+- Upload
+  - 更新 `fileList` 的类型定义 (#15716 by @underfin)
+- Table
+  - 修复加载 icon 不显示的问题 (#15868 by @ziyoung)
+  - 修复复杂表格中 hover 行背景色问题 (#15504 by @cnlon)
+  - 修复 `current-row-key` 和选择事件的问题 (#15983 by @ziyoung)
+  - `height` 属性接受更多单位 (#16013 by @ziyoung)
+  - 修复 `reserve-selection` 无效的问题 (#16135 by @ziyoung)
+- Menu
+  - 修复 `popper-append-to-body` 设置后，子菜单无法收起的问题 (#15391 by @PanJiaChen)
+- Select
+  - 修复 `initialInputHeight` 问题 (#15989 by @yyjjqq94)
+  - 修复输入中文时 `default-first-option` 的行为问题 (#15431 by @VanMess)
+  - `import` 重复 (#16215 by @lengband)
+- Message
+  - 类型定义中添加 `offset` 属性 (#16027 by @matjaz)
+- Timeline
+  - 修复逆序问题 (#16091 by @ziyoung)
+- Slider
+  - 补充 `input` 事件文档 (#15588 by @VanMess)
+- InfiniteScroll
+  - 更新包名 (#16125 by @iamkun)
+- MessageBox
+  - 修复 `distinguishCancelAndClose` 行为与文档不符的问题 (#15438 by @qingdengyue)
+- PopupManager
+  - 修复无法复写 `z-index` 的问题 (#15738 by @luckyCao)
+- Docs
+  - 删除不必要的内容 (#16194 by @Alexeykhr)
+  - 更正 `Divider` 属性类型 (#15889 by @haoranyu)
+- Chore
+  - 更新测试 API 地址 (#15807 by @iamkun)
+
+#### 优化
+
+- Tree
+  -优化循环性能 (#15699 by @KingJeason)
+- Theme
+  - 更新 GA 打点，修改页底地址链接到主题编辑器 (#16007 by @island205)
+- Badge
+  - 更新类型定义 (#16198 by @iamkun)
+- Avatar
+  - 更新主题变量配置 (#16202 by @luckyCao)
+- I18n
+  - 更新葡萄牙语 (#15776 by @gigioSouza)
+  - 更新波斯语 (#15881 by @pamenary)
+- Docs
+  - 补充入门文档中的组件列表 (#16063 by @pape2016)
+  - 更新法语文档 (#16208 by @blombard)
+  - 为 `Alert` 添加 默认插槽文档 (#15444 by @Alexeykhr)
+  - 更新西班牙语文档 (#15840 by @Gonzalo2310)
+  - 更新法语文档中的拼写错误 (#15837 by @blombard)
+  - 更新 2.9.2 西班牙文档 (#16185 by @Gonzalo2310)
+
+#### 非兼容性更新
+
+- Form
+  - 移除输入框的成功状态 (#16159 by @ziyoung)
+
+### 2.9.2
+
+*2019-06-21*
+
+#### Bug 修复
+
+- Chore
+  - 修复 TS 定义文件 (#15805 by @NateScarlet)
+
 ### 2.9.1
 
 *2019-05-30*
@@ -32,7 +142,7 @@
 - PageHeader
   - 新增 PageHeader 组件 (#15714 by @ziyoung)
 - InfiniteScroll
-  - 新增 InfiniteScroll 指令 (#15567 by @iamkun) 
+  - 新增 InfiniteScroll 指令 (#15567 by @iamkun)
 - Cascader
   - 新增多选模式和 filter-method 方法 (#15611 by @SimonaliaChen)
 - Message
@@ -46,7 +156,7 @@
 - Image
   - 支持 attrs 和 listeners (#15578 by @VanMess)
 - Theme
-  - 新增 popup 背景配置 (#15412 by @iamkun)  
+  - 新增 popup 背景配置 (#15412 by @iamkun)
 - Chore
   - 更新文档首页 (#15682 by @iamkun)
 
@@ -57,7 +167,7 @@
 - Image
   - 修复 ssr 问题和 object-fit 的兼容性 (#15346 by @SimonaliaChen)
 - Input
-  - 修复 show-word-count 样式问题 (#15359 by @lvjiaxuan) 
+  - 修复 show-word-count 样式问题 (#15359 by @lvjiaxuan)
   - 修复删除图标样式 (#15354 by @YiiGuxing)
 - Calendar
   - 修复星期展示错误 (#15399 by @qingdengyue)
@@ -73,7 +183,7 @@
   - 修复自定义 tabindex 不生效问题 (#15619 by @SimonaliaChen)
 - Link
   - 修复图标 class 问题 (#15752 by @iamkun)
-- Select  
+- Select
   - 回滚清除时，设置 value 为 null 的修改 (#15447 by @iamkun)
 - Loading
   - 修复 Dom 不更新的问题 (#15123 by @FAKER-A)
@@ -102,7 +212,7 @@
   - 重新命名文档变量 (#15185 by @liupl)
   - 更新 Image 组件文档 (#15423 by @haoranyu)
   - 修复 Form 组件文档错误 (#15228 by @SHERlocked93)
- 
+
 ### 2.8.2
 
 *2019-04-25*
@@ -245,7 +355,7 @@ Docs
 
 - Form
   - 修复 `label-width` 为 `auto` 的样式 (#14955 by @ziyoung)
-  
+
 #### 优化
 - Docs
   - 修复文档内图片链接错误 (#14957 by @iamkun)
@@ -268,7 +378,7 @@ Docs
   - 可以设置背景色 (#14939 by @ziyoung)
 - Form
   - `label-width` 支持自动宽度 (#14944 by @ziyoung)
-  
+
 #### 优化
 - Docs
   - 更新西班牙语文档 (#14913 by @Gonzalo2310)
@@ -399,7 +509,7 @@ Docs
 
 #### 优化
 - Alert
-  - 组件对通过 slot 传入的  description 也应用默认样式类 (by @iamkun in #14488)
+  - 组件对通过 slot 传入的 description 也应用默认样式类 (by @iamkun in #14488)
 - InputNumber
   -移除多余的 `parseFloat` (by @JuniorTour in #14172)
 - Menu
@@ -482,8 +592,8 @@ Docs
 #### 修复
 - 构建:
   - 删除 umd 模块 `lib/index.js` 中本没有的注释 (by @island205 in #14233)
-  - 修复 nuxt.js 中关于 `export` 关键字的报错  (by @island205 in #14232)
-  - 修复发布 2.5.1 过程中的错误   (by @iamkun in #14228)
+  - 修复 nuxt.js 中关于 `export` 关键字的报错 (by @island205 in #14232)
+  - 修复发布 2.5.1 过程中的错误 (by @iamkun in #14228)
 
 ### 2.5.1
 

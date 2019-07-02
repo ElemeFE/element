@@ -85,7 +85,7 @@ Vous pouvez filtrer les options.
 
 Vous pouvez personnaliser les titres, les textes des boutons, les fonctions de rendu pour les objets et le contenu du footer.
 
-:::demo Utilisez `titles`, `button-texts`, `render-content` et `format` pour personnaliser respectivement les titres des listes, les textes des boutons, les fonctions de rendus des objets et le texte des statuts du header. Vous pouvez aussi utiliser des slots pour les objets. Pour le contenu du footer, deux slots sont fournis: `left-footer` et `right-footer`. SI vous souhaitez que certains items soient sélectionnés par défaut, utilisez `left-default-checked` et `right-default-checked`. Enfin, cet exemple utilise aussi l'évènement `change`. Notez que cet exemple ne fonctionne pas dans jsfiddle car il ne supporte pas JSX. Dans un vrai projet, `render-content` fonctionnera si les dépendances sont satisfaites.
+:::demo Utilisez `titles`, `button-texts`, `render-content` et `format` pour personnaliser respectivement les titres des listes, les textes des boutons, les fonctions de rendus des objets et le texte des statuts du header. Vous pouvez aussi utiliser des slots pour les objets. Pour le contenu du footer, deux slots sont fournis: `left-footer` et `right-footer`. Si vous souhaitez que certains items soient sélectionnés par défaut, utilisez `left-default-checked` et `right-default-checked`. Enfin, cet exemple utilise aussi l'évènement `change`. Notez que cet exemple ne fonctionne pas dans jsfiddle car il ne supporte pas JSX. Dans un vrai projet, `render-content` fonctionnera si les dépendances sont satisfaites.
 ```html
 <template>
   <p style="text-align: center; margin: 0 0 20px">Utilise render-content</p>
@@ -223,7 +223,7 @@ Par défaut, Transfer utilise `key`, `label` et `disabled` de vos objets. Si vos
 | filterable | Si Transfer est filtrable. | boolean | — | false |
 | filter-placeholder | Placeholder du champ de filtrage. | string | — | Enter keyword |
 | filter-method | Méthode de filtrage. | function | — | — |
-| target-order | Ordre de tri des éléments de la liste d'arrivée. Si il est à `original`, les éléments garderont le même ordre que la liste d'origine. Si à `push`, les nouveaux éléments seront mis à la suite des anciens. Si mis à `unshift`, les nouveaux éléments seront mis en haut de la liste. | string | original / push / unshift | original |
+| target-order | Ordre de tri des éléments de la liste d'arrivée. S'il est à `original`, les éléments garderont le même ordre que la liste d'origine. Si à `push`, les nouveaux éléments seront mis à la suite des anciens. Si mis à `unshift`, les nouveaux éléments seront mis en haut de la liste. | string | original / push / unshift | original |
 | titles | Titres des listes. | array | — | ['List 1', 'List 2'] |
 | button-texts | Textes des boutons. | array | — | [ ] |
 | render-content | Fonction de rendu pour les objets. | function(h, option) | — | — |
