@@ -67,7 +67,7 @@ import { ElTimePicker } from './time-picker'
 import { ElTimeSelect } from './time-select'
 import { ElTooltip } from './tooltip'
 import { ElTransfer } from './transfer'
-import { ElTree } from './tree'
+import { ElTree, TreeData } from './tree'
 import { ElUpload } from './upload'
 import { ElLink } from './link'
 import { ElDivider } from './divider'
@@ -305,7 +305,7 @@ export class Tooltip extends ElTooltip {}
 export class Transfer extends ElTransfer {}
 
 /** Tree Component */
-export class Tree extends ElTree {}
+export class Tree<K = any, D = TreeData> extends ElTree<K, D> {}
 
 /** Upload Component */
 export class Upload extends ElUpload {}
