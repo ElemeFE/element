@@ -405,4 +405,106 @@ describe('Cascader', () => {
     await wait(300);
     expect(body.querySelector('.el-cascader__suggestion-item').textContent).to.equal('Zhejiang / Hangzhou / West Lake');
   });
+
+  it('options with same leaf value', async() => {
+    const sameValueOptions = [{
+      value: 'zhinan',
+      label: '指南',
+      children: [{
+        value: 'shejiyuanze',
+        label: '设计原则',
+        children: [{
+          value: 'yizhi',
+          label: '一致',
+          children: [
+            {
+              value: 'child01',
+              label: 'child01',
+              children: null
+            },
+            {
+              value: 'child02',
+              label: 'child02',
+              children: null
+            }
+          ]
+        }, {
+          value: 'fankui',
+          label: '反馈',
+          children: [
+            {
+              value: 'child01',
+              label: 'child01',
+              children: null
+            },
+            {
+              value: 'child02',
+              label: 'child02',
+              children: null
+            }
+          ]
+        }]
+      }]
+    }, {
+      value: '第二',
+      label: '第二',
+      children: [{
+        value: '211',
+        label: '第二1',
+        children: [{
+          value: '2221',
+          label: '一致2',
+          children: [
+            {
+              value: 'child01',
+              label: 'child01',
+              children: null
+            },
+            {
+              value: 'child02',
+              label: 'child02',
+              children: null
+            }
+          ]
+        }, {
+          value: '2222',
+          label: '反馈2',
+          children: [
+            {
+              value: 'child01',
+              label: 'child01',
+              children: null
+            },
+            {
+              value: 'child02',
+              label: 'child02',
+              children: null
+            }
+          ]
+        }]
+      }]
+    }];
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options: sameValueOptions
+        };
+      }
+    }, true);
+
+    vm.value = ['zhinan', 'shejiyuanze', 'yizhi', 'child01'];
+    await waitImmediate();
+    expect(vm.$el.querySelector('input').value).to.equal('指南 / 设计原则 / 一致 / child01');
+
+    vm.value = ['第二', '211', '2221', 'child01'];
+    await waitImmediate();
+    expect(vm.$el.querySelector('input').value).to.equal('第二 / 第二1 / 一致2 / child01');
+  });
 });

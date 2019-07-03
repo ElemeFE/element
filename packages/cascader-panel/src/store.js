@@ -52,12 +52,23 @@ export default class Store {
 
   getNodeByValue(value) {
     if (value) {
-      value = Array.isArray(value) ? value[value.length - 1] : value;
+      const curValue = Array.isArray(value) ? value : [value];
+      const fullValue = curValue.slice(0).reverse().join('');
       const nodes = this.getFlattedNodes(false, !this.config.lazy)
-        .filter(node => node.value === value);
+        .filter(node => fullValue === this.getFullValue(node));
+
       return nodes && nodes.length ? nodes[0] : null;
     }
     return null;
   }
 
+  getFullValue(node) {
+    let fullValue = '';
+
+    for (let item = node; item; item = item.parent) {
+      fullValue += item.value || '';
+    }
+
+    return fullValue;
+  }
 }
