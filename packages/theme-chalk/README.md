@@ -1,33 +1,32 @@
-# element-theme-chalk
-> element component chalk theme.
-
+# @femessage/theme-deepexi
+deepexi 自定义 element 主题
 
 ## Installation
 ```shell
-npm i element-theme-chalk -S
+yarn add @femessage/theme-deepexi
 ```
 
 ## Usage
 
-Use Sass import
-```css
-@import 'element-theme-chalk';
-```
-
-Or Use webpack
+在 nuxt 中使用
 ```javascript
-import 'element-theme-chalk';
+// 修改 nuxt.config.js
+babel: {
+  plugins: [
+    [
+      'component',
+      {
+        libraryName: 'element-ui',
+        styleLibraryName: '~node_modules/@femessage/theme-deepexi/lib'
+      }
+    ]
+  ]
+}
 ```
-
-Or
-```html
-<link rel="stylesheet" href="path/to/node_modules/element-theme-chalk/lib/index.css">
-```
-
-##  Import on demand
+在 vue 项目中使用
 ```javascript
-import 'element-theme-chalk/lib/input.css';
-import 'element-theme-chalk/lib/select.css';
-
-// ...
+import Vue from "vue";
+import ElementUI from 'element-ui';
+import '@femessage/theme-deepexi/lib/index.css';
+Vue.use(ElementUI);
 ```
