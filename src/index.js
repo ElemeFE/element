@@ -188,14 +188,14 @@ const install = function(Vue, opts = {}) {
 
 };
 
+/* 解决跨域 */
+let childDomain = document.domain;
+document.domain = childDomain;
+
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
-
-/* 解决跨域 */
-let childDomain = document.domain;
-document.domain = childDomain;
 
 export default {
   version: '2.10.0',
