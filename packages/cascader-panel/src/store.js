@@ -52,10 +52,17 @@ export default class Store {
 
   getNodeByValue(value) {
     if (value) {
-      const curValue = Array.isArray(value) ? value : [value];
-      const fullValue = curValue.slice(0).reverse().join('');
       const nodes = this.getFlattedNodes(false, !this.config.lazy)
-        .filter(node => fullValue === this.getFullValue(node));
+        .filter(node => {
+          // leaf node value can not locate the path
+          // find node by diff full value when value is array
+          if (Array.isArray(value)) {
+            const fullValue = value.slice(0).reverse().join('');
+            return fullValue === this.getFullValue(node);
+          }
+
+          return node.value === value;
+        });
 
       return nodes && nodes.length ? nodes[0] : null;
     }
