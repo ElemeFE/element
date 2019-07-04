@@ -51,7 +51,7 @@
     },
 
     methods: {
-      handleExpand(e) {
+      handleExpand() {
         const { panel, node, isDisabled, config } = this;
         const { multiple, checkStrictly } = config;
 
