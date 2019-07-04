@@ -34,4 +34,7 @@ export declare class ElFormItem extends ElementUIComponent {
 
   /** Remove validation status of the field */
   clearValidate (): void
+
+  /** Validate current field */
+  validate (trigger: 'blur' | 'change', callback: Function): void
 }
