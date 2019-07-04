@@ -33,7 +33,7 @@ export default {
       month10: 'Urria',
       month11: 'Azaroa',
       month12: 'Abendua',
-      // week: 'astea',
+      week: 'astea',
       weeks: {
         sun: 'ig.',
         mon: 'al.',

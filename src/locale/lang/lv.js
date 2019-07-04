@@ -33,7 +33,7 @@ export default {
       month10: 'Oktobris',
       month11: 'Novembris',
       month12: 'Decembris',
-      // week: 'nedēļa',
+      week: 'nedēļa',
       weeks: {
         sun: 'Sv',
         mon: 'Pr',

@@ -33,6 +33,7 @@ export default {
       month10: 'அக்டோபர்',
       month11: 'நவம்பர்',
       month12: 'டிசம்பர்',
+      week: 'week', // to be translated
       weeks: {
         sun: 'ஞாயிறு',
         mon: 'திங்கள்',

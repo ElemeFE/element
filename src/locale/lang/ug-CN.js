@@ -33,7 +33,7 @@ export default {
       month10: '10-ئاي',
       month11: '11-ئاي',
       month12: '12-ئاي',
-      // week: '周次',
+      week: '周次',
       weeks: {
         sun: 'يەكشەنبە',
         mon: 'دۈشەنبە',

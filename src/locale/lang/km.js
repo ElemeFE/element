@@ -33,7 +33,7 @@ export default {
       month10: 'តុលា',
       month11: 'វិច្ឆកា',
       month12: 'ធ្នូ',
-      // week: 'week',
+      week: 'week',
       weeks: {
         sun: 'អាទិត្យ',
         mon: 'Mon',

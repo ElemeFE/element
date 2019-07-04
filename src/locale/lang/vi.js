@@ -33,7 +33,7 @@ export default {
       month10: 'Tháng 10',
       month11: 'Tháng 11',
       month12: 'Tháng 12',
-      // week: 'week',
+      week: 'week',
       weeks: {
         sun: 'CN',
         mon: 'T2',

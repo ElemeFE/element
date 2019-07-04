@@ -121,6 +121,7 @@
               :cell-class-name="cellClassName"
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
+              :show-week-number="showWeekNumber"
               @pick="handleRangePick">
             </date-table>
           </div>
@@ -161,6 +162,7 @@
               :cell-class-name="cellClassName"
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
+              :show-week-number="showWeekNumber"
               @pick="handleRangePick">
             </date-table>
           </div>
@@ -335,6 +337,7 @@
         disabledDate: '',
         cellClassName: '',
         firstDayOfWeek: 7,
+        showWeekNumber: false,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
         format: '',

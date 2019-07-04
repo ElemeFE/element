@@ -97,6 +97,7 @@
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :cell-class-name="cellClassName"
+              :show-week-number="showWeekNumber"
               :disabled-date="disabledDate">
             </date-table>
             <year-table
@@ -218,7 +219,6 @@
         }
       }
     },
-
     methods: {
       proxyTimePickerDataProperties() {
         const format = timeFormat => {this.$refs.timepicker.format = timeFormat;};

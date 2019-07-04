@@ -33,6 +33,7 @@ export default {
       month10: 'Október',
       month11: 'November',
       month12: 'December',
+      week: 'hét',
       weeks: {
         sun: 'Vas',
         mon: 'Hét',

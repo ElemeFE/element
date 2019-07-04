@@ -33,7 +33,7 @@ export default {
       month10: 'Οκτώβριος',
       month11: 'Νοέμβριος',
       month12: 'Δεκέμβριος',
-      // week: 'εβδομάδα',
+      week: 'εβδομάδα',
       weeks: {
         sun: 'Κυρ',
         mon: 'Δευ',

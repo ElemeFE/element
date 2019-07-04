@@ -33,7 +33,7 @@ export default {
       month10: 'Spalis',
       month11: 'Lapkritis',
       month12: 'Gruodis',
-      // week: 'savaitė',
+      week: 'savaitė',
       weeks: {
         sun: 'S.',
         mon: 'Pr.',

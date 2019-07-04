@@ -33,7 +33,7 @@ export default {
       month10: 'онунчу айда',
       month11: 'он биринчи ай',
       month12: 'он экинчи айда',
-      // week: '周次',
+      week: 'week',
       weeks: {
         sun: 'жети жума',
         mon: 'дүйшөмбү',

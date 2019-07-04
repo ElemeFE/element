@@ -33,7 +33,7 @@ export default {
       month10: 'Октомври',
       month11: 'Ноември',
       month12: 'Декември',
-      // week: 'Седмица',
+      week: 'Седмица',
       weeks: {
         sun: 'Нед',
         mon: 'Пон',

@@ -33,7 +33,7 @@ export default {
       month10: '10월',
       month11: '11월',
       month12: '12월',
-      // week: 'week',
+      week: '주',
       weeks: {
         sun: '일',
         mon: '월',

@@ -33,7 +33,7 @@ export default {
       month10: 'lokakuu',
       month11: 'marraskuu',
       month12: 'joulukuu',
-      // week: 'week',
+      week: 'week',
       weeks: {
         sun: 'su',
         mon: 'ma',

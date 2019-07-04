@@ -33,7 +33,7 @@ export default {
       month10: 'octubre',
       month11: 'noviembre',
       month12: 'diciembre',
-      // week: 'semana',
+      week: 'semana',
       weeks: {
         sun: 'dom',
         mon: 'lun',
