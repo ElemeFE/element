@@ -133,9 +133,9 @@ export default {
 
     rangeValidator(date, isStart) {
       const firstDayOfWeek = this.realFirstDayOfWeek;
-      const expeted = isStart ? firstDayOfWeek : (firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1);
-      const message = `${isStart ? 'start' : 'end'} of range should be ${weekDays[expeted]}.`;
-      if (date.getDay() !== expeted) {
+      const expected = isStart ? firstDayOfWeek : (firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1);
+      const message = `${isStart ? 'start' : 'end'} of range should be ${weekDays[expected]}.`;
+      if (date.getDay() !== expected) {
         console.warn('[ElementCalendar]', message, 'Invalid range will be ignored.');
         return false;
       }
