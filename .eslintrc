@@ -1,6 +1,7 @@
 {
   "globals": {
-    "ga": true
+    "ga": true,
+    "chrome": true
   },
   "plugins": ["html", "json"],
   "extends": "elemefe",
