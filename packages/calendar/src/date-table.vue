@@ -141,7 +141,7 @@ export default {
     },
 
     weekDays() {
-      let start = this.firstDayOfWeek;
+      const start = this.firstDayOfWeek;
       if (typeof start !== 'number' || start === 0) {
         return WEEK_DAYS.slice();
       } else {
