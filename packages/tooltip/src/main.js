@@ -97,13 +97,16 @@ export default {
         </transition>);
     }
 
-    const firstElement = this.getFirstElement();
-    if (!firstElement) return null;
-
-    const data = firstElement.data = firstElement.data || {};
+    const slots = this.$slots.default;
+    let node = slots;
+    if (!slots) return null;
+    if (slots.length > 1) {
+      node = h('div');
+      node.children = slots;
+    }
+    const data = (node.data = node.data || {});
     data.staticClass = this.addTooltipClass(data.staticClass);
-
-    return firstElement;
+    return node;
   },
 
   mounted() {
@@ -209,18 +212,6 @@ export default {
         clearTimeout(this.timeoutPending);
       }
       this.expectedState = expectedState;
-    },
-
-    getFirstElement() {
-      const slots = this.$slots.default;
-      if (!Array.isArray(slots)) return null;
-      let element = null;
-      for (let index = 0; index < slots.length; index++) {
-        if (slots[index] && slots[index].tag) {
-          element = slots[index];
-        };
-      }
-      return element;
     }
   },
 
