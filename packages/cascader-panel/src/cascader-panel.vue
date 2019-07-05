@@ -79,6 +79,8 @@ const checkNode = el => {
   }
 };
 
+let loadCount = 0;
+
 export default {
   name: 'ElCascaderPanel',
 
@@ -294,6 +296,24 @@ export default {
         dataList && dataList.length && this.store.appendNodes(dataList, parent);
         node.loading = false;
         node.loaded = true;
+
+        // dispose default value on lazy load mode
+        if (this.checkedValue && Array.isArray(this.checkedValue)) {
+          const nodeValue = this.checkedValue.slice(loadCount++).shift();
+          const valueKey = this.config.value;
+
+          if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
+            const checkedNode = this.store.getNodeByValue(nodeValue);
+            this.lazyLoad(checkedNode, () => {
+              this.handleExpand(checkedNode);
+            });
+
+            if (loadCount === this.checkedValue.length) {
+              this.$parent.computePresentText();
+            }
+          }
+        }
+
         onFullfiled && onFullfiled(dataList);
       };
       config.lazyLoad(node, resolve);
