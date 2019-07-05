@@ -31,7 +31,7 @@ const Message = function(options) {
     instance.message = null;
   }
   instance.$mount();
-  document.body.appendChild(instance.$el);
+  window.parent.document.body.appendChild(instance.$el);
   let verticalOffset = options.offset || 20;
   instances.forEach(item => {
     verticalOffset += item.$el.offsetHeight + 16;

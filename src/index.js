@@ -188,6 +188,10 @@ const install = function(Vue, opts = {}) {
 
 };
 
+/* 解决跨域 */
+let childDomain = document.domain;
+document.domain = childDomain;
+
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
