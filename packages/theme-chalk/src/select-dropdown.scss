@@ -4,7 +4,7 @@
 
 @include b(select-dropdown) {
   position: absolute;
-  z-index: #{$--index-top + 1};
+  z-index: #{$--index-top + 1}; // z-index: #{$--index-top + 1}; 
   border: $--select-dropdown-border;
   border-radius: $--border-radius-base;
   background-color: $--select-dropdown-background;
