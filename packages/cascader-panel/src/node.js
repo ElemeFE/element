@@ -40,9 +40,9 @@ export default class Node {
 
   get isDisabled() {
     const { data, parent, config } = this;
-    const disabledKey = config.disabled;
+    const isDisabled = typeof config.disabled === 'function' ? config.disabled(data) : data[config.disabled];
     const { checkStrictly } = config;
-    return data[disabledKey] ||
+    return isDisabled ||
       !checkStrictly && parent && parent.isDisabled;
   }
 
