@@ -3,7 +3,7 @@
     name="dialog-fade"
     @after-enter="afterEnter"
     @after-leave="afterLeave">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-dialog__wrapper" v-show="visible" @mousedown.self="handleWrapperClick">
       <div
         role="dialog"
         aria-modal="true"
