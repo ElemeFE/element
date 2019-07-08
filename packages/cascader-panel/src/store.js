@@ -52,10 +52,28 @@ export default class Store {
 
   getNodeByValue(value) {
     if (value) {
-      value = Array.isArray(value) ? value[value.length - 1] : value;
-      const nodes = this.getFlattedNodes(false, !this.config.lazy)
-        .filter(node => node.value === value);
-      return nodes && nodes.length ? nodes[0] : null;
+      const val = Array.isArray(value) ? value[value.length - 1] : value;
+      const nodes = this.getFlattedNodes(!this.config.checkStrictly, !this.config.lazy).filter(node => node.value === val);
+      if (nodes && nodes.length) {
+        if (nodes.length > 1) {
+          if (Array.isArray(value) && value.length > 1) {
+            const filteredNodes = value.slice(0, -1).reduceRight((previousNodes, value) => {
+              if (previousNodes.length > 1) {
+                const filteredNodes = previousNodes.filter(item => item.parent && item.parent.value === value);
+                if (filteredNodes.length) {
+                  return filteredNodes;
+                }
+              }
+              return previousNodes;
+            }, nodes);
+            return filteredNodes[0];
+          } else {
+            return nodes.find(item => !item.parent);
+          }
+        } else {
+          return nodes[0];
+        }
+      }
     }
     return null;
   }
