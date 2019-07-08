@@ -227,7 +227,7 @@ describe('Dialog', () => {
     setTimeout(() => {
       dialog.$el.click();
       setTimeout(() => {
-        expect(vm.visible).to.be.true;
+        expect(vm.visible).to.be.false;
         done();
       }, 400);
     }, 50);
@@ -284,7 +284,7 @@ describe('Dialog', () => {
     setTimeout(() => {
       dialog.$el.click();
       setTimeout(() => {
-        expect(spy.called).to.be.false;
+        expect(spy.called).to.be.true;
         done();
       }, 500);
     }, 10);
