@@ -39,7 +39,7 @@ export default {
         border="0">
         <colgroup>
           {
-            this.columns.map(column => <col name={ column.id } key={column.id} />)
+            this.columns.map(column => <col name={column.id} key={column.id} />)
           }
         </colgroup>
         <tbody>
@@ -48,7 +48,7 @@ export default {
               return acc.concat(this.wrappedRowRender(row, acc.length));
             }, [])
           }
-          <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
+          <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
         </tbody>
       </table>
     );
@@ -236,7 +236,7 @@ export default {
 
       if (cell) {
         const column = getColumnByCell(table, cell);
-        const hoverState = table.hoverState = {cell, column, row};
+        const hoverState = table.hoverState = { cell, column, row };
         table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
@@ -323,14 +323,14 @@ export default {
       }
       return (<tr
         v-show={display}
-        style={ this.getRowStyle(row, $index) }
-        class={ rowClasses }
-        key={ this.getKeyOfRow(row, $index) }
-        on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-        on-click={ ($event) => this.handleClick($event, row) }
-        on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
-        on-mouseenter={ _ => this.handleMouseEnter($index) }
-        on-mouseleave={ this.handleMouseLeave }>
+        style={this.getRowStyle(row, $index)}
+        class={rowClasses}
+        key={this.getKeyOfRow(row, $index)}
+        on-dblclick={($event) => this.handleDoubleClick($event, { ...row, $index })}
+        on-click={($event) => this.handleClick($event, { ...row, $index })}
+        on-contextmenu={($event) => this.handleContextMenu($event, { ...row, $index })}
+        on-mouseenter={_ => this.handleMouseEnter($index)}
+        on-mouseleave={this.handleMouseLeave}>
         {
           columns.map((column, cellIndex) => {
             const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
@@ -364,12 +364,12 @@ export default {
             }
             return (
               <td
-                style={ this.getCellStyle($index, cellIndex, row, column) }
-                class={ this.getCellClass($index, cellIndex, row, column) }
-                rowspan={ rowspan }
-                colspan={ colspan }
-                on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                on-mouseleave={ this.handleCellMouseLeave }>
+                style={this.getCellStyle($index, cellIndex, row, column)}
+                class={this.getCellClass($index, cellIndex, row, column)}
+                rowspan={rowspan}
+                colspan={colspan}
+                on-mouseenter={($event) => this.handleCellMouseEnter($event, row)}
+                on-mouseleave={this.handleCellMouseLeave}>
                 {
                   column.renderCell.call(
                     this._renderProxy,
@@ -400,8 +400,8 @@ export default {
         return [[
           tr,
           <tr key={'expanded-row__' + tr.key}>
-            <td colspan={ this.columnsCount } class="el-table__expanded-cell">
-              { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
+            <td colspan={this.columnsCount} class="el-table__expanded-cell">
+              {renderExpanded(this.$createElement, { row, $index, store: this.store })}
             </td>
           </tr>]];
       } else if (Object.keys(treeData).length) {
