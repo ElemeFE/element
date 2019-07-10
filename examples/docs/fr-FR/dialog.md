@@ -197,6 +197,39 @@ Le contenu du modal peut être centré.
 ```
 :::
 
+### Tractable
+
+Maintenez la tête sur la fenêtre.
+
+:::demo Régler `center` à `true` activer la fonction de traction.
+
+```html
+<el-button type="text" @click="dragDialogVisible = true">Cliquez pour ouvrir le modal</el-button>
+
+<el-dialog
+  title="Fais - moi traîner"
+  :visible.sync="dragDialogVisible"
+  width="40%"
+  draggable>
+  <span>Tenez la tête et tirez.</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dragDialogVisible = false">Annuler</el-button>
+    <el-button type="primary" @click="dragDialogVisible = false">Confirmer</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        dragDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 Le contenu de Dialog bénéficie du lazy loading, ce qui signifie que le slot par défaut n'est pas généré par le DOM avant la première ouverture. Si vous avez besoin de manipuler le DOM ou d'accéder à un composant via `ref`, vous pouvez le faire avec la callback de l'évènement `open`.
 :::
@@ -224,6 +257,7 @@ Si la variable liée à `visible` est gérée dans Vuex, le modificateur `.sync`
 | show-close | Si le bouton de fermeture doit apparaître. | boolean    | — | true |
 | before-close | Callback avant la fermeture du Dialog. | function(done)，done est utilisé pour fermer le Dialog. | — | — |
 | center | Si le header et le footer doivent être centrés. | boolean | — | false |
+| draggable | Si le peut être traîné | boolean | — | false |
 
 ### Slot
 

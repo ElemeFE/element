@@ -194,6 +194,39 @@ Dialog's content can be centered.
 ```
 :::
 
+### Draggable
+
+Hold on dialog head and drag the whole window.
+
+:::demo Setting `draggable` to `true`, Drag-and-drop function can be enabled.
+
+```html
+<el-button type="text" @click="dragDialogVisible = true">Click to open the Dialog</el-button>
+
+<el-dialog
+  title="Hold on and drag"
+  :visible.sync="dragDialogVisible"
+  width="40%"
+  draggable>
+  <span>Try to hold the head and drag.</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dragDialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="dragDialogVisible = false">Confirm</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        dragDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 The content of Dialog is lazily rendered, which means the default slot is not rendered onto the DOM until it is firstly opened. Therefore, if you need to perform a DOM manipulation or access a component using `ref`, do it in the `open` event callback.
 :::
@@ -221,6 +254,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | show-close | whether to show a close button | boolean    | — | true |
 | before-close | callback before Dialog closes, and it will prevent Dialog from closing | function(done)，done is used to close the Dialog | — | — |
 | center | whether to align the header and footer in center | boolean | — | false |
+| draggable | whether the Dialog can be dragged | boolean | — | false |
 
 ### Slot
 

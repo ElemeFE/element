@@ -193,6 +193,39 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```
 :::
 
+### 可拖拽
+
+按住头部可以对整个窗口拖拽
+
+:::demo 将`draggable`设置为`true`即可启用拖拽功能。
+
+```html
+<el-button type="text" @click="dragDialogVisible = true">点击打开 Dialog</el-button>
+
+<el-dialog
+  title="点我拖拽"
+  :visible.sync="dragDialogVisible"
+  width="40%"
+  draggable>
+  <span>按住头部拖拉试试</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dragDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dragDialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        dragDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
 :::
@@ -219,6 +252,7 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | show-close | 是否显示关闭按钮 | boolean    | — | true |
 | before-close | 关闭前的回调，会暂停 Dialog 的关闭 | function(done)，done 用于关闭 Dialog | — | — |
 | center | 是否对头部和底部采用居中布局 | boolean | — | false |
+| draggable | 是否可拖拽 | boolean | — | false |
 
 ### Slot
 | name | 说明 |

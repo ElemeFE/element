@@ -5,7 +5,7 @@
 
 @include b(dialog) {
   position: relative;
-  margin: 0 auto 50px;
+  // margin: 0 auto 50px;
   background: $--dialog-background-color;
   border-radius: $--border-radius-small;
   box-shadow: $--dialog-box-shadow;
@@ -28,6 +28,13 @@
     left: 0;
     overflow: auto;
     margin: 0;
+
+    .draggable-proxy {
+      position: absolute;
+      z-index: 6;
+      border: 2px dotted $--color-primary;
+      cursor: move;
+    }
   }
 
   @include e(header) {
@@ -88,6 +95,16 @@
 
     @include e(footer) {
       text-align: inherit;
+    }
+  }
+
+  // 添加拖拽样式
+  @include m(draggable) {
+    position: relative;
+    z-index: 9;
+
+    .el-dialog__header {
+      cursor: move;
     }
   }
 }

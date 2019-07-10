@@ -3,16 +3,22 @@
     name="dialog-fade"
     @after-enter="afterEnter"
     @after-leave="afterLeave">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-dialog__wrapper" 
+      v-show="visible" 
+      @click.self="handleWrapperClick"
+      @mouseup.stop="handleDragStop"
+      @mousemove.stop="handleMouseMove">
       <div
         role="dialog"
         aria-modal="true"
         :aria-label="title || 'dialog'"
         class="el-dialog"
-        :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
+        :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center, 'el-dialog--draggable': draggable && !fullscreen }, customClass]"
         ref="dialog"
         :style="style">
-        <div class="el-dialog__header">
+        <div class="el-dialog__header" 
+          @mousedown.stop="handleDragStart" 
+          @mouseup.stop="handleDragStop">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
           </slot>
@@ -21,6 +27,8 @@
             class="el-dialog__headerbtn"
             aria-label="Close"
             v-if="showClose"
+            @mousedown.stop
+            @mouseup.stop
             @click="handleClose">
             <i class="el-dialog__close el-icon el-icon-close"></i>
           </button>
@@ -30,6 +38,8 @@
           <slot name="footer"></slot>
         </div>
       </div>
+
+      <div v-if="draggable && isDragging" class="draggable-proxy" :style="dragProxyStyle"></div>
     </div>
   </transition>
 </template>
@@ -102,18 +112,39 @@
       center: {
         type: Boolean,
         default: false
+      },
+      draggable: {
+        type: Boolean,
+        default: false
       }
     },
 
     data() {
       return {
-        closed: false
+        closed: false,
+        isDragging: false,
+        style: {
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)'
+        },
+        dragProxyStyle: {
+          left: 0,
+          top: 0,
+          width: 0,
+          height: 0
+        },
+        mouseNormal: {
+          x: 0,
+          y: 0
+        }
       };
     },
 
     watch: {
       visible(val) {
         if (val) {
+          this.isDragging = false;
           this.closed = false;
           this.$emit('open');
           this.$el.addEventListener('scroll', this.updatePopper);
@@ -130,7 +161,7 @@
       }
     },
 
-    computed: {
+    /* computed: {
       style() {
         let style = {};
         if (!this.fullscreen) {
@@ -141,7 +172,7 @@
         }
         return style;
       }
-    },
+    }, */
 
     methods: {
       getMigratingConfig() {
@@ -152,7 +183,7 @@
         };
       },
       handleWrapperClick() {
-        if (!this.closeOnClickModal) return;
+        if (!this.closeOnClickModal || this.isDragging) return;
         this.handleClose();
       },
       handleClose() {
@@ -178,10 +209,57 @@
       },
       afterLeave() {
         this.$emit('closed');
+      },
+      handleDragStart(e) {
+        if (this.fullscreen || !this.draggable) return;
+        e.preventDefault() ;
+        this.isDragging = true;
+
+        this.mouseNormal.x = e.offsetX;
+        this.mouseNormal.y = e.offsetY;
+
+        const rect = this.$refs['dialog'].getBoundingClientRect();
+        this.dragProxyStyle.left = rect.left + 'px';
+        this.dragProxyStyle.top = rect.top + 'px';
+        this.dragProxyStyle.width = rect.width + 'px';
+        this.dragProxyStyle.height = rect.height + 'px';
+      },
+      handleDragStop(e) {
+        if (this.fullscreen || !this.isDragging) return;
+        e.preventDefault();
+
+        setTimeout(() => {
+          this.mouseNormal = {
+            x: 0,
+            y: 0
+          };
+          this.isDragging = false;
+
+          this.style.top = this.dragProxyStyle.top;
+          this.style.left = this.dragProxyStyle.left;
+          this.style.transform = 'none';
+        }, 10);
+      },
+      handleMouseMove(e) {
+        if (!this.isDragging || this.fullscreen) return;
+        e.preventDefault();
+
+        let mousemoveX = e.clientX - this.mouseNormal.x;
+        let mousemoveY = e.clientY - this.mouseNormal.y ;
+
+        this.dragProxyStyle.left = mousemoveX + 'px';
+        this.dragProxyStyle.top = mousemoveY + 'px' ;
       }
     },
 
     mounted() {
+      if (!this.fullscreen) {
+        this.style.top = this.top;
+        if (this.width) {
+          this.style.width = this.width;
+        }
+      }
+
       if (this.visible) {
         this.rendered = true;
         this.open();

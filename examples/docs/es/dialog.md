@@ -200,6 +200,39 @@ El contenido de Diálogo se puede centrar.
 ```
 :::
 
+### Arrastrar
+
+Aprieta la cabeza para arrastrar por toda la ventana.
+
+:::demo Ajuste `draggable` en`true` activar tracción.
+
+```html
+<el-button type="text" @click="dragDialogVisible = true">Click to open the Dialog</el-button>
+
+<el-dialog
+  title="Hold on and drag"
+  :visible.sync="dragDialogVisible"
+  width="40%"
+  draggable>
+  <span>Try to hold the head and drag.</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dragDialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="dragDialogVisible = false">Confirm</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        dragDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
 :::tip
 El contenido de Dialog se renderiza en modo lazy, lo que significa que la ranura por defecto no se renderiza en el DOM hasta que se abre por primera vez. Por lo tanto, si necesita realizar una manipulación DOM o acceder a un componente mediante ref, hágalo en el callback del evento `open`.
 :::
@@ -229,6 +262,7 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 | show-close            | si mostrar un botón de cerrar            | boolean                                  | —                 | true        |
 | before-close          | una devolución de llamada antes de que se cierre el cuadro de diálogo, y evitar cerrar el cuadro de diálogo | función(done) `done`se usa para cerrar el diálog | —                 | —           |
 | center                | si alinear el encabezado y el pie de página en el centro | boolean                                  | —                 | false       |
+| draggable | Arrastrar o no | boolean | — | false |
 
 ### Slots
 
