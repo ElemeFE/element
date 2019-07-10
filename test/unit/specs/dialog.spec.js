@@ -142,7 +142,7 @@ describe('Dialog', () => {
 
     it('top', () => {
       vm = getDialogVm('top="100px"');
-      expect(vm.$el.querySelector('.el-dialog').style.marginTop).to.equal('100px');
+      expect(vm.$el.querySelector('.el-dialog').style.top).to.equal('100px');
     });
 
     it('custom-class', () => {

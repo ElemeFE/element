@@ -252,14 +252,16 @@
       }
     },
 
-    mounted() {
+    created() {
       if (!this.fullscreen) {
         this.style.top = this.top;
         if (this.width) {
           this.style.width = this.width;
         }
       }
+    },
 
+    mounted() {
       if (this.visible) {
         this.rendered = true;
         this.open();
