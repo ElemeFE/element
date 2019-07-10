@@ -149,8 +149,9 @@ export default {
     checkedValue(val) {
       if (!isEqual(val, this.value)) {
         this.checkStrictly && this.calculateCheckedNodePaths();
+
         this.$emit('input', val);
-        this.$emit('change', val);
+        this.$emit('change', val, this.getCheckedPath(val));
       }
     }
   },
@@ -348,6 +349,29 @@ export default {
       } else {
         this.checkedValue = emitPath ? [] : null;
       }
+    },
+    getNodeListByValue(valueList) {
+      const nodeList = this.store.getFlattedNodes(false).map(node => node.data);
+      return valueList.map((nodeValue) => {
+        return nodeList.filter(node => node.value === nodeValue)[0];
+      });
+    },
+    getCheckedPath(checkedValue) {
+      if (this.config.emitPath) {
+        if (this.multiple) {
+          return checkedValue.map((item) => {
+            return this.getNodeListByValue(item);
+          });
+        }
+
+        return this.getNodeListByValue(checkedValue);
+      }
+
+      if (this.multiple) {
+        return checkedValue.map((item) => this.getNodeByValue(item).data);
+      }
+
+      return this.getNodeByValue(checkedValue).data;
     }
   }
 };

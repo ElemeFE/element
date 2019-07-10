@@ -310,7 +310,7 @@ export default {
       const { value } = this;
       if (!isEqual(val, value) || isUndefined(value)) {
         this.$emit('input', val);
-        this.$emit('change', val);
+        this.$emit('change', val, this.panel.getCheckedPath(val));
         this.dispatch('ElFormItem', 'el.form.change', [val]);
         this.computePresentContent();
       }
