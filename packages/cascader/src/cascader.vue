@@ -225,7 +225,8 @@ export default {
       type: Function,
       default: () => (() => {})
     },
-    popperClass: String
+    popperClass: String,
+    separatorMethod: Function
   },
 
   data() {
@@ -480,10 +481,16 @@ export default {
     },
     computePresentText() {
       const { checkedValue, config } = this;
+      let { separatorMethod } = this;
+
+      if (!isFunction(separatorMethod)) {
+        separatorMethod = (node, separator, showAllLevels) => node.getText(showAllLevels, separator);
+      }
+
       if (!isEmpty(checkedValue)) {
         const node = this.panel.getNodeByValue(checkedValue);
         if (node && (config.checkStrictly || node.isLeaf)) {
-          this.presentText = node.getText(this.showAllLevels, this.separator);
+          this.presentText = separatorMethod(node, this.separator, this.showAllLevels);
           return;
         }
       }
@@ -493,11 +500,16 @@ export default {
       const { isDisabled, leafOnly, showAllLevels, separator, collapseTags } = this;
       const checkedNodes = this.getCheckedNodes(leafOnly);
       const tags = [];
+      let { separatorMethod } = this;
+
+      if (!isFunction(separatorMethod)) {
+        separatorMethod = (node, separator, showAllLevels) => node.getText(showAllLevels, separator);
+      }
 
       const genTag = node => ({
         node,
         key: node.uid,
-        text: node.getText(showAllLevels, separator),
+        text: separatorMethod(node, separator, showAllLevels),
         hitState: false,
         closable: !isDisabled && !node.isDisabled
       });
@@ -524,16 +536,20 @@ export default {
       this.presentTags = tags;
     },
     getSuggestions() {
-      let { filterMethod } = this;
+      let { filterMethod, separatorMethod } = this;
 
       if (!isFunction(filterMethod)) {
         filterMethod = (node, keyword) => node.text.includes(keyword);
       }
 
+      if (!isFunction(separatorMethod)) {
+        separatorMethod = (node, separator, showAllLevels) => node.getText(showAllLevels, separator);
+      }
+
       const suggestions = this.panel.getFlattedNodes(this.leafOnly)
         .filter(node => {
           if (node.isDisabled) return false;
-          node.text = node.getText(this.showAllLevels, this.separator) || '';
+          node.text = separatorMethod(node, this.separator, this.showAllLevels) || '';
           return filterMethod(node, this.inputValue);
         });
 
