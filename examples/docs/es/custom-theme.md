@@ -2,7 +2,7 @@
 Element utiliza la metodología BEM en CSS con la finalidad de que puedas sobrescribir los estilos fácilmente. Pero, si necesita remplazar estilos a gran escala, por ejemplo, cambiar el color del tema de azul a naranja o verde, quizás reemplazarlos uno a uno no sea lo más adecuado, para ello hay 4 maneras de modificar los estilos.
 
 ### Online Theme Roller
-Use [Online Theme Roller](./#/es/theme) to customize all Design Tokens of global variables and components，and preview the new theme in real-time.and it can generate a complete style package based on the new theme for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or 'Import component theme on demand' part of this section).
+Use [Online Theme Roller](./#/es/theme) to customize all Design Tokens of global variables and components，and preview the new theme in real-time.and it can generate a complete style package based on the new theme for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or part of this section).
 
 <img src="https://shadow.elemecdn.com/app/sns-client/element-theme-editor2.e16c6a01-806d-11e9-bc23-21435c54c509.png" style="width: 70%;margin: 30px auto 0;display: block;">
 
@@ -92,7 +92,7 @@ $--color-primary: red;
 ```
 
 #### <strong>Construyendo el tema</strong>
-Después de haber modificado el archivo de variables, utilizaremos el comando `et` para construir nuestro tema. Puedes activar el modo `watch` agregando el parámetro `-w`. Y, si desea personalizar el nombre del archivo, debes agregar el parámetro `-c` seguido del nombre.
+Después de haber modificado el archivo de variables, utilizaremos el comando `et` para construir nuestro tema. Puedes activar el modo `watch` agregando el parámetro `-w`. Y, si desea personalizar el nombre del archivo, debes agregar el parámetro `-c` seguido del nombre. Por defecto, el archivo de tema construido es colocado dentro de `./theme`. Puede especificar un directorio distinto utilizando el parámetro `-o`. 
 ```shell
 et
 
@@ -100,8 +100,9 @@ et
 > ✔ build element theme
 ```
 
+### Use custom theme
 #### <strong>Importar un tema personalizado</strong>
-Por defecto, el archivo de tema construido es colocado dentro de `./theme`. Puede especificar un directorio distinto utilizando el parámetro `-o`. Importar su propio tema es igual a como si importará el tema por defecto, únicamente tiene que importar el archivo que se construyó:
+Importing your own theme is just like importing the default theme, only this time you import the file built from "Online Theme Roller" or "CLI tool":
 
 ```javascript
 import '../theme/index.css'

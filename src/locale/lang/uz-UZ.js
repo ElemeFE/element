@@ -10,15 +10,15 @@ export default {
       cancel: 'Bekor qilish',
       clear: 'Tozalash',
       confirm: 'Qabul qilish',
-      selectDate: 'Kunni taladingiz',
-      selectTime: 'Soatni tanladingiz',
+      selectDate: 'Kunni tanlash',
+      selectTime: 'Soatni tanlash',
       startDate: 'Boshlanish sanasi',
       startTime: 'Boshlanish vaqti',
       endDate: 'Tugash sanasi',
       endTime: 'Tugash vaqti',
-      prevYear: 'O`tgan yil',
+      prevYear: 'Oʻtgan yil',
       nextYear: 'Kelgusi yil',
-      prevMonth: 'O`tgan oy',
+      prevMonth: 'Oʻtgan oy',
       nextMonth: 'Kelgusi oy',
       year: 'Yil',
       month1: 'Yanvar',
@@ -29,7 +29,7 @@ export default {
       month6: 'Iyun',
       month7: 'Iyul',
       month8: 'Avgust',
-      month9: 'Sentyabr',
+      month9: 'Sentabr',
       month10: 'Oktabr',
       month11: 'Noyabr',
       month12: 'Dekabr',
@@ -60,20 +60,20 @@ export default {
     },
     select: {
       loading: 'Yuklanmoqda',
-      noMatch: 'Mos ma`lumot yo`q',
-      noData: 'Ma`lumot yo`q',
+      noMatch: 'Mos maʼlumot yoʻq',
+      noData: 'Maʼlumot yoʻq',
       placeholder: 'Tanladizngiz'
     },
     cascader: {
-      noMatch: 'Mos ma`lumot yo`q',
+      noMatch: 'Mos maʼlumot topilmadi',
       loading: 'Yuklanmoqda',
-      placeholder: 'Tanladingiz',
-      noData: 'Ma`lumot yo`q'
+      placeholder: 'Tanlash',
+      noData: 'Maʼlumot yoʻq'
     },
     pagination: {
-      goto: 'Borish',
-      pagesize: '/page',
-      total: 'Jami {total}',
+      goto: 'Oʻtish',
+      pagesize: '/sahifa',
+      total: 'Barchasi {total} ta',
       pageClassifier: ''
     },
     messagebox: {
@@ -83,28 +83,28 @@ export default {
       error: 'Xatolik'
     },
     upload: {
-      deleteTip: 'O`chirish tugmasini bosib o`chiring',
-      delete: 'O`chirish',
-      preview: 'Oldin ko`rish',
-      continue: 'Joylashtirish'
+      deleteTip: 'Oʻchirish tugmasini bosib oʻchiring',
+      delete: 'Oʻchirish',
+      preview: 'Oldin koʻrish',
+      continue: 'Davom qilish'
     },
     table: {
-      emptyText: 'Bo`sh',
+      emptyText: 'Boʻsh',
       confirmFilter: 'Qabul qilish',
       resetFilter: 'Oldingi holatga qaytarish',
       clearFilter: 'Jami',
       sumText: 'Summasi'
     },
     tree: {
-      emptyText: 'Ma`lumot yo`q'
+      emptyText: 'Maʼlumot yoʻq'
     },
     transfer: {
-      noMatch: 'Mos ma`lumot topilmadi',
-      noData: 'Ma`lumot yo`q',
-      titles: ['List 1', 'List 2'],
-      filterPlaceholder: 'Kalit so`zni kiriting',
+      noMatch: 'Mos maʼlumot topilmadi',
+      noData: 'Maʼlumot yoʻq',
+      titles: ['1-jadval', '2-jadval'],
+      filterPlaceholder: 'Kalit soʻzni kiriting',
       noCheckedFormat: '{total} ta element',
-      hasCheckedFormat: '{checked}/{total} belgilandi'
+      hasCheckedFormat: '{checked}/{total} ta belgilandi'
     },
     image: {
       error: 'Xatolik'
