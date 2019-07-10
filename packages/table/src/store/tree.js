@@ -149,7 +149,7 @@ export default {
       const id = getRowIdentity(row, rowKey);
       const data = id && treeData[id];
       if (!data) return;
-      const oldExpanded = treeData[id].expanded;
+      const oldExpanded = data.expanded;
       if (id && ('expanded' in data)) {
         expanded = typeof expanded === 'undefined' ? !data.expanded : expanded;
         treeData[id].expanded = expanded;
