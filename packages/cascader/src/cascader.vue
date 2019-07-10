@@ -225,7 +225,11 @@ export default {
       type: Function,
       default: () => (() => {})
     },
-    popperClass: String
+    popperClass: String,
+    separatorMethod: {
+      type: Function,
+      default: (node, separator, showAllLevels) => node.getText(showAllLevels, separator)
+    }
   },
 
   data() {
@@ -479,25 +483,25 @@ export default {
       });
     },
     computePresentText() {
-      const { checkedValue, config } = this;
+      const { checkedValue, config, separatorMethod, separator, showAllLevels } = this;
       if (!isEmpty(checkedValue)) {
         const node = this.panel.getNodeByValue(checkedValue);
         if (node && (config.checkStrictly || node.isLeaf)) {
-          this.presentText = node.getText(this.showAllLevels, this.separator);
+          this.presentText = separatorMethod(node, separator, showAllLevels);
           return;
         }
       }
       this.presentText = null;
     },
     computePresentTags() {
-      const { isDisabled, leafOnly, showAllLevels, separator, collapseTags } = this;
+      const { isDisabled, leafOnly, showAllLevels, separator, collapseTags, separatorMethod } = this;
       const checkedNodes = this.getCheckedNodes(leafOnly);
       const tags = [];
 
       const genTag = node => ({
         node,
         key: node.uid,
-        text: node.getText(showAllLevels, separator),
+        text: separatorMethod(node, separator, showAllLevels),
         hitState: false,
         closable: !isDisabled && !node.isDisabled
       });
@@ -524,7 +528,7 @@ export default {
       this.presentTags = tags;
     },
     getSuggestions() {
-      let { filterMethod } = this;
+      let { filterMethod, separatorMethod, separator, showAllLevels } = this;
 
       if (!isFunction(filterMethod)) {
         filterMethod = (node, keyword) => node.text.includes(keyword);
@@ -533,7 +537,7 @@ export default {
       const suggestions = this.panel.getFlattedNodes(this.leafOnly)
         .filter(node => {
           if (node.isDisabled) return false;
-          node.text = node.getText(this.showAllLevels, this.separator) || '';
+          node.text = separatorMethod(node, separator, showAllLevels) || '';
           return filterMethod(node, this.inputValue);
         });
 
