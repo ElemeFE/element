@@ -16,6 +16,8 @@
   >img {
     width: 100%;
     height: 100%;
+    vertical-align: middle;
+    display: block;
   }
 
   @include m(circle) {
