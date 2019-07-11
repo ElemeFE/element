@@ -34,7 +34,6 @@
               tabSize = $el[`client${firstUpperCase(sizeName)}`];
               let tabStyles = window.getComputedStyle($el);
               if (sizeName === 'width' && this.tabs.length > 1) {
-                // tabSize -= (index === 0 || index === this.tabs.length - 1) ? 20 : 40;
                 tabSize -= parseFloat(tabStyles.paddingLeft) + parseFloat(tabStyles.paddingRight);
               }
               offset += parseFloat(tabStyles.paddingLeft);
