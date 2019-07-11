@@ -2117,7 +2117,7 @@
     methods: {
       handleChange(node, separator, showAllLevels) {
         if(node.pathLabels){
-          return node.pathLabels.reverse().join(separator)
+          return JSON.parse(JSON.stringify( node.pathLabels )).reverse().join(separator)
         }
       }
     }
