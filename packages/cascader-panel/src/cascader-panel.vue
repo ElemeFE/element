@@ -137,7 +137,23 @@ export default {
   watch: {
     options: {
       handler: function() {
-        this.initStore();
+        const { store, activePath } = this;
+        // option lazy load
+        if (isEmpty(store) || isEmpty(activePath)) {
+          this.initStore();
+        } else {
+          // when options change, recalculate store, activePath and menus, let panel rerender
+          const { options, config } = this;
+          this.store = new Store(options, config);
+
+          if (!isEmpty(activePath)) {
+            this.activePath = activePath.map((path) => {
+              return this.store.getNodeByValue(path.value);
+            });
+          }
+
+          this.menus = this.getCurrentMenus();
+        }
       },
       immediate: true,
       deep: true
@@ -348,6 +364,16 @@ export default {
       } else {
         this.checkedValue = emitPath ? [] : null;
       }
+    },
+    getCurrentMenus() {
+      const { store, activePath } = this;
+      const menus = [store.getNodes()];
+
+      for (let i = 0; i < activePath.length; i++) {
+        menus.push(activePath[i].children);
+      }
+
+      return menus;
     }
   }
 };

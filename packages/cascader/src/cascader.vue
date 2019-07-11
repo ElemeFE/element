@@ -317,7 +317,7 @@ export default {
     },
     options: {
       handler: function() {
-        this.$nextTick(this.computePresentContent);
+        this.$nextTick(this.computePresentContent(false));
       },
       deep: true
     },
@@ -464,7 +464,7 @@ export default {
         }
       });
     },
-    computePresentContent() {
+    computePresentContent(toggleDropDown = true) {
       this.$nextTick(() => {
         const { multiple, checkStrictly } = this.config;
         if (multiple) {
@@ -472,7 +472,7 @@ export default {
           this.presentText = this.presentTags.length ? ' ' : null;
         } else {
           this.computePresentText();
-          if (!checkStrictly && this.dropDownVisible) {
+          if (toggleDropDown && !checkStrictly && this.dropDownVisible) {
             this.toggleDropDownVisible(false);
           }
         }
