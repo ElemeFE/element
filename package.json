@@ -65,6 +65,7 @@
     "deepmerge": "^1.2.0",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",
+    "scroll-into-view-if-needed": "^2.2.20",
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {

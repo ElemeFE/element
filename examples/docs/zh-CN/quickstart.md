@@ -254,14 +254,14 @@ Vue.prototype.$message = Message;
 
 ### 全局配置
 
-在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 `size` 与 `zIndex` 字段。`size` 用于改变组件的默认尺寸，`zIndex` 设置弹框的初始 z-index（默认值：2000）。按照引入 Element 的方式，具体操作如下：
+在引入 Element 时，可以传入一个全局配置对象。该对象目前支持 `size`、`zIndex` 与 `validateScrollOptions` 字段。`size` 用于改变组件的默认尺寸，`zIndex` 设置弹框的初始 z-index（默认值：2000），`validateScrollOptions` 设置校验表单滚动到第一个报错元素时的滚动行为（只有使用 `Form` 组件的 `validateAndScroll` 方法才会应用此配置，默认值：{ scrollMode: 'if-needed', behavior: 'smooth', block: 'start' }），详细配置见 [配置参数](https://github.com/stipsan/scroll-into-view-if-needed#options)。按照引入 Element 的方式，具体操作如下：
 
 完整引入 Element：
 
 ```js
 import Vue from 'vue';
 import Element from 'element-ui';
-Vue.use(Element, { size: 'small', zIndex: 3000 });
+Vue.use(Element, { size: 'small', zIndex: 3000, validateScrollOptions: { block: 'start' } });
 ```
 
 按需引入 Element：
@@ -270,11 +270,11 @@ Vue.use(Element, { size: 'small', zIndex: 3000 });
 import Vue from 'vue';
 import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000, validateScrollOptions: { block: 'start' } };
 Vue.use(Button);
 ```
 
-按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'，弹框的初始 z-index 为 3000。
+按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'，弹框的初始 z-index 为 3000，表单校验滚动为第一个报错元素滚动到可视区的最顶部。
 
 ### 开始使用
 
