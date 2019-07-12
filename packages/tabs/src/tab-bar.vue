@@ -36,7 +36,10 @@
               if (sizeName === 'width' && this.tabs.length > 1) {
                 tabSize -= parseFloat(tabStyles.paddingLeft) + parseFloat(tabStyles.paddingRight);
               }
-              offset += parseFloat(tabStyles.paddingLeft);
+
+              if (sizeName === 'width') {
+                offset += parseFloat(tabStyles.paddingLeft);
+              }
               return false;
             }
           });
