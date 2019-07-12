@@ -80,6 +80,12 @@ export interface ElMessage {
   
   /** Show an error message with options */
   error (options: ElMessageOptions): ElMessageComponent
+
+  /** Close the message by id */
+  close(id: string, onClose?: Function): void
+
+  /** Close all message */
+  closeAll(): void
 }
 
 declare module 'vue/types/vue' {
