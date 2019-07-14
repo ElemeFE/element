@@ -219,7 +219,7 @@
           };
         }
       } else if (!isDisabled && !checkStrictly && !multiple) {
-        events.on.click = this.handleCheckChange;
+        events.on.click = [this.handleExpand, this.handleCheckChange];
       }
 
       return (
