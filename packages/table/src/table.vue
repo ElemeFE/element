@@ -125,8 +125,18 @@
           class="el-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px'}"></div>
       </div>
+    </div>
+    <div
+      v-if="fixedColumns.length > 0 && showSummary"
+      v-mousewheel="handleFixedMousewheel"
+      class="el-table__fixed"
+      :style="{
+        width: layout.fixedWidth ? layout.fixedWidth + 'px' : '',
+        top: 'auto',
+        bottom: 0,
+        height: footerWrapperHeight + 'px'
+      }">
       <div
-        v-if="showSummary"
         v-show="data && data.length > 0"
         class="el-table__fixed-footer-wrapper"
         ref="fixedFooterWrapper">
@@ -186,8 +196,19 @@
           class="el-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px' }"></div>
       </div>
+    </div>
+    <div
+      v-if="rightFixedColumns.length > 0 && showSummary"
+      v-mousewheel="handleFixedMousewheel"
+      class="el-table__fixed-right"
+      :style="{
+        width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
+        right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 0)) + 'px' : '',
+        top: 'auto',
+        bottom: 0,
+        height: footerWrapperHeight + 'px'
+      }">
       <div
-        v-if="showSummary"
         v-show="data && data.length > 0"
         class="el-table__fixed-footer-wrapper"
         ref="rightFixedFooterWrapper">
@@ -547,7 +568,7 @@
         if (this.maxHeight) {
           if (this.showSummary) {
             return {
-              bottom: 0
+              bottom: (this.layout.scrollX && this.data.length) ? (this.layout.gutterWidth + this.footerWrapperHeight) + 'px' : ''
             };
           }
           return {
@@ -556,7 +577,8 @@
         } else {
           if (this.showSummary) {
             return {
-              height: this.layout.tableHeight ? this.layout.tableHeight + 'px' : ''
+              // 减去总计的高度，防止左/右固定列，挡住了主表格的横向滚动条
+              height: this.layout.viewportHeight ? this.layout.viewportHeight - this.footerWrapperHeight + 'px' : ''
             };
           }
           return {
@@ -601,6 +623,12 @@
         immediate: true,
         handler(value) {
           this.store.commit('setData', value);
+          this.$nextTick(() => {
+            // 获取“总计”的高度
+            if (this.$refs.footerWrapper) {
+              this.footerWrapperHeight = this.$refs.footerWrapper.clientHeight;
+            }
+          });
         }
       },
 
@@ -676,7 +704,9 @@
         },
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left'
+        scrollPosition: 'left',
+        // “总计”的高度
+        footerWrapperHeight: 0
       };
     }
   };
