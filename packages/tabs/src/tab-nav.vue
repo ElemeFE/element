@@ -41,6 +41,15 @@
       };
     },
 
+    watch:{
+      scrollable(val){
+        if(!val) return;
+        this.$nextTick(()=>{
+          this.scrollToActiveTab()
+        })
+      }
+    },
+
     computed: {
       navStyle() {
         const dir = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'X' : 'Y';
