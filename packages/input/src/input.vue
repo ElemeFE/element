@@ -60,7 +60,8 @@
           </template>
           <i v-if="showClear"
             class="el-input__icon el-icon-circle-close el-input__clear"
-            @click="clear"
+            @mousedown.prevent
+            @mouseup="HandleBlurAndClear"
           ></i>
           <i v-if="showPwdVisible"
             class="el-input__icon el-icon-view el-input__clear"
@@ -404,6 +405,10 @@
           this.showPassword ||
           this.isWordLimitVisible ||
           (this.validateState && this.needStatusIcon);
+      },
+      HandleBlurAndClear() {
+        this.$emit('blur');
+        this.clear();
       }
     },
 
