@@ -81,7 +81,8 @@ You can choose week, month, year or multiple dates by extending the standard dat
     <el-date-picker
       v-model="value1"
       type="week"
-      format="Week WW"
+      format="yyyy([W]eek WW)"
+      value-format="yyyy([W]eek WW)"
       placeholder="Pick a week">
     </el-date-picker>
   </div>
@@ -117,7 +118,7 @@ You can choose week, month, year or multiple dates by extending the standard dat
   export default {
     data() {
       return {
-        value1: '',
+        value1: '2019(Week 10)',
         value2: '',
         value3: '',
         value4: ''
@@ -331,8 +332,8 @@ Pay attention to capitalization
 | `MM` | month | | 01 |
 | `MMM` | month | | Jan |
 | `MMMM` | month | | January |
-| `W`  | week | only for week picker's `format`; no leading 0 | 1 |
-| `WW` | week | only for week picker's `format`| 01 |
+| `W`  | week | only for week picker; no leading 0 | 1 |
+| `WW` | week | only for week picker| 01 |
 | `d`  | day | no leading 0 | 2 |
 | `dd` | day | | 02 |
 | `H`  | hour | 24-hour clock; no leading 0 | 3 |

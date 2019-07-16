@@ -81,6 +81,7 @@
       v-model="value1"
       type="week"
       format="yyyy 第 WW 周"
+      value-format="yyyy-WW"
       placeholder="选择周">
     </el-date-picker>
   </div>
@@ -116,7 +117,7 @@
   export default {
     data() {
       return {
-        value1: '',
+        value1: '2019-10',
         value2: '',
         value3: '',
         value4: ''
@@ -284,8 +285,8 @@
 | `yyyy` | 年 | | 2017 |
 | `M`  | 月 | 不补0 | 1 |
 | `MM` | 月 | | 01 |
-| `W`  | 周 | 仅周选择器的 `format` 可用；不补0 | 1 |
-| `WW` | 周 | 仅周选择器的 `format` 可用 | 01 |
+| `W`  | 周 | 仅周选择器可用；不补0 | 1 |
+| `WW` | 周 | 仅周选择器可用 | 01 |
 | `d`  | 日 | 不补0 | 2 |
 | `dd` | 日 | | 02 |
 | `H`  | 小时 | 24小时制；不补0 | 3 |
