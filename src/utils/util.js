@@ -216,3 +216,22 @@ export const isEmpty = function(val) {
 
   return false;
 };
+
+export function rafThrottle(fn) {
+  let locked = false;
+  return function(...args) {
+    if (locked) return;
+    locked = true;
+    window.requestAnimationFrame(_ => {
+      fn.apply(this, args);
+      locked = false;
+    });
+  };
+}
+
+export function objToArray(obj) {
+  if (Array.isArray(obj)) {
+    return obj;
+  }
+  return isEmpty(obj) ? [] : [obj];
+}

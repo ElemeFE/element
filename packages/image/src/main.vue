@@ -11,13 +11,16 @@
       class="el-image__inner"
       v-bind="$attrs"
       v-on="$listeners"
+      @click="clickHandler"
       :src="src"
       :style="imageStyle"
-      :class="{ 'el-image__inner--center': alignCenter }">
+      :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
+    <image-viewer v-if="preview" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
   </div>
 </template>
 
 <script>
+  import ImageViewer from './image-viewer';
   import Locale from 'element-ui/src/mixins/locale';
   import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
   import { isString, isHtmlElement } from 'element-ui/src/utils/types';
@@ -39,11 +42,19 @@
     mixins: [Locale],
     inheritAttrs: false,
 
+    components: {
+      ImageViewer
+    },
+
     props: {
       src: String,
       fit: String,
       lazy: Boolean,
-      scrollContainer: {}
+      scrollContainer: {},
+      previewSrcList: {
+        type: Array,
+        default: () => []
+      }
     },
 
     data() {
@@ -52,7 +63,8 @@
         error: false,
         show: !this.lazy,
         imageWidth: 0,
-        imageHeight: 0
+        imageHeight: 0,
+        showViewer: false
       };
     },
 
@@ -68,6 +80,10 @@
       },
       alignCenter() {
         return !this.$isServer && !isSupportObjectFit() && this.fit !== ObjectFit.FILL;
+      },
+      preview() {
+        const { previewSrcList } = this;
+        return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       }
     },
 
@@ -188,6 +204,12 @@
           default:
             return {};
         }
+      },
+      clickHandler() {
+        this.showViewer = true;
+      },
+      closeViewer() {
+        this.showViewer = false;
       }
     }
   };
