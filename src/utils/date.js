@@ -33,7 +33,7 @@
    * @class fecha
    */
   var fecha = {};
-  var token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
+  var token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|([HhMsDmW])\1?|[aA]|"[^"]*"|'[^']*'/g;
   var twoDigits = '\\d\\d?';
   var threeDigits = '\\d{3}';
   var fourDigits = '\\d{4}';
@@ -169,6 +169,13 @@
     ZZ: function(dateObj) {
       var o = dateObj.getTimezoneOffset();
       return (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4);
+    },
+    //picker.vue  TYPE_VALUE_RESOLVER_MAP.week.format will handle this string
+    W: function(dateObj) {
+      return "W"
+    },
+    WW: function(dateObj) {
+      return "WW"
     }
   };
 
@@ -226,6 +233,9 @@
         minutes = +(parts[1] * 60) + parseInt(parts[2], 10);
         d.timezoneOffset = parts[0] === '+' ? minutes : -minutes;
       }
+    }],
+    W: [twoDigits, function (d, v) {
+      d.week = v;
     }]
   };
   parseFlags.dd = parseFlags.d;
@@ -236,6 +246,7 @@
   parseFlags.MM = parseFlags.M;
   parseFlags.ss = parseFlags.s;
   parseFlags.A = parseFlags.a;
+  parseFlags.WW = parseFlags.W;
 
 
   // Some common format strings
@@ -351,6 +362,12 @@
     } else {
       date = new Date(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
         dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0);
+    }
+
+    if (dateInfo.week && !dateInfo.day) {
+      var weekMillisecond = (dateInfo.week - 1) * 7 * 24 * 60 * 60 * 1000;
+      date.setMonth(0)
+      date = new Date(date.getTime() + weekMillisecond)
     }
     return date;
   };
