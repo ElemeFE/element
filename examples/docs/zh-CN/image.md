@@ -108,6 +108,34 @@
 ```
 :::
 
+### 大图预览
+
+:::demo 可通过 `previewSrcList` 开启预览大图的功能。
+```html
+<div class="demo-image__preview">
+  <el-image 
+    style="width: 100px; height: 100px"
+    :src="url" 
+    :preview-src-list="srcList">
+  </el-image>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        srcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -117,6 +145,8 @@
 | referrer-policy | 原生 referrerPolicy | string | - | - |
 | lazy | 是否开启懒加载 | boolean | — | false |
 | scroll-container | 开启懒加载后，监听 scroll 事件的容器 | string / HTMLElement | — | 最近一个 overflow 值为 auto 或 scroll 的父元素 |
+| preview-src-list | 开启图片预览功能 | Array | — | - |
+| z-index | 设置图片预览的 z-index | Number | — | 2000 |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
