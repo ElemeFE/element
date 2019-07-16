@@ -1,0 +1,18 @@
+.demo-drawer {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    form {
+      flex: 1;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    button {
+      flex: 1;
+    }
+  }
+}
