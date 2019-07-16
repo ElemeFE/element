@@ -8,7 +8,7 @@ Bouton communément utilisé.
 
 ```html
 <el-row>
-  <el-button>Default</el-button>
+  <el-button>Défaut</el-button>
   <el-button type="primary">Primary</el-button>
   <el-button type="success">Success</el-button>
   <el-button type="info">Info</el-button>
@@ -17,7 +17,7 @@ Bouton communément utilisé.
 </el-row>
 
 <el-row>
-  <el-button plain>Plain</el-button>
+  <el-button plain>Plein</el-button>
   <el-button type="primary" plain>Primary</el-button>
   <el-button type="success" plain>Success</el-button>
   <el-button type="info" plain>Info</el-button>
@@ -26,7 +26,7 @@ Bouton communément utilisé.
 </el-row>
 
 <el-row>
-  <el-button round>Round</el-button>
+  <el-button round>Arrondi</el-button>
   <el-button type="primary" round>Primary</el-button>
   <el-button type="success" round>Success</el-button>
   <el-button type="info" round>Info</el-button>
@@ -85,7 +85,7 @@ Bouton sans bordure ni fond.
 
 ### Icône
 
-Utilisez des icônes pour ajouter plus de sens aux boutons. Vous pouvez utiliser uniquement l'icône pour économiser de l'espace, ou bien l'utiliser en plus du texte.
+Utilisez des icônes pour ajouter plus de sens aux boutons. Vous pouvez utiliser uniquement l'icône pour économiser de l'espace, ou bien l'utiliser avec du texte.
 
 :::demo Utilisez l'attribut `icon` pour ajouter une icône. Vous pourrez trouver la liste des icônes dans le composant Icon d'Element. Ajouter des icônes sur le coté droit du texte est possible grâce à la balise `<i>`. Des icônes personnalisées peuvent également être utilisées.
 

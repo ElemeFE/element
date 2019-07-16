@@ -2,7 +2,7 @@
 
 Muestra fechas.
 
-### Basico
+### Básico
 
 :::demo Configure el valor para especificar el mes que se muestra actualmente. Si no se especifica el valor, se muestra el mes actual. el valor soporta la vinculación bidireccional.
 ```html
@@ -54,13 +54,15 @@ Muestra fechas.
 :::
 
 ### Atributos
-| Atributo      | Descripción | Tipo   | Valores aceptados | Por defecto |
-|-----------------|-------------- |---------- |---------------------- |--------- |
-| value / v-model | valor vinculante | Date/string/number | —            | —        |
+| Atributo        | Descripción        | Tipo      | Valores aceptados     | Por defecto |
+|-----------------|------------------- |---------- |---------------------- |------------ |
+| value / v-model | valor vinculante   | Date/string/number | —            | —           |
 | range           | rango de tiempo, incluyendo el tiempo de inicio y el tiempo final. El tiempo de inicio debe ser el lunes, el tiempo final debe ser el domingo, el período no puede exceder los dos meses. | Array     | —           | —      |
+| first-day-of-week | fisrt day of week| Number    | 1 to 7                |  1          |
 
 ### dateCell scoped slot
 | Atributo      | Descripción | Tipo   | Valores aceptados | Por defecto |
 |-----------------|-------------- |---------- |---------------------- |--------- |
 | date            | fecha que la celda representa | Date      | —                     | —        |
 | data            | { type, isSelected, day}. `type` indica el mes al que pertenece la fecha, los valores opcionales son mes anterior, mes actual, mes siguiente; `isSelected` indica si la fecha está seleccionada; `day` es la fecha formateada en el formato yyyy-MM-dd | Object      | —           | —      |
+

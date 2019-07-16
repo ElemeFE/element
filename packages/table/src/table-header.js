@@ -192,9 +192,12 @@ export default {
   },
 
   mounted() {
-    const { prop, order } = this.defaultSort;
-    const init = true;
-    this.store.commit('sort', { prop, order, init });
+    // nextTick 是有必要的 https://github.com/ElemeFE/element/pull/11311
+    this.$nextTick(() => {
+      const { prop, order } = this.defaultSort;
+      const init = true;
+      this.store.commit('sort', { prop, order, init });
+    });
   },
 
   beforeDestroy() {

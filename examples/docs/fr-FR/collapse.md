@@ -14,11 +14,11 @@ Vous pouvez agrandir plusieurs panneaux.
     <div>Cohérence au sein de l'interface: tout les éléments doivent être cohérents entre eux et suivre les mêmes règles, par exemple: le style global, les icônes, la position des éléments, etc.</div>
   </el-collapse-item>
   <el-collapse-item title="Feedback" name="2">
-    <div>Retour d'expèrience: permets aux utilisateurs de percevoir clairement leur opérations par le biais d'animations et d'effets interactifs.</div>
+    <div>Retour d'expérience: permets aux utilisateurs de percevoir clairement leurs opérations par le biais d'animations et d'effets interactifs.</div>
     <div>Retour visuel: reflète l'état actuel de la page via le réarrangement ou la mise à jour des éléments.</div>
   </el-collapse-item>
   <el-collapse-item title="Efficacité" name="3">
-    <div>Simplifier le processus: garde chaque operation simple et intuitive.;</div>
+    <div>Simplifier le processus: garde chaque opération simple et intuitive.;</div>
     <div>Clair et défini: énonce clairement ses intentions afin que l'utilisateur puisse comprendre et prendre une décision rapidement;</div>
     <div>Facile à identifier: l'interface devrait être simple et facile d'accès, afin que les utilisateurs n'ai pas d'efforts de mémorisation à faire.</div>
   </el-collapse-item>
@@ -60,7 +60,7 @@ En mode accordéon, un seul panneau peut être ouvert à la fois.
       <div>Retour visuel: reflète l'état actuel de la page via le réarrangement ou la mise à jour des éléments.</div>
     </el-collapse-item>
     <el-collapse-item title="Efficacité" name="3">
-      <div>Simplifier le processus: garde chaque operation simple et intuitive.;</div>
+      <div>Simplifier le processus: garde chaque opération simple et intuitive.;</div>
       <div>Clair et défini: énonce clairement ses intentions afin que l'utilisateur puisse comprendre et prendre une décision rapidement;</div>
       <div>Facile à identifier: l'interface devrait être simple et facile d'accès, afin que les utilisateurs n'ai pas d'efforts de mémorisation à faire.</div>
     </el-collapse-item>
@@ -83,7 +83,7 @@ En mode accordéon, un seul panneau peut être ouvert à la fois.
 
 ### Titre personnalisé
 
-En plus de l'utilisation de l'attribut `title`, vous pouvez configurer les titres de panneau, ce qui rends possible l'ajout de contenu personnalisé, comme des icônes par exemple.
+En plus de l'utilisation de l'attribut `title`, vous pouvez configurer les titres de panneau, ce qui rend possible l'ajout de contenu personnalisé, comme des icônes par exemple.
 
 :::demo
 ```html
@@ -100,7 +100,7 @@ En plus de l'utilisation de l'attribut `title`, vous pouvez configurer les titre
       <div>Retour visuel: reflète l'état actuel de la page via le réarrangement ou la mise à jour des éléments.</div>
   </el-collapse-item>
   <el-collapse-item title="Efficacité" name="3">
-      <div>Simplifier le processus: garde chaque operation simple et intuitive.;</div>
+      <div>Simplifier le processus: garde chaque opération simple et intuitive.;</div>
       <div>Clair et défini: énonce clairement ses intentions afin que l'utilisateur puisse comprendre et prendre une décision rapidement;</div>
       <div>Facile à identifier: l'interface devrait être simple et facile d'accès, afin que les utilisateurs n'ai pas d'efforts de mémorisation à faire.</div>
   </el-collapse-item>

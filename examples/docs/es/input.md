@@ -155,7 +155,7 @@ export default {
 
 ### Textarea
 
-Redimensiona para introducir varias líneas de información de texto. Agrege el atributo `type="textarea"` para cambiar el `input` al tipo nativo `textarea`.
+Redimensiona para introducir varias líneas de información de texto. Agregue el atributo `type="textarea"` para cambiar el `input` al tipo nativo `textarea`.
 
 :::demo Controle la altura ajustando el prop `rows`.
 
@@ -180,9 +180,9 @@ export default {
 
 :::
 
-### Textarea tamaño automatico
+### Textarea tamaño automático
 
-El ajuste del prop `autosize` en el tipo de Input textarea hace que la altura se ajuste automáticamente en función del contenido. Se puede proporcionar opciones en un objeto para autodimensionar y especificar el número mínimo y máximo de líneas que el textarea puede ajustar automáticamente.
+El ajuste del prop `autosize` en el tipo de Input textarea hace que la altura se ajuste automáticamente en función del contenido. Se puede proporcionar opciones en un objeto para auto dimensionar y especificar el número mínimo y máximo de líneas que el textarea puede ajustar automáticamente.
 
 :::demo
 
@@ -579,18 +579,18 @@ export default {
 | value / v-model | valor enlazado                          | boolean / string / number | —                       | —           |
 | maxlength     | igual que `maxlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
 | minlength     | igual que `minlength` en el input nativo                                                                                                         | number           | —                                                                                                                                       | —           |
-| show-word-limit | Si se muesta el contador de palabras, solamente funciona con los tipos 'text' o 'textarea' | boolean    |  —  | false |
+| show-word-limit | Si se muestra el contador de palabras, solamente funciona con los tipos `text` o `textarea` | boolean    |  —  | false |
 | placeholder   | placeholder del Input                                                                                                                            | string           | —                                                                                                                                       | —           |
-| clearable | si debe mostrar el boton de limpieza | boolean | — | false |
-| show-password | si debe mostrar la posibilidad de conmutacion de password input | boolean         | — | false |
+| clearable | si debe mostrar el botón de limpieza | boolean | — | false |
+| show-password | si debe mostrar la posibilidad de conmutación de password input | boolean         | — | false |
 | disabled      | si esta deshabilitado                                                                                                                            | boolean          | —                                                                                                                                       | false       |
 | size          | tamaño del input, esto no funciona cuando `type` no es textarea                                                                                  | string           | medium / small / mini                                                                                                                   | —           |
 | prefix-icon   | clase del icono de prefijo                                                                                                                       | string           | —                                                                                                                                       | —           |
 | suffix-icon   | clase del icono de sufijo                                                                                                                        | string           | —                                                                                                                                       | —           |
-| rows          | número de filas, sólo funciona cuando `type` es 'textarea'.                                                                                      | number           | —                                                                                                                                       | 2           |
-| autosize      | si textarea tiene una altura adaptativa, sólo funciona cuando el`type` es 'textarea'. Puede aceptar un objeto, p. ej. { minRows: 2, maxRows: 6 } | boolean / object | —                                                                                                                                       | false       |
+| rows          | número de filas, sólo funciona cuando `type` es `textarea`.                                                                                    | number           | —                                                                                                                                       | 2           |
+| autosize      | si textarea tiene una altura adaptativa, sólo funciona cuando el`type` es `textarea`. Puede aceptar un objeto, p. ej. { minRows: 2, maxRows: 6 } | boolean / object | —                                                                                                                                       | false       |
 | autocomplete  | igual que `autocomplete` en el input nativo                                                                                                      | string           | on/off                                                                                                                                  | off         |
-| auto-complete | @DEPRECATED en el proximo cambio mayor de version                                                                                                | string           | on/off                                                                                                                                  | off         |
+| auto-complete | @DEPRECATED en el próximo cambio mayor de versión                                                                                  | string           | on/off                                                                                                                                  | off         |
 | name          | igual que `name` en el input nativo                                                                                                              | string           | —                                                                                                                                       | —           |
 | readonly      | igual que `readonly` en el input nativo                                                                                                          | boolean          | —                                                                                                                                       | false       |
 | max           | igual que `max` en el input nativo                                                                                                               | —                | —                                                                                                                                       | —           |
@@ -600,7 +600,7 @@ export default {
 | autofocus     | igual que `autofocus` en el input nativo                                                                                                         | boolean          | —                                                                                                                                       | false       |
 | form          | igual que `form` en el input nativo                                                                                                              | string           | —                                                                                                                                       | —           |
 | label         | texto de la etiqueta                                                                                                                             | string           | —                                                                                                                                       | —           |
-| tabindex      | orden de tabulacion para el Input                                                                                                                | string           | -                                                                                                                                       | -           |
+| tabindex      | orden de tabulación para el Input                                                                                                               | string           | -                                                                                                                                       | -           |
 
 ### Input slots
 
@@ -613,12 +613,12 @@ export default {
 
 ### Input eventos
 
-| Nombre | Descripción                                                                                | Parametros                |
-| ------ | ------------------------------------------------------------------------------------------ | ------------------------- |
-| blur   | Se dispara cuando se pierde el foco                                                        | (event: Event)            |
-| focus  | Se dispara cuando se obtiene el foco                                                       | (event: Event)            |
-| change | se activa cuando cambia el valor de entrada                                                | (value: string \| number) |
-| clear  | se dispara cuando la entrada es borrada por el botón generado por el atributo "clearable". | —                         |
+| Nombre | Descripción                                                  | Parametros                |
+| ------ | ------------------------------------------------------------ | ------------------------- |
+| blur   | Se dispara cuando se pierde el foco                          | (event: Event)            |
+| focus  | Se dispara cuando se obtiene el foco                         | (event: Event)            |
+| change | se activa cuando cambia el valor de entrada                  | (value: string \| number) |
+| clear  | se dispara cuando la entrada es borrada por el botón generado por el atributo `clearable`. | —                         |
 
 ### Input Metodo
 
@@ -663,15 +663,15 @@ export default {
 
 ### Autocomplete Scoped Slot
 
-| Name | Description                                                                              |
-| ---- | ---------------------------------------------------------------------------------------- |
-| —    | Contenido personalizado para el input de sugerencias. El parametro del scope es { item } |
+| Name | Description                                                  |
+| ---- | ------------------------------------------------------------ |
+| —    | Contenido personalizado para el input de sugerencias. El parámetro del scope es { ítem } |
 
 ### Autocomplete Eventos
 
-| Nombre | Descripción                                      | Parametros                                  |
-| ------ | ------------------------------------------------ | ------------------------------------------- |
-| select | se dispara cuando se hace click a una sugerencia | sugerencia en la que se está haciendo click |
+| Nombre | Descripción                                     | Parametros                                 |
+| ------ | ----------------------------------------------- | ------------------------------------------ |
+| select | se dispara cuando se hace clic a una sugerencia | sugerencia en la que se está haciendo clic |
 
 ### Autocomplete Metodo
 

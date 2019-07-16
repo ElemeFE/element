@@ -37,6 +37,8 @@
     });
   </script><% } %>
   <% if (process.env.NODE_ENV !== 'production') { %><script>
-    var ga = function() {};
+    var ga = function() {
+      console.log(arguments)
+    };
   </script><% } %>
 </html>

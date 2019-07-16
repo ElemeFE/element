@@ -1,8 +1,8 @@
 ## PageHeader
 
-If path of the page is simple, it is recommended to use PageHeader instead of the Breadcrumb.
+Si la ruta de la página es simple, se recomienda utilizar  PageHeader en lugar de Breadcrumb.
 
-### Basic
+### Básico
 
 :::demo
 ```html
@@ -18,22 +18,22 @@ If path of the page is simple, it is recommended to use PageHeader instead of th
     }
   }
 </script>
-```html
+```
 :::
 
-### Attributes
-| Attribute | Description   | Type      | Accepted Values               | Default |
+### Atributos
+| Atributos | Descripción | Tipo   | Valores aceptados | Por defecto |
 |---------- |-------------- |---------- |------------------------------ | ------ |
-| title     | main title    | string    |  —                            | Back   |
-| content   | content       | string    |  —                            | —      |
+| title     | titulo principal | string    |  —                            | Back   |
+| content   | contenido   | string    |  —                            | —      |
 
-### Events
-| Event Name | Description   | Parameters |
+### Eventos
+| Nombre evento | Descripción | Parámetros |
 |----------- |-------------- |----------- |
-| back       | triggers when right side is clicked | — |
+| back       | se activa cuando se hace clic en el lado derecho | — |
 
 ### Slots
-| slot      | Description            |
-|---------- | ---------------------- |
-| title     | title content          |
-| content   | content                |
+| Nombre del slot | Descripción |
+| --------------- | ----------- |
+| title           | titulo      |
+| content         | contenido   |

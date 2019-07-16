@@ -4,7 +4,7 @@ Affiche des messages importants.
 
 ### Usage
 
-Les Alertes sont des composants non-superposés qui ne disparaissent pas automatiquement.
+Les Alertes sont des composants non superposés qui ne disparaissent pas automatiquement.
 
 :::demo Les Alertes peuvent être de 4 types différents, définit par `type`, le type par défaut étant `info`.
 
@@ -70,7 +70,7 @@ Personnalisez le bouton de fermeture avec du texte ou des symboles.
 ```html
 <template>
   <el-alert
-    title="alerte non-fermable"
+    title="alerte non fermable"
     type="success"
     :closable="false">
   </el-alert>
@@ -233,6 +233,7 @@ Contient un message avec plus d'informations.
 
 | Nom | Description |
 |------|--------|
+| — | la description |
 | title | Le contenu du titre. |
 
 ### Évènements

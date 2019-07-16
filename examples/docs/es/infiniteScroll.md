@@ -1,10 +1,11 @@
 ## InfiniteScroll
 
-Load more data while reach bottom of the page
+Cargar más datos mientras se llega al final de la página
 
-### Basic usage
-Add `v-infinite-scroll` to the list to automatically execute loading method when scrolling to the bottom.
+### Uso básico
+Añada `v-infinite-scroll` a la lista para ejecutar automáticamente el método de carga cuando se desplace hacia abajo.
 :::demo
+
 ```html
 <template>
   <ul class="infinite-list" v-infinite-scroll="load">
@@ -29,7 +30,7 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 ```
 :::
 
-### Disable Loading
+### Deshabilite Loading
 
 :::demo
 ```html
@@ -77,11 +78,11 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 :::
 
 
-### Attributes
+### Atributos
 
-| Attribute | Description | Type  | Accepted values | Default   |
+| Atributos | Descripción | Tipo | Valores aceptados | Por defecto |
 | -------------- | ------------------------------ | --------- | ------------------------------------ | ------- |
-| infinite-scroll-disabled | is disabled           | boolean      | - |false |
-| infinite-scroll-delay   | throttle delay (ms)   | number       |   - |200   |
-| infinite-scroll-distance| trigger distance (px) | number   |- |0 |
-| infinite-scroll-immediate |Whether to execute the loading method immediately, in case the content cannot be filled up in the initial state. | boolean | - |true |
+| infinite-scroll-disabled | si esta disabled | boolean      | - |false |
+| infinite-scroll-delay   | retraso en milisegundos | number       |   - |200   |
+| infinite-scroll-distance| distancia de activación (px) | number   |- |0 |
+| infinite-scroll-immediate |Si se debe ejecutar el método de carga inmediatamente, en caso de que el contenido no se pueda rellenar en el estado inicial. | boolean | - |true |

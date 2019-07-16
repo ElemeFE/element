@@ -66,7 +66,7 @@ Muestra una animación en un contenedor (como en una tabla) mientras se cargan l
 
 Puede personalizar el texto de carga, spinner de carga y color de fondo.
 
-:::demo Agrege el atributo `element-loading-text` al elemento en el que `v-loading` está vinculado, y su valor se mostrará debajo del spinner. Del mismo modo, `element-loading-spinner` y `element-loading-background` son para personalizar el nombre de la clase del spinner y el color de fondo.
+:::demo Agregue el atributo `element-loading-text` al elemento en el que `v-loading` está vinculado, y su valor se mostrará debajo del spinner. Del mismo modo, `element-loading-spinner` y `element-loading-background` son para personalizar el nombre de la clase del spinner y el color de fondo.
 ```html
 <template>
   <el-table

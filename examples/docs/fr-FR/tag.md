@@ -141,9 +141,9 @@ En plus de la taille par défaut, Tag fournit d'autres tailles pour vos composan
 
 ### Theme
 
-Tag provide three different themes: `dark`、`light` and `plain`
+Les balises utilisent trois thèmes différents: `dark`, `light` et `plain`
 
-:::demo Using `effect` to change, default is `light`
+:::demo Utilisez `effect` pour changer. La valeur par défaut est `light`
 ```html
 <div class="tag-group">
   <span class="tag-group__title">Dark</span>

@@ -48,7 +48,7 @@ Lien souligné.
 
 ```html
 <div>
-  <el-link :underline="false">Non-souligné</el-link>
+  <el-link :underline="false">non souligné</el-link>
   <el-link>Souligné</el-link>
 </div>
 ```

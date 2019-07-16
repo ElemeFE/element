@@ -1,8 +1,9 @@
 <script>
 import fecha from 'element-ui/src/utils/date';
 import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
-export default {
 
+const WEEK_DAYS = getI18nSettings().dayNames;
+export default {
   props: {
     selectedDay: String, // formated date yyyy-MM-dd
     range: {
@@ -14,7 +15,8 @@ export default {
       }
     },
     date: Date,
-    hideHeader: Boolean
+    hideHeader: Boolean,
+    firstDayOfWeek: Number
   },
 
   inject: ['elCalendar'],
@@ -119,7 +121,8 @@ export default {
         const date = this.date;
         let firstDay = getFirstDayOfMonth(date);
         firstDay = firstDay === 0 ? 7 : firstDay;
-        const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map(day => ({
+        const firstDayOfWeek = typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1;
+        const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek).map(day => ({
           text: day,
           type: 'prev'
         }));
@@ -135,20 +138,22 @@ export default {
         days = days.concat(nextMonthDays);
       }
       return this.toNestedArr(days);
-    }
-  },
+    },
 
-  data() {
-    const dayNames = getI18nSettings().dayNames;
-    return {
-      DAYS: dayNames.slice(1).concat(dayNames[0])
-    };
+    weekDays() {
+      const start = this.firstDayOfWeek;
+      if (typeof start !== 'number' || start === 0) {
+        return WEEK_DAYS.slice();
+      } else {
+        return WEEK_DAYS.slice(start).concat(WEEK_DAYS.slice(0, start));
+      }
+    }
   },
 
   render() {
     const thead = this.hideHeader ? null : (<thead>
       {
-        this.DAYS.map(day => <th key={day}>{ day }</th>)
+        this.weekDays.map(day => <th key={day}>{ day }</th>)
       }
     </thead>);
     return (

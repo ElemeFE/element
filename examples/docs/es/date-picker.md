@@ -346,7 +346,7 @@ Preste atención a la capitalización
 | `A`         | AM/PM        | solamente para `format`, mayusculas      | AM            |
 | `a`         | am/pm        | solamente para `format`, minúsculas      | am            |
 | `timestamp` | JS timestamp | solamente para `value-format`; valor vinculado debe ser un `number` | 1483326245000 |
-| `[MM]` | No escape characters | To escape characters, wrap them in square brackets (e.g. [A] [MM]) | MM |
+| `[MM]` | No hay caracteres de escape | Para escapar de los caracteres, colóquelos entre corchetes (ejemplo: [A] [MM]). | MM |
 
 :::demo
 ```html
@@ -439,7 +439,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | disabled          | si DatePicker esta deshabilitado         | boolean           | —                                        | false                |
 | size              | tamaño del input                         | string            | large/small/mini                         | —                    |
 | editable          | si el input es editable                  | boolean           | —                                        | true                 |
-| clearable         | si se muestra el boton de borrado        | boolean           | —                                        | true                 |
+| clearable         | si se muestra el botón de borrado   | boolean           | —                                        | true                 |
 | placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —                    |
 | start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —                    |
 | end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —                    |
@@ -458,11 +458,11 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | clear-icon        | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
 
 ### Opciones del Picker
-| Atributo       | Descripción                              | Tipo                           | Valores aceptados | Por defecto |
-| -------------- | ---------------------------------------- | ------------------------------ | ----------------- | ----------- |
+| Atributo       | Descripción                                                  | Tipo                           | Valores aceptados | Por defecto |
+| -------------- | ------------------------------------------------------------ | ------------------------------ | ----------------- | ----------- |
 | shortcuts      | { text, onClick } un array de objetos para establecer opciones de acceso directo, verifique la tabla siguiente | object[]                       | —                 | —           |
 | disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un valor booleano | function                       | —                 | —           |
-| firstDayOfWeek | primer dia de la semana                  | Number                         | 1 to 7            | 7           |
+| firstDayOfWeek | primer día de la semana                                      | Number                         | 1 to 7            | 7           |
 | onPick         | una función que se dispara cuando se cambia la fecha seleccionada. Solamente para `daterange` y `datetimerange`. | Function({ maxDate, minDate }) | -                 | -           |
 
 ### Accesso directo

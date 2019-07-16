@@ -351,7 +351,6 @@ export default {
                 indent: treeRowData.level * treeIndent,
                 level: treeRowData.level
               };
-              // TODO: 优化这里的逻辑
               if (typeof treeRowData.expanded === 'boolean') {
                 data.treeNode.expanded = treeRowData.expanded;
                 // 表明是懒加载
@@ -418,10 +417,10 @@ export default {
             level: cur.level,
             display: true
           };
-          if (typeof cur.loaded === 'boolean' && cur.loaded) {
-            treeRowData.noLazyChildren = !(cur.children && cur.children.length);
-          }
-          if (typeof cur.loading === 'boolean') {
+          if (typeof cur.lazy === 'boolean') {
+            if (typeof cur.loaded === 'boolean' && cur.loaded) {
+              treeRowData.noLazyChildren = !(cur.children && cur.children.length);
+            }
             treeRowData.loading = cur.loading;
           }
         }
@@ -451,10 +450,10 @@ export default {
                 // 懒加载的某些节点，level 未知
                 cur.level = cur.level || innerTreeRowData.level;
                 cur.display = !!(cur.expanded && innerTreeRowData.display);
-                if (typeof cur.loaded === 'boolean' && cur.loaded) {
-                  innerTreeRowData.noLazyChildren = !(cur.children && cur.children.length);
-                }
                 if (typeof cur.lazy === 'boolean') {
+                  if (typeof cur.loaded === 'boolean' && cur.loaded) {
+                    innerTreeRowData.noLazyChildren = !(cur.children && cur.children.length);
+                  }
                   innerTreeRowData.loading = cur.loading;
                 }
               }

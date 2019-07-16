@@ -1,15 +1,15 @@
 ## Backtop
 
-A button to back to top
+Un bouton pour revenir en haut de la page
 
 ### Basic usage
 
-Scroll down to see the bottom-right button.
+Scrollez en bas de la page pour voir le bouton en bas à droite.
 :::demo
 
 ```html
 <template>
-  Scroll down to see the bottom-right button.
+  Scrollez en bas de la page pour voir le bouton en bas à droite.
   <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
 </template>
 ```
@@ -18,12 +18,12 @@ Scroll down to see the bottom-right button.
 
 ### Customizations
 
-Display area is 40px \* 40px.
+La zone d'affichage est de 40px \* 40px.
 :::demo
 
 ```html
 <template>
-  Scroll down to see the bottom-right button.
+  Scrollez en bas de la page pour voir le bouton en bas à droite.
   <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100">
     <div
       style="{
@@ -46,15 +46,15 @@ Display area is 40px \* 40px.
 
 ### Attributes
 
-| Attribute         | Description                                                         | Type            | Accepted Values | Default |
+| Attribut          | Description                                                         | Type            | Valeurs acceptées | Défaut |
 | ----------------- | ------------------------------------------------------------------- | --------------- | --------------- | ------- |
-| target            | the target to trigger scroll                                        | string          |                 |         |
-| visibility-height | the button will not show until the scroll height reaches this value |  number |                 | 200     |
-| right             | right distance                                                      | number |                 | 40      |
-| bottom            | bottom distance                                                     | number |                 | 40      |
+| target            | La cible pour déclencher le scroll                                  | string          |                 |         |
+| visibility-height | Le bouton ne s'affichera pas tant que la hauteur de défilement n'aura pas atteint cette valeur. |  number |    | 200     |
+| right             | La distance du bord droit                                           | number |                 | 40      |
+| bottom            | La distance du bord gauche                                          | number |                 | 40      |
 
 ### Events
 
 | Event Name | Description         | Parameters  |
 | ---------- | ------------------- | ----------- |
-| click      | triggers when click | click event |
+| click      | Se déclenche quand l'utilisateur clique | click event |

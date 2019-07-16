@@ -4,7 +4,7 @@ Use el Time Picker para input de tipo time.
 
 ### Selector de tiempo fijo
 
-Provee una lista de tiempo fijo para que los usuarios escogan.
+Provee una lista de tiempo fijo para que los usuarios escojan.
 
 :::demo Use el tag `el-time-select`, se pueden asignar tiempo de inicio, tiempo de finalización y salto de tiempo con `start`, `end` y `step`.
 ```html

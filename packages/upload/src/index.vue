@@ -276,6 +276,15 @@ export default {
           files={this.uploadFiles}
           on-remove={this.handleRemove}
           handlePreview={this.onPreview}>
+          {
+            (props) => {
+              if (this.$scopedSlots.file) {
+                return this.$scopedSlots.file({
+                  file: props.file
+                });
+              }
+            }
+          }
         </UploadList>
       );
     }

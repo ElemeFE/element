@@ -231,6 +231,9 @@
       getInputElement() {
         const inputRefs = this.$refs.input.$refs;
         return inputRefs.input || inputRefs.textarea;
+      },
+      handleClose() {
+        this.handleAction('close');
       }
     },
 
