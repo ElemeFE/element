@@ -119,21 +119,18 @@
     flex-wrap: wrap;
   }
 
-  .el-tag__close {
-    margin-top: -2px;
-  }
-
-  .el-tag {
+  .el-tag.el-tag--info {
     box-sizing: border-box;
     border-color: transparent;
     margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
 
-    &__close.el-icon-close {
+    .el-icon-close {
       background-color: $--color-text-placeholder;
       right: -7px;
       top: 0;
-      color: $--color-white;
+      margin-top: -2px;
+      color: $--color-white !important;
 
       &:hover {
         background-color: $--color-text-secondary;
