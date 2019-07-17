@@ -39,15 +39,17 @@
   transform: scaleX(0);
 }
 
-.el-zoom-in-top-enter-active,
-.el-zoom-in-top-leave-active {
-  opacity: 1;
-  transform: scaleY(1);
+.el-zoom-in-top-enter-to,
+.el-zoom-in-top-leave-to{
   transition: $--md-fade-transition;
   transform-origin: center top;
 }
-.el-zoom-in-top-enter,
-.el-zoom-in-top-leave-active {
+
+.el-zoom-in-top-enter-to,.el-zoom-in-top-leave {
+  opacity: 1;
+  transform: scaleY(1);
+}
+.el-zoom-in-top-leave-to,.el-zoom-in-top-enter{
   opacity: 0;
   transform: scaleY(0);
 }
