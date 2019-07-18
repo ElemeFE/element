@@ -257,8 +257,8 @@ describe('Loading', () => {
             expect(masks.length).to.equal(0);
             done();
           }, 350);
-        }, 10);
-      }, 10);
+        }, 50);
+      }, 50);
     });
 
     it('lock', () => {

@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
 
 const DELAY = 10;
 const testDataArr = [];
@@ -91,9 +91,9 @@ describe('Table', () => {
     });
 
     it('height as string', done => {
-      const vm = createTable('height="100pt"');
+      const vm = createTable('height="100px"');
       setTimeout(_ => {
-        expect(vm.$el.style.height).to.equal('100pt');
+        expect(vm.$el.style.height).to.equal('100px');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -676,19 +676,16 @@ describe('Table', () => {
       const vm = createVue({
         template: `
           <el-table :data="testData">
-            <el-table-column prop="name" :render-header="renderHeader" label="name">
+            <el-table-column prop="name" label="name">
+              <template slot="header" slot-scope="{ column, $index }">
+              {{ $index }}:{{column.label}}
+              </template>
             </el-table-column>
             <el-table-column prop="release"/>
             <el-table-column prop="director"/>
             <el-table-column prop="runtime"/>
           </el-table>
         `,
-
-        methods: {
-          renderHeader(h, { column, $index }) {
-            return '' + $index + ':' + column.label;
-          }
-        },
 
         created() {
           this.testData = getTestData();
@@ -697,7 +694,7 @@ describe('Table', () => {
 
       setTimeout(_ => {
         const headerCell = vm.$el.querySelector('.el-table__header-wrapper thead tr th:first-child .cell');
-        expect(headerCell.textContent).to.equal('0:name');
+        expect(headerCell.textContent.trim()).to.equal('0:name');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -952,7 +949,7 @@ describe('Table', () => {
                 <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
-            </el-table-column>
+              </el-table-column>
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
               <el-table-column prop="runtime" label="runtime" />
@@ -1693,6 +1690,21 @@ describe('Table', () => {
       destroyVM(vm);
     });
 
+    it('toggleAllSelection', done => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleAllSelection();
+      setTimeout(() => {
+        expect(vm.selection).to.length(5);
+
+        vm.$refs.table.toggleAllSelection();
+        setTimeout(() => {
+          expect(vm.selection).to.length(0);
+          destroyVM(vm);
+          done();
+        }, 50);
+      }, 50);
+    });
+
     it('clearSelection', () => {
       const vm = createTable('selection-change');
       vm.$refs.table.toggleRowSelection(vm.testData[0]);
@@ -1741,14 +1753,50 @@ describe('Table', () => {
           vm.$nextTick(() => {
             expect(toArray(lastCells).map(node => node.textContent))
               .to.eql(['-100', '-95', '-92', '-92', '-80']);
+            destroyVM(vm);
             done();
           });
         });
       }, DELAY);
     });
+
+    it('sort correct change icon', async() => {
+      function assertSortIconCount($el, msg, count = 1) {
+        const sortIconCount = $el.querySelectorAll('th.ascending, th.descending').length;
+        expect(sortIconCount).to.equal(count, msg);
+      }
+
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" >
+            <el-table-column prop="name" sortable />
+            <el-table-column prop="release" sortable />
+            <el-table-column prop="director" sortable />
+            <el-table-column prop="runtime" sortable />
+          </el-table>
+        `,
+        data() {
+          return { testData: getTestData() };
+        }
+      });
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not empty after mount', 0);
+      // manual click first column header
+      const elm = vm.$el.querySelector('.caret-wrapper');
+      elm.click();
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not one after click header');
+      vm.$refs.table.sort('director', 'descending');
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not one after call sort');
+      vm.$refs.table.sort('director', 'ascending');
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not one after sort same column');
+      destroyVM(vm);
+    });
   });
 
-  it('hover', done => {
+  it('hover', async() => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
@@ -1758,24 +1806,23 @@ describe('Table', () => {
           <el-table-column prop="runtime" label="时长（分）" />
         </el-table>
       `,
-
-      created() {
-        this.testData = getTestData();
+      data() {
+        return {
+          testData: getTestData()
+        };
       }
     }, true);
-    setTimeout(_ => {
-      const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
-      triggerEvent(tr, 'mouseenter', true, false);
-      setTimeout(_ => {
-        expect(tr.classList.contains('hover-row')).to.true;
-        triggerEvent(tr, 'mouseleave', true, false);
-        setTimeout(_ => {
-          expect(tr.classList.contains('hover-row')).to.false;
-          destroyVM(vm);
-          done();
-        }, DELAY);
-      }, DELAY);
-    }, DELAY);
+    await waitImmediate();
+    const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+    triggerEvent(tr, 'mouseenter', true, false);
+
+    await wait(50);
+    expect(tr.classList.contains('hover-row')).to.true;
+    triggerEvent(tr, 'mouseleave', true, false);
+
+    await wait(50);
+    expect(tr.classList.contains('hover-row')).to.false;
+    destroyVM(vm);
   });
 
   it('highlight-current-row', done => {
@@ -1819,5 +1866,282 @@ describe('Table', () => {
         }, DELAY);
       }, DELAY);
     }, DELAY);
+  });
+
+  it('keep highlight row when data change', done => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" highlight-current-row row-key="release">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" sortable />
+        </el-table>
+      `,
+      data() {
+        return {
+          testData: getTestData()
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+      triggerEvent(rows[2], 'click', true, false);
+      setTimeout(() => {
+        expect(rows[2].classList.contains('current-row')).to.be.true;
+        const data = getTestData();
+        data.splice(0, 0, {
+          id: 8,
+          name: 'Monsters, Inc.',
+          release: '2018-02-01',
+          director: 'Peter Docter',
+          runtime: 92
+        });
+        data[2].name = 'Modified Name';
+        vm.testData = data;
+
+        setTimeout(() => {
+          rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          expect(rows[3].classList.contains('current-row')).to.be.true;
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('keep highlight row after sort', done => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" row-key="release" highlight-current-row >
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" sortable />
+        </el-table>
+      `,
+      data() {
+        return {
+          testData: getTestData()
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+      triggerEvent(rows[1], 'click', true, false);
+      setTimeout(() => {
+        expect(rows[1].classList.contains('current-row')).to.be.true;
+        const cells = vm.$el.querySelectorAll('.el-table__header-wrapper thead th > .cell');
+        triggerEvent(cells[3], 'click', true, false);
+
+        setTimeout(() => {
+          rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          expect(rows[3].classList.contains('current-row')).to.be.true;
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  describe('tree', () => {
+    let vm;
+    afterEach(() => destroyVM(vm));
+    it('render tree structual data', async() => {
+      vm = createVue({
+        template: `
+          <el-table :data="testData" row-key="release">
+            <el-table-column prop="name" label="片名" />
+            <el-table-column prop="release" label="发行日期" />
+            <el-table-column prop="director" label="导演" />
+            <el-table-column prop="runtime" label="时长（分）" />
+          </el-table>
+        `,
+        data() {
+          const testData = getTestData();
+          testData[1].children = [
+            {
+              name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+            },
+            {
+              name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+            }
+          ];
+          return {
+            testData: testData
+          };
+        }
+      }, true);
+      await waitImmediate();
+
+      const rows = vm.$el.querySelectorAll('.el-table__row');
+      expect(rows.length).to.equal(7);
+      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      expect(childRows.length).to.equal(2);
+      childRows.forEach(item => {
+        expect(item.style.display).to.equal('none');
+      });
+      vm.$el.querySelector('.el-table__expand-icon').click();
+
+      await waitImmediate();
+      childRows.forEach(item => {
+        expect(item.style.display).to.equal('');
+      });
+    });
+
+    it('load substree row data', async() => {
+      vm = createVue({
+        template: `
+          <el-table :data="testData" row-key="release" lazy :load="load">
+            <el-table-column prop="name" label="片名" />
+            <el-table-column prop="release" label="发行日期" />
+            <el-table-column prop="director" label="导演" />
+            <el-table-column prop="runtime" label="时长（分）" />
+          </el-table>
+        `,
+        data() {
+          const testData = getTestData();
+          testData[testData.length - 1].children = [
+            {
+              name: 'A Bug\'s Life copy 1', release: '2008-1-25-1', director: 'John Lasseter', runtime: 95
+            }
+          ];
+          testData[1].hasChildren = true;
+          return {
+            testData: testData
+          };
+        },
+        methods: {
+          load(row, treeNode, resolve) {
+            resolve([
+              {
+                name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+              },
+              {
+                name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+              }
+            ]);
+          }
+        }
+      }, true);
+      await waitImmediate();
+
+      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+      expandIcon.click();
+
+      await waitImmediate();
+
+      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
+      expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(8);
+    });
+
+    it('tree-props & default-expand-all & expand-change', async() => {
+      const spy = sinon.spy();
+      vm = createVue({
+        template: `
+          <el-table
+            :data="testData" lazy default-expand-all row-key="release" :tree-props="{children: 'childrenTest', hasChildren: 'hasChildrenTest'}"
+            :load="load" @expand-change="change">
+            <el-table-column prop="name" label="片名" />
+            <el-table-column prop="release" label="发行日期" />
+            <el-table-column prop="director" label="导演" />
+            <el-table-column prop="runtime" label="时长（分）" />
+          </el-table>
+        `,
+        data() {
+          const testData = getTestData();
+          testData[testData.length - 1].childrenTest = [
+            {
+              name: 'A Bug\'s Life copy 1', release: '2008-1-25-1', director: 'John Lasseter', runtime: 95
+            }
+          ];
+          testData[1].hasChildrenTest = true;
+          return {
+            testData: testData
+          };
+        },
+        methods: {
+          load(row, treeNode, resolve) {
+            resolve([
+              {
+                name: 'A Bug\'s Life copy 1', release: '1998-11-25-1', director: 'John Lasseter', runtime: 95
+              },
+              {
+                name: 'A Bug\'s Life copy 2', release: '1998-11-25-2', director: 'John Lasseter', runtime: 95
+              }
+            ]);
+          },
+          change: spy
+        }
+      }, true);
+      await waitImmediate();
+      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      childRows.forEach(item => {
+        expect(item.style.display).to.equal('');
+      });
+      const expandIcon = vm.$el.querySelector('.el-table__expand-icon');
+      expandIcon.click();
+
+      await waitImmediate();
+
+      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
+      expect(vm.$el.querySelectorAll('.el-table__row').length).to.equal(8);
+      expect(spy.args[0][0]).to.be.an('object');
+      expect(spy.args[0][1]).to.be.true;
+    });
+
+    it('expand-row-keys & toggleRowExpansion', async() => {
+      vm = createVue({
+        template: `
+          <el-table :data="testData" row-key="release" lazy :load="load" :expand-row-keys="['2003-5-30']" ref="table">
+            <el-table-column prop="name" label="片名" />
+            <el-table-column prop="release" label="发行日期" />
+            <el-table-column prop="director" label="导演" />
+            <el-table-column prop="runtime" label="时长（分）" />
+          </el-table>
+        `,
+        data() {
+          const testData = getTestData();
+          testData[testData.length - 1].children = [
+            {
+              name: 'A Bug\'s Life copy 1', release: '2003-5-30-1', director: 'John Lasseter', runtime: 95,
+              hasChildren: true
+            }
+          ];
+          return {
+            testData: testData
+          };
+        },
+        methods: {
+          load(row, treeNode, resolve) {
+            resolve([
+              {
+                name: 'A Bug\'s Life copy 1', release: '2003-5-30-2', director: 'John Lasseter', runtime: 95
+              }
+            ]);
+          },
+          closeExpandRow() {
+            const testData = this.testData;
+            const row = testData[testData.length - 1].children[0];
+            this.$refs.table.toggleRowExpansion(row);
+          }
+        }
+      }, true);
+      await waitImmediate();
+      const childRows = vm.$el.querySelectorAll('.el-table__row--level-1');
+      childRows.forEach(item => {
+        expect(item.style.display).to.equal('');
+      });
+      const expandIcon = childRows[0].querySelector('.el-table__expand-icon');
+      expandIcon.click();
+
+      await waitImmediate();
+
+      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.true;
+      vm.closeExpandRow();
+
+      await waitImmediate();
+      expect(expandIcon.classList.contains('el-table__expand-icon--expanded')).to.be.false;
+    });
   });
 });

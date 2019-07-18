@@ -161,7 +161,7 @@ export default {
         style.transitionDelay = (-150 * this.index) + 'ms';
       }
 
-      style.borderWidth = step ? '1px' : 0;
+      style.borderWidth = step && !this.isSimple ? '1px' : 0;
       this.$parent.direction === 'vertical'
         ? style.height = step + '%'
         : style.width = step + '%';
@@ -173,6 +173,10 @@ export default {
   mounted() {
     const unwatch = this.$watch('index', val => {
       this.$watch('$parent.active', this.updateStatus, { immediate: true });
+      this.$watch('$parent.processStatus', () => {
+        const activeIndex = this.$parent.active;
+        this.updateStatus(activeIndex);
+      }, { immediate: true });
       unwatch();
     });
   }

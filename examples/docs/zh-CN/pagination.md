@@ -4,7 +4,7 @@
 
 ### 基础用法
 
-:::demo 设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。`prev`表示上一页，`next`为下一页，`pager`表示页码列表，除此以外还提供了`jumper`和`total`，`size`和特殊的布局符号`->`，`->`后的元素会靠右显示，`jumper`表示跳页元素，`total`表示显示页码总数，`size`用于设置每页显示的页码数量。
+:::demo 设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。`prev`表示上一页，`next`为下一页，`pager`表示页码列表，除此以外还提供了`jumper`和`total`，`size`和特殊的布局符号`->`，`->`后的元素会靠右显示，`jumper`表示跳页元素，`total`表示总条目数，`size`用于设置每页显示的页码数量。
 ```html
 <div class="block">
   <span class="demonstration">页数较少时的效果</span>
@@ -139,103 +139,52 @@
 </script>
 ```
 :::
+
+### 当只有一页时隐藏分页
+
+当只有一页时，通过设置 `hide-on-single-page` 属性来隐藏分页。
+
+:::demo
+```html
+<div>
+ <el-switch v-model="value">
+ </el-switch>
+ <el-pagination
+  :hide-on-single-page="value"
+  :total="5"
+  layout="prev, pager, next">
+</el-pagination>
+</div>
+
 <script>
-  import { addClass } from 'element-ui/src/utils/dom';
   export default {
-    methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
-    },
     data() {
       return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
-      };
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let demos = document.querySelectorAll('.source');
-        let firstDemo = demos[0];
-        let lastDemo = demos[demos.length - 1];
-        addClass(firstDemo, 'first');
-        addClass(lastDemo, 'last');
-      });
+        value: false
+      }
     }
   }
 </script>
-<style>
-  .demo-pagination .source.first {
-    padding: 0;
-  }
-
-  .demo-pagination .first .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    display: inline-block;
-    width: 50%;
-    box-sizing: border-box;
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-pagination .first .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-
-  .demo-pagination .source.last {
-    padding: 0;
-  }
-
-  .demo-pagination .last .block {
-    padding: 30px 24px;
-    border-bottom: solid 1px #EFF2F6;
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .demo-pagination .last .demonstration {
-    font-size: 14px;
-    color: #8492a6;
-    line-height: 44px;
-  }
-
-  .demo-pagination .last .demonstration + .el-pagination {
-    float: right;
-    width: 70%;
-    margin: 5px 20px 0 0;
-  }
-</style>
-
+```
+:::
 
 ### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| small | 是否使用小型分页样式 | Boolean | — | false |
-| background | 是否为分页按钮添加背景色 | Boolean | — | false |
-| page-size | 每页显示条目个数 | Number | — | 10 |
-| total | 总条目数 | Number | — | — |
+| small | 是否使用小型分页样式 | boolean | — | false |
+| background | 是否为分页按钮添加背景色 | boolean | — | false |
+| page-size | 每页显示条目个数，支持 .sync 修饰符 | number | — | 10 |
+| total | 总条目数 | number | — | — |
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
-| pager-count | 页码按钮的数量，当总页数超过该值时会折叠 | Number | 大于等于 5 且小于等于 21 的奇数 | 7 |
-| current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
+| pager-count | 页码按钮的数量，当总页数超过该值时会折叠 | number | 大于等于 5 且小于等于 21 的奇数 | 7 |
+| current-page | 当前页数，支持 .sync 修饰符 | number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
-| page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
+| page-sizes | 每页显示个数选择器的选项设置 | number[] | — |  [10, 20, 30, 40, 50, 100] |
 | popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
 | prev-text | 替代图标显示的上一页文字 | string | — | — |
 | next-text | 替代图标显示的下一页文字 | string | — | — |
 | disabled | 是否禁用 | boolean | — | false |
+| hide-on-single-page | 只有一页时是否隐藏 | boolean | — | - |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

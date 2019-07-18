@@ -22,6 +22,7 @@
     >
       <span class="el-radio__inner"></span>
       <input
+        ref="radio"
         class="el-radio__original"
         :value="label"
         type="radio"
@@ -35,7 +36,7 @@
         tabindex="-1"
       >
     </span>
-    <span class="el-radio__label">
+    <span class="el-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
@@ -98,6 +99,7 @@
           } else {
             this.$emit('input', val);
           }
+          this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
         }
       },
       _elFormItemSize() {
@@ -115,7 +117,7 @@
           : this.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
-        return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;
+        return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
       }
     },
 

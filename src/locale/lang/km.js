@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'គ្មានទិន្ន័យដូច',
       loading: 'កំពុងផ្ទុក',
-      placeholder: 'ជ្រើសរើស'
+      placeholder: 'ជ្រើសរើស',
+      noData: 'គ្មានទិន្ន័យ'
     },
     pagination: {
       goto: 'ទៅកាន់',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'បញ្ចូលពាក្យ',
       noCheckedFormat: '{total} ធាតុ',
       hasCheckedFormat: '{checked}/{total} បានគូសធីក'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

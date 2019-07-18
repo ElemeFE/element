@@ -14,6 +14,13 @@
     padding: 20px 3px;
     cursor: pointer;
 
+    &.today {
+      .cell {
+        color: $--color-primary;
+        font-weight: bold;
+      }
+    }
+
     &.disabled .cell {
       background-color: $--background-color-base;
       cursor: not-allowed;
@@ -29,11 +36,11 @@
       height: 32px;
       display: block;
       line-height: 32px;
-      color: $--datepicker-color;
+      color: $--datepicker-font-color;
       margin: 0 auto;
 
       &:hover {
-        color: $--datepicker-text-hover-color;
+        color: $--datepicker-hover-font-color;
       }
     }
 

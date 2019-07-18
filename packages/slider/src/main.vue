@@ -1,18 +1,19 @@
 <template>
-  <div class="el-slider"
+  <div
+    class="el-slider"
     :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
-     role="slider"
-     :aria-valuemin="min"
-     :aria-valuemax="max"
-     :aria-orientation="vertical ? 'vertical': 'horizontal'"
-     :aria-disabled="sliderDisabled"
+    role="slider"
+    :aria-valuemin="min"
+    :aria-valuemax="max"
+    :aria-orientation="vertical ? 'vertical': 'horizontal'"
+    :aria-disabled="sliderDisabled"
   >
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
-      @change="$nextTick(emitChange)"
+      @change="emitChange"
       :step="step"
       :disabled="sliderDisabled"
       :controls="showInputControls"
@@ -21,7 +22,8 @@
       :debounce="debounce"
       :size="inputSize">
     </el-input-number>
-    <div class="el-slider__runway"
+    <div
+      class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
@@ -45,10 +47,28 @@
       </slider-button>
       <div
         class="el-slider__stop"
-        v-for="item in stops"
-        :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
+        v-for="(item, key) in stops"
+        :key="key"
+        :style="getStopStyle(item)"
         v-if="showStops">
       </div>
+      <template v-if="markList.length > 0">
+        <div>
+          <div
+            v-for="(item, key) in markList"
+            :style="getStopStyle(item.position)"
+            class="el-slider__stop el-slider__marks-stop"
+            :key="key">
+          </div>
+        </div>
+        <div class="el-slider__marks">
+          <slider-marker
+            :mark="item.mark" v-for="(item, key) in markList"
+            :key="key"
+            :style="getStopStyle(item.position)">
+          </slider-marker>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -56,6 +76,7 @@
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
+  import SliderMarker from './marker';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -129,12 +150,14 @@
       label: {
         type: String
       },
-      tooltipClass: String
+      tooltipClass: String,
+      marks: Object
     },
 
     components: {
       ElInputNumber,
-      SliderButton
+      SliderButton,
+      SliderMarker
     },
 
     data() {
@@ -272,6 +295,10 @@
         this.$nextTick(() => {
           this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
         });
+      },
+
+      getStopStyle(position) {
+        return this.vertical ? { 'bottom': position + '%' } : { 'left': position + '%' };
       }
     },
 
@@ -297,6 +324,22 @@
         } else {
           return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
         }
+      },
+
+      markList() {
+        if (!this.marks) {
+          return [];
+        }
+
+        const marksKeys = Object.keys(this.marks);
+        return marksKeys.map(parseFloat)
+          .sort((a, b) => a - b)
+          .filter(point => point <= this.max && point >= this.min)
+          .map(point => ({
+            point,
+            position: (point - this.min) * 100 / (this.max - this.min),
+            mark: this.marks[point]
+          }));
       },
 
       minValue() {

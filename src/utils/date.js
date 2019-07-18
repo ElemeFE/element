@@ -34,12 +34,17 @@
    */
   var fecha = {};
   var token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
-  var twoDigits = /\d\d?/;
-  var threeDigits = /\d{3}/;
-  var fourDigits = /\d{4}/;
-  var word = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
+  var twoDigits = '\\d\\d?';
+  var threeDigits = '\\d{3}';
+  var fourDigits = '\\d{4}';
+  var word = '[^\\s]+';
+  var literal = /\[([^]*?)\]/gm;
   var noop = function () {
   };
+
+  function regexEscape(str) {
+    return str.replace( /[|\\{()[^$+*?.-]/g, '\\$&');
+  }
 
   function shorten(arr, sLen) {
     var newArr = [];
@@ -117,10 +122,10 @@
       return i18n.monthNames[dateObj.getMonth()];
     },
     yy: function(dateObj) {
-      return String(dateObj.getFullYear()).substr(2);
+      return pad(String(dateObj.getFullYear()), 4).substr(2);
     },
     yyyy: function(dateObj) {
-      return dateObj.getFullYear();
+      return pad(dateObj.getFullYear(), 4);
     },
     h: function(dateObj) {
       return dateObj.getHours() % 12 || 12;
@@ -171,6 +176,9 @@
     d: [twoDigits, function (d, v) {
       d.day = v;
     }],
+    Do: [twoDigits + word, function (d, v) {
+      d.day = parseInt(v, 10);
+    }],
     M: [twoDigits, function (d, v) {
       d.month = v - 1;
     }],
@@ -190,10 +198,10 @@
     yyyy: [fourDigits, function (d, v) {
       d.year = v;
     }],
-    S: [/\d/, function (d, v) {
+    S: ['\\d', function (d, v) {
       d.millisecond = v * 100;
     }],
-    SS: [/\d{2}/, function (d, v) {
+    SS: ['\\d{2}', function (d, v) {
       d.millisecond = v * 10;
     }],
     SSS: [threeDigits, function (d, v) {
@@ -211,8 +219,8 @@
         d.isPm = true;
       }
     }],
-    ZZ: [/[\+\-]\d\d:?\d\d/, function (d, v) {
-      var parts = (v + '').match(/([\+\-]|\d\d)/gi), minutes;
+    ZZ: ['[^\\s]*?[\\+\\-]\\d\\d:?\\d\\d|[^\\s]*?Z', function (d, v) {
+      var parts = (v + '').match(/([+-]|\d\d)/gi), minutes;
 
       if (parts) {
         minutes = +(parts[1] * 60) + parseInt(parts[2], 10);
@@ -220,9 +228,9 @@
       }
     }]
   };
-  parseFlags.DD = parseFlags.D;
+  parseFlags.dd = parseFlags.d;
   parseFlags.dddd = parseFlags.ddd;
-  parseFlags.Do = parseFlags.dd = parseFlags.d;
+  parseFlags.DD = parseFlags.D;
   parseFlags.mm = parseFlags.m;
   parseFlags.hh = parseFlags.H = parseFlags.HH = parseFlags.h;
   parseFlags.MM = parseFlags.M;
@@ -232,7 +240,7 @@
 
   // Some common format strings
   fecha.masks = {
-    'default': 'ddd MMM dd yyyy HH:mm:ss',
+    default: 'ddd MMM dd yyyy HH:mm:ss',
     shortDate: 'M/D/yy',
     mediumDate: 'MMM d, yyyy',
     longDate: 'MMMM d, yyyy',
@@ -261,8 +269,20 @@
 
     mask = fecha.masks[mask] || mask || fecha.masks['default'];
 
-    return mask.replace(token, function ($0) {
+    var literals = [];
+
+    // Make literals inactive by replacing them with ??
+    mask = mask.replace(literal, function($0, $1) {
+      literals.push($1);
+      return '@@@';
+    });
+    // Apply formatting rules
+    mask = mask.replace(token, function ($0) {
       return $0 in formatFlags ? formatFlags[$0](dateObj, i18n) : $0.slice(1, $0.length - 1);
+    });
+    // Inline literal values back into the formatted value
+    return mask.replace(/@@@/g, function() {
+      return literals.shift();
     });
   };
 
@@ -285,31 +305,35 @@
     // Avoid regular expression denial of service, fail early for really long strings
     // https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
     if (dateStr.length > 1000) {
-      return false;
+      return null;
     }
 
-    var isValid = true;
     var dateInfo = {};
-    format.replace(token, function ($0) {
+    var parseInfo = [];
+    var literals = [];
+    format = format.replace(literal, function($0, $1) {
+      literals.push($1);
+      return '@@@';
+    });
+    var newFormat = regexEscape(format).replace(token, function ($0) {
       if (parseFlags[$0]) {
         var info = parseFlags[$0];
-        var index = dateStr.search(info[0]);
-        if (!~index) {
-          isValid = false;
-        } else {
-          dateStr.replace(info[0], function (result) {
-            info[1](dateInfo, result, i18n);
-            dateStr = dateStr.substr(index + result.length);
-            return result;
-          });
-        }
+        parseInfo.push(info[1]);
+        return '(' + info[0] + ')';
       }
 
-      return parseFlags[$0] ? '' : $0.slice(1, $0.length - 1);
+      return $0;
     });
+    newFormat = newFormat.replace(/@@@/g, function() {
+      return literals.shift();
+    });
+    var matches = dateStr.match(new RegExp(newFormat, 'i'));
+    if (!matches) {
+      return null;
+    }
 
-    if (!isValid) {
-      return false;
+    for (var i = 1; i < matches.length; i++) {
+      parseInfo[i - 1](dateInfo, matches[i], i18n);
     }
 
     var today = new Date();

@@ -4,27 +4,36 @@
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
-      'is-required': isRequired || required
+      'is-required': isRequired || required,
+      'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
-    <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
-      <slot name="label">{{label + form.labelSuffix}}</slot>
-    </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <label-wrap
+      :is-auto-width="labelStyle && labelStyle.width === 'auto'"
+      :update-all="form.labelWidth === 'auto'">
+      <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
+        <slot name="label">{{label + form.labelSuffix}}</slot>
+      </label>
+    </label-wrap>
+    <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div
+        <slot
           v-if="validateState === 'error' && showMessage && form.showMessage"
-          class="el-form-item__error"
-          :class="{
-            'el-form-item__error--inline': typeof inlineMessage === 'boolean'
-              ? inlineMessage
-              : (elForm && elForm.inlineMessage || false)
-          }"
-        >
-          {{validateMessage}}
-        </div>
+          name="error"
+          :error="validateMessage">
+          <div
+            class="el-form-item__error"
+            :class="{
+              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+                ? inlineMessage
+                : (elForm && elForm.inlineMessage || false)
+            }"
+          >
+            {{validateMessage}}
+          </div>
+        </slot>
       </transition>
     </div>
   </div>
@@ -34,7 +43,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
-
+  import LabelWrap from './label-wrap';
   export default {
     name: 'ElFormItem',
 
@@ -72,6 +81,10 @@
       },
       size: String
     },
+    components: {
+      // use this component to calculate auto width
+      LabelWrap
+    },
     watch: {
       error: {
         immediate: true,
@@ -103,7 +116,13 @@
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
         const labelWidth = this.labelWidth || this.form.labelWidth;
-        if (labelWidth) {
+        if (labelWidth === 'auto') {
+          if (this.labelWidth === 'auto') {
+            ret.marginLeft = this.computedLabelWidth;
+          } else if (this.form.labelWidth === 'auto') {
+            ret.marginLeft = this.elForm.autoLabelWidth;
+          }
+        } else {
           ret.marginLeft = labelWidth;
         }
         return ret;
@@ -120,19 +139,16 @@
         }
         return parent;
       },
-      fieldValue: {
-        cache: false,
-        get() {
-          const model = this.form.model;
-          if (!model || !this.prop) { return; }
+      fieldValue() {
+        const model = this.form.model;
+        if (!model || !this.prop) { return; }
 
-          let path = this.prop;
-          if (path.indexOf(':') !== -1) {
-            path = path.replace(/:/, '.');
-          }
-
-          return getPropByPath(model, path, true).v;
+        let path = this.prop;
+        if (path.indexOf(':') !== -1) {
+          path = path.replace(/:/, '.');
         }
+
+        return getPropByPath(model, path, true).v;
       },
       isRequired() {
         let rules = this.getRules();
@@ -165,7 +181,8 @@
         validateMessage: '',
         validateDisabled: false,
         validator: {},
-        isNested: false
+        isNested: false,
+        computedLabelWidth: ''
       };
     },
     methods: {
@@ -197,7 +214,7 @@
           this.validateMessage = errors ? errors[0].message : '';
 
           callback(this.validateMessage, invalidFields);
-          this.elForm && this.elForm.$emit('validate', this.prop, !errors);
+          this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
       },
       clearValidate() {
@@ -224,10 +241,11 @@
         } else {
           prop.o[prop.k] = this.initialValue;
         }
-        /* Select 的值被代码改变时不会触发校验，
-           这里需要强行触发一次，刷新 validateDisabled 的值，
-           确保 Select 下一次值改变时能正确触发校验 */
-        this.broadcast('ElSelect', 'fieldReset');
+
+        // reset validateDisabled after onFieldChange triggered
+        this.$nextTick(() => {
+          this.validateDisabled = false;
+        });
 
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
@@ -263,6 +281,20 @@
         }
 
         this.validate('change');
+      },
+      updateComputedLabelWidth(width) {
+        this.computedLabelWidth = width ? `${width}px` : '';
+      },
+      addValidateEvents() {
+        const rules = this.getRules();
+
+        if (rules.length || this.required !== undefined) {
+          this.$on('el.form.blur', this.onFieldBlur);
+          this.$on('el.form.change', this.onFieldChange);
+        }
+      },
+      removeValidateEvents() {
+        this.$off();
       }
     },
     mounted() {
@@ -277,12 +309,7 @@
           value: initialValue
         });
 
-        let rules = this.getRules();
-
-        if (rules.length || this.required !== undefined) {
-          this.$on('el.form.blur', this.onFieldBlur);
-          this.$on('el.form.change', this.onFieldChange);
-        }
+        this.addValidateEvents();
       }
     },
     beforeDestroy() {

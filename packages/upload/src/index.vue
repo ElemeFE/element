@@ -122,6 +122,20 @@ export default {
   },
 
   watch: {
+    listType(type) {
+      if (type === 'picture-card' || type === 'picture') {
+        this.uploadFiles = this.uploadFiles.map(file => {
+          if (!file.url && file.raw) {
+            try {
+              file.url = URL.createObjectURL(file.raw);
+            } catch (err) {
+              console.error('[Element Error][Upload]', err);
+            }
+          }
+          return file;
+        });
+      }
+    },
     fileList: {
       immediate: true,
       handler(fileList) {
@@ -146,11 +160,13 @@ export default {
         raw: rawFile
       };
 
-      try {
-        file.url = URL.createObjectURL(rawFile);
-      } catch (err) {
-        console.error(err);
-        return;
+      if (this.listType === 'picture-card' || this.listType === 'picture') {
+        try {
+          file.url = URL.createObjectURL(rawFile);
+        } catch (err) {
+          console.error('[Element Error][Upload]', err);
+          return;
+        }
       }
 
       this.uploadFiles.push(file);
@@ -241,6 +257,14 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    this.uploadFiles.forEach(file => {
+      if (file.url && file.url.indexOf('blob:') === 0) {
+        URL.revokeObjectURL(file.url);
+      }
+    });
+  },
+
   render(h) {
     let uploadList;
 
@@ -252,6 +276,15 @@ export default {
           files={this.uploadFiles}
           on-remove={this.handleRemove}
           handlePreview={this.onPreview}>
+          {
+            (props) => {
+              if (this.$scopedSlots.file) {
+                return this.$scopedSlots.file({
+                  file: props.file
+                });
+              }
+            }
+          }
         </UploadList>
       );
     }

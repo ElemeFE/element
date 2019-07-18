@@ -87,7 +87,7 @@
         const navScroll = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const navBounding = nav.getBoundingClientRect();
+        const maxOffset = nav.offsetWidth - navScrollBounding.width;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
@@ -97,10 +97,9 @@
         if (activeTabBounding.right > navScrollBounding.right) {
           newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
         }
-        if (navBounding.right < navScrollBounding.right) {
-          newOffset = nav.offsetWidth - navScrollBounding.width;
-        }
-        this.navOffset = Math.max(newOffset, 0);
+
+        newOffset = Math.max(newOffset, 0);
+        this.navOffset = Math.min(newOffset, maxOffset);
       },
       update() {
         if (!this.$refs.nav) return;
@@ -228,6 +227,7 @@
               'is-focus': this.isFocus
             }}
             id={`tab-${tabName}`}
+            key={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
             aria-selected={ pane.active }
@@ -268,6 +268,9 @@
       document.addEventListener('visibilitychange', this.visibilityChangeHandler);
       window.addEventListener('blur', this.windowBlurHandler);
       window.addEventListener('focus', this.windowFocusHandler);
+      setTimeout(() => {
+        this.scrollToActiveTab();
+      }, 0);
     },
 
     beforeDestroy() {

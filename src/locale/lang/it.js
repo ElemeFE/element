@@ -20,7 +20,7 @@ export default {
       nextYear: 'Anno successivo',
       prevMonth: 'Mese precedente',
       nextMonth: 'Mese successivo',
-      year: 'Anno',
+      year: '',
       month1: 'Gennaio',
       month2: 'Febbraio',
       month3: 'Marzo',
@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Nessuna corrispondenza',
       loading: 'Caricamento',
-      placeholder: 'Seleziona'
+      placeholder: 'Seleziona',
+      noData: 'Nessun dato'
     },
     pagination: {
       goto: 'Vai a',
@@ -103,6 +104,12 @@ export default {
       filterPlaceholder: 'Inserisci filtro',
       noCheckedFormat: '{total} elementi',
       hasCheckedFormat: '{checked}/{total} selezionati'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

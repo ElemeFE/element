@@ -3,7 +3,7 @@
     height: calc(100% - 80px);
     margin-top: 80px;
 
-    .el-scrollbar__wrap {
+    > .el-scrollbar__wrap {
       overflow-x: auto;
     }
   }
@@ -24,8 +24,9 @@
       margin-top: 80px;
       transition: padding-top .3s;
 
-      .el-scrollbar__wrap {
+      > .el-scrollbar__wrap {
         height: 100%;
+        overflow-x: auto;
       }
 
       &.is-extended {
@@ -71,7 +72,7 @@
           }
 
           td, th {
-            border-bottom: 1px solid #d8d8d8;
+            border-bottom: 1px solid #dcdfe6;
             padding: 15px;
             max-width: 250px;
           }
@@ -79,12 +80,12 @@
           th {
             text-align: left;
             white-space: nowrap;
-            color: #666;
+            color: #909399;
             font-weight: normal;
           }
 
           td {
-            color: #333;
+            color: #606266;
           }
 
           th:first-child, td:first-child {
@@ -100,36 +101,6 @@
           line-height: 2em;
         }
       }
-    }
-
-    .page-component-up {
-      background-color: #fff;
-      position: fixed;
-      right: 100px;
-      bottom: 150px;
-      size: 40px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: .3s;
-      box-shadow: 0 0 6px rgba(0,0,0, .12);
-      z-index: 5;
-
-      i {
-        color: #409EFF;
-        display: block;
-        line-height: 40px;
-        text-align: center;
-        font-size: 18px;
-      }
-
-      &.hover {
-        opacity: 1;
-      }
-    }
-    .back-top-fade-enter,
-    .back-top-fade-leave-active {
-      transform: translateY(-30px);
-      opacity: 0;
     }
   }
 
@@ -155,9 +126,6 @@
         overflow: auto;
         display: block;
       }
-      .page-component-up {
-        display: none;
-      }
     }
   }
 </style>
@@ -171,17 +139,12 @@
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
     </div>
-    <transition name="back-top-fade">
-      <div
-        class="page-component-up"
-        :class="{ 'hover': hover }"
-        v-show="showBackToTop"
-        @mouseenter="hover = true"
-        @mouseleave="hover = false"
-        @click="toTop">
-        <i class="el-icon-caret-top"></i>
-      </div>
-    </transition>
+    <el-backtop 
+      v-if="showBackToTop"
+      target=".page-component__scroll .el-scrollbar__wrap"
+      :right="100"
+      :bottom="150"
+    ></el-backtop>
   </div>
   </el-scrollbar>
 </template>
@@ -195,8 +158,6 @@
       return {
         lang: this.$route.meta.lang,
         navsData,
-        hover: false,
-        showBackToTop: false,
         scrollTop: 0,
         showHeader: true,
         componentScrollBar: null,
@@ -215,7 +176,7 @@
     methods: {
       renderAnchorHref() {
         if (/changelog/g.test(location.href)) return;
-        const anchors = document.querySelectorAll('h2 a,h3 a');
+        const anchors = document.querySelectorAll('h2 a,h3 a,h4 a,h5 a');
         const basePath = location.href.split('#').splice(0, 2).join('#');
 
         [].slice.call(anchors).forEach(a => {
@@ -236,15 +197,9 @@
           }, 50);
         }
       },
-      toTop() {
-        this.hover = false;
-        this.showBackToTop = false;
-        this.componentScrollBox.scrollTop = 0;
-      },
 
       handleScroll() {
         const scrollTop = this.componentScrollBox.scrollTop;
-        this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
         if (this.showHeader !== this.scrollTop > scrollTop) {
           this.showHeader = this.scrollTop > scrollTop;
         }
@@ -257,17 +212,14 @@
         this.scrollTop = scrollTop;
       }
     },
+    computed: {
+      showBackToTop() {
+        return !this.$route.path.match(/backtop/);
+      }
+    },
     created() {
       bus.$on('navFade', val => {
         this.navFaded = val;
-      });
-      window.addEventListener('hashchange', () => {
-        if (location.href.match(/#/g).length < 2) {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-          this.renderAnchorHref();
-        } else {
-          this.goAnchor();
-        }
       });
     },
     mounted() {
@@ -284,6 +236,17 @@
     },
     beforeDestroy() {
       this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
+    },
+    beforeRouteUpdate(to, from, next) {
+      next();
+      setTimeout(() => {
+        if (location.href.match(/#/g).length < 2) {
+          document.documentElement.scrollTop = document.body.scrollTop = 0;
+          this.renderAnchorHref();
+        } else {
+          this.goAnchor();
+        }
+      }, 100);
     }
   };
 </script>

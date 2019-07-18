@@ -1,0 +1,34 @@
+.demo-block.demo-tag {
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+
+  .tag-group {
+    display: flex;
+    align-items: center;
+
+    &__title {
+      width: 45px;
+      font-size: 14px;
+      color: #606266;
+    }
+
+    &+.tag-group  {
+      margin-top: 10px;
+    }
+  }
+}

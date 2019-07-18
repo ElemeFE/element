@@ -75,13 +75,13 @@ export declare class ElUpload extends ElementUIComponent {
   onRemove: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when uploaded successfully */
-  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when some errors occurs */
-  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when some progress occurs */
-  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when file status change */
   onChange: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
@@ -118,4 +118,7 @@ export declare class ElUpload extends ElementUIComponent {
 
   /** Abort specified file */
   abort (file: ElUploadInternalFileDetail): void
+
+  /** Upload the file list manually */
+  submit ():void;
 }

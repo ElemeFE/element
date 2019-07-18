@@ -109,7 +109,7 @@
     }
 
     &:focus.is-active.is-focus:not(:active) {
-      box-shadow: 0 0 2px 2px #409eff inset;
+      box-shadow: 0 0 2px 2px $--color-primary inset;
       border-radius: 3px;
     }
 
@@ -211,10 +211,10 @@
     border: 1px solid $--border-color-base;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04);
 
-    >.el-tabs__content {
+    > .el-tabs__content {
       padding: 15px;
     }
-    >.el-tabs__header {
+    > .el-tabs__header {
       background-color: $--background-color-base;
       border-bottom: 1px solid $--border-color-light;
       margin: 0;
@@ -222,11 +222,19 @@
     > .el-tabs__header .el-tabs__nav-wrap::after {
       content: none;
     }
-    >.el-tabs__header .el-tabs__item {
+    > .el-tabs__header .el-tabs__item {
       transition: all .3s cubic-bezier(.645,.045,.355,1);
       border: 1px solid transparent;
-      margin: -1px -1px 0;
+      margin-top: -1px;
       color: $--color-text-secondary;
+
+      &:first-child {
+        margin-left: -1px;
+      }
+
+      & + .el-tabs__item {
+        margin-left: -1px;
+      }
 
       &.is-active {
         color: $--color-primary;
@@ -241,6 +249,10 @@
         color: $--disabled-color-base;
       }
     }
+
+    > .el-tabs__header .is-scrollable .el-tabs__item:first-child {
+      margin-left: 0;
+    }
   }
   @include m((top, bottom)) {
     .el-tabs__item.is-top:nth-child(2),
@@ -254,11 +266,13 @@
 
     &.el-tabs--border-card, &.el-tabs--card,
     .el-tabs--left, .el-tabs--right {
-      .el-tabs__item:nth-child(2) {
-        padding-left: 20px;
-      }
-      .el-tabs__item:last-child {
-        padding-right: 20px;
+      > .el-tabs__header {
+        .el-tabs__item:nth-child(2) {
+          padding-left: 20px;
+        }
+        .el-tabs__item:last-child {
+          padding-right: 20px;
+        }
       }
     }
   }
@@ -314,7 +328,7 @@
         width: 100%;
         text-align: center;
         cursor: pointer;
-  
+
         i {
           transform: rotateZ(90deg);
         }
@@ -379,6 +393,7 @@
         border-right: 1px solid $--border-color-light;
         border-bottom: none;
         border-top: 1px solid $--border-color-light;
+        text-align: left;
       }
       .el-tabs__item.is-left:first-child {
         border-right: 1px solid $--border-color-light;

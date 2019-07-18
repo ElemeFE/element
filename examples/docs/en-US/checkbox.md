@@ -1,48 +1,3 @@
-<script>
-  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
-  module.exports = {
-    data() {
-      return {
-        checkList: ['selected and disabled','Option A'],
-        // checkList2: ['Option A'],
-        checked: true,
-        checked1: false,
-        checked2: true,
-        checked3: true,
-        checked4: false,
-        checked5: false,
-        checked6: true,
-        isValid: 'valid',
-        checkAll: false,
-        cities: cityOptions,
-        checkedCities: ['Shanghai', 'Beijing'],
-        checkedCities1: ['Shanghai', 'Beijing'],
-        isIndeterminate: true,
-        checkboxGroup1: ['Shanghai'],
-        checkboxGroup2: ['Shanghai'],
-        checkboxGroup3: ['Shanghai'],
-        checkboxGroup4: ['Shanghai'],
-        checkboxGroup5: [],
-        checkboxGroup6: []
-      };
-    },
-    methods: {
-      handleChange(ev) {
-        console.log(ev);
-      },
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
-    }
-  };
-</script>
-
 ## Checkbox
 
 A group of options for multiple choices.
@@ -173,7 +128,7 @@ The `min` and `max` properties can help you to limit the number of checked items
 ```html
 <template>
   <el-checkbox-group 
-    v-model="checkedCities1"
+    v-model="checkedCities"
     :min="1"
     :max="2">
     <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
@@ -184,7 +139,7 @@ The `min` and `max` properties can help you to limit the number of checked items
   export default {
     data() {
       return {
-        checkedCities1: ['Shanghai', 'Beijing'],
+        checkedCities: ['Shanghai', 'Beijing'],
         cities: cityOptions
       };
     }
@@ -245,21 +200,21 @@ Checkbox with button styles.
 ```html
 <template>
   <div>
-    <el-checkbox v-model="checked3" label="Option1" border></el-checkbox>
-    <el-checkbox v-model="checked4" label="Option2" border></el-checkbox>
+    <el-checkbox v-model="checked1" label="Option1" border></el-checkbox>
+    <el-checkbox v-model="checked2" label="Option2" border></el-checkbox>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox v-model="checked5" label="Option1" border size="medium"></el-checkbox>
-    <el-checkbox v-model="checked6" label="Option2" border size="medium"></el-checkbox>
+    <el-checkbox v-model="checked3" label="Option1" border size="medium"></el-checkbox>
+    <el-checkbox v-model="checked4" label="Option2" border size="medium"></el-checkbox>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup5" size="small">
+    <el-checkbox-group v-model="checkboxGroup1" size="small">
       <el-checkbox label="Option1" border></el-checkbox>
       <el-checkbox label="Option2" border disabled></el-checkbox>
     </el-checkbox-group>
   </div>
   <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup6" size="mini" disabled>
+    <el-checkbox-group v-model="checkboxGroup2" size="mini" disabled>
       <el-checkbox label="Option1" border></el-checkbox>
       <el-checkbox label="Option2" border></el-checkbox>
     </el-checkbox-group>
@@ -270,12 +225,12 @@ Checkbox with button styles.
   export default {
     data () {
       return {
-        checked3: true,
-        checked4: false,
-        checked5: false,
-        checked6: true,
-        checkboxGroup5: [],
-        checkboxGroup6: []
+        checked1: true,
+        checked2: false,
+        checked3: false,
+        checked4: true,
+        checkboxGroup1: [],
+        checkboxGroup2: []
       };
     }
   }
@@ -286,6 +241,7 @@ Checkbox with button styles.
 ### Checkbox Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | string / number / boolean | — | — |
 | label     | value of the Checkbox when used inside a `checkbox-group`   | string / number / boolean   |       —        |     —    |
 | true-label | value of the Checkbox if it's checked   | string / number    |       —        |     —    |
 | false-label | value of the Checkbox if it's not checked   | string / number    |      —         |     —    |
@@ -304,6 +260,7 @@ Checkbox with button styles.
 ### Checkbox-group Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | binding value | array | — | — |
 |size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini | — |
 | disabled  | whether the nesting checkboxes are disabled | boolean   | — | false   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |

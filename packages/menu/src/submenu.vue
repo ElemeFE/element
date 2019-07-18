@@ -178,7 +178,11 @@
         }
         this.dispatch('ElMenu', 'submenu-click', this);
       },
-      handleMouseenter() {
+      handleMouseenter(event, showTimeout = this.showTimeout) {
+
+        if (!('ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
+          return;
+        }
         const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
@@ -191,9 +195,13 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
-        }, this.showTimeout);
+        }, showTimeout);
+
+        if (this.appendToBody) {
+          this.$parent.$el.dispatchEvent(new MouseEvent('mouseenter'));
+        }
       },
-      handleMouseleave() {
+      handleMouseleave(deepDispatch = false) {
         const {rootMenu} = this;
         if (
           (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
@@ -206,6 +214,12 @@
         this.timeout = setTimeout(() => {
           !this.mouseInChild && this.rootMenu.closeMenu(this.index);
         }, this.hideTimeout);
+
+        if (this.appendToBody && deepDispatch) {
+          if (this.$parent.$options.name === 'ElSubmenu') {
+            this.$parent.handleMouseleave(true);
+          }
+        }
       },
       handleTitleMouseenter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
@@ -271,9 +285,9 @@
             ref="menu"
             v-show={opened}
             class={[`el-menu--${mode}`, popperClass]}
-            on-mouseenter={this.handleMouseenter}
-            on-mouseleave={this.handleMouseleave}
-            on-focus={this.handleMouseenter}>
+            on-mouseenter={($event) => this.handleMouseenter($event, 100)}
+            on-mouseleave={() => this.handleMouseleave(true)}
+            on-focus={($event) => this.handleMouseenter($event, 100)}>
             <ul
               role="menu"
               class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
@@ -313,7 +327,7 @@
           aria-haspopup="true"
           aria-expanded={opened}
           on-mouseenter={this.handleMouseenter}
-          on-mouseleave={this.handleMouseleave}
+          on-mouseleave={() => this.handleMouseleave(false)}
           on-focus={this.handleMouseenter}
         >
           <div

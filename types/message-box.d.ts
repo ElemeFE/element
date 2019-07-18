@@ -1,8 +1,8 @@
-import Vue from 'vue'
+import Vue, { VNode } from 'vue'
 import { MessageType } from './message'
 
-export type MessageBoxCloseAction = 'confirm' | 'cancel'
-export type MessageBoxData = MessageBoxCloseAction | MessageBoxInputData
+export type MessageBoxCloseAction = 'confirm' | 'cancel' | 'close'
+export type MessageBoxData = MessageBoxInputData | MessageBoxCloseAction
 
 export interface MessageBoxInputData {
   value: string,
@@ -47,7 +47,7 @@ export interface ElMessageBoxOptions {
   title?: string
 
   /** Content of the MessageBox */
-  message?: string
+  message?: string | VNode
 
   /** Message type, used for icon display */
   type?: MessageType
@@ -72,6 +72,9 @@ export interface ElMessageBoxOptions {
 
   /** Whether to show a confirm button */
   showConfirmButton?: boolean
+
+  /** Whether to show a close button */
+  showClose?: boolean
 
   /** Text content of cancel button */
   cancelButtonText?: string
@@ -123,6 +126,9 @@ export interface ElMessageBoxOptions {
 
   /** Error message when validation fails */
   inputErrorMessage?: string
+
+  /** Whether to distinguish canceling and closing */
+  distinguishCancelAndClose?: boolean
 }
 
 export interface ElMessageBoxShortcutMethod {

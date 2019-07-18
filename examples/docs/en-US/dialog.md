@@ -1,78 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        gridData: [{
-          date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-03',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }],
-        dialogVisible: false,
-        dialogTableVisible: false,
-        dialogFormVisible: false,
-        outerVisible: false,
-        innerVisible: false,
-        centerDialogVisible: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
-      };
-    },
-    methods: {
-      handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-dialog {
-    .dialog-footer button:first-child {
-      margin-right: 10px;
-    }
-    .full-image {
-      width: 100%;
-    }
-    .el-dialog__wrapper {
-      margin: 0;
-    }
-    .el-select {
-      width: 300px;
-    }
-    .el-input {
-      width: 300px;
-    }
-    .el-button--text {
-      margin-right: 15px;
-    }
-  }
-</style>
-
 ## Dialog
 
 Informs users while preserving the current page state.
@@ -147,7 +72,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="Zones" :label-width="formLabelWidth">
       <el-select v-model="form.region" placeholder="Please select a zone">
@@ -309,5 +234,6 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open | triggers when the Dialog opens | — |
+| opened | triggers when the Dialog opening animation ends | — |
 | close | triggers when the Dialog closes | — |
 | closed | triggers when the Dialog closing animation ends | — |

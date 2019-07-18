@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'データなし',
       loading: 'ロード中',
-      placeholder: '選択してください'
+      placeholder: '選択してください',
+      noData: 'データなし'
     },
     pagination: {
       goto: '',
@@ -104,6 +105,12 @@ export default {
       filterPlaceholder: 'キーワードを入力',
       noCheckedFormat: '総計 {total} 件',
       hasCheckedFormat: '{checked}/{total} を選択した'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

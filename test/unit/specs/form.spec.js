@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 const DELAY = 50;
 
@@ -42,6 +42,43 @@ describe('Form', () => {
     expect(vm.$el.querySelector('.el-form-item__label').style.width).to.equal('80px');
     expect(vm.$el.querySelector('.el-form-item__content').style.marginLeft).to.equal('80px');
     done();
+  });
+  it('auto label width', async() => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" label-width="auto">
+          <el-form-item label="活动名称">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="活动备注信息" v-if="display">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          display: true,
+          form: {
+            name: '',
+            intro: ''
+          }
+        };
+      }
+    }, true);
+
+    await waitImmediate();
+
+    const formItems = vm.$el.querySelectorAll('.el-form-item__content');
+    const marginLeft = parseInt(formItems[0].style.marginLeft, 10);
+    const marginLeft1 = parseInt(formItems[1].style.marginLeft, 10);
+    expect(marginLeft === marginLeft1).to.be.true;
+
+    vm.display = false;
+    await waitImmediate();
+
+    const formItem = vm.$el.querySelector('.el-form-item__content');
+    const newMarginLeft = parseInt(formItem.style.marginLeft, 10);
+    expect(newMarginLeft < marginLeft).to.be.true;
   });
   it('inline form', done => {
     vm = createVue({
@@ -213,6 +250,64 @@ describe('Form', () => {
       done();
     });
   });
+  it('clear validate', done => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" :rules="rules">
+          <el-form-item label="活动名称" prop="name">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="活动地址" prop="address">
+            <el-input v-model="form.address"></el-input>
+          </el-form-item>
+          <el-form-item label="活动性质" prop="type">
+            <el-checkbox-group v-model="form.type">
+              <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+              <el-checkbox label="地推活动" name="type"></el-checkbox>
+              <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+              <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          form: {
+            name: '',
+            address: '',
+            type: []
+          },
+          rules: {
+            name: [
+              { required: true, message: '请输入活动名称', trigger: 'blur' }
+            ],
+            address: [
+              { required: true, message: '请选择活动区域', trigger: 'change' }
+            ],
+            type: [
+              { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+            ]
+          }
+        };
+      }
+    }, true);
+    const form = vm.$refs.form;
+    const nameField = form.fields.filter(field => field.prop === 'name')[0];
+    const addressField = form.fields.filter(field => field.prop === 'address')[0];
+    form.validate();
+    vm.$nextTick(() => {
+      expect(nameField.validateMessage).to.equal('请输入活动名称');
+      form.clearValidate(['name']);
+      vm.$nextTick(() => {
+        expect(nameField.validateMessage).to.equal('');
+        form.clearValidate();
+        vm.$nextTick(() => {
+          expect(addressField.validateMessage).to.equal('');
+          done();
+        });
+      });
+    });
+  });
   it('form item nest', done => {
     vm = createVue({
       template: `
@@ -226,7 +321,7 @@ describe('Form', () => {
             <el-col class="line" :span="2">-</el-col>
             <el-col :span="11">
               <el-form-item prop="date2">
-                <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+                <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
               </el-form-item>
             </el-col>
           </el-form-item>
@@ -425,11 +520,11 @@ describe('Form', () => {
         expect(valid).to.not.true;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择日期');
-          // programatic modification does not trigger change
-          vm.value = new Date();
+          // programatic modification triggers change validation
+          vm.form.date = new Date();
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('请选择日期');
-            vm.value = '';
+            expect(field.validateMessage).to.equal('');
+            vm.form.date = '';
             // user modification triggers change
             const input = vm.$refs.picker.$el.querySelector('input');
             input.blur();
@@ -459,7 +554,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-time-picker type="fixed-time" ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
+              <el-time-picker ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-form>
         `,
@@ -854,6 +949,10 @@ describe('Form', () => {
             name: null,
             addr: null
           },
+          error: {
+            name: null,
+            addr: null
+          },
           rules: {
             name: [
               { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
@@ -865,8 +964,9 @@ describe('Form', () => {
         };
       },
       methods: {
-        onValidate(prop, valid) {
+        onValidate(prop, valid, msg) {
           this.valid[prop] = valid;
+          this.error[prop] = msg;
         },
         setValue(prop, value) {
           this.form[prop] = value;
@@ -876,12 +976,15 @@ describe('Form', () => {
     vm.setValue('name', '1');
     setTimeout(() => {
       expect(vm.valid.name).to.equal(false);
+      expect(vm.error.name).to.equal('请输入活动名称');
       vm.setValue('addr', '1');
       setTimeout(() => {
         expect(vm.valid.addr).to.equal(true);
+        expect(vm.error.addr).to.equal(null);
         vm.setValue('name', '111');
         setTimeout(() => {
           expect(vm.valid.name).to.equal(true);
+          expect(vm.error.name).to.equal(null);
           done();
         }, DELAY);
       }, DELAY);

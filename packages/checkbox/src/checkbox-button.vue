@@ -35,7 +35,7 @@
       @focus="focus = true"
       @blur="focus = false">
 
-    <span class="el-checkbox-button__inner" 
+    <span class="el-checkbox-button__inner"
       v-if="$slots.default || label"
       :style="isChecked ? activeStyle : null">
       <slot>{{label}}</slot>
@@ -150,9 +150,17 @@
         return this._checkboxGroup.checkboxGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
 
+      /* used to make the isDisabled judgment under max/min props */
+      isLimitDisabled() {
+        const { max, min } = this._checkboxGroup;
+        return !!(max || min) &&
+          (this.model.length >= max && !this.isChecked) ||
+          (this.model.length <= min && this.isChecked);
+      },
+
       isDisabled() {
         return this._checkboxGroup
-          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled || this.isLimitDisabled
           : this.disabled || (this.elForm || {}).disabled;
       }
     },
