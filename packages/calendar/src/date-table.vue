@@ -122,14 +122,8 @@ export default {
         let firstDay = getFirstDayOfMonth(date);
         firstDay = firstDay === 0 ? 7 : firstDay;
         const firstDayOfWeek = typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1;
-        const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek).map(day => ({
-          text: day,
-          type: 'prev'
-        }));
-        const currentMonthDays = getMonthDays(date).map(day => ({
-          text: day,
-          type: 'current'
-        }));
+        const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek);
+        const currentMonthDays = getMonthDays(date);
         days = [...prevMonthDays, ...currentMonthDays];
         const nextMonthDays = rangeArr(42 - days.length).map((_, index) => ({
           text: index + 1,

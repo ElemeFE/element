@@ -137,13 +137,13 @@ export const getPrevMonthLastDays = (date, amount) => {
   const temp = new Date(date.getTime());
   temp.setDate(0);
   const lastDay = temp.getDate();
-  return range(amount).map((_, index) => lastDay - (amount - index - 1));
+  return range(amount).map((_, index) => ({text: lastDay - (amount - index - 1), type: 'prev'}));
 };
 
 export const getMonthDays = (date) => {
   const temp = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   const days = temp.getDate();
-  return range(days).map((_, index) => index + 1);
+  return range(days).map((_, index) => ({text: index + 1, type: 'current'}));
 };
 
 function setRangeData(arr, start, end, value) {
