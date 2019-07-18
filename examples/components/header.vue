@@ -434,10 +434,11 @@
           ga('send', 'event', 'DocView', 'Ele', 'Outer');
           console.error(err);
         });
-      getTestAli.then(() => {
-        this.$isEle = true;
-        ga('send', 'event', 'DocView', 'Ali', 'Inner');
-      })
+      getTestAli()
+        .then(() => {
+          this.$isEle = true;
+          ga('send', 'event', 'DocView', 'Ali', 'Inner');
+        })
         .catch((err) => {
           ga('send', 'event', 'DocView', 'Ali', 'Outer');
           console.error(err);
