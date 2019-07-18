@@ -380,7 +380,7 @@
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
   import themeLoader from './theme/loader';
-  import { getTestEle } from './theme/loader/api.js';
+  import { getTestEle, getTestAli } from './theme/loader/api.js';
   import bus from '../bus';
   import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
 
@@ -430,6 +430,13 @@
           this.$isEle = true;
           ga('send', 'event', 'DocView', 'Inner');
         })
+        .catch((err) => {
+          console.error(err);
+        });
+      getTestAli.then(() => {
+        this.$isEle = true;
+        ga('send', 'event', 'DocView', 'Ali');
+      })
         .catch((err) => {
           console.error(err);
         });
