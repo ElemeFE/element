@@ -431,7 +431,7 @@
           ga('send', 'event', 'DocView', 'Ele', 'Inner');
         })
         .catch((err) => {
-          ga('send', 'event', 'DocView', 'Ele', 'Outter');
+          ga('send', 'event', 'DocView', 'Ele', 'Outer');
           console.error(err);
         });
       getTestAli.then(() => {
@@ -439,7 +439,7 @@
         ga('send', 'event', 'DocView', 'Ali', 'Inner');
       })
         .catch((err) => {
-          ga('send', 'event', 'DocView', 'Ali', 'Outter');
+          ga('send', 'event', 'DocView', 'Ali', 'Outer');
           console.error(err);
         });
     },
