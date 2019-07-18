@@ -20,7 +20,7 @@ export const getTestEle = () => {
 };
 
 export const getTestAli = () => {
-  return get('https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png');
+  return get(`https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`);
 };
 
 export const updateVars = (data, cb) => {
