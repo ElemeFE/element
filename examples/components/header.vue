@@ -151,9 +151,9 @@
         }
       }
 
-      .nav-ecology {
+      .nav-ecosystem {
         font-size: 16px;
-        .nav-ecology__title {
+        .nav-ecosystem__title {
           text-decoration: none;
           color: #1989fa;
           opacity: .5;
@@ -161,7 +161,7 @@
           padding: 0 22px;
         }
 
-        .nav-ecology__title.active {
+        .nav-ecosystem__title.active {
           opacity: 1;
 
           &::after {
@@ -179,8 +179,8 @@
     }
   }
 
-  .ecology-dropdown {
-    .nav-ecology-item {
+  .ecosystem-dropdown {
+    .nav-ecosystem-item {
       a {
         color: #1989fa;
         font-size: 16px;
@@ -352,20 +352,20 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <el-dropdown class="nav-ecology" v-if="$isEle">
-              <span class="nav-ecology__title" :class="{ active: isEcology }">
-                生态
+            <el-dropdown class="nav-ecosystem" v-if="$isEle">
+              <span class="nav-ecosystem__title" :class="{ active: isEcology }">
+                {{ langConfig.ecosystem }}
               </span>
-              <el-dropdown-menu class="ecology-dropdown" slot="dropdown">
-                <el-dropdown-item class="nav-ecology-item">
+              <el-dropdown-menu class="ecosystem-dropdown" slot="dropdown">
+                <el-dropdown-item class="nav-ecosystem-item">
                   <router-link
                     active-class="active"
                     :to="`/${ lang }/resource`"
                     exact>{{ langConfig.resource }}
                   </router-link>
                 </el-dropdown-item>
-                <el-dropdown-item class="nav-ecology-item">
-                  <a href="http://element-plus.faas.elenet.me" target="_blank">业务组件</a>
+                <el-dropdown-item class="nav-ecosystem-item">
+                  <a href="http://element-plus.faas.elenet.me" target="_blank">Element Plus</a>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>

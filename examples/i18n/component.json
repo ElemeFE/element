@@ -24,7 +24,8 @@
       "guide": "指南",
       "components": "组件",
       "theme": "主题",
-      "resource": "资源"
+      "resource": "资源",
+      "ecosystem": "生态"
     },
     "nav": {
       "dropdown": "版本："
@@ -55,7 +56,8 @@
       "guide": "Guide",
       "components": "Component",
       "theme": "Theme",
-      "resource": "Resource"
+      "resource": "Resource",
+      "ecosystem": "Ecosystem"
     },
     "nav": {
       "dropdown": "Version: "
@@ -86,7 +88,8 @@
       "guide": "Guía",
       "components": "Componentes",
       "theme": "Theme",
-      "resource": "Recursos"
+      "resource": "Recursos",
+      "ecosystem": "Ecosystem"
     },
     "nav": {
       "dropdown": "Versión: "
@@ -117,7 +120,8 @@
       "guide": "Guide",
       "components": "Composants",
       "theme": "Theme",
-      "resource": "Ressources"
+      "resource": "Ressources",
+      "ecosystem": "Ecosystem"
     },
     "nav": {
       "dropdown": "Version: "
