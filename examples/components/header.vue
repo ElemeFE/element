@@ -97,11 +97,11 @@
       list-style: none;
       position: relative;
       cursor: pointer;
-    
+
       &.nav-algolia-search {
         cursor: default;
       }
-    
+
       &.lang-item,
       &:last-child {
         cursor: default;
@@ -150,6 +150,48 @@
           background: #409EFF;
         }
       }
+
+      .nav-ecology {
+        font-size: 16px;
+        .nav-ecology__title {
+          text-decoration: none;
+          color: #1989fa;
+          opacity: .5;
+          display: block;
+          padding: 0 22px;
+        }
+
+        .nav-ecology__title.active {
+          opacity: 1;
+
+          &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 15px);
+            width: 30px;
+            height: 2px;
+            background: #409EFF;
+          }
+        }
+      }
+    }
+  }
+
+  .ecology-dropdown {
+    .nav-ecology-item {
+      a {
+        color: #1989fa;
+        font-size: 16px;
+        opacity: .5;
+        width: 100%;
+        display: inline-block;
+      }
+
+      a.active {
+        opacity: 1;
+      }
     }
   }
 
@@ -195,7 +237,7 @@
       }
     }
   }
-  
+
   .nav-dropdown-list {
     width: auto;
   }
@@ -215,7 +257,7 @@
         &:last-child {
           margin-left: 10px;
         }
-         
+
         a {
           padding: 0 5px;
         }
@@ -239,11 +281,11 @@
 
         &.lang-item {
           height: 100%;
-         
+
           .nav-lang {
             display: flex;
             align-items: center;
-            
+
             span {
               padding-bottom: 0;
             }
@@ -301,7 +343,7 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
-          <li 
+          <li
             class="nav-item nav-item-theme"
           >
             <router-link
@@ -310,7 +352,25 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <el-dropdown class="nav-ecology" v-if="$isEle">
+              <span class="nav-ecology__title" :class="{ active: isEcology }">
+                生态
+              </span>
+              <el-dropdown-menu class="ecology-dropdown" slot="dropdown">
+                <el-dropdown-item class="nav-ecology-item">
+                  <router-link
+                    active-class="active"
+                    :to="`/${ lang }/resource`"
+                    exact>{{ langConfig.resource }}
+                  </router-link>
+                </el-dropdown-item>
+                <el-dropdown-item class="nav-ecology-item">
+                  <a href="http://element-plus.faas.elenet.me" target="_blank">业务组件</a>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
             <router-link
+              v-else
               active-class="active"
               :to="`/${ lang }/resource`"
               exact>{{ langConfig.resource }}
@@ -422,6 +482,9 @@
       },
       isComponentPage() {
         return /^component/.test(this.$route.name);
+      },
+      isEcology() {
+        return /^resource/.test(this.$route.name);
       }
     },
     mounted() {
