@@ -53,6 +53,29 @@ export default {
 ```
 :::
 
+### Required
+
+:::demo Make the Input required with the `required` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input"
+  required>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Clearable
 
 :::demo Make the Input clearable with the `clearable` attribute.

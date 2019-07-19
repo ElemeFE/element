@@ -47,6 +47,27 @@ Input numerical values with a customizable range.
 ```
 :::
 
+### Required
+
+:::demo Make the Input required with the `required` attribute.
+
+```html
+</el-input>
+<template>
+  <el-input-number v-model="num" required></el-input-number>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Steps
 
 Allows you to define incremental steps.

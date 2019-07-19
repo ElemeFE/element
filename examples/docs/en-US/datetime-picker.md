@@ -193,6 +193,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | value / v-model | binding value | date(DateTimePicker) / array(DateTimeRangePicker) | — | — |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
+| required | whether DatePicker is disabled | required | — | false |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | whether to show clear button | boolean | — | true |
 |size | size of Input | string | large/small/mini | — |
