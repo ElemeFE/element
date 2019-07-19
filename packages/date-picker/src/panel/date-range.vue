@@ -118,6 +118,7 @@
               :max-date="maxDate"
               :range-state="rangeState"
               :disabled-date="disabledDate"
+              :class-name="className"
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
@@ -157,6 +158,7 @@
               :max-date="maxDate"
               :range-state="rangeState"
               :disabled-date="disabledDate"
+              :class-name="className"
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
@@ -331,6 +333,7 @@
         shortcuts: '',
         visible: '',
         disabledDate: '',
+        className: '',
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
