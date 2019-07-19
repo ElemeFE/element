@@ -46,6 +46,12 @@
     right: 10px;
   }
 
+  @include when(readonly){
+    .el-textarea__inner {
+      cursor: default;
+    }
+  }
+
   @include when(disabled) {
     .el-textarea__inner {
       background-color: $--input-disabled-fill;
@@ -180,6 +186,12 @@
     .el-input__inner {
       outline: none;
       border-color: $--input-focus-border;
+    }
+  }
+
+  @include when(readonly) {
+    .el-input__inner {
+      cursor: default;
     }
   }
 
