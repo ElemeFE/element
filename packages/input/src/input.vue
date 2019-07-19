@@ -29,6 +29,7 @@
         :disabled="inputDisabled"
         :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
+        :required="required"
         ref="input"
         @compositionstart="handleCompositionStart"
         @compositionend="handleCompositionEnd"
@@ -94,6 +95,7 @@
       :disabled="inputDisabled"
       :readonly="readonly"
       :autocomplete="autoComplete || autocomplete"
+      :required="required"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -145,6 +147,7 @@
       form: String,
       disabled: Boolean,
       readonly: Boolean,
+      required: Boolean,
       type: {
         type: String,
         default: 'text'

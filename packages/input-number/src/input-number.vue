@@ -36,6 +36,7 @@
       :min="min"
       :name="name"
       :label="label"
+      :required="required"
       @keydown.up.native.prevent="increase"
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
@@ -86,6 +87,7 @@
       },
       value: {},
       disabled: Boolean,
+      required: Boolean,
       size: String,
       controls: {
         type: Boolean,

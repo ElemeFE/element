@@ -18,6 +18,7 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
+    :required="required"
     ref="reference">
     <i slot="prefix"
       class="el-input__icon"
@@ -54,6 +55,7 @@
       :disabled="pickerDisabled"
       v-bind="firstInputId"
       :readonly="!editable || readonly"
+      :required="required"
       :name="name && name[0]"
       @input="handleStartInput"
       @change="handleStartChange"
@@ -69,6 +71,7 @@
       :disabled="pickerDisabled"
       v-bind="secondInputId"
       :readonly="!editable || readonly"
+      :required="required"
       :name="name && name[1]"
       @input="handleEndInput"
       @change="handleEndChange"
@@ -97,7 +100,8 @@ const NewPopper = {
     appendToBody: Popper.props.appendToBody,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
-    arrowOffset: Popper.props.arrowOffset
+    arrowOffset: Popper.props.arrowOffset,
+    required: Boolean
   },
   methods: Popper.methods,
   data() {
