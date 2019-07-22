@@ -57,7 +57,7 @@ Affiche un calendrier.
 | Attribut          | Description   | Type      | Valeurs acceptées     | Défaut   |
 |------------------ |-------------- |---------- |---------------------- |--------- |
 | value / v-model   | Valeur liée.  | Date/string/number | —            | —        |
-| range             | Intervalle de dates, début et fin inclus. Le début doit être un lundi et la fin un dimanche, l'intervalle ne pouvant excéder deux mois. | Array     | —           | —      |
+| range             | Intervalle de dates, début et fin inclus. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months. | Array     | —           | —      |
 | first-day-of-week | fisrt day of week| Number | 1 to 7                |  1       |
 
 ### Slot dateCell
