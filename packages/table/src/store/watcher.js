@@ -266,6 +266,9 @@ export default Vue.extend({
     },
 
     updateSort(column, prop, order) {
+      if (this.states.sortingColumn && this.states.sortingColumn !== column) {
+        this.states.sortingColumn.order = null;
+      }
       this.states.sortingColumn = column;
       this.states.sortProp = prop;
       this.states.sortOrder = order;

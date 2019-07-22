@@ -1753,10 +1753,46 @@ describe('Table', () => {
           vm.$nextTick(() => {
             expect(toArray(lastCells).map(node => node.textContent))
               .to.eql(['-100', '-95', '-92', '-92', '-80']);
+            destroyVM(vm);
             done();
           });
         });
       }, DELAY);
+    });
+
+    it('sort correct change icon', async() => {
+      function assertSortIconCount($el, msg, count = 1) {
+        const sortIconCount = $el.querySelectorAll('th.ascending, th.descending').length;
+        expect(sortIconCount).to.equal(count, msg);
+      }
+
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" >
+            <el-table-column prop="name" sortable />
+            <el-table-column prop="release" sortable />
+            <el-table-column prop="director" sortable />
+            <el-table-column prop="runtime" sortable />
+          </el-table>
+        `,
+        data() {
+          return { testData: getTestData() };
+        }
+      });
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not empty after mount', 0);
+      // manual click first column header
+      const elm = vm.$el.querySelector('.caret-wrapper');
+      elm.click();
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not one after click header');
+      vm.$refs.table.sort('director', 'descending');
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not one after call sort');
+      vm.$refs.table.sort('director', 'ascending');
+      await waitImmediate();
+      assertSortIconCount(vm.$el, 'sorting icon is not one after sort same column');
+      destroyVM(vm);
     });
   });
 
