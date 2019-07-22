@@ -195,7 +195,7 @@
             let cellDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);
             cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime());
-            cell.customClass = typeof className === 'function' && cellClassName(cellDate);
+            cell.customClass = typeof cellClassName === 'function' && cellClassName(cellDate);
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
 
