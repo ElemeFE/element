@@ -77,8 +77,8 @@
         }
       },
 
-      handleCheckChange() 
-        const { panel, value, uids , node } = this;
+      handleCheckChange() {
+        const { panel, value, uids, node } = this;
         panel.handleCheckChange(value, uids);
         panel.handleExpand(node);
       },
