@@ -2839,7 +2839,7 @@ describe('DatePicker', () => {
           return {
             value: '',
             pickerOptions: {
-              className() { return 'test-class'; }
+              cellClassName() { return 'test-class'; }
             }
           };
         }

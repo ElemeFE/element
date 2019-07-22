@@ -463,7 +463,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | Un tableau d'objets { text, onClick } pour configurer les raccourcis, voir table ci-dessous. | object[] | — | — |
 | disabledDate | Une fonction qui détermine si une date est désactivée ou pas, avec cette date en paramètre. Doit retourner un booléen. | function | — | — |
-| className | set custom className | Function(Date) | — | — |
+| cellClassName | set custom className | Function(Date) | — | — |
 | firstDayOfWeek | Premier jour du mois. | Number | 1 to 7 | 7 |
 | onPick | Callback se déclenchant quand la date sélectionnée change. Uniquement pour `daterange` et `datetimerange`. | Function({ maxDate, minDate }) | - | - |
 
