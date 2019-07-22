@@ -109,7 +109,8 @@ export default {
       checkedNodePaths: [],
       store: [],
       menus: [],
-      activePath: []
+      activePath: [],
+      loadCount: 0
     };
   },
 
@@ -294,6 +295,28 @@ export default {
         dataList && dataList.length && this.store.appendNodes(dataList, parent);
         node.loading = false;
         node.loaded = true;
+
+        // dispose default value on lazy load mode
+        if (Array.isArray(this.checkedValue)) {
+          const nodeValue = this.checkedValue[this.loadCount++];
+          const valueKey = this.config.value;
+          const leafKey = this.config.leaf;
+
+          if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
+            const checkedNode = this.store.getNodeByValue(nodeValue);
+
+            if (!checkedNode.data[leafKey]) {
+              this.lazyLoad(checkedNode, () => {
+                this.handleExpand(checkedNode);
+              });
+            }
+
+            if (this.loadCount === this.checkedValue.length) {
+              this.$parent.computePresentText();
+            }
+          }
+        }
+
         onFullfiled && onFullfiled(dataList);
       };
       config.lazyLoad(node, resolve);
