@@ -2832,7 +2832,7 @@ describe('DatePicker', () => {
     });
   });
   describe('picker-options:className', () => {
-    it('set custom class name', done => {
+    it('set custom class name', async() => {
       vm = createVue({
         template: '<el-date-picker type="datetime" v-model="value" ref="compo" :pickerOptions="pickerOptions" />',
         data() {
@@ -2845,15 +2845,11 @@ describe('DatePicker', () => {
         }
       }, true);
       vm.$refs.compo.$el.querySelector('input').focus();
-      setTimeout(_ => {
-        setTimeout(_ => {
-          expect(
-            (vm.$refs.compo.picker.$el.querySelector('.el-date-table__row td').className)
-              .indexOf('test-class') > -1
-          ).to.be.true;
-          done();
-        }, DELAY);
-      }, DELAY);
+      await wait();
+      expect(
+        (vm.$refs.compo.picker.$el.querySelector('.el-date-table__row td').className)
+          .indexOf('test-class') > -1
+      ).to.be.true;
     });
   });
 });
