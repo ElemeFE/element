@@ -85,13 +85,20 @@ const getScrollOptions = (el, vm) => {
   }, {});
 };
 
-const getElementTop = el => el.getBoundingClientRect().top;
+const getElementTop = el => getElementContainer(el).getBoundingClientRect().top;
+
+const getElementContainer = el => el === window ? window.document.body : el;
+
+const isElementVisible = el => {
+  let rect = getElementContainer(el).getBoundingClientRect();
+  return rect.width > 0 && rect.height > 0;
+};
 
 const handleScroll = function(cb) {
   const { el, vm, container, observer } = this[scope];
   const { distance, disabled } = getScrollOptions(el, vm);
 
-  if (disabled) return;
+  if (disabled || !isElementVisible(el)) return;
 
   let shouldTrigger = false;
 
@@ -133,7 +140,7 @@ export default {
 
       if (immediate) {
         const observer = el[scope].observer = new MutationObserver(onScroll);
-        observer.observe(container, { childList: true, subtree: true });
+        observer.observe(getElementContainer(container), { childList: true, subtree: true });
         onScroll();
       }
     }
