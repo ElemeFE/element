@@ -75,7 +75,7 @@ import { ElIcon } from './icon'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
 import { ElBacktop } from './backtop'
-import { ElInfiniteScroll } from './infiniteScroll'
+import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 
