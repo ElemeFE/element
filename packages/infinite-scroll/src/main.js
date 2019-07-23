@@ -33,6 +33,7 @@ const getPositionSize = (el, prop) => {
     : el[prop];
 };
 
+
 const getOffsetHeight = el => {
   return getPositionSize(el, 'offsetHeight');
 };
