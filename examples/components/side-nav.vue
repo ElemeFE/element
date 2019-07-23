@@ -135,6 +135,11 @@
               <img src="~examples/assets/images/duohui.svg" alt="duohui">
             </a>
           </li>
+          <li class="nav-item">
+            <a class="sponsor" href="https://osholic.com/?utm_source=element&utm_medium=sidebar" target="_blank">
+              <img src="~examples/assets/images/osholic.svg" alt="osholic">
+            </a>
+          </li>
         </ul>
       </li>
       <li

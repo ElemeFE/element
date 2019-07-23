@@ -313,6 +313,13 @@
           <p>炫酷的新一代活动票务系统</p>
         </div>
       </a>
+      <a class="sponsor" href="https://osholic.com/?utm_source=element&utm_medium=index" target="_blank">
+        <img width="45px" src="~examples/assets/images/osholic.svg" alt="osholic">
+        <div>
+          <p>Sponsored by 开源控</p>
+          <p>开源项目正版周边</p>
+        </div>
+      </a>
     </div>
     <div class="cards">
       <ul class="container">
@@ -375,7 +382,7 @@
       </div>
       <div class="mask"></div>
     </div>
-    <div 
+    <div
       class="theme-intro-b"
       @click="hideIntroB"
       v-if="showIntroB"
