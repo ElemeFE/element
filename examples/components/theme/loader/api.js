@@ -19,10 +19,6 @@ export const getTestEle = () => {
   return get(`${hostList.alpha}getVariable`);
 };
 
-export const getTestAli = () => {
-  return get(`https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`);
-};
-
 export const updateVars = (data, cb) => {
   return post(`${host}updateVariable?version=${version}`, data, cb);
 };
