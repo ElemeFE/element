@@ -939,6 +939,11 @@ $--calendar-border: $--table-border !default;
 $--calendar-selected-background-color: #F2F8FE !default;
 $--calendar-cell-width: 85px !default;
 
+/* Form
+-------------------------- */
+/// fontSize||Font|1
+$--form-font-size: $--font-size-base !default;
+
 /* Avatar
 --------------------------*/
 /// color||Color|0
