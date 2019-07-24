@@ -46,6 +46,12 @@
     right: 10px;
   }
 
+  @include when(readonly){
+    .el-textarea__inner {
+      cursor: default;
+    }
+  }
+
   @include when(disabled) {
     .el-textarea__inner {
       background-color: $--input-disabled-fill;
@@ -74,6 +80,8 @@
   position: relative;
   font-size: $--font-size-base;
   display: inline-block;
+  height: $--input-height;
+  line-height: $--input-height;
   width: 100%;
   @include scroll-bar;
 
@@ -82,7 +90,6 @@
     font-size: $--input-font-size;
     cursor: pointer;
     transition: $--color-transition-base;
-
     &:hover {
       color: $--input-clear-hover-color;
     }
@@ -94,7 +101,6 @@
     align-items: center;
     color: $--color-info;
     font-size: 12px;
-
     .el-input__count-inner {
       background: $--color-white;
       line-height: initial;
@@ -113,8 +119,7 @@
     color: $--input-font-color;
     display: inline-block;
     font-size: inherit;
-    height: $--input-height;
-    line-height: $--input-height;
+    height: 100%;
     outline: none;
     padding: 0 15px;
     transition: $--border-transition-base;
@@ -164,8 +169,6 @@
     width: 25px;
     text-align: center;
     transition: all .3s;
-    line-height: $--input-height;
-
     &:after {
       content: '';
       height: 100%;
@@ -183,6 +186,12 @@
     .el-input__inner {
       outline: none;
       border-color: $--input-focus-border;
+    }
+  }
+
+  @include when(readonly) {
+    .el-input__inner {
+      cursor: default;
     }
   }
 
@@ -229,39 +238,20 @@
 
   @include m(medium) {
     font-size: $--input-medium-font-size;
-
-    @include e(inner) {
-      height: $--input-medium-height;
-      line-height: $--input-medium-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-medium-height;
-    }
+    height: $--input-medium-height;
+    line-height: $--input-medium-height;
   }
+
   @include m(small) {
     font-size: $--input-small-font-size;
-
-    @include e(inner) {
-      height: $--input-small-height;
-      line-height: $--input-small-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-small-height;
-    }
+    height: $--input-small-height;
+    line-height: $--input-small-height;
   }
+
   @include m(mini) {
     font-size: $--input-mini-font-size;
-
-    @include e(inner) {
-      height: $--input-mini-height;
-      line-height: $--input-mini-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-mini-height;
-    }
+    height: $--input-mini-height;
+    line-height: $--input-mini-height;
   }
 }
 

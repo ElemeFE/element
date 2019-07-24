@@ -92,6 +92,9 @@ export declare class ElTree<K, D extends TreeData> extends ElementUIComponent {
   /** Whether node is selectable */
   showCheckbox: boolean;
 
+  /** Whether all nodes is disabled */
+  allDisabled: boolean;
+
   /** Whether checked state of a node not affects its father and child nodes when show-checkbox is true */
   checkStrictly: boolean;
 
