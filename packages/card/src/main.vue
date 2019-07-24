@@ -1,6 +1,6 @@
 <template>
   <div class="el-card" :class="shadow ? 'is-' + shadow + '-shadow' : 'is-always-shadow'">
-    <div class="el-card__header" v-if="$slots.header || header">
+    <div class="el-card__header" :style="headerStyle" v-if="$slots.header || header">
       <slot name="header">{{ header }}</slot>
     </div>
     <div class="el-card__body" :style="bodyStyle">
@@ -15,6 +15,7 @@
     props: {
       header: {},
       bodyStyle: {},
+      headerStyle: {},
       shadow: {
         type: String
       }
