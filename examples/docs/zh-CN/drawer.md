@@ -1,9 +1,13 @@
 ## Drawer 抽屉
+
 有些时候, `Dialog` 组件并不满足我们的需求, 比如你的表单很长, 亦或是你需要临时展示一些文档, `Drawer` 拥有和 `Dialog` 几乎相同的 API, 在 UI 上带来不一样的体验.
+
 ### 基本用法
+
 呼出一个临时的侧边栏, 可以从多个方向呼出
 
 :::demo 需要设置 `visible` 属性，它的**类型**是 `boolean`,当为 **true** 时显示 Drawer。Drawer 分为两个部分：`title` 和 `body`，`title` 需要具名为 **title** 的 `slot`, 也可以通过 `title` 属性来定义，默认值为空。需要注意的是, Drawer 默认是从右往左打开, 当然可以设置对应的 `direction`, 详细请参考 `direction` 用法 最后，本例还展示了 `before-close` 的用法
+
 ```html
 <el-radio-group v-model="direction">
   <el-radio label="ltr">从左往右开</el-radio>
@@ -47,9 +51,11 @@
 :::
 
 ### 自定义内容
+
 和 `Dialog` 组件一样, `Drawer` 同样可以在其内部嵌套各种丰富的操作
 
 :::demo
+
 ```html
 <el-button type="text" @click="table = true">打开嵌套表格的 Drawer</el-button>
 <el-button type="text" @click="dialog = true">打开嵌套 Form 的 Drawer</el-button>
@@ -148,7 +154,9 @@ export default {
 :::
 
 ### 多层嵌套
+
 `Drawer` 组件也拥有多层嵌套的方法
+
 :::demo 同样, 如果你需要嵌套多层 `Drawer` 请一定要设置 `append-to-body` 属性为 **true**
 
 ```html
@@ -197,18 +205,25 @@ export default {
 :::
 
 :::tip
+
 Drawer 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
+
 :::
 
 :::tip
+
 Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组件内容, 例如清理表单内的状态, 在必要时可以将该属性设置为 **true** 用来保证初始状态的一致性
+
 :::
 
 :::tip
+
 如果 `visible` 属性绑定的变量位于 Vuex 的 store 内，那么 `.sync` 不会正常工作。此时需要去除 `.sync` 修饰符，同时监听 Drawer 的 `open` 和 `close` 事件，在事件回调中执行 Vuex 中对应的 mutation 更新 `visible` 属性绑定的变量的值。
+
 :::
 
 ### Drawer Attributes
+
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | append-to-body     | Drawer 自身是否插入至 body 元素上。嵌套的 Drawer 必须指定该属性并赋值为 true   | boolean   | — | false |
@@ -226,6 +241,7 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 | wrapperClosable | 点击遮罩层是否可以关闭 Drawer | boolean | - | true |
 
 ### Drawer Slot
+
 | name | 说明 |
 |------|--------|
 | — | Drawer 的内容 |
@@ -238,6 +254,7 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 | closeDrawer | 用于关闭 Drawer, 该方法会调用传入的 `before-close` 方法 |
 
 ### Drawer Events
+
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | open  | Drawer 打开的回调 | — |

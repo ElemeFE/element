@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 10px;
     form {
       flex: 1;
     }
@@ -15,4 +14,8 @@
       flex: 1;
     }
   }
+}
+
+.el-drawer__body {
+  padding: 20px;
 }

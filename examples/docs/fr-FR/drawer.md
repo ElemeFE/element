@@ -1,9 +1,13 @@
 ## Drawer
+
 Sometimes, `Dialog` does not always satisfy our requirements, let's say you have a massive form, or you need space to display something like `terms & conditions`, `Drawer` has almost identical API with `Dialog`, but it introduces different user experience.
+
 ### Basic Usage
+
 Callout a temporary drawer, from multiple direction
 
 :::demo You must set `visible` for `Drawer` like `Dialog` does to control the visibility of `Drawer` itself, it's `boolean` type. `Drawer` has to parts: `title` & `body`, the `title` is a named slot, you can also set the title through attribute named `title`, default to an empty string, the `body` part is the main area of `Drawer`, which contains user defined content. When opening, `Drawer` expand itself from the **right corner to left** which size is **30%** of the browser window by default. You can change that default behavior by setting `direction` and `size` attribute. This show case also demonstrated how to use the `before-close` API, check the Attribute section for more detail
+
 ```html
 <el-radio-group v-model="direction">
   <el-radio label="ltr">left to right</el-radio>
@@ -47,9 +51,11 @@ Callout a temporary drawer, from multiple direction
 :::
 
 ### Customization Content
+
 Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
 
 :::demo
+
 ```html
 <el-button type="text" @click="table = true">Open Drawer with nested table</el-button>
 <el-button type="text" @click="dialog = true">Open Drawer with nested form</el-button>
@@ -148,6 +154,7 @@ export default {
 :::
 
 ### Nested Drawer
+
 You can also have multiple layer of `Drawer` just like `Dialog`.
 :::demo If you need multiple Drawer in different layer, you must set the `append-to-body` attribute to **true**
 
@@ -197,18 +204,25 @@ You can also have multiple layer of `Drawer` just like `Dialog`.
 :::
 
 :::tip
+
 The content inside Drawer should be lazy rendered, which means that the content inside Drawer will not impact the initial render performance, therefore any DOM operation should be performed through `ref` or after `open` event emitted.
+
 :::
 
 :::tip
+
 Drawer provides an API called `destroyOnClose`, which is a flag variable that indicates should destroy the children content inside Drawer after Drawer was closed. You can use this API when you need your `mounted` life cycle to be called every time the Drawer opens.
+
 :::
 
 :::tip
+
 If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
+
 :::
 
 ### Drawer Attributes
+
 | Parameter| Description | Type      | Acceptable Values                           | Defaults  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | append-to-body | Controls should Drawer be inserted to DocumentBody Element, nested Drawer must assign this param to **true**| boolean   | — | false |
@@ -226,6 +240,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | wrapperClosable | Indicates whether user can close Drawer by clicking the shadowing layer. | boolean | - | true |
 
 ### Drawer Slot
+
 | Name | Description |
 |------|--------|
 | — | Drawer's Content |
@@ -238,6 +253,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | closeDrawer | In order to close Drawer, this method will call `before-close`. |
 
 ### Drawer Events
+
 | Event Name | Description | Parameter |
 |---------- |-------- |---------- |
 | open  | Triggered before Drawer opening animation begins  | — |
