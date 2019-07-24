@@ -14,18 +14,20 @@
       <el-button
         type="primary"
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToLeft"
-        :disabled="rightChecked.length === 0">
-        <i class="el-icon-arrow-left"></i>
-        <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
+        @click.native="addTo(buttonQueue == 'left'?'left':'right')"
+        :disabled="buttonQueue == 'left'? rightChecked.length === 0 : leftChecked.length === 0">
+        <span v-if="buttonTexts[0] !== undefined && buttonQueue =='right'">{{ buttonTexts[0] }}</span>
+        <i :class="buttonQueue == 'left'?'el-icon-arrow-left':'el-icon-arrow-right'"></i>
+        <span v-if="buttonTexts[0] !== undefined && buttonQueue == 'left'">{{ buttonTexts[0] }}</span>
       </el-button>
       <el-button
         type="primary"
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToRight"
-        :disabled="leftChecked.length === 0">
-        <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <i class="el-icon-arrow-right"></i>
+        @click.native="addTo(buttonQueue == 'left'?'right':'left')"
+        :disabled="buttonQueue == 'right'? rightChecked.length === 0 : leftChecked.length === 0">
+        <span v-if="buttonTexts[1] !== undefined && buttonQueue !='right'">{{ buttonTexts[1] }}</span>
+        <i :class="buttonQueue != 'left'?'el-icon-arrow-left':'el-icon-arrow-right'"></i>
+        <span v-if="buttonTexts[1] !== undefined && buttonQueue !='left'">{{ buttonTexts[1] }}</span>
       </el-button>
     </div>
     <transfer-panel
@@ -76,6 +78,10 @@
         default() {
           return [];
         }
+      },
+      buttonQueue: {
+        type: String,
+        default: 'left'
       },
       filterPlaceholder: {
         type: String,
@@ -185,6 +191,10 @@
         this.rightChecked = val;
         if (movedKeys === undefined) return;
         this.$emit('right-check-change', val, movedKeys);
+      },
+
+      addTo(e) {
+        e === 'left' ? this.addToLeft() : this.addToRight();
       },
 
       addToLeft() {

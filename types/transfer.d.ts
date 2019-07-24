@@ -53,6 +53,8 @@ export declare class ElTransfer extends ElementUIComponent {
   /** Custom button texts */
   buttonTexts: string[]
 
+  buttonQueue: string
+
   /** Custom render function for data items */
   renderContent: TransferRenderContent
 
