@@ -2,6 +2,8 @@
 
 ### 2.11.0
 
+*2019-07-25*
+
 #### New features
 
 - Drawer
@@ -11,8 +13,6 @@
 
 - Checkbox
   - Enhance css selector (#16006 by @Hazlank)
-- Docs
-  - Fix typo in table documents (#15971 by @howiefh)
 - Tree
   - Make el-tree generic (#15934 by @JeremyWuuuuu)
   - Set isCurrent prop to False (#15870 by @kkkisme)
@@ -53,6 +53,8 @@
   - Fix doc anchor bug (#16692 by @iamkun)
 
 ### 2.10.1
+
+*2019-07-02*
 
 #### Bug fixes
 
