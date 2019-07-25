@@ -28,5 +28,34 @@ describe('InfiniteScroll', () => {
     await wait();
     expect(vm.$el.innerText.indexOf('2') > -1).to.be.true;
   });
+
+  it('visible change', async() => {
+    vm = createVue({
+      template: `
+      <div v-show="visible">
+        <ul ref="scrollTarget" v-infinite-scroll="load" style="height: 300px;overflow: auto;">
+          <li v-for="i in count" style="display: flex;height: 50px;">{{ i }}</li>
+        </ul>
+      </div>
+      `,
+      data() {
+        return {
+          count: 0,
+          visible: false
+        };
+      },
+      methods: {
+        load() {
+          this.count += 2;
+        }
+      }
+    }, true);
+    await wait();// wait for render
+    vm.visible = true;
+    await wait();
+    vm.$refs.scrollTarget.scrollTop = 2000;
+    await wait();
+    expect(vm.$el.innerText.indexOf('2') > -1).to.be.true;
+  });
 });
 
