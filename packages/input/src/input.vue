@@ -238,7 +238,7 @@
         return this.showWordLimit &&
           this.$attrs.maxlength &&
           (this.type === 'text' || this.type === 'textarea') &&
-          this.alwaysShowWordLimit &&
+          (this.alwaysShowWordLimit || !this.inputDisabled) &&
           !this.readonly &&
           !this.showPassword;
       },
