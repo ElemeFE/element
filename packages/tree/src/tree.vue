@@ -112,7 +112,8 @@
           return {
             children: 'children',
             label: 'label',
-            disabled: 'disabled'
+            disabled: 'disabled',
+            wrapperClass: ''
           };
         }
       },

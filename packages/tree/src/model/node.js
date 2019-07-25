@@ -169,6 +169,10 @@ export default class Node {
     return getPropertyFromData(this, 'disabled');
   }
 
+  get wrapperClass() {
+    return getPropertyFromData(this, 'wrapperClass');
+  }
+
   get nextSibling() {
     const parent = this.parent;
     if (parent) {

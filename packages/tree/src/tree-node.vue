@@ -52,6 +52,7 @@
     <el-collapse-transition>
       <div
         class="el-tree-node__children"
+        :class="[node.wrapperClass]"
         v-if="!renderAfterExpand || childNodeRendered"
         v-show="expanded"
         role="group"
