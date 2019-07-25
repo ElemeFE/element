@@ -195,21 +195,23 @@ export default {
       });
     },
     syncActivePath() {
-      let { checkedValue, store, multiple } = this;
-      if (isEmpty(checkedValue)) {
+      const { store, multiple, activePath, checkedValue } = this;
+
+      if (!isEmpty(activePath)) {
+        const nodes = activePath.map(node => this.getNodeByValue(node.getValue()));
+        this.expandNodes(nodes);
+      } else if (!isEmpty(checkedValue)) {
+        const value = multiple ? checkedValue[0] : checkedValue;
+        const checkedNode = this.getNodeByValue(value) || {};
+        const nodes = (checkedNode.pathNodes || []).slice(0, -1);
+        this.expandNodes(nodes);
+      } else {
         this.activePath = [];
         this.menus = [store.getNodes()];
-      } else {
-        checkedValue = multiple ? checkedValue[0] : checkedValue;
-        const checkedNode = this.getNodeByValue(checkedValue) || {};
-        const nodes = [];
-        let { parent } = checkedNode;
-        while (parent) {
-          nodes.unshift(parent);
-          parent = parent.parent;
-        }
-        nodes.forEach(node => this.handleExpand(node, true /* silent */));
       }
+    },
+    expandNodes(nodes) {
+      nodes.forEach(node => this.handleExpand(node, true /* silent */));
     },
     calculateCheckedNodePaths() {
       const { checkedValue, multiple } = this;
@@ -259,8 +261,9 @@ export default {
       }
     },
     handleExpand(node, silent) {
+      const { activePath } = this;
       const { level } = node;
-      const path = this.activePath.slice(0, level - 1);
+      const path = activePath.slice(0, level - 1);
       const menus = this.menus.slice(0, level);
 
       if (!node.isLeaf) {
@@ -268,15 +271,16 @@ export default {
         menus.push(node.children);
       }
 
-      if (valueEquals(path, this.activePath)) return;
-
       this.activePath = path;
       this.menus = menus;
 
       if (!silent) {
         const pathValues = path.map(node => node.getValue());
-        this.$emit('active-item-change', pathValues); // Deprecated
-        this.$emit('expand-change', pathValues);
+        const activePathValues = activePath.map(node => node.getValue());
+        if (!valueEquals(pathValues, activePathValues)) {
+          this.$emit('active-item-change', pathValues); // Deprecated
+          this.$emit('expand-change', pathValues);
+        }
       }
     },
     handleCheckChange(value) {
@@ -321,6 +325,7 @@ export default {
       };
       config.lazyLoad(node, resolve);
     },
+
     /**
      * public methods
     */

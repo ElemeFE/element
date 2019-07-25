@@ -1915,6 +1915,11 @@
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 | remove-tag | 在多选模式下，移除Tag时触发 | 移除的Tag对应的节点的值 |
 
+### Cascader Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| getCheckedNodes | 获取选中的节点 | (leafOnly) 是否只是叶子节点，默认值为 `false` |
+
 ### Cascader Slots
 | 名称     | 说明 |
 |---------|-------------|
@@ -1933,6 +1938,12 @@
 |---------- |-------- |---------- |
 | change | 当选中节点变化时触发 | 选中节点的值 |
 | expand-change | 当展开节点发生变化时触发 | 各父级选项值组成的数组 |
+
+### CascaderPanel Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| getCheckedNodes | 获取选中的节点数组 | (leafOnly) 是否只是叶子节点，默认值为 `false` |
+| clearCheckedNodes | 清空选中的节点 | - |
 
 ### CascaderPanel Slots
 | 名称     | 说明 |
