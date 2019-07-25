@@ -66,7 +66,7 @@ const Mode = {
   }
 };
 
-const isFirefox = !!window.navigator.userAgent.match(/firefox/i);
+const isFirefox = typeof window !== 'undefined' && !!window.navigator.userAgent.match(/firefox/i);
 const mousewheelEventName = isFirefox ? 'DOMMouseScroll' : 'mousewheel';
 
 export default {
