@@ -139,8 +139,7 @@ export default {
       handler: function(val) {
         this.reset();
         this.onSwitch(val);
-      },
-      sync: true
+      }
     },
     currentImg(val) {
       this.$nextTick(_ => {
