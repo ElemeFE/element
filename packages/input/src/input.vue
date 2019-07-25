@@ -185,6 +185,10 @@
         type: Boolean,
         default: false
       },
+      alwaysShowWordLimit: {
+        type: Boolean,
+        default: false
+      },
       tabindex: String
     },
 
@@ -234,7 +238,7 @@
         return this.showWordLimit &&
           this.$attrs.maxlength &&
           (this.type === 'text' || this.type === 'textarea') &&
-          !this.inputDisabled &&
+          this.alwaysShowWordLimit &&
           !this.readonly &&
           !this.showPassword;
       },
