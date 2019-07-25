@@ -43,6 +43,7 @@
 
 - Docs
   - Fix dropdown demo (#16193 by @webxmsj)
+  - Fix typo in table documents (#15971 by @howiefh)
 - I18n
   - Update translation of Thai language (#16689 by @ponkrit)
 - Chore
