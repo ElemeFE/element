@@ -53,8 +53,7 @@
 
 <script>
 import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle } from 'element-ui/src/utils/util';
-import { isFirefox } from 'element-ui/src/utils/util';
+import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
 
 const Mode = {
   CONTAIN: {
