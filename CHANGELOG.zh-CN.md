@@ -1,5 +1,16 @@
 ## 更新日志
 
+### 2.11.1
+
+*2019-07-26*
+
+#### Bug 修复
+
+- Image
+  - 修复 Image 组件 SSR 兼容性 (#16737 by @luckyCao)
+- Chore
+  - 更新 dart-sass 的兼容性 by @LewisChennnnn)
+
 ### 2.11.0
 
 *2019-07-25*
