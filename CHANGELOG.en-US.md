@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.11.1
+
+*2019-07-26*
+
+#### Bug fixes
+
+- Image
+  - Fix Image component SSR compatibility (#16737 by @luckyCao)
+- Chore
+  - Update dart-sass compatibility by @LewisChennnnn)
+
 ### 2.11.0
 
 *2019-07-25*
