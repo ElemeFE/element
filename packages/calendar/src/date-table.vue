@@ -22,8 +22,8 @@ export default {
   
   data() {
     return {
-      WEEK_DAYS: getI18nSettings().dayNames;
-    }
+      WEEK_DAYS: getI18nSettings().dayNames
+    };
   },
   
   methods: {
