@@ -403,6 +403,10 @@
   @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
+    & th {
+      width: 80px;
+    }
+
     & tbody td {
       background-color: $--table-row-hover-background-color;
       color: $--table-font-color;
