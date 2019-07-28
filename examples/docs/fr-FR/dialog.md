@@ -224,6 +224,7 @@ Si la variable liée à `visible` est gérée dans Vuex, le modificateur `.sync`
 | show-close | Si le bouton de fermeture doit apparaître. | boolean    | — | true |
 | before-close | Callback avant la fermeture du Dialog. | function(done)，done est utilisé pour fermer le Dialog. | — | — |
 | center | Si le header et le footer doivent être centrés. | boolean | — | false |
+| destroy-on-close | Destroy elements in Dialog when closed   | boolean | — | false |
 
 ### Slot
 

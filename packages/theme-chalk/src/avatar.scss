@@ -14,8 +14,9 @@
   font-size: $--avatar-text-font-size;
 
   >img {
-    width: 100%;
+    display: block;
     height: 100%;
+    vertical-align: middle;
   }
 
   @include m(circle) {

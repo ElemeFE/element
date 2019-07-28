@@ -108,5 +108,26 @@ describe('Image', () => {
     await wait();
     expect(result).to.exist;
   });
+
+  it('big image preview', async() => {
+    vm = createVue({
+      template: `
+        <el-image :src="src" :preview-src-list="srcList"></el-image>
+      `,
+      data() {
+        return {
+          src: src,
+          srcList: [src]
+        };
+      }
+    }, true);
+    await wait();
+    vm.$el.querySelector('.el-image__inner').click();
+    await wait();
+    expect(vm.$el.querySelector('.el-image-viewer__wrapper')).to.exist;
+    vm.$el.querySelector('.el-image-viewer__close').click();
+    await wait(1000);
+    expect(vm.$el.querySelector('.el-image-viewer__wrapper')).to.not.exist;
+  });
 });
 

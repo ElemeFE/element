@@ -428,11 +428,23 @@
       getTestEle()
         .then(() => {
           this.$isEle = true;
-          ga('send', 'event', 'DocView', 'Inner');
+          ga('send', 'event', 'DocView', 'Ele', 'Inner');
         })
         .catch((err) => {
+          ga('send', 'event', 'DocView', 'Ele', 'Outer');
           console.error(err);
         });
+  
+      const testInnerImg = new Image();
+      testInnerImg.onload = () => {
+        this.$isEle = true;
+        ga('send', 'event', 'DocView', 'Ali', 'Inner');
+      };
+      testInnerImg.onerror = (err) => {
+        ga('send', 'event', 'DocView', 'Ali', 'Outer');
+        console.error(err);
+      };
+      testInnerImg.src = `https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`;
     },
     methods: {
       switchVersion(version) {
