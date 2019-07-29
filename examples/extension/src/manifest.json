@@ -1,6 +1,6 @@
 {
   "name": "Element Theme Roller",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Customize all Design Tokens of Element UI and preview in real-time",
   "web_accessible_resources": ["entry.js"],
   "background": {
@@ -20,7 +20,6 @@
   "manifest_version": 2,
   "permissions": [
     "activeTab",
-    "storage",
-    "https://*/"
+    "storage"
   ]
 }
