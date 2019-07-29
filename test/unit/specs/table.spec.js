@@ -1794,6 +1794,33 @@ describe('Table', () => {
       assertSortIconCount(vm.$el, 'sorting icon is not one after sort same column');
       destroyVM(vm);
     });
+
+    it('setCurrentRow', async() => {
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" highlight-current-row>
+            <el-table-column prop="name" sortable />
+            <el-table-column prop="release" sortable />
+            <el-table-column prop="director" sortable />
+            <el-table-column prop="runtime" sortable />
+          </el-table>
+        `,
+        data() {
+          return { testData: getTestData() };
+        }
+      });
+
+      vm.$refs.table.setCurrentRow(vm.testData[1]);
+      const secondColumn = vm.$el.querySelector('.el-table__body-wrapper tbody tr:nth-child(0n+2)');
+      await waitImmediate();
+      expect(secondColumn.classList.contains('current-row')).to.true;
+
+      vm.$refs.table.setCurrentRow();
+      await waitImmediate();
+      expect(secondColumn.classList.contains('current-row')).to.false;
+
+      destroyVM(vm);
+    });
   });
 
   it('hover', async() => {
