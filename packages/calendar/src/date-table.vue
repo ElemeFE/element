@@ -19,7 +19,7 @@ export default {
   },
 
   inject: ['elCalendar'],
-  
+
   data() {
     return {
       WEEK_DAYS: getI18nSettings().dayNames
