@@ -1,6 +1,6 @@
 {
   "name": "Element Theme Roller",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Customize all Design Tokens of Element UI and preview in real-time",
   "web_accessible_resources": ["entry.js"],
   "background": {
