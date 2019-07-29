@@ -19,6 +19,7 @@
         type: String,
         default: 'top'
       },
+      barWidth: Number,
       beforeLeave: Function,
       stretch: Boolean
     },
@@ -120,9 +121,9 @@
         editable,
         addable,
         tabPosition,
+        barWidth,
         stretch
       } = this;
-
       const newButton = editable || addable
         ? (
           <span
@@ -144,6 +145,7 @@
           editable,
           type,
           panes,
+          barWidth,
           stretch
         },
         ref: 'nav'

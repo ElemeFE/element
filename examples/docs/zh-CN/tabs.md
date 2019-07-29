@@ -282,7 +282,8 @@
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
 | tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
-| stretch  | 标签的宽度是否自撑开 | boolean   |  -  |  false |
+| stretch  | 标签的宽度是否自撑开 | boolean   |  —  |  false |
+| bar-width  | 选项卡的下划线宽度 | number   |  —  |  — |
 | before-leave | 切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。 | Function(activeName, oldActiveName) | — | — |
 
 ### Tabs Events

@@ -7,7 +7,8 @@
     name: 'TabBar',
 
     props: {
-      tabs: Array
+      tabs: Array,
+      barWidth: Number
     },
 
     inject: ['rootTabs'],
@@ -18,6 +19,7 @@
           let style = {};
           let offset = 0;
           let tabSize = 0;
+          const barWidth = this.barWidth;
           const sizeName = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'width' : 'height';
           const sizeDir = sizeName === 'width' ? 'x' : 'y';
           const firstUpperCase = str => {
@@ -42,12 +44,11 @@
           if (sizeName === 'width' && offset !== 0) {
             offset += 20;
           }
-          const transform = `translate${firstUpperCase(sizeDir)}(${offset}px)`;
-          style[sizeName] = tabSize + 'px';
+          const transform = `translate${firstUpperCase(sizeDir)}(${(tabSize - barWidth) / 2 + offset}px)`;
+          style[sizeName] = (barWidth || tabSize) + 'px';
           style.transform = transform;
           style.msTransform = transform;
           style.webkitTransform = transform;
-
           return style;
         }
       }
