@@ -41,6 +41,10 @@ export default {
       const data = states.data || [];
       const oldCurrentRow = states.currentRow;
 
+      if (!currentRow || currentRow instanceof MouseEvent) {
+        currentRow = null;
+      }
+
       if (currentRow) {
         this.restoreCurrentRowKey();
         states.currentRow = currentRow;
@@ -62,6 +66,11 @@ export default {
           }
         } else if (_currentRowKey) {
           this.setCurrentRowByKey(_currentRowKey);
+        } else {
+          states.currentRow = currentRow;
+          if (states.currentRow !== oldCurrentRow) {
+            table.$emit('current-change', null, oldCurrentRow);
+          }
         }
       }
     }
