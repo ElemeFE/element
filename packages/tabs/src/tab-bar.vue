@@ -44,7 +44,7 @@
           if (sizeName === 'width' && offset !== 0) {
             offset += 20;
           }
-          const transform = `translate${firstUpperCase(sizeDir)}(${(tabSize - barWidth) / 2 + offset}px)`;
+          const transform = `translate${firstUpperCase(sizeDir)}(${barWidth ? (tabSize - barWidth) / 2 + offset : offset}px)`;
           style[sizeName] = (barWidth || tabSize) + 'px';
           style.transform = transform;
           style.msTransform = transform;
