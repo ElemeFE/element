@@ -9,7 +9,7 @@
 - Image
   - 修复 Image 组件 SSR 兼容性 (#16737 by @luckyCao)
 - Chore
-  - 更新 dart-sass 的兼容性 by @LewisChennnnn)
+  - 更新 dart-sass 的兼容性 (#16744 by @LewisChennnnn)
 
 ### 2.11.0
 
@@ -31,10 +31,11 @@
   - 更新 split-button 默认颜色 (#15931 by @JuniorTour)
 - Cascader
   - 修复一级菜单更新问题 (#16399 by @luckyCao)
-  - 更新显示正确的 header 的逻辑 (#16354 by @ziyoung)
   - 懒加载时设默认值 (#16420 by @luckyCao)
-  - 修复显示问题 (#15935 by @junyiz)
-  - 对外暴露 getCheckedNodes 和修复 option 问题 (#16709 by @SimonaliaChen)
+  - 修复当节点值重复时的显示问题 (#15935 by @junyiz)
+  - 对外暴露 getCheckedNodes 和修复 options 改变会影响选中的问题 (#16709 by @SimonaliaChen)
+- Calendar
+  - 更新显示正确的 header 的逻辑 (#16354 by @ziyoung)
 - Submenu
   - 修复 append-to-body 问题 (#16289 by @a631807682)
 - Table 
