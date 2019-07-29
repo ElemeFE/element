@@ -48,7 +48,6 @@ export default {
           this.table.$emit('current-change', currentRow, oldCurrentRow);
         }
       } else {
-        console.log('data', data, 'oldCurrentRow', oldCurrentRow, '_currentRowKey', _currentRowKey);
         // 当 currentRow 不在 data 中时尝试更新数据
         if (data.indexOf(oldCurrentRow) === -1 && oldCurrentRow) {
           this.restoreCurrentRowKey();
