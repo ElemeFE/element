@@ -270,7 +270,8 @@
   display: inline-table;
   width: 100%;
   border-collapse: separate;
-  border-spacing:0;
+  border-spacing: 0;
+  vertical-align: middle;
 
   > .el-input__inner {
     vertical-align: middle;
