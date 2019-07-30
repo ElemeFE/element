@@ -301,23 +301,19 @@ export default {
         node.loaded = true;
 
         // dispose default value on lazy load mode
-        if (Array.isArray(this.checkedValue)) {
-          const nodeValue = this.checkedValue[this.loadCount++];
-          const valueKey = this.config.value;
-          const leafKey = this.config.leaf;
+        if (Array.isArray(this.checkedValue) && !this.multiple) {
+          if (this.loadCount < this.checkedValue.length) {
+            const leafKey = this.config.leaf;
+            const checkedValue = this.checkedValue.slice(0, ++this.loadCount);
+            const checkedNode = this.store.getNodeByValue(checkedValue);
 
-          if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
-            const checkedNode = this.store.getNodeByValue(nodeValue);
-
-            if (!checkedNode.data[leafKey]) {
+            if (checkedNode && !checkedNode.data[leafKey]) {
               this.lazyLoad(checkedNode, () => {
                 this.handleExpand(checkedNode);
               });
             }
-
-            if (this.loadCount === this.checkedValue.length) {
-              this.$parent.computePresentText();
-            }
+          } else if (this.loadCount === this.checkedValue.length) {
+            this.$parent.computePresentText();
           }
         }
 
