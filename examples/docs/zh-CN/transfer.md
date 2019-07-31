@@ -78,9 +78,9 @@
 
 ### 可自定义
 
-可以对列表标题文案、按钮文案、数据项的渲染函数、列表底部的勾选状态文案、列表底部的内容区等进行自定义。
+可以对列表标题文案、按钮顺序、按钮文案、数据项的渲染函数、列表底部的勾选状态文案、列表底部的内容区等进行自定义。
 
-:::demo 可以使用 `titles`、`button-texts`、`render-content` 和 `format` 属性分别对列表标题文案、按钮文案、数据项的渲染函数和列表顶部的勾选状态文案进行自定义。数据项的渲染还可以使用 `scoped-slot` 进行自定义。对于列表底部的内容区，提供了两个具名 slot：`left-footer` 和 `right-footer`。此外，如果希望某些数据项在初始化时就被勾选，可以使用 `left-default-checked` 和 `right-default-checked` 属性。最后，本例还展示了 `change` 事件的用法。注意：由于 jsfiddle 不支持 JSX 语法，所以使用 `render-content` 自定义数据项的例子在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
+:::demo 可以使用 `titles`、`button-turn`、`button-texts`、`render-content` 和 `format` 属性分别对列表标题文案、按钮顺序、按钮文案、数据项的渲染函数和列表顶部的勾选状态文案进行自定义。数据项的渲染还可以使用 `scoped-slot` 进行自定义。对于列表底部的内容区，提供了两个具名 slot：`left-footer` 和 `right-footer`。此外，如果希望某些数据项在初始化时就被勾选，可以使用 `left-default-checked` 和 `right-default-checked` 属性。最后，本例还展示了 `change` 事件的用法。注意：由于 jsfiddle 不支持 JSX 语法，所以使用 `render-content` 自定义数据项的例子在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <template>
   <p style="text-align: center; margin: 0 0 20px">使用 render-content 自定义数据项</p>
@@ -93,6 +93,7 @@
       :right-default-checked="[1]"
       :render-content="renderFunc"
       :titles="['Source', 'Target']"
+      button-turn="left"
       :button-texts="['到左边', '到右边']"
       :format="{
         noChecked: '${total}',
@@ -113,7 +114,8 @@
       :left-default-checked="[2, 3]"
       :right-default-checked="[1]"
       :titles="['Source', 'Target']"
-      :button-texts="['到左边', '到右边']"
+      button-turn="right"
+      :button-texts="['到右边', '到左边']"
       :format="{
         noChecked: '${total}',
         hasChecked: '${checked}/${total}'
@@ -218,6 +220,7 @@
 | filter-method | 自定义搜索方法 | function | — | — |
 | target-order | 右侧列表元素的排序策略：若为 `original`，则保持与数据源相同的顺序；若为 `push`，则新加入的元素排在最后；若为 `unshift`，则新加入的元素排在最前 | string | original / push / unshift | original |
 | titles | 自定义列表标题 | array | — | ['列表 1', '列表 2'] |
+| button-turn | 自定义按钮优先显示顺序 | string | left / right | left |
 | button-texts | 自定义按钮文案 | array | — | [ ] |
 | render-content | 自定义数据项渲染函数 | function(h, option) | — | — |
 | format | 列表顶部勾选状态文案 | object{noChecked, hasChecked} | — | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |

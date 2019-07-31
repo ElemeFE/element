@@ -14,18 +14,20 @@
       <el-button
         type="primary"
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToLeft"
-        :disabled="rightChecked.length === 0">
-        <i class="el-icon-arrow-left"></i>
-        <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
+        @click.native="addTo(buttonTurn === 'left' ? 'left' : 'right')"
+        :disabled="buttonTurn === 'left' ? rightChecked.length === 0 : leftChecked.length === 0">
+        <span v-if="buttonTexts[0] !== undefined && buttonTurn === 'right'">{{ buttonTexts[0] }}</span>
+        <i :class="buttonTurn === 'left' ? 'el-icon-arrow-left' : 'el-icon-arrow-right'"></i>
+        <span v-if="buttonTexts[0] !== undefined && buttonTurn === 'left'">{{ buttonTexts[0] }}</span>
       </el-button>
       <el-button
         type="primary"
         :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToRight"
-        :disabled="leftChecked.length === 0">
-        <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <i class="el-icon-arrow-right"></i>
+        @click.native="addTo(buttonTurn === 'left' ? 'right' : 'left')"
+        :disabled="buttonTurn === 'left'? leftChecked.length === 0 : rightChecked.length === 0">
+        <span v-if="buttonTexts[1] !== undefined && buttonTurn === 'left'">{{ buttonTexts[1] }}</span>
+        <i :class="buttonTurn === 'left' ? 'el-icon-arrow-right' : 'el-icon-arrow-left'"></i>
+        <span v-if="buttonTexts[1] !== undefined && buttonTurn === 'right'">{{ buttonTexts[1] }}</span>
       </el-button>
     </div>
     <transfer-panel
@@ -70,6 +72,10 @@
         default() {
           return [];
         }
+      },
+      buttonTurn: {
+        type: String,
+        default: 'left'
       },
       buttonTexts: {
         type: Array,
@@ -185,6 +191,10 @@
         this.rightChecked = val;
         if (movedKeys === undefined) return;
         this.$emit('right-check-change', val, movedKeys);
+      },
+
+      addTo(type) {
+        type === 'left' ? this.addToLeft() : this.addToRight();
       },
 
       addToLeft() {
