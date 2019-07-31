@@ -25,7 +25,7 @@
             <i class="el-dialog__close el-icon el-icon-close"></i>
           </button>
         </div>
-        <div class="el-dialog__body" ><slot></slot></div>
+        <div class="el-dialog__body"><slot></slot></div>
         <div class="el-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
