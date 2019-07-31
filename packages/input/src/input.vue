@@ -3,6 +3,7 @@
     type === 'textarea' ? 'el-textarea' : 'el-input',
     inputSize ? 'el-input--' + inputSize : '',
     {
+      'is-readonly': readonly,
       'is-disabled': inputDisabled,
       'is-exceed': inputExceed,
       'el-input-group': $slots.prepend || $slots.append,
