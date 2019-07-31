@@ -38,7 +38,7 @@
         v-if="showCheckbox"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
-        :disabled="!!node.disabled"
+        :disabled="!!allDisabled || !!node.disabled"
         @click.native.stop
         @change="handleCheckChange"
       >
@@ -62,6 +62,7 @@
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
           :show-checkbox="showCheckbox"
+          :all-disabled="allDisabled"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
@@ -97,6 +98,10 @@
         default: true
       },
       showCheckbox: {
+        type: Boolean,
+        default: false
+      },
+      allDisabled: {
         type: Boolean,
         default: false
       }

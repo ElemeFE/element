@@ -299,6 +299,61 @@
 ```
 :::
 
+### 全部禁用状态
+可将 Tree 的全部节点设置为禁用状态
+
+:::demo 通过`all-disabled`属性，可快捷将 Tree 的全部节点设置为禁用状态。
+```html
+<el-tree
+  :data="data"
+  show-checkbox
+  all-disabled
+  node-key="id"
+  :default-expanded-keys="[2, 3]"
+  :default-checked-keys="[5]">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          id: 1,
+          label: '一级 2',
+          children: [{
+            id: 3,
+            label: '二级 2-1',
+            children: [{
+              id: 4,
+              label: '三级 3-1-1'
+            }, {
+              id: 5,
+              label: '三级 3-1-2',
+            }]
+          }, {
+            id: 2,
+            label: '二级 2-2',
+            disabled: true,
+            children: [{
+              id: 6,
+              label: '三级 3-2-1'
+            }, {
+              id: 7,
+              label: '三级 3-2-2',
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 树节点的选择
 
 :::demo 本例展示如何获取和设置选中节点。获取和设置各有两种方式：通过 node 或通过 key。如果需要通过 key 来获取或设置，则必须设置`node-key`。
@@ -809,6 +864,7 @@
 | auto-expand-parent    | 展开子节点的时候是否自动展开父节点                 | boolean                     | —    | true  |
 | default-expanded-keys | 默认展开的节点的 key 的数组                        | array                       | —    | —     |
 | show-checkbox         | 节点是否可被选择                                   | boolean                     | —    | false |
+| all-disabled          | 全部节点的选择框是否禁用                           | boolean                     | —    | false  | 
 | check-strictly        | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false   | boolean                     | —    | false |
 | default-checked-keys  | 默认勾选的节点的 key 的数组                        | array                       | —    | —     |
 | current-node-key      | 当前选中的节点                                   | string, number               | —    | —     |
