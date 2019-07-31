@@ -219,6 +219,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
+| cellClassName | set custom className | Function(Date) | — | — |
 | firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
 
 ### shortcuts

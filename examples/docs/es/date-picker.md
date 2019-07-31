@@ -462,6 +462,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | -------------- | ------------------------------------------------------------ | ------------------------------ | ----------------- | ----------- |
 | shortcuts      | { text, onClick } un array de objetos para establecer opciones de acceso directo, verifique la tabla siguiente | object[]                       | —                 | —           |
 | disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un valor booleano | function                       | —                 | —           |
+| cellClassName | set custom className | Function(Date) | — | — |
 | firstDayOfWeek | primer día de la semana                                      | Number                         | 1 to 7            | 7           |
 | onPick         | una función que se dispara cuando se cambia la fecha seleccionada. Solamente para `daterange` y `datetimerange`. | Function({ maxDate, minDate }) | -                 | -           |
 

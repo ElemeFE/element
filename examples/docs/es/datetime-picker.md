@@ -221,6 +221,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | -------------- | ---------------------------------------- | -------- | ----------------- | ----------- |
 | shortcuts      | un array de objetos { text, onClick } para establecer las opciones de acceso directo, verifique la tabla debajo | objeto[] | —                 | —           |
 | disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un booleano | función  | —                 | —           |
+| cellClassName | set custom className | Function(Date) | — | — |
 | firstDayOfWeek | primera día de semana                    | Número   | 1 to 7            | 7           |
 
 ### Accesos directos

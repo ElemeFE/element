@@ -96,6 +96,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
+              :cell-class-name="cellClassName"
               :disabled-date="disabledDate">
             </date-table>
             <year-table
@@ -515,6 +516,7 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
+        cellClassName: '',
         selectableRange: [],
         firstDayOfWeek: 7,
         showWeekNumber: false,
