@@ -1,4 +1,4 @@
-| Se## Cascader
+## Cascader
 
 Si les options ont une structure hiérarchique claire, Le composant Cascader peut être utilisé pour les afficher et les sélectionner.
 
@@ -238,11 +238,18 @@ Il y a deux manières d'étendres les options enfants.
 
 ### Disabled option
 
-Désactivez une option en définissant un champ `disabled` dans l'objet d'option.
+Désactivez une option en définissant un champ `disabled` dans l'objet d'option, or custom disable logic by `props.disabled`.
 
-:::demo Dans cet exemple, le premier élément du tableau `options` a un champ` disabled: true`, il est donc désactivé. Par défaut, Cascader vérifie le champ `disabled` dans chaque objet option. Si vous utilisez un autre nom de champ pour indiquer si une option est désactivée, vous pouvez l'affecter dans l'attribut `props.disabled` (voir le tableau des API ci-dessous pour plus de détails). Et bien sûr, les noms de champs `value`,` label` et `children` peuvent également être personnalisés de la même manière.
+:::demo Par défaut, Cascader vérifie le champ `disabled` dans chaque objet option. Si vous utilisez un autre nom de champ pour indiquer si une option est désactivée, vous pouvez l'affecter dans l'attribut `props.disabled` (voir le tableau des API ci-dessous pour plus de détails). Et bien sûr, les noms de champs `value`,` label`, `children` et `leaf` peuvent également être personnalisés de la même manière.
 ```html
-<el-cascader :options="options"></el-cascader>
+<div class="block">
+  <span class="demonstration">Default disable logic (by disabled field)</span>
+  <el-cascader :options="options"></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">Custom disable logic</span>
+  <el-cascader :options="options" :props="props"></el-cascader>
+</div>
 
 <script>
   export default {
@@ -282,9 +289,11 @@ Désactivez une option en définissant un champ `disabled` dans l'objet d'option
         }, {
           value: 'component',
           label: 'Component',
+          isDisabled: true,
           children: [{
             value: 'basic',
             label: 'Basic',
+            disabled: true,
             children: [{
               value: 'layout',
               label: 'Layout'
@@ -443,7 +452,12 @@ Désactivez une option en définissant un champ `disabled` dans l'objet d'option
             value: 'docs',
             label: 'Design Documentation'
           }]
-        }]
+        }],
+        props: {
+          disabled: function(data, node) {
+            return data.disabled || data.isDisabled;
+          }
+        }
       };
     }
   };
@@ -1983,5 +1997,5 @@ Vous pouvez personnaliser le contenu du noeud cascader.
 | value    | Spécifie quelle clé de l'objet noeud est utilisée comme valeur du noeud | string | — | 'value' |
 | label    | Spécifie quelle clé de l'objet noeud est utilisée comme label du noeud | string | — | 'label' |
 | children | Spécifie quelle clé de l'objet noeud est utilisée en tant qu'enfant du noeud | string | — | 'children' |
-| disabled | Spécifie quelle clé de l'objet noeud est utilisée comme noeud désactivé | string | — | 'disabled' |
-| leaf     | Spécifie quelle clé de l'objet est noeud utilisée comme champ feuille du noeud | string | — | 'leaf' |
+| disabled | Spécifie quelle clé de l'objet noeud est utilisée comme noeud désactivé, or pass an assertion function that returns a boolean value to customize more complex logic | string, function(data, node) | — | 'disabled' |
+| leaf     | Spécifie quelle clé de l'objet est noeud utilisée comme champ feuille du noeud, or pass an assertion function that returns a boolean value to customize more complex logic | string, function(data, node) | — | 'leaf' |

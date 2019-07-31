@@ -11,6 +11,7 @@ import Cascader from 'packages/cascader';
 const options = [{
   value: 'zhejiang',
   label: 'Zhejiang',
+  isDisabled: true,
   children: [{
     value: 'hangzhou',
     label: 'Hangzhou',
@@ -118,6 +119,39 @@ describe('Cascader', () => {
     vm.$el.click();
     await waitImmediate();
     expect(vm.$refs.popper.style.display).to.includes('none');
+  });
+
+  it('disable option by props.disabled', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :props="props"></el-cascader>
+      `,
+      data() {
+        return {
+          value: [],
+          options,
+          props: {
+            disabled: function (data, node) {
+              return data.disabled || data.isDisabled;
+            }
+          }
+        };
+      }
+    })
+
+    const { body } = document;
+
+    vm.$el.click();
+    await waitImmediate();
+
+    const firstOption = getOptions(body, 0)[0];
+    expect(firstOption.className).to.includes('is-disabled');
+    firstOption.click();
+    await waitImmediate();
+    expect(vm.value).deep.equal([]);
   });
 
   it('with default value', async() => {

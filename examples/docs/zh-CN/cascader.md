@@ -238,11 +238,18 @@
 
 ### 禁用选项
 
-通过在数据源中设置 `disabled` 字段来声明该选项是禁用的
+通过在数据源中设置 `disabled` 字段或通过 `props.disabled` 传入一个断言函数来声明选项是禁用的
 
-:::demo 本例中，`options`指定的数组中的第一个元素含有`disabled: true`键值对，因此是禁用的。在默认情况下，Cascader 会检查数据中每一项的`disabled`字段是否为`true`，如果你的数据中表示禁用含义的字段名不为`disabled`，可以通过`props.disabled`属性来指定（详见下方 API 表格）。当然，`value`、`label`和`children`这三个字段名也可以通过同样的方式指定。
+:::demo 在默认情况下，Cascader 会检查数据中每一项的 `disabled` 字段是否为 `true`，如果你的数据中表示禁用含义的字段名不为 `disabled` 或者想自定义更复杂的判断逻辑，可以通过 `props.disabled` 来指定（详见下方 API 表格）。`value`、`label`、 `children`、`leaf` 等字段名也可以通过类似的方式指定。
 ```html
-<el-cascader :options="options"></el-cascader>
+<div class="block">
+  <span class="demonstration">默认禁用逻辑 (设置disabled字段)</span>
+  <el-cascader :options="options"></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">自定义禁用逻辑</span>
+  <el-cascader :options="options" :props="props"></el-cascader>
+</div>
 
 <script>
   export default {
@@ -282,12 +289,14 @@
         }, {
           value: 'zujian',
           label: '组件',
+          isDisabled: true,
           children: [{
             value: 'basic',
             label: 'Basic',
             children: [{
               value: 'layout',
-              label: 'Layout 布局'
+              label: 'Layout 布局',
+              disabled: true
             }, {
               value: 'color',
               label: 'Color 色彩'
@@ -443,7 +452,12 @@
             value: 'jiaohu',
             label: '组件交互文档'
           }]
-        }]
+        }],
+        props: {
+          disabled: function(data, node) {
+            return data.disabled || data.isDisabled;
+          }
+        }
       };
     }
   };
@@ -1962,5 +1976,5 @@
 | value    | 指定选项的值为选项对象的某个属性值 | string | — | 'value' |
 | label    | 指定选项标签为选项对象的某个属性值 | string | — | 'label' |
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | 'children' |
-| disabled | 指定选项的禁用为选项对象的某个属性值 | string | — | 'disabled' |
-| leaf     | 指定选项的叶子节点的标志位为选项对象的某个属性值 | string | — | 'leaf' |
+| disabled | 指定选项的禁用为选项对象的某个属性值，或者传入一个返回布尔值的函数来自定义禁用逻辑 | string, function(data, node) | — | 'disabled' |
+| leaf     | 指定选项的叶子节点的标志位为选项对象的某个属性值，或者传入一个返回布尔值的函数来自定义是否为叶子节点的逻辑 | string, function(data, node) | — | 'leaf' |

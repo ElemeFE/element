@@ -13,6 +13,9 @@ export interface CascaderOption {
   leaf?: boolean
 }
 
+export type isDisabled<V, D> = (data: D, node: CascaderNode<V, D>) => boolean
+export type isLeaf<V, D> = isDisabled<V, D>
+
 /** Cascader Props */
 export interface CascaderProps<V, D> {
   expandTrigger?: ExpandTrigger,
@@ -24,8 +27,8 @@ export interface CascaderProps<V, D> {
   value?: string,
   label?: string,
   children?: string,
-  disabled?: string
-  leaf?: string
+  disabled?: string | isDisabled,
+  leaf?: string | isLeaf
 }
 
 /** Cascader Node */

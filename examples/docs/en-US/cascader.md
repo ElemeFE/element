@@ -238,11 +238,18 @@ There are two ways to expand child option items.
 
 ### Disabled option
 
-Disable an option by setting a `disabled` field in the option object.
+Disable an option by setting a `disabled` field in the option object, or custom disable logic by `props.disabled`.
 
-:::demo In this example, the first item in `options` array has a `disabled: true` field, so it is disabled. By default, Cascader checks the `disabled` field in each option object; if you are using another field name to indicate whether an option is disabled, you can assign it in the `props.disabled` attribute (see the API table below for details). And of course, field name `value`, `label` and `children` can also be customized in the same way.
+:::demo By default, Cascader checks the `disabled` field in each option object; if you are using another field name or more complex logic to indicate whether an option is disabled, you can assign it in the `props.disabled` attribute (see the API table below for details). And of course, field name `value`, `label`, `children` and `leaf` can also be customized in the same way.
 ```html
-<el-cascader :options="options"></el-cascader>
+<div class="block">
+  <span class="demonstration">Default disable logic (by disabled field)</span>
+  <el-cascader :options="options"></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">Custom disable logic</span>
+  <el-cascader :options="options" :props="props"></el-cascader>
+</div>
 
 <script>
   export default {
@@ -282,12 +289,14 @@ Disable an option by setting a `disabled` field in the option object.
         }, {
           value: 'component',
           label: 'Component',
+          isDisabled: true,
           children: [{
             value: 'basic',
             label: 'Basic',
             children: [{
               value: 'layout',
-              label: 'Layout'
+              label: 'Layout',
+              disabled: true
             }, {
               value: 'color',
               label: 'Color'
@@ -443,7 +452,12 @@ Disable an option by setting a `disabled` field in the option object.
             value: 'docs',
             label: 'Design Documentation'
           }]
-        }]
+        }],
+        props: {
+          disabled: function(data, node) {
+            return data.disabled || data.isDisabled;
+          }
+        }
       };
     }
   };
@@ -1983,5 +1997,5 @@ You can customize the content of cascader node.
 | value    | specify which key of node object is used as the node's value | string | — | 'value' |
 | label    | specify which key of node object is used as the node's label | string | — | 'label' |
 | children | specify which key of node object is used as the node's children | string | — | 'children' |
-| disabled | specify which key of node object is used as the node's disabled | string | — | 'disabled' |
-| leaf     | specify which key of node object is used as the node's leaf field | string | — | 'leaf' |
+| disabled | specify which key of node object is used as the node's disabled, or pass an assertion function that returns a boolean value to customize more complex logic  | string, function(data, node) | — | 'disabled' |
+| leaf     | specify which key of node object is used as the node's leaf field, or pass an assertion function that returns a boolean value to customize more complex logic | string, function(data, node) | — | 'leaf' |

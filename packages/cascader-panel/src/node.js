@@ -1,5 +1,6 @@
 import { isEqual, capitalize } from 'element-ui/src/utils/util';
 import { isDef } from 'element-ui/src/utils/shared';
+import { isFunction } from 'element-ui/src/utils/types';
 
 let uid = 0;
 
@@ -40,23 +41,27 @@ export default class Node {
 
   get isDisabled() {
     const { data, parent, config } = this;
-    const disabledKey = config.disabled;
+    const { disabled } = config;
     const { checkStrictly } = config;
-    return data[disabledKey] ||
+    const isDisabled = isFunction(disabled) ? disabled(data, this) : data[disabled];
+    return isDisabled ||
       !checkStrictly && parent && parent.isDisabled;
   }
 
   get isLeaf() {
     const { data, loaded, hasChildren, children } = this;
-    const { lazy, leaf: leafKey } = this.config;
-    if (lazy) {
-      const isLeaf = isDef(data[leafKey])
-        ? data[leafKey]
-        : (loaded ? !children.length : false);
+    const { lazy, leaf } = this.config;
+    const isLeaf = isFunction(leaf) ? leaf(data, this) : data[leaf];
+    if (isDef(isLeaf)) {
       this.hasChildren = !isLeaf;
       return isLeaf;
+    } else if (lazy) {
+      const hasChildren = loaded ? !!children.length : true;
+      this.hasChildren = hasChildren;
+      return !hasChildren;
+    } else {
+      return !hasChildren;
     }
-    return !hasChildren;
   }
 
   calculatePathNodes() {
