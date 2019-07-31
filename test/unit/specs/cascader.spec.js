@@ -134,13 +134,13 @@ describe('Cascader', () => {
           value: [],
           options,
           props: {
-            disabled: function (data, node) {
+            disabled: function(data, node) {
               return data.disabled || data.isDisabled;
             }
           }
         };
       }
-    })
+    });
 
     const { body } = document;
 
