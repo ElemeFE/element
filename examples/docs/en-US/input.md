@@ -263,7 +263,8 @@ export default {
 
 ### Sizes
 
-:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
+Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `medium`, `small` and `mini`.
+
 ```html
 <div class="demo-input-size">
   <el-input

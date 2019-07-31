@@ -176,7 +176,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |step | incremental step | number | — | 1 |
 |step-strictly | whether input value can only be multiple of step | number   | — | false |
 |precision | precision of input value | number | — | — |
-|size | size of the component | string | large/small| — |
+|size | size of the component | string | medium / small / mini | — |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |
 |controls-position | position of the control buttons | string | right | - |
