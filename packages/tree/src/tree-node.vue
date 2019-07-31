@@ -75,7 +75,7 @@
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
-  import { getNodeKey } from './model/util';
+  import { getNodeKey, clickDocment } from './model/util';
 
   export default {
     name: 'ElTreeNode',
@@ -180,18 +180,21 @@
             target: { checked: !this.node.checked }
           });
         }
-        this.tree.$emit('node-click', this.node.data, this.node, this);
+        clickDocment();
+        this.tree.$emit('node-click', this.node.data, this.node, this); // click.stop
       },
 
       handleContextMenu(event) {
         if (this.tree._events['node-contextmenu'] && this.tree._events['node-contextmenu'].length > 0) {
           event.stopPropagation();
           event.preventDefault();
+          clickDocment();
         }
         this.tree.$emit('node-contextmenu', event, this.node.data, this.node, this);
       },
-
+      
       handleExpandIconClick() {
+        clickDocment();
         if (this.node.isLeaf) return;
         if (this.expanded) {
           this.tree.$emit('node-collapse', this.node.data, this.node, this);
@@ -229,10 +232,12 @@
         if (!this.tree.draggable) return;
         this.tree.$emit('tree-node-drag-over', event, this);
         event.preventDefault();
+        clickDocment()
       },
 
       handleDrop(event) {
         event.preventDefault();
+        clickDocment();
       },
 
       handleDragEnd(event) {
