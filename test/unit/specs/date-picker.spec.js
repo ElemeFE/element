@@ -920,7 +920,7 @@ describe('DatePicker', () => {
     // TODO: implement the same feature for range panels
   });
 
-  describe('nagivation', () => {
+  describe('navigation', () => {
     afterEach(() => { destroyVM(vm); });
 
     const clickAndWait = (el) => {
