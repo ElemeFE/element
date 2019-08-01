@@ -31,20 +31,20 @@ export default {
       if (rowKey) {
         currentRow = arrayFind(data, item => getRowIdentity(item, rowKey) === key);
       }
-      states.currentRow = currentRow;
+      this.setCurrentRow(currentRow);
     },
 
     setCurrentRow(currentRow = null) {
-      const { states } = this;
+      const { states, table} = this;
       const oldCurrentRow = states.currentRow;
       states.currentRow = currentRow;
       if (oldCurrentRow !== currentRow) {
-        this.table.$emit('current-change', currentRow, oldCurrentRow);
+        table.$emit('current-change', currentRow, oldCurrentRow);
       }
     },
 
     updateCurrentRow(currentRow) {
-      const { states, table } = this;
+      const { states } = this;
       const { rowKey, _currentRowKey } = states;
       // data 为 null 时，结构时的默认值会被忽略
       const data = states.data || [];
@@ -61,10 +61,7 @@ export default {
             const currentRowKey = getRowIdentity(oldCurrentRow, rowKey);
             this.setCurrentRowByKey(currentRowKey);
           } else {
-            states.currentRow = null;
-          }
-          if (states.currentRow !== oldCurrentRow) {
-            table.$emit('current-change', null, oldCurrentRow);
+            this.setCurrentRow();
           }
         } else if (_currentRowKey) {
           this.setCurrentRowByKey(_currentRowKey);
