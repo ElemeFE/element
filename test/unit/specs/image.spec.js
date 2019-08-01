@@ -1,6 +1,6 @@
 import { createTest, createVue, destroyVM, wait } from '../util';
 import Image from 'packages/image';
-import { IMAGE_SUCCESS, IMAGE_FAIL } from '../dataUri';
+import { IMAGE_SUCCESS, IMAGE_FAIL } from '../mocks/uri';
 
 const src = IMAGE_SUCCESS;
 

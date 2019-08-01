@@ -1,6 +1,6 @@
 import { createTest, createVue, destroyVM, wait } from '../util';
 import Avatar from 'packages/avatar';
-import { IMAGE_SUCCESS, IMAGE_FAIL } from '../dataUri';
+import { IMAGE_SUCCESS, IMAGE_FAIL } from '../mocks/uri';
 
 describe('Avatar', () => {
   let vm;
