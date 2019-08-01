@@ -1,5 +1,6 @@
 import {createTest, createVue, destroyVM} from '../util';
 import Avatar from 'packages/avatar';
+import { IMAGE_SUCCESS, IMAGE_FAIL } from '../dataUri';
 
 describe('Avatar', () => {
   let vm;
@@ -63,18 +64,18 @@ describe('Avatar', () => {
   it('image avatar', () => {
     vm = createVue({
       template: `
-        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <el-avatar src="${IMAGE_SUCCESS}"></el-avatar>
       `
     }, true);
     const imgElm = vm.$el.children[0];
     expect(imgElm.tagName.toUpperCase()).to.equal('IMG');
-    expect(imgElm.src).to.equal('https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png');
+    expect(imgElm.src).to.equal(IMAGE_SUCCESS);
   });
 
   it('image fallback', (done) => {
     vm = createVue({
       template: `
-        <el-avatar src="https://empty" @error="errorHandler">
+        <el-avatar src="${IMAGE_FAIL}" @error="errorHandler">
           fallback
         </el-avatar>
       `,
@@ -103,7 +104,7 @@ describe('Avatar', () => {
       data() {
         return {
           fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-          url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+          url: IMAGE_SUCCESS
         };
       }
     }, true);
