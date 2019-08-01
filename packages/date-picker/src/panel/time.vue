@@ -170,7 +170,8 @@
       },
 
       changeSelectionRange(step) {
-        const list = [0, 3].concat(this.showSeconds ? [6] : []);
+        var hoursLen = this.amPmMode && (this.date.getHours() % 12) !== 0 && (this.date.getHours() % 12) < 10 ? 1 : 2;
+        const list = [0, (3 - (2 - hoursLen))].concat(this.showSeconds ? [(6 - (2 - hoursLen))] : []);
         const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;

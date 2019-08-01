@@ -207,12 +207,13 @@
       },
 
       emitSelectRange(type) {
+        var hoursLen = this.amPmMode && (this.date.getHours() % 12) !== 0 && (this.date.getHours() % 12) < 10 ? 1 : 2;
         if (type === 'hours') {
-          this.$emit('select-range', 0, 2);
+          this.$emit('select-range', 0, hoursLen);
         } else if (type === 'minutes') {
-          this.$emit('select-range', 3, 5);
+          this.$emit('select-range', 3 - (2 - hoursLen), 5 - (2 - hoursLen));
         } else if (type === 'seconds') {
-          this.$emit('select-range', 6, 8);
+          this.$emit('select-range', 6 - (2 - hoursLen), 8 - (2 - hoursLen));
         }
         this.currentScrollbar = type;
       },
