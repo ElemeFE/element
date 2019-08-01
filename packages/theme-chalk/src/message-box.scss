@@ -80,8 +80,7 @@
   }
 
   @include e(input) {
-    padding-top: 15px;
-
+    padding: 10px $--msgbox-padding-primary;
     & input.invalid {
       border-color: $--color-danger;
       &:focus {
