@@ -34,6 +34,15 @@ export default {
       states.currentRow = currentRow;
     },
 
+    setCurrentRow(currentRow = null) {
+      const { states } = this;
+      const oldCurrentRow = states.currentRow;
+      states.currentRow = currentRow;
+      if (oldCurrentRow !== currentRow) {
+        this.table.$emit('current-change', currentRow, oldCurrentRow);
+      }
+    },
+
     updateCurrentRow(currentRow) {
       const { states, table } = this;
       const { rowKey, _currentRowKey } = states;
@@ -43,10 +52,7 @@ export default {
 
       if (currentRow) {
         this.restoreCurrentRowKey();
-        states.currentRow = currentRow;
-        if (oldCurrentRow !== currentRow) {
-          this.table.$emit('current-change', currentRow, oldCurrentRow);
-        }
+        this.setCurrentRow(currentRow);
       } else {
         // 当 currentRow 不在 data 中时尝试更新数据
         if (data.indexOf(oldCurrentRow) === -1 && oldCurrentRow) {
@@ -63,7 +69,7 @@ export default {
         } else if (_currentRowKey) {
           this.setCurrentRowByKey(_currentRowKey);
         } else {
-          states.currentRow = null;
+          this.setCurrentRow();
         }
       }
     }
