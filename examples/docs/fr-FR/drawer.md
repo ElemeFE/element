@@ -232,7 +232,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | destroy-on-close | Indicates whether children should be destroyed after Drawer closed | boolean | - | false |
 | modal | Should show shadowing layer | boolean | — | true |
 | modal-append-to-body | Indicates should shadowing layer be insert into DocumentBody element | boolean   | — | true |
-| direction | Drawer's opening direction | Direction | rtl / ltr / ttb / tbb | rtl |
+| direction | Drawer's opening direction | Direction | rtl / ltr / ttb / btt | rtl |
 | show-close | Should show close button at the top right of Drawer | boolean | — | true |
 | size | Drawer's size, if Drawer is horizontal mode, it effects the width property, otherwise it effects the height property, when size is `number` type, it describes the size by unit of pixels; when size is `string` type, it should be used with `x%` notation, other wise it will be interpreted to pixel unit | number / string | - | '30%' |
 | title | Drawer's title, can also be set by named slot, detailed descriptions can be found in the slot form | string | — | — |
