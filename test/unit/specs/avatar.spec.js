@@ -1,4 +1,4 @@
-import {createTest, createVue, destroyVM} from '../util';
+import { createTest, createVue, destroyVM, wait } from '../util';
 import Avatar from 'packages/avatar';
 import { IMAGE_SUCCESS, IMAGE_FAIL } from '../dataUri';
 
@@ -72,7 +72,7 @@ describe('Avatar', () => {
     expect(imgElm.src).to.equal(IMAGE_SUCCESS);
   });
 
-  it('image fallback', (done) => {
+  it('image fallback', async() => {
     vm = createVue({
       template: `
         <el-avatar src="${IMAGE_FAIL}" @error="errorHandler">
@@ -85,14 +85,12 @@ describe('Avatar', () => {
         }
       }
     }, true);
-    setTimeout(() => {
-      const avatarElm = vm.$el;
-      expect(avatarElm.textContent.trim()).to.equal('fallback');
-      done();
-    }, 3000);
+    await wait();
+    const avatarElm = vm.$el;
+    expect(avatarElm.textContent.trim()).to.equal('fallback');
   });
 
-  it('image fit', (done) => {
+  it('image fit', async() => {
     vm = createVue({
       template: `
         <div>
@@ -108,17 +106,14 @@ describe('Avatar', () => {
         };
       }
     }, true);
-    setTimeout(() => {
-      const containerElm = vm.$el;
-      expect(containerElm.children[0].children[0].style.objectFit).to.equal('cover');
-      expect(containerElm.children[1].children[0].style.objectFit).to.equal('fill');
-      expect(containerElm.children[2].children[0].style.objectFit).to.equal('contain');
-      expect(containerElm.children[3].children[0].style.objectFit).to.equal('cover');
-      expect(containerElm.children[4].children[0].style.objectFit).to.equal('none');
-      expect(containerElm.children[5].children[0].style.objectFit).to.equal('scale-down');
-
-      done();
-    }, 3000);
+    await wait();
+    const containerElm = vm.$el;
+    expect(containerElm.children[0].children[0].style.objectFit).to.equal('cover');
+    expect(containerElm.children[1].children[0].style.objectFit).to.equal('fill');
+    expect(containerElm.children[2].children[0].style.objectFit).to.equal('contain');
+    expect(containerElm.children[3].children[0].style.objectFit).to.equal('cover');
+    expect(containerElm.children[4].children[0].style.objectFit).to.equal('none');
+    expect(containerElm.children[5].children[0].style.objectFit).to.equal('scale-down');
   });
 });
 
