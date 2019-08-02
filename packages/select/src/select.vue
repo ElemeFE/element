@@ -580,13 +580,13 @@
       },
 
       handleBlur(event) {
-        setTimeout(() => {
+        this.$nextTick(() => {
           if (this.isSilentBlur) {
             this.isSilentBlur = false;
           } else {
             this.$emit('blur', event);
           }
-        }, 50);
+        });
         this.softFocus = false;
       },
 
@@ -851,7 +851,10 @@
         this.handleQueryChange(e.target.value);
       });
 
-      this.$on('handleOptionClick', this.handleOptionSelect);
+      this.$on('handleOptionClick', (option, byClick) => {
+        this.handleOptionSelect(option, byClick);
+        this.handleBlur();
+      });
       this.$on('setSelected', this.setSelected);
     },
 
