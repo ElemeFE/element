@@ -1820,12 +1820,12 @@ describe('Table', () => {
 
       vm.$refs.table.setCurrentRow(vm.testData[1]);
       await waitImmediate();
-      const secondColumn = vm.$el.querySelector('.el-table__row')[1];
-      expect(secondColumn.classList.contains('current-row')).to.true;
+      const secondRow = vm.$el.querySelectorAll('.el-table__row')[1];
+      expect(secondRow.classList.contains('current-row')).to.true;
 
       vm.$el.querySelector('.clear').click();
       await waitImmediate();
-      expect(secondColumn.classList.contains('current-row')).to.false;
+      expect(secondRow.classList.contains('current-row')).to.false;
 
       destroyVM(vm);
     });
