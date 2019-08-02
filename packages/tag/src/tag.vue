@@ -52,7 +52,7 @@
         </span>
       );
 
-      return this.disableTransitions ? tagEl : <transition name="el-zoom-in-center">{ tagEl }</transition>;
+      return this.disableTransitions ? tagEl : <transition name="el-zoom-in-center" appear>{ tagEl }</transition>;
     }
   };
 </script>
