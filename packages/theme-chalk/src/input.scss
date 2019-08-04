@@ -221,6 +221,21 @@
     }
   }
 
+  @include m(suffix-count) {
+    .el-input__inner {
+      padding-right: 46px;
+    }
+  }
+
+  @include m(suffix-multi) {
+    .el-input__inner {
+      padding-right: 54px;
+    }
+    &.el-input--suffix-count .el-input__inner {
+      padding-right: 68px;
+    }
+  }
+
   @include m(prefix) {
     .el-input__inner {
       padding-left: 30px;

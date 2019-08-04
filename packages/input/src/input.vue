@@ -9,7 +9,9 @@
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
       'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
+      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword || isWordLimitVisible,
+      'el-input--suffix-count': isWordLimitVisible,
+      'el-input--suffix-multi': showClear && (isWordLimitVisible || showPassword),
     }
     ]"
     @mouseenter="hovering = true"
