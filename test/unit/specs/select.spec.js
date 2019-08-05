@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown', 'autocomplete'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -37,6 +37,7 @@ describe('Select', () => {
             ref="select"
             v-model="value"
             :multiple="multiple"
+            :autocomplete="autocomplete"
             :multiple-limit="multipleLimit"
             :popper-class="popperClass"
             :clearable="clearable"
@@ -289,6 +290,15 @@ describe('Select', () => {
       expect(iconClear).to.exist;
       iconClear.click();
       expect(vm.value).to.equal('');
+      done();
+    }, 100);
+  });
+
+  it('autocomplete off', done => {
+    vm = getSelectVm({ autocomplete: 'off' });
+    setTimeout(() => {
+      const input = vm.$el.querySelector('.el-input input');
+      expect(input.type).to.equal('search');
       done();
     }, 100);
   });
