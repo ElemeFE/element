@@ -480,7 +480,7 @@ export default {
     },
 
     autoLoadDataForRow(row, rowKey, treeData) {
-      if (!rowKey || this.$data._autoLoadRows.indexOf(rowKey) !== -1) return;
+      if (!rowKey || !treeData || this.$data._autoLoadRows.indexOf(rowKey) !== -1) return;
       const { loading, expanded, display } = treeData;
       // 当某一行展开时，但是它的子节点没有加载或者正在加载，需要手动加载数据
       // loading，expanded 与 display 可能为 undefined，这里直接跟布尔值比较
