@@ -327,7 +327,7 @@ export default class Node {
   }
 
   doCreateChildren(array, defaultProps = {}) {
-    // 增加判断对数组的判断，在懒加载模式下array肯能为undefine
+    // 增加判断对数组的判断，在懒加载模式下array可能出现为undefine
    if (Array.isArray(array) && array.length) {
       array.forEach((item) => {
         this.insertChild(objectAssign({ data: item }, defaultProps), undefined, true);
