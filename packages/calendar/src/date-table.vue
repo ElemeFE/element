@@ -147,10 +147,12 @@ export default {
 
     weekDays() {
       const start = this.firstDayOfWeek;
+      const { WEEK_DAYS } = this;
+      
       if (typeof start !== 'number' || start === 0) {
-        return this.WEEK_DAYS.slice();
+        return WEEK_DAYS.slice();
       } else {
-        return this.WEEK_DAYS.slice(start).concat(this.WEEK_DAYS.slice(0, start));
+        return WEEK_DAYS.slice(start).concat(WEEK_DAYS.slice(0, start));
       }
     }
   },
