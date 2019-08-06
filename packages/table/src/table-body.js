@@ -101,7 +101,8 @@ export default {
 
   data() {
     return {
-      tooltipContent: ''
+      tooltipContent: '',
+      _autoLoadRows: []
     };
   },
 
@@ -425,6 +426,7 @@ export default {
           }
         }
         const tmp = [this.rowRender(row, $index, treeRowData)];
+        this.autoLoadDataForRow(row, key, treeRowData);
         // 渲染嵌套数据
         if (cur) {
           // currentRow 记录的是 index，所以还需主动增加 TreeTable 的 index
@@ -459,6 +461,7 @@ export default {
               }
               i++;
               tmp.push(this.rowRender(node, $index + i, innerTreeRowData));
+              this.autoLoadDataForRow(node, childKey, innerTreeRowData);
               if (cur) {
                 const nodes = lazyTreeNodeMap[childKey] || node[childrenColumnName];
                 traverse(nodes, cur);
@@ -473,6 +476,19 @@ export default {
         return tmp;
       } else {
         return this.rowRender(row, $index);
+      }
+    },
+
+    autoLoadDataForRow(row, rowKey, treeData) {
+      if (!rowKey || this.$data._autoLoadRows.indexOf(rowKey) !== -1) return;
+      const { loading, expanded, display } = treeData;
+      // 当某一行展开时，但是它的子节点没有加载或者正在加载，需要手动加载数据
+      // loading，expanded 与 display 可能为 undefined，这里直接跟布尔值比较
+      if (expanded === true && display === true && loading === false) {
+        this.$data._autoLoadRows.push(rowKey);
+        this.$nextTick(() => {
+          this.store.loadOrToggle(row);
+        });
       }
     }
   }
