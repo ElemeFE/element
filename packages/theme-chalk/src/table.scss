@@ -98,6 +98,7 @@
   @include m(scrollable-x) {
     .el-table__body-wrapper {
       overflow-x: auto;
+      z-index: 1;
     }
   }
 
