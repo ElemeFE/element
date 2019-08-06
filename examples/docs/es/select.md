@@ -551,6 +551,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | filter-method        | método de filtrado personalizado   | function | —                 | —                |
 | remote               | si las opciones se traerán desde el servidor | boolean  | —                 | false            |
 | remote-method        | método de búsqueda remota personalizada | function | —                 | —                |
+| debounce-delay       | debounce delay (in ms) for remote search method | number | — | 300 |
 | loading              | si Select está cargando datos del servidor | boolean  | —                 | false            |
 | loading-text         | texto mostrado durante la carga de datos del servidor, también puedes usar la configuración de slot = "empty" | string   | —                 | Loading          |
 | no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. También puedes usar la configuración de slot = "empty" | string   | —                 | No matching data |

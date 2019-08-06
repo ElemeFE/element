@@ -544,6 +544,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | filter-method | custom filter method | function | — | — |
 | remote | whether options are loaded from server | boolean | — | false |
 | remote-method | custom remote search method | function | — | — |
+| debounce-delay | debounce delay (in ms) for remote search method | number | — | 300 |
 | loading | whether Select is loading data from server | boolean | — | false |
 | loading-text | displayed text while loading data from server | string | — | Loading |
 | no-match-text | displayed text when no data matches the filtering query, you can also use slot `empty` | string | — | No matching data |

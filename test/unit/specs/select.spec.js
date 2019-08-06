@@ -47,6 +47,7 @@ describe('Select', () => {
             :remote="remote"
             :loading="loading"
             :remoteMethod="remoteMethod"
+            :debounce-delay="debounceDelay"
             :automatic-dropdown="automaticDropdown">
             <el-option
               v-for="item in options"
@@ -74,6 +75,7 @@ describe('Select', () => {
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
           remoteMethod: configs.remoteMethod && configs.remoteMethod(this),
+          debounceDelay: configs.debounceDelay,
           value: configs.multiple ? [] : ''
         };
       }
@@ -671,6 +673,45 @@ describe('Select', () => {
           });
         });
       }, 250);
+    });
+  });
+
+  it('custom debounce delay for remote search', done => {
+    const debounceDelay = 500;
+    const queryDelay = 200;
+    const remoteMethod = vm => {
+      return query => {
+        vm.loading = true;
+        setTimeout(() => {
+          vm.options = vm.options.filter(option => {
+            return option.label.indexOf(query) > -1;
+          });
+          vm.loading = false;
+        }, queryDelay);
+      };
+    };
+    vm = getSelectVm({
+      multiple: true,
+      remote: true,
+      filterable: true,
+      debounceDelay,
+      remoteMethod
+    });
+    const select = vm.$children[0];
+    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+
+    select.handleQueryChange('');
+    select.debouncedQueryChange({ target: { value: '面' } });
+
+    vm.$nextTick(() => {
+      expect(select.filteredOptionsCount).to.equal(options.length);
+
+      setTimeout(() => {
+        vm.$nextTick(() => {
+          expect(select.filteredOptionsCount).to.equal(1);
+          done();
+        });
+      }, debounceDelay + queryDelay);
     });
   });
 

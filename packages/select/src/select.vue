@@ -198,7 +198,7 @@
       },
 
       debounce() {
-        return this.remote ? 300 : 0;
+        return this.remote ? this.debounceDelay : 0;
       },
 
       emptyText() {
@@ -275,6 +275,10 @@
       loading: Boolean,
       popperClass: String,
       remote: Boolean,
+      debounceDelay: {
+        type: Number,
+        default: 300
+      },
       loadingText: String,
       noMatchText: String,
       noDataText: String,

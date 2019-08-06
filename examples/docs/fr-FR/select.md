@@ -547,6 +547,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | filter-method | Méthode de filtrage personnalisée. | function | — | — |
 | remote | Si les options sont chargées dynamiquement depuis le serveur. | boolean | — | false |
 | remote-method | Méthode pour la recherche distante. | function | — | — |
+| debounce-delay | Delai en milliseconde avant l'exécution de la méthode de recherche distante | number | — | 300 |
 | loading | Si le sélecteur est en train de charger des options. | boolean | — | false |
 | loading-text | Texte à afficher pendant le chargement. | string | — | Loading |
 | no-match-text | Texte à afficher quand le filtrage ne retourne aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No matching data |
