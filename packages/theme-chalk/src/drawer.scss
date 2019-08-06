@@ -163,6 +163,7 @@ $directions: rtl, ltr, ttb, btt;
     height: 100%;
     top: 0;
     bottom: 0;
+    overflow-y: auto;
   }
 
   &.ttb, &.btt {
