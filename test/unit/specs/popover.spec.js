@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, createTest, destroyVM } from '../util';
+import { createVue, triggerEvent, createTest, destroyVM, wait } from '../util';
 import Popover from 'packages/popover';
 
 describe('Popover', () => {
@@ -247,6 +247,56 @@ describe('Popover', () => {
         done();
       }, 50);
     }, 50);
+  });
+
+  describe('open/close delays', () => {
+    it('100ms open / instant close', async() => {
+      vm = createVue(`
+        <div>
+          <el-popover
+            ref="popover"
+            content="content"
+            trigger="hover"
+            :open-delay="100"
+            :close-delay="0">
+            <button slot="reference">reference</button>
+          </el-popover>
+        </div>
+      `, true);
+      const compo = vm.$refs.popover;
+      const button = vm.$el.querySelector('button');
+
+      triggerEvent(button, 'mouseenter');
+      expect(compo.showPopper).to.false;
+      await wait(150);
+      expect(compo.showPopper).to.true;
+      triggerEvent(button, 'mouseleave');
+      expect(compo.showPopper).to.false;
+    });
+
+    it('instant open / 100ms close', async() => {
+      vm = createVue(`
+        <div>
+          <el-popover
+            ref="popover"
+            content="content"
+            trigger="hover"
+            :open-delay="0"
+            :close-delay="100">
+            <button slot="reference">reference</button>
+          </el-popover>
+        </div>
+      `, true);
+      const compo = vm.$refs.popover;
+      const button = vm.$el.querySelector('button');
+
+      triggerEvent(button, 'mouseenter');
+      expect(compo.showPopper).to.true;
+      triggerEvent(button, 'mouseleave');
+      expect(compo.showPopper).to.true;
+      await wait(150);
+      expect(compo.showPopper).to.false;
+    });
   });
 
   it('destroy event', () => {
