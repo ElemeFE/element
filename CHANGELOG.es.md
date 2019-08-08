@@ -4,23 +4,23 @@
 
 *2019-07-26*
 
-#### Bug fixes
+#### Corrección de errores
 
 - Image
-  - Fix Image component SSR compatibility (#16737 by @luckyCao)
-- Chore
-  - Update dart-sass compatibility (#16744 by @LewisChennnnn)
+  - Corregido el componente Image para compatibilidad SSR (#16737 by @luckyCao)
+- Tarea
+  - Actualizado para compatibilidad con dart-sass by @LewisChennnnn)
 
 ### 2.11.0
 
 *2019-07-25*
 
-#### New features
+#### Nuevas características
 
 - Drawer
   - Add drawer component (#16577 by @JeremyWuuuuu)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Checkbox
   - Enhance css selector (#16006 by @Hazlank)
@@ -33,10 +33,8 @@
   - Fix level 1 children is empty update problem (#16399 by @luckyCao)
   - Display correct header when range is specified (#16354 by @ziyoung)
   - Add sets default values when lazy is true (#16420 by @luckyCao)
-  - Fix display errors when node value is duplicate (#15935 by @junyiz)
+  - Fix display errors (#15935 by @junyiz)
   - Expose getCheckedNodes and fix options change bug (#16709 by @SimonaliaChen)
-- Calendar
-  - Display correct header when range is specified (#16354 by @ziyoung)
 - Submenu
   - Fix prop append-to-body (#16289 by @a631807682)
 - Table 

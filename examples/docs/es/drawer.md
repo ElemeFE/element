@@ -1,12 +1,12 @@
 ## Drawer
 
-Sometimes, `Dialog` does not always satisfy our requirements, let's say you have a massive form, or you need space to display something like `terms & conditions`, `Drawer` has almost identical API with `Dialog`, but it introduces different user experience.
+A veces, `Dialog` no siempre satisface nuestros requisitos, digamos que tiene un formulario masivo, o necesita espacio para mostrar algo como `terminos & condiciones`, `Drawer` tiene una API casi idéntica a `Dialog`, pero introduce una experiencia de usuario diferente.
 
-### Basic Usage
+### Uso básico
 
-Callout a temporary drawer, from multiple direction
+Llamada de un drawer temporal, desde varias direcciones
 
-:::demo You must set `visible` for `Drawer` like `Dialog` does to control the visibility of `Drawer` itself, it's `boolean` type. `Drawer` has to parts: `title` & `body`, the `title` is a named slot, you can also set the title through attribute named `title`, default to an empty string, the `body` part is the main area of `Drawer`, which contains user defined content. When opening, `Drawer` expand itself from the **right corner to left** which size is **30%** of the browser window by default. You can change that default behavior by setting `direction` and `size` attribute. This show case also demonstrated how to use the `before-close` API, check the Attribute section for more detail
+:::demo Debe establecer `visible` para `Drawer` como lo hace `Dialog` para controlar la visibilidad. `visible` es del tipo `boolean`. `Drawer` tiene partes: `title` & `body`, el `title` es un slot con nombre, también puede establecer el título a través de un atributo llamado `title`, por defecto a una cadena vacía, la parte `body` es el área principal de `Drawer`, que contiene contenido definido por el usuario. Al abrir, `Drawer` se expande desde la **esquina derecha a la izquierda** cuyo tamaño es **30%** de la ventana del navegador por defecto. Puede cambiar ese comportamiento predeterminado estableciendo los atributos `direction` y `size`. Este caso de demostración también muestra cómo utilizar la API `before-close`, consulte la sección Atributos para obtener más detalles.
 
 ```html
 <el-radio-group v-model="direction">
@@ -50,9 +50,9 @@ Callout a temporary drawer, from multiple direction
 ```
 :::
 
-### Customization Content
+### Personalizar el  contenido
 
-Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
+Al igual que `Dialog`, `Drawer` puede hacer muchas interacciones diversas.
 
 :::demo
 
@@ -153,10 +153,10 @@ export default {
 ```
 :::
 
-### Nested Drawer
+### Drawer anidados
 
-You can also have multiple layer of `Drawer` just like `Dialog`.
-:::demo If you need multiple Drawer in different layer, you must set the `append-to-body` attribute to **true**
+También puede tener varias capas de `Drawer` al igual que con `Dialog`.
+:::demo Si necesita varios drawer en diferentes capas, debe establecer el atributo `append-to-body` en **true**
 
 ```html
 
@@ -205,25 +205,25 @@ You can also have multiple layer of `Drawer` just like `Dialog`.
 
 :::tip
 
-The content inside Drawer should be lazy rendered, which means that the content inside Drawer will not impact the initial render performance, therefore any DOM operation should be performed through `ref` or after `open` event emitted.
+El contenido dentro del Drawer debe ser renderizado de forma perezosa, lo que significa que el contenido dentro del Drawer no afectará al rendimiento inicial del renderizado, por lo que cualquier operación DOM debe realizarse a través de `ref' o después de que se emita el evento `open'.
 
 :::
 
 :::tip
 
-Drawer provides an API called `destroyOnClose`, which is a flag variable that indicates should destroy the children content inside Drawer after Drawer was closed. You can use this API when you need your `mounted` life cycle to be called every time the Drawer opens.
+El Drawer proporciona una API llamada "destroyOnClose", que es una variable de bandera que indica que debe destruir el contenido hijo dentro del Drawer después de que se haya cerrado. Puede utilizar esta API cuando necesite que su ciclo de vida "mounted" sea llamado cada vez que se abra el Cajón.
 
 :::
 
 :::tip
 
-If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
+Si la variable `visible` se gestiona en el almacén de Vuex, el `.sync` no puede funcionar correctamente. En este caso, elimine el modificador `.sync`, escuche los eventos `open` y `close` de Drawer, y envíe mutaciones Vuex para actualizar el valor de esa variable en los manejadores de eventos.
 
 :::
 
-### Drawer Attributes
+### Atributos de Drawer
 
-| Parameter| Description | Type      | Acceptable Values                           | Defaults  |
+| Parámetros | Descripción | Tipo   | Valores aceptados           | Por defecto |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | append-to-body | Controls should Drawer be inserted to DocumentBody Element, nested Drawer must assign this param to **true**| boolean   | — | false |
 | before-close | If set, closing procedure will be halted | function(done), done is function type that accepts a boolean as parameter, calling done with true or without parameter will abort the close procedure | — | — |
@@ -232,7 +232,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | destroy-on-close | Indicates whether children should be destroyed after Drawer closed | boolean | - | false |
 | modal | Should show shadowing layer | boolean | — | true |
 | modal-append-to-body | Indicates should shadowing layer be insert into DocumentBody element | boolean   | — | true |
-| direction | Drawer's opening direction | Direction | rtl / ltr / ttb / btt | rtl |
+| direction | Drawer's opening direction | Direction | rtl / ltr / ttb / tbb | rtl |
 | show-close | Should show close button at the top right of Drawer | boolean | — | true |
 | size | Drawer's size, if Drawer is horizontal mode, it effects the width property, otherwise it effects the height property, when size is `number` type, it describes the size by unit of pixels; when size is `string` type, it should be used with `x%` notation, other wise it will be interpreted to pixel unit | number / string | - | '30%' |
 | title | Drawer's title, can also be set by named slot, detailed descriptions can be found in the slot form | string | — | — |
