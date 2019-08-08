@@ -48,20 +48,20 @@
 - Dialog
   - Agregado el atributo destroyOnClosee (#16455 by @ziyoung)
 - Image
-  - Agregado Add big Image preview feature (#16333 by @luckyCao)
+  - Agregada la función de vista previa grande de imágenes (#16333 by @luckyCao)
 
-#### Optimization
+#### Optimización
 
-- Docs
-  - Fix dropdown demo (#16193 by @webxmsj)
-  - Fix typo in table documents (#15971 by @howiefh)
+- Documentación
+  - Arreglada la demo de dropdown (#16193 by @webxmsj)
+  - Corrección de errores tipográficos en las tablas de documentos (#15971 by @howiefh)
 - I18n
-  - Update translation of Thai language (#16689 by @ponkrit)
-- Chore
-  - Update theme base api (#16607 by @iamkun)
-  - Add form theme token (#16699 by @iamkun)
-  - Mark ali inner user's access (#16609 by @iamkun)
-  - Fix doc anchor bug (#16692 by @iamkun)
+  - Actualizada la traduccion del lenguage Thai (#16689 by @ponkrit)
+- Tareas
+  - Actualizada la api base del tema (#16607 by @iamkun)
+  - Añadido token del formulario del tema (#16699 by @iamkun)
+  - Marcar todos los accesos internos del usuario (#16609 by @iamkun)
+  - Corrección del error de anclaje del documento (#16692 by @iamkun)
 
 ### 2.10.1
 
