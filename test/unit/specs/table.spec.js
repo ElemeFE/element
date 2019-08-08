@@ -1944,6 +1944,28 @@ describe('Table', () => {
     }, DELAY);
   });
 
+  it('table append is visible in viewport if height is 100%', async() => {
+    const vm = createVue({
+      template: `
+      <el-table :data="[]" height="100%">
+        <el-table-column prop="name" label="片名" />
+        <el-table-column prop="release" label="发行日期" />
+        <el-table-column prop="director" label="导演" />
+        <el-table-column prop="runtime" label="时长（分）" />
+        <template slot="append">
+          <div class="append-content" style="height: 48px;">
+            append 区域始终出现在视图内
+          </div>
+        </template>
+      </el-table>
+      `
+    }, true);
+    await waitImmediate();
+    const emptyBlockEl = vm.$el.querySelector('.el-table__empty-block');
+    expect(emptyBlockEl.style.height).to.be.equal('calc(100% - 48px)');
+    destroyVM(vm);
+  });
+
   describe('tree', () => {
     let vm;
     afterEach(() => destroyVM(vm));
