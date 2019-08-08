@@ -10,29 +10,29 @@ export default {
       cancel: 'Nuligi',
       clear: 'Malplenigi',
       confirm: 'Bone',
-      selectDate: '选择日期',
-      selectTime: '选择时间',
-      startDate: '开始日期',
-      startTime: '开始时间',
-      endDate: '结束日期',
-      endTime: '结束时间',
-      prevYear: '前一年',
-      nextYear: '后一年',
-      prevMonth: '上个月',
-      nextMonth: '下个月',
+      selectDate: 'Elektu daton',
+      selectTime: 'Elektu horon',
+      startDate: 'Komenca Dato',
+      startTime: 'Komenca Horo',
+      endDate: 'Fina Dato',
+      endTime: 'Fina Horo',
+      prevYear: 'Antaŭa Jaro',
+      nextYear: 'Sekva Jaro',
+      prevMonth: 'Antaŭa Monato',
+      nextMonth: 'Sekva Monato',
       year: 'Jaro',
-      month1: '1 月',
-      month2: '2 月',
-      month3: '3 月',
-      month4: '4 月',
-      month5: '5 月',
-      month6: '6 月',
-      month7: '7 月',
-      month8: '8 月',
-      month9: '9 月',
-      month10: '10 月',
-      month11: '11 月',
-      month12: '12 月',
+      month1: 'Januaro',
+      month2: 'Februaro',
+      month3: 'Marto',
+      month4: 'Aprilo',
+      month5: 'Majo',
+      month6: 'Junio',
+      month7: 'Julio',
+      month8: 'Aŭgusto',
+      month9: 'Septembro',
+      month10: 'Oktobro',
+      month11: 'Novembro',
+      month12: 'Decembro',
       week: 'Semajno',
       weeks: {
         sun: 'Dim',
@@ -44,73 +44,73 @@ export default {
         sat: 'Sab'
       },
       months: {
-        jan: '一月',
-        feb: '二月',
-        mar: '三月',
-        apr: '四月',
-        may: '五月',
-        jun: '六月',
-        jul: '七月',
-        aug: '八月',
-        sep: '九月',
-        oct: '十月',
-        nov: '十一月',
-        dec: '十二月'
+        jan: 'Jan',
+        feb: 'Feb',
+        mar: 'Mar',
+        apr: 'Apr',
+        may: 'Maj',
+        jun: 'Jun',
+        jul: 'Jul',
+        aug: 'Aŭg',
+        sep: 'Sep',
+        oct: 'Okt',
+        nov: 'Nov',
+        dec: 'Dec'
       }
     },
     select: {
-      loading: '加载中',
-      noMatch: '无匹配数据',
-      noData: '无数据',
-      placeholder: '请选择'
+      loading: 'Ŝarĝante',
+      noMatch: 'Neniuj kongruaj datumoj',
+      noData: 'Neniuj datumoj',
+      placeholder: 'Bonvolu elekti'
     },
     cascader: {
-      noMatch: '无匹配数据',
-      loading: '加载中',
-      placeholder: '请选择',
-      noData: '暂无数据'
+      noMatch: 'Neniuj kongruaj datumoj',
+      loading: 'Ŝarĝante',
+      placeholder: 'Bonvolu elekti',
+      noData: 'Neniuj datumoj'
     },
     pagination: {
-      goto: '前往',
-      pagesize: '条/页',
-      total: '共 {total} 条',
-      pageClassifier: '页'
+      goto: 'Iru al',
+      pagesize: '/ paĝo',
+      total: 'Entute {total}',
+      pageClassifier: ''
     },
     messagebox: {
-      title: '提示',
+      title: 'Mesaĝo',
       confirm: 'Bone',
       cancel: 'Nuligi',
-      error: '输入的数据不合法!'
+      error: 'Nevalida Enigo!'
     },
     upload: {
-      deleteTip: '按 delete 键可删除',
-      delete: '删除',
-      preview: '查看图片',
-      continue: '继续上传'
+      deleteTip: 'Premu "Delete" por forigi',
+      delete: 'Forigi',
+      preview: 'Antaŭrigardi',
+      continue: 'Daŭrigi'
     },
     table: {
-      emptyText: '暂无数据',
-      confirmFilter: '筛选',
-      resetFilter: '重置',
-      clearFilter: '全部',
-      sumText: '合计'
+      emptyText: 'Neniuj datumoj',
+      confirmFilter: 'Konfirmi',
+      resetFilter: 'Restarigi',
+      clearFilter: 'Ĉiuj',
+      sumText: 'Sumo'
     },
     tree: {
-      emptyText: '暂无数据'
+      emptyText: 'Neniuj datumoj'
     },
     transfer: {
-      noMatch: '无匹配数据',
-      noData: '无数据',
-      titles: ['列表 1', '列表 2'],
-      filterPlaceholder: '请输入搜索内容',
-      noCheckedFormat: '共 {total} 项',
-      hasCheckedFormat: '已选 {checked}/{total} 项'
+      noMatch: 'Neniuj kongruaj datumoj',
+      noData: 'Neniuj datumoj',
+      titles: ['Listo 1', 'Listo 2'],
+      filterPlaceholder: 'Enigu ŝlosilvorton',
+      noCheckedFormat: '{total} elementoj',
+      hasCheckedFormat: '{checked}/{total} elektitaj'
     },
     image: {
-      error: '加载失败'
+      error: 'MALSUKCESIS'
     },
     pageHeader: {
-      title: '返回'
+      title: 'Reen'
     }
   }
 };
