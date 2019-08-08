@@ -18,37 +18,37 @@
 #### Nuevas características
 
 - Drawer
-  - Add drawer component (#16577 by @JeremyWuuuuu)
+  - Agregado componente drawer (#16577 by @JeremyWuuuuu)
 
 #### Corrección de errores
 
 - Checkbox
-  - Enhance css selector (#16006 by @Hazlank)
+  - Mejora del selector css (#16006 by @Hazlank)
 - Tree
-  - Make el-tree generic (#15934 by @JeremyWuuuuu)
-  - Set isCurrent prop to False (#15870 by @kkkisme)
+  - Establecido el el-tree como genérico (#15934 by @JeremyWuuuuu)
+  - Establecido la prop  isCurrent como False (#15870 by @kkkisme)
 - Dropdown
-  - Fix split-button caret default color (#15931 by @JuniorTour)
+  - Corregido el color predeterminado de los split-button (#15931 by @JuniorTour)
 - Cascader
-  - Fix level 1 children is empty update problem (#16399 by @luckyCao)
-  - Display correct header when range is specified (#16354 by @ziyoung)
-  - Add sets default values when lazy is true (#16420 by @luckyCao)
-  - Fix display errors (#15935 by @junyiz)
-  - Expose getCheckedNodes and fix options change bug (#16709 by @SimonaliaChen)
+  - Corregido un problema de actualización cuando el nivel 1 de children estaba vació (#16399 by @luckyCao)
+  - Ahora se muestra correctamente header cuando range esta especificado (#16354 by @ziyoung)
+  - Agregados valores por defecto cuando lazy es true (#16420 by @luckyCao)
+  - Solucionado problemas de visualización (#15935 by @junyiz)
+  - Expuestos los getCheckedNodes y corrección de errores en el cambio de opciones (#16709 by @SimonaliaChen)
 - Submenu
-  - Fix prop append-to-body (#16289 by @a631807682)
+  - Corregida la prop append-to-body (#16289 by @a631807682)
 - Table 
-  - Fix tree table when updating data (#16481 by @island205)
+  - Arreglado un fallo en la actualizacion de los datos de tree table (#16481 by @island205)
 - Select
-  - Fix memory leak issue (#16463 by @island205)
+  - Arreglado un problema de fuga de memoria (#16463 by @island205)
 - InfiniteScroll
-  - Update naming & doc (#16698 by @iamkun)
+  - Actualizada la nomenclatura y la documentacion (#16698 by @iamkun)
 - Avatar
-  - Fix image not center vertically issue (#16489 by @luckyCao)
+  - Arreglado que la imagen no se centraba verticalmente (#16489 by @luckyCao)
 - Dialog
-  - Add destroyOnClose attribute (#16455 by @ziyoung)
+  - Agregado el atributo destroyOnClosee (#16455 by @ziyoung)
 - Image
-  - Add big Image preview feature (#16333 by @luckyCao)
+  - Agregado Add big Image preview feature (#16333 by @luckyCao)
 
 #### Optimization
 
