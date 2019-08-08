@@ -4,13 +4,15 @@
       v-show="visible"
       class="el-time-panel el-popper"
       :class="popperClass">
-      <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
+      <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds, 'has-am-pm': showAmPm }">
         <time-spinner
           ref="spinner"
           @change="handleChange"
           :arrow-control="useArrow"
           :show-seconds="showSeconds"
+          :show-am-pm="showAmPm"
           :am-pm-mode="amPmMode"
+          :zero-pad-hour="zeroPadHour"
           @select-range="setSelectionRange"
           :date="date">
         </time-spinner>
@@ -44,7 +46,11 @@
 
     props: {
       visible: Boolean,
-      timeArrowControl: Boolean
+      timeArrowControl: Boolean,
+      toggleAmPm: {
+        type: Boolean,
+        default: false
+      }
     },
 
     watch: {
@@ -103,6 +109,9 @@
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
       },
+      showAmPm() {
+        return this.toggleAmPm && ((this.format || '').indexOf('a') !== -1 || (this.format || '').indexOf('A') !== -1);
+      },
       useArrow() {
         return this.arrowControl || this.timeArrowControl || false;
       },
@@ -110,6 +119,9 @@
         if ((this.format || '').indexOf('A') !== -1) return 'A';
         if ((this.format || '').indexOf('a') !== -1) return 'a';
         return '';
+      },
+      zeroPadHour() {
+        return (this.format || '').indexOf('HH') !== -1 || (this.format || '').indexOf('hh') !== -1;
       }
     },
 
@@ -170,8 +182,10 @@
       },
 
       changeSelectionRange(step) {
-        const list = [0, 3].concat(this.showSeconds ? [6] : []);
-        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
+        const hoursLen = !this.zeroPadHour && (this.date.getHours() % 12 || 12) < 10 ? 1 : 2;
+        const secondsOffset = this.showSeconds ? 3 : 0;
+        const list = [0, (3 - (2 - hoursLen))].concat(this.showSeconds ? [(6 - (2 - hoursLen))] : []).concat(this.showAmPm ? [(6 + secondsOffset - (2 - hoursLen))] : []);
+        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []).concat(this.showAmPm ? ['amPm'] : []);
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         this.$refs.spinner.emitSelectRange(mapping[next]);

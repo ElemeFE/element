@@ -1,9 +1,15 @@
 @import "../common/var";
 
 @include b(time-spinner) {
-  &.has-seconds {
+  &.has-seconds:not(.has-am-pm), &.has-am-pm:not(.has-seconds) {
     .el-time-spinner__wrapper {
       width: 33.3%;
+    }
+  }
+
+  &.has-seconds.has-am-pm {
+    .el-time-spinner__wrapper {
+      width: 25%;
     }
   }
 
