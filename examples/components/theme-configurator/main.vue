@@ -1,5 +1,5 @@
 <template>
-  <div class="main" ref="mainPanel">
+  <div class="editor-main" ref="mainPanel">
     <!-- <span>{{configName}}</span> -->
     <div v-for="(config, key) in configByOrder" :key="key">
       <span 
@@ -22,7 +22,7 @@
 </template>
 
 <style>
-.main {
+.editor-main {
   padding: 0 18px 15px;
   overflow-y: auto;
 }

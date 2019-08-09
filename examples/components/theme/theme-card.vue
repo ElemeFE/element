@@ -260,7 +260,8 @@ export default {
     base: {
       type: String,
       default: ''
-    }
+    },
+    from: String
   },
   data() {
     return {
@@ -308,6 +309,10 @@ export default {
       switch (e) {
         case 'preview':
         case 'edit':
+          if (this.from) {
+            this.$emit('action', e, this.config);
+            return;
+          }
           const { name, theme } = this.config;
           savePreviewToLocal({
             type: this.type,
