@@ -58,8 +58,13 @@ export default {
     },
 
     pickDay({ text, type }) {
-      const date = this.getFormateDate(text, type);
-      this.$emit('pick', date);
+      const dateStr = this.getFormateDate(text, type);
+      const date = new Date(dateStr);
+      this.$emit('pick', dateStr);
+
+      if (this.date && this.date.getMonth() !== date.getMonth()) {
+        this.$parent.$emit('panel-change', date);
+      }
     },
 
     cellRenderProxy({ text, type }) {

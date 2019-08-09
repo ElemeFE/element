@@ -122,6 +122,7 @@ export default {
 
       if (day === this.formatedDate) return;
       this.pickDay(day);
+      this.$emit('panel-change', this.toDate(day));
     },
 
     toDate(val) {
