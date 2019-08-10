@@ -104,6 +104,7 @@ $--fill-base: $--color-white !default;
 /* Typography
 -------------------------- */
 $--font-path: 'fonts' !default;
+$--font-display: 'auto' !default;
 /// fontSize|1|Font Size|0
 $--font-size-extra-large: 20px !default;
 /// fontSize|1|Font Size|0
@@ -938,6 +939,11 @@ $--calendar-border: $--table-border !default;
 /// color||Other|4
 $--calendar-selected-background-color: #F2F8FE !default;
 $--calendar-cell-width: 85px !default;
+
+/* Form
+-------------------------- */
+/// fontSize||Font|1
+$--form-label-font-size: $--font-size-base !default;
 
 /* Avatar
 --------------------------*/

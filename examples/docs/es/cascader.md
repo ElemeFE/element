@@ -1939,6 +1939,11 @@ Puede personalizar el contenido del nodo de cascada.
 | visible-change | se activa cuando aparece/desaparece el menú desplegable | verdadero cuando aparece, y falso de otra manera |
 | remove-tag | se activa cuando se quita la etiqueta en modo de selección múltiple | el valor de la etiqueta que se quita |
 
+### Cascader Methods
+| Method Name | Description | Parameters |
+| ---- | ---- | ---- |
+| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+
 ### Slots de Cascader
 | Nombre del slot | Descripción |
 |---------|-------------|
@@ -1957,6 +1962,12 @@ Puede personalizar el contenido del nodo de cascada.
 |---------- |-------- |---------- |
 | change | se desencadena cuando cambia el valor ligado.         | valor |
 | expand-change | se desencadena cuando las opciones expandidas cambian | un array de los nodos padres del nodo en expansión |
+
+### CascaderPanel Methods
+| Method Name | Description | Parameters |
+| ---- | ---- | ---- |
+| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+| clearCheckedNodes | clear checked nodes | - |
 
 ### Slots de CascaderPanel
 | Nombre del slot | Descripción |

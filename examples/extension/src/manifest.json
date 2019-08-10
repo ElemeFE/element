@@ -1,0 +1,27 @@
+{
+  "name": "Element Theme Roller",
+  "version": "0.0.9",
+  "description": "Customize all Design Tokens of Element UI and preview in real-time",
+  "web_accessible_resources": ["entry.js"],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Element Theme Roller"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://*.ele.me/",
+    "https://*.elenet.me/"
+  ]
+}

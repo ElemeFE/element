@@ -67,7 +67,7 @@ import { ElTimePicker } from './time-picker'
 import { ElTimeSelect } from './time-select'
 import { ElTooltip } from './tooltip'
 import { ElTransfer } from './transfer'
-import { ElTree } from './tree'
+import { ElTree, TreeData } from './tree'
 import { ElUpload } from './upload'
 import { ElLink } from './link'
 import { ElDivider } from './divider'
@@ -75,9 +75,10 @@ import { ElIcon } from './icon'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
 import { ElBacktop } from './backtop'
-import { ElInfiniteScroll } from './infiniteScroll'
+import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
+import { ElDrawer } from './drawer'
 
 export interface InstallationOptions {
   locale: any,
@@ -305,7 +306,7 @@ export class Tooltip extends ElTooltip {}
 export class Transfer extends ElTransfer {}
 
 /** Tree Component */
-export class Tree extends ElTree {}
+export class Tree<K = any, D = TreeData> extends ElTree<K, D> {}
 
 /** Upload Component */
 export class Upload extends ElUpload {}
@@ -336,3 +337,6 @@ export class PageHeader extends ElPageHeader {}
 
 /** Avatar Component */
 export class Avatar extends ElAvatar {}
+
+/** Drawer Component */
+export class Drawer extends ElDrawer {}

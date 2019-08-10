@@ -7,7 +7,7 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 :::demo
 ```html
 <template>
-  <ul class="infinite-list" v-infinite-scroll="load">
+  <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
     <li v-for="i in count" class="infinite-list-item">{{ i }}</li>
   </ul>
 </template>
@@ -34,7 +34,7 @@ Add `v-infinite-scroll` to the list to automatically execute loading method when
 :::demo
 ```html
 <template>
-  <div class="infinite-list-wrapper">
+  <div class="infinite-list-wrapper" style="overflow:auto">
     <ul
       class="list"
       v-infinite-scroll="load"

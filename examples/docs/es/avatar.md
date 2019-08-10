@@ -1,10 +1,10 @@
-## Avatar avatar
+## Avatar
 
-Avatars can be used to represent people or objects. It supports images, Icons, or characters.
+Los avatares pueden utilizarse para representar personas u objetos. Soporta imágenes, iconos o caracteres.
 
-### Basic
+### Básico
 
-use `shape` and `size` prop to set avatar's shape and size
+Use los props `shape` y `size` para establecer la forma y el tamaño del avatar
 
 :::demo
 ```html
@@ -45,9 +45,9 @@ use `shape` and `size` prop to set avatar's shape and size
 ```
 :::
 
-### Types
+### Tipos
 
-It supports images, Icons, or characters
+Soporta imágenes, iconos o caracteres.
 
 :::demo
 ```html
@@ -67,9 +67,9 @@ It supports images, Icons, or characters
 ```
 :::
 
-### Fallback when image load error
+### Fallback cuando se produce un error de carga de imagen
 
-fallback when image load error
+Fallback cuando se produce un error de carga de imagen
 
 :::demo
 ```html
@@ -93,9 +93,9 @@ fallback when image load error
 ```
 :::
 
-### How the image fit its container
+### Cómo encaja la imagen en su contenedor
 
-Set how the image fit its container for an image avatar, same as [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
+Establezca cómo la imagen se ajusta a su contenedor para un avatar de imagen, igual que [object-fit](https://developer.mozilla.org/es/docs/Web/CSS/object-fit).
 
 :::demo
 ```html
@@ -121,25 +121,26 @@ Set how the image fit its container for an image avatar, same as [object-fit](ht
 ```
 :::
 
-### Attributes
+### Atributos
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo     | Descripción | Tipo   | Valores aceptados | Por defecto |
 | ----------------- | -------------------------------- | --------------- | ------ | ------ |
-| icon              | set representation type to Icon, more info on Icon Component   | string          |        |        |
-| size              | set avatar size                     | number/string | number / large / medium / small | large  |
-| shape             | set avatar shape  | string |    circle / square     |   circle  |
-| src               | the address of the image for an image avatar | string |        |      |
-| srcSet            | A list of one or more strings separated by commas indicating a set of possible image sources for the user agent to use | string |        |      |
-| alt               | This attribute defines an alternative text description of the image | string |        |      |
-| fit               | set how the image fit its container for an image avatar | string |    fill / contain / cover / none / scale-down    |   cover   |
+| icon              | establece el tipo de representación a Icono, más información en  Componente Icon | string          |        |        |
+| size              | Establece el tamaño del avatar | number/string | number / large / medium / small | large  |
+| shape             | establece la forma del avatar | string |    circle / square     |   circle  |
+| src               | la dirección de la imagen para un avatar de imagen | string |        |      |
+| srcSet            | Una lista de una o más cadenas separadas por comas que indica un conjunto de posibles fuentes de imágenes para que el agente de usuario las utilice. | string |        |      |
+| alt               | Este atributo define una descripción de texto alternativo de la imagen | string |        |      |
+| fit               | establece cómo encaja la imagen en su contenedor para un avatar de imagen | string |    fill / contain / cover / none / scale-down    |   cover   |
 
-### Events
+### Eventos
 
-| Event Name | Description         | Parameters  |
+| Nombre | Descripción | Parámetros |
 | ------ | ------------------ | -------- |
-| error  | handler when img load error, return false to prevent default fallback behavior |(e: Event)  |
+| error  | cuando se produce un error de carga de img, devuelve false para evitar el comportamiento de repliegue predeterminado |(e: Event)  |
 
 ### Slot
 
-| Slot Name | Description | 
-| default  | customize avatar content |
+| Nombre | Descripción | 
+| default  | personalice el contenido del avatar |
+

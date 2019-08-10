@@ -1,6 +1,72 @@
 ## 更新日志
 
+### 2.11.1
+
+*2019-07-26*
+
+#### Bug 修复
+
+- Image
+  - 修复 Image 组件 SSR 兼容性 (#16737 by @luckyCao)
+- Chore
+  - 更新 dart-sass 的兼容性 (#16744 by @LewisChennnnn)
+
+### 2.11.0
+
+*2019-07-25*
+
+#### 新特性
+
+- Drawer
+  - 新增抽屉组件 (#16577 by @JeremyWuuuuu)
+
+#### Bug 修复
+
+- Checkbox
+  - 修复 CSS 样式问题 (#16006 by @Hazlank)
+- Tree
+  - 更新类型定义为泛类型 (#15934 by @JeremyWuuuuu)
+  - 修复设置节点 isCurrent 的为 false 的问题 (#15870 by @kkkisme)
+- Dropdown
+  - 更新 split-button 默认颜色 (#15931 by @JuniorTour)
+- Cascader
+  - 修复一级菜单更新问题 (#16399 by @luckyCao)
+  - 懒加载时设默认值 (#16420 by @luckyCao)
+  - 修复当节点值重复时的显示问题 (#15935 by @junyiz)
+  - 对外暴露 getCheckedNodes 和修复 options 改变会影响选中的问题 (#16709 by @SimonaliaChen)
+- Calendar
+  - 更新显示正确的 header 的逻辑 (#16354 by @ziyoung)
+- Submenu
+  - 修复 append-to-body 问题 (#16289 by @a631807682)
+- Table 
+  - 修复 tree table 数据更新问题 (#16481 by @island205)
+- Select
+  - 修复内存泄漏问题 (#16463 by @island205)
+- InfiniteScroll
+  - 更新命名和说明 (#16698 by @iamkun)
+- Avatar
+  - 修复图片不居中的问题 (#16489 by @luckyCao)
+- Dialog
+  - 增加 destroyOnClose 属性 (#16455 by @ziyoung)
+- Image
+  - 增加大图预览 (#16333 by @luckyCao)
+
+#### 优化
+
+- Docs
+  - 修复 dropdown 示例 (#16193 by @webxmsj)
+  - 修正笔误 (#15971 by @howiefh)
+- I18n
+  - 更新泰文翻译 (#16689 by @ponkrit)
+- Chore
+  - 更新基础 API 地址 (#16607 by @iamkun)
+  - 增加 Form 的主题 token (#16699 by @iamkun)
+  - 更新统计 (#16609 by @iamkun)
+  - 修复文档锚点问题 (#16692 by @iamkun)
+
 ### 2.10.1
+
+*2019-07-02*
 
 #### Bug 修复
 

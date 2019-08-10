@@ -85,5 +85,24 @@ describe('Calendar', () => {
     expect(firstRow.firstElementChild.innerText).to.be.equal('31');
     expect(firstRow.lastElementChild.innerText).to.be.equal('6');
   });
+
+  it('firstDayOfWeek in range mode', async() => {
+    vm = createVue({
+      template: `
+      <el-calendar v-model="value" :first-day-of-week="7" :range="['2019-02-03', '2019-03-23']"></el-calendar>
+      `,
+      data() {
+        return {
+          value: new Date('2019-03-04')
+        };
+      }
+    }, true);
+    const head = vm.$el.querySelector('.el-calendar-table thead');
+    expect(head.firstElementChild.innerText).to.be.equal('日');
+    expect(head.lastElementChild.innerText).to.be.equal('六');
+    const firstRow = vm.$el.querySelector('.el-calendar-table__row');
+    expect(firstRow.firstElementChild.innerText).to.be.equal('3');
+    expect(firstRow.lastElementChild.innerText).to.be.equal('9');
+  });
 });
 

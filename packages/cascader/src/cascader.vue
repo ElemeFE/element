@@ -307,12 +307,19 @@ export default {
       }
     },
     checkedValue(val) {
-      const { value } = this;
+      const { value, dropDownVisible } = this;
+      const { checkStrictly, multiple } = this.config;
+
       if (!isEqual(val, value) || isUndefined(value)) {
+        this.computePresentContent();
+        // hide dropdown when single mode
+        if (!multiple && !checkStrictly && dropDownVisible) {
+          this.toggleDropDownVisible(false);
+        }
+
         this.$emit('input', val);
         this.$emit('change', val);
         this.dispatch('ElFormItem', 'el.form.change', [val]);
-        this.computePresentContent();
       }
     },
     options: {
@@ -465,16 +472,13 @@ export default {
       });
     },
     computePresentContent() {
+      // nextTick is required, because checked nodes may not change right now
       this.$nextTick(() => {
-        const { multiple, checkStrictly } = this.config;
-        if (multiple) {
+        if (this.config.multiple) {
           this.computePresentTags();
           this.presentText = this.presentTags.length ? ' ' : null;
         } else {
           this.computePresentText();
-          if (!checkStrictly && this.dropDownVisible) {
-            this.toggleDropDownVisible(false);
-          }
         }
       });
     },
@@ -630,6 +634,10 @@ export default {
         this.updatePopper();
       }
     },
+
+    /**
+     * public methods
+    */
     getCheckedNodes(leafOnly) {
       return this.panel.getCheckedNodes(leafOnly);
     }

@@ -462,6 +462,7 @@ When picking a date range, you can assign the time part for start date and end d
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
+| cellClassName | set custom className | Function(Date) | — | — |
 | firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
 | onPick | a callback that triggers when the selected date is changed. Only for `daterange` and `datetimerange`. | Function({ maxDate, minDate }) | - | - |
 

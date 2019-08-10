@@ -102,7 +102,7 @@ export default {
             defaultConfig = res;
           })
           .catch(err => {
-            this.onError(err);
+            this.onError && this.onError(err);
           })
           .then(() => {
             setTimeout(() => {
