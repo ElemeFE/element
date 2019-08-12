@@ -96,6 +96,7 @@ class TableLayout {
 
     if (this.showHeader && !headerWrapper) return;
 
+    // fix issue (https://github.com/ElemeFE/element/pull/16956)
     const headerTrElm = headerWrapper.querySelector('.el-table__header tr');
     const noneHeader = this.headerDisplayNone(headerTrElm);
 
