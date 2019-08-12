@@ -210,9 +210,11 @@
         }
       },
       clickHandler() {
+        document.body.style.overflow = 'hidden';
         this.showViewer = true;
       },
       closeViewer() {
+        document.body.style.overflow = 'auto';
         this.showViewer = false;
       }
     }
