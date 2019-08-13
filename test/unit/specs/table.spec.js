@@ -193,7 +193,6 @@ describe('Table', () => {
       setTimeout(_ => {
         let child1 = vm.$el.querySelector('.el-table__body tr:nth-child(1)');
         let child2 = vm.$el.querySelector('.el-table__body tr:nth-child(2)');
-        
         expect(child1.style.height).to.equal('');
         expect(child1.style.display).to.equal('');
         expect(child2.style.height).to.equal('60px');
