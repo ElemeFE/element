@@ -7,7 +7,7 @@ Input is a controlled component, it **always shows Vue binding value**.
 
 Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
 
-Do not support `v-model` modifiers.
+Do not support `.lazy` modifiers.
 :::
 
 
