@@ -7,7 +7,7 @@ Input est un composant contrôlé, il **affiche toujours la valeur liée de Vue*
 
 En règle générale, l'évènement `input` devrait être géré. Son handler devrait mettre à jour la valeur du composant (ou utilisez `v-model`). Dans le cas contraire, la valeur du champ ne sera pas modifiée.
 
-Les modificateurs de `v-model` ne sont pas supportés.
+Les modificateurs de `.lazy` ne sont pas supportés.
 :::
 
 ### Usage
