@@ -7,7 +7,7 @@ Input es un componente controlado, **siempre muestra el valor de enlace Vue**.
 
 Bajo circunstancias normales, el evento "input" debe ser manejado. Su handler debe actualizar el valor de enlace del componente (o usar `v-model`). De lo contrario, el valor del cuadro de entrada no cambiará.
 
-No admite modificadores `v-model`.
+No admite modificadores `.lazy`.
 :::
 
 ### Uso básico
