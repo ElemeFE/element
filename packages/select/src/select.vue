@@ -445,10 +445,10 @@
     methods: {
       hoverSelected(e, idx) {
         const value = this.value[idx] || null;
-        !this.sorting && this.$emit('hover-selected', e, value);
+        this.$emit('hover-selected', e, value);
       },
       hoverSelectedLeave() {
-        !this.sorting && this.$emit('hover-selected', null, null);
+        this.$emit('hover-selected', null, null);
       },
       handleComposition(event) {
         const text = event.target.value;
