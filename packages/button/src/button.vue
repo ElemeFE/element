@@ -18,8 +18,8 @@
     ]"
   >
     <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
-    <span v-if="$slots.default"><slot></slot></span>
+    <i :class="icon" v-if="icon && !loading" @click.stop="handleChildClick"></i>
+    <span v-if="$slots.default" @click.stop="handleChildClick"><slot></slot></span>
   </button>
 </template>
 <script>
@@ -72,6 +72,11 @@
     methods: {
       handleClick(evt) {
         this.$emit('click', evt);
+      },
+      handleChildClick(evt) {
+        if (!this.buttonDisabled && !this.loading) {
+          this.handleClick(evt);
+        }
       }
     }
   };

@@ -111,6 +111,28 @@ describe('Button', () => {
     }, 20);
   });
 
+  it('click inside with disabled', done => {
+    let triggered = false;
+    vm = createVue({
+      template: `
+        <div @click="handleClick">
+          <el-button ref="button" @click="handleClick" disabled ><span ref="child"></span></el-button>
+        </div>
+      `,
+      methods: {
+        handleClick() {
+          triggered = true;
+        }
+      }
+    }, true);
+
+    vm.$refs.child.click();
+    setTimeout(_ => {
+      expect(triggered).to.be.false;
+      done();
+    }, 20);
+  });
+
   it('loading implies disabled', done => {
     let result;
     vm = createVue({
