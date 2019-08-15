@@ -387,7 +387,6 @@
         this.calcIconOffset('suffix');
       },
       clear() {
-        this.blur();
         this.$emit('input', '');
         this.$emit('change', '');
         this.$emit('clear');
