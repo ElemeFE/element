@@ -61,6 +61,7 @@
           </template>
           <i v-if="showClear"
             class="el-input__icon el-icon-circle-close el-input__clear"
+            @mousedown.prevent
             @click="clear"
           ></i>
           <i v-if="showPwdVisible"
