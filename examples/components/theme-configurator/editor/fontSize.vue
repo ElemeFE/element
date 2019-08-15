@@ -1,7 +1,7 @@
 <template>
   <section class="config" :key="displayName">
     <div class="config-label">
-      <el-tooltip :content="displayName">
+      <el-tooltip :content="displayName" placement="top">
         <span>{{displayKeyName}}</span>
       </el-tooltip>
     </div>

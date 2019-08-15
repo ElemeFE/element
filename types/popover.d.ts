@@ -58,8 +58,11 @@ export declare class ElPopover extends ElementUIComponent {
   /** Custom class name for popover */
   popperClass: string
 
-  /** Delay of appearance when trigger is hover, in milliseconds */
+  /** Delay before appearing when trigger is hover, in milliseconds */
   openDelay: number
+
+  /** Delay before disappearing when trigger is hover, in milliseconds */
+  closeDelay: number
 
   /** Popover tabindex */
   tabindex: number
