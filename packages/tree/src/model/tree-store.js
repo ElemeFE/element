@@ -228,7 +228,7 @@ export default class TreeStore {
     const allNodes = this._getAllNodes().sort((a, b) => b.level - a.level);
     const cache = Object.create(null);
     const keys = Object.keys(checkedKeys);
-    allNodes.forEach(node => node.setChecked(false, false));
+    allNodes.forEach(node => node.setChecked(false, false, true));
     for (let i = 0, j = allNodes.length; i < j; i++) {
       const node = allNodes[i];
       const nodeKey = node.data[key].toString();
