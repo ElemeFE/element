@@ -69,14 +69,14 @@
       <td class="line">举例</td>
     </tr>
     <tr>
-      <td class="text">实线</td>
+      <td class="text">实线</td>
       <td class="text">1px</td>
       <td class="line">
         <div></div>
       </td>
     </tr>
     <tr>
-      <td class="text">虚线</td>
+      <td class="text">虚线</td>
       <td class="text">2px</td>
       <td class="line">
         <div class="dashed"></div>
