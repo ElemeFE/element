@@ -93,6 +93,10 @@
         type: Boolean,
         default: true
       },
+      expandAfterFilter: {
+        type: Boolean,
+        default: true
+      },
       defaultCheckedKeys: Array,
       defaultExpandedKeys: Array,
       currentNodeKey: [String, Number],
@@ -334,6 +338,7 @@
         defaultCheckedKeys: this.defaultCheckedKeys,
         defaultExpandedKeys: this.defaultExpandedKeys,
         autoExpandParent: this.autoExpandParent,
+        expandAfterFilter: this.expandAfterFilter,
         defaultExpandAll: this.defaultExpandAll,
         filterNodeMethod: this.filterNodeMethod
       });

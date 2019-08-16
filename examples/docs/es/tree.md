@@ -804,6 +804,7 @@ Puede arrastrar y soltar nodos de Tree añadiendo un atributo `draggable` .
 | default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
 | current-node-key      | la clave del nodo inicialmente seleccionado | string, number                       | —               | —       |
 | filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
+| expand-after-filter    | expandir nodo después del filtro | boolean    | —     | true
 | accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
 | indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
 | icon-class            | Icono del nodo del árbol de cliente                                                | string                            | -                 | -           |

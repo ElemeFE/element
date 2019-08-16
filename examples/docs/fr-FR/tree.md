@@ -808,6 +808,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 | default-checked-keys  | Tableau des clés des noeuds initialement sélectionnés. | array                       | —               | —       |
 | current-node-key      | Clé du noeud initialement sélectionné. | string, number                       | —               | —       |
 | filter-node-method    | Fonction exécutée sur chaque noeud pour le filtrage. Si elle retourne `false`, les noeuds seront cachés. | Function(value, data, node) | —               | —       |
+| expand-after-filter    | développer le noeud après le filtre | boolean    | —     | true
 | accordion             | Si les noeuds fonctionnent en mode accordéon. | boolean                     | —               | false   |
 | indent                | Indentation horizontale des noeuds en px. | number                     | —    | 16 |
 | icon-class            | Icône pour chaque noeud.                                       | string                     | -    | -  |

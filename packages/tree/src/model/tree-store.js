@@ -32,6 +32,7 @@ export default class TreeStore {
 
   filter(value) {
     const filterNodeMethod = this.filterNodeMethod;
+    const expandAfterFilter = this.expandAfterFilter;
     const lazy = this.lazy;
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
@@ -53,8 +54,7 @@ export default class TreeStore {
         }
       }
       if (!value) return;
-
-      if (node.visible && !node.isLeaf && !lazy) node.expand();
+      if (node.visible && !node.isLeaf && !lazy && expandAfterFilter) node.expand();
     };
 
     traverse(this);
