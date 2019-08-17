@@ -35,12 +35,20 @@ const Notification = function(options) {
   instance.dom = instance.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
-  let verticalOffset = options.offset || 0;
-  instances.filter(item => item.position === position).forEach(item => {
-    verticalOffset += item.$el.offsetHeight + 16;
-  });
-  verticalOffset += 16;
-  instance.verticalOffset = verticalOffset;
+  instance.hasSetVertical = false;
+  const RAFCallback = function(instance) {
+    return function() {
+      let verticalOffset = options.offset || 0;
+      instances.filter(item => item.position === position && item.hasSetVertical).forEach(item => {
+        verticalOffset += item.$el.offsetHeight + 16;
+      });
+      verticalOffset += 16;
+      instance.hasSetVertical = true;
+      instance.verticalOffset = verticalOffset;
+    };
+  };
+  window.requestAnimationFrame(RAFCallback(instance));
+
   instances.push(instance);
   return instance;
 };
