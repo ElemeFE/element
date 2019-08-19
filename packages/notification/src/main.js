@@ -35,9 +35,15 @@ const Notification = function(options) {
   instance.dom = instance.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
+  instance.dom.style.display = 'block';
+  instance.offsetHeight = instance.dom.offsetHeight;
+  instance.dom.style.display = 'none';
+  /*eslint-disable no-unused-vars*/
+  const rf = instance.dom.offsetHeight;
+
   let verticalOffset = options.offset || 0;
   instances.filter(item => item.position === position).forEach(item => {
-    verticalOffset += item.$el.offsetHeight + 16;
+    verticalOffset += item.offsetHeight + 16;
   });
   verticalOffset += 16;
   instance.verticalOffset = verticalOffset;
