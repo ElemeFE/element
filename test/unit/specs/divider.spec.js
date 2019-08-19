@@ -25,4 +25,13 @@ describe('Divider', () => {
 
     expect(vm.$el.className).to.include('el-divider--vertical');
   });
+
+  it('apply class to divider', () => {
+    vm = createVue({
+      template: `
+        <el-divider direction="vertical" class="my-divider">我是一条完美分割线！</el-divider>
+      `
+    });
+    expect(vm.$el.className).to.include('my-divider');
+  });
 });
