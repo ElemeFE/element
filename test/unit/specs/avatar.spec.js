@@ -1,5 +1,6 @@
-import {createTest, createVue, destroyVM} from '../util';
+import { createTest, createVue, destroyVM, wait } from '../util';
 import Avatar from 'packages/avatar';
+import { IMAGE_SUCCESS, IMAGE_FAIL } from '../mocks/uri';
 
 describe('Avatar', () => {
   let vm;
@@ -63,18 +64,18 @@ describe('Avatar', () => {
   it('image avatar', () => {
     vm = createVue({
       template: `
-        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <el-avatar src="${IMAGE_SUCCESS}"></el-avatar>
       `
     }, true);
     const imgElm = vm.$el.children[0];
     expect(imgElm.tagName.toUpperCase()).to.equal('IMG');
-    expect(imgElm.src).to.equal('https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png');
+    expect(imgElm.src).to.equal(IMAGE_SUCCESS);
   });
 
-  it('image fallback', (done) => {
+  it('image fallback', async() => {
     vm = createVue({
       template: `
-        <el-avatar src="https://empty" @error="errorHandler">
+        <el-avatar src="${IMAGE_FAIL}" @error="errorHandler">
           fallback
         </el-avatar>
       `,
@@ -84,14 +85,12 @@ describe('Avatar', () => {
         }
       }
     }, true);
-    setTimeout(() => {
-      const avatarElm = vm.$el;
-      expect(avatarElm.textContent.trim()).to.equal('fallback');
-      done();
-    }, 3000);
+    await wait();
+    const avatarElm = vm.$el;
+    expect(avatarElm.textContent.trim()).to.equal('fallback');
   });
 
-  it('image fit', (done) => {
+  it('image fit', async() => {
     vm = createVue({
       template: `
         <div>
@@ -103,21 +102,18 @@ describe('Avatar', () => {
       data() {
         return {
           fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-          url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+          url: IMAGE_SUCCESS
         };
       }
     }, true);
-    setTimeout(() => {
-      const containerElm = vm.$el;
-      expect(containerElm.children[0].children[0].style.objectFit).to.equal('cover');
-      expect(containerElm.children[1].children[0].style.objectFit).to.equal('fill');
-      expect(containerElm.children[2].children[0].style.objectFit).to.equal('contain');
-      expect(containerElm.children[3].children[0].style.objectFit).to.equal('cover');
-      expect(containerElm.children[4].children[0].style.objectFit).to.equal('none');
-      expect(containerElm.children[5].children[0].style.objectFit).to.equal('scale-down');
-
-      done();
-    }, 3000);
+    await wait();
+    const containerElm = vm.$el;
+    expect(containerElm.children[0].children[0].style.objectFit).to.equal('cover');
+    expect(containerElm.children[1].children[0].style.objectFit).to.equal('fill');
+    expect(containerElm.children[2].children[0].style.objectFit).to.equal('contain');
+    expect(containerElm.children[3].children[0].style.objectFit).to.equal('cover');
+    expect(containerElm.children[4].children[0].style.objectFit).to.equal('none');
+    expect(containerElm.children[5].children[0].style.objectFit).to.equal('scale-down');
   });
 });
 

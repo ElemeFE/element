@@ -50,6 +50,7 @@ const options = [{
 const getMenus = el => el.querySelectorAll('.el-cascader-menu');
 const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node');
 const selectedValue = ['zhejiang', 'hangzhou', 'xihu'];
+const getCloseButton = el => el.querySelectorAll('i.el-tag__close');
 
 describe('Cascader', () => {
   let vm;
@@ -242,12 +243,14 @@ describe('Cascader', () => {
         <el-cascader
           v-model="value"
           :options="options"
+          :disabled="disabled"
           :props="props"></el-cascader>
       `,
       data() {
         return {
           value: [],
           options,
+          disabled: false,
           props: {
             multiple: true
           }
@@ -258,6 +261,7 @@ describe('Cascader', () => {
     getOptions(document.body, 0)[0].querySelector('.el-checkbox input').click();
     await waitImmediate();
     expect(vm.value.length).to.equal(3);
+    expect(getCloseButton(vm.$el).length).to.equal(3);
 
     const tags = vm.$el.querySelectorAll('.el-tag');
     const closeBtn = tags[0].querySelector('.el-tag__close');
@@ -267,6 +271,10 @@ describe('Cascader', () => {
     await waitImmediate();
     expect(vm.value.length).to.equal(2);
     expect(vm.$el.querySelectorAll('.el-tag').length).to.equal(2);
+
+    vm.disabled = true;
+    await waitImmediate();
+    expect(getCloseButton(vm.$el).length).to.equal(0);
   });
 
   it('clearable in multiple mode', async() => {

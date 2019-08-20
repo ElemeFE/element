@@ -88,6 +88,23 @@ const options2 = [{
   }]
 }];
 
+const options3 = [
+  {
+    value: 'shanghai',
+    label: '上海',
+    children: [
+      {
+        value: 'baoshan',
+        label: '宝山'
+      }
+    ]
+  },
+  {
+    value: 'beijing',
+    label: '北京'
+  }
+];
+
 const getMenus = el => el.querySelectorAll('.el-cascader-menu');
 const getOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node');
 const getValidOptions = (el, menuIndex) => getMenus(el)[menuIndex].querySelectorAll('.el-cascader-node[tabindex="-1"]');
@@ -531,6 +548,34 @@ describe('CascaderPanel', () => {
     getOptions(el, 2)[0].click();
     await waitImmediate();
     expect(vm.value.length).to.equal(3);
+  });
+
+  it('click leaf hidden children', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader-panel
+          ref="panel"
+          v-model="value"
+          :options="options"></el-cascader-panel>
+      `,
+      data() {
+        return {
+          value: [],
+          options: options3
+        };
+      }
+    }, true);
+
+    const el = vm.$el;
+    const elOptions = getOptions(el, 0);
+    const firstOption = elOptions[0];
+    const twoOption = elOptions[1];
+    firstOption.click();
+    await waitImmediate();
+    expect(getMenus(el).length).to.equal(2);
+    twoOption.click();
+    await waitImmediate();
+    expect(getMenus(el).length).to.equal(1);
   });
 });
 

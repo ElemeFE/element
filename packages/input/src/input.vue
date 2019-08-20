@@ -31,6 +31,7 @@
         :autocomplete="autoComplete || autocomplete"
         ref="input"
         @compositionstart="handleCompositionStart"
+        @compositionupdate="handleCompositionUpdate"
         @compositionend="handleCompositionEnd"
         @input="handleInput"
         @focus="handleFocus"
@@ -60,6 +61,7 @@
           </template>
           <i v-if="showClear"
             class="el-input__icon el-icon-circle-close el-input__clear"
+            @mousedown.prevent
             @click="clear"
           ></i>
           <i v-if="showPwdVisible"
@@ -87,6 +89,7 @@
       :tabindex="tabindex"
       class="el-textarea__inner"
       @compositionstart="handleCompositionStart"
+      @compositionupdate="handleCompositionUpdate"
       @compositionend="handleCompositionEnd"
       @input="handleInput"
       ref="textarea"
@@ -109,6 +112,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
+  import {isKorean} from 'element-ui/src/utils/shared';
 
   export default {
     name: 'ElInput',
@@ -336,9 +340,16 @@
       handleCompositionStart() {
         this.isComposing = true;
       },
+      handleCompositionUpdate(event) {
+        const text = event.target.value;
+        const lastCharacter = text[text.length - 1] || '';
+        this.isComposing = !isKorean(lastCharacter);
+      },
       handleCompositionEnd(event) {
-        this.isComposing = false;
-        this.handleInput(event);
+        if (this.isComposing) {
+          this.isComposing = false;
+          this.handleInput(event);
+        }
       },
       handleInput(event) {
         // should not emit input during composition

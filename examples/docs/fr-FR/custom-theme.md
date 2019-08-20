@@ -1,10 +1,12 @@
 ## Thème
 Element utilise le style BEM pour le CSS afin que vous puissiez écraser les règles prédéfinies facilement. Mais si vous avez besoin de remplacer des styles à une plus grande échelle , e.g. changer le thème de bleu à orange ou vert, les modifier une par une serait fastidieux. Nous fournissons ttrtois méthodes pour changer les variables de style.
 
-### Online Theme Roller
+### Theme Roller
 Utilisez [Online Theme Roller](./#/fr-FR/theme) pour personnaliser les Design Tokens des variables globales et des composants, et prévisualisez le nouveau thème en temps réel. Il peut générer un package de style complet basé sur le nouveau thème que vous pouvez télécharger directement (pour importer de nouveaux fichiers de style dans votre projet, veuillez vous reporter à la partie 'Importer un thème personnalisé'' de cette section).
 
-<img src="https://shadow.elemecdn.com/app/sns-client/element-theme-editor2.e16c6a01-806d-11e9-bc23-21435c54c509.png" style="width: 70%;margin: 30px auto 0;display: block;">
+Also, use [Theme Roller Chrome Extension](https://chrome.google.com/webstore/detail/element-theme-roller/lifkjlojflekabbmlddfccdkphlelmim)，to customize theme and preview in real-time on any website developed by Element.
+
+<img src="https://shadow.elemecdn.com/app/sns-client/element-theme-editor2.e16c6a01-806d-11e9-bc23-21435c54c509.png" style="width: 100%;margin: 30px auto 0;display: block;">
 
 ### Changer la couleur du thème
 Si vous avez juste besoin de changer la couleur du thème, le [générateur de thème en ligne](https://elementui.github.io/theme-chalk-preview/#/en-US) est recommandé. La couleur du thème d'Element est un bleu clair et agréable. En le changeant, vous rendez Element visuellement plus adapté à vos projets.
