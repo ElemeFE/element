@@ -35,7 +35,7 @@ const Notification = function(options) {
   instance.dom = instance.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
-  instance.dom.style.display = 'block';
+  instance.dom.style.display = 'flex';
   instance.offsetHeight = instance.dom.offsetHeight;
   instance.dom.style.display = 'none';
   /*eslint-disable no-unused-vars*/
