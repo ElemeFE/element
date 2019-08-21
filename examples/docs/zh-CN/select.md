@@ -414,7 +414,7 @@
       v-for="item in options"
       :key="item.value"
       :label="item.label"
-      :value="item.value">
+      :value="item">
     </el-option>
   </el-select>
 </template>
@@ -424,7 +424,10 @@
     data() {
       return {
         options: [],
-        value: [],
+        value: [{
+          label: "Arkansas",
+          value: "Arkansas"
+        }],
         list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona",
@@ -526,6 +529,7 @@
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
+| label-key | 作为 value 显示的label属性名，绑定值为对象类型并且开启远程搜索remote时必填 | string | — | label |
 | size | 输入框尺寸 | string | medium/small/mini | — |
 | clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
