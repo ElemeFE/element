@@ -233,7 +233,7 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 | destroy-on-close | 控制是否在关闭 Drawer 之后将子元素全部销毁 | boolean | - | false |
 | modal     | 是否需要遮罩层   | boolean   | — | true |
 | modal-append-to-body     | 遮罩层是否插入至 body 元素上，若为 false，则遮罩层会插入至 Drawer 的父元素上   | boolean   | — | true |
-| direction | Drawer 打开的方向 | Direction | rtl / ltr / ttb / tbb | rtl |
+| direction | Drawer 打开的方向 | Direction | rtl / ltr / ttb / btt | rtl |
 | show-close | 是否显示关闭按钮 | boolean    | — | true |
 | size | Drawer 窗体的大小, 当使用 `number` 类型时, 以像素为单位, 当使用 `string` 类型时, 请传入 'x%', 否则便会以 `number` 类型解释 | number / string | - | '30%' |
 | title     | Drawer 的标题，也可通过具名 slot （见下表）传入 | string    | — | — |

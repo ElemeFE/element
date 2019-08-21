@@ -43,7 +43,7 @@ npm run dev
 # open http://localhost:8085
 ```
 
-> **Remarque** : modifiez le fichier `examples/play/index.vue`, utilisez le composant auquel vous contribuez, puis lancez `npm run dev:play`, allez sur http://localhost:8085, regardez le résultat rapidement et facilement.
+> **Remarque** : modifiez le fichier `examples/play/index.vue`, utilisez le composant auquel vous contribuez, puis lancez `npm run dev:play`, allez sur [http://localhost:8085](http://localhost:8085), regardez le résultat rapidement et facilement.
 
 Pour le build:
 

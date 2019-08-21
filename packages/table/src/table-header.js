@@ -298,6 +298,7 @@ export default {
       event.stopPropagation();
       const target = event.target;
       let cell = target.tagName === 'TH' ? target : target.parentNode;
+      if (hasClass(cell, 'noclick')) return;
       cell = cell.querySelector('.el-table__column-filter-trigger') || cell;
       const table = this.$parent;
 

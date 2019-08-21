@@ -1,12 +1,12 @@
 ## Drawer
 
-Sometimes, `Dialog` does not always satisfy our requirements, let's say you have a massive form, or you need space to display something like `terms & conditions`, `Drawer` has almost identical API with `Dialog`, but it introduces different user experience.
+A veces, `Dialog` no siempre satisface nuestros requisitos, digamos que tiene un formulario masivo, o necesita espacio para mostrar algo como `terminos & condiciones`, `Drawer` tiene una API casi idéntica a `Dialog`, pero introduce una experiencia de usuario diferente.
 
-### Basic Usage
+### Uso básico
 
-Callout a temporary drawer, from multiple direction
+Llamada de un drawer temporal, desde varias direcciones
 
-:::demo You must set `visible` for `Drawer` like `Dialog` does to control the visibility of `Drawer` itself, it's `boolean` type. `Drawer` has to parts: `title` & `body`, the `title` is a named slot, you can also set the title through attribute named `title`, default to an empty string, the `body` part is the main area of `Drawer`, which contains user defined content. When opening, `Drawer` expand itself from the **right corner to left** which size is **30%** of the browser window by default. You can change that default behavior by setting `direction` and `size` attribute. This show case also demonstrated how to use the `before-close` API, check the Attribute section for more detail
+:::demo Debe establecer `visible` para `Drawer` como lo hace `Dialog` para controlar la visibilidad. `visible` es del tipo `boolean`. `Drawer` tiene partes: `title` & `body`, el `title` es un slot con nombre, también puede establecer el título a través de un atributo llamado `title`, por defecto a una cadena vacía, la parte `body` es el área principal de `Drawer`, que contiene contenido definido por el usuario. Al abrir, `Drawer` se expande desde la **esquina derecha a la izquierda** cuyo tamaño es **30%** de la ventana del navegador por defecto. Puede cambiar ese comportamiento predeterminado estableciendo los atributos `direction` y `size`. Este caso de demostración también muestra cómo utilizar la API `before-close`, consulte la sección Atributos para obtener más detalles.
 
 ```html
 <el-radio-group v-model="direction">
@@ -50,9 +50,9 @@ Callout a temporary drawer, from multiple direction
 ```
 :::
 
-### Customization Content
+### Personalizar el  contenido
 
-Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
+Al igual que `Dialog`, `Drawer` puede hacer muchas interacciones diversas.
 
 :::demo
 
@@ -153,10 +153,10 @@ export default {
 ```
 :::
 
-### Nested Drawer
+### Drawer anidados
 
-You can also have multiple layer of `Drawer` just like `Dialog`.
-:::demo If you need multiple Drawer in different layer, you must set the `append-to-body` attribute to **true**
+También puede tener varias capas de `Drawer` al igual que con `Dialog`.
+:::demo Si necesita varios drawer en diferentes capas, debe establecer el atributo `append-to-body` en **true**
 
 ```html
 
@@ -205,58 +205,58 @@ You can also have multiple layer of `Drawer` just like `Dialog`.
 
 :::tip
 
-The content inside Drawer should be lazy rendered, which means that the content inside Drawer will not impact the initial render performance, therefore any DOM operation should be performed through `ref` or after `open` event emitted.
+El contenido dentro del Drawer debe ser renderizado de forma perezosa, lo que significa que el contenido dentro del Drawer no afectará al rendimiento inicial del renderizado, por lo que cualquier operación DOM debe realizarse a través de `ref' o después de que se emita el evento `open'.
 
 :::
 
 :::tip
 
-Drawer provides an API called `destroyOnClose`, which is a flag variable that indicates should destroy the children content inside Drawer after Drawer was closed. You can use this API when you need your `mounted` life cycle to be called every time the Drawer opens.
+El Drawer proporciona una API llamada "destroyOnClose", que es una variable de bandera que indica que debe destruir el contenido hijo dentro del Drawer después de que se haya cerrado. Puede utilizar esta API cuando necesite que su ciclo de vida "mounted" sea llamado cada vez que se abra el Cajón.
 
 :::
 
 :::tip
 
-If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
+Si la variable `visible` se gestiona en el almacén de Vuex, el `.sync` no puede funcionar correctamente. En este caso, elimine el modificador `.sync`, escuche los eventos `open` y `close` de Drawer, y envíe mutaciones Vuex para actualizar el valor de esa variable en los manejadores de eventos.
 
 :::
 
-### Drawer Attributes
+### Atributos de Drawer
 
-| Parameter| Description | Type      | Acceptable Values                           | Defaults  |
+| Parámetros | Descripción | Tipo   | Valores aceptados           | Por defecto |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| append-to-body | Controls should Drawer be inserted to DocumentBody Element, nested Drawer must assign this param to **true**| boolean   | — | false |
-| before-close | If set, closing procedure will be halted | function(done), done is function type that accepts a boolean as parameter, calling done with true or without parameter will abort the close procedure | — | — |
-| close-on-press-escape | Indicates whether Drawer can be closed by pressing ESC | boolean | — | true |
-| custom-class | Extra class names for Drawer | string | — | — |
-| destroy-on-close | Indicates whether children should be destroyed after Drawer closed | boolean | - | false |
-| modal | Should show shadowing layer | boolean | — | true |
-| modal-append-to-body | Indicates should shadowing layer be insert into DocumentBody element | boolean   | — | true |
-| direction | Drawer's opening direction | Direction | rtl / ltr / ttb / tbb | rtl |
-| show-close | Should show close button at the top right of Drawer | boolean | — | true |
-| size | Drawer's size, if Drawer is horizontal mode, it effects the width property, otherwise it effects the height property, when size is `number` type, it describes the size by unit of pixels; when size is `string` type, it should be used with `x%` notation, other wise it will be interpreted to pixel unit | number / string | - | '30%' |
-| title | Drawer's title, can also be set by named slot, detailed descriptions can be found in the slot form | string | — | — |
-| visible | Should Drawer be displayed, also support the `.sync` notation | boolean | — | false |
-| wrapperClosable | Indicates whether user can close Drawer by clicking the shadowing layer. | boolean | - | true |
+| append-to-body | Los controles deberían insertar Drawer en el elemento DocumentBody, los Drawer anidados deben asignar este parámetro a **true** | boolean   | — | false |
+| before-close | Si está configurado, el procedimiento de cierre se detendrá. | function(done), done es un tipo de función que acepta un booleano como parámetro, una llamada hecha con true o sin parámetro abortará el procedimiento de cierre. | — | — |
+| close-on-press-escape | Indica si el Drawer puede cerrarse pulsando ESC | boolean | — | true |
+| custom-class | Nombre extra de clase para  Drawer | string | — | — |
+| destroy-on-close | Indica si los children deben ser destruidos después de cerrar el Drawer. | boolean | - | false |
+| modal | Mostrará una capa de sombra | boolean | — | true |
+| modal-append-to-body | Indica si se debe insertar una capa de sombreado en el elemento DocumentBody | boolean   | — | true |
+| direction | Dirección de apertura del Drawer | Direction | rtl / ltr / ttb / tbb | rtl |
+| show-close | Se mostrará el botón de cerrar en la parte superior derecha del Drawer | boolean | — | true |
+| size | Tamaño del Drawer. Si el Drawer está en modo horizontal, afecta a la propiedad width, de lo contrario afecta a la propiedad height, cuando el tamaño es tipo `number`, describe el tamaño por unidad de píxeles; cuando el tamaño es tipo `string`, se debe usar con notación `x%`, de lo contrario se interpretará como unidad de píxeles. | number / string | - | '30%' |
+| title | El título del Drawer, también se puede establecer por slot con nombre, las descripciones detalladas se pueden encontrar en el formulario de slot. | string | — | — |
+| visible | Si se muestra el Drawer, también soporta la notación `.sync` | boolean | — | false |
+| wrapperClosable | Indica si el usuario puede cerrar el Drawer haciendo clic en la capa de sombreado. | boolean | - | true |
 
-### Drawer Slot
+### Drawer Slot's
 
-| Name | Description |
+| Nombre | Descripción |
 |------|--------|
-| — | Drawer's Content |
-| title | Drawer Title Section |
+| — | El contenido del Drawer |
+| title | El titulo de la sección del Drawer |
 
-### Drawer Methods
+### Métodos Drawer
 
-| Name | Description |
+| Nombre | Descripción |
 | ---- | ---  |
-| closeDrawer | In order to close Drawer, this method will call `before-close`. |
+| closeDrawer | Para cerrar el Drawer, este método llamará `before-close`. |
 
-### Drawer Events
+### Eventos Drawer
 
-| Event Name | Description | Parameter |
+| Nombre | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| open  | Triggered before Drawer opening animation begins  | — |
-| opened  | Triggered after Drawer opening animation ended | — |
-| close  | Triggered before Drawer closing animation begins | — |
-| closed | Triggered after Drawer closing animation ended | — |
+| open  | Se activa antes de que comience la animación de apertura del Drawer. | — |
+| opened  | Se activa cuando finaliza la animación de apertura del Drawer. | — |
+| close  | Se activa antes de que comience la animación de cierre del Drawer. | — |
+| closed | Se activa después de que finaliza la animación de cierre del Drawer. | — |

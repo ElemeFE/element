@@ -41,7 +41,7 @@ npm run dev
 # open http://localhost:8085
 ```
 
-> **提示**：可以运行 `npm run dev:play`，修改 `examples/play/index.vue` 文件，调用你修改后的组件，仍然访问 http://localhost:8085，查看修改效果，更快更方便。
+> **提示**：可以运行 `npm run dev:play`，修改 `examples/play/index.vue` 文件，调用你修改后的组件，仍然访问 [http://localhost:8085](http://localhost:8085)，查看修改效果，更快更方便。
 
 打包代码：
 

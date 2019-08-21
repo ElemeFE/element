@@ -85,19 +85,30 @@
         const activeTab = this.$el.querySelector('.is-active');
         if (!activeTab) return;
         const navScroll = this.$refs.navScroll;
+        const isHorizontal = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const maxOffset = nav.offsetWidth - navScrollBounding.width;
+        const maxOffset = isHorizontal
+          ? nav.offsetWidth - navScrollBounding.width
+          : nav.offsetHeight - navScrollBounding.height;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
-        if (activeTabBounding.left < navScrollBounding.left) {
-          newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
+        if (isHorizontal) {
+          if (activeTabBounding.left < navScrollBounding.left) {
+            newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
+          }
+          if (activeTabBounding.right > navScrollBounding.right) {
+            newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
+          }
+        } else {
+          if (activeTabBounding.top < navScrollBounding.top) {
+            newOffset = currentOffset - (navScrollBounding.top - activeTabBounding.top);
+          }
+          if (activeTabBounding.bottom > navScrollBounding.bottom) {
+            newOffset = currentOffset + (activeTabBounding.bottom - navScrollBounding.bottom);
+          }
         }
-        if (activeTabBounding.right > navScrollBounding.right) {
-          newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
-        }
-
         newOffset = Math.max(newOffset, 0);
         this.navOffset = Math.min(newOffset, maxOffset);
       },
