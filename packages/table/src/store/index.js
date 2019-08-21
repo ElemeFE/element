@@ -68,13 +68,13 @@ Watcher.prototype.mutations = {
   },
 
   sort(states, options) {
-    const { prop, order } = options;
+    const { prop, order, init } = options;
     if (prop) {
       const column = arrayFind(states.columns, column => column.property === prop);
       if (column) {
         column.order = order;
         this.updateSort(column, prop, order);
-        this.commit('changeSortCondition');
+        this.commit('changeSortCondition', { init });
       }
     }
   },
@@ -89,7 +89,7 @@ Watcher.prototype.mutations = {
     const ingore = { filter: true };
     this.execQuery(ingore);
 
-    if (!options || !options.silent) {
+    if (!options || !(options.silent || options.init)) {
       this.table.$emit('sort-change', {
         column,
         prop,
