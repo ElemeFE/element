@@ -94,7 +94,6 @@ import merge from 'element-ui/src/utils/merge';
 
 const NewPopper = {
   props: {
-    appendToBody: Popper.props.appendToBody,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     arrowOffset: Popper.props.arrowOffset
@@ -386,6 +385,10 @@ export default {
     pickerOptions: {},
     unlinkPanels: Boolean,
     validateEvent: {
+      type: Boolean,
+      default: true
+    },
+    appendToBody: {
       type: Boolean,
       default: true
     }
