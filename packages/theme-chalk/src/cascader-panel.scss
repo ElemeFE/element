@@ -13,6 +13,77 @@
     border: $--cascader-menu-border;
     border-radius: $--cascader-menu-radius;
   }
+  @include m(medium) {
+    @include b(cascader-menu) {
+      min-width: 170px;
+    }
+    @include b(cascader-node) {
+      padding: 0 26px 0 16px;
+      height: 28px;
+      line-height: 28px;
+      font-size: 14px;
+ 
+      @include e(prefix) {
+        left: 10px;
+      }
+    
+      @include e(postfix) {
+        right: 10px;
+      }
+    
+      @include e(label) {
+        padding: 0 10px;
+      }
+    }
+  }
+
+  @include m(small) {
+    @include b(cascader-menu) {
+      min-width: 160px;
+    }
+    @include b(cascader-node) {
+      padding: 0 24px 0 14px;
+      height: 26px;
+      line-height: 26px;
+      font-size: 13px;
+ 
+      @include e(prefix) {
+        left: 8px;
+      }
+    
+      @include e(postfix) {
+        right: 8px;
+      }
+    
+      @include e(label) {
+        padding: 0 8px;
+      }
+    }
+  }
+
+  @include m(mini) {
+    @include b(cascader-menu) {
+      min-width: 140px;
+    }
+    @include b(cascader-node) {
+      padding: 0 20px 0 10px;
+      height: 24px;
+      line-height: 24px;
+      font-size: 12px;
+ 
+      @include e(prefix) {
+        left: 6px;
+      }
+    
+      @include e(postfix) {
+        right: 6px;
+      }
+    
+      @include e(label) {
+        padding: 0 6px;
+      }
+    }
+  }
 }
 
 @include b(cascader-menu) {

@@ -2,7 +2,8 @@
   <div
     :class="[
       'el-cascader-panel',
-      border && 'is-bordered'
+      border && 'is-bordered',
+      { [`el-cascader-panel--${_computedSize}`] : !!_computedSize }
     ]"
     @keydown="handleKeyDown">
     <cascader-menu
@@ -88,6 +89,7 @@ export default {
 
   props: {
     value: {},
+    size: String,
     options: Array,
     props: Object,
     border: {
@@ -132,6 +134,9 @@ export default {
     },
     renderLabelFn() {
       return this.renderLabel || this.$scopedSlots.default;
+    },
+    _computedSize() {
+      return this.size || (this.$ELEMENT || {}).size;
     }
   },
 
