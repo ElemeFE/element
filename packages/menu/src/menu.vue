@@ -2,6 +2,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import Menubar from 'element-ui/src/utils/menu/aria-menubar';
+  import { isSameRoute } from 'element-ui/src/utils/menu/route';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
 
   export default {
@@ -292,11 +293,17 @@
         });
       },
       routeToItem(item, onError) {
-        let route = item.route || item.index;
-        try {
-          this.$router.push(route, () => {}, onError);
-        } catch (e) {
-          console.error(e);
+        const currentRoute = this.$router.history.current;
+        const route =  this.$router.match(item.route || item.index, currentRoute);
+        // vue-router 3.1.0+ push/replace 导航重复会报错
+        // 修改自 https://github.com/vuejs/vue-router/blob/dev/src/history/base.js#L120
+        // https://github.com/ElemeFE/element/issues/17044
+        if (!isSameRoute(route, currentRoute) || route.matched.length !== currentRoute.matched.length) {
+          try {
+            this.$router.push(route, () => {}, onError);
+          } catch (e) {
+            console.error(e);
+          }
         }
       },
       open(index) {
