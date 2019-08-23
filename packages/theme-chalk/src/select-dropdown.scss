@@ -34,6 +34,33 @@
     }
   }
 
+  @include m(medium) {
+    @include e(item) {
+      height: 30px;
+      line-height: 30px;
+      padding: 0 17px;
+      font-size: 14px;
+    }
+  }
+
+  @include m(small) {
+    @include e(item) {
+      height: 27px;
+      line-height: 27px;
+      padding: 0 15px;
+      font-size: 13px;
+    }
+  }
+
+  @include m(mini) {
+    @include e(item) {
+      height: 24px;
+      line-height: 24px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+  }
+
   .el-scrollbar.is-empty .el-select-dropdown__list{
     padding: 0;
   }

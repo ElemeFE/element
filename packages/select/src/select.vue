@@ -105,6 +105,7 @@
       @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
+        :size="selectSize"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
