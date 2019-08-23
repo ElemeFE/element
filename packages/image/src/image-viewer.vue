@@ -80,6 +80,10 @@ export default {
       type: Number,
       default: 2000
     },
+    current: {
+      type: Number,
+      default: 0
+    },
     onSwitch: {
       type: Function,
       default: () => {}
@@ -289,6 +293,7 @@ export default {
     }
   },
   mounted() {
+    this.index = this.current;
     this.deviceSupportInstall();
   }
 };
