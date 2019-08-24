@@ -1194,7 +1194,7 @@
 
 :::demo 通过`lazy`开启动态加载，并通过`lazyload`来设置加载数据源的方法。`lazyload`方法有两个参数，第一个参数`node`为当前点击的节点，第二个`resolve`为数据加载完成的回调(必须调用)。为了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为`leaf`，可通过`props.leaf`修改)，否则会简单的以有无子节点来判断是否为叶子节点。
 ```html
-<el-cascader :props="props"></el-cascader>
+<el-cascader v-model="value" :props="props" :options="options"></el-cascader>
 
 <script>
   let id = 0;
@@ -1202,8 +1202,10 @@
   export default {
     data() {
       return {
+        value: [1, 2],
         props: {
           lazy: true,
+          checkStrictly: true,
           lazyLoad (node, resolve) {
             const { level } = node;
             setTimeout(() => {
@@ -1217,7 +1219,18 @@
               resolve(nodes);
             }, 1000);
           }
-        }
+        },
+        options: [{
+          label: '选项1',
+          value: 1,
+          children: [{
+            label: '选项2',
+            value: 2
+          }, {
+            label: '选项3',
+            value: 3
+          }]
+        }]
       };
     }
   };

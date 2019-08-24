@@ -1215,7 +1215,7 @@ Dynamic load its child nodes when checked a node.
 
 :::demo Set `lazy = true` to use dynamic loading, and you have to specify how to load the data source by `lazyload`. There are two parameters of `lazyload`,the first parameter `node` is the node currently clicked, and the `resolve` is a callback that indicate loading is finished which must invoke. To display the status of node more accurately, you can add a `leaf` field (can be modified by `props.leaf`) to indicate whether it is a leaf node. Otherwise, it will be inferred by if has any child nodes.
 ```html
-<el-cascader :props="props"></el-cascader>
+<el-cascader v-model="value" :props="props" :options="options"></el-cascader>
 
 <script>
   let id = 0;
@@ -1223,8 +1223,10 @@ Dynamic load its child nodes when checked a node.
   export default {
     data() {
       return {
+        value: [1, 2],
         props: {
           lazy: true,
+          checkStrictly: true,
           lazyLoad (node, resolve) {
             const { level } = node;
             setTimeout(() => {
@@ -1238,7 +1240,18 @@ Dynamic load its child nodes when checked a node.
               resolve(nodes);
             }, 1000);
           }
-        }
+        },
+        options: [{
+          label: 'Option - 1',
+          value: 1,
+          children: [{
+            label: 'Option - 2',
+            value: 2
+          }, {
+            label: 'Option - 3',
+            value: 3
+          }]
+        }]
       };
     }
   };

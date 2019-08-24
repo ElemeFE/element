@@ -27,7 +27,7 @@ export default class Node {
 
     // lazy load
     this.loading = false;
-    this.loaded = false;
+    this.loaded = this.data.children && !!this.data.children.length;
   }
 
   initChildren() {
