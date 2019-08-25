@@ -108,6 +108,12 @@ const toggleRowExpansion = function(states, row, expanded) {
   return changed;
 };
 
+const DEFAULT_PAGINATION = {
+  currentPage: 1,
+  pageSize: 10,
+  layout: 'prev,pager,next'
+};
+
 const TableStore = function(table, initialState = {}) {
   if (!table) {
     throw new Error('Table is required.');
@@ -146,7 +152,9 @@ const TableStore = function(table, initialState = {}) {
     treeData: {},
     indent: 16,
     lazy: false,
-    lazyTreeNodeMap: {}
+    lazyTreeNodeMap: {},
+    pagination: {},
+    _pagination: null
   };
 
   this._toggleAllSelection = debounce(10, function(states) {
@@ -202,7 +210,9 @@ TableStore.prototype.mutations = {
     });
 
     states.filteredData = data;
-    states.data = sortData((data || []), states);
+    const sortedData = sortData((data || []), states);
+    const pagedData = this.getCurrentPageData(sortedData);
+    states.data = pagedData;
 
     this.updateCurrentRow();
 
@@ -257,7 +267,9 @@ TableStore.prototype.mutations = {
   },
 
   changeSortCondition(states, options) {
-    states.data = sortData((states.filteredData || states._data || []), states);
+    const sortedData = sortData((states.filteredData || states._data || []), states);
+    const pagedData = this.getCurrentPageData(sortedData);
+    states.data = pagedData;
 
     if (!options || !(options.silent || options.init)) {
       this.table.$emit('sort-change', {
@@ -329,7 +341,22 @@ TableStore.prototype.mutations = {
     });
 
     states.filteredData = data;
-    states.data = sortData(data, states);
+    const sortedData = sortData(data, states);
+
+    if (this.hasPagination()) {
+      const newCurrentPage = 1;
+      if (states.pagination.currentChange) {
+        states.pagination.currentChange(newCurrentPage);
+      }
+      // Controlled current prop will not respond user interaction
+      if (!(this.isPaginationCurrentControlled())) {
+        states.pagination.currentPage = newCurrentPage;
+      }
+      const pagedData = this.getCurrentPageData(sortedData);
+      states.data = pagedData;
+    } else {
+      states.data = sortedData;
+    }
 
     if (!silent) {
       this.table.$emit('filter-change', filters);
@@ -406,6 +433,47 @@ TableStore.prototype.mutations = {
 
   toggleAllSelection(state) {
     this._toggleAllSelection(state);
+  },
+
+  setPagination: function(states, pagination) {
+    states._pagination = pagination;
+    let newPagination = {};
+    if (pagination === false) {
+      newPagination = {};
+    } else {
+      newPagination = merge({}, DEFAULT_PAGINATION, states.pagination, pagination);
+      newPagination.currentPage = pagination.currentPage || DEFAULT_PAGINATION.currentPage;
+      newPagination.pageSize = pagination.pageSize || DEFAULT_PAGINATION.pageSize;
+    }
+
+    this.handlePaginationChange(newPagination);
+  },
+
+  paginationCurrentChange: function(states, current) {
+    const pagination = states.pagination;
+    if (pagination.currentChange) {
+      pagination.currentChange(current);
+    }
+    if (this.isPaginationCurrentControlled()) {
+      return;
+    }
+
+    const newPagination = merge(pagination, {
+      currentPage: current
+    });
+    this.handlePaginationChange(newPagination);
+  },
+
+  paginationSizeChange: function(states, size) {
+    const pagination = states.pagination;
+    if (pagination.sizeChange) {
+      pagination.sizeChange(size);
+    }
+
+    const newPagination = merge(pagination, {
+      pageSize: size
+    });
+    this.handlePaginationChange(newPagination);
   }
 };
 
@@ -673,6 +741,50 @@ TableStore.prototype.updateCurrentRow = function() {
       table.$emit('current-change', null, oldCurrentRow);
     }
   }
+};
+
+TableStore.prototype.hasPagination = function() {
+  return this.states._pagination !== false;
+};
+
+TableStore.prototype.getMaxCurrentPage = function(total) {
+  const { currentPage, pageSize } = this.states.pagination;
+  if ((currentPage - 1) * pageSize >= total) {
+    return Math.floor((total - 1) / pageSize) + 1;
+  }
+  return currentPage;
+};
+
+TableStore.prototype.isPaginationCurrentControlled = function() {
+  const { _pagination } = this.states;
+  return (_pagination && typeof _pagination === 'object' && 'currentPage' in _pagination);
+};
+
+TableStore.prototype.getCurrentPageData = function(data) {
+  const pagination = this.states.pagination;
+  if (!this.hasPagination()) {
+    return data;
+  }
+
+  // 当数据量少于等于每页数量时，直接设置数据
+  // 否则进行读取分页数据
+  const currentPage = this.getMaxCurrentPage(pagination.total || data.length);
+  const pageSize = pagination.pageSize;
+  if (data.length > pageSize) {
+    data = data.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  }
+  return data;
+};
+
+TableStore.prototype.handlePaginationChange = function(newPagination) {
+  this.states.pagination = newPagination;
+  const filteredData = this.states.filteredData || this.states._data || [];
+  const sortedData = sortData(filteredData, this.states);
+  const pagedData = this.getCurrentPageData(sortedData);
+
+  this.states.data = pagedData;
+
+  Vue.nextTick(() => this.table.updateScrollY());
 };
 
 TableStore.prototype.commit = function(name, ...args) {

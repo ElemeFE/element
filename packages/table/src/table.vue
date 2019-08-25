@@ -209,6 +209,12 @@
         height: layout.headerHeight + 'px'
       }"></div>
     <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
+    <div class="el-table__pagination-wrapper" ref="paginationWrapper" v-show="pagination">
+      <table-pagination
+        :store="store"
+        :layout="layout">
+      </table-pagination>
+    </div>
   </div>
 </template>
 
@@ -224,6 +230,7 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
+  import TablePagination from './table-pagination';
   import { getRowIdentity } from './util';
 
   const flattenData = function(data) {
@@ -328,6 +335,11 @@
 
       spanMethod: Function,
 
+      pagination: {
+        type: [Object, Boolean],
+        default: false
+      },
+
       selectOnIndeterminate: {
         type: Boolean,
         default: true
@@ -347,7 +359,8 @@
       TableHeader,
       TableFooter,
       TableBody,
-      ElCheckbox
+      ElCheckbox,
+      TablePagination
     },
 
     methods: {
@@ -677,6 +690,14 @@
           if (newVal) {
             this.store.setExpandRowKeys(newVal);
           }
+        }
+      },
+
+      pagination: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          this.store.commit('setPagination', val);
         }
       }
     },
