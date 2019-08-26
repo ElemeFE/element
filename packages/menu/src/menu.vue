@@ -322,6 +322,7 @@
         new Menubar(this.$el); // eslint-disable-line
       }
       this.$watch('items', this.updateActiveIndex);
+      if (this.router && !this.$router) throw new Error(`[ElMenu] router props should use with vue-router plugin`);
     }
   };
 </script>

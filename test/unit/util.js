@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Element from 'main/index.js';
+import VueRouter from 'vue-router';
 
 Vue.use(Element);
+Vue.use(VueRouter);
 
 let id = 0;
 

@@ -1,3 +1,4 @@
+import VueRouter from 'vue-router';
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Menu', () => {
@@ -420,5 +421,43 @@ describe('Menu', () => {
         done();
       }, 20);
     }, 100);
+  });
+  describe('menu router', () => {
+    const createVueWithRouter = () =>{
+      const router = new VueRouter();
+      return createVue({
+        router,
+        template: `
+          <el-menu :router="true">
+            <el-menu-item index="/1">选项1</el-menu-item>
+            <el-menu-item index="/2">选项2</el-menu-item>
+            <el-menu-item index="3" :route="{ path: '/1'}">选项3</el-menu-item>
+          </el-menu>
+        `
+      });
+    };
+
+    describe('click', () => {
+      it('route to path', async() => {
+        vm = createVueWithRouter();
+        let items = vm.$el.querySelectorAll('.el-menu-item');
+        items[0].click();
+        expect(vm.$route.fullPath).to.equal('/1');
+        items[1].click();
+        expect(vm.$route.fullPath).to.equal('/2');
+        items[2].click();
+        expect(vm.$route.fullPath).to.equal('/1');
+      });
+
+      it('same route', () => {
+        vm = createVueWithRouter();
+        let spy = sinon.spy(console, 'error');
+        let items = vm.$el.querySelectorAll('.el-menu-item');
+        items[0].click();
+        items[0].click();
+        items[2].click();
+        expect(spy.notCalled).to.true;
+      });
+    });
   });
 });
