@@ -31,7 +31,7 @@
                 : (elForm && elForm.inlineMessage || false)
             }"
           >
-            {{validateMessage}}
+          <validate-message-wrap :message="validateMessage"></validate-message-wrap>
           </div>
         </slot>
       </transition>
@@ -44,6 +44,7 @@
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
   import LabelWrap from './label-wrap';
+  import ValidateMessageWrap from './validate-message-wrap';
   export default {
     name: 'ElFormItem',
 
@@ -83,7 +84,8 @@
     },
     components: {
       // use this component to calculate auto width
-      LabelWrap
+      LabelWrap,
+      ValidateMessageWrap
     },
     watch: {
       error: {

@@ -858,6 +858,37 @@ describe('Form', () => {
         });
       });
     });
+    it('error message with vnode', done => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" :error="error" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { required: true, message: <a>请填写活动形式</a>, trigger: 'change', min: 3, max: 6 }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate(valid => {
+        expect(valid).to.not.true;
+        vm.$refs.form.$nextTick(_ => {
+          let errorMsgEl = vm.$el.querySelector('.el-form-item__error');
+          expect(errorMsgEl.innerHTML).to.equal('<a>请填写活动形式</a>');
+          done();
+        });
+      });
+    });
     it('invalid fields', done => {
       var checkName = (rule, value, callback) => {
         if (value.length < 5) {

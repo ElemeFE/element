@@ -22,3 +22,8 @@ export const isUndefined = (val)=> {
 export const isDefined = (val) => {
   return val !== undefined && val !== null;
 };
+
+export const isVNode = (obj) => {
+  if (!isObject(obj)) return false;
+  return obj.constructor.name === 'VNode';
+};
