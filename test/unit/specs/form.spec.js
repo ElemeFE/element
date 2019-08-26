@@ -862,19 +862,26 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" :error="error" ref="field">
+            <el-form-item label="活动名称" prop="name" :error="error">
               <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="活动名称2" prop="name2" :error="error">
+              <el-input v-model="form.name2"></el-input>
             </el-form-item>
           </el-form>
         `,
         data() {
           return {
             form: {
-              name: ''
+              name: '',
+              name2: ''
             },
             rules: {
               name: [
-                { required: true, message: <a>请填写活动形式</a>, trigger: 'change', min: 3, max: 6 }
+                { required: true, message: <a>请输入活动名称</a>, trigger: 'change', min: 3, max: 6 }
+              ],
+              name2: [
+                { required: true, message: '请输入活动名称2', trigger: 'change', min: 3, max: 6 }
               ]
             }
           };
@@ -883,8 +890,9 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          let errorMsgEl = vm.$el.querySelector('.el-form-item__error');
-          expect(errorMsgEl.innerHTML).to.equal('<a>请填写活动形式</a>');
+          let errors = vm.$el.querySelectorAll('.el-form-item__error');
+          expect(errors[0].innerHTML).to.equal('<a>请输入活动名称</a>');
+          expect(errors[1].innerText).to.equal('请输入活动名称2');
           done();
         });
       });
