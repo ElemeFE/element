@@ -9,7 +9,7 @@ export default {
     if (isVNode(message)) {
       return message;
     } else {
-      return (<span>message</span>);
+      return (<span>{message}</span>);
     }
   }
 };
