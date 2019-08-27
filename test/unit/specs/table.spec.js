@@ -567,10 +567,6 @@ describe('Table', () => {
           </el-table>
         `,
 
-        // created() {
-        //   this.testData = getTestData();
-        // },
-
         data() {
           return { testData: getTestData() };
         }
