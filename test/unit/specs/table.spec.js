@@ -567,12 +567,12 @@ describe('Table', () => {
           </el-table>
         `,
 
-        created() {
-          this.testData = getTestData();
-        },
+        // created() {
+        //   this.testData = getTestData();
+        // },
 
         data() {
-          return { testData: this.testData };
+          return { testData: getTestData() };
         }
       });
 
@@ -1714,6 +1714,48 @@ describe('Table', () => {
           done();
         }, 50);
       }, 50);
+    });
+
+    it('toggleAllSelection debounce', async() => {
+      const spy = sinon.spy();
+      const vm = createVue({
+        template: `
+        <div>
+          <el-table ref="table" :data="testData" @selection-change="change">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" />
+          </el-table>
+          <el-table ref="table1" :data="testData1" @selection-change="change">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" />
+          </el-table>
+        </div>
+        `,
+
+        data() {
+          return {
+            testData: getTestData(),
+            testData1: getTestData()
+          };
+        },
+
+        methods: {
+          change(selection) {
+            spy(selection);
+          }
+        },
+
+        mounted() {
+          this.$refs.table.toggleAllSelection();
+          this.$refs.table1.toggleAllSelection();
+        }
+      }, true);
+
+      await wait(50);
+      expect(spy.callCount).to.be.equal(2);
+      expect(spy.args[0][0].length).to.be.equal(5);
+      expect(spy.args[1][0].length).to.be.equal(5);
+      destroyVM(vm);
     });
 
     it('clearSelection', () => {
