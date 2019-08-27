@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
-import merge from 'element-ui/src/utils/merge';
-import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
+import { getKeysMap, getRowIdentity, getColumnById, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
 import current from './current';
 import tree from './tree';
@@ -308,48 +307,25 @@ export default Vue.extend({
 
     clearFilter(columnKeys) {
       const states = this.states;
-      const { tableHeader, fixedTableHeader, rightFixedTableHeader } = this.table.$refs;
-
-      let panels = {};
-      if (tableHeader) panels = merge(panels, tableHeader.filterPanels);
-      if (fixedTableHeader) panels = merge(panels, fixedTableHeader.filterPanels);
-      if (rightFixedTableHeader) panels = merge(panels, rightFixedTableHeader.filterPanels);
-
-      const keys = Object.keys(panels);
-      if (!keys.length) return;
 
       if (typeof columnKeys === 'string') {
         columnKeys = [columnKeys];
       }
 
+      let columns = states.columns.filter(col => col.filterable);
       if (Array.isArray(columnKeys)) {
-        const columns = columnKeys.map(key => getColumnByKey(states, key));
-        keys.forEach(key => {
-          const column = columns.find(col => col.id === key);
-          if (column) {
-            // TODO: 优化这里的代码
-            panels[key].filteredValue = [];
-          }
-        });
-        this.commit('filterChange', {
-          column: columns,
-          values: [],
-          silent: true,
-          multi: true
-        });
-      } else {
-        keys.forEach(key => {
-          // TODO: 优化这里的代码
-          panels[key].filteredValue = [];
-        });
-
-        states.filters = {};
-        this.commit('filterChange', {
-          column: {},
-          values: [],
-          silent: true
-        });
+        columns = columns.filter(col => columnKeys.includes(col.columnKey));
       }
+
+      columns.forEach(column => {
+        column.filteredValue = [];
+      });
+
+      this.commit('filterChange', {
+        column: columns,
+        values: [],
+        silent: true
+      });
     },
 
     clearSort() {
