@@ -181,7 +181,7 @@ describe('Rate', () => {
 
     const fourthStar = vm2.$el.querySelectorAll('.el-rate__item')[3];
     const halfStar = fourthStar.querySelector('.el-rate__decimal');
-    expect(halfStar.style.width).to.equal('0%');
+    expect(halfStar.style.width).to.equal('40%');
   });
 
   it('allow half', () => {
@@ -205,4 +205,25 @@ describe('Rate', () => {
     rate.resetCurrentValue();
     expect(vm.value).to.equal(0.5);
   });
+
+  it('custom icon classes by passing object', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-rate
+            v-model="value"
+            :icon-classes="{ 2: 'icon-rate-face-1', 4: { value: 'icon-rate-face-2', excluded: true }, 5: 'icon-rate-face-3' }"></el-rate>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 4
+        };
+      }
+    }, true);
+    const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[3].querySelector('.el-rate__icon');
+    expect(thirdIcon.className).to.include('icon-rate-face-3');
+  });
+
 });

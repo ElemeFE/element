@@ -2,8 +2,15 @@
 @import "common/var";
 
 @include b(carousel) {
-  overflow-x: hidden;
   position: relative;
+
+  @include m(horizontal) {
+    overflow-x: hidden;
+  }
+
+  @include m(vertical) {
+    overflow-y: hidden;
+  }
 
   @include e(container) {
     position: relative;
@@ -49,12 +56,21 @@
   @include e(indicators) {
     position: absolute;
     list-style: none;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
     margin: 0;
     padding: 0;
     z-index: #{$--index-normal + 1};
+
+    @include m(horizontal) {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @include m(vertical) {
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 
     @include m(outside) {
       bottom: #{$--carousel-indicator-height + $--carousel-indicator-padding-vertical * 2};
@@ -90,13 +106,24 @@
   }
 
   @include e(indicator) {
-    display: inline-block;
     background-color: transparent;
-    padding: $--carousel-indicator-padding-vertical $--carousel-indicator-padding-horizontal;
     cursor: pointer;
 
     &:hover button {
       opacity: 0.72;
+    }
+
+    @include m(horizontal) {
+      display: inline-block;
+      padding: $--carousel-indicator-padding-vertical $--carousel-indicator-padding-horizontal;
+    }
+
+    @include m(vertical) {
+      padding: $--carousel-indicator-padding-horizontal $--carousel-indicator-padding-vertical;
+      .el-carousel__button {
+        width: $--carousel-indicator-height;
+        height: #{$--carousel-indicator-width / 2};
+      }
     }
 
     @include when(active) {

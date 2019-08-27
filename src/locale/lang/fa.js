@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'هیچ داده‌ای پیدا نشد',
       loading: 'بارگیری',
-      placeholder: 'انتخاب کنید'
+      placeholder: 'انتخاب کنید',
+      noData: 'اطلاعاتی وجود ندارد'
     },
     pagination: {
       goto: 'برو به',
@@ -82,7 +83,7 @@ export default {
       error: 'ورودی غیر مجاز'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'برای پاک کردن حذف را فشار دهید',
       delete: 'حذف',
       preview: 'پیش‌نمایش',
       continue: 'ادامه'
@@ -92,7 +93,7 @@ export default {
       confirmFilter: 'تایید',
       resetFilter: 'حذف',
       clearFilter: 'همه',
-      sumText: 'Sum' // to be translated
+      sumText: 'جمع'
     },
     tree: {
       emptyText: 'اطلاعاتی وجود ندارد'
@@ -100,10 +101,16 @@ export default {
     transfer: {
       noMatch: 'هیچ داده‌ای پیدا نشد',
       noData: 'اطلاعاتی وجود ندارد',
-      titles: ['List 1', 'List 2'], // to be translated
+      titles: ['لیست 1', 'لیست 2'],
       filterPlaceholder: 'کلید واژه هارو وارد کن',
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      noCheckedFormat: '{total} مورد',
+      hasCheckedFormat: '{checked} مورد از {total} مورد انتخاب شده است'
+    },
+    image: {
+      error: 'خطا در بارگیری تصویر'
+    },
+    pageHeader: {
+      title: 'بازگشت'
     }
   }
 };

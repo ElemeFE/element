@@ -1,55 +1,7 @@
-<script>
-  import dateUtil from 'main/utils/date'
-  export default {
-    data() {
-      return {
-        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
-      };
-    }
-  }
-</script>
-
-<style scoped>
-  .text {
-    font-size: 14px;
-  }
-
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    display: block;
-  }
-
-  .clearfix {
-    @utils-clearfix;
-  }
-
-  .box-card {
-    width: 480px;
-  }
-</style>
 ## Card
 Muestra información dentro de un contenedor `card`
 
-### Uso Basico
+### Uso Básico
 
 `Card` incluye titulo, contenido y operaciones.
 
@@ -129,12 +81,12 @@ Muestre un contenido más rico añadiendo algunas configuraciones.
 <el-row>
   <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
-      <img src="~examples/assets/images/hamburger.png" class="image">
+      <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
       <div style="padding: 14px;">
         <span>Yummy hamburger</span>
         <div class="bottom clearfix">
           <time class="time">{{ currentDate }}</time>
-          <el-button type="text" class="button">Operating button</el-button>
+          <el-button type="text" class="button">Operating</el-button>
         </div>
       </div>
     </el-card>
@@ -187,9 +139,10 @@ export default {
 
 ### Shadow
 
-You can define when to show the card shadows
+Puede definir cuándo mostrar las sombras.
 
-:::demo The `shadow` attribute determines when the card shadows are displayed. It can be `always`, `hover` or `never`.
+:::demo El atributo de sombra determina cuándo se muestran las sombras. Puede ser `always`, `hover` o `never`.
+
 ```html
 <el-row :gutter="12">
   <el-col :span="8">
@@ -216,4 +169,4 @@ You can define when to show the card shadows
 | ---------- | ---------------------------------------- | ------ | -----------------  | ------------------- |
 | header     | Titulo del card. También acepta DOM pasado por `slot#header` | string  | —                 | —                   |
 | body-style | Estilo CSS del cuerpo                    | object | —                  | { padding: '20px' } |
-| shadow     | when to show card shadows                | string | always / hover / never | always          |
+| shadow     | cuando mostrar la sombra del Card | string | always / hover / never | always          |

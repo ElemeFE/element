@@ -1,60 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        disabled: false
-      };
-    }
-  };
-</script>
-
-<style>
-  .demo-tooltip.demo-es {
-    &:first-of-type .source {
-      .el-button {
-        width: 110px;
-      }
-    }
-    .el-tooltip + .el-tooltip {
-      margin-left: 15px;
-    }
-    .box {
-      width: 400px;
-    
-      .top {
-        text-align: center;
-      }
-      
-      .left {
-        float: left;
-        width: 110px;
-      }
-      
-      .right {
-        float: right;
-        width: 110px;
-      }
-      
-      .bottom {
-        clear: both;
-        text-align: center;
-      }
-      
-      .item {
-        margin: 4px;
-      }
-      
-      .left .el-tooltip__popper,
-      .right .el-tooltip__popper {
-        padding: 8px 10px;
-      }
-      .el-tooltip {
-        margin-left: 0;
-      }
-    }
-  }
-</style>
-
 ## Tooltip
 
 Mostrar aviso de información con el hover del mouse.
@@ -156,7 +99,7 @@ Tooltip tiene 9 colocaciones.
 
 ### Tema
 
-Tooltip tiene dos temas: `dark` and `light`.
+Tooltip tiene dos temas: `dark` y `light`.
 
 :::demo Establecer `effect` para modificar el tema, el valor por defecto es `dark`.
 ```html
@@ -173,7 +116,7 @@ Tooltip tiene dos temas: `dark` and `light`.
 
 Despliegue múltiples líneas de texto y establezca su formato.
 
-:::demo Sobre-escribiba el atributo `content` del `el-tooltip` añadiendo un slot llamado `content`.
+:::demo Sobrecriba el atributo `content` del `el-tooltip` añadiendo un slot llamado `content`.
 ```html
 <el-tooltip placement="top">
   <div slot="content">multiple lines<br/>second line</div>
@@ -190,7 +133,7 @@ el atributo `transition` permite personalizar la animación con la que el Toolti
 
 el atributo `disabled` permite deshabilitar `tooltip`. Solo es necesario definirlo como `true`.
 
-De hecho, Tooltip es una extension basada en [Vue-popper](https://github.com/element-component/vue-popper), es posible utilizar cualquier atributo permitido en Vue-popper.
+De hecho, Tooltip es una extensión basada en [Vue-popper](https://github.com/element-component/vue-popper), es posible utilizar cualquier atributo permitido en Vue-popper.
 
 :::demo
 ```html
@@ -199,6 +142,16 @@ De hecho, Tooltip es una extension basada en [Vue-popper](https://github.com/ele
     <el-button @click="disabled = !disabled">click to {{disabled ? 'active' : 'close'}} tooltip function</el-button>
   </el-tooltip>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
 
 <style>
   .slide-fade-enter-active {
@@ -215,7 +168,6 @@ De hecho, Tooltip es una extension basada en [Vue-popper](https://github.com/ele
 ```
 :::
 
-
 :::tip
 El componente `router-link` no es soportado por Tooltip, favor de usar `vm.$router.push`.
 
@@ -230,7 +182,7 @@ Es necesario envolver los elementos de forma deshabilitados en un elemento conte
 | effect         | tema del Tooltip                         | string  | dark/light                               | dark                                     |
 | content        | contenido a mostrar, puede ser sobre-escrito por `slot#content` | string  | —                                        | —                                        |
 | placement      | posición del Tooltip                     | string  | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                   |
-| value(v-model) | visibilidad del Tooltip                  | boolean | —                                        | false                                    |
+| value / v-model | visibilidad del Tooltip                  | boolean | —                                        | false                                    |
 | disabled       | saber si el Tooltip se encuentra deshabilitado | boolean | —                                        | false                                    |
 | offset         | offset del Tooltip                       | number  | —                                        | 0                                        |
 | transition     | nombre de animación                      | string  | —                                        | el-fade-in-linear                        |
@@ -241,3 +193,4 @@ Es necesario envolver los elementos de forma deshabilitados en un elemento conte
 | popper-class   | nombre de clase personalizada para el popper del Tooltip | string  | —                                        | —                                        |
 | enterable      | si el mouse puede entrar al Tooltip      | Boolean | —                                        | true                                     |
 | hide-after     | tiempo a esperar en milisegundos para esconder el Tooltip | number  | —                                        | 0                                        |
+| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Tooltip | number   | —                      | 0              |

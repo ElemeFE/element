@@ -28,7 +28,8 @@
         type: Function,
         default: noop
       },
-      type: String
+      type: String,
+      stretch: Boolean
     },
 
     data() {
@@ -84,22 +85,32 @@
         const activeTab = this.$el.querySelector('.is-active');
         if (!activeTab) return;
         const navScroll = this.$refs.navScroll;
+        const isHorizontal = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1;
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
-        const navBounding = nav.getBoundingClientRect();
+        const maxOffset = isHorizontal
+          ? nav.offsetWidth - navScrollBounding.width
+          : nav.offsetHeight - navScrollBounding.height;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
-        if (activeTabBounding.left < navScrollBounding.left) {
-          newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
+        if (isHorizontal) {
+          if (activeTabBounding.left < navScrollBounding.left) {
+            newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
+          }
+          if (activeTabBounding.right > navScrollBounding.right) {
+            newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
+          }
+        } else {
+          if (activeTabBounding.top < navScrollBounding.top) {
+            newOffset = currentOffset - (navScrollBounding.top - activeTabBounding.top);
+          }
+          if (activeTabBounding.bottom > navScrollBounding.bottom) {
+            newOffset = currentOffset + (activeTabBounding.bottom - navScrollBounding.bottom);
+          }
         }
-        if (activeTabBounding.right > navScrollBounding.right) {
-          newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
-        }
-        if (navBounding.right < navScrollBounding.right) {
-          newOffset = nav.offsetWidth - navScrollBounding.width;
-        }
-        this.navOffset = Math.max(newOffset, 0);
+        newOffset = Math.max(newOffset, 0);
+        this.navOffset = Math.min(newOffset, maxOffset);
       },
       update() {
         if (!this.$refs.nav) return;
@@ -163,7 +174,9 @@
         if (visibility === 'hidden') {
           this.focusable = false;
         } else if (visibility === 'visible') {
-          this.focusable = true;
+          setTimeout(() => {
+            this.focusable = true;
+          }, 50);
         }
       },
       windowBlurHandler() {
@@ -185,6 +198,7 @@
         type,
         panes,
         editable,
+        stretch,
         onTabClick,
         onTabRemove,
         navStyle,
@@ -224,6 +238,7 @@
               'is-focus': this.isFocus
             }}
             id={`tab-${tabName}`}
+            key={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
             aria-selected={ pane.active }
@@ -244,7 +259,13 @@
         <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
-            <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
+            <div
+              class={['el-tabs__nav', `is-${ this.rootTabs.tabPosition }`, stretch && ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'is-stretch' : '']}
+              ref="nav"
+              style={navStyle}
+              role="tablist"
+              on-keydown={ changeTab }
+            >
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}
             </div>
@@ -258,6 +279,9 @@
       document.addEventListener('visibilitychange', this.visibilityChangeHandler);
       window.addEventListener('blur', this.windowBlurHandler);
       window.addEventListener('focus', this.windowFocusHandler);
+      setTimeout(() => {
+        this.scrollToActiveTab();
+      }, 0);
     },
 
     beforeDestroy() {
@@ -268,4 +292,3 @@
     }
   };
 </script>
-

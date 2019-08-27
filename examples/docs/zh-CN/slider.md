@@ -1,54 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        value1: 0,
-        value2: 50,
-        value3: 36,
-        value4: 48,
-        value5: 42,
-        value6: 0,
-        value7: 0,
-        value8: 0,
-        value9: [4, 8],
-        value10: 0
-      };
-    },
-    methods: {
-      formatTooltip(val) {
-        return val / 100;
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-box.demo-slider .source {
-    padding: 0;
-  }
-
-  .demo-box.demo-slider .block {
-    padding: 30px 24px;
-    overflow: hidden;
-    border-bottom: solid 1px #EFF2F6;
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .demo-box.demo-slider .demonstration {
-    font-size: 14px;
-    color: #8492a6;
-    line-height: 44px;
-  }
-
-  .demo-box.demo-slider .demonstration + .el-slider {
-    float: right;
-    width: 70%;
-    margin-right: 20px;
-  }
-</style>
-
 ## Slider 滑块
 
 通过拖动滑块在一个固定区间内进行选择
@@ -107,20 +56,20 @@
 
 选项可以是离散的
 
-:::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
+:::demo 改变`step`的值可以改变步长，通过设置`show-stops`属性可以显示间断点
 ```html
 <template>
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
-      v-model="value6"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
-      v-model="value7"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -131,8 +80,8 @@
   export default {
     data() {
       return {
-        value6: 0,
-        value7: 0
+        value1: 0,
+        value2: 0
       }
     }
   }
@@ -149,7 +98,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value"
       show-input>
     </el-slider>
   </div>
@@ -159,7 +108,7 @@
   export default {
     data() {
       return {
-        value8: 0
+        value: 0
       }
     }
   }
@@ -176,7 +125,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value9"
+      v-model="value"
       range
       show-stops
       :max="10">
@@ -188,7 +137,7 @@
   export default {
     data() {
       return {
-        value9: [4, 8]
+        value: [4, 8]
       }
     }
   }
@@ -203,7 +152,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value10"
+      v-model="value"
       vertical
       height="200px">
     </el-slider>
@@ -214,7 +163,44 @@
   export default {
     data() {
       return {
-        value10: 0
+        value: 0
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 展示标记
+
+:::demo 设置 `marks` 属性可以展示标记
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [30, 60],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
       }
     }
   }
@@ -225,6 +211,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | 绑定值 | number | — | 0 |
 | min | 最小值 | number | — | 0 |
 | max | 最大值 | number | — | 100 |
 | disabled | 是否禁用 | boolean | — | false |
@@ -241,8 +228,10 @@
 | label | 屏幕阅读器标签 | string | — | — |
 | debounce | 输入时的去抖延迟，毫秒，仅在`show-input`等于true时有效 | number | — | 300 |
 | tooltip-class | tooltip 的自定义类名 | string | — | — |
+| marks | 标记， key 的类型必须为 number 且取值在闭区间 `[min, max]` 内，每个标记可以单独设置样式 | object | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | change | 值改变时触发（使用鼠标拖曳时，只在松开鼠标后触发） | 改变后的值 |
+| input | 数据改变时触发（使用鼠标拖曳时，活动过程实时触发） | 改变后的值 |

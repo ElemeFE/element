@@ -52,6 +52,11 @@
           <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
         </a>
       </td>
+      <td align="center" valign="middle">
+        <a href="https://bitsrc.io/" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/10095631/41342907-e44e7196-6f2f-11e8-92f2-47702dc8f059.png">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -63,11 +68,12 @@
   - [International users](http://element.eleme.io/#/en-US)
   - [Chinese users](http://element-cn.eleme.io/#/zh-CN)
   - [Spanish users](http://element.eleme.io/#/es)
+  - [French users](http://element.eleme.io/#/fr-FR)
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
-- [Element for React](https://github.com/eleme/element-react)
+- [Element for React](https://github.com/elemefe/element-react)
 - [Element for Angular](https://github.com/ElemeFE/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
 - [Visual Studio Code helper](https://github.com/ElemeFE/vscode-element-helper)
@@ -109,7 +115,7 @@ Modern browsers and Internet Explorer 10+.
 ## Development
 Skip this part if you just want to use Element.
 
-For those who are interested in contributing to Element, please refer to our contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) to see how to run this project.
+For those who are interested in contributing to Element, please refer to our contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md) | [Français](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.fr-FR.md)) to see how to run this project.
 
 ## Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
@@ -118,7 +124,9 @@ Detailed changes for each release are documented in the [release notes](https://
 We have collected some [frequently asked questions](https://github.com/ElemeFE/element/blob/master/FAQ.md). Before reporting an issue, please search if the FAQ has the answer to your problem.
 
 ## Contribution
-Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md)) before making a pull request.
+Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md) | [Français](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.fr-FR.md)) before making a pull request.
+
+[![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/67274736)
 
 ## Special Thanks
 English documentation is brought to you by SwiftGG Translation Team:
@@ -145,10 +153,14 @@ Spanish documentation is made possible by these community developers:
 - [sigfriedCub1990](https://github.com/sigfriedCub1990)
 - [thechosenjuan](https://github.com/thechosenjuan)
 
+French documentation is made possible by these community developers:
+- [smalesys](https://github.com/smalesys)
+- [blombard](https://github.com/blombard)
+
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 
-<img width="650" src="https://user-images.githubusercontent.com/10095631/37442034-3170a9e0-283f-11e8-8fdd-56748646fa43.jpg" alt="donation">
+<img width="650" src="https://user-images.githubusercontent.com/14025786/44833997-5d7c4d80-ac62-11e8-8445-1dffec0eb13c.png" alt="donation">
 
 ## Backers
 
@@ -221,6 +233,11 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 <a href="https://opencollective.com/element/sponsor/28/website" target="_blank"><img src="https://opencollective.com/element/sponsor/28/avatar.svg"></a>
 <a href="https://opencollective.com/element/sponsor/29/website" target="_blank"><img src="https://opencollective.com/element/sponsor/29/avatar.svg"></a>
 
+## Join Discusion Group
+
+Scan the QR code using [Dingtalk App](https://www.dingtalk.com/) to join in discusion group :
+
+<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/60150281-95183f80-980a-11e9-88a8-d324c5e8d83b.png" width="300">
 
 
 ## LICENSE

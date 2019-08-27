@@ -7,7 +7,7 @@ export default {
 
   computed: {
     optionsAllDisabled() {
-      return this.options.length === this.options.filter(item => item.disabled === true).length;
+      return this.options.filter(option => option.visible).every(option => option.disabled);
     }
   },
 
@@ -47,8 +47,8 @@ export default {
           !option.visible) {
           this.navigateOptions(direction);
         }
+        this.$nextTick(() => this.scrollToOption(this.hoverOption));
       }
-      this.$nextTick(() => this.scrollToOption(this.hoverOption));
     }
   }
 };

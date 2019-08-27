@@ -27,6 +27,28 @@ describe('Menu', () => {
       }, 20);
     }, 20);
   });
+  it('background-color', done => {
+    vm = createVue({
+      template: `
+        <el-menu default-active="2"
+          background-color="#f00"
+          text-color="#000"
+          active-text-color="#0f0">
+          <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
+          <el-menu-item index="2" ref="item2">订单管理</el-menu-item>
+        </el-menu>
+      `
+    }, true);
+    expect(vm.$el.style.backgroundColor).to.equal('rgb(255, 0, 0)');
+    expect(vm.$refs.item1.$el.style.backgroundColor).to.equal('rgb(255, 0, 0)');
+    expect(vm.$refs.item1.$el.style.color).to.equal('rgb(0, 0, 0)');
+    expect(vm.$refs.item2.$el.style.color).to.equal('rgb(0, 255, 0)');
+    triggerEvent(vm.$refs.item1.$el, 'mouseenter');
+    setTimeout(_ => {
+      expect(vm.$refs.item1.$el.style.backgroundColor).to.equal('rgb(204, 0, 0)');
+      done();
+    }, 20);
+  });
   it('menu-item click', done => {
     vm = createVue({
       template: `
@@ -372,7 +394,6 @@ describe('Menu', () => {
       template: `
           <el-menu :default-active="active">
             <el-menu-item
-              v-ref="menus"
               v-for="menu in menus"
               :index="menu.name"
               :key="menu.name">

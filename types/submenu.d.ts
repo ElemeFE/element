@@ -3,10 +3,7 @@ import { ElementUIComponent } from './component'
 /** Submenu Component */
 export declare class ElSubmenu extends ElementUIComponent {
   /** Unique identification */
-  index: string
-
-  /** Delay time before show a sub-menu */
-  showTimeout: number
+  index: string | null
 
   /** Delay time before showing a sub-menu */
   showTimeout: number

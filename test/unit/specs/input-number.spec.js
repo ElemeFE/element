@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
+import {createVue, triggerEvent, triggerClick, destroyVM, waitImmediate} from '../util';
 
 const DELAY = 1;
 
@@ -142,6 +142,29 @@ describe('InputNumber', () => {
       });
     });
   });
+  it('step strictly', async() => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" :step="1.2" step-strictly>
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 5
+        };
+      }
+    }, true);
+
+    let input = vm.$el.querySelector('input');
+    await waitImmediate();
+    expect(vm.value).to.be.equal(4.8);
+    expect(input.value).to.be.equal('4.8');
+    vm.value = '8';
+
+    await waitImmediate();
+    expect(vm.value).to.be.equal(8.4);
+    expect(input.value).to.be.equal('8.4');
+  });
   it('min', done => {
     vm = createVue({
       template: `
@@ -218,6 +241,51 @@ describe('InputNumber', () => {
       expect(vm.value).to.be.equal(8);
       expect(input.value).to.be.equal('8');
       done();
+    });
+  });
+  describe('precision', () => {
+    it('precision is 2', () => {
+      vm = createVue({
+        template: `
+          <el-input-number v-model="value" :max="8" :precision="2">
+          </el-input-number>
+        `,
+        data() {
+          return {
+            value: 6.999
+          };
+        }
+      }, true);
+      expect(vm.value === 7);
+      expect(vm.$el.querySelector('input').value).to.be.equal('7.00');
+    });
+
+    it('precision greater than the precision of step', done => {
+      vm = createVue({
+        template: `
+          <el-input-number v-model="value" :max="8" :precision="0" :step="0.1">
+          </el-input-number>
+        `,
+        data() {
+          return {
+            value: 6.999
+          };
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+      const btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+
+      expect(vm.value === 7);
+      expect(input.value).to.be.equal('7');
+
+      triggerEvent(btnIncrease, 'mousedown');
+      triggerClick(document, 'mouseup');
+
+      vm.$nextTick(_ => {
+        expect(vm.value).to.be.equal(7);
+        expect(input.value).to.be.equal('7');
+        done();
+      });
     });
   });
   it('controls', () => {
@@ -349,6 +417,37 @@ describe('InputNumber', () => {
     vm.$nextTick(_ => {
       expect(spy.calledOnce).to.be.true;
       done();
+    });
+  });
+
+  describe('InputNumber Methods', () => {
+    it('method:select', done => {
+      const testContent = '123';
+
+      vm = createVue({
+        template: `
+          <el-input-number
+            ref="inputNumComp"
+            :value="${testContent}"
+          />
+        `
+      }, true);
+
+      expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionStart)
+        .to.equal(testContent.length);
+      expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionEnd)
+        .to.equal(testContent.length);
+
+      vm.$refs.inputNumComp.select();
+
+      vm.$nextTick(_ => {
+        expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionStart)
+          .to.equal(0);
+        expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionEnd)
+          .to.equal(testContent.length);
+
+        done();
+      });
     });
   });
 });

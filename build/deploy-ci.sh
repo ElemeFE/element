@@ -36,11 +36,11 @@ if [ "$TRAVIS_TAG" ]; then
   # build site
   npm run deploy:build
   cd temp_web
-  git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
+  git clone --depth 1 -b gh-pages --single-branch https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
   # build sub folder
   echo $TRAVIS_TAG
 
-  SUB_FOLDER='2.3'
+  SUB_FOLDER='2.11'
   mkdir $SUB_FOLDER
   rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**
@@ -56,7 +56,7 @@ if [ "$TRAVIS_TAG" ]; then
 fi
 
 # build dev site
-npm run build:file && CI_ENV=/dev/$TRAVIS_BRANCH/ node_modules/.bin/cooking build -c build/cooking.demo.js
+npm run build:file && CI_ENV=/dev/$TRAVIS_BRANCH/ node_modules/.bin/cross-env NODE_ENV=production node_modules/.bin/webpack --config build/webpack.demo.js
 cd temp_web
 git clone https://$ROT_TOKEN@github.com/ElementUI/dev.git && cd dev
 mkdir $TRAVIS_BRANCH

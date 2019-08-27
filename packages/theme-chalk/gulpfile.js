@@ -1,25 +1,25 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var cssmin = require('gulp-cssmin');
+const { series, src, dest } = require('gulp');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const cssmin = require('gulp-cssmin');
 
-gulp.task('compile', function() {
-  return gulp.src('./src/*.scss')
+function compile() {
+  return src('./src/*.scss')
     .pipe(sass.sync())
     .pipe(autoprefixer({
       browsers: ['ie > 9', 'last 2 versions'],
       cascade: false
     }))
     .pipe(cssmin())
-    .pipe(gulp.dest('./lib'));
-});
+    .pipe(dest('./lib'));
+}
 
-gulp.task('copyfont', function() {
-  return gulp.src('./src/fonts/**')
+function copyfont() {
+  return src('./src/fonts/**')
     .pipe(cssmin())
-    .pipe(gulp.dest('./lib/fonts'));
-});
+    .pipe(dest('./lib/fonts'));
+}
 
-gulp.task('build', ['compile', 'copyfont']);
+exports.build = series(compile, copyfont);

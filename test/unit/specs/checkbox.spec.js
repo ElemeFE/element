@@ -147,6 +147,7 @@ describe('Checkbox', () => {
       }
     }, true);
     expect(vm.checkList.length === 1).to.be.true;
+    expect(vm.$refs.a.isDisabled).to.be.true;
     vm.$refs.a.$el.click();
     vm.$nextTick(() => {
       expect(vm.checkList.indexOf('a') !== -1).to.be.true;
@@ -158,6 +159,8 @@ describe('Checkbox', () => {
         vm.$nextTick(() => {
           expect(vm.checkList.indexOf('c') !== -1).to.be.false;
           expect(vm.checkList.indexOf('d') !== -1).to.be.false;
+          expect(vm.$refs.c.isDisabled).to.be.true;
+          expect(vm.$refs.d.isDisabled).to.be.true;
           done();
         });
       });

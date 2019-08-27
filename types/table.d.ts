@@ -17,6 +17,26 @@ export interface SummaryMethodParams {
   data: object
 }
 
+export interface rowCallbackParams {
+  row: object,
+  rowIndex: number
+}
+
+export interface cellCallbackParams {
+  row: object,
+  rowIndex: number,
+  column: object,
+  columnIndex: number
+}
+
+export interface treeNode {
+  rowKey: string | number,
+  isLeaf: boolean,
+  level: number,
+  expanded: boolean,
+  loaded: boolean
+}
+
 /** Table Component */
 export declare class ElTable extends ElementUIComponent {
   /** Table data */
@@ -46,11 +66,35 @@ export declare class ElTable extends ElementUIComponent {
   /** Key of current row, a set only prop */
   currentRowKey: string | number
 
-  /** Function that returns custom class names for a row, or a string assigning class names for every row */
-  rowClassName: string | ((row: object, index: number) => string)
+  /** Whether to lazy load tree structure data, used with load attribute */
+  lazy: boolean
 
-  /** Function that returns custom style for a row, or a string assigning custom style for every row */
-  rowStyle: string | object | ((row: object, index: number) => object)
+  /** Horizontal indentation of nodes in adjacent levels in pixels */
+  indent: number
+
+  /** Function that returns custom class names for a row, or a string assigning class names for every row */
+  rowClassName: string | ((param: rowCallbackParams) => string)
+
+  /** Function that returns custom style for a row, or an object assigning custom style for every row */
+  rowStyle: object | ((param: rowCallbackParams) => object)
+
+  /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
+  cellClassName: string | ((param: cellCallbackParams) => string)
+
+  /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
+  cellStyle: object | ((param: cellCallbackParams) => object)
+
+  /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
+  headerRowClassName: string | ((param: rowCallbackParams) => string)
+
+  /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
+  headerRowStyle: object | ((param: rowCallbackParams) => object)
+
+  /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
+  headerCellClassName: string | ((param: cellCallbackParams) => string)
+
+  /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
+  headerCellStyle: object | ((param: cellCallbackParams) => object)
 
   /** Key of row data, used for optimizing rendering. Required if reserve-selection is on */
   rowKey: (row: object) => any
@@ -94,6 +138,11 @@ export declare class ElTable extends ElementUIComponent {
   toggleRowSelection (row: object, selected?: boolean): void
 
   /**
+   * Toggle or set all rows
+   */
+  toggleAllSelection (): void
+
+  /**
    * Set a certain row as selected
    *
    * @param row The row that is going to set as selected
@@ -116,4 +165,10 @@ export declare class ElTable extends ElementUIComponent {
 
   /** Relayout the table, maybe needed when change the table or it's ancestors visibility */
   doLayout (): void
+
+  /** Sort Table manually */
+  sort (prop: string, order: string): void
+
+  /** method for lazy load subtree data */
+  load (row: object, treeNode: treeNode, resolve: Function): void
 }

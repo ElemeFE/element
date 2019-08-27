@@ -17,7 +17,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath } from 'element-ui/src/utils/util';
+  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -86,8 +86,14 @@
       currentLabel() {
         if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
       },
-      value() {
-        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
+      value(val, oldVal) {
+        const { remote, valueKey } = this.select;
+        if (!this.created && !remote) {
+          if (valueKey && typeof val === 'object' && typeof oldVal === 'object' && val[valueKey] === oldVal[valueKey]) {
+            return;
+          }
+          this.dispatch('ElSelect', 'setSelected');
+        }
       }
     },
 
@@ -103,10 +109,10 @@
 
       contains(arr = [], target) {
         if (!this.isObject) {
-          return arr.indexOf(target) > -1;
+          return arr && arr.indexOf(target) > -1;
         } else {
           const valueKey = this.select.valueKey;
-          return arr.some(item => {
+          return arr && arr.some(item => {
             return getValueByPath(item, valueKey) === getValueByPath(target, valueKey);
           });
         }
@@ -124,14 +130,12 @@
 
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
-          this.dispatch('ElSelect', 'handleOptionClick', this);
+          this.dispatch('ElSelect', 'handleOptionClick', [this, true]);
         }
       },
 
       queryChange(query) {
-        // query 里如果有正则中的特殊字符，需要先将这些字符转义
-        let parsedQuery = String(query).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
-        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
+        this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }
@@ -149,6 +153,10 @@
     },
 
     beforeDestroy() {
+      let index = this.select.cachedOptions.indexOf(this);
+      if (index > -1) {
+        this.select.cachedOptions.splice(index, 1);
+      }
       this.select.onOptionDestroy(this.select.options.indexOf(this));
     }
   };

@@ -46,4 +46,7 @@ export declare class ElTooltip extends ElementUIComponent {
 
   /** Timeout in milliseconds to hide tooltip */
   hideAfter: string
+
+  /** Tooltip tabindex */
+  tabindex: number
 }

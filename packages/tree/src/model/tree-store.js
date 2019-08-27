@@ -32,6 +32,7 @@ export default class TreeStore {
 
   filter(value) {
     const filterNodeMethod = this.filterNodeMethod;
+    const lazy = this.lazy;
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
@@ -43,10 +44,7 @@ export default class TreeStore {
 
       if (!node.visible && childNodes.length) {
         let allHidden = true;
-
-        childNodes.forEach((child) => {
-          if (child.visible) allHidden = false;
-        });
+        allHidden = !childNodes.some(child => child.visible);
 
         if (node.root) {
           node.root.visible = allHidden === false;
@@ -56,7 +54,7 @@ export default class TreeStore {
       }
       if (!value) return;
 
-      if (node.visible && !node.isLeaf) node.expand();
+      if (node.visible && !node.isLeaf && !lazy) node.expand();
     };
 
     traverse(this);
@@ -90,7 +88,11 @@ export default class TreeStore {
 
   remove(data) {
     const node = this.getNode(data);
-    if (node) {
+
+    if (node && node.parent) {
+      if (node === this.currentNode) {
+        this.currentNode = null;
+      }
       node.parent.removeChild(node);
     }
   }
@@ -143,22 +145,20 @@ export default class TreeStore {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
-    const childNodes = node.childNodes;
-    for (let i = 0, j = childNodes.length; i < j; i++) {
-      const child = childNodes[i];
+    node.childNodes.forEach(child => {
       this.deregisterNode(child);
-    }
+    });
 
     delete this.nodesMap[node.key];
   }
 
-  getCheckedNodes(leafOnly = false) {
+  getCheckedNodes(leafOnly = false, includeHalfChecked = false) {
     const checkedNodes = [];
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
       childNodes.forEach((child) => {
-        if (child.checked && (!leafOnly || (leafOnly && child.isLeaf))) {
+        if ((child.checked || (includeHalfChecked && child.indeterminate)) && (!leafOnly || (leafOnly && child.isLeaf))) {
           checkedNodes.push(child.data);
         }
 
@@ -311,8 +311,13 @@ export default class TreeStore {
     return this.currentNode;
   }
 
-  setCurrentNode(node) {
-    this.currentNode = node;
+  setCurrentNode(currentNode) {
+    const prevCurrentNode = this.currentNode;
+    if (prevCurrentNode) {
+      prevCurrentNode.isCurrent = false;
+    }
+    this.currentNode = currentNode;
+    this.currentNode.isCurrent = true;
   }
 
   setUserCurrentNode(node) {
@@ -322,9 +327,14 @@ export default class TreeStore {
   }
 
   setCurrentNodeKey(key) {
+    if (key === null || key === undefined) {
+      this.currentNode && (this.currentNode.isCurrent = false);
+      this.currentNode = null;
+      return;
+    }
     const node = this.getNode(key);
     if (node) {
-      this.currentNode = node;
+      this.setCurrentNode(node);
     }
   }
 };

@@ -67,16 +67,16 @@ export declare class ElForm extends ElementUIComponent {
   validate (callback: ValidateCallback): void
   validate (): Promise<boolean>
   /**
-   * Validate a certain form item
+   * Validate certain form items
    *
-   * @param prop The property of `model` that is going to validate
+   * @param props The property of `model` or array of prop which is going to validate
    * @param callback A callback to tell the field validation result
    */
-  validateField (prop: string, callback: ValidateFieldCallback): void
+  validateField (props: string | string[], callback: ValidateFieldCallback): void
 
   /** reset all the fields and remove validation result */
   resetFields (): void
   
-  /** clear validation message for all fields */
-  clearValidate (): void
+  /** clear validation message for certain fields */
+  clearValidate (props?: string | string[]): void
 }

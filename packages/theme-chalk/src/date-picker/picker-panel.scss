@@ -38,14 +38,14 @@
     background-color: transparent;
     line-height: 28px;
     font-size: 14px;
-    color: $--datepicker-color;
+    color: $--datepicker-font-color;
     padding-left: 12px;
     text-align: left;
     outline: none;
     cursor: pointer;
 
     &:hover {
-      color: $--datepicker-text-hover-color;
+      color: $--datepicker-hover-font-color;
     }
 
     &.active {
@@ -81,7 +81,7 @@
     margin-top: 8px;
 
     &:hover {
-      color: $--datepicker-text-hover-color;
+      color: $--datepicker-hover-font-color;
     }
 
     @include when(disabled) {
