@@ -24,6 +24,6 @@ export const isDefined = (val) => {
 };
 
 export const isVNode = (obj) => {
-  if (!isObject(obj)) return false;
+  if (!isObject(obj) || !obj.constructor) return false;
   return obj.constructor.name === 'VNode';
 };
