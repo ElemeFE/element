@@ -555,6 +555,38 @@ describe('Table', () => {
         done();
       }, DELAY);
     });
+
+    it('sort-change', async() => {
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
+            <el-table-column prop="name" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime" sortable/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { testData: this.testData };
+        }
+      });
+
+      const spy = sinon.spy();
+      vm.$refs.table.$on('sort-change', spy);
+      await waitImmediate();
+      expect(spy.notCalled).to.be.true;// not emit when mounted
+
+      const elm = vm.$el.querySelector('.caret-wrapper');
+      elm.click();
+      await waitImmediate();
+      expect(spy.calledOnce).to.be.true;
+      destroyVM(vm);
+    });
   });
 
   describe('column attributes', () => {
@@ -1139,27 +1171,6 @@ describe('Table', () => {
           setTimeout(_ => {
             const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['80', '92', '92', '95', '100']);
-            destroyVM(vm);
-            done();
-          }, DELAY);
-        }, DELAY);
-      });
-
-      it('sort-change', done => {
-        let result;
-        const vm = createTable('sortable="custom"', '', '', '', {
-          methods: {
-            sortChange(...args) {
-              result = args;
-            }
-          }
-        }, '@sort-change="sortChange"');
-        setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper');
-
-          elm.click();
-          setTimeout(_ => {
-            expect(result).to.exist;
             destroyVM(vm);
             done();
           }, DELAY);
