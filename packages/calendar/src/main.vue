@@ -188,7 +188,8 @@ export default {
     date() {
       if (!this.value) {
         if (this.realSelectedDay) {
-          return new Date(this.selectedDay);
+          const d = this.selectedDay.split('-');
+          return new Date(d[0], d[1] - 1, d[2]);
         } else if (this.validatedRange.length) {
           return this.validatedRange[0][0];
         }
