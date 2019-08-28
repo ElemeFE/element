@@ -110,8 +110,7 @@ export default {
       store: [],
       menus: [],
       activePath: [],
-      loadCount: 0,
-      loading: true
+      loadCount: 0
     };
   },
 
@@ -149,7 +148,7 @@ export default {
       this.checkStrictly && this.calculateCheckedNodePaths();
     },
     checkedValue(val) {
-      if (val && this.loading && this.config.lazy) {
+      if (val && this.config.lazy) {
         const nodeList = this.store.getNodes();
         if (!isEmpty(nodeList)) {
           const valueKey = this.config.value;
@@ -331,7 +330,6 @@ export default {
             }
 
             if (this.loadCount === this.checkedValue.length) {
-              this.loading = false;
               this.$parent.computePresentText();
             }
           }
