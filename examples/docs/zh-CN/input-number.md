@@ -185,7 +185,7 @@
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| change | 绑定值被改变时触发 | 最后变更的值 |
+| change | 绑定值被改变时触发 | currentValue, oldValue |
 | blur | 在组件 Input 失去焦点时触发 | (event: Event) |
 | focus | 在组件 Input 获得焦点时触发 | (event: Event) |
 

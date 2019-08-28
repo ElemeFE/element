@@ -190,7 +190,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 | Nombre | Descripción                              | Parámetros         |
 | ------ | ---------------------------------------- | ------------------ |
-| change | se produce cuando el valor cambia        | value after change |
+| change | se produce cuando el valor cambia        | currentValue, oldValue |
 | blur   | se produce cuando el componente pierde el foco | (event: Event)     |
 | focus  | se produce cuando el componente obtiene el foco | (event: Event)     |
 
