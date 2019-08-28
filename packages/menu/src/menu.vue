@@ -3,6 +3,8 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import Menubar from 'element-ui/src/utils/menu/aria-menubar';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
+  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import ElSubmenu from './submenu'
 
   export default {
     name: 'ElMenu',
@@ -19,7 +21,7 @@
             "el-menu": true
           }}
         >
-          { this.$slots.default }
+        {this.renderChildren(this.$slots.default)}
         </ul>
       );
 
@@ -158,6 +160,56 @@
       }
     },
     methods: {
+          renderChildren(children) {
+        if (this.mode === 'horizontal') {
+          let items = [];
+          children.forEach((el, index) => {
+            if(el.tag) {
+              items.push(this.getOverflowedSubMenuItem(children.slice(index), index));
+            }
+            items.push(el);
+          })
+          return items;
+        } else {
+          return children;
+        }
+      },
+      getOverflowedSubMenuItem(overflowedItems, index) {
+        const key = "subpopmenu-" + index;
+        return <ElSubmenu index={ key } class="el-submenu-overflowed"><template slot="title">...</template>{overflowedItems}</ElSubmenu>;
+      },
+      handleResize() {
+        if (this.mode === 'horizontal') {
+          const menuWidth = this.$el.getBoundingClientRect().width;
+          const items  = [].slice.call(this.$el.children);
+          let currentWidth = 0;
+          let lastVisibleIndex = 0;
+          items.forEach(el => {
+            el.style['display'] = '';
+          })
+          const menuItemNodes = items.filter(el => el.className.split(' ').indexOf('el-submenu-overflowed') < 0);
+          const menuItemSizes = menuItemNodes.map(el => el.getBoundingClientRect().width);
+          const overflowedItems = items.filter(el => el.className.split(' ').indexOf('el-submenu-overflowed') >=0);
+          const overflowedWidth = overflowedItems[0].getBoundingClientRect().width;
+          overflowedItems.forEach(el => {
+            el.style['display'] = 'none';
+          })
+          menuItemSizes.forEach(liWidth => {
+            currentWidth += liWidth;
+            if(currentWidth + overflowedWidth <= menuWidth) {
+              lastVisibleIndex++;
+            }
+          })
+          menuItemNodes.forEach((el, index) => {
+            if(index >= lastVisibleIndex) {
+              el.style['display'] = 'none';
+            }
+          })
+          if(lastVisibleIndex < overflowedItems.length) {
+            overflowedItems[lastVisibleIndex].style['display'] = '';
+          }
+        }
+      },
       updateActiveIndex(val) {
         const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive];
         if (item) {
@@ -315,6 +367,13 @@
         new Menubar(this.$el); // eslint-disable-line
       }
       this.$watch('items', this.updateActiveIndex);
+      this.$nextTick(() => {
+        this.handleResize()
+        addResizeListener(this.$el, this.handleResize)
+      })
+    },
+    beforeDestroy() {
+      if (this.$el) removeResizeListener(this.$el, this.handleResize)
     }
   };
 </script>
