@@ -110,7 +110,8 @@ export default {
       store: [],
       menus: [],
       activePath: [],
-      loadCount: 0
+      loadCount: 0,
+      loading: true
     };
   },
 
@@ -148,6 +149,20 @@ export default {
       this.checkStrictly && this.calculateCheckedNodePaths();
     },
     checkedValue(val) {
+      if (val && this.loading && this.config.lazy) {
+        const nodeList = this.store.getNodes();
+        if (!isEmpty(nodeList)) {
+          const valueKey = this.config.value;
+          const nodeValue = val[this.loadCount++];
+          if (nodeList.filter(item => item[valueKey] === nodeValue).length > 0) {
+            const checkedNode = this.store.getNodeByValue(nodeValue);
+            this.lazyLoad(checkedNode, () => {
+              this.handleExpand(checkedNode);
+            });
+          }
+        }
+      }
+
       if (!isEqual(val, this.value)) {
         this.checkStrictly && this.calculateCheckedNodePaths();
         this.$emit('input', val);
@@ -316,6 +331,7 @@ export default {
             }
 
             if (this.loadCount === this.checkedValue.length) {
+              this.loading = false;
               this.$parent.computePresentText();
             }
           }
