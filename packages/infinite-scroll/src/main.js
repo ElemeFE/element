@@ -126,7 +126,7 @@ const handleScroll = function(cb) {
     observer.disconnect();
     this[scope].observer = null;
     if (visibleObserver) {
-      observer.disconnect();
+      visibleObserver.disconnect();
       this[scope].visibleObserver = null;
     }
   }
