@@ -21,7 +21,7 @@
       padding: 0 26px 0 16px;
       height: 28px;
       line-height: 28px;
-      font-size: 14px;
+      font-size: $--font-size-base;
  
       @include e(prefix) {
         left: 10px;
@@ -45,7 +45,7 @@
       padding: 0 24px 0 14px;
       height: 26px;
       line-height: 26px;
-      font-size: 13px;
+      font-size: $--font-size-small;
  
       @include e(prefix) {
         left: 8px;
@@ -69,7 +69,7 @@
       padding: 0 20px 0 10px;
       height: 24px;
       line-height: 24px;
-      font-size: 12px;
+      font-size: $--font-size-extra-small;
  
       @include e(prefix) {
         left: 6px;
