@@ -129,7 +129,10 @@
         activeIndex: this.defaultActive,
         openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
         items: {},
-        submenus: {}
+        submenus: {},
+        menuItemSizes: [],
+        overflowedWidth: 0,
+        lastVisibleIndex: 0,
       };
     },
     computed: {
@@ -160,11 +163,11 @@
       }
     },
     methods: {
-          renderChildren(children) {
+      renderChildren(children) {
         if (this.mode === 'horizontal') {
           let items = [];
           children.forEach((el, index) => {
-            if(el.tag) {
+            if (el.tag) {
               items.push(this.getOverflowedSubMenuItem(children.slice(index), index));
             }
             items.push(el);
@@ -178,36 +181,45 @@
         const key = "subpopmenu-" + index;
         return <ElSubmenu index={ key } class="el-submenu-overflowed"><template slot="title">...</template>{overflowedItems}</ElSubmenu>;
       },
+      resizeInit(){
+        if (this.mode === 'horizontal') {
+        }
+      },
       handleResize() {
         if (this.mode === 'horizontal') {
           const menuWidth = this.$el.getBoundingClientRect().width;
           const items  = [].slice.call(this.$el.children);
-          let currentWidth = 0;
-          let lastVisibleIndex = 0;
-          items.forEach(el => {
-            el.style['display'] = '';
-          })
           const menuItemNodes = items.filter(el => el.className.split(' ').indexOf('el-submenu-overflowed') < 0);
-          const menuItemSizes = menuItemNodes.map(el => el.getBoundingClientRect().width);
+          if (!this.menuItemSizes.length) this.menuItemSizes = menuItemNodes.map(el => el.getBoundingClientRect().width);
           const overflowedItems = items.filter(el => el.className.split(' ').indexOf('el-submenu-overflowed') >=0);
-          const overflowedWidth = overflowedItems[0].getBoundingClientRect().width;
-          overflowedItems.forEach(el => {
-            el.style['display'] = 'none';
-          })
-          menuItemSizes.forEach(liWidth => {
+          if (!this.overflowedWidth) {
+            this.overflowedWidth = overflowedItems[0].getBoundingClientRect().width;
+            overflowedItems.forEach(el => {
+              el.style['display'] = 'none'
+            })
+          }
+          let currentWidth = 0
+          let lastVisibleIndex = 0
+          if (this.lastVisibleIndex < overflowedItems.length && this.lastVisibleIndex) {
+            overflowedItems[this.lastVisibleIndex].style['display'] = 'none'
+          }
+          this.menuItemSizes.forEach(liWidth => {
             currentWidth += liWidth;
-            if(currentWidth + overflowedWidth <= menuWidth) {
+            if(currentWidth + this.overflowedWidth <= menuWidth) {
               lastVisibleIndex++;
             }
           })
           menuItemNodes.forEach((el, index) => {
-            if(index >= lastVisibleIndex) {
+            if (index >= lastVisibleIndex) {
               el.style['display'] = 'none';
+            } else {
+              el.style['display'] = ''
             }
           })
           if(lastVisibleIndex < overflowedItems.length) {
             overflowedItems[lastVisibleIndex].style['display'] = '';
           }
+          this.lastVisibleIndex = lastVisibleIndex
         }
       },
       updateActiveIndex(val) {
@@ -373,7 +385,7 @@
       })
     },
     beforeDestroy() {
-      if (this.$el) removeResizeListener(this.$el, this.handleResize)
+      if (this.$el && this.mode === 'horizontal') removeResizeListener(this.$el, this.handleResize)
     }
   };
 </script>
