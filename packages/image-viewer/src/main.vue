@@ -37,7 +37,7 @@
       <div class="el-image-viewer__canvas">
         <img
           v-for="(url, i) in urlList"
-          v-if="i === index"
+          v-if="i === value"
           ref="img"
           class="el-image-viewer__img"
           :key="url"
@@ -87,12 +87,15 @@ export default {
     onClose: {
       type: Function,
       default: () => {}
+    },
+    value: {
+      type: Number,
+      default: 0
     }
   },
 
   data() {
     return {
-      index: 0,
       isShow: false,
       infinite: true,
       loading: false,
@@ -111,13 +114,13 @@ export default {
       return this.urlList.length <= 1;
     },
     isFirst() {
-      return this.index === 0;
+      return this.value === 0;
     },
     isLast() {
-      return this.index === this.urlList.length - 1;
+      return this.value === this.urlList.length - 1;
     },
     currentImg() {
-      return this.urlList[this.index];
+      return this.urlList[this.value];
     },
     imgStyle() {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform;
@@ -134,7 +137,7 @@ export default {
     }
   },
   watch: {
-    index: {
+    value: {
       handler: function(val) {
         this.reset();
         this.onSwitch(val);
@@ -253,12 +256,12 @@ export default {
     prev() {
       if (this.isFirst && !this.infinite) return;
       const len = this.urlList.length;
-      this.index = (this.index - 1 + len) % len;
+      this.$emit('input', (this.value - 1 + len) % len);
     },
     next() {
       if (this.isLast && !this.infinite) return;
       const len = this.urlList.length;
-      this.index = (this.index + 1) % len;
+      this.$emit('input', (this.value + 1) % len);
     },
     handleActions(action, options = {}) {
       if (this.loading) return;

@@ -49,6 +49,10 @@ export default {
     drag: Boolean,
     dragger: Boolean,
     withCredentials: Boolean,
+    imagePreview: {
+      type: Boolean,
+      default: false
+    },
     showFileList: {
       type: Boolean,
       default: true
@@ -275,6 +279,7 @@ export default {
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
+          image-preview={this.imagePreview}
           handlePreview={this.onPreview}>
           {
             (props) => {
