@@ -150,6 +150,40 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
 ```
 :::
 
+### Fullscreen image preview
+
+Set `image-preview` to `true` to enable the fullscreen image previewer.
+
+:::demo
+```html
+<el-upload
+  action="https://jsonplaceholder.typicode.com/posts/"
+  list-type="picture-card"
+  :image-preview="true"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
+<script>
+  export default {
+    data() {
+      return {
+        dialogImageUrl: '',
+        dialogVisible: false
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Custom file thumbnail
 
 Use `scoped-slot` to change default thumbnail template.
@@ -348,6 +382,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | show-file-list   | especifica si se debe mostrar la lista de archivos cargados  | boolean                            | —                         | true        |
 | drag             | se especifica si se activará el modo arrastrar y soltar      | boolean                            | —                         | false       |
 | accept           | acepta [tipos de archivos](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), puede no funcionar cuando `thumbnail-mode` esta en `true` | string                             | —                         | —           |
+| image-preview    | Uses image viewer to preview images. Is ignored when on-preview hook is used | boolean            | —                         | false       |
 | on-preview       | _hook_ lanzado al hacer clic en los archivos subidos         | function(file)                     | —                         | —           |
 | on-remove        | _hook_ lanzado cuando los archivos son eliminados            | function(file, fileList)           | —                         | —           |
 | on-success       | _hook_ lanzado cuando los archivos fueron cargados correctamente | function(response, file, fileList) | —                         | —           |

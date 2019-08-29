@@ -154,6 +154,40 @@ Utilisez `list-type` pour changer le style de la liste de fichiers.
 ```
 :::
 
+### Fullscreen image preview
+
+Set `image-preview` to `true` to enable the fullscreen image previewer.
+
+:::demo
+```html
+<el-upload
+  action="https://jsonplaceholder.typicode.com/posts/"
+  list-type="picture-card"
+  :image-preview="true"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
+<script>
+  export default {
+    data() {
+      return {
+        dialogImageUrl: '',
+        dialogVisible: false
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Custom file thumbnail
 
 Use `scoped-slot` to change default thumbnail template.
@@ -354,6 +388,7 @@ show-file-list | Si la liste des fichiers est affichée. | boolean | — | true
  drag | Si le mode drag'n drop est activé. | boolean | — | false
 accept | [Types de fichiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept) acceptés, ne marche pas si `thumbnail-mode` est `true`. | string | — | —
 on-preview | Fonction pour quand le fichier est cliqué. | function(file) | — | —
+image-preview | Uses image viewer to preview images. Is ignored when on-preview hook is used | boolean | — | false
 on-remove | Fonction pour quand des fichiers sont supprimés. | function(file, fileList) | — | —
 on-success | Fonction pour quand l'upload a réussi. | function(response, file, fileList) | — | —
 on-error | Fonction pour quand l'upload renvoi une erreur. | function(err, file, fileList) | — | —

@@ -154,6 +154,40 @@ Use `list-type` to change the fileList style.
 ```
 :::
 
+### Fullscreen image preview
+
+Set `image-preview` to `true` to enable the fullscreen image previewer.
+
+:::demo
+```html
+<el-upload
+  action="https://jsonplaceholder.typicode.com/posts/"
+  list-type="picture-card"
+  :image-preview="true"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
+<script>
+  export default {
+    data() {
+      return {
+        dialogImageUrl: '',
+        dialogVisible: false
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Custom file thumbnail
 
 Use `scoped-slot` to change default thumbnail template.
@@ -352,6 +386,7 @@ with-credentials | whether cookies are sent | boolean | — |false
 show-file-list | whether to show the uploaded file list | boolean | — | true
  drag | whether to activate drag and drop mode | boolean | — | false
 accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
+image-preview | Uses image viewer to preview images. Is ignored when on-preview hook is used | boolean | — | false
 on-preview | hook function when clicking the uploaded files | function(file) | — | —
 on-remove | hook function when files are removed | function(file, fileList) | — | —
 on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
