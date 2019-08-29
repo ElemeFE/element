@@ -53,8 +53,6 @@ export default {
 
   watch: {
     normalizedData: 'updateTreeData',
-    // expandRowKeys 在 ExpandTable 中也有使用
-    expandRowKeys: 'updateTreeData',
     normalizedLazyNode: 'updateTreeData'
   },
 
@@ -155,6 +153,7 @@ export default {
 
     updateTreeExpandKeys(value) {
       this.states.expandRowKeys = value;
+      this.updateTreeData();
     },
 
     toggleTreeExpansion(row, expanded) {
