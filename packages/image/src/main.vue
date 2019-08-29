@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import ImageViewer from './image-viewer';
+  import ImageViewer from 'element-ui/packages/image-viewer';
   import Locale from 'element-ui/src/mixins/locale';
   import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
   import { isString, isHtmlElement } from 'element-ui/src/utils/types';
