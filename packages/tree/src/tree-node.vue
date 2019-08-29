@@ -2,6 +2,7 @@
   <div
     class="el-tree-node"
     @click.stop="handleClick"
+    @dblclick="handleDblClick"
     @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
     :class="{
@@ -133,7 +134,8 @@
         expanded: false,
         childNodeRendered: false,
         oldChecked: null,
-        oldIndeterminate: null
+        oldIndeterminate: null,
+        clickFlag: null
       };
     },
 
@@ -168,19 +170,33 @@
       },
 
       handleClick() {
-        const store = this.tree.store;
-        store.setCurrentNode(this.node);
-        this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
-        this.tree.currentNode = this;
-        if (this.tree.expandOnClickNode) {
-          this.handleExpandIconClick();
+        if (this.clickFlag) {
+          clearTimeout(this.clickFlag)
+          this.clickFlag = null
         }
-        if (this.tree.checkOnClickNode && !this.node.disabled) {
-          this.handleCheckChange(null, {
-            target: { checked: !this.node.checked }
-          });
+        this.clickFlag = setTimeout(() => {
+          const store = this.tree.store;
+          store.setCurrentNode(this.node);
+          this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
+          this.tree.currentNode = this;
+          if (this.tree.expandOnClickNode) {
+            this.handleExpandIconClick();
+          }
+          if (this.tree.checkOnClickNode && !this.node.disabled) {
+            this.handleCheckChange(null, {
+              target: { checked: !this.node.checked }
+            });
+          }
+          this.tree.$emit('node-click', this.node.data, this.node, this);
+        }, 300);
+      },
+
+      handleDblClick() {
+        if (this.clickFlag) {
+          clearTimeout(this.clickFlag)
+          this.clickFlag = null
         }
-        this.tree.$emit('node-click', this.node.data, this.node, this);
+        this.tree.$emit('node-dblclick', this.node.data, this.node, this);
       },
 
       handleContextMenu(event) {
