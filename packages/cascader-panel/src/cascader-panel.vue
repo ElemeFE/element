@@ -149,17 +149,7 @@ export default {
     },
     checkedValue(val) {
       if (val && this.config.lazy) {
-        const nodeList = this.store.getNodes();
-        if (!isEmpty(nodeList)) {
-          const valueKey = this.config.value;
-          const nodeValue = val[this.loadCount++];
-          if (nodeList.filter(item => item[valueKey] === nodeValue).length > 0) {
-            const checkedNode = this.store.getNodeByValue(nodeValue);
-            this.lazyLoad(checkedNode, () => {
-              this.handleExpand(checkedNode);
-            });
-          }
-        }
+        this.handleLazyDefaultValue(this.store.getNodes(), val);
       }
 
       if (!isEqual(val, this.value)) {
@@ -300,6 +290,25 @@ export default {
     handleCheckChange(value) {
       this.checkedValue = value;
     },
+    handleLazyDefaultValue(dataList, defaultValue) {
+      if (Array.isArray(defaultValue) && !isEmpty(dataList)) {
+        const nodeValue = defaultValue[this.loadCount++];
+        const valueKey = this.config.value;
+        const leafKey = this.config.leaf;
+
+        if (dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
+          const checkedNode = this.store.getNodeByValue(nodeValue);
+
+          if (!checkedNode.data[leafKey]) {
+            this.lazyLoad(checkedNode, () => {
+              this.handleExpand(checkedNode);
+            });
+          } else {
+            this.$parent.computePresentText();
+          }
+        }
+      }
+    },
     lazyLoad(node, onFullfiled) {
       const { config } = this;
       if (!node) {
@@ -315,25 +324,7 @@ export default {
         node.loaded = true;
 
         // dispose default value on lazy load mode
-        if (Array.isArray(this.checkedValue)) {
-          const nodeValue = this.checkedValue[this.loadCount++];
-          const valueKey = this.config.value;
-          const leafKey = this.config.leaf;
-
-          if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
-            const checkedNode = this.store.getNodeByValue(nodeValue);
-
-            if (!checkedNode.data[leafKey]) {
-              this.lazyLoad(checkedNode, () => {
-                this.handleExpand(checkedNode);
-              });
-            }
-
-            if (this.loadCount === this.checkedValue.length) {
-              this.$parent.computePresentText();
-            }
-          }
-        }
+        this.handleLazyDefaultValue(dataList, this.checkedValue);
 
         onFullfiled && onFullfiled(dataList);
       };
