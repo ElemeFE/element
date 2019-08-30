@@ -1172,6 +1172,35 @@ describe('Table', () => {
           }, DELAY);
         }, DELAY);
       });
+
+      it('sortable order with null', async() => {
+        const vm = createVue({
+          template: `
+            <el-table :data="testData">
+              <el-table-column prop="name" label="name" sortable/>
+            </el-table>
+          `,
+          data() {
+            return {
+              testData: [
+                { id: 1, name: 'Toy Story' },
+                { id: 2, name: '' },
+                { id: 3, name: 'Toy Story 2' },
+                { id: 4, name: null },
+                { id: 5, name: 'Finding Nemo' }
+              ]
+            };
+          }
+        }, true);
+
+        await waitImmediate();
+        const elm = vm.$el.querySelector('.caret-wrapper');
+        elm.click();
+        await waitImmediate();
+        let lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+        let content = toArray(lastCells).map(node => node.textContent);
+        expect(content).to.eql(['', '', 'Finding Nemo', 'Toy Story', 'Toy Story 2']);
+      });
     });
 
     describe('click sortable column', () => {
