@@ -200,7 +200,7 @@
           }
           let currentWidth = 0
           let lastVisibleIndex = 0
-          if (this.lastVisibleIndex < overflowedItems.length && this.lastVisibleIndex) {
+          if (this.lastVisibleIndex < overflowedItems.length) {
             overflowedItems[this.lastVisibleIndex].style['display'] = 'none'
           }
           this.menuItemSizes.forEach(liWidth => {
@@ -213,11 +213,11 @@
             if (index >= lastVisibleIndex) {
               el.style['display'] = 'none';
             } else {
-              el.style['display'] = ''
+              el.style['display'] = 'inline-block'
             }
           })
           if(lastVisibleIndex < overflowedItems.length) {
-            overflowedItems[lastVisibleIndex].style['display'] = '';
+            overflowedItems[lastVisibleIndex].style['display'] = 'inline-block';
           }
           this.lastVisibleIndex = lastVisibleIndex
         }

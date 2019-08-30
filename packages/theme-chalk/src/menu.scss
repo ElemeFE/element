@@ -51,8 +51,9 @@
 
   @include m(horizontal) {
     border-right: none;
+    white-space: nowrap;
     & > .el-menu-item {
-      float: left;
+      display: inline-block;
       height: 60px;
       line-height: 60px;
       margin: 0;
@@ -70,7 +71,7 @@
       }
     }
     & > .el-submenu {
-      float: left;
+      display: inline-block;
 
       &:focus,
       &:hover {
