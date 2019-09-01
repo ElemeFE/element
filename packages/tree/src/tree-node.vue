@@ -2,7 +2,7 @@
   <div
     class="el-tree-node"
     @click.stop="handleClick"
-    @dblclick="handleDblClick"
+    @dblclick.stop="handleDblClick"
     @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
     :class="{
@@ -195,6 +195,15 @@
         if (this.clickFlag) {
           clearTimeout(this.clickFlag)
           this.clickFlag = null
+        }
+        const store = this.tree.store;
+        store.setCurrentNode(this.node);
+        this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
+        this.tree.currentNode = this;
+        if (this.tree.checkOnClickNode && !this.node.disabled) {
+          this.handleCheckChange(null, {
+            target: { checked: !this.node.checked }
+          });
         }
         this.tree.$emit('node-dblclick', this.node.data, this.node, this);
       },
