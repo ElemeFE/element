@@ -1,4 +1,4 @@
-import { createVue, wait, destroyVM } from '../util';
+import { createVue, wait, destroyVM, waitImmediate } from '../util';
 
 describe('InfiniteScroll', () => {
   let vm;
@@ -50,11 +50,11 @@ describe('InfiniteScroll', () => {
         }
       }
     }, true);
-    await wait();// wait for render
+    await waitImmediate();// wait for render
     vm.visible = true;
-    await wait();
+    await wait(200);
     vm.$refs.scrollTarget.scrollTop = 2000;
-    await wait();
+    await waitImmediate();
     expect(vm.$el.innerText.indexOf('2') > -1).to.be.true;
   });
 });

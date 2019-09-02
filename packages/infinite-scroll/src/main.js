@@ -95,15 +95,13 @@ const isElementVisible = el => {
 
 const handleScroll = function(cb) {
   const { el, vm, container, observer, visibleObserver, onScroll } = this[scope];
-  const { distance, disabled } = getScrollOptions(el, vm);
+  const { distance, disabled, delay } = getScrollOptions(el, vm);
 
   if (disabled) return;
 
   if (!isElementVisible(el)) {
-    if (!visibleObserver) {
-      const observer = this[scope].visibleObserver = new IntersectionObserver(onScroll);
-      observer.observe(el);
-    }
+    if (visibleObserver) clearTimeout(visibleObserver);
+    this[scope].visibleObserver = setTimeout(onScroll, delay);
     return;
   }
 
@@ -125,10 +123,7 @@ const handleScroll = function(cb) {
   } else if (observer) {
     observer.disconnect();
     this[scope].observer = null;
-    if (visibleObserver) {
-      visibleObserver.disconnect();
-      this[scope].visibleObserver = null;
-    }
+    visibleObserver && clearTimeout(visibleObserver);
   }
 };
 
