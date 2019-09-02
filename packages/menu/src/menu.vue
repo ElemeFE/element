@@ -271,7 +271,12 @@
         if (this.router && hasIndex) {
           this.routeToItem(item, (error) => {
             this.activeIndex = oldActiveIndex;
-            if (error) console.error(error);
+            if (error) {
+              // vue-router 3.1.0+ push/replace cause NavigationDuplicated error (In a Promise)
+              // https://github.com/ElemeFE/element/issues/17044
+              if (error && error.name === 'NavigationDuplicated') return
+              console.error(error)
+            }
           });
         }
       },
@@ -294,10 +299,7 @@
       routeToItem(item, onError) {
         let route = item.route || item.index;
         try {
-          const result = this.$router.push(route, () => {}, onError)
-          // vue-router 3.1.0+ push/replace cause NavigationDuplicated error (In a Promise)
-          // https://github.com/ElemeFE/element/issues/17044
-          result.catch && result.catch(() => {});
+          this.$router.push(route, () => {}, onError)
         } catch (e) {
           console.error(e);
         }
