@@ -272,7 +272,7 @@
           this.routeToItem(item, (error) => {
             this.activeIndex = oldActiveIndex;
             if (error) {
-              // vue-router 3.1.0+ push/replace cause NavigationDuplicated error (In a Promise)
+              // vue-router 3.1.0+ push/replace cause NavigationDuplicated error 
               // https://github.com/ElemeFE/element/issues/17044
               if (error && error.name === 'NavigationDuplicated') return
               console.error(error)
@@ -299,7 +299,7 @@
       routeToItem(item, onError) {
         let route = item.route || item.index;
         try {
-          this.$router.push(route, () => {}, onError)
+          this.$router.push(route, () => {}, onError);
         } catch (e) {
           console.error(e);
         }
