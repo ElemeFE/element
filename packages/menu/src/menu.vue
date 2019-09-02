@@ -294,7 +294,10 @@
       routeToItem(item, onError) {
         let route = item.route || item.index;
         try {
-          this.$router.push(route, () => {}, onError);
+          const result = this.$router.push(route, () => {}, onError)
+          // vue-router 3.1.0+ push/replace cause NavigationDuplicated error (In a Promise)
+          // https://github.com/ElemeFE/element/issues/17044
+          result.catch && result.catch(() => {});
         } catch (e) {
           console.error(e);
         }
