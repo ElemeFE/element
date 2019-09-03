@@ -105,6 +105,7 @@
     "gulp-sass": "^4.0.2",
     "highlight.js": "^9.3.0",
     "html-webpack-plugin": "^3.2.0",
+    "inputmask": "^4.0.8",
     "json-loader": "^0.5.7",
     "json-templater": "^1.0.4",
     "karma": "^4.0.1",

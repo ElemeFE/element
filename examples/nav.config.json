@@ -89,6 +89,10 @@
               "title": "Checkbox 多选框"
             },
             {
+              "path": "/regex",
+              "title": "Regex 输入框"
+            },
+            {
               "path": "/input",
               "title": "Input 输入框"
             },
@@ -381,6 +385,10 @@
             {
               "path": "/checkbox",
               "title": "Checkbox"
+            },
+            {
+              "path": "/regex",
+              "title": "Regex"
             },
             {
               "path": "/input",
@@ -677,6 +685,10 @@
               "title": "Checkbox"
             },
             {
+              "path": "/regex",
+              "title": "Regex"
+            },
+            {
               "path": "/input",
               "title": "Input"
             },
@@ -969,6 +981,10 @@
             {
               "path": "/checkbox",
               "title": "Checkbox"
+            },
+            {
+              "path": "/regex",
+              "title": "Regex"
             },
             {
               "path": "/input",
