@@ -185,30 +185,22 @@
   }
 
   th {
-    white-space: nowrap;
     overflow: hidden;
     user-select: none;
     background-color: $--table-header-background-color;
 
-    div {
-      display: inline-block;
-      padding-left: 10px;
-      padding-right: 10px;
-      line-height: 40px;
-      box-sizing: border-box;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
     > .cell {
+      display: inline-block;
+      box-sizing: border-box;
       position: relative;
       word-wrap: normal;
       text-overflow: ellipsis;
-      display: inline-block;
       vertical-align: middle;
+      white-space: nowrap;
+      padding-left: 10px;
+      padding-right: 10px;
+      line-height: 40px;
       width: 100%;
-      box-sizing: border-box;
 
       &.highlight {
         color: $--color-primary;
