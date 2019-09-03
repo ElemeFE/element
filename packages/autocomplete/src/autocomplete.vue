@@ -200,7 +200,7 @@
         this.activated = true;
         this.$emit('focus', event);
         if (this.triggerOnFocus) {
-          this.debouncedGetData(this.value);
+          this.getData(this.value);
         }
       },
       handleBlur(event) {
