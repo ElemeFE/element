@@ -24,11 +24,13 @@ const install = function(Vue, opts = {}) {
   locale.i18n(opts.i18n);
 
   components.forEach(component => {
-    Vue.component(component.name, component);
+    let { name } = component;
+    if (name) Vue.component(name, component);
   });
 
   Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
+  Vue.use(Regex.directive);
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',

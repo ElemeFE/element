@@ -43,6 +43,7 @@
   "notification": "./packages/notification/index.js",
   "slider": "./packages/slider/index.js",
   "loading": "./packages/loading/index.js",
+  "regex": "./packages/regex/index.js",
   "icon": "./packages/icon/index.js",
   "row": "./packages/row/index.js",
   "col": "./packages/col/index.js",

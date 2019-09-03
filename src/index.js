@@ -44,6 +44,7 @@ import Alert from '../packages/alert/index.js';
 import Notification from '../packages/notification/index.js';
 import Slider from '../packages/slider/index.js';
 import Loading from '../packages/loading/index.js';
+import Regex from '../packages/regex/index.js';
 import Icon from '../packages/icon/index.js';
 import Row from '../packages/row/index.js';
 import Col from '../packages/col/index.js';
@@ -126,6 +127,7 @@ const components = [
   Tree,
   Alert,
   Slider,
+  Regex,
   Icon,
   Row,
   Col,
@@ -169,11 +171,13 @@ const install = function(Vue, opts = {}) {
   locale.i18n(opts.i18n);
 
   components.forEach(component => {
-    Vue.component(component.name, component);
+    let { name } = component;
+    if (name) Vue.component(name, component);
   });
 
   Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
+  Vue.use(Regex.directive);
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
@@ -245,6 +249,7 @@ export default {
   Alert,
   Notification,
   Slider,
+  Regex,
   Icon,
   Row,
   Col,
