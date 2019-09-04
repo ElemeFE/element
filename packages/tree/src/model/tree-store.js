@@ -321,7 +321,7 @@ export default class TreeStore {
   }
 
   setUserCurrentNode(node) {
-    const key = node.data[this.key];
+    const key = node.data ? node.data[this.key] : node[this.key];
     const currNode = this.nodesMap[key];
     this.setCurrentNode(currNode);
   }
