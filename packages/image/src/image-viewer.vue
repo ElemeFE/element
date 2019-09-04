@@ -1,6 +1,6 @@
 <template>
   <transition name="viewer-fade">
-    <div class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
+    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
       <div class="el-image-viewer__mask"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
@@ -290,6 +290,7 @@ export default {
   },
   mounted() {
     this.deviceSupportInstall();
+    this.$refs['el-image-viewer__wrapper'].focus();
   }
 };
 </script>
