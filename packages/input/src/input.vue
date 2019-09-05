@@ -43,8 +43,8 @@
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <i class="el-input__icon"
-           v-if="prefixIcon"
-           :class="prefixIcon">
+          v-if="prefixIcon"
+          :class="prefixIcon">
         </i>
       </span>
       <!-- 后置内容 -->
