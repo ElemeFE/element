@@ -107,7 +107,7 @@ describe('TimePicker', () => {
       template: '<el-time-picker ref="compo" format="h:mm A" toggle-am-pm v-model="value"></el-time-picker>',
       data() {
         return {
-          value: ''
+          value: new Date(1970, 0, 1, 9, 0, 0, 0)
         };
       }
     }, true);
