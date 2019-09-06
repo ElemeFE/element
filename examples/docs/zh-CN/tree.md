@@ -813,7 +813,7 @@
 | default-checked-keys  | 默认勾选的节点的 key 的数组                        | array                       | —    | —     |
 | current-node-key      | 当前选中的节点                                   | string, number               | —    | —     |
 | filter-node-method    | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | —    | —     |
-| expand-after-filter    | 搜索后是否自动展开节点 | boolean    | —     | true
+| expand-after-filter    | 搜索后是否自动展开节点 | string    | expand/collapse/notChange     | expand
 | accordion             | 是否每次只打开一个同级树节点展开                   | boolean                     | —    | false |
 | indent                | 相邻级节点间的水平缩进，单位为像素                 | number                     | —    | 16 |
 | icon-class            | 自定义树节点的图标                              |  string                     | -    | -     |

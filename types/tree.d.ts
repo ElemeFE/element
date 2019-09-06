@@ -86,8 +86,8 @@ export declare class ElTree<K, D extends TreeData> extends ElementUIComponent {
   /** Whether to expand father node when a child node is expanded */
   autoExpandParent: boolean;
 
-  /** expand after filter */
-  expandAfterFilter: boolean;
+  /** expand after filter  ['expand', 'collapse', 'notChange']*/
+  expandAfterFilter: string;
 
   /** Array of keys of initially expanded nodes */
   defaultExpandedKeys: K[];

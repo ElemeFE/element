@@ -804,7 +804,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | default-checked-keys  | array of keys of initially checked nodes | array                       | —               | —       |
 | current-node-key      | key of initially selected node | string, number                       | —               | —       |
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
-| expand-after-filter    | expand node after filter | boolean    | —     | true
+| expand-after-filter    | expand node after filter | string    | expand/collapse/notChange     | expand
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
 | icon-class            | custome tree node icon                                       | string                     | -    | -  |

@@ -94,8 +94,9 @@
         default: true
       },
       expandAfterFilter: {
-        type: Boolean,
-        default: true
+        validator: function(value) {
+          return ['expand', 'collapse', 'notChange'].includes(value);
+        }
       },
       defaultCheckedKeys: Array,
       defaultExpandedKeys: Array,
