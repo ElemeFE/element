@@ -212,7 +212,7 @@ export default Vue.extend({
     updateAllSelected() {
       const states = this.states;
       const { selection, rowKey, selectable } = states;
-      // data 为 null 时，结构时的默认值会被忽略
+      // data 为 null 时，解构时的默认值会被忽略
       const data = states.data || [];
       if (data.length === 0) {
         states.isAllSelected = false;
