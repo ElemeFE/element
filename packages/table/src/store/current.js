@@ -51,7 +51,7 @@ export default {
     updateCurrentRowData() {
       const { states, table } = this;
       const { rowKey, _currentRowKey } = states;
-      // data 为 null 时，结构时的默认值会被忽略
+      // data 为 null 时，解构时的默认值会被忽略
       const data = states.data || [];
       const oldCurrentRow = states.currentRow;
 
