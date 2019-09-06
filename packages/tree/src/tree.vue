@@ -96,7 +96,8 @@
       expandAfterFilter: {
         validator: function(value) {
           return ['expand', 'collapse', 'notChange'].includes(value);
-        }
+        },
+        default: 'expand'
       },
       defaultCheckedKeys: Array,
       defaultExpandedKeys: Array,
