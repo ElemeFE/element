@@ -193,13 +193,9 @@
       display: inline-block;
       box-sizing: border-box;
       position: relative;
-      word-wrap: normal;
-      text-overflow: ellipsis;
       vertical-align: middle;
-      white-space: nowrap;
       padding-left: 10px;
       padding-right: 10px;
-      line-height: 40px;
       width: 100%;
 
       &.highlight {
