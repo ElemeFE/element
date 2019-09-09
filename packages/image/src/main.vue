@@ -212,6 +212,7 @@
         }
       },
       clickHandler() {
+        // prevent body scroll
         prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         this.showViewer = true;
