@@ -16,8 +16,7 @@ const isPlay = !!process.env.PLAY_ENV;
 const webpackConfig = {
   mode: process.env.NODE_ENV,
   entry: isProd ? {
-    docs: './examples/entry.js',
-    'element-ui': './src/index.js'
+    docs: './examples/entry.js'
   } : (isPlay ? './examples/play.js' : './examples/entry.js'),
   output: {
     path: path.resolve(process.cwd(), './examples/element-ui/'),
@@ -148,6 +147,16 @@ if (isProd) {
     }),
     new OptimizeCSSAssetsPlugin({})
   );
+  // https://webpack.js.org/configuration/optimization/#optimizationsplitchunks
+  webpackConfig.optimization.splitChunks = {
+    cacheGroups: {
+      vendor: {
+        test: /\/src\//,
+        name: 'element-ui',
+        chunks: 'all'
+      }
+    }
+  };
   webpackConfig.devtool = false;
 }
 
