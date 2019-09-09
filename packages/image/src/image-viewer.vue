@@ -1,7 +1,6 @@
 <template>
   <transition name="viewer-fade">
-    <div class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
-      <div class="el-image-viewer__mask"></div>
+    <div v-show="visible" class="el-image-viewer__wrapper">
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
         <i class="el-icon-circle-close"></i>
@@ -36,22 +35,23 @@
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
         <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
-          ref="img"
-          class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
-          :style="imgStyle"
-          @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown">
+                v-for="(url, i) in urlList"
+                v-if="i === index"
+                ref="img"
+                class="el-image-viewer__img"
+                :key="url"
+                :src="currentImg"
+                :style="imgStyle"
+                @load="handleImgLoad"
+                @error="handleImgError"
+                @mousedown="handleMouseDown">
       </div>
     </div>
   </transition>
 </template>
 
 <script>
+import Popup from 'element-ui/src/utils/popup';
 import { on, off } from 'element-ui/src/utils/dom';
 import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
 
@@ -71,14 +71,16 @@ const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel';
 export default {
   name: 'elImageViewer',
 
+  mixins: [Popup],
+
   props: {
+    modal: {
+      type: Boolean,
+      default: true
+    },
     urlList: {
       type: Array,
       default: () => []
-    },
-    zIndex: {
-      type: Number,
-      default: 2000
     },
     onSwitch: {
       type: Function,
@@ -147,6 +149,11 @@ export default {
           this.loading = true;
         }
       });
+    },
+    visible(val) {
+      if (val) {
+        document.body.appendChild(this.$el);
+      }
     }
   },
   methods: {
@@ -290,6 +297,17 @@ export default {
   },
   mounted() {
     this.deviceSupportInstall();
+    if (this.visible) {
+      this.rendered = true;
+      this.open();
+      document.body.appendChild(this.$el);
+    }
+  },
+  destroyed() {
+    // remove DOM node after destroy
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
   }
 };
 </script>
