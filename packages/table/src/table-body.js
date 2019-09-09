@@ -86,7 +86,8 @@ export default {
         raf = (fn) => setTimeout(fn, 16);
       }
       raf(() => {
-        const rows = this.$el.querySelectorAll('.el-table__row');
+        const tr = this.$el.querySelector('tbody').children;
+        const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
         if (oldRow) {
