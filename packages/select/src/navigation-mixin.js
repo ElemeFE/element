@@ -24,6 +24,7 @@ export default {
 
   methods: {
     navigateOptions(direction) {
+      if (this.disabled) return;
       if (!this.visible) {
         this.visible = true;
         return;
