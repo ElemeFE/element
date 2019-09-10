@@ -105,7 +105,8 @@ const PopupManager = {
     }
     modalDom.tabIndex = 0;
     modalDom.style.display = '';
-
+    modalDom.focus();
+    
     this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
   },
 
