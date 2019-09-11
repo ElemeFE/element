@@ -293,7 +293,7 @@
 
       emitChange() {
         this.$nextTick(() => {
-          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
+          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.firstValue);
         });
       },
 
