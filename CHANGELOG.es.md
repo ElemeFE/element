@@ -39,7 +39,7 @@
   - Corregido el error de que la pestaña activada estaba fuera del rango visual (#17033 by @nullptru)
 - Calendar
   - Arreglado el problema de los días de la semana con i18n (#16772 by @ubitoffee)
-  - Corregido el error de localización ([#17208](https://github.com/ElemeFE/element/issues/17208) by [@iamkun](https://github.com/iamkun))
+  - Corregido el error de localización (#17208 by @iamkun)
 - Cascader
   - Corregido un error de visualización del CascaderPanel  (#16716 by @zhangHongEn)
   - Corregido el problema de disable status y close button (#16224 by @yyjjqq94)
