@@ -58,7 +58,7 @@
         if (!checkStrictly && isDisabled || node.loading) return;
 
         if (config.lazy && !node.loaded) {
-          // hide children's menus before fetch async data，prevent user's error click
+          // close child options when lazy load another node's child options
           panel.changePanel(node, true);
           panel.lazyLoad(node, () => {
             // do not use cached leaf value here, invoke this.isLeaf to get new value.
