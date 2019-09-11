@@ -35,7 +35,7 @@
       >
       </span>
       <el-checkbox
-        v-if="showCheckbox"
+        v-if="showCheckbox && ((leafCheck && node.isLeaf) || !leafCheck)"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
         :disabled="!!node.disabled"
@@ -62,6 +62,7 @@
           v-for="child in node.childNodes"
           :render-after-expand="renderAfterExpand"
           :show-checkbox="showCheckbox"
+          :leaf-check="leafCheck"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
@@ -97,6 +98,10 @@
         default: true
       },
       showCheckbox: {
+        type: Boolean,
+        default: false
+      },
+      leafCheck: {
         type: Boolean,
         default: false
       }

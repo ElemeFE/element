@@ -15,6 +15,7 @@
       :props="props"
       :render-after-expand="renderAfterExpand"
       :show-checkbox="showCheckbox"
+      :leaf-check="leafCheck"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
@@ -98,6 +99,10 @@
       currentNodeKey: [String, Number],
       renderContent: Function,
       showCheckbox: {
+        type: Boolean,
+        default: false
+      },
+      leafCheck: {
         type: Boolean,
         default: false
       },
