@@ -39,7 +39,7 @@
   - Fix activated tab is out of visual range bug (#17033 by @nullptru)
 - Calendar
   - Fix weekdays i18n issue (#16772 by @ubitoffee)
-  - fix locale error by @iamkun)
+  - fix locale error by (#17208 by @iamkun)
 - Cascader
   - Fix CascaderPanel display error (#16716 by @zhangHongEn)
   - Fix disable status and close button issue (#16224 by @yyjjqq94)
