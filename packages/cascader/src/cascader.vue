@@ -632,7 +632,12 @@ export default {
 
       if (tags) {
         const { offsetHeight } = tags;
-        const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
+        let height;
+        if (this.presentTags.length === 0) {
+          height = inputInitialHeight + 'px';
+        } else {
+          height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
+        }
         inputInner.style.height = height;
         this.updatePopper();
       }
