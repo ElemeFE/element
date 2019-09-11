@@ -1,5 +1,44 @@
 ## Changelog
 
+### 2.11.1-1
+
+*2019-08-16*
+
+#### Unreleased changes
+
+- 91297a97 - 2019-08-15 Input: the click event of clear button is not trigger when using v-loading (#16576)
+- 27398103 - 2019-08-14 Cascader: Fix disable status and close button issue (#16209)
+- 0bff072f - 2019-08-14 Cascader: fix display errors (#16665)
+- 75f0eb81 - 2019-08-14 Table: fix chrome crash when set thead css display to none (#16956)
+- a907d392 - 2019-08-12 i18n: add Esperanto translation (#16955)
+- 4680e55b - 2019-08-10  DOC: update spanish doc 2.11.1 (#16961)
+- ab32ec0a - 2019-08-10 Docs: Update custom theme (#16983)
+- **58b544e5 - 2019-08-10 Checkbox: Improve screen reader experience (#16575)**
+- f29f49a1 - 2019-08-09 Chore: Theme Extension (#16686)
+- 8b8a1a2e - 2019-08-08 Table: fix wrong empty block height (#16861)
+- e9c5e469 - 2019-08-08 Input: Fix Korean composition event (#15069)
+- 465c38bf - 2019-08-07 Popover: add close-delay prop (#16671)
+- 0734dc79 - 2019-08-06 Calendar : Fix weekdays i18n issue (#16772)
+- b8e96b35 - 2019-08-05 Docs: fix typo in Drawer docs (#16848)
+- 27d4e0ac - 2019-08-01  Tab: fix tabs-item's padding cause active-bar's width and transform err(  ??? #15355) (#16520)
+- 6105a755 - 2019-08-01 Table: prevent click handler after drag (#16850)
+- 744bad1f - 2019-08-01 DateTimePicker: fix time-spinner not scroll to right position
+- 31cb7d30 - 2019-08-01 Test: refactor unit test to use data-uri instead (#16847)
+- 64d0acec - 2019-08-01 Tree: Increase css weight (#16799)
+- 8dbc66ae - 2019-07-31 docs: Update contributing guide (#14800)
+- 6cc6bc4f - 2019-07-31 Fix: httprequest type (#16633)
+- be712399 - 2019-07-31 Date-Picker: add className picker option (#16632)
+- c80e77f9 - 2019-07-31 I18n: Update ar.js (#16653)
+- e26e70fe - 2019-07-31 Test: correct spelling error (#16672)
+- ec3326e0 - 2019-07-31 Notification: Fix modifying incoming option object (#16704)
+- 484a033a - 2019-07-31 Carousel: Fix onChange emit value (#16705)
+- a08cc0f1 - 2019-07-31 I18n: Update spanish changelog 2.10.0 and 2.10.1 (#16548)
+- f4df2522 - 2019-07-31 Icon: Adding font-display to @font-face declaration (#16805)
+- 54887e5b - 2019-07-30 I18n: Remove translation of 'year' in catalan language as in the other languages (#14722)
+- 2a32b84f - 2019-07-29 docs: update changelog (#16773)
+
+
+
 ### 2.11.1
 
 *2019-07-26*
