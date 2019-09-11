@@ -260,19 +260,24 @@ export default {
           return;
       }
     },
-    handleExpand(node, silent) {
+    changePanel(node, lazy = false) {
       const { activePath } = this;
       const { level } = node;
       const path = activePath.slice(0, level - 1);
       const menus = this.menus.slice(0, level);
 
-      if (!node.isLeaf) {
+      if (!lazy && !node.isLeaf) {
         path.push(node);
         menus.push(node.children);
       }
 
       this.activePath = path;
       this.menus = menus;
+
+      return { path, activePath };
+    },
+    handleExpand(node, silent) {
+      const { path, activePath } = this.changePanel(node);
 
       if (!silent) {
         const pathValues = path.map(node => node.getValue());
