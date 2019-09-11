@@ -35,7 +35,7 @@
       >
       </span>
       <el-checkbox
-        v-if="showCheckbox && ((leafCheck && node.isLeaf) || !leafCheck)"
+        v-if="showCheckbox && ((leafCheck && !!node.isLeaf) || !leafCheck)"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
         :disabled="!!node.disabled"
