@@ -96,6 +96,9 @@
       },
 
       showAmPm() {
+        // Even if `toggle-am-pm` is set to true, if the time format doesn't include AM/PM then they won't be shown,
+        // since this would create an inconsistency between the picker and the formatted time value. Also, although it
+        // isn't required, AM/PM toggling should be used along with the `arrow-control` option to provide the best result.
         return this.toggleAmPm && ((this.format || '').indexOf('a') !== -1 || (this.format || '').indexOf('A') !== -1);
       },
 
