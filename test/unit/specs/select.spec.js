@@ -880,6 +880,107 @@ describe('Select', () => {
     expect(vm.$el.querySelector('.el-input__inner').value).to.equal('黄金糕');
   });
 
+  it('width', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" width="200px">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }],
+          value: undefined
+        };
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('.el-select').style.width).to.equal('200px');
+
+  });
+
+  it('dynamic width', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" :width="width">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }],
+          value: undefined,
+          width: '200px'
+        };
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('.el-select').style.width).to.equal('200px');
+    vm.width = '400px';
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-select').style.width).to.equal('400px');
+  });
+
+  it('use style width', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" style="width: 200px">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }],
+          value: undefined
+        };
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('.el-select').style.width).to.equal('200px');
+  });
+
   describe('resetInputHeight', () => {
     const getSelectComponentVm = (configs) => {
       vm = getSelectVm(configs || {});

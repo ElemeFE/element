@@ -480,4 +480,54 @@ describe('Input', () => {
     await waitImmediate();
     expect(inputElm4.classList.contains('is-exceed')).to.false;
   });
+
+  it('width', async() => {
+    vm = createVue({
+      template: `
+        <el-input v-model="input" width="200px"/>
+      `,
+      data() {
+        return {
+          input: ''
+        };
+      }
+    }, true);
+
+    expect(vm.$el.style.width).to.equal('200px');
+
+  });
+
+  it('dynamic width', async() => {
+    vm = createVue({
+      template: `
+        <el-input v-model="input" :width="width"/>
+      `,
+      data() {
+        return {
+          input: '',
+          width: '200px'
+        };
+      }
+    }, true);
+
+    expect(vm.$el.style.width).to.equal('200px');
+    vm.width = '400px';
+    await waitImmediate();
+    expect(vm.$el.style.width).to.equal('400px');
+  });
+
+  it('use style width', async() => {
+    vm = createVue({
+      template: `
+        <el-input v-model="input" style="width: 200px"/>
+      `,
+      data() {
+        return {
+          input: ''
+        };
+      }
+    }, true);
+
+    expect(vm.$el.style.width).to.equal('200px');
+  });
 });

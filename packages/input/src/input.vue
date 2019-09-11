@@ -12,6 +12,7 @@
       'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }
     ]"
+    :style="inputStyles"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
@@ -145,6 +146,7 @@
     props: {
       value: [String, Number],
       size: String,
+      width: String,
       resize: String,
       form: String,
       disabled: Boolean,
@@ -214,6 +216,11 @@
       },
       inputSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      inputStyles() {
+        return {
+          width: this.width
+        };
       },
       inputDisabled() {
         return this.disabled || (this.elForm || {}).disabled;

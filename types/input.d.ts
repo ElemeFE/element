@@ -36,6 +36,9 @@ export declare class ElInput extends ElementUIComponent {
   /** Size of Input, works when type is not 'textarea' */
   size: ElementUIComponentSize
 
+  /** Width of Input */
+  width: string
+
   /** Prefix icon class */
   prefixIcon: string
 

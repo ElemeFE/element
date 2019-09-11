@@ -24,6 +24,9 @@ export declare class ElSelect extends ElementUIComponent {
   /** Size of Input */
   size: ElementUIComponentSize
 
+  /** Width of Select */
+  width: string
+
   /** Whether single select can be cleared */
   clearable: boolean
 

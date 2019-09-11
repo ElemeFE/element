@@ -293,6 +293,41 @@ export default {
 ```
 :::
 
+### 宽度
+
+:::demo 可通过 `width` 属性指定输入框的跨度，支持 String 和 Number（原 style 方式仍然支持且优先）。
+```html
+<div class="demo-input-width">
+  <el-input
+    placeholder="请输入内容"
+    v-model="input1">
+  </el-input>
+  <el-input
+    width="80%"
+    placeholder="请输入内容"
+    v-model="input2">
+  </el-input>
+  <el-input
+    style="width: 60%;"
+    placeholder="请输入内容"
+    v-model="input4">
+  </el-input>
+</div>
+
+<script>
+export default {
+  data() {
+    return {
+      input1: '',
+      input2: '',
+      input3: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### 带输入建议
 
 根据输入内容提供对应的输入建议
@@ -688,6 +723,7 @@ export default {
 | show-password | 是否显示切换密码图标| boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
+| width         | 输入框宽度      | string          | — | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
 | suffix-icon   | 输入框尾部图标    | string          | — | — |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |

@@ -17,6 +17,13 @@
       margin: 0 10px 10px 0;
     }
   }
+  .demo-input-width {
+    .el-input {
+      width: 100%;
+      vertical-align: top;
+      margin: 0 10px 10px 0;
+    }
+  }
   .input-with-select .el-input-group__prepend {
     background-color: #fff;
   }

@@ -2,6 +2,7 @@
   <div
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
+    :style="selectStyles"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
@@ -227,6 +228,12 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
 
+      selectStyles() {
+        return {
+          width: this.width
+        };
+      },
+
       selectDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
       },
@@ -269,6 +276,7 @@
       },
       automaticDropdown: Boolean,
       size: String,
+      width: String,
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
