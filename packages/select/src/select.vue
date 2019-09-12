@@ -781,11 +781,17 @@
         }
       },
 
-      onOptionDestroy(index) {
-        if (index > -1) {
-          this.optionsCount--;
-          this.filteredOptionsCount--;
-          this.options.splice(index, 1);
+      onOptionDestroy(option) {
+        let optionIndex = this.options.indexOf(option)
+        let cachedOptionIndex = this.cachedOptions.indexOf(option)
+
+        if ((this.multiple && this.selected.indexOf(option) === -1) || (!this.multiple && this.selected !== option)) {
+          if (optionIndex !== -1) {
+            this.optionsCount--;
+            this.filteredOptionsCount--;
+            this.options.splice(index, 1);
+          }
+          if (cachedOptionIndex !== -1) this.cachedOptions.splice(cachedOptionIndex, 1);
         }
       },
 
