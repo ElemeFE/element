@@ -453,7 +453,7 @@ Vous pouvez aller chercher les options sur le serveur de manière dynamique.
     },
     mounted() {
       this.list = this.states.map(item => {
-        return { value: item, label: item };
+        return { value: `value:${item}`, label: `label:${item}` };
       });
     },
     methods: {
