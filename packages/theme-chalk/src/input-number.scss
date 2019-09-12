@@ -34,7 +34,7 @@
     &:hover {
       color: $--color-primary;
 
-      &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+      &:not(.is-disabled) ~ .el-input:not(.is-disabled) .el-input__inner:not(.is-disabled) {
         border-color: $--input-focus-border;
       }
     }
