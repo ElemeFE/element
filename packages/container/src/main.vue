@@ -23,8 +23,8 @@
         }
         return this.$slots && this.$slots.default
           ? this.$slots.default.some(vnode => {
-            const tag = vnode.componentOptions && vnode.componentOptions.tag;
-            return tag === 'el-header' || tag === 'el-footer';
+            const componentName = vnode.componentOptions && vnode.componentOptions.Ctor.options.name;
+            return componentName === 'ElHeader' || componentName === 'ElFooter';
           })
           : false;
       }

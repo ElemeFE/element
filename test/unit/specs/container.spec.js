@@ -28,6 +28,18 @@ describe('Container', () => {
     expect(vm.$children[0].$el.classList.contains('is-vertical')).to.true;
   });
 
+  it('vertical for PascalCase', () => {
+    vm = createVue({
+      template: `
+        <ElContainer>
+          <ElHeader></ElHeader>
+          <ElMain></ElMain>
+        </ElContainer>
+      `
+    }, true);
+    expect(vm.$children[0].$el.classList.contains('is-vertical')).to.true;
+  });
+
   it('direction', done => {
     vm = createVue({
       template: `
