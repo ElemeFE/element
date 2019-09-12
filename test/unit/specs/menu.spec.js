@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, wait } from '../util';
 
 describe('Menu', () => {
   let vm;
@@ -275,6 +275,32 @@ describe('Menu', () => {
         expect(submenu.$el.classList.contains('is-opened')).to.be.false;
         done();
       }, 20);
+    });
+    it('click item not open again', async() => {
+      vm = createVue({
+        template: `
+          <el-menu mode="horizontal">
+            <el-menu-item index="1">处理中心</el-menu-item>
+            <el-submenu index="2" ref="submenu">
+              <template slot="title">我的工作台</template>
+              <el-menu-item index="2-1">选项1</el-menu-item>
+              <el-menu-item index="2-2" ref="submenuItem2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="3">订单管理</el-menu-item>
+          </el-menu>
+        `
+      }, true);
+      let submenu = vm.$refs.submenu;
+      let submenuItem2 = vm.$refs.submenuItem2;
+      triggerEvent(submenu.$el, 'mouseenter');
+      await wait(500);
+      expect(submenu.$el.classList.contains('is-opened')).to.be.true;
+      triggerEvent(submenu.$el, 'mouseleave');
+      triggerEvent(submenu.$el, 'mouseenter');
+      submenuItem2.$el.click();
+      await wait(500);
+      expect(submenu.$el.classList.contains('is-opened')).to.be.false;
     });
   });
   it('unique-opened', done => {

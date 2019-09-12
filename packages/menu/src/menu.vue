@@ -266,6 +266,7 @@
 
         if (this.mode === 'horizontal' || this.collapse) {
           this.openedMenus = [];
+          this.broadcast('ElSubmenu', 'clear-mouse-event-timer');
         }
 
         if (this.router && hasIndex) {

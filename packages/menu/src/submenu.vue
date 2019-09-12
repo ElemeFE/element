@@ -252,6 +252,9 @@
         this.mouseInChild = false;
         clearTimeout(this.timeout);
       });
+      this.$on('clear-mouse-event-timer', () => {
+        clearTimeout(this.timeout);
+      });
     },
     mounted() {
       this.parentMenu.addSubmenu(this);
