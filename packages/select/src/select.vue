@@ -782,8 +782,8 @@
       },
 
       onOptionDestroy(option) {
-        let optionIndex = this.options.indexOf(option)
-        let cachedOptionIndex = this.cachedOptions.indexOf(option)
+        let optionIndex = this.options.indexOf(option);
+        let cachedOptionIndex = this.cachedOptions.indexOf(option);
 
         if ((this.multiple && this.selected.indexOf(option) === -1) || (!this.multiple && this.selected !== option)) {
           if (optionIndex !== -1) {
