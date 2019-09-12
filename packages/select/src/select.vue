@@ -789,7 +789,7 @@
           if (optionIndex !== -1) {
             this.optionsCount--;
             this.filteredOptionsCount--;
-            this.options.splice(index, 1);
+            this.options.splice(optionIndex, 1);
           }
           if (cachedOptionIndex !== -1) this.cachedOptions.splice(cachedOptionIndex, 1);
         }
