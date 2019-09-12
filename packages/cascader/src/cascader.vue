@@ -350,7 +350,8 @@ export default {
       this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40;
     }
 
-    if (!isEmpty(this.value)) {
+    // call presentContent is (emitPath is false and multiple is false)
+    if (!isEmpty(this.value) || (!this.emitPath && !this.config.multiple)) {
       this.computePresentContent();
     }
 
@@ -487,7 +488,7 @@ export default {
     },
     computePresentText() {
       const { checkedValue, config } = this;
-      if (!isEmpty(checkedValue)) {
+      if (!isEmpty(checkedValue) || !this.emitPath) {
         const node = this.panel.getNodeByValue(checkedValue);
         if (node && (config.checkStrictly || node.isLeaf)) {
           this.presentText = node.getText(this.showAllLevels, this.separator);

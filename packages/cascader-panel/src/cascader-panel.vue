@@ -188,19 +188,24 @@ export default {
       this.$nextTick(this.scrollIntoView);
     },
     syncMultiCheckState() {
-      const nodes = this.getFlattedNodes(this.leafOnly);
+      const { checkedValue } = this;
 
-      nodes.forEach(node => {
-        node.syncCheckState(this.checkedValue);
-      });
+      if (!isEmpty(checkedValue)) {
+        const nodes = this.getFlattedNodes(this.leafOnly);
+
+        nodes.forEach(node => {
+          node.syncCheckState(this.checkedValue);
+        });
+      }
     },
     syncActivePath() {
-      const { store, multiple, activePath, checkedValue } = this;
+      const { store, multiple, activePath, checkedValue, config } = this;
+      const { emitPath } = config;
 
       if (!isEmpty(activePath)) {
         const nodes = activePath.map(node => this.getNodeByValue(node.getValue()));
         this.expandNodes(nodes);
-      } else if (!isEmpty(checkedValue)) {
+      } else if (!isEmpty(checkedValue) || (!emitPath && !multiple)) {
         const value = multiple ? checkedValue[0] : checkedValue;
         const checkedNode = this.getNodeByValue(value) || {};
         const nodes = (checkedNode.pathNodes || []).slice(0, -1);

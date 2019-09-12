@@ -34,6 +34,10 @@
         return this.panel.checkedValue;
       },
       isChecked() {
+        const { multiple } = this.panel;
+        if (multiple && !this.checkedValue) {
+          return false;
+        }
         return this.node.isSameNode(this.checkedValue);
       },
       inActivePath() {
