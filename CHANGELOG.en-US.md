@@ -1,5 +1,20 @@
 ## Changelog
 
+### 2.11.1-2
+
+*2019-09-13*
+
+#### New features
+
+- Time Picker
+  - Add support for toggling AM/PM (#16959 by @mattheyan)
+
+#### Bug fixes
+
+- Time Picker
+  - Fix text selection for 12-hour format (#16867 by @mattheyan)
+  - Set the selection range after scrolling up or down (#16868 by @mattheyan)
+
 ### 2.11.1-1
 
 *2019-08-16*
