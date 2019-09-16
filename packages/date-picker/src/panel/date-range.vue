@@ -171,7 +171,8 @@
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
-          @click="handleClear">
+          @click="handleClear"
+          v-if="clearable">
           {{ t('el.datepicker.clear') }}
         </el-button>
         <el-button
@@ -347,7 +348,8 @@
         timeUserInput: {
           min: null,
           max: null
-        }
+        },
+        clearable: true
       };
     },
 
