@@ -118,14 +118,6 @@ export default class TreeStore {
     });
   }
 
-  _initDefaultCheckedNode(node) {
-    const defaultCheckedKeys = this.defaultCheckedKeys || [];
-
-    if (defaultCheckedKeys.indexOf(node.key) !== -1) {
-      node.setChecked(true, !this.checkStrictly);
-    }
-  }
-
   setDefaultCheckedKey(newVal) {
     if (newVal !== this.defaultCheckedKeys) {
       this.defaultCheckedKeys = newVal;

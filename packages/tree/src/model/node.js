@@ -128,10 +128,6 @@ export default class Node {
       store.currentNode.isCurrent = true;
     }
 
-    if (store.lazy) {
-      store._initDefaultCheckedNode(this);
-    }
-
     this.updateLeafState();
   }
 
@@ -468,7 +464,7 @@ export default class Node {
         this.childNodes = [];
 
         this.doCreateChildren(children, defaultProps);
-
+        this.store._initDefaultCheckedNodes();
         this.updateLeafState();
         if (callback) {
           callback.call(this, children);
