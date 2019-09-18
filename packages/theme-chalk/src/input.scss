@@ -35,6 +35,10 @@
       outline: none;
       border-color: $--input-focus-border;
     }
+    &:-webkit-autofill {
+      animation-name: onAutoFillStart;
+      transition: background-color .3s ease-in-out 0s;
+    }
   }
 
   & .el-input__count {
@@ -131,6 +135,14 @@
     &:focus {
       outline: none;
       border-color: $--input-focus-border;
+    }
+
+    &:-webkit-autofill {
+      // Expose a hook for JavaScript when auto fill is shown.
+      // JavaScript can capture 'animationstart' events
+      animation-name: onAutoFillStart;
+  
+      transition: background-color .3s ease-in-out 0s;
     }
   }
 
@@ -353,4 +365,9 @@
   display: none;
   width: 0;
   height: 0;
+}
+
+@keyframes onAutoFillStart {
+  from {/**/}
+  to {/**/}
 }
