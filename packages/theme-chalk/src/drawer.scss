@@ -196,6 +196,7 @@ $directions: rtl, ltr, ttb, btt;
   bottom: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .el-drawer-fade-enter-active {
