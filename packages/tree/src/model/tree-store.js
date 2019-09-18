@@ -122,7 +122,7 @@ export default class TreeStore {
     const defaultCheckedKeys = this.defaultCheckedKeys || [];
 
     if (defaultCheckedKeys.indexOf(node.key) !== -1) {
-      node.setChecked(true, !this.checkStrictly);
+      node.setChecked(true, !this.checkStrictly, true);
     }
   }
 
