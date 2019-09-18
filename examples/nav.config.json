@@ -287,6 +287,10 @@
             {
               "path": "/drawer",
               "title": "Drawer 抽屉"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
             }
           ]
         }
@@ -581,6 +585,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
             }
           ]
         }
@@ -875,6 +883,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
             }
           ]
         }
@@ -1169,6 +1181,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
             }
           ]
         }
