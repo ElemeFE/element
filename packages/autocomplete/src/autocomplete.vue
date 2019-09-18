@@ -235,7 +235,7 @@
       },
       highlight(index, event) {
         if (!this.suggestionVisible || this.loading) { return; }
-        event.preventDefault();
+        if(event) { event.preventDefault(); }
 
         if (index < 0) {
           this.highlightedIndex = -1;
