@@ -15,7 +15,7 @@
           v-for="(disabled, hour) in hoursList"
           class="el-time-spinner__item"
           :key="hour"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{ getAmPm(hour, { prefix: ' ' }) }}</li>
+          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ formatListItem('hours', hour) }}{{ getAmPm(hour, { prefix: ' ' }) }}</li>
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
@@ -31,7 +31,7 @@
           v-for="(enabled, key) in minutesList"
           :key="key"
           class="el-time-spinner__item"
-          :class="{ 'active': key === minutes, disabled: !enabled }">{{ ('0' + key).slice(-2) }}</li>
+          :class="{ 'active': key === minutes, disabled: !enabled }">{{ formatListItem('minutes', key) }}</li>
       </el-scrollbar>
       <el-scrollbar
         v-show="showSeconds"
@@ -48,7 +48,7 @@
           v-for="(second, key) in 60"
           class="el-time-spinner__item"
           :class="{ 'active': key === seconds }"
-          :key="key">{{ ('0' + key).slice(-2) }}</li>
+          :key="key">{{ formatListItem('seconds', key) }}</li>
       </el-scrollbar>
       <el-scrollbar
         v-show="showAmPm"
@@ -65,7 +65,7 @@
           v-for="(value, key) in amPmList"
           class="el-time-spinner__item"
           :class="{ 'active': key === amPm }"
-          :key="key">{{ key ? getAmPm(12) : getAmPm(0) }}</li>
+          :key="key">{{ formatListItem('amPm', key) }}</li>
       </el-scrollbar>
     </template>
     <template v-if="arrowControl">
@@ -79,7 +79,7 @@
             class="el-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
             v-for="(hour, key) in arrowHourList"
-            :key="key">{{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + (showAmPm ? '' : getAmPm(hour, { prefix: ' ' })) }}</li>
+            :key="key">{{ hour === undefined ? '' : formatListItem('hours', hour) + (showAmPm ? '' : getAmPm(hour, { prefix: ' ' })) }}</li>
         </ul>
       </div>
       <div
@@ -93,7 +93,7 @@
             :class="{ 'active': minute === minutes }"
             v-for="(minute, key) in arrowMinuteList"
             :key="key">
-            {{ minute === undefined ? '' : ('0' + minute).slice(-2) }}
+            {{ minute === undefined ? '' : formatListItem('minutes', minute) }}
           </li>
         </ul>
       </div>
@@ -109,7 +109,7 @@
             class="el-time-spinner__item"
             :class="{ 'active': second === seconds }"
             :key="key">
-            {{ second === undefined ? '' : ('0' + second).slice(-2) }}
+            {{ second === undefined ? '' : formatListItem('seconds', second) }}
           </li>
         </ul>
       </div>
@@ -125,7 +125,7 @@
             class="el-time-spinner__item"
             :class="{ 'active': amOrPm === amPm }"
             :key="key">
-            {{ amOrPm === undefined ? '' : (amOrPm ? getAmPm(12) : getAmPm(0)) }}
+            {{ amOrPm === undefined ? '' : formatListItem('amPm', amOrPm) }}
           </li>
         </ul>
       </div>
@@ -265,6 +265,25 @@
           this.emitSelectRange(type);
           this.adjustSpinner(type, value);
         }
+      },
+
+      formatListItem(type, value) {
+        let text;
+        if (type === 'hours') {
+          text = ('0' + (this.amPmMode ? (value % 12 || 12) : value)).slice(-2);
+          if (!this.zeroPadHour) {
+            text = text.replace(/^0/, '');
+          }
+        } else if (type === 'minutes') {
+          text = ('0' + value).slice(-2);
+        } else if (type === 'seconds') {
+          text = ('0' + value).slice(-2);
+        } else if (type === 'amPm') {
+          text = value ? this.getAmPm(12) : this.getAmPm(0);
+        } else {
+          text = value + '';
+        }
+        return text;
       },
 
       emitSelectRange(type) {
