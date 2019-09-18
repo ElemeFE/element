@@ -14,8 +14,8 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @clear="handleClear"
-      @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
-      @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
+      @keydown.up.native="highlight(highlightedIndex - 1, $event)"
+      @keydown.down.native="highlight(highlightedIndex + 1, $event)"
       @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
     >
@@ -233,8 +233,10 @@
           this.highlightedIndex = -1;
         });
       },
-      highlight(index) {
+      highlight(index, event) {
         if (!this.suggestionVisible || this.loading) { return; }
+        event.preventDefault();
+
         if (index < 0) {
           this.highlightedIndex = -1;
           return;
