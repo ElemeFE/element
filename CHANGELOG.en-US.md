@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2.11.1-3
+
+*2019-09-19*
+
+#### New features
+
+- Time Picker
+  - Add support for 'format' option in time-select
+
+#### Bug fixes
+
+- Time Picker
+  - Don't pad hour with zero if a 1-digit hour format is used
+
 ### 2.11.1-2
 
 *2019-09-13*
