@@ -25,9 +25,6 @@
       this.setGlobal();
     },
     methods: {
-      tintColor(color, tint) {
-        return tintColor(color, tint);
-      },
       setGlobal() {
         if (window.userThemeConfig) {
           this.global = window.userThemeConfig.global;
