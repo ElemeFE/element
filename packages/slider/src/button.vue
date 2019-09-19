@@ -66,7 +66,7 @@
 
     computed: {
       disabled() {
-        return this.$parent.sliderDisabled;
+        return this.$parent.sliderDisabled || this.min == this.max;
       },
 
       max() {
@@ -214,7 +214,7 @@
       },
 
       setPosition(newPosition) {
-        if (newPosition === null || isNaN(newPosition)) return;
+        if (newPosition === null || isNaN(newPosition) || this.disabled) return;
         if (newPosition < 0) {
           newPosition = 0;
         } else if (newPosition > 100) {
