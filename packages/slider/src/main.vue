@@ -34,12 +34,14 @@
       </div>
       <slider-button
         :vertical="vertical"
+        :reverse="reverse"
         v-model="firstValue"
         :tooltip-class="tooltipClass"
         ref="button1">
       </slider-button>
       <slider-button
         :vertical="vertical"
+        :reverse="reverse"
         v-model="secondValue"
         :tooltip-class="tooltipClass"
         ref="button2"
@@ -151,7 +153,11 @@
         type: String
       },
       tooltipClass: String,
-      marks: Object
+      marks: Object,
+      reverse: {
+        type: Boolean,
+        default: false
+      }
     },
 
     components: {
@@ -189,7 +195,11 @@
 
       firstValue(val) {
         if (this.range) {
-          this.$emit('input', [this.minValue, this.maxValue]);
+          if (this.reverse) {
+            this.$emit('input', [this.maxValue, this.minValue]);
+          } else {
+            this.$emit('input', [this.minValue, this.maxValue]);
+          }
         } else {
           this.$emit('input', val);
         }
@@ -197,7 +207,11 @@
 
       secondValue() {
         if (this.range) {
-          this.$emit('input', [this.minValue, this.maxValue]);
+          if (this.reverse) {
+            this.$emit('input', [this.maxValue, this.minValue]);
+          } else {
+            this.$emit('input', [this.minValue, this.maxValue]);
+          }
         }
       },
 
@@ -258,7 +272,12 @@
       },
 
       setPosition(percent) {
-        const targetValue = this.min + percent * (this.max - this.min) / 100;
+        let targetValue;
+        if (this.reverse) {
+          targetValue = this.max - percent * (this.max - this.min) / 100;
+        } else {
+          targetValue = this.min + percent * (this.max - this.min) / 100;
+        }
         if (!this.range) {
           this.$refs.button1.setPosition(percent);
           return;
@@ -298,7 +317,19 @@
       },
 
       getStopStyle(position) {
-        return this.vertical ? { 'bottom': position + '%' } : { 'left': position + '%' };
+        if (this.vertical) {
+          if (this.reverse) {
+            return { 'bottom': this.max - position + '%' };
+          } else {
+            return { 'bottom': position + '%' };
+          }
+        } else {
+          if (this.reverse) {
+            return { 'left': this.max - position + '%' };
+          } else {
+            return { 'left': position + '%' };
+          }
+        }
       }
     },
 
@@ -357,9 +388,11 @@
       },
 
       barStart() {
-        return this.range
-          ? `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`
-          : '0%';
+        if (this.reverse) {
+          return `${ 100 * (this.max - this.maxValue) / (this.max - this.min) }%`;
+        } else {
+          return `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`;
+        }
       },
 
       precision() {

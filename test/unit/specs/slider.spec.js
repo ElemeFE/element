@@ -142,6 +142,38 @@ describe('Slider', () => {
     }, 10);
   });
 
+  it('drag with reverse', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" :vertical="vertical" reverse></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          vertical: false,
+          value: 100
+        };
+      }
+    }, true);
+    const slider = vm.$children[0].$children[0];
+    slider.onButtonDown({ clientX: 0, preventDefault() {} });
+    slider.onDragging({ clientX: 100 });
+    slider.onDragEnd();
+    await waitImmediate();
+    expect(vm.value < 100).to.true;
+    vm.vertical = true;
+    vm.value = 100;
+    await waitImmediate();
+    expect(vm.value === 100).to.true;
+    slider.onButtonDown({ clientY: 0, preventDefault() {} });
+    slider.onDragging({ clientY: -100 });
+    slider.onDragEnd();
+    await waitImmediate();
+    expect(vm.value < 100).to.true;
+  });
+
   it('accessibility', done => {
     vm = createVue({
       template: `
@@ -329,6 +361,27 @@ describe('Slider', () => {
         done();
       }, 10);
     }, 10);
+  });
+
+  it('reverse mode', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider vertical reverse v-model="value" height="200px"></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    await waitImmediate();
+    slider.onSliderClick({ clientY: 100 });
+    await waitImmediate();
+    expect(vm.value > 0).to.true;
   });
 
   describe('range', () => {

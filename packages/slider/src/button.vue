@@ -46,7 +46,11 @@
         type: Boolean,
         default: false
       },
-      tooltipClass: String
+      tooltipClass: String,
+      reverse: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {
@@ -90,7 +94,11 @@
       },
 
       currentPosition() {
-        return `${ (this.value - this.min) / (this.max - this.min) * 100 }%`;
+        if (this.reverse) {
+          return `${ (this.max - this.value) / (this.max - this.min) * 100 }%`;
+        } else {
+          return `${ (this.value - this.min) / (this.max - this.min) * 100 }%`;
+        }
       },
 
       enableFormat() {
@@ -186,6 +194,7 @@
             this.currentX = event.clientX;
             diff = (this.currentX - this.startX) / this.$parent.sliderSize * 100;
           }
+
           this.newPosition = this.startPosition + diff;
           this.setPosition(this.newPosition);
         }
@@ -222,7 +231,12 @@
         }
         const lengthPerStep = 100 / ((this.max - this.min) / this.step);
         const steps = Math.round(newPosition / lengthPerStep);
-        let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
+        let value;
+        if (this.reverse) {
+          value = this.max - steps * lengthPerStep * (this.max - this.min) * 0.01;
+        } else {
+          value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
+        }
         value = parseFloat(value.toFixed(this.precision));
         this.$emit('input', value);
         this.$nextTick(() => {
