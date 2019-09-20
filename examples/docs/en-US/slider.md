@@ -211,6 +211,44 @@ Selecting a range of values is supported.
 ```
 :::
 
+### Reverse mode
+
+:::demo Setting this `reverse` attribute can show it in the reverse direction. 
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value"
+      range
+      reverse
+      :marks="marks">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: [60, 30],
+        marks: {
+          0: '0°C',
+          8: '8°C',
+          37: '37°C',
+          50: {
+            style: {
+              color: '#1989FA'
+            },
+            label: this.$createElement('strong', '50%')
+          }
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ## Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -232,6 +270,7 @@ Selecting a range of values is supported.
 | debounce | debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 | tooltip-class | custom class name for the tooltip | string | — | — |
 | marks | marks， type of key must be `number` and must in closed interval `[min, max]`, each mark can custom style| object | — | — |
+| reverse | reverse mode | boolean | — | false |
 
 ## Events
 | Event Name | Description | Parameters |
