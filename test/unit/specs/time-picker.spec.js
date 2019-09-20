@@ -1,4 +1,4 @@
-import { createTest, destroyVM, createVue } from '../util';
+import { createTest, destroyVM, createVue, triggerEvent, triggerKeyDown, wait } from '../util';
 import TimePicker from 'packages/time-picker';
 
 const DELAY = 100;
@@ -71,6 +71,102 @@ describe('TimePicker', () => {
     }, DELAY);
   });
 
+  it('selection range', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,2');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('3,5');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('6,8');
+  });
+
+  it('selection range with 1 digit hour', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" format="H:mm:ss" v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 13, 0, 0, 0)
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,2');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('3,5');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('6,8');
+  });
+
+  it('selection range with 1 digit hour and 12 hour mode', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" format="h:mm" v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 13, 0, 0, 0)
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,1');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('2,4');
+  });
+
+  it('selection range with AM/PM', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" format="h:mm A" toggle-am-pm v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 9, 0, 0, 0)
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,1');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('2,4');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('5,7');
+  });
+
   it('select time', done => {
     vm = createVue({
       template: '<el-time-picker ref="compo" v-model="value"></el-time-picker>',
@@ -115,6 +211,76 @@ describe('TimePicker', () => {
         });
       });
     }, DELAY);
+  });
+
+  it('select AM/PM', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" format="h:mm A" toggle-am-pm v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 7, 0) // 7:00 AM
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    expect(input.value).to.equal('7:00 AM');
+
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+
+    const list = timePicker.picker.$el.querySelectorAll('.el-time-spinner__list');
+
+    // Assert that the hours list is 1-12 with AM and PM suffixes
+    const hours = Array.prototype.map.call(list[0].querySelectorAll('.el-time-spinner__item'), (i) => i.innerText);
+    expect(hours.join(',')).to.equal('12 AM,1 AM,2 AM,3 AM,4 AM,5 AM,6 AM,7 AM,8 AM,9 AM,10 AM,11 AM,12 PM,1 PM,2 PM,3 PM,4 PM,5 PM,6 PM,7 PM,8 PM,9 PM,10 PM,11 PM');
+
+    // Assert that the list is "AM" (active) and "PM" as expected
+    const amPmEl = list[3];
+    const amPmElOptions = amPmEl.querySelectorAll('.el-time-spinner__item');
+    expect(amPmElOptions.length).to.equal(2);
+    const amEl = amPmElOptions[0];
+    expect(amEl.classList.contains('active')).to.true;
+    const pmEl = amPmElOptions[1];
+    expect(pmEl.classList.contains('active')).to.false;
+
+    // click 'PM'
+    pmEl.click();
+    await wait(DELAY);
+    const date = timePicker.picker.date;
+    expect(amEl.classList.contains('active')).to.false;
+    expect(pmEl.classList.contains('active')).to.true;
+    expect(input.value).to.equal('7:00 PM');
+    expect(date.getHours()).to.equal(19);
+    expect(date.getMinutes()).to.equal(0);
+    expect(date.getSeconds()).to.equal(0);
+  });
+
+  it('toggle AM/PM', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" format="h:mm A" toggle-am-pm arrow-control v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 6, 0) // 6:00 AM
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    expect(input.value).to.equal('6:00 AM');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,1');
+    triggerKeyDown(input, 37);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('5,7');
+    triggerKeyDown(input, 40);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(input.value).to.equal('6:00 PM');
   });
 
   it('click cancel button', done => {

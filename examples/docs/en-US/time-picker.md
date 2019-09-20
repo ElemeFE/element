@@ -169,6 +169,7 @@ Can pick an arbitrary time range.
 | name | same as `name` in native input | string | — | — |
 | prefix-icon | Custom prefix icon class | string | — | el-icon-time |
 | clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| toggle-am-pm | whether an AM/PM selector should be rendered, only works with `<el-time-picker>` when the format includes AM/PM, and is best used in conjunction with `arrow-control` | boolean | — | false |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

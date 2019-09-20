@@ -15,7 +15,10 @@
             <time-spinner
               ref="minSpinner"
               :show-seconds="showSeconds"
+              :show-am-pm="showAmPm"
               :am-pm-mode="amPmMode"
+              :twelve-hour-clock="twelveHourClock"
+              :zero-pad-hour="zeroPadHour"
               @change="handleMinChange"
               :arrow-control="arrowControl"
               @select-range="setMinSelectionRange"
@@ -31,7 +34,10 @@
             <time-spinner
               ref="maxSpinner"
               :show-seconds="showSeconds"
+              :show-am-pm="showAmPm"
               :am-pm-mode="amPmMode"
+              :twelve-hour-clock="twelveHourClock"
+              :zero-pad-hour="zeroPadHour"
               @change="handleMaxChange"
               :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
@@ -92,8 +98,15 @@
         return (this.format || '').indexOf('ss') !== -1;
       },
 
+      showAmPm() {
+        // Even if `toggle-am-pm` is set to true, if the time format doesn't include AM/PM then they won't be shown,
+        // since this would create an inconsistency between the picker and the formatted time value. Also, although it
+        // isn't required, AM/PM toggling should be used along with the `arrow-control` option to provide the best result.
+        return this.toggleAmPm && ((this.format || '').indexOf('a') !== -1 || (this.format || '').indexOf('A') !== -1);
+      },
+
       offset() {
-        return this.showSeconds ? 11 : 8;
+        return 8 + (this.showSeconds ? 3 : 0) + (this.showAmPm ? 3 : 0);
       },
 
       spinner() {
@@ -103,10 +116,19 @@
       btnDisabled() {
         return this.minDate.getTime() > this.maxDate.getTime();
       },
+
       amPmMode() {
         if ((this.format || '').indexOf('A') !== -1) return 'A';
         if ((this.format || '').indexOf('a') !== -1) return 'a';
         return '';
+      },
+
+      twelveHourClock() {
+        return (this.format || '').indexOf('hh') !== -1 || (this.format || '').indexOf('h') !== -1;
+      },
+
+      zeroPadHour() {
+        return (this.format || '').indexOf('HH') !== -1 || (this.format || '').indexOf('hh') !== -1;
       }
     },
 
@@ -121,6 +143,7 @@
         format: 'HH:mm:ss',
         visible: false,
         selectionRange: [0, 2],
+        toggleAmPm: false,
         arrowControl: false
       };
     },
@@ -205,8 +228,16 @@
       },
 
       changeSelectionRange(step) {
-        const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11];
-        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
+        const secondsOffset = this.showSeconds ? 3 : 0;
+
+        const minHoursLen = !this.zeroPadHour && this.minDate && (this.twelveHourClock ? (this.minDate.getHours() % 12 || 12) : this.minDate.getHours()) < 10 ? 1 : 2;
+        const list1 = [0, 3 - (2 - minHoursLen)].concat(this.showSeconds ? [6 - (2 - minHoursLen)] : []).concat(this.showAmPm ? [6 + secondsOffset - (2 - minHoursLen)] : []);
+
+        const maxHoursLen = !this.zeroPadHour && this.maxDate && (this.twelveHourClock ? (this.maxDate.getHours() % 12 || 12) : this.maxDate.getHours()) < 10 ? 1 : 2;
+        const list2 = [this.offset, this.offset + 3 - (2 - maxHoursLen)].concat(this.showSeconds ? [this.offset + 6 - (2 - maxHoursLen)] : []).concat(this.showAmPm ? [this.offset + 6 + secondsOffset - (2 - maxHoursLen)] : []);
+
+        const list = list1.concat(list2);
+        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []).concat(this.showAmPm ? ['amPm'] : []);
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         const half = list.length / 2;
