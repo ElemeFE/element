@@ -134,7 +134,7 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from 'element-ui/src/utils/date-util';
+  import { getRangeHours, getRangeMinutes, modifyTime, getI18nSettings } from 'element-ui/src/utils/date-util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
@@ -390,8 +390,13 @@
         let shouldShowAmPm = this.amPmMode.toLowerCase() === 'a';
         if (!shouldShowAmPm) return '';
         let isCapital = this.amPmMode === 'A';
-        let content = (hour < 12) ? 'am' : 'pm';
-        if (isCapital) content = content.toUpperCase();
+        const i18n = getI18nSettings();
+        let content = (hour < 12) ? i18n.amPm[0] || 'am' : i18n.amPm[1] || 'pm';
+        if (isCapital) {
+          content = content.toUpperCase();
+        } else {
+          content = content.toLowerCase();
+        }
         return prefix + content;
       },
       typeItemHeight(type) {
