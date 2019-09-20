@@ -80,6 +80,7 @@
     <el-date-picker
       v-model="value1"
       type="week"
+      value-format='yyyy-W'
       format="yyyy 第 WW 周"
       placeholder="选择周">
     </el-date-picker>
@@ -111,6 +112,16 @@
     </el-date-picker>
   </div>
 </div>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">季度</span>
+    <el-date-picker
+      v-model="value5"
+      type="quarter"
+      placeholder="选择季度">
+    </el-date-picker>
+  </div>
+</div>
 
 <script>
   export default {
@@ -119,7 +130,8 @@
         value1: '',
         value2: '',
         value3: '',
-        value4: ''
+        value4: '',
+        value5: ''
       };
     }
   };
@@ -282,6 +294,7 @@
 | 格式 | 含义 | 备注 | 举例 |
 |------|------|------|------|------|
 | `yyyy` | 年 | | 2017 |
+| `Q`  | 季度 | 仅季度选择器的 `format` 可用
 | `M`  | 月 | 不补0 | 1 |
 | `MM` | 月 | | 01 |
 | `W`  | 周 | 仅周选择器的 `format` 可用；不补0 | 1 |

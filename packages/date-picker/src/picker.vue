@@ -86,7 +86,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
+import { formatDate, parseDate, isDateObject, getWeekNumber, getQuarterNumber } from 'element-ui/src/utils/date-util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -116,7 +116,8 @@ const DEFAULT_FORMATS = {
   daterange: 'yyyy-MM-dd',
   monthrange: 'yyyy-MM',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
-  year: 'yyyy'
+  year: 'yyyy',
+  quarter: 'yyyy-qQ'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -130,7 +131,8 @@ const HAVE_TRIGGER_TYPES = [
   'monthrange',
   'timerange',
   'datetimerange',
-  'dates'
+  'dates',
+  'quarter'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -188,6 +190,20 @@ const TYPE_VALUE_RESOLVER_MAP = {
       date = /WW/.test(date)
         ? date.replace(/WW/, week < 10 ? '0' + week : week)
         : date.replace(/W/, week);
+      return date;
+    },
+    parser(text, format) {
+      // parse as if a normal date
+      return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format);
+    }
+  },
+  quarter: {
+    formatter(value, format) {
+      const quarter = getQuarterNumber(value);
+      let date = formatDate(value, format);
+      if (/Q/.test(date)) {
+        date = date.replace(/Q/, quarter);
+      }
       return date;
     },
     parser(text, format) {
@@ -489,6 +505,8 @@ export default {
         return 'year';
       } else if (this.type === 'dates') {
         return 'dates';
+      } else if (this.type === 'quarter') {
+        return 'quarter';
       }
 
       return 'day';

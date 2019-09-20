@@ -1012,8 +1012,30 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.empty;
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.be.equal('none');
+      expect(vm.picker.$el.querySelector('.el-quarter-table').style.display).to.be.equal('none');
       vm.picker.$el.querySelector('.el-month-table a.cell').click();
       expect(vm.pickerVisible).to.false;
+      done();
+    }, DELAY);
+  });
+
+  it('type:quarter', done => {
+    vm = createTest(DatePicker, {
+      type: 'quarter'
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      expect(vm.picker.$el.querySelector('.el-quarter-table').style.display).to.be.empty;
+      expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.equal('none');
+      expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.be.equal('none');
+
+      vm.picker.$el.querySelector('.el-quarter-table a.cell').click();
+      expect(vm.pickerVisible).to.false;
+
       done();
     }, DELAY);
   });
@@ -1030,6 +1052,7 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.empty;
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.equal('none');
+      expect(vm.picker.$el.querySelector('.el-quarter-table').style.display).to.be.equal('none');
 
       const leftBtn = vm.picker.$el.querySelector('.el-icon-d-arrow-left');
       const rightBtn = vm.picker.$el.querySelector('.el-icon-d-arrow-right');
