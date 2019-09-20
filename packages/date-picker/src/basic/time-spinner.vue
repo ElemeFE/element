@@ -161,6 +161,7 @@
         type: String,
         default: '' // 'a': am/pm; 'A': AM/PM
       },
+      twelveHourClock: Boolean,
       zeroPadHour: Boolean
     },
 
@@ -270,7 +271,7 @@
       formatListItem(type, value) {
         let text;
         if (type === 'hours') {
-          text = ('0' + (this.amPmMode ? (value % 12 || 12) : value)).slice(-2);
+          text = ('0' + (this.twelveHourClock ? (value % 12 || 12) : value)).slice(-2);
           if (!this.zeroPadHour) {
             text = text.replace(/^0/, '');
           }
@@ -287,7 +288,7 @@
       },
 
       emitSelectRange(type) {
-        const hoursLen = !this.zeroPadHour && (this.date.getHours() % 12 || 12) < 10 ? 1 : 2;
+        const hoursLen = !this.zeroPadHour && (this.twelveHourClock ? (this.date.getHours() % 12 || 12) : this.date.getHours()) < 10 ? 1 : 2;
         const secondsOffset = this.showSeconds ? 3 : 0;
         if (type === 'hours') {
           this.$emit('select-range', 0, hoursLen);

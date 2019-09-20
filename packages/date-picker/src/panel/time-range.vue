@@ -17,6 +17,7 @@
               :show-seconds="showSeconds"
               :show-am-pm="showAmPm"
               :am-pm-mode="amPmMode"
+              :twelve-hour-clock="twelveHourClock"
               :zero-pad-hour="zeroPadHour"
               @change="handleMinChange"
               :arrow-control="arrowControl"
@@ -35,6 +36,8 @@
               :show-seconds="showSeconds"
               :show-am-pm="showAmPm"
               :am-pm-mode="amPmMode"
+              :twelve-hour-clock="twelveHourClock"
+              :zero-pad-hour="zeroPadHour"
               @change="handleMaxChange"
               :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
@@ -118,6 +121,10 @@
         if ((this.format || '').indexOf('A') !== -1) return 'A';
         if ((this.format || '').indexOf('a') !== -1) return 'a';
         return '';
+      },
+
+      twelveHourClock() {
+        return (this.format || '').indexOf('hh') !== -1 || (this.format || '').indexOf('h') !== -1;
       },
 
       zeroPadHour() {
@@ -223,10 +230,10 @@
       changeSelectionRange(step) {
         const secondsOffset = this.showSeconds ? 3 : 0;
 
-        const minHoursLen = !this.zeroPadHour && this.minDate && (this.minDate.getHours() % 12 || 12) < 10 ? 1 : 2;
+        const minHoursLen = !this.zeroPadHour && this.minDate && (this.twelveHourClock ? (this.minDate.getHours() % 12 || 12) : this.minDate.getHours()) < 10 ? 1 : 2;
         const list1 = [0, 3 - (2 - minHoursLen)].concat(this.showSeconds ? [6 - (2 - minHoursLen)] : []).concat(this.showAmPm ? [6 + secondsOffset - (2 - minHoursLen)] : []);
 
-        const maxHoursLen = !this.zeroPadHour && this.maxDate && (this.maxDate.getHours() % 12 || 12) < 10 ? 1 : 2;
+        const maxHoursLen = !this.zeroPadHour && this.maxDate && (this.twelveHourClock ? (this.maxDate.getHours() % 12 || 12) : this.maxDate.getHours()) < 10 ? 1 : 2;
         const list2 = [this.offset, this.offset + 3 - (2 - maxHoursLen)].concat(this.showSeconds ? [this.offset + 6 - (2 - maxHoursLen)] : []).concat(this.showAmPm ? [this.offset + 6 + secondsOffset - (2 - maxHoursLen)] : []);
 
         const list = list1.concat(list2);
