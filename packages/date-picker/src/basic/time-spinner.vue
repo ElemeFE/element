@@ -15,7 +15,7 @@
           v-for="(disabled, hour) in hoursList"
           class="el-time-spinner__item"
           :key="hour"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{ getAmPm(hour, { prefix: ' ' }) }}</li>
+          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (twelveHourClock ? (hour % 12 || 12) : hour )).slice(-2) }}{{ getAmPm(hour, { prefix: ' ' }) }}</li>
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
@@ -79,7 +79,7 @@
             class="el-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
             v-for="(hour, key) in arrowHourList"
-            :key="key">{{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + (showAmPm ? '' : getAmPm(hour, { prefix: ' ' })) }}</li>
+            :key="key">{{ hour === undefined ? '' : ('0' + (twelveHourClock ? (hour % 12 || 12) : hour )).slice(-2) + (showAmPm ? '' : getAmPm(hour, { prefix: ' ' })) }}</li>
         </ul>
       </div>
       <div
@@ -161,6 +161,7 @@
         type: String,
         default: '' // 'a': am/pm; 'A': AM/PM
       },
+      twelveHourClock: Boolean,
       zeroPadHour: Boolean
     },
 
@@ -268,7 +269,7 @@
       },
 
       emitSelectRange(type) {
-        const hoursLen = !this.zeroPadHour && (this.date.getHours() % 12 || 12) < 10 ? 1 : 2;
+        const hoursLen = !this.zeroPadHour && (this.twelveHourClock ? (this.date.getHours() % 12 || 12) : this.date.getHours()) < 10 ? 1 : 2;
         const secondsOffset = this.showSeconds ? 3 : 0;
         if (type === 'hours') {
           this.$emit('select-range', 0, hoursLen);
