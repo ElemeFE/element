@@ -373,7 +373,7 @@ describe('Slider', () => {
 
       data() {
         return {
-          value: 0
+          value: 100
         };
       }
     }, true);
@@ -381,7 +381,7 @@ describe('Slider', () => {
     await waitImmediate();
     slider.onSliderClick({ clientY: 100 });
     await waitImmediate();
-    expect(vm.value > 0).to.true;
+    expect(vm.value < 100).to.true;
   });
 
   describe('range', () => {
