@@ -98,6 +98,52 @@ describe('TimePicker', () => {
 
   it('selection range with 1 digit hour', async() => {
     vm = createVue({
+      template: '<el-time-picker ref="compo" format="H:mm:ss" v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 13, 0, 0, 0)
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,2');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('3,5');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('6,8');
+  });
+
+  it('selection range with 1 digit hour and 12 hour mode', async() => {
+    vm = createVue({
+      template: '<el-time-picker ref="compo" format="h:mm" v-model="value"></el-time-picker>',
+      data() {
+        return {
+          value: new Date(1970, 0, 1, 13, 0, 0, 0)
+        };
+      }
+    }, true);
+    const timePicker = vm.$refs.compo;
+    const input = timePicker.$el.querySelector('input');
+    input.blur();
+    input.focus();
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('0,1');
+    triggerKeyDown(input, 39);
+    triggerEvent(input, 'keyup');
+    await wait(DELAY);
+    expect(timePicker.picker.selectionRange.join(',')).to.equal('2,4');
+  });
+
+  it('selection range with AM/PM', async() => {
+    vm = createVue({
       template: '<el-time-picker ref="compo" format="h:mm A" toggle-am-pm v-model="value"></el-time-picker>',
       data() {
         return {

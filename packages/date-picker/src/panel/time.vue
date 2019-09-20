@@ -12,6 +12,7 @@
           :show-seconds="showSeconds"
           :show-am-pm="showAmPm"
           :am-pm-mode="amPmMode"
+          :twelve-hour-clock="twelveHourClock"
           :zero-pad-hour="zeroPadHour"
           @select-range="setSelectionRange"
           :date="date">
@@ -123,6 +124,9 @@
         if ((this.format || '').indexOf('a') !== -1) return 'a';
         return '';
       },
+      twelveHourClock() {
+        return (this.format || '').indexOf('hh') !== -1 || (this.format || '').indexOf('h') !== -1;
+      },
       zeroPadHour() {
         return (this.format || '').indexOf('HH') !== -1 || (this.format || '').indexOf('hh') !== -1;
       }
@@ -185,7 +189,7 @@
       },
 
       changeSelectionRange(step) {
-        const hoursLen = !this.zeroPadHour && (this.date.getHours() % 12 || 12) < 10 ? 1 : 2;
+        const hoursLen = !this.zeroPadHour && (this.twelveHourClock ? (this.date.getHours() % 12 || 12) : this.date.getHours()) < 10 ? 1 : 2;
         const secondsOffset = this.showSeconds ? 3 : 0;
         const list = [0, (3 - (2 - hoursLen))].concat(this.showSeconds ? [(6 - (2 - hoursLen))] : []).concat(this.showAmPm ? [(6 + secondsOffset - (2 - hoursLen))] : []);
         const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []).concat(this.showAmPm ? ['amPm'] : []);
