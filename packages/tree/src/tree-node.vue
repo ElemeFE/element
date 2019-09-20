@@ -2,6 +2,7 @@
   <div
     class="el-tree-node"
     @click.stop="handleClick"
+    @dblclick.stop="handleDblClick"
     @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
     :class="{
@@ -181,6 +182,10 @@
           });
         }
         this.tree.$emit('node-click', this.node.data, this.node, this);
+      },
+
+      handleDblClick() {
+        this.tree.$emit('node-dblclick', this.node.data, this.node, this);
       },
 
       handleContextMenu(event) {
