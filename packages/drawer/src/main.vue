@@ -30,7 +30,7 @@
               class="el-drawer__close-btn"
               type="button"
               v-if="showClose"
-              @click="closeDrawer">
+              @click="handleClose">
               <i class="el-dialog__close el-icon el-icon-close"></i>
             </button>
           </header>
@@ -58,6 +58,10 @@ export default {
     },
     beforeClose: {
       type: Function
+    },
+    closeOnPressEscape: {
+      type: Boolean,
+      default: true
     },
     customClass: {
       type: String,
@@ -140,10 +144,10 @@ export default {
     },
     handleWrapperClick() {
       if (this.wrapperClosable) {
-        this.closeDrawer();
+        this.handleClose();
       }
     },
-    closeDrawer() {
+    handleClose() {
       if (typeof this.beforeClose === 'function') {
         this.beforeClose(this.hide);
       } else {
