@@ -183,8 +183,10 @@
             const precisionFactor = Math.pow(10, stepPrecision);
             currentValue = Math.round(currentValue / this.step) * precisionFactor * this.step / precisionFactor;
           }
-
-          if (this.precision !== undefined) {
+          // https://github.com/ElemeFE/element/issues/17509
+          // currentValue.toFixed will equal last userInput when precision equal 0
+          // then input watch not trigger
+          if (this.precision !== undefined && this.precision !== 0) {
             currentValue = currentValue.toFixed(this.precision);
           }
         }
