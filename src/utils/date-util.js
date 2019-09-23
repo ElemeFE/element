@@ -18,7 +18,7 @@ export const getI18nSettings = () => {
     dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
     monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
     monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`)),
-    amPm: ['am', 'pm']
+    amPm: ['am', 'pm'].map(amOrPm => t(`el.datepicker.${ amOrPm }`) || amOrPm)
   };
 };
 
