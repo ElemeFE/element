@@ -1,5 +1,27 @@
 ## Changelog
 
+### 2.11.1-4
+
+*2019-09-23*
+
+#### New features
+
+- Internationalization
+  - Add support for localizing am/pm
+- Time Picker
+  - Use localized am/pm in time spinner
+
+#### Bug fixes
+
+- Select
+  - Fix null ref error in unit tests
+- Internationalization
+  - Prevent error when the final resource property doesn't exist
+- Date Picker
+  - Style current date using explicity set 'date' field
+- Time Picker
+  - Fix bugs with selection and display with regard to format options
+
 ### 2.11.1-3
 
 *2019-09-19*
