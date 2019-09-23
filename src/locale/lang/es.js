@@ -110,6 +110,10 @@ export default {
     },
     pageHeader: {
       title: 'Volver'
+    },
+    popconfirm: {
+      okText: 'Yes', // to be translated
+      cancelText: 'No' // to be translated
     }
   }
 };

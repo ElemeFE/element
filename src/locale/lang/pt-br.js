@@ -111,6 +111,10 @@ export default {
     },
     pageHeader: {
       title: 'Voltar'
+    },
+    popconfirm: {
+      okText: 'Yes', // to be translated
+      cancelText: 'No' // to be translated
     }
   }
 };

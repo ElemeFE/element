@@ -110,6 +110,10 @@ export default {
     },
     pageHeader: {
       title: 'عودة'
+    },
+    popconfirm: {
+      okText: 'Yes', // to be translated
+      cancelText: 'No' // to be translated
     }
   }
 };
