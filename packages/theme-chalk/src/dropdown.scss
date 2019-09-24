@@ -83,6 +83,7 @@
     color: $--color-text-regular;
     cursor: pointer;
     outline: none;
+    min-width: max-content;
     &:not(.is-disabled):hover, &:focus {
       background-color: $--dropdown-menuItem-hover-fill;
       color: $--dropdown-menuItem-hover-color;
