@@ -631,7 +631,8 @@ export default {
       }
 
       if (tags) {
-        const { offsetHeight } = tags;
+        // const { offsetHeight } = tags;
+        const offsetHeight = tags.getBoundingClientRect().height; 
         const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
         inputInner.style.height = height;
         this.updatePopper();
