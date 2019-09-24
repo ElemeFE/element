@@ -249,6 +249,10 @@
               "title": "Popover 弹出框"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm 气泡确认框"
+            },
+            {
               "path": "/card",
               "title": "Card 卡片"
             },
@@ -287,10 +291,6 @@
             {
               "path": "/drawer",
               "title": "Drawer 抽屉"
-            },
-            {
-              "path": "/popconfirm",
-              "title": "Popconfirm"
             }
           ]
         }
@@ -543,6 +543,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -585,10 +589,6 @@
             {
               "path": "/drawer",
               "title": "Drawer"
-            },
-            {
-              "path": "/popconfirm",
-              "title": "Popconfirm"
             }
           ]
         }
@@ -841,6 +841,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -883,10 +887,6 @@
             {
               "path": "/drawer",
               "title": "Drawer"
-            },
-            {
-              "path": "/popconfirm",
-              "title": "Popconfirm"
             }
           ]
         }
@@ -1139,6 +1139,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -1181,10 +1185,6 @@
             {
               "path": "/drawer",
               "title": "Drawer"
-            },
-            {
-              "path": "/popconfirm",
-              "title": "Popconfirm"
             }
           ]
         }
