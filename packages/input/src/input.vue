@@ -358,7 +358,7 @@
       handleChange(event) {
         this.$emit('change', event.target.value);
       },
-      calcIconOffset(place) {
+      calcAffixOffset(place) {
         let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
         if (!elList.length) return;
         let el = null;
@@ -369,6 +369,13 @@
           }
         }
         if (!el) return;
+
+        if (place === 'suffix' && this.isWordLimitVisible) {
+          const input = this.$refs.input;
+          const elOffsetRight = parseInt(getComputedStyle(el).right, 10) || 0;
+          const inputPaddingRight = el.offsetWidth + elOffsetRight;
+          input.style.paddingRight = inputPaddingRight + 'px';
+        }
         const pendantMap = {
           suffix: 'append',
           prefix: 'prepend'
@@ -382,8 +389,8 @@
         }
       },
       updateIconOffset() {
-        this.calcIconOffset('prefix');
-        this.calcIconOffset('suffix');
+        this.calcAffixOffset('prefix');
+        this.calcAffixOffset('suffix');
       },
       clear() {
         this.$emit('input', '');
