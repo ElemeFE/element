@@ -128,6 +128,8 @@ export default {
     el[scope] = { el, vm, container, onScroll };
 
     if (container) {
+      const containerInfo = container.getBoundingClientRect();
+      if (!containerInfo.width && !containerInfo.height) return;
       container.addEventListener('scroll', onScroll);
 
       if (immediate) {
