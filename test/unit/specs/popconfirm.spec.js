@@ -1,5 +1,4 @@
-import { createTest, destroyVM } from '../util';
-import Popconfirm from 'packages/popconfirm';
+import { createVue, destroyVM } from '../util';
 
 describe('Popconfirm', () => {
   let vm;
@@ -7,9 +6,24 @@ describe('Popconfirm', () => {
     destroyVM(vm);
   });
 
-  it('create', () => {
-    vm = createTest(Popconfirm, true);
-    expect(vm.$el).to.exist;
+  describe('trigger', () => {
+    const createVM = () => {
+      return createVue(`
+        <div>
+          <el-popconfirm
+            ref="popover"
+            title="content">
+            <button slot="reference">trigger</button>
+          </el-popconfirm>
+        </div>
+      `, true);
+    };
+    it('click', () => {
+      vm = createVM();
+      vm.$el.querySelector('button').click();
+      document.body.click();
+      expect(document.body.querySelector('.el-popconfirm__action').style.display).to.equal('');
+    });
   });
-});
 
+});
