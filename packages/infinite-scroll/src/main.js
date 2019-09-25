@@ -92,6 +92,9 @@ const handleScroll = function(cb) {
 
   if (disabled) return;
 
+  const containerInfo = container.getBoundingClientRect();
+  if (!containerInfo.width && !containerInfo.height) return;
+
   let shouldTrigger = false;
 
   if (container === el) {
@@ -128,8 +131,6 @@ export default {
     el[scope] = { el, vm, container, onScroll };
 
     if (container) {
-      const containerInfo = container.getBoundingClientRect();
-      if (!containerInfo.width && !containerInfo.height) return;
       container.addEventListener('scroll', onScroll);
 
       if (immediate) {
