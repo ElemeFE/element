@@ -165,6 +165,10 @@ export default {
   methods: {
     initStore() {
       const { config, options } = this;
+      this.activePath = [];
+      this.checkedValues = null;
+      this.checkedNodePaths = [];
+      this.loadCount = 0;
       if (config.lazy && isEmpty(options)) {
         this.lazyLoad();
       } else {
@@ -376,6 +380,7 @@ export default {
       } else {
         this.checkedValue = emitPath ? [] : null;
       }
+      this.activePath = [];
     }
   }
 };
