@@ -112,8 +112,8 @@ export default {
       title: 'عودة'
     },
     popconfirm: {
-      okText: 'Yes', // to be translated
-      cancelText: 'No' // to be translated
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

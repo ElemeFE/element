@@ -113,8 +113,8 @@ export default {
       title: '返回'
     },
     popconfirm: {
-      okText: '确定',
-      cancelText: '取消'
+      confirmButtonText: '确定',
+      cancelButtonText: '取消'
     }
   }
 };

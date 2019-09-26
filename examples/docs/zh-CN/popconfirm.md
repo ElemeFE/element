@@ -24,8 +24,8 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 ```html
 <template>
 <el-popconfirm
-  okText='好的'
-  cancelText='不用了'
+  confirmButtonText='好的'
+  cancelButtonText='不用了'
   icon="el-icon-info"
   iconColor="red"
   title="这是一段内容确定删除吗？"
@@ -40,10 +40,10 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  title              | 标题 | String | — | — |
-|  okText              | 确认按钮文字 | String | — | — |
-|  cancelText              | 取消按钮文字 | String | — | — |
-|  okType              | 确认按钮类型 | String | — | Primary |
-|  cancelType              | 取消按钮类型 | String | — | Text |
+|  confirmButtonText              | 确认按钮文字 | String | — | — |
+|  cancelButtonText              | 取消按钮文字 | String | — | — |
+|  confirmButtonType              | 确认按钮类型 | String | — | Primary |
+|  cancelButtonType              | 取消按钮类型 | String | — | Text |
 |  icon              | Icon | String | — | el-icon-question |
 |  iconColor              | Icon 颜色 | String | — | #f90 |
 |  hideIcon              | 是否隐藏 Icon | Boolean | — | false |

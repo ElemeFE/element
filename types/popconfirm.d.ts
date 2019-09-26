@@ -7,16 +7,16 @@ export declare class ElPopconfirm extends ElPopover {
   title: string
 
   /** Popconfirm ok text */
-  okText: string
+  confirmButtonText: string
   
   /** Popconfirm cancel text */
-  cancelText: string
+  cancelButtonText: string
 
   /** Popconfirm ok type */
-  okType: string
+  confirmButtonType: string
 
   /** Popconfirm cancal type */
-  cancelType: string
+  cancelButtonType: string
 
   /** Popconfirm icon */
   icon: string

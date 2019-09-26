@@ -24,8 +24,8 @@ You can customise Popconfirm like:
 ```html
 <template>
 <el-popconfirm
-  okText='OK'
-  cancelText='No, Thanks'
+  confirmButtonText='OK'
+  cancelButtonText='No, Thanks'
   icon="el-icon-info"
   iconColor="red"
   title="Are you sure to delete this?"
@@ -40,10 +40,10 @@ You can customise Popconfirm like:
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  title              | Title | String | — | — |
-|  okText              | OK button text | String | — | — |
-|  cancelText              | Cancel button text | String | — | — |
-|  okType              | OK button type | String | — | Primary |
-|  cancelType              | Cancel button type | String | — | Text |
+|  confirmButtonText              | Confirm button text | String | — | — |
+|  cancelButtonText              | Cancel button text | String | — | — |
+|  confirmButtonType              | Confirm button type | String | — | Primary |
+|  cancelButtonType              | Cancel button type | String | — | Text |
 |  icon              | Icon | String | — | el-icon-question |
 |  iconColor              | Icon color | String | — | #f90 |
 |  hideIcon              | is hide Icon | Boolean | — | false |

@@ -17,17 +17,17 @@
     <div class="el-popconfirm__action">
       <el-button 
         size="mini" 
-        :type="cancelType" 
+        :type="cancelButtonType" 
         @click="cancel"
       >
-        {{cancelText}}
+        {{cancelButtonText}}
       </el-button>
       <el-button 
         size="mini" 
-        :type="okType" 
+        :type="confirmButtonType" 
         @click="confirm"
       >
-        {{okText}}
+        {{confirmButtonText}}
       </el-button>
     </div>
   </div>
@@ -46,19 +46,19 @@ export default {
     title: {
       type: String
     },
-    okText: {
+    confirmButtonText: {
       type: String,
-      default: t('el.popconfirm.okText')
+      default: t('el.popconfirm.confirmButtonText')
     },
-    cancelText: {
+    cancelButtonText: {
       type: String,
-      default: t('el.popconfirm.cancelText')
+      default: t('el.popconfirm.cancelButtonText')
     },
-    okType: {
+    confirmButtonType: {
       type: String,
       default: 'primary'
     },
-    cancelType: {
+    cancelButtonType: {
       type: String,
       default: 'text'
     },
