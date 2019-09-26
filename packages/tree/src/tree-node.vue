@@ -265,6 +265,7 @@
       if (this.node.expanded) {
         this.expanded = true;
         this.childNodeRendered = true;
+        this.handleChildNodeExpand(this.node.data, this.node, this);
       }
 
       if(this.tree.accordion) {
