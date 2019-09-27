@@ -1,3 +1,4 @@
+import debounce from 'throttle-debounce/debounce';
 export default {
   created() {
     this.tableLayout.addObserver(this);
@@ -20,9 +21,16 @@ export default {
     }
   },
 
+  data() {
+    return {
+      debounceUpdateElsHeight: null
+    };
+  },
+
   mounted() {
     this.onColumnsChange(this.tableLayout);
     this.onScrollableChange(this.tableLayout);
+    this.debounceUpdateElsHeight = debounce(50, this._debounceUpdateElsHeight);
   },
 
   updated() {
@@ -47,6 +55,7 @@ export default {
         const column = columnsMap[name];
         if (column) {
           col.setAttribute('width', column.realWidth || column.width);
+          this.debounceUpdateElsHeight();
         }
       }
     },
@@ -63,6 +72,10 @@ export default {
         th.style.width = layout.scrollY ? layout.gutterWidth + 'px' : '0';
         th.style.display = layout.scrollY ? '' : 'none';
       }
+    },
+
+    _debounceUpdateElsHeight() {
+      this.tableLayout.updateElsHeight();
     }
   }
 };
