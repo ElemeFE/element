@@ -23,7 +23,7 @@ export default {
 
   data() {
     return {
-      debounceUpdateElsHeight: null
+      debounceUpdateElsHeight: function() {}
     };
   },
 
