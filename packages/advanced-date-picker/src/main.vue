@@ -76,7 +76,7 @@
   const getOldDateValidity = selectedDate => {
     const isYear = moment().isSame(selectedDate, 'year') || moment().isBefore(selectedDate, 'year');
     const isMonth = moment().isSame(selectedDate, 'month') || moment().isBefore(selectedDate, 'month');
-    const isDay = moment().isBefore(selectedDate, 'day');
+    const isDay = !moment().isAfter(selectedDate, 'day');
 
     return isDay && isMonth && isYear;
   };
