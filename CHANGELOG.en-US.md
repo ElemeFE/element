@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.11.1-5
+
+*2019-09-30*
+
+#### Bug fixes
+
+- Switch
+  - Avoid error if destroyed when toggled
+
 ### 2.11.1-4
 
 *2019-09-23*
