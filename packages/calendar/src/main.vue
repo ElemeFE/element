@@ -64,7 +64,6 @@ import ElButtonGroup from 'element-ui/packages/button-group';
 import DateTable from './date-table';
 import { validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
 
-const validTypes = ['prev-month', 'today', 'next-month'];
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const oneDay = 86400000;
 
@@ -112,16 +111,15 @@ export default {
     },
 
     selectDate(type) {
-      if (validTypes.indexOf(type) === -1) {
-        throw new Error(`invalid type ${type}`);
-      }
       let day = '';
       if (type === 'prev-month') {
-        day = `${this.prevMonthDatePrefix}-01`;
+        day = fecha.format(new Date(this.date.getFullYear(), this.date.getMonth() - 1, 1), 'yyyy-MM-dd');
       } else if (type === 'next-month') {
-        day = `${this.nextMonthDatePrefix}-01`;
+        day = fecha.format(new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1), 'yyyy-MM-dd');
+      } else if (type === 'today') {
+        day = fecha.format(this.now, 'yyyy-MM-dd');
       } else {
-        day = this.formatedToday;
+        throw new Error(`invalid type ${type}`);
       }
 
       if (day === this.formatedDate) return;
@@ -148,21 +146,6 @@ export default {
   },
 
   computed: {
-    prevMonthDatePrefix() {
-      const temp = new Date(this.date.getTime());
-      temp.setDate(0);
-      return fecha.format(temp, 'yyyy-MM');
-    },
-
-    curMonthDatePrefix() {
-      return fecha.format(this.date, 'yyyy-MM');
-    },
-
-    nextMonthDatePrefix() {
-      const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
-      return fecha.format(temp, 'yyyy-MM');
-    },
-
     formatedDate() {
       return fecha.format(this.date, 'yyyy-MM-dd');
     },
@@ -171,10 +154,6 @@ export default {
       const year = this.date.getFullYear();
       const month = this.date.getMonth() + 1;
       return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`;
-    },
-
-    formatedToday() {
-      return fecha.format(this.now, 'yyyy-MM-dd');
     },
 
     realSelectedDay: {
