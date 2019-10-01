@@ -17,7 +17,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
+  import { getValueByPath, escapeRegexpString, arrayFindIndex } from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -139,10 +139,23 @@
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }
+      },
+
+      removeCachedOptions(index) {
+        this.select.cachedOptions.splice(index, 1);
+      },
+
+      queryEqualValueIndex(arr) {
+        return arrayFindIndex(arr, item => this.isEqual(item.value, this.value));
       }
     },
 
     created() {
+      let index = this.queryEqualValueIndex(this.select.cachedOptions);
+      if (index > -1) {
+        this.removeCachedOptions(index);
+      }
+
       this.select.options.push(this);
       this.select.cachedOptions.push(this);
       this.select.optionsCount++;
@@ -154,9 +167,18 @@
 
     beforeDestroy() {
       let index = this.select.cachedOptions.indexOf(this);
-      if (index > -1) {
-        this.select.cachedOptions.splice(index, 1);
+
+      if (this.select.multiple) {
+        let selectedIndex = this.queryEqualValueIndex(this.select.selected);
+        if (index > -1 && selectedIndex === -1) {
+          this.removeCachedOptions(index);
+        }
+      } else {
+        if (index > -1) {
+          this.removeCachedOptions(index);
+        }
       }
+
       this.select.onOptionDestroy(this.select.options.indexOf(this));
     }
   };
