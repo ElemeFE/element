@@ -443,6 +443,7 @@
       handleClear() {
         this.minDate = null;
         this.maxDate = null;
+        this.rangeState.selecting = false;
         this.leftDate = calcDefaultValue(this.defaultValue)[0];
         this.rightDate = nextMonth(this.leftDate);
         this.$emit('pick', null);
