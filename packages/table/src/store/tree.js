@@ -57,6 +57,10 @@ export default {
   },
 
   methods: {
+    clearTreeData() {
+      this.states.treeData = {};
+      this.states.lazyTreeNodeMap = {};
+    },
     normalize(data) {
       const {
         childrenColumnName,

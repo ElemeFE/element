@@ -611,6 +611,7 @@
         immediate: true,
         handler(value) {
           this.store.commit('setData', value);
+          this.store.clearTreeData();
         }
       },
 
