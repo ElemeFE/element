@@ -343,6 +343,7 @@ $--alert-icon-large-size: 28px !default;
 /// color||Color|0
 $--messagebox-title-color: $--color-text-primary !default;
 $--msgbox-width: 420px !default;
+$--msgbox-max-width: 100% !default;
 $--msgbox-border-radius: 4px !default;
 /// fontSize||Font|1
 $--messagebox-font-size: $--font-size-large !default;
