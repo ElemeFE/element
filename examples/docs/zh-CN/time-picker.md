@@ -158,7 +158,7 @@
 | size          | 输入框尺寸     | string          | medium / small / mini  | — |
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
-| end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
 | is-range | 是否为时间范围选择，仅对`<el-time-picker>`有效 | boolean | — | false |
 | arrow-control | 是否使用箭头进行时间选择，仅对`<el-time-picker>`有效 | boolean | — | false |
 | align | 对齐方式 | string | left / center / right | left |
