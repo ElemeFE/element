@@ -58,9 +58,11 @@ const Message = function(options) {
 Message.close = function(id, userOnClose) {
   let len = instances.length;
   let index = -1;
+  let removedHeight = 0;
   for (let i = 0; i < len; i++) {
     if (id === instances[i].id) {
       index = i;
+      removedHeight = instances[index].$el.offsetHeight;
       if (typeof userOnClose === 'function') {
         userOnClose(instances[i]);
       }
@@ -69,8 +71,7 @@ Message.close = function(id, userOnClose) {
     }
   }
   if (len <= 1 || index === -1 || index > instances.length - 1) return;
-  const removedHeight = instances[index].$el.offsetHeight;
-  for (let i = index; i < len - 1 ; i++) {
+  for (let i = index; i < len - 1; i++) {
     let dom = instances[i].$el;
     dom.style['top'] =
       parseInt(dom.style['top'], 10) - removedHeight - 16 + 'px';
