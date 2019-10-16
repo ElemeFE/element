@@ -217,6 +217,10 @@ export default {
       default: true
     },
     collapseTags: Boolean,
+    collapseTagsMaxNum: {
+      type: Number,
+      default: 10
+    },
     debounce: {
       type: Number,
       default: 300
@@ -497,7 +501,7 @@ export default {
       this.presentText = null;
     },
     computePresentTags() {
-      const { isDisabled, leafOnly, showAllLevels, separator, collapseTags } = this;
+      const { isDisabled, leafOnly, showAllLevels, separator, collapseTags, collapseTagsMaxNum } = this;
       const checkedNodes = this.getCheckedNodes(leafOnly);
       const tags = [];
 
@@ -516,11 +520,16 @@ export default {
 
         if (restCount) {
           if (collapseTags) {
-            tags.push({
-              key: -1,
-              text: `+ ${restCount}`,
-              closable: false
-            });
+            for (let i = 0; i < collapseTagsMaxNum - 1 && i < restCount; i++) {
+              tags.push(genTag(rest[i]));
+            }
+            if (restCount > collapseTagsMaxNum - 1) {
+              tags.push({
+                key: -1,
+                text: `+ ${restCount - (collapseTagsMaxNum - 1)}`,
+                closable: false
+              });
+            }
           } else {
             rest.forEach(node => tags.push(genTag(node)));
           }
