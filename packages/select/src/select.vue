@@ -38,7 +38,7 @@
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          <span class="el-select__tags-text">{{ item.currentLabel || item.value.label }}</span>
         </el-tag>
       </transition-group>
 
