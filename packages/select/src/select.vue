@@ -514,7 +514,6 @@
         const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
         const isUndefined = Object.prototype.toString.call(value).toLowerCase() === '[object undefined]';
 
-        for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
           const isEqual = isObject
             ? getValueByPath(cachedOption.value, this.valueKey) === getValueByPath(value, this.valueKey)
@@ -557,6 +556,7 @@
             result.push(this.getOption(value));
           });
         }
+        console.log('result', result);
         this.selected = result;
         this.$nextTick(() => {
           this.resetInputHeight();
