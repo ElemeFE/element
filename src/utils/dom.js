@@ -191,7 +191,7 @@ export const getScrollContainer = (el, vertical) => {
 
   let parent = el;
   while (parent) {
-    if ([window, document, document.documentElement].includes(parent)) {
+    if ([window, document, document.documentElement].indexOf(parent) >= 0) {
       return window;
     }
     if (isScroll(parent, vertical)) {
@@ -209,7 +209,7 @@ export const isInContainer = (el, container) => {
   const elRect = el.getBoundingClientRect();
   let containerRect;
 
-  if ([window, document, document.documentElement, null, undefined].includes(container)) {
+  if ([window, document, document.documentElement, null, undefined].indexOf(container) >= 0) {
     containerRect = {
       top: 0,
       right: window.innerWidth,
