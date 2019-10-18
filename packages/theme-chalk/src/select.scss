@@ -14,7 +14,7 @@
 
   .el-select__tags
     >span {
-      display: contents;
+      display: inline-block;
     }
 
   &:hover {
@@ -114,7 +114,7 @@
     z-index: $--index-normal;
     top: 50%;
     transform: translateY(-50%);
-    display: flex;
+    display: block;
     align-items: center;
     flex-wrap: wrap;
   }
