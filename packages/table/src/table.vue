@@ -427,18 +427,19 @@
           this.scrollPosition = 'middle';
         }
       }),
-
+      syncPostionHeader: throttle(20, function() {
+        const { fixedHeaderWrapper, rightFixedHeaderWrapper, footerWrapper, bodyWrapper } = this.$refs;
+        const { scrollLeft, scrollTop} = this.bodyWrapper;
+        if (scrollLeft === bodyWrapper.scrollLeft) return;
+        if (bodyWrapper) bodyWrapper.scrollLeft = scrollLeft;
+        if (footerWrapper) footerWrapper.scrollLeft = scrollLeft;
+        if (fixedHeaderWrapper) fixedHeaderWrapper.scrollTop = scrollTop;
+        if (rightFixedHeaderWrapper) rightFixedHeaderWrapper.scrollTop = scrollTop;
+      }),
       bindEvents() {
-        const { headerWrapper, footerWrapper, bodyWrapper } = this.$refs;
-        const refs = this.$refs;
+        const { headerWrapper } = this.$refs;
         if (headerWrapper) {
-          headerWrapper.addEventListener('scroll', function() {
-            if (this.scrollLeft === bodyWrapper.scrollLeft) return;
-            if (bodyWrapper) bodyWrapper.scrollLeft = this.scrollLeft;
-            if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
-            if (refs.fixedHeaderWrapper) refs.fixedHeaderWrapper.scrollTop = this.scrollTop;
-            if (refs.rightFixedHeaderWrapper) refs.rightFixedHeaderWrapper.scrollTop = this.scrollTop;
-          })
+          headerWrapper.addEventListener('scroll', this.syncPostionHeader, { passive: true })
         }
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
@@ -447,6 +448,10 @@
       },
 
       unbindEvents() {
+        const { headerWrapper } = this.$refs;
+        if (headerWrapper) {
+          headerWrapper.removeEventListener('scroll', this.syncPostionHeader, { passive: true })
+        }
         this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
