@@ -1,4 +1,3 @@
-
 ## DatePicker
 
 Utilisez DatePicker pour les champs de dates.
