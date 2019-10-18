@@ -67,6 +67,9 @@ const getScrollOptions = (el, vm) => {
   return entries(attributes).reduce((map, [key, option]) => {
     const { type, default: defaultValue } = option;
     let value = el.getAttribute(`infinite-scroll-${key}`);
+    Number.isNaN = Number.isNaN || function(value) {
+      return typeof value === 'number' && isNaN(value);
+    };
     value = isUndefined(vm[value]) ? value : vm[value];
     switch (type) {
       case Number:
@@ -97,12 +100,12 @@ const handleScroll = function(cb) {
   if (container === el) {
     // be aware of difference between clientHeight & offsetHeight & window.getComputedStyle().height
     const scrollBottom = container.scrollTop + getClientHeight(container);
-    shouldTrigger = container.scrollHeight - scrollBottom <= distance;
+    shouldTrigger = (container.scrollHeight - scrollBottom) <= distance;
   } else {
     const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - getElementTop(container);
     const offsetHeight = getOffsetHeight(container);
     const borderBottom = Number.parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
-    shouldTrigger = heightBelowTop - offsetHeight + borderBottom <= distance;
+    shouldTrigger = (heightBelowTop - offsetHeight + borderBottom) <= distance;
   }
 
   if (shouldTrigger && isFunction(cb)) {
