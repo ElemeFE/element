@@ -14,7 +14,7 @@
 
   .el-select__tags
     >span {
-      display: contents;
+      display: inline-block;
     }
 
   &:hover {
