@@ -428,8 +428,8 @@
         }
       }),
       syncPostionHeader: throttle(20, function() {
-        const { fixedHeaderWrapper, rightFixedHeaderWrapper, footerWrapper, bodyWrapper } = this.$refs;
-        const { scrollLeft, scrollTop} = this.bodyWrapper;
+        const { fixedHeaderWrapper, rightFixedHeaderWrapper, footerWrapper, bodyWrapper, headerWrapper } = this.$refs;
+        const { scrollLeft, scrollTop } = headerWrapper;
         if (scrollLeft === bodyWrapper.scrollLeft) return;
         if (bodyWrapper) bodyWrapper.scrollLeft = scrollLeft;
         if (footerWrapper) footerWrapper.scrollLeft = scrollLeft;
