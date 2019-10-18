@@ -429,6 +429,21 @@
       }),
 
       bindEvents() {
+        const { headerWrapper, footerWrapper, bodyWrapper } = this.$refs;
+        const refs = this.$refs;
+        /**
+         * 解决当table的容器已经滚动到最右边，table的列总长度大于table长度出现滚动条，右边滚动到type为selection的列，
+         * checkbox选择框只展示一半，选择头部的全选，出现头部向左边移动，body的内容没有变的错位bug
+         */
+        if (headerWrapper) {
+          headerWrapper.addEventListener('scroll', function() {
+            if (this.scrollLeft === bodyWrapper.scrollLeft) return;
+            if (bodyWrapper) bodyWrapper.scrollLeft = this.scrollLeft;
+            if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
+            if (refs.fixedHeaderWrapper) refs.fixedHeaderWrapper.scrollTop = this.scrollTop;
+            if (refs.rightFixedHeaderWrapper) refs.rightFixedHeaderWrapper.scrollTop = this.scrollTop;
+          })
+        }
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
