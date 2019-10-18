@@ -427,6 +427,7 @@
           this.scrollPosition = 'middle';
         }
       }),
+
       syncPostionHeader: throttle(20, function() {
         const { fixedHeaderWrapper, rightFixedHeaderWrapper, footerWrapper, bodyWrapper, headerWrapper } = this.$refs;
         const { scrollLeft, scrollTop } = headerWrapper;
@@ -436,10 +437,11 @@
         if (fixedHeaderWrapper) fixedHeaderWrapper.scrollTop = scrollTop;
         if (rightFixedHeaderWrapper) rightFixedHeaderWrapper.scrollTop = scrollTop;
       }),
+
       bindEvents() {
         const { headerWrapper } = this.$refs;
         if (headerWrapper) {
-          headerWrapper.addEventListener('scroll', this.syncPostionHeader, { passive: true })
+          headerWrapper.addEventListener('scroll', this.syncPostionHeader, { passive: true });
         }
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
@@ -450,7 +452,7 @@
       unbindEvents() {
         const { headerWrapper } = this.$refs;
         if (headerWrapper) {
-          headerWrapper.removeEventListener('scroll', this.syncPostionHeader, { passive: true })
+          headerWrapper.removeEventListener('scroll', this.syncPostionHeader, { passive: true });
         }
         this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
