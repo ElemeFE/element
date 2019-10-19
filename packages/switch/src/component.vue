@@ -25,7 +25,7 @@
       <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
-    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
+    <span class="el-switch__core" ref="core" :style="{ 'width': width + 'px' }">
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
@@ -97,11 +97,6 @@
       },
       id: String
     },
-    data() {
-      return {
-        coreWidth: this.width
-      };
-    },
     created() {
       if (!~[this.activeValue, this.inactiveValue].indexOf(this.value)) {
         this.$emit('input', this.inactiveValue);
@@ -162,7 +157,6 @@
     },
     mounted() {
       /* istanbul ignore if */
-      this.coreWidth = this.width || 40;
       if (this.activeColor || this.inactiveColor) {
         this.setBackgroundColor();
       }
