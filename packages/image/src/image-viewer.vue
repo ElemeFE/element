@@ -242,7 +242,18 @@ export default {
     },
     toggleMode() {
       if (this.loading) return;
-
+      if (!Object.values) {
+        Object.values = function(obj) {
+          var vals = [];
+          for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+              vals.push(obj[key]);
+            }
+          }
+          return vals;
+        };
+      };
+      
       const modeNames = Object.keys(Mode);
       const modeValues = Object.values(Mode);
       const index = modeValues.indexOf(this.mode);
