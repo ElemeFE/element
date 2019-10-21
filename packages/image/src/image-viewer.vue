@@ -11,14 +11,16 @@
         <span
           class="el-image-viewer__btn el-image-viewer__prev"
           :class="{ 'is-disabled': !infinite && isFirst }"
-          @click="prev">
-          <i class="el-icon-arrow-left"/>
+          @click="prev"
+        >
+          <i class="el-icon-arrow-left" />
         </span>
         <span
           class="el-image-viewer__btn el-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
-          @click="next">
-          <i class="el-icon-arrow-right"/>
+          @click="next"
+        >
+          <i class="el-icon-arrow-right" />
         </span>
       </template>
       <!-- ACTIONS -->
@@ -45,31 +47,32 @@
           :style="imgStyle"
           @load="handleImgLoad"
           @error="handleImgError"
-          @mousedown="handleMouseDown">
+          @mousedown="handleMouseDown"
+        />
       </div>
     </div>
   </transition>
 </template>
 
 <script>
-import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
+import { on, off } from "element-ui/src/utils/dom";
+import { rafThrottle, isFirefox } from "element-ui/src/utils/util";
 
 const Mode = {
   CONTAIN: {
-    name: 'contain',
-    icon: 'el-icon-full-screen'
+    name: "contain",
+    icon: "el-icon-full-screen"
   },
   ORIGINAL: {
-    name: 'original',
-    icon: 'el-icon-c-scale-to-original'
+    name: "original",
+    icon: "el-icon-c-scale-to-original"
   }
 };
 
-const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel';
+const mousewheelEventName = isFirefox() ? "DOMMouseScroll" : "mousewheel";
 
 export default {
-  name: 'elImageViewer',
+  name: "elImageViewer",
 
   props: {
     urlList: {
@@ -123,12 +126,12 @@ export default {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform;
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg)`,
-        transition: enableTransition ? 'transform .3s' : '',
-        'margin-left': `${offsetX}px`,
-        'margin-top': `${offsetY}px`
+        transition: enableTransition ? "transform .3s" : "",
+        "margin-left": `${offsetX}px`,
+        "margin-top": `${offsetY}px`
       };
       if (this.mode === Mode.CONTAIN) {
-        style.maxWidth = style.maxHeight = '100%';
+        style.maxWidth = style.maxHeight = "100%";
       }
       return style;
     }
@@ -172,7 +175,7 @@ export default {
             break;
           // UP_ARROW
           case 38:
-            this.handleActions('zoomIn');
+            this.handleActions("zoomIn");
             break;
           // RIGHT_ARROW
           case 39:
@@ -180,29 +183,29 @@ export default {
             break;
           // DOWN_ARROW
           case 40:
-            this.handleActions('zoomOut');
+            this.handleActions("zoomOut");
             break;
         }
       });
       this._mouseWheelHandler = rafThrottle(e => {
         const delta = e.wheelDelta ? e.wheelDelta : -e.detail;
         if (delta > 0) {
-          this.handleActions('zoomIn', {
+          this.handleActions("zoomIn", {
             zoomRate: 0.015,
             enableTransition: false
           });
         } else {
-          this.handleActions('zoomOut', {
+          this.handleActions("zoomOut", {
             zoomRate: 0.015,
             enableTransition: false
           });
         }
       });
-      on(document, 'keydown', this._keyDownHandler);
+      on(document, "keydown", this._keyDownHandler);
       on(document, mousewheelEventName, this._mouseWheelHandler);
     },
     deviceSupportUninstall() {
-      off(document, 'keydown', this._keyDownHandler);
+      off(document, "keydown", this._keyDownHandler);
       off(document, mousewheelEventName, this._mouseWheelHandler);
       this._keyDownHandler = null;
       this._mouseWheelHandler = null;
@@ -212,7 +215,7 @@ export default {
     },
     handleImgError(e) {
       this.loading = false;
-      e.target.alt = '加载失败';
+      e.target.alt = "加载失败";
     },
     handleMouseDown(e) {
       if (this.loading || e.button !== 0) return;
@@ -224,9 +227,9 @@ export default {
         this.transform.offsetX = offsetX + ev.pageX - startX;
         this.transform.offsetY = offsetY + ev.pageY - startY;
       });
-      on(document, 'mousemove', this._dragHandler);
-      on(document, 'mouseup', ev => {
-        off(document, 'mousemove', this._dragHandler);
+      on(document, "mousemove", this._dragHandler);
+      on(document, "mouseup", ev => {
+        off(document, "mousemove", this._dragHandler);
       });
 
       e.preventDefault();
@@ -252,8 +255,8 @@ export default {
           }
           return vals;
         };
-      };
-      
+      }
+
       const modeNames = Object.keys(Mode);
       const modeValues = Object.values(Mode);
       const index = modeValues.indexOf(this.mode);
@@ -281,18 +284,20 @@ export default {
       };
       const { transform } = this;
       switch (action) {
-        case 'zoomOut':
+        case "zoomOut":
           if (transform.scale > 0.2) {
-            transform.scale = parseFloat((transform.scale - zoomRate).toFixed(3));
+            transform.scale = parseFloat(
+              (transform.scale - zoomRate).toFixed(3)
+            );
           }
           break;
-        case 'zoomIn':
+        case "zoomIn":
           transform.scale = parseFloat((transform.scale + zoomRate).toFixed(3));
           break;
-        case 'clocelise':
+        case "clocelise":
           transform.deg += rotateDeg;
           break;
-        case 'anticlocelise':
+        case "anticlocelise":
           transform.deg -= rotateDeg;
           break;
       }
