@@ -31,10 +31,6 @@
       cursor: not-allowed;
     }
 
-    & + .el-checkbox.is-bordered {
-      margin-left: 10px;
-    }
-
     &.el-checkbox--medium {
       padding: $--checkbox-bordered-medium-padding;
       border-radius: $--button-medium-border-radius;
