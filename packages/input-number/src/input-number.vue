@@ -185,7 +185,7 @@
           }
 
           if (this.precision !== undefined) {
-            currentValue = currentValue.toFixed(this.precision);
+            currentValue = this.toPrecision(currentValue, this.precision);
           }
         }
 
