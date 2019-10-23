@@ -124,6 +124,16 @@
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [this.value]);
         }
+      },
+      activeColor() {
+        if (this.activeColor || this.inactiveColor) {
+          this.setBackgroundColor();
+        }
+      },
+      inactiveColor() {
+        if (this.activeColor || this.inactiveColor) {
+          this.setBackgroundColor();
+        }
       }
     },
     methods: {
