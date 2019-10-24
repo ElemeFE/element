@@ -57,6 +57,10 @@
         type: Boolean,
         default: false
       },
+      async: {
+        type: Boolean,
+        default: false
+      },
       width: {
         type: Number,
         default: 40
@@ -98,6 +102,7 @@
       id: String
     },
     created() {
+      this.async && this.initAsyncCallback();
       if (!~[this.activeValue, this.inactiveValue].indexOf(this.value)) {
         this.$emit('input', this.inactiveValue);
       }
@@ -122,6 +127,10 @@
       }
     },
     methods: {
+      initAsyncCallback() {
+        this.resolve = () => {};
+        this.reject = () => {};
+      },
       handleChange(event) {
         const val = this.checked ? this.inactiveValue : this.activeValue;
         this.$emit('input', val);
@@ -138,7 +147,23 @@
         this.$refs.core.style.backgroundColor = newColor;
       },
       switchValue() {
-        !this.switchDisabled && this.handleChange();
+        if (this.switchDisabled) return;
+        this.async ? this.asyncChange() : this.handleChange();
+      },
+      asyncChange() {
+        new window.Promise((resolve, reject) => {
+          this.resolve = resolve;
+          this.reject = reject;
+        })
+          .then(res => {
+            this.handleChange();
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .finally(_ => {
+            this.initAsyncCallback();
+          });
       },
       getMigratingConfig() {
         return {

@@ -12,13 +12,43 @@
   active-color="#13ce66"
   inactive-color="#ff4949">
 </el-switch>
-
 <script>
   export default {
     data() {
       return {
         value: true
       }
+    }
+  };
+</script>
+```
+:::
+
+### 异步改变
+
+使用 `async` 属性开启了异步，则需调用 `resolve` 来改变 value
+
+:::demo 设置`async`属性，接受一个`Boolean`，设置`true`即可异步改变。
+
+
+```html
+<el-switch
+  ref='switch'
+  v-model="value"
+  async>
+</el-switch>
+<el-button type='primary' size='mini' @click='asyncChange'>async</el-button>
+<script>
+  export default {
+    data() {
+      return {
+        value: true
+      }
+    },
+    methods: {
+      asyncChange() {
+        this.$refs.switch.resolve();
+      } 
     }
   };
 </script>
@@ -119,6 +149,7 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | boolean / string / number | — | — |
 | disabled  | 是否禁用    | boolean   | — | false   |
+| async  | 是否异步改变 value | boolean   | —   | false |
 | width  | switch 的宽度（像素）    | number   | — | 40 |
 | active-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `active-text`    | string   | — | — |
 | inactive-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `inactive-text`    | string   | — | — |
@@ -140,3 +171,5 @@
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | focus | 使 Switch 获取焦点 | - |
+| resolve | 仅在 async 下可用，异步改变 value 的 resolve | - |
+| reject | 仅在 async 下可用，异步改变 value 的 reject | - |
