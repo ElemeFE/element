@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2.11.1-6
+
+*2019-10-25*
+
+#### New features
+
+- Date Picker
+  - Add optional slots for prefix and suffix
+
+#### Changed
+
+- Date Picker
+  - Move input event handler to method
+
 ### 2.11.1-5
 
 *2019-09-30*
