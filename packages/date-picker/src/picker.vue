@@ -13,7 +13,7 @@
     @focus="handleFocus"
     @keydown.native="handleKeydown"
     :value="displayValue"
-    @input="value => userInput = value"
+    @input="handleInput"
     @change="handleChange"
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
@@ -637,6 +637,10 @@ export default {
       if (!this.valueIsEmpty && this.clearable) {
         this.showClose = true;
       }
+    },
+
+    handleInput(value) {
+      this.userInput = value;
     },
 
     handleChange() {
