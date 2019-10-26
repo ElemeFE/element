@@ -11,13 +11,13 @@ let seed = 1;
 const Message = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
+  const { total } = options;
+  if (total && instances.length > total - 1) return;
   if (typeof options === 'string') {
     options = {
       message: options
     };
   }
-  const { total } = options;
-  if (total && instances.length > total - 1) return;
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
 
