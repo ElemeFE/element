@@ -16,6 +16,8 @@ const Message = function(options) {
       message: options
     };
   }
+  const { total } = options;
+  if (total && instances.length > total - 1) return;
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
 
