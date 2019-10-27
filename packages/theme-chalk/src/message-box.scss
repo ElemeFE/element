@@ -73,10 +73,13 @@
   }
 
   @include e(content) {
-    position: relative;
     padding: 10px $--msgbox-padding-primary;
     color: $--messagebox-content-color;
     font-size: $--messagebox-content-font-size;
+  }
+  
+  @include e(container) {
+    position: relative;
   }
 
   @include e(input) {

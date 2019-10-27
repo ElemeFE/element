@@ -1,5 +1,83 @@
 ## 更新日志
 
+### 2.12.0
+
+*2019-08-29*
+
+#### 新特性
+
+- Popover
+  - 添加 close-delay 属性 (#16671 by @LachlanStuart)
+- Theme
+  - 增加 Chrome 插件: Element Theme Extension (#16686 by @iamkun)
+- Icon
+  - 支持 font-display 属性的配置 (#16805 by @iamfaizalandyka)
+
+#### Bug fixes
+
+- Table
+  - 在表头拖拽后阻止 click 事件的触发 (#16850 by @ziyoung)
+  - 修复表头 display 为 none 造成浏览器崩溃的问题 (#16956 by @luckyCao)
+  - 修复没有数据的时表格高度问题 (#16861 by @ziyoung)
+  - 调用 toggleExpansion 不再抛出异常 (#16304 by @yyjjqq94)
+  - 挂载时不再触发 sort-change 事件 (#17113 by @a631807682)
+  - 修复 setCurrentRow 方法不生效的问题 (#16879 by @ziyoung)
+  - 修复当数据异步加载时，expand-row-keys 不生效的问题 (#16899 by @ziyoung)
+  - 把 toggleAllSelection 设置为 Table 示例的属性 (#17137 by @ziyoung)
+- Tree
+  - 修复文字与复选框之间的距离 (#16799 by @Hazlank)
+- Tabs
+  - 修复 TabItem 位置不正确的问题 (#16520 by @victorting)
+  - 修复高亮的 Tab 不在可视区的问题 (#17033 by @nullptru)
+- Calendar
+  - 修复日期的显示问题 (#16772 by @ubitoffee)
+  - 修复在夏令时的显示问题 (#17208 by @iamkun)
+- Cascader
+  - 修复 CascaderPanel 的显示问题 (#16716 by @zhangHongEn)
+  - 禁用状态下，关闭按钮不显示 (#16224 by @yyjjqq94)
+- Input
+  - 修复韩语输入问题 (#15069 by @MoonHyuk)
+  - 触发清楚按钮的点击事件 (#16576 by @a631807682)
+- Select
+  - 过滤时，不收起下拉框 (#17205 by @luckyCao)
+- Transfer
+  - 修复样式问题 (#17206 by @iamkun)
+- Dialog
+  - 添加 SCSS 变量 (#16365 by @haoranyu)
+- RadioGroup
+  - is 指定时，不产生非法的 HTML 片段 (#17070 by @nullptru)
+- Divider
+  - 支持自定义类 (#17078 by @island205)
+- Carousel
+  - 修复 change 的触发时机 (#16705 by @iamkun)
+- Notification
+  - 不修改传入的 option (#16704 by @iamkun)
+- DatePicker
+  - 给 picker-option 添加 className 属性 (#16632 by @iamkun)
+- DateTimePicker
+  - 修复时间选择滚动条的问题 (#16854 by @jesse-li)
+
+#### Optimization
+
+- Checkbox
+  - 提高可访问性 (#16575 by @tylertrotter)
+- Docs
+  - 更新 changelog (#16773 by @SimonaliaChen)
+  - 更新贡献指南 (#14800 by @sinchang)
+  - 修复 Drawer 文档中的拼写错误 (#16848 by @winkay)
+  - 更新自定义主题 (#16983 by @iamkun)
+  - 新增 Esperanto 翻译 (#16955 by @maxkoryukov)
+  - 更新 input-number 文档 (#16316 by @luckyCao)
+  - 更新 Spanish 文档 (#16961 #16548 by @Gonzalo2310)
+- I18n
+  - 更新加泰罗尼亚语翻译 (#14722 by @oscaralbareda)
+  - 更新阿拉伯语翻译 (#16653 by @l3op)
+- Test
+  - 修复拼写错误 (#16672 by @boomler)
+  - 优化 image 的单元测试 (#16847 by @a631807682)
+- Types
+  - 修复 httprequest 的类型 (#16633 by @luckyCao)
+
 ### 2.11.1
 
 *2019-07-26*
