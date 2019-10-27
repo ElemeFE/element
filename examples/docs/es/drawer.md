@@ -232,7 +232,7 @@ Si la variable `visible` se gestiona en el almacén de Vuex, el `.sync` no puede
 | destroy-on-close | Indica si los children deben ser destruidos después de cerrar el Drawer. | boolean | - | false |
 | modal | Mostrará una capa de sombra | boolean | — | true |
 | modal-append-to-body | Indica si se debe insertar una capa de sombreado en el elemento DocumentBody | boolean   | — | true |
-| direction | Dirección de apertura del Drawer | Direction | rtl / ltr / ttb / tbb | rtl |
+| direction | Dirección de apertura del Drawer | Direction | rtl / ltr / ttb / btt | rtl |
 | show-close | Se mostrará el botón de cerrar en la parte superior derecha del Drawer | boolean | — | true |
 | size | Tamaño del Drawer. Si el Drawer está en modo horizontal, afecta a la propiedad width, de lo contrario afecta a la propiedad height, cuando el tamaño es tipo `number`, describe el tamaño por unidad de píxeles; cuando el tamaño es tipo `string`, se debe usar con notación `x%`, de lo contrario se interpretará como unidad de píxeles. | number / string | - | '30%' |
 | title | El título del Drawer, también se puede establecer por slot con nombre, las descripciones detalladas se pueden encontrar en el formulario de slot. | string | — | — |

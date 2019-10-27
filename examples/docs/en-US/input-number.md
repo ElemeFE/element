@@ -188,7 +188,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 | Event Name | Description | Parameters |
 |----| ---- | -----|
-|change | triggers when the value changes | value after change |
+|change | triggers when the value changes | currentValue, oldValue |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 

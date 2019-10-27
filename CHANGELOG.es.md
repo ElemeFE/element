@@ -1,5 +1,84 @@
 ## Changelog
 
+### 2.12.0
+
+*2019-08-29*
+
+#### Nuevas características
+
+- Popover
+  - Agregada la prop close-delay  (#16671 by @LachlanStuart)
+- Theme
+  - Añadida la extensión Chrome: Element Theme Extensión (#16686 by @iamkun)
+- Icon
+  - Añadido font-display a la declaración @font-face (#16805 by @iamfaizalandyka)
+
+#### Corrección de errores
+
+- Carousel
+  - Corregido el valor emitido por onChange (#16705 by @iamkun)
+- Notification
+  - Corrección de la modificación del objeto de opción entrante (#16704 by @iamkun)
+- DatePicker
+  - Agregado el className para la opción picker (#16632 by @iamkun)
+- DateTimePicker
+  - Corrección del  time-spinner que no se desplazaba a la posición correcta (#16854 by @jesse-li)
+- Table
+  - Evitar la propagación del click después del arrastre (#16850 by @ziyoung)
+  - Corregido una error en chrome que se producía cuando el css de thead tenia display: none  (#16956 by @luckyCao)
+  - Corregida la altura incorrecta de los bloques vacíos  (#16861 by @ziyoung)
+  - No hay lanzamiento de error cuando se llama a toggleExpansion (#16304 by @yyjjqq94)
+  - No se lanza el evento sort-change cuando esta montado (#17113 by @a631807682)
+  - Corregido que el setCurrentRow no borraba la linea resaltada (#16879 by @ziyoung)
+  - Corregido que expand-row-keys no funcionaba cuando los datos eran cargados asincrónicamente (#16899 by @ziyoung)
+  - Establecido toggleAllSelection como propiedad instanciada (#17137 by @ziyoung)
+- Tree
+  - Corregida la distancia entre label y checkbox (#16799 by @Hazlank)
+- Tabs
+  - Corregida la posición incorrecta de los item's del Tab (#16520 by @victorting)
+  - Corregido el error de que la pestaña activada estaba fuera del rango visual (#17033 by @nullptru)
+- Calendar
+  - Arreglado el problema de los días de la semana con i18n (#16772 by @ubitoffee)
+  - Corregido el error de localización (#17208 by @iamkun)
+- Cascader
+  - Corregido un error de visualización del CascaderPanel  (#16716 by @zhangHongEn)
+  - Corregido el problema de disable status y close button (#16224 by @yyjjqq94)
+- Input
+  - Arreglado el evento de composición coreana (#15069 by @MoonHyuk)
+  - Arreglado el evento click del botón clear que no se lanzaba cuando se usaba v-loading (#16576 by @a631807682)
+- Select
+  - No cambiaba el dropdown cuando se filtraba (#17205 by @luckyCao)
+- Transfer
+  - Arreglado un error de estilo (#17206 by @iamkun)
+- Dialog
+  - Actualizada las variables Sass  (#16365 by @haoranyu)
+- RadioGroup
+  - No produce HTML invalido en la tabla si el atributo 'is' es especificado (#17070 by @nullptru)
+- Divider
+  - Soporta clases personalizadas (#17078 by @island205)
+
+#### Optimización
+
+- Checkbox
+  - Mejorada la experiencia del lector de pantalla (#16575 by @tylertrotter)
+- Docs
+  - Actualizado changelog (#16773 by @SimonaliaChen)
+  - Actualizada la guía de contribución (#14800 by @sinchang)
+  - Arreglado typo en la documentación de Drawer (#16848 by @winkay)
+  - Actualizado el tema personalizado (#16983 by @iamkun)
+  - Agregada traducción en Esperanto (#16955 by @maxkoryukov)
+  - Actualizada la documentación de input-number sobre el evento change (#16316 by @luckyCao)
+  - Actualizada la documentación en Español 2.11.1 (#16961 by @Gonzalo2310)
+- I18n
+  - Eliminada la traducción de 'year' en idioma Catalán como en otros idiomas (#14722 by @oscaralbareda)
+  - Actualizado el changelog de las versiones 2.10.0 y 2.10.1 en Español (#16548 by @Gonzalo2310)
+  - Actualizado ar.js (#16653 by @l3op)
+- Test
+  - Corregir error ortográfico (#16672 by @boomler)
+  - Refractorizacion del unit test para usar data-uri (#16847 by @a631807682)
+- Types
+  - Corrección del tipo httprequest (#16633 by @luckyCao)
+
 ### 2.11.1
 
 *2019-07-26*

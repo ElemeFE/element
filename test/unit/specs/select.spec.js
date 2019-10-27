@@ -693,7 +693,7 @@ describe('Select', () => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
-    }, 100);
+    }, 250);
   });
 
   it('should return focus to input inside select after option select', done => {

@@ -23,6 +23,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     color: $--color-text-secondary;
+    font-size: $--font-size-base;
   }
 
   @include e(drop-indicator) {
