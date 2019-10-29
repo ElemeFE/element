@@ -66,18 +66,22 @@ export default {
       this.uploadFiles(files);
     },
     uploadFiles(files) {
+      // 超过限制图片长度，文件超出个数限制时的钩子	function(files, fileList)
       if (this.limit && this.fileList.length + files.length > this.limit) {
         this.onExceed && this.onExceed(files, this.fileList);
         return;
       }
 
       let postFiles = Array.prototype.slice.call(files);
+      // 如果不支持多图，默认第一张
       if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
 
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
+        // 保存文件属性，并且可视化
         this.onStart(rawFile);
+        // auto-upload	是否在选取文件后立即进行上传
         if (this.autoUpload) this.upload(rawFile);
       });
     },
@@ -140,6 +144,7 @@ export default {
         file: rawFile,
         data: this.data,
         filename: this.name,
+        // 上传的地址
         action: this.action,
         onProgress: e => {
           this.onProgress(e, rawFile);
@@ -203,6 +208,8 @@ export default {
             ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
             : this.$slots.default
         }
+        // Accept 请求头用来告知（服务器）客户端可以处理的内容类型，这种内容类型用MIME类型来表示。
+        // 方法XMLHttpRequest.overrideMimeType()重写由服务器返回的 MIME 类型。
         <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
       </div>
     );

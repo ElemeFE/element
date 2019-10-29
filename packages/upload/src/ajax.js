@@ -34,12 +34,13 @@ export default function upload(option) {
   }
 
   const xhr = new XMLHttpRequest();
+  // 上传的地址
   const action = option.action;
-
+  //用来表示上传的进度 https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/upload
   if (xhr.upload) {
     xhr.upload.onprogress = function progress(e) {
       if (e.total > 0) {
-        e.percent = e.loaded / e.total * 100;
+        e.percent = (e.loaded / e.total) * 100;
       }
       option.onProgress(e);
     };
@@ -59,16 +60,19 @@ export default function upload(option) {
     option.onError(e);
   };
 
-  xhr.onload = function onload() {
+xhr.onload = function onload() {
     if (xhr.status < 200 || xhr.status >= 300) {
       return option.onError(getError(action, option, xhr));
     }
 
     option.onSuccess(getBody(xhr));
   };
-
+  /* open() 初始化一个请求
+  send() 发送请求
+  setRequestHeader()设置 HTTP 请求头的值 必须在 open() 之后、send() 之前调用 setRequestHeader() 方法。s
+  */
   xhr.open('post', action, true);
-
+  // 一个布尔值，用来指定跨域 Access-Control 请求是否应带有授权信息，如 cookie 或授权 header 头。
   if (option.withCredentials && 'withCredentials' in xhr) {
     xhr.withCredentials = true;
   }
@@ -80,6 +84,7 @@ export default function upload(option) {
       xhr.setRequestHeader(item, headers[item]);
     }
   }
+  // 发送请求
   xhr.send(formData);
   return xhr;
 }

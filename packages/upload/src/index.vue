@@ -49,6 +49,7 @@ export default {
     drag: Boolean,
     dragger: Boolean,
     withCredentials: Boolean,
+    // 是否显示已上传文件列表
     showFileList: {
       type: Boolean,
       default: true
@@ -64,6 +65,7 @@ export default {
       type: Function,
       default: noop
     },
+    // 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用
     onChange: {
       type: Function,
       default: noop
@@ -83,6 +85,7 @@ export default {
       type: Function,
       default: noop
     },
+    // 上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]
     fileList: {
       type: Array,
       default() {
@@ -93,6 +96,7 @@ export default {
       type: Boolean,
       default: true
     },
+    // 文件列表的类型	string	text/picture/picture-card
     listType: {
       type: String,
       default: 'text' // text,picture,picture-card
@@ -162,6 +166,7 @@ export default {
 
       if (this.listType === 'picture-card' || this.listType === 'picture') {
         try {
+          // 本地预览https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL
           file.url = URL.createObjectURL(rawFile);
         } catch (err) {
           console.error('[Element Error][Upload]', err);
@@ -258,6 +263,8 @@ export default {
   },
 
   beforeDestroy() {
+    // URL.revokeObjectURL() 静态方法用来释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/URL/revokeObjectURL
     this.uploadFiles.forEach(file => {
       if (file.url && file.url.indexOf('blob:') === 0) {
         URL.revokeObjectURL(file.url);
@@ -295,6 +302,8 @@ export default {
         drag: this.drag,
         action: this.action,
         multiple: this.multiple,
+        // 上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。
+        // 用途 使用 before-upload 限制用户上传的图片格式和大小。
         'before-upload': this.beforeUpload,
         'with-credentials': this.withCredentials,
         headers: this.headers,
@@ -302,6 +311,7 @@ export default {
         data: this.data,
         accept: this.accept,
         fileList: this.uploadFiles,
+        // auto-upload	是否在选取文件后立即进行上传
         autoUpload: this.autoUpload,
         listType: this.listType,
         disabled: this.uploadDisabled,
@@ -319,6 +329,7 @@ export default {
     };
 
     const trigger = this.$slots.trigger || this.$slots.default;
+    // jsx语法，{...uploadData}驼峰会转化
     const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
 
     return (
