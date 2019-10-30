@@ -2,7 +2,7 @@
   <div
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
-    @click.stop="handleContainerClick"
+    @click="handleContainerClick"
     v-clickoutside="handleClickOutside">
     <div
       class="el-select__tags"
@@ -760,7 +760,8 @@
         }
       },
 
-      handleContainerClick() {
+      handleContainerClick(e) {
+        e.stopPropagation();
         this.toggleMenu();
       },
 
