@@ -2,8 +2,8 @@
   <div
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
-    @click.stop="toggleMenu"
-    v-clickoutside="handleClose">
+    @click.stop="handleContainerClick"
+    v-clickoutside="handleClickOutside">
     <div
       class="el-select__tags"
       v-if="multiple"
@@ -83,11 +83,11 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.stop.prevent="navigateOptions('next')"
-      @keydown.native.up.stop.prevent="navigateOptions('prev')"
-      @keydown.native.enter.prevent="selectOption"
-      @keydown.native.esc.stop.prevent="visible = false"
-      @keydown.native.tab="visible = false"
+      @keydown.native.down="handleDownArrowKey"
+      @keydown.native.up="handleUpArrowKey"
+      @keydown.native.enter="handleEnterKey"
+      @keydown.native.esc="handleEscapeKey"
+      @keydown.native.tab="handleTabKey"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
@@ -490,6 +490,33 @@
         }
       },
 
+      handleUpArrowKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.navigateOptions('prev');
+      },
+
+      handleDownArrowKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.navigateOptions('next');
+      },
+
+      handleEnterKey(e) {
+        e.preventDefault();
+        this.selectOption(e);
+      },
+
+      handleEscapeKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.visible = false;
+      },
+
+      handleTabKey(e) {
+        this.visible = false;
+      },
+
       scrollToOption(option) {
         const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
         if (this.$refs.popper && target) {
@@ -598,6 +625,10 @@
 
       doDestroy() {
         this.$refs.popper && this.$refs.popper.doDestroy();
+      },
+
+      handleClickOutside(e) {
+        this.handleClose();
       },
 
       handleClose() {
@@ -727,6 +758,10 @@
           });
           return index;
         }
+      },
+
+      handleContainerClick() {
+        this.toggleMenu();
       },
 
       toggleMenu() {
