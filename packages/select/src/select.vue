@@ -271,6 +271,7 @@
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
+      editable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
       popperClass: String,
@@ -411,7 +412,8 @@
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
 
-              if (this.selectedLabel) {
+              // Set placeholder to label of option selected when filterable is true, unless editable is true (i.e. keep existing value and allow editing it)
+              if (this.selectedLabel && !this.editable) {
                 this.currentPlaceholder = this.selectedLabel;
                 this.selectedLabel = '';
               }
