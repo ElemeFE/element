@@ -658,6 +658,7 @@ export default {
 | Nom | Description | Paramètres |
 |----| ----| ----|
 | select | Se déclenche quand une suggestion est cliquée. | La suggestion sélectionnée. |
+| change | Se déclenche quand la valeur change. | (value: string \ number) |
 
 ### Méthodes de l'autocomplétion
 
