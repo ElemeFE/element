@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2.11.1-7
+
+*2019-10-30*
+
+#### New features
+
+- Select
+  - If 'editable', don't move selected value to placeholder
+
+#### Changed
+
+- Select
+  - Move event handler logic into methods to allow for experimentation
+
 ### 2.11.1-6
 
 *2019-10-25*

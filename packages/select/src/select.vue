@@ -2,8 +2,8 @@
   <div
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
-    @click.stop="toggleMenu"
-    v-clickoutside="handleClose">
+    @click="handleContainerClick"
+    v-clickoutside="handleClickOutside">
     <div
       class="el-select__tags"
       v-if="multiple"
@@ -83,11 +83,11 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.stop.prevent="navigateOptions('next')"
-      @keydown.native.up.stop.prevent="navigateOptions('prev')"
-      @keydown.native.enter.prevent="selectOption"
-      @keydown.native.esc.stop.prevent="visible = false"
-      @keydown.native.tab="visible = false"
+      @keydown.native.down="handleDownArrowKey"
+      @keydown.native.up="handleUpArrowKey"
+      @keydown.native.enter="handleEnterKey"
+      @keydown.native.esc="handleEscapeKey"
+      @keydown.native.tab="handleTabKey"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
@@ -271,6 +271,7 @@
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
+      editable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
       popperClass: String,
@@ -411,7 +412,8 @@
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
 
-              if (this.selectedLabel) {
+              // Set placeholder to label of option selected when filterable is true, unless editable is true (i.e. keep existing value and allow editing it)
+              if (this.selectedLabel && !this.editable) {
                 this.currentPlaceholder = this.selectedLabel;
                 this.selectedLabel = '';
               }
@@ -486,6 +488,33 @@
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
         }
+      },
+
+      handleUpArrowKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.navigateOptions('prev');
+      },
+
+      handleDownArrowKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.navigateOptions('next');
+      },
+
+      handleEnterKey(e) {
+        e.preventDefault();
+        this.selectOption(e);
+      },
+
+      handleEscapeKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.visible = false;
+      },
+
+      handleTabKey(e) {
+        this.visible = false;
       },
 
       scrollToOption(option) {
@@ -596,6 +625,10 @@
 
       doDestroy() {
         this.$refs.popper && this.$refs.popper.doDestroy();
+      },
+
+      handleClickOutside(e) {
+        this.handleClose();
       },
 
       handleClose() {
@@ -725,6 +758,11 @@
           });
           return index;
         }
+      },
+
+      handleContainerClick(e) {
+        e.stopPropagation();
+        this.toggleMenu();
       },
 
       toggleMenu() {
