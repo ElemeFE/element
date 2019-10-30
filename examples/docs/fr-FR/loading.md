@@ -128,13 +128,13 @@ Affichez une animation en plein écran quand vous charger des données.
 <template>
   <el-button
     type="primary"
-    @click="openFullScreen"
+    @click="openFullScreen1"
     v-loading.fullscreen.lock="fullscreenLoading">
     Comme directive
   </el-button>
   <el-button
     type="primary"
-    @click="openFullScreen">
+    @click="openFullScreen2">
     Comme service
   </el-button>
 </template>
@@ -147,13 +147,13 @@ Affichez une animation en plein écran quand vous charger des données.
       }
     },
     methods: {
-      openFullScreen() {
+      openFullScreen1() {
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
         }, 2000);
       },
-      openFullScreen() {
+      openFullScreen2() {
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
