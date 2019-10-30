@@ -655,7 +655,7 @@
               sizeInMap
             ) + 'px';
           if (Math.abs(parseInt(input.style.height || 0, 10) - parseInt(newHeight || 0, 10)) > 1) {
-            input.style.height = newHeight
+            input.style.height = newHeight;
           }
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
