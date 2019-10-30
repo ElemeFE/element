@@ -3,7 +3,6 @@
 
 @include b(badge) {
   position: relative;
-  vertical-align: middle;
   display: inline-block;
 
   @include e(content) {
@@ -17,7 +16,6 @@
     padding: 0 $--badge-padding;
     text-align: center;
     white-space: nowrap;
-    border: 1px solid $--color-white;
 
     @include when(fixed) {
       position: absolute;
