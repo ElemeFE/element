@@ -186,7 +186,7 @@ export default {
       if (this.hideAfter > 0) {
         this.timeoutPending = setTimeout(() => {
           this.showPopper = false;
-        }, this.hideAfter);
+        }, this.hideAfter + this.openDelay);
       }
     },
 
