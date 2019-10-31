@@ -38,6 +38,8 @@
     SCALE_DOWN: 'scale-down'
   };
 
+  let prevOverflow = '';
+
   export default {
     name: 'ElImage',
 
@@ -215,9 +217,13 @@
         }
       },
       clickHandler() {
+        // prevent body scroll
+        prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
         this.showViewer = true;
       },
       closeViewer() {
+        document.body.style.overflow = prevOverflow;
         this.showViewer = false;
       }
     }
