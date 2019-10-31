@@ -219,7 +219,7 @@ export default {
     collapseTags: Boolean,
     collapseTagsMaxNum: {
       type: Number,
-      default: 10
+      default: 1
     },
     debounce: {
       type: Number,

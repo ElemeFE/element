@@ -883,7 +883,7 @@
 
 可通过 `props.multiple = true` 来开启多选模式
 
-:::demo 在开启多选模式后，默认情况下会展示所有已选中的选项的Tag，你可以使用`collapse-tags`来折叠Tag
+:::demo 在开启多选模式后，默认情况下会展示所有已选中的选项的Tag，你可以使用`collapse-tags`来折叠Tag，并使用`collapse-tags-max-num`来调整超过多少个Tag才折叠
 ```html
 <div class="block">
   <span class="demonstration">默认显示所有Tag</span>
@@ -898,6 +898,15 @@
     :options="options"
     :props="props"
     collapse-tags
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">调整折叠时显示的Tag数量</span>
+  <el-cascader
+    :options="options"
+    :props="props"
+    collapse-tags
+    :collapse-tags-max-num="5"
     clearable></el-cascader>
 </div>
 
