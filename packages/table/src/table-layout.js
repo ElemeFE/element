@@ -97,7 +97,7 @@ class TableLayout {
     if (this.showHeader && !headerWrapper) return;
 
     // fix issue (https://github.com/ElemeFE/element/pull/16956)
-    const headerTrElm = headerWrapper.querySelector('.el-table__header tr');
+    const headerTrElm = headerWrapper ? headerWrapper.querySelector('.el-table__header tr') : null;
     const noneHeader = this.headerDisplayNone(headerTrElm);
 
     const headerHeight = this.headerHeight = !this.showHeader ? 0 : headerWrapper.offsetHeight;
@@ -119,6 +119,7 @@ class TableLayout {
   }
 
   headerDisplayNone(elm) {
+    if (!elm) return true;
     let headerChild = elm;
     while (headerChild.tagName !== 'DIV') {
       if (getComputedStyle(headerChild).display === 'none') {
