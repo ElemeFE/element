@@ -87,12 +87,16 @@ export default {
     onClose: {
       type: Function,
       default: () => {}
+    },
+    initialIndex: {
+      type: Number,
+      default: 0
     }
   },
 
   data() {
     return {
-      index: 0,
+      index: this.initialIndex,
       isShow: false,
       infinite: true,
       loading: false,
