@@ -50,6 +50,36 @@ Callout a temporary drawer, from multiple direction
 ```
 :::
 
+### No Title
+
+When you no longer need a title, you can remove title from drawer.
+
+:::demo Set the `withHeader` attribute to **false**, you can remove the title from drawer, thus your drawer can have more space on screen. If you want to be accessible, make sure to set the `title` attribute.
+
+```html
+<el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+  open
+</el-button>
+
+<el-drawer
+  title="I am the title"
+  :visible.sync="drawer"
+  :with-header="false">
+  <span>Hi there!</span>
+</el-drawer>
+
+<script>
+  export default {
+    data() {
+      return {
+        drawer: false,
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Customization Content
 
 Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
@@ -92,7 +122,7 @@ Like `Dialog`, `Drawer` can do many diverse interaction as you wanted.
       </el-form-item>
     </el-form>
     <div class="demo-drawer__footer">
-      <el-button @click="dialog = false">Cancel</el-button>
+      <el-button @click="cancelForm">Cancel</el-button>
       <el-button type="primary" @click="$refs.drawer.closeDrawer()" :loading="loading">{{ loading ? 'Submitting ...' : 'Submit' }}</el-button>
     </div>
   </div>
@@ -132,20 +162,32 @@ export default {
         resource: '',
         desc: ''
       },
-      formLabelWidth: '80px'
+      formLabelWidth: '80px',
+      timer: null,
     };
   },
   methods: {
     handleClose(done) {
+      if (this.loading) {
+        return;
+      }
       this.$confirm('Do you want to submit?')
         .then(_ => {
           this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
+          this.timer = setTimeout(() => {
             done();
+            // animation takes time
+            setTimeout(() => {
+              this.loading = false;
+            }, 400);
           }, 2000);
         })
         .catch(_ => {});
+    },
+    cancelForm() {
+      this.loading = false;
+      this.dialog = false;
+      clearTimeout(this.timer);
     }
   }
 }
@@ -238,6 +280,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | title | Drawer's title, can also be set by named slot, detailed descriptions can be found in the slot form | string | — | — |
 | visible | Should Drawer be displayed, also support the `.sync` notation | boolean | — | false |
 | wrapperClosable | Indicates whether user can close Drawer by clicking the shadowing layer. | boolean | - | true |
+| withHeader | Flag that controls the header section's existance, default to true, when withHeader set to false, both `title attribute` and `title slot` won't work | boolean | - | true |
 
 ### Drawer Slot
 
