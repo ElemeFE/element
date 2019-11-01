@@ -34,7 +34,7 @@ export default class Node {
     const { config } = this;
     const childrenKey = config.children;
     const childrenData = this.data[childrenKey];
-    this.hasChildren = Array.isArray(childrenData);
+    this.hasChildren = Array.isArray(childrenData) && childrenData.length;
     this.children = (childrenData || []).map(child => new Node(child, config, this));
   }
 
