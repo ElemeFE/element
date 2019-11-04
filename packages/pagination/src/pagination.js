@@ -48,7 +48,11 @@ export default {
 
     prevText: String,
 
+    prevAriaLabel: String,
+
     nextText: String,
+
+    nextAriaLabel: String,
 
     background: Boolean,
 
@@ -117,6 +121,7 @@ export default {
           <button
             type="button"
             class="btn-prev"
+            aria-label={ this.$parent.prevAriaLabel }
             disabled={ this.$parent.disabled || this.$parent.internalCurrentPage <= 1 }
             on-click={ this.$parent.prev }>
             {
@@ -135,6 +140,7 @@ export default {
           <button
             type="button"
             class="btn-next"
+            aria-label={ this.$parent.nextAriaLabel }
             disabled={ this.$parent.disabled || this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             on-click={ this.$parent.next }>
             {

@@ -168,6 +168,22 @@ When there is only one page, hide the pagination by setting the `hide-on-single-
 ```
 :::
 
+### Aria labeling
+
+When you don't want to display text in 'previous' / 'next' buttons but still want buttons to be screen-reader friendly you can use `prev-aria-label` and `next-aria-label`.
+
+:::demo
+```html
+<el-pagination
+  small
+  prev-aria-label="Go back"
+  prev-aria-next="Go next"
+  layout="prev, pager, next"
+  :total="50">
+</el-pagination>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
@@ -183,6 +199,8 @@ When there is only one page, hide the pagination by setting the `hide-on-single-
 | popper-class | custom class name for the page size Select's dropdown | string | — | — |
 | prev-text | text for the prev button | string | — | — |
 | next-text | text for the next button | string | — | — |
+| prev-aria-label | aria-label for prev button | string | - | - |
+| next-aria-label | aria-label for next button | string | - | - |
 | disabled | whether Pagination is disabled | boolean | — | false |
 | hide-on-single-page | whether to hide when there's only one page | boolean | — | - |
 
