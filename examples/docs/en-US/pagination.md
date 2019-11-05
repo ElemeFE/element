@@ -177,7 +177,7 @@ When you don't want to display text in 'previous' / 'next' buttons but still wan
 <el-pagination
   small
   prev-aria-label="Go back"
-  prev-aria-next="Go next"
+  next-aria-label="Go next"
   layout="prev, pager, next"
   :total="50">
 </el-pagination>
