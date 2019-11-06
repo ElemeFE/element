@@ -10,7 +10,7 @@
   font-weight: bold;
   @include utils-clearfix;
 
-  span:not([class*=suffix]),
+  span[class*=el-pagination],
   button {
     display: inline-block;
     font-size: $--pagination-font-size;
@@ -115,7 +115,7 @@
       line-height: 24px;
     }
 
-    span:not([class*=suffix]),
+    span[class*=el-pagination],
     button {
       height: 22px;
       line-height: 22px;
