@@ -3,7 +3,7 @@
     class="el-switch"
     :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
     role="switch"
-    :aria-checked="checked"
+    :aria-checked="checked.toString()"
     :aria-disabled="switchDisabled"
     @click.prevent="switchValue"
   >
