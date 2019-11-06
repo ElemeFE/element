@@ -4,7 +4,7 @@
     v-clickoutside="close"
     aria-haspopup="listbox"
     role="combobox"
-    :aria-expanded="suggestionVisible"
+    :aria-expanded="suggestionVisible.toString()"
     :aria-owns="id"
   >
     <el-input
