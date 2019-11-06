@@ -154,6 +154,9 @@
     watch: {
       suggestionVisible(val) {
         let $input = this.getInput();
+        if (!val) {
+          $input.removeAttribute('aria-activedescendant');
+        }
         if ($input) {
           this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
         }
@@ -272,7 +275,6 @@
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
       $input.setAttribute('aria-controls', this.id);
-      $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
     },
     beforeDestroy() {
       this.$refs.suggestions.$destroy();
