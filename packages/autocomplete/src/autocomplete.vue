@@ -271,7 +271,7 @@
       let $input = this.getInput();
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
-      $input.setAttribute('aria-controls', 'id');
+      $input.setAttribute('aria-controls', this.id);
       $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
     },
     beforeDestroy() {
