@@ -11,7 +11,8 @@
   @include utils-clearfix;
 
   span[class*=el-pagination],
-  button {
+  button.btn-prev,
+  button.btn-next {
     display: inline-block;
     font-size: $--pagination-font-size;
     min-width: $--pagination-button-width;
@@ -43,7 +44,8 @@
     }
   }
 
-  button {
+  button.btn-prev,
+  button.btn-next {
     border: none;
     padding: 0 6px;
     background: transparent;
@@ -116,7 +118,8 @@
     }
 
     span[class*=el-pagination],
-    button {
+    button.btn-prev,
+    button.btn-next {
       height: 22px;
       line-height: 22px;
     }
