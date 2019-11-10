@@ -168,3 +168,4 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
 | color        | color de fondo de la barra de progreso. Sobreescribe la propiedad `status` | string/function/array | — | '' |
 | width        | ancho del canvas que contiene la barra de progreso circula | number  | —                 | 126         |
 | show-text    | mostrar porcentaje                       | boolean | —                 | true        |
+| stroke-linecap  | circle/dashboard type shape at the end path | string | butt/round/square | round |

@@ -18,6 +18,11 @@
 <script>
 import throttle from 'throttle-debounce/throttle';
 
+const cubic = value => Math.pow(value, 3);
+const easeInOutCubic = value => value < 0.5
+  ? cubic(value * 2) / 2
+  : 1 - cubic((1 - value) * 2) / 2;
+
 export default {
   name: 'ElBacktop',
 
@@ -81,16 +86,20 @@ export default {
       this.$emit('click', e);
     },
     scrollToTop() {
-      let el = this.el;
-      let step = 0;
-      let interval = setInterval(() => {
-        if (el.scrollTop <= 0) {
-          clearInterval(interval);
-          return;
+      const el = this.el;
+      const beginTime = Date.now();
+      const beginValue = el.scrollTop;
+      const rAF = window.requestAnimationFrame || (func => setTimeout(func, 16));
+      const frameFunc = () => {
+        const progress = (Date.now() - beginTime) / 500;
+        if (progress < 1) {
+          el.scrollTop = beginValue * (1 - easeInOutCubic(progress));
+          rAF(frameFunc);
+        } else {
+          el.scrollTop = 0;
         }
-        step += 10;
-        el.scrollTop -= step;
-      }, 20);
+      };
+      rAF(frameFunc);
     }
   },
 
