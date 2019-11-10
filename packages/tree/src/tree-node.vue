@@ -2,7 +2,6 @@
   <div
     class="el-tree-node"
     @click.stop="handleClick"
-    @dblclick.stop="handleDblClick"
     @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
     :class="{
@@ -134,8 +133,7 @@
         expanded: false,
         childNodeRendered: false,
         oldChecked: null,
-        oldIndeterminate: null,
-        clickFlag: null
+        oldIndeterminate: null
       };
     },
 
@@ -170,42 +168,19 @@
       },
 
       handleClick() {
-        if (this.clickFlag) {
-          clearTimeout(this.clickFlag)
-          this.clickFlag = null
-        }
-        this.clickFlag = setTimeout(() => {
-          const store = this.tree.store;
-          store.setCurrentNode(this.node);
-          this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
-          this.tree.currentNode = this;
-          if (this.tree.expandOnClickNode) {
-            this.handleExpandIconClick();
-          }
-          if (this.tree.checkOnClickNode && !this.node.disabled) {
-            this.handleCheckChange(null, {
-              target: { checked: !this.node.checked }
-            });
-          }
-          this.tree.$emit('node-click', this.node.data, this.node, this);
-        }, 300);
-      },
-
-      handleDblClick() {
-        if (this.clickFlag) {
-          clearTimeout(this.clickFlag)
-          this.clickFlag = null
-        }
         const store = this.tree.store;
         store.setCurrentNode(this.node);
         this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
         this.tree.currentNode = this;
+        if (this.tree.expandOnClickNode) {
+          this.handleExpandIconClick();
+        }
         if (this.tree.checkOnClickNode && !this.node.disabled) {
           this.handleCheckChange(null, {
             target: { checked: !this.node.checked }
           });
         }
-        this.tree.$emit('node-dblclick', this.node.data, this.node, this);
+        this.tree.$emit('node-click', this.node.data, this.node, this);
       },
 
       handleContextMenu(event) {
@@ -220,9 +195,9 @@
         if (this.node.isLeaf) return;
         if (this.expanded) {
           this.tree.$emit('node-collapse', this.node.data, this.node, this);
-          this.node.collapse();
+          this.$nextTick(() => this.node.collapse());
         } else {
-          this.node.expand();
+          this.$nextTick(() => this.node.expand());
           this.$emit('node-expand', this.node.data, this.node, this);
         }
       },
