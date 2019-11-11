@@ -198,20 +198,32 @@ class TableLayout {
 
     if (fixedColumns.length > 0) {
       let fixedWidth = 0;
-      fixedColumns.forEach(function(column) {
-        fixedWidth += column.realWidth || column.width;
-      });
-
+      const recursionColumns = (columns) => {
+        columns.forEach(function(column) {
+          if (column.children && column.children.length) {
+            recursionColumns(column.children);
+          } else {
+            fixedWidth += column.realWidth || column.width;
+          }
+        });
+      }
+      recursionColumns(fixedColumns);
       this.fixedWidth = fixedWidth;
     }
 
     const rightFixedColumns = this.store.states.rightFixedColumns;
     if (rightFixedColumns.length > 0) {
       let rightFixedWidth = 0;
-      rightFixedColumns.forEach(function(column) {
-        rightFixedWidth += column.realWidth || column.width;
-      });
-
+      const recursionColumns = (columns) => {
+        columns.forEach(function(column) {
+          if (column.children && column.children.length) {
+            recursionColumns(column.children);
+          } else {
+            rightFixedWidth += column.realWidth || column.width;
+          }
+        });
+      }
+      recursionColumns(rightFixedColumns);
       this.rightFixedWidth = rightFixedWidth;
     }
 
