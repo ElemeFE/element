@@ -11,8 +11,7 @@ export function isHtmlElement(node) {
 }
 
 export const isFunction = (functionToCheck) => {
-  var getType = {};
-  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+  return (Boolean(functionToCheck) && /^\[object ([a-zA-Z]+)?Function\]$/.test(Object.prototype.toString.call(functionToCheck)));
 };
 
 export const isUndefined = (val)=> {
