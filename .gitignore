@@ -8,7 +8,6 @@ npm-debug.log.*
 yarn-debug.log.*
 yarn-error.log.*
 lerna-debug.log.*
-lib
 .idea
 .vscode
 examples/element-ui
