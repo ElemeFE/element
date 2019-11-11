@@ -207,8 +207,8 @@ class TableLayout {
             fixedWidth += column.realWidth || column.width;
           }
         });
-      }
-      recursionColumns(fixedColumns)
+      };
+      recursionColumns(fixedColumns);
       this.fixedWidth = fixedWidth;
     }
 
@@ -223,8 +223,8 @@ class TableLayout {
             rightFixedWidth += column.realWidth || column.width;
           }
         });
-      }
-      recursionColumns(rightFixedColumns)
+      };
+      recursionColumns(rightFixedColumns);
       this.rightFixedWidth = rightFixedWidth;
     }
 
