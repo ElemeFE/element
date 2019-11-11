@@ -92,13 +92,13 @@
 
 @mixin animation-in($direction) {
   .el-drawer__open &.#{$direction} {
-    animation: #{$direction}-drawer-in 225ms cubic-bezier(0, 0, .2, 1) 0ms;
+    animation: #{$direction}-drawer-in .3s 1ms;
   }
 }
 
 @mixin animation-out($direction) {
   &.#{$direction} {
-    animation: #{$direction}-drawer-out 225ms cubic-bezier(0, 0, .2, 1) 0ms;
+    animation: #{$direction}-drawer-out .3s;
   }
 }
 
@@ -123,6 +123,16 @@ $directions: rtl, ltr, ttb, btt;
   @each $direction in $directions {
     @include animation-out($direction);
     @include animation-in($direction);
+  }
+
+  &__wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    margin: 0;
   }
 
   &__header {
@@ -199,9 +209,9 @@ $directions: rtl, ltr, ttb, btt;
 }
 
 .el-drawer-fade-enter-active {
-  animation: el-drawer-fade-in 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  animation: el-drawer-fade-in .3s;
 }
 
 .el-drawer-fade-leave-active {
-  animation: el-drawer-fade-in 225ms cubic-bezier(0, 0, 0.2, 1) 0ms reverse;
+  animation: el-drawer-fade-in .3s reverse;
 }
