@@ -104,10 +104,10 @@
         return this.rootMenu.hoverBackground;
       },
       hoverActiveBackground() {
-        return this.rootMenu.hoverActiveBackground;
+        return this.rootMenu.hoverActiveBackground || this.rootMenu.hoverBackground || '';
       },
       activeBackgroundColor() {
-        return this.rootMenu.activeBackgroundColor || '';
+        return this.rootMenu.activeBackgroundColor || this.rootMenu.backgroundColor || '';
       },
       backgroundColor() {
         return this.rootMenu.backgroundColor || '';

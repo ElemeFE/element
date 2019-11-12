@@ -58,10 +58,10 @@
         return this.rootMenu.hoverBackground;
       },
       hoverActiveBackground() {
-        return this.rootMenu.hoverActiveBackground;
+        return this.rootMenu.hoverActiveBackground || this.rootMenu.hoverBackground || '';
       },
       activeBackgroundColor() {
-        return this.rootMenu.activeBackgroundColor || '';
+        return this.rootMenu.activeBackgroundColor || this.rootMenu.backgroundColor || '';
       },
       backgroundColor() {
         return this.rootMenu.backgroundColor || '';
@@ -93,11 +93,11 @@
     },
     methods: {
       onMouseEnter() {
-        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor && !this.rootMenu.hoverActiveBackground) return;
+        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         this.$el.style.backgroundColor = this.active ? this.hoverActiveBackground : this.hoverBackground;
       },
       onMouseLeave() {
-        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor && !this.rootMenu.activeBackgroundColor) return;
+        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         this.$el.style.backgroundColor = this.active ? this.activeBackgroundColor : this.backgroundColor;
       },
       handleClick() {
