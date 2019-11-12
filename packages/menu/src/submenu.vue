@@ -233,12 +233,12 @@
       handleTitleMouseenter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         const title = this.$refs['submenu-title'];
-        title && (title.style.backgroundColor = this.active ? this.rootMenu.hoverActiveBackground : this.rootMenu.hoverBackground);
+        title && (title.style.backgroundColor = this.rootMenu.hoverBackground);
       },
       handleTitleMouseleave() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         const title = this.$refs['submenu-title'];
-        title && (title.style.backgroundColor = this.active ? this.rootMenu.activeBackgroundColor : this.rootMenu.backgroundColor || '');
+        title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
       },
       updatePlacement() {
         this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
