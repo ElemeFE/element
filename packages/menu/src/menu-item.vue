@@ -2,7 +2,7 @@
   <li class="el-menu-item"
     role="menuitem"
     tabindex="-1"
-    :style="[paddingStyle, itemStyle, { backgroundColor }]"
+    :style="[paddingStyle, itemStyle]"
     :class="{
       'is-active': active,
       'is-disabled': disabled
@@ -97,7 +97,7 @@
         this.$el.style.backgroundColor = this.active ? this.hoverActiveBackground : this.hoverBackground;
       },
       onMouseLeave() {
-        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
+        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor && !this.rootMenu.activeBackgroundColor) return;
         this.$el.style.backgroundColor = this.active ? this.activeBackgroundColor : this.backgroundColor;
       },
       handleClick() {

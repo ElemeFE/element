@@ -103,6 +103,12 @@
       hoverBackground() {
         return this.rootMenu.hoverBackground;
       },
+      hoverActiveBackground() {
+        return this.rootMenu.hoverActiveBackground;
+      },
+      activeBackgroundColor() {
+        return this.rootMenu.activeBackgroundColor || '';
+      },
       backgroundColor() {
         return this.rootMenu.backgroundColor || '';
       },
@@ -130,7 +136,10 @@
             : 'transparent',
           color: this.active
             ? this.activeTextColor
-            : this.textColor
+            : this.textColor,
+          backgroundColor: this.active
+            ? this.activeBackgroundColor
+            : this.backgroundColor
         };
       },
       isFirstLevel() {
@@ -224,12 +233,12 @@
       handleTitleMouseenter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         const title = this.$refs['submenu-title'];
-        title && (title.style.backgroundColor = this.rootMenu.hoverBackground);
+        title && (title.style.backgroundColor = this.active ? this.rootMenu.hoverActiveBackground : this.rootMenu.hoverBackground);
       },
       handleTitleMouseleave() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         const title = this.$refs['submenu-title'];
-        title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
+        title && (title.style.backgroundColor = this.active ? this.rootMenu.activeBackgroundColor : this.rootMenu.backgroundColor || '');
       },
       updatePlacement() {
         this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
@@ -268,7 +277,6 @@
         opened,
         paddingStyle,
         titleStyle,
-        backgroundColor,
         rootMenu,
         currentPlacement,
         menuTransitionName,
@@ -336,7 +344,7 @@
             on-click={this.handleClick}
             on-mouseenter={this.handleTitleMouseenter}
             on-mouseleave={this.handleTitleMouseleave}
-            style={[paddingStyle, titleStyle, { backgroundColor }]}
+            style={[paddingStyle, titleStyle]}
           >
             {$slots.title}
             <i class={[ 'el-submenu__icon-arrow', submenuTitleIcon ]}></i>
