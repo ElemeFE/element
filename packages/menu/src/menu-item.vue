@@ -77,7 +77,8 @@
       },
       itemStyle() {
         const style = {
-          color: this.active ? this.activeTextColor : this.textColor
+          color: this.active ? this.activeTextColor : this.textColor,
+          backgroundColor: this.active ? this.activeBackgroundColor : this.backgroundColor
         };
         if (this.mode === 'horizontal' && !this.isNested) {
           style.borderBottomColor = this.active
