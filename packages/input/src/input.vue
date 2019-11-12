@@ -30,13 +30,7 @@
         :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
         ref="input"
-        @compositionstart="handleCompositionStart"
-        @compositionupdate="handleCompositionUpdate"
-        @compositionend="handleCompositionEnd"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @change="handleChange"
+        v-on="inputListeners"
         :aria-label="label"
       >
       <!-- 前置内容 -->
@@ -88,20 +82,14 @@
       v-else
       :tabindex="tabindex"
       class="el-textarea__inner"
-      @compositionstart="handleCompositionStart"
-      @compositionupdate="handleCompositionUpdate"
-      @compositionend="handleCompositionEnd"
-      @input="handleInput"
       ref="textarea"
       v-bind="$attrs"
       :disabled="inputDisabled"
       :readonly="readonly"
       :autocomplete="autoComplete || autocomplete"
       :style="textareaStyle"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @change="handleChange"
       :aria-label="label"
+      v-on="inputListeners"
     >
     </textarea>
     <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
@@ -193,6 +181,22 @@
     },
 
     computed: {
+      inputListeners() {
+        let vm = this;
+        return Object.assign(
+          {},
+          this.$listeners,
+          {
+            compositionstart: vm.handleCompositionStart,
+            compositionupdate: vm.handleCompositionUpdate,
+            compositionend: vm.handleCompositionEnd,
+            input: vm.handleInput,
+            focus: vm.handleFocus,
+            blur: vm.handleBlur,
+            change: vm.handleChange
+          }
+        );
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },

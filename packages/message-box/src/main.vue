@@ -23,7 +23,7 @@
             aria-label="Close"
             v-if="showClose"
             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
-            @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
+            @keyup.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
@@ -42,7 +42,7 @@
             <el-input
               v-model="inputValue"
               :type="inputType"
-              @keydown.enter.native="handleInputEnter"
+              @keyup.enter="handleInputEnter"
               :placeholder="inputPlaceholder"
               ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
@@ -56,7 +56,7 @@
             :round="roundButton"
             size="small"
             @click.native="handleAction('cancel')"
-            @keydown.enter="handleAction('cancel')">
+            @keyup.enter="handleAction('cancel')">
             {{ cancelButtonText || t('el.messagebox.cancel') }}
           </el-button>
           <el-button
@@ -67,7 +67,7 @@
             :round="roundButton"
             size="small"
             @click.native="handleAction('confirm')"
-            @keydown.enter="handleAction('confirm')">
+            @keyup.enter="handleAction('confirm')">
             {{ confirmButtonText || t('el.messagebox.confirm') }}
           </el-button>
         </div>
@@ -179,6 +179,7 @@
 
       handleInputEnter() {
         if (this.inputType !== 'textarea') {
+          console.log('handle confirm');
           return this.handleAction('confirm');
         }
       },
