@@ -30,7 +30,7 @@ export interface ElUploadProgressEvent extends ProgressEvent {
 export interface HttpRequestOptions {
   headers: object,
   withCredentials: boolean,
-  file: ElUploadInternalFileDetail,
+  file: File,
   data: object,
   filename: string,
   action: string,
@@ -75,13 +75,13 @@ export declare class ElUpload extends ElementUIComponent {
   onRemove: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when uploaded successfully */
-  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when some errors occurs */
-  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when some progress occurs */
-  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 
   /** Hook function when file status change */
   onChange: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void

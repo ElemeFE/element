@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="scss" scoped>
   .headerWrapper {
     height: 80px;
   }
@@ -10,13 +10,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    line-height: @height;
+    line-height: 80px;
     z-index: 100;
     position: relative;
 
     .container {
       height: 100%;
       box-sizing: border-box;
+      border-bottom: 1px solid #DCDFE6;
     }
 
     .nav-lang-spe {
@@ -54,9 +55,15 @@
       height: 100%;
       line-height: 80px;
       background: transparent;
-      @utils-clearfix;
       padding: 0;
       margin: 0;
+      &::before, &::after {
+        display: table;
+        content: "";
+      }
+      &::after {
+        clear: both;
+      }
     }
 
     .nav-gap {
@@ -122,24 +129,25 @@
 
       a {
         text-decoration: none;
-        color: #888;
+        color: #1989FA;
+        opacity: 0.5;
         display: block;
         padding: 0 22px;
 
         &.active,
         &:hover {
-          color: #333;
+          opacity: 1;
         }
 
         &.active::after {
           content: '';
           display: inline-block;
           position: absolute;
-          bottom: 15px;
-          left: calc(50% - 7px);
-          width: 14px;
-          height: 4px;
-          background: #5D81F9;
+          bottom: 0;
+          left: calc(50% - 15px);
+          width: 30px;
+          height: 2px;
+          background: #409EFF;
         }
       }
     }
@@ -172,7 +180,7 @@
       transform: translateY(-2px);
     }
 
-    @when active {
+    .is-active {
       span, i {
         color: #5D81F9;
       }
@@ -293,6 +301,14 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
+          <li 
+            class="nav-item nav-item-theme"
+          >
+            <router-link
+              active-class="active"
+              :to="`/${ lang }/theme`">{{ langConfig.theme }}
+            </router-link>
+          </li>
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -313,10 +329,10 @@
               class="nav-dropdown"
               :class="{ 'is-active': verDropdownVisible }">
               <span>
-                {{ version }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                element: {{ elementVersion }}
+                <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
               </span>
-              <el-dropdown-menu
+              <!-- <el-dropdown-menu
                 slot="dropdown"
                 class="nav-dropdown-list"
                 @input="handleVerDropdownToggle">
@@ -326,12 +342,35 @@
                   @click.native="switchVersion(item)">
                   {{ item }}
                 </el-dropdown-item>
-              </el-dropdown-menu>
+              </el-dropdown-menu> -->
+            </el-dropdown>
+          </li>
+
+          <li class="nav-item nav-versions" v-show="isComponentPage">
+            <el-dropdown
+              trigger="click"
+              class="nav-dropdown"
+              :class="{ 'is-active': verDropdownVisible }">
+              <span>
+                deepexi: {{ deepexiVersion }}
+                <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
+              </span>
+              <!-- <el-dropdown-menu
+                slot="dropdown"
+                class="nav-dropdown-list"
+                @input="handleVerDropdownToggle">
+                <el-dropdown-item
+                  v-for="item in Object.keys(versions)"
+                  :key="item"
+                  @click.native="switchVersion(item)">
+                  {{ item }}
+                </el-dropdown-item>
+              </el-dropdown-menu> -->
             </el-dropdown>
           </li>
 
           <!-- 语言选择器 -->
-          <li class="nav-item lang-item">
+          <!-- <li class="nav-item lang-item">
             <el-dropdown
               trigger="click"
               class="nav-dropdown nav-lang"
@@ -352,11 +391,6 @@
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </li>
-          
-          <!--theme picker-->
-          <!-- <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-picker></theme-picker>
           </li> -->
         </ul>
       </div>
@@ -367,23 +401,32 @@
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
-  import { version } from 'main/index.js';
+  import Element from 'main/index.js';
+  import themeLoader from './theme/loader';
+  import { getTestEle } from './theme/loader/api.js';
+  import bus from '../bus';
+  import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
+
+  const { version } = Element;
 
   export default {
     data() {
       return {
         active: '',
-        versions: [],
-        version,
+        versions: {},
+        deepexiVersion: version,
         verDropdownVisible: true,
         langDropdownVisible: true,
         langs: {
           'zh-CN': '中文',
-          'en-US': 'English'
-          // 'es': 'Español'
+          'en-US': 'English',
+          'es': 'Español',
+          'fr-FR': 'Français'
         }
       };
     },
+
+    mixins: [themeLoader],
 
     components: {
       ThemePicker,
@@ -391,6 +434,10 @@
     },
 
     computed: {
+      elementVersion() {
+        console.log(this.versions);
+        return Object.keys(this.versions)[0];
+      },
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
       },
@@ -404,7 +451,28 @@
         return /^component/.test(this.$route.name);
       }
     },
-
+    mounted() {
+      getTestEle()
+        .then(() => {
+          this.$isEle = true;
+          ga('send', 'event', 'DocView', 'Ele', 'Inner');
+        })
+        .catch((err) => {
+          ga('send', 'event', 'DocView', 'Ele', 'Outer');
+          console.error(err);
+        });
+  
+      const testInnerImg = new Image();
+      testInnerImg.onload = () => {
+        this.$isEle = true;
+        ga('send', 'event', 'DocView', 'Ali', 'Inner');
+      };
+      testInnerImg.onerror = (err) => {
+        ga('send', 'event', 'DocView', 'Ali', 'Outer');
+        console.error(err);
+      };
+      testInnerImg.src = `https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`;
+    },
     methods: {
       switchVersion(version) {
         if (version === this.version) return;
@@ -437,8 +505,19 @@
           }, {});
         }
       };
-      xhr.open('GET', '/versions.json');
+      xhr.open('GET', '/element/versions.json');
       xhr.send();
+      let primaryLast = '#409EFF';
+      bus.$on(ACTION_USER_CONFIG_UPDATE, (val) => {
+        let primaryColor = val.global['$--color-primary'];
+        if (!primaryColor) primaryColor = '#409EFF';
+        const base64svg = 'data:image/svg+xml;base64,';
+        const imgSet = document.querySelectorAll('h1 img');
+        imgSet.forEach((img) => {
+          img.src = `${base64svg}${window.btoa(window.atob(img.src.replace(base64svg, '')).replace(primaryLast, primaryColor))}`;
+        });
+        primaryLast = primaryColor;
+      });
     }
   };
 </script>

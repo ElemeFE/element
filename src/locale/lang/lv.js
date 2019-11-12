@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Nav atbilstošu datu',
       loading: 'Ielādē',
-      placeholder: 'Izvēlēties'
+      placeholder: 'Izvēlēties',
+      noData: 'Nav datu'
     },
     pagination: {
       goto: 'Iet uz',
@@ -104,6 +105,16 @@ export default {
       filterPlaceholder: 'Ievadīt atslēgvārdu',
       noCheckedFormat: '{total} vienības',
       hasCheckedFormat: '{checked}/{total} atzīmēti'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

@@ -6,7 +6,7 @@
 @include b(pagination) {
   white-space: nowrap;
   padding: 2px 5px;
-  color: $--pagination-color;
+  color: $--pagination-font-color;
   font-weight: bold;
   @include utils-clearfix;
 
@@ -53,12 +53,12 @@
     }
 
     &:hover {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
     }
 
     &:disabled {
       color: $--pagination-button-disabled-color;
-      background-color: $--pagination-button-disabled-fill;
+      background-color: $--pagination-button-disabled-background-color;
       cursor: not-allowed;
     }
   }
@@ -67,7 +67,7 @@
   .btn-next {
     background: center center no-repeat;
     background-size: 16px;
-    background-color: $--pagination-fill;
+    background-color: $--pagination-background-color;
     cursor: pointer;
     margin: 0;
     color: $--pagination-button-color;
@@ -139,7 +139,7 @@
       padding-left: 8px;
 
       &:hover {
-        border-color: $--pagination-hover-fill;
+        border-color: $--pagination-hover-color;
       }
     }
   }
@@ -214,7 +214,7 @@
 
     .el-pager li:not(.disabled) {
       &:hover {
-        color: $--pagination-hover-fill;
+        color: $--pagination-hover-color;
       }
 
       &.active {
@@ -249,7 +249,7 @@
 
   li {
     padding: 0 4px;
-    background: $--pagination-fill;
+    background: $--pagination-background-color;
     vertical-align: top;
     display: inline-block;
     font-size: $--pagination-font-size;
@@ -284,11 +284,11 @@
     }
 
     &:hover {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
     }
 
     &.active {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
       cursor: default;
     }
   }

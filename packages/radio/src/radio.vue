@@ -22,6 +22,7 @@
     >
       <span class="el-radio__inner"></span>
       <input
+        ref="radio"
         class="el-radio__original"
         :value="label"
         type="radio"
@@ -98,6 +99,7 @@
           } else {
             this.$emit('input', val);
           }
+          this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
         }
       },
       _elFormItemSize() {

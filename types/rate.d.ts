@@ -1,5 +1,17 @@
 import { ElementUIComponent } from './component'
 
+interface Option {
+  value: string,
+  excluded?: boolean
+}
+
+interface Options {
+  [threshold: number]: string | Option
+}
+
+export type RateColors = Options
+export type RateIconClasses = Options
+
 /** Rate Component */
 export declare class ElRate extends ElementUIComponent {
   /** Max rating score */
@@ -17,8 +29,8 @@ export declare class ElRate extends ElementUIComponent {
   /** Threshold value between medium and high level. The value itself will be included in high level */
   highThreshold: number
 
-  /** Color array for icons. It should have 3 elements, each of which corresponds with a score level */
-  colors: string[]
+  /** Colors for icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding color */
+  colors: string[] | RateColors
 
   /** Color of unselected icons */
   voidColor: string
@@ -26,8 +38,8 @@ export declare class ElRate extends ElementUIComponent {
   /** Color of unselected read-only icons */
   disabledVoidColor: string
 
-  /** Array of class names of icons. It should have 3 elements, each of which corresponds with a score level */
-  iconClasses: string[]
+  /** Class names of icons. If array, it should have 3 elements, each of which corresponds with a score level, else if object, the key should be threshold value between two levels, and the value should be corresponding class name */
+  iconClasses: string[] | RateIconClasses
 
   /** Class name of unselected icons */
   voidIconClass: string

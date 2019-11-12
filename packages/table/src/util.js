@@ -120,3 +120,136 @@ export const getRowIdentity = (row, rowKey) => {
     return rowKey.call(null, row);
   }
 };
+
+export const getKeysMap = function(array, rowKey) {
+  const arrayMap = {};
+  (array || []).forEach((row, index) => {
+    arrayMap[getRowIdentity(row, rowKey)] = { row, index };
+  });
+  return arrayMap;
+};
+
+function hasOwn(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+export function mergeOptions(defaults, config) {
+  const options = {};
+  let key;
+  for (key in defaults) {
+    options[key] = defaults[key];
+  }
+  for (key in config) {
+    if (hasOwn(config, key)) {
+      const value = config[key];
+      if (typeof value !== 'undefined') {
+        options[key] = value;
+      }
+    }
+  }
+  return options;
+}
+
+export function parseWidth(width) {
+  if (width !== undefined) {
+    width = parseInt(width, 10);
+    if (isNaN(width)) {
+      width = null;
+    }
+  }
+  return width;
+}
+
+export function parseMinWidth(minWidth) {
+  if (typeof minWidth !== 'undefined') {
+    minWidth = parseWidth(minWidth);
+    if (isNaN(minWidth)) {
+      minWidth = 80;
+    }
+  }
+  return minWidth;
+};
+
+export function parseHeight(height) {
+  if (typeof height === 'number') {
+    return height;
+  }
+  if (typeof height === 'string') {
+    if (/^\d+(?:px)?$/.test(height)) {
+      return parseInt(height, 10);
+    } else {
+      return height;
+    }
+  }
+  return null;
+}
+
+// https://github.com/reduxjs/redux/blob/master/src/compose.js
+export function compose(...funcs) {
+  if (funcs.length === 0) {
+    return arg => arg;
+  }
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+}
+
+export function toggleRowStatus(statusArr, row, newVal) {
+  let changed = false;
+  const index = statusArr.indexOf(row);
+  const included = index !== -1;
+
+  const addRow = () => {
+    statusArr.push(row);
+    changed = true;
+  };
+  const removeRow = () => {
+    statusArr.splice(index, 1);
+    changed = true;
+  };
+
+  if (typeof newVal === 'boolean') {
+    if (newVal && !included) {
+      addRow();
+    } else if (!newVal && included) {
+      removeRow();
+    }
+  } else {
+    if (included) {
+      removeRow();
+    } else {
+      addRow();
+    }
+  }
+  return changed;
+}
+
+export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasChildren') {
+  const isNil = (array) => !(Array.isArray(array) && array.length);
+
+  function _walker(parent, children, level) {
+    cb(parent, children, level);
+    children.forEach(item => {
+      if (item[lazyKey]) {
+        cb(item, null, level + 1);
+        return;
+      }
+      const children = item[childrenKey];
+      if (!isNil(children)) {
+        _walker(item, children, level + 1);
+      }
+    });
+  }
+
+  root.forEach(item => {
+    if (item[lazyKey]) {
+      cb(item, null, 0);
+      return;
+    }
+    const children = item[childrenKey];
+    if (!isNil(children)) {
+      _walker(item, children, 0);
+    }
+  });
+}

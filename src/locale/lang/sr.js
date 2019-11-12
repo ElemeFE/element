@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Нема резултата',
       loading: 'Учитавање',
-      placeholder: 'Изабери'
+      placeholder: 'Изабери',
+      noData: 'Нема података'
     },
     pagination: {
       goto: 'Иди на',
@@ -104,6 +105,16 @@ export default {
       filterPlaceholder: 'Унеси кључну реч', // to be translated
       noCheckedFormat: '{total} ставки', // to be translated
       hasCheckedFormat: '{checked}/{total} обележених' // to be translated
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

@@ -249,7 +249,6 @@ describe('Pagination', () => {
     const input = vm.inputer;
     const changeValue = (value) => {
       input.$emit('input', value);
-      input.setCurrentValue(value);
       input.$emit('change', value);
     };
 
@@ -420,6 +419,17 @@ describe('Pagination', () => {
     input.value = '我好帅';
     triggerEvent(input, 'change');
     expect(vm.page).to.equal(1);
+  });
+
+  it('hideOnSinglePage', () => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          hide-on-single-page
+          :total="1" />
+      `
+    });
+    expect(vm.$el.nodeType).to.be.equal(window.Node.COMMENT_NODE);
   });
 
   describe('click pager', () => {

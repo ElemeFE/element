@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
   .footer-nav {
     padding: 40px 0;
     color: #333;

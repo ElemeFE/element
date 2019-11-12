@@ -35,7 +35,10 @@ export declare class ElInputNumber extends ElementUIComponent {
   name: string
 
   /** Precision of input value */
-  precision: Number
+  precision: number
+
+  /** whether input value can only be multiple of step */
+  stepStrictly: boolean
 
   /**
    * Focus the Input component

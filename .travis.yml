@@ -1,21 +1,29 @@
 branches:
   only:
-    - feature-theme-deepexi
+    - master
 language: node_js
 node_js:
-- lts/*
+  - 10
 git:
   depth: 3
 install:
-- yarn --frozen-lockfile
+  - yarn --frozen-lockfile
+  - yarn test
 script:
-- yarn deploy:build
+  - yarn stdver
+  # build file to ensure generate versions.json
+  - yarn build:file && yarn deploy:build
+  - yarn dist
 cache: yarn
 deploy:
-  provider: pages
-  skip-cleanup: true
-  keep-history: true
-  local-dir: examples/element-ui
-  github-token: $GITHUB_TOKEN
-  on:
-    branch: feature-theme-deepexi
+  - provider: pages
+    skip-cleanup: true
+    keep-history: true
+    local-dir: examples/element-ui
+    github-token: $GITHUB_TOKEN
+  - provider: npm
+    email: levy9527@qq.com
+    api_key: $NPM_TOKEN
+    skip-cleanup: true
+after_script:
+  - ./notify.sh

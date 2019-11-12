@@ -35,6 +35,10 @@
       background: mix(white, transparent, 50%);
     }
 
+    &.el-button--default::before {
+      background: mix($--button-default-border-color, transparent, 50%);
+    }
+
     &:hover {
       &::before {
         top: 0;
@@ -82,6 +86,10 @@
     &:not(.is-disabled):hover, &:focus {
       background-color: $--dropdown-menuItem-hover-fill;
       color: $--dropdown-menuItem-hover-color;
+    }
+
+    i {
+      margin-right: 5px;
     }
 
     @include m(divided) {

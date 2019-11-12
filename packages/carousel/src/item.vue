@@ -10,11 +10,7 @@
       'is-animating': animating
     }"
     @click="handleItemClick"
-    :style="{
-      msTransform: `translateX(${ translate }px) scale(${ scale })`,
-      webkitTransform: `translateX(${ translate }px) scale(${ scale })`,
-      transform: `translateX(${ translate }px) scale(${ scale })`
-    }">
+    :style="itemStyle">
     <div
       v-if="$parent.type === 'card'"
       v-show="!active"
@@ -25,6 +21,7 @@
 </template>
 
 <script>
+  import { autoprefixer } from 'element-ui/src/utils/util';
   const CARD_SCALE = 0.83;
   export default {
     name: 'ElCarouselItem',
@@ -63,7 +60,8 @@
         return index;
       },
 
-      calculateTranslate(index, activeIndex, parentWidth) {
+      calcCardTranslate(index, activeIndex) {
+        const parentWidth = this.$parent.$el.offsetWidth;
         if (this.inStage) {
           return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4;
         } else if (index < activeIndex) {
@@ -73,23 +71,33 @@
         }
       },
 
+      calcTranslate(index, activeIndex, isVertical) {
+        const distance = this.$parent.$el[isVertical ? 'offsetHeight' : 'offsetWidth'];
+        return distance * (index - activeIndex);
+      },
+
       translateItem(index, activeIndex, oldIndex) {
-        const parentWidth = this.$parent.$el.offsetWidth;
+        const parentType = this.$parent.type;
+        const parentDirection = this.parentDirection;
         const length = this.$parent.items.length;
-        if (this.$parent.type !== 'card' && oldIndex !== undefined) {
+        if (parentType !== 'card' && oldIndex !== undefined) {
           this.animating = index === activeIndex || index === oldIndex;
         }
         if (index !== activeIndex && length > 2 && this.$parent.loop) {
           index = this.processIndex(index, activeIndex, length);
         }
-        if (this.$parent.type === 'card') {
+        if (parentType === 'card') {
+          if (parentDirection === 'vertical') {
+            console.warn('[Element Warn][Carousel]vertical directionis not supported in card mode');
+          }
           this.inStage = Math.round(Math.abs(index - activeIndex)) <= 1;
           this.active = index === activeIndex;
-          this.translate = this.calculateTranslate(index, activeIndex, parentWidth);
+          this.translate = this.calcCardTranslate(index, activeIndex);
           this.scale = this.active ? 1 : CARD_SCALE;
         } else {
           this.active = index === activeIndex;
-          this.translate = parentWidth * (index - activeIndex);
+          const isVertical = parentDirection === 'vertical';
+          this.translate = this.calcTranslate(index, activeIndex, isVertical);
         }
         this.ready = true;
       },
@@ -100,6 +108,21 @@
           const index = parent.items.indexOf(this);
           parent.setActiveItem(index);
         }
+      }
+    },
+
+    computed: {
+      parentDirection() {
+        return this.$parent.direction;
+      },
+
+      itemStyle() {
+        const translateType = this.parentDirection === 'vertical' ? 'translateY' : 'translateX';
+        const value = `${translateType}(${ this.translate }px) scale(${ this.scale })`;
+        const style = {
+          transform: value
+        };
+        return autoprefixer(style);
       }
     },
 

@@ -1,11 +1,3 @@
-<style>
-  .demo-box {
-    .el-date-editor + .el-date-editor {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## TimePicker
 
 Use Time Picker for time input.
@@ -17,7 +9,7 @@ Provide a list of fixed time for users to choose.
 :::demo Use `el-time-select` label, then assign start time, end time and time step with `start`, `end` and `step`.
 ```html
 <el-time-select
-  v-model="value1"
+  v-model="value"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -30,7 +22,7 @@ Provide a list of fixed time for users to choose.
   export default {
     data() {
       return {
-        value1: ''
+        value: ''
       };
     }
   }
@@ -47,7 +39,7 @@ Can pick an arbitrary time.
 ```html
 <template>
   <el-time-picker
-    v-model="value2"
+    v-model="value1"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -55,7 +47,7 @@ Can pick an arbitrary time.
   </el-time-picker>
   <el-time-picker
     arrow-control
-    v-model="value3"
+    v-model="value2"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -67,8 +59,8 @@ Can pick an arbitrary time.
   export default {
     data() {
       return {
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40)
+        value1: new Date(2016, 9, 10, 18, 40),
+        value2: new Date(2016, 9, 10, 18, 40)
       };
     }
   }
@@ -126,7 +118,7 @@ Can pick an arbitrary time range.
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value1"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -134,7 +126,7 @@ Can pick an arbitrary time range.
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value2"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -145,8 +137,8 @@ Can pick an arbitrary time range.
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value2: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
@@ -154,27 +146,12 @@ Can pick an arbitrary time range.
 ```
 :::
 
-<script>
-  export default {
-    data() {
-      return {
-        value1: '',
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40),
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        startTime: '',
-        endTime: ''
-      };
-    }
-  }
-</script>
-
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | — | false |
+| value / v-model | binding value | date(TimePicker) / string(TimeSelect) | - | - |
+| readonly | whether TimePicker is read only | boolean | — | false |
+| disabled | whether TimePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | whether to show clear button | boolean | — | true |
 | size | size of Input | string | medium / small / mini | — |
@@ -183,7 +160,6 @@ Can pick an arbitrary time range.
 | end-placeholder | placeholder for the end time in range mode | string | — | — |
 | is-range | whether to pick a time range, only works with `<el-time-picker>` | boolean | — | false |
 | arrow-control | whether to pick time using arrow buttons, only works with `<el-time-picker>` | boolean | — | false |
-| value | value of the picker | Date for Time Picker, and string for Time Select | - | - |
 | align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |

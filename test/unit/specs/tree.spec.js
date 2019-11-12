@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate, wait } from '../util';
 
 const DELAY = 10;
 
@@ -299,36 +299,6 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(1);
   });
 
-  it('defaultCheckedKeys & lazy, checked children length as expected', () => {
-    vm = getTreeVm(':load="loadNode" :props="defaultProps" :default-checked-keys="defaultCheckedKeys" node-key="id" :default-expanded-keys="[1]" lazy show-checkbox ', {
-      created() {
-        this.defaultCheckedKeys = [2, 3];
-      },
-      methods: {
-        loadNode(node, resolve) {
-          if (node.level === 0) {
-            return resolve([{ label: 'head', id: 1} ]);
-          }
-          return resolve([
-            {
-              label: '#1',
-              id: 2
-            },
-            {
-              label: '#3',
-              id: 3
-            },
-            {
-              label: '$4',
-              id: 5
-            }
-          ]);
-        }
-      }
-    });
-    expect(vm.$el.querySelectorAll('.el-checkbox.is-checked').length).to.equal(2);
-  });
-
   it('show checkbox', done => {
     vm = getTreeVm(':props="defaultProps" show-checkbox');
     const tree = vm.$children[0];
@@ -353,12 +323,10 @@ describe('Tree', () => {
   });
 
   it('check', done => {
+    const spy = sinon.spy();
     vm = getTreeVm(':props="defaultProps" show-checkbox @check="handleCheck"', {
       methods: {
-        handleCheck(data, args) {
-          this.data = data;
-          this.args = args;
-        }
+        handleCheck: spy
       }
     });
     const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
@@ -366,8 +334,10 @@ describe('Tree', () => {
     expect(nodeCheckbox).to.be.exist;
     nodeCheckbox.click();
     setTimeout(() => {
-      expect(vm.args.checkedNodes.length).to.equal(3);
-      expect(vm.data.id).to.equal(2);
+      expect(spy.calledOnce).to.be.true;
+      const [data, args] = spy.args[0];
+      expect(data.id).to.equal(2);
+      expect(args.checkedNodes.length).to.equal(3);
       done();
     }, 10);
   });
@@ -389,31 +359,31 @@ describe('Tree', () => {
     }, 10);
   });
 
-  it('setCheckedKeys', () => {
+  it('setCheckedKeys', async() => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([111]);
+    await waitImmediate();
     expect(tree.getCheckedNodes().length).to.equal(3);
     expect(tree.getCheckedKeys().length).to.equal(3);
 
     tree.setCheckedKeys([1]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(3);
-      expect(tree.getCheckedKeys().length).to.equal(3);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
 
     tree.setCheckedKeys([2]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(3);
-      expect(tree.getCheckedKeys().length).to.equal(3);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
 
     tree.setCheckedKeys([21]);
+    await waitImmediate();
     expect(tree.getCheckedNodes().length).to.equal(1);
     expect(tree.getCheckedKeys().length).to.equal(1);
   });
 
-  it('setCheckedKeys with checkStrictly', () => {
+  it('setCheckedKeys with checkStrictly', async() => {
     vm = getTreeVm(':props="defaultProps" checkStrictly show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([111]);
@@ -421,18 +391,17 @@ describe('Tree', () => {
     expect(tree.getCheckedKeys().length).to.equal(1);
 
     tree.setCheckedKeys([1]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(1);
-      expect(tree.getCheckedKeys().length).to.equal(1);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(1);
+    expect(tree.getCheckedKeys().length).to.equal(1);
 
     tree.setCheckedKeys([2]);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(1);
-      expect(tree.getCheckedKeys().length).to.equal(1);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(1);
+    expect(tree.getCheckedKeys().length).to.equal(1);
 
     tree.setCheckedKeys([21, 22]);
+    await waitImmediate();
     expect(tree.getCheckedNodes().length).to.equal(2);
     expect(tree.getCheckedKeys().length).to.equal(2);
   });
@@ -449,24 +418,22 @@ describe('Tree', () => {
     expect(tree.getCheckedKeys().length).to.equal(0);
   });
 
-  it('setCheckedKeys with leafOnly=false', () => {
+  it('setCheckedKeys with leafOnly=false', async() => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([1, 11, 111, 2], false);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(6);
-      expect(tree.getCheckedKeys().length).to.equal(6);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(6);
+    expect(tree.getCheckedKeys().length).to.equal(6);
   });
 
-  it('setCheckedKeys with leafOnly=true', () => {
+  it('setCheckedKeys with leafOnly=true', async() => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([2], true);
-    setTimeout(function() {
-      expect(tree.getCheckedNodes().length).to.equal(2);
-      expect(tree.getCheckedKeys().length).to.equal(2);
-    }, 0);
+    await waitImmediate();
+    expect(tree.getCheckedNodes().length).to.equal(2);
+    expect(tree.getCheckedKeys().length).to.equal(2);
   });
 
   it('setCurrentKey', (done) => {
@@ -527,10 +494,13 @@ describe('Tree', () => {
   it('remove', (done) => {
     vm = getTreeVm(':props="defaultProps" node-key="id"');
     const tree = vm.$children[0];
+    tree.setCurrentKey(1);
+    expect(tree.getCurrentNode().id).to.equal(1);
     tree.remove(1);
     vm.$nextTick(() => {
       expect(vm.data[0].id).to.equal(2);
       expect(tree.getNode(1)).to.equal(null);
+      expect(tree.getCurrentNode()).to.equal(null);
       done();
     });
   });
@@ -608,7 +578,7 @@ describe('Tree', () => {
     expect(firstNode.querySelector('.custom-content')).to.exist;
     const button = firstNode.querySelector('.custom-content .el-button');
     expect(button).to.exist;
-    expect(button.textContent).to.equal('一级 1');
+    expect(button.querySelector('span').textContent).to.equal('一级 1');
   });
 
   it('scoped slot', () => {
@@ -860,5 +830,64 @@ describe('Tree', () => {
       expect(label.textContent).to.equal('三级 1-1');
       done();
     });
+  });
+
+  it('update multi tree data', async() => {
+    const vm = createVue({
+      template: `
+        <div>
+          <el-tree ref="tree1" :data="data" node-key="id" :props="defaultProps"></el-tree>
+          <el-tree ref="tree2" :data="data" node-key="id" :props="defaultProps"></el-tree>
+        </div>
+        `,
+
+      data() {
+        return {
+          data: [{
+            id: 1,
+            label: '一级 1',
+            children: [{
+              id: 11,
+              label: '二级 1-1',
+              children: [{
+                id: 111,
+                label: '三级 1-1'
+              }]
+            }]
+          }, {
+            id: 2,
+            label: '一级 2',
+            children: [{
+              id: 21,
+              label: '二级 2-1'
+            }, {
+              id: 22,
+              label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            children: [{
+              id: 31,
+              label: '二级 3-1'
+            }, {
+              id: 32,
+              label: '二级 3-2'
+            }]
+          }],
+          defaultProps: {
+            children: 'children',
+            label: 'label'
+          }
+        };
+      }
+    }, true);
+    const nodeData = { label: '新增 1', id: 4 };
+    vm.data.push(nodeData);
+    await wait();
+    const tree1 = vm.$refs.tree1;
+    expect(tree1.getNode(4).data).to.equal(nodeData);
+    const tree2 = vm.$refs.tree2;
+    expect(tree2.getNode(4).data).to.equal(nodeData);
   });
 });

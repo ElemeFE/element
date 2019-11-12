@@ -1,12 +1,13 @@
 import { createVue, destroyVM } from '../util.js';
 import ajax from 'packages/upload/src/ajax';
-const noop = () => {
-};
+
+const noop = () => {};
 const option = {
   onSuccess: noop,
+  onProgress: noop,
   data: { a: 'abc', b: 'bcd' },
   filename: 'file.png',
-  file: 'foo',
+  file: new File([JSON.stringify('foo')], {type: 'image/png'}),
   action: '/upload',
   headers: { region: 'shanghai' }
 };
@@ -34,7 +35,6 @@ describe('ajax', () => {
   it('request width header', done => {
     ajax(option);
     expect(requests[0].requestHeaders).to.eql({
-      // 'X-Requested-With': 'XMLHttpRequest',
       region: 'shanghai'
     });
     done();

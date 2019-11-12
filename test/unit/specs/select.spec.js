@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
@@ -693,7 +693,7 @@ describe('Select', () => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
-    }, 100);
+    }, 250);
   });
 
   it('should return focus to input inside select after option select', done => {
@@ -799,6 +799,85 @@ describe('Select', () => {
         done();
       }, 10);
     }, 10);
+  });
+
+  it('render slot `empty`', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <div class="empty-slot" slot="empty">EmptySlot</div>
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 1
+        };
+      }
+    });
+
+    expect(vm.$el.querySelector('.empty-slot').innerText).to.be.equal('EmptySlot');
+    done();
+  });
+
+  it('should set placeholder to label of selected option when filterable is true and multiple is false', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select ref="select" v-model="value" filterable>
+            <el-option label="test" value="test" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 'test'
+        };
+      }
+    });
+    vm.$refs.select.$el.click();
+    await waitImmediate();
+    expect(vm.$refs.select.visible).to.be.equal(true);
+    expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
+    expect(vm.value).to.be.equal('test');
+  });
+
+  it('default value is null or undefined', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }],
+          value: undefined
+        };
+      }
+    }, true);
+
+    vm.value = null;
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('');
+    vm.value = '选项1';
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('黄金糕');
   });
 
   describe('resetInputHeight', () => {

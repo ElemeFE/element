@@ -55,5 +55,8 @@ export declare class ElDialog extends ElementUIComponent {
   /** Whether to align the header and footer in center */
   center: boolean
 
+  /** Whether to destroy elements in Dialog when closed */
+  destroyOnClose: boolean
+
   $slots: DialogSlots
 }

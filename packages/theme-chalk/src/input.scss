@@ -2,6 +2,7 @@
 @import "common/var";
 
 @include b(textarea) {
+  position: relative;
   display: inline-block;
   width: 100%;
   vertical-align: bottom;
@@ -15,8 +16,8 @@
     box-sizing: border-box;
     width: 100%;
     font-size: inherit;
-    color: $--input-color;
-    background-color: $--input-fill;
+    color: $--input-font-color;
+    background-color: $--input-background-color;
     background-image: none;
     border: $--input-border;
     border-radius: $--input-border-radius;
@@ -36,6 +37,15 @@
     }
   }
 
+  & .el-input__count {
+    color: $--color-info;
+    background: $--color-white;
+    position: absolute;
+    font-size: 12px;
+    bottom: 5px;
+    right: 10px;
+  }
+
   @include when(disabled) {
     .el-textarea__inner {
       background-color: $--input-disabled-fill;
@@ -46,6 +56,16 @@
       &::placeholder {
         color: $--input-disabled-placeholder-color;
       }
+    }
+  }
+
+  @include when(exceed) {
+    .el-textarea__inner {
+      border-color: $--color-danger;
+    }
+
+    .el-input__count {
+      color: $--color-danger;
     }
   }
 }
@@ -60,7 +80,6 @@
   & .el-input__clear {
     color: $--input-icon-color;
     font-size: $--input-font-size;
-    line-height: 16px;
     cursor: pointer;
     transition: $--color-transition-base;
 
@@ -69,14 +88,29 @@
     }
   }
 
+  & .el-input__count {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    color: $--color-info;
+    font-size: 12px;
+
+    .el-input__count-inner {
+      background: $--color-white;
+      line-height: initial;
+      display: inline-block;
+      padding: 0 5px;
+    }
+  }
+
   @include e(inner) {
     -webkit-appearance: none;
-    background-color: $--input-fill;
+    background-color: $--input-background-color;
     background-image: none;
     border-radius: $--input-border-radius;
     border: $--input-border;
     box-sizing: border-box;
-    color: $--input-color;
+    color: $--input-font-color;
     display: inline-block;
     font-size: inherit;
     height: $--input-height;
@@ -166,6 +200,18 @@
 
     .el-input__icon {
       cursor: not-allowed;
+    }
+  }
+
+  @include when(exceed) {
+    .el-input__inner {
+      border-color: $--color-danger;
+    }
+
+    .el-input__suffix {
+      .el-input__count {
+        color: $--color-danger;
+      }
     }
   }
 

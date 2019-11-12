@@ -1,0 +1,46 @@
+.infinite-list {
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .infinite-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: #e8f3fe;
+    margin: 10px;
+    color: lighten(#1989fa, 20%);
+    & + .list-item {
+      margin-top: 10px
+    }
+  } 
+}
+
+.infinite-list-wrapper {
+  height: 300px;
+  text-align: center;
+
+  .list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+    
+
+  .list-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: #fff6f6;
+    color: #ff8484;
+    & + .list-item {
+      margin-top: 10px
+    }
+  }
+}
+   
+
+ 

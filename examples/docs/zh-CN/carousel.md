@@ -1,64 +1,3 @@
-<script>
-  export default {
-    mounted() {
-      this.$nextTick(() => {
-        const demos = document.querySelectorAll('.source');
-        demos[0].style.padding = '0';
-        demos[0].className += ' small';
-        demos[3].className += ' medium';
-      });
-    }
-  }
-</script>
-<style>
-  .demo-carousel .block {
-    padding: 30px;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    display: inline-block;
-    width: 50%;
-    box-sizing: border-box;
-    &:last-child {
-      border-right: none;
-    }
-  }
-  
-  .demo-carousel .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-
-  .demo-carousel .el-carousel__container {
-    text-align: center;
-  }
-  
-  .demo-carousel .el-carousel__item {
-    h3 {
-      color: #fff;
-      font-size: 18px;
-      line-height: 300px;
-      margin: 0;
-    }
-    &:nth-child(2n) {
-      background-color: #99a9bf;
-    }
-    &:nth-child(2n+1) {
-      background-color: #d3dce6;
-    }
-  }
-  
-  .demo-carousel .small h3 {
-    font-size: 14px;
-    line-height: 150px;
-  }
-
-  .demo-carousel .medium h3 {
-    font-size: 14px;
-    line-height: 200px;
-  }
-</style>
 ## Carousel 走马灯
 
 在有限空间内，循环播放同一类型的图片、文字等内容
@@ -74,7 +13,7 @@
     <span class="demonstration">默认 Hover 指示器触发</span>
     <el-carousel height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+        <h3 class="small">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -82,7 +21,7 @@
     <span class="demonstration">Click 指示器触发</span>
     <el-carousel trigger="click" height="150px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+        <h3 class="small">{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -183,7 +122,39 @@
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6" :key="item">
-      <h3>{{ item }}</h3>
+      <h3 class="medium">{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+</template>
+
+<style>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+</style>
+```
+:::
+
+### 方向
+默认情况下，`direction` 为 `horizontal`。通过设置 `direction` 为 `vertical` 来让走马灯在垂直方向上显示。
+:::demo
+```html
+<template>
+  <el-carousel height="200px" direction="vertical" :autoplay="false">
+    <el-carousel-item v-for="item in 3" :key="item">
+      <h3 class="medium">{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -220,6 +191,7 @@
 | arrow | 切换箭头的显示时机 | string | always/hover/never | hover |
 | type | 走马灯的类型 | string | card | — |
 | loop | 是否循环显示 | boolean | - | true |
+| direction | 走马灯展示的方向 | string | horizontal/vertical | horizontal |
 
 ### Carousel Events
 | 事件名称 | 说明 | 回调参数 |

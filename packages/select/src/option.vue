@@ -109,10 +109,10 @@
 
       contains(arr = [], target) {
         if (!this.isObject) {
-          return arr.indexOf(target) > -1;
+          return arr && arr.indexOf(target) > -1;
         } else {
           const valueKey = this.select.valueKey;
-          return arr.some(item => {
+          return arr && arr.some(item => {
             return getValueByPath(item, valueKey) === getValueByPath(target, valueKey);
           });
         }
@@ -153,6 +153,10 @@
     },
 
     beforeDestroy() {
+      let index = this.select.cachedOptions.indexOf(this);
+      if (index > -1) {
+        this.select.cachedOptions.splice(index, 1);
+      }
       this.select.onOptionDestroy(this.select.options.indexOf(this));
     }
   };
