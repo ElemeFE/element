@@ -2,7 +2,7 @@
   <li class="el-menu-item"
     role="menuitem"
     tabindex="-1"
-    :style="[paddingStyle, itemStyle, { backgroundColor }]"
+    :style="[paddingStyle, itemStyle]"
     :class="{
       'is-active': active,
       'is-disabled': disabled
@@ -57,6 +57,12 @@
       hoverBackground() {
         return this.rootMenu.hoverBackground;
       },
+      hoverActiveBackground() {
+        return this.rootMenu.hoverActiveBackground || this.rootMenu.hoverBackground || '';
+      },
+      activeBackgroundColor() {
+        return this.rootMenu.activeBackgroundColor || this.rootMenu.backgroundColor || '';
+      },
       backgroundColor() {
         return this.rootMenu.backgroundColor || '';
       },
@@ -71,7 +77,8 @@
       },
       itemStyle() {
         const style = {
-          color: this.active ? this.activeTextColor : this.textColor
+          color: this.active ? this.activeTextColor : this.textColor,
+          backgroundColor: this.active ? this.activeBackgroundColor : this.backgroundColor
         };
         if (this.mode === 'horizontal' && !this.isNested) {
           style.borderBottomColor = this.active
@@ -87,11 +94,11 @@
     methods: {
       onMouseEnter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
-        this.$el.style.backgroundColor = this.hoverBackground;
+        this.$el.style.backgroundColor = this.active ? this.hoverActiveBackground : this.hoverBackground;
       },
       onMouseLeave() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
-        this.$el.style.backgroundColor = this.backgroundColor;
+        this.$el.style.backgroundColor = this.active ? this.activeBackgroundColor : this.backgroundColor;
       },
       handleClick() {
         if (!this.disabled) {
