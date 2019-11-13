@@ -77,9 +77,9 @@
 
     mounted() {
       localize(this.lang);
-      if (this.lang === 'zh-CN') {
-        this.suggestJump();
-      }
+      // if (this.lang === 'zh-CN') {
+      //   this.suggestJump();
+      // }
     }
   };
 </script>
