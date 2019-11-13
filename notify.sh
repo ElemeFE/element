@@ -19,7 +19,7 @@ html_url=$(sed -n 5p $resp_tmp_file | sed 's/\"html_url\"://g' | awk -F '"' '{pr
 body=$(grep body < $resp_tmp_file | sed 's/\"body\"://g;s/\"//g')
 version=$(echo $html_url | awk -F '/' '{print $NF}')
 
-msg='{"msgtype": "markdown", "markdown": {"title": "element更新", "text": "@所有人\n# [vant('$version')]('$html_url')\n'$body'"}}'
+msg='{"msgtype": "markdown", "markdown": {"title": "element更新", "text": "@所有人\n# [element('$version')]('$html_url')\n'$body'"}}'
 
 curl -X POST https://oapi.dingtalk.com/robot/send\?access_token\=$DINGTALK_ROBOT_TOKEN -H 'Content-Type: application/json' -d "$msg"
 
