@@ -1,0 +1,16 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(message-box-center) {
+  &.el-message-box{
+    .el-message-box__content {
+      text-align: center;
+    }
+    .el-message-box__status {
+      display: inline-block;
+    }
+    .el-message-box__message {
+      display: inline-block;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(lr-container) {
+  display: flex;
+  
+  &.is-bordered {
+    border-width: 1px;
+    border-style: solid;
+    border-color: $--aside-border-color;
+  }
+
+  @include b(aside-border-right) {
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: $--aside-border-color;
+  }
+
+  @include b(lr-container-main) {
+    flex: 1;
+  }
+  @include b(lr-container-aside-content) {
+    min-width: 80px;
+  }
+}

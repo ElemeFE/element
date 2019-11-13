@@ -1,0 +1,69 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(panel) {
+    .el-panel {
+        background-color: #fff;
+        &-view {
+          &__header {
+            display: flex;
+            justify-content: space-between;
+            height: 54px;
+            line-height: 54px;
+            padding: 0 20px;
+            border-bottom: 1px solid #e4e8f3;
+          }
+      
+          &__title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      
+        &-edit {
+          &__header {
+            display: flex;
+            justify-content: space-between;
+            height: 54px;
+            line-height: 54px;
+            padding: 0 20px;
+          }
+      
+          &__title {
+            display: flex;
+            position: relative;
+            padding-left: 10px;
+            justify-content: center;
+            align-items: center;
+            &:before {
+              content: '';
+              display: block;
+              width: 4px;
+              height: 12px;
+              background-color: #575962;
+              border-radius: 4px;
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
+        }
+      
+        &-view__title,
+        &-edit__title {
+          .title {
+            font-size: 14px;
+            color: #2d303b;
+            font-weight: 500;
+          }
+      
+          .subtitle {
+            font-size: 12px;
+            color: #9ca6c7;
+            padding-left: 10px;
+          }
+        }
+      }
+}

@@ -1,0 +1,43 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(empty) {
+  margin: 0 8px;
+  font-size: $--empty-font-size;
+  line-height: 22px;
+  text-align: center;
+
+  &-image {
+    height: 100px;
+    margin-bottom: 8px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  &-description {
+    margin: 0;
+  }
+
+  &-footer {
+    margin-top: 16px;
+  }
+
+  // antd internal empty style
+  &-small {
+    margin: 8px 0;
+
+    @include b(image) {
+      height: 35px;
+    }
+  }
+
+  &-normal {
+    margin: 32px 0;
+
+    @include b(image) {
+      height: 40px;
+    }
+  }
+}

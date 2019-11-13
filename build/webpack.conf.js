@@ -61,6 +61,10 @@ module.exports = {
             preserveWhitespace: false
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
     ]
   },

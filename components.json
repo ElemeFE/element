@@ -80,5 +80,18 @@
   "cascader-panel": "./packages/cascader-panel/index.js",
   "avatar": "./packages/avatar/index.js",
   "drawer": "./packages/drawer/index.js",
-  "popconfirm": "./packages/popconfirm/index.js"
+  "popconfirm": "./packages/popconfirm/index.js",
+  "lr-container": "./packages/lr-container/index.js",
+  "loading-button": "./packages/loading-button/index.js",
+  "message-box-center": "./packages/message-box-center/index.js",
+  "tabs-dotted": "./packages/tabs-dotted/index.js",
+  "data-mapper": "./packages/data-mapper/index.js",
+  "checkbox-img-button": "./packages/checkbox-img-button/index.js",
+  "radio-img-button": "./packages/radio-img-button/index.js",
+  "icon-checkbox": "./packages/icon-checkbox/index.js",
+  "status-steps": "./packages/status-steps/index.js",
+  "panel": "./packages/panel/index.js",
+  "skeleton": "./packages/skeleton/index.js",
+  "empty": "./packages/empty/index.js",
+  "affix": "./packages/affix/index.js"
 }

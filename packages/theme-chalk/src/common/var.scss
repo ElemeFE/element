@@ -971,6 +971,23 @@ $--md: 992px !default;
 $--lg: 1200px !default;
 $--xl: 1920px !default;
 
+/* LrContainer
+--------------------------*/
+$--aside-border-color: $--border-color-base;
+
+/* Skeleton
+--------------------------*/
+$--skeleton-color: #f2f2f2;
+$--skeleton-to-color: #e6e6e6;
+
+/* Empty
+--------------------------*/
+$--empty-font-size: $--font-size-base;
+
+/* Affix
+--------------------------*/
+$--zindex-affix: 10;
+
 $--breakpoints: (
   'xs' : (max-width: $--sm - 1),
   'sm' : (min-width: $--sm),

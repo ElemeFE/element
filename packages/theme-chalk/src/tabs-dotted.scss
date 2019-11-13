@@ -1,0 +1,31 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(tabs-dotted) {
+  > .el-tabs__header .el-tabs__nav-wrap::after {
+    content: none;
+  }
+  > .el-tabs__header {
+    .el-tabs__item:not(:last-child)::after {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background-color: #999;
+      vertical-align: middle;
+      border-radius: 4px;
+      position: absolute;
+      top: 45%;
+      right: 0;
+    }
+    .el-tabs__active-bar{
+      display: none;
+    }
+    .el-tabs__item:first-child {
+      padding-left: 0
+    }
+    .el-tabs__item:nth-child(2) {
+      padding-left: 20px;
+    }
+  }
+}

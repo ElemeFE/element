@@ -82,6 +82,19 @@ import CascaderPanel from '../packages/cascader-panel/index.js';
 import Avatar from '../packages/avatar/index.js';
 import Drawer from '../packages/drawer/index.js';
 import Popconfirm from '../packages/popconfirm/index.js';
+import LrContainer from '../packages/lr-container/index.js';
+import LoadingButton from '../packages/loading-button/index.js';
+import MessageBoxCenter from '../packages/message-box-center/index.js';
+import TabsDotted from '../packages/tabs-dotted/index.js';
+import DataMapper from '../packages/data-mapper/index.js';
+import CheckboxImgButton from '../packages/checkbox-img-button/index.js';
+import RadioImgButton from '../packages/radio-img-button/index.js';
+import IconCheckbox from '../packages/icon-checkbox/index.js';
+import StatusSteps from '../packages/status-steps/index.js';
+import Panel from '../packages/panel/index.js';
+import Skeleton from '../packages/skeleton/index.js';
+import Empty from '../packages/empty/index.js';
+import Affix from '../packages/affix/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -163,6 +176,18 @@ const components = [
   Avatar,
   Drawer,
   Popconfirm,
+  LrContainer,
+  LoadingButton,
+  TabsDotted,
+  DataMapper,
+  CheckboxImgButton,
+  RadioImgButton,
+  IconCheckbox,
+  StatusSteps,
+  Panel,
+  Skeleton,
+  Empty,
+  Affix,
   CollapseTransition
 ];
 
@@ -189,6 +214,8 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
+  Vue.prototype.$alertCenter = MessageBoxCenter.alert;
+  Vue.prototype.$confirmCenter = MessageBoxCenter.confirm;
 
 };
 
@@ -284,5 +311,18 @@ export default {
   CascaderPanel,
   Avatar,
   Drawer,
-  Popconfirm
+  Popconfirm,
+  LrContainer,
+  LoadingButton,
+  MessageBoxCenter,
+  TabsDotted,
+  DataMapper,
+  CheckboxImgButton,
+  RadioImgButton,
+  IconCheckbox,
+  StatusSteps,
+  Panel,
+  Skeleton,
+  Empty,
+  Affix
 };

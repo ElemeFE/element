@@ -1,0 +1,16 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(step) {
+
+  @include when(horizontal) {
+    display: inline-block;
+
+    @include e(line) {
+      height: 2px;
+      top: 11px;
+      left: 34px;
+      right: 10px;
+    }
+  }
+}

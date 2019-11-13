@@ -1,0 +1,66 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "mixins/_button";
+@import "mixins/utils";
+
+$--label-background-color: transparent;
+
+@include b(checkbox) {
+  color: #2D303B;
+}
+
+@include b(checkbox-icon-button) {
+  .el-checkbox-button__inner {
+    margin: 0 10px 0 0;
+    padding: 7px 8px;
+    border-radius: 14px;
+    border: none;
+    border-left: 0;
+    color: #818389;
+  }
+  @include e(inner) {
+    background: $--label-background-color;
+    transition: $--label-background-color;
+    @include utils-user-select(none);
+
+    @include button-size(7px, 8px, $--button-font-size, 14px);
+
+    &:hover {
+      color: $--color-primary;
+    }
+
+    & [class*="el-icon-"] {
+      line-height: 0.9;
+
+      & + span {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &.is-checked {
+    & .el-checkbox-button__inner {
+      color: #5D81F9;
+      background-color: #E7ECFE;
+      border-color: $--label-background-color;
+      box-shadow: none;
+    }
+    &:first-child .el-checkbox-button__inner {
+      border-left-color: $--label-background-color;
+    }
+  }
+
+  &:first-child {
+    .el-checkbox-button__inner {
+      border-left: $--label-background-color;
+      border-radius: 14px;
+      box-shadow: none !important;
+    }
+  }
+
+  &:last-child {
+    .el-checkbox-button__inner {
+      border-radius: 14px;
+    }
+  }
+}

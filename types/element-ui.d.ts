@@ -80,6 +80,19 @@ import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElPopconfirm } from './popconfirm'
+import { ElLrContainer } from './lr-container'
+import { ElLoadingButton } from './loading-button'
+import { ElMessageBoxCenter } from './message-box-center'
+import { ElTabsDotted } from './tabs-dotted'
+import { ElDataMapper } from './data-mapper'
+import { ElCheckboxImgButton } from './checkbox-img-button'
+import { ElRadioImgButton } from './radio-img-button'
+import { ElIconCheckbox } from './icon-checkbox'
+import { ElStatusSteps } from './status-steps'
+import { ElPanel } from './panel'
+import { ElSkeleton } from './skeleton'
+import { ElEmpty } from './empty'
+import { ElAffix } from './affix'
 
 export interface InstallationOptions {
   locale: any,
@@ -344,3 +357,42 @@ export class Drawer extends ElDrawer {}
 
 /** Popconfirm Component */
 export class Popconfirm extends ElPopconfirm {}
+
+/** LrContainer Component */
+export class LrContainer extends ElLrContainer {}
+
+/** LoadingButton Component */
+export class LoadingButton extends ElLoadingButton {}
+
+/** MessageBoxCenter Component */
+export class MessageBoxCenter extends ElMessageBoxCenter {}
+
+/** TabsDotted Component */
+export class TabsDotted extends ElTabsDotted {}
+
+/** DataMapper Component */
+export class DataMapper extends ElDataMapper {}
+
+/** CheckboxImgButton Component */
+export class CheckboxImgButton extends ElCheckboxImgButton {}
+
+/** RadioImgButton Component */
+export class RadioImgButton extends ElRadioImgButton {}
+
+/** IconCheckbox Component */
+export class IconCheckbox extends ElIconCheckbox {}
+
+/** StatusSteps Component */
+export class StatusSteps extends ElStatusSteps {}
+
+/** Panel Component */
+export class Panel extends ElPanel {}
+
+/** Skeleton Component */
+export class Skeleton extends ElSkeleton {}
+
+/** Empty Component */
+export class Empty extends ElEmpty {}
+
+/** Affix Component */
+export class Affix extends ElAffix {}

@@ -293,6 +293,63 @@
               "title": "Drawer 抽屉"
             }
           ]
+        },
+        {
+          "groupName": "SPaaS",
+          "list": [
+            {
+              "path": "/lr-container",
+              "title": "LrContainer 左右布局容器"
+            },
+            {
+              "path": "/loading-button",
+              "title": "LoadingButton 加载按钮"
+            },
+            {
+              "path": "/message-box-center",
+              "title": "MessageBoxCenter 居中提示弹窗"
+            },
+            {
+              "path": "/tabs-dotted",
+              "title": "TabsDotted 点分Tab标签"
+            },
+            {
+              "path": "/data-mapper",
+              "title": "DataMapper 数据映射"
+            },
+            {
+              "path": "/checkbox-img-button",
+              "title": "CheckboxImgButton checkbox扩展"
+            },
+            {
+              "path": "/radio-img-button",
+              "title": "RadioImgButton radio扩展"
+            },
+            {
+              "path": "/icon-checkbox",
+              "title": "IconCheckbox 多选按钮"
+            },
+            {
+              "path": "/status-steps",
+              "title": "StatusSteps 简约步骤条"
+            },
+            {
+              "path": "/panel",
+              "title": "Panel 展示板"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton 骨架屏"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty 无数据"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix 固钉"
+            }
+          ]
         }
       ]
     }
@@ -589,6 +646,63 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            }
+          ]
+        },
+        {
+          "groupName": "SPaaS",
+          "list": [
+            {
+              "path": "/lr-container",
+              "title": "LrContainer"
+            },
+            {
+              "path": "/loading-button",
+              "title": "LoadingButton"
+            },
+            {
+              "path": "/message-box-center",
+              "title": "MessageBoxCenter"
+            },
+            {
+              "path": "/tabs-dotted",
+              "title": "TabsDotted"
+            },
+            {
+              "path": "/data-mapper",
+              "title": "DataMapper"
+            },
+            {
+              "path": "/checkbox-img-button",
+              "title": "CheckboxImgButton"
+            },
+            {
+              "path": "/radio-img-button",
+              "title": "RadioImgButton"
+            },
+            {
+              "path": "/icon-checkbox",
+              "title": "IconCheckbox"
+            },
+            {
+              "path": "/status-steps",
+              "title": "StatusSteps"
+            },
+            {
+              "path": "/panel",
+              "title": "Panel"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }
@@ -889,6 +1003,63 @@
               "title": "Drawer"
             }
           ]
+        },
+        {
+          "groupName": "SPaaS",
+          "list": [
+            {
+              "path": "/lr-container",
+              "title": "LrContainer"
+            },
+            {
+              "path": "/loading-button",
+              "title": "LoadingButton"
+            },
+            {
+              "path": "/message-box-center",
+              "title": "MessageBoxCenter"
+            },
+            {
+              "path": "/tabs-dotted",
+              "title": "TabsDotted"
+            },
+            {
+              "path": "/data-mapper",
+              "title": "DataMapper"
+            },
+            {
+              "path": "/checkbox-img-button",
+              "title": "CheckboxImgButton"
+            },
+            {
+              "path": "/radio-img-button",
+              "title": "RadioImgButton"
+            },
+            {
+              "path": "/icon-checkbox",
+              "title": "IconCheckbox"
+            },
+            {
+              "path": "/status-steps",
+              "title": "StatusSteps"
+            },
+            {
+              "path": "/panel",
+              "title": "Panel"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
+            }
+          ]
         }
       ]
     }
@@ -1185,6 +1356,63 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            }
+          ]
+        },
+        {
+          "groupName": "SPaaS",
+          "list": [
+            {
+              "path": "/lr-container",
+              "title": "LrContainer"
+            },
+            {
+              "path": "/loading-button",
+              "title": "LoadingButton"
+            },
+            {
+              "path": "/message-box-center",
+              "title": "MessageBoxCenter"
+            },
+            {
+              "path": "/tabs-dotted",
+              "title": "TabsDotted"
+            },
+            {
+              "path": "/data-mapper",
+              "title": "DataMapper"
+            },
+            {
+              "path": "/checkbox-img-button",
+              "title": "CheckboxImgButton"
+            },
+            {
+              "path": "/radio-img-button",
+              "title": "RadioImgButton"
+            },
+            {
+              "path": "/icon-checkbox",
+              "title": "IconCheckbox"
+            },
+            {
+              "path": "/status-steps",
+              "title": "StatusSteps"
+            },
+            {
+              "path": "/panel",
+              "title": "Panel"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }

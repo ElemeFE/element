@@ -67,10 +67,14 @@
   "dependencies": {
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
+    "classnames": "^2.2.6",
     "deepmerge": "^1.2.0",
     "github-release-notes": "^0.17.0",
     "normalize-wheel": "^1.0.1",
+    "omit.js": "^1.0.2",
+    "raf": "^3.4.1",
     "resize-observer-polyfill": "^1.5.0",
+    "shallowequal": "^1.1.0",
     "standard-version": "^7.0.0",
     "throttle-debounce": "^1.0.1"
   },
@@ -138,6 +142,7 @@
     "sinon": "^7.2.7",
     "sinon-chai": "^3.3.0",
     "style-loader": "^0.23.1",
+    "svg-inline-loader": "^0.8.0",
     "transliteration": "^1.1.11",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "uppercamelcase": "^1.1.0",
