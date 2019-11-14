@@ -168,8 +168,8 @@ route.push({
   component: require('./play/index.vue')
 });
 
-let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
-let defaultPath = '/en-US';
+let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || '/zh-CN';
+let defaultPath = '/zh-CN';
 if (userLanguage.indexOf('zh-') !== -1) {
   defaultPath = '/zh-CN';
 } else if (userLanguage.indexOf('es') !== -1) {

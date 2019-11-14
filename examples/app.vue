@@ -18,8 +18,8 @@
   const lang = location.hash.replace('#', '').split('/')[1] || 'zh-CN';
   const localize = lang => {
     switch (lang) {
-      case 'zh-CN':
-        use(zhLocale);
+      case 'en-US':
+        use(enLocale);
         break;
       case 'es':
         use(esLocale);
@@ -28,7 +28,7 @@
         use(frLocale);
         break;
       default:
-        use(enLocale);
+        use(zhLocale);
     }
   };
   localize(lang);
@@ -47,9 +47,9 @@
 
     watch: {
       lang(val) {
-        if (val === 'zh-CN') {
-          this.suggestJump();
-        }
+        // if (val === 'zh-CN') {
+        //   this.suggestJump();
+        // }
         localize(val);
       }
     },
@@ -73,13 +73,6 @@
             });
         }, 1000);
       }
-    },
-
-    mounted() {
-      localize(this.lang);
-      // if (this.lang === 'zh-CN') {
-      //   this.suggestJump();
-      // }
     }
   };
 </script>
