@@ -176,7 +176,7 @@ export function setStyle(element, styleName, value) {
 export const isScroll = (el, vertical) => {
   if (isServer) return;
 
-  const determinedDirection = vertical !== null || vertical !== undefined;
+  const determinedDirection = vertical !== null && vertical !== undefined;
   const overflow = determinedDirection
     ? vertical
       ? getStyle(el, 'overflow-y')
