@@ -719,7 +719,8 @@ export default {
 |---------|--------|---------|
 | blur | 在 Input 失去焦点时触发 | (event: Event) |
 | focus | 在 Input 获得焦点时触发 | (event: Event) |
-| change | 在 Input 值改变时触发 | (value: string \| number) |
+| change | 仅在输入框失去焦点或用户按下回车时触发 | (value: string \| number) |
+| input | 在 Input 值改变时触发 | (value: string \| number) |
 | clear | 在点击由 `clearable` 属性生成的清空按钮时触发 | — |
 
 ### Input Methods
