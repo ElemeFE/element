@@ -11,13 +11,18 @@
       class="el-image__inner"
       v-bind="$attrs"
       v-on="$listeners"
+      @click="clickHandler"
       :src="src"
       :style="imageStyle"
-      :class="{ 'el-image__inner--center': alignCenter }">
+      :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
+    <template v-if="preview">
+      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+    </template>
   </div>
 </template>
 
 <script>
+  import ImageViewer from './image-viewer';
   import Locale from 'element-ui/src/mixins/locale';
   import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
   import { isString, isHtmlElement } from 'element-ui/src/utils/types';
@@ -33,17 +38,31 @@
     SCALE_DOWN: 'scale-down'
   };
 
+  let prevOverflow = '';
+
   export default {
     name: 'ElImage',
 
     mixins: [Locale],
     inheritAttrs: false,
 
+    components: {
+      ImageViewer
+    },
+
     props: {
       src: String,
       fit: String,
       lazy: Boolean,
-      scrollContainer: {}
+      scrollContainer: {},
+      previewSrcList: {
+        type: Array,
+        default: () => []
+      },
+      zIndex: {
+        type: Number,
+        default: 2000
+      }
     },
 
     data() {
@@ -52,7 +71,8 @@
         error: false,
         show: !this.lazy,
         imageWidth: 0,
-        imageHeight: 0
+        imageHeight: 0,
+        showViewer: false
       };
     },
 
@@ -68,6 +88,13 @@
       },
       alignCenter() {
         return !this.$isServer && !isSupportObjectFit() && this.fit !== ObjectFit.FILL;
+      },
+      preview() {
+        const { previewSrcList } = this;
+        return Array.isArray(previewSrcList) && previewSrcList.length > 0;
+      },
+      imageIndex() {
+        return this.previewSrcList.indexOf(this.src);
       }
     },
 
@@ -188,6 +215,16 @@
           default:
             return {};
         }
+      },
+      clickHandler() {
+        // prevent body scroll
+        prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        this.showViewer = true;
+      },
+      closeViewer() {
+        document.body.style.overflow = prevOverflow;
+        this.showViewer = false;
       }
     }
   };

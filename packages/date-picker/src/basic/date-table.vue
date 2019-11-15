@@ -86,6 +86,8 @@
       },
 
       disabledDate: {},
+  
+      cellClassName: {},
 
       minDate: {},
 
@@ -140,6 +142,7 @@
 
         const startDate = this.startDate;
         const disabledDate = this.disabledDate;
+        const cellClassName = this.cellClassName;
         const selectedDate = this.selectionMode === 'dates' ? coerceTruthyValueToArray(this.value) : [];
         const now = getDateTimestamp(new Date());
 
@@ -192,7 +195,7 @@
             let cellDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);
             cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime());
-
+            cell.customClass = typeof cellClassName === 'function' && cellClassName(cellDate);
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
 
@@ -286,6 +289,10 @@
 
         if (cell.selected) {
           classes.push('selected');
+        }
+
+        if (cell.customClass) {
+          classes.push(cell.customClass);
         }
 
         return classes.join(' ');

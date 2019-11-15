@@ -457,7 +457,7 @@ Introduzca palabras y datos para buscar desde el servidor.
     },
     mounted() {
       this.list = this.states.map(item => {
-        return { value: item, label: item };
+        return { value: `value:${item}`, label: `label:${item}` };
       });
     },
     methods: {

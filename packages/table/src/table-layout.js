@@ -95,8 +95,13 @@ class TableLayout {
     this.appendHeight = appendWrapper ? appendWrapper.offsetHeight : 0;
 
     if (this.showHeader && !headerWrapper) return;
+
+    // fix issue (https://github.com/ElemeFE/element/pull/16956)
+    const headerTrElm = headerWrapper ? headerWrapper.querySelector('.el-table__header tr') : null;
+    const noneHeader = this.headerDisplayNone(headerTrElm);
+
     const headerHeight = this.headerHeight = !this.showHeader ? 0 : headerWrapper.offsetHeight;
-    if (this.showHeader && headerWrapper.offsetWidth > 0 && (this.table.columns || []).length > 0 && headerHeight < 2) {
+    if (this.showHeader && !noneHeader && headerWrapper.offsetWidth > 0 && (this.table.columns || []).length > 0 && headerHeight < 2) {
       return Vue.nextTick(() => this.updateElsHeight());
     }
     const tableHeight = this.tableHeight = this.table.$el.clientHeight;
@@ -106,11 +111,23 @@ class TableLayout {
     }
     this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterWidth) : this.bodyHeight;
 
-    const noData = !this.table.data || this.table.data.length === 0;
+    const noData = !(this.store.states.data && this.store.states.data.length);
     this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
 
     this.updateScrollY();
     this.notifyObservers('scrollable');
+  }
+
+  headerDisplayNone(elm) {
+    if (!elm) return true;
+    let headerChild = elm;
+    while (headerChild.tagName !== 'DIV') {
+      if (getComputedStyle(headerChild).display === 'none') {
+        return true;
+      }
+      headerChild = headerChild.parentElement;
+    }
+    return false;
   }
 
   updateColumnsWidth() {

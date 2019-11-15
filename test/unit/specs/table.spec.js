@@ -182,7 +182,7 @@ describe('Table', () => {
         methods: {
           tableRowStyle({row, rowIndex}) {
             if (rowIndex === 1) {
-              return { height: '60px' };
+              return { height: '60px', display: 'none' };
             }
 
             return null;
@@ -191,8 +191,12 @@ describe('Table', () => {
       });
 
       setTimeout(_ => {
-        expect(vm.$el.querySelector('.el-table__body tr:nth-child(1)').style.height).to.equal('');
-        expect(vm.$el.querySelector('.el-table__body tr:nth-child(2)').style.height).to.equal('60px');
+        let child1 = vm.$el.querySelector('.el-table__body tr:nth-child(1)');
+        let child2 = vm.$el.querySelector('.el-table__body tr:nth-child(2)');
+        expect(child1.style.height).to.equal('');
+        expect(child1.style.display).to.equal('');
+        expect(child2.style.height).to.equal('60px');
+        expect(child2.style.display).to.equal('none');
         destroyVM(vm);
         done();
       }, DELAY);
@@ -554,6 +558,34 @@ describe('Table', () => {
         destroyVM(vm);
         done();
       }, DELAY);
+    });
+
+    it('sort-change', async() => {
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData" :default-sort = "{prop: 'runtime', order: 'ascending'}">
+            <el-table-column prop="name" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime" sortable/>
+          </el-table>
+        `,
+
+        data() {
+          return { testData: getTestData() };
+        }
+      });
+
+      const spy = sinon.spy();
+      vm.$refs.table.$on('sort-change', spy);
+      await waitImmediate();
+      expect(spy.notCalled).to.be.true;// not emit when mounted
+
+      const elm = vm.$el.querySelector('.caret-wrapper');
+      elm.click();
+      await waitImmediate();
+      expect(spy.calledOnce).to.be.true;
+      destroyVM(vm);
     });
   });
 
@@ -1144,27 +1176,6 @@ describe('Table', () => {
           }, DELAY);
         }, DELAY);
       });
-
-      it('sort-change', done => {
-        let result;
-        const vm = createTable('sortable="custom"', '', '', '', {
-          methods: {
-            sortChange(...args) {
-              result = args;
-            }
-          }
-        }, '@sort-change="sortChange"');
-        setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper');
-
-          elm.click();
-          setTimeout(_ => {
-            expect(result).to.exist;
-            destroyVM(vm);
-            done();
-          }, DELAY);
-        }, DELAY);
-      });
     });
 
     describe('click sortable column', () => {
@@ -1705,6 +1716,48 @@ describe('Table', () => {
       }, 50);
     });
 
+    it('toggleAllSelection debounce', async() => {
+      const spy = sinon.spy();
+      const vm = createVue({
+        template: `
+        <div>
+          <el-table ref="table" :data="testData" @selection-change="change">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" />
+          </el-table>
+          <el-table ref="table1" :data="testData1" @selection-change="change">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" />
+          </el-table>
+        </div>
+        `,
+
+        data() {
+          return {
+            testData: getTestData(),
+            testData1: getTestData()
+          };
+        },
+
+        methods: {
+          change(selection) {
+            spy(selection);
+          }
+        },
+
+        mounted() {
+          this.$refs.table.toggleAllSelection();
+          this.$refs.table1.toggleAllSelection();
+        }
+      }, true);
+
+      await wait(50);
+      expect(spy.callCount).to.be.equal(2);
+      expect(spy.args[0][0].length).to.be.equal(5);
+      expect(spy.args[1][0].length).to.be.equal(5);
+      destroyVM(vm);
+    });
+
     it('clearSelection', () => {
       const vm = createTable('selection-change');
       vm.$refs.table.toggleRowSelection(vm.testData[0]);
@@ -1792,6 +1845,41 @@ describe('Table', () => {
       vm.$refs.table.sort('director', 'ascending');
       await waitImmediate();
       assertSortIconCount(vm.$el, 'sorting icon is not one after sort same column');
+      destroyVM(vm);
+    });
+
+    it('setCurrentRow', async() => {
+      const vm = createVue({
+        template: `
+        <div>
+          <el-table ref="table" :data="testData" highlight-current-row>
+            <el-table-column prop="name" sortable />
+            <el-table-column prop="release" sortable />
+            <el-table-column prop="director" sortable />
+            <el-table-column prop="runtime" sortable />
+          </el-table>
+          <button class="clear" @click="clear">clear</button>
+        </div>
+        `,
+        data() {
+          return { testData: getTestData() };
+        },
+        methods: {
+          clear() {
+            this.$refs.table.setCurrentRow();
+          }
+        }
+      });
+
+      vm.$refs.table.setCurrentRow(vm.testData[1]);
+      await waitImmediate();
+      const secondRow = vm.$el.querySelectorAll('.el-table__row')[1];
+      expect(secondRow.classList.contains('current-row')).to.true;
+
+      vm.$el.querySelector('.clear').click();
+      await waitImmediate();
+      expect(secondRow.classList.contains('current-row')).to.false;
+
       destroyVM(vm);
     });
   });
@@ -1942,6 +2030,28 @@ describe('Table', () => {
         }, DELAY);
       }, DELAY);
     }, DELAY);
+  });
+
+  it('table append is visible in viewport if height is 100%', async() => {
+    const vm = createVue({
+      template: `
+      <el-table :data="[]" height="100%">
+        <el-table-column prop="name" label="片名" />
+        <el-table-column prop="release" label="发行日期" />
+        <el-table-column prop="director" label="导演" />
+        <el-table-column prop="runtime" label="时长（分）" />
+        <template slot="append">
+          <div class="append-content" style="height: 48px;">
+            append 区域始终出现在视图内
+          </div>
+        </template>
+      </el-table>
+      `
+    }, true);
+    await waitImmediate();
+    const emptyBlockEl = vm.$el.querySelector('.el-table__empty-block');
+    expect(emptyBlockEl.style.height).to.be.equal('calc(100% - 48px)');
+    destroyVM(vm);
   });
 
   describe('tree', () => {

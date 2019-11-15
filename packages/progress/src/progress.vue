@@ -35,7 +35,7 @@
           :d="trackPath"
           :stroke="stroke"
           fill="none"
-          stroke-linecap="round"
+          :stroke-linecap="strokeLinecap"
           :stroke-width="percentage ? relativeStrokeWidth : 0"
           :style="circlePathStyle"></path>
       </svg>
@@ -72,6 +72,10 @@
       strokeWidth: {
         type: Number,
         default: 6
+      },
+      strokeLinecap: {
+        type: String,
+        default: 'round'
       },
       textInside: {
         type: Boolean,

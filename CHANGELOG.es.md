@@ -1,105 +1,249 @@
 ## Changelog
 
+### 2.12.0
+
+*2019-08-29*
+
+#### Nuevas características
+
+- Popover
+  - Agregada la prop close-delay  (#16671 by @LachlanStuart)
+- Theme
+  - Añadida la extensión Chrome: Element Theme Extensión (#16686 by @iamkun)
+- Icon
+  - Añadido font-display a la declaración @font-face (#16805 by @iamfaizalandyka)
+
+#### Corrección de errores
+
+- Carousel
+  - Corregido el valor emitido por onChange (#16705 by @iamkun)
+- Notification
+  - Corrección de la modificación del objeto de opción entrante (#16704 by @iamkun)
+- DatePicker
+  - Agregado el className para la opción picker (#16632 by @iamkun)
+- DateTimePicker
+  - Corrección del  time-spinner que no se desplazaba a la posición correcta (#16854 by @jesse-li)
+- Table
+  - Evitar la propagación del click después del arrastre (#16850 by @ziyoung)
+  - Corregido una error en chrome que se producía cuando el css de thead tenia display: none  (#16956 by @luckyCao)
+  - Corregida la altura incorrecta de los bloques vacíos  (#16861 by @ziyoung)
+  - No hay lanzamiento de error cuando se llama a toggleExpansion (#16304 by @yyjjqq94)
+  - No se lanza el evento sort-change cuando esta montado (#17113 by @a631807682)
+  - Corregido que el setCurrentRow no borraba la linea resaltada (#16879 by @ziyoung)
+  - Corregido que expand-row-keys no funcionaba cuando los datos eran cargados asincrónicamente (#16899 by @ziyoung)
+  - Establecido toggleAllSelection como propiedad instanciada (#17137 by @ziyoung)
+- Tree
+  - Corregida la distancia entre label y checkbox (#16799 by @Hazlank)
+- Tabs
+  - Corregida la posición incorrecta de los item's del Tab (#16520 by @victorting)
+  - Corregido el error de que la pestaña activada estaba fuera del rango visual (#17033 by @nullptru)
+- Calendar
+  - Arreglado el problema de los días de la semana con i18n (#16772 by @ubitoffee)
+  - Corregido el error de localización (#17208 by @iamkun)
+- Cascader
+  - Corregido un error de visualización del CascaderPanel  (#16716 by @zhangHongEn)
+  - Corregido el problema de disable status y close button (#16224 by @yyjjqq94)
+- Input
+  - Arreglado el evento de composición coreana (#15069 by @MoonHyuk)
+  - Arreglado el evento click del botón clear que no se lanzaba cuando se usaba v-loading (#16576 by @a631807682)
+- Select
+  - No cambiaba el dropdown cuando se filtraba (#17205 by @luckyCao)
+- Transfer
+  - Arreglado un error de estilo (#17206 by @iamkun)
+- Dialog
+  - Actualizada las variables Sass  (#16365 by @haoranyu)
+- RadioGroup
+  - No produce HTML invalido en la tabla si el atributo 'is' es especificado (#17070 by @nullptru)
+- Divider
+  - Soporta clases personalizadas (#17078 by @island205)
+
+#### Optimización
+
+- Checkbox
+  - Mejorada la experiencia del lector de pantalla (#16575 by @tylertrotter)
+- Docs
+  - Actualizado changelog (#16773 by @SimonaliaChen)
+  - Actualizada la guía de contribución (#14800 by @sinchang)
+  - Arreglado typo en la documentación de Drawer (#16848 by @winkay)
+  - Actualizado el tema personalizado (#16983 by @iamkun)
+  - Agregada traducción en Esperanto (#16955 by @maxkoryukov)
+  - Actualizada la documentación de input-number sobre el evento change (#16316 by @luckyCao)
+  - Actualizada la documentación en Español 2.11.1 (#16961 by @Gonzalo2310)
+- I18n
+  - Eliminada la traducción de 'year' en idioma Catalán como en otros idiomas (#14722 by @oscaralbareda)
+  - Actualizado el changelog de las versiones 2.10.0 y 2.10.1 en Español (#16548 by @Gonzalo2310)
+  - Actualizado ar.js (#16653 by @l3op)
+- Test
+  - Corregir error ortográfico (#16672 by @boomler)
+  - Refractorizacion del unit test para usar data-uri (#16847 by @a631807682)
+- Types
+  - Corrección del tipo httprequest (#16633 by @luckyCao)
+
+### 2.11.1
+
+*2019-07-26*
+
+#### Corrección de errores
+
+- Image
+  - Corregido el componente Image para compatibilidad SSR (#16737 by @luckyCao)
+- Tarea
+  - Actualizado para compatibilidad con dart-sass by @LewisChennnnn)
+
+### 2.11.0
+
+*2019-07-25*
+
+#### Nuevas características
+
+- Drawer
+  - Agregado componente drawer (#16577 by @JeremyWuuuuu)
+
+#### Corrección de errores
+
+- Checkbox
+  - Mejora del selector css (#16006 by @Hazlank)
+- Tree
+  - Establecido el el-tree como genérico (#15934 by @JeremyWuuuuu)
+  - Establecido la prop  isCurrent como False (#15870 by @kkkisme)
+- Dropdown
+  - Corregido el color predeterminado de los split-button (#15931 by @JuniorTour)
+- Cascader
+  - Corregido un problema de actualización cuando el nivel 1 de children estaba vació (#16399 by @luckyCao)
+  - Ahora se muestra correctamente header cuando range esta especificado (#16354 by @ziyoung)
+  - Agregados valores por defecto cuando lazy es true (#16420 by @luckyCao)
+  - Solucionado problemas de visualización (#15935 by @junyiz)
+  - Expuestos los getCheckedNodes y corrección de errores en el cambio de opciones (#16709 by @SimonaliaChen)
+- Submenu
+  - Corregida la prop append-to-body (#16289 by @a631807682)
+- Table 
+  - Arreglado un fallo en la actualizacion de los datos de tree table (#16481 by @island205)
+- Select
+  - Arreglado un problema de fuga de memoria (#16463 by @island205)
+- InfiniteScroll
+  - Actualizada la nomenclatura y la documentacion (#16698 by @iamkun)
+- Avatar
+  - Arreglado que la imagen no se centraba verticalmente (#16489 by @luckyCao)
+- Dialog
+  - Agregado el atributo destroyOnClosee (#16455 by @ziyoung)
+- Image
+  - Agregada la función de vista previa grande de imágenes (#16333 by @luckyCao)
+
+#### Optimización
+
+- Documentación
+  - Arreglada la demo de dropdown (#16193 by @webxmsj)
+  - Corrección de errores tipográficos en las tablas de documentos (#15971 by @howiefh)
+- I18n
+  - Actualizada la traduccion del lenguage Thai (#16689 by @ponkrit)
+- Tareas
+  - Actualizada la api base del tema (#16607 by @iamkun)
+  - Añadido token del formulario del tema (#16699 by @iamkun)
+  - Marcar todos los accesos internos del usuario (#16609 by @iamkun)
+  - Corrección del error de anclaje del documento (#16692 by @iamkun)
+
 ### 2.10.1
 
-#### Bug fixes
+*2019-07-02*
+
+#### Corrección de errores
+
 
 - Table
-  - Fix sort icon (#15439 by @bezany)
-  - Fix layout breaks when append slot exists (#16332 by @ziyoung)
-  - Fix showOverflowTooltip not reactive (#16295 by @a631807682)
-  - Register scrollbar in filter-panel (#16246 by @ziyoung)
-- Chore
-  - Fix 2.9 docs (#16233 by @ziyoung)
-  - Fix index page theme intro english css style issue (#16254 by @iamkun)
+  - Corregido el icono de ordenación  (#15439 by @bezany)
+  - Corregidas las rupturas del layout cuando existía un slot (#16332 by @ziyoung)
+  - Corregido showOverflowTooltip no era reactivo (#16295 by @a631807682)
+  - Registrada la scrollbar en el panel de filtro (#16246 by @ziyoung)
+- Tareas
+  - Arreglada la documentación 2.9 (#16233 by @ziyoung)
+  - Corregido el índice de la página de introducción del tema en inglés que tenia un error en los estilos css  (#16254 by @iamkun)
 
-#### Optimization
+#### Optimización
 
 - Tag
-  - Compatible with IE (#16334 by @ziyoung)
-- Chore
-  - Update Dingtalk Group QR image (#16236 by @iamkun)
+  - Compatible con IE (#16334 by @ziyoung)
+- Tarea
+  - Actualizada la imagen QR de Dingtalk Group (#16236 by @iamkun)
 - Doc
-  - Update online theme roller doc (#16244 by @iamkun)
+  - Actualizada la documentación online del theme roller (#16244 by @iamkun)
 
 ### 2.10.0
 
 *2019-06-25*
 
-#### New features
+#### Nuevas características
 
 - I18n
-  - Added Uzbek language (#15796 by @ogabek96)
+  - Añadido idioma Uzbeko (#15796 by @ogabek96)
 - Calendar
-  - Add first-day-of-week attribute (#16047 by @ziyoung)
+  - Añadido el atributo del primer día de la semana (#16047 by @ziyoung)
 - Avatar
-  - Add avatar component (#16144 by @luckyCao)
+  - Agregado componente Avatar (#16144 by @luckyCao)
 - Upload:
-  - Add capability to customize thumbnail template (#13192 by @victorzhuk)
+  - Añade capacidad para personalizar la plantilla de miniaturas (#13192 by @victorzhuk)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Tree
-  - Not highlight tree node when currentKey is null (#15668 by @yyjjqq94)
-  - Fix issue #15538 caused by two Tree sharing the same data. (#15615 by @VanMess)
+  - No resaltar el nodo de árbol cuando currentKey es nulo (#15668 by @yyjjqq94)
+  - Solucionado el problema #15538 causado por dos Tree que compartian los mismos datos.(#15615 by @VanMess)
 - Upload
-  - Update the parameter `fileList` type (#15716 by @underfin)
+  - Actualizado el tipo del parámetro `fileList`  (#15716 by @underfin)
 - Table
-  - Fix loading icon not display (#15868 by @ziyoung)
-  - Fix background color of complex table when hovering (#15504 by @cnlon)
-  - Fix current-row-key and select event bug (#15983 by @ziyoung)
-  - Height accepts more units (#16013 by @ziyoung)
-  - Fix reserve-selection not work (#16135 by @ziyoung)
+  - Solucionado que el icono de loading no se mostraba (#15868 by @ziyoung)
+  - Corregido el color de fondo de una tabla compleja cuando se desplaza el cursor (#15504 by @cnlon)
+  - Corregido current-row-key y el bug del evento select (#15983 by @ziyoung)
+  - Height acepta más unidades (#16013 by @ziyoung)
+  - Solucionado reserve-selection no funcionaba (#16135 by @ziyoung)
 - Docs
-  - Fix Divider attribute type in zh-cn (#15889 by @haoranyu)
+  - Corregido el tipo de atributo Divider en zh-cn  (#15889 by @haoranyu)
+  - Se elimina una etiqueta html de cierre incorrecta y el código de bloque vacío (#16194 por @Alexeykhr)
 - Menu
-  - Fixed submenu hidden bug after adding popper-append-to-body (#15391 by @PanJiaChen)
+  - Corregido un error oculto en el submenú después de añadir popper-append-to-body (#15391 by @PanJiaChen)
 - Select
-  - Fix initialInputHeight (#15989 by @yyjjqq94)
-  - Fix default-first-option behavior when typing Chinese (#15431 by @VanMess)
-  - fix double import problem (#16215 by @lengband)
+  - Arreglado initialInputHeight (#15989 by @yyjjqq94)
+  - Corregido el comportamiento de default-first-option cuando se escribe chino (#15431 by @VanMess)
+  - Corregido el problema de importación doble (#16215 by @lengband)
 - Message
-  - Add type def for offset option (#16027 by @matjaz)
+  - Añadida la opción type def para offset (#16027 by @matjaz)
 - Timeline
-  - Fix reverse broken (#16091 by @ziyoung)
+  - Arreglado reverso roto (#16091 by @ziyoung)
 - Slider
-  - Fix #15545 by adding explains about "input" event in Chinese (#15588 by @VanMess)
+  - Corregido #15545 agregando explicaciones sobre el evento "input" en chino (#15588 by @VanMess)
 - InfiniteScroll
-  - Update package name (#16125 by @iamkun)
+  - Actualización del nombre del paquete (#16125 by @iamkun)
 - MessageBox
-  - Fix  distinguishCancelAndClose action not same as docs bug (#15438 by @qingdengyue)
+  - Arreglado el bug de distinguishCancelAndClose, la acción no era la misma que la documentada (#15438 by @qingdengyue)
 - PopupManager
-  - Fix z-index cannot be rewritten at first using (#15738 by @luckyCao)
-- Docs
-  - Delete an incorrect closing html tag and empty block code (#16194 by @Alexeykhr)
-- Chore
-  - Update test api host (#15807 by @iamkun)
+  - Arreglado que el z-index no podía ser reescrito la primera vez que se usaba (#15738 by @luckyCao)
+- Tarea
+  - Actualizado el test del api host  (#15807 by @iamkun)
 
-#### Optimization
+#### Optimizacion
 
 - Tree
-  - Modify loop conditions to improve performance (#15699 by @KingJeason)
+  - Modificar las condiciones del bucle para mejorar el rendimiento (#15699 by @KingJeason)
 - Theme
-  - Refine GA track & Update footer link forward to online theme roller (#16007 by @island205)
+  - Refinado  GA track & actualizado el link del pie que lleva al theme roller online (#16007 by @island205)
 - Badge
-  - Update badge prop check (#16198 by @iamkun)
+  - Actualizado el check del prop badge (#16198 by @iamkun)
 - Avatar
-  - Update theme config var (#16202 by @luckyCao)
+  - Actualizado el var del config del theme (#16202 by @luckyCao)
 - I18n
-  - Update pt-br.js (#15776 by @gigioSouza)
-  - Update Farsi translation (#15881 by @pamenary)
+  - Actualizada la traducción del portugués (#15776 by @gigioSouza)
+  - Actualizada la traducción del idioma Farsi (#15881 by @pamenary)
 - Docs
-  - Add missing components in quickstart (#16063 by @pape2016)
-  - Update french translation (#16208 by @blombard)
-  - Add description $slots.default (#15444 by @Alexeykhr)
-  - Update Spanish Doc 2.9.1 (#15840 by @Gonzalo2310)
-  - Fix spelling mistakes in fr (#15837 by @blombard)
-  - Update changelog 2.9.2 Spanish (#16185 by @Gonzalo2310)
+  - Agregado componentes faltantes en el quick start (#16063 by @pape2016)
+  - Actualizada la traducción al francés (#16208 by @blombard)
+  - Agregada descripción $slots.default (#15444 by @Alexeykhr)
+  - Actualizada la Doc en Español 2.9.1 (#15840 by @Gonzalo2310)
+  - Corrección de errores ortográficos en fr (#15837 by @blombard)
+  - Actualizado el changelog 2.9.2 en español (#16185 by @Gonzalo2310)
 
 #### Breaking changes
 
 - Form
-  - Remove success status (#16159 by @ziyoung)
+  - Eliminado el estado success (#16159 by @ziyoung)
 
 ### 2.9.2
 

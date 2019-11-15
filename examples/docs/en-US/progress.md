@@ -170,3 +170,4 @@ You also can specify `type` attribute to `dashboard` to use dashboard progress b
 | color  | background color of progress bar. Overrides `status` prop | string/function/array | — | '' |
 | width | the canvas width of circle progress bar | number | — | 126 |
 | show-text | whether to show percentage | boolean | — | true |
+| stroke-linecap  | circle/dashboard type shape at the end path | string | butt/round/square | round |

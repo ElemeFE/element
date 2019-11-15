@@ -75,9 +75,11 @@ import { ElIcon } from './icon'
 import { ElCalendar } from './calendar'
 import { ElImage } from './image'
 import { ElBacktop } from './backtop'
-import { ElInfiniteScroll } from './infiniteScroll'
+import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
+import { ElDrawer } from './drawer'
+import { ElPopconfirm } from './popconfirm'
 
 export interface InstallationOptions {
   locale: any,
@@ -336,3 +338,9 @@ export class PageHeader extends ElPageHeader {}
 
 /** Avatar Component */
 export class Avatar extends ElAvatar {}
+
+/** Drawer Component */
+export class Drawer extends ElDrawer {}
+
+/** Popconfirm Component */
+export class Popconfirm extends ElPopconfirm {}

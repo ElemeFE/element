@@ -188,7 +188,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 
 | Nom | Description | Paramètres |
 |----| ---- | -----|
-| change | Se déclenche quand la valeur change. | La nouvelle valeur. |
+| change | Se déclenche quand la valeur change. | currentValue, oldValue |
 | blur | Se déclenche quand le champ perds le focus. | (event: Event) |
 | focus | Se déclenche quand le champ a le focus. | (event: Event) |
 

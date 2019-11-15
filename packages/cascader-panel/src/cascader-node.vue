@@ -75,8 +75,9 @@
       },
 
       handleCheckChange() {
-        const { panel, value } = this;
+        const { panel, value, node } = this;
         panel.handleCheckChange(value);
+        panel.handleExpand(node);
       },
 
       handleMultiCheckChange(checked) {
@@ -204,20 +205,19 @@
       const disabled = !checkStrictly && isDisabled;
       const events = { on: {} };
 
-      if (!isLeaf) {
-        if (expandTrigger === 'click') {
-          events.on.click = this.handleExpand;
-        } else {
-          events.on.mouseenter = e => {
-            this.handleExpand();
-            this.$emit('expand', e);
-          };
-          events.on.focus = e => {
-            this.handleExpand();
-            this.$emit('expand', e);
-          };
-        }
-      } else if (!isDisabled && !checkStrictly && !multiple) {
+      if (expandTrigger === 'click') {
+        events.on.click = this.handleExpand;
+      } else {
+        events.on.mouseenter = e => {
+          this.handleExpand();
+          this.$emit('expand', e);
+        };
+        events.on.focus = e => {
+          this.handleExpand();
+          this.$emit('expand', e);
+        };
+      }
+      if (isLeaf && !isDisabled && !checkStrictly && !multiple) {
         events.on.click = this.handleCheckChange;
       }
 

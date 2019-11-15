@@ -249,6 +249,10 @@
               "title": "Popover 弹出框"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm 气泡确认框"
+            },
+            {
               "path": "/card",
               "title": "Card 卡片"
             },
@@ -283,6 +287,10 @@
             {
               "path": "/infiniteScroll",
               "title": "InfiniteScroll 无限滚动"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer 抽屉"
             }
           ]
         }
@@ -535,6 +543,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -573,6 +585,10 @@
             {
               "path": "/avatar",
               "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
@@ -825,6 +841,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -863,6 +883,10 @@
             {
               "path": "/avatar",
               "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
@@ -1115,6 +1139,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -1153,6 +1181,10 @@
             {
               "path": "/avatar",
               "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
