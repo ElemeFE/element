@@ -113,7 +113,7 @@
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
   import {isKorean} from 'element-ui/src/utils/shared';
-
+  import {getActiveElement, setActiveElement} from './detectActiveElement';
   export default {
     name: 'ElInput',
 
@@ -303,6 +303,7 @@
         };
       },
       handleBlur(event) {
+        setActiveElement(null);
         this.focused = false;
         this.$emit('blur', event);
         if (this.validateEvent) {
@@ -334,6 +335,9 @@
         input.value = this.nativeInputValue;
       },
       handleFocus(event) {
+        if (getActiveElement() === document.activeElement) {
+          return;
+        }
         this.focused = true;
         this.$emit('focus', event);
       },
