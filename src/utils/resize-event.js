@@ -1,5 +1,5 @@
 import ResizeObserver from 'resize-observer-polyfill';
-
+// https://zhuanlan.zhihu.com/p/24887312
 const isServer = typeof window === 'undefined';
 
 /* istanbul ignore next */

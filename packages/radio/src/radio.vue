@@ -20,6 +20,7 @@
         'is-checked': model === label
       }"
     >
+      <!-- 模拟选中的圆点 -->
       <span class="el-radio__inner"></span>
       <input
         ref="radio"

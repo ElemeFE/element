@@ -14,7 +14,7 @@
       TabBar
     },
 
-    inject: ['rootTabs'],
+    inject: ['rootTabs'],//有tabs.vue的provide提供的
 
     props: {
       panes: Array,
@@ -54,6 +54,7 @@
     },
 
     methods: {
+      // 左右滑动，当tab太长时
       scrollPrev() {
         const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
         const currentOffset = this.navOffset;
@@ -86,14 +87,15 @@
         if (!activeTab) return;
         const navScroll = this.$refs.navScroll;
         const isHorizontal = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1;
-        const activeTabBounding = activeTab.getBoundingClientRect();
-        const navScrollBounding = navScroll.getBoundingClientRect();
+        // div布局 el-tabs__nav-scroll，ref=navScroll 》 class="el-tabs__nav ref=nav 
+        const activeTabBounding = activeTab.getBoundingClientRect();//动画的div
+        const navScrollBounding = navScroll.getBoundingClientRect();//整个tabs
         const maxOffset = isHorizontal
           ? nav.offsetWidth - navScrollBounding.width
           : nav.offsetHeight - navScrollBounding.height;
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
-
+        // 让活动也完全显示
         if (isHorizontal) {
           if (activeTabBounding.left < navScrollBounding.left) {
             newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
@@ -140,6 +142,7 @@
         let currentIndex, tabList;
         if ([37, 38, 39, 40].indexOf(keyCode) !== -1) { // 左右上下键更换tab
           tabList = e.currentTarget.querySelectorAll('[role=tab]');
+          //currentTarget和target的区别，currentTarget始终是监听事件者，而target是事件的真正发出者。
           currentIndex = Array.prototype.indexOf.call(tabList, e.target);
         } else {
           return;
@@ -157,8 +160,8 @@
             nextIndex = 0;
           }
         }
-        tabList[nextIndex].focus(); // 改变焦点元素
-        tabList[nextIndex].click(); // 选中下一个tab
+        tabList[nextIndex].focus(); // 改变焦点元素   HTMLElement.focus()方法可以设置指定元素获取焦点。
+        tabList[nextIndex].click(); // 选中下一个tab 
         this.setFocus();
       },
       setFocus() {
@@ -180,9 +183,11 @@
         }
       },
       windowBlurHandler() {
+        console.log('windowBlurHandler')
         this.focusable = false;
       },
       windowFocusHandler() {
+        console.log('windowFocusHandler')
         setTimeout(() => {
           this.focusable = true;
         }, 50);
@@ -215,7 +220,7 @@
           <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
         ] : null;
 
-      const tabs = this._l(panes, (pane, index) => {
+      const tabs = this._l(panes, (pane, index) => {//this._l相当于map，是vue封装的，在render中可以使用
         let tabName = pane.name || pane.index || index;
         const closable = pane.isClosable || editable;
 
@@ -245,7 +250,7 @@
             ref="tabs"
             tabindex={tabindex}
             refInFor
-            on-focus={ ()=> { setFocus(); }}
+            on-focus={ ()=> { setFocus(); }} //vue jsx写法跟react区别
             on-blur ={ ()=> { removeFocus(); }}
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
@@ -266,7 +271,7 @@
               role="tablist"
               on-keydown={ changeTab }
             >
-              {!type ? <tab-bar tabs={panes}></tab-bar> : null}
+              {!type ? <tab-bar tabs={panes}></tab-bar> : null} //下划线的标志，抽成了组件
               {tabs}
             </div>
           </div>

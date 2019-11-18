@@ -9,18 +9,18 @@
     },
 
     props: {
-      type: String,
+      type: String,//风格类型card/border-card
       activeName: String,
       closable: Boolean,
       addable: Boolean,
-      value: {},
+      value: {}, //绑定值，选中选项卡的 name.有v-model传入双向绑定
       editable: Boolean,
-      tabPosition: {
+      tabPosition: {//	top/right/bottom/left	
         type: String,
         default: 'top'
       },
-      beforeLeave: Function,
-      stretch: Boolean
+      beforeLeave: Function,//切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。
+      stretch: Boolean //标签的宽度是否自撑开
     },
 
     provide() {
@@ -69,27 +69,28 @@
           this.panes = [];
         }
       },
+      // Tabs Events
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
         this.setCurrentName(tabName);
-        this.$emit('tab-click', tab, event);
+        this.$emit('tab-click', tab, event);//tab 被选中时触发，回调参数tab为实例
       },
       handleTabRemove(pane, ev) {
         if (pane.disabled) return;
         ev.stopPropagation();
         this.$emit('edit', pane.name, 'remove');
-        this.$emit('tab-remove', pane.name);
+        this.$emit('tab-remove', pane.name);//点击 tab 移除按钮后触发
       },
       handleTabAdd() {
         this.$emit('edit', null, 'add');
-        this.$emit('tab-add');
+        this.$emit('tab-add');//点击 tabs 的新增按钮后触发
       },
       setCurrentName(value) {
         const changeCurrentName = () => {
           this.currentName = value;
           this.$emit('input', value);
         };
-        if (this.currentName !== value && this.beforeLeave) {
+        if (this.currentName !== value && this.beforeLeave) {//切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。
           const before = this.beforeLeave(value, this.currentName);
           if (before && before.then) {
             before
