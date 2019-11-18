@@ -448,7 +448,7 @@
     },
     mounted() {
       this.list = this.states.map(item => {
-        return { value: item, label: item };
+        return { value: `value:${item}`, label: `label:${item}` };
       });
     },
     methods: {

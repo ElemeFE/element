@@ -218,6 +218,24 @@ describe('Drawer', () => {
     expect(vm.$el.querySelector(`.${classes}`)).to.exist;
   });
 
+  it('should not render header when withHeader attribute is false', () => {
+    vm = createVue({
+      template: `
+        <el-drawer :title='title' :visible='visible' ref='drawer' :with-header='false'>
+           <span>${content}</span>
+        </el-drawer>
+      `,
+      data() {
+        return {
+          title,
+          visible: true
+        };
+      }
+    });
+
+    expect(vm.$el.querySelector('.el-drawer__header')).to.not.exist;
+  });
+
   describe('directions', () => {
     const renderer = direction => {
       return createVue({

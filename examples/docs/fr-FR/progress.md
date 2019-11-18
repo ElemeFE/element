@@ -171,3 +171,4 @@ Vous pouvez également spécifier l'attribut `type` de `dashboard` pour utiliser
 | color  | La couleur de fon de la barre. Écrase `status`. | string/function/array | — | '' |
 | width | La largeur du canvas dans le cas d'une barre circulaire. | number | — | 126 |
 | show-text | Si le pourcentage doit être affiché. | boolean | — | true |
+| stroke-linecap  | circle/dashboard type shape at the end path | string | butt/round/square | round |
