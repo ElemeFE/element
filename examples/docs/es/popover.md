@@ -142,6 +142,7 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | title          | título del popover                       | string         | —                                        | —                                        |
 | content        | contenido del popover, puede ser sustituido por un `slot` | string         | —                                        | —                                        |
 | width          | ancho del popover                        | string, number | —                                        | Min width 150px                          |
+| max-width       | anchura máxima                      | string, number | —                                        | Min width 150px                          |
 | placement      | posición del popover en la pantalla      | string         | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                   |
 | disabled       | si el popover está deshabilitado         | boolean        | —                                        | false                                    |
 | value / v-model | si el popover está visible               | Boolean        | —                                        | false                                    |

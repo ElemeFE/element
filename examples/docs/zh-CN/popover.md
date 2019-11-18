@@ -140,6 +140,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 |  title              | 标题 | String | — | — |
 |  content        |  显示的内容，也可以通过 `slot` 传入 DOM   | String            | — | — |
 |  width        |  宽度  | String, Number            | — | 最小宽度 150px |
+|  max-width        |  最大宽度  | String, Number            | — |  |
 |  placement        |  出现位置  | String | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 |  disabled       |  Popover 是否可用  | Boolean           | — |  false |
 |  value / v-model        |  状态是否可见  | Boolean           | — |  false |

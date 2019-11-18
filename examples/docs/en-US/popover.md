@@ -143,6 +143,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  title              | popover title | string | — | — |
 |  content        |  popover content, can be replaced with a default `slot`    | string            | — | — |
 |  width        |  popover width  | string, number            | — | Min width 150px |
+|  max-width        |  popover max width  | String, Number            | — |  |
 |  placement        |  popover placement  | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 |  disabled       |  whether Popover is disabled  | boolean    | — |  false |
 |  value / v-model        |  whether popover is visible  | Boolean           | — |  false |

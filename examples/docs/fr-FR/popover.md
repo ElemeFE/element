@@ -144,6 +144,7 @@ Vous pouvez aussi imbriquer des opérations. Procéder ainsi est plus léger que
 | title | Titre du popover. | string | — | — |
 | content | Contenu du popover, peut être remplacé par un `slot` | string | — | — |
 | width | Largeur du popover. | string, number  | — | Min width 150px |
+|  max-width      |  Largeur maximale  | String, Number            | — |  |
 | placement | Emplacement du popover. | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
 | disabled | Si le popover est désactivé. | boolean | — |  false |
 | value / v-model | Si le popover est visible. | Boolean | — |  false |
