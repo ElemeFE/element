@@ -120,11 +120,17 @@ export default {
   mounted() {
     if (this.native) return;
     this.$nextTick(this.update);
-    !this.noresize && addResizeListener(this.$refs.resize, this.update);
+    if (!this.noresize) {
+      addResizeListener(this.$refs.resize, this.update);
+      addResizeListener(this.$refs.wrap, this.update);
+    }
   },
 
   beforeDestroy() {
     if (this.native) return;
-    !this.noresize && removeResizeListener(this.$refs.resize, this.update);
+    if (!this.noresize) {
+      removeResizeListener(this.$refs.resize, this.update);
+      removeResizeListener(this.$refs.wrap, this.update);
+    }
   }
 };
