@@ -669,6 +669,7 @@
         // NOTE: this is a hack to reset {min, max}Date on picker open.
         // TODO: correct way of doing so is to refactor {min, max}Date to be dependent on value and internal selection state
         //       an alternative would be resetView whenever picker becomes visible, should also investigate date-panel's resetView
+        if (this.minDate && this.maxDate == null) this.rangeState.selecting = false;
         this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null;
         this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null;
       }

@@ -1,4 +1,5 @@
 import { kebabCase } from 'element-ui/src/utils/util';
+// 主要判断方法或者组件属性是否被移除
 /**
  * Show migrating guide in browser console.
  *
@@ -25,6 +26,7 @@ export default {
     if (process.env.NODE_ENV === 'production') return;
     if (!this.$vnode) return;
     const { props = {}, events = {} } = this.getMigratingConfig();
+    // see $vnode detail https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js
     const { data, componentOptions } = this.$vnode;
     const definedProps = data.attrs || {};
     const definedEvents = componentOptions.listeners || {};

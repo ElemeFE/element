@@ -182,7 +182,7 @@ describe('Table', () => {
         methods: {
           tableRowStyle({row, rowIndex}) {
             if (rowIndex === 1) {
-              return { height: '60px' };
+              return { height: '60px', display: 'none' };
             }
 
             return null;
@@ -191,8 +191,12 @@ describe('Table', () => {
       });
 
       setTimeout(_ => {
-        expect(vm.$el.querySelector('.el-table__body tr:nth-child(1)').style.height).to.equal('');
-        expect(vm.$el.querySelector('.el-table__body tr:nth-child(2)').style.height).to.equal('60px');
+        let child1 = vm.$el.querySelector('.el-table__body tr:nth-child(1)');
+        let child2 = vm.$el.querySelector('.el-table__body tr:nth-child(2)');
+        expect(child1.style.height).to.equal('');
+        expect(child1.style.display).to.equal('');
+        expect(child2.style.height).to.equal('60px');
+        expect(child2.style.display).to.equal('none');
         destroyVM(vm);
         done();
       }, DELAY);
