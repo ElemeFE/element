@@ -49,7 +49,7 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
-
+    // $on：监听当前实例上的自定义事件,radio-button,radio-group的handleChange事件
     created() {
       this.$on('handleChange', value => {
         this.$emit('change', value);
@@ -57,8 +57,8 @@
     },
     mounted() {
       // 当radioGroup没有默认选项时，第一个可以选中Tab导航
-      const radios = this.$el.querySelectorAll('[type=radio]');
-      const firstLabel = this.$el.querySelectorAll('[role=radio]')[0];
+      const radios = this.$el.querySelectorAll('[type=radio]'); //获取第radios
+      const firstLabel = this.$el.querySelectorAll('[role=radio]')[0]; //获取第一个label
       if (![].some.call(radios, radio => radio.checked) && firstLabel) {
         firstLabel.tabIndex = 0;
       }
@@ -103,6 +103,7 @@
     },
     watch: {
       value(value) {
+        // 发送给form-item组件的事件
         this.dispatch('ElFormItem', 'el.form.change', [this.value]);
       }
     }

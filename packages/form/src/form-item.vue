@@ -60,25 +60,32 @@
     inject: ['elForm'],
 
     props: {
-      label: String,
-      labelWidth: String,
+      label: String,//标签文本
+      labelWidth: String,//表单域标签的的宽度，例如 '50px'。支持 auto。
+      // 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的	
+      // 传入 Form 组件的 model 中的字段
       prop: String,
-      required: {
+      required: {//是否必填，如不设置，则会根据校验规则自动生成
         type: Boolean,
         default: undefined
       },
+      // 表单验证规则	
       rules: [Object, Array],
+      // 表单域验证错误信息, 设置该值会使表单验证状态变为error，并显示该错误信息
       error: String,
       validateStatus: String,
       for: String,
+      // 以行内形式展示校验信息
       inlineMessage: {
         type: [String, Boolean],
         default: ''
       },
+      // 是否显示校验错误信息
       showMessage: {
         type: Boolean,
         default: true
       },
+      // 用于控制该表单域下组件的尺寸		medium / small / mini
       size: String
     },
     components: {
@@ -87,6 +94,7 @@
     },
     watch: {
       error: {
+        // TODO: immediate https://juejin.im/post/5ae91fa76fb9a07aa7677543 
         immediate: true,
         handler(value) {
           this.validateMessage = value;
@@ -127,6 +135,7 @@
         }
         return ret;
       },
+      // TODO1:获取最近的elform组件
       form() {
         let parent = this.$parent;
         let parentName = parent.$options.componentName;
@@ -139,6 +148,7 @@
         }
         return parent;
       },
+      // 
       fieldValue() {
         const model = this.form.model;
         if (!model || !this.prop) { return; }
@@ -250,7 +260,9 @@
         this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
+        // 由父组件el-form传递的素有的集合
         let formRules = this.form.rules;
+        // 自身传递进来的，form-item属性
         const selfRules = this.rules;
         const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
@@ -289,6 +301,7 @@
         const rules = this.getRules();
 
         if (rules.length || this.required !== undefined) {
+          // inputVue触发的事件监测
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }

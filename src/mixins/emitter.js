@@ -12,6 +12,7 @@ function broadcast(componentName, eventName, params) {
 export default {
   methods: {
     dispatch(componentName, eventName, params) {
+      // 根元素阻止
       var parent = this.$parent || this.$root;
       var name = parent.$options.componentName;
 

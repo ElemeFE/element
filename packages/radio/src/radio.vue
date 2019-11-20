@@ -14,13 +14,14 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
+  <!-- aria属性，无障碍属性 -->
     <span class="el-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
     >
-      <!-- 模拟选中的圆点 -->
+      <!-- 模拟选中的圆点，input为原生丑陋的小圆点，opacity:0 -->
       <span class="el-radio__inner"></span>
       <input
         ref="radio"
@@ -78,6 +79,7 @@
       };
     },
     computed: {
+      // 是否是组选择框，找到其父组件
       isGroup() {
         let parent = this.$parent;
         while (parent) {
@@ -100,6 +102,7 @@
           } else {
             this.$emit('input', val);
           }
+          // 只在当前显示勾选，传值给父组件
           this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
         }
       },
