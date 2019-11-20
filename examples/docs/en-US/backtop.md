@@ -52,6 +52,8 @@ Display area is 40px \* 40px.
 | visibility-height | the button will not show until the scroll height reaches this value | number |                 | 200     |
 | right             | right distance                                                      | number |                 | 40      |
 | bottom            | bottom distance                                                     | number |                 | 40      |
+| duration    |     | scroll to top will cost this time, millisecond
+     | number |                 | 500     |
 
 ### Events
 

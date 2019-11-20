@@ -52,6 +52,7 @@
 | visibility-height | 滚动高度达到此参数值才出现       | number |        | 200    |
 | right             | 控制其显示位置, 距离页面右边距   | number |        | 40     |
 | bottom            | 控制其显示位置, 距离页面底部距离 | number |        | 40     |
+| duration          | 完成滚动到顶部需要花费的时间, 毫秒     | number |        | 500    |
 
 ### Events
 
