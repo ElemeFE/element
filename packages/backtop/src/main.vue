@@ -1,7 +1,7 @@
 <template>
   <transition name="el-fade-in">
     <div
-      v-if="visible"
+      v-show="visible"
       @click.stop="handleClick"
       :style="{
         'right': styleRight,
@@ -39,6 +39,10 @@ export default {
     bottom: {
       type: Number,
       default: 40
+    },
+    duration: {
+      type: Number,
+      default: 500
     }
   },
 
@@ -68,7 +72,7 @@ export default {
   methods: {
     init() {
       this.container = document;
-      this.el = document.documentElement;
+      // this.el = document.documentElement;
       if (this.target) {
         this.el = document.querySelector(this.target);
         if (!this.el) {
@@ -78,20 +82,28 @@ export default {
       }
     },
     onScroll() {
-      const scrollTop = this.el.scrollTop;
+      const scrollTop = this.getScrollTop();
       this.visible = scrollTop >= this.visibilityHeight;
+    },
+    getScrollTop() {
+      if (this.el) {
+        return this.el.scrollTop;
+      }
+      return document.documentElement.scrollTop || document.body.scrollTop;
     },
     handleClick(e) {
       this.scrollToTop();
       this.$emit('click', e);
     },
     scrollToTop() {
-      const el = this.el;
+      const el = this.el
+        ? this.el
+        : (document.body.scrollTop ? document.body : document.documentElement);
       const beginTime = Date.now();
       const beginValue = el.scrollTop;
       const rAF = window.requestAnimationFrame || (func => setTimeout(func, 16));
       const frameFunc = () => {
-        const progress = (Date.now() - beginTime) / 500;
+        const progress = (Date.now() - beginTime) / this.duration;
         if (progress < 1) {
           el.scrollTop = beginValue * (1 - easeInOutCubic(progress));
           rAF(frameFunc);
