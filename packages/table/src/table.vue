@@ -655,6 +655,10 @@
     },
 
     destroyed() {
+      // store是一个Vue实例，调用$destroy解绑和释放监听。
+      if (this.store) {
+        this.store.$destroy();
+      }
       this.unbindEvents();
     },
 
