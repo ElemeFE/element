@@ -93,7 +93,9 @@
       handleReset() {
         this.filteredValue = [];
         this.confirmFilter(this.filteredValue);
-        this.handleOutsideClick();
+        if (this.filterCloseReset) {
+          this.handleOutsideClick();
+        }
       },
 
       handleSelect(filterValue) {
@@ -128,6 +130,10 @@
     computed: {
       filters() {
         return this.column && this.column.filters;
+      },
+
+      filterCloseReset() {
+        return this.column && this.column.filterCloseReset;
       },
 
       filterValue: {

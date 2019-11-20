@@ -990,7 +990,7 @@
 
 对表格进行筛选，可快速查找到自己想看的数据。
 
-:::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入三个参数：`value`, `row` 和 `column`。
+:::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入三个参数：`value`, `row` 和 `column`, `filter-close-reset`属性是一个逻辑值，可以决定点击重置按钮是否关闭筛选弹窗。
 ```html
 <template>
   <el-button @click="resetDateFilter">清除日期过滤器</el-button>
@@ -1954,6 +1954,7 @@
 | filter-multiple | 数据过滤的选项是否多选 | Boolean | — | true |
 | filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row, column) | — | — |
 | filtered-value | 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性。 | Array | — | — |
+| filter-close-reset | 点击重置按钮是否关闭筛选弹窗 | Boolean | - | - |
 
 ### Table-column Scoped Slot
 | name | 说明 |

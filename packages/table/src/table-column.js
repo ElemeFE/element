@@ -47,6 +47,10 @@ export default {
       type: Boolean,
       default: true
     },
+    filterCloseReset: {
+      type: Boolean,
+      default: true
+    },
     index: [Number, Function],
     sortOrders: {
       type: Array,
@@ -195,7 +199,7 @@ export default {
     },
 
     registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
+      const props = ['label', 'property', 'filters', 'filterMultiple', 'filterCloseReset', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
       // 一些属性具有别名
       const aliases = {
         prop: 'property',
@@ -281,7 +285,7 @@ export default {
     const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];
     const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
     const selectProps = ['selectable', 'reserveSelection'];
-    const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];
+    const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterCloseReset', 'filterOpened', 'filteredValue', 'filterPlacement'];
 
     let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
     column = mergeOptions(defaults, column);
