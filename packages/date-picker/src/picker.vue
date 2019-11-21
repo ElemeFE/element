@@ -809,6 +809,7 @@ export default {
         this.mountPicker();
       }
       this.pickerVisible = this.picker.visible = true;
+
       this.updatePopper();
 
       this.picker.value = this.parsedValue;
@@ -861,8 +862,7 @@ export default {
       };
       updateOptions();
       this.unwatchPickerOptions = this.$watch('pickerOptions', () => updateOptions(), { deep: true });
-      // this.$el.appendChild(this.picker.$el);
-      document.body.appendChild(this.picker.$el);
+      this.$el.appendChild(this.picker.$el);
       this.picker.resetView && this.picker.resetView();
 
       this.picker.$on('dodestroy', this.doDestroy);
