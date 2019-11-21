@@ -407,6 +407,7 @@ export default {
 
   watch: {
     pickerVisible(val) {
+      debugger
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
@@ -585,6 +586,7 @@ export default {
 
   methods: {
     focus() {
+      debugger
       if (!this.ranged) {
         this.$refs.reference.focus();
       } else {
@@ -725,6 +727,7 @@ export default {
     },
 
     handleFocus() {
+      console.log('handelfocus')
       const type = this.type;
 
       if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
@@ -809,7 +812,6 @@ export default {
         this.mountPicker();
       }
       this.pickerVisible = this.picker.visible = true;
-
       this.updatePopper();
 
       this.picker.value = this.parsedValue;
@@ -862,7 +864,8 @@ export default {
       };
       updateOptions();
       this.unwatchPickerOptions = this.$watch('pickerOptions', () => updateOptions(), { deep: true });
-      this.$el.appendChild(this.picker.$el);
+      // this.$el.appendChild(this.picker.$el);
+      document.body.appendChild(this.picker.$el);
       this.picker.resetView && this.picker.resetView();
 
       this.picker.$on('dodestroy', this.doDestroy);
@@ -874,6 +877,7 @@ export default {
       });
 
       this.picker.$on('select-range', (start, end, pos) => {
+        debugger
         if (this.refInput.length === 0) return;
         if (!pos || pos === 'min') {
           this.refInput[0].setSelectionRange(start, end);
@@ -893,6 +897,7 @@ export default {
           this.unwatchPickerOptions();
         }
         this.picker.$el.parentNode.removeChild(this.picker.$el);
+        this.popperJS = null;
       }
     },
 
