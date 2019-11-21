@@ -725,7 +725,6 @@ export default {
     },
 
     handleFocus() {
-      console.log('handelfocus')
       const type = this.type;
 
       if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
