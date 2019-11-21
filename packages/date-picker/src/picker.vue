@@ -407,7 +407,6 @@ export default {
 
   watch: {
     pickerVisible(val) {
-      debugger
       if (this.readonly || this.pickerDisabled) return;
       if (val) {
         this.showPicker();
@@ -586,7 +585,6 @@ export default {
 
   methods: {
     focus() {
-      debugger
       if (!this.ranged) {
         this.$refs.reference.focus();
       } else {
@@ -877,7 +875,6 @@ export default {
       });
 
       this.picker.$on('select-range', (start, end, pos) => {
-        debugger
         if (this.refInput.length === 0) return;
         if (!pos || pos === 'min') {
           this.refInput[0].setSelectionRange(start, end);
