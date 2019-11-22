@@ -179,13 +179,6 @@
     pointer-events: none;
   }
 
-  @include when(active) {
-    .el-input__inner {
-      outline: none;
-      border-color: $--input-focus-border;
-    }
-  }
-
   @include when(disabled) {
     .el-input__inner {
       background-color: $--input-disabled-fill;
