@@ -30,14 +30,16 @@ $--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /
 $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
+
+// README: success warning danger 用于产品内有提示作用的颜色；不要随意修改
 /// color|1|Functional Color|1
-$--color-success: #02C5E2 !default; // 67C23A
+$--color-success: #2FD163 !default; // 67C23A
 /// color|1|Functional Color|1
 $--color-warning: #F5A623 !default; // E6A23C
 /// color|1|Functional Color|1
-$--color-danger: #E24156 !default; // F56C6C
+$--color-danger: #FF4D4F !default; // F56C6C
 /// color|1|Functional Color|1
-$--color-info: #6A6E7B !default; // 909399
+$--color-info: #A7A8AD !default; // 909399
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
 $--color-warning-light: mix($--color-white, $--color-warning, 80%) !default;
@@ -51,15 +53,15 @@ $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 /// color|1|Font Color|2
 $--color-text-primary: #2D303B !default; // 303133
 /// color|1|Font Color|2
-$--color-text-regular: #2D303B !default; // 606266
+$--color-text-regular: #6A6C73 !default; // 606266
 /// color|1|Font Color|2
-$--color-text-secondary: #93959b !default; // 909399
+$--color-text-secondary: #A7A8AD !default; // 909399
 /// color|1|Font Color|2
-$--color-text-placeholder: #9CA6C7 !default; // C0C4CC
+$--color-text-placeholder: #C6C7CA !default; // C0C4CC
 /// color|1|Border Color|3
-$--border-color-base: #CAD1E8 !default; // DCDFE6
+$--border-color-base: #DCDEE6 !default; // DCDFE6
 /// color|1|Border Color|3
-$--border-color-light: #CAD1E8 !default; // E4E7ED
+$--border-color-light: #E4E8F3 !default; // E4E7ED
 /// color|1|Border Color|3
 $--border-color-lighter: #EBEEF5 !default;
 /// color|1|Border Color|3
@@ -67,7 +69,7 @@ $--border-color-extra-light: #F2F6FC !default;
 
 // Background
 /// color|1|Background Color|4
-$--background-color-base: #f5f7fa !default; // F5F7FA
+$--background-color-base: #F0F2F5 !default; // F5F7FA
 
 /* Link
 -------------------------- */
