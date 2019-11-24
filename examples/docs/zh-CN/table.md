@@ -1768,6 +1768,86 @@
 ```
 :::
 
+
+### 合并行
+
+上下行数据条件相等时自动合并。
+:::demo 通过给`table`传入`merge-rows`数组实现合并行，数组中每一项要求有`key`(要合并的列)和`conditions`(合并列条件)，当上下行中合并列条件都一致时表格自动合并。
+
+```html
+<template>
+  <div>
+    <el-table :data="tableData" :merge-rows="mergeRows" border style="width: 100%">
+      <el-table-column prop="company" label="公司"></el-table-column>
+      <el-table-column prop="department" label="部门"></el-table-column>
+      <el-table-column prop="employees" label="人员"></el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      mergeRows: [
+        {
+          key: "company",
+          conditions: ["company"]
+        },
+        {
+          key: "department",
+          conditions: ["company", "department"]
+        }
+      ],
+      tableData: [
+        {
+          company: "公司1",
+          department: "财务部",
+          employees: "小明"
+        },
+        {
+          company: "公司1",
+          department: "财务部",
+          employees: "小李"
+        },
+        {
+          company: "公司1",
+          department: "IT部",
+          employees: "小张"
+        },
+        {
+          company: "公司1",
+          department: "IT部",
+          employees: "小赵"
+        },
+        {
+          company: "公司2",
+          department: "IT部",
+          employees: "小王"
+        },
+        {
+          company: "公司2",
+          department: "IT部",
+          employees: "小徐"
+        },
+        {
+          company: "公司2",
+          department: "人事部",
+          employees: "小唐"
+        },
+        {
+          company: "公司2",
+          department: "人事部",
+          employees: "小郑"
+        }
+      ]
+    };
+  }
+};
+</script>
+```
+:::
+
 ### 自定义索引
 
 自定义 `type=index` 列的行号。
@@ -1879,6 +1959,7 @@
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| merge-rows | 合并行的条件(优先级低于span-method)，每一项需要有`key`(需要合并的列)，`conditions`（合并列的条件） | array | — | — |
 | select-on-indeterminate | 在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行 | Boolean | — | true |
 | indent      | 展示树形数据时，树节点的缩进 | Number | — | 16 |
 | lazy        | 是否懒加载子节点数据 | Boolean | — | — |

@@ -309,6 +309,8 @@
 
       spanMethod: Function,
 
+      mergeRows: Array,
+
       selectOnIndeterminate: {
         type: Boolean,
         default: true
