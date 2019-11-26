@@ -306,8 +306,8 @@ export default {
     value(val) {
       if (!isEqual(val, this.checkedValue)) {
         this.checkedValue = val;
-        this.computePresentContent();
       }
+      this.computePresentContent();
     },
     checkedValue(val) {
       const { value, dropDownVisible } = this;
