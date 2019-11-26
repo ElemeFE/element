@@ -1,4 +1,7 @@
 <template>
+  <div v-if="type == 'inline'">
+      <date-panel ref="inlinePicker"/>
+  </div>
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
@@ -7,10 +10,10 @@
     :size="pickerSize"
     :name="name"
     v-bind="firstInputId"
-    v-if="!ranged"
+    v-else-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
-    @focus="handleFocus"
+    @click="handleFocus"
     @keydown.native="handleKeydown"
     :value="displayValue"
     @input="value => userInput = value"
@@ -91,6 +94,7 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
 import merge from 'element-ui/src/utils/merge';
+import DatePanel from './panel/date';
 
 const NewPopper = {
   props: {
@@ -391,7 +395,7 @@ export default {
     }
   },
 
-  components: { ElInput },
+  components: { ElInput, 'date-panel': DatePanel },
 
   directives: { Clickoutside },
 
@@ -571,7 +575,17 @@ export default {
       return obj;
     }
   },
-
+  mounted() {
+    if (this.type === 'inline') {
+      let picker = this.$refs.inlinePicker;
+      picker.visible = true ;
+      picker.$on('pick', (date = '', visible = false) => {
+        this.emitInput(date);
+        this.picker.resetView && this.picker.resetView();
+      });
+      this.picker = picker;
+    }
+  },
   created() {
     // vue-popper
     this.popperOptions = {
@@ -726,6 +740,11 @@ export default {
 
     handleFocus() {
       const type = this.type;
+
+      if (this.pickerVisible) {
+        this.pickerVisible = false;
+        return;
+      }
 
       if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
         this.pickerVisible = true;
