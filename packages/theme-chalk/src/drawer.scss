@@ -1,6 +1,8 @@
 @import "mixins/mixins";
 @import "common/var";
 
+$trigger-size: 6px;
+
 @keyframes el-drawer-fade-in {
   0% {
     opacity: 0;
@@ -166,6 +168,79 @@ $directions: rtl, ltr, ttb, btt;
     flex: 1;
     & > * {
       box-sizing: border-box;
+    }
+  }
+
+  &__trigger {
+    position: absolute;
+
+    .el-drawer__trigger-icon {
+      content: ' ';
+      position: absolute;
+      border-radius: 2px;
+      background: #939393;
+    }
+
+    &.ltr, &.rtl {
+      width: $trigger-size;
+      height: 100%;
+      cursor: col-resize;
+
+      .el-drawer__trigger-icon {
+        top: 50%;
+        height: 28px;
+        width: $trigger-size / 2;
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+
+    &.btt, &.ttb {
+      width: 100%;
+      height: $trigger-size;
+      cursor: row-resize;
+
+      .el-drawer__trigger-icon {
+        left: 50%;
+        height: $trigger-size / 2;
+        width: 28px;
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+
+    &.ltr {
+      right: 0;
+      top: 0;
+
+      .el-drawer__trigger-icon {
+        left: 0;
+      }
+    }
+
+    &.rtl {
+      left: 0;
+      top: 0;
+
+      .el-drawer__trigger-icon {
+        right: 0;
+      }
+    }
+
+    &.ttb {
+      left: 0;
+      bottom: 0;
+
+      .el-drawer__trigger-icon {
+        top: 0;
+      }
+    }
+
+    &.btt {
+      top: 0;
+      left: 0;
+
+      .el-drawer__trigger-icon {
+        bottom: 0;
+      }
     }
   }
 

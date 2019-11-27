@@ -40,6 +40,11 @@
           <section class="el-drawer__body" v-if="rendered">
             <slot></slot>
           </section>
+          <div :class="['el-drawer__trigger', direction]" ref="trigger" v-if="draggable" @mousedown="handleTriggerMousedown ">
+            <slot name="triggerIcon">
+              <div class="el-drawer__trigger-icon"></div>
+            </slot>
+          </div>
         </div>
       </div>
     </div>
@@ -111,6 +116,10 @@ export default {
     withHeader: {
       type: Boolean,
       default: true
+    },
+    draggable: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -121,7 +130,8 @@ export default {
   data() {
     return {
       closed: false,
-      prevActiveElement: null
+      prevActiveElement: null,
+      canMove: false
     };
   },
   watch: {
@@ -168,6 +178,35 @@ export default {
         this.closeDrawer();
       }
     },
+    handleMousemove(event) {
+      if (!this.canMove || !this.draggable) return;
+      event.preventDefault()
+
+      let triggerSize, viewportSize, offset, size
+      if (this.isHorizontal) {
+        triggerSize = this.$refs.trigger.offsetWidth
+        viewportSize = document.documentElement.clientWidth
+        offset = event.clientX
+      } else {
+        triggerSize = this.$refs.trigger.offsetHeight
+        viewportSize = document.documentElement.clientHeight
+        offset = event.clientY
+      }
+
+      if (this.direction === 'rtl' || this.direction === 'btt') {
+        size = ((viewportSize - offset) / viewportSize) * 100
+      } else {
+        size = ((offset + triggerSize) / viewportSize) * 100
+      }
+      this.$emit('update:size', `${Math.min(size, 100)}%`)
+    },
+    handleMouseup () {
+      if (!this.draggable) return;
+      this.canMove = false;
+    },
+    handleTriggerMousedown() {
+      this.canMove = true;
+    },
     closeDrawer() {
       if (typeof this.beforeClose === 'function') {
         this.beforeClose(this.hide);
@@ -187,12 +226,18 @@ export default {
       this.rendered = true;
       this.open();
     }
+
+    document.addEventListener('mousemove', this.handleMousemove)
+    document.addEventListener('mouseup', this.handleMouseup)
   },
   destroyed() {
     // if appendToBody is true, remove DOM node after destroy
     if (this.appendToBody && this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }
+
+    document.removeEventListener('mousemove', this.handleMousemove)
+    document.removeEventListener('mouseup', this.handleMouseup)
   }
 };
 </script>
