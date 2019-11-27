@@ -8,12 +8,12 @@ git:
   depth: 3
 install:
   - yarn --frozen-lockfile
-  # deploy 和 dist 之前必须生成一些必要文件
-  - yarn build:file
   - yarn lint --fix
   - yarn test
 script:
   - yarn stdver
+  # deploy 和 dist 之前必须生成一些必要文件
+  - yarn build:file
   - yarn deploy:build
   - yarn dist
 cache: yarn
