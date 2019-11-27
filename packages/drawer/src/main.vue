@@ -200,7 +200,7 @@ export default {
       }
       this.$emit('update:size', `${Math.min(size, 100)}%`);
     },
-    handleMouseup () {
+    handleMouseup() {
       if (!this.draggable) return;
       this.canMove = false;
     },
@@ -227,8 +227,8 @@ export default {
       this.open();
     }
 
-    document.addEventListener('mousemove', this.handleMousemove)
-    document.addEventListener('mouseup', this.handleMouseup)
+    document.addEventListener('mousemove', this.handleMousemove);
+    document.addEventListener('mouseup', this.handleMouseup);
   },
   destroyed() {
     // if appendToBody is true, remove DOM node after destroy
@@ -236,8 +236,8 @@ export default {
       this.$el.parentNode.removeChild(this.$el);
     }
 
-    document.removeEventListener('mousemove', this.handleMousemove)
-    document.removeEventListener('mouseup', this.handleMouseup)
+    document.removeEventListener('mousemove', this.handleMousemove);
+    document.removeEventListener('mouseup', this.handleMouseup);
   }
 };
 </script>
