@@ -176,7 +176,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | step | Le pas pour l'incrémentation. | number | — | 1 |
 | step-strictly | Si la valeur ne peut être qu'un multiple du pas. | number   | — | false |
 | precision | La précision de la valeur. | number | — | — |
-| size | La taille du composant. | string | large/small| — |
+| size | La taille du composant. | string | medium / small / mini | — |
 | disabled| Si le composant est désactivé. | boolean | — | false |
 | controls| Si les boutons sont visibles. | boolean | — | true |
 | controls-position | Position des boutons. | string | right | - |
