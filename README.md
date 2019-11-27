@@ -38,6 +38,26 @@ Vue.component(Button.name, Button)
 ```
 For more information, please refer to [Quick Start](http://femessgae.github.io/#/zh-CN/component/quickstart) in our documentation.
 
+## Generate Theme
+```sh
+# fork this repository
+
+git clone https://github/{ user || owner }/element.git
+
+# remember: if want to update your component and its css, must merge latest only-component branch into your repository
+git checkout -b only-component new-theme
+
+# modify packages/theme-chalk/src/common/var.scss
+
+# modify package name in packages/theme-chalk/package.json
+
+sh ./publish-theme.sh
+
+# now a new theme publish to npm for your own
+```
+
+The reason to checkout from branch `only-component`, can be found in [Contributing Guide](https://github.com/femessage/element/blob/master/.github/CONTRIBUTING.zh-CN.md)
+
 ## Development
 ```sh
 # install dependence
@@ -87,7 +107,7 @@ yarn test
 ```
 
 ## Contribution
-Please make sure to read the [Contributing Guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) before making a pull request.
+Please make sure to read the [Contributing Guide](https://github.com/femessage/element/blob/master/.github/CONTRIBUTING.zh-CN.md) before making a pull request.
 
 ## Browser Support
 Modern browsers and Internet Explorer 10+.
