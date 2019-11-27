@@ -180,25 +180,25 @@ export default {
     },
     handleMousemove(event) {
       if (!this.canMove || !this.draggable) return;
-      event.preventDefault()
+      event.preventDefault();
 
-      let triggerSize, viewportSize, offset, size
+      let triggerSize, viewportSize, offset, size;
       if (this.isHorizontal) {
-        triggerSize = this.$refs.trigger.offsetWidth
-        viewportSize = document.documentElement.clientWidth
-        offset = event.clientX
+        triggerSize = this.$refs.trigger.offsetWidth;
+        viewportSize = document.documentElement.clientWidth;
+        offset = event.clientX;
       } else {
-        triggerSize = this.$refs.trigger.offsetHeight
-        viewportSize = document.documentElement.clientHeight
-        offset = event.clientY
+        triggerSize = this.$refs.trigger.offsetHeight;
+        viewportSize = document.documentElement.clientHeight;
+        offset = event.clientY;
       }
 
       if (this.direction === 'rtl' || this.direction === 'btt') {
-        size = ((viewportSize - offset) / viewportSize) * 100
+        size = ((viewportSize - offset) / viewportSize) * 100;
       } else {
-        size = ((offset + triggerSize) / viewportSize) * 100
+        size = ((offset + triggerSize) / viewportSize) * 100;
       }
-      this.$emit('update:size', `${Math.min(size, 100)}%`)
+      this.$emit('update:size', `${Math.min(size, 100)}%`);
     },
     handleMouseup () {
       if (!this.draggable) return;
