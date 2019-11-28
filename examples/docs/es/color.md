@@ -24,12 +24,12 @@
     success: '#2FD163',
     warning: '#F5A623',
     danger: '#FF4D4F',
-    info: '#909399',
+    info: '#A7A8AD',
     white: '#FFFFFF',
     black: '#000000',
     textPrimary: '#303133',
     textRegular: '#606266',
-    textSecondary: '#909399',
+    textSecondary: '#A7A8AD',
     textPlaceholder: '#C0C4CC',
     borderBase: '#DCDFE6',
     borderLight: '#E4E7ED',
@@ -179,7 +179,7 @@ Además del color principal, se necesitan utilizar distintos colores para difere
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: info }"
-    >Info<div class="value">#909399</div>
+    >Info<div class="value">#A7A8AD</div>
       <div 
           class="bg-color-sub"
         >
