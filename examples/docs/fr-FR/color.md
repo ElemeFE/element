@@ -23,7 +23,7 @@
     primary: '#5D81F9',
     success: '#2FD163',
     warning: '#F5A623',
-    danger: '#F56C6C',
+    danger: '#FF4D4F',
     info: '#909399',
     white: '#FFFFFF',
     black: '#000000',
@@ -146,7 +146,7 @@ En plus de la couleur principale, vous devrez sans doute utiliser d'autres coule
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box" :style="{ background: danger }">Danger
-      <div class="value">#F56C6C</div>
+      <div class="value">#FF4D4F</div>
       <div class="bg-color-sub">
         <div
           class="bg-success-sub-item"

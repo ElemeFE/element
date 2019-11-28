@@ -151,7 +151,7 @@ describe('Progress', () => {
         return {
           percentage: 50,
           colors: [
-            {color: '#f56c6c', percentage: 20},
+            {color: '#FF4D4F', percentage: 20},
             {color: '#F5A623', percentage: 40},
             {color: '#20a0ff', percentage: 60},
             {color: '#13ce66', percentage: 80},

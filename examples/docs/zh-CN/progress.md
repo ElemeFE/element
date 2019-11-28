@@ -65,7 +65,7 @@
         percentage: 20,
         customColor: '#5D81F9',
         customColors: [
-          {color: '#f56c6c', percentage: 20},
+          {color: '#FF4D4F', percentage: 20},
           {color: '#F5A623', percentage: 40},
           {color: '#5cb87a', percentage: 60},
           {color: '#1989fa', percentage: 80},
@@ -136,7 +136,7 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
       return {
         percentage: 10,
         colors: [
-          {color: '#f56c6c', percentage: 20},
+          {color: '#FF4D4F', percentage: 20},
           {color: '#F5A623', percentage: 40},
           {color: '#5cb87a', percentage: 60},
           {color: '#1989fa', percentage: 80},

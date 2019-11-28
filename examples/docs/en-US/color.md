@@ -23,7 +23,7 @@
     primary: '#5D81F9',
     success: '#2FD163',
     warning: '#F5A623',
-    danger: '#F56C6C',
+    danger: '#FF4D4F',
     info: '#909399',
     white: '#FFFFFF',
     black: '#000000',
@@ -163,7 +163,7 @@ Besides the main color, you need to use different scene colors in different scen
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: danger }"
-    >Danger<div class="value">#F56C6C</div>
+    >Danger<div class="value">#FF4D4F</div>
       <div 
           class="bg-color-sub"
         >

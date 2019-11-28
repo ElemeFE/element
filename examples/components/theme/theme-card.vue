@@ -226,7 +226,7 @@
                   <el-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</el-dropdown-item>
                   <el-dropdown-item
                       command="delete"
-                      style="color: #F56C6C;"
+                      style="color: #FF4D4F;"
                     >
                       {{getActionDisplayName('delete-theme')}}
                     </el-dropdown-item>
