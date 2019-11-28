@@ -224,6 +224,7 @@
           this.validateMessage = errors ? errors[0].message : '';
 
           callback(this.validateMessage, invalidFields);
+          // TODO 不太理解这句$emit
           this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
       },
@@ -271,9 +272,12 @@
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
+
+      //过滤必要监测参数trigger，trigger:['change','blur'],
+      // 把符合trigger触发条件的监测重新放入对象中
       getFilteredRule(trigger) {
         const rules = this.getRules();
-
+        // [].filter().map()
         return rules.filter(rule => {
           if (!rule.trigger || trigger === '') return true;
           if (Array.isArray(rule.trigger)) {

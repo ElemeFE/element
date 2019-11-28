@@ -162,13 +162,19 @@
     },
 
     props: {
+      // 绑定值
       value: {},
+      // 选中状态的值（只有在checkbox-group或者绑定对象类型为array时有效）	string / number / boolean
       label: {},
+      // 设置 indeterminate 状态，只负责样式控制
       indeterminate: Boolean,
       disabled: Boolean,
+      // 当前是否勾选	
       checked: Boolean,
       name: String,
+      // 选中时的值
       trueLabel: [String, Number],
+      // 没有选中时的值
       falseLabel: [String, Number],
       id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/

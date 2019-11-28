@@ -106,6 +106,17 @@
           field.clearValidate();
         });
       },
+      // 触发
+      // submitForm(formName) {
+      //   this.$refs[formName].validate((valid) => {
+      //     if (valid) {
+      //       alert('submit!');
+      //     } else {
+      //       console.log('error submit!!');
+      //       return false;
+      //     }
+      //   });
+      // },
       validate(callback) {
         if (!this.model) {
           console.warn('[Element Warn][Form]model is required for validate to work!');

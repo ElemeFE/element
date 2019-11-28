@@ -4,10 +4,12 @@ export default {
   componentName: 'ElRow',
 
   props: {
+    // 自定义元素标签
     tag: {
       type: String,
       default: 'div'
     },
+    //栅格间隔
     gutter: Number,
     type: String,
     justify: {

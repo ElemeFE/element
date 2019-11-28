@@ -34,6 +34,7 @@
       link.addEventListener('click', _ => {
         const { to, $router } = this;
         if (!to || !$router) return;
+        // 在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录
         this.replace ? $router.replace(to) : $router.push(to);
       });
     }

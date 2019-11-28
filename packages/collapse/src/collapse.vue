@@ -42,10 +42,14 @@
         activeNames = [].concat(activeNames);
         let value = this.accordion ? activeNames[0] : activeNames;
         this.activeNames = activeNames;
+        // 改变v-model的值
         this.$emit('input', value);
+        // 当前激活面板改变时触发
+        // (如果是手风琴模式，参数 activeNames 类型为string，否则为array)
         this.$emit('change', value);
       },
       handleItemClick(item) {
+        // 是否是手风琴
         if (this.accordion) {
           this.setActiveNames(
             (this.activeNames[0] || this.activeNames[0] === 0) &&
