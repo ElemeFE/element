@@ -78,7 +78,7 @@ Vous pouvez utiliser l'attribut `color` pour définir la couleur de la barre de 
         } else if (percentage < 70) {
           return '#e6a23c';
         } else {
-          return '#67c23a';
+          return '#2FD163';
         }
       },
       increase() {

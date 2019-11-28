@@ -21,7 +21,7 @@
   };
   const original = {
     primary: '#5D81F9',
-    success: '#67C23A',
+    success: '#2FD163',
     warning: '#E6A23C',
     danger: '#F56C6C',
     info: '#909399',
@@ -129,7 +129,7 @@ Besides the main color, you need to use different scene colors in different scen
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: success }"
-    >Success<div class="value">#67C23A</div>
+    >Success<div class="value">#2FD163</div>
       <div 
         class="bg-color-sub"
       >

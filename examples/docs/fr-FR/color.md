@@ -21,7 +21,7 @@
   };
   const original = {
     primary: '#5D81F9',
-    success: '#67C23A',
+    success: '#2FD163',
     warning: '#E6A23C',
     danger: '#F56C6C',
     info: '#909399',
@@ -120,7 +120,7 @@ En plus de la couleur principale, vous devrez sans doute utiliser d'autres coule
 <el-row :gutter="12">
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box" :style="{ background: success }">Succès
-      <div class="value">#67C23A</div>
+      <div class="value">#2FD163</div>
       <div class="bg-color-sub">
         <div
           class="bg-success-sub-item"

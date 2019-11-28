@@ -122,7 +122,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: success }"
-    >Success<div class="value">#67C23A</div>
+    >Success<div class="value">#2FD163</div>
       <div 
         class="bg-color-sub"
       >
