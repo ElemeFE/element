@@ -176,7 +176,7 @@ import {
 const original = {
   'color_primary': '#5D81F9',
   'color_success': '#2FD163',
-  'color_warning': '#E6A23C',
+  'color_warning': '#F5A623',
   'color_danger': '#F56C6C',
   'color_info': '#909399',
   'color_white': '#FFFFFF',

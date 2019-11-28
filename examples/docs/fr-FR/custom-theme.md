@@ -81,7 +81,7 @@ $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
 $--color-success: #2FD163 !default;
-$--color-warning: #e6a23c !default;
+$--color-warning: #F5A623 !default;
 $--color-danger: #f56c6c !default;
 $--color-info: #909399 !default;
 

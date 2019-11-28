@@ -64,7 +64,7 @@ You can use `color` attr to set the progress bar color. it accepts color string,
         customColor: '#5D81F9',
         customColors: [
           {color: '#f56c6c', percentage: 20},
-          {color: '#e6a23c', percentage: 40},
+          {color: '#F5A623', percentage: 40},
           {color: '#5cb87a', percentage: 60},
           {color: '#1989fa', percentage: 80},
           {color: '#6f7ad3', percentage: 100}
@@ -76,7 +76,7 @@ You can use `color` attr to set the progress bar color. it accepts color string,
         if (percentage < 30) {
           return '#909399';
         } else if (percentage < 70) {
-          return '#e6a23c';
+          return '#F5A623';
         } else {
           return '#2FD163';
         }
@@ -133,7 +133,7 @@ You also can specify `type` attribute to `dashboard` to use dashboard progress b
         percentage: 10,
         colors: [
           {color: '#f56c6c', percentage: 20},
-          {color: '#e6a23c', percentage: 40},
+          {color: '#F5A623', percentage: 40},
           {color: '#5cb87a', percentage: 60},
           {color: '#1989fa', percentage: 80},
           {color: '#6f7ad3', percentage: 100}

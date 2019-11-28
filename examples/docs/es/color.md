@@ -22,7 +22,7 @@
   const original = {
     primary: '#5D81F9',
     success: '#2FD163',
-    warning: '#E6A23C',
+    warning: '#F5A623',
     danger: '#F56C6C',
     info: '#909399',
     white: '#FFFFFF',
@@ -145,7 +145,7 @@ Además del color principal, se necesitan utilizar distintos colores para difere
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: warning }"
-    >Warning<div class="value">#E6A23C</div>
+    >Warning<div class="value">#F5A623</div>
       <div 
           class="bg-color-sub"
         >
