@@ -60,7 +60,7 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
     data() {
       return {
         percentage: 20,
-        customColor: '#409eff',
+        customColor: '#5D81F9',
         customColors: [
           {color: '#f56c6c', percentage: 20},
           {color: '#e6a23c', percentage: 40},

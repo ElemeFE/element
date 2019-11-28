@@ -35,7 +35,7 @@ Vous pouvez utiliser les transitions d'Element directement. Mais avant ça, merc
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -84,7 +84,7 @@ Vous pouvez utiliser les transitions d'Element directement. Mais avant ça, merc
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -131,7 +131,7 @@ Pour l'effet collapse, utilisez le composant `el-collapse-transition`.
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #409EFF;
+    background-color: #5D81F9;
     text-align: center;
     color: #fff;
     padding: 40px 20px;

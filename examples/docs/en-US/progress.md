@@ -61,7 +61,7 @@ You can use `color` attr to set the progress bar color. it accepts color string,
     data() {
       return {
         percentage: 20,
-        customColor: '#409eff',
+        customColor: '#5D81F9',
         customColors: [
           {color: '#f56c6c', percentage: 20},
           {color: '#e6a23c', percentage: 40},
