@@ -193,8 +193,9 @@ export default {
         offset = event.clientY;
       }
 
+      // 加上 triggerSize 防止拖动时鼠标在 trigger 外面，导致松开时关闭 drawer
       if (this.direction === 'rtl' || this.direction === 'btt') {
-        size = ((viewportSize - offset) / viewportSize) * 100;
+        size = ((viewportSize - offset + triggerSize) / viewportSize) * 100;
       } else {
         size = ((offset + triggerSize) / viewportSize) * 100;
       }
