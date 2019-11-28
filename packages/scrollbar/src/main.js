@@ -21,6 +21,22 @@ export default {
     tag: {
       type: String,
       default: 'div'
+    },
+    barMoveX: {
+      type: Number,
+      default: 0
+    },
+    barMoveY: {
+      type: Number,
+      default: 0
+    },
+    scrollLeft: {
+      type: Number,
+      default: 0
+    },
+    scrollTop: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -28,11 +44,62 @@ export default {
     return {
       sizeWidth: '0',
       sizeHeight: '0',
-      moveX: 0,
-      moveY: 0
+      modelBarMoveX: 0,
+      modelBarMoveY: 0,
+      modelScrollLeft: 0,
+      modelScrollTop: 0
     };
   },
-
+  watch: {
+    barMoveX: {
+      immediate: true,
+      handler(val) {
+        this.modelBarMoveX = val;
+      }
+    },
+    barMoveY: {
+      immediate: true,
+      handler(val) {
+        this.modelBarMoveY = val;
+      }
+    },
+    scrollLeft: {
+      immediate: true,
+      handler(val) {
+        if (this.modelScrollLeft === val) {
+          return;
+        }
+        this.modelScrollLeft = val;
+        if (this.wrap) {
+          this.wrap.scrollLeft = val;
+        }
+      }
+    },
+    scrollTop: {
+      immediate: true,
+      handler(val) {
+        if (this.modelScrollTop === val) {
+          return;
+        }
+        this.modelScrollTop = val;
+        if (this.wrap) {
+          this.wrap.scrollTop = val;
+        }
+      }
+    },
+    modelBarMoveX(value) {
+      this.$emit('update:barMoveX', value);
+    },
+    modelBarMoveY(value) {
+      this.$emit('update:barMoveY', value);
+    },
+    modelScrollLeft(value) {
+      this.$emit('update:scrollLeft', value);
+    },
+    modelScrollTop(value) {
+      this.$emit('update:scrollTop', value);
+    }
+  },
   computed: {
     wrap() {
       return this.$refs.wrap;
@@ -44,8 +111,8 @@ export default {
     let style = this.wrapStyle;
 
     if (gutter) {
-      const gutterWith = `-${gutter}px`;
-      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+      const gutterWith = `-${ gutter }px`;
+      const gutterStyle = `margin-bottom: ${ gutterWith }; margin-right: ${ gutterWith };`;
 
       if (Array.isArray(this.wrapStyle)) {
         style = toObject(this.wrapStyle);
@@ -76,11 +143,11 @@ export default {
       nodes = ([
         wrap,
         <Bar
-          move={ this.moveX }
+          move={ this.modelBarMoveX }
           size={ this.sizeWidth }></Bar>,
         <Bar
           vertical
-          move={ this.moveY }
+          move={ this.modelBarMoveY }
           size={ this.sizeHeight }></Bar>
       ]);
     } else {
@@ -100,8 +167,10 @@ export default {
     handleScroll() {
       const wrap = this.wrap;
 
-      this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
-      this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
+      this.modelBarMoveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
+      this.modelBarMoveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
+      this.modelScrollLeft = wrap.scrollLeft;
+      this.modelScrollTop = wrap.scrollTop;
     },
 
     update() {
