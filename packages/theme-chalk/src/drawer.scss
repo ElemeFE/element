@@ -132,7 +132,10 @@ $directions: rtl, ltr, ttb, btt;
     bottom: 0;
     left: 0;
     overflow: hidden;
-    margin: 0;
+    margin: 0; 
+    div,span,button,i {
+      outline: none;
+    }
   }
 
   &__header {
