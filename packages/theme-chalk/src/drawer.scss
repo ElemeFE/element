@@ -167,6 +167,7 @@ $directions: rtl, ltr, ttb, btt;
 
   &__body {
     flex: 1;
+    overflow-y: auto;
     & > * {
       box-sizing: border-box;
     }
