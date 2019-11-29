@@ -26,7 +26,7 @@
           >
           <header class="el-drawer__header" id="el-drawer__title" v-if="withHeader">
             <slot name="title">
-              <span role="heading" tabindex="0" :title="title">{{ title }}</span>
+              <span role="heading" tabindex="-1" :title="title">{{ title }}</span>
             </slot>
             <button
               :aria-label="`close ${title || 'drawer'}`"
