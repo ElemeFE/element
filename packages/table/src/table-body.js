@@ -110,46 +110,6 @@ export default {
   },
 
   methods: {
-    getMergeRowsMethod() {
-      if (this.table.mergeRows == null) {
-        return null;
-      }
-      let mergeRowMap = {};
-      this.table.mergeRows.forEach(item => {
-        mergeRowMap[item.key] = item.conditions;
-      });
-
-      function isSimilar(data1, data2, keyList) {
-        for (let key of keyList) {
-          if (data1[key] !== data2[key]) {
-            return false;
-          }
-        }
-        return true;
-      }
-      return ({
-        row,
-        column,
-        rowIndex
-      }) => {
-        let mergeConditions = mergeRowMap[column.property];
-        if (mergeConditions == null || !Array.isArray(mergeConditions)) {
-          return [1, 1];
-        }
-        if (rowIndex !== 0 && isSimilar(row, this.data[rowIndex - 1], mergeConditions)) {
-          return [0, 0];
-        } else {
-          let i = 1;
-          for (; i < this.data.length - rowIndex; i++) {
-            if (!isSimilar(row, this.data[rowIndex + i], mergeConditions)) {
-              break;
-            }
-          }
-          return [i, 1];
-        }
-      };
-    },
-
     getKeyOfRow(row, index) {
       const rowKey = this.table.rowKey;
       if (rowKey) {
@@ -518,6 +478,48 @@ export default {
       } else {
         return this.rowRender(row, $index);
       }
+    },
+
+    dataIsSimilar(index1, index2, keyList) {
+      let data1 = this.data[index1];
+      let data2 = this.data[index2];
+      for (let key of keyList) {
+        if (data1[key] !== data2[key]) {
+          return false;
+        }
+      }
+      return true;
+    },
+
+    getMergeRowsMethod() {
+      if (this.table.mergeRows == null) {
+        return null;
+      }
+      let mergeRowMap = {};
+      this.table.mergeRows.forEach(item => {
+        mergeRowMap[item.key] = item.conditions;
+      });
+      return ({
+        row,
+        column,
+        rowIndex
+      }) => {
+        let mergeConditions = mergeRowMap[column.property];
+        if (mergeConditions == null || !Array.isArray(mergeConditions)) {
+          return [1, 1];
+        }
+        if (rowIndex !== 0 && this.dataIsSimilar(rowIndex, rowIndex - 1, mergeConditions)) {
+          return [0, 0];
+        } else {
+          let i = 1;
+          for (; i < this.data.length - rowIndex; i++) {
+            if (!this.dataIsSimilar(rowIndex, rowIndex + i, mergeConditions)) {
+              break;
+            }
+          }
+          return [i, 1];
+        }
+      };
     }
   }
 };
