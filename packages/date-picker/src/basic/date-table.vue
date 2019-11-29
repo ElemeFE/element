@@ -86,7 +86,7 @@
       },
 
       disabledDate: {},
-  
+
       cellClassName: {},
 
       minDate: {},
@@ -194,7 +194,8 @@
 
             let cellDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);
-            cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime());
+            let sameDateCb = date => date.getTime() >= cellDate.getTime() && date.getTime() < nextDate(cellDate).getTime();
+            cell.selected = arrayFind(selectedDate, sameDateCb);
             cell.customClass = typeof cellClassName === 'function' && cellClassName(cellDate);
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
