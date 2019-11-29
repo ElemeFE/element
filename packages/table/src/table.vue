@@ -612,7 +612,9 @@
         immediate: true,
         handler(value) {
           this.store.commit('setData', value);
-          this.doLayout()
+          if (this.shouldUpdateHeight) {
+            this.layout.updateElsHeight();
+          }
         }
       },
 
