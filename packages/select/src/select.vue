@@ -16,8 +16,9 @@
           :hit="selected[0].hitState"
           type="info"
           @close="deleteTag($event, selected[0])"
-          disable-transitions>
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+          disable-transitions
+          style="display: flex; align-items: center">
+          <span class="el-select__tags-text" :style="{ 'max-width': inputWidth - 68 + 'px' }" :title="selected[0].currentLabel">{{ selected[0].currentLabel }}</span>
         </el-tag>
         <el-tag
           v-if="selected.length > 1"
@@ -37,8 +38,9 @@
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
-          disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          disable-transitions
+          style="display: flex; align-items: center">
+          <span class="el-select__tags-text" :style="{ 'max-width': inputWidth - 68 + 'px' }" :title="item.currentLabel">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
