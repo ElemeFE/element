@@ -17,6 +17,18 @@
       display: contents;
     }
 
+  .el-select__tags {
+    .el-select__tags-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .el-tag__close {
+      margin: 0px;
+    }
+  }
+
   &:hover {
     .el-input__inner {
       border-color: $--select-border-color-hover;
@@ -134,6 +146,7 @@
       right: -7px;
       top: 0;
       color: $--color-white;
+      margin: 0px;
 
       &:hover {
         background-color: $--color-text-secondary;
