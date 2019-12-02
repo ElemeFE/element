@@ -218,6 +218,9 @@
       },
       clickHandler() {
         // prevent body scroll
+        if (this.previewSrcList.length === 0) {
+          return;
+        }
         prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         this.showViewer = true;
