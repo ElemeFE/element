@@ -1,4 +1,4 @@
-| Se## Cascader
+## Cascader
 
 Si les options ont une structure hiérarchique claire, Le composant Cascader peut être utilisé pour les afficher et les sélectionner.
 

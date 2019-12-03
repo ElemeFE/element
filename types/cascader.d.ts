@@ -2,11 +2,7 @@ import { VNode } from 'vue';
 import { ElementUIComponent, ElementUIComponentSize } from './component'
 import { CascaderOption, CascaderProps, CascaderNode } from './cascader-panel';
 
-export type CascaderOption = CascaderOption
-
-export type CascaderProps<V, D> = CascaderProps<V, D>
-
-export type CascaderNode<V, D> = CascaderNode<V, D>
+export { CascaderOption, CascaderProps, CascaderNode };
 
 export interface CascaderSlots {
   /** Custom label content */

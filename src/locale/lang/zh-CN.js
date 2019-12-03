@@ -111,6 +111,10 @@ export default {
     },
     pageHeader: {
       title: '返回'
+    },
+    popconfirm: {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消'
     }
   }
 };

@@ -604,7 +604,8 @@ export default {
 |----| ----| ----|
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
-| change | triggers when the icon inside Input value change | (value: string \| number) |
+| change | triggers only when the input box loses focus or the user presses Enter | (value: string \| number) |
+| input | triggers when the Input value change | (value: string \| number) |
 | clear | triggers when the Input is cleared by clicking the clear button | — |
 
 ### Input Methods
