@@ -558,6 +558,116 @@ describe('Select', () => {
     }, 100);
   });
 
+  it('multiple select defalut disable options', done => {
+    const defalutOptions = [1, 3];
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" multiple :multipleDisableOptions="multipleDisableOptions">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: 1,
+            label: 'label1'
+          }, {
+            value: 2,
+            label: 'label2'
+          }, {
+            value: 3,
+            label: 'label3'
+          }],
+          value: defalutOptions,
+          multipleDisableOptions: defalutOptions
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      const selectTags = vm.$el.querySelectorAll('.el-select__tags .el-tag');
+      const tag1 = selectTags[0];
+      const tag2 = selectTags[1];
+      const tagText1 = tag1.querySelector('.el-select__tags-text');
+      const tagCloseIcon1 = tag1.querySelector('.el-tag__close');
+      const tagText2 = tag2.querySelector('.el-select__tags-text');
+      const tagCloseIcon2 = tag2.querySelector('.el-tag__close');
+      expect(tagText1.innerText).to.equal('label1');
+      expect(tagCloseIcon1).to.equal(null);
+      expect(tagText2.innerText).to.equal('label3');
+      expect(tagCloseIcon2).to.equal(null);
+      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      expect(options[0].classList.contains('is-disabled')).to.true;
+      expect(options[2].classList.contains('is-disabled')).to.true;
+      done();
+    }, 100);
+
+  });
+
+  it('multiple select defalut disable options with value-key', done => {
+    const defalutOptions = [
+      {
+        id: 1,
+        name: 'label1'
+      }, {
+        id: 3,
+        name: 'label3'
+      }
+    ];
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" value-key="id" multiple :multipleDisableOptions="multipleDisableOptions">
+            <el-option
+              v-for="item in options"
+              :label="item.name"
+              :key="item.id"
+              :value="item">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            id: 1,
+            name: 'label1'
+          }, {
+            id: 2,
+            name: 'label2'
+          }, {
+            id: 3,
+            name: 'label3'
+          }],
+          value: defalutOptions,
+          multipleDisableOptions: defalutOptions
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      const selectTags = vm.$el.querySelectorAll('.el-select__tags .el-tag');
+      [].slice.call(selectTags).map((item, index) => {
+        const text = item.querySelector('.el-select__tags-text');
+        const closeIcon = item.querySelector('.el-tag__close');
+        expect(text.innerText).to.equal(defalutOptions[index].name);
+        expect(closeIcon).to.equal(null);
+      });
+      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      expect(options[0].classList.contains('is-disabled')).to.true;
+      expect(options[2].classList.contains('is-disabled')).to.true;
+      done();
+    }, 100);
+
+  });
+
   it('multiple remove-tag', done => {
     sinon.stub(window.console, 'log');
     vm = createVue({

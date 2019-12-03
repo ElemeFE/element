@@ -242,6 +242,98 @@ Multiple select uses tags to display selected options.
 ```
 :::
 
+### multiple select defalut disable options
+
+Set the default disabled option when multiple selection.
+
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute. Set the `multiple-disable-options` property to the value of` v-model` to enable multiple-selection disabled options.
+```html
+<template>
+  <el-select v-model="value1" :multiple-disable-options="multipleDisableOptions" multiple placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value1: ['Option2'],
+        multipleDisableOptions: ['Option2']
+      }
+    }
+  }
+</script>
+```
+:::
+
+### multiple select defalut disable options with value-key
+
+Set the default disabled option when multiple selection.
+
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute. Set the `multiple-disable-options` property to the value of` v-model` to enable multiple-selection disabled options.
+```html
+<template>
+  <el-select v-model="value1" :multipleDisableOptions="multipleDisableOptions" multiple placeholder="Select" value-key="id">
+    <el-option
+      v-for="item in options"
+      :key="item.id"
+      :label="item.name"
+      :value="item">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          id: 'Option1',
+          name: 'Option1'
+        }, {
+          id: 'Option2',
+          name: 'Option2'
+        }, {
+          id: 'Option3',
+          name: 'Option3'
+        }, {
+          id: 'Option4',
+          name: 'Option4'
+        }, {
+          id: 'Option5',
+          name: 'Option5'
+        }],
+        value1: [{ id: 'Option2', name: 'Option2' }],
+        multipleDisableOptions: [{ id: 'Option2', name: 'Option2' }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Custom template
 
 You can customize HTML templates for options.
@@ -535,6 +627,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | clearable | whether select can be cleared | boolean | — | false |
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
+| multiple-disable-options | Options that are selected and disabled by default when making multiple selections | array | — | — |
 | name | the name attribute of select input | string | — | — |
 | autocomplete | the autocomplete attribute of select input | string | — | off |
 | auto-complete | @DEPRECATED in next major version | string | — | off |
@@ -550,9 +643,9 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | no-data-text | displayed text when there is no options, you can also use slot `empty` | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
-| default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
-| popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
-| automatic-dropdown | for non-filterable Select, this prop decides if the option menu pops up when the input is focused | boolean | - | false |
+| default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | — | false |
+| popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | — | true |
+| automatic-dropdown | for non-filterable Select, this prop decides if the option menu pops up when the input is focused | boolean | — | false |
 
 ### Select Events
 | Event Name | Description | Parameters |
@@ -587,5 +680,5 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 ### Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| focus | focus the Input component | - |
-| blur | blur the Input component, and hide the dropdown | - |
+| focus | focus the Input component | — |
+| blur | blur the Input component, and hide the dropdown | — |

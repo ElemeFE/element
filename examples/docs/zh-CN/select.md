@@ -241,6 +241,100 @@
 ```
 :::
 
+### 多选禁用
+
+设置多选时的默认禁用选项
+
+:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。设置`multiple-disable-options`属性为`v-model`的值，开启多选禁用选项。
+
+```html
+<template>
+  <el-select v-model="value1" :multiple-disable-options="multipleDisableOptions" multiple placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value1: ['Option2'],
+        multipleDisableOptions: ['Option2']
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 多选禁用（自定义value-key）
+
+设置多选时的默认禁用选项
+
+:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。设置`multiple-disable-options`属性为`v-model`的值，开启多选禁用选项。
+
+```html
+<template>
+  <el-select v-model="value1" :multiple-disable-options="multipleDisableOptions" multiple placeholder="请选择" value-key="id">
+    <el-option
+      v-for="item in options"
+      :key="item.id"
+      :label="item.name"
+      :value="item">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          id: 'Option1',
+          name: 'Option1'
+        }, {
+          id: 'Option2',
+          name: 'Option2'
+        }, {
+          id: 'Option3',
+          name: 'Option3'
+        }, {
+          id: 'Option4',
+          name: 'Option4'
+        }, {
+          id: 'Option5',
+          name: 'Option5'
+        }],
+        value1: [{ id: 'Option2',name: 'Option2' }],
+        multipleDisableOptions: [{ id: 'Option2',name: 'Option2' }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 自定义模板
 
 可以自定义备选项
@@ -530,6 +624,7 @@
 | clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
+| multiple-disable-options | 多选时默认选中且禁用的选项 | array | — | — |
 | name | select input 的 name 属性 | string | — | — |
 | autocomplete | select input 的 autocomplete 属性 | string | — | off |
 | auto-complete | 下个主版本弃用 | string | — | off |
@@ -545,9 +640,9 @@
 | no-data-text | 选项为空时显示的文字，也可以使用`slot="empty"`设置 | string | — | 无数据 |
 | popper-class | Select 下拉框的类名 | string | — | — |
 | reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
-| default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
-| popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
-| automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | — | false |
+| popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | — | true |
+| automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | — | false |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |
@@ -582,5 +677,5 @@
 ### Methods
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| focus | 使 input 获取焦点 | - |
-| blur | 使 input 失去焦点，并隐藏下拉框 | - |
+| focus | 使 input 获取焦点 | — |
+| blur | 使 input 失去焦点，并隐藏下拉框 | — |

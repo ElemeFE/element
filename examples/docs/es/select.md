@@ -245,6 +245,98 @@ Selección multiple utiliza tags para mostrar las opciones seleccionadas.
 ```
 :::
 
+### múltiples opciones por defecto deshabilitadas
+
+Establecer la opción deshabilitada predeterminada cuando la selección múltiple.
+
+:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. De forma predeterminada, las opciones seleccionadas se mostrarán como tags. Se pueden contraer a un texto utilizando el atributo  `collapse-tags`. Establezca la propiedad `multiple-disable-options` en el valor de` v-model` para habilitar las opciones deshabilitadas de selección múltiple.
+```html
+<template>
+  <el-select v-model="value1" :multiple-disable-options="multipleDisableOptions" multiple placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value1: ['Option2'],
+        multipleDisableOptions: ['Option2']
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Múltiples opciones predeterminadas de selección deshabilitadas con value-key
+
+Establecer la opción deshabilitada predeterminada cuando la selección múltiple.
+
+:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. De forma predeterminada, las opciones seleccionadas se mostrarán como tags. Se pueden contraer a un texto utilizando el atributo  `collapse-tags`. Establezca la propiedad `multiple-disable-options` en el valor de` v-model` para habilitar las opciones deshabilitadas de selección múltiple.
+```html
+<template>
+  <el-select v-model="value1" :multipleDisableOptions="multipleDisableOptions" multiple placeholder="Select" value-key="id">
+    <el-option
+      v-for="item in options"
+      :key="item.id"
+      :label="item.name"
+      :value="item">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          id: 'Option1',
+          name: 'Option1'
+        }, {
+          id: 'Option2',
+          name: 'Option2'
+        }, {
+          id: 'Option3',
+          name: 'Option3'
+        }, {
+          id: 'Option4',
+          name: 'Option4'
+        }, {
+          id: 'Option5',
+          name: 'Option5'
+        }],
+        value1: [{ id: 'Option2', name: 'Option2' }],
+        multipleDisableOptions: [{ id: 'Option2', name: 'Option2' }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Personalizar template
 
 Puede personalizar templates HTML para las opciones.
@@ -542,6 +634,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | size                 | tamaño del Input                         | string   | large/small/mini  | —                |
 | clearable            | si el select puede ser limpiado | boolean  | —                 | false            |
 | multiple-limit       | máximo numero de opciones que el usuario puede seleccionar cuando `multiple` es `true`.  Sin límite cuando se fija a 0 | number   | —                 | 0                |
+| multiple-disable-options | Opciones que están seleccionadas y deshabilitadas de manera predeterminada al hacer múltiples selecciones | array | — | — |
 | name                 | el atributo `name` del input seleccionado | string   | —                 | —                |
 | autocomplete         | el atributo `autocomplete` del input seleccionado | string   | —         | off              |
 | auto-complete         | @DEPRECATED en la proxima major versión | string   | —         | off              |
@@ -557,9 +650,9 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | no-data-text         | texto mostrado cuando no hay opciones    | string   | —                 | No data          |
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
-| default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
-| popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | - | true |
-| automatic-dropdown | para non-filterable Select, este `prop` decide si el menú de opciones aparece cuando la entrada está enfocada | boolean | - | false |
+| default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | —                | false            |
+| popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | — | true |
+| automatic-dropdown | para non-filterable Select, este `prop` decide si el menú de opciones aparece cuando la entrada está enfocada | boolean | — | false |
 
 ### Eventos Select
 | Nombre         | Descripción                                                  | Parametros                                |
@@ -594,5 +687,5 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 ### Metodos
 | Metodo | Descripción                 | Parametros |
 | ------ | --------------------------- | ---------- |
-| focus  | Foco en el componente input | -          |
-| blur   | Quita el focus del componente y oculta el dropdown | - |
+| focus  | Foco en el componente input | —          |
+| blur   | Quita el focus del componente y oculta el dropdown | — |

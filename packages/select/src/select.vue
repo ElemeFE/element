@@ -11,7 +11,7 @@
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
-          :closable="!selectDisabled"
+          :closable="selectDefaultDisabled(selected[0])"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
@@ -32,7 +32,7 @@
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
-          :closable="!selectDisabled"
+          :closable="selectDefaultDisabled(item)"
           :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
@@ -292,6 +292,7 @@
           return t('el.select.placeholder');
         }
       },
+      multipleDisableOptions: Array,
       defaultFirstOption: Boolean,
       reserveKeyword: Boolean,
       valueKey: {
@@ -441,6 +442,29 @@
     },
 
     methods: {
+      selectDefaultDisabled(value, isOptionItem = false) {
+        if (selectDisabled) return !selectDisabled;
+        const optionValue = isOptionItem
+          ? Object.prototype.toString.call(value).toLowerCase() === '[object object]'
+            ? getValueByPath(value, this.valueKey)
+            : value
+          : this.getValueKey(value);
+        const { multiple, multipleDisableOptions, selectDisabled } = this;
+        if (multiple) {
+          if (multipleDisableOptions && multipleDisableOptions.length > 0) {
+            let values = [];
+            multipleDisableOptions.map((item) => {
+              if (Object.prototype.toString.call(item).toLowerCase() === '[object object]') {
+                values.push(getValueByPath(item, this.valueKey));
+              } else {
+                values.push(item);
+              }
+            });
+            return isOptionItem ? values.indexOf(optionValue) > -1 : !(values.indexOf(optionValue) > -1);
+          }
+        }
+        return !selectDisabled;
+      },
       handleComposition(event) {
         const text = event.target.value;
         if (event.type === 'compositionend') {

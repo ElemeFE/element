@@ -242,6 +242,98 @@ Les sélecteurs multiples utilisent des tags pour afficher les différentes opti
 ```
 :::
 
+### plusieurs options par défaut désactivées
+
+Définissez l'option désactivée par défaut lors d'une sélection multiple.
+
+:::demo Ajoutez `multiple` à `el-select` pour le changer en sélecteur multiple. La valeur de `v-model` devient un tableau contenant toutes les options. Par défaut les différents choix sont affichés sous forme de tags. Vous pouvez réduire leur nombre en utilisant l'attribut `collapse-tags`. Définissez la propriété `multiple-disable-options` sur la valeur de` v-model` pour activer les options désactivées à plusieurs sélections.
+```html
+<template>
+  <el-select v-model="value1" :multiple-disable-options="multipleDisableOptions" multiple placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value1: ['Option2'],
+        multipleDisableOptions: ['Option2']
+      }
+    }
+  }
+</script>
+```
+:::
+
+### plusieurs options par défaut désactivées avec value-key
+
+Définissez l'option désactivée par défaut lors d'une sélection multiple.
+
+:::demo Ajoutez `multiple` à `el-select` pour le changer en sélecteur multiple. La valeur de `v-model` devient un tableau contenant toutes les options. Par défaut les différents choix sont affichés sous forme de tags. Vous pouvez réduire leur nombre en utilisant l'attribut `collapse-tags`. Définissez la propriété `multiple-disable-options` sur la valeur de` v-model` pour activer les options désactivées à plusieurs sélections.
+```html
+<template>
+  <el-select v-model="value1" :multipleDisableOptions="multipleDisableOptions" multiple placeholder="Select" value-key="id">
+    <el-option
+      v-for="item in options"
+      :key="item.id"
+      :label="item.name"
+      :value="item">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          id: 'Option1',
+          name: 'Option1'
+        }, {
+          id: 'Option2',
+          name: 'Option2'
+        }, {
+          id: 'Option3',
+          name: 'Option3'
+        }, {
+          id: 'Option4',
+          name: 'Option4'
+        }, {
+          id: 'Option5',
+          name: 'Option5'
+        }],
+        value1: [{ id: 'Option2', name: 'Option2' }],
+        multipleDisableOptions: [{ id: 'Option2', name: 'Option2' }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Template personnalisé
 
 Vous pouvez définir un template HTML pour l'affichage des options.
@@ -538,6 +630,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | clearable | Si la sélection est effaçable. | boolean | — | false |
 | collapse-tags | Si les tags peuvent être réduits, dans le cas d'une sélection multiple. | boolean | — | false |
 | multiple-limit | Nombre maximum d'options multiples sélectionnable. Pas de limites quand est à 0. | number | — | 0 |
+| multiple-disable-options | Options sélectionnées et désactivées par défaut lors de sélections multiples | array | — | — |
 | name | L'attribut name natif du sélecteur. | string | — | — |
 | autocomplete | L'attribut autocomplete natif du sélecteur. | string | — | off |
 | auto-complete | @DEPRECATED dans la prochaine version majeure. | string | — | off |
@@ -553,9 +646,9 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | no-data-text | Texte à afficher quand il n'y a aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No data |
 | popper-class | Classe du menu déroulant. | string | — | — |
 | reserve-keyword | Quand `multiple` et `filter` sont activés, s'il faut réserver le mot-clé courant après la sélection d'une option. | boolean | — | false |
-| default-first-option | Sélectionne la première option avec Entrée. Utilisable avec `filterable` ou `remote` | boolean | - | false |
-| popper-append-to-body| Si le menu déroulant doit être ajouté au body. Si le positionnement du menu est incorrect, essayez de mettre cette option à `false`. | boolean | - | true |
-| automatic-dropdown | Pour les sélecteurs non filtrables, détermine si le menu apparaît au focus du champ. | boolean | - | false |
+| default-first-option | Sélectionne la première option avec Entrée. Utilisable avec `filterable` ou `remote` | boolean | — | false |
+| popper-append-to-body| Si le menu déroulant doit être ajouté au body. Si le positionnement du menu est incorrect, essayez de mettre cette option à `false`. | boolean | — | true |
+| automatic-dropdown | Pour les sélecteurs non filtrables, détermine si le menu apparaît au focus du champ. | boolean | — | false |
 
 ### Évènements de Select
 
@@ -595,5 +688,5 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 
 | Méthode | Description | Paramètres |
 |------|--------|-------|
-| focus | Focus sur l'input. | - |
-| blur | Enlève le focus de l'input et cache le menu. | - |
+| focus | Focus sur l'input. | — |
+| blur | Enlève le focus de l'input et cache le menu. | — |

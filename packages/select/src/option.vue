@@ -6,7 +6,7 @@
     v-show="visible"
     :class="{
       'selected': itemSelected,
-      'is-disabled': disabled || groupDisabled || limitReached,
+      'is-disabled': disabled || groupDisabled || multipleDisabled || limitReached,
       'hover': hover
     }">
     <slot>
@@ -51,6 +51,14 @@
     },
 
     computed: {
+      multipleDisabled() {
+        const { selectDefaultDisabled, multiple } = this.select;
+        if (multiple) {
+          return selectDefaultDisabled(this.value, true);
+        }
+        return false;
+      },
+
       isObject() {
         return Object.prototype.toString.call(this.value).toLowerCase() === '[object object]';
       },
@@ -129,7 +137,7 @@
       },
 
       selectOptionClick() {
-        if (this.disabled !== true && this.groupDisabled !== true) {
+        if (this.disabled !== true && this.groupDisabled !== true && this.multipleDisabled !== true) {
           this.dispatch('ElSelect', 'handleOptionClick', [this, true]);
         }
       },
