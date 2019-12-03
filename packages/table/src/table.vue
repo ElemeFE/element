@@ -16,7 +16,6 @@
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div
       v-if="showHeader"
-      v-mousewheel="handleHeaderFooterMousewheel"
       class="el-table__header-wrapper"
       ref="headerWrapper">
       <table-header
@@ -64,7 +63,6 @@
     <div
       v-if="showSummary"
       v-show="data && data.length > 0"
-      v-mousewheel="handleHeaderFooterMousewheel"
       class="el-table__footer-wrapper"
       ref="footerWrapper">
       <table-footer
@@ -404,13 +402,6 @@
         }
       },
 
-      handleHeaderFooterMousewheel(event, data) {
-        const { pixelX, pixelY } = data;
-        if (Math.abs(pixelX) >= Math.abs(pixelY)) {
-          this.bodyWrapper.scrollLeft += data.pixelX / 5;
-        }
-      },
-
       // TODO 使用 CSS transform
       syncPostion: throttle(20, function() {
         const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
@@ -429,7 +420,19 @@
         }
       }),
 
+      syncBodyPostion: throttle(20, function(event) {
+        const target = event.target;
+        const { scrollLeft } = target;
+        const { headerWrapper, footerWrapper } = this.$refs;
+        if (headerWrapper && target !== headerWrapper) headerWrapper.scrollLeft = scrollLeft;
+        if (footerWrapper && target !== footerWrapper) footerWrapper.scrollLeft = scrollLeft;
+        this.bodyWrapper.scrollLeft = scrollLeft;
+      }),
+
       bindEvents() {
+        const { headerWrapper, footerWrapper } = this.$refs;
+        if (headerWrapper) headerWrapper.addEventListener('scroll', this.syncBodyPostion, { passive: true });
+        if (footerWrapper) footerWrapper.addEventListener('scroll', this.syncBodyPostion, { passive: true });
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
@@ -437,6 +440,9 @@
       },
 
       unbindEvents() {
+        const { headerWrapper, footerWrapper } = this.$refs;
+        if (headerWrapper) headerWrapper.removeEventListener('scroll', this.syncBodyPostion, { passive: true });
+        if (footerWrapper) footerWrapper.removeEventListener('scroll', this.syncBodyPostion, { passive: true });
         this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
