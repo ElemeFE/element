@@ -133,9 +133,6 @@ export default {
           document.body.appendChild(this.$el);
         }
         this.prevActiveElement = document.activeElement;
-        this.$nextTick(() => {
-          Utils.focusFirstDescendant(this.$refs.drawer);
-        });
       } else {
         if (!this.closed) this.$emit('close');
         this.$nextTick(() => {
