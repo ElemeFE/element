@@ -66,7 +66,7 @@ Muestra una animación en un contenedor (como en una tabla) mientras se cargan l
 
 Puede personalizar el texto de carga, spinner de carga y color de fondo.
 
-:::demo Agrege el atributo `element-loading-text` al elemento en el que `v-loading` está vinculado, y su valor se mostrará debajo del spinner. Del mismo modo, `element-loading-spinner` y `element-loading-background` son para personalizar el nombre de la clase del spinner y el color de fondo.
+:::demo Agregue el atributo `element-loading-text` al elemento en el que `v-loading` está vinculado, y su valor se mostrará debajo del spinner. Del mismo modo, `element-loading-spinner` y `element-loading-background` son para personalizar el nombre de la clase del spinner y el color de fondo.
 ```html
 <template>
   <el-table
@@ -128,13 +128,13 @@ Muestra una animación de pantalla completa mientras se cargan los datos
 <template>
   <el-button
     type="primary"
-    @click="openFullScreen"
+    @click="openFullScreen1"
     v-loading.fullscreen.lock="fullscreenLoading">
     Como directiva
   </el-button>
   <el-button
     type="primary"
-    @click="openFullScreen">
+    @click="openFullScreen2">
     Como servicio
   </el-button>
 </template>
@@ -147,13 +147,13 @@ Muestra una animación de pantalla completa mientras se cargan los datos
       }
     },
     methods: {
-      openFullScreen() {
+      openFullScreen1() {
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
         }, 2000);
       },
-      openFullScreen() {
+      openFullScreen2() {
         const loading = this.$loading({
           lock: true,
           text: 'Loading',

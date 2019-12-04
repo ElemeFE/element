@@ -266,11 +266,13 @@
 
     &.el-tabs--border-card, &.el-tabs--card,
     .el-tabs--left, .el-tabs--right {
-      .el-tabs__item:nth-child(2) {
-        padding-left: 20px;
-      }
-      .el-tabs__item:last-child {
-        padding-right: 20px;
+      > .el-tabs__header {
+        .el-tabs__item:nth-child(2) {
+          padding-left: 20px;
+        }
+        .el-tabs__item:last-child {
+          padding-right: 20px;
+        }
       }
     }
   }
@@ -326,7 +328,7 @@
         width: 100%;
         text-align: center;
         cursor: pointer;
-  
+
         i {
           transform: rotateZ(90deg);
         }
@@ -391,6 +393,7 @@
         border-right: 1px solid $--border-color-light;
         border-bottom: none;
         border-top: 1px solid $--border-color-light;
+        text-align: left;
       }
       .el-tabs__item.is-left:first-child {
         border-right: 1px solid $--border-color-light;

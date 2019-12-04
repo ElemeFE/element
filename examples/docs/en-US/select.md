@@ -189,7 +189,7 @@ Multiple select uses tags to display selected options.
 :::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="Select">
+  <el-select v-model="value1" multiple placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -199,7 +199,7 @@ Multiple select uses tags to display selected options.
   </el-select>
   
   <el-select
-    v-model="value11"
+    v-model="value2"
     multiple
     collapse-tags
     style="margin-left: 20px;"
@@ -233,8 +233,8 @@ Multiple select uses tags to display selected options.
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: [],
-        value11: []
+        value1: [],
+        value2: []
       }
     }
   }
@@ -453,7 +453,7 @@ Enter keywords and search data from server.
     },
     mounted() {
       this.list = this.states.map(item => {
-        return { value: item, label: item };
+        return { value: `value:${item}`, label: `label:${item}` };
       });
     },
     methods: {

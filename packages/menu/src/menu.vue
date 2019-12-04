@@ -140,7 +140,12 @@
       }
     },
     watch: {
-      defaultActive: 'updateActiveIndex',
+      defaultActive(value){
+        if(!this.items[value]){
+          this.activeIndex = null
+        }
+        this.updateActiveIndex(value)
+      },
 
       defaultOpeneds(value) {
         if (!this.collapse) {

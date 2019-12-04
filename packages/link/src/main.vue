@@ -6,12 +6,12 @@
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline'
     ]"
-    :href="href"
+    :href="disabled ? null : href"
     v-bind="$attrs"
     @click="handleClick"
   >
 
-    <el-icon :class="icon" v-if="icon"></el-icon>
+    <i :class="icon" v-if="icon"></i>
 
     <span v-if="$slots.default" class="el-link--inner">
       <slot></slot>

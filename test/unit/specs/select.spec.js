@@ -288,7 +288,7 @@ describe('Select', () => {
       const iconClear = vm.$el.querySelector('.el-input__icon.el-icon-circle-close');
       expect(iconClear).to.exist;
       iconClear.click();
-      expect(vm.value).to.equal(null);
+      expect(vm.value).to.equal('');
       done();
     }, 100);
   });
@@ -693,7 +693,7 @@ describe('Select', () => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
-    }, 100);
+    }, 250);
   });
 
   it('should return focus to input inside select after option select', done => {
@@ -841,6 +841,43 @@ describe('Select', () => {
     expect(vm.$refs.select.visible).to.be.equal(true);
     expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
     expect(vm.value).to.be.equal('test');
+  });
+
+  it('default value is null or undefined', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }],
+          value: undefined
+        };
+      }
+    }, true);
+
+    vm.value = null;
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('');
+    vm.value = '选项1';
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('黄金糕');
   });
 
   describe('resetInputHeight', () => {

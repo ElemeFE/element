@@ -64,14 +64,14 @@ Las opciones pueden ser discretas.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value"
+      v-model="value1"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value"
+      v-model="value2"
       :step="10"
       show-stops>
     </el-slider>
@@ -82,8 +82,8 @@ Las opciones pueden ser discretas.
   export default {
     data() {
       return {
-        value: 0,
-        value: 0
+        value1: 0,
+        value2: 0
       }
     }
   }
@@ -93,7 +93,7 @@ Las opciones pueden ser discretas.
 
 ### Slider con input
 
-Inserte el valor a traves de un input
+Inserte el valor a través de un input
 
 :::demo Configure el atributo `show-input` para que muestre un input a la derecha.
 
@@ -176,9 +176,9 @@ Se soporta la selección de un rango de valores.
 ```
 :::
 
-### Show marks
+### Mostrar marcas
 
-:::demo Setting this `marks` attribute can show mark on slider.
+:::demo Use el atributo `marks`  para mostrar marcas en el slider.
 ```html
 <template>
   <div class="block">
@@ -217,11 +217,11 @@ Se soporta la selección de un rango de valores.
 | Atributo            | Descripción                              | Tipo            | Valores aceptados | Por defecto |
 | ------------------- | ---------------------------------------- | --------------- | ----------------- | ----------- |
 | value / v-model      | valor enlazado                           | number          | —                 | 0           |
-| min                 | valor minimo                             | number          | —                 | 0           |
+| min                 | valor mínimo                       | number          | —                 | 0           |
 | max                 | valor máximo                             | number          | —                 | 100         |
 | disabled            | si el Slider esta deshabitado            | boolean         | —                 | false       |
 | step                | tamaño del paso                          | number          | —                 | 1           |
-| show-input          | Si se muestra el input, trabaja cuando`range`es false | boolean         | —                 | false       |
+| show-input          | Si se muestra el input, trabaja cuando `range`es false | boolean         | —                 | false       |
 | show-input-controls | si se muestran los botones de control cuando`show-input`es true | boolean         | —                 | true        |
 | input-size          | tamaño del input   | string           | large / medium / small / mini | small |
 | show-stops          | si se muestran los puntos de ruptura (breakpoints) | boolean         | —                 | false       |
@@ -233,10 +233,11 @@ Se soporta la selección de un rango de valores.
 | label               | etiqueta para screen reader              | string          | —                 | —           |
 | debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 | tooltip-class       | nombre personalizado de clase para el tooltip | string | — | — |
-| marks | marks， type of key must be `number` and must in closed interval `[min, max]`, each mark can custom style| object | — | — |
+| marks | marcas, tipo de clave debe ser `number` y debe estar en intervalo cerrado [min, max], cada marca puede tener estilo personalizado | object | — | — |
 
 ## Eventos
 | Nombre | Descripción                              | Parametros               |
 | ------ | ---------------------------------------- | ------------------------ |
 | change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor despues del cambio |
+| input | triggers when the data changes (It'll be emitted in real time during sliding) | value after changing |
 

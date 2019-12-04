@@ -153,4 +153,12 @@ describe('Tooltip', () => {
       }, 100);
     });
   });
+  it('custom tabindex', () => {
+    vm = createVue(`
+      <el-tooltip ref="tooltip" content="提示文字" :tabindex="-1">
+        <button>click</button>
+      </el-tooltip>
+    `, true);
+    expect(vm.$el.getAttribute('tabindex')).to.be.equal('-1');
+  });
 });

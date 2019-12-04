@@ -50,6 +50,7 @@
   import Dropdown from './dropdown';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
 
   export default {
     name: 'ElTableFilterPanel',
@@ -62,7 +63,8 @@
 
     components: {
       ElCheckbox,
-      ElCheckboxGroup
+      ElCheckboxGroup,
+      ElScrollbar
     },
 
     props: {
@@ -70,17 +72,6 @@
         type: String,
         default: 'bottom-end'
       }
-    },
-
-    customRender(h) {
-      return (<div class="el-table-filter">
-        <div class="el-table-filter__content">
-        </div>
-        <div class="el-table-filter__bottom">
-          <button on-click={ this.handleConfirm }>{ this.t('el.table.confirmFilter') }</button>
-          <button on-click={ this.handleReset }>{ this.t('el.table.resetFilter') }</button>
-        </div>
-      </div>);
     },
 
     methods: {

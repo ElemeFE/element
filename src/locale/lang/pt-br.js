@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Sem resultados',
       loading: 'Carregando',
-      placeholder: 'Selecione'
+      placeholder: 'Selecione',
+      noData: 'Sem dados'
     },
     pagination: {
       goto: 'Ir para',
@@ -106,7 +107,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} selecionados'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Erro ao carregar imagem'
+    },
+    pageHeader: {
+      title: 'Voltar'
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

@@ -30,5 +30,12 @@ export declare class ElImage extends ElementUIComponent {
   /** Native 'alt' attribute */
   alt: string
 
+  /** Native 'referrerPolicy' attribute */
+  referrerPolicy: string
+
   $slots: ImageSlots
+
+  previewSrcList: string[]
+
+  zIndex: number
 }

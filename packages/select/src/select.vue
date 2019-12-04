@@ -50,7 +50,6 @@
         :autocomplete="autoComplete || autocomplete"
         @focus="handleFocus"
         @blur="softFocus = false"
-        @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -58,6 +57,7 @@
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
+        @keydown.tab="visible = false"
         @compositionstart="handleComposition"
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
@@ -80,6 +80,7 @@
       :readonly="readonly"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
+      :tabindex="(multiple && filterable) ? '-1' : null"
       @focus="handleFocus"
       @blur="handleBlur"
       @keyup.native="debouncedOnInputChange"
@@ -146,8 +147,7 @@
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
+  import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
   import { isKorean } from 'element-ui/src/utils/shared';
 
@@ -346,7 +346,7 @@
       value(val, oldVal) {
         if (this.multiple) {
           this.resetInputHeight();
-          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
+          if ((val && val.length > 0) || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
@@ -445,7 +445,7 @@
         const text = event.target.value;
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.handleQueryChange(text);
+          this.$nextTick(_ => this.handleQueryChange(text));
         } else {
           const lastCharacter = text[text.length - 1] || '';
           this.isOnComposition = !isKorean(lastCharacter);
@@ -466,10 +466,12 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          const length = this.$refs.input.value.length * 15 + 20;
-          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
-          this.managePlaceholder();
-          this.resetInputHeight();
+          this.$nextTick(() => {
+            const length = this.$refs.input.value.length * 15 + 20;
+            this.inputLength = this.collapseTags ? Math.min(50, length) : length;
+            this.managePlaceholder();
+            this.resetInputHeight();
+          });
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
@@ -510,6 +512,7 @@
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
         const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
+        const isUndefined = Object.prototype.toString.call(value).toLowerCase() === '[object undefined]';
 
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
@@ -522,7 +525,7 @@
           }
         }
         if (option) return option;
-        const label = (!isObject && !isNull)
+        const label = (!isObject && !isNull && !isUndefined)
           ? value : '';
         let newOption = {
           value: value,
@@ -564,7 +567,9 @@
         if (!this.softFocus) {
           if (this.automaticDropdown || this.filterable) {
             this.visible = true;
-            this.menuVisibleOnFocus = true;
+            if (this.filterable) {
+              this.menuVisibleOnFocus = true;
+            }
           }
           this.$emit('focus', event);
         } else {
@@ -671,7 +676,7 @@
 
       handleOptionSelect(option, byClick) {
         if (this.multiple) {
-          const value = this.value.slice();
+          const value = (this.value || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
@@ -750,7 +755,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        const value = this.multiple ? [] : null;
+        const value = this.multiple ? [] : '';
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;
@@ -866,7 +871,8 @@
           small: 32,
           mini: 28
         };
-        this.initialInputHeight = reference.$el.getBoundingClientRect().height || sizeMap[this.selectSize];
+        const input = reference.$el.querySelector('input');
+        this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize];
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();

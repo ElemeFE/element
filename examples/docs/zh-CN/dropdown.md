@@ -107,7 +107,7 @@
         <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
         <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check-outline">蚵仔煎</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -122,7 +122,7 @@
         <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
         <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check-outline">蚵仔煎</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -282,6 +282,7 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | — | true |
 | show-timeout  | 展开下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 250 |
 | hide-timeout  | 收起下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 150 |
+| tabindex      | Dropdown 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) | number | — | 0 |
 
 ### Dropdown Slots
 

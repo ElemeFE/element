@@ -9,7 +9,7 @@
     .el-date-table__row {
       &:hover {
         div {
-          background-color: $--datepicker-inrange-color;
+          background-color: $--datepicker-inrange-background-color;
         }
         td.available:hover {
           color: $--datepicker-font-color;
@@ -27,7 +27,7 @@
       }
 
       &.current div {
-        background-color: $--datepicker-inrange-color;
+        background-color: $--datepicker-inrange-background-color;
       }
     }
   }
@@ -77,13 +77,13 @@
     }
 
     &.available:hover {
-      color: $--datepicker-text-hover-color;
+      color: $--datepicker-hover-font-color;
     }
 
     &.in-range div {
-      background-color: $--datepicker-inrange-color;
+      background-color: $--datepicker-inrange-background-color;
       &:hover {
-        background-color: $--datepicker-inrange-hover-color;
+        background-color: $--datepicker-inrange-hover-background-color;
       }
     }
 
@@ -123,10 +123,10 @@
     &.selected div {
       margin-left: 5px;
       margin-right: 5px;
-      background-color: $--datepicker-inrange-color;
+      background-color: $--datepicker-inrange-background-color;
       border-radius: 15px;
       &:hover {
-        background-color: $--datepicker-inrange-hover-color;
+        background-color: $--datepicker-inrange-hover-background-color;
       }
     }
 

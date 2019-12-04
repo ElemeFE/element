@@ -99,6 +99,7 @@ Puede usar directamente las transiciones incorporadas en Element. Antes de hacer
 ### Colapsado
 Para efectos de colapsado usar el componente `el-collapse-transition`.
 :::demo
+
 ```html
 <template>
   <div>
@@ -140,7 +141,7 @@ Para efectos de colapsado usar el componente `el-collapse-transition`.
 ```
 :::
 
-### On demand
+### Bajo demanda
 
 ```js
 // fade/zoom

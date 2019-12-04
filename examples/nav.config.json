@@ -172,6 +172,10 @@
             {
               "path": "/badge",
               "title": "Badge 标记"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar 头像"
             }
           ]
         },
@@ -216,6 +220,10 @@
               "title": "Breadcrumb 面包屑"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader 页头"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown 下拉菜单"
             },
@@ -241,6 +249,10 @@
               "title": "Popover 弹出框"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm 气泡确认框"
+            },
+            {
               "path": "/card",
               "title": "Card 卡片"
             },
@@ -261,8 +273,24 @@
               "title": "Divider 分割线"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar 日历"
+            },
+            {
               "path": "/image",
               "title": "Image 图片"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop 回到顶部"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll 无限滚动"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer 抽屉"
             }
           ]
         }
@@ -486,6 +514,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -511,6 +543,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -531,8 +567,28 @@
               "title": "Divider"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
@@ -756,6 +812,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -781,6 +841,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -801,8 +865,28 @@
               "title": "Divider"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }
@@ -1026,6 +1110,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -1051,6 +1139,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -1071,8 +1163,28 @@
               "title": "Divider"
             },
             {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
               "path": "/image",
               "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }

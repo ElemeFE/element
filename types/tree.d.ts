@@ -36,6 +36,7 @@ export interface TreeNode<K, D> {
   label: string;
   nextSibling: TreeNode<K, D> | null;
   previousSibling: TreeNode<K, D> | null;
+  isCurrent: boolean;
 }
 
 /** incomplete, you can convert to any to use other properties */
@@ -44,7 +45,7 @@ export interface TreeStore<K, D> {
 }
 
 /** Tree Component */
-export declare class ElTree<K = any, D = TreeData> extends ElementUIComponent {
+export declare class ElTree<K, D extends TreeData> extends ElementUIComponent {
   /** TreeStore */
   store: TreeStore<K, D>;
 

@@ -106,7 +106,7 @@ Vous pouvez choisir de déclencher le menu au moment du clic, ou en passant la s
         <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
         <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check-outline">Action 5</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -121,7 +121,7 @@ Vous pouvez choisir de déclencher le menu au moment du clic, ou en passant la s
         <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
         <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check-outline">Action 5</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -280,6 +280,7 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 | hide-on-click | Si le menu doit disparaître après avoir cliqué sur un élément.     | boolean          | — | true |
 | show-timeout | Délai avant d'afficher le menu (ne marche que si `trigger` est `hover`) | number | — | 250 |
 | hide-timeout | Délai avant de cacher le menu (ne marche que si `trigger` est `hover`) | number | — | 150 |
+| tabindex     | [tabindex](https://developer.mozilla.org/fr/docs/Web/HTML/Attributs_universels/tabindex) de Dropdown | number | — | 0 |
 
 ### Dropdown Slots
 
@@ -300,7 +301,7 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| command       | Le contenu a envoyer à la callback de l'évènement `command` du Dropdown. | string/number/object  |          —             |    —     |
+| command       | Le contenu à envoyer au callback de l'évènement `command` du Dropdown. | string/number/object  |          —             |    —     |
 | disabled      | Si l'élément est désactivé.  | boolean  |          —             |    false     |
 | divided       | Si un diviseur doit être affiché.  | boolean  |          —             |    false     |
 | icon          | Classe de l'icône. | string   |  —  |  —  |

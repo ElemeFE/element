@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'ئۇچۇر تېپىلمىدى',
       loading: 'يۈكلىنىۋاتىدۇ',
-      placeholder: 'تاللاڭ'
+      placeholder: 'تاللاڭ',
+      noData: 'ئۇچۇر يوق'
     },
     pagination: {
       goto: 'كىيىنكى بەت',
@@ -107,6 +108,13 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

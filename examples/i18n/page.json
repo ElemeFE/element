@@ -12,11 +12,25 @@
         "7": "使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。",
         "8": "资源",
         "9": "下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。",
+        "10": "主题",
+        "11": "在线主题编辑器，可视化定制和管理站点主题、组件样式",
+        "12": "主题定制功能上线",
+        "13": "点击开始编辑",
+        "14": "尝试您的新主题",
         "lang": "zh-CN",
         "titleSize": "34",
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "官方主题",
+        "2": "我的主题",
+        "3": "主题名称"
+      },
+      "theme-preview": {
+        "1": "返回"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "更新日志",
         "2": "zh-CN"
@@ -104,11 +118,25 @@
         "7": "Experience interaction details by strolling through component demos. Use encapsulated code to improve developing efficiency.",
         "8": "Resource",
         "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
+        "10": "Theme",
+        "11": "Online theme roller, visualize custom and manage site themes and component styles",
+        "12": "Theme customization is available!",
+        "13": "Click here",
+        "14": "Make your own theme",
         "lang": "en-US",
         "titleSize": "34",
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
+      "theme-preview": {
+        "1": "Back"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "Changelog",
         "2": "en-US"
@@ -196,11 +224,25 @@
         "7": "Experimenta la interacción al pasear con los ejemplos de los componentes. Utiliza el código encapsulado para mejorar la eficiencia en el desarrollo.",
         "8": "Recursos",
         "9": "Descarga los recursos de diseño relevantes para dar forma a un prototipo o borrador, aumentando la eficiencia del diseño.",
+        "10": "Theme",
+        "11": "Online theme roller, visualize custom and manage site themes and component styles",
+        "12": "Theme customization is available!",
+        "13": "Click here",
+        "14": "Make your own theme",
         "lang": "es",
         "titleSize": "34",
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
+      "theme-preview": {
+        "1": "Back"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "Lista de cambios",
         "2": "es"
@@ -287,13 +329,26 @@
         "6": "Composants",
         "7": "Découvrez les détails de chaque composant and parcourant les différentes démos. Utilisez l'encapsulation du code pour développer plus efficacement.",
         "8": "Ressources",
-        "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
         "9": "Téléchargez différents outils de prototypage ou de visualisation pour un design plus efficace.",
+        "10": "Theme",
+        "11": "Online theme roller, visualize custom and manage site themes and component styles",
+        "12": "Theme customization is available!",
+        "13": "Click here",
+        "14": "Make your own theme",
         "lang": "fr-FR",
         "titleSize": "34",
         "paraSize": "18"
       },
       "component": {},
+      "theme": {
+        "1": "Official Theme",
+        "2": "My Theme",
+        "3": "Theme name"
+      },
+      "theme-preview": {
+        "1": "Back"
+      },
+      "theme-nav": {},
       "changelog": {
         "1": "Changelog",
         "2": "fr-FR"

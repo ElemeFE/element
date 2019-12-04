@@ -174,3 +174,4 @@ tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozill
 | popper-class | 为 Tooltip 的 popper 添加类名 | String | — | — |
 | enterable | 鼠标是否可进入到 tooltip 中 | Boolean | — | true |
 | hide-after | Tooltip 出现后自动隐藏延时，单位毫秒，为 0 则不会自动隐藏 | number | — | 0 |
+| tabindex   | Tooltip 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) | number | — | 0 |

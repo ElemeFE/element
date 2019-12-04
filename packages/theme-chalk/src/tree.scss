@@ -23,6 +23,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     color: $--color-text-secondary;
+    font-size: $--font-size-base;
   }
 
   @include e(drop-indicator) {
@@ -59,7 +60,7 @@
     & > .el-tree-node__expand-icon {
       padding: 6px;
     }
-    & > .el-checkbox {
+    & > label.el-checkbox {
       margin-right: 8px;
     }
     &:hover {

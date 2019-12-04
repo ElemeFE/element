@@ -20,7 +20,6 @@
     min-height: 60px;
     text-align: center;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,6 +80,11 @@
     width: 20px;
   }
 
+  @include e(append-wrapper) {
+    // 避免外边距重合 https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
+    overflow: hidden;
+  }
+
   @include m(fit) {
     border-right: 0;
     border-bottom: 0;
@@ -103,7 +107,7 @@
   }
 
   thead {
-    color: $--table-header-color;
+    color: $--table-header-font-color;
     font-weight: 500;
 
     &.is-group {
@@ -181,30 +185,18 @@
   }
 
   th {
-    white-space: nowrap;
     overflow: hidden;
     user-select: none;
     background-color: $--table-header-background-color;
 
-    div {
+    > .cell {
       display: inline-block;
+      box-sizing: border-box;
+      position: relative;
+      vertical-align: middle;
       padding-left: 10px;
       padding-right: 10px;
-      line-height: 40px;
-      box-sizing: border-box;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    > .cell {
-      position: relative;
-      word-wrap: normal;
-      text-overflow: ellipsis;
-      display: inline-block;
-      vertical-align: middle;
       width: 100%;
-      box-sizing: border-box;
 
       &.highlight {
         color: $--color-primary;
@@ -505,7 +497,7 @@
       &, &.el-table__row--striped {
         &, &.current-row {
           > td {
-            background-color: $--table-current-row-background-color;
+            background-color: $--table-row-hover-background-color;
           }
         }
       }
@@ -561,9 +553,11 @@
   [class*=el-table__row--level] {
     .el-table__expand-icon {
       display: inline-block;
-      width: 14px;
-      vertical-align: middle;
-      margin-right: 5px;
+      width: 20px;
+      line-height: 20px;
+      height: 20px;
+      text-align: center;
+      margin-right: 3px;
     }
   }
 }

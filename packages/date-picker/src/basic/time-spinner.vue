@@ -101,7 +101,7 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from '../util';
+  import { getRangeHours, getRangeMinutes, modifyTime } from 'element-ui/src/utils/date-util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
@@ -231,7 +231,7 @@
       },
 
       handleScroll(type) {
-        const value = Math.min(Math.floor((this.$refs[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), (type === 'hours' ? 23 : 59));
+        const value = Math.min(Math.round((this.$refs[type].wrap.scrollTop - (this.scrollBarHeight(type) * 0.5 - 10) / this.typeItemHeight(type) + 3) / this.typeItemHeight(type)), (type === 'hours' ? 23 : 59));
         this.modifyDateField(type, value);
       },
 
@@ -283,6 +283,7 @@
 
         this.modifyDateField(label, now);
         this.adjustSpinner(label, now);
+        this.$nextTick(() => this.emitSelectRange(this.currentScrollbar));
       },
       amPm(hour) {
         let shouldShowAmPm = this.amPmMode.toLowerCase() === 'a';

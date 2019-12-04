@@ -1,9 +1,11 @@
+import { arrayFindIndex } from 'element-ui/src/utils/util';
 import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { getStyle, hasClass } from 'element-ui/src/utils/dom';
+import { getStyle, hasClass, removeClass, addClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
+import { mapStates } from './store/helper';
 
 export default {
   name: 'ElTableBody',
@@ -28,30 +30,7 @@ export default {
   },
 
   render(h) {
-    const columnsHidden = this.columns.map((column, index) => this.isColumnHidden(index));
-    let rows = this.data;
-    if (this.store.states.lazy && Object.keys(this.store.states.lazyTreeNodeMap).length) {
-      rows = rows.reduce((prev, item) => {
-        prev.push(item);
-        const rowKey = this.store.table.getRowKey(item);
-        const parent = this.store.states.treeData[rowKey];
-        if (parent && parent.children && parent.hasChildren) {
-          const tmp = [];
-          const traverse = (children) => {
-            if (!children) return;
-            children.forEach(key => {
-              tmp.push(this.store.states.lazyTreeNodeMap[key]);
-              if (this.store.states.treeData[key]) {
-                traverse(this.store.states.treeData[key].children);
-              }
-            });
-          };
-          traverse(parent.children);
-          prev = prev.concat(tmp);
-        }
-        return prev;
-      }, []);
-    }
+    const data = this.data || [];
     return (
       <table
         class="el-table__body"
@@ -60,89 +39,16 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this.columns.map(column => <col name={ column.id } key={column.id} />)
           }
         </colgroup>
         <tbody>
           {
-            this._l(rows, (row, $index) => {
-              const rowKey = this.table.rowKey ? this.getKeyOfRow(row, $index) : $index;
-              const treeNode = this.treeData[rowKey];
-              const rowClasses = this.getRowClass(row, $index);
-              if (treeNode) {
-                rowClasses.push('el-table__row--level-' + treeNode.level);
-              }
-              const tr = (<tr
-                v-show={ treeNode ? treeNode.display : true }
-                style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
-                key={ rowKey }
-                on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-                on-click={ ($event) => this.handleClick($event, row) }
-                on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
-                on-mouseenter={ _ => this.handleMouseEnter($index) }
-                on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ rowClasses }>
-                {
-                  this._l(this.columns, (column, cellIndex) => {
-                    const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
-                    if (!rowspan || !colspan) {
-                      return '';
-                    } else {
-                      const data = {
-                        store: this.store,
-                        _self: this.context || this.table.$vnode.context,
-                        row,
-                        column,
-                        $index
-                      };
-                      if (cellIndex === this.firstDefaultColumnIndex && treeNode) {
-                        data.treeNode = {
-                          hasChildren: treeNode.hasChildren || (treeNode.children && treeNode.children.length),
-                          expanded: treeNode.expanded,
-                          indent: treeNode.level * this.treeIndent,
-                          level: treeNode.level,
-                          loaded: treeNode.loaded,
-                          rowKey
-                        };
-                      }
-                      return (
-                        <td
-                          style={ this.getCellStyle($index, cellIndex, row, column) }
-                          class={ this.getCellClass($index, cellIndex, row, column) }
-                          rowspan={ rowspan }
-                          colspan={ colspan }
-                          on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                          on-mouseleave={ this.handleCellMouseLeave }>
-                          {
-                            column.renderCell.call(
-                              this._renderProxy,
-                              h,
-                              data,
-                              columnsHidden[cellIndex]
-                            )
-                          }
-                        </td>
-                      );
-                    }
-                  })
-                }
-              </tr>);
-              if (this.hasExpandColumn && this.store.isRowExpanded(row)) {
-                return [
-                  tr,
-                  <tr>
-                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
-                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
-                    </td>
-                  </tr>
-                ];
-              } else {
-                return tr;
-              }
-            }).concat(
-              <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
-            )
+            data.reduce((acc, row) => {
+              return acc.concat(this.wrappedRowRender(row, acc.length));
+            }, [])
           }
+          <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
         </tbody>
       </table>
     );
@@ -153,53 +59,43 @@ export default {
       return this.$parent;
     },
 
-    data() {
-      return this.store.states.data;
-    },
-
-    treeData() {
-      return this.store.states.treeData;
-    },
-
-    columnsCount() {
-      return this.store.states.columns.length;
-    },
-
-    leftFixedLeafCount() {
-      return this.store.states.fixedLeafColumnsLength;
-    },
-
-    rightFixedLeafCount() {
-      return this.store.states.rightFixedLeafColumnsLength;
-    },
-
-    leftFixedCount() {
-      return this.store.states.fixedColumns.length;
-    },
-
-    rightFixedCount() {
-      return this.store.states.rightFixedColumns.length;
-    },
-
-    columns() {
-      return this.store.states.columns;
-    },
-
-    hasExpandColumn() {
-      return this.columns.some(({ type }) => type === 'expand');
-    },
+    ...mapStates({
+      data: 'data',
+      columns: 'columns',
+      treeIndent: 'indent',
+      leftFixedLeafCount: 'fixedLeafColumnsLength',
+      rightFixedLeafCount: 'rightFixedLeafColumnsLength',
+      columnsCount: states => states.columns.length,
+      leftFixedCount: states => states.fixedColumns.length,
+      rightFixedCount: states => states.rightFixedColumns.length,
+      hasExpandColumn: states => states.columns.some(({ type }) => type === 'expand')
+    }),
 
     firstDefaultColumnIndex() {
-      for (let index = 0; index < this.columns.length; index++) {
-        if (this.columns[index].type === 'default') {
-          return index;
-        }
-      }
-      return 0;
-    },
+      return arrayFindIndex(this.columns, ({ type }) => type === 'default');
+    }
+  },
 
-    treeIndent() {
-      return this.store.states.indent;
+  watch: {
+    // don't trigger getter of currentRow in getCellClass. see https://jsfiddle.net/oe2b4hqt/
+    // update DOM manually. see https://github.com/ElemeFE/element/pull/13954/files#diff-9b450c00d0a9dec0ffad5a3176972e40
+    'store.states.hoverRow'(newVal, oldVal) {
+      if (!this.store.states.isComplex || this.$isServer) return;
+      let raf = window.requestAnimationFrame;
+      if (!raf) {
+        raf = (fn) => setTimeout(fn, 16);
+      }
+      raf(() => {
+        const rows = this.$el.querySelectorAll('.el-table__row');
+        const oldRow = rows[oldVal];
+        const newRow = rows[newVal];
+        if (oldRow) {
+          removeClass(oldRow, 'hover-row');
+        }
+        if (newRow) {
+          addClass(newRow, 'hover-row');
+        }
+      });
     }
   },
 
@@ -235,7 +131,6 @@ export default {
     getSpan(row, column, rowIndex, columnIndex) {
       let rowspan = 1;
       let colspan = 1;
-
       const fn = this.table.spanMethod;
       if (typeof fn === 'function') {
         const result = fn({
@@ -244,7 +139,6 @@ export default {
           rowIndex,
           columnIndex
         });
-
         if (Array.isArray(result)) {
           rowspan = result[0];
           colspan = result[1];
@@ -253,11 +147,7 @@ export default {
           colspan = result.colspan;
         }
       }
-
-      return {
-        rowspan,
-        colspan
-      };
+      return { rowspan, colspan };
     },
 
     getRowStyle(row, rowIndex) {
@@ -268,17 +158,13 @@ export default {
           rowIndex
         });
       }
-      return rowStyle;
+      return rowStyle || null;
     },
 
     getRowClass(row, rowIndex) {
       const classes = ['el-table__row'];
       if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
         classes.push('current-row');
-      }
-
-      if (rowIndex === this.store.states.hoverRow) {
-        classes.push('hover-row');
       }
 
       if (this.stripe && rowIndex % 2 === 1) {
@@ -336,6 +222,14 @@ export default {
       return classes.join(' ');
     },
 
+    getColspanRealWidth(columns, colspan, index) {
+      if (colspan < 1) {
+        return columns[index].realWidth;
+      }
+      const widthArr = columns.map(({ realWidth }) => realWidth).slice(index, index + colspan);
+      return widthArr.reduce((acc, width) => acc + width, -1);
+    },
+
     handleCellMouseEnter(event, row) {
       const table = this.table;
       const cell = getCell(event);
@@ -384,13 +278,13 @@ export default {
       this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
-    handleMouseEnter(index) {
+    handleMouseEnter: debounce(30, function(index) {
       this.store.commit('setHoverRow', index);
-    },
+    }),
 
-    handleMouseLeave() {
+    handleMouseLeave: debounce(30, function() {
       this.store.commit('setHoverRow', null);
-    },
+    }),
 
     handleContextMenu(event, row) {
       this.handleEvent(event, row, 'contextmenu');
@@ -418,9 +312,172 @@ export default {
       table.$emit(`row-${name}`, row, column, event);
     },
 
-    handleExpandClick(row, e) {
-      e.stopPropagation();
-      this.store.toggleRowExpansion(row);
+    rowRender(row, $index, treeRowData) {
+      const { treeIndent, columns, firstDefaultColumnIndex } = this;
+      const columnsHidden = columns.map((column, index) => this.isColumnHidden(index));
+      const rowClasses = this.getRowClass(row, $index);
+      let display = true;
+      if (treeRowData) {
+        rowClasses.push('el-table__row--level-' + treeRowData.level);
+        display = treeRowData.display;
+      }
+      // 指令 v-show 会覆盖 row-style 中 display
+      // 使用 :style 代替 v-show https://github.com/ElemeFE/element/issues/16995
+      let displayStyle = display ? null : {
+        display: 'none'
+      };
+      return (<tr
+        style={ [displayStyle, this.getRowStyle(row, $index)] }
+        class={ rowClasses }
+        key={ this.getKeyOfRow(row, $index) }
+        on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
+        on-click={ ($event) => this.handleClick($event, row) }
+        on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
+        on-mouseenter={ _ => this.handleMouseEnter($index) }
+        on-mouseleave={ this.handleMouseLeave }>
+        {
+          columns.map((column, cellIndex) => {
+            const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
+            if (!rowspan || !colspan) {
+              return null;
+            }
+            const columnData = { ...column };
+            columnData.realWidth = this.getColspanRealWidth(columns, colspan, cellIndex);
+            const data = {
+              store: this.store,
+              _self: this.context || this.table.$vnode.context,
+              column: columnData,
+              row,
+              $index
+            };
+            if (cellIndex === firstDefaultColumnIndex && treeRowData) {
+              data.treeNode = {
+                indent: treeRowData.level * treeIndent,
+                level: treeRowData.level
+              };
+              if (typeof treeRowData.expanded === 'boolean') {
+                data.treeNode.expanded = treeRowData.expanded;
+                // 表明是懒加载
+                if ('loading' in treeRowData) {
+                  data.treeNode.loading = treeRowData.loading;
+                }
+                if ('noLazyChildren' in treeRowData) {
+                  data.treeNode.noLazyChildren = treeRowData.noLazyChildren;
+                }
+              }
+            }
+            return (
+              <td
+                style={ this.getCellStyle($index, cellIndex, row, column) }
+                class={ this.getCellClass($index, cellIndex, row, column) }
+                rowspan={ rowspan }
+                colspan={ colspan }
+                on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                on-mouseleave={ this.handleCellMouseLeave }>
+                {
+                  column.renderCell.call(
+                    this._renderProxy,
+                    this.$createElement,
+                    data,
+                    columnsHidden[cellIndex]
+                  )
+                }
+              </td>
+            );
+          })
+        }
+      </tr>);
+    },
+
+    wrappedRowRender(row, $index) {
+      const store = this.store;
+      const { isRowExpanded, assertRowKey } = store;
+      const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
+      if (this.hasExpandColumn && isRowExpanded(row)) {
+        const renderExpanded = this.table.renderExpanded;
+        const tr = this.rowRender(row, $index);
+        if (!renderExpanded) {
+          console.error('[Element Error]renderExpanded is required.');
+          return tr;
+        }
+        // 使用二维数组，避免修改 $index
+        return [[
+          tr,
+          <tr key={'expanded-row__' + tr.key}>
+            <td colspan={ this.columnsCount } class="el-table__expanded-cell">
+              { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
+            </td>
+          </tr>]];
+      } else if (Object.keys(treeData).length) {
+        assertRowKey();
+        // TreeTable 时，rowKey 必须由用户设定，不使用 getKeyOfRow 计算
+        // 在调用 rowRender 函数时，仍然会计算 rowKey，不太好的操作
+        const key = getRowIdentity(row, rowKey);
+        let cur = treeData[key];
+        let treeRowData = null;
+        if (cur) {
+          treeRowData = {
+            expanded: cur.expanded,
+            level: cur.level,
+            display: true
+          };
+          if (typeof cur.lazy === 'boolean') {
+            if (typeof cur.loaded === 'boolean' && cur.loaded) {
+              treeRowData.noLazyChildren = !(cur.children && cur.children.length);
+            }
+            treeRowData.loading = cur.loading;
+          }
+        }
+        const tmp = [this.rowRender(row, $index, treeRowData)];
+        // 渲染嵌套数据
+        if (cur) {
+          // currentRow 记录的是 index，所以还需主动增加 TreeTable 的 index
+          let i = 0;
+          const traverse = (children, parent) => {
+            if (!(children && children.length && parent)) return;
+            children.forEach(node => {
+              // 父节点的 display 状态影响子节点的显示状态
+              const innerTreeRowData = {
+                display: parent.display && parent.expanded,
+                level: parent.level + 1
+              };
+              const childKey = getRowIdentity(node, rowKey);
+              if (childKey === undefined || childKey === null) {
+                throw new Error('for nested data item, row-key is required.');
+              }
+              cur = { ...treeData[childKey] };
+              // 对于当前节点，分成有无子节点两种情况。
+              // 如果包含子节点的，设置 expanded 属性。
+              // 对于它子节点的 display 属性由它本身的 expanded 与 display 共同决定。
+              if (cur) {
+                innerTreeRowData.expanded = cur.expanded;
+                // 懒加载的某些节点，level 未知
+                cur.level = cur.level || innerTreeRowData.level;
+                cur.display = !!(cur.expanded && innerTreeRowData.display);
+                if (typeof cur.lazy === 'boolean') {
+                  if (typeof cur.loaded === 'boolean' && cur.loaded) {
+                    innerTreeRowData.noLazyChildren = !(cur.children && cur.children.length);
+                  }
+                  innerTreeRowData.loading = cur.loading;
+                }
+              }
+              i++;
+              tmp.push(this.rowRender(node, $index + i, innerTreeRowData));
+              if (cur) {
+                const nodes = lazyTreeNodeMap[childKey] || node[childrenColumnName];
+                traverse(nodes, cur);
+              }
+            });
+          };
+          // 对于 root 节点，display 一定为 true
+          cur.display = true;
+          const nodes = lazyTreeNodeMap[key] || row[childrenColumnName];
+          traverse(nodes, cur);
+        }
+        return tmp;
+      } else {
+        return this.rowRender(row, $index);
+      }
     }
   }
 };

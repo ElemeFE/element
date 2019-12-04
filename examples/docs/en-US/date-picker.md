@@ -346,6 +346,7 @@ Pay attention to capitalization
 | `A`  | AM/PM | only for `format`, uppercased | AM |
 | `a`  | am/pm | only for `format`, lowercased | am |
 | `timestamp` | JS timestamp | only for `value-format`; binding value will be a `number` | 1483326245000 |
+| `[MM]` | No escape characters | To escape characters, wrap them in square brackets (e.g. [A] [MM]) | MM |
 
 :::demo
 ```html
@@ -461,6 +462,7 @@ When picking a date range, you can assign the time part for start date and end d
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
+| cellClassName | set custom className | Function(Date) | — | — |
 | firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
 | onPick | a callback that triggers when the selected date is changed. Only for `daterange` and `datetimerange`. | Function({ maxDate, minDate }) | - | - |
 

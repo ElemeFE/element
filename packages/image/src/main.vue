@@ -9,53 +9,110 @@
     <img
       v-else
       class="el-image__inner"
+      v-bind="$attrs"
+      v-on="$listeners"
+      @click="clickHandler"
       :src="src"
-      :alt="alt"
-      :style="{ 'object-fit': fit }">
+      :style="imageStyle"
+      :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
+    <template v-if="preview">
+      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+    </template>
   </div>
 </template>
 
 <script>
+  import ImageViewer from './image-viewer';
   import Locale from 'element-ui/src/mixins/locale';
   import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
   import { isString, isHtmlElement } from 'element-ui/src/utils/types';
   import throttle from 'throttle-debounce/throttle';
 
+  const isSupportObjectFit = () => document.documentElement.style.objectFit !== undefined;
+
+  const ObjectFit = {
+    NONE: 'none',
+    CONTAIN: 'contain',
+    COVER: 'cover',
+    FILL: 'fill',
+    SCALE_DOWN: 'scale-down'
+  };
+
+  let prevOverflow = '';
+
   export default {
     name: 'ElImage',
 
     mixins: [Locale],
+    inheritAttrs: false,
+
+    components: {
+      ImageViewer
+    },
 
     props: {
       src: String,
       fit: String,
       lazy: Boolean,
-      scrollContainer: [String, HTMLElement],
-      alt: String
+      scrollContainer: {},
+      previewSrcList: {
+        type: Array,
+        default: () => []
+      },
+      zIndex: {
+        type: Number,
+        default: 2000
+      }
     },
 
     data() {
       return {
         loading: true,
         error: false,
-        show: !this.lazy
+        show: !this.lazy,
+        imageWidth: 0,
+        imageHeight: 0,
+        showViewer: false
       };
     },
 
+    computed: {
+      imageStyle() {
+        const { fit } = this;
+        if (!this.$isServer && fit) {
+          return isSupportObjectFit()
+            ? { 'object-fit': fit }
+            : this.getImageStyle(fit);
+        }
+        return {};
+      },
+      alignCenter() {
+        return !this.$isServer && !isSupportObjectFit() && this.fit !== ObjectFit.FILL;
+      },
+      preview() {
+        const { previewSrcList } = this;
+        return Array.isArray(previewSrcList) && previewSrcList.length > 0;
+      },
+      imageIndex() {
+        return this.previewSrcList.indexOf(this.src);
+      }
+    },
+
     watch: {
-      src: {
-        handler(val) {
-          this.show && this.loadImage(val);
-        },
-        immediate: true
+      src(val) {
+        this.show && this.loadImage();
       },
       show(val) {
-        val && this.loadImage(this.src);
+        val && this.loadImage();
       }
     },
 
     mounted() {
-      this.lazy && this.addLazyLoadListener();
+      if (this.lazy) {
+        this.addLazyLoadListener();
+      } else {
+        this.loadImage();
+      }
     },
 
     beforeDestroy() {
@@ -63,19 +120,30 @@
     },
 
     methods: {
-      loadImage(val) {
+      loadImage() {
+        if (this.$isServer) return;
+
         // reset status
         this.loading = true;
         this.error = false;
 
         const img = new Image();
-        img.onload = this.handleLoad.bind(this);
+        img.onload = e => this.handleLoad(e, img);
         img.onerror = this.handleError.bind(this);
-        img.src = val;
+
+        // bind html attrs
+        // so it can behave consistently
+        Object.keys(this.$attrs)
+          .forEach((key) => {
+            const value = this.$attrs[key];
+            img.setAttribute(key, value);
+          });
+        img.src = this.src;
       },
-      handleLoad(e) {
+      handleLoad(e, img) {
+        this.imageWidth = img.width;
+        this.imageHeight = img.height;
         this.loading = false;
-        this.$emit('load', e);
       },
       handleError(e) {
         this.loading = false;
@@ -117,6 +185,46 @@
         off(_scrollContainer, 'scroll', _lazyLoadHandler);
         this._scrollContainer = null;
         this._lazyLoadHandler = null;
+      },
+      /**
+       * simulate object-fit behavior to compatible with IE11 and other browsers which not support object-fit
+       */
+      getImageStyle(fit) {
+        const { imageWidth, imageHeight } = this;
+        const {
+          clientWidth: containerWidth,
+          clientHeight: containerHeight
+        } = this.$el;
+
+        if (!imageWidth || !imageHeight || !containerWidth || !containerHeight) return {};
+
+        const vertical = imageWidth / imageHeight < 1;
+
+        if (fit === ObjectFit.SCALE_DOWN) {
+          const isSmaller = imageWidth < containerWidth && imageHeight < containerHeight;
+          fit = isSmaller ? ObjectFit.NONE : ObjectFit.CONTAIN;
+        }
+
+        switch (fit) {
+          case ObjectFit.NONE:
+            return { width: 'auto', height: 'auto' };
+          case ObjectFit.CONTAIN:
+            return vertical ? { width: 'auto' } : { height: 'auto' };
+          case ObjectFit.COVER:
+            return vertical ? { height: 'auto' } : { width: 'auto' };
+          default:
+            return {};
+        }
+      },
+      clickHandler() {
+        // prevent body scroll
+        prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        this.showViewer = true;
+      },
+      closeViewer() {
+        document.body.style.overflow = prevOverflow;
+        this.showViewer = false;
       }
     }
   };

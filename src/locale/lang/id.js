@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Tidak ada data yg cocok',
       loading: 'Memuat',
-      placeholder: 'Pilih'
+      placeholder: 'Pilih',
+      noData: 'Tidak ada data'
     },
     pagination: {
       goto: 'Pergi ke',
@@ -107,6 +108,13 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

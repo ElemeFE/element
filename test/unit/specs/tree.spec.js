@@ -1,4 +1,4 @@
-import { createVue, destroyVM, waitImmediate } from '../util';
+import { createVue, destroyVM, waitImmediate, wait } from '../util';
 
 const DELAY = 10;
 
@@ -494,10 +494,13 @@ describe('Tree', () => {
   it('remove', (done) => {
     vm = getTreeVm(':props="defaultProps" node-key="id"');
     const tree = vm.$children[0];
+    tree.setCurrentKey(1);
+    expect(tree.getCurrentNode().id).to.equal(1);
     tree.remove(1);
     vm.$nextTick(() => {
       expect(vm.data[0].id).to.equal(2);
       expect(tree.getNode(1)).to.equal(null);
+      expect(tree.getCurrentNode()).to.equal(null);
       done();
     });
   });
@@ -827,5 +830,64 @@ describe('Tree', () => {
       expect(label.textContent).to.equal('三级 1-1');
       done();
     });
+  });
+
+  it('update multi tree data', async() => {
+    const vm = createVue({
+      template: `
+        <div>
+          <el-tree ref="tree1" :data="data" node-key="id" :props="defaultProps"></el-tree>
+          <el-tree ref="tree2" :data="data" node-key="id" :props="defaultProps"></el-tree>
+        </div>
+        `,
+
+      data() {
+        return {
+          data: [{
+            id: 1,
+            label: '一级 1',
+            children: [{
+              id: 11,
+              label: '二级 1-1',
+              children: [{
+                id: 111,
+                label: '三级 1-1'
+              }]
+            }]
+          }, {
+            id: 2,
+            label: '一级 2',
+            children: [{
+              id: 21,
+              label: '二级 2-1'
+            }, {
+              id: 22,
+              label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            children: [{
+              id: 31,
+              label: '二级 3-1'
+            }, {
+              id: 32,
+              label: '二级 3-2'
+            }]
+          }],
+          defaultProps: {
+            children: 'children',
+            label: 'label'
+          }
+        };
+      }
+    }, true);
+    const nodeData = { label: '新增 1', id: 4 };
+    vm.data.push(nodeData);
+    await wait();
+    const tree1 = vm.$refs.tree1;
+    expect(tree1.getNode(4).data).to.equal(nodeData);
+    const tree2 = vm.$refs.tree2;
+    expect(tree2.getNode(4).data).to.equal(nodeData);
   });
 });

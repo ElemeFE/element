@@ -12,8 +12,7 @@
       "repo": "代码仓库",
       "community": "社区",
       "changelog": "更新日志",
-      "theme": "自定义主题工具",
-      "preview": "在线主题生成",
+      "theme": "在线主题生成器",
       "faq": "常见问题",
       "gitter": "在线讨论",
       "starter": "脚手架",
@@ -24,6 +23,7 @@
     "header": {
       "guide": "指南",
       "components": "组件",
+      "theme": "主题",
       "resource": "资源"
     },
     "nav": {
@@ -43,8 +43,7 @@
       "repo": "GitHub",
       "community": "Community",
       "changelog": "Changelog",
-      "theme": "Theme CLI tool",
-      "preview": "Online theme generator",
+      "theme": "Online Theme Roller",
       "faq": "FAQ",
       "gitter": "Gitter",
       "starter": "Starter kit",
@@ -55,6 +54,7 @@
     "header": {
       "guide": "Guide",
       "components": "Component",
+      "theme": "Theme",
       "resource": "Resource"
     },
     "nav": {
@@ -74,8 +74,7 @@
       "repo": "GitHub",
       "community": "Comunidad",
       "changelog": "Lista de cambios",
-      "theme": "Generador de temas por CLI",
-      "preview": "Generador de temas en línea",
+      "theme": "Online Theme Roller",
       "faq": "FAQ",
       "gitter": "Gitter",
       "starter": "Kit de inicio",
@@ -86,6 +85,7 @@
     "header": {
       "guide": "Guía",
       "components": "Componentes",
+      "theme": "Theme",
       "resource": "Recursos"
     },
     "nav": {
@@ -105,8 +105,7 @@
       "repo": "GitHub",
       "community": "Communauté",
       "changelog": "Changelog",
-      "theme": "Générateur de thème (CLI)",
-      "preview": "Générateur de thème en ligne",
+      "theme": "Online Theme Roller",
       "faq": "FAQ",
       "gitter": "Gitter",
       "starter": "Kit de démarrage",
@@ -117,6 +116,7 @@
     "header": {
       "guide": "Guide",
       "components": "Composants",
+      "theme": "Theme",
       "resource": "Ressources"
     },
     "nav": {

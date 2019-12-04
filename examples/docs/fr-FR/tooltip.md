@@ -194,3 +194,4 @@ Les éléments de formulaire désactivés ne sont pas supportés par Tooltip, pl
 | popper-class | Classe du popper de Tooltip. | string | — | — |
 | enterable | Si la souris peut entrer dans la Tooltip. | Boolean | — | true |
 | hide-after | Délai avant disparition. | number | — | 0 |
+| tabindex   | [tabindex](https://developer.mozilla.org/fr/docs/Web/HTML/Attributs_universels/tabindex) de Tooltip. | number | — | 0 |

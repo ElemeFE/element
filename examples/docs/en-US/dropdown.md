@@ -106,7 +106,7 @@ Click the triggering element or hover on it.
         <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
         <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check-outline">Action 5</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -121,7 +121,7 @@ Click the triggering element or hover on it.
         <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
         <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
-        <el-dropdown-item icon="el-icon-circle-check-outline">Action 5</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-col>
@@ -278,6 +278,7 @@ Besides default size, Dropdown component provides three additional sizes for you
 | hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
 | show-timeout | Delay time before show a dropdown (only works when trigger is `hover`) | number | — | 250 |
 | hide-timeout | Delay time before hide a dropdown (only works when trigger is `hover`) | number | — | 150 |
+| tabindex     | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Dropdown | number | — | 0 |
 
 ### Dropdown Slots
 

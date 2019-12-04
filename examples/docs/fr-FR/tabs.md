@@ -68,7 +68,7 @@ Les onglets peuvent être stylisés comme des cartes.
 
 ### Style carte avec bordure
 
-ONglets avec style de carte et bordure.
+Onglets avec style de carte et bordure.
 
 :::demo Mettez `type` à `border-card`.
 
@@ -303,6 +303,6 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Titre de l'onglet. | string   | — |    —     |
 | disabled | Si l'onglet est désactivé. | boolean | — | false |
-| name      |identifiant correspondant au nom des onglets, utilisé par Tabs pour savoir quel est l'onglet actif. | string | — | Numéro de l'onglet dans l'ordre d'apparition, e.g. le premier est '1'. |
+| name      | Identifiant correspondant au nom des onglets, utilisé par Tabs pour savoir quel est l'onglet actif. | string | — | Numéro de l'onglet dans l'ordre d'apparition, e.g. le premier est '1'. |
 | closable  | Si l'onglet est supprimable. | boolean   | — |  false  |
 | lazy  | Si le contenu de l'onglet bénéficie du lazy-loading.  | boolean   | — |  false  |

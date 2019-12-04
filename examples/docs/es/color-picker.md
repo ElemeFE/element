@@ -30,7 +30,7 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 
 ### Alpha
 
-:::demo ColorPicker soporta selección de canales alpha. Para activarlo sólo agrege el atributo `show-alpha`.
+:::demo ColorPicker soporta selección de canales alpha. Para activarlo sólo agregue el atributo `show-alpha`.
 ```html
 <el-color-picker v-model="color" show-alpha></el-color-picker>
 
@@ -46,9 +46,9 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 ```
 :::
 
-### Predefined colors
+### Colores predefinidos
 
-:::demo ColorPicker supports predefined color options
+:::demo ColorPicker soporta opciones de color predefinidas
 ```html
 <el-color-picker
   v-model="color"

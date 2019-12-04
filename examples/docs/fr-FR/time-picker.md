@@ -9,7 +9,7 @@ Vous pouvez fournir une liste d'horaires fixés pour que l'utilisateur en choisi
 :::demo Utilisez `el-time-select` puis assignez un horaire de début, de fin et un pas grâce aux propriétés `start`, `end` et `step` de l'attribut `picker-options`.
 ```html
 <el-time-select
-  v-model="value1"
+  v-model="value"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -22,7 +22,7 @@ Vous pouvez fournir une liste d'horaires fixés pour que l'utilisateur en choisi
   export default {
     data() {
       return {
-        value1: ''
+        value: ''
       };
     }
   }
@@ -39,7 +39,7 @@ Vous pouvez aussi laisser l'utilisateur choisir librement un horaire.
 ```html
 <template>
   <el-time-picker
-    v-model="value2"
+    v-model="value1"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -47,7 +47,7 @@ Vous pouvez aussi laisser l'utilisateur choisir librement un horaire.
   </el-time-picker>
   <el-time-picker
     arrow-control
-    v-model="value3"
+    v-model="value2"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -59,8 +59,8 @@ Vous pouvez aussi laisser l'utilisateur choisir librement un horaire.
   export default {
     data() {
       return {
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40)
+        value1: new Date(2016, 9, 10, 18, 40),
+        value2: new Date(2016, 9, 10, 18, 40)
       };
     }
   }
@@ -70,7 +70,7 @@ Vous pouvez aussi laisser l'utilisateur choisir librement un horaire.
 
 ### Intervalle de temps fixe
 
-Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélectionné en premier, certains horaires de fins seront désactivés si ils ont lieu avant l'horaire de début.
+Vous pouvez définir un intervalle de temps. Si l'horaire de début est sélectionné en premier, certains horaires de fins seront désactivés s'ils ont lieu avant l'horaire de début.
 
 :::demo
 ```html
@@ -118,7 +118,7 @@ Vous pouvez également définir un intervalle libre.
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value1"
     range-separator="To"
     start-placeholder="Horaire de début"
     end-placeholder="Horaire de fin">
@@ -126,7 +126,7 @@ Vous pouvez également définir un intervalle libre.
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value2"
     range-separator="To"
     start-placeholder="Horaire de début"
     end-placeholder="Horaire de fin">
@@ -137,8 +137,8 @@ Vous pouvez également définir un intervalle libre.
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value2: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
@@ -166,7 +166,7 @@ Vous pouvez également définir un intervalle libre.
 | picker-options | Options additionnelles, voir la table ci-dessous. | object | — | {} |
 | range-separator | Séparateur d'intervalle. | string | - | '-' |
 | default-value | Optionnel, date d'aujourd'hui par défaut. | `Date` pour le TimePicker, `string` pour le TimeSelect | Toute valeur acceptée par `new Date()` pour le TimePicker, une valeur sélectionnable pour TimeSelect. | — |
-| value-format | Optionnel, uniquement pour TimePicker, format de la valeur. Si non-spécifié, la valeur sera un objet `Date`. | string | Voir [date formats](#/en-US/component/date-picker#date-formats) | — |
+| value-format | Optionnel, uniquement pour TimePicker, format de la valeur. Si non spécifié, la valeur sera un objet `Date`. | string | Voir [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | Attribut `name` natif de l'input. | string | — | — |
 | prefix-icon | Classe de l'icône de préfixe. | string | — | el-icon-time |
 | clear-icon | Classe de l'icône d'effacement. | string | — | el-icon-circle-close |

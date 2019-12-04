@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'データなし',
       loading: 'ロード中',
-      placeholder: '選択してください'
+      placeholder: '選択してください',
+      noData: 'データなし'
     },
     pagination: {
       goto: '',
@@ -107,6 +108,13 @@ export default {
     },
     image: {
       error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

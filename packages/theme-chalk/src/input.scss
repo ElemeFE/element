@@ -80,7 +80,6 @@
   & .el-input__clear {
     color: $--input-icon-color;
     font-size: $--input-font-size;
-    line-height: 16px;
     cursor: pointer;
     transition: $--color-transition-base;
 
@@ -98,6 +97,7 @@
 
     .el-input__count-inner {
       background: $--color-white;
+      line-height: initial;
       display: inline-block;
       padding: 0 5px;
     }

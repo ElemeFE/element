@@ -174,7 +174,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 ```
 :::
 
-:::demo Setting this `marks` attribute can show mark on slider.
+:::demo Vous pouvez afficher des marqueurs sur le slider grâce à l'attribut `marks`.
 ```html
 <template>
   <div class="block">
@@ -230,10 +230,11 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 | label | Label pour les lecteurs d'écran. | string | — | — |
 | debounce | Délai après écriture en millisecondes, marche quand `show-input` est `true`. | number | — | 300 |
 | tooltip-class | Classe du tooltip. | string | — | — |
-| marks | marks， type of key must be `number` and must in closed interval `[min, max]`, each mark can custom style| object | — | — |
+| marks | Marqueurs, les clés doivent être des `number` et être comprises dans l'intervalle `[min, max]`. Chaque marqueur peut avoir un style particulier. | object | — | — |
 
 ## Évènements
 
 | Nom | Description | Paramètres |
 |---------- |-------- |---------- |
 | change | Se déclenche quand la valeur change (si le changement est fait à la souris, se déclenche quand la souris redevient immobile). | La nouvelle valeur. |
+| input | triggers when the data changes (It'll be emitted in real time during sliding) | value after changing |

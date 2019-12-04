@@ -69,6 +69,26 @@ Allows you to define incremental steps.
 ```
 :::
 
+### Step strictly
+
+:::demo The `step-strictly` attribute accepts a `boolean`. if this attribute is `true`, input value can only be multiple of step.
+
+```html
+<template>
+  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num: 2
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Precision
 
 :::demo Add `precision` attribute to set the precision of input value.
@@ -154,6 +174,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
+|step-strictly | whether input value can only be multiple of step | number   | — | false |
 |precision | precision of input value | number | — | — |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
@@ -167,7 +188,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 | Event Name | Description | Parameters |
 |----| ---- | -----|
-|change | triggers when the value changes | value after change |
+|change | triggers when the value changes | currentValue, oldValue |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 

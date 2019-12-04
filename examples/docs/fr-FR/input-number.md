@@ -1,10 +1,10 @@
 ## InputNumber
 
-Un champs d'input de valeurs numériques, avec un domaine personnalisable.
+Un champ d'input de valeurs numériques, avec un domaine personnalisable.
 
 ### Usage
 
-:::demo Liez une variable à `v-model` dans l'element `<el-input-number>` et c'est tout !
+:::demo Liez une variable à `v-model` dans l'élément `<el-input-number>` et c'est tout !
 
 ```html
 <template>
@@ -69,6 +69,26 @@ Vous pouvez déterminer un pas pour le champs.
 ```
 :::
 
+### Pas strict
+
+:::demo L'attribut `step-strictly` accepte un `boolean`. Si cet attribut est `true`, la valeur de l'input ne peut être qu'un multiple de `step`.
+
+```html
+<template>
+  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num: 2
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Précision
 
 :::demo Ajoutez l'attribut `precision` pour régler la précision du champs.
@@ -91,7 +111,7 @@ Vous pouvez déterminer un pas pour le champs.
 :::
 
 :::tip
-La valeur de `precision` doit être un integer non-négatif et ne doit pas être inférieure aux décimales de `step`.
+La valeur de `precision` doit être un integer non négatif et ne doit pas être inférieure aux décimales de `step`.
 :::
 
 ### Taille
@@ -154,6 +174,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | min | La valeur minimale autorisée. | number | — | `-Infinity` |
 | max | La valeur maximale autorisée. | number | — | `Infinity` |
 | step | Le pas pour l'incrémentation. | number | — | 1 |
+| step-strictly | Si la valeur ne peut être qu'un multiple du pas. | number   | — | false |
 | precision | La précision de la valeur. | number | — | — |
 | size | La taille du composant. | string | large/small| — |
 | disabled| Si le composant est désactivé. | boolean | — | false |
@@ -167,7 +188,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 
 | Nom | Description | Paramètres |
 |----| ---- | -----|
-| change | Se déclenche quand la valeur change. | La nouvelle valeur. |
+| change | Se déclenche quand la valeur change. | currentValue, oldValue |
 | blur | Se déclenche quand le champ perds le focus. | (event: Event) |
 | focus | Se déclenche quand le champ a le focus. | (event: Event) |
 

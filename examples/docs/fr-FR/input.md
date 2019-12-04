@@ -3,7 +3,7 @@
 Le champ d'input de base.
 
 :::warning
-Input est un composant controllé, il **affiche toujours la valeur liée de Vue**.
+Input est un composant contrôlé, il **affiche toujours la valeur liée de Vue**.
 
 En règle générale, l'évènement `input` devrait être géré. Son handler devrait mettre à jour la valeur du composant (ou utilisez `v-model`). Dans le cas contraire, la valeur du champ ne sera pas modifiée.
 
@@ -520,9 +520,9 @@ Vous pouvez aller chercher des infos de suggestions sur un serveur distant.
 ```
 :::
 
-### Limit length
+### Taille limite
 
-:::demo `maxlength` and `minlength` are attributes of native input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+:::demo `maxlength` et `minlength` sont des attributs natifs, indiquant la taille limite de l'input. Le nombre de caractères est mesuré par la taille de la chaine Javascript. Si vous utilisez `maxlength`, vous pourrez montrer le nombre de caractères en mettant `show-word-limit` à `true`.
 
 ```html
 <el-input
@@ -564,7 +564,7 @@ export default {
 | value / v-model | Variable liée. | string / number | — | — |
 | maxlength| Identique à `maxlength` dans l'input natif. | number| — | — |
 | minlength| Identique à `minlength` dans l'input natif. | number | — | — |
-| show-word-limit | whether show word count，only works when `type` is 'text' or 'textarea' | boolean    |  —  | false |
+| show-word-limit | Affiche le nombre de caractères restant， ne marche que lorsque `type` est 'text' ou 'textarea'. | boolean    |  —  | false |
 | placeholder| Placeholder de l' Input. | string | — | — |
 | clearable | Si le bouton de reset apparaît. | boolean | — | false |
 | show-password | Si le champ doit un champ de mot de passe avec bouton de visualisation. | boolean         | — | false |
@@ -604,6 +604,8 @@ export default {
 | blur | Se déclenche quand Input perds le focus. | (event: Event) |
 | focus | Se déclenche quand Input a le focus. | (event: Event) |
 | change | Se déclenche quand la valeur change. | (value: string \ number) |
+| change | Déclenché uniquement lorsque la zone de saisie perd le focus ou que l'utilisateur appuie sur Entrée. | (value: string \| number) |
+| input | Déclenché lorsque la valeur d'entrée change. | (value: string \| number) |
 | clear | Se déclenche quand le champ est effacé par le bouton de reset. | — |
 
 ### Méthodes de l'Input

@@ -4,14 +4,14 @@ Conteneur intégrant des informations.
 
 ### Usage
 
-Les composants Card incluent un titre, un contenu et des opérations.
+Le composant Card comprend un titre, un contenu et des opérations.
 
 :::demo Card est composé d'un `header` et d'un `body`. `header` est optionnel et son contenu nécessite l'utilisation d'un slot.
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">
     <span>Card name</span>
-    <el-button style="float: right; padding: 3px 0" type="text">Operating button</el-button>
+    <el-button style="float: right; padding: 3px 0" type="text">Bouton</el-button>
   </div>
   <div v-for="o in 4" :key="o" class="text item">
     {{'List item ' + o }}

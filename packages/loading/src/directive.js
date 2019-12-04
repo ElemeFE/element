@@ -45,6 +45,7 @@ loadingDirective.install = Vue => {
       });
     } else {
       afterLeave(el.instance, _ => {
+        if (!el.instance.hiding) return;
         el.domVisible = false;
         const target = binding.modifiers.fullscreen || binding.modifiers.body
           ? document.body
@@ -80,6 +81,9 @@ loadingDirective.install = Vue => {
         }
       });
       el.domInserted = true;
+    } else if (el.domVisible && el.instance.hiding === true) {
+      el.instance.visible = true;
+      el.instance.hiding = false;
     }
   };
 

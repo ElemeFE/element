@@ -229,6 +229,7 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 | show-close            | si mostrar un botón de cerrar            | boolean                                  | —                 | true        |
 | before-close          | una devolución de llamada antes de que se cierre el cuadro de diálogo, y evitar cerrar el cuadro de diálogo | función(done) `done`se usa para cerrar el diálog | —                 | —           |
 | center                | si alinear el encabezado y el pie de página en el centro | boolean                                  | —                 | false       |
+| destroy-on-close      | Destruir elementos en Dialog cuando se cierra | boolean                                  | —                 | false         |
 
 ### Slots
 
@@ -242,7 +243,7 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 | Nombre de Evento | Descripcíon                              | Parámetros |
 | ---------------- | ---------------------------------------- | ---------- |
 | open             | se activa cuando se abre el cuadro de Diálogo | —          |
-| opened           | se activa cuando la animacion de apertura del Dialog termina. | — |
+| opened           | se activa cuando la animación de apertura del Dialog termina. | — |
 | close            | se dispara cuando el Diálogo se cierra   | —          |
 | closed           | se activa cuando finaliza la animación de cierre del Diálog | — |
 
