@@ -390,13 +390,7 @@
       },
 
       resetView() {
-        if (this.selectionMode === 'month') {
-          this.currentView = 'month';
-        } else if (this.selectionMode === 'year') {
-          this.currentView = 'year';
-        } else {
-          this.currentView = 'date';
-        }
+        this.currentView = this.computedDefaultView();
       },
 
       handleEnter() {
@@ -510,6 +504,7 @@
         value: '',
         defaultValue: null, // use getDefaultValue() for time computation
         defaultTime: null,
+        defaultView: null,
         showTime: false,
         selectionMode: 'day',
         shortcuts: '',
@@ -562,6 +557,20 @@
           return this.userInputDate;
         } else {
           return formatDate(this.value || this.defaultValue, this.dateFormat);
+        }
+      },
+
+      computedDefaultView() {
+        if (['month', 'year', 'date'].indexOf(this.defaultView) >= 0) {
+          return this.defaultView;
+        }
+
+        if (this.selectionMode === 'month') {
+          return 'month';
+        } else if (this.selectionMode === 'year') {
+          return 'year';
+        } else {
+          return 'date';
         }
       },
 
