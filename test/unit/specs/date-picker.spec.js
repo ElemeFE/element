@@ -2705,6 +2705,26 @@ describe('DatePicker', () => {
       }, DELAY);
     }, DELAY);
   });
+  
+  
+  
+  it('uses the default view option', done => {
+    let test;
+    vm = createTest(DatePicker, {
+      pickerOptions: {
+        defaultView: 'year'
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      expect(vm.picker.currentView).to.be.equal('year');
+      done();
+    }, DELAY);
+  });
 
   describe('picker-options:selectableRange', () => {
     let vm;
