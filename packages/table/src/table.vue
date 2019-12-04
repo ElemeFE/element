@@ -16,6 +16,7 @@
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div
       v-if="showHeader"
+      v-mousewheel="handleHeaderFooterMousewheel"
       class="el-table__header-wrapper"
       ref="headerWrapper">
       <table-header
@@ -62,6 +63,7 @@
     </div>
     <div
       v-if="showSummary"
+      v-mousewheel="handleHeaderFooterMousewheel"
       v-show="data && data.length > 0"
       class="el-table__footer-wrapper"
       ref="footerWrapper">
@@ -402,6 +404,13 @@
         }
       },
 
+      handleHeaderFooterMousewheel: throttle(16, function(event, data) {
+        const { pixelX, pixelY } = data;
+        if (Math.abs(pixelX) >= Math.abs(pixelY)) {
+          this.bodyWrapper.scrollLeft += data.pixelX / 5;
+        }
+      }),
+
       // TODO 使用 CSS transform
       syncPostion: throttle(20, function() {
         const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
@@ -429,10 +438,28 @@
         this.bodyWrapper.scrollLeft = scrollLeft;
       }),
 
+      bindHeaderOrFooterScrollEvent(wrapper) {
+        if (!wrapper) return;
+        const overflowX = window.getComputedStyle(wrapper, null).overflowX;
+        const isScroll = ['scroll', 'auto', 'overlay'].indexOf(overflowX) !== -1;
+        if (!isScroll) {
+          wrapper.addEventListener('scroll', this.syncBodyPostion, { passive: true });
+        }
+      },
+
+      unbindHeaderOrFooterScrollEvent(wrapper) {
+        if (!wrapper) return;
+        const overflowX = window.getComputedStyle(wrapper, null).overflowX;
+        const isScroll = ['scroll', 'auto', 'overlay'].indexOf(overflowX) !== -1;
+        if (!isScroll) {
+          wrapper.removeEventListener('scroll', this.syncBodyPostion, { passive: true });
+        }
+      },
+
       bindEvents() {
         const { headerWrapper, footerWrapper } = this.$refs;
-        if (headerWrapper) headerWrapper.addEventListener('scroll', this.syncBodyPostion, { passive: true });
-        if (footerWrapper) footerWrapper.addEventListener('scroll', this.syncBodyPostion, { passive: true });
+        this.bindHeaderOrFooterScrollEvent(headerWrapper);
+        this.bindHeaderOrFooterScrollEvent(footerWrapper);
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
@@ -441,8 +468,8 @@
 
       unbindEvents() {
         const { headerWrapper, footerWrapper } = this.$refs;
-        if (headerWrapper) headerWrapper.removeEventListener('scroll', this.syncBodyPostion, { passive: true });
-        if (footerWrapper) footerWrapper.removeEventListener('scroll', this.syncBodyPostion, { passive: true });
+        this.unbindHeaderOrFooterScrollEvent(headerWrapper);
+        this.unbindHeaderOrFooterScrollEvent(footerWrapper);
         this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
