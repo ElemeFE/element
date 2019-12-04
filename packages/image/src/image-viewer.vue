@@ -290,13 +290,12 @@ export default {
           break;
       }
       transform.enableTransition = enableTransition;
+    },
+    focusToImageViewer() {
+      // add tabindex then wrapper can be focusable via Javascript
+      // focus wrapper so arrow key can't cause inner scroll behavior underneath
+      this.$refs['el-image-viewer__wrapper'].focus();
     }
-  },
-  mounted() {
-    this.deviceSupportInstall();
-    // add tabindex then wrapper can be focusable via Javascript
-    // focus wrapper so arrow key can't cause inner scroll behavior underneath
-    this.$refs['el-image-viewer__wrapper'].focus();
   }
 };
 </script>

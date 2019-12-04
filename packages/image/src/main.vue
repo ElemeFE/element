@@ -16,7 +16,7 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer ref="imageViewer" :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
     </template>
   </div>
 </template>
@@ -222,6 +222,10 @@
         prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         this.showViewer = true;
+
+        const $imageViewer = this.$refs['imageViewer'];
+        $imageViewer.deviceSupportInstall();
+        $imageViewer.focusToImageViewer();
       },
       closeViewer() {
         document.body.style.overflow = prevOverflow;
