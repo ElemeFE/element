@@ -390,7 +390,7 @@
       },
 
       resetView() {
-        this.currentView = this.computedDefaultView();
+        this.currentView = this.computedDefaultView;
       },
 
       handleEnter() {
