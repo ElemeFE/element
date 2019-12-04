@@ -82,6 +82,7 @@
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
+      :beforeSelect="beforeSelect"
       @open="handleOpen"
       @close="handleClose">
       <el-submenu index="1">
@@ -168,6 +169,11 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      beforeSelect(next){
+        this.$confirm('确认跳转?', '提示').then(() => {
+          next()
+        }).catch(err => err)
       }
     }
   }

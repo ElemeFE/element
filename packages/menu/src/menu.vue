@@ -120,7 +120,8 @@
       collapseTransition: {
         type: Boolean,
         default: true
-      }
+      },
+      beforeSelect:null
     },
     data() {
       return {
@@ -249,25 +250,33 @@
         }
       },
       handleItemClick(item) {
-        const { index, indexPath } = item;
-        const oldActiveIndex = this.activeIndex;
-        const hasIndex = item.index !== null;
+        const doClick = () => {
+          const { index, indexPath } = item;
+          const oldActiveIndex = this.activeIndex;
+          const hasIndex = item.index !== null;
 
-        if (hasIndex) {
-          this.activeIndex = item.index;
+          if (hasIndex) {
+            this.activeIndex = item.index;
+          }
+
+          this.$emit('select', index, indexPath, item);
+
+          if (this.mode === 'horizontal' || this.collapse) {
+            this.openedMenus = [];
+          }
+
+          if (this.router && hasIndex) {
+            this.routeToItem(item, (error) => {
+              this.activeIndex = oldActiveIndex;
+              if (error) console.error(error);
+            });
+          }
         }
 
-        this.$emit('select', index, indexPath, item);
-
-        if (this.mode === 'horizontal' || this.collapse) {
-          this.openedMenus = [];
-        }
-
-        if (this.router && hasIndex) {
-          this.routeToItem(item, (error) => {
-            this.activeIndex = oldActiveIndex;
-            if (error) console.error(error);
-          });
+        if (typeof this.beforeSelect === 'function') {
+          this.beforeSelect(doClick)
+        } else {
+          doClick()
         }
       },
       // 初始化展开菜单
