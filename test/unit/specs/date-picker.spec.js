@@ -2705,11 +2705,8 @@ describe('DatePicker', () => {
       }, DELAY);
     }, DELAY);
   });
-  
-  
-  
-  it('uses the default view option', done => {
-    let test;
+
+  it('picker-options:defaultView', done => {
     vm = createTest(DatePicker, {
       pickerOptions: {
         defaultView: 'year'
