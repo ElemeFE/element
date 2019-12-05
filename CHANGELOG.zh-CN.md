@@ -1,5 +1,74 @@
 ## 更新日志
 
+### 2.13.0
+
+*2019-11-26*
+
+#### 新特性
+
+- Popconfirm
+  - 新增 Popconfirm 组件 (#17548 by @iamkun)
+
+#### Bug fixes
+
+- BackTop
+  - 平滑过渡动画 (by @lon)
+- DatePicker
+  - 修复选择最小日期的 bug (#17191 by @smk0621)
+- Select
+  - 修复测试用例  (by @msidolphin)
+- Tree
+  - 增加 font-size 样式 (#17094 by @spengjie)
+- Table
+  - 头部可自定义 (#17291 by @ziyoung)
+  - 更新头部样式 (#17284 by @ziyoung)
+  - 修复时候 filter 之后高度问题 (#17348 by @ziyoung)
+  - 修复 row-style 失效的 bug (#17002 by @a631807682)
+  - 修复头部消失的 bug (#17341 by @ziyoung)
+- Calendar
+  - 导入 el-button 和 el-button-group (#17376 by @masongzhi)
+- MessageBox
+  - 修复图表位置 (#17410 by @nullptru)
+- TimePicker
+  - 滚动后设置正确的位置 (#16868 by @mattheyan)
+- Message
+  - 修复关闭的 offsetHeight（#17564） (#17852 by @gzwgq222)
+- Form
+  - ValidateField 的回调应为可选项 (#17314 by @CarterLi)
+- Cascader
+  - 修复 TypeScript 3.7 的兼容问题 (#17881 by @CarterLi)
+- Menu
+  - 修复 NavigationDuplicated 在 vue-router@^3.1.0 的报错 (#17269 by @iamkun)
+- Dropdown
+  - 更新类型文件 (#17550 by @iamkun)
+- Progress
+  - 增加 strokeLinecap 属性 (#17552 by @iamkun)
+- InfiniteScroll
+  - 跳过不可见元素触发 (#17553 by @iamkun)
+- Image
+  - 优化用户体验 (#16985 by @luckyCao)
+  - 优化大图片展示问题 (#16796 by @luckyCao)
+- Drawer 
+  - 修复 drawer-append-to-body 失效的 bug (#16953 by @JeremyWuuuuu)
+- Select
+  - 修复空 tag 的 bug (17199 by @luckyCao)
+- Scrollbar
+  - 修复 FireFox 双滚动条的 bug (#18091 by @iamkun)
+  
+#### Optimization
+
+- I18n
+  - 更新 sv-SE.js (#17926 by @FOLLGAD)
+  - 更新 avatar 组件法语文档 (#17762 by @blombard)
+- Docs
+  - 修复 time-select 文档错误 (#17250 by @wacky6)
+  - 修复 Drawer 文档错误 (#17122 by @haoranyu)
+  - 更新 Spanish changelog 2.12.0 (#17364 by @Gonzalo2310)
+  - 修复 Changelog 文档错误 (#17874 by @renlixin)
+  - 修复 Loading 示例 (#17862 by @MBearo)
+  - 增加 input event 相关文档 (#18061 by @zhouxinyong)
+  - 移除 Input repeat change event 相关文档 (#18085 by @zhouxinyong)
+
 ### 2.12.0
 
 *2019-08-29*
