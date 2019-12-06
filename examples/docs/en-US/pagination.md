@@ -66,7 +66,7 @@ Use small pagination in the case of limited space.
 
 Add more modules based on your scenario.
 
-:::demo This example is a complete use case. It uses `size-change` and `current-change` event to handle page size changes and current page changes. `page-sizes` accepts an array of integers, each of which represents a different page size in the `sizes` select options, e.g. `[100, 200, 300, 400]` indicates that the select will have four options: 100, 200, 300 or 400 items per page.
+:::demo This example is a complete use case. It uses `size-change` and `current-change` event to handle page size changes and current page changes. `page-sizes` accepts an array of integers, each of which represents a different page size in the `sizes` select options, e.g. `[100, 200, 300, 400]` indicates that the select will have four options: 100, 200, 300 or 400 items per page. the elements after the `->` in layout will float to right
 
 ```html
 <template>
@@ -100,7 +100,7 @@ Add more modules based on your scenario.
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
       :page-size="100"
-      layout="prev, pager, next, jumper"
+      layout="prev, pager, next, ->, jumper"
       :total="1000">
     </el-pagination>
   </div>
