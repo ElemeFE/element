@@ -175,7 +175,7 @@
 | background | 是否为分页按钮添加背景色 | boolean | — | false |
 | page-size | 每页显示条目个数，支持 .sync 修饰符 | number | — | 10 |
 | total | 总条目数 | number | — | — |
-| page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
+| page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-size 的更改，则需要使用 total 属性 | Number | — | — |
 | pager-count | 页码按钮的数量，当总页数超过该值时会折叠 | number | 大于等于 5 且小于等于 21 的奇数 | 7 |
 | current-page | 当前页数，支持 .sync 修饰符 | number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
