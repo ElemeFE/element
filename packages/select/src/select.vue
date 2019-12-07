@@ -564,17 +564,19 @@
       },
 
       handleFocus(event) {
-        if (!this.softFocus) {
-          if (this.automaticDropdown || this.filterable) {
-            this.visible = true;
-            if (this.filterable) {
-              this.menuVisibleOnFocus = true;
+        setTimeout(() => {
+          if (!this.softFocus) {
+            if (this.automaticDropdown || this.filterable) {
+              this.visible = true;
+              if (this.filterable) {
+                this.menuVisibleOnFocus = true;
+              }
             }
+            this.$emit('focus', event);
+          } else {
+            this.softFocus = false;
           }
-          this.$emit('focus', event);
-        } else {
-          this.softFocus = false;
-        }
+        }, 100);
       },
 
       blur() {
