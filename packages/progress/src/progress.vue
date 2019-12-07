@@ -67,7 +67,7 @@
       },
       status: {
         type: String,
-        validator: val => ['success', 'exception', 'warning'].indexOf(val) > -1
+        validator: val => ['success', 'exception', 'warning', ''].indexOf(val) > -1
       },
       strokeWidth: {
         type: Number,
