@@ -187,6 +187,7 @@
         });
       },
       handleChange(value) {
+        this.activated = true;
         this.$emit('input', value);
         this.suggestionDisabled = false;
         if (!this.triggerOnFocus && !value) {
