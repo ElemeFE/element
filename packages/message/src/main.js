@@ -11,7 +11,7 @@ let seed = 1;
 const Message = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
-  if (typeof options === 'string') {
+  if (typeof options === 'string' || options instanceof Error) {
     options = {
       message: options
     };
