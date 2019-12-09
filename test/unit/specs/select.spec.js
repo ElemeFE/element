@@ -740,15 +740,17 @@ describe('Select', () => {
     });
   });
 
-  it('should open popper when automatic-dropdown is set', done => {
+  it('should open popper when automatic-dropdown is set', async done => {
     vm = getSelectVm({ automaticDropdown: true });
 
     vm.$refs.select.$refs.reference.$refs.input.focus();
 
-    vm.$nextTick(_ => {
+    await vm.$nextTick();
+
+    setTimeout(() => {
       expect(vm.$refs.select.visible).to.be.true;
       done();
-    });
+    }, 120);
   });
 
   it('focus', done => {
