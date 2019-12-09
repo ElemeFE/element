@@ -15,6 +15,10 @@ const Message = function(options) {
     options = {
       message: options
     };
+  } else if (options instanceof Error) {
+    options = {
+      message: '' + options
+    };
   }
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
@@ -48,6 +52,10 @@ const Message = function(options) {
     if (typeof options === 'string') {
       options = {
         message: options
+      };
+    } else if (options instanceof Error) {
+      options = {
+        message: '' + options
       };
     }
     options.type = type;
