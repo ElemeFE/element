@@ -1,23 +1,15 @@
-<style>
-  .demo-box {
-    .el-date-editor + .el-date-editor {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## Selector de Tiempo
 
 Use el Time Picker para input de tipo time.
 
 ### Selector de tiempo fijo
 
-Provee una lista de tiempo fijo para que los usuarios escogan.
+Provee una lista de tiempo fijo para que los usuarios escojan.
 
 :::demo Use el tag `el-time-select`, se pueden asignar tiempo de inicio, tiempo de finalización y salto de tiempo con `start`, `end` y `step`.
 ```html
 <el-time-select
-  v-model="value1"
+  v-model="value"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -30,7 +22,7 @@ Provee una lista de tiempo fijo para que los usuarios escogan.
   export default {
     data() {
       return {
-        value1: ''
+        value: ''
       };
     }
   }
@@ -47,7 +39,7 @@ Un tiempo arbitrario puede ser escogido.
 ```html
 <template>
   <el-time-picker
-    v-model="value2"
+    v-model="value1"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -55,7 +47,7 @@ Un tiempo arbitrario puede ser escogido.
   </el-time-picker>
   <el-time-picker
     arrow-control
-    v-model="value3"
+    v-model="value2"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -67,8 +59,8 @@ Un tiempo arbitrario puede ser escogido.
   export default {
     data() {
       return {
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40)
+        value1: new Date(2016, 9, 10, 18, 40),
+        value2: new Date(2016, 9, 10, 18, 40)
       };
     }
   }
@@ -126,7 +118,7 @@ Es posible escoger un rango de tiempo arbitrario.
 <template>
   <el-time-picker
     is-range
-    v-model="value4"
+    v-model="value1"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -134,7 +126,7 @@ Es posible escoger un rango de tiempo arbitrario.
   <el-time-picker
     is-range
     arrow-control
-    v-model="value5"
+    v-model="value2"
     range-separator="To"
     start-placeholder="Start time"
     end-placeholder="End time">
@@ -145,8 +137,8 @@ Es posible escoger un rango de tiempo arbitrario.
   export default {
     data() {
       return {
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value2: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
@@ -154,25 +146,10 @@ Es posible escoger un rango de tiempo arbitrario.
 ```
 :::
 
-<script>
-  export default {
-    data() {
-      return {
-        value1: '',
-        value2: new Date(2016, 9, 10, 18, 40),
-        value3: new Date(2016, 9, 10, 18, 40),
-        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-        startTime: '',
-        endTime: ''
-      };
-    }
-  }
-</script>
-
 ### Atributos
 | Atributo          | Descripción                              | Tipo                                     | Valores aceptados                        | Por defecto          |
 | ----------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | -------------------- |
+| value / v-model    | valor enlazado                           | date(TimePicker) / string(TimeSelect)    | -                                        | -                    |
 | readonly          | si el Time Picker está en modo de sólo lectura | boolean                                  | —                                        | false                |
 | disabled          | si el Time Picker se encuentra deshabilitado | boolean                                  | —                                        | false                |
 | editable          | si el input puede ser editado            | boolean                                  | —                                        | true                 |
@@ -183,7 +160,6 @@ Es posible escoger un rango de tiempo arbitrario.
 | end-placeholder   | placeholder para el tiempo de finalización en modo de rango | string                                   | —                                        | —                    |
 | is-range          | si es posible escoger un rango de tiempo, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false                |
 | arrow-control     | si es posible escoger el tiempo usando los botones de flecha, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false                |
-| value             | valor del selector                       | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | hour `HH`, minute `mm`, second `ss`      | HH:mm:ss             |
 | align             | alineación                               | left / center / right                    | left                                     |                      |
 | popper-class      | nombre de clase personalizada para el dropdown del Time Picker | string                                   | —                                        | —                    |
 | picker-options    | opciones adicionales, revisar la tabla posterior | object                                   | —                                        | {}                   |
@@ -216,3 +192,8 @@ Es posible escoger un rango de tiempo arbitrario.
 | change           | se lanza cuando el usuario confirma el valor | valor vinculado del componente |
 | blur             | se lanza cuando el input se difumina     | instancia del componente       |
 | focus            | se lanza cuando el input se enfoca       | instancia del componente       |
+
+### Metodos
+| Metodo | Descripción                | Parameteros |
+| ------ | -------------------------- | ----------- |
+| focus  | coloca el foco en el input | —           |

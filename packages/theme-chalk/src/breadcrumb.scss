@@ -22,8 +22,11 @@
     float: left;
 
     @include e(inner) {
-      &, & a {
+      color: $--color-text-regular;
+
+      &.is-link, & a {
         font-weight: bold;
+        text-decoration: none;
         transition: $--color-transition-base;
         color: $--color-text-primary;
 

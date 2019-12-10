@@ -13,7 +13,8 @@
           <button
             type="button"
             class="el-picker-panel__shortcut"
-            v-for="shortcut in shortcuts"
+            v-for="(shortcut, key) in shortcuts"
+            :key="key"
             @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
         </div>
         <div class="el-picker-panel__body">
@@ -27,18 +28,19 @@
                   :placeholder="t('el.datepicker.startDate')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleDate"
-                  @input.native="handleDateInput($event, 'min')"
-                  @change.native="handleDateChange($event, 'min')" />
+                  @input="val => handleDateInput(val, 'min')"
+                  @change="val => handleDateChange(val, 'min')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMinTimeClose">
                 <el-input
                   size="small"
+                  class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
-                  class="el-date-range-picker__editor"
                   :value="minVisibleTime"
-                  @focus="minTimePickerVisible = !minTimePickerVisible"
-                  @change.native="handleTimeChange($event, 'min')" />
+                  @focus="minTimePickerVisible = true"
+                  @input="val => handleTimeInput(val, 'min')"
+                  @change="val => handleTimeChange(val, 'min')" />
                 <time-picker
                   ref="minTimePicker"
                   @pick="handleMinTimePick"
@@ -53,25 +55,25 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
                   size="small"
+                  class="el-date-range-picker__editor"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endDate')"
-                  class="el-date-range-picker__editor"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
-                  @input.native="handleDateInput($event, 'max')"
-                  @change.native="handleDateChange($event, 'max')" />
+                  @input="val => handleDateInput(val, 'max')"
+                  @change="val => handleDateChange(val, 'max')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMaxTimeClose">
                 <el-input
                   size="small"
-                  :disabled="rangeState.selecting"
-                  ref="maxInput"
-                  :placeholder="t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
+                  :disabled="rangeState.selecting"
+                  :placeholder="t('el.datepicker.endTime')"
                   :value="maxVisibleTime"
-                  @focus="minDate && (maxTimePickerVisible = !maxTimePickerVisible)"
                   :readonly="!minDate"
-                  @change.native="handleTimeChange($event, 'max')" />
+                  @focus="minDate && (maxTimePickerVisible = true)"
+                  @input="val => handleTimeInput(val, 'max')"
+                  @change="val => handleTimeChange(val, 'max')" />
                 <time-picker
                   ref="maxTimePicker"
                   @pick="handleMaxTimePick"
@@ -116,6 +118,7 @@
               :max-date="maxDate"
               :range-state="rangeState"
               :disabled-date="disabledDate"
+              :cell-class-name="cellClassName"
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
@@ -155,6 +158,7 @@
               :max-date="maxDate"
               :range-state="rangeState"
               :disabled-date="disabledDate"
+              :cell-class-name="cellClassName"
               @changerange="handleChangeRange"
               :first-day-of-week="firstDayOfWeek"
               @pick="handleRangePick">
@@ -175,7 +179,7 @@
           size="mini"
           class="el-picker-panel__link-btn"
           :disabled="btnDisabled"
-          @click="handleConfirm()">
+          @click="handleConfirm(false)">
           {{ t('el.datepicker.confirm') }}
         </el-button>
       </div>
@@ -190,50 +194,40 @@
     isDate,
     modifyDate,
     modifyTime,
+    modifyWithTimeString,
     prevYear,
     nextYear,
     prevMonth,
-    nextMonth
-  } from '../util';
+    nextMonth,
+    nextDate,
+    extractDateFormat,
+    extractTimeFormat
+  } from 'element-ui/src/utils/date-util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
 
-  const advanceDate = (date, amount) => {
-    return new Date(new Date(date).getTime() + amount);
-  };
-
   const calcDefaultValue = (defaultValue) => {
     if (Array.isArray(defaultValue)) {
       return [new Date(defaultValue[0]), new Date(defaultValue[1])];
     } else if (defaultValue) {
-      return [new Date(defaultValue), advanceDate(defaultValue, 24 * 60 * 60 * 1000)];
+      return [new Date(defaultValue), nextDate(new Date(defaultValue), 1)];
     } else {
-      return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
+      return [new Date(), nextDate(new Date(), 1)];
     }
-  };
-
-  const modifyWithGivenTime = (date, time) => {
-    if (date == null || time == null) {
-      return date;
-    }
-    time = parseDate(time, 'HH:mm:ss');
-    return modifyTime(
-      date,
-      time.getHours(),
-      time.getMinutes(),
-      time.getSeconds()
-    );
   };
 
   export default {
     mixins: [Locale],
 
+    directives: { Clickoutside },
+
     computed: {
       btnDisabled() {
-        return !(this.minDate && this.maxDate && !this.selecting);
+        return !(this.minDate && this.maxDate && !this.selecting && this.isValidValue([this.minDate, this.maxDate]));
       },
 
       leftLabel() {
@@ -269,34 +263,42 @@
       },
 
       minVisibleDate() {
-        return this.minDate ? formatDate(this.minDate) : '';
+        if (this.dateUserInput.min !== null) return this.dateUserInput.min;
+        if (this.minDate) return formatDate(this.minDate, this.dateFormat);
+        return '';
       },
 
       maxVisibleDate() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate) : '';
+        if (this.dateUserInput.max !== null) return this.dateUserInput.max;
+        if (this.maxDate || this.minDate) return formatDate(this.maxDate || this.minDate, this.dateFormat);
+        return '';
       },
 
       minVisibleTime() {
-        return this.minDate ? formatDate(this.minDate, 'HH:mm:ss') : '';
+        if (this.timeUserInput.min !== null) return this.timeUserInput.min;
+        if (this.minDate) return formatDate(this.minDate, this.timeFormat);
+        return '';
       },
 
       maxVisibleTime() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, 'HH:mm:ss') : '';
+        if (this.timeUserInput.max !== null) return this.timeUserInput.max;
+        if (this.maxDate || this.minDate) return formatDate(this.maxDate || this.minDate, this.timeFormat);
+        return '';
+      },
+
+      timeFormat() {
+        if (this.format) {
+          return extractTimeFormat(this.format);
+        } else {
+          return 'HH:mm:ss';
+        }
       },
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH:mm', '').replace(':ss', '').trim();
+          return extractDateFormat(this.format);
         } else {
           return 'yyyy-MM-dd';
-        }
-      },
-
-      timeFormat() {
-        if (this.format && this.format.indexOf('ss') === -1) {
-          return 'HH:mm';
-        } else {
-          return 'HH:mm:ss';
         }
       },
 
@@ -331,17 +333,28 @@
         shortcuts: '',
         visible: '',
         disabledDate: '',
+        cellClassName: '',
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
-        unlinkPanels: false
+        unlinkPanels: false,
+        dateUserInput: {
+          min: null,
+          max: null
+        },
+        timeUserInput: {
+          min: null,
+          max: null
+        }
       };
     },
 
     watch: {
       minDate(val) {
+        this.dateUserInput.min = null;
+        this.timeUserInput.min = null;
         this.$nextTick(() => {
           if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
             const format = 'HH:mm:ss';
@@ -360,6 +373,8 @@
       },
 
       maxDate(val) {
+        this.dateUserInput.max = null;
+        this.timeUserInput.max = null;
         if (val && this.$refs.maxTimePicker) {
           this.$refs.maxTimePicker.date = val;
           this.$refs.maxTimePicker.value = val;
@@ -393,8 +408,6 @@
         } else if (Array.isArray(newVal)) {
           this.minDate = isDate(newVal[0]) ? new Date(newVal[0]) : null;
           this.maxDate = isDate(newVal[1]) ? new Date(newVal[1]) : null;
-          // NOTE: currently, maxDate = minDate + 1 month
-          //       should allow them to be set individually in the future
           if (this.minDate) {
             this.leftDate = this.minDate;
             if (this.unlinkPanels && this.maxDate) {
@@ -441,8 +454,8 @@
         this.rangeState = val.rangeState;
       },
 
-      handleDateInput(event, type) {
-        const value = event.target.value;
+      handleDateInput(value, type) {
+        this.dateUserInput[type] = value;
         if (value.length !== this.dateFormat.length) return;
         const parsedValue = parseDate(value, this.dateFormat);
 
@@ -452,19 +465,22 @@
             return;
           }
           if (type === 'min') {
-            this.minDate = new Date(parsedValue);
+            this.minDate = modifyDate(this.minDate || new Date(), parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
             this.leftDate = new Date(parsedValue);
-            this.rightDate = nextMonth(this.leftDate);
+            if (!this.unlinkPanels) {
+              this.rightDate = nextMonth(this.leftDate);
+            }
           } else {
-            this.maxDate = new Date(parsedValue);
-            this.leftDate = prevMonth(parsedValue);
+            this.maxDate = modifyDate(this.maxDate || new Date(), parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
             this.rightDate = new Date(parsedValue);
+            if (!this.unlinkPanels) {
+              this.leftDate = prevMonth(parsedValue);
+            }
           }
         }
       },
 
-      handleDateChange(event, type) {
-        const value = event.target.value;
+      handleDateChange(value, type) {
         const parsedValue = parseDate(value, this.dateFormat);
         if (parsedValue) {
           if (type === 'min') {
@@ -481,8 +497,23 @@
         }
       },
 
-      handleTimeChange(event, type) {
-        const value = event.target.value;
+      handleTimeInput(value, type) {
+        this.timeUserInput[type] = value;
+        if (value.length !== this.timeFormat.length) return;
+        const parsedValue = parseDate(value, this.timeFormat);
+
+        if (parsedValue) {
+          if (type === 'min') {
+            this.minDate = modifyTime(this.minDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
+            this.$nextTick(_ => this.$refs.minTimePicker.adjustSpinners());
+          } else {
+            this.maxDate = modifyTime(this.maxDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
+            this.$nextTick(_ => this.$refs.maxTimePicker.adjustSpinners());
+          }
+        }
+      },
+
+      handleTimeChange(value, type) {
         const parsedValue = parseDate(value, this.timeFormat);
         if (parsedValue) {
           if (type === 'min') {
@@ -505,8 +536,8 @@
 
       handleRangePick(val, close = true) {
         const defaultTime = this.defaultTime || [];
-        const minDate = modifyWithGivenTime(val.minDate, defaultTime[0]);
-        const maxDate = modifyWithGivenTime(val.maxDate, defaultTime[1]);
+        const minDate = modifyWithTimeString(val.minDate, defaultTime[0]);
+        const maxDate = modifyWithTimeString(val.maxDate, defaultTime[1]);
 
         if (this.maxDate === maxDate && this.minDate === minDate) {
           return;
@@ -545,6 +576,10 @@
         }
       },
 
+      handleMinTimeClose() {
+        this.minTimePickerVisible = false;
+      },
+
       handleMaxTimePick(value, visible, first) {
         if (this.maxDate && value) {
           this.maxDate = modifyTime(this.maxDate, value.getHours(), value.getMinutes(), value.getSeconds());
@@ -557,6 +592,10 @@
         if (this.maxDate && this.minDate && this.minDate.getTime() > this.maxDate.getTime()) {
           this.minDate = new Date(this.maxDate);
         }
+      },
+
+      handleMaxTimeClose() {
+        this.maxTimePickerVisible = false;
       },
 
       // leftPrev*, rightNext* need to take care of `unlinkPanels`
@@ -610,7 +649,9 @@
       },
 
       handleConfirm(visible = false) {
-        this.$emit('pick', [this.minDate, this.maxDate], visible);
+        if (this.isValidValue([this.minDate, this.maxDate])) {
+          this.$emit('pick', [this.minDate, this.maxDate], visible);
+        }
       },
 
       isValidValue(value) {
@@ -622,6 +663,15 @@
             ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
             : true
         );
+      },
+
+      resetView() {
+        // NOTE: this is a hack to reset {min, max}Date on picker open.
+        // TODO: correct way of doing so is to refactor {min, max}Date to be dependent on value and internal selection state
+        //       an alternative would be resetView whenever picker becomes visible, should also investigate date-panel's resetView
+        if (this.minDate && this.maxDate == null) this.rangeState.selecting = false;
+        this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null;
+        this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null;
       }
     },
 

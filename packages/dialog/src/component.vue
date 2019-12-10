@@ -1,9 +1,18 @@
 <template>
-  <transition name="dialog-fade">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+  <transition
+    name="dialog-fade"
+    @after-enter="afterEnter"
+    @after-leave="afterLeave">
+    <div
+      v-show="visible"
+      class="el-dialog__wrapper"
+      @click.self="handleWrapperClick">
       <div
-        class="el-dialog"
-        :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
+        role="dialog"
+        :key="key"
+        aria-modal="true"
+        :aria-label="title || 'dialog'"
+        :class="['el-dialog', { 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
         :style="style">
         <div class="el-dialog__header">
@@ -96,12 +105,15 @@
       center: {
         type: Boolean,
         default: false
-      }
+      },
+
+      destroyOnClose: Boolean
     },
 
     data() {
       return {
-        closed: false
+        closed: false,
+        key: 0
       };
     },
 
@@ -120,6 +132,11 @@
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
           if (!this.closed) this.$emit('close');
+          if (this.destroyOnClose) {
+            this.$nextTick(() => {
+              this.key++;
+            });
+          }
         }
       }
     },
@@ -127,11 +144,11 @@
     computed: {
       style() {
         let style = {};
-        if (this.width) {
-          style.width = this.width;
-        }
         if (!this.fullscreen) {
           style.marginTop = this.top;
+          if (this.width) {
+            style.width = this.width;
+          }
         }
         return style;
       }
@@ -166,6 +183,12 @@
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
         this.broadcast('ElDropdownMenu', 'updatePopper');
+      },
+      afterEnter() {
+        this.$emit('opened');
+      },
+      afterLeave() {
+        this.$emit('closed');
       }
     },
 

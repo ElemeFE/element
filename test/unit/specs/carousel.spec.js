@@ -10,12 +10,13 @@ describe('Carousel', () => {
     vm = createVue({
       template: `
         <div>
-          <el-carousel>
+          <el-carousel ref="carousel">
             <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
     });
+    expect(vm.$refs.carousel.direction).to.be.equal('horizontal');
     expect(vm.$el.querySelectorAll('.el-carousel__item').length).to.equal(3);
   });
 
@@ -255,6 +256,22 @@ describe('Carousel', () => {
         }, 10);
       }, 10);
     }, 10);
+  });
+
+  it('vertical direction', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-carousel ref="carousel" :autoplay="false" direction="vertical" height="100px">
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
+          </el-carousel>
+        </div>
+      `
+    });
+    const items = vm.$el.querySelectorAll('.el-carousel__item');
+
+    expect(vm.$refs.carousel.direction).to.be.equal('vertical');
+    expect(items[0].style.transform.indexOf('translateY') !== -1).to.be.true;
   });
 });
 

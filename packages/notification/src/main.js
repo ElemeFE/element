@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Main from './main.vue';
+import merge from 'element-ui/src/utils/merge';
 import { PopupManager } from 'element-ui/src/utils/popup';
 import { isVNode } from 'element-ui/src/utils/vdom';
 const NotificationConstructor = Vue.extend(Main);
@@ -10,7 +11,7 @@ let seed = 1;
 
 const Notification = function(options) {
   if (Vue.prototype.$isServer) return;
-  options = options || {};
+  options = merge({}, options);
   const userOnClose = options.onClose;
   const id = 'notification_' + seed++;
   const position = options.position || 'top-right';
@@ -28,10 +29,10 @@ const Notification = function(options) {
     options.message = 'REPLACED_BY_VNODE';
   }
   instance.id = id;
-  instance.vm = instance.$mount();
-  document.body.appendChild(instance.vm.$el);
-  instance.vm.visible = true;
-  instance.dom = instance.vm.$el;
+  instance.$mount();
+  document.body.appendChild(instance.$el);
+  instance.visible = true;
+  instance.dom = instance.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
   let verticalOffset = options.offset || 0;
@@ -41,7 +42,7 @@ const Notification = function(options) {
   verticalOffset += 16;
   instance.verticalOffset = verticalOffset;
   instances.push(instance);
-  return instance.vm;
+  return instance;
 };
 
 ['success', 'warning', 'info', 'error'].forEach(type => {

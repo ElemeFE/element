@@ -69,6 +69,19 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
+import Timeline from '../packages/timeline/index.js';
+import TimelineItem from '../packages/timeline-item/index.js';
+import Link from '../packages/link/index.js';
+import Divider from '../packages/divider/index.js';
+import Image from '../packages/image/index.js';
+import Calendar from '../packages/calendar/index.js';
+import Backtop from '../packages/backtop/index.js';
+import InfiniteScroll from '../packages/infinite-scroll/index.js';
+import PageHeader from '../packages/page-header/index.js';
+import CascaderPanel from '../packages/cascader-panel/index.js';
+import Avatar from '../packages/avatar/index.js';
+import Drawer from '../packages/drawer/index.js';
+import Popconfirm from '../packages/popconfirm/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -138,6 +151,18 @@ const components = [
   Aside,
   Main,
   Footer,
+  Timeline,
+  TimelineItem,
+  Link,
+  Divider,
+  Image,
+  Calendar,
+  Backtop,
+  PageHeader,
+  CascaderPanel,
+  Avatar,
+  Drawer,
+  Popconfirm,
   CollapseTransition
 ];
 
@@ -145,14 +170,17 @@ const install = function(Vue, opts = {}) {
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
-  components.map(component => {
+  components.forEach(component => {
     Vue.component(component.name, component);
   });
 
+  Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
 
-  const ELEMENT = {};
-  ELEMENT.size = opts.size || '';
+  Vue.prototype.$ELEMENT = {
+    size: opts.size || '',
+    zIndex: opts.zIndex || 2000
+  };
 
   Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
@@ -162,7 +190,6 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
 
-  Vue.prototype.$ELEMENT = ELEMENT;
 };
 
 /* istanbul ignore if */
@@ -170,8 +197,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
-  version: '2.1.0',
+export default {
+  version: '2.13.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -244,7 +271,18 @@ module.exports = {
   Header,
   Aside,
   Main,
-  Footer
+  Footer,
+  Timeline,
+  TimelineItem,
+  Link,
+  Divider,
+  Image,
+  Calendar,
+  Backtop,
+  InfiniteScroll,
+  PageHeader,
+  CascaderPanel,
+  Avatar,
+  Drawer,
+  Popconfirm
 };
-
-module.exports.default = module.exports;

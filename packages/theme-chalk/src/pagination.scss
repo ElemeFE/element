@@ -6,7 +6,7 @@
 @include b(pagination) {
   white-space: nowrap;
   padding: 2px 5px;
-  color: $--pagination-color;
+  color: $--pagination-font-color;
   font-weight: bold;
   @include utils-clearfix;
 
@@ -24,6 +24,7 @@
   .el-input__inner {
     text-align: center;
     -moz-appearance: textfield;
+    line-height: normal;
   }
 
   // pagesize 的下拉 icon
@@ -39,7 +40,6 @@
     .el-input__inner {
       padding-right: 25px;
       border-radius: $--pagination-border-radius;
-      height: $--pagination-button-height;
     }
   }
 
@@ -53,12 +53,12 @@
     }
 
     &:hover {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
     }
 
-    &.disabled {
+    &:disabled {
       color: $--pagination-button-disabled-color;
-      background-color: $--pagination-button-disabled-fill;
+      background-color: $--pagination-button-disabled-background-color;
       cursor: not-allowed;
     }
   }
@@ -67,7 +67,7 @@
   .btn-next {
     background: center center no-repeat;
     background-size: 16px;
-    background-color: $--pagination-fill;
+    background-color: $--pagination-background-color;
     cursor: pointer;
     margin: 0;
     color: $--pagination-button-color;
@@ -87,10 +87,17 @@
     padding-left: 12px;    
   }
 
+  .el-pager li.disabled {
+    color: $--color-text-placeholder;
+    cursor: not-allowed;
+  }
+
   @include m(small) {
     .btn-prev,
     .btn-next,
     .el-pager li,
+    .el-pager li.btn-quicknext,
+    .el-pager li.btn-quickprev,
     .el-pager li:last-child {
       border-color: transparent;
       font-size: 12px;
@@ -101,6 +108,24 @@
 
     .arrow.disabled {
       visibility: hidden;
+    }
+
+    .more::before,
+    li.more::before {
+      line-height: 24px;
+    }
+
+    span:not([class*=suffix]),
+    button {
+      height: 22px;
+      line-height: 22px;
+    }
+
+    @include e(editor) {
+      height: 22px;
+      &.el-input .el-input__inner {
+        height: 22px;
+      }
     }
   }
 
@@ -114,7 +139,7 @@
       padding-left: 8px;
 
       &:hover {
-        border-color: $--pagination-hover-fill;
+        border-color: $--pagination-hover-color;
       }
     }
   }
@@ -173,19 +198,23 @@
       color: $--color-text-regular;
       min-width: 30px;
       border-radius: 2px;
-    }
-
-    .btn-prev, .btn-next {
-      padding: 0;
 
       &.disabled {
         color: $--color-text-placeholder;
       }
     }
 
-    .el-pager li {
+    .btn-prev, .btn-next {
+      padding: 0;
+
+      &:disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .el-pager li:not(.disabled) {
       &:hover {
-        color: $--pagination-hover-fill;
+        color: $--pagination-hover-color;
       }
 
       &.active {
@@ -220,7 +249,7 @@
 
   li {
     padding: 0 4px;
-    background: $--pagination-fill;
+    background: $--pagination-background-color;
     vertical-align: top;
     display: inline-block;
     font-size: $--pagination-font-size;
@@ -236,6 +265,10 @@
     &.btn-quickprev {
       line-height: 28px;
       color: $--pagination-button-color;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
     }
 
     &.btn-quickprev:hover {
@@ -251,11 +284,11 @@
     }
 
     &:hover {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
     }
 
     &.active {
-      color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
       cursor: default;
     }
   }

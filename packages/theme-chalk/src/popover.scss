@@ -4,7 +4,7 @@
 
 @include b(popover) {
   position: absolute;
-  background: $--popover-fill;
+  background: $--popover-background-color;
   min-width: 150px;
   border-radius: 4px;
   border: 1px solid $--popover-border-color;
@@ -15,13 +15,14 @@
   text-align: justify;
   font-size: $--popover-font-size;
   box-shadow: $--box-shadow-light;
+  word-break: break-all;
 
   @include m(plain) {
     padding: $--popover-padding-large;
   }
 
   @include e(title) {
-    color: $--popover-title-color;
+    color: $--popover-title-font-color;
     font-size: $--popover-title-font-size;
     line-height: 1;
     margin-bottom: 12px;

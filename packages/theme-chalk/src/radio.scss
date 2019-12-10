@@ -4,7 +4,7 @@
 @import "common/var";
 
 @include b(radio) {
-  color: $--radio-color;
+  color: $--radio-font-color;
   font-weight: $--radio-font-weight;
   line-height: 1;
   position: relative;
@@ -13,6 +13,7 @@
   white-space: nowrap;
   outline: none;
   font-size: $--font-size-base;
+  margin-right: 30px;
   @include utils-user-select(none);
 
   @include when(bordered) {
@@ -79,8 +80,8 @@
     }
   }
 
-  & + .el-radio {
-    margin-left: 30px;
+  &:last-child {
+    margin-right: 0;
   }
 
   @include e(input) {
@@ -134,7 +135,7 @@
       }
 
       & + .el-radio__label {
-        color: $--radio-checked-text-color;
+        color: $--radio-checked-font-color;
       }
     }
 
@@ -149,7 +150,7 @@
     border-radius: $--radio-input-border-radius;
     width: $--radio-input-width;
     height: $--radio-input-height;
-    background-color: $--radio-input-fill;
+    background-color: $--radio-input-background-color;
     position: relative;
     cursor: pointer;
     display: inline-block;
@@ -169,7 +170,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%) scale(0);
-      transition: transform .15s cubic-bezier(.71,-.46,.88,.6);
+      transition: transform .15s ease-in;
     }
   }
 
@@ -185,7 +186,7 @@
     margin: 0;
   }
 
-  &:focus:not(.is-focus):not(:active){ /*获得焦点时 样式提醒*/
+  &:focus:not(.is-focus):not(:active):not(.is-disabled) { /*获得焦点时 样式提醒*/
     .el-radio__inner {
       box-shadow: 0 0 2px 2px $--radio-input-border-color-hover;
     }

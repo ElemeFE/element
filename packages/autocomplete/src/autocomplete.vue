@@ -9,18 +9,15 @@
   >
     <el-input
       ref="input"
-      v-bind="$props"
-      @compositionstart.native="handleComposition"
-      @compositionupdate.native="handleComposition"
-      @compositionend.native="handleComposition"
+      v-bind="[$props, $attrs]"
       @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
+      @clear="handleClear"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
-      :label="label"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -38,8 +35,10 @@
     <el-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
+      :popper-options="popperOptions"
+      :append-to-body="popperAppendToBody"
       ref="suggestions"
-      placement="bottom-start"
+      :placement="placement"
       :id="id">
       <li
         v-for="(item, index) in suggestions"
@@ -72,6 +71,8 @@
 
     mixins: [Emitter, Focus('input'), Migrating],
 
+    inheritAttrs: false,
+
     componentName: 'ElAutocomplete',
 
     components: {
@@ -87,7 +88,12 @@
         default: 'value'
       },
       popperClass: String,
+      popperOptions: Object,
       placeholder: String,
+      clearable: {
+        type: Boolean,
+        default: false
+      },
       disabled: Boolean,
       name: String,
       size: String,
@@ -111,15 +117,28 @@
       debounce: {
         type: Number,
         default: 300
+      },
+      placement: {
+        type: String,
+        default: 'bottom-start'
+      },
+      hideLoading: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: true
+      },
+      highlightFirstItem: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
       return {
         activated: false,
-        isOnComposition: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: -1
+        highlightedIndex: -1,
+        suggestionDisabled: false
       };
     },
     computed: {
@@ -134,7 +153,10 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
+        let $input = this.getInput();
+        if ($input) {
+          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
+        }
       }
     },
     methods: {
@@ -147,27 +169,28 @@
         };
       },
       getData(queryString) {
+        if (this.suggestionDisabled) {
+          return;
+        }
         this.loading = true;
         this.fetchSuggestions(queryString, (suggestions) => {
           this.loading = false;
+          if (this.suggestionDisabled) {
+            return;
+          }
           if (Array.isArray(suggestions)) {
             this.suggestions = suggestions;
+            this.highlightedIndex = this.highlightFirstItem ? 0 : -1;
           } else {
-            console.error('autocomplete suggestions must be an array');
+            console.error('[Element Error][Autocomplete]autocomplete suggestions must be an array');
           }
         });
       },
-      handleComposition(event) {
-        if (event.type === 'compositionend') {
-          this.isOnComposition = false;
-          this.handleChange(event.target.value);
-        } else {
-          this.isOnComposition = true;
-        }
-      },
       handleChange(value) {
         this.$emit('input', value);
-        if (this.isOnComposition || (!this.triggerOnFocus && !value)) {
+        this.suggestionDisabled = false;
+        if (!this.triggerOnFocus && !value) {
+          this.suggestionDisabled = true;
           this.suggestions = [];
           return;
         }
@@ -182,6 +205,10 @@
       },
       handleBlur(event) {
         this.$emit('blur', event);
+      },
+      handleClear() {
+        this.activated = false;
+        this.$emit('clear');
       },
       close(e) {
         this.activated = false;
@@ -229,17 +256,19 @@
           suggestion.scrollTop -= highlightItem.scrollHeight;
         }
         this.highlightedIndex = index;
-        this.$el.querySelector('.el-input__inner').setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+        let $input = this.getInput();
+        $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+      },
+      getInput() {
+        return this.$refs.input.getInput();
       }
     },
     mounted() {
-      this.debouncedGetData = debounce(this.debounce, (val) => {
-        this.getData(val);
-      });
+      this.debouncedGetData = debounce(this.debounce, this.getData);
       this.$on('item-click', item => {
         this.select(item);
       });
-      let $input = this.$el.querySelector('.el-input__inner');
+      let $input = this.getInput();
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
       $input.setAttribute('aria-controls', 'id');

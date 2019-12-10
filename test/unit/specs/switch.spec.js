@@ -37,7 +37,11 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch v-model="value"></el-switch>
+          <el-switch
+            v-model="value"
+            activeColor="#0f0"
+            inactiveColor="#f00">
+          </el-switch>
         </div>
       `,
 
@@ -49,8 +53,10 @@ describe('Switch', () => {
     }, true);
 
     const core = vm.$el.querySelector('.el-switch__core');
+    expect(core.style.backgroundColor).to.equal('rgb(0, 255, 0)');
     core.click();
     setTimeout(() => {
+      expect(core.style.backgroundColor).to.equal('rgb(255, 0, 0)');
       expect(vm.value).to.equal(false);
       core.click();
       setTimeout(() => {

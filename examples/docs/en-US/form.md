@@ -1,250 +1,3 @@
-<script>
-  export default {
-    data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('Please input the age'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
-          } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password'));
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('Please input the password again'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('Two inputs don\'t match!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        sizeForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formInline: {
-          user: '',
-          region: ''
-        },
-        labelPosition: 'right',
-        formLabelAlign: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        ruleForm2: {
-          pass: '',
-          checkPass: '',
-          age: ''
-        },
-        formLabelWidth: '80px',
-        options: [
-        ],
-        rules: {
-          name: [
-            { required: true, message: 'Please input Activity name', trigger: 'blur' },
-            { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: 'Please select Activity zone', trigger: 'change' }
-          ],
-          date1: [
-            { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
-          ],
-          date2: [
-            { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
-          ],
-          type: [
-            { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
-          ],
-          resource: [
-            { required: true, message: 'Please select activity resource', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: 'Please input activity form', trigger: 'blur' }
-          ]
-        },
-        rules2: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
-          age: [
-            { validator: checkAge, trigger: 'blur' }
-          ]
-        },
-        dynamicValidateForm: {
-          domains: [{
-            key: Date.now(),
-            value: ''
-          }],
-          email: ''
-        },
-        numberValidateForm: {
-          age: ''
-        }
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      },
-      onRuleFormSubmit() {
-        console.log('onRuleFormSubmit');
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item)
-        if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1)
-        }
-      },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
-          key: Date.now(),
-          value: ''
-        });
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-form.demo-en-US {
-    .el-select .el-input {
-      width: 360px;
-    }
-    .el-form {
-      width: 480px;
-    }
-
-    .line {
-      text-align: center;
-    }
-
-    .el-checkbox-group {
-      width: 320px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      &:after, &:before {
-        content: ' ';
-        display: table;
-      }
-      &:after {
-        clear: both;
-        visibility: hidden;
-        font-size: 0;
-        height: 0;
-      }
-
-      .el-checkbox {
-        float: left;
-        width: 160px;
-        padding-right: 20px;
-        margin: 0;
-        padding: 0;
-
-        + .el-checkbox {
-          margin-left: 0;
-        }
-      }
-    }
-    .demo-form-normal {
-      width: 480px;
-    }
-    .demo-form-inline {
-      width: auto;
-
-      .el-input {
-        width: 150px;
-      }
-      > * {
-        margin-right: 10px;
-      }
-    }
-    .demo-ruleForm {
-      width: 480px;
-
-      .el-select .el-input {
-        width: 360px;
-      }
-    }
-    .demo-dynamic {
-      width: 500px;
-
-      .el-input {
-        margin-right: 10px;
-        width: 270px;
-        vertical-align: top;
-      }
-    }
-    .fr {
-      float: right;
-    }
-  }
-</style>
-
 ## Form
 
 Form consists of `input`, `radio`, `select`, `checkbox` and so on. With form, you can collect, verify and submit data.
@@ -272,7 +25,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
@@ -441,7 +194,7 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
       <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+        <el-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
       </el-form-item>
     </el-col>
   </el-form-item>
@@ -536,19 +289,19 @@ This example shows how to customize your own validation rules to finish a two-fa
 
 :::demo Here we use `status-icon` to reflect validation result as an icon.
 ```html
-<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
-    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Confirm" prop="checkPass">
-    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
-    <el-input v-model.number="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
-    <el-button @click="resetForm('ruleForm2')">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+    <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -574,8 +327,8 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
+          if (this.ruleForm.checkPass !== '') {
+            this.$refs.ruleForm.validateField('checkPass');
           }
           callback();
         }
@@ -583,19 +336,19 @@ This example shows how to customize your own validation rules to finish a two-fa
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
-        } else if (value !== this.ruleForm2.pass) {
+        } else if (value !== this.ruleForm.pass) {
           callback(new Error('Two inputs don\'t match!'));
         } else {
           callback();
         }
       };
       return {
-        ruleForm2: {
+        ruleForm: {
           pass: '',
           checkPass: '',
           age: ''
         },
-        rules2: {
+        rules: {
           pass: [
             { validator: validatePass, trigger: 'blur' }
           ],
@@ -628,6 +381,10 @@ This example shows how to customize your own validation rules to finish a two-fa
 ```
 :::
 
+:::tip
+Custom validate callback function must be called. See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
+:::
+
 ### Delete or add form items dynamically
 
 :::demo In addition to passing all validation rules at once on the form component, you can also pass the validation rules or delete rules on a single form field dynamically.
@@ -639,7 +396,7 @@ This example shows how to customize your own validation rules to finish a two-fa
     label="Email"
     :rules="[
       { required: true, message: 'Please input email address', trigger: 'blur' },
-      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+      { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
     ]"
   >
     <el-input v-model="dynamicValidateForm.email"></el-input>
@@ -719,7 +476,7 @@ This example shows how to customize your own validation rules to finish a two-fa
       { type: 'number', message: 'age must be a number'}
     ]"
   >
-    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
+    <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
@@ -781,7 +538,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Activity type">
@@ -835,9 +592,10 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | model| data of form component | object | — | — |
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left / right / top | right |
-| label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
+| label-position | position of label. If set to 'left' or 'right', `label-width` prop is also required | string | left / right / top | right |
+| label-width    | width of label, e.g. '50px'. All its direct child form items will inherit this value. Width `auto` is supported.        | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
+| hide-required-asterisk | whether required fields should have a red asterisk (star) beside their labels | boolean | — | false |
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | whether to display the error message inline with the form item | boolean | — | false |
 | status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
@@ -849,10 +607,15 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
-| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| validate | validate the whole form. Takes a callback as a param. After validation, the callback will be executed with two params: a boolean indicating if the validation has passed, and an object containing all fields that fail the validation. Returns a promise if callback is omitted | Function(callback: Function(boolean, object)) |
+| validateField | validate one or several form items | Function(props: string \| array, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
-| clearValidate | clear validation message for all fields | -
+| clearValidate | clear validation message for certain fields. The parameter is prop name or an array of prop names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string \| array) |
+
+### Form Events
+| Event Name | Description | Parameters |
+|----------- |------------ |----------- |
+| validate   | triggers after a form item is validated | prop name of the form item being validated, whether validation is passed and the error message if not |
 
 ### Form-Item Attributes
 
@@ -860,8 +623,8 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | ---- | ----| ---- | ---- | ---- |
 | prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
-| label-width | width of label, e.g. '50px' | string | — | — |
-| required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
+| label-width | width of label, e.g. '50px'. Width `auto` is supported. | string | — | — |
+| required | whether the field is required or not, will be determined by validation rules if omitted | boolean |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
@@ -874,8 +637,14 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | — | content of Form Item |
 | label | content of label |
 
+### Form-Item Scoped Slot
+|      Name     | Description |
+|---------------|-------------|
+|      error    | Custom content to display validation message. The scope parameter is { error } |
+
 ### Form-Item Methods
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
 | resetField | reset current field and remove validation result | — |
+| clearValidate | remove validation status of the field | - |

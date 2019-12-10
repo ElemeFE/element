@@ -23,14 +23,17 @@ const install = function(Vue, opts = {}) {
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
-  components.map(component => {
+  components.forEach(component => {
     Vue.component(component.name, component);
   });
 
+  Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
 
-  const ELEMENT = {};
-  ELEMENT.size = opts.size || '';
+  Vue.prototype.$ELEMENT = {
+    size: opts.size || '',
+    zIndex: opts.zIndex || 2000
+  };
 
   Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
@@ -40,7 +43,6 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
 
-  Vue.prototype.$ELEMENT = ELEMENT;
 };
 
 /* istanbul ignore if */
@@ -48,7 +50,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
+export default {
   version: '{{version}}',
   locale: locale.use,
   i18n: locale.i18n,
@@ -57,8 +59,6 @@ module.exports = {
   Loading,
 {{list}}
 };
-
-module.exports.default = module.exports;
 `;
 
 delete Components.font;
@@ -77,7 +77,7 @@ ComponentNames.forEach(name => {
     package: name
   }));
 
-  if (['Loading', 'MessageBox', 'Notification', 'Message'].indexOf(componentName) === -1) {
+  if (['Loading', 'MessageBox', 'Notification', 'Message', 'InfiniteScroll'].indexOf(componentName) === -1) {
     installTemplate.push(render(INSTALL_COMPONENT_TEMPLATE, {
       name: componentName,
       component: name

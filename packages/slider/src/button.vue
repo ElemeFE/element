@@ -4,6 +4,7 @@
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="onButtonDown"
+    @touchstart="onButtonDown"
     :class="{ 'hover': hovering, 'dragging': dragging }"
     :style="wrapperStyle"
     ref="button"
@@ -15,7 +16,11 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
+    <el-tooltip
+      placement="top"
+      ref="tooltip"
+      :popper-class="tooltipClass"
+      :disabled="!showTooltip">
       <span slot="content">{{ formatValue }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
@@ -40,7 +45,8 @@
       vertical: {
         type: Boolean,
         default: false
-      }
+      },
+      tooltipClass: String
     },
 
     data() {
@@ -130,22 +136,30 @@
         event.preventDefault();
         this.onDragStart(event);
         window.addEventListener('mousemove', this.onDragging);
+        window.addEventListener('touchmove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
+        window.addEventListener('touchend', this.onDragEnd);
         window.addEventListener('contextmenu', this.onDragEnd);
       },
       onLeftKeyDown() {
         if (this.disabled) return;
         this.newPosition = parseFloat(this.currentPosition) - this.step / (this.max - this.min) * 100;
         this.setPosition(this.newPosition);
+        this.$parent.emitChange();
       },
       onRightKeyDown() {
         if (this.disabled) return;
         this.newPosition = parseFloat(this.currentPosition) + this.step / (this.max - this.min) * 100;
         this.setPosition(this.newPosition);
+        this.$parent.emitChange();
       },
       onDragStart(event) {
         this.dragging = true;
         this.isClick = true;
+        if (event.type === 'touchstart') {
+          event.clientY = event.touches[0].clientY;
+          event.clientX = event.touches[0].clientX;
+        }
         if (this.vertical) {
           this.startY = event.clientY;
         } else {
@@ -161,6 +175,10 @@
           this.displayTooltip();
           this.$parent.resetSize();
           let diff = 0;
+          if (event.type === 'touchmove') {
+            event.clientY = event.touches[0].clientY;
+            event.clientX = event.touches[0].clientX;
+          }
           if (this.vertical) {
             this.currentY = event.clientY;
             diff = (this.startY - this.currentY) / this.$parent.sliderSize * 100;
@@ -188,13 +206,15 @@
             }
           }, 0);
           window.removeEventListener('mousemove', this.onDragging);
+          window.removeEventListener('touchmove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
+          window.removeEventListener('touchend', this.onDragEnd);
           window.removeEventListener('contextmenu', this.onDragEnd);
         }
       },
 
       setPosition(newPosition) {
-        if (newPosition === null) return;
+        if (newPosition === null || isNaN(newPosition)) return;
         if (newPosition < 0) {
           newPosition = 0;
         } else if (newPosition > 100) {
@@ -206,6 +226,7 @@
         value = parseFloat(value.toFixed(this.precision));
         this.$emit('input', value);
         this.$nextTick(() => {
+          this.displayTooltip();
           this.$refs.tooltip && this.$refs.tooltip.updatePopper();
         });
         if (!this.dragging && this.value !== this.oldValue) {

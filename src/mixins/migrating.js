@@ -1,3 +1,4 @@
+import { kebabCase } from 'element-ui/src/utils/util';
 /**
  * Show migrating guide in browser console.
  *
@@ -29,13 +30,15 @@ export default {
     const definedEvents = componentOptions.listeners || {};
 
     for (let propName in definedProps) {
-      if (definedProps.hasOwnProperty(propName) && props[propName]) {
+      propName = kebabCase(propName); // compatible with camel case
+      if (props[propName]) {
         console.warn(`[Element Migrating][${this.$options.name}][Attribute]: ${props[propName]}`);
       }
     }
 
     for (let eventName in definedEvents) {
-      if (definedEvents.hasOwnProperty(eventName) && events[eventName]) {
+      eventName = kebabCase(eventName); // compatible with camel case
+      if (events[eventName]) {
         console.warn(`[Element Migrating][${this.$options.name}][Event]: ${events[eventName]}`);
       }
     }

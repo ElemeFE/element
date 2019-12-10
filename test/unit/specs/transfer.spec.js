@@ -122,4 +122,63 @@ describe('Transfer', () => {
     leftList.handleAllCheckedChange({ target: { checked: true } });
     expect(leftList.checked.length).to.equal(12);
   });
+
+  describe('target order', () => {
+    it('original(default)', done => {
+      vm = createTransfer('v-model="value" :left-default-checked="[2, 3]"', {
+        data() {
+          return {
+            value: [1, 4]
+          };
+        }
+      });
+      const transfer = vm.$refs.transfer;
+      setTimeout(() => {
+        transfer.addToRight();
+        setTimeout(() => {
+          const targetItems = [].slice.call(vm.$el.querySelectorAll('.el-transfer__buttons + .el-transfer-panel .el-transfer-panel__body .el-checkbox__label span'));
+          expect(targetItems.map(item => item.innerText)).to.deep.equal(['备选项 1', '备选项 2', '备选项 3', '备选项 4']);
+          done();
+        }, 50);
+      }, 50);
+    });
+
+    it('push', done => {
+      vm = createTransfer('v-model="value" :left-default-checked="[2, 3]" target-order="push"', {
+        data() {
+          return {
+            value: [1, 4]
+          };
+        }
+      });
+      const transfer = vm.$refs.transfer;
+      setTimeout(() => {
+        transfer.addToRight();
+        setTimeout(() => {
+          const targetItems = [].slice.call(vm.$el.querySelectorAll('.el-transfer__buttons + .el-transfer-panel .el-transfer-panel__body .el-checkbox__label span'));
+          expect(targetItems.map(item => item.innerText)).to.deep.equal(['备选项 1', '备选项 4', '备选项 2', '备选项 3']);
+          done();
+        }, 50);
+      }, 50);
+    });
+
+    it('unshift', done => {
+      vm = createTransfer('v-model="value" :left-default-checked="[2, 3]" target-order="unshift"', {
+        data() {
+          return {
+            value: [1, 4]
+          };
+        }
+      });
+      const transfer = vm.$refs.transfer;
+      setTimeout(() => {
+        transfer.addToRight();
+        setTimeout(() => {
+          const targetItems = [].slice.call(vm.$el.querySelectorAll('.el-transfer__buttons + .el-transfer-panel .el-transfer-panel__body .el-checkbox__label span'));
+          expect(targetItems.map(item => item.innerText)).to.deep.equal(['备选项 2', '备选项 3', '备选项 1', '备选项 4']);
+          done();
+        }, 50);
+      }, 50);
+    });
+  });
 });

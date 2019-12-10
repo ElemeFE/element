@@ -7,7 +7,7 @@
   display: inline-block;
 
   @include e(content) {
-    background-color: $--badge-fill;
+    background-color: $--badge-background-color;
     border-radius: $--badge-radius;
     color: $--color-white;
     display: inline-block;
@@ -36,6 +36,22 @@
       padding: 0;
       right: 0;
       border-radius: 50%;
+    }
+
+    @each $type in (primary, success, warning, info, danger) {
+      @include m($type) {
+        @if $type == primary {
+          background-color: $--color-primary;
+        } @else if $type == success {
+          background-color: $--color-success;
+        } @else if $type == warning {
+          background-color: $--color-warning;
+        } @else if $type == info {
+          background-color: $--color-info;
+        } @else {
+          background-color: $--color-danger;
+        }
+      }
     }
   }
 }

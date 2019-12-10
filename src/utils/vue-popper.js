@@ -39,7 +39,6 @@ export default {
       type: Number,
       default: 35
     },
-    transition: String,
     appendToBody: {
       type: Boolean,
       default: true
@@ -71,6 +70,7 @@ export default {
     },
 
     showPopper(val) {
+      if (this.disabled) return;
       val ? this.updatePopper() : this.destroyPopper();
       this.$emit('input', val);
     }
@@ -129,9 +129,9 @@ export default {
       }
     },
 
-    doDestroy() {
+    doDestroy(forceDestroy) {
       /* istanbul ignore if */
-      if (this.showPopper || !this.popperJS) return;
+      if (!this.popperJS || (this.showPopper && !forceDestroy)) return;
       this.popperJS.destroy();
       this.popperJS = null;
     },
@@ -184,7 +184,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.doDestroy();
+    this.doDestroy(true);
     if (this.popperElm && this.popperElm.parentNode === document.body) {
       this.popperElm.removeEventListener('click', stop);
       document.body.removeChild(this.popperElm);

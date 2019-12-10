@@ -1,91 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        pickerOptions1: {
-          shortcuts: [{
-            text: 'Today',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }, {
-            text: 'Yesterday',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
-            }
-          }, {
-            text: 'A week ago',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
-            }
-          }]
-        },
-        pickerOptions2: {
-          shortcuts: [{
-            text: 'Last week',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last month',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last 3 months',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value1: '',
-        value2: '',
-        value3: new Date(),
-        value4: '',
-        value5: '',
-        value6: ''
-      };
-    }
-  };
-</script>
-
-<style>
-.demo-block.demo-datetime-picker .source {
-    padding: 0;
-    display: flex;
-  }
-
-  .demo-datetime-picker .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    flex: 1;
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-datetime-picker .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-</style>
-
 ## DateTimePicker
 
 Seleccionar fecha y tiempo juntos en un picker.
@@ -115,7 +27,16 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
       v-model="value2"
       type="datetime"
       placeholder="Select date and time"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">With default time</span>
+    <el-date-picker
+      v-model="value3"
+      type="datetime"
+      placeholder="Select date and time"
+      default-time="12:00:00">
     </el-date-picker>
   </div>
 </template>
@@ -124,7 +45,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        pickerOptions1: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -147,7 +68,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
           }]
         },
         value1: '',
-        value2: ''
+        value2: '',
+        value3: ''
       };
     }
   };
@@ -164,7 +86,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Default</span>
     <el-date-picker
-      v-model="value3"
+      v-model="value1"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
@@ -174,9 +96,9 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">With shortcuts</span>
     <el-date-picker
-      v-model="value4"
+      v-model="value2"
       type="datetimerange"
-      :picker-options="pickerOptions2"
+      :picker-options="pickerOptions"
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
@@ -189,7 +111,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        pickerOptions2: {
+        pickerOptions: {
           shortcuts: [{
             text: 'Last week',
             onClick(picker) {
@@ -216,8 +138,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
             }
           }]
         },
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        value4: ''
+        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value2: ''
       };
     }
   };
@@ -225,15 +147,15 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 ```
 :::
 
-###  Default time value for start date and end date
+###  Valor de la hora por defecto para la fecha de inicio y la fecha final
 
-:::demo When picking date range on the date panel with type `datetimerange`, `00:00:00` will be used as the default time value for start and end date. We can control it with the `default-time` attribute. `default-time` accepts an array of up to two strings. The first item controls time value of the start date and the second item controls time value of the end date.
+:::demo Cuando se selecciona el rango de fechas en el panel con el tipo datetimerange, 00:00:00:00 se usará como el valor de tiempo predeterminado para la fecha de inicio y fin. Podemos controlarlo con el atributo default-time. default-time acepta una matriz de hasta dos cadenas. La primera posición controla el valor de tiempo de la fecha de inicio y la segunda el valor de tiempo de la fecha de fin.
 ```html
 <template>
   <div class="block">
     <span class="demonstration">Start date time 12:00:00</span>
     <el-date-picker
-      v-model="value5"
+      v-model="value1"
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
@@ -243,7 +165,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   <div class="block">
     <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
     <el-date-picker
-      v-model="value6"
+      v-model="value2"
       type="datetimerange"
       align="right"
       start-placeholder="Start Date"
@@ -257,8 +179,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
   export default {
     data() {
       return {
-        value5: '',
-        value6: ''
+        value1: '',
+        value2: ''
       };
     }
   };
@@ -269,6 +191,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 ### Atributos
 | Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto          |
 | ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | -------------------- |
+| value / v-model     | valor enlazado                           | date(DateTimePicker) / array(DateTimeRangePicker) | — | — |
 | readonly           | si DatePicker es solo de lectura         | boolean           | —                                        | false                |
 | disabled           | si DatePicker esta deshabilitada         | boolean           | —                                        | false                |
 | editable           | Si la entrada es editable                | boolean           | —                                        | true                 |
@@ -279,31 +202,33 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —                    |
 | time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false                |
 | type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
-| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
+| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd HH:mm:ss           |
 | align              | alineación                               | left/center/right | left                                     |                      |
 | popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —                    |
 | picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |
 | range-separator    | separador de rango                       | string            | -                                        | '-'                  |
 | default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |                      |
-| default-time       | the time value to use when selecting date range | string[]          | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | —                    |
+| default-time | el valor de tiempo por defecto después de elegir una fecha | non-range: string / range: string[] | non-range: Una cadena de texto como `12:00:00`, range: array de dos strings, el primero es para la fecha de inicio y el segundo para la fecha final. 00:00:00 se utilizará si no se especifica | — |
 | value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
 | prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
-| clear-icon         | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
+| clear-icon         | Clase personalizada para el icono `clear` | string              | —                                        | el-icon-circle-close |
+| validate-event     | si se debe disparar la validacion | boolean             | -                                        | true                 |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |
 | -------------- | ---------------------------------------- | -------- | ----------------- | ----------- |
 | shortcuts      | un array de objetos { text, onClick } para establecer las opciones de acceso directo, verifique la tabla debajo | objeto[] | —                 | —           |
 | disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un booleano | función  | —                 | —           |
+| cellClassName | establecer nombre de clase personalizado | Function(Date) | — | — |
 | firstDayOfWeek | primera día de semana                    | Número   | 1 to 7            | 7           |
 
 ### Accesos directos
-| Atributo | Descripción                              | Tipo     | Valores aceptados | Por defecto |
-| -------- | ---------------------------------------- | -------- | ----------------- | ----------- |
-| text     | título del acceso directo                | string   | —                 | —           |
-| onClick  | la funcion se dispara cuando se hace clic en el acceso directo, con el `vm` como parámetro. Puede modificar el valor del picker emitiendo el evento`pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
+| Atributo | Descripción                                                  | Tipo     | Valores aceptados | Por defecto |
+| -------- | ------------------------------------------------------------ | -------- | ----------------- | ----------- |
+| text     | título del acceso directo                                    | string   | —                 | —           |
+| onClick  | la función se dispara cuando se hace clic en el acceso directo, con el `vm` como parámetro. Puede modificar el valor del picker emitiendo el evento`pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
 
 ### Eventos
 | Nombre de evento | Descripción                              | Parámetros                    |

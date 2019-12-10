@@ -265,4 +265,98 @@ describe('ColorPicker', () => {
       });
     }, ANIMATION_TIME);
   });
+
+  it('should change color to the selected color', done => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color" show-alpha :predefine="colors"></el-color-picker>
+      `,
+      data() {
+        return {
+          color: 'hsva(180, 65, 20, 0.5)',
+          colors: [
+            'rgba(19, 206, 102, 0.18)',
+            'rgb(25, 159, 147)',
+            'hsv(250, 54, 98)',
+            'hsva(180, 65, 20, 0.5)',
+            'hsl(170, 32%, 87%)',
+            'hsla(45, 62%, 47%, 0.13)',
+            '#7486de',
+            '#45aa9477',
+            '#892345'
+          ]
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      expect(document.querySelectorAll('.el-color-predefine__color-selector').length === 9).to.be.true;
+      const selector = document.querySelector('.el-color-predefine__color-selector:nth-child(4)');
+      selector.click();
+      vm.$nextTick(() => {
+        const picker = vm.$children[0];
+        expect(picker.color._hue === 180).to.be.true;
+        expect(picker.color._saturation === 65).to.be.true;
+        expect(picker.color._value === 20).to.be.true;
+        expect(picker.color._alpha === 50).to.be.true;
+
+        const selector2 = document.querySelector('.el-color-predefine__color-selector:nth-child(3)');
+        selector2.click();
+
+        vm.$nextTick(() => {
+          expect(picker.color._hue === 250).to.be.true;
+          expect(picker.color._saturation === 54).to.be.true;
+          expect(picker.color._value === 98).to.be.true;
+          expect(picker.color._alpha === 100).to.be.true;
+          done();
+        });
+      });
+    });
+  });
+
+  it('should change selected state of predefined color', done => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color" show-alpha :predefine="colors"></el-color-picker>
+      `,
+      data() {
+        return {
+          color: 'hsva(180, 65, 20, 0.5)',
+          colors: [
+            'rgba(19, 206, 102, 0.18)',
+            'rgb(25, 159, 147)',
+            'hsv(250, 54, 98)',
+            'hsva(180, 65, 20, 0.5)',
+            'hsl(170, 32%, 87%)',
+            'hsla(45, 62%, 47%, 0.13)',
+            '#7486de',
+            '#45aa9477',
+            '#892345'
+          ]
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      const selector = document.querySelector('.el-color-predefine__color-selector:nth-child(4)');
+      selector.click();
+      vm.$nextTick(() => {
+        expect(selector.classList.contains('selected')).to.be.true;
+
+        const hueBar = document.querySelector('.el-color-hue-slider');
+        hueBar.__vue__.handleClick({ target: null, clientX: 0, clientY: 1000 });
+
+        vm.$nextTick(() => {
+          expect(selector.classList.contains('selected')).to.be.false;
+          done();
+        });
+      });
+    });
+  });
 });

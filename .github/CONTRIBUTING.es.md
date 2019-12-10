@@ -37,8 +37,8 @@ Estamos orgullosos de que usted esta interesado en contribuir al proyecto `Eleme
 - Fusión de un PR requiere dos mantenedores: el primero aprueba los cambios después de revisar, y entonces el segundo mantenedor revisa los cambios y hace la fusión.
 
 
-## Requerimientos Técnicos 
-`Node.js 4+` y `NPM 3+` son requisitos
+## Requerimientos Técnicos
+`Node.js 4+`, `yarn` y `npm 3+` son requisitos. Nota: Usamos yarn para bloquear versiones de dependencias, por lo que debería instalar dependencias usando `yarn` en lugar de `npm install`.
 .
 ```shell
 git clone git@github.com:ElemeFE/element.git
@@ -47,16 +47,7 @@ npm run dev
 # abra http://localhost:8085
 ```
 
-Para usuarios chinos, [yarn](https://github.com/yarnpkg/yarn) con `taobao registry` es recomendado, sí la instalación de dependencias es lenta.
-
-```shell
-npm i yarn -g
-yarn config set registry https://registry.npm.taobao.org
-yarn
-npm run dev
-
-# abra http://localhost:8085
-```
+> **Notice**: modify `examples/play/index.vue` file, use the component you contribute, then run `npm run dev:play`, go ahead [http://localhost:8085](http://localhost:8085), get result, more quickly and friendly.
 
 Para armar:
 
@@ -66,7 +57,7 @@ npm run dist
 ```
 
 ## Guía Para Desarrollo de Componentes
-- Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, configuración para armar, documentación y `package.json` están incluidos.
+- Corra el comando `make new <component-name>` para crear el directorio de su proyecto para un componente nuevo. Verifique su código fuente test, archivo de entrada y documentación están incluidos.
 - Refiérase al `Button` para componentes anidados.
 - Refiérase al `Select` para componentes que dependen de otros componentes.
 

@@ -4,27 +4,36 @@
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
-      'is-required': isRequired || required
+      'is-required': isRequired || required,
+      'is-no-asterisk': elForm && elForm.hideRequiredAsterisk
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
-    <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
-      <slot name="label">{{label + form.labelSuffix}}</slot>
-    </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <label-wrap
+      :is-auto-width="labelStyle && labelStyle.width === 'auto'"
+      :update-all="form.labelWidth === 'auto'">
+      <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
+        <slot name="label">{{label + form.labelSuffix}}</slot>
+      </label>
+    </label-wrap>
+    <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div
+        <slot
           v-if="validateState === 'error' && showMessage && form.showMessage"
-          class="el-form-item__error"
-          :class="{
-            'el-form-item__error--inline': typeof inlineMessage === 'boolean'
-              ? inlineMessage
-              : (elForm && elForm.inlineMessage || false)
-          }"
-        >
-          {{validateMessage}}
-        </div>
+          name="error"
+          :error="validateMessage">
+          <div
+            class="el-form-item__error"
+            :class="{
+              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+                ? inlineMessage
+                : (elForm && elForm.inlineMessage || false)
+            }"
+          >
+            {{validateMessage}}
+          </div>
+        </slot>
       </transition>
     </div>
   </div>
@@ -34,7 +43,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
-
+  import LabelWrap from './label-wrap';
   export default {
     name: 'ElFormItem',
 
@@ -72,6 +81,10 @@
       },
       size: String
     },
+    components: {
+      // use this component to calculate auto width
+      LabelWrap
+    },
     watch: {
       error: {
         immediate: true,
@@ -89,21 +102,27 @@
         return this.for || this.prop;
       },
       labelStyle() {
-        var ret = {};
+        const ret = {};
         if (this.form.labelPosition === 'top') return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
+        const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.width = labelWidth;
         }
         return ret;
       },
       contentStyle() {
-        var ret = {};
+        const ret = {};
         const label = this.label;
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
-        if (labelWidth) {
+        const labelWidth = this.labelWidth || this.form.labelWidth;
+        if (labelWidth === 'auto') {
+          if (this.labelWidth === 'auto') {
+            ret.marginLeft = this.computedLabelWidth;
+          } else if (this.form.labelWidth === 'auto') {
+            ret.marginLeft = this.elForm.autoLabelWidth;
+          }
+        } else {
           ret.marginLeft = labelWidth;
         }
         return ret;
@@ -120,19 +139,16 @@
         }
         return parent;
       },
-      fieldValue: {
-        cache: false,
-        get() {
-          var model = this.form.model;
-          if (!model || !this.prop) { return; }
+      fieldValue() {
+        const model = this.form.model;
+        if (!model || !this.prop) { return; }
 
-          var path = this.prop;
-          if (path.indexOf(':') !== -1) {
-            path = path.replace(/:/, '.');
-          }
-
-          return getPropByPath(model, path, true).v;
+        let path = this.prop;
+        if (path.indexOf(':') !== -1) {
+          path = path.replace(/:/, '.');
         }
+
+        return getPropByPath(model, path, true).v;
       },
       isRequired() {
         let rules = this.getRules();
@@ -156,7 +172,7 @@
         return this.size || this._formSize;
       },
       sizeClass() {
-        return (this.$ELEMENT || {}).size || this.elFormItemSize;
+        return this.elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
     data() {
@@ -165,13 +181,14 @@
         validateMessage: '',
         validateDisabled: false,
         validator: {},
-        isNested: false
+        isNested: false,
+        computedLabelWidth: ''
       };
     },
     methods: {
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
-        var rules = this.getFilteredRule(trigger);
+        const rules = this.getFilteredRule(trigger);
         if ((!rules || rules.length === 0) && this.required === undefined) {
           callback();
           return true;
@@ -179,7 +196,7 @@
 
         this.validateState = 'validating';
 
-        var descriptor = {};
+        const descriptor = {};
         if (rules && rules.length > 0) {
           rules.forEach(rule => {
             delete rule.trigger;
@@ -187,16 +204,17 @@
         }
         descriptor[this.prop] = rules;
 
-        var validator = new AsyncValidator(descriptor);
-        var model = {};
+        const validator = new AsyncValidator(descriptor);
+        const model = {};
 
         model[this.prop] = this.fieldValue;
 
-        validator.validate(model, { firstFields: true }, (errors, fields) => {
+        validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 
-          callback(this.validateMessage);
+          callback(this.validateMessage, invalidFields);
+          this.elForm && this.elForm.$emit('validate', this.prop, !errors, this.validateMessage || null);
         });
       },
       clearValidate() {
@@ -217,28 +235,40 @@
 
         let prop = getPropByPath(model, path, true);
 
+        this.validateDisabled = true;
         if (Array.isArray(value)) {
-          this.validateDisabled = true;
           prop.o[prop.k] = [].concat(this.initialValue);
         } else {
-          this.validateDisabled = true;
           prop.o[prop.k] = this.initialValue;
         }
+
+        // reset validateDisabled after onFieldChange triggered
+        this.$nextTick(() => {
+          this.validateDisabled = false;
+        });
+
+        this.broadcast('ElTimeSelect', 'fieldReset', this.initialValue);
       },
       getRules() {
-        var formRules = this.form.rules;
-        var selfRules = this.rules;
-        var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
+        let formRules = this.form.rules;
+        const selfRules = this.rules;
+        const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? getPropByPath(formRules, this.prop || '').o[this.prop || ''] : [];
+        const prop = getPropByPath(formRules, this.prop || '');
+        formRules = formRules ? (prop.o[this.prop || ''] || prop.v) : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
       getFilteredRule(trigger) {
-        var rules = this.getRules();
+        const rules = this.getRules();
 
         return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          if (!rule.trigger || trigger === '') return true;
+          if (Array.isArray(rule.trigger)) {
+            return rule.trigger.indexOf(trigger) > -1;
+          } else {
+            return rule.trigger === trigger;
+          }
         }).map(rule => objectAssign({}, rule));
       },
       onFieldBlur() {
@@ -251,6 +281,20 @@
         }
 
         this.validate('change');
+      },
+      updateComputedLabelWidth(width) {
+        this.computedLabelWidth = width ? `${width}px` : '';
+      },
+      addValidateEvents() {
+        const rules = this.getRules();
+
+        if (rules.length || this.required !== undefined) {
+          this.$on('el.form.blur', this.onFieldBlur);
+          this.$on('el.form.change', this.onFieldChange);
+        }
+      },
+      removeValidateEvents() {
+        this.$off();
       }
     },
     mounted() {
@@ -265,12 +309,7 @@
           value: initialValue
         });
 
-        let rules = this.getRules();
-
-        if (rules.length || this.required !== undefined) {
-          this.$on('el.form.blur', this.onFieldBlur);
-          this.$on('el.form.change', this.onFieldChange);
-        }
+        this.addValidateEvents();
       }
     },
     beforeDestroy() {

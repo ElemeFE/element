@@ -29,12 +29,8 @@
     }
 
     &.selected {
-      color: $--select-option-selected;
+      color: $--select-option-selected-font-color;
       font-weight: bold;
-    }
-
-    & span {
-      line-height: 34px !important;
     }
   }
 }

@@ -33,7 +33,7 @@ describe('MessageBox', () => {
     setTimeout(() => {
       const msgbox = document.querySelector('.el-message-box__wrapper');
       expect(msgbox.__vue__.$parent.visible).to.true;
-      expect(msgbox.querySelector('.el-message-box__title').textContent).to.equal('消息');
+      expect(msgbox.querySelector('.el-message-box__title span').textContent).to.equal('消息');
       expect(msgbox.querySelector('.el-message-box__message')
         .querySelector('p').textContent).to.equal('这是一段内容');
       MessageBox.close();
@@ -50,6 +50,19 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('custom icon', done => {
+    MessageBox({
+      type: 'warning',
+      iconClass: 'el-icon-question',
+      message: '这是一段内容'
+    });
+    setTimeout(() => {
+      const icon = document.querySelector('.el-message-box__status');
+      expect(icon.classList.contains('el-icon-question')).to.true;
+      done();
+    }, 300);
+  });
+
   it('html string', done => {
     MessageBox({
       title: 'html string',
@@ -61,6 +74,24 @@ describe('MessageBox', () => {
       expect(message.textContent).to.equal('html string');
       done();
     }, 300);
+  });
+
+  it('distinguish cancel and close', done => {
+    let msgAction = '';
+    MessageBox({
+      title: '消息',
+      message: '这是一段内容',
+      distinguishCancelAndClose: true
+    }, action => {
+      msgAction = action;
+    });
+    setTimeout(() => {
+      document.querySelector('.el-message-box__close').click();
+      setTimeout(() => {
+        expect(msgAction).to.equal('close');
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('alert', done => {

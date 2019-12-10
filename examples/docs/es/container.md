@@ -1,62 +1,3 @@
-<style>
-  .el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
-  }
-
-  .el-aside {
-    color: #333;
-  }
-
-  #disenos-comunes + .demo-container {
-    .el-header, .el-footer {
-      text-align: center;
-    }
-    
-    .el-aside {
-      background-color: #D3DCE6;
-      text-align: center;
-      line-height: 200px;
-    }
-    
-    .el-main {
-      background-color: #E9EEF3;
-      color: #333;
-      text-align: center;
-      line-height: 160px;
-    }
-    
-    & > .source > .el-container {
-      margin-bottom: 40px;
-    
-      &:nth-child(5) .el-aside,
-      &:nth-child(6) .el-aside {
-        line-height: 260px;
-      }
-    
-     &:nth-child(7) .el-aside {
-       line-height: 320px;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      const item = {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      };
-      return {
-        tableData: Array(20).fill(item)
-      }
-    }
-  };
-</script>
-
 ## Contenedor
 Componentes contenedores para iniciar una estructura básica de un sitio:
 
@@ -72,7 +13,7 @@ De lo contrario, de forma horizontal.
 `<el-footer>`: Contenedor para pie de página.
 
 :::tip
-Estos componentes utilizan flex para el diseño, así que asegurese que el navegador lo soporta. Además, los elementos directos de `<el-container>` tienen que ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
+Estos componentes utilizan flex para el diseño, así que asegúrese que el navegador lo soporta. Además, los elementos directos de `<el-container>` tienen que ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
 :::
 
 ### Diseños comunes

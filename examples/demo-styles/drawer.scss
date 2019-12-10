@@ -1,0 +1,21 @@
+.demo-drawer {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    form {
+      flex: 1;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    button {
+      flex: 1;
+    }
+  }
+}
+
+.el-drawer__body {
+  padding: 20px;
+}
