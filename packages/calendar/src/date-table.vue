@@ -122,7 +122,7 @@ export default {
         let firstDay = getFirstDayOfMonth(date);
         firstDay = firstDay === 0 ? 7 : firstDay;
         const firstDayOfWeek = typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1;
-        const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek < 0?7 - firstDayOfWeek + firstDay:firstDay - firstDayOfWeek).map(day => ({
+        const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek < 0 ? 7 - firstDayOfWeek + firstDay : firstDay - firstDayOfWeek).map(day => ({
           text: day,
           type: 'prev'
         }));
