@@ -100,7 +100,7 @@ describe('Checkbox', () => {
   it('checkbox group change event', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList" @change="onChange">
+        <el-checkbox-group :value="checkList" @change="onChange">
           <el-checkbox label="a" ref="a"></el-checkbox>
           <el-checkbox label="b" ref="b"></el-checkbox>
         </el-checkbox-group>

@@ -14,6 +14,10 @@
       }
     },
 
+    model: {
+      prop: 'value',
+      event: 'change'
+    },
     props: {
       value: {},
       disabled: Boolean,

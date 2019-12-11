@@ -100,10 +100,7 @@
               (this.isLimitExceeded = true));
 
             this.isLimitExceeded === false &&
-            this.dispatch('ElCheckboxGroup', 'input', [val]);
-          } else {
-            this.$emit('input', val);
-            this.selfModel = val;
+            this.dispatch('ElCheckboxGroup', 'change', [val]);
           }
         }
       },
@@ -161,6 +158,10 @@
       }
     },
 
+    model: {
+      prop: 'value',
+      event: 'change'
+    },
     props: {
       value: {},
       label: {},
@@ -182,9 +183,13 @@
           Array.isArray(this.model) &&
           this.model.indexOf(this.label) === -1
         ) {
-          this.model.push(this.label);
+          this.store.push(this.label);
+          this.dispatch('ElCheckboxGroup', 'change', [this.store]);
         } else {
-          this.model = this.trueLabel || true;
+          this.selfModel = this.trueLabel || true;
+          if (this.value !== this.selfModel) {
+            this.$emit('change', this.selfModel);
+          }
         }
       },
       handleChange(ev) {
@@ -195,12 +200,8 @@
         } else {
           value = this.falseLabel === undefined ? false : this.falseLabel;
         }
+        this.selfModel = value;
         this.$emit('change', value, ev);
-        this.$nextTick(() => {
-          if (this.isGroup) {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
-          }
-        });
       }
     },
 
