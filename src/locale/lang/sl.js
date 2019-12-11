@@ -16,11 +16,11 @@ export default {
       startTime: 'Začetni čas',
       endDate: 'Končni datum',
       endTime: 'Končni čas',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
-      year: 'Leto',
+      prevYear: 'Prejšnje leto',
+      nextYear: 'Naslednje leto',
+      prevMonth: 'Prejšnji mesec',
+      nextMonth: 'Naslednji mesec',
+      year: '',
       month1: 'Jan',
       month2: 'Feb',
       month3: 'Mar',
@@ -67,11 +67,12 @@ export default {
     cascader: {
       noMatch: 'Ni ustreznih podatkov',
       loading: 'Nalaganje',
-      placeholder: 'Izberi'
+      placeholder: 'Izberi',
+      noData: 'Ni podatkov'
     },
     pagination: {
       goto: 'Pojdi na',
-      pagesize: '/page',
+      pagesize: '/stran',
       total: 'Skupno {total}',
       pageClassifier: ''
     },
@@ -104,6 +105,16 @@ export default {
       filterPlaceholder: 'Vnesi ključno besedo',
       noCheckedFormat: '{total} elementov',
       hasCheckedFormat: '{checked}/{total} izbranih'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

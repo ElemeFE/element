@@ -1,30 +1,6 @@
-<style>
-  .demo-box.demo-switch {
-    .el-switch {
-      margin: 20px 20px 20px 0;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: true,
-        value2: true,
-        value3: true,
-        value4: true,
-        value5: '100',
-        value6: true,
-        value7: false
-      }
-    }
-  };
-</script>
-
 ## Switch
 
-Switch es utilizdo para realizar cambios entre dos estados opuestos.
+Switch es utilizado para realizar cambios entre dos estados opuestos.
 
 ### Uso básico
 
@@ -57,13 +33,13 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 ```html
 <el-switch
-  v-model="value3"
+  v-model="value1"
   active-text="Pay by month"
   inactive-text="Pay by year">
 </el-switch>
 <el-switch
   style="display: block"
-  v-model="value4"
+  v-model="value2"
   active-color="#13ce66"
   inactive-color="#ff4949"
   active-text="Pay by month"
@@ -74,8 +50,8 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
   export default {
     data() {
       return {
-        value3: true,
-        value4: true
+        value1: true,
+        value2: true
       }
     }
   };
@@ -88,9 +64,9 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 :::demo Puede establecer los atributos `active-value` y `inactive-value`. Ambos reciben valores de tipo `Boolean`, `String` o `Number`.
 
 ```html
-<el-tooltip :content="'Switch value: ' + value5" placement="top">
+<el-tooltip :content="'Switch value: ' + value" placement="top">
   <el-switch
-    v-model="value5"
+    v-model="value"
     active-color="#13ce66"
     inactive-color="#ff4949"
     active-value="100"
@@ -102,7 +78,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
   export default {
     data() {
       return {
-        value5: '100'
+        value: '100'
       }
     }
   };
@@ -117,11 +93,11 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 ```html
 <el-switch
-  v-model="value6"
+  v-model="value1"
   disabled>
 </el-switch>
 <el-switch
-  v-model="value7"
+  v-model="value2"
   disabled>
 </el-switch>
 
@@ -129,8 +105,8 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
   export default {
     data() {
       return {
-        value6: true,
-        value7: false
+        value1: true,
+        value2: false
       }
     }
   };
@@ -142,10 +118,11 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 | Atributo            | Descripción                              | Tipo                      | Valores aceptados | Por defecto |
 | ------------------- | ---------------------------------------- | ------------------------- | ----------------- | ----------- |
+| value / v-model      | valor enlazado                           | boolean / string / number | —                 | —           |
 | disabled            | si Switch esta deshabilitado             | boolean                   | —                 | false       |
 | width               | ancho del componente Switch              | number                    | —                 | 40          |
-| active-icon-class   | nombre de la clase del icono mostrado en el estado `on`, sobreescribe `active-text` | string                    | —                 | —           |
-| inactive-icon-class | nombre de la clase del icono mostrado en el estado `off`, sobreescribe `inactive-text` | string                    | —                 | —           |
+| active-icon-class   | nombre de la clase del icono mostrado en el estado `on`, sobrescribe `active-text` | string                    | —                 | —           |
+| inactive-icon-class | nombre de la clase del icono mostrado en el estado `off`, sobrescribe `inactive-text` | string                    | —                 | —           |
 | active-text         | texto mostrado en el estado `on`         | string                    | —                 | —           |
 | inactive-text       | texto mostrado en el estado `off`        | string                    | —                 | —           |
 | active-value        | cambia su valor cuando se encuentra en el estado `on` | boolean / string / number | —                 | true        |
@@ -153,6 +130,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 | active-color        | color de fondo cuando se encuentra en el estado `on` | string                    | —                 | #409EFF     |
 | inactive-color      | color de fondo cuando se encuentra en el estado `off` | string                    | —                 | #C0CCDA     |
 | name                | nombre de entrada del componente Switch  | string                    | —                 | —           |
+| validate-event      | si se debe lanzar la validación de formulario | boolean              | -                 | true        |
 
 ### Eventos
 

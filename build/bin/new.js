@@ -11,6 +11,7 @@ if (!process.argv[2]) {
 }
 
 const path = require('path');
+const fs = require('fs');
 const fileSave = require('file-save');
 const uppercamelcase = require('uppercamelcase');
 const componentname = process.argv[2];
@@ -51,6 +52,10 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/es', `${componentname}.md`),
+    content: `## ${ComponentName}`
+  },
+  {
+    filename: path.join('../../examples/docs/fr-FR', `${componentname}.md`),
     content: `## ${ComponentName}`
   },
   {
@@ -98,6 +103,29 @@ if (componentsFile[componentname]) {
 componentsFile[componentname] = `./packages/${componentname}/index.js`;
 fileSave(path.join(__dirname, '../../components.json'))
   .write(JSON.stringify(componentsFile, null, '  '), 'utf8')
+  .end('\n');
+
+// 添加到 index.scss
+const sassPath = path.join(__dirname, '../../packages/theme-chalk/src/index.scss');
+const sassImportText = `${fs.readFileSync(sassPath)}@import "./${componentname}.scss";`;
+fileSave(sassPath)
+  .write(sassImportText, 'utf8')
+  .end('\n');
+
+// 添加到 element-ui.d.ts
+const elementTsPath = path.join(__dirname, '../../types/element-ui.d.ts');
+
+let elementTsText = `${fs.readFileSync(elementTsPath)}
+/** ${ComponentName} Component */
+export class ${ComponentName} extends El${ComponentName} {}`;
+
+const index = elementTsText.indexOf('export') - 1;
+const importString = `import { El${ComponentName} } from './${componentname}'`;
+
+elementTsText = elementTsText.slice(0, index) + importString + '\n' + elementTsText.slice(index);
+
+fileSave(elementTsPath)
+  .write(elementTsText, 'utf8')
   .end('\n');
 
 // 创建 package

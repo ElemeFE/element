@@ -14,15 +14,14 @@
   margin: 5px 0;
   box-shadow: $--box-shadow-light;
   border-radius: $--border-radius-base;
+  border: 1px solid $--border-color-light;
+  box-sizing: border-box;
+  background-color: $--color-white;
 
   @include e(wrap) {
     max-height: 280px;
     padding: 10px 0;
     box-sizing: border-box;
-    overflow: auto;
-    background-color: $--color-white;
-    border: 1px solid $--border-color-light;
-    border-radius: $--border-radius-base;
   }
 
   @include e(list) {

@@ -27,6 +27,7 @@ const install = function(Vue, opts = {}) {
     Vue.component(component.name, component);
   });
 
+  Vue.use(InfiniteScroll);
   Vue.use(Loading.directive);
 
   Vue.prototype.$ELEMENT = {
@@ -49,7 +50,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
+export default {
   version: '{{version}}',
   locale: locale.use,
   i18n: locale.i18n,
@@ -58,8 +59,6 @@ module.exports = {
   Loading,
 {{list}}
 };
-
-module.exports.default = module.exports;
 `;
 
 delete Components.font;
@@ -78,7 +77,7 @@ ComponentNames.forEach(name => {
     package: name
   }));
 
-  if (['Loading', 'MessageBox', 'Notification', 'Message'].indexOf(componentName) === -1) {
+  if (['Loading', 'MessageBox', 'Notification', 'Message', 'InfiniteScroll'].indexOf(componentName) === -1) {
     installTemplate.push(render(INSTALL_COMPONENT_TEMPLATE, {
       name: componentName,
       component: name

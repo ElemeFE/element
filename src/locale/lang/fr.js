@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Aucune correspondance',
       loading: 'Chargement',
-      placeholder: 'Choisir'
+      placeholder: 'Choisir',
+      noData: 'Aucune donnée'
     },
     pagination: {
       goto: 'Aller à',
@@ -103,6 +104,16 @@ export default {
       filterPlaceholder: 'Entrer un mot clef',
       noCheckedFormat: '{total} elements',
       hasCheckedFormat: '{checked}/{total} coché(s)'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

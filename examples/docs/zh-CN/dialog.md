@@ -1,77 +1,3 @@
-<script>
-  module.exports = {
-    data() {
-      return {
-        gridData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
-        dialogVisible: false,
-        dialogTableVisible: false,
-        dialogFormVisible: false,
-        outerVisible: false,
-        innerVisible: false,
-        centerDialogVisible: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '80px'
-      };
-    },
-    methods: {
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
-    }
-  };
-</script>
-
-<style>
-  .demo-box.demo-dialog {
-    .dialog-footer button:first-child {
-      margin-right: 10px;
-    }
-    .full-image {
-      width: 100%;
-    }
-    .el-dialog__wrapper {
-      margin: 0;
-    }
-    .el-select {
-      width: 300px;
-    }
-    .el-input {
-      width: 300px;
-    }
-    .el-button--text {
-      margin-right: 15px;
-    }
-  }
-</style>
 ## Dialog 对话框
 在保留当前页面状态的情况下，告知用户并承载相关操作。
 
@@ -293,6 +219,7 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | show-close | 是否显示关闭按钮 | boolean    | — | true |
 | before-close | 关闭前的回调，会暂停 Dialog 的关闭 | function(done)，done 用于关闭 Dialog | — | — |
 | center | 是否对头部和底部采用居中布局 | boolean | — | false |
+| destroy-on-close | 关闭时销毁 Dialog 中的元素 | boolean | — | false |
 
 ### Slot
 | name | 说明 |

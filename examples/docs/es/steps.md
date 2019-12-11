@@ -1,19 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        active: 0
-      };
-    },
-    
-    methods: {
-      next() {
-        if (this.active++ > 2) this.active = 0;
-      }
-    }
-  }
-</script>
-
 ## Steps
 
 Guía al usuario para completar tareas de acuerdo con el proceso. Sus pasos pueden configurarse de acuerdo con el escenario de aplicación real y el número de pasos no puede ser inferior a dos.
@@ -51,11 +35,11 @@ Barra de pasos simple.
 ```
 :::
 
-### Step bar con el status
+### Step bar con el estatus
 
 Muestra el estado del step para cada paso.
 
-:::demo Utilice el atributo `title` para establecer el nombre del paso, o sobreescriba el atributo usando un slot con nombre. Hemos enumerado todos los nombres de slots al final de esta página.
+:::demo Utilice el atributo `title` para establecer el nombre del paso, o sobrescriba el atributo usando un slot con nombre. Hemos enumerado todos los nombres de slots al final de esta página.
 
 ```html
 <el-steps :space="200" :active="1" finish-status="success">
@@ -95,7 +79,7 @@ Puede poner una descripción para cada paso.
 ```
 :::
 
-### Step bar with icon
+### Step bar con icono
 
 En la barra de pasos se pueden utilizar diversos iconos personalizados.
 
@@ -149,15 +133,15 @@ Step bar simple, donde se ignorará `align-center`, `description`, `direction` y
 
 ### Steps atributos
 
-| Atributo       | Descripción                              | Tipo            | Valores aceptados                        | Por defecto |
-| -------------- | ---------------------------------------- | --------------- | ---------------------------------------- | ----------- |
-| space          | el espaciado de cada paso, será responsivo si se omite. Soporta porcentaje. | number / string | —                                        | —           |
-| direction      | dirección de visualización               | string          | vertical/horizontal                      | horizontal  |
-| active         | actual paso de activación                | number          | —                                        | 0           |
-| process-status | status del paso actual                   | string          | wait / process / finish / error / success | process     |
-| finish-status  | status del paso final                    | string          | wait / process / finish / error / success | finish      |
-| align-center   | centrado de título y descripción         | boolean         | —                                        | false       |
-| simple         | si aplicar un tema simple                | boolean         | -                                        | false       |
+| Atributo       | Descripción                                                  | Tipo            | Valores aceptados                         | Por defecto |
+| -------------- | ------------------------------------------------------------ | --------------- | ----------------------------------------- | ----------- |
+| space          | el espaciado de cada paso, será responsivo si se omite. Soporta porcentaje. | number / string | —                                         | —           |
+| direction      | dirección de visualización                                   | string          | vertical/horizontal                       | horizontal  |
+| active         | actual paso de activación                                    | number          | —                                         | 0           |
+| process-status | estatus del paso actual                                      | string          | wait / process / finish / error / success | process     |
+| finish-status  | estatus del paso final                                       | string          | wait / process / finish / error / success | finish      |
+| align-center   | centrado de título y descripción                             | boolean         | —                                         | false       |
+| simple         | si aplicar un tema simple                                    | boolean         | -                                         | false       |
 
 ### Step atributos
 | Atributo    | Descripción                              | Tipo                                     | Valores aceptados | Por defecto |
@@ -172,5 +156,5 @@ Step bar simple, donde se ignorará `align-center`, `description`, `direction` y
 | ----------- | -------------------- |
 | icon        | Icono personalizado  |
 | title       | Titulo del paso      |
-| description | Descripcion del paso |
+| description | Descripción del paso |
 

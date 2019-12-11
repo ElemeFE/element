@@ -1,7 +1,7 @@
 export default {
   el: {
     colorpicker: {
-      confirm: 'جەزىملەش',
+      confirm: 'جەزملەش',
       clear: 'قۇرۇقداش'
     },
     datepicker: {
@@ -9,7 +9,7 @@ export default {
       today: 'بۈگۈن',
       cancel: 'بىكار قىلىش',
       clear: 'قۇرۇقداش',
-      confirm: 'جەزىملەش',
+      confirm: 'جەزملەش',
       selectDate: 'چىسلا تاللاڭ',
       selectTime: 'ۋاقىت تاللاڭ',
       startDate: 'باشلانغان چىسلا',
@@ -20,7 +20,7 @@ export default {
       nextYear: 'كىيىنكى يىل',
       prevMonth: 'ئالدىنقى ئاي',
       nextMonth: 'كىيىنكى ئاي',
-      year: 'يىل',
+      year: '- يىل',
       month1: '1-ئاي',
       month2: '2-ئاي',
       month3: '3-ئاي',
@@ -67,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'ئۇچۇر تېپىلمىدى',
       loading: 'يۈكلىنىۋاتىدۇ',
-      placeholder: 'تاللاڭ'
+      placeholder: 'تاللاڭ',
+      noData: 'ئۇچۇر يوق'
     },
     pagination: {
       goto: 'كىيىنكى بەت',
@@ -77,7 +78,7 @@ export default {
     },
     messagebox: {
       title: 'ئەسكەرتىش',
-      confirm: 'جەزىملەش',
+      confirm: 'جەزملەش',
       cancel: 'بىكار قىلىش',
       error: 'كىرگۈزگەن ئۇچۇرىڭىزدا خاتالىق بار!'
     },
@@ -104,6 +105,16 @@ export default {
       filterPlaceholder: 'ئىزدىمەكچى بولغان مەزمۇننى كىرگۈزۈڭ',
       noCheckedFormat: 'جەمئىي {total} تۈر',
       hasCheckedFormat: 'تاللانغىنى {checked}/{total} تۈر'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

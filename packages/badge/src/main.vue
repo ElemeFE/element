@@ -6,7 +6,13 @@
         v-show="!hidden && (content || content === 0 || isDot)"
         v-text="content"
         class="el-badge__content"
-        :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }">
+        :class="[
+          'el-badge__content--' + type,
+          {
+            'is-fixed': $slots.default,
+            'is-dot': isDot
+          }
+        ]">
       </sup>
     </transition>
   </div>
@@ -17,10 +23,16 @@ export default {
   name: 'ElBadge',
 
   props: {
-    value: {},
+    value: [String, Number],
     max: Number,
     isDot: Boolean,
-    hidden: Boolean
+    hidden: Boolean,
+    type: {
+      type: String,
+      validator(val) {
+        return ['primary', 'success', 'warning', 'info', 'danger'].indexOf(val) > -1;
+      }
+    }
   },
 
   computed: {

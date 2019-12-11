@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 describe('Dialog', () => {
   let vm;
@@ -100,14 +100,14 @@ describe('Dialog', () => {
         };
       }
     }, true);
-    const dialog = vm.$children[0];
-    expect(dialog.$el.style.display).to.equal('none');
+    const dialogEl = vm.$children[0].$el;
+    expect(getComputedStyle(dialogEl).display).to.equal('none');
     vm.visible = true;
     setTimeout(() => {
-      expect(dialog.$el.style.display).to.not.equal('none');
+      expect(getComputedStyle(dialogEl).display).to.not.equal('none');
       vm.visible = false;
       setTimeout(() => {
-        expect(dialog.$el.style.display).to.equal('none');
+        expect(getComputedStyle(dialogEl).display).to.equal('none');
         done();
       }, 400);
     }, 50);
@@ -288,5 +288,32 @@ describe('Dialog', () => {
         done();
       }, 500);
     }, 10);
+  });
+
+  it('destroyOnClose', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible.sync="visible" destroy-on-close>
+            <input />
+          </el-dialog>
+        </div>
+      `,
+
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+    const dialog = vm.$children[0];
+    await waitImmediate();
+    dialog.$el.querySelector('input').value = '123';
+    dialog.$el.click();
+    await waitImmediate();
+    vm.visible = true;
+    await waitImmediate();
+    expect(dialog.$el.querySelector('input').value).to.be.equal('');
   });
 });

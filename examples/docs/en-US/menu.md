@@ -1,56 +1,3 @@
-<style>
-  .demo-box.demo-menu {
-    .el-menu-demo {
-      padding-left: 55px;
-    }
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
-      width: 240px;
-      min-height: 400px;
-    }
-    .line {
-      height: 1px;
-      background-color: #e0e6ed;
-      margin: 35px -24px;
-    }
-    h5 {
-      font-size: 14px;
-      color: #8492a6;
-      margin-top: 10px;
-    }
-    .tac {
-      text-align: center;
-
-      .el-menu-vertical-demo {
-        display: inline-block;
-        text-align: left;
-      }
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1',
-        isCollapse: true
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
-</script>
-
 ## NavMenu
 
 Menu that provides navigation for your website.
@@ -311,7 +258,7 @@ Vertical NavMenu could be collapsed.
 | collapse-transition  | whether to enable the collapse transition | boolean   | — | true   |
 
 ### Menu Methods
-| Event Name | Description | Parameters |
+| Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open  | open a specific sub-menu | index: index of the sub-menu to open |
 | close  | close a specific sub-menu | index: index of the sub-menu to close |
@@ -341,7 +288,7 @@ Vertical NavMenu could be collapsed.
 ### Menu-Item Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | unique identification   | string  | — | — |
+| index     | unique identification   | string/null  | — | null |
 | route     | Vue Router object   | object | — | — |
 | disabled | whether disabled | boolean | — | false |
 

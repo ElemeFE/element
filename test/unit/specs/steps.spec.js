@@ -1,5 +1,4 @@
-import { createVue, destroyVM } from '../util';
-import Vue from 'vue';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 describe('Steps', () => {
   let vm;
@@ -19,14 +18,14 @@ describe('Steps', () => {
     expect(vm.$el.querySelectorAll('.el-step')).to.length(3);
   });
 
-  it('space', done => {
+  it('space', async() => {
     vm = createVue(`
       <el-steps>
         <el-step title="step1"></el-step>
         <el-step title="step2"></el-step>
         <el-step title="step3"></el-step>
       </el-steps>
-    `);
+    `, true);
 
     const vm2 = createVue(`
       <el-steps :space="100">
@@ -35,13 +34,13 @@ describe('Steps', () => {
         <el-step title="step3"></el-step>
         <el-step title="step4"></el-step>
       </el-steps>
-    `);
+    `, true);
 
-    Vue.nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('50%');
-      expect(vm2.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('100px');
-      done();
-    });
+    await waitImmediate();
+    const stepElm = vm.$el.querySelector('.el-step');
+    const stepElm2 = vm2.$el.querySelector('.el-step');
+    expect(getComputedStyle(stepElm).flexBasis).to.equal('50%');
+    expect(getComputedStyle(stepElm2).flexBasis).to.equal('100px');
   });
 
   it('processStatus', done => {
@@ -56,6 +55,29 @@ describe('Steps', () => {
     vm.$nextTick(_ => {
       expect(vm.$el.querySelectorAll('.el-step__head.is-error')).to.length(1);
       done();
+    });
+  });
+
+  it('update processStatus', done => {
+    vm = createVue({
+      template: `
+        <el-steps :active="1" :process-status="processStatus">
+          <el-step title="abc"></el-step>
+          <el-step title="abc2"></el-step>
+        </el-steps>
+      `,
+      data() {
+        return { processStatus: 'error' };
+      }
+    });
+
+    vm.$nextTick(_ => {
+      expect(vm.$el.querySelectorAll('.el-step__head.is-error')).to.length(1);
+      vm.processStatus = 'process';
+      vm.$nextTick(_ => {
+        expect(vm.$el.querySelectorAll('.el-step__head.is-process')).to.length(1);
+        done();
+      });
     });
   });
 
@@ -108,18 +130,17 @@ describe('Steps', () => {
     expect(vm.$el.querySelector('.is-vertical')).to.exist;
   });
 
-  it('vertical:height', done => {
+  it('vertical:height', async() => {
     vm = createVue(`
       <el-steps direction="vertical" :space="200">
         <el-step title="aaa"></el-step>
         <el-step title="bbb"></el-step>
       </el-steps>
-    `);
+    `, true);
 
-    vm.$nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('200px');
-      done();
-    });
+    await waitImmediate();
+    const stepElm = vm.$el.querySelector('.el-step');
+    expect(getComputedStyle(stepElm).flexBasis).to.equal('200px');
   });
 
   it('step:status=error', done => {

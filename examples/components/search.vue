@@ -6,11 +6,12 @@
     :fetch-suggestions="querySearch"
     :placeholder="placeholder"
     :trigger-on-focus="false"
-    @select="handleSelect">
+    @select="handleSelect"
+    highlight-first-item>
     <template slot-scope="props">
       <p class="algolia-search-title" v-if="props.item.title">
         <span v-html="props.item.highlightedCompo"></span>
-        <span class="algolia-search-separator">></span>
+        <span class="algolia-search-separator"></span>
         <span v-html="props.item.title"></span>
       </p>
       <p
@@ -34,10 +35,10 @@
   </el-autocomplete>
 </template>
 
-<style>
+<style lang="scss">
   .algolia-search {
     width: 450px !important;
-  
+
     &.is-empty {
       .el-autocomplete-suggestion__list {
         padding-bottom: 0;
@@ -51,27 +52,27 @@
 
     li {
       border-bottom: solid 1px #ebebeb;
-      
+
       &:last-child {
          border-bottom: none;
        }
     }
-    
+
     .algolia-highlight {
       color: #409EFF;
       font-weight: bold;
     }
-    
+
     .algolia-search-title {
       font-size: 14px;
       margin: 6px 0;
       line-height: 1.8;
     }
-    
+
     .algolia-search-separator {
       padding: 0 6px;
     }
-    
+
     .algolia-search-content {
       font-size: 12px;
       margin: 6px 0;
@@ -80,7 +81,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    
+
     .algolia-search-link {
       position: absolute;
       bottom: 0;
@@ -96,14 +97,14 @@
       &:hover {
          background-color: #e4e7ed;
        }
-    
+
       img {
         display: inline-block;
         height: 17px;
         margin-top: 10px;
       }
     }
-  
+
     .algolia-search-empty {
       margin: 5px 0;
       text-align: center;
@@ -136,6 +137,11 @@
             search: 'Buscar',
             empty: 'No hay datos que coincidan',
             index: 'es'
+          },
+          'fr-FR': {
+            search: 'Rechercher',
+            empty: 'Aucun résultat',
+            index: 'fr'
           }
         }
       };

@@ -7,9 +7,6 @@
       { 'is-bordered': border },
       { 'is-checked': isChecked }
     ]"
-    role="checkbox"
-    :aria-checked="indeterminate ? 'mixed': isChecked"
-    :aria-disabled="isDisabled"
     :id="id"
   >
     <span class="el-checkbox__input"
@@ -19,14 +16,16 @@
         'is-indeterminate': indeterminate,
         'is-focus': focus
       }"
-       aria-checked="mixed"
+      :tabindex="indeterminate ? 0 : false"
+      :role="indeterminate ? 'checkbox' : false"
+      :aria-checked="indeterminate ? 'mixed' : false"
     >
       <span class="el-checkbox__inner"></span>
       <input
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
         type="checkbox"
-        aria-hidden="true"
+        :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
         :disabled="isDisabled"
         :true-value="trueLabel"
@@ -39,7 +38,7 @@
         v-else
         class="el-checkbox__original"
         type="checkbox"
-        aria-hidden="true"
+        :aria-hidden="indeterminate ? 'true' : 'false'"
         :disabled="isDisabled"
         :value="label"
         :name="name"
@@ -136,9 +135,17 @@
         return this._checkboxGroup ? this._checkboxGroup.value : this.value;
       },
 
+      /* used to make the isDisabled judgment under max/min props */
+      isLimitDisabled() {
+        const { max, min } = this._checkboxGroup;
+        return !!(max || min) &&
+          (this.model.length >= max && !this.isChecked) ||
+          (this.model.length <= min && this.isChecked);
+      },
+
       isDisabled() {
         return this.isGroup
-          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled || this.isLimitDisabled
           : this.disabled || (this.elForm || {}).disabled;
       },
 
