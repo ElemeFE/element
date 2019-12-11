@@ -1,4 +1,4 @@
-import { createVue, destroyVM, waitImmediate } from '../util';
+import { createVue, destroyVM, waitImmediate, triggerEvent } from '../util';
 
 describe('Dialog', () => {
   let vm;
@@ -225,7 +225,7 @@ describe('Dialog', () => {
     }, true);
     const dialog = vm.$children[0];
     setTimeout(() => {
-      dialog.$el.click();
+      triggerEvent(dialog.$el, 'mousedown');
       setTimeout(() => {
         expect(vm.visible).to.be.false;
         done();
@@ -282,7 +282,7 @@ describe('Dialog', () => {
     }, true);
     const dialog = vm.$children[0];
     setTimeout(() => {
-      dialog.$el.click();
+      triggerEvent(dialog.$el, 'mousedown');
       setTimeout(() => {
         expect(spy.called).to.be.true;
         done();
@@ -310,7 +310,7 @@ describe('Dialog', () => {
     const dialog = vm.$children[0];
     await waitImmediate();
     dialog.$el.querySelector('input').value = '123';
-    dialog.$el.click();
+    triggerEvent(dialog.$el, 'mousedown');
     await waitImmediate();
     vm.visible = true;
     await waitImmediate();
