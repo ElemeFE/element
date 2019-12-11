@@ -261,6 +261,12 @@ export default {
       }
     },
     handleExpand(node, silent) {
+      if (!node) {
+        const { store } = this;
+        this.activePath = [];
+        this.menus = [store.getNodes()];
+        return;
+      }
       const { activePath } = this;
       const { level } = node;
       const path = activePath.slice(0, level - 1);
