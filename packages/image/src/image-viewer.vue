@@ -36,11 +36,8 @@
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
         <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
           ref="img"
           class="el-image-viewer__img"
-          :key="url"
           :src="currentImg"
           :style="imgStyle"
           @load="handleImgLoad"
@@ -146,7 +143,7 @@ export default {
     },
     currentImg(val) {
       this.$nextTick(_ => {
-        const $img = this.$refs.img[0];
+        const $img = this.$refs.img;
         if (!$img.complete) {
           this.loading = true;
         }
@@ -265,7 +262,8 @@ export default {
       this.index = (this.index + 1) % len;
     },
     handleActions(action, options = {}) {
-      if (this.loading) return;
+      const viewer = this.$refs['el-image-viewer__wrapper'];
+      if (this.loading || viewer.style.display === 'none') return;
       const { zoomRate, rotateDeg, enableTransition } = {
         zoomRate: 0.2,
         rotateDeg: 90,
@@ -290,6 +288,11 @@ export default {
           break;
       }
       transform.enableTransition = enableTransition;
+    }
+  },
+  created() {
+    if (this.index < 0) {
+      this.index = 0;
     }
   },
   mounted() {
