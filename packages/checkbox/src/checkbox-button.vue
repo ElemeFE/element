@@ -68,6 +68,10 @@
       };
     },
 
+    model: {
+      prop: 'value',
+      event: 'change'
+    },
     props: {
       value: {},
       label: {},
@@ -97,9 +101,9 @@
               (this.isLimitExceeded = true));
 
             this.isLimitExceeded === false &&
-            this.dispatch('ElCheckboxGroup', 'input', [val]);
+            this.dispatch('ElCheckboxGroup', 'change', [val]);
           } else if (this.value !== undefined) {
-            this.$emit('input', val);
+            this.$emit('change', val);
           } else {
             this.selfModel = val;
           }
