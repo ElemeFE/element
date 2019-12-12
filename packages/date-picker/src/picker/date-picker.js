@@ -34,6 +34,9 @@ export default {
       } else {
         this.panel = getPanel(type);
       }
+      this.$nextTick(()=> {
+        this.referenceElm = this.$refs.reference.$el || this.$refs.reference;
+      });
     }
   },
 
