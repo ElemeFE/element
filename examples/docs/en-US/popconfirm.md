@@ -52,3 +52,10 @@ You can customise Popconfirm like:
 | Name | Description |
 |--- | ---|
 | reference | HTML element that triggers Popconfirm |
+
+
+### Events
+| Event | Description |
+|--- | ---|
+| onConfirm | Triggers when the confirmation button is pressed. |
+| onCancel | Triggers when the cancel button is pressed. |
