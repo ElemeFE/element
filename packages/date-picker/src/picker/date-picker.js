@@ -28,12 +28,15 @@ export default {
   watch: {
     type(type) {
       if (this.picker) {
+        this.doDestroy();
         this.unmountPicker();
         this.panel = getPanel(type);
         this.mountPicker();
       } else {
         this.panel = getPanel(type);
       }
+
+      this.appended = false;
       this.$nextTick(()=> {
         this.referenceElm = this.$refs.reference.$el || this.$refs.reference;
       });
