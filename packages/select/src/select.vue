@@ -312,6 +312,7 @@
         createdLabel: null,
         createdSelected: false,
         selected: this.multiple ? [] : {},
+        label: this.multiple ? [] : '',
         inputLength: 20,
         inputWidth: 0,
         initialInputHeight: 0,
@@ -502,9 +503,9 @@
         this.$nextTick(() => this.scrollToOption(this.selected));
       },
 
-      emitChange(val) {
+      emitChange(val, label) {
         if (!valueEquals(this.value, val)) {
-          this.$emit('change', val);
+          this.$emit('change', val, label);
         }
       },
 
@@ -622,9 +623,12 @@
       deletePrevTag(e) {
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
           const value = this.value.slice();
+          const label = this.label.slice();
           value.pop();
-          this.$emit('input', value);
-          this.emitChange(value);
+          label.pop();
+          this.label = label;
+          this.$emit('input', value, label);
+          this.emitChange(value, label);
         }
       },
 
@@ -677,14 +681,18 @@
       handleOptionSelect(option, byClick) {
         if (this.multiple) {
           const value = (this.value || []).slice();
+          const label = (this.label || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
+            label.splice(optionIndex, 1);
           } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
             value.push(option.value);
+            label.push(option.label);
           }
-          this.$emit('input', value);
-          this.emitChange(value);
+          this.label = label;
+          this.$emit('input', value, label);
+          this.emitChange(value, label);
           if (option.created) {
             this.query = '';
             this.handleQueryChange('');
@@ -692,8 +700,9 @@
           }
           if (this.filterable) this.$refs.input.focus();
         } else {
-          this.$emit('input', option.value);
-          this.emitChange(option.value);
+          this.label = option.label;
+          this.$emit('input', option.value, option.label);
+          this.emitChange(option.value, option.label);
           this.visible = false;
         }
         this.isSilentBlur = byClick;
@@ -756,8 +765,10 @@
       deleteSelected(event) {
         event.stopPropagation();
         const value = this.multiple ? [] : '';
-        this.$emit('input', value);
-        this.emitChange(value);
+        const label = this.multiple ? [] : '';
+        this.label = label;
+        this.$emit('input', value, label);
+        this.emitChange(value, label);
         this.visible = false;
         this.$emit('clear');
       },
@@ -766,10 +777,13 @@
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.selectDisabled) {
           const value = this.value.slice();
+          const label = this.label.slice();
           value.splice(index, 1);
-          this.$emit('input', value);
-          this.emitChange(value);
-          this.$emit('remove-tag', tag.value);
+          label.splice(index, 1);
+          this.label = label;
+          this.$emit('input', value, label);
+          this.emitChange(value, label);
+          this.$emit('remove-tag', tag.value, tag.label);
         }
         event.stopPropagation();
       },
