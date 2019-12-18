@@ -15,16 +15,16 @@
       {{title}}
     </p>
     <div class="el-popconfirm__action">
-      <el-button 
-        size="mini" 
-        :type="cancelButtonType" 
+      <el-button
+        size="mini"
+        :type="cancelButtonType"
         @click="cancel"
       >
         {{cancelButtonText}}
       </el-button>
-      <el-button 
-        size="mini" 
-        :type="confirmButtonType" 
+      <el-button
+        size="mini"
+        :type="confirmButtonType"
         @click="confirm"
       >
         {{confirmButtonText}}
@@ -87,11 +87,11 @@ export default {
   methods: {
     confirm() {
       this.visible = false;
-      this.$emit('onConfirm');
+      this.$emit('on-confirm');
     },
     cancel() {
       this.visible = false;
-      this.$emit('onCancel');
+      this.$emit('on-cancel');
     }
   }
 };
