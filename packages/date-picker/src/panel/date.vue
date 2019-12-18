@@ -127,7 +127,7 @@
           type="text"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="selectionMode !== 'dates'">
+          v-show="selectionMode !== 'dates' && showNowBtn">
           {{ t('el.datepicker.now') }}
         </el-button>
         <el-button
@@ -524,7 +524,8 @@
         format: '',
         arrowControl: false,
         userInputDate: null,
-        userInputTime: null
+        userInputTime: null,
+        showNowBtn: true
       };
     },
 

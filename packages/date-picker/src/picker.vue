@@ -388,6 +388,10 @@ export default {
     validateEvent: {
       type: Boolean,
       default: true
+    },
+    showNowBtn: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -828,6 +832,7 @@ export default {
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
+      this.picker.showNowBtn = this.showNowBtn;
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
