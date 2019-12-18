@@ -82,6 +82,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@femessage/github-release-notes": "^0.19.0",
     "@vue/component-compiler-utils": "^2.6.0",
     "algoliasearch": "^3.24.5",
     "babel-cli": "^6.26.0",
@@ -110,7 +111,6 @@
     "eslint-plugin-json": "^1.2.0",
     "file-loader": "^1.1.11",
     "file-save": "^0.2.0",
-    "github-release-notes": "^0.17.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-cssmin": "^0.2.0",
@@ -166,5 +166,6 @@
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
       "post-commit": "git update-index --again"
     }
-  }
+  },
+  "gren": "@femessage/grenrc"
 }
