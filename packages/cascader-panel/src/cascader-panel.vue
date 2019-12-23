@@ -32,6 +32,7 @@ const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {
   expandTrigger: 'click', // or hover
   multiple: false,
+  labelFill: false,// trigger hover and checkStrictly after
   checkStrictly: false, // whether all nodes can be selected
   emitPath: true, // wether to emit an array of all levels value in which node is located
   lazy: false,
@@ -120,6 +121,9 @@ export default {
     },
     multiple() {
       return this.config.multiple;
+    },
+    labelFill() {
+      return this.config.labelFill;
     },
     checkStrictly() {
       return this.config.checkStrictly;

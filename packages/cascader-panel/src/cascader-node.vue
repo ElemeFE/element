@@ -201,7 +201,7 @@
         config,
         nodeId
       } = this;
-      const { expandTrigger, checkStrictly, multiple } = config;
+      const { expandTrigger, checkStrictly, multiple, labelFill } = config;
       const disabled = !checkStrictly && isDisabled;
       const events = { on: {} };
 
@@ -217,7 +217,7 @@
           this.$emit('expand', e);
         };
       }
-      if (isLeaf && !isDisabled && !checkStrictly && !multiple) {
+      if (isLeaf && !isDisabled && !checkStrictly && !multiple || (expandTrigger === 'hover' && checkStrictly && labelFill)) {
         events.on.click = this.handleCheckChange;
       }
 
