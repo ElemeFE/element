@@ -28,7 +28,7 @@
 - Calendar
   - 导入 el-button 和 el-button-group (#17376 by @masongzhi)
 - MessageBox
-  - 修复图表位置 (#17410 by @nullptru)
+  - 修复图标位置 (#17410 by @nullptru)
 - TimePicker
   - 滚动后设置正确的位置 (#16868 by @mattheyan)
 - Message
