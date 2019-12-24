@@ -52,6 +52,10 @@
               "title": "Container 布局容器"
             },
             {
+              "path": "/splitpanes",
+              "title": "Splitpanes 分割面板"
+            },
+            {
               "path": "/color",
               "title": "Color 色彩"
             },
@@ -348,6 +352,10 @@
             {
               "path": "/container",
               "title": "Layout Container"
+            },
+            {
+              "path": "/splitpanes",
+              "title": "Split Panes"
             },
             {
               "path": "/color",
@@ -648,6 +656,10 @@
               "title": "Layout Container"
             },
             {
+              "path": "/splitpanes",
+              "title": "Split Panes"
+            },
+            {
               "path": "/color",
               "title": "Color"
             },
@@ -944,6 +956,10 @@
             {
               "path": "/container",
               "title": "Layout Container"
+            },
+            {
+              "path": "/splitpanes",
+              "title": "Split Panes"
             },
             {
               "path": "/color",

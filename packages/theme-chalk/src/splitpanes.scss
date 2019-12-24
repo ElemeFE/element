@@ -1,0 +1,81 @@
+@import "mixins/mixins";
+@import "common/var";
+
+.splitpanes {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    &--vertical {flex-direction: row;}
+    &--horizontal {flex-direction: column;}
+    &--dragging * {user-select: none;}
+    &__pane {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      transition: width 0.2s ease-out, height 0.2s ease-out;
+      .splitpanes--dragging & {transition: none;}
+    }
+    // Disable default zoom behavior on touch device when double tapping splitter.
+    &__splitter {touch-action: none;}
+    &--vertical > .splitpanes__splitter {min-width: 1px;cursor: col-resize;}
+    &--horizontal > .splitpanes__splitter {min-height: 1px;cursor: row-resize;}
+  }
+  .splitpanes.el-splitpanes {
+    .splitpanes__pane {
+      background-color: transparent
+    }
+    .splitpanes__splitter {
+      background-color: $--splitter-handle-background-color;
+      box-sizing: border-box;
+      position: relative;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        top: calc(50% - 15px);
+        left: calc(50% - 15px);
+        background-color: rgba(0, 0, 0, .15);
+        transition: background-color 0.3s;
+      }
+      &:hover:before, &:hover:after {background-color: rgba(0, 0, 0, .25);}
+      &:first-child {cursor: auto;}
+    }
+  }
+  .el-splitpanes {
+    &.splitpanes .splitpanes .splitpanes__splitter {
+      z-index: 1;
+    }
+    &.splitpanes--vertical > .splitpanes__splitter,
+    .splitpanes--vertical > .splitpanes__splitter {
+      width: $--splitter-size;
+      border-left: none;
+      margin-left: -1px;
+      &:before, &:after {
+        width: 1px;
+        height: $--splitter-handle-size;
+      }
+      &:before {
+        margin-left: 13px;
+      }
+      &:after {
+        margin-left: 16px;
+      }
+    }
+    &.splitpanes--horizontal > .splitpanes__splitter,
+    .splitpanes--horizontal > .splitpanes__splitter {
+      height: $--splitter-size;
+      border-top: none;
+      margin-top: -1px;
+      &:before,
+      &:after {
+        width: $--splitter-handle-size;
+        height: 1px;
+      }
+      &:before {
+        margin-top: 13px;
+      }
+      &:after {
+        margin-top: 16px;
+      }
+    }
+  }
+  

@@ -964,6 +964,12 @@ $--avatar-medium-size: 36px !default;
 /// size|1|Avatar Size|3
 $--avatar-small-size: 28px !default;
 
+/* Splitpanes
+--------------------------*/
+$--splitter-size: 12px !default;
+$--splitter-handle-size: 30px !default;
+$--splitter-handle-background-color: $--border-color-lighter !default;
+
 /* Break-point
 --------------------------*/
 $--sm: 768px !default;

@@ -8764,6 +8764,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+splitpanes@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/splitpanes/-/splitpanes-2.2.0.tgz#3606cda7fbef22950edb42565e00e39eecb7df8d"
+  integrity sha512-n87JXR3xNHC6Zrcvg1JGU4wgqOxV95bFShhHhGM/cvQVFxN2HRJuaVWvvwgQzd9cF+4UyXtjcreqkOxr5bPnoA==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
