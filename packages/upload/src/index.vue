@@ -236,9 +236,14 @@ export default {
     abort(file) {
       this.$refs['upload-inner'].abort(file);
     },
-    clearFiles() {
-      this.uploadFiles = this.uploadFiles.filter((item) => {
-        return item.status !== 'success'
+    clearFiles(status = ['ready', 'success', 'fail']) {
+      let n;
+      this.uploadFiles = this.uploadFiles.filter((row) => {
+        n = 0;
+        status.forEach(item => {
+          n += row.status === item
+        });
+        return  !n;
       });
     },
     submit() {
