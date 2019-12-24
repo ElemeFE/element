@@ -237,7 +237,9 @@ export default {
       this.$refs['upload-inner'].abort(file);
     },
     clearFiles() {
-      this.uploadFiles = [];
+      this.uploadFiles = this.uploadFiles.filter((item) => {
+        return item.status !== 'success'
+      });
     },
     submit() {
       this.uploadFiles
