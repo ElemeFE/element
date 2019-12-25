@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
-import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
+import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus, getRowIndexOfSelection } from '../util';
 import expand from './expand';
 import current from './current';
 import tree from './tree';
@@ -118,8 +118,10 @@ export default Vue.extend({
 
     // 选择
     isSelected(row) {
-      const { selection = [] } = this.states;
-      return selection.indexOf(row) > -1;
+
+      const { selection = [], data = [] } = this.states;
+
+      return getRowIndexOfSelection(row, data, selection) > -1;
     },
 
     clearSelection() {
@@ -136,10 +138,13 @@ export default Vue.extend({
       const states = this.states;
       const { data, rowKey, selection } = states;
       let deleted;
+      console.log(states);
       if (rowKey) {
         deleted = [];
         const selectedMap = getKeysMap(selection, rowKey);
         const dataMap = getKeysMap(data, rowKey);
+        console.log(selectedMap);
+        console.log(dataMap);
         for (let key in selectedMap) {
           if (selectedMap.hasOwnProperty(key) && !dataMap[key]) {
             deleted.push(selectedMap[key].row);
@@ -156,7 +161,10 @@ export default Vue.extend({
     },
 
     toggleRowSelection(row, selected, emitChange = true) {
-      const changed = toggleRowStatus(this.states.selection, row, selected);
+
+      const { data = [] } = this.states;
+
+      const changed = toggleRowStatus(this.states.selection, data, row, selected);
       if (changed) {
         const newSelection = (this.states.selection || []).slice();
         // 调用 API 修改选中值，不触发 select 事件
@@ -180,11 +188,11 @@ export default Vue.extend({
       let selectionChanged = false;
       data.forEach((row, index) => {
         if (states.selectable) {
-          if (states.selectable.call(null, row, index) && toggleRowStatus(selection, row, value)) {
+          if (states.selectable.call(null, row, index) && toggleRowStatus(selection, data, row, value)) {
             selectionChanged = true;
           }
         } else {
-          if (toggleRowStatus(selection, row, value)) {
+          if (toggleRowStatus(selection, data, row, value)) {
             selectionChanged = true;
           }
         }
