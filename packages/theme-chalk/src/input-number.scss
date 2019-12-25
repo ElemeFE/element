@@ -10,7 +10,13 @@
 
   .el-input {
     display: block;
-
+    &.el-input-group {
+      display: inline-table;
+      .el-input-group__prepend,
+      .el-input-group__append {
+        padding: 0 10px;
+      }
+    }
     &__inner {
       -webkit-appearance: none;
       padding-left: #{$--input-height + 10};
@@ -18,6 +24,8 @@
       text-align: center;
     }
   }
+
+ 
 
   @include e((increase, decrease)) {
     position: absolute;
