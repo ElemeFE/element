@@ -18,7 +18,7 @@ Use los props `shape` y `size` para establecer la forma y el tamaño del avatar
           <el-avatar :size="size" :src="circleUrl"></el-avatar>
         </div>
       </div>
-    </el-col>  
+    </el-col>
     <el-col :span="12">
       <div class="sub-title">square</div>
       <div class="demo-basic--circle">
@@ -27,7 +27,7 @@ Use los props `shape` y `size` para establecer la forma y el tamaño del avatar
           <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
         </div>
       </div>
-    </el-col> 
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -75,7 +75,7 @@ Fallback cuando se produce un error de carga de imagen
 ```html
 <template>
   <div class="demo-type">
-    <el-avatar :size="60" src="https://empty" @error="errorHandler">
+    <el-avatar :size="60" src="https://empty" :error="errorHandler">
       <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
       </el-avatar>
   </div>
@@ -132,15 +132,9 @@ Establezca cómo la imagen se ajusta a su contenedor para un avatar de imagen, i
 | srcSet            | Una lista de una o más cadenas separadas por comas que indica un conjunto de posibles fuentes de imágenes para que el agente de usuario las utilice. | string |        |      |
 | alt               | Este atributo define una descripción de texto alternativo de la imagen | string |        |      |
 | fit               | establece cómo encaja la imagen en su contenedor para un avatar de imagen | string |    fill / contain / cover / none / scale-down    |   cover   |
-
-### Eventos
-
-| Nombre | Descripción | Parámetros |
-| ------ | ------------------ | -------- |
-| error  | cuando se produce un error de carga de img, devuelve false para evitar el comportamiento de repliegue predeterminado |(e: Event)  |
+| error             | cuando se produce un error de carga de img, devuelve false para evitar el comportamiento de repliegue predeterminado | function |     |     |
 
 ### Slot
 
-| Nombre | Descripción | 
+| Nombre | Descripción |
 | default  | personalice el contenido del avatar |
-

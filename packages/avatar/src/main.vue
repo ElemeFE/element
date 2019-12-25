@@ -58,9 +58,9 @@ export default {
   },
 
   methods: {
-    handleError() {
+    handleError(e) {
       const { error } = this;
-      const errorFlag = error ? error() : undefined;
+      const errorFlag = error ? error(e) : undefined;
       if (errorFlag !== false) {
         this.isImageExist = false;
       }

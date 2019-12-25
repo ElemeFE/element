@@ -18,7 +18,7 @@ use `shape` and `size` prop to set avatar's shape and size
           <el-avatar :size="size" :src="circleUrl"></el-avatar>
         </div>
       </div>
-    </el-col>  
+    </el-col>
     <el-col :span="12">
       <div class="sub-title">square</div>
       <div class="demo-basic--circle">
@@ -27,7 +27,7 @@ use `shape` and `size` prop to set avatar's shape and size
           <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
         </div>
       </div>
-    </el-col> 
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -75,7 +75,7 @@ fallback when image load error
 ```html
 <template>
   <div class="demo-type">
-    <el-avatar :size="60" src="https://empty" @error="errorHandler">
+    <el-avatar :size="60" src="https://empty" :error="errorHandler">
       <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
       </el-avatar>
   </div>
@@ -132,14 +132,9 @@ Set how the image fit its container for an image avatar, same as [object-fit](ht
 | srcSet            | A list of one or more strings separated by commas indicating a set of possible image sources for the user agent to use | string |        |      |
 | alt               | This attribute defines an alternative text description of the image | string |        |      |
 | fit               | set how the image fit its container for an image avatar | string |    fill / contain / cover / none / scale-down    |   cover   |
-
-### Events
-
-| Event Name | Description         | Parameters  |
-| ------ | ------------------ | -------- |
-| error  | handler when img load error, return false to prevent default fallback behavior |(e: Event)  |
+| error             | handler when img load error, return false to prevent default fallback behavior | function |      |      |
 
 ### Slot
 
-| Slot Name | Description | 
+| Slot Name | Description |
 | default  | customize avatar content |

@@ -18,7 +18,7 @@
           <el-avatar :size="size" :src="circleUrl"></el-avatar>
         </div>
       </div>
-    </el-col>  
+    </el-col>
     <el-col :span="12">
       <div class="sub-title">square</div>
       <div class="demo-basic--circle">
@@ -27,7 +27,7 @@
           <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
         </div>
       </div>
-    </el-col> 
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -75,7 +75,7 @@
 ```html
 <template>
   <div class="demo-type">
-    <el-avatar :size="60" src="https://empty" @error="errorHandler">
+    <el-avatar :size="60" src="https://empty" :error="errorHandler">
       <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
     </el-avatar>
   </div>
@@ -132,16 +132,10 @@
 | srcSet            | 以逗号分隔的一个或多个字符串列表表明一系列用户代理使用的可能的图像 | string |        |      |
 | alt               | 描述图像的替换文本 | string |        |      |
 | fit               | 当展示类型为图片的时候，设置图片如何适应容器框 | string |    fill / contain / cover / none / scale-down    |   cover   |
-
-
-### Events
-
-| 事件名 | 说明               | 回调参数 |
-| ------ | ------------------ | -------- |
-| error  | 图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为 |(e: Event)  |
+| error             | 图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为 | function |      |      |
 
 ### Slot
 
-| 名称	 | 说明               |  
-| ------ | ------------------ | 
+| 名称	 | 说明               |
+| ------ | ------------------ |
 | default  | 自定义头像展示内容 |

@@ -19,7 +19,7 @@ utilisez les prop `shape` et` size` pour définir la forme et la taille de l'ava
           <el-avatar :size="size" :src="circleUrl"></el-avatar>
         </div>
       </div>
-    </el-col>  
+    </el-col>
     <el-col :span="12">
       <div class="sub-title">carré</div>
       <div class="demo-basic--circle">
@@ -76,7 +76,7 @@ fallback en cas d'erreur de chargement d'image
 ```html
 <template>
   <div class="demo-type">
-    <el-avatar :size="60" src="https://empty" @error="errorHandler">
+    <el-avatar :size="60" src="https://empty" :error="errorHandler">
       <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
       </el-avatar>
   </div>
@@ -133,12 +133,7 @@ Défini comment l'image s'adapte à son conteneur, pareil que [object-fit](https
 | srcSet            | Une liste d'un ou plusieurs string séparés par des virgules indiquant un ensemble de sources d'images possibles que le user agent peut utiliser | string |        |      |
 | alt               | Cet attribut définit une description textuelle alternative de l'image | string |        |      |
 | fit               | Défini comment l'image s'adapte à son conteneur | string |    fill / contain / cover / none / scale-down    |   cover   |
-
-### Évènements
-
-| Event Name | Description         | Paramètres  |
-| ------ | ------------------ | -------- |
-| error  | handler en cas d'erreur de chargement de l'image, renvoie false pour éviter le fallback par défaut |(e: Event)  |
+| error             | handler en cas d'erreur de chargement de l'image, renvoie false pour éviter le fallback par défaut |     |     |
 
 ### Slot
 
