@@ -293,7 +293,8 @@ export default {
     }
   },
   mounted() {
-    this.deviceSupportInstall();
+
+    // move the init install function to parent for second show
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();

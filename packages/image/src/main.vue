@@ -16,7 +16,7 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer ref="imageViewer" :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
     </template>
   </div>
 </template>
@@ -105,6 +105,10 @@
       },
       show(val) {
         val && this.loadImage();
+      },
+      showViewer(val) {
+        // key esc will remove funciton at child when it is show ,setUp the function
+        val && this.$refs.imageViewer.deviceSupportInstall();
       }
     },
 
