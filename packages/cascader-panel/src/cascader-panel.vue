@@ -199,8 +199,7 @@ export default {
 
       if (!isEmpty(activePath)) {
         const nodes = activePath.map(node => this.getNodeByValue(node.getValue()))
-        .filter(node => Boolean(node));
-        if(nodes.length){
+        if(!nodes.every(node => node === null)){
           this.expandNodes(nodes);
         }
       } else if (!isEmpty(checkedValue)) {
