@@ -198,8 +198,11 @@ export default {
       const { store, multiple, activePath, checkedValue } = this;
 
       if (!isEmpty(activePath)) {
-        const nodes = activePath.map(node => this.getNodeByValue(node.getValue()));
-        this.expandNodes(nodes);
+        const nodes = activePath.map(node => this.getNodeByValue(node.getValue()))
+        .filter(node => Boolean(node));
+        if(nodes.length){
+          this.expandNodes(nodes);
+        }
       } else if (!isEmpty(checkedValue)) {
         const value = multiple ? checkedValue[0] : checkedValue;
         const checkedNode = this.getNodeByValue(value) || {};
