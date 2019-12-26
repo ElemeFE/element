@@ -91,6 +91,10 @@ export default {
     initialIndex: {
       type: Number,
       default: 0
+    },
+    appendToBody: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -216,7 +220,7 @@ export default {
     },
     handleImgError(e) {
       this.loading = false;
-      e.target.alt = '加载失败';
+      e.target.alt = this.t('el.image.error');
     },
     handleMouseDown(e) {
       if (this.loading || e.button !== 0) return;
@@ -294,9 +298,17 @@ export default {
   },
   mounted() {
     this.deviceSupportInstall();
+    if (this.appendToBody) {
+      document.body.appendChild(this.$el);
+    }
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();
+  },
+  destroyed() {
+    if (this.appendToBody && this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
   }
 };
 </script>
