@@ -70,7 +70,7 @@ Utilisez `before-upload` pour restreindre le format et la taille du fichier à e
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
+    border-color: #5D81F9;
   }
   .avatar-uploader-icon {
     font-size: 28px;

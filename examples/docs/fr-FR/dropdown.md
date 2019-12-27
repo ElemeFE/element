@@ -23,7 +23,7 @@ Passez sur le menu avec la souris pour dérouler son contenu.
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -130,7 +130,7 @@ Vous pouvez choisir de déclencher le menu au moment du clic, ou en passant la s
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -167,7 +167,7 @@ Utilisez l'attribut `hide-on-click` pour déterminer si le menu se ferme après 
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;
@@ -199,7 +199,7 @@ Le paramètre de cet évènement peut être assigné à chaque élément de la l
 <style>
   .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #5D81F9;
   }
   .el-icon-arrow-down {
     font-size: 12px;

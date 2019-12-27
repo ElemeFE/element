@@ -21,10 +21,10 @@ export default {
   },
   methods: {
     successColor() {
-      return this.userSelectColor()['$--color-primary'] || '#409EFF';
+      return this.userSelectColor()['$--color-primary'] || '#5D81F9';
     },
     failedColor() {
-      return this.userSelectColor()['$--color-danger'] || '#F56C6C';
+      return this.userSelectColor()['$--color-danger'] || '#FF4D4F';
     },
     userSelectColor() {
       return window.userThemeConfig && window.userThemeConfig.global || {}

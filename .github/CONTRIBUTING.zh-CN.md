@@ -1,4 +1,4 @@
-# Element UI 贡献指南
+# @femessage/element-ui 贡献指南
 
 Hi! 首先感谢你使用 Element UI。
 
@@ -7,7 +7,7 @@ Element UI 是一套为开发者、设计师和产品经理准备的开源组件
 Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡献代码或提供建议，请阅读以下内容。
 
 ## Issue 规范
-- issue 仅用于提交 Bug 或 Feature 以及设计相关的内容，其它内容可能会被直接关闭。如果你在使用时产生了疑问，请到 Slack 或 [Gitter](https://gitter.im/ElemeFE/element) 里咨询。
+- issue 仅用于提交 Bug 或 Feature 以及设计相关的内容，其它内容可能会被直接关闭。
 
 - 在提交 issue 之前，请搜索相关内容是否已被提出。
 
@@ -16,7 +16,15 @@ Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡
 ## Pull Request 规范
 - 请先 fork 一份到自己的项目下，不要直接在仓库下建分支。
 
-- commit 信息要以`[组件名]: 描述信息` 的形式填写，例如 `Button: fix xxx bug`。
+- commit 信息遵循 [commitlint-config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum)
+
+- 修改主题请使用 `theme` 作为 commit type
+
+- 由于本仓库的主题会随着业务不断更新，为了防止不必要的主题样式污染。自定义主题需要根据 `only-component` 分支生成主题
+
+- 于此同时，除了修改主题的 PR，其他改动请务必额外增加一个合并到 `only-component` 的 PR，保持 `only-component` 和 `master` 只有主题上的差异
+
+- [具体规范链接](https://www.yuque.com/docs/share/eeff5604-1163-47c1-b979-65373b1d9467)
 
 - **不要提交** `lib` 里面打包的文件。
 

@@ -147,7 +147,7 @@
           left: calc(50% - 15px);
           width: 30px;
           height: 2px;
-          background: #409EFF;
+          background: #5D81F9;
         }
       }
     }
@@ -507,10 +507,10 @@
       };
       xhr.open('GET', '/element/versions.json');
       xhr.send();
-      let primaryLast = '#409EFF';
+      let primaryLast = '#5D81F9';
       bus.$on(ACTION_USER_CONFIG_UPDATE, (val) => {
         let primaryColor = val.global['$--color-primary'];
-        if (!primaryColor) primaryColor = '#409EFF';
+        if (!primaryColor) primaryColor = '#5D81F9';
         const base64svg = 'data:image/svg+xml;base64,';
         const imgSet = document.querySelectorAll('h1 img');
         imgSet.forEach((img) => {

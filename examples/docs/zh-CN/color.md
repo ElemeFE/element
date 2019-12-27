@@ -20,17 +20,17 @@
     'borderExtraLight': '$--border-color-extra-light'
   };
   const original = {
-    primary: '#409EFF',
-    success: '#67C23A',
-    warning: '#E6A23C',
-    danger: '#F56C6C',
-    info: '#909399',
+    primary: '#5D81F9',
+    success: '#2FD163',
+    warning: '#F5A623',
+    danger: '#FF4D4F',
+    info: '#A7A8AD',
     white: '#FFFFFF',
     black: '#000000',
-    textPrimary: '#303133',
-    textRegular: '#606266',
-    textSecondary: '#909399',
-    textPlaceholder: '#C0C4CC',
+    textPrimary: '#2D303B',
+    textRegular: '#6A6C73',
+    textSecondary: '#A7A8AD',
+    textPlaceholder: '#C6C7CA',
     borderBase: '#DCDFE6',
     borderLight: '#E4E7ED',
     borderLighter: '#EBEEF5',
@@ -101,7 +101,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 <el-row :gutter="12">
   <el-col :span="10" :xs="{span: 12}">
     <div class="demo-color-box" :style="{ background: primary }">Brand Color
-      <div class="value">#409EFF</div>
+      <div class="value">#5D81F9</div>
       <div class="bg-color-sub" :style="{ background: tintColor(primary, 0.9) }">
         <div
           class="bg-blue-sub-item"
@@ -122,7 +122,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: success }"
-    >Success<div class="value">#67C23A</div>
+    >Success<div class="value">#2FD163</div>
       <div 
         class="bg-color-sub"
       >
@@ -139,7 +139,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: warning }"
-    >Warning<div class="value">#E6A23C</div>
+    >Warning<div class="value">#F5A623</div>
       <div 
           class="bg-color-sub"
         >
@@ -156,7 +156,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: danger }"
-    >Danger<div class="value">#F56C6C</div>
+    >Danger<div class="value">#FF4D4F</div>
       <div 
           class="bg-color-sub"
         >
@@ -173,7 +173,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box"
     :style="{ background: info }"
-    >Info<div class="value">#909399</div>
+    >Info<div class="value">#A7A8AD</div>
       <div 
           class="bg-color-sub"
         >

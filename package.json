@@ -80,6 +80,9 @@
     "vue": "^2.5.17"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@femessage/github-release-notes": "^0.19.0",
     "@vue/component-compiler-utils": "^2.6.0",
     "algoliasearch": "^3.24.5",
     "babel-cli": "^6.26.0",
@@ -108,13 +111,13 @@
     "eslint-plugin-json": "^1.2.0",
     "file-loader": "^1.1.11",
     "file-save": "^0.2.0",
-    "github-release-notes": "^0.17.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-cssmin": "^0.2.0",
     "gulp-sass": "^4.0.2",
     "highlight.js": "^9.3.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "1.3.1",
     "json-loader": "^0.5.7",
     "json-templater": "^1.0.4",
     "karma": "^4.0.1",
@@ -156,5 +159,13 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.11",
     "webpack-node-externals": "^1.7.2"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint --fix",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "gren": "@femessage/grenrc"
 }

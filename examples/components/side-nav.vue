@@ -185,6 +185,14 @@
               </li>
             </ul>
           </div>
+          <ul class="pure-menu-list">
+            <li
+              class="nav-item"
+              v-for="(navItem, key) in femessageNavs"
+              :key="key">
+              <a :href="navItem.url" target="_blank">{{navItem.repoName | upperFirst}} {{navItem.title}}</a>
+            </li>
+          </ul>
         </template>
       </li>
     </ul>
@@ -208,7 +216,8 @@
         highlights: [],
         navState: [],
         isSmallScreen: false,
-        isFade: false
+        isFade: false,
+        femessageNavs: []
       };
     },
     watch: {
@@ -271,8 +280,34 @@
         if (!target.nextElementSibling || target.nextElementSibling.tagName !== 'UL') return;
         this.hideAllMenu();
         event.currentTarget.nextElementSibling.style.height = 'auto';
+      },
+
+      getFemessageNavs() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = _ => {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            const {data: navs} = JSON.parse(xhr.responseText);
+            this.femessageNavs = navs.map(nav => {
+              nav.url = `https://serverless.deepexi.top/serverless-console/index.html#/material/${nav.repoName}`;
+              return nav;
+            }).filter(nav => nav.lib && nav.lib.indexOf('element') > -1);
+          }
+        };
+        xhr.open(
+          'GET',
+          '//mockapi.eolinker.com/jttjNwp60fc1c9e944fdf1cc494b28a7ca4cfe66bbafee1/open'
+        );
+        xhr.send();
       }
     },
+
+    filters: {
+      upperFirst(value = '') {
+        const words = value.split('-');
+        return words.map(word => word.replace(word[0], word[0].toUpperCase())).join('');
+      }
+    },
+
     created() {
       bus.$on('fadeNav', () => {
         this.isFade = true;
@@ -280,6 +315,7 @@
     },
     mounted() {
       this.handleResize();
+      this.getFemessageNavs();
       window.addEventListener('resize', this.handleResize);
     },
     beforeDestroy() {

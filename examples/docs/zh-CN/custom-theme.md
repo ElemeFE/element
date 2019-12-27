@@ -38,68 +38,6 @@ Vue.use(Element)
 需要注意的是，覆盖字体路径变量是必需的，将其赋值为 Element 中 icon 图标所在的相对路径即可。
 :::
 
-### 命令行主题工具
-如果你的项目没有使用 SCSS，那么可以使用命令行主题工具进行深层次的主题定制：
-
-#### <strong>安装工具</strong>
-首先安装「主题生成工具」，可以全局安装或者安装在当前项目下，推荐安装在项目里，方便别人 clone 项目时能直接安装依赖并启动，这里以全局安装做演示。
-```shell
-npm i element-theme -g
-```
-
-安装白垩主题，可以从 npm 安装或者从 GitHub 拉取最新代码。
-```shell
-# 从 npm
-npm i element-theme-chalk -D
-
-# 从 GitHub
-npm i https://github.com/ElementUI/theme-chalk -D
-```
-
-#### <strong>初始化变量文件</strong>
-主题生成工具安装成功后，如果全局安装可以在命令行里通过 `et` 调用工具，如果安装在当前目录下，需要通过 `node_modules/.bin/et` 访问到命令。执行 `-i` 初始化变量文件。默认输出到 `element-variables.scss`，当然你可以传参数指定文件输出目录。
-
-```shell
-et -i [可以自定义变量文件]
-
-> ✔ Generator variables file
-```
-
-如果使用默认配置，执行后当前目录会有一个 `element-variables.scss` 文件。内部包含了主题所用到的所有变量，它们使用 SCSS 的格式定义。大致结构如下：
-```css
-$--color-primary: #5D81F9 !default;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default; /* 8cc5ff */
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default; /* a0cfff */
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /* b3d8ff */
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
-
-$--color-success: #02C5E2 !default;
-$--color-warning: #F5A623 !default;
-$--color-danger: #E24156 !default;
-$--color-info: #6A6E7B !default;
-
-...
-```
-
-#### <strong>修改变量</strong>
-直接编辑 `element-variables.scss` 文件，例如修改主题色为红色。
-```CSS
-$--color-primary: red;
-```
-
-#### <strong>编译主题</strong>
-保存文件后，到命令行里执行 `et` 编译主题，如果你想启用 `watch` 模式，实时编译主题，增加 `-w` 参数；如果你在初始化时指定了自定义变量文件，则需要增加 `-c` 参数，并带上你的变量文件名。默认情况下编译的主题目录是放在 `./theme` 下，你可以通过 `-o` 参数指定打包目录。
-```shell
-et
-
-> ✔ build theme font
-> ✔ build element theme
-```
 ### 使用自定义主题
 #### <strong>引入自定义主题</strong>
 和引入默认主题一样，在代码里直接引用「在线主题编辑器」或「命令行工具」生成的主题的 `theme/index.css` 文件即可。
@@ -120,7 +58,7 @@ Vue.use(ElementUI)
     [
       "component",
       {
-        "libraryName": "element-ui",
+        "libraryName": "@femessage/element-ui",
         "styleLibraryName": "~theme"
       }
     ]

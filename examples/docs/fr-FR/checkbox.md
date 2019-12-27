@@ -266,7 +266,7 @@ Des checkbox avec une apparence de bouton.
 | min     | Nombre minimum de checkbox cochées.   | number    |       —        |     —    |
 | max     | Nombre maximum de checkbox cochées.   | number    |       —        |     —    |
 |text-color | Couleur de police quand le bouton est actif. | string   | — | #ffffff   |
-|fill  | Couleur de la bordure et du fond quand le bouton est actif. | string   | — | #409EFF   |
+|fill  | Couleur de la bordure et du fond quand le bouton est actif. | string   | — | #5D81F9   |
 
 ### Évènements Checkbox-group
 | Nom | Description | Paramètres |

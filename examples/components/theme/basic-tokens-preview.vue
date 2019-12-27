@@ -174,16 +174,16 @@ import {
 } from './constant.js';
 
 const original = {
-  'color_primary': '#409EFF',
-  'color_success': '#67C23A',
-  'color_warning': '#E6A23C',
-  'color_danger': '#F56C6C',
-  'color_info': '#909399',
+  'color_primary': '#5D81F9',
+  'color_success': '#2FD163',
+  'color_warning': '#F5A623',
+  'color_danger': '#FF4D4F',
+  'color_info': '#A7A8AD',
   'color_white': '#FFFFFF',
   'color_black': '#000000',
   'color_text_primary': '#303133',
   'color_text_regular': '#606266',
-  'color_text_secondary': '#909399',
+  'color_text_secondary': '#A7A8AD',
   'color_text_placeholder': '#C0C4CC',
   'border_color_base': '#DCDFE6',
   'border_color_light': '#E4E7ED',

@@ -126,7 +126,8 @@
             },
             {
               "path": "/upload",
-              "title": "Upload 上传"
+              "title": "Upload 上传",
+              "disabled": true
             },
             {
               "path": "/rate",
@@ -278,7 +279,8 @@
             },
             {
               "path": "/image",
-              "title": "Image 图片"
+              "title": "Image 图片",
+              "disabled": true
             },
             {
               "path": "/backtop",
@@ -295,7 +297,7 @@
           ]
         },
         {
-          "groupName": "SPaaS",
+          "groupName": "Wheel",
           "list": [
             {
               "path": "/lr-container",
@@ -629,7 +631,8 @@
             },
             {
               "path": "/image",
-              "title": "Image"
+              "title": "Image",
+              "disabled": true
             },
             {
               "path": "/backtop",
@@ -836,7 +839,8 @@
             },
             {
               "path": "/upload",
-              "title": "Upload"
+              "title": "Upload",
+              "disabled": true
             },
             {
               "path": "/rate",

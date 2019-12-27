@@ -128,7 +128,7 @@ Switch est utilisé pour choisir entre deux états opposés.
 | inactive-text | Texte affiché dans l'état `off`. | string | — | — |
 | active-value  | Valeur du switch dans l'état `on`. | boolean / string / number | — | true |
 | inactive-value  | Valeur du switch dans l'état `off`. | boolean / string / number | — | false |
-| active-color | Couleur de fond de l'état `on`. | string | — | #409EFF |
+| active-color | Couleur de fond de l'état `on`. | string | — | #5D81F9 |
 | inactive-color | Couleur de fond de l'état `off`. | string | — | #C0CCDA |
 | name| Nom du champ d'input du switch. | string | — | — |
 | validate-event | Si la validation doit avoir lieu. | boolean | - | true |

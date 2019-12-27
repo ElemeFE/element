@@ -133,7 +133,7 @@
       float: right;
       font-weight: normal;
       font-size: 14px;
-      color: #909399;
+      color: #A7A8AD;
     }
     .more {
       font-size: 16px;
@@ -226,7 +226,7 @@
                   <el-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</el-dropdown-item>
                   <el-dropdown-item
                       command="delete"
-                      style="color: #F56C6C;"
+                      style="color: #FF4D4F;"
                     >
                       {{getActionDisplayName('delete-theme')}}
                     </el-dropdown-item>
@@ -368,7 +368,7 @@ export default {
       return this.theme.global['$--border-color-base'] || '#DCDFE6';
     },
     textSecondaryColor() {
-      return this.theme.global['$--color-text-secondary'] || '#909399';
+      return this.theme.global['$--color-text-secondary'] || '#A7A8AD';
     },
     isOfficial() {
       return this.type === 'official';
