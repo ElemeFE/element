@@ -2,6 +2,13 @@
 
 ### 2.13.0
 
+*2019-12-29*
+
+#### Bug fixes
+
+- Select
+  - Repair when deleting the selected tag by backspace key, the remove tag event is not triggered bug (#18548 by @tanglinhai)
+
 *2019-11-26*
 
 #### New features
