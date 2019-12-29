@@ -625,6 +625,7 @@
           value.pop();
           this.$emit('input', value);
           this.emitChange(value);
+          this.$emit('remove-tag', value);
         }
       },
 
