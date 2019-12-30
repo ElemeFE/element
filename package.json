@@ -29,6 +29,9 @@
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
   },
+  "engines": {
+    "node": "<=11"
+  },
   "faas": [
     {
       "domain": "element",
