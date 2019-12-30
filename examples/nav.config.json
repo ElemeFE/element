@@ -297,6 +297,15 @@
           ]
         },
         {
+          "groupName": "Input-Enhance",
+          "list": [
+            {
+              "path": "/input-email",
+              "title": "InputEmail 邮件输入组件"
+            }
+          ]
+        },
+        {
           "groupName": "Wheel",
           "list": [
             {
@@ -350,10 +359,6 @@
             {
               "path": "/affix",
               "title": "Affix 固钉"
-            },
-            {
-              "path": "/input-email",
-              "title": "InputEmail 邮件输入组件"
             }
           ]
         }
