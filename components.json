@@ -93,5 +93,6 @@
   "panel": "./packages/panel/index.js",
   "skeleton": "./packages/skeleton/index.js",
   "empty": "./packages/empty/index.js",
-  "affix": "./packages/affix/index.js"
+  "affix": "./packages/affix/index.js",
+  "input-email": "./packages/input-email/index.js"
 }

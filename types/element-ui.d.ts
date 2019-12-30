@@ -93,6 +93,7 @@ import { ElPanel } from './panel'
 import { ElSkeleton } from './skeleton'
 import { ElEmpty } from './empty'
 import { ElAffix } from './affix'
+import { ElInputEmail } from './input-email'
 
 export interface InstallationOptions {
   locale: any,
@@ -396,3 +397,6 @@ export class Empty extends ElEmpty {}
 
 /** Affix Component */
 export class Affix extends ElAffix {}
+
+/** InputEmail Component */
+export class InputEmail extends ElInputEmail {}

@@ -350,6 +350,10 @@
             {
               "path": "/affix",
               "title": "Affix 固钉"
+            },
+            {
+              "path": "/input-email",
+              "title": "InputEmail 邮件输入组件"
             }
           ]
         }
@@ -706,6 +710,10 @@
             {
               "path": "/affix",
               "title": "Affix"
+            },
+            {
+              "path": "/input-email",
+              "title": "InputEmail"
             }
           ]
         }
@@ -1062,6 +1070,10 @@
             {
               "path": "/affix",
               "title": "Affix"
+            },
+            {
+              "path": "/input-email",
+              "title": "InputEmail"
             }
           ]
         }
@@ -1417,6 +1429,10 @@
             {
               "path": "/affix",
               "title": "Affix"
+            },
+            {
+              "path": "/input-email",
+              "title": "InputEmail"
             }
           ]
         }
