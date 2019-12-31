@@ -1,5 +1,5 @@
 {
-  "name": "element-ui",
+  "name": "@flickerlist/element-ui",
   "version": "2.13.0",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
@@ -28,6 +28,9 @@
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js && sh build/deploy-faas.sh",
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
+  },
+  "engines": {
+    "node": "<=11"
   },
   "faas": [
     {

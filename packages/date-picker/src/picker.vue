@@ -407,20 +407,22 @@ export default {
 
   watch: {
     pickerVisible(val) {
-      if (this.readonly || this.pickerDisabled) return;
-      if (val) {
-        this.showPicker();
-        this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
-      } else {
-        this.hidePicker();
-        this.emitChange(this.value);
-        this.userInput = null;
-        if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.blur');
+      if (!this.readonly && !this.pickerDisabled) {
+        if (val) {
+          this.showPicker();
+          this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
+        } else {
+          this.hidePicker();
+          this.emitChange(this.value);
+          this.userInput = null;
+          if (this.validateEvent) {
+            this.dispatch('ElFormItem', 'el.form.blur');
+          }
+          this.$emit('blur', this);
+          this.blur();
         }
-        this.$emit('blur', this);
-        this.blur();
       }
+      this.$emit('visible-change', val);
     },
     parsedValue: {
       immediate: true,
