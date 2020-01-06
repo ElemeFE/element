@@ -44,14 +44,14 @@
 
     <div v-if="multiple" class="el-cascader__tags">
       <el-tag
-        v-for="(tag, index) in presentTags"
+        v-for="(tag) in presentTags"
         :key="tag.key"
         type="info"
         :size="tagSize"
         :hit="tag.hitState"
         :closable="tag.closable"
         disable-transitions
-        @close="deleteTag(index)">
+        @close="deleteTag(tag)">
         <span>{{ tag.text }}</span>
       </el-tag>
       <input
@@ -123,7 +123,7 @@ import ElScrollbar from 'element-ui/packages/scrollbar';
 import ElCascaderPanel from 'element-ui/packages/cascader-panel';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
-import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
+import { isEqual, isEmpty, kebabCase, valueEquals } from 'element-ui/src/utils/util';
 import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
@@ -588,7 +588,7 @@ export default {
 
       if (this.pressDeleteCount) {
         if (lastTag.hitState) {
-          this.deleteTag(lastIndex);
+          this.deleteTag(lastTag);
         } else {
           lastTag.hitState = true;
         }
@@ -607,8 +607,9 @@ export default {
         this.toggleDropDownVisible(false);
       }
     },
-    deleteTag(index) {
-      const { checkedValue } = this;
+    deleteTag(tag) {
+      const { checkedValue, props: { emitPath = true }} = this;
+      const index = checkedValue.findIndex(v => valueEquals(v, tag.node[emitPath ? 'path' : 'value']));
       const val = checkedValue[index];
       this.checkedValue = checkedValue.filter((n, i) => i !== index);
       this.$emit('remove-tag', val);
@@ -647,4 +648,3 @@ export default {
   }
 };
 </script>
-
