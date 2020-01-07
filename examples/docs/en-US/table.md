@@ -1897,7 +1897,7 @@ You can customize row index in `type=index` columns.
 | sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
 | sort-by | specify which property to sort by, works when `sortable` is `true` and `sort-method` is `undefined`. If set to an Array, the column will sequentially sort by the next property if the previous one is equal | Function(row, index)/String/Array | — | — |
 | sort-orders | the order of the sorting strategies used when sorting the data, works when `sortable` is `true`. Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array | array | the elements in the array need to be one of the following: `ascending`, `descending` and `null` (restores to the original order) | ['ascending', 'descending', null] |
-| resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
+| resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | true |
 | formatter | function that formats cell content | Function(row, column, cellValue, index) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
 | align | alignment | string | left/center/right | left |
