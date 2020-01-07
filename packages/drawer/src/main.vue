@@ -51,9 +51,17 @@ import Popup from 'element-ui/src/utils/popup';
 import emitter from 'element-ui/src/mixins/emitter';
 import Utils from 'element-ui/src/utils/aria-utils';
 
+const PopupMixin = {
+  ...Popup,
+  props: {
+    ...Popup.props
+  }
+};
+delete PopupMixin.props.zIndex;
+
 export default {
   name: 'ElDrawer',
-  mixins: [Popup, emitter],
+  mixins: [PopupMixin, emitter],
   props: {
     appendToBody: {
       type: Boolean,

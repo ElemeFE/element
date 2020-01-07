@@ -87,6 +87,14 @@
   import { t } from 'element-ui/src/locale';
   import Dialog from 'element-ui/src/utils/aria-dialog';
 
+  const PopupMixin = {
+    ...Popup,
+    props: {
+      ...Popup.props
+    }
+  };
+  delete PopupMixin.props.zIndex;
+
   let messageBox;
   let typeMap = {
     success: 'success',
@@ -96,7 +104,7 @@
   };
 
   export default {
-    mixins: [Popup, Locale],
+    mixins: [PopupMixin, Locale],
 
     props: {
       modal: {

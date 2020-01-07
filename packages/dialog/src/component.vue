@@ -42,10 +42,18 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import emitter from 'element-ui/src/mixins/emitter';
 
+  const PopupMixin = {
+    ...Popup,
+    props: {
+      ...Popup.props
+    }
+  };
+  delete PopupMixin.props.zIndex;
+
   export default {
     name: 'ElDialog',
 
-    mixins: [Popup, emitter, Migrating],
+    mixins: [PopupMixin, emitter, Migrating],
 
     props: {
       title: {
