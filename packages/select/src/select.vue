@@ -625,7 +625,7 @@
           value.pop();
           this.$emit('input', value);
           this.emitChange(value);
-          this.$emit('remove-tag', value);
+          this.$emit('remove-tag', this.selected[this.selected.length - 1].value);
         }
       },
 
@@ -681,6 +681,7 @@
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
+            this.$emit('remove-tag', option.value);
           } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
             value.push(option.value);
           }
@@ -770,6 +771,8 @@
           value.splice(index, 1);
           this.$emit('input', value);
           this.emitChange(value);
+          console.log(tag.value, value);
+          console.log(1111, tag.value, this.selected);
           this.$emit('remove-tag', tag.value);
         }
         event.stopPropagation();
