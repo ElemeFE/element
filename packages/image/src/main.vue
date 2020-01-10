@@ -55,7 +55,10 @@
       fit: String,
       lazy: Boolean,
       scrollContainer: {},
-      abbreviated: String,
+      abbreviated: {
+        type: String,
+        default: ''
+      },
       previewSrcList: {
         type: Array,
         default: () => []
@@ -95,7 +98,11 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
-        let src = this.src.split(this.abbreviated)[0];
+        let src = null;
+        if (this.abbreviated.length > 0) {
+          src = this.src.split(this.abbreviated)[0];
+        }
+        console.log(this.previewSrcList.indexOf(src));
         return this.previewSrcList.indexOf(src);
       }
     },
