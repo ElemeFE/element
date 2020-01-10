@@ -95,8 +95,7 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
-        let src = this.src.split(this.abbreviated)[0]
-        console.log(src);
+        let src = this.src.split(this.abbreviated)[0];
         return this.previewSrcList.indexOf(src);
       }
     },
