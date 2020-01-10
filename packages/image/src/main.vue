@@ -12,7 +12,7 @@
       v-bind="$attrs"
       v-on="$listeners"
       @click="clickHandler"
-      :src="src"
+      :src="`${src}${abbreviated}`"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
@@ -55,6 +55,7 @@
       fit: String,
       lazy: Boolean,
       scrollContainer: {},
+      abbreviated: String,
       previewSrcList: {
         type: Array,
         default: () => []
@@ -94,7 +95,9 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
-        return this.previewSrcList.indexOf(this.src);
+        let src = this.src.split(this.abbreviated)[0]
+        console.log(src);
+        return this.previewSrcList.indexOf(src);
       }
     },
 
