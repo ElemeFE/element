@@ -33,6 +33,7 @@
           <slot name="footer"></slot>
         </div>
       </div>
+      <img v-if="wrapImg" class="el-dialog-wrap-img" :src="wrapImg" />
     </div>
   </transition>
 </template>
@@ -107,7 +108,12 @@
         default: false
       },
 
-      destroyOnClose: Boolean
+      destroyOnClose: Boolean,
+      
+      wrapImg: {
+        type: String,
+        default: ''
+      }
     },
 
     data() {
