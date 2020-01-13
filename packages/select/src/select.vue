@@ -77,7 +77,7 @@
       :autocomplete="autoComplete || autocomplete"
       :size="selectSize"
       :disabled="selectDisabled"
-      :readonly="readonly"
+      :readonly="inputReadonly"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       :tabindex="(multiple && filterable) ? '-1' : null"
@@ -179,8 +179,8 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
 
-      readonly() {
-        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
+      inputReadonly() {
+        return this.readonly || !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
       },
 
       showClose() {
@@ -270,6 +270,7 @@
       automaticDropdown: Boolean,
       size: String,
       disabled: Boolean,
+      readonly: Boolean,
       clearable: Boolean,
       filterable: Boolean,
       allowCreate: Boolean,

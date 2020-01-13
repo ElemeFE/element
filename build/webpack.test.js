@@ -20,7 +20,7 @@ const webpackConfig = {
     alias: Object.assign(config.alias, {
       'vue$': 'vue/dist/vue.common.js'
     }),
-    modules: ['node_modules']
+    modules: [path.resolve('./node_modules')]
   },
   module: {
     rules: [
