@@ -12,7 +12,7 @@ export default {
       confirm: 'Confirmar',
       selectDate: 'Seleccionar fecha',
       selectTime: 'Seleccionar hora',
-      startDate: 'Fecha Incial',
+      startDate: 'Fecha Inicial',
       startTime: 'Hora Inicial',
       endDate: 'Fecha Final',
       endTime: 'Hora Final',
