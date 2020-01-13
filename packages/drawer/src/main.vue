@@ -66,6 +66,10 @@ export default {
       type: String,
       default: ''
     },
+    lockScroll: {
+      type: Boolean,
+      default: true
+    },
     closeOnPressEscape: {
       type: Boolean,
       default: true
