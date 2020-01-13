@@ -12,7 +12,8 @@
           :show-seconds="showSeconds"
           :am-pm-mode="amPmMode"
           @select-range="setSelectionRange"
-          :date="date">
+          :date="date"
+          :format="format">
         </time-spinner>
       </div>
       <div class="el-time-panel__footer">
