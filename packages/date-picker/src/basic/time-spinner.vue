@@ -225,6 +225,7 @@
           index = this.format.indexOf("ss");
         }
         index !== -1 && this.$emit("select-range", index, index + 2);
+        this.currentScrollbar = type;
       },
 
       bindScrollEvent() {
