@@ -214,10 +214,8 @@
         var index = -1;
         if (type === "hours") {
           index = this.format.indexOf("HH");
-          this.$emit("select-range", index, index + 2);
         } else if (type === "minutes") {
           index = this.format.indexOf("mm");
-          this.$emit("select-range", index, index + 2);
         } else if (type === "seconds") {
           index = this.format.indexOf("ss");
         }
