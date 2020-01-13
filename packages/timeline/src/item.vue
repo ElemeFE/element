@@ -24,7 +24,7 @@
     <div class="el-timeline-item__wrapper">
       <div v-if="!hideTimestamp && placement === 'top'"
         class="el-timeline-item__timestamp is-top">
-        {{timestamp}}
+        <slot name="timestamp">{{ timestamp }}</slot>
       </div>
 
       <div class="el-timeline-item__content">
@@ -33,7 +33,7 @@
 
       <div v-if="!hideTimestamp && placement === 'bottom'"
         class="el-timeline-item__timestamp is-bottom">
-        {{timestamp}}
+        <slot name="timestamp">{{ timestamp }}</slot>
       </div>
     </div>
   </li>

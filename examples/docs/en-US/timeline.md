@@ -151,3 +151,4 @@ Timestamp can be placed on top of content when content is too high.
 |------|--------|
 | — | Custom content for timeline item |
 | dot | Custom defined node |
+| timestamp | Custom content for timestamp |

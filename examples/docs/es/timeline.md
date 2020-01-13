@@ -151,3 +151,4 @@ Las marcas de tiempo ( timestamp )  puede colocarse encima del contenido cuando 
 |------|--------|
 | — | Contenido personalizado del ítem del timeline |
 | dot | Definición personalizada del nodo |
+| timestamp | Contenido personalizado para la marca de tiempo |

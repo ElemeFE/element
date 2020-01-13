@@ -225,4 +225,19 @@ describe('Timeline', () => {
     const nodeElm = vm.$el.querySelector('.el-timeline-item__icon');
     expect(nodeElm.classList.contains('el-icon-more')).to.true;
   });
+
+  it('slot timestamp', () => {
+    vm = createVue({
+      template: `
+        <el-timeline>
+          <el-timeline-item icon="el-icon-more">
+            <div slot="timestamp">2018-04-11</div>
+          </el-timeline-item>
+        </el-timeline>
+      `
+    }, true);
+
+    const nodeElm = vm.$el.querySelector('.el-timeline-item__timestamp');
+    expect(nodeElm.innerHTML).to.contains('2018-04-11');
+  });
 });

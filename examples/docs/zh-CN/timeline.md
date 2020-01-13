@@ -151,3 +151,4 @@ Timeline 可拆分成多个按照时间戳正序或倒序排列的 activity，�
 |------|--------|
 | — | Timeline-Item 的内容 |
 | dot | 自定义节点 |
+| timestamp | 时间戳的自定义内容 |

@@ -154,3 +154,4 @@ Le timestamp peut être placé au-dessus du contenu lorsque celui-ci est trop ha
 |------|--------|
 | — | Contenu personnalisé pour le timeline-item. |
 | dot | Noeud personnalisé. |
+| timestamp | Contenu personnalisé pour l'horodatage |
