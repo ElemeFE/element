@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    :class="[selectSize ? 'el-select--' + selectSize : '', {'el-select--readonly': readonly}]"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
@@ -47,6 +47,7 @@
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
+        :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
         @focus="handleFocus"
         @blur="softFocus = false"
@@ -565,16 +566,18 @@
       },
 
       handleFocus(event) {
-        if (!this.softFocus) {
-          if (this.automaticDropdown || this.filterable) {
-            this.visible = true;
-            if (this.filterable) {
-              this.menuVisibleOnFocus = true;
+        if (!this.readonly && !this.disabled) {
+          if (!this.softFocus) {
+            if (this.automaticDropdown || this.filterable) {
+              this.visible = true;
+              if (this.filterable) {
+                this.menuVisibleOnFocus = true;
+              }
             }
+            this.$emit('focus', event);
+          } else {
+            this.softFocus = false;
           }
-          this.$emit('focus', event);
-        } else {
-          this.softFocus = false;
         }
       },
 
@@ -732,7 +735,7 @@
       },
 
       toggleMenu() {
-        if (!this.selectDisabled) {
+        if (!this.selectDisabled && !this.readonly) {
           if (this.menuVisibleOnFocus) {
             this.menuVisibleOnFocus = false;
           } else {
