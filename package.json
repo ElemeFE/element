@@ -4,6 +4,7 @@
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
+    "components.json",
     "build",
     "lib",
     "src",
@@ -13,6 +14,7 @@
   "typings": "types/index.d.ts",
   "scripts": {
     "bootstrap": "yarn || npm i",
+    "build": "npm run clean && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
