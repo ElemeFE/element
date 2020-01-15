@@ -4,6 +4,9 @@
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
+    ".babelrc",
+    ".eslintignore",
+    ".eslintrc",
     "components.json",
     "build",
     "lib",
