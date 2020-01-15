@@ -46,4 +46,4 @@ exports.vue = {
   amd: 'vue'
 };
 
-exports.jsexclude = [path.resolve('./node_modules'), path.resolve('./utils', 'popper.js'), path.resolve('./utils', 'date.js')]
+exports.jsexclude = [path.resolve('./node_modules'), path.resolve('./src/utils', 'popper.js'), path.resolve('./src/utils', 'date.js')]
