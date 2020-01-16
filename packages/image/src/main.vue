@@ -16,7 +16,7 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer ref="imageViewer" :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
     </template>
   </div>
 </template>
@@ -104,6 +104,13 @@
       },
       show(val) {
         val && this.loadImage();
+      },
+      showViewer(val) {
+        if (val) {
+          this.$refs.imageViewer.deviceSupportInstall();
+        } else {
+          this.$refs.imageViewer.deviceSupportUninstall();
+        }
       }
     },
 
