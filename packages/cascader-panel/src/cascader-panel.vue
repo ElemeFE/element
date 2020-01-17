@@ -305,8 +305,9 @@ export default {
           const nodeValue = this.checkedValue[this.loadCount++];
           const valueKey = this.config.value;
           const leafKey = this.config.leaf;
+          const childrenKey = this.config.children;
 
-          if (Array.isArray(dataList) && dataList.filter(item => item[valueKey] === nodeValue).length > 0) {
+          if (Array.isArray(dataList) && (node[childrenKey] || dataList).filter(item => item[valueKey] === nodeValue).length > 0) {
             const checkedNode = this.store.getNodeByValue(nodeValue);
 
             if (!checkedNode.data[leafKey]) {
