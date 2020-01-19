@@ -86,6 +86,7 @@
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "file-save": "^0.2.0",
+    "fsevents": "^2.1.2",
     "gh-pages": "^0.11.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
