@@ -59,7 +59,7 @@
 
         if (config.lazy && !node.loaded) {
           // close child options when lazy load another node's child options
-          panel.changePanel(node, true);
+          panel.toggleExpand(node, false);
           panel.lazyLoad(node, () => {
             // do not use cached leaf value here, invoke this.isLeaf to get new value.
             const { isLeaf } = this;

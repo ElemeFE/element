@@ -260,13 +260,13 @@ export default {
           return;
       }
     },
-    changePanel(node, lazy = false) {
+    toggleExpand(node, isExpand = true) {
       const { activePath } = this;
       const { level } = node;
       const path = activePath.slice(0, level - 1);
       const menus = this.menus.slice(0, level);
 
-      if (!lazy && !node.isLeaf) {
+      if (isExpand && !node.isLeaf) {
         path.push(node);
         menus.push(node.children);
       }
@@ -277,7 +277,7 @@ export default {
       return { path, activePath };
     },
     handleExpand(node, silent) {
-      const { path, activePath } = this.changePanel(node);
+      const { path, activePath } = this.toggleExpand(node);
 
       if (!silent) {
         const pathValues = path.map(node => node.getValue());
