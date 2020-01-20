@@ -303,11 +303,10 @@ export default {
         // dispose default value on lazy load mode
         if (Array.isArray(this.checkedValue)) {
           const nodeValue = this.checkedValue[this.loadCount++];
-          const valueKey = this.config.value;
+          const valueKey = node.hasChildren ? 'value' : this.config.value;
           const leafKey = this.config.leaf;
-          const childrenKey = this.config.children;
 
-          if (Array.isArray(dataList) && (node[childrenKey] || dataList).filter(item => item[valueKey] === nodeValue).length > 0) {
+          if (Array.isArray(dataList) && (node.children || dataList).filter(item => item[valueKey] === nodeValue).length > 0) {
             const checkedNode = this.store.getNodeByValue(nodeValue);
 
             if (!checkedNode.data[leafKey]) {
