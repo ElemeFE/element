@@ -198,7 +198,9 @@
         }, showTimeout);
 
         if (this.appendToBody) {
-          this.$parent.$el.dispatchEvent(new MouseEvent('mouseenter'));
+          const event = document.createEvent('MouseEvent');
+          event.initEvent('mouseenter', true, true);
+          this.$parent.$el.dispatchEvent(event);
         }
       },
       handleMouseleave(deepDispatch = false) {
