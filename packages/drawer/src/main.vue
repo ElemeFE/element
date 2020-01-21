@@ -10,7 +10,7 @@
       <div
         class="el-drawer__container"
         :class="visible && 'el-drawer__open'"
-        @click.self="handleWrapperClick"
+        @mousedown.self="handleWrapperClick"
         role="document"
         tabindex="-1">
         <div
