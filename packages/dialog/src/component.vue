@@ -6,7 +6,9 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
-      @mosedown.self="handleWrapperClick">
+      @mosedown.self="handleWrapperMouseDown"
+      @mouseup.self="handleWrapperMouseUp"
+      @click.self="handleWrapperClick">
       <div
         role="dialog"
         :key="key"
@@ -14,7 +16,9 @@
         :aria-label="title || 'dialog'"
         :class="['el-dialog', { 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
-        :style="style">
+        :style="style"
+        @mouseup.stop
+        @mousedown.stop>
         <div class="el-dialog__header">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
@@ -113,7 +117,10 @@
     data() {
       return {
         closed: false,
-        key: 0
+        key: 0,
+
+        mouseDownFired: false,
+        mouseUpFired: false,
       };
     },
 
@@ -155,6 +162,17 @@
     },
 
     methods: {
+      handleWrapperMouseDown(){
+        this.mouseDownFired = false;
+      },
+      handleWrapperMouseUp(){
+        this.mouseUpFired = false;
+      },
+      handleWrapperClick(){
+        if(this.mouseUpFired && this.mouseDownFired) this.handleClose();
+        this.mouseUpFired = false;
+        this.mouseDownFired = false;
+      },
       getMigratingConfig() {
         return {
           props: {
