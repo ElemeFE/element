@@ -161,10 +161,10 @@
 
     methods: {
       handleWrapperMouseDown(){
-        this.mouseDownFired = false;
+        this.mouseDownFired = true;
       },
       handleWrapperMouseUp(){
-        this.mouseUpFired = false;
+        this.mouseUpFired = true;
       },
       handleWrapperClick(){
         if(this.mouseUpFired && this.mouseDownFired) this.handleClose();
