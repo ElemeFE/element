@@ -16,9 +16,7 @@
         :aria-label="title || 'dialog'"
         :class="['el-dialog', { 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
-        :style="style"
-        @mouseup.stop
-        @mousedown.stop>
+        :style="style">
         <div class="el-dialog__header">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
