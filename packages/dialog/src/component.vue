@@ -118,7 +118,7 @@
         key: 0,
 
         mouseDownFired: false,
-        mouseUpFired: false,
+        mouseUpFired: false
       };
     },
 
@@ -160,14 +160,14 @@
     },
 
     methods: {
-      handleWrapperMouseDown(){
+      handleWrapperMouseDown() {
         this.mouseDownFired = true;
       },
-      handleWrapperMouseUp(){
+      handleWrapperMouseUp() {
         this.mouseUpFired = true;
       },
-      handleWrapperClick(){
-        if(this.mouseUpFired && this.mouseDownFired && this.closeOnClickModal) this.handleClose();
+      handleWrapperClick() {
+        if (this.mouseUpFired && this.mouseDownFired && this.closeOnClickModal) this.handleClose();
         this.mouseUpFired = false;
         this.mouseDownFired = false;
       },
