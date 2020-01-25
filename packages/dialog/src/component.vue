@@ -167,7 +167,7 @@
         this.mouseUpFired = true;
       },
       handleWrapperClick(){
-        if(this.mouseUpFired && this.mouseDownFired) this.handleClose();
+        if(this.mouseUpFired && this.mouseDownFired && this.closeOnClickModal) this.handleClose();
         this.mouseUpFired = false;
         this.mouseDownFired = false;
       },
@@ -177,10 +177,6 @@
             'size': 'size is removed.'
           }
         };
-      },
-      handleWrapperClick() {
-        if (!this.closeOnClickModal) return;
-        this.handleClose();
       },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
