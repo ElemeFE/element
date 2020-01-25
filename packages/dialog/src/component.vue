@@ -6,7 +6,7 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
-      @click.self="handleWrapperClick">
+      @mosedown.self="handleWrapperClick">
       <div
         role="dialog"
         :key="key"
