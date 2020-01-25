@@ -225,8 +225,8 @@ describe('Dialog', () => {
     }, true);
     const dialog = vm.$children[0];
     setTimeout(() => {
-      dialog.$el.mousedown();
-      dialog.$el.mouseup();
+      dialog.$el.dispatchEvent(new Event('mousedown'));
+      dialog.$el.dispatchEvent(new Event('mouseup'));
       dialog.$el.click();
       setTimeout(() => {
         expect(vm.visible).to.be.false;
@@ -284,8 +284,8 @@ describe('Dialog', () => {
     }, true);
     const dialog = vm.$children[0];
     setTimeout(() => {
-      dialog.$el.mousedown();
-      dialog.$el.mouseup();
+      dialog.$el.dispatchEvent(new Event('mousedown'));
+      dialog.$el.dispatchEvent(new Event('mouseup'));
       dialog.$el.click();
       setTimeout(() => {
         expect(spy.called).to.be.true;
@@ -314,8 +314,8 @@ describe('Dialog', () => {
     const dialog = vm.$children[0];
     await waitImmediate();
     dialog.$el.querySelector('input').value = '123';
-    dialog.$el.mousedown();
-    dialog.$el.mouseup();
+    dialog.$el.dispatchEvent(new Event('mousedown'));
+    dialog.$el.dispatchEvent(new Event('mouseup'));
     dialog.$el.click();
     await waitImmediate();
     vm.visible = true;
