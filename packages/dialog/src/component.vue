@@ -6,7 +6,7 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
-      @mosedown.self="handleWrapperMouseDown"
+      @mousedown.self="handleWrapperMouseDown"
       @mouseup.self="handleWrapperMouseUp"
       @click.self="handleWrapperClick">
       <div
