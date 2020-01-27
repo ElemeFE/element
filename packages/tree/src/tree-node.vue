@@ -24,13 +24,13 @@
     ref="node"
   >
     <div class="el-tree-node__content"
-      :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
+      :style="nodePadding">
       <span
         @click.stop="handleExpandIconClick"
         :class="[
           { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
           'el-tree-node__expand-icon',
-          tree.iconClass ? tree.iconClass : 'el-icon-caret-right'
+          tree.iconClass ? tree.iconClass : (tree.dir == 'rtl' ? 'el-icon-caret-left' : 'el-icon-caret-right')
         ]"
       >
       </span>
@@ -151,6 +151,17 @@
         if (val) {
           this.childNodeRendered = true;
         }
+      }
+    },
+
+    computed: {
+      nodePadding() {
+        if (this.tree.dir === 'rtl') {
+          return { 'padding-right': (this.node.level - 1) * this.tree.indent + 'px' }
+        } else {
+          return { 'padding-left': (this.node.level - 1) * this.tree.indent + 'px' }
+        }
+        
       }
     },
 

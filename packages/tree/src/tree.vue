@@ -8,6 +8,7 @@
       'is-drop-inner': dragState.dropType === 'inner'
     }"
     role="tree"
+    :dir="dir"
   >
     <el-tree-node
       v-for="child in root.childNodes"
@@ -128,7 +129,11 @@
         type: Number,
         default: 18
       },
-      iconClass: String
+      iconClass: String,
+      dir: {
+        type: String,
+        default: 'ltr'
+      },
     },
 
     computed: {
