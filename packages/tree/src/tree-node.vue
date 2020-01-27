@@ -161,7 +161,6 @@
         } else {
           return { 'padding-left': (this.node.level - 1) * this.tree.indent + 'px' }
         }
-        
       }
     },
 

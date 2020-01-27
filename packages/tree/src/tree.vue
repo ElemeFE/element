@@ -133,7 +133,7 @@
       dir: {
         type: String,
         default: 'ltr'
-      },
+      }
     },
 
     computed: {
