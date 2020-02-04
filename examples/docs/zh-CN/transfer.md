@@ -76,6 +76,69 @@
 ```
 :::
 
+### 异步数据搜索
+ 当搜索数据是服务端异步请求获得的情况下，可以等待数据加载完毕，再对进行搜索和过滤。
+ :::demo 在`before-query`函数中，执行异步方法，且返回promise，就可以进行异步数据搜索。`before-query`对外返回`title`和`query`。
+```html
+<template>
+  <el-transfer
+    filterable
+    :filter-method="filterMethod"
+    filter-placeholder="请输入城市拼音"
+    v-model="value2"
+    :before-filter="beforeFilter"
+    :data="data2">
+  </el-transfer>
+</template>
+ <script>
+  export default {
+    data() {
+      return {
+        data2: [
+          { key: 'heilongjiang', pinyin: 'heilongjiang', label: '黑龙江' },
+          { key: 'haerbing', pinyin: 'haerbing', label: '哈尔滨' },
+        ],
+        value2: [],
+        filterMethod(query, item) {
+          return item.pinyin.indexOf(query) > -1;
+        }
+      };
+    },
+    methods: {
+      generateData() {
+        const data = [];
+        const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
+        const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
+        cities.forEach((city, index) => {
+          data.push({
+            label: city,
+            key: pinyin[index],
+            pinyin: pinyin[index]
+          });
+        });
+        return data;
+      },
+      requestApi(url) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(this.generateData());
+          }, 1000);
+        });
+      },
+      beforeFilter(title, query) {
+        if(title === '列表 1') {
+          return this.requestApi(`/api/cities?name=${query}&limit=10&offset=1`)
+            .then((data) => {
+              this.data2 = data;
+            });
+        }
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 可自定义
 
 可以对列表标题文案、按钮文案、数据项的渲染函数、列表底部的勾选状态文案、列表底部的内容区等进行自定义。

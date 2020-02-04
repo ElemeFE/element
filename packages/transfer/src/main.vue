@@ -7,6 +7,7 @@
       :title="titles[0] || t('el.transfer.titles.0')"
       :default-checked="leftDefaultChecked"
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+      :before-filter="beforeFilter"
       @checked-change="onSourceCheckedChange">
       <slot name="left-footer"></slot>
     </transfer-panel>
@@ -35,6 +36,7 @@
       :title="titles[1] || t('el.transfer.titles.1')"
       :default-checked="rightDefaultChecked"
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
+      :before-filter="beforeFilter"
       @checked-change="onTargetCheckedChange">
       <slot name="right-footer"></slot>
     </transfer-panel>
@@ -121,11 +123,18 @@
       targetOrder: {
         type: String,
         default: 'original'
+      },
+      beforeFilter: {
+        type: Function,
+        default() {
+          return () => {};
+        }
       }
     },
 
     data() {
       return {
+        extraData: [],
         leftChecked: [],
         rightChecked: []
       };
@@ -134,16 +143,20 @@
     computed: {
       dataObj() {
         const key = this.props.key;
-        return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {});
+        return this.fullData.reduce((o, cur) => (o[cur[key]] = cur) && o, {});
+      },
+
+      fullData() {
+        return [...this.data, ...this.extraData];
       },
   
       sourceData() {
-        return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
+        return this.fullData.filter(item => this.value.indexOf(item[this.props.key]) === -1);
       },
 
       targetData() {
         if (this.targetOrder === 'original') {
-          return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+          return this.fullData.filter(item => this.value.indexOf(item[this.props.key]) > -1);
         } else {
           return this.value.reduce((arr, cur) => {
             const val = this.dataObj[cur];
@@ -163,6 +176,24 @@
     watch: {
       value(val) {
         this.dispatch('ElFormItem', 'el.form.change', val);
+      },
+      data(newVal, oldVal) {
+        const extraItems = [];
+        const key = this.props.key;
+
+        for (const item of oldVal) {
+          if (this.value.includes(item[key])) {
+            extraItems.push(item);
+          }
+        }
+        for (const item of this.extraData) {
+          if (this.value.includes(item[key])) {
+            extraItems.push(item);
+          }
+        }
+        this.extraData = extraItems.filter(item => {
+          return !newVal.some(newItem => newItem[key] === item[key]);
+        });
       }
     },
 
@@ -203,7 +234,7 @@
         let currentValue = this.value.slice();
         const itemsToBeMoved = [];
         const key = this.props.key;
-        this.data.forEach(item => {
+        this.fullData.forEach(item => {
           const itemKey = item[key];
           if (
             this.leftChecked.indexOf(itemKey) > -1 &&
