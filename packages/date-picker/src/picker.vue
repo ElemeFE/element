@@ -833,8 +833,13 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.timeEmpty = this.timeEmpty;
+      this.picker.timeClearAble = this.timeClearAble;
       this.$watch('format', (format) => {
         this.picker.format = format;
+      });
+      this.$watch('timeEmpty', (timeEmpty) => {
+        this.picker.timeEmpty = timeEmpty;
       });
 
       const updateOptions = () => {
@@ -868,11 +873,14 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.picker.$on('dodestroy', this.doDestroy);
-      this.picker.$on('pick', (date = '', visible = false) => {
+      this.picker.$on('pick', (date = '', visible = false, timeEmpty = false) => {
         this.userInput = null;
         this.pickerVisible = this.picker.visible = visible;
         this.emitInput(date);
         this.picker.resetView && this.picker.resetView();
+      });
+      this.picker.$on('time-empty-change', (timeEmpty) => {
+        this.$emit('time-empty-change', timeEmpty);
       });
 
       this.picker.$on('select-range', (start, end, pos) => {
