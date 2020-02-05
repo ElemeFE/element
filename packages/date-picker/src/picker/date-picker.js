@@ -22,6 +22,16 @@ export default {
       type: String,
       default: 'date'
     },
+    // if timeEmpty=true, time input will be empty
+    timeEmpty: {
+      type: Boolean,
+      default: false
+    },
+    // allow to clear time
+    timeClearAble: {
+      type: Boolean,
+      default: false
+    },
     timeArrowControl: Boolean
   },
 

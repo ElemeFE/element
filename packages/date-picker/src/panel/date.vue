@@ -32,6 +32,8 @@
                 ref="input"
                 @focus="timePickerVisible = true"
                 :placeholder="t('el.datepicker.selectTime')"
+                :clearable="timeClearAble"
+                @clear="handleTimeClear"
                 :value="visibleTime"
                 size="small"
                 @input="val => userInputTime = val"
@@ -240,8 +242,19 @@
         this.date = this.getDefaultValue();
         this.$emit('pick', null);
       },
+      handleTimeClear() {
+        this.timeEmpty = true;
+        if (isDate(this.date)) {
+          this.date = clearTime(this.date);
+        }
+        this.$emit('time-empty-change', this.timeEmpty);
+        this.emit(this.date, true);
+      },
 
       emit(value, ...args) {
+        if (this.timeEmpty) {
+          this.$emit('pick', clearTime(value), ...args, this.timeEmpty);
+        }
         if (!value) {
           this.$emit('pick', value, ...args);
         } else if (Array.isArray(value)) {
@@ -306,6 +319,10 @@
       },
 
       handleTimePick(value, visible, first) {
+        if (this.timeEmpty) {
+          this.timeEmpty = false;
+          this.$emit('time-empty-change', this.timeEmpty);
+        }
         if (isDate(value)) {
           const newDate = this.value
             ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
@@ -510,6 +527,8 @@
         value: '',
         defaultValue: null, // use getDefaultValue() for time computation
         defaultTime: null,
+        timeEmpty: false, // if timeEmpty=true, time input will be empty, this will emit by 'picker' event
+        timeClearAble: false, // allow to clear time
         showTime: false,
         selectionMode: 'day',
         shortcuts: '',
@@ -550,6 +569,9 @@
       },
 
       visibleTime() {
+        if (this.timeEmpty) {
+          return null;
+        }
         if (this.userInputTime !== null) {
           return this.userInputTime;
         } else {
