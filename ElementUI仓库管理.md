@@ -8,7 +8,7 @@
 
 ### 项目管理
 1. 拉取代码时，直接从我们的仓库拉取（即remote origin是我们的仓库）
-    - 如果文件下载太慢，可以fork到自己仓库，然后导入[码云](https://gitee.com/)(速度很快)，然后从码云clone仓库，clone完成后再修改remote origin为我们的仓库
+    - 如果文件下载太慢，可以fork到自己仓库，然后导入[码云](https://gitee.com/flickerlist/element)(速度很快)，然后从码云clone仓库，clone完成后再修改remote origin为我们的仓库
 2. 拉取代码后，再添加Element官方仓库，保持两个remote
     - `git remote add element git@github.com:ElemeFE/element.git`// remote element是官方仓库
     - `cat .git/config` //   检查是否成功 
