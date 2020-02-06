@@ -567,9 +567,9 @@
         if (!this.softFocus) {
           if (this.automaticDropdown || this.filterable) {
             this.visible = true;
-            if (this.filterable) {
-              this.menuVisibleOnFocus = true;
-            }
+            // if (this.filterable) {
+            //   this.menuVisibleOnFocus = true;
+            // }
           }
           this.$emit('focus', event);
         } else {
