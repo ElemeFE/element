@@ -1,6 +1,18 @@
 {
   "zh-CN": [
     {
+      "name": "更新日志",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://elemefe.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
+    {
       "name": "开发指南",
       "children": [
         {
@@ -26,15 +38,7 @@
       ]
     },
     {
-      "name": "更新日志",
-      "path": "/changelog"
-    },
-    {
-      "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
-    },
-    {
-      "name": "基础组件",
+      "name": "组件",
       "groups": [
         {
           "groupName": "Basic",
@@ -42,6 +46,10 @@
             {
               "path": "/layout",
               "title": "Layout 布局"
+            },
+            {
+              "path": "/container",
+              "title": "Container 布局容器"
             },
             {
               "path": "/color",
@@ -52,12 +60,20 @@
               "title": "Typography 字体"
             },
             {
+              "path": "/border",
+              "title": "Border 边框"
+            },
+            {
               "path": "/icon",
               "title": "Icon 图标"
             },
             {
               "path": "/button",
               "title": "Button 按钮"
+            },
+            {
+              "path": "/link",
+              "title": "Link 文字链接"
             }
           ]
         },
@@ -156,6 +172,10 @@
             {
               "path": "/badge",
               "title": "Badge 标记"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar 头像"
             }
           ]
         },
@@ -200,6 +220,10 @@
               "title": "Breadcrumb 面包屑"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader 页头"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown 下拉菜单"
             },
@@ -225,6 +249,10 @@
               "title": "Popover 弹出框"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm 气泡确认框"
+            },
+            {
               "path": "/card",
               "title": "Card 卡片"
             },
@@ -235,6 +263,34 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline 时间线"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider 分割线"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar 日历"
+            },
+            {
+              "path": "/image",
+              "title": "Image 图片"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop 回到顶部"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll 无限滚动"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer 抽屉"
             }
           ]
         }
@@ -242,6 +298,18 @@
     }
   ],
   "en-US": [
+    {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://elemefe.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
     {
       "name": "Development",
       "children": [
@@ -268,14 +336,6 @@
       ]
     },
     {
-      "name": "Changelog",
-      "path": "/changelog"
-    },
-    {
-      "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
-    },
-    {
       "name": "Components",
       "groups": [
         {
@@ -286,6 +346,10 @@
               "title": "Layout"
             },
             {
+              "path": "/container",
+              "title": "Layout Container"
+            },
+            {
               "path": "/color",
               "title": "Color"
             },
@@ -294,12 +358,20 @@
               "title": "Typography"
             },
             {
+              "path": "/border",
+              "title": "Border"
+            },
+            {
               "path": "/icon",
               "title": "Icon"
             },
             {
               "path": "/button",
               "title": "Button"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
             }
           ]
         },
@@ -442,6 +514,10 @@
               "title": "Breadcrumb"
             },
             {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
               "path": "/dropdown",
               "title": "Dropdown"
             },
@@ -467,6 +543,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -477,6 +557,634 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
+              "path": "/image",
+              "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "es": [
+    {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://elemefe.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
+    {
+      "name": "Development",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation"
+        },
+        {
+          "path": "/quickstart",
+          "name": "Quick Start"
+        },
+        {
+          "path": "/i18n",
+          "name": "Internationalization"
+        },
+        {
+          "path": "/custom-theme",
+          "name": "Custom Theme"
+        },
+        {
+          "path": "/transition",
+          "name": "Built-in transition"
+        }
+      ]
+    },
+    {
+      "name": "Components",
+      "groups": [
+        {
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container"
+            },
+            {
+              "path": "/color",
+              "title": "Color"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography"
+            },
+            {
+              "path": "/border",
+              "title": "Border"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon"
+            },
+            {
+              "path": "/button",
+              "title": "Button"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
+            }
+          ]
+        },
+        {
+          "groupName": "Form",
+          "list": [
+            {
+              "path": "/radio",
+              "title": "Radio"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox"
+            },
+            {
+              "path": "/input",
+              "title": "Input"
+            },
+            {
+              "path": "/input-number",
+              "title": "InputNumber"
+            },
+            {
+              "path": "/select",
+              "title": "Select"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader"
+            },
+            {
+              "path": "/switch",
+              "title": "Switch"
+            },
+            {
+              "path": "/slider",
+              "title": "Slider"
+            },
+            {
+              "path": "/time-picker",
+              "title": "TimePicker"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker"
+            },
+            {
+              "path": "/datetime-picker",
+              "title": "DateTimePicker"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload"
+            },
+            {
+              "path": "/rate",
+              "title": "Rate"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer"
+            },
+            {
+              "path": "/form",
+              "title": "Form"
+            }
+          ]
+        },
+        {
+          "groupName": "Data",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table"
+            },
+            {
+              "path": "/tag",
+              "title": "Tag"
+            },
+            {
+              "path": "/progress",
+              "title": "Progress"
+            },
+            {
+              "path": "/tree",
+              "title": "Tree"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge"
+            }
+          ]
+        },
+        {
+          "groupName": "Notice",
+          "list": [
+            {
+              "path": "/alert",
+              "title": "Alert"
+            },
+            {
+              "path": "/loading",
+              "title": "Loading"
+            },
+            {
+              "path": "/message",
+              "title": "Message"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification"
+            }
+          ]
+        },
+        {
+          "groupName": "Navigation",
+          "list": [
+            {
+              "path": "/menu",
+              "title": "NavMenu"
+            },
+            {
+              "path": "/tabs",
+              "title": "Tabs"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb"
+            },
+            {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
+              "path": "/dropdown",
+              "title": "Dropdown"
+            },
+            {
+              "path": "/steps",
+              "title": "Steps"
+            }
+          ]
+        },
+        {
+          "groupName": "Others",
+          "list": [
+            {
+              "path": "/dialog",
+              "title": "Dialog"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
+              "path": "/card",
+              "title": "Card"
+            },
+            {
+              "path": "/carousel",
+              "title": "Carousel"
+            },
+            {
+              "path": "/collapse",
+              "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
+              "path": "/image",
+              "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fr-FR": [
+    {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element pour React",
+      "href": "https://elemefe.github.io/element-react/"
+    },
+    {
+      "name": "Element pour Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
+    {
+      "name": "Développement",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation"
+        },
+        {
+          "path": "/quickstart",
+          "name": "Démarrer"
+        },
+        {
+          "path": "/i18n",
+          "name": "Internationalisation"
+        },
+        {
+          "path": "/custom-theme",
+          "name": "Thème"
+        },
+        {
+          "path": "/transition",
+          "name": "Transitions"
+        }
+      ]
+    },
+    {
+      "name": "Composants",
+      "groups": [
+        {
+          "groupName": "Basiques",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container"
+            },
+            {
+              "path": "/color",
+              "title": "Color"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography"
+            },
+            {
+              "path": "/border",
+              "title": "Border"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon"
+            },
+            {
+              "path": "/button",
+              "title": "Button"
+            },
+            {
+              "path": "/link",
+              "title": "Link"
+            }
+          ]
+        },
+        {
+          "groupName": "Formulaire",
+          "list": [
+            {
+              "path": "/radio",
+              "title": "Radio"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox"
+            },
+            {
+              "path": "/input",
+              "title": "Input"
+            },
+            {
+              "path": "/input-number",
+              "title": "InputNumber"
+            },
+            {
+              "path": "/select",
+              "title": "Select"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader"
+            },
+            {
+              "path": "/switch",
+              "title": "Switch"
+            },
+            {
+              "path": "/slider",
+              "title": "Slider"
+            },
+            {
+              "path": "/time-picker",
+              "title": "TimePicker"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker"
+            },
+            {
+              "path": "/datetime-picker",
+              "title": "DateTimePicker"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload"
+            },
+            {
+              "path": "/rate",
+              "title": "Rate"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer"
+            },
+            {
+              "path": "/form",
+              "title": "Form"
+            }
+          ]
+        },
+        {
+          "groupName": "Données",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table"
+            },
+            {
+              "path": "/tag",
+              "title": "Tag"
+            },
+            {
+              "path": "/progress",
+              "title": "Progress"
+            },
+            {
+              "path": "/tree",
+              "title": "Tree"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge"
+            }
+          ]
+        },
+        {
+          "groupName": "Notifier",
+          "list": [
+            {
+              "path": "/alert",
+              "title": "Alert"
+            },
+            {
+              "path": "/loading",
+              "title": "Loading"
+            },
+            {
+              "path": "/message",
+              "title": "Message"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification"
+            }
+          ]
+        },
+        {
+          "groupName": "Navigation",
+          "list": [
+            {
+              "path": "/menu",
+              "title": "NavMenu"
+            },
+            {
+              "path": "/tabs",
+              "title": "Tabs"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb"
+            },
+            {
+              "path": "/page-header",
+              "title": "PageHeader"
+            },
+            {
+              "path": "/dropdown",
+              "title": "Dropdown"
+            },
+            {
+              "path": "/steps",
+              "title": "Steps"
+            }
+          ]
+        },
+        {
+          "groupName": "Autres",
+          "list": [
+            {
+              "path": "/dialog",
+              "title": "Dialog"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
+              "path": "/card",
+              "title": "Card"
+            },
+            {
+              "path": "/carousel",
+              "title": "Carousel"
+            },
+            {
+              "path": "/collapse",
+              "title": "Collapse"
+            },
+            {
+              "path": "/timeline",
+              "title": "Timeline"
+            },
+            {
+              "path": "/divider",
+              "title": "Divider"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar"
+            },
+            {
+              "path": "/image",
+              "title": "Image"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop"
+            },
+            {
+              "path": "/infiniteScroll",
+              "title": "InfiniteScroll"
+            },
+            {
+              "path": "/avatar",
+              "title": "Avatar"
+            },
+            {
+              "path": "/drawer",
+              "title": "Drawer"
             }
           ]
         }

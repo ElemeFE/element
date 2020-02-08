@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, createTest, destroyVM } from '../util';
+import { createVue, triggerEvent, createTest, destroyVM, wait } from '../util';
 import Popover from 'packages/popover';
 
 describe('Popover', () => {
@@ -162,7 +162,8 @@ describe('Popover', () => {
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
       vm.$nextTick(_ => {
-        expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
+        const popperElm = compo.popperElm;
+        expect(getComputedStyle(popperElm).display).to.not.equal('none');
         done();
       });
     });
@@ -194,7 +195,8 @@ describe('Popover', () => {
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
       vm.$nextTick(_ => {
-        expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
+        const popperElm = compo.popperElm;
+        expect(getComputedStyle(popperElm).display).to.not.equal('none');
         done();
       });
     });
@@ -205,56 +207,95 @@ describe('Popover', () => {
     });
   });
 
-  describe('event', (done) => {
-    const createVM = (trigger) => {
-      return createVue({
-        template: `
-          <div>
-            <el-popover
-              ref="popover"
-              trigger="${trigger}"
-              @show="handleShow"
-              @hide="handleHide"
-              content="content">
-              <button slot="reference">trigger ${trigger}</button>
-            </el-popover>
-          </div>
-        `,
+  it('show/hide events', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-popover
+            ref="popover"
+            trigger="click"
+            @show="handleShow"
+            @hide="handleHide"
+            content="content">
+            <button slot="reference">trigger</button>
+          </el-popover>
+        </div>
+      `,
 
-        methods: {
-          handleShow() {
-            this.trigger = true;
-          },
-          handleHide() {
-            this.trigger = false;
-          }
+      methods: {
+        handleShow() {
+          this.trigger = true;
         },
-
-        data() {
-          return {
-            trigger: false
-          };
+        handleHide() {
+          this.trigger = false;
         }
-      }, true);
-    };
+      },
 
-    it('show/hide', () => {
-      vm = createVM('click');
-      const compo = vm.$refs.popover;
+      data() {
+        return {
+          trigger: false
+        };
+      }
+    }, true);
 
-      vm.$el.querySelector('button').click();
-      expect(compo.showPopper).to.true;
-      expect(vm.trigger).to.false;
+    vm.$el.querySelector('button').click();
+    setTimeout(_ => {
+      expect(vm.trigger).to.true;
       document.body.click();
-      expect(compo.showPopper).to.false;
       setTimeout(_ => {
-        expect(vm.trigger).to.true;
-        document.body.click();
-        setTimeout(_ => {
-          expect(vm.trigger).to.false;
-        }, 50);
+        expect(vm.trigger).to.false;
         done();
       }, 50);
+    }, 50);
+  });
+
+  describe('open/close delays', () => {
+    it('100ms open / instant close', async() => {
+      vm = createVue(`
+        <div>
+          <el-popover
+            ref="popover"
+            content="content"
+            trigger="hover"
+            :open-delay="100"
+            :close-delay="0">
+            <button slot="reference">reference</button>
+          </el-popover>
+        </div>
+      `, true);
+      const compo = vm.$refs.popover;
+      const button = vm.$el.querySelector('button');
+
+      triggerEvent(button, 'mouseenter');
+      expect(compo.showPopper).to.false;
+      await wait(150);
+      expect(compo.showPopper).to.true;
+      triggerEvent(button, 'mouseleave');
+      expect(compo.showPopper).to.false;
+    });
+
+    it('instant open / 100ms close', async() => {
+      vm = createVue(`
+        <div>
+          <el-popover
+            ref="popover"
+            content="content"
+            trigger="hover"
+            :open-delay="0"
+            :close-delay="100">
+            <button slot="reference">reference</button>
+          </el-popover>
+        </div>
+      `, true);
+      const compo = vm.$refs.popover;
+      const button = vm.$el.querySelector('button');
+
+      triggerEvent(button, 'mouseenter');
+      expect(compo.showPopper).to.true;
+      triggerEvent(button, 'mouseleave');
+      expect(compo.showPopper).to.true;
+      await wait(150);
+      expect(compo.showPopper).to.false;
     });
   });
 

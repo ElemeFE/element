@@ -28,8 +28,8 @@ const CONTEXT_STYLE = [
   'box-sizing'
 ];
 
-function calculateNodeStyling(node) {
-  const style = window.getComputedStyle(node);
+function calculateNodeStyling(targetElement) {
+  const style = window.getComputedStyle(targetElement);
 
   const boxSizing = style.getPropertyValue('box-sizing');
 
@@ -51,8 +51,8 @@ function calculateNodeStyling(node) {
 }
 
 export default function calcTextareaHeight(
-  targetNode,
-  minRows = null,
+  targetElement,
+  minRows = 1,
   maxRows = null
 ) {
   if (!hiddenTextarea) {
@@ -65,12 +65,13 @@ export default function calcTextareaHeight(
     borderSize,
     boxSizing,
     contextStyle
-  } = calculateNodeStyling(targetNode);
+  } = calculateNodeStyling(targetElement);
 
   hiddenTextarea.setAttribute('style', `${contextStyle};${HIDDEN_STYLE}`);
-  hiddenTextarea.value = targetNode.value || targetNode.placeholder || '';
+  hiddenTextarea.value = targetElement.value || targetElement.placeholder || '';
 
   let height = hiddenTextarea.scrollHeight;
+  const result = {};
 
   if (boxSizing === 'border-box') {
     height = height + borderSize;
@@ -87,6 +88,7 @@ export default function calcTextareaHeight(
       minHeight = minHeight + paddingSize + borderSize;
     }
     height = Math.max(minHeight, height);
+    result.minHeight = `${ minHeight }px`;
   }
   if (maxRows !== null) {
     let maxHeight = singleRowHeight * maxRows;
@@ -95,6 +97,8 @@ export default function calcTextareaHeight(
     }
     height = Math.min(maxHeight, height);
   }
-
-  return { height: height + 'px'};
+  result.height = `${ height }px`;
+  hiddenTextarea.parentNode && hiddenTextarea.parentNode.removeChild(hiddenTextarea);
+  hiddenTextarea = null;
+  return result;
 };

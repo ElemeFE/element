@@ -35,7 +35,7 @@ You can use Element's built-in transitions directly. Before that, please read th
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #20A0FF;
+    background-color: #409EFF;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -84,7 +84,7 @@ You can use Element's built-in transitions directly. Before that, please read th
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #20A0FF;
+    background-color: #409EFF;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -131,7 +131,7 @@ For collapse effect, use the `el-collapse-transition` component.
     width: 200px;
     height: 100px;
     border-radius: 4px;
-    background-color: #20A0FF;
+    background-color: #409EFF;
     text-align: center;
     color: #fff;
     padding: 40px 20px;
@@ -146,35 +146,10 @@ For collapse effect, use the `el-collapse-transition` component.
 
 ```js
 // fade/zoom
-import 'element-ui/lib/theme-defaut/base.css';
+import 'element-ui/lib/theme-chalk/base.css';
 // collapse
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 import Vue from 'vue'
 
 Vue.component(CollapseTransition.name, CollapseTransition)
 ```
-
-<style>
-  .transition-box {
-    margin-bottom: 10px;
-    width: 200px;
-    height: 100px;
-    border-radius: 4px;
-    background-color: #20A0FF;
-    text-align: center;
-    color: #fff;
-    padding: 40px 20px;
-    margin-right: 20px;
-    box-sizing: border-box;
-  }
-</style>
-
-<script>
-  module.exports = {
-    data: () => ({
-      show: true,
-      show2: true,
-      show3: true
-    })
-  }
-</script>

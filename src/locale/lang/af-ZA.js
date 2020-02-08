@@ -16,6 +16,10 @@ export default {
       startTime: 'Begintyd',
       endDate: 'Einddatum',
       endTime: 'Eindtyd',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'Jaar',
       month1: 'Jan',
       month2: 'Feb',
@@ -63,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Geen toepaslike data',
       loading: 'Laai',
-      placeholder: 'Kies'
+      placeholder: 'Kies',
+      noData: 'Geen data'
     },
     pagination: {
       goto: 'Gaan na',
@@ -78,6 +83,7 @@ export default {
       error: 'Ongeldige invoer'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Verwyder',
       preview: 'Voorskou',
       continue: 'Gaan voort'
@@ -99,6 +105,16 @@ export default {
       filterPlaceholder: 'Voer sleutelwoord in',
       noCheckedFormat: '{total} items',
       hasCheckedFormat: '{checked}/{total} gekies'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

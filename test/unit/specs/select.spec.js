@@ -1,9 +1,9 @@
-import { createTest, createVue, triggerEvent, destroyVM } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -34,17 +34,20 @@ describe('Select', () => {
       template: `
         <div>
           <el-select
+            ref="select"
             v-model="value"
             :multiple="multiple"
             :multiple-limit="multipleLimit"
             :popper-class="popperClass"
             :clearable="clearable"
             :filterable="filterable"
+            :collapse-tags="collapseTags"
             :allow-create="allowCreate"
             :filterMethod="filterMethod"
             :remote="remote"
             :loading="loading"
-            :remoteMethod="remoteMethod">
+            :remoteMethod="remoteMethod"
+            :automatic-dropdown="automaticDropdown">
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -63,8 +66,10 @@ describe('Select', () => {
           multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
+          collapseTags: configs.collapseTags,
           allowCreate: configs.allowCreate,
           popperClass: configs.popperClass,
+          automaticDropdown: configs.automaticDropdown,
           loading: false,
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
@@ -140,7 +145,6 @@ describe('Select', () => {
   });
 
   it('single select', done => {
-    sinon.stub(window.console, 'log');
     vm = createVue({
       template: `
         <div>
@@ -174,13 +178,14 @@ describe('Select', () => {
             value: '选项5',
             label: '北京烤鸭'
           }],
-          value: ''
+          value: '',
+          count: 0
         };
       },
 
       methods: {
         handleChange() {
-          console.log('changed');
+          this.count++;
         }
       }
     }, true);
@@ -190,12 +195,12 @@ describe('Select', () => {
     options[2].click();
     setTimeout(() => {
       expect(vm.value).to.equal('选项3');
-      expect(window.console.log.callCount).to.equal(1);
+      expect(vm.count).to.equal(1);
+      triggerEvent(options[2], 'mouseenter');
       options[4].click();
       setTimeout(() => {
         expect(vm.value).to.equal('选项5');
-        expect(window.console.log.callCount).to.equal(2);
-        window.console.log.restore();
+        expect(vm.count).to.equal(2);
         done();
       }, 100);
     }, 100);
@@ -280,9 +285,9 @@ describe('Select', () => {
     vm.value = '选项1';
     select.inputHovering = true;
     setTimeout(() => {
-      const icon = vm.$el.querySelector('.el-input__icon');
-      expect(icon.classList.contains('el-icon-circle-close')).to.true;
-      icon.click();
+      const iconClear = vm.$el.querySelector('.el-input__icon.el-icon-circle-close');
+      expect(iconClear).to.exist;
+      iconClear.click();
       expect(vm.value).to.equal('');
       done();
     }, 100);
@@ -324,6 +329,32 @@ describe('Select', () => {
       expect(vm.$el.querySelector('.el-select-dropdown__item').classList.contains('selected'));
       done();
     }, 100);
+  });
+
+  it('prefixed icon', () => {
+    vm = createTest({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [],
+          value: ''
+        };
+      }
+    });
+    expect(vm.$el.querySelector('.el-input__icon').classList.contains('el-icon-search')).to.be.true;
   });
 
   it('custom el-option template', () => {
@@ -437,7 +468,7 @@ describe('Select', () => {
     };
     vm = getSelectVm({ filterable: true, filterMethod });
     const select = vm.$children[0];
-    select.$el.querySelector('input').focus();
+    select.$el.click();
     setTimeout(() => {
       select.selectedLabel = '面';
       select.onInputChange();
@@ -460,7 +491,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item"
-              :key="item.value"
+              :key="item"
               :value="item"
             />
           </el-select>
@@ -471,32 +502,19 @@ describe('Select', () => {
           options: ['1', '2', '3', '4', '5'],
           value: ''
         };
-      },
-      methods: {
-        filterMethod(query) {
-          // simulate async filterMethod / remoteMethod
-          setTimeout(() => {
-            this.options.filter(option => option.label.indexOf(query) !== -1);
-          }, 5);
-        }
       }
     }, true);
 
     const select = vm.$children[0];
     setTimeout(() => {
-      select.$el.querySelector('input').focus();
+      select.$el.click();
       select.query = '3';
-      select.selectedLabel = '3';
+      select.handleQueryChange('3');
+      select.selectOption();
       setTimeout(() => {
-        const enterKey = document.createEvent('Events');
-        enterKey.initEvent('keydown', true, true);
-        enterKey.keyCode = 13;
-        select.$el.querySelector('input').dispatchEvent(enterKey);
-        setTimeout(() => {
-          expect(select.value).to.equal('3');
-          done();
-        }, 10);
-      }, 10);  // wait for async filterMethod
+        expect(select.value).to.equal('3');
+        done();
+      }, 10);
     }, 10);
   });
 
@@ -585,20 +603,22 @@ describe('Select', () => {
         }
       }
     }, true);
-    const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
     expect(vm.value.length).to.equal(2);
-    tagCloseIcons[1].click();
     setTimeout(() => {
-      expect(vm.value.length).to.equal(1);
-      expect(window.console.log.callCount).to.equal(1);
-      tagCloseIcons[0].click();
+      const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+      tagCloseIcons[1].click();
       setTimeout(() => {
-        expect(vm.value.length).to.equal(0);
-        expect(window.console.log.callCount).to.equal(2);
-        window.console.log.restore();
-        done();
-      }, 100);
-    }, 100);
+        expect(vm.value.length).to.equal(1);
+        expect(window.console.log.callCount).to.equal(1);
+        tagCloseIcons[0].click();
+        setTimeout(() => {
+          expect(vm.value.length).to.equal(0);
+          expect(window.console.log.callCount).to.equal(2);
+          window.console.log.restore();
+          done();
+        }, 50);
+      }, 50);
+    }, 50);
   });
 
   it('multiple limit', done => {
@@ -634,11 +654,11 @@ describe('Select', () => {
       remoteMethod
     });
     const select = vm.$children[0];
+    select.handleQueryChange('');
     vm.$nextTick(() => {
-      select.query = '面';
+      select.handleQueryChange('面');
       setTimeout(() => {
         expect(select.filteredOptionsCount).to.equal(1);
-        select.query = '';
         select.options[0].$el.click();
         vm.$nextTick(() => {
           expect(vm.value[0]).to.equal('选项4');
@@ -651,6 +671,240 @@ describe('Select', () => {
           });
         });
       }, 250);
+    });
+  });
+
+  it('event:focus & blur', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.select.$on('focus', spyFocus);
+    vm.$refs.select.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    setTimeout(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    }, 250);
+  });
+
+  it('should return focus to input inside select after option select', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" ref="select">
+            <el-option label="1" :value="1" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    const spyInputFocus = sinon.spy();
+    const spySelectFocus = sinon.spy();
+
+    vm.$refs.select.$on('focus', spySelectFocus);
+    vm.$refs.select.$refs.reference.$on('focus', spyInputFocus);
+
+    const option = vm.$el.querySelectorAll('.el-select-dropdown__item')[0];
+    triggerEvent(option, 'mouseenter');
+    option.click();
+
+    vm.$nextTick(_ => {
+      expect(spyInputFocus.calledOnce).to.be.true;
+      expect(spySelectFocus.calledOnce).not.to.be.true;
+      done();
+    });
+  });
+
+  it('should not open popper when automatic-dropdown not set', done => {
+    vm = getSelectVm();
+
+    vm.$refs.select.$refs.reference.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(vm.$refs.select.visible).to.be.false;
+      done();
+    });
+  });
+
+  it('should open popper when automatic-dropdown is set', done => {
+    vm = getSelectVm({ automaticDropdown: true });
+
+    vm.$refs.select.$refs.reference.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(vm.$refs.select.visible).to.be.true;
+      done();
+    });
+  });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+    const spy = sinon.spy();
+
+    vm.$refs.select.$on('focus', spy);
+    vm.$refs.select.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('only emit change on user input', done => {
+    let callCount = 0;
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" @change="change" ref="select">
+            <el-option label="1" :value="1" />
+            <el-option label="2" :value="2" />
+            <el-option label="3" :value="3" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 1,
+          change: () => ++callCount
+        };
+      }
+    });
+
+    vm.value = 2;
+    setTimeout(() => {
+      expect(callCount).to.equal(0);
+      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      triggerEvent(options[2], 'mouseenter');
+      options[2].click();
+      setTimeout(() => {
+        expect(callCount).to.equal(1);
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  it('render slot `empty`', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <div class="empty-slot" slot="empty">EmptySlot</div>
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 1
+        };
+      }
+    });
+
+    expect(vm.$el.querySelector('.empty-slot').innerText).to.be.equal('EmptySlot');
+    done();
+  });
+
+  it('should set placeholder to label of selected option when filterable is true and multiple is false', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select ref="select" v-model="value" filterable>
+            <el-option label="test" value="test" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 'test'
+        };
+      }
+    });
+    vm.$refs.select.$el.click();
+    await waitImmediate();
+    expect(vm.$refs.select.visible).to.be.equal(true);
+    expect(vm.$el.querySelector('.el-input__inner').placeholder).to.be.equal('test');
+    expect(vm.value).to.be.equal('test');
+  });
+
+  it('default value is null or undefined', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.value"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }],
+          value: undefined
+        };
+      }
+    }, true);
+
+    vm.value = null;
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('');
+    vm.value = '选项1';
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-input__inner').value).to.equal('黄金糕');
+  });
+
+  describe('resetInputHeight', () => {
+    const getSelectComponentVm = (configs) => {
+      vm = getSelectVm(configs || {});
+      return vm.$refs.select;
+    };
+
+    it('should reset height if collapse-tags option is disabled', () => {
+      const select = getSelectComponentVm();
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
+    });
+
+    it('should not reset height if collapse-tags option is enabled', () => {
+      const select = getSelectComponentVm({ collapseTags: true });
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(0);
+    });
+
+    it('should reset height if both collapse-tags and filterable are enabled', () => {
+      const select = getSelectComponentVm({ collapseTags: true, filterable: true });
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
     });
   });
 });

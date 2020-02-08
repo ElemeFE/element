@@ -16,6 +16,10 @@ export default {
       startTime: '開始時間',
       endDate: '結束日期',
       endTime: '結束時間',
+      prevYear: '前一年',
+      nextYear: '後一年',
+      prevMonth: '上個月',
+      nextMonth: '下個月',
       year: '年',
       month1: '1 月',
       month2: '2 月',
@@ -63,7 +67,8 @@ export default {
     cascader: {
       noMatch: '無匹配資料',
       loading: '加載中',
-      placeholder: '請選擇'
+      placeholder: '請選擇',
+      noData: '無資料'
     },
     pagination: {
       goto: '前往',
@@ -78,6 +83,7 @@ export default {
       error: '輸入的資料不符規定!'
     },
     upload: {
+      deleteTip: '按 delete 鍵可刪除',
       delete: '刪除',
       preview: '查看圖片',
       continue: '繼續上傳'
@@ -99,6 +105,16 @@ export default {
       filterPlaceholder: 'Enter keyword', // to be translated
       noCheckedFormat: '{total} items', // to be translated
       hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    },
+    image: {
+      error: '加載失敗'
+    },
+    pageHeader: {
+      title: '返回'
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

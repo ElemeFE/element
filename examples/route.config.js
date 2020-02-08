@@ -1,5 +1,5 @@
-import navConfig from './nav.config.json';
-import langs from './i18n/route.json';
+import navConfig from './nav.config';
+import langs from './i18n/route';
 
 const LOAD_MAP = {
   'zh-CN': name => {
@@ -11,6 +11,16 @@ const LOAD_MAP = {
     return r => require.ensure([], () =>
       r(require(`./pages/en-US/${name}.vue`)),
     'en-US');
+  },
+  'es': name => {
+    return r => require.ensure([], () =>
+      r(require(`./pages/es/${name}.vue`)),
+    'es');
+  },
+  'fr-FR': name => {
+    return r => require.ensure([], () =>
+      r(require(`./pages/fr-FR/${name}.vue`)),
+    'fr-FR');
   }
 };
 
@@ -28,6 +38,16 @@ const LOAD_DOCS_MAP = {
     return r => require.ensure([], () =>
       r(require(`./docs/en-US${path}.md`)),
     'en-US');
+  },
+  'es': path => {
+    return r => require.ensure([], () =>
+      r(require(`./docs/es${path}.md`)),
+    'es');
+  },
+  'fr-FR': path => {
+    return r => require.ensure([], () =>
+      r(require(`./docs/fr-FR${path}.md`)),
+    'fr-FR');
   }
 };
 
@@ -73,7 +93,7 @@ const registerRoute = (navConfig) => {
         description: page.description,
         lang
       },
-      name: 'component-' + (page.title || page.name),
+      name: 'component-' + lang + (page.title || page.name),
       component: component.default || component
     };
 
@@ -103,6 +123,24 @@ const generateMiscRoutes = function(lang) {
     }]
   };
 
+  let themeRoute = {
+    path: `/${ lang }/theme`,
+    component: load(lang, 'theme-nav'),
+    children: [
+      {
+        path: '/', // 主题管理
+        name: 'theme' + lang,
+        meta: { lang },
+        component: load(lang, 'theme')
+      },
+      {
+        path: 'preview', // 主题预览编辑
+        name: 'theme-preview-' + lang,
+        meta: { lang },
+        component: load(lang, 'theme-preview')
+      }]
+  };
+
   let resourceRoute = {
     path: `/${ lang }/resource`, // 资源
     meta: { lang },
@@ -117,7 +155,7 @@ const generateMiscRoutes = function(lang) {
     component: load(lang, 'index')
   };
 
-  return [guideRoute, resourceRoute, indexRoute];
+  return [guideRoute, resourceRoute, themeRoute, indexRoute];
 };
 
 langs.forEach(lang => {
@@ -134,6 +172,10 @@ let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.
 let defaultPath = '/en-US';
 if (userLanguage.indexOf('zh-') !== -1) {
   defaultPath = '/zh-CN';
+} else if (userLanguage.indexOf('es') !== -1) {
+  defaultPath = '/es';
+} else if (userLanguage.indexOf('fr') !== -1) {
+  defaultPath = '/fr-FR';
 }
 
 route = route.concat([{

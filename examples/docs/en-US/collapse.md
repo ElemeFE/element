@@ -1,29 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        activeNames: ['1'],
-        activeName: '1'
-      };
-    },
-    methods: {
-      handleChange(val) {
-        console.log(val);
-      }
-    }
-  }
-</script>
-
-<style>
-  .demo-collapse {
-    .el-collapse-item__header {
-      .header-icon {
-        margin-left: 5px;
-      }
-    }
-  }
-</style>
-
 ## Collapse
 
 Use Collapse to store contents.
@@ -59,6 +33,11 @@ You can expand multiple panels
       return {
         activeNames: ['1']
       };
+    },
+    methods: {
+      handleChange(val) {
+        console.log(val);
+      }
     }
   }
 </script>
@@ -111,7 +90,7 @@ Besides using the `title` attribute, you can customize panel title with named sl
 <el-collapse accordion>
   <el-collapse-item name="1">
     <template slot="title">
-      Consistency<i class="header-icon el-icon-information"></i>
+      Consistency<i class="header-icon el-icon-info"></i>
     </template>
     <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;</div>
     <div>Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
@@ -136,16 +115,17 @@ Besides using the `title` attribute, you can customize panel title with named sl
 ### Collapse Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| value / v-model | currently active panel | string (accordion mode) / array (non-accordion mode) | — | — |
 | accordion | whether to activate accordion mode | boolean | — | false |
-| value | currently active panel | string (accordion mode)/array (non-accordion mode) | — | — |
 
 ### Collapse Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
-| change | triggers when active panels change | activeNames: array (non-accordion mode)/string (accordion mode) |
+| change | triggers when active panels change | (activeNames: array (non-accordion mode) / string (accordion mode)) |
 
 ### Collapse Item Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| name | unique identification of the panel | string/number | — | — |
-| title | title of the panel | string | — | — |
+| name      | unique identification of the panel | string/number | — | — |
+| title     | title of the panel                 | string        | — | — |
+| disabled  | disable the collapse item          | boolean       | — | — |

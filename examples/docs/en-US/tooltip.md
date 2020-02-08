@@ -1,34 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        disabled: false
-      };
-    }
-  };
-</script>
-
-<style>
-  .demo-tooltip.demo-en-US {
-    &:first-of-type .source {
-      .el-button {
-        width: 110px;
-      }
-    }
-    .box {
-      .left {
-        float: left;
-        width: 110px;
-      }
-
-      .right {
-        float: right;
-        width: 110px;
-      }
-    }
-  }
-</style>
-
 ## Tooltip
 
 Display prompt information for mouse hover.
@@ -174,6 +143,16 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
   </el-tooltip>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
+
 <style>
   .slide-fade-enter-active {
     transition: all .3s ease;
@@ -193,7 +172,7 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 :::tip
 The `router-link` component is not supported in tooltip, please use `vm.$router.push`.
 
-Disabled form elements are not supported in tooltip, see more information at [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter), please wrap disabled form elements.
+Disabled form elements are not supported for Tooltip, more information can be found at [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter). You need to wrap the disabled form element with a container element for Tooltip to work.
 :::
 
 
@@ -203,7 +182,7 @@ Disabled form elements are not supported in tooltip, see more information at [MD
 |  effect   |  Tooltip theme  | string   | dark/light  | dark  |
 |  content  | display content, can be overridden by `slot#content` | String   | — | — |
 |  placement | position of Tooltip   | string    |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  value(v-model) | visibility of Tooltip | boolean           | — |  false |
+|  value / v-model | visibility of Tooltip | boolean           | — |  false |
 |  disabled       |  whether Tooltip is disabled  | boolean    | — |  false |
 |  offset        |  offset of the Tooltip   | number    | — |  0 |
 |  transition     |  animation name | string             | — | el-fade-in-linear |
@@ -213,3 +192,5 @@ Disabled form elements are not supported in tooltip, see more information at [MD
 | manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true` | boolean | — | false |
 |  popper-class  |  custom class name for Tooltip's popper | string | — | — |
 | enterable | whether the mouse can enter the tooltip | Boolean | — | true |
+| hide-after | timeout in milliseconds to hide tooltip | number | — | 0 |
+| tabindex   | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Tooltip | number | — | 0 |

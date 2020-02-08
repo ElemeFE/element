@@ -1,13 +1,14 @@
 import Vue from 'vue';
+import Main from './main.vue';
 import { PopupManager } from 'element-ui/src/utils/popup';
 import { isVNode } from 'element-ui/src/utils/vdom';
-let MessageConstructor = Vue.extend(require('./main.vue'));
+let MessageConstructor = Vue.extend(Main);
 
 let instance;
 let instances = [];
 let seed = 1;
 
-var Message = function(options) {
+const Message = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
   if (typeof options === 'string') {
@@ -29,13 +30,17 @@ var Message = function(options) {
     instance.$slots.default = [instance.message];
     instance.message = null;
   }
-  instance.vm = instance.$mount();
-  document.body.appendChild(instance.vm.$el);
-  instance.vm.visible = true;
-  instance.dom = instance.vm.$el;
-  instance.dom.style.zIndex = PopupManager.nextZIndex();
+  instance.$mount();
+  document.body.appendChild(instance.$el);
+  let verticalOffset = options.offset || 20;
+  instances.forEach(item => {
+    verticalOffset += item.$el.offsetHeight + 16;
+  });
+  instance.verticalOffset = verticalOffset;
+  instance.visible = true;
+  instance.$el.style.zIndex = PopupManager.nextZIndex();
   instances.push(instance);
-  return instance.vm;
+  return instance;
 };
 
 ['success', 'warning', 'info', 'error'].forEach(type => {
@@ -51,14 +56,25 @@ var Message = function(options) {
 });
 
 Message.close = function(id, userOnClose) {
-  for (let i = 0, len = instances.length; i < len; i++) {
+  let len = instances.length;
+  let index = -1;
+  let removedHeight;
+  for (let i = 0; i < len; i++) {
     if (id === instances[i].id) {
+      removedHeight = instances[i].$el.offsetHeight;
+      index = i;
       if (typeof userOnClose === 'function') {
         userOnClose(instances[i]);
       }
       instances.splice(i, 1);
       break;
     }
+  }
+  if (len <= 1 || index === -1 || index > instances.length - 1) return;
+  for (let i = index; i < len - 1 ; i++) {
+    let dom = instances[i].$el;
+    dom.style['top'] =
+      parseInt(dom.style['top'], 10) - removedHeight - 16 + 'px';
   }
 };
 

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import loadingVue from './loading.vue';
-import { getStyle } from 'element-ui/src/utils/dom';
+import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
+import { PopupManager } from 'element-ui/src/utils/popup';
+import afterLeave from 'element-ui/src/utils/after-leave';
 import merge from 'element-ui/src/utils/merge';
 
 const LoadingConstructor = Vue.extend(loadingVue);
@@ -19,23 +21,20 @@ LoadingConstructor.prototype.originalPosition = '';
 LoadingConstructor.prototype.originalOverflow = '';
 
 LoadingConstructor.prototype.close = function() {
-  if (this.fullscreen && this.originalOverflow !== 'hidden') {
-    document.body.style.overflow = this.originalOverflow;
-  }
-  if (this.fullscreen || this.body) {
-    document.body.style.position = this.originalPosition;
-  } else {
-    this.target.style.position = this.originalPosition;
-  }
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
-  this.$on('after-leave', _ => {
-    this.$el &&
-    this.$el.parentNode &&
-    this.$el.parentNode.removeChild(this.$el);
+  afterLeave(this, _ => {
+    const target = this.fullscreen || this.body
+      ? document.body
+      : this.target;
+    removeClass(target, 'el-loading-parent--relative');
+    removeClass(target, 'el-loading-parent--hidden');
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
     this.$destroy();
-  });
+  }, 300);
   this.visible = false;
 };
 
@@ -44,6 +43,7 @@ const addStyle = (options, parent, instance) => {
   if (options.fullscreen) {
     instance.originalPosition = getStyle(document.body, 'position');
     instance.originalOverflow = getStyle(document.body, 'overflow');
+    maskStyle.zIndex = PopupManager.nextZIndex();
   } else if (options.body) {
     instance.originalPosition = getStyle(document.body, 'position');
     ['top', 'left'].forEach(property => {
@@ -88,10 +88,10 @@ const Loading = (options = {}) => {
 
   addStyle(options, parent, instance);
   if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed') {
-    parent.style.position = 'relative';
+    addClass(parent, 'el-loading-parent--relative');
   }
   if (options.fullscreen && options.lock) {
-    parent.style.overflow = 'hidden';
+    addClass(parent, 'el-loading-parent--hidden');
   }
   parent.appendChild(instance.$el);
   Vue.nextTick(() => {

@@ -1,0 +1,23 @@
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
+}
+
+.demo-table .name-wrapper {
+  display: inline-block;
+}
+
+.demo-table .demo-table-expand {
+  label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+}

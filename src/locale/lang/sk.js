@@ -16,6 +16,10 @@ export default {
       startTime: 'Čas začiatku',
       endDate: 'Dátum konca',
       endTime: 'Čas konca',
+      prevYear: 'Predošlý rok',
+      nextYear: 'Ďalší rok',
+      prevMonth: 'Predošlý mesiac',
+      nextMonth: 'Ďalší mesiac',
       day: 'Deň',
       week: 'Týždeň',
       month: 'Mesiac',
@@ -65,7 +69,8 @@ export default {
     cascader: {
       noMatch: 'Žiadna zhoda',
       loading: 'Načítavanie',
-      placeholder: 'Vybrať'
+      placeholder: 'Vybrať',
+      noData: 'Žiadne dáta'
     },
     pagination: {
       goto: 'Choď na',
@@ -80,6 +85,7 @@ export default {
       error: 'Neplatný vstup'
     },
     upload: {
+      deleteTip: 'pre odstránenie stisni klávesu Delete',
       delete: 'Vymazať',
       preview: 'Prehliadať',
       continue: 'Pokračovať'
@@ -101,6 +107,16 @@ export default {
       filterPlaceholder: 'Filtrovať podľa',
       noCheckedFormat: '{total} položiek',
       hasCheckedFormat: '{checked}/{total} označených'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

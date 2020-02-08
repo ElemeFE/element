@@ -1,21 +1,52 @@
 <template>
   <transition name="msgbox-fade">
-    <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
-      <div class="el-message-box" :class="customClass">
-        <div class="el-message-box__header" v-if="title !== undefined">
-          <div class="el-message-box__title">{{ title }}</div>
-          <button type="button" class="el-message-box__headerbtn" aria-label="Close" 
-                  v-if="showClose" @click="handleAction('cancel')">
+    <div
+      class="el-message-box__wrapper"
+      tabindex="-1"
+      v-show="visible"
+      @click.self="handleWrapperClick"
+      role="dialog"
+      aria-modal="true"
+      :aria-label="title || 'dialog'">
+      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
+        <div class="el-message-box__header" v-if="title !== null">
+          <div class="el-message-box__title">
+            <div
+              :class="['el-message-box__status', icon]"
+              v-if="icon && center">
+            </div>
+            <span>{{ title }}</span>
+          </div>
+          <button
+            type="button"
+            class="el-message-box__headerbtn"
+            aria-label="Close"
+            v-if="showClose"
+            @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
+            @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content" v-if="message !== ''">
-          <div class="el-message-box__status" :class="[ typeClass ]"></div>
-          <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }">
-            <slot><p>{{ message }}</p></slot>
+        <div class="el-message-box__content">
+          <div class="el-message-box__container">
+            <div
+              :class="['el-message-box__status', icon]"
+              v-if="icon && !center && message !== ''">
+            </div>
+            <div class="el-message-box__message" v-if="message !== ''">
+              <slot>
+                <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+                <p v-else v-html="message"></p>
+              </slot>
+            </div>
           </div>
           <div class="el-message-box__input" v-show="showInput">
-            <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
+            <el-input
+              v-model="inputValue"
+              :type="inputType"
+              @keydown.enter.native="handleInputEnter"
+              :placeholder="inputPlaceholder"
+              ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
         </div>
@@ -23,8 +54,11 @@
           <el-button
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
-            v-show="showCancelButton"
-            @click.native="handleAction('cancel')">
+            v-if="showCancelButton"
+            :round="roundButton"
+            size="small"
+            @click.native="handleAction('cancel')"
+            @keydown.enter="handleAction('cancel')">
             {{ cancelButtonText || t('el.messagebox.cancel') }}
           </el-button>
           <el-button
@@ -32,7 +66,10 @@
             ref="confirm"
             :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
-            @click.native="handleAction('confirm')">
+            :round="roundButton"
+            size="small"
+            @click.native="handleAction('confirm')"
+            @keydown.enter="handleAction('confirm')">
             {{ confirmButtonText || t('el.messagebox.confirm') }}
           </el-button>
         </div>
@@ -48,12 +85,14 @@
   import ElButton from 'element-ui/packages/button';
   import { addClass, removeClass } from 'element-ui/src/utils/dom';
   import { t } from 'element-ui/src/locale';
+  import Dialog from 'element-ui/src/utils/aria-dialog';
 
+  let messageBox;
   let typeMap = {
-    success: 'circle-check',
-    info: 'information',
+    success: 'success',
+    info: 'info',
     warning: 'warning',
-    error: 'circle-cross'
+    error: 'error'
   };
 
   export default {
@@ -75,6 +114,17 @@
       },
       closeOnPressEscape: {
         default: true
+      },
+      closeOnHashChange: {
+        default: true
+      },
+      center: {
+        default: false,
+        type: Boolean
+      },
+      roundButton: {
+        default: false,
+        type: Boolean
       }
     },
 
@@ -84,8 +134,9 @@
     },
 
     computed: {
-      typeClass() {
-        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+      icon() {
+        const { type, iconClass } = this;
+        return iconClass || (type && typeMap[type] ? `el-icon-${ typeMap[type] }` : '');
       },
 
       confirmButtonClasses() {
@@ -111,28 +162,26 @@
         this._closing = true;
 
         this.onClose && this.onClose();
-
+        messageBox.closeDialog(); // 解绑
         if (this.lockScroll) {
-          setTimeout(() => {
-            if (this.modal && this.bodyOverflow !== 'hidden') {
-              document.body.style.overflow = this.bodyOverflow;
-              document.body.style.paddingRight = this.bodyPaddingRight;
-            }
-            this.bodyOverflow = null;
-            this.bodyPaddingRight = null;
-          }, 200);
+          setTimeout(this.restoreBodyStyle, 200);
         }
         this.opened = false;
-
-        if (!this.transition) {
-          this.doAfterClose();
-        }
-        if (this.action) this.callback(this.action, this);
+        this.doAfterClose();
+        setTimeout(() => {
+          if (this.action) this.callback(this.action, this);
+        });
       },
 
       handleWrapperClick() {
         if (this.closeOnClickModal) {
-          this.handleAction('cancel');
+          this.handleAction(this.distinguishCancelAndClose ? 'close' : 'cancel');
+        }
+      },
+
+      handleInputEnter() {
+        if (this.inputType !== 'textarea') {
+          return this.handleAction('confirm');
         }
       },
 
@@ -151,29 +200,42 @@
 
       validate() {
         if (this.$type === 'prompt') {
-          var inputPattern = this.inputPattern;
+          const inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
-            addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+            addClass(this.getInputElement(), 'invalid');
             return false;
           }
-          var inputValidator = this.inputValidator;
+          const inputValidator = this.inputValidator;
           if (typeof inputValidator === 'function') {
-            var validateResult = inputValidator(this.inputValue);
+            const validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
-              addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+              addClass(this.getInputElement(), 'invalid');
               return false;
             }
             if (typeof validateResult === 'string') {
               this.editorErrorMessage = validateResult;
+              addClass(this.getInputElement(), 'invalid');
               return false;
             }
           }
         }
         this.editorErrorMessage = '';
-        removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+        removeClass(this.getInputElement(), 'invalid');
         return true;
+      },
+      getFirstFocus() {
+        const btn = this.$el.querySelector('.el-message-box__btns .el-button');
+        const title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
+        return btn || title;
+      },
+      getInputElement() {
+        const inputRefs = this.$refs.input.$refs;
+        return inputRefs.input || inputRefs.textarea;
+      },
+      handleClose() {
+        this.handleAction('close');
       }
     },
 
@@ -190,24 +252,47 @@
       },
 
       visible(val) {
-        if (val) this.uid++;
-        if (this.$type === 'alert' || this.$type === 'confirm') {
-          this.$nextTick(() => {
-            this.$refs.confirm.$el.focus();
-          });
+        if (val) {
+          this.uid++;
+          if (this.$type === 'alert' || this.$type === 'confirm') {
+            this.$nextTick(() => {
+              this.$refs.confirm.$el.focus();
+            });
+          }
+          this.focusAfterClosed = document.activeElement;
+          messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus());
         }
+
+        // prompt
         if (this.$type !== 'prompt') return;
         if (val) {
           setTimeout(() => {
             if (this.$refs.input && this.$refs.input.$el) {
-              this.$refs.input.$el.querySelector('input').focus();
+              this.getInputElement().focus();
             }
           }, 500);
         } else {
           this.editorErrorMessage = '';
-          removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+          removeClass(this.getInputElement(), 'invalid');
         }
       }
+    },
+
+    mounted() {
+      this.$nextTick(() => {
+        if (this.closeOnHashChange) {
+          window.addEventListener('hashchange', this.close);
+        }
+      });
+    },
+
+    beforeDestroy() {
+      if (this.closeOnHashChange) {
+        window.removeEventListener('hashchange', this.close);
+      }
+      setTimeout(() => {
+        messageBox.closeDialog();
+      });
     },
 
     data() {
@@ -216,10 +301,12 @@
         title: undefined,
         message: '',
         type: '',
+        iconClass: '',
         customClass: '',
         showInput: false,
         inputValue: null,
         inputPlaceholder: '',
+        inputType: 'text',
         inputPattern: null,
         inputValidator: null,
         inputErrorMessage: '',
@@ -234,7 +321,11 @@
         confirmButtonDisabled: false,
         cancelButtonClass: '',
         editorErrorMessage: null,
-        callback: null
+        callback: null,
+        dangerouslyUseHTMLString: false,
+        focusAfterClosed: null,
+        isOnComposition: false,
+        distinguishCancelAndClose: false
       };
     }
   };

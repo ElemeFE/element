@@ -8,10 +8,31 @@
         <sv-panel ref="sl" :color="color"></sv-panel>
       </div>
       <alpha-slider v-if="showAlpha" ref="alpha" :color="color"></alpha-slider>
+      <predefine v-if="predefine" :color="color" :colors="predefine"></predefine>
       <div class="el-color-dropdown__btns">
-        <span class="el-color-dropdown__value">{{ currentColor }}</span>
-        <a href="JavaScript:" class="el-color-dropdown__link-btn" @click="$emit('clear')">{{ t('el.colorpicker.clear') }}</a>
-        <button class="el-color-dropdown__btn" @click="confirmValue">{{ t('el.colorpicker.confirm') }}</button>
+        <span class="el-color-dropdown__value">
+          <el-input
+            v-model="customInput"
+            @keyup.native.enter="handleConfirm"
+            @blur="handleConfirm"
+            :validate-event="false"
+            size="mini">
+          </el-input>
+        </span>
+        <el-button
+          size="mini"
+          type="text"
+          class="el-color-dropdown__link-btn"
+          @click="$emit('clear')">
+          {{ t('el.colorpicker.clear') }}
+        </el-button>
+        <el-button
+          plain
+          size="mini"
+          class="el-color-dropdown__btn"
+          @click="confirmValue">
+          {{ t('el.colorpicker.confirm') }}
+        </el-button>
       </div>
     </div>
   </transition>
@@ -21,8 +42,11 @@
   import SvPanel from './sv-panel';
   import HueSlider from './hue-slider';
   import AlphaSlider from './alpha-slider';
+  import Predefine from './predefine';
   import Popper from 'element-ui/src/utils/vue-popper';
   import Locale from 'element-ui/src/mixins/locale';
+  import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
 
   export default {
     name: 'el-color-picker-dropdown',
@@ -32,14 +56,24 @@
     components: {
       SvPanel,
       HueSlider,
-      AlphaSlider
+      AlphaSlider,
+      ElInput,
+      ElButton,
+      Predefine
     },
 
     props: {
       color: {
         required: true
       },
-      showAlpha: Boolean
+      showAlpha: Boolean,
+      predefine: Array
+    },
+
+    data() {
+      return {
+        customInput: ''
+      };
     },
 
     computed: {
@@ -52,6 +86,10 @@
     methods: {
       confirmValue() {
         this.$emit('pick');
+      },
+
+      handleConfirm() {
+        this.color.fromString(this.customInput);
       }
     },
 
@@ -69,6 +107,13 @@
             hue && hue.update();
             alpha && alpha.update();
           });
+        }
+      },
+
+      currentColor: {
+        immediate: true,
+        handler(val) {
+          this.customInput = val;
         }
       }
     }

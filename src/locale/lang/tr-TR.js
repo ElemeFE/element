@@ -16,6 +16,10 @@ export default {
       startTime: 'Başlangıç Saati',
       endDate: 'Bitiş Tarihi',
       endTime: 'Bitiş Saati',
+      prevYear: 'Önceki Yıl',
+      nextYear: 'Sonraki Yıl',
+      prevMonth: 'Önceki Ay',
+      nextMonth: 'Sonraki Ay',
       year: '',
       month1: 'Ocak',
       month2: 'Şubat',
@@ -63,11 +67,12 @@ export default {
     cascader: {
       noMatch: 'Eşleşen veri bulunamadı',
       loading: 'Yükleniyor',
-      placeholder: 'Seç'
+      placeholder: 'Seç',
+      noData: 'Veri yok'
     },
     pagination: {
       goto: 'Git',
-      pagesize: '/page',
+      pagesize: '/sayfa',
       total: 'Toplam {total}',
       pageClassifier: ''
     },
@@ -78,6 +83,7 @@ export default {
       error: 'İllegal giriş'
     },
     upload: {
+      deleteTip: 'kaldırmak için delete tuşuna bas',
       delete: 'Sil',
       preview: 'Görüntüle',
       continue: 'Devam'
@@ -99,6 +105,16 @@ export default {
       filterPlaceholder: 'Anahtar kelimeleri gir',
       noCheckedFormat: '{total} adet',
       hasCheckedFormat: '{checked}/{total} seçildi'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

@@ -1,7 +1,10 @@
+import Vue from 'vue';
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
+import { parseHeight } from './util';
 
 class TableLayout {
   constructor(options) {
+    this.observers = [];
     this.table = null;
     this.store = null;
     this.columns = null;
@@ -16,6 +19,7 @@ class TableLayout {
     this.rightFixedWidth = null;
     this.tableHeight = null;
     this.headerHeight = 44; // Table Header Height
+    this.appendHeight = 0; // Append Slot Height
     this.footerHeight = 44; // Table Footer Height
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
@@ -38,69 +42,42 @@ class TableLayout {
 
   updateScrollY() {
     const height = this.height;
-    if (typeof height !== 'string' && typeof height !== 'number') return;
+    if (height === null) return false;
     const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
-      this.scrollY = body.offsetHeight > bodyWrapper.offsetHeight;
+      const prevScrollY = this.scrollY;
+      const scrollY = body.offsetHeight > this.bodyHeight;
+      this.scrollY = scrollY;
+      return prevScrollY !== scrollY;
     }
+    return false;
   }
 
   setHeight(value, prop = 'height') {
+    if (Vue.prototype.$isServer) return;
     const el = this.table.$el;
-    if (typeof value === 'string' && /^\d+$/.test(value)) {
-      value = Number(value);
-    }
-
+    value = parseHeight(value);
     this.height = value;
 
-    if (!el) return;
+    if (!el && (value || value === 0)) return Vue.nextTick(() => this.setHeight(value, prop));
+
     if (typeof value === 'number') {
       el.style[prop] = value + 'px';
-
-      this.updateHeight();
+      this.updateElsHeight();
     } else if (typeof value === 'string') {
-      if (value === '') {
-        el.style[prop] = '';
-      }
-      this.updateHeight();
+      el.style[prop] = value;
+      this.updateElsHeight();
     }
   }
 
   setMaxHeight(value) {
-    return this.setHeight(value, 'max-height');
+    this.setHeight(value, 'max-height');
   }
 
-  updateHeight() {
-    const height = this.tableHeight = this.table.$el.clientHeight;
-    const noData = !this.table.data || this.table.data.length === 0;
-    const { headerWrapper, footerWrapper } = this.table.$refs;
-    const footerHeight = this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0;
-    if (this.showHeader && !headerWrapper) return;
-    if (!this.showHeader) {
-      this.headerHeight = 0;
-      if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
-        this.bodyHeight = height - footerHeight + (footerWrapper ? 1 : 0);
-      }
-      this.fixedBodyHeight = this.scrollX ? height - this.gutterWidth : height;
-    } else {
-      const headerHeight = this.headerHeight = headerWrapper.offsetHeight;
-      const bodyHeight = height - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
-      if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
-        this.bodyHeight = bodyHeight;
-      }
-      this.fixedBodyHeight = this.scrollX ? bodyHeight - this.gutterWidth : bodyHeight;
-    }
-    this.viewportHeight = this.scrollX ? height - (noData ? 0 : this.gutterWidth) : height;
-  }
-
-  update() {
-    const fit = this.fit;
-    const columns = this.table.columns;
-    const bodyWidth = this.table.$el.clientWidth;
-    let bodyMinWidth = 0;
-
+  getFlattenColumns() {
     const flattenColumns = [];
+    const columns = this.table.columns;
     columns.forEach((column) => {
       if (column.isColumnGroup) {
         flattenColumns.push.apply(flattenColumns, column.columns);
@@ -109,17 +86,74 @@ class TableLayout {
       }
     });
 
+    return flattenColumns;
+  }
+
+  updateElsHeight() {
+    if (!this.table.$ready) return Vue.nextTick(() => this.updateElsHeight());
+    const { headerWrapper, appendWrapper, footerWrapper } = this.table.$refs;
+    this.appendHeight = appendWrapper ? appendWrapper.offsetHeight : 0;
+
+    if (this.showHeader && !headerWrapper) return;
+
+    // fix issue (https://github.com/ElemeFE/element/pull/16956)
+    const headerTrElm = headerWrapper ? headerWrapper.querySelector('.el-table__header tr') : null;
+    const noneHeader = this.headerDisplayNone(headerTrElm);
+
+    const headerHeight = this.headerHeight = !this.showHeader ? 0 : headerWrapper.offsetHeight;
+    if (this.showHeader && !noneHeader && headerWrapper.offsetWidth > 0 && (this.table.columns || []).length > 0 && headerHeight < 2) {
+      return Vue.nextTick(() => this.updateElsHeight());
+    }
+    const tableHeight = this.tableHeight = this.table.$el.clientHeight;
+    const footerHeight = this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0;
+    if (this.height !== null) {
+      this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
+    }
+    this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterWidth) : this.bodyHeight;
+
+    const noData = !(this.store.states.data && this.store.states.data.length);
+    this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
+
+    this.updateScrollY();
+    this.notifyObservers('scrollable');
+  }
+
+  headerDisplayNone(elm) {
+    if (!elm) return true;
+    let headerChild = elm;
+    while (headerChild.tagName !== 'DIV') {
+      if (getComputedStyle(headerChild).display === 'none') {
+        return true;
+      }
+      headerChild = headerChild.parentElement;
+    }
+    return false;
+  }
+
+  updateColumnsWidth() {
+    if (Vue.prototype.$isServer) return;
+    const fit = this.fit;
+    const bodyWidth = this.table.$el.clientWidth;
+    let bodyMinWidth = 0;
+
+    const flattenColumns = this.getFlattenColumns();
     let flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number');
+
+    flattenColumns.forEach((column) => { // Clean those columns whose width changed from flex to unflex
+      if (typeof column.width === 'number' && column.realWidth) column.realWidth = null;
+    });
 
     if (flexColumns.length > 0 && fit) {
       flattenColumns.forEach((column) => {
         bodyMinWidth += column.width || column.minWidth || 80;
       });
 
-      if (bodyMinWidth < bodyWidth - this.gutterWidth) { // DON'T HAVE SCROLL BAR
+      const scrollYWidth = this.scrollY ? this.gutterWidth : 0;
+
+      if (bodyMinWidth <= bodyWidth - scrollYWidth) { // DON'T HAVE SCROLL BAR
         this.scrollX = false;
 
-        const totalFlexWidth = bodyWidth - this.gutterWidth - bodyMinWidth;
+        const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth;
 
         if (flexColumns.length === 1) {
           flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth;
@@ -145,6 +179,7 @@ class TableLayout {
       }
 
       this.bodyWidth = Math.max(bodyMinWidth, bodyWidth);
+      this.table.resizeState.width = this.bodyWidth;
     } else {
       flattenColumns.forEach((column) => {
         if (!column.width && !column.minWidth) {
@@ -165,7 +200,7 @@ class TableLayout {
     if (fixedColumns.length > 0) {
       let fixedWidth = 0;
       fixedColumns.forEach(function(column) {
-        fixedWidth += column.realWidth;
+        fixedWidth += column.realWidth || column.width;
       });
 
       this.fixedWidth = fixedWidth;
@@ -175,11 +210,40 @@ class TableLayout {
     if (rightFixedColumns.length > 0) {
       let rightFixedWidth = 0;
       rightFixedColumns.forEach(function(column) {
-        rightFixedWidth += column.realWidth;
+        rightFixedWidth += column.realWidth || column.width;
       });
 
       this.rightFixedWidth = rightFixedWidth;
     }
+
+    this.notifyObservers('columns');
+  }
+
+  addObserver(observer) {
+    this.observers.push(observer);
+  }
+
+  removeObserver(observer) {
+    const index = this.observers.indexOf(observer);
+    if (index !== -1) {
+      this.observers.splice(index, 1);
+    }
+  }
+
+  notifyObservers(event) {
+    const observers = this.observers;
+    observers.forEach((observer) => {
+      switch (event) {
+        case 'columns':
+          observer.onColumnsChange(this);
+          break;
+        case 'scrollable':
+          observer.onScrollableChange(this);
+          break;
+        default:
+          throw new Error(`Table Layout don't have event ${event}.`);
+      }
+    });
   }
 }
 

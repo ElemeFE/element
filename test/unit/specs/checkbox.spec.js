@@ -44,6 +44,35 @@ describe('Checkbox', () => {
     let checkboxElm = vm.$el;
     expect(checkboxElm.querySelector('.is-disabled')).to.be.ok;
   });
+  it('change event', done => {
+    vm = createVue({
+      template: `
+        <el-checkbox v-model="checked" @change="onChange">
+        </el-checkbox>
+      `,
+      methods: {
+        onChange(val) {
+          this.data = val;
+        }
+      },
+      data() {
+        return {
+          data: '',
+          checked: false
+        };
+      }
+    }, true);
+    let checkboxElm = vm.$el;
+    checkboxElm.click();
+    setTimeout(_ => {
+      expect(vm.data).to.true;
+      vm.checked = false;
+      setTimeout(_ => {
+        expect(vm.data).to.true;
+        done();
+      }, 10);
+    }, 10);
+  });
   it('checkbox group', done => {
     vm = createVue({
       template: `
@@ -68,6 +97,34 @@ describe('Checkbox', () => {
     });
   });
 
+  it('checkbox group change event', done => {
+    vm = createVue({
+      template: `
+        <el-checkbox-group v-model="checkList" @change="onChange">
+          <el-checkbox label="a" ref="a"></el-checkbox>
+          <el-checkbox label="b" ref="b"></el-checkbox>
+        </el-checkbox-group>
+      `,
+      methods: {
+        onChange(val) {
+          this.data = val;
+        }
+      },
+      data() {
+        return {
+          data: '',
+          checkList: []
+        };
+      }
+    }, true);
+    vm.$refs.a.$el.click();
+    setTimeout(_ => {
+      expect(vm.data).to.deep.equal(['a']);
+      vm.checkList = ['b'];
+      done();
+    }, 10);
+  });
+
   it('checkbox group minimum and maximum', done => {
     vm = createVue({
       template: `
@@ -90,6 +147,7 @@ describe('Checkbox', () => {
       }
     }, true);
     expect(vm.checkList.length === 1).to.be.true;
+    expect(vm.$refs.a.isDisabled).to.be.true;
     vm.$refs.a.$el.click();
     vm.$nextTick(() => {
       expect(vm.checkList.indexOf('a') !== -1).to.be.true;
@@ -101,6 +159,8 @@ describe('Checkbox', () => {
         vm.$nextTick(() => {
           expect(vm.checkList.indexOf('c') !== -1).to.be.false;
           expect(vm.checkList.indexOf('d') !== -1).to.be.false;
+          expect(vm.$refs.c.isDisabled).to.be.true;
+          expect(vm.$refs.d.isDisabled).to.be.true;
           done();
         });
       });
@@ -216,6 +276,36 @@ describe('Checkbox', () => {
       expect(checkboxElm.classList.contains('is-disabled')).to.be.ok;
     });
 
+    it('change event', done => {
+      vm = createVue({
+        template: `
+        <el-checkbox-button v-model="checked" @change="onChange">
+        </el-checkbox-button>
+      `,
+        methods: {
+          onChange(val) {
+            this.data = val;
+          }
+        },
+        data() {
+          return {
+            data: '',
+            checked: false
+          };
+        }
+      }, true);
+      let checkboxElm = vm.$el;
+      checkboxElm.click();
+      setTimeout(_ => {
+        expect(vm.data).to.true;
+        vm.checked = false;
+        setTimeout(_ => {
+          expect(vm.data).to.true;
+          done();
+        }, 10);
+      }, 10);
+    });
+
     it('checkbox group', done => {
       vm = createVue({
         template: `
@@ -243,6 +333,39 @@ describe('Checkbox', () => {
           done();
         });
       });
+    });
+
+    it('checkbox-button group change event', done => {
+      vm = createVue({
+        template: `
+        <el-checkbox-group v-model="checkList" @change="onChange">
+          <el-checkbox-button label="a" ref="a"></el-checkbox-button>
+          <el-checkbox-button label="b" ref="b"></el-checkbox-button>
+          <el-checkbox-button label="c" ref="c"></el-checkbox-button>
+          <el-checkbox-button label="d" ref="d"></el-checkbox-button>
+        </el-checkbox-group>
+      `,
+        methods: {
+          onChange(val) {
+            this.data = val;
+          }
+        },
+        data() {
+          return {
+            data: '',
+            checkList: []
+          };
+        }
+      }, true);
+      vm.$refs.a.$el.click();
+      setTimeout(_ => {
+        expect(vm.data).to.deep.equal(['a']);
+        vm.checkList = ['b'];
+        setTimeout(_ => {
+          expect(vm.data).to.deep.equal(['a']);
+          done();
+        }, 10);
+      }, 10);
     });
 
     it('checkbox group props', () => {

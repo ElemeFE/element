@@ -22,7 +22,7 @@ if (componentFile.some(item => item.lang === lang)) {
   console.error(`${lang} already exists.`);
   process.exit(1);
 }
-let componentNew = Object.assign({}, componentFile.filter(item => item.lang === 'en-us')[0], { lang });
+let componentNew = Object.assign({}, componentFile.filter(item => item.lang === 'en-US')[0], { lang });
 componentFile.push(componentNew);
 fileSave(path.join(__dirname, '../../examples/i18n/component.json'))
   .write(JSON.stringify(componentFile, null, '  '), 'utf8')
@@ -30,7 +30,7 @@ fileSave(path.join(__dirname, '../../examples/i18n/component.json'))
 
 // 添加到 page.json
 const pageFile = require('../../examples/i18n/page.json');
-let pageNew = Object.assign({}, pageFile.filter(item => item.lang === 'en-us')[0], { lang });
+let pageNew = Object.assign({}, pageFile.filter(item => item.lang === 'en-US')[0], { lang });
 pageFile.push(pageNew);
 fileSave(path.join(__dirname, '../../examples/i18n/page.json'))
   .write(JSON.stringify(pageFile, null, '  '), 'utf8')
@@ -45,7 +45,7 @@ fileSave(path.join(__dirname, '../../examples/i18n/route.json'))
 
 // 添加到 nav.config.json
 const navFile = require('../../examples/nav.config.json');
-navFile[lang] = navFile['en-us'];
+navFile[lang] = navFile['en-US'];
 fileSave(path.join(__dirname, '../../examples/nav.config.json'))
   .write(JSON.stringify(navFile, null, '  '), 'utf8')
   .end('\n');

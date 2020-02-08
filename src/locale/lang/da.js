@@ -16,7 +16,11 @@ export default {
       startTime: 'Starttidspunkt',
       endDate: 'Slutdato',
       endTime: 'Sluttidspunkt',
-      year: 'År',
+      prevYear: 'Forrige år',
+      nextYear: 'Næste år',
+      prevMonth: 'Forrige måned',
+      nextMonth: 'Næste måned',
+      year: '',
       month1: 'Januar',
       month2: 'Februar',
       month3: 'Marts',
@@ -63,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Ingen matchende data',
       loading: 'Henter',
-      placeholder: 'Vælg'
+      placeholder: 'Vælg',
+      noData: 'Ingen data'
     },
     pagination: {
       goto: 'Gå til',
@@ -77,6 +82,7 @@ export default {
       error: 'Ugyldig input'
     },
     upload: {
+      deleteTip: 'tryk slet for at fjerne',
       delete: 'Slet',
       preview: 'Forhåndsvisning',
       continue: 'Fortsæt'
@@ -86,7 +92,7 @@ export default {
       confirmFilter: 'Bekræft',
       resetFilter: 'Nulstil',
       clearFilter: 'Alle',
-      sumText: 'Sum' // to be translated
+      sumText: 'Sum'
     },
     tree: {
       emptyText: 'Ingen data'
@@ -94,10 +100,20 @@ export default {
     transfer: {
       noMatch: 'Ingen matchende data',
       noData: 'Ingen data',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Indtast søgeord',
+      noCheckedFormat: '{total} emner',
+      hasCheckedFormat: '{checked}/{total} valgt'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

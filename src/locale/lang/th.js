@@ -16,6 +16,10 @@ export default {
       startTime: 'เวลาเริ่มต้น',
       endDate: 'วันที่สิ้นสุด',
       endTime: 'เวลาสิ้นสุด',
+      prevYear: 'ปีก่อนหน้า',
+      nextYear: 'ปีถัดไป',
+      prevMonth: 'เดือนก่อนหน้า',
+      nextMonth: 'เดือนถัดไป',
       year: 'ปี',
       month1: 'มกราคม',
       month2: 'กุมภาพันธ์',
@@ -63,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       loading: 'กำลังโหลด',
-      placeholder: 'เลือก'
+      placeholder: 'เลือก',
+      noData: 'ไม่พบข้อมูล'
     },
     pagination: {
       goto: 'ไปที่',
@@ -78,6 +83,7 @@ export default {
       error: 'คุณป้อนข้อมูลไม่ถูกต้อง'
     },
     upload: {
+      deleteTip: 'กดปุ่ม "ลบ" เพื่อลบออก',
       delete: 'ลบ',
       preview: 'ตัวอย่าง',
       continue: 'ทำต่อ'
@@ -87,7 +93,7 @@ export default {
       confirmFilter: 'ยืนยัน',
       resetFilter: 'รีเซ็ต',
       clearFilter: 'ทั้งหมด',
-      sumText: 'Sum' // to be translated
+      sumText: 'รวม'
     },
     tree: {
       emptyText: 'ไม่พบข้อมูล'
@@ -96,9 +102,19 @@ export default {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่พบข้อมูล',
       titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
+      filterPlaceholder: 'กรอกคีย์เวิร์ด',
       noCheckedFormat: '{total} items', // to be translated
       hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'ย้อนกลับ'
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

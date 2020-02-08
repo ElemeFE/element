@@ -8,7 +8,8 @@ export default {
   name: 'ElTimePicker',
 
   props: {
-    isRange: Boolean
+    isRange: Boolean,
+    arrowControl: Boolean
   },
 
   data() {

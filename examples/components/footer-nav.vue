@@ -17,10 +17,10 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
   .footer-nav {
-    padding: 24px 0;
-    color: #99a9bf;
+    padding: 40px 0;
+    color: #333;
     font-size: 14px;
     
     &::after {
@@ -31,7 +31,7 @@
      
     & i {
       transition: .3s;
-      color: #d9def1;
+      color: #999;
       vertical-align: baseline;
     }
   }
@@ -41,10 +41,10 @@
     transition: .3s;
     
     &:hover {
-      color: #20a0ff;
+      color: #409EFF;
      
       & i {
-        color: #20a0ff;
+        color: #409EFF;
       }
     }
   }
@@ -90,8 +90,8 @@
     methods: {
       setNav() {
         let nav = navConfig[this.lang];
-        this.nav = nav[0].children.concat(nav[1]);
-        nav[3].groups.map(group => group.list).forEach(list => {
+        this.nav = [nav[0]].concat(nav[3].children);
+        nav[4].groups.map(group => group.list).forEach(list => {
           this.nav = this.nav.concat(list);
         });
       },

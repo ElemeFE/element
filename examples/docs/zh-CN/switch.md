@@ -1,42 +1,47 @@
-<style>
-  .demo-box.demo-switch {
-    .el-switch {
-      margin: 20px 20px 20px 0;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        value1: true,
-        value2: true,
-        value3: '100',
-        value4: true
-      }
-    }
-  };
-</script>
-
 ## Switch 开关
 
 表示两种相互对立的状态间的切换，多用于触发「开/关」。
 
 ### 基本用法
 
-:::demo 绑定`v-model`到一个`Boolean`类型的变量。可以使用`on-text`属性与`off-text`属性来设置开关的文字描述，使用`on-color`属性与`off-color`属性来设置开关的背景色。
+:::demo 绑定`v-model`到一个`Boolean`类型的变量。可以使用`active-color`属性与`inactive-color`属性来设置开关的背景色。
+
+```html
+<el-switch
+  v-model="value"
+  active-color="#13ce66"
+  inactive-color="#ff4949">
+</el-switch>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: true
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 文字描述
+
+:::demo 使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。
 
 ```html
 <el-switch
   v-model="value1"
-  on-text=""
-  off-text="">
+  active-text="按月付费"
+  inactive-text="按年付费">
 </el-switch>
 <el-switch
+  style="display: block"
   v-model="value2"
-  on-color="#13ce66"
-  off-color="#ff4949">
+  active-color="#13ce66"
+  inactive-color="#ff4949"
+  active-text="按月付费"
+  inactive-text="按年付费">
 </el-switch>
 
 <script>
@@ -54,16 +59,16 @@
 
 ### 扩展的 value 类型
 
-:::demo 设置`on-value`和`off-value`属性，接受`Boolean`, `String`或`Number`类型的值。
+:::demo 设置`active-value`和`inactive-value`属性，接受`Boolean`, `String`或`Number`类型的值。
 
 ```html
-<el-tooltip :content="'Switch value: ' + value3" placement="top">
+<el-tooltip :content="'Switch value: ' + value" placement="top">
   <el-switch
-    v-model="value3"
-    on-color="#13ce66"
-    off-color="#ff4949"
-    on-value="100"
-    off-value="0">
+    v-model="value"
+    active-color="#13ce66"
+    inactive-color="#ff4949"
+    active-value="100"
+    inactive-value="0">
   </el-switch>
 </el-tooltip>
 
@@ -71,7 +76,7 @@
   export default {
     data() {
       return {
-        value3: '100'
+        value: '100'
       }
     }
   };
@@ -87,20 +92,19 @@
 
 ```html
 <el-switch
-  v-model="value4"
-  on-text=""
-  off-text=""
+  v-model="value1"
   disabled>
 </el-switch>
 <el-switch
-  v-model="value4"
+  v-model="value2"
   disabled>
 </el-switch>
 <script>
   export default {
     data() {
       return {
-        value4: true
+        value1: true,
+        value2: false
       }
     }
   };
@@ -113,19 +117,26 @@
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | boolean / string / number | — | — |
 | disabled  | 是否禁用    | boolean   | — | false   |
-| width  | switch 的宽度（像素）    | number   | — | 58（有文字）/ 46（无文字） |
-| on-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `on-text`    | string   | — | — |
-| off-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `off-text`    | string   | — | — |
-| on-text  | switch 打开时的文字    | string   | — | ON |
-| off-text  | switch 关闭时的文字    | string   | — | OFF |
-| on-value  | switch 打开时的值    | boolean / string / number | — | true |
-| off-value  | switch 关闭时的值    | boolean / string / number | — | false |
-| on-color  | switch 打开时的背景色    | string   | — | #20A0FF |
-| off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
-| name  | switch 对应的 name 属性    | string   | — | — |
+| width  | switch 的宽度（像素）    | number   | — | 40 |
+| active-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `active-text`    | string   | — | — |
+| inactive-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `inactive-text`    | string   | — | — |
+| active-text  | switch 打开时的文字描述    | string   | — | — |
+| inactive-text  | switch 关闭时的文字描述    | string   | — | — |
+| active-value  | switch 打开时的值    | boolean / string / number | — | true |
+| inactive-value  | switch 关闭时的值    | boolean / string / number | — | false |
+| active-color  | switch 打开时的背景色    | string   | — | #409EFF |
+| inactive-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
+| name            | switch 对应的 name 属性    | string   | — | — |
+| validate-event  | 改变 switch 状态时是否触发表单的校验     | boolean   | - | true |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | change  | switch 状态发生变化时的回调函数    | 新状态的值 |
+
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 Switch 获取焦点 | - |

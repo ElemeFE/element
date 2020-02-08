@@ -33,7 +33,7 @@ Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡
 - 合并代码需要两名维护人员参与：一人进行 review 后 approve，另一人再次 review，通过后即可合并。
 
 ## 开发环境搭建
-首先你需要 Node.js 4+ 和 NPM 3+
+首先你需要 Node.js 4+，yarn 和 npm 3+。注意：我们使用 yarn 进行依赖版本的锁定，所以请不要使用 `npm install` 安装依赖。
 ```shell
 git clone git@github.com:ElemeFE/element.git
 npm run dev
@@ -41,24 +41,16 @@ npm run dev
 # open http://localhost:8085
 ```
 
-如果国内用户觉得安装慢可以使用 [yarn](https://github.com/yarnpkg/yarn) 搭配 taobao registry
-```shell
-npm i yarn -g
-yarn config set registry https://registry.npm.taobao.org
-yarn
-npm run dev
+> **提示**：可以运行 `npm run dev:play`，修改 `examples/play/index.vue` 文件，调用你修改后的组件，仍然访问 [http://localhost:8085](http://localhost:8085)，查看修改效果，更快更方便。
 
-# open http://localhost:8085
-```
-
-To build:
+打包代码：
 
 ```shell
 npm run dist
 ```
 
 ## 组件开发规范
-- 通过 `make new` 创建组件目录结构，包含测试代码、入口文件、cooking 配置、package.json、文档
+- 通过 `make new` 创建组件目录结构，包含测试代码、入口文件、文档
 - 如果包含父子组件，需要更改目录结构，参考 `Button`
 - 组件内如果依赖了其他组件，需要在当前组件内引入，参考 `Select`
 

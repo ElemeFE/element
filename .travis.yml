@@ -1,6 +1,8 @@
 sudo: false
 language: node_js
-node_js: stable
+node_js: 10
+addons:
+  chrome: stable
 before_install:
 - export TRAVIS_COMMIT_MSG="[deploy] $(git log --format='%h - %B' --no-merges -n 1)"
 - export TRAVIS_COMMIT_USER="$(git log --no-merges -n 1 --format=%an)"

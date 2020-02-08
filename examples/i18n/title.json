@@ -10,5 +10,17 @@
     "guide": "Guide | Element",
     "component": "Component | Element",
     "resource": "Resource | Element"
+  },
+  "es": {
+    "home": "Element - Un kit de interfaz de usuario para la web",
+    "guide": "Guía | Element",
+    "component": "Componentes | Element",
+    "resource": "Recursos | Element"
+  },
+  "fr-FR": {
+    "home": "Element - Un kit de composants d'interface pour le web",
+    "guide": "Guide | Element",
+    "component": "Composants | Element",
+    "resource": "Ressources | Element"
   }
 }

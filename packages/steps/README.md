@@ -13,7 +13,7 @@ npm i element-steps -D
 ```javascript
 import Vue from 'vue'
 import ElStep from 'element-steps'
-import 'element-theme-default/dist/step.css'
+import 'element-theme-chalk/dist/step.css'
 
 Vue.use(ElStep)
 ```

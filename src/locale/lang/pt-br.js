@@ -16,6 +16,10 @@ export default {
       startTime: 'Hora inicial',
       endDate: 'Data final',
       endTime: 'Hora final',
+      prevYear: 'Ano anterior',
+      nextYear: 'Próximo ano',
+      prevMonth: 'Mês anterior',
+      nextMonth: 'Próximo mês',
       year: '',
       month1: 'Janeiro',
       month2: 'Fevereiro',
@@ -63,7 +67,8 @@ export default {
     cascader: {
       noMatch: 'Sem resultados',
       loading: 'Carregando',
-      placeholder: 'Selecione'
+      placeholder: 'Selecione',
+      noData: 'Sem dados'
     },
     pagination: {
       goto: 'Ir para',
@@ -78,6 +83,7 @@ export default {
       error: 'Erro!'
     },
     upload: {
+      deleteTip: 'aperte delete para apagar',
       delete: 'Apagar',
       preview: 'Pré-visualizar',
       continue: 'Continuar'
@@ -99,6 +105,16 @@ export default {
       filterPlaceholder: 'Digite uma palavra-chave',
       noCheckedFormat: '{total} itens',
       hasCheckedFormat: '{checked}/{total} selecionados'
+    },
+    image: {
+      error: 'Erro ao carregar imagem'
+    },
+    pageHeader: {
+      title: 'Voltar'
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes', // to be translated
+      cancelButtonText: 'No' // to be translated
     }
   }
 };

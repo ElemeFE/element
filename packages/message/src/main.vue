@@ -1,21 +1,37 @@
 <template>
-  <transition name="el-message-fade">
+  <transition name="el-message-fade" @after-leave="handleAfterLeave">
     <div
-      class="el-message"
-      :class="customClass"
+      :class="[
+        'el-message',
+        type && !iconClass ? `el-message--${ type }` : '',
+        center ? 'is-center' : '',
+        showClose ? 'is-closable' : '',
+        customClass
+      ]"
+      :style="positionStyle"
       v-show="visible"
       @mouseenter="clearTimer"
-      @mouseleave="startTimer">
-      <img class="el-message__img" :src="typeImg" alt="" v-if="!iconClass">
-      <div class="el-message__group" :class="{ 'is-with-icon': iconClass }">
-        <slot><p><i class="el-message__icon" :class="iconClass" v-if="iconClass"></i>{{ message }}</p></slot>
-        <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></div>
-      </div>
+      @mouseleave="startTimer"
+      role="alert">
+      <i :class="iconClass" v-if="iconClass"></i>
+      <i :class="typeClass" v-else></i>
+      <slot>
+        <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
+        <p v-else v-html="message" class="el-message__content"></p>
+      </slot>
+      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
+  const typeMap = {
+    success: 'success',
+    info: 'info',
+    warning: 'warning',
+    error: 'error'
+  };
+
   export default {
     data() {
       return {
@@ -28,13 +44,23 @@
         onClose: null,
         showClose: false,
         closed: false,
-        timer: null
+        verticalOffset: 20,
+        timer: null,
+        dangerouslyUseHTMLString: false,
+        center: false
       };
     },
 
     computed: {
-      typeImg() {
-        return require(`../assets/${ this.type }.svg`);
+      typeClass() {
+        return this.type && !this.iconClass
+          ? `el-message__icon el-icon-${ typeMap[this.type] }`
+          : '';
+      },
+      positionStyle() {
+        return {
+          'top': `${ this.verticalOffset }px`
+        };
       }
     },
 
@@ -42,14 +68,12 @@
       closed(newVal) {
         if (newVal) {
           this.visible = false;
-          this.$el.addEventListener('transitionend', this.destroyElement);
         }
       }
     },
 
     methods: {
-      destroyElement() {
-        this.$el.removeEventListener('transitionend', this.destroyElement);
+      handleAfterLeave() {
         this.$destroy(true);
         this.$el.parentNode.removeChild(this.$el);
       },
@@ -73,11 +97,21 @@
             }
           }, this.duration);
         }
+      },
+      keydown(e) {
+        if (e.keyCode === 27) { // esc关闭消息
+          if (!this.closed) {
+            this.close();
+          }
+        }
       }
     },
-
     mounted() {
       this.startTimer();
+      document.addEventListener('keydown', this.keydown);
+    },
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.keydown);
     }
   };
 </script>

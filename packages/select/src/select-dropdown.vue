@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-select-dropdown"
+    class="el-select-dropdown el-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }">
     <slot></slot>
@@ -29,10 +29,18 @@
       popperOptions: {
         default() {
           return {
-            forceAbsolute: true,
             gpuAcceleration: false
           };
         }
+      },
+
+      visibleArrow: {
+        default: true
+      },
+
+      appendToBody: {
+        type: Boolean,
+        default: true
       }
     },
 

@@ -1,0 +1,31 @@
+@import "../common/var";
+
+@include b(time-range-picker) {
+  width: 354px;
+  overflow: visible;
+
+  @include e(content) {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+  }
+
+  @include e(cell) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 4px 7px 7px;
+    width: 50%;
+    display: inline-block;
+  }
+
+  @include e(header) {
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  @include e(body) {
+    border-radius:2px;
+    border: 1px solid $--datepicker-border-color;
+  }
+}

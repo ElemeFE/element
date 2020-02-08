@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, triggerKeyDown } from '../util';
 
 describe('Dropdown', () => {
   let vm;
@@ -34,7 +34,6 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 400);
@@ -75,7 +74,6 @@ describe('Dropdown', () => {
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
         expect(callback.calledWith(myCommandObject)).to.be.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 300);
@@ -104,13 +102,11 @@ describe('Dropdown', () => {
     triggerEvent(triggerElm, 'mouseenter');
     dropdown.$nextTick(_ => {
       expect(dropdown.visible).to.not.true;
-
       triggerElm.click();
-      dropdown.$nextTick(_ => {
+      setTimeout(_ => {
         expect(dropdown.visible).to.be.true;
-        destroyVM(vm);
         done();
-      });
+      }, 300);
     });
   });
   it('split button', done => {
@@ -148,11 +144,10 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 300);
-  }).timeout(3000);
+  });
   it('hide on click', done => {
     vm = createVue({
       template: `
@@ -185,6 +180,104 @@ describe('Dropdown', () => {
         expect(callback.calledWith('c')).to.be.true;
         done();
       }, 300);
+    }, 300);
+  });
+  it('triggerElm keydown', done => {
+    vm = createVue({
+      template: `
+        <el-dropdown ref="dropdown">
+          <span class="el-dropdown-link">
+            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
+            <el-dropdown-item>黄金糕</el-dropdown-item>
+            <el-dropdown-item>狮子头</el-dropdown-item>
+            <el-dropdown-item>螺蛳粉</el-dropdown-item>
+            <el-dropdown-item>双皮奶</el-dropdown-item>
+            <el-dropdown-item>蚵仔煎</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      `
+    }, true);
+    let dropdown = vm.$refs.dropdown;
+    let dropdownElm = dropdown.$el;
+    let triggerElm = dropdownElm.children[0];
+    triggerKeyDown(triggerElm, 13); // enter
+    setTimeout(() => {
+      expect(dropdown.visible).to.be.true;
+      triggerKeyDown(triggerElm, 27); // esc
+      setTimeout(() => {
+        expect(dropdown.visible).to.be.false;
+        done();
+      }, 300);
+    }, 400);
+  });
+  it('dropdown menu keydown', done => {
+    vm = createVue({
+      template: `
+        <el-dropdown ref="dropdown">
+          <span class="el-dropdown-link">
+            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
+            <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+            <el-dropdown-item command="b">狮子头</el-dropdown-item>
+            <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+            <el-dropdown-item command="d">双皮奶</el-dropdown-item>
+            <el-dropdown-item command="e">蚵仔煎</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      `
+    }, true);
+    let dropdown = vm.$refs.dropdown;
+    let dropdownElm = dropdown.$el;
+    let triggerElm = dropdownElm.children[0];
+    let dropdownMenu = dropdown.dropdownElm;
+
+    triggerEvent(triggerElm, 'mouseenter');
+
+    setTimeout(() => {
+      expect(dropdown.visible).to.be.true;
+      triggerKeyDown(dropdownMenu, 40); // down
+      setTimeout(() => {
+        triggerKeyDown(dropdownMenu, 13); // enter
+        setTimeout(() => {
+          expect(dropdown.visible).to.be.false;
+          done();
+        }, 100);
+      }, 100);
+    }, 300);
+  });
+  it('updatePopper', done => {
+    vm = createVue({
+      template: `
+        <el-dropdown ref="dropdown">
+          <span class="el-dropdown-link">
+            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
+            <el-dropdown-item>黄金糕</el-dropdown-item>
+            <el-dropdown-item>狮子头</el-dropdown-item>
+            <el-dropdown-item>螺蛳粉</el-dropdown-item>
+            <el-dropdown-item>双皮奶</el-dropdown-item>
+            <el-dropdown-item>蚵仔煎</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      `
+    }, true);
+    let dropdown = vm.$refs.dropdown;
+    let dropdownElm = dropdown.$el;
+    let triggerElm = dropdownElm.children[0];
+
+    triggerEvent(triggerElm, 'mouseenter');
+    setTimeout(() => {
+      const zIndex1 = document.querySelector('.el-dropdown-menu').style.zIndex;
+      dropdown.broadcast('ElDropdownMenu', 'updatePopper');
+      setTimeout(() => {
+        const zIndex2 = document.querySelector('.el-dropdown-menu').style.zIndex;
+        expect(zIndex2 > zIndex1).to.be.true;
+        done();
+      }, 100);
     }, 300);
   });
 });

@@ -1,94 +1,3 @@
-<script>
-  export default {
-    data() {
-      return {
-        activeName: 'second',
-        activeName2: 'first',
-        editableTabsValue: '2',
-        editableTabsValue2: '2',
-        editableTabs: [{
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        }, {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        }],
-        editableTabs2: [{
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        }, {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        }],
-        tabIndex: 2
-      }
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      },
-      handleTabsEdit(targetName, action) {
-        if (action === 'add') {
-          let newTabName = ++this.tabIndex + '';
-          this.editableTabs.push({
-            title: 'New Tab',
-            name: newTabName,
-            content: 'New Tab content'
-          });
-          this.editableTabsValue = newTabName;
-        }
-        if (action === 'remove') {
-          let tabs = this.editableTabs;
-          let activeName = this.editableTabsValue;
-          if (activeName === targetName) {
-            tabs.forEach((tab, index) => {
-              if (tab.name === targetName) {
-                let nextTab = tabs[index + 1] || tabs[index - 1];
-                if (nextTab) {
-                  activeName = nextTab.name;
-                }
-              }
-            });
-          }
-          
-          this.editableTabsValue = activeName;
-          this.editableTabs = tabs.filter(tab => tab.name !== targetName);
-        }
-      },
-      addTab(targetName) {
-        let newTabName = ++this.tabIndex + '';
-        this.editableTabs2.push({
-          title: 'New Tab',
-          name: newTabName,
-          content: 'New Tab content'
-        });
-        this.editableTabsValue2 = newTabName;
-      },
-      removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
-        if (activeName === targetName) {
-          tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
-              let nextTab = tabs[index + 1] || tabs[index - 1];
-              if (nextTab) {
-                activeName = nextTab.name;
-              }
-            }
-          });
-        }
-        
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
-      }
-    }
-  }
-</script>
-
 ## Tabs 标签页
 
 分隔内容上有关联但属于不同类别的数据集合。
@@ -133,7 +42,7 @@
 
 ```html
 <template>
-  <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
+  <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
@@ -144,7 +53,7 @@
   export default {
     data() {
       return {
-        activeName2: 'first'
+        activeName: 'first'
       };
     },
     methods: {
@@ -169,6 +78,40 @@
   <el-tab-pane label="角色管理">角色管理</el-tab-pane>
   <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
 </el-tabs>
+```
+:::
+
+### 位置
+
+可以通过 `tab-position` 设置标签的位置
+
+:::demo 标签一共有四个方向的设置 `tabPosition="left|right|top|bottom"`
+
+```html
+<template>
+  <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
+    <el-radio-button label="top">top</el-radio-button>
+    <el-radio-button label="right">right</el-radio-button>
+    <el-radio-button label="bottom">bottom</el-radio-button>
+    <el-radio-button label="left">left</el-radio-button>
+  </el-radio-group>
+
+  <el-tabs :tab-position="tabPosition" style="height: 200px;">
+    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tabPosition: 'left'
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -265,14 +208,14 @@
 <div style="margin-bottom: 20px;">
   <el-button
     size="small"
-    @click="addTab(editableTabsValue2)"
+    @click="addTab(editableTabsValue)"
   >
     add tab
   </el-button>
 </div>
-<el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
+<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
   <el-tab-pane
-    v-for="(item, index) in editableTabs2"
+    v-for="(item, index) in editableTabs"
     :key="item.name"
     :label="item.title"
     :name="item.name"
@@ -284,8 +227,8 @@
   export default {
     data() {
       return {
-        editableTabsValue2: '2',
-        editableTabs2: [{
+        editableTabsValue: '2',
+        editableTabs: [{
           title: 'Tab 1',
           name: '1',
           content: 'Tab 1 content'
@@ -300,16 +243,16 @@
     methods: {
       addTab(targetName) {
         let newTabName = ++this.tabIndex + '';
-        this.editableTabs2.push({
+        this.editableTabs.push({
           title: 'New Tab',
           name: newTabName,
           content: 'New Tab content'
         });
-        this.editableTabsValue2 = newTabName;
+        this.editableTabsValue = newTabName;
       },
       removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
+        let tabs = this.editableTabs;
+        let activeName = this.editableTabsValue;
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
             if (tab.name === targetName) {
@@ -321,8 +264,8 @@
           });
         }
         
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+        this.editableTabsValue = activeName;
+        this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
   }
@@ -333,12 +276,14 @@
 ### Tabs Attributes
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| value / v-model  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 | type     | 风格类型   | string   | card/border-card  |     —    |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
-| active-name(deprecated)  | 选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
-| value  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
+| tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
+| stretch  | 标签的宽度是否自撑开 | boolean   |  -  |  false |
+| before-leave | 切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。 | Function(activeName, oldActiveName) | — | — |
 
 ### Tabs Events
 | 事件名称 | 说明 | 回调参数 |
@@ -353,5 +298,6 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | 选项卡标题   | string   | — |    —     |
 | disabled | 是否禁用 | boolean | — | false |
-| name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
+| name      | 与选项卡绑定值 value 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
+| lazy  | 标签是否延迟渲染   | boolean   | — |  false  |
