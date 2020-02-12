@@ -1025,8 +1025,8 @@
      * @argument {String} property
      */
     function getStyleComputedProperty(element, property) {
-        if (typeof element !== Element) {
-            return '';
+        if (element.nodeType !== 1) {
+            return [];
         }
         
         // NOTE: 1 DOM access here
