@@ -1025,6 +1025,10 @@
      * @argument {String} property
      */
     function getStyleComputedProperty(element, property) {
+        if (typeof element !== Element) {
+            return null;
+        }
+        
         // NOTE: 1 DOM access here
         var css = root.getComputedStyle(element, null);
         return css[property];
