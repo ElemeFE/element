@@ -1026,7 +1026,7 @@
      */
     function getStyleComputedProperty(element, property) {
         if (typeof element !== Element) {
-            return null;
+            return '';
         }
         
         // NOTE: 1 DOM access here
