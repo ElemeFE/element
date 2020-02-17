@@ -1,5 +1,11 @@
-node_modules
 .DS_Store
+.idea
+.npmrc
+.vscode
+.project
+.packageinfo
+
+node_modules
 npm-debug.log
 yarn-debug.log
 yarn-error.log
@@ -14,6 +20,7 @@ lib
 examples/element-ui
 examples/pages/en-US
 examples/pages/zh-CN
+fe.yuwp-ui/yuwp-ui
 examples/pages/es
 examples/pages/fr-FR
 fe.element/element-ui
@@ -21,4 +28,8 @@ fe.element/element-ui
 coverage
 waiter.config.js
 build/bin/algolia-key.js
+package-lock.json
+lib
+deploy
+src/index.js
 .envrc
