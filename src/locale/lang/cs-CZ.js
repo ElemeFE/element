@@ -23,7 +23,7 @@ export default {
       day: 'Den',
       week: 'Týden',
       month: 'Měsíc',
-      year: 'Rok',
+      year: '',
       month1: 'Leden',
       month2: 'Únor',
       month3: 'Březen',
