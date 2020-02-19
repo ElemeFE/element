@@ -2,6 +2,11 @@ export function isString(obj) {
   return Object.prototype.toString.call(obj) === '[object String]';
 }
 
+/**
+ * 快速对象检查-主要用于当我们知道原始值是符合JSON的类型。
+ * @param {*} obj 检查值
+ * @returns {Boolean}
+ */
 export function isObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 }
