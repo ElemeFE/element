@@ -88,6 +88,7 @@
       @keydown.native.enter="handleEnterKey"
       @keydown.native.esc="handleEscapeKey"
       @keydown.native.tab="handleTabKey"
+      @keydown.native.space="handleSpaceKey"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
@@ -515,6 +516,15 @@
 
       handleTabKey(e) {
         this.visible = false;
+      },
+
+      handleSpaceKey(e) {
+        if (!this.visible) {
+          e.stopPropagation();
+          e.preventDefault();
+          this.visible = true;
+        }
+        return true;
       },
 
       scrollToOption(option) {
