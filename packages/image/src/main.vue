@@ -126,6 +126,10 @@
         // reset status
         this.loading = true;
         this.error = false;
+        if (this._loadingImage) {
+          this._loadingImage.onload = null;
+          this._loadingImage.onerror = null;
+        }
 
         const img = new Image();
         img.onload = e => this.handleLoad(e, img);
@@ -139,15 +143,18 @@
             img.setAttribute(key, value);
           });
         img.src = this.src;
+        this._loadingImage = img;
       },
       handleLoad(e, img) {
         this.imageWidth = img.width;
         this.imageHeight = img.height;
+        this._loadingImage = null;
         this.loading = false;
       },
       handleError(e) {
         this.loading = false;
         this.error = true;
+        this._loadingImage = null;
         this.$emit('error', e);
       },
       handleLazyLoad() {
