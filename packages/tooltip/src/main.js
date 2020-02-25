@@ -4,6 +4,8 @@ import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';
 import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
 
+console.log('But.. is just conosole  Okay?');
+
 export default {
   name: 'ElTooltip',
 
