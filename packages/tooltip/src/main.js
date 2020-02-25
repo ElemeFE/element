@@ -45,6 +45,10 @@ export default {
       type: Boolean,
       default: true
     },
+    customized: {
+      type: Boolean,
+      default: false
+    },
     hideAfter: {
       type: Number,
       default: 0
@@ -112,22 +116,27 @@ export default {
     if (this.$el.nodeType === 1) {
       this.$el.setAttribute('aria-describedby', this.tooltipId);
       this.$el.setAttribute('tabindex', this.tabindex);
-      on(this.referenceElm, 'mouseenter', this.show);
-      on(this.referenceElm, 'mouseleave', this.hide);
-      on(this.referenceElm, 'focus', () => {
-        if (!this.$slots.default || !this.$slots.default.length) {
-          this.handleFocus();
-          return;
-        }
-        const instance = this.$slots.default[0].componentInstance;
-        if (instance && instance.focus) {
-          instance.focus();
-        } else {
-          this.handleFocus();
-        }
-      });
-      on(this.referenceElm, 'blur', this.handleBlur);
-      on(this.referenceElm, 'click', this.removeFocusing);
+      if (!this.customized) {
+        on(this.referenceElm, 'mouseenter', this.show);
+        on(this.referenceElm, 'mouseleave', this.hide);
+        on(this.referenceElm, 'focus', () => {
+          if (!this.$slots.default || !this.$slots.default.length) {
+            this.handleFocus();
+            return;
+          }
+          const instance = this.$slots.default[0].componentInstance;
+          if (instance && instance.focus) {
+            instance.focus();
+          } else {
+            this.handleFocus();
+          }
+        });
+        on(this.referenceElm, 'blur', this.handleBlur);
+        on(this.referenceElm, 'click', this.removeFocusing);
+      } else {
+        on(this.referenceElm, 'click', this.show);
+      }
+
     }
     // fix issue https://github.com/ElemeFE/element/issues/14424
     if (this.value && this.popperVM) {
@@ -149,24 +158,28 @@ export default {
   },
   methods: {
     show() {
-      console.log('[showshowshow]but.... just console log is Okay??');
+      console.log('methods show');
       this.setExpectedState(true);
       this.handleShowPopper();
     },
 
     hide() {
+      console.log('methods hide');
       this.setExpectedState(false);
       this.debounceClose();
     },
     handleFocus() {
+      console.log('methods handleFocus');
       this.focusing = true;
       this.show();
     },
     handleBlur() {
+      console.log('methods handleBlur');
       this.focusing = false;
       this.hide();
     },
     removeFocusing() {
+      console.log('methods removeFocusing');
       this.focusing = false;
     },
 
@@ -233,11 +246,15 @@ export default {
   destroyed() {
     const reference = this.referenceElm;
     if (reference.nodeType === 1) {
-      off(reference, 'mouseenter', this.show);
-      off(reference, 'mouseleave', this.hide);
-      off(reference, 'focus', this.handleFocus);
-      off(reference, 'blur', this.handleBlur);
-      off(reference, 'click', this.removeFocusing);
+      if (!this.customized) {
+        off(reference, 'mouseenter', this.show);
+        off(reference, 'mouseleave', this.hide);
+        off(reference, 'focus', this.handleFocus);
+        off(reference, 'blur', this.handleBlur);
+        off(reference, 'click', this.removeFocusing);
+      } else {
+        off(reference, 'click', this.show);
+      }
     }
   }
 };
