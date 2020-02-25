@@ -163,17 +163,12 @@ export default {
     },
 
     show2seconds() {
-      console.log('methods show2seconds');
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => {
-        this.showPopper = true;
-      }, this.openDelay);
-
-      if (this.hideAfter > 0) {
-        this.timeoutPending = setTimeout(() => {
-          this.showPopper = false;
-        }, 2000);
-      }
+      console.log('methods show2secondsshow2secondsshow2seconds');
+      this.show();
+      setTimeout(() => {
+        console.log('setTimeout');
+        this.hide();
+      }, 1000);
     },
 
     hide() {
