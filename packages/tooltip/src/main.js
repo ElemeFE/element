@@ -80,7 +80,6 @@ export default {
   },
 
   render(h) {
-    console.log('but.... just console log is Okay??');
     if (this.popperVM) {
       this.popperVM.node = (
         <transition
@@ -134,7 +133,7 @@ export default {
         on(this.referenceElm, 'blur', this.handleBlur);
         on(this.referenceElm, 'click', this.removeFocusing);
       } else {
-        on(this.referenceElm, 'click', this.show);
+        on(this.referenceElm, 'click', this.show2seconds);
       }
 
     }
@@ -161,6 +160,20 @@ export default {
       console.log('methods show');
       this.setExpectedState(true);
       this.handleShowPopper();
+    },
+
+    show2seconds() {
+      console.log('methods show2seconds');
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.showPopper = true;
+      }, this.openDelay);
+
+      if (this.hideAfter > 0) {
+        this.timeoutPending = setTimeout(() => {
+          this.showPopper = false;
+        }, 2000);
+      }
     },
 
     hide() {
