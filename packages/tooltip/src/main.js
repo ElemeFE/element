@@ -4,8 +4,6 @@ import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';
 import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
 
-console.log('But.. is just conosole  Okay?');
-
 export default {
   name: 'ElTooltip',
 
@@ -78,6 +76,7 @@ export default {
   },
 
   render(h) {
+    console.log('but.... just console log is Okay??');
     if (this.popperVM) {
       this.popperVM.node = (
         <transition
@@ -150,6 +149,7 @@ export default {
   },
   methods: {
     show() {
+      console.log('[showshowshow]but.... just console log is Okay??');
       this.setExpectedState(true);
       this.handleShowPopper();
     },
