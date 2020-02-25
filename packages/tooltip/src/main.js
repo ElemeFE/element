@@ -45,7 +45,7 @@ export default {
       type: Boolean,
       default: true
     },
-    customized: {
+    isClipboard: {
       type: Boolean,
       default: false
     },
@@ -115,7 +115,9 @@ export default {
     if (this.$el.nodeType === 1) {
       this.$el.setAttribute('aria-describedby', this.tooltipId);
       this.$el.setAttribute('tabindex', this.tabindex);
-      if (!this.customized) {
+      if (this.isClipboard) {
+        on(this.referenceElm, 'click', this.showShortwhile);
+      } else {
         on(this.referenceElm, 'mouseenter', this.show);
         on(this.referenceElm, 'mouseleave', this.hide);
         on(this.referenceElm, 'focus', () => {
@@ -132,10 +134,7 @@ export default {
         });
         on(this.referenceElm, 'blur', this.handleBlur);
         on(this.referenceElm, 'click', this.removeFocusing);
-      } else {
-        on(this.referenceElm, 'click', this.show2seconds);
       }
-
     }
     // fix issue https://github.com/ElemeFE/element/issues/14424
     if (this.value && this.popperVM) {
@@ -157,37 +156,30 @@ export default {
   },
   methods: {
     show() {
-      console.log('methods show');
       this.setExpectedState(true);
       this.handleShowPopper();
     },
 
-    show2seconds() {
-      console.log('methods show2secondsshow2secondsshow2seconds');
+    showShortwhile() {
       this.show();
       setTimeout(() => {
-        console.log('setTimeout');
         this.hide();
       }, 1000);
     },
 
     hide() {
-      console.log('methods hide');
       this.setExpectedState(false);
       this.debounceClose();
     },
     handleFocus() {
-      console.log('methods handleFocus');
       this.focusing = true;
       this.show();
     },
     handleBlur() {
-      console.log('methods handleBlur');
       this.focusing = false;
       this.hide();
     },
     removeFocusing() {
-      console.log('methods removeFocusing');
       this.focusing = false;
     },
 
@@ -254,14 +246,14 @@ export default {
   destroyed() {
     const reference = this.referenceElm;
     if (reference.nodeType === 1) {
-      if (!this.customized) {
+      if (this.isClipboard) {
+        off(reference, 'click', this.showShortwhile);
+      } else {
         off(reference, 'mouseenter', this.show);
         off(reference, 'mouseleave', this.hide);
         off(reference, 'focus', this.handleFocus);
         off(reference, 'blur', this.handleBlur);
         off(reference, 'click', this.removeFocusing);
-      } else {
-        off(reference, 'click', this.show);
       }
     }
   }
