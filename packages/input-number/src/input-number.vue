@@ -115,8 +115,9 @@
       value: {
         immediate: true,
         handler(value) {
-          let newVal = value === undefined ? value : Number(value);
-          if (newVal !== undefined) {
+          let newVal = value;
+          if (newVal != null) {
+            newVal = +newVal;
             if (isNaN(newVal)) {
               return;
             }
@@ -130,9 +131,10 @@
             if (this.precision !== undefined) {
               newVal = this.toPrecision(newVal, this.precision);
             }
+
+            if (newVal >= this.max) newVal = this.max;
+            if (newVal <= this.min) newVal = this.min;
           }
-          if (newVal >= this.max) newVal = this.max;
-          if (newVal <= this.min) newVal = this.min;
           this.currentValue = newVal;
           this.userInput = null;
           this.$emit('input', newVal);
