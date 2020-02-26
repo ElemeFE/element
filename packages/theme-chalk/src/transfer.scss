@@ -96,12 +96,8 @@
     height: $--transfer-item-height;
     line-height: $--transfer-item-height;
     padding-left: 15px;
-    display: block;
-
-    & + .el-transfer-panel__item {
-      margin-left: 0;
-      display: block!important;
-    }
+    display: block!important;
+    margin-left: 0;
 
     &.el-checkbox {
       color: $--color-text-regular;
@@ -209,10 +205,6 @@
     padding: 6px 15px 0;
     color: $--color-text-secondary;
     text-align: center;
-  }
-
-  .el-checkbox__label {
-    padding-left: 8px;
   }
 
   .el-checkbox__inner {
