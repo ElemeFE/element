@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.11.1-8
+
+*2020-02-27*
+
+#### New features
+
+- Select
+  - Open dropdown with space bar
+
 ### 2.11.1-7
 
 *2019-10-30*
