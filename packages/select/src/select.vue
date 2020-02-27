@@ -524,7 +524,6 @@
           e.preventDefault();
           this.visible = true;
         }
-        return true;
       },
 
       scrollToOption(option) {
