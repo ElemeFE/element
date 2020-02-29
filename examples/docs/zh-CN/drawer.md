@@ -270,7 +270,7 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | append-to-body     | Drawer 自身是否插入至 body 元素上。嵌套的 Drawer 必须指定该属性并赋值为 true   | boolean   | — | false |
-| before-close | 关闭前的回调，会暂停 Drawer 的关闭 | function(done)，done 用于关闭 Drawer | — | — |
+| before-close | 关闭前的回调，会暂停 Drawer 的关闭 | function(done)，done 用于关闭 Drawer, done 方法传入 false 终止关闭 | — | — |
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Drawer | boolean    | — | true |
 | custom-class      | Drawer 的自定义类名 | string    | — | — |
 | destroy-on-close | 控制是否在关闭 Drawer 之后将子元素全部销毁 | boolean | - | false |
