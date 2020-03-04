@@ -409,6 +409,7 @@
 | prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |
+| popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

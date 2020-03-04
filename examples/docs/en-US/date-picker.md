@@ -456,6 +456,7 @@ When picking a date range, you can assign the time part for start date and end d
 | prefix-icon | Custom prefix icon class | string | — | el-icon-date |
 | clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 | validate-event | whether to trigger form validation | boolean | - | true |
+| append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

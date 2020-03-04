@@ -456,6 +456,7 @@ Lorsque vous choisissez une plage de dates, vous pouvez assigner l'horaire de d�
 | prefix-icon | Icône de préfixe. | string | — | el-icon-date |
 | clear-icon | Icône de reset. | string | — | el-icon-circle-close |
 | validate-event | Si la validation doit être déclenchée. | boolean | - | true |
+| append-to-body| Si le menu déroulant doit être ajouté au body. Si le positionnement du menu est incorrect, essayez de mettre cette option à `false`. | boolean | - | true |
 
 ### Options du Picker
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
