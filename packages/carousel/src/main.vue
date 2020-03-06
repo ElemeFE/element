@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import throttle from 'throttle-debounce/throttle';
+import { throttle } from 'throttle-debounce';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {

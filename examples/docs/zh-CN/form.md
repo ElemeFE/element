@@ -303,39 +303,36 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 <script>
   export default {
     data() {
-      var checkAge = (rule, value, callback) => {
+      var checkAge = (rule, value) => {
         if (!value) {
-          return callback(new Error('年龄不能为空'));
+          return Promise.reject('年龄不能为空');
         }
-        setTimeout(() => {
+        return new Promise(resolve => setTimeout(resolve, 1000))
+        .then(() => {
           if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
-          } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
+            return Promise.reject('请输入整数值');
+          } else if (value < 18) {
+            return Promise.reject('必须年满18岁');
           }
-        }, 1000);
+        });
       };
-      var validatePass = (rule, value, callback) => {
+      var validatePass = (rule, value) => {
         if (value === '') {
-          callback(new Error('请输入密码'));
+          return new Error('请输入密码');
         } else {
           if (this.ruleForm.checkPass !== '') {
             this.$refs.ruleForm.validateField('checkPass');
           }
-          callback();
+          return true;
         }
       };
-      var validatePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value) => {
         if (value === '') {
-          callback(new Error('请再次输入密码'));
+          return new Error('请再次输入密码');
         } else if (value !== this.ruleForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
+          return new Error('两次输入密码不一致!');
         } else {
-          callback();
+          return true;
         }
       };
       return {
@@ -346,13 +343,13 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
         },
         rules: {
           pass: [
-            { validator: validatePass, trigger: 'blur' }
+            { asyncValidator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
+            { asyncValidator: validatePass2, trigger: 'blur' }
           ],
           age: [
-            { validator: checkAge, trigger: 'blur' }
+            { asyncValidator: checkAge, trigger: 'blur' }
           ]
         }
       };

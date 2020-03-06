@@ -292,9 +292,9 @@
     </div>
     <div class="jumbotron" ref="indexMainImg">
       <img src="~examples/assets/images/theme-index-blue.png" alt="">
-      <div class="jumbotron-red" :style="{
-           height: mainImgOffset + 'px'
-         }">
+        <div class="jumbotron-red" :style="{
+          height: mainImgOffset + 'px'
+        }">
         <img src="~examples/assets/images/theme-index-red.png" alt="">
       </div>
     </div>
@@ -375,7 +375,7 @@
       </div>
       <div class="mask"></div>
     </div>
-    <div 
+    <div
       class="theme-intro-b"
       @click="hideIntroB"
       v-if="showIntroB"
@@ -398,9 +398,9 @@
   </div>
 </template>
 <script>
-  import throttle from 'throttle-debounce/throttle';
+  import { throttle } from 'throttle-debounce';
   import { addClass, removeClass } from 'element-ui/src/utils/dom';
-  
+
   export default {
     created() {
       this.throttledHandleScroll = throttle(10, true, index => {

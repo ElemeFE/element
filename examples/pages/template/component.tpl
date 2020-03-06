@@ -11,7 +11,7 @@
   .page-component {
     box-sizing: border-box;
     height: 100%;
-  
+
     &.page-container {
       padding: 0;
     }
@@ -139,7 +139,7 @@
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
     </div>
-    <el-backtop 
+    <el-backtop
       v-if="showBackToTop"
       target=".page-component__scroll .el-scrollbar__wrap"
       :right="100"
@@ -151,7 +151,7 @@
 <script>
   import bus from '../../bus';
   import navsData from '../../nav.config.json';
-  import throttle from 'throttle-debounce/throttle';
+  import { throttle } from 'throttle-debounce';
 
   export default {
     data() {

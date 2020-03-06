@@ -127,7 +127,7 @@ import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
 import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-import debounce from 'throttle-debounce/debounce';
+import { debounce } from 'throttle-debounce';
 
 const { keys: KeyCode } = AriaUtils;
 const MigratingProps = {
@@ -647,4 +647,3 @@ export default {
   }
 };
 </script>
-
