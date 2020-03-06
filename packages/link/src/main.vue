@@ -6,7 +6,7 @@
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline'
     ]"
-    :href="disabled ? null : href"
+    :href="tHref"
     v-bind="$attrs"
     @click="handleClick"
   >
@@ -37,16 +37,34 @@ export default {
     },
     disabled: Boolean,
     href: String,
+    to: [String, Object],
     icon: String
   },
 
   methods: {
     handleClick(event) {
       if (!this.disabled) {
+        if (this.to) {
+          if (/\b_blank\b/i.test(event.currentTarget.target)) return;
+
+          this.$router.push(this.to);
+          event.preventDefault();
+          return;
+        }
         if (!this.href) {
           this.$emit('click', event);
         }
       }
+    }
+  },
+
+  computed: {
+    tHref() {
+      if (this.disabled) return null;
+      if (this.to) {
+        return this.$router.resolve(this.to).href;
+      }
+      return this.href;
     }
   }
 };

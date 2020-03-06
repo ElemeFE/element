@@ -17,6 +17,16 @@
 ```
 :::
 
+### 路由跳转
+使用 :to 参数指定跳转链接，见 router-link 的参数配置说明。
+:::demo
+```html
+<div>
+  <el-link to="/">跳转路由首页</el-link>
+</div>
+```
+:::
+
 ### 禁用状态
 文字链接不可用状态。
 :::demo
@@ -59,8 +69,9 @@
 
 | 参数           | 说明                           | 类型      | 可选值                               | 默认值  |
 | -------------- | ------------------------------ | --------- | ------------------------------------ | ------- |
-| type           | 类型                   | string  | primary / success / warning / danger / info | default |
-| underline      | 是否下划线                         | boolean | —                                    | true    |
-| disabled       | 是否禁用状态                       | boolean | —                                    | false   |
-| href           | 原生 href 属性                     | string  | —                                    | -       |
-| icon           | 图标类名                       | string  | —                                    | -       |
+| type           | 类型                      | string  | primary / success / warning / danger / info | default |
+| underline      | 是否下划线                         | boolean | —                                 | true    |
+| disabled       | 是否禁用状态                       | boolean | —                                 | false   |
+| href           | 原生 href 属性                     | string  | —                                 | -       |
+| to             | 跳转路由对象。注意如此参数非空会忽略 href 参数 | string / object | —             | -       |
+| icon           | 图标类名                           | string  | —                                 | -       |
