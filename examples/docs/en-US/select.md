@@ -197,7 +197,7 @@ Multiple select uses tags to display selected options.
       :value="item.value">
     </el-option>
   </el-select>
-  
+
   <el-select
     v-model="value2"
     multiple
@@ -521,7 +521,7 @@ Create and select new items that are not included in select options
 :::
 
 :::tip
-If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
+If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name, `label-key` as the value key for its display content.
 :::
 
 ### Select Attributes
@@ -531,6 +531,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
+| label-key | when the binding value is an object type, and it is a multi-select mode, used to obtain the display content in the binding value | string | - | label |
 | size | size of Input | string | large/small/mini | — |
 | clearable | whether select can be cleared | boolean | — | false |
 | collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |

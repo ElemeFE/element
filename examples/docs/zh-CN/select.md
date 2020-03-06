@@ -107,7 +107,7 @@
     </el-option>
   </el-select>
 </template>
-  
+
 <script>
   export default {
     data() {
@@ -516,7 +516,7 @@
 :::
 
 :::tip
-如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
+如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识，以及 `label-key` 作为它展示内容的取值键值。
 :::
 
 ### Select Attributes
@@ -526,6 +526,7 @@
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
+| label-key | 当绑定值为对象类型时，且是多选模式，用以获取绑定值中的展示内容 | string | - | label |
 | size | 输入框尺寸 | string | medium/small/mini | — |
 | clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |

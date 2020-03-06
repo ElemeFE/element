@@ -523,7 +523,7 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
 :::
 
 :::tip
-Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme identifiant unique.
+Si la valeur de liaison de Select est un objet, assurez-vous d'attribuer `value-key` comme nom de clé d'identité unique, `label-key` comme clé de valeur pour son contenu d'affichage..
 :::
 
 ### Attributs de Select
@@ -534,6 +534,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | multiple | Si la sélection multiple est activée. | boolean | — | false |
 | disabled | Si le sélecteur est désactivé. | boolean | — | false |
 | value-key | Identifiant unique pour la valeur, requis quand la valeur est un objet. | string | — | value |
+| label-key | lorsque la valeur de liaison est un type d'objet et qu'il s'agit d'un mode de sélection multiple, utilisé pour obtenir le contenu d'affichage dans la valeur de liaison | string | - | label |
 | size | Taille de l'Input. | string | large/small/mini | — |
 | clearable | Si la sélection est effaçable. | boolean | — | false |
 | collapse-tags | Si les tags peuvent être réduits, dans le cas d'une sélection multiple. | boolean | — | false |
