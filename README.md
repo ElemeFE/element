@@ -1,3 +1,42 @@
+The offical version seemed to be no longer maintained, we forked the offical repo to provide various bugfixes and improvements, for our internal use.
+
+The modification may or may not introduce unknown issues. USE IT AT YOUR OWN RISK!
+
+NPM repo: <https://www.npmjs.com/element-ui-eoi>
+
+Usage:
+
+```shell
+$ npm i element-ui-eoi
+```
+
+```js
+// vue.config.js
+module.exports = {
+  configureWebpack: {
+    resolve: {
+      alias: {
+        'element-ui': 'element-ui-eoi',
+      },
+    },
+  },
+};
+```
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "paths": {
+      "element-ui": ["node_modules/element-ui-eoi"],
+      "element-ui/*": ["node_modules/element-ui-eoi/*"]
+    }
+  }
+}
+```
+
+---
+
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
