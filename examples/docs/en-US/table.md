@@ -1985,6 +1985,8 @@ You can customize row index in `type=index` columns.
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
 | filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row, column) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |
+| filter-type | specify type of filter | String | `checkbox`,`input` | `checkbox` |
+| filter-type-options | if filter-type set to `input` then you can specify some option for input eg `placeholder`, `clearable` and `delay`. <br> `filter-type=input` trigger on input event for not call it immediately you can specify a `delay` by default it's `500ms`  | Object | `{placeholder: string, clearable: boolean, delay: number}` | `{label: column label}` |
 
 ### Table-column Scoped Slot
 | Name | Description |
