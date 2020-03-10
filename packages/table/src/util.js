@@ -46,7 +46,7 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
   };
   const compare = function(a, b) {
     if (sortMethod) {
-      return sortMethod(a.value, b.value);
+      return sortMethod(a.value, b.value, reverse);
     }
     for (let i = 0, len = a.key.length; i < len; i++) {
       if (a.key[i] < b.key[i]) {
