@@ -95,9 +95,18 @@ export default {
 
           if (fileType === '[object File]' || fileType === '[object Blob]') {
             if (fileType === '[object Blob]') {
-              processedFile = new File([processedFile], rawFile.name, {
-                type: rawFile.type
-              });
+              try {
+                processedFile = new File([processedFile], rawFile.name, {
+                  type: rawFile.type
+                });
+              } catch (error) {
+                // Not support file constructor, like IE10
+                const file = new Blob([processedFile], { type: rawFile.type });
+                file.lastModifiedDate = new Date();
+                file.lastModified = file.lastModifiedDate.getTime();
+                file.name = rawFile.name;
+                processedFile = file;
+              }
             }
             for (const p in rawFile) {
               if (rawFile.hasOwnProperty(p)) {
