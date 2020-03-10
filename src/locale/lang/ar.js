@@ -106,14 +106,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} مختار'
     },
     image: {
-      error: 'فشل'
+      error: 'خطأ'
     },
     pageHeader: {
-      title: 'عودة'
+      title: 'عنوان'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'نعم', 
+      cancelButtonText: 'لا' 
     }
   }
 };
