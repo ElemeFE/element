@@ -279,6 +279,54 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 ```
 :::
 
+### 简单必填验证
+
+可以使用 `required` 参数指定必填项验证。如果参数为字符串类型，其值将作为错误提示使用
+
+:::demo
+```html
+<el-form :model="requiredForm" status-icon ref="requiredForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item label="用户名" prop="user" required="请填写用户名">
+    <el-input type="password" v-model="requiredForm.user" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item label="密码" prop="password" required>
+    <el-input type="password" v-model="requiredForm.password" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('requiredForm')">提交</el-button>
+    <el-button @click="resetForm('requiredForm')">重置</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        requiredForm: {
+          user: '',
+          password: ''
+        },
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 自定义校验规则
 
 这个例子中展示了如何使用自定义验证规则来完成密码的二次验证。
@@ -346,10 +394,10 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
             { asyncValidator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { asyncValidator: validatePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
-            { asyncValidator: checkAge, trigger: 'blur' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         }
       };

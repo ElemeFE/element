@@ -64,8 +64,8 @@
       labelWidth: String,
       prop: String,
       required: {
-        type: Boolean,
-        default: undefined
+        type: [Boolean, String],
+        default: false
       },
       rules: [Object, Array],
       error: String,
@@ -151,19 +151,7 @@
         return getPropByPath(model, path, true).v;
       },
       isRequired() {
-        let rules = this.getRules();
-        let isRequired = false;
-
-        if (rules && rules.length) {
-          rules.every(rule => {
-            if (rule.required) {
-              isRequired = true;
-              return false;
-            }
-            return true;
-          });
-        }
-        return isRequired;
+        return this.getRules().some(rule => rule.required);
       },
       _formSize() {
         return this.elForm.size;
@@ -189,7 +177,7 @@
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
         const rules = this.getFilteredRule(trigger);
-        if ((!rules || rules.length === 0) && this.required === undefined) {
+        if ((!rules || rules.length === 0) && !this.required) {
           callback();
           return true;
         }
@@ -197,11 +185,9 @@
         this.validateState = 'validating';
 
         const descriptor = {};
-        if (rules && rules.length > 0) {
-          rules.forEach(rule => {
-            delete rule.trigger;
-          });
-        }
+        rules.forEach(rule => {
+          delete rule.trigger;
+        });
         descriptor[this.prop] = rules;
 
         const validator = new AsyncValidator(descriptor);
@@ -252,12 +238,19 @@
       getRules() {
         let formRules = this.form.rules;
         const selfRules = this.rules;
-        const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
+        const requiredRule = this.required ? [{
+          required: true,
+          message: typeof this.required === 'string' ? this.required : undefined
+        }] : [];
 
-        const prop = getPropByPath(formRules, this.prop || '');
-        formRules = formRules ? (prop.o[this.prop || ''] || prop.v) : [];
+        if (selfRules) return requiredRule.concat(selfRules);
 
-        return [].concat(selfRules || formRules || []).concat(requiredRule);
+        if (formRules && this.prop) {
+          const prop = getPropByPath(formRules, this.prop);
+          return requiredRule.concat(prop.o[this.prop] || prop.v || []);
+        }
+
+        return requiredRule;
       },
       getFilteredRule(trigger) {
         const rules = this.getRules();
@@ -288,7 +281,7 @@
       addValidateEvents() {
         const rules = this.getRules();
 
-        if (rules.length || this.required !== undefined) {
+        if (rules.length || this.required) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }
