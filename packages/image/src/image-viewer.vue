@@ -1,7 +1,7 @@
 <template>
   <transition name="viewer-fade">
     <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
-      <div class="el-image-viewer__mask"></div>
+      <div class="el-image-viewer__mask" @click="handleClickMask"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
         <i class="el-icon-circle-close"></i>
@@ -91,6 +91,10 @@ export default {
     initialIndex: {
       type: Number,
       default: 0
+    },
+    closeOnClickModal: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -157,6 +161,10 @@ export default {
     hide() {
       this.deviceSupportUninstall();
       this.onClose();
+    },
+     handleClickMask() {
+      if (!this.closeOnClickModal) return;
+      this.hide();
     },
     deviceSupportInstall() {
       this._keyDownHandler = rafThrottle(e => {

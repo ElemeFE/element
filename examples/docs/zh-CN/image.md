@@ -147,6 +147,8 @@
 | scroll-container | 开启懒加载后，监听 scroll 事件的容器 | string / HTMLElement | — | 最近一个 overflow 值为 auto 或 scroll 的父元素 |
 | preview-src-list | 开启图片预览功能 | Array | — | - |
 | z-index | 设置图片预览的 z-index | Number | — | 2000 |
+| close-on-click-modal | 是否可以通过点击 modal 关闭预览| boolean | — | false |
+
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
