@@ -15,7 +15,9 @@
       :src="src"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
-    <image-viewer :z-index="zIndex" v-if="preview && showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+    <template v-if="preview">
+      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+    </template>
   </div>
 </template>
 
@@ -35,6 +37,8 @@
     FILL: 'fill',
     SCALE_DOWN: 'scale-down'
   };
+
+  let prevOverflow = '';
 
   export default {
     name: 'ElImage',
@@ -88,6 +92,9 @@
       preview() {
         const { previewSrcList } = this;
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
+      },
+      imageIndex() {
+        return this.previewSrcList.indexOf(this.src);
       }
     },
 
@@ -210,9 +217,13 @@
         }
       },
       clickHandler() {
+        // prevent body scroll
+        prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
         this.showViewer = true;
       },
       closeViewer() {
+        document.body.style.overflow = prevOverflow;
         this.showViewer = false;
       }
     }
