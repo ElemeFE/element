@@ -6,10 +6,10 @@ build-theme:
 	npm run build:theme
 
 install:
-	npm install
+	yarn || npm i
 
 install-cn:
-	npm install --registry=http://registry.npm.taobao.org
+	yarn --registry=http://registry.npm.taobao.org || npm i --registry=http://registry.npm.taobao.org
 
 dev:
 	npm run dev
@@ -29,8 +29,8 @@ dist: install
 deploy:
 	@npm run deploy
 
-pub:
-	npm run pub
+pub: dist
+	yarn publish --registry="https://registry.npmjs.org/"
 
 test:
 	npm run test:watch
