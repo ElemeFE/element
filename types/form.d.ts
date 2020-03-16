@@ -18,7 +18,7 @@ export interface ValidateFieldCallback {
    *
    * @param errorMessage The error message. It will be empty if there is no error
    */
-  (errorMessage: string): void
+  (errorMessage: string, error: Record<string, Array<{ field: string; message: string }>>): void
 }
 
 /** Form Component */
