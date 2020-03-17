@@ -65,7 +65,7 @@
 
       itemSelected() {
         if (!this.select.multiple) {
-          return this.isEqual(this.value, this.select.value);
+          return this.itemSelected;
         } else {
           return this.contains(this.select.value, this.value);
         }
