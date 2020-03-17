@@ -29,6 +29,10 @@
     <span class="demonstration">禁用</span>
     <el-slider v-model="value5" disabled></el-slider>
   </div>
+   <div class="block">
+    <span class="demonstration">始终显示 Tooltip</span>
+    <el-slider v-model="value6" :tooltip-visible="true"></el-slider>
+  </div>
 </template>
 
 <script>
@@ -39,7 +43,8 @@
         value2: 50,
         value3: 36,
         value4: 48,
-        value5: 42
+        value5: 42,
+        value6: 68
       }
     },
     methods: {
@@ -228,6 +233,7 @@
 | label | 屏幕阅读器标签 | string | — | — |
 | debounce | 输入时的去抖延迟，毫秒，仅在`show-input`等于true时有效 | number | — | 300 |
 | tooltip-class | tooltip 的自定义类名 | string | — | — |
+| tooltip-visible | 是否始终显示 tooltip, show-tooltip 为 `true` 时有效 | boolean | — | false |
 | marks | 标记， key 的类型必须为 number 且取值在闭区间 `[min, max]` 内，每个标记可以单独设置样式 | object | — | — |
 
 ### Events

@@ -33,12 +33,16 @@
         :style="barStyle">
       </div>
       <slider-button
+        :placement="placement"
+        :tooltip-visible="tooltipVisible"
         :vertical="vertical"
         v-model="firstValue"
         :tooltip-class="tooltipClass"
         ref="button1">
       </slider-button>
       <slider-button
+        :placement="placement"
+        :tooltip-visible="tooltipVisible"
         :vertical="vertical"
         v-model="secondValue"
         :tooltip-class="tooltipClass"
@@ -151,7 +155,15 @@
         type: String
       },
       tooltipClass: String,
-      marks: Object
+      marks: Object,
+      tooltipVisible: {
+        type: Boolean,
+        default: false
+      },
+      placement: {
+        type: String,
+        default: 'top'
+      }
     },
 
     components: {

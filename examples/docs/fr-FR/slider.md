@@ -30,6 +30,10 @@ La valeur est affichée lorsque le slider est utilisé.
     <span class="demonstration">Désactivé</span>
     <el-slider v-model="value5" disabled></el-slider>
   </div>
+  <div class="block">
+    <span class="demonstration">Show Tooltip always</span>
+    <el-slider v-model="value6" :tooltip-visible="true"></el-slider>
+  </div>
 </template>
 
 <script>
@@ -40,7 +44,8 @@ La valeur est affichée lorsque le slider est utilisé.
         value2: 50,
         value3: 36,
         value4: 48,
-        value5: 42
+        value5: 42,
+        value6: 68
       }
     },
     methods: {
@@ -230,6 +235,7 @@ Vous pouvez sélectionner des intervalles de valeurs au lieu d'une valeur unique
 | label | Label pour les lecteurs d'écran. | string | — | — |
 | debounce | Délai après écriture en millisecondes, marche quand `show-input` est `true`. | number | — | 300 |
 | tooltip-class | Classe du tooltip. | string | — | — |
+| tooltip-visible | whether to display tooltip value all the time | boolean | — | false |
 | marks | Marqueurs, les clés doivent être des `number` et être comprises dans l'intervalle `[min, max]`. Chaque marqueur peut avoir un style particulier. | object | — | — |
 
 ## Évènements

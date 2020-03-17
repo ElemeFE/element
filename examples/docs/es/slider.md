@@ -22,6 +22,7 @@ El valor actual se muestra cuando se inicia el arrastre del slider.
     <span class="demonstration">Hide Tooltip</span>
     <el-slider v-model="value3" :show-tooltip="false"></el-slider>
   </div>
+  
   <div class="block">
     <span class="demonstration">Format Tooltip</span>
     <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
@@ -29,6 +30,10 @@ El valor actual se muestra cuando se inicia el arrastre del slider.
   <div class="block">
     <span class="demonstration">Disabled</span>
     <el-slider v-model="value5" disabled></el-slider>
+  </div>
+  <div class="block">
+    <span class="demonstration">Show Tooltip always</span>
+    <el-slider v-model="value6" :tooltip-visible="true"></el-slider>
   </div>
 </template>
 
@@ -40,7 +45,8 @@ El valor actual se muestra cuando se inicia el arrastre del slider.
         value2: 50,
         value3: 36,
         value4: 48,
-        value5: 42
+        value5: 42,
+        value6: 68
       }
     },
     methods: {
@@ -233,6 +239,7 @@ Se soporta la selección de un rango de valores.
 | label               | etiqueta para screen reader              | string          | —                 | —           |
 | debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 | tooltip-class       | nombre personalizado de clase para el tooltip | string | — | — |
+| tooltip-visible | whether to display tooltip value all the time | boolean | — | false |
 | marks | marcas, tipo de clave debe ser `number` y debe estar en intervalo cerrado [min, max], cada marca puede tener estilo personalizado | object | — | — |
 
 ## Eventos

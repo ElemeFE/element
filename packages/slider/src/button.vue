@@ -17,7 +17,9 @@
     @keydown.up.prevent="onRightKeyDown"
   >
     <el-tooltip
-      placement="top"
+      :manual="tooltipVisible"
+      :value="tooltipVisible"
+      :placement="placement"
       ref="tooltip"
       :popper-class="tooltipClass"
       :disabled="!showTooltip">
@@ -46,7 +48,15 @@
         type: Boolean,
         default: false
       },
-      tooltipClass: String
+      tooltipClass: String,
+      tooltipVisible: {
+        type: Boolean,
+        default: false
+      },
+      placement: {
+        type: String,
+        default: 'top'
+      }
     },
 
     data() {
@@ -118,7 +128,9 @@
       },
 
       hideTooltip() {
-        this.$refs.tooltip && (this.$refs.tooltip.showPopper = false);
+        if (!this.tooltipVisible) {
+          this.$refs.tooltip && (this.$refs.tooltip.showPopper = false);
+        }
       },
 
       handleMouseEnter() {

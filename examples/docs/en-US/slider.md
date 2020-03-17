@@ -30,6 +30,10 @@ The current value is displayed when the slider is being dragged.
     <span class="demonstration">Disabled</span>
     <el-slider v-model="value5" disabled></el-slider>
   </div>
+  <div class="block">
+    <span class="demonstration">Show Tooltip always</span>
+    <el-slider v-model="value6" :tooltip-visible="true"></el-slider>
+  </div>
 </template>
 
 <script>
@@ -40,7 +44,8 @@ The current value is displayed when the slider is being dragged.
         value2: 50,
         value3: 36,
         value4: 48,
-        value5: 42
+        value5: 42,
+        value6: 68
       }
     },
     methods: {
@@ -231,6 +236,7 @@ Selecting a range of values is supported.
 | label | label for screen reader | string | — | — |
 | debounce | debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 | tooltip-class | custom class name for the tooltip | string | — | — |
+| tooltip-visible | whether to display tooltip value all the time | boolean | — | false |
 | marks | marks， type of key must be `number` and must in closed interval `[min, max]`, each mark can custom style| object | — | — |
 
 ## Events
