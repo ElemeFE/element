@@ -362,10 +362,11 @@
             this.$emit('input', text);
             return;
           }
+        } else if (text === this.nativeInputValue) {
+          // hack for https://github.com/ElemeFE/element/issues/8548
+          // should remove this else if block when we don't support IE
+          return;
         }
-        // hack for https://github.com/ElemeFE/element/issues/8548
-        // should remove the following line when we don't support IE
-        else if (text === this.nativeInputValue) return;
 
         this.$emit('input', text);
 
