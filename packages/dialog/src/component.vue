@@ -15,7 +15,10 @@
         :class="['el-dialog', { 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
         :style="style">
-        <div class="el-dialog__header">
+        <div class="el-dialog__header"
+          ref="header"
+          v-on:mouseup="mouseup"
+          v-on:mousedown="mousedown">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
           </slot>
@@ -48,6 +51,11 @@
     mixins: [Popup, emitter, Migrating],
 
     props: {
+      canDrag: {
+        type: Boolean,
+        default: false
+      },
+
       title: {
         type: String,
         default: ''
@@ -112,6 +120,17 @@
 
     data() {
       return {
+        first: true,
+        o_l: 0,
+        o_t: 0,
+        o_r: 0,
+        o_b: 0,
+        x: 0,
+        y: 0,
+        l: 0,
+        t: 0,
+        isDown: false,
+
         closed: false,
         key: 0
       };
@@ -155,6 +174,47 @@
     },
 
     methods: {
+      mouseup() {
+        if (!this.canDrag) {
+          return;
+        };
+        this.isDown = false;
+        this.$refs.header.style.cursor = 'default';
+      },
+      mousedown(e) {
+        if (!this.canDrag) {
+          return;
+        };
+        this.isDown = true;
+        var dv = this.$refs.dialog;
+        this.x = e.clientX;
+        this.y = e.clientY;
+
+        this.l = dv.offsetLeft;
+        this.t = dv.offsetTop;
+        if (this.first) {
+          this.o_l = dv.offsetLeft;
+          this.o_t = dv.offsetTop;
+          this.o_r = dv.offsetRight;
+          this.o_b = dv.offsetBottom;
+          this.first = false;
+        }
+
+        this.$refs.header.style.cursor = 'move';
+        window.onmousemove = (e)=>{
+          if (this.isDown === false) {
+            return;
+          }
+          var nx = e.clientX - this.x;
+          var ny = e.clientY - this.y;
+
+          var left = this.l - this.o_l + nx;
+          var right = this.t - this.o_t + ny;
+
+          this.$refs.dialog.style.left = left + 'px';
+          this.$refs.dialog.style.top = right + 'px';
+        };
+      },
       getMigratingConfig() {
         return {
           props: {
@@ -163,6 +223,7 @@
         };
       },
       handleWrapperClick() {
+        this.mouseup();
         if (!this.closeOnClickModal) return;
         this.handleClose();
       },
