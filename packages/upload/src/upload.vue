@@ -82,7 +82,7 @@ export default {
       });
     },
     upload(rawFile) {
-      this.$refs.input.value = null;
+      this.$refs.resetForm.reset();
 
       if (!this.beforeUpload) {
         return this.post(rawFile);
@@ -161,7 +161,7 @@ export default {
     },
     handleClick() {
       if (!this.disabled) {
-        this.$refs.input.value = null;
+        this.$refs.resetForm.reset();
         this.$refs.input.click();
       }
     },
@@ -203,7 +203,9 @@ export default {
             ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
             : this.$slots.default
         }
-        <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
+        <form ref="resetForm">
+          <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
+        </form>
       </div>
     );
   }
