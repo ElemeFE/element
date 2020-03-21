@@ -32,6 +32,9 @@ deploy:
 pub: dist
 	yarn publish --registry="https://registry.npmjs.org/"
 
+taobao:
+	curl 'https://npm.taobao.org/sync/connect'
+
 test:
 	npm run test:watch
 
