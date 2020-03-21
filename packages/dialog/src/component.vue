@@ -12,10 +12,11 @@
         :key="key"
         aria-modal="true"
         :aria-label="title || 'dialog'"
-        :class="['el-dialog', { 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
+        class="el-dialog"
+        :class="[{ 'is-fullscreen': fullscreen, 'is-movable': movable, 'el-dialog--center': center }, customClass]"
         ref="dialog"
         :style="style">
-        <div class="el-dialog__header">
+        <div class="el-dialog__header" ref="header">
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
           </slot>
@@ -91,6 +92,9 @@
       width: String,
 
       fullscreen: Boolean,
+
+      // Not responsable
+      movable: Boolean,
 
       customClass: {
         type: String,
@@ -199,6 +203,29 @@
         if (this.appendToBody) {
           document.body.appendChild(this.$el);
         }
+      }
+
+      if (this.movable) {
+        this.$refs.header.addEventListener('mousedown', e => {
+          if (e.button !== 0) return;
+          const startPos = {
+            x: e.pageX - (parseFloat(this.$refs.dialog.style.left) || 0),
+            y: e.pageY - (parseFloat(this.$refs.dialog.style.top) || 0)
+          };
+          /** @param {MouseEvent} e */
+          const handleMove = e => {
+            this.$refs.dialog.style.left = e.pageX - startPos.x + 'px';
+            this.$refs.dialog.style.top = e.pageY - startPos.y + 'px';
+          };
+          const cleanUp = () => {
+            window.removeEventListener('mousemove', handleMove);
+            window.removeEventListener('mouseup', handleMove);
+            window.removeEventListener('mouseup', cleanUp);
+          };
+          window.addEventListener('mousemove', handleMove);
+          window.addEventListener('mouseup', handleMove);
+          window.addEventListener('mouseup', cleanUp);
+        });
       }
     },
 

@@ -5,7 +5,7 @@
 
 Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
-:::demo 需要设置`visible`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了`before-close`的用法。
+:::demo 需要设置`visible`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。`movable`属性用于指定用户可以通过鼠标拖动标题来移动 Dialog 的位置。最后，本例还展示了`before-close`的用法。
 
 ```html
 <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
@@ -14,6 +14,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
   title="提示"
   :visible.sync="dialogVisible"
   width="30%"
+  movable
   :before-close="handleClose">
   <span>这是一段信息</span>
   <span slot="footer" class="dialog-footer">
@@ -208,6 +209,7 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | title     | Dialog 的标题，也可通过具名 slot （见下表）传入 | string    | — | — |
 | width     | Dialog 的宽度 | string    | — | 50% |
 | fullscreen     | 是否为全屏 Dialog | boolean    | — | false |
+| movable   | 是否可以通过拖动标题移动 Dialog。此属性设置后再改变不会生效 | boolean | — | false |
 | top       | Dialog CSS 中的 margin-top 值 | string | — | 15vh |
 | modal     | 是否需要遮罩层   | boolean   | — | true |
 | modal-append-to-body     | 遮罩层是否插入至 body 元素上，若为 false，则遮罩层会插入至 Dialog 的父元素上   | boolean   | — | true |

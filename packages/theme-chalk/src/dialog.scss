@@ -20,6 +20,13 @@
     overflow: auto;
   }
 
+  @include when(movable) {
+    .el-dialog__title {
+      cursor: move;
+      user-select: none;
+    }
+  }
+
   @include e(wrapper) {
     position: fixed;
     top: 0;
