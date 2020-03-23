@@ -155,7 +155,6 @@ export default {
   },
   methods: {
     hide() {
-      this.deviceSupportUninstall();
       this.onClose();
     },
     deviceSupportInstall() {
@@ -297,6 +296,9 @@ export default {
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();
+  },
+  beforeDestroy() {
+    this.deviceSupportUninstall();
   }
 };
 </script>
