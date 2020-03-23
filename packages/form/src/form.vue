@@ -129,6 +129,7 @@
           callback(true);
         }
         let invalidFields = {};
+        let callbacked = false;
         this.fields.forEach(field => {
           field.validate('', (message, field) => {
             if (message) {
@@ -137,10 +138,13 @@
             invalidFields = objectAssign({}, invalidFields, field);
             if (typeof callback === 'function' && ++count === this.fields.length) {
               callback(valid, invalidFields);
+              callbacked = true;
             }
           });
         });
-
+        if (!callbacked) {
+          callback(valid, invalidFields);
+        }
         if (promise) {
           return promise;
         }

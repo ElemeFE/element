@@ -158,6 +158,10 @@
       }
     },
     methods: {
+      resetActiveIndex() {
+        this.activeIndex = this.defaultActive
+      },
+
       updateActiveIndex(val) {
         const item = this.items[val] || this.items[this.activeIndex] || this.items[this.defaultActive];
         if (item) {
