@@ -130,7 +130,7 @@ export default {
 
     el[scope] = { el, vm, container, onScroll };
 
-    if (container) {
+    if (container !== window) {
       container.addEventListener('scroll', onScroll);
 
       if (immediate) {
