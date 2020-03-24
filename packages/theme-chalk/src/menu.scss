@@ -133,7 +133,9 @@
     width: 64px;
 
     > .el-menu-item,
-    > .el-submenu > .el-submenu__title {
+    > .el-submenu > .el-submenu__title,
+    > .el-menu-item-group .el-submenu> .el-submenu__title
+    {
       [class^="el-icon-"] {
         margin: 0;
         vertical-align: middle;
