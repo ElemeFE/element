@@ -43,6 +43,13 @@ const MessageBoxConstructor = Vue.extend(msgboxVue);
 let currentMsg, instance;
 let msgQueue = [];
 
+export class MessageBoxRejectError extends Error {
+  constructor(action) {
+    super('MessageBox Reject');
+    this.action = action;
+  }
+}
+
 const defaultCallback = action => {
   if (currentMsg) {
     let callback = currentMsg.callback;
@@ -61,7 +68,7 @@ const defaultCallback = action => {
           currentMsg.resolve(action);
         }
       } else if (currentMsg.reject && (action === 'cancel' || action === 'close')) {
-        currentMsg.reject(action);
+        currentMsg.reject(new MessageBoxRejectError(action));
       }
     }
   }
