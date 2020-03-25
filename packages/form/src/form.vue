@@ -118,7 +118,7 @@
           promise = new window.Promise((resolve, reject) => {
             callback = function(valid) {
               if (valid) {
-                resolve(valid)
+                resolve(valid);
               } else {
                 const retError = new Error('Form Validation Error');
                 retError.valid = valid;
