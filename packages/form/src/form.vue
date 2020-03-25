@@ -115,9 +115,15 @@
         let promise;
         // if no callback, return promise
         if (typeof callback !== 'function' && window.Promise) {
-          promise = new window.Promise((resolve) => {
+          promise = new window.Promise((resolve, reject) => {
             callback = function(valid) {
-              resolve(valid);
+              if (valid) {
+                resolve(valid)
+              } else {
+                const retError = new Error('Form Validation Error');
+                retError.valid = valid;
+                reject(retError);
+              }
             };
           });
         }

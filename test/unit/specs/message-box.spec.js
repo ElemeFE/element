@@ -251,8 +251,8 @@ describe('MessageBox', () => {
 
     it('reject', done => {
       MessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示')
-        .catch(action => {
-          expect(action).to.equal('cancel');
+        .catch(actionError => {
+          expect(actionError.action).to.equal('cancel');
           done();
         });
       setTimeout(() => {
