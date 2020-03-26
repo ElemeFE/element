@@ -2,18 +2,14 @@
 @import "common/var";
 
 $typeMap: (
-  primary: $--link-primary-font-color, 
-  danger: $--link-danger-font-color, 
-  success: $--link-success-font-color, 
-  warning: $--link-warning-font-color, 
-  info: $--link-info-font-color);
+  primary: $--link-primary-font-color,
+  danger: $--link-danger-font-color,
+  success: $--link-success-font-color,
+  warning: $--link-warning-font-color,
+  info: $--link-info-font-color,
+  native: rgb(0, 0, 238));
 
 @include b(link) {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
   position: relative;
   text-decoration: none;
   outline: none;
@@ -22,6 +18,10 @@ $typeMap: (
   font-size: $--link-font-size;
   font-weight: $--link-font-weight;
 
+  @include when(inherit-fs) {
+    font-size: inherit;
+  }
+
   @include when(underline) {
     &:hover:after {
       content: "";
@@ -29,22 +29,15 @@ $typeMap: (
       left: 0;
       right: 0;
       height: 0;
-      bottom: 0;
+      bottom: -2px;
       border-bottom: 1px solid $--link-default-active-color
     }
   }
 
   @include when(disabled) {
     cursor: not-allowed;
-  } 
-
-  & [class*="el-icon-"] {
-    & + span {
-      margin-left: 5px;
-    }
   }
-    
-    
+
   &.el-link--default  {
     color: $--link-default-font-color;
     &:hover {
@@ -77,5 +70,4 @@ $typeMap: (
       }
     }
   }
-    
 }

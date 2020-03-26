@@ -4,20 +4,18 @@
       'el-link',
       type ? `el-link--${type}` : '',
       disabled && 'is-disabled',
-      underline && !disabled && 'is-underline'
+      underline && !disabled && 'is-underline',
+      inheritFs && 'is-inherit-fs'
     ]"
     :href="tHref"
     v-bind="$attrs"
     @click="handleClick"
   >
+    <i :class="[icon, $slots.default ? 'el-icon--left' : null]" v-if="icon"></i>
 
-    <i :class="icon" v-if="icon"></i>
+    <slot></slot>
 
-    <span v-if="$slots.default" class="el-link--inner">
-      <slot></slot>
-    </span>
-
-    <template v-if="$slots.icon"><slot v-if="$slots.icon" name="icon"></slot></template>
+    <i :class="[iconRight, $slots.default ? 'el-icon--right' : null]" v-if="iconRight"></i>
   </a>
 </template>
 
@@ -38,7 +36,9 @@ export default {
     disabled: Boolean,
     href: String,
     to: [String, Object],
-    icon: String
+    icon: String,
+    iconRight: String,
+    inheritFs: Boolean
   },
 
   methods: {
