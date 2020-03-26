@@ -104,7 +104,17 @@
       :aria-label="label"
     >
     </textarea>
-    <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
+    <template v-if="type === 'textarea'">
+      <i v-if="showClear"
+         class="el-input__icon el-icon-circle-close el-input__clear"
+         @mousedown.prevent
+         @click="clear"
+      ></i>
+      <span
+        v-if="isWordLimitVisible"
+        class="el-input__count"
+      >{{ textLength }}/{{ upperLimit }}</span>
+    </template>
   </div>
 </template>
 <script>

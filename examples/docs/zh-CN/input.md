@@ -61,12 +61,20 @@ export default {
   v-model="input"
   clearable>
 </el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  placeholder="请输入内容"
+  v-model="textarea"
+  clearable>
+</el-input>
 
 <script>
   export default {
     data() {
       return {
-        input: ''
+        input: '待清空文本',
+        textarea: '待清空文本'
       }
     }
   }
@@ -656,7 +664,7 @@ export default {
   type="textarea"
   placeholder="请输入内容"
   v-model="textarea"
-  maxlength="30"
+  maxlength="60"
   show-word-limit
 >
 </el-input>

@@ -46,6 +46,14 @@
     right: 10px;
   }
 
+  & .el-input__clear {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    height: 25px;
+    line-height: 25px;
+  }
+
   @include when(disabled) {
     .el-textarea__inner {
       background-color: $--input-disabled-fill;
@@ -76,17 +84,6 @@
   display: inline-block;
   width: 100%;
   @include scroll-bar;
-
-  & .el-input__clear {
-    color: $--input-icon-color;
-    font-size: $--input-font-size;
-    cursor: pointer;
-    transition: $--color-transition-base;
-
-    &:hover {
-      color: $--input-clear-hover-color;
-    }
-  }
 
   & .el-input__count {
     height: 100%;
@@ -172,6 +169,17 @@
       width: 0;
       display: inline-block;
       vertical-align: middle;
+    }
+  }
+
+  @include e(clear) {
+    color: $--input-icon-color;
+    font-size: $--input-font-size;
+    cursor: pointer;
+    transition: $--color-transition-base;
+
+    &:hover {
+      color: $--input-clear-hover-color;
     }
   }
 
