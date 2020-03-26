@@ -3,15 +3,6 @@
 @import "tag";
 @import "common/var";
 
-@include b(table-column) {
-  @include m(selection) {
-    .cell {
-      padding-left: 14px;
-      padding-right: 14px;
-    }
-  }
-}
-
 @include b(table-filter) {
   border: solid 1px $--border-color-lighter;
   border-radius: 2px;
