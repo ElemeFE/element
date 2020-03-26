@@ -6,25 +6,25 @@
   >
   <div class="el-popconfirm">
     <p class="el-popconfirm__main">
-    <i
-      v-if="!hideIcon"
-      :class="icon"
-      class="el-popconfirm__icon"
-      :style="{color: iconColor}"
-    ></i>
+      <i
+        v-if="!hideIcon"
+        :class="icon"
+        class="el-popconfirm__icon"
+        :style="{color: iconColor}"
+      ></i>
       {{title}}
     </p>
     <div class="el-popconfirm__action">
-      <el-button 
-        size="mini" 
-        :type="cancelButtonType" 
+      <el-button
+        size="mini"
+        :type="cancelButtonType"
         @click="cancel"
       >
         {{cancelButtonText}}
       </el-button>
-      <el-button 
-        size="mini" 
-        :type="confirmButtonType" 
+      <el-button
+        size="mini"
+        :type="confirmButtonType"
         @click="confirm"
       >
         {{confirmButtonText}}
@@ -85,13 +85,13 @@ export default {
     };
   },
   methods: {
-    confirm() {
+    confirm(e) {
       this.visible = false;
-      this.$emit('onConfirm');
+      this.$emit('on-confirm', e);
     },
-    cancel() {
+    cancel(e) {
       this.visible = false;
-      this.$emit('onCancel');
+      this.$emit('on-cancel', e);
     }
   }
 };

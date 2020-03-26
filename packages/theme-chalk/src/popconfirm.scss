@@ -5,12 +5,13 @@
   @include e(main) {
     display: flex;
     align-items: center;
+    margin-top: 0;
   }
   @include e(icon) {
     margin-right: 5px;
   }
   @include e(action) {
-    text-align: right; 
-    margin: 0
+    text-align: right;
+    margin: 0;
   }
 }
