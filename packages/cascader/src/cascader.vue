@@ -145,27 +145,6 @@ const MigratingProps = {
   }
 };
 
-const PopperMixin = {
-  props: {
-    placement: {
-      type: String,
-      default: 'bottom-start'
-    },
-    appendToBody: Popper.props.appendToBody,
-    visibleArrow: {
-      type: Boolean,
-      default: true
-    },
-    arrowOffset: Popper.props.arrowOffset,
-    offset: Popper.props.offset,
-    boundariesPadding: Popper.props.boundariesPadding,
-    popperOptions: Popper.props.popperOptions
-  },
-  methods: Popper.methods,
-  data: Popper.data,
-  beforeDestroy: Popper.beforeDestroy
-};
-
 const InputSizeMap = {
   medium: 36,
   small: 32,
@@ -177,7 +156,7 @@ export default {
 
   directives: { Clickoutside },
 
-  mixins: [PopperMixin, Emitter, Locale, Migrating],
+  mixins: [Popper, Emitter, Locale, Migrating],
 
   inject: {
     elForm: {
@@ -197,6 +176,10 @@ export default {
 
   props: {
     value: {},
+    placement: {
+      type: String,
+      default: 'bottom-start'
+    },
     options: Array,
     props: Object,
     size: String,

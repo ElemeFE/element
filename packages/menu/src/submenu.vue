@@ -2,23 +2,9 @@
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
-  import Popper from 'element-ui/src/utils/vue-popper';
+  import { customerPopper } from 'element-ui/src/utils/vue-popper';
 
-  const poperMixins = {
-    props: {
-      transformOrigin: {
-        type: [Boolean, String],
-        default: false
-      },
-      offset: Popper.props.offset,
-      boundariesPadding: Popper.props.boundariesPadding,
-      popperOptions: Popper.props.popperOptions
-    },
-    data: Popper.data,
-    methods: Popper.methods,
-    beforeDestroy: Popper.beforeDestroy,
-    deactivated: Popper.deactivated
-  };
+  const poperMixins = customerPopper('appendToBody');
 
   export default {
     name: 'ElSubmenu',
@@ -30,6 +16,10 @@
     components: { ElCollapseTransition },
 
     props: {
+      transformOrigin: {
+        type: [Boolean, String],
+        default: false
+      },
       index: {
         type: String,
         required: true
@@ -61,10 +51,8 @@
     },
     watch: {
       opened(val) {
-        if (this.isMenuPopup) {
-          this.$nextTick(_ => {
-            this.updatePopper();
-          });
+        if (this.isMenuPopup && val) {
+          this.$nextTick(this.updatePopper);
         }
       }
     },

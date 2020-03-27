@@ -64,6 +64,7 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "deepmerge": "^4.2.2",
     "normalize-wheel": "^1.0.1",
+    "popper.js": "^1.16.1",
     "resize-observer-polyfill": "^1.5.1",
     "throttle-debounce": "^2.1.0"
   },
@@ -140,7 +141,7 @@
     "vue-router": "^3.1.6",
     "vue-template-compiler": "^2.6.11",
     "vue-template-es2015-compiler": "^1.9.1",
-    "webpack": "^4.42.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-node-externals": "^1.7.2"

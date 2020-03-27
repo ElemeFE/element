@@ -22,25 +22,17 @@
         default: 'bottom-start'
       },
 
-      boundariesPadding: {
-        default: 0
-      },
-
       popperOptions: {
+        type: Object,
         default() {
           return {
-            gpuAcceleration: false
+            modifiers: {
+              preventOverflow: {
+                padding: 0
+              }
+            }
           };
         }
-      },
-
-      visibleArrow: {
-        default: true
-      },
-
-      appendToBody: {
-        type: Boolean,
-        default: true
       }
     },
 
