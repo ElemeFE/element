@@ -96,8 +96,8 @@
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
-        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
-        <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
+        <i v-if="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]" @click="toggleList"></i>
+        <i v-else class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
     </el-input>
     <transition
@@ -574,6 +574,13 @@
           this.$emit('focus', event);
         } else {
           this.softFocus = false;
+        }
+      },
+
+      toggleList(event) {
+        if (this.visible) {
+          this.visible = false;
+          event.stopPropagation();
         }
       },
 
