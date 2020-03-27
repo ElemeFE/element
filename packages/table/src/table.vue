@@ -655,6 +655,7 @@
     },
 
     destroyed() {
+      this.store.$destroy();
       this.unbindEvents();
     },
 

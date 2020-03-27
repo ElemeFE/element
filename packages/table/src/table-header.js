@@ -344,7 +344,7 @@ export default {
       if (this.$isServer) return;
       if (column.children && column.children.length > 0) return;
       /* istanbul ignore if */
-      if (this.draggingColumn && this.border) {
+      if (this.draggingColumn && this.border && this.draggingColumn.resizable) {
         this.dragging = true;
 
         this.$parent.resizeProxyVisible = true;

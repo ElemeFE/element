@@ -175,7 +175,7 @@ export default Vue.extend({
       const value = states.selectOnIndeterminate
         ? !states.isAllSelected
         : !(states.isAllSelected || selection.length);
-      states.isAllSelected = value;
+      states.isAllSelected = data.length !== 0 && value;
 
       let selectionChanged = false;
       data.forEach((row, index) => {
