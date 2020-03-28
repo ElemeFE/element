@@ -15,9 +15,15 @@
       :src="src"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
-    <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
-    </template>
+    <transition name="viewer-fade" v-if="preview">
+      <image-viewer
+        v-if="showViewer"
+        :z-index="zIndex"
+        :initial-index="imageIndex"
+        :on-close="closeViewer"
+        :url-list="previewSrcList"
+        :close-on-click-modal="closeOnClickModal" />
+    </transition>
   </div>
 </template>
 
@@ -62,7 +68,8 @@
       zIndex: {
         type: Number,
         default: 2000
-      }
+      },
+      closeOnClickModal: Boolean
     },
 
     data() {
@@ -94,7 +101,8 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
-        return this.previewSrcList.indexOf(this.src);
+        const itemIndex = this.previewSrcList.indexOf(this.src) ;
+        return itemIndex > 0 ? itemIndex : 0 ;
       }
     },
 
@@ -108,6 +116,10 @@
     },
 
     mounted() {
+      const img = this._loadingImage = new Image();
+      img.onerror = this.handleError;
+      img.onload = this.handleLoad;
+
       if (this.lazy) {
         this.addLazyLoadListener();
       } else {
@@ -127,12 +139,13 @@
         this.loading = true;
         this.error = false;
 
-        const img = new Image();
-        img.onload = e => this.handleLoad(e, img);
-        img.onerror = this.handleError.bind(this);
-
         // bind html attrs
         // so it can behave consistently
+        /** @type {HTMLImageElement} */
+        const img = this._loadingImage;
+        while (img.attributes.length) {
+          img.attributes.removeNamedItem(img.attributes[0].name);
+        }
         Object.keys(this.$attrs)
           .forEach((key) => {
             const value = this.$attrs[key];
@@ -140,7 +153,8 @@
           });
         img.src = this.src;
       },
-      handleLoad(e, img) {
+      handleLoad(e) {
+        const img = this._loadingImage;
         this.imageWidth = img.width;
         this.imageHeight = img.height;
         this.loading = false;
@@ -217,6 +231,7 @@
         }
       },
       clickHandler() {
+        if (!this.preview) return;
         // prevent body scroll
         prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';

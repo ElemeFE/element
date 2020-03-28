@@ -110,13 +110,14 @@
 
 ### 大图预览
 
-:::demo 可通过 `previewSrcList` 开启预览大图的功能。
+:::demo 可通过 `previewSrcList` 开启预览大图的功能。设置`close-on-click-modal`允许用户点击遮罩层关闭预览
 ```html
 <div class="demo-image__preview">
-  <el-image 
+  <el-image
     style="width: 100px; height: 100px"
-    :src="url" 
-    :preview-src-list="srcList">
+    :src="url"
+    :preview-src-list="srcList"
+    close-on-click-modal>
   </el-image>
 </div>
 
@@ -126,6 +127,7 @@
       return {
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         srcList: [
+          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
           'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
         ]
@@ -147,6 +149,7 @@
 | scroll-container | 开启懒加载后，监听 scroll 事件的容器 | string / HTMLElement | — | 最近一个 overflow 值为 auto 或 scroll 的父元素 |
 | preview-src-list | 开启图片预览功能 | Array | — | - |
 | z-index | 设置图片预览的 z-index | Number | — | 2000 |
+| close-on-click-modal | 是否可以通过点击 modal 关闭预览。设置此属性后不显示关闭图标| boolean | — | false |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
@@ -159,5 +162,3 @@
 |---------|-------------|
 | placeholder | 图片未加载的占位内容 |
 | error | 加载失败的内容 |
-
-

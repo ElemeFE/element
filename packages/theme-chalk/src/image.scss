@@ -145,32 +145,12 @@
     background: #000;
   }
 }
-
-.viewer-fade-enter-active {
-  animation: viewer-fade-in .3s;
-}
-
-.viewer-fade-leave-active {
-  animation: viewer-fade-out .3s;
-}
-
-@keyframes viewer-fade-in {
-  0% {
-    transform: translate3d(0, -20px, 0);
-    opacity: 0;
+.viewer-fade {
+  &-enter-active, &-leave-active {
+    transition: .3s;
   }
-  100% {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-}
 
-@keyframes viewer-fade-out {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-  100% {
+  &-enter, &-leave-to {
     transform: translate3d(0, -20px, 0);
     opacity: 0;
   }

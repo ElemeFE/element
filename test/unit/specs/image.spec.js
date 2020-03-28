@@ -131,8 +131,7 @@ describe('Image', () => {
     const $wrapper = vm.$el.querySelector('.el-image-viewer__wrapper');
     expect($wrapper).to.exist;
     vm.$el.querySelector('.el-image-viewer__close').click();
-    await wait(1000);
-    expect($wrapper.style.display).to.equal('none');
+    await wait(600);
+    expect(vm.$el.querySelector('.el-image-viewer__wrapper')).to.be.null;
   });
 });
-

@@ -1,59 +1,59 @@
 <template>
-  <transition name="viewer-fade">
-    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
-      <div class="el-image-viewer__mask"></div>
-      <!-- CLOSE -->
-      <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
-        <i class="el-icon-circle-close"></i>
+  <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
+    <div class="el-image-viewer__mask" @click="closeOnClickModal && onClose()"></div>
+    <!-- CLOSE -->
+    <span
+      v-if="!closeOnClickModal"
+      class="el-image-viewer__btn el-image-viewer__close"
+      @click="onClose"
+    >
+      <i class="el-icon-circle-close"></i>
+    </span>
+    <!-- ARROW -->
+    <template v-if="!isSingle">
+      <span
+        class="el-image-viewer__btn el-image-viewer__prev"
+        :class="{ 'is-disabled': !infinite && isFirst }"
+        @click="prev">
+        <i class="el-icon-arrow-left"/>
       </span>
-      <!-- ARROW -->
-      <template v-if="!isSingle">
-        <span
-          class="el-image-viewer__btn el-image-viewer__prev"
-          :class="{ 'is-disabled': !infinite && isFirst }"
-          @click="prev">
-          <i class="el-icon-arrow-left"/>
-        </span>
-        <span
-          class="el-image-viewer__btn el-image-viewer__next"
-          :class="{ 'is-disabled': !infinite && isLast }"
-          @click="next">
-          <i class="el-icon-arrow-right"/>
-        </span>
-      </template>
-      <!-- ACTIONS -->
-      <div class="el-image-viewer__btn el-image-viewer__actions">
-        <div class="el-image-viewer__actions__inner">
-          <i class="el-icon-zoom-out" @click="handleActions('zoomOut')"></i>
-          <i class="el-icon-zoom-in" @click="handleActions('zoomIn')"></i>
-          <i class="el-image-viewer__actions__divider"></i>
-          <i :class="mode.icon" @click="toggleMode"></i>
-          <i class="el-image-viewer__actions__divider"></i>
-          <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
-          <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
-        </div>
-      </div>
-      <!-- CANVAS -->
-      <div class="el-image-viewer__canvas">
-        <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
-          ref="img"
-          class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
-          :style="imgStyle"
-          @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown">
+      <span
+        class="el-image-viewer__btn el-image-viewer__next"
+        :class="{ 'is-disabled': !infinite && isLast }"
+        @click="next">
+        <i class="el-icon-arrow-right"/>
+      </span>
+    </template>
+    <!-- ACTIONS -->
+    <div class="el-image-viewer__btn el-image-viewer__actions">
+      <div class="el-image-viewer__actions__inner">
+        <i class="el-icon-zoom-out" @click="handleActions('zoomOut')"></i>
+        <i class="el-icon-zoom-in" @click="handleActions('zoomIn')"></i>
+        <i class="el-image-viewer__actions__divider"></i>
+        <i :class="mode.icon" @click="toggleMode"></i>
+        <i class="el-image-viewer__actions__divider"></i>
+        <i class="el-icon-refresh-left" @click="handleActions('rotateLeft')"></i>
+        <i class="el-icon-refresh-right" @click="handleActions('rotateRight')"></i>
       </div>
     </div>
-  </transition>
+    <!-- CANVAS -->
+    <div class="el-image-viewer__canvas">
+      <img
+        ref="img"
+        class="el-image-viewer__img"
+        :key="currentImg"
+        :src="currentImg"
+        :style="imgStyle"
+        @load="handleImgLoad"
+        @error="handleImgError"
+        @mousedown="handleMouseDown">
+    </div>
+  </div>
 </template>
 
 <script>
 import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
+import { rafThrottle } from 'element-ui/src/utils/util';
 
 const Mode = {
   CONTAIN: {
@@ -65,8 +65,6 @@ const Mode = {
     icon: 'el-icon-c-scale-to-original'
   }
 };
-
-const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel';
 
 export default {
   name: 'elImageViewer',
@@ -91,13 +89,16 @@ export default {
     initialIndex: {
       type: Number,
       default: 0
+    },
+    closeOnClickModal: {
+      type: Boolean,
+      default: false
     }
   },
 
   data() {
     return {
       index: this.initialIndex,
-      isShow: false,
       infinite: true,
       loading: false,
       mode: Mode.CONTAIN,
@@ -138,33 +139,26 @@ export default {
     }
   },
   watch: {
-    index: {
-      handler: function(val) {
-        this.reset();
-        this.onSwitch(val);
-      }
+    index(val) {
+      this.reset();
+      this.onSwitch(val);
     },
     currentImg(val) {
-      this.$nextTick(_ => {
-        const $img = this.$refs.img[0];
-        if (!$img.complete) {
+      this.$nextTick(() => {
+        if (!this.$refs.img.complete) {
           this.loading = true;
         }
       });
     }
   },
   methods: {
-    hide() {
-      this.deviceSupportUninstall();
-      this.onClose();
-    },
     deviceSupportInstall() {
       this._keyDownHandler = rafThrottle(e => {
         const keyCode = e.keyCode;
         switch (keyCode) {
           // ESC
           case 27:
-            this.hide();
+            this.onClose();
             break;
           // SPACE
           case 32:
@@ -189,25 +183,17 @@ export default {
         }
       });
       this._mouseWheelHandler = rafThrottle(e => {
-        const delta = e.wheelDelta ? e.wheelDelta : -e.detail;
-        if (delta > 0) {
-          this.handleActions('zoomIn', {
-            zoomRate: 0.015,
-            enableTransition: false
-          });
-        } else {
-          this.handleActions('zoomOut', {
-            zoomRate: 0.015,
-            enableTransition: false
-          });
-        }
+        this.handleActions(e.deltaY > 0 ? 'zoomIn' : 'zoomOut', {
+          zoomRate: 0.015,
+          enableTransition: false
+        });
       });
       on(document, 'keydown', this._keyDownHandler);
-      on(document, mousewheelEventName, this._mouseWheelHandler);
+      on(document, 'wheel', this._mouseWheelHandler);
     },
     deviceSupportUninstall() {
       off(document, 'keydown', this._keyDownHandler);
-      off(document, mousewheelEventName, this._mouseWheelHandler);
+      off(document, 'wheel', this._mouseWheelHandler);
       this._keyDownHandler = null;
       this._mouseWheelHandler = null;
     },
@@ -216,7 +202,7 @@ export default {
     },
     handleImgError(e) {
       this.loading = false;
-      e.target.alt = '加载失败';
+      e.target.alt = this.t('el.image.error');
     },
     handleMouseDown(e) {
       if (this.loading || e.button !== 0) return;
@@ -276,17 +262,17 @@ export default {
       switch (action) {
         case 'zoomOut':
           if (transform.scale > 0.2) {
-            transform.scale = parseFloat((transform.scale - zoomRate).toFixed(3));
+            transform.scale -= zoomRate;
           }
           break;
         case 'zoomIn':
-          transform.scale = parseFloat((transform.scale + zoomRate).toFixed(3));
+          transform.scale += zoomRate;
           break;
-        case 'clocelise':
-          transform.deg += rotateDeg;
-          break;
-        case 'anticlocelise':
+        case 'rotateLeft':
           transform.deg -= rotateDeg;
+          break;
+        case 'rotateRight':
+          transform.deg += rotateDeg;
           break;
       }
       transform.enableTransition = enableTransition;
@@ -297,6 +283,9 @@ export default {
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();
+  },
+  beforeDestroy() {
+    this.deviceSupportUninstall();
   }
 };
 </script>
