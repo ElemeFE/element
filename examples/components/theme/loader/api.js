@@ -15,10 +15,6 @@ export const getVars = () => {
   return get(`${host}getVariable?version=${version}`);
 };
 
-export const getTestEle = () => {
-  return get(`${hostList.alpha}getVariable`);
-};
-
 export const updateVars = (data, cb) => {
   return post(`${host}updateVariable?version=${version}`, data, cb);
 };

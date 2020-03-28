@@ -97,11 +97,11 @@
       list-style: none;
       position: relative;
       cursor: pointer;
-    
+
       &.nav-algolia-search {
         cursor: default;
       }
-    
+
       &.lang-item,
       &:last-child {
         cursor: default;
@@ -195,7 +195,7 @@
       }
     }
   }
-  
+
   .nav-dropdown-list {
     width: auto;
   }
@@ -215,7 +215,7 @@
         &:last-child {
           margin-left: 10px;
         }
-         
+
         a {
           padding: 0 5px;
         }
@@ -239,11 +239,11 @@
 
         &.lang-item {
           height: 100%;
-         
+
           .nav-lang {
             display: flex;
             align-items: center;
-            
+
             span {
               padding-bottom: 0;
             }
@@ -301,7 +301,7 @@
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
-          <li 
+          <li
             class="nav-item nav-item-theme"
           >
             <router-link
@@ -380,7 +380,6 @@
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
   import themeLoader from './theme/loader';
-  import { getTestEle } from './theme/loader/api.js';
   import bus from '../bus';
   import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
 
@@ -423,28 +422,6 @@
       isComponentPage() {
         return /^component/.test(this.$route.name);
       }
-    },
-    mounted() {
-      getTestEle()
-        .then(() => {
-          this.$isEle = true;
-          ga('send', 'event', 'DocView', 'Ele', 'Inner');
-        })
-        .catch((err) => {
-          ga('send', 'event', 'DocView', 'Ele', 'Outer');
-          console.error(err);
-        });
-  
-      const testInnerImg = new Image();
-      testInnerImg.onload = () => {
-        this.$isEle = true;
-        ga('send', 'event', 'DocView', 'Ali', 'Inner');
-      };
-      testInnerImg.onerror = (err) => {
-        ga('send', 'event', 'DocView', 'Ali', 'Outer');
-        console.error(err);
-      };
-      testInnerImg.src = `https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`;
     },
     methods: {
       switchVersion(version) {
