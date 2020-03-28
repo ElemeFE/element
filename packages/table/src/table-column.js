@@ -36,7 +36,7 @@ export default {
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
     fixed: [Boolean, String],
-    formatter: Function,
+    formatter: [Function, Object, String],
     selectable: Function,
     reserveSelection: Boolean,
     filterMethod: Function,

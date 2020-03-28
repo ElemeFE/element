@@ -77,7 +77,7 @@ export declare class ElTableColumn extends ElementUIComponent {
   resizable: boolean
 
   /** Function that formats content */
-  formatter: (row: object, column: TableColumn, cellValue: any, index: number) => any
+  formatter: (row: object, column: TableColumn, cellValue: any, index: number) => any | object | string
 
   /** Whether to hide extra content and show them in a tooltip when hovering on the cell */
   showOverflowTooltip: boolean

@@ -149,9 +149,12 @@
   </el-scrollbar>
 </template>
 <script>
+  import Vue from 'vue';
+  import { formatDate } from 'element-ui/src/utils/date-util';
   import bus from '../../bus';
   import navsData from '../../nav.config.json';
   import { throttle } from 'throttle-debounce';
+  Vue.filter('formatDate', x => formatDate(x));
 
   export default {
     data() {

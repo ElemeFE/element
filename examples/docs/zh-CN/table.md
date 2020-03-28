@@ -6,7 +6,7 @@
 
 基础的表格展示用法。
 
-:::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。本例还演示了`formatter`属性的用法，可用来格式化日期、状态码等值
 ```html
   <template>
     <el-table
@@ -15,12 +15,19 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        width="150"
+        formatter="formatDate">
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="180">
+        width="150">
+      </el-table-column>
+      <el-table-column
+        prop="married"
+        label="婚否"
+        width="150"
+        :formatter="marriageMap">
       </el-table-column>
       <el-table-column
         prop="address"
@@ -35,22 +42,31 @@
       data() {
         return {
           tableData: [{
-            date: '2016-05-02',
+            date: 1462118400000,
+            married: false,
             name: '王小一',
             address: '上海市普陀区金沙江路 1518 弄'
           }, {
-            date: '2016-05-04',
+            date: 1462291200000,
+            married: true,
             name: '王小二',
             address: '上海市普陀区金沙江路 1517 弄，上海市普陀区金沙江路 1517 弄，上海市普陀区金沙江路 1517 弄，上海市普陀区金沙江路 1517 弄'
           }, {
-            date: '2016-05-01',
+            date: 1462032000000,
+            married: null,
             name: '王小三',
             address: '上海市普陀区金沙江路 1519 弄，上海市普陀区金沙江路 1519 弄，上海市普陀区金沙江路 1519 弄，上海市普陀区金沙江路 1519 弄'
           }, {
-            date: '2016-05-03',
+            date: 1462204800000,
+            married: false,
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
-          }]
+          }],
+          marriageMap: {
+            false: '未婚',
+            true: '已婚',
+            null: '重婚'
+          }
         }
       }
     }
@@ -1941,7 +1957,7 @@
 | sort-by | 指定数据按照哪个属性进行排序，仅当 sortable 设置为 true 且没有设置 sort-method 的时候有效。如果 sort-by 为数组，则先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推 | String/Array/Function(row, index) | — | — |
 | sort-orders | 数据在排序时所使用排序策略的轮转顺序，仅当 sortable 为 true 时有效。需传入一个数组，随着用户点击表头，该列依次按照数组中元素的顺序进行排序 | array | 数组中的元素需为以下三者之一：`ascending` 表示升序，`descending` 表示降序，`null` 表示还原为原始顺序 | ['ascending', 'descending', null] |
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
-| formatter | 用来格式化内容 | Function(row, column, cellValue, index) | — | — |
+| formatter | 用来格式化内容。当为函数时使用其返回值：`formatter(row, column, cellValue, index)`；当为对象时取其对应key的值：`formatter[cellValue]`；当为字符串时使用全局注册的过滤器：`Vue.filter(formatter)(cellValue)` | Function / Object / String | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
 | align | 对齐方式 | String | left/center/right | left |
 | header-align | 表头对齐方式，若不设置该项，则使用表格的对齐方式 | String | left/center/right | — |

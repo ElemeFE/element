@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { getPropByPath } from 'element-ui/src/utils/util';
 
 export const cellStarts = {
@@ -91,8 +92,14 @@ export function defaultRenderCell(h, { row, column, $index }) {
   const property = column.property;
   const value = property && getPropByPath(row, property).v;
   if (column && column.formatter) {
+    if (typeof column.formatter === 'string') {
+      return Vue.filter(column.formatter)(value, $index);
+    } else if (typeof column.formatter === 'object') {
+      return column.formatter[value];
+    }
     return column.formatter(row, column, value, $index);
   }
+  if (typeof value === 'boolean') return value + '';
   return value;
 }
 
