@@ -10,14 +10,15 @@
     <el-input
       ref="input"
       v-bind="[$props, $attrs]"
-      @input="handleChange"
+      @input="handleInput"
+      @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
       @clear="handleClear"
-      @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
-      @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
+      @keydown.up.native="highlight(highlightedIndex - 1, $event)"
+      @keydown.down.native="highlight(highlightedIndex + 1, $event)"
       @keydown.enter.native="handleKeyEnter"
-      @keydown.native.tab="close"
+      @keydown.tab.native="handleKeyEnter"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -101,7 +102,10 @@
       maxlength: Number,
       minlength: Number,
       autofocus: Boolean,
-      fetchSuggestions: Function,
+      fetchSuggestions: {
+        type: Function,
+        required: true
+      },
       triggerOnFocus: {
         type: Boolean,
         default: true
@@ -128,6 +132,10 @@
         default: true
       },
       highlightFirstItem: {
+        type: Boolean,
+        default: false
+      },
+      showAllOnFocus: {
         type: Boolean,
         default: false
       }
@@ -173,7 +181,7 @@
           return;
         }
         this.loading = true;
-        this.fetchSuggestions(queryString, (suggestions) => {
+        const done = (suggestions) => {
           this.loading = false;
           if (this.suggestionDisabled) {
             return;
@@ -184,9 +192,14 @@
           } else {
             console.error('[Element Error][Autocomplete]autocomplete suggestions must be an array');
           }
-        });
+        };
+        const result = this.fetchSuggestions(queryString, done);
+        if (result != null && typeof result === 'object') {
+          if (Array.isArray(result)) done(result);
+          if (typeof result.then === 'function') result.then(done);
+        }
       },
-      handleChange(value) {
+      handleInput(value) {
         this.$emit('input', value);
         this.suggestionDisabled = false;
         if (!this.triggerOnFocus && !value) {
@@ -196,11 +209,14 @@
         }
         this.debouncedGetData(value);
       },
+      handleChange(event) {
+        this.$emit('change', event);
+      },
       handleFocus(event) {
         this.activated = true;
         this.$emit('focus', event);
         if (this.triggerOnFocus) {
-          this.debouncedGetData(this.value);
+          this.getData(this.showAllOnFocus ? '' : this.value);
         }
       },
       handleBlur(event) {
@@ -233,8 +249,10 @@
           this.highlightedIndex = -1;
         });
       },
-      highlight(index) {
+      highlight(index, event) {
         if (!this.suggestionVisible || this.loading) { return; }
+        if (event) event.preventDefault();
+
         if (index < 0) {
           this.highlightedIndex = -1;
           return;
