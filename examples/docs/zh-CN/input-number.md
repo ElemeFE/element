@@ -174,7 +174,7 @@
 | step     | 计数器步长           | number   | — | 1 |
 | step-strictly | 是否只能输入 step 的倍数 | boolean   | — | false |
 | precision| 数值精度             | number   | — | — |
-| size     | 计数器尺寸           | string   | large, small | — |
+| size     | 计数器尺寸           | string   | medium / small / mini | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
 | controls | 是否使用控制按钮        | boolean | — | true |
 | controls-position | 控制按钮位置 | string | right | - |

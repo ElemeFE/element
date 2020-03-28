@@ -288,6 +288,34 @@ describe('InputNumber', () => {
       });
     });
   });
+  it('should update value when precision changes', done => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" :precision="precision">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 1.35,
+          precision: 2
+        };
+      }
+    }, true);
+    expect(vm.value).to.be.equal(1.35);
+    vm.precision = 0;
+    setTimeout(() => {
+      expect(vm.value).to.be.equal(1);
+      expect(vm.$el.querySelector('input').value).to.be.equal('1');
+
+      vm.precision = 2;
+      setTimeout(() => {
+        expect(vm.value).to.be.equal(1);
+        expect(vm.$el.querySelector('input').value).to.be.equal('1.00');
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
+
   it('controls', () => {
     vm = createVue({
       template: `

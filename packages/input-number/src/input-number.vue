@@ -101,7 +101,7 @@
       precision: {
         type: Number,
         validator(val) {
-          return val >= 0 && val === parseInt(val, 10);
+          return val >= 0 && val === Math.floor(val);
         }
       }
     },
@@ -139,6 +139,9 @@
           this.userInput = null;
           this.$emit('input', newVal);
         }
+      },
+      precision(value) {
+        this.setCurrentValue(this.value, value);
       }
     },
     computed: {
@@ -170,7 +173,7 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       inputNumberDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled || !!(this.elForm || {}).disabled;
       },
       displayValue() {
         if (this.userInput !== null) {
@@ -241,10 +244,10 @@
       handleFocus(event) {
         this.$emit('focus', event);
       },
-      setCurrentValue(newVal) {
+      setCurrentValue(newVal, precision = this.precision) {
         const oldVal = this.currentValue;
-        if (typeof newVal === 'number' && this.precision !== undefined) {
-          newVal = this.toPrecision(newVal, this.precision);
+        if (typeof newVal === 'number' && precision !== undefined) {
+          newVal = this.toPrecision(newVal, precision);
         }
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
