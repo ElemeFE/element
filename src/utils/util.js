@@ -225,7 +225,7 @@ export function rafThrottle(fn) {
   return function(...args) {
     if (locked) return;
     locked = true;
-    window.requestAnimationFrame(_ => {
+    window.requestAnimationFrame(() => {
       fn.apply(this, args);
       locked = false;
     });

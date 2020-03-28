@@ -42,7 +42,7 @@ export default {
             this.columns.map(column => <col name={ column.id } key={column.id} />)
           }
         </colgroup>
-        <tbody>
+        <tbody ref="tbody">
           {
             data.reduce((acc, row) => {
               return acc.concat(this.wrappedRowRender(row, acc.length));
@@ -81,12 +81,9 @@ export default {
     // update DOM manually. see https://github.com/ElemeFE/element/pull/13954/files#diff-9b450c00d0a9dec0ffad5a3176972e40
     'store.states.hoverRow'(newVal, oldVal) {
       if (!this.store.states.isComplex || this.$isServer) return;
-      let raf = window.requestAnimationFrame;
-      if (!raf) {
-        raf = (fn) => setTimeout(fn, 16);
-      }
-      raf(() => {
-        const rows = this.$el.querySelectorAll('.el-table__row');
+      window.requestAnimationFrame(() => {
+        const trs = this.$refs.tbody.children;
+        const rows = [].filter.call(trs, row => hasClass(row, 'el-table__row'));
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
         if (oldRow) {

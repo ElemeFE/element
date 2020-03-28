@@ -22,6 +22,10 @@ Watcher.prototype.mutations = {
         this.cleanSelection();
       }
     }
+    if (this.table.$ready) {
+      this.scheduleLayout();
+    }
+
     this.updateAllSelected();
 
     this.updateTableScrollY();

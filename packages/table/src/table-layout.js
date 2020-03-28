@@ -43,7 +43,7 @@ class TableLayout {
   updateScrollY() {
     const height = this.height;
     if (height === null) return false;
-    const bodyWrapper = this.table.bodyWrapper;
+    const bodyWrapper = this.table.$refs.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
       const prevScrollY = this.scrollY;

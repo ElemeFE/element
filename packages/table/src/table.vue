@@ -41,9 +41,7 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
-        :style="{
-           width: bodyWidth
-        }">
+        :style="{ width: bodyWidth }">
       </table-body>
       <div
         v-if="!data || data.length === 0"
@@ -179,7 +177,7 @@
             width: bodyWidth
           }">
         </table-body>
-         <div
+        <div
           v-if="$slots.append"
           class="el-table__append-gutter"
           :style="{ height: layout.appendHeight + 'px' }"></div>
@@ -214,11 +212,12 @@
 
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
-  import { debounce, throttle } from 'throttle-debounce';
+  import { debounce } from 'throttle-debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Mousewheel from 'element-ui/src/directives/mousewheel';
   import Locale from 'element-ui/src/mixins/locale';
   import Migrating from 'element-ui/src/mixins/migrating';
+  import { rafThrottle } from 'element-ui/src/utils/util';
   import { createStore, mapStates } from './store/helper';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -389,7 +388,7 @@
       },
 
       handleFixedMousewheel(event, data) {
-        const bodyWrapper = this.bodyWrapper;
+        const { bodyWrapper } = this.$refs;
         if (Math.abs(data.spinY) > 0) {
           const currentScrollTop = bodyWrapper.scrollTop;
           if (data.pixelY < 0 && currentScrollTop !== 0) {
@@ -407,14 +406,14 @@
       handleHeaderFooterMousewheel(event, data) {
         const { pixelX, pixelY } = data;
         if (Math.abs(pixelX) >= Math.abs(pixelY)) {
-          this.bodyWrapper.scrollLeft += data.pixelX / 5;
+          this.$refs.bodyWrapper.scrollLeft += data.pixelX / 5;
         }
       },
 
       // TODO 使用 CSS transform
-      syncPostion: throttle(20, function() {
-        const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
-        const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
+      syncPostion: rafThrottle(function() {
+        const { bodyWrapper, headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
+        const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = bodyWrapper;
         if (headerWrapper) headerWrapper.scrollLeft = scrollLeft;
         if (footerWrapper) footerWrapper.scrollLeft = scrollLeft;
         if (fixedBodyWrapper) fixedBodyWrapper.scrollTop = scrollTop;
@@ -430,14 +429,16 @@
       }),
 
       bindEvents() {
-        this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
+        this.$refs.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
         }
       },
 
       unbindEvents() {
-        this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
+        if (this.$refs.bodyWrapper) {
+          this.$refs.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
+        }
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
         }
@@ -486,10 +487,6 @@
     computed: {
       tableSize() {
         return this.size || (this.$ELEMENT || {}).size;
-      },
-
-      bodyWrapper() {
-        return this.$refs.bodyWrapper;
       },
 
       shouldUpdateHeight() {

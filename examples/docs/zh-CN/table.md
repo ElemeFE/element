@@ -6,7 +6,7 @@
 
 基础的表格展示用法。
 
-:::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。
+:::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
   <template>
     <el-table
@@ -24,7 +24,8 @@
       </el-table-column>
       <el-table-column
         prop="address"
-        label="地址">
+        label="地址"
+        show-overflow-tooltip>
       </el-table-column>
     </el-table>
   </template>
@@ -35,16 +36,16 @@
         return {
           tableData: [{
             date: '2016-05-02',
-            name: '王小虎',
+            name: '王小一',
             address: '上海市普陀区金沙江路 1518 弄'
           }, {
             date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
+            name: '王小二',
+            address: '上海市普陀区金沙江路 1517 弄，上海市普陀区金沙江路 1517 弄，上海市普陀区金沙江路 1517 弄，上海市普陀区金沙江路 1517 弄'
           }, {
             date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
+            name: '王小三',
+            address: '上海市普陀区金沙江路 1519 弄，上海市普陀区金沙江路 1519 弄，上海市普陀区金沙江路 1519 弄，上海市普陀区金沙江路 1519 弄'
           }, {
             date: '2016-05-03',
             name: '王小虎',
@@ -830,7 +831,7 @@
 
 选择多行数据时使用 Checkbox。
 
-:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可
 ```html
 <template>
   <el-table
@@ -855,8 +856,7 @@
     </el-table-column>
     <el-table-column
       prop="address"
-      label="地址"
-      show-overflow-tooltip>
+      label="地址">
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
