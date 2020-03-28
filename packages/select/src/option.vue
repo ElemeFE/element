@@ -52,7 +52,7 @@
 
     computed: {
       isObject() {
-        return Object.prototype.toString.call(this.value).toLowerCase() === '[object object]';
+        return this.value && typeof this.value === 'object';
       },
 
       currentLabel() {

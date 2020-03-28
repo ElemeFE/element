@@ -107,7 +107,7 @@
       },
 
       isChecked() {
-        if ({}.toString.call(this.model) === '[object Boolean]') {
+        if (typeof this.model === 'boolean') {
           return this.model;
         } else if (Array.isArray(this.model)) {
           return this.model.indexOf(this.label) > -1;

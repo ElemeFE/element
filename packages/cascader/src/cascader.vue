@@ -124,7 +124,6 @@ import ElCascaderPanel from 'element-ui/packages/cascader-panel';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
 import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
-import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import { debounce } from 'throttle-debounce';
@@ -296,7 +295,7 @@ export default {
       const { value, dropDownVisible } = this;
       const { checkStrictly, multiple } = this.config;
 
-      if (!isEqual(val, value) || isUndefined(value)) {
+      if (!isEqual(val, value) || value === void 0) {
         this.computePresentContent();
         // hide dropdown when single mode
         if (!multiple && !checkStrictly && dropDownVisible) {
@@ -516,7 +515,7 @@ export default {
     getSuggestions() {
       let { filterMethod } = this;
 
-      if (!isFunction(filterMethod)) {
+      if (typeof filterMethod !== 'function') {
         filterMethod = (node, keyword) => node.text.includes(keyword);
       }
 

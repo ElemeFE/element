@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import { isString, isObject } from 'element-ui/src/utils/types';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -149,13 +148,13 @@ export const kebabCase = function(str) {
 };
 
 export const capitalize = function(str) {
-  if (!isString(str)) return str;
+  if (typeof str !== 'string') return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 export const looseEqual = function(a, b) {
-  const isObjectA = isObject(a);
-  const isObjectB = isObject(b);
+  const isObjectA = typeof a === 'object';
+  const isObjectB = typeof b === 'object';
   if (isObjectA && isObjectB) {
     return JSON.stringify(a) === JSON.stringify(b);
   } else if (!isObjectA && !isObjectB) {

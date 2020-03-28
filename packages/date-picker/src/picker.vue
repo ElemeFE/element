@@ -302,17 +302,12 @@ const valueEquals = function(a, b) {
   return false;
 };
 
-const isString = function(val) {
-  return typeof val === 'string' || val instanceof String;
-};
-
 const validator = function(val) {
   // either: String, Array of String, null / undefined
   return (
-    val === null ||
-    val === undefined ||
-    isString(val) ||
-    (Array.isArray(val) && val.length === 2 && val.every(isString))
+    val == null ||
+    typeof val === 'string' ||
+    (Array.isArray(val) && val.length === 2 && val.every(x => typeof x === 'string'))
   );
 };
 

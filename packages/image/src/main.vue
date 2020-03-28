@@ -31,7 +31,6 @@
   import ImageViewer from './image-viewer';
   import Locale from 'element-ui/src/mixins/locale';
   import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
-  import { isString, isHtmlElement } from 'element-ui/src/utils/types';
   import { throttle } from 'throttle-debounce';
 
   const isSupportObjectFit = () => document.documentElement.style.objectFit !== undefined;
@@ -176,9 +175,9 @@
         const { scrollContainer } = this;
         let _scrollContainer = null;
 
-        if (isHtmlElement(scrollContainer)) {
+        if (scrollContainer && scrollContainer.nodeType === Node.ELEMENT_NODE) {
           _scrollContainer = scrollContainer;
-        } else if (isString(scrollContainer)) {
+        } else if (typeof scrollContainer === 'string') {
           _scrollContainer = document.querySelector(scrollContainer);
         } else {
           _scrollContainer = getScrollContainer(this.$el);

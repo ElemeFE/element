@@ -34,7 +34,6 @@
 
 <script>
   import { hasClass } from 'element-ui/src/utils/dom';
-  import { isObject } from 'element-ui/src/utils/types';
   import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
@@ -238,12 +237,12 @@
         const matchedKeys = Object.keys(map)
           .filter(key => {
             const val = map[key];
-            const excluded = isObject(val) ? val.excluded : false;
+            const excluded = val && typeof val === 'object' ? val.excluded : false;
             return excluded ? value < key : value <= key;
           })
           .sort((a, b) => a - b);
         const matchedValue = map[matchedKeys[0]];
-        return isObject(matchedValue) ? matchedValue.value : (matchedValue || '');
+        return matchedValue && typeof matchedValue === 'object' ? matchedValue.value : (matchedValue || '');
       },
 
       showDecimalIcon(item) {

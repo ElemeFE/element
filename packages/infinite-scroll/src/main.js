@@ -1,11 +1,5 @@
 import { throttle } from 'throttle-debounce';
 import {
-  isHtmlElement,
-  isFunction,
-  isUndefined,
-  isDefined
-} from 'element-ui/src/utils/types';
-import {
   getScrollContainer
 } from 'element-ui/src/utils/dom';
 
@@ -62,22 +56,23 @@ const attributes = {
 };
 
 const getScrollOptions = (el, vm) => {
-  if (!isHtmlElement(el)) return {};
+  if (!el || el.nodeType !== Node.ELEMENT_NODE) return {};
 
   return entries(attributes).reduce((map, [key, option]) => {
     const { type, default: defaultValue } = option;
     let value = el.getAttribute(`infinite-scroll-${key}`);
-    value = isUndefined(vm[value]) ? value : vm[value];
+    value = vm[value] === void 0 ? value : vm[value];
     switch (type) {
       case Number:
         value = Number(value);
         value = Number.isNaN(value) ? defaultValue : value;
         break;
       case Boolean:
-        value = isDefined(value) ? value === 'false' ? false : Boolean(value) : defaultValue;
+        value = value != null ? value === 'false' ? false : Boolean(value) : defaultValue;
         break;
       default:
         value = type(value);
+        break;
     }
     map[key] = value;
     return map;
@@ -108,7 +103,7 @@ const handleScroll = function(cb) {
     shouldTrigger = heightBelowTop - offsetHeight + borderBottom <= distance;
   }
 
-  if (shouldTrigger && isFunction(cb)) {
+  if (shouldTrigger && typeof cb === 'function') {
     cb.call(vm);
   } else if (observer) {
     observer.disconnect();

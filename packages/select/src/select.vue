@@ -513,9 +513,7 @@
 
       getOption(value) {
         let option;
-        const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
-        const isNull = Object.prototype.toString.call(value).toLowerCase() === '[object null]';
-        const isUndefined = Object.prototype.toString.call(value).toLowerCase() === '[object undefined]';
+        const isObject = value && typeof value === 'object';
 
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
@@ -528,8 +526,7 @@
           }
         }
         if (option) return option;
-        const label = (!isObject && !isNull && !isUndefined)
-          ? value : '';
+        const label = !isObject && value != null ? value : '';
         let newOption = {
           value: value,
           currentLabel: label
@@ -723,8 +720,7 @@
       },
 
       getValueIndex(arr = [], value) {
-        const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
-        if (!isObject) {
+        if (!value || typeof value !== 'object') {
           return arr.indexOf(value);
         } else {
           const valueKey = this.valueKey;
@@ -838,11 +834,11 @@
         }
       },
 
-      getValueKey(item) {
-        if (Object.prototype.toString.call(item.value).toLowerCase() !== '[object object]') {
-          return item.value;
+      getValueKey({ value }) {
+        if (!value || typeof value !== 'object') {
+          return value;
         } else {
-          return getValueByPath(item.value, this.valueKey);
+          return getValueByPath(value, this.valueKey);
         }
       }
     },
