@@ -30,7 +30,7 @@ describe('Select', () => {
         disabled: false
       }];
     }
-    const vm = createVue({
+    return createVue({
       template: `
         <div>
           <el-select
@@ -78,7 +78,6 @@ describe('Select', () => {
         };
       }
     }, true);
-    return vm;
   };
 
   let vm;

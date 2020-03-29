@@ -30,45 +30,55 @@ describe('Tooltip', () => {
   });
 
   describe('manual', () => {
-    const vm = createVue({
-      template: `
-        <el-tooltip ref="tooltip" manual content="abc" v-model="show">
-          <button>click</button>
-        </el-tooltip>
-      `,
+    const createVM = () => {
+      vm = createVue({
+        template: `
+          <el-tooltip ref="tooltip" manual content="abc" v-model="show">
+            <button>click</button>
+          </el-tooltip>
+        `,
 
-      data() {
-        return { show: false };
-      }
-    }, true);
-    const tooltip = vm.$refs.tooltip;
+        data() {
+          return { show: false };
+        }
+      }, true);
+    };
 
     it('showPopper is false', () => {
+      createVM();
+      const tooltip = vm.$refs.tooltip;
       triggerEvent(tooltip.$el, 'mouseenter');
       expect(tooltip.showPopper).to.false;
     });
-    it('show', done => {
+    it('show', async() => {
+      createVM();
+      const tooltip = vm.$refs.tooltip;
+
       vm.show = true;
-      vm.$nextTick(_ => {
-        expect(tooltip.showPopper).to.true;
-        done();
-      });
+      await vm.$nextTick();
+      expect(tooltip.showPopper).to.true;
     });
-    it('still show when trigger mouseleave', () => {
+    it('still show when trigger mouseleave', async() => {
+      createVM();
+      const tooltip = vm.$refs.tooltip;
+      vm.show = true;
+      await vm.$nextTick();
       triggerEvent(tooltip.$el, 'mouseleave');
       expect(tooltip.showPopper).to.true;
     });
-    it('hidden', done => {
+    it('hidden', async() => {
+      createVM();
+      const tooltip = vm.$refs.tooltip;
+      vm.show = true;
+      await vm.$nextTick();
       vm.show = false;
-      vm.$nextTick(_ => {
-        expect(tooltip.showPopper).to.false;
-        done();
-      });
+      await vm.$nextTick();
+      expect(tooltip.showPopper).to.false;
     });
   });
 
   describe('hover', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-tooltip ref="tooltip" content="提示文字">
         <button>click</button>
       </el-tooltip>

@@ -833,7 +833,7 @@ describe('Tree', () => {
   });
 
   it('update multi tree data', async() => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-tree ref="tree1" :data="data" node-key="id" :props="defaultProps"></el-tree>

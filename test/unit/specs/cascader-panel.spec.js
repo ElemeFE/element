@@ -394,7 +394,7 @@ describe('CascaderPanel', () => {
       `,
       data() {
         return {
-          value: [['zhejiang']],
+          value: ['zhejiang'],
           options: options,
           props: {
             multiple: true,
@@ -578,4 +578,3 @@ describe('CascaderPanel', () => {
     expect(getMenus(el).length).to.equal(1);
   });
 });
-

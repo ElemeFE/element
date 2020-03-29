@@ -1,5 +1,5 @@
 import VuePopper from 'element-ui/src/utils/vue-popper';
-import { createTest, wait } from '../util';
+import { createTest, wait, destroyVM } from '../util';
 
 const Popper = Object.assign({}, VuePopper, {
   template: `
@@ -17,12 +17,13 @@ const CleanPopper = Object.assign({}, VuePopper, {
 });
 
 describe('Utils:VuePopper', () => {
-  function describeVm(vm) {
-    vm.doDestroy();
-  }
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
 
   it('set popper not reference', () => {
-    const vm = createTest(CleanPopper, {
+    vm = createTest(CleanPopper, {
       popper: document.createElement('div')
     });
     vm.createPopper();
@@ -32,7 +33,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('set reference not popper', () => {
-    const vm = createTest(CleanPopper, {
+    vm = createTest(CleanPopper, {
       reference: document.createElement('div')
     });
     vm.createPopper();
@@ -42,7 +43,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('set reference by slot', () => {
-    const vm = createTest(CleanPopper);
+    vm = createTest(CleanPopper);
     vm.$slots['reference'] = [{
       elm: document.createElement('div')
     }];
@@ -53,15 +54,14 @@ describe('Utils:VuePopper', () => {
   });
 
   it('createPopper', async() => {
-    const vm = createTest(Popper, { placement: 'top' }, true);
+    vm = createTest(Popper, { placement: 'top' }, true);
     vm.createPopper();
     await wait(10);
     expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
-    describeVm(vm);
   });
 
   it('destroy popper when calling createPopper twice', () => {
-    const vm = createTest(Popper);
+    vm = createTest(Popper);
     vm.createPopper();
     const popperJS = vm.popperJS;
 
@@ -72,7 +72,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('updatePopper', () => {
-    const vm = createTest(Popper);
+    vm = createTest(Popper);
     vm.updatePopper();
     const popperJS = vm.popperJS;
 
@@ -82,7 +82,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('doDestroy', () => {
-    const vm = createTest(Popper, { placement: 'top' });
+    vm = createTest(Popper, { placement: 'top' });
     vm.createPopper();
     expect(vm.popperElm.getAttribute('x-placement')).to.equal('top');
     vm.doDestroy();
@@ -90,26 +90,28 @@ describe('Utils:VuePopper', () => {
   });
 
   it('destroyPopper', () => {
-    const vm = createTest(Popper);
+    vm = createTest(Popper);
     const vm2 = createTest(Popper);
 
     vm.createPopper();
     expect(() => vm.destroyPopper()).to.not.throw();
     expect(() => vm2.destroyPopper()).to.not.throw();
+    destroyVM(vm2);
   });
 
   it('placement', () => {
-    const vm = createTest(Popper, { placement: 'bottom-start' });
+    vm = createTest(Popper, { placement: 'bottom-start' });
     const vm2 = createTest(Popper, { placement: 'bottom-abc' });
 
     vm.createPopper();
     vm2.createPopper();
     expect(vm.popperElm.getAttribute('x-placement')).to.equal('bottom-start');
     expect(vm2.popperJS).to.not.exist;
+    destroyVM(vm2);
   });
 
   it('display arrow', () => {
-    const vm = createTest(Popper, {
+    vm = createTest(Popper, {
       visibleArrow: true
     });
 
@@ -118,7 +120,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('update showPopper', async() => {
-    const vm = createTest(Popper);
+    vm = createTest(Popper);
     expect(vm.popperJS).to.not.exist;
     vm.showPopper = true;
     await wait(50);
@@ -129,17 +131,16 @@ describe('Utils:VuePopper', () => {
   });
 
   it('resetTransformOrigin', async() => {
-    const vm = createTest(Popper, {
+    vm = createTest(Popper, {
       placement: 'left'
     });
     vm.createPopper();
     await wait(10);
     expect(vm.popperElm.style.transformOrigin).to.include('left center');
-    describeVm(vm);
   });
 
   it('appendArrow', () => {
-    const vm = createTest(Popper, {
+    vm = createTest(Popper, {
       visibleArrow: true
     });
     expect(vm.appended).to.be.undefined;
@@ -153,7 +154,7 @@ describe('Utils:VuePopper', () => {
   it('appendArrow: add scoped', () => {
     const popper = document.createElement('div');
     popper.setAttribute('_v-110', true);
-    const vm = createTest(CleanPopper, {
+    vm = createTest(CleanPopper, {
       reference: document.createElement('div'),
       visibleArrow: true,
       popper
@@ -164,7 +165,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('appendToBody set false', () => {
-    const vm = createTest(Popper, {
+    vm = createTest(Popper, {
       appendToBody: false
     });
     vm.createPopper();
@@ -172,7 +173,7 @@ describe('Utils:VuePopper', () => {
   });
 
   it('destroy', () => {
-    const vm = createTest(Popper, true);
+    vm = createTest(Popper, true);
 
     vm.createPopper();
     expect(document.body.contains(vm.popperElm)).to.true;

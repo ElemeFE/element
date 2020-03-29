@@ -93,7 +93,7 @@ describe('Pagination', () => {
   });
 
   it('pageCount', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSize: 25,
       pageCount: 4
     });
@@ -102,7 +102,7 @@ describe('Pagination', () => {
   });
 
   it('pagerCount', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSize: 25,
       total: 1000,
       pagerCount: 21
@@ -112,7 +112,7 @@ describe('Pagination', () => {
   });
 
   it('will work without total & page-count', (done) => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSize: 25,
       currentPage: 2
     });

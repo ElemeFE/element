@@ -31,7 +31,7 @@ describe('Popover', () => {
       expect(compo.showPopper).to.false;
     });
 
-    it('hover', done => {
+    it('hover', async() => {
       vm = createVM('hover');
       const compo = vm.$refs.popover;
       const button = vm.$el.querySelector('button');
@@ -39,13 +39,12 @@ describe('Popover', () => {
       triggerEvent(button, 'mouseenter');
       expect(compo.showPopper).to.true;
       triggerEvent(button, 'mouseleave');
-      setTimeout(_ => {
-        expect(compo.showPopper).to.false;
-        done();
-      }, 250); // 代码里是 200ms
+
+      await wait(250);// 代码里是 200ms
+      expect(compo.showPopper).to.false;
     });
 
-    it('manual', done => {
+    it('manual', async() => {
       vm = createVM('manual');
       const compo = vm.$refs.popover;
       const button = vm.$el.querySelector('button');
@@ -53,10 +52,9 @@ describe('Popover', () => {
       triggerEvent(button, 'mouseenter');
       expect(compo.showPopper).to.false;
       triggerEvent(button, 'mouseleave');
-      setTimeout(_ => {
-        expect(compo.showPopper).to.false;
-        done();
-      }, 250); // 代码里是 200ms
+
+      await wait(250);// 代码里是 200ms
+      expect(compo.showPopper).to.false;
     });
 
     it('focus input in children node', () => {
@@ -136,78 +134,98 @@ describe('Popover', () => {
   });
 
   describe('create by directive', () => {
-    const vm = createVue({
-      template: `
-        <div>
-          <el-popover
-            ref="popover1"
-            trigger="click"
-            content="content">
-          </el-popover>
-          <button v-popover:popover1>create by directive</button>
-        </div>
-      `,
+    const createVM_CBD = () => {
+      vm = createVue({
+        template: `
+          <div>
+            <el-popover
+              ref="popover1"
+              trigger="click"
+              content="content">
+            </el-popover>
+            <button v-popover:popover1>create by directive</button>
+          </div>
+        `,
 
-      directives: {
-        Popover: Popover.directive
-      }
-    }, true);
-    const compo = vm.$refs.popover1;
+        directives: {
+          Popover: Popover.directive
+        }
+      }, true);
+    };
 
     it('render', () => {
+      createVM_CBD();
+      const compo = vm.$refs.popover1;
       expect(vm.$el.querySelector('.el-popover')).to.have.deep.property('textContent').include('content');
     });
 
-    it('triggering click', done => {
+    it('triggering click', async() => {
+      createVM_CBD();
+      const compo = vm.$refs.popover1;
+
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
-      vm.$nextTick(_ => {
-        const popperElm = compo.popperElm;
-        expect(getComputedStyle(popperElm).display).to.not.equal('none');
-        done();
-      });
+      await vm.$nextTick();
+      const popperElm = compo.popperElm;
+      expect(getComputedStyle(popperElm).display).to.not.equal('none');
     });
 
-    it('click outside', () => {
+    it('click outside', async() => {
+      createVM_CBD();
+      const compo = vm.$refs.popover1;
+
+      vm.$el.querySelector('button').click();
+      await vm.$nextTick();
+
       document.body.click();
       expect(compo.showPopper).to.false;
     });
   });
 
   describe('create by slot', () => {
-    const vm = createVue(`
-      <div>
-        <el-popover
-          ref="popover"
-          trigger="click"
-          content="content">
-          <button slot="reference">create by slot</button>
-        </el-popover>
-      </div>
-    `, true);
-    const compo = vm.$refs.popover;
+    const createVM_CBD = () => {
+      vm = createVue(`
+        <div>
+          <el-popover
+            ref="popover"
+            trigger="click"
+            content="content">
+            <button slot="reference">create by slot</button>
+          </el-popover>
+        </div>
+      `, true);
+    };
 
     it('render', () => {
+      createVM_CBD();
+      const compo = vm.$refs.popover;
       expect(vm.$el.querySelector('.el-popover')).to.have.deep.property('textContent').include('content');
     });
 
-    it('triggering click', done => {
+    it('triggering click', async() => {
+      createVM_CBD();
+      const compo = vm.$refs.popover;
+
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
-      vm.$nextTick(_ => {
-        const popperElm = compo.popperElm;
-        expect(getComputedStyle(popperElm).display).to.not.equal('none');
-        done();
-      });
+      await vm.$nextTick();
+      const popperElm = compo.popperElm;
+      expect(getComputedStyle(popperElm).display).to.not.equal('none');
     });
 
-    it('click outside', () => {
+    it('click outside', async() => {
+      createVM_CBD();
+      const compo = vm.$refs.popover;
+
+      vm.$el.querySelector('button').click();
+      await vm.$nextTick();
+
       document.body.click();
       expect(compo.showPopper).to.false;
     });
   });
 
-  it('show/hide events', done => {
+  it('show/hide events', async() => {
     vm = createVue({
       template: `
         <div>
@@ -239,14 +257,13 @@ describe('Popover', () => {
     }, true);
 
     vm.$el.querySelector('button').click();
-    setTimeout(_ => {
-      expect(vm.trigger).to.true;
-      document.body.click();
-      setTimeout(_ => {
-        expect(vm.trigger).to.false;
-        done();
-      }, 50);
-    }, 50);
+
+    await wait(50);
+    expect(vm.trigger).to.true;
+    document.body.click();
+
+    await wait(50);
+    expect(vm.trigger).to.false;
   });
 
   describe('open/close delays', () => {
