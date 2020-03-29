@@ -235,6 +235,71 @@
         value1: [],
         value2: []
       }
+    },
+  }
+</script>
+```
+:::
+
+### 绑定对象
+
+如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识，以及 `label-key` 作为它展示内容的取值键值（当 `options` 还未加载出来时有用）。
+
+:::demo
+```html
+<template>
+  <el-button @click="options = []">清空备选项列表</el-button>
+  <div style="margin-top: 15px">
+    <el-select v-model="value1" placeholder="单选" value-key="value" label-key="label">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item" />
+    </el-select><br>
+    <code class="json" v-text="JSON.stringify(value1, null, 2)"></code>
+  </div>
+
+  <div style="margin-top: 15px">
+    <el-select
+      v-model="value2"
+      multiple
+      placeholder="多选"
+      value-key="value"
+      label-key="label">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item" />
+    </el-select><br>
+    <code class="json" v-text="JSON.stringify(value2, null, 2)"></code>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value1: null,
+        value2: []
+      }
     }
   }
 </script>
@@ -515,10 +580,6 @@
 ```
 :::
 
-:::tip
-如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
-:::
-
 ### Select Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -526,6 +587,7 @@
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
+| label-key | 当绑定值为对象类型且未匹配到选项时（比如正在加载数据），用以获取绑定值中的展示内容 | string | - | label |
 | size | 输入框尺寸 | string | medium/small/mini | — |
 | clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
@@ -544,6 +606,7 @@
 | no-match-text | 搜索条件无匹配时显示的文字，也可以使用`slot="empty"`设置 | string | — | 无匹配数据 |
 | no-data-text | 选项为空时显示的文字，也可以使用`slot="empty"`设置 | string | — | 无数据 |
 | popper-class | Select 下拉框的类名 | string | — | — |
+| placement | Select 下拉框的出现位置 | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom-start |
 | reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |

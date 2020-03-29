@@ -143,26 +143,13 @@
     },
 
     created() {
-      this.select.options.push(this);
-      this.select.cachedOptions.push(this);
-      this.select.optionsCount++;
-      this.select.filteredOptionsCount++;
-
+      this.select.onOptionCreate(this);
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);
     },
 
     beforeDestroy() {
-      const { selected, multiple } = this.select;
-      let selectedOptions = multiple ? selected : [selected];
-      let index = this.select.cachedOptions.indexOf(this);
-      let selectedIndex = selectedOptions.indexOf(this);
-
-      // if option is not selected, remove it from cache
-      if (index > -1 && selectedIndex < 0) {
-        this.select.cachedOptions.splice(index, 1);
-      }
-      this.select.onOptionDestroy(this.select.options.indexOf(this));
+      this.select.onOptionDestroy(this);
     }
   };
 </script>

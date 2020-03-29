@@ -107,6 +107,7 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
+        :placement="placement"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
@@ -275,6 +276,10 @@
       allowCreate: Boolean,
       loading: Boolean,
       popperClass: String,
+      placement: {
+        type: String,
+        default: 'bottom-start'
+      },
       remote: Boolean,
       loadingText: String,
       noMatchText: String,
@@ -298,6 +303,10 @@
         type: String,
         default: 'value'
       },
+      labelKey: {
+        type: String,
+        default: 'label'
+      },
       collapseTags: Boolean,
       popperAppendToBody: {
         type: Boolean,
@@ -308,7 +317,6 @@
     data() {
       return {
         options: [],
-        cachedOptions: [],
         createdLabel: null,
         createdSelected: false,
         selected: this.multiple ? [] : {},
@@ -512,29 +520,30 @@
       },
 
       getOption(value) {
-        let option;
+        let result;
         const isObject = value && typeof value === 'object';
 
-        for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
-          const cachedOption = this.cachedOptions[i];
+        for (let i = this.options.length - 1; i >= 0; i--) {
+          const option = this.options[i];
           const isEqual = isObject
-            ? getValueByPath(cachedOption.value, this.valueKey) === getValueByPath(value, this.valueKey)
-            : cachedOption.value === value;
+            ? getValueByPath(option.value, this.valueKey) === getValueByPath(value, this.valueKey)
+            : option.value === value;
           if (isEqual) {
-            option = cachedOption;
+            result = option;
             break;
           }
         }
-        if (option) return option;
-        const label = !isObject && value != null ? value : '';
-        let newOption = {
-          value: value,
-          currentLabel: label
-        };
-        if (this.multiple) {
-          newOption.hitState = false;
+        if (!result) {
+          result = {
+            value: value,
+            currentLabel: isObject ? value[this.labelKey] : value != null ? value : ''
+          };
+          if (this.multiple) {
+            result.hitState = false;
+          }
         }
-        return newOption;
+
+        return result;
       },
 
       setSelected() {
@@ -787,7 +796,14 @@
         }
       },
 
-      onOptionDestroy(index) {
+      onOptionCreate(option) {
+        this.options.push(option);
+        this.optionsCount++;
+        this.filteredOptionsCount++;
+      },
+
+      onOptionDestroy(option) {
+        const index = this.options.indexOf(option);
         if (index > -1) {
           this.optionsCount--;
           this.filteredOptionsCount--;
