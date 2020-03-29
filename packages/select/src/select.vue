@@ -458,7 +458,9 @@
           (typeof this.filterMethod === 'function' || typeof this.remoteMethod === 'function')
         ) {
           this.previousQuery = val;
-          this.remoteMethod('');
+          if (typeof this.remoteMethod === 'function') {
+            this.remoteMethod('');
+          }
           return;
         }
         this.previousQuery = val;

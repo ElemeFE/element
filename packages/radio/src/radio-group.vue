@@ -84,11 +84,12 @@
               roleRadios[index - 1].focus();
             }
             break;
+
           case keyCode.RIGHT:
           case keyCode.DOWN:
+            e.stopPropagation();
+            e.preventDefault();
             if (index === (length - 1)) {
-              e.stopPropagation();
-              e.preventDefault();
               roleRadios[0].click();
               roleRadios[0].focus();
             } else {
@@ -108,4 +109,3 @@
     }
   };
 </script>
-

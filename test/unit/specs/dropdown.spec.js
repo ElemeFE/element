@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM, triggerKeyDown } from '../util';
+import { createVue, triggerEvent, destroyVM, triggerKeyDown, wait } from '../util';
 
 describe('Dropdown', () => {
   let vm;
@@ -148,7 +148,7 @@ describe('Dropdown', () => {
       }, 300);
     }, 300);
   });
-  it('hide on click', done => {
+  it('hide on click', async() => {
     vm = createVue({
       template: `
         <el-dropdown ref="dropdown" :hide-on-click="false">
@@ -173,14 +173,11 @@ describe('Dropdown', () => {
     dropdown.$on('command', callback);
 
     triggerEvent(triggerElm, 'mouseenter');
-    setTimeout(_ => {
-      vm.$refs.commandC.$el.click();
-      setTimeout(_ => {
-        expect(dropdown.visible).to.true;
-        expect(callback.calledWith('c')).to.be.true;
-        done();
-      }, 300);
-    }, 300);
+    await wait(300);
+    vm.$refs.commandC.$el.click();
+    await wait(300);
+    expect(dropdown.visible).to.true;
+    expect(callback.calledWith('c')).to.be.true;
   });
   it('triggerElm keydown', done => {
     vm = createVue({

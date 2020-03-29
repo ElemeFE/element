@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
@@ -446,18 +446,16 @@ describe('Select', () => {
     expect(options[0].querySelector('span').textContent).to.equal('成都');
   });
 
-  it('filterable', done => {
+  it('filterable', async() => {
     vm = getSelectVm({ filterable: true });
     const select = vm.$children[0];
-    setTimeout(() => {
-      select.selectedLabel = '面';
-      select.onInputChange();
-      select.visible = true;
-      setTimeout(() => {
-        expect(select.filteredOptionsCount).to.equal(1);
-        done();
-      }, 10);
-    }, 10);
+
+    await wait(10);
+    select.selectedLabel = '面';
+    select.onInputChange();
+    select.visible = true;
+    await wait(10);
+    expect(select.filteredOptionsCount).to.equal(1);
   });
 
   it('filterable with custom filter-method', done => {
