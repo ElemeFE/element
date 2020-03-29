@@ -58,11 +58,10 @@
 
 <script>
 import Locale from 'element-ui/src/mixins/locale';
-import fecha from 'element-ui/src/utils/date';
 import ElButton from 'element-ui/packages/button';
 import ElButtonGroup from 'element-ui/packages/button-group';
 import DateTable from './date-table';
-import { validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
+import { validateRangeInOneMonth, formatDate } from 'element-ui/src/utils/date-util';
 
 const validTypes = ['prev-month', 'today', 'next-month'];
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -151,20 +150,20 @@ export default {
     prevMonthDatePrefix() {
       const temp = new Date(this.date.getTime());
       temp.setDate(0);
-      return fecha.format(temp, 'yyyy-MM');
+      return formatDate(temp, 'yyyy-MM');
     },
 
     curMonthDatePrefix() {
-      return fecha.format(this.date, 'yyyy-MM');
+      return formatDate(this.date, 'yyyy-MM');
     },
 
     nextMonthDatePrefix() {
       const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
-      return fecha.format(temp, 'yyyy-MM');
+      return formatDate(temp, 'yyyy-MM');
     },
 
     formatedDate() {
-      return fecha.format(this.date, 'yyyy-MM-dd');
+      return formatDate(this.date, 'yyyy-MM-dd');
     },
 
     i18nDate() {
@@ -174,7 +173,7 @@ export default {
     },
 
     formatedToday() {
-      return fecha.format(this.now, 'yyyy-MM-dd');
+      return formatDate(this.now, 'yyyy-MM-dd');
     },
 
     realSelectedDay: {

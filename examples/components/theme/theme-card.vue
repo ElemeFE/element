@@ -250,7 +250,7 @@ import {
 } from './constant.js';
 import { savePreviewToLocal } from './localstorage';
 import { tintColor } from '../../color.js';
-import dateUtil from 'element-ui/src/utils/date';
+import { formatDate } from 'element-ui/src/utils/date-util';
 import { getActionDisplayName } from '../theme-configurator/utils/utils';
 
 export default {
@@ -277,7 +277,7 @@ export default {
     },
     formatDate(timestamp) {
       if (!timestamp) return '';
-      return dateUtil.format(new Date(timestamp), 'yyyy-MM-dd HH:mm');
+      return formatDate(timestamp, 'yyyy-MM-dd HH:mm');
     },
     uploadClick() {
       this.$refs.input.value = null;

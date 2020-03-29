@@ -1,6 +1,5 @@
 <script>
-import fecha from 'element-ui/src/utils/date';
-import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
+import { formatDate, range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
 
 export default {
   props: {
@@ -86,16 +85,16 @@ export default {
     prevMonthDatePrefix() {
       const temp = new Date(this.date.getTime());
       temp.setDate(0);
-      return fecha.format(temp, 'yyyy-MM');
+      return formatDate(temp, 'yyyy-MM');
     },
 
     curMonthDatePrefix() {
-      return fecha.format(this.date, 'yyyy-MM');
+      return formatDate(this.date, 'yyyy-MM');
     },
 
     nextMonthDatePrefix() {
       const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
-      return fecha.format(temp, 'yyyy-MM');
+      return formatDate(temp, 'yyyy-MM');
     },
 
     formatedToday() {
