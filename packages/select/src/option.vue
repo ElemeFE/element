@@ -4,6 +4,7 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
+    :style="{ maxWidth: this.select.optionMaxWidth }"
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
@@ -125,6 +126,10 @@
       hoverItem() {
         if (!this.disabled && !this.groupDisabled) {
           this.select.hoverIndex = this.select.options.indexOf(this);
+        }
+
+        if (this.select.optionMaxWidth) {
+          this.$el.title = this.$el.clientWidth < this.$el.scrollWidth ? this.currentLabel : '';
         }
       },
 

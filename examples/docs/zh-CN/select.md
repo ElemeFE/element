@@ -45,6 +45,49 @@
 </script>
 ```
 :::
+### 限制下拉框最大宽度
+
+使用`option-max-width`控制下拉框最大宽度，以免出现下拉框过宽占满屏幕的情况
+:::demo
+```html
+<template>
+  <el-select v-model="value" placeholder="请选择" option-max-width="600px">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'.repeat(10)
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'.repeat(20)
+        }, {
+          value: '选项4',
+          label: '龙须面'.repeat(30)
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: ''
+      }
+    }
+  }
+</script>
+```
+:::
 
 ### 有禁用选项
 
@@ -611,6 +654,7 @@
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| option-max-width | 下拉框的最大宽度，默认不限制 | string | - | - |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

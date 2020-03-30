@@ -311,6 +311,9 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      optionMaxWidth: {
+        type: String
       }
     },
 
