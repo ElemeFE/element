@@ -608,9 +608,9 @@ export default {
       }
     },
     deleteTag(index) {
-      const { checkedValue } = this;
-      const val = checkedValue[index];
-      this.checkedValue = checkedValue.filter((n, i) => i !== index);
+      const { checkedNodes, checkedValue } = this;
+      const val = checkedNodes[index].getValueByOption();
+      this.checkedValue = checkedValue.filter(v => !isEqual(v, val));
       this.$emit('remove-tag', val);
     },
     updateStyle() {

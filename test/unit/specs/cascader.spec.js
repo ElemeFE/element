@@ -309,6 +309,40 @@ describe('Cascader', () => {
     expect(vm.value.length).to.equal(1);
   });
 
+  it('delete tag with disordered default value in multiple mode', async() => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :props="props"
+          clearable></el-cascader>
+      `,
+      data() {
+        return {
+          value: [
+            ['zhejiang', 'hangzhou', 'binjiang'],
+            ['zhejiang', 'hangzhou', 'xihu']
+          ],
+          options,
+          props: {
+            multiple: true
+          }
+        };
+      }
+    }, true);
+
+    await waitImmediate();
+    const tags = vm.$el.querySelectorAll('.el-tag');
+    const closeBtn = tags[0].querySelector('.el-tag__close');
+    expect(tags.length).to.equal(2);
+    expect(closeBtn).to.exist;
+    closeBtn.click();
+    await waitImmediate();
+    expect(vm.value).to.deep.equal([['zhejiang', 'hangzhou', 'binjiang']]);
+    expect(vm.$el.querySelectorAll('.el-tag').length).to.equal(1);
+  });
+
   it('collapse tags', async() => {
     vm = createVue({
       template: `
