@@ -17,6 +17,7 @@
       :step="step"
       :disabled="sliderDisabled"
       :controls="showInputControls"
+      :controls-position="inputControlsPosition"
       :min="min"
       :max="max"
       :debounce="debounce"
@@ -114,6 +115,10 @@
       showInputControls: {
         type: Boolean,
         default: true
+      },
+      inputControlsPosition: {
+        type: String,
+        default: ''
       },
       inputSize: {
         type: String,
