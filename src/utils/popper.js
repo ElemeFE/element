@@ -945,6 +945,24 @@
     //
     // Helpers
     //
+    /**
+     * Get the window the element is belonging to
+     * @function
+     * @ignore
+     * @argument {Element} element
+     * @returns {Window} the window the element belongs to
+     */
+    function getWindow(element) {
+      var win = root
+        if (element.toString() === '[object Window]') {
+        win = element
+      } else if (element.toString() === '[object HTMLDocument]') {
+        win = element.defaultView
+      } else {
+        win = element.ownerDocument.defaultView || root
+      }
+      return win
+    }
 
     /**
      * Get the outer sizes of the given element (offset size + margins)
@@ -960,7 +978,7 @@
         var calcWidthToForceRepaint = element.offsetWidth;
 
         // original method
-        var styles = root.getComputedStyle(element);
+        var styles = getWindow(element).getComputedStyle(element);
         var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
         var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
         var result = { width: element.offsetWidth + y, height: element.offsetHeight + x };
@@ -1026,7 +1044,7 @@
      */
     function getStyleComputedProperty(element, property) {
         // NOTE: 1 DOM access here
-        var css = root.getComputedStyle(element, null);
+        var css = getWindow(element).getComputedStyle(element, null);
         return css[property];
     }
 
@@ -1040,7 +1058,7 @@
     function getOffsetParent(element) {
         // NOTE: 1 DOM access here
         var offsetParent = element.offsetParent;
-        return offsetParent === root.document.body || !offsetParent ? root.document.documentElement : offsetParent;
+        return offsetParent === getWindow(element).document.body || !offsetParent ? getWindow(element).document.documentElement : offsetParent;
     }
 
     /**
@@ -1057,13 +1075,13 @@
             return element;
         }
 
-        if (parent === root.document) {
+        if (parent === getWindow(element).document) {
             // Firefox puts the scrollTOp value on `documentElement` instead of `body`, we then check which of them is
             // greater than 0 and return the proper element
-            if (root.document.body.scrollTop || root.document.body.scrollLeft) {
-                return root.document.body;
+            if (getWindow(element).document.body.scrollTop || getWindow(element).document.body.scrollLeft) {
+                return getWindow(element).document.body;
             } else {
-                return root.document.documentElement;
+                return getWindow(element).document.documentElement;
             }
         }
 
@@ -1090,7 +1108,7 @@
      * @returns {Boolean} answer to "isFixed?"
      */
     function isFixed(element) {
-        if (element === root.document.body) {
+        if (element === getWindow(element).document.body) {
             return false;
         }
         if (getStyleComputedProperty(element, 'position') === 'fixed') {
