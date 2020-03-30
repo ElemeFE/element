@@ -135,7 +135,6 @@
           if (newVal <= this.min) newVal = this.min;
           this.currentValue = newVal;
           this.userInput = null;
-          this.$emit('input', newVal);
         }
       }
     },
