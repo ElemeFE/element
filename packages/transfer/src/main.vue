@@ -1,5 +1,5 @@
 <template>
-  <div class="el-transfer">
+  <div class="el-transfer" :class="{ 'is-flexable': flexable }">
     <transfer-panel
       v-bind="$props"
       ref="leftPanel"
@@ -13,19 +13,20 @@
     <div class="el-transfer__buttons">
       <el-button
         type="primary"
-        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToLeft"
+        class="el-transfer__button"
+        @click="addToLeft"
         :disabled="rightChecked.length === 0">
-        <i class="el-icon-arrow-left"></i>
-        <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
+        <i class="el-icon-arrow-left" :class="{ 'el-icon--left': buttonTexts[0] }"></i>
+        {{ buttonTexts[0] }}
       </el-button>
+      <div v-if="stackButton"></div>
       <el-button
         type="primary"
-        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToRight"
+        class="el-transfer__button"
+        @click="addToRight"
         :disabled="leftChecked.length === 0">
-        <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <i class="el-icon-arrow-right"></i>
+        {{ buttonTexts[1] }}
+        <i class="el-icon-arrow-right" :class="{ 'el-icon--right': buttonTexts[1] }"></i>
       </el-button>
     </div>
     <transfer-panel
@@ -121,7 +122,9 @@
       targetOrder: {
         type: String,
         default: 'original'
-      }
+      },
+      stackButton: Boolean,
+      flexable: Boolean
     },
 
     data() {
@@ -136,7 +139,7 @@
         const key = this.props.key;
         return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {});
       },
-  
+
       sourceData() {
         return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
       },

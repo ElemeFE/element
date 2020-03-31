@@ -9,6 +9,15 @@
 @include b(transfer) {
   font-size: $--font-size-base;
 
+  @include when(flexable) {
+    display: flex;
+    align-items: center;
+
+    .el-transfer-panel {
+      flex: 1;
+    }
+  }
+
   @include e(buttons) {
     display: inline-block;
     vertical-align: middle;
@@ -24,10 +33,6 @@
     background-color: $--color-primary;
     font-size: 0;
 
-    @include when(with-texts) {
-      border-radius: $--border-radius-base;
-    }
-
     @include when(disabled) {
       border: $--border-base;
       background-color: $--background-color-base;
@@ -42,10 +47,6 @@
 
     &:first-child {
       margin-bottom: 10px;
-    }
-
-    &:nth-child(2) {
-      margin: 0;
     }
 
     i, span {

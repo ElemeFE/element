@@ -31,6 +31,37 @@
 ```
 :::
 
+### 层叠按钮和伸缩布局
+:::demo 可以通过设置`stack-button`属性将左右移按钮排成一列，以减小按钮占用空间。通过设置`flexable`属性让两边的列表框自动撑满整个组件宽度
+```html
+<template>
+  <el-transfer v-model="value" :data="data" stack-button flexable></el-transfer>
+</template>
+
+<script>
+  export default {
+    data() {
+      const generateData = _ => {
+        const data = [];
+        for (let i = 1; i <= 15; i++) {
+          data.push({
+            key: i,
+            label: `备选项 ${ i }`,
+            disabled: i % 4 === 0
+          });
+        }
+        return data;
+      };
+      return {
+        data: generateData(),
+        value: [1, 4]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 可搜索
 
 在数据很多的情况下，可以对数据进行搜索和过滤。
@@ -224,6 +255,8 @@
 | props | 数据源的字段别名 | object{key, label, disabled} | — | — |
 | left-default-checked | 初始状态下左侧列表的已勾选项的 key 数组 | array | — | [ ] |
 | right-default-checked | 初始状态下右侧列表的已勾选项的 key 数组 | array | — | [ ] |
+| stack-button | 是否将左右移动按钮层叠起来 | boolean | — | false |
+| flexable | 是否让两边的数据列表框撑满整个宽度（使用`flex`布局） | boolean | — | false |
 
 ### Slot
 | name | 说明 |
