@@ -1,4 +1,4 @@
-import {createVue, triggerEvent, triggerClick, destroyVM, waitImmediate} from '../util';
+import {createVue, triggerEvent, triggerClick, destroyVM, waitImmediate, wait} from '../util';
 
 const DELAY = 1;
 
@@ -7,7 +7,7 @@ describe('InputNumber', () => {
   afterEach(() => {
     destroyVM(vm);
   });
-  it('create', () => {
+  it('create', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value">
@@ -21,18 +21,20 @@ describe('InputNumber', () => {
     }, true);
     let input = vm.$el.querySelector('input');
 
+    await waitImmediate();
     expect(vm.value).to.be.equal(1);
     expect(input.value).to.be.equal('1');
   });
-  it('decrease', done => {
+  it('decrease', async() => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" ref="input">
+        <el-input-number v-model="value" ref="input" @input="eventCount++">
         </el-input-number>
       `,
       data() {
         return {
-          value: 5
+          value: 5,
+          eventCount: 0
         };
       }
     }, true);
@@ -43,21 +45,21 @@ describe('InputNumber', () => {
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(4);
-      expect(input.value).to.be.equal('4');
-      done();
-    });
+    await waitImmediate();
+    expect(vm.value).to.be.equal(4);
+    expect(input.value).to.be.equal('4');
+    expect(vm.eventCount).to.be.equal(1);
   });
-  it('increase', done => {
+  it('increase', async() => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value">
+        <el-input-number v-model="value" @input="eventCount++">
         </el-input-number>
       `,
       data() {
         return {
-          value: 1.5
+          value: 1.5,
+          eventCount: 0
         };
       }
     }, true);
@@ -67,14 +69,13 @@ describe('InputNumber', () => {
 
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
+    await waitImmediate();
 
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(2.5);
-      expect(input.value).to.be.equal('2.5');
-      done();
-    });
+    expect(vm.value).to.be.equal(2.5);
+    expect(input.value).to.be.equal('2.5');
+    expect(vm.eventCount).to.be.equal(1);
   });
-  it('disabled', done => {
+  it('disabled', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value" disabled>
@@ -94,21 +95,18 @@ describe('InputNumber', () => {
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(2);
-      expect(input.value).to.be.equal('2');
+    await waitImmediate();
+    expect(vm.value).to.be.equal(2);
+    expect(input.value).to.be.equal('2');
 
-      triggerEvent(btnIncrease, 'mousedown');
-      triggerClick(document, 'mouseup');
+    triggerEvent(btnIncrease, 'mousedown');
+    triggerClick(document, 'mouseup');
 
-      vm.$nextTick(_ => {
-        expect(vm.value).to.be.equal(2);
-        expect(input.value).to.be.equal('2');
-        done();
-      });
-    });
+    await waitImmediate();
+    expect(vm.value).to.be.equal(2);
+    expect(input.value).to.be.equal('2');
   });
-  it('step', done => {
+  it('step', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value" :step="3.2">
@@ -128,19 +126,16 @@ describe('InputNumber', () => {
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(8.2);
-      expect(input.value).to.be.equal('8.2');
+    await waitImmediate();
+    expect(vm.value).to.be.equal(8.2);
+    expect(input.value).to.be.equal('8.2');
 
-      triggerEvent(btnDecrease, 'mousedown');
-      triggerClick(document, 'mouseup');
+    triggerEvent(btnDecrease, 'mousedown');
+    triggerClick(document, 'mouseup');
 
-      vm.$nextTick(_ => {
-        expect(vm.value).to.be.equal(5);
-        expect(input.value).to.be.equal('5');
-        done();
-      });
-    });
+    await waitImmediate();
+    expect(vm.value).to.be.equal(5);
+    expect(input.value).to.be.equal('5');
   });
   it('step strictly', async() => {
     vm = createVue({
@@ -157,15 +152,16 @@ describe('InputNumber', () => {
 
     let input = vm.$el.querySelector('input');
     await waitImmediate();
+
     expect(vm.value).to.be.equal(4.8);
     expect(input.value).to.be.equal('4.8');
-    vm.value = '8';
+    vm.value = 8;
 
     await waitImmediate();
     expect(vm.value).to.be.equal(8.4);
     expect(input.value).to.be.equal('8.4');
   });
-  it('min', done => {
+  it('min', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value" :min="6">
@@ -177,7 +173,19 @@ describe('InputNumber', () => {
         };
       }
     }, true);
-    const vm2 = createVue({
+
+    let input = vm.$el.querySelector('input');
+    let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
+
+    triggerEvent(btnDecrease, 'mousedown');
+    triggerClick(document, 'mouseup');
+
+    await waitImmediate();
+    expect(vm.value).to.be.equal(6);
+    expect(input.value).to.be.equal('6');
+  });
+  it('min2', async() => {
+    vm = createVue({
       template: `
         <el-input-number v-model="value" :min="6">
         </el-input-number>
@@ -189,22 +197,10 @@ describe('InputNumber', () => {
       }
     }, true);
 
-    expect(vm2.value === 6);
-    expect(vm2.$el.querySelector('input').value).to.be.equal('6');
-
-    let input = vm.$el.querySelector('input');
-    let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
-
-    triggerEvent(btnDecrease, 'mousedown');
-    triggerClick(document, 'mouseup');
-
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(6);
-      expect(input.value).to.be.equal('6');
-      done();
-    });
+    expect(vm.value === 6);
+    expect(vm.$el.querySelector('input').value).to.be.equal('6');
   });
-  it('max', done => {
+  it('max', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value" :max="8">
@@ -216,7 +212,19 @@ describe('InputNumber', () => {
         };
       }
     }, true);
-    const vm2 = createVue({
+
+    let input = vm.$el.querySelector('input');
+    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+
+    triggerEvent(btnIncrease, 'mousedown');
+    triggerClick(document, 'mouseup');
+
+    await waitImmediate();
+    expect(vm.value).to.be.equal(8);
+    expect(input.value).to.be.equal('8');
+  });
+  it('max2', async() => {
+    vm = createVue({
       template: `
         <el-input-number v-model="value" :max="8">
         </el-input-number>
@@ -228,23 +236,12 @@ describe('InputNumber', () => {
       }
     }, true);
 
-    expect(vm2.value === 8);
-    expect(vm2.$el.querySelector('input').value).to.be.equal('8');
-
-    let input = vm.$el.querySelector('input');
-    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
-
-    triggerEvent(btnIncrease, 'mousedown');
-    triggerClick(document, 'mouseup');
-
-    vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(8);
-      expect(input.value).to.be.equal('8');
-      done();
-    });
+    await waitImmediate();
+    expect(vm.value === 8);
+    expect(vm.$el.querySelector('input').value).to.be.equal('8');
   });
   describe('precision', () => {
-    it('precision is 2', () => {
+    it('precision is 2', async() => {
       vm = createVue({
         template: `
           <el-input-number v-model="value" :max="8" :precision="2">
@@ -256,11 +253,13 @@ describe('InputNumber', () => {
           };
         }
       }, true);
+
+      await waitImmediate();
       expect(vm.value === 7);
       expect(vm.$el.querySelector('input').value).to.be.equal('7.00');
     });
 
-    it('precision greater than the precision of step', done => {
+    it('precision greater than the precision of step', async() => {
       vm = createVue({
         template: `
           <el-input-number v-model="value" :max="8" :precision="0" :step="0.1">
@@ -281,14 +280,12 @@ describe('InputNumber', () => {
       triggerEvent(btnIncrease, 'mousedown');
       triggerClick(document, 'mouseup');
 
-      vm.$nextTick(_ => {
-        expect(vm.value).to.be.equal(7);
-        expect(input.value).to.be.equal('7');
-        done();
-      });
+      await waitImmediate();
+      expect(vm.value).to.be.equal(7);
+      expect(input.value).to.be.equal('7');
     });
   });
-  it('should update value when precision changes', done => {
+  it('should update value when precision changes', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value" :precision="precision">
@@ -302,18 +299,16 @@ describe('InputNumber', () => {
       }
     }, true);
     expect(vm.value).to.be.equal(1.35);
-    vm.precision = 0;
-    setTimeout(() => {
-      expect(vm.value).to.be.equal(1);
-      expect(vm.$el.querySelector('input').value).to.be.equal('1');
 
-      vm.precision = 2;
-      setTimeout(() => {
-        expect(vm.value).to.be.equal(1);
-        expect(vm.$el.querySelector('input').value).to.be.equal('1.00');
-        done();
-      }, DELAY);
-    }, DELAY);
+    vm.precision = 0;
+    await wait(DELAY);
+    expect(vm.value).to.be.equal(1);
+    expect(vm.$el.querySelector('input').value).to.be.equal('1');
+
+    vm.precision = 2;
+    await wait(DELAY);
+    expect(vm.value).to.be.equal(1);
+    expect(vm.$el.querySelector('input').value).to.be.equal('1.00');
   });
 
   it('controls', () => {
@@ -332,7 +327,7 @@ describe('InputNumber', () => {
     expect(vm.$el.querySelector('.el-input-number__decrease')).to.not.exist;
     expect(vm.$el.querySelector('.el-input-number__increase')).to.not.exist;
   });
-  it('invalid value reset', done => {
+  it('invalid value reset', async() => {
     vm = createVue({
       template: `
         <el-input-number v-model="value" :min="5" :max="10" ref="inputNumber">
@@ -346,20 +341,17 @@ describe('InputNumber', () => {
     }, true);
     const inputNumber = vm.$refs.inputNumber;
     vm.value = 100;
-    vm.$nextTick(_ => {
-      expect(inputNumber.currentValue).to.be.equal(10);
-      vm.value = 4;
 
-      vm.$nextTick(_ => {
-        expect(inputNumber.currentValue).to.be.equal(5);
-        vm.value = 'dsajkhd';
+    await waitImmediate();
+    expect(inputNumber.currentValue).to.be.equal(10);
+    vm.value = 4;
 
-        vm.$nextTick(_ => {
-          expect(inputNumber.currentValue).to.be.equal(5);
-          done();
-        });
-      });
-    });
+    await waitImmediate();
+    expect(inputNumber.currentValue).to.be.equal(5);
+    vm.value = 'dsajkhd';
+
+    await waitImmediate();
+    expect(inputNumber.currentValue).to.be.equal(5);
   });
   describe('event:change', () => {
     let spy;
@@ -380,35 +372,29 @@ describe('InputNumber', () => {
       vm.$refs.compo.$on('change', spy);
     });
 
-    it('emit on input', done => {
+    it('emit on input', async() => {
       vm.$refs.compo.handleInputChange('3');
-      setTimeout(_ => {
-        expect(spy.calledOnce).to.be.true;
-        expect(spy.args[0][0]).to.equal(3);
-        done();
-      }, DELAY);
+      await wait(DELAY);
+      expect(spy.calledOnce).to.be.true;
+      expect(spy.args[0][0]).to.equal(3);
     });
 
-    it('emit on button', done => {
+    it('emit on button', async() => {
       const btnIncrease = vm.$el.querySelector('.el-input-number__increase');
       triggerEvent(btnIncrease, 'mousedown');
       triggerClick(document, 'mouseup');
-      setTimeout(_ => {
-        expect(spy.calledOnce).to.be.true;
-        expect(spy.args[0][0]).to.equal(3);
-        done();
-      }, DELAY);
+      await wait(DELAY);
+      expect(spy.calledOnce).to.be.true;
+      expect(spy.args[0][0]).to.equal(3);
     });
 
-    it('does not emit on programatic change', done => {
+    it('does not emit on programatic change', async() => {
       vm.value = 3;
-      setTimeout(_ => {
-        expect(spy.notCalled).to.be.true;
-        done();
-      }, DELAY);
+      await wait(DELAY);
+      expect(spy.notCalled).to.be.true;
     });
   });
-  it('event:focus & blur', done => {
+  it('event:focus & blur', async() => {
     vm = createVue({
       template: `
         <el-input-number ref="input">
@@ -424,13 +410,11 @@ describe('InputNumber', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
-      expect(spyFocus.calledOnce).to.be.true;
-      expect(spyBlur.calledOnce).to.be.true;
-      done();
-    });
+    await waitImmediate();
+    expect(spyFocus.calledOnce).to.be.true;
+    expect(spyBlur.calledOnce).to.be.true;
   });
-  it('focus', done => {
+  it('focus', async() => {
     vm = createVue({
       template: `
         <el-input-number ref="input"></el-input-number>
@@ -442,14 +426,12 @@ describe('InputNumber', () => {
     vm.$refs.input.$on('focus', spy);
     vm.$refs.input.focus();
 
-    vm.$nextTick(_ => {
-      expect(spy.calledOnce).to.be.true;
-      done();
-    });
+    await waitImmediate();
+    expect(spy.calledOnce).to.be.true;
   });
 
   describe('InputNumber Methods', () => {
-    it('method:select', done => {
+    it('method:select', async() => {
       const testContent = '123';
 
       vm = createVue({
@@ -468,14 +450,11 @@ describe('InputNumber', () => {
 
       vm.$refs.inputNumComp.select();
 
-      vm.$nextTick(_ => {
-        expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionStart)
-          .to.equal(0);
-        expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionEnd)
-          .to.equal(testContent.length);
-
-        done();
-      });
+      await waitImmediate();
+      expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionStart)
+        .to.equal(0);
+      expect(vm.$refs.inputNumComp.$refs.input.$refs.input.selectionEnd)
+        .to.equal(testContent.length);
     });
   });
 });

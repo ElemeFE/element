@@ -84,7 +84,7 @@
         type: Number,
         default: -Infinity
       },
-      value: {},
+      value: Number,
       disabled: Boolean,
       size: String,
       controls: {
@@ -115,33 +115,12 @@
       value: {
         immediate: true,
         handler(value) {
-          let newVal = value;
-          if (newVal != null) {
-            newVal = +newVal;
-            if (isNaN(newVal)) {
-              return;
-            }
-
-            if (this.stepStrictly) {
-              const stepPrecision = this.getPrecision(this.step);
-              const precisionFactor = Math.pow(10, stepPrecision);
-              newVal = Math.round(newVal / this.step) * precisionFactor * this.step / precisionFactor;
-            }
-
-            if (this.precision !== undefined) {
-              newVal = this.toPrecision(newVal, this.precision);
-            }
-
-            if (newVal >= this.max) newVal = this.max;
-            if (newVal <= this.min) newVal = this.min;
-          }
-          this.currentValue = newVal;
-          this.userInput = null;
-          this.$emit('input', newVal);
+          if (value === this.currentValue) return;
+          this.updateCurrentValue(value);
         }
       },
       precision(value) {
-        this.setCurrentValue(this.value, value);
+        this.updateCurrentValue(this.value);
       }
     },
     computed: {
@@ -179,22 +158,9 @@
         if (this.userInput !== null) {
           return this.userInput;
         }
-
-        let currentValue = this.currentValue;
-
-        if (typeof currentValue === 'number') {
-          if (this.stepStrictly) {
-            const stepPrecision = this.getPrecision(this.step);
-            const precisionFactor = Math.pow(10, stepPrecision);
-            currentValue = Math.round(currentValue / this.step) * precisionFactor * this.step / precisionFactor;
-          }
-
-          if (this.precision !== undefined) {
-            currentValue = currentValue.toFixed(this.precision);
-          }
-        }
-
-        return currentValue;
+        const val = this.currentValue;
+        if (typeof val !== 'number') return val;
+        return typeof this.precision === 'number' ? val.toFixed(this.precision) : val + '';
       }
     },
     methods: {
@@ -244,18 +210,37 @@
       handleFocus(event) {
         this.$emit('focus', event);
       },
-      setCurrentValue(newVal, precision = this.precision) {
-        const oldVal = this.currentValue;
-        if (typeof newVal === 'number' && precision !== undefined) {
-          newVal = this.toPrecision(newVal, precision);
-        }
-        if (newVal >= this.max) newVal = this.max;
-        if (newVal <= this.min) newVal = this.min;
-        if (oldVal === newVal) return;
-        this.userInput = null;
+      setCurrentValue(newVal) {
         this.$emit('input', newVal);
-        this.$emit('change', newVal, oldVal);
+        this.$emit('change', newVal, this.currentValue);
+      },
+      updateCurrentValue(value) {
+        let newVal = value;
+        if (newVal != null) {
+          newVal = +newVal;
+          if (isNaN(newVal)) return;
+
+          if (this.stepStrictly) {
+            const stepPrecision = this.getPrecision(this.step);
+            const precisionFactor = Math.pow(10, stepPrecision);
+            newVal = Math.round(newVal / this.step) * precisionFactor * this.step / precisionFactor;
+          }
+
+          if (this.precision !== undefined) {
+            newVal = this.toPrecision(newVal, this.precision);
+          }
+
+          if (newVal >= this.max) newVal = this.max;
+          if (newVal <= this.min) newVal = this.min;
+        }
+
         this.currentValue = newVal;
+        this.userInput = null;
+
+        if (newVal !== value) {
+          // Value is standardized, we need to notify the parent
+          this.$emit('input', newVal);
+        }
       },
       handleInput(value) {
         this.userInput = value;
