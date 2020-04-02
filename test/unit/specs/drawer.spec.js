@@ -346,5 +346,11 @@ describe('Drawer', () => {
       vm = renderer(size, false);
       expect(vm.$el.querySelector('.el-drawer').style.height).to.equal('50%');
     });
+
+    it('should effect width when drawer is horizontal', async() => {
+      const size = '50';
+      vm = renderer(size, false);
+      expect(vm.$el.querySelector('.el-drawer').style.height).to.equal('50px');
+    });
   });
 });
