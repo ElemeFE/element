@@ -5,14 +5,12 @@
     @after-leave="afterLeave">
     <div
       class="el-drawer__wrapper"
-      tabindex="-1"
       v-show="visible">
       <div
         class="el-drawer__container"
         :class="visible && 'el-drawer__open'"
         @click.self="handleWrapperClick"
-        role="document"
-        tabindex="-1">
+        role="document">
         <div
           aria-modal="true"
           aria-labelledby="el-drawer__title"
@@ -22,11 +20,10 @@
           :style="isHorizontal ? `width: ${size}` : `height: ${size}`"
           ref="drawer"
           role="dialog"
-          tabindex="-1"
           >
           <header class="el-drawer__header" id="el-drawer__title" v-if="withHeader">
             <slot name="title">
-              <span role="heading" tabindex="0" :title="title">{{ title }}</span>
+              <span role="heading" :title="title">{{ title }}</span>
             </slot>
             <button
               :aria-label="`close ${title || 'drawer'}`"
@@ -37,7 +34,7 @@
               <i class="el-dialog__close el-icon el-icon-close"></i>
             </button>
           </header>
-          <section class="el-drawer__body" v-if="rendered">
+          <section class="el-drawer__body" ref="body" v-if="rendered">
             <slot></slot>
           </section>
         </div>
@@ -134,7 +131,7 @@ export default {
         }
         this.prevActiveElement = document.activeElement;
         this.$nextTick(() => {
-          Utils.focusFirstDescendant(this.$refs.drawer);
+          Utils.focusFirstDescendant(this.$refs.body);
         });
       } else {
         if (!this.closed) this.$emit('close');

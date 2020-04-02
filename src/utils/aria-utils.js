@@ -11,6 +11,7 @@ aria.Utils = aria.Utils || {};
  *  true if a focusable element is found and focus is set.
  */
 aria.Utils.focusFirstDescendant = function(element) {
+  if (!element) return false;
   for (var i = 0; i < element.childNodes.length; i++) {
     var child = element.childNodes[i];
     if (aria.Utils.attemptFocus(child) || aria.Utils.focusFirstDescendant(child)) {
