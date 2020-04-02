@@ -1,5 +1,4 @@
 import { isEqual, capitalize } from 'element-ui/src/utils/util';
-import { isDef } from 'element-ui/src/utils/shared';
 
 let uid = 0;
 
@@ -50,7 +49,7 @@ export default class Node {
     const { data, loaded, hasChildren, children } = this;
     const { lazy, leaf: leafKey } = this.config;
     if (lazy) {
-      const isLeaf = isDef(data[leafKey])
+      const isLeaf = data[leafKey] != null
         ? data[leafKey]
         : (loaded ? !children.length : false);
       this.hasChildren = !isLeaf;

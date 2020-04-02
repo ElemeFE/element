@@ -124,7 +124,6 @@ import ElCascaderPanel from 'element-ui/packages/cascader-panel';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
 import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
-import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import { debounce } from 'throttle-debounce';
 
@@ -248,7 +247,7 @@ export default {
         .forEach(oldProp => {
           const { newProp, type } = MigratingProps[oldProp];
           let oldValue = $attrs[oldProp] || $attrs[kebabCase(oldProp)];
-          if (isDef(oldProp) && !isDef(config[newProp])) {
+          if (oldProp != null && config[newProp] == null) {
             if (type === Boolean && oldValue === '') {
               oldValue = true;
             }
@@ -379,7 +378,7 @@ export default {
 
       const { dropDownVisible } = this;
       const { input } = this.$refs;
-      visible = isDef(visible) ? visible : !dropDownVisible;
+      visible = visible != null ? visible : !dropDownVisible;
       if (visible !== dropDownVisible) {
         this.dropDownVisible = visible;
         if (visible) {
