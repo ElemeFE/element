@@ -40,19 +40,19 @@
     props: {
       value: {
         type: Number,
-        default: 0
+        required: true
       },
       vertical: {
         type: Boolean,
         default: false
       },
-      tooltipClass: String
+      tooltipClass: String,
+      dragging: Boolean
     },
 
     data() {
       return {
         hovering: false,
-        dragging: false,
         isClick: false,
         startX: 0,
         currentX: 0,
@@ -94,7 +94,7 @@
       },
 
       enableFormat() {
-        return this.$parent.formatTooltip instanceof Function;
+        return typeof this.$parent.formatTooltip === 'function';
       },
 
       formatValue() {
@@ -103,12 +103,6 @@
 
       wrapperStyle() {
         return this.vertical ? { bottom: this.currentPosition } : { left: this.currentPosition };
-      }
-    },
-
-    watch: {
-      dragging(val) {
-        this.$parent.dragging = val;
       }
     },
 
@@ -145,16 +139,14 @@
         if (this.disabled) return;
         this.newPosition = parseFloat(this.currentPosition) - this.step / (this.max - this.min) * 100;
         this.setPosition(this.newPosition);
-        this.$parent.emitChange();
       },
       onRightKeyDown() {
         if (this.disabled) return;
         this.newPosition = parseFloat(this.currentPosition) + this.step / (this.max - this.min) * 100;
         this.setPosition(this.newPosition);
-        this.$parent.emitChange();
       },
       onDragStart(event) {
-        this.dragging = true;
+        this.$emit('update:dragging', true);
         this.isClick = true;
         if (event.type === 'touchstart') {
           event.clientY = event.touches[0].clientY;
@@ -198,13 +190,13 @@
            * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
            */
           setTimeout(() => {
-            this.dragging = false;
+            this.$emit('update:dragging', false);
             this.hideTooltip();
             if (!this.isClick) {
               this.setPosition(this.newPosition);
-              this.$parent.emitChange();
             }
-          }, 0);
+            if (this.oldValue !== this.value) this.$emit('change');
+          });
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('touchmove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
@@ -228,6 +220,7 @@
         this.$nextTick(() => {
           this.displayTooltip();
           this.$refs.tooltip && this.$refs.tooltip.updatePopper();
+          this.$emit('change');
         });
         if (!this.dragging && this.value !== this.oldValue) {
           this.oldValue = this.value;

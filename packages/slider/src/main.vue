@@ -7,13 +7,16 @@
     :aria-valuemax="max"
     :aria-orientation="vertical ? 'vertical': 'horizontal'"
     :aria-disabled="sliderDisabled"
+    :aria-valuetext="range ? `${minValue}-${maxValue}` : minValue"
+    :aria-label="label || `slider between ${min} and ${max}`"
   >
     <el-input-number
-      v-model="firstValue"
+      :value="minValue"
+      @input="min => setValues({ min })"
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
-      @change="emitChange"
+      @change="$emit('change', $event)"
       :step="step"
       :disabled="sliderDisabled"
       :controls="showInputControls"
@@ -35,24 +38,31 @@
       </div>
       <slider-button
         :vertical="vertical"
-        v-model="firstValue"
+        :value="minValue"
+        @input="min => setValues({ min })"
+        @change="$emit('change', value)"
         :tooltip-class="tooltipClass"
+        :dragging.sync="dragging"
         ref="button1">
       </slider-button>
       <slider-button
         :vertical="vertical"
-        v-model="secondValue"
+        :value="maxValue"
+        @input="max => setValues({ max })"
+        @change="$emit('change', value)"
         :tooltip-class="tooltipClass"
+        :dragging.sync="dragging"
         ref="button2"
         v-if="range">
       </slider-button>
-      <div
-        class="el-slider__stop"
-        v-for="(item, key) in stops"
-        :key="key"
-        :style="getStopStyle(item)"
-        v-if="showStops">
-      </div>
+      <template v-if="showStops">
+        <div
+          class="el-slider__stop"
+          v-for="(item, key) in stops"
+          :key="key"
+          :style="getStopStyle(item)">
+        </div>
+      </template>
       <template v-if="markList.length > 0">
         <div>
           <div
@@ -156,7 +166,11 @@
         type: String
       },
       tooltipClass: String,
-      marks: Object
+      marks: Object,
+      validateEvent: {
+        type: Boolean,
+        default: true
+      }
     },
 
     components: {
@@ -167,96 +181,59 @@
 
     data() {
       return {
-        firstValue: null,
-        secondValue: null,
-        oldValue: null,
         dragging: false,
         sliderSize: 1
       };
     },
 
     watch: {
-      value(val, oldVal) {
-        if (this.dragging ||
-          Array.isArray(val) &&
-          Array.isArray(oldVal) &&
-          val.every((item, index) => item === oldVal[index])) {
-          return;
-        }
-        this.setValues();
-      },
-
-      dragging(val) {
-        if (!val) {
-          this.setValues();
-        }
-      },
-
-      firstValue(val) {
-        if (this.range) {
-          this.$emit('input', [this.minValue, this.maxValue]);
-        } else {
-          this.$emit('input', val);
-        }
-      },
-
-      secondValue() {
-        if (this.range) {
-          this.$emit('input', [this.minValue, this.maxValue]);
+      value(val) {
+        this.setValues({ forceEmit: false });
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', val);
         }
       },
 
       min() {
-        this.setValues();
+        this.setValues({ forceEmit: false });
       },
 
       max() {
-        this.setValues();
+        this.setValues({ forceEmit: false });
       }
     },
 
     methods: {
-      valueChanged() {
-        if (this.range) {
-          return ![this.minValue, this.maxValue]
-            .every((item, index) => item === this.oldValue[index]);
-        } else {
-          return this.value !== this.oldValue;
-        }
-      },
-      setValues() {
+      setValues({
+        min = this.range ? this.value[0] : this.value,
+        max = this.range ? this.value[1] : null,
+        forceEmit = true
+      } = {}) {
         if (this.min > this.max) {
           console.error('[Element Error][Slider]min should not be greater than max.');
           return;
         }
-        const val = this.value;
-        if (this.range && Array.isArray(val)) {
-          if (val[1] < this.min) {
+        if (this.range) {
+          if (max < this.min) {
             this.$emit('input', [this.min, this.min]);
-          } else if (val[0] > this.max) {
+          } else if (min > this.max) {
             this.$emit('input', [this.max, this.max]);
-          } else if (val[0] < this.min) {
-            this.$emit('input', [this.min, val[1]]);
-          } else if (val[1] > this.max) {
-            this.$emit('input', [val[0], this.max]);
-          } else {
-            this.firstValue = val[0];
-            this.secondValue = val[1];
-            if (this.valueChanged()) {
-              this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
-              this.oldValue = val.slice();
-            }
+          } else if (min < this.min) {
+            this.$emit('input', [this.min, max]);
+          } else if (max > this.max) {
+            this.$emit('input', [min, this.max]);
+          } else if (forceEmit) {
+            this.$emit('input', [min, max]);
           }
-        } else if (!this.range && typeof val === 'number' && !isNaN(val)) {
-          if (val < this.min) {
-            this.$emit('input', this.min);
-          } else if (val > this.max) {
-            this.$emit('input', this.max);
-          } else {
-            this.firstValue = val;
-            if (this.valueChanged()) {
-              this.dispatch('ElFormItem', 'el.form.change', val);
-              this.oldValue = val;
+        } else {
+          const val = min;
+          if (typeof val === 'number' && !isNaN(val)) {
+            if (val < this.min) {
+              this.$emit('input', this.min);
+            } else if (val > this.max) {
+              this.$emit('input', this.max);
+            } else if (forceEmit) {
+              this.$emit('input', val);
             }
           }
         }
@@ -270,15 +247,15 @@
         }
         let button;
         if (Math.abs(this.minValue - targetValue) < Math.abs(this.maxValue - targetValue)) {
-          button = this.firstValue < this.secondValue ? 'button1' : 'button2';
+          button = this.minValue < this.maxValue ? 'button1' : 'button2';
         } else {
-          button = this.firstValue > this.secondValue ? 'button1' : 'button2';
+          button = this.minValue > this.maxValue ? 'button1' : 'button2';
         }
         this.$refs[button].setPosition(percent);
       },
 
       onSliderClick(event) {
-        if (this.sliderDisabled || this.dragging) return;
+        if (this.sliderDisabled) return;
         this.resetSize();
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
@@ -287,7 +264,6 @@
           const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
           this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
         }
-        this.emitChange();
       },
 
       resetSize() {
@@ -296,14 +272,8 @@
         }
       },
 
-      emitChange() {
-        this.$nextTick(() => {
-          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
-        });
-      },
-
       getStopStyle(position) {
-        return this.vertical ? { 'bottom': position + '%' } : { 'left': position + '%' };
+        return { [this.vertical ? 'bottom' : 'left']: position + '%' };
       }
     },
 
@@ -327,7 +297,7 @@
               step > 100 * (this.maxValue - this.min) / (this.max - this.min);
           });
         } else {
-          return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
+          return result.filter(step => step > 100 * (this.minValue - this.min) / (this.max - this.min));
         }
       },
 
@@ -348,17 +318,25 @@
       },
 
       minValue() {
-        return Math.min(this.firstValue, this.secondValue);
+        if (this.range) {
+          return Array.isArray(this.value) ? this.value[0] : null;
+        } else {
+          return this.value;
+        }
       },
 
       maxValue() {
-        return Math.max(this.firstValue, this.secondValue);
+        if (this.range) {
+          return Array.isArray(this.value) ? this.value[1] : null;
+        } else {
+          return null;
+        }
       },
 
       barSize() {
         return this.range
           ? `${ 100 * (this.maxValue - this.minValue) / (this.max - this.min) }%`
-          : `${ 100 * (this.firstValue - this.min) / (this.max - this.min) }%`;
+          : `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`;
       },
 
       barStart() {
@@ -368,11 +346,11 @@
       },
 
       precision() {
-        let precisions = [this.min, this.max, this.step].map(item => {
-          let decimal = ('' + item).split('.')[1];
-          return decimal ? decimal.length : 0;
-        });
-        return Math.max.apply(null, precisions);
+        return Math.max(...[this.min, this.max, this.step].map(item => {
+          const str = '' + item;
+          let decimal = str.indexOf('.') + 1;
+          return decimal > 0 ? str.length - decimal : 0;
+        }));
       },
 
       runwayStyle() {
@@ -396,31 +374,7 @@
     },
 
     mounted() {
-      let valuetext;
-      if (this.range) {
-        if (Array.isArray(this.value)) {
-          this.firstValue = Math.max(this.min, this.value[0]);
-          this.secondValue = Math.min(this.max, this.value[1]);
-        } else {
-          this.firstValue = this.min;
-          this.secondValue = this.max;
-        }
-        this.oldValue = [this.firstValue, this.secondValue];
-        valuetext = `${this.firstValue}-${this.secondValue}`;
-      } else {
-        if (typeof this.value !== 'number' || isNaN(this.value)) {
-          this.firstValue = this.min;
-        } else {
-          this.firstValue = Math.min(this.max, Math.max(this.min, this.value));
-        }
-        this.oldValue = this.firstValue;
-        valuetext = this.firstValue;
-      }
-      this.$el.setAttribute('aria-valuetext', valuetext);
-
-      // label screen reader
-      this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`);
-
+      this.setValues({ forceEmit: false });
       this.resetSize();
       window.addEventListener('resize', this.resetSize);
     },

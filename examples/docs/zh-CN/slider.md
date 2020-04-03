@@ -12,22 +12,31 @@
   <div class="block">
     <span class="demonstration">默认</span>
     <el-slider v-model="value1"></el-slider>
+    {{value1}}
   </div>
   <div class="block">
     <span class="demonstration">自定义初始值</span>
     <el-slider v-model="value2"></el-slider>
+    {{value2}}
   </div>
   <div class="block">
     <span class="demonstration">隐藏 Tooltip</span>
     <el-slider v-model="value3" :show-tooltip="false"></el-slider>
+    {{value3}}
   </div>
   <div class="block">
     <span class="demonstration">格式化 Tooltip</span>
     <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
+    {{value4}}
   </div>
   <div class="block">
     <span class="demonstration">禁用</span>
     <el-slider v-model="value5" disabled></el-slider>
+    {{value5}}
+  </div>
+  <div class="block">
+    <span class="demonstration">设置恒定值</span>
+    <el-slider :value="50"></el-slider>
   </div>
 </template>
 
@@ -93,7 +102,7 @@
 
 通过输入框设置精确数值
 
-:::demo 设置`show-input`属性会在右侧显示一个输入框
+:::demo 设置`show-input`属性会在右侧显示一个输入框。设置`input-controls-position`改变输入框上下箭头按钮的位置
 ```html
 <template>
   <div class="block">
@@ -212,7 +221,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value / v-model | 绑定值 | number | — | 0 |
+| value / v-model | 绑定值，非范围选择时为数字，范围选择时为数字的数组 | number / [number, number] | — | 0 |
 | min | 最小值 | number | — | 0 |
 | max | 最大值 | number | — | 100 |
 | disabled | 是否禁用 | boolean | — | false |

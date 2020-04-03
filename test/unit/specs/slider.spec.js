@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
 import Slider from 'packages/slider';
 
 describe('Slider', () => {
@@ -12,7 +12,7 @@ describe('Slider', () => {
     expect(vm.value).to.equal(0);
   });
 
-  it('should not exceed min and max', done => {
+  it('should not exceed min and max', async() => {
     vm = createVue({
       template: `
         <div>
@@ -23,21 +23,18 @@ describe('Slider', () => {
 
       data() {
         return {
-          value: 50
+          value: 30
         };
       }
     }, true);
-    setTimeout(() => {
-      vm.value = 40;
-      vm.$nextTick(() => {
-        expect(vm.value).to.equal(50);
-        vm.value = 120;
-        vm.$nextTick(() => {
-          expect(vm.value).to.equal(100);
-          done();
-        });
-      });
-    }, 10);
+    await waitImmediate();
+    expect(vm.value).to.equal(50);
+    vm.value = 40;
+    await waitImmediate();
+    expect(vm.value).to.equal(50);
+    vm.value = 120;
+    await waitImmediate();
+    expect(vm.value).to.equal(100);
   });
 
   it('show tooltip', () => {
@@ -106,11 +103,11 @@ describe('Slider', () => {
     expect(sliderButton.formatValue).to.equal('$0');
   });
 
-  it('drag', done => {
+  it('drag', async() => {
     vm = createVue({
       template: `
         <div>
-          <el-slider v-model="value" :vertical="vertical"></el-slider>
+          <el-slider ref="slider" v-model="value" :vertical="vertical"></el-slider>
         </div>
       `,
 
@@ -121,25 +118,26 @@ describe('Slider', () => {
         };
       }
     }, true);
-    const slider = vm.$children[0].$children[0];
+    await waitImmediate();
+    const slider = vm.$refs.slider.$refs.button1;
     slider.onButtonDown({ clientX: 0, preventDefault() {} });
+    await waitImmediate();
     slider.onDragging({ clientX: 100 });
+    await waitImmediate();
     slider.onDragEnd();
-    setTimeout(() => {
-      expect(vm.value > 0).to.true;
-      vm.vertical = true;
-      vm.value = 0;
-      vm.$nextTick(() => {
-        expect(vm.value === 0).to.true;
-        slider.onButtonDown({ clientY: 0, preventDefault() {} });
-        slider.onDragging({ clientY: -100 });
-        slider.onDragEnd();
-        setTimeout(() => {
-          expect(vm.value > 0).to.true;
-          done();
-        }, 10);
-      });
-    }, 10);
+    await wait(10);
+    expect(vm.value).to.gt(0);
+    vm.vertical = true;
+    vm.value = 0;
+    await waitImmediate();
+    expect(vm.value).to.eq(0);
+    slider.onButtonDown({ clientY: 0, preventDefault() {} });
+    await waitImmediate();
+    slider.onDragging({ clientY: -100 });
+    await waitImmediate();
+    slider.onDragEnd();
+    await wait(10);
+    expect(vm.value).to.gt(0);
   });
 
   it('accessibility', done => {
@@ -168,7 +166,7 @@ describe('Slider', () => {
     }, 10);
   });
 
-  it('step', done => {
+  it('step', async() => {
     vm = createVue({
       template: `
         <div style="width: 200px;">
@@ -184,12 +182,12 @@ describe('Slider', () => {
     }, true);
     const slider = vm.$children[0].$children[0];
     slider.onButtonDown({ clientX: 0, preventDefault() {} });
+    await waitImmediate();
     slider.onDragging({ clientX: 100 });
+    await waitImmediate();
     slider.onDragEnd();
-    setTimeout(() => {
-      expect(vm.value > 0.4 && vm.value < 0.6).to.true;
-      done();
-    }, 10);
+    await waitImmediate();
+    expect(vm.value > 0.4 && vm.value < 0.6).to.true;
   });
 
   it('click', done => {
@@ -216,7 +214,7 @@ describe('Slider', () => {
     }, 10);
   });
 
-  it('change event', done => {
+  it('change event', async() => {
     vm = createVue({
       template: `
         <div>
@@ -239,17 +237,14 @@ describe('Slider', () => {
     }, true);
     const slider = vm.$children[0];
     vm.value = 10;
-    setTimeout(() => {
-      expect(vm.data).to.equal(0);
-      slider.onSliderClick({ clientX: 100 });
-      setTimeout(() => {
-        expect(vm.data > 0).to.true;
-        done();
-      }, 10);
-    }, 10);
+    await waitImmediate();
+    expect(vm.data).to.equal(0);
+    slider.onSliderClick({ clientX: 100 });
+    await waitImmediate();
+    expect(vm.data).to.gt(0);
   });
 
-  it('disabled', done => {
+  it('disabled', async() => {
     vm = createVue({
       template: `
         <div>
@@ -265,12 +260,12 @@ describe('Slider', () => {
     }, true);
     const slider = vm.$children[0].$children[0];
     slider.onButtonDown({ clientX: 0 });
+    await waitImmediate();
     slider.onDragging({ clientX: 100 });
+    await waitImmediate();
     slider.onDragEnd();
-    setTimeout(() => {
-      expect(vm.value).to.equal(0);
-      done();
-    }, 10);
+    await waitImmediate();
+    expect(vm.value).to.equal(0);
   });
 
   it('show input', done => {
@@ -350,7 +345,7 @@ describe('Slider', () => {
       expect(buttons.length).to.equal(2);
     });
 
-    it('should not exceed min and max', done => {
+    it('should not exceed min and max', async() => {
       vm = createVue({
         template: `
         <div>
@@ -365,17 +360,13 @@ describe('Slider', () => {
           };
         }
       }, true);
-      setTimeout(() => {
-        vm.value = [40, 60];
-        setTimeout(() => {
-          expect(vm.value).to.deep.equal([50, 60]);
-          vm.value = [50, 120];
-          setTimeout(() => {
-            expect(vm.value).to.deep.equal([50, 100]);
-            done();
-          }, 10);
-        }, 10);
-      }, 10);
+      await waitImmediate();
+      vm.value = [40, 60];
+      await waitImmediate();
+      expect(vm.value).to.deep.equal([50, 60]);
+      vm.value = [50, 120];
+      await waitImmediate();
+      expect(vm.value).to.deep.equal([50, 100]);
     });
 
     it('click', done => {
@@ -396,7 +387,7 @@ describe('Slider', () => {
       setTimeout(() => {
         slider.onSliderClick({ clientX: 100 });
         setTimeout(() => {
-          expect(vm.value[0] > 0).to.true;
+          expect(vm.value[0]).to.gt(0);
           expect(vm.value[1]).to.equal(100);
           done();
         }, 10);
