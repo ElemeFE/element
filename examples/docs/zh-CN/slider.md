@@ -1,6 +1,6 @@
 ## Slider 滑块
 
-通过拖动滑块在一个固定区间内进行选择
+通过拖动滑块在一个固定区间内进行选择。该组件是受控组件。
 
 ### 基础用法
 
@@ -130,7 +130,7 @@
 
 支持选择某一数值范围
 
-:::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
+:::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值。如果设置`range`为一个整数，可绑定多个值
 ```html
 <template>
   <div class="block">
@@ -141,13 +141,22 @@
       :max="10">
     </el-slider>
   </div>
+  <div class="block">
+    <el-slider
+      id="slider-rangedemo"
+      v-model="value2"
+      :range="4"
+      :max="100">
+    </el-slider>
+  </div>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        value: [4, 8]
+        value: [4, 8],
+        value2: [20, 40, 60, 80]
       }
     }
   }
@@ -173,7 +182,7 @@
   export default {
     data() {
       return {
-        value: 0
+        value: 50
       }
     }
   }

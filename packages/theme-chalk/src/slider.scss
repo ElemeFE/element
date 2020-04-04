@@ -88,6 +88,7 @@
     border-top-left-radius: $--slider-border-radius;
     border-bottom-left-radius: $--slider-border-radius;
     position: absolute;
+    z-index: 1;
   }
 
   @include e(button-wrapper) {
@@ -158,12 +159,20 @@
     width: 18px;
     height: 100%;
 
-    @include e(marks-text) {
+    @include e(marks-item) {
       position: absolute;
+      z-index: 600;
+    }
+
+    @include e(marks-text) {
       transform: translateX(-50%);
       font-size: 14px;
       color: $--color-info;
       margin-top: 15px;
+    }
+
+    @include e(marks-stop) {
+      position: static;
     }
   }
 

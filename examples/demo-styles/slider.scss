@@ -22,3 +22,12 @@
   width: 70%;
   margin-right: 20px;
 }
+
+#slider-rangedemo .el-slider__bar {
+  display: block !important;
+  &[data-index="0"] { background-color: #E84F62 }
+  &[data-index="1"] { background-color: #F5A623 }
+  &[data-index="2"] { background-color: #F5E411 }
+  &[data-index="3"] { background-color: #386BF3 }
+  &[data-index="4"] { background-color: #57B19B }
+}

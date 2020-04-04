@@ -1,5 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
-import Slider from 'packages/slider';
+import { createVue, triggerEvent, destroyVM, waitImmediate, wait } from '../util';
 
 describe('Slider', () => {
   let vm;
@@ -7,333 +6,290 @@ describe('Slider', () => {
     destroyVM(vm);
   });
 
-  it('create', () => {
-    vm = createTest(Slider);
-    expect(vm.value).to.equal(0);
-  });
-
-  it('should not exceed min and max', async() => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value" :min="50">
-          </el-slider>
-        </div>
-      `,
-
-      data() {
-        return {
-          value: 30
-        };
-      }
-    }, true);
-    await waitImmediate();
-    expect(vm.value).to.equal(50);
-    vm.value = 40;
-    await waitImmediate();
-    expect(vm.value).to.equal(50);
-    vm.value = 120;
-    await waitImmediate();
-    expect(vm.value).to.equal(100);
-  });
-
-  it('show tooltip', () => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value">
-          </el-slider>
-        </div>
-      `,
-
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    const slider = vm.$children[0].$children[0];
-    slider.handleMouseEnter();
-    expect(slider.$refs.tooltip.showPopper).to.true;
-    slider.handleMouseLeave();
-    expect(slider.$refs.tooltip.showPopper).to.false;
-  });
-
-  it('hide tooltip', () => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value" :show-tooltip="false">
-          </el-slider>
-        </div>
-      `,
-
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    const slider = vm.$children[0].$children[0];
-    expect(slider.$refs.tooltip.disabled).to.true;
-  });
-
-  it('format tooltip', async() => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider ref="slider" v-model="value" :format-tooltip="formatTooltip">
-          </el-slider>
-        </div>
-      `,
-
-      data() {
-        return {
-          value: 0
-        };
-      },
-      methods: {
-        formatTooltip(val) {
-          return '$' + val;
+  describe('single', () => {
+    it('create', async() => {
+      vm = createVue({
+        template: '<el-slider ref="slider" v-model="value" id="test" />',
+        data() {
+          return {
+            value: undefined
+          };
         }
-      }
-    }, true);
-    const sliderButton = vm.$refs.slider.$children[0];
-    await waitImmediate();
-    expect(sliderButton.formatValue).to.equal('$0');
-  });
+      });
+      await waitImmediate();
+      expect(vm.value).to.equal(0);
+      expect(vm.$refs.slider).to.exist;
+      expect(vm.$refs.slider.$el.id).to.eq('test');
+    });
 
-  it('drag', async() => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider ref="slider" v-model="value" :vertical="vertical"></el-slider>
-        </div>
-      `,
+    it('should not exceed min and max', async() => {
+      vm = createVue({
+        template: '<el-slider v-model="value" :min="50" />',
 
-      data() {
-        return {
-          vertical: false,
-          value: 0
-        };
-      }
-    }, true);
-    await waitImmediate();
-    const slider = vm.$refs.slider.$refs.button1;
-    slider.onButtonDown({ clientX: 0, preventDefault() {} });
-    await waitImmediate();
-    slider.onDragging({ clientX: 100 });
-    await waitImmediate();
-    slider.onDragEnd();
-    await wait(10);
-    expect(vm.value).to.gt(0);
-    vm.vertical = true;
-    vm.value = 0;
-    await waitImmediate();
-    expect(vm.value).to.eq(0);
-    slider.onButtonDown({ clientY: 0, preventDefault() {} });
-    await waitImmediate();
-    slider.onDragging({ clientY: -100 });
-    await waitImmediate();
-    slider.onDragEnd();
-    await wait(10);
-    expect(vm.value).to.gt(0);
-  });
+        data() {
+          return {
+            value: 30
+          };
+        }
+      }, true);
+      await waitImmediate();
+      expect(vm.value).to.equal(50);
+      vm.value = 40;
+      await waitImmediate();
+      expect(vm.value).to.equal(50);
+      vm.value = 120;
+      await waitImmediate();
+      expect(vm.value).to.equal(100);
+    });
 
-  it('accessibility', done => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value"></el-slider>
-        </div>
-      `,
+    it('show tooltip', () => {
+      vm = createVue({
+        template: '<el-slider v-model="value" />',
 
-      data() {
-        return {
-          value: 0.1
-        };
-      }
-    }, true);
-    const slider = vm.$children[0].$children[0];
-    slider.onRightKeyDown();
-    setTimeout(() => {
-      expect(vm.value).to.equal(1);
-      slider.onLeftKeyDown();
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      const slider = vm.$children[0].$children[0];
+      slider.handleMouseEnter();
+      expect(slider.$refs.tooltip.showPopper).to.true;
+      slider.handleMouseLeave();
+      expect(slider.$refs.tooltip.showPopper).to.false;
+    });
+
+    it('hide tooltip', () => {
+      vm = createVue({
+        template: '<el-slider v-model="value" :show-tooltip="false" />',
+
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      const slider = vm.$children[0].$children[0];
+      expect(slider.$refs.tooltip.disabled).to.true;
+    });
+
+    it('format tooltip', async() => {
+      vm = createVue({
+        template: '<el-slider v-model="value" :format-tooltip="formatTooltip" />',
+
+        data() {
+          return {
+            value: 0
+          };
+        },
+        methods: {
+          formatTooltip(val) {
+            return '$' + val;
+          }
+        }
+      }, true);
+      const sliderButton = vm.$children[0].$refs.button;
+      await waitImmediate();
+      expect(sliderButton.formatValue).to.equal('$0');
+    });
+
+    it('drag', async() => {
+      vm = createVue({
+        template: '<el-slider ref="slider" v-model="value" :vertical="vertical" />',
+
+        data() {
+          return {
+            vertical: false,
+            value: 0
+          };
+        }
+      }, true);
+      await waitImmediate();
+      const slider = vm.$children[0].$refs.button;
+      slider.onButtonDown({ clientX: 0, preventDefault() {} });
+      await waitImmediate();
+      slider.onDragging({ clientX: 100 });
+      await waitImmediate();
+      slider.onDragEnd();
+      await wait(10);
+      expect(vm.value).to.gt(0);
+      vm.vertical = true;
+      vm.value = 0;
+      await waitImmediate();
+      expect(vm.value).to.eq(0);
+      slider.onButtonDown({ clientY: 0, preventDefault() {} });
+      await waitImmediate();
+      slider.onDragging({ clientY: -100 });
+      await waitImmediate();
+      slider.onDragEnd();
+      await wait(10);
+      expect(vm.value).to.gt(0);
+    });
+
+    it('accessibility', done => {
+      vm = createVue({
+        template: '<el-slider v-model="value" />',
+
+        data() {
+          return {
+            value: 0.1
+          };
+        }
+      }, true);
+      const slider = vm.$children[0].$children[0];
+      slider.onRightKeyDown();
       setTimeout(() => {
-        expect(vm.value).to.equal(0);
-        done();
+        expect(vm.value).to.equal(1);
+        slider.onLeftKeyDown();
+        setTimeout(() => {
+          expect(vm.value).to.equal(0);
+          done();
+        }, 10);
       }, 10);
-    }, 10);
-  });
+    });
 
-  it('step', async() => {
-    vm = createVue({
-      template: `
-        <div style="width: 200px;">
-          <el-slider v-model="value" :min="0" :max="1" :step="0.1"></el-slider>
-        </div>
-      `,
+    it('step', async() => {
+      vm = createVue({
+        template: '<el-slider style="width: 200px" v-model="value" :min="0" :max="1" :step="0.1" />',
 
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    const slider = vm.$children[0].$children[0];
-    slider.onButtonDown({ clientX: 0, preventDefault() {} });
-    await waitImmediate();
-    slider.onDragging({ clientX: 100 });
-    await waitImmediate();
-    slider.onDragEnd();
-    await waitImmediate();
-    expect(vm.value > 0.4 && vm.value < 0.6).to.true;
-  });
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      const button = vm.$children[0].$refs.button;
+      button.onButtonDown({ clientX: 0, preventDefault() {} });
+      await waitImmediate();
+      button.onDragging({ clientX: 100 });
+      await waitImmediate();
+      button.onDragEnd();
+      await waitImmediate();
+      expect(vm.value > 0.4 && vm.value < 0.6).to.true;
+    });
 
-  it('click', done => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value"></el-slider>
-        </div>
-      `,
+    it('click', async() => {
+      vm = createVue({
+        template: '<el-slider v-model="value" />',
 
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    const slider = vm.$children[0];
-    setTimeout(() => {
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      const slider = vm.$children[0];
+      await waitImmediate();
       slider.onSliderClick({ clientX: 100 });
-      setTimeout(() => {
-        expect(vm.value > 0).to.true;
-        done();
-      }, 10);
-    }, 10);
-  });
+      await waitImmediate();
+      expect(vm.value ).to.gt(0);
+    });
 
-  it('change event', async() => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value" @change="onChange">
-          </el-slider>
-        </div>
-      `,
+    it('change event', async() => {
+      vm = createVue({
+        template: '<el-slider v-model="value" @change="onChange" />',
 
-      data() {
-        return {
-          data: 0,
-          value: 0
-        };
-      },
-      methods: {
-        onChange(val) {
-          this.data = val;
+        data() {
+          return {
+            data: 0,
+            value: 0
+          };
+        },
+        methods: {
+          onChange(val) {
+            this.data = val;
+          }
         }
-      }
-    }, true);
-    const slider = vm.$children[0];
-    vm.value = 10;
-    await waitImmediate();
-    expect(vm.data).to.equal(0);
-    slider.onSliderClick({ clientX: 100 });
-    await waitImmediate();
-    expect(vm.data).to.gt(0);
-  });
+      }, true);
+      const slider = vm.$children[0];
+      vm.value = 10;
+      await waitImmediate();
+      expect(vm.data).to.equal(0);
+      slider.onSliderClick({ clientX: 100 });
+      await waitImmediate();
+      expect(vm.data).to.gt(0);
+    });
 
-  it('disabled', async() => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value" disabled></el-slider>
-        </div>
-      `,
+    it('disabled', async() => {
+      vm = createVue({
+        template: '<el-slider v-model="value" disabled />',
 
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    const slider = vm.$children[0].$children[0];
-    slider.onButtonDown({ clientX: 0 });
-    await waitImmediate();
-    slider.onDragging({ clientX: 100 });
-    await waitImmediate();
-    slider.onDragEnd();
-    await waitImmediate();
-    expect(vm.value).to.equal(0);
-  });
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      const slider = vm.$children[0].$children[0];
+      slider.onButtonDown({ clientX: 0 });
+      await waitImmediate();
+      slider.onDragging({ clientX: 100 });
+      await waitImmediate();
+      slider.onDragEnd();
+      await waitImmediate();
+      expect(vm.value).to.equal(0);
+    });
 
-  it('show input', done => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider v-model="value" show-input></el-slider>
-        </div>
-      `,
+    it('show input', async() => {
+      vm = createVue({
+        template: '<el-slider v-model="value" show-input />',
 
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    setTimeout(() => {
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      await waitImmediate();
       triggerEvent(vm.$el.querySelector('.el-input-number'), 'keyup');
       const inputNumber = vm.$el.querySelector('.el-input-number').__vue__;
       inputNumber.setCurrentValue(40);
-      setTimeout(() => {
-        expect(vm.value).to.equal(40);
-        done();
-      }, 10);
-    }, 10);
-  });
+      await waitImmediate();
+      expect(vm.value).to.equal(40);
+    });
 
-  it('show stops', () => {
-    vm = createTest(Slider, {
-      showStops: true,
-      step: 10
-    }, true);
-    const stops = vm.$el.querySelectorAll('.el-slider__stop');
-    expect(stops.length).to.equal(9);
-  });
+    it('show stops', async() => {
+      vm = createVue({
+        template: '<el-slider :value="0" show-stops :step="10" show-input />'
+      }, true);
+      await waitImmediate();
+      const stops = vm.$el.querySelectorAll('.el-slider__stop');
+      expect(stops.length).to.equal(9);
+    });
 
-  it('vertical mode', done => {
-    vm = createVue({
-      template: `
-        <div>
-          <el-slider vertical v-model="value" height="200px"></el-slider>
-        </div>
-      `,
+    it('should resize', async() => {
+      vm = createVue({
+        template: '<div style="width: 100px"><el-slider :value="0" /></div>'
+      }, true);
+      await waitImmediate();
+      expect(vm.$children[0].sliderSize).to.lte(100);
+      vm.$el.style.width = '200px';
+      await wait(100);
+      expect(vm.$children[0].sliderSize).to.gt(150);
+    });
 
-      data() {
-        return {
-          value: 0
-        };
-      }
-    }, true);
-    const slider = vm.$children[0];
-    setTimeout(() => {
+    it('vertical mode', async() => {
+      vm = createVue({
+        template: '<el-slider vertical v-model="value" height="200px" />',
+
+        data() {
+          return {
+            value: 0
+          };
+        }
+      }, true);
+      const slider = vm.$children[0];
+      await waitImmediate();
       slider.onSliderClick({ clientY: 100 });
-      setTimeout(() => {
-        expect(vm.value > 0).to.true;
-        done();
-      }, 10);
-    }, 10);
+      await waitImmediate();
+      expect(vm.value > 0).to.true;
+    });
   });
 
   describe('range', () => {
     it('basic ranged slider', () => {
       vm = createVue({
-        template: `
-        <div>
-          <el-slider v-model="value" range></el-slider>
-        </div>
-      `,
+        template: '<el-slider v-model="value" range />',
 
         data() {
           return {
@@ -341,18 +297,13 @@ describe('Slider', () => {
           };
         }
       }, true);
-      const buttons = vm.$children[0].$children;
+      const buttons = vm.$children[0].$refs.buttons;
       expect(buttons.length).to.equal(2);
     });
 
     it('should not exceed min and max', async() => {
       vm = createVue({
-        template: `
-        <div>
-          <el-slider v-model="value" range :min="50">
-          </el-slider>
-        </div>
-      `,
+        template: '<el-slider v-model="value" range :min="50" />',
 
         data() {
           return {
@@ -369,13 +320,9 @@ describe('Slider', () => {
       expect(vm.value).to.deep.equal([50, 100]);
     });
 
-    it('click', done => {
+    it('click', async() => {
       vm = createVue({
-        template: `
-        <div style="width: 200px;">
-          <el-slider range v-model="value"></el-slider>
-        </div>
-      `,
+        template: '<el-slider style="width: 200px" range v-model="value" />',
 
         data() {
           return {
@@ -384,24 +331,16 @@ describe('Slider', () => {
         }
       }, true);
       const slider = vm.$children[0];
-      setTimeout(() => {
-        slider.onSliderClick({ clientX: 100 });
-        setTimeout(() => {
-          expect(vm.value[0]).to.gt(0);
-          expect(vm.value[1]).to.equal(100);
-          done();
-        }, 10);
-      }, 10);
+      await waitImmediate();
+      slider.onSliderClick({ clientX: 100 });
+      await waitImmediate();
+      expect(vm.value[0]).to.gt(0);
+      expect(vm.value[1]).to.equal(100);
     });
 
-    it('responsive to dynamic min and max', done => {
+    it('responsive to dynamic min and max', async() => {
       vm = createVue({
-        template: `
-        <div>
-          <el-slider v-model="value" range :min="min" :max="max">
-          </el-slider>
-        </div>
-      `,
+        template: '<el-slider v-model="value" range :min="min" :max="max" />',
 
         data() {
           return {
@@ -411,31 +350,19 @@ describe('Slider', () => {
           };
         }
       }, true);
-      setTimeout(() => {
-        vm.min = 60;
-        setTimeout(() => {
-          expect(vm.value).to.deep.equal([60, 80]);
-          vm.min = 30;
-          vm.max = 40;
-          setTimeout(() => {
-            expect(vm.value).to.deep.equal([40, 40]);
-            done();
-          }, 10);
-        }, 10);
-      }, 10);
+      await waitImmediate();
+      vm.min = 60;
+      await waitImmediate();
+      expect(vm.value).to.deep.equal([60, 80]);
+      vm.min = 30;
+      vm.max = 40;
+      await waitImmediate();
+      expect(vm.value).to.deep.equal([40, 40]);
     });
 
-    it('show stops', done => {
+    it('show stops', async() => {
       vm = createVue({
-        template: `
-        <div>
-          <el-slider
-            v-model="value"
-            range
-            :step="10"
-            show-stops></el-slider>
-        </div>
-      `,
+        template: '<el-slider v-model="value" range :step="10" show-stops />',
 
         data() {
           return {
@@ -443,26 +370,15 @@ describe('Slider', () => {
           };
         }
       }, true);
-      setTimeout(() => {
-        const stops = vm.$el.querySelectorAll('.el-slider__stop');
-        expect(stops.length).to.equal(5);
-        done();
-      }, 10);
+      await waitImmediate();
+      const stops = vm.$el.querySelectorAll('.el-slider__stop');
+      // 4 stops will be covered by bar, their DOMs are not removed.
+      expect(stops.length).to.equal(9);
     });
 
     it('marks', async() => {
       vm = createVue({
-        template: `
-        <div>
-          <el-slider
-            v-model="value"
-            range
-            :step="10"
-            :marks="marks"
-            :min="20"
-            show-stops></el-slider>
-        </div>
-      `,
+        template: '<el-slider v-model="value" range :step="10" :marks="marks" :min="20" show-stops />',
 
         data() {
           return {
@@ -484,7 +400,7 @@ describe('Slider', () => {
 
       waitImmediate();
       const stops = vm.$el.querySelectorAll('.el-slider__marks-stop.el-slider__stop');
-      const marks = vm.$el.querySelectorAll('.el-slider__marks .el-slider__marks-text');
+      const marks = vm.$el.querySelectorAll('.el-slider__marks-text');
       expect(marks.length).to.equal(2);
       expect(stops.length).to.equal(2);
     });

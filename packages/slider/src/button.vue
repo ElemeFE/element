@@ -5,7 +5,7 @@
     @mouseleave="handleMouseLeave"
     @mousedown="onButtonDown"
     @touchstart="onButtonDown"
-    :class="{ 'hover': hovering, 'dragging': dragging }"
+    :class="{ 'hover': hovering, 'dragging': dragging != null }"
     :style="wrapperStyle"
     ref="button"
     tabindex="0"
@@ -22,7 +22,9 @@
       :popper-class="tooltipClass"
       :disabled="!showTooltip">
       <span slot="content">{{ formatValue }}</span>
-      <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
+      <div
+        class="el-slider__button"
+        :class="{ 'hover': hovering, 'dragging': dragging != null }"></div>
     </el-tooltip>
   </div>
 </template>
@@ -47,7 +49,11 @@
         default: false
       },
       tooltipClass: String,
-      dragging: Boolean
+      dragging: Number,
+      index: {
+        type: Number,
+        required: true
+      }
     },
 
     data() {
@@ -93,12 +99,9 @@
         return `${ (this.value - this.min) / (this.max - this.min) * 100 }%`;
       },
 
-      enableFormat() {
-        return typeof this.$parent.formatTooltip === 'function';
-      },
-
       formatValue() {
-        return this.enableFormat && this.$parent.formatTooltip(this.value) || this.value;
+        return typeof this.$parent.formatTooltip === 'function' &&
+          this.$parent.formatTooltip(this.value) || this.value;
       },
 
       wrapperStyle() {
@@ -146,7 +149,7 @@
         this.setPosition(this.newPosition);
       },
       onDragStart(event) {
-        this.$emit('update:dragging', true);
+        this.$emit('update:dragging', this.index);
         this.isClick = true;
         if (event.type === 'touchstart') {
           event.clientY = event.touches[0].clientY;
@@ -162,7 +165,7 @@
       },
 
       onDragging(event) {
-        if (this.dragging) {
+        if (this.dragging != null) {
           this.isClick = false;
           this.displayTooltip();
           this.$parent.resetSize();
@@ -184,18 +187,20 @@
       },
 
       onDragEnd() {
-        if (this.dragging) {
+        if (this.dragging != null) {
           /*
            * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
            * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
            */
           setTimeout(() => {
-            this.$emit('update:dragging', false);
             this.hideTooltip();
             if (!this.isClick) {
               this.setPosition(this.newPosition);
             }
-            if (this.oldValue !== this.value) this.$emit('change');
+            this.$emit('update:dragging', null);
+            if (this.oldValue !== this.value) {
+              this.$nextTick(() => this.$emit('change'));
+            }
           });
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('touchmove', this.onDragging);
@@ -222,7 +227,7 @@
           this.$refs.tooltip && this.$refs.tooltip.updatePopper();
           this.$emit('change');
         });
-        if (!this.dragging && this.value !== this.oldValue) {
+        if (this.dragging == null && this.value !== this.oldValue) {
           this.oldValue = this.value;
         }
       }
