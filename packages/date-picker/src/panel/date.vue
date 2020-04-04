@@ -409,6 +409,14 @@
       },
 
       handleKeydown(event) {
+        if (!this.$el.parentElement) {
+          // FIXME: for some reason, the element is detached
+          // but the component isn't destroyed sometimes.
+          // found by UT. Try cleaning up
+          this.handleLeave();
+          return;
+        }
+
         const keyCode = event.keyCode;
         const list = [38, 40, 37, 39];
         if (this.visible && !this.timePickerVisible) {

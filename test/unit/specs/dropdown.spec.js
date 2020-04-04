@@ -179,7 +179,7 @@ describe('Dropdown', () => {
     expect(dropdown.visible).to.true;
     expect(callback.calledWith('c')).to.be.true;
   });
-  it('triggerElm keydown', done => {
+  it('triggerElm keydown', async() => {
     vm = createVue({
       template: `
         <el-dropdown ref="dropdown">
@@ -200,14 +200,11 @@ describe('Dropdown', () => {
     let dropdownElm = dropdown.$el;
     let triggerElm = dropdownElm.children[0];
     triggerKeyDown(triggerElm, 13); // enter
-    setTimeout(() => {
-      expect(dropdown.visible).to.be.true;
-      triggerKeyDown(triggerElm, 27); // esc
-      setTimeout(() => {
-        expect(dropdown.visible).to.be.false;
-        done();
-      }, 300);
-    }, 400);
+    await wait(400);
+    expect(dropdown.visible).to.be.true;
+    triggerKeyDown(triggerElm, 27); // esc
+    await wait(300);
+    expect(dropdown.visible).to.be.false;
   });
   it('dropdown menu keydown', done => {
     vm = createVue({
