@@ -9,16 +9,22 @@
 
 ```html
 <el-badge :value="12" class="item">
-  <el-button size="small">评论</el-button>
-</el-badge>
-<el-badge :value="3" class="item">
-  <el-button size="small">回复</el-button>
+  <el-button size="small">默认</el-button>
 </el-badge>
 <el-badge :value="1" class="item" type="primary">
-  <el-button size="small">评论</el-button>
+  <el-button size="small">主要</el-button>
+</el-badge>
+<el-badge :value="1" class="item" type="success">
+  <el-button size="small">成功</el-button>
 </el-badge>
 <el-badge :value="2" class="item" type="warning">
-  <el-button size="small">回复</el-button>
+  <el-button size="small">警告</el-button>
+</el-badge>
+<el-badge :value="3" class="item" type="danger">
+  <el-button size="small">危险</el-button>
+</el-badge>
+<el-badge :value="4" class="item" type="info">
+  <el-button size="small">信息</el-button>
 </el-badge>
 
 <el-dropdown trigger="click">
@@ -49,13 +55,34 @@
 ### 最大值
 可自定义最大值。
 
-:::demo 由`max`属性定义，它接受一个`Number`，需要注意的是，只有当`value`为`Number`时，它才会生效。
+:::demo 由`max`属性定义，它接受一个`Number`。需要注意的是，只有当`value`为`Number`时，它才会生效。
 
 ```html
 <el-badge :value="200" :max="99" class="item">
   <el-button size="small">评论</el-button>
 </el-badge>
 <el-badge :value="100" :max="10" class="item">
+  <el-button size="small">回复</el-button>
+</el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
+```
+:::
+
+### 按 K 和 W 显示
+还有一种控制长度的方式，超过（包括） `1000` 显示 `nK+`，超过 `10000` 显示 `nW+`
+
+:::demo
+```html
+<el-badge :value="2000" use-kw class="item">
+  <el-button size="small">评论</el-button>
+</el-badge>
+<el-badge :value="30000" use-kw class="item">
   <el-button size="small">回复</el-button>
 </el-badge>
 
@@ -115,6 +142,8 @@
 |------------- |---------------- |---------------- |---------------------- |-------- |
 | value        | 显示值           | string, number  |          —            |    —    |
 | max          | 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型    | number  |         —              |     —    |
+| use-kw       | 大于等于 1000 显示 nK+，大于等于 10000 显示 nW+，设置该属性后会忽略 max 属性，要求 value 是 Number 类型 |
+boolean | — | false |
 | is-dot       | 小圆点           | boolean         |         —             |  false  |
 | hidden       | 隐藏 badge       | boolean         |         —             |  false  |
-| type         | 类型             | string          | primary / success / warning / danger / info |    —    |
+| type         | 类型，默认配色同 danger | string   | default / primary / success / warning / danger / info | default |

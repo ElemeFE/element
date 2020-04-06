@@ -27,10 +27,12 @@ export default {
     max: Number,
     isDot: Boolean,
     hidden: Boolean,
+    useKw: Boolean,
     type: {
       type: String,
+      default: 'default',
       validator(val) {
-        return ['primary', 'success', 'warning', 'info', 'danger'].indexOf(val) > -1;
+        return ['default', 'primary', 'success', 'warning', 'info', 'danger'].indexOf(val) > -1;
       }
     }
   },
@@ -40,10 +42,20 @@ export default {
       if (this.isDot) return;
 
       const value = this.value;
-      const max = this.max;
+      if (typeof value === 'number') {
+        if (this.useKw) {
+          if (value >= 1e4) {
+            return ~~(value / 1e4) + 'W+';
+          } else if (value >= 1e3) {
+            return ~~(value / 1e3) + 'K+';
+          }
+        } else {
+          const max = this.max;
 
-      if (typeof value === 'number' && typeof max === 'number') {
-        return max < value ? `${max}+` : value;
+          if (typeof max === 'number') {
+            return max < value ? `${max}+` : value;
+          }
+        }
       }
 
       return value;
