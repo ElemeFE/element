@@ -4,17 +4,26 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export function noop() {};
 
+/**
+ * @param {object} obj
+ * @param {string} key
+ */
 export function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 };
 
-function extend(to, _from) {
-  for (let key in _from) {
-    to[key] = _from[key];
+/**
+ * @param {object} target
+ * @param {object} source
+ */
+function extend(target, source) {
+  for (let key in source) {
+    target[key] = source[key];
   }
-  return to;
-};
+  return target;
+}
 
+/** @param {object[]} arr */
 export function toObject(arr) {
   var res = {};
   for (let i = 0; i < arr.length; i++) {
@@ -25,8 +34,8 @@ export function toObject(arr) {
   return res;
 };
 
-export const getValueByPath = function(object, prop) {
-  prop = prop || '';
+/** @param {object} object */
+export function getValueByPath(object, prop = '') {
   const paths = prop.split('.');
   let current = object;
   let result = null;
@@ -41,8 +50,13 @@ export const getValueByPath = function(object, prop) {
     current = current[path];
   }
   return result;
-};
+}
 
+/**
+ * @param {object} obj
+ * @param {path} string
+ * @param {boolean} strict
+ **/
 export function getPropByPath(obj, path, strict) {
   let tempObj = obj;
   path = path.replace(/\[(\w+)\]/g, '.$1').replace(/^\./, '');
@@ -68,11 +82,11 @@ export function getPropByPath(obj, path, strict) {
   };
 };
 
-export const generateId = function() {
+export function generateId() {
   return Math.floor(Math.random() * 10000);
-};
+}
 
-export const valueEquals = (a, b) => {
+export function valueEquals(a, b) {
   // see: https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
   if (a === b) return true;
   if (!(a instanceof Array)) return false;
@@ -82,27 +96,42 @@ export const valueEquals = (a, b) => {
     if (a[i] !== b[i]) return false;
   }
   return true;
-};
+}
 
 export const escapeRegexpString = (value = '') => String(value).replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
 
 // TODO: use native Array.find, Array.findIndex when IE support is dropped
-export const arrayFindIndex = function(arr, pred) {
-  for (let i = 0; i !== arr.length; ++i) {
-    if (pred(arr[i])) {
+/**
+ * @param {any[]} arr
+ * @param {(item: any, index: number) => bool} pred
+ */
+export function arrayFindIndex(arr, pred) {
+  for (let i = 0; i < arr.length; ++i) {
+    if (pred(arr[i], i)) {
       return i;
     }
   }
   return -1;
-};
+}
 
-export const arrayFind = function(arr, pred) {
+/**
+ * @param {any[]} arr
+ * @param {(item: any, index: number) => bool} pred
+ */
+export function arrayFind(arr, pred) {
   const idx = arrayFindIndex(arr, pred);
   return idx !== -1 ? arr[idx] : undefined;
-};
+}
 
-// coerce truthy value to array
-export const coerceTruthyValueToArray = function(val) {
+/** @param {any[]} arr */
+export function arrayFill(arr, value) {
+  for (let i = 0; i < arr.length; ++i) {
+    arr[i] = value;
+  }
+  return arr;
+}
+
+export function coerceTruthyValueToArray(val) {
   if (Array.isArray(val)) {
     return val;
   } else if (val) {
@@ -110,21 +139,22 @@ export const coerceTruthyValueToArray = function(val) {
   } else {
     return [];
   }
-};
+}
 
-export const isIE = function() {
+export function isIE() {
   return !Vue.prototype.$isServer && !isNaN(Number(document.documentMode));
-};
+}
 
-export const isEdge = function() {
+export function isEdge() {
   return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Edge') > -1;
-};
+}
 
-export const isFirefox = function() {
+export function isFirefox() {
   return !Vue.prototype.$isServer && !!window.navigator.userAgent.match(/firefox/i);
-};
+}
 
-export const autoprefixer = function(style) {
+/** @param {CSSStyleSheet} style */
+export function autoprefixer(style) {
   if (typeof style !== 'object') return style;
   const rules = ['transform', 'transition', 'animation'];
   const prefixes = ['ms-', 'webkit-'];
@@ -137,22 +167,24 @@ export const autoprefixer = function(style) {
     }
   });
   return style;
-};
+}
 
-export const kebabCase = function(str) {
+/** @param {string} str */
+export function kebabCase(str) {
   const hyphenateRE = /([^-])([A-Z])/g;
   return str
     .replace(hyphenateRE, '$1-$2')
     .replace(hyphenateRE, '$1-$2')
     .toLowerCase();
-};
+}
 
-export const capitalize = function(str) {
+/** @param {string} str */
+export function capitalize(str) {
   if (typeof str !== 'string') return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
-};
+}
 
-export const looseEqual = function(a, b) {
+export function looseEqual(a, b) {
   const isObjectA = typeof a === 'object';
   const isObjectB = typeof b === 'object';
   if (isObjectA && isObjectB) {
@@ -162,33 +194,34 @@ export const looseEqual = function(a, b) {
   } else {
     return false;
   }
-};
+}
 
-export const arrayEquals = function(arrayA, arrayB) {
-  arrayA = arrayA || [];
-  arrayB = arrayB || [];
-
+/**
+ * @param {any[]} arrayA
+ * @param {any[]} arrayB
+ */
+export function arrayEquals(arrayA, arrayB) {
   if (arrayA.length !== arrayB.length) {
     return false;
   }
 
   for (let i = 0; i < arrayA.length; i++) {
-    if (!looseEqual(arrayA[i], arrayB[i])) {
+    if (arrayA[i] !== arrayB[i]) {
       return false;
     }
   }
 
   return true;
-};
+}
 
-export const isEqual = function(value1, value2) {
+export function isEqual(value1, value2) {
   if (Array.isArray(value1) && Array.isArray(value2)) {
     return arrayEquals(value1, value2);
   }
   return looseEqual(value1, value2);
-};
+}
 
-export const isEmpty = function(val) {
+export function isEmpty(val) {
   // null or undefined
   if (val == null) return true;
 
@@ -217,8 +250,9 @@ export const isEmpty = function(val) {
   }
 
   return false;
-};
+}
 
+/** @param {Function} fn */
 export function rafThrottle(fn) {
   let locked = false;
   return function(...args) {
@@ -238,6 +272,7 @@ export function objToArray(obj) {
   return isEmpty(obj) ? [] : [obj];
 }
 
+/** @param {string} text */
 export function isKorean(text) {
   const reg = /([(\uAC00-\uD7AF)|(\u3130-\u318F)])+/gi;
   return reg.test(text);

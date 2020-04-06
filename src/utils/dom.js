@@ -5,12 +5,14 @@ const isServer = Vue.prototype.$isServer;
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 const MOZ_HACK_REGEXP = /^moz([A-Z])/;
 
+/** @param {string} name */
 export function camelCase(name) {
   return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
     return offset ? letter.toUpperCase() : letter;
   }).replace(MOZ_HACK_REGEXP, 'Moz$1');
 }
 
+/** @type {(element: Element, event: string, handler: (event: Event) => void)} */
 export const on = (function() {
   if (!isServer) {
     return function(element, event, handler) {
@@ -25,6 +27,7 @@ export const on = (function() {
   }
 })();
 
+/** @type {(element: Element, event: string, handler: (event: Event) => void)} */
 export const off = (function() {
   if (!isServer) {
     return function(element, event, handler) {
@@ -37,6 +40,7 @@ export const off = (function() {
   }
 })();
 
+/** @type {(element: Element, event: string, handler: (event: Event) => void)} */
 export function once(el, event, fn) {
   function listener() {
     fn.apply(this, arguments);
@@ -46,18 +50,35 @@ export function once(el, event, fn) {
 }
 
 // Supported in IE10+
+/**
+ * @param {Element} el
+ * @param {string} cls
+ */
 export function hasClass(el, cls) {
   return el.classList.contains(cls);
 }
 
+/**
+ * @param {Element} el
+ * @param {string} cls
+ */
 export function addClass(el, cls) {
   el.classList.add(cls);
 }
 
+/**
+ * @param {Element} el
+ * @param {string} cls
+ */
 export function removeClass(el, cls) {
   el.classList.remove(cls);
 }
 
+/**
+ * @param {Element} element
+ * @param {string} styleName
+ * @returns {string}
+ */
 export function getStyle(element, styleName) {
   if (isServer) return;
   if (!element || !styleName) return null;
@@ -73,6 +94,11 @@ export function getStyle(element, styleName) {
   }
 }
 
+/**
+ * @param {Element} element
+ * @param {string} styleName
+ * @param {string} value
+ */
 export function setStyle(element, styleName, value) {
   if (!element || !styleName) return;
 
@@ -88,6 +114,11 @@ export function setStyle(element, styleName, value) {
   }
 }
 
+/**
+ * @param {Element} el
+ * @param {boolean} vertical
+ * @returns {boolean}
+ */
 export function isScroll(el, vertical) {
   if (isServer) return;
 
@@ -101,6 +132,11 @@ export function isScroll(el, vertical) {
   return overflow.match(/(scroll|auto)/);
 }
 
+/**
+ * @param {Element} el
+ * @param {boolean} vertical
+ * @returns {HTMLElement}
+ */
 export function getScrollContainer(el, vertical) {
   if (isServer) return;
 
@@ -118,6 +154,10 @@ export function getScrollContainer(el, vertical) {
   return parent;
 }
 
+/**
+ * @param {Element} el
+ * @param {Element} container
+ */
 export function isInContainer(el, container) {
   if (isServer || !el || !container) return false;
 

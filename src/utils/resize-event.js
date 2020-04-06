@@ -1,20 +1,24 @@
 import ResizeObserver from 'resize-observer-polyfill';
+import Vue from 'vue';
 
-const isServer = typeof window === 'undefined';
+const isServer = Vue.prototype.$isServer;
 
 /* istanbul ignore next */
+/** @param {ResizeObserverEntry[]} entries */
 function resizeHandler(entries) {
-  for (let entry of entries) {
+  entries.forEach(entry => {
     const listeners = entry.target.__resizeListeners__ || [];
     if (listeners.length) {
-      listeners.forEach(fn => {
-        fn();
-      });
+      listeners.forEach(fn => fn());
     }
-  }
+  });
 }
 
 /* istanbul ignore next */
+/**
+ * @param {Element} element
+ * @param {() => void} fn
+ **/
 export function addResizeListener(element, fn) {
   if (isServer) return;
   if (!element.__resizeListeners__) {
@@ -26,6 +30,10 @@ export function addResizeListener(element, fn) {
 }
 
 /* istanbul ignore next */
+/**
+ * @param {Element} element
+ * @param {() => void} fn
+ **/
 export function removeResizeListener(element, fn) {
   if (!element || !element.__resizeListeners__) return;
   element.__resizeListeners__.splice(element.__resizeListeners__.indexOf(fn), 1);

@@ -4,13 +4,29 @@ import { t } from 'element-ui/src/locale';
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
+/** @param {number} n */
 export function range(n, cb = (_, n) => n) {
   // see https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
   return Array.apply(null, {length: n}).map(cb);
 }
 
+/**
+ * @param {number} start
+ * @param {number} end
+ **/
 function newArray(start, end) {
   return range(end - start + 1, (_, n) => start + n);
+}
+
+/**
+ * @param {any[]} arr
+ * @param {number} start
+ * @param {number} end
+ **/
+function setRangeData(arr, start, end, value) {
+  for (let i = start; i < end; i++) {
+    arr[i] = value;
+  }
 }
 
 export function getI18nSettings() {
@@ -45,38 +61,52 @@ export function formatDate(date, format = 'yyyy-MM-dd') {
   return fecha.format(date, format);
 }
 
+/** @param {string} string */
 export function parseDate(string, format = 'yyyy-MM-dd') {
   return fecha.parse(string, format);
 }
 
+/**
+ * @param {number} year
+ * @param {number} month
+ **/
 export function getDayCountOfMonth(year, month) {
   // 后一个月的前一天（它这个month是1开始的）
   return new Date(year, month + 1, 0).getDate();
 }
 
+/** @param {number} year */
 export function getDayCountOfYear(year) {
   const isLeapYear = year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
   return isLeapYear ? 366 : 365;
-};
+}
 
+/** @param {Date} date */
 export function getFirstDayOfMonth(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 }
 
+/** @param {Date} date */
 export function prevDate(date, amount = 1) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() - amount);
 }
 
+/** @param {Date} date */
 export function nextDate(date, amount = 1) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 }
 
+/**
+ * @param {number} year
+ * @param {number} month
+ **/
 export function getStartDateOfMonth(year, month) {
   const result = new Date(year, month, 1);
   const day = result.getDay();
   return prevDate(result, day === 0 ? 7 : day);
 }
 
+/** @param {Date} src */
 export function getWeekNumber(src) {
   if (!isDate(src)) return null;
   const date = new Date(src.getTime());
@@ -113,23 +143,22 @@ export function getRangeHours(ranges = []) {
   return hours;
 }
 
+/**
+ * @param {Date} date
+ * @param {number} amount
+ **/
 export function getPrevMonthLastDays(date, amount) {
   if (amount <= 0) return [];
-  const temp = new Date(date.getTime());
+  const temp = new Date(+date);
   temp.setDate(0);
   const lastDay = temp.getDate();
   return range(amount, (_, index) => lastDay - (amount - index - 1));
 }
 
+/** @param {Date} date */
 export function getMonthDays(date) {
   const temp = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   return range(temp.getDate(), (_, index) => index + 1);
-}
-
-function setRangeData(arr, start, end, value) {
-  for (let i = start; i < end; i++) {
-    arr[i] = value;
-  }
 }
 
 export function getRangeMinutes(ranges, hour) {
@@ -157,14 +186,30 @@ export function getRangeMinutes(ranges, hour) {
   return minutes;
 }
 
+/**
+ * @param {Date} date
+ * @param {number} y
+ * @param {number} m
+ * @param {number} d
+ **/
 export function modifyDate(date, y, m, d) {
   return new Date(y, m, d, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 }
 
+/**
+ * @param {Date} date
+ * @param {number} h
+ * @param {number} m
+ * @param {number} s
+ **/
 export function modifyTime(date, h, m, s) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
 }
 
+/**
+ * @param {Date} date
+ * @param {string} time
+ **/
 export function modifyWithTimeString(date, time) {
   if (date == null || !time) {
     return date;
@@ -177,12 +222,17 @@ export function clearTime(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
 
+/** @param {Date} date */
 export function clearMilliseconds(date) {
   const temp = new Date(+date);
   temp.setMilliseconds(0);
   return temp;
 };
 
+/**
+ * @param {Date} date
+ * @param {any[]} ranges
+ **/
 export function limitTimeRange(date, ranges, format = 'HH:mm:ss') {
   // TODO: refactory a more elegant solution
   if (ranges.length === 0) return date;
@@ -209,11 +259,21 @@ export function limitTimeRange(date, ranges, format = 'HH:mm:ss') {
   );
 }
 
+/**
+ * @param {Date} date
+ * @param {any[]} ranges
+ * @param {string} format
+ **/
 export function timeWithinRange(date, selectableRange, format) {
   const limitedDate = limitTimeRange(date, selectableRange, format);
-  return limitedDate.getTime() === date.getTime();
+  return +limitedDate === +date;
 }
 
+/**
+ * @param {Date} date
+ * @param {number} year
+ * @param {number} month
+ **/
 export function changeYearMonthAndClampDate(date, year, month) {
   // clamp date to the number of days in `year`, `month`
   // eg: (2010-1-31, 2010, 2) => 2010-2-28
@@ -221,6 +281,7 @@ export function changeYearMonthAndClampDate(date, year, month) {
   return modifyDate(date, year, month, monthDate);
 }
 
+/** @param {Date} date */
 export function prevMonth(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -229,6 +290,7 @@ export function prevMonth(date) {
     : changeYearMonthAndClampDate(date, year, month - 1);
 }
 
+/** @param {Date} date */
 export function nextMonth(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -237,18 +299,21 @@ export function nextMonth(date) {
     : changeYearMonthAndClampDate(date, year, month + 1);
 }
 
+/** @param {Date} date */
 export function prevYear(date, amount = 1) {
   const year = date.getFullYear();
   const month = date.getMonth();
   return changeYearMonthAndClampDate(date, year - amount, month);
 }
 
+/** @param {Date} date */
 export function nextYear(date, amount = 1) {
   const year = date.getFullYear();
   const month = date.getMonth();
   return changeYearMonthAndClampDate(date, year + amount, month);
 }
 
+/** @param {string} format */
 export function extractDateFormat(format) {
   return format
     .replace(/\W?m{1,2}|\W?ZZ/g, '')
@@ -256,12 +321,17 @@ export function extractDateFormat(format) {
     .trim();
 }
 
+/** @param {string} format */
 export function extractTimeFormat(format) {
   return format
     .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
     .trim();
 }
 
+/**
+ * @param {Date} start
+ * @param {Date} end
+ **/
 export function validateRangeInOneMonth(start, end) {
   return (start.getMonth() === end.getMonth()) && (start.getFullYear() === end.getFullYear());
 }

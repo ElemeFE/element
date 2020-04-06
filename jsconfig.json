@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "paths": {
+      "element-ui": ["."],
+      "element-ui/*": ["./*"]
+    }
+  }
+}
