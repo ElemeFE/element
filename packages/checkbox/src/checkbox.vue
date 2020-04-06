@@ -144,9 +144,9 @@
       },
 
       isDisabled() {
-        return this.isGroup
-          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled || this.isLimitDisabled
-          : this.disabled || (this.elForm || {}).disabled;
+        return (this.isGroup
+          ? this._checkboxGroup.disabled || this.isLimitDisabled
+          : false) || this.disabled || !!(this.elForm || {}).disabled;
       },
 
       _elFormItemSize() {

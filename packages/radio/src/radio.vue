@@ -112,9 +112,9 @@
           : temRadioSize;
       },
       isDisabled() {
-        return this.isGroup
-          ? this._radioGroup.disabled || this.disabled || (this.elForm || {}).disabled
-          : this.disabled || (this.elForm || {}).disabled;
+        return (this.isGroup
+          ? this._radioGroup.disabled
+          : false) || this.disabled || !!(this.elForm || {}).disabled;
       },
       tabIndex() {
         return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;

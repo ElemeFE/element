@@ -236,7 +236,7 @@ export default {
         : 'small';
     },
     isDisabled() {
-      return this.disabled || (this.elForm || {}).disabled;
+      return this.disabled || !!(this.elForm || {}).disabled;
     },
     config() {
       const config = this.props || {};

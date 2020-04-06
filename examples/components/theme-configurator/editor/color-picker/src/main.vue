@@ -82,7 +82,7 @@
       },
 
       colorDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled || !!(this.elForm || {}).disabled;
       }
     },
 

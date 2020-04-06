@@ -541,7 +541,7 @@ export default {
     },
 
     pickerDisabled() {
-      return this.disabled || (this.elForm || {}).disabled;
+      return this.disabled || !!(this.elForm || {}).disabled;
     },
 
     firstInputId() {
