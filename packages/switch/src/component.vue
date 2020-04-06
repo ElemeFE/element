@@ -11,6 +11,7 @@
       class="el-switch__input"
       type="checkbox"
       @change="handleChange"
+      @click.prevent
       ref="input"
       :id="id"
       :name="name"
@@ -18,19 +19,23 @@
       :false-value="inactiveValue"
       :disabled="switchDisabled"
       @keydown.enter="switchValue"
+      :checked="this.checked"
     >
     <span
-      :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
+      class="el-switch__label el-switch__label--left"
+      :class="checked || 'is-active'"
       v-if="inactiveIconClass || inactiveText">
-      <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
+      <i :class="inactiveIconClass" v-if="inactiveIconClass"></i>
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
-    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
-    </span>
     <span
-      :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
+      class="el-switch__core" ref="core"
+      :style="coreStyle"></span>
+    <span
+      class="el-switch__label el-switch__label--right"
+      :class="checked && 'is-active'"
       v-if="activeIconClass || activeText">
-      <i :class="[activeIconClass]" v-if="activeIconClass"></i>
+      <i :class="activeIconClass" v-if="activeIconClass"></i>
       <span v-if="!activeIconClass && activeText" :aria-hidden="!checked">{{ activeText }}</span>
     </span>
   </div>
@@ -97,11 +102,6 @@
       },
       id: String
     },
-    data() {
-      return {
-        coreWidth: this.width
-      };
-    },
     created() {
       if (!~[this.activeValue, this.inactiveValue].indexOf(this.value)) {
         this.$emit('input', this.inactiveValue);
@@ -112,15 +112,19 @@
         return this.value === this.activeValue;
       },
       switchDisabled() {
-        return this.disabled || (this.elForm || {}).disabled;
+        return this.disabled || !!(this.elForm || {}).disabled;
+      },
+      coreStyle() {
+        const color = this.checked ? this.activeColor : this.inactiveColor;
+        return {
+          width: this.width + 'px',
+          borderColor: color,
+          backgroundColor: color
+        };
       }
     },
     watch: {
       checked() {
-        this.$refs.input.checked = this.checked;
-        if (this.activeColor || this.inactiveColor) {
-          this.setBackgroundColor();
-        }
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [this.value]);
         }
@@ -131,16 +135,6 @@
         const val = this.checked ? this.inactiveValue : this.activeValue;
         this.$emit('input', val);
         this.$emit('change', val);
-        this.$nextTick(() => {
-          // set input's checked property
-          // in case parent refuses to change component's value
-          this.$refs.input.checked = this.checked;
-        });
-      },
-      setBackgroundColor() {
-        let newColor = this.checked ? this.activeColor : this.inactiveColor;
-        this.$refs.core.style.borderColor = newColor;
-        this.$refs.core.style.backgroundColor = newColor;
       },
       switchValue() {
         !this.switchDisabled && this.handleChange();
@@ -159,14 +153,6 @@
           }
         };
       }
-    },
-    mounted() {
-      /* istanbul ignore if */
-      this.coreWidth = this.width || 40;
-      if (this.activeColor || this.inactiveColor) {
-        this.setBackgroundColor();
-      }
-      this.$refs.input.checked = this.checked;
     }
   };
 </script>
