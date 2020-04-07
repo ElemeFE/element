@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, destroyVM, wait, waitImmediate } from '../util';
 
 describe('Tooltip', () => {
   let vm;
@@ -77,7 +77,7 @@ describe('Tooltip', () => {
     });
   });
 
-  describe('hover', () => {
+  it('should show on hover', async() => {
     vm = createVue(`
       <el-tooltip ref="tooltip" content="提示文字">
         <button>click</button>
@@ -86,15 +86,12 @@ describe('Tooltip', () => {
     const tooltip = vm.$refs.tooltip;
 
     triggerEvent(tooltip.$el, 'mouseenter');
-    it('popperElm is exist', () => expect(tooltip.popperElm).to.exist);
-    it('showPopper is true', () => expect(tooltip.showPopper).to.true);
-    it('close popper', done => {
-      triggerEvent(tooltip.$el, 'mouseleave');
-      setTimeout(() => {
-        expect(tooltip.showPopper).to.false;
-        done();
-      }, 300);
-    });
+    await waitImmediate();
+    expect(tooltip.popperElm).to.exist;
+    expect(tooltip.showPopper).to.true;
+    triggerEvent(tooltip.$el, 'mouseleave');
+    await wait(300);
+    expect(tooltip.showPopper).to.false;
   });
 
   it('light mode', done => {

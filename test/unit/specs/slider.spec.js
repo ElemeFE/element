@@ -182,7 +182,7 @@ describe('Slider', () => {
       await waitImmediate();
       slider.onSliderClick({ clientX: 100 });
       await waitImmediate();
-      expect(vm.value ).to.gt(0);
+      expect(vm.value).to.gt(0);
     });
 
     it('change event', async() => {
