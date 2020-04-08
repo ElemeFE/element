@@ -9,8 +9,10 @@
         <span>{{ checkedSummary }}</span>
       </el-checkbox>
     </p>
-    
-    <div :class="['el-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
+
+    <div
+      class="el-transfer-panel__body"
+      :class="{ 'is-with-footer': hasFooter }">
       <el-input
         class="el-transfer-panel__filter"
         v-model="query"
@@ -20,7 +22,8 @@
         @mouseleave.native="inputHover = false"
         v-if="filterable">
         <i slot="prefix"
-          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          class="el-input__icon"
+          :class="'el-icon-' + inputIcon"
           @click="clearQuery"
         ></i>
       </el-input>
@@ -69,10 +72,10 @@
       ElCheckbox,
       ElInput,
       OptionContent: {
-        props: {
-          option: Object
-        },
-        render(h) {
+        name: 'OptionContent',
+        props: { option: Object },
+        functional: true,
+        render(h, { parent, props: { option } }) {
           const getParent = vm => {
             if (vm.$options.componentName === 'ElTransferPanel') {
               return vm;
@@ -82,13 +85,13 @@
               return vm;
             }
           };
-          const panel = getParent(this);
+          const panel = getParent(parent);
           const transfer = panel.$parent || panel;
           return panel.renderContent
-            ? panel.renderContent(h, this.option)
+            ? panel.renderContent(h, option)
             : transfer.$scopedSlots.default
-              ? transfer.$scopedSlots.default({ option: this.option })
-              : <span>{ this.option[panel.labelProp] || this.option[panel.keyProp] }</span>;
+              ? transfer.$scopedSlots.default({ option })
+              : <span>{ option[panel.labelProp] || option[panel.keyProp] }</span>;
         }
       }
     },
