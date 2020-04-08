@@ -35,16 +35,16 @@
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
         <img
-                v-for="(url, i) in urlList"
-                v-if="i === index"
-                ref="img"
-                class="el-image-viewer__img"
-                :key="url"
-                :src="currentImg"
-                :style="imgStyle"
-                @load="handleImgLoad"
-                @error="handleImgError"
-                @mousedown="handleMouseDown">
+          v-for="(url, i) in urlList"
+          v-if="i === index"
+          ref="img"
+          class="el-image-viewer__img"
+          :key="url"
+          :src="currentImg"
+          :style="imgStyle"
+          @load="handleImgLoad"
+          @error="handleImgError"
+          @mousedown="handleMouseDown">
       </div>
     </div>
   </transition>
