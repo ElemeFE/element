@@ -20,23 +20,11 @@ export default {
     xl: [Number, Object]
   },
 
-  computed: {
-    gutter() {
-      let parent = this.$parent;
-      while (parent && parent.$options.componentName !== 'ElRow') {
-        parent = parent.$parent;
-      }
-      return parent ? parent.gutter : 0;
-    }
-  },
-  render(h) {
-    let classList = [];
-    let style = {};
+  inject: ['elRow'],
 
-    if (this.gutter) {
-      style.paddingLeft = this.gutter / 2 + 'px';
-      style.paddingRight = style.paddingLeft;
-    }
+  render(h) {
+    const classList = [];
+    let padding = this.elRow && this.elRow.gutter ? this.elRow.gutter / 2 + 'px' : null;
 
     ['span', 'offset', 'pull', 'push'].forEach(prop => {
       if (this[prop] || this[prop] === 0) {
@@ -63,9 +51,10 @@ export default {
       }
     });
 
-    return h(this.tag, {
-      class: ['el-col', classList],
-      style
-    }, this.$slots.default);
+    return <this.tag
+      staticClass="el-col"
+      class={classList}
+      style={padding && { paddingLeft: padding, paddingRight: padding }}
+    >{this.$slots.default}</this.tag>;
   }
 };

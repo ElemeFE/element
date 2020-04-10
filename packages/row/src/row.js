@@ -20,28 +20,23 @@ export default {
     }
   },
 
-  computed: {
-    style() {
-      const ret = {};
-
-      if (this.gutter) {
-        ret.marginLeft = `-${this.gutter / 2}px`;
-        ret.marginRight = ret.marginLeft;
-      }
-
-      return ret;
-    }
+  provide() {
+    return {
+      elRow: this
+    };
   },
 
   render(h) {
-    return h(this.tag, {
-      class: [
-        'el-row',
-        this.justify !== 'start' ? `is-justify-${this.justify}` : '',
-        this.align !== 'top' ? `is-align-${this.align}` : '',
-        { 'el-row--flex': this.type === 'flex' }
-      ],
-      style: this.style
-    }, this.$slots.default);
+    const margin = this.gutter ? `-${this.gutter / 2}px` : null;
+
+    return <this.tag
+      staticClass="el-row"
+      class={{
+        [`is-justify-${this.justify}`]: this.justify !== 'start',
+        [`is-align-${this.align}`]: this.align !== 'top',
+        'el-row--flex': this.type === 'flex'
+      }}
+      style={margin && { marginLeft: margin, marginRight: margin }}
+    >{this.$slots.default}</this.tag>;
   }
 };

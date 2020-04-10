@@ -1,4 +1,4 @@
-import Footer from './src/main';
+import Footer from './src/main.jsx';
 
 /* istanbul ignore next */
 Footer.install = function(Vue) {
