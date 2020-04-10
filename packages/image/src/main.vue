@@ -94,7 +94,12 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
-        return this.previewSrcList.indexOf(this.src);
+        let previewIndex = 0;
+        const srcIndex = this.previewSrcList.indexOf(this.src);
+        if (srcIndex >= 0) {
+          previewIndex = srcIndex;
+        }
+        return previewIndex;
       }
     },
 
