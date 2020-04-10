@@ -769,6 +769,7 @@ export default {
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | select | 点击选中建议项时触发 | 选中建议项 |
+| change | 在 Input 值改变时触发 | (value: string \| number) |
 
 ### Autocomplete Methods
 | 方法名 | 说明 | 参数 |
