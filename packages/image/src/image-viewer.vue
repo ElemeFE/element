@@ -1,6 +1,6 @@
 <template>
   <transition name="viewer-fade">
-    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
+    <div v-show="visible" tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
       <div class="el-image-viewer__mask"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
@@ -91,7 +91,8 @@ export default {
     initialIndex: {
       type: Number,
       default: 0
-    }
+    },
+    visible: Boolean
   },
 
   data() {
@@ -151,15 +152,30 @@ export default {
           this.loading = true;
         }
       });
+    },
+    visible(val) {
+      if (val) {
+        this.show();
+      }
     }
   },
   methods: {
+    show() {
+      this.deviceSupportInstall();
+      this.$nextTick(_ => {
+        // add tabindex then wrapper can be focusable via Javascript
+        // focus wrapper so arrow key can't cause inner scroll behavior underneath
+        this.$refs['el-image-viewer__wrapper'].focus();
+      });
+    },
     hide() {
       this.deviceSupportUninstall();
       this.onClose();
     },
     deviceSupportInstall() {
       this._keyDownHandler = rafThrottle(e => {
+        // prevent scroll behavior
+        e.preventDefault();
         const keyCode = e.keyCode;
         switch (keyCode) {
           // ESC
@@ -202,11 +218,11 @@ export default {
           });
         }
       });
-      on(document, 'keydown', this._keyDownHandler);
+      on(this.$refs['el-image-viewer__wrapper'], 'keydown', this._keyDownHandler);
       on(document, mousewheelEventName, this._mouseWheelHandler);
     },
     deviceSupportUninstall() {
-      off(document, 'keydown', this._keyDownHandler);
+      off(this.$refs['el-image-viewer__wrapper'], 'keydown', this._keyDownHandler);
       off(document, mousewheelEventName, this._mouseWheelHandler);
       this._keyDownHandler = null;
       this._mouseWheelHandler = null;
@@ -291,12 +307,6 @@ export default {
       }
       transform.enableTransition = enableTransition;
     }
-  },
-  mounted() {
-    this.deviceSupportInstall();
-    // add tabindex then wrapper can be focusable via Javascript
-    // focus wrapper so arrow key can't cause inner scroll behavior underneath
-    this.$refs['el-image-viewer__wrapper'].focus();
   }
 };
 </script>
