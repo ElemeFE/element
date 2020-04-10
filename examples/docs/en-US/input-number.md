@@ -174,7 +174,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
-|step-strictly | whether input value can only be multiple of step | number   | — | false |
+|step-strictly | whether input value can only be multiple of step | boolean | — | false |
 |precision | precision of input value | number | — | — |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |

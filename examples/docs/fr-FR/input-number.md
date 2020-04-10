@@ -174,7 +174,7 @@ Utilisez l'attribut `size` pour régler la taille avec `medium`, `small` ou `min
 | min | La valeur minimale autorisée. | number | — | `-Infinity` |
 | max | La valeur maximale autorisée. | number | — | `Infinity` |
 | step | Le pas pour l'incrémentation. | number | — | 1 |
-| step-strictly | Si la valeur ne peut être qu'un multiple du pas. | number   | — | false |
+| step-strictly | Si la valeur ne peut être qu'un multiple du pas. | boolean   | — | false |
 | precision | La précision de la valeur. | number | — | — |
 | size | La taille du composant. | string | large/small| — |
 | disabled| Si le composant est désactivé. | boolean | — | false |
