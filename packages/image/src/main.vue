@@ -217,6 +217,10 @@
         }
       },
       clickHandler() {
+        // don't show viewer when preview is false
+        if (!this.preview) {
+          return;
+        }
         // prevent body scroll
         prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
