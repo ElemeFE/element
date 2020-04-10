@@ -52,3 +52,9 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 | 参数 | 说明 |
 |--- | ---|
 | reference | 触发 Popconfirm 显示的 HTML 元素 |
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| onConfirm | 点击确认按钮时触发 | — |
+| onCancel | 点击取消按钮时触发 | — |
