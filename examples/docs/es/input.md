@@ -674,6 +674,7 @@ export default {
 | Nombre | Descripción                                     | Parametros                                 |
 | ------ | ----------------------------------------------- | ------------------------------------------ |
 | select | se dispara cuando se hace clic a una sugerencia | sugerencia en la que se está haciendo clic |
+| change | se activa cuando cambia el valor de entrada                  | (value: string \| number) |
 
 ### Autocomplete Metodo
 
