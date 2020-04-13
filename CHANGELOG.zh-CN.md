@@ -1,5 +1,34 @@
 ## 更新日志
 
+### 2.13.1
+
+*2020-04-13*
+
+#### 新特性
+- Autocomplete
+  - 添加 change 事件 (#17913 by @sxzz)
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复类型为 textarea 时建议错误问题 (#18478 by @Roojay)
+- Carousel
+  - 修复 console.warn 文案拼写错误 (#18264 by @IceFox)
+- Image
+  - 修复当 preview-src-list 属性不包含 src 时图片预览大图展示为空的问题 (#18975) (#19130 by @luckyCao)
+  - 修复第二次图片预览时快捷键失效问题 (#18983) (#19156 by @luckyCao)
+  - 修复 preview-src-list 为空时点击图片会给 body 添加 overflow: scroll 的问题 (#18967 by @inooNgt)
+- Transfer
+  - 修复和 Form 组件一起使用时错误的行高问题 (#18917 by @Hanx)
+- InputNumber
+  - 正确计算 inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - 更新首页文案 (#19155 by @iamkun)
+- Doc
+  - 更新 Popconfirm 文档 (#18324 by @iamkun)
+  - 修复 step-strictly 文档拼写问题 (#18705 by @dream2023)
+  - 修复 Steps 组件文档问题 (#17555 by @haoranyu)
+
 ### 2.13.0
 
 *2019-11-26*
