@@ -6,7 +6,7 @@
 
 #### New features
 - Autocomplete
-  - Add change event (#17913 by @三咲智子)
+  - Add change event (#17913 by @sxzz)
 
 #### Bug fixes
 
@@ -26,7 +26,7 @@
   - Remove index intro (#19155 by @iamkun)
 - Doc
   - Popconfirm doc update (#18324 by @iamkun)
-  - Fix step-strictly docs typo (#18705 by @张超杰)
+  - Fix step-strictly docs typo (#18705 by @dream2023)
   - Fix a type error in document of steps component (#17555 by @haoranyu)
 
 ### 2.13.0

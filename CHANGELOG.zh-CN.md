@@ -6,7 +6,7 @@
 
 #### 新特性
 - Autocomplete
-  - 添加 change 事件 (#17913) (by @三咲智子)
+  - 添加 change 事件 (#17913) (by @sxzz)
 
 #### Bug 修复
 
@@ -26,7 +26,7 @@
   - 更新首页文案 (#19155 by @iamkun)
 - Doc
   - 更新 Popconfirm 文档 (#18324 by @iamkun)
-  - 修复 step-strictly 文档拼写问题 (#18705 by @张超杰)
+  - 修复 step-strictly 文档拼写问题 (#18705 by @dream2023)
   - 修复 Steps 组件文档问题 (#17555 by @haoranyu)
 
 ### 2.13.0
