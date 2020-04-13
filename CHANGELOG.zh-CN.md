@@ -6,7 +6,7 @@
 
 #### 新特性
 - Autocomplete
-  - 添加 change 事件 (#17913) (by @sxzz)
+  - 添加 change 事件 (#17913 by @sxzz)
 
 #### Bug 修复
 
