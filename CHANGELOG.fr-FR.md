@@ -1,5 +1,34 @@
 ## Changelog
 
+### 2.13.1
+
+*2020-04-13*
+
+#### New features
+- Autocomplete
+  - Add change event (#17913) (by @三咲智子)
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix suggestion error when textarea (#18478) (by @Roojay)
+- Carousel
+  - Fix console typo bug (#18264) (by @IceFox)
+- Image
+  - Fix preview dose not show when preview list not contain src issue (#18975) (#19130) (by @luckyCao)
+  - Fix shortcut key not work at second time issue (#18983) (#19156) (by @luckyCao)
+  - Don't show image-viewer when preview is false (#18967) (by @inooNgt)
+- Transfer
+  - Fix incorrect line-height of el-transfer's first list item when it was used with  el-form-item (#18917) (by @Hanx)
+- InputNumber
+  - Correctly compute inputNumberDisabled (#18439) (by @ashuser-pendo)
+- Chore
+  - Remove index intro (#19155) (by @iamkun)
+- Doc
+  - Popconfirm doc update (#18324) (by @iamkun)
+  - Fix step-strictly docs typo (#18705) (by @张超杰)
+  - Fix a type error in document of steps component (#17555) (by @haoranyu)
+
 ### 2.13.0
 
 *2019-11-26*
