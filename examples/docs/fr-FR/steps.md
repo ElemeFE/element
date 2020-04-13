@@ -6,7 +6,7 @@ Permet de guider l'utilisateur dans l'accomplissement de toutes les taches d'un 
 
 Voici une barre d'étapes basique.
 
-:::demo Réglez l'attribut `active` avec une variable `Number`, qui indique l'index des étapes et commence à 0. L'attribut `space` permet de déterminer si l'espace entre les étapes doit être fixe à l'aide d'un `Boolean`. L'unité de `space` est `px`. Si cet attribut est absent, la barre sera responsive. L'attribut `finish-status` change le statut d'accomplissement des étapes.
+:::demo Réglez l'attribut `active` avec une variable `Number`, qui indique l'index des étapes et commence à 0. L'attribut `space` permet de déterminer si l'espace entre les étapes doit être fixe à l'aide d'un `Number`. L'unité de `space` est `px`. Si cet attribut est absent, la barre sera responsive. L'attribut `finish-status` change le statut d'accomplissement des étapes.
 
 ```html
 <el-steps :active="active" finish-status="success">
