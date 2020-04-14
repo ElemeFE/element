@@ -21,6 +21,7 @@ export default {
       type: Array,
       required: true
     },
+    optionMaxWidth: String,
     index: Number
   },
 
@@ -96,8 +97,8 @@ export default {
             node={ node }
             node-id={ `${menuId}-${index}` }
             aria-haspopup={ hasChildren }
-            aria-owns = { hasChildren ? menuId : null }
-            { ...events }></cascader-node>
+            aria-owns={ hasChildren ? menuId : null }
+            { ...events } />
         );
       });
 
@@ -123,6 +124,7 @@ export default {
         tag="ul"
         role="menu"
         id={ menuId }
+        style={{ maxWidth: this.optionMaxWidth }}
         class="el-cascader-menu"
         wrap-class="el-cascader-menu__wrap"
         view-class={{

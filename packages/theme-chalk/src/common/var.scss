@@ -480,9 +480,10 @@ $--cascader-menu-radius: $--border-radius-base !default;
 $--cascader-menu-border: solid 1px $--border-color-light !default;
 $--cascader-menu-shadow: $--box-shadow-light !default;
 $--cascader-node-background-hover: $--background-color-base !default;
-$--cascader-node-color-disabled:$--color-text-placeholder !default;
-$--cascader-color-empty:$--color-text-placeholder !default;
+$--cascader-node-color-disabled: $--color-text-placeholder !default;
+$--cascader-color-empty: $--color-text-placeholder !default;
 $--cascader-tag-background: #f0f2f5;
+$--cascader-menu-height: 204px;
 
 /* Group
 -------------------------- */

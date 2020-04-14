@@ -227,8 +227,8 @@
           id={ nodeId }
           aria-expanded={ inActivePath }
           tabindex={ disabled ? null : -1 }
+          staticClass="el-cascader-node"
           class={{
-            'el-cascader-node': true,
             'is-selectable': checkStrictly,
             'in-active-path': inActivePath,
             'in-checked-path': inCheckedPath,

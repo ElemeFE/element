@@ -78,6 +78,7 @@
           :props="config"
           :border="false"
           :render-label="$scopedSlots.default"
+          :optionMaxWidth="optionMaxWidth"
           @expand-change="handleExpandChange"
           @close="toggleDropDownVisible(false)"></el-cascader-panel>
         <el-scrollbar
@@ -206,6 +207,7 @@ export default {
       type: Function,
       default: () => (() => {})
     },
+    optionMaxWidth: String,
     popperClass: String
   },
 

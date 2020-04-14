@@ -29,7 +29,7 @@
   }
 
   @include e(wrap) {
-    height: 204px;
+    height: $--cascader-menu-height;
   }
 
   @include e(list) {

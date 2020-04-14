@@ -1,16 +1,15 @@
 <template>
   <div
-    :class="[
-      'el-cascader-panel',
-      border && 'is-bordered'
-    ]"
+    class="el-cascader-panel"
+    :class="{ 'is-bordered': border }"
     @keydown="handleKeyDown">
     <cascader-menu
       ref="menu"
       v-for="(menu, index) in menus"
       :index="index"
       :key="index"
-      :nodes="menu"></cascader-menu>
+      :nodes="menu"
+      :optionMaxWidth="optionMaxWidth"></cascader-menu>
   </div>
 </template>
 
@@ -94,6 +93,7 @@ export default {
       type: Boolean,
       default: true
     },
+    optionMaxWidth: String,
     renderLabel: Function
   },
 
@@ -137,7 +137,7 @@ export default {
 
   watch: {
     options: {
-      handler: function() {
+      handler() {
         this.initStore();
       },
       immediate: true,
