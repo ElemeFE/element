@@ -95,6 +95,25 @@ export default {
 ```
 :::
 
+### Right to left input
+
+:::demo
+
+```html
+<el-input placeholder="Please input" v-model="input" dir="rtl"></el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Input with icon
 
 Add an icon to indicate input type.
@@ -588,6 +607,8 @@ export default {
 | label | label text | string | — | — |
 | tabindex | input tabindex | string | - | - |
 | validate-event | whether to trigger form validation | boolean | - | true |
+| dir | input direction | string | ltr, rtl | ltr |
+
 
 ### Input slots
 

@@ -38,6 +38,7 @@
         @blur="handleBlur"
         @change="handleChange"
         :aria-label="label"
+        :dir="dir"
       >
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
@@ -102,6 +103,7 @@
       @blur="handleBlur"
       @change="handleChange"
       :aria-label="label"
+      :dir="dir"
     >
     </textarea>
     <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
@@ -189,7 +191,14 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      dir: {
+        type: String,
+        default: 'ltr',
+        validator: function(value) {
+          return ['ltr', 'rtl'].indexOf(value) !== -1;
+        }
+      }
     },
 
     computed: {
