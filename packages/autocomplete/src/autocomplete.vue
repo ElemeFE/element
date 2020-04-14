@@ -51,7 +51,7 @@
         :aria-selected="highlightedIndex === index"
       >
         <slot :item="item">
-          {{ item[valueKey] }}
+          {{ getValue(item, valueKey) }}
         </slot>
       </li>
     </el-autocomplete-suggestions>
@@ -85,7 +85,7 @@
 
     props: {
       valueKey: {
-        type: String,
+        type: [String, Number],
         default: 'value'
       },
       popperClass: String,
@@ -265,6 +265,12 @@
       },
       getInput() {
         return this.$refs.input.getInput();
+      },
+      getValue(item, valueKey) {
+        if (typeof item === 'string' && item.constructor === String) {
+          return item;
+        }
+        return item[valueKey];
       }
     },
     mounted() {
