@@ -2,13 +2,13 @@ import Vue from 'vue';
 import Main from './main.vue';
 import { PopupManager } from 'element-ui/src/utils/popup';
 import { isVNode } from 'element-ui/src/utils/vdom';
-let MessageConstructor = Vue.extend(Main);
+const MessageConstructor = Vue.extend(Main);
 
 let instance;
 let instances = [];
 let seed = 1;
 
-const Message = function(options) {
+function Message(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
   if (typeof options === 'string') {
@@ -55,7 +55,7 @@ const Message = function(options) {
   };
 });
 
-Message.close = function(id, userOnClose) {
+Message.close = function close(id, userOnClose) {
   let len = instances.length;
   let index = -1;
   let removedHeight;
@@ -78,7 +78,7 @@ Message.close = function(id, userOnClose) {
   }
 };
 
-Message.closeAll = function() {
+Message.closeAll = function closeAll() {
   for (let i = instances.length - 1; i >= 0; i--) {
     instances[i].close();
   }

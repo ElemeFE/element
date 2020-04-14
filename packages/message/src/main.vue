@@ -1,20 +1,19 @@
 <template>
   <transition name="el-message-fade" @after-leave="handleAfterLeave">
     <div
+      class="el-message"
       :class="[
-        'el-message',
-        type && !iconClass ? `el-message--${ type }` : '',
+        type && !iconClass ? 'el-message--' + type : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
         customClass
       ]"
-      :style="positionStyle"
+      :style="{ top: this.verticalOffset + 'px' }"
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
       role="alert">
-      <i :class="iconClass" v-if="iconClass"></i>
-      <i :class="typeClass" v-else></i>
+      <i :class="iconClass || typeClass"></i>
       <slot>
         <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
         <p v-else v-html="message" class="el-message__content"></p>
@@ -25,13 +24,6 @@
 </template>
 
 <script type="text/babel">
-  const typeMap = {
-    success: 'success',
-    info: 'info',
-    warning: 'warning',
-    error: 'error'
-  };
-
   export default {
     data() {
       return {
@@ -54,13 +46,8 @@
     computed: {
       typeClass() {
         return this.type && !this.iconClass
-          ? `el-message__icon el-icon-${ typeMap[this.type] }`
+          ? `el-message__icon el-icon-${ this.type }`
           : '';
-      },
-      positionStyle() {
-        return {
-          'top': `${ this.verticalOffset }px`
-        };
       }
     },
 

@@ -14,7 +14,6 @@
   transform: translateX(-50%);
   background-color: $--message-background-color;
   transition: opacity 0.3s, transform .4s, top 0.4s;
-  overflow: hidden;
   padding: $--message-padding;
   display: flex;
   align-items: center;
@@ -29,8 +28,10 @@
     }
   }
 
-  p {
+  .el-message__content {
     margin: 0;
+    flex: 1;
+    word-break: break-all;
   }
 
   @include m(info) {
@@ -73,7 +74,8 @@
   @include e(content) {
     padding: 0;
     font-size: 14px;
-    line-height: 1;
+    line-height: 1.2;
+
     &:focus {
       outline-width: 0;
     }
@@ -96,19 +98,19 @@
     }
   }
 
-  & .el-icon-success {
+  .el-icon-success {
     color: $--message-success-font-color;
   }
 
-  & .el-icon-error {
+  .el-icon-error {
     color: $--message-danger-font-color;
   }
 
-  & .el-icon-info {
+  .el-icon-info {
     color: $--message-info-font-color;
   }
 
-  & .el-icon-warning {
+  .el-icon-warning {
     color: $--message-warning-font-color;
   }
 }
