@@ -283,6 +283,7 @@ Drawer 提供一个 `destroyOnClose` API, 用来在关闭 Drawer 时销毁子组
 | visible   | 是否显示 Drawer，支持 .sync 修饰符 | boolean | — | false |
 | wrapperClosable | 点击遮罩层是否可以关闭 Drawer | boolean | - | true |
 | withHeader | 控制是否显示 header 栏, 默认为 true, 当此项为 false 时, title attribute 和 title slot 均不生效 | boolean | - | true |
+| focus-first | 控制是否默认给第一个可获取焦点的元素设置焦点 | boolean | - | true |
 
 ### Drawer Slot
 

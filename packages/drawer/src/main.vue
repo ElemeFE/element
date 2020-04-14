@@ -108,6 +108,10 @@ export default {
     withHeader: {
       type: Boolean,
       default: true
+    },
+    focusFirst: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -117,8 +121,7 @@ export default {
   },
   data() {
     return {
-      closed: false,
-      prevActiveElement: null
+      closed: false
     };
   },
   watch: {
@@ -130,16 +133,19 @@ export default {
           document.body.appendChild(this.$el);
         }
         this.prevActiveElement = document.activeElement;
-        this.$nextTick(() => {
-          Utils.focusFirstDescendant(this.$refs.body);
-        });
+        if (this.focusFirst) {
+          this.$nextTick(() => {
+            Utils.focusFirstDescendant(this.$refs.body);
+          });
+        }
       } else {
         if (!this.closed) this.$emit('close');
-        this.$nextTick(() => {
-          if (this.prevActiveElement) {
+        if (this.prevActiveElement) {
+          this.$nextTick(() => {
             this.prevActiveElement.focus();
-          }
-        });
+            this.prevActiveElement = null;
+          });
+        }
       }
     }
   },
