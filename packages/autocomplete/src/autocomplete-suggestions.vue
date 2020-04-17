@@ -11,8 +11,7 @@
         wrap-class="el-autocomplete-suggestion__wrap"
         view-class="el-autocomplete-suggestion__list">
         <li v-if="!parent.hideLoading && parent.loading"><i class="el-icon-loading"></i></li>
-        <slot v-else>
-        </slot>
+        <slot v-else></slot>
       </el-scrollbar>
     </div>
   </transition>
