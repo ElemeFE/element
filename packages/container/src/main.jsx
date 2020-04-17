@@ -12,7 +12,7 @@ export default {
       } else if (direction === 'horizontal') {
         return false;
       }
-      return children.some(vnode => {
+      return children && children.some(vnode => {
         const tag = vnode.data && vnode.data.class;
         return tag === 'el-header' || tag === 'el-footer';
       });

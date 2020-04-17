@@ -32,7 +32,7 @@ export const destroyVM = function(vm) {
  * @return {Object} vm
  */
 export const createVue = function(Compo, mounted = false) {
-  if (Object.prototype.toString.call(Compo) === '[object String]') {
+  if (typeof Compo === 'string') {
     Compo = { template: Compo };
   }
   return new Vue(Compo).$mount(mounted === false ? null : createElm());

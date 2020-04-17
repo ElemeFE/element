@@ -12,7 +12,7 @@ describe('Container', () => {
   });
 
   it('create', () => {
-    vm = createTest(Container, true);
+    vm = createVue('<el-container />');
     expect(vm.$el).to.exist;
   });
 
@@ -25,10 +25,10 @@ describe('Container', () => {
         </el-container>
       `
     }, true);
-    expect(vm.$children[0].$el.classList.contains('is-vertical')).to.true;
+    expect(vm.$el.classList.contains('is-vertical')).to.true;
   });
 
-  it('direction', done => {
+  it('direction', async() => {
     vm = createVue({
       template: `
         <el-container :direction="direction">
@@ -42,12 +42,10 @@ describe('Container', () => {
         };
       }
     }, true);
-    expect(vm.$children[0].$el.classList.contains('is-vertical')).not.to.true;
+    expect(vm.$el.classList.contains('is-vertical')).not.to.true;
     vm.direction = 'vertical';
-    vm.$nextTick(() => {
-      expect(vm.$children[0].$el.classList.contains('is-vertical')).to.true;
-      done();
-    });
+    await vm.$nextTick();
+    expect(vm.$el.classList.contains('is-vertical')).to.true;
   });
 });
 
@@ -58,7 +56,7 @@ describe('Header', () => {
   });
 
   it('create', () => {
-    vm = createTest(Header, true);
+    vm = createVue('<el-header />');
     expect(vm.$el).to.exist;
   });
 
@@ -68,7 +66,7 @@ describe('Header', () => {
         <el-header height="100px"></el-header>
       `
     }, true);
-    expect(vm.$children[0].$el.style.height).to.equal('100px');
+    expect(vm.$el.style.height).to.equal('100px');
   });
 });
 
@@ -79,7 +77,7 @@ describe('Aside', () => {
   });
 
   it('create', () => {
-    vm = createTest(Aside, true);
+    vm = createVue('<el-aside />');
     expect(vm.$el).to.exist;
   });
 
@@ -89,7 +87,7 @@ describe('Aside', () => {
         <el-aside width="200px"></el-aside>
       `
     }, true);
-    expect(vm.$children[0].$el.style.width).to.equal('200px');
+    expect(vm.$el.style.width).to.equal('200px');
   });
 });
 
@@ -100,7 +98,7 @@ describe('Main', () => {
   });
 
   it('create', () => {
-    vm = createTest(Main, true);
+    vm = createVue('<el-main />');
     expect(vm.$el).to.exist;
   });
 });
@@ -112,7 +110,7 @@ describe('Footer', () => {
   });
 
   it('create', () => {
-    vm = createTest(Footer, true);
+    vm = createVue('<el-footer />');
     expect(vm.$el).to.exist;
   });
 
@@ -122,7 +120,6 @@ describe('Footer', () => {
         <el-footer height="100px"></el-footer>
       `
     }, true);
-    expect(vm.$children[0].$el.style.height).to.equal('100px');
+    expect(vm.$el.style.height).to.equal('100px');
   });
 });
-
