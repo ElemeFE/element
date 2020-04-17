@@ -80,6 +80,26 @@ describe('Message', () => {
     }, 500);
   });
 
+  it('close one', done => {
+    const Message1 = Message({
+      message: '夏天',
+      duration: 0
+    });
+    Message({
+      message: '淑女',
+      duration: 0
+    });
+    setTimeout(() => {
+      Message.close(Message1.id);
+      setTimeout(() => {
+        const message = document.querySelector('.el-message__content');
+        expect(document.querySelectorAll('.el-message')[1]).to.not.exist;
+        expect(message.textContent).to.equal('淑女');
+        done();
+      }, 500);
+    }, 500);
+  });
+
   it('create', () => {
     Message('娜梅莉亚');
     expect(document.querySelector('.el-message')).to.exist;
