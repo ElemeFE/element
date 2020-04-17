@@ -1,8 +1,8 @@
 // reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
 
+import { isChromeLike } from 'element-ui/src/utils/util';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
-import { toObject } from 'element-ui/src/utils/util';
 import Bar from './bar';
 
 /* istanbul ignore next */
@@ -12,7 +12,13 @@ export default {
   components: { Bar },
 
   props: {
-    native: Boolean,
+    native: {
+      type: Boolean,
+      default() {
+        return isChromeLike() &&
+          !!(window.CSS && window.CSS.supports && window.CSS.supports('overflow: overlay'));
+      }
+    },
     wrapStyle: {},
     wrapClass: {},
     viewClass: {},
@@ -21,6 +27,13 @@ export default {
     tag: {
       type: String,
       default: 'div'
+    },
+    orientation: {
+      type: String,
+      validator(value) {
+        return ['vertical', 'horizontal', 'both'].indexOf(value) >= 0;
+      },
+      default: 'vertical'
     }
   },
 
@@ -40,80 +53,89 @@ export default {
   },
 
   render(h) {
-    let gutter = scrollbarWidth();
-    let style = this.wrapStyle;
+    const gutter = this.native ? 0 : scrollbarWidth();
+    const staticStyle = {
+      overflowX: this.orientation === 'vertical' ? 'hidden' : '',
+      overflowY: this.orientation === 'horizontal' ? 'hidden' : ''
+    };
 
-    if (gutter) {
-      const gutterWith = `-${gutter}px`;
-      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+    if (!this.native && gutter) {
+      staticStyle.marginRight = staticStyle.marginBottom = `-${gutter}px`;
 
-      if (Array.isArray(this.wrapStyle)) {
-        style = toObject(this.wrapStyle);
-        style.marginRight = style.marginBottom = gutterWith;
-      } else if (typeof this.wrapStyle === 'string') {
-        style += gutterStyle;
-      } else {
-        style = gutterStyle;
+      if (this.orientation === 'vertical') {
+        staticStyle.marginBottom = '';
+      } else if (this.orientation === 'horizontal') {
+        staticStyle.marginRight = '';
       }
     }
-    const view = h(this.tag, {
-      class: ['el-scrollbar__view', this.viewClass],
-      style: this.viewStyle,
-      ref: 'resize'
-    }, this.$slots.default);
-    const wrap = (
-      <div
-        ref="wrap"
-        style={ style }
-        onScroll={ this.handleScroll }
-        class={ [this.wrapClass, 'el-scrollbar__wrap', gutter ? '' : 'el-scrollbar__wrap--hidden-default'] }>
-        { [view] }
-      </div>
-    );
-    let nodes;
 
-    if (!this.native) {
-      nodes = ([
-        wrap,
-        <Bar
-          move={ this.moveX }
-          size={ this.sizeWidth }></Bar>,
-        <Bar
-          vertical
-          move={ this.moveY }
-          size={ this.sizeHeight }></Bar>
-      ]);
-    } else {
-      nodes = ([
-        <div
-          ref="wrap"
-          class={ [this.wrapClass, 'el-scrollbar__wrap'] }
-          style={ style }>
-          { [view] }
-        </div>
-      ]);
-    }
-    return h('div', { class: 'el-scrollbar' }, nodes);
+    const view = <this.tag
+      staticClass="el-scrollbar__view"
+      class={ this.viewClass }
+      style={ this.viewStyle }
+      ref="resize"
+    >{this.$slots.default}</this.tag>;
+
+    h('div', {
+      staticStyle, // JSX 不支持 staticStyle
+      ref: 'wrap',
+      style: this.wrapStyle,
+      staticClass: 'el-scrollbar__wrap' + (gutter ? '' : ' el-scrollbar__wrap--hidden-default'),
+      class: this.wrapClass,
+      on: { scroll: this.handleScroll }
+    }, [view]);
+
+    return <div
+      staticClass="el-scrollbar"
+      class={!this.native ? 'is-simulated' : 'is-native'}
+    >
+      {!this.native
+        ? [
+          h('div', {
+            staticStyle, // 见上
+            ref: 'wrap',
+            style: this.wrapStyle,
+            staticClass: 'el-scrollbar__wrap' + (gutter ? '' : ' el-scrollbar__wrap--hidden-default'),
+            class: this.wrapClass,
+            on: { scroll: this.handleScroll }
+          }, [view]),
+          this.orientation !== 'vertical' && <Bar
+            move={ this.moveX }
+            size={ this.sizeWidth } />,
+          this.orientation !== 'horizontal' && <Bar
+            vertical
+            move={ this.moveY }
+            size={ this.sizeHeight } />
+        ]
+        : h('div', {
+          ref: 'wrap',
+          staticStyle,
+          style: this.wrapStyle,
+          staticClass: 'el-scrollbar__wrap',
+          class: this.wrapClass,
+          on: { scroll: this.handleScroll }
+        }, [view])
+      }
+    </div>;
   },
 
   methods: {
     handleScroll() {
       const wrap = this.wrap;
 
-      this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
-      this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
+      this.moveY = wrap.scrollTop * 100 / wrap.clientHeight;
+      this.moveX = wrap.scrollLeft * 100 / wrap.clientWidth;
     },
 
     update() {
-      let heightPercentage, widthPercentage;
       const wrap = this.wrap;
       if (!wrap) return;
 
-      heightPercentage = (wrap.clientHeight * 100 / wrap.scrollHeight);
-      widthPercentage = (wrap.clientWidth * 100 / wrap.scrollWidth);
+      const heightPercentage = wrap.clientHeight * 100 / wrap.scrollHeight;
+      const widthPercentage = wrap.clientWidth * 100 / wrap.scrollWidth;
 
-      this.sizeHeight = (heightPercentage < 100) ? (heightPercentage + '%') : '';
-      this.sizeWidth = (widthPercentage < 100) ? (widthPercentage + '%') : '';
+      this.sizeHeight = heightPercentage < 100 ? heightPercentage + '%' : '';
+      this.sizeWidth = widthPercentage < 100 ? widthPercentage + '%' : '';
     }
   },
 

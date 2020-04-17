@@ -23,17 +23,6 @@ function extend(target, source) {
   return target;
 }
 
-/** @param {object[]} arr */
-export function toObject(arr) {
-  var res = {};
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      extend(res, arr[i]);
-    }
-  }
-  return res;
-};
-
 /** @param {object} object */
 export function getValueByPath(object, prop = '') {
   const paths = prop.split('.');
@@ -82,8 +71,9 @@ export function getPropByPath(obj, path, strict) {
   };
 };
 
+let idSeed = 0;
 export function generateId() {
-  return Math.floor(Math.random() * 10000);
+  return ++idSeed;
 }
 
 export function valueEquals(a, b) {
@@ -141,6 +131,10 @@ export function coerceTruthyValueToArray(val) {
   }
 }
 
+export function isChromeLike() {
+  return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Chrome') > -1;
+}
+
 export function isIE() {
   return !Vue.prototype.$isServer && !isNaN(Number(document.documentMode));
 }
@@ -150,7 +144,7 @@ export function isEdge() {
 }
 
 export function isFirefox() {
-  return !Vue.prototype.$isServer && !!window.navigator.userAgent.match(/firefox/i);
+  return !Vue.prototype.$isServer && !!navigator.userAgent.match(/firefox/i);
 }
 
 /** @param {CSSStyleSheet} style */

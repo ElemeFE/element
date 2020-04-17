@@ -15,10 +15,6 @@
     vertical-align: top;
     position: relative;
 
-    & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
-      padding-bottom: 15px;
-    }
-
     @include when(arrow) {
       box-sizing: border-box;
       text-align: center;

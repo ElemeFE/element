@@ -3,10 +3,7 @@ import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
 import { getStyle, addClass, removeClass, hasClass } from '../dom';
-
-let idSeed = 1;
-
-let scrollBarWidth;
+import { generateId } from 'element-ui/src/utils/util';
 
 export default {
   props: {
@@ -45,7 +42,7 @@ export default {
   },
 
   beforeMount() {
-    this._popupId = 'popup-' + idSeed++;
+    this._popupId = 'popup-' + generateId();
     PopupManager.register(this._popupId, this);
   },
 
@@ -135,9 +132,9 @@ export default {
           this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
           if (this.withoutHiddenClass) {
             this.bodyPaddingRight = document.body.style.paddingRight;
-            this.computedBodyPaddingRight = parseInt(getStyle(document.body, 'paddingRight'), 10);
+            this.computedBodyPaddingRight = parseFloat(getStyle(document.body, 'paddingRight'));
           }
-          scrollBarWidth = getScrollBarWidth();
+          const scrollBarWidth = getScrollBarWidth();
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
           let bodyOverflowY = getStyle(document.body, 'overflowY');
           if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll') && this.withoutHiddenClass) {
