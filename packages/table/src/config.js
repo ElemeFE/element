@@ -93,7 +93,7 @@ export function defaultRenderCell(h, { row, column, $index }) {
   const value = property && getPropByPath(row, property).v;
   if (column && column.formatter) {
     if (typeof column.formatter === 'string') {
-      return Vue.filter(column.formatter)(value, $index);
+      return Vue.filter(column.formatter)(value);
     } else if (typeof column.formatter === 'object') {
       return column.formatter[value];
     }
