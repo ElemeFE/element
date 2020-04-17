@@ -1,13 +1,13 @@
 import { ElementUIComponent } from './component'
 
 /** Button type */
-export type LinkType = 'primary' | 'success' | 'warning' | 'danger' | 'info' 
+export type LinkType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 
 /** Link Component */
 export declare class ElLink extends ElementUIComponent {
   /** Link type */
   type: LinkType
-  
+
   /** Disable the link */
   disabled: boolean
 
@@ -22,4 +22,7 @@ export declare class ElLink extends ElementUIComponent {
 
   /** Link target */
   target: string
+
+  /** @see RouterLink.to */
+  to: string | object
 }

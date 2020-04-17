@@ -61,5 +61,8 @@ export declare class ElCascader<V = any, D = CascaderOption> extends ElementUICo
   /** Hook function before filtering with the value to be filtered as its parameter */
   beforeFilter: (value: string) => boolean | Promise<any>
 
+  /** The maximum width of option list dropdown */
+  optionMaxWidth: string
+
   $slots: CascaderSlots
 }

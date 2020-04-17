@@ -13,4 +13,6 @@ export declare class ElBadge extends ElementUIComponent {
 
   /** Hidden badge */
   hidden: boolean
+
+  useKw: boolean
 }

@@ -20,10 +20,10 @@ interface DrawerSlots {
 }
 /** Drawer Component */
 export declare class ElDrawer extends ElementUIComponent {
-    /* Equivalent to `Dialog`'s append to body attribute, when applying nested drawer, make sure this one is set to true */
+    /** Equivalent to `Dialog`'s append to body attribute, when applying nested drawer, make sure this one is set to true */
     appendToBody: boolean
 
-    /* Hook method called before close drawer, the first parameter is a function which should determine if the drawer should be closed */
+    /** Hook method called before close drawer, the first parameter is a function which should determine if the drawer should be closed */
     beforeClose: (done: hide) => void
 
     /** Whether the Drawer can be closed by pressing ESC */
@@ -32,32 +32,35 @@ export declare class ElDrawer extends ElementUIComponent {
     /** Custom class names for Dialog */
     customClass: string
 
-    /* Determine whether the wrapped children should be destroyed, if true, children's destroyed life cycle method will be called all local state will be destroyed */
+    /** Determine whether the wrapped children should be destroyed, if true, children's destroyed life cycle method will be called all local state will be destroyed */
     destroyOnClose: boolean
 
-    /* Equivalent to `Dialog`'s modal attribute, determines whether the dark shadowing background should show */
+    /** Equivalent to `Dialog`'s modal attribute, determines whether the dark shadowing background should show */
     modal: boolean
 
-    /* Equivalent to `Dialog`'s modal-append-to-body attribute, determines whether the shadowing background should be inserted direct to DocumentBody element */
+    /** Equivalent to `Dialog`'s modal-append-to-body attribute, determines whether the shadowing background should be inserted direct to DocumentBody element */
     modalAppendToBody: boolean
 
-    /* Attributes that controls the drawer's direction of display*/
+    /** Attributes that controls the drawer's direction of display*/
     position: Direction
 
-    /* Whether the close button should be rendered to control the drawer's visible state */
+    /** Whether the close button should be rendered to control the drawer's visible state */
     showClose: boolean
 
-    /* The size of the drawer component, supporting number with unit of pixel, string by percentage e.g. 30% */
+    /** The size of the drawer component, supporting number with unit of pixel, string by percentage e.g. 30% */
     size: number | string
 
-    /* The Drawer's title, also can be replaced by named slot `title` */
+    /** The Drawer's title, also can be replaced by named slot `title` */
     title: string
 
-    /* Whether the drawer component should show, also can be decorated by `.sync` */
+    /** Whether the drawer component should show, also can be decorated by `.sync` */
     visible: boolean
 
-    /* Flag attribute whi */
+    /** Flag attribute whi */
     wrapperClosable: boolean
+
+    /** Whether to focus the first descendant element on drawer open */
+    focusFirst: boolean
 
     $slots: DrawerSlots
 }

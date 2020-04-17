@@ -70,4 +70,10 @@ export declare class ElTransfer extends ElementUIComponent {
 
   /** Clear the query text in specified panel */
   clearQuery (which: TransferPanelPosition): void
+
+  /** True to stack the move buttons */
+  stackButton: boolean
+
+  /** Whether the width of Transfer is flexable */
+  flexable: boolean
 }

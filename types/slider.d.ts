@@ -61,6 +61,9 @@ export declare class ElSlider extends ElementUIComponent {
   /** Custom class name for the tooltip */
   tooltipClass: string
 
+  /** @see InputNumber.controlsPosition */
+  inputControlsPosition: string
+
   /** Custom marks */
   marks: {
     [key: number]: string | { style: object; label: string | VNode }

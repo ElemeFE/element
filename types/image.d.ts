@@ -38,4 +38,7 @@ export declare class ElImage extends ElementUIComponent {
   previewSrcList: string[]
 
   zIndex: number
+
+  /** True to close preview when clicking modal */
+  closeOnClickModal: boolean
 }

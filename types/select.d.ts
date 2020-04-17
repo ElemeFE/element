@@ -78,13 +78,17 @@ export declare class ElSelect extends ElementUIComponent {
   /** Whether to append the popper menu to body */
   popperAppendToBody: boolean
 
-  /**
-   * Focus the Input component
-   */
+  /** @see Dropdown.placement */
+  placement: string
+
+  /** The maximum width of option list dropdown */
+  optionMaxWidth: string
+
+  /** Label key used when binding object */
+
+  /** Focus the Input component */
   focus (): void
 
-  /**
-   * Blur the Input component, and hide the dropdown
-   */
+  /** Blur the Input component, and hide the dropdown */
   blur (): void
 }
