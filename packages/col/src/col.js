@@ -20,7 +20,11 @@ export default {
     xl: [Number, Object]
   },
 
-  inject: ['elRow'],
+  inject: {
+    elRow: {
+      default: null
+    }
+  },
 
   render(h) {
     const classList = [];
