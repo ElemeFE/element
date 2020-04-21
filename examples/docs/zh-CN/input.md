@@ -793,7 +793,7 @@ export default {
 | placeholder   | 输入框占位文本    | string          | — | — |
 | clearable     | 是否可清空        | boolean         | — | false |
 | show-password | 是否显示切换密码图标| boolean         | — | false |
-| disabled      | 禁用            | boolean         | — | false   |
+| disabled      | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
 | suffix-icon   | 输入框尾部图标    | string          | — | — |

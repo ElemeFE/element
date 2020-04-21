@@ -80,7 +80,37 @@ describe('Form', () => {
     const newMarginLeft = parseInt(formItem.style.marginLeft, 10);
     expect(newMarginLeft < marginLeft).to.be.true;
   });
-  it('inline form', done => {
+  it('disable form', () => {
+    vm = createVue({
+      template: `
+        <el-form ref="form" :model="form" disabled>
+          <el-form-item>
+            <el-input ref="text1" v-model="form.text1"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input ref="text2" v-model="form.text2" :disabled="true"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input ref="text3" v-model="form.text3" :disabled="false"></el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          form: {
+            text1: '',
+            text2: '',
+            text3: ''
+          }
+        };
+      }
+    }, true);
+    expect(vm.$el.classList.contains('el-form--disabled')).to.be.true;
+    expect(vm.$refs.text1.$el.classList.contains('is-disabled')).to.be.true;
+    expect(vm.$refs.text2.$el.classList.contains('is-disabled')).to.be.true;
+    expect(vm.$refs.text3.$el.classList.contains('is-disabled')).to.be.false;
+  });
+  it('inline form', () => {
     vm = createVue({
       template: `
         <el-form ref="form" :model="form" inline>
@@ -102,9 +132,8 @@ describe('Form', () => {
       }
     }, true);
     expect(vm.$el.classList.contains('el-form--inline')).to.be.true;
-    done();
   });
-  it('label position', done => {
+  it('label position', () => {
     vm = createVue({
       template: `
         <div>
@@ -137,7 +166,6 @@ describe('Form', () => {
     }, true);
     expect(vm.$refs.labelTop.$el.classList.contains('el-form--label-top')).to.be.true;
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
-    done();
   });
   it('label size', () => {
     vm = createVue({

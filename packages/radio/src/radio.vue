@@ -44,6 +44,7 @@
 </template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElRadio',
@@ -65,7 +66,10 @@
     props: {
       value: {},
       label: {},
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       name: String,
       border: Boolean,
       size: String
@@ -114,7 +118,7 @@
       isDisabled() {
         return (this.isGroup
           ? this._radioGroup.disabled
-          : false) || this.disabled || !!(this.elForm || {}).disabled;
+          : false) || calcDisabled(this.disabled, this.elForm);
       },
       tabIndex() {
         return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;

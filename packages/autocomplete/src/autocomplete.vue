@@ -95,7 +95,10 @@
         type: Boolean,
         default: false
       },
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       name: String,
       size: String,
       value: String,

@@ -44,6 +44,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
   import Focus from 'element-ui/src/mixins/focus';
   import Migrating from 'element-ui/src/mixins/migrating';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElSwitch',
@@ -112,7 +113,7 @@
         return this.value === this.activeValue;
       },
       switchDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       },
       coreStyle() {
         const color = this.checked ? this.activeColor : this.inactiveColor;

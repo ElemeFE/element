@@ -233,7 +233,7 @@
 | value / v-model | 绑定值，非范围选择时为数字，范围选择时为数字的数组 | number / [number, number] | — | 0 |
 | min | 最小值 | number | — | 0 |
 | max | 最大值 | number | — | 100 |
-| disabled | 是否禁用 | boolean | — | false |
+| disabled  | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | step | 步长 | number | — | 1 |
 | show-input | 是否显示输入框，仅在非范围选择时有效 | boolean | — | false |
 | show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true |

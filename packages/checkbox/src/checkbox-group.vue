@@ -1,3 +1,8 @@
+<template>
+  <div class="el-checkbox-group" role="group" aria-label="checkbox-group">
+    <slot></slot>
+  </div>
+</template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
 
@@ -40,9 +45,3 @@
     }
   };
 </script>
-
-<template>
-  <div class="el-checkbox-group" role="group" aria-label="checkbox-group">
-    <slot></slot>
-  </div>
-</template>

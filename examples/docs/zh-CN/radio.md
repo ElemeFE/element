@@ -207,5 +207,5 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Radio 的 value  | string / number  |        —       |     —    |
-| disabled  | 是否禁用    | boolean   | — | false   |
+| disabled  | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | name | 原生 name 属性 | string    |      —         |     —    |

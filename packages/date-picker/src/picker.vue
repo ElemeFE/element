@@ -90,6 +90,8 @@ import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/s
 import { customerPopper } from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
+import { calcDisabled } from 'element-ui/src/utils/util';
+
 const poperMixins = customerPopper('reference');
 
 const DEFAULT_FORMATS = {
@@ -340,7 +342,10 @@ export default {
       default: '',
       validator
     },
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: null
+    },
     clearable: {
       type: Boolean,
       default: true
@@ -541,7 +546,7 @@ export default {
     },
 
     pickerDisabled() {
-      return this.disabled || !!(this.elForm || {}).disabled;
+      return calcDisabled(this.disabled, this.elForm);
     },
 
     firstInputId() {

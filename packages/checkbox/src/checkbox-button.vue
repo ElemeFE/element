@@ -1,12 +1,12 @@
 <template>
   <label
     class="el-checkbox-button"
-      :class="[
-        size ? 'el-checkbox-button--' + size : '',
-        { 'is-disabled': isDisabled },
-        { 'is-checked': isChecked },
-        { 'is-focus': focus },
-      ]"
+    :class="[
+      size ? 'el-checkbox-button--' + size : '',
+      { 'is-disabled': isDisabled },
+      { 'is-checked': isChecked },
+      { 'is-focus': focus },
+    ]"
     role="checkbox"
     :aria-checked="isChecked"
     :aria-disabled="isDisabled"
@@ -45,6 +45,7 @@
 </template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElCheckboxButton',
@@ -71,7 +72,10 @@
     props: {
       value: {},
       label: {},
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       checked: Boolean,
       name: String,
       trueLabel: [String, Number],
@@ -161,7 +165,7 @@
       isDisabled() {
         return (this._checkboxGroup
           ? this._checkboxGroup.disabled || this.isLimitDisabled
-          : false) || this.disabled || !!(this.elForm || {}).disabled;
+          : false) || calcDisabled(this.disabled, this.elForm);
       }
     },
     methods: {

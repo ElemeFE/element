@@ -1,10 +1,8 @@
-<script>
 import UploadList from './upload-list';
 import Upload from './upload';
 import ElProgress from 'element-ui/packages/progress';
 import Migrating from 'element-ui/src/mixins/migrating';
-
-function noop() {}
+import { calcDisabled, noop } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElUpload',
@@ -98,7 +96,10 @@ export default {
       default: 'text' // text,picture,picture-card
     },
     httpRequest: Function,
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: null
+    },
     limit: Number,
     onExceed: {
       type: Function,
@@ -117,7 +118,7 @@ export default {
 
   computed: {
     uploadDisabled() {
-      return this.disabled || !!(this.elForm || {}).disabled;
+      return calcDisabled(this.disabled, this.elForm);
     }
   },
 
@@ -335,4 +336,3 @@ export default {
     );
   }
 };
-</script>

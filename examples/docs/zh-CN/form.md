@@ -91,7 +91,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 
 :::demo 设置 `inline` 属性可以让表单域变为行内的表单域
 ```html
-<el-form :inline="true" :model="formInline" class="demo-form-inline">
+<el-form inline :model="formInline" class="demo-form-inline">
   <el-form-item label="审批人">
     <el-input v-model="formInline.user" placeholder="审批人"></el-input>
   </el-form-item>
@@ -159,6 +159,64 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
           type: ''
         }
       };
+    }
+  }
+</script>
+```
+:::
+
+### 禁用表单
+
+:::demo 设置 `disabled` 属性可以禁用所有未显式指定 `:disabled="false"` 的输入组件
+```html
+<el-form :model="form" label-width="80px" disabled>
+  <el-form-item label="审批人">
+    <el-input v-model="form.user" placeholder="审批人"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域">
+    <el-select v-model="form.region" placeholder="活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="活动性质">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+      <el-checkbox label="地推活动" name="type"></el-checkbox>
+      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="特殊资源">
+    <el-radio-group v-model="form.resource">
+      <el-radio label="线上品牌商赞助"></el-radio>
+      <el-radio label="线下场地免费"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit">查询</el-button>
+    <el-button type="primary" @click="onClose" :disabled="false">关闭</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        form: {
+          user: '',
+          region: '',
+          type: [],
+          resource: ''
+        }
+      }
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      },
+      onClose() {
+        console.log('close!');
+      }
     }
   }
 </script>
@@ -641,7 +699,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | status-icon  | 是否在输入框中显示校验结果反馈图标 | boolean | — | false |
 | validate-on-rule-change  | 是否在 `rules` 属性改变后立即触发一次验证 | boolean | — | true |
 | size  | 用于控制该表单内组件的尺寸 | string | medium / small / mini | — |
-| disabled | 是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效 | boolean | — | false |
+| disabled | 是否禁用该表单内的所有未显式指定 `disabled` 属性的组件 | boolean | — | false |
 
 ### Form Methods
 

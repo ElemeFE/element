@@ -5,17 +5,15 @@
     :disabled="buttonDisabled || loading"
     :autofocus="autofocus"
     :type="nativeType"
-    :class="[
-      type ? 'el-button--' + type : '',
-      buttonSize ? 'el-button--' + buttonSize : '',
-      {
-        'is-disabled': buttonDisabled,
-        'is-loading': loading,
-        'is-plain': plain,
-        'is-round': round,
-        'is-circle': circle
-      }
-    ]"
+    :class="{
+      ['el-button--' + type]: type,
+      ['el-button--' + buttonSize]: buttonSize,
+      'is-disabled': buttonDisabled,
+      'is-loading': loading,
+      'is-plain': plain,
+      'is-round': round,
+      'is-circle': circle
+    }"
   >
     <i class="el-icon-loading" v-if="loading"></i>
     <i :class="icon" v-if="icon && !loading"></i>
@@ -23,6 +21,8 @@
   </button>
 </template>
 <script>
+  import { calcDisabled } from 'element-ui/src/utils/util';
+
   export default {
     name: 'ElButton',
 
@@ -50,7 +50,10 @@
         default: 'button'
       },
       loading: Boolean,
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       plain: Boolean,
       autofocus: Boolean,
       round: Boolean,
@@ -65,7 +68,7 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       buttonDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       }
     },
 

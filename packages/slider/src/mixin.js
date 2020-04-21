@@ -1,5 +1,6 @@
 import Emitter from 'element-ui/src/mixins/emitter';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import { calcDisabled } from 'element-ui/src/utils/util';
 
 import SliderButton from './button.vue';
 import SliderCommon from './common.jsx';
@@ -133,7 +134,7 @@ export default {
     },
 
     sliderDisabled() {
-      return this.disabled || !!(this.elForm || {}).disabled;
+      return calcDisabled(this.disabled, this.elForm);
     },
 
     barStyle() {

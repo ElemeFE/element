@@ -124,7 +124,7 @@ import ElScrollbar from 'element-ui/packages/scrollbar';
 import ElCascaderPanel from 'element-ui/packages/cascader-panel';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import { t } from 'element-ui/src/locale';
-import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
+import { isEqual, isEmpty, kebabCase, calcDisabled } from 'element-ui/src/utils/util';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import { debounce } from 'throttle-debounce';
 
@@ -186,7 +186,10 @@ export default {
       type: String,
       default: () => t('el.cascader.placeholder')
     },
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: null
+    },
     clearable: Boolean,
     filterable: Boolean,
     filterMethod: Function,
@@ -238,7 +241,7 @@ export default {
         : 'small';
     },
     isDisabled() {
-      return this.disabled || !!(this.elForm || {}).disabled;
+      return calcDisabled(this.disabled, this.elForm);
     },
     config() {
       const config = this.props || {};

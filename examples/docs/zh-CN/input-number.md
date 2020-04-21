@@ -175,7 +175,7 @@
 | step-strictly | 是否只能输入 step 的倍数 | boolean   | — | false |
 | precision| 数值精度             | number   | — | — |
 | size     | 计数器尺寸           | string   | medium / small / mini | — |
-| disabled | 是否禁用计数器        | boolean | — | false |
+| disabled | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | controls | 是否使用控制按钮        | boolean | — | true |
 | controls-position | 控制按钮位置 | string | right | - |
 | name | 原生属性 | string | — | — |

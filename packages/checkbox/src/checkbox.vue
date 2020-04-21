@@ -55,6 +55,7 @@
 </template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElCheckbox',
@@ -146,7 +147,7 @@
       isDisabled() {
         return (this.isGroup
           ? this._checkboxGroup.disabled || this.isLimitDisabled
-          : false) || this.disabled || !!(this.elForm || {}).disabled;
+          : false) || calcDisabled(this.disabled, this.elForm);
       },
 
       _elFormItemSize() {
@@ -165,7 +166,10 @@
       value: {},
       label: {},
       indeterminate: Boolean,
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       checked: Boolean,
       name: String,
       trueLabel: [String, Number],

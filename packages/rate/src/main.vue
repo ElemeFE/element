@@ -35,6 +35,7 @@
 <script>
   import { hasClass } from 'element-ui/src/utils/dom';
   import Migrating from 'element-ui/src/mixins/migrating';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElRate',
@@ -213,7 +214,7 @@
       },
 
       rateDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       }
     },
 

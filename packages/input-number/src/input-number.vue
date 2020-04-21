@@ -49,6 +49,7 @@
   import ElInput from 'element-ui/packages/input';
   import Focus from 'element-ui/src/mixins/focus';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElInputNumber',
@@ -85,7 +86,10 @@
         default: -Infinity
       },
       value: Number,
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       size: String,
       controls: {
         type: Boolean,
@@ -152,7 +156,7 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       inputNumberDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       },
       displayValue() {
         if (this.userInput !== null) {

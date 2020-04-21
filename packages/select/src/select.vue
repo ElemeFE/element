@@ -148,7 +148,7 @@
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath, valueEquals, isIE, isEdge, isKorean } from 'element-ui/src/utils/util';
+  import { getValueByPath, valueEquals, isIE, isEdge, isKorean, calcDisabled } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
 
   export default {
@@ -228,7 +228,7 @@
       },
 
       selectDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       },
 
       collapseTagSize() {
@@ -269,7 +269,10 @@
       },
       automaticDropdown: Boolean,
       size: String,
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       clearable: Boolean,
       filterable: Boolean,
       allowCreate: Boolean,

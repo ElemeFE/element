@@ -1894,7 +1894,7 @@
 | props | 配置选项，具体见下表 | object | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
 | placeholder | 输入框占位文本 | string | — | 请选择 |
-| disabled | 是否禁用 | boolean | — | false |
+| disabled      | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | clearable | 是否支持清空选项 | boolean | — | false |
 | show-all-levels | 输入框中是否显示选中值的完整路径 | boolean | — | true |
 | collapse-tags | 多选模式下是否折叠Tag | boolean | - | false |

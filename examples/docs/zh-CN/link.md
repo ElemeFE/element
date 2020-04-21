@@ -84,7 +84,7 @@
 | -------------- | ------------------------------ | --------- | ------------------------------------ | ------- |
 | type           | 类型                      | string  | primary / success / warning / danger / info / native | default |
 | underline      | 是否下划线                         | boolean | —                                 | true    |
-| disabled       | 是否禁用状态                       | boolean | —                                 | false   |
+| disabled       | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | inherit-fs     | 是否继承父级的字号大小             | boolean | —                                 | false   |
 | href           | 原生 href 属性                     | string  | —                                 | -       |
 | to             | 跳转路由对象。注意如此参数非空会忽略 href 参数 | string / object | —             | -       |

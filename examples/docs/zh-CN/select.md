@@ -628,7 +628,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | value / v-model | 绑定值 | boolean / string / number | — | — |
 | multiple | 是否多选 | boolean | — | false |
-| disabled | 是否禁用 | boolean | — | false |
+| disabled | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
 | label-key | 当绑定值为对象类型且未匹配到选项时（比如正在加载数据），用以获取绑定值中的展示内容 | string | - | label |
 | size | 输入框尺寸 | string | medium/small/mini | — |

@@ -9,8 +9,7 @@
 <div class="block">
   <span class="demonstration">有默认值</span>
   <el-color-picker v-model="color1"></el-color-picker>
-</div>
-<div class="block">
+</div><div class="block">
   <span class="demonstration">无默认值</span>
   <el-color-picker v-model="color2"></el-color-picker>
 </div>
@@ -21,6 +20,24 @@
       return {
         color1: '#409EFF',
         color2: null
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 禁用
+
+:::demo 设置 `disabled` 属性禁用
+```html
+<el-color-picker v-model="color" disabled></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color: '#409EFF'
       }
     }
   };
@@ -109,7 +126,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | string | — | — |
-| disabled | 是否禁用 | boolean | — | false |
+| disabled      | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | size | 尺寸 | string | — | medium / small / mini |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |

@@ -36,6 +36,7 @@
   import PickerDropdown from './components/picker-dropdown.vue';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElColorPicker',
@@ -46,7 +47,10 @@
       value: String,
       showAlpha: Boolean,
       colorFormat: String,
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       size: String,
       popperClass: String,
       predefine: Array,
@@ -82,7 +86,7 @@
       },
 
       colorDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       }
     },
 

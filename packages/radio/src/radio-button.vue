@@ -53,7 +53,10 @@
 
     props: {
       label: {},
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       name: String
     },
     data() {

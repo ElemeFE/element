@@ -1,10 +1,10 @@
 <template>
   <a
+    class="el-link"
     :class="[
-      'el-link',
       type ? `el-link--${type}` : '',
-      disabled && 'is-disabled',
-      underline && !disabled && 'is-underline',
+      linkDisabled && 'is-disabled',
+      underline && !linkDisabled && 'is-underline',
       inheritFs && 'is-inherit-fs'
     ]"
     :href="tHref"
@@ -20,9 +20,16 @@
 </template>
 
 <script>
+import { calcDisabled } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElLink',
+
+  inject: {
+    elForm: {
+      default: ''
+    }
+  },
 
   props: {
     type: {
@@ -33,7 +40,10 @@ export default {
       type: Boolean,
       default: true
     },
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: null
+    },
     href: String,
     to: [String, Object],
     icon: String,
@@ -65,6 +75,9 @@ export default {
         return this.$router.resolve(this.to).href;
       }
       return this.href;
+    },
+    linkDisabled() {
+      return calcDisabled(this.disabled, this.elForm);
     }
   }
 };

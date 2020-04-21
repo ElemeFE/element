@@ -121,7 +121,7 @@
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
-  import {isKorean} from 'element-ui/src/utils/util';
+  import { isKorean, calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElInput',
@@ -156,7 +156,10 @@
       size: String,
       resize: String,
       form: String,
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: null
+      },
       readonly: Boolean,
       type: {
         type: String,
@@ -225,10 +228,10 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       inputDisabled() {
-        return this.disabled || !!(this.elForm || {}).disabled;
+        return calcDisabled(this.disabled, this.elForm);
       },
       nativeInputValue() {
-        return this.value === null || this.value === undefined ? '' : String(this.value);
+        return this.value == null ? '' : String(this.value);
       },
       showClear() {
         return this.clearable &&

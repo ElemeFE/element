@@ -601,7 +601,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
 | validate-on-rule-change  | whether to trigger validation when the `rules` prop is changed | boolean | — | true |
 | size  | control the size of components in this form | string | medium / small / mini | — |
-| disabled | whether to disabled all components in this form. If set to true, it cannot be overridden by its inner components' `disabled` prop | boolean | — | false |
+| disabled | whether to disabled all components which don't set `disabled` prop in this form | boolean | — | false |
 
 ### Form Methods
 
