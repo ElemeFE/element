@@ -53,7 +53,7 @@ export default {
 
   methods: {
     handleClick(event) {
-      if (!this.disabled) {
+      if (!this.linkDisabled) {
         if (this.to) {
           if (/\b_blank\b/i.test(event.currentTarget.target)) return;
 
@@ -70,7 +70,7 @@ export default {
 
   computed: {
     tHref() {
-      if (this.disabled) return null;
+      if (this.linkDisabled) return null;
       if (this.to) {
         return this.$router.resolve(this.to).href;
       }
