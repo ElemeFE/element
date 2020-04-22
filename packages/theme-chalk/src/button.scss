@@ -44,12 +44,6 @@
     border: 0;
   }
 
-  & [class*="el-icon-"] {
-    & + span {
-      margin-left: 5px;
-    }
-  }
-
   @include when(plain) {
     &:hover,
     &:focus {
@@ -234,7 +228,7 @@
       z-index: 1;
     }
   }
-  
+
   & > .el-dropdown {
     & > .el-button {
       border-top-left-radius: 0;

@@ -95,7 +95,7 @@
 <el-button type="primary" icon="el-icon-share"></el-button>
 <el-button type="primary" icon="el-icon-delete"></el-button>
 <el-button type="primary" icon="el-icon-search">搜索</el-button>
-<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+<el-button type="primary" icon-right="el-icon-upload">上传</el-button>
 ```
 :::
 
@@ -108,7 +108,7 @@
 ```html
 <el-button-group>
   <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
-  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+  <el-button type="primary" icon-right="el-icon-arrow-right">下一页</i></el-button>
 </el-button-group>
 <el-button-group>
   <el-button type="primary" icon="el-icon-edit"></el-button>
@@ -162,5 +162,6 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | loading   | 是否加载中状态   | boolean    | — | false   |
 | disabled  | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
 | icon      | 图标类名 | string   |  —  |  —  |
+| icon-right | 图标类名，显示在文字右侧 | string   |  —  |  —  |
 | autofocus | 是否默认聚焦 | boolean   |  —  |  false  |
 | native-type | 原生 type 属性 | string | button / submit / reset | button |

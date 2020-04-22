@@ -1,4 +1,4 @@
-import { createTest, createVue, destroyVM } from '../util';
+import { createTest, createVue, destroyVM, wait } from '../util';
 import Button from 'packages/button';
 
 describe('Button', () => {
@@ -14,12 +14,36 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('el-button--primary')).to.be.true;
   });
-  it('icon', () => {
+  it('icon without content', () => {
     vm = createTest(Button, {
       icon: 'el-icon-search'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;
+    const ico = buttonElm.querySelector('.el-icon-search');
+    expect(ico).to.be.ok;
+    expect(ico.classList.contains('el-icon--left')).to.be.false;
+  });
+  it('icon with content', () => {
+    vm = createVue({
+      template: `
+        <el-button icon="el-icon-search">search</el-button>
+      `
+    });
+    let buttonElm = vm.$el;
+    const ico = buttonElm.querySelector('.el-icon-search');
+    expect(ico).to.be.ok;
+    expect(ico.classList.contains('el-icon--left')).to.be.true;
+  });
+  it('icon right with content', () => {
+    vm = createVue({
+      template: `
+        <el-button icon-right="el-icon-search">search</el-button>
+      `
+    });
+    let buttonElm = vm.$el;
+    const ico = buttonElm.querySelector('.el-icon-search');
+    expect(ico).to.be.ok;
+    expect(ico.classList.contains('el-icon--right')).to.be.true;
   });
   it('nativeType', () => {
     vm = createTest(Button, {
@@ -30,6 +54,7 @@ describe('Button', () => {
   });
   it('loading', () => {
     vm = createTest(Button, {
+      icon: 'el-icon-search',
       loading: true
     }, true);
     let buttonElm = vm.$el;
@@ -71,7 +96,7 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-circle')).to.be.true;
   });
-  it('click', done => {
+  it('click', async() => {
     let result;
     vm = createVue({
       template: `
@@ -85,13 +110,11 @@ describe('Button', () => {
     }, true);
     vm.$el.click();
 
-    setTimeout(_ => {
-      expect(result).to.exist;
-      done();
-    }, 20);
+    await wait(20);
+    expect(result).to.exist;
   });
 
-  it('click inside', done => {
+  it('click inside', async() => {
     let result;
     vm = createVue({
       template: `
@@ -105,13 +128,11 @@ describe('Button', () => {
     }, true);
     vm.$el.querySelector('.inner-slot').click();
 
-    setTimeout(_ => {
-      expect(result).to.exist;
-      done();
-    }, 20);
+    await wait(20);
+    expect(result).to.exist;
   });
 
-  it('loading implies disabled', done => {
+  it('loading implies disabled', async() => {
     let result;
     vm = createVue({
       template: `
@@ -125,9 +146,7 @@ describe('Button', () => {
     }, true);
     vm.$el.querySelector('.inner-slot').click();
 
-    setTimeout(_ => {
-      expect(result).to.not.exist;
-      done();
-    }, 20);
+    await wait(20);
+    expect(result).to.not.exist;
   });
 });

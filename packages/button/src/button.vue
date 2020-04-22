@@ -15,9 +15,14 @@
       'is-circle': circle
     }"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="icon" v-if="icon && !loading"></i>
-    <span v-if="$slots.default"><slot></slot></span>
+    <i
+      v-if="icon || loading"
+      :class="[
+        loading ? 'el-icon-loading' : icon,
+        $slots.default ? 'el-icon--left' : null
+      ]"></i>
+    <slot></slot>
+    <i class="el-icon--right" :class="iconRight" v-if="iconRight"></i>
   </button>
 </template>
 <script>
@@ -41,10 +46,8 @@
         default: 'default'
       },
       size: String,
-      icon: {
-        type: String,
-        default: ''
-      },
+      icon: String,
+      iconRight: String,
       nativeType: {
         type: String,
         default: 'button'

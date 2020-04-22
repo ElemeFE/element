@@ -17,6 +17,9 @@ export declare class ElLink extends ElementUIComponent {
   /** Link icon, accepts an icon name of Element icon component */
   icon: string
 
+  /** Link icon on the right of content */
+  iconRight: string
+
   /** Link href */
   href: string
 

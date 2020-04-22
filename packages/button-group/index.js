@@ -1,4 +1,4 @@
-import ElButtonGroup from '../button/src/button-group';
+import ElButtonGroup from '../button/src/button-group.jsx';
 
 /* istanbul ignore next */
 ElButtonGroup.install = function(Vue) {

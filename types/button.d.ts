@@ -29,6 +29,9 @@ export declare class ElButton extends ElementUIComponent {
   /** Button icon, accepts an icon name of Element icon component */
   icon: string
 
+  /** Button icon on the right of content */
+  iconRight: string
+
   /** Same as native button's autofocus */
   autofocus: boolean
 
