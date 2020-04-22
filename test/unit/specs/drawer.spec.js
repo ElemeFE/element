@@ -59,8 +59,8 @@ describe('Drawer', () => {
     );
     const footerBtns = vm.$el.querySelectorAll('.el-button');
     expect(footerBtns.length).to.equal(2);
-    expect(footerBtns[0].querySelector('span').textContent).to.equal('取消');
-    expect(footerBtns[1].querySelector('span').textContent).to.equal('确定');
+    expect(footerBtns[0].textContent).to.equal('取消');
+    expect(footerBtns[1].textContent).to.equal('确定');
   });
 
   it('should append to body, when append-to-body flag is true', async() => {
@@ -283,7 +283,7 @@ describe('Drawer', () => {
 
     vm = createVue({
       template: `
-        <el-drawer 
+        <el-drawer
             :title='title'
             :visible='visible'
             ref="drawer"

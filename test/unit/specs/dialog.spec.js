@@ -1,4 +1,4 @@
-import { createVue, destroyVM, waitImmediate } from '../util';
+import { createVue, destroyVM, waitImmediate, wait } from '../util';
 
 describe('Dialog', () => {
   let vm;
@@ -30,7 +30,7 @@ describe('Dialog', () => {
     }, 10);
   });
 
-  it('render correct content', done => {
+  it('render correct content', async() => {
     vm = createVue({
       template: `
         <div>
@@ -51,14 +51,12 @@ describe('Dialog', () => {
         };
       }
     }, true);
-    setTimeout(() => {
-      const footerBtns = vm.$el.querySelectorAll('.el-dialog__footer .el-button');
-      expect(vm.$el.querySelector('.el-dialog__body span').textContent).to.equal('这是一段信息');
-      expect(footerBtns.length).to.equal(2);
-      expect(footerBtns[0].querySelector('span').textContent).to.equal('取消');
-      expect(footerBtns[1].querySelector('span').textContent).to.equal('确定');
-      done();
-    }, 100);
+    await wait(100);
+    const footerBtns = vm.$el.querySelectorAll('.el-dialog__footer .el-button');
+    expect(vm.$el.querySelector('.el-dialog__body span').textContent).to.equal('这是一段信息');
+    expect(footerBtns.length).to.equal(2);
+    expect(footerBtns[0].textContent).to.equal('取消');
+    expect(footerBtns[1].textContent).to.equal('确定');
   });
 
   it('append to body', done => {
