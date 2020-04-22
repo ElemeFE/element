@@ -1,12 +1,11 @@
 <template>
-  <component
-    :is="_elTag"
+  <div
     class="el-radio-group"
     role="radiogroup"
     @keydown="handleKeydown"
   >
     <slot></slot>
-  </component>
+  </div>
 </template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
@@ -21,6 +20,12 @@
     name: 'ElRadioGroup',
 
     componentName: 'ElRadioGroup',
+
+    provide() {
+      return {
+        elRadioGroup: this
+      };
+    },
 
     inject: {
       elFormItem: {
@@ -42,9 +47,6 @@
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
-      _elTag() {
-        return (this.$vnode.data || {}).tag || 'div';
-      },
       radioGroupSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       }
@@ -58,8 +60,8 @@
     mounted() {
       // 当radioGroup没有默认选项时，第一个可以选中Tab导航
       const radios = this.$el.querySelectorAll('[type=radio]');
-      const firstLabel = this.$el.querySelectorAll('[role=radio]')[0];
-      if (![].some.call(radios, radio => radio.checked) && firstLabel) {
+      const firstLabel = this.$el.querySelector('[role=radio]');
+      if (firstLabel && ![].some.call(radios, radio => radio.checked)) {
         firstLabel.tabIndex = 0;
       }
     },

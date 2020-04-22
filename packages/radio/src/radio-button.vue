@@ -36,6 +36,7 @@
 </template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { calcDisabled } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElRadioButton',
@@ -48,6 +49,9 @@
       },
       elFormItem: {
         default: ''
+      },
+      elRadioGroup: {
+        default: null
       }
     },
 
@@ -67,42 +71,31 @@
     computed: {
       value: {
         get() {
-          return this._radioGroup.value;
+          return this.elRadioGroup.value;
         },
         set(value) {
-          this._radioGroup.$emit('input', value);
+          this.elRadioGroup.$emit('input', value);
         }
-      },
-      _radioGroup() {
-        let parent = this.$parent;
-        while (parent) {
-          if (parent.$options.componentName !== 'ElRadioGroup') {
-            parent = parent.$parent;
-          } else {
-            return parent;
-          }
-        }
-        return false;
       },
       activeStyle() {
         return {
-          backgroundColor: this._radioGroup.fill || '',
-          borderColor: this._radioGroup.fill || '',
-          boxShadow: this._radioGroup.fill ? `-1px 0 0 0 ${this._radioGroup.fill}` : '',
-          color: this._radioGroup.textColor || ''
+          backgroundColor: this.elRadioGroup.fill || '',
+          borderColor: this.elRadioGroup.fill || '',
+          boxShadow: this.elRadioGroup.fill ? `-1px 0 0 0 ${this.elRadioGroup.fill}` : '',
+          color: this.elRadioGroup.textColor || ''
         };
       },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
       size() {
-        return this._radioGroup.radioGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.elRadioGroup.radioGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       isDisabled() {
-        return this.disabled || this._radioGroup.disabled || !!(this.elForm || {}).disabled;
+        return this.elRadioGroup.disabled || calcDisabled(this.disabled, this.elForm);
       },
       tabIndex() {
-        return (this.isDisabled || (this._radioGroup && this.value !== this.label)) ? -1 : 0;
+        return this.isDisabled || (this.elRadioGroup && this.value !== this.label) ? -1 : 0;
       }
     },
 

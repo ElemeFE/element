@@ -13,6 +13,12 @@
 
     mixins: [Emitter],
 
+    provide() {
+      return {
+        elCheckboxGroup: this
+      };
+    },
+
     inject: {
       elFormItem: {
         default: ''

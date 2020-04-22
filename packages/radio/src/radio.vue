@@ -55,9 +55,11 @@
       elForm: {
         default: ''
       },
-
       elFormItem: {
         default: ''
+      },
+      elRadioGroup: {
+        default: null
       }
     },
 
@@ -81,24 +83,12 @@
       };
     },
     computed: {
-      isGroup() {
-        let parent = this.$parent;
-        while (parent) {
-          if (parent.$options.componentName !== 'ElRadioGroup') {
-            parent = parent.$parent;
-          } else {
-            this._radioGroup = parent;
-            return true;
-          }
-        }
-        return false;
-      },
       model: {
         get() {
-          return this.isGroup ? this._radioGroup.value : this.value;
+          return this.elRadioGroup ? this.elRadioGroup.value : this.value;
         },
         set(val) {
-          if (this.isGroup) {
+          if (this.elRadioGroup) {
             this.dispatch('ElRadioGroup', 'input', [val]);
           } else {
             this.$emit('input', val);
@@ -111,17 +101,16 @@
       },
       radioSize() {
         const temRadioSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-        return this.isGroup
-          ? this._radioGroup.radioGroupSize || temRadioSize
+        return this.elRadioGroup
+          ? this.elRadioGroup.radioGroupSize || temRadioSize
           : temRadioSize;
       },
       isDisabled() {
-        return (this.isGroup
-          ? this._radioGroup.disabled
-          : false) || calcDisabled(this.disabled, this.elForm);
+        return (!!this.elRadioGroup && this.elRadioGroup.disabled) ||
+          calcDisabled(this.disabled, this.elForm);
       },
       tabIndex() {
-        return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
+        return this.isDisabled || (this.elRadioGroup && this.model !== this.label) ? -1 : 0;
       }
     },
 
@@ -129,7 +118,7 @@
       handleChange() {
         this.$nextTick(() => {
           this.$emit('change', this.model);
-          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
+          this.elRadioGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
         });
       }
     }

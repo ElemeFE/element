@@ -58,6 +58,9 @@
       },
       elFormItem: {
         default: ''
+      },
+      elCheckboxGroup: {
+        default: null
       }
     },
 
@@ -84,20 +87,20 @@
     computed: {
       model: {
         get() {
-          return this._checkboxGroup
-            ? this.store : this.value !== undefined
-              ? this.value : this.selfModel;
+          return this.elCheckboxGroup
+            ? this.store
+            : this.value !== undefined ? this.value : this.selfModel;
         },
 
         set(val) {
-          if (this._checkboxGroup) {
+          if (this.elCheckboxGroup) {
             this.isLimitExceeded = false;
-            (this._checkboxGroup.min !== undefined &&
-              val.length < this._checkboxGroup.min &&
+            (this.elCheckboxGroup.min !== undefined &&
+              val.length < this.elCheckboxGroup.min &&
               (this.isLimitExceeded = true));
 
-            (this._checkboxGroup.max !== undefined &&
-              val.length > this._checkboxGroup.max &&
+            (this.elCheckboxGroup.max !== undefined &&
+              val.length > this.elCheckboxGroup.max &&
               (this.isLimitExceeded = true));
 
             this.isLimitExceeded === false &&
@@ -120,30 +123,21 @@
         }
       },
 
-      _checkboxGroup() {
-        let parent = this.$parent;
-        while (parent) {
-          if (parent.$options.componentName !== 'ElCheckboxGroup') {
-            parent = parent.$parent;
-          } else {
-            return parent;
-          }
-        }
-        return false;
-      },
-
       store() {
-        return this._checkboxGroup ? this._checkboxGroup.value : this.value;
+        return this.elCheckboxGroup ? this.elCheckboxGroup.value : this.value;
       },
 
       activeStyle() {
-        return {
-          backgroundColor: this._checkboxGroup.fill || '',
-          borderColor: this._checkboxGroup.fill || '',
-          color: this._checkboxGroup.textColor || '',
-          'box-shadow': '-1px 0 0 0 ' + this._checkboxGroup.fill
-
-        };
+        if (this.elCheckboxGroup) {
+          return {
+            backgroundColor: this.elCheckboxGroup.fill || '',
+            borderColor: this.elCheckboxGroup.fill || '',
+            color: this.elCheckboxGroup.textColor || '',
+            boxShadow: '-1px 0 0 0 ' + this.elCheckboxGroup.fill
+          };
+        } else {
+          return null;
+        }
       },
 
       _elFormItemSize() {
@@ -151,20 +145,21 @@
       },
 
       size() {
-        return this._checkboxGroup.checkboxGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return (!!this.elCheckboxGroup && this.elCheckboxGroup.checkboxGroupSize) ||
+          this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
 
       /* used to make the isDisabled judgment under max/min props */
       isLimitDisabled() {
-        const { max, min } = this._checkboxGroup;
+        const { max, min } = this.elCheckboxGroup;
         return !!(max || min) &&
           (this.model.length >= max && !this.isChecked) ||
           (this.model.length <= min && this.isChecked);
       },
 
       isDisabled() {
-        return (this._checkboxGroup
-          ? this._checkboxGroup.disabled || this.isLimitDisabled
+        return (this.elCheckboxGroup
+          ? this.elCheckboxGroup.disabled || this.isLimitDisabled
           : false) || calcDisabled(this.disabled, this.elForm);
       }
     },
@@ -189,8 +184,8 @@
         }
         this.$emit('change', value, ev);
         this.$nextTick(() => {
-          if (this._checkboxGroup) {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
+          if (this.elCheckboxGroup) {
+            this.dispatch('ElCheckboxGroup', 'change', [this.elCheckboxGroup.value]);
           }
         });
       }
