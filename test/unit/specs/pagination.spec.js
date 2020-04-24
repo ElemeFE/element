@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent, destroyVM } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '../util';
 import Pagination from 'packages/pagination';
 
 describe('Pagination', () => {
@@ -76,6 +76,7 @@ describe('Pagination', () => {
   it('pageSize', () => {
     vm = createTest(Pagination, {
       pageSize: 25,
+      pageSizes: [25],
       total: 100
     });
 
@@ -111,7 +112,7 @@ describe('Pagination', () => {
     expect(vm.$el.querySelectorAll('li.number')).to.length(21);
   });
 
-  it('will work without total & page-count', (done) => {
+  it('will work without total & page-count', async() => {
     vm = createTest(Pagination, {
       pageSize: 25,
       currentPage: 2
@@ -119,14 +120,11 @@ describe('Pagination', () => {
 
     vm.$el.querySelector('.btn-prev').click();
 
-    setTimeout(() => {
-      vm.internalCurrentPage.should.be.equal(1);
+    await waitImmediate();
+    vm.internalCurrentPage.should.be.equal(1);
 
-      vm.$el.querySelector('.btn-prev').click();
-      vm.internalCurrentPage.should.be.equal(1);
-
-      done();
-    }, 20);
+    vm.$el.querySelector('.btn-prev').click();
+    vm.internalCurrentPage.should.be.equal(1);
   });
 
   it('currentPage', () => {
@@ -150,7 +148,7 @@ describe('Pagination', () => {
     expect(vm.$el.querySelectorAll('li.number')).to.length(7);
   });
 
-  it('set currentPage & total', (done) => {
+  it('set currentPage & total', async() => {
     vm = createVue({
       template: `
         <el-pagination
@@ -180,10 +178,8 @@ describe('Pagination', () => {
 
     expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('10');
     vm.resetTotal();
-    setTimeout(() => {
-      expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('1');
-      done();
-    }, 50);
+    await waitImmediate();
+    expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('1');
   });
 
   it('pageSizes', () => {
@@ -200,7 +196,7 @@ describe('Pagination', () => {
       .to.deep.equal([10, 15, 35, 50]);
   });
 
-  it('pageSizes:not found pageSize', () => {
+  it('pageSizes: not found pageSize', () => {
     vm = createTest(Pagination, {
       pageSizes: [10, 15, 35, 50],
       pageSize: 24,
@@ -219,7 +215,7 @@ describe('Pagination', () => {
     expect(vm.$el.textContent).to.empty;
   });
 
-  it('jumper: change value', (done) => {
+  it('jumper: change value', async() => {
     vm = createVue({
       template: `
         <el-pagination
@@ -237,46 +233,35 @@ describe('Pagination', () => {
 
       data() {
         return {
-          page: 1,
-          inputer: null
+          page: 1
         };
-      },
-
-      mounted() {
-        this.inputer = this.$children[0].$children[1].$children[0];
       }
     }, true);
-    const input = vm.inputer;
+    const input = vm.$children[0].$refs.jumper;
     const changeValue = (value) => {
       input.$emit('input', value);
       input.$emit('change', value);
     };
 
     changeValue(1);
-    setTimeout(() => {
-      expect(input.value).to.equal(1);
-      // 多次输入不在min-max区间内的数字
-      changeValue(0);
-      setTimeout(() => {
-        expect(input.value).to.equal(1);
-        changeValue(0);
-        setTimeout(() => {
-          expect(input.value).to.equal(1);
-          changeValue(1000);
-          setTimeout(() => {
-            expect(input.value).to.equal(10);
-            changeValue(1000);
-            setTimeout(() => {
-              expect(input.value).to.equal(10);
-              done();
-            }, 50);
-          }, 50);
-        }, 50);
-      }, 50);
-    }, 50);
+    await waitImmediate();
+    expect(input.value).to.equal(1);
+    // 多次输入不在min-max区间内的数字
+    changeValue(0);
+    await waitImmediate();
+    expect(input.value).to.equal(1);
+    changeValue(0);
+    await waitImmediate();
+    expect(input.value).to.equal(1);
+    changeValue(1000);
+    await waitImmediate();
+    expect(input.value).to.equal(10);
+    changeValue(1000);
+    await waitImmediate();
+    expect(input.value).to.equal(10);
   });
 
-  it('event:current-change', (done) => {
+  it('event: current-change', async() => {
     vm = createVue({
       template: `
         <el-pagination
@@ -299,13 +284,11 @@ describe('Pagination', () => {
     }
 
     prev.click();
-    setTimeout(() => {
-      expect(vm.change).to.true;
-      done();
-    }, 50);
+    await waitImmediate();
+    expect(vm.change).to.true;
   });
 
-  it('event:current-change after current page is manually updated', (done) => {
+  it('event: current-change after current page is manually updated', async() => {
     vm = createVue({
       template: `
         <el-pagination
@@ -323,21 +306,17 @@ describe('Pagination', () => {
     });
     const next = vm.$el.querySelector('button.btn-next');
     next.click();
-    setTimeout(() => {
-      expect(vm.emitCount).to.equal(1);
-      vm.currentPage = 1;
-      setTimeout(() => {
-        expect(vm.emitCount).to.equal(1);
-        next.click();
-        setTimeout(() => {
-          expect(vm.emitCount).to.equal(2);
-          done();
-        }, 50);
-      }, 50);
-    }, 50);
+    await waitImmediate();
+    expect(vm.emitCount).to.equal(1);
+    vm.currentPage = 1;
+    await waitImmediate();
+    expect(vm.emitCount).to.equal(1);
+    next.click();
+    await waitImmediate();
+    expect(vm.emitCount).to.equal(2);
   });
 
-  it('event:size-change', done => {
+  it('event: size-change', async() => {
     vm = createVue({
       template: `
         <el-pagination
@@ -354,16 +333,13 @@ describe('Pagination', () => {
 
     expect(vm.trigger).to.false;
 
-    setTimeout(_ => {
-      vm.$el.querySelectorAll('li.el-select-dropdown__item')[1].click();
-      setTimeout(_ => {
-        expect(vm.trigger).to.true;
-        done();
-      }, 50);
-    }, 50);
+    await waitImmediate();
+    vm.$el.querySelectorAll('li.el-select-dropdown__item')[1].click();
+    await waitImmediate();
+    expect(vm.trigger).to.true;
   });
 
-  it('event: prev and next click', done => {
+  it('event: prev and next click', async() => {
     vm = createVue({
       template: `
         <el-pagination
@@ -381,14 +357,11 @@ describe('Pagination', () => {
     const prev = vm.$el.querySelector('.btn-prev');
     const next = vm.$el.querySelector('.btn-next');
     prev.click();
-    setTimeout(_ => {
-      expect(vm.trigger).to.false;
-      next.click();
-      setTimeout(_ => {
-        expect(vm.trigger).to.true;
-        done();
-      }, 50);
-    }, 50);
+    await waitImmediate();
+    expect(vm.trigger).to.false;
+    next.click();
+    await waitImmediate();
+    expect(vm.trigger).to.true;
   });
 
   it('pageSize > total', () => {
@@ -460,32 +433,28 @@ describe('Pagination', () => {
       expect(vm.internalCurrentPage).to.equal(6);
     });
 
-    it('click prev icon-more', done => {
+    it('click prev icon-more', async() => {
       vm = createTest(Pagination, {
         total: 1000
       }, true);
 
       vm.$el.querySelector('.btn-quicknext.more').click();
-      setTimeout(_ => {
-        expect(vm.$el.querySelector('.btn-quickprev.more')).to.exist;
-        vm.$el.querySelector('.btn-quickprev.more').click();
-        expect(vm.internalCurrentPage).to.equal(1);
-        done();
-      }, 50);
+      await waitImmediate();
+      expect(vm.$el.querySelector('.btn-quickprev.more')).to.exist;
+      vm.$el.querySelector('.btn-quickprev.more').click();
+      expect(vm.internalCurrentPage).to.equal(1);
     });
 
-    it('click last page', done => {
+    it('click last page', async() => {
       vm = createTest(Pagination, {
         total: 1000
       }, true);
       const nodes = vm.$el.querySelectorAll('li.number');
 
       nodes[nodes.length - 1].click();
-      setTimeout(_ => {
-        expect(vm.$el.querySelector('.btn-quickprev.more')).to.exist;
-        expect(vm.$el.querySelector('.btn-quicknext.more')).to.not.exist;
-        done();
-      }, 50);
+      await waitImmediate();
+      expect(vm.$el.querySelector('.btn-quickprev.more')).to.exist;
+      expect(vm.$el.querySelector('.btn-quicknext.more')).to.not.exist;
     });
   });
 });

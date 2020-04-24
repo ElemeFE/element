@@ -2,8 +2,8 @@ import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
 import ElInput from 'element-ui/packages/input';
-import Locale from 'element-ui/src/mixins/locale';
 import { valueEquals } from 'element-ui/src/utils/util';
+import { t } from 'element-ui/src/locale';
 
 export default {
   name: 'ElPagination',
@@ -62,7 +62,8 @@ export default {
       internalCurrentPage: 1,
       internalPageSize: 0,
       lastEmittedPage: -1,
-      userChangePageSize: false
+      userChangePageSize: false,
+      userInput: null
     };
   },
 
@@ -76,13 +77,18 @@ export default {
       'el-pagination--small': this.small
     }] }></div>;
     const TEMPLATE_MAP = {
-      prev: <prev></prev>,
-      jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
-      next: <next></next>,
-      sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
-      slot: <slot>{ this.$slots.default ? this.$slots.default : '' }</slot>,
-      total: <total></total>
+      prev: <prev />,
+      jumper: <jumper />,
+      pager: <pager
+        currentPage={ this.internalCurrentPage }
+        pageCount={ this.internalPageCount }
+        pagerCount={ this.pagerCount }
+        on-change={ this.handleCurrentChange }
+        disabled={ this.disabled } />,
+      next: <next />,
+      sizes: <sizes />,
+      slot: <slot>{ this.$slots.default || '' }</slot>,
+      total: <total />
     };
     const components = layout.split(',').map((item) => item.trim());
     const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
@@ -112,16 +118,18 @@ export default {
 
   components: {
     Prev: {
-      render(h) {
+      functional: true,
+      name: 'Prev',
+      render(h, { parent }) {
         return (
           <button
             type="button"
             class="btn-prev"
-            disabled={ this.$parent.disabled || this.$parent.internalCurrentPage <= 1 }
-            on-click={ this.$parent.prev }>
+            disabled={ parent.disabled || parent.internalCurrentPage <= 1 }
+            on-click={ parent.prev }>
             {
-              this.$parent.prevText
-                ? <span>{ this.$parent.prevText }</span>
+              parent.prevText
+                ? <span>{ parent.prevText }</span>
                 : <i class="el-icon el-icon-arrow-left"></i>
             }
           </button>
@@ -130,16 +138,18 @@ export default {
     },
 
     Next: {
-      render(h) {
+      functional: true,
+      name: 'Next',
+      render(h, { parent }) {
         return (
           <button
             type="button"
             class="btn-next"
-            disabled={ this.$parent.disabled || this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
-            on-click={ this.$parent.next }>
+            disabled={ parent.disabled || parent.internalCurrentPage === parent.internalPageCount || parent.internalPageCount === 0 }
+            on-click={ parent.next }>
             {
-              this.$parent.nextText
-                ? <span>{ this.$parent.nextText }</span>
+              parent.nextText
+                ? <span>{ parent.nextText }</span>
                 : <i class="el-icon el-icon-arrow-right"></i>
             }
           </button>
@@ -148,129 +158,83 @@ export default {
     },
 
     Sizes: {
-      mixins: [Locale],
-
-      props: {
-        pageSizes: Array
-      },
-
-      watch: {
-        pageSizes: {
-          immediate: true,
-          handler(newVal, oldVal) {
-            if (valueEquals(newVal, oldVal)) return;
-            if (Array.isArray(newVal)) {
-              this.$parent.internalPageSize = newVal.indexOf(this.$parent.pageSize) > -1
-                ? this.$parent.pageSize
-                : this.pageSizes[0];
-            }
-          }
-        }
-      },
-
-      render(h) {
+      functional: true,
+      name: 'Sizes',
+      render(h, { parent }) {
         return (
           <span class="el-pagination__sizes">
-            <el-select
-              value={ this.$parent.internalPageSize }
-              popperClass={ this.$parent.popperClass || '' }
+            <ElSelect
+              value={ parent.internalPageSize }
+              popperClass={ parent.popperClass || '' }
               size="mini"
-              on-input={ this.handleChange }
-              disabled={ this.$parent.disabled }>
+              disabled={ parent.disabled }
+              on-input={ val => {
+                if (val !== parent.internalPageSize) {
+                  val = ~~val;
+                  parent.internalPageSize = val;
+                  parent.userChangePageSize = true;
+                  parent.$emit('update:pageSize', val);
+                  parent.$emit('size-change', val);
+                }
+              } }>
               {
-                this.pageSizes.map(item =>
-                  <el-option
+                parent.pageSizes.map(item =>
+                  <ElOption
                     value={ item }
-                    label={ item + this.t('el.pagination.pagesize') }>
-                  </el-option>
+                    label={ item + t('el.pagination.pagesize') } />
                 )
               }
-            </el-select>
+            </ElSelect>
           </span>
         );
-      },
-
-      components: {
-        ElSelect,
-        ElOption
-      },
-
-      methods: {
-        handleChange(val) {
-          if (val !== this.$parent.internalPageSize) {
-            this.$parent.internalPageSize = val = parseInt(val, 10);
-            this.$parent.userChangePageSize = true;
-            this.$parent.$emit('update:pageSize', val);
-            this.$parent.$emit('size-change', val);
-          }
-        }
       }
     },
 
     Jumper: {
-      mixins: [Locale],
-
-      components: { ElInput },
-
-      data() {
-        return {
-          userInput: null
-        };
-      },
-
-      watch: {
-        '$parent.internalCurrentPage'() {
-          this.userInput = null;
-        }
-      },
-
-      methods: {
-        handleKeyup({ keyCode, target }) {
-          // Chrome, Safari, Firefox triggers change event on Enter
-          // Hack for IE: https://github.com/ElemeFE/element/issues/11710
-          // Drop this method when we no longer supports IE
-          if (keyCode === 13) {
-            this.handleChange(target.value);
-          }
-        },
-        handleInput(value) {
-          this.userInput = value;
-        },
-        handleChange(value) {
-          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
-          this.$parent.emitChange();
-          this.userInput = null;
-        }
-      },
-
-      render(h) {
+      functional: true,
+      name: 'Jumper',
+      render(h, { parent }) {
         return (
           <span class="el-pagination__jump">
-            { this.t('el.pagination.goto') }
-            <el-input
-              class="el-pagination__editor is-in-pagination"
+            { t('el.pagination.goto') }
+            <ElInput
+              ref="jumper"
+              staticClass="el-pagination__editor is-in-pagination"
               min={ 1 }
-              max={ this.$parent.internalPageCount }
-              value={ this.userInput !== null ? this.userInput : this.$parent.internalCurrentPage }
+              max={ parent.internalPageCount }
+              value={ parent.userInput !== null ? parent.userInput : parent.internalCurrentPage }
               type="number"
-              disabled={ this.$parent.disabled }
-              nativeOnKeyup={ this.handleKeyup }
-              onInput={ this.handleInput }
-              onChange={ this.handleChange }/>
-            { this.t('el.pagination.pageClassifier') }
+              disabled={ parent.disabled }
+              nativeOnKeyup={ ({ keyCode, target }) => {
+                // Chrome, Safari, Firefox triggers change event on Enter
+                // Hack for IE: https://github.com/ElemeFE/element/issues/11710
+                // Drop this method when we no longer supports IE
+                if (keyCode === 13) {
+                  this.handleChange(target.value);
+                }
+              } }
+              onInput={ (value) => { parent.userInput = value; } }
+              onChange={ (value) => {
+                parent.internalCurrentPage = parent.getValidCurrentPage(value);
+                parent.emitChange();
+                parent.userInput = null;
+              } } />
+            { t('el.pagination.pageClassifier') }
           </span>
         );
       }
     },
 
     Total: {
-      mixins: [Locale],
-
-      render(h) {
+      functional: true,
+      name: 'Total',
+      render(h, { parent }) {
         return (
-          typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
-            : ''
+          typeof parent.total === 'number'
+            ? <span class="el-pagination__total">
+              { t('el.pagination.total', { total: parent.total }) }
+            </span>
+            : null
         );
       }
     },
@@ -363,11 +327,23 @@ export default {
       }
     },
 
+    pageSizes: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        if (!valueEquals(newVal, oldVal) && Array.isArray(newVal)) {
+          this.internalPageSize = newVal.indexOf(this.pageSize) > -1
+            ? this.pageSize
+            : this.pageSizes[0];
+        }
+      }
+    },
+
     internalCurrentPage: {
       immediate: true,
       handler(newVal) {
         this.$emit('update:currentPage', newVal);
         this.lastEmittedPage = -1;
+        this.userInput = null;
       }
     },
 
