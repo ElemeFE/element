@@ -198,7 +198,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.14.0-beta5',
+  version: '2.14.0-beta6',
   locale: locale.use,
   i18n: locale.i18n,
   install,
