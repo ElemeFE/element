@@ -5,7 +5,7 @@
     class="el-date-table"
     @click="handleClick"
     @mousemove="handleMouseMove"
-    :class="{ 'is-week-mode': selectionMode === 'week' }">
+    :class="{ 'is-week-mode': selectionMode === 'week' || selectionMode === 'weekrange' }">
     <tbody>
     <tr>
       <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
@@ -86,7 +86,7 @@
       },
 
       disabledDate: {},
-  
+
       cellClassName: {},
 
       minDate: {},
@@ -271,7 +271,7 @@
           classes.push('current');
         }
 
-        if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week')) {
+        if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week') || this.selectionMode === "weekrange") {
           classes.push('in-range');
 
           if (cell.start) {
@@ -434,6 +434,18 @@
             ? removeFromArray(value, date => date.getTime() === newDate.getTime())
             : [...value, newDate];
           this.$emit('pick', newValue);
+        } else if (this.selectionMode === "weekrange") {
+          if (!this.rangeState.selecting) {
+            this.$emit("pick", { minDate: newDate, maxDate: null });
+            this.rangeState.selecting = true;
+          } else {
+            if (newDate >= this.minDate) {
+              this.$emit("pick", { minDate: this.minDate, maxDate: newDate });
+            } else {
+              this.$emit("pick", { minDate: newDate, maxDate: this.minDate });
+            }
+            this.rangeState.selecting = false;
+          }
         }
       }
     }
