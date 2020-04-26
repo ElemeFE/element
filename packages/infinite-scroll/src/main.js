@@ -1,4 +1,4 @@
-import throttle from 'throttle-debounce/debounce';
+import { debounce } from 'throttle-debounce';
 import {
   isHtmlElement,
   isFunction,
@@ -126,7 +126,7 @@ export default {
     // only include vertical scroll
     const container = getScrollContainer(el, true);
     const { delay, immediate } = getScrollOptions(el, vm);
-    const onScroll = throttle(delay, handleScroll.bind(el, cb));
+    const onScroll = debounce(delay, handleScroll.bind(el, cb));
 
     el[scope] = { el, vm, container, onScroll };
 
