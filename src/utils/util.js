@@ -43,10 +43,17 @@ export const getValueByPath = function(object, prop) {
 
 export function getPropByPath(obj, path, strict) {
   let tempObj = obj;
-  path = path.replace(/\[(\w+)\]/g, '.$1');
+  // remove start dot in path
   path = path.replace(/^\./, '');
+  // replace .=>[]
+  path = path.replace(/\.(\w+)((?:\.)|\[|$)/g, '[$1]$2');
+  // replace start key
+  path = path.replace(/^(\w+)/, '[$1]');
 
-  let keyArr = path.split('.');
+  // sometime path is empty when init, so match will get null
+  let keyArr = path.match(/(?:\[)(.*?)(?:\])/g) || [];
+  // remove [|]|"|' in key
+  keyArr = keyArr.map((k) => k.replace(/(\[|\]|"|')/g, ''));
   let i = 0;
   for (let len = keyArr.length; i < len - 1; ++i) {
     if (!tempObj && !strict) break;

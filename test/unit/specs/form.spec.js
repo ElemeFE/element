@@ -348,7 +348,7 @@ describe('Form', () => {
             },
             rules: {
               region: [
-                {required: true, message: '请选择活动区域', trigger: 'change' }
+                { required: true, message: '请选择活动区域', trigger: 'change' }
               ]
             }
           };
@@ -389,7 +389,7 @@ describe('Form', () => {
             },
             rules: {
               date: [
-                {type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+                { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
               ]
             }
           };
@@ -445,7 +445,7 @@ describe('Form', () => {
             },
             rules: {
               date: [
-                {type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+                { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
               ]
             }
           };
@@ -594,6 +594,41 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validateField('name', valid => {
+        expect(valid).to.not.true;
+        done();
+      });
+    });
+    it('validate field name with dot', done => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="2.4G信道编号" prop='["2.4g"].channel' ref="field">
+              <el-input v-model.number="form['2.4g'].channel"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              '2.4g': {
+                channel: 0
+              }
+
+            },
+            rules: {
+              '["2.4g"].channel': [
+                { type: 'number', required: true, message: '请输入2.4G信道编号', trigger: 'change', min: 11, max: 14 }
+              ]
+            }
+          };
+        },
+        methods: {
+          setValue(value) {
+            this.form['2.4g'].channel = value;
+          }
+        }
+      }, true);
+      vm.$refs.form.validateField('["2.4g"].channel', valid => {
         expect(valid).to.not.true;
         done();
       });
