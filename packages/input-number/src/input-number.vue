@@ -86,6 +86,13 @@
         default: -Infinity
       },
       value: Number,
+      defaultValue: {
+        type: [Number, String],
+        default: undefined,
+        validator(value) {
+          return typeof value !== 'string' || ['min', 'max'].indexOf(value) >= 0;
+        }
+      },
       disabled: {
         type: Boolean,
         default: null
@@ -165,6 +172,12 @@
         const val = this.currentValue;
         if (typeof val !== 'number') return val;
         return typeof this.precision === 'number' ? val.toFixed(this.precision) : val + '';
+      },
+      resDefaultValue() {
+        const val = this.defaultValue;
+        if (val === 'min') return this.min;
+        if (val === 'max') return this.max;
+        return val;
       }
     },
     methods: {
@@ -250,8 +263,8 @@
         this.userInput = value;
       },
       handleInputChange(value) {
-        const newVal = value === '' ? undefined : Number(value);
-        if (!isNaN(newVal) || value === '') {
+        const newVal = value ? +value : this.resDefaultValue;
+        if (!isNaN(newVal) || !value) {
           this.setCurrentValue(newVal);
         }
         this.userInput = null;

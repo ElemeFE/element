@@ -26,6 +26,30 @@
 ```
 :::
 
+### 指定用户清空输入框时的行为
+
+:::demo 当用户手工清空了输入框时，默认会将绑定变量设置为 `undefined`，可以使用 `default-value` 属性指定需要设置的值
+```html
+<template>
+  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字" :default-value="5"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num: 1
+      };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 禁用状态
 
 :::demo `disabled`属性接受一个`Boolean`，设置为`true`即可禁用整个组件，如果你只需要控制数值在某一范围内，可以设置`min`属性和`max`属性，不设置`min`和`max`时，最小值为 0。
@@ -169,6 +193,7 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |----------|-------------- |----------|--------------------------------  |-------- |
 | value / v-model    | 绑定值         | number | — | 0 |
+| default-value | 当用户清空输入框时设置的值 | number / string | number, undefined, null, 'min', 'max' | undefined |
 | min      | 设置计数器允许的最小值 | number | — | -Infinity |
 | max      | 设置计数器允许的最大值 | number | — | Infinity |
 | step     | 计数器步长           | number   | — | 1 |

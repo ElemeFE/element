@@ -25,6 +25,67 @@ describe('InputNumber', () => {
     expect(vm.value).to.be.equal(1);
     expect(input.value).to.be.equal('1');
   });
+
+  it('default-value=some_number', async() => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" :default-value="10">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 1
+        };
+      }
+    }, true);
+    let input = vm.$el.querySelector('input');
+
+    await waitImmediate();
+    input.value = '';
+    triggerEvent(input, 'input');
+    triggerEvent(input, 'change');
+    expect(vm.value).to.be.equal(10);
+  });
+  it('default-value="min"', async() => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" default-value="min" :min="10" :max="100">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 1
+        };
+      }
+    }, true);
+    let input = vm.$el.querySelector('input');
+
+    await waitImmediate();
+    input.value = '';
+    triggerEvent(input, 'input');
+    triggerEvent(input, 'change');
+    expect(vm.value).to.be.equal(10);
+  });
+  it('default-value="max"', async() => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" default-value="max" :min="10" :max="100">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 1
+        };
+      }
+    }, true);
+    let input = vm.$el.querySelector('input');
+
+    await waitImmediate();
+    input.value = '';
+    triggerEvent(input, 'input');
+    triggerEvent(input, 'change');
+    expect(vm.value).to.be.equal(100);
+  });
   it('decrease', async() => {
     vm = createVue({
       template: `
