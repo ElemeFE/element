@@ -205,14 +205,6 @@ export default {
               value={ parent.userInput !== null ? parent.userInput : parent.internalCurrentPage }
               type="number"
               disabled={ parent.disabled }
-              nativeOnKeyup={ ({ keyCode, target }) => {
-                // Chrome, Safari, Firefox triggers change event on Enter
-                // Hack for IE: https://github.com/ElemeFE/element/issues/11710
-                // Drop this method when we no longer supports IE
-                if (keyCode === 13) {
-                  this.handleChange(target.value);
-                }
-              } }
               onInput={ (value) => { parent.userInput = value; } }
               onChange={ (value) => {
                 parent.internalCurrentPage = parent.getValidCurrentPage(value);
