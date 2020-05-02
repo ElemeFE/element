@@ -71,6 +71,7 @@
 
     methods: {
       handleClick(evt) {
+        document.activeElement.blur();
         this.$emit('click', evt);
       }
     }
