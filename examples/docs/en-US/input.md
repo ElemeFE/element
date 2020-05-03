@@ -593,10 +593,10 @@ export default {
 
 | Name | Description |
 |------|--------|
-| prefix | content as Input prefix, only works when `type` is 'text' |
-| suffix | content as Input suffix, only works when `type` is 'text' |
-| prepend | content to prepend before Input, only works when `type` is 'text' |
-| append | content to append after Input, only works when `type` is 'text' |
+| prefix | content as Input prefix, only works when `type` is other than 'textarea' |
+| suffix | content as Input suffix, only works when `type` is other than 'textarea' |
+| prepend | content to prepend before Input, only works when `type` is other than 'textarea' |
+| append | content to append after Input, only works when `type` is other than 'textarea' |
 
 ### Input Events
 
