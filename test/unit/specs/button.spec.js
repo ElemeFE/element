@@ -21,7 +21,8 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     const ico = buttonElm.querySelector('.el-icon-search');
     expect(ico).to.be.ok;
-    expect(ico.classList.contains('el-icon--left')).to.be.false;
+    expect(ico.style.marginLeft).to.be.equal('');
+    expect(ico.style.marginRight).to.be.equal('');
   });
   it('icon with content', () => {
     vm = createVue({
@@ -32,7 +33,7 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     const ico = buttonElm.querySelector('.el-icon-search');
     expect(ico).to.be.ok;
-    expect(ico.classList.contains('el-icon--left')).to.be.true;
+    expect(ico.style.marginRight).to.be.equal('5px');
   });
   it('icon right with content', () => {
     vm = createVue({
@@ -43,7 +44,7 @@ describe('Button', () => {
     let buttonElm = vm.$el;
     const ico = buttonElm.querySelector('.el-icon-search');
     expect(ico).to.be.ok;
-    expect(ico.classList.contains('el-icon--right')).to.be.true;
+    expect(ico.style.marginLeft).to.be.equal('5px');
   });
   it('nativeType', () => {
     vm = createTest(Button, {

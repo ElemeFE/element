@@ -17,12 +17,10 @@
   >
     <i
       v-if="icon || loading"
-      :class="[
-        loading ? 'el-icon-loading' : icon,
-        $slots.default ? 'el-icon--left' : null
-      ]"></i>
+      :class="loading ? 'el-icon-loading' : icon"
+      :style="$slots.default ? { marginRight: '5px' } : null"></i>
     <slot></slot>
-    <i class="el-icon--right" :class="iconRight" v-if="iconRight"></i>
+    <i v-if="iconRight" :class="iconRight" style="margin-left: 5px"></i>
   </button>
 </template>
 <script>
