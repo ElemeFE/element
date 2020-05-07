@@ -29,13 +29,9 @@ const Notification = function(options) {
     options.message = 'REPLACED_BY_VNODE';
   }
   instance.id = id;
-  instance.$mount();
-  // 触发回流. 一次添加多个实例时 line:44 item.$el.offsetHeight 无法获取正确的高度
-  let display = window.getComputedStyle(instance.$el).display;
-  instance.$el.style.display = 'none';
-  instance.$el.style.display = display;
-  document.body.appendChild(instance.$el);
   instance.visible = true;
+  instance.$mount();
+  document.body.appendChild(instance.$el);
   instance.dom = instance.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
