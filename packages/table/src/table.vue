@@ -24,6 +24,7 @@
         :store="store"
         :border="border"
         :default-sort="defaultSort"
+        :filter-icon="filterIcon"
         :style="{
           width: layout.bodyWidth ? layout.bodyWidth + 'px' : ''
         }">
@@ -94,9 +95,8 @@
           fixed="left"
           :border="border"
           :store="store"
-          :style="{
-            width: bodyWidth
-          }"></table-header>
+          :style="{ width: bodyWidth }"
+          :filter-icon="filterIcon"></table-header>
       </div>
       <div
         class="el-table__fixed-body-wrapper"
@@ -155,9 +155,8 @@
           fixed="right"
           :border="border"
           :store="store"
-          :style="{
-            width: bodyWidth
-          }"></table-header>
+          :style="{ width: bodyWidth }"
+          :filter-icon="filterIcon"></table-header>
       </div>
       <div
         class="el-table__fixed-body-wrapper"
@@ -303,6 +302,8 @@
       defaultExpandAll: Boolean,
 
       defaultSort: Object,
+
+      filterIcon: String,
 
       tooltipEffect: String,
 

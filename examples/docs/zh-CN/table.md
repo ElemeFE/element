@@ -1006,7 +1006,7 @@
 
 对表格进行筛选，可快速查找到自己想看的数据。
 
-:::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入三个参数：`value`, `row` 和 `column`。
+:::demo 在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入三个参数：`value`, `row` 和 `column`。可以用`filter-icon`指定过滤图标，element 没有提供专门的过滤图标，可以使用 [fontawesome](http://www.fontawesome.com.cn/icons/filter/) 等第三方库的图标
 ```html
 <template>
   <el-button @click="resetDateFilter">清除日期过滤器</el-button>
@@ -1890,6 +1890,7 @@
 | default-expand-all | 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
 | default-sort | 默认的排序列的 prop 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序| Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
+| filter-icon | 过滤图标的类名 | string | — | el-icon-arrow-down |
 | tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 | show-summary | 是否在表尾显示合计行 | Boolean | — | false |
 | sum-text | 合计行第一列的文本 | String | — | 合计 |

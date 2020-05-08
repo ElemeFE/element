@@ -100,16 +100,19 @@ export declare class ElTable extends ElementUIComponent {
   rowKey: (row: object) => any
 
   /** Displayed text when data is empty. You can customize this area with `slot="empty"` */
-  emptyText: String
+  emptyText: string
 
   /** Whether expand all rows by default. Only works when the table has a column `type="expand"` */
-  defaultExpandAll: Boolean
+  defaultExpandAll: boolean
 
   /** Set expanded rows by this prop. Prop's value is the keys of expand rows, you should set row-key before using this prop */
   expandRowKeys: any[]
 
   /** Set the default sort column and order */
   defaultSort: DefaultSortOptions
+
+  /** Set filter icon class */
+  filterIcon: string;
 
   /** Tooltip effect property */
   tooltipEffect: TooltipEffect
@@ -148,7 +151,7 @@ export declare class ElTable extends ElementUIComponent {
    * @param row The row that is going to set as selected
    */
   setCurrentRow (row?: object): void
-  
+
   /**
    * Toggle or set if a certain row is expanded
    *
