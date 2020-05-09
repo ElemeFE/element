@@ -552,6 +552,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | no-match-text | Texte à afficher quand le filtrage ne retourne aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No matching data |
 | no-data-text | Texte à afficher quand il n'y a aucune option. Vous pouvez aussi utiliser le slot `empty`. | string | — | No data |
 | popper-class | Classe du menu déroulant. | string | — | — |
+| icon | custom class name for Select's dropdown icon | string | - | el-icon-arrow-up |
 | reserve-keyword | Quand `multiple` et `filter` sont activés, s'il faut réserver le mot-clé courant après la sélection d'une option. | boolean | — | false |
 | default-first-option | Sélectionne la première option avec Entrée. Utilisable avec `filterable` ou `remote` | boolean | - | false |
 | popper-append-to-body| Si le menu déroulant doit être ajouté au body. Si le positionnement du menu est incorrect, essayez de mettre cette option à `false`. | boolean | - | true |

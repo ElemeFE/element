@@ -549,6 +549,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | no-match-text | displayed text when no data matches the filtering query, you can also use slot `empty` | string | — | No matching data |
 | no-data-text | displayed text when there is no options, you can also use slot `empty` | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
+| icon | custom class name for Select's dropdown icon | string | - | el-icon-arrow-up |
 | reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 | popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
