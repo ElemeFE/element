@@ -96,7 +96,7 @@
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
-        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
+        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', iconClass]"></i>
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
       </template>
     </el-input>
@@ -195,7 +195,7 @@
       },
 
       iconClass() {
-        return this.remote && this.filterable ? '' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up');
+        return this.remote && this.filterable ? '' : (this.visible ? `${this.icon} is-reverse` : this.icon);
       },
 
       debounce() {
@@ -275,6 +275,10 @@
       allowCreate: Boolean,
       loading: Boolean,
       popperClass: String,
+      icon: {
+        type: String,
+        default: 'el-icon-arrow-up'
+      },
       remote: Boolean,
       loadingText: String,
       noMatchText: String,
