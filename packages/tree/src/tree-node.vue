@@ -133,7 +133,8 @@
         expanded: false,
         childNodeRendered: false,
         oldChecked: null,
-        oldIndeterminate: null
+        oldIndeterminate: null,
+        clearWatcher: null
       };
     },
 
@@ -258,7 +259,7 @@
       const props = tree.props || {};
       const childrenKey = props['children'] || 'children';
 
-      this.$watch(`node.data.${childrenKey}`, () => {
+      this.clearWatcher = this.$watch(`node.data.${childrenKey}`, () => {
         this.node.updateChildren();
       });
 
@@ -274,6 +275,9 @@
           }
         });
       }
+    },
+    destroyed() {
+      this.clearWatcher();
     }
   };
 </script>
