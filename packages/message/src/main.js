@@ -34,6 +34,7 @@ const Message = function(options) {
   document.body.appendChild(instance.$el);
   let verticalOffset = options.offset || 20;
   instances.forEach(item => {
+    item.$el.style.display = 'flex';
     verticalOffset += item.$el.offsetHeight + 16;
   });
   instance.verticalOffset = verticalOffset;
