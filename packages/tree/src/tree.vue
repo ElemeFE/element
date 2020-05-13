@@ -305,7 +305,10 @@
           } else {
             nextIndex = (currentIndex < this.treeItemArray.length - 1) ? currentIndex + 1 : 0;
           }
-          this.treeItemArray[nextIndex].focus(); // 选中
+          const nextItem = this.treeItemArray[nextIndex];
+          if (typeof nextItem !== 'undefined') { // There may be no focusable items
+            nextItem.focus(); // 选中
+          }
         }
         if ([37, 39].indexOf(keyCode) > -1) { // left、right 展开
           ev.preventDefault();
