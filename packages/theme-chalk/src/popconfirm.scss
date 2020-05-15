@@ -1,5 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
+@import "popover";
 
 @include b(popconfirm) {
   @include e(main) {

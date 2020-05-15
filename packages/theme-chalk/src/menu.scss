@@ -2,6 +2,7 @@
 @import "mixins/utils";
 @import "common/var";
 @import "common/transition";
+@import "tooltip";
 
 @mixin menu-item {
   height: 56px;
