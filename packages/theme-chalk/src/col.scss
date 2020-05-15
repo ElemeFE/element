@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.el-col {
+  min-height: 1px;
+}
+
 .el-col-0 {
   display: none;
 }
