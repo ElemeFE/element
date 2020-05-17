@@ -189,6 +189,7 @@
       },
       handleInput(value) {
         this.$emit('input', value);
+        this.activated = true;
         this.suggestionDisabled = false;
         if (!this.triggerOnFocus && !value) {
           this.suggestionDisabled = true;
