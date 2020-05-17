@@ -38,7 +38,10 @@
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          <span v-if="$scopedSlots.tag || $slots.tag">
+            <slot name="tag" :option="item"></slot>
+          </span>
+          <span v-else class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 

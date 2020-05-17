@@ -570,6 +570,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 |    —    | Option component list |
 | prefix  | content as Select prefix |
 | empty  | content when there is no options |
+| tag  | customize the tag and get the option instance with the scope `option` |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -583,6 +584,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | value | value of option | string/number/object | — | — |
 | label | label of option, same as `value` if omitted | string/number | — | — |
 | disabled | whether option is disabled | boolean | — | false |
+| item | If you would like store more information and used later | object | — | — |
 
 ### Methods
 | Method | Description | Parameters |

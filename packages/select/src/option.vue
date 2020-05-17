@@ -34,6 +34,9 @@
       },
       label: [String, Number],
       created: Boolean,
+      item: {
+        type: Object
+      },
       disabled: {
         type: Boolean,
         default: false
