@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix change event bug (#19200 by @sxzz)
+- Image
+  - Update error status (#19194 by @lhx6538665)
+
+#### Optimization
+
+- I18n
+  - Update ru-RU popconfirm translation (#19220 by @Opppex)
+  - Update vi translation (#19244 by @quangln2810)
+  - Update Catalan and Spanish translations (#19296 by @Ismaaa)
+  - Update Indonesia translation (#19320) by @therour)
+  - Update Brazilian Portuguese translation (#19374 by @diegomengarda)
+
 ### 2.13.1
 
 *2020-04-13*
