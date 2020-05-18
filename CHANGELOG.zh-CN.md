@@ -1,5 +1,55 @@
 ## 更新日志
 
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复 'change event' 错误 (#19200 by @sxzz)
+- Image
+  - 更新错误状态 (#19194 by @lhx6538665)
+
+#### Optimization
+
+- I18n
+  - 更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)
+  - 更新 vi 翻译 (#19244 by @quangln2810)
+  - 更新 Catalan 和 Spanish 翻译 (#19296 by @Ismaaa)
+  - 更新 Indonesia 翻译 (#19320) by @therour)
+  - 更新 Brazilian Portuguese 翻译 (#19374 by @diegomengarda)
+
+
+### 2.13.1
+
+*2020-04-13*
+
+#### 新特性
+- Autocomplete
+  - 添加 change 事件 (#17913 by @sxzz)
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复类型为 textarea 时建议错误问题 (#18478 by @Roojay)
+- Carousel
+  - 修复 console.warn 文案拼写错误 (#18264 by @IceFox)
+- Image
+  - 修复当 preview-src-list 属性不包含 src 时图片预览大图展示为空的问题 (#18975) (#19130 by @luckyCao)
+  - 修复第二次图片预览时快捷键失效问题 (#18983) (#19156 by @luckyCao)
+  - 修复 preview-src-list 为空时点击图片会给 body 添加 overflow: scroll 的问题 (#18967 by @inooNgt)
+- Transfer
+  - 修复和 Form 组件一起使用时错误的行高问题 (#18917 by @Hanx)
+- InputNumber
+  - 正确计算 inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - 更新首页文案 (#19155 by @iamkun)
+- Doc
+  - 更新 Popconfirm 文档 (#18324 by @iamkun)
+  - 修复 step-strictly 文档拼写问题 (#18705 by @dream2023)
+  - 修复 Steps 组件文档问题 (#17555 by @haoranyu)
+
 ### 2.13.0
 
 *2019-11-26*
