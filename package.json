@@ -1,6 +1,6 @@
 {
   "name": "element-ui-eoi",
-  "version": "2.14.0-beta9",
+  "version": "2.14.0-beta10",
   "description": "A Component Library for Vue.js ( bugfix version )",
   "main": "lib/element-ui.common.js",
   "files": [
