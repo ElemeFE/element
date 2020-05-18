@@ -16,10 +16,10 @@ export default {
       startTime: 'Waktu Mulai',
       endDate: 'Tanggal Selesai',
       endTime: 'Waktu Selesai',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
+      prevYear: 'Tahun Sebelumnya',
+      nextYear: 'Tahun Selanjutnya',
+      prevMonth: 'Bulan Sebelumnya',
+      nextMonth: 'Bulan Selanjutnya',
       year: 'Tahun',
       month1: 'Januari',
       month2: 'Februari',
@@ -83,7 +83,7 @@ export default {
       error: 'Masukan ilegal'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'Tekan hapus untuk melanjutkan',
       delete: 'Hapus',
       preview: 'Pratinjau',
       continue: 'Lanjutkan'
@@ -107,14 +107,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} terpilih'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'GAGAL'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Kembali'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Ya',
+      cancelButtonText: 'Tidak'
     }
   }
 };

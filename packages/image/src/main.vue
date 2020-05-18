@@ -16,7 +16,7 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-show="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
     </template>
   </div>
 </template>
@@ -94,7 +94,12 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
-        return this.previewSrcList.indexOf(this.src);
+        let previewIndex = 0;
+        const srcIndex = this.previewSrcList.indexOf(this.src);
+        if (srcIndex >= 0) {
+          previewIndex = srcIndex;
+        }
+        return previewIndex;
       }
     },
 
@@ -144,6 +149,7 @@
         this.imageWidth = img.width;
         this.imageHeight = img.height;
         this.loading = false;
+        this.error = false;
       },
       handleError(e) {
         this.loading = false;
@@ -217,6 +223,10 @@
         }
       },
       clickHandler() {
+        // don't show viewer when preview is false
+        if (!this.preview) {
+          return;
+        }
         // prevent body scroll
         prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';

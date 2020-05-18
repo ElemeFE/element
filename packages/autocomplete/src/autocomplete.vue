@@ -10,7 +10,8 @@
     <el-input
       ref="input"
       v-bind="[$props, $attrs]"
-      @input="handleChange"
+      @input="handleInput"
+      @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
       @clear="handleClear"
@@ -186,7 +187,7 @@
           }
         });
       },
-      handleChange(value) {
+      handleInput(value) {
         this.$emit('input', value);
         this.suggestionDisabled = false;
         if (!this.triggerOnFocus && !value) {
@@ -195,6 +196,9 @@
           return;
         }
         this.debouncedGetData(value);
+      },
+      handleChange(value) {
+        this.$emit('change', value);
       },
       handleFocus(event) {
         this.activated = true;
