@@ -35,13 +35,6 @@
     },
 
     props: {
-      options: {
-        default() {
-          return {
-            gpuAcceleration: false
-          };
-        }
-      },
       id: String
     },
 

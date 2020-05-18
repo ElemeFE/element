@@ -150,18 +150,11 @@ export const BasePopper = {
           arrow: {
             fn: computeArrow.bind(this)
           },
-          computeStyle: { gpuAcceleration: false }
+          preventOverflow: {
+            boundariesElement: this.boundariesElement || 'viewport'
+          }
         }
       }, this.popperOptions);
-      if (this.boundariesElement) {
-        if (options.modifiers.preventOverflow) {
-          options.modifiers.preventOverflow.boundariesElement = this.boundariesElement;
-        } else {
-          options.modifiers.preventOverflow = {
-            boundariesElement: this.boundariesElement
-          };
-        }
-      }
       this.popperJS = new PopperJS(reference, popper, options);
       this.increaseZIndex();
       this.popperElm.addEventListener('click', stop);

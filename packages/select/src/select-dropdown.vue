@@ -20,19 +20,6 @@
     props: {
       placement: {
         default: 'bottom-start'
-      },
-
-      popperOptions: {
-        type: Object,
-        default() {
-          return {
-            modifiers: {
-              preventOverflow: {
-                padding: 0
-              }
-            }
-          };
-        }
       }
     },
 

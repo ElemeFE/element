@@ -378,11 +378,7 @@ export default {
     popperOptions: {
       type: Object,
       default() {
-        return {
-          modifiers: {
-            preventOverflow: { padding: 0 }
-          }
-        };
+        return {};
       }
     },
     transformOrigin: {
