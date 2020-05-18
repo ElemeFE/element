@@ -14,11 +14,11 @@
 #### Optimization
 
 - I18n
-  更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)
-  更新 vi 翻译 (#19244 by @quangln2810)
-  更新 Catalan 和 Spanish 翻译 (#19296 by @Ismaaa)
-  更新 Indonesia 翻译 (#19320) by @therour)
-  更新 Brazilian Portuguese 翻译 (#19374 by @diegomengarda)
+  - 更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)
+  - 更新 vi 翻译 (#19244 by @quangln2810)
+  - 更新 Catalan 和 Spanish 翻译 (#19296 by @Ismaaa)
+  - 更新 Indonesia 翻译 (#19320) by @therour)
+  - 更新 Brazilian Portuguese 翻译 (#19374 by @diegomengarda)
 
 
 ### 2.13.1
