@@ -231,8 +231,7 @@
         this.$emit('input', newVal);
         this.$emit('change', newVal, this.currentValue);
       },
-      updateCurrentValue(value) {
-        let newVal = value;
+      updateCurrentValue(newVal) {
         if (newVal != null) {
           newVal = +newVal;
           if (isNaN(newVal)) return;
@@ -254,9 +253,9 @@
         this.currentValue = newVal;
         this.userInput = null;
 
-        if (newVal !== value) {
+        if (newVal !== this.value) {
           // Value is standardized, we need to notify the parent
-          this.$emit('input', newVal);
+          this.setCurrentValue(newVal);
         }
       },
       handleInput(value) {
@@ -265,7 +264,7 @@
       handleInputChange(value) {
         const newVal = value ? +value : this.resDefaultValue;
         if (!isNaN(newVal) || !value) {
-          this.setCurrentValue(newVal);
+          this.updateCurrentValue(newVal);
         }
         this.userInput = null;
       },
