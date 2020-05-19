@@ -107,7 +107,7 @@ export default {
       hasCheckedFormat: '{checked}/{total} выбрано'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Произошла ошибка'
     },
     pageHeader: {
       title: 'Назад'
