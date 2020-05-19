@@ -44,6 +44,7 @@
     font-size: 12px;
     bottom: 5px;
     right: 10px;
+    line-height: initial;
   }
 
   & .el-input__clear {
@@ -91,6 +92,7 @@
     align-items: center;
     color: $--color-info;
     font-size: 12px;
+    line-height: initial;
 
     .el-input__count-inner {
       background: $--color-white;
