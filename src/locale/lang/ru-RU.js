@@ -85,7 +85,7 @@ export default {
     upload: {
       deleteTip: 'Нажмите [Удалить] для удаления',
       delete: 'Удалить',
-      preview: 'Превью',
+      preview: 'Предпросмотр',
       continue: 'Продолжить'
     },
     table: {
