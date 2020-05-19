@@ -104,5 +104,32 @@ describe('Calendar', () => {
     expect(firstRow.firstElementChild.innerText).to.be.equal('3');
     expect(firstRow.lastElementChild.innerText).to.be.equal('9');
   });
+
+  it('panel change event', async() => {
+    let checkedDate = null;
+    vm = createVue({
+      template: `
+      <el-calendar v-model="value" @panel-change="panelChangeHandler"></el-calendar>
+      `,
+      data() {
+        return {
+          value: new Date('2019-03-04')
+        };
+      },
+      methods: {
+        panelChangeHandler(date) {
+          checkedDate = date;
+        }
+      }
+    }, true);
+
+    const dateList = vm.$el.querySelectorAll('.el-calendar__body .el-calendar-day');
+    dateList[0].click();
+    await waitImmediate();
+
+    expect(checkedDate).to.not.equal(null);
+    expect(checkedDate.getDate()).to.equal(25);
+    expect(checkedDate.getMonth()).to.equal(1);
+  });
 });
 

@@ -52,6 +52,30 @@
 ```
 :::
 
+### 面板变化
+
+:::demo 可以通过 `panel-change` 事件监听 calendar 面板的变化。
+```html
+<el-calendar v-model="value" @panel-change="panelChangeHandler"></el-calendar>
+<script>
+  export default {
+    data() {
+      return {
+        value: new Date()
+      }
+    },
+    
+    methods: {
+      panelChangeHandler(date) {
+        console.log(date)
+      }
+    }
+  }
+</script>
+
+```
+:::
+
 ### Attributes
 | 参数             | 说明          | 类型      | 可选值        | 默认值  |
 |-----------------|-------------- |---------- |------------ |-------- |
@@ -64,3 +88,8 @@
 |-----------------|-------------- |---------- |------------ |-------- |
 | date            | 单元格代表的日期 | Date      | —           | —      |
 | data            | { type, isSelected, day}，`type` 表示该日期的所属月份，可选值有 prev-month，current-month，next-month；`isSelected` 标明该日期是否被选中；`day` 是格式化的日期，格式为 yyyy-MM-dd    | Object      | —           | —      |
+
+### Calendar Events
+| 事件名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| panelChange | 点击下个月、下个月或者选择上个月的日期，导致 calendar 面板变化时触发的事件 | pickedDate |

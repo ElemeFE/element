@@ -52,13 +52,37 @@ Affiche un calendrier.
 ```
 :::
 
+### Panel change
+
+:::demo use `panel-change` event to monitor calendar's panel change。
+```html
+<el-calendar v-model="value" @panel-change="panelChangeHandler"></el-calendar>
+<script>
+  export default {
+    data() {
+      return {
+        value: new Date()
+      }
+    },
+    
+    methods: {
+      panelChangeHandler(date) {
+        console.log(date)
+      }
+    }
+  }
+</script>
+
+```
+:::
+
 ### Attributs
 
 | Attribut          | Description   | Type      | Valeurs acceptées     | Défaut   |
 |------------------ |-------------- |---------- |---------------------- |--------- |
 | value / v-model   | Valeur liée.  | Date/string/number | —            | —        |
 | range             | Intervalle de dates, début et fin inclus. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months. | Array     | —           | —      |
-| first-day-of-week | fisrt day of week| Number | 1 to 7                |  1       |
+| first-day-of-week | first day of week| Number | 1 to 7                |  1       |
 
 ### Slot dateCell
 
@@ -66,3 +90,8 @@ Affiche un calendrier.
 |-----------------|-------------- |---------- |---------------------- |--------- |
 | date            | Date de la cellule courante.  | Date      | —                     | —        |
 | data            | { type, isSelected, day }. `type` indique le mois de la date courante, les valeurs prev-month, current-month et next-month pouvant être utilisées; `isSelected` indique si la date est sélectionnée; `day` est la date formattée en yyyy-MM-dd.    | Object      | —           | —      |
+
+### Calendar Events
+| Name | Description | Parameters |
+| ---- | ---- | ---- |
+| panelChange | triggers when the panel changes (click the `prev-month` or `current-month` button, pick prev month date)  | pickedDate |

@@ -53,12 +53,36 @@ Muestra fechas.
 ```
 :::
 
+### Panel change
+
+:::demo use `panel-change` event to monitor calendar's panel change。
+```html
+<el-calendar v-model="value" @panel-change="panelChangeHandler"></el-calendar>
+<script>
+  export default {
+    data() {
+      return {
+        value: new Date()
+      }
+    },
+    
+    methods: {
+      panelChangeHandler(date) {
+        console.log(date)
+      }
+    }
+  }
+</script>
+
+```
+:::
+
 ### Atributos
 | Atributo        | Descripción        | Tipo      | Valores aceptados     | Por defecto |
 |-----------------|------------------- |---------- |---------------------- |------------ |
 | value / v-model | valor vinculante   | Date/string/number | —            | —           |
 | range           | rango de tiempo, incluyendo el tiempo de inicio y el tiempo final. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months | Array     | —           | —      |
-| first-day-of-week | fisrt day of week| Number    | 1 to 7                |  1          |
+| first-day-of-week | first day of week| Number    | 1 to 7                |  1          |
 
 ### dateCell scoped slot
 | Atributo      | Descripción | Tipo   | Valores aceptados | Por defecto |
@@ -66,3 +90,7 @@ Muestra fechas.
 | date            | fecha que la celda representa | Date      | —                     | —        |
 | data            | { type, isSelected, day}. `type` indica el mes al que pertenece la fecha, los valores opcionales son mes anterior, mes actual, mes siguiente; `isSelected` indica si la fecha está seleccionada; `day` es la fecha formateada en el formato yyyy-MM-dd | Object      | —           | —      |
 
+### Calendar Events
+| Name | Description | Parameters |
+| ---- | ---- | ---- |
+| panelChange | triggers when the panel changes (click the `prev-month` or `current-month` button, pick prev month date)  | pickedDate |
