@@ -110,7 +110,7 @@ export default {
       error: 'FAILED' // to be translated
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Назад'
     },
     popconfirm: {
       confirmButtonText: 'OK',
