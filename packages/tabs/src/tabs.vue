@@ -19,6 +19,10 @@
         type: String,
         default: 'top'
       },
+      transition: {
+        type: String,
+        default: 'el-tab-pane'
+      },
       beforeLeave: Function,
       stretch: Boolean
     },
@@ -84,10 +88,31 @@
         this.$emit('edit', null, 'add');
         this.$emit('tab-add');
       },
-      setCurrentName(value) {
+      setCurrentName(value, init = false) {
         const changeCurrentName = () => {
-          this.currentName = value;
-          this.$emit('input', value);
+          if (this.transition && !init) {
+            for (const item of this.$children) {
+              if (item.active) {
+                item.$el.classList.add(`${this.transition}-leave-active`, `${this.transition}-leave`);
+                const handTransitionend = ()=> {
+                  item.$el.classList.remove(`${this.transition}-leave-active`, `${this.transition}-leave`);
+                  for (const item of this.$children) {
+                    if ((item.name || item.index) === this.currentName) {
+                      this.currentName = value;
+                      this.$emit('input', value);
+                      break;
+                    }
+                  };
+                  item.$el.removeEventListener('transitionend', handTransitionend);
+                };
+                item.$el.addEventListener('transitionend', handTransitionend);
+                break;
+              }
+            }
+          } else {
+            this.currentName = value;
+            this.$emit('input', value);
+          }
         };
         if (this.currentName !== value && this.beforeLeave) {
           const before = this.beforeLeave(value, this.currentName);
@@ -174,7 +199,7 @@
   
     created() {
       if (!this.currentName) {
-        this.setCurrentName('0');
+        this.setCurrentName('0', true);
       }
 
       this.$on('tab-nav-update', this.calcPaneInstances.bind(null, true));

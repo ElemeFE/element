@@ -41,6 +41,17 @@
         const active = this.$parent.currentName === (this.name || this.index);
         if (active) {
           this.loaded = true;
+          if (this.$parent.transition && this.$el) {
+            this.$el.classList.add(`${this.$parent.transition}-enter-active`, `${this.$parent.transition}-enter`);
+            requestAnimationFrame(() => {
+              this.$el.classList.remove(`${this.$parent.transition}-enter`);
+              const handTransitionend = ()=> {
+                this.$el.classList.remove(`${this.$parent.transition}-enter-active`, `${this.$parent.transition}-enter`);
+                this.$el.removeEventListener('transitionend', handTransitionend);
+              };
+              this.$el.addEventListener('transitionend', handTransitionend);
+            });
+          }
         }
         return active;
       },

@@ -600,3 +600,16 @@
     opacity: 0
   }
 }
+
+.el-tab-pane-enter-active,
+.el-tab-pane-leave-active {
+  transition: all 0.3s;
+}
+.el-tab-pane-leave {
+  opacity: 0;
+  transform: translateX(5%);
+}
+.el-tab-pane-enter {
+  opacity: 0;
+  transform: translateX(-5%);
+}
