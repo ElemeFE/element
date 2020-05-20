@@ -19,6 +19,10 @@
         type: String,
         default: 'top'
       },
+      transition: {
+        type: String,
+        default: 'el-tab-pane'
+      },
       beforeLeave: Function,
       stretch: Boolean
     },
@@ -86,8 +90,28 @@
       },
       setCurrentName(value) {
         const changeCurrentName = () => {
-          this.currentName = value;
-          this.$emit('input', value);
+          if (this.currentName !== value) {
+            if (this.transition) {
+              for (const item of this.$children) {
+                if (item.active) {
+                  item.$el.classList.add(`${this.transition}-leave-active`, `${this.transition}-leave`);
+                  const handTransitionend = ()=> {
+                    item.$el.classList.remove(`${this.transition}-leave-active`, `${this.transition}-leave`);
+                    for (const item of this.$children) {
+                      if ((item.name || item.index) === this.currentName) {
+                        this.currentName = value;
+                        this.$emit('input', value);
+                        break;
+                      }
+                    };
+                    item.$el.removeEventListener('transitionend', handTransitionend);
+                  };
+                  item.$el.addEventListener('transitionend', handTransitionend);
+                  break;
+                }
+              }
+            }
+          }
         };
         if (this.currentName !== value && this.beforeLeave) {
           const before = this.beforeLeave(value, this.currentName);
