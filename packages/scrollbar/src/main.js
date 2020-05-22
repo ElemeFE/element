@@ -21,6 +21,14 @@ export default {
     tag: {
       type: String,
       default: 'div'
+    },
+    id: {
+      type: String,
+      default: null
+    },
+    listbox: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -59,7 +67,11 @@ export default {
     const view = h(this.tag, {
       class: ['el-scrollbar__view', this.viewClass],
       style: this.viewStyle,
-      ref: 'resize'
+      ref: 'resize',
+      attrs: {
+        id: this.id,
+        role: this.listbox ? 'listbox' : null
+      }
     }, this.$slots.default);
     const wrap = (
       <div

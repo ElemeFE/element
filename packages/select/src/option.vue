@@ -4,6 +4,7 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
+		role="option"
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
