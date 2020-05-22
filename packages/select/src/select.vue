@@ -329,7 +329,8 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        valueOnMenuOpen: ''
       };
     },
 
@@ -422,6 +423,12 @@
           }
         }
         this.$emit('visible-change', val);
+        if (this.visible) {
+          this.valueOnMenuOpen = this.value;
+        } else {
+          this.emitChange(this.value);
+        }
+
       },
 
       options() {
@@ -506,6 +513,7 @@
       handleEnterKey(e) {
         e.preventDefault();
         this.selectOption(e);
+        this.visible = !this.visible;
       },
 
       handleEscapeKey(e) {
@@ -540,7 +548,7 @@
       },
 
       emitChange(val) {
-        if (!valueEquals(this.value, val)) {
+        if (!valueEquals(this.valueOnMenuOpen, val)) {
           this.$emit('change', val);
         }
       },
@@ -723,7 +731,6 @@
             value.push(option.value);
           }
           this.$emit('input', value);
-          this.emitChange(value);
           if (option.created) {
             this.query = '';
             this.handleQueryChange('');
@@ -732,8 +739,6 @@
           if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
-          this.emitChange(option.value);
-          this.visible = false;
         }
         this.isSilentBlur = byClick;
         this.setSoftFocus();
@@ -788,12 +793,8 @@
       },
 
       selectOption() {
-        if (!this.visible) {
-          this.toggleMenu();
-        } else {
-          if (this.options[this.hoverIndex]) {
-            this.handleOptionSelect(this.options[this.hoverIndex]);
-          }
+        if (this.visible && this.options[this.hoverIndex]) {
+          this.handleOptionSelect(this.options[this.hoverIndex]);
         }
       },
 
@@ -899,6 +900,7 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
+      this.$on('handleOptionClick', this.handleClose);
       this.$on('setSelected', this.setSelected);
     },
 
