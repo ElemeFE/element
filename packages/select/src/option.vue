@@ -5,6 +5,7 @@
     class="el-select-dropdown__item"
     v-show="visible"
 		role="option"
+		:aria-selected="itemSelected"
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
