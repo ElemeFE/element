@@ -117,7 +117,9 @@
     },
     watch: {
       checked() {
-        this.$refs.input.checked = this.checked;
+        if (this.$refs.input) {
+          this.$refs.input.checked = this.checked;
+        }
         if (this.activeColor || this.inactiveColor) {
           this.setBackgroundColor();
         }
