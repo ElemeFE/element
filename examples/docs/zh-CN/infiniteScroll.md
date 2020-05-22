@@ -85,3 +85,5 @@
 | infinite-scroll-delay   | 节流时延，单位为ms   | number       |   - |200   |
 | infinite-scroll-distance| 触发加载的距离阈值，单位为px | number   |- |0 |
 | infinite-scroll-immediate | 是否立即执行加载方法，以防初始状态下内容无法撑满容器。| boolean | - |true |
+
+温馨提示：指令参数非`props`传值，无法使用`v-on`进行绑定。
