@@ -126,7 +126,7 @@
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading"
-          :listbox="true"
+          :is-listbox="true"
           :multiple="multiple"
           :id="id ? `${id}-listbox` : null">
           <el-option

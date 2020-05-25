@@ -26,7 +26,7 @@ export default {
       type: String,
       default: null
     },
-    listbox: {
+    isListbox: {
       type: Boolean,
       default: false
     },
@@ -74,7 +74,7 @@ export default {
       ref: 'resize',
       attrs: {
         id: this.id,
-        role: this.listbox ? 'listbox' : null,
+        role: this.isListbox ? 'listbox' : null,
         'aria-multiselectable': this.multiple
 
       }
