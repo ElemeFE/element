@@ -26,7 +26,7 @@
         class="el-radio__original"
         :value="label"
         type="radio"
-        aria-hidden="true"
+        :aria-hidden="!native"
         v-model="model"
         @focus="focus = true"
         @blur="focus = false"
@@ -68,7 +68,8 @@
       disabled: Boolean,
       name: String,
       border: Boolean,
-      size: String
+      size: String,
+      native: Boolean
     },
 
     data() {
