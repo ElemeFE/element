@@ -29,6 +29,10 @@ export default {
     listbox: {
       type: Boolean,
       default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -70,7 +74,9 @@ export default {
       ref: 'resize',
       attrs: {
         id: this.id,
-        role: this.listbox ? 'listbox' : null
+        role: this.listbox ? 'listbox' : null,
+        'aria-multiselectable': this.multiple
+
       }
     }, this.$slots.default);
     const wrap = (

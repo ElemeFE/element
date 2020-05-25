@@ -5,7 +5,8 @@
     class="el-select-dropdown__item"
     v-show="visible"
     role="option"
-    :aria-selected="itemSelected"
+    :id="select.id ? `${select.id}-option-${value}` : null"
+    :aria-selected="itemSelected ? 'true' : 'false'"
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
