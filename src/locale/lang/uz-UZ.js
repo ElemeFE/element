@@ -113,8 +113,8 @@ export default {
       title: 'Orqaga'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Xa',
+      cancelButtonText: 'Bekor qilish'
     }
   }
 };
