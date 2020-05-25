@@ -85,10 +85,10 @@
       aria-haspopup="listbox"
       :aria-owns="id ? `${id}-listbox` : null"
       :aria-expanded="visible ? 'true' : 'false'"	
-			:aria-activedescendant="id && hoverIndex > -1 ? `${id}-option-${options[hoverIndex].value}` : null"
-			:readonly="readonly"
+      :aria-activedescendant="id && hoverIndex > -1 ? `${id}-option-${options[hoverIndex].value}` : null"
       :size="selectSize"
       :disabled="selectDisabled"
+      :readonly="readonly"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
@@ -127,7 +127,7 @@
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading"
           :listbox="true"
-					:multiple="multiple"
+          :multiple="multiple"
           :id="id ? `${id}-listbox` : null">
           <el-option
             :value="query"
