@@ -38,7 +38,7 @@
     props: {
       type: {
         type: String,
-        default: 'default'
+        default: 'success'
       },
       size: String,
       icon: {
