@@ -1,4 +1,4 @@
-import { getPropByPath } from 'element-ui/src/utils/util';
+import { getPropByPath, noop } from 'element-ui/src/utils/util';
 
 export const cellStarts = {
   default: {
@@ -29,10 +29,11 @@ export const cellStarts = {
 export const cellForced = {
   selection: {
     renderHeader: function(h, { store }) {
+      const isCheckboxDisabled = store.states.data && store.states.data.length === 0;
       return <el-checkbox
-        disabled={ store.states.data && store.states.data.length === 0 }
+        disabled={ isCheckboxDisabled }
         indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
-        nativeOn-click={ this.toggleAllSelection }
+        nativeOn-click={ isCheckboxDisabled ? noop : this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
