@@ -141,9 +141,12 @@ export default {
     }
   },
   unbind(el) {
-    const { container, onScroll } = el[scope];
+    const { container, onScroll, observer } = el[scope];
     if (container) {
       container.removeEventListener('scroll', onScroll);
+    }
+    if (observer) {
+      observer.disconnect();
     }
   }
 };
