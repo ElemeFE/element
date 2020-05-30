@@ -20,7 +20,7 @@ export default {
       nextYear: 'Năm tới',
       prevMonth: 'Tháng trước',
       nextMonth: 'Tháng tới',
-      year: 'Năm',
+      year: '',
       month1: 'Tháng 1',
       month2: 'Tháng 2',
       month3: 'Tháng 3',
