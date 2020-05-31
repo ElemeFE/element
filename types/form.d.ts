@@ -64,8 +64,8 @@ export declare class ElForm extends ElementUIComponent {
    *
    * @param callback A callback to tell the validation result
    */
-  validate (callback: ValidateCallback): void
-  validate (): Promise<boolean>
+  validate (callback: ValidateCallback, fieldProps?: string[] | string): void
+  validate (fieldProps?: string[] | string): Promise<boolean>
   /**
    * Validate certain form items
    *
