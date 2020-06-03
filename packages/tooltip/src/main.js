@@ -180,7 +180,9 @@ export default {
       if (!this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
-        this.showPopper = true;
+        if (this.referenceElm.offsetParent !== null) {
+          this.showPopper = true;
+        }
       }, this.openDelay);
 
       if (this.hideAfter > 0) {
