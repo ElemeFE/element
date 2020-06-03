@@ -180,6 +180,10 @@ export default {
       if (!this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
+        // 该元素已被隐藏，则不再显示tooltip
+        if (this.referenceElm.offsetParent === null) {
+          return
+        }
         this.showPopper = true;
       }, this.openDelay);
 
