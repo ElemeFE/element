@@ -9,7 +9,7 @@
       'el-table--fluid-height': maxHeight,
       'el-table--scrollable-x': layout.scrollX,
       'el-table--scrollable-y': layout.scrollY,
-      'el-table--enable-row-hover': !store.states.isComplex,
+      'el-table--enable-row-hover': !noHover && !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
@@ -42,7 +42,8 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
-        :style="{ width: bodyWidth }">
+        :style="{ width: bodyWidth }"
+        :no-hover="noHover">
       </table-body>
       <div
         v-if="!data || data.length === 0"
@@ -114,7 +115,8 @@
           :row-style="rowStyle"
           :style="{
             width: bodyWidth
-          }">
+          }"
+          :no-hover="noHover">
         </table-body>
         <div
           v-if="$slots.append"
@@ -174,7 +176,8 @@
           :highlight="highlightCurrentRow"
           :style="{
             width: bodyWidth
-          }">
+          }"
+          :no-hover="noHover">
         </table-body>
         <div
           v-if="$slots.append"
@@ -331,7 +334,9 @@
 
       lazy: Boolean,
 
-      load: Function
+      load: Function,
+
+      noHover: Boolean
     },
 
     components: {

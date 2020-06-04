@@ -78,6 +78,9 @@ export declare class ElTable extends ElementUIComponent {
   /** Function that returns custom style for a row, or an object assigning custom style for every row */
   rowStyle: object | ((param: rowCallbackParams) => object)
 
+  /** Whether to disable hover-row style */
+  noHover: boolean
+
   /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
   cellClassName: string | ((param: cellCallbackParams) => string)
 
