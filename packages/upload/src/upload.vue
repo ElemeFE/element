@@ -72,6 +72,31 @@ export default {
       }
 
       let postFiles = Array.prototype.slice.call(files);
+      if (this.webkitdirectory) {
+        postFiles = postFiles.filter(file => {
+          const { type, name } = file;
+          const extension = name.indexOf('.') > -1
+            ? `.${ name.split('.').pop() }`
+            : '';
+          const baseType = type.replace(/\/.*$/, '');
+          return this.accept
+            .split(',')
+            .map(type => type.trim())
+            .filter(type => type)
+            .some(acceptedType => {
+              if (/\..+$/.test(acceptedType)) {
+                return extension === acceptedType;
+              }
+              if (/\/\*$/.test(acceptedType)) {
+                return baseType === acceptedType.replace(/\/\*$/, '');
+              }
+              if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
+                return type === acceptedType;
+              }
+              return false;
+            });
+        });
+      }
       if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
 
       if (postFiles.length === 0) { return; }
@@ -184,7 +209,8 @@ export default {
       listType,
       uploadFiles,
       disabled,
-      handleKeydown
+      handleKeydown,
+      webkitdirectory
     } = this;
     const data = {
       class: {
@@ -203,7 +229,7 @@ export default {
             ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
             : this.$slots.default
         }
-        <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
+        <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept} webkitdirectory={webkitdirectory}></input>
       </div>
     );
   }
