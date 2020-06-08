@@ -303,11 +303,14 @@ export default {
     disabled() {
       this.computePresentContent();
     },
-    value(val) {
-      if (!isEqual(val, this.checkedValue)) {
-        this.checkedValue = val;
-        this.computePresentContent();
-      }
+    value: {
+      handler(value) {
+        if (!isEqual(val, this.checkedValue)) {
+          this.checkedValue = val;
+          this.computePresentContent();
+        }
+      },
+      deep: true
     },
     checkedValue(val) {
       const { value, dropDownVisible } = this;
