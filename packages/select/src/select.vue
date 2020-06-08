@@ -91,7 +91,8 @@
       @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
-      @mouseleave.native="inputHovering = false">
+      @mouseleave.native="inputHovering = false"
+      @input="debouncedOnInputChange">
       <template slot="prefix" v-if="$slots.prefix">
         <slot name="prefix"></slot>
       </template>
