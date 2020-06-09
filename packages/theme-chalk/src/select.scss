@@ -130,18 +130,38 @@
     background-color: #f0f2f5;
 
     &__close.el-icon-close {
-      background-color: $--color-text-placeholder;
+      background-color: rgba($--tag-primary-color, .4);
       right: -7px;
       top: 0;
       color: $--color-white;
 
       &:hover {
-        background-color: $--color-text-secondary;
+        background-color: $--tag-primary-color;
       }
 
       &::before {
         display: block;
         transform: translate(0, .5px);
+      }
+    }
+    &.el-tag--info {
+      .el-tag__close {
+        background-color: rgba($--tag-info-color, .4);
+      }
+    }
+    &.el-tag--success {
+      .el-tag__close {
+        background-color: rgba($--tag-success-color, .4);
+      }
+    }
+    &.el-tag--warning {
+      .el-tag__close {
+        background-color: rgba($--tag-warning-color, .4);
+      }
+    }
+    &.el-tag--danger {
+      .el-tag__close {
+        background-color: rgba($--tag-danger-color, .4);
       }
     }
   }

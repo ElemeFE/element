@@ -14,7 +14,7 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
-          type="info"
+          :type="tagType"
           @close="deleteTag($event, selected[0])"
           disable-transitions>
           <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
@@ -23,7 +23,7 @@
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
-          type="info"
+          :type="tagType"
           disable-transitions>
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
         </el-tag>
@@ -35,7 +35,7 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
-          type="info"
+          :type="tagType"
           @close="deleteTag($event, item)"
           disable-transitions>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
@@ -302,6 +302,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      tagType: {
+        type: String,
+        default: 'info'
       }
     },
 
