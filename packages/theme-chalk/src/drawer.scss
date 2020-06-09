@@ -215,3 +215,9 @@ $directions: rtl, ltr, ttb, btt;
 .el-drawer-fade-leave-active {
   animation: el-drawer-fade-in .3s reverse;
 }
+
+.el-drawer__wrapper {
+  & [tabindex] {
+    outline: none;
+  }
+}
