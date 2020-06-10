@@ -85,11 +85,13 @@
         this.$emit('tab-add');
       },
       setCurrentName(value) {
+        if (this.currentName === value) return;
+
         const changeCurrentName = () => {
           this.currentName = value;
           this.$emit('input', value);
         };
-        if (this.currentName !== value && this.beforeLeave) {
+        if (this.beforeLeave) {
           const before = this.beforeLeave(value, this.currentName);
           if (before && before.then) {
             before
@@ -171,7 +173,7 @@
         </div>
       );
     },
-  
+
     created() {
       if (!this.currentName) {
         this.setCurrentName('0');
