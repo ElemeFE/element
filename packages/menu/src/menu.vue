@@ -258,10 +258,6 @@
         const oldActiveIndex = this.activeIndex;
         const hasIndex = item.index !== null;
 
-        if (hasIndex) {
-          this.activeIndex = item.index;
-        }
-
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal' || this.collapse) {
