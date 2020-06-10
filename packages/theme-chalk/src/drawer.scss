@@ -58,7 +58,7 @@
       }
 
       @if $direction == rtl {
-        transform: translate(0px, 0px);;
+        transform: translate(0px, 0px);
       }
 
       @if $direction == ttb {
