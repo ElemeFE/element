@@ -117,46 +117,61 @@
         // if no callback, return promise
         if (typeof callback !== 'function' && window.Promise) {
           promise = new window.Promise((resolve, reject) => {
-            callback = function(valid) {
-              valid ? resolve(valid) : reject(valid);
+            callback = function(valid, invalidFields) {
+              (valid ? resolve : reject)(invalidFields);
             };
           });
         }
 
         let valid = true;
         let count = 0;
+        let invalidFields = {};
+
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
-          callback(true);
+          callback(true, invalidFields);
         }
-        let invalidFields = {};
         this.fields.forEach(field => {
           field.validate('', (message, field) => {
-            if (message) {
-              valid = false;
-            }
-            invalidFields = objectAssign({}, invalidFields, field);
+            if (message) valid = false;
+            objectAssign(invalidFields, field);
             if (typeof callback === 'function' && ++count === this.fields.length) {
               callback(valid, invalidFields);
             }
           });
         });
 
-        if (promise) {
-          return promise;
-        }
+        return promise;
       },
       validateField(props, cb) {
-        props = [].concat(props);
+        if (!Array.isArray(props)) props = [].concat(props);
         const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
         if (!fields.length) {
           console.warn('[Element Warn]please pass correct props!');
           return;
         }
 
+        let promise;
+        if (typeof cb !== 'function') {
+          const result = {};
+          let isValid = true;
+          let count = 0;
+          promise = new window.Promise((resolve, reject) => {
+            cb = function(message, field) {
+              if (message) isValid = false;
+              objectAssign(result, field);
+              if (++count === props.length) {
+                (isValid ? resolve : reject)(result);
+              }
+            };
+          });
+        }
+
         fields.forEach(field => {
           field.validate('', cb);
         });
+
+        return promise;
       },
       getLabelWidthIndex(width) {
         const index = this.potentialLabelWidthArr.indexOf(width);

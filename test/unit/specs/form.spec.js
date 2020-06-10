@@ -798,6 +798,36 @@ describe('Form', () => {
         done();
       });
     });
+    it('validate field promise', () => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
+              ]
+            }
+          };
+        },
+        methods: {
+          setValue(value) {
+            this.form.name = value;
+          }
+        }
+      }, true);
+      return vm.$refs.form.validateField('name')
+        .then(() => { throw new Error('failed'); }, () => {});
+    });
     it('custom validate', done => {
       var checkName = (rule, value, callback) => {
         if (value.length < 5) {
@@ -920,7 +950,7 @@ describe('Form', () => {
         done();
       });
     });
-    it('validate return promise', done => {
+    it('validate return promise', () => {
       var checkName = (rule, value, callback) => {
         if (value.length < 5) {
           callback(new Error('长度至少为5'));
@@ -949,9 +979,10 @@ describe('Form', () => {
           };
         }
       }, true);
-      vm.$refs.form.validate().catch(validFailed => {
-        expect(validFailed).to.false;
-        done();
+      return vm.$refs.form.validate().then(() => {
+        throw new Error('failed');
+      }, validFailed => {
+        return expect(validFailed.name.length).to.eq(1);
       });
     });
   });
