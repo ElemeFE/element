@@ -144,7 +144,11 @@ export function isEdge() {
 }
 
 export function isFirefox() {
-  return !Vue.prototype.$isServer && !!navigator.userAgent.match(/firefox/i);
+  return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Firefox') > -1;
+}
+
+export function isSafari() {
+  return !Vue.prototype.$isServer && navigator.userAgent.indexOf('Chrome') === -1 && navigator.userAgent.indexOf('Safari') > -1;
 }
 
 /** @param {CSSStyleSheet} style */

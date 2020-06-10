@@ -1,4 +1,5 @@
 import objectAssign from 'element-ui/src/utils/merge';
+import { isSafari } from 'element-ui/src/utils/util';
 import deepmerge from 'deepmerge';
 import { PopupManager } from 'element-ui/src/utils/popup';
 import PopperUtils from 'popper.js/dist/esm/popper-utils';
@@ -152,6 +153,9 @@ export const BasePopper = {
           },
           preventOverflow: {
             boundariesElement: this.boundariesElement || 'viewport'
+          },
+          computeStyle: {
+            gpuAcceleration: !isSafari()
           }
         }
       }, this.popperOptions);
