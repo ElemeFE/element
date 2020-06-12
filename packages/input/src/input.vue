@@ -13,6 +13,7 @@
       'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }
     ]"
+    :style="{width : width ? width : auto}"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
