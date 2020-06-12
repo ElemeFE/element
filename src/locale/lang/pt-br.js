@@ -111,6 +111,10 @@ export default {
     },
     pageHeader: {
       title: 'Voltar'
+    },
+    popconfirm: {
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
     }
   }
 };
