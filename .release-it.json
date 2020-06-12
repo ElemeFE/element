@@ -1,0 +1,15 @@
+  
+{
+  "git": {
+    "commitMessage": "chore: release v${version}"
+  },
+  "github": {
+    "release": true
+  },
+  "hooks": {
+    "before:npm:release": "npm run dist"
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {}
+  }
+}

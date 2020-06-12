@@ -27,7 +27,8 @@
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js && sh build/deploy-faas.sh",
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
+    "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "release": "dotenv release-it"
   },
   "faas": [
     {
@@ -71,6 +72,7 @@
     "vue": "^2.5.17"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^1.1.4",
     "@vue/component-compiler-utils": "^2.6.0",
     "algoliasearch": "^3.24.5",
     "babel-cli": "^6.26.0",
@@ -91,6 +93,7 @@
     "cp-cli": "^1.0.2",
     "cross-env": "^3.1.3",
     "css-loader": "^2.1.0",
+    "dotenv-cli": "^3.1.0",
     "es6-promise": "^4.0.5",
     "eslint": "4.18.2",
     "eslint-config-elemefe": "0.1.1",
@@ -125,6 +128,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.14",
     "progress-bar-webpack-plugin": "^1.11.0",
+    "release-it": "^13.6.2",
     "rimraf": "^2.5.4",
     "sass-loader": "^7.1.0",
     "select-version-cli": "^0.0.2",
