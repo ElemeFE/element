@@ -48,6 +48,11 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
+        :aria-controls="id ? `${id}-listbox` : null"
+        role="combobox"
+        aria-haspopup="listbox"
+        :aria-owns="id ? `${id}-listbox` : null"
+        :aria-expanded="visible ? 'true' : 'false'"	
         @focus="handleFocus"
         @blur="softFocus = false"
         @click.stop
@@ -75,6 +80,12 @@
       :name="name"
       :id="id"
       :autocomplete="autoComplete || autocomplete"
+      :aria-controls="id ? `${id}-listbox` : null"
+      role="combobox"
+      aria-haspopup="listbox"
+      :aria-owns="id ? `${id}-listbox` : null"
+      :aria-expanded="visible ? 'true' : 'false'"	
+      :aria-activedescendant="id && hoverIndex > -1 ? `${id}-option-${options[hoverIndex].value}` : null"
       :size="selectSize"
       :disabled="selectDisabled"
       :readonly="readonly"
@@ -114,7 +125,10 @@
           view-class="el-select-dropdown__list"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
-          v-show="options.length > 0 && !loading">
+          v-show="options.length > 0 && !loading"
+          :is-listbox="true"
+          :multiple="multiple"
+          :id="id ? `${id}-listbox` : null">
           <el-option
             :value="query"
             created
