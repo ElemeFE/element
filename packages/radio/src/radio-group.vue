@@ -35,7 +35,8 @@
       size: String,
       fill: String,
       textColor: String,
-      disabled: Boolean
+      disabled: Boolean,
+      native: Boolean
     },
 
     computed: {

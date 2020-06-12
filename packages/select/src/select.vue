@@ -2,8 +2,8 @@
   <div
     class="el-select"
     :class="[selectSize ? 'el-select--' + selectSize : '']"
-    @click.stop="toggleMenu"
-    v-clickoutside="handleClose">
+    @click="handleContainerClick"
+    v-clickoutside="handleClickOutside">
     <div
       class="el-select__tags"
       v-if="multiple"
@@ -48,6 +48,11 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
+        :aria-controls="id ? `${id}-listbox` : null"
+        role="combobox"
+        aria-haspopup="listbox"
+        :aria-owns="id ? `${id}-listbox` : null"
+        :aria-expanded="visible ? 'true' : 'false'"	
         @focus="handleFocus"
         @blur="softFocus = false"
         @keyup="managePlaceholder"
@@ -75,6 +80,12 @@
       :name="name"
       :id="id"
       :autocomplete="autoComplete || autocomplete"
+      :aria-controls="id ? `${id}-listbox` : null"
+      role="combobox"
+      aria-haspopup="listbox"
+      :aria-owns="id ? `${id}-listbox` : null"
+      :aria-expanded="visible ? 'true' : 'false'"	
+      :aria-activedescendant="id && hoverIndex > -1 ? `${id}-option-${options[hoverIndex].value}` : null"
       :size="selectSize"
       :disabled="selectDisabled"
       :readonly="readonly"
@@ -84,11 +95,12 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.stop.prevent="navigateOptions('next')"
-      @keydown.native.up.stop.prevent="navigateOptions('prev')"
-      @keydown.native.enter.prevent="selectOption"
-      @keydown.native.esc.stop.prevent="visible = false"
-      @keydown.native.tab="visible = false"
+      @keydown.native.down="handleDownArrowKey"
+      @keydown.native.up="handleUpArrowKey"
+      @keydown.native.enter="handleEnterKey"
+      @keydown.native.esc="handleEscapeKey"
+      @keydown.native.tab="handleTabKey"
+      @keydown.native.space="handleSpaceKey"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
@@ -114,7 +126,10 @@
           view-class="el-select-dropdown__list"
           ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
-          v-show="options.length > 0 && !loading">
+          v-show="options.length > 0 && !loading"
+          :is-listbox="true"
+          :multiple="multiple"
+          :id="id ? `${id}-listbox` : null">
           <el-option
             :value="query"
             created
@@ -272,6 +287,7 @@
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
+      editable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
       popperClass: String,
@@ -328,7 +344,8 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        valueOnMenuOpen: ''
       };
     },
 
@@ -412,7 +429,8 @@
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
 
-              if (this.selectedLabel) {
+              // Set placeholder to label of option selected when filterable is true, unless editable is true (i.e. keep existing value and allow editing it)
+              if (this.selectedLabel && !this.editable) {
                 this.currentPlaceholder = this.selectedLabel;
                 this.selectedLabel = '';
               }
@@ -420,6 +438,12 @@
           }
         }
         this.$emit('visible-change', val);
+        if (this.visible) {
+          this.valueOnMenuOpen = this.value;
+        } else {
+          this.emitChange(this.value);
+        }
+
       },
 
       options() {
@@ -489,6 +513,42 @@
         }
       },
 
+      handleUpArrowKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.navigateOptions('prev');
+      },
+
+      handleDownArrowKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.navigateOptions('next');
+      },
+
+      handleEnterKey(e) {
+        e.preventDefault();
+        this.selectOption(e);
+        this.visible = !this.visible;
+      },
+
+      handleEscapeKey(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.visible = false;
+      },
+
+      handleTabKey(e) {
+        this.visible = false;
+      },
+
+      handleSpaceKey(e) {
+        if (!this.visible) {
+          e.stopPropagation();
+          e.preventDefault();
+          this.visible = true;
+        }
+      },
+
       scrollToOption(option) {
         const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
         if (this.$refs.popper && target) {
@@ -503,7 +563,7 @@
       },
 
       emitChange(val) {
-        if (!valueEquals(this.value, val)) {
+        if (!valueEquals(this.valueOnMenuOpen, val)) {
           this.$emit('change', val);
         }
       },
@@ -601,6 +661,10 @@
         this.$refs.popper && this.$refs.popper.doDestroy();
       },
 
+      handleClickOutside(e) {
+        this.handleClose();
+      },
+
       handleClose() {
         this.visible = false;
       },
@@ -684,7 +748,6 @@
             value.push(option.value);
           }
           this.$emit('input', value);
-          this.emitChange(value);
           if (option.created) {
             this.query = '';
             this.handleQueryChange('');
@@ -693,8 +756,6 @@
           if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
-          this.emitChange(option.value);
-          this.visible = false;
         }
         this.isSilentBlur = byClick;
         this.setSoftFocus();
@@ -730,6 +791,11 @@
         }
       },
 
+      handleContainerClick(e) {
+        e.stopPropagation();
+        this.toggleMenu();
+      },
+
       toggleMenu() {
         if (!this.selectDisabled) {
           if (this.menuVisibleOnFocus) {
@@ -744,12 +810,8 @@
       },
 
       selectOption() {
-        if (!this.visible) {
-          this.toggleMenu();
-        } else {
-          if (this.options[this.hoverIndex]) {
-            this.handleOptionSelect(this.options[this.hoverIndex]);
-          }
+        if (this.visible && this.options[this.hoverIndex]) {
+          this.handleOptionSelect(this.options[this.hoverIndex]);
         }
       },
 
@@ -855,6 +917,7 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
+      this.$on('handleOptionClick', this.handleClose);
       this.$on('setSelected', this.setSelected);
     },
 

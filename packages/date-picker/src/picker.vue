@@ -13,23 +13,29 @@
     @focus="handleFocus"
     @keydown.native="handleKeydown"
     :value="displayValue"
-    @input="value => userInput = value"
+    @input="handleInput"
     @change="handleChange"
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
     ref="reference">
-    <i slot="prefix"
-      class="el-input__icon"
-      :class="triggerClass"
-      @click="handleFocus">
-    </i>
-    <i slot="suffix"
-      class="el-input__icon"
-      @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon : '']"
-      v-if="haveTrigger">
-    </i>
+    <template slot="prefix">
+      <slot name="prefix">
+        <i class="el-input__icon"
+          :class="triggerClass"
+          @click="handleFocus">
+        </i>
+      </slot>
+    </template>
+    <template slot="suffix">
+      <slot name="suffix">
+        <i class="el-input__icon"
+          @click="handleClickIcon"
+          :class="[showClose ? '' + clearIcon : '']"
+          v-if="haveTrigger">
+        </i>
+      </slot>
+    </template>
   </el-input>
   <div
     class="el-date-editor el-range-editor el-input__inner"
@@ -633,6 +639,10 @@ export default {
       }
     },
 
+    handleInput(value) {
+      this.userInput = value;
+    },
+
     handleChange() {
       if (this.userInput) {
         const value = this.parseString(this.displayValue);
@@ -831,6 +841,7 @@ export default {
       this.picker.selectionMode = this.selectionMode;
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
+      this.picker.toggleAmPm = this.toggleAmPm || false;
       this.$watch('format', (format) => {
         this.picker.format = format;
       });

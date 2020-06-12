@@ -25,7 +25,7 @@
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
         type="checkbox"
-        :aria-hidden="indeterminate ? 'true' : 'false'"
+        :aria-hidden="!native && indeterminate ? 'true' : false"
         :name="name"
         :disabled="isDisabled"
         :true-value="trueLabel"
@@ -38,7 +38,7 @@
         v-else
         class="el-checkbox__original"
         type="checkbox"
-        :aria-hidden="indeterminate ? 'true' : 'false'"
+        :aria-hidden="!native && indeterminate ? 'true' : false"
         :disabled="isDisabled"
         :value="label"
         :name="name"
@@ -173,7 +173,8 @@
       id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       border: Boolean,
-      size: String
+      size: String,
+      native: Boolean
     },
 
     methods: {

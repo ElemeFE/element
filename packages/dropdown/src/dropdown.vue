@@ -190,7 +190,7 @@
       },
       initAria() {
         this.dropdownElm.setAttribute('id', this.listId);
-        this.triggerElm.setAttribute('aria-haspopup', 'list');
+        this.triggerElm.setAttribute('aria-haspopup', 'menu');
         this.triggerElm.setAttribute('aria-controls', this.listId);
 
         if (!this.splitButton) { // 自定义

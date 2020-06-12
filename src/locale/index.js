@@ -30,7 +30,7 @@ export const t = function(path, options) {
   for (let i = 0, j = array.length; i < j; i++) {
     const property = array[i];
     value = current[property];
-    if (i === j - 1) return format(value, options);
+    if (i === j - 1) return value ? format(value, options) : '';
     if (!value) return '';
     current = value;
   }

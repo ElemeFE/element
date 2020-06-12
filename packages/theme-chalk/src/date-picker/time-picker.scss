@@ -46,13 +46,23 @@
       margin-left: 12%;
     }
 
-    &.has-seconds {
+    &.has-seconds:not(.has-am-pm), &.has-am-pm:not(.has-seconds) {
       &::after {
         left: calc(100% / 3 * 2);
       }
 
       &::before {
         padding-left: calc(100% / 3);
+      }
+    }
+
+    &.has-seconds.has-am-pm {
+      &::after {
+        left: calc(100% / 4 * 2);
+      }
+
+      &::before {
+        padding-left: calc(100% / 4);
       }
     }
   }

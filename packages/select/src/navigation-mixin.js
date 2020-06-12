@@ -42,6 +42,9 @@ export default {
           }
         }
         const option = this.options[this.hoverIndex];
+        if (!this.$props.multiple) {
+          this.selectOption();
+        }
         if (option.disabled === true ||
           option.groupDisabled === true ||
           !option.visible) {

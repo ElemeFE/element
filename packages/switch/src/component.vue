@@ -132,6 +132,11 @@
         this.$emit('input', val);
         this.$emit('change', val);
         this.$nextTick(() => {
+          // Don't attempt to change the checkbox value if the component
+          // has been destroyed as a result of toggling the value
+          if (this._isDestroyed) {
+            return;
+          }
           // set input's checked property
           // in case parent refuses to change component's value
           this.$refs.input.checked = this.checked;

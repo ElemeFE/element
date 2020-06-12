@@ -63,9 +63,11 @@
     },
 
     mounted() {
-      this.referenceElm = this.$parent.$refs.reference.$el;
       this.$parent.popperElm = this.popperElm = this.$el;
       this.$on('updatePopper', () => {
+        if (this.$parent.$refs.reference) {
+          this.referenceElm = this.$parent.$refs.reference.$el;
+        }
         if (this.$parent.visible) this.updatePopper();
       });
       this.$on('destroyPopper', this.destroyPopper);

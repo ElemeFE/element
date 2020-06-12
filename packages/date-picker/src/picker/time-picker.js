@@ -9,7 +9,11 @@ export default {
 
   props: {
     isRange: Boolean,
-    arrowControl: Boolean
+    arrowControl: Boolean,
+    toggleAmPm: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {

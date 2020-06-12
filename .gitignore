@@ -17,7 +17,6 @@ examples/pages/zh-CN
 examples/pages/es
 examples/pages/fr-FR
 fe.element/element-ui
-.npmrc
 coverage
 waiter.config.js
 build/bin/algolia-key.js
