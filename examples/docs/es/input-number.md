@@ -176,7 +176,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
 | max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
-| step-strictly  | si el valor del input puede ser solo un multiplo de step | number  | —                 | false       |
+| step-strictly  | si el valor del input puede ser solo un multiplo de step | boolean  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
@@ -190,7 +190,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 
 | Nombre | Descripción                              | Parámetros         |
 | ------ | ---------------------------------------- | ------------------ |
-| change | se produce cuando el valor cambia        | value after change |
+| change | se produce cuando el valor cambia        | currentValue, oldValue |
 | blur   | se produce cuando el componente pierde el foco | (event: Event)     |
 | focus  | se produce cuando el componente obtiene el foco | (event: Event)     |
 

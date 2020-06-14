@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import debounce from 'throttle-debounce/debounce';
 import merge from 'element-ui/src/utils/merge';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
@@ -168,7 +167,7 @@ export default Vue.extend({
       }
     },
 
-    toggleAllSelection: debounce(10, function() {
+    _toggleAllSelection() {
       const states = this.states;
       const { data = [], selection } = states;
       // when only some rows are selected (but not all), select or deselect all of them
@@ -195,7 +194,7 @@ export default Vue.extend({
         this.table.$emit('selection-change', selection ? selection.slice() : []);
       }
       this.table.$emit('select-all', selection);
-    }),
+    },
 
     updateSelectionByRowKey() {
       const states = this.states;
@@ -213,7 +212,7 @@ export default Vue.extend({
     updateAllSelected() {
       const states = this.states;
       const { selection, rowKey, selectable } = states;
-      // data 为 null 时，结构时的默认值会被忽略
+      // data 为 null 时，解构时的默认值会被忽略
       const data = states.data || [];
       if (data.length === 0) {
         states.isAllSelected = false;

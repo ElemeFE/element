@@ -1,4 +1,5 @@
 import Store from './index';
+import debounce from 'throttle-debounce/debounce';
 
 export function createStore(table, initialState = {}) {
   if (!table) {
@@ -7,6 +8,9 @@ export function createStore(table, initialState = {}) {
 
   const store = new Store();
   store.table = table;
+  // fix https://github.com/ElemeFE/element/issues/14075
+  // related pr https://github.com/ElemeFE/element/pull/14146
+  store.toggleAllSelection = debounce(10, store._toggleAllSelection);
   Object.keys(initialState).forEach(key => {
     store.states[key] = initialState[key];
   });

@@ -33,10 +33,10 @@ export default {
   },
 
   methods: {
-    onColumnsChange() {
+    onColumnsChange(layout) {
       const cols = this.$el.querySelectorAll('colgroup > col');
       if (!cols.length) return;
-      const flattenColumns = this.tableLayout.getFlattenColumns();
+      const flattenColumns = layout.getFlattenColumns();
       const columnsMap = {};
       flattenColumns.forEach((column) => {
         columnsMap[column.id] = column;

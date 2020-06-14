@@ -1,5 +1,203 @@
 ## Changelog
 
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix change event bug (#19200 by @sxzz)
+- Image
+  - Update error status (#19194 by @lhx6538665)
+
+#### Optimization
+
+- I18n
+  - Update ru-RU popconfirm translation (#19220 by @Opppex)
+  - Update vi translation (#19244 by @quangln2810)
+  - Update Catalan and Spanish translations (#19296 by @Ismaaa)
+  - Update Indonesia translation (#19320) by @therour)
+  - Update Brazilian Portuguese translation (#19374 by @diegomengarda)
+
+
+### 2.13.1
+
+*2020-04-13*
+
+#### New features
+- Autocomplete
+  - Add change event (#17913 by @sxzz)
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix suggestion error when textarea (#18478 by @Roojay)
+- Carousel
+  - Fix console typo bug (#18264 by @IceFox)
+- Image
+  - Fix preview dose not show when preview list not contain src issue (#18975) (#19130 by @luckyCao)
+  - Fix shortcut key not work at second time issue (#18983) (#19156 by @luckyCao)
+  - Don't show image-viewer when preview is false (#18967 by @inooNgt)
+- Transfer
+  - Fix incorrect line-height of el-transfer's first list item when it was used with  el-form-item (#18917 by @Hanx)
+- InputNumber
+  - Correctly compute inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - Remove index intro (#19155 by @iamkun)
+- Doc
+  - Popconfirm doc update (#18324 by @iamkun)
+  - Fix step-strictly docs typo (#18705 by @dream2023)
+  - Fix a type error in document of steps component (#17555 by @haoranyu)
+
+### 2.13.0
+
+*2019-11-26*
+
+#### New features
+
+- Popconfirm
+  - Add popconfirm component (#17548 by @iamkun)
+
+#### Bug fixes
+
+- BackTop
+  - Use cubic bezier scrolling (by @lon)
+- DatePicker
+  - Fix bug of only select min date of date range problem (#17191 by @smk0621)
+- Select
+  - Fix select test cases (by @msidolphin)
+- Tree
+  - Add font-size for the style of tree empty-text (#17094 by @spengjie)
+- Table
+  - Column header can be costumed (#17291 by @ziyoung)
+  - Update table header cell style (#17284 by @ziyoung)
+  - Fix table header height after filter (#17348 by @ziyoung)
+  - Fixed row-style with display not work (#17002 by @a631807682)
+  - Fix header table not display (#17341 by @ziyoung)
+- Calendar
+  - Import el-button and el-button-group (#17376 by @masongzhi)
+- MessageBox
+  - Fix icon position error (#17410 by @nullptru)
+- TimePicker
+  - Set the selection range after scrolling up or down (#16868 by @mattheyan)
+- Message
+  - Fix close instace offsetHeight（#17564） (#17852 by @gzwgq222)
+- Form
+  - Callback of validateField should be optional (#17314 by @CarterLi)
+- Cascader
+  - Fix TypeScript 3.7 compatibility (#17881 by @CarterLi)
+- Menu
+  - Fix router NavigationDuplicated error when using vue-router@^3.1.0 (#17269 by @iamkun)
+- Dropdown
+  - Update type file (#17550 by @iamkun)
+- Progress
+  - Add strokeLinecap prop (#17552 by @iamkun)
+- InfiniteScroll
+  - Skip trigger event on invisible element (#17553 by @iamkun)
+- Image
+  - Perfect picture preview behavior (#16985 by @luckyCao)
+  - Fix shield the page when preview big image (#16796 by @luckyCao)
+- Drawer 
+  - Bugfix drawer-append-to-body-not-working (#16953 by @JeremyWuuuuu)
+- Select
+  - Fix tag show value or empty issue (17199 by @luckyCao)
+- Scrollbar
+  - Fix FireFox scroll bar width (#18091 by @iamkun)
+  
+#### Optimization
+
+- I18n
+  - Update sv-SE.js (#17926 by @FOLLGAD)
+  - Update avatar component fr doc (#17762 by @blombard)
+- Docs
+  - Fix time-select typo (#17250 by @wacky6)
+  - Fix Drawer attribute accepted value typo in es (#17122 by @haoranyu)
+  - Update Spanish changelog 2.12.0 (#17364 by @Gonzalo2310)
+  - Fix Changelog typo (#17874 by @renlixin)
+  - Fix Loading demo (#17862 by @MBearo)
+  - Add input event in input Events Table (#18061 by @zhouxinyong)
+  - Delete Input repeat change event (#18085 by @zhouxinyong)
+
+### 2.12.0
+
+*2019-08-29*
+
+#### New features
+
+- Popover
+  - Add close-delay prop (#16671 by @LachlanStuart)
+- Theme
+  - Add Chrome Extension: Element Theme Extension (#16686 by @iamkun)
+- Icon
+  - Add font-display to @font-face declaration (#16805 by @iamfaizalandyka)
+
+#### Bug fixes
+
+- Carousel
+  - Fix onChange emit value (#16705 by @iamkun)
+- Notification
+  - Fix modifying incoming option object (#16704 by @iamkun)
+- DatePicker
+  - Add className for picker option (#16632 by @iamkun)
+- DateTimePicker
+  - Fix time-spinner not scroll to right position (#16854 by @jesse-li)
+- Table
+  - Prevent click handler after drag (#16850 by @ziyoung)
+  - Fix chrome crash when set thead css display to none (#16956 by @luckyCao)
+  - Fix wrong empty block height (#16861 by @ziyoung)
+  - Not throw error when calling toggleExpansion (#16304 by @yyjjqq94)
+  - Not trigger sort-change event when mounted (#17113 by @a631807682)
+  - Fix setCurrentRow unable to clear highlight row (#16879 by @ziyoung)
+  - Fix expand-row-keys not work when data is loaded asynchronously (#16899 by @ziyoung)
+  - set toggleAllSelection as instance property (#17137 by @ziyoung)
+- Tree
+  - Fix distance between label and checkbox (#16799 by @Hazlank)
+- Tabs
+  - Fix incorrect TabItem's position (#16520 by @victorting)
+  - Fix activated tab is out of visual range bug (#17033 by @nullptru)
+- Calendar
+  - Fix weekdays i18n issue (#16772 by @ubitoffee)
+  - fix locale error by (#17208 by @iamkun)
+- Cascader
+  - Fix CascaderPanel display error (#16716 by @zhangHongEn)
+  - Fix disable status and close button issue (#16224 by @yyjjqq94)
+- Input
+  - Fix Korean composition event (#15069 by @MoonHyuk)
+  - Fix click event of clear button not trigger when using v-loading (#16576 by @a631807682)
+- Select
+  - Not toggle dropdown when filtering (#17205 by @luckyCao)
+- Transfer
+  - Fix style error  (#17206 by @iamkun)
+- Dialog
+  - update sass var (#16365 by @haoranyu)
+- RadioGroup
+  - Not produce invalid HTML in table if "is" attribute is specify (#17070 by @nullptru)
+- Divider
+  - Support custom classes (#17078 by @island205)
+
+#### Optimization
+
+- Checkbox
+  - Improve screen reader experience (#16575 by @tylertrotter)
+- Docs
+  - Update changelog (#16773 by @SimonaliaChen)
+  - Update contributing guide (#14800 by @sinchang)
+  - Fix typo in Drawer docs (#16848 by @winkay)
+  - Update custom theme (#16983 by @iamkun)
+  - Add Esperanto translation (#16955 by @maxkoryukov)
+  - Update input-number document about change event (#16316 by @luckyCao)
+  - Update spanish doc 2.11.1 (#16961 by @Gonzalo2310)
+- I18n
+  - Remove translation of 'year' in catalan language as in the other languages (#14722 by @oscaralbareda)
+  - Update spanish changelog 2.10.0 and 2.10.1 (#16548 by @Gonzalo2310)
+  - Update ar.js (#16653 by @l3op)
+- Test
+  - Correct spelling error (#16672 by @boomler)
+  - Refactor unit test to use data-uri (#16847 by @a631807682)
+- Types
+  - Fix httprequest type (#16633 by @luckyCao)
+
 ### 2.11.1
 
 *2019-07-26*

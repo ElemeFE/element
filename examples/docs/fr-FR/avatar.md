@@ -1,17 +1,18 @@
 ## Avatar avatar
 
 Avatars can be used to represent people or objects. It supports images, Icons, or characters.
+Les avatars peuvent être utilisés pour représenter des personnes ou des objets. Les images, icônes et les caractères sont supportés.
 
 ### Basic
 
-use `shape` and `size` prop to set avatar's shape and size
+utilisez les prop `shape` et` size` pour définir la forme et la taille de l'avatar
 
 :::demo
 ```html
 <template>
   <el-row class="demo-avatar demo-basic">
     <el-col :span="12">
-      <div class="sub-title">circle</div>
+      <div class="sub-title">cercle</div>
       <div class="demo-basic--circle">
         <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
@@ -20,14 +21,14 @@ use `shape` and `size` prop to set avatar's shape and size
       </div>
     </el-col>  
     <el-col :span="12">
-      <div class="sub-title">square</div>
+      <div class="sub-title">carré</div>
       <div class="demo-basic--circle">
         <div class="block"><el-avatar shape="square" :size="50" :src="squareUrl"></el-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
           <el-avatar shape="square" :size="size" :src="squareUrl"></el-avatar>
         </div>
       </div>
-    </el-col> 
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -47,7 +48,7 @@ use `shape` and `size` prop to set avatar's shape and size
 
 ### Types
 
-It supports images, Icons, or characters
+Les images, icônes et les caractères sont supportés.
 
 :::demo
 ```html
@@ -67,9 +68,9 @@ It supports images, Icons, or characters
 ```
 :::
 
-### Fallback when image load error
+### fallback en cas d'erreur de chargement d'image
 
-fallback when image load error
+fallback en cas d'erreur de chargement d'image
 
 :::demo
 ```html
@@ -93,9 +94,9 @@ fallback when image load error
 ```
 :::
 
-### How the image fit its container
+### Comment l'image s'adapte à son conteneur
 
-Set how the image fit its container for an image avatar, same as [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
+Défini comment l'image s'adapte à son conteneur, pareil que [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
 
 :::demo
 ```html
@@ -123,23 +124,23 @@ Set how the image fit its container for an image avatar, same as [object-fit](ht
 
 ### Attributes
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Attribute      | Description          | Type      | Valeurs acceptées       | Default  |
 | ----------------- | -------------------------------- | --------------- | ------ | ------ |
-| icon              | set representation type to Icon, more info on Icon Component   | string          |        |        |
-| size              | set avatar size                     | number/string | number / large / medium / small | large  |
-| shape             | set avatar shape  | string |    circle / square     |   circle  |
-| src               | the address of the image for an image avatar | string |        |      |
-| srcSet            | A list of one or more strings separated by commas indicating a set of possible image sources for the user agent to use | string |        |      |
-| alt               | This attribute defines an alternative text description of the image | string |        |      |
-| fit               | set how the image fit its container for an image avatar | string |    fill / contain / cover / none / scale-down    |   cover   |
+| icon              | Défini le type de représentation sur Icon, plus d’informations sur le composant Icon   | string          |        |        |
+| size              | Défini la taille de l'avatar                     | number/string | number / large / medium / small | large  |
+| shape             | Défini la forme de l'avatar  | string |    circle / square     |   circle  |
+| src               | L'adresse de l'image pour un avatar image | string |        |      |
+| srcSet            | Une liste d'un ou plusieurs string séparés par des virgules indiquant un ensemble de sources d'images possibles que le user agent peut utiliser | string |        |      |
+| alt               | Cet attribut définit une description textuelle alternative de l'image | string |        |      |
+| fit               | Défini comment l'image s'adapte à son conteneur | string |    fill / contain / cover / none / scale-down    |   cover   |
 
-### Events
+### Évènements
 
-| Event Name | Description         | Parameters  |
+| Event Name | Description         | Paramètres  |
 | ------ | ------------------ | -------- |
-| error  | handler when img load error, return false to prevent default fallback behavior |(e: Event)  |
+| error  | handler en cas d'erreur de chargement de l'image, renvoie false pour éviter le fallback par défaut |(e: Event)  |
 
 ### Slot
 
-| Slot Name | Description | 
-| default  | customize avatar content |
+| Slot Name | Description |
+| default  | personnalise le contenu de l'avatar |

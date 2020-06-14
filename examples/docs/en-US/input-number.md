@@ -174,7 +174,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
-|step-strictly | whether input value can only be multiple of step | number   | — | false |
+|step-strictly | whether input value can only be multiple of step | boolean | — | false |
 |precision | precision of input value | number | — | — |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
@@ -188,7 +188,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 | Event Name | Description | Parameters |
 |----| ---- | -----|
-|change | triggers when the value changes | value after change |
+|change | triggers when the value changes | currentValue, oldValue |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 
