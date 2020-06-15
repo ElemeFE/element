@@ -51,8 +51,8 @@
     },
 
     created() {
-      this.$on('handleChange', value => {
-        this.$emit('change', value);
+      this.$on('handleChange', (value, lastVal) => {
+        this.$emit('change', value, lastVal);
       });
     },
     mounted() {

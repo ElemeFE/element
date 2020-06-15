@@ -134,6 +134,7 @@
 
     data() {
       return {
+        lastVal: '',
         textareaCalcStyle: {},
         hovering: false,
         focused: false,
@@ -367,7 +368,9 @@
         this.$nextTick(this.setNativeInputValue);
       },
       handleChange(event) {
-        this.$emit('change', event.target.value);
+        const lastVal = this.lastVal;
+        this.$emit('change', event.target.value, lastVal);
+        this.lastVal = event.target.value;
       },
       calcIconOffset(place) {
         let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);

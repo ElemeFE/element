@@ -502,9 +502,9 @@
         this.$nextTick(() => this.scrollToOption(this.selected));
       },
 
-      emitChange(val) {
+      emitChange(val, lastVal) {
         if (!valueEquals(this.value, val)) {
-          this.$emit('change', val);
+          this.$emit('change', val, lastVal);
         }
       },
 
@@ -622,9 +622,10 @@
       deletePrevTag(e) {
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
           const value = this.value.slice();
+          const valCopy = [].concat(value);
           value.pop();
           this.$emit('input', value);
-          this.emitChange(value);
+          this.emitChange(value, valCopy);
           this.$emit('remove-tag', this.selected[this.selected.length - 1]);
         }
       },
@@ -678,6 +679,7 @@
       handleOptionSelect(option, byClick) {
         if (this.multiple) {
           const value = (this.value || []).slice();
+          const valCopy = [].concat(value);
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
@@ -685,7 +687,7 @@
             value.push(option.value);
           }
           this.$emit('input', value);
-          this.emitChange(value);
+          this.emitChange(value, valCopy);
           if (optionIndex > -1) {
             this.$emit('remove-tag', option);
           }
@@ -697,7 +699,7 @@
           if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
-          this.emitChange(option.value);
+          this.emitChange(option.value, this.selected.value);
           this.visible = false;
         }
         this.isSilentBlur = byClick;
@@ -761,7 +763,7 @@
         event.stopPropagation();
         const value = this.multiple ? [] : '';
         this.$emit('input', value);
-        this.emitChange(value);
+        this.emitChange(value, this.selected.value);
         this.visible = false;
         this.$emit('clear');
       },
@@ -770,9 +772,10 @@
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.selectDisabled) {
           const value = this.value.slice();
+          const valCopy = [].concat(value);
           value.splice(index, 1);
           this.$emit('input', value);
-          this.emitChange(value);
+          this.emitChange(value, valCopy);
           this.$emit('remove-tag', tag);
         }
         event.stopPropagation();

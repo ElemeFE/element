@@ -123,9 +123,10 @@
 
     methods: {
       handleChange() {
+        const lastVal = this.model;
         this.$nextTick(() => {
-          this.$emit('change', this.model);
-          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
+          this.$emit('change', this.model, lastVal);
+          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', [this.model, lastVal]);
         });
       }
     }
