@@ -11,6 +11,7 @@
       ref="input"
       v-bind="[$props, $attrs]"
       @input="handleInput"
+      @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
       @clear="handleClear"
@@ -196,6 +197,9 @@
           return;
         }
         this.debouncedGetData(value);
+      },
+      handleChange(value) {
+        this.$emit('change', value);
       },
       handleFocus(event) {
         this.activated = true;
