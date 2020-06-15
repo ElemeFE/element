@@ -50,7 +50,7 @@ export default {
 
     getCellClass({ text, type}) {
       const classes = [type];
-      if (type === 'current') {
+      if (type === 'current' || (this.isInRange && type === 'next')) {
         const date = this.getFormateDate(text, type);
         if (date === this.selectedDay) {
           classes.push('is-selected');
