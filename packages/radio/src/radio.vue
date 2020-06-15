@@ -99,7 +99,9 @@
           } else {
             this.$emit('input', val);
           }
-          this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
+          this.$nextTick(() => {
+            this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
+          });
         }
       },
       _elFormItemSize() {
