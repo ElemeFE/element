@@ -79,6 +79,13 @@ export default {
     },
     onScroll() {
       const scrollTop = this.el.scrollTop;
+      if (!this.target && !scrollTop) {
+        if (document.documentElement.scrollTop) {
+          this.el = document.documentElement;
+        } else {
+          this.el = document.body;
+        }
+      }
       this.visible = scrollTop >= this.visibilityHeight;
     },
     handleClick(e) {
