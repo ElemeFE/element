@@ -13,7 +13,6 @@
   white-space: nowrap;
   outline: none;
   font-size: $--font-size-base;
-  margin-right: 30px;
   @include utils-user-select(none);
 
   @include when(bordered) {
@@ -80,8 +79,8 @@
     }
   }
 
-  &:last-child {
-    margin-right: 0;
+  & + .el-radio {
+    margin-left: 30px;
   }
 
   @include e(input) {
