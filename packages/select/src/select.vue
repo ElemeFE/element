@@ -77,6 +77,7 @@
       v-model="selectedLabel"
       type="text"
       :placeholder="currentPlaceholder"
+			:title="title"
       :name="name"
       :id="id"
       :autocomplete="autoComplete || autocomplete"
@@ -266,6 +267,7 @@
     props: {
       name: String,
       id: String,
+      title: String,
       value: {
         required: true
       },
