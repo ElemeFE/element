@@ -77,7 +77,7 @@
       v-model="selectedLabel"
       type="text"
       :placeholder="currentPlaceholder"
-			:title="title"
+      :title="title"
       :name="name"
       :id="id"
       :autocomplete="autoComplete || autocomplete"
