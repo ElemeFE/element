@@ -208,6 +208,38 @@
 ```
 :::
 
+### 可懒加载
+如果数据量比较大，一次性加载所有数据会有性能问题时，可以使用`lazy`属性懒加载数据
+:::demo 
+```html
+<template>
+  <el-transfer v-model="value" :data="data" :lazy="20"></el-transfer>
+</template>
+
+<script>
+  export default {
+    data() {
+      const generateData = _ => {
+        const data = [];
+        for (let i = 1; i <= 150; i++) {
+          data.push({
+            key: i,
+            label: `备选项 ${ i }`,
+            disabled: i % 4 === 0
+          });
+        }
+        return data;
+      };
+      return {
+        data: generateData(),
+        value: []
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -224,6 +256,7 @@
 | props | 数据源的字段别名 | object{key, label, disabled} | — | — |
 | left-default-checked | 初始状态下左侧列表的已勾选项的 key 数组 | array | — | [ ] |
 | right-default-checked | 初始状态下右侧列表的已勾选项的 key 数组 | array | — | [ ] |
+| lazy | 每次懒加载的数量, 值为 0 时关闭懒加载 | number | — | 0 |
 
 ### Slot
 | name | 说明 |

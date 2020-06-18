@@ -121,6 +121,10 @@
       targetOrder: {
         type: String,
         default: 'original'
+      },
+      lazy: {
+        type: Number,
+        default: 0
       }
     },
 
