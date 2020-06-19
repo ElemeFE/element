@@ -22,6 +22,7 @@
             <span class="el-date-picker__editor-wrap">
               <el-input
                 :placeholder="t('el.datepicker.selectDate')"
+                :readonly="!editable"
                 :value="visibleDate"
                 size="small"
                 @input="val => userInputDate = val"
@@ -32,6 +33,7 @@
                 ref="input"
                 @focus="timePickerVisible = true"
                 :placeholder="t('el.datepicker.selectTime')"
+                :readonly="!editable"
                 :value="visibleTime"
                 size="small"
                 @input="val => userInputTime = val"
