@@ -299,6 +299,7 @@
       routeToItem(item, onError) {
         let route = item.route || item.index;
         try {
+          if (this.$route.path === route) return;
           this.$router.push(route, () => {}, onError);
         } catch (e) {
           console.error(e);
