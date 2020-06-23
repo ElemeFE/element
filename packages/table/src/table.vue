@@ -555,11 +555,11 @@
         } else {
           if (this.showSummary) {
             return {
-              height: this.layout.tableHeight ? this.layout.tableHeight + 'px' : ''
+              height: this.layout.tableHeight ? (this.layout.scrollX ? (this.layout.tableHeight - this.layout.gutterWidth) : this.layout.tableHeight) + 'px' : ''
             };
           }
           return {
-            height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
+            height: this.layout.viewportHeight ? (this.layout.scrollX ? (this.layout.viewportHeight - this.layout.gutterWidth) : this.layout.viewportHeight) + 'px' : ''
           };
         }
       },
