@@ -28,6 +28,7 @@
     </span>
     <el-input
       ref="input"
+			:id="id"
       :value="displayValue"
       :placeholder="placeholder"
       :disabled="inputNumberDisabled"
@@ -68,6 +69,10 @@
       ElInput
     },
     props: {
+      id: {
+        type: String,
+        default: null
+      },
       step: {
         type: Number,
         default: 1
