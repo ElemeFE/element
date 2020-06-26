@@ -11,6 +11,7 @@
     <span
       class="el-input-number__decrease"
       role="button"
+      :title="buttonWords.decrease"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{'is-disabled': minDisabled}"
@@ -20,6 +21,7 @@
     <span
       class="el-input-number__increase"
       role="button"
+      :title="buttonWords.increase"
       v-if="controls"
       v-repeat-click="increase"
       :class="{'is-disabled': maxDisabled}"
@@ -28,7 +30,7 @@
     </span>
     <el-input
       ref="input"
-			:id="id"
+      :id="id"
       :value="displayValue"
       :placeholder="placeholder"
       :disabled="inputNumberDisabled"
@@ -71,6 +73,10 @@
     props: {
       id: {
         type: String,
+        default: null
+      },
+      buttonWords: {
+        type: Object,
         default: null
       },
       step: {
