@@ -11,7 +11,7 @@
     :aria-checked="value === label"
     :aria-disabled="isDisabled"
     :tabindex="tabIndex"
-    @keydown.space.stop.prevent="value = isDisabled ? value : label"
+    @keydown.space.stop.prevent="handleKeydownSpace"
   >
     <input
       class="el-radio-button__orig-radio"
@@ -104,6 +104,13 @@
     },
 
     methods: {
+      handleKeydownSpace() {
+        this.value = this.isDisabled ? this.value : this.label;
+        if (this.value === this.label) {
+          return;
+        }
+        this.handleChange();
+      },
       handleChange() {
         this.$nextTick(() => {
           this.dispatch('ElRadioGroup', 'handleChange', this.value);

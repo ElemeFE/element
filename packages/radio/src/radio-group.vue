@@ -1,12 +1,13 @@
 <template>
-  <component
-    :is="_elTag"
-    class="el-radio-group"
-    role="radiogroup"
-    @keydown="handleKeydown"
-  >
-    <slot></slot>
-  </component>
+    <component
+            :is="_elTag"
+            class="el-radio-group"
+            role="radiogroup"
+            @keydown="handleKeydown"
+            @keyup.space="handleKeydown"
+    >
+        <slot></slot>
+    </component>
 </template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
