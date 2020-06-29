@@ -1,27 +1,29 @@
 <template>
   <div
-    v-show="ready"
-    class="el-carousel__item"
-    :class="{
+      v-show="ready"
+      class="el-carousel__item"
+      :class="{
       'is-active': active,
       'el-carousel__item--card': $parent.type === 'card',
       'is-in-stage': inStage,
       'is-hover': hover,
       'is-animating': animating
     }"
-    @click="handleItemClick"
-    :style="itemStyle">
+      @click="handleItemClick"
+      :style="itemStyle">
+    <!--遮盖，index !=== activeIndex的-->
     <div
-      v-if="$parent.type === 'card'"
-      v-show="!active"
-      class="el-carousel__mask">
+        v-if="$parent.type === 'card'"
+        v-show="!active"
+        class="el-carousel__mask">
     </div>
     <slot></slot>
   </div>
 </template>
 
 <script>
-  import { autoprefixer } from 'element-ui/src/utils/util';
+  import {autoprefixer} from 'element-ui/src/utils/util';
+
   const CARD_SCALE = 0.83;
   export default {
     name: 'ElCarouselItem',
@@ -48,8 +50,10 @@
 
     methods: {
       processIndex(index, activeIndex, length) {
+        // 如果是最后一张都第一张
         if (activeIndex === 0 && index === length - 1) {
           return -1;
+          // 如果是第一张到对后一张
         } else if (activeIndex === length - 1 && index === 0) {
           return length;
         } else if (index < activeIndex - 1 && activeIndex - index >= length / 2) {
@@ -72,6 +76,7 @@
       },
 
       calcTranslate(index, activeIndex, isVertical) {
+        // 拿到容器的高度或宽度
         const distance = this.$parent.$el[isVertical ? 'offsetHeight' : 'offsetWidth'];
         return distance * (index - activeIndex);
       },
@@ -86,7 +91,9 @@
         if (index !== activeIndex && length > 2 && this.$parent.loop) {
           index = this.processIndex(index, activeIndex, length);
         }
+        // 如果是card
         if (parentType === 'card') {
+          // 垂直没有card模式
           if (parentDirection === 'vertical') {
             console.warn('[Element Warn][Carousel]vertical direction is not supported in card mode');
           }
@@ -97,6 +104,7 @@
         } else {
           this.active = index === activeIndex;
           const isVertical = parentDirection === 'vertical';
+          // item位移的距离,触发computed  itemStyle的更新
           this.translate = this.calcTranslate(index, activeIndex, isVertical);
         }
         this.ready = true;
@@ -118,10 +126,12 @@
 
       itemStyle() {
         const translateType = this.parentDirection === 'vertical' ? 'translateY' : 'translateX';
-        const value = `${translateType}(${ this.translate }px) scale(${ this.scale })`;
+        const value = `${translateType}(${this.translate}px) scale(${this.scale})`;
+        // 位移
         const style = {
           transform: value
         };
+        // 添加浏览器适配
         return autoprefixer(style);
       }
     },
