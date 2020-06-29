@@ -29,10 +29,30 @@ You can customise Popconfirm like:
   icon="el-icon-info"
   iconColor="red"
   title="Are you sure to delete this?"
+  @on-confirm="confirm"
+  @on-cancel="cancel"
 >
   <el-button slot="reference">Delete</el-button>
 </el-popconfirm>
 </template>
+<script>
+  export default {
+    methods: {
+      confirm() {
+         this.$message({
+              type: 'info',
+              message: `confirm`
+            });
+      },
+      cancel() {
+         this.$message({
+              type: 'info',
+              message: `cancel`
+            });
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -56,5 +76,5 @@ You can customise Popconfirm like:
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| onConfirm | triggers when click confirm button | — |
-| onCancel | triggers when click cancel button | — |
+| on-confirm | triggers when click confirm button | — |
+| on-cancel | triggers when click cancel button | — |
