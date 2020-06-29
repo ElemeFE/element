@@ -29,10 +29,32 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
   icon="el-icon-info"
   iconColor="red"
   title="这是一段内容确定删除吗？"
+  @on-confirm="confirm"
+  @on-cancel="cancel"
 >
   <el-button slot="reference">删除</el-button>
 </el-popconfirm>
 </template>
+
+<script>
+  export default {
+    methods: {
+      confirm() {
+         this.$message({
+              type: 'info',
+              message: `confirm`
+            });
+      },
+      cancel() {
+         this.$message({
+              type: 'info',
+              message: `cancel`
+            });
+      }
+    }
+  }
+</script>
+
 ```
 :::
 
@@ -56,5 +78,5 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| onConfirm | 点击确认按钮时触发 | — |
-| onCancel | 点击取消按钮时触发 | — |
+| on-confirm | 点击确认按钮时触发 | — |
+| on-cancel | 点击取消按钮时触发 | — |
