@@ -69,6 +69,14 @@ export default {
     }
   },
 
+  data:()=>({
+    isMouseDownInner: false
+    /* 
+      if `trigger:click` and user click inner current element
+      it shouldnt be closed [issue#19481](https://github.com/ElemeFE/element/issues/19481)
+    */
+  }),
+  
   computed: {
     tooltipId() {
       return `el-popover-${generateId()}`;
@@ -80,62 +88,21 @@ export default {
         return;
       }
       val ? this.$emit('show') : this.$emit('hide');
+    },
+    trigger(val){
+      this.cleanclear();
+      this.$nextTick(()=>{
+        this.init();
+      });
     }
   },
 
   mounted() {
-    let reference = this.referenceElm = this.reference || this.$refs.reference;
-    const popper = this.popper || this.$refs.popper;
-
-    if (!reference && this.$slots.reference && this.$slots.reference[0]) {
-      reference = this.referenceElm = this.$slots.reference[0].elm;
-    }
-    // 可访问性
-    if (reference) {
-      addClass(reference, 'el-popover__reference');
-      reference.setAttribute('aria-describedby', this.tooltipId);
-      reference.setAttribute('tabindex', this.tabindex); // tab序列
-      popper.setAttribute('tabindex', 0);
-
-      if (this.trigger !== 'click') {
-        on(reference, 'focusin', () => {
-          this.handleFocus();
-          const instance = reference.__vue__;
-          if (instance && typeof instance.focus === 'function') {
-            instance.focus();
-          }
-        });
-        on(popper, 'focusin', this.handleFocus);
-        on(reference, 'focusout', this.handleBlur);
-        on(popper, 'focusout', this.handleBlur);
-      }
-      on(reference, 'keydown', this.handleKeydown);
-      on(reference, 'click', this.handleClick);
-    }
-    if (this.trigger === 'click') {
-      on(reference, 'click', this.doToggle);
-      on(document, 'click', this.handleDocumentClick);
-    } else if (this.trigger === 'hover') {
-      on(reference, 'mouseenter', this.handleMouseEnter);
-      on(popper, 'mouseenter', this.handleMouseEnter);
-      on(reference, 'mouseleave', this.handleMouseLeave);
-      on(popper, 'mouseleave', this.handleMouseLeave);
-    } else if (this.trigger === 'focus') {
-      if (this.tabindex < 0) {
-        console.warn('[Element Warn][Popover]a negative taindex means that the element cannot be focused by tab key');
-      }
-      if (reference.querySelector('input, textarea')) {
-        on(reference, 'focusin', this.doShow);
-        on(reference, 'focusout', this.doClose);
-      } else {
-        on(reference, 'mousedown', this.doShow);
-        on(reference, 'mouseup', this.doClose);
-      }
-    }
+    this.init()
   },
 
   beforeDestroy() {
-    this.cleanup();
+    this.cleanclear();
   },
 
   deactivated() {
@@ -154,14 +121,21 @@ export default {
     },
     handleFocus() {
       addClass(this.referenceElm, 'focusing');
-      if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = true;
+      if (this.trigger === 'click' || this.trigger === 'focus') {
+        this.isMouseDownInner = true;
+        this.showPopper = true;
+      }
     },
     handleClick() {
       removeClass(this.referenceElm, 'focusing');
     },
     handleBlur() {
       removeClass(this.referenceElm, 'focusing');
-      if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = false;
+      if (this.trigger === 'click' || this.trigger === 'focus') {
+        if(!this.isMouseDownInner)
+          this.showPopper = false;
+        this.isMouseDownInner = false; // only effect while last tick click inner element
+      }
     },
     handleMouseEnter() {
       clearTimeout(this._timer);
@@ -214,22 +188,72 @@ export default {
       if (this.openDelay || this.closeDelay) {
         clearTimeout(this._timer);
       }
+    },
+    cleanclear(){
+      this.cleanup();
+      const reference = this.reference;
+
+      off(reference, 'click', this.doToggle);
+      off(reference, 'mouseup', this.doClose);
+      off(reference, 'mousedown', this.doShow);
+      off(reference, 'focusin', this.doShow);
+      off(reference, 'focusout', this.doClose);
+      off(reference, 'mousedown', this.doShow);
+      off(reference, 'mouseup', this.doClose);
+      off(reference, 'mouseleave', this.handleMouseLeave);
+      off(reference, 'mouseenter', this.handleMouseEnter);
+      off(document, 'click', this.handleDocumentClick);
+    },
+    init(){
+      let reference = this.referenceElm = this.reference || this.$refs.reference;
+      const popper = this.popper || this.$refs.popper;
+
+      if (!reference && this.$slots.reference && this.$slots.reference[0]) {
+        reference = this.referenceElm = this.$slots.reference[0].elm;
+      }
+      // 可访问性
+      if (reference) {
+        addClass(reference, 'el-popover__reference');
+        reference.setAttribute('aria-describedby', this.tooltipId);
+        reference.setAttribute('tabindex', this.tabindex); // tab序列
+        popper.setAttribute('tabindex', 0);
+
+        if (this.trigger !== 'click') {
+          on(reference, 'focusin', () => {
+            this.handleFocus();
+            const instance = reference.__vue__;
+            if (instance && typeof instance.focus === 'function') {
+              instance.focus();
+            }
+          });
+          on(popper, 'focusin', this.handleFocus);
+          on(reference, 'focusout', this.handleBlur);
+          on(popper, 'focusout', this.handleBlur);
+        }
+        on(reference, 'keydown', this.handleKeydown);
+        on(reference, 'click', this.handleClick);
+      }
+      if (this.trigger === 'click') {
+        on(reference, 'click', this.doToggle);
+        on(document, 'click', this.handleDocumentClick);
+      } else if (this.trigger === 'hover') {
+        on(reference, 'mouseenter', this.handleMouseEnter);
+        on(popper, 'mouseenter', this.handleMouseEnter);
+        on(reference, 'mouseleave', this.handleMouseLeave);
+        on(popper, 'mouseleave', this.handleMouseLeave);
+      } else if (this.trigger === 'focus') {
+        if (this.tabindex < 0) {
+          console.warn('[Element Warn][Popover]a negative taindex means that the element cannot be focused by tab key');
+        }
+        if (reference.querySelector('input, textarea')) {
+          on(reference, 'focusin', this.doShow);
+          on(reference, 'focusout', this.doClose);
+        } else {
+          on(reference, 'mousedown', this.doShow);
+          on(reference, 'mouseup', this.doClose);
+        }
+      }
     }
-  },
-
-  destroyed() {
-    const reference = this.reference;
-
-    off(reference, 'click', this.doToggle);
-    off(reference, 'mouseup', this.doClose);
-    off(reference, 'mousedown', this.doShow);
-    off(reference, 'focusin', this.doShow);
-    off(reference, 'focusout', this.doClose);
-    off(reference, 'mousedown', this.doShow);
-    off(reference, 'mouseup', this.doClose);
-    off(reference, 'mouseleave', this.handleMouseLeave);
-    off(reference, 'mouseenter', this.handleMouseEnter);
-    off(document, 'click', this.handleDocumentClick);
   }
 };
 </script>
