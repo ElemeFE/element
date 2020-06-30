@@ -130,7 +130,7 @@ export default {
     handleBlur() {
       removeClass(this.referenceElm, 'focusing');
       if (this.trigger === 'click' || this.trigger === 'focus') {
-        if(!this.isMouseDownInner) {
+        if (!this.isMouseDownInner) {
           this.showPopper = false;
         }
         this.isMouseDownInner = false; // only effect while last tick click inner element
