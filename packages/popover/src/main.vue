@@ -69,9 +69,9 @@ export default {
     }
   },
 
-  data:()=>({
+  data: ()=>({
     isMouseDownInner: false
-    /* 
+    /*
       if `trigger:click` and user click inner current element
       it shouldnt be closed [issue#19481](https://github.com/ElemeFE/element/issues/19481)
     */
@@ -96,7 +96,7 @@ export default {
   },
 
   mounted() {
-    this.init()
+    this.init();
   },
 
   beforeDestroy() {
@@ -130,8 +130,9 @@ export default {
     handleBlur() {
       removeClass(this.referenceElm, 'focusing');
       if (this.trigger === 'click' || this.trigger === 'focus') {
-        if(!this.isMouseDownInner)
+        if(!this.isMouseDownInner) {
           this.showPopper = false;
+        }
         this.isMouseDownInner = false; // only effect while last tick click inner element
       }
     },
