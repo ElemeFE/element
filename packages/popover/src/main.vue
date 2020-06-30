@@ -76,7 +76,7 @@ export default {
       it shouldnt be closed [issue#19481](https://github.com/ElemeFE/element/issues/19481)
     */
   }),
-  
+
   computed: {
     tooltipId() {
       return `el-popover-${generateId()}`;
@@ -89,11 +89,9 @@ export default {
       }
       val ? this.$emit('show') : this.$emit('hide');
     },
-    trigger(val){
+    trigger(val) {
       this.cleanclear();
-      this.$nextTick(()=>{
-        this.init();
-      });
+      this.init();
     }
   },
 
@@ -189,7 +187,7 @@ export default {
         clearTimeout(this._timer);
       }
     },
-    cleanclear(){
+    cleanclear() {
       this.cleanup();
       const reference = this.reference;
 
@@ -204,7 +202,7 @@ export default {
       off(reference, 'mouseenter', this.handleMouseEnter);
       off(document, 'click', this.handleDocumentClick);
     },
-    init(){
+    init() {
       let reference = this.referenceElm = this.reference || this.$refs.reference;
       const popper = this.popper || this.$refs.popper;
 
