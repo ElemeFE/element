@@ -300,8 +300,8 @@ export default {
   mounted() {
     const owner = this.owner;
     const parent = this.columnOrTableParent;
-    const children = this.isSubColumn ? parent.$el.children : parent.$refs.hiddenColumns.children;
-    const columnIndex = this.getColumnElIndex(children, this.$el);
+    const children = this.$parent.$children;
+    const columnIndex = this.getColumnElIndex(children, this);
 
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
   },
