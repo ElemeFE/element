@@ -1,9 +1,8 @@
-import Vue from 'vue';
 import {
   PopupManager
 } from 'element-ui/src/utils/popup';
 
-const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
+const PopperJS = require('./popper');
 const stop = e => e.stopPropagation();
 
 /**

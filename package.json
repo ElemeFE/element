@@ -21,7 +21,7 @@
     "deploy:extension": "cross-env NODE_ENV=production webpack --config build/webpack.extension.js",
     "dev:extension": "rimraf examples/extension/dist && cross-env NODE_ENV=development webpack --watch --config build/webpack.extension.js",
     "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
-    "dev:play": "npm run build:file && cross-env NODE_ENV=development PLAY_ENV=true webpack-dev-server --config build/webpack.demo.js",
+    "dev:play": "cross-env NODE_ENV=development PLAY_ENV=true webpack-dev-server --config build/webpack.demo.js",
     "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme",
     "i18n": "node build/bin/i18n.js",
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
@@ -68,10 +68,11 @@
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": "^3.0.0-beta.17"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
+    "@vue/compiler-sfc": "^3.0.0-beta.15",
     "algoliasearch": "^3.24.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -135,14 +136,14 @@
     "uglifyjs-webpack-plugin": "^2.1.1",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^1.0.1",
-    "vue": "2.5.21",
-    "vue-loader": "^15.7.0",
-    "vue-router": "^3.0.1",
+    "vue": "^3.0.0-beta.17",
+    "vue-loader": "^16.0.0-beta.4",
+    "vue-router": "^4.0.0-alpha.13",
     "vue-template-compiler": "2.5.21",
     "vue-template-es2015-compiler": "^1.6.0",
-    "webpack": "^4.14.0",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.11",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
     "webpack-node-externals": "^1.7.2"
   }
 }
