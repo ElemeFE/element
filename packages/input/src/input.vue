@@ -424,13 +424,11 @@
         if (this.type !== 'password') return;
         let valueCapsLock = event.keyCode ? event.keyCode : event.which;
         let valueShift = event.shiftKey ? event.shiftKey : (valueCapsLock === 16);
-        console.log(valueCapsLock, valueShift);
         if (((valueCapsLock >= 65 && valueCapsLock <= 90) && !valueShift) || ((valueCapsLock >= 97 && valueCapsLock <= 122) && valueShift)) {
           this.tooltipOpen = true;
         } else {
           this.tooltipOpen = false;
         }
-        console.log(this.tooltipOpen);
       }
     },
 
