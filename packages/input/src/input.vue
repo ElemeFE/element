@@ -20,25 +20,28 @@
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
-      <input
-        :tabindex="tabindex"
-        v-if="type !== 'textarea'"
-        class="el-input__inner"
-        v-bind="$attrs"
-        :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
-        :disabled="inputDisabled"
-        :readonly="readonly"
-        :autocomplete="autoComplete || autocomplete"
-        ref="input"
-        @compositionstart="handleCompositionStart"
-        @compositionupdate="handleCompositionUpdate"
-        @compositionend="handleCompositionEnd"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @change="handleChange"
-        :aria-label="label"
-      >
+      <el-tooltip :manual="true" v-model="tooltipOpen" content="大写锁定已打开" placement="bottom-start" effect="dark">
+        <input
+          :tabindex="tabindex"
+          v-if="type !== 'textarea'"
+          class="el-input__inner"
+          v-bind="$attrs"
+          :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
+          :disabled="inputDisabled"
+          :readonly="readonly"
+          :autocomplete="autoComplete || autocomplete"
+          ref="input"
+          @compositionstart="handleCompositionStart"
+          @compositionupdate="handleCompositionUpdate"
+          @compositionend="handleCompositionEnd"
+          @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+          :aria-label="label"
+          @keypress="detectCapsLock($event)"
+        >
+      </el-tooltip>
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
@@ -138,7 +141,8 @@
         hovering: false,
         focused: false,
         isComposing: false,
-        passwordVisible: false
+        passwordVisible: false,
+        tooltipOpen: false
       };
     },
 
@@ -415,6 +419,18 @@
           this.showPassword ||
           this.isWordLimitVisible ||
           (this.validateState && this.needStatusIcon);
+      },
+      detectCapsLock(event) {
+        if (this.type !== 'password') return;
+        let valueCapsLock = event.keyCode ? event.keyCode : event.which;
+        let valueShift = event.shiftKey ? event.shiftKey : (valueCapsLock === 16);
+        console.log(valueCapsLock, valueShift);
+        if (((valueCapsLock >= 65 && valueCapsLock <= 90) && !valueShift) || ((valueCapsLock >= 97 && valueCapsLock <= 122) && valueShift)) {
+          this.tooltipOpen = true;
+        } else {
+          this.tooltipOpen = false;
+        }
+        console.log(this.tooltipOpen);
       }
     },
 
