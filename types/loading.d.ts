@@ -1,12 +1,18 @@
-import Vue, { VNodeDirective, PluginObject } from 'vue'
+import Vue, {
+  VNodeDirective,
+  PluginObject,
+  CreateElement,
+  VNode,
+  context
+} from 'vue'
 
 /** Options used in Loading service */
 export interface LoadingServiceOptions {
-  /** The DOM node Loading needs to cover. Accepts a DOM object or a string. If it's a string, it will be passed to `document.querySelector` to get the corresponding DOM node */
-  target?: HTMLElement | string
-
-  /** Whether to make the mask append to the body element */
-  body?: boolean
+  /** The DOM node Loading needs to cover. Accepts a DOM object , a string or Vue instance. 
+   * If it's a string, it will be passed to `document.querySelector` to get the corresponding DOM node 
+   * If it's a Vue instance, it will be passed to $el property to get the corresponding DOM node 
+  * */
+  target?: HTMLElement | string | Vue
 
   /** Whether to show the loading mask in fullscreen */
   fullscreen?: boolean
@@ -25,6 +31,9 @@ export interface LoadingServiceOptions {
 
   /** Custom class name for Loading */
   customClass?: string
+
+  /** Custom render function to draw spinner */
+  render?: (h: CreateElement, context: context) => VNode | false
 }
 
 /** Loading Component */
@@ -38,8 +47,8 @@ export interface ElLoadingDirective extends VNodeDirective {
   name: 'loading',
   value: boolean,
   modifiers: {
-    body: boolean,
-    fullscreen: boolean
+    fullscreen: boolean,
+    lock: boolean
   }
 }
 

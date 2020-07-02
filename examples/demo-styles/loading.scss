@@ -1,3 +1,73 @@
 .demo-loading .el-table {
   border: none;
 }
+
+.btn-container{
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+@mixin loadingChild($index) {
+  $innerIndex: $index - 1;
+  $seconds: 1.2 - $innerIndex * 0.1;
+  &:nth-child(#{$index}){
+      transform: rotate($innerIndex* 30deg);
+      &:before{
+          animation-delay: -#{$seconds}s;
+      }
+  }
+}
+
+.custom-loading{
+  .custom-loading__spinner{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    .custom-loading__spinner--circle{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      &:before{
+          content: '';
+          display: block;
+          width: 15%;
+          height: 15%;
+          border-radius: 50%;
+          background-color: #409EFF;
+          margin: 0 auto;
+          animation: bounceDelay 1.2s ease-in-out both infinite;
+      }
+
+      @include loadingChild(2);
+      @include loadingChild(3);
+      @include loadingChild(4);
+      @include loadingChild(5);
+      @include loadingChild(6);
+      @include loadingChild(7);
+      @include loadingChild(8);
+      @include loadingChild(9);
+      @include loadingChild(10);
+      @include loadingChild(11);
+      @include loadingChild(12);
+    }
+  }
+}
+
+@keyframes bounceDelay{
+  0%{
+      transform: scale(1);
+  }
+  50%{
+      transform: scale(0);
+  }
+}
