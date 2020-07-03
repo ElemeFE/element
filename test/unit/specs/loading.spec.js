@@ -1,26 +1,28 @@
 import { getStyle } from '../../../src/utils/dom';
-import { createVue, destroyVM } from '../util';
+import { createVue } from '../util';
 import Vue from 'vue';
 import LoadingRaw from 'packages/loading';
-import loading from '../../../packages/loading';
 const Loading = LoadingRaw.service;
 
 describe('Loading', () => {
   let vm, loadingInstance, loadingInstance2;
-  /* afterEach(() => {
+  afterEach(() => {
     if(vm){
-      vm.close && vm.close();
-      vm.$destroy && vm.$destroy();
+      vm &&
+      vm.$destroy 
+      && vm.$destroy();
     }
     if (loadingInstance) {
-      loadingInstance.close();
+      loadingInstance &&
+      loadingInstance.$destroy &&
       loadingInstance.$destroy();
     }
     if (loadingInstance2) {
-      loadingInstance2.close();
+      loadingInstance2 &&
+      loadingInstance2.$destroy &&
       loadingInstance2.$destroy();
     }
-  }); */
+  });
 
   describe('as a directive', () => {
     it('create', done => {
@@ -40,7 +42,7 @@ describe('Loading', () => {
         expect(mask).to.exist;
         vm.loading = false;
         Vue.nextTick(() => {
-          const mask = vm.$el.querySelector('.el-loading-mask');
+          const mask = document.querySelector('.el-loading-mask');
           expect(mask).to.not.exist;
           done();
         });
@@ -139,7 +141,7 @@ describe('Loading', () => {
       }, true);
 
       Vue.nextTick(() => {
-        const text = vm.$el.querySelector('.el-loading-text');
+        const text = document.querySelector('.el-loading-text');
         expect(text).to.exist;
         expect(text.textContent).to.equal('拼命加载中');
         done();
@@ -159,7 +161,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        const mask = vm.$el.querySelector('.el-loading-mask');
+        const mask = document.querySelector('.el-loading-mask');
         expect(mask.classList.contains('loading-custom-class')).to.true;
         done();
       });
@@ -167,9 +169,14 @@ describe('Loading', () => {
   });
 
   describe('as a service', () => {
-    it('create', () => {
+    it('create', done => {
       loadingInstance = Loading();
-      expect(loadingInstance.$el.classList.contains('el-loading-mask')).to.exist;
+      Vue.nextTick(() => {
+        const mask = document.querySelector('.el-loading-mask');
+        expect(mask).to.exist;
+        expect(mask === loadingInstance.$el).to.true;
+        done();
+      });
     });
 
     it('close', () => {
@@ -230,7 +237,7 @@ describe('Loading', () => {
       loadingInstance = Loading({
         text: 'Loading...'
       });
-      const text = loadingInstance.$el.querySelector('.el-loading-text');
+      const text = document.querySelector('.el-loading-text');
       expect(text).to.exist;
       expect(text.textContent).to.equal('Loading...');
     });
@@ -238,6 +245,26 @@ describe('Loading', () => {
     it('customClass', () => {
       loadingInstance = Loading({ customClass: 'el-loading-custom-class' });
       expect(loadingInstance.$el.classList.contains('el-loading-custom-class')).to.true;
+    });
+
+    it('render',done => {
+      loadingInstance = Loading({
+        text: 'Loading...',
+        render(h){
+          return h('div',{
+            class: 'custom-inner-spiner'
+          });
+        }
+      });
+
+      Vue.nextTick(() => {
+        const mask = loadingInstance.$el;
+        const innerSpinner = mask.querySelector('.custom-inner-spiner');
+        const text = mask.querySelector('.el-loading-text');
+        expect(innerSpinner).to.exist;
+        expect(text).to.not.exist;
+        done();
+      });
     });
   });
 });

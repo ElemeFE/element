@@ -2,7 +2,7 @@
  * @Author: Yang Lin
  * @Description: loading 组件
  * @Date: 2020-06-16 20:20:42
- * @LastEditTime: 2020-07-02 20:55:16
+ * @LastEditTime: 2020-07-03 20:17:01
  * @FilePath: f:\sourcecode\element\packages\loading\src\main.vue
 --> 
 
@@ -12,6 +12,9 @@ import {
   removeClass
 } from 'element-ui/src/utils/dom';
 import { PopupManager } from 'element-ui/src/utils/popup';
+import {
+  beforeDestroyHookName
+} from './config';
 
 function genDefaultContent(h) {
   const {
@@ -86,7 +89,7 @@ export default {
     },
     // loading 图标
     spinner: String,
-    // 参考对象
+    // 覆盖对象
     target: {
       type: HTMLElement,
       required: true
@@ -173,6 +176,16 @@ export default {
         background
       }
     }, [child]);
+  },
+  beforeDestroy() {
+    this[beforeDestroyHookName] && this[beforeDestroyHookName]();
+    if (this.visible) {
+      const target = this.target;
+      this.visible = false;
+      removeClass(target, 'el-loading-parent--relative');
+      removeClass(target, 'el-loading-parent--hidden');
+      target.removeChild(this.$el);
+    }
   }
 };
 </script>
