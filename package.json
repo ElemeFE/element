@@ -139,7 +139,6 @@
     "vue": "^3.0.0-beta.17",
     "vue-loader": "^16.0.0-beta.4",
     "vue-router": "^4.0.0-alpha.13",
-    "vue-template-compiler": "2.5.21",
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
