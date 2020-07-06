@@ -84,7 +84,9 @@ const getScrollOptions = (el, vm) => {
   }, {});
 };
 
-const getElementTop = el => el.getBoundingClientRect().top;
+const getElementTop = el => {
+  return el === window ? 0 : el.getBoundingClientRect().top;
+}
 
 const handleScroll = function(cb) {
   const { el, vm, container, observer } = this[scope];
