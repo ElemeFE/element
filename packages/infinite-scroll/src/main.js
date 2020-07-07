@@ -84,9 +84,7 @@ const getScrollOptions = (el, vm) => {
   }, {});
 };
 
-const getElementTop = el => {
-  return el === window ? 0 : el.getBoundingClientRect().top;
-};
+const getElementTop = el => el.getBoundingClientRect().top;
 
 const handleScroll = function(cb) {
   const { el, vm, container, observer } = this[scope];
@@ -104,10 +102,10 @@ const handleScroll = function(cb) {
     const scrollBottom = container.scrollTop + getClientHeight(container);
     shouldTrigger = container.scrollHeight - scrollBottom <= distance;
   } else {
-    const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - getElementTop(container);
-    const offsetHeight = getOffsetHeight(container);
-    const borderBottom = Number.parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
-    shouldTrigger = heightBelowTop - offsetHeight + borderBottom <= distance;
+    const containerTop = container === window ? 0 : getElementTop(container);
+    const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - containerTop;
+    const offsetHeight = getClientHeight(container);
+    shouldTrigger = heightBelowTop - offsetHeight <= distance;
   }
 
   if (shouldTrigger && isFunction(cb)) {
