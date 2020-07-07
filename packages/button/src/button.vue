@@ -23,6 +23,8 @@
   </button>
 </template>
 <script>
+  import { useELEMENT } from '../../../src/index';
+  
   export default {
     name: 'ElButton',
 
@@ -62,7 +64,8 @@
         return (this.elFormItem || {}).elFormItemSize;
       },
       buttonSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        const ELEMENT = useELEMENT();
+        return this.size || this._elFormItemSize || (ELEMENT || {}).size;
       },
       buttonDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
