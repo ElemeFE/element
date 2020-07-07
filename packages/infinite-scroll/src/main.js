@@ -9,18 +9,18 @@ import {
   getScrollContainer
 } from 'element-ui/src/utils/dom';
 
-const getStyleComputedProperty = (element, property) => {
-  if (element === window) {
-    element = document.documentElement;
-  }
+// const getStyleComputedProperty = (element, property) => {
+//   if (element === window) {
+//     element = document.documentElement;
+//   }
 
-  if (element.nodeType !== 1) {
-    return [];
-  }
-  // NOTE: 1 DOM access here
-  const css = window.getComputedStyle(element, null);
-  return property ? css[property] : css;
-};
+//   if (element.nodeType !== 1) {
+//     return [];
+//   }
+//   // NOTE: 1 DOM access here
+//   const css = window.getComputedStyle(element, null);
+//   return property ? css[property] : css;
+// };
 
 const entries = (obj) => {
   return Object.keys(obj || {})
