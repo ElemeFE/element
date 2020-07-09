@@ -16,19 +16,19 @@ then
   VERSION=$VERSION npm run dist
 
   # ssr test
-  node test/ssr/require.test.js            
+  node test/ssr/require.test.js
 
   # publish theme
-  echo "Releasing theme-chalk $VERSION ..."
-  cd packages/theme-chalk
-  npm version $VERSION --message "[release] $VERSION"
-  if [[ $VERSION =~ "beta" ]]
-  then
-    npm publish --tag beta
-  else
-    npm publish
-  fi
-  cd ../..
+  # echo "Releasing theme-chalk $VERSION ..."
+  # cd packages/theme-chalk
+  # npm version $VERSION --message "[release] $VERSION"
+  # if [[ $VERSION =~ "beta" ]]
+  # then
+  #   npm publish --tag beta
+  # else
+  #   npm publish
+  # fi
+  # cd ../..
 
   # commit
   git add -A
@@ -36,11 +36,11 @@ then
   npm version $VERSION --message "[release] $VERSION"
 
   # publish
-  git push eleme master
-  git push eleme refs/tags/v$VERSION
+  git push origin master
+  git push origin refs/tags/v$VERSION
   git checkout dev
   git rebase master
-  git push eleme dev
+  git push origin dev
 
   if [[ $VERSION =~ "beta" ]]
   then
