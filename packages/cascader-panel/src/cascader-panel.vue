@@ -316,7 +316,9 @@ export default {
             }
 
             if (this.loadCount === this.checkedValue.length) {
-              this.$parent.computePresentText();
+              if (this.$parent.computePresentText) {
+                this.$parent.computePresentText();
+              }
             }
           }
         }
