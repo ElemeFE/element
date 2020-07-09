@@ -369,7 +369,7 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkTimeWithinRange(new Date())) {
+        if (this.isValidValue(new Date())) {
           this.date = new Date();
           this.emit(this.date);
         }
@@ -445,7 +445,7 @@
         while (Math.abs(now - newDate.getTime()) <= year) {
           const map = mapping[mode];
           map.offset(newDate, map[keyCode]);
-          if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
+          if (!this.isValidDate(newDate)) {
             continue;
           }
           this.date = newDate;
@@ -468,7 +468,7 @@
       handleVisibleDateChange(value) {
         const date = parseDate(value, this.dateFormat);
         if (date) {
-          if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
+          if (!this.isValidDate(date)) {
             return;
           }
           this.date = modifyTime(date, this.date.getHours(), this.date.getMinutes(), this.date.getSeconds());
@@ -479,11 +479,15 @@
       },
 
       isValidValue(value) {
-        return value && !isNaN(value) && (
+        return this.isValidDate(value) && this.checkTimeWithinRange(value);
+      },
+
+      isValidDate(date) {
+        return date && !isNaN(date) && (
           typeof this.disabledDate === 'function'
-            ? !this.disabledDate(value)
+            ? !this.disabledDate(date)
             : true
-        ) && this.checkTimeWithinRange(value);
+        );
       },
 
       getDefaultValue() {
