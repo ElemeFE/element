@@ -1,12 +1,11 @@
 {
-  "name": "element-ui",
+  "name": "belloment-ui",
   "version": "2.13.2",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
-    "src",
-    "packages",
+    "packages/theme-chalk",
     "types"
   ],
   "typings": "types/index.d.ts",
@@ -43,10 +42,6 @@
       ]
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
-  },
   "homepage": "http://element.eleme.io",
   "keywords": [
     "eleme",
@@ -54,9 +49,6 @@
     "components"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ElemeFE/element/issues"
-  },
   "unpkg": "lib/index.js",
   "style": "lib/theme-chalk/index.css",
   "dependencies": {
