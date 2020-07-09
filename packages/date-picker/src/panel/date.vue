@@ -342,7 +342,7 @@
             ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
             : modifyWithTimeString(value, this.defaultTime);
           // change default time while out of selectableRange
-          if (!this.checkDateWithinRange(newDate)) {
+          if (!this.checkTimeWithinRange(newDate)) {
             newDate = modifyDate(this.selectableRange[0][0], value.getFullYear(), value.getMonth(), value.getDate());
           }
           this.date = newDate;
@@ -369,7 +369,7 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkTimeWithinRange(new Date())) {
           this.date = new Date();
           this.emit(this.date);
         }
@@ -456,7 +456,7 @@
 
       handleVisibleTimeChange(value) {
         const time = parseDate(value, this.timeFormat);
-        if (time && this.checkDateWithinRange(time)) {
+        if (time && this.checkTimeWithinRange(time)) {
           this.date = modifyDate(time, this.year, this.month, this.monthDate);
           this.userInputTime = null;
           this.$refs.timepicker.value = this.date;
@@ -483,7 +483,7 @@
           typeof this.disabledDate === 'function'
             ? !this.disabledDate(value)
             : true
-        ) && this.checkDateWithinRange(value);
+        ) && this.checkTimeWithinRange(value);
       },
 
       getDefaultValue() {
@@ -492,7 +492,7 @@
         return this.defaultValue ? new Date(this.defaultValue) : new Date();
       },
 
-      checkDateWithinRange(date) {
+      checkTimeWithinRange(date) {
         return this.selectableRange.length > 0
           ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
           : true;
