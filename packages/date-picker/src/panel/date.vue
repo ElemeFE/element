@@ -105,7 +105,7 @@
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :cell-class-name="cellClassName"
-              :disabled-date="disabledDate || dateOutOfRange">
+              :disabled-date="disabledDate || (minimum || maximum ? dateOutOfRange : '')">
             </date-table>
             <year-table
               v-show="currentView === 'year'"
@@ -113,7 +113,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate || dateOutOfRange">
+              :disabled-date="disabledDate || (minimum || maximum ? dateOutOfRange : '')">
             </year-table>
             <month-table
               v-show="currentView === 'month'"
@@ -121,7 +121,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate || dateOutOfRange">
+              :disabled-date="disabledDate || (minimum || maximum ? dateOutOfRange : '')">
             </month-table>
           </div>
         </div>
