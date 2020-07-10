@@ -1,8 +1,8 @@
 import Aside from './src/main';
 
 /* istanbul ignore next */
-Aside.install = function(Vue) {
-  Vue.component(Aside.name, Aside);
+Aside.install = function(app) {
+  app.component(Aside.name, Aside);
 };
 
 export default Aside;

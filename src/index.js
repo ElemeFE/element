@@ -48,7 +48,7 @@ import Button from '../packages/button/index.js';
 // import Loading from '../packages/loading/index.js';
 // import Icon from '../packages/icon/index.js';
 import Row from '../packages/row/index.js';
-// import Col from '../packages/col/index.js';
+import Col from '../packages/col/index.js';
 // import Upload from '../packages/upload/index.js';
 // import Progress from '../packages/progress/index.js';
 // import Spinner from '../packages/spinner/index.js';
@@ -66,14 +66,14 @@ import Row from '../packages/row/index.js';
 // import Cascader from '../packages/cascader/index.js';
 // import ColorPicker from '../packages/color-picker/index.js';
 // import Transfer from '../packages/transfer/index.js';
-// import Container from '../packages/container/index.js';
-// import Header from '../packages/header/index.js';
-// import Aside from '../packages/aside/index.js';
-// import Main from '../packages/main/index.js';
-// import Footer from '../packages/footer/index.js';
+import Container from '../packages/container/index.js';
+import Header from '../packages/header/index.js';
+import Aside from '../packages/aside/index.js';
+import Main from '../packages/main/index.js';
+import Footer from '../packages/footer/index.js';
 // import Timeline from '../packages/timeline/index.js';
 // import TimelineItem from '../packages/timeline-item/index.js';
-// import Link from '../packages/link/index.js';
+import Link from '../packages/link/index.js';
 // import Divider from '../packages/divider/index.js';
 // import Image from '../packages/image/index.js';
 // import Calendar from '../packages/calendar/index.js';
@@ -130,8 +130,8 @@ const components = [
   // Alert,
   // Slider,
   // Icon,
-  Row
-  // Col,
+  Row,
+  Col,
   // Upload,
   // Progress,
   // Spinner,
@@ -148,14 +148,14 @@ const components = [
   // Cascader,
   // ColorPicker,
   // Transfer,
-  // Container,
-  // Header,
-  // Aside,
-  // Main,
-  // Footer,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
   // Timeline,
   // TimelineItem,
-  // Link,
+  Link
   // Divider,
   // Image,
   // Calendar,
@@ -262,8 +262,8 @@ export default {
   // Notification,
   // Slider,
   // Icon,
-  Row
-  // Col,
+  Row,
+  Col,
   // Upload,
   // Progress,
   // Spinner,
@@ -281,14 +281,14 @@ export default {
   // Cascader,
   // ColorPicker,
   // Transfer,
-  // Container,
-  // Header,
-  // Aside,
-  // Main,
-  // Footer,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
   // Timeline,
   // TimelineItem,
-  // Link,
+  Link
   // Divider,
   // Image,
   // Calendar,

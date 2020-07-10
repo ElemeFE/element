@@ -1,4 +1,11 @@
-import { computed, h } from 'vue';
+import { computed, h, inject, provide } from 'vue';
+
+// eslint-disable-next-line no-undef
+const gutterSymbol = Symbol();
+
+export function useGutter() {
+  return inject(gutterSymbol);
+}
 
 export default {
   name: 'ElRow',
@@ -33,6 +40,8 @@ export default {
 
       return ret;
     });
+
+    provide(gutterSymbol, props.gutter);
 
     return () => h(props.tag, {
       class: [
