@@ -261,6 +261,8 @@ export default {
       }
     },
     handleExpand(node, silent) {
+      if (!node) return;
+
       const { activePath } = this;
       const { level } = node;
       const path = activePath.slice(0, level - 1);
