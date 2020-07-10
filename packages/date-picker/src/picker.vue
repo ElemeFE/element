@@ -389,6 +389,8 @@ export default {
     rangeSeparator: {
       default: '-'
     },
+    minimum: Date,
+    maximum: Date,
     pickerOptions: {},
     unlinkPanels: Boolean,
     validateEvent: {
@@ -842,6 +844,17 @@ export default {
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
       this.picker.toggleAmPm = this.toggleAmPm || false;
+
+      this.picker.minimum = this.minimum || null;
+      this.$watch('minimum', (minimum) => {
+        this.picker.minimum = minimum || null;
+      });
+
+      this.picker.maximum = this.maximum || null;
+      this.$watch('maximum', (maximum) => {
+        this.picker.maximum = maximum || null;
+      });
+
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
