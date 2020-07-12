@@ -107,10 +107,10 @@ export default {
       hasCheckedFormat: '{checked}/{total} выбрано'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'Ошибка'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Назад'
     },
     popconfirm: {
       confirmButtonText: 'OK',
