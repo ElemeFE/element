@@ -171,7 +171,9 @@
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
       this.table.bodyWrapper.addEventListener('scroll', () => {
-        this.updatePopper();
+        if (this.showPopper) {
+          this.updatePopper();
+        }
       });
 
       this.$watch('showPopper', (value) => {
