@@ -56,6 +56,15 @@ export declare class ElCascaderPanel<V = any, D = CascaderOption> extends Elemen
   /** Selected value */
   value: V | V[]
 
+  /** lazyload repeat count */
+  loadCount: number
+
+  /** current active node path */
+  activePath: []
+
+  /** lazy load */
+  lazyLoad()
+
   /** Data of the options */
   options: D[]
 
