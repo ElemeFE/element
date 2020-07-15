@@ -422,12 +422,13 @@
           dropType = 'none';
         }
 
+        const nodeContentPosition = dropNode.$el.querySelector('.el-tree-node__content').getBoundingClientRect();
         const iconPosition = dropNode.$el.querySelector('.el-tree-node__expand-icon').getBoundingClientRect();
         const dropIndicator = this.$refs.dropIndicator;
         if (dropType === 'before') {
-          indicatorTop = iconPosition.top - treePosition.top;
+          indicatorTop = nodeContentPosition.top - treePosition.top;
         } else if (dropType === 'after') {
-          indicatorTop = iconPosition.bottom - treePosition.top;
+          indicatorTop = nodeContentPosition.bottom - treePosition.top;
         }
         dropIndicator.style.top = indicatorTop + 'px';
         dropIndicator.style.left = (iconPosition.right - treePosition.left) + 'px';
