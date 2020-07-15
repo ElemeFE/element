@@ -1,6 +1,6 @@
 import { VNode } from 'vue';
 import { ElementUIComponent, ElementUIComponentSize } from './component'
-import { CascaderOption, CascaderProps, CascaderNode } from './cascader-panel';
+import { CascaderOption, CascaderProps, CascaderNode, ElCascaderPanel } from './cascader-panel';
 
 export { CascaderOption, CascaderProps, CascaderNode };
 
@@ -18,6 +18,9 @@ export interface CascaderSlots {
 export declare class ElCascader<V = any, D = CascaderOption> extends ElementUIComponent {
   /** Data of the options */
   options: CascaderOption[]
+
+  /** panel ref */
+  panel: ElCascaderPanel
 
   /** Configuration options */
   props: CascaderProps<V, D>
@@ -60,6 +63,9 @@ export declare class ElCascader<V = any, D = CascaderOption> extends ElementUICo
 
   /** Hook function before filtering with the value to be filtered as its parameter */
   beforeFilter: (value: string) => boolean | Promise<any>
+
+  /** get checked node list */
+  getCheckedNodes: () => []
 
   $slots: CascaderSlots
 }
