@@ -11,6 +11,7 @@
     <span
       class="el-input-number__decrease"
       role="button"
+      :title="t('el.spinner.decrease')"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{'is-disabled': minDisabled}"
@@ -20,6 +21,7 @@
     <span
       class="el-input-number__increase"
       role="button"
+      :title="t('el.spinner.increase')"
       v-if="controls"
       v-repeat-click="increase"
       :class="{'is-disabled': maxDisabled}"
@@ -28,6 +30,7 @@
     </span>
     <el-input
       ref="input"
+      :id="id"
       :value="displayValue"
       :placeholder="placeholder"
       :disabled="inputNumberDisabled"
@@ -49,10 +52,11 @@
   import ElInput from 'element-ui/packages/input';
   import Focus from 'element-ui/src/mixins/focus';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import Locale from 'element-ui/src/mixins/locale';
 
   export default {
     name: 'ElInputNumber',
-    mixins: [Focus('input')],
+    mixins: [Focus('input'), Locale ],
     inject: {
       elForm: {
         default: ''
@@ -68,6 +72,10 @@
       ElInput
     },
     props: {
+      id: {
+        type: String,
+        default: null
+      },
       step: {
         type: Number,
         default: 1

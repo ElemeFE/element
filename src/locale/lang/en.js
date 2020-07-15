@@ -115,6 +115,10 @@ export default {
     popconfirm: {
       confirmButtonText: 'Yes',
       cancelButtonText: 'No'
+    },
+    spinner: {
+      increase: 'increase',
+      decrease: 'decrease'
     }
   }
 };
