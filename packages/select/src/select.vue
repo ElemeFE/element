@@ -62,7 +62,7 @@
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
-        @keydown.tab="visible = false"
+        @keydown.tab="handleTabKey"
         @compositionstart="handleComposition"
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
@@ -540,6 +540,10 @@
       },
 
       handleTabKey(e) {
+        if (this.visible) {
+          e.preventDefault();
+        }
+        this.selectOption(e);
         this.visible = false;
       },
 
