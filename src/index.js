@@ -14,9 +14,9 @@ import { inject } from 'vue';
 // import MenuItemGroup from '../packages/menu-item-group/index.js';
 // import Input from '../packages/input/index.js';
 // import InputNumber from '../packages/input-number/index.js';
-// import Radio from '../packages/radio/index.js';
-// import RadioGroup from '../packages/radio-group/index.js';
-// import RadioButton from '../packages/radio-button/index.js';
+import Radio from '../packages/radio/index.js';
+import RadioGroup from '../packages/radio-group/index.js';
+import RadioButton from '../packages/radio-button/index.js';
 // import Checkbox from '../packages/checkbox/index.js';
 // import CheckboxButton from '../packages/checkbox-button/index.js';
 // import CheckboxGroup from '../packages/checkbox-group/index.js';
@@ -100,9 +100,9 @@ const components = [
   // MenuItemGroup,
   // Input,
   // InputNumber,
-  // Radio,
-  // RadioGroup,
-  // RadioButton,
+  Radio,
+  RadioGroup,
+  RadioButton,
   // Checkbox,
   // CheckboxButton,
   // CheckboxGroup,

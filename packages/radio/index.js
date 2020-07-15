@@ -1,8 +1,8 @@
 import Radio from './src/radio';
 
 /* istanbul ignore next */
-Radio.install = function(Vue) {
-  Vue.component(Radio.name, Radio);
+Radio.install = function(app) {
+  app.component(Radio.name, Radio);
 };
 
 export default Radio;
