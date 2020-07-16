@@ -52,15 +52,19 @@
             <button
               type="button"
               @click="prevYear"
+              @mousedown="prevYearMousedown"
               :aria-label="t(`el.datepicker.prevYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left"
+              :class="{ disabled: !canSelectPrevYear }">
             </button>
             <button
               type="button"
               @click="prevMonth"
+              @mousedown="prevMonthMousedown"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left"
+              :class="{ disabled: !canSelectPrevMonth }">
             </button>
             <span
               @click="showYearPicker"
@@ -75,15 +79,19 @@
             <button
               type="button"
               @click="nextYear"
+              @mousedown="nextYearMousedown"
               :aria-label="t(`el.datepicker.nextYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
+              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right"
+              :class="{ disabled: !canSelectNextYear }">
             </button>
             <button
               type="button"
               @click="nextMonth"
+              @mousedown="nextMonthMousedown"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
+              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right"
+              :class="{ disabled: !canSelectNextMonth }">
             </button>
           </div>
 
@@ -97,7 +105,7 @@
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
               :cell-class-name="cellClassName"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate || (minimum || maximum ? dateOutOfRange : '')">
             </date-table>
             <year-table
               v-show="currentView === 'year'"
@@ -105,7 +113,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate || (minimum || maximum ? dateOutOfRange : '')">
             </year-table>
             <month-table
               v-show="currentView === 'month'"
@@ -113,7 +121,7 @@
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
               :date="date"
-              :disabled-date="disabledDate">
+              :disabled-date="disabledDate || (minimum || maximum ? dateOutOfRange : '')">
             </month-table>
           </div>
         </div>
@@ -156,6 +164,7 @@
     prevYear,
     nextYear,
     prevMonth,
+    getPrevMonthLastDays,
     nextMonth,
     changeYearMonthAndClampDate,
     extractDateFormat,
@@ -276,26 +285,62 @@
       // },
 
       prevMonth() {
-        this.date = prevMonth(this.date);
+        if (this.canSelectPrevMonth) {
+          this.date = prevMonth(this.date);
+        }
+      },
+
+      prevMonthMousedown(ev) {
+        if (!this.canSelectPrevMonth) {
+          // Cancel the default behavior to prevent the disabled button from being focused
+          ev.preventDefault();
+        }
       },
 
       nextMonth() {
-        this.date = nextMonth(this.date);
+        if (this.canSelectNextMonth) {
+          this.date = nextMonth(this.date);
+        }
+      },
+
+      nextMonthMousedown(ev) {
+        if (!this.canSelectNextMonth) {
+          // Cancel the default behavior to prevent the disabled button from being focused
+          ev.preventDefault();
+        }
       },
 
       prevYear() {
-        if (this.currentView === 'year') {
-          this.date = prevYear(this.date, 10);
-        } else {
-          this.date = prevYear(this.date);
+        if (this.canSelectPrevYear) {
+          if (this.currentView === 'year') {
+            this.date = prevYear(this.date, 10);
+          } else {
+            this.date = prevYear(this.date);
+          }
+        }
+      },
+
+      prevYearMousedown(ev) {
+        if (!this.canSelectPrevYear) {
+          // Cancel the default behavior to prevent the disabled button from being focused
+          ev.preventDefault();
         }
       },
 
       nextYear() {
-        if (this.currentView === 'year') {
-          this.date = nextYear(this.date, 10);
-        } else {
-          this.date = nextYear(this.date);
+        if (this.canSelectNextYear) {
+          if (this.currentView === 'year') {
+            this.date = nextYear(this.date, 10);
+          } else {
+            this.date = nextYear(this.date);
+          }
+        }
+      },
+
+      nextYearMousedown(ev) {
+        if (!this.canSelectNextYear) {
+          // Cancel the default behavior to prevent the disabled button from being focused
+          ev.preventDefault();
         }
       },
 
@@ -342,7 +387,7 @@
             ? modifyDate(this.value, value.getFullYear(), value.getMonth(), value.getDate())
             : modifyWithTimeString(value, this.defaultTime);
           // change default time while out of selectableRange
-          if (!this.checkDateWithinRange(newDate)) {
+          if (!this.checkTimeWithinRange(newDate)) {
             newDate = modifyDate(this.selectableRange[0][0], value.getFullYear(), value.getMonth(), value.getDate());
           }
           this.date = newDate;
@@ -369,7 +414,7 @@
       changeToNow() {
         // NOTE: not a permanent solution
         //       consider disable "now" button in the future
-        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+        if (this.isValidValue(new Date())) {
           this.date = new Date();
           this.emit(this.date);
         }
@@ -445,7 +490,7 @@
         while (Math.abs(now - newDate.getTime()) <= year) {
           const map = mapping[mode];
           map.offset(newDate, map[keyCode]);
-          if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
+          if (!this.isValidDate(newDate)) {
             continue;
           }
           this.date = newDate;
@@ -456,7 +501,7 @@
 
       handleVisibleTimeChange(value) {
         const time = parseDate(value, this.timeFormat);
-        if (time && this.checkDateWithinRange(time)) {
+        if (time && this.checkTimeWithinRange(time)) {
           this.date = modifyDate(time, this.year, this.month, this.monthDate);
           this.userInputTime = null;
           this.$refs.timepicker.value = this.date;
@@ -468,7 +513,7 @@
       handleVisibleDateChange(value) {
         const date = parseDate(value, this.dateFormat);
         if (date) {
-          if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
+          if (!this.isValidDate(date)) {
             return;
           }
           this.date = modifyTime(date, this.date.getHours(), this.date.getMinutes(), this.date.getSeconds());
@@ -479,11 +524,25 @@
       },
 
       isValidValue(value) {
-        return value && !isNaN(value) && (
-          typeof this.disabledDate === 'function'
-            ? !this.disabledDate(value)
-            : true
-        ) && this.checkDateWithinRange(value);
+        return this.isValidDate(value) && this.checkTimeWithinRange(value);
+      },
+
+      isValidDate(date) {
+        if (date && !isNaN(date)) {
+          if (typeof this.disabledDate === 'function') {
+            return !this.disabledDate(date);
+          } else if (this.minimum || this.maximum) {
+            return !this.dateOutOfRange(date);
+          } else {
+            return true;
+          }
+        } else {
+          return false;
+        }
+      },
+
+      dateOutOfRange(date) {
+        return (this.maximum && date > this.maximum) || (this.minimum && date < this.minimum);
       },
 
       getDefaultValue() {
@@ -492,7 +551,7 @@
         return this.defaultValue ? new Date(this.defaultValue) : new Date();
       },
 
-      checkDateWithinRange(date) {
+      checkTimeWithinRange(date) {
         return this.selectableRange.length > 0
           ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
           : true;
@@ -516,6 +575,8 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
+        minimum: '',
+        maximum: '',
         cellClassName: '',
         selectableRange: [],
         firstDayOfWeek: 7,
@@ -562,6 +623,59 @@
           return this.userInputDate;
         } else {
           return formatDate(this.value || this.defaultValue, this.dateFormat);
+        }
+      },
+
+      canSelectPrevMonth() {
+        if (typeof this.disabledDate === 'function') {
+          // If 'disabledDate' is defined, then minimum is ignored
+          return true;
+        } else if (this.minimum) {
+          // If minimum is defined, ensure that the last day of the previous month is not before the minimum
+          let prevMonthLastDay = getPrevMonthLastDays(this.date, 1)[0];
+          let lastDayOfPrevMonth = this.date.getMonth() > 0 ? new Date(this.date.getFullYear(), this.date.getMonth() - 1, prevMonthLastDay) : new Date(this.date.getFullYear() - 1, 11, prevMonthLastDay);
+          return lastDayOfPrevMonth >= this.minimum;
+        } else {
+          return true;
+        }
+      },
+
+      canSelectPrevYear() {
+        if (typeof this.disabledDate === 'function') {
+          // If 'disabledDate' is defined, then minimum is ignored
+          return true;
+        } else if (this.minimum) {
+          // If minimum is defined, ensure that the last day of the previous year is not before the minimum
+          let lastDayOfPrevYear = new Date(this.date.getFullYear() - 1, 11, 31);
+          return lastDayOfPrevYear >= this.minimum;
+        } else {
+          return true;
+        }
+      },
+
+      canSelectNextMonth() {
+        if (typeof this.disabledDate === 'function') {
+          // If 'disabledDate' is defined, then minimum is ignored
+          return true;
+        } else if (this.maximum) {
+          // If maximum is defined, ensure that the first day of the next month is not after the maximum
+          let firstDayOfNextMonth = this.date.getMonth() < 11 ? new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1) : new Date(this.date.getFullYear() + 1, 0, 1);
+          return firstDayOfNextMonth <= this.maximum;
+        } else {
+          return true;
+        }
+      },
+
+      canSelectNextYear() {
+        if (typeof this.disabledDate === 'function') {
+          // If 'disabledDate' is defined, then minimum is ignored
+          return true;
+        } else if (this.maximum) {
+          // If maximum is defined, ensure that the first day of the next year is not after the maximum
+          let firstDayOfNextYear = new Date(this.date.getFullYear() + 1, 0, 1);
+          return firstDayOfNextYear <= this.maximum;
+        } else {
+          return true;
         }
       },
 

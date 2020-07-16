@@ -389,6 +389,8 @@ export default {
     rangeSeparator: {
       default: '-'
     },
+    minimum: Date,
+    maximum: Date,
     pickerOptions: {},
     unlinkPanels: Boolean,
     validateEvent: {
@@ -407,7 +409,9 @@ export default {
       showClose: false,
       userInput: null,
       valueOnOpen: null, // value when picker opens, used to determine whether to emit change
-      unwatchPickerOptions: null
+      unwatchPickerOptions: null,
+      unwatchPickerMin: null,
+      unwatchPickerMax: null
     };
   },
 
@@ -842,6 +846,17 @@ export default {
       this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
       this.picker.toggleAmPm = this.toggleAmPm || false;
+
+      this.picker.minimum = this.minimum || null;
+      this.unwatchPickerMin = this.$watch('minimum', (minimum) => {
+        this.picker.minimum = minimum || null;
+      });
+
+      this.picker.maximum = this.maximum || null;
+      this.unwatchPickerMax = this.$watch('maximum', (maximum) => {
+        this.picker.maximum = maximum || null;
+      });
+
       this.$watch('format', (format) => {
         this.picker.format = format;
       });
@@ -902,6 +917,14 @@ export default {
         this.picker.$off();
         if (typeof this.unwatchPickerOptions === 'function') {
           this.unwatchPickerOptions();
+        }
+        if (typeof this.unwatchPickerMin === 'function') {
+          this.unwatchPickerMin();
+          this.unwatchPickerMin = null;
+        }
+        if (typeof this.unwatchPickerMax === 'function') {
+          this.unwatchPickerMax();
+          this.unwatchPickerMax = null;
         }
         this.picker.$el.parentNode.removeChild(this.picker.$el);
       }
