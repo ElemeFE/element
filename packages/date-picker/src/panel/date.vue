@@ -646,7 +646,7 @@
           return true;
         } else if (this.minimum) {
           // If minimum is defined, ensure that the last day of the previous year is not before the minimum
-          let lastDayOfPrevYear = new Date(this.date.getFullYear() - 1, 11, 1);
+          let lastDayOfPrevYear = new Date(this.date.getFullYear() - 1, 11, 31);
           return lastDayOfPrevYear >= this.minimum;
         } else {
           return true;
