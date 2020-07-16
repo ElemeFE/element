@@ -227,7 +227,6 @@
         this.validateMessage = '';
 
         let model = this.form.model;
-        let value = this.fieldValue;
         let path = this.prop;
         if (path.indexOf(':') !== -1) {
           path = path.replace(/:/, '.');
@@ -236,11 +235,8 @@
         let prop = getPropByPath(model, path, true);
 
         this.validateDisabled = true;
-        if (Array.isArray(value)) {
-          prop.o[prop.k] = [].concat(this.initialValue);
-        } else {
-          prop.o[prop.k] = this.initialValue;
-        }
+
+        prop.o[prop.k] = this.initialValue;
 
         // reset validateDisabled after onFieldChange triggered
         this.$nextTick(() => {
