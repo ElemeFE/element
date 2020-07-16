@@ -286,12 +286,8 @@
         this.computedLabelWidth = width ? `${width}px` : '';
       },
       addValidateEvents() {
-        const rules = this.getRules();
-
-        if (rules.length || this.required !== undefined) {
-          this.$on('el.form.blur', this.onFieldBlur);
-          this.$on('el.form.change', this.onFieldChange);
-        }
+        this.$on('el.form.blur', this.onFieldBlur);
+        this.$on('el.form.change', this.onFieldChange);
       },
       removeValidateEvents() {
         this.$off();
