@@ -258,18 +258,18 @@
         const oldActiveIndex = this.activeIndex;
         const hasIndex = item.index !== null;
 
-        if (hasIndex) {
-          this.activeIndex = item.index;
-        }
-
-        this.$emit('select', index, indexPath, item);
-
-        if (this.mode === 'horizontal' || this.collapse) {
-          this.openedMenus = [];
-        }
-
         if (this.router && hasIndex) {
-          this.routeToItem(item, (error) => {
+          this.routeToItem(item, () => {
+            if (hasIndex) {
+              this.activeIndex = item.index;
+            }
+
+            this.$emit('select', index, indexPath, item);
+
+            if (this.mode === 'horizontal' || this.collapse) {
+              this.openedMenus = [];
+            }
+          }, (error) => {
             this.activeIndex = oldActiveIndex;
             if (error) {
               // vue-router 3.1.0+ push/replace cause NavigationDuplicated error 
@@ -296,10 +296,10 @@
           submenu && this.openMenu(index, submenu.indexPath);
         });
       },
-      routeToItem(item, onError) {
+      routeToItem(item, onComplete = () => {}, onError) {
         let route = item.route || item.index;
         try {
-          this.$router.push(route, () => {}, onError);
+          this.$router.push(route, onComplete, onError);
         } catch (e) {
           console.error(e);
         }
