@@ -10,6 +10,5 @@
     "before:npm:release": "npm run dist"
   },
   "plugins": {
-    "@release-it/conventional-changelog": {}
   }
 }
