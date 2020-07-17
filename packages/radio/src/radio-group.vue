@@ -40,15 +40,6 @@
     },
 
     setup(props, ctx) {
-      provide(RADIOGROUP, {
-        modelValue,
-        fill: props.fill,
-        emit: handleChange,
-        name: 'ElRadioGroup',
-        disabled: props.disabled,
-        radioGroupSize: props.size,
-        textColor: props.textColor
-      });
   
       const ELEMENT = useELEMENT();
       const instance = getCurrentInstance();
@@ -74,15 +65,21 @@
       });
 
       const handleChange = val => {
-        console.log('sssss');
-  
         ctx.emit('update:modelValue', val);
         nextTick(() => {
-          console.log('zzzz');
-  
-          ctx.emit('change-val', val);
+          ctx.emit('change', val);
         });
       };
+
+      provide(RADIOGROUP, {
+        modelValue,
+        fill: props.fill,
+        emit: handleChange,
+        name: 'ElRadioGroup',
+        disabled: props.disabled,
+        radioGroupSize: props.size,
+        textColor: props.textColor
+      });
 
       onMounted(() => {
         // 当radioGroup没有默认选项时，第一个可以选中Tab导航
@@ -136,13 +133,13 @@
             break;
         }
       }
-    },
-    watch: {
-      value(value) {
-        // TODO
-        this.dispatch('ElFormItem', 'el.form.change', [this.value]);
-      }
     }
+    // watch: {
+    //   value(value) {
+    //     // TODO
+    //     this.dispatch('ElFormItem', 'el.form.change', [this.value]);
+    //   }
+    // }
   };
 </script>
 

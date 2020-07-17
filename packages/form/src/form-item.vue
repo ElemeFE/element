@@ -39,11 +39,20 @@
   </div>
 </template>
 <script>
+  import { inject } from 'vue';
   import AsyncValidator from 'async-validator';
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
   import LabelWrap from './label-wrap';
+
+  // eslint-disable-next-line no-undef
+  const ELFORMITEMSYMBOL = Symbol('elFormItem');
+
+  export function useElFormItem() {
+    return inject(ELFORMITEMSYMBOL, undefined);
+  }
+
   export default {
     name: 'ElFormItem',
 

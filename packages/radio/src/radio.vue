@@ -30,7 +30,7 @@
         v-model="model"
         @focus="focus = true"
         @blur="focus = false"
-        @change="handleChange"
+        @change.stop="handleChange"
         :name="name"
         :disabled="isDisabled"
         tabindex="-1"
@@ -63,16 +63,17 @@
 
     setup(props, ctx) {
   
+      const instance = getCurrentInstance();
       const ELEMENT = useELEMENT();
       const elForm = inject('elForm', '');
-      const instance = getCurrentInstance();
       const elFormItem = inject('elFormItem', '');
 
-      let _radioGroup;
-
-      const focus = ref(false);
       const parent = useRadioGroup();
 
+      let _radioGroup;
+  
+      const focus = ref(false);
+  
       const isGroup = computed(() => {
         if (parent && parent.name === 'ElRadioGroup') {
           _radioGroup = parent;
@@ -106,17 +107,13 @@
             _radioGroup.emit(val);
           } else {
             ctx.emit('update:modelValue', val);
+            ctx.emit('change', val);
           }
           instance.refs.radio && (instance.refs.radio.checked = props.modelValue === props.label);
         }
       });
 
-      const handleChange = () => {
-        ctx.emit('change', model.value);
-        // nextTick(() => {
-        //   ctx.emit('change1', model.value);
-        // });
-      };
+      const handleChange = () => {};
 
       return {
         model,
@@ -128,47 +125,5 @@
         handleChange
       };
     }
-
-    // computed: {
-    //   model: {
-    //     get() {
-    //       return this.isGroup ? this._radioGroup.value : this.value;
-    //     },
-    //     set(val) {
-    //       if (this.isGroup) {
-    //         this.dispatch('ElRadioGroup', 'input', [val]);
-    //       } else {
-    //         this.$emit('input', val);
-    //       }
-    //       this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
-    //     }
-    //   },
-    //   _elFormItemSize() {
-    //     return (this.elFormItem || {}).elFormItemSize;
-    //   },
-    //   radioSize() {
-    //     const temRadioSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-    //     return this.isGroup
-    //       ? this._radioGroup.radioGroupSize || temRadioSize
-    //       : temRadioSize;
-    //   },
-    //   isDisabled() {
-    //     return this.isGroup
-    //       ? this._radioGroup.disabled || this.disabled || (this.elForm || {}).disabled
-    //       : this.disabled || (this.elForm || {}).disabled;
-    //   },
-    //   tabIndex() {
-    //     return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
-    //   }
-    // },
-
-    // methods: {
-    //   handleChange() {
-    //     this.$nextTick(() => {
-    //       this.$emit('change', this.model);
-    //       this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
-    //     });
-    //   }
-    // }
   };
 </script>
