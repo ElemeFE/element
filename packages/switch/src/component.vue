@@ -24,6 +24,7 @@ import {
   watch,
   inject
 } from 'vue';
+import mitt from '../../../src/mixins/emitter';
 export default {
   name: 'ElSwitch',
   componentName: 'ElSwitch',
@@ -113,7 +114,7 @@ export default {
         setBackgroundColor();
       }
       if (props.validateEvent) {
-        // this.dispatch('ElFormItem', 'el.form.change', [this.value]);
+        mitt.emit('el.form.change', props.modelValue);
       }
     });
     const setBackgroundColor = () => {
