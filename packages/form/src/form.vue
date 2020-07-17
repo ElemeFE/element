@@ -7,7 +7,15 @@
   </form>
 </template>
 <script>
+  import { inject } from 'vue';
   import objectAssign from 'element-ui/src/utils/merge';
+
+  // eslint-disable-next-line no-undef
+  const ELFORMSYMBOL = Symbol('ElForm');
+
+  export function useElForm() {
+    return inject(ELFORMSYMBOL, undefined);
+  }
 
   export default {
     name: 'ElForm',
