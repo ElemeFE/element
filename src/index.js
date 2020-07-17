@@ -20,7 +20,7 @@ import RadioButton from '../packages/radio-button/index.js';
 // import Checkbox from '../packages/checkbox/index.js';
 // import CheckboxButton from '../packages/checkbox-button/index.js';
 // import CheckboxGroup from '../packages/checkbox-group/index.js';
-// import Switch from '../packages/switch/index.js';
+import Switch from '../packages/switch/index.js';
 // import Select from '../packages/select/index.js';
 // import Option from '../packages/option/index.js';
 // import OptionGroup from '../packages/option-group/index.js';
@@ -106,7 +106,7 @@ const components = [
   // Checkbox,
   // CheckboxButton,
   // CheckboxGroup,
-  // Switch,
+  Switch,
   // Select,
   // Option,
   // OptionGroup,
@@ -236,7 +236,7 @@ export default {
   // Checkbox,
   // CheckboxButton,
   // CheckboxGroup,
-  // Switch,
+  Switch,
   // Select,
   // Option,
   // OptionGroup,

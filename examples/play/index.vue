@@ -5,7 +5,8 @@
     <play-link></play-link>
     <play-layout></play-layout>
     <play-containter></play-containter> -->
-    <play-radio></play-radio>
+    <!-- <play-radio></play-radio> -->
+    <play-swicth></play-swicth>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
   import PlayContainter from './components/containter'
   import PlayLayout from './components/layout'
   import PlayRadio from './components/radio'
+  import PlaySwicth from './components/switch'
 
   export default {
     components: {
@@ -24,7 +26,8 @@
       PlayLink,
       PlayContainter,
       PlayLayout,
-      PlayRadio
+      PlayRadio,
+      PlaySwicth
     },
     data() {
       return {
