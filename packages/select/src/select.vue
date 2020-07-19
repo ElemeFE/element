@@ -872,6 +872,6 @@
         }
       });
       this.setSelected();
-    },
+    }
   };
 </script>
