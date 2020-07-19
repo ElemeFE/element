@@ -35,6 +35,10 @@
     data() {
       return {
         scrollable: false,
+        scrollState: {
+          prev: 0,
+          next: false
+        },
         navOffset: 0,
         isFocus: false,
         focusable: true
@@ -121,9 +125,9 @@
 
         if (containerSize < navSize) {
           const currentOffset = this.navOffset;
-          this.scrollable = this.scrollable || {};
-          this.scrollable.prev = currentOffset;
-          this.scrollable.next = currentOffset + containerSize < navSize;
+          this.scrollable = true;
+          this.scrollState.prev = currentOffset;
+          this.scrollState.next = currentOffset + containerSize < navSize;
           if (navSize - currentOffset < containerSize) {
             this.navOffset = navSize - containerSize;
           }
@@ -203,6 +207,7 @@
         onTabRemove,
         navStyle,
         scrollable,
+        scrollState,
         scrollNext,
         scrollPrev,
         changeTab,
@@ -211,8 +216,8 @@
       } = this;
       const scrollBtn = scrollable
         ? [
-          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
-          <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+          <span class={['el-tabs__nav-prev', scrollState.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
+          <span class={['el-tabs__nav-next', scrollState.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
