@@ -144,7 +144,6 @@
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
@@ -789,15 +788,6 @@
         }
       },
 
-      resetInputWidth() {
-        this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
-      },
-
-      handleResize() {
-        this.resetInputWidth();
-        if (this.multiple) this.resetInputHeight();
-      },
-
       checkDefaultFirstOption() {
         this.hoverIndex = -1;
         // highlight the created option
@@ -862,7 +852,6 @@
       if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
       }
-      addResizeListener(this.$el, this.handleResize);
 
       const reference = this.$refs.reference;
       if (reference && reference.$el) {
@@ -884,9 +873,5 @@
       });
       this.setSelected();
     },
-
-    beforeDestroy() {
-      if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize);
-    }
   };
 </script>
