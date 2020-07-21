@@ -51,9 +51,9 @@ La checkbox peut être désactivée.
 
 ### Checkbox groupées
 
-Utile pour grouper des checkbox, indiquant si une option est selectionnée en vérifiant la case en question.
+Utile pour grouper des checkbox, indiquant si une option est sélectionnée en vérifiant la case en question.
 
-:::demo L'élément `checkbox-group` peut gérer plusieurs checkbox d'un groupe en utilisant `v-model`, qui sera un `Array`. Dans l'élément `el-checkbox`, `label` est la valeur de la checkbox. Si il n'y a aucun contenu dans la balise, `label` sera également la description de la checkbox. `label` correspond aussi aux valeurs des éléments dans le tableau. Il est sélectionné si la valeur spécifiée existe dans le tableau, et vice-versa.
+:::demo L'élément `checkbox-group` peut gérer plusieurs checkbox d'un groupe en utilisant `v-model`, qui sera un `Array`. Dans l'élément `el-checkbox`, `label` est la valeur de la checkbox. S'il n'y a aucun contenu dans la balise, `label` sera également la description de la checkbox. `label` correspond aussi aux valeurs des éléments dans le tableau. Il est sélectionné si la valeur spécifiée existe dans le tableau, et vice-versa.
 
 ```html
 <template>
@@ -80,13 +80,13 @@ Utile pour grouper des checkbox, indiquant si une option est selectionnée en v�
 
 ### Indéterminée
 
-La propriété `indeterminate` permet de réaliser un effet "Selectionner tout".
+La propriété `indeterminate` permet de réaliser un effet "Sélectionner tout".
 
 :::demo
 
 ```html
 <template>
-  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Selectionner tout</el-checkbox>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Sélectionner tout</el-checkbox>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
     <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
@@ -244,7 +244,7 @@ Des checkbox avec une apparence de bouton.
 | value / v-model | La valeur liée. | string / number / boolean | — | — |
 | label     | Valeur de la checkbox quand utilisée dans un `checkbox-group`.   | string / number / boolean   |       —        |     —    |
 | true-label | Valeur de la checkbox si cochée.   | string / number    |       —        |     —    |
-| false-label | Valeur de la checkbox si non-cochée.   | string / number    |      —         |     —    |
+| false-label | Valeur de la checkbox si non cochée.   | string / number    |      —         |     —    |
 | disabled  | Désactive la checkbox.   | boolean   |  — | false   |
 | border  | Ajoute une bordure à la checkbox.  | boolean   | — | false   |
 | size  | taille de la checkbox, ne marche que si `border` est 'true'  | string  | medium / small / mini | — |
@@ -278,7 +278,7 @@ Des checkbox avec une apparence de bouton.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Valeur de la checkbox quand utilisée dans un `checkbox-group` | string / number / boolean  |       —        |     —    |
 | true-label | Valeur de la checkbox si cochée. | string / number | — |     —    |
-| false-label | Valeur de la checkbox si non-cochée. | string / number    |      —         |     —    |
+| false-label | Valeur de la checkbox si non cochée. | string / number    |      —         |     —    |
 | disabled  | Si la checkbox est désactivée. | boolean   |  — | false   |
 | name | Attribut 'name' natif. | string    |      —         |     —    |
-| checked  | SI la checkbox est cochée. | boolean   |  — | false   |
+| checked  | Si la checkbox est cochée. | boolean   |  — | false   |

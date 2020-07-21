@@ -49,10 +49,8 @@
         v-if="!data || data.length === 0"
         class="el-table__empty-block"
         ref="emptyBlock"
-        :style="{
-          width: bodyWidth
-        }">
-        <span class="el-table__empty-text">
+        :style="emptyBlockStyle">
+        <span class="el-table__empty-text" >
           <slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot>
         </span>
       </div>
@@ -123,9 +121,7 @@
         <div
           v-if="$slots.append"
           class="el-table__append-gutter"
-          :style="{
-            height: layout.appendHeight + 'px'
-          }"></div>
+          :style="{ height: layout.appendHeight + 'px'}"></div>
       </div>
       <div
         v-if="showSummary"
@@ -183,6 +179,10 @@
             width: bodyWidth
           }">
         </table-body>
+         <div
+          v-if="$slots.append"
+          class="el-table__append-gutter"
+          :style="{ height: layout.appendHeight + 'px' }"></div>
       </div>
       <div
         v-if="showSummary"
@@ -381,8 +381,11 @@
       },
 
       updateScrollY() {
-        this.layout.updateScrollY();
-        this.layout.updateColumnsWidth();
+        const changed = this.layout.updateScrollY();
+        if (changed) {
+          this.layout.notifyObservers('scrollable');
+          this.layout.updateColumnsWidth();
+        }
       },
 
       handleFixedMousewheel(event, data) {
@@ -408,7 +411,7 @@
         }
       },
 
-      // TODO 性能优化
+      // TODO 使用 CSS transform
       syncPostion: throttle(20, function() {
         const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
         const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
@@ -464,10 +467,10 @@
       },
 
       doLayout() {
-        this.layout.updateColumnsWidth();
         if (this.shouldUpdateHeight) {
           this.layout.updateElsHeight();
         }
+        this.layout.updateColumnsWidth();
       },
 
       sort(prop, order) {
@@ -509,7 +512,7 @@
           };
         } else if (this.maxHeight) {
           const maxHeight = parseHeight(this.maxHeight);
-          if (maxHeight) {
+          if (typeof maxHeight === 'number') {
             return {
               'max-height': (maxHeight - footerHeight - (this.showHeader ? headerHeight : 0)) + 'px'
             };
@@ -525,7 +528,7 @@
           };
         } else if (this.maxHeight) {
           let maxHeight = parseHeight(this.maxHeight);
-          if (maxHeight) {
+          if (typeof maxHeight === 'number') {
             maxHeight = this.layout.scrollX ? maxHeight - this.layout.gutterWidth : maxHeight;
             if (this.showHeader) {
               maxHeight -= this.layout.headerHeight;
@@ -559,6 +562,18 @@
             height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
           };
         }
+      },
+
+      emptyBlockStyle() {
+        if (this.data && this.data.length) return null;
+        let height = '100%';
+        if (this.layout.appendHeight) {
+          height = `calc(100% - ${this.layout.appendHeight}px)`;
+        }
+        return {
+          width: this.bodyWidth,
+          height
+        };
       },
 
       ...mapStates({
@@ -597,11 +612,6 @@
         immediate: true,
         handler(value) {
           this.store.commit('setData', value);
-          if (this.$ready) {
-            this.$nextTick(() => {
-              this.doLayout();
-            });
-          }
         }
       },
 

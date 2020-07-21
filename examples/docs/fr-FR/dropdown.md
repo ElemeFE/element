@@ -301,7 +301,7 @@ En plus de la taille par défaut, le composant Dropdown propose trois autres tai
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| command       | Le contenu a envoyer à la callback de l'évènement `command` du Dropdown. | string/number/object  |          —             |    —     |
+| command       | Le contenu à envoyer au callback de l'évènement `command` du Dropdown. | string/number/object  |          —             |    —     |
 | disabled      | Si l'élément est désactivé.  | boolean  |          —             |    false     |
 | divided       | Si un diviseur doit être affiché.  | boolean  |          —             |    false     |
 | icon          | Classe de l'icône. | string   |  —  |  —  |

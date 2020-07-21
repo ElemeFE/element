@@ -144,11 +144,10 @@ export default {
     },
 
     setColumnRenders(column) {
-      const specialTypes = Object.keys(cellForced);
       // renderHeader 属性不推荐使用。
       if (this.renderHeader) {
         console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
-      } else if (specialTypes.indexOf(column.type) === -1) {
+      } else if (column.type !== 'selection') {
         column.renderHeader = (h, scope) => {
           const renderHeader = this.$scopedSlots.header;
           return renderHeader ? renderHeader(scope) : column.label;
@@ -196,7 +195,7 @@ export default {
     },
 
     registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName'];
+      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
       // 一些属性具有别名
       const aliases = {
         prop: 'property',
@@ -279,7 +278,7 @@ export default {
       index: this.index
     };
 
-    const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'resizable', 'formatter', 'fixed', 'resizable'];
+    const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];
     const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
     const selectProps = ['selectable', 'reserveSelection'];
     const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];

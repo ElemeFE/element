@@ -1,13 +1,377 @@
 ## Changelog
 
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix change event bug (#19200 by @sxzz)
+- Image
+  - Update error status (#19194 by @lhx6538665)
+
+#### Optimization
+
+- I18n
+  - Update ru-RU popconfirm translation (#19220 by @Opppex)
+  - Update vi translation (#19244 by @quangln2810)
+  - Update Catalan and Spanish translations (#19296 by @Ismaaa)
+  - Update Indonesia translation (#19320) by @therour)
+  - Update Brazilian Portuguese translation (#19374 by @diegomengarda)
+
+
+### 2.13.1
+
+*2020-04-13*
+
+#### New features
+- Autocomplete
+  - Add change event (#17913 by @sxzz)
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix suggestion error when textarea (#18478 by @Roojay)
+- Carousel
+  - Fix console typo bug (#18264 by @IceFox)
+- Image
+  - Fix preview dose not show when preview list not contain src issue (#18975) (#19130 by @luckyCao)
+  - Fix shortcut key not work at second time issue (#18983) (#19156 by @luckyCao)
+  - Don't show image-viewer when preview is false (#18967 by @inooNgt)
+- Transfer
+  - Fix incorrect line-height of el-transfer's first list item when it was used with  el-form-item (#18917 by @Hanx)
+- InputNumber
+  - Correctly compute inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - Remove index intro (#19155 by @iamkun)
+- Doc
+  - Popconfirm doc update (#18324 by @iamkun)
+  - Fix step-strictly docs typo (#18705 by @dream2023)
+  - Fix a type error in document of steps component (#17555 by @haoranyu)
+
+### 2.13.0
+
+*2019-11-26*
+
+#### New features
+
+- Popconfirm
+  - Add popconfirm component (#17548 by @iamkun)
+
+#### Bug fixes
+
+- BackTop
+  - Use cubic bezier scrolling (by @lon)
+- DatePicker
+  - Fix bug of only select min date of date range problem (#17191 by @smk0621)
+- Select
+  - Fix select test cases by (@msidolphin)
+- Tree
+  - Add font-size for the style of tree empty-text (#17094 by @spengjie)
+- Table
+  - Column header can be costumed (#17291 by @ziyoung)
+  - Update table header cell style (#17284 by @ziyoung)
+  - Fix table header height after filter (#17348 by @ziyoung)
+  - Fixed row-style with display not work (#17002 by @a631807682)
+  - Fix header table not display (#17341 by @ziyoung)
+- Calendar
+  - Import el-button and el-button-group (#17376 by @masongzhi)
+- MessageBox
+  - Fix icon position error (#17410 by @nullptru)
+- TimePicker
+  - Set the selection range after scrolling up or down (#16868 by @mattheyan)
+- Message
+  - Fix close instace offsetHeight（#17564） (#17852 by @gzwgq222)
+- Form
+  - Callback of validateField should be optional (#17314 by @CarterLi)
+- Cascader
+  - Fix TypeScript 3.7 compatibility (#17881 by @CarterLi)
+- Menu
+  - Fix router NavigationDuplicated error when using vue-router@^3.1.0 (#17269 by @iamkun)
+- Dropdown
+  - Update type file (#17550 by @iamkun)
+- Progress
+  - Add strokeLinecap prop (#17552 by @iamkun)
+- InfiniteScroll
+  - Skip trigger event on invisible element (#17553 by @iamkun)
+- Image
+  - Perfect picture preview behavior (#16985 by @luckyCao)
+  - Fix shield the page when preview big image (#16796 by @luckyCao)
+- Drawer 
+  - Bugfix drawer-append-to-body-not-working (#16953 by @JeremyWuuuuu)
+- Select
+  - Fix tag show value or empty issue (17199 by @luckyCao)
+- Scrollbar
+  - Fix FireFox scroll bar width (#18091 by @iamkun)
+  
+#### Optimization
+
+- I18n
+  - Update sv-SE.js (#17926 by @FOLLGAD)
+  - Update avatar component fr doc (#17762 by @blombard)
+- Docs
+  - Fix time-select typo (#17250 by @wacky6)
+  - Fix Drawer attribute accepted value typo in es (#17122 by @haoranyu)
+  - Update Spanish changelog 2.12.0 (#17364 by @Gonzalo2310)
+  - Fix Changelog typo (#17874 by @renlixin)
+  - Fix Loading demo (#17862 by @MBearo)
+  - Add input event in input Events Table (#18061 by @zhouxinyong)
+  - Delete Input repeat change event (#18085 by @zhouxinyong)
+
+### 2.12.0
+
+*2019-08-29*
+
+#### Nuevas características
+
+- Popover
+  - Agregada la prop close-delay  (#16671 by @LachlanStuart)
+- Theme
+  - Añadida la extensión Chrome: Element Theme Extensión (#16686 by @iamkun)
+- Icon
+  - Añadido font-display a la declaración @font-face (#16805 by @iamfaizalandyka)
+
+#### Corrección de errores
+
+- Carousel
+  - Corregido el valor emitido por onChange (#16705 by @iamkun)
+- Notification
+  - Corrección de la modificación del objeto de opción entrante (#16704 by @iamkun)
+- DatePicker
+  - Agregado el className para la opción picker (#16632 by @iamkun)
+- DateTimePicker
+  - Corrección del  time-spinner que no se desplazaba a la posición correcta (#16854 by @jesse-li)
+- Table
+  - Evitar la propagación del click después del arrastre (#16850 by @ziyoung)
+  - Corregido una error en chrome que se producía cuando el css de thead tenia display: none  (#16956 by @luckyCao)
+  - Corregida la altura incorrecta de los bloques vacíos  (#16861 by @ziyoung)
+  - No hay lanzamiento de error cuando se llama a toggleExpansion (#16304 by @yyjjqq94)
+  - No se lanza el evento sort-change cuando esta montado (#17113 by @a631807682)
+  - Corregido que el setCurrentRow no borraba la linea resaltada (#16879 by @ziyoung)
+  - Corregido que expand-row-keys no funcionaba cuando los datos eran cargados asincrónicamente (#16899 by @ziyoung)
+  - Establecido toggleAllSelection como propiedad instanciada (#17137 by @ziyoung)
+- Tree
+  - Corregida la distancia entre label y checkbox (#16799 by @Hazlank)
+- Tabs
+  - Corregida la posición incorrecta de los item's del Tab (#16520 by @victorting)
+  - Corregido el error de que la pestaña activada estaba fuera del rango visual (#17033 by @nullptru)
+- Calendar
+  - Arreglado el problema de los días de la semana con i18n (#16772 by @ubitoffee)
+  - Corregido el error de localización (#17208 by @iamkun)
+- Cascader
+  - Corregido un error de visualización del CascaderPanel  (#16716 by @zhangHongEn)
+  - Corregido el problema de disable status y close button (#16224 by @yyjjqq94)
+- Input
+  - Arreglado el evento de composición coreana (#15069 by @MoonHyuk)
+  - Arreglado el evento click del botón clear que no se lanzaba cuando se usaba v-loading (#16576 by @a631807682)
+- Select
+  - No cambiaba el dropdown cuando se filtraba (#17205 by @luckyCao)
+- Transfer
+  - Arreglado un error de estilo (#17206 by @iamkun)
+- Dialog
+  - Actualizada las variables Sass  (#16365 by @haoranyu)
+- RadioGroup
+  - No produce HTML invalido en la tabla si el atributo 'is' es especificado (#17070 by @nullptru)
+- Divider
+  - Soporta clases personalizadas (#17078 by @island205)
+
+#### Optimización
+
+- Checkbox
+  - Mejorada la experiencia del lector de pantalla (#16575 by @tylertrotter)
+- Docs
+  - Actualizado changelog (#16773 by @SimonaliaChen)
+  - Actualizada la guía de contribución (#14800 by @sinchang)
+  - Arreglado typo en la documentación de Drawer (#16848 by @winkay)
+  - Actualizado el tema personalizado (#16983 by @iamkun)
+  - Agregada traducción en Esperanto (#16955 by @maxkoryukov)
+  - Actualizada la documentación de input-number sobre el evento change (#16316 by @luckyCao)
+  - Actualizada la documentación en Español 2.11.1 (#16961 by @Gonzalo2310)
+- I18n
+  - Eliminada la traducción de 'year' en idioma Catalán como en otros idiomas (#14722 by @oscaralbareda)
+  - Actualizado el changelog de las versiones 2.10.0 y 2.10.1 en Español (#16548 by @Gonzalo2310)
+  - Actualizado ar.js (#16653 by @l3op)
+- Test
+  - Corregir error ortográfico (#16672 by @boomler)
+  - Refractorizacion del unit test para usar data-uri (#16847 by @a631807682)
+- Types
+  - Corrección del tipo httprequest (#16633 by @luckyCao)
+
+### 2.11.1
+
+*2019-07-26*
+
+#### Corrección de errores
+
+- Image
+  - Corregido el componente Image para compatibilidad SSR (#16737 by @luckyCao)
+- Tarea
+  - Actualizado para compatibilidad con dart-sass by @LewisChennnnn)
+
+### 2.11.0
+
+*2019-07-25*
+
+#### Nuevas características
+
+- Drawer
+  - Agregado componente drawer (#16577 by @JeremyWuuuuu)
+
+#### Corrección de errores
+
+- Checkbox
+  - Mejora del selector css (#16006 by @Hazlank)
+- Tree
+  - Establecido el el-tree como genérico (#15934 by @JeremyWuuuuu)
+  - Establecido la prop  isCurrent como False (#15870 by @kkkisme)
+- Dropdown
+  - Corregido el color predeterminado de los split-button (#15931 by @JuniorTour)
+- Cascader
+  - Corregido un problema de actualización cuando el nivel 1 de children estaba vació (#16399 by @luckyCao)
+  - Ahora se muestra correctamente header cuando range esta especificado (#16354 by @ziyoung)
+  - Agregados valores por defecto cuando lazy es true (#16420 by @luckyCao)
+  - Solucionado problemas de visualización (#15935 by @junyiz)
+  - Expuestos los getCheckedNodes y corrección de errores en el cambio de opciones (#16709 by @SimonaliaChen)
+- Submenu
+  - Corregida la prop append-to-body (#16289 by @a631807682)
+- Table 
+  - Arreglado un fallo en la actualizacion de los datos de tree table (#16481 by @island205)
+- Select
+  - Arreglado un problema de fuga de memoria (#16463 by @island205)
+- InfiniteScroll
+  - Actualizada la nomenclatura y la documentacion (#16698 by @iamkun)
+- Avatar
+  - Arreglado que la imagen no se centraba verticalmente (#16489 by @luckyCao)
+- Dialog
+  - Agregado el atributo destroyOnClosee (#16455 by @ziyoung)
+- Image
+  - Agregada la función de vista previa grande de imágenes (#16333 by @luckyCao)
+
+#### Optimización
+
+- Documentación
+  - Arreglada la demo de dropdown (#16193 by @webxmsj)
+  - Corrección de errores tipográficos en las tablas de documentos (#15971 by @howiefh)
+- I18n
+  - Actualizada la traduccion del lenguage Thai (#16689 by @ponkrit)
+- Tareas
+  - Actualizada la api base del tema (#16607 by @iamkun)
+  - Añadido token del formulario del tema (#16699 by @iamkun)
+  - Marcar todos los accesos internos del usuario (#16609 by @iamkun)
+  - Corrección del error de anclaje del documento (#16692 by @iamkun)
+
+### 2.10.1
+
+*2019-07-02*
+
+#### Corrección de errores
+
+
+- Table
+  - Corregido el icono de ordenación  (#15439 by @bezany)
+  - Corregidas las rupturas del layout cuando existía un slot (#16332 by @ziyoung)
+  - Corregido showOverflowTooltip no era reactivo (#16295 by @a631807682)
+  - Registrada la scrollbar en el panel de filtro (#16246 by @ziyoung)
+- Tareas
+  - Arreglada la documentación 2.9 (#16233 by @ziyoung)
+  - Corregido el índice de la página de introducción del tema en inglés que tenia un error en los estilos css  (#16254 by @iamkun)
+
+#### Optimización
+
+- Tag
+  - Compatible con IE (#16334 by @ziyoung)
+- Tarea
+  - Actualizada la imagen QR de Dingtalk Group (#16236 by @iamkun)
+- Doc
+  - Actualizada la documentación online del theme roller (#16244 by @iamkun)
+
+### 2.10.0
+
+*2019-06-25*
+
+#### Nuevas características
+
+- I18n
+  - Añadido idioma Uzbeko (#15796 by @ogabek96)
+- Calendar
+  - Añadido el atributo del primer día de la semana (#16047 by @ziyoung)
+- Avatar
+  - Agregado componente Avatar (#16144 by @luckyCao)
+- Upload:
+  - Añade capacidad para personalizar la plantilla de miniaturas (#13192 by @victorzhuk)
+
+#### Corrección de errores
+
+- Tree
+  - No resaltar el nodo de árbol cuando currentKey es nulo (#15668 by @yyjjqq94)
+  - Solucionado el problema #15538 causado por dos Tree que compartian los mismos datos.(#15615 by @VanMess)
+- Upload
+  - Actualizado el tipo del parámetro `fileList`  (#15716 by @underfin)
+- Table
+  - Solucionado que el icono de loading no se mostraba (#15868 by @ziyoung)
+  - Corregido el color de fondo de una tabla compleja cuando se desplaza el cursor (#15504 by @cnlon)
+  - Corregido current-row-key y el bug del evento select (#15983 by @ziyoung)
+  - Height acepta más unidades (#16013 by @ziyoung)
+  - Solucionado reserve-selection no funcionaba (#16135 by @ziyoung)
+- Docs
+  - Corregido el tipo de atributo Divider en zh-cn  (#15889 by @haoranyu)
+  - Se elimina una etiqueta html de cierre incorrecta y el código de bloque vacío (#16194 por @Alexeykhr)
+- Menu
+  - Corregido un error oculto en el submenú después de añadir popper-append-to-body (#15391 by @PanJiaChen)
+- Select
+  - Arreglado initialInputHeight (#15989 by @yyjjqq94)
+  - Corregido el comportamiento de default-first-option cuando se escribe chino (#15431 by @VanMess)
+  - Corregido el problema de importación doble (#16215 by @lengband)
+- Message
+  - Añadida la opción type def para offset (#16027 by @matjaz)
+- Timeline
+  - Arreglado reverso roto (#16091 by @ziyoung)
+- Slider
+  - Corregido #15545 agregando explicaciones sobre el evento "input" en chino (#15588 by @VanMess)
+- InfiniteScroll
+  - Actualización del nombre del paquete (#16125 by @iamkun)
+- MessageBox
+  - Arreglado el bug de distinguishCancelAndClose, la acción no era la misma que la documentada (#15438 by @qingdengyue)
+- PopupManager
+  - Arreglado que el z-index no podía ser reescrito la primera vez que se usaba (#15738 by @luckyCao)
+- Tarea
+  - Actualizado el test del api host  (#15807 by @iamkun)
+
+#### Optimizacion
+
+- Tree
+  - Modificar las condiciones del bucle para mejorar el rendimiento (#15699 by @KingJeason)
+- Theme
+  - Refinado  GA track & actualizado el link del pie que lleva al theme roller online (#16007 by @island205)
+- Badge
+  - Actualizado el check del prop badge (#16198 by @iamkun)
+- Avatar
+  - Actualizado el var del config del theme (#16202 by @luckyCao)
+- I18n
+  - Actualizada la traducción del portugués (#15776 by @gigioSouza)
+  - Actualizada la traducción del idioma Farsi (#15881 by @pamenary)
+- Docs
+  - Agregado componentes faltantes en el quick start (#16063 by @pape2016)
+  - Actualizada la traducción al francés (#16208 by @blombard)
+  - Agregada descripción $slots.default (#15444 by @Alexeykhr)
+  - Actualizada la Doc en Español 2.9.1 (#15840 by @Gonzalo2310)
+  - Corrección de errores ortográficos en fr (#15837 by @blombard)
+  - Actualizado el changelog 2.9.2 en español (#16185 by @Gonzalo2310)
+
+#### Breaking changes
+
+- Form
+  - Eliminado el estado success (#16159 by @ziyoung)
+
 ### 2.9.2
 
 *2019-06-21*
 
-#### Bug fixes
+#### Corrección de errores
 
-- Chore
-  - Fix TS definitions file (#15805 by @NateScarlet)
+- Tareas
+  - Solucionadas las definiciones de archivos TS (#15805 by @NateScarlet)
 
 ### 2.9.1
 
@@ -16,7 +380,7 @@
 #### Nuevas características
 
 - Table
-  - tree-props，default-expand-all, expand-row-keys, toggle-row-expansion method and expand-change event son compatibles con Tree Table (#15709 by @ziyoung)
+  - Los metodos tree-props，default-expand-all, expand-row-keys, toggle-row-expansion y el evento expand-change son compatibles con Tree Table (#15709 by @ziyoung)
 
 #### Corrección de errores
 
@@ -39,15 +403,15 @@
 - Backtop
   - Añadido componente Backtop (#15541 by @iamkun)
 - PageHeader
-  - Añadido el componente PageHeader  (#15714 by @ziyoung)
+  - Añadido el componente PageHeader (#15714 by @ziyoung)
 - InfiniteScroll
-  - Añadida la directiva InfiniteScroll (#15567 by @iamkun) 
+  - Añadida la directiva InfiniteScroll (#15567 by @iamkun)
 - Cascader
   - Agregado modo múltiple y método de filtro (#15611 by @SimonaliaChen)
 - Message
   - Visualización en modo stack (#15639 by @island205)
 - Tag
-  - Añadido prop effect  (#15725 by @SimonaliaChen)
+  - Añadido prop effect (#15725 by @SimonaliaChen)
 - Tabs
   - Alinea el título a la izquierda cuando el tipo es card (#15695 by @luckyCao)
 - DatePicker
@@ -55,7 +419,7 @@
 - Image
   - Añadido soporte para transmitir attrs y listeners (#15578 by @VanMess)
 - Theme
-  - Añadido fondo al popup (#15412 by @iamkun)  
+  - Añadido fondo al popup (#15412 by @iamkun)
 - Tarea
   - Actualizada la nueva página de índice 2.9.0 (#15682 by @iamkun)
 
@@ -66,13 +430,13 @@
 - Image
   - Corregido ssr y compatibilidad de ajuste de objetos (#15346 by @SimonaliaChen)
 - Input
-  - Corregido estilo show-word-count en el-form (#15359 by @lvjiaxuan) 
+  - Corregido estilo show-word-count en el-form (#15359 by @lvjiaxuan)
   - Corregido el icono de borrar que no estaba centrado (#15354 by @YiiGuxing)
 - Calendar
-  - Corregido día de la semana no correcto cuando el día es domingo  (#15399 by @qingdengyue)
+  - Corregido día de la semana no correcto cuando el día es domingo (#15399 by @qingdengyue)
   - Corregido error de desaparición de octubre (#15394 by @qingdengyue)
 - Tabs
-  -  Corrección de la pestaña básica anidada en el error de relleno de la pestaña de la tarjeta (#15461 by @SimonaliaChen)
+  - Corrección de la pestaña básica anidada en el error de relleno de la pestaña de la tarjeta (#15461 by @SimonaliaChen)
 - Tag
   - Corregido problema de propagación de stop (#15150 by @infjer)
 - Form
@@ -82,7 +446,7 @@
   - Corregido tabindex personalizado no funcionaba (#15619 by @SimonaliaChen )
 - Link
   - Arreglada la clase de estilo del icono de enlace (#15752 by @iamkun)
-- Select  
+- Select
   - Revertir el valor establecido a nulo cuando se borra (#15447 by @iamkun)
 - Loading
   - Corregido dom no cambia cuando el estado de carga cambia rápidamente (#15123 by @FAKER-A)
@@ -93,13 +457,13 @@
 - Radio
   - Solucionado el problema 14808 (#14809 by @OverTree)
 - Form
-  - Solucionado el problema de resetFields (15181 by @luckyCao)  
+  - Solucionado el problema de resetFields (15181 by @luckyCao)
 - Tarea
   - Se actualizaron las dependencias y se corrigió el error de demostración (#15324 by ziyoung)
  - Type
-   - Corregida la definición del tipo de carga (#15635 by @iamkun)
-   - Corregido tipo Icono (#15634 by @iamkun)
-   - Corregida la definición del tipo de enlace (#15402 by @iamkun)
+  - Corregida la definición del tipo de carga (#15635 by @iamkun)
+  - Corregido tipo Icono (#15634 by @iamkun)
+  - Corregida la definición del tipo de enlace (#15402 by @iamkun)
 
 #### Optimización
 
@@ -186,7 +550,7 @@
   - Arreglado el estilo del label (#14969 by @ziyoung)
   - Los FormItem requeridos muestran astericos cuando el label es auto (#15144 by @ziyoung)
 - Pagination
-  -  Arreglado que el slot no se actualizaba (#14711 by @lucyhao)
+  - Arreglado que el slot no se actualizaba (#14711 by @lucyhao)
 - Table
   - Arreglado un bug del load en el modo lazy (#15101 by @ziyoung)
   - Arreglado el ancho de la celda cuando colspan es mayor que 1 (#15196 by @ziyoung)
@@ -210,9 +574,9 @@
 - Dropdown
   - Estilo arreglado (#14907 by @doing123)
 - Slider
-  - Corrección de un fallo en el teclado a11y  (#14792 by @erezsob)
+  - Corrección de un fallo en el teclado a11y (#14792 by @erezsob)
 - Menu
-  - El valor de ActiveIndex será nulo si el defaultIndex no existe  (#14074 by @hoythan)
+  - El valor de ActiveIndex será nulo si el defaultIndex no existe (#14074 by @hoythan)
 - Directive
   - RepeatClick: usa Date.now() en lugar de new Date() (#14776 by @pavelmash)
 - Upload
@@ -294,7 +658,7 @@
 
 #### Optimización
 - Docs
-  - Actualización de la documentación en español  (#14913 by @Gonzalo2310)
+  - Actualización de la documentación en español (#14913 by @Gonzalo2310)
   - Agregada documentación en francés para el nuevo componente (#14924 by @ziyoung)
   - Documentación de los Tabs optimizada (#14938 by @ziyoung)
 
@@ -319,7 +683,7 @@
 - Dropdown
   - Compatible con la nueva sintaxis de v-slot en V 2.6 (#14832 by @ziyoung)
 - ColorPicker
-  - Corregido el  manejo de error de string en hex color (#14793 by @iamkun)
+  - Corregido el manejo de error de string en hex color (#14793 by @iamkun)
 - Tree
   - Revertido pr #13349 (#14847 by @ziyoung)
 - Tooltip
@@ -409,7 +773,7 @@
 - Timeline
   - Agregado componente timeline (by @jikkai in #14248)
 - DropdownItem
-  - Añadida la prop icon  a `el-dropdown-item` (by @gabrielboliveira in #14088)
+  - Añadida la prop icon a `el-dropdown-item` (by @gabrielboliveira in #14088)
 - Input
   - Añadida la prop show-password (by @phshy0607 in #13966)
 - Select
@@ -423,7 +787,7 @@
 
 #### Optimización
 - Alert
-  - Actualizada la descripción de Alert  (by @iamkun in #14488)
+  - Actualizada la descripción de Alert (by @iamkun in #14488)
 - Input
   - Actualizado input password (by @iamkun in #14480)
 - InputNumber
@@ -457,7 +821,7 @@
 - ScrollBar
   - Prevenido el clic del botón derecho en la miniatura (by @xifeiwu in #14196)
 - Switch
-  - Activación de la validación de formularios si el valor cambia  (by @hetech in #14426)
+  - Activación de la validación de formularios si el valor cambia (by @hetech in #14426)
 - Table
   - Se ha convertido el método toggleAllSelection en un método de instancia (by @letanure in #14075)
 - Tabs & Dropdown
@@ -555,7 +919,7 @@
 - Table
   - Mejorada la ordenación de tablas al hacer clic en la flecha de ordenación (#12890) (por @ohhoney1)
   - Solucionado el problema de alineación vertical de texto vacío en IE10+ (#13638) (por @imzjjy)
-  - Corregida la documentación del tipo de índice  (#13628) (por @ilovefafa)
+  - Corregida la documentación del tipo de índice (#13628) (por @ilovefafa)
   - Corrección del problema de visualización de `show-summary` cuando el encabezado multinivel tiene el attr fixed (#13914) (por @luckyCao)
 - Tabs
   - Corregido error de autodesplazamiento (#13696) (por @iamkun)
@@ -575,7 +939,7 @@
 - Doc
   - Actualización del documento 2.4.11 (#13522) (por @Gonzalo2310)
 - Otros
-  - Eliminar  scripts innecesarios (por @ziyoung)
+  - Eliminar scripts innecesarios (por @ziyoung)
   - Corregido el error de anchor link (#13753) (por @iamkun)
   - Corrección de la capitalización inconsistente en la documentación (por @wonderjar)
   - Añadido código qr del grupo de chat DingDing al readme (by @iamkun in #13957)
@@ -674,7 +1038,7 @@
 
 *2018-08-09*
 
-- Arreglada la tabla que no mostraba el ícono del filtro cuando a  `filter` se les asignaba un array vacío, #12165
+- Arreglada la tabla que no mostraba el ícono del filtro cuando a `filter` se les asignaba un array vacío, #12165
 - Arreglado Menu que no guardaba el estado activo cuando cambiaba `collapse` #12178 (por @elfman)
 - Se ha corregido que Cascader no escapaba a los caracteres especiales para Regexp, #12248
 - Se ha corregido que el RadioBotón deshabilitado mostraba la sombra de la caja cuando se hacía clic, #12262
@@ -708,10 +1072,10 @@
 *2018-07-13*
 
 - Corregido que se disparaba la validacion del Select después de reajustar el formulario, #11837
-- Corregida la posición incorrecta del slot Input `suffix`  cuando se usaba el slot `suffix` con el slot  `append`  , #11951
+- Corregida la posición incorrecta del slot Input `suffix` cuando se usaba el slot `suffix` con el slot `append` , #11951
 - Corregido el clearable Input que muestraba el icono de borrado cuando era readonly, #11967
 - Arreglado el nodo Tree checked cuando estaba disabled, #11847
-- Corregido que  `default-checked-keys`  no funcionaba en Tree, #11971
+- Corregido que `default-checked-keys` no funcionaba en Tree, #11971
 - Corregido que el `empty-text` no era visible cuando el nodo Tree se filtraba, #11971
 - Arreglada la posición de texto vacío sobredimensionado en Table, #11965
 - Corregido que la fila de la tabla no se modificado el resaltado cuando `current-row-key` era asignada a null, #11866
@@ -731,10 +1095,10 @@
 *2018-06-26*
 
 - Ahora el `class-name` y el `label-class-name` de la tabla son reactivos, #11626
-- Arreglado que Table seguia resaltando la fila en la que se había hecho clic cuando  `highlight-current-row` era `false`, #11646
+- Arreglado que Table seguia resaltando la fila en la que se había hecho clic cuando `highlight-current-row` era `false`, #11646
 - Corregido un error de estilo de ButtonGroup cuando sólo habia un botón `round` o `circle`, #11605
 - Arreglado estilo del tamaño de página del Select de Pagination, #11622
-- Corregido un error del método `open`  de los Menús cuando se cambiaba dinámicamente `collapse`, #11646
+- Corregido un error del método `open` de los Menús cuando se cambiaba dinámicamente `collapse`, #11646
 - Añadidos los parámetros `activeName` y `oldActiveName` al gancho before-leave de Tabs, #11713
 - Arreglado el focus en Cascader después de hacer clic fuera, #11588
 - Arreglado que Cascader no se cerraba cuando se hacia clic en la opción estando `change-on-select` como `true`, #11623
@@ -752,7 +1116,7 @@
 - Añadido el atributo `stretch` para Tabs, #11476
 - Arreglado el problema de orden de renderizado de TabPane cuando Tabs es `lazy`, #11461
 - Arreglado que Table no retenia la fila actual de resaltados cuando se expandia, #11464
-- Arreglado que  focusing state cuando `before-leave` devolvia una promesa resuelta, #11386
+- Arreglado que focusing state cuando `before-leave` devolvia una promesa resuelta, #11386
 - Arreglado que Popover deshabilitado seguia creando poppers, #11426
 - Arreglado el bucle sin fin de Tree cuando se añadia un nuevo nodo en modo `lazy`, #11430 (por @wangjingf)
 - Añadido el evento `closed` para Dialog, #11490
@@ -787,9 +1151,9 @@
 - Upload
   - Corregido el error de la consola cuando se resolvia el Archivo en la Promesa devuelta del método `beforeUpload`, #11297 (por @qusiba)
 - Tooltip
-  - Solucionado que la flecha no se  posicionaba correctamente cuando el contenido estaba vacío, #11335
+  - Solucionado que la flecha no se posicionaba correctamente cuando el contenido estaba vacío, #11335
 - Autocompletar
-  - Corregido que  las sugerencias de entrada eran  incorrectas después de eliminar la palabra clave rápidamente, #11323
+  - Corregido que las sugerencias de entrada eran incorrectas después de eliminar la palabra clave rápidamente, #11323
 - ColorPicker
   - Corregido el evento `active-change` que se disparaba incorrectamente cuando el menú desplegable del picker estaba cerrado, #11304
 - Table
@@ -822,7 +1186,7 @@
 - Arreglado que al cerrar el panel DatePicker sin modificar el valor se desencadenaba incorrectamente el evento `change`, #11017
 - Arreglado que la navegación por el teclado no funcionaba correctamente cuando Select tenia opciones agrupadas, #11058
 - Agregado el `slot named` `prefix` para Select, #11063
-- Agregado  el metodo `clearValidate` para FormItem, #11076
+- Agregado el metodo `clearValidate` para FormItem, #11076
 - Agregado el atributo `checkOnClickNode` para Tree, #11111
 
 ### 2.3.7
@@ -838,7 +1202,7 @@
 
 *2018-04-21*
 
-- Corregido el comportamiento incorrecto del callback  `allow-drop` de Tree cuando se usaba el parámetro `type`, #10821
+- Corregido el comportamiento incorrecto del callback `allow-drop` de Tree cuando se usaba el parámetro `type`, #10821
 - Ahora puede introducir correctamente las palabras clave en filterable Single Select en IE11, #10822
 - Corregido Single Select activaba incorrectamente el evento `blur` después de hacer clic en una opción, #10822
 
@@ -848,24 +1212,24 @@
 
 - Arreglado los incorrectos realces en el panel de DatePicker cuando `type` es week, #10712
 - Arreglado que InputNumber comenzaba vacio cuando el valor inicial era 0, #10714
-- Agregado el atributo  `automatic-dropdown` para Select, #10042 (by @Seebiscuit)
+- Agregado el atributo `automatic-dropdown` para Select, #10042 (by @Seebiscuit)
 - Arreglado que el valor del Rate pasaba a `disabled` cuando se comenzaba a actualizar con las teclas de navegacion, #10726 (by @Richard-Choooou)
-- Ahora el atributo `type` de DatePicker's puede ser  `'dates'`, donde puede elegir varias fechas en un solo picker, #10650 (by @Mini256)
-- Agregados los eventos  `prev-click` y `next-click` para Pagination, #10755
+- Ahora el atributo `type` de DatePicker's puede ser `'dates'`, donde puede elegir varias fechas en un solo picker, #10650 (by @Mini256)
+- Agregados los eventos `prev-click` y `next-click` para Pagination, #10755
 - Agregado el atributo `pager-count` para Pagination, #10493 (by @chongjohn716)
-- Agregado `type` como 3rd parametro del atributo  `allow-drop`  de Tree, #10792
+- Agregado `type` como 3rd parametro del atributo `allow-drop` de Tree, #10792
 - Ahora usamos ResizeObserver para detectar el redimensionamiento de elementos DOM, #10779
 
 ### 2.3.4
 
 *2018-04-12*
 
-- Eliminado el atributo duplicado  `showTimeout` en SubMenu's en la declaracion TypeScript, #10566 (by @kimond)
+- Eliminado el atributo duplicado `showTimeout` en SubMenu's en la declaracion TypeScript, #10566 (by @kimond)
 - Ahora se puede personalizar los datos de los items de Transfer usando scoped slot, #10577
-- Arreglado que los click de los botones `next` y `prev`  en Pagination se deshabilitaban cuando se disparaba el evento  `current-change`, #10628
+- Arreglado que los click de los botones `next` y `prev` en Pagination se deshabilitaban cuando se disparaba el evento `current-change`, #10628
 - Arreglado que Textarea mostraba `undefined` en SSR cuando el valor no era asignado, #10630
-- Arreglado que se deshabilitaba el estilo del TabItem cuando  `type` era border-card, #10640
-- Agregado `$index` como cuarto parametro en el atributo de las columnas de Table  `formatter` , #10645
+- Arreglado que se deshabilitaba el estilo del TabItem cuando `type` era border-card, #10640
+- Agregado `$index` como cuarto parametro en el atributo de las columnas de Table `formatter` , #10645
 - Arreglado que CheckboxButton no se exportaba en la declaracion de TypeScript, #10666
 
 ### 2.3.3
@@ -902,7 +1266,7 @@
 #### Nuevas características
 - Table
   - Ahora `formatter` de TableColumn puede ser actualizado dinámicamente, #10184 (by @elfman)
-  - Agregado el atributo  `select-on-indeterminate`, #9924 (by @syn-zeta)
+  - Agregado el atributo `select-on-indeterminate`, #9924 (by @syn-zeta)
 - Menu
   - Agregado el atributo `collapse-transition`, #8809 (by @limichange)
 - Input
@@ -913,8 +1277,8 @@
 - Tree
   - Agregados los atributos `draggable`, `allow-drop` y `allow-drag`, y los eventos `node-drag-start`, `node-drag-enter`, `node-drag-leave`, `node-drag-over`, `node-drag-end` y `node-drop`, #9251 #10372 (by @elfman)
 - Form
-  - El metodo `validate` ahora acepta un segundo parametro, que contiene información de los ítems  del formulario que no superaron la validación, #10279
-  - Agregado el evento  `validate`, #10351
+  - El metodo `validate` ahora acepta un segundo parametro, que contiene información de los ítems del formulario que no superaron la validación, #10279
+  - Agregado el evento `validate`, #10351
 - Progress
   - Agregado el atributo `color`, #10352 (by @YunYouJun)
 - Button
@@ -926,7 +1290,7 @@
 - Menu
   - Ahora collapsed Menu sólo mostrará el Tooltip cuando el slot `title` de MenuItem esté configurado, #10193 (by @PanJiaChen)
 - Pagination
-  - Corregido el evento  `current-change`  que se disparaba erróneamente sin interacción del usuario, #10247
+  - Corregido el evento `current-change` que se disparaba erróneamente sin interacción del usuario, #10247
 - DatePicker
   - Ahora la fecha y la hora en el panel desplegable están correctamente formateadas según el atributo `format`, #10174（by @remizovvv）
 - Upload
@@ -948,16 +1312,16 @@
 - Arreglado anchos incorrectos de columnas fijas de Table en algunos casos, #10130
 - Corregido MessageBox heredaba el atributo `title` de su instancia anterior cuando se llamaba sin `title`, #10126 (by @Pochodaydayup)
 - Agregado el atributo `input-size` para Slider, #10154
-- Agregados los eventos  `left-check-change` y `right-check-change` para Transfer, #10156
+- Agregados los eventos `left-check-change` y `right-check-change` para Transfer, #10156
 
 ### 2.2.1
 
 *2018-03-02*
 
 - Corregido Aside, Header y Footer que se contraia en algunos layout, #9812
-- Corregido Table con un atributo `height`  no renderizaba en SSR, #9876
+- Corregido Table con un atributo `height` no renderizaba en SSR, #9876
 - Corregido Table con fila expandible no calculaba la altura cuando la fila era expandida, #9484
-- Corregido que cuando se escribia la fecha de forma manual en DateTimePicker no se disparaba el evento  `change`, #9913
+- Corregido que cuando se escribia la fecha de forma manual en DateTimePicker no se disparaba el evento `change`, #9913
 - Corregido que Select mostraba sus opciones cuando se hacia click con el botón derecho del mouse en el Input, #9894 (by @openks)
 - Agregado el atributo `tooltip-class` para Slider, #9957
 - Ahora Select permanecera enfocado despues de la selección, #9857 (by @Seebiscuit)
@@ -969,12 +1333,12 @@
 
 #### New features
 - Menu
-  - Agregados los atributos  `popper-class` y `disabled` para SubMenu, #9604 #9771
+  - Agregados los atributos `popper-class` y `disabled` para SubMenu, #9604 #9771
   - Menu Horizontal ahora soporta SubMenu multi-capas, #9741
 - Tree
   - Agregado el evento `node-contextmenu`, #9678
   - Ahora se puede personalizar el template del nodo usando scoped slot, #9686
-  - Agregados los metodos  `getNode`, `remove`, `append`, `insertBefore`, `insertAfter`, `getCheckedKeys`, `getHalfCheckedNodes`, `getHalfCheckedKeys` y el evento `check`, #9718 #9730
+  - Agregados los metodos `getNode`, `remove`, `append`, `insertBefore`, `insertAfter`, `getCheckedKeys`, `getHalfCheckedNodes`, `getHalfCheckedKeys` y el evento `check`, #9718 #9730
 - Transfer
   - Agregado el metodo `clearQuery`, #9753
 - Select
@@ -990,7 +1354,7 @@
   - Corregido componentes del Container que no se estiraban en IE11, #9655
 - Loading
 
-  - Corregido Loading no se mostraba cuando el valor de `v-loading` era cambiado a true en el `hook`  `mounted`, #9722
+  - Corregido Loading no se mostraba cuando el valor de `v-loading` era cambiado a true en el `hook` `mounted`, #9722
 - Switch
   - Corregido se disparaban los dos eventos nativos de click cuando se hacia click en el Switch, #9760
 
@@ -1054,11 +1418,11 @@
 
 *2018-01-08*
 
-- Corregido el problema de color del borde del Select cuando está el slot `prepend` o `append`  del Input, #9089
-- Corregido el parámetro  `remove-tag` de Select, #9090
+- Corregido el problema de color del borde del Select cuando está el slot `prepend` o `append` del Input, #9089
+- Corregido el parámetro `remove-tag` de Select, #9090
 - Añadido los atributos `show-timeout` y `hide-timeout` para SubMenu, #8934 (por @HugoLew)
-- Corregido el estilo de Tooltip de  `show-overflow-tooltip`  que faltaba cuando Table era importada bajo demanda, #9130
-- Se ha corregido el mal funcionamiento de ordenación de la columna de Table despues que  `clearSort`  era ejecutado en esa columna, #9100 (por @zEmily)
+- Corregido el estilo de Tooltip de `show-overflow-tooltip` que faltaba cuando Table era importada bajo demanda, #9130
+- Se ha corregido el mal funcionamiento de ordenación de la columna de Table despues que `clearSort` era ejecutado en esa columna, #9100 (por @zEmily)
 - El fichero de configuración i18n para el checo se renombra de `cz` a `cs-CZ`, #9164
 
 ### 2.0.10
@@ -1074,7 +1438,7 @@
 
 *2017-12-24*
 
-- Añadida la función de enganche (hook) `before-remove`  para Upload, #8788 (by @firesh)
+- Añadida la función de enganche (hook) `before-remove` para Upload, #8788 (by @firesh)
 - Arreglado el valor inicial de error que no funcionaba para FormItem, #8840
 - Ahora la directiva Loading soporta nombre de clase personalizado asignando el atributo `element-loading-custom-class`, #8826 (por @earlymeme)
 - Arreglado CarouselItem que se ponía invisible cuando los datos eran actualizados asincrónicamente, #8921
@@ -1102,7 +1466,7 @@
 
 - Corregido error de estilo de los iconos de ordenación de Table, #8405
 - Corregido activacion para Popover cuando `trigger` es manual, #8467
-- Añadidos los atributos `prefix-icon` y `suffix-icon`  para Autocomplete, #8446 (por @liyanlong)
+- Añadidos los atributos `prefix-icon` y `suffix-icon` para Autocomplete, #8446 (por @liyanlong)
 - Añadido el atributo `separator` para Cascader, #8501
 - Añadido atributo `clearable` para Input, #8509 (por @lbogdan)
 - Añadido atributo `background` para Pagination, #8553
@@ -1114,7 +1478,7 @@
 - Solucionado regresion en 2.0.4 de Popover, Tree, Breadcrumb and Cascader, #8188 #8217 #8283
 - Solucionado Fuga de memoria de la directiva clickoutside, #8168 #8225 (por @badpunman @STLighter)
 - Solucionada la altura en multiple Select cuando se borra su valor, #8317 (por @luciy)
-- Añadido el atributo `collapse-tags` para multiple Select  para reemplazar las tags con una línea de texto, #8190
+- Añadido el atributo `collapse-tags` para multiple Select para reemplazar las tags con una línea de texto, #8190
 - Solucionado el alto consumo de CPU causado por Table cuando esta oculta, #8351
 - Ahora puede usar el método `doLayout` de Table para actualizar su diseño, #8351
 
@@ -1135,7 +1499,7 @@
 - Solucionado atributos `editable` and `readonly` de DatePicker de los rangos, #7922
 - Corregido error de estilo de los Tabs anidados, #7941
 - Corregido error de estilo del último Step de Steps verticales, #7980
-- Corregido el tiempo de activación del evento `current-change`  para Pagination, #7995
+- Corregido el tiempo de activación del evento `current-change` para Pagination, #7995
 - Corregido Tooltip no registrado en el Menu, #7995
 
 ### 2.0.2
@@ -1166,7 +1530,7 @@
 #### New features
 
 - General
-  - Un nuevo tema:  `theme-chalk`
+  - Un nuevo tema: `theme-chalk`
   - Se ha mejorado la accesibilidad de los siguientes componentes: Alert, AutoComplete, Breadcrumb, Button, Checkbox, Collapse, Input, InputNumber, Menu, Progress, Radio, Rate, Slider, Switch, Upload
   - Añadido tipografías TypeScript
   - Todos los iconos existentes son rediseñados. Se han añadido algunos iconos nuevos
@@ -1176,9 +1540,9 @@
 - Button
   - Atributo `round` añadido. Se usa para botones de esquinas redondas #6643
 - TimeSelect
-  - Ahora puede ser navegado por  `Up` y `Down`, y presionando `Enter` selecciona la hora #6023
+  - Ahora puede ser navegado por `Up` y `Down`, y presionando `Enter` selecciona la hora #6023
 - TimePicker
-  - Ahora puede ser navegado por  `Up` y `Down`, y presionando `Enter` selecciona la hora #6050
+  - Ahora puede ser navegado por `Up` y `Down`, y presionando `Enter` selecciona la hora #6050
   - Añadido `start-placeholder` y `end-placeholder`. Son placeholder's para las dos casillas de input en modo range #7169
   - Añadido el atributo `arrow-control` para hacer girar el tiempo con las flechas #7438
 - Tree
@@ -1195,19 +1559,19 @@
   - Añadido el atributo `closeOnHashChange` #6043
   - Atributo `center` agregado para que el contenido pueda ser centrado #7029
   - Añadido atributo `roundButton` para mostrar Botones redondeados #7029
-  - Añadido atributo  `dangerouslyUseHTMLString`. Cuando está configurado en true, el mensaje será analizado como cadena HTML<sup>*</sup> #6043
+  - Añadido atributo `dangerouslyUseHTMLString`. Cuando está configurado en true, el mensaje será analizado como cadena HTML<sup>*</sup> #6043
   - Añadido atributo `inputType` para asignar el tipo para el input interno, #7651
 - Dialog
   - Añadidos los atributos `width`, `fullscreen`, `append-to-body`. Ahora Dialog puede ser anidado
   - Atributo `center` agregado para que el contenido pueda ser centrado #7042
-  - Añadidos  `focus-after-closed`, `focus-after-open`  para mejorar la accesibilidad #6511
+  - Añadidos `focus-after-closed`, `focus-after-open` para mejorar la accesibilidad #6511
 - ColorPicker
   - Ahora puede escribir colores en el input #6167
   - Añadidos atributos `size` y `disabled` #7026
   - Añadido atributo `popper-class` #7351
 - Message
   - Ahora el color de los iconos puede ser sustituido por CSS #6207
-  - Añadido atributo  `dangerouslyUseHTMLString`. Cuando está configurado en true, el mensaje será analizado como cadena HTML<sup>*</sup> #6207
+  - Añadido atributo `dangerouslyUseHTMLString`. Cuando está configurado en true, el mensaje será analizado como cadena HTML<sup>*</sup> #6207
   - Atributo `center` agregado para que el contenido pueda ser centrado #6875
 - Notification
   - Añadido atributo `position` para configurar donde aparece Notification #6231
@@ -1216,24 +1580,24 @@
 - Rate
   - Añadido el atributo `show-score` para determinar si la puntuación actual se muestra #6295
 - Tabs
-  - Añadido el atributo `tab-position`  #6096
+  - Añadido el atributo `tab-position` #6096
 - Radio
-  - Añadidos los atributos `border` y `size`  #6690
+  - Añadidos los atributos `border` y `size` #6690
 - Checkbox
-  - Añadidos los atributos `border` y `size`  #6690
+  - Añadidos los atributos `border` y `size` #6690
 - Alert
   - Atributo `center` agregado para que el contenido pueda ser centrado #6876
 - Menu
-  - Añadidos los atributos  `background-color`, `text-color` y `active-text-color` #7064
-  - Añadidos los methods  `open` and `close` para abrir y cerrar los SubMenu con programación, #7412
+  - Añadidos los atributos `background-color`, `text-color` y `active-text-color` #7064
+  - Añadidos los methods `open` and `close` para abrir y cerrar los SubMenu con programación, #7412
 - Form
-  - Añadido el atributo  `inline-message`  para determinar si el mensaje de validación se muestra inline #7032
+  - Añadido el atributo `inline-message` para determinar si el mensaje de validación se muestra inline #7032
   - Añadido el atributo `status-icon` para mostrar un icono de retroalimentación cuando se valida #7032
   - Form y FormItem ahora tienen un atributo `size`. Los componentes internos heredarán este tamaño si no se especifica en ellos mismos, #7428
   - Método `validate` devolverá ahora una promesa si se omite la llamada de retorno, #7405
   - Añadido método `clearValidate` para limpiar los resultados de las validaciones de todos los form items, #7623
 - Input
-  - Añadido slots con nombres `suffix` y `prefix` y atributos `suffixIcon` y `prefixIcon`  para añadir contenido dentro del input #7032
+  - Añadido slots con nombres `suffix` y `prefix` y atributos `suffixIcon` y `prefixIcon` para añadir contenido dentro del input #7032
 - Breadcrumb
   - Añadido el atributo `separator-class` para dar soporte a los iconos como separadores de items #7203
 - Steps
@@ -1241,7 +1605,7 @@
 - Pagination
   - Añadidos los atributos `prev-text` y `next-text` para personalizar los textos de la página anterior y de la página siguiente #7005
 - Loading
-  - Ahora usted puede personalizar el ícono del spinner y el color de fondo con los props  `spinner` y `background` , #7390
+  - Ahora usted puede personalizar el ícono del spinner y el color de fondo con los props `spinner` y `background` , #7390
 - Autocomplete
   - Añadido atributo `debounce`, #7413
 - Upload
@@ -1263,7 +1627,7 @@
   - Añadido un atributo `header-row-style` para el estilo de encabezado
   - Añadido el atributo `header-cell-class-name` para asignar el nombre de la clase para las celdas de encabezado.
   - Añadido el atributo `header-cell-style` a las celdas de encabezado de estilo
-  - El atributo prop de TableColumn ahora acepta las notaciones  `object[key]`
+  - El atributo prop de TableColumn ahora acepta las notaciones `object[key]`
   - Atributo de `index` añadido para TableColumn para personalizar índices de filas
 - Select
   - Añadido el atributo `reserve-keyword` para reservar la palabra clave de búsqueda actual después de seleccionar una opción.
@@ -1271,8 +1635,8 @@
 #### Bug fixes
 
 - DatePicker
-  -  Arreglado  `v-model`  que devolvia el segundo día de la semana seleccionada en modo week #6038
-  -  Arreglado el primer input comenzaba borrado con el type `daterange`  #6021
+  - Arreglado `v-model` que devolvia el segundo día de la semana seleccionada en modo week #6038
+  - Arreglado el primer input comenzaba borrado con el type `daterange` #6021
 - DateTimePicker
   - Arreglado DateTimePicker y TimePicker que se afectaban entre sí cuando se seleccionaban #6090
   - Arreglado la hora y el segundo podian estar más allá del límite al seleccionar el tiempo #6076
@@ -1283,9 +1647,9 @@
 - Select
   - Rendimiento mejorado. Ahora Vue dev-tool no se bloqueará cuando un gran número de Selects sean destruidos #6151
 - Table
-  - Corregido un bug de Table permanecía oculto cuando su elemento padre tenia el atributo   `display: none`
+  - Corregido un bug de Table permanecía oculto cuando su elemento padre tenia el atributo `display: none`
   - Arreglado Table ahora amplia su ancho cuando el elemento padre tiene `display: flex`
-  - Arreglado un bug que corregía las columnas de una tabla con slot con nombre  `append`   que  desaparecia cuando los datos eran recuperados dinámicamente.
+  - Arreglado un bug que corregía las columnas de una tabla con slot con nombre `append` que desaparecia cuando los datos eran recuperados dinámicamente.
   - Arreglado el atributo `expand-row-keys` que no funcionan con el valor inicial
   - Fallo del filtro corregido al actualizar los datos
   - Se ha corregido un error de cálculo de la disposición de columnas fijas con cabeceras agrupadas.
@@ -1297,11 +1661,11 @@
 - General
   - Eliminado `theme-default`
   - Compatible con Vue 2.5.2+ e IE 10+
-  - Evento `change`  de componentes del formulario y evento `current-change` de Pagination ahora sólo se activa en la interacción del usuario.
+  - Evento `change` de componentes del formulario y evento `current-change` de Pagination ahora sólo se activa en la interacción del usuario.
   - El atributo `size` del botón y los componentes del formulario aceptan ahora los tamaños `medium`, `small` y `mini`.
-  - Para facilitar el uso de iconos de terceros, los atributos `icon` de Button y Steps y los atributos  `prefix-icon` y `suffix-icon`  del input ahora requieren un nombre de clase completo.
+  - Para facilitar el uso de iconos de terceros, los atributos `icon` de Button y Steps y los atributos `prefix-icon` y `suffix-icon` del input ahora requieren un nombre de clase completo.
 - Dialog
-  - Atributo `size` eliminado. Ahora el tamaño de Dialog se puede configurar con  `width` y `fullscreen`
+  - Atributo `size` eliminado. Ahora el tamaño de Dialog se puede configurar con `width` y `fullscreen`
   - Ahora la visibilidad del Diálogo no puede ser controlada por `v-model`
 - Rate
   - `text-template` a sido renombrado a `score-template`
@@ -1310,19 +1674,19 @@
 - Transfer
   - `footer-format` a sido renombrado a `format`
 - Switch
-  - Los atributos que comienzan con `on*` serán analizados en eventos en JSX, haciendo que todos los atributos `on*` de Switch no puedan trabajar en JSX. Por lo tanto, los atributos `on*` se renombran a `active-*`, y por consiguiente los atributos `off-*` se renombran a `inactivado-*`. Este cambio afecta a los siguientes atributos:  `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`.
-  - Los atributos `active-text` y `inactive-text`  ahora no tienen valores por defecto.
+  - Los atributos que comienzan con `on*` serán analizados en eventos en JSX, haciendo que todos los atributos `on*` de Switch no puedan trabajar en JSX. Por lo tanto, los atributos `on*` se renombran a `active-*`, y por consiguiente los atributos `off-*` se renombran a `inactivado-*`. Este cambio afecta a los siguientes atributos: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`.
+  - Los atributos `active-text` y `inactive-text` ahora no tienen valores por defecto.
 - Tag
-  - El atributo type acepta ahora  `success`, `info`, `warning` y `danger`
+  - El atributo type acepta ahora `success`, `info`, `warning` y `danger`
 - Menu
-  - Atributo `theme` eliminado. El color de Menu se puede configurar utilizando  `background-color`, `text-color` y `active-text-color`
+  - Atributo `theme` eliminado. El color de Menu se puede configurar utilizando `background-color`, `text-color` y `active-text-color`
 - Input
-  - Atributo `icon` eliminado. Ahora el icono del sufijo puede configurarse usando el atributo  `suffix-icon`  o el slot con nombre `suffix`.
+  - Atributo `icon` eliminado. Ahora el icono del sufijo puede configurarse usando el atributo `suffix-icon` o el slot con nombre `suffix`.
   - Eliminado el atributo `on-icon-click` y el evento `click`. Ahora para añadir el manejador de clics en los iconos, por favor use los slots con nombre.
   - El evento `change` se comporta ahora como el nativo, que se activa sólo en la perdida del foco o presionando enter. Si necesita responder a las entradas de usuario en tiempo real, puede utilizar el evento `input`.
 - Autocomplete
   - Atributo `custom-item` eliminado. Ahora la plantilla de sugerencias del input se puede personalizar utilizando `scoped slot`
-  - Atributo  `props`  eliminado. Ahora puede utilizar el atributo `value-key` para designar el nombre de la clave del objeto de sugerencia del input para su visualización.
+  - Atributo `props` eliminado. Ahora puede utilizar el atributo `value-key` para designar el nombre de la clave del objeto de sugerencia del input para su visualización.
 - Steps
   - Atributo `center` eliminado
   - Ahora Steps llenara su contenedor padre por defecto
@@ -1331,9 +1695,9 @@
 - Table
   - Soporte eliminado para personalizar la plantilla de columnas mediante `inline-template`
   - `sort-method` ahora se alinea con `Array.sort`. Debería devolver un número en lugar de un booleano
-  - El slot `append`  se desplazo fuera del elemento `tbody` para evitar múltiples renderizados.
+  - El slot `append` se desplazo fuera del elemento `tbody` para evitar múltiples renderizados.
   - Evento `expand` se renombro a `expand-change`
-  - Los parametros de los métodos  `row-class-name` y `row-style` son ahora un objeto
+  - Los parametros de los métodos `row-class-name` y `row-style` son ahora un objeto
 
 # #
 

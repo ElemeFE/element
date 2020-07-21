@@ -62,7 +62,7 @@ Un tableau de base pour afficher seulement.
 
 Ajouter des couleurs différentes pour les lignes paires et impaires permet de lire le tableau plus facilement.
 
-:::demo L'attribut `stripe` accepte un `Boolean`. Si `true`, le tabelau sera rayé.
+:::demo L'attribut `stripe` accepte un `Boolean`. Si `true`, le tableau sera rayé.
 ```html
 <template>
   <el-table
@@ -833,7 +833,7 @@ Vous pouvez activer la sélection d'une ligne.
 
 Vous pouvez aussi sélectionner plusieurs lignes.
 
-:::demo Ajoutez une `el-table-column` avec son `type` à `selection`. Cet exemple utilise aussi `show-overflow-tooltip`: par défaut, si le contenu est trop long, il se séparera en plusieurs lignes. Si vous souhaitez conserver une seule ligne, utilisez `show-overflow-tooltip`, qui accepte un `Boolean`. Si `true`, le contenu non-affiché s'affichera dans le tooltip lorsque la souris passera sur la case.
+:::demo Ajoutez une `el-table-column` avec son `type` à `selection`. Cet exemple utilise aussi `show-overflow-tooltip`: par défaut, si le contenu est trop long, il se séparera en plusieurs lignes. Si vous souhaitez conserver une seule ligne, utilisez `show-overflow-tooltip`, qui accepte un `Boolean`. Si `true`, le contenu non affiché s'affichera dans le tooltip lorsque la souris passera sur la case.
 ```html
 <template>
   <el-table
@@ -1817,7 +1817,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 |----------------|----------------------|-----------|-----------------------|----------|
 | data | Les données de la table. | array | — | — |
 | height | La hauteur de la table. Par défaut la hauteur est `auto`. Si sa valeur est un nombre, la hauteur est en px; si c'est un string, la valeur est assigné au style.height de l'élement. La hauteur est affectée par les styles externes. | string/number | — | — |
-| max-height | La hauteur maximale de la table. La hauteur commence à `auto` jusqu'à atteindre la limite. La `maxHeight` est en px. | string/number | — | — |
+| max-height | Table's max-height. The legal value is a number or the height in px. | string/number | — | — |
 | stripe | Si la table est rayée. | boolean | — | false |
 | border | Si la table à une bordure verticale. | boolean | — | false |
 | size | Taille de la table. | string | medium / small / mini | — |
@@ -1889,7 +1889,7 @@ Vous pouvez personnaliser les indices des colonnes de type `index`.
 
 | Nom | Description |
 |------|--------|
-| append | Contenu à insérer après la dernière ligne. Vous aurez sans doute besoin de ce slot si vous implémentez un scroll infini. Il sera affiché au-dessus de la ligne de somme si il y en a une. |
+| append | Contenu à insérer après la dernière ligne. Vous aurez sans doute besoin de ce slot si vous implémentez un scroll infini. Il sera affiché au-dessus de la ligne de somme s'il y en a une. |
 
 ### Attributs de Table-column
 

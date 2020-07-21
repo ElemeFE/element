@@ -321,9 +321,13 @@ export default {
         rowClasses.push('el-table__row--level-' + treeRowData.level);
         display = treeRowData.display;
       }
+      // 指令 v-show 会覆盖 row-style 中 display
+      // 使用 :style 代替 v-show https://github.com/ElemeFE/element/issues/16995
+      let displayStyle = display ? null : {
+        display: 'none'
+      };
       return (<tr
-        v-show={display}
-        style={ this.getRowStyle(row, $index) }
+        style={ [displayStyle, this.getRowStyle(row, $index)] }
         class={ rowClasses }
         key={ this.getKeyOfRow(row, $index) }
         on-dblclick={ ($event) => this.handleDoubleClick($event, row) }

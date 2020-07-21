@@ -3,7 +3,7 @@
 Le champ d'input de base.
 
 :::warning
-Input est un composant controllé, il **affiche toujours la valeur liée de Vue**.
+Input est un composant contrôlé, il **affiche toujours la valeur liée de Vue**.
 
 En règle générale, l'évènement `input` devrait être géré. Son handler devrait mettre à jour la valeur du composant (ou utilisez `v-model`). Dans le cas contraire, la valeur du champ ne sera pas modifiée.
 
@@ -604,6 +604,8 @@ export default {
 | blur | Se déclenche quand Input perds le focus. | (event: Event) |
 | focus | Se déclenche quand Input a le focus. | (event: Event) |
 | change | Se déclenche quand la valeur change. | (value: string \ number) |
+| change | Déclenché uniquement lorsque la zone de saisie perd le focus ou que l'utilisateur appuie sur Entrée. | (value: string \| number) |
+| input | Déclenché lorsque la valeur d'entrée change. | (value: string \| number) |
 | clear | Se déclenche quand le champ est effacé par le bouton de reset. | — |
 
 ### Méthodes de l'Input
@@ -658,6 +660,7 @@ export default {
 | Nom | Description | Paramètres |
 |----| ----| ----|
 | select | Se déclenche quand une suggestion est cliquée. | La suggestion sélectionnée. |
+| change | Se déclenche quand la valeur change. | (value: string \ number) |
 
 ### Méthodes de l'autocomplétion
 

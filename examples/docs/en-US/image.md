@@ -108,6 +108,34 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 ```
 :::
 
+### Image Preview
+
+:::demo allow big image preview by setting `previewSrcList` prop.
+```html
+<div class="demo-image__preview">
+  <el-image 
+    style="width: 100px; height: 100px"
+    :src="url" 
+    :preview-src-list="srcList">
+  </el-image>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        srcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | Attribute | Description | Type  | Accepted values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -117,6 +145,8 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 | referrer-policy | Native referrerPolicy | string | - | - |
 | lazy | Whether to use lazy load | boolean | — | false |
 | scroll-container | The container to add scroll listener when using lazy load | string / HTMLElement | — | The nearest parent container whose overflow property is auto or scroll |
+| preview-src-list | allow big image preview | Array | — | - |
+| z-index | set image preview z-index | Number | — | 2000 |
 
 ### Events
 | Event Name | Description | Parameters |

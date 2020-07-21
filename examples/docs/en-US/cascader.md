@@ -1936,6 +1936,11 @@ You can customize the content of cascader node.
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 | remove-tag | triggers when remove tag in multiple selection mode | the value of the tag which is removed |
 
+### Cascader Methods
+| Method Name | Description | Parameters |
+| ---- | ---- | ---- |
+| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+
 ### Cascader Slots
 | Slot Name | Description |
 |---------|-------------|
@@ -1954,6 +1959,12 @@ You can customize the content of cascader node.
 |---------- |-------- |---------- |
 | change | triggers when the binding value changes | value |
 | expand-change | triggers when expand option changes | an array of the expanding node's parent nodes |
+
+### CascaderPanel Methods
+| Method Name | Description | Parameters |
+| ---- | ---- | ---- |
+| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+| clearCheckedNodes | clear checked nodes | - |
 
 ### CascaderPanel Slots
 | Slot Name | Description |

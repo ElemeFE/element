@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import debounce from 'throttle-debounce/debounce';
 import merge from 'element-ui/src/utils/merge';
 import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
 import expand from './expand';
@@ -127,18 +126,15 @@ export default Vue.extend({
       const states = this.states;
       states.isAllSelected = false;
       const oldSelection = states.selection;
-      if (states.selection.length) {
+      if (oldSelection.length) {
         states.selection = [];
-      }
-      if (oldSelection.length > 0) {
-        this.table.$emit('selection-change', states.selection ? states.selection.slice() : []);
+        this.table.$emit('selection-change', []);
       }
     },
 
     cleanSelection() {
-      const selection = this.states.selection || [];
-      const data = this.states.data;
-      const rowKey = this.states.rowKey;
+      const states = this.states;
+      const { data, rowKey, selection } = states;
       let deleted;
       if (rowKey) {
         deleted = [];
@@ -150,24 +146,19 @@ export default Vue.extend({
           }
         }
       } else {
-        deleted = selection.filter((item) => {
-          return data.indexOf(item) === -1;
-        });
+        deleted = selection.filter(item => data.indexOf(item) === -1);
       }
-
-      deleted.forEach((deletedItem) => {
-        selection.splice(selection.indexOf(deletedItem), 1);
-      });
-
       if (deleted.length) {
-        this.table.$emit('selection-change', selection ? selection.slice() : []);
+        const newSelection = selection.filter(item => deleted.indexOf(item) === -1);
+        states.selection = newSelection;
+        this.table.$emit('selection-change', newSelection.slice());
       }
     },
 
     toggleRowSelection(row, selected, emitChange = true) {
       const changed = toggleRowStatus(this.states.selection, row, selected);
       if (changed) {
-        const newSelection = this.states.selection ? this.states.selection.slice() : [];
+        const newSelection = (this.states.selection || []).slice();
         // 调用 API 修改选中值，不触发 select 事件
         if (emitChange) {
           this.table.$emit('select', newSelection, row);
@@ -176,7 +167,7 @@ export default Vue.extend({
       }
     },
 
-    toggleAllSelection: debounce(10, function() {
+    _toggleAllSelection() {
       const states = this.states;
       const { data = [], selection } = states;
       // when only some rows are selected (but not all), select or deselect all of them
@@ -203,27 +194,25 @@ export default Vue.extend({
         this.table.$emit('selection-change', selection ? selection.slice() : []);
       }
       this.table.$emit('select-all', selection);
-    }),
+    },
 
     updateSelectionByRowKey() {
       const states = this.states;
-      const { selection, rowKey, data = [] } = states;
+      const { selection, rowKey, data } = states;
       const selectedMap = getKeysMap(selection, rowKey);
-      // TODO：这里的代码可以优化
-      states.selection = data.reduce((prev, row) => {
+      data.forEach(row => {
         const rowId = getRowIdentity(row, rowKey);
         const rowInfo = selectedMap[rowId];
         if (rowInfo) {
-          prev.push(row);
+          selection[rowInfo.index] = row;
         }
-        return prev;
-      }, []);
+      });
     },
 
     updateAllSelected() {
       const states = this.states;
       const { selection, rowKey, selectable } = states;
-      // data 为 null 时，结构时的默认值会被忽略
+      // data 为 null 时，解构时的默认值会被忽略
       const data = states.data || [];
       if (data.length === 0) {
         states.isAllSelected = false;
@@ -276,6 +265,9 @@ export default Vue.extend({
     },
 
     updateSort(column, prop, order) {
+      if (this.states.sortingColumn && this.states.sortingColumn !== column) {
+        this.states.sortingColumn.order = null;
+      }
       this.states.sortingColumn = column;
       this.states.sortProp = prop;
       this.states.sortOrder = order;

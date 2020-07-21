@@ -96,7 +96,7 @@
     height: $--transfer-item-height;
     line-height: $--transfer-item-height;
     padding-left: 15px;
-    display: block;
+    display: block !important;
 
     & + .el-transfer-panel__item {
       margin-left: 0;

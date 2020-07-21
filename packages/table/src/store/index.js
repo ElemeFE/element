@@ -10,17 +10,17 @@ Watcher.prototype.mutations = {
     this.execQuery();
     // 数据变化，更新部分数据。
     // 没有使用 computed，而是手动更新部分数据 https://github.com/vuejs/vue/issues/6660#issuecomment-331417140
-    this.updateCurrentRow();
+    this.updateCurrentRowData();
     this.updateExpandRows();
-    if (!states.reserveSelection) {
+    if (states.reserveSelection) {
+      this.assertRowKey();
+      this.updateSelectionByRowKey();
+    } else {
       if (dataInstanceChanged) {
         this.clearSelection();
       } else {
         this.cleanSelection();
       }
-    } else {
-      this.assertRowKey();
-      this.updateSelectionByRowKey();
     }
     this.updateAllSelected();
 
@@ -68,17 +68,14 @@ Watcher.prototype.mutations = {
   },
 
   sort(states, options) {
-    const { prop, order } = options;
+    const { prop, order, init } = options;
     if (prop) {
-      // TODO：nextTick 是否有必要？
-      Vue.nextTick(() => {
-        const column = arrayFind(states.columns, column => column.property === prop);
-        if (column) {
-          column.order = order;
-          this.updateSort(column, prop, order);
-          this.commit('changeSortCondition');
-        }
-      });
+      const column = arrayFind(states.columns, column => column.property === prop);
+      if (column) {
+        column.order = order;
+        this.updateSort(column, prop, order);
+        this.commit('changeSortCondition', { init });
+      }
     }
   },
 
@@ -92,7 +89,7 @@ Watcher.prototype.mutations = {
     const ingore = { filter: true };
     this.execQuery(ingore);
 
-    if (!options || !options.silent) {
+    if (!options || !(options.silent || options.init)) {
       this.table.$emit('sort-change', {
         column,
         prop,

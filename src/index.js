@@ -76,9 +76,12 @@ import Divider from '../packages/divider/index.js';
 import Image from '../packages/image/index.js';
 import Calendar from '../packages/calendar/index.js';
 import Backtop from '../packages/backtop/index.js';
-import InfiniteScroll from '../packages/infiniteScroll/index.js';
+import InfiniteScroll from '../packages/infinite-scroll/index.js';
 import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
+import Avatar from '../packages/avatar/index.js';
+import Drawer from '../packages/drawer/index.js';
+import Popconfirm from '../packages/popconfirm/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -157,6 +160,9 @@ const components = [
   Backtop,
   PageHeader,
   CascaderPanel,
+  Avatar,
+  Drawer,
+  Popconfirm,
   CollapseTransition
 ];
 
@@ -192,7 +198,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.9.2',
+  version: '2.13.2',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -275,5 +281,8 @@ export default {
   Backtop,
   InfiniteScroll,
   PageHeader,
-  CascaderPanel
+  CascaderPanel,
+  Avatar,
+  Drawer,
+  Popconfirm
 };

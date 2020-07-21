@@ -233,6 +233,7 @@ Description includes a message with more detailed information.
 
 | Name | Description |
 |------|--------|
+| — | description |
 | title | content of the Alert title |
 
 ### Events

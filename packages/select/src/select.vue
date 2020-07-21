@@ -50,7 +50,6 @@
         :autocomplete="autoComplete || autocomplete"
         @focus="handleFocus"
         @blur="softFocus = false"
-        @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -58,6 +57,7 @@
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
+        @keydown.tab="visible = false"
         @compositionstart="handleComposition"
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
@@ -80,6 +80,7 @@
       :readonly="readonly"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
+      :tabindex="(multiple && filterable) ? '-1' : null"
       @focus="handleFocus"
       @blur="handleBlur"
       @keyup.native="debouncedOnInputChange"
@@ -146,8 +147,7 @@
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
+  import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
   import { isKorean } from 'element-ui/src/utils/shared';
 
@@ -445,7 +445,7 @@
         const text = event.target.value;
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.handleQueryChange(text);
+          this.$nextTick(_ => this.handleQueryChange(text));
         } else {
           const lastCharacter = text[text.length - 1] || '';
           this.isOnComposition = !isKorean(lastCharacter);
@@ -567,7 +567,9 @@
         if (!this.softFocus) {
           if (this.automaticDropdown || this.filterable) {
             this.visible = true;
-            this.menuVisibleOnFocus = true;
+            if (this.filterable) {
+              this.menuVisibleOnFocus = true;
+            }
           }
           this.$emit('focus', event);
         } else {

@@ -237,4 +237,5 @@ Selecting a range of values is supported.
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | change | triggers when the value changes (if the mouse is being dragged, this event only fires when the mouse is released) | value after changing |
+| input | triggers when the data changes (It'll be emitted in real time during sliding) | value after changing |
 

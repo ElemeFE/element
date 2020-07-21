@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, destroyVM, waitImmediate } from '../util';
 
 describe('Dialog', () => {
   let vm;
@@ -288,5 +288,32 @@ describe('Dialog', () => {
         done();
       }, 500);
     }, 10);
+  });
+
+  it('destroyOnClose', async() => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-dialog :title="title" :visible.sync="visible" destroy-on-close>
+            <input />
+          </el-dialog>
+        </div>
+      `,
+
+      data() {
+        return {
+          title: 'dialog test',
+          visible: true
+        };
+      }
+    }, true);
+    const dialog = vm.$children[0];
+    await waitImmediate();
+    dialog.$el.querySelector('input').value = '123';
+    dialog.$el.click();
+    await waitImmediate();
+    vm.visible = true;
+    await waitImmediate();
+    expect(dialog.$el.querySelector('input').value).to.be.equal('');
   });
 });

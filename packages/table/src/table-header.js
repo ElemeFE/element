@@ -192,9 +192,12 @@ export default {
   },
 
   mounted() {
-    const { prop, order } = this.defaultSort;
-    const init = true;
-    this.store.commit('sort', { prop, order, init });
+    // nextTick 是有必要的 https://github.com/ElemeFE/element/pull/11311
+    this.$nextTick(() => {
+      const { prop, order } = this.defaultSort;
+      const init = true;
+      this.store.commit('sort', { prop, order, init });
+    });
   },
 
   beforeDestroy() {
@@ -295,6 +298,7 @@ export default {
       event.stopPropagation();
       const target = event.target;
       let cell = target.tagName === 'TH' ? target : target.parentNode;
+      if (hasClass(cell, 'noclick')) return;
       cell = cell.querySelector('.el-table__column-filter-trigger') || cell;
       const table = this.$parent;
 

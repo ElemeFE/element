@@ -62,7 +62,7 @@ Vous pouvez ajouter du texte à chaque score.
 
 Vous pouvez utiliser différentes icônes pour chaque
 
-:::demo You can customize icons by passing `icon-classes` an array with three elements or a object which key is the threshold between two levels and value is the corresponding icon class. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir l'icône des valeurs non-sélectionnées.
+:::demo Vous pouvez personnaliser les icônes en passant à `icon-classes` un tableau avec trois éléments ou un objet dont la clé est le seuil entre deux niveaux et la valeur la classe d'icônes correspondante. Dans cet exemple, nous utilisons aussi `void-icon-class` qui permet de choisir d'autres valeurs non sélectionnées.
 
 ```html
 <el-rate
@@ -123,11 +123,11 @@ Le score peut être en lecture seule. Les demi-étoiles sont supportées.
 | low-threshold | Seuil entre les niveaux bas et moyen. La valeur sera incluse dans le niveau bas. | number | — | 2 |
 | high-threshold | Seuil entre les niveaux moyen et haut. La valeur sera incluse entre dans le niveau haut. | number | — | 4 |
 | colors | colors for icons. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est la couleur correspondante. | array/object | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
-| void-color | Couleur des icônes non-sélectionnées. | string | — | #C6D1DE |
-| disabled-void-color | Couleur des icônes non-sélectionnées en lecture seule. | string | — | #EFF2F7 |
+| void-color | Couleur des icônes non sélectionnées. | string | — | #C6D1DE |
+| disabled-void-color | Couleur des icônes non sélectionnées en lecture seule. | string | — | #EFF2F7 |
 | icon-classes | Noms de classe des icônes. Si c'est un array, il doit avoir 3 élements, chacun correspondant à un niveau. Si c'est un objet, la clé est le seuil entre deux niveaux et la valeur est le nom de classe de l'icône. | array/object | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
-| void-icon-class | Classe des icônes non-sélectionnées. | string | — | el-icon-star-off |
-| disabled-void-icon-class | Classe des icônes non-sélectionnées en lecture seule. | string | — | el-icon-star-on |
+| void-icon-class | Classe des icônes non sélectionnées. | string | — | el-icon-star-off |
+| disabled-void-icon-class | Classe des icônes non sélectionnées en lecture seule. | string | — | el-icon-star-on |
 | show-text | Si du texte doit apparaître à droite des étoiles. | boolean | — | false |
 | show-score | Si le score doit apparaître. Incompatible avec show-text. | boolean | — | false |
 | text-color | Couleur du texte. | string | — | #1F2D3D |

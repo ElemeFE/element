@@ -5,7 +5,7 @@ Affiche le chemin de la page actuelle, afin de pouvoir naviguer plus facilement.
 ### Usage
 
 
-:::demo Dans `el-breadcrumb`, chaque `el-breadcrumb-item` est un tag représentant chaque niveau depuis la page d'accueil. Ce Composant possède un attribut de type `String` appelé `separator`qui détermine le séparateur. Sa valeur par défaut est '/'.
+:::demo Dans `el-breadcrumb`, chaque `el-breadcrumb-item` est un tag représentant chaque niveau depuis la page d'accueil. Ce Composant possède un attribut de type `String` appelé `separator` qui détermine le séparateur. Sa valeur par défaut est '/'.
 
 ```html
 <el-breadcrumb separator="/">
@@ -41,4 +41,4 @@ Affiche le chemin de la page actuelle, afin de pouvoir naviguer plus facilement.
 | Attributs      | Description          | Type      | Valeurs acceptées            | Défaut|
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | to | Route cible du lien, identique au `to` de `vue-router`. | string/object | — | — |
-| replace | Si `true`, la navigation ne laissera pas d'enregistrement dans l'historique. | boolean | — | false |
+| replace | Si `true`, la navigation ne laissera pas d'historique. | boolean | — | false |

@@ -30,7 +30,7 @@ export interface ElUploadProgressEvent extends ProgressEvent {
 export interface HttpRequestOptions {
   headers: object,
   withCredentials: boolean,
-  file: ElUploadInternalFileDetail,
+  file: File,
   data: object,
   filename: string,
   action: string,

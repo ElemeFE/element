@@ -35,6 +35,10 @@
       background: mix(white, transparent, 50%);
     }
 
+    &.el-button--default::before {
+      background: mix($--button-default-border-color, transparent, 50%);
+    }
+
     &:hover {
       &::before {
         top: 0;

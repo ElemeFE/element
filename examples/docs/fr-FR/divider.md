@@ -10,9 +10,9 @@ Séparer le texte de deux paragraphes.
 ```html
 <template>
   <div>
-    <span>I sit at my window this morning where the world like a passer-by stops for a moment, nods to me and goes.</span>
+    <span>Je suis assis à ma fenêtre ce matin où le monde, tel un passant, s’arrête un instant, me fait signe de la tête et part.</span>
     <el-divider></el-divider>
-    <span>There little thoughts are the rustle of leaves; they have their whisper of joy in my mind.</span>
+    <span>Les petites pensées sont le bruissement des feuilles; ils ont leur murmure de joie dans mon esprit.</span>
   </div>
 </template>
 ```
@@ -20,17 +20,17 @@ Séparer le texte de deux paragraphes.
 
 ### Contenu personnalisé
 
-Vous ajouter du contenu dans la ligne.
+Vous ajouter du contenu dans la ligne de séparation.
 
 :::demo
 ```html
 <template>
   <div>
-    <span>What you are you do not see, what you see is your shadow. </span>
+    <span>Vous ne voyez pas ce que vous êtes, ce que vous voyez est votre ombre.</span>
     <el-divider content-position="left">Rabindranath Tagore</el-divider>
-    <span>I cannot choose the best. The best chooses me.</span>
+    <span>Je ne peux pas choisir le meilleur. Le meilleur me choisit.</span>
     <el-divider><i class="el-icon-star-on"></i></el-divider>
-    <span>My wishes are fools, they shout across thy song, my Master. Let me but listen.</span>
+    <span>Mes souhaits sont des imbéciles, ils crient à travers ta chanson, mon Maître. Laisse-moi mais écoute.</span>
     <el-divider content-position="right">Rabindranath Tagore</el-divider>
   </div>
 </template>
@@ -57,5 +57,5 @@ Vous ajouter du contenu dans la ligne.
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| direction      | Régle la direction du séparateur.  | string  |          horizontal / vertical           |    horizontal     |
+| direction      | Règle la direction du séparateur.  | string  |          horizontal / vertical           |    horizontal     |
 | content-position      | Personnalise le contenu du séparateur. | String  |  left / right / center  |  center |

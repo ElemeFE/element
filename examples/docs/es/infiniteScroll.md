@@ -8,7 +8,7 @@ Añada `v-infinite-scroll` a la lista para ejecutar automáticamente el método 
 
 ```html
 <template>
-  <ul class="infinite-list" v-infinite-scroll="load">
+  <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
     <li v-for="i in count" class="infinite-list-item">{{ i }}</li>
   </ul>
 </template>
@@ -35,7 +35,7 @@ Añada `v-infinite-scroll` a la lista para ejecutar automáticamente el método 
 :::demo
 ```html
 <template>
-  <div class="infinite-list-wrapper">
+  <div class="infinite-list-wrapper" style="overflow:auto">
     <ul
       class="list"
       v-infinite-scroll="load"
