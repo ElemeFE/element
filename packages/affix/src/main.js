@@ -86,8 +86,6 @@ export default {
       const fixedTop = this.getFixedTop(rect, targetRect, offsetTop);
       const fixedBottom = this.getFixedBottom(rect, targetRect, offsetBottom);
 
-      console.log(fixedTop, fixedBottom);
-
       if (fixedTop === undefined && fixedBottom === undefined) {
         if (this.affix) {
           this.slot = false;
