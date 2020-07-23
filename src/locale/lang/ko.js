@@ -107,14 +107,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} 선택됨'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: '실패'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: '이전'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: '예',
+      cancelButtonText: '아니오'
     }
   }
 };
