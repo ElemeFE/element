@@ -659,6 +659,7 @@ Attribute | Description | Type | Options | Default
 | Event Name | Description | Parameters |
 |----| ----| ----|
 |select | triggers when a suggestion is clicked | suggestion being clicked |
+| change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Methods
 
