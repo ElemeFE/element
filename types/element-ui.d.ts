@@ -80,6 +80,7 @@ import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElPopconfirm } from './popconfirm'
+import { ElAffix } from './affix'
 
 export interface InstallationOptions {
   locale: any,
@@ -344,3 +345,6 @@ export class Drawer extends ElDrawer {}
 
 /** Popconfirm Component */
 export class Popconfirm extends ElPopconfirm {}
+
+/** Affix Component */
+export class Affix extends ElAffix {}

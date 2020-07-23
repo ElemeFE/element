@@ -291,6 +291,10 @@
             {
               "path": "/drawer",
               "title": "Drawer 抽屉"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix 图钉"
             }
           ]
         }
@@ -589,6 +593,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }
@@ -887,6 +895,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }
@@ -1185,6 +1197,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/affix",
+              "title": "Affix"
             }
           ]
         }
