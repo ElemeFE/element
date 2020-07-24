@@ -140,7 +140,7 @@ const navConfigFile = require('../../examples/nav.config.json');
 
 Object.keys(navConfigFile).forEach(lang => {
   let groups = navConfigFile[lang][4].groups;
-  groups[groups.length - 1].list.push({
+  groups[groups.length - 2].list.push({
     path: `/${componentname}`,
     title: lang === 'zh-CN' && componentname !== chineseName
       ? `${ComponentName} ${chineseName}`
