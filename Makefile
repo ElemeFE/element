@@ -20,6 +20,9 @@ play:
 new:
 	node build/bin/new.js $(filter-out $@,$(MAKECMDGOALS))
 
+new-bel:
+	node build/bin/new-bel.js $(filter-out $@,$(MAKECMDGOALS))
+
 new-lang:
 	node build/bin/new-lang.js $(filter-out $@,$(MAKECMDGOALS))
 

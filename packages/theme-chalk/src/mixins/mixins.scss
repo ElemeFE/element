@@ -75,6 +75,14 @@
   }
 }
 
+@mixin bel($block) {
+  $B: $namespace-bel + '-' + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
 @mixin e($element) {
   $E: $element !global;
   $selector: &;
