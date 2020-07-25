@@ -4,62 +4,62 @@
 
 *2020-05-18*
 
-#### Bug fixes
+#### Corrección de errores
 
 - Autocomplete
-  - Fix change event bug (#19200 by @sxzz)
+  - Arreglado el error cuando se daba el evento change (#19200 by @sxzz)
 - Image
-  - Update error status (#19194 by @lhx6538665)
+  - Actualizado el estado de error  (#19194 by @lhx6538665)
 
-#### Optimization
+#### Optimización
 
 - I18n
-  - Update ru-RU popconfirm translation (#19220 by @Opppex)
-  - Update vi translation (#19244 by @quangln2810)
-  - Update Catalan and Spanish translations (#19296 by @Ismaaa)
-  - Update Indonesia translation (#19320) by @therour)
-  - Update Brazilian Portuguese translation (#19374 by @diegomengarda)
+  - Actualización de la traducción del popconfirm al Ruso (#19220 by @Opppex)
+  - Actualización  de la traducción al vi (#19244 by @quangln2810)
+  - Actualización de la traducción al Catalán y al Español (#19296 by @Ismaaa)
+  - Actualización de la traducción al Indonesio (#19320) by @therour)
+  - Actualización de la traducción al Portugués Brasileño (#19374 by @diegomengarda)
 
 
 ### 2.13.1
 
 *2020-04-13*
 
-#### New features
+#### Nuevas características
 - Autocomplete
-  - Add change event (#17913 by @sxzz)
+  - Agregado el evento change (#17913 by @sxzz)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Autocomplete
-  - Fix suggestion error when textarea (#18478 by @Roojay)
+  - Solucionado el error de la sugerencia en textarea (#18478 by @Roojay)
 - Carousel
-  - Fix console typo bug (#18264 by @IceFox)
+  - Arreglado el error de escritura de la consola (#18264 by @IceFox)
 - Image
-  - Fix preview dose not show when preview list not contain src issue (#18975) (#19130 by @luckyCao)
-  - Fix shortcut key not work at second time issue (#18983) (#19156 by @luckyCao)
-  - Don't show image-viewer when preview is false (#18967 by @inooNgt)
+  - Solucionado el error de que no se mostraba el preview si no existía el src  (#18975) (#19130 by @luckyCao)
+  - Arreglado el problema de que el shortcut key no funcionaba la segunda vez (#18983) (#19156 by @luckyCao)
+  - No muestra la imagen cuando preview es falso (#18967 by @inooNgt)
 - Transfer
-  - Fix incorrect line-height of el-transfer's first list item when it was used with  el-form-item (#18917 by @Hanx)
+  - Corregida la altura (line-height) incorrecta del primer elemento del el-transfer cuando era usado con el-form-item (#18917 by @Hanx)
 - InputNumber
-  - Correctly compute inputNumberDisabled (#18439 by @ashuser-pendo)
-- Chore
-  - Remove index intro (#19155 by @iamkun)
-- Doc
-  - Popconfirm doc update (#18324 by @iamkun)
-  - Fix step-strictly docs typo (#18705 by @dream2023)
-  - Fix a type error in document of steps component (#17555 by @haoranyu)
+  - Calculo correcto de inputNumberDisabled (#18439 by @ashuser-pendo)
+- Tarea
+  - Se quito la introducción del index (#19155 by @iamkun)
+- Documentación
+  - Actualización de la documentación de Popconfirm (#18324 by @iamkun)
+  - Arreglado el error tipográfico de la documentación de Fix step-strictly (#18705 by @dream2023)
+  - Corregido un type error en la documentación de steps component (#17555 by @haoranyu)
 
 ### 2.13.0
 
 *2019-11-26*
 
-#### New features
+#### Nuevas características
 
 - Popconfirm
-  - Add popconfirm component (#17548 by @iamkun)
+  - Agregado componente popconfirm (#17548 by @iamkun)
 
-#### Bug fixes
+#### Corrección de errores
 
 - BackTop
   - Use cubic bezier scrolling (by @lon)
