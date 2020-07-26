@@ -62,62 +62,62 @@
 #### Corrección de errores
 
 - BackTop
-  - Use cubic bezier scrolling (by @lon)
+  - Se usa cubic bezier para el scroll (by @lon)
 - DatePicker
-  - Fix bug of only select min date of date range problem (#17191 by @smk0621)
+  - Arreglado el fallo cuando solo se elegía fecha mínima en un rango de fechas (#17191 by @smk0621)
 - Select
-  - Fix select test cases by (@msidolphin)
+  - Arreglado los casos de test del select (by @msidolphin)
 - Tree
-  - Add font-size for the style of tree empty-text (#17094 by @spengjie)
+  - Agregado font-size para el estilo del texto cuando esta vacío el tree (#17094 by @spengjie)
 - Table
-  - Column header can be costumed (#17291 by @ziyoung)
-  - Update table header cell style (#17284 by @ziyoung)
-  - Fix table header height after filter (#17348 by @ziyoung)
-  - Fixed row-style with display not work (#17002 by @a631807682)
-  - Fix header table not display (#17341 by @ziyoung)
+  - La cabecera de la columna puede modificarse (#17291 by @ziyoung)
+  - Se actualizo el estilo de la cabecera de la tabla de la celda  (#17284 by @ziyoung)
+  - Se soluciono el problema de height de la cabecera de la tabla después de un filtro (#17348 by @ziyoung)
+  - Corregido el estilo de la fila que con display no funcionaba (#17002 by @a631807682)
+  - Arreglado que la cabecera de la tabla no se mostraba (#17341 by @ziyoung)
 - Calendar
-  - Import el-button and el-button-group (#17376 by @masongzhi)
+  - La importación de el-button y el-button-group (#17376 by @masongzhi)
 - MessageBox
-  - Fix icon position error (#17410 by @nullptru)
+  - Corregido el error de posición del icono (#17410 by @nullptru)
 - TimePicker
-  - Set the selection range after scrolling up or down (#16868 by @mattheyan)
+  - Establecido el rango de selección después de hacer scroll (#16868 by @mattheyan)
 - Message
-  - Fix close instace offsetHeight（#17564） (#17852 by @gzwgq222)
+  - Corregido el offsetHeight al cerrar la instancia（#17564） (#17852 by @gzwgq222)
 - Form
-  - Callback of validateField should be optional (#17314 by @CarterLi)
+  - La función de llamada de validateField es opcional (#17314 by @CarterLi)
 - Cascader
-  - Fix TypeScript 3.7 compatibility (#17881 by @CarterLi)
+  - Corregida la compatibilidad con TypeScript 3.7 (#17881 by @CarterLi)
 - Menu
-  - Fix router NavigationDuplicated error when using vue-router@^3.1.0 (#17269 by @iamkun)
+  - Corregido el error de la ruta de navegación duplicada cuando se usaba vue-router@^3.1.0 (#17269 by @iamkun)
 - Dropdown
-  - Update type file (#17550 by @iamkun)
+  - Actualización del tipo de archivo (#17550 by @iamkun)
 - Progress
-  - Add strokeLinecap prop (#17552 by @iamkun)
+  - Agregada la prop strokeLinecap (#17552 by @iamkun)
 - InfiniteScroll
-  - Skip trigger event on invisible element (#17553 by @iamkun)
+  - Salto del disparo de evento en elementos invisibles (#17553 by @iamkun)
 - Image
-  - Perfect picture preview behavior (#16985 by @luckyCao)
-  - Fix shield the page when preview big image (#16796 by @luckyCao)
+  - Comportamiento perfecto de personalización de imágenes (#16985 by @luckyCao)
+  - Corregida la pagina cuando se hace preview de imágenes grandes (#16796 by @luckyCao)
 - Drawer 
-  - Bugfix drawer-append-to-body-not-working (#16953 by @JeremyWuuuuu)
+  - Corregido el fallo del append-to-body del drawer que no funcionaba (#16953 by @JeremyWuuuuu)
 - Select
-  - Fix tag show value or empty issue (17199 by @luckyCao)
+  - Corregido:  ahora muestra el tag o el valor vacío (17199 by @luckyCao)
 - Scrollbar
-  - Fix FireFox scroll bar width (#18091 by @iamkun)
+  - Arreglado el ancho del scroll en FireFox  (#18091 by @iamkun)
   
-#### Optimization
+#### Optimización
 
 - I18n
-  - Update sv-SE.js (#17926 by @FOLLGAD)
-  - Update avatar component fr doc (#17762 by @blombard)
+  - Actualizado sv-SE.js (#17926 by @FOLLGAD)
+  - Actualizada la documentación para francés para el componente avatar (#17762 by @blombard)
 - Docs
-  - Fix time-select typo (#17250 by @wacky6)
-  - Fix Drawer attribute accepted value typo in es (#17122 by @haoranyu)
-  - Update Spanish changelog 2.12.0 (#17364 by @Gonzalo2310)
-  - Fix Changelog typo (#17874 by @renlixin)
-  - Fix Loading demo (#17862 by @MBearo)
-  - Add input event in input Events Table (#18061 by @zhouxinyong)
-  - Delete Input repeat change event (#18085 by @zhouxinyong)
+  - Arreglada la typografia de time-select (#17250 by @wacky6)
+  - Arreglado en Drawer, ahora el atributo value acepta tipografías en español (#17122 by @haoranyu)
+  - Actualización del Changelog 2.12.0 al español (#17364 by @Gonzalo2310)
+  - Arreglo de la tipografía del Changelog (#17874 by @renlixin)
+  - Arreglada la demo de Loading (#17862 by @MBearo)
+  - Agregado el evento input en los inputs de Table (#18061 by @zhouxinyong)
+  - Eliminado el evento repetitivo change de los input (#18085 by @zhouxinyong)
 
 ### 2.12.0
 
