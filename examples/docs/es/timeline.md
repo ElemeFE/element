@@ -147,7 +147,7 @@ Las marcas de tiempo ( timestamp )  puede colocarse encima del contenido cuando 
 | icon | nombre de la clase del icono | string | — | - |
 
 ### Timeline-Item Slot
-| name | Description |
+| Nombre | Descripción |
 |------|--------|
 | — | Contenido personalizado del ítem del timeline |
 | dot | Definición personalizada del nodo |

@@ -141,9 +141,9 @@ Además del tamaño predeterminado, el componente Tag proporciona tres tamaños 
 
 ### Theme
 
-Tag provide three different themes: `dark`、`light` and `plain`
+Tag tiene tres diferentes temas: `dark`、`light` y `plain`
 
-:::demo Using `effect` to change, default is `light`
+:::demo Use  `effect` para cambiarlo, por defecto es `light`
 ```html
 <div class="tag-group">
   <span class="tag-group__title">Dark</span>
