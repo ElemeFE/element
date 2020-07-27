@@ -18,7 +18,6 @@ Voici la structure basique.
           label: 'Niveau un 1',
           children: [{
             label: 'Niveau deux 1-1',
-            leaf:true,
             children: [{
               label: 'Niveau trois 1-1-1'
             }]
@@ -52,8 +51,7 @@ Voici la structure basique.
         }],
         defaultProps: {
           children: 'children',
-          label: 'label',
-          isLeaf:'leaf'
+          label: 'label'
         }
       };
     },

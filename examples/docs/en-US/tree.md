@@ -18,7 +18,6 @@ Basic tree structure.
           label: 'Level one 1',
           children: [{
             label: 'Level two 1-1',
-            leaf:true,
             children: [{
               label: 'Level three 1-1-1'
             }]
@@ -52,8 +51,7 @@ Basic tree structure.
         }],
         defaultProps: {
           children: 'children',
-          label: 'label',
-          isLeaf:'leaf'
+          label: 'label'
         }
       };
     },
