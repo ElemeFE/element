@@ -15,10 +15,9 @@
     data() {
       return {
         data: [{
-          label: '一级 1222',
+          label: '一级 1',
           children: [{
             label: '二级 1-1',
-            leaf:true,
             children: [{
               label: '三级 1-1-1'
             }]
@@ -52,8 +51,7 @@
         }],
         defaultProps: {
           children: 'children',
-          label: 'label',
-          isLeaf:'leaf'
+          label: 'label'
         }
       };
     },
