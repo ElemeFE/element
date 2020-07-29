@@ -146,7 +146,12 @@
     "webpack-node-externals": "^1.7.2"
   },
   "engines": {
-    "node": ">=12.13.1",
+    "node": ">=12",
     "npm": ">= 6.10.0"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "ie > 9"
+  ]
 }

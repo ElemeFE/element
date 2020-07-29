@@ -5,14 +5,13 @@
       {
         "loose": true,
         "modules": false,
-        "targets": {
-          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-        }
       }
     ],
     "stage-2"
   ],
-  "plugins": ["transform-vue-jsx"],
+  "plugins": [
+    "transform-vue-jsx"
+  ],
   "env": {
     "utils": {
       "presets": [
@@ -21,23 +20,27 @@
           {
             "loose": true,
             "modules": "commonjs",
-            "targets": {
-              "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-            }
           }
         ],
       ],
       "plugins": [
-        ["module-resolver", {
-          "root": ["element-ui"],
-          "alias": {
-            "element-ui/src": "element-ui/lib"
+        [
+          "module-resolver",
+          {
+            "root": [
+              "element-ui"
+            ],
+            "alias": {
+              "element-ui/src": "element-ui/lib"
+            }
           }
-        }]
+        ]
       ]
     },
     "test": {
-      "plugins": ["istanbul"]
+      "plugins": [
+        "istanbul"
+      ]
     }
   }
 }
