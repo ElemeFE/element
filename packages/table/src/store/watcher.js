@@ -161,7 +161,9 @@ export default Vue.extend({
         const newSelection = (this.states.selection || []).slice();
         // 调用 API 修改选中值，不触发 select 事件
         if (emitChange) {
-          this.table.$emit('select', newSelection, row);
+          this.$nextTick(function() {
+            this.table.$emit('select', newSelection, row);
+          });
         }
         this.table.$emit('selection-change', newSelection);
       }
