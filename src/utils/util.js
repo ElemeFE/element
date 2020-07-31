@@ -126,6 +126,11 @@ export const isFirefox = function() {
   return !Vue.prototype.$isServer && !!window.navigator.userAgent.match(/firefox/i);
 };
 
+export const isIOS = function() {
+  // https://stackoverflow.com/a/58064481/2836695
+  return !Vue.prototype.$isServer && (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+};
+
 export const autoprefixer = function(style) {
   if (typeof style !== 'object') return style;
   const rules = ['transform', 'transition', 'animation'];

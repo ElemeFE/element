@@ -163,7 +163,7 @@
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
+  import { getValueByPath, valueEquals, isIE, isEdge, isIOS } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
   import { isKorean } from 'element-ui/src/utils/shared';
 
@@ -196,7 +196,7 @@
       },
 
       readonly() {
-        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !this.visible);
+        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !isIOS() && this.visible);
       },
 
       showClose() {
