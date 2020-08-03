@@ -679,7 +679,7 @@
           const value = (this.value || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
-            value.splice(optionIndex, 1);
+            value.splice(optionIndex, 1, option.value);
           } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
             value.push(option.value);
           }
