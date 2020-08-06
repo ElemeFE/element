@@ -467,6 +467,16 @@ export default class Node {
         this.loading = false;
         this.childNodes = [];
 
+        const props = this.store.props;
+        let childrenKey = 'children';
+        if (props) {
+          childrenKey = props.children || 'children';
+        }
+        let hasChildren = this.data[childrenKey] ? !!this.data[childrenKey].length : false;
+        if (hasChildren) {
+          children = this.data[childrenKey].concat(children);
+        }
+
         this.doCreateChildren(children, defaultProps);
 
         this.updateLeafState();
