@@ -1,0 +1,35 @@
+{
+  "name": "element-theme-bello",
+  "version": "2.13.2",
+  "description": "Element component bello theme.",
+  "main": "lib/index.css",
+  "style": "lib/index.css",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElementUI/theme-bello.git"
+  },
+  "keywords": [
+    "element",
+    "theme"
+  ],
+  "author": "yi.shyang@ele.me",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ElementUI/theme-bello/issues"
+  },
+  "homepage": "https://github.com/ElementUI/theme-bello#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-sass": "^3.1.0",
+    "gulp-autoprefixer": "^4.0.0"
+  },
+  "dependencies": {}
+}
