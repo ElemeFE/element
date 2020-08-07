@@ -68,15 +68,16 @@
 /* BEM
  -------------------------- */
 @mixin b($block) {
-  $B: $namespace+'-'+$block !global;
+  $B: $namespace + "_" + $block !global;
+  $BEL: $namespace-bel + "_scope" !global;
 
-  .#{$B} {
+  .#{$BEL} .#{$B} {
     @content;
   }
 }
 
 @mixin bel($block) {
-  $B: $namespace-bel + '-' + $block !global;
+  $B: $namespace-bel + "_" + $block !global;
 
   .#{$B} {
     @content;
