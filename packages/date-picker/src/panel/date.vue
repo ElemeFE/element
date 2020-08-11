@@ -2,7 +2,7 @@
   <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-picker el-popper"
+      class="el-picker-panel el-date-picker el-popper bel-scope"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime

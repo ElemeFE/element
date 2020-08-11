@@ -4,7 +4,7 @@
     @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-time-range-picker el-picker-panel el-popper"
+      class="el-time-range-picker el-picker-panel el-popper bel-scope"
       :class="popperClass">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
@@ -72,7 +72,7 @@
   const minTimeOfDay = function(date) {
     return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate());
   };
-  
+
   const maxTimeOfDay = function(date) {
     return modifyDate(MAX_TIME, date.getFullYear(), date.getMonth(), date.getDate());
   };

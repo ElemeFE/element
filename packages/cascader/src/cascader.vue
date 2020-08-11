@@ -69,7 +69,7 @@
       <div
         v-show="dropDownVisible"
         ref="popper"
-        :class="['el-popper', 'el-cascader__dropdown', popperClass]">
+        :class="['el-popper', 'bel-scope', 'el-cascader__dropdown', popperClass]">
         <el-cascader-panel
           ref="panel"
           v-show="!filtering"

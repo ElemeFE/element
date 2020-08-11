@@ -71,6 +71,7 @@
   $B: $namespace + "-" + $block !global;
   $BEL: $namespace-bel + "-scope" !global;
 
+  body > .#{$BEL}.#{$B}.el-popper,
   .#{$BEL} .#{$B} {
     @content;
   }
