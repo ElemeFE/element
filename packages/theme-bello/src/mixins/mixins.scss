@@ -95,7 +95,7 @@
   }
 
   @each $unit in $element {
-    $currentSelector2: #{".bel-scope " + $currentSelector2 + "." + $B + $element-separator + $unit + ","};
+    $currentSelector2: #{$currentSelector2 + ".bel-scope " + "." + $B + $element-separator + $unit + ","};
   }
 
   @if hitAllSpecialNestRule($selector) {
