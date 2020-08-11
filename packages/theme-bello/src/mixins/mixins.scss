@@ -118,8 +118,13 @@
 @mixin m($modifier) {
   $selector: &;
   $currentSelector: "";
+
   @each $unit in $modifier {
-    $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ","};
+    @if variable-exists("E") {
+      $currentSelector: #{$currentSelector + ".bel-scope " + "." + $B + $element-separator + $E + $modifier-separator + $unit + "," + "body > .bel-scope" + "." + $B + $element-separator + $E + $modifier-separator + $unit + ","};
+    } @else {
+      $currentSelector: #{$currentSelector + ".bel-scope " + "." + $B + $modifier-separator + $unit + "," + "body > .bel-scope" + "." + $B + $modifier-separator + $unit + ","};
+    }
   }
 
   @at-root {
