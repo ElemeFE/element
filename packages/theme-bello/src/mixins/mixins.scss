@@ -71,7 +71,7 @@
   $B: $namespace + "-" + $block !global;
   $BEL: $namespace-bel + "-scope" !global;
 
-  body > .#{$BEL}.#{$B}.el-popper,
+  body > .#{$BEL}.#{$B},
   .#{$BEL} .#{$B} {
     @content;
   }
@@ -89,8 +89,13 @@
   $E: $element !global;
   $selector: &;
   $currentSelector: "";
+  $currentSelector2: "";
   @each $unit in $element {
     $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+  }
+
+  @each $unit in $element {
+    $currentSelector2: #{".bel-scope " + $currentSelector2 + "." + $B + $element-separator + $unit + ","};
   }
 
   @if hitAllSpecialNestRule($selector) {
@@ -103,7 +108,7 @@
     }
   } @else {
     @at-root {
-      #{$currentSelector} {
+      #{$currentSelector2} {
         @content;
       }
     }
