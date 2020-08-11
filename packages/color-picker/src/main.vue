@@ -25,7 +25,8 @@
        @clear="clearValue"
        :color="color"
        :show-alpha="showAlpha"
-       :predefine="predefine">
+       :predefine="predefine"
+       :placement="placement">
     </picker-dropdown>
   </div>
 </template>
@@ -52,7 +53,8 @@
       },
       size: String,
       popperClass: String,
-      predefine: Array
+      predefine: Array,
+      placement: String
     },
 
     inject: {

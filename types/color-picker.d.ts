@@ -18,4 +18,7 @@ export declare class ElColorPicker extends ElementUIComponent {
 
   /** Custom class name for ColorPicker's dropdown */
   colorFormat: ColorFormat
+
+  /** Placement of the menu */
+  placement: string
 }

@@ -121,6 +121,24 @@
 </script>
 ```
 :::
+### 弹出框位置
+
+:::demo
+```html
+<el-color-picker v-model="color" placement="top"></el-color-picker>
+<el-color-picker v-model="color" placement="bottom"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color: '#409EFF'
+      }
+    }
+  };
+</script>
+```
+:::
 
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
@@ -132,6 +150,7 @@
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 | popper-class | ColorPicker 下拉框的类名 | string | — | — |
 | predefine | 预定义颜色 | array | — | — |
+| placement    | 菜单弹出位置     | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
