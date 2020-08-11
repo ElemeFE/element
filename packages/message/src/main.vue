@@ -3,6 +3,7 @@
     <div
       :class="[
         'el-message',
+        'bel-scope'
         type && !iconClass ? `el-message--${ type }` : '',
         center ? 'is-center' : '',
         showClose ? 'is-closable' : '',
