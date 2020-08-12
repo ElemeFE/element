@@ -77,6 +77,14 @@
   }
 }
 
+@mixin bo($block) {
+  $B: $namespace + "-" + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
 @mixin bel($block) {
   $B: $namespace-bel + "-" + $block !global;
 
@@ -120,11 +128,7 @@
   $currentSelector: "";
 
   @each $unit in $modifier {
-    @if variable-exists("E") {
-      $currentSelector: #{$currentSelector + ".bel-scope " + "." + $B + $element-separator + $E + $modifier-separator + $unit + "," + "body > .bel-scope" + "." + $B + $element-separator + $E + $modifier-separator + $unit + ","};
-    } @else {
-      $currentSelector: #{$currentSelector + ".bel-scope " + "." + $B + $modifier-separator + $unit + "," + "body > .bel-scope" + "." + $B + $modifier-separator + $unit + ","};
-    }
+    $currentSelector: #{$currentSelector + wrapBelScope($selector, $modifier-separator + $unit) + ","};
   }
 
   @at-root {

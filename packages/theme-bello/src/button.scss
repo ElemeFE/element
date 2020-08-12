@@ -5,6 +5,7 @@
 @import "mixins/utils";
 
 @include b(button) {
+  $b-ns: $namespace + "-button";
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
@@ -21,7 +22,8 @@
   transition: .1s;
   font-weight: $--button-font-weight;
   @include utils-user-select(none);
-  & + & {
+
+  & + .#{$b-ns} {
     margin-left: 10px;
   }
 
@@ -234,7 +236,7 @@
       z-index: 1;
     }
   }
-  
+
   & > .el-dropdown {
     & > .el-button {
       border-top-left-radius: 0;

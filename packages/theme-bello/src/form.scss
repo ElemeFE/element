@@ -35,6 +35,7 @@
     }
   }
 }
+
 @include b(form-item) {
   margin-bottom: 22px;
   @include utils-clearfix;
@@ -102,6 +103,7 @@
     padding: 0 12px 0 0;
     box-sizing: border-box;
   }
+
   @include e(content) {
     line-height: 40px;
     position: relative;
@@ -112,6 +114,7 @@
       vertical-align: top;
     }
   }
+
   @include e(error) {
     color: $--color-danger;
     font-size: 12px;

@@ -42,3 +42,8 @@
 
   @return containsModifier($selector) or containWhenFlag($selector) or containPseudoClass($selector);
 }
+
+
+@function wrapBelScope($selector, $follow) {
+  @return selector-append(selector-parse($selector), $follow);
+}

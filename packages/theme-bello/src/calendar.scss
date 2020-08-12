@@ -66,14 +66,14 @@
   tr.el-calendar-table__row--hide-border td {
     border-top: none;
   }
+}
 
-  @include b(calendar-day) {
-    box-sizing: border-box;
-    padding: 8px;
-    height: $--calendar-cell-width;
-    &:hover {
-      cursor: pointer;
-      background-color: $--calendar-selected-background-color;
-    }
+@include b(calendar-day) {
+  box-sizing: border-box;
+  padding: 8px;
+  height: $--calendar-cell-width;
+  &:hover {
+    cursor: pointer;
+    background-color: $--calendar-selected-background-color;
   }
 }

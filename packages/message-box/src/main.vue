@@ -1,7 +1,7 @@
 <template>
   <transition name="msgbox-fade">
     <div
-      class="el-message-box__wrapper"
+      class="el-message-box__wrapper bel-scope"
       tabindex="-1"
       v-show="visible"
       @click.self="handleWrapperClick"

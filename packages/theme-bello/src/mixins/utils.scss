@@ -8,12 +8,13 @@
   $selector: &;
 
   @at-root {
-    #{$selector}::before,
-    #{$selector}::after {
+    #{wrapBelScope($selector, "::before")},
+    #{wrapBelScope($selector, "::after")} {
       display: table;
       content: "";
     }
-    #{$selector}::after {
+
+    #{wrapBelScope($selector, "::after")} {
       clear: both
     }
   }
@@ -23,7 +24,7 @@
   $selector: &;
 
   @at-root {
-    #{$selector}::after {
+    #{wrapBelScope($selector, "::after")} {
       display: inline-block;
       content: "";
       height: 100%;
