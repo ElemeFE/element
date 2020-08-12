@@ -6,6 +6,7 @@
   "files": [
     "lib",
     "packages/theme-chalk",
+    "packages/theme-bello",
     "types"
   ],
   "typings": "types/index.d.ts",
