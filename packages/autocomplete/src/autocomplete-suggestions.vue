@@ -2,8 +2,8 @@
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
     <div
       v-show="showPopper"
-      class="el-autocomplete-suggestion el-popper bel-scope"
-      :class="{ 'is-loading': !parent.hideLoading && parent.loading }"
+      class="el-autocomplete-suggestion el-popper"
+      :class="[$ELEMENT.scopeClass, { 'is-loading': !parent.hideLoading && parent.loading}]"
       :style="{ width: dropdownWidth }"
       role="region">
       <el-scrollbar

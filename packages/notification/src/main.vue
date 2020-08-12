@@ -1,7 +1,7 @@
 <template>
   <transition name="el-notification-fade">
     <div
-      :class="['el-notification', 'bel-scope', customClass, horizontalClass]"
+      :class="['el-notification', $ELEMENT.scopeClass, customClass, horizontalClass]"
       v-show="visible"
       :style="positionStyle"
       @mouseenter="clearTimer()"

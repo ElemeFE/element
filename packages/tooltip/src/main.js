@@ -90,7 +90,7 @@ export default {
             aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
             v-show={!this.disabled && this.showPopper}
             class={
-              ['el-tooltip__popper', 'bel-scope', 'is-' + this.effect, this.popperClass]
+              ['el-tooltip__popper', this.$ELEMENT.scopeClass, 'is-' + this.effect, this.popperClass]
             }>
             { this.$slots.content || this.content }
           </div>

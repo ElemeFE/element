@@ -5,8 +5,8 @@
       @after-enter="handleAfterEnter"
       @after-leave="handleAfterLeave">
       <div
-        class="el-popover el-popper bel-scope"
-        :class="[popperClass, content && 'el-popover--plain']"
+        class="el-popover el-popper"
+        :class="[popperClass, (content && 'el-popover--plain'), $ELEMENT.scopeClass]"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"

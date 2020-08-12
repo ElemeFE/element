@@ -32,7 +32,8 @@ const install = function(Vue, opts = {}) {
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
-    zIndex: opts.zIndex || 2000
+    zIndex: opts.zIndex || 2000,
+    scopeClass: opts.scopeClass || ''
   };
 
   Vue.prototype.$loading = Loading.service;

@@ -1,7 +1,7 @@
 <template>
   <div
-    class="el-select-dropdown el-popper bel-scope"
-    :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
+    class="el-select-dropdown el-popper"
+    :class="[{ 'is-multiple': $parent.multiple }, $ELEMENT.scopeClass, popperClass]"
     :style="{ minWidth: minWidth }">
     <slot></slot>
   </div>

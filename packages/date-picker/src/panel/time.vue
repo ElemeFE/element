@@ -2,8 +2,8 @@
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-time-panel el-popper bel-scope"
-      :class="popperClass">
+      class="el-time-panel el-popper"
+      :class="[popperClass, $ELEMENT.scopeClass]">
       <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
         <time-spinner
           ref="spinner"
