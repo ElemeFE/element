@@ -1,6 +1,6 @@
 {
   "name": "element-ui-eoi",
-  "version": "2.14.2",
+  "version": "2.14.3",
   "description": "A Component Library for Vue.js ( bugfix version )",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -60,13 +60,13 @@
   "unpkg": "lib/index.js",
   "style": "lib/theme-chalk/index.css",
   "dependencies": {
-    "async-validator": "^3.3.0",
+    "async-validator": "^3.4.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "deepmerge": "^4.2.2",
     "normalize-wheel": "^1.0.1",
     "popper.js": "^1.16.1",
     "resize-observer-polyfill": "^1.5.1",
-    "throttle-debounce": "^2.1.0"
+    "throttle-debounce": "^2.2.1"
   },
   "peerDependencies": {
     "vue": "^2.6.11"
