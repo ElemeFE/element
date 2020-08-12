@@ -68,4 +68,7 @@ export declare class ElCascader<V = any, D = CascaderOption> extends ElementUICo
   getCheckedNodes: () => []
 
   $slots: CascaderSlots
+
+  /** input text */
+  presentText: string
 }
