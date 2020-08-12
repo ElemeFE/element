@@ -38,7 +38,7 @@ export default {
     formatTooltip: Function,
     disabled: {
       type: Boolean,
-      default: false
+      default: null
     },
     vertical: {
       type: Boolean,

@@ -61,7 +61,7 @@
       },
       disabled: {
         type: Boolean,
-        default: false
+        default: null
       },
       width: {
         type: Number,

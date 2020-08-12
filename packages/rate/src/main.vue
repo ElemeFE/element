@@ -103,7 +103,7 @@
       },
       disabled: {
         type: Boolean,
-        default: false
+        default: null
       },
       allowHalf: {
         type: Boolean,
