@@ -293,7 +293,7 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 | tab-click        | se lanza cuando se hace clic a una pestaña                   | pestaña clickeada             |
 | tab-remove       | se lanza cuando se hace clic al botón tab-remove             | nombre de la pestaña removida |
 | tab-add          | se lanza cuando se hace clic al botón tab-add                | —                             |
-| edit             | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action)          |
+| edit             | se lanza cuando los botones de tab-add y/o tab-remove son cliqueados | (targetName, action)          |
 
 ### Atributos del Tab-pane
 | Atributo | Descripción                                                  | Tipo    | Valores Aceptados | Default                                                      |

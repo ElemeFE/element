@@ -186,7 +186,7 @@ Puede limpiar un Select con un icono.
 
 ### Selección múltiple básica
 
-Selección multiple utiliza tags para mostrar las opciones seleccionadas.
+Selección múltiple utiliza tags para mostrar las opciones seleccionadas.
 
 :::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. De forma predeterminada, las opciones seleccionadas se mostrarán como tags. Se pueden contraer a un texto utilizando el atributo  `collapse-tags`.
 
@@ -562,7 +562,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | automatic-dropdown | para non-filterable Select, este `prop` decide si el menú de opciones aparece cuando la entrada está enfocada | boolean | - | false |
 
 ### Eventos Select
-| Nombre         | Descripción                                                  | Parametros                                |
+| Nombre         | Descripción                                                  | Parámetros                                |
 | -------------- | ------------------------------------------------------------ | ----------------------------------------- |
 | change         | se dispara cuando el valor del select cambia                 | valor actual del select                   |
 | visible-change | se dispara cuando el menú desplegable aparece o desaparece   | true cuando aparece, y false en otro caso |
@@ -571,8 +571,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | blur           | se dispara cuando el input pierde el foco                    | (event: Event)                            |
 | focus          | se dispara cuando el input obtiene el foco                   | (event: Event)                            |
 
-### Select Slots
-| Name    | Description |
+### Slots Select 
+| Nombre | Descripción |
 |---------|-------------|
 |    —    | lista de los componentes Option |
 | prefix  | contenido prefix de un  Select |
@@ -591,8 +591,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | label    | etiqueta de option, es igual a  `value` si se omite | string/number        | —                 | —           |
 | disabled | si  option esta deshabilitado            | boolean              | —                 | false       |
 
-### Metodos
-| Metodo | Descripción                 | Parametros |
+### Métodos
+| Método | Descripción                 | Parámetros |
 | ------ | --------------------------- | ---------- |
 | focus  | Foco en el componente input | -          |
 | blur   | Quita el focus del componente y oculta el dropdown | - |

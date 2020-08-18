@@ -214,7 +214,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
 | prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
 | clear-icon         | Clase personalizada para el icono `clear` | string              | —                                        | el-icon-circle-close |
-| validate-event     | si se debe disparar la validacion | boolean             | -                                        | true                 |
+| validate-event     | si se debe disparar la validación | boolean             | -                                        | true                 |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |
