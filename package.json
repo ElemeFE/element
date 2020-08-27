@@ -1,6 +1,6 @@
 {
-  "name": "element-ui",
-  "version": "2.13.2",
+  "name": "exarcheia-element",
+  "version": "2.13.3",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -45,7 +45,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
+    "url": "git@github.com:DreamCraftSu/element.git"
   },
   "homepage": "http://element.eleme.io",
   "keywords": [
