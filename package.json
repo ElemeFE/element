@@ -55,7 +55,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ElemeFE/element/issues"
+    "url": "https://github.com/DreamCraftSu/element.issues"
   },
   "unpkg": "lib/index.js",
   "style": "lib/theme-chalk/index.css",
