@@ -25,7 +25,7 @@ export const getChildState = node => {
 const reInitChecked = function(node) {
   if (node.childNodes.length === 0) return;
 
-  const {all, none, half} = getChildState(node.childNodes);
+  const { all, none, half } = getChildState(node.childNodes);
   if (all) {
     node.checked = true;
     node.indeterminate = false;
@@ -467,6 +467,7 @@ export default class Node {
         this.loading = false;
         this.childNodes = [];
 
+        // 拿取childrenKey，如果有children，则拼接上
         const props = this.store.props;
         let childrenKey = 'children';
         if (props) {

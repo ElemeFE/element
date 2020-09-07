@@ -173,6 +173,10 @@
 
       checkStrictly(newVal) {
         this.store.checkStrictly = newVal;
+      },
+
+      props(newVal) {
+        this.store.props = newVal;
       }
     },
 
