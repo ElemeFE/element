@@ -196,7 +196,7 @@
       },
 
       readonly() {
-        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !isIOS() && this.visible);
+        return !this.filterable || this.multiple || (!isIE() && !isEdge() && !isIOS() && !this.visible);
       },
 
       showClose() {
