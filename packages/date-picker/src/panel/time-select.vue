@@ -153,7 +153,7 @@
 
     computed: {
       items() {
-        const reverse = compareTime(this.start, this.end) > 0
+        const reverse = compareTime(this.start, this.end) > 0;
         const start = reverse ? this.end : this.start;
         const end = reverse ? this.start : this.end;
         const step = this.step;
