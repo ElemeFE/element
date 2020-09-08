@@ -153,8 +153,9 @@
 
     computed: {
       items() {
-        const start = this.start;
-        const end = this.end;
+        const reverse = compareTime(this.start, this.end) > 0
+        const start = reverse ? this.end : this.start;
+        const end = reverse ? this.start : this.end;
         const step = this.step;
 
         const result = [];
@@ -171,7 +172,7 @@
           }
         }
 
-        return result;
+        return reverse ? result.reverse() : result;
       }
     }
   };
