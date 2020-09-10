@@ -13,7 +13,7 @@
       role="button"
       :title="t('el.spinner.decrease')"
       v-if="controls"
-      v-repeat-click="decrease"
+      v-repeat-click:[sensitivity]="decrease"
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease">
       <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
@@ -23,7 +23,7 @@
       role="button"
       :title="t('el.spinner.increase')"
       v-if="controls"
-      v-repeat-click="increase"
+      v-repeat-click:[sensitivity]="increase"
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase">
       <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
@@ -93,6 +93,10 @@
         default: -Infinity
       },
       value: {},
+      sensitivity: {
+        type: Number,
+        default: 100
+      },
       disabled: Boolean,
       size: String,
       controls: {
