@@ -289,6 +289,10 @@
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
+      filterMatch: {
+        type: String,
+        default: 'anywhere'
+      },
       editable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,

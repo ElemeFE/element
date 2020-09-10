@@ -138,7 +138,11 @@
       },
 
       queryChange(query) {
-        this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
+        let queryExpr = escapeRegexpString(query);
+        if (this.select && this.select.filterMatch === 'beginning') {
+          queryExpr = '^' + queryExpr;
+        }
+        this.visible = new RegExp(queryExpr, 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }

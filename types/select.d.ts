@@ -45,6 +45,9 @@ export declare class ElSelect extends ElementUIComponent {
   /** Whether Select is filterable */
   filterable: boolean
 
+  /** Specify whether to match options that contain the filter ('anywhere'), or start with the filter ('beginning') */
+  filterMatch: string
+
   /** Whether creating new items is allowed. To use this, filterable must be true */
   allowCreate: boolean
 
