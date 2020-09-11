@@ -225,13 +225,13 @@ describe('Table', () => {
         vm.currentRowKey = 1;
         const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
         setTimeout(_ => {
-          expect(tr.classList.contains('current-row')).to.be.true;
+          expect(tr.classList.contains('is-selected')).to.be.true;
           vm.currentRowKey = 2;
 
           const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
           setTimeout(_ => {
-            expect(tr.classList.contains('current-row')).to.be.false;
-            expect(rows[1].classList.contains('current-row')).to.be.true;
+            expect(tr.classList.contains('is-selected')).to.be.false;
+            expect(rows[1].classList.contains('is-selected')).to.be.true;
             destroyVM(vm);
             done();
           }, DELAY);
@@ -1874,11 +1874,11 @@ describe('Table', () => {
       vm.$refs.table.setCurrentRow(vm.testData[1]);
       await waitImmediate();
       const secondRow = vm.$el.querySelectorAll('.el-table__row')[1];
-      expect(secondRow.classList.contains('current-row')).to.true;
+      expect(secondRow.classList.contains('is-selected')).to.true;
 
       vm.$el.querySelector('.clear').click();
       await waitImmediate();
-      expect(secondRow.classList.contains('current-row')).to.false;
+      expect(secondRow.classList.contains('is-selected')).to.false;
 
       destroyVM(vm);
     });
@@ -1932,13 +1932,13 @@ describe('Table', () => {
       const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
       triggerEvent(tr, 'click', true, false);
       setTimeout(_ => {
-        expect(tr.classList.contains('current-row')).to.be.true;
+        expect(tr.classList.contains('is-selected')).to.be.true;
         const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
 
         triggerEvent(rows[1], 'click', true, false);
         setTimeout(_ => {
-          expect(tr.classList.contains('current-row')).to.be.false;
-          expect(rows[1].classList.contains('current-row')).to.be.true;
+          expect(tr.classList.contains('is-selected')).to.be.false;
+          expect(rows[1].classList.contains('is-selected')).to.be.true;
 
           const ths = vm.$el.querySelectorAll('.el-table__header-wrapper thead th');
           triggerEvent(ths[3], 'click', true, false);
@@ -1946,8 +1946,8 @@ describe('Table', () => {
           setTimeout(_ => {
             const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
 
-            expect(rows[1].classList.contains('current-row')).to.be.false;
-            expect(rows[3].classList.contains('current-row')).to.be.true;
+            expect(rows[1].classList.contains('is-selected')).to.be.false;
+            expect(rows[3].classList.contains('is-selected')).to.be.true;
             destroyVM(vm);
             done();
           }, DELAY);
@@ -1976,7 +1976,7 @@ describe('Table', () => {
       let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
       triggerEvent(rows[2], 'click', true, false);
       setTimeout(() => {
-        expect(rows[2].classList.contains('current-row')).to.be.true;
+        expect(rows[2].classList.contains('is-selected')).to.be.true;
         const data = getTestData();
         data.splice(0, 0, {
           id: 8,
@@ -1990,7 +1990,7 @@ describe('Table', () => {
 
         setTimeout(() => {
           rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
-          expect(rows[3].classList.contains('current-row')).to.be.true;
+          expect(rows[3].classList.contains('is-selected')).to.be.true;
           destroyVM(vm);
           done();
         }, DELAY);
@@ -2018,13 +2018,13 @@ describe('Table', () => {
       let rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
       triggerEvent(rows[1], 'click', true, false);
       setTimeout(() => {
-        expect(rows[1].classList.contains('current-row')).to.be.true;
+        expect(rows[1].classList.contains('is-selected')).to.be.true;
         const cells = vm.$el.querySelectorAll('.el-table__header-wrapper thead th > .cell');
         triggerEvent(cells[3], 'click', true, false);
 
         setTimeout(() => {
           rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
-          expect(rows[3].classList.contains('current-row')).to.be.true;
+          expect(rows[3].classList.contains('is-selected')).to.be.true;
           destroyVM(vm);
           done();
         }, DELAY);

@@ -15,8 +15,8 @@
     min-width: 10px;
     word-wrap: break-word;
 
-    .popper__arrow,
-    .popper__arrow::after {
+    .el-popper__arrow,
+    .el-popper__arrow::after {
       position: absolute;
       display: block;
       width: 0;
@@ -25,11 +25,11 @@
       border-style: solid;
     }
 
-    .popper__arrow {
+    .el-popper__arrow {
       border-width: $--tooltip-arrow-size;
     }
 
-    .popper__arrow::after {
+    .el-popper__arrow::after {
       content: " ";
       border-width: 5px;
     }
@@ -38,7 +38,7 @@
       margin-bottom: #{$--tooltip-arrow-size + 6px};
     }
 
-    &[x-placement^="top"] .popper__arrow {
+    &[x-placement^="top"] .el-popper__arrow {
       bottom: -$--tooltip-arrow-size;
       border-top-color: $--tooltip-border-color;
       border-bottom-width: 0;
@@ -55,7 +55,7 @@
       margin-top: #{$--tooltip-arrow-size + 6px};
     }
 
-    &[x-placement^="bottom"] .popper__arrow {
+    &[x-placement^="bottom"] .el-popper__arrow {
       top: -$--tooltip-arrow-size;
       border-top-width: 0;
       border-bottom-color: $--tooltip-border-color;
@@ -72,7 +72,7 @@
       margin-left: #{$--tooltip-arrow-size + 6px};
     }
 
-    &[x-placement^="right"] .popper__arrow {
+    &[x-placement^="right"] .el-popper__arrow {
       left: -$--tooltip-arrow-size;
       border-right-color: $--tooltip-border-color;
       border-left-width: 0;
@@ -89,7 +89,7 @@
       margin-right: #{$--tooltip-arrow-size + 6px};
     }
 
-    &[x-placement^="left"] .popper__arrow {
+    &[x-placement^="left"] .el-popper__arrow {
       right: -$--tooltip-arrow-size;
       border-right-width: 0;
       border-left-color: $--tooltip-border-color;
@@ -112,25 +112,25 @@
       background: $--tooltip-color;
       border: 1px solid $--tooltip-fill;
 
-      &[x-placement^="top"] .popper__arrow {
+      &[x-placement^="top"] .el-popper__arrow {
         border-top-color: $--tooltip-fill;
         &::after {
           border-top-color: $--tooltip-color;
         }
       }
-      &[x-placement^="bottom"] .popper__arrow {
+      &[x-placement^="bottom"] .el-popper__arrow {
         border-bottom-color: $--tooltip-fill;
         &::after {
           border-bottom-color: $--tooltip-color;
         }
       }
-      &[x-placement^="left"] .popper__arrow {
+      &[x-placement^="left"] .el-popper__arrow {
         border-left-color: $--tooltip-fill;
         &::after {
           border-left-color: $--tooltip-color;
         }
       }
-      &[x-placement^="right"] .popper__arrow {
+      &[x-placement^="right"] .el-popper__arrow {
         border-right-color: $--tooltip-fill;
         &::after {
           border-right-color: $--tooltip-color;

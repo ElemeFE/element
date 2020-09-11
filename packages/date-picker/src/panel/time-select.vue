@@ -9,7 +9,7 @@
       <el-scrollbar noresize wrap-class="el-picker-panel__content">
         <div class="time-select-item"
           v-for="item in items"
-          :class="{ selected: value === item.value, disabled: item.disabled, default: item.value === defaultValue }"
+          :class="{ 'is-selected': value === item.value, 'is-disabled': item.disabled, default: item.value === defaultValue }"
           :disabled="item.disabled"
           :key="item.value"
           @click="handleClick(item)">{{ item.value }}</div>
@@ -128,7 +128,7 @@
       handleMenuEnter() {
         const selected = this.items.map(item => item.value).indexOf(this.value) !== -1;
         const hasDefault = this.items.map(item => item.value).indexOf(this.defaultValue) !== -1;
-        const option = (selected && '.selected') || (hasDefault && '.default') || '.time-select-item:not(.disabled)';
+        const option = (selected && '.selected') || (hasDefault && '.default') || '.time-select-item:not(.is-disabled)';
         this.$nextTick(() => this.scrollToOption(option));
       },
 

@@ -14,14 +14,14 @@
     <tr
       class="el-date-table__row"
       v-for="(row, key) in rows"
-      :class="{ current: isWeekActive(row[1]) }"
+      :class="{ ['is-selected']: isWeekActive(row[1]) }"
       :key="key">
       <td
         v-for="(cell, key) in row"
         :class="getCellClasses(cell)"
         :key="key">
         <div>
-          <span>
+          <span class="el-date-picker__cell">
             {{ cell.text }}
           </span>
         </div>
@@ -181,14 +181,14 @@
                 cell.text = count++;
               } else {
                 cell.text = dateCountOfLastMonth - (numberOfDaysFromPreviousMonth - j % 7) + 1 + i * 7;
-                cell.type = 'prev-month';
+                cell.type = 'is-muted';
               }
             } else {
               if (count <= dateCountOfMonth) {
                 cell.text = count++;
               } else {
                 cell.text = count++ - dateCountOfMonth;
-                cell.type = 'next-month';
+                cell.type = 'is-muted';
               }
             }
 
@@ -255,11 +255,11 @@
 
         let classes = [];
         if ((cell.type === 'normal' || cell.type === 'today') && !cell.disabled) {
-          classes.push('available');
+          classes.push('is-selectable');
           if (cell.type === 'today') {
-            classes.push('today');
+            classes.push('is-current');
           }
-        } else {
+        } else if (cell.type !== 'normal') {
           classes.push(cell.type);
         }
 
@@ -268,7 +268,7 @@
         }
 
         if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.date || this.value)) {
-          classes.push('current');
+          classes.push('is-selected');
         }
 
         if (cell.inRange && ((cell.type === 'normal' || cell.type === 'today') || this.selectionMode === 'week')) {
@@ -284,11 +284,11 @@
         }
 
         if (cell.disabled) {
-          classes.push('disabled');
+          classes.push('is-disabled');
         }
 
         if (cell.selected) {
-          classes.push('selected');
+          classes.push('is-selected');
         }
 
         if (cell.customClass) {

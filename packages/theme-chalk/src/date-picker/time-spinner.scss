@@ -34,7 +34,7 @@
         transform: translateY(-32px);
       }
 
-      .el-time-spinner__item:hover:not(.disabled):not(.active) {
+      .el-time-spinner__item:hover:not(.is-disabled):not(.active) {
         background: $--color-white;
         cursor: default;
       }
@@ -98,17 +98,17 @@
     font-size: 12px;
     color: $--color-text-regular;
 
-    &:hover:not(.disabled):not(.active) {
+    &:hover:not(.is-disabled):not(.active) {
       background: $--background-color-base;
       cursor: pointer;
     }
 
-    &.active:not(.disabled) {
+    &.active:not(.is-disabled) {
       color: $--color-text-primary;
       font-weight: bold;
     }
 
-    &.disabled {
+    &.is-disabled {
       color: $--color-text-placeholder;
       cursor: not-allowed;
     }

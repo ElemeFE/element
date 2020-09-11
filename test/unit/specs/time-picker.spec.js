@@ -380,17 +380,17 @@ describe('TimePicker', () => {
       const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
       const hoursEl = list[0];
       const disabledHours = [].slice
-        .call(hoursEl.querySelectorAll('.disabled'))
+        .call(hoursEl.querySelectorAll('.is-disabled'))
         .map(node => Number(node.textContent));
 
-      hoursEl.querySelectorAll('.disabled')[0].click();
+      hoursEl.querySelectorAll('.is-disabled')[0].click();
       expect(disabledHours).to.not.include.members([17, 18, 19, 20, 21, 22]);
 
       const minutesEl = list[1];
       hoursEl.querySelectorAll('.el-time-spinner__item')[18].click();
       setTimeout(_ => {
         const disabledMinutes = [].slice
-          .call(minutesEl.querySelectorAll('.disabled'))
+          .call(minutesEl.querySelectorAll('.is-disabled'))
           .map(node => Number(node.textContent));
         expect(disabledMinutes.every(t => t > 30 && t < 50)).to.equal(true);
         expect(disabledMinutes.length).to.equal(19);

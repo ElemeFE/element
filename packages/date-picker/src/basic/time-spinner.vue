@@ -15,7 +15,7 @@
           v-for="(disabled, hour) in hoursList"
           class="el-time-spinner__item"
           :key="hour"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ formatListItem('hours', hour) }}{{ getAmPm(hour, { prefix: ' ' }) }}</li>
+          :class="{ 'active': hour === hours, 'is-disabled': disabled }">{{ formatListItem('hours', hour) }}{{ getAmPm(hour, { prefix: ' ' }) }}</li>
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
@@ -31,7 +31,7 @@
           v-for="(enabled, key) in minutesList"
           :key="key"
           class="el-time-spinner__item"
-          :class="{ 'active': key === minutes, disabled: !enabled }">{{ formatListItem('minutes', key) }}</li>
+          :class="{ 'active': key === minutes, 'is-disabled': !enabled }">{{ formatListItem('minutes', key) }}</li>
       </el-scrollbar>
       <el-scrollbar
         v-show="showSeconds"
@@ -77,7 +77,7 @@
         <ul class="el-time-spinner__list" ref="hours">
           <li
             class="el-time-spinner__item"
-            :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
+            :class="{ 'active': hour === hours, 'is-disabled': hoursList[hour] }"
             v-for="(hour, key) in arrowHourList"
             :key="key">{{ hour === undefined ? '' : formatListItem('hours', hour) + (showAmPm ? '' : getAmPm(hour, { prefix: ' ' })) }}</li>
         </ul>

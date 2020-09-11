@@ -74,7 +74,7 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         expect(spans[0].textContent).to.include(date.getFullYear() - 1);
         expect(spans[1].textContent).to.include(date.getMonth() + 1);
-        $el.querySelector('td.available').click();
+        $el.querySelector('td.is-selectable').click();
         vm.$nextTick(_ => {
           expect(vm.value).to.exist;
         });
@@ -99,7 +99,7 @@ describe('DatePicker', () => {
     input.focus();
     setTimeout(_ => {
       const $el = vm.$refs.compo.picker.$el;
-      $el.querySelector('td.available').click();
+      $el.querySelector('td.is-selectable').click();
       setTimeout(_ => {
         vm.$refs.compo.showClose = true;
         vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
@@ -127,7 +127,7 @@ describe('DatePicker', () => {
     input.focus();
     setTimeout(_ => {
       const $el = vm.$refs.compo.picker.$el;
-      $el.querySelector('td.available').click();
+      $el.querySelector('td.is-selectable').click();
       vm.$nextTick(_ => {
         vm.$el.querySelector('.el-input__icon').click();
         setTimeout(_ => {
@@ -157,7 +157,7 @@ describe('DatePicker', () => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('.el-date-picker__next-btn.el-icon-arrow-right').click();
       setTimeout(_ => {
-        $el.querySelector('td.available').click();
+        $el.querySelector('td.is-selectable').click();
         vm.$nextTick(_ => {
           vm.value = '';
           setTimeout(_ => {
@@ -223,7 +223,7 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         expect(onChangeValue).to.not.exist;
         // user interaction does emit change
-        picker.$el.querySelector('td.available').click();
+        picker.$el.querySelector('td.is-selectable').click();
         setTimeout(_ => {
           expect(onChangeValue.getTime()).to.equal(vm.value.getTime());
           done();
@@ -304,7 +304,7 @@ describe('DatePicker', () => {
     input.focus();
     setTimeout(_ => {
       const picker = vm.$refs.compo.picker;
-      picker.$el.querySelector('td.available').click();
+      picker.$el.querySelector('td.is-selectable').click();
       setTimeout(_ => {
         const date = vm.$refs.compo.picker.date;
         expect(date.getHours()).to.equal(12);
@@ -351,7 +351,7 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const picker = vm.$refs.compo.picker;
 
-        picker.$el.querySelector('td.available').click();
+        picker.$el.querySelector('td.is-selectable').click();
         setTimeout(_ => {
           expect(emitted).to.true;
           emitted = false;
@@ -360,7 +360,7 @@ describe('DatePicker', () => {
             input.blur();
             input.focus();
 
-            picker.$el.querySelector('td.available').click();
+            picker.$el.querySelector('td.is-selectable').click();
             setTimeout(_ => {
               expect(emitted).to.false;
               done();
@@ -400,9 +400,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const picker = vm.$refs.compo.picker;
 
-        picker.$el.querySelector('td.available').click();
+        picker.$el.querySelector('td.is-selectable').click();
         setTimeout(_ => {
-          picker.$el.querySelector('td.available + td.available').click();
+          picker.$el.querySelector('td.is-selectable + td.is-selectable').click();
           setTimeout(_ => {
             expect(emitted).to.true;
             emitted = false;
@@ -412,9 +412,9 @@ describe('DatePicker', () => {
               input.focus();
 
               const picker = vm.$refs.compo.picker;
-              picker.$el.querySelector('td.available').click();
+              picker.$el.querySelector('td.is-selectable').click();
               setTimeout(_ => {
-                picker.$el.querySelector('td.available + td.available').click();
+                picker.$el.querySelector('td.is-selectable + td.is-selectable').click();
                 setTimeout(_ => {
                   expect(emitted).to.false;
                   done();
@@ -474,7 +474,7 @@ describe('DatePicker', () => {
 
       vm.$refs.compo.$el.querySelector('input').focus();
       setTimeout(_ => {
-        vm.$refs.compo.picker.$el.querySelector('.el-date-table td.available').click();
+        vm.$refs.compo.picker.$el.querySelector('.el-date-table td.is-selectable').click();
         setTimeout(_ => {
           const today = new Date();
           const yyyy = today.getFullYear();
@@ -507,7 +507,7 @@ describe('DatePicker', () => {
       vm.$refs.compo.$el.querySelector('input').focus();
 
       setTimeout(_ => {
-        vm.$refs.compo.picker.$el.querySelector('.el-date-table td.available').click();
+        vm.$refs.compo.picker.$el.querySelector('.el-date-table td.is-selectable').click();
         setTimeout(_ => {
           const today = new Date();
           const yyyy = today.getFullYear();
@@ -544,7 +544,7 @@ describe('DatePicker', () => {
         expect(date.getFullYear()).to.equal(2000);
         expect(date.getMonth()).to.equal(1);
         expect(date.getDate()).to.equal(1);
-        vm.$refs.compo.picker.$el.querySelector('.el-date-table .current').click();
+        vm.$refs.compo.picker.$el.querySelector('.el-date-table .is-selected').click();
         setTimeout(_ => {
           expect(input.value).to.equal('2000-02-01');
           done();
@@ -762,7 +762,7 @@ describe('DatePicker', () => {
       input.focus();
       setTimeout(_ => {
         let $el = vm.$refs.compo.picker.$el;
-        expect($el.querySelector('.el-date-table td.current')).to.exist;
+        expect($el.querySelector('.el-date-table td.is-selected')).to.exist;
         vm.defaultValue = defaultValue;
         triggerEvent(vm.$refs.compo.$el, 'mouseenter');
         setTimeout(_ => {
@@ -771,7 +771,7 @@ describe('DatePicker', () => {
             input.focus();
             setTimeout(() => {
               $el = vm.$refs.compo.picker.$el;
-              expect($el.querySelector('.el-date-table td.current')).to.not.exist;
+              expect($el.querySelector('.el-date-table td.is-selected')).to.not.exist;
               expect($el.querySelector('.el-date-table td.default')).to.exist;
               $el.querySelector('.el-date-table td.default').click();
               setTimeout(() => {
@@ -1012,7 +1012,7 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.empty;
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.be.equal('none');
-      vm.picker.$el.querySelector('.el-month-table a.cell').click();
+      vm.picker.$el.querySelector('.el-month-table a.el-date-picker__cell').click();
       expect(vm.pickerVisible).to.false;
       done();
     }, DELAY);
@@ -1043,7 +1043,7 @@ describe('DatePicker', () => {
         rightBtn.click();
       }
 
-      vm.picker.$el.querySelector('.el-year-table a.cell').click();
+      vm.picker.$el.querySelector('.el-year-table a.el-date-picker__cell').click();
       expect(vm.pickerVisible).to.false;
       done();
     }, DELAY);
@@ -1297,7 +1297,7 @@ describe('DatePicker', () => {
         input.focus();
 
         setTimeout(_ => {
-          vm.$refs.compo.picker.$el.querySelector('td.available').click();
+          vm.$refs.compo.picker.$el.querySelector('td.is-selectable').click();
           setTimeout(_ => {
             expect(spy.called).to.equal(false);
             vm.$refs.compo.picker.$el.querySelector('.el-picker-panel__footer .el-button--default').click();
@@ -1332,7 +1332,7 @@ describe('DatePicker', () => {
           // simplified change
           picker.handleVisibleDateChange('2000-01-02');
           setTimeout(_ => {
-            expect(picker.$el.querySelector('td.current').innerText.trim()).to.equal('2');
+            expect(picker.$el.querySelector('td.is-selected').innerText.trim()).to.equal('2');
             expect(spy.called).to.equal(false);
             // keyDown does not work, event listener attached to document.body
             picker.handleKeydown({ keyCode: ENTER, stopPropagation() {}, preventDefault() {} });
@@ -1524,7 +1524,7 @@ describe('DatePicker', () => {
     });
 
     it('click cell', done => {
-      vm.picker.$el.querySelector('.el-date-table__row .available').click();
+      vm.picker.$el.querySelector('.el-date-table__row .is-selectable').click();
       setTimeout(_ => {
         expect(vm.picker.week).to.exist;
         done();
@@ -1545,7 +1545,7 @@ describe('DatePicker', () => {
       vm.picker.$el.querySelectorAll('.el-date-picker__header-label')[1].click();
 
       setTimeout(_ => {
-        vm.picker.$el.querySelector('.el-month-table .cell').click();
+        vm.picker.$el.querySelector('.el-month-table .el-date-picker__cell').click();
 
         setTimeout(_ => {
           expect(vm.picker.$el.querySelector('.el-date-table.is-week-mode').style.display).to.equal('');
@@ -1570,10 +1570,10 @@ describe('DatePicker', () => {
 
       setTimeout(() => {
         const pickerEl = vm.$refs.compo.picker.$el;
-        const numberOfHighlightRows = () => pickerEl.querySelectorAll('.el-date-table__row.current').length;
+        const numberOfHighlightRows = () => pickerEl.querySelectorAll('.el-date-table__row.is-selected').length;
         expect(numberOfHighlightRows()).to.equal(0);
         setTimeout(() => {
-          pickerEl.querySelector('.el-date-table__row ~ .el-date-table__row td.available').click();
+          pickerEl.querySelector('.el-date-table__row ~ .el-date-table__row td.is-selectable').click();
           setTimeout(() => {
             expect(vm.value).to.exist;
             input.blur();
@@ -1621,7 +1621,7 @@ describe('DatePicker', () => {
     afterEach(() => destroyVM(vm));
 
     it('click cell', done => {
-      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .is-selectable');
       td.click();
       setTimeout(_ => {
         expect(vm.$refs.compo.value).to.be.an('array');
@@ -1633,7 +1633,7 @@ describe('DatePicker', () => {
     });
 
     it('restore value when cancel', done => {
-      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .available');
+      const td = vm.$refs.compo.picker.$el.querySelector('.el-date-table__row .is-selectable');
       td.click();
       setTimeout(_ => {
         vm.$refs.compo.handleClose();
@@ -1665,9 +1665,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
         expect(Array.prototype.slice.call(panels)).to.length(2);
-        panels[0].querySelector('td.available').click();
+        panels[0].querySelector('td.is-selectable').click();
         setTimeout(_ => {
-          panels[1].querySelector('td.available').click();
+          panels[1].querySelector('td.is-selectable').click();
           setTimeout(_ => {
             inputs[0].focus();
             setTimeout(_ => {
@@ -1707,9 +1707,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
         expect(Array.prototype.slice.call(panels)).to.length(2);
-        panels[1].querySelector('td.available').click();
+        panels[1].querySelector('td.is-selectable').click();
         setTimeout(_ => {
-          panels[0].querySelector('td.available').click();
+          panels[0].querySelector('td.is-selectable').click();
           setTimeout(_ => {
             inputs[0].focus();
             setTimeout(_ => {
@@ -1864,9 +1864,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const picker = vm.$refs.compo.picker;
         setTimeout(_ => {
-          picker.$el.querySelector('td.available').click();
+          picker.$el.querySelector('td.is-selectable').click();
           setTimeout(_ => {
-            picker.$el.querySelector('td.available ~ td.available').click();
+            picker.$el.querySelector('td.is-selectable ~ td.is-selectable').click();
             setTimeout(_ => {
               expect(spy.calledOnce).to.equal(true);
               // change event is not emitted if used does not change value
@@ -1974,8 +1974,8 @@ describe('DatePicker', () => {
 
     it('select daterange', done => {
       const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-      const leftCell = pickers[0].querySelector('td.available');
-      const rightCell = pickers[1].querySelector('td.available');
+      const leftCell = pickers[0].querySelector('td.is-selectable');
+      const rightCell = pickers[1].querySelector('td.is-selectable');
 
       triggerEvent(leftCell, 'mousemove', true);
       triggerEvent(leftCell, 'click', true);
@@ -2016,8 +2016,8 @@ describe('DatePicker', () => {
 
         setTimeout(_ => {
           const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-          const leftCell = pickers[0].querySelector('td.available');
-          const rightCell = pickers[1].querySelector('td.available');
+          const leftCell = pickers[0].querySelector('td.is-selectable');
+          const rightCell = pickers[1].querySelector('td.is-selectable');
 
           const {
             minDate,
@@ -2128,8 +2128,8 @@ describe('DatePicker', () => {
 
         setTimeout(_ => {
           const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-          const leftCell = pickers[0].querySelector('td.available');
-          const rightCell = pickers[1].querySelector('td.available');
+          const leftCell = pickers[0].querySelector('td.is-selectable');
+          const rightCell = pickers[1].querySelector('td.is-selectable');
 
           const {
             minDate,
@@ -2229,8 +2229,8 @@ describe('DatePicker', () => {
     it('input date', done => {
       const input = vm.picker.$el.querySelector('.el-date-range-picker__editors-wrap input');
       const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-      const leftCell = pickers[0].querySelector('td.available');
-      const rightCell = pickers[1].querySelector('td.available');
+      const leftCell = pickers[0].querySelector('td.is-selectable');
+      const rightCell = pickers[1].querySelector('td.is-selectable');
 
       triggerEvent(leftCell, 'mousemove', true);
       triggerEvent(leftCell, 'click', true);
@@ -2258,8 +2258,8 @@ describe('DatePicker', () => {
       const input = vm.picker.$el.querySelector('.el-date-range-picker__editors-wrap input');
       const input2 = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[2];
       const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-      const leftCell = pickers[0].querySelector('td.available');
-      const rightCell = pickers[1].querySelector('td.available');
+      const leftCell = pickers[0].querySelector('td.is-selectable');
+      const rightCell = pickers[1].querySelector('td.is-selectable');
 
       triggerEvent(leftCell, 'mousemove', true);
       triggerEvent(leftCell, 'click', true);
@@ -2362,9 +2362,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
         expect(Array.prototype.slice.call(panels)).to.length(2);
-        panels[0].querySelector('td:not(.disabled)').click();
+        panels[0].querySelector('td:not(.is-disabled)').click();
         setTimeout(_ => {
-          panels[1].querySelector('td:not(.disabled)').click();
+          panels[1].querySelector('td:not(.is-disabled)').click();
           setTimeout(_ => {
             inputs[0].focus();
             setTimeout(_ => {
@@ -2404,9 +2404,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
         expect(Array.prototype.slice.call(panels)).to.length(2);
-        panels[1].querySelector('td:not(.disabled)').click();
+        panels[1].querySelector('td:not(.is-disabled)').click();
         setTimeout(_ => {
-          panels[0].querySelector('td:not(.disabled)').click();
+          panels[0].querySelector('td:not(.is-disabled)').click();
           setTimeout(_ => {
             inputs[0].focus();
             setTimeout(_ => {
@@ -2557,9 +2557,9 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const picker = vm.$refs.compo.picker;
         setTimeout(_ => {
-          picker.$el.querySelector('td:not(.disabled)').click();
+          picker.$el.querySelector('td:not(.is-disabled)').click();
           setTimeout(_ => {
-            picker.$el.querySelector('td:not(.disabled) ~ td:not(.disabled)').click();
+            picker.$el.querySelector('td:not(.is-disabled) ~ td:not(.is-disabled)').click();
             setTimeout(_ => {
               expect(spy.calledOnce).to.equal(true);
               // change event is not emitted if used does not change value
@@ -2735,13 +2735,13 @@ describe('DatePicker', () => {
           const list = $el.querySelectorAll('.el-time-spinner__list');
           const hoursEl = list[0];
           const disabledHours = [].slice
-            .call(hoursEl.querySelectorAll('.disabled'))
+            .call(hoursEl.querySelectorAll('.is-disabled'))
             .map(node => Number(node.textContent));
           expect(disabledHours[disabledHours.length - 2]).to.equal(16);
           expect(disabledHours[disabledHours.length - 1]).to.equal(23);
           const minutesEl = list[1];
           const disabledMinutes = [].slice
-            .call(minutesEl.querySelectorAll('.disabled'))
+            .call(minutesEl.querySelectorAll('.is-disabled'))
             .map(node => Number(node.textContent));
           expect(disabledMinutes.length).to.equal(19);
           done();
@@ -2772,7 +2772,7 @@ describe('DatePicker', () => {
     afterEach(() => destroyVM(vm));
 
     it('create', () => {
-      expect(vm.picker.$el.querySelector('.disabled')).to.be.ok;
+      expect(vm.picker.$el.querySelector('.is-disabled')).to.be.ok;
     });
 
     it('set value', done => {

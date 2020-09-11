@@ -4,7 +4,7 @@
     <tr v-for="(row, key) in rows" :key="key">
       <td :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key">
         <div>
-          <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
+          <a class="el-date-picker__cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
         </div>
       </td>
     </tr>
@@ -107,8 +107,8 @@
         style.disabled = typeof this.disabledDate === 'function'
           ? datesInMonth(year, month).every(this.disabledDate)
           : false;
-        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
-        style.today = today.getFullYear() === year && today.getMonth() === month;
+        style['is-selected'] = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
+        style['is-current'] = today.getFullYear() === year && today.getMonth() === month;
         style.default = defaultValue.some(date => this.cellMatchesDate(cell, date));
 
         if (cell.inRange) {

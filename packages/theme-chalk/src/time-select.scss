@@ -20,12 +20,12 @@
   line-height: 20px;
 }
 
-.time-select-item.selected:not(.disabled) {
+.time-select-item.selected:not(.is-disabled) {
   color: $--color-primary;
   font-weight: bold;
 }
 
-.time-select-item.disabled {
+.time-select-item.is-disabled {
   color: $--datepicker-border-color;
   cursor: not-allowed;
 }

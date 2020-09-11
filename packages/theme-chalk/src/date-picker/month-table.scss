@@ -14,18 +14,18 @@
       padding: 6px 0;
       box-sizing: border-box;
     }
-    &.today {
-      .cell {
+    &.is-current {
+      .el-date-picker__cell {
         color: $--color-primary;
         font-weight: bold;
       }
-      &.start-date .cell,
-      &.end-date .cell {
+      &.start-date .el-date-picker__cell,
+      &.end-date .el-date-picker__cell {
         color: $--color-white;
       }
     }
 
-    &.disabled .cell {
+    &.is-disabled .el-date-picker__cell {
       background-color: $--background-color-base;
       cursor: not-allowed;
       color: $--color-text-placeholder;
@@ -35,7 +35,7 @@
       }
     }
 
-    .cell {
+    .el-date-picker__cell {
       width: 60px;
       height: 36px;
       display: block;
@@ -59,8 +59,8 @@
       color: $--color-white;
     }
 
-    &.start-date .cell,
-    &.end-date .cell {
+    &.start-date .el-date-picker__cell,
+    &.end-date .el-date-picker__cell {
       color: $--color-white;
       background-color: $--datepicker-active-color;
     }
@@ -75,7 +75,7 @@
       border-bottom-right-radius: 24px;
     }
 
-    &.current:not(.disabled) .cell {
+    &.is-selected:not(.is-disabled) .el-date-picker__cell {
       color: $--datepicker-active-color;
     }
   }

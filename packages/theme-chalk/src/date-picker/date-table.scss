@@ -11,7 +11,7 @@
         div {
           background-color: $--datepicker-inrange-background-color;
         }
-        td.available:hover {
+        td.is-selectable:hover {
           color: $--datepicker-font-color;
         }
         td:first-child div {
@@ -26,7 +26,7 @@
         }
       }
 
-      &.current div {
+      &.is-selected div {
         background-color: $--datepicker-inrange-background-color;
       }
     }
@@ -59,12 +59,11 @@
       border-radius: 50%;
     }
 
-    &.next-month,
-    &.prev-month {
+    &.is-muted {
       color: $--datepicker-off-font-color;
     }
 
-    &.today {
+    &.is-current {
       position: relative;
       span {
         color: $--color-primary;
@@ -76,7 +75,7 @@
       }
     }
 
-    &.available:hover {
+    &.is-selectable:hover {
       color: $--datepicker-hover-font-color;
     }
 
@@ -87,7 +86,7 @@
       }
     }
 
-    &.current:not(.disabled) span {
+    &.is-selected:not(.is-disabled) span {
       color: $--color-white;
       background-color: $--datepicker-active-color;
     }
@@ -113,7 +112,7 @@
       border-bottom-right-radius: 15px;
     }
 
-    &.disabled div {
+    &.is-disabled div {
       background-color: $--background-color-base;
       opacity: 1;
       cursor: not-allowed;

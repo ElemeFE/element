@@ -158,7 +158,7 @@ export default {
       // TODO: 这里的实现调整
       if (column.type === 'expand') {
         // 对于展开行，renderCell 不允许配置的。在上一步中已经设置过，这里需要简单封装一下。
-        column.renderCell = (h, data) => (<div class="cell">
+        column.renderCell = (h, data) => (<div class="el-date-picker__cell">
           { originRenderCell(h, data) }
         </div>);
         this.owner.renderExpanded = (h, data) => {

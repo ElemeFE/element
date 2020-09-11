@@ -75,8 +75,8 @@ describe('TimeSelect', () => {
 
     setTimeout(_ => {
       expect(input.value).to.equal('14:30');
-      expect(vm.picker.$el.querySelector('.selected')).to.be.ok;
-      expect(vm.picker.$el.querySelector('.selected').textContent).to.equal('14:30');
+      expect(vm.picker.$el.querySelector('.is-selected')).to.be.ok;
+      expect(vm.picker.$el.querySelector('.is-selected').textContent).to.equal('14:30');
       done();
     }, 50);
   });
@@ -97,7 +97,7 @@ describe('TimeSelect', () => {
     input.blur();
 
     setTimeout(_ => {
-      const elms = picker.picker.$el.querySelectorAll('.disabled');
+      const elms = picker.picker.$el.querySelectorAll('.is-disabled');
       const elm = elms[elms.length - 1];
 
       expect(elm.textContent).to.equal('14:30');
@@ -153,7 +153,7 @@ describe('TimeSelect', () => {
     input.blur();
 
     setTimeout(_ => {
-      const elm = picker.picker.$el.querySelector('.disabled');
+      const elm = picker.picker.$el.querySelector('.is-disabled');
 
       expect(elm.textContent).to.equal('14:30');
       done();

@@ -94,7 +94,7 @@
      * @param {String} [popper.content=''] The content of the popper, it can be text, html, or node; if it is not text, set `contentType` to `html` or `node`.
      * @param {String} [popper.contentType='text'] If `html`, the `content` will be parsed as HTML. If `node`, it will be appended as-is.
      * @param {String} [popper.arrowTagName='div'] Same as `popper.tagName` but for the arrow element.
-     * @param {Array} [popper.arrowClassNames='popper__arrow'] Same as `popper.classNames` but for the arrow element.
+     * @param {Array} [popper.arrowClassNames='el-popper__arrow'] Same as `popper.classNames` but for the arrow element.
      * @param {String} [popper.arrowAttributes=['x-arrow']] Same as `popper.attributes` but for the arrow element.
      * @param {Object} options
      * @param {String} [options.placement=bottom]
@@ -283,7 +283,7 @@
             content: '',
             contentType: 'text',
             arrowTagName: 'div',
-            arrowClassNames: [ 'popper__arrow' ],
+            arrowClassNames: [ 'el-popper__arrow' ],
             arrowAttributes: [ 'x-arrow']
         };
         config = Object.assign({}, defaultConfig, config);

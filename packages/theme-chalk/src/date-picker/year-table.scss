@@ -14,14 +14,14 @@
     padding: 20px 3px;
     cursor: pointer;
 
-    &.today {
-      .cell {
+    &.is-current {
+      .el-date-picker__cell {
         color: $--color-primary;
         font-weight: bold;
       }
     }
 
-    &.disabled .cell {
+    &.is-disabled .el-date-picker__cell {
       background-color: $--background-color-base;
       cursor: not-allowed;
       color: $--color-text-placeholder;
@@ -31,7 +31,7 @@
       }
     }
 
-    .cell {
+    .el-date-picker__cell {
       width: 48px;
       height: 32px;
       display: block;
@@ -44,7 +44,7 @@
       }
     }
 
-    &.current:not(.disabled) .cell {
+    &.is-selected:not(.is-disabled) .el-date-picker__cell {
       color: $--datepicker-active-color;
     }
   }

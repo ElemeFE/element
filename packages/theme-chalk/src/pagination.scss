@@ -87,7 +87,7 @@
     padding-left: 12px;    
   }
 
-  .el-pager li.disabled {
+  .el-pager li.is-disabled {
     color: $--color-text-placeholder;
     cursor: not-allowed;
   }
@@ -106,7 +106,7 @@
       min-width: 22px;
     }
 
-    .arrow.disabled {
+    .arrow.is-disabled {
       visibility: hidden;
     }
 
@@ -199,7 +199,7 @@
       min-width: 30px;
       border-radius: 2px;
 
-      &.disabled {
+      &.is-disabled {
         color: $--color-text-placeholder;
       }
     }
@@ -212,7 +212,7 @@
       }
     }
 
-    .el-pager li:not(.disabled) {
+    .el-pager li:not(.is-disabled) {
       &:hover {
         color: $--pagination-hover-color;
       }
@@ -266,7 +266,7 @@
       line-height: 28px;
       color: $--pagination-button-color;
 
-      &.disabled {
+      &.is-disabled {
         color: $--color-text-placeholder;
       }
     }

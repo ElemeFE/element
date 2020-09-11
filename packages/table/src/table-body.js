@@ -164,7 +164,7 @@ export default {
     getRowClass(row, rowIndex) {
       const classes = ['el-table__row'];
       if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
-        classes.push('current-row');
+        classes.push('is-selected');
       }
 
       if (this.stripe && rowIndex % 2 === 1) {
