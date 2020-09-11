@@ -267,7 +267,7 @@
           classes.push('default');
         }
 
-        if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.date || this.value)) {
+        if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.value)) {
           classes.push('is-selected');
         }
 

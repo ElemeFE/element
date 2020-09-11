@@ -462,9 +462,6 @@
             event.stopPropagation();
             event.preventDefault();
           }
-          if (keyCode === 13 && this.userInputDate === null && this.userInputTime === null) { // Enter
-            this.emit(this.date, false);
-          }
         }
       },
 
