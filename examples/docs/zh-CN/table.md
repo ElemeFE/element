@@ -421,6 +421,7 @@
 <template>
   <el-table
     :data="tableData"
+    border
     style="width: 100%"
     height="250">
     <el-table-column
@@ -651,6 +652,7 @@
 <template>
   <el-table
     :data="tableData"
+    class="my-table-1"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -688,7 +690,14 @@
     </el-table-column>
   </el-table>
 </template>
+<style>
 
+  .my-table-fixed{
+    position: fixed;
+    border-top: 1px solid #c8d0dc;
+    z-index: 1000;
+  }
+</style>
 <script>
   export default {
     data() {
@@ -744,6 +753,36 @@
           zip: 200333
         }]
       }
+    },
+    mounted(){
+      var header;
+      function w() {
+        header = $(".my-table-1 .el-table__header-wrapper-forFixed");
+        var fixedPositionDom = header.parent().children('.fixedPositionDom');
+        var scrollTop = $(window).scrollTop();
+        if(scrollTop > 0){
+          header.addClass('my-table-fixed');
+          if(fixedPositionDom.hasClass('fixedPositionDom')){
+            fixedPositionDom.show();
+          }else{
+            var fixedPositionDomNew = $('<div class="fixedPositionDom" style="width: 100%;height: '+header.height()+'px;"></div>');
+            fixedPositionDom.before(fixedPositionDomNew);
+          }
+        }else{
+          header.removeClass('my-table-fixed');
+          if(fixedPositionDom.hasClass('fixedPositionDom')){
+            fixedPositionDom.hide();
+          }
+        }
+        // console.log(scrollTop, header.length);
+      }
+      $('.el-scrollbar__wrap').scroll(function() {
+        w()
+      });
+      setTimeout(function() {
+        w()
+      },
+      1000);
     }
   }
 </script>
