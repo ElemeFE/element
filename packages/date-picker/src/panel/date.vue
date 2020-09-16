@@ -1,6 +1,7 @@
 <template>
   <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
+      @mousedown="handleMousedown"
       v-show="visible"
       class="el-picker-panel el-date-picker el-popper"
       :class="[{
@@ -552,6 +553,11 @@
         return this.selectableRange.length > 0
           ? timeWithinRange(date, this.selectableRange, this.format || 'HH:mm:ss')
           : true;
+      },
+
+      handleMousedown(e) {
+        // Prevent mousedown from stealing focus from date input
+        e.preventDefault();
       }
     },
 
