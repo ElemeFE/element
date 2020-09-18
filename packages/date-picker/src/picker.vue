@@ -418,6 +418,7 @@ export default {
   watch: {
     pickerVisible(val) {
       if (this.readonly || this.pickerDisabled) return;
+      this.$emit('visible-change', val);
       if (val) {
         this.showPicker();
         this.valueOnOpen = Array.isArray(this.value) ? [...this.value] : this.value;
