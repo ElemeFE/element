@@ -13,6 +13,8 @@
       role="button"
       :title="t('el.spinner.decrease')"
       v-if="controls"
+      @mousedown="handleButtonMousedown"
+      @click="handleButtonClick"
       v-repeat-click:[sensitivity]="decrease"
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease">
@@ -23,6 +25,8 @@
       role="button"
       :title="t('el.spinner.increase')"
       v-if="controls"
+      @mousedown="handleButtonMousedown"
+      @click="handleButtonClick"
       v-repeat-click:[sensitivity]="increase"
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase">
@@ -232,6 +236,16 @@
         const precisionFactor = Math.pow(10, this.numPrecision);
 
         return this.toPrecision((precisionFactor * val - precisionFactor * step) / precisionFactor);
+      },
+      handleButtonMousedown(ev) {
+        // Prevent mousedown from stealing focus from the input
+        ev.preventDefault();
+      },
+      handleButtonClick(ev) {
+        if (this.$refs.input) {
+          // Focus the input when increment/decrement buttons are clicked
+          this.$refs.input.focus();
+        }
       },
       increase() {
         if (this.inputNumberDisabled || this.maxDisabled) return;
