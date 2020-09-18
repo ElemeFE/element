@@ -94,7 +94,7 @@
           return this.visible;
         },
         set(val) {
-          return val
+          return val;
         }
       }
     }
