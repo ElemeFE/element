@@ -91,7 +91,7 @@
 
       selfVisible: {
         get() {
-          return this.visible
+          return this.visible;
         },
         set(val) {
           return val
