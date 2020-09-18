@@ -40,6 +40,8 @@ export default {
 
   methods: {
     clickThumbHandler(e) {
+      // Prevent mousedown on scrollbar from taking focus away from input
+      e.preventDefault();
       // prevent click event of right button
       if (e.ctrlKey || e.button === 2) {
         return;
