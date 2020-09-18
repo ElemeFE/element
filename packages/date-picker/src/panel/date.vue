@@ -200,11 +200,8 @@
 
       value(val) {
         if (this.selectionMode === 'dates' && this.value) return;
-        if (isDate(val)) {
-          this.date = new Date(val);
-        } else {
-          this.date = this.getDefaultValue();
-        }
+        // Reset the internal `date` data property when the `value` prop changes
+        this.resetDate();
       },
 
       defaultValue(val) {
@@ -264,9 +261,13 @@
         this.userInputTime = null;
       },
 
-      // resetDate() {
-      //   this.date = new Date(this.date);
-      // },
+      resetDate() {
+        if (isDate(this.value)) {
+          this.date = new Date(this.value);
+        } else {
+          this.date = this.getDefaultValue();
+        }
+      },
 
       showMonthPicker() {
         this.currentView = 'month';
