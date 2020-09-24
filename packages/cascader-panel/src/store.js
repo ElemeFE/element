@@ -1,5 +1,6 @@
 import Node from './node';
 import { coerceTruthyValueToArray, valueEquals } from 'element-ui/src/utils/util';
+import { isDef } from 'element-ui/src/utils/shared'
 
 const flatNodes = (data, leafOnly) => {
   return data.reduce((res, node) => {
@@ -51,7 +52,7 @@ export default class Store {
   }
 
   getNodeByValue(value) {
-    if (value) {
+    if (isDef(value)) {
       const nodes = this.getFlattedNodes(false, !this.config.lazy)
         .filter(node => (valueEquals(node.path, value) || node.value === value));
       return nodes && nodes.length ? nodes[0] : null;
