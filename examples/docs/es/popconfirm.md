@@ -25,10 +25,10 @@ Se puede personalizar Popconfirm así:
 ```html
 <template>
 <el-popconfirm
-  confirmButtonText='OK'
-  cancelButtonText='No, Thanks'
+  confirm-button-text='OK'
+  cancel-button-text='No, Thanks'
   icon="el-icon-info"
-  iconColor="red"
+  icon-color="red"
   title="Are you sure to delete this?"
 >
   <el-button slot="reference">Delete</el-button>
@@ -41,13 +41,13 @@ Se puede personalizar Popconfirm así:
 | Atributo     | Descripción | Tipo    | Valores aceptados | Por defecto |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  title              | Titulo | String | — | — |
-|  confirmButtonText              | Texto del botón de confirmación | String | — | — |
-|  cancelButtonText              | Texto del botón de cancelación | String | — | — |
-|  confirmButtonType              | Tipo del botón de confirmación | String | — | Primary |
-|  cancelButtonType              | Tipo del botón de cancelación | String | — | Text |
+|  confirm-button-text              | Texto del botón de confirmación | String | — | — |
+|  cancel-button-text              | Texto del botón de cancelación | String | — | — |
+|  confirm-button-type              | Tipo del botón de confirmación | String | — | Primary |
+|  cancel-button-type              | Tipo del botón de cancelación | String | — | Text |
 |  icon              | Icono | String | — | el-icon-question |
-|  iconColor              | Color icono | String | — | #f90 |
-|  hideIcon              | ¿Es un icono oculto? | Boolean | — | false |
+|  icon-color              | Color icono | String | — | #f90 |
+|  hide-icon              | ¿Es un icono oculto? | Boolean | — | false |
 
 ### Slot
 | Nombre | Descripción |
@@ -57,5 +57,5 @@ Se puede personalizar Popconfirm así:
 ### Eventos
 | Nombre Evento | Descripción | Parámetros |
 |---------|--------|---------|
-| onConfirm | Se activa cuando se pulsa el botón de confirmación | — |
-| onCancel | Se activa cuando se pulsa el botón de cancelación | — |
+| on-confirm | Se activa cuando se pulsa el botón de confirmación | — |
+| on-cancel | Se activa cuando se pulsa el botón de cancelación | — |
