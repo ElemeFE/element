@@ -57,5 +57,5 @@ Se puede personalizar Popconfirm así:
 ### Eventos
 | Nombre Evento | Descripción | Parámetros |
 |---------|--------|---------|
-| on-confirm | Se activa cuando se pulsa el botón de confirmación | — |
-| on-cancel | Se activa cuando se pulsa el botón de cancelación | — |
+| confirm | Se activa cuando se pulsa el botón de confirmación | — |
+| cancel | Se activa cuando se pulsa el botón de cancelación | — |
