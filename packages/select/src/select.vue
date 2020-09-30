@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    :class="[selectSize ? 'el-select--' + selectSize : '', 'el-select--dropdown-' + popperPlacement]"
     @click="handleContainerClick"
     v-clickoutside="handleClickOutside">
     <div
@@ -119,6 +119,7 @@
       @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
+        @placement-change="handlePlacementChange"
         :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
@@ -351,7 +352,8 @@
         menuVisibleOnFocus: false,
         isOnComposition: false,
         isSilentBlur: false,
-        valueOnMenuOpen: ''
+        valueOnMenuOpen: '',
+        popperPlacement: 'bottom'
       };
     },
 
@@ -906,6 +908,10 @@
         } else {
           return getValueByPath(item.value, this.valueKey);
         }
+      },
+
+      handlePlacementChange(placement) {
+        this.popperPlacement = placement;
       }
     },
 

@@ -151,6 +151,7 @@ export default {
         right: 'left'
       };
       let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
+      this.$emit('placement-change', placement);
       let origin = placementMap[placement];
       this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
         ? this.transformOrigin
