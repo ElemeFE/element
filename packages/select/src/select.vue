@@ -546,11 +546,28 @@
       },
 
       handleTabKey(e) {
-        if (this.visible) {
-          e.preventDefault();
+        if (this.allowCreate) {
+          this.handleOptionSelect(this.getMatchingOption());
+        } else if (this.query.length > 0 && this.query !== this.selected.currentValue) {
+          this.handleOptionSelect(this.getFirstVisibleOption());
         }
-        this.selectOption(e);
         this.visible = false;
+      },
+
+      getFirstVisibleOption() {
+        for (let i = 0; i < this.options.length; i++) {
+          if (this.options[i].visible) {
+            return this.options[i];
+          }
+        }
+      },
+
+      getMatchingOption() {
+        for (let i = 0; i < this.options.length; i++) {
+          if (this.options[i].currentValue === this.query) {
+            return this.options[i];
+          }
+        }
       },
 
       handleSpaceKey(e) {
