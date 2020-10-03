@@ -253,7 +253,7 @@
         this.currentValue = newVal;
       },
       handleInput(value) {
-        this.userInput = value;
+        this.userInput = value.replace(/[^\d|.]/g, '');
       },
       handleInputChange(value) {
         const newVal = value === '' ? undefined : Number(value);
