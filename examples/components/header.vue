@@ -398,7 +398,8 @@
           'zh-CN': '中文',
           'en-US': 'English',
           'es': 'Español',
-          'fr-FR': 'Français'
+          'fr-FR': 'Français',
+          'jp': '日本語'
         }
       };
     },
