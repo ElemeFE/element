@@ -230,9 +230,18 @@
 
     methods: {
       updateAllChecked() {
-        const checkableDataKeys = this.checkableData.map(item => item[this.keyProp]);
-        this.allChecked = checkableDataKeys.length > 0 &&
-          checkableDataKeys.every(item => this.checked.indexOf(item) > -1);
+        let start = new Date().getTime();
+        let checkObj = {};
+        this.checked.forEach((item, index) => {
+          checkObj[item] = true;
+        });
+        // 通过对象的k-v对应，n(1)的方式寻找数组中是否存在某元素
+        this.allChecked =
+          this.checkableData.length > 0 &&
+          this.checked.length > 0 &&
+          this.checkableData.every((item) => checkObj[item[this.keyProp]]);
+        // 上面被注释的源码是最耗时的，所有一直看耗时就可以了
+        console.log("updateAllCheckedEnd", new Date().getTime() - start);
       },
 
       handleAllCheckedChange(value) {
