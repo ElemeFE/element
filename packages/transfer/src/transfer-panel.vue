@@ -241,7 +241,7 @@
           this.checked.length > 0 &&
           this.checkableData.every((item) => checkObj[item[this.keyProp]]);
         // 上面被注释的源码是最耗时的，所有一直看耗时就可以了
-        console.log("updateAllCheckedEnd", new Date().getTime() - start);
+        console.log('updateAllCheckedEnd', new Date().getTime() - start);
       },
 
       handleAllCheckedChange(value) {
