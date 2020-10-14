@@ -235,8 +235,8 @@
           }
         });
         currentValue = this.targetOrder === 'unshift'
-            ? itemsToBeMoved.concat(currentValue)
-            : currentValue.concat(itemsToBeMoved);
+          ? itemsToBeMoved.concat(currentValue)
+          : currentValue.concat(itemsToBeMoved);
         this.$emit('input', currentValue);
         this.$emit('change', currentValue, 'right', this.leftChecked);
       },
