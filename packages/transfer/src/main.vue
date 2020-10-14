@@ -153,7 +153,7 @@
           this.value.forEach((item, index)=>{
             valueObj[item] = true;
           });
-          let data =  this.data.filter(
+          let data = this.data.filter(
             (item) => valueObj[item[this.props.key]]
           );
           return data;
@@ -228,8 +228,8 @@
         });
         this.data.forEach((item) => {
           const itemKey = item[key];
-          if ( 
-            leftCheckedKeyPropsObj[itemKey] && 
+          if (
+            leftCheckedKeyPropsObj[itemKey] &&
             !valueKeyPropsObj[itemKey]) {
             itemsToBeMoved.push(itemKey);
           }
