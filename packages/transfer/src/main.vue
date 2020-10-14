@@ -138,10 +138,10 @@
       },
   
       sourceData() {
-        let valueObj = {}
-        this.value.forEach((item,index)=>{
-          valueObj[item] = true
-        })
+        let valueObj = {};
+        this.value.forEach((item, index)=>{
+          valueObj[item] = true;
+        });
         return this.data.filter(
           (item) => !valueObj[item[this.props.key]]
         );
@@ -149,14 +149,14 @@
 
       targetData() {
         if (this.targetOrder === 'original') {
-          let valueObj = {}
-          this.value.forEach((item,index)=>{
-            valueObj[item] = true
-          })
+          let valueObj = {};
+          this.value.forEach((item, index)=>{
+            valueObj[item] = true;
+          });
           let data =  this.data.filter(
             (item) => valueObj[item[this.props.key]]
           );
-          return data
+          return data;
         } else {
           return this.value.reduce((arr, cur) => {
             const val = this.dataObj[cur];
@@ -230,7 +230,7 @@
           const itemKey = item[key];
           if ( 
             leftCheckedKeyPropsObj[itemKey] && 
-            !valueKeyPropsObj[itemKey] ) {
+            !valueKeyPropsObj[itemKey]) {
             itemsToBeMoved.push(itemKey);
           }
         });
