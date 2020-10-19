@@ -85,7 +85,8 @@
   @include e(input) {
     padding-top: 15px;
 
-    & input.invalid {
+    & input.invalid,
+    & textarea.invalid{
       border-color: $--color-danger;
       &:focus {
         border-color: $--color-danger;
