@@ -86,7 +86,7 @@
     padding-top: 15px;
 
     & input.invalid,
-    & textarea.invalid{
+    & textarea.invalid {
       border-color: $--color-danger;
       &:focus {
         border-color: $--color-danger;
