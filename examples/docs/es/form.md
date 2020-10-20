@@ -392,7 +392,7 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 Se debe llamar a la función de validación de llamada de retorno personalizada. Ver uso más avanzado en [async-validator](https://github.com/yiminghe/async-validator).
 :::
 
-### Eliminar o agregar validaciones dinamicamente
+### Eliminar o agregar validaciones dinámicamente
 
 :::demo Además de pasar todas las reglas de validación al mismo tiempo en el componente `form`, también puede pasar las reglas de validación o borrar reglas en un único campo de formulario de forma dinámica.
 
@@ -471,7 +471,7 @@ Se debe llamar a la función de validación de llamada de retorno personalizada.
 
 :::
 
-### Validación numerica
+### Validación numérica
 
 :::demo La validación numérica necesita un modificador `.number` añadido en el enlace `v-model` de entrada, sirve para transformar el valor de la cadena al número proporcionado por Vuejs.
 
@@ -617,9 +617,9 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | size                    | el tamaño de los componentes en este form | string  | medium / small / mini | —           |
 | disabled                | si se desactivan todos los componentes del formulario. Si esta en `true` no puede ser cambiado por el prop `disabled` individual de los componentes. | boolean | —                     | false       |
 
-### Form Metodos
+### Form Métodos
 
-| Metodo        | Descripción                                                  | Parametros                                                   |
+| Método        | Descripción                                                  | Parámetros                                                   |
 | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | validate      | el método para validar todo el formulario. Recibe una llamada como parámetro. Después de la validación, la llamada de retorno se ejecutará con dos parámetros: un booleano que indica si la validación ha pasado, y un objeto que contiene todos los campos que fallaron en la validación. Devuelve una promesa si se omite el return | Function(callback: Function(boolean, object))                |
 | validateField | validar uno o varios elementos de formulario                 | Function(props: string \| array, callback: Function(errorMessage: string)) |
@@ -627,9 +627,9 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | clearValidate | borra el mensaje de validación para determinados campos. El parámetro es un prop name o un array de props names de los items del formulario cuyos mensajes de validación se eliminarán. Si se omiten, se borrarán todos los mensajes de validación de los campos. | Function(props: string \| array)                             |
 
 
-### Form Events
+### Eventos Form
 
-| Nombre   | Descripción                                          | Parametros                                                   |
+| Nombre   | Descripción                                          | Parámetros                                                   |
 | -------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | validate | se dispara después de validar un ítem del formulario | la propiedad (`prop name`) nombre del ítem del form que se esta validando, si la validación paso o no, y el mensaje de error si existe. |
 
@@ -660,9 +660,9 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | ----- | ------------------------------------------------------------ |
 | error | Contenido personalizado para mostrar el mensaje de validación. El parámetro del scope es { error } |
 
-### Form-Item Metodo
+### Form-Item Método
 
-| Metodo        | Descripción                                                 | Parametros |
+| Método        | Descripción                                                 | Parámetros |
 | ------------- | ----------------------------------------------------------- | ---------- |
 | resetField    | restablecer campo actual y eliminar resultado de validación | —          |
 | clearValidate | elimina el estado de la validación de un campo              | -          |

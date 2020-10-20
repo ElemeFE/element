@@ -333,17 +333,17 @@ Preste atención a la capitalización
 | `MM`        | mes          |                                          | 01            |
 | `W`         | semana       | solamente para semanas en picker's `format`; no acepta 0 | 1             |
 | `WW`        | semana       | solamente para semanas en  picker's `format` | 01            |
-| `d`         | dia          | no acepta 0                              | 2             |
-| `dd`        | dia          |                                          | 02            |
+| `d`         | día       | no acepta 0                              | 2             |
+| `dd`        | día       |                                          | 02            |
 | `H`         | hora         | 24-hora reloj; no acepta 0               | 3             |
 | `HH`        | hora         | 24-hora reloj                            | 03            |
 | `h`         | hora         | 12-hora reloj;  debe usarse con `A` o `a`; no acepta 0 | 3             |
-| `hh`        | hour         | 12-hora reloj;  debe usarse con `A` o `a` | 03            |
+| `hh`        | hora      | 12-hora reloj;  debe usarse con `A` o `a` | 03            |
 | `m`         | minuto       | no acepta 0                              | 4             |
 | `mm`        | minuto       |                                          | 04            |
 | `s`         | segundo      | no acepta 0                              | 5             |
 | `ss`        | segundo      |                                          | 05            |
-| `A`         | AM/PM        | solamente para `format`, mayusculas      | AM            |
+| `A`         | AM/PM        | solamente para `format`, mayúsculas | AM            |
 | `a`         | am/pm        | solamente para `format`, minúsculas      | am            |
 | `timestamp` | JS timestamp | solamente para `value-format`; valor vinculado debe ser un `number` | 1483326245000 |
 | `[MM]` | No hay caracteres de escape | Para escapar de los caracteres, colóquelos entre corchetes (ejemplo: [A] [MM]). | MM |
@@ -450,7 +450,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | picker-options    | opciones adicionales, chequee la tabla debajo | object            | —                                        | {}                   |
 | range-separator   | separador de rangos                      | string            | —                                        | '-'                  |
 | default-value     | opcional, valor por defecto para el calendario | Date              | cualquiera aceptado por `new Date()`     | —                    |
-| default-time      | opcional, los valores para las horas que se deben usar en la seleccion de fechas cuando se usa el modo rango | string[]          | Array de dos valores, cada uno es un string del estilo `12:00:00`. El primer elemento es para la fecha de inicio y el segundo es para la fecha final. | —                    |
+| default-time      | opcional, los valores para las horas que se deben usar en la selección de fechas cuando se usa el modo rango | string[]          | Array de dos valores, cada uno es un string del estilo `12:00:00`. El primer elemento es para la fecha de inicio y el segundo es para la fecha final. | —                    |
 | value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name              | igual que `name` en el input nativo      | string            | —                                        | —                    |
 | unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false                |
@@ -474,18 +474,18 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 
 
 ### Eventos
-| Nombre | Descripción                              | Parametros                   |
-| ------ | ---------------------------------------- | ---------------------------- |
+| Nombre | Descripción                                    | Parámetros                   |
+| ------ | ---------------------------------------------- | ---------------------------- |
 | change | se dispara cuando el usuario confirma el valor | valor enlazado al componente |
-| blur   | se dispara cuando el input pierde el foco | instancia del componente     |
-| focus  | se dispara cuando el input obtiene el foco | instancia del componente     |
+| blur   | se dispara cuando el input pierde el foco      | instancia del componente     |
+| focus  | se dispara cuando el input obtiene el foco     | instancia del componente     |
 
-### Metodos
-| Metodo | Descripción                | Parameteros |
-| ------ | -------------------------- | ----------- |
-| focus  | coloca el foco en el input | —           |
+### Métodos
+| Método | Descripción                | Parámetros |
+| ------ | -------------------------- | ---------- |
+| focus  | coloca el foco en el input | —          |
 
 ### Slots
-| Name            | Description                           |
+| Nombre          | Descripción                           |
 | --------------- | ------------------------------------- |
 | range-separator | Separador de los rangos personalizado |

@@ -253,8 +253,8 @@ Checkbox con estilo tipo Botón.
 | indeterminate | similar a `indeterminate` en el checkbox nativo | boolean                   | —                     | false       |
 
 ### Eventos de Checkbox
-| Nombre | Descripción                              | Parametros           |
-| ------ | ---------------------------------------- | -------------------- |
+| Nombre | Descripción                                | Parámetros           |
+| ------ | ------------------------------------------ | -------------------- |
 | change | se ejecuta cuando el valor enlazado cambia | el valor actualizado |
 
 ### Atributos de Checkbox-group
@@ -269,8 +269,8 @@ Checkbox con estilo tipo Botón.
 | fill       | color de border y de fondo cuando el botón está activo | string  | —                     | #409EFF     |
 
 ### Eventos de Checkbox-group
-| Nombre de Evento | Descripción                              | Parametros           |
-| ---------------- | ---------------------------------------- | -------------------- |
+| Nombre de Evento | Descripción                                | Parámetros           |
+| ---------------- | ------------------------------------------ | -------------------- |
 | change           | se ejecuta cuando el valor enlazado cambia | el valor actualizado |
 
 ### Atributos de Checkbox-button
