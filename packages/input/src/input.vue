@@ -37,7 +37,8 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
-        :aria-label="label"
+        :aria-label="label",
+        :maxlength="maxlength"
       >
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
