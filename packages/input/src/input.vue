@@ -38,7 +38,7 @@
         @blur="handleBlur"
         @change="handleChange"
         :aria-label="label",
-        :maxlength="maxlength"
+        :maxLength="maxLength"
       >
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
@@ -103,7 +103,7 @@
       @blur="handleBlur"
       @change="handleChange"
       :aria-label="label",
-      :maxlength="maxlength"
+      :maxLength="maxLength"
     >
     </textarea>
     <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
@@ -145,7 +145,7 @@
     },
 
     props: {
-      maxlength:Number,
+      maxLength: Number,
       value: [String, Number],
       size: String,
       resize: String,
