@@ -101,7 +101,8 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @change="handleChange"
-      :aria-label="label"
+      :aria-label="label",
+      :maxlength="maxlength"
     >
     </textarea>
     <span v-if="isWordLimitVisible && type === 'textarea'" class="el-input__count">{{ textLength }}/{{ upperLimit }}</span>
@@ -143,6 +144,7 @@
     },
 
     props: {
+      maxlength:Number,
       value: [String, Number],
       size: String,
       resize: String,
