@@ -58,7 +58,7 @@
         if (!checkStrictly && isDisabled || node.loading) return;
 
         if (config.lazy && !node.loaded) {
-          panel.lazyLoad(node, () => {
+          panel.lazyLoad(node, panel.checkedValue, () => {
             // do not use cached leaf value here, invoke this.isLeaf to get new value.
             const { isLeaf } = this;
 
