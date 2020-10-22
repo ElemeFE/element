@@ -105,7 +105,7 @@ export default {
 
   data() {
     return {
-      checkedValue: null,
+      checkedValue: this.value,
       checkedNodePaths: [],
       store: [],
       menus: [],
@@ -156,12 +156,6 @@ export default {
     }
   },
 
-  mounted() {
-    if (!isEmpty(this.value)) {
-      this.syncCheckedValue();
-    }
-  },
-
   methods: {
     initStore() {
       const { config, options } = this;
@@ -174,8 +168,16 @@ export default {
       }
     },
     syncCheckedValue() {
-      const { value, checkedValue } = this;
-      if (!isEqual(value, checkedValue)) {
+      const { value, checkedValue, config, options } = this;
+      if (isEqual(value, checkedValue)) {
+        return
+      }
+      if (config.lazy && isEmpty(options)) {
+        const [nodeValue] = value.filter((item, index) => (!checkedValue || checkedValue[index] !== item));
+        const checkedNode = this.store.getNodeByValue(nodeValue);
+        this.checkedValue = value;
+        this.lazyLoad(checkedNode, this.checkedValue);
+      } else {
         this.checkedValue = value;
         this.syncMenuState();
       }
@@ -286,7 +288,7 @@ export default {
     handleCheckChange(value) {
       this.checkedValue = value;
     },
-    lazyLoad(node, onFullfiled) {
+    lazyLoad(node, checkedValue, onFullfiled) {
       const { config } = this;
       if (!node) {
         node = node || { root: true, level: 0 };
@@ -294,6 +296,7 @@ export default {
         this.menus = [this.store.getNodes()];
       }
       node.loading = true;
+      checkedValue = checkedValue || this.checkedValue;
       const resolve = dataList => {
         const parent = node.root ? null : node;
         dataList && dataList.length && this.store.appendNodes(dataList, parent);
@@ -301,8 +304,8 @@ export default {
         node.loaded = true;
 
         // dispose default value on lazy load mode
-        if (Array.isArray(this.checkedValue)) {
-          const nodeValue = this.checkedValue[this.loadCount++];
+        if (Array.isArray(checkedValue)) {
+          const nodeValue = checkedValue[node.level];
           const valueKey = this.config.value;
           const leafKey = this.config.leaf;
 
@@ -310,12 +313,12 @@ export default {
             const checkedNode = this.store.getNodeByValue(nodeValue);
 
             if (!checkedNode.data[leafKey]) {
-              this.lazyLoad(checkedNode, () => {
+              this.lazyLoad(checkedNode, checkedValue, () => {
                 this.handleExpand(checkedNode);
               });
             }
 
-            if (this.loadCount === this.checkedValue.length) {
+            if (node.level === this.checkedValue.length - 1) {
               this.$parent.computePresentText();
             }
           }
