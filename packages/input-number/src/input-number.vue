@@ -58,6 +58,28 @@
   import RepeatClick from 'element-ui/src/directives/repeat-click';
   import Locale from 'element-ui/src/mixins/locale';
 
+  function ensureMobileKeyboardOnClick(innerInput) {
+    innerInput.addEventListener('click', (event) => {
+      // https://stackoverflow.com/questions/54424729/ios-show-keyboard-on-input-focus
+      event.stopPropagation();
+      var __tempEl__ = document.createElement('input');
+      __tempEl__.style.position = 'absolute';
+      __tempEl__.style.top = (innerInput.offsetTop + 7) + 'px';
+      __tempEl__.style.left = innerInput.offsetLeft + 'px';
+      __tempEl__.style.height = 0;
+      __tempEl__.style.opacity = 0;
+      __tempEl__.style['aria-hidden'] = true;
+      // Put this temp element as a child of the page <body> and focus on it
+      document.body.appendChild(__tempEl__);
+      __tempEl__.focus();
+
+      setTimeout(()=>{
+        innerInput.focus();
+        document.body.removeChild(__tempEl__);
+      });
+    });
+  };
+
   export default {
     name: 'ElInputNumber',
     mixins: [Focus('input'), Locale ],
@@ -244,7 +266,12 @@
       handleButtonClick(ev) {
         if (this.$refs.input) {
           // Focus the input when increment/decrement buttons are clicked
-          this.$refs.input.focus();
+          // Set field to readonly so the keyboard does not popup on mobile
+          this.$refs.input.$refs.input.setAttribute('readonly', 'readonly');
+          setTimeout(()=>{
+            this.$refs.input.$refs.input.focus();
+            this.$refs.input.$refs.input.removeAttribute('readonly');
+          });
         }
       },
       increase() {
@@ -299,6 +326,7 @@
       innerInput.setAttribute('aria-valuemin', this.min);
       innerInput.setAttribute('aria-valuenow', this.currentValue);
       innerInput.setAttribute('aria-disabled', this.inputNumberDisabled);
+      ensureMobileKeyboardOnClick(innerInput);
     },
     updated() {
       if (!this.$refs || !this.$refs.input) return;
