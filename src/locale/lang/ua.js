@@ -1,7 +1,7 @@
 export default {
   el: {
     colorpicker: {
-      confirm: 'OK',
+      confirm: 'Обрати',
       clear: 'Очистити'
     },
     datepicker: {
@@ -107,14 +107,14 @@ export default {
       hasCheckedFormat: '{checked}/{total} вибрано'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'ПОМИЛКА'
     },
     pageHeader: {
-      title: 'Back' // to be translated
+      title: 'Назад'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'Так',
+      cancelButtonText: 'Ні'
     }
   }
 };
