@@ -36,6 +36,12 @@
   </a>
 </p>
 
+> A Vue.js 2.0 UI Toolkit for Web.
+
+Element will stay with Vue 2.x 
+
+For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/element-plus) from the same team
+
 <p align="center">
   <b>Special thanks to the generous sponsorship by:</b>
 </p>
@@ -60,8 +66,6 @@
     </tr>
   </tbody>
 </table>
-
-> A Vue.js 2.0 UI Toolkit for Web.
 
 ## Links
 - Homepage and documentation
