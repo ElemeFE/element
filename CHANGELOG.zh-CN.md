@@ -1,5 +1,26 @@
 ## 更新日志
 
+### 2.14.0
+
+*2020-10-29*
+
+#### 非兼容性更新
+
+- Popconfirm
+  - 事件名称修改为 `confirm`, `cancel` (#20240 by @hugiron)"
+
+#### Bug fixes
+
+- Progress
+  - 修复参数错误的问题 (#19985 by @Caaalabash)
+
+#### Optimization
+
+- I18n
+  - 更新俄语翻译 (#19451 by @yangirov)
+  - 更新高棉语翻译 (#20077 by @Sovai)
+  - 更新乌克兰语翻译 (#20344 by @MammutAlex)
+
 ### 2.13.2
 
 *2020-05-18*
