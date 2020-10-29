@@ -9,12 +9,12 @@
 - Popconfirm
   - 事件名称修改为 `confirm`, `cancel` (#20240 by @hugiron)"
 
-#### Bug fixes
+#### Bug 修复
 
 - Progress
   - 修复参数错误的问题 (#19985 by @Caaalabash)
 
-#### Optimization
+#### 优化
 
 - I18n
   - 更新俄语翻译 (#19451 by @yangirov)
@@ -32,7 +32,7 @@
 - Image
   - 更新错误状态 (#19194 by @lhx6538665)
 
-#### Optimization
+#### 优化
 
 - I18n
   - 更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)
