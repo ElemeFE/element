@@ -222,6 +222,9 @@
      * @memberof Popper
      */
     Popper.prototype.update = function() {
+        if (typeof this._options.beforeUpdate === 'function' && this._options.beforeUpdate() === false) {
+            return;
+        }
         var data = { instance: this, styles: {} };
 
         // store placement inside the data object, modifiers will be able to edit `placement` if needed
