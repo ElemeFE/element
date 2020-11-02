@@ -218,9 +218,8 @@
       },
 
       showNewOption() {
-        let hasExistingOption = this.options.filter(option => !option.created)
-          .some(option => option.currentLabel === this.query);
-        return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
+        return this.filterable && this.allowCreate && this.query !== '' &&
+          this.options.some(option => !option.created && option.currentLabel === this.query);
       },
 
       selectSize() {
