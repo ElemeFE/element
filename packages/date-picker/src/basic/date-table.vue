@@ -106,8 +106,9 @@
     computed: {
       offsetDay() {
         const week = this.firstDayOfWeek;
-        // 周日为界限，左右偏移的天数，3217654 例如周一就是 -1，目的是调整前两行日期的位置
-        return week > 3 ? 7 - week : -week;
+        const startDate = this.startDate;
+        const firstDay = getFirstDayOfMonth(new Date(this.year, this.month, 1));
+        return (startDate - firstDay) > 60 * 60 * 24 * 7 ? 7 - week : -week;
       },
 
       WEEKS() {
