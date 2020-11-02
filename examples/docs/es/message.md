@@ -181,7 +181,7 @@ Utiliza el atributo `center` para centrar el texto.
 :::
 
 :::warning
-Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinámico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir fácilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegurese que el contenido de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
+Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinámico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir fácilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegúrese que el contenido de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
 :::
 
 ### Métodos Globales
@@ -198,15 +198,15 @@ import { Message } from 'element-ui';
 
 En este caso debería llamar al método `Message(options)`. También se han registrado métodos para los diferentes tipos, e.g. `Message.success(options)`. Puede llamar al método `Message.closeAll()` para cerrar manualmente todas las instancias.
 
-### Options
-| Atributo                 | Descripcion                              | Tipo           | Valores permitidos         | Por defecto |
+### Opciones
+| Atributo                 | Descripción                   | Tipo           | Valores permitidos         | Por defecto |
 | ------------------------ | ---------------------------------------- | -------------- | -------------------------- | ----------- |
 | message                  | texto del mensaje                        | string / VNode | —                          | —           |
 | type                     | tipo del mensaje                         | string         | success/warning/info/error | info        |
-| iconClass                | clase personalizada para el icono, sobreescribe `type` | string         | —                          | —           |
+| iconClass                | clase personalizada para el icono, sobrescribe `type` | string         | —                          | —           |
 | dangerouslyUseHTMLString | utilizado para que `message` sea tratado como cadena HTML | boolean        | —                          | false       |
 | customClass              | nombre de clase personalizado para el componente Message | string         | —                          | —           |
-| duration                 | muestra la duración,en milisegundos. si se establece en 0, este no se apagara automáticamente | number         | —                          | 3000        |
+| duration                 | muestra la duración,en mili segundos. si se establece en 0, este no se apagara automáticamente | number         | —                          | 3000        |
 | showClose                | utilizado para mostrar un botón para cerrar | boolean        | —                          | false       |
 | center                   | utilizado para centrar el texto          | boolean        | —                          | false       |
 | onClose                  | función callback ejecutada cuando se cierra con una instancia de mensaje como parámetro | function       | —                          | —           |

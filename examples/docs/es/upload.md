@@ -150,9 +150,9 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
 ```
 :::
 
-### Custom file thumbnail
+### Personalizar el template thumbnail
 
-Use `scoped-slot` to change default thumbnail template.
+Use el `scoped-slot`  para cambiar el template por defecto del thumbnail.
 
 :::demo
 ```html
@@ -359,20 +359,20 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 | thumbnail-mode   | especifica si se mostrará la miniatura                       | boolean                            | —                         | false       |
 | file-list        | archivos cargados por defecto, por ejemplo,  [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array                              | —                         | []          |
 | list-type        | tipo de lista de archivos                                    | string                             | text/picture/picture-card | text        |
-| auto-upload      | se especifica si se autocargan archivos                      | boolean                            | —                         | true        |
+| auto-upload      | se especifica si se auto cargan archivos                     | boolean                            | —                         | true        |
 | http-request     | sobrescribe el comportamiento por defecto de xhr, permitiendo implementar tu propia petición de carga de archivos | function                           | —                         | —           |
 | disabled         | especifica si se deshabilita la carga de archivos            | boolean                            | —                         | false       |
 | limit            | número máximo de cargas permitidas                           | number                             | —                         | —           |
 | on-exceed        | _hook_ lanzado cuando el límite ha sido excedido             | function(files, fileList)          | —                         | -           |
 
 ### Slot
-| Nombre       | Descripcion                              |
+| Nombre       | Descripción                   |
 | ------------ | ---------------------------------------- |
 | trigger | contenido que desencadena el diálogo de archivo |
 | tip | contenido de los tips |
 
 ### Métodos
-| Nombre del método | Descripción                              | Parametros                |
+| Nombre del método | Descripción                              | Parámetros      |
 | ----------------- | ---------------------------------------- | ------------------------- |
 | clearFiles        | limpia la lista de archivos cargados (este método no esta soportado en el _hook_ `before-upload`) | —                         |
 | abort             | cancela la petición de carga             | （ file: fileList's item ） |

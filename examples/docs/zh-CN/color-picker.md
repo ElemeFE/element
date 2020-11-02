@@ -145,7 +145,7 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | string | — | — |
 | disabled      | 是否禁用。`null` 表示继承父级表单的禁用状态 | boolean | true, false, null | null   |
-| size | 尺寸 | string | — | medium / small / mini |
+| size | 尺寸 | string | medium / small / mini | — |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 | popper-class | ColorPicker 下拉框的类名 | string | — | — |
