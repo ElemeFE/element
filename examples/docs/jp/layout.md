@@ -6,7 +6,7 @@
 
 カラムを用いて、ベーシックグリッドレイアウトを作ります。
 
-:::demo With `rrow` と `col` を使えば、`span` 属性を使って簡単にレイアウトを操作することができます。
+:::demo `row` と `col` を使えば、`span` 属性を使って簡単にレイアウトを操作することができます。
 ```html
 <el-row>
   <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
