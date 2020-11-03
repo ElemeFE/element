@@ -49,7 +49,7 @@
 
 `disabled` 属性はbuttonが無効になっているかどうかを判定します。
 
-buttonが無効になっているかどうかを判断するには `disabled` 属性を用いる。これは `Boolean` 値を受け取ります。
+:::demo buttonが無効になっているかどうかを判断するには `disabled` 属性を用いる。これは `Boolean` 値を受け取ります。
 
 ```html
 <el-row>
