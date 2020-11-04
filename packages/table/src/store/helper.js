@@ -1,5 +1,5 @@
 import Store from './index';
-import debounce from 'throttle-debounce/debounce';
+import { debounce } from 'throttle-debounce';
 
 export function createStore(table, initialState = {}) {
   if (!table) {
