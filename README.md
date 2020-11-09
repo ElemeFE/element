@@ -161,11 +161,6 @@ French documentation is made possible by these community developers:
 - [smalesys](https://github.com/smalesys)
 - [blombard](https://github.com/blombard)
 
-## Donation
-If you find Element useful, you can buy us a cup of coffee
-
-<img width="650" src="https://user-images.githubusercontent.com/14025786/44833997-5d7c4d80-ac62-11e8-8445-1dffec0eb13c.png" alt="donation">
-
 ## Backers
 
 Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/element#backer)]
