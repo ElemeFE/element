@@ -58,7 +58,7 @@
   </div>
 </template>
 <script>
-  import debounce from 'throttle-debounce/debounce';
+  import { debounce } from 'throttle-debounce';
   import ElInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';

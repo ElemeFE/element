@@ -369,7 +369,7 @@
   </div>
 </template>
 <script>
-  import throttle from 'throttle-debounce/throttle';
+  import { throttle } from 'throttle-debounce';
   
   export default {
     created() {
