@@ -75,6 +75,7 @@ For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/e
   - [French users](http://element.eleme.io/#/fr-FR)
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
+- [Vue.js 3.0 migration](https://github.com/element-plus/element-plus)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
 - [Element for React](https://github.com/elemefe/element-react)
