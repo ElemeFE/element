@@ -1,5 +1,20 @@
 ## Changelog
 
+### 2.14.1
+
+*2020-11-11*
+
+#### Bug fixes
+
+- Popover
+  - Compatible with Vue 2.6 new v-slot syntax (#20424 by @iamkun)
+
+#### Optimization
+
+- I18n
+  - Update Arabic translation (#20202 by @elkattan)
+  - Update Uighur translation (#20177 by @IlhamTahir)
+
 ### 2.14.0
 
 *2020-10-29*
@@ -7,7 +22,7 @@
 #### Breaking changes
 
 - Popconfirm
-  - Rename event name to `confirm`, `cancel` (#20240 by @hugiron)"
+  - Rename event name to `confirm`, `cancel` (#20240 by @hugiron)
 
 #### Bug fixes
 
