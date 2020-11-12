@@ -15,5 +15,5 @@ cp -rf ../../examples/element-ui/** $SUB_FOLDER/
 cd ../..
 
 # deploy domestic site
-faas deploy alpha -P element
+faas deploy daily -P element
 rm -rf temp_web
