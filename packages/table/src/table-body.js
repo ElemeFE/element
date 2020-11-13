@@ -6,6 +6,7 @@ import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';
+import Vue from 'vue';
 
 export default {
   name: 'ElTableBody',
@@ -48,7 +49,6 @@ export default {
               return acc.concat(this.wrappedRowRender(row, acc.length));
             }, [])
           }
-          <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
         </tbody>
       </table>
     );
@@ -253,10 +253,10 @@ export default {
       const rangeWidth = range.getBoundingClientRect().width;
       const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
         (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
-      if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
-        const tooltip = this.$refs.tooltip;
+      if (rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) {
+        const tooltip = this._tooltip;
         // TODO 会引起整个 Table 的重新渲染，需要优化
-        this.tooltipContent = cell.innerText || cell.textContent;
+        tooltip.content = cell.innerText || cell.textContent;
         tooltip.referenceElm = cell;
         tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
         tooltip.doDestroy();
@@ -266,7 +266,7 @@ export default {
     },
 
     handleCellMouseLeave(event) {
-      const tooltip = this.$refs.tooltip;
+      const tooltip = this._tooltip;
       if (tooltip) {
         tooltip.setExpectedState(false);
         tooltip.handleClosePopper();
@@ -478,6 +478,23 @@ export default {
       } else {
         return this.rowRender(row, $index);
       }
+    },
+
+    createPopper() {
+      const TooltipChild = Vue.extend(ElTooltip);
+      this._tooltip = new TooltipChild({
+        propsData: {
+          placement: 'top',
+          effect: this.table.tooltipEffect
+        }
+      });
+      const Wapper = document.createElement('div');
+      document.body.append(Wapper);
+      this._tooltip.$mount(Wapper);
     }
+  },
+
+  destroyed() {
+    this._tooltip && this._tooltip.$el && document.body.removeChild(this._tooltip.$el);
   }
 };
