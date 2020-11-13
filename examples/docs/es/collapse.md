@@ -119,8 +119,8 @@ Además de usar el atributo `title`, se puede personalizar el título del panel 
 | accordion | especifica si activa el modo acordeón | boolean                                  | —                 | false       |
 
 ### Eventos de Collapse
-| Nombre de Evento | Descripción                              | Parametros                               |
-| ---------------- | ---------------------------------------- | ---------------------------------------- |
+| Nombre de Evento | Descripción                                   | Parámetros                                                   |
+| ---------------- | --------------------------------------------- | ------------------------------------------------------------ |
 | change           | se dispara cuando los paneles activos cambian | (activeNames: array (No modo acordeón) / string (modo acordeón)) |
 
 

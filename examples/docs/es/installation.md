@@ -20,7 +20,7 @@ Obtenga la última versión desde [unpkg.com/element-ui](https://unpkg.com/eleme
 ```
 
 ##Tip
-Recomendamos a nuestros usuarios congelar la versión de Elemet cuando usas un CDN. Por favor, refiérase a [unpkg.com](https://unpkg.com) para más información.
+Recomendamos a nuestros usuarios congelar la versión de Element cuando usas un CDN. Por favor, refiérase a [unpkg.com](https://unpkg.com) para más información.
 
 ### Hello world
 

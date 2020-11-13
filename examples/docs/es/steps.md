@@ -151,8 +151,8 @@ Step bar simple, donde se ignorará `align-center`, `description`, `direction` y
 | icon        | icono del paso                           | nombre de la clase del icono del paso. Los iconos también se pueden pasar a través del slot con nombre | string            | —           |
 | status      | estado actual. Se configurará automáticamente mediante Steps si no está configurado. | wait / process / finish / error / success | -                 |             |
 
-### Step Slot
-| Name        | Description          |
+### Slot Step
+| Nombre      | Descripción          |
 | ----------- | -------------------- |
 | icon        | Icono personalizado  |
 | title       | Titulo del paso      |
