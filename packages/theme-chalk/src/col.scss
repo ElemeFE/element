@@ -12,6 +12,7 @@
 
 @for $i from 0 through 24 {
   .el-col-#{$i} {
+    display: inherit;
     width: (1 / 24 * $i * 100) * 1%;
   }
 
@@ -36,6 +37,7 @@
   }
   @for $i from 0 through 24 {
     .el-col-xs-#{$i} {
+      display: inherit;
       width: (1 / 24 * $i * 100) * 1%;
     }
 
@@ -61,6 +63,7 @@
   }
   @for $i from 0 through 24 {
     .el-col-sm-#{$i} {
+      display: inherit;
       width: (1 / 24 * $i * 100) * 1%;
     }
 
@@ -86,6 +89,7 @@
   }
   @for $i from 0 through 24 {
     .el-col-md-#{$i} {
+      display: inherit;
       width: (1 / 24 * $i * 100) * 1%;
     }
 
@@ -111,6 +115,7 @@
   }
   @for $i from 0 through 24 {
     .el-col-lg-#{$i} {
+      display: inherit;
       width: (1 / 24 * $i * 100) * 1%;
     }
 
@@ -136,6 +141,7 @@
   }
   @for $i from 0 through 24 {
     .el-col-xl-#{$i} {
+      display: inherit;
       width: (1 / 24 * $i * 100) * 1%;
     }
 
