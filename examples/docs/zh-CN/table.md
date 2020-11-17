@@ -528,6 +528,7 @@
 <template>
   <el-table
     :data="tableData"
+    :border="true"
     style="width: 100%"
     max-height="250">
     <el-table-column
