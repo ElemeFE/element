@@ -190,12 +190,12 @@ Por defecto, `direction` es `horizontal`. El carousel puede ser mostrado de form
 | initial-index      | Indice del slider inicial activo (empieza desde 0) | number  | —                   | 0           |
 | trigger            | Evento que muestra los indicadores                 | string  | hover/click         | hover       |
 | autoplay           | Si se enlazan automáticamente las diapositivas     | boolean | —                   | true        |
-| interval           | Intervalo del auto loop, en milisegundos           | number  | —                   | 3000        |
+| interval           | Intervalo del auto loop, en mili segundos          | number  | —                   | 3000        |
 | indicator-position | Posición del indicador de paginación               | string  | outside/none        | —           |
 | arrow              | Cuando se muestran las flechas                     | string  | always/hover/never  | hover       |
 | type               | Tipo de carrusel                                   | string  | card                | —           |
 | loop               | Si se muestra cíclicamente                         | boolean | —                   | true        |
-| direction          | direccion en la que se muestra el contenido        | string  | horizontal/vertical | horizontal  |
+| direction          | dirección en la que se muestra el contenido        | string  | horizontal/vertical | horizontal  |
 
 ### Eventos de Carousel
 | Nombre evento | Descripción                               | Parámetros                                                   |
@@ -210,8 +210,8 @@ Por defecto, `direction` es `horizontal`. El carousel puede ser mostrado de form
 | next          | Cambia al slider siguiente | —                                                            |
 
 ### Atributos de Carousel-Item
-| Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |
-| -------- | ---------------------------------------- | ------ | ----------------- | ----------- |
-| name     | Nombre del item que puede ser usado en `setActiveItem` | string | —                 | —           |
-| label    | Texto que se mostrara en el indicador de paginacion correspondiente | string | —                 | —           |
+| Atributo | Descripción                                                  | Tipo   | Valores aceptados | Por defecto |
+| -------- | ------------------------------------------------------------ | ------ | ----------------- | ----------- |
+| name     | Nombre del ítem que puede ser usado en `setActiveItem`       | string | —                 | —           |
+| label    | Texto que se mostrara en el indicador de paginación correspondiente | string | —                 | —           |
 

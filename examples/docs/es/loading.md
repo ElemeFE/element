@@ -196,7 +196,7 @@ Llamar al método `close` en cualquiera de estas puede cerrarlo.
 
 Si Element es importado completamente, un método global `$loading` puede ser registrado a Vue.prototype. Puede invocarlo como esto: `this.$loading(options)`, y también devuelve una instancia del componente.
 
-### Options
+### Opciones
 | Atributo    | Descripción                              | Tipo          | Valores aceptados | Por defecto   |
 | ----------- | ---------------------------------------- | ------------- | ----------------- | ------------- |
 | target      | el nodo del DOM que el componente debe cubrir. Acepta un objecto DOM o una cadena. Si está es una cadena, este será pasado a `document.querySelector` para obtener el correspondiente nodo del DOM | object/string | —                 | document.body |
