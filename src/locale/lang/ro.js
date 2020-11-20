@@ -71,9 +71,9 @@ export default {
       noData: 'Nu există date'
     },
     pagination: {
-      goto: 'Go to',
-      pagesize: '/pagina',
-      total: 'Total {total}',
+      goto: 'Săriți la pagina: ',
+      pagesize: '/pagină',
+      total: 'Total: {total}',
       pageClassifier: ''
     },
     messagebox: {
