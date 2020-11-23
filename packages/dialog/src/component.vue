@@ -188,7 +188,7 @@
       afterLeave() {
         this.$emit('closed');
         if (this.destroyOnClose) {
-            this.slotVisibility = false;
+          this.slotVisibility = false;
         }
       }
     },
