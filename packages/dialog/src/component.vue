@@ -132,9 +132,6 @@
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
           if (!this.closed) this.$emit('close');
-          if (this.destroyOnClose) {
-            this.slotVisibility = false;
-          }
         }
       }
     },
@@ -190,6 +187,9 @@
       },
       afterLeave() {
         this.$emit('closed');
+        if (this.destroyOnClose) {
+            this.slotVisibility = false;
+        }
       }
     },
 
