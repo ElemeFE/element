@@ -256,6 +256,7 @@ Vertical NavMenu could be collapsed.
 | menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | hover / click | hover |
 | router  | whether `vue-router` mode is activated. If true, index will be used as 'path' to activate the route action | boolean   | — | false   |
 | collapse-transition  | whether to enable the collapse transition | boolean   | — | true   |
+| tooltip-effect | tooltip `effect` property | String | dark/light | | dark |
 
 ### Menu Methods
 | Methods Name | Description | Parameters |

@@ -258,6 +258,7 @@ NavMenu vertical puede ser colapsado.
 | menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | hover / click      | hover   |
 | router            | si el modo `vue-router` está activado. Si es verdadero, el índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
 | collapse-transition  | si se debe permitir collapse transition | boolean   | — | true   |
+| tooltip-effect | propiedad `effect` para efectos en tooltip | String | dark/light | | dark |
 
 ### Métodos Menu 
 | Métodos de evento | Descripción                   | Parámetros                             |

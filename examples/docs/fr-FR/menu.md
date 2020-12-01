@@ -257,6 +257,7 @@ Le menu vertical peut être réduit.
 | menu-trigger | Comment les sous-menu sont déclenchés, uniquement en mode horizontal. | string    | hover / click | hover |
 | router  | Si le mode `vue-router` est activé. Si `true`, l'index sera utilisé comme 'path' pour activer la route. | boolean   | — | false   |
 | collapse-transition  | Si la transition de réduction doit être activée. | boolean   | — | true   |
+| tooltip-effect | Propriété `effect` de Tooltip. | String | dark/light | | dark |
 
 ### Méthodes du menu
 
