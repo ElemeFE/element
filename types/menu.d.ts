@@ -37,6 +37,9 @@ export declare class ElMenu extends ElementUIComponent {
 
   /** Whether the menu collapse transition is active */
   collapseTransition: boolean
+
+  /**  Tooltip effect property */
+  tooltipEffect: String
   
   /** Open the specified sub-menu */
   open (index: string): void

@@ -120,7 +120,8 @@
       collapseTransition: {
         type: Boolean,
         default: true
-      }
+      },
+      tooltipEffect: String
     },
     data() {
       return {
