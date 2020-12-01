@@ -37,6 +37,9 @@ export declare class ElDialog extends ElementUIComponent {
   /** Whether scroll of body is disabled while Dialog is displayed */
   lockScroll: boolean
 
+  /** Custom class names for Dialog wrapper */
+  wrapperClass: string
+
   /** Custom class names for Dialog */
   customClass: string
 
