@@ -16,7 +16,10 @@ class Transition {
   enter(el) {
     el.dataset.oldOverflow = el.style.overflow;
     if (el.scrollHeight !== 0) {
-      el.style.height = el.scrollHeight + 'px';
+      // 高度计算的有问题因为在beforeEnter时候 el.style.paddingTop以及Bottom 都设置为了0 那么这边获取的话就缺少了这块高度
+      const paddingTop = el.dataset.oldPaddingTop ? parseFloat(el.dataset.oldPaddingTop) : 0;
+      const paddingBottom = el.dataset.paddingBottom ? parseFloat(el.dataset.paddingBottom) : 0;
+      el.style.height = `${el.scrollHeight + paddingTop + paddingBottom}px`;
       el.style.paddingTop = el.dataset.oldPaddingTop;
       el.style.paddingBottom = el.dataset.oldPaddingBottom;
     } else {
