@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Create new issue
+    url: https://elementui.github.io/issue-generator
+    about: The issue which is not created via https://elementui.github.io/issue-generator will be closed immediately.
