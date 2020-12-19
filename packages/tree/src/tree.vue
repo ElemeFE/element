@@ -451,15 +451,23 @@
 
         if (draggingNode && dropNode) {
           const draggingNodeCopy = { data: draggingNode.node.data };
+          const oldDraggingNodeParent = draggingNode.node.parent;
           if (dropType !== 'none') {
             draggingNode.node.remove();
           }
+          const { showCheckbox } = dropNode.tree;
           if (dropType === 'before') {
             dropNode.node.parent.insertBefore(draggingNodeCopy, dropNode.node);
+            showCheckbox && dropNode.node.parent.reInitChecked();
           } else if (dropType === 'after') {
             dropNode.node.parent.insertAfter(draggingNodeCopy, dropNode.node);
+            showCheckbox && dropNode.node.parent.reInitChecked();
           } else if (dropType === 'inner') {
             dropNode.node.insertChild(draggingNodeCopy);
+            showCheckbox && dropNode.node.reInitChecked();
+          }
+          if (showCheckbox && oldDraggingNodeParent) {
+            oldDraggingNodeParent.reInitChecked();
           }
           if (dropType !== 'none') {
             this.store.registerNode(draggingNodeCopy);
