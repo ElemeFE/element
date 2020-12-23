@@ -107,6 +107,7 @@ import {
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)
 ```
+
 For more information, please refer to [Quick Start](http://element.eleme.io/#/en-US/component/quickstart) in our documentation.
 
 ## Browser Support
