@@ -332,7 +332,7 @@ export default {
       deep: true
     },
     presentText(val) {
-      this.inputValue = val;
+      if (!this.multiple) this.inputValue = val;
     },
     presentTags(val, oldVal) {
       if (this.multiple && (val.length || oldVal.length)) {
