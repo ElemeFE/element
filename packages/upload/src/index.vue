@@ -174,31 +174,30 @@ export default {
     },
     handleProgress(ev, rawFile) {
       const file = this.getFile(rawFile);
-      this.onProgress(ev, file, this.uploadFiles);
-      file.status = 'uploading';
-      file.percentage = ev.percent || 0;
+      if (file) {
+        this.onProgress(ev, file, this.uploadFiles);
+        file.status = 'uploading';
+        file.percentage = ev.percent || 0;
+      }
     },
     handleSuccess(res, rawFile) {
       const file = this.getFile(rawFile);
-
       if (file) {
         file.status = 'success';
         file.response = res;
-
         this.onSuccess(res, file, this.uploadFiles);
         this.onChange(file, this.uploadFiles);
       }
     },
     handleError(err, rawFile) {
       const file = this.getFile(rawFile);
-      const fileList = this.uploadFiles;
-
-      file.status = 'fail';
-
-      fileList.splice(fileList.indexOf(file), 1);
-
-      this.onError(err, file, this.uploadFiles);
-      this.onChange(file, this.uploadFiles);
+      if (file) {
+        const fileList = this.uploadFiles;
+        file.status = 'fail';
+        fileList.splice(fileList.indexOf(file), 1);
+        this.onError(err, file, this.uploadFiles);
+        this.onChange(file, this.uploadFiles);
+      }
     },
     handleRemove(file, raw) {
       if (raw) {

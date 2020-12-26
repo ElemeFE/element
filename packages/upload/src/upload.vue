@@ -122,12 +122,13 @@ export default {
       if (file) {
         let uid = file;
         if (file.uid) uid = file.uid;
-        if (reqs[uid]) {
+        if (reqs[uid] && typeof reqs[uid].abort === 'function') {
           reqs[uid].abort();
         }
+        delete reqs[uid];
       } else {
         Object.keys(reqs).forEach((uid) => {
-          if (reqs[uid]) reqs[uid].abort();
+          if (reqs[uid] && typeof reqs[uid].abort === 'function') reqs[uid].abort();
           delete reqs[uid];
         });
       }
