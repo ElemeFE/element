@@ -29,7 +29,7 @@ Display date.
   <!-- Use 2.5 slot syntax. If you use Vue 2.6, please use new slot syntax-->
   <template
     slot="header"
-    slot-scope="{dateText, toPrevMonth, toToday, toNextMonth}">
+    slot-scope="{dateText, toPrevMonth, toToday, toNextMonth, pickDay}">
     <div style="
       width: 100%;
       display: flex;
@@ -46,6 +46,12 @@ Display date.
           size="mini"
           @click="toToday">
           Today
+        </el-button>
+        <el-button
+          size="mini"
+          @click="pickDay('1970-01-01')"
+          >
+          1970-01-01
         </el-button>
       </p>
       <el-button
@@ -109,10 +115,11 @@ Display date.
 ### header Scoped Slot Parameters
 | Attribute       | Description   | Type      | Accepted Values       | Default  |
 |-----------------|-------------- |---------- |---------------------- |--------- |
-| dateText        | date the cell represents  | String   | — | — |
+| dateText        | translated date text      | String   | — | — |
 | toPrevMonth     | select to previous month  | Function | — | — |
 | toNextMonth     | select to next month      | Function | — | — |
 | toToday         | select to today           | Function | — | — |
+| pickDay         | select to targe date      | Function | 'yyyy-MMM-dd' | — |
 
 ### dateCell Scoped Slot Parameters
 | Attribute       | Description   | Type      | Accepted Values       | Default  |

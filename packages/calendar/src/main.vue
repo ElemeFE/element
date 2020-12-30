@@ -4,9 +4,10 @@
       <slot
         name="header"
         :dateText="i18nDate"
-        :toToday="selectDate.bind(null, 'today')"
-        :toNextMonth="selectDate.bind(null, 'next-month')"
-        :toPrevMonth="selectDate.bind(null, 'prev-month')"
+        :toToday="() => selectDate('today')"
+        :toNextMonth="() => selectDate('next-month')"
+        :toPrevMonth="() => selectDate('prev-month')"
+        :pickDay="pickDay"
       >
         <div class="el-calendar__title">
           {{ i18nDate }}
