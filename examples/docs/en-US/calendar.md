@@ -21,6 +21,53 @@ Display date.
 ```
 :::
 
+### Custom Header
+
+:::demo Customize what is displayed in the calendar header by setting `scoped-slot` named `header`. In `header` you can get `dateText`, `toPrev`, `toToday`, `toNextMonth`. For details, please refer to the API documentation below.
+```html
+<el-calendar>
+  <!-- Use 2.5 slot syntax. If you use Vue 2.6, please use new slot syntax-->
+  <template
+    slot="header"
+    slot-scope="{dateText, toPrevMonth, toToday, toNextMonth}">
+    <div style="
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;">
+      <el-button
+        size="mini"
+        @click="toPrevMonth">
+        Previous Month
+      </el-button>
+      <p>
+        {{ dateText }}
+        <el-button
+          size="mini"
+          @click="toToday">
+          Today
+        </el-button>
+      </p>
+      <el-button
+        size="mini"
+        @click="toNextMonth">
+        Next Month
+      </el-button>
+    </div>
+  </template>
+
+</el-calendar>
+<style>
+  .custom-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+```
+:::
+
 ### Custom Content
 
 :::demo Customize what is displayed in the calendar cell by setting `scoped-slot` named `dateCell`. In `scoped-slot` you can get the date (the date of the current cell), data (including the type, isSelected, day attribute). For details, please refer to the API documentation below.
@@ -58,6 +105,14 @@ Display date.
 | value / v-model | binding value      | Date/string/number | —            | —        |
 | range           | time range, including start time and end time. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months. | Array  | —  | —  |
 | first-day-of-week | fisrt day of week| Number    | 1 to 7                |  1       |
+
+### header Scoped Slot Parameters
+| Attribute       | Description   | Type      | Accepted Values       | Default  |
+|-----------------|-------------- |---------- |---------------------- |--------- |
+| dateText        | date the cell represents  | String   | — | — |
+| toPrevMonth     | select to previous month  | Function | — | — |
+| toNextMonth     | select to next month      | Function | — | — |
+| toToday         | select to today           | Function | — | — |
 
 ### dateCell Scoped Slot Parameters
 | Attribute       | Description   | Type      | Accepted Values       | Default  |
