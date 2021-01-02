@@ -408,5 +408,5 @@ export const parseDateWithMoment = function(string) {
   }
 
   const allFormats = getMomentAllowedFormats();
-  return moment(string, allFormats);
+  return moment(string, allFormats).toDate();
 };
