@@ -300,9 +300,17 @@ export const parseDateWithMoment = function(string) {
       'DD|MM|YYYYHHmm',
       'DD|MM|YYYY',
 
+      'DD|MMM|YYYY HH:mm',
+      'DD|MMM|YYYYHHmm',
+      'DD|MMM|YYYY',
+
       'D|MM|YYYY HH:mm',
       'D|MM|YYYYHHmm',
       'D|MM|YYYY',
+
+      'D|MMM|YYYY HH:mm',
+      'D|MMM|YYYYHHmm',
+      'D|MMM|YYYY',
 
       'DD|M|YYYY HH:mm',
       'DD|M|YYYYHHmm',
@@ -316,6 +324,10 @@ export const parseDateWithMoment = function(string) {
       'MM|DD|YYYYHHmm',
       'MM|DD|YYYY',
 
+      'MMM|DD|YYYY HH:mm',
+      'MMM|DD|YYYYHHmm',
+      'MMM|DD|YYYY',
+
       'M|DD|YYYY HH:mm',
       'M|DD|YYYYHHmm',
       'M|DD|YYYY',
@@ -323,6 +335,10 @@ export const parseDateWithMoment = function(string) {
       'MM|D|YYYY HH:mm',
       'MM|D|YYYYHHmm',
       'MM|D|YYYY',
+
+      'MMM|D|YYYY HH:mm',
+      'MMM|D|YYYYHHmm',
+      'MMM|D|YYYY',
 
       'M|D|YYYY HH:mm',
       'M|D|YYYYHHmm',
@@ -332,9 +348,17 @@ export const parseDateWithMoment = function(string) {
       'YYYY|DD|MMHHmm',
       'YYYY|DD|MM',
 
+      'YYYY|DD|MMM HH:mm',
+      'YYYY|DD|MMMHHmm',
+      'YYYY|DD|MMM',
+
       'YYYY|D|MM HH:mm',
       'YYYY|D|MMHHmm',
       'YYYY|D|MM',
+
+      'YYYY|D|MMM HH:mm',
+      'YYYY|D|MMMHHmm',
+      'YYYY|D|MMM',
 
       'YYYY|DD|M HH:mm',
       'YYYY|DD|MHHmm',
@@ -348,6 +372,10 @@ export const parseDateWithMoment = function(string) {
       'YYYY|MM|DDHHmm',
       'YYYY|MM|DD',
 
+      'YYYY|MMM|DD HH:mm',
+      'YYYY|MMM|DDHHmm',
+      'YYYY|MMM|DD',
+
       'YYYY|M|DD HH:mm',
       'YYYY|M|DDHHmm',
       'YYYY|M|DD',
@@ -355,6 +383,10 @@ export const parseDateWithMoment = function(string) {
       'YYYY|MM|D HH:mm',
       'YYYY|MM|DHHmm',
       'YYYY|MM|D',
+
+      'YYYY|MMM|D HH:mm',
+      'YYYY|MMM|DHHmm',
+      'YYYY|MMM|D',
 
       'YYYY|M|D HH:mm',
       'YYYY|M|DHHmm',
@@ -364,9 +396,17 @@ export const parseDateWithMoment = function(string) {
       'DD|MM|YYHHmm',
       'DD|MM|YY',
 
+      'DD|MMM|YY HH:mm',
+      'DD|MMM|YYHHmm',
+      'DD|MMM|YY',
+
       'D|MM|YY HH:mm',
       'D|MM|YYHHmm',
       'D|MM|YY',
+
+      'D|MMM|YY HH:mm',
+      'D|MMM|YYHHmm',
+      'D|MMM|YY',
 
       'DD|M|YY HH:mm',
       'DD|M|YYHHmm',
@@ -380,6 +420,10 @@ export const parseDateWithMoment = function(string) {
       'MM|DD|YYHHmm',
       'MM|DD|YY',
 
+      'MMM|DD|YY HH:mm',
+      'MMM|DD|YYHHmm',
+      'MMM|DD|YY',
+
       'M|DD|YY HH:mm',
       'M|DD|YYHHmm',
       'M|DD|YY',
@@ -387,6 +431,10 @@ export const parseDateWithMoment = function(string) {
       'MM|D|YY HH:mm',
       'MM|D|YYHHmm',
       'MM|D|YY',
+
+      'MMM|D|YY HH:mm',
+      'MMM|D|YYHHmm',
+      'MMM|D|YY',
 
       'M|D|YY HH:mm',
       'M|D|YYHHmm',
