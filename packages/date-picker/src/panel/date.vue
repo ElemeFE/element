@@ -145,7 +145,7 @@
 <script type="text/babel">
   import {
     formatDate,
-    parseDate,
+    parseDateWithMoment,
     getWeekNumber,
     isDate,
     modifyDate,
@@ -466,7 +466,7 @@
       },
 
       handleVisibleDateChange(value) {
-        const date = parseDate(value, this.dateFormat);
+        const date = parseDateWithMoment(value, this.dateFormat);
         if (date) {
           if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
             return;
