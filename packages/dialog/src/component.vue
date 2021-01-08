@@ -89,7 +89,8 @@
       },
 
       width: String,
-
+      height: String,
+      
       fullscreen: Boolean,
 
       customClass: {
@@ -148,6 +149,9 @@
           style.marginTop = this.top;
           if (this.width) {
             style.width = this.width;
+          }
+          if (this.height) {
+            style.height = this.height;
           }
         }
         return style;
