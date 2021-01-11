@@ -100,14 +100,8 @@ export default {
       popper.setAttribute('tabindex', 0);
 
       if (this.trigger !== 'click') {
-        on(reference, 'focusin', () => {
-          this.handleFocus();
-          const instance = reference.__vue__;
-          if (instance && typeof instance.focus === 'function') {
-            instance.focus();
-          }
-        });
-        on(popper, 'focusin', this.handleFocus);
+        on(reference, 'focusin', this.handleRefrenceFocus);
+        on(popper, 'focusin', this.handlePopperFocus);
         on(reference, 'focusout', this.handleBlur);
         on(popper, 'focusout', this.handleBlur);
       }
@@ -154,7 +148,14 @@ export default {
     doClose() {
       this.showPopper = false;
     },
-    handleFocus() {
+    handleRefrenceFocus() {
+      this.handlePopperFocus();
+      const instance = reference.__vue__;
+      if (instance && typeof instance.focus === 'function') {
+        instance.focus();
+      }
+    },
+    handlePopperFocus() {
       addClass(this.referenceElm, 'focusing');
       if (this.trigger === 'click' || this.trigger === 'focus') this.showPopper = true;
     },
@@ -221,17 +222,22 @@ export default {
 
   destroyed() {
     const reference = this.reference;
-
+    off(reference, 'focusin', this.handleRefrenceFocus);
+    off(popper, 'focusin', this.handlePopperFocus);
+    off(reference, 'focusout', this.handleBlur);
+    off(popper, 'focusout', this.handleBlur);
+    off(reference, 'keydown', this.handleKeydown);
+    off(reference, 'click', this.handleClick);
     off(reference, 'click', this.doToggle);
-    off(reference, 'mouseup', this.doClose);
-    off(reference, 'mousedown', this.doShow);
+    off(document, 'click', this.handleDocumentClick);
+    off(reference, 'mouseenter', this.handleMouseEnter);
+    off(popper, 'mouseenter', this.handleMouseEnter);
+    off(reference, 'mouseleave', this.handleMouseLeave);
+    off(popper, 'mouseleave', this.handleMouseLeave);
     off(reference, 'focusin', this.doShow);
     off(reference, 'focusout', this.doClose);
     off(reference, 'mousedown', this.doShow);
     off(reference, 'mouseup', this.doClose);
-    off(reference, 'mouseleave', this.handleMouseLeave);
-    off(reference, 'mouseenter', this.handleMouseEnter);
-    off(document, 'click', this.handleDocumentClick);
   }
 };
 </script>
