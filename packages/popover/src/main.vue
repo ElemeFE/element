@@ -150,6 +150,10 @@ export default {
     },
     handleRefrenceFocus() {
       this.handlePopperFocus();
+      let reference = this.referenceElm = this.reference || this.$refs.reference;
+      if (!reference && this.$refs.wrapper.children) {
+        reference = this.referenceElm = this.$refs.wrapper.children[0];
+      }
       const instance = reference.__vue__;
       if (instance && typeof instance.focus === 'function') {
         instance.focus();
