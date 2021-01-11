@@ -222,6 +222,7 @@ export default {
 
   destroyed() {
     const reference = this.reference;
+    const popper = this.popper || this.$refs.popper;
     off(reference, 'focusin', this.handleRefrenceFocus);
     off(popper, 'focusin', this.handlePopperFocus);
     off(reference, 'focusout', this.handleBlur);
