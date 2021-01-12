@@ -150,11 +150,10 @@ export default {
     },
     handleRefrenceFocus() {
       this.handlePopperFocus();
-      let reference = this.referenceElm = this.reference || this.$refs.reference;
-      if (!reference && this.$refs.wrapper.children) {
-        reference = this.referenceElm = this.$refs.wrapper.children[0];
+      if (!this.referenceElm) {
+        return;
       }
-      const instance = reference.__vue__;
+      const instance = this.referenceElm.__vue__;
       if (instance && typeof instance.focus === 'function') {
         instance.focus();
       }
@@ -200,7 +199,7 @@ export default {
       const popper = this.popper || this.$refs.popper;
 
       if (!reference && this.$refs.wrapper.children) {
-        reference = this.referenceElm = this.$refs.wrapper.children[0];
+        reference = this.$refs.wrapper.children[0];
       }
       if (!this.$el ||
         !reference ||
@@ -225,7 +224,7 @@ export default {
   },
 
   destroyed() {
-    const reference = this.reference;
+    const reference = this.referenceElm;
     const popper = this.popper || this.$refs.popper;
     off(reference, 'focusin', this.handleRefrenceFocus);
     off(popper, 'focusin', this.handlePopperFocus);
@@ -243,6 +242,7 @@ export default {
     off(reference, 'focusout', this.doClose);
     off(reference, 'mousedown', this.doShow);
     off(reference, 'mouseup', this.doClose);
+    this.referenceElm = undefined;
   }
 };
 </script>
