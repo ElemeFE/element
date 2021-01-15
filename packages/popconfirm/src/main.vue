@@ -84,10 +84,10 @@ export default {
   },
   computed: {
     displayConfirmButtonText() {
-      return this.confirmButtonText || t('el.popconfirm.confirmButtonText')
+      return this.confirmButtonText || t('el.popconfirm.confirmButtonText');
     },
     displayCancelButtonText() {
-      return this.cancelButtonText || t('el.popconfirm.cancelButtonText')
+      return this.cancelButtonText || t('el.popconfirm.cancelButtonText');
     }
   },
   methods: {
