@@ -766,7 +766,15 @@ export default {
       // Enter
       if (keyCode === 13) {
         if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
-          this.handleChange();
+          if (this.type === 'daterange') {
+            this.picker.value = this.displayValue;
+            this.$nextTick(() => {
+              this.emitInput([this.picker.minDate, this.picker.maxDate]);
+              this.emitChange([this.picker.minDate, this.picker.maxDate]);
+            });
+          } else {
+            this.handleChange();
+          }
           this.pickerVisible = this.picker.visible = false;
           this.blur();
         }
