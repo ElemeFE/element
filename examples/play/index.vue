@@ -5,11 +5,11 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        input: 'Hello Element UI!'
-      };
-    }
-  };
+export default {
+  data() {
+    return {
+      input: 'Hello Element UI!'
+    };
+  }
+};
 </script>

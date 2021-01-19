@@ -113,7 +113,8 @@ export default class TreeStore {
       const node = nodesMap[checkedKey];
 
       if (node) {
-        node.setChecked(true, !this.checkStrictly);
+        // node.setChecked(true, !this.checkStrictly);
+        node.setChecked(true, false, !this.checkStrictly);
       }
     });
   }
@@ -122,7 +123,8 @@ export default class TreeStore {
     const defaultCheckedKeys = this.defaultCheckedKeys || [];
 
     if (defaultCheckedKeys.indexOf(node.key) !== -1) {
-      node.setChecked(true, !this.checkStrictly);
+      // node.setChecked(true, !this.checkStrictly);
+      node.setChecked(true, false, !this.checkStrictly);
     }
   }
 
