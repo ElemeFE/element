@@ -287,7 +287,10 @@ describe('Tree', () => {
         this.defaultCheckedKeys = [1];
       }
     });
-    expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(3);
+    // expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(3);
+    setTimeout(() => {
+      expect(vm.$el.querySelectorAll('.el-checkbox .is-checked').length).to.equal(3);
+    }, 10);
   });
 
   it('defaultCheckedKeys & check-strictly', () => {
