@@ -156,15 +156,15 @@ export default class Color {
     this.enableAlpha = false;
     this.format = 'hex';
     this.value = '';
-    
+
     options = options || {};
-    
+
     for (let option in options) {
       if (options.hasOwnProperty(option)) {
         this[option] = options[option];
       }
     }
-    
+
     this.doOnChange();
   }
 
@@ -178,7 +178,7 @@ export default class Color {
 
       return;
     }
-    
+
     this['_' + prop] = value;
     this.doOnChange();
   }
@@ -200,19 +200,19 @@ export default class Color {
       this.doOnChange();
       return;
     }
-    
+
     const fromHSV = (h, s, v) => {
       this._hue = Math.max(0, Math.min(360, h));
       this._saturation = Math.max(0, Math.min(100, s));
       this._value = Math.max(0, Math.min(100, v));
-    
+
       this.doOnChange();
     };
-    
+
     if (value.indexOf('hsl') !== -1) {
       const parts = value.replace(/hsla|hsl|\(|\)/gm, '')
         .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-    
+
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       } else if (parts.length === 3) {
@@ -225,7 +225,7 @@ export default class Color {
     } else if (value.indexOf('hsv') !== -1) {
       const parts = value.replace(/hsva|hsv|\(|\)/gm, '')
         .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-    
+
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       } else if (parts.length === 3) {
@@ -237,7 +237,7 @@ export default class Color {
     } else if (value.indexOf('rgb') !== -1) {
       const parts = value.replace(/rgba|rgb|\(|\)/gm, '')
         .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-    
+
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       } else if (parts.length === 3) {
@@ -251,7 +251,7 @@ export default class Color {
       const hex = value.replace('#', '').trim();
       if (!/^(?:[0-9a-fA-F]{3}){1,2}|[0-9a-fA-F]{8}$/.test(hex)) return;
       let r, g, b;
-    
+
       if (hex.length === 3) {
         r = parseHexChannel(hex[0] + hex[0]);
         g = parseHexChannel(hex[1] + hex[1]);
@@ -261,13 +261,13 @@ export default class Color {
         g = parseHexChannel(hex.substring(2, 4));
         b = parseHexChannel(hex.substring(4, 6));
       }
-    
+
       if (hex.length === 8) {
         this._alpha = Math.floor(parseHexChannel(hex.substring(6)) / 255 * 100);
       } else if (hex.length === 3 || hex.length === 6) {
         this._alpha = 100;
       }
-    
+
       const { h, s, v } = rgb2hsv(r, g, b);
       fromHSV(h, s, v);
     }
