@@ -1057,6 +1057,11 @@
             return element;
         }
 
+        // if the type of parent is document-fragment, go on with it's host element
+        if (parent.nodeType === 11) {
+          return getScrollParent(parent.host);
+        }
+
         if (parent === root.document) {
             // Firefox puts the scrollTOp value on `documentElement` instead of `body`, we then check which of them is
             // greater than 0 and return the proper element
@@ -1090,7 +1095,8 @@
      * @returns {Boolean} answer to "isFixed?"
      */
     function isFixed(element) {
-        if (element === root.document.body) {
+        // document.body and document-fragment(nodetype is 11) are not fixed
+        if (element === root.document.body || element.nodeType === 11) {
             return false;
         }
         if (getStyleComputedProperty(element, 'position') === 'fixed') {
