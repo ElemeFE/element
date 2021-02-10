@@ -20,12 +20,6 @@ export default {
 
   inject: ['elCalendar'],
 
-  data() {
-    return {
-      WEEK_DAYS: getI18nSettings().dayNames
-    };
-  },
-
   methods: {
     toNestedArr(days) {
       return rangeArr(days.length / 7).map((_, index) => {
@@ -83,6 +77,9 @@ export default {
   },
 
   computed: {
+    WEEK_DAYS() {
+      return getI18nSettings().dayNames;
+    },
     prevMonthDatePrefix() {
       const temp = new Date(this.date.getTime());
       temp.setDate(0);
