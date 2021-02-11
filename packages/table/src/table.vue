@@ -19,15 +19,17 @@
       v-mousewheel="handleHeaderFooterMousewheel"
       class="el-table__header-wrapper"
       ref="headerWrapper">
-      <table-header
-        ref="tableHeader"
-        :store="store"
-        :border="border"
-        :default-sort="defaultSort"
-        :style="{
-          width: layout.bodyWidth ? layout.bodyWidth + 'px' : ''
-        }">
-      </table-header>
+      <div class="el-table__header-wrapper-forFixed">
+        <table-header
+          ref="tableHeader"
+          :store="store"
+          :border="border"
+          :default-sort="defaultSort"
+          :style="{
+            width: layout.bodyWidth ? layout.bodyWidth + 'px' : ''
+          }">
+        </table-header>
+      </div>
     </div>
     <div
       class="el-table__body-wrapper"
@@ -91,14 +93,16 @@
         v-if="showHeader"
         class="el-table__fixed-header-wrapper"
         ref="fixedHeaderWrapper" >
-        <table-header
-          ref="fixedTableHeader"
-          fixed="left"
-          :border="border"
-          :store="store"
-          :style="{
-            width: bodyWidth
-          }"></table-header>
+        <div class="el-table__fixed-header-wrapper-forFixed">
+          <table-header
+            ref="fixedTableHeader"
+            fixed="left"
+            :border="border"
+            :store="store"
+            :style="{
+              width: bodyWidth
+            }"></table-header>
+        </div>
       </div>
       <div
         class="el-table__fixed-body-wrapper"
@@ -152,14 +156,16 @@
       <div v-if="showHeader"
         class="el-table__fixed-header-wrapper"
         ref="rightFixedHeaderWrapper">
-        <table-header
-          ref="rightFixedTableHeader"
-          fixed="right"
-          :border="border"
-          :store="store"
-          :style="{
-            width: bodyWidth
-          }"></table-header>
+        <div class="el-table__fixed-header-wrapper-forFixed">
+          <table-header
+            ref="rightFixedTableHeader"
+            fixed="right"
+            :border="border"
+            :store="store"
+            :style="{
+              width: bodyWidth
+            }"></table-header>
+        </div>
       </div>
       <div
         class="el-table__fixed-body-wrapper"
@@ -214,7 +220,10 @@
 
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
-  import { debounce, throttle } from 'throttle-debounce';
+  /* -------------------------------- tanglinhai start ------------------------------------ */
+  // import { debounce, throttle } from 'throttle-debounce';
+  import { debounce } from 'throttle-debounce';
+  /* -------------------------------- tanglinhai start ------------------------------------ */
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Mousewheel from 'element-ui/src/directives/mousewheel';
   import Locale from 'element-ui/src/mixins/locale';
@@ -412,7 +421,10 @@
       },
 
       // TODO 使用 CSS transform
-      syncPostion: throttle(20, function() {
+      /* -------------------------------- tanglinhai start ------------------------------------ */
+      // syncPostion: throttle(20, function() {
+      syncPostion: function() {
+      /* -------------------------------- tanglinhai end ------------------------------------ */
         const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
         const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
         if (headerWrapper) headerWrapper.scrollLeft = scrollLeft;
@@ -427,7 +439,7 @@
         } else {
           this.scrollPosition = 'middle';
         }
-      }),
+      },
 
       bindEvents() {
         this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });

@@ -105,8 +105,9 @@
 
     methods: {
       handleChange() {
+        const lastVal = this.value;
         this.$nextTick(() => {
-          this.dispatch('ElRadioGroup', 'handleChange', this.value);
+          this.dispatch('ElRadioGroup', 'handleChange', [this.value, lastVal]);
         });
       }
     }

@@ -10,8 +10,8 @@
 
 ```html
 <template>
-  <el-radio v-model="radio" label="1">备选项</el-radio>
-  <el-radio v-model="radio" label="2">备选项</el-radio>
+  <el-radio v-model="radio" label="1" @change="change">备选项</el-radio>
+  <el-radio v-model="radio" label="2" @change="change">备选项</el-radio>
 </template>
 
 <script>
@@ -20,6 +20,11 @@
       return {
         radio: '1'
       };
+    },
+    methods: {
+      change(val, lastVal){
+        console.log(val, lastVal);
+      }
     }
   }
 </script>
@@ -33,8 +38,8 @@
 :::demo 只要在`el-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 ```html
 <template>
-  <el-radio disabled v-model="radio" label="禁用">备选项</el-radio>
-  <el-radio disabled v-model="radio" label="选中且禁用">备选项</el-radio>
+  <el-radio disabled v-model="radio" label="禁用" @change="change">备选项</el-radio>
+  <el-radio disabled v-model="radio" label="选中且禁用" @change="change">备选项</el-radio>
 </template>
 
 <script>
@@ -43,6 +48,11 @@
       return {
         radio: '选中且禁用'
       };
+    },
+    methods: {
+      change(val, lastVal){
+        console.log(val, lastVal);
+      }
     }
   }
 </script>
@@ -57,7 +67,7 @@
 
 ```html
 <template>
-  <el-radio-group v-model="radio">
+  <el-radio-group v-model="radio" @change="change">
     <el-radio :label="3">备选项</el-radio>
     <el-radio :label="6">备选项</el-radio>
     <el-radio :label="9">备选项</el-radio>
@@ -70,6 +80,11 @@
       return {
         radio: 3
       };
+    },
+    methods: {
+      change(val, lastVal){
+        console.log(val, lastVal);
+      }
     }
   }
 </script>
@@ -84,7 +99,7 @@
 ```html
 <template>
   <div>
-    <el-radio-group v-model="radio1">
+    <el-radio-group v-model="radio1" @change="change">
       <el-radio-button label="上海"></el-radio-button>
       <el-radio-button label="北京"></el-radio-button>
       <el-radio-button label="广州"></el-radio-button>
@@ -92,7 +107,7 @@
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio2" size="medium">
+    <el-radio-group v-model="radio2" size="medium" @change="change">
       <el-radio-button label="上海" ></el-radio-button>
       <el-radio-button label="北京"></el-radio-button>
       <el-radio-button label="广州"></el-radio-button>
@@ -100,7 +115,7 @@
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
+    <el-radio-group v-model="radio3" size="small" @change="change">
       <el-radio-button label="上海"></el-radio-button>
       <el-radio-button label="北京" disabled ></el-radio-button>
       <el-radio-button label="广州"></el-radio-button>
@@ -108,7 +123,7 @@
     </el-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" disabled size="mini">
+    <el-radio-group v-model="radio4" disabled size="mini" @change="change">
       <el-radio-button label="上海"></el-radio-button>
       <el-radio-button label="北京"></el-radio-button>
       <el-radio-button label="广州"></el-radio-button>
@@ -126,6 +141,11 @@
         radio3: '上海',
         radio4: '上海'
       };
+    },
+    methods: {
+      change(val, lastVal){
+        console.log(val, lastVal);
+      }
     }
   }
 </script>

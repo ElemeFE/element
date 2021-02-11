@@ -14,13 +14,18 @@ Input 为受控组件，它**总会显示 Vue 绑定值**。
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+<el-input v-model="input" placeholder="请输入内容" @change="change"></el-input>
 
 <script>
 export default {
   data() {
     return {
       input: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }
@@ -36,7 +41,7 @@ export default {
 <el-input
   placeholder="请输入内容"
   v-model="input"
-  :disabled="true">
+  :disabled="true" @change="change">
 </el-input>
 
 <script>
@@ -44,6 +49,11 @@ export default {
   data() {
     return {
       input: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }
@@ -59,7 +69,7 @@ export default {
 <el-input
   placeholder="请输入内容"
   v-model="input"
-  clearable>
+  clearable @change="change">
 </el-input>
 
 <script>
@@ -67,6 +77,11 @@ export default {
     data() {
       return {
         input: ''
+      }
+    },
+    methods: {
+      change(val, preVal) {
+        console.log(val, preVal);
       }
     }
   }
@@ -79,13 +94,18 @@ export default {
 :::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
 
 ```html
-<el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+<el-input placeholder="请输入密码" v-model="input" show-password @change="change"></el-input>
 
 <script>
   export default {
     data() {
       return {
         input: ''
+      }
+    },
+    methods: {
+      change(val, preVal) {
+        console.log(val, preVal);
       }
     }
   }
@@ -104,24 +124,24 @@ export default {
   <el-input
     placeholder="请选择日期"
     suffix-icon="el-icon-date"
-    v-model="input1">
+    v-model="input1" @change="change">
   </el-input>
   <el-input
     placeholder="请输入内容"
     prefix-icon="el-icon-search"
-    v-model="input2">
+    v-model="input2" @change="change">
   </el-input>
 </div>
 <div class="demo-input-suffix">
   slot 方式：
   <el-input
     placeholder="请选择日期"
-    v-model="input3">
+    v-model="input3" @change="change">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
   </el-input>
   <el-input
     placeholder="请输入内容"
-    v-model="input4">
+    v-model="input4" @change="change">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
@@ -134,6 +154,11 @@ export default {
       input2: '',
       input3: '',
       input4: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }
@@ -151,7 +176,7 @@ export default {
   type="textarea"
   :rows="2"
   placeholder="请输入内容"
-  v-model="textarea">
+  v-model="textarea" @change="change">
 </el-input>
 
 <script>
@@ -159,6 +184,11 @@ export default {
   data() {
     return {
       textarea: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }
@@ -176,14 +206,14 @@ export default {
   type="textarea"
   autosize
   placeholder="请输入内容"
-  v-model="textarea1">
+  v-model="textarea1" @change="change">
 </el-input>
 <div style="margin: 20px 0;"></div>
 <el-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="请输入内容"
-  v-model="textarea2">
+  v-model="textarea2" @change="change">
 </el-input>
 
 <script>
@@ -192,6 +222,11 @@ export default {
     return {
       textarea1: '',
       textarea2: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }
@@ -206,17 +241,17 @@ export default {
 :::demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
-  <el-input placeholder="请输入内容" v-model="input1">
+  <el-input placeholder="请输入内容" v-model="input1" @change="change">
     <template slot="prepend">Http://</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input2">
+  <el-input placeholder="请输入内容" v-model="input2" @change="change">
     <template slot="append">.com</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select" @change="change">
     <el-select v-model="select" slot="prepend" placeholder="请选择">
       <el-option label="餐厅名" value="1"></el-option>
       <el-option label="订单号" value="2"></el-option>
@@ -242,6 +277,11 @@ export default {
       input3: '',
       select: ''
     }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
+    }
   }
 }
 </script>
@@ -256,25 +296,25 @@ export default {
   <el-input
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input1">
+    v-model="input1" @change="change">
   </el-input>
   <el-input
     size="medium"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input2">
+    v-model="input2" @change="change">
   </el-input>
   <el-input
     size="small"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input3">
+    v-model="input3" @change="change">
   </el-input>
   <el-input
     size="mini"
     placeholder="请输入内容"
     suffix-icon="el-icon-date"
-    v-model="input4">
+    v-model="input4" @change="change">
   </el-input>
 </div>
 
@@ -286,6 +326,11 @@ export default {
       input2: '',
       input3: '',
       input4: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }
@@ -308,6 +353,7 @@ export default {
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
       @select="handleSelect"
+      @change="change"
     ></el-autocomplete>
   </el-col>
   <el-col :span="12">
@@ -319,6 +365,7 @@ export default {
       placeholder="请输入内容"
       :trigger-on-focus="false"
       @select="handleSelect"
+      @change="change"
     ></el-autocomplete>
   </el-col>
 </el-row>
@@ -332,6 +379,9 @@ export default {
       };
     },
     methods: {
+      change(val, preVal) {
+        console.log(val, preVal);
+      },
       querySearch(queryString, cb) {
         var restaurants = this.restaurants;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -351,7 +401,9 @@ export default {
           { "value": "泷千家(天山西路店)", "address": "天山西路438号" },
           { "value": "胖仙女纸杯蛋糕（上海凌空店）", "address": "上海市长宁区金钟路968号1幢18号楼一层商铺18-101" },
           { "value": "贡茶", "address": "上海市长宁区金钟路633号" },
-          { "value": "豪大大香鸡排超级奶爸", "address": "上海市嘉定区曹安公路曹安路1685号" },
+          { "value": "豪大大香鸡排超级奶爸1", "address": "上海市嘉定区曹安公路曹安路1685号" },
+          { "value": "豪大大香鸡排超级奶爸2", "address": "上海市嘉定区曹安公路曹安路1685号" },
+          { "value": "豪大大香鸡排超级奶爸3", "address": "上海市嘉定区曹安公路曹安路1685号" },
           { "value": "茶芝兰（奶茶，手抓饼）", "address": "上海市普陀区同普路1435号" },
           { "value": "十二泷町", "address": "上海市北翟路1444弄81号B幢-107" },
           { "value": "星移浓缩咖啡", "address": "上海市嘉定区新郁路817号" },
@@ -418,7 +470,8 @@ export default {
   v-model="state"
   :fetch-suggestions="querySearch"
   placeholder="请输入内容"
-  @select="handleSelect">
+  @select="handleSelect"
+  @change="change">
   <i
     class="el-icon-edit el-input__icon"
     slot="suffix"
@@ -461,6 +514,9 @@ export default {
       };
     },
     methods: {
+      change(val, preVal) {
+        console.log(val, preVal);
+      },
       querySearch(queryString, cb) {
         var restaurants = this.restaurants;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -550,6 +606,7 @@ export default {
   :fetch-suggestions="querySearchAsync"
   placeholder="请输入内容"
   @select="handleSelect"
+  @change="change"
 ></el-autocomplete>
 <script>
   export default {
@@ -561,6 +618,9 @@ export default {
       };
     },
     methods: {
+      change(val, preVal) {
+        console.log(val, preVal);
+      },
       loadAll() {
         return [
           { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
@@ -649,6 +709,7 @@ export default {
   v-model="text"
   maxlength="10"
   show-word-limit
+  @change="change"
 >
 </el-input>
 <div style="margin: 20px 0;"></div>
@@ -658,6 +719,7 @@ export default {
   v-model="textarea"
   maxlength="30"
   show-word-limit
+  @change="change"
 >
 </el-input>
 
@@ -667,6 +729,11 @@ export default {
     return {
       text: '',
       textarea: ''
+    }
+  },
+  methods: {
+    change(val, preVal) {
+      console.log(val, preVal);
     }
   }
 }

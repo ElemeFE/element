@@ -135,6 +135,7 @@
     },
     data() {
       return {
+        lastVal: '',
         activated: false,
         suggestions: [],
         loading: false,
@@ -230,8 +231,11 @@
         }
       },
       select(item) {
-        this.$emit('input', item[this.valueKey]);
+        const selectVal = item[this.valueKey];
+        this.$emit('input', selectVal);
         this.$emit('select', item);
+        this.$emit('change', selectVal, this.lastVal);
+        this.$refs.input.lastVal = selectVal;
         this.$nextTick(_ => {
           this.suggestions = [];
           this.highlightedIndex = -1;
@@ -277,6 +281,12 @@
       $input.setAttribute('aria-autocomplete', 'list');
       $input.setAttribute('aria-controls', 'id');
       $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+      const _this = this;
+      document.getElementsByTagName('body')[0].addEventListener('mousedown', function() {
+        if (_this.suggestionVisible) {
+          _this.lastVal = _this.$refs.input.lastVal;
+        }
+      });
     },
     beforeDestroy() {
       this.$refs.suggestions.$destroy();
