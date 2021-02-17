@@ -60,7 +60,8 @@
 
   function ensureMobileKeyboardOnClick(innerInput) {
     innerInput.addEventListener('click', (event) => {
-      // https://stackoverflow.com/questions/54424729/ios-show-keyboard-on-input-focus
+      // https://stackoverflow.com/a/55425845/2836695
+      // See comment about not appending to body though
       event.stopPropagation();
       var __tempEl__ = document.createElement('input');
       __tempEl__.style.position = 'absolute';
@@ -69,13 +70,13 @@
       __tempEl__.style.height = 0;
       __tempEl__.style.opacity = 0;
       __tempEl__.style['aria-hidden'] = true;
-      // Put this temp element as a child of the page <body> and focus on it
-      document.body.appendChild(__tempEl__);
+      // Put this temp element as a child of the parent container and focus on it
+      innerInput.parentElement.appendChild(__tempEl__);
       __tempEl__.focus();
 
       setTimeout(()=>{
         innerInput.focus();
-        document.body.removeChild(__tempEl__);
+        innerInput.parentElement.removeChild(__tempEl__);
       });
     });
   };
