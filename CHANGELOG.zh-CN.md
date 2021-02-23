@@ -1,5 +1,27 @@
 ## 更新日志
 
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug fixes
+
+- Drawer
+  - 修复 Drawer bug (by @cs1707)
+- Image
+  - 修复 image object fit ratio 在 IE 下的 bug  (#19583 by @charlie0228)
+- Cascader
+  - 修复 cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - 修复 calendar 国际化 bug (#20758 by @iamkun)
+- ColorPicker
+  - 修复 bugs (by @UxieVerity)
+
+#### Optimization
+
+- Doc
+  - 更新 Axure 设计资源 v2.1.0 (by @iamkun)
+
 ### 2.15.0
 
 *2021-01-15*
