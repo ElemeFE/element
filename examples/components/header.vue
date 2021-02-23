@@ -3,6 +3,21 @@
     height: 80px;
   }
 
+  #v3-banner {
+    background-color: #409EFF;
+    min-height: 30px;
+    padding: 5px 60px;
+    z-index: 19;
+    box-sizing: border-box;
+    text-align: center;
+    color: #eee;
+  }
+
+  #v3-banner a {
+    color: #FFF;
+    font-weight: bold;
+  }
+
   .header {
     height: 80px;
     background-color: #fff;
@@ -267,6 +282,16 @@
 </style>
 <template>
   <div class="headerWrapper">
+    <div id="v3-banner" v-if="isHome">
+      <template v-if="lang === 'zh-CN'">
+        您正在浏览基于 Vue 2.x 的 Element UI 文档;
+        <a href="https://element-plus.org/#/zh-CN">点击这里</a> 查看 Vue 3.x 的升级版本
+      </template>
+      <template v-else>
+        You’re browsing the documentation of Element UI for Vue 2.x version.
+        <a href="https://element-plus.org">Click here</a> for Vue 3.x version
+      </template>
+    </div>
     <header class="header" ref="header">
       <div class="container">
         <h1><router-link :to="`/${ lang }`">
@@ -422,6 +447,9 @@
       },
       isComponentPage() {
         return /^component/.test(this.$route.name);
+      },
+      isHome() {
+        return /^home/.test(this.$route.name);
       }
     },
     mounted() {
