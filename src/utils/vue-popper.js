@@ -78,6 +78,7 @@ export default {
           this.$emit('input', val);
         })
       }
+    }
   },
 
   methods: {
