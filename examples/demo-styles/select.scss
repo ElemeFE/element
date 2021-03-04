@@ -1,3 +1,6 @@
 .demo-select .el-select {
   width: 240px;
+  &.full-width {
+    width: 100%;
+  }
 }

@@ -395,6 +395,99 @@
 ```
 :::
 
+### 复合型输入框
+
+可前置或后置元素，一般为标签或按钮
+
+:::可通过 slot 来指定在 input 中前置或者后置内容。
+
+```html
+<template>
+  <div>
+    <el-select
+      v-model="value1"
+      filterable
+      allow-create
+      default-first-option
+      placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Catégorie</template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value2"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value3"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      class="full-width"
+      placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Choisir les catégories</template>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: undefined,
+        value2: undefined,
+        value3: undefined,
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 远程搜索
 
 从服务器搜索数据，输入关键字进行查找
@@ -565,6 +658,8 @@
 |    —    | Option 组件列表 |
 | prefix  | Select 组件头部内容 |
 | empty | 无选项时的列表 |
+| prepend | 输入框前置内容 |
+| append | 输入框后置内容 |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

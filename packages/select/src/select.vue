@@ -8,7 +8,7 @@
       class="el-select__tags"
       v-if="multiple"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
+      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%', 'margin-left': inputMarginLeft + 'px' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
@@ -92,12 +92,18 @@
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
+      <template slot="prepend" v-if="$slots.prepend">
+        <slot name="prepend"></slot>
+      </template>
       <template slot="prefix" v-if="$slots.prefix">
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
         <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
         <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
+      </template>
+      <template slot="append" v-if="$slots.append">
+        <slot name="append"></slot>
       </template>
     </el-input>
     <transition
@@ -314,6 +320,7 @@
         selected: this.multiple ? [] : {},
         inputLength: 20,
         inputWidth: 0,
+        inputMarginLeft: 0,
         initialInputHeight: 0,
         cachedPlaceHolder: '',
         optionsCount: 0,
@@ -790,7 +797,10 @@
       },
 
       resetInputWidth() {
-        this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+        const inputBoundingClientRect = this.$refs.reference.$el.querySelector('input').getBoundingClientRect();
+        const componentBoundingClientRect = this.$refs.reference.$el.getBoundingClientRect();
+        this.inputMarginLeft = inputBoundingClientRect.x - componentBoundingClientRect.x;
+        this.inputWidth = inputBoundingClientRect.width;
       },
 
       handleResize() {
@@ -879,7 +889,7 @@
       }
       this.$nextTick(() => {
         if (reference && reference.$el) {
-          this.inputWidth = reference.$el.getBoundingClientRect().width;
+          this.inputWidth = reference.$el.querySelector('input').getBoundingClientRect().width;
         }
       });
       this.setSelected();
