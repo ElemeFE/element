@@ -69,7 +69,7 @@ For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/e
 ```shell
 npm install element-ui -S
 ```
-
+     
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
