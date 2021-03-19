@@ -2,34 +2,29 @@
   <div
     class="el-switch"
     :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
-    role="switch"
-    :aria-checked="checked"
-    :aria-disabled="switchDisabled"
-    @click.prevent="switchValue"
   >
     <input
       class="el-switch__input"
       type="checkbox"
-      @change="handleChange"
       ref="input"
+      :aria-label="ariaLabel"
       :id="id"
       :name="name"
-      :true-value="activeValue"
-      :false-value="inactiveValue"
       :disabled="switchDisabled"
-      @keydown.enter="switchValue"
+      @keyup.enter="switchValue()"
+      @change="switchValue()"
     >
     <span
       :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
-      v-if="inactiveIconClass || inactiveText">
+      v-if="inactiveIconClass || inactiveText" @click="checked? switchValue() : null">
       <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
-    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
+    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }" @click="switchValue()">
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
-      v-if="activeIconClass || activeText">
+      v-if="activeIconClass || activeText" @click="!checked? switchValue() : null">
       <i :class="[activeIconClass]" v-if="activeIconClass"></i>
       <span v-if="!activeIconClass && activeText" :aria-hidden="!checked">{{ activeText }}</span>
     </span>
@@ -108,6 +103,9 @@
       }
     },
     computed: {
+      ariaLabel() {
+        return this.name + (this.name ? '.' : '') + ' ' + this.activeText;
+      },
       checked() {
         return this.value === this.activeValue;
       },
