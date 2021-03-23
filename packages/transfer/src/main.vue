@@ -47,7 +47,7 @@
   import Locale from 'element-ui/src/mixins/locale';
   import TransferPanel from './transfer-panel.vue';
   import Migrating from 'element-ui/src/mixins/migrating';
-
+  // let start = '';
   export default {
     name: 'ElTransfer',
 
