@@ -116,7 +116,8 @@ const DEFAULT_FORMATS = {
   daterange: 'yyyy-MM-dd',
   monthrange: 'yyyy-MM',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
-  year: 'yyyy'
+  year: 'yyyy',
+  yearrange: 'yyyy'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -126,6 +127,7 @@ const HAVE_TRIGGER_TYPES = [
   'week',
   'month',
   'year',
+  'yearrange',
   'daterange',
   'monthrange',
   'timerange',
@@ -204,6 +206,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser: DATE_PARSER
   },
   daterange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
+  },
+  yearrange: {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
   },
