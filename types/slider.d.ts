@@ -11,6 +11,12 @@ export interface SliderTooltipFormat {
   (value: number): string
 }
 
+export interface SliderTransition {
+  duration: number
+  mode?: string
+  delay?: number
+}
+
 /** Slider Component */
 export declare class ElSlider extends ElementUIComponent {
   /** Current value of the slider */
@@ -65,4 +71,10 @@ export declare class ElSlider extends ElementUIComponent {
   marks: {
     [key: number]: string | { style: object; label: string | VNode }
   }
+
+  /** Wheather to enable smooth tranistion when the value change */ 
+  enableTransition: boolean
+
+  /** custom transition option, works when enableTransition is true */
+  transition: SliderTransition
 }
