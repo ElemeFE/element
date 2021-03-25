@@ -1,0 +1,38 @@
+@import '../common/var';
+
+@include b(quarter-table) {
+  margin: -1px;
+  border-collapse: collapse;
+
+  td {
+    text-align: center;
+    padding: 10px 3px;
+    cursor: pointer;
+
+    &.disabled .cell {
+      background-color: $--background-color-base;
+      cursor: not-allowed;
+      color: $--color-text-placeholder;
+
+      &:hover {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .cell {
+      height: 40px;
+      display: block;
+      line-height: 32px;
+      color: $--datepicker-font-color;
+      padding: 5px auto;
+
+      &:hover {
+        color: $--datepicker-hover-font-color;
+      }
+    }
+
+    &.current:not(.disabled) .cell {
+      color: $--datepicker-active-color;
+    }
+  }
+} 
