@@ -194,7 +194,17 @@ const TYPE_VALUE_RESOLVER_MAP = {
     },
     parser(text, format) {
       // parse as if a normal date
-      return TYPE_VALUE_RESOLVER_MAP.date.parser(text, format);
+      let yearPosition = format.indexOf('yyyy');
+      let weekPosition = format.indexOf('W') !== -1 ? format.indexOf('W') : format.indexOf('WW');
+      let year = /yyyy/.test(format)
+        ? text.substring(yearPosition, yearPosition + 4)
+        : (new Date()).getFullYear();
+      let weeks = isNaN(text.substring(weekPosition, weekPosition + 2))
+        ? text.substring(weekPosition, weekPosition + 1)
+        : text.substring(weekPosition, weekPosition + 2);
+      let timestamp = (new Date(year)).getTime() + weeks * 7 * 24 * 60 * 60 * 1000;
+
+      return new Date(timestamp);
     }
   },
   date: {
