@@ -235,11 +235,36 @@
     }
   }
   
+  & > span,
   & > .el-dropdown {
-    & > .el-button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left-color: rgba($--color-white, 0.5);
+    float: left;
+    
+    & > .el-button,
+    & > .el-popover__reference-wrapper .el-button {
+
+      border-radius: 0;
+      margin-right: -1px;
+      position: relative;
+
+      &:active {
+        z-index: 1;
+      }
+    }
+
+    &:first-child,
+    &:first-child .el-popover__reference-wrapper {
+      & > .el-button {
+        border-top-left-radius: $--button-border-radius;
+        border-bottom-left-radius: $--button-border-radius;
+      }
+    }
+
+    &:last-child,
+    &:last-child .el-popover__reference-wrapper {
+      & > .el-button {
+        border-top-right-radius: $--button-border-radius;
+        border-bottom-right-radius: $--button-border-radius;
+      }
     }
   }
 
