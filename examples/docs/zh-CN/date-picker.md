@@ -334,6 +334,62 @@
 ```
 :::
 
+### 选择季度范围
+
+可在一个选择器中便捷地选择一个年份范围
+
+:::demo 在选择月份范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用`unlink-panels`属性解除联动。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker
+      v-model="value1"
+      type="quarterrange"
+      format="yyyy年 第Q季度"
+      value-format="yyyy年 第Q季度"
+      range-separator="至"
+      start-placeholder="开始季度"
+      end-placeholder="结束季度">
+    </el-date-picker>
+  </div>
+   <div class="block">
+    <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value2"
+      type="quarterrange"
+      align="right"
+      unlink-panels
+      range-separator="至"
+      start-placeholder="开始季度"
+      end-placeholder="结束季度"
+      :picker-options="pickerOptions">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+          pickerOptions: {
+          shortcuts: [{
+            text: '最近三年',
+            onClick(picker) {
+              const start = new Date('2017');
+              const end = new Date('2020')
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: [],
+        value2: []
+      };
+    }
+  };
+</script>
+```
+:::
 
 ###  日期格式
 
@@ -352,6 +408,7 @@
 | `MM` | 月 | | 01 |
 | `W`  | 周 | 仅周选择器的 `format` 可用；不补0 | 1 |
 | `WW` | 周 | 仅周选择器的 `format` 可用 | 01 |
+| `Q`  | 季度 | 不补0 | 1 |
 | `d`  | 日 | 不补0 | 2 |
 | `dd` | 日 | | 02 |
 | `H`  | 小时 | 24小时制；不补0 | 3 |
@@ -461,7 +518,7 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange/yearrange | date |
+| type | 显示类型 | string | year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange/yearrange/quarter/quarterange | date |
 | format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |

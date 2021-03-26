@@ -1,13 +1,29 @@
 @import '../common/var';
 
 @include b(quarter-table) {
+  font-size: 14px;
   margin: -1px;
   border-collapse: collapse;
 
   td {
     text-align: center;
-    padding: 10px 3px;
+    padding: 8px 0px;
     cursor: pointer;
+    & div {
+      height: 52px;
+      padding: 8px 0;
+      box-sizing: border-box;
+    }
+    &.today {
+      .cell {
+          color: $--color-primary;
+          font-weight: bold;
+      }
+      &.start-date .cell,
+      &.end-date .cell {
+          color: $--color-white;
+      }
+    }
 
     &.disabled .cell {
       background-color: $--background-color-base;
@@ -20,19 +36,47 @@
     }
 
     .cell {
-      height: 40px;
+      height: 36px;
       display: block;
-      line-height: 32px;
+      line-height: 36px;
       color: $--datepicker-font-color;
       padding: 5px auto;
-
+      margin: 0 10px;
+      border-radius: 23px;
       &:hover {
         color: $--datepicker-hover-font-color;
       }
+    }
+
+    &.in-range div {
+      background-color: $--datepicker-inrange-background-color;
+      &:hover {
+        background-color: $--datepicker-inrange-hover-background-color;
+      }
+    }
+    &.start-date div,
+    &.end-date div {
+      color: $--color-white;
+    }
+
+    &.start-date .cell,
+    &.end-date .cell {
+      color: $--color-white;
+      background-color: $--datepicker-active-color;
+    }
+
+    &.start-date div {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+    }
+
+    &.end-date div {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
     }
 
     &.current:not(.disabled) .cell {
       color: $--datepicker-active-color;
     }
   }
-} 
+}
