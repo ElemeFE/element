@@ -118,7 +118,8 @@ const DEFAULT_FORMATS = {
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy',
   yearrange: 'yyyy',
-  quarter: 'yyyy年Q季度'
+  quarter: 'yyyy年 第Q季度',
+  quarterrange: 'yyyy年 第Q季度'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -134,7 +135,8 @@ const HAVE_TRIGGER_TYPES = [
   'timerange',
   'datetimerange',
   'dates',
-  'quarter'
+  'quarter',
+  'quarterrange'
 ];
 const DATE_FORMATTER = function(value, format) {
   if (format === 'timestamp') return value.getTime();
@@ -166,6 +168,24 @@ const RANGE_PARSER = function(array, format, separator) {
     return [DATE_PARSER(range1, format), DATE_PARSER(range2, format)];
   }
   return [];
+};
+const QUARTER_FORMATTER = function(value, format) {
+  const quarter = getQuarterNumber(value);
+  let date = formatDate(value, format);
+  if (/Q/.test(date)) {
+    date = date.replace(/Q/, quarter);
+  }
+  return date;
+};
+const QUARTER_PARSER = function(value, format) {
+  const yearPosition = format.indexOf('yyyy');
+  const quarterPosition = format.indexOf('Q');
+  let year = /yyyy/.test(format)
+    ? value.substring(yearPosition, yearPosition + 4)
+    : (new Date()).getFullYear();
+  let quarter = value.substring(quarterPosition, quarterPosition + 1);
+
+  return new Date(year, (quarter - 1) * 3 + 1);
 };
 const TYPE_VALUE_RESOLVER_MAP = {
   default: {
@@ -274,23 +294,31 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   quarter: {
+    formatter: QUARTER_FORMATTER,
+    parser: QUARTER_PARSER
+  },
+  quarterrange: {
     formatter(value, format) {
-      const quarter = getQuarterNumber(value);
-      let date = formatDate(value, format);
-      if (/Q/.test(date)) {
-        date = date.replace(/Q/, quarter);
+      if (Array.isArray(value) && value.length === 2) {
+        const start = value[0];
+        const end = value[1];
+
+        if (start && end) {
+          return [QUARTER_FORMATTER(start, format), QUARTER_FORMATTER(end, format)];
+        }
       }
-      return date;
+      return '';
     },
     parser(value, format) {
-      const yearPosition = format.indexOf('yyyy');
-      const quarterPosition = format.indexOf('Q');
-      let year = /yyyy/.test(format)
-        ? value.substring(yearPosition, yearPosition + 4)
-        : (new Date()).getFullYear();
-      let quarter = value.substring(quarterPosition, quarterPosition + 1);
+      if (Array.isArray(value) && value.length === 2) {
+        const start = value[0];
+        const end = value[1];
 
-      return new Date(year, (quarter - 1) * 3 + 1);
+        if (start && end) {
+          return [QUARTER_PARSER(start, format), QUARTER_PARSER(end, format)];
+        }
+      }
+      return '';
     }
   }
 };
