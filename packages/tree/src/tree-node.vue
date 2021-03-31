@@ -169,7 +169,8 @@
 
       handleClick() {
         const store = this.tree.store;
-        store.setCurrentNode(this.node);
+        // 本行修改， 使得disabled属性生效，在高亮属性为true时，不添加is-current class
+        !this.node.disabled && store.setCurrentNode(this.node);
         this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
         this.tree.currentNode = this;
         if (this.tree.expandOnClickNode) {
