@@ -356,7 +356,7 @@
         this.dateUserInput.min = null;
         this.timeUserInput.min = null;
         this.$nextTick(() => {
-          if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
+          if (this.$refs.maxTimePicker && this.maxDate) {
             const format = 'HH:mm:ss';
             this.$refs.maxTimePicker.selectableRange = [
               [
