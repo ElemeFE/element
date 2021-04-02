@@ -10,6 +10,7 @@
     componentName: 'ElCollapse',
 
     props: {
+      trigger: String,
       accordion: Boolean,
       value: {
         type: [Array, String, Number],
