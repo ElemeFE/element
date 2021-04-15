@@ -467,10 +467,14 @@
       },
 
       doLayout() {
-        if (this.shouldUpdateHeight) {
-          this.layout.updateElsHeight();
-        }
         this.layout.updateColumnsWidth();
+        if (this.shouldUpdateHeight) {
+          const oldScrollY = this.layout.scrollY;
+          this.layout.updateElsHeight();
+          if (oldScrollY !== this.layout.scrollY) {
+            this.layout.updateColumnsWidth();
+            }
+        }
       },
 
       sort(prop, order) {

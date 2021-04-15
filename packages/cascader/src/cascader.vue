@@ -51,7 +51,7 @@
         :hit="tag.hitState"
         :closable="tag.closable"
         disable-transitions
-        @close="deleteTag(index)">
+        @close="deleteTag(tag.node.path)">
         <span>{{ tag.text }}</span>
       </el-tag>
       <input
@@ -588,7 +588,7 @@ export default {
 
       if (this.pressDeleteCount) {
         if (lastTag.hitState) {
-          this.deleteTag(lastIndex);
+          this.deleteTag(lastTag.node.path);
         } else {
           lastTag.hitState = true;
         }
@@ -607,10 +607,9 @@ export default {
         this.toggleDropDownVisible(false);
       }
     },
-    deleteTag(index) {
+    deleteTag(val) {
       const { checkedValue } = this;
-      const val = checkedValue[index];
-      this.checkedValue = checkedValue.filter((n, i) => i !== index);
+      this.checkedValue = checkedValue.filter((n => n.toString() !== val.toString());
       this.$emit('remove-tag', val);
     },
     updateStyle() {
