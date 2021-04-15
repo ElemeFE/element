@@ -44,14 +44,14 @@
 
     <div v-if="multiple" class="el-cascader__tags">
       <el-tag
-        v-for="(tag, index) in presentTags"
+        v-for="tag in presentTags"
         :key="tag.key"
         type="info"
         :size="tagSize"
         :hit="tag.hitState"
         :closable="tag.closable"
         disable-transitions
-        @close="deleteTag(index)">
+        @close="deleteTag(tag)">
         <span>{{ tag.text }}</span>
       </el-tag>
       <input
@@ -588,7 +588,7 @@ export default {
 
       if (this.pressDeleteCount) {
         if (lastTag.hitState) {
-          this.deleteTag(lastIndex);
+          this.deleteTag(lastTag);
         } else {
           lastTag.hitState = true;
         }
@@ -607,10 +607,11 @@ export default {
         this.toggleDropDownVisible(false);
       }
     },
-    deleteTag(index) {
+    deleteTag(tag) {
       const { checkedValue } = this;
-      const val = checkedValue[index];
-      this.checkedValue = checkedValue.filter((n, i) => i !== index);
+      const current = tag.node.getValueByOption();
+      const val = checkedValue.find(n => isEqual(n, current));
+      this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
       this.$emit('remove-tag', val);
     },
     updateStyle() {
