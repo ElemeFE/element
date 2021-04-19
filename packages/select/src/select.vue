@@ -431,7 +431,11 @@
           this.resetInputHeight();
         }
         let inputs = this.$el.querySelectorAll('input');
-        if ([].indexOf.call(inputs, document.activeElement) === -1) {
+        if (this.allowCreate) {
+          if ([].indexOf.call(inputs, document.activeElement) === -1) {
+            this.setSelected();
+          }
+        } else {
           this.setSelected();
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
