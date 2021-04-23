@@ -6,6 +6,7 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
+      @mousedown="clickStartElement = $event.target"
       @click.self="handleWrapperClick">
       <div
         role="dialog"
@@ -113,7 +114,8 @@
     data() {
       return {
         closed: false,
-        key: 0
+        key: 0,
+        clickStartElement: null
       };
     },
 
@@ -162,9 +164,13 @@
           }
         };
       },
-      handleWrapperClick() {
-        if (!this.closeOnClickModal) return;
-        this.handleClose();
+      handleWrapperClick(event) {
+        if (
+          this.closeOnClickModal &&
+          (!this.clickStartElement || this.clickStartElement.contains(event.target))
+        ) {
+          this.handleClose();
+        }
       },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
