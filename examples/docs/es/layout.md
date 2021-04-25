@@ -338,7 +338,7 @@ Las clases son:
 | gutter    | espaciado de la grilla                   | number | —                                        | 0                 |
 | type      | modo del layout , puedes usar flex, funciona en navegadores modernos | string | —                                        | —                 |
 | justify   | alineación horizontal del layout flex    | string | start/end/center/space-around/space-between | start             |
-| align     | alineación vertical del layout flex      | string | top/middle/bottom                        | top               |
+| align     | alineación vertical del layout flex      | string | top/middle/bottom                        | —                |
 | tag       | tag de elemento propio                   | string | *                                        | div               |
 
 ### Atributos Col 
