@@ -251,7 +251,7 @@ NavMenu vertical puede ser colapsado.
 | mode              | modo de presentación del menú            | string  | horizontal / vertical | vertical    |
 | collapse          | si el menú está colapsado (solo en modo vertical) | boolean | —                     | false       |
 | background-color  | color de fondo del menú (formato hexadecimal) | string  | —                     | #ffffff     |
-| active-background-color  | background color of currently active menu item. If not set, the background color will be used. (valid only when mode is vertical and hex format) | string |   —   | #ffffff |
+| active-background-color  | background color of currently active menu item. If not set, the background color will be used (valid only when mode is vertical and hex format) | string |   —   | #ffffff |
 | text-color        | color de texto del menú (formato hexadecimal) | string  | —                     | #303133     |
 | active-text-color | color del texto del menu-item activo (formato hexadecimal) | string  | —                     | #409EFF     |
 | default-active    | índice del menu-item activo              | string  | —                     | —           |
