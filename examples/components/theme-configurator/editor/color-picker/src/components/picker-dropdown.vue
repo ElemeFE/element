@@ -35,9 +35,9 @@
           {{ t('el.colorpicker.confirm') }}
         </el-button>
       </div>
-      <color-list 
-        v-if="colorList && colorList.length > 0" 
-        :color="color" 
+      <color-list
+        v-if="colorList && colorList.length > 0"
+        :color="color"
         :colors="colorList"
         @select=onColorListSelect
       ></color-list>
@@ -51,10 +51,10 @@
   import AlphaSlider from './alpha-slider';
   import Predefine from './predefine';
   import ColorList from './color-list';
-  import Popper from 'element-ui/src/utils/vue-popper';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import Popper from 'element-ui-tide/src/utils/vue-popper';
+  import Locale from 'element-ui-tide/src/mixins/locale';
+  import ElInput from 'element-ui-tide/packages/input';
+  import ElButton from 'element-ui-tide/packages/button';
 
   export default {
     name: 'el-color-picker-dropdown',

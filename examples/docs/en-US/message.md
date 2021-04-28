@@ -193,7 +193,7 @@ Element has added a global method `$message` for Vue.prototype. So in a vue inst
 Import `Message`:
 
 ```javascript
-import { Message } from 'element-ui';
+import { Message } from 'element-ui-tide';
 ```
 
 In this case you should call `Message(options)`. We have also registered methods for different types, e.g. `Message.success(options)`. You can call `Message.closeAll()` to manually close all the instances.

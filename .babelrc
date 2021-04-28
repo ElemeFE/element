@@ -29,9 +29,9 @@
       ],
       "plugins": [
         ["module-resolver", {
-          "root": ["element-ui"],
+          "root": ["element-ui-tide"],
           "alias": {
-            "element-ui/src": "element-ui/lib"
+            "element-ui-tide/src": "element-ui-tide/lib"
           }
         }]
       ]

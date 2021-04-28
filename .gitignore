@@ -11,12 +11,12 @@ lerna-debug.log.*
 lib
 .idea
 .vscode
-examples/element-ui
+examples/element-ui-tide
 examples/pages/en-US
 examples/pages/zh-CN
 examples/pages/es
 examples/pages/fr-FR
-fe.element/element-ui
+fe.element/element-ui-tide
 .npmrc
 coverage
 waiter.config.js

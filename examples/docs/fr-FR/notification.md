@@ -285,7 +285,7 @@ Element ajoute la méthode `$notify` à Vue.prototype. Vous pouvez donc appeler 
 Importez `Notification`:
 
 ```javascript
-import { Notification } from 'element-ui';
+import { Notification } from 'element-ui-tide';
 ```
 
 Dans ce cas vous devrez appeler `Notification(options)`. Il existe aussi des méthodes pour chaque type, e.g. `Notification.success(options)`. Vous pouvez appeler `Notification.closeAll()` pour fermer manuellement toutes les instances.

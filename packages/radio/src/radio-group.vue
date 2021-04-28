@@ -9,7 +9,7 @@
   </component>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui-tide/src/mixins/emitter';
 
   const keyCode = Object.freeze({
     LEFT: 37,

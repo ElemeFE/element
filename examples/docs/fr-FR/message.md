@@ -195,7 +195,7 @@ Element ajoute une méthode `$message` à Vue.prototype. Vous pouvez donc appele
 Importez `Message`:
 
 ```javascript
-import { Message } from 'element-ui';
+import { Message } from 'element-ui-tide';
 ```
 
 Dans ce cas il faudra appeler `Message(options)`. Les méthodes des différents types sont aussi ajoutées, e.g. `Message.success(options)`. Vous pouvez appeler `Message.closeAll()` pour fermer manuellement toutes les instances.
