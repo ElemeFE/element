@@ -83,6 +83,11 @@
         default: true
       },
 
+      closeOnDeactivated: {
+        type: Boolean,
+        default: true
+      },
+
       showClose: {
         type: Boolean,
         default: true
@@ -200,6 +205,11 @@
           document.body.appendChild(this.$el);
         }
       }
+    },
+
+    deactivated() {
+      if (!this.closeOnDeactivated) return;
+      this.handleClose();
     },
 
     destroyed() {
