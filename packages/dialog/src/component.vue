@@ -208,8 +208,8 @@
     },
 
     deactivated() {
-      if (!this.closeOnDeactivated) return;
-      this.handleClose();
+      if (!this.closeOnDeactivated || !this.visible) return;
+      this.hide();
     },
 
     destroyed() {
