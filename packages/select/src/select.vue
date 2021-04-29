@@ -548,7 +548,7 @@
       handleTabKey(e) {
         if (this.allowCreate) {
           this.handleOptionSelect(this.getMatchingOption());
-        } else if (this.query.length > 0 && this.query !== this.selected.currentLabel) {
+        } else if (this.query && this.query.length > 0 && this.query !== this.selected.currentLabel) {
           this.handleOptionSelect(this.getFirstVisibleOption());
         }
         this.visible = false;
