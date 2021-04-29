@@ -572,8 +572,6 @@
             }
           }
           this.$emit('focus', event);
-        } else {
-          this.softFocus = false;
         }
       },
 
