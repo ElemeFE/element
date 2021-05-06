@@ -304,6 +304,7 @@
       noDataText: String,
       remoteMethod: Function,
       filterMethod: Function,
+      alternativeFilter: Function,
       multiple: Boolean,
       multipleLimit: {
         type: Number,

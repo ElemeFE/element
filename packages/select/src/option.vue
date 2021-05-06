@@ -142,7 +142,13 @@
         if (this.select && this.select.filterMatch === 'beginning') {
           queryExpr = '^' + queryExpr;
         }
-        this.visible = new RegExp(queryExpr, 'i').test(this.currentLabel) || this.created;
+        if (this.created) {
+          this.visible = this.created;
+        } else if (this.select && this.select.alternativeFilter) {
+          this.visible = this.select.alternativeFilter(query, this.currentLabel);
+        } else {
+          this.visible = new RegExp(queryExpr, 'i').test(this.currentLabel);
+        }
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }
