@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "mixins/mixins";
 @import "common/var";
 
@@ -122,7 +123,7 @@
       padding: $--carousel-indicator-padding-horizontal $--carousel-indicator-padding-vertical;
       .el-carousel__button {
         width: $--carousel-indicator-height;
-        height: #{$--carousel-indicator-width / 2};
+        height: #{math.div($--carousel-indicator-width, 2)};
       }
     }
 
