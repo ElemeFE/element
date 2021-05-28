@@ -97,7 +97,7 @@ export default {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1490px) {
   .right-nav {
     display: none;
   }

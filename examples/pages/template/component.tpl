@@ -146,6 +146,7 @@
       :bottom="50"
     ></el-backtop>
   </div>
+  <right-nav />
   </el-scrollbar>
 </template>
 <script>
