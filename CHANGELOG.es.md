@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug fixes
+
+- Image
+  - fix z-index and keydown event add stopPropagation (#20859 by @cs1707)
+- Input
+  - fix show password cursor (#20870 by @cs1707)
+  - fix show password icon in edge (#20902 by @cs1707)
+- Carousel
+  - fix interval and scale bug (#20931 by @cs1707)
+- Cascader
+  - fix delete tag bug (#20939 by @cs1707)
+- Drawer
+  - add overflow auto (#20948 by @cs1707)
+- Others
+  - fix isFunction (#20912 by @cs1707)
+
 ### 2.15.1
 
 *2021-02-23*
