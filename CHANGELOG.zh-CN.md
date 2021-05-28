@@ -1,10 +1,30 @@
 ## 更新日志
 
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug 修复
+
+- Image
+  - 修复 z-index 增加 keydown 事件 添加 stopPropagation (#20859 by @cs1707)
+- Input
+  - 修复 password cursor 展示 (#20870 by @cs1707)
+  - 修复 password icon 在 edge 下的展示 (#20902 by @cs1707)
+- Carousel
+  - 修复 interval 和 scale bug (#20931 by @cs1707)
+- Cascader
+  - 修复 delete tag bug (#20939 by @cs1707)
+- Drawer
+  - 支持 overflow auto (#20948 by @cs1707)
+- 其他
+  - 修复 isFunction (#20912 by @cs1707)
+
 ### 2.15.1
 
 *2021-02-23*
 
-#### Bug fixes
+#### Bug 修复
 
 - Drawer
   - 修复 Drawer bug (by @cs1707)
@@ -17,7 +37,7 @@
 - ColorPicker
   - 修复 bugs (by @UxieVerity)
 
-#### Optimization
+#### 优化
 
 - Doc
   - 更新 Axure 设计资源 v2.1.0 (by @iamkun)
