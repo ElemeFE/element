@@ -84,6 +84,7 @@ import Drawer from '../packages/drawer/index.js';
 import Popconfirm from '../packages/popconfirm/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import Affix from '../packages/affix/index.js';
 
 const components = [
   Pagination,
@@ -163,7 +164,8 @@ const components = [
   Avatar,
   Drawer,
   Popconfirm,
-  CollapseTransition
+  CollapseTransition,
+  Affix
 ];
 
 const install = function(Vue, opts = {}) {
@@ -284,5 +286,6 @@ export default {
   CascaderPanel,
   Avatar,
   Drawer,
-  Popconfirm
+  Popconfirm,
+  Affix
 };
