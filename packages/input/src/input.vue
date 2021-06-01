@@ -370,7 +370,7 @@
         this.$emit('change', event.target.value);
       },
       calcIconOffset(place) {
-        let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
+        let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`));
         if (!elList.length) return;
         let el = null;
         for (let i = 0; i < elList.length; i++) {

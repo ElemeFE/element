@@ -206,7 +206,7 @@ export default {
     bus.$on(ACTION_USER_CONFIG_UPDATE, this.setGlobal);
     bus.$on(ACTION_COMPONECT_SELECT, (val) => {
       this.$nextTick(() => {
-        const getSelectElement = Array.from(document.querySelectorAll('h4')).filter((el) => (el.innerText.toLowerCase() === val));
+        const getSelectElement = [].slice.call(document.querySelectorAll('h4')).filter((el) => (el.innerText.toLowerCase() === val));
         if (getSelectElement[0]) {
           const elementTop = getSelectElement[0].getBoundingClientRect().top;
           window.scrollTo(0, window.pageYOffset + elementTop - 20); // 20 for padding
