@@ -40,6 +40,7 @@
   export default {
     props: {
       disabledDate: {},
+      cellClassName: {},
       value: {},
       selectionMode: {
         default: 'month'
@@ -122,6 +123,13 @@
             style['end-date'] = true;
           }
         }
+
+        if (cell.customClass && typeof cell.customClass === 'string') {
+          cell.customClass.split(' ').forEach(className => {
+            style[className] = true;
+          });
+        }
+
         return style;
       },
       getMonthOfCell(month) {
@@ -216,6 +224,7 @@
         // TODO: refactory rows / getCellClasses
         const rows = this.tableRows;
         const disabledDate = this.disabledDate;
+        const cellClassName = this.cellClassName;
         const selectedDate = [];
         const now = getMonthTimestamp(new Date());
 
@@ -243,7 +252,7 @@
             let cellDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);
             cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime());
-
+            cell.customClass = typeof cellClassName === 'function' && cellClassName(cellDate);
             this.$set(row, j, cell);
           }
         }
