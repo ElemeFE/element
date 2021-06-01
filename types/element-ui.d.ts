@@ -80,6 +80,8 @@ import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElPopconfirm } from './popconfirm'
+import { ElSkeleton } from './skeleton'
+import { ElSkeletonItem } from './skeleton-item'
 
 export interface InstallationOptions {
   locale: any,
@@ -344,3 +346,9 @@ export class Drawer extends ElDrawer {}
 
 /** Popconfirm Component */
 export class Popconfirm extends ElPopconfirm {}
+
+/** Skeleton Component */
+export class Skeleton extends ElSkeleton {}
+
+/** Skeleton Item Component */
+export class SkeletonItem extends ElSkeletonItem {}
