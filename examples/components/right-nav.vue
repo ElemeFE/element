@@ -2,10 +2,8 @@
   <el-scrollbar
     ref="navScroll"
     class="right-nav"
-    wrap-style="max-height: 300px"
-    style="position: fixed;right: 10px;top: 100px;width: 150px;border-left: 1px solid rgb(220, 223, 230);height: auto;max-height: 300px;"
   >
-    <div v-for="item in anchors" :key="item" style="margin: 3px 0 3px 10px">
+    <div v-for="item in anchors" :key="item" class="right-nav-link">
       <el-link
         :id="item"
         :title="item"
@@ -53,12 +51,13 @@ export default {
       this.resizeObserver.observe(this.scrollContainer.childNodes[0]);
 
       let cachedIndex = -1;
+      let that = this;
       this.scrollContainer.addEventListener('scroll', () => {
-        const index = mapValues.findIndex(item => this.scrollContainer.scrollTop > item - 75);
+        const index = mapValues.findIndex(item => that.scrollContainer.scrollTop > item - 75);
         if (cachedIndex !== index && index !== -1) {
-          this.active = mapKeys[index];
+          that.active = mapKeys[index];
           cachedIndex = index;
-          document.getElementById(this.active).focus();
+          document.getElementById(that.active) && document.getElementById(that.active).focus();
         }
       });
     });
@@ -87,16 +86,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.link {
-  ::v-deep(span) {
-    font-size: 12px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 135px;
-  }
+.right-nav {
+    position: fixed;
+    right: 10px;
+    top: 100px;
+    width: 150px;
+    border-left: 1px solid rgb(220, 223, 230);
+    height: auto;
+    max-height: 300px;
+    .right-nav-link {
+        margin: 3px 0 3px 10px;
+        .link {
+            ::v-deep span {
+                font-size: 12px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                max-width: 135px;
+            }
+        }
+    }
 }
-
 @media (max-width: 1490px) {
   .right-nav {
     display: none;
