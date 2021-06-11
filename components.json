@@ -82,5 +82,6 @@
   "drawer": "./packages/drawer/index.js",
   "popconfirm": "./packages/popconfirm/index.js",
   "skeleton": "./packages/skeleton/index.js",
-  "skeleton-item": "./packages/skeleton-item/index.js"
+  "skeleton-item": "./packages/skeleton-item/index.js",
+  "empty": "./packages/empty/index.js"
 }

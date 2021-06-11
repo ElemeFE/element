@@ -115,6 +115,9 @@ export default {
     popconfirm: {
       confirmButtonText: 'Так',
       cancelButtonText: 'Ні'
+    },
+    empty: {
+      description: 'Немає даних'
     }
   }
 };
