@@ -1,12 +1,12 @@
 import { ElementUIComponent } from './component'
-
+import { VNode } from 'vue'
 
 interface ElSkeletonSlots {
   /* default slot:  Real rendering DOM */
-  default: VNode[];
+  default: VNode[]
 
   /* template slot: Custom rendering skeleton template */
-  template: VNode[];
+  template: VNode[]
 
   [key: string]: VNode[]
 }
@@ -28,6 +28,6 @@ export declare class ElSkeleton extends ElementUIComponent {
   /** Rendering delay in millseconds; default: 0 */
   throttle: number
 
-  $slots: ElSkeletonSlots 
+  $slots: ElSkeletonSlots
 
 }
