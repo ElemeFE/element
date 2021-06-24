@@ -2,6 +2,8 @@ let hiddenTextarea;
 
 const HIDDEN_STYLE = `
   height:0 !important;
+  min-height:0 !important;
+  max-height:0 !important;
   visibility:hidden !important;
   overflow:hidden !important;
   position:absolute !important;
@@ -57,7 +59,7 @@ export default function calcTextareaHeight(
 ) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
-    document.body.appendChild(hiddenTextarea);
+    targetElement.parentElement.appendChild(hiddenTextarea);
   }
 
   let {
