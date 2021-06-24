@@ -91,7 +91,7 @@ export function addClass(el, cls) {
     }
   }
   if (!el.classList) {
-    el.className = curClass;
+    el.setAttribute('class', curClass);
   }
 };
 
@@ -112,7 +112,7 @@ export function removeClass(el, cls) {
     }
   }
   if (!el.classList) {
-    el.className = trim(curClass);
+    el.setAttribute('class', trim(curClass));
   }
 };
 
