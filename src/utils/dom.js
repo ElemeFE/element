@@ -183,7 +183,7 @@ export const isScroll = (el, vertical) => {
       : getStyle(el, 'overflow-x')
     : getStyle(el, 'overflow');
 
-  return overflow.match(/(scroll|auto)/);
+  return overflow.match(/(scroll|auto|overlay)/);
 };
 
 export const getScrollContainer = (el, vertical) => {
