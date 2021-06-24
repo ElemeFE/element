@@ -101,20 +101,20 @@ export default {
     transfer: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่พบข้อมูล',
-      titles: ['List 1', 'List 2'], // to be translated
+      titles: ['รายการที่ 1', 'รายการที่ 2'],
       filterPlaceholder: 'กรอกคีย์เวิร์ด',
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      noCheckedFormat: 'ทั้งหมด {total} ตัวเลือก',
+      hasCheckedFormat: '{checked} จาก {total} ถูกเลือก'
     },
     image: {
-      error: 'FAILED' // to be translated
+      error: 'ผิดพลาด'
     },
     pageHeader: {
       title: 'ย้อนกลับ'
     },
     popconfirm: {
-      confirmButtonText: 'Yes', // to be translated
-      cancelButtonText: 'No' // to be translated
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่'
     },
     empty: {
       description: 'ไม่พบข้อมูล'
