@@ -156,7 +156,9 @@ export default Vue.extend({
     },
 
     toggleRowSelection(row, selected, emitChange = true) {
-      const changed = toggleRowStatus(this.states.selection, row, selected);
+      const rowKey = this.states.rowKey;
+      const rowIdentity = getRowIdentity(row, rowKey)
+      const changed = toggleRowStatus(this.states.selection, row, selected, rowIdentity);
       if (changed) {
         const newSelection = (this.states.selection || []).slice();
         // 调用 API 修改选中值，不触发 select 事件
@@ -223,7 +225,7 @@ export default Vue.extend({
       if (rowKey) {
         selectedMap = getKeysMap(selection, rowKey);
       }
-      const isSelected = function(row) {
+      const isSelected = function (row) {
         if (selectedMap) {
           return !!selectedMap[getRowIdentity(row, rowKey)];
         } else {

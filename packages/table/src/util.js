@@ -1,6 +1,6 @@
 import { getValueByPath } from 'element-ui/src/utils/util';
 
-export const getCell = function(event) {
+export const getCell = function (event) {
   let cell = event.target;
 
   while (cell && cell.tagName.toUpperCase() !== 'HTML') {
@@ -13,11 +13,11 @@ export const getCell = function(event) {
   return null;
 };
 
-const isObject = function(obj) {
+const isObject = function (obj) {
   return obj !== null && typeof obj === 'object';
 };
 
-export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
+export const orderBy = function (array, sortKey, reverse, sortMethod, sortBy) {
   if (!sortKey && !sortMethod && (!sortBy || Array.isArray(sortBy) && !sortBy.length)) {
     return array;
   }
@@ -26,12 +26,12 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
   } else {
     reverse = (reverse && reverse < 0) ? -1 : 1;
   }
-  const getKey = sortMethod ? null : function(value, index) {
+  const getKey = sortMethod ? null : function (value, index) {
     if (sortBy) {
       if (!Array.isArray(sortBy)) {
         sortBy = [sortBy];
       }
-      return sortBy.map(function(by) {
+      return sortBy.map(function (by) {
         if (typeof by === 'string') {
           return getValueByPath(value, by);
         } else {
@@ -44,7 +44,7 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
     }
     return [isObject(value) ? getValueByPath(value, sortKey) : value];
   };
-  const compare = function(a, b) {
+  const compare = function (a, b) {
     if (sortMethod) {
       return sortMethod(a.value, b.value);
     }
@@ -58,13 +58,13 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
     }
     return 0;
   };
-  return array.map(function(value, index) {
+  return array.map(function (value, index) {
     return {
       value: value,
       index: index,
       key: getKey ? getKey(value, index) : null
     };
-  }).sort(function(a, b) {
+  }).sort(function (a, b) {
     let order = compare(a, b);
     if (!order) {
       // make stable https://en.wikipedia.org/wiki/Sorting_algorithm#Stability
@@ -74,9 +74,9 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
   }).map(item => item.value);
 };
 
-export const getColumnById = function(table, columnId) {
+export const getColumnById = function (table, columnId) {
   let column = null;
-  table.columns.forEach(function(item) {
+  table.columns.forEach(function (item) {
     if (item.id === columnId) {
       column = item;
     }
@@ -84,7 +84,7 @@ export const getColumnById = function(table, columnId) {
   return column;
 };
 
-export const getColumnByKey = function(table, columnKey) {
+export const getColumnByKey = function (table, columnKey) {
   let column = null;
   for (let i = 0; i < table.columns.length; i++) {
     const item = table.columns[i];
@@ -96,7 +96,7 @@ export const getColumnByKey = function(table, columnKey) {
   return column;
 };
 
-export const getColumnByCell = function(table, cell) {
+export const getColumnByCell = function (table, cell) {
   const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
   if (matches) {
     return getColumnById(table, matches[0]);
@@ -121,7 +121,7 @@ export const getRowIdentity = (row, rowKey) => {
   }
 };
 
-export const getKeysMap = function(array, rowKey) {
+export const getKeysMap = function (array, rowKey) {
   const arrayMap = {};
   (array || []).forEach((row, index) => {
     arrayMap[getRowIdentity(row, rowKey)] = { row, index };
@@ -197,7 +197,7 @@ export function compose(...funcs) {
 
 export function toggleRowStatus(statusArr, row, newVal) {
   let changed = false;
-  const index = statusArr.indexOf(row);
+  const index = statusArr.findIndex(item => item[rowIdentity] === row[rowIdentity])
   const included = index !== -1;
 
   const addRow = () => {
