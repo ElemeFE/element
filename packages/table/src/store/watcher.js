@@ -157,8 +157,8 @@ export default Vue.extend({
 
     toggleRowSelection(row, selected, emitChange = true) {
       const rowKey = this.states.rowKey;
-      const rowIdentity = getRowIdentity(row, rowKey);
-      const changed = toggleRowStatus(this.states.selection, row, selected, rowIdentity);
+      const rowId = getRowIdentity(row, rowKey);
+      const changed = toggleRowStatus(this.states.selection, row, selected, rowId);
       if (changed) {
         const newSelection = (this.states.selection || []).slice();
         // 调用 API 修改选中值，不触发 select 事件

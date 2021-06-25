@@ -195,9 +195,9 @@ export function compose(...funcs) {
   return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }
 
-export function toggleRowStatus(statusArr, row, newVal, rowIdentity) {
+export function toggleRowStatus(statusArr, row, newVal, rowId) {
   let changed = false;
-  const index = statusArr.findIndex(item => item[rowIdentity] === row[rowIdentity]);
+  const index = statusArr.findIndex(item => item[rowId] === row[rowId]);
   const included = index !== -1;
 
   const addRow = () => {
