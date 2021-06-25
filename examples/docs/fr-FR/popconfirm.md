@@ -24,10 +24,10 @@ You can customise Popconfirm like:
 ```html
 <template>
 <el-popconfirm
-  confirmButtonText='OK'
-  cancelButtonText='No, Thanks'
+  confirm-button-text='OK'
+  cancel-button-text='No, Thanks'
   icon="el-icon-info"
-  iconColor="red"
+  icon-color="red"
   title="Are you sure to delete this?"
 >
   <el-button slot="reference">Delete</el-button>
@@ -40,15 +40,21 @@ You can customise Popconfirm like:
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  title              | Title | String | — | — |
-|  confirmButtonText              | Confirm button text | String | — | — |
-|  cancelButtonText              | Cancel button text | String | — | — |
-|  confirmButtonType              | Confirm button type | String | — | Primary |
-|  cancelButtonType              | Cancel button type | String | — | Text |
+|  confirm-button-text              | Confirm button text | String | — | — |
+|  cancel-button-text              | Cancel button text | String | — | — |
+|  confirm-button-type              | Confirm button type | String | — | Primary |
+|  cancel-button-type              | Cancel button type | String | — | Text |
 |  icon              | Icon | String | — | el-icon-question |
-|  iconColor              | Icon color | String | — | #f90 |
-|  hideIcon              | is hide Icon | Boolean | — | false |
+|  icon-color              | Icon color | String | — | #f90 |
+|  hide-icon              | is hide Icon | Boolean | — | false |
 
 ### Slot
 | Name | Description |
 |--- | ---|
 | reference | HTML element that triggers Popconfirm |
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| confirm | triggers when click confirm button | — |
+| cancel | triggers when click cancel button | — |

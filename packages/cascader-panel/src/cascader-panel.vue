@@ -176,6 +176,7 @@ export default {
     syncCheckedValue() {
       const { value, checkedValue } = this;
       if (!isEqual(value, checkedValue)) {
+        this.activePath = [];
         this.checkedValue = value;
         this.syncMenuState();
       }

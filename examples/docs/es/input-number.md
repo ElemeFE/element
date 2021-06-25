@@ -91,7 +91,7 @@ Le permite definir el nivel de incremento de los saltos.
 
 ### Precisión
 
-:::demo El atributo `precision` aplica presicion al valor del value.
+:::demo El atributo `precision` aplica presición al valor del value.
 
 ```html
 <template>
@@ -174,9 +174,9 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | ----------------- | ---------------------------------------- | ------- | ----------------- | ----------- |
 | value / v-model    | valor vinculado                          | number  | —                 | 0           |
 | min               | el valor mínimo permitido                | number  | —                 | `-Infinity`  |
-| max               | el valor maximo permitido                | number  | —                 | `Infinity`  |
+| max               | el valor máximo permitido          | number  | —                 | `Infinity`  |
 | step              | incremento (salto)                       | number  | —                 | 1           |
-| step-strictly  | si el valor del input puede ser solo un multiplo de step | number  | —                 | false       |
+| step-strictly  | si el valor del input puede ser solo un múltiplo de step | boolean  | —                 | false       |
 | precision         | precisión del valor del input | number  | —                 | —           |
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
@@ -184,7 +184,7 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | controls-position | posición de los botones de control       | string  | right             | -           |
 | name              | lo mismo que `name` en un input nativo   | string  | —                 | —           |
 | label             | texto de la etiqueta                     | string  | —                 | —           |
-| placeholder | placeholder in input | string | - | - |
+| placeholder | placeholder en el input | string | - | - |
 
 ### Eventos
 

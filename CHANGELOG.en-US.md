@@ -1,5 +1,153 @@
 ## Changelog
 
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug fixes
+
+- Image
+  - fix z-index and keydown event add stopPropagation (#20859 by @cs1707)
+- Input
+  - fix show password cursor (#20870 by @cs1707)
+  - fix show password icon in edge (#20902 by @cs1707)
+- Carousel
+  - fix interval and scale bug (#20931 by @cs1707)
+- Cascader
+  - fix delete tag bug (#20939 by @cs1707)
+- Drawer
+  - add overflow auto (#20948 by @cs1707)
+- Others
+  - fix isFunction (#20912 by @cs1707)
+
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug fixes
+
+- Drawer
+  - bugfix (by @cs1707)
+- Image
+  - fix incorrect image object fit ratio in IE (#19583 by @charlie0228)
+- Cascader
+  - fix cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - fix calendar component i18n bug (#20758 by @iamkun)
+- ColorPicker
+  - fix bugs (by @UxieVerity)
+
+#### Optimization
+
+- Doc
+  - update Axure resource v2.1.0 (by @iamkun)
+
+### 2.15.0
+
+*2021-01-15*
+
+#### Bug fixes
+
+- Select
+  - Fix placeholder i18n bug (#17644 by @nzh63)
+- Popconfirm
+  - Popconfirm i18n bug by @iamkun)
+- Drawer
+  - Fix focus bug (#20626 by @cs1707)
+- Image
+  - Preview optimization (#20652 by @cs1707)
+
+#### Optimization
+
+- Doc
+  - Fix typo in french translation of datetime-picker.md (#20543 by @lonk)
+  - Add format attribute description to the progress component (#20641 by @cs1707)
+
+### 2.14.1
+
+*2020-11-11*
+
+#### Bug fixes
+
+- Popover
+  - Compatible with Vue 2.6 new v-slot syntax (#20424 by @iamkun)
+
+#### Optimization
+
+- I18n
+  - Update Arabic translation (#20202 by @elkattan)
+  - Update Uighur translation (#20177 by @IlhamTahir)
+
+### 2.14.0
+
+*2020-10-29*
+
+#### Breaking changes
+
+- Popconfirm
+  - Rename event name to `confirm`, `cancel` (#20240 by @hugiron)
+
+#### Bug fixes
+
+- Progress
+  - Fix attribute error (#19985 by @Caaalabash)
+
+#### Optimization
+
+- I18n
+  - Update Russian translation (#19451 by @yangirov)
+  - Update Khmer translation (#20077 by @Sovai)
+  - Update Ukrainian translation (#20344 by @MammutAlex)
+
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix change event bug (#19200 by @sxzz)
+- Image
+  - Update error status (#19194 by @lhx6538665)
+
+#### Optimization
+
+- I18n
+  - Update ru-RU popconfirm translation (#19220 by @Opppex)
+  - Update vi translation (#19244 by @quangln2810)
+  - Update Catalan and Spanish translations (#19296 by @Ismaaa)
+  - Update Indonesia translation (#19320) by @therour)
+  - Update Brazilian Portuguese translation (#19374 by @diegomengarda)
+
+### 2.13.1
+
+*2020-04-13*
+
+#### New features
+- Autocomplete
+  - Add change event (#17913 by @sxzz)
+
+#### Bug fixes
+
+- Autocomplete
+  - Fix suggestion error when textarea (#18478 by @Roojay)
+- Carousel
+  - Fix console typo bug (#18264 by @IceFox)
+- Image
+  - Fix preview dose not show when preview list not contain src issue (#18975) (#19130 by @luckyCao)
+  - Fix shortcut key not work at second time issue (#18983) (#19156 by @luckyCao)
+  - Don't show image-viewer when preview is false (#18967 by @inooNgt)
+- Transfer
+  - Fix incorrect line-height of el-transfer's first list item when it was used with  el-form-item (#18917 by @Hanx)
+- InputNumber
+  - Correctly compute inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - Remove index intro (#19155 by @iamkun)
+- Doc
+  - Popconfirm doc update (#18324 by @iamkun)
+  - Fix step-strictly docs typo (#18705 by @dream2023)
+  - Fix a type error in document of steps component (#17555 by @haoranyu)
+
 ### 2.13.0
 
 *2019-11-26*

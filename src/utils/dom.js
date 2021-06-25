@@ -91,7 +91,7 @@ export function addClass(el, cls) {
     }
   }
   if (!el.classList) {
-    el.className = curClass;
+    el.setAttribute('class', curClass);
   }
 };
 
@@ -112,7 +112,7 @@ export function removeClass(el, cls) {
     }
   }
   if (!el.classList) {
-    el.className = trim(curClass);
+    el.setAttribute('class', trim(curClass));
   }
 };
 
@@ -176,7 +176,7 @@ export function setStyle(element, styleName, value) {
 export const isScroll = (el, vertical) => {
   if (isServer) return;
 
-  const determinedDirection = vertical !== null || vertical !== undefined;
+  const determinedDirection = vertical !== null && vertical !== undefined;
   const overflow = determinedDirection
     ? vertical
       ? getStyle(el, 'overflow-y')

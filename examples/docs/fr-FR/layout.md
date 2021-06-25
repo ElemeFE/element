@@ -338,7 +338,7 @@ Ces classes sont:
 | gutter | Espacement de la grille. | number | — | 0 |
 | type | Mode de mise en page. Vous pouvez utiliser flex, qui fonctionne sur les navigateurs modernes. | string | — | — |
 | justify | Alignement horizontal pour le mise en page flex. | string | start/end/center/space-around/space-between | start |
-| align | Alignement vertical pour la mise en page flex. | string | top/middle/bottom | top |
+| align | Alignement vertical pour la mise en page flex. | string | top/middle/bottom | — |
 | tag | Élément de tag personnalisé. | string | * | div |
 
 ### Attributs des colonnes

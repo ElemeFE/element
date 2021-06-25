@@ -1,12 +1,12 @@
 ## Popconfirm 
 
-A simple confirmation dialog of an element click action.
+Un dialogo de confirmación simple asociado al evento click de un elemento.
 
-### Basic usage
+### Uso básico
 
-Popconfirm is similar to Popover. So for some duplicated attributes, please refer to the documentation of Popover.
+Popconfirm es parecido a Popover. Para algunos atributos duplicados, por favor consulte la documentación de Popover.
 
-:::demo Only `title` attribute is avaliable in Popconfirm, `content` will be ignored.
+:::demo Solo el atributo  `title`  esta disponible en Popconfirm, `content` sera ignorado.
 ```html
 <template>
 <el-popconfirm
@@ -18,16 +18,17 @@ Popconfirm is similar to Popover. So for some duplicated attributes, please refe
 ````
 :::
 
-### Customise
-You can customise Popconfirm like:
+### Personalización
+Se puede personalizar Popconfirm así:
 :::demo
+
 ```html
 <template>
 <el-popconfirm
-  confirmButtonText='OK'
-  cancelButtonText='No, Thanks'
+  confirm-button-text='OK'
+  cancel-button-text='No, Thanks'
   icon="el-icon-info"
-  iconColor="red"
+  icon-color="red"
   title="Are you sure to delete this?"
 >
   <el-button slot="reference">Delete</el-button>
@@ -36,19 +37,25 @@ You can customise Popconfirm like:
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos
+| Atributo     | Descripción | Tipo    | Valores aceptados | Por defecto |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-|  title              | Title | String | — | — |
-|  confirmButtonText              | Confirm button text | String | — | — |
-|  cancelButtonText              | Cancel button text | String | — | — |
-|  confirmButtonType              | Confirm button type | String | — | Primary |
-|  cancelButtonType              | Cancel button type | String | — | Text |
-|  icon              | Icon | String | — | el-icon-question |
-|  iconColor              | Icon color | String | — | #f90 |
-|  hideIcon              | is hide Icon | Boolean | — | false |
+|  title              | Titulo | String | — | — |
+|  confirm-button-text              | Texto del botón de confirmación | String | — | — |
+|  cancel-button-text              | Texto del botón de cancelación | String | — | — |
+|  confirm-button-type              | Tipo del botón de confirmación | String | — | Primary |
+|  cancel-button-type              | Tipo del botón de cancelación | String | — | Text |
+|  icon              | Icono | String | — | el-icon-question |
+|  icon-color              | Color icono | String | — | #f90 |
+|  hide-icon              | ¿Es un icono oculto? | Boolean | — | false |
 
 ### Slot
-| Name | Description |
+| Nombre | Descripción |
 |--- | ---|
-| reference | HTML element that triggers Popconfirm |
+| reference | Elemento HTML que activa el Popconfirm |
+
+### Eventos
+| Nombre Evento | Descripción | Parámetros |
+|---------|--------|---------|
+| confirm | Se activa cuando se pulsa el botón de confirmación | — |
+| cancel | Se activa cuando se pulsa el botón de cancelación | — |

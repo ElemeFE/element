@@ -24,10 +24,10 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 ```html
 <template>
 <el-popconfirm
-  confirmButtonText='好的'
-  cancelButtonText='不用了'
+  confirm-button-text='好的'
+  cancel-button-text='不用了'
   icon="el-icon-info"
-  iconColor="red"
+  icon-color="red"
   title="这是一段内容确定删除吗？"
 >
   <el-button slot="reference">删除</el-button>
@@ -40,15 +40,21 @@ Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  title              | 标题 | String | — | — |
-|  confirmButtonText              | 确认按钮文字 | String | — | — |
-|  cancelButtonText              | 取消按钮文字 | String | — | — |
-|  confirmButtonType              | 确认按钮类型 | String | — | Primary |
-|  cancelButtonType              | 取消按钮类型 | String | — | Text |
+|  confirm-button-text              | 确认按钮文字 | String | — | — |
+|  cancel-button-text              | 取消按钮文字 | String | — | — |
+|  confirm-button-type              | 确认按钮类型 | String | — | Primary |
+|  cancel-button-type              | 取消按钮类型 | String | — | Text |
 |  icon              | Icon | String | — | el-icon-question |
-|  iconColor              | Icon 颜色 | String | — | #f90 |
-|  hideIcon              | 是否隐藏 Icon | Boolean | — | false |
+|  icon-color              | Icon 颜色 | String | — | #f90 |
+|  hide-icon              | 是否隐藏 Icon | Boolean | — | false |
 
 ### Slot
 | 参数 | 说明 |
 |--- | ---|
 | reference | 触发 Popconfirm 显示的 HTML 元素 |
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| confirm | 点击确认按钮时触发 | — |
+| cancel | 点击取消按钮时触发 | — |

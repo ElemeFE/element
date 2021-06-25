@@ -128,11 +128,10 @@ describe('Image', () => {
     vm.$el.querySelector('.el-image__inner').click();
     await wait();
 
-    const $wrapper = vm.$el.querySelector('.el-image-viewer__wrapper');
-    expect($wrapper).to.exist;
-    vm.$el.querySelector('.el-image-viewer__close').click();
+    expect(document.querySelector('.el-image-viewer__wrapper')).to.exist;
+    document.querySelector('.el-image-viewer__close').click();
     await wait(1000);
-    expect($wrapper.style.display).to.equal('none');
+    expect(document.querySelector('.el-image-viewer__wrapper')).to.not.exist;
   });
 });
 

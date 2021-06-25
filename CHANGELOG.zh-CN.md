@@ -1,5 +1,154 @@
 ## 更新日志
 
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug 修复
+
+- Image
+  - 修复 z-index 增加 keydown 事件 添加 stopPropagation (#20859 by @cs1707)
+- Input
+  - 修复 password cursor 展示 (#20870 by @cs1707)
+  - 修复 password icon 在 edge 下的展示 (#20902 by @cs1707)
+- Carousel
+  - 修复 interval 和 scale bug (#20931 by @cs1707)
+- Cascader
+  - 修复 delete tag bug (#20939 by @cs1707)
+- Drawer
+  - 支持 overflow auto (#20948 by @cs1707)
+- 其他
+  - 修复 isFunction (#20912 by @cs1707)
+
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug 修复
+
+- Drawer
+  - 修复 Drawer bug (by @cs1707)
+- Image
+  - 修复 image object fit ratio 在 IE 下的 bug  (#19583 by @charlie0228)
+- Cascader
+  - 修复 cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - 修复 calendar 国际化 bug (#20758 by @iamkun)
+- ColorPicker
+  - 修复 bugs (by @UxieVerity)
+
+#### 优化
+
+- Doc
+  - 更新 Axure 设计资源 v2.1.0 (by @iamkun)
+
+### 2.15.0
+
+*2021-01-15*
+
+#### Bug 修复
+
+- Select
+  - 修复 placeholder 国际化 bug (#17644 by @nzh63)
+- Popconfirm
+  - 修复 Popconfirm 国际化 bug by @iamkun
+- Drawer
+  - 修复 focus bug (#20626 by @cs1707)
+- Image
+  - 图片预览优化 (#20652 by @cs1707)
+
+#### 优化
+
+- Doc
+  - 更新法语文档 datetime-picker.md (#20543 by @lonk)
+  - 更新 Progress 组件文档 (#20641 by @cs1707)
+
+### 2.14.1
+
+*2020-11-11*
+
+#### Bug 修复
+
+- Popover
+  - 兼容 Vue 2.6 新 v-slot 语法 (#20424 by @iamkun)
+
+#### 优化
+
+- I18n
+  - 更新阿拉伯语翻译 (#20202 by @elkattan)
+  - 更新维吾尔语翻译 (#20177 by @IlhamTahir)
+
+### 2.14.0
+
+*2020-10-29*
+
+#### 非兼容性更新
+
+- Popconfirm
+  - 事件名称修改为 `confirm`, `cancel` (#20240 by @hugiron)
+
+#### Bug 修复
+
+- Progress
+  - 修复参数错误的问题 (#19985 by @Caaalabash)
+
+#### 优化
+
+- I18n
+  - 更新俄语翻译 (#19451 by @yangirov)
+  - 更新高棉语翻译 (#20077 by @Sovai)
+  - 更新乌克兰语翻译 (#20344 by @MammutAlex)
+
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复 'change event' 错误 (#19200 by @sxzz)
+- Image
+  - 更新错误状态 (#19194 by @lhx6538665)
+
+#### 优化
+
+- I18n
+  - 更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)
+  - 更新 vi 翻译 (#19244 by @quangln2810)
+  - 更新 Catalan 和 Spanish 翻译 (#19296 by @Ismaaa)
+  - 更新 Indonesia 翻译 (#19320) by @therour)
+  - 更新 Brazilian Portuguese 翻译 (#19374 by @diegomengarda)
+
+
+### 2.13.1
+
+*2020-04-13*
+
+#### 新特性
+- Autocomplete
+  - 添加 change 事件 (#17913 by @sxzz)
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复类型为 textarea 时建议错误问题 (#18478 by @Roojay)
+- Carousel
+  - 修复 console.warn 文案拼写错误 (#18264 by @IceFox)
+- Image
+  - 修复当 preview-src-list 属性不包含 src 时图片预览大图展示为空的问题 (#18975) (#19130 by @luckyCao)
+  - 修复第二次图片预览时快捷键失效问题 (#18983) (#19156 by @luckyCao)
+  - 修复 preview-src-list 为空时点击图片会给 body 添加 overflow: scroll 的问题 (#18967 by @inooNgt)
+- Transfer
+  - 修复和 Form 组件一起使用时错误的行高问题 (#18917 by @Hanx)
+- InputNumber
+  - 正确计算 inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - 更新首页文案 (#19155 by @iamkun)
+- Doc
+  - 更新 Popconfirm 文档 (#18324 by @iamkun)
+  - 修复 step-strictly 文档拼写问题 (#18705 by @dream2023)
+  - 修复 Steps 组件文档问题 (#17555 by @haoranyu)
+
 ### 2.13.0
 
 *2019-11-26*

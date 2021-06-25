@@ -36,32 +36,11 @@
   </a>
 </p>
 
-<p align="center">
-  <b>Special thanks to the generous sponsorship by:</b>
-</p>
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://tipe.io/?ref=element" target="_blank">
-          <img width="150px" src="https://user-images.githubusercontent.com/1016365/34124854-48fafa06-e3e9-11e7-8c04-251055feebee.png">
-        </a>
-      </td>
-      <td align="center" valign="middle">
-        <a href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
-          <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
-        </a>
-      </td>
-      <td align="center" valign="middle">
-        <a href="https://bitsrc.io/" target="_blank">
-          <img width="150px" src="https://user-images.githubusercontent.com/10095631/41342907-e44e7196-6f2f-11e8-92f2-47702dc8f059.png">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 > A Vue.js 2.0 UI Toolkit for Web.
+
+Element will stay with Vue 2.x 
+
+For Vue 3.0, we recommend using [Element Plus](https://github.com/element-plus/element-plus) from the same team
 
 ## Links
 - Homepage and documentation
@@ -71,6 +50,7 @@
   - [French users](http://element.eleme.io/#/fr-FR)
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
+- [Vue.js 3.0 migration](https://github.com/element-plus/element-plus)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
 - [Element for React](https://github.com/elemefe/element-react)
@@ -126,8 +106,6 @@ We have collected some [frequently asked questions](https://github.com/ElemeFE/e
 ## Contribution
 Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md) | [Español](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.es.md) | [Français](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.fr-FR.md)) before making a pull request.
 
-[![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/67274736)
-
 ## Special Thanks
 English documentation is brought to you by SwiftGG Translation Team:
 - [raychenfj](https://github.com/raychenfj)
@@ -157,87 +135,11 @@ French documentation is made possible by these community developers:
 - [smalesys](https://github.com/smalesys)
 - [blombard](https://github.com/blombard)
 
-## Donation
-If you find Element useful, you can buy us a cup of coffee
-
-<img width="650" src="https://user-images.githubusercontent.com/14025786/44833997-5d7c4d80-ac62-11e8-8445-1dffec0eb13c.png" alt="donation">
-
-## Backers
-
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/element#backer)]
-
-<a href="https://opencollective.com/element/backer/0/website" target="_blank"><img src="https://opencollective.com/element/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/1/website" target="_blank"><img src="https://opencollective.com/element/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/2/website" target="_blank"><img src="https://opencollective.com/element/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/3/website" target="_blank"><img src="https://opencollective.com/element/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/4/website" target="_blank"><img src="https://opencollective.com/element/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/5/website" target="_blank"><img src="https://opencollective.com/element/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/6/website" target="_blank"><img src="https://opencollective.com/element/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/7/website" target="_blank"><img src="https://opencollective.com/element/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/8/website" target="_blank"><img src="https://opencollective.com/element/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/9/website" target="_blank"><img src="https://opencollective.com/element/backer/9/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/10/website" target="_blank"><img src="https://opencollective.com/element/backer/10/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/11/website" target="_blank"><img src="https://opencollective.com/element/backer/11/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/12/website" target="_blank"><img src="https://opencollective.com/element/backer/12/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/13/website" target="_blank"><img src="https://opencollective.com/element/backer/13/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/14/website" target="_blank"><img src="https://opencollective.com/element/backer/14/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/15/website" target="_blank"><img src="https://opencollective.com/element/backer/15/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/16/website" target="_blank"><img src="https://opencollective.com/element/backer/16/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/17/website" target="_blank"><img src="https://opencollective.com/element/backer/17/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/18/website" target="_blank"><img src="https://opencollective.com/element/backer/18/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/19/website" target="_blank"><img src="https://opencollective.com/element/backer/19/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/20/website" target="_blank"><img src="https://opencollective.com/element/backer/20/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/21/website" target="_blank"><img src="https://opencollective.com/element/backer/21/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/22/website" target="_blank"><img src="https://opencollective.com/element/backer/22/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/23/website" target="_blank"><img src="https://opencollective.com/element/backer/23/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/24/website" target="_blank"><img src="https://opencollective.com/element/backer/24/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/25/website" target="_blank"><img src="https://opencollective.com/element/backer/25/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/26/website" target="_blank"><img src="https://opencollective.com/element/backer/26/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/27/website" target="_blank"><img src="https://opencollective.com/element/backer/27/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/28/website" target="_blank"><img src="https://opencollective.com/element/backer/28/avatar.svg"></a>
-<a href="https://opencollective.com/element/backer/29/website" target="_blank"><img src="https://opencollective.com/element/backer/29/avatar.svg"></a>
-
-
-## Sponsors
-
-Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/element#sponsor)]
-
-<a href="https://opencollective.com/element/sponsor/0/website" target="_blank"><img src="https://opencollective.com/element/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/1/website" target="_blank"><img src="https://opencollective.com/element/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/2/website" target="_blank"><img src="https://opencollective.com/element/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/3/website" target="_blank"><img src="https://opencollective.com/element/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/4/website" target="_blank"><img src="https://opencollective.com/element/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/5/website" target="_blank"><img src="https://opencollective.com/element/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/6/website" target="_blank"><img src="https://opencollective.com/element/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/7/website" target="_blank"><img src="https://opencollective.com/element/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/8/website" target="_blank"><img src="https://opencollective.com/element/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/9/website" target="_blank"><img src="https://opencollective.com/element/sponsor/9/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/10/website" target="_blank"><img src="https://opencollective.com/element/sponsor/10/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/11/website" target="_blank"><img src="https://opencollective.com/element/sponsor/11/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/12/website" target="_blank"><img src="https://opencollective.com/element/sponsor/12/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/13/website" target="_blank"><img src="https://opencollective.com/element/sponsor/13/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/14/website" target="_blank"><img src="https://opencollective.com/element/sponsor/14/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/15/website" target="_blank"><img src="https://opencollective.com/element/sponsor/15/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/16/website" target="_blank"><img src="https://opencollective.com/element/sponsor/16/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/17/website" target="_blank"><img src="https://opencollective.com/element/sponsor/17/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/18/website" target="_blank"><img src="https://opencollective.com/element/sponsor/18/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/19/website" target="_blank"><img src="https://opencollective.com/element/sponsor/19/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/20/website" target="_blank"><img src="https://opencollective.com/element/sponsor/20/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/21/website" target="_blank"><img src="https://opencollective.com/element/sponsor/21/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/22/website" target="_blank"><img src="https://opencollective.com/element/sponsor/22/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/23/website" target="_blank"><img src="https://opencollective.com/element/sponsor/23/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/24/website" target="_blank"><img src="https://opencollective.com/element/sponsor/24/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/25/website" target="_blank"><img src="https://opencollective.com/element/sponsor/25/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/26/website" target="_blank"><img src="https://opencollective.com/element/sponsor/26/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/27/website" target="_blank"><img src="https://opencollective.com/element/sponsor/27/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/28/website" target="_blank"><img src="https://opencollective.com/element/sponsor/28/avatar.svg"></a>
-<a href="https://opencollective.com/element/sponsor/29/website" target="_blank"><img src="https://opencollective.com/element/sponsor/29/avatar.svg"></a>
-
 ## Join Discussion Group
 
 Scan the QR code using [Dingtalk App](https://www.dingtalk.com/) to join in discussion group :
 
-<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/66537329-9a4b9100-eb52-11e9-9d99-65469cfdae58.jpeg" width="300">
+<img alt="Join Discusion Group" src="https://user-images.githubusercontent.com/17680888/93177882-0ae92d80-f766-11ea-870d-3fa2d7f06454.png" width="300">
 
 
 ## LICENSE

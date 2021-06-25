@@ -155,7 +155,7 @@ export default {
 
 ### Textarea
 
-Redimensiona para introducir varias líneas de información de texto. Agregue el atributo `type="textarea"` para cambiar el `input` al tipo nativo `textarea`.
+Re dimensiona para introducir varias líneas de información de texto. Agregue el atributo `type="textarea"` para cambiar el `input` al tipo nativo `textarea`.
 
 :::demo Controle la altura ajustando el prop `rows`.
 
@@ -613,7 +613,7 @@ export default {
 
 ### Input eventos
 
-| Nombre | Descripción                                                  | Parametros                |
+| Nombre | Descripción                                                  | Parámetros                |
 | ------ | ------------------------------------------------------------ | ------------------------- |
 | blur   | Se dispara cuando se pierde el foco                          | (event: Event)            |
 | focus  | Se dispara cuando se obtiene el foco                         | (event: Event)            |
@@ -622,9 +622,9 @@ export default {
 | input  | se activa cuando cambia el valor de entrada                  | (value: string \| number) |
 | clear  | se dispara cuando la entrada es borrada por el botón generado por el atributo `clearable`. | —                         |
 
-### Input Metodo
+### Input Métodos
 
-| Metodo | Descripción                   | Parametros |
+| Método | Descripción                   | Parámetros |
 | ------ | ----------------------------- | ---------- |
 | focus  | coloca el foco en el elemento | —          |
 | blur   | quita el foco del elemento    | —          |
@@ -665,18 +665,19 @@ export default {
 
 ### Autocomplete Scoped Slot
 
-| Name | Description                                                  |
-| ---- | ------------------------------------------------------------ |
-| —    | Contenido personalizado para el input de sugerencias. El parámetro del scope es { ítem } |
+| Nombre | Descripción                                                  |
+| ------ | ------------------------------------------------------------ |
+| —      | Contenido personalizado para el input de sugerencias. El parámetro del scope es { ítem } |
 
 ### Autocomplete Eventos
 
-| Nombre | Descripción                                     | Parametros                                 |
+| Nombre | Descripción                                     | Parámetros                                 |
 | ------ | ----------------------------------------------- | ------------------------------------------ |
 | select | se dispara cuando se hace clic a una sugerencia | sugerencia en la que se está haciendo clic |
+| change | se activa cuando cambia el valor de entrada     | (value: string \| number)                  |
 
-### Autocomplete Metodo
+### Autocomplete Método
 
-| Metodo | Descripción                   | Parametros |
+| Método | Descripción                   | Parámetros |
 | ------ | ----------------------------- | ---------- |
 | focus  | coloca el foco en el elemento | —          |

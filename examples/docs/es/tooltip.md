@@ -6,7 +6,7 @@ Mostrar aviso de información con el hover del mouse.
 
 Tooltip tiene 9 colocaciones.
 
-:::demo Use el atributo `content` para establecer el contenido que se mostrará al hacer hover. El atributo `placement` determina la posición del tooltip. Su valor es `[orientation]-[alignment]` con cuatro orientaciones `top`, `left`, `right`, `bottom` y tres alineaciones `start`, `end`, `null`, la alineación default es null. Tome `placement="left-end"` como ejemplo, Tooltip será mostrado en la izquierda del elemento en que se esté haciendo hover y el fondo del tooltip se alineará con el fondo del elemento.
+:::demo Use el atributo `content` para establecer el contenido que se mostrará al hacer hover. El atributo `placement` determina la posición del tooltip. Su valor es `[orientation]-[alignment]` con cuatro orientaciones `top`, `left`, `right`, `bottom` y tres alineaciones `start`, `end`, `null`, la alineación por defecto es null. Tome `placement="left-end"` como ejemplo, Tooltip será mostrado en la izquierda del elemento en que se esté haciendo hover y el fondo del tooltip se alineará con el fondo del elemento.
 ```html
 <div class="box">
   <div class="top">
@@ -116,7 +116,7 @@ Tooltip tiene dos temas: `dark` y `light`.
 
 Despliegue múltiples líneas de texto y establezca su formato.
 
-:::demo Sobrecriba el atributo `content` del `el-tooltip` añadiendo un slot llamado `content`.
+:::demo Sobrescriba el atributo `content` del `el-tooltip` añadiendo un slot llamado `content`.
 ```html
 <el-tooltip placement="top">
   <div slot="content">multiple lines<br/>second line</div>
@@ -172,7 +172,7 @@ De hecho, Tooltip es una extensión basada en [Vue-popper](https://github.com/el
 El componente `router-link` no es soportado por Tooltip, favor de usar `vm.$router.push`.
 
 Elementos de forma deshabilitados no son soportados por Tooltip, más información puede ser encontrada en [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter).
-Es necesario envolver los elementos de forma deshabilitados en un elemento contenedor para que Tooltipo funcione.
+Es necesario envolver los elementos de forma deshabilitados en un elemento contenedor para que Tooltip funcione.
 :::
 
 
@@ -188,9 +188,9 @@ Es necesario envolver los elementos de forma deshabilitados en un elemento conte
 | transition     | nombre de animación                      | string  | —                                        | el-fade-in-linear                        |
 | visible-arrow  | si una flecha es mostrada. Para mayor información, revisar la página de [Vue-popper](https://github.com/element-component/vue-popper) | boolean | —                                        | true                                     |
 | popper-options | parámetros de [popper.js](https://popper.js.org/documentation.html) | Object  | referirse a la documentación de [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
-| open-delay     | retraso de la apariencia, en milisegundos | number  | —                                        | 0                                        |
+| open-delay     | retraso de la apariencia, en mili segundos | number  | —                                        | 0                                        |
 | manual         | si el Tooltipo será controlado de forma manual. `mouseenter` y `mouseleave` no tendrán efecto si fue establecido como `true` | boolean | —                                        | false                                    |
 | popper-class   | nombre de clase personalizada para el popper del Tooltip | string  | —                                        | —                                        |
-| enterable      | si el mouse puede entrar al Tooltip      | Boolean | —                                        | true                                     |
-| hide-after     | tiempo a esperar en milisegundos para esconder el Tooltip | number  | —                                        | 0                                        |
-| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Tooltip | number   | —                      | 0              |
+| enterable      | si el ratón puede entrar al Tooltip | Boolean | —                                        | true                                     |
+| hide-after     | tiempo a esperar en mili segundos para esconder el Tooltip | number  | —                                        | 0                                        |
+| tabindex       | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) de Tooltip | number   | —                      | 0              |

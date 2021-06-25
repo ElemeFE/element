@@ -1,10 +1,10 @@
 ## Link
 
-Texto con hipervinculo
+Texto con hipervínculo
 
 ### Básico
 
-Texto con hipervinculo básico
+Texto con hipervínculo básico
 :::demo
 
 ```html
@@ -22,7 +22,7 @@ Texto con hipervinculo básico
 
 ### Deshabilitar
 
-Deshabilita el hipervinculo
+Deshabilita el hipervínculo
 :::demo
 
 ```html
@@ -40,7 +40,7 @@ Deshabilita el hipervinculo
 
 ### Subrayado
 
-Subrayado del hipervinculo
+Subrayado del hipervínculo
 :::demo
 
 ```html
@@ -54,7 +54,7 @@ Subrayado del hipervinculo
 
 ### Icono
 
-Hipervinculo con icono
+Hipervínculo con icono
 :::demo
 
 ```html
@@ -71,7 +71,7 @@ Hipervinculo con icono
 | Atributo  | Descripción                                          | Tipo    | Opciones                                    | Por defecto |
 | --------- | ---------------------------------------------------- | ------- | ------------------------------------------- | ----------- |
 | type      | tipo                                                 | string  | primary / success / warning / danger / info | default     |
-| underline | si el hipervinculo estara subrayado                  | boolean | —                                           | true        |
+| underline | si el hipervínculo estará subrayado                  | boolean | —                                           | true        |
 | disabled  | si el componente esta deshabilitado                  | boolean | —                                           | false       |
-| href      | lo mismo que el valor nativo del hipervinculo `href` | string  | —                                           | -           |
+| href      | lo mismo que el valor nativo del hipervínculo `href` | string  | —                                           | -           |
 | icon      | nombre de clase del icono                            | string  | —                                           | -           |
