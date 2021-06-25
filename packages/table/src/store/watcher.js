@@ -157,7 +157,7 @@ export default Vue.extend({
 
     toggleRowSelection(row, selected, emitChange = true) {
       const rowKey = this.states.rowKey;
-      const rowIdentity = getRowIdentity(row, rowKey)
+      const rowIdentity = getRowIdentity(row, rowKey);
       const changed = toggleRowStatus(this.states.selection, row, selected, rowIdentity);
       if (changed) {
         const newSelection = (this.states.selection || []).slice();
@@ -225,7 +225,7 @@ export default Vue.extend({
       if (rowKey) {
         selectedMap = getKeysMap(selection, rowKey);
       }
-      const isSelected = function (row) {
+      const isSelected = function(row) {
         if (selectedMap) {
           return !!selectedMap[getRowIdentity(row, rowKey)];
         } else {
