@@ -1,5 +1,39 @@
 ## Changelog
 
+### 2.15.3
+
+*2021-06-29*
+
+#### New features
+
+- Skeleton
+  - add skeleton component (#21038 by @cs1707)
+- Empty
+  - add empty component (#21080 by @cs1707)
+
+#### Bug fixes
+
+- Local
+  - fix week translations for hr locale (#21040 by @cs1707)
+- Table
+  - fix lazy load data (#21041 by @cs1707)
+- Docs
+  - fix form hide-required-asterisk description (#21045 by @cs1707)
+- Drawer:
+  - fix destroy (#20715 by @zj9495)
+- Row
+  - fix align top (#20963 by @cs1707)
+- Select
+  - fix the bug when the value is Boolean (#21052 by @cs1707)
+- Calendar
+  - fix first-day-of-week (#21057 by @cs1707)
+- Utils
+  - fix isScroll (#21065 by @cs1707)
+  - fix(utils.dom by @fw6)
+- TypeScript
+  - add CascaderPanel export type (#21070 by @qige2016)
+  - add spinner.d.ts (#21090 by @qige2016)
+
 ### 2.15.2
 
 *2021-05-28*

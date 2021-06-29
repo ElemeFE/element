@@ -1,5 +1,38 @@
 ## 更新日志
 
+### 2.15.3
+
+*2021-06-29*
+#### 新特性
+
+- Skeleton
+  - 新增 Skeleton 组件 (#21038 by @cs1707)
+- Empty
+  - 新增 Empty 组件 (#21080 by @cs1707)
+
+#### Bug 修复
+
+- Local
+  - 修复 hr 语言 week 翻译 (#21040 by @cs1707)
+- Table
+  - 修复 lazy load data (#21041 by @cs1707)
+- Docs
+  - 修改 form 组件 hide-required-asterisk 描述 (#21045 by @cs1707)
+- Drawer:
+  - 修复 destroy (#20715 by @zj9495)
+- Row
+  - 修复 align top (#20963 by @cs1707)
+- Select
+  - 修复 value 为 Boolean 类型的bug (#21052 by @cs1707)
+- Calendar
+  - 修复 first-day-of-week (#21057 by @cs1707)
+- Utils
+  - 修复 fix isScroll (#21065 by @cs1707)
+  - 修复 (utils.dom by @fw6)
+- TypeScript
+  - 增加 CascaderPanel 类型导出 (#21070 by @qige2016)
+  - 增加 spinner.d.ts (#21090 by @qige2016)
+
 ### 2.15.2
 
 *2021-05-28*
