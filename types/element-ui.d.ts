@@ -85,6 +85,8 @@ import { ElSkeletonItem } from './skeleton-item'
 import { ElCascaderPanel } from './cascader-panel'
 import { ElEmpty } from './empty'
 import { ElSpinner } from './spinner'
+import { ElDescriptions } from './descriptions'
+import { ElDescriptionsItem } from './descriptions-item'
 
 export interface InstallationOptions {
   locale: any,
@@ -364,3 +366,9 @@ export class Empty extends ElEmpty {}
 
 /** Spinner Component */
 export class Spinner extends ElSpinner {}
+
+/** Description Component */
+export class Descripitions extends ElDescriptions {}
+
+/** Description Item Component */
+export class DescripitionsItem extends ElDescriptionsItem {}

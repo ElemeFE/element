@@ -85,6 +85,8 @@ import Popconfirm from '../packages/popconfirm/index.js';
 import Skeleton from '../packages/skeleton/index.js';
 import SkeletonItem from '../packages/skeleton-item/index.js';
 import Empty from '../packages/empty/index.js';
+import Descriptions from '../packages/descriptions/index.js';
+import DescriptionsItem from '../packages/descriptions-item/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -169,6 +171,8 @@ const components = [
   Skeleton,
   SkeletonItem,
   Empty,
+  Descriptions,
+  DescriptionsItem,
   CollapseTransition
 ];
 
@@ -293,5 +297,7 @@ export default {
   Popconfirm,
   Skeleton,
   SkeletonItem,
-  Empty
+  Empty,
+  Descriptions,
+  DescriptionsItem
 };

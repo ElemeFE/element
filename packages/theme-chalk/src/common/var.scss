@@ -971,6 +971,13 @@ $--empty-image-width: 160px !default;
 $--empty-description-margin-top: 20px !default;
 $--empty-bottom-margin-top: 20px !default;
 
+/* Descriptions
+-------------------------- */
+$--descriptions-header-margin-bottom: 20px !default;
+$--descriptions-title-font-size: 16px !default;
+$--descriptions-table-border: 1px solid $--border-color-lighter !default;
+$--descriptions-item-bordered-label-background: #fafafa !default;
+
 /* Skeleton 
 --------------------------*/
 $--skeleton-color: #f2f2f2 !default;
