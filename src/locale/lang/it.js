@@ -106,10 +106,10 @@ export default {
       hasCheckedFormat: '{checked}/{total} selezionati'
     },
     image: {
-      error: 'ERRORE' 
+      error: 'ERRORE'
     },
     pageHeader: {
-      title: 'Indietro' 
+      title: 'Indietro'
     },
     popconfirm: {
       confirmButtonText: 'Sì',

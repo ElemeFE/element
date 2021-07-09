@@ -1,4 +1,4 @@
-import DescriptionsItem from '../descriptions/src/description-item';
+import DescriptionsItem from '../descriptions/src/descriptions-item';
 
 /* istanbul ignore next */
 DescriptionsItem.install = function install(Vue) {
