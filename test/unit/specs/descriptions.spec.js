@@ -1,7 +1,3 @@
-// import Descriptions from 'packages/descriptions';
-// import DescriptionsItem from '../src/description-item';
-
-// import { createTest, destroyVM, createVue, waitImmediate, wait} from '../util';
 import { destroyVM, createVue, waitImmediate } from '../util';
 
 describe('Descriptions', () => {
