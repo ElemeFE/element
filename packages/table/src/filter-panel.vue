@@ -1,8 +1,22 @@
 <template>
   <transition name="el-zoom-in-top">
+    <div class="el-table-filter" 
+      v-if="isInputField" 
+      v-clickoutside="handleOutsideClick"
+      v-show="showPopper">
+      <div class="el-table-filter__content">
+          <el-input 
+            :placeholder="inputFieldOptions.placeholder" 
+            :clearable="!!inputFieldOptions.clearable"
+            @clear="handleReset"
+            v-model="filterValue" 
+            ref="input">
+          </el-input>
+      </div>
+    </div>
     <div
       class="el-table-filter"
-      v-if="multiple"
+      v-else-if="isCheckbox && multiple"
       v-clickoutside="handleOutsideClick"
       v-show="showPopper">
       <div class="el-table-filter__content">
@@ -51,6 +65,9 @@
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
   import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElInput from 'element-ui/packages/input';
+
+  import debounce from 'throttle-debounce/debounce';
 
   export default {
     name: 'ElTableFilterPanel',
@@ -64,7 +81,8 @@
     components: {
       ElCheckbox,
       ElCheckboxGroup,
-      ElScrollbar
+      ElScrollbar,
+      ElInput
     },
 
     props: {
@@ -85,15 +103,19 @@
         }, 16);
       },
 
-      handleConfirm() {
+      handleConfirm(closePanel = true) {
         this.confirmFilter(this.filteredValue);
-        this.handleOutsideClick();
+        if (closePanel) {
+          this.handleOutsideClick();
+        }
       },
 
-      handleReset() {
+      handleReset(closePanel = true) {
         this.filteredValue = [];
         this.confirmFilter(this.filteredValue);
-        this.handleOutsideClick();
+        if (closePanel) {
+          this.handleOutsideClick();
+        }
       },
 
       handleSelect(filterValue) {
@@ -114,6 +136,19 @@
           values: filteredValue
         });
         this.table.store.updateAllSelected();
+      },
+
+      handleInputEvent() {
+        const event = 'input';
+        const delay = this.inputFieldOptions.delay || 500;
+        const handleFunc = debounce(delay, (val) => this.handleConfirm(val));
+
+        this.$refs.input.$on(event, () => {
+          if (this.filterValue === '') {
+            return this.handleReset(false);
+          }
+          handleFunc(false);
+        });
       }
     },
 
@@ -164,6 +199,18 @@
           return this.column.filterMultiple;
         }
         return true;
+      },
+
+      isCheckbox() {
+        return this.column && this.column.filterType === 'checkbox';
+      },
+
+      isInputField() {
+        return this.column && this.column.filterType === 'input';
+      },
+
+      inputFieldOptions() {
+        return this.column.filterTypeOptions;
       }
     },
 
@@ -182,6 +229,14 @@
           Dropdown.close(this);
         }
       });
+
+      /**
+       * if filter is input field then
+       * change filter on passed event
+       */
+      if (this.isInputField) {
+        this.handleInputEvent();
+      }
     },
     watch: {
       showPopper(val) {
