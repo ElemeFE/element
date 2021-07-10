@@ -36,6 +36,8 @@
         :vertical="vertical"
         v-model="firstValue"
         :tooltip-class="tooltipClass"
+        :enableTransition="enableTransition"
+        :transition="transition"
         ref="button1">
       </slider-button>
       <slider-button
@@ -151,7 +153,21 @@
         type: String
       },
       tooltipClass: String,
-      marks: Object
+      marks: Object,
+      enableTransition: {
+        type: Boolean,
+        default: false
+      },
+      transition: {
+        type: Object,
+        default: () => {
+          return {
+            duration: 1,
+            mode: 'linear',
+            delay: 0
+          };
+        }
+      }
     },
 
     components: {
@@ -375,6 +391,19 @@
       },
 
       barStyle() {
+        if (this.enableTransition) {
+          return this.vertical
+            ? {
+              height: this.barSize,
+              bottom: this.barStart,
+              transition: `height ${this.transition.duration}s ${this.transition.mode} ${this.transition.delay}s`
+            } : {
+              width: this.barSize,
+              left: this.barStart,
+              transition: `width ${this.transition.duration}s ${this.transition.mode} ${this.transition.delay}s`,
+              color: 'red'
+            };
+        }
         return this.vertical
           ? {
             height: this.barSize,
