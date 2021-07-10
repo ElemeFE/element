@@ -28,9 +28,9 @@
       <span
         @click.stop="handleExpandIconClick"
         :class="[
-          { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
+          { 'is-leaf': node.isLeaf },
           'el-tree-node__expand-icon',
-          tree.iconClass ? tree.iconClass : 'el-icon-caret-right'
+          iconClass
         ]"
       >
       </span>
@@ -135,6 +135,19 @@
         oldChecked: null,
         oldIndeterminate: null
       };
+    },
+
+    computed: {
+      iconClass() {
+        if(this.node.expanded && !this.node.isLeaf) {
+          if(this.tree.expandIconClass) {
+            return this.tree.expandIconClass
+          } else {
+            return 'el-icon-caret-right expanded'
+          }
+        }
+        return this.tree.iconClass ? this.tree.iconClass : 'el-icon-caret-right'
+      }
     },
 
     watch: {
