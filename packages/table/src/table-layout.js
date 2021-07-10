@@ -93,6 +93,7 @@ class TableLayout {
     if (!this.table.$ready) return Vue.nextTick(() => this.updateElsHeight());
     const { headerWrapper, appendWrapper, footerWrapper } = this.table.$refs;
     this.appendHeight = appendWrapper ? appendWrapper.offsetHeight : 0;
+    const noData = !(this.store.states.data && this.store.states.data.length);
 
     if (this.showHeader && !headerWrapper) return;
 
@@ -107,11 +108,10 @@ class TableLayout {
     const tableHeight = this.tableHeight = this.table.$el.clientHeight;
     const footerHeight = this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0;
     if (this.height !== null) {
-      this.bodyHeight = tableHeight - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
+      this.bodyHeight = noData ? 0 : tableHeight - headerHeight - footerHeight + (this.elmDisplayNone(footerWrapper) ? 0 : 1);
     }
     this.fixedBodyHeight = this.scrollX ? (this.bodyHeight - this.gutterWidth) : this.bodyHeight;
 
-    const noData = !(this.store.states.data && this.store.states.data.length);
     this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
 
     this.updateScrollY();
@@ -122,12 +122,16 @@ class TableLayout {
     if (!elm) return true;
     let headerChild = elm;
     while (headerChild.tagName !== 'DIV') {
-      if (getComputedStyle(headerChild).display === 'none') {
+      if (this.elmDisplayNone(headerChild)) {
         return true;
       }
       headerChild = headerChild.parentElement;
     }
     return false;
+  }
+
+  elmDisplayNone(elm) {
+    return !elm || elm && getComputedStyle(elm).display === 'none';
   }
 
   updateColumnsWidth() {
