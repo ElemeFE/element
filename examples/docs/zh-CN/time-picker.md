@@ -161,6 +161,7 @@
 | end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | is-range | 是否为时间范围选择，仅对`<el-time-picker>`有效 | boolean | — | false |
 | arrow-control | 是否使用箭头进行时间选择，仅对`<el-time-picker>`有效 | boolean | — | false |
+| format | 显示在输入框的时间格式 | string | 小时：`HH`，分：`mm`，秒：`ss`，AM/PM `A`，am/pm `a` | HH:mm:ss |
 | align | 对齐方式 | string | left / center / right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
@@ -184,7 +185,7 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | selectableRange | 可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | — | — |
-| format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss`，AM/PM `A` | 'HH:mm:ss' |
+| format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss`，AM/PM `A`，am/pm `a` | HH:mm:ss |
 
 ### Events
 | 事件名 | 说明 | 参数 |
