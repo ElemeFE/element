@@ -121,6 +121,7 @@
 
   .el-tag__close {
     margin-top: -2px;
+    flex: 0 0 16px;
   }
 
   .el-tag {
@@ -128,6 +129,10 @@
     border-color: transparent;
     margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 
     &__close.el-icon-close {
       background-color: $--color-text-placeholder;
@@ -144,5 +149,39 @@
         transform: translate(0, .5px);
       }
     }
+  }
+
+  .el-tag--mini {
+    .el-tag__close.el-icon-close{
+      right: -5px;
+    }
+  }
+
+  .el-select__tags{
+    > span{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .el-select__tags-collapse{
+      flex-wrap: nowrap;
+    }
+  }
+
+  .el-select__tags-collapse{
+    .el-tag:nth-child(2){
+      flex: 0 0 36px;
+      display: inline-block;
+      overflow: visible;
+    }
+  }
+
+  .el-select__tags-text{
+    flex-shrink: 1;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

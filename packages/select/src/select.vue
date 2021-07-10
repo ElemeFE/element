@@ -9,7 +9,7 @@
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
-      <span v-if="collapseTags && selected.length">
+      <span class="el-select__tags-collapse" v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
