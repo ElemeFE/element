@@ -2706,6 +2706,23 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('picker-options:defaultView', done => {
+    vm = createTest(DatePicker, {
+      pickerOptions: {
+        defaultView: 'year'
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      expect(vm.picker.currentView).to.be.equal('year');
+      done();
+    }, DELAY);
+  });
+
   describe('picker-options:selectableRange', () => {
     let vm;
     afterEach(() => destroyVM(vm));
