@@ -62,7 +62,12 @@
             // do not use cached leaf value here, invoke this.isLeaf to get new value.
             const { isLeaf } = this;
 
-            if (!isLeaf) this.handleExpand();
+            if (!isLeaf) {
+              this.handleExpand();
+            } else {
+              panel.handleExpand(node);
+            }
+
             if (multiple) {
               // if leaf sync checked state, else clear checked state
               const checked = isLeaf ? node.checked : false;
@@ -75,9 +80,9 @@
       },
 
       handleCheckChange() {
-        const { panel, value, node } = this;
+        const { panel, value } = this;
         panel.handleCheckChange(value);
-        panel.handleExpand(node);
+        this.handleExpand();
       },
 
       handleMultiCheckChange(checked) {
