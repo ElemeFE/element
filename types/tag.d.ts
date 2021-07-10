@@ -11,6 +11,9 @@ export declare class ElTag extends ElementUIComponent {
   /** Whether Tab can be removed */
   closable: boolean
 
+  /** Tag content text */
+  text: string
+
   /** Whether the removal animation is disabled */
   disableTransitions: boolean
 

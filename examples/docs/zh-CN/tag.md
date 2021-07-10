@@ -188,6 +188,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | 类型 | string | success/info/warning/danger | — |
+| text | Tag 的文字内容，提供 slot 时被覆盖 | string | - | - |
 | closable | 是否可关闭 | boolean | — | false |
 | disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
