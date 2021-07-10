@@ -31,6 +31,31 @@ describe('TimeSelect', () => {
     });
   });
 
+  it('supports custom format', done => {
+    vm = createTest(TimeSelect, {
+      format: 'h:mm A',
+      pickerOptions: {
+        start: '9:00 AM',
+        step: '01:00',
+        end: '5:00 PM'
+      },
+      placeholder: 'test'
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.focus();
+    input.blur();
+
+    Vue.nextTick(_ => {
+      expect(vm.picker.start).to.equal('9:00 AM');
+      expect(vm.picker.end).to.equal('5:00 PM');
+      expect(vm.picker.step).to.equal('01:00');
+      expect(vm.$el.querySelector('input').getAttribute('placeholder')).to.equal('test');
+      expect(Array.from(vm.picker.$el.querySelectorAll('div.time-select-item')).slice(0, 5).map(e => e.innerText).join(', ')).to.equal('9:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 1:00 PM');
+      done();
+    });
+  });
+
   it('select time', done => {
     vm = createVue({
       template: `

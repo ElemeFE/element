@@ -19,19 +19,30 @@
 </template>
 
 <script type="text/babel">
+  import { formatDate, parseDate } from 'element-ui/src/utils/date-util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
-  const parseTime = function(time) {
-    const values = (time || '').split(':');
-    if (values.length >= 2) {
-      const hours = parseInt(values[0], 10);
-      const minutes = parseInt(values[1], 10);
+  const parseTime = function(time, format) {
+    if (format && format !== 'HH:mm') {
+      const date = parseDate(time, format);
+      if (date) {
+        return {
+          hours: date.getHours(),
+          minutes: date.getMinutes()
+        };
+      }
+    } else {
+      const values = (time || '').split(':');
+      if (values.length >= 2) {
+        const hours = parseInt(values[0], 10);
+        const minutes = parseInt(values[1], 10);
 
-      return {
-        hours,
-        minutes
-      };
+        return {
+          hours,
+          minutes
+        };
+      }
     }
     /* istanbul ignore next */
     return null;
@@ -51,11 +62,16 @@
     return minutes1 > minutes2 ? 1 : -1;
   };
 
-  const formatTime = function(time) {
-    return (time.hours < 10 ? '0' + time.hours : time.hours) + ':' + (time.minutes < 10 ? '0' + time.minutes : time.minutes);
+  const formatTime = function(time, format) {
+    if (format) {
+      const date = new Date(1970, 0, 1, time.hours, time.minutes);
+      return formatDate(date, format);
+    } else {
+      return (time.hours < 10 ? '0' + time.hours : time.hours) + ':' + (time.minutes < 10 ? '0' + time.minutes : time.minutes);
+    }
   };
 
-  const nextTime = function(time, step) {
+  const nextTime = function(time, step, format) {
     const timeValue = parseTime(time);
     const stepValue = parseTime(step);
 
@@ -70,7 +86,17 @@
     next.hours += Math.floor(next.minutes / 60);
     next.minutes = next.minutes % 60;
 
-    return formatTime(next);
+    return formatTime(next, format);
+  };
+
+  const convertTime = function(time, sourceFormat, destinationFormat) {
+    if (sourceFormat && sourceFormat !== destinationFormat) {
+      let timeValue = parseTime(time, sourceFormat);
+      if (timeValue) {
+        return formatTime(timeValue, destinationFormat);
+      }
+    }
+    return time;
   };
 
   export default {
@@ -142,6 +168,7 @@
         start: '09:00',
         end: '18:00',
         step: '00:30',
+        format: '',
         value: '',
         defaultValue: '',
         visible: false,
@@ -153,8 +180,9 @@
 
     computed: {
       items() {
-        const start = this.start;
-        const end = this.end;
+        const format = this.format;
+        const start = format ? convertTime(this.start, format, 'HH:mm') : this.start;
+        const end = format ? convertTime(this.end, format, 'HH:mm') : this.end;
         const step = this.step;
 
         const result = [];
@@ -163,7 +191,7 @@
           let current = start;
           while (compareTime(current, end) <= 0) {
             result.push({
-              value: current,
+              value: format ? convertTime(current, 'HH:mm', format) : current,
               disabled: compareTime(current, this.minTime || '-1:-1') <= 0 ||
                 compareTime(current, this.maxTime || '100:100') >= 0
             });
