@@ -1,7 +1,7 @@
-@import "../common/var";
+@import '../common/var';
 
-@include b(year-table) {
-  font-size: 12px;
+@include b(quarter-table) {
+  font-size: 14px;
   margin: -1px;
   border-collapse: collapse;
 
@@ -10,18 +10,18 @@
     padding: 8px 0px;
     cursor: pointer;
     & div {
-      height: 48px;
-      padding: 6px 0;
+      height: 52px;
+      padding: 8px 0;
       box-sizing: border-box;
     }
     &.today {
       .cell {
-        color: $--color-primary;
-        font-weight: bold;
+          color: $--color-primary;
+          font-weight: bold;
       }
       &.start-date .cell,
       &.end-date .cell {
-        color: $--color-white;
+          color: $--color-white;
       }
     }
 
@@ -36,13 +36,13 @@
     }
 
     .cell {
-      width: 60px;
       height: 36px;
       display: block;
       line-height: 36px;
       color: $--datepicker-font-color;
-      margin: 0 auto;
-      border-radius: 18px;
+      padding: 5px auto;
+      margin: 0 10px;
+      border-radius: 23px;
       &:hover {
         color: $--datepicker-hover-font-color;
       }
@@ -66,13 +66,13 @@
     }
 
     &.start-date div {
-      border-top-left-radius: 24px;
-      border-bottom-left-radius: 24px;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
     }
 
     &.end-date div {
-      border-top-right-radius: 24px;
-      border-bottom-right-radius: 24px;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
     }
 
     &.current:not(.disabled) .cell {
