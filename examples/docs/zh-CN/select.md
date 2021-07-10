@@ -548,6 +548,7 @@
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| tag-type | 多选时选中的tag类型 | string | success/info/warning/danger | info |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |
