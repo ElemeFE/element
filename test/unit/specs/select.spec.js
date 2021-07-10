@@ -74,7 +74,7 @@ describe('Select', () => {
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
           remoteMethod: configs.remoteMethod && configs.remoteMethod(this),
-          value: configs.multiple ? [] : ''
+          value: configs.value || (configs.multiple ? [] : '')
         };
       }
     }, true);
@@ -906,5 +906,21 @@ describe('Select', () => {
       select.resetInputHeight();
       expect(select.$nextTick.callCount).to.equal(1);
     });
+  });
+
+  it('default value when focus', done => {
+    vm = getSelectVm({ value: '选项6' });
+    const select = vm.$children[0];
+    select.$el.querySelector('input').focus();
+    setTimeout(() => {
+      vm.options.push({
+        value: '选项6',
+        label: '重庆小面'
+      });
+      setTimeout(() => {
+        expect(vm.$el.querySelector('.el-input__inner').value).to.equal('重庆小面');
+        done();
+      }, 100);
+    }, 100);
   });
 });
