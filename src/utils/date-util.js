@@ -89,8 +89,8 @@ export const getStartDateOfMonth = function(year, month) {
   const result = new Date(year, month, 1);
   const day = result.getDay();
 
-  if (day === 0) {
-    return prevDate(result, 7);
+  if (day === 1) {
+    return prevDate(result, 8);
   } else {
     return prevDate(result, day);
   }
