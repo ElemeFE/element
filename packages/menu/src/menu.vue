@@ -117,6 +117,7 @@
       backgroundColor: String,
       textColor: String,
       activeTextColor: String,
+      activeBackgroundColor: String,
       collapseTransition: {
         type: Boolean,
         default: true

@@ -6,7 +6,7 @@ Menú que provee la navegación para tu sitio.
 
 Top bar NavMenu puede ser usado en distinto escenarios.
 
-:::demo Por defecto el menú es vertical, pero puede hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puede utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `text-color` y `active-text-color` para customizar los colores.
+:::demo Por defecto el menú es vertical, pero puede hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puede utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `text-color` y `active-text-color` para customizar los colores. In addition, when the navigation menu is in vertical mode, the Menu also provides an additional `active-background-color` attribute to set the background color of the current active menu.
 
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -125,7 +125,8 @@ NavMenu vertical con sub-menús.
       @close="handleClose"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffd04b"
+      active-background-color="#646857">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -250,6 +251,7 @@ NavMenu vertical puede ser colapsado.
 | mode              | modo de presentación del menú            | string  | horizontal / vertical | vertical    |
 | collapse          | si el menú está colapsado (solo en modo vertical) | boolean | —                     | false       |
 | background-color  | color de fondo del menú (formato hexadecimal) | string  | —                     | #ffffff     |
+| active-background-color  | background color of currently active menu item. If not set, the background color will be used (valid only when mode is vertical and hex format) | string |   —   | #ffffff |
 | text-color        | color de texto del menú (formato hexadecimal) | string  | —                     | #303133     |
 | active-text-color | color del texto del menu-item activo (formato hexadecimal) | string  | —                     | #409EFF     |
 | default-active    | índice del menu-item activo              | string  | —                     | —           |
