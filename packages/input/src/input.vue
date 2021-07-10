@@ -286,7 +286,10 @@
 
     methods: {
       focus() {
-        this.getInput().focus();
+        // see: https://github.com/ElemeFE/element/issues/18573
+        this.$nextTick(() => {
+          this.getInput().focus();
+        });
       },
       blur() {
         this.getInput().blur();
