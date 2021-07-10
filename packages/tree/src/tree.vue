@@ -17,6 +17,7 @@
       :show-checkbox="showCheckbox"
       :key="getNodeKey(child)"
       :render-content="renderContent"
+      :disable-transitions="disableTransitions"
       @node-expand="handleNodeExpand">
     </el-tree-node>
     <div class="el-tree__empty-block" v-if="isEmpty">
@@ -128,7 +129,11 @@
         type: Number,
         default: 18
       },
-      iconClass: String
+      iconClass: String,
+      disableTransitions: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {

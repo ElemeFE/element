@@ -49,7 +49,7 @@
       </span>
       <node-content :node="node"></node-content>
     </div>
-    <el-collapse-transition>
+    <el-collapse-transition v-if="!disableTransitions">
       <div
         class="el-tree-node__children"
         v-if="!renderAfterExpand || childNodeRendered"
@@ -68,6 +68,26 @@
         </el-tree-node>
       </div>
     </el-collapse-transition>
+    <div v-else>
+      <div
+        class="el-tree-node__children"
+        v-if="!renderAfterExpand || childNodeRendered"
+        v-show="expanded"
+        role="group"
+        :aria-expanded="expanded"
+      >
+        <el-tree-node
+          :render-content="renderContent"
+          v-for="child in node.childNodes"
+          :render-after-expand="renderAfterExpand"
+          :show-checkbox="showCheckbox"
+          :key="getNodeKey(child)"
+          :node="child"
+          :disable-transitions="disableTransitions"
+          @node-expand="handleChildNodeExpand">
+        </el-tree-node>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -97,6 +117,10 @@
         default: true
       },
       showCheckbox: {
+        type: Boolean,
+        default: false
+      },
+      disableTransitions: {
         type: Boolean,
         default: false
       }
