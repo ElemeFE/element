@@ -257,6 +257,7 @@
 | menu-trigger  | 子菜单打开的触发方式(只在 mode 为 horizontal 时有效) | string   | hover / click | hover |
 | router  | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 | boolean   | — | false   |
 | collapse-transition  | 是否开启折叠动画 | boolean   | — | true   |
+| tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 
 ### Menu Methods
 | 方法名称      | 说明    | 参数      |
