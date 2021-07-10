@@ -26,15 +26,17 @@
       </el-input>
       <el-checkbox-group
         v-model="checked"
+        ref="listWrapper"
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
-        class="el-transfer-panel__list">
+        class="el-transfer-panel__list"
+        @scroll.native="doScroll">
         <el-checkbox
           class="el-transfer-panel__item"
           :label="item[keyProp]"
           :disabled="item[disabledProp]"
           :key="item[keyProp]"
-          v-for="item in filteredData">
+          v-for="item in renderData">
           <option-content :option="item"></option-content>
         </el-checkbox>
       </el-checkbox-group>
@@ -107,7 +109,8 @@
       format: Object,
       filterMethod: Function,
       defaultChecked: Array,
-      props: Object
+      props: Object,
+      lazy: Number
     },
 
     data() {
@@ -116,11 +119,20 @@
         allChecked: false,
         query: '',
         inputHover: false,
-        checkChangeByUser: true
+        checkChangeByUser: true,
+        renderData: [],
+        lazyPage: 1,
+        lazyLoaded: false
       };
     },
 
     watch: {
+      filteredData: {
+        immediate: true,
+        handler(val) {
+          this.loadRenderData(1);
+        }
+      },
       checked(val, oldVal) {
         this.updateAllChecked();
         if (this.checkChangeByUser) {
@@ -244,6 +256,45 @@
       clearQuery() {
         if (this.inputIcon === 'circle-close') {
           this.query = '';
+        }
+      },
+
+      loadRenderData(reset) {
+        const lazy = Math.max(this.lazy, 0);
+        if (lazy) {
+          const loadNext = () => {
+            let to = lazy * this.lazyPage;
+            const from = lazy * (this.lazyPage - 1);
+            const len = this.filteredData.length;
+            if (to >= len) {
+              this.lazyLoaded = true;
+              to = len;
+            }
+            this.renderData.push(...this.filteredData.slice(from, to));
+            this.lazyPage++;
+          };
+          if (reset) {
+            this.lazyPage = 1;
+            this.renderData = [];
+            this.lazyLoaded = false;
+            while (!this.lazyLoaded && this.renderData.length < 20) {
+              loadNext();
+            }
+          } else {
+            loadNext();
+          }
+        } else {
+          this.renderData = this.filteredData;
+        }
+      },
+
+      doScroll(e) {
+        const target = e.target || e.srcElement;
+        if (this.lazy && !this.lazyLoaded) {
+          const isApproachBottom = target.scrollTop + target.offsetHeight + 50 >= target.scrollHeight;
+          if (isApproachBottom) {
+            this.loadRenderData();
+          }
         }
       }
     }
