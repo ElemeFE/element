@@ -406,8 +406,9 @@
           this.minDate = null;
           this.maxDate = null;
         } else if (Array.isArray(newVal)) {
-          this.minDate = isDate(newVal[0]) ? new Date(newVal[0]) : null;
-          this.maxDate = isDate(newVal[1]) ? new Date(newVal[1]) : null;
+          const defaultTime = this.defaultTime || [];
+          this.minDate = isDate(newVal[0]) ? modifyWithTimeString(new Date(newVal[0]), defaultTime[0]) : null;
+          this.maxDate = isDate(newVal[1]) ? modifyWithTimeString(new Date(newVal[1]), defaultTime[1]) : null;
           if (this.minDate) {
             this.leftDate = this.minDate;
             if (this.unlinkPanels && this.maxDate) {
@@ -658,7 +659,7 @@
         return Array.isArray(value) &&
           value && value[0] && value[1] &&
           isDate(value[0]) && isDate(value[1]) &&
-          value[0].getTime() <= value[1].getTime() && (
+          new Date(value[0]).getTime() <= new Date(value[1]).getTime() && (
           typeof this.disabledDate === 'function'
             ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
             : true
