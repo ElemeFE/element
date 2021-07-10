@@ -149,6 +149,13 @@ export default {
   },
 
   methods: {
+    handleExceed(files, fileList) {
+      if (this.onExceed === noop) {
+        this.$emit('exceed', files, fileList);
+      } else {
+        this.onExceed(files, fileList);
+      }
+    },
     handleStart(rawFile) {
       rawFile.uid = Date.now() + this.tempIndex++;
       let file = {
@@ -170,11 +177,20 @@ export default {
       }
 
       this.uploadFiles.push(file);
-      this.onChange(file, this.uploadFiles);
+      if (this.onChange === noop) {
+        this.$emit('change', file, this.uploadFiles);
+      } else {
+        this.onChange(file, this.uploadFiles);
+      }
     },
     handleProgress(ev, rawFile) {
       const file = this.getFile(rawFile);
-      this.onProgress(ev, file, this.uploadFiles);
+
+      if (this.onProgress === noop) {
+        this.$emit('progress', ev, file, this.uploadFiles);
+      } else {
+        this.onProgress(ev, file, this.uploadFiles);
+      }
       file.status = 'uploading';
       file.percentage = ev.percent || 0;
     },
@@ -185,8 +201,16 @@ export default {
         file.status = 'success';
         file.response = res;
 
-        this.onSuccess(res, file, this.uploadFiles);
-        this.onChange(file, this.uploadFiles);
+        if (this.onSuccess === noop) {
+          this.$emit('success', res, file, this.uploadFiles);
+        } else {
+          this.onSuccess(res, file, this.uploadFiles);
+        }
+        if (this.onChange === noop) {
+          this.$emit('change', file, this.uploadFiles);
+        } else {
+          this.onChange(file, this.uploadFiles);
+        }
       }
     },
     handleError(err, rawFile) {
@@ -197,8 +221,16 @@ export default {
 
       fileList.splice(fileList.indexOf(file), 1);
 
-      this.onError(err, file, this.uploadFiles);
-      this.onChange(file, this.uploadFiles);
+      if (this.onError === noop) {
+        this.$emit('error', err, file, this.uploadFiles);
+      } else {
+        this.onError(err, file, this.uploadFiles);
+      }
+      if (this.onChange === noop) {
+        this.$emit('change', file, this.uploadFiles);
+      } else {
+        this.onChange(file, this.uploadFiles);
+      }
     },
     handleRemove(file, raw) {
       if (raw) {
@@ -208,7 +240,11 @@ export default {
         this.abort(file);
         let fileList = this.uploadFiles;
         fileList.splice(fileList.indexOf(file), 1);
-        this.onRemove(file, fileList);
+        if (this.onRemove === noop) {
+          this.$emit('remove', file, fileList);
+        } else {
+          this.onRemove(file, fileList);
+        }
       };
 
       if (!this.beforeRemove) {
@@ -222,6 +258,13 @@ export default {
         } else if (before !== false) {
           doRemove();
         }
+      }
+    },
+    handlePreview(...args) {
+      if (this.onPreview === noop) {
+        this.$emit('preview', ...args);
+      } else {
+        this.onPreview(...args);
       }
     },
     getFile(rawFile) {
@@ -275,7 +318,7 @@ export default {
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
-          handlePreview={this.onPreview}>
+          handlePreview={this.handlePreview}>
           {
             (props) => {
               if (this.$scopedSlots.file) {
@@ -306,12 +349,12 @@ export default {
         listType: this.listType,
         disabled: this.uploadDisabled,
         limit: this.limit,
-        'on-exceed': this.onExceed,
+        'on-exceed': this.handleExceed,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
-        'on-preview': this.onPreview,
+        'on-preview': this.handlePreview,
         'on-remove': this.handleRemove,
         'http-request': this.httpRequest
       },
