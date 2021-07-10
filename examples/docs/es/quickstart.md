@@ -254,16 +254,14 @@ Vue.prototype.$message = Message;
 
 ### Configuración global
 
-Cuando importa Element, puede definir un objeto global de configuración. Por ahora este elemento solo contiene dos propiedades: `size`, `zIndex`. `size` define el tamaño por defecto de todos los componentes.
-
-La propiedad `zIndex` indica el z-index inicial (por defecto: 2000) para los modal:
+When importing Element, you can define a global config object. For now this object has three properties: `size` , `zIndex` and `validateScrollOptions`. The property `size` sets the default size for all components and the property `zIndex` sets the initial z-index (default: 2000) for modal boxes, `validateScrollOptions` Sets the scroll behavior when the validation form scrolls to the first error element (this configuration is only applied using the `validateAndScroll` method of the `Form` component. Default: { scrollMode: 'if-needed', behavior: 'smooth', block: 'start' }). For detailed configuration, see [Configuration Parameters](https://github.com/stipsan/scroll-into-view-if-needed#options). The specific operation is as follows:
 
 Importando Element completamente：
 
 ```js
 import Vue from 'vue';
 import Element from 'element-ui';
-Vue.use(Element, { size: 'small', zIndex: 3000 });
+Vue.use(Element, { size: 'small', zIndex: 3000, validateScrollOptions: { block: 'start' } });
 ```
 
 Importando Element parcialmente：
@@ -272,11 +270,11 @@ Importando Element parcialmente：
 import Vue from 'vue';
 import { Button } from 'element-ui';
 
-Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000, validateScrollOptions: { block: 'start' } };
 Vue.use(Button);
 ```
 
-Con la anterior configuración, el tamaño por defecto de todos los componentes que tienen el atributo `size` será `small`. El valor inicial de z-index para los modals se ha establecido a 3000.
+With the above config, the default size of all components that have size attribute will be 'small', the initial z-index of modal boxes is 3000, and the first error element of the form component scrolls to the top of the viewport.
 
 ### Empiece ya!
 

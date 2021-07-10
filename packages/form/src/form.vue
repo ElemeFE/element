@@ -7,7 +7,10 @@
   </form>
 </template>
 <script>
+  import Vue from 'vue';
   import objectAssign from 'element-ui/src/utils/merge';
+  import scrollIntoView from 'scroll-into-view-if-needed';
+  import {isObject, isFunction} from 'element-ui/src/utils/types';
 
   export default {
     name: 'ElForm',
@@ -114,9 +117,13 @@
 
         let promise;
         // if no callback, return promise
-        if (typeof callback !== 'function' && window.Promise) {
+        if (typeof callback !== 'function' && window.Promise || typeof callback === 'function' && callback._returnPromise) {
+          const oldCb = callback;
           promise = new window.Promise((resolve, reject) => {
-            callback = function(valid) {
+            callback = function(valid, invalidFields, invalidFormItemComponents) {
+              if (oldCb) {
+                oldCb(valid, invalidFields, invalidFormItemComponents);
+              }
               valid ? resolve(valid) : reject(valid);
             };
           });
@@ -129,14 +136,16 @@
           callback(true);
         }
         let invalidFields = {};
+        let invalidFormItemComponents = [];
         this.fields.forEach(field => {
-          field.validate('', (message, field) => {
+          field.validate('', (message, fieldRule) => {
             if (message) {
               valid = false;
+              invalidFormItemComponents.push(field);
             }
-            invalidFields = objectAssign({}, invalidFields, field);
+            invalidFields = objectAssign({}, invalidFields, fieldRule);
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid, invalidFields);
+              callback(valid, invalidFields, invalidFormItemComponents);
             }
           });
         });
@@ -144,6 +153,45 @@
         if (promise) {
           return promise;
         }
+      },
+      validateAndScroll() {
+        let options = Vue.prototype.$ELEMENT.validateScrollOptions;
+        let callback;
+        // function overloads
+        switch (arguments.length) {
+          case 0:
+            break;
+          case 1:
+            const arg = arguments[0];
+            if (isObject(arg)) {
+              options = arg;
+            } else if (isFunction(arg)) {
+              callback = arg;
+            }
+            break;
+          case 2:
+            options = arguments[0];
+            callback = arguments[1];
+            break;
+          default:
+            break;
+        }
+
+        let newCb = (valid, invalidFields, invalidFormItemComponents) => {
+          if (!valid) {
+            if (invalidFormItemComponents && invalidFormItemComponents[0] && invalidFormItemComponents[0].$el) {
+              const firstErrorNode = invalidFormItemComponents[0].$el;
+              scrollIntoView(firstErrorNode, options);
+            }
+          }
+          callback && callback(valid, invalidFields);
+        };
+
+        if (!callback) {
+          newCb._returnPromise = true;
+        }
+
+        return this.validate(newCb);
       },
       validateField(props, cb) {
         props = [].concat(props);
