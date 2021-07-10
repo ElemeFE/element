@@ -237,9 +237,9 @@
 
         this.validateDisabled = true;
         if (Array.isArray(value)) {
-          prop.o[prop.k] = [].concat(this.initialValue);
+          this.$set(prop.o, prop.k, [].concat(this.initialValue));
         } else {
-          prop.o[prop.k] = this.initialValue;
+          this.$set(prop.o, prop.k, this.initialValue);
         }
 
         // reset validateDisabled after onFieldChange triggered
