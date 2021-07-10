@@ -234,6 +234,7 @@ export default {
     },
     handleMouseDown(e) {
       if (this.loading || e.button !== 0) return;
+      off(document, 'mousemove', this._dragHandler);
 
       const { offsetX, offsetY } = this.transform;
       const startX = e.pageX;
