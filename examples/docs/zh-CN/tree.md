@@ -160,8 +160,13 @@
         if (node.level === 0) {
           return resolve([{ name: 'region' }]);
         }
-        if (node.level > 1) return resolve([]);
-
+        if (node.level > 3) { return resolve([]) }
+        if (node.level === 1) { 
+          return setTimeout(() => {
+            resolve([{name:'bbbb'},{name:'ccc'}])
+          }, 500); 
+        }
+        
         setTimeout(() => {
           const data = [{
             name: 'leaf',
@@ -172,6 +177,21 @@
 
           resolve(data);
         }, 500);
+        /* if (node.level > 3) { return resolve([]) }
+        if (node.level > 1) {
+          setTimeout(() => {
+            const data = [{
+              name: 'leaf',
+              leaf: true
+            }, {
+              name: 'zone'
+            }];
+
+            resolve(data);
+          }, 500);
+          return;
+        }
+        resolve([]); */
       }
     }
   };
