@@ -59,7 +59,7 @@
         v-model.trim="inputValue"
         type="text"
         class="el-cascader__search-input"
-        :placeholder="presentTags.length ? '' : placeholder"
+        :placeholder="placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
         @keydown.delete="handleDelete">
@@ -479,7 +479,7 @@ export default {
       this.$nextTick(() => {
         if (this.config.multiple) {
           this.computePresentTags();
-          this.presentText = this.presentTags.length ? ' ' : null;
+          this.presentText = this.presentTags.length ? '' : null;
         } else {
           this.computePresentText();
         }
