@@ -61,4 +61,7 @@ export declare class ElRate extends ElementUIComponent {
 
   /** Text template when the component is read-only */
   scoreTemplate: string
+
+  /** Whether Keydown Event is disabled  */
+  keydownDisabled: boolean
 }
