@@ -22,5 +22,11 @@
     "guide": "Guide | Element",
     "component": "Composants | Element",
     "resource": "Ressources | Element"
+  },
+  "jp":  {
+    "home": "Element - WebのためのデスクトップUIツールキット",
+    "guide": "ガイド | Element",
+    "component": "コンポーネント | Element",
+    "resource": "リソース | Element"
   }
 }

@@ -122,5 +122,36 @@
     "nav": {
       "dropdown": "Version: "
     }
+  },
+  {
+    "lang": "jp",
+    "demo-block": {
+      "hide-text": "隠す",
+      "show-text": "展開する",
+      "button-text": "試してみる!",
+      "tooltip-text": "codepen.ioでこのデモを実行します。"
+    },
+    "footer": {
+      "links": "リンク",
+      "repo": "GitHub",
+      "community": "コミュニティ",
+      "changelog": "Changelog",
+      "theme": "Online Theme Roller",
+      "faq": "FAQ",
+      "gitter": "Gitter",
+      "starter": "スターターキット",
+      "feedback": "フィードバック",
+      "contribution": "貢献",
+      "eleme": "Eleme"
+    },
+    "header": {
+      "guide": "ガイド",
+      "components": "コンポーネント",
+      "theme": "テーマ",
+      "resource": "リソース"
+    },
+    "nav": {
+      "dropdown": "Version: "
+    }
   }
 ]

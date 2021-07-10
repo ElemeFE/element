@@ -21,6 +21,11 @@ const LOAD_MAP = {
     return r => require.ensure([], () =>
       r(require(`./pages/fr-FR/${name}.vue`)),
     'fr-FR');
+  },
+  'jp': name => {
+    return r => require.ensure([], () =>
+      r(require(`./pages/jp/${name}.vue`)),
+    'jp');
   }
 };
 
@@ -48,6 +53,11 @@ const LOAD_DOCS_MAP = {
     return r => require.ensure([], () =>
       r(require(`./docs/fr-FR${path}.md`)),
     'fr-FR');
+  },
+  'jp': path => {
+    return r => require.ensure([], () =>
+      r(require(`./docs/jp${path}.md`)),
+    'jp');
   }
 };
 
@@ -176,6 +186,8 @@ if (userLanguage.indexOf('zh-') !== -1) {
   defaultPath = '/es';
 } else if (userLanguage.indexOf('fr') !== -1) {
   defaultPath = '/fr-FR';
+} else if (userLanguage.indexOf('jp') !== -1) {
+  defaultPath = '/jp';
 }
 
 route = route.concat([{

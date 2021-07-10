@@ -142,6 +142,11 @@
             search: 'Rechercher',
             empty: 'Aucun résultat',
             index: 'fr'
+          },
+          'jp': {
+            search: '検索',
+            empty: '検索結果はありません',
+            index: 'jp'
           }
         }
       };
