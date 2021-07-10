@@ -4,6 +4,7 @@
 @include b(rate) {
   height: $--rate-height;
   line-height: 1;
+  display: inline-block;
 
   &:focus, &:active {
     outline-width: 0;
