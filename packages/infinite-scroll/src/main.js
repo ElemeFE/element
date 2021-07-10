@@ -9,18 +9,18 @@ import {
   getScrollContainer
 } from 'element-ui/src/utils/dom';
 
-const getStyleComputedProperty = (element, property) => {
-  if (element === window) {
-    element = document.documentElement;
-  }
+// const getStyleComputedProperty = (element, property) => {
+//   if (element === window) {
+//     element = document.documentElement;
+//   }
 
-  if (element.nodeType !== 1) {
-    return [];
-  }
-  // NOTE: 1 DOM access here
-  const css = window.getComputedStyle(element, null);
-  return property ? css[property] : css;
-};
+//   if (element.nodeType !== 1) {
+//     return [];
+//   }
+//   // NOTE: 1 DOM access here
+//   const css = window.getComputedStyle(element, null);
+//   return property ? css[property] : css;
+// };
 
 const entries = (obj) => {
   return Object.keys(obj || {})
@@ -92,8 +92,10 @@ const handleScroll = function(cb) {
 
   if (disabled) return;
 
-  const containerInfo = container.getBoundingClientRect();
-  if (!containerInfo.width && !containerInfo.height) return;
+  if (container !== window) {
+    const containerInfo = container.getBoundingClientRect();
+    if (!containerInfo.width && !containerInfo.height) return;
+  }
 
   let shouldTrigger = false;
 
@@ -102,10 +104,10 @@ const handleScroll = function(cb) {
     const scrollBottom = container.scrollTop + getClientHeight(container);
     shouldTrigger = container.scrollHeight - scrollBottom <= distance;
   } else {
-    const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - getElementTop(container);
-    const offsetHeight = getOffsetHeight(container);
-    const borderBottom = Number.parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
-    shouldTrigger = heightBelowTop - offsetHeight + borderBottom <= distance;
+    const containerTop = container === window ? 0 : getElementTop(container);
+    const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - containerTop;
+    const offsetHeight = getClientHeight(container);
+    shouldTrigger = heightBelowTop - offsetHeight <= distance;
   }
 
   if (shouldTrigger && isFunction(cb)) {
