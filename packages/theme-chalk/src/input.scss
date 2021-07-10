@@ -114,7 +114,7 @@
     display: inline-block;
     font-size: inherit;
     height: $--input-height;
-    line-height: $--input-height;
+    line-height: 1.5;
     outline: none;
     padding: 0 15px;
     transition: $--border-transition-base;
