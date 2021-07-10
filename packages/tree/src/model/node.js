@@ -407,7 +407,9 @@ export default class Node {
   }
 
   getChildren(forceInit = false) { // this is data
-    if (this.level === 0) return this.data;
+    if (this.level === 0) {
+      return forceInit ? (this.data || []) : this.data;
+    }
     const data = this.data;
     if (!data) return null;
 
