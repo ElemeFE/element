@@ -79,10 +79,10 @@ const showNextMsg = () => {
   if (!instance) {
     initInstance();
   }
-  instance.action = '';
 
   if (!instance.visible || instance.closeTimer) {
     if (msgQueue.length > 0) {
+      instance.action = '';
       currentMsg = msgQueue.shift();
 
       let options = currentMsg.options;
