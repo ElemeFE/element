@@ -64,6 +64,7 @@
     text-align: center;
     font-size: $--font-size-base;
     color: $--color-text-regular;
+    background-color: $--input-background-color;
 
     &::placeholder {
       color: $--color-text-placeholder;
