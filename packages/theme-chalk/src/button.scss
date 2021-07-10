@@ -49,6 +49,10 @@
       margin-left: 5px;
     }
   }
+  
+  & .el-icon-right {
+    margin-left: 5px;
+  }
 
   @include when(plain) {
     &:hover,
