@@ -230,14 +230,14 @@ export default {
       return widthArr.reduce((acc, width) => acc + width, -1);
     },
 
-    handleCellMouseEnter(event, row) {
+    handleCellMouseEnter(event, row, $index) {
       const table = this.table;
       const cell = getCell(event);
 
       if (cell) {
         const column = getColumnByCell(table, cell);
-        const hoverState = table.hoverState = {cell, column, row};
-        table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
+        const hoverState = table.hoverState = {cell, column, row, $index};
+        table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event, hoverState.$index);
       }
 
       // 判断是否text-overflow, 如果是就显示tooltip
@@ -275,7 +275,7 @@ export default {
       if (!cell) return;
 
       const oldHoverState = this.table.hoverState || {};
-      this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
+      this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, oldHoverState.$index, event);
     },
 
     handleMouseEnter: debounce(30, function(index) {
@@ -286,30 +286,30 @@ export default {
       this.store.commit('setHoverRow', null);
     }),
 
-    handleContextMenu(event, row) {
-      this.handleEvent(event, row, 'contextmenu');
+    handleContextMenu(event, row, $index) {
+      this.handleEvent(event, row, $index, 'contextmenu');
     },
 
-    handleDoubleClick(event, row) {
-      this.handleEvent(event, row, 'dblclick');
+    handleDoubleClick(event, row, $index) {
+      this.handleEvent(event, row, $index, 'dblclick');
     },
 
-    handleClick(event, row) {
+    handleClick(event, row, $index) {
       this.store.commit('setCurrentRow', row);
-      this.handleEvent(event, row, 'click');
+      this.handleEvent(event, row, $index, 'click');
     },
 
-    handleEvent(event, row, name) {
+    handleEvent(event, row, $index, name) {
       const table = this.table;
       const cell = getCell(event);
       let column;
       if (cell) {
         column = getColumnByCell(table, cell);
         if (column) {
-          table.$emit(`cell-${name}`, row, column, cell, event);
+          table.$emit(`cell-${name}`, row, column, cell, event, $index);
         }
       }
-      table.$emit(`row-${name}`, row, column, event);
+      table.$emit(`row-${name}`, row, column, event, $index);
     },
 
     rowRender(row, $index, treeRowData) {
@@ -330,9 +330,9 @@ export default {
         style={ [displayStyle, this.getRowStyle(row, $index)] }
         class={ rowClasses }
         key={ this.getKeyOfRow(row, $index) }
-        on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-        on-click={ ($event) => this.handleClick($event, row) }
-        on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
+        on-dblclick={ ($event) => this.handleDoubleClick($event, row, $index) }
+        on-click={ ($event) => this.handleClick($event, row, $index) }
+        on-contextmenu={ ($event) => this.handleContextMenu($event, row, $index) }
         on-mouseenter={ _ => this.handleMouseEnter($index) }
         on-mouseleave={ this.handleMouseLeave }>
         {
@@ -372,7 +372,7 @@ export default {
                 class={ this.getCellClass($index, cellIndex, row, column) }
                 rowspan={ rowspan }
                 colspan={ colspan }
-                on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row, $index) }
                 on-mouseleave={ this.handleCellMouseLeave }>
                 {
                   column.renderCell.call(
