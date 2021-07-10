@@ -24,7 +24,7 @@ export interface ValidateFieldCallback {
 /** Form Component */
 export declare class ElForm extends ElementUIComponent {
   /** Data of form component */
-  model: object
+  model: object | any[]
 
   /** Validation rules of form */
   rules: object

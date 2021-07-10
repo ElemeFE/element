@@ -21,7 +21,7 @@
     },
 
     props: {
-      model: Object,
+      model: [Object, Array],
       rules: Object,
       labelPosition: String,
       labelWidth: String,
