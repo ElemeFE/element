@@ -6,6 +6,8 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
+      @mousedown.self="handleWrapperMouseDown"
+      @mouseup.self="handleWrapperMouseUp"
       @click.self="handleWrapperClick">
       <div
         role="dialog"
@@ -113,7 +115,10 @@
     data() {
       return {
         closed: false,
-        key: 0
+        key: 0,
+
+        mouseDownFired: false,
+        mouseUpFired: false
       };
     },
 
@@ -155,16 +160,23 @@
     },
 
     methods: {
+      handleWrapperMouseDown() {
+        this.mouseDownFired = true;
+      },
+      handleWrapperMouseUp() {
+        this.mouseUpFired = true;
+      },
+      handleWrapperClick() {
+        if (this.mouseUpFired && this.mouseDownFired && this.closeOnClickModal) this.handleClose();
+        this.mouseUpFired = false;
+        this.mouseDownFired = false;
+      },
       getMigratingConfig() {
         return {
           props: {
             'size': 'size is removed.'
           }
         };
-      },
-      handleWrapperClick() {
-        if (!this.closeOnClickModal) return;
-        this.handleClose();
       },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
