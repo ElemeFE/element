@@ -286,6 +286,7 @@ Only card type Tabs support addable & closeable.
 | tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
 | stretch  | whether width of tab automatically fits its container | boolean   |  -  |  false |
 | before-leave | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | Function(activeName, oldActiveName) | — | — |
+| controllable  | whether Tab is toggled with arrow keys   | boolean   | — |  true  |
 
 ### Tabs Events
 | Event Name | Description | Parameters |

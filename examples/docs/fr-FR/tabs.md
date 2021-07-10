@@ -287,6 +287,7 @@ Seuls les onglets de type carte supportent l'ajout et la suppression.
 | tab-position  | Position des onglets. | string   |  top/right/bottom/left  |  top |
 | stretch  | Si la largeur des onglets s'adapte au conteneur. | boolean   |  -  |  false |
 | before-leave | Fonction de hook avant de changer d'onglet. Si `false` est retourné ou qu'une `Promise` retournée et rejetée, le changement sera annulé. | Function(activeName, oldActiveName) | — | — |
+| controllable  | whether Tab is toggled with arrow keys   | boolean   | — |  true  |
 
 ### Évènements de Tabs
 

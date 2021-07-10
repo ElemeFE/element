@@ -284,6 +284,7 @@
 | tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
 | stretch  | 标签的宽度是否自撑开 | boolean   |  -  |  false |
 | before-leave | 切换标签之前的钩子，若返回 false 或者返回 Promise 且被 reject，则阻止切换。 | Function(activeName, oldActiveName) | — | — |
+| controllable  | 标签是否可方向键切换   | boolean   | — |  true  |
 
 ### Tabs Events
 | 事件名称 | 说明 | 回调参数 |
