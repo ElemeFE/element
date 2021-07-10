@@ -36,6 +36,14 @@
         type: String,
         default: ''
       },
+      loading: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       splitButton: Boolean,
       hideOnClick: {
         type: Boolean,
@@ -78,6 +86,9 @@
     computed: {
       dropdownSize() {
         return this.size || (this.$ELEMENT || {}).size;
+      },
+      splitButtonDisabled() {
+        return this.loading || this.disabled;
       }
     },
 
@@ -250,7 +261,7 @@
     },
 
     render(h) {
-      let { hide, splitButton, type, dropdownSize } = this;
+      let { hide, splitButton, type, dropdownSize, loading, splitButtonDisabled, disabled } = this;
 
       const handleMainButtonClick = (event) => {
         this.$emit('click', event);
@@ -260,10 +271,10 @@
       let triggerElm = !splitButton
         ? this.$slots.default
         : (<el-button-group>
-          <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
+          <el-button type={type} disabled={disabled} loading={loading} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
             {this.$slots.default}
           </el-button>
-          <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
+          <el-button ref="trigger" disabled={splitButtonDisabled} type={type} size={dropdownSize} class="el-dropdown__caret-button">
             <i class="el-dropdown__icon el-icon-arrow-down"></i>
           </el-button>
         </el-button-group>);
