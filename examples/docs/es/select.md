@@ -402,6 +402,93 @@ Puede filtrar opciones como lo desee.
 ```
 :::
 
+### Mezclando elementos con select
+
+Añade un elemento antes o después del input, generalmente una etiqueta o un botón.
+
+:::demo Utilice el `slot` para seleccionar si el elemento se colocara antes (prepend) o después (append) del Select.
+
+```html
+<template>
+  <div>
+    <el-select
+      v-model="value1"
+      filterable
+      allow-create
+      default-first-option
+      placeholder="Choisissez les tags de vos articles">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Catégorie</template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value2"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      placeholder="Choisissez les tags de vos articles">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value3"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      class="full-width"
+      placeholder="Choisissez les tags de vos articles">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Choisir les catégories</template>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: undefined,
+        value2: undefined,
+        value3: undefined,
+        options: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        value: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Búsqueda remota
 
 Introduzca palabras y datos para buscar desde el servidor.
@@ -577,6 +664,8 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 |    —    | lista de los componentes Option |
 | prefix  | contenido prefix de un  Select |
 | empty | Lista sin opciones |
+| prepend | contenido antes del select |
+| append  | contenido a añadir después del select |
 
 ### Atributos del grupo de opciones
 | Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |

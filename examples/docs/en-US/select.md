@@ -398,6 +398,93 @@ You can filter options for your desired ones.
 ```
 :::
 
+### Mixed Select
+
+Prepend or append an element, generally a label or a button.
+
+:::demo Use `slot` to distribute elements that prepend or append to Input.
+
+```html
+<template>
+  <div>
+    <el-select
+      v-model="value1"
+      filterable
+      allow-create
+      default-first-option
+      placeholder="Please input">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Category</template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value2"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      placeholder="Please input">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value3"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      class="full-width"
+      placeholder="Please input">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Select categories</template>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: undefined,
+        value2: undefined,
+        value3: undefined,
+        options: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        value: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Remote Search
 
 Enter keywords and search data from server.
@@ -570,6 +657,9 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 |    —    | Option component list |
 | prefix  | content as Select prefix |
 | empty  | content when there is no options |
+| prepend | content to prepend before Select |
+| append | content to append after Select |
+
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

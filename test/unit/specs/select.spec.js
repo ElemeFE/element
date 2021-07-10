@@ -2,7 +2,7 @@ import { createTest, createVue, triggerEvent, destroyVM, waitImmediate } from '.
 import Select from 'packages/select';
 
 describe('Select', () => {
-  const getSelectVm = (configs = {}, options) => {
+  const getSelectVm = (configs = {}, options, slots) => {
     ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags', 'automaticDropdown'].forEach(config => {
       configs[config] = configs[config] || false;
     });
@@ -48,6 +48,7 @@ describe('Select', () => {
             :loading="loading"
             :remoteMethod="remoteMethod"
             :automatic-dropdown="automaticDropdown">
+            ${slots}
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -905,6 +906,34 @@ describe('Select', () => {
       sinon.stub(select, '$nextTick');
       select.resetInputHeight();
       expect(select.$nextTick.callCount).to.equal(1);
+    });
+  });
+
+  describe('prepend', () => {
+    it('should not display prepend slot if empty', async() => {
+      vm = getSelectVm();
+      await waitImmediate();
+      expect(vm.$el.querySelector('.el-input-group__prepend')).to.equal(null);
+    });
+
+    it('should display prepend when enabled', async() => {
+      vm = getSelectVm({}, undefined, '<template slot="prepend">Category</template>');
+      await waitImmediate();
+      expect(vm.$el.querySelector('.el-input-group__prepend').innerText).to.equal('Category');
+    });
+  });
+
+  describe('append', () => {
+    it('should not display append slot if empty', async() => {
+      vm = getSelectVm();
+      await waitImmediate();
+      expect(vm.$el.querySelector('.el-input-group__append')).to.equal(null);
+    });
+
+    it('should display append slot when enabled', async() => {
+      vm = getSelectVm({}, undefined, '<template slot="append">Search</template>');
+      await waitImmediate();
+      expect(vm.$el.querySelector('.el-input-group__append').innerText).to.equal('Search');
     });
   });
 });

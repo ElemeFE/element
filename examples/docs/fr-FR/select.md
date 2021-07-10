@@ -398,6 +398,93 @@ Vous pouvez ajouter un mode de filtrage pour trouver les options désirées plus
 ```
 :::
 
+### Select mixte
+
+Ajouter un élément avant ou après le select, généralement du texte ou un bouton.
+
+:::demo Utilisez `slot` pour ajouter des éléments avant ou après le select.
+
+```html
+<template>
+  <div>
+    <el-select
+      v-model="value1"
+      filterable
+      allow-create
+      default-first-option
+      placeholder="Choisissez les tags de vos articles">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Catégorie</template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value2"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      placeholder="Choisissez les tags de vos articles">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+  <div style="margin-top: 15px;">
+    <el-select
+      v-model="value3"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      class="full-width"
+      placeholder="Choisissez les tags de vos articles">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+      <template slot="prepend">Choisir les catégories</template>
+      <template slot="append"><el-button @click.stop.prevent icon="el-icon-search"></el-button></template>
+    </el-select>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: undefined,
+        value2: undefined,
+        value3: undefined,
+        options: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        value: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Recherche à distance
 
 Vous pouvez aller chercher les options sur le serveur de manière dynamique.
@@ -497,6 +584,7 @@ Vous pouvez entrer des choix dans le champ de sélection qui ne sont pas incluse
       :label="item.label"
       :value="item.value">
     </el-option>
+    <template slot="prepend">#</template>
   </el-select>
 </template>
 
@@ -575,6 +663,8 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 |    —    | Liste de options. |
 | prefix  | Contenu du préfixe du sélecteur. |
 | empty  | Contenu lorsqu'il n'y a aucune option. |
+| prepend | Contenu à ajouter avant le sélecteur. |
+| append | Contenu à ajouter après le sélecteur. |
 
 ### Attributs du groupe d'options
 

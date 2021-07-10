@@ -73,10 +73,6 @@
     }
   }
 
-  > .el-input {
-    display: block;
-  }
-
   @include e(input) {
     border: none;
     outline: none;
