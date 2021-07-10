@@ -10,6 +10,7 @@
       <div
         class="el-drawer__container"
         :class="visible && 'el-drawer__open'"
+        @mousedown="clickStartElement = $event.target"
         @click.self="handleWrapperClick"
         role="document"
         tabindex="-1">
@@ -123,7 +124,8 @@ export default {
   data() {
     return {
       closed: false,
-      prevActiveElement: null
+      prevActiveElement: null,
+      clickStartElement: null
     };
   },
   watch: {
@@ -167,8 +169,11 @@ export default {
         this.closed = true;
       }
     },
-    handleWrapperClick() {
-      if (this.wrapperClosable) {
+    handleWrapperClick(event) {
+      if (
+        this.wrapperClosable &&
+        (!this.clickStartElement || this.clickStartElement.contains(event.target))
+      ) {
         this.closeDrawer();
       }
     },
