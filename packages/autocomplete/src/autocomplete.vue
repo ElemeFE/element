@@ -4,7 +4,7 @@
     v-clickoutside="close"
     aria-haspopup="listbox"
     role="combobox"
-    :aria-expanded="suggestionVisible"
+    :aria-expanded="suggestionVisible.toString()"
     :aria-owns="id"
   >
     <el-input
@@ -155,6 +155,9 @@
     watch: {
       suggestionVisible(val) {
         let $input = this.getInput();
+        if (!val) {
+          $input.removeAttribute('aria-activedescendant');
+        }
         if ($input) {
           this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
         }
@@ -275,8 +278,7 @@
       let $input = this.getInput();
       $input.setAttribute('role', 'textbox');
       $input.setAttribute('aria-autocomplete', 'list');
-      $input.setAttribute('aria-controls', 'id');
-      $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
+      $input.setAttribute('aria-controls', this.id);
     },
     beforeDestroy() {
       this.$refs.suggestions.$destroy();
