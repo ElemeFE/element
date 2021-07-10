@@ -39,6 +39,7 @@
               :min-date="minDate"
               :max-date="maxDate"
               :range-state="rangeState"
+              :cell-class-name="cellClassName"
               :disabled-date="disabledDate"
               @changerange="handleChangeRange"
               @pick="handleRangePick">
@@ -66,6 +67,7 @@
               :min-date="minDate"
               :max-date="maxDate"
               :range-state="rangeState"
+              :cell-class-name="cellClassName"
               :disabled-date="disabledDate"
               @changerange="handleChangeRange"
               @pick="handleRangePick">
@@ -150,6 +152,7 @@
         shortcuts: '',
         visible: '',
         disabledDate: '',
+        cellClassName: '',
         format: '',
         arrowControl: false,
         unlinkPanels: false

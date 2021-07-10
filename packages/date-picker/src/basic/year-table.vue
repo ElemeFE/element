@@ -45,7 +45,7 @@
 
 <script type="text/babel">
   import { hasClass } from 'element-ui/src/utils/dom';
-  import { isDate, range, nextDate, getDayCountOfYear } from 'element-ui/src/utils/date-util';
+  import { isDate, range, nextDate, getDayCountOfYear, parseDate } from 'element-ui/src/utils/date-util';
   import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
   const datesInYear = year => {
@@ -57,6 +57,7 @@
   export default {
     props: {
       disabledDate: {},
+      cellClassName: {},
       value: {},
       defaultValue: {
         validator(val) {
@@ -84,7 +85,13 @@
         style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year) >= 0;
         style.today = today.getFullYear() === year;
         style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
-
+        let yearDate = parseDate(year + '', 'yyyy');
+        let classes = typeof this.cellClassName === 'function' && this.cellClassName(yearDate);
+        if (classes && typeof classes === 'string') {
+          classes.split(' ').forEach(className => {
+            style[className] = true;
+          });
+        }
         return style;
       },
 
