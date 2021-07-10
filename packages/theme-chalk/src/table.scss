@@ -12,7 +12,7 @@
   width: 100%;
   max-width: 100%;
   background-color: $--color-white;
-  font-size: 14px;
+  font-size: $--font-size-base;
   color: $--table-font-color;
 
   // 数据为空
@@ -45,7 +45,7 @@
     position: relative;
     cursor: pointer;
     color: #666;
-    font-size: 12px;
+    font-size: $--font-size-small;
     transition: transform 0.2s ease-in-out;
     height: 20px;
 
@@ -155,14 +155,14 @@
   }
 
   @include m(small) {
-    font-size: 12px;
+    font-size: $--font-size-small;
     th, td {
       padding: 8px 0;
     }
   }
 
   @include m(mini) {
-    font-size: 12px;
+    font-size: $--font-size-small;
     th, td {
       padding: 6px 0;
     }
@@ -525,7 +525,7 @@
 
     & i {
       color: $--color-info;
-      font-size: 12px;
+      font-size: $--font-size-small;
       transform: scale(.75);
     }
   }
