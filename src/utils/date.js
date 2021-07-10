@@ -34,7 +34,7 @@
    */
   var fecha = {};
   var token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
-  var twoDigits = '\\d\\d?';
+  var twoDigits = '\\d\\d?\\d?\\d?';
   var threeDigits = '\\d{3}';
   var fourDigits = '\\d{4}';
   var word = '[^\\s]+';
