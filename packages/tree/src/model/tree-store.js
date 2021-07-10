@@ -35,28 +35,25 @@ export default class TreeStore {
     const lazy = this.lazy;
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
-
-      childNodes.forEach((child) => {
-        child.visible = filterNodeMethod.call(child, value, child.data, child);
-
-        traverse(child);
+      let allHidden = true;
+      childNodes.forEach(child => {
+        child.visible = traverse(child);
+        if (filterNodeMethod.call(child, value, child.data, child)) {
+          allHidden = false;
+          child.visible = true;
+        } else {
+          child.visible ? (allHidden = false) : (child.value = false);
+        }
       });
-
       if (!node.visible && childNodes.length) {
-        let allHidden = true;
-        allHidden = !childNodes.some(child => child.visible);
-
         if (node.root) {
           node.root.visible = allHidden === false;
-        } else {
-          node.visible = allHidden === false;
         }
       }
-      if (!value) return;
-
+      if (!value) return true;
       if (node.visible && !node.isLeaf && !lazy) node.expand();
+      return !allHidden;
     };
-
     traverse(this);
   }
 
