@@ -195,9 +195,11 @@ export function compose(...funcs) {
   return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }
 
-export function toggleRowStatus(statusArr, row, newVal) {
+export function toggleRowStatus(statusArr, data, row, newVal) {
+
   let changed = false;
-  const index = statusArr.indexOf(row);
+
+  const index = getRowIndexOfSelection(row, data, statusArr);
   const included = index !== -1;
 
   const addRow = () => {
@@ -252,4 +254,35 @@ export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasC
       _walker(item, children, 0);
     }
   });
+}
+
+export function getRowIndexOfSelection(row, data, selection) {
+
+  if (row === null) throw new Error('row object is required when multiple selection');
+  if (!data.length) throw new Error('table data is required when multiple selection');
+
+  const dataKeysMap = Object.keys(data[0]);
+  const rowKeysMap = Object.keys(row);
+
+  if (dataKeysMap.length !== rowKeysMap.length) throw new Error('The number of fields in the row object does not match');
+
+  const equal = dataKeysMap.every(key => {
+    return rowKeysMap.indexOf(key) > -1;
+  });
+
+  if (!equal) throw new Error('Row object\'s field name does not match ');
+
+  const isSameObj = i => {
+    return dataKeysMap.every(key => {
+      return selection[i][key] === row[key];
+    });
+  };
+
+  const includedRow = () => {
+    for (let i = 0; i < selection.length; i++) {
+      if (isSameObj(i)) return i;
+    }
+    return -1;
+  };
+  return includedRow();
 }
