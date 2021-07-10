@@ -92,7 +92,7 @@
     methods: {
       destroyElement() {
         this.$el.removeEventListener('transitionend', this.destroyElement);
-        this.$destroy(true);
+        this.$destroy();
         this.$el.parentNode.removeChild(this.$el);
       },
 
