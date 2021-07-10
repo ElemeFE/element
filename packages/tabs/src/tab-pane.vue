@@ -50,7 +50,7 @@
     },
 
     updated() {
-      this.$parent.$emit('tab-nav-update');
+      this.$parent.$emit('tab-nav-update', this);
     }
   };
 </script>
