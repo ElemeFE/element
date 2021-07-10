@@ -16,7 +16,19 @@ export default {
           sums[index] = this.sumText;
           return;
         }
-        const values = this.store.states.data.map(item => Number(item[column.property]));
+        const values = this.store.states.data.map(item => {
+          if (column.property && column.property.includes('.')) {
+            const paths = column.property.split('.');
+            let prop;
+            for (let index = 0; index <= paths.length; index++) {
+              prop = paths.shift();
+              item = item[prop];
+            }
+            return Number(item);
+          } else {
+            return Number(item[column.property]);
+          }
+        });
         const precisions = [];
         let notNumber = true;
         values.forEach(value => {
