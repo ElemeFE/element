@@ -312,6 +312,11 @@ export default class TreeStore {
   }
 
   setCurrentNode(currentNode) {
+    /**
+     * 发现声明变量后没有使用意图（个人意见）
+     * 1.prevCurrentNode声明后没有使用，表明这三行代码是无效的
+     * 2. 或者是起到优化作用的，但是后面没有用到
+     */
     const prevCurrentNode = this.currentNode;
     if (prevCurrentNode) {
       prevCurrentNode.isCurrent = false;
