@@ -135,6 +135,10 @@ export default class Node {
     this.updateLeafState();
   }
 
+  reInitChecked() {
+    reInitChecked(this);
+  }
+
   setData(data) {
     if (!Array.isArray(data)) {
       markNodeData(this, data);
