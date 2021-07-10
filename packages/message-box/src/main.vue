@@ -261,6 +261,14 @@
           }
           this.focusAfterClosed = document.activeElement;
           messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFirstFocus());
+
+          if (this.closeOnHashChange) {
+            window.addEventListener('hashchange', this.close);
+          }
+        } else {
+          if (this.closeOnHashChange) {
+            window.removeEventListener('hashchange', this.close);
+          }
         }
 
         // prompt
@@ -276,14 +284,6 @@
           removeClass(this.getInputElement(), 'invalid');
         }
       }
-    },
-
-    mounted() {
-      this.$nextTick(() => {
-        if (this.closeOnHashChange) {
-          window.addEventListener('hashchange', this.close);
-        }
-      });
     },
 
     beforeDestroy() {
