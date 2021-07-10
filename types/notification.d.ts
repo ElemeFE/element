@@ -74,6 +74,12 @@ export interface ElNotification {
 
   /** Show an error notification */
   error (options: ElNotificationOptions): ElNotificationComponent
+
+  /** Close the notification by id */
+  close(id: string, onClose?: Function): void
+
+  /** Close all notification */
+  closeAll(): void
 }
 
 declare module 'vue/types/vue' {
