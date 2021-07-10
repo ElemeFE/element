@@ -88,6 +88,11 @@
         default: true
       },
 
+      closeOnDeactivated: {
+        type: Boolean,
+        default: true
+      },
+
       width: String,
 
       fullscreen: Boolean,
@@ -200,6 +205,11 @@
           document.body.appendChild(this.$el);
         }
       }
+    },
+
+    deactivated() {
+      if (!this.closeOnDeactivated || !this.visible) return;
+      this.hide();
     },
 
     destroyed() {
