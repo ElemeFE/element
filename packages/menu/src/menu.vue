@@ -115,6 +115,7 @@
       },
       collapse: Boolean,
       backgroundColor: String,
+      activeBackgroundColor: String,
       textColor: String,
       activeTextColor: String,
       collapseTransition: {
@@ -133,6 +134,9 @@
     computed: {
       hoverBackground() {
         return this.backgroundColor ? this.mixColor(this.backgroundColor, 0.2) : '';
+      },
+      hoverActiveBackground() {
+        return this.activeBackgroundColor ? this.mixColor(this.activeBackgroundColor, 0.2) : '';
       },
       isMenuPopup() {
         return this.mode === 'horizontal' || (this.mode === 'vertical' && this.collapse);

@@ -174,11 +174,15 @@ export default {
       }
     },
     syncCheckedValue() {
-      const { value, checkedValue } = this;
+      const { value, checkedValue, config, options } = this;
       if (!isEqual(value, checkedValue)) {
         this.activePath = [];
         this.checkedValue = value;
-        this.syncMenuState();
+        if (config.lazy && isEmpty(options)) {
+          this.lazyLoad();
+        } else {
+          this.syncMenuState();
+        }
       }
     },
     syncMenuState() {
@@ -318,6 +322,7 @@ export default {
 
             if (this.loadCount === this.checkedValue.length) {
               this.$parent.computePresentText();
+              this.loadCount = 0;
             }
           }
         }
