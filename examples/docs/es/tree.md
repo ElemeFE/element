@@ -18,6 +18,7 @@ Estructura básica de árbol.
           label: 'Level one 1',
           children: [{
             label: 'Level two 1-1',
+            leaf:true,
             children: [{
               label: 'Level three 1-1-1'
             }]
@@ -51,7 +52,8 @@ Estructura básica de árbol.
         }],
         defaultProps: {
           children: 'children',
-          label: 'label'
+          label: 'label',
+          isLeaf:'leaf'
         }
       };
     },
