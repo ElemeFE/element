@@ -54,6 +54,9 @@ export interface DatePickerOptions {
   /** A function determining if a date is disabled. */
   disabledDate?: DisabledDateChecker
 
+  /** Set custom className */
+  cellClassName?: (date: Date) => string
+
   /** First day of week */
   firstDayOfWeek?: FirstDayOfWeek
 
