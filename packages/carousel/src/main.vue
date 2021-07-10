@@ -236,6 +236,11 @@ export default {
       this.timer = setInterval(this.playSlides, this.interval);
     },
 
+    resetTimer() {
+      this.pauseTimer();
+      this.startTimer();
+    },
+
     setActiveItem(index) {
       if (typeof index === 'string') {
         const filteredItems = this.items.filter(item => item.name === index);
@@ -260,6 +265,7 @@ export default {
       if (oldIndex === this.activeIndex) {
         this.resetItemPosition(oldIndex);
       }
+      this.resetTimer();
     },
 
     prev() {
