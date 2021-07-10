@@ -63,7 +63,7 @@
             const { isLeaf } = this;
 
             if (!isLeaf) this.handleExpand();
-            if (multiple) {
+            if (multiple && !checkStrictly) {
               // if leaf sync checked state, else clear checked state
               const checked = isLeaf ? node.checked : false;
               this.handleMultiCheckChange(checked);
