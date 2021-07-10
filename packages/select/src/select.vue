@@ -11,6 +11,7 @@
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
+          v-if="showAtLeastOne"
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
@@ -20,12 +21,12 @@
           <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
         </el-tag>
         <el-tag
-          v-if="selected.length > 1"
+          v-if="selected.length > showAtLeastOne ? 1 : 0"
           :closable="false"
           :size="collapseTagSize"
           type="info"
           disable-transitions>
-          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+          <span class="el-select__tags-text">+ {{ selected.length - showAtLeastOne ? 1 : 0 }}</span>
         </el-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
@@ -300,6 +301,10 @@
       },
       collapseTags: Boolean,
       popperAppendToBody: {
+        type: Boolean,
+        default: true
+      },
+      showAtLeastOne: {
         type: Boolean,
         default: true
       }

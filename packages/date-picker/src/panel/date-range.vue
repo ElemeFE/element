@@ -191,6 +191,7 @@
   import {
     formatDate,
     parseDate,
+    parseDateWithMoment,
     isDate,
     modifyDate,
     modifyTime,
@@ -360,7 +361,7 @@
             const format = 'HH:mm:ss';
             this.$refs.maxTimePicker.selectableRange = [
               [
-                parseDate(formatDate(this.minDate, format), format),
+                parseDateWithMoment(formatDate(this.minDate, format), format),
                 parseDate('23:59:59', format)
               ]
             ];
@@ -457,7 +458,7 @@
       handleDateInput(value, type) {
         this.dateUserInput[type] = value;
         if (value.length !== this.dateFormat.length) return;
-        const parsedValue = parseDate(value, this.dateFormat);
+        const parsedValue = parseDateWithMoment(value, this.dateFormat);
 
         if (parsedValue) {
           if (typeof this.disabledDate === 'function' &&
@@ -481,7 +482,7 @@
       },
 
       handleDateChange(value, type) {
-        const parsedValue = parseDate(value, this.dateFormat);
+        const parsedValue = parseDateWithMoment(value, this.dateFormat);
         if (parsedValue) {
           if (type === 'min') {
             this.minDate = modifyDate(this.minDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
@@ -500,7 +501,7 @@
       handleTimeInput(value, type) {
         this.timeUserInput[type] = value;
         if (value.length !== this.timeFormat.length) return;
-        const parsedValue = parseDate(value, this.timeFormat);
+        const parsedValue = parseDateWithMoment(value, this.timeFormat);
 
         if (parsedValue) {
           if (type === 'min') {

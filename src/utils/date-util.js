@@ -1,5 +1,6 @@
 import fecha from 'element-ui/src/utils/date';
 import { t } from 'element-ui/src/locale';
+import moment from 'moment';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -289,4 +290,163 @@ export const extractTimeFormat = function(format) {
 
 export const validateRangeInOneMonth = function(start, end) {
   return (start.getMonth() === end.getMonth()) && (start.getFullYear() === end.getFullYear());
+};
+
+export const parseDateWithMoment = function(string) {
+  function getMomentAllowedFormats() {
+    const formats = [];
+    const defaultFormats = [
+      'DD|MM|YYYY HH:mm',
+      'DD|MM|YYYYHHmm',
+      'DD|MM|YYYY',
+
+      'DD|MMM|YYYY HH:mm',
+      'DD|MMM|YYYYHHmm',
+      'DD|MMM|YYYY',
+
+      'D|MM|YYYY HH:mm',
+      'D|MM|YYYYHHmm',
+      'D|MM|YYYY',
+
+      'D|MMM|YYYY HH:mm',
+      'D|MMM|YYYYHHmm',
+      'D|MMM|YYYY',
+
+      'DD|M|YYYY HH:mm',
+      'DD|M|YYYYHHmm',
+      'DD|M|YYYY',
+
+      'D|M|YYYY HH:mm',
+      'D|M|YYYYHHmm',
+      'D|M|YYYY',
+
+      'MM|DD|YYYY HH:mm',
+      'MM|DD|YYYYHHmm',
+      'MM|DD|YYYY',
+
+      'MMM|DD|YYYY HH:mm',
+      'MMM|DD|YYYYHHmm',
+      'MMM|DD|YYYY',
+
+      'M|DD|YYYY HH:mm',
+      'M|DD|YYYYHHmm',
+      'M|DD|YYYY',
+
+      'MM|D|YYYY HH:mm',
+      'MM|D|YYYYHHmm',
+      'MM|D|YYYY',
+
+      'MMM|D|YYYY HH:mm',
+      'MMM|D|YYYYHHmm',
+      'MMM|D|YYYY',
+
+      'M|D|YYYY HH:mm',
+      'M|D|YYYYHHmm',
+      'M|D|YYYY',
+
+      'YYYY|DD|MM HH:mm',
+      'YYYY|DD|MMHHmm',
+      'YYYY|DD|MM',
+
+      'YYYY|DD|MMM HH:mm',
+      'YYYY|DD|MMMHHmm',
+      'YYYY|DD|MMM',
+
+      'YYYY|D|MM HH:mm',
+      'YYYY|D|MMHHmm',
+      'YYYY|D|MM',
+
+      'YYYY|D|MMM HH:mm',
+      'YYYY|D|MMMHHmm',
+      'YYYY|D|MMM',
+
+      'YYYY|DD|M HH:mm',
+      'YYYY|DD|MHHmm',
+      'YYYY|DD|M',
+
+      'YYYY|D|M HH:mm',
+      'YYYY|D|MHHmm',
+      'YYYY|D|M',
+
+      'YYYY|MM|DD HH:mm',
+      'YYYY|MM|DDHHmm',
+      'YYYY|MM|DD',
+
+      'YYYY|M|DD HH:mm',
+      'YYYY|M|DDHHmm',
+      'YYYY|M|DD',
+
+      'YYYY|MM|D HH:mm',
+      'YYYY|MM|DHHmm',
+      'YYYY|MM|D',
+
+      'YYYY|M|D HH:mm',
+      'YYYY|M|DHHmm',
+      'YYYY|M|D',
+
+      'DD|MM|YY HH:mm',
+      'DD|MM|YYHHmm',
+      'DD|MM|YY',
+
+      'DD|MMM|YY HH:mm',
+      'DD|MMM|YYHHmm',
+      'DD|MMM|YY',
+
+      'D|MM|YY HH:mm',
+      'D|MM|YYHHmm',
+      'D|MM|YY',
+
+      'D|MMM|YY HH:mm',
+      'D|MMM|YYHHmm',
+      'D|MMM|YY',
+
+      'DD|M|YY HH:mm',
+      'DD|M|YYHHmm',
+      'DD|M|YY',
+
+      'D|M|YY HH:mm',
+      'D|M|YYHHmm',
+      'D|M|YY',
+
+      'MM|DD|YY HH:mm',
+      'MM|DD|YYHHmm',
+      'MM|DD|YY',
+
+      'MMM|DD|YY HH:mm',
+      'MMM|DD|YYHHmm',
+      'MMM|DD|YY',
+
+      'M|DD|YY HH:mm',
+      'M|DD|YYHHmm',
+      'M|DD|YY',
+
+      'MM|D|YY HH:mm',
+      'MM|D|YYHHmm',
+      'MM|D|YY',
+
+      'MMM|D|YY HH:mm',
+      'MMM|D|YYHHmm',
+      'MMM|D|YY',
+
+      'M|D|YY HH:mm',
+      'M|D|YYHHmm',
+      'M|D|YY',
+
+      'YYYY|MM|DDTHH:mm:ss',
+      'YYYY|DD|MMTHH:mm:ss'
+    ];
+
+    const delimiters = ['.', '/', '-', ''];
+
+    for (let i = 0; i < delimiters.length; i += 1) {
+      for (let j = 0; j < defaultFormats.length; j += 1) {
+        formats.push(defaultFormats[j].replace(/\|/g, delimiters[i]));
+      }
+    }
+
+    return formats;
+  }
+
+  const allFormats = getMomentAllowedFormats();
+  return moment(string, allFormats).toDate();
 };

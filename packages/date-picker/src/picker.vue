@@ -86,7 +86,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
+import { formatDate, parseDateWithMoment, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -138,7 +138,7 @@ const DATE_FORMATTER = function(value, format) {
 };
 const DATE_PARSER = function(text, format) {
   if (format === 'timestamp') return new Date(Number(text));
-  return parseDate(text, format);
+  return parseDateWithMoment(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
   if (Array.isArray(value) && value.length === 2) {
@@ -927,3 +927,6 @@ export default {
   }
 };
 </script>
+
+
+
