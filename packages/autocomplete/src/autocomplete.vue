@@ -146,7 +146,7 @@
       suggestionVisible() {
         const suggestions = this.suggestions;
         let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
-        return (isValidData || this.loading) && this.activated;
+        return (isValidData || this.loading) && (this.activated || this.$refs.input.focused);
       },
       id() {
         return `el-autocomplete-${generateId()}`;
