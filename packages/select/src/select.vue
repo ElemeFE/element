@@ -437,6 +437,7 @@
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
         }
+        this.resetHoverIndex();
       }
     },
 
