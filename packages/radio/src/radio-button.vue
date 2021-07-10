@@ -14,6 +14,7 @@
     @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
     <input
+      ref="radio"
       class="el-radio-button__orig-radio"
       :value="label"
       type="radio"
@@ -68,6 +69,7 @@
         },
         set(value) {
           this._radioGroup.$emit('input', value);
+          this.$refs.radio && (this.$refs.radio.checked = this.value === this.label);
         }
       },
       _radioGroup() {
