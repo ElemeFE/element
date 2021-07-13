@@ -795,7 +795,6 @@
 
       handleResize() {
         this.resetInputWidth();
-        if (this.multiple) this.resetInputHeight();
       },
 
       checkDefaultFirstOption() {
