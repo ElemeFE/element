@@ -86,8 +86,14 @@ export default {
 
       const options = this.popperOptions;
       const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
-      let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
-
+      let reference = this.referenceElm = this.referenceElm || this.reference;
+      if (this.$refs.reference) {
+        if (this.$refs.reference.$el) {
+          reference = this.$refs.reference.$el;
+        } else {
+          reference = this.$refs.reference;
+        }
+      }
       if (!reference &&
         this.$slots.reference &&
         this.$slots.reference[0]) {
@@ -159,11 +165,10 @@ export default {
 
     appendArrow(element) {
       let hash;
-      if (this.appended) {
+      let arrowClassName = 'popper__arrow';
+      if (element.getElementsByClassName(arrowClassName).length) {
         return;
       }
-
-      this.appended = true;
 
       for (let item in element.attributes) {
         if (/^_v-/.test(element.attributes[item].name)) {
@@ -178,7 +183,7 @@ export default {
         arrow.setAttribute(hash, '');
       }
       arrow.setAttribute('x-arrow', '');
-      arrow.className = 'popper__arrow';
+      arrow.className = arrowClassName;
       element.appendChild(arrow);
     }
   },
