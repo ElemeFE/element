@@ -164,9 +164,10 @@ export default {
     },
 
     appendArrow(element) {
+      if (!element) return;
       let hash;
       let arrowClassName = 'popper__arrow';
-      if (element.getElementsByClassName(arrowClassName).length) {
+      if (element && element.querySelector('[x-arrow]')) {
         return;
       }
 
