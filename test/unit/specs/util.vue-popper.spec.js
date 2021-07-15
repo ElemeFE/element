@@ -141,10 +141,8 @@ describe('Utils:VuePopper', () => {
     });
     expect(vm.appended).to.be.undefined;
     vm.createPopper();
-    expect(vm.appended).to.true;
     vm.appendArrow();
     expect(vm.popperJS._popper.querySelector('[x-arrow]')).to.exist;
-    expect(vm.appended).to.true;
   });
 
   it('appendArrow: add scoped', () => {
