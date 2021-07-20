@@ -87,6 +87,7 @@ import SkeletonItem from '../packages/skeleton-item/index.js';
 import Empty from '../packages/empty/index.js';
 import Descriptions from '../packages/descriptions/index.js';
 import DescriptionsItem from '../packages/descriptions-item/index.js';
+import Result from '../packages/result/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -173,6 +174,7 @@ const components = [
   Empty,
   Descriptions,
   DescriptionsItem,
+  Result,
   CollapseTransition
 ];
 
@@ -299,5 +301,6 @@ export default {
   SkeletonItem,
   Empty,
   Descriptions,
-  DescriptionsItem
+  DescriptionsItem,
+  Result
 };

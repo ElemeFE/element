@@ -6,7 +6,7 @@
           <slot v-if="loading" name="template">
             <el-skeleton-item
               v-for="item in rows"
-              :key="item"
+              :key="`${i}-${item}`"
               :class="{
                 'el-skeleton__paragraph': item !== 1,
                 'is-first': item === 1,

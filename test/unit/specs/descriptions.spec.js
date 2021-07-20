@@ -12,7 +12,7 @@ describe('Descriptions', () => {
       {
         template: `
           <el-descriptions title="title" extra="extra">
-            <el-descriptions-item v-for="item in 4"></el-descriptions-item>
+            <el-descriptions-item v-for="item in 4" :key="item"></el-descriptions-item>
           </el-descriptions>
         `
       },
@@ -29,8 +29,8 @@ describe('Descriptions', () => {
       {
         template: `
           <el-descriptions border>
-            <el-descriptions-item v-for="item in 3" :label="item">{{ item }}</el-descriptions-item>
-          </el-descriptions
+            <el-descriptions-item v-for="item in 3" :label="item" :key="item">{{ item }}</el-descriptions-item>
+          </el-descriptions>
         `
       },
       true
@@ -44,7 +44,7 @@ describe('Descriptions', () => {
       {
         template: `
           <el-descriptions border label-class-name="label-class-name" content-class-name="content-class-name">
-            <el-descriptions-item v-for="item in 3" :label="item">{{ item }}</el-descriptions-item>
+            <el-descriptions-item v-for="item in 3" :label="item" :key="item">{{ item }}</el-descriptions-item>
           </el-descriptions>
         `
       },
@@ -58,7 +58,7 @@ describe('Descriptions', () => {
     vm = createVue({
       template: `
       <el-descriptions :column="5" :border="border">
-        <el-descriptions-item v-for="item in 10" :label="item">{{ item }}</el-descriptions-item>
+        <el-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</el-descriptions-item>
       </el-descriptions>
     `,
       data() {
@@ -79,7 +79,7 @@ describe('Descriptions', () => {
 
       template: `
       <el-descriptions :column="5" :direction="direction" border>
-        <el-descriptions-item v-for="item in 10" :label="item">{{ item }}</el-descriptions-item>
+        <el-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</el-descriptions-item>
       </el-descriptions>
     `,
       data() {
@@ -102,7 +102,7 @@ describe('Descriptions', () => {
       template: `
       <el-descriptions>
         <template slot="title">title</template>
-        <el-descriptions-item v-for="item in 10" :label="item">{{ item }}</el-descriptions-item>
+        <el-descriptions-item v-for="item in 10" :label="item" :key="item">{{ item }}</el-descriptions-item>
       </el-descriptions>
     `
     }, true);
