@@ -45,7 +45,6 @@ const getModal = function() {
 
     return modalDom;
   }
-  
 };
 
 const instances = {};
@@ -127,11 +126,10 @@ const PopupManager = {
     modalDom.tabIndex = 0;
     modalDom.style.display = '';
     if (independent) {
-      independentModalArr.push(modalDom)
+      independentModalArr.push(modalDom);
     } else {
       this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
     }
-    
   },
 
   closeModal: function(id) {
