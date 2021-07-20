@@ -41,6 +41,10 @@ export default {
     closeOnClickModal: {
       type: Boolean,
       default: false
+    },
+    independentModal: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -130,7 +134,7 @@ export default {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
+        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade, this.independentModal ?  true : false);
         if (props.lockScroll) {
           this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
           if (this.withoutHiddenClass) {
