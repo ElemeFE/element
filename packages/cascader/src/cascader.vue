@@ -231,7 +231,7 @@ export default {
   data() {
     return {
       dropDownVisible: false,
-      checkedValue: this.value || null,
+      checkedValue: this.value,
       inputHover: false,
       inputValue: null,
       presentText: null,
@@ -350,7 +350,7 @@ export default {
       this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40;
     }
 
-    if (!isEmpty(this.value)) {
+    if (!this.isEmptyValue(this.value)) {
       this.computePresentContent();
     }
 
@@ -485,9 +485,17 @@ export default {
         }
       });
     },
+    isEmptyValue(val) {
+      const { multiple } = this;
+      const { emitPath } = this.panel.config;
+      if (multiple || emitPath) {
+        return isEmpty(val);
+      }
+      return false;
+    },
     computePresentText() {
       const { checkedValue, config } = this;
-      if (!isEmpty(checkedValue)) {
+      if (!this.isEmptyValue(checkedValue)) {
         const node = this.panel.getNodeByValue(checkedValue);
         if (node && (config.checkStrictly || node.isLeaf)) {
           this.presentText = node.getText(this.showAllLevels, this.separator);
