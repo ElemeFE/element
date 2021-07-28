@@ -82,6 +82,7 @@ import CascaderPanel from '../packages/cascader-panel/index.js';
 import Avatar from '../packages/avatar/index.js';
 import Drawer from '../packages/drawer/index.js';
 import Popconfirm from '../packages/popconfirm/index.js';
+import Affix from '../packages/affix/index.js';
 import Skeleton from '../packages/skeleton/index.js';
 import SkeletonItem from '../packages/skeleton-item/index.js';
 import Empty from '../packages/empty/index.js';
@@ -169,6 +170,7 @@ const components = [
   Avatar,
   Drawer,
   Popconfirm,
+  Affix,
   Skeleton,
   SkeletonItem,
   Empty,
@@ -297,6 +299,7 @@ export default {
   Avatar,
   Drawer,
   Popconfirm,
+  Affix,
   Skeleton,
   SkeletonItem,
   Empty,
