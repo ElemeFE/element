@@ -13,10 +13,6 @@ export default {
       type: Boolean,
       default: false
     },
-    targets: {
-      type: Function,
-      default: () => [window]
-    },
     target: {
       type: Function,
       default: () => window
@@ -33,43 +29,37 @@ export default {
   computed: {
     el() {
       return this.target();
-    },
-    els() {
-      return this.targets();
     }
   },
   render(h) {
-    return (
-      <div>
-        <div class={ [{ 'el-affix': this.affix }] } style={ this.styles }>
-          <slot>{this.$slots.default}</slot>
-        </div>
-        <div v-show="slot" style={ this.slotStyle }></div>
-      </div>
-    );
+
+    return h('div', [
+      h('div', { class: this.affix ? 'el-affix' : '', style: this.styles }, [this.$slots.default]),
+      this.affix ? h('div', { style: this.slotStyle }) : ''
+    ]);
   },
   mounted() {
-    if (this.el !== window) {
+    on(window, 'resize', this.handleScroll, this.useCapture);
+    if (Array.isArray(this.el)) {
+      for (let i = 0; i < this.el.length; i++) {
+        on(this.el[i], 'scroll', this.handleScroll, this.useCapture);
+      }
+    } else {
       on(this.el, 'scroll', this.handleScroll, this.useCapture);
-      on(this.el, 'resize', this.handleScroll, this.useCapture);
     }
-    for (let i = 0; i < this.els.length; i++) {
-      on(this.els[i], 'scroll', this.handleScroll, this.useCapture);
-      on(this.els[i], 'resize', this.handleScroll, this.useCapture);
-    }
+
     this.$nextTick(() => {
       this.handleScroll();
     });
   },
   beforeDestroy() {
-    if (this.el !== window) {
+    off(window, 'resize', this.handleScroll, this.useCapture);
+    if (Array.isArray(this.el)) {
+      for (let i = 0; i < this.el.length; i++) {
+        off(this.el[i], 'scroll', this.handleScroll, this.useCapture);
+      }
+    } else {
       off(this.el, 'scroll', this.handleScroll, this.useCapture);
-      off(this.el, 'resize', this.handleScroll, this.useCapture);
-    }
-
-    for (let i = 0; i < this.els.length; i++) {
-      off(this.els[i], 'scroll', this.handleScroll, this.useCapture);
-      on(this.els[i], 'resize', this.handleScroll, this.useCapture);
     }
   },
   methods: {
@@ -85,8 +75,6 @@ export default {
 
       const fixedTop = this.getFixedTop(rect, targetRect, offsetTop);
       const fixedBottom = this.getFixedBottom(rect, targetRect, offsetBottom);
-
-      console.log(fixedTop, fixedBottom);
 
       if (fixedTop === undefined && fixedBottom === undefined) {
         if (this.affix) {

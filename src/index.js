@@ -82,6 +82,7 @@ import CascaderPanel from '../packages/cascader-panel/index.js';
 import Avatar from '../packages/avatar/index.js';
 import Drawer from '../packages/drawer/index.js';
 import Popconfirm from '../packages/popconfirm/index.js';
+import Affix from '../packages/affix/index.js';
 import Skeleton from '../packages/skeleton/index.js';
 import SkeletonItem from '../packages/skeleton-item/index.js';
 import Empty from '../packages/empty/index.js';
@@ -90,7 +91,6 @@ import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
-import Affix from '../packages/affix/index.js';
 
 const components = [
   Pagination,
