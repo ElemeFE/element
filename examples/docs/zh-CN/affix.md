@@ -17,8 +17,7 @@
   export default {
     methods: {
       getTarget() {
-        const el = window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
-        return el;
+        return window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
       }
     }
   }
@@ -41,8 +40,7 @@
   export default {
     methods: {
       getTarget() {
-        const el = window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
-        return el;
+        return window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
       }
     }
   }
@@ -65,8 +63,7 @@
   export default {
     methods: {
       getTarget() {
-        const el = window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
-        return el;
+        return window.document.getElementsByClassName('page-component__scroll el-scrollbar')[0].children[0];
       }
     }
   }
