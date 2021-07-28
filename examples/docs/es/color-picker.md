@@ -117,8 +117,8 @@ ColorPicker es un selector de color que soporta varios formatos de color.
 | predefine      | opciones de colores predefinidas | array | — | — |
 
 ### Eventos
-| Nombre de Evento | Descripción                              | Parametros             |
-| ---------------- | ---------------------------------------- | ---------------------- |
-| change           | se dispara cuando el valor del input cambia | valor del color        |
+| Nombre de Evento | Descripción                                     | Parámetros             |
+| ---------------- | ----------------------------------------------- | ---------------------- |
+| change           | se dispara cuando el valor del input cambia     | valor del color        |
 | active-change    | se dispara cuando el actual color activo cambia | valor del color activo |
 

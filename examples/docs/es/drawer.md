@@ -50,11 +50,11 @@ Llamada de un drawer temporal, desde varias direcciones
 ```
 :::
 
-### No Title
+### Sin titulo
 
-When you no longer need a title, you can remove title from drawer.
+Si no necesitas el titulo lo puedes eliminar del drawer.
 
-:::demo Set the `withHeader` attribute to **false**, you can remove the title from drawer, thus your drawer can have more space on screen. If you want to be accessible, make sure to set the `title` attribute.
+:::demo Asigne **false** al atributo `withHeader`, se puede eliminar el atributo title del drawer, de esa manera el drawer tendrá mas espacio para el contenido. Por razones de accesibilidad se recomienda asignar siempre un contenido valido al atributo `title`.
 
 ```html
 <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
@@ -280,7 +280,7 @@ Si la variable `visible` se gestiona en el almacén de Vuex, el `.sync` no puede
 | title | El título del Drawer, también se puede establecer por slot con nombre, las descripciones detalladas se pueden encontrar en el formulario de slot. | string | — | — |
 | visible | Si se muestra el Drawer, también soporta la notación `.sync` | boolean | — | false |
 | wrapperClosable | Indica si el usuario puede cerrar el Drawer haciendo clic en la capa de sombreado. | boolean | - | true |
-| withHeader | Flag that controls the header section's existance, default to true, when withHeader set to false, both `title attribute` and `title slot` won't work | boolean | - | true |
+| withHeader | Indica si la sección header existirá, por defecto es true, cuando es false no tienen efecto, ambos, `title attribute` y `title slot` | boolean | - | true |
 
 ### Drawer Slot's
 

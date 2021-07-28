@@ -4,7 +4,7 @@ Muestra un mensaje de notificación global en una esquina de la página.
 
 ### Uso básico
 
-:::demo Element ha registrado el método`$notify` y recibe un objeto como parámetro. En el caso más sencillo, puede establecer el campo de `title` y el campo de ` message` para el título y el cuerpo de la notificación. De forma predeterminada, la notificación se cierra automáticamente después de 4500ms, pero configurando `duration`  se puede controlar su duración. Específicamente, si está configurado en `0`, no se cerrará automáticamente. Tenga en cuenta que `duration` recibe un `Number` en milisegundos.
+:::demo Element ha registrado el método`$notify` y recibe un objeto como parámetro. En el caso más sencillo, puede establecer el campo de `title` y el campo de ` message` para el título y el cuerpo de la notificación. De forma predeterminada, la notificación se cierra automáticamente después de 4500ms, pero configurando `duration`  se puede controlar su duración. Específicamente, si está configurado en `0`, no se cerrará automáticamente. Tenga en cuenta que `duration` recibe un `Number` en mili segundos.
 
 ```html
 <template>
@@ -313,6 +313,6 @@ En este caso, debe llamar a `Notification(options)`. También se han registrado 
 ### Métodos
 `Notification` y `this.$notify` devuelven la instancia de la notificación actual. Para cerrar manualmente la instancia, se puede llamar `close` para ello.
 
-| Metodo | Descripción            |
+| Método | Descripción            |
 | ------ | ---------------------- |
 | close  | cierra la notificación |

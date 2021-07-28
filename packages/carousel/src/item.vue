@@ -98,6 +98,7 @@
           this.active = index === activeIndex;
           const isVertical = parentDirection === 'vertical';
           this.translate = this.calcTranslate(index, activeIndex, isVertical);
+          this.scale = 1;
         }
         this.ready = true;
       },
