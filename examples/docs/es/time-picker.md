@@ -34,7 +34,7 @@ Provee una lista de tiempo fijo para que los usuarios escojan.
 
 Un tiempo arbitrario puede ser escogido.
 
-:::demo Al usar el tag `el-time-picker`, es posible limitar el rango de tiempo al especificar `selectableRange`. Por defecto, es posible hacer scroll con la rueda del mouse para escoger el tiempo, alternativamente se pueden utilizar las flechas de control cuando el atributo `arrow-control` esté establecido.
+:::demo Al usar el tag `el-time-picker`, es posible limitar el rango de tiempo al especificar `selectableRange`. Por defecto, es posible hacer scroll con la rueda del ratón para escoger el tiempo, alternativamente se pueden utilizar las flechas de control cuando el atributo `arrow-control` esté establecido.
 
 ```html
 <template>

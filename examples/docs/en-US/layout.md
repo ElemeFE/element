@@ -337,7 +337,7 @@ The classes are:
 | gutter | grid spacing | number | — | 0 |
 | type | layout mode, you can use flex, works in modern browsers | string | — | — |
 | justify | horizontal alignment of flex layout | string | start/end/center/space-around/space-between | start |
-| align | vertical alignment of flex layout | string | top/middle/bottom | top |
+| align | vertical alignment of flex layout | string | top/middle/bottom | — |
 | tag | custom element tag | string | * | div |
 
 ### Col Attributes

@@ -231,13 +231,13 @@ Se soporta la selección de un rango de valores.
 | vertical            | modo vertical                            | boolean         | —                 | false       |
 | height              | alto del Slider, requerido en modo vertical | string          | —                 | —           |
 | label               | etiqueta para screen reader              | string          | —                 | —           |
-| debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
+| debounce            | retardo al escribir, en mili segundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 | tooltip-class       | nombre personalizado de clase para el tooltip | string | — | — |
 | marks | marcas, tipo de clave debe ser `number` y debe estar en intervalo cerrado [min, max], cada marca puede tener estilo personalizado | object | — | — |
 
 ## Eventos
-| Nombre | Descripción                              | Parametros               |
+| Nombre | Descripción                              | Parámetros     |
 | ------ | ---------------------------------------- | ------------------------ |
-| change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor despues del cambio |
-| input | triggers when the data changes (It'll be emitted in real time during sliding) | value after changing |
+| change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor después del cambio |
+| input | Se dispara cuando los datos cambian (funciona en tiempo real) | valor después del cambio |
 
