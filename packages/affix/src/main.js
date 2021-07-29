@@ -16,6 +16,10 @@ export default {
     target: {
       type: Function,
       default: () => window
+    },
+    scrolltargets: {
+      type: Function,
+      default: () => null
     }
   },
   data() {
@@ -29,6 +33,9 @@ export default {
   computed: {
     el() {
       return this.target();
+    },
+    els() {
+      return this.scrolltargets();
     }
   },
   render(h) {
@@ -40,12 +47,12 @@ export default {
   },
   mounted() {
     on(window, 'resize', this.handleScroll, this.useCapture);
-    if (Array.isArray(this.el)) {
-      for (let i = 0; i < this.el.length; i++) {
-        on(this.el[i], 'scroll', this.handleScroll, this.useCapture);
+    on(this.el, 'scroll', this.handleScroll, this.useCapture);
+
+    if (Array.isArray(this.els)) {
+      for (let i = 0; i < this.els.length; i++) {
+        on(this.els[i], 'scroll', this.handleScroll, this.useCapture);
       }
-    } else {
-      on(this.el, 'scroll', this.handleScroll, this.useCapture);
     }
 
     this.$nextTick(() => {
@@ -54,12 +61,11 @@ export default {
   },
   beforeDestroy() {
     off(window, 'resize', this.handleScroll, this.useCapture);
-    if (Array.isArray(this.el)) {
-      for (let i = 0; i < this.el.length; i++) {
-        off(this.el[i], 'scroll', this.handleScroll, this.useCapture);
+    off(this.el, 'scroll', this.handleScroll, this.useCapture);
+    if (Array.isArray(this.els)) {
+      for (let i = 0; i < this.els.length; i++) {
+        off(this.els[i], 'scroll', this.handleScroll, this.useCapture);
       }
-    } else {
-      off(this.el, 'scroll', this.handleScroll, this.useCapture);
     }
   },
   methods: {

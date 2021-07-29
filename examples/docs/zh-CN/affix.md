@@ -79,6 +79,7 @@
 | offset-top    | 距离窗口顶部达到指定偏移量后触发    | Number |  —  |    0     |
 | offset-bottom | 距离窗口底部达到指定偏移量后触发    | Number |  —  |    -     |
 | target        | 设置 Affix 相对于哪个元素进行固定，并监听其滚动事件，值为一个返回对应 DOM 元素的函数 | Function |  —  | () => window   |
+| scrolltargets | 监听其他元素的滚动事件，如果此元素的滚动会影响被固定元素的位置，值为一个返回对应 DOM 元素数组的函数 | Function |  —  | () => [window]   |
 | use-capture   | addEventListener 原生的 useCapture 选项    | Boolean |  —  | false |
 
 
