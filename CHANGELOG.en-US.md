@@ -1,5 +1,36 @@
 ## Changelog
 
+### 2.15.4
+
+*2021-08-03*
+
+#### New features
+
+- Descriptions 
+  - add description component (#21129 by @cs1707)
+- Result 
+  - add result component (#21171 by @cs1707)
+
+#### Bug fixes
+
+- Utils 
+  - fix isScroll (#21098 by @canvascat)
+- Translation 
+  - update it.js (#21133 by @bliberi)
+- RadioGroup 
+  - fix RadioGroup used in component causes exception #17908 (#20783 by @lceric)
+- Message 
+  - fix message[type] (#21088 by @cs1707)
+- Carousel 
+  - reset the timer when setActiveItem method is called (#20846 by @Nekojita1)
+- Cascader 
+  - fix emitPath (#21185 by @cs1707)
+- Select 
+  - fix select filterable bug (#17494 by @profore)
+  - fix a bug that makes the browser jitter in zoom mode (#21197 by @cs1707)
+- Tree 
+  - fix insertChild (#21194 by @cs1707)
+  
 ### 2.15.3
 
 *2021-06-29*

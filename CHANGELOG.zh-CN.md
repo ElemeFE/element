@@ -1,5 +1,36 @@
 ## 更新日志
 
+### 2.15.4
+
+*2021-08-03*
+
+#### 新特性
+
+- Descriptions
+  - 新增 Descriptions 组件 (#21129 by @cs1707)
+- Result
+  - 新增 Result 组件 (#21171 by @cs1707)
+
+#### Bug 修复
+
+- Utils
+  - 修复 isScroll (#21098 by @canvascat)
+- Translation
+  - 更新 it.js (#21133 by @bliberi)
+- RadioGroup
+  - 修复 RadioGroup 与 component 兼容的 bug (#20783 by @lceric)
+- Message
+  - 修复 message[type] (#21088 by @cs1707)
+- Carousel
+  - 修复 setActiveItem 重置计时 (#20846 by @Nekojita1)
+- Cascader
+  - 修复 emitPath (#21185 by @cs1707)
+- Select
+  - 修复 filterable bug (#17494 by @profore)
+  - 修复浏览器 (#21197 by @cs1707)
+- Tree
+  - 修复 insertChild (#21194 by @cs1707)
+
 ### 2.15.3
 
 *2021-06-29*
