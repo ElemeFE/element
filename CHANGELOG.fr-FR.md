@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2.15.5
+
+*2021-08-04*
+
+- Select
+  - fix resetInputHeight (#21201 by @cs1707)
+
 ### 2.15.4
 
 *2021-08-03*

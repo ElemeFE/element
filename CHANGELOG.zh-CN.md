@@ -1,5 +1,14 @@
 ## 更新日志
 
+### 2.15.5
+
+*2021-08-04*
+
+#### Bug 修复
+
+- Select
+  - 修复 resetInputHeight 报错的 bug (#21201 by @cs1707)
+
 ### 2.15.4
 
 *2021-08-03*
@@ -27,7 +36,7 @@
   - 修复 emitPath (#21185 by @cs1707)
 - Select
   - 修复 filterable bug (#17494 by @profore)
-  - 修复浏览器 (#21197 by @cs1707)
+  - 修复浏览器缩放模式下抖动的 bug (#21197 by @cs1707)
 - Tree
   - 修复 insertChild (#21194 by @cs1707)
 
