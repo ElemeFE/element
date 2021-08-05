@@ -119,6 +119,10 @@
             created
             v-if="showNewOption">
           </el-option>
+          <div class="chooseAllOrNot" v-if="multiple && allOption">
+            <div class="chooseAll" @click="handleChooseAll">全选</div>
+            <div class="chooseNot" @click="handleChooseNot">全不选</div>
+          </div>
           <slot></slot>
         </el-scrollbar>
         <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
@@ -283,6 +287,7 @@
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
+      allOption: Boolean,
       multipleLimit: {
         type: Number,
         default: 0
@@ -440,6 +445,20 @@
     },
 
     methods: {
+      handleChooseAll() {
+        if (this.multiple) {
+          if (this.multipleLimit > 0 && this.options.length > this.multipleLimit) {
+            throw new Error(this.multipleLimit + '低于' + this.options.length + '，无法全部选中');
+          }
+        }
+        let value = Array.from(this.options, ({value})=>value);
+        this.$emit('input', value);
+        this.emitChange(value);
+      },
+      handleChooseNot() {
+        this.$emit('input', []);
+        this.emitChange([]);
+      },
       handleComposition(event) {
         const text = event.target.value;
         if (event.type === 'compositionend') {

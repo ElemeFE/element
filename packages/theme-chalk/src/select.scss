@@ -146,3 +146,37 @@
     }
   }
 }
+
+
+.chooseAllOrNot {
+  display: flex;
+  height: $--select-option-height + 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.chooseAll {
+  font-size: $--select-font-size;
+  margin-top: 5px;
+  width: 45%;
+  border-radius: 5% 0 0 5%;
+  border: 1px solid #CCCCCC;
+  height: $--select-option-height;
+  line-height: $--select-option-height;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+}
+
+.chooseNot {
+  cursor: pointer;
+  background-color: white;
+  font-size: $--select-font-size;
+  margin-top: 5px;
+  width: 45%;
+  border: 1px solid #CCCCCC;
+  height: $--select-option-height;
+  line-height: $--select-option-height;
+  text-align: center;
+  border-radius: 0 5% 5% 0;
+}

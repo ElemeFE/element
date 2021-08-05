@@ -210,6 +210,21 @@
       :value="item.value">
     </el-option>
   </el-select>
+
+  <el-select 
+    v-model="value3"
+    multiple
+    allOption
+    collapse-tags
+    style="margin-left: 20px;"
+    placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -233,7 +248,8 @@
           label: '北京烤鸭'
         }],
         value1: [],
-        value2: []
+        value2: [],
+        value3: []
       }
     }
   }
