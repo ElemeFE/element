@@ -1,19 +1,81 @@
 <style scoped>
+  .home {
+    background: #F8F9FC;
+  }
+  .container {
+    box-sizing: border-box;
+  }
   .banner {
-    text-align: center;
+    /* text-align: center; */
+    background: url('../../assets/images/banner-bg-1.svg') top left no-repeat;
+    padding-top: 160px;
+    &-title {
+      color: #0F2645;
+      font-weight: 700;
+      font-size: 80px;
+      margin: 0;
+    }
+    &-description {
+      line-height: 26px;
+      font-size: 22px;
+      color: #5A6A7F;
+      margin-bottom: 40px;
+    }
+    &-image {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 94.6575342%;
+      background: url('../../assets/images/banner-image-bottom.png') 0 / 100% no-repeat;
+      transition: background-image 1s;
+      &-top {
+        position: absolute;
+        width: 38.630137%;
+        height: 0;
+        padding-bottom: 38.630137%;
+        background: url('../../assets/images/banner-image-top.png') 0 / 100% no-repeat;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 13%;
+        transition: all 1s;
+      }
+      &-top-1 {
+        position: absolute;
+        width: 38.630137%;
+        height: 0;
+        padding-bottom: 38.630137%;
+        background: url('../../assets/images/banner-image-top-1.png') 0 / 100% no-repeat;
+        right: 50%;
+        transform: translateX(100%);
+        opacity: 0;
+        top: 13%;
+        transition: all 1s;
+      }
+      &:hover {
+        background-image: url('../../assets/images/banner-image-bottom-1.png');
+        .banner-image-top {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        .banner-image-top-1 {
+          transform: translateX(50%);
+          opacity: 1;
+        }
+      }
+    }
   }
   .banner-desc {
     padding-top: 50px;
 
     h1 {
-      font-size: <%= titleSize >px;
+      font-size: 34px;
       margin: 0;
       line-height: 48px;
       color: #555;
     }
 
     p {
-      font-size: <%= paraSize >px;
+      font-size: 18px;
       line-height: 28px;
       color: #888;
       margin: 10px 0 5px;
@@ -63,6 +125,144 @@
       overflow: hidden;
     }
   }
+  .section {
+    padding-bottom: 240px;
+    &-head {
+      text-align: center;
+      color: #333;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 56px;
+      margin: 0;
+    }
+    &-subhead {
+      font-size: 32px;
+      line-height: 38px;
+      color: rgba(51,51,51,.06);
+      font-weight: 700;
+      text-align: center;
+      margin: 0 0 40px;
+    }
+  }
+  @keyframes  animate-frame {
+    from { 
+      background-position: 0 0;
+    }
+    to { 
+      background-position: 0 62.0253165%;
+    }
+  }
+  @keyframes  animate-frame-loop {
+    from { 
+      background-position: 0 63.2911392%;
+    }
+    to { 
+      background-position: 0 100%;
+    }
+  }
+
+  .card {
+    background: #fff;
+    transition: box-shadow .3s,border-color .3s;
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(80,101,161,0.10);
+    }
+    &-thin {
+      text-align: center;
+      background: #F8F9FC;
+      border-radius: 12px;
+      .card-footer {
+        padding: 32px;
+      }
+      &:hover {
+        background: #fff;
+        .card-image-cover {
+          animation: 
+            animate-frame 1s steps(49),
+            animate-frame-loop 1s steps(29) 1s infinite;
+        }
+      }
+    }
+
+    &-product {
+      display: flex;
+      align-items: end;
+      background-image: linear-gradient(90deg, #FDFEFF 0%, #ECF1F8 99%);
+      border-radius: 12px;
+      .card-image {
+        width: auto;
+      }
+      .card-footer {
+        min-height: 84px;
+      }
+      .card-title {
+        font-weight: 500;
+        font-size: 22px;
+      }
+
+      .card-description {
+        color: #333;
+      }
+    }
+
+    &-image {
+      width: 100%;
+    }
+    &-image-cover {
+      width: 100%;
+      padding-bottom: 100%;
+      background: url('../../assets/images/xt.png') 0 0 / 100% auto no-repeat;
+      overflow: hidden;
+      &-1 {
+        background-image: url('../../assets/images/br.png');
+      }
+      &-2 {
+        background-image: url('../../assets/images/bz.png');
+      }
+      &-3 {
+        background-image: url('../../assets/images/xl.png');
+      }
+    }
+    &-footer {
+      padding: 16px;
+    }
+    &-title {
+      margin: 0 0 7px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      line-height: 28px;
+    }
+    &-description {
+      font-size: 14px;
+      color: #999;
+      margin: 0;
+    }
+  }
+  .partner {
+    /* background: url('../../assets/images/partner-bg.png') center / 100% no-repeat; */
+    background: 
+            linear-gradient(to bottom, #F8F9FC, #E5E5E5, #F8F9FC) 25% 0/1px no-repeat,
+            linear-gradient(to bottom, #F8F9FC, #E5E5E5, #F8F9FC) 50% 0/1px no-repeat,
+            linear-gradient(to bottom, #F8F9FC, #E5E5E5, #F8F9FC) 75% 0/1px no-repeat,
+            linear-gradient(to right, #F8F9FC, #E5E5E5, #F8F9FC) 0 50%/100% 1px no-repeat;
+    .el-col {
+      padding: 14px 30px;
+    }
+    &-item {
+      font-family: "elementdoc" !important;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      text-align: center;
+      font-size: 60px;
+      color: #D2D7E3;
+      &:hover {
+        color: #1778FF;
+        transition: 0.5s background;
+      }
+    }
+  }
+
   .cards {
     margin: 0 auto 110px;
     width: 1140px;
@@ -94,63 +294,7 @@
       height: 120px;
     }
   }
-  .card {
-    height: 430px;
-    width: 100%;
-    background:#ffffff;
-    border:1px solid #eaeefb;
-    border-radius:5px;
-    box-sizing: border-box;
-    text-align: center;
-    position: relative;
-    transition: all .3s ease-in-out;
-    bottom: 0;
 
-    img {
-      margin: 66px auto 60px;
-    }
-    h3 {
-      margin: 0;
-      font-size: 18px;
-      color: #1f2f3d;
-      font-weight: normal;
-    }
-    p {
-      font-size: 14px;
-      color: #99a9bf;
-      padding: 0 25px;
-      line-height: 20px;
-    }
-    a {
-      height: 53px;
-      line-height: 52px;
-      font-size: 14px;
-      color: #409EFF;
-      text-align: center;
-      border: 0;
-      border-top: 1px solid #eaeefb;
-      padding: 0;
-      cursor: pointer;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      background-color: #fff;
-      border-radius: 0 0 5px 5px;
-      transition: all .3s;
-      text-decoration: none;
-      display: block;
-
-      &:hover {
-        color: #fff;
-        background: #409EFF;
-      }
-    }
-    &:hover {
-      bottom: 6px;
-      box-shadow: 0 6px 18px 0 rgba(232,237,250,0.50);
-    }
-  }
   @media (max-width: 1140px) {
     .cards {
       width: 100%;
@@ -180,176 +324,202 @@
   }
 
   @media (max-width: 768px) {
-    .cards {
-      li {
-        width: 80%;
-        margin: 0 auto 20px;
-        float: none;
-      }
-      .card {
-        height: auto;
-        padding-bottom: 54px;
-      }
-    }
-    .banner-stars {
-      display: none;
-    }
-    .banner-desc {
-      #line2 {
+    .banner {
+      padding-top: 120px;
+      background: transparent;
+      &-image {
         display: none;
       }
-      h2 {
-        font-size: 32px;
-      }
-      p {
-        width: auto;
-      }
+      
     }
-  }
-  .theme-intro-b {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 200;
-    .intro-banner {
-      position: absolute
+    .section {
+      padding-bottom: 120px;
     }
-    img {
-      width: 300px;
+    .card {
+      margin-bottom: 16px;
     }
-    .title {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: #FFF;
-      text-align: center;
-      font-weight: bold;
-      font-size: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      p {
-        padding: 0;
-        margin: 10px 0;
-      }
-    }
-  }
-  .theme-intro-a {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 200;
-    .mask{
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: #000;
-      opacity: .5;
-    }
-    .intro-banner {
-      top: 50%;
-      left: 50%;
-      position: fixed;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      box-sizing: border-box;
-      text-align: center;
-      z-index: 100;
-      img {
-        width: 100%;
-      }
-      .intro-text {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        p {
-          padding: 0;
-          margin: 0;
-          font-size: 48px;
-          font-weight: bold;
-          color: #FFF;
-        }
+    .partner {
+      background: none;
+      &-item {
+        font-size: 40px;
       }
     }
   }
 </style>
+<style>
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+  animation-play-state: paused;
+}
+.animate__animated {
+  .animate__fadeInUp {
+    animation-duration: 1s;
+    animation-fill-mode: both; 
+    animation-play-state: running;
+  }
+}
+</style>
 <template>
-  <div>
-    <div class="banner">
-      <div class="banner-desc">
-        <h1><%= 1 ></h1>
-        <p><%= 2 ></p>
+  <div class="home">
+    <section class="section banner animate__animated">
+      <div class="container">
+        <el-row type="flex" align="middle">
+          <el-col :xs="24" :sm="13">
+            <h1 class="banner-title animate__fadeInUp">Element Design</h1>
+            <p class="banner-description animate__fadeInUp"><%= 1 ></p>
+            <el-button @click="$router.push(`${lang}/component`)" round type="primary" class="animate__fadeInUp"><%= 2 ></el-button>
+            <el-button @click="$router.push(`${lang}/guide/design`)" round plain type="default" class="animate__fadeInUp"><%= 3 ></el-button>
+          </el-col>
+          <el-col :xs="24" :sm="11">
+            <div class="banner-image">
+              <div  class="banner-image-top"></div>
+              <div  class="banner-image-top-1"></div>
+            </div>
+          </el-col>
+        </el-row>
       </div>
-    </div>
-    <div class="jumbotron" ref="indexMainImg">
-      <img src="~examples/assets/images/theme-index-blue.png" alt="">
-      <div class="jumbotron-red" :style="{
-           height: mainImgOffset + 'px'
-         }">
-        <img src="~examples/assets/images/theme-index-red.png" alt="">
+    </section>
+    <section class="section container">
+      <h2 class="section-head animate__fadeInUp"><%= 4 ></h2>
+      <h3 class="section-subhead animate__fadeInUp">OPEN SOURCE COMPONENT LIBRARY</h3>
+      <el-row :gutter="40" class="animate__fadeInUp">
+        <el-col :xs="24" :sm="8">
+          <a class="card card-product" :href="`/#/${lang}/component`">
+            <div class="card-footer">
+              <h3 class="card-title">Element UI</h3>
+              <p class="card-description">
+                <%= 5 >
+              </p>
+            </div>
+            <img src="../../assets/images/element-ui.png" class="card-image">
+          </a>
+        </el-col>
+        <el-col :xs="24" :sm="8">
+          <a class="card card-product" href="https://element-plus.org">
+            <div class="card-footer">
+              <h3 class="card-title">Element Plus</h3>
+              <p class="card-description">
+                <%= 6 >
+              </p>
+            </div>
+            <img src="../../assets/images/element-plus.png" class="card-image">
+          </a>
+        </el-col>
+        <el-col :xs="24" :sm="8">
+          <div class="card card-product">
+            <div class="card-footer">
+              <h3 class="card-title">Element Mobile</h3>
+              <p class="card-description">
+                <%= 7 >
+              </p>
+            </div>
+            <img src="../../assets/images/element-mobile.png" class="card-image">
+          </div>
+        </el-col>
+      </el-row>
+    </section>
+    <section class="section container">
+      <div class="animate__fadeInUp">
+        <h2 class="section-head"><%= 8 ></h2>
+        <h3 class="section-subhead">COMPONENT LIBRARY ADVANTAGE</h3>
       </div>
-    </div>
-    <div class="cards">
-      <ul class="container">
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/guide.png" alt="">
-            <h3><%= 3 ></h3>
-            <p><%= 4 ></p>
-            <router-link
-              active-class="active"
-              to="/<%= lang >/guide/design"
-              exact><%= 5 >
-            </router-link>
+      <el-row :gutter="40" class="animate__fadeInUp">
+        <el-col :sx="24" :sm="6">
+          <div class="card card-thin">
+            <div class="card-image-cover">
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title"><%= 9 ></h3>
+              <p class="card-description">
+                <%= 10 >
+              </p>
+            </div>
           </div>
-        </li>
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/component.png" alt="">
-            <h3><%= 6 ></h3>
-            <p><%= 7 ></p>
-            <router-link
-              active-class="active"
-              to="/<%= lang >/component/layout"
-              exact><%= 5 >
-            </router-link>
+        </el-col>
+        <el-col :sx="24" :sm="6">
+          <div class="card card-thin">
+            <div class="card-image-cover card-image-cover-1">
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title"><%= 11 ></h3>
+              <p class="card-description">
+                <%= 12 >
+              </p>
+            </div>
           </div>
-        </li>
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/theme-index-icon.svg" alt="">
-            <h3><%= 10 ></h3>
-            <p><%= 11 ></p>
-            <router-link
-              active-class="active"
-              to="/<%= lang >/theme"
-              exact><%= 5 >
-            </router-link>
+        </el-col>
+        <el-col :sx="24" :sm="6">
+          <div class="card card-thin">
+            <div class="card-image-cover card-image-cover-2">
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title"><%= 13 ></h3>
+              <p class="card-description">
+                <%= 14 >
+              </p>
+            </div>
           </div>
-        </li>
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/resource.png" alt="">
-            <h3><%= 8 ></h3>
-            <p><%= 9 ></p>
-            <router-link
-              active-class="active"
-              to="/<%= lang >/resource"
-              exact><%= 5 >
-            </router-link>
+        </el-col>
+        <el-col :sx="24" :sm="6">
+          <div class="card card-thin">
+            <div class="card-image-cover card-image-cover-3">
+            </div>
+            <div class="card-footer">
+              <h3 class="card-title"><%= 15 ></h3>
+              <p class="card-description">
+                <%= 16 >
+              </p>
+            </div>
           </div>
-        </li>
-      </ul>
-    </div>
+        </el-col>
+      </el-row>
+    </section>
+    <section class="section container">
+      <div class="animate__fadeInUp">
+        <h2 class="section-head"><%= 17 ></h2>
+        <h3 class="section-subhead">Partner</h3>
+      </div>
+      <el-row class="partner animate__fadeInUp">
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-eleme"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-koubei"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-fengniaojipei"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-keruyun"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-xuanyuan"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-chensen"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-koubeizhanggui"></div>
+        </el-col>
+        <el-col :xs="12 ":sm="6">
+          <div class="partner-item doc-icon-crm"></div>
+        </el-col>
+      </el-row>
+    </section>
   </div>
 </template>
 <script>
@@ -362,18 +532,26 @@
       });
     },
     methods: {
+      isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        const viewportHeight =
+            window.innerHeight || document.documentElement.clientHeight;
+        return (
+          viewportHeight - rect.top >= 0
+        );
+      },
       handleScroll(index) {
-        const ele = this.$refs.indexMainImg;
-        const rect = ele.getBoundingClientRect();
-        const eleHeight = ele.clientHeight + 55;
-        let calHeight = (180 - rect.top) * 2;
-        if (calHeight < 0) calHeight = 0;
-        if (calHeight > eleHeight) calHeight = eleHeight;
-        this.mainImgOffset = calHeight;
+        const els = document.querySelectorAll('.section');
+        els.forEach((item) => {
+          if (this.isElementInViewport(item)) {
+            item.classList.add('animate__animated');
+          }
+        });
       }
     },
     data() {
       return {
+        active: null,
         lang: this.$route.meta.lang,
         mainImgOffset: 0
       };

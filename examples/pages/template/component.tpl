@@ -1,10 +1,10 @@
 <style>
   .page-component__scroll {
-    height: calc(100% - 80px);
-    margin-top: 80px;
+    height: calc(100vh - 64px);
+    margin-top: 64px;
 
     > .el-scrollbar__wrap {
-      overflow-x: auto;
+      overflow: auto;
     }
   }
 
@@ -14,6 +14,7 @@
   
     &.page-container {
       padding: 0;
+      width: 100%;
     }
 
     .page-component__nav {
@@ -21,7 +22,7 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      margin-top: 80px;
+      margin-top: 64px;
       transition: padding-top .3s;
 
       > .el-scrollbar__wrap {
@@ -36,7 +37,7 @@
 
     .side-nav {
       height: 100%;
-      padding-top: 50px;
+      padding-top: 0;
       padding-bottom: 50px;
       padding-right: 0;
 
@@ -47,8 +48,14 @@
 
     .page-component__content {
       padding-left: 270px;
+      padding-right: 170px;
       padding-bottom: 100px;
+      padding-bottom: 0;
       box-sizing: border-box;
+    }
+
+    .content-wrap {
+      /* margin-right: 200px; */
     }
 
     .content {
@@ -136,8 +143,10 @@
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
     </el-scrollbar>
     <div class="page-component__content">
-      <router-view class="content"></router-view>
-      <footer-nav></footer-nav>
+      <div class="content-wrap">
+        <router-view class="content"></router-view>
+        <footer-nav></footer-nav>
+      </div>
     </div>
     <el-backtop 
       v-if="showBackToTop"

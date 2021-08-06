@@ -137,7 +137,7 @@
     "url-loader": "^1.0.1",
     "vue": "2.5.21",
     "vue-loader": "^15.7.0",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.5.2",
     "vue-template-compiler": "2.5.21",
     "vue-template-es2015-compiler": "^1.6.0",
     "webpack": "^4.14.0",

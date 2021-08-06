@@ -1,7 +1,8 @@
 <template>
   <el-autocomplete
+    prefix-icon="el-icon-search"
     v-model="query"
-    size="small"
+    class="algolia-search-input"
     :popper-class="`algolia-search${ isEmpty ? ' is-empty' : '' }`"
     :fetch-suggestions="querySearch"
     :placeholder="placeholder"
@@ -34,10 +35,21 @@
     </template>
   </el-autocomplete>
 </template>
-
 <style lang="scss">
+  .algolia-search-input {
+    .el-input__inner {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      &:placeholder {
+        font-size: 14px;
+        color: #ccc;
+      }
+    }
+  }
   .algolia-search {
     width: 450px !important;
+    border: none;
 
     &.is-empty {
       .el-autocomplete-suggestion__list {

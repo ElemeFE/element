@@ -4,10 +4,28 @@
     box-sizing: border-box;
     padding-right: 30px;
     transition: opacity .3s;
+    // box-shadow: 1px 0 0 0 #F1F1F1;
+    box-shadow: 1px 0 0 0 #ebebeb;
+    border-right: 1px solid #ebebeb;
+    background: #fff;
     &.is-fade {
       transition: opacity 3s;
     }
-
+    .version-wrap {
+      padding: 0 16px;
+      margin-bottom: 20px;
+    }
+    .version{
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #333333;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 16px 0;
+      .select-version {
+        flex: 1;
+      }
+    }
     li {
       list-style: none;
     }
@@ -40,8 +58,10 @@
         transition: .15s ease-out;
         font-weight: bold;
 
+        padding-left: 16px;
+
         &.active {
-          color: #409EFF;
+          // color: #409EFF;
         }
       }
 
@@ -57,9 +77,15 @@
           text-overflow: ellipsis;
           font-weight: normal;
 
+          padding-left: 30px;
+          border-left: 6px solid transparent;
+
           &:hover,
           &.active {
-            color: #409EFF;
+            // color: #409EFF;
+            background-image: linear-gradient(270deg, rgba(0,109,255,0.00) 1%, rgba(0,109,255,0.06) 100%);
+            border-left: 6px solid #006DFF;
+            color: #333;
           }
         }
       }
@@ -97,10 +123,15 @@
     }
 
     .nav-group__title {
-      font-size: 12px;
-      color: #999;
-      line-height: 26px;
-      margin-top: 15px;
+      font-size: 14px;
+      color: #333;
+      line-height: 20px;
+      padding: 5px 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     #code-sponsor-widget {
@@ -121,12 +152,21 @@
     @mouseenter="isFade = false"
     :class="{ 'is-fade': isFade }"
     :style="navStyle">
+    <div class="version-wrap" v-if="isComponent">
+      <div class="version">
+        {{langConfig.dropdown}} <select-version></select-version>
+      </div>
+    </div>
     <ul>
       <li
         class="nav-item"
         v-for="(item, key) in data"
         :key="key">
-        <a v-if="!item.path && !item.href" @click="expandMenu">{{item.name}}</a>
+        <a v-if="!item.path && !item.href">{{item.name}}</a>
+        <!-- <a v-if="!item.path && !item.href" @click="$set(item, 'isClose', !item.isClose)">{{item.name}}  
+          <i class="el-icon-arrow-down" v-show="item.isClose"></i>
+          <i class="el-icon-arrow-up" v-show="!item.isClose"></i>
+        </a> -->
         <a v-if="item.href" :href="item.href" target="_blank">{{item.name}}</a>
         <router-link
           v-if="item.path"
@@ -135,7 +175,8 @@
           exact
           v-text="item.title || item.name">
         </router-link>
-        <ul class="pure-menu-list sub-nav" v-if="item.children">
+        <el-collapse-transition>
+        <ul class="pure-menu-list sub-nav" v-if="item.children" v-show="!item.isClose">
           <li
             class="nav-item"
             v-for="(navItem, key) in item.children"
@@ -149,14 +190,19 @@
             </router-link>
           </li>
         </ul>
+        </el-collapse-transition>
         <template v-if="item.groups">
           <div
             class="nav-group"
             v-for="(group, key) in item.groups"
             :key="key"
             >
-            <div class="nav-group__title" @click="expandMenu">{{group.groupName}}</div>
-            <ul class="pure-menu-list">
+            <div class="nav-group__title" @click="$set(group, 'isClose', !group.isClose)">{{group.groupName}}
+              <i class="el-icon-arrow-down" v-show="group.isClose"></i>
+              <i class="el-icon-arrow-up" v-show="!group.isClose"></i>
+            </div>
+            <el-collapse-transition>
+            <ul class="pure-menu-list" v-show="!group.isClose">
               <li
                 class="nav-item"
                 v-for="(navItem, key) in group.list"
@@ -169,6 +215,7 @@
                   v-text="navItem.title"></router-link>
               </li>
             </ul>
+            </el-collapse-transition>
           </div>
         </template>
       </li>
@@ -179,6 +226,7 @@
 <script>
   import bus from '../bus';
   import compoLang from '../i18n/component.json';
+  import SelectVersion from './select-version';
 
   export default {
     props: {
@@ -196,6 +244,9 @@
         isFade: false
       };
     },
+    components: {
+      SelectVersion
+    },
     watch: {
       '$route.path'() {
         this.handlePathChange();
@@ -205,12 +256,15 @@
       }
     },
     computed: {
+      isComponent() {
+        return /^component-/.test(this.$route.name || '');
+      },
       navStyle() {
         const style = {};
         if (this.isSmallScreen) {
           style.paddingBottom = '60px';
         }
-        style.opacity = this.isFade ? '0.5' : '1';
+        // style.opacity = this.isFade ? '0.5' : '1';
         return style;
       },
       lang() {
@@ -223,7 +277,7 @@
     methods: {
       handleResize() {
         this.isSmallScreen = document.documentElement.clientWidth < 768;
-        this.handlePathChange();
+        // this.handlePathChange();
       },
       handlePathChange() {
         if (!this.isSmallScreen) {
@@ -251,7 +305,7 @@
         });
       },
       expandMenu(event) {
-        if (!this.isSmallScreen) return;
+        // if (!this.isSmallScreen) return;
         let target = event.currentTarget;
         if (!target.nextElementSibling || target.nextElementSibling.tagName !== 'UL') return;
         this.hideAllMenu();

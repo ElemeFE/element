@@ -9,9 +9,11 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = require('./config');
+const { name } = require('../package');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isPlay = !!process.env.PLAY_ENV;
+console.log(process.env.CI_ENV);
 
 const webpackConfig = {
   mode: process.env.NODE_ENV,
@@ -22,7 +24,10 @@ const webpackConfig = {
     path: path.resolve(process.cwd(), './examples/element-ui/'),
     publicPath: process.env.CI_ENV || '',
     filename: '[name].[hash:7].js',
-    chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js'
+    chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js',
+    library: `${name}-[name]`,
+    libraryTarget: 'umd', // 把微应用打包成 umd 库格式
+    jsonpFunction: `webpackJsonp_${name}`
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -33,7 +38,10 @@ const webpackConfig = {
     host: '0.0.0.0',
     port: 8085,
     publicPath: '/',
-    hot: true
+    hot: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   },
   performance: {
     hints: false

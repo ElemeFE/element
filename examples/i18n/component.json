@@ -8,17 +8,15 @@
       "tooltip-text": "前往 codepen.io 运行此示例"
     },
     "footer": {
-      "links": "链接",
-      "repo": "代码仓库",
-      "community": "社区",
-      "changelog": "更新日志",
-      "theme": "在线主题生成器",
+      "links": "友情链接",
+      "community": "社区交流",
+      "components": "相关组件",
+      "help": "反馈帮助",
       "faq": "常见问题",
       "gitter": "在线讨论",
-      "starter": "脚手架",
       "feedback": "反馈建议",
       "contribution": "贡献指南",
-      "eleme": "饿了么"
+      "dingtalkGroup": "钉钉交流群"
     },
     "header": {
       "guide": "指南",
@@ -39,17 +37,14 @@
       "tooltip-text": "Run this demo on codepen.io"
     },
     "footer": {
+      "components": "Components",
       "links": "Links",
-      "repo": "GitHub",
       "community": "Community",
-      "changelog": "Changelog",
-      "theme": "Online Theme Roller",
-      "faq": "FAQ",
+      "help": "Help",
       "gitter": "Gitter",
-      "starter": "Starter kit",
       "feedback": "Feedback",
       "contribution": "Contribution",
-      "eleme": "Eleme"
+      "dingtalkGroup": "Dingtalk Group"
     },
     "header": {
       "guide": "Guide",
@@ -70,17 +65,14 @@
       "tooltip-text": "Prueba este ejemplo en codepen.io"
     },
     "footer": {
-      "links": "Enlaces",
-      "repo": "GitHub",
-      "community": "Comunidad",
-      "changelog": "Lista de cambios",
-      "theme": "Online Theme Roller",
-      "faq": "FAQ",
+      "components": "Components",
+      "links": "Links",
+      "community": "Community",
+      "help": "Help",
       "gitter": "Gitter",
-      "starter": "Kit de inicio",
-      "feedback": "Comentarios",
-      "contribution": "Contribución",
-      "eleme": "Eleme"
+      "feedback": "Feedback",
+      "contribution": "Contribution",
+      "dingtalkGroup": "Dingtalk Group"
     },
     "header": {
       "guide": "Guía",
@@ -101,17 +93,14 @@
       "tooltip-text": "Essayer cette démo sur codepen.io"
     },
     "footer": {
-      "links": "Liens",
-      "repo": "GitHub",
-      "community": "Communauté",
-      "changelog": "Changelog",
-      "theme": "Online Theme Roller",
-      "faq": "FAQ",
+      "components": "Components",
+      "links": "Links",
+      "community": "Community",
+      "help": "Help",
       "gitter": "Gitter",
-      "starter": "Kit de démarrage",
-      "feedback": "Commentaires",
+      "feedback": "Feedback",
       "contribution": "Contribution",
-      "eleme": "Eleme"
+      "dingtalkGroup": "Dingtalk Group"
     },
     "header": {
       "guide": "Guide",
