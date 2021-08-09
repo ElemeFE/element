@@ -11,12 +11,12 @@ lerna-debug.log.*
 lib
 .idea
 .vscode
-examples/vue-element-week
+examples/td-element-week
 examples/pages/en-US
 examples/pages/zh-CN
 examples/pages/es
 examples/pages/fr-FR
-fe.element/vue-element-week
+fe.element/td-element-week
 .npmrc
 coverage
 waiter.config.js

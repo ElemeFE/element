@@ -34,9 +34,9 @@
   import TreeStore from './model/tree-store';
   import { getNodeKey, findNearestComponent } from './model/util';
   import ElTreeNode from './tree-node.vue';
-  import {t} from 'vue-element-week/src/locale';
-  import emitter from 'vue-element-week/src/mixins/emitter';
-  import { addClass, removeClass } from 'vue-element-week/src/utils/dom';
+  import {t} from 'td-element-week/src/locale';
+  import emitter from 'td-element-week/src/mixins/emitter';
+  import { addClass, removeClass } from 'td-element-week/src/utils/dom';
 
   export default {
     name: 'ElTree',

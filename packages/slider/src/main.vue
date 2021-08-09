@@ -74,10 +74,10 @@
 </template>
 
 <script type="text/babel">
-  import ElInputNumber from 'vue-element-week/packages/input-number';
+  import ElInputNumber from 'td-element-week/packages/input-number';
   import SliderButton from './button.vue';
   import SliderMarker from './marker';
-  import Emitter from 'vue-element-week/src/mixins/emitter';
+  import Emitter from 'td-element-week/src/mixins/emitter';
 
   export default {
     name: 'ElSlider',

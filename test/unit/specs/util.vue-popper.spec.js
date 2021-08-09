@@ -1,4 +1,4 @@
-import VuePopper from 'vue-element-week/src/utils/vue-popper';
+import VuePopper from 'td-element-week/src/utils/vue-popper';
 import { createTest } from '../util';
 
 const Popper = Object.assign({}, VuePopper, {

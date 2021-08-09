@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { addClass, removeClass } from 'vue-element-week/src/utils/dom';
+import { addClass, removeClass } from 'td-element-week/src/utils/dom';
 
 let hasModal = false;
 let hasInitZIndex = false;

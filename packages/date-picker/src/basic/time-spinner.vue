@@ -101,9 +101,9 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from 'vue-element-week/src/utils/date-util';
-  import ElScrollbar from 'vue-element-week/packages/scrollbar';
-  import RepeatClick from 'vue-element-week/src/directives/repeat-click';
+  import { getRangeHours, getRangeMinutes, modifyTime } from 'td-element-week/src/utils/date-util';
+  import ElScrollbar from 'td-element-week/packages/scrollbar';
+  import RepeatClick from 'td-element-week/src/directives/repeat-click';
 
   export default {
     components: { ElScrollbar },

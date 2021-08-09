@@ -1,10 +1,10 @@
 <script>
-  import Clickoutside from 'vue-element-week/src/utils/clickoutside';
-  import Emitter from 'vue-element-week/src/mixins/emitter';
-  import Migrating from 'vue-element-week/src/mixins/migrating';
-  import ElButton from 'vue-element-week/packages/button';
-  import ElButtonGroup from 'vue-element-week/packages/button-group';
-  import { generateId } from 'vue-element-week/src/utils/util';
+  import Clickoutside from 'td-element-week/src/utils/clickoutside';
+  import Emitter from 'td-element-week/src/mixins/emitter';
+  import Migrating from 'td-element-week/src/mixins/migrating';
+  import ElButton from 'td-element-week/packages/button';
+  import ElButtonGroup from 'td-element-week/packages/button-group';
+  import { generateId } from 'td-element-week/src/utils/util';
 
   export default {
     name: 'ElDropdown',

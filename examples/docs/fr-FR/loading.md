@@ -175,7 +175,7 @@ Affichez une animation en plein écran quand vous charger des données.
 Vous pouvez invoquer Loading comme un service. Importez le service Loading:
 
 ```javascript
-import { Loading } from 'vue-element-week';
+import { Loading } from 'td-element-week';
 ```
 Et invoquer-le:
 

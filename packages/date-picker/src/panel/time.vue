@@ -31,8 +31,8 @@
 </template>
 
 <script type="text/babel">
-  import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from 'vue-element-week/src/utils/date-util';
-  import Locale from 'vue-element-week/src/mixins/locale';
+  import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from 'td-element-week/src/utils/date-util';
+  import Locale from 'td-element-week/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   export default {

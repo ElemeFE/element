@@ -112,8 +112,8 @@ fileSave(sassPath)
   .write(sassImportText, 'utf8')
   .end('\n');
 
-// 添加到 vue-element-week.d.ts
-const elementTsPath = path.join(__dirname, '../../types/vue-element-week.d.ts');
+// 添加到 td-element-week.d.ts
+const elementTsPath = path.join(__dirname, '../../types/td-element-week.d.ts');
 
 let elementTsText = `${fs.readFileSync(elementTsPath)}
 /** ${ComponentName} Component */

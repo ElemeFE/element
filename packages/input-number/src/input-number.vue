@@ -46,9 +46,9 @@
   </div>
 </template>
 <script>
-  import ElInput from 'vue-element-week/packages/input';
-  import Focus from 'vue-element-week/src/mixins/focus';
-  import RepeatClick from 'vue-element-week/src/directives/repeat-click';
+  import ElInput from 'td-element-week/packages/input';
+  import Focus from 'td-element-week/src/mixins/focus';
+  import RepeatClick from 'td-element-week/src/directives/repeat-click';
 
   export default {
     name: 'ElInputNumber',

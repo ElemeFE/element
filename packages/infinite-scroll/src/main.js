@@ -4,10 +4,10 @@ import {
   isFunction,
   isUndefined,
   isDefined
-} from 'vue-element-week/src/utils/types';
+} from 'td-element-week/src/utils/types';
 import {
   getScrollContainer
-} from 'vue-element-week/src/utils/dom';
+} from 'td-element-week/src/utils/dom';
 
 const getStyleComputedProperty = (element, property) => {
   if (element === window) {

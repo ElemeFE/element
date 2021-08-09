@@ -57,12 +57,12 @@
 </template>
 
 <script>
-import Locale from 'vue-element-week/src/mixins/locale';
-import fecha from 'vue-element-week/src/utils/date';
-import ElButton from 'vue-element-week/packages/button';
-import ElButtonGroup from 'vue-element-week/packages/button-group';
+import Locale from 'td-element-week/src/mixins/locale';
+import fecha from 'td-element-week/src/utils/date';
+import ElButton from 'td-element-week/packages/button';
+import ElButtonGroup from 'td-element-week/packages/button-group';
 import DateTable from './date-table';
-import { validateRangeInOneMonth } from 'vue-element-week/src/utils/date-util';
+import { validateRangeInOneMonth } from 'td-element-week/src/utils/date-util';
 
 const validTypes = ['prev-month', 'today', 'next-month'];
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

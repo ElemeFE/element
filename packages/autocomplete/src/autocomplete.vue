@@ -59,13 +59,13 @@
 </template>
 <script>
   import debounce from 'throttle-debounce/debounce';
-  import ElInput from 'vue-element-week/packages/input';
-  import Clickoutside from 'vue-element-week/src/utils/clickoutside';
+  import ElInput from 'td-element-week/packages/input';
+  import Clickoutside from 'td-element-week/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
-  import Emitter from 'vue-element-week/src/mixins/emitter';
-  import Migrating from 'vue-element-week/src/mixins/migrating';
-  import { generateId } from 'vue-element-week/src/utils/util';
-  import Focus from 'vue-element-week/src/mixins/focus';
+  import Emitter from 'td-element-week/src/mixins/emitter';
+  import Migrating from 'td-element-week/src/mixins/migrating';
+  import { generateId } from 'td-element-week/src/utils/util';
+  import Focus from 'td-element-week/src/mixins/focus';
 
   export default {
     name: 'ElAutocomplete',

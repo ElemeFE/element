@@ -112,21 +112,21 @@
 </template>
 
 <script>
-import Popper from 'vue-element-week/src/utils/vue-popper';
-import Clickoutside from 'vue-element-week/src/utils/clickoutside';
-import Emitter from 'vue-element-week/src/mixins/emitter';
-import Locale from 'vue-element-week/src/mixins/locale';
-import Migrating from 'vue-element-week/src/mixins/migrating';
-import ElInput from 'vue-element-week/packages/input';
-import ElTag from 'vue-element-week/packages/tag';
-import ElScrollbar from 'vue-element-week/packages/scrollbar';
-import ElCascaderPanel from 'vue-element-week/packages/cascader-panel';
-import AriaUtils from 'vue-element-week/src/utils/aria-utils';
-import { t } from 'vue-element-week/src/locale';
-import { isEqual, isEmpty, kebabCase } from 'vue-element-week/src/utils/util';
-import { isUndefined, isFunction } from 'vue-element-week/src/utils/types';
-import { isDef } from 'vue-element-week/src/utils/shared';
-import { addResizeListener, removeResizeListener } from 'vue-element-week/src/utils/resize-event';
+import Popper from 'td-element-week/src/utils/vue-popper';
+import Clickoutside from 'td-element-week/src/utils/clickoutside';
+import Emitter from 'td-element-week/src/mixins/emitter';
+import Locale from 'td-element-week/src/mixins/locale';
+import Migrating from 'td-element-week/src/mixins/migrating';
+import ElInput from 'td-element-week/packages/input';
+import ElTag from 'td-element-week/packages/tag';
+import ElScrollbar from 'td-element-week/packages/scrollbar';
+import ElCascaderPanel from 'td-element-week/packages/cascader-panel';
+import AriaUtils from 'td-element-week/src/utils/aria-utils';
+import { t } from 'td-element-week/src/locale';
+import { isEqual, isEmpty, kebabCase } from 'td-element-week/src/utils/util';
+import { isUndefined, isFunction } from 'td-element-week/src/utils/types';
+import { isDef } from 'td-element-week/src/utils/shared';
+import { addResizeListener, removeResizeListener } from 'td-element-week/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
 
 const { keys: KeyCode } = AriaUtils;

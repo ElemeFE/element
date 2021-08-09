@@ -24,10 +24,10 @@
   </span>
 </template>
 <script>
-import Popper from 'vue-element-week/src/utils/vue-popper';
-import { on, off } from 'vue-element-week/src/utils/dom';
-import { addClass, removeClass } from 'vue-element-week/src/utils/dom';
-import { generateId } from 'vue-element-week/src/utils/util';
+import Popper from 'td-element-week/src/utils/vue-popper';
+import { on, off } from 'td-element-week/src/utils/dom';
+import { addClass, removeClass } from 'td-element-week/src/utils/dom';
+import { generateId } from 'td-element-week/src/utils/util';
 
 export default {
   name: 'ElPopover',

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Watcher from './watcher';
-import { arrayFind } from 'vue-element-week/src/utils/util';
+import { arrayFind } from 'td-element-week/src/utils/util';
 
 Watcher.prototype.mutations = {
   setData(states, data) {

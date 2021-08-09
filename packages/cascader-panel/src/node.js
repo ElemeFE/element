@@ -1,5 +1,5 @@
-import { isEqual, capitalize } from 'vue-element-week/src/utils/util';
-import { isDef } from 'vue-element-week/src/utils/shared';
+import { isEqual, capitalize } from 'td-element-week/src/utils/util';
+import { isDef } from 'td-element-week/src/utils/shared';
 
 let uid = 0;
 

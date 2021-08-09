@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import { hasClass, addClass, removeClass } from 'vue-element-week/src/utils/dom';
-import ElCheckbox from 'vue-element-week/packages/checkbox';
+import { hasClass, addClass, removeClass } from 'td-element-week/src/utils/dom';
+import ElCheckbox from 'td-element-week/packages/checkbox';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';

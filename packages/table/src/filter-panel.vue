@@ -43,14 +43,14 @@
 </template>
 
 <script type="text/babel">
-  import Popper from 'vue-element-week/src/utils/vue-popper';
-  import { PopupManager } from 'vue-element-week/src/utils/popup';
-  import Locale from 'vue-element-week/src/mixins/locale';
-  import Clickoutside from 'vue-element-week/src/utils/clickoutside';
+  import Popper from 'td-element-week/src/utils/vue-popper';
+  import { PopupManager } from 'td-element-week/src/utils/popup';
+  import Locale from 'td-element-week/src/mixins/locale';
+  import Clickoutside from 'td-element-week/src/utils/clickoutside';
   import Dropdown from './dropdown';
-  import ElCheckbox from 'vue-element-week/packages/checkbox';
-  import ElCheckboxGroup from 'vue-element-week/packages/checkbox-group';
-  import ElScrollbar from 'vue-element-week/packages/scrollbar';
+  import ElCheckbox from 'td-element-week/packages/checkbox';
+  import ElCheckboxGroup from 'td-element-week/packages/checkbox-group';
+  import ElScrollbar from 'td-element-week/packages/scrollbar';
 
   export default {
     name: 'ElTableFilterPanel',

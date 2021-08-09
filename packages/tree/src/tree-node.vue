@@ -72,9 +72,9 @@
 </template>
 
 <script type="text/jsx">
-  import ElCollapseTransition from 'vue-element-week/src/transitions/collapse-transition';
-  import ElCheckbox from 'vue-element-week/packages/checkbox';
-  import emitter from 'vue-element-week/src/mixins/emitter';
+  import ElCollapseTransition from 'td-element-week/src/transitions/collapse-transition';
+  import ElCheckbox from 'td-element-week/packages/checkbox';
+  import emitter from 'td-element-week/src/mixins/emitter';
   import { getNodeKey } from './model/util';
 
   export default {

@@ -40,9 +40,9 @@
 </template>
 <script>
   import AsyncValidator from 'async-validator';
-  import emitter from 'vue-element-week/src/mixins/emitter';
-  import objectAssign from 'vue-element-week/src/utils/merge';
-  import { noop, getPropByPath } from 'vue-element-week/src/utils/util';
+  import emitter from 'td-element-week/src/mixins/emitter';
+  import objectAssign from 'td-element-week/src/utils/merge';
+  import { noop, getPropByPath } from 'td-element-week/src/utils/util';
   import LabelWrap from './label-wrap';
   export default {
     name: 'ElFormItem',

@@ -1,4 +1,4 @@
-import { addClass, removeClass } from 'vue-element-week/src/utils/dom';
+import { addClass, removeClass } from 'td-element-week/src/utils/dom';
 
 class Transition {
   beforeEnter(el) {

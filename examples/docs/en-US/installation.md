@@ -5,18 +5,18 @@
 Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
 
 ```shell
-npm i vue-element-week -S
+npm i td-element-week -S
 ```
 
 ### CDN
 
-Get the latest version from [unpkg.com/vue-element-week](https://unpkg.com/vue-element-week/) , and import JavaScript and CSS file in your page.
+Get the latest version from [unpkg.com/td-element-week](https://unpkg.com/td-element-week/) , and import JavaScript and CSS file in your page.
 
 ```html
 <!-- import CSS -->
-<link rel="stylesheet" href="https://unpkg.com/vue-element-week/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="https://unpkg.com/td-element-week/lib/theme-chalk/index.css">
 <!-- import JavaScript -->
-<script src="https://unpkg.com/vue-element-week/lib/index.js"></script>
+<script src="https://unpkg.com/td-element-week/lib/index.js"></script>
 ```
 
 :::tip

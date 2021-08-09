@@ -108,11 +108,11 @@
   </div>
 </template>
 <script>
-  import emitter from 'vue-element-week/src/mixins/emitter';
-  import Migrating from 'vue-element-week/src/mixins/migrating';
+  import emitter from 'td-element-week/src/mixins/emitter';
+  import Migrating from 'td-element-week/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
-  import merge from 'vue-element-week/src/utils/merge';
-  import {isKorean} from 'vue-element-week/src/utils/shared';
+  import merge from 'td-element-week/src/utils/merge';
+  import {isKorean} from 'td-element-week/src/utils/shared';
 
   export default {
     name: 'ElInput',

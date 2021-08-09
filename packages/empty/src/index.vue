@@ -18,7 +18,7 @@
 
 <script>
 import ImgEmpty from './img-empty.vue';
-import { t } from 'vue-element-week/src/locale';
+import { t } from 'td-element-week/src/locale';
 
 export default {
   name: 'ElEmpty',

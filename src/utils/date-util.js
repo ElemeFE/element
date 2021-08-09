@@ -1,5 +1,5 @@
-import fecha from 'vue-element-week/src/utils/date';
-import { t } from 'vue-element-week/src/locale';
+import fecha from 'td-element-week/src/utils/date';
+import { t } from 'td-element-week/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];

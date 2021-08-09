@@ -20,15 +20,15 @@ Element 的 theme-chalk 使用 SCSS 编写，如果你的项目也使用了 SCSS
 $--color-primary: teal;
 
 /* 改变 icon 字体路径变量，必需 */
-$--font-path: '~vue-element-week/lib/theme-chalk/fonts';
+$--font-path: '~td-element-week/lib/theme-chalk/fonts';
 
-@import "~vue-element-week/packages/theme-chalk/src/index";
+@import "~td-element-week/packages/theme-chalk/src/index";
 ```
 
 之后，在项目的入口文件中，直接引入以上样式文件即可（无需引入 Element 编译好的 CSS 文件）：
 ```JS
 import Vue from 'vue'
-import Element from 'vue-element-week'
+import Element from 'td-element-week'
 import './element-variables.scss'
 
 Vue.use(Element)
@@ -106,7 +106,7 @@ et
 
 ```javascript
 import '../theme/index.css'
-import ElementUI from 'vue-element-week'
+import ElementUI from 'td-element-week'
 import Vue from 'vue'
 
 Vue.use(ElementUI)
@@ -120,7 +120,7 @@ Vue.use(ElementUI)
     [
       "component",
       {
-        "libraryName": "vue-element-week",
+        "libraryName": "td-element-week",
         "styleLibraryName": "~theme"
       }
     ]

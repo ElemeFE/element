@@ -21,15 +21,15 @@ Le site précédent vous permet de visualiser et de télécharger un nouveau th�
 $--color-primary: teal;
 
 /* chemin vers le fichier de police, requis */
-$--font-path: '~vue-element-week/lib/theme-chalk/fonts';
+$--font-path: '~td-element-week/lib/theme-chalk/fonts';
 
-@import "~vue-element-week/packages/theme-chalk/src/index";
+@import "~td-element-week/packages/theme-chalk/src/index";
 ```
 
 Puis dans le fichier d'entrée, importez ce style au lieu de celui d'Element:
 ```JS
 import Vue from 'vue'
-import Element from 'vue-element-week'
+import Element from 'td-element-week'
 import './element-variables.scss'
 
 Vue.use(Element)
@@ -109,7 +109,7 @@ Importing your own theme is just like importing the default theme, only this tim
 
 ```javascript
 import '../theme/index.css'
-import ElementUI from 'vue-element-week'
+import ElementUI from 'td-element-week'
 import Vue from 'vue'
 
 Vue.use(ElementUI)
@@ -123,7 +123,7 @@ Si vous utilisez `babel-plugin-component` pour les imports sur demande, modifiez
     [
       "component",
       {
-        "libraryName": "vue-element-week",
+        "libraryName": "td-element-week",
         "styleLibraryName": "~theme"
       }
     ]

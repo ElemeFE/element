@@ -1,4 +1,4 @@
-import VuePopup from 'vue-element-week/src/utils/popup';
+import VuePopup from 'td-element-week/src/utils/popup';
 import { createTest, destroyVM } from '../util';
 
 const Popup = Object.assign({}, VuePopup, {

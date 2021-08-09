@@ -1,8 +1,8 @@
 <script type="text/jsx">
-  import emitter from 'vue-element-week/src/mixins/emitter';
-  import Migrating from 'vue-element-week/src/mixins/migrating';
-  import Menubar from 'vue-element-week/src/utils/menu/aria-menubar';
-  import { addClass, removeClass, hasClass } from 'vue-element-week/src/utils/dom';
+  import emitter from 'td-element-week/src/mixins/emitter';
+  import Migrating from 'td-element-week/src/mixins/migrating';
+  import Menubar from 'td-element-week/src/utils/menu/aria-menubar';
+  import { addClass, removeClass, hasClass } from 'td-element-week/src/utils/dom';
 
   export default {
     name: 'ElMenu',

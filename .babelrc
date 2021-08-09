@@ -29,9 +29,9 @@
       ],
       "plugins": [
         ["module-resolver", {
-          "root": ["vue-element-week"],
+          "root": ["td-element-week"],
           "alias": {
-            "vue-element-week/src": "vue-element-week/lib"
+            "td-element-week/src": "td-element-week/lib"
           }
         }]
       ]

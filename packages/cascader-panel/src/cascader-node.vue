@@ -1,7 +1,7 @@
 <script>
-  import ElCheckbox from 'vue-element-week/packages/checkbox';
-  import ElRadio from 'vue-element-week/packages/radio';
-  import { isEqual } from 'vue-element-week/src/utils/util';
+  import ElCheckbox from 'td-element-week/packages/checkbox';
+  import ElRadio from 'td-element-week/packages/radio';
+  import { isEqual } from 'td-element-week/src/utils/util';
 
   const stopPropagation = e => e.stopPropagation();
 

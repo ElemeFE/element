@@ -95,11 +95,11 @@ export interface InstallationOptions {
   size: string
 }
 
-/** The version of vue-element-week */
+/** The version of td-element-week */
 export const version: string
 
 /**
- * Install all vue-element-week components into Vue.
+ * Install all td-element-week components into Vue.
  * Please do not invoke this method directly.
  * Call `Vue.use(ElementUI)` to install.
  */

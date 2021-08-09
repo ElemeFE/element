@@ -16,8 +16,8 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'vue-element-week/src/mixins/emitter';
-  import { getValueByPath, escapeRegexpString } from 'vue-element-week/src/utils/util';
+  import Emitter from 'td-element-week/src/mixins/emitter';
+  import { getValueByPath, escapeRegexpString } from 'td-element-week/src/utils/util';
 
   export default {
     mixins: [Emitter],

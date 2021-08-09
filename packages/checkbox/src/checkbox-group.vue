@@ -1,5 +1,5 @@
 <script>
-  import Emitter from 'vue-element-week/src/mixins/emitter';
+  import Emitter from 'td-element-week/src/mixins/emitter';
 
   export default {
     name: 'ElCheckboxGroup',

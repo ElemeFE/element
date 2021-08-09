@@ -1,8 +1,8 @@
 // reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
 
-import { addResizeListener, removeResizeListener } from 'vue-element-week/src/utils/resize-event';
-import scrollbarWidth from 'vue-element-week/src/utils/scrollbar-width';
-import { toObject } from 'vue-element-week/src/utils/util';
+import { addResizeListener, removeResizeListener } from 'td-element-week/src/utils/resize-event';
+import scrollbarWidth from 'td-element-week/src/utils/scrollbar-width';
+import { toObject } from 'td-element-week/src/utils/util';
 import Bar from './bar';
 
 /* istanbul ignore next */

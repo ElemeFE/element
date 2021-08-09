@@ -62,8 +62,8 @@
     modifyDate,
     clearMilliseconds,
     timeWithinRange
-  } from 'vue-element-week/src/utils/date-util';
-  import Locale from 'vue-element-week/src/mixins/locale';
+  } from 'td-element-week/src/utils/date-util';
+  import Locale from 'td-element-week/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');

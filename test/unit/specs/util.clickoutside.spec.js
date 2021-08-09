@@ -1,4 +1,4 @@
-import Clickoutside from 'vue-element-week/src/utils/clickoutside';
+import Clickoutside from 'td-element-week/src/utils/clickoutside';
 const ctx = '@@clickoutsideContext';
 
 import { triggerEvent, triggerClick } from '../util';

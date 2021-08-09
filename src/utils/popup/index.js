@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import merge from 'vue-element-week/src/utils/merge';
-import PopupManager from 'vue-element-week/src/utils/popup/popup-manager';
+import merge from 'td-element-week/src/utils/merge';
+import PopupManager from 'td-element-week/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
 import { getStyle, addClass, removeClass, hasClass } from '../dom';
 

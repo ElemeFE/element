@@ -42,11 +42,11 @@
 </template>
 
 <script>
-  import ElButton from 'vue-element-week/packages/button';
-  import Emitter from 'vue-element-week/src/mixins/emitter';
-  import Locale from 'vue-element-week/src/mixins/locale';
+  import ElButton from 'td-element-week/packages/button';
+  import Emitter from 'td-element-week/src/mixins/emitter';
+  import Locale from 'td-element-week/src/mixins/locale';
   import TransferPanel from './transfer-panel.vue';
-  import Migrating from 'vue-element-week/src/mixins/migrating';
+  import Migrating from 'td-element-week/src/mixins/migrating';
 
   export default {
     name: 'ElTransfer',

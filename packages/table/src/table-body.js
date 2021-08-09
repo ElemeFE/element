@@ -1,8 +1,8 @@
-import { arrayFindIndex } from 'vue-element-week/src/utils/util';
+import { arrayFindIndex } from 'td-element-week/src/utils/util';
 import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { getStyle, hasClass, removeClass, addClass } from 'vue-element-week/src/utils/dom';
-import ElCheckbox from 'vue-element-week/packages/checkbox';
-import ElTooltip from 'vue-element-week/packages/tooltip';
+import { getStyle, hasClass, removeClass, addClass } from 'td-element-week/src/utils/dom';
+import ElCheckbox from 'td-element-week/packages/checkbox';
+import ElTooltip from 'td-element-week/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';

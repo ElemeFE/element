@@ -9,21 +9,21 @@ var transitionList = fs.readdirSync(path.resolve(__dirname, '../src/transitions'
 var externals = {};
 
 Object.keys(Components).forEach(function(key) {
-  externals[`vue-element-week/packages/${key}`] = `vue-element-week/lib/${key}`;
+  externals[`td-element-week/packages/${key}`] = `td-element-week/lib/${key}`;
 });
 
-externals['vue-element-week/src/locale'] = 'vue-element-week/lib/locale';
+externals['td-element-week/src/locale'] = 'td-element-week/lib/locale';
 utilsList.forEach(function(file) {
   file = path.basename(file, '.js');
-  externals[`vue-element-week/src/utils/${file}`] = `vue-element-week/lib/utils/${file}`;
+  externals[`td-element-week/src/utils/${file}`] = `td-element-week/lib/utils/${file}`;
 });
 mixinsList.forEach(function(file) {
   file = path.basename(file, '.js');
-  externals[`vue-element-week/src/mixins/${file}`] = `vue-element-week/lib/mixins/${file}`;
+  externals[`td-element-week/src/mixins/${file}`] = `td-element-week/lib/mixins/${file}`;
 });
 transitionList.forEach(function(file) {
   file = path.basename(file, '.js');
-  externals[`vue-element-week/src/transitions/${file}`] = `vue-element-week/lib/transitions/${file}`;
+  externals[`td-element-week/src/transitions/${file}`] = `td-element-week/lib/transitions/${file}`;
 });
 
 externals = [Object.assign({
@@ -36,7 +36,7 @@ exports.alias = {
   main: path.resolve(__dirname, '../src'),
   packages: path.resolve(__dirname, '../packages'),
   examples: path.resolve(__dirname, '../examples'),
-  'vue-element-week': path.resolve(__dirname, '../')
+  'td-element-week': path.resolve(__dirname, '../')
 };
 
 exports.vue = {

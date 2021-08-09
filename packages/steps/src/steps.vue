@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Migrating from 'vue-element-week/src/mixins/migrating';
+import Migrating from 'td-element-week/src/mixins/migrating';
 
 export default {
   name: 'ElSteps',

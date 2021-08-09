@@ -1,4 +1,4 @@
-import { arrayFind } from 'vue-element-week/src/utils/util';
+import { arrayFind } from 'td-element-week/src/utils/util';
 import { getRowIdentity } from '../util';
 
 export default {

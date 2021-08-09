@@ -213,12 +213,12 @@
 </template>
 
 <script type="text/babel">
-  import ElCheckbox from 'vue-element-week/packages/checkbox';
+  import ElCheckbox from 'td-element-week/packages/checkbox';
   import { debounce, throttle } from 'throttle-debounce';
-  import { addResizeListener, removeResizeListener } from 'vue-element-week/src/utils/resize-event';
-  import Mousewheel from 'vue-element-week/src/directives/mousewheel';
-  import Locale from 'vue-element-week/src/mixins/locale';
-  import Migrating from 'vue-element-week/src/mixins/migrating';
+  import { addResizeListener, removeResizeListener } from 'td-element-week/src/utils/resize-event';
+  import Mousewheel from 'td-element-week/src/directives/mousewheel';
+  import Locale from 'td-element-week/src/mixins/locale';
+  import Migrating from 'td-element-week/src/mixins/migrating';
   import { createStore, mapStates } from './store/helper';
   import TableLayout from './table-layout';
   import TableBody from './table-body';

@@ -1,4 +1,4 @@
-import { getPropByPath } from 'vue-element-week/src/utils/util';
+import { getPropByPath } from 'td-element-week/src/utils/util';
 
 export const cellStarts = {
   default: {

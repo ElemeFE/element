@@ -161,11 +161,11 @@
     extractDateFormat,
     extractTimeFormat,
     timeWithinRange
-  } from 'vue-element-week/src/utils/date-util';
-  import Clickoutside from 'vue-element-week/src/utils/clickoutside';
-  import Locale from 'vue-element-week/src/mixins/locale';
-  import ElInput from 'vue-element-week/packages/input';
-  import ElButton from 'vue-element-week/packages/button';
+  } from 'td-element-week/src/utils/date-util';
+  import Clickoutside from 'td-element-week/src/utils/clickoutside';
+  import Locale from 'td-element-week/src/mixins/locale';
+  import ElInput from 'td-element-week/packages/input';
+  import ElButton from 'td-element-week/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';

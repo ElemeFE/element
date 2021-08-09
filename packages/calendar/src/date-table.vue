@@ -1,6 +1,6 @@
 <script>
-import fecha from 'vue-element-week/src/utils/date';
-import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'vue-element-week/src/utils/date-util';
+import fecha from 'td-element-week/src/utils/date';
+import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'td-element-week/src/utils/date-util';
 
 export default {
   props: {

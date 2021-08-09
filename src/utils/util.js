@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { isString, isObject } from 'vue-element-week/src/utils/types';
+import { isString, isObject } from 'td-element-week/src/utils/types';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 

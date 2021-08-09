@@ -1,9 +1,9 @@
-import { kebabCase } from 'vue-element-week/src/utils/util';
+import { kebabCase } from 'td-element-week/src/utils/util';
 /**
  * Show migrating guide in browser console.
  *
  * Usage:
- * import Migrating from 'vue-element-week/src/mixins/migrating';
+ * import Migrating from 'td-element-week/src/mixins/migrating';
  *
  * mixins: [Migrating]
  *

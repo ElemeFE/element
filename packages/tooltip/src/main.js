@@ -1,7 +1,7 @@
-import Popper from 'vue-element-week/src/utils/vue-popper';
+import Popper from 'td-element-week/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
-import { addClass, removeClass, on, off } from 'vue-element-week/src/utils/dom';
-import { generateId } from 'vue-element-week/src/utils/util';
+import { addClass, removeClass, on, off } from 'td-element-week/src/utils/dom';
+import { generateId } from 'td-element-week/src/utils/util';
 import Vue from 'vue';
 
 export default {

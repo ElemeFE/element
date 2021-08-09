@@ -1,4 +1,4 @@
-export * from './vue-element-week'
+export * from './td-element-week'
 
-import * as ElementUI from './vue-element-week'
+import * as ElementUI from './td-element-week'
 export default ElementUI

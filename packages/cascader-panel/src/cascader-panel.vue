@@ -17,16 +17,16 @@
 <script>
 import CascaderMenu from './cascader-menu';
 import Store from './store';
-import merge from 'vue-element-week/src/utils/merge';
-import AriaUtils from 'vue-element-week/src/utils/aria-utils';
-import scrollIntoView from 'vue-element-week/src/utils/scroll-into-view';
+import merge from 'td-element-week/src/utils/merge';
+import AriaUtils from 'td-element-week/src/utils/aria-utils';
+import scrollIntoView from 'td-element-week/src/utils/scroll-into-view';
 import {
   noop,
   coerceTruthyValueToArray,
   isEqual,
   isEmpty,
   valueEquals
-} from 'vue-element-week/src/utils/util';
+} from 'td-element-week/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {

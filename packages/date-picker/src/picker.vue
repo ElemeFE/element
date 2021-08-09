@@ -85,12 +85,12 @@
 
 <script>
 import Vue from 'vue';
-import Clickoutside from 'vue-element-week/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from 'vue-element-week/src/utils/date-util';
-import Popper from 'vue-element-week/src/utils/vue-popper';
-import Emitter from 'vue-element-week/src/mixins/emitter';
-import ElInput from 'vue-element-week/packages/input';
-import merge from 'vue-element-week/src/utils/merge';
+import Clickoutside from 'td-element-week/src/utils/clickoutside';
+import { formatDate, parseDate, isDateObject, getWeekNumber } from 'td-element-week/src/utils/date-util';
+import Popper from 'td-element-week/src/utils/vue-popper';
+import Emitter from 'td-element-week/src/mixins/emitter';
+import ElInput from 'td-element-week/packages/input';
+import merge from 'td-element-week/src/utils/merge';
 
 const NewPopper = {
   props: {

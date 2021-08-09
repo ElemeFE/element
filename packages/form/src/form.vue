@@ -7,7 +7,7 @@
   </form>
 </template>
 <script>
-  import objectAssign from 'vue-element-week/src/utils/merge';
+  import objectAssign from 'td-element-week/src/utils/merge';
 
   export default {
     name: 'ElForm',

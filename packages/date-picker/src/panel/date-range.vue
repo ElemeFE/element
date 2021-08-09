@@ -202,13 +202,13 @@
     nextDate,
     extractDateFormat,
     extractTimeFormat
-  } from 'vue-element-week/src/utils/date-util';
-  import Clickoutside from 'vue-element-week/src/utils/clickoutside';
-  import Locale from 'vue-element-week/src/mixins/locale';
+  } from 'td-element-week/src/utils/date-util';
+  import Clickoutside from 'td-element-week/src/utils/clickoutside';
+  import Locale from 'td-element-week/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
-  import ElInput from 'vue-element-week/packages/input';
-  import ElButton from 'vue-element-week/packages/button';
+  import ElInput from 'td-element-week/packages/input';
+  import ElButton from 'td-element-week/packages/button';
 
   const calcDefaultValue = (defaultValue) => {
     if (Array.isArray(defaultValue)) {

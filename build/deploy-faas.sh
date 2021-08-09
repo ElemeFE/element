@@ -10,8 +10,8 @@ SUB_FOLDER='2.15'
 mkdir -p $SUB_FOLDER
 rm -rf *.js *.css *.map static
 rm -rf $SUB_FOLDER/**
-cp -rf ../../examples/vue-element-week/** .
-cp -rf ../../examples/vue-element-week/** $SUB_FOLDER/
+cp -rf ../../examples/td-element-week/** .
+cp -rf ../../examples/td-element-week/** $SUB_FOLDER/
 cd ../..
 
 # deploy domestic site

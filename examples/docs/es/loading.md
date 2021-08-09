@@ -175,7 +175,7 @@ Muestra una animación de pantalla completa mientras se cargan los datos
 Puede invocar el componente con un servicio. Importe el servicio:
 
 ```javascript
-import { Loading } from 'vue-element-week';
+import { Loading } from 'td-element-week';
 ```
 Invocar:
 ```javascript
