@@ -4,10 +4,10 @@ import {
   isFunction,
   isUndefined,
   isDefined
-} from 'td-element-week/src/utils/types';
+} from 'element-ui/src/utils/types';
 import {
   getScrollContainer
-} from 'td-element-week/src/utils/dom';
+} from 'element-ui/src/utils/dom';
 
 const getStyleComputedProperty = (element, property) => {
   if (element === window) {

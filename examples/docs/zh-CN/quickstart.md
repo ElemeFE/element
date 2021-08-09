@@ -22,8 +22,8 @@
 
 ```javascript
 import Vue from 'vue';
-import ElementUI from 'td-element-week';
-import 'td-element-week/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 
 Vue.use(ElementUI);
@@ -55,7 +55,7 @@ npm install babel-plugin-component -D
     [
       "component",
       {
-        "libraryName": "td-element-week",
+        "libraryName": "element-ui",
         "styleLibraryName": "theme-chalk"
       }
     ]
@@ -67,7 +67,7 @@ npm install babel-plugin-component -D
 
 ```javascript
 import Vue from 'vue';
-import { Button, Select } from 'td-element-week';
+import { Button, Select } from 'element-ui';
 import App from './App.vue';
 
 Vue.component(Button.name, Button);
@@ -165,7 +165,7 @@ import {
   MessageBox,
   Message,
   Notification
-} from 'td-element-week';
+} from 'element-ui';
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -260,7 +260,7 @@ Vue.prototype.$message = Message;
 
 ```js
 import Vue from 'vue';
-import Element from 'td-element-week';
+import Element from 'element-ui';
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
@@ -268,7 +268,7 @@ Vue.use(Element, { size: 'small', zIndex: 3000 });
 
 ```js
 import Vue from 'vue';
-import { Button } from 'td-element-week';
+import { Button } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);

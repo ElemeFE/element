@@ -1,8 +1,8 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
-import ElProgress from 'td-element-week/packages/progress';
-import Migrating from 'td-element-week/src/mixins/migrating';
+import ElProgress from 'element-ui/packages/progress';
+import Migrating from 'element-ui/src/mixins/migrating';
 
 function noop() {}
 

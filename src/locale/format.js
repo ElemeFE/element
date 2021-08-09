@@ -1,4 +1,4 @@
-import { hasOwn } from 'td-element-week/src/utils/util';
+import { hasOwn } from 'element-ui/src/utils/util';
 
 const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 /**

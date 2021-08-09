@@ -1,4 +1,4 @@
-import { t } from 'td-element-week/src/locale';
+import { t } from 'element-ui/src/locale';
 
 export default {
   methods: {

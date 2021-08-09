@@ -19,8 +19,8 @@
 </template>
 
 <script type="text/babel">
-  import ElScrollbar from 'td-element-week/packages/scrollbar';
-  import scrollIntoView from 'td-element-week/src/utils/scroll-into-view';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
   const parseTime = function(time) {
     const values = (time || '').split(':');

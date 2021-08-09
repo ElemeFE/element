@@ -84,12 +84,12 @@
     prevYear,
     nextYear,
     nextMonth
-  } from 'td-element-week/src/utils/date-util';
-  import Clickoutside from 'td-element-week/src/utils/clickoutside';
-  import Locale from 'td-element-week/src/mixins/locale';
+  } from 'element-ui/src/utils/date-util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Locale from 'element-ui/src/mixins/locale';
   import MonthTable from '../basic/month-table';
-  import ElInput from 'td-element-week/packages/input';
-  import ElButton from 'td-element-week/packages/button';
+  import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
 
   const calcDefaultValue = (defaultValue) => {
     if (Array.isArray(defaultValue)) {

@@ -33,9 +33,9 @@
 </template>
 
 <script>
-  import { hasClass } from 'td-element-week/src/utils/dom';
-  import { isObject } from 'td-element-week/src/utils/types';
-  import Migrating from 'td-element-week/src/mixins/migrating';
+  import { hasClass } from 'element-ui/src/utils/dom';
+  import { isObject } from 'element-ui/src/utils/types';
+  import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
     name: 'ElRate',

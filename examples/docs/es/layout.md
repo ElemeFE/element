@@ -315,7 +315,7 @@ Tomando el ejemplo de Bootstrap responsive design, existen 5 breakpoints: xs, sm
 Adicionalmente, Element provee una serie de clases para ocultar elementos dadas ciertas condiciones. Estas clases pueden se agregadas a cualquier elemento del DOM o un elemento propio. Necesita importar el siguiente archivo CSS para usar estas clases:
 
 ```js
-import 'td-element-week/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css';
 ```
 
 Las clases son:

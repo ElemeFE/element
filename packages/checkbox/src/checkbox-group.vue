@@ -1,5 +1,5 @@
 <script>
-  import Emitter from 'td-element-week/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElCheckboxGroup',

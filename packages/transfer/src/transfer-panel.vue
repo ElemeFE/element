@@ -52,10 +52,10 @@
 </template>
 
 <script>
-  import ElCheckboxGroup from 'td-element-week/packages/checkbox-group';
-  import ElCheckbox from 'td-element-week/packages/checkbox';
-  import ElInput from 'td-element-week/packages/input';
-  import Locale from 'td-element-week/src/mixins/locale';
+  import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
+  import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElInput from 'element-ui/packages/input';
+  import Locale from 'element-ui/src/mixins/locale';
 
   export default {
     mixins: [Locale],

@@ -1,4 +1,4 @@
-import { getValueByPath } from 'td-element-week/src/utils/util';
+import { getValueByPath } from 'element-ui/src/utils/util';
 
 export const getCell = function(event) {
   let cell = event.target;

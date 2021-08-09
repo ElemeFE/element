@@ -88,8 +88,8 @@ import Empty from '../packages/empty/index.js';
 import Descriptions from '../packages/descriptions/index.js';
 import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
-import locale from 'td-element-week/src/locale';
-import CollapseTransition from 'td-element-week/src/transitions/collapse-transition';
+import locale from 'element-ui/src/locale';
+import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
 const components = [
   Pagination,

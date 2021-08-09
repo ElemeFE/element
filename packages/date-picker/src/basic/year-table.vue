@@ -44,9 +44,9 @@
 </template>
 
 <script type="text/babel">
-  import { hasClass } from 'td-element-week/src/utils/dom';
-  import { isDate, range, nextDate, getDayCountOfYear } from 'td-element-week/src/utils/date-util';
-  import { arrayFindIndex, coerceTruthyValueToArray } from 'td-element-week/src/utils/util';
+  import { hasClass } from 'element-ui/src/utils/dom';
+  import { isDate, range, nextDate, getDayCountOfYear } from 'element-ui/src/utils/date-util';
+  import { arrayFindIndex, coerceTruthyValueToArray } from 'element-ui/src/utils/util';
 
   const datesInYear = year => {
     const numOfDays = getDayCountOfYear(year);

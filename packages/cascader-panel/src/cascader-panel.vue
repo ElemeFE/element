@@ -17,16 +17,16 @@
 <script>
 import CascaderMenu from './cascader-menu';
 import Store from './store';
-import merge from 'td-element-week/src/utils/merge';
-import AriaUtils from 'td-element-week/src/utils/aria-utils';
-import scrollIntoView from 'td-element-week/src/utils/scroll-into-view';
+import merge from 'element-ui/src/utils/merge';
+import AriaUtils from 'element-ui/src/utils/aria-utils';
+import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 import {
   noop,
   coerceTruthyValueToArray,
   isEqual,
   isEmpty,
   valueEquals
-} from 'td-element-week/src/utils/util';
+} from 'element-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {

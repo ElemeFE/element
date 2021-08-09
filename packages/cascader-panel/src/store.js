@@ -1,5 +1,5 @@
 import Node from './node';
-import { coerceTruthyValueToArray, valueEquals } from 'td-element-week/src/utils/util';
+import { coerceTruthyValueToArray, valueEquals } from 'element-ui/src/utils/util';
 
 const flatNodes = (data, leafOnly) => {
   return data.reduce((res, node) => {

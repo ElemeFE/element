@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import ElTooltip from 'td-element-week/packages/tooltip';
+  import ElTooltip from 'element-ui/packages/tooltip';
 
   export default {
     name: 'ElSliderButton',

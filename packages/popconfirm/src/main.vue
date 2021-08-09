@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import ElPopover from 'td-element-week/packages/popover';
-import ElButton from 'td-element-week/packages/button';
-import {t} from 'td-element-week/src/locale';
+import ElPopover from 'element-ui/packages/popover';
+import ElButton from 'element-ui/packages/button';
+import {t} from 'element-ui/src/locale';
 
 export default {
   name: 'ElPopconfirm',

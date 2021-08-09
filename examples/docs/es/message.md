@@ -193,7 +193,7 @@ Element ha agregado un método global llamado `$message` para Vue.prototype. Ent
 Import `Message`:
 
 ```javascript
-import { Message } from 'td-element-week';
+import { Message } from 'element-ui';
 ```
 
 En este caso debería llamar al método `Message(options)`. También se han registrado métodos para los diferentes tipos, e.g. `Message.success(options)`. Puede llamar al método `Message.closeAll()` para cerrar manualmente todas las instancias.

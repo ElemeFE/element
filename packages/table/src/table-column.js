@@ -1,6 +1,6 @@
 import { cellStarts, cellForced, defaultRenderCell, treeCellPrefix } from './config';
 import { mergeOptions, parseWidth, parseMinWidth, compose } from './util';
-import ElCheckbox from 'td-element-week/packages/checkbox';
+import ElCheckbox from 'element-ui/packages/checkbox';
 
 let columnIdSeed = 1;
 

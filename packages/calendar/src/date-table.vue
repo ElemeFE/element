@@ -1,6 +1,6 @@
 <script>
-import fecha from 'td-element-week/src/utils/date';
-import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'td-element-week/src/utils/date-util';
+import fecha from 'element-ui/src/utils/date';
+import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings, validateRangeInOneMonth } from 'element-ui/src/utils/date-util';
 
 export default {
   props: {

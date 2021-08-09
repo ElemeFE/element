@@ -1,8 +1,8 @@
 {
-  "name": "td-element-week",
+  "name": "element-ui",
   "version": "1.0.0",
   "description": "A Component Library for Vue.js.",
-  "main": "lib/td-element-week.common.js",
+  "main": "lib/element-ui.common.js",
   "files": [
     "lib",
     "src",
@@ -17,7 +17,7 @@
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "build:umd": "node build/bin/build-locale.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
-    "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/td-element-week/CNAME",
+    "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/element-ui/CNAME",
     "deploy:extension": "cross-env NODE_ENV=production webpack --config build/webpack.extension.js",
     "dev:extension": "rimraf examples/extension/dist && cross-env NODE_ENV=development webpack --watch --config build/webpack.extension.js",
     "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
@@ -36,7 +36,7 @@
     },
     {
       "domain": "element-theme",
-      "public": "examples/td-element-week",
+      "public": "examples/element-ui",
       "build": [
         "yarn",
         "npm run deploy:build"
@@ -49,7 +49,7 @@
   },
   "homepage": "http://element.eleme.io",
   "keywords": [
-    "td-element-week"
+    "element-ui"
   ],
   "license": "MIT",
   "bugs": {

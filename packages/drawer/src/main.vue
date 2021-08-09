@@ -47,8 +47,8 @@
 </template>
 
 <script>
-import Popup from 'td-element-week/src/utils/popup';
-import emitter from 'td-element-week/src/mixins/emitter';
+import Popup from 'element-ui/src/utils/popup';
+import emitter from 'element-ui/src/mixins/emitter';
 
 export default {
   name: 'ElDrawer',

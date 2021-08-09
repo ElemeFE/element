@@ -29,9 +29,9 @@
       ],
       "plugins": [
         ["module-resolver", {
-          "root": ["td-element-week"],
+          "root": ["element-ui"],
           "alias": {
-            "td-element-week/src": "td-element-week/lib"
+            "element-ui/src": "element-ui/lib"
           }
         }]
       ]

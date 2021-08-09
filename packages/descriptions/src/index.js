@@ -1,5 +1,5 @@
 import DescriptionsRow from './descriptions-row';
-import { isFunction } from 'td-element-week/src/utils/types';
+import { isFunction } from 'element-ui/src/utils/types';
 
 export default {
   name: 'ElDescriptions',

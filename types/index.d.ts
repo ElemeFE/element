@@ -1,4 +1,4 @@
-export * from './td-element-week'
+export * from './element-ui'
 
-import * as ElementUI from './td-element-week'
+import * as ElementUI from './element-ui'
 export default ElementUI

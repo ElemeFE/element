@@ -315,7 +315,7 @@ Taking example by Bootstrap's responsive design, five breakpoints are preset: xs
 Additionally, Element provides a series of classes for hiding elements under certain conditions. These classes can be added to any DOM elements or custom components. You need to import the following CSS file to use these classes:
 
 ```js
-import 'td-element-week/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css';
 ```
 
 The classes are:

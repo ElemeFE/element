@@ -18,9 +18,9 @@
   </transition>
 </template>
 <script>
-  import Popper from 'td-element-week/src/utils/vue-popper';
-  import Emitter from 'td-element-week/src/mixins/emitter';
-  import ElScrollbar from 'td-element-week/packages/scrollbar';
+  import Popper from 'element-ui/src/utils/vue-popper';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
 
   export default {
     components: { ElScrollbar },

@@ -59,7 +59,7 @@
         const docsHandler = getHandler('docs', 'docs-style');
 
         if (!this.chalk) {
-          const url = `https://unpkg.com/td-element-week@${ version }/lib/theme-chalk/index.css`;
+          const url = `https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`;
           this.getCSSString(url, chalkHandler, 'chalk');
         } else {
           chalkHandler();
