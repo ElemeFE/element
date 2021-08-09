@@ -1,4 +1,4 @@
-import { once, on } from 'element-ui/src/utils/dom';
+import { once, on } from 'vue-element-week/src/utils/dom';
 
 export default {
   bind(el, binding, vnode) {

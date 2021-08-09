@@ -45,9 +45,9 @@
   </div>
 </template>
 <script>
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import { generateId } from 'element-ui/src/utils/util';
+  import ElCollapseTransition from 'vue-element-week/src/transitions/collapse-transition';
+  import Emitter from 'vue-element-week/src/mixins/emitter';
+  import { generateId } from 'vue-element-week/src/utils/util';
 
   export default {
     name: 'ElCollapseItem',

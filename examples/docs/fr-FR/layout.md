@@ -315,7 +315,7 @@ Se basant sur le design responsive de Bootstrap, il existe cinq breakpoints déj
 Element fournit également une série de classes pour cacher des éléments dans certaines circonstances. Ces classes peuvent être ajoutées à n'importe quel élément du DOM ou composant. Vous devrez importer le fichier CSS suivant pour pouvoir les utiliser:
 
 ```js
-import 'element-ui/lib/theme-chalk/display.css';
+import 'vue-element-week/lib/theme-chalk/display.css';
 ```
 
 Ces classes sont:

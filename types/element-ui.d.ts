@@ -95,11 +95,11 @@ export interface InstallationOptions {
   size: string
 }
 
-/** The version of element-ui */
+/** The version of vue-element-week */
 export const version: string
 
 /**
- * Install all element-ui components into Vue.
+ * Install all vue-element-week components into Vue.
  * Please do not invoke this method directly.
  * Call `Vue.use(ElementUI)` to install.
  */

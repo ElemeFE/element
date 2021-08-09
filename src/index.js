@@ -88,8 +88,8 @@ import Empty from '../packages/empty/index.js';
 import Descriptions from '../packages/descriptions/index.js';
 import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
-import locale from 'element-ui/src/locale';
-import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import locale from 'vue-element-week/src/locale';
+import CollapseTransition from 'vue-element-week/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
@@ -210,7 +210,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.15.5',
+  version: '1.0.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,

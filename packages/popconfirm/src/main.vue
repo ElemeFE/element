@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import ElPopover from 'element-ui/packages/popover';
-import ElButton from 'element-ui/packages/button';
-import {t} from 'element-ui/src/locale';
+import ElPopover from 'vue-element-week/packages/popover';
+import ElButton from 'vue-element-week/packages/button';
+import {t} from 'vue-element-week/src/locale';
 
 export default {
   name: 'ElPopconfirm',

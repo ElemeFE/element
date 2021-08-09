@@ -1,5 +1,5 @@
-import fecha from 'element-ui/src/utils/date';
-import { t } from 'element-ui/src/locale';
+import fecha from 'vue-element-week/src/utils/date';
+import { t } from 'vue-element-week/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -98,17 +98,35 @@ export const getStartDateOfMonth = function(year, month) {
 
 export const getWeekNumber = function(src) {
   if (!isDate(src)) return null;
-  const date = new Date(src.getTime());
-  date.setHours(0, 0, 0, 0);
+  //   const date = new Date(src.getTime());
+  //   date.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
-  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  //   date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
   // January 4 is always in week 1.
-  const week1 = new Date(date.getFullYear(), 0, 4);
+  //   const week1 = new Date(date.getFullYear(), 0, 4);
   // Adjust to Thursday in week 1 and count number of weeks from date to week 1.
   // Rounding should be fine for Daylight Saving Time. Its shift should never be more than 12 hours.
-  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  //   console.log(week1, '===week1===');
+  //   return (
+  //     1 +
+  //     Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7)
+  //   );
+  const [year, month, day] = getYearMonthDay(src);
+  return getYearWeek(year, month, day);
 };
-
+function getYearWeek(a, b, c) {
+  let date1 = new Date(a, parseInt(b, 10) - 1, c);
+  let date2 = new Date(a, 0, 1);
+  let d = Math.round((date1.valueOf() - date2.valueOf()) / 86400000);
+  return Math.ceil((d + (date2.getDay() + 1 - 1)) / 7);
+}
+function getYearMonthDay(value) {
+  const date = value ? new Date(value) : new Date();
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  return [year, month + 1, day];
+}
 export const getRangeHours = function(ranges) {
   const hours = [];
   let disabledHours = [];

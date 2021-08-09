@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
-import { PopupManager } from 'element-ui/src/utils/popup';
+import { on, off } from 'vue-element-week/src/utils/dom';
+import { rafThrottle, isFirefox } from 'vue-element-week/src/utils/util';
+import { PopupManager } from 'vue-element-week/src/utils/popup';
 
 const Mode = {
   CONTAIN: {

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { on } from 'element-ui/src/utils/dom';
+import { on } from 'vue-element-week/src/utils/dom';
 
 const nodeList = [];
 const ctx = '@@clickoutsideContext';
