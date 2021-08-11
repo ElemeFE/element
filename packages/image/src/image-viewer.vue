@@ -44,8 +44,7 @@
           :src="currentImg"
           :style="imgStyle"
           @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown">
+          @error="handleImgError">
       </div>
     </div>
   </transition>
@@ -53,7 +52,7 @@
 
 <script>
 import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
+import { rafThrottle, isFirefox, isMobile } from 'element-ui/src/utils/util';
 import { PopupManager } from 'element-ui/src/utils/popup';
 
 const Mode = {
@@ -66,8 +65,11 @@ const Mode = {
     icon: 'el-icon-c-scale-to-original'
   }
 };
-
 const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel';
+// 兼容移动端拖动
+const mousedownEventName = isMobile() ? 'touchstart' : 'mousedown';
+const mousemoveEventName = isMobile() ? 'touchmove' : 'mousemove';
+const mouseupEventName = isMobile() ? 'touchend' : 'mouseup';
 
 export default {
   name: 'elImageViewer',
@@ -166,6 +168,29 @@ export default {
       });
     }
   },
+
+  beforeCreate() {
+    this._handleMouseDown = e => {
+      const _isMobile = isMobile();
+      if (this.loading || (!_isMobile && e.button !== 0)) return;
+
+      const { offsetX, offsetY } = this.transform;
+      const { pageX: c_pageX, pageY: c_pageY } = _isMobile ? e.touches[0] : e;
+
+      this._dragHandler = rafThrottle(ev => {
+        const { pageX: m_pageX, pageY: m_pageY } = _isMobile ? ev.touches[0] : ev;
+        this.transform.offsetX = offsetX + m_pageX - c_pageX;
+        this.transform.offsetY = offsetY + m_pageY - c_pageY;
+      });
+      on(document, mousemoveEventName, this._dragHandler);
+      on(document, mouseupEventName, ev => {
+        off(document, mousemoveEventName, this._dragHandler);
+      });
+
+      e.preventDefault();
+    };
+  },
+
   methods: {
     hide() {
       this.deviceSupportUninstall();
@@ -227,27 +252,15 @@ export default {
     },
     handleImgLoad(e) {
       this.loading = false;
+      this.bindImgMouseDownEvent();
     },
     handleImgError(e) {
       this.loading = false;
       e.target.alt = '加载失败';
     },
-    handleMouseDown(e) {
-      if (this.loading || e.button !== 0) return;
-
-      const { offsetX, offsetY } = this.transform;
-      const startX = e.pageX;
-      const startY = e.pageY;
-      this._dragHandler = rafThrottle(ev => {
-        this.transform.offsetX = offsetX + ev.pageX - startX;
-        this.transform.offsetY = offsetY + ev.pageY - startY;
-      });
-      on(document, 'mousemove', this._dragHandler);
-      on(document, 'mouseup', ev => {
-        off(document, 'mousemove', this._dragHandler);
-      });
-
-      e.preventDefault();
+    bindImgMouseDownEvent() {
+      const $img = this.$refs['img'][0];
+      on($img, mousedownEventName, this._handleMouseDown);
     },
     handleMaskClick() {
       if (this.maskClosable) {
@@ -319,6 +332,10 @@ export default {
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();
+  },
+  beforeDestroy() {
+    const imgs = this.$refs['img'];
+    if (imgs) off(imgs[0], mousedownEventName, this._handleMouseDown);
   },
   destroyed() {
     // if appendToBody is true, remove DOM node after destroy
