@@ -224,10 +224,12 @@
       margin-right: -1px;
     }
 
-    &:hover,
-    &:focus,
-    &:active {
-      z-index: 1;
+    &:not(.is-disabled) {
+      &:hover,
+      &:focus,
+      &:active {
+        z-index: 1;
+      }
     }
 
     @include when(active) {
