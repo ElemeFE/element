@@ -119,8 +119,9 @@
     flex-wrap: wrap;
   }
 
-  .el-tag__close {
-    margin-top: -2px;
+  @include e(tags-text) {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .el-tag {
@@ -128,12 +129,15 @@
     border-color: transparent;
     margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
+    display: flex;
+    max-width: 100%;
+    align-items: center;
 
     &__close.el-icon-close {
       background-color: $--color-text-placeholder;
-      right: -7px;
       top: 0;
       color: $--color-white;
+      flex-shrink: 0;
 
       &:hover {
         background-color: $--color-text-secondary;
