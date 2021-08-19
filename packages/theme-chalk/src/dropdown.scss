@@ -40,7 +40,7 @@
     }
 
     &:hover {
-      &::before {
+      &:not(.is-disabled)::before {
         top: 0;
         bottom: 0;
       }
@@ -59,6 +59,11 @@
     &:focus:active, &:focus:not(.focusing) {
       outline-width: 0;
     }
+  }
+
+  [disabled] {
+    cursor: not-allowed;
+    color: $--font-color-disabled-base;
   }
 }
 

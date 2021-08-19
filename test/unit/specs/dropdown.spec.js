@@ -280,4 +280,32 @@ describe('Dropdown', () => {
       }, 100);
     }, 300);
   });
+  it('dropdown disabled', done => {
+    vm = createVue({
+      template: `
+        <el-dropdown ref="dropdown" disabled>
+          <span class="el-dropdown-link">
+            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
+            <el-dropdown-item>黄金糕</el-dropdown-item>
+            <el-dropdown-item>狮子头</el-dropdown-item>
+            <el-dropdown-item>螺蛳粉</el-dropdown-item>
+            <el-dropdown-item>双皮奶</el-dropdown-item>
+            <el-dropdown-item>蚵仔煎</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      `
+    }, true);
+    let dropdown = vm.$refs.dropdown;
+    let dropdownElm = dropdown.$el;
+    let triggerElm = dropdownElm.children[0];
+
+    triggerEvent(triggerElm, 'mouseenter');
+    setTimeout(() => {
+      expect(dropdownElm.querySelectorAll('.el-dropdown-link[disabled]').length).equal(1);
+      expect(dropdown.visible).to.be.false;
+      done();
+    }, 10);
+  });
 });

@@ -281,6 +281,7 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | show-timeout  | Tiempo de retardo antes de mostrar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 250         |
 | hide-timeout  | Tiempo de retardo antes de ocultar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 150         |
 | tabindex      | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) de Dropdown | number              |          —         | 0           |
+| disabled      | si el desplegable está desactivado       | boolean | —                                      | false       |
 
 ### Dropdown Slots
 
