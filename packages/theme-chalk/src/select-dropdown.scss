@@ -13,6 +13,9 @@
   margin: 5px 0;
 
   @include when(multiple) {
+    & .el-select-dropdown__item {
+      padding-right: 40px;
+    }
     & .el-select-dropdown__item.selected {
       color: $--select-option-selected-font-color;
       background-color: $--select-dropdown-background;

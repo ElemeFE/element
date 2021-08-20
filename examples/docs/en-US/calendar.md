@@ -59,8 +59,8 @@ Display date.
 | range           | time range, including start time and end time. Start time must be start day of week, end time must be end day of week, the time span cannot exceed two months. | Array  | —  | —  |
 | first-day-of-week | fisrt day of week| Number    | 1 to 7                |  1       |
 
-### dateCell scoped slot 参数
+### dateCell Scoped Slot Parameters
 | Attribute       | Description   | Type      | Accepted Values       | Default  |
 |-----------------|-------------- |---------- |---------------------- |--------- |
 | date            | date the cell represents  | Date      | —                     | —        |
-| data            | { type, isSelected, day}. `type` indicates which month the date belongs, optional values are prev-month, current-month, next-month; `isSelected` indicates whether the date is selected; `day` is the formatted date in the format yyyy-MM-dd    | Object      | —           | —      |
+| data            | { type, isSelected, day}. The `type` property indicates which month the date belongs, optional values are `prev-month`, `current-month`, `next-month`. The `isSelected` property indicates whether the date is selected. The `day` property is the formatted date in the format yyyy-MM-dd    | Object      | —           | —      |

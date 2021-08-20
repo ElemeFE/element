@@ -44,14 +44,14 @@
 
     <div v-if="multiple" class="el-cascader__tags">
       <el-tag
-        v-for="(tag, index) in presentTags"
+        v-for="tag in presentTags"
         :key="tag.key"
         type="info"
         :size="tagSize"
         :hit="tag.hitState"
         :closable="tag.closable"
         disable-transitions
-        @close="deleteTag(index)">
+        @close="deleteTag(tag)">
         <span>{{ tag.text }}</span>
       </el-tag>
       <input
@@ -231,7 +231,7 @@ export default {
   data() {
     return {
       dropDownVisible: false,
-      checkedValue: this.value || null,
+      checkedValue: this.value,
       inputHover: false,
       inputValue: null,
       presentText: null,
@@ -350,7 +350,7 @@ export default {
       this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40;
     }
 
-    if (!isEmpty(this.value)) {
+    if (!this.isEmptyValue(this.value)) {
       this.computePresentContent();
     }
 
@@ -413,6 +413,7 @@ export default {
     handleDropdownLeave() {
       this.filtering = false;
       this.inputValue = this.presentText;
+      this.doDestroy();
     },
     handleKeyDown(event) {
       switch (event.keyCode) {
@@ -485,9 +486,17 @@ export default {
         }
       });
     },
+    isEmptyValue(val) {
+      const { multiple } = this;
+      const { emitPath } = this.panel.config;
+      if (multiple || emitPath) {
+        return isEmpty(val);
+      }
+      return false;
+    },
     computePresentText() {
       const { checkedValue, config } = this;
-      if (!isEmpty(checkedValue)) {
+      if (!this.isEmptyValue(checkedValue)) {
         const node = this.panel.getNodeByValue(checkedValue);
         if (node && (config.checkStrictly || node.isLeaf)) {
           this.presentText = node.getText(this.showAllLevels, this.separator);
@@ -588,7 +597,7 @@ export default {
 
       if (this.pressDeleteCount) {
         if (lastTag.hitState) {
-          this.deleteTag(lastIndex);
+          this.deleteTag(lastTag);
         } else {
           lastTag.hitState = true;
         }
@@ -607,10 +616,11 @@ export default {
         this.toggleDropDownVisible(false);
       }
     },
-    deleteTag(index) {
+    deleteTag(tag) {
       const { checkedValue } = this;
-      const val = checkedValue[index];
-      this.checkedValue = checkedValue.filter((n, i) => i !== index);
+      const current = tag.node.getValueByOption();
+      const val = checkedValue.find(n => isEqual(n, current));
+      this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
       this.$emit('remove-tag', val);
     },
     updateStyle() {
@@ -631,10 +641,12 @@ export default {
       }
 
       if (tags) {
-        const { offsetHeight } = tags;
+        const offsetHeight = Math.round(tags.getBoundingClientRect().height);
         const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
         inputInner.style.height = height;
-        this.updatePopper();
+        if (this.dropDownVisible) {
+          this.updatePopper();
+        }
       }
     },
 

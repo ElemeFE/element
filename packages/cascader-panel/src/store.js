@@ -51,12 +51,8 @@ export default class Store {
   }
 
   getNodeByValue(value) {
-    if (value) {
-      const nodes = this.getFlattedNodes(false, !this.config.lazy)
-        .filter(node => (valueEquals(node.path, value) || node.value === value));
-      return nodes && nodes.length ? nodes[0] : null;
-    }
-    return null;
+    const nodes = this.getFlattedNodes(false, !this.config.lazy)
+      .filter(node => (valueEquals(node.path, value) || node.value === value));
+    return nodes && nodes.length ? nodes[0] : null;
   }
-
 }
