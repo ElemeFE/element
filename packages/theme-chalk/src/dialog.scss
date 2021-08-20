@@ -93,11 +93,11 @@
 }
 
 .dialog-fade-enter-active {
-  animation: dialog-fade-in .3s;
+  animation: dialog-fade-in .3s both;
 }
 
 .dialog-fade-leave-active {
-  animation: dialog-fade-out .3s;
+  animation: dialog-fade-out .3s both;
 }
 
 @keyframes dialog-fade-in {
