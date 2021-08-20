@@ -58,7 +58,17 @@
     text-align: center;
     color: $--cascader-color-empty;
   }
+
+  .checkAll {
+    padding: 0px 30px 0px 20px;
+    height: 34px;
+    min-width: 180px;
+    display: inline-block;
+    line-height: 34px;
+    box-sizing: border-box;
+  }
 }
+
 
 @include b(cascader-node) {
   position: relative;
