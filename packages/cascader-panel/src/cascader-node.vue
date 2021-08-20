@@ -37,7 +37,9 @@
         return this.node.isSameNode(this.checkedValue);
       },
       inActivePath() {
-        return this.isInPath(this.panel.activePath);
+        let inActivePath = this.isInPath(this.panel.activePath);
+        this.node.inActivePath = inActivePath;
+        return inActivePath;
       },
       inCheckedPath() {
         if (!this.config.checkStrictly) return false;
