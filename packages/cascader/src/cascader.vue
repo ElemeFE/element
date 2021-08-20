@@ -608,9 +608,16 @@ export default {
       }
     },
     deleteTag(index) {
-      const { checkedValue } = this;
+      const { checkedValue, panel } = this;
       const val = checkedValue[index];
       this.checkedValue = checkedValue.filter((n, i) => i !== index);
+      if (this.config.checkAll) {
+        this.$nextTick(() => {
+          panel.$refs.menu.forEach((menu) => {
+            menu.updateInDeterminate();
+          });
+        });
+      }
       this.$emit('remove-tag', val);
     },
     updateStyle() {
