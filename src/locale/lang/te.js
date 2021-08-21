@@ -102,9 +102,9 @@ export default {
       noMatch: 'సరిపోలే డేటా లేదు',
       noData: 'డేటా లేదు',
       titles: ['Liste 1', 'Liste 2'],   // to be translated
-      filterPlaceholder: 'Entrer un mot clef', // to be translated
-      noCheckedFormat: '{total} elements',  // to be translated
-      hasCheckedFormat: '{checked}/{total} coché(s)'  // to be translated
+      filterPlaceholder: 'కీవర్డ్‌ని నమోదు చేయండి', // to be translated
+      noCheckedFormat: '{total} items',  // to be translated
+      hasCheckedFormat: '{checked}/{total} తనిఖీ చేయబడినవి'  
     },
     image: {
       error: 'విఫలమైంది' 
