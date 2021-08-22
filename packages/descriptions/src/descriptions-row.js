@@ -27,6 +27,7 @@ export default {
                 return (
                   <th
                     class={{
+                      'el-descriptions-item__cell': true,
                       'el-descriptions-item__label': true,
                       'has-colon': elDescriptions.border ? false : elDescriptions.colon,
                       'is-bordered-label': elDescriptions.border,
@@ -44,6 +45,7 @@ export default {
               row.map(item =>{
                 return (
                   <td
+                    class="el-descriptions-item__cell"
                     class="el-descriptions-item__content"
                     class={['el-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}

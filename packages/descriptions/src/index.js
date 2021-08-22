@@ -168,7 +168,7 @@ export default {
         }
 
         <div class="el-descriptions__body">
-          <table class={[{'is-bordered': border}, descriptionsSize ? `el-descriptions--${descriptionsSize}` : '']}>
+          <table class={['el-descriptions__table', {'is-bordered': border}, descriptionsSize ? `el-descriptions--${descriptionsSize}` : '']}>
             {rows.map(row => (
               <DescriptionsRow row={row}></DescriptionsRow>
             ))}
