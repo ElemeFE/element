@@ -120,6 +120,7 @@
         default: true
       },
       arrowControl: Boolean,
+      format: String,
       amPmMode: {
         type: String,
         default: '' // 'a': am/pm; 'A': AM/PM
@@ -206,13 +207,30 @@
         }
       },
 
+      calculateSelectRangePostion(type) {
+        const reg = /[Hhms]/g;
+        const postion = { start: -1, end: -1 };
+        const maskTypeMap = { H: 'hours', h: 'hours', m: 'minutes', s: 'seconds' };
+
+        while (true) {
+          const match = reg.exec(this.format);
+          if (!match) break;
+          const { 0: mask, index } = match;
+          if (maskTypeMap[mask] === type) {
+            if (postion.start === -1) {
+              postion.start = postion.end = index;
+            } else {
+              postion.end = index;
+            }
+          }
+        }
+        return postion;
+      },
+
       emitSelectRange(type) {
-        if (type === 'hours') {
-          this.$emit('select-range', 0, 2);
-        } else if (type === 'minutes') {
-          this.$emit('select-range', 3, 5);
-        } else if (type === 'seconds') {
-          this.$emit('select-range', 6, 8);
+        const { start, end } = this.calculateSelectRangePostion(type);
+        if (start > -1) {
+          this.$emit('select-range', start, end + 1);
         }
         this.currentScrollbar = type;
       },
