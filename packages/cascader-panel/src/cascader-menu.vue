@@ -93,7 +93,7 @@ export default {
         events.on.expand = this.handleExpand;
       }
 
-      this.virtualListProps.menuId - menuId;
+      this.virtualListProps.menuId = menuId;
 
       const nodeItems = this.nodes.map((node, index) => {
         const { hasChildren } = node;
