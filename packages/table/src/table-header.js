@@ -105,7 +105,7 @@ export default {
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
                     on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
                     style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
-                    class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
+                    class={ [...this.getHeaderCellClass(rowIndex, cellIndex, columns, column), 'el-table__cell'] }
                     key={ column.id }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                       {
@@ -260,7 +260,7 @@ export default {
     },
 
     getHeaderCellClass(rowIndex, columnIndex, row, column) {
-      const classes = ['el-table__cell', column.id, column.order, column.headerAlign, column.className, column.labelClassName];
+      const classes = [column.id, column.order, column.headerAlign, column.className, column.labelClassName];
 
       if (rowIndex === 0 && this.isCellHidden(columnIndex, row)) {
         classes.push('is-hidden');

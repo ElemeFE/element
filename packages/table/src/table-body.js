@@ -201,7 +201,7 @@ export default {
     },
 
     getCellClass(rowIndex, columnIndex, row, column) {
-      const classes = ['el-table__cell', column.id, column.align, column.className];
+      const classes = [column.id, column.align, column.className];
 
       if (this.isColumnHidden(columnIndex)) {
         classes.push('is-hidden');
@@ -369,7 +369,7 @@ export default {
             return (
               <td
                 style={ this.getCellStyle($index, cellIndex, row, column) }
-                class={ this.getCellClass($index, cellIndex, row, column) }
+                class={ [...this.getCellClass($index, cellIndex, row, column), 'el-table__cell'] }
                 rowspan={ rowspan }
                 colspan={ colspan }
                 on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
