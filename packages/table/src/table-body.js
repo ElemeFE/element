@@ -201,7 +201,7 @@ export default {
     },
 
     getCellClass(rowIndex, columnIndex, row, column) {
-      const classes = [column.id, column.align, column.className];
+      const classes = ['el-table__cell', column.id, column.align, column.className];
 
       if (this.isColumnHidden(columnIndex)) {
         classes.push('is-hidden');
@@ -404,7 +404,7 @@ export default {
         return [[
           tr,
           <tr key={'expanded-row__' + tr.key}>
-            <td colspan={ this.columnsCount } class="el-table__expanded-cell">
+            <td colspan={ this.columnsCount } class="el-table__cell el-table__expanded-cell">
               { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
             </td>
           </tr>]];

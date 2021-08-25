@@ -63,7 +63,7 @@ export default {
                 key={cellIndex}
                 colspan={ column.colSpan }
                 rowspan={ column.rowSpan }
-                class={ this.getRowClasses(column, cellIndex) }>
+                class={ ['el-table__cell', ...this.getRowClasses(column, cellIndex)] }>
                 <div class={ ['cell', column.labelClassName] }>
                   {
                     sums[cellIndex]
@@ -72,7 +72,7 @@ export default {
               </td>)
             }
             {
-              this.hasGutter ? <th class="gutter"></th> : ''
+              this.hasGutter ? <th class="el-table__cell gutter"></th> : ''
             }
           </tr>
         </tbody>

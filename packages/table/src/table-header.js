@@ -136,7 +136,7 @@ export default {
                   </th>))
                 }
                 {
-                  this.hasGutter ? <th class="gutter"></th> : ''
+                  this.hasGutter ? <th class="el-table__cell gutter"></th> : ''
                 }
               </tr>
             )
@@ -260,7 +260,7 @@ export default {
     },
 
     getHeaderCellClass(rowIndex, columnIndex, row, column) {
-      const classes = [column.id, column.order, column.headerAlign, column.className, column.labelClassName];
+      const classes = ['el-table__cell', column.id, column.order, column.headerAlign, column.className, column.labelClassName];
 
       if (rowIndex === 0 && this.isCellHidden(columnIndex, row)) {
         classes.push('is-hidden');
