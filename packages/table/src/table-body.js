@@ -219,6 +219,8 @@ export default {
         }));
       }
 
+      classes.push('el-table__cell');
+
       return classes.join(' ');
     },
 
@@ -369,7 +371,7 @@ export default {
             return (
               <td
                 style={ this.getCellStyle($index, cellIndex, row, column) }
-                class={ [...this.getCellClass($index, cellIndex, row, column), 'el-table__cell'] }
+                class={ this.getCellClass($index, cellIndex, row, column) }
                 rowspan={ rowspan }
                 colspan={ colspan }
                 on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
