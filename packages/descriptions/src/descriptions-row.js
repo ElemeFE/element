@@ -45,9 +45,7 @@ export default {
               row.map(item =>{
                 return (
                   <td
-                    class="el-descriptions-item__cell"
-                    class="el-descriptions-item__content"
-                    class={['el-descriptions-item__content', item.contentClassName]}
+                    class={['el-descriptions-item__cell', 'el-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}
                     colSpan={item.props.span}
                   >{item.slots.default}</td>
@@ -67,6 +65,7 @@ export default {
                 return ([
                   <th
                     class={{
+                      'el-descriptions-item__cell': true,
                       'el-descriptions-item__label': true,
                       'is-bordered-label': elDescriptions.border,
                       [item.labelClassName]: true
@@ -75,7 +74,7 @@ export default {
                     colSpan="1"
                   >{item.label}</th>,
                   <td
-                    class={['el-descriptions-item__content', item.contentClassName]}
+                    class={['el-descriptions-item__cell', 'el-descriptions-item__content', item.contentClassName]}
                     style={item.contentStyle}
                     colSpan={item.props.span * 2 - 1}
                   >{item.slots.default}</td>
@@ -92,7 +91,7 @@ export default {
           {
             row.map(item=> {
               return (
-                <td class="el-descriptions-item" colSpan={item.props.span}>
+                <td class="el-descriptions-item el-descriptions-item__cell" colSpan={item.props.span}>
                   <div class="el-descriptions-item__container">
                     <span
                       class={{
