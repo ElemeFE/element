@@ -1,6 +1,6 @@
 {
   "name": "@cognitoforms/element-ui",
-  "version": "2.13.2-17",
+  "version": "2.13.2-18",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
