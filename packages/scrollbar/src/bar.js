@@ -24,6 +24,10 @@ export default {
   render(h) {
     const { size, move, bar } = this;
 
+    if (!size) {
+      return null;
+    }
+
     return (
       <div
         class={ ['el-scrollbar__bar', 'is-' + bar.key] }
