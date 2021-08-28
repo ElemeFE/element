@@ -289,11 +289,6 @@ export default {
       return classes.join(' ');
     },
 
-    toggleAllSelection(event) {
-      event.stopPropagation();
-      this.store.commit('toggleAllSelection');
-    },
-
     handleFilterClick(event, column) {
       event.stopPropagation();
       const target = event.target;
