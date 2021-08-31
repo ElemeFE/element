@@ -348,6 +348,7 @@ export default {
             const data = {
               store: this.store,
               _self: this.context || this.table.$vnode.context,
+              fixed: this.fixed,
               column: columnData,
               row,
               $index
