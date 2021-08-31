@@ -110,7 +110,7 @@ export default {
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                       {
                         column.renderHeader
-                          ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
+                          ? column.renderHeader.call(this._renderProxy, h, { column, fixed: this.fixed, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
                           : column.label
                       }
                       {
