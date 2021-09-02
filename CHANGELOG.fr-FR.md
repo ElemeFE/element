@@ -1,8 +1,33 @@
 ## Changelog
 
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug fixes
+
+- Cascader
+  - fix a bug that makes the browser jitter in zoom mode (#21207 by @cs1707)
+  - optimize performance (#21231 by @cs1707)
+- Select
+  - fix long text overflow in multiple mode (#21237 by @cs1707)
+- Dropdown
+  - add disabled property (#21235 by @mshioda)
+- Radio
+  - fix checked state when browser go back (#21250 by @cs1707)
+- Descriptions
+  - fix type declaration (#21265 by @adaex)
+  - avoid table style conflict (#21254 by @adaex)
+- Drawer
+  - fix append to body (#21264 by @cs1707)
+- Local
+  - fix italian mistake (#21012 by @ricardotondello)
+
 ### 2.15.5
 
 *2021-08-04*
+
+#### Bug fixes
 
 - Select
   - fix resetInputHeight (#21201 by @cs1707)
