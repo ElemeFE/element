@@ -1,5 +1,28 @@
 ## 更新日志
 
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug 修复
+
+- Cascader
+  - 修复浏览器缩放模式下抖动的 bug (#21207 by @cs1707)
+  - 优化性能 (#21231 by @cs1707)
+- Select
+  - 修复多选模式下文字溢出的 bug (#21237 by @cs1707)
+- Dropdown
+  - 增加 disabled 属性 (#21235 by @mshioda)
+- Radio
+  - 修复浏览器返回后保留状态的 bug (#21250 by @cs1707)
+- Descriptions
+  - 修复类型定义 (#21265 by @adaex)
+  - 修复与表格组件混用样式冲突的问题 (#21254 by @adaex)
+- Drawer
+  - 修复 append-to-body (#21264 by @cs1707)
+- Local
+  - 修复 italian 翻译错误 (#21012 by @ricardotondello)
+
 ### 2.15.5
 
 *2021-08-04*
