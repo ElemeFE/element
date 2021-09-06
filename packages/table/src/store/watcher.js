@@ -170,6 +170,8 @@ export default Vue.extend({
     _toggleAllSelection() {
       const states = this.states;
       const { data = [], selection } = states;
+      // prevent action when no data
+      if (data.length === 0) return;
       // when only some rows are selected (but not all), select or deselect all of them
       // depending on the value of selectOnIndeterminate
       const value = states.selectOnIndeterminate
