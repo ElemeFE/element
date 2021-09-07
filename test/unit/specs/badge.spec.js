@@ -40,7 +40,7 @@ describe('Badge', () => {
     `);
 
     expect(vm.$el.querySelector('.el-badge__content.is-dot')).to.exist;
-    expect(vm.$el.querySelector('.el-badge__content.el-badge_content--success.is-dot')).to.exist;
+    expect(vm.$el.querySelector('.el-badge__content.el-badge__content--success.is-dot')).to.exist;
   });
 
   it('max', () => {
