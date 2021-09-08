@@ -114,6 +114,9 @@ export default {
     popconfirm: {
       confirmButtonText: 'Si',
       cancelButtonText: 'No'
+    },
+    empty: {
+      description: 'Sense Dades'
     }
   }
 };

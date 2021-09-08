@@ -1,12 +1,12 @@
 ## Layout
 
-Rápido y facilmente crea un layout básico con 24 columnas.
+Rápido y fácilmente crea un layout básico con 24 columnas.
 
 ### Layout básico
 
 Crea un layout básico usando columnas.
 
-:::demo Con `row` y `col`, puede facilmente manipular el layout usando el atributo `span`.
+:::demo Con `row` y `col`, puede fácilmente manipular el layout usando el atributo `span`.
 ```html
 <el-row>
   <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -338,22 +338,22 @@ Las clases son:
 | gutter    | espaciado de la grilla                   | number | —                                        | 0                 |
 | type      | modo del layout , puedes usar flex, funciona en navegadores modernos | string | —                                        | —                 |
 | justify   | alineación horizontal del layout flex    | string | start/end/center/space-around/space-between | start             |
-| align     | alineación vertical del layout flex      | string | top/middle/bottom                        | top               |
+| align     | alineación vertical del layout flex      | string | top/middle/bottom                        | —                |
 | tag       | tag de elemento propio                   | string | *                                        | div               |
 
 ### Atributos Col 
 
-| Atributos | Descripción                              | Tipo                                     | Valores aceptados | Valor por defecto |
-| --------- | ---------------------------------------- | ---------------------------------------- | ----------------- | ----------------- |
-| span      | número de columnas que abarca la cuadrícula | number                                   | —                 | 24                |
-| offset    | especific espacio en el lado izquierdo de la grill | number                                   | —                 | 0                 |
-| push      | número de columnas que la grilla se mueve hacia la derecha | number                                   | —                 | 0                 |
-| pull      | número de columnas que la grilla se mueve hacia la izquierda | number                                   | —                 | 0                 |
+| Atributos | Descripción                                                  | Tipo                                      | Valores aceptados | Valor por defecto |
+| --------- | ------------------------------------------------------------ | ----------------------------------------- | ----------------- | ----------------- |
+| span      | número de columnas que abarca la cuadrícula                  | number                                    | —                 | 24                |
+| offset    | especifica el espacio en el lado izquierdo del grill         | number                                    | —                 | 0                 |
+| push      | número de columnas que la grilla se mueve hacia la derecha   | number                                    | —                 | 0                 |
+| pull      | número de columnas que la grilla se mueve hacia la izquierda | number                                    | —                 | 0                 |
 | xs        | `<768px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
 | sm        | `≥768px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
 | md        | `≥992px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
 | lg        | `≥1200px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
 | xl        | `≥1920px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
-| tag       | tag de elemento propio                   | string                                   | *                 | div               |
+| tag       | tag de elemento propio                                       | string                                    | *                 | div               |
 
 

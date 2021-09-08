@@ -4,7 +4,7 @@ Progress est utilisé pour afficher la progression d'une opération et informer 
 
 ### Barre de progression linéaire
 
-:::demo Utilisez l'attribut `percentage` pour indiquer le pourcentage. Cet attribut est **requis** et doit être compris entre 0 et 100. You can custom text format by setting `format`.
+:::demo Utilisez l'attribut `percentage` pour indiquer le pourcentage. Cet attribut est **requis** et doit être compris entre 0 et 100. Vous pouvez personnaliser le format du texte en définissant le `format`.
 ```html
 <el-progress :percentage="50"></el-progress>
 <el-progress :percentage="100" :format="format"></el-progress>
@@ -172,3 +172,4 @@ Vous pouvez également spécifier l'attribut `type` de `dashboard` pour utiliser
 | width | La largeur du canvas dans le cas d'une barre circulaire. | number | — | 126 |
 | show-text | Si le pourcentage doit être affiché. | boolean | — | true |
 | stroke-linecap  | circle/dashboard type shape at the end path | string | butt/round/square | round |
+| format  | Vous pouvez personnaliser le format du texte en définissant le format  | function(percentage) | — | — |

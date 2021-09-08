@@ -219,6 +219,8 @@ export default {
         }));
       }
 
+      classes.push('el-table__cell');
+
       return classes.join(' ');
     },
 
@@ -404,7 +406,7 @@ export default {
         return [[
           tr,
           <tr key={'expanded-row__' + tr.key}>
-            <td colspan={ this.columnsCount } class="el-table__expanded-cell">
+            <td colspan={ this.columnsCount } class="el-table__cell el-table__expanded-cell">
               { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
             </td>
           </tr>]];

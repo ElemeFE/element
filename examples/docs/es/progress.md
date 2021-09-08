@@ -165,7 +165,8 @@ Puede utilizar el atributo `color` para establecer el color de la barra de progr
 | stroke-width | ancho de la barra de progreso            | number  | —                 | 6           |
 | text-inside  | mostrar el porcentaje dentro de la barra de progreso, solo funciona cuando `type` es 'line' | boolean | —                 | false       |
 | status       | estado actual de la barra de progreso    | string  | success/exception/warning | —   |
-| color        | color de fondo de la barra de progreso. Sobreescribe la propiedad `status` | string/function/array | — | '' |
+| color        | color de fondo de la barra de progreso. Sobrescribe la propiedad `status` | string/function/array | — | '' |
 | width        | ancho del canvas que contiene la barra de progreso circula | number  | —                 | 126         |
 | show-text    | mostrar porcentaje                       | boolean | —                 | true        |
-| stroke-linecap  | circle/dashboard type shape at the end path | string | butt/round/square | round |
+| stroke-linecap  | circle/dashboard tipo de diseño al final del camino | string | butt/round/square | round |
+| format  | personalizar el formato de texto estableciendo format  | function(percentage) | — | — |

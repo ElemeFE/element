@@ -1923,14 +1923,14 @@ Puede personalizar el contenido del nodo de cascada.
 | show-all-levels | si muestra todos los niveles del valor seleccionado en el input | boolean | — | true |
 | collapse-tags | si se colapsan los tags en la selección múltiple | boolean | - | false |
 | separator | separador de las etiquetas de las opciones | string | — | ' / ' |
-| filterable | si las opciones pueden ser usadas para la busqueda | boolean | — | — |
+| filterable | si las opciones pueden ser usadas para la búsqueda | boolean | — | — |
 | filter-method | lógica de búsqueda personalizable. El primer parámetro es `node`, el segundo es `keyword`, y es necesario devolver un valor boolean que indique si se ha tenido éxito. | function(node, keyword) | - | - |
-| debounce | retraso en milisegundos para el tipeo de los datos de filtro | number | — | 300 |
+| debounce | retraso en mili segundos para el tipeo de los datos de filtro | number | — | 300 |
 | before-filter | hook antes de filtrar con el valor a filtrar como parámetro. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se abortará el filtrado. | function(value) | — | — |
 | popper-class | nombre de clase personalizado para el menú desplegable de Cascader | string | —  | — |
 
 ### Eventos de Cascader
-| Nombre del evento | Descripción | Parámetros |
+| Nombre | Descripción | Parámetros |
 |---------- |-------- |---------- |
 | change | se desencadena cuando cambia el valor ligado. | valor |
 | expand-change | se desencadena cuando las opciones expandidas cambian | un array de los nodos padres del nodo en expansión |
@@ -1939,13 +1939,13 @@ Puede personalizar el contenido del nodo de cascada.
 | visible-change | se activa cuando aparece/desaparece el menú desplegable | verdadero cuando aparece, y falso de otra manera |
 | remove-tag | se activa cuando se quita la etiqueta en modo de selección múltiple | el valor de la etiqueta que se quita |
 
-### Cascader Methods
-| Method Name | Description | Parameters |
+### Cascader Métodos
+| Método | Descripción | Parámetros |
 | ---- | ---- | ---- |
-| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
+| getCheckedNodes | Obtiene el array de los nodos seleccionados actualmente | (leafOnly) Si solo devuelve los nodos chequeados, por defecto es `false` |
 
 ### Slots de Cascader
-| Nombre del slot | Descripción |
+| Nombre | Descripción |
 |---------|-------------|
 | - | el contenido personalizado del nodo cascader, el parámetro es { node, data }, que son el actual objeto Node y los datos del nodo respectivamente. |
 | empty  | cuando no hay opciones coincidentes. |
@@ -1958,19 +1958,19 @@ Puede personalizar el contenido del nodo de cascada.
 | props | opciones de configuración, consulte la siguiente tabla. | object | — | — |
 
 ### Eventos de CascaderPanel
-| Nombre de los evetos | Descripción | Parámetros |
+| Evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
 | change | se desencadena cuando cambia el valor ligado.         | valor |
 | expand-change | se desencadena cuando las opciones expandidas cambian | un array de los nodos padres del nodo en expansión |
 
-### CascaderPanel Methods
-| Method Name | Description | Parameters |
+### CascaderPanel Métodos
+| Método | Descripción | Parámetros |
 | ---- | ---- | ---- |
-| getCheckedNodes | get an array of currently selected node | (leafOnly) whether only return the leaf checked nodes, default is `false` |
-| clearCheckedNodes | clear checked nodes | - |
+| getCheckedNodes | Obtiene el array de los nodos seleccionados actualmente | (leafOnly) Si solo devuelve los nodos chequeados, por defecto es `false` |
+| clearCheckedNodes | Limpia de nodos chequeados | - |
 
 ### Slots de CascaderPanel
-| Nombre del slot | Descripción |
+| Nombre | Descripción |
 |---------|-------------|
 | - | el contenido personalizado del nodo cascader, el parámetro es { node, data }, que son el actual objeto Node y los datos del nodo respectivamente. |
 

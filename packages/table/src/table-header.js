@@ -136,7 +136,7 @@ export default {
                   </th>))
                 }
                 {
-                  this.hasGutter ? <th class="gutter"></th> : ''
+                  this.hasGutter ? <th class="el-table__cell gutter"></th> : ''
                 }
               </tr>
             )
@@ -285,6 +285,8 @@ export default {
           column
         }));
       }
+
+      classes.push('el-table__cell');
 
       return classes.join(' ');
     },

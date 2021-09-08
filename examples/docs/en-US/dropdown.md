@@ -279,6 +279,7 @@ Besides default size, Dropdown component provides three additional sizes for you
 | show-timeout | Delay time before show a dropdown (only works when trigger is `hover`) | number | — | 250 |
 | hide-timeout | Delay time before hide a dropdown (only works when trigger is `hover`) | number | — | 150 |
 | tabindex     | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) of Dropdown | number | — | 0 |
+| disabled     | whether the Dropdown is disabled | boolean | — | false |
 
 ### Dropdown Slots
 

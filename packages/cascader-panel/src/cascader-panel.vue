@@ -157,7 +157,7 @@ export default {
   },
 
   mounted() {
-    if (!isEmpty(this.value)) {
+    if (!this.isEmptyValue(this.value)) {
       this.syncCheckedValue();
     }
   },
@@ -176,6 +176,7 @@ export default {
     syncCheckedValue() {
       const { value, checkedValue } = this;
       if (!isEqual(value, checkedValue)) {
+        this.activePath = [];
         this.checkedValue = value;
         this.syncMenuState();
       }
@@ -194,13 +195,21 @@ export default {
         node.syncCheckState(this.checkedValue);
       });
     },
+    isEmptyValue(val) {
+      const { multiple, config } = this;
+      const { emitPath } = config;
+      if (multiple || emitPath) {
+        return isEmpty(val);
+      }
+      return false;
+    },
     syncActivePath() {
       const { store, multiple, activePath, checkedValue } = this;
 
       if (!isEmpty(activePath)) {
         const nodes = activePath.map(node => this.getNodeByValue(node.getValue()));
         this.expandNodes(nodes);
-      } else if (!isEmpty(checkedValue)) {
+      } else if (!this.isEmptyValue(checkedValue)) {
         const value = multiple ? checkedValue[0] : checkedValue;
         const checkedNode = this.getNodeByValue(value) || {};
         const nodes = (checkedNode.pathNodes || []).slice(0, -1);
@@ -360,7 +369,7 @@ export default {
         const nodes = this.getFlattedNodes(leafOnly);
         return nodes.filter(node => node.checked);
       } else {
-        return isEmpty(checkedValue)
+        return this.isEmptyValue(checkedValue)
           ? []
           : [this.getNodeByValue(checkedValue)];
       }

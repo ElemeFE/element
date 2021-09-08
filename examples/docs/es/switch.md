@@ -134,12 +134,12 @@ Switch es utilizado para realizar cambios entre dos estados opuestos.
 
 ### Eventos
 
-| Nombre del evento | Descripción                       | Parametro |
+| Nombre del evento | Descripción                       | Parámetro |
 | ----------------- | --------------------------------- | --------- |
 | change            | se dispara cuando el valor cambia | valor     |
 después de cambiar
 
-### Metodos
-| Metodo | Descripción               | Parametro |
+### Métodos
+| Método | Descripción               | Parámetro |
 | ------ | ------------------------- | --------- |
 | focus  | foco al componente Switch | —         |
