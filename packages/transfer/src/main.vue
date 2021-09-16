@@ -138,12 +138,25 @@
       },
   
       sourceData() {
-        return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
+        let valueObj = {};
+        this.value.forEach((item, index)=>{
+          valueObj[item] = true;
+        });
+        return this.data.filter(
+          (item) => !valueObj[item[this.props.key]]
+        );
       },
 
       targetData() {
         if (this.targetOrder === 'original') {
-          return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+          let valueObj = {};
+          this.value.forEach((item, index)=>{
+            valueObj[item] = true;
+          });
+          let data = this.data.filter(
+            (item) => valueObj[item[this.props.key]]
+          );
+          return data;
         } else {
           return this.value.reduce((arr, cur) => {
             const val = this.dataObj[cur];
@@ -203,12 +216,22 @@
         let currentValue = this.value.slice();
         const itemsToBeMoved = [];
         const key = this.props.key;
-        this.data.forEach(item => {
+        let leftCheckedKeyPropsObj = {};
+        this.leftChecked.forEach((item, index) => {
+          leftCheckedKeyPropsObj[item] = true;
+        });
+        let valueKeyPropsObj = {};
+        this.value.forEach((item, index) => {
+          valueKeyPropsObj[item] = true;
+        });
+        this.data.forEach((item) => {
           const itemKey = item[key];
           if (
-            this.leftChecked.indexOf(itemKey) > -1 &&
-            this.value.indexOf(itemKey) === -1
-          ) {
+          //   this.leftChecked.indexOf(itemKey) > -1 &&
+          //   this.value.indexOf(itemKey) === -1
+          // ) {
+            leftCheckedKeyPropsObj[itemKey] &&
+            !valueKeyPropsObj[itemKey]) {
             itemsToBeMoved.push(itemKey);
           }
         });
