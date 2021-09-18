@@ -25,6 +25,7 @@ class TableLayout {
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
     this.gutterWidth = scrollbarWidth();
+    this.fixedColumnsBodyRowsHeight = {};
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -113,10 +114,37 @@ class TableLayout {
 
     const noData = !(this.store.states.data && this.store.states.data.length);
     this.viewportHeight = this.scrollX ? tableHeight - (noData ? 0 : this.gutterWidth) : tableHeight;
-
+    this.syncFixedTableRowHeight();
     this.updateScrollY();
     this.notifyObservers('scrollable');
   }
+
+  syncFixedTableRowHeight() {
+    const fixedColumns = this.store.states.fixedColumns;
+    const rightFixedColumns = this.store.states.rightFixedColumns;
+    if (fixedColumns.length + rightFixedColumns.length === 0) {
+      return;
+    }
+    const { bodyWrapper } = this.table.$refs;
+    const tableRect = bodyWrapper.getBoundingClientRect();
+
+    if (tableRect.height !== undefined && tableRect.height <= 0) {
+      return;
+    }
+    const bodyRows = bodyWrapper.querySelectorAll('.el-table__row') || [];
+
+    const fixedColumnsBodyRowsHeight = [].reduce.call(
+      bodyRows,
+      (acc, row, index) => {
+        const height =
+          row.getBoundingClientRect().height || 'auto';
+        acc[index] = height;
+        return acc;
+      },
+      {}
+    );
+    this.fixedColumnsBodyRowsHeight = fixedColumnsBodyRowsHeight;
+  };
 
   headerDisplayNone(elm) {
     if (!elm) return true;
