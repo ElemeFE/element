@@ -144,13 +144,20 @@ export default {
     },
 
     setColumnRenders(column) {
-      // renderHeader 属性不推荐使用。
-      if (this.renderHeader) {
-        console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
-      } else if (column.type !== 'selection') {
-        column.renderHeader = (h, scope) => {
-          const renderHeader = this.$scopedSlots.header;
-          return renderHeader ? renderHeader(scope) : column.label;
+      const that = this;
+      if (column.type !== 'selection') {
+        column.renderHeader = function(h, scope) {
+          const headerSlot = that.$scopedSlots.header;
+          if (headerSlot) {
+            return headerSlot(scope);
+          } else if (that.renderHeader) {
+            console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
+            // renderHeader 属性不推荐使用。
+            // "this" equal to TableHeader._renderProxy
+            return that.renderHeader.call(this, h, scope);
+          } else {
+            return column.label;
+          }
         };
       }
 
