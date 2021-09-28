@@ -15,16 +15,17 @@ export default {
     },
     date: Date,
     hideHeader: Boolean,
-    firstDayOfWeek: Number
+    firstDayOfWeek: Number,
+    doubleWeek: Boolean
   },
 
   inject: ['elCalendar'],
 
   methods: {
     toNestedArr(days) {
-      return rangeArr(days.length / 7).map((_, index) => {
-        const start = index * 7;
-        return days.slice(start, start + 7);
+      return rangeArr(days.length / (this.doubleWeek ? 14 : 7)).map((_, index) => {
+        const start = index * (this.doubleWeek ? 14 : 7);
+        return days.slice(start, start + (this.doubleWeek ? 14 : 7));
       });
     },
 
@@ -42,7 +43,7 @@ export default {
       return `${prefix}-${day}`;
     },
 
-    getCellClass({ text, type}) {
+    getCellClass({ text, type }) {
       const classes = [type];
       if (type === 'current') {
         const date = this.getFormateDate(text, type);
@@ -63,7 +64,7 @@ export default {
 
     cellRenderProxy({ text, type }) {
       let render = this.elCalendar.$scopedSlots.dateCell;
-      if (!render) return <span>{ text }</span>;
+      if (!render) return <span>{text}</span>;
 
       const day = this.getFormateDate(text, type);
       const date = new Date(day);
@@ -112,8 +113,8 @@ export default {
           text: start.getDate() + index,
           type: 'current'
         }));
-        let remaining = currentMonthRange.length % 7;
-        remaining = remaining === 0 ? 0 : 7 - remaining;
+        let remaining = currentMonthRange.length % (this.doubleWeek ? 14 : 7);
+        remaining = remaining === 0 ? 0 : (this.doubleWeek ? 14 : 7) - remaining;
         const nextMonthRange = rangeArr(remaining).map((_, index) => ({
           text: index + 1,
           type: 'next'
@@ -124,7 +125,7 @@ export default {
         let firstDay = getFirstDayOfMonth(date);
         firstDay = firstDay === 0 ? 7 : firstDay;
         const firstDayOfWeek = typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1;
-        const offset = (7 + firstDay - firstDayOfWeek) % 7;
+        const offset = ((this.doubleWeek ? 14 : 7) + firstDay - firstDayOfWeek) % (this.doubleWeek ? 14 : 7);
         const prevMonthDays = getPrevMonthLastDays(date, offset).map(day => ({
           text: day,
           type: 'prev'
@@ -154,11 +155,13 @@ export default {
       }
     }
   },
-
   render() {
     const thead = this.hideHeader ? null : (<thead>
       {
-        this.weekDays.map(day => <th key={day}>{ day }</th>)
+        this.weekDays.map(day => <th key={day + '1'}>{day}</th>)
+      }
+      {
+        this.doubleWeek && this.weekDays.map(day => <th key={day + '2'}>{day}</th>)
       }
     </thead>);
     return (
@@ -182,7 +185,7 @@ export default {
               key={index}>
               {
                 row.map((cell, key) => <td key={key}
-                  class={ this.getCellClass(cell) }
+                  class={this.getCellClass(cell)}
                   onClick={this.pickDay.bind(this, cell)}>
                   <div class="el-calendar-day">
                     {

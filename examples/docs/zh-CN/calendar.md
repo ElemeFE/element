@@ -52,12 +52,23 @@
 ```
 :::
 
+### 双周
+
+:::demo 设置 `doubleWeek` 属性开启日历以双周格式显示。
+```html
+<el-calendar :doubleWeek="true">
+</el-calendar>
+```
+:::
+
 ### Attributes
 | 参数             | 说明          | 类型      | 可选值        | 默认值  |
 |-----------------|-------------- |---------- |------------ |-------- |
 | value / v-model | 绑定值         | Date/string/number | —  | —      |
 | range           | 时间范围，包括开始时间与结束时间。开始时间必须是周一，结束时间必须是周日，且时间跨度不能超过两个月。 | Array     | —           | —      |
 | first-day-of-week | 周起始日	    | Number    | 1 到 7      |  1     |
+| double-week | 双周显示格式	    | Boolean    | —     |  false    |
+
 
 ### dateCell scoped slot 参数
 | 参数             | 说明          | 类型      | 可选值        | 默认值  |
