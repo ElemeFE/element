@@ -565,10 +565,10 @@
       handleFocus(event) {
         if (!this.softFocus) {
           if (this.automaticDropdown || this.filterable) {
-            this.visible = true;
-            if (this.filterable) {
+            if (this.filterable && !this.visible) {
               this.menuVisibleOnFocus = true;
             }
+            this.visible = true;
           }
           this.$emit('focus', event);
         } else {
