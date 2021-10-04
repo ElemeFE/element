@@ -37,7 +37,7 @@
               <i class="el-dialog__close el-icon el-icon-close"></i>
             </button>
           </header>
-          <section class="el-drawer__body" v-if="rendered">
+          <section class="el-drawer__body" :data-scroll="scroll" v-if="rendered">
             <slot></slot>
           </section>
         </div>
@@ -110,6 +110,10 @@ export default {
     withHeader: {
       type: Boolean,
       default: true
+    },
+    scroll: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
