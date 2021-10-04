@@ -207,3 +207,9 @@ export default {
   }
 };
 </script>
+<style scoped lang="scss">
+.el-drawer__body[data-scroll="true"] {
+  overflow-x: auto;
+  overflow-y: unset;
+}
+</style>
