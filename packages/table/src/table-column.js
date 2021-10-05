@@ -195,7 +195,7 @@ export default {
     },
 
     registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
+      const props = ['type', 'label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
       // 一些属性具有别名
       const aliases = {
         prop: 'property',
@@ -213,6 +213,9 @@ export default {
 
         this.$watch(key, (newVal) => {
           this.columnConfig[columnKey] = newVal;
+          if (key === 'type') {
+            compose(this.setColumnRenders, this.setColumnWidth, this.setColumnForcedProps)(this.columnConfig);
+          }
         });
       });
     },
