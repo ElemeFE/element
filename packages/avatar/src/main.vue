@@ -7,7 +7,7 @@ export default {
       type: [Number, String],
       validator(val) {
         if (typeof val === 'string') {
-          return ['large', 'medium', 'small'].includes(val);
+          return ['large', 'medium', 'small'].indexOf(val) >= 0;
         }
         return typeof val === 'number';
       }
@@ -16,7 +16,7 @@ export default {
       type: String,
       default: 'circle',
       validator(val) {
-        return ['circle', 'square'].includes(val);
+        return ['circle', 'square'].indexOf(val) >= 0;
       }
     },
     icon: String,
