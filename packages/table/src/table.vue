@@ -460,6 +460,10 @@
         }
 
         if (shouldUpdateLayout) {
+          // FIX: When used in a dialog, closing the dialog will trigger a resize. the fixed column height will be calculated incorrectly
+          if (!width && !height) {
+            return;
+          }
           this.resizeState.width = width;
           this.resizeState.height = height;
           this.doLayout();
