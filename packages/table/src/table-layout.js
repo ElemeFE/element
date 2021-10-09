@@ -171,7 +171,7 @@ class TableLayout {
 
           flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
         }
-      } else { // HAVE HORIZONTAL SCROLL BAR
+      } else if (bodyWidth) { // HAVE HORIZONTAL SCROLL BAR
         this.scrollX = true;
         flexColumns.forEach(function(column) {
           column.realWidth = column.minWidth;
