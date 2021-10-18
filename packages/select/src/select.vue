@@ -485,6 +485,7 @@
         }
       },
       handleQueryChange(val) {
+        this.query = val;
         if (this.previousQuery === val || this.isOnComposition) return;
         if (
           this.previousQuery === null &&
@@ -772,6 +773,7 @@
       },
 
       handleOptionSelect(option, byClick) {
+        if (!option) return;
         if (this.multiple) {
           const value = (this.value || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
