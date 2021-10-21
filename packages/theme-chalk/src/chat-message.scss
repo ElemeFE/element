@@ -1,0 +1,143 @@
+@import "mixins/mixins";
+@import "mixins/chat-message";
+@import "common/var";
+
+@include b(chat-message) {
+  @include e(list) {
+    display: flex;
+    flex-direction: column;
+
+    @include e(box) {
+      display: flex;
+      align-items: flex-end;
+
+      @include e(body) {
+        color: $--chat-message--color;
+        background-color: $--color-info-light;
+
+        @include e(name) {
+          margin-bottom: 2px;
+          font-weight: bold;
+        }
+
+        @include e(footer) {
+          float: right;
+          display: flex;
+          justify-content: flex-end;
+
+          color: darken($--color-info-light, 20);
+
+          @include e(check-icon){
+            color: #11c711;
+            position: relative;
+
+            .el-icon-check {
+              font-weight: bold;
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  @include when(left) {
+    @include e(list) {
+      align-items: flex-start;
+    }
+
+    @include e(name) {
+      text-align: left;
+    }
+  }
+
+  @include when(right) {
+    @include e(list) {
+      align-items: flex-end;
+
+      @include e(box) {
+        flex-direction: row-reverse;
+      }
+    }
+
+    @include e(name) {
+      text-align: right;
+    }
+  }
+
+  @include m('primary') {
+    @include chat-message-variant($--chat-message-primary-font-color, $--chat-message-primary-background-color)
+  }
+
+  @include m('success') {
+    @include chat-message-variant($--chat-message-success-font-color, $--chat-message-success-background-color)
+  }
+
+  @include m('warning') {
+    @include chat-message-variant($--chat-message-warning-font-color, $--chat-message-warning-background-color)
+  }
+
+  @include m('danger') {
+    @include chat-message-variant($--chat-message-danger-font-color, $--chat-message-danger-background-color)
+  }
+
+  @include m('default') {
+    @include chat-message-size(
+                    $--chat-message-avatar-size,
+                    $--chat-message-margin-gutter,
+                    $--chat-message-font-size,
+                    $--chat-message-font-size-footer,
+                    $--chat-message-padding-vertical,
+                    $--chat-message-padding-horizontal,
+                    $--chat-message-border-radius
+    )
+  }
+
+  @include m('large') {
+    @include chat-message-size(
+                    $--chat-message-large-avatar-size,
+                    $--chat-message-large-margin-gutter,
+                    $--chat-message-large-font-size,
+                    $--chat-message-large-font-size-footer,
+                    $--chat-message-large-padding-vertical,
+                    $--chat-message-large-padding-horizontal,
+                    $--chat-message-large-border-radius
+    )
+  }
+
+  @include m('medium') {
+    @include chat-message-size(
+                    $--chat-message-medium-avatar-size,
+                    $--chat-message-medium-margin-gutter,
+                    $--chat-message-medium-font-size,
+                    $--chat-message-medium-font-size-footer,
+                    $--chat-message-medium-padding-vertical,
+                    $--chat-message-medium-padding-horizontal,
+                    $--chat-message-medium-border-radius
+    )
+  }
+
+  @include m('small') {
+    @include chat-message-size(
+                    $--chat-message-small-avatar-size,
+                    $--chat-message-small-margin-gutter,
+                    $--chat-message-small-font-size,
+                    $--chat-message-small-font-size-footer,
+                    $--chat-message-small-padding-vertical,
+                    $--chat-message-small-padding-horizontal,
+                    $--chat-message-small-border-radius
+    )
+  }
+
+  @include m('mini') {
+    @include chat-message-size(
+                    $--chat-message-mini-avatar-size,
+                    $--chat-message-mini-margin-gutter,
+                    $--chat-message-mini-font-size,
+                    $--chat-message-mini-font-size-footer,
+                    $--chat-message-mini-padding-vertical,
+                    $--chat-message-mini-padding-horizontal,
+                    $--chat-message-mini-border-radius
+    )
+  }
+}
