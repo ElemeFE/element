@@ -40,7 +40,7 @@ We have provided a switch flag indicating whether showing the loading animation,
 :::
 
 ### Customized Template
-ElementPlus only provides the most common template, sometimes that could be a problem, so you have a slot named `template` to do that work.
+Element only provides the most common template, sometimes that could be a problem, so you have a slot named `template` to do that work.
 
 Also we have provided different types skeleton unit that you can choose, for more detailed info, please scroll down to the bottom of this page to see the API description. Also, when building your own customized skeleton structure, you should be structuring them as closer to the real DOM as possible, which avoiding the DOM bouncing caused by the height difference.
 
