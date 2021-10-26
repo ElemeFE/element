@@ -14,6 +14,7 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
+          :class="selected[0].customClass"
           type="info"
           @close="deleteTag($event, selected[0])"
           disable-transitions>
@@ -35,6 +36,7 @@
           :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
+          :class="item.customClass"
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
@@ -956,7 +958,9 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
-      this.$on('handleOptionClick', this.handleClose);
+      if (!this.multiple) {
+        this.$on('handleOptionClick', this.handleClose);
+      }
       this.$on('setSelected', this.setSelected);
     },
 

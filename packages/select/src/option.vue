@@ -7,11 +7,13 @@
     role="option"
     :id="select.id ? `${select.id}-option-${value}` : null"
     :aria-selected="itemSelected ? 'true' : 'false'"
-    :class="{
+    :class="[{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
-      'hover': hover
-    }">
+      'hover': hover,
+    },
+    customClass]"
+    >
     <slot>
       <span>{{ currentLabel }}</span>
     </slot>
@@ -40,6 +42,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      customClass: {
+        type: String,
+        default: ''
       }
     },
 
