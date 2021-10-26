@@ -8,7 +8,7 @@
       role="dialog"
       aria-modal="true"
       :aria-label="title || 'dialog'">
-      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
+      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']" :style="customStyle">
         <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
             <div
@@ -303,6 +303,7 @@
         type: '',
         iconClass: '',
         customClass: '',
+        customStyle: {},
         showInput: false,
         inputValue: null,
         inputPlaceholder: '',
