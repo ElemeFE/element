@@ -163,18 +163,18 @@
 
       handleMinChange(date) {
         this.minDate = clearMilliseconds(date);
+        this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
         this.handleChange();
       },
 
       handleMaxChange(date) {
         this.maxDate = clearMilliseconds(date);
+        this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
         this.handleChange();
       },
 
       handleChange() {
         if (this.isValidValue([this.minDate, this.maxDate])) {
-          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
-          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
           this.$emit('pick', [this.minDate, this.maxDate], true);
         }
       },
