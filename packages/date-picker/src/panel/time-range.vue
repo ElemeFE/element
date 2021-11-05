@@ -163,20 +163,30 @@
 
       handleMinChange(date) {
         this.minDate = clearMilliseconds(date);
-        this.handleChange();
+        if (this.isValidMinValue()) {
+          this.handleChange();
+        }
       },
 
       handleMaxChange(date) {
         this.maxDate = clearMilliseconds(date);
-        this.handleChange();
+        if (this.isValidMaxValue()) {
+          this.handleChange();
+        }
+      },
+
+      isValidMinValue() {
+        return timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange);
+      },
+
+      isValidMaxValue() {
+        return timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange);
       },
 
       handleChange() {
-        if (this.isValidValue([this.minDate, this.maxDate])) {
-          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
-          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
-          this.$emit('pick', [this.minDate, this.maxDate], true);
-        }
+        this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
+        this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
+        this.$emit('pick', [this.minDate, this.maxDate], true);
       },
 
       setMinSelectionRange(start, end) {
@@ -215,12 +225,6 @@
         } else {
           this.$refs.maxSpinner.emitSelectRange(mapping[next - half]);
         }
-      },
-
-      isValidValue(date) {
-        return Array.isArray(date) &&
-          timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange) &&
-          timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange);
       },
 
       handleKeydown(event) {
