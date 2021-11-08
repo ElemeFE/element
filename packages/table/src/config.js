@@ -28,11 +28,11 @@ export const cellStarts = {
 // 这些选项不应该被覆盖
 export const cellForced = {
   selection: {
-    renderHeader: function(h, { store }) {
+    renderHeader: function(h, { store, column }) {
       return <el-checkbox
-        disabled={ store.states.data && store.states.data.length === 0 }
+        disabled={ store.states.data && store.states.data.length === 0 || column.disabled }
         indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
-        nativeOn-click={ this.toggleAllSelection }
+        nativeOn-click={ !column.disabled ? this.toggleAllSelection : ()=>{} }
         value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
