@@ -129,6 +129,8 @@ export default Vue.extend({
       if (oldSelection.length) {
         states.selection = [];
         this.table.$emit('selection-change', []);
+        states.unselection = [];
+        this.table.$emit('unselection-change', []);
       }
     },
 
@@ -165,6 +167,14 @@ export default Vue.extend({
         }
         this.table.$emit('selection-change', newSelection);
       }
+      if (!this.isSelected(row)) {
+        if (!this.states.unselection) this.states.unselection = [];
+        this.states.unselection.push(row);
+      } else if (this.states.unselection) {
+        let indx = this.states.unselection.findIndex(v => v.ns_id === row.ns_id);
+        this.states.unselection.splice(indx, indx >= 0 ? 1 : 0);
+      }
+      if (this.states.unselection && this.states.unselection.length > 0) this.table.$emit('unselection-change', this.states.unselection);
     },
 
     _toggleAllSelection() {
