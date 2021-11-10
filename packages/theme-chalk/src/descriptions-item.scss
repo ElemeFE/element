@@ -8,6 +8,9 @@
   }
 
   @include e(label) {
+    display: inline-flex;
+    align-items: baseline;
+
     &.has-colon {
       &::after {
         content: ':';
@@ -27,6 +30,8 @@
   }
 
   @include e(content) {
-
+    display: inline-flex;
+    align-items: baseline;
+    flex: 1;
   }
 }
