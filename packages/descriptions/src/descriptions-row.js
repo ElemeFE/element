@@ -100,7 +100,7 @@ export default {
                         [item.labelClassName]: true
                       }}
                       style={item.labelStyle}
-                    >{item.props.label}</span>
+                    >{item.label}</span>
                     <span
                       class={['el-descriptions-item__content', item.contentClassName]}
                       style={item.contentStyle}

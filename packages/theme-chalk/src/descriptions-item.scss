@@ -2,9 +2,19 @@
 @import 'common/var';
 
 @include b(descriptions-item) {
+  vertical-align: top;
   
   @include e(container) {
     display: flex;
+
+    .el-descriptions-item__label,
+    .el-descriptions-item__content {
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .el-descriptions-item__content {
+      flex: 1;
+    }
   }
 
   @include e(label) {
@@ -20,13 +30,13 @@
       color: $--color-text-secondary;
       background: $--descriptions-item-bordered-label-background;
     }
-
     &:not(.is-bordered-label) {
       margin-right: 10px;
     }
   }
 
   @include e(content) {
-
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
