@@ -1,4 +1,4 @@
-name: Website Preview
+name: Preview Build
 
 on: pull_request
 
