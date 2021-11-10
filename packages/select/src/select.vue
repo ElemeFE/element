@@ -238,7 +238,7 @@
 
       showNewOption() {
         let hasExistingOption = this.options.filter(option => !option.created)
-          .some(option => option.currentLabel === this.query);
+          .some(option => option.currentValue === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
       },
 
