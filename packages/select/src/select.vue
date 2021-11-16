@@ -88,7 +88,7 @@
       aria-haspopup="listbox"
       :aria-owns="id ? `${id}-listbox` : null"
       :aria-expanded="visible ? 'true' : 'false'"	
-      :aria-activedescendant="id && hoverIndex > -1 ? `${id}-option-${options[hoverIndex].value}` : null"
+      :aria-activedescendant="id && hoveredOption ? `${id}-option-${hoveredOption.value}` : null"
       :size="selectSize"
       :disabled="selectDisabled"
       :readonly="readonly"
@@ -254,6 +254,10 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
+      },
+
+      hoveredOption() {
+        return this.options[this.hoverIndex];
       }
     },
 
