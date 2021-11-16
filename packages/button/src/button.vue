@@ -71,6 +71,7 @@
 
     methods: {
       handleClick(evt) {
+        if (this.buttonDisabled) return;
         this.$emit('click', evt);
       }
     }
