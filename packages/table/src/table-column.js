@@ -56,6 +56,10 @@ export default {
       validator(val) {
         return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -195,13 +199,14 @@ export default {
     },
 
     registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
+      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip', 'disabled'];
       // 一些属性具有别名
       const aliases = {
         prop: 'property',
         realAlign: 'align',
         realHeaderAlign: 'headerAlign',
-        realWidth: 'width'
+        realWidth: 'width',
+        disabled: 'disabled'
       };
       const allAliases = props.reduce((prev, cur) => {
         prev[cur] = cur;
@@ -280,7 +285,7 @@ export default {
 
     const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];
     const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
-    const selectProps = ['selectable', 'reserveSelection'];
+    const selectProps = ['selectable', 'reserveSelection', 'disabled'];
     const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];
 
     let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
