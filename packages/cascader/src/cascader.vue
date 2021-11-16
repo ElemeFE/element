@@ -14,7 +14,7 @@
 
     <el-input
       ref="input"
-      v-model="multiple ? presentText : inputValue"
+      v-model="realModel"
       :size="realSize"
       :placeholder="placeholder"
       :readonly="readonly"
@@ -296,6 +296,18 @@ export default {
     },
     panel() {
       return this.$refs.panel;
+    },
+    realModel: {
+      get() {
+        return this.multiple ? this.presentText : this.inputValue;
+      },
+      set(val) {
+        if (this.multiple) {
+          this.presentText = val;
+        } else {
+          this.inputValue = val;
+        }
+      }
     }
   },
 
