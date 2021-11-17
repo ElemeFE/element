@@ -17,7 +17,8 @@ export default {
     'getCellStyle',
     'getCellClass',
     'handleCellMouseLeave',
-    'handleCellMouseEnter'
+    'handleCellMouseEnter',
+    'fixed'
   ],
   render() {
     const {
@@ -38,6 +39,9 @@ export default {
       <tr>
         {
           columns.map((column, cellIndex) => {
+            if (columnsHidden[cellIndex] && this.fixed) {
+              return null;
+            }
             const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
             if (!rowspan || !colspan) {
               return null;

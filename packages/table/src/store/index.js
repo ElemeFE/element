@@ -98,6 +98,7 @@ Watcher.prototype.mutations = {
     }
 
     this.updateTableScrollY();
+    this.syncFixedTableRowHeight();
   },
 
   filterChange(states, options) {
@@ -111,6 +112,7 @@ Watcher.prototype.mutations = {
     }
 
     this.updateTableScrollY();
+    this.syncFixedTableRowHeight();
   },
 
   toggleAllSelection() {
@@ -142,6 +144,10 @@ Watcher.prototype.commit = function(name, ...args) {
 
 Watcher.prototype.updateTableScrollY = function() {
   Vue.nextTick(this.table.updateScrollY);
+};
+
+Watcher.prototype.syncFixedTableRowHeight = function() {
+  Vue.nextTick(() => this.table.layout.syncFixedTableRowHeight());
 };
 
 export default Watcher;

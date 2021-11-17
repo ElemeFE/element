@@ -41,7 +41,9 @@ export default {
         border="0">
         <colgroup>
           {
-            this.columns.map(column => <col name={column.id} key={column.id} />)
+            this.columns
+              .filter((column, index) => !(this.columnsHidden[index] && this.fixed))
+              .map(column => <col name={column.id} key={column.id} />)
           }
         </colgroup>
         <tbody>
@@ -70,15 +72,7 @@ export default {
 
     ...mapStates({
       data: 'data',
-      columns(states) {
-        if (this.fixed === true || this.fixed === 'left') {
-          return states.fixedColumns;
-        }
-        if (this.fixed === 'right') {
-          return states.rightFixedColumns;
-        }
-        return states.columns;
-      },
+      columns: 'columns',
       treeIndent: 'indent',
       leftFixedLeafCount: 'fixedLeafColumnsLength',
       rightFixedLeafCount: 'rightFixedLeafColumnsLength',
@@ -140,8 +134,10 @@ export default {
     },
 
     isColumnHidden(index) {
-      if (this.fixed === true || this.fixed === 'left' || this.fixed === 'right') {
-        return false;
+      if (this.fixed === true || this.fixed === 'left') {
+        return index >= this.leftFixedLeafCount;
+      } else if (this.fixed === 'right') {
+        return index < this.columnsCount - this.rightFixedLeafCount;
       } else {
         return (index < this.leftFixedLeafCount) || (index >= this.columnsCount - this.rightFixedLeafCount);
       }
@@ -388,6 +384,7 @@ export default {
           handleCellMouseLeave={this.handleCellMouseLeave}
           isSelected={isSelected}
           isExpanded={isExpanded}
+          fixed={this.fixed}
         >
         </TableRow>
       );
