@@ -476,6 +476,17 @@
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
         }
+      },
+
+      multiple: {
+        immediate: true,
+        handler(val) {
+          if (val) {
+            this.$off('handleOptionClick', this.handleClose);
+          } else {
+            this.$on('handleOptionClick', this.handleClose);
+          }
+        }
       }
     },
 
@@ -962,9 +973,6 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
-      if (!this.multiple) {
-        this.$on('handleOptionClick', this.handleClose);
-      }
       this.$on('setSelected', this.setSelected);
     },
 
