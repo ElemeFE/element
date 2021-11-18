@@ -115,7 +115,7 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :style="{
-            width: bodyWidth
+            width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
           }">
         </table-body>
         <div
@@ -176,7 +176,7 @@
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
           :style="{
-            width: bodyWidth
+            width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
           }">
         </table-body>
          <div
