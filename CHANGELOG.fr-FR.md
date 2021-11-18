@@ -1,5 +1,31 @@
 ## Changelog
 
+### 2.15.7
+
+*2021-11-18*
+
+#### Bug fixes
+
+- Select
+  - fix click icon triggering dropdown (#21314 by @dennyak47)
+  - fix keydown event when composition (#21336 by @bchen1029)
+- Badge
+  - fix type class when is-dot (#21308 by @adaex)
+- Form
+  - validate method reject error info (#21374 by @cs1707)
+- Table
+  - fix resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - fix toggleAllSelection bug when table is empty (#21456 by @cs1707)
+  - optimize performance (#21330 by @cs1707)
+- Button
+  - fix disabled priority (#21375 by @cs1707)
+- Descriptions
+  - fix label slot bug (#21462 by @cs1707)
+- SASS
+  - replace node-sass with dart-sass (#21019 by @linxsbox)
+- Docs
+  - fix skeleton typos (#21408 by @zhhbstudio)
+
 ### 2.15.6
 
 *2021-09-02*
