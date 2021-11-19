@@ -483,8 +483,12 @@
         handler(val) {
           if (val) {
             this.$off('handleOptionClick', this.handleClose);
+            // selectedLabel is really only a concept for single select mode
+            this.selectedLabel = '';
           } else {
             this.$on('handleOptionClick', this.handleClose);
+            let option = this.getOption(this.value);
+            this.selectedLabel = option ? option.currentLabel : '';
           }
         }
       }
