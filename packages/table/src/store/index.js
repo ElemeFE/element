@@ -25,6 +25,14 @@ Watcher.prototype.mutations = {
     this.updateAllSelected();
 
     this.updateTableScrollY();
+    this.$nextTick().then(() => {
+      states.lastDataKeysMap = {};
+      if (Array.isArray(data)) {
+        for (let el of data) {
+          states.lastDataKeysMap[el[states.rowKey]] = true;
+        }
+      }
+    });
   },
 
   insertColumn(states, column, index, parent) {

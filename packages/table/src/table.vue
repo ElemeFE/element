@@ -619,7 +619,9 @@
         immediate: true,
         handler(newVal) {
           if (newVal) {
-            this.store.setExpandRowKeysAdapter(newVal);
+            this.$nextTick().then(()=>{
+              this.store.setExpandRowKeysAdapter(newVal);
+            });
           }
         }
       }
