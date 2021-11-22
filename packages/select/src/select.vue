@@ -490,6 +490,7 @@
             let option = this.getOption(this.value);
             this.selectedLabel = option ? option.currentLabel : '';
           }
+          this.resetInputHeight();
         }
       }
     },
