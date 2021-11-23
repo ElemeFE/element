@@ -41,22 +41,13 @@ export default {
         border="0">
         <colgroup>
           {
-            this.columns
-              .filter((column, index) => !(this.columnsHidden[index] && this.fixed))
-              .map(column => <col name={column.id} key={column.id} />)
+            this.columns.map(column => <col name={column.id} key={column.id} />)
           }
         </colgroup>
         <tbody>
           {
             data.reduce((acc, row) => {
-              const isSelected = this.store.isSelected(row);
-              const isExpanded = this.store.states.expandRows.indexOf(row) > -1;
-              return acc.concat(this.wrappedRowRender({
-                row,
-                $index: acc.length,
-                isSelected,
-                isExpanded
-              }));
+              return acc.concat(this.wrappedRowRender(row, acc.length));
             }, [])
           }
           <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
@@ -329,18 +320,8 @@ export default {
       table.$emit(`row-${name}`, row, column, event);
     },
 
-    getRowHeight(rowKey) {
-      const { fixed } = this;
-      if (!fixed) {
-        return null;
-      }
-      const height = (this.tableLayout.fixedColumnsBodyRowsHeight || {})[rowKey];
-      return typeof height === 'number' ? `${height}px` : height;
-    },
-
-    rowRender({ row, $index, treeRowData, isSelected, isExpanded }) {
+    rowRender(row, $index, treeRowData) {
       const { treeIndent, columns, firstDefaultColumnIndex } = this;
-
       const rowClasses = this.getRowClass(row, $index);
       let display = true;
       if (treeRowData) {
@@ -352,14 +333,9 @@ export default {
       let displayStyle = display ? null : {
         display: 'none'
       };
-      const height = this.getRowHeight($index);
-      const heightStyle = height ? {
-        height
-      } : null;
-
       return (
         <TableRow
-          style={[displayStyle, this.getRowStyle(row, $index), heightStyle]}
+          style={[displayStyle, this.getRowStyle(row, $index)]}
           class={rowClasses}
           key={this.getKeyOfRow(row, $index)}
           nativeOn-dblclick={($event) => this.handleDoubleClick($event, row)}
@@ -382,21 +358,21 @@ export default {
           getCellClass={this.getCellClass}
           handleCellMouseEnter={this.handleCellMouseEnter}
           handleCellMouseLeave={this.handleCellMouseLeave}
-          isSelected={isSelected}
-          isExpanded={isExpanded}
+          isSelected={this.store.isSelected(row)}
+          isExpanded={this.store.states.expandRows.indexOf(row) > -1}
           fixed={this.fixed}
         >
         </TableRow>
       );
     },
 
-    wrappedRowRender({ row, $index, isSelected, isExpanded }) {
+    wrappedRowRender(row, $index) {
       const store = this.store;
       const { isRowExpanded, assertRowKey } = store;
       const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
       if (this.hasExpandColumn && isRowExpanded(row)) {
         const renderExpanded = this.table.renderExpanded;
-        const tr = this.rowRender({ row, $index, isSelected, isExpanded });
+        const tr = this.rowRender(row, $index);
         if (!renderExpanded) {
           console.error('[Element Error]renderExpanded is required.');
           return tr;
@@ -429,7 +405,7 @@ export default {
             treeRowData.loading = cur.loading;
           }
         }
-        const tmp = [this.rowRender({ row, $index, treeRowData, isSelected, isExpanded })];
+        const tmp = [this.rowRender(row, $index, treeRowData)];
         // 渲染嵌套数据
         if (cur) {
           // currentRow 记录的是 index，所以还需主动增加 TreeTable 的 index
@@ -463,7 +439,7 @@ export default {
                 }
               }
               i++;
-              tmp.push(this.rowRender({ row: node, $index: $index + i, treeRowData: innerTreeRowData, isSelected, isExpanded }));
+              tmp.push(this.rowRender(node, $index + i, innerTreeRowData));
               if (cur) {
                 const nodes = lazyTreeNodeMap[childKey] || node[childrenColumnName];
                 traverse(nodes, cur);
@@ -477,7 +453,7 @@ export default {
         }
         return tmp;
       } else {
-        return this.rowRender({ row, $index, isSelected, isExpanded });
+        return this.rowRender(row, $index);
       }
     }
   }
