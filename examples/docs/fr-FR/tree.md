@@ -815,7 +815,7 @@ Vous pouvez déplacer les noeuds par drag'n drop en ajoutant l'attribut `draggab
 | draggable             | Si les noeuds sont déplaçables par drag'n drop. | boolean            | —    | false |
 | allow-drag            | Fonction exécutée avant le déplacement d'un noeud. Si `false` est retourné, le noeud ne sera pas déplaçable. | Function(node)  | —  | —  |
 | allow-drop            | Fonction exécutée avant le placement d'un noeud. Si `false` est retourné, le noeud ne pourra être placé sur la zone en question. `type` a trois valeurs possibles: 'prev' (insertion avant le noeud cible), 'inner' (insertion dans le noeud cible) and 'next' (insertion après le noeud cible). | Function(draggingNode, dropNode, type)  | —    | —     |
-
+| filter-check-strictly | Whether to check the parent time only check the filtered child when `show-checkbox` is `true`  | boolean  | —               | false   |
 ### props
 
 | Attribut | Description                              | Type   | Valeurs acceptées | Défaut |

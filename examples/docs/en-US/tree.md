@@ -811,7 +811,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 | draggable             | whether enable tree nodes drag and drop | boolean            | —    | false |
 | allow-drag            | this function will be executed before dragging a node. If `false` is returned, the node can not be dragged | Function(node)  | —  | —  |
 | allow-drop            | this function will be executed before the dragging node is dropped. If `false` is returned, the dragging node can not be dropped at the target node. `type` has three possible values: 'prev' (inserting the dragging node before the target node), 'inner' (inserting the dragging node to the target node) and 'next' (inserting the dragging node after the target node) | Function(draggingNode, dropNode, type)  | —    | —     |
-
+| filter-check-strictly | Whether to check the parent time only check the filtered child when `show-checkbox` is `true`  | boolean  | —               | false   |
 ### props
 | Attribute | Description                              | Type   | Accepted Values | Default |
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |

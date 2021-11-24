@@ -355,6 +355,9 @@ export default class Node {
 
   setChecked(value, deep, recursion, passValue) {
     this.indeterminate = value === 'half';
+
+    if (this.store.filterCheckStrictly && !this.visible) return;
+
     this.checked = value === true;
 
     if (this.store.checkStrictly) return;
