@@ -243,11 +243,13 @@ export default {
         this.transform.offsetY = offsetY + ev.pageY - startY;
       });
       on(document, 'mousemove', this._dragHandler);
-      on(document, 'mouseup', ev => {
-        off(document, 'mousemove', this._dragHandler);
-      });
+      on(document, 'mouseup', this.handleMouseUp);
 
       e.preventDefault();
+    },
+    handleMouseUp(e) {
+      off(document, 'mousemove', this._dragHandler);
+      off(document, 'mouseup', this.handleMouseUp);
     },
     handleMaskClick() {
       if (this.maskClosable) {
