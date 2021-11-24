@@ -556,6 +556,7 @@ Si la valeur de Select est un objet, assurez-vous d'utiliser `value-key` comme i
 | default-first-option | Sélectionne la première option avec Entrée. Utilisable avec `filterable` ou `remote` | boolean | - | false |
 | popper-append-to-body| Si le menu déroulant doit être ajouté au body. Si le positionnement du menu est incorrect, essayez de mettre cette option à `false`. | boolean | - | true |
 | automatic-dropdown | Pour les sélecteurs non filtrables, détermine si le menu apparaît au focus du champ. | boolean | - | false |
+| fix-dropdown-width | Whether to fix the width of the dropdown, the same as the Select | boolean | - | false |
 
 ### Évènements de Select
 

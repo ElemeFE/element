@@ -553,6 +553,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 | popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
 | automatic-dropdown | for non-filterable Select, this prop decides if the option menu pops up when the input is focused | boolean | - | false |
+| fix-dropdown-width | Whether to fix the width of the dropdown, the same as the Select | boolean | - | false |
 
 ### Select Events
 | Event Name | Description | Parameters |
