@@ -118,6 +118,9 @@
       closeOnHashChange: {
         default: true
       },
+      closeOnPopstate: {
+        default: true
+      },
       center: {
         default: false,
         type: Boolean
@@ -283,12 +286,18 @@
         if (this.closeOnHashChange) {
           window.addEventListener('hashchange', this.close);
         }
+        if (this.closeOnPopstate) {
+          window.addEventListener('popstate', this.close);
+        }
       });
     },
 
     beforeDestroy() {
       if (this.closeOnHashChange) {
         window.removeEventListener('hashchange', this.close);
+      }
+      if (this.closeOnPopstate) {
+        window.addEventListener('popstate', this.close);
       }
       setTimeout(() => {
         messageBox.closeDialog();
