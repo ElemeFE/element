@@ -263,4 +263,6 @@ export declare class ElTree<K, D extends TreeData> extends ElementUIComponent {
   /** Custom tree node icon */
   iconClass?: string;
 
+  /** Whether to check the parent time only check the filtered child when `show-checkbox` is `true` */
+  filterCheckStrictly: boolean;
 }
