@@ -50,7 +50,7 @@
   "homepage": "http://element.eleme.io",
   "keywords": [
     "eleme",
-    "vue",
+    "vue", 
     "components"
   ],
   "license": "MIT",
