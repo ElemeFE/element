@@ -69,7 +69,7 @@
   },
   "peerDependencies": {
     "vue": "^2.5.17"
-  }, 
+  },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
     "algoliasearch": "^3.24.5",
