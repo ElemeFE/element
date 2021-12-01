@@ -38,7 +38,7 @@
 }
 
 @include b(loading-spinner) {
-  top: 50%;
+  top: 50vh;
   margin-top: #{math.div(-$--loading-spinner-size, 2)};
   width: 100%;
   text-align: center;
