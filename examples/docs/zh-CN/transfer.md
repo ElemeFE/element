@@ -139,7 +139,7 @@
     data() {
       const generateData = _ => {
         const data = [];
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 60000; i++) {
           data.push({
             key: i,
             label: `备选项 ${ i }`,
