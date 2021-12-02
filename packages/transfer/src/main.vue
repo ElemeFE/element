@@ -47,7 +47,7 @@
   import Locale from 'element-ui/src/mixins/locale';
   import TransferPanel from './transfer-panel.vue';
   import Migrating from 'element-ui/src/mixins/migrating';
-
+  // let start = '';
   export default {
     name: 'ElTransfer',
 
@@ -227,9 +227,6 @@
         this.data.forEach((item) => {
           const itemKey = item[key];
           if (
-          //   this.leftChecked.indexOf(itemKey) > -1 &&
-          //   this.value.indexOf(itemKey) === -1
-          // ) {
             leftCheckedKeyPropsObj[itemKey] &&
             !valueKeyPropsObj[itemKey]) {
             itemsToBeMoved.push(itemKey);

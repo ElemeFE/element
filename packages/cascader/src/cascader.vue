@@ -617,10 +617,17 @@ export default {
       }
     },
     deleteTag(tag) {
-      const { checkedValue } = this;
+      const { checkedValue, panel } = this;
       const current = tag.node.getValueByOption();
       const val = checkedValue.find(n => isEqual(n, current));
       this.checkedValue = checkedValue.filter(n => !isEqual(n, current));
+      if (this.config.checkAll) {
+        this.$nextTick(() => {
+          panel.$refs.menu.forEach((menu) => {
+            menu.updateInDeterminate();
+          });
+        });
+      }
       this.$emit('remove-tag', val);
     },
     updateStyle() {
