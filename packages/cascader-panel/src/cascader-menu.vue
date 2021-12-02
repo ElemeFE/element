@@ -5,11 +5,14 @@ import Locale from 'element-ui/src/mixins/locale';
 import { generateId } from 'element-ui/src/utils/util';
 import virtualListItem from './cascader-virtual-scroll-item.vue';
 import VirtualList from 'vue-virtual-scroll-list';
+import emitter from 'element-ui/src/mixins/emitter';
 
 export default {
   name: 'ElCascaderMenu',
 
-  mixins: [Locale],
+  componentName: 'ElCascaderMenu',
+
+  mixins: [Locale, emitter],
 
   inject: ['panel'],
 
@@ -27,12 +30,20 @@ export default {
     index: Number
   },
 
+  watch: {
+    nodes() {
+      this.updateInDeterminate();
+    }
+  },
+
   data() {
     return {
       activeNode: null,
       hoverTimer: null,
       id: generateId(),
       virtualListProps: {}
+      checkAll: false,
+      isIndeterminate: false
     };
   },
 
@@ -46,7 +57,33 @@ export default {
     }
   },
 
+  created() {
+    this.updateInDeterminate();
+    this.$on('updateInDeterminate', this.updateInDeterminate);
+  },
+
   methods: {
+    updateInDeterminate() {
+      const { panel, nodes } = this;
+      if (panel.config.checkAll) {
+        let counter = 0;
+        for (let i = 0; i < nodes.length; i++) {
+          const node = nodes[i];
+          (node.checked || node.indeterminate) && counter++;
+        }
+        this.checkAll = counter === nodes.length;
+        this.isIndeterminate = !(counter === nodes.length || counter === 0);
+      }
+    },
+    handleCheckAllChange(val) {
+      const { nodes, panel } = this;
+      this.checkAll = !this.checkAll;
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        node.doCheck(this.checkAll, true);
+      }
+      panel.calculateMultiCheckedValue();
+    },
     handleExpand(e) {
       this.activeNode = e.target;
     },
@@ -85,7 +122,7 @@ export default {
       );
     },
     renderNodeList(h) {
-      const { menuId, nodes } = this;
+      const { menuId, checkAll, isIndeterminate, handleCheckAllChange } = this;
       const { isHoverMenu, config } = this.panel;
       const events = { on: {} };
 
@@ -111,6 +148,8 @@ export default {
       return [
         config.virtualScroll ? <virtual-list ref="virtualList" class="el-cascader-menu__virtual-list" data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
         </virtual-list> : [...nodeItems],
+        config.checkAll && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
+        ...nodes,
         isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
       ];
     }

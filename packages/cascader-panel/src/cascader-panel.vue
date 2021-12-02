@@ -20,6 +20,7 @@ import Store from './store';
 import merge from 'element-ui/src/utils/merge';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+import emitter from 'element-ui/src/mixins/emitter';
 import {
   noop,
   coerceTruthyValueToArray,
@@ -86,6 +87,8 @@ export default {
     CascaderMenu
   },
 
+  mixins: [emitter],
+
   props: {
     value: {},
     options: Array,
@@ -150,6 +153,7 @@ export default {
     checkedValue(val) {
       if (!isEqual(val, this.value)) {
         this.checkStrictly && this.calculateCheckedNodePaths();
+        this.broadcast('ElCascaderMenu', 'updateInDeterminate');
         this.$emit('input', val);
         this.$emit('change', val);
       }

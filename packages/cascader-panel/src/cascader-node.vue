@@ -34,7 +34,9 @@
         return this.panel.checkedValue;
       },
       isChecked() {
-        return this.node.isSameNode(this.checkedValue);
+        let isChecked = this.node.isSameNode(this.checkedValue);
+        this.node.isChecked = isChecked;
+        return isChecked;
       },
       inActivePath() {
         let inActivePath = this.isInPath(this.panel.activePath);
