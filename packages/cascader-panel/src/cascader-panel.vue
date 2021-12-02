@@ -351,12 +351,31 @@ export default {
 
       const menus = this.$refs.menu || [];
       menus.forEach(menu => {
-        const menuElement = menu.$el;
-        if (menuElement) {
-          const container = menuElement.querySelector('.el-scrollbar__wrap');
-          const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
-            menuElement.querySelector('.el-cascader-node.in-active-path');
-          scrollIntoView(container, activeNode);
+        if (this.config.virtualScroll) {
+          let currentNodeIndex = -1;
+          menu.nodes.find((item, index) => {
+            let flag = item.inActivePath;
+            flag && (currentNodeIndex = index);
+            return flag;
+          });
+          if (currentNodeIndex !== -1) {
+            menu.$refs.virtualList && menu.$refs.virtualList.scrollToIndex(currentNodeIndex);
+          } else {
+            menu.nodes.find((item, index) => {
+              let flag = item.checked || item.indeterminate;
+              flag && (currentNodeIndex = index);
+              return flag;
+            });
+            menu.$refs.virtualList && currentNodeIndex === -1 ? menu.$refs.virtualList.reset() : menu.$refs.virtualList.scrollToIndex(currentNodeIndex);
+          }
+        } else {
+          const menuElement = menu.$el;
+          if (menuElement) {
+            const container = menuElement.querySelector('.el-scrollbar__wrap');
+            const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
+              menuElement.querySelector('.el-cascader-node.in-active-path');
+            scrollIntoView(container, activeNode);
+          }
         }
       });
     },

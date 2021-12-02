@@ -39,9 +39,9 @@
         return isChecked;
       },
       inActivePath() {
-        let isActivePath = this.isInPath(this.panel.activePath);
-        this.node.inActivePath = isActivePath;
-        return isActivePath;
+        let inActivePath = this.isInPath(this.panel.activePath);
+        this.node.inActivePath = inActivePath;
+        return inActivePath;
       },
       inCheckedPath() {
         if (!this.config.checkStrictly) return false;

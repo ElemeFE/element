@@ -65,7 +65,8 @@
     "deepmerge": "^1.2.0",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",
-    "throttle-debounce": "^1.0.1"
+    "throttle-debounce": "^1.0.1",
+    "vue-virtual-scroll-list": "^2.3.2"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
