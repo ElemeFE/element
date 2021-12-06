@@ -1889,9 +1889,6 @@
 ### 虚拟滚动
 
 可通过 `props.virtualScroll = true` 来开启虚拟滚动
-### 全选
-
-可通过 `props.checkAll = true` 来开启全选功能
 
 :::demo 
 ```html
@@ -1899,9 +1896,6 @@
   <span class="demonstration">默认显示所有Tag</span>
   <el-cascader
     :options="list"
-  <span class="demonstration">折叠展示Tag</span>
-  <el-cascader
-    :options="options"
     :props="props"
     collapse-tags
     clearable></el-cascader>
@@ -1911,10 +1905,7 @@
   export default {
     data() {
       let list = []
-      let options = [{
-      return {
-        props: { multiple: true, checkAll: true, expandTrigger: 'hover' },
-        options: [{
+      let options: [{
           value: 1,
           label: '东南',
           children: [{
