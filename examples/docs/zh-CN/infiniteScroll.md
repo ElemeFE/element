@@ -38,7 +38,7 @@
     <ul
       class="list"
       v-infinite-scroll="load"
-      infinite-scroll-disabled="disabled">
+      :infinite-scroll-disabled="disabled">
       <li v-for="i in count" class="list-item">{{ i }}</li>
     </ul>
     <p v-if="loading">加载中...</p>
