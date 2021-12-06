@@ -1,0 +1,45 @@
+name: Preview Build
+
+on: pull_request
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      PULL_REQUEST_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '10.15.0'
+          registry-url: https://registry.npmjs.com/
+
+      - name: Build
+        run: npm run bootstrap && npm run deploy:build
+        
+
+      # share website dist
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs
+          path: examples/element-ui/
+          retention-days: 1
+
+      # write pr.txt for share
+      - name: Save pr number
+        if: ${{ always() }}
+        run: echo ${PULL_REQUEST_NUMBER} > ./pr.txt
+
+      # share pr number
+      - name: Upload pr number
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: pr
+          path: ./pr.txt
+          retention-days: 1
