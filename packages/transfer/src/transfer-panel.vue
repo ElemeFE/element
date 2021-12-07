@@ -127,7 +127,6 @@
 
     watch: {
       checked(val, oldVal) {
-        start = new Date().getTime();
         this.updateAllChecked();
         let newObj = {};
         val.every((item)=>{
@@ -147,11 +146,9 @@
           this.$emit('checked-change', val);
           this.checkChangeByUser = true;
         }
-        console.log('checked耗时', new Date().getTime() - start);
       },
 
       data() {
-        start = new Date().getTime();
         const checked = [];
         const filteredDataKeys = this.filteredData.map(item => item[this.keyProp]);
         this.checked.forEach(item => {
@@ -161,7 +158,6 @@
         });
         this.checkChangeByUser = false;
         this.checked = checked;
-        console.log('data耗时', new Date().getTime() - start);
       },
 
       checkableData() {
@@ -171,7 +167,6 @@
       defaultChecked: {
         immediate: true,
         handler(val, oldVal) {
-          start = new Date().getTime();
           if (oldVal && val.length === oldVal.length &&
             val.every(item => oldVal.indexOf(item) > -1)) return;
           const checked = [];
@@ -183,14 +178,12 @@
           });
           this.checkChangeByUser = false;
           this.checked = checked;
-          console.log('defaultCheck耗时', new Date().getTime() - start);
         }
       }
     },
 
     computed: {
       filteredData() {
-        start = new Date().getTime();
         let arr = this.data.filter(item => {
           if (typeof this.filterMethod === 'function') {
             return this.filterMethod(this.query, item);
@@ -200,7 +193,6 @@
           }
         });
         this.dataForShow = arr.slice(0, this.pageSize);
-        console.log('filteredData耗时', new Date().getTime() - start);
         return arr;
       },
 
@@ -274,11 +266,9 @@
 
       handleAllCheckedChange(value) {
         // debugger
-        start = new Date().getTime();
         this.checked = value
           ? this.checkableData.map(item => item[this.keyProp])
           : [];
-        console.log('handleAllCheckedChange耗时', new Date().getTime() - start);
       },
 
       loadMore() {

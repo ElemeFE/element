@@ -41,7 +41,7 @@ export default {
       activeNode: null,
       hoverTimer: null,
       id: generateId(),
-      virtualListProps: {}
+      virtualListProps: {},
       checkAll: false,
       isIndeterminate: false
     };
@@ -122,7 +122,7 @@ export default {
       );
     },
     renderNodeList(h) {
-      const { menuId, checkAll, isIndeterminate, handleCheckAllChange } = this;
+      const { menuId, checkAll, isIndeterminate, handleCheckAllChange, index, nodes } = this;
       const { isHoverMenu, config } = this.panel;
       const events = { on: {} };
 
@@ -132,7 +132,7 @@ export default {
 
       this.virtualListProps.menuId = menuId;
 
-      const nodeItems = this.nodes.map((node, index) => {
+      const nodeItems = nodes.map((node, index) => {
         const { hasChildren } = node;
         return (
           <cascader-node
@@ -146,10 +146,9 @@ export default {
       });
 
       return [
+        config.checkAll && index === 0 && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
         config.virtualScroll ? <virtual-list ref="virtualList" class="el-cascader-menu__virtual-list" data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
         </virtual-list> : [...nodeItems],
-        config.checkAll && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
-        ...nodes,
         isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
       ];
     }
