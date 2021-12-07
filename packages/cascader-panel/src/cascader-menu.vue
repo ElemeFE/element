@@ -121,7 +121,7 @@ export default {
 
       this.virtualListProps.menuId = menuId;
 
-      const nodeItems = this.nodes.map((node, index) => {
+      const nodeItems = nodes.map((node, index) => {
         const { hasChildren } = node;
         return (
           <cascader-node
@@ -135,6 +135,7 @@ export default {
       });
 
       return [
+        config.checkAll && index === 0 && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
         config.virtualScroll ? <virtual-list ref="virtualList" class="el-cascader-menu__virtual-list" data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
         </virtual-list> : [...nodeItems],
         isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
