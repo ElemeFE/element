@@ -44,7 +44,7 @@
     },
     watch: {
       isForceUpdate() {
-        this.$$forceUpdate();
+        this.$forceUpdate();
       }
     }
   };

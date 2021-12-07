@@ -361,8 +361,21 @@ export default {
           if (currentNodeIndex !== -1) {
             menu.$refs.virtualList && menu.$refs.virtualList.scrollToIndex(currentNodeIndex);
           } else {
+            currentNodeIndex = -1;
             menu.nodes.find((item, index) => {
-              let flag = item.checked || item.indeterminate;
+              let flag = false;
+              if (this.config.multiple) {
+                flag = item.checked || item.indeterminate;
+              } else {
+                // 如果是单选，得区分emitPath
+                // 因为emitPath为true时，this.checkValue是数组
+                // 为false时，是字符串
+                if (this.config.emitPath) {
+                  flag = Array.isArray(this.value) && this.value.includes(item.value);
+                } else {
+                  flag = this.value === item.value;
+                }
+              }
               flag && (currentNodeIndex = index);
               return flag;
             });

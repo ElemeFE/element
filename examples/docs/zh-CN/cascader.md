@@ -1890,7 +1890,7 @@
 
 可通过 `props.virtualScroll = true` 来开启虚拟滚动
 
-:::demo
+:::demo 多选不支持emitPath:false
 ```html
 <div class="block">
   <span class="demonstration">默认显示所有Tag</span>
@@ -1959,7 +1959,7 @@
       }
       list = list.concat(options)
       return {
-        props: { multiple: true, virtualScroll: true, expandTrigger: 'hover' },
+        props: {  virtualScroll: true,multiple:true, expandTrigger: 'hover'},
         list: list
       };
     }
