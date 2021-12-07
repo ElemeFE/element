@@ -65,8 +65,7 @@
     "deepmerge": "^1.2.0",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",
-    "throttle-debounce": "^1.0.1",
-    "vue-virtual-scroll-list": "^2.3.3"
+    "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
@@ -141,6 +140,7 @@
     "vue-router": "^3.0.1",
     "vue-template-compiler": "2.5.21",
     "vue-template-es2015-compiler": "^1.6.0",
+    "vue-virtual-scroll-list": "^2.3.3",
     "webpack": "^4.14.0",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.11",

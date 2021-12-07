@@ -80,9 +80,20 @@
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
           @close="toggleDropDownVisible(false)"></el-cascader-panel>
+        <virtual-list 
+          ref="virtualListFilter"
+          style="height: 187px;overflow: overlay;minWidth:180px"
+          v-if="filtering && config.virtualScroll"
+          v-show="filtering"
+          data-key="uid" 
+          @keydown.native="handleSuggestionKeyDown"
+          :data-sources="suggestions"
+          :extra-props="virtualListProps" 
+          :data-component="CascaderLi">
+        </virtual-list>
         <el-scrollbar
           ref="suggestionPanel"
-          v-if="filterable"
+          v-if="filterable && !config.virtualScroll"
           v-show="filtering"
           tag="ul"
           class="el-cascader__suggestion-panel"
@@ -128,6 +139,8 @@ import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
+import VirtualList from 'vue-virtual-scroll-list';
+import CascaderLi from './virtual-scroll-item';
 
 const { keys: KeyCode } = AriaUtils;
 const MigratingProps = {
@@ -188,11 +201,18 @@ export default {
     }
   },
 
+  provide() {
+    return {
+      cascader: this
+    };
+  },
+
   components: {
     ElInput,
     ElTag,
     ElScrollbar,
-    ElCascaderPanel
+    ElCascaderPanel,
+    'virtual-list': VirtualList
   },
 
   props: {
@@ -240,7 +260,11 @@ export default {
       filtering: false,
       suggestions: [],
       inputInitialHeight: 0,
-      pressDeleteCount: 0
+      pressDeleteCount: 0,
+      CascaderLi: CascaderLi,
+      virtualListProps: {
+        isForceUpdate: false
+      }
     };
   },
 
@@ -320,6 +344,7 @@ export default {
           this.toggleDropDownVisible(false);
         }
 
+        this.virtualListProps.isForceUpdate = !this.virtualListProps.isForceUpdate;
         this.$emit('input', val);
         this.$emit('change', val);
         this.dispatch('ElFormItem', 'el.form.change', [val]);
@@ -634,13 +659,17 @@ export default {
       const { $el, inputInitialHeight } = this;
       if (this.$isServer || !$el) return;
 
-      const { suggestionPanel } = this.$refs;
+      const { suggestionPanel, virtualListFilter } = this.$refs;
       const inputInner = $el.querySelector('.el-input__inner');
 
       if (!inputInner) return;
 
       const tags = $el.querySelector('.el-cascader__tags');
       let suggestionPanelEl = null;
+
+      if (virtualListFilter) {
+        virtualListFilter.$el.style.minWidth = inputInner.offsetWidth + 'px';
+      }
 
       if (suggestionPanel && (suggestionPanelEl = suggestionPanel.$el)) {
         const suggestionList = suggestionPanelEl.querySelector('.el-cascader__suggestion-list');

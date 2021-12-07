@@ -1898,6 +1898,7 @@
     :options="list"
     :props="props"
     collapse-tags
+    filterable
     clearable></el-cascader>
 </div>
 
@@ -1905,7 +1906,7 @@
   export default {
     data() {
       let list = []
-      let options: [{
+      let options= [{
           value: 1,
           label: '东南',
           children: [{
@@ -1952,7 +1953,7 @@
             ]
           }]
         }]
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 10000; i++) {
         list.push({ value: i,
         label: i})          
       }
