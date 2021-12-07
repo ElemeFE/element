@@ -135,6 +135,11 @@
     text-align: center;
   }
 
+  @include e(virtual-list-filter) {
+    height: 187px;
+    overflow: overlay;
+  }
+
   @include e(suggestion-item) {
     display: flex;
     justify-content: space-between;

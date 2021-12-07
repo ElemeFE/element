@@ -1898,6 +1898,7 @@
     :options="list"
     :props="props"
     collapse-tags
+    filterable
     clearable></el-cascader>
 </div>
 
@@ -1952,7 +1953,7 @@
             ]
           }]
         }]
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 10000; i++) {
         list.push({ value: i,
         label: i})          
       }
