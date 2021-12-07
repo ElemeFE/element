@@ -11,6 +11,8 @@ export default class Node {
     this.parent = parentNode || null;
     this.level = !this.parent ? 1 : this.parent.level + 1;
     this.uid = uid++;
+    this.inActivePath = false;
+    this.isChecked = false;
 
     this.initState();
     this.initChildren();
@@ -151,8 +153,8 @@ export default class Node {
     this.doCheck(checked);
   }
 
-  doCheck(checked) {
-    if (this.checked !== checked) {
+  doCheck(checked, checkAllFlag = false) {
+    if (this.checked !== checked || checkAllFlag) {
       if (this.config.checkStrictly) {
         this.checked = checked;
       } else {
