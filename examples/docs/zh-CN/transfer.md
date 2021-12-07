@@ -139,7 +139,7 @@
     data() {
       const generateData = _ => {
         const data = [];
-        for (let i = 1; i <= 60000; i++) {
+        for (let i = 1; i <= 60; i++) {
           data.push({
             key: i,
             label: `备选项 ${ i }`,
@@ -190,6 +190,48 @@
       const generateData = _ => {
         const data = [];
         for (let i = 1; i <= 15; i++) {
+          data.push({
+            value: i,
+            desc: `备选项 ${ i }`,
+            disabled: i % 4 === 0
+          });
+        }
+        return data;
+      };
+      return {
+        data: generateData(),
+        value: []
+      };
+    }
+  };
+</script>
+```
+:::
+
+
+### 虚拟滚动
+
+应用于大数据量的穿梭框情况
+:::demo 通过传入virtual-scroll来启动
+```html
+<template>
+  <el-transfer
+    v-model="value"
+    :props="{
+      key: 'value',
+      label: 'desc'
+    }"
+    :virtual-scroll="true"
+    :data="data">
+  </el-transfer>
+</template>
+
+<script>
+  export default {
+    data() {
+      const generateData = _ => {
+        const data = [];
+        for (let i = 1; i <= 30000; i++) {
           data.push({
             value: i,
             desc: `备选项 ${ i }`,
