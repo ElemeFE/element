@@ -437,7 +437,11 @@ export default {
     },
     handleDropdownLeave() {
       this.filtering = false;
-      this.inputValue = this.presentText;
+      if (this.config.virtualScroll && this.config.multiple) {
+        this.inputValue = null;
+      } else {
+        this.inputValue = this.presentText;
+      }
       this.doDestroy();
     },
     handleKeyDown(event) {

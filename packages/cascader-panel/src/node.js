@@ -12,7 +12,6 @@ export default class Node {
     this.level = !this.parent ? 1 : this.parent.level + 1;
     this.uid = uid++;
     this.inActivePath = false;
-    this.isChecked = false;
 
     this.initState();
     this.initChildren();
