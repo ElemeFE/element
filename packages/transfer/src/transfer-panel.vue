@@ -31,12 +31,24 @@
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
         class="el-transfer-panel__list">
-        <virtual-list style="height:100%;overflow-y: auto;"
+        <virtual-list 
+          v-if="virtualScroll"
+          style="height:100%;overflow-y: auto;"
           :data-key="keyProp"
           :data-sources="filteredData"
           :data-component="itemComponent"
           :extra-props="virtualListProps"
         />
+        <template v-else>
+          <el-checkbox
+            class="el-transfer-panel__item"
+            :label="item[keyProp]"
+            :disabled="item[disabledProp]"
+            :key="item[keyProp]"
+            v-for="item in dataForShow">
+            <option-content :option="item"></option-content>
+          </el-checkbox>
+        </template>
       </el-checkbox-group>
       <p
         class="el-transfer-panel__empty"
@@ -183,6 +195,9 @@
     },
 
     computed: {
+      virtualScroll() {
+        return this.$parent.virtualScroll;
+      },
       filteredData() {
         let arr = this.data.filter(item => {
           if (typeof this.filterMethod === 'function') {
@@ -272,7 +287,6 @@
       },
 
       loadMore() {
-        console.log('1111');
         this.pageNumber++;
         this.dataForShow = this.filteredData.slice(0, this.pageSize * this.pageNumber);
       },

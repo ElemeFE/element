@@ -121,6 +121,10 @@
       targetOrder: {
         type: String,
         default: 'original'
+      },
+      virtualScroll: {
+        type: Boolean,
+        default: false
       }
     },
 
