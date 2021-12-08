@@ -339,6 +339,7 @@
         if (input.value === this.isThousandFormat(this.nativeInputValue)) return;
         // 如果开启了千分位格式化
         // 那么我们就得对用户的输入做很多的处理
+        input.value = this.isThousandFormat(this.nativeInputValue);
         if (this.thousandFormatter && event) {
           let target = event.currentTarget;
           let newPos = 0;
@@ -377,13 +378,10 @@
             // 如果有负号，则newPos++
             /^-/.test(target.value) && newPos++;
           }
-          input.value = this.isThousandFormat(this.nativeInputValue);
           this.$nextTick(() => {
             target.selectionStart = newPos;
             target.selectionEnd = newPos;
           });
-        } else {
-          input.value = this.isThousandFormat(this.nativeInputValue);
         }
       },
       handleFocus(event) {
@@ -422,7 +420,7 @@
         this.$nextTick(this.setNativeInputValue(event));
       },
       handleChange(event) {
-        this.$emit('change', event.target.value);
+        this.$emit('change', this.thousandFormatter ? event.target.value.replace(/,/g, '') : event.target.value);
       },
       calcIconOffset(place) {
         let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
