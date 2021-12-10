@@ -35,7 +35,6 @@
       },
       isChecked() {
         let isChecked = this.node.isSameNode(this.checkedValue);
-        this.node.isChecked = isChecked;
         return isChecked;
       },
       inActivePath() {
