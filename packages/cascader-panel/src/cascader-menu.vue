@@ -32,7 +32,7 @@ export default {
 
   watch: {
     nodes() {
-      this.updateInDeterminate();
+      this.panel.config.checkAll && this.index === 0 && this.updateInDeterminate();
     }
   },
 
@@ -56,8 +56,10 @@ export default {
   },
 
   created() {
-    this.updateInDeterminate();
-    this.$on('updateInDeterminate', this.updateInDeterminate);
+    if (this.panel.config.checkAll && this.index === 0) {
+      this.updateInDeterminate();
+      this.$on('updateInDeterminate', this.updateInDeterminate);
+    }
   },
 
   methods: {
@@ -65,12 +67,19 @@ export default {
       const { panel, nodes } = this;
       if (panel.config.checkAll) {
         let counter = 0;
+        let disabledCounter = 0;
+        let indeterminateCounter = 0;
         for (let i = 0; i < nodes.length; i++) {
           const node = nodes[i];
-          (node.checked || node.indeterminate) && counter++;
+          if (!node.isDisabled) {
+            node.checked && counter++;
+            node.indeterminate && indeterminateCounter++;
+          } else {
+            disabledCounter++;
+          }
         }
-        this.checkAll = counter === nodes.length;
-        this.isIndeterminate = !(counter === nodes.length || counter === 0);
+        this.checkAll = counter === (this.nodes.length - disabledCounter) && counter > 0;
+        this.isIndeterminate = this.checkAll ? false : indeterminateCounter > 0 || counter > 0;
       }
     },
     handleExpand(e) {
@@ -111,7 +120,7 @@ export default {
       );
     },
     renderNodeList(h) {
-      const { menuId, nodes } = this;
+      const { menuId, nodes, checkAll, isIndeterminate, handleCheckAllChange, index } = this;
       const { isHoverMenu, config } = this.panel;
       const events = { on: {} };
 
