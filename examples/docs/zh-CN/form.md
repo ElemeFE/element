@@ -175,6 +175,9 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
   <el-form-item label="活动名称" prop="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
+  <el-form-item label="金额" prop="money" :show-max-number-unit="true" :ignoreNum="4">
+    <el-input v-model="ruleForm.money"></el-input>
+  </el-form-item>
   <el-form-item label="活动区域" prop="region">
     <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
@@ -231,7 +234,8 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          desc: '',
+          money:''
         },
         rules: {
           name: [
@@ -255,6 +259,11 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
           ],
           desc: [
             { required: true, message: '请填写活动形式', trigger: 'blur' }
+          ],
+          money:[
+            { required: true, message: '请输入金额', trigger: 'blur' },
+            {max:16,message:'请输入16位以内的数值类型',trigger:"change"},
+            {pattern:/^-?[0-9]*(.[0-9]*)?$/,message:'请输入16位以内的数值类型',trigger:"change"}
           ]
         }
       };
