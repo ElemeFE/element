@@ -129,6 +129,12 @@
       margin-left: 10px;
     }
   }
+  
+  @include e(showMaxNumberUnit) {
+   text-align: left;
+   color: #a2a1a1;
+   padding-left: 15px;
+  }
 
   @include when(required) {
     @include pseudo('not(.is-no-asterisk)') {

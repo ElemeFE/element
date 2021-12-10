@@ -28,6 +28,23 @@
     }
   }
 
+  @include e(virtual-list) {
+    height: 187px;
+    padding: 6px 0px;
+    overflow: overlay;
+    &::-webkit-scrollbar{
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: rgba(#000,.1);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-track{
+      background: transparent;
+    }
+  }
+
   @include e(wrap) {
     height: 204px;
   }

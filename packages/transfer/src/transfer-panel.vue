@@ -25,18 +25,30 @@
         ></i>
       </el-input>
       <el-checkbox-group
+        v-infinite-scroll="loadMore" 
+        :infinite-scroll-distance="10"
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
         :class="{ 'is-filterable': filterable }"
         class="el-transfer-panel__list">
-        <el-checkbox
-          class="el-transfer-panel__item"
-          :label="item[keyProp]"
-          :disabled="item[disabledProp]"
-          :key="item[keyProp]"
-          v-for="item in filteredData">
-          <option-content :option="item"></option-content>
-        </el-checkbox>
+        <virtual-list 
+          v-if="virtualScroll"
+          style="height:100%;overflow-y: auto;"
+          :data-key="keyProp"
+          :data-sources="filteredData"
+          :data-component="itemComponent"
+          :extra-props="virtualListProps"
+        />
+        <template v-else>
+          <el-checkbox
+            class="el-transfer-panel__item"
+            :label="item[keyProp]"
+            :disabled="item[disabledProp]"
+            :key="item[keyProp]"
+            v-for="item in dataForShow">
+            <option-content :option="item"></option-content>
+          </el-checkbox>
+        </template>
       </el-checkbox-group>
       <p
         class="el-transfer-panel__empty"
@@ -56,6 +68,8 @@
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElInput from 'element-ui/packages/input';
   import Locale from 'element-ui/src/mixins/locale';
+  import Item from './transfer-checkbox-item.vue';
+  import VirtualList from 'vue-virtual-scroll-list';
 
   export default {
     mixins: [Locale],
@@ -68,6 +82,7 @@
       ElCheckboxGroup,
       ElCheckbox,
       ElInput,
+      'virtual-list': VirtualList,
       OptionContent: {
         props: {
           option: Object
@@ -116,16 +131,28 @@
         allChecked: false,
         query: '',
         inputHover: false,
-        checkChangeByUser: true
+        checkChangeByUser: true,
+        itemComponent: Item,
+        virtualListProps: {}
       };
     },
 
     watch: {
       checked(val, oldVal) {
         this.updateAllChecked();
+        let newObj = {};
+        val.every((item)=>{
+          newObj[item] = true;
+        });
+        let oldObj = {};
+        oldVal.every((item)=>{
+          oldObj[item] = true;
+        });
         if (this.checkChangeByUser) {
-          const movedKeys = val.concat(oldVal)
-            .filter(v => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1);
+          // const movedKeys = val.concat(oldVal)
+          //   .filter(v => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1);
+          const movedKeys = this.filteredData.concat(oldVal)
+            .filter(v => newObj[v] || oldVal[v]);
           this.$emit('checked-change', val, movedKeys);
         } else {
           this.$emit('checked-change', val);
@@ -168,8 +195,11 @@
     },
 
     computed: {
+      virtualScroll() {
+        return this.$parent.virtualScroll;
+      },
       filteredData() {
-        return this.data.filter(item => {
+        let arr = this.data.filter(item => {
           if (typeof this.filterMethod === 'function') {
             return this.filterMethod(this.query, item);
           } else {
@@ -177,6 +207,8 @@
             return label.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
           }
         });
+        this.dataForShow = arr.slice(0, this.pageSize);
+        return arr;
       },
 
       checkableData() {
@@ -216,10 +248,12 @@
       },
 
       keyProp() {
+        this.virtualListProps.keyProp = this.props.key || 'key';
         return this.props.key || 'key';
       },
 
       disabledProp() {
+        this.virtualListProps.disabledProp = this.props.disabled || 'disabled';
         return this.props.disabled || 'disabled';
       },
 
@@ -230,15 +264,31 @@
 
     methods: {
       updateAllChecked() {
-        const checkableDataKeys = this.checkableData.map(item => item[this.keyProp]);
-        this.allChecked = checkableDataKeys.length > 0 &&
-          checkableDataKeys.every(item => this.checked.indexOf(item) > -1);
+        // const checkableDataKeys = this.checkableData.map(item => item[this.keyProp]);
+        // this.allChecked = checkableDataKeys.length > 0 &&
+        //   checkableDataKeys.every(item => this.checked.indexOf(item) > -1);
+        let checkObj = {};
+        this.checked.forEach((item, index) => {
+          checkObj[item] = true;
+        });
+        // 通过对象的k-v对应，n(1)的方式寻找数组中是否存在某元素
+        this.allChecked =
+          this.checkableData.length > 0 &&
+          this.checked.length > 0 &&
+          this.checkableData.every((item) => checkObj[item[this.keyProp]]);
+        // 上面被注释的源码是最耗时的，所有一直看耗时就可以了
       },
 
       handleAllCheckedChange(value) {
+        // debugger
         this.checked = value
           ? this.checkableData.map(item => item[this.keyProp])
           : [];
+      },
+
+      loadMore() {
+        this.pageNumber++;
+        this.dataForShow = this.filteredData.slice(0, this.pageSize * this.pageNumber);
       },
 
       clearQuery() {

@@ -113,6 +113,7 @@
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
   import {isKorean} from 'element-ui/src/utils/shared';
+  import { formatThousand } from 'element-ui/src/utils/formatter/index';
 
   export default {
     name: 'ElInput',
@@ -138,7 +139,8 @@
         hovering: false,
         focused: false,
         isComposing: false,
-        passwordVisible: false
+        passwordVisible: false,
+        formatThousand: formatThousand
       };
     },
 
@@ -189,7 +191,11 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      thousandFormatter: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -327,11 +333,56 @@
 
         this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
-      setNativeInputValue() {
+      setNativeInputValue(event = undefined) {
         const input = this.getInput();
         if (!input) return;
-        if (input.value === this.nativeInputValue) return;
-        input.value = this.nativeInputValue;
+        if (input.value === this.isThousandFormat(this.nativeInputValue)) return;
+        // 如果开启了千分位格式化
+        // 那么我们就得对用户的输入做很多的处理
+        input.value = this.isThousandFormat(this.nativeInputValue);
+        if (this.thousandFormatter && event) {
+          let target = event.currentTarget;
+          let newPos = 0;
+          if (target.selectionStart === 0 && target.selectionEnd === 0) {
+          } else {
+            // input组件输入完，光标所在的位置
+            let cursorPos = target.selectionStart === target.selectionEnd ? input.selectionEnd : 0;
+            // 如果存在负号，则光标--
+            /^-/.test(target.value) && cursorPos--;
+            // 数值的绝对值字符串
+            let absolutePart = target.value.replace(/-/g, '');
+            // 数值的整数部分（去除,）
+            let intergetPart = absolutePart.replace(/,/g, '').split('.')[0];
+            // 光标左侧部分（去除,）
+            let leftPart = absolutePart.slice(0, cursorPos).replace(/,/g, '');
+            // 整数部分长度
+            let intergetPartLen = intergetPart.length;
+            // 光标左侧部分长度
+            let leftPartLen = leftPart.length;
+            // 光标如果是在小数点后的话，什么都不干
+            if (leftPartLen > intergetPartLen + 1) {
+              newPos = cursorPos;
+            } else {
+              // 标记newPos：光标左侧部分 在 整数部分的 位置
+              newPos = intergetPart.indexOf(leftPart) + leftPartLen;
+              // 计算整数部分理论上应该有多少个逗号
+              let allComasNum = intergetPartLen === 0 ? 0 : intergetPartLen % 3 === 0 ? Math.floor(intergetPartLen / 3) - 1 : Math.floor(intergetPartLen / 3);
+              // 光标在整数部分的右侧 的长度
+              let rightPartLen = intergetPartLen - leftPartLen;
+              // 光标在整数部分的右侧 理论上有多少个逗号
+              let rightComasNum = rightPartLen === 0 ? 0 : Math.floor(rightPartLen / 3);
+              // 根据整数部分的逗号数，以及右侧部分的逗号数，算出光标应该要移动多少位
+              let addComasLen = allComasNum - rightComasNum;
+              newPos = newPos + addComasLen;
+            }
+            // 如果有负号，则newPos++
+            /^-/.test(target.value) && newPos++;
+          }
+          this.$nextTick(() => {
+            target.selectionStart = newPos;
+            target.selectionEnd = newPos;
+          });
+        }
       },
       handleFocus(event) {
         this.focused = true;
@@ -360,14 +411,16 @@
         // should remove the following line when we don't support IE
         if (event.target.value === this.nativeInputValue) return;
 
-        this.$emit('input', event.target.value);
+        const value = this.thousandFormatter ? event.target.value.replace(/,/g, '') : event.target.value;
+
+        this.$emit('input', value);
 
         // ensure native input value is controlled
         // see: https://github.com/ElemeFE/element/issues/12850
-        this.$nextTick(this.setNativeInputValue);
+        this.$nextTick(this.setNativeInputValue(event));
       },
       handleChange(event) {
-        this.$emit('change', event.target.value);
+        this.$emit('change', this.thousandFormatter ? event.target.value.replace(/,/g, '') : event.target.value);
       },
       calcIconOffset(place) {
         let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
@@ -417,6 +470,10 @@
           this.showPassword ||
           this.isWordLimitVisible ||
           (this.validateState && this.needStatusIcon);
+      },
+      // 是否将值千分位格式化
+      isThousandFormat(value) {
+        return this.thousandFormatter ? this.formatThousand(value) : value;
       }
     },
 

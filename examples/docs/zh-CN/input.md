@@ -674,6 +674,32 @@ export default {
 ```
 :::
 
+
+### 千分位格式化功能
+
+对于数值类输入框，自动千分位格式化，组件返回的value依旧是未千分位格式化的数值类字符串
+
+:::demo  通过thousand-formatter开启
+```html
+<el-input
+  placeholder="请输入内容"
+  v-model="value"
+  thousand-formatter
+>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      value: '',
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Input Attributes
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
@@ -705,7 +731,8 @@ export default {
 | label | 输入框关联的label文字 | string | — | — |
 | tabindex | 输入框的tabindex | string | - | - |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |
-
+| thousand-formatter | 是否开启千分位格式化 | boolean | - | false |
+ 
 ### Input Slots
 | name | 说明 |
 |------|--------|

@@ -3,6 +3,8 @@ import ElScrollbar from 'element-ui/packages/scrollbar';
 import CascaderNode from './cascader-node.vue';
 import Locale from 'element-ui/src/mixins/locale';
 import { generateId } from 'element-ui/src/utils/util';
+import virtualListItem from './cascader-virtual-scroll-item.vue';
+import VirtualList from 'vue-virtual-scroll-list';
 import emitter from 'element-ui/src/mixins/emitter';
 
 export default {
@@ -16,7 +18,8 @@ export default {
 
   components: {
     ElScrollbar,
-    CascaderNode
+    CascaderNode,
+    'virtual-list': VirtualList
   },
 
   props: {
@@ -38,8 +41,7 @@ export default {
       activeNode: null,
       hoverTimer: null,
       id: generateId(),
-      checkAll: false,
-      isIndeterminate: false
+      virtualListProps: {}
     };
   },
 
@@ -48,6 +50,7 @@ export default {
       return !this.nodes.length;
     },
     menuId() {
+      this.virtualListProps.menuId = `cascader-menu-${this.id}-${this.index}`;
       return `cascader-menu-${this.id}-${this.index}`;
     }
   },
@@ -78,15 +81,6 @@ export default {
         this.checkAll = counter === (this.nodes.length - disabledCounter) && counter > 0;
         this.isIndeterminate = this.checkAll ? false : indeterminateCounter > 0 || counter > 0;
       }
-    },
-    handleCheckAllChange(val) {
-      const { nodes, panel } = this;
-      this.checkAll = !this.checkAll;
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        node.doCheck(this.checkAll, true);
-      }
-      panel.calculateMultiCheckedValue();
     },
     handleExpand(e) {
       this.activeNode = e.target;
@@ -126,7 +120,7 @@ export default {
       );
     },
     renderNodeList(h) {
-      const { menuId, checkAll, isIndeterminate, handleCheckAllChange, index } = this;
+      const { menuId, nodes, checkAll, isIndeterminate, handleCheckAllChange, index } = this;
       const { isHoverMenu, config } = this.panel;
       const events = { on: {} };
 
@@ -134,7 +128,9 @@ export default {
         events.on.expand = this.handleExpand;
       }
 
-      const nodes = this.nodes.map((node, index) => {
+      this.virtualListProps.menuId = menuId;
+
+      const nodeItems = nodes.map((node, index) => {
         const { hasChildren } = node;
         return (
           <cascader-node
@@ -149,7 +145,8 @@ export default {
 
       return [
         config.checkAll && index === 0 && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
-        ...nodes,
+        config.virtualScroll ? <virtual-list ref="virtualList" class="el-cascader-menu__virtual-list" data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
+        </virtual-list> : [...nodeItems],
         isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
       ];
     }
@@ -157,6 +154,7 @@ export default {
 
   render(h) {
     const { isEmpty, menuId } = this;
+    const { config } = this.panel;
     const events = { nativeOn: {} };
 
     // optimize hover to expand experience (#8010)
@@ -166,7 +164,9 @@ export default {
     }
 
     return (
-      <el-scrollbar
+      config.virtualScroll ? <div class="el-cascader-menu">
+        { isEmpty ? this.renderEmptyText() : this.renderNodeList(h) }
+      </div> : <el-scrollbar
         tag="ul"
         role="menu"
         id={ menuId }
