@@ -41,6 +41,8 @@ export default {
       activeNode: null,
       hoverTimer: null,
       id: generateId(),
+      checkAll: false,
+      isIndeterminate: false,
       virtualListProps: {}
     };
   },
@@ -81,6 +83,15 @@ export default {
         this.checkAll = counter === (this.nodes.length - disabledCounter) && counter > 0;
         this.isIndeterminate = this.checkAll ? false : indeterminateCounter > 0 || counter > 0;
       }
+    },
+    handleCheckAllChange(val) {
+      const { nodes, panel } = this;
+      this.checkAll = !this.checkAll;
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        node.doCheck(this.checkAll, true);
+      }
+      panel.calculateMultiCheckedValue();
     },
     handleExpand(e) {
       this.activeNode = e.target;

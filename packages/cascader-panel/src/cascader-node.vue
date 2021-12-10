@@ -20,6 +20,21 @@
       nodeId: String
     },
 
+    data() {
+      return {
+        isShowCheckBox: true
+      };
+    },
+
+    watch: {
+      'node.refreshFlag'(val) {
+        this.isShowCheckBox = false;
+        this.$nextTick(() => {
+          this.isShowCheckBox = true;
+        });
+      }
+    },
+
     computed: {
       config() {
         return this.panel.config;
@@ -100,7 +115,8 @@
       },
 
       handleMultiCheckChange(checked) {
-        this.node.doCheck(checked);
+        // this.node.doCheck(checked);
+        this.node.doCheck(checked, false, true);
         this.panel.calculateMultiCheckedValue();
       },
 
@@ -218,7 +234,8 @@
         isLeaf,
         isDisabled,
         config,
-        nodeId
+        nodeId,
+        isShowCheckBox
       } = this;
       const { expandTrigger, checkStrictly, multiple } = config;
       const disabled = !checkStrictly && isDisabled;
@@ -255,7 +272,7 @@
             'is-disabled': disabled
           }}
           {...events}>
-          { this.renderPrefix(h) }
+          { isShowCheckBox && this.renderPrefix(h) }
           { this.renderContent(h) }
           { this.renderPostfix(h) }
         </li>
