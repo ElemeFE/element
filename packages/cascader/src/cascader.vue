@@ -450,6 +450,8 @@ export default {
     handleClear() {
       this.presentText = '';
       this.panel.clearCheckedNodes();
+      this.panel.activePath = [];
+      this.panel.menus = this.panel.menus.length ? this.panel.menus.splice(0, 1) : [];
     },
     handleExpandChange(value) {
       this.$nextTick(this.updatePopper.bind(this));
