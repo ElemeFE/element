@@ -18,7 +18,7 @@ export declare class ElTabs extends ElementUIComponent {
   editable: boolean
 
   /** Name of the selected tab */
-  value: string
+  value: string | number
 
   /** Position of tabs */
   tabPosition: TabPosition
@@ -27,5 +27,5 @@ export declare class ElTabs extends ElementUIComponent {
   stretch: Boolean
 
   /** Hook function before switching tab. If false or a Promise is returned and then is rejected, switching will be prevented */
-  beforeLeave: (activeName: string, oldActiveName: string) => boolean | Promise<any>
+  beforeLeave: (activeName: string | number, oldActiveName: string | number) => boolean | Promise<any>
 }
