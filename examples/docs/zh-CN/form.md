@@ -176,7 +176,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="金额" prop="money" :show-max-number-unit="true" :ignoreNum="4">
-    <el-input v-model="ruleForm.money"></el-input>
+    <el-input v-model="ruleForm.money" thousand-formatter></el-input>
   </el-form-item>
   <el-form-item label="活动区域" prop="region">
     <el-select v-model="ruleForm.region" placeholder="请选择活动区域">

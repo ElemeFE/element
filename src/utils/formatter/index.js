@@ -7,7 +7,6 @@ const formatThousand = (num) => {
   if (_tempResult !== '' && _tempResult.indexOf('.') < 0) {
     _tempResult = _tempResult;
   }
-  console.log('qqq', _tempResult);
   return _tempResult;
 };
 
