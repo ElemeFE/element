@@ -62,7 +62,9 @@
         :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
-        @keydown.delete="handleDelete">
+        @keydown.delete="handleDelete"
+        @compositionstart="handleCompositionstart"
+        @compositionend="handleCompositionend">
     </div>
 
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
@@ -240,7 +242,8 @@ export default {
       filtering: false,
       suggestions: [],
       inputInitialHeight: 0,
-      pressDeleteCount: 0
+      pressDeleteCount: 0,
+      spell: false
     };
   },
 
@@ -436,6 +439,12 @@ export default {
     handleBlur(e) {
       this.$emit('blur', e);
     },
+    handleCompositionstart() {
+      this.spell = true;
+    },
+    handleCompositionend(e) {
+      this.spell = false;
+    },
     handleInput(val, event) {
       !this.dropDownVisible && this.toggleDropDownVisible(true);
 
@@ -579,6 +588,7 @@ export default {
       }
     },
     handleDelete() {
+      if (this.spell) return;
       const { inputValue, pressDeleteCount, presentTags } = this;
       const lastIndex = presentTags.length - 1;
       const lastTag = presentTags[lastIndex];
