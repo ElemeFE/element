@@ -1967,6 +1967,7 @@
 </script>
 ```
 :::
+
 ### 全选
 
 可通过 `props.checkAll = true` 来开启全选功能
@@ -1976,8 +1977,9 @@
 <div class="block">
   <span class="demonstration">父子关联</span>
   <el-cascader
-    :options="list"
+    :options="options"
     :props="props"
+    filterable
     collapse-tags
     clearable></el-cascader>
 </div>
@@ -1993,9 +1995,10 @@
 
 <script>
   export default {
-    data() {
-      let list = []
-      let options = [{
+    data() { 
+      return {
+        props: { multiple: true,checkAll: true, expandTrigger: 'hover' },
+        options: [{
           value: 1,
           label: '东南',
           children: [{
@@ -2042,14 +2045,75 @@
             ]
           }]
         }]
-      list = list.concat(options)
-      return {
-        props: { multiple: true,checkAll: true, expandTrigger: 'hover' },
-        props2: { checkAll: true, expandTrigger: 'hover',checkStrictly:true,multiple:true },
-        list: list
       };
     }
   };
+</script>
+```
+:::
+
+
+### 同级互斥
+
+可通过`props.mutualExcluseLabel`来配置那个层级的数据是互斥的
+
+:::demo  
+```html
+<div class="block">
+  <span class="demonstration">第二层互斥</span>
+  <el-cascader
+    :options="options"
+    v-model="value"
+    :props="props"
+    filterable
+    collapse-tags
+    clearable></el-cascader>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value:[],
+        props:{multiple:true, mutualExcluseLabel:2,expandTrigger:'hover'},
+        options: [{
+            value: 'buy',
+            label: '买入',
+            children: [{
+              value: 'ALL',
+              label: '所有'
+            }, {
+              value: 'Some',
+              label: '指定',
+              children: [{
+                value: 'watermelon',
+                label: '西瓜'
+              }, {
+                value: 'potato',
+                label: '土豆'
+              }]
+            }]
+          }, {
+            value: 'sell',
+            label: '卖出',
+            children: [{
+              value: 'ALL',
+              label: '所有',
+            }, {
+              value: 'Some',
+              label: '指定',
+              children: [{
+                value: 'watermelon',
+                label: '西瓜'
+              }, {
+                value: 'potato',
+                label: '土豆'
+              }]
+            }]
+          }]
+        }
+      }
+    }
 </script>
 ```
 :::
