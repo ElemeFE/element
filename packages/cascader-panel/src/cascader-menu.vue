@@ -42,7 +42,8 @@ export default {
       hoverTimer: null,
       id: generateId(),
       virtualListProps: {},
-      checkAll: false
+      checkAll: false,
+      isIndeterminate: false
     };
   },
 
