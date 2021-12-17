@@ -1975,10 +1975,19 @@
 :::demo 
 ```html
 <div class="block">
-  <span class="demonstration">默认显示所有Tag</span>
+  <span class="demonstration">父子关联</span>
   <el-cascader
     :options="options"
     :props="props"
+    filterable
+    collapse-tags
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">父子不关联</span>
+   <el-cascader
+    :options="list"
+    :props="props2"
     filterable
     collapse-tags
     clearable></el-cascader>
