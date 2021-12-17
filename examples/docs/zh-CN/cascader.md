@@ -1986,7 +1986,7 @@
 <div class="block">
   <span class="demonstration">父子不关联</span>
    <el-cascader
-    :options="list"
+    :options="options"
     :props="props2"
     filterable
     collapse-tags
@@ -1998,6 +1998,7 @@
     data() { 
       return {
         props: { multiple: true,checkAll: true, expandTrigger: 'hover' },
+        props2: { multiple: true,checkAll: true, expandTrigger: 'hover',checkStrictly:true },
         options: [{
           value: 1,
           label: '东南',
