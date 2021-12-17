@@ -1974,10 +1974,19 @@
 :::demo 
 ```html
 <div class="block">
-  <span class="demonstration">默认显示所有Tag</span>
+  <span class="demonstration">父子关联</span>
   <el-cascader
     :options="list"
     :props="props"
+    collapse-tags
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">父子不关联</span>
+   <el-cascader
+    :options="list"
+    :props="props2"
+    filterable
     collapse-tags
     clearable></el-cascader>
 </div>
@@ -2036,6 +2045,7 @@
       list = list.concat(options)
       return {
         props: { multiple: true,checkAll: true, expandTrigger: 'hover' },
+        props2: { checkAll: true, expandTrigger: 'hover',checkStrictly:true,multiple:true },
         list: list
       };
     }
