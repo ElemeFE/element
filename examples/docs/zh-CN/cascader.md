@@ -2061,11 +2061,19 @@
 :::demo  
 ```html
 <div class="block">
-  <span class="demonstration">第二层互斥</span>
+  <span class="demonstration">父子关联-第二层互斥</span>
   <el-cascader
     :options="options"
-    v-model="value"
     :props="props"
+    filterable
+    collapse-tags
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">父子不关联-第二层互斥</span>
+  <el-cascader
+    :options="options"
+    :props="props2"
     filterable
     collapse-tags
     clearable></el-cascader>
@@ -2077,6 +2085,7 @@
       return {
         value:[],
         props:{multiple:true, mutualExcluseLabel:2,expandTrigger:'hover'},
+        props2:{multiple:true, mutualExcluseLabel:2,expandTrigger:'hover',checkStrictly:true},
         options: [{
             value: 'buy',
             label: '买入',

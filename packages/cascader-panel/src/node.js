@@ -224,6 +224,7 @@ export default class Node {
     if (this.checked !== checked || flag || isForce) {
       if (this.config.checkStrictly) {
         this.checked = checked;
+        this.mutualExclusion();
       } else {
         // bottom up to unify the calculation of the indeterminate state
         // 对于节点层级<=互斥层级的节点，且是用户自己点击该节点，且该节点有子代节点时，
