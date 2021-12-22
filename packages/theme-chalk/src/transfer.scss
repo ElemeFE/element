@@ -73,6 +73,7 @@
 
   @include e(body) {
     height: $--transfer-panel-body-height;
+    box-sizing: content-box;
 
     @include when(with-footer) {
       padding-bottom: $--transfer-panel-footer-height;
