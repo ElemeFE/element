@@ -2793,8 +2793,8 @@ describe('DatePicker', () => {
       setTimeout(() => {
         const newLeft = left.textContent.replace(/\s/g, '');
         const newRight = right.textContent.replace(/\s/g, '');
-        expect(newLeft).to.equal('1980年');
-        expect(newRight).to.equal('1990年');
+        expect(newLeft).to.equal('1980年-1989年');
+        expect(newRight).to.equal('1990年-1999年');
         done();
       }, DELAY);
     });
@@ -2827,12 +2827,12 @@ describe('DatePicker', () => {
           const right = picker.picker.$el.querySelector('.is-right .el-date-range-picker__header');
           const newLeft = left.textContent.replace(/\s/g, '');
           const newRight = right.textContent.replace(/\s/g, '');
-          expect(newLeft).to.equal('2010年');
-          expect(newRight).to.equal('2020年');
+          expect(newLeft).to.equal('2010年-2019年');
+          expect(newRight).to.equal('2020年-2029年');
           vm.defaultValue = ['1998-01-01'];
           setTimeout(() => {
-            expect(left.textContent.replace(/\s/g, '')).to.equal('1990年');
-            expect(right.textContent.replace(/\s/g, '')).to.equal('2000年');
+            expect(left.textContent.replace(/\s/g, '')).to.equal('1990年-1999年');
+            expect(right.textContent.replace(/\s/g, '')).to.equal('2000年-2009年');
             done();
           }, DELAY);
         });
@@ -2862,10 +2862,10 @@ describe('DatePicker', () => {
         input.focus();
         setTimeout(() => {
           const left = picker.picker.$el.querySelector('.is-left .el-date-range-picker__header');
-          expect(left.textContent.replace(/\s/g, '')).to.equal('2010年');
+          expect(left.textContent.replace(/\s/g, '')).to.equal('2020年-2029年');
           vm.value = ['2028/06/22', '2029/07/22'];
           setTimeout(() => {
-            expect(left.textContent.replace(/\s/g, '')).to.equal('2020年');
+            expect(left.textContent.replace(/\s/g, '')).to.equal('2020年-2029年');
             done();
           }, DELAY);
         }, DELAY);
@@ -2945,12 +2945,12 @@ describe('DatePicker', () => {
         const left = vm.picker.$el.querySelector('.is-left .el-date-range-picker__header');
         const right = vm.picker.$el.querySelector('.is-right .el-date-range-picker__header');
         const leftNextBtn = left.querySelector('.el-icon-d-arrow-right');
-        expect(left.textContent.replace(/\s/g, '')).to.equal('2000年');
-        expect(right.textContent.replace(/\s/g, '')).to.equal('2020年');
+        expect(left.textContent.replace(/\s/g, '')).to.equal('2000年-2009年');
+        expect(right.textContent.replace(/\s/g, '')).to.equal('2020年-2029年');
         expect(leftNextBtn.classList.contains('is-disabled')).to.false;
         leftNextBtn.click();
         setTimeout(() => {
-          expect(left.textContent.replace(/\s/g, '')).to.equal('2010年');
+          expect(left.textContent.replace(/\s/g, '')).to.equal('2010年-2019年');
           expect(leftNextBtn.classList.contains('is-disabled')).to.true;
           done();
         }, DELAY);

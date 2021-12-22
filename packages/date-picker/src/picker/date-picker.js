@@ -3,7 +3,7 @@ import DatePanel from '../panel/date';
 import DateRangePanel from '../panel/date-range';
 import MonthRangePanel from '../panel/month-range';
 import YearRangePanel from '../panel/year-range';
-import QuarterRangePanel from '../panel/quarterrange.vue';
+import QuarterRangePanel from '../panel/quarter-range.vue';
 
 const getPanel = function(type) {
   if (type === 'daterange' || type === 'datetimerange') {
