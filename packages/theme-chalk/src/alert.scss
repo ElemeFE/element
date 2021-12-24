@@ -120,6 +120,10 @@
     }
   }
 
+  & .el-alert__content {
+    flex: 1 1 auto;
+  }
+
   & .el-alert__description {
     font-size: $--alert-description-font-size;
     margin: 5px 0 0 0;
