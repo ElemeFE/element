@@ -26,6 +26,11 @@ export default class Store {
     this.flattedNodes = this.getFlattedNodes(false, false);
     this.leafNodes = this.getFlattedNodes(true, false);
   }
+  initFirstLevelNodes() {
+    this.nodes.forEach(node => {
+      node.initFirstLevelNodes(this.nodes);
+    });
+  }
 
   appendNode(nodeData, parentNode) {
     const node = new Node(nodeData, this.config, parentNode);

@@ -121,6 +121,10 @@
       targetOrder: {
         type: String,
         default: 'original'
+      },
+      virtualScroll: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -216,12 +220,10 @@
         let currentValue = this.value.slice();
         const itemsToBeMoved = [];
         const key = this.props.key;
-
         let leftCheckedKeyPropsObj = {};
         this.leftChecked.forEach((item, index) => {
           leftCheckedKeyPropsObj[item] = true;
         });
-
         let valueKeyPropsObj = {};
         this.value.forEach((item, index) => {
           valueKeyPropsObj[item] = true;
