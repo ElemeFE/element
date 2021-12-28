@@ -60,3 +60,20 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+@include b(select-dropdown-virtual-scroll__list) {
+  max-height: $--select-dropdown-max-height;
+  overflow-y: overlay;
+  list-style: none;
+  padding: $--select-dropdown-padding;
+  margin: 0;
+  box-sizing: border-box;
+  &::-webkit-scrollbar{
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+  }
+}
+
