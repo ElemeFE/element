@@ -44,6 +44,9 @@
       background: transparent;
     }
   }
+  @include e(first-virtual-list) {
+    width: 153px;
+  }
 
   @include e(wrap) {
     height: 204px;
@@ -85,7 +88,6 @@
     box-sizing: border-box;
   }
 }
-
 
 @include b(cascader-node) {
   position: relative;

@@ -1886,88 +1886,6 @@
 ```
 :::
 
-### 虚拟滚动
-
-可通过 `props.virtualScroll = true` 来开启虚拟滚动
-
-:::demo 多选不支持emitPath:false
-```html
-<div class="block">
-  <span class="demonstration">默认显示所有Tag</span>
-  <el-cascader
-    :options="list"
-    :props="props"
-    collapse-tags
-    filterable
-    clearable></el-cascader>
-</div>
-
-<script>
-  export default {
-    data() {
-      let list = []
-      let options= [{
-          value: 1,
-          label: '东南',
-          children: [{
-            value: 2,
-            label: '上海',
-            children: [
-              { value: 3, label: '普陀' },
-              { value: 4, label: '黄埔' },
-              { value: 5, label: '徐汇' }
-            ]
-          }, {
-            value: 7,
-            label: '江苏',
-            children: [
-              { value: 8, label: '南京' },
-              { value: 9, label: '苏州' },
-              { value: 10, label: '无锡' }
-            ]
-          }, {
-            value: 12,
-            label: '浙江',
-            children: [
-              { value: 13, label: '杭州' },
-              { value: 14, label: '宁波' },
-              { value: 15, label: '嘉兴' }
-            ]
-          }]
-        }, {
-          value: 17,
-          label: '西北',
-          children: [{
-            value: 18,
-            label: '陕西',
-            children: [
-              { value: 19, label: '西安' },
-              { value: 20, label: '延安' }
-            ]
-          }, {
-            value: 21,
-            label: '新疆维吾尔族自治区',
-            children: [
-              { value: 22, label: '乌鲁木齐' },
-              { value: 23, label: '克拉玛依' }
-            ]
-          }]
-        }]
-      for (let i = 0; i < 10000; i++) {
-        list.push({ value: i,
-        label: i})          
-      }
-      list = list.concat(options)
-      return {
-        props: {  virtualScroll: true,multiple:true, expandTrigger: 'hover'},
-        list: list
-      };
-    }
-  };
-</script>
-```
-:::
-
 ### 全选
 
 可通过 `props.checkAll = true` 来开启全选功能
@@ -1986,7 +1904,7 @@
 <div class="block">
   <span class="demonstration">父子不关联</span>
    <el-cascader
-    :options="list"
+    :options="options"
     :props="props2"
     filterable
     collapse-tags
@@ -1997,7 +1915,8 @@
   export default {
     data() { 
       return {
-        props: { multiple: true,checkAll: true, expandTrigger: 'hover' },
+        props: { multiple: true,checkAll: true, expandTrigger: 'hover',checkStrictly:true },
+        props2: { multiple: true,checkAll: true, expandTrigger: 'hover',checkStrictly:false},
         options: [{
           value: 1,
           label: '东南',
@@ -2048,72 +1967,6 @@
       };
     }
   };
-</script>
-```
-:::
-
-
-### 同级互斥
-
-可通过`props.mutualExcluseLabel`来配置那个层级的数据是互斥的
-
-:::demo  
-```html
-<div class="block">
-  <span class="demonstration">第二层互斥</span>
-  <el-cascader
-    :options="options"
-    v-model="value"
-    :props="props"
-    filterable
-    collapse-tags
-    clearable></el-cascader>
-</div>
-
-<script>
-  export default {
-    data() {
-      return {
-        value:[],
-        props:{multiple:true, mutualExcluseLabel:2,expandTrigger:'hover'},
-        options: [{
-            value: 'buy',
-            label: '买入',
-            children: [{
-              value: 'ALL',
-              label: '所有'
-            }, {
-              value: 'Some',
-              label: '指定',
-              children: [{
-                value: 'watermelon',
-                label: '西瓜'
-              }, {
-                value: 'potato',
-                label: '土豆'
-              }]
-            }]
-          }, {
-            value: 'sell',
-            label: '卖出',
-            children: [{
-              value: 'ALL',
-              label: '所有',
-            }, {
-              value: 'Some',
-              label: '指定',
-              children: [{
-                value: 'watermelon',
-                label: '西瓜'
-              }, {
-                value: 'potato',
-                label: '土豆'
-              }]
-            }]
-          }]
-        }
-      }
-    }
 </script>
 ```
 :::

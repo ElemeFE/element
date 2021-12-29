@@ -160,7 +160,7 @@ export default {
 
       return [
         isCheckAll && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
-        config.virtualScroll ? <virtual-list ref="virtualList" class="el-cascader-menu__virtual-list" data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
+        config.virtualScroll ? <virtual-list ref="virtualList" class={{'el-cascader-menu__virtual-list': true, 'el-cascader-menu__fisrst-virtual-list': isCheckAll}} data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
         </virtual-list> : [...nodeItems],
         isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
       ];
@@ -179,13 +179,13 @@ export default {
     }
 
     return (
-      config.virtualScroll ? <div class="el-cascader-menu">
+      config.virtualScroll ? <div class='el-cascader-menu'>
         { isEmpty ? this.renderEmptyText() : this.renderNodeList(h) }
       </div> : <el-scrollbar
         tag="ul"
         role="menu"
         id={ menuId }
-        class="el-cascader-menu"
+        class='el-cascader-menu'
         wrap-class="el-cascader-menu__wrap"
         view-class={{
           'el-cascader-menu__list': true,
