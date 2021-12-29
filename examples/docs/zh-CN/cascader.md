@@ -1886,6 +1886,175 @@
 ```
 :::
 
+### 虚拟滚动
+
+可通过 `props.virtualScroll = true` 来开启虚拟滚动
+
+:::demo 
+```html
+<div class="block">
+  <span class="demonstration">emitPath:false</span>
+  <el-cascader
+    :options="list"
+    :props="props"
+    collapse-tags
+    filterable
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">emitPath:true</span>
+  <el-cascader
+    :options="list"
+    :props="props2"
+    collapse-tags
+    filterable
+    clearable></el-cascader>
+</div>
+
+<script>
+  export default {
+    data() {
+      let list = []
+      let options= [{
+          value: 1,
+          label: '东南',
+          children: [{
+            value: 2,
+            label: '上海',
+            children: [
+              { value: 3, label: '普陀' },
+              { value: 4, label: '黄埔' },
+              { value: 5, label: '徐汇' }
+            ]
+          }, {
+            value: 7,
+            label: '江苏',
+            children: [
+              { value: 8, label: '南京' },
+              { value: 9, label: '苏州' },
+              { value: 10, label: '无锡' }
+            ]
+          }, {
+            value: 12,
+            label: '浙江',
+            children: [
+              { value: 13, label: '杭州' },
+              { value: 14, label: '宁波' },
+              { value: 15, label: '嘉兴' }
+            ]
+          }]
+        }, {
+          value: 17,
+          label: '西北',
+          children: [{
+            value: 18,
+            label: '陕西',
+            children: [
+              { value: 19, label: '西安' },
+              { value: 20, label: '延安' }
+            ]
+          }, {
+            value: 21,
+            label: '新疆维吾尔族自治区',
+            children: [
+              { value: 22, label: '乌鲁木齐' },
+              { value: 23, label: '克拉玛依' }
+            ]
+          }]
+        }]
+      for (let i = 0; i < 10000; i++) {
+        list.push({ value: i,
+        label: i})          
+      }
+      list = list.concat(options)
+      return {
+        props: {  virtualScroll: true,multiple:true, expandTrigger: 'hover',emitPath:false},
+        props2: {  virtualScroll: true,multiple:true, expandTrigger: 'hover',emitPath:true},
+        list: list
+      };
+    }
+  };
+</script>
+```
+:::
+### 全选
+
+可通过 `props.checkAll = true` 来开启全选功能
+
+:::demo 
+```html
+<div class="block">
+  <span class="demonstration">默认显示所有Tag</span>
+  <el-cascader
+    :options="list"
+    :props="props"
+    collapse-tags
+    clearable></el-cascader>
+</div>
+
+<script>
+  export default {
+    data() {
+      let list = []
+      let options = [{
+          value: 1,
+          label: '东南',
+          children: [{
+            value: 2,
+            label: '上海',
+            children: [
+              { value: 3, label: '普陀' },
+              { value: 4, label: '黄埔' },
+              { value: 5, label: '徐汇' }
+            ]
+          }, {
+            value: 7,
+            label: '江苏',
+            children: [
+              { value: 8, label: '南京' },
+              { value: 9, label: '苏州' },
+              { value: 10, label: '无锡' }
+            ]
+          }, {
+            value: 12,
+            label: '浙江',
+            children: [
+              { value: 13, label: '杭州' },
+              { value: 14, label: '宁波' },
+              { value: 15, label: '嘉兴' }
+            ]
+          }]
+        }, {
+          value: 17,
+          label: '西北',
+          children: [{
+            value: 18,
+            label: '陕西',
+            children: [
+              { value: 19, label: '西安' },
+              { value: 20, label: '延安' }
+            ]
+          }, {
+            value: 21,
+            label: '新疆维吾尔族自治区',
+            children: [
+              { value: 22, label: '乌鲁木齐' },
+              { value: 23, label: '克拉玛依' }
+            ]
+          }]
+        }]
+      list = list.concat(options)
+      return {
+        props: { multiple: true,checkAll: true, expandTrigger: 'hover' },
+        list: list
+      };
+    }
+  };
+</script>
+```
+:::
+
+
 ### Cascader Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -1964,3 +2133,4 @@
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | 'children' |
 | disabled | 指定选项的禁用为选项对象的某个属性值 | string | — | 'disabled' |
 | leaf     | 指定选项的叶子节点的标志位为选项对象的某个属性值 | string | — | 'leaf' |
+| checkAll     | 是否全选 | boolean | — | false |
