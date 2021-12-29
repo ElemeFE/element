@@ -1890,13 +1890,22 @@
 
 可通过 `props.virtualScroll = true` 来开启虚拟滚动
 
-:::demo 多选不支持emitPath:false
+:::demo 
 ```html
 <div class="block">
-  <span class="demonstration">默认显示所有Tag</span>
+  <span class="demonstration">emitPath:false</span>
   <el-cascader
     :options="list"
     :props="props"
+    collapse-tags
+    filterable
+    clearable></el-cascader>
+</div>
+<div class="block">
+  <span class="demonstration">emitPath:true</span>
+  <el-cascader
+    :options="list"
+    :props="props2"
     collapse-tags
     filterable
     clearable></el-cascader>
@@ -1959,7 +1968,8 @@
       }
       list = list.concat(options)
       return {
-        props: {  virtualScroll: true,multiple:true, expandTrigger: 'hover'},
+        props: {  virtualScroll: true,multiple:true, expandTrigger: 'hover',emitPath:false},
+        props2: {  virtualScroll: true,multiple:true, expandTrigger: 'hover',emitPath:true},
         list: list
       };
     }
