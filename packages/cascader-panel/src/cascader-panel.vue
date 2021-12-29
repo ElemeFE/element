@@ -113,7 +113,8 @@ export default {
       store: [],
       menus: [],
       activePath: [],
-      loadCount: 0
+      loadCount: 0,
+      checkedValueObj: {}
     };
   },
 
@@ -156,7 +157,13 @@ export default {
         this.broadcast('ElCascaderMenu', 'updateInDeterminate');
         this.$emit('input', val);
         this.$emit('change', val);
+      };
+      let obj = {};
+      for (let i = 0; i < val.length; i++) {
+        const item = val[i];
+        obj[item.emitPath ? item.join('#$#') : item] = true;
       }
+      this.checkedValueObj = obj;
     }
   },
 
