@@ -20,6 +20,21 @@
       nodeId: String
     },
 
+    data() {
+      return {
+        isShowCheckBox: true
+      };
+    },
+
+    watch: {
+      'node.refreshFlag'(val) {
+        this.isShowCheckBox = false;
+        this.$nextTick(() => {
+          this.isShowCheckBox = true;
+        });
+      }
+    },
+
     computed: {
       config() {
         return this.panel.config;
@@ -34,10 +49,29 @@
         return this.panel.checkedValue;
       },
       isChecked() {
-        return this.node.isSameNode(this.checkedValue);
+        let config = this.panel.config;
+        if (config.virtualScroll) {
+          // 多选不支持emitPath为true, 单选支持
+          if (config.multiple) {
+            return Array.isArray(this.checkedValue) && this.checkedValue.includes(this.node.getValue());
+          } else {
+            // 如果是单选，得区分emitPath
+            // 因为emitPath为true时，this.checkValue是数组
+            // 为false时，是字符串
+            if (config.emitPath) {
+              return Array.isArray(this.checkedValue) && this.checkedValue.includes(this.node.getValue());
+            } else {
+              return this.checkedValue === this.node.getValue();
+            }
+          }
+        } else {
+          return this.node.isSameNode(this.checkedValue);
+        }
       },
       inActivePath() {
-        return this.isInPath(this.panel.activePath);
+        let inActivePath = this.isInPath(this.panel.activePath);
+        this.node.inActivePath = inActivePath;
+        return inActivePath;
       },
       inCheckedPath() {
         if (!this.config.checkStrictly) return false;
@@ -81,7 +115,8 @@
       },
 
       handleMultiCheckChange(checked) {
-        this.node.doCheck(checked);
+        // this.node.doCheck(checked);
+        this.node.doCheck(checked, false, true);
         this.panel.calculateMultiCheckedValue();
       },
 
@@ -199,7 +234,8 @@
         isLeaf,
         isDisabled,
         config,
-        nodeId
+        nodeId,
+        isShowCheckBox
       } = this;
       const { expandTrigger, checkStrictly, multiple } = config;
       const disabled = !checkStrictly && isDisabled;
@@ -236,7 +272,7 @@
             'is-disabled': disabled
           }}
           {...events}>
-          { this.renderPrefix(h) }
+          { isShowCheckBox && this.renderPrefix(h) }
           { this.renderContent(h) }
           { this.renderPostfix(h) }
         </li>

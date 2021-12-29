@@ -30,8 +30,26 @@
                 ? inlineMessage
                 : (elForm && elForm.inlineMessage || false)
             }"
-          >
+          > 
             {{validateMessage}}
+          </div>
+        </slot>
+        <slot
+          v-if="validateState !== 'error' && showMessage && form.showMessage && showMaxNumberUnit"
+          name="error"
+          :error="validateMessage">
+          <div
+            class="el-form-item__error"
+            :class="{
+              'el-form-item__showMaxNumberUnit' : !validateMessage,
+              'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+                ? inlineMessage
+                : (elForm && elForm.inlineMessage || false)
+            }"
+          > 
+            <template v-if="!validateMessage">
+              {{fieldValue && maxUnitOfNumber(fieldValue, ignoreNum)}}
+            </template>
           </div>
         </slot>
       </transition>
@@ -79,7 +97,15 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      showMaxNumberUnit: {
+        type: Boolean,
+        default: false
+      },
+      ignoreNum: {
+        type: Number,
+        default: 0
+      }
     },
     components: {
       // use this component to calculate auto width
@@ -186,6 +212,20 @@
       };
     },
     methods: {
+      maxUnitOfNumber(num, ignoreNum = 0) {
+        if (isNaN(num)) return '';
+        let param_num = num.replace(/-/, '');
+        param_num = param_num.split('.')[0];
+        param_num = param_num.replace(/^0*/, '');
+        if (param_num.length < ignoreNum) return '';
+        let unit_1 = ['', '十', '百', '千'];
+        let unit_2 = ['', '万', '亿', '兆'];
+        let len = param_num.length - 1 < 0 ? 0 : param_num.length - 1;
+        let rsl = '';
+        rsl += unit_1[Math.floor(len % 4)];
+        rsl += unit_2[Math.floor(len / 4)];
+        return rsl;
+      },
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
         const rules = this.getFilteredRule(trigger);

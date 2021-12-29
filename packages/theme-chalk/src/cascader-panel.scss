@@ -28,6 +28,26 @@
     }
   }
 
+  @include e(virtual-list) {
+    height: 187px;
+    padding: 6px 0px;
+    overflow: overlay;
+    &::-webkit-scrollbar{
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: rgba(#000,.1);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-track{
+      background: transparent;
+    }
+  }
+  @include e(first-virtual-list) {
+    width: 153px;
+  }
+
   @include e(wrap) {
     height: 204px;
   }
@@ -57,6 +77,15 @@
     transform: translate(-50%, -50%);
     text-align: center;
     color: $--cascader-color-empty;
+  }
+
+  .checkAll {
+    padding: 0px 30px 0px 20px;
+    height: 34px;
+    min-width: 180px;
+    display: inline-block;
+    line-height: 34px;
+    box-sizing: border-box;
   }
 }
 

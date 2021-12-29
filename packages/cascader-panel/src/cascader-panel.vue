@@ -20,6 +20,7 @@ import Store from './store';
 import merge from 'element-ui/src/utils/merge';
 import AriaUtils from 'element-ui/src/utils/aria-utils';
 import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+import emitter from 'element-ui/src/mixins/emitter';
 import {
   noop,
   coerceTruthyValueToArray,
@@ -86,6 +87,8 @@ export default {
     CascaderMenu
   },
 
+  mixins: [emitter],
+
   props: {
     value: {},
     options: Array,
@@ -150,6 +153,7 @@ export default {
     checkedValue(val) {
       if (!isEqual(val, this.value)) {
         this.checkStrictly && this.calculateCheckedNodePaths();
+        this.broadcast('ElCascaderMenu', 'updateInDeterminate');
         this.$emit('input', val);
         this.$emit('change', val);
       }
@@ -347,12 +351,44 @@ export default {
 
       const menus = this.$refs.menu || [];
       menus.forEach(menu => {
-        const menuElement = menu.$el;
-        if (menuElement) {
-          const container = menuElement.querySelector('.el-scrollbar__wrap');
-          const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
-            menuElement.querySelector('.el-cascader-node.in-active-path');
-          scrollIntoView(container, activeNode);
+        if (this.config.virtualScroll) {
+          let currentNodeIndex = -1;
+          menu.nodes.find((item, index) => {
+            let flag = item.inActivePath;
+            flag && (currentNodeIndex = index);
+            return flag;
+          });
+          if (currentNodeIndex !== -1) {
+            menu.$refs.virtualList && menu.$refs.virtualList.scrollToIndex(currentNodeIndex);
+          } else {
+            currentNodeIndex = -1;
+            menu.nodes.find((item, index) => {
+              let flag = false;
+              if (this.config.multiple) {
+                flag = item.checked || item.indeterminate;
+              } else {
+                // 如果是单选，得区分emitPath
+                // 因为emitPath为true时，this.checkValue是数组
+                // 为false时，是字符串
+                if (this.config.emitPath) {
+                  flag = Array.isArray(this.value) && this.value.includes(item.value);
+                } else {
+                  flag = this.value === item.value;
+                }
+              }
+              flag && (currentNodeIndex = index);
+              return flag;
+            });
+            menu.$refs.virtualList && currentNodeIndex === -1 ? menu.$refs.virtualList.reset() : menu.$refs.virtualList.scrollToIndex(currentNodeIndex);
+          }
+        } else {
+          const menuElement = menu.$el;
+          if (menuElement) {
+            const container = menuElement.querySelector('.el-scrollbar__wrap');
+            const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
+              menuElement.querySelector('.el-cascader-node.in-active-path');
+            scrollIntoView(container, activeNode);
+          }
         }
       });
     },
