@@ -519,6 +519,163 @@
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
 :::
 
+### 虚拟列表
+应用于大数据量的情况，可达10w条。
+:::demo 使用`virtual-scroll`开启，然后传入items数组即可，暂不支持创建条目的功能。
+```html
+<template>
+  <div>自定义项、可搜索、有禁用项、单选</div>
+  <el-select
+    v-model="value"
+    filterable
+    :virtual-scroll="true"
+    :items="options"
+    default-first-option
+    placeholder="请选择文章标签">
+    <template slot-scope="item">
+      <el-option
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        :disabled="item.disabled">
+          <span style="float:left">{{item.label}}</span>
+          <span style="float:right;color:#8492a6;font-size:13px">{{item.label}}</span>
+      </el-option>
+    </template>
+  </el-select>
+  <div>自定义项、可搜索、有禁用项、多选</div>
+  <el-select
+    v-model="value2"
+    multiple
+    filterable
+    :virtual-scroll="true"
+    :items="options"
+    default-first-option
+    placeholder="请选择文章标签">
+    <template slot-scope="item">
+      <el-option
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        :disabled="item.disabled">
+          <span style="float:left">{{item.label}}</span>
+          <span style="float:right;color:#8492a6;font-size:13px">{{item.label}}</span>
+      </el-option>
+    </template>
+  </el-select>
+  <div>分组多选</div>
+  <el-select
+    v-model="value3"
+    multiple
+    filterable
+    :virtual-scroll="true"
+    :items="options2"
+    default-first-option
+    placeholder="请选择文章标签">
+    <template slot-scope="item">
+      <li
+        style="
+        border-top:1px solid #ccc;
+        font-size:12px;
+        color:#aaa;
+        height:24px;
+        line-height:24px;
+        margin-left:20px;padding-top:9px;"
+        v-if="item.isGroupTitle"
+      >
+        {{item.label}}
+      </li>
+      <el-option
+        v-else
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        :disabled="item.disabled">
+      </el-option>
+    </template>
+  </el-select>
+  <div>远程搜索</div>
+  <el-select
+    v-model="value"
+    multiple
+    filterable
+    remote
+    reserve-keyword
+    placeholder="请输入关键词"
+    :remote-method="remoteMethod"
+    :loading="loading"
+    :virtual-scroll="true"
+    :items="options3">
+    <template slot-scope="item">
+      <el-option
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        :disabled="item.disabled">
+      </el-option>
+    </template>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      let temp = []
+      for (let i = 1; i < 10000; i++) {
+        temp.push({
+          value:i,
+          label:i+'',
+          disabled: i%4===0
+        })
+      }
+      let temp2 = [{
+        value:0,
+        label:'分组一',
+        isGroupTitle:true
+      }]
+      for (let i = 1; i < 10000; i++) {
+        temp2.push({
+          value:i,
+          label:i === 5 ? '分组二' : i + '',
+          disabled: i % 4 === 0,
+          isGroupTitle:i === 5
+        })
+      }
+      return {
+        options:temp,
+        options2:temp2,
+        options3:[],
+        value:'',
+        value2:[],
+        value3:[],
+        loading:false
+      }
+    },
+    methods:{
+      remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.options3 = this.options.filter(item => {
+              return item.label.toLowerCase()
+                .indexOf(query.toLowerCase()) > -1;
+            });
+          }, 300);
+        } else {
+          this.options3 = [];
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::tip
+如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
+:::
+
 ### Select Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |

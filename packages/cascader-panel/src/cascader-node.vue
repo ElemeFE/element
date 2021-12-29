@@ -51,19 +51,7 @@
       isChecked() {
         let config = this.panel.config;
         if (config.virtualScroll) {
-          // 多选不支持emitPath为true, 单选支持
-          if (config.multiple) {
-            return Array.isArray(this.checkedValue) && this.checkedValue.includes(this.node.getValue());
-          } else {
-            // 如果是单选，得区分emitPath
-            // 因为emitPath为true时，this.checkValue是数组
-            // 为false时，是字符串
-            if (config.emitPath) {
-              return Array.isArray(this.checkedValue) && this.checkedValue.includes(this.node.getValue());
-            } else {
-              return this.checkedValue === this.node.getValue();
-            }
-          }
+          return true && this.panel.checkedValueObj[this.node.getValue()];
         } else {
           return this.node.isSameNode(this.checkedValue);
         }

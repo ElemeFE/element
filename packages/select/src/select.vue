@@ -106,8 +106,9 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
-        v-show="visible && emptyText !== false">
+        v-show="visible && (virtualScroll ? virtualScrollEmptyText !== false : emptyText !== false)">
         <el-scrollbar
+          v-if="!virtualScroll"
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
@@ -121,10 +122,20 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+        <virtual-list 
+          v-else
+          ref="virtualList" 
+          class="el-select-dropdown-virtual-scroll__list" 
+          :data-key="'value'" 
+          :data-sources="filterItems" 
+          :data-component="virtualListItem"
+          :estimate-size="34"
+          v-show="items.length > 0 && !loading && !isEmpty">
+        </virtual-list>
+        <template v-if="isEmpty">
           <slot name="empty" v-if="$slots.empty"></slot>
           <p class="el-select-dropdown__empty" v-else>
-            {{ emptyText }}
+            {{ virtualScroll ? virtualScrollEmptyText : emptyText }}
           </p>
         </template>
       </el-select-menu>
@@ -142,12 +153,15 @@
   import ElTag from 'element-ui/packages/tag';
   import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
+  import throttle from 'throttle-debounce/throttle';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
   import { isKorean } from 'element-ui/src/utils/shared';
+  import virtualListItem from './virtual-scroll-list-item.vue';
+  import VirtualList from 'vue-virtual-scroll-list';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
@@ -173,6 +187,10 @@
     },
 
     computed: {
+      isEmptyOption() {
+        return this.noUsedItemCounter === this.filterItems.length;
+      },
+
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
@@ -201,6 +219,10 @@
       },
 
       emptyText() {
+        if (this.virtualScroll) {
+          this.throttleEmptyText();
+          return null;
+        }
         if (this.loading) {
           return this.loadingText || this.t('el.select.loading');
         } else {
@@ -236,6 +258,13 @@
       },
       propPlaceholder() {
         return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
+      },
+      isEmpty() {
+        if (this.virtualScroll) {
+          return this.virtualScrollEmptyText && (this.loading || this.isEmptyOption);
+        } else {
+          return this.emptyText && (!this.allowCreate || this.loading || (this.allowCreate && this.options.length === 0));
+        }
       }
     },
 
@@ -244,7 +273,8 @@
       ElSelectMenu,
       ElOption,
       ElTag,
-      ElScrollbar
+      ElScrollbar,
+      'virtual-list': VirtualList
     },
 
     directives: { Clickoutside },
@@ -297,10 +327,24 @@
         type: String,
         default: 'value'
       },
+      labelKey: {
+        type: String,
+        default: 'label'
+      },
       collapseTags: Boolean,
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      items: {
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      virtualScroll: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -327,11 +371,27 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        virtualListItem: virtualListItem,
+        noUsedItemCounter: 0,
+        virtualScrollEmptyText: null,
+        filterItems: []
       };
     },
 
     watch: {
+      items(val) {
+        let counter = 0;
+        for (let i = 0; i < val.length; i++) {
+          const item = val[i];
+          if (item.isGroupTitle) {
+            counter++;
+          }
+        }
+        this.noUsedItemCounter = counter;
+        this.filterItems = this.filterItem('');
+      },
+
       selectDisabled() {
         this.$nextTick(() => {
           this.resetInputHeight();
@@ -407,6 +467,7 @@
               this.$refs.input.focus();
             } else {
               if (!this.remote) {
+                this.filterItems = this.filterItem('');
                 this.broadcast('ElOption', 'queryChange', '');
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
@@ -440,6 +501,39 @@
     },
 
     methods: {
+      throttleEmptyText: throttle(50, function() {
+        if (this.loading) {
+          this.virtualScrollEmptyText = this.loadingText || this.t('el.select.loading');
+          return;
+        } else {
+          if (this.remote && this.query === '' && this.options.length === 0) {
+            this.virtualScrollEmptyText = false;
+            return;
+          }
+          if (this.filterable && this.query && this.isEmptyOption && this.items.length > 0) {
+            this.virtualScrollEmptyText = this.noMatchText || this.t('el.select.noMatch');
+            return;
+          }
+          if (this.isEmptyOption) {
+            this.virtualScrollEmptyText = this.noDataText || this.t('el.select.noData');
+            return;
+          }
+        }
+        this.virtualScrollEmptyText = null;
+      }),
+
+      filterItem(query) {
+        let tempItems = [...this.items];
+        this.$refs.virtualList && this.$refs.virtualList.reset();
+        if (query === undefined || query === '') {
+          return tempItems;
+        } else {
+          return tempItems.filter(item => {
+            return item[this.labelKey].toString().includes(query) || item.isPlaceHolder || item.isGroupTitle;
+          }) || [];
+        }
+      },
+
       handleComposition(event) {
         const text = event.target.value;
         if (event.type === 'compositionend') {
@@ -480,6 +574,7 @@
           this.broadcast('ElOptionGroup', 'queryChange');
         } else {
           this.filteredOptionsCount = this.optionsCount;
+          this.filterItems = this.filterItem(val);
           this.broadcast('ElOption', 'queryChange', val);
           this.broadcast('ElOptionGroup', 'queryChange');
         }
@@ -490,9 +585,30 @@
 
       scrollToOption(option) {
         const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
-        if (this.$refs.popper && target) {
-          const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
-          scrollIntoView(menu, target);
+        if (this.$refs.popper) {
+          if (this.virtualScroll) {
+            if (this.filterItems.length > 0) {
+              let currentNodeIndex = -1;
+              const firstSelectNode = Array.isArray(option) && option[0] ? option[option.length - 1] : option;
+              for (let i = 0; i < this.filterItems.length; i++) {
+                const item = this.filterItems[i];
+                if (item.value === firstSelectNode.value) {
+                  currentNodeIndex = i;
+                  break;
+                }
+              }
+              if ((currentNodeIndex === -1 || currentNodeIndex === 0)) {
+                this.$refs.virtualList && this.$refs.virtualList.reset();
+              } else {
+                this.$refs.virtualList.scrollToIndex(currentNodeIndex);
+              }
+            } else {
+              this.$refs.virtualList && this.$refs.virtualList.reset();
+            }
+          } else if (target) {
+            const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+            scrollIntoView(menu, target);
+          }
         }
         this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();
       },
@@ -883,6 +999,17 @@
         }
       });
       this.setSelected();
+
+      this.filterItems = this.filterItem('');
+
+      let counter = 0;
+      for (let i = 0; i < this.items.length; i++) {
+        const item = this.items[i];
+        if (item.isGroupTitle) {
+          counter++;
+        }
+      }
+      this.noUsedItemCounter = counter;
     },
 
     beforeDestroy() {
