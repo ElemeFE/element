@@ -32,7 +32,7 @@ export default {
 
   watch: {
     nodes() {
-      this.updateInDeterminate();
+      this.isCheckAll && this.updateInDeterminate();
     }
   },
 
@@ -41,7 +41,9 @@ export default {
       activeNode: null,
       hoverTimer: null,
       id: generateId(),
-      virtualListProps: {}
+      virtualListProps: {},
+      checkAll: false,
+      isIndeterminate: false
     };
   },
 
@@ -52,12 +54,18 @@ export default {
     menuId() {
       this.virtualListProps.menuId = `cascader-menu-${this.id}-${this.index}`;
       return `cascader-menu-${this.id}-${this.index}`;
+    },
+    isCheckAll() {
+      let config = this.panel.config;
+      return config.checkAll && (config.checkStrictly || (!config.checkStrictly && this.index === 0));
     }
   },
 
   created() {
-    this.updateInDeterminate();
-    this.$on('updateInDeterminate', this.updateInDeterminate);
+    if (this.isCheckAll) {
+      this.updateInDeterminate();
+      this.$on('updateInDeterminate', this.updateInDeterminate);
+    }
   },
 
   methods: {
@@ -65,13 +73,29 @@ export default {
       const { panel, nodes } = this;
       if (panel.config.checkAll) {
         let counter = 0;
+        let disabledCounter = 0;
+        let indeterminateCounter = 0;
         for (let i = 0; i < nodes.length; i++) {
           const node = nodes[i];
-          (node.checked || node.indeterminate) && counter++;
+          if (!node.isDisabled) {
+            node.checked && counter++;
+            node.indeterminate && indeterminateCounter++;
+          } else {
+            disabledCounter++;
+          }
         }
-        this.checkAll = counter === nodes.length;
-        this.isIndeterminate = !(counter === nodes.length || counter === 0);
+        this.checkAll = counter === (this.nodes.length - disabledCounter) && counter > 0;
+        this.isIndeterminate = this.checkAll ? false : indeterminateCounter > 0 || counter > 0;
       }
+    },
+    handleCheckAllChange() {
+      const { nodes, panel } = this;
+      this.checkAll = !this.checkAll;
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        node.doCheck(this.checkAll, true);
+      }
+      panel.calculateMultiCheckedValue();
     },
     handleExpand(e) {
       this.activeNode = e.target;
@@ -111,7 +135,7 @@ export default {
       );
     },
     renderNodeList(h) {
-      const { menuId, nodes } = this;
+      const { menuId, nodes, checkAll, isIndeterminate, handleCheckAllChange, isCheckAll } = this;
       const { isHoverMenu, config } = this.panel;
       const events = { on: {} };
 
@@ -135,6 +159,7 @@ export default {
       });
 
       return [
+        isCheckAll && <el-checkbox class="checkAll" indeterminate={isIndeterminate} value={checkAll} onChange={handleCheckAllChange}>全选</el-checkbox>,
         config.virtualScroll ? <virtual-list ref="virtualList" class="el-cascader-menu__virtual-list" data-key="uid" data-sources={nodes} extra-props={this.virtualListProps} data-component={virtualListItem}>
         </virtual-list> : [...nodeItems],
         isHoverMenu ? <svg ref='hoverZone' class='el-cascader-menu__hover-zone'></svg> : null
