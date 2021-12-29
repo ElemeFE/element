@@ -1,5 +1,31 @@
 ## 更新日志
 
+### 2.15.7
+
+*2021-11-18*
+
+#### Bug 修复
+
+- Select
+  - 修复 filter 模式下，点击图标不能触发下拉的 bug (#21314 by @dennyak47)
+  - 修复 composition 模式下 keydown 事件 (#21336 by @bchen1029)
+- Badge
+  - 修复 is-dot class (#21308 by @adaex)
+- Form
+  - validate 方法返回错误信息 (#21374 by @cs1707)
+- Table
+  - 修复 resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - 修复 toggleAllSelection (#21456 by @cs1707)
+  - 优化 table 性能 (#21330 by @cs1707)
+- Button
+  - 修复 disabled 优先级 (#21375 by @cs1707)
+- Descriptions
+  - 修复 label slot bug (#21462 by @cs1707)
+- SASS
+  - node-sass 替换为 dart-sass (#21019 by @linxsbox)
+- Docs
+  - 修复 skeleton 文案 (#21408 by @zhhbstudio)
+
 ### 2.15.6
 
 *2021-09-02*
