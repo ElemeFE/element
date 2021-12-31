@@ -244,6 +244,8 @@ export default class Node {
       this.childNodes.splice(index, 0, child);
     }
 
+    reInitChecked(this);
+
     this.updateLeafState();
   }
 
