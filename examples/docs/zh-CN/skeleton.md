@@ -306,7 +306,7 @@ Element 提供的排版模式有时候并不满足要求，当您想要用自己
 
 | 参数    | 说明                     | 类型         | 可选值                                                               | 默认值 |
 | ------- | ------------------------ | ------------ | -------------------------------------------------------------------- | ------ |
-| variant | 当前显示的占位元素的样式 | Enum(string) | p / text / h1 / h3 / text / caption / button / image / circle / rect | text   |
+| variant | 当前显示的占位元素的样式 | Enum(string) | p / h1 / h3 / text / caption / button / image / circle / rect | text   |
 
 ### Skeleton Slots
 
