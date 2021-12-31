@@ -71,8 +71,7 @@ export default {
         return this.node;
       }
     }).$mount();
-
-    this.debounceClose = debounce(200, () => this.handleClosePopper());
+    this.debounceClose = () => this.handleClosePopper();
   },
 
   render(h) {
