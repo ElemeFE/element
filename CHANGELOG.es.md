@@ -1,123 +1,344 @@
 ## Changelog
 
-### 2.13.2
+### 2.15.7
 
-*2020-05-18*
+*2021-11-18*
 
 #### Bug fixes
 
-- Autocomplete
-  - Fix change event bug (#19200 by @sxzz)
+- Select
+  - fix click icon triggering dropdown (#21314 by @dennyak47)
+  - fix keydown event when composition (#21336 by @bchen1029)
+- Badge
+  - fix type class when is-dot (#21308 by @adaex)
+- Form
+  - validate method reject error info (#21374 by @cs1707)
+- Table
+  - fix resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - fix toggleAllSelection bug when table is empty (#21456 by @cs1707)
+  - optimize performance (#21330 by @cs1707)
+- Button
+  - fix disabled priority (#21375 by @cs1707)
+- Descriptions
+  - fix label slot bug (#21462 by @cs1707)
+- SASS
+  - replace node-sass with dart-sass (#21019 by @linxsbox)
+- Docs
+  - fix skeleton typos (#21408 by @zhhbstudio)
+
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug fixes
+
+- Cascader
+  - fix a bug that makes the browser jitter in zoom mode (#21207 by @cs1707)
+  - optimize performance (#21231 by @cs1707)
+- Select
+  - fix long text overflow in multiple mode (#21237 by @cs1707)
+- Dropdown
+  - add disabled property (#21235 by @mshioda)
+- Radio
+  - fix checked state when browser go back (#21250 by @cs1707)
+- Descriptions
+  - fix type declaration (#21265 by @adaex)
+  - avoid table style conflict (#21254 by @adaex)
+- Drawer
+  - fix append to body (#21264 by @cs1707)
+- Local
+  - fix italian mistake (#21012 by @ricardotondello)
+
+### 2.15.5
+
+*2021-08-04*
+
+#### Bug fixes
+
+- Select
+  - fix resetInputHeight (#21201 by @cs1707)
+
+### 2.15.4
+
+*2021-08-03*
+
+#### New features
+
+- Descriptions 
+  - add description component (#21129 by @cs1707)
+- Result 
+  - add result component (#21171 by @cs1707)
+
+#### Bug fixes
+
+- Utils 
+  - fix isScroll (#21098 by @canvascat)
+- Translation 
+  - update it.js (#21133 by @bliberi)
+- RadioGroup 
+  - fix RadioGroup used in component causes exception #17908 (#20783 by @lceric)
+- Message 
+  - fix message[type] (#21088 by @cs1707)
+- Carousel 
+  - reset the timer when setActiveItem method is called (#20846 by @Nekojita1)
+- Cascader 
+  - fix emitPath (#21185 by @cs1707)
+- Select 
+  - fix select filterable bug (#17494 by @profore)
+  - fix a bug that makes the browser jitter in zoom mode (#21197 by @cs1707)
+- Tree 
+  - fix insertChild (#21194 by @cs1707)
+
+### 2.15.3
+
+*2021-06-29*
+
+#### New features
+
+- Skeleton
+  - add skeleton component (#21038 by @cs1707)
+- Empty
+  - add empty component (#21080 by @cs1707)
+
+#### Bug fixes
+
+- Local
+  - fix week translations for hr locale (#21040 by @cs1707)
+- Table
+  - fix lazy load data (#21041 by @cs1707)
+- Docs
+  - fix form hide-required-asterisk description (#21045 by @cs1707)
+- Drawer:
+  - fix destroy (#20715 by @zj9495)
+- Row
+  - fix align top (#20963 by @cs1707)
+- Select
+  - fix the bug when the value is Boolean (#21052 by @cs1707)
+- Calendar
+  - fix first-day-of-week (#21057 by @cs1707)
+- Utils
+  - fix isScroll (#21065 by @cs1707)
+  - fix(utils.dom by @fw6)
+- TypeScript
+  - add CascaderPanel export type (#21070 by @qige2016)
+  - add spinner.d.ts (#21090 by @qige2016)
+  
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug fixes
+
 - Image
-  - Update error status (#19194 by @lhx6538665)
+  - fix z-index and keydown event add stopPropagation (#20859 by @cs1707)
+- Input
+  - fix show password cursor (#20870 by @cs1707)
+  - fix show password icon in edge (#20902 by @cs1707)
+- Carousel
+  - fix interval and scale bug (#20931 by @cs1707)
+- Cascader
+  - fix delete tag bug (#20939 by @cs1707)
+- Drawer
+  - add overflow auto (#20948 by @cs1707)
+- Others
+  - fix isFunction (#20912 by @cs1707)
+
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug fixes
+
+- Drawer
+  - bugfix (by @cs1707)
+- Image
+  - fix incorrect image object fit ratio in IE (#19583 by @charlie0228)
+- Cascader
+  - fix cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - fix calendar component i18n bug (#20758 by @iamkun)
+- ColorPicker
+  - fix bugs (by @UxieVerity)
+
+#### Optimization
+
+- Doc
+  - update Axure resource v2.1.0 (by @iamkun)
+### 2.15.0
+
+*2021-01-15*
+
+#### Bug fixes
+
+- Select
+  - Fix placeholder i18n bug (#17644 by @nzh63)
+- Popconfirm
+  - Popconfirm i18n bug by @iamkun
+- Drawer
+  - Fix focus bug (#20626 by @cs1707)
+- Image
+  - Preview optimization (#20652 by @cs1707)
+
+#### Optimization
+
+- Doc
+  - Fix typo in french translation of datetime-picker.md (#20543 by @lonk)
+  - Add format attribute description to the progress component (#20641 by @cs1707)
+
+### 2.14.1
+
+*2020-11-11*
+
+#### Bug fixes
+
+- Popover
+  - Compatible with Vue 2.6 new v-slot syntax (#20424 by @iamkun)
 
 #### Optimization
 
 - I18n
-  - Update ru-RU popconfirm translation (#19220 by @Opppex)
-  - Update vi translation (#19244 by @quangln2810)
-  - Update Catalan and Spanish translations (#19296 by @Ismaaa)
-  - Update Indonesia translation (#19320) by @therour)
-  - Update Brazilian Portuguese translation (#19374 by @diegomengarda)
+  - Update Arabic translation (#20202 by @elkattan)
+  - Update Uighur translation (#20177 by @IlhamTahir)
+
+### 2.14.0
+
+*2020-10-29*
+
+#### Breaking changes
+
+- Popconfirm
+  - Rename event name to `confirm`, `cancel` (#20240 by @hugiron)
+
+#### Bug fixes
+
+- Progress
+  - Fix attribute error (#19985 by @Caaalabash)
+
+#### Optimization
+
+- I18n
+  - Update Russian translation (#19451 by @yangirov)
+  - Update Khmer translation (#20077 by @Sovai)
+  - Update Ukrainian translation (#20344 by @MammutAlex)
+
+### 2.13.2
+
+*2020-05-18*
+
+#### Corrección de errores
+
+- Autocomplete
+  - Arreglado el error cuando se daba el evento change (#19200 by @sxzz)
+- Image
+  - Actualizado el estado de error  (#19194 by @lhx6538665)
+
+#### Optimización
+
+- I18n
+  - Actualización de la traducción del popconfirm al Ruso (#19220 by @Opppex)
+  - Actualización  de la traducción al vi (#19244 by @quangln2810)
+  - Actualización de la traducción al Catalán y al Español (#19296 by @Ismaaa)
+  - Actualización de la traducción al Indonesio (#19320) by @therour)
+  - Actualización de la traducción al Portugués Brasileño (#19374 by @diegomengarda)
 
 
 ### 2.13.1
 
 *2020-04-13*
 
-#### New features
+#### Nuevas características
 - Autocomplete
-  - Add change event (#17913 by @sxzz)
+  - Agregado el evento change (#17913 by @sxzz)
 
-#### Bug fixes
+#### Corrección de errores
 
 - Autocomplete
-  - Fix suggestion error when textarea (#18478 by @Roojay)
+  - Solucionado el error de la sugerencia en textarea (#18478 by @Roojay)
 - Carousel
-  - Fix console typo bug (#18264 by @IceFox)
+  - Arreglado el error de escritura de la consola (#18264 by @IceFox)
 - Image
-  - Fix preview dose not show when preview list not contain src issue (#18975) (#19130 by @luckyCao)
-  - Fix shortcut key not work at second time issue (#18983) (#19156 by @luckyCao)
-  - Don't show image-viewer when preview is false (#18967 by @inooNgt)
+  - Solucionado el error de que no se mostraba el preview si no existía el src  (#18975) (#19130 by @luckyCao)
+  - Arreglado el problema de que el shortcut key no funcionaba la segunda vez (#18983) (#19156 by @luckyCao)
+  - No muestra la imagen cuando preview es falso (#18967 by @inooNgt)
 - Transfer
-  - Fix incorrect line-height of el-transfer's first list item when it was used with  el-form-item (#18917 by @Hanx)
+  - Corregida la altura (line-height) incorrecta del primer elemento del el-transfer cuando era usado con el-form-item (#18917 by @Hanx)
 - InputNumber
-  - Correctly compute inputNumberDisabled (#18439 by @ashuser-pendo)
-- Chore
-  - Remove index intro (#19155 by @iamkun)
-- Doc
-  - Popconfirm doc update (#18324 by @iamkun)
-  - Fix step-strictly docs typo (#18705 by @dream2023)
-  - Fix a type error in document of steps component (#17555 by @haoranyu)
+  - Calculo correcto de inputNumberDisabled (#18439 by @ashuser-pendo)
+- Tarea
+  - Se quito la introducción del index (#19155 by @iamkun)
+- Documentación
+  - Actualización de la documentación de Popconfirm (#18324 by @iamkun)
+  - Arreglado el error tipográfico de la documentación de Fix step-strictly (#18705 by @dream2023)
+  - Corregido un type error en la documentación de steps component (#17555 by @haoranyu)
 
 ### 2.13.0
 
 *2019-11-26*
 
-#### New features
+#### Nuevas características
 
 - Popconfirm
-  - Add popconfirm component (#17548 by @iamkun)
+  - Agregado componente popconfirm (#17548 by @iamkun)
 
-#### Bug fixes
+#### Corrección de errores
 
 - BackTop
-  - Use cubic bezier scrolling (by @lon)
+  - Se usa cubic bezier para el scroll (by @lon)
 - DatePicker
-  - Fix bug of only select min date of date range problem (#17191 by @smk0621)
+  - Arreglado el fallo cuando solo se elegía fecha mínima en un rango de fechas (#17191 by @smk0621)
 - Select
-  - Fix select test cases by (@msidolphin)
+  - Arreglado los casos de test del select (by @msidolphin)
 - Tree
-  - Add font-size for the style of tree empty-text (#17094 by @spengjie)
+  - Agregado font-size para el estilo del texto cuando esta vacío el tree (#17094 by @spengjie)
 - Table
-  - Column header can be costumed (#17291 by @ziyoung)
-  - Update table header cell style (#17284 by @ziyoung)
-  - Fix table header height after filter (#17348 by @ziyoung)
-  - Fixed row-style with display not work (#17002 by @a631807682)
-  - Fix header table not display (#17341 by @ziyoung)
+  - La cabecera de la columna puede modificarse (#17291 by @ziyoung)
+  - Se actualizo el estilo de la cabecera de la tabla de la celda  (#17284 by @ziyoung)
+  - Se soluciono el problema de height de la cabecera de la tabla después de un filtro (#17348 by @ziyoung)
+  - Corregido el estilo de la fila que con display no funcionaba (#17002 by @a631807682)
+  - Arreglado que la cabecera de la tabla no se mostraba (#17341 by @ziyoung)
 - Calendar
-  - Import el-button and el-button-group (#17376 by @masongzhi)
+  - La importación de el-button y el-button-group (#17376 by @masongzhi)
 - MessageBox
-  - Fix icon position error (#17410 by @nullptru)
+  - Corregido el error de posición del icono (#17410 by @nullptru)
 - TimePicker
-  - Set the selection range after scrolling up or down (#16868 by @mattheyan)
+  - Establecido el rango de selección después de hacer scroll (#16868 by @mattheyan)
 - Message
-  - Fix close instace offsetHeight（#17564） (#17852 by @gzwgq222)
+  - Corregido el offsetHeight al cerrar la instancia（#17564） (#17852 by @gzwgq222)
 - Form
-  - Callback of validateField should be optional (#17314 by @CarterLi)
+  - La función de llamada de validateField es opcional (#17314 by @CarterLi)
 - Cascader
-  - Fix TypeScript 3.7 compatibility (#17881 by @CarterLi)
+  - Corregida la compatibilidad con TypeScript 3.7 (#17881 by @CarterLi)
 - Menu
-  - Fix router NavigationDuplicated error when using vue-router@^3.1.0 (#17269 by @iamkun)
+  - Corregido el error de la ruta de navegación duplicada cuando se usaba vue-router@^3.1.0 (#17269 by @iamkun)
 - Dropdown
-  - Update type file (#17550 by @iamkun)
+  - Actualización del tipo de archivo (#17550 by @iamkun)
 - Progress
-  - Add strokeLinecap prop (#17552 by @iamkun)
+  - Agregada la prop strokeLinecap (#17552 by @iamkun)
 - InfiniteScroll
-  - Skip trigger event on invisible element (#17553 by @iamkun)
+  - Salto del disparo de evento en elementos invisibles (#17553 by @iamkun)
 - Image
-  - Perfect picture preview behavior (#16985 by @luckyCao)
-  - Fix shield the page when preview big image (#16796 by @luckyCao)
+  - Comportamiento perfecto de personalización de imágenes (#16985 by @luckyCao)
+  - Corregida la pagina cuando se hace preview de imágenes grandes (#16796 by @luckyCao)
 - Drawer 
-  - Bugfix drawer-append-to-body-not-working (#16953 by @JeremyWuuuuu)
+  - Corregido el fallo del append-to-body del drawer que no funcionaba (#16953 by @JeremyWuuuuu)
 - Select
-  - Fix tag show value or empty issue (17199 by @luckyCao)
+  - Corregido:  ahora muestra el tag o el valor vacío (17199 by @luckyCao)
 - Scrollbar
-  - Fix FireFox scroll bar width (#18091 by @iamkun)
+  - Arreglado el ancho del scroll en FireFox  (#18091 by @iamkun)
   
-#### Optimization
+#### Optimización
 
 - I18n
-  - Update sv-SE.js (#17926 by @FOLLGAD)
-  - Update avatar component fr doc (#17762 by @blombard)
+  - Actualizado sv-SE.js (#17926 by @FOLLGAD)
+  - Actualizada la documentación para francés para el componente avatar (#17762 by @blombard)
 - Docs
-  - Fix time-select typo (#17250 by @wacky6)
-  - Fix Drawer attribute accepted value typo in es (#17122 by @haoranyu)
-  - Update Spanish changelog 2.12.0 (#17364 by @Gonzalo2310)
-  - Fix Changelog typo (#17874 by @renlixin)
-  - Fix Loading demo (#17862 by @MBearo)
-  - Add input event in input Events Table (#18061 by @zhouxinyong)
-  - Delete Input repeat change event (#18085 by @zhouxinyong)
+  - Arreglada la typografia de time-select (#17250 by @wacky6)
+  - Arreglado en Drawer, ahora el atributo value acepta tipografías en español (#17122 by @haoranyu)
+  - Actualización del Changelog 2.12.0 al español (#17364 by @Gonzalo2310)
+  - Arreglo de la tipografía del Changelog (#17874 by @renlixin)
+  - Arreglada la demo de Loading (#17862 by @MBearo)
+  - Agregado el evento input en los inputs de Table (#18061 by @zhouxinyong)
+  - Eliminado el evento repetitivo change de los input (#18085 by @zhouxinyong)
 
 ### 2.12.0
 

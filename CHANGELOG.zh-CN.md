@@ -1,5 +1,226 @@
 ## 更新日志
 
+### 2.15.7
+
+*2021-11-18*
+
+#### Bug 修复
+
+- Select
+  - 修复 filter 模式下，点击图标不能触发下拉的 bug (#21314 by @dennyak47)
+  - 修复 composition 模式下 keydown 事件 (#21336 by @bchen1029)
+- Badge
+  - 修复 is-dot class (#21308 by @adaex)
+- Form
+  - validate 方法返回错误信息 (#21374 by @cs1707)
+- Table
+  - 修复 resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - 修复 toggleAllSelection (#21456 by @cs1707)
+  - 优化 table 性能 (#21330 by @cs1707)
+- Button
+  - 修复 disabled 优先级 (#21375 by @cs1707)
+- Descriptions
+  - 修复 label slot bug (#21462 by @cs1707)
+- SASS
+  - node-sass 替换为 dart-sass (#21019 by @linxsbox)
+- Docs
+  - 修复 skeleton 文案 (#21408 by @zhhbstudio)
+
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug 修复
+
+- Cascader
+  - 修复浏览器缩放模式下抖动的 bug (#21207 by @cs1707)
+  - 优化性能 (#21231 by @cs1707)
+- Select
+  - 修复多选模式下文字溢出的 bug (#21237 by @cs1707)
+- Dropdown
+  - 增加 disabled 属性 (#21235 by @mshioda)
+- Radio
+  - 修复浏览器返回后保留状态的 bug (#21250 by @cs1707)
+- Descriptions
+  - 修复类型定义 (#21265 by @adaex)
+  - 修复与表格组件混用样式冲突的问题 (#21254 by @adaex)
+- Drawer
+  - 修复 append-to-body (#21264 by @cs1707)
+- Local
+  - 修复 italian 翻译错误 (#21012 by @ricardotondello)
+
+### 2.15.5
+
+*2021-08-04*
+
+#### Bug 修复
+
+- Select
+  - 修复 resetInputHeight 报错的 bug (#21201 by @cs1707)
+
+### 2.15.4
+
+*2021-08-03*
+
+#### 新特性
+
+- Descriptions
+  - 新增 Descriptions 组件 (#21129 by @cs1707)
+- Result
+  - 新增 Result 组件 (#21171 by @cs1707)
+
+#### Bug 修复
+
+- Utils
+  - 修复 isScroll (#21098 by @canvascat)
+- Translation
+  - 更新 it.js (#21133 by @bliberi)
+- RadioGroup
+  - 修复 RadioGroup 与 component 兼容的 bug (#20783 by @lceric)
+- Message
+  - 修复 message[type] (#21088 by @cs1707)
+- Carousel
+  - 修复 setActiveItem 重置计时 (#20846 by @Nekojita1)
+- Cascader
+  - 修复 emitPath (#21185 by @cs1707)
+- Select
+  - 修复 filterable bug (#17494 by @profore)
+  - 修复浏览器缩放模式下抖动的 bug (#21197 by @cs1707)
+- Tree
+  - 修复 insertChild (#21194 by @cs1707)
+
+### 2.15.3
+
+*2021-06-29*
+#### 新特性
+
+- Skeleton
+  - 新增 Skeleton 组件 (#21038 by @cs1707)
+- Empty
+  - 新增 Empty 组件 (#21080 by @cs1707)
+
+#### Bug 修复
+
+- Local
+  - 修复 hr 语言 week 翻译 (#21040 by @cs1707)
+- Table
+  - 修复 lazy load data (#21041 by @cs1707)
+- Docs
+  - 修改 form 组件 hide-required-asterisk 描述 (#21045 by @cs1707)
+- Drawer:
+  - 修复 destroy (#20715 by @zj9495)
+- Row
+  - 修复 align top (#20963 by @cs1707)
+- Select
+  - 修复 value 为 Boolean 类型的bug (#21052 by @cs1707)
+- Calendar
+  - 修复 first-day-of-week (#21057 by @cs1707)
+- Utils
+  - 修复 fix isScroll (#21065 by @cs1707)
+  - 修复 (utils.dom by @fw6)
+- TypeScript
+  - 增加 CascaderPanel 类型导出 (#21070 by @qige2016)
+  - 增加 spinner.d.ts (#21090 by @qige2016)
+
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug 修复
+
+- Image
+  - 修复 z-index 增加 keydown 事件 添加 stopPropagation (#20859 by @cs1707)
+- Input
+  - 修复 password cursor 展示 (#20870 by @cs1707)
+  - 修复 password icon 在 edge 下的展示 (#20902 by @cs1707)
+- Carousel
+  - 修复 interval 和 scale bug (#20931 by @cs1707)
+- Cascader
+  - 修复 delete tag bug (#20939 by @cs1707)
+- Drawer
+  - 支持 overflow auto (#20948 by @cs1707)
+- 其他
+  - 修复 isFunction (#20912 by @cs1707)
+
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug 修复
+
+- Drawer
+  - 修复 Drawer bug (by @cs1707)
+- Image
+  - 修复 image object fit ratio 在 IE 下的 bug  (#19583 by @charlie0228)
+- Cascader
+  - 修复 cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - 修复 calendar 国际化 bug (#20758 by @iamkun)
+- ColorPicker
+  - 修复 bugs (by @UxieVerity)
+
+#### 优化
+
+- Doc
+  - 更新 Axure 设计资源 v2.1.0 (by @iamkun)
+
+### 2.15.0
+
+*2021-01-15*
+
+#### Bug 修复
+
+- Select
+  - 修复 placeholder 国际化 bug (#17644 by @nzh63)
+- Popconfirm
+  - 修复 Popconfirm 国际化 bug by @iamkun
+- Drawer
+  - 修复 focus bug (#20626 by @cs1707)
+- Image
+  - 图片预览优化 (#20652 by @cs1707)
+
+#### 优化
+
+- Doc
+  - 更新法语文档 datetime-picker.md (#20543 by @lonk)
+  - 更新 Progress 组件文档 (#20641 by @cs1707)
+
+### 2.14.1
+
+*2020-11-11*
+
+#### Bug 修复
+
+- Popover
+  - 兼容 Vue 2.6 新 v-slot 语法 (#20424 by @iamkun)
+
+#### 优化
+
+- I18n
+  - 更新阿拉伯语翻译 (#20202 by @elkattan)
+  - 更新维吾尔语翻译 (#20177 by @IlhamTahir)
+
+### 2.14.0
+
+*2020-10-29*
+
+#### 非兼容性更新
+
+- Popconfirm
+  - 事件名称修改为 `confirm`, `cancel` (#20240 by @hugiron)
+
+#### Bug 修复
+
+- Progress
+  - 修复参数错误的问题 (#19985 by @Caaalabash)
+
+#### 优化
+
+- I18n
+  - 更新俄语翻译 (#19451 by @yangirov)
+  - 更新高棉语翻译 (#20077 by @Sovai)
+  - 更新乌克兰语翻译 (#20344 by @MammutAlex)
+
 ### 2.13.2
 
 *2020-05-18*
@@ -11,7 +232,7 @@
 - Image
   - 更新错误状态 (#19194 by @lhx6538665)
 
-#### Optimization
+#### 优化
 
 - I18n
   - 更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)

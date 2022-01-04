@@ -220,7 +220,7 @@ export default class Node {
 
     if (!(child instanceof Node)) {
       if (!batch) {
-        const children = this.getChildren(true);
+        const children = this.getChildren(true) || [];
         if (children.indexOf(child.data) === -1) {
           if (typeof index === 'undefined' || index < 0) {
             children.push(child.data);

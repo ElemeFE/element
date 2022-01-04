@@ -46,7 +46,7 @@ DateTimePicker est dérivé de DatePicker et TimePicker. Pour plus d'information
       return {
         pickerOptions: {
           shortcuts: [{
-            text: 'Aujourdh\'ui',
+            text: 'Aujourd\'hui',
             onClick(picker) {
               picker.$emit('pick', new Date());
             }

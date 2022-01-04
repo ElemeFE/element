@@ -169,4 +169,4 @@ Puede definir cuándo mostrar las sombras.
 | ---------- | ---------------------------------------- | ------ | -----------------  | ------------------- |
 | header     | Titulo del card. También acepta DOM pasado por `slot#header` | string  | —                 | —                   |
 | body-style | Estilo CSS del cuerpo                    | object | —                  | { padding: '20px' } |
-| shadow     | cuando mostrar la sombra del Card | string | always / hover / never | always          |
+| shadow     | Cuando mostrar la sombra del Card | string | always / hover / never | always          |
