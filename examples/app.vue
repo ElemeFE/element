@@ -1,6 +1,6 @@
 <template>
-  <div id="app" :class="{ 'is-component': isComponent }">
-    <main-header v-if="lang !== 'play'"></main-header>
+  <div id="app" :class="{ 'is-component': isComponent, 'is-home': isHome }">
+    <main-header v-if="lang !== 'play' && !$isQianKun"></main-header>
     <div class="main-cnt">
       <router-view></router-view>
     </div>
@@ -42,6 +42,9 @@
       },
       isComponent() {
         return /^component-/.test(this.$route.name || '');
+      },
+      isHome() {
+        return /^home/.test(this.$route.name || '');
       }
     },
 

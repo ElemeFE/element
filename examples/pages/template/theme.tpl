@@ -1,35 +1,42 @@
 <style lang="scss">
 .page-theme {
+  box-sizing: border-box;
   &:last-child {
     margin-bottom: 55px;
   }
   h2 {
-    font-size: 28px;
-    line-height: 28px;
-    margin: 0;
+    font-size: 24px;
+    color: #333333;
+    line-height: 34px;
+    margin-bottom: 16px;
   }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+}
+.theme-card {
+  display: inline-block;
+  height: 150px;
+  height: 16vw;
+  max-height: 230px;
+  cursor: default;
+  vertical-align: bottom;
+}
+.theme-section {
+  margin-bottom: 20px;
+}
+.second-section {
+  margin-top: 60px;
+  margin-bottom: 120px;
+}
+@media (max-width: 768px) {
+  .page-theme {
+    padding-top: 24px;
   }
   .theme-card {
-    display: inline-block;
-    height: 150px;
-    height: 16vw;
-    max-height: 230px;
-    flex: 0 0 24%;
-    cursor: default;
-    vertical-align: bottom;
-  }
-  .theme-section {
-    margin-bottom: 20px;
+    height: 200px;
+    margin-bottom: 16px;
   }
   .second-section {
-    margin-top: 60px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 }
 </style>
@@ -37,34 +44,35 @@
   <div class="page-container page-theme">
     <section class="theme-section">
       <h2><%= 1 ></h2>
-      <ul>
-        <li class="theme-card" v-for="item in officialTheme" :key="item.name">
+      <el-row :gutter="20">
+        <el-col :xs="24" :span="6" class="theme-card" v-for="item in officialTheme" :key="item.name">
           <theme-card 
             type="official" 
             :config="item"
             @action="onAction"
           ></theme-card>
-        </li>
-      </ul>
+        </el-col>
+      </el-row>
     </section>
     <section class="theme-section second-section">
       <h2><%= 2 > ({{userThemeCount}}/{{maxUserTheme}})</h2>
-      <ul>
-        <li class="theme-card" v-if="showUserUpload">
+      <el-row :gutter="20">
+        <el-col :xs="24" :span="6" class="theme-card" v-if="showUserUpload">
           <theme-card 
             type="upload" 
             :config="{name: 'upload'}"
             @action="onAction"
           ></theme-card>
-        </li>
-        <li class="theme-card" v-for="item in displayUserTheme" :key="item.name">
+        </el-col>
+        <el-col :xs="24" :span="6" class="theme-card" 
+         v-for="item in displayUserTheme" :key="item.name">
           <theme-card 
             type="user"
             :config="item"
             @action="onAction"
           ></theme-card>
-        </li>
-      </ul>
+        </el-col>
+      </el-row>
     </section>
     <el-dialog :visible.sync="copyDialogVisible">
       <el-form :model="copyForm" ref="copyForm" :rules="copyFormRule">
@@ -117,7 +125,7 @@ export default {
   },
   computed: {
     officialTheme() {
-      return this.padEmpeyTheme(themeList.concat(this.$isEle ? eleThemeList : []));
+      return themeList.concat(this.$isEle ? eleThemeList : []);
     },
     userThemeCount() {
       return this.userTheme.length;
@@ -126,7 +134,7 @@ export default {
       return this.userThemeCount < maxUserTheme;
     },
     displayUserTheme() {
-      return this.padEmpeyTheme(this.userTheme, this.showUserUpload ? 1 : 0);
+      return this.userTheme;
     }
   },
   methods: {

@@ -14,6 +14,20 @@ html, body {
 
 #app {
   height: 100%;
+
+  &.is-home {
+    .headerWrapper {
+      position: fixed;
+      width: 100%;
+      left: 0;
+      top: 0;
+      z-index: 1500;
+      .header {
+        background: transparent;
+        box-shadow: none;
+      }
+    }
+  }
   
   &.is-component {
     overflow-y: hidden;
@@ -80,6 +94,7 @@ button, input, select, textarea {
 .container,
 .page-container {
   width: 1140px;
+  padding: 0 15px;
   padding: 0;
   margin: 0 auto;
 }
@@ -87,17 +102,10 @@ button, input, select, textarea {
 .page-container {
   padding-top: 55px;
 
-  h2 {
-    font-size: 28px;
-    color: #1f2d3d;
-    margin: 0;
-  }
-  h3 {
-    font-size: 22px;
-  }
+  
   h2, h3, h4, h5 {
     font-weight: normal;
-    color: #1f2f3d;
+    color: #333;
 
     &:hover a {
       opacity: .4;
@@ -115,9 +123,20 @@ button, input, select, textarea {
     }
   }
 
+  h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
   p {
     font-size: 14px;
-    color: #5e6d82;
+    color: #333;
     line-height: 1.5em;
   }
 

@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
   .headerWrapper {
-    height: 80px;
+    height: 64px;
   }
 
   #v3-banner {
@@ -19,20 +19,41 @@
   }
 
   .header {
-    height: 80px;
+    height: 64px;
     background-color: #fff;
     color: #fff;
     top: 0;
     left: 0;
     width: 100%;
-    line-height: 80px;
+    line-height: 64px;
     z-index: 100;
     position: relative;
+    box-shadow: 0 4px 6px 0 rgba(63,75,92,0.10);
 
     .container {
       height: 100%;
+      width: 100%;
       box-sizing: border-box;
-      border-bottom: 1px solid #DCDFE6;
+    }
+
+    h1 {
+      width: 240px;
+      box-sizing: border-box;
+    }
+
+    .nav-algolia-search {
+      cursor: default;
+      display: inline-block;
+      position: relative;
+      &:before {
+        position: absolute;
+        content: '';
+        display: inline-block;
+        height: 20px;
+        border-left: 1px solid #E5E5E5;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
 
     .nav-lang-spe {
@@ -44,6 +65,8 @@
       float: left;
       font-size: 32px;
       font-weight: normal;
+      padding-left: 24px;
+
 
       a {
         color: #333;
@@ -68,10 +91,11 @@
     .nav {
       float: right;
       height: 100%;
-      line-height: 80px;
+      line-height: 64px;
       background: transparent;
       padding: 0;
       margin: 0;
+      padding-right: 40px;
       &::before, &::after {
         display: table;
         content: "";
@@ -84,7 +108,7 @@
     .nav-gap {
       position: relative;
       width: 1px;
-      height: 80px;
+      height: 64px;
       padding: 0 20px;
 
       &::before {
@@ -113,14 +137,11 @@
       position: relative;
       cursor: pointer;
     
-      &.nav-algolia-search {
-        cursor: default;
-      }
+     
     
       &.lang-item,
       &:last-child {
         cursor: default;
-        margin-left: 34px;
 
         span {
           opacity: .8;
@@ -130,40 +151,47 @@
           cursor: pointer;
           display: inline-block;
           height: 100%;
-          color: #888;
+          color: #333;
+          font-size: 14px;
 
           &:hover {
-            color: #409EFF;
+            color: #006DFF;
           }
           &.active {
              font-weight: bold;
-             color: #409EFF;
+             color: #006DFF;
            }
         }
       }
 
       a {
         text-decoration: none;
-        color: #1989FA;
-        opacity: 0.5;
+        color: #333;
         display: block;
-        padding: 0 22px;
+        height: 64px;
+        line-height: 64px;
+        padding: 0 12px;
+        font-size: 14px;
+        min-width: 64px;
+        text-align: center;
+        box-sizing: border-box;
 
         &.active,
         &:hover {
-          opacity: 1;
+          color: #006DFF;
+          font-weight: 500;
         }
 
-        &.active::after {
-          content: '';
-          display: inline-block;
-          position: absolute;
-          bottom: 0;
-          left: calc(50% - 15px);
-          width: 30px;
-          height: 2px;
-          background: #409EFF;
-        }
+        // &.active::after {
+        //   content: '';
+        //   display: inline-block;
+        //   position: absolute;
+        //   bottom: 0;
+        //   left: calc(50% - 15px);
+        //   width: 30px;
+        //   height: 2px;
+        //   background: #409EFF;
+        // }
       }
     }
   }
@@ -176,12 +204,13 @@
     span {
       display: block;
       width: 100%;
-      font-size: 16px;
-      color: #888;
+      font-size: 14px;
+      color: #333;
       line-height: 40px;
       transition: .2s;
       padding-bottom: 6px;
       user-select: none;
+      font-weight: 500;
 
       &:hover {
          cursor: pointer;
@@ -197,7 +226,7 @@
 
     .is-active {
       span, i {
-        color: #409EFF;
+        color: #006DFF;
       }
       i {
         transform: rotateZ(180deg) translateY(3px);
@@ -206,7 +235,7 @@
 
     &:hover {
       span, i {
-        color: #409EFF;
+        color: #006DFF;
       }
     }
   }
@@ -246,10 +275,17 @@
       .container {
         padding: 0 12px;
       }
+      h1 {
+        width: auto;
+      }
+      .nav {
+        padding-right: 0;
+      }
       .nav-item {
         a {
           font-size: 12px;
           vertical-align: top;
+          min-width: initial;
         }
 
         &.lang-item {
@@ -282,16 +318,6 @@
 </style>
 <template>
   <div class="headerWrapper">
-    <div id="v3-banner" v-if="isHome">
-      <template v-if="lang === 'zh-CN'">
-        您正在浏览基于 Vue 2.x 的 Element UI 文档;
-        <a href="https://element-plus.org/#/zh-CN">点击这里</a> 查看 Vue 3.x 的升级版本
-      </template>
-      <template v-else>
-        You’re browsing the documentation of Element UI for Vue 2.x version.
-        <a href="https://element-plus.org">Click here</a> for Vue 3.x version
-      </template>
-    </div>
     <header class="header" ref="header">
       <div class="container">
         <h1><router-link :to="`/${ lang }`">
@@ -308,12 +334,12 @@
           </slot>
 
         </router-link></h1>
+        <div class="nav-algolia-search" v-show="isComponentPage">
+          <algolia-search></algolia-search>
+        </div>
 
         <!-- nav -->
         <ul class="nav">
-          <li class="nav-item nav-algolia-search" v-show="isComponentPage">
-            <algolia-search></algolia-search>
-          </li>
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -340,35 +366,6 @@
               :to="`/${ lang }/resource`"
               exact>{{ langConfig.resource }}
             </router-link>
-          </li>
-
-          <!-- gap -->
-          <li class="nav-item" v-show="isComponentPage">
-            <div class="nav-gap"></div>
-          </li>
-
-          <!-- 版本选择器 -->
-          <li class="nav-item nav-versions" v-show="isComponentPage">
-            <el-dropdown
-              trigger="click"
-              class="nav-dropdown"
-              :class="{ 'is-active': verDropdownVisible }">
-              <span>
-                {{ version }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleVerDropdownToggle">
-                <el-dropdown-item
-                  v-for="item in Object.keys(versions)"
-                  :key="item"
-                  @click.native="switchVersion(item)">
-                  {{ item }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
           </li>
 
           <!-- 语言选择器 -->
@@ -403,19 +400,14 @@
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
-  import Element from 'main/index.js';
   import themeLoader from './theme/loader';
   import bus from '../bus';
   import { ACTION_USER_CONFIG_UPDATE } from './theme/constant.js';
-
-  const { version } = Element;
 
   export default {
     data() {
       return {
         active: '',
-        versions: [],
-        version,
         verDropdownVisible: true,
         langDropdownVisible: true,
         langs: {
@@ -464,11 +456,6 @@
       testInnerImg.src = `https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/rmsportal/VmvVUItLdPNqKlNGuRHi.png?t=${Date.now()}`;
     },
     methods: {
-      switchVersion(version) {
-        if (version === this.version) return;
-        location.href = `${ location.origin }/${ this.versions[version] }/${ location.hash } `;
-      },
-
       switchLang(targetLang) {
         if (this.lang === targetLang) return;
         localStorage.setItem('ELEMENT_LANGUAGE', targetLang);
@@ -485,18 +472,6 @@
     },
 
     created() {
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = _ => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          const versions = JSON.parse(xhr.responseText);
-          this.versions = Object.keys(versions).reduce((prev, next) => {
-            prev[next] = versions[next];
-            return prev;
-          }, {});
-        }
-      };
-      xhr.open('GET', '/versions.json');
-      xhr.send();
       let primaryLast = '#409EFF';
       bus.$on(ACTION_USER_CONFIG_UPDATE, (val) => {
         let primaryColor = val.global['$--color-primary'];

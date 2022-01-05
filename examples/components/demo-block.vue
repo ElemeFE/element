@@ -133,9 +133,8 @@
       position: relative;
     
       &.is-fixed {
-        position: fixed;
+        position: sticky;
         bottom: 0;
-        width: 868px;
       }
 
       i {

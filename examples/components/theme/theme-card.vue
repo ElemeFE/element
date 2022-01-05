@@ -1,37 +1,35 @@
 <style lang="scss">
 .theme-card-item {
   user-select: none;
-  border-radius: 4px;
+  border-radius: 12px;
   overflow: hidden;
   background: #fff;
-  height: 90%;
-  margin: 25px 0;
-  box-shadow: 0 0 1px 0 #666;
+  height: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
   &.is-hidden {
     opacity: 0;
     height: 0;
   }
   .upload {
     cursor: pointer;
-    background: #f5f7fa;
+    background: #FBFCFE;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items:center;
     .upload-action {
-      width: 40%;
-      margin: 0 auto;
-      text-align: center;
-      color: #606266;
+      display: flex;
+      align-items: center;
+      color: #006DFF;
+      font-weight: 500;
       img {
-        display: block;
-        margin: 0 auto;
+        width: 16px;
+        margin-right: 6px;
       }
       span {
-        display: block;
-        font-size: 14px;
-        margin-top: 8px;
+        font-size: 16px;
       }
     }
   }
@@ -52,81 +50,19 @@
       height: 100%;
       display: inline-block;
     }
-    .action {
-      transition: all .3s;
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      .action-mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #000;
-        opacity: 0.4;
-      }
-      .action-block {
-        position: absolute;
-        width: 50%;
-        height: 50%;
-        left: 25%;
-        top: 25%;
-      }
-      .action-item {
-        cursor: pointer;
-        display: inline-block;
-        height: 100%;
-        width: 30%;
-        color: #eee;
-        &:hover {
-          color: #fff;
-          .circle {
-            border-color: #fff;
-          }
-        }
-        .icon {
-          height: 50%;
-          font-size: 22px;
-          text-align: center;
-          display: flex;
-          justify-content:center;
-          align-items:center;
-          img {
-            width: 130%;
-          }
-        }
-        .name {
-          font-size: 12px;
-          height: 50%;
-          text-align: center;
-          display: flex;
-          justify-content:center;
-          align-items:center;
-          margin-top: 4px;
-        }
-      }
-      .action-item-right {
-        margin-left: 40%;
-      }
-    }
   }
   .info {
-    height: 30%;
     line-height: 16px;
     display: flex;
-    align-items: center;
+    padding: 8px 16px;
     .info-center {
       width: 100%;
     }
     .title {
-      font-weight: bold;
-      font-size: 16px;
-      color: #303133;
-      padding: 0 12px;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 26px;
+      color: #333;
       justify-content: space-between;
     }
     .right {
@@ -135,30 +71,29 @@
       font-size: 14px;
       color: #909399;
     }
+    .el-icon-more {
+      color: #999;
+    }
     .more {
       font-size: 16px;
       cursor: pointer;
     }
     .description {
-      padding: 0 12px;
       font-size: 14px;
-      color: #606266;
-      margin-top: 10px;
+      color: #999;
+      margin-top: 8px;
     }
   }
   &.is-upload {
     box-shadow: none;
-    border: 1px dashed #DCDFE6;
+    border: 1px dashed #E5E5E5;
   }
   &.is-upload:hover {
     box-shadow: none;
   }
 
   &:hover {
-    box-shadow: 0 0 10px 0 #999;
-    .action {
-      opacity: 1;
-    }
+    box-shadow: 0 8px 16px 0 rgba(80,101,161,0.10);
   }
 }
 </style>
@@ -192,44 +127,31 @@
           <span class="line-4" :style="{background: borderBaseColor}"></span>
           <span class="line-4" :style="{background: textSecondaryColor}"></span>
         </div>
-        <div class="action">
-          <div class="action-mask"></div>
-          <div class="action-block">
-            <div
-              class="action-item"
-              :class="index && 'action-item-right'"
-              v-for="(item, index) in actionArray"
-              :key="index"
-              @click="iconClick(item.action)"
-            >
-              <div class="icon">
-                <img :src="item.icon"/>
-                <span class="circle"></span>
-              </div>
-              <div class="name">
-                <span>{{item.name}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="info">
         <div class="info-center">
           <div class="title">
             <span>{{config.name}}</span>
-            <span class="right" v-if="isOfficial">by {{config.author}}</span>
-            <span class="right more" v-else>
+            <span class="right more">
               <el-dropdown @command="actionClick">
                 <i class="el-icon-more"></i>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="rename">{{getActionDisplayName('rename-theme')}}</el-dropdown-item>
-                  <el-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</el-dropdown-item>
-                  <el-dropdown-item
+                  <template v-if="isOfficial">
+                    <el-dropdown-item command="preview">{{getActionDisplayName('theme-check')}}</el-dropdown-item>
+                    <el-dropdown-item command="copy">{{getActionDisplayName('theme-copy')}}</el-dropdown-item>
+                  </template>
+                  <template v-else>
+                    <el-dropdown-item command="edit">{{getActionDisplayName('theme-edit')}}</el-dropdown-item>
+                    <el-dropdown-item command="download">{{getActionDisplayName('download-theme')}}</el-dropdown-item>
+                    <el-dropdown-item command="rename">{{getActionDisplayName('rename-theme')}}</el-dropdown-item>
+                    <el-dropdown-item command="copy">{{getActionDisplayName('copy-theme')}}</el-dropdown-item>
+                    <el-dropdown-item
                       command="delete"
                       style="color: #F56C6C;"
                     >
                       {{getActionDisplayName('delete-theme')}}
                     </el-dropdown-item>
+                  </template>
                 </el-dropdown-menu>
               </el-dropdown>
             </span>
@@ -303,9 +225,6 @@ export default {
       reader.readAsText(files[0]);
     },
     actionClick(e) {
-      this.$emit('action', e, this.config);
-    },
-    iconClick(e) {
       switch (e) {
         case 'preview':
         case 'edit':
@@ -372,34 +291,6 @@ export default {
     },
     isOfficial() {
       return this.type === 'official';
-    },
-    actionArray() {
-      if (this.isOfficial) {
-        return [
-          {
-            icon: require('../../assets/images/icon-check.png'),
-            name: getActionDisplayName('theme-check'),
-            action: 'preview'
-          },
-          {
-            icon: require('../../assets/images/icon-copy.png'),
-            name: getActionDisplayName('theme-copy'),
-            action: 'copy'
-          }
-        ];
-      }
-      return [
-        {
-          icon: require('../../assets/images/icon-edit.png'),
-          name: getActionDisplayName('theme-edit'),
-          action: 'edit'
-        },
-        {
-          icon: require('../../assets/images/icon-download.png'),
-          name: getActionDisplayName('download-theme'),
-          action: 'download'
-        }
-      ];
     }
   }
 };

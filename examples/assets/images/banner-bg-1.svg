@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600px" height="788px" viewBox="0 0 1600 788" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Rectangle</title>
+    <defs>
+        <filter x="-17.0%" y="-17.0%" width="134.1%" height="134.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="50" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#EBECEE" offset="0%"></stop>
+            <stop stop-color="#F8F9FC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#F8F9FC" offset="0%"></stop>
+            <stop stop-color="#EBECEE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(0.000000, 1.000000)">
+            <rect fill="#F8F9FC" x="0" y="0" width="1600" height="3376"></rect>
+            <circle id="椭圆形" fill="#E3E6F1" opacity="0.300000012" filter="url(#filter-1)" cx="207" cy="244" r="440"></circle>
+            <g id="编组-9" transform="translate(-35.000000, -1.000000)">
+                <circle id="椭圆形" stroke="#BDC1CB" stroke-width="0.5" opacity="0.300000012" cx="493" cy="375" r="179.75"></circle>
+                <circle id="椭圆形" stroke="#BDC1CB" stroke-width="0.5" opacity="0.300000012" cx="743" cy="375" r="199.75"></circle>
+                <rect id="矩形" fill="url(#linearGradient-2)" x="484" y="-4.54747351e-13" width="1" height="788"></rect>
+                <rect id="矩形" fill="url(#linearGradient-2)" x="264" y="-4.54747351e-13" width="1" height="788"></rect>
+                <rect id="矩形" fill="url(#linearGradient-2)" x="744" y="-4.54747351e-13" width="1" height="788"></rect>
+                <polygon id="矩形" fill="url(#linearGradient-3)" transform="translate(594.500000, 384.000000) rotate(-270.000000) translate(-594.500000, -384.000000) " points="594 -210 595 -210 595 978 594 978"></polygon>
+                <polygon id="矩形" fill="url(#linearGradient-3)" transform="translate(594.500000, 87.000000) rotate(-270.000000) translate(-594.500000, -87.000000) " points="594 -507 595 -507 595 681 594 681"></polygon>
+                <circle id="椭圆形" stroke="#BDC1CB" stroke-width="0.5" opacity="0.300000012" cx="273" cy="375" r="119.75"></circle>
+            </g>
+            <rect id="Rectangle" x="0" y="-1" width="1600" height="788"></rect>
+            <circle id="椭圆形" stroke="#BDC1CB" stroke-width="0.5" opacity="0.300000012" cx="263.5" cy="228.5" r="267.25"></circle>
+            <circle id="椭圆形" stroke="#BDC1CB" stroke-width="0.5" opacity="0.200000003" cx="266.5" cy="103.5" r="152.25"></circle>
+            <circle id="椭圆形" stroke="#BDC1CB" stroke-width="0.5" opacity="0.200000003" cx="711.5" cy="86.5" r="87.25"></circle>
+        </g>
+    </g>
+</svg>
