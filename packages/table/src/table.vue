@@ -8,7 +8,7 @@
       'el-table--group': isGroup,
       'el-table--fluid-height': maxHeight,
       'el-table--scrollable-x': layout.scrollX,
-      'el-table--scrollable-y': layout.scrollY,
+      'el-table--scrollable-y': true,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }, tableSize ? `el-table--${ tableSize }` : '']"
@@ -381,6 +381,7 @@
       },
 
       updateScrollY() {
+        console.log('change');
         const changed = this.layout.updateScrollY();
         if (changed) {
           this.layout.notifyObservers('scrollable');
