@@ -52,6 +52,10 @@ export default {
     tabindex: {
       type: Number,
       default: 0
+    },
+    width: {
+      type: String,
+      default: ''
     }
   },
 
@@ -91,7 +95,8 @@ export default {
             v-show={!this.disabled && this.showPopper}
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
-            }>
+            }
+            style={{width: this.width}}>
             { this.$slots.content || this.content }
           </div>
         </transition>);
