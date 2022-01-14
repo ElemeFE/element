@@ -123,20 +123,27 @@
         }
 
         let valid = true;
+        let hasWarning = false;
         let count = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
           callback(true);
         }
         let invalidFields = {};
+        let warningFields = {};
         this.fields.forEach(field => {
-          field.validate('', (message, field) => {
+          field.validate('', (message, field, warningMessage, warningField) => {
             if (message) {
               valid = false;
             }
             invalidFields = objectAssign({}, invalidFields, field);
+
+            if (warningMessage) {
+              hasWarning = true;
+            }
+            warningFields = objectAssign({}, warningFields, warningField);
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid, invalidFields);
+              callback(valid, invalidFields, hasWarning, warningFields);
             }
           });
         });

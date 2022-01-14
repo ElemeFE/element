@@ -510,6 +510,57 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 嵌套在 `el-form-item` 中的 `el-form-item` 标签宽度默认为零，不会继承 `el-form` 的 `label-width`。如果需要可以为其单独设置 `label-width` 属性。
 :::
 
+### 警告规则
+
+:::demo 设置了 `warningOnly` 的校验规则不会阻止页面提交，并且在表单项显示警告信息。
+
+```html
+<el-form :model="warningForm" ref="warningForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="url"
+    prop="url"
+    :rules="[{ required: true }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]"
+  >
+    <el-input v-model="warningForm.url" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('warningForm')">Submit</el-button>
+    <el-button @click="resetForm('warningForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        warningForm: {
+          url: ''
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid, _, hasWarning) => {
+          if (valid) {
+            if (!hasWarning) {
+              alert('submit!');
+            } else {
+              alert('please notice warning');
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 表单内组件尺寸控制
 
 通过设置 Form 上的 `size` 属性可以使该表单内所有可调节大小的组件继承该尺寸。Form-Item 也具有该属性。
@@ -636,6 +687,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 |  name  |   说明  |
 |--------|--------|
 |  error | 自定义表单校验信息的显示方式，参数为 { error } |
+|  warning | 自定义表单校验信息的显示方式，参数为 { warning } |
 
 ### Form-Item Methods
 

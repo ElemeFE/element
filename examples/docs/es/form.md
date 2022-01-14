@@ -528,6 +528,57 @@ Cuando un `el-form-item` está anidado en otro `el-form-item`, su ancho de etiqu
 
 :::
 
+### Averta regulo
+
+:::demo Regulo kun warningOnly ne blokos formularon sendi.
+
+```html
+<el-form :model="warningForm" ref="warningForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="url"
+    prop="url"
+    :rules="[{ required: true }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]"
+  >
+    <el-input v-model="warningForm.url" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('warningForm')">Submit</el-button>
+    <el-button @click="resetForm('warningForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        warningForm: {
+          url: ''
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid, _, hasWarning) => {
+          if (valid) {
+            if (!hasWarning) {
+              alert('submit!');
+            } else {
+              alert('please notice warning');
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Tamaño del control
 
 Todos los componentes de un formulario heredan su atributo `size`. De manera similar, FormItem también tiene un atributo `size`.
@@ -659,6 +710,7 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | Name  | Description                                                  |
 | ----- | ------------------------------------------------------------ |
 | error | Contenido personalizado para mostrar el mensaje de validación. El parámetro del scope es { error } |
+| warning | Contenido personalizado para mostrar el mensaje de validación. El parámetro del scope es { warning } |
 
 ### Form-Item Método
 
