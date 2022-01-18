@@ -220,11 +220,11 @@
         const descriptor = {};
         const rulesClone = [];
         if (rules && rules.length > 0) {
-          rules.forEach((rule, index) => {
+          rules.forEach((rule, ruleIndex) => {
             delete rule.trigger;
             rulesClone.push({
               ...rule,
-              index
+              ruleIndex
             });
           });
         }
@@ -286,6 +286,8 @@
         const model = {
           [this.prop]: this.fieldValue
         };
+        
+        delete rule.ruleIndex;
 
         const validator = new AsyncValidator(descriptor);
         validator.validate(model, { firstFields: true }, (errors, fields) => {
