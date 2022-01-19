@@ -104,7 +104,7 @@ const handleScroll = function(cb) {
   } else {
     const heightBelowTop = getOffsetHeight(el) + getElementTop(el) - getElementTop(container);
     const offsetHeight = getOffsetHeight(container);
-    const borderBottom = Number.parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
+    const borderBottom = parseFloat(getStyleComputedProperty(container, 'borderBottomWidth'));
     shouldTrigger = heightBelowTop - offsetHeight + borderBottom <= distance;
   }
 
