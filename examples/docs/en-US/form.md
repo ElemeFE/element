@@ -595,7 +595,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | label-position | position of label. If set to 'left' or 'right', `label-width` prop is also required | string | left / right / top | right |
 | label-width    | width of label, e.g. '50px'. All its direct child form items will inherit this value. Width `auto` is supported.        | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
-| hide-required-asterisk | whether required fields should have a red asterisk (star) beside their labels | boolean | — | false |
+| hide-required-asterisk | whether to hide a red asterisk (star) next to the required field label. | boolean | — | false |
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | whether to display the error message inline with the form item | boolean | — | false |
 | status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
