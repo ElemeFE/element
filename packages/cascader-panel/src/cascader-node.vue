@@ -220,6 +220,8 @@
       }
       if (isLeaf && !isDisabled && !checkStrictly && !multiple) {
         events.on.click = this.handleCheckChange;
+      } else if (isLeaf && multiple) {
+        delete events.on.click;
       }
 
       return (
