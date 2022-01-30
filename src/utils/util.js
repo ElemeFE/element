@@ -126,6 +126,10 @@ export const isFirefox = function() {
   return !Vue.prototype.$isServer && !!window.navigator.userAgent.match(/firefox/i);
 };
 
+export const isMobile = function() {
+  return navigator.userAgent.toLowerCase().match(/(ipad|iphone|android|midp|ucweb|windows ce|windows mobile)/i) != null;
+};
+
 export const autoprefixer = function(style) {
   if (typeof style !== 'object') return style;
   const rules = ['transform', 'transition', 'animation'];
