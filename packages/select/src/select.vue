@@ -42,9 +42,39 @@
           disable-transitions>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
+        <input
+          key="input"
+          type="text"
+          class="el-select__input"
+          :class="[selectSize ? `is-${ selectSize }` : '']"
+          :disabled="selectDisabled"
+          :autocomplete="autoComplete || autocomplete"
+          :aria-controls="id ? `${id}-listbox` : null"
+          role="combobox"
+          aria-haspopup="listbox"
+          :aria-owns="id ? `${id}-listbox` : null"
+          :aria-expanded="visible ? 'true' : 'false'"	
+          @focus="handleFocus"
+          @blur="softFocus = false"
+          @keyup="managePlaceholder"
+          @keydown="resetInputState"
+          @keydown.down.prevent="navigateOptions('next')"
+          @keydown.up.prevent="navigateOptions('prev')"
+          @keydown.enter.prevent="selectOption"
+          @keydown.esc.stop.prevent="visible = false"
+          @keydown.delete="deletePrevTag"
+          @keydown.tab="handleTabKey"
+          @compositionstart="handleComposition"
+          @compositionupdate="handleComposition"
+          @compositionend="handleComposition"
+          v-model="query"
+          @input="debouncedQueryChange"
+          v-if="filterable"
+          :style="{ 'flex-grow': '1', width: multiSelectInputWidth, 'max-width': '100%' }"
+          ref="input">
       </transition-group>
-
       <input
+        v-else-if="filterable"
         type="text"
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
@@ -70,7 +100,6 @@
         @compositionend="handleComposition"
         v-model="query"
         @input="debouncedQueryChange"
-        v-if="filterable"
         :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
@@ -258,6 +287,14 @@
 
       hoveredOption() {
         return this.options[this.hoverIndex];
+      },
+
+      multiSelectInputWidth() {
+        if (this.selected.length > 0) {
+          return this.query.length + 2 + 'ch';
+        } else {
+          return '100%';
+        }
       }
     },
 
