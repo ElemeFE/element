@@ -630,7 +630,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
       submitForm(formName) {
         this.submitting = true;
         this.$refs[formName].validate((valid) => {
-          console.log('immediate callback exec!');
+          console.log('callback immediate exec!');
           if (valid) {
             alert('submit!');
           } else {

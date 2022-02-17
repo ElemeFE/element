@@ -584,6 +584,75 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 ```
 :::
 
+### Return form validation result immediately
+
+:::demo Exécuter `callback` immédiatement lorsque la validation du premier élément de formulaire échoue
+```html
+<el-form :model="immedidateForm" ref="immedidateForm" immediateValid>
+  <el-form-item
+    label="Name"
+    prop="name"
+    :rules="[
+      { required: true, message: 'Le nom n'est pas vide'},
+      { validator: asyncValid, trigger: ['blur']}
+    ]"
+  >
+    <el-input v-model="immedidateForm.name" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item 
+    label="Age"
+    prop="age" 
+    :rules="[{required: true, message: 'L'âge n'est pas vide' }]">
+    <el-input v-model="immedidateForm.age" autocomplete="off" />
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('immedidateForm')" :loading="submitting">Submit</el-button>
+    <el-button @click="resetForm('immedidateForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        submitting: false,
+        immedidateForm: {
+          name: '',
+          age: ''
+        }
+      };
+    },
+    methods: {
+      asyncValid(rule, value, callback) {
+        setTimeout(() => {
+          if(value === "element") {
+            callback("Le nom ne peut pas être répété");
+          }else {
+            callback()
+          }
+        }, 2000)
+      },
+      submitForm(formName) {
+        this.submitting = true;
+        this.$refs[formName].validate((valid) => {
+          console.log('callback immediate exec!');
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+          }
+          this.submitting = false;
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
+
 ### Attributs de Form
 
 | Attribut      | Description          | Type      | Valeurs acceptées       | Défaut  |

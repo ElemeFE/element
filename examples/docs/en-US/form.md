@@ -585,6 +585,74 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ```
 :::
 
+### Return form validation result immediately
+
+:::demo Execute `callback` immediately when the validation of the first form item fails
+```html
+<el-form :model="immedidateForm" ref="immedidateForm" immediateValid>
+  <el-form-item
+    label="Name"
+    prop="name"
+    :rules="[
+      { required: true, message: 'Name is not empty'},
+      { validator: asyncValid, trigger: ['blur']}
+    ]"
+  >
+    <el-input v-model="immedidateForm.name" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item 
+    label="Age"
+    prop="age" 
+    :rules="[{required: true, message: 'Age is not empty' }]">
+    <el-input v-model="immedidateForm.age" autocomplete="off" />
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('immedidateForm')" :loading="submitting">Submit</el-button>
+    <el-button @click="resetForm('immedidateForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        submitting: false,
+        immedidateForm: {
+          name: '',
+          age: ''
+        }
+      };
+    },
+    methods: {
+      asyncValid(rule, value, callback) {
+        setTimeout(() => {
+          if(value === "element") {
+            callback("Name cannot be repeated");
+          }else {
+            callback()
+          }
+        }, 2000)
+      },
+      submitForm(formName) {
+        this.submitting = true;
+        this.$refs[formName].validate((valid) => {
+          console.log('callback immediate exec!');
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+          }
+          this.submitting = false;
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
