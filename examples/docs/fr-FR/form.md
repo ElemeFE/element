@@ -584,7 +584,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 ```
 :::
 
-### Return form validation result immediately
+### Renvoyez immédiatement le résultat de la validation du formulaire
 
 :::demo Exécuter `callback` immédiatement lorsque la validation du premier élément de formulaire échoue
 ```html
@@ -593,7 +593,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
     label="Name"
     prop="name"
     :rules="[
-      { required: true, message: 'Le nom n'est pas vide'},
+      { required: true, message: 'Le nom n’est pas vide'},
       { validator: asyncValid, trigger: ['blur']}
     ]"
   >
@@ -602,7 +602,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
   <el-form-item 
     label="Age"
     prop="age" 
-    :rules="[{required: true, message: 'L'âge n'est pas vide' }]">
+    :rules="[{required: true, message: 'L’âge n‘est pas vide' }]">
     <el-input v-model="immedidateForm.age" autocomplete="off" />
   </el-form-item>
   <el-form-item>
@@ -651,7 +651,6 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 </script>
 ```
 :::
-
 
 ### Attributs de Form
 
