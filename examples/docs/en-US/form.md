@@ -602,6 +602,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | validate-on-rule-change  | whether to trigger validation when the `rules` prop is changed | boolean | — | true |
 | size  | control the size of components in this form | string | medium / small / mini | — |
 | disabled | whether to disabled all components in this form. If set to true, it cannot be overridden by its inner components' `disabled` prop | boolean | — | false |
+| immediateValid | `form.validate()`The method triggers a callback immediately when the first failed form item is verified or the promise is set to reject | boolean | — | false |
 
 ### Form Methods
 

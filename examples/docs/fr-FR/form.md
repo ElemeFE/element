@@ -601,6 +601,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | validate-on-rule-change  | Si la validation doit se déclencher lorsque `rules` est modifié. | boolean | — | true |
 | size  | Contrôle la taille des champs du formulaire. | string | medium / small / mini | — |
 | disabled | Si tout les champs du formulaire doivent être désactivés. Si `true`, il ne peut pas être modifié par l'attribut `disabled` des enfants. | boolean | — | false |
+| immediateValid | `form.validate()`La méthode déclenche un rappel immédiatement lorsque le premier élément de formulaire ayant échoué est vérifié ou que la promesse est définie sur rejeter | boolean | — | false |
 
 ### Méthodes de Form
 

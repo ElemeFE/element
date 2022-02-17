@@ -580,6 +580,74 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 ```
 :::
 
+### 立即返回表单校验结果
+
+:::demo 在校验到第一个表单项失败时立即执行`callback`
+```html
+<el-form :model="immedidateForm" ref="immedidateForm" immediateValid>
+  <el-form-item
+    label="姓名"
+    prop="name"
+    :rules="[
+      { required: true, message: '姓名不能为空'},
+      { validator: asyncValid, trigger: ['blur']}
+    ]"
+  >
+    <el-input v-model="immedidateForm.name" autocomplete="off"></el-input>
+  </el-form-item>
+  <el-form-item 
+    label="年龄"
+    prop="age" 
+    :rules="[{required: true, message: '年龄不能为空' }]">
+    <el-input v-model="immedidateForm.age" autocomplete="off" />
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('immedidateForm')" :loading="submitting">提交</el-button>
+    <el-button @click="resetForm('immedidateForm')">重置</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        submitting: false,
+        immedidateForm: {
+          name: '',
+          age: ''
+        }
+      };
+    },
+    methods: {
+      asyncValid(rule, value, callback) {
+        setTimeout(() => {
+          if(value === "element") {
+            callback("姓名不能重复");
+          }else {
+            callback()
+          }
+        }, 2000)
+      },
+      submitForm(formName) {
+        this.submitting = true;
+        this.$refs[formName].validate((valid) => {
+          console.log('immediate callback exec!');
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+          }
+          this.submitting = false;
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Form Attributes
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -597,6 +665,7 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
 | validate-on-rule-change  | 是否在 `rules` 属性改变后立即触发一次验证 | boolean | — | true |
 | size  | 用于控制该表单内组件的尺寸 | string | medium / small / mini | — |
 | disabled | 是否禁用该表单内的所有组件。若设置为 true，则表单内组件上的 disabled 属性不再生效 | boolean | — | false |
+| immediateValid | `form.validate()`方法在校验到第一个失败的表单项时立即触发回调或者 promise 置为 reject | boolean | — | false |
 
 ### Form Methods
 

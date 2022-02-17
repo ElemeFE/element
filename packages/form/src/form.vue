@@ -45,6 +45,10 @@
       hideRequiredAsterisk: {
         type: Boolean,
         default: false
+      },
+      immediateValid: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -124,6 +128,7 @@
 
         let valid = true;
         let count = 0;
+        let errorCount = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
           callback(true);
@@ -133,8 +138,14 @@
           field.validate('', (message, field) => {
             if (message) {
               valid = false;
+              errorCount++;
             }
             invalidFields = objectAssign({}, invalidFields, field);
+            // 校验到第一个错误，立即触发表单校验失败。在异步校验的时候会出现等待一个异步校验结果，可能此时其他表单项已经校验失败了，但是会等待这个异步的结果一起返回
+            if (this.immediateValid && !valid && errorCount === 1) {
+              callback(false, invalidFields);
+              return;
+            }
             if (typeof callback === 'function' && ++count === this.fields.length) {
               callback(valid, invalidFields);
             }
