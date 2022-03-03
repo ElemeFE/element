@@ -270,7 +270,7 @@ export default {
 
     if (this.showFileList) {
       uploadList = (
-        <slot :file-list="this.uploadFiles">
+        <slot :file-list={this.uploadFiles}>
           <UploadList
             disabled={this.uploadDisabled}
             listType={this.listType}
