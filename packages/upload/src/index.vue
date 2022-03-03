@@ -270,22 +270,24 @@ export default {
 
     if (this.showFileList) {
       uploadList = (
-        <UploadList
-          disabled={this.uploadDisabled}
-          listType={this.listType}
-          files={this.uploadFiles}
-          on-remove={this.handleRemove}
-          handlePreview={this.onPreview}>
-          {
-            (props) => {
-              if (this.$scopedSlots.file) {
-                return this.$scopedSlots.file({
-                  file: props.file
-                });
+        <slot :file-list="this.uploadFiles">
+          <UploadList
+            disabled={this.uploadDisabled}
+            listType={this.listType}
+            files={this.uploadFiles}
+            on-remove={this.handleRemove}
+            handlePreview={this.onPreview}>
+            {
+              (props) => {
+                if (this.$scopedSlots.file) {
+                  return this.$scopedSlots.file({
+                    file: props.file
+                  });
+                }
               }
             }
-          }
-        </UploadList>
+          </UploadList>
+        </slot>
       );
     }
 
