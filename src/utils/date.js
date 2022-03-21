@@ -49,14 +49,14 @@
   function shorten(arr, sLen) {
     var newArr = [];
     for (var i = 0, len = arr.length; i < len; i++) {
-      newArr.push(arr[i].substr(0, sLen));
+      newArr.push(arr[i].slice(0, sLen));
     }
     return newArr;
   }
 
   function monthUpdate(arrName) {
     return function (d, v, i18n) {
-      var index = i18n[arrName].indexOf(v.charAt(0).toUpperCase() + v.substr(1).toLowerCase());
+      var index = i18n[arrName].indexOf(v.charAt(0).toUpperCase() + v.slice(1).toLowerCase());
       if (~index) {
         d.month = index;
       }
@@ -122,7 +122,7 @@
       return i18n.monthNames[dateObj.getMonth()];
     },
     yy: function(dateObj) {
-      return pad(String(dateObj.getFullYear()), 4).substr(2);
+      return pad(String(dateObj.getFullYear()), 4).slice(2);
     },
     yyyy: function(dateObj) {
       return pad(dateObj.getFullYear(), 4);
@@ -183,7 +183,7 @@
       d.month = v - 1;
     }],
     yy: [twoDigits, function (d, v) {
-      var da = new Date(), cent = +('' + da.getFullYear()).substr(0, 2);
+      var da = new Date(), cent = +('' + da.getFullYear()).slice(0, 2);
       d.year = '' + (v > 68 ? cent - 1 : cent) + v;
     }],
     h: [twoDigits, function (d, v) {
