@@ -5,10 +5,10 @@ export default {
   bind(el, binding, vnode) {
     let interval = null;
     let startTime;
-    const intervals = isMac() ? 100 : 300;
+    const maxIntervals = isMac() ? 100 : 300;
     const handler = () => vnode.context[binding.expression].apply();
     const clear = () => {
-      if (Date.now() - startTime < intervals) {
+      if (Date.now() - startTime < maxIntervals) {
         handler();
       }
       clearInterval(interval);
@@ -20,7 +20,7 @@ export default {
       startTime = Date.now();
       once(document, 'mouseup', clear);
       clearInterval(interval);
-      interval = setInterval(handler, intervals);
+      interval = setInterval(handler, maxIntervals);
     });
   }
 };
