@@ -124,7 +124,7 @@
     },
     data() {
       return {
-        activeIndex: this.defaultActive,
+        activeIndex: this.router ? this.$router.currentRoute.path : this.defaultActive,
         openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
@@ -311,6 +311,10 @@
       close(index) {
         this.closeMenu(index);
       }
+    },
+    created() {
+      if(!this.router || this.$router === null) return;
+      this.$router.afterHooks.push(to => this.activeIndex = to.path);
     },
     mounted() {
       this.initOpenedMenu();
