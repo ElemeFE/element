@@ -173,10 +173,11 @@ export default {
       this.onChange(file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {
+      const {percent, loaded, total} = ev;
       const file = this.getFile(rawFile);
       this.onProgress(ev, file, this.uploadFiles);
       file.status = 'uploading';
-      file.percentage = ev.percent || 0;
+      file.percentage = percent === undefined ? (loaded / total * 100) : (percent);
     },
     handleSuccess(res, rawFile) {
       const file = this.getFile(rawFile);
