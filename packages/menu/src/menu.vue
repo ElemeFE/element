@@ -314,7 +314,7 @@
     },
     created() {
       if(!this.router || this.$router === null) return;
-      this.$router.afterHooks.push(to => this.activeIndex = to.path);
+      this.$router.afterEach(to => this.activeIndex = to.path);
     },
     mounted() {
       this.initOpenedMenu();
