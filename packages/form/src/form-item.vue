@@ -14,6 +14,9 @@
       :update-all="form.labelWidth === 'auto'">
       <label :for="labelFor" class="el-form-item__label" :style="labelStyle" v-if="label || $slots.label">
         <slot name="label">{{label + form.labelSuffix}}</slot>
+        <el-tooltip :content="tooltip" placement="top">
+          <i v-if="!!tooltip" class="el-icon-question" style="margin-inline-start: 4px"/>
+        </el-tooltip>
       </label>
     </label-wrap>
     <div class="el-form-item__content" :style="contentStyle">
@@ -79,7 +82,8 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      tooltip: String
     },
     components: {
       // use this component to calculate auto width
