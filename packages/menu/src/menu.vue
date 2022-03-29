@@ -155,6 +155,18 @@
       collapse(value) {
         if (value) this.openedMenus = [];
         this.broadcast('ElSubmenu', 'toggle-collapse', value);
+      },
+
+      router: {
+        handler(value) {
+        if (value && !this.haveRouterHook) {
+            this.haveRouterHook = true;
+            this.$router.afterEach(to => {
+              if (this.router) this.updateActiveIndex(to.path)
+            });
+          }
+        },
+        immediate: true
       }
     },
     methods: {
@@ -311,10 +323,6 @@
       close(index) {
         this.closeMenu(index);
       }
-    },
-    created() {
-      if(!this.router || this.$router === null) return;
-      this.$router.afterEach(to => this.activeIndex = to.path);
     },
     mounted() {
       this.initOpenedMenu();
