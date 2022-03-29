@@ -159,7 +159,7 @@
 
       router: {
         handler(value) {
-        if (value && !this.haveRouterHook) {
+          if (value && !this.haveRouterHook) {
             this.haveRouterHook = true;
             this.$router.afterEach(to => {
               if (this.router) this.updateActiveIndex(to.path)
