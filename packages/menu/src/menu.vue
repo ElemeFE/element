@@ -109,6 +109,7 @@
       defaultOpeneds: Array,
       uniqueOpened: Boolean,
       router: Boolean,
+      followRouter: Boolean,
       menuTrigger: {
         type: String,
         default: 'hover'
@@ -157,12 +158,14 @@
         this.broadcast('ElSubmenu', 'toggle-collapse', value);
       },
 
-      router: {
+      followRouter: {
         handler(value) {
           if (value && !this.haveRouterHook) {
             this.haveRouterHook = true;
             this.$router.afterEach(to => {
-              if (this.router) this.updateActiveIndex(to.path)
+              if (this.followRouter && this.router) {
+                this.updateActiveIndex(to.path);
+              }
             });
           }
         },
