@@ -1336,7 +1336,7 @@ Docs
 - Ajout de l'attribut `iconClass` pour MessageBox, #11499
 - Ajout de l'attribut `stretch` pour Tabs, #11476
 - Correction d'un problème d'ordre de rendu de TabPane lorsque Tabs est `lazy`, #11461
-- Correction de Table ne conservant pas la surbrillance de la ligne actuelle lors de son ouverture, #11464
+- Correction de Table ne conservant pas la surbrillance de la ligne actuelle lors de child ouverture, #11464
 - Correction de l'état de la mise au point lorsque `before-leave` renvoie une promesse résolue, #11386
 - Correction de la désactivation du Popover qui créait encore des poppers, #11426
 - Correction de la boucle sans fin de Tree lorsqu'un nouveau noeud est ajouté en mode lazy, #11430 (par @wangjingf)
@@ -1393,9 +1393,9 @@ Docs
 
 - Correction d'une erreur lorsque les données source n'ont pas le champ spécifié par l'attribut `prop` d'une TableColumn, lorsque la souris se déplace dans les cellules de cette colonne, #11137
 - L'attribut `lockScroll` des composants popup n'ajoute plus un style en ligne à l'élément parent, mais ajoute un nom de classe, #1111114
-- Correction de l'icône de Progression qui ne s'affichait pas quand son `status` était une exception, #11172
+- Correction de l'icône de Progression qui ne s'affichait pas quand child `status` était une exception, #11172
 - Correction de l'attribut `désactivé` qui ne fonctionnait pas dans la liste des résultats de filtrage du Cascader filtrable, #11185
-- Correction d'un problème où la ligne étendue de la table ne peut pas être réduite si la source de données est mise à jour après son extension, #11186
+- Correction d'un problème où la ligne étendue de la table ne peut pas être réduite si la source de données est mise à jour après child extension, #11186
 - `setCurrentKey` de Tree accepte maintenant `null` comme paramètre pour annuler le noeud actuellement mis en surbrillance, #11205
 
 ### 2.3.8
@@ -1531,7 +1531,7 @@ Docs
 - Ajout des événements `after-enter` et `after-leave` pour Popover, #10047
 - Correction de Select ne déclenchant pas la validation lorsque l'utilisateur sélectionne une option après avoir exécuté `resetFields` du formulaire, #10105
 - Correction des largeurs incorrectes des colonnes fixes de Table dans certains cas, #10130
-- Correction de MessageBox héritant de l'attribut `title` de son instance précédente lorsqu'il était appelé sans `title`, #10126 (par @Pochodaydaydayup)
+- Correction de MessageBox héritant de l'attribut `title` de child instance précédente lorsqu'il était appelé sans `title`, #10126 (par @Pochodaydaydayup)
 - Ajout de l'attribut `input-size` pour Slider, #10154
 - Ajout des événements `left-check-change` et `right-check-change` pour Transfer, #10156
 
@@ -1682,7 +1682,7 @@ Docs
 *2017-11-29*
 
 - Correction d'un bug de style des icônes de tri de la table, #8405
-- Correction du mécanisme de déclenchement de Popover lorsque son `trigger` est manuel, #8467
+- Correction du mécanisme de déclenchement de Popover lorsque child `trigger` est manuel, #8467
 - Ajout des attributs `prefix-icon` et `suffix-icon` pour Autocomplete, #8446 (par @liyanlong)
 - Ajout de l'attribut `separator` pour Cascader, #8501
 - Ajout de l'attribut `clearable` pour Input, #8509 (par @lbogdan)
@@ -1724,9 +1724,9 @@ Docs
 *2017-10-31*
 
 - Un clic droit sur les boutons de InputNumber ne changera pas sa valeur, #7817
-- La méthode `validate` de Form peut maintenant attendre des validations asynchrones avant d'exécuter son callback, #7774 (par @Allenice)
+- La méthode `validate` de Form peut maintenant attendre des validations asynchrones avant d'exécuter child callback, #7774 (par @Allenice)
 - Correction de la plage de sélection de DatePicker ne fonctionnant pas dans les navigateurs Chromium 53-57, #7838
-- Correction des icônes manquantes de prévisualisation et de suppression de Upload lorsque son `list-type` est picture-card, #7857
+- Correction des icônes manquantes de prévisualisation et de suppression de Upload lorsque child `list-type` est picture-card, #7857
 - Ajout de l'attribut `sort-by` pour TableColumn, #7828 (par @wangfengming)
 - Correction de DatePicker affichant parfois un mauvais numéro d'année lors de la sélection de la première semaine en mode semaine, #7860 (par @hhh23485)
 - Correction d'une erreur de style d'icône des Steps verticales, #7891
@@ -1834,7 +1834,7 @@ Docs
   - Ajout de l'attribut `span-method` pour la fusion de cellules
   - Ajout de la méthode `clearSort` pour effacer le tri par programmation
   - Ajout de la méthode `clearFilter` pour effacer le filtre par programmation
-  - Pour les lignes extensibles, lorsqu'une ligne est étendue, une classe `.expanded` sera ajoutée à sa liste de classes, afin que vous puissiez personnaliser son style
+  - Pour les lignes extensibles, lorsqu'une ligne est étendue, une classe `.expanded` sera ajoutée à sa liste de classes, afin que vous puissiez personnaliser child style
   - Ajout de l'attribut `size`
   - Ajout de la méthode `toggleRowExpansionRowExpansion` pour ouvrir ou réduire les lignes extensibles par programmation
   - Ajout de l'attribut `cell-class-name` pour assigner un nom de classe aux cellules
@@ -1862,7 +1862,7 @@ Docs
 - Select
   - Performances améliorées. Maintenant Vue dev-tool ne crashera pas quand un grand nombre de Select sont détruits #6151
 - Table
-  - Correction d'un bug ou la table reste masquée lorsque son élément parent apparaît depuis `display : none`
+  - Correction d'un bug ou la table reste masquée lorsque child élément parent apparaît depuis `display : none`
   - Correction de l'extension de la largeur de la table lorsque l'élément parent a `display : flex`
   - Correction d'un bug qui corrigeait le fait que les colonnes d'une table avec l'emplacement `append` disparaissaient lorsque les données étaient récupérées dynamiquement
   - Correction de l'attribut `expand-row-keys` qui ne fonctionnait pas avec la valeur initiale
@@ -1903,9 +1903,9 @@ Docs
   - Suppression de l'attribut `props`. Vous pouvez maintenant utiliser l'attribut `value-key` pour désigner le nom de clé de l'objet de suggestion d'entrée pour l'affichage.
 - Steps
   - Suppression de l'attribut `center`
-  - Maintenant le Steps va remplir son conteneur parent par défaut
+  - Maintenant le Steps va remplir child conteneur parent par défaut
 - DatePicker
-  - Le paramètre de l'événement `change` de DatePicker est maintenant la valeur liée elle-même. Son format est contrôlé par `value-format`
+  - Le paramètre de l'événement `change` de DatePicker est maintenant la valeur liée elle-même. Child format est contrôlé par `value-format`
 - Table
   - Suppression de la prise en charge de la personnalisation du modèle de colonne à l'aide de `inline-template`
   - `sort-method` s'aligne maintenant avec `Array.sort`. Il devrait retourner un nombre au lieu d'un booléen

@@ -601,7 +601,7 @@
 #### Nuevas características
 
 - Table
-  - Los metodos tree-props，default-expand-all, expand-row-keys, toggle-row-expansion y el evento expand-change son compatibles con Tree Table (#15709 by @ziyoung)
+  - Los metodos tree-props，default-expand-all, expand-row-keys, toggle-row-expansion y el evento expand-change child compatibles con Tree Table (#15709 by @ziyoung)
 
 #### Corrección de errores
 
@@ -1048,7 +1048,7 @@
 - Tabs & Dropdown
   - Estilo arreglado (by @hetech in #14452)
 - Tree
-  - Los tips de texto vacío son diferentes de las tablas (by @ColinCll in #14331)
+  - Los tips de texto vacío child diferentes de las tablas (by @ColinCll in #14331)
 - Docs
   - Corregido el error de formato de la documentacion de DatetimePicker (by @iamkun in #14290)
   - Problema de ortografía en la documentación de datepicker (by @helmut in #14481)
@@ -1315,7 +1315,7 @@
 
 *2018-06-26*
 
-- Ahora el `class-name` y el `label-class-name` de la tabla son reactivos, #11626
+- Ahora el `class-name` y el `label-class-name` de la tabla child reactivos, #11626
 - Arreglado que Table seguia resaltando la fila en la que se había hecho clic cuando `highlight-current-row` era `false`, #11646
 - Corregido un error de estilo de ButtonGroup cuando sólo habia un botón `round` o `circle`, #11605
 - Arreglado estilo del tamaño de página del Select de Pagination, #11622
@@ -1754,7 +1754,7 @@
   - Un nuevo tema: `theme-chalk`
   - Se ha mejorado la accesibilidad de los siguientes componentes: Alert, AutoComplete, Breadcrumb, Button, Checkbox, Collapse, Input, InputNumber, Menu, Progress, Radio, Rate, Slider, Switch, Upload
   - Añadido tipografías TypeScript
-  - Todos los iconos existentes son rediseñados. Se han añadido algunos iconos nuevos
+  - Todos los iconos existentes child rediseñados. Se han añadido algunos iconos nuevos
   - Añadida una serie de clases de utilidades basadas en puntos de ruptura que ocultan elementos cuando el tamaño del viewport cumple ciertas condiciones
   - Componentes de diseño añadidos: Container, Header, Aside, Main, Footer.
   - Ahora puede configurar los tamaños de componentes a nivel global. Al importar Element, puede añadir un objeto de configuración global con un prop `size` para configurar tamaños predeterminados para todos los componentes.
@@ -1764,7 +1764,7 @@
   - Ahora puede ser navegado por `Up` y `Down`, y presionando `Enter` selecciona la hora #6023
 - TimePicker
   - Ahora puede ser navegado por `Up` y `Down`, y presionando `Enter` selecciona la hora #6050
-  - Añadido `start-placeholder` y `end-placeholder`. Son placeholder's para las dos casillas de input en modo range #7169
+  - Añadido `start-placeholder` y `end-placeholder`. Child placeholder's para las dos casillas de input en modo range #7169
   - Añadido el atributo `arrow-control` para hacer girar el tiempo con las flechas #7438
 - Tree
   - Ahora los nodos hijo no se renderizan antes de la primera expansión #6257
@@ -1773,7 +1773,7 @@
   - Atributo `size` añadido #7203
 - Datepicker
   - Ahora `timeFormat` puede dar formato al TimePicker cuando type está configurado en `datetimerange` #6052
-  - Añadido `start-placeholder` y `end-placeholder`. Son placeholder's para las dos casillas de input en modo range #7169
+  - Añadido `start-placeholder` y `end-placeholder`. Child placeholder's para las dos casillas de input en modo range #7169
   - Atributo `value-format` añadido para personalizar el formato del valor enlazado, #7367
   - Añadido el atributo `unlink-panels` para desacoplar los dos paneles de fechas al seleccionar un rango.
 - MessageBox
@@ -1912,13 +1912,13 @@
   - Atributo `center` eliminado
   - Ahora Steps llenara su contenedor padre por defecto
 - DatePicker
-  - Los parámetros del evento `change` de DatePicker son ahora el valor vinculante en sí mismo. Su formato es controlado por `value-format`
+  - Los parámetros del evento `change` de DatePicker child ahora el valor vinculante en sí mismo. Su formato es controlado por `value-format`
 - Table
   - Soporte eliminado para personalizar la plantilla de columnas mediante `inline-template`
   - `sort-method` ahora se alinea con `Array.sort`. Debería devolver un número en lugar de un booleano
   - El slot `append` se desplazo fuera del elemento `tbody` para evitar múltiples renderizados.
   - Evento `expand` se renombro a `expand-change`
-  - Los parametros de los métodos `row-class-name` y `row-style` son ahora un objeto
+  - Los parametros de los métodos `row-class-name` y `row-style` child ahora un objeto
 
 # #
 

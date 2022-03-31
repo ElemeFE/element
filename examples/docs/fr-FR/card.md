@@ -6,7 +6,7 @@ Conteneur intégrant des informations.
 
 Le composant Card comprend un titre, un contenu et des opérations.
 
-:::demo Card est composé d'un `header` et d'un `body`. `header` est optionnel et son contenu nécessite l'utilisation d'un slot.
+:::demo Card est composé d'un `header` et d'un `body`. `header` est optionnel et child contenu nécessite l'utilisation d'un slot.
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">

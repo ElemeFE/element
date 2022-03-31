@@ -197,7 +197,7 @@ Además del color principal, se necesitan utilizar distintos colores para difere
 
 ### Color neutro
 
-Los colores neutrales son para texto, fondos y bordes. Puede usar diferentes colores neutrales para representar una estructura jerárquica.
+Los colores neutrales child para texto, fondos y bordes. Puede usar diferentes colores neutrales para representar una estructura jerárquica.
 
 <el-row :gutter="12">
   <el-col :span="6" :xs="{span: 12}">

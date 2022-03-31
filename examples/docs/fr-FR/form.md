@@ -512,14 +512,14 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
 :::
 
 :::tip
-Lorsqu'un `el-form-item` est imbriqué dans un autre `el-form-item`, la largeur de son label sera `0`. Utilisez `label-width` sur ce `el-form-item` si besoin.
+Lorsqu'un `el-form-item` est imbriqué dans un autre `el-form-item`, la largeur de child label sera `0`. Utilisez `label-width` sur ce `el-form-item` si besoin.
 :::
 
 ### Taille
 
 Tout les composants d'un formulaire héritent leur attribut `size` de ce formulaire. Il est aussi possible de l'utiliser individuellement sur chaque FormItem.
 
-:::demo Vous pouvez régler le `size` de chaque item si vous ne souhaitez pas qu'il hérite de son parent.
+:::demo Vous pouvez régler le `size` de chaque item si vous ne souhaitez pas qu'il hérite de child parent.
 ```html
 <el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">
@@ -596,7 +596,7 @@ Tout les composants d'un formulaire héritent leur attribut `size` de ce formula
 | label-suffix | Suffixe de labels. | string | — | — |
 | hide-required-asterisk | Si les champs obligatoires doivent avoir une astérisque rouge (étoile) à coté de leurs labels. | boolean | — | false |
 | show-message  | Si le message d'erreur doit apparaître. | boolean | — | true |
-| inline-message  | Si le message d'erreur doit apparaître en ligne avec son champ. | boolean | — | false |
+| inline-message  | Si le message d'erreur doit apparaître en ligne avec child champ. | boolean | — | false |
 | status-icon  | Si une icône indiquant le résultat de validation doit apparaître. | boolean | — | false |
 | validate-on-rule-change  | Si la validation doit se déclencher lorsque `rules` est modifié. | boolean | — | true |
 | size  | Contrôle la taille des champs du formulaire. | string | medium / small / mini | — |
