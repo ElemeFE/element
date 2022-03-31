@@ -125,7 +125,7 @@
     },
     data() {
       return {
-        activeIndex: this.router ? this.$router.currentRoute.path : this.defaultActive,
+        activeIndex: this.defaultActive === '' && this.followRouter && this.router ? this.$router.currentRoute.path : this.defaultActive,
         openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
