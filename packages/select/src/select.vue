@@ -495,8 +495,11 @@
           this.valueOnMenuOpen = this.value;
         } else {
           this.emitChange(this.value);
-        }
 
+          if (this.multiple) {
+            this.resetInputHeight();
+          }
+        }
       },
 
       options() {
