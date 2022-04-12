@@ -1,5 +1,35 @@
 ## Changelog
 
+### 2.15.8
+
+*2022-04-12*
+
+#### Bug fixes
+
+- Drawer
+  - Fix appendToBody failure problem (#21264 by @cs1707)
+- Switch
+  - Fix toggling value problem(#19473 by @EdwinBetanc0urt)
+- Docs
+  - Fix input docs (#21723 by @justforuse)
+  - Fix DatePicker docs (#21663 by @justforuse)
+  - Fix Skeleton docs (#21601 by @yanwydxf)
+- Others
+  - Fix vue version (#21736 by @ckvv)
+
+#### Optimization
+
+- I18n
+  - add translation of Azerbaijani (#21012 by @ricardotondello)
+  - update translation of Slovenian (#21729 by @patik123)
+  - update translation of Slovak (#21711 by @sjaustirni )
+  - add translation of Icelandic (#21709 by @aronhr)
+  - add translation of Bengali (#21485 by @llwwtt)
+
+#### Others
+
+- Due to compatibility considerations, the PR on node-sass (#21019 by @linxsbox) of 2.15.7 release has been withdrawn and will be published in an appropriate version after re-evaluation.
+
 ### 2.15.7
 
 *2021-11-18*
