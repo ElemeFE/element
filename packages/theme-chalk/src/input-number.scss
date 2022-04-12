@@ -1,4 +1,3 @@
-@use "sass:math";
 @import "mixins/mixins";
 @import "common/var";
 @import "input";
@@ -138,7 +137,7 @@
 
     @include e((increase, decrease)) {
       height: auto;
-      line-height: #{math.div($--input-height - 2, 2)};
+      line-height: #{($--input-height - 2) / 2};
 
       [class*=el-icon] {
         transform: scale(.8);
@@ -162,19 +161,19 @@
 
     &[class*=medium] {
       [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-medium-height - 2, 2)};
+        line-height: #{($--input-medium-height - 2) / 2};
       }
     }
 
     &[class*=small] {
       [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-small-height - 2, 2)};
+        line-height: #{($--input-small-height - 2) / 2};
       }
     }
 
     &[class*=mini] {
       [class*=increase], [class*=decrease] {
-        line-height: #{math.div($--input-mini-height - 2, 2)};
+        line-height: #{($--input-mini-height - 2) / 2};
       }
     }
   }

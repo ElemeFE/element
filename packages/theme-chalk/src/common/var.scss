@@ -1,4 +1,3 @@
-@use "sass:math";
 /* Element Chalk Variables */
 
 // Special comment for theme configurator
@@ -487,7 +486,7 @@ $--cascader-tag-background: #f0f2f5;
 
 /* Group
 -------------------------- */
-$--group-option-flex: 0 0 math.div(1, 5) * 100% !default;
+$--group-option-flex: 0 0 (1/5) * 100% !default;
 $--group-option-offset-bottom: 12px !default;
 $--group-option-fill-hover: rgba($--color-black, 0.06) !default;
 $--group-title-color: $--color-black !default;

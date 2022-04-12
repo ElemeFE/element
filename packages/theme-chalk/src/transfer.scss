@@ -1,4 +1,3 @@
-@use "sass:math";
 @import "mixins/mixins";
 @import "mixins/utils";
 @import "common/var";
@@ -139,7 +138,7 @@
       font-size: 12px;
       display: inline-block;
       box-sizing: border-box;
-      border-radius: #{math.div($--transfer-filter-height, 2)};
+      border-radius: #{$--transfer-filter-height / 2};
       padding-right: 10px;
       padding-left: 30px;
     }
