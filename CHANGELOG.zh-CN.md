@@ -1,5 +1,35 @@
 ## 更新日志
 
+### 2.15.8
+
+*2022-04-12*
+
+#### Bug 修复
+
+- Drawer
+  - 修复 appendToBody 失效问题 (#21264 by @cs1707)
+- Switch
+  - 修复 toggling value 问题(#19473 by @EdwinBetanc0urt)
+- Docs
+  - 修复 input 文案 (#21723 by @justforuse)
+  - 修复 DatePicker 文案 (#21663 by @justforuse)
+  - 修复 Skeleton 文案 (#21601 by @yanwydxf)
+- 其他
+  - 修复 vue 版本(#21736 by @ckvv)
+
+#### 优化
+
+- I18n
+  - 新增 阿塞拜疆语 翻译 (#21012 by @ricardotondello)
+  - 更新 斯洛文尼亚语 翻译 (#21729 by @patik123)
+  - 更新 斯洛伐克语 翻译 (#21711 by @sjaustirni )
+  - 新增 冰岛语 的翻译 (#21709 by @aronhr)
+  - 新增 孟加拉 语的翻译 (#21485 by @llwwtt)
+
+#### 其他
+
+- 因兼容性考虑，撤回2.15.7关于node-sass的更新(#21019 by @linxsbox)，重新评估后会在后续合适版本上线
+
 ### 2.15.7
 
 *2021-11-18*
