@@ -306,6 +306,16 @@ export default {
     owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
   },
 
+  beforeUpdate() {
+    // #20453
+    if (this.$slots.header && this.$scopedSlots.header) {
+      this.columnConfig.renderHeader = (h, scope) => {
+        const renderHeader = this.$scopedSlots.header;
+        return renderHeader ? renderHeader(scope) : this.columnConfig.label;
+      };
+    }
+  },
+
   destroyed() {
     if (!this.$parent) return;
     const parent = this.$parent;
