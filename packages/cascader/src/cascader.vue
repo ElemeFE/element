@@ -641,8 +641,13 @@ export default {
       }
 
       if (tags) {
+        const reviseSize = {
+          mini: 0,
+          small: 2
+        };
         const offsetHeight = Math.round(tags.getBoundingClientRect().height);
-        const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
+        const reviseSizeNum = ['small', 'mini'].indexOf(this.realSize) > -1 ? reviseSize[this.realSize] : 6;
+        const height = Math.max(offsetHeight + reviseSizeNum, inputInitialHeight) + 'px';
         inputInner.style.height = height;
         if (this.dropDownVisible) {
           this.updatePopper();
