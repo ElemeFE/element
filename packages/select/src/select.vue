@@ -50,6 +50,7 @@
         :autocomplete="autoComplete || autocomplete"
         @focus="handleFocus"
         @blur="softFocus = false"
+        @click.stop="() => {}"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
