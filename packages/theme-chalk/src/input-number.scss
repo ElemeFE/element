@@ -137,7 +137,7 @@
 
     @include e((increase, decrease)) {
       height: auto;
-      line-height: #{($--input-height - 2) / 2};
+      line-height: calc(#{$--input-height - 2} / 2);
 
       [class*=el-icon] {
         transform: scale(.8);
@@ -161,19 +161,19 @@
 
     &[class*=medium] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-medium-height - 2) / 2};
+        line-height: calc(#{$--input-medium-height - 2} / 2);
       }
     }
 
     &[class*=small] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-small-height - 2) / 2};
+        line-height: calc(#{$--input-small-height - 2} / 2);
       }
     }
 
     &[class*=mini] {
       [class*=increase], [class*=decrease] {
-        line-height: #{($--input-mini-height - 2) / 2};
+        line-height: calc(#{$--input-mini-height - 2} / 2);
       }
     }
   }
