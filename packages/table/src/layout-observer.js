@@ -61,7 +61,7 @@ export default {
       for (let i = 0, j = ths.length; i < j; i++) {
         const th = ths[i];
         th.style.width = layout.scrollY ? layout.gutterWidth + 'px' : '0';
-        th.style.display = layout.scrollY ? '' : 'none';
+        // th.style.display = layout.scrollY ? '' : 'none';
       }
     }
   }
