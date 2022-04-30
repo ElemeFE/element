@@ -12,7 +12,7 @@
       v-bind="$attrs"
       v-on="$listeners"
       @click="clickHandler"
-      :src="src"
+      :src="thumbnailSrc || src"
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
@@ -55,6 +55,7 @@
       fit: String,
       lazy: Boolean,
       scrollContainer: {},
+      thumbnailSrc: String,
       previewSrcList: {
         type: Array,
         default: () => []
@@ -104,8 +105,15 @@
     },
 
     watch: {
+      thumbnailSrc(val) {
+        let { show, loadImage } = this;
+        show && loadImage();
+      },
       src(val) {
-        this.show && this.loadImage();
+        let { thumbnailSrc, show, loadImage } = this;
+        if (!thumbnailSrc) {
+          show && loadImage();
+        }
       },
       show(val) {
         val && this.loadImage();
@@ -143,7 +151,8 @@
             const value = this.$attrs[key];
             img.setAttribute(key, value);
           });
-        img.src = this.src;
+        const { thumbnailSrc, src } = this;
+        img.src = thumbnailSrc || src;
       },
       handleLoad(e, img) {
         this.imageWidth = img.width;

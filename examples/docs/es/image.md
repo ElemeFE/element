@@ -129,7 +129,8 @@ Además de las características nativas de img, soporte de carga perezosa, marca
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         srcList: [
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         ]
       }
     }
@@ -141,7 +142,7 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 ### Atributos
 | Atributo | Descripción | Tipo | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| src | origen de la imagen, igual que en nativo | string | — | - |
+| src | origen de la imagen, igual que en nativo. No funcionará cuando 'Thumbnail src' sea el valor de 'src' | string | — | - |
 | fit | Indica como la imagen debe adaptarse al contenedor, lo mismo que [object-fit](https://developer.mozilla.org/es/docs/Web/CSS/object-fit) | string | fill / contain / cover / none / scale-down | - |
 | alt | alt nativo | string | - | - |
 | referrer-policy | referrerPolicy nativo | string | - | - |
@@ -149,7 +150,7 @@ Además de las características nativas de img, soporte de carga perezosa, marca
 | scroll-container | El contenedor para añadir el scroll listener cuando se utiliza lazy load | string / HTMLElement | — | El contenedor padre más cercano cuya propiedad de desbordamiento es auto o scroll |
 | preview-src-list | permitir una vista previa grande de la imagen | Array | — | - |
 | z-index | establecer el z-index de la vista previa de la imagen | Number | — | 2000 |
-
+| thumbnail-src | Presentación de miniaturas，El valor de src se ignora cuando hay un valor. `preview-src-list` after opening preview，La imagen de previsualización es leer el valor de `src` | string | — | - |
 ### Eventos
 | Nombre del evento | Descripción | Parámetros |
 |---------- |-------- |---------- |

@@ -1,6 +1,6 @@
 import { createTest, createVue, destroyVM, wait } from '../util';
 import Image from 'packages/image';
-import { IMAGE_SUCCESS, IMAGE_FAIL } from '../mocks/uri';
+import { IMAGE_SUCCESS, IMAGE_FAIL, IMAGE_INFO } from '../mocks/uri';
 
 const src = IMAGE_SUCCESS;
 
@@ -129,6 +129,35 @@ describe('Image', () => {
     await wait();
 
     expect(document.querySelector('.el-image-viewer__wrapper')).to.exist;
+    document.querySelector('.el-image-viewer__close').click();
+    await wait(1000);
+    expect(document.querySelector('.el-image-viewer__wrapper')).to.not.exist;
+  });
+  it('thumbnail preview.', async() => {
+    let thumbnailSrc = IMAGE_INFO;
+    vm = createVue({
+      template: `
+        <el-image :src="src" :thumbnail-src="thumbnailSrc" :preview-src-list="srcList"></el-image>
+      `,
+      data() {
+        return {
+          thumbnailSrc,
+          src,
+          srcList: [src]
+        };
+      }
+    }, true);
+    await wait(500);
+    let innerImg = vm.$el.querySelector('.el-image__inner');
+    expect(innerImg.src).to.equal(thumbnailSrc);
+    vm.$el.querySelector('.el-image__inner').click();
+    await wait();
+
+    expect(document.querySelector('.el-image-viewer__wrapper')).to.exist;
+    await wait(1000);
+    let viewerImg = document.querySelector('.el-image-viewer__img');
+    expect(viewerImg.src).to.equal(src);
+    await wait();
     document.querySelector('.el-image-viewer__close').click();
     await wait(1000);
     expect(document.querySelector('.el-image-viewer__wrapper')).to.not.exist;
