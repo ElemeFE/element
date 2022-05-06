@@ -92,6 +92,7 @@
           if (this.isGroup) {
             this.isLimitExceeded = false;
             (this._checkboxGroup.min !== undefined &&
+              this.model.length >= this._checkboxGroup.min &&
               val.length < this._checkboxGroup.min &&
               (this.isLimitExceeded = true));
 
