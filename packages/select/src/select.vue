@@ -32,13 +32,13 @@
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
-          :closable="!selectDisabled"
+          :closable="!selectDisabled && !item.disabled"
           :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
-          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          <span class="el-select__tags-text" :class="{ 'is-disabled': item.disabled }">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
@@ -771,6 +771,7 @@
       },
 
       deleteTag(event, tag) {
+        console.log(tag)
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.selectDisabled) {
           const value = this.value.slice();
