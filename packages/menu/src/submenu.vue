@@ -231,6 +231,16 @@
         const title = this.$refs['submenu-title'];
         title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
       },
+      submenuKeyUp(event) {
+        // If enter on submenu title, open submenu
+        if (event.keyCode === 13) {
+          if (!this.opened) {
+            this.rootMenu.openMenu(this.index, this.indexPath);
+          } else {
+            this.rootMenu.closeMenu(this.index);
+          }
+        }
+      },
       updatePlacement() {
         this.currentPlacement = this.mode === 'horizontal' && this.isFirstLevel
           ? 'bottom-start'
@@ -329,6 +339,7 @@
           on-mouseenter={this.handleMouseenter}
           on-mouseleave={() => this.handleMouseleave(false)}
           on-focus={this.handleMouseenter}
+          on-keyup={this.submenuKeyUp}
         >
           <div
             class="el-submenu__title"
@@ -337,6 +348,7 @@
             on-mouseenter={this.handleTitleMouseenter}
             on-mouseleave={this.handleTitleMouseleave}
             style={[paddingStyle, titleStyle, { backgroundColor }]}
+            tabindex="-1"
           >
             {$slots.title}
             <i class={[ 'el-submenu__icon-arrow', submenuTitleIcon ]}></i>
