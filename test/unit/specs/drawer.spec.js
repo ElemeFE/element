@@ -132,6 +132,30 @@ describe('Drawer', () => {
     expect(vm.$el.querySelector('.el-drawer__body')).not.to.exist;
   });
 
+  it('should destroy every child by visible change when destroy-on-close flag is true', async() => {
+    vm = createVue({
+      template: `
+        <el-drawer :title='title' :visible='visible' :append-to-body='true' :destroy-on-close='true' ref='drawer'>
+           <span>${content}</span>
+        </el-drawer>
+      `,
+      data() {
+        return {
+          title,
+          visible: true
+        };
+      }
+    });
+
+    await waitImmediate();
+    expect(vm.$el.querySelector('.el-drawer__body span').textContent).to.equal(
+      content
+    );
+    vm.visible = false;
+    await wait(400);
+    expect(vm.$el.querySelector('.el-drawer__body')).not.to.exist;
+  });
+
   it('should close dialog by clicking the close button', async() => {
     vm = createVue({
       template: `

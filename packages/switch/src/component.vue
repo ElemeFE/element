@@ -134,7 +134,9 @@
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value
-          this.$refs.input.checked = this.checked;
+          if (this.$refs.input) {
+            this.$refs.input.checked = this.checked;
+          }
         });
       },
       setBackgroundColor() {

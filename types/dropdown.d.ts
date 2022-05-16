@@ -32,4 +32,7 @@ export declare class ElDropdown extends ElementUIComponent {
 
   /** Dropdown tabindex */
   tabindex: number
+
+  /** Whether Dropdown is disabled */
+  disabled: boolean
 }
