@@ -197,7 +197,9 @@
         this.rendered = true;
         this.open();
         if (this.appendToBody) {
-          document.body.appendChild(this.$el);
+          this.$nextTick(()=>{
+            document.body.appendChild(this.$el);
+          });
         }
       }
     },
