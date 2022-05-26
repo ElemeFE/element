@@ -412,7 +412,7 @@
       },
 
       // TODO 使用 CSS transform
-      syncPostion: throttle(20, function() {
+      syncPostion() {
         const { scrollLeft, scrollTop, offsetWidth, scrollWidth } = this.bodyWrapper;
         const { headerWrapper, footerWrapper, fixedBodyWrapper, rightFixedBodyWrapper } = this.$refs;
         if (headerWrapper) headerWrapper.scrollLeft = scrollLeft;
@@ -427,17 +427,30 @@
         } else {
           this.scrollPosition = 'middle';
         }
+      },
+
+      throttleSyncPostion: throttle(16, function() {
+        this.syncPostion();
       }),
 
+      onScroll(evt) {
+        let raf = window.requestAnimationFrame;
+        if (!raf) {
+          this.throttleSyncPostion();
+        } else {
+          raf(this.syncPostion);
+        }
+      },
+
       bindEvents() {
-        this.bodyWrapper.addEventListener('scroll', this.syncPostion, { passive: true });
+        this.bodyWrapper.addEventListener('scroll', this.onScroll, { passive: true });
         if (this.fit) {
           addResizeListener(this.$el, this.resizeListener);
         }
       },
 
       unbindEvents() {
-        this.bodyWrapper.removeEventListener('scroll', this.syncPostion, { passive: true });
+        this.bodyWrapper.removeEventListener('scroll', this.onScroll, { passive: true });
         if (this.fit) {
           removeResizeListener(this.$el, this.resizeListener);
         }
