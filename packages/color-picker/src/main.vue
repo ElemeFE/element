@@ -94,8 +94,8 @@
       },
       color: {
         deep: true,
-        handler() {
-          this.showPanelColor = true;
+        handler(color) {
+          this.showPanelColor = !!color.value;
         }
       },
       displayedColor(val) {
@@ -144,6 +144,7 @@
           if (this.value) {
             this.color.fromString(this.value);
           } else {
+            this.color.value = '';
             this.showPanelColor = false;
           }
         });
