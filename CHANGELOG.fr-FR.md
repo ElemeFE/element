@@ -1,5 +1,39 @@
 ## Changelog
 
+### 2.15.9
+
+*2022-06-02*
+
+#### Bug fixes
+
+- Table
+  - Fix Tabl-header shake bug (#21863 by @bofeng)
+  - Fix when partial import  show `el-checkbox not imported` error (#21828 by @bobohuochai)
+- FormItem
+  - Fix  change rules  verification not reset bug (#21892 by @bofeng)
+- Cascader
+  - Fix change options unexpect error (#21759 by @louiebb)
+- Docs
+  - Fix Popover docs (#21843 by @lod61)
+  - Fix Calendar docs (#21814 by @GoJam11)
+  - Fix TimePicker docs (#21803 by @Alanscut)
+  - Fix DatePicker docs (#21877 by @Nirvanaiu)
+- 其他
+  - Fix codepen display bug (#21863 by @bofeng)
+
+#### Optimization
+
+- I18n
+  - Add translation of Swahili (#21895 by @quilltouch)
+- Chore
+  - Use launch-editor-middleware in dev environment (#21633 by @polemices)
+- DatePicker & Cascader
+  - Optimize the dropdown animation direction (#21806 by @XivLaw)
+- Tooltip
+  - Optimize `getFirstElement` code (#21886 by @zhankang)
+- Input
+  - Optimize scss code (#21558 by @cheese-git)
+
 ### 2.15.8
 
 *2022-04-12*
