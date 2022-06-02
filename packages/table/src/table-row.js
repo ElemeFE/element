@@ -1,3 +1,4 @@
+import ElCheckbox from 'element-ui/packages/checkbox';
 export default {
   name: 'ElTableRow',
   props: [
@@ -20,6 +21,9 @@ export default {
     'handleCellMouseEnter',
     'fixed'
   ],
+  components: {
+    ElCheckbox
+  },
   render() {
     const {
       columns,
