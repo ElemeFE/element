@@ -159,7 +159,8 @@ const PopperMixin = {
     arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
-    popperOptions: Popper.props.popperOptions
+    popperOptions: Popper.props.popperOptions,
+    transformOrigin: Popper.props.transformOrigin
   },
   methods: Popper.methods,
   data: Popper.data,
