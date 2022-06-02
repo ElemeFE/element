@@ -475,7 +475,7 @@ Les callback de validations personnalisées doivent être appelées. Un usage pl
       { type: 'number', message: 'l\'âge doit être un nombre'}
     ]"
   >
-    <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
+    <el-input v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">Soumettre</el-button>
