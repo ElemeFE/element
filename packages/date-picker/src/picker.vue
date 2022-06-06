@@ -98,7 +98,6 @@ const NewPopper = {
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     arrowOffset: Popper.props.arrowOffset,
-    placement: Popper.props.placement,
     transformOrigin: Popper.props.transformOrigin
   },
   methods: Popper.methods,
