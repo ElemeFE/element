@@ -316,6 +316,17 @@
           ev.preventDefault();
           hasInput.click();
         }
+      },
+
+      reload() {
+        if (this.lazy && this.load) {
+          const loadFn = this.load;
+          loadFn({level: 0}, (data) => {
+            this.root.clearChildren()
+            this.root.doCreateChildren(data);
+            this.store._initDefaultCheckedNodes();
+          });
+        }
       }
     },
 

@@ -482,4 +482,8 @@ export default class Node {
       }
     }
   }
+
+  clearChildren() {
+    this.childNodes = [];
+  }
 }
