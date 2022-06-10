@@ -6,6 +6,7 @@
       'el-dropdown-menu__item--divided': divided
     }"
     @click="handleClick"
+    @keypress.space="handleClick"
     :aria-disabled="disabled"
     :tabindex="disabled ? null : -1"
   >

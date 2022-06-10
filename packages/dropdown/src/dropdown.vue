@@ -144,7 +144,7 @@
           this.menuItems[0].focus();
           ev.preventDefault();
           ev.stopPropagation();
-        } else if (keyCode === 13) { // space enter选中
+        } else if ([32, 13].indexOf(keyCode) > -1) { // space || enter
           this.handleClick();
         } else if ([9, 27].indexOf(keyCode) > -1) { // tab || esc
           this.hide();
@@ -167,7 +167,7 @@
           this.menuItems[nextIndex].focus();
           ev.preventDefault();
           ev.stopPropagation();
-        } else if (keyCode === 13) { // enter选中
+        } else if ([32, 13].indexOf(keyCode) > -1) { // space || enter
           this.triggerElmFocus();
           target.click();
           if (this.hideOnClick) { // click关闭
