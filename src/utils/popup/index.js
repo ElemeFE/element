@@ -8,6 +8,8 @@ let idSeed = 1;
 
 let scrollBarWidth;
 
+let lockScrollCount = 0;
+
 export default {
   props: {
     visible: {
@@ -132,6 +134,7 @@ export default {
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
+          lockScrollCount++;
           this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
           if (this.withoutHiddenClass) {
             this.bodyPaddingRight = document.body.style.paddingRight;
@@ -204,11 +207,11 @@ export default {
     },
 
     restoreBodyStyle() {
-      if (this.modal && this.withoutHiddenClass) {
+      lockScrollCount--;
+      if (lockScrollCount === 0) {
         document.body.style.paddingRight = this.bodyPaddingRight;
         removeClass(document.body, 'el-popup-parent--hidden');
       }
-      this.withoutHiddenClass = true;
     }
   }
 };
