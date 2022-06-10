@@ -184,6 +184,9 @@
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
   import { stripScript, stripStyle, stripTemplate } from '../util';
+  import config from '../../package.json';
+  // 获取当前package.json中vue的版本好
+  const vueVersion = config.devDependencies['vue'];
   const { version } = Element;
 
   export default {
@@ -205,7 +208,8 @@
       goCodepen() {
         // since 2.6.2 use code rather than jsfiddle https://blog.codepen.io/documentation/api/prefill/
         const { script, html, style } = this.codepen;
-        const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>' +
+        // 将版本号拼接到链接中，获取vue在线包
+        const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue@' + vueVersion + '/dist/vue.js"></scr' + 'ipt>' +
         '\n<scr' + `ipt src="//unpkg.com/element-ui@${ version }/lib/index.js"></scr` + 'ipt>';
         let jsTpl = (script || '').replace(/export default/, 'var Main =').trim();
         let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
