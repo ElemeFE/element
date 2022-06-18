@@ -3,7 +3,7 @@ import { markNodeData, NODE_KEY } from './util';
 import { arrayFindIndex } from 'element-ui/src/utils/util';
 
 export const getChildState = node => {
-  let all = true;
+  let all = node.loaded;
   let none = true;
   let allWithoutDisable = true;
   for (let i = 0, j = node.length; i < j; i++) {
@@ -463,11 +463,11 @@ export default class Node {
       this.loading = true;
 
       const resolve = (children) => {
-        this.loaded = true;
-        this.loading = false;
         this.childNodes = [];
 
         this.doCreateChildren(children, defaultProps);
+        this.loaded = true;
+        this.loading = false;
 
         this.updateLeafState();
         if (callback) {
