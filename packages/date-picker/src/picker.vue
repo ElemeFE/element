@@ -580,7 +580,7 @@ export default {
       boundariesPadding: 0,
       gpuAcceleration: false
     };
-    this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+    this.currentPlacement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
 
     this.$on('fieldReset', this.handleFieldReset);
   },
