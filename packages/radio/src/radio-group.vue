@@ -35,7 +35,11 @@
       size: String,
       fill: String,
       textColor: String,
-      disabled: Boolean
+      disabled: Boolean,
+      controllable: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -67,6 +71,9 @@
     },
     methods: {
       handleKeydown(e) { // 左右上下按键 可以在radio组内切换不同选项
+        if (this.disabled || this.controllable) {
+          return;
+        }
         const target = e.target;
         const className = target.nodeName === 'INPUT' ? '[type=radio]' : '[role=radio]';
         const radios = this.$el.querySelectorAll(className);

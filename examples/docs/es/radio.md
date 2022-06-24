@@ -176,6 +176,7 @@ Radio con estilo de botón.
 | value / v-model | valor enlazado | string / number / boolean | — | — |
 | label    | el valor del Radio                       | string / number / boolean | —                     | —           |
 | disabled | si el Radio está deshabilitado           | boolean                   | —                     | false       |
+| controllable | desactivar eventos de teclado        | boolean                   | —                     | false       |
 | border   | agregar borde alrededor del elemento Radio | boolean                   | —                     | false       |
 | size     | tamaño del elemento Radio, solo funciona si `border` es verdadero | string                    | medium / small / mini | —           |
 | name     | atributo nativo `name`                 | string                    | —                     | —           |

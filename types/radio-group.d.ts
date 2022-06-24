@@ -13,6 +13,9 @@ export declare class ElRadioGroup extends ElementUIComponent {
   /** Whether the nesting radios are disabled */
   disabled: boolean
 
+  /** Whether Keydown Event is disabled  */
+  controllable: boolean
+
   /** Font color when button is active */
   textColor: string
 }
