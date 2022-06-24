@@ -98,12 +98,17 @@ const NewPopper = {
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     arrowOffset: Popper.props.arrowOffset,
-    placement: Popper.props.placement,
     transformOrigin: Popper.props.transformOrigin
   },
   methods: Popper.methods,
   data() {
     return merge({ visibleArrow: true }, Popper.data);
+  },
+  computed: {
+    // fix: 21941 Fix the `placement` change error, which makes the component unusable `bug`
+    placement() {
+      return PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+    }
   },
   beforeDestroy: Popper.beforeDestroy
 };
@@ -580,7 +585,6 @@ export default {
       boundariesPadding: 0,
       gpuAcceleration: false
     };
-    this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
 
     this.$on('fieldReset', this.handleFieldReset);
   },
