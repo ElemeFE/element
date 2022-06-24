@@ -136,16 +136,16 @@ export default {
   },
 
   watch: {
+    value() {
+      this.syncCheckedValue();
+      this.checkStrictly && this.calculateCheckedNodePaths();
+    },
     options: {
       handler: function() {
         this.initStore();
       },
       immediate: true,
       deep: true
-    },
-    value() {
-      this.syncCheckedValue();
-      this.checkStrictly && this.calculateCheckedNodePaths();
     },
     checkedValue(val) {
       if (!isEqual(val, this.value)) {

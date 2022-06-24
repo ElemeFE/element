@@ -1,4 +1,3 @@
-@use "sass:math";
 @import "mixins/mixins";
 @import "common/var";
 
@@ -23,7 +22,7 @@
     @include when(fixed) {
       position: absolute;
       top: 0;
-      right: #{1 + math.div($--badge-size, 2)};
+      right: #{1 + $--badge-size / 2};
       transform: translateY(-50%) translateX(100%);
 
       @include when(dot) {

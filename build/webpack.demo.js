@@ -7,6 +7,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const launchEditorMiddleware = require('launch-editor-middleware');
 
 const config = require('./config');
 
@@ -33,7 +34,16 @@ const webpackConfig = {
     host: '0.0.0.0',
     port: 8085,
     publicPath: '/',
-    hot: true
+    hot: true,
+    before: (app) => {
+      /*
+       * 编辑器类型 :此处的指令表示的时各个各个编辑器在cmd或terminal中的命令
+       * webstorm
+       * code // vscode
+       * idea
+      */
+      app.use('/__open-in-editor', launchEditorMiddleware('code'));
+    }
   },
   performance: {
     hints: false

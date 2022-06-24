@@ -269,7 +269,7 @@ export default {
 
 ### Tamaño
 
-:::demo Añada el atributo `size` para cambiar el tamaño del Input. Además del tamaño predeterminado, hay otras tres opciones: `large`, `small` y `mini`.
+:::demo Añada el atributo `size` para cambiar el tamaño del Input. Además del tamaño predeterminado, hay otras tres opciones: `medium`, `small` y `mini`.
 
 ```html
 <div class="demo-input-size">

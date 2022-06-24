@@ -476,7 +476,7 @@ Custom validate callback function must be called. See more advanced usage at [as
       { type: 'number', message: 'age must be a number'}
     ]"
   >
-    <el-input type="age" v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
+    <el-input v-model.number="numberValidateForm.age" autocomplete="off"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
