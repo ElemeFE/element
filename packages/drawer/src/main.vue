@@ -19,7 +19,7 @@
           :aria-label="title"
           class="el-drawer"
           :class="[direction, customClass]"
-          :style="isHorizontal ? `width: ${drawerSize}` : `height: ${drawerSize}`"
+          :style="isHorizontal ? `width: ${drawerSize};${positionPx}` : `height: ${drawerSize};${positionPx}`"
           ref="drawer"
           role="dialog"
           tabindex="-1"
@@ -88,6 +88,10 @@ export default {
       type: Boolean,
       default: true
     },
+    openPosition: {
+      type: [Number, String],
+      default: 0
+    },
     showClose: {
       type: Boolean,
       default: true
@@ -118,6 +122,25 @@ export default {
     },
     drawerSize() {
       return typeof this.size === 'number' ? `${this.size}px` : this.size;
+    },
+    positionPx() {
+      let size;
+      if (typeof this.openPosition === 'number') {
+        size = `${this.openPosition}px`;
+      } else {
+        size = this.openPosition;
+      }
+      let direction;
+      if (this.direction === 'rtl') {
+        direction = 'right';
+      } else if (this.direction === 'ltr') {
+        direction = 'left';
+      } else if (this.direction === 'ttb') {
+        direction = 'top';
+      } else {
+        direction = 'bottom';
+      }
+      return `${direction}:${size}`;
     }
   },
   data() {
