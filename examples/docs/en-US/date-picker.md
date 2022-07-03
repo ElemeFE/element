@@ -456,6 +456,7 @@ When picking a date range, you can assign the time part for start date and end d
 | prefix-icon | Custom prefix icon class | string | — | el-icon-date |
 | clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 | validate-event | whether to trigger form validation | boolean | - | true |
+| append-to-body | whether to append DatePicker itself to body | boolean   | — | true |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

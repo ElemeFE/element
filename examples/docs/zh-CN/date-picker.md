@@ -409,6 +409,7 @@
 | prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |
+| append-to-body | DetePicker 自身是否插入至 body 元素上。   | boolean   | — | true |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
