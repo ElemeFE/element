@@ -33,6 +33,7 @@
         required: true
       },
       label: [String, Number],
+      labelFilter: String,
       created: Boolean,
       disabled: {
         type: Boolean,
@@ -135,7 +136,7 @@
       },
 
       queryChange(query) {
-        this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
+        this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.labelFilter || this.currentLabel) || this.created;
         if (!this.visible) {
           this.select.filteredOptionsCount--;
         }
