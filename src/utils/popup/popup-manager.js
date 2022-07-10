@@ -18,7 +18,7 @@ const getModal = function() {
     modalDom.addEventListener('touchmove', function(event) {
       event.preventDefault();
       event.stopPropagation();
-    });
+    }, { passive:true } );
 
     modalDom.addEventListener('click', function() {
       PopupManager.doOnModalClick && PopupManager.doOnModalClick();
