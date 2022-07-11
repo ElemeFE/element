@@ -7,6 +7,7 @@ export default {
     datepicker: {
       now: '此刻',
       today: '今天',
+      longTerm: '长期',
       cancel: '取消',
       clear: '清空',
       confirm: '确定',

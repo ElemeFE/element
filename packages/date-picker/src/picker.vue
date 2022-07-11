@@ -91,6 +91,7 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
 import merge from 'element-ui/src/utils/merge';
+import { t } from 'element-ui/src/locale';
 
 const NewPopper = {
   props: {
@@ -258,6 +259,9 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   }
 };
+
+const S_LONG_TERM = new Date(9999, 11, 31).toDateString();
+
 const PLACEMENT_MAP = {
   left: 'bottom-start',
   center: 'bottom',
@@ -276,6 +280,9 @@ const parseAsFormatAndType = (value, customFormat, type, rangeSeparator = '-') =
 
 const formatAsFormatAndType = (value, customFormat, type) => {
   if (!value) return null;
+
+  if (value.toDateString() === S_LONG_TERM) return t('el.datepicker.longTerm');
+
   const formatter = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
