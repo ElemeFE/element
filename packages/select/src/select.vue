@@ -48,6 +48,7 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
+        :placeholder: "value.length > 0 ? '' : currentPlaceholder"
         @focus="handleFocus"
         @blur="softFocus = false"
         @keyup="managePlaceholder"
