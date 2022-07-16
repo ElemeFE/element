@@ -611,6 +611,9 @@ export default {
     formatToValue(date) {
       const isFormattable = isDateObject(date) || (Array.isArray(date) && date.every(isDateObject));
       if (this.valueFormat && isFormattable) {
+        if (this.valueFormat === "timestamp") {
+          return Array.isArray(date) ? date.map(d => d.getTime()) : date.getTime();
+        }
         return formatAsFormatAndType(date, this.valueFormat, this.type, this.rangeSeparator);
       } else {
         return date;
