@@ -1,5 +1,158 @@
 ## Changelog
 
+### 2.15.9
+
+*2022-06-02*
+
+#### Bug fixes
+
+- Table
+  - Fix Tabl-header shake bug (#21863 by @bofeng)
+  - Fix when partial import  show `el-checkbox not imported` error (#21828 by @bobohuochai)
+- FormItem
+  - Fix  change rules  verification not reset bug (#21892 by @bofeng)
+- Cascader
+  - Fix change options unexpect error (#21759 by @louiebb)
+- Docs
+  - Fix Popover docs (#21843 by @lod61)
+  - Fix Calendar docs (#21814 by @GoJam11)
+  - Fix TimePicker docs (#21803 by @Alanscut)
+  - Fix DatePicker docs (#21877 by @Nirvanaiu)
+- 其他
+  - Fix codepen display bug (#21863 by @bofeng)
+
+#### Optimization
+
+- I18n
+  - Add translation of Swahili (#21895 by @quilltouch)
+- Chore
+  - Use launch-editor-middleware in dev environment (#21633 by @polemices)
+- DatePicker & Cascader
+  - Optimize the dropdown animation direction (#21806 by @XivLaw)
+- Tooltip
+  - Optimize `getFirstElement` code (#21886 by @zhankang)
+- Input
+  - Optimize scss code (#21558 by @cheese-git)
+
+### 2.15.8
+
+*2022-04-12*
+
+#### Bug fixes
+
+- Drawer
+  - Fix appendToBody failure problem (#21264 by @cs1707)
+- Switch
+  - Fix toggling value problem(#19473 by @EdwinBetanc0urt)
+- Docs
+  - Fix input docs (#21723 by @justforuse)
+  - Fix DatePicker docs (#21663 by @justforuse)
+  - Fix Skeleton docs (#21601 by @yanwydxf)
+- Others
+  - Fix vue version (#21736 by @ckvv)
+
+#### Optimization
+
+- I18n
+  - add translation of Azerbaijani (#21012 by @ricardotondello)
+  - update translation of Slovenian (#21729 by @patik123)
+  - update translation of Slovak (#21711 by @sjaustirni )
+  - add translation of Icelandic (#21709 by @aronhr)
+  - add translation of Bengali (#21485 by @llwwtt)
+
+#### Others
+
+- Due to compatibility considerations, the PR on node-sass (#21019 by @linxsbox) of 2.15.7 release has been withdrawn and will be published in an appropriate version after re-evaluation.
+
+### 2.15.7
+
+*2021-11-18*
+
+#### Bug fixes
+
+- Select
+  - fix click icon triggering dropdown (#21314 by @dennyak47)
+  - fix keydown event when composition (#21336 by @bchen1029)
+- Badge
+  - fix type class when is-dot (#21308 by @adaex)
+- Form
+  - validate method reject error info (#21374 by @cs1707)
+- Table
+  - fix resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - fix toggleAllSelection bug when table is empty (#21456 by @cs1707)
+  - optimize performance (#21330 by @cs1707)
+- Button
+  - fix disabled priority (#21375 by @cs1707)
+- Descriptions
+  - fix label slot bug (#21462 by @cs1707)
+- SASS
+  - replace node-sass with dart-sass (#21019 by @linxsbox)
+- Docs
+  - fix skeleton typos (#21408 by @zhhbstudio)
+
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug fixes
+
+- Cascader
+  - fix a bug that makes the browser jitter in zoom mode (#21207 by @cs1707)
+  - optimize performance (#21231 by @cs1707)
+- Select
+  - fix long text overflow in multiple mode (#21237 by @cs1707)
+- Dropdown
+  - add disabled property (#21235 by @mshioda)
+- Radio
+  - fix checked state when browser go back (#21250 by @cs1707)
+- Descriptions
+  - fix type declaration (#21265 by @adaex)
+  - avoid table style conflict (#21254 by @adaex)
+- Drawer
+  - fix append to body (#21264 by @cs1707)
+- Local
+  - fix italian mistake (#21012 by @ricardotondello)
+
+### 2.15.5
+
+*2021-08-04*
+
+#### Bug fixes
+
+- Select
+  - fix resetInputHeight (#21201 by @cs1707)
+
+### 2.15.4
+
+*2021-08-03*
+
+#### New features
+
+- Descriptions 
+  - add description component (#21129 by @cs1707)
+- Result 
+  - add result component (#21171 by @cs1707)
+
+#### Bug fixes
+
+- Utils 
+  - fix isScroll (#21098 by @canvascat)
+- Translation 
+  - update it.js (#21133 by @bliberi)
+- RadioGroup 
+  - fix RadioGroup used in component causes exception #17908 (#20783 by @lceric)
+- Message 
+  - fix message[type] (#21088 by @cs1707)
+- Carousel 
+  - reset the timer when setActiveItem method is called (#20846 by @Nekojita1)
+- Cascader 
+  - fix emitPath (#21185 by @cs1707)
+- Select 
+  - fix select filterable bug (#17494 by @profore)
+  - fix a bug that makes the browser jitter in zoom mode (#21197 by @cs1707)
+- Tree 
+  - fix insertChild (#21194 by @cs1707)
+  
 ### 2.15.3
 
 *2021-06-29*
