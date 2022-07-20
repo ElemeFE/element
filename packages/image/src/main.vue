@@ -59,6 +59,7 @@
         type: Array,
         default: () => []
       },
+      viewerIndex: Number,
       zIndex: {
         type: Number,
         default: 2000
@@ -94,6 +95,10 @@
         return Array.isArray(previewSrcList) && previewSrcList.length > 0;
       },
       imageIndex() {
+        if(this.viewerIndex !== undefined) {
+          return this.viewerIndex;
+        }
+
         let previewIndex = 0;
         const srcIndex = this.previewSrcList.indexOf(this.src);
         if (srcIndex >= 0) {
