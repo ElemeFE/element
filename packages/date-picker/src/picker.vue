@@ -281,7 +281,7 @@ const parseAsFormatAndType = (value, customFormat, type, rangeSeparator = '-') =
 const formatAsFormatAndType = (value, customFormat, type) => {
   if (!value) return null;
 
-  if (value.toDateString() === S_LONG_TERM) return t('el.datepicker.longTerm');
+  if (type === "date"  && value.toDateString() === S_LONG_TERM) return t('el.datepicker.longTerm');
 
   const formatter = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
