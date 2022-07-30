@@ -36,12 +36,12 @@
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
         <img
-          v-for="(url, i) in urlList"
+          v-for="(url, i) in urlListFormat"
           v-if="i === index"
           ref="img"
           class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
+          :key="url.id"
+          :src="currentImg.src"
           :style="imgStyle"
           @load="handleImgLoad"
           @error="handleImgError"
@@ -120,6 +120,13 @@ export default {
     };
   },
   computed: {
+    urlListFormat() {
+      return this.urlList.map(item => {
+        return typeof item === 'string'
+          ? { id: item, src: item}
+          : item
+      })
+    },
     isSingle() {
       return this.urlList.length <= 1;
     },
@@ -130,7 +137,7 @@ export default {
       return this.index === this.urlList.length - 1;
     },
     currentImg() {
-      return this.urlList[this.index];
+      return this.urlListFormat[this.index];
     },
     imgStyle() {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform;
@@ -157,14 +164,17 @@ export default {
         this.onSwitch(val);
       }
     },
-    currentImg(val) {
-      this.$nextTick(_ => {
-        const $img = this.$refs.img[0];
-        if (!$img.complete) {
-          this.loading = true;
-        }
-      });
-    }
+    currentImg: {
+      handler(val) {
+        this.$nextTick(_ => {
+          const $img = this.$refs.img[0];
+          if (!$img.complete) {
+            this.loading = true;
+          }
+        });
+      },
+      deep: true,
+    },
   },
   methods: {
     hide() {
