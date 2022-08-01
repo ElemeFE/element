@@ -93,7 +93,15 @@
         type: [String, Array, Function],
         default: ''
       },
-      format: Function
+      format: Function,
+      gapPercentage: {
+        type: Number,
+        validator: val => val >= 0 && val < 100
+      },
+      gapPosition: {
+        type: String,
+        validator: val => ['top', 'bottom', 'left', 'right'].indexOf(val) > -1
+      }
     },
     computed: {
       barStyle() {
@@ -114,19 +122,52 @@
       },
       trackPath() {
         const radius = this.radius;
-        const isDashboard = this.type === 'dashboard';
+        let beginPositionX = 0;
+        let beginPositionY = -radius;
+        let endPositionX = 0;
+        let endPositionY = -2 * radius;
+        switch (this.gapPos) {
+          case 'left':
+            beginPositionX = -radius;
+            beginPositionY = 0;
+            endPositionX = 2 * radius;
+            endPositionY = 0;
+            break;
+          case 'right':
+            beginPositionX = radius;
+            beginPositionY = 0;
+            endPositionX = -2 * radius;
+            endPositionY = 0;
+            break;
+          case 'bottom':
+            beginPositionY = radius;
+            endPositionY = 2 * radius;
+            break;
+          default:
+        }
+  
         return `
           M 50 50
-          m 0 ${isDashboard ? '' : '-'}${radius}
-          a ${radius} ${radius} 0 1 1 0 ${isDashboard ? '-' : ''}${radius * 2}
-          a ${radius} ${radius} 0 1 1 0 ${isDashboard ? '' : '-'}${radius * 2}
+          m ${beginPositionX},${beginPositionY}
+          a ${radius} ${radius} 0 1 1 ${endPositionX},${-endPositionY}
+          a ${radius} ${radius} 0 1 1 ${-endPositionX},${endPositionY}
           `;
       },
       perimeter() {
         return 2 * Math.PI * this.radius;
       },
       rate() {
-        return this.type === 'dashboard' ? 0.75 : 1;
+        return 1 - (this.gapPer || 0) / 100;
+      },
+      gapPer() {
+        // Support gapDeg = 0 when type = 'dashboard'
+        if (this.gapPercentage || this.gapPercentage === 0) {
+          return this.gapPercentage;
+        }
+        if (this.type === 'dashboard') {
+          return 25;
+        }
+        return undefined;
       },
       strokeDashoffset() {
         const offset = -1 * this.perimeter * (1 - this.rate) / 2;
@@ -187,6 +228,9 @@
         } else {
           return `${this.percentage}%`;
         }
+      },
+      gapPos() {
+        return this.gapPosition || (this.type === 'dashboard' && 'bottom') || 'top';
       }
     },
     methods: {
