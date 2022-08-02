@@ -307,11 +307,14 @@
 
       handleTimePick(value, visible, first) {
         if (isDate(value)) {
-          const newDate = this.value
-            ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
-            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
-          this.date = newDate;
-          this.emit(this.date, true);
+          let newDate = '';
+          if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+            newDate = this.value
+              ? modifyTime(this.value, value.getHours(), value.getMinutes(), value.getSeconds())
+              : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
+            this.date = newDate;
+          }
+          this.emit(newDate, true);
         } else {
           this.emit(value, true);
         }
@@ -376,15 +379,18 @@
       },
 
       confirm() {
+        let value = '';
         if (this.selectionMode === 'dates') {
           this.emit(this.value);
         } else {
           // value were emitted in handle{Date,Time}Pick, nothing to update here
           // deal with the scenario where: user opens the picker, then confirm without doing anything
-          const value = this.value
-            ? this.value
-            : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
-          this.date = new Date(value); // refresh date
+          if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+            value = this.value
+              ? this.value
+              : modifyWithTimeString(this.getDefaultValue(), this.defaultTime);
+            this.date = new Date(value); // refresh date
+          };
           this.emit(value);
         }
       },
