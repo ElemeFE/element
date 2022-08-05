@@ -336,9 +336,11 @@
 
     watch: {
       selectDisabled() {
-        this.$nextTick(() => {
-          this.resetInputHeight();
-        });
+        if (this.multiple) {
+          this.$nextTick(() => {
+            this.resetInputHeight();
+          });
+        }
       },
 
       propPlaceholder(val) {
@@ -654,7 +656,7 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
-          const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
+          const tagsHeight = Math.round(tags.getBoundingClientRect().height);
           const sizeInMap = this.initialInputHeight || 40;
           input.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
