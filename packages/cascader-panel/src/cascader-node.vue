@@ -6,6 +6,10 @@
   const stopPropagation = e => e.stopPropagation();
 
   export default {
+    name: 'ElCascaderNode',
+
+    componentName: 'ElCascaderNode',
+
     inject: ['panel'],
 
     components: {
@@ -93,12 +97,18 @@
 
       renderPrefix(h) {
         const { isLeaf, isChecked, config } = this;
-        const { checkStrictly, multiple } = config;
+        const {checkStrictly, multiple, hideRadio} = config;
 
         if (multiple) {
           return this.renderCheckbox(h);
         } else if (checkStrictly) {
-          return this.renderRadio(h);
+          if (hideRadio) {
+            if (isChecked) {
+              return this.renderCheckIcon(h);
+            }
+          } else {
+            return this.renderRadio(h);
+          }
         } else if (isLeaf && isChecked) {
           return this.renderCheckIcon(h);
         }
@@ -201,7 +211,7 @@
         config,
         nodeId
       } = this;
-      const { expandTrigger, checkStrictly, multiple } = config;
+      const {expandTrigger, checkStrictly, multiple, hideRadio} = config;
       const disabled = !checkStrictly && isDisabled;
       const events = { on: {} };
 
@@ -217,7 +227,8 @@
           this.$emit('expand', e);
         };
       }
-      if (isLeaf && !isDisabled && !checkStrictly && !multiple) {
+
+      if (!isDisabled && (!checkStrictly && isLeaf || checkStrictly && hideRadio) && !multiple) {
         events.on.click = this.handleCheckChange;
       }
 

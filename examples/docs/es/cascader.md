@@ -1003,6 +1003,15 @@ En la selección única, sólo se pueden comprobar los nodos de la hoja, y en la
     :props="{ multiple: true, checkStrictly: true }"
     clearable></el-cascader>
 </div>
+<div class="block">
+  <span class="demonstration">Combinaciones de opciones comunes de elección única</span>
+  <el-cascader
+    :options="options"
+    hide-dropdown-on-mouseleave
+    hide-dropdown-on-select
+    :props="{ checkStrictly: true, hideRadio: true, expandTrigger: 'hover' }"
+    clearable></el-cascader>
+</div>
 
 <script>
   export default {
@@ -1928,6 +1937,8 @@ Puede personalizar el contenido del nodo de cascada.
 | debounce | retraso en mili segundos para el tipeo de los datos de filtro | number | — | 300 |
 | before-filter | hook antes de filtrar con el valor a filtrar como parámetro. Si se devuelve `false` o se devuelve una `Promise` y luego se rechaza, se abortará el filtrado. | function(value) | — | — |
 | popper-class | nombre de clase personalizado para el menú desplegable de Cascader | string | —  | — |
+| hide-dropdown-on-mouseleave | Ocultar el cuadro de selección cuando el mouse sale del cuadro de selección   | boolean | —  | false |
+| hide-dropdown-on-select | Ocultar el cuadro de selección cuando el usuario selecciona   | boolean | —  | false |
 
 ### Eventos de Cascader
 | Nombre | Descripción | Parámetros |
@@ -1988,3 +1999,4 @@ Puede personalizar el contenido del nodo de cascada.
 | children | especificar qué clave de objeto de nodo se utiliza como hijo del nodo | string | — | 'children' |
 | disabled | especificar qué clave de objeto de nodo se utiliza como nodo desactivado | string | — | 'disabled' |
 | leaf     | especificar qué clave de objeto de nodo se utiliza como campo de hoja del nodo | string | — | 'leaf' |
+| hideRadio| Si ocultar el botón de opción, válido cuando checkStrictly es verdadero y múltiple es falso | boolean | — | false |

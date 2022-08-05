@@ -1002,6 +1002,15 @@ In single selection, only the leaf nodes can be checked, and in multiple selecti
     :props="{ multiple: true, checkStrictly: true }"
     clearable></el-cascader>
 </div>
+<div class="block">
+  <span class="demonstration">Single selection common option combinations</span>
+  <el-cascader
+    :options="options"
+    hide-dropdown-on-mouseleave
+    hide-dropdown-on-select
+    :props="{ checkStrictly: true, hideRadio: true, expandTrigger: 'hover' }"
+    clearable></el-cascader>
+</div>
 
 <script>
   export default {
@@ -1925,6 +1934,8 @@ You can customize the content of cascader node.
 | debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 | popper-class | custom class name for Cascader's dropdown   | string | —  | — |
+| hide-dropdown-on-mouseleave | Hide the selection box when the mouse leaves the selection box   | boolean | —  | false |
+| hide-dropdown-on-select | Hide the select box when the user selects   | boolean | —  | false |
 
 ### Cascader Events
 | Event Name | Description | Parameters |
@@ -1985,3 +1996,4 @@ You can customize the content of cascader node.
 | children | specify which key of node object is used as the node's children | string | — | 'children' |
 | disabled | specify which key of node object is used as the node's disabled | string | — | 'disabled' |
 | leaf     | specify which key of node object is used as the node's leaf field | string | — | 'leaf' |
+| hideRadio| Whether to hide the radio button, valid when checkStrictly is true and multiple is false | boolean | — | false |
