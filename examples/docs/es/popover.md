@@ -148,7 +148,7 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 | offset         | popover offset                           | number         | —                                        | 0                                        |
 | transition     | animación de transición del popover | string         | —                                        | el-fade-in-linear                        |
 | visible-arrow  | si una flecha del tooltip es mostrada o no. Para más información, por favor refiérase a [Vue-popper](https://github.com/element-component/vue-popper) | boolean        | —                                        | true                                     |
-| popper-options | parámetros para [popper.js](https://popper.js.org/documentation.html) | object         | por favor, refiérase a [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| popper-options | parámetros para [popper.js](https://popper.js.org/docs/v2/) | object         | por favor, refiérase a [popper.js](https://popper.js.org/docs/v2/) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | popper-class   | clase propia para popover                | string         | —                                        | —                                        |
 | open-delay     | retraso de la aparición cuando `trigger` es hover, en mili segundos | number         | —                                        | —                                        |
 | close-delay    | Retraso antes de desaparecer cuando el `trigger` es hover, en mili segundos. | number | — | 200 |
