@@ -1,3 +1,4 @@
+
 <template>
   <div
     class="el-progress"
@@ -15,9 +16,9 @@
     aria-valuemax="100"
   >
     <div class="el-progress-bar" v-if="type === 'line'">
-      <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px', backgroundColor:defineBackColor}">
+      <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px'}">
         <div class="el-progress-bar__inner" :style="barStyle">
-          <div class="el-progress-bar__innerText" :style="{color:textColor}" v-if="showText && textInside">{{content}}</div>
+          <div class="el-progress-bar__innerText" v-if="showText && textInside">{{content}}</div>
         </div>
       </div>
     </div>
@@ -26,7 +27,7 @@
         <path
           class="el-progress-circle__track"
           :d="trackPath"
-          :stroke="defineBackColor"
+          stroke="#e5e9f2"
           :stroke-width="relativeStrokeWidth"
           fill="none"
           :style="trailPathStyle"></path>
@@ -43,7 +44,7 @@
     <div
       class="el-progress__text"
       v-if="showText && !textInside"
-      :style="{fontSize: progressTextSize + 'px', color:textColor}"
+      :style="{fontSize: progressTextSize + 'px'}"
     >
       <template v-if="!status">{{content}}</template>
       <i v-else :class="iconClass"></i>
@@ -92,14 +93,6 @@
       color: {
         type: [String, Array, Function],
         default: ''
-      },
-      defineBackColor: {
-        type: [String, Array, Function],
-        default: '#ebeef5'
-      },
-      textColor: {
-        type: [String, Array, Function],
-        default: '#606266'
       },
       format: Function
     },
@@ -209,7 +202,6 @@
       },
       getLevelColor(percentage) {
         const colorArray = this.getColorArray().sort((a, b) => a.percentage - b.percentage);
-
         for (let i = 0; i < colorArray.length; i++) {
           if (colorArray[i].percentage > percentage) {
             return colorArray[i].color;
