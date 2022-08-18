@@ -150,7 +150,7 @@ Vous pouvez aussi imbriquer des opérations. Procéder ainsi est plus léger que
 | offset | Décalage du popover. | number | — |  0 |
 | transition | Animation de transition du popover. | string | — | el-fade-in-linear |
 | visible-arrow | Si une flèche doit être affichée ou non. Pour plus d'informations, référez-vous à [Vue-popper](https://github.com/element-component/vue-popper). | boolean | — | true |
-| popper-options | Paramètres pour [popper.js](https://popper.js.org/documentation.html). | object | Référez-vous à [popper.js](https://popper.js.org/documentation.html). | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| popper-options | Paramètres pour [popper.js](https://popper.js.org/docs/v2/). | object | Référez-vous à [popper.js](https://popper.js.org/docs/v2/). | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | popper-class | Classe du popover. | string | — | — |
 | open-delay | Délai d'affichage, lorsque `trigger` est 'hover', en millisecondes. | number | — | — |
 | close-delay | delay before disappearing when `trigger` is hover, in milliseconds | number | — | 200 |
