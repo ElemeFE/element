@@ -1,5 +1,69 @@
 ## Changelog
 
+### 2.15.9
+
+*2022-06-02*
+
+#### Bug fixes
+
+- Table
+  - Fix Tabl-header shake bug (#21863 by @bofeng)
+  - Fix when partial import  show `el-checkbox not imported` error (#21828 by @bobohuochai)
+- FormItem
+  - Fix  change rules  verification not reset bug (#21892 by @bofeng)
+- Cascader
+  - Fix change options unexpect error (#21759 by @louiebb)
+- Docs
+  - Fix Popover docs (#21843 by @lod61)
+  - Fix Calendar docs (#21814 by @GoJam11)
+  - Fix TimePicker docs (#21803 by @Alanscut)
+  - Fix DatePicker docs (#21877 by @Nirvanaiu)
+- 其他
+  - Fix codepen display bug (#21863 by @bofeng)
+
+#### Optimization
+
+- I18n
+  - Add translation of Swahili (#21895 by @quilltouch)
+- Chore
+  - Use launch-editor-middleware in dev environment (#21633 by @polemices)
+- DatePicker & Cascader
+  - Optimize the dropdown animation direction (#21806 by @XivLaw)
+- Tooltip
+  - Optimize `getFirstElement` code (#21886 by @zhankang)
+- Input
+  - Optimize scss code (#21558 by @cheese-git)
+
+### 2.15.8
+
+*2022-04-12*
+
+#### Bug fixes
+
+- Drawer
+  - Fix appendToBody failure problem (#21264 by @cs1707)
+- Switch
+  - Fix toggling value problem(#19473 by @EdwinBetanc0urt)
+- Docs
+  - Fix input docs (#21723 by @justforuse)
+  - Fix DatePicker docs (#21663 by @justforuse)
+  - Fix Skeleton docs (#21601 by @yanwydxf)
+- Others
+  - Fix vue version (#21736 by @ckvv)
+
+#### Optimization
+
+- I18n
+  - add translation of Azerbaijani (#21012 by @ricardotondello)
+  - update translation of Slovenian (#21729 by @patik123)
+  - update translation of Slovak (#21711 by @sjaustirni )
+  - add translation of Icelandic (#21709 by @aronhr)
+  - add translation of Bengali (#21485 by @llwwtt)
+
+#### Others
+
+- Due to compatibility considerations, the PR on node-sass (#21019 by @linxsbox) of 2.15.7 release has been withdrawn and will be published in an appropriate version after re-evaluation.
+
 ### 2.15.7
 
 *2021-11-18*

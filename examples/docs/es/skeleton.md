@@ -304,7 +304,7 @@ Sometimes API responds very quickly, when that happens, the skeleton just gets r
 ### Skeleton Item Attributes
 | Attribute    | Description             | Type    | Acceptable Value       | Default  |
 | ------- | ---------------- | ------- | ------------ | ------ |
-| variant | The current rendering skeleton type | Enum(string) | p / text / h1 / h3 / text / caption / button / image / circle / rect | text |
+| variant | The current rendering skeleton type | Enum(string) | p / h1 / h3 / text / caption / button / image / circle / rect | text |
 
 
 ### Skeleton Slots

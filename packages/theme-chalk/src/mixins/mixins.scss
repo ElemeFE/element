@@ -6,17 +6,8 @@
 @mixin res($key, $map: $--breakpoints) {
   // 循环断点Map，如果存在则返回
   @if map-has-key($map, $key) {
-    @if $key=='sm-only'or $key=='md-only'or $key=='lg-only' {
-      // 判定特定定义处理字符串参数值问题
-      @media only screen and #{unquote(map-get($map, $key))} {
-        @content;
-      }
-    }
-
-    @else {
-      @media only screen and #{inspect(map-get($map, $key))} {
-        @content;
-      }
+    @media only screen and #{inspect(map-get($map, $key))} {
+      @content;
     }
   } @else {
     @warn "Undefeined points: `#{$map}`";
