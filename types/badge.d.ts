@@ -1,5 +1,8 @@
 import { ElementUIComponent } from './component'
 
+/** Badge type */
+export type BadgeType = 'primary' | 'success' | 'warning' | 'info' | 'danger'
+
 /** Badge Component */
 export declare class ElBadge extends ElementUIComponent {
   /** Display value */
@@ -13,4 +16,7 @@ export declare class ElBadge extends ElementUIComponent {
 
   /** Hidden badge */
   hidden: boolean
+
+  /** Badge type */
+  type: BadgeType
 }
