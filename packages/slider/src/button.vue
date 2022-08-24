@@ -223,7 +223,7 @@
         const lengthPerStep = 100 / ((this.max - this.min) / this.step);
         const steps = Math.round(newPosition / lengthPerStep);
         let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
-        value = parseFloat(value.toFixed(this.precision));
+        value = Math.min(parseFloat(value.toFixed(this.precision)), this.max);
         this.$emit('input', value);
         this.$nextTick(() => {
           this.displayTooltip();
