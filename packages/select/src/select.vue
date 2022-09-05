@@ -52,8 +52,8 @@
         @blur="softFocus = false"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
-        @keydown.down.prevent="navigateOptions('next')"
-        @keydown.up.prevent="navigateOptions('prev')"
+        @keydown.down.prevent="handleNavigate('next')"
+        @keydown.up.prevent="handleNavigate('prev')"
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
@@ -83,13 +83,15 @@
       :tabindex="(multiple && filterable) ? '-1' : null"
       @focus="handleFocus"
       @blur="handleBlur"
-      @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.stop.prevent="navigateOptions('next')"
-      @keydown.native.up.stop.prevent="navigateOptions('prev')"
+      @input="debouncedOnInputChange"
+      @keydown.native.down.stop.prevent="handleNavigate('next')"
+      @keydown.native.up.stop.prevent="handleNavigate('prev')"
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.stop.prevent="visible = false"
       @keydown.native.tab="visible = false"
-      @paste.native="debouncedOnInputChange"
+      @compositionstart="handleComposition"
+      @compositionupdate="handleComposition"
+      @compositionend="handleComposition"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
       <template slot="prefix" v-if="$slots.prefix">
@@ -145,7 +147,6 @@
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
@@ -235,6 +236,9 @@
         return ['small', 'mini'].indexOf(this.selectSize) > -1
           ? 'mini'
           : 'small';
+      },
+      propPlaceholder() {
+        return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
       }
     },
 
@@ -288,9 +292,7 @@
       },
       placeholder: {
         type: String,
-        default() {
-          return t('el.select.placeholder');
-        }
+        required: false
       },
       defaultFirstOption: Boolean,
       reserveKeyword: Boolean,
@@ -339,7 +341,7 @@
         });
       },
 
-      placeholder(val) {
+      propPlaceholder(val) {
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
 
@@ -441,6 +443,11 @@
     },
 
     methods: {
+      handleNavigate(direction) {
+        if (this.isOnComposition) return;
+
+        this.navigateOptions(direction);
+      },
       handleComposition(event) {
         const text = event.target.value;
         if (event.type === 'compositionend') {
@@ -526,7 +533,7 @@
         }
         if (option) return option;
         const label = (!isObject && !isNull && !isUndefined)
-          ? value : '';
+          ? String(value) : '';
         let newOption = {
           value: value,
           currentLabel: label
@@ -566,10 +573,10 @@
       handleFocus(event) {
         if (!this.softFocus) {
           if (this.automaticDropdown || this.filterable) {
-            this.visible = true;
-            if (this.filterable) {
+            if (this.filterable && !this.visible) {
               this.menuVisibleOnFocus = true;
             }
+            this.visible = true;
           }
           this.$emit('focus', event);
         } else {
@@ -647,11 +654,12 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
+          const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
           const sizeInMap = this.initialInputHeight || 40;
           input.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
             : Math.max(
-              tags ? (tags.clientHeight + (tags.clientHeight > sizeInMap ? 6 : 0)) : 0,
+              tags ? (tagsHeight + (tagsHeight > sizeInMap ? 6 : 0)) : 0,
               sizeInMap
             ) + 'px';
           if (this.visible && this.emptyText !== false) {
@@ -838,7 +846,7 @@
     },
 
     created() {
-      this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
+      this.cachedPlaceHolder = this.currentPlaceholder = this.propPlaceholder;
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);
       }

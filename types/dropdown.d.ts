@@ -24,6 +24,15 @@ export declare class ElDropdown extends ElementUIComponent {
   /** Whether to hide menu after clicking menu-item */
   hideOnClick: boolean
 
+  /** Delay time before show a dropdown */
+  showTimeout: number
+
+  /** Delay time before hide a dropdown */
+  hideTimeout: number
+
   /** Dropdown tabindex */
   tabindex: number
+
+  /** Whether Dropdown is disabled */
+  disabled: boolean
 }

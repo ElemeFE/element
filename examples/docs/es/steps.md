@@ -6,7 +6,7 @@ Guía al usuario para completar tareas de acuerdo con el proceso. Sus pasos pued
 
 Barra de pasos simple.
 
-:::demo Defina el atributo `active` con un valor de tipo `Number`, que indica el índice de pasos y comienza desde 0. Puede definir el atributo `space` cuando es necesario fijar el ancho del paso que acepta el tipo `Boolean`. La unidad del atributo `space` es px. Si no está configurado, es responsive. La configuración del atributo `finish-status` puede cambiar el estado de los pasos completados.
+:::demo Defina el atributo `active` con un valor de tipo `Number`, que indica el índice de pasos y comienza desde 0. Puede definir el atributo `space` cuando es necesario fijar el ancho del paso que acepta el tipo `Number`. La unidad del atributo `space` es px. Si no está configurado, es responsive. La configuración del atributo `finish-status` puede cambiar el estado de los pasos completados.
 
 ```html
 <el-steps :active="active" finish-status="success">
@@ -50,7 +50,7 @@ Muestra el estado del step para cada paso.
 ```
 :::
 
-### Centrado 
+### Centrado
 
 El título y la descripción pueden estar centrados.
 
@@ -151,8 +151,8 @@ Step bar simple, donde se ignorará `align-center`, `description`, `direction` y
 | icon        | icono del paso                           | nombre de la clase del icono del paso. Los iconos también se pueden pasar a través del slot con nombre | string            | —           |
 | status      | estado actual. Se configurará automáticamente mediante Steps si no está configurado. | wait / process / finish / error / success | -                 |             |
 
-### Step Slot
-| Name        | Description          |
+### Slot Step
+| Nombre      | Descripción          |
 | ----------- | -------------------- |
 | icon        | Icono personalizado  |
 | title       | Titulo del paso      |

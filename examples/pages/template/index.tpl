@@ -3,7 +3,7 @@
     text-align: center;
   }
   .banner-desc {
-    padding-top: 20px;
+    padding-top: 50px;
 
     h1 {
       font-size: <%= titleSize >px;
@@ -298,22 +298,6 @@
         <img src="~examples/assets/images/theme-index-red.png" alt="">
       </div>
     </div>
-    <div class="sponsors">
-      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
-        <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
-        <div>
-          <p>Sponsored by Tipe.io</p>
-          <p>Next Generation API-first CMS</p>
-        </div>
-      </a>
-      <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
-        <img width="45px" src="~examples/assets/images/duohui.svg" alt="duohui">
-        <div>
-          <p>Sponsored by 多会</p>
-          <p>炫酷的新一代活动票务系统</p>
-        </div>
-      </a>
-    </div>
     <div class="cards">
       <ul class="container">
         <li>
@@ -366,40 +350,10 @@
         </li>
       </ul>
     </div>
-    <div class="theme-intro-a" v-if="showIntroA" @click="hideIntroA">
-      <div class="intro-banner">
-        <img src="~examples/assets/images/theme-intro.png" alt="">
-        <div class="intro-text">
-          <p><%= 12 ></p>
-        </div>
-      </div>
-      <div class="mask"></div>
-    </div>
-    <div 
-      class="theme-intro-b"
-      @click="hideIntroB"
-      v-if="showIntroB"
-    >
-      <div class="intro-banner"
-      :style="{
-        left: introBX + 'px',
-        top: introBY + 'px'
-      }"
-      >
-        <img src="~examples/assets/images/intro-theme-b.png" alt="">
-          <div class="title">
-            <div>
-              <p><%= 13 ></p>
-              <p><%= 14 ></p>
-            </div>
-          </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
   import throttle from 'throttle-debounce/throttle';
-  import { addClass, removeClass } from 'element-ui/src/utils/dom';
   
   export default {
     created() {
@@ -416,28 +370,12 @@
         if (calHeight < 0) calHeight = 0;
         if (calHeight > eleHeight) calHeight = eleHeight;
         this.mainImgOffset = calHeight;
-      },
-      hideIntroB() {
-        removeClass(document.body, 'el-loading-parent--hidden');
-        localStorage.setItem('KNOW_THEME', 'true');
-        this.showIntroB = false;
-      },
-      hideIntroA() {
-        const themeTab = document.querySelector('.nav-item-theme');
-        this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2);
-        this.introBY = themeTab.offsetTop + 40;
-        this.showIntroA = false;
-        this.showIntroB = true;
       }
     },
     data() {
       return {
         lang: this.$route.meta.lang,
-        mainImgOffset: 0,
-        showIntroA: false,
-        showIntroB: false,
-        introBY: 0,
-        introBX: 0
+        mainImgOffset: 0
       };
     },
     beforeDestroy() {
@@ -445,9 +383,6 @@
     },
     mounted() {
       window.addEventListener('scroll', this.throttledHandleScroll);
-      if (localStorage.getItem('KNOW_THEME')) return;
-      this.showIntroA = true;
-      addClass(document.body, 'el-loading-parent--hidden');
     }
   };
 </script>

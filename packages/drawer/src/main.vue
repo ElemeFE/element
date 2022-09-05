@@ -4,8 +4,8 @@
     @after-enter="afterEnter"
     @after-leave="afterLeave">
     <div
-      class="el-dialog__wrapper"
-      role="presentation"
+      class="el-drawer__wrapper"
+      tabindex="-1"
       v-show="visible">
       <div
         class="el-drawer__container"
@@ -16,14 +16,17 @@
         <div
           aria-modal="true"
           aria-labelledby="el-drawer__title"
+          :aria-label="title"
           class="el-drawer"
           :class="[direction, customClass]"
-          :style="isHorizontal ? `width: ${size}` : `height: ${size}`"
+          :style="isHorizontal ? `width: ${drawerSize}` : `height: ${drawerSize}`"
           ref="drawer"
-          role="presentation">
-          <header class="el-drawer__header" id="el-drawer__title">
+          role="dialog"
+          tabindex="-1"
+          >
+          <header class="el-drawer__header" id="el-drawer__title" v-if="withHeader">
             <slot name="title">
-              <span role="heading">{{ title }}</span>
+              <span role="heading" :title="title">{{ title }}</span>
             </slot>
             <button
               :aria-label="`close ${title || 'drawer'}`"
@@ -45,16 +48,15 @@
 
 <script>
 import Popup from 'element-ui/src/utils/popup';
-import Migrating from 'element-ui/src/mixins/migrating';
 import emitter from 'element-ui/src/mixins/emitter';
 
 export default {
   name: 'ElDrawer',
-  mixins: [Popup, emitter, Migrating],
+  mixins: [Popup, emitter],
   props: {
     appendToBody: {
       type: Boolean,
-      default: true
+      default: false
     },
     beforeClose: {
       type: Function
@@ -62,6 +64,10 @@ export default {
     customClass: {
       type: String,
       default: ''
+    },
+    closeOnPressEscape: {
+      type: Boolean,
+      default: true
     },
     destroyOnClose: {
       type: Boolean,
@@ -78,12 +84,16 @@ export default {
         return ['ltr', 'rtl', 'ttb', 'btt'].indexOf(val) !== -1;
       }
     },
+    modalAppendToBody: {
+      type: Boolean,
+      default: true
+    },
     showClose: {
       type: Boolean,
       default: true
     },
     size: {
-      type: String,
+      type: [Number, String],
       default: '30%'
     },
     title: {
@@ -96,16 +106,24 @@ export default {
     wrapperClosable: {
       type: Boolean,
       default: true
+    },
+    withHeader: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
     isHorizontal() {
       return this.direction === 'rtl' || this.direction === 'ltr';
+    },
+    drawerSize() {
+      return typeof this.size === 'number' ? `${this.size}px` : this.size;
     }
   },
   data() {
     return {
-      closed: false
+      closed: false,
+      prevActiveElement: null
     };
   },
   watch: {
@@ -116,8 +134,19 @@ export default {
         if (this.appendToBody) {
           document.body.appendChild(this.$el);
         }
+        this.prevActiveElement = document.activeElement;
       } else {
-        if (!this.closed) this.$emit('close');
+        if (!this.closed) {
+          this.$emit('close');
+          if (this.destroyOnClose === true) {
+            this.rendered = false;
+          }
+        }
+        this.$nextTick(() => {
+          if (this.prevActiveElement) {
+            this.prevActiveElement.focus();
+          }
+        });
       }
     }
   },
@@ -149,12 +178,21 @@ export default {
       } else {
         this.hide();
       }
+    },
+    handleClose() {
+      // This method here will be called by PopupManger, when the `closeOnPressEscape` was set to true
+      // pressing `ESC` will call this method, and also close the drawer.
+      // This method also calls `beforeClose` if there was one.
+      this.closeDrawer();
     }
   },
   mounted() {
     if (this.visible) {
       this.rendered = true;
       this.open();
+      if (this.appendToBody) {
+        document.body.appendChild(this.$el);
+      }
     }
   },
   destroyed() {

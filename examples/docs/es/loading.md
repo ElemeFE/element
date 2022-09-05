@@ -128,13 +128,13 @@ Muestra una animación de pantalla completa mientras se cargan los datos
 <template>
   <el-button
     type="primary"
-    @click="openFullScreen"
+    @click="openFullScreen1"
     v-loading.fullscreen.lock="fullscreenLoading">
     Como directiva
   </el-button>
   <el-button
     type="primary"
-    @click="openFullScreen">
+    @click="openFullScreen2">
     Como servicio
   </el-button>
 </template>
@@ -147,13 +147,13 @@ Muestra una animación de pantalla completa mientras se cargan los datos
       }
     },
     methods: {
-      openFullScreen() {
+      openFullScreen1() {
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
         }, 2000);
       },
-      openFullScreen() {
+      openFullScreen2() {
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
@@ -196,7 +196,7 @@ Llamar al método `close` en cualquiera de estas puede cerrarlo.
 
 Si Element es importado completamente, un método global `$loading` puede ser registrado a Vue.prototype. Puede invocarlo como esto: `this.$loading(options)`, y también devuelve una instancia del componente.
 
-### Options
+### Opciones
 | Atributo    | Descripción                              | Tipo          | Valores aceptados | Por defecto   |
 | ----------- | ---------------------------------------- | ------------- | ----------------- | ------------- |
 | target      | el nodo del DOM que el componente debe cubrir. Acepta un objecto DOM o una cadena. Si está es una cadena, este será pasado a `document.querySelector` para obtener el correspondiente nodo del DOM | object/string | —                 | document.body |

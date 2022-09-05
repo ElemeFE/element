@@ -111,6 +111,13 @@ export default {
     },
     pageHeader: {
       title: 'Back' // to be translated
+    },
+    popconfirm: {
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    },
+    empty: {
+      description: 'No Data'
     }
   }
 };

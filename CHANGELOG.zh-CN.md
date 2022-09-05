@@ -1,5 +1,409 @@
 ## 更新日志
 
+### 2.15.9
+
+*2022-06-02*
+
+#### Bug 修复
+
+- Table
+  - 表头抖动修复 (#21863 by @bofeng)
+  - 按需引用时 `el-checkbox not imported` 修复 (#21828 by @bobohuochai)
+- FormItem
+  - 修复 rules 切换为 null 时校验未重置 问题 (#21892 by @bofeng)
+- Cascader
+  - 修复 切换 options 时错误报错信息 问题 (#21759 by @louiebb)
+- Docs
+  - 修复 Popover 文案 (#21843 by @lod61)
+  - 修复 Calendar 文案 (#21814 by @GoJam11)
+  - 修复 TimePicker 文案 (#21803 by @Alanscut)
+  - 修复 DatePicker 文案 (#21877 by @Nirvanaiu)
+- 其他
+  - 官网在线演示功能修复 (#21863 by @bofeng)
+
+#### 优化
+
+- I18n
+  - 新增 斯瓦希里语 翻译 (#21895 by @quilltouch)
+- Chore
+  - 本地开发时可从 devTools 工具跳转源代码 (#21633 by @polemices)
+- DatePicker & Cascader
+  - 弹窗方向优化 (#21806 by @XivLaw)
+- Tooltip
+  - 优化 `getFirstElement` 代码 (#21886 by @zhankang)
+- Input
+  - 优化 scss 代码 (#21558 by @cheese-git)
+
+### 2.15.8
+
+*2022-04-12*
+
+#### Bug 修复
+
+- Drawer
+  - 修复 appendToBody 失效问题 (#21264 by @cs1707)
+- Switch
+  - 修复 toggling value 问题(#19473 by @EdwinBetanc0urt)
+- Docs
+  - 修复 input 文案 (#21723 by @justforuse)
+  - 修复 DatePicker 文案 (#21663 by @justforuse)
+  - 修复 Skeleton 文案 (#21601 by @yanwydxf)
+- 其他
+  - 修复 vue 版本(#21736 by @ckvv)
+
+#### 优化
+
+- I18n
+  - 新增 阿塞拜疆语 翻译 (#21012 by @ricardotondello)
+  - 更新 斯洛文尼亚语 翻译 (#21729 by @patik123)
+  - 更新 斯洛伐克语 翻译 (#21711 by @sjaustirni )
+  - 新增 冰岛语 的翻译 (#21709 by @aronhr)
+  - 新增 孟加拉 语的翻译 (#21485 by @llwwtt)
+
+#### 其他
+
+- 因兼容性考虑，撤回2.15.7关于node-sass的更新(#21019 by @linxsbox)，重新评估后会在后续合适版本上线
+
+### 2.15.7
+
+*2021-11-18*
+
+#### Bug 修复
+
+- Select
+  - 修复 filter 模式下，点击图标不能触发下拉的 bug (#21314 by @dennyak47)
+  - 修复 composition 模式下 keydown 事件 (#21336 by @bchen1029)
+- Badge
+  - 修复 is-dot class (#21308 by @adaex)
+- Form
+  - validate 方法返回错误信息 (#21374 by @cs1707)
+- Table
+  - 修复 resizeObserver loop limit exceeded (#21255 by @tomieric)
+  - 修复 toggleAllSelection (#21456 by @cs1707)
+  - 优化 table 性能 (#21330 by @cs1707)
+- Button
+  - 修复 disabled 优先级 (#21375 by @cs1707)
+- Descriptions
+  - 修复 label slot bug (#21462 by @cs1707)
+- SASS
+  - node-sass 替换为 dart-sass (#21019 by @linxsbox)
+- Docs
+  - 修复 skeleton 文案 (#21408 by @zhhbstudio)
+
+### 2.15.6
+
+*2021-09-02*
+
+#### Bug 修复
+
+- Cascader
+  - 修复浏览器缩放模式下抖动的 bug (#21207 by @cs1707)
+  - 优化性能 (#21231 by @cs1707)
+- Select
+  - 修复多选模式下文字溢出的 bug (#21237 by @cs1707)
+- Dropdown
+  - 增加 disabled 属性 (#21235 by @mshioda)
+- Radio
+  - 修复浏览器返回后保留状态的 bug (#21250 by @cs1707)
+- Descriptions
+  - 修复类型定义 (#21265 by @adaex)
+  - 修复与表格组件混用样式冲突的问题 (#21254 by @adaex)
+- Drawer
+  - 修复 append-to-body (#21264 by @cs1707)
+- Local
+  - 修复 italian 翻译错误 (#21012 by @ricardotondello)
+
+### 2.15.5
+
+*2021-08-04*
+
+#### Bug 修复
+
+- Select
+  - 修复 resetInputHeight 报错的 bug (#21201 by @cs1707)
+
+### 2.15.4
+
+*2021-08-03*
+
+#### 新特性
+
+- Descriptions
+  - 新增 Descriptions 组件 (#21129 by @cs1707)
+- Result
+  - 新增 Result 组件 (#21171 by @cs1707)
+
+#### Bug 修复
+
+- Utils
+  - 修复 isScroll (#21098 by @canvascat)
+- Translation
+  - 更新 it.js (#21133 by @bliberi)
+- RadioGroup
+  - 修复 RadioGroup 与 component 兼容的 bug (#20783 by @lceric)
+- Message
+  - 修复 message[type] (#21088 by @cs1707)
+- Carousel
+  - 修复 setActiveItem 重置计时 (#20846 by @Nekojita1)
+- Cascader
+  - 修复 emitPath (#21185 by @cs1707)
+- Select
+  - 修复 filterable bug (#17494 by @profore)
+  - 修复浏览器缩放模式下抖动的 bug (#21197 by @cs1707)
+- Tree
+  - 修复 insertChild (#21194 by @cs1707)
+
+### 2.15.3
+
+*2021-06-29*
+#### 新特性
+
+- Skeleton
+  - 新增 Skeleton 组件 (#21038 by @cs1707)
+- Empty
+  - 新增 Empty 组件 (#21080 by @cs1707)
+
+#### Bug 修复
+
+- Local
+  - 修复 hr 语言 week 翻译 (#21040 by @cs1707)
+- Table
+  - 修复 lazy load data (#21041 by @cs1707)
+- Docs
+  - 修改 form 组件 hide-required-asterisk 描述 (#21045 by @cs1707)
+- Drawer:
+  - 修复 destroy (#20715 by @zj9495)
+- Row
+  - 修复 align top (#20963 by @cs1707)
+- Select
+  - 修复 value 为 Boolean 类型的bug (#21052 by @cs1707)
+- Calendar
+  - 修复 first-day-of-week (#21057 by @cs1707)
+- Utils
+  - 修复 fix isScroll (#21065 by @cs1707)
+  - 修复 (utils.dom by @fw6)
+- TypeScript
+  - 增加 CascaderPanel 类型导出 (#21070 by @qige2016)
+  - 增加 spinner.d.ts (#21090 by @qige2016)
+
+### 2.15.2
+
+*2021-05-28*
+
+#### Bug 修复
+
+- Image
+  - 修复 z-index 增加 keydown 事件 添加 stopPropagation (#20859 by @cs1707)
+- Input
+  - 修复 password cursor 展示 (#20870 by @cs1707)
+  - 修复 password icon 在 edge 下的展示 (#20902 by @cs1707)
+- Carousel
+  - 修复 interval 和 scale bug (#20931 by @cs1707)
+- Cascader
+  - 修复 delete tag bug (#20939 by @cs1707)
+- Drawer
+  - 支持 overflow auto (#20948 by @cs1707)
+- 其他
+  - 修复 isFunction (#20912 by @cs1707)
+
+### 2.15.1
+
+*2021-02-23*
+
+#### Bug 修复
+
+- Drawer
+  - 修复 Drawer bug (by @cs1707)
+- Image
+  - 修复 image object fit ratio 在 IE 下的 bug  (#19583 by @charlie0228)
+- Cascader
+  - 修复 cascader panel active path (#20730 by @cs1707)
+- Calendar 
+  - 修复 calendar 国际化 bug (#20758 by @iamkun)
+- ColorPicker
+  - 修复 bugs (by @UxieVerity)
+
+#### 优化
+
+- Doc
+  - 更新 Axure 设计资源 v2.1.0 (by @iamkun)
+
+### 2.15.0
+
+*2021-01-15*
+
+#### Bug 修复
+
+- Select
+  - 修复 placeholder 国际化 bug (#17644 by @nzh63)
+- Popconfirm
+  - 修复 Popconfirm 国际化 bug by @iamkun
+- Drawer
+  - 修复 focus bug (#20626 by @cs1707)
+- Image
+  - 图片预览优化 (#20652 by @cs1707)
+
+#### 优化
+
+- Doc
+  - 更新法语文档 datetime-picker.md (#20543 by @lonk)
+  - 更新 Progress 组件文档 (#20641 by @cs1707)
+
+### 2.14.1
+
+*2020-11-11*
+
+#### Bug 修复
+
+- Popover
+  - 兼容 Vue 2.6 新 v-slot 语法 (#20424 by @iamkun)
+
+#### 优化
+
+- I18n
+  - 更新阿拉伯语翻译 (#20202 by @elkattan)
+  - 更新维吾尔语翻译 (#20177 by @IlhamTahir)
+
+### 2.14.0
+
+*2020-10-29*
+
+#### 非兼容性更新
+
+- Popconfirm
+  - 事件名称修改为 `confirm`, `cancel` (#20240 by @hugiron)
+
+#### Bug 修复
+
+- Progress
+  - 修复参数错误的问题 (#19985 by @Caaalabash)
+
+#### 优化
+
+- I18n
+  - 更新俄语翻译 (#19451 by @yangirov)
+  - 更新高棉语翻译 (#20077 by @Sovai)
+  - 更新乌克兰语翻译 (#20344 by @MammutAlex)
+
+### 2.13.2
+
+*2020-05-18*
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复 'change event' 错误 (#19200 by @sxzz)
+- Image
+  - 更新错误状态 (#19194 by @lhx6538665)
+
+#### 优化
+
+- I18n
+  - 更新 ru-RU popconfirm 翻译 (#19220 by @Opppex)
+  - 更新 vi 翻译 (#19244 by @quangln2810)
+  - 更新 Catalan 和 Spanish 翻译 (#19296 by @Ismaaa)
+  - 更新 Indonesia 翻译 (#19320) by @therour)
+  - 更新 Brazilian Portuguese 翻译 (#19374 by @diegomengarda)
+
+
+### 2.13.1
+
+*2020-04-13*
+
+#### 新特性
+- Autocomplete
+  - 添加 change 事件 (#17913 by @sxzz)
+
+#### Bug 修复
+
+- Autocomplete
+  - 修复类型为 textarea 时建议错误问题 (#18478 by @Roojay)
+- Carousel
+  - 修复 console.warn 文案拼写错误 (#18264 by @IceFox)
+- Image
+  - 修复当 preview-src-list 属性不包含 src 时图片预览大图展示为空的问题 (#18975) (#19130 by @luckyCao)
+  - 修复第二次图片预览时快捷键失效问题 (#18983) (#19156 by @luckyCao)
+  - 修复 preview-src-list 为空时点击图片会给 body 添加 overflow: scroll 的问题 (#18967 by @inooNgt)
+- Transfer
+  - 修复和 Form 组件一起使用时错误的行高问题 (#18917 by @Hanx)
+- InputNumber
+  - 正确计算 inputNumberDisabled (#18439 by @ashuser-pendo)
+- Chore
+  - 更新首页文案 (#19155 by @iamkun)
+- Doc
+  - 更新 Popconfirm 文档 (#18324 by @iamkun)
+  - 修复 step-strictly 文档拼写问题 (#18705 by @dream2023)
+  - 修复 Steps 组件文档问题 (#17555 by @haoranyu)
+
+### 2.13.0
+
+*2019-11-26*
+
+#### 新特性
+
+- Popconfirm
+  - 新增 Popconfirm 组件 (#17548 by @iamkun)
+
+#### Bug fixes
+
+- BackTop
+  - 平滑过渡动画 (by @lon)
+- DatePicker
+  - 修复选择最小日期的 bug (#17191 by @smk0621)
+- Select
+  - 修复测试用例  (by @msidolphin)
+- Tree
+  - 增加 font-size 样式 (#17094 by @spengjie)
+- Table
+  - 头部可自定义 (#17291 by @ziyoung)
+  - 更新头部样式 (#17284 by @ziyoung)
+  - 修复时候 filter 之后高度问题 (#17348 by @ziyoung)
+  - 修复 row-style 失效的 bug (#17002 by @a631807682)
+  - 修复头部消失的 bug (#17341 by @ziyoung)
+- Calendar
+  - 导入 el-button 和 el-button-group (#17376 by @masongzhi)
+- MessageBox
+  - 修复图表位置 (#17410 by @nullptru)
+- TimePicker
+  - 滚动后设置正确的位置 (#16868 by @mattheyan)
+- Message
+  - 修复关闭的 offsetHeight（#17564） (#17852 by @gzwgq222)
+- Form
+  - ValidateField 的回调应为可选项 (#17314 by @CarterLi)
+- Cascader
+  - 修复 TypeScript 3.7 的兼容问题 (#17881 by @CarterLi)
+- Menu
+  - 修复 NavigationDuplicated 在 vue-router@^3.1.0 的报错 (#17269 by @iamkun)
+- Dropdown
+  - 更新类型文件 (#17550 by @iamkun)
+- Progress
+  - 增加 strokeLinecap 属性 (#17552 by @iamkun)
+- InfiniteScroll
+  - 跳过不可见元素触发 (#17553 by @iamkun)
+- Image
+  - 优化用户体验 (#16985 by @luckyCao)
+  - 优化大图片展示问题 (#16796 by @luckyCao)
+- Drawer 
+  - 修复 drawer-append-to-body 失效的 bug (#16953 by @JeremyWuuuuu)
+- Select
+  - 修复空 tag 的 bug (17199 by @luckyCao)
+- Scrollbar
+  - 修复 FireFox 双滚动条的 bug (#18091 by @iamkun)
+  
+#### Optimization
+
+- I18n
+  - 更新 sv-SE.js (#17926 by @FOLLGAD)
+  - 更新 avatar 组件法语文档 (#17762 by @blombard)
+- Docs
+  - 修复 time-select 文档错误 (#17250 by @wacky6)
+  - 修复 Drawer 文档错误 (#17122 by @haoranyu)
+  - 更新 Spanish changelog 2.12.0 (#17364 by @Gonzalo2310)
+  - 修复 Changelog 文档错误 (#17874 by @renlixin)
+  - 修复 Loading 示例 (#17862 by @MBearo)
+  - 增加 input event 相关文档 (#18061 by @zhouxinyong)
+  - 移除 Input repeat change event 相关文档 (#18085 by @zhouxinyong)
+
 ### 2.12.0
 
 *2019-08-29*
@@ -37,7 +441,7 @@
   - 禁用状态下，关闭按钮不显示 (#16224 by @yyjjqq94)
 - Input
   - 修复韩语输入问题 (#15069 by @MoonHyuk)
-  - 触发清楚按钮的点击事件 (#16576 by @a631807682)
+  - 触发清除按钮的点击事件 (#16576 by @a631807682)
 - Select
   - 过滤时，不收起下拉框 (#17205 by @luckyCao)
 - Transfer

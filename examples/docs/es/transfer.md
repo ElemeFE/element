@@ -38,7 +38,7 @@
 
 Puede buscar y filtrar los items.
 
-:::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del ítem contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada ítem. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
+:::demo Ponga el atributo `filterable` a true para permitir el filtrado. Por defecto si el `label` del ítem contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada ítem. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer
@@ -213,7 +213,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 :::
 
 ### Atributos
-| Atriburo              | Descripcion                              | Tipo                            | Valores aceptados | Por defecto                              |
+| Atributo             | Descripción                   | Tipo                            | Valores aceptados | Por defecto                              |
 | --------------------- | ---------------------------------------- | ------------------------------- | ----------------- | ---------------------------------------- |
 | value / v-model        | valor enlazado                           | array                           | —                 | —                                        |
 | data                  | Origen de datos                          | array[{ key, label, disabled }] | —                 | [ ]                                      |
@@ -230,23 +230,23 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | right-default-checked | Array de claves de los elementos marcados inicialmente en la lista de la derecha | array                           | —                 | [ ]                                      |
 
 ### Slot
-| Nombre       | Descripcion                              |
-| ------------ | ---------------------------------------- |
+| Nombre       | Descripción                                      |
+| ------------ | ------------------------------------------------ |
 | left-footer  | Contenido del footer de la lista de la izquierda |
-| right-footer | Contenido del footer de la lista de la derecha |
+| right-footer | Contenido del footer de la lista de la derecha   |
 
 ### Scoped Slot
-| Name | Description |
+| Name | Descripción |
 |------|--------|
 | — | Contenido personalizado para los datos de los items. El parámetro del scope es { option } |
 
-### Methods
-| Method | Description | Parameters |
+### Métodos
+| Método | Descripción | Parámetros |
 | ---- | ---- | ---- |
 | clearQuery | borra la palabra clave del filtro de un determinado panel | 'left' / 'right' |
 
 ### Eventos
-| Nombre | Descripcion                              | Parametros                               |
+| Nombre | Descripción                   | Parámetros                     |
 | ------ | ---------------------------------------- | ---------------------------------------- |
 | change | se lanza cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
 | left-check-change | se dispara cuando el usuario final cambia el estado verificado de cualquier elemento de datos en la lista izquierda | array clave de ítems actualmente verificados, array clave de ítems cuyo estado verificado ha cambiado |

@@ -75,7 +75,9 @@
     right: 40px;
     width: 40px;
     height: 40px;
-    font-size: 40px;
+    font-size: 24px;
+    color: #fff;
+    background-color: #606266;
   }
 
   @include e(canvas) {
