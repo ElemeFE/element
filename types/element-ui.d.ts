@@ -79,6 +79,7 @@ import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
+import { ElStatistic } from './statistic'
 
 export interface InstallationOptions {
   locale: any,
@@ -340,3 +341,6 @@ export class Avatar extends ElAvatar {}
 
 /** Drawer Component */
 export class Drawer extends ElDrawer {}
+
+/** Statistic Component */
+export class Statistic extends ElStatistic {}

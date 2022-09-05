@@ -176,6 +176,26 @@
             {
               "path": "/avatar",
               "title": "Avatar 头像"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton 骨架屏"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty 空状态"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions 描述列表"
+            },
+            {
+              "path": "/result",
+              "title": "Result 结果"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic 统计数值"
             }
           ]
         },
@@ -247,6 +267,10 @@
             {
               "path": "/popover",
               "title": "Popover 弹出框"
+            },
+            {
+              "path": "/popconfirm",
+              "title": "Popconfirm 气泡确认框"
             },
             {
               "path": "/card",
@@ -466,6 +490,22 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions"
+            },
+            {
+              "path": "/result",
+              "title": "Result"
             }
           ]
         },
@@ -539,6 +579,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -581,6 +625,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
@@ -760,6 +808,22 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions"
+            },
+            {
+              "path": "/result",
+              "title": "Result"
             }
           ]
         },
@@ -833,6 +897,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -875,6 +943,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }
@@ -1054,6 +1126,22 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions"
+            },
+            {
+              "path": "/result",
+              "title": "Result"
             }
           ]
         },
@@ -1127,6 +1215,10 @@
               "title": "Popover"
             },
             {
+              "path": "/popconfirm",
+              "title": "Popconfirm"
+            },
+            {
               "path": "/card",
               "title": "Card"
             },
@@ -1169,6 +1261,10 @@
             {
               "path": "/drawer",
               "title": "Drawer"
+            },
+            {
+              "path": "/statistic",
+              "title": "Statistic"
             }
           ]
         }

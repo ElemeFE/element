@@ -1,0 +1,36 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(statistic) {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: $--color-black;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum";
+ text-align: center;
+    .head {
+        margin-bottom: 4px;
+        color: #00000073;
+        font-size: 14px;
+
+    }
+
+    .con{
+        display: flex;
+        justify-content :center;
+        align-items: center  ;
+        .number{
+            font-size: 20px;
+            padding: 0 4px;
+        }
+        span{  display: inline-block;
+              margin: 0;
+            line-height: 100%;
+        }
+    }
+}
