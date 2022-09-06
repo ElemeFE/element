@@ -135,6 +135,9 @@ class TableLayout {
     const bodyWidth = this.table.$el.clientWidth;
     let bodyMinWidth = 0;
 
+    // fix #22136
+    if (!bodyWidth) return;
+
     const flattenColumns = this.getFlattenColumns();
     let flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number');
 
