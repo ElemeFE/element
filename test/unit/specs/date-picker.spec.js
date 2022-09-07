@@ -1012,8 +1012,30 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.empty;
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.be.equal('none');
+      expect(vm.picker.$el.querySelector('.el-quarter-table').style.display).to.be.equal('none');
       vm.picker.$el.querySelector('.el-month-table a.cell').click();
       expect(vm.pickerVisible).to.false;
+      done();
+    }, DELAY);
+  });
+
+  it('type:quarter', done => {
+    vm = createTest(DatePicker, {
+      type: 'quarter'
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      expect(vm.picker.$el.querySelector('.el-quarter-table').style.display).to.be.empty;
+      expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.equal('none');
+      expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.be.equal('none');
+
+      vm.picker.$el.querySelector('.el-quarter-table a.cell').click();
+      expect(vm.pickerVisible).to.false;
+
       done();
     }, DELAY);
   });
@@ -1030,6 +1052,7 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.empty;
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.equal('none');
+      expect(vm.picker.$el.querySelector('.el-quarter-table').style.display).to.be.equal('none');
 
       const leftBtn = vm.picker.$el.querySelector('.el-icon-d-arrow-left');
       const rightBtn = vm.picker.$el.querySelector('.el-icon-d-arrow-right');
@@ -2704,6 +2727,236 @@ describe('DatePicker', () => {
         done();
       }, DELAY);
     }, DELAY);
+  });
+
+  describe('type:yearrange', () => {
+    let vm;
+    beforeEach((done) => {
+      vm = createTest(DatePicker, {
+        type: 'yearrange',
+        value: [new Date(2000, 10, 1), new Date(2010, 11, 1)]
+      }, true);
+
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('create', () => {
+      expect(Array.prototype.slice.call(vm.picker.$el.querySelectorAll('.el-year-table'))).to.length(2);
+      expect(vm.picker.$el.querySelector('.el-year-table .start-date').textContent).to.equal('2000');
+      expect(vm.picker.$el.querySelector('.el-year-table .end-date').textContent).to.equal('2010');
+    });
+
+    it('select yearrange', (done) => {
+      const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
+      const leftCell = pickers[0].querySelectorAll('td')[0];
+      const rightCell = pickers[0].querySelectorAll('td')[7];
+      triggerEvent(leftCell, 'mousemove', true);
+      triggerEvent(leftCell, 'click', true);
+      setTimeout(() => {
+        triggerEvent(rightCell, 'mousemove', true);
+        triggerEvent(rightCell, 'click', true);
+
+        setTimeout(() => {
+          const {
+            minDate,
+            maxDate
+          } = vm.picker;
+          expect(minDate).to.equal(2000);
+          expect(maxDate).to.equal(2007);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('prev/next year button', (done) => {
+      const leftBtn = vm.picker.$el.querySelector('.is-left .el-icon-d-arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.is-right .el-icon-d-arrow-right');
+      const left = vm.picker.$el.querySelector('.is-left .el-date-range-picker__header');
+      const right = vm.picker.$el.querySelector('.is-right .el-date-range-picker__header');
+
+      let count = 20;
+      while (--count) {
+        leftBtn.click();
+      }
+      count = 18;
+      while (--count) {
+        rightBtn.click();
+      }
+
+      setTimeout(() => {
+        const newLeft = left.textContent.replace(/\s/g, '');
+        const newRight = right.textContent.replace(/\s/g, '');
+        expect(newLeft).to.equal('1980年-1989年');
+        expect(newRight).to.equal('1990年-1999年');
+        done();
+      }, DELAY);
+    });
+
+    it('default value', (done) => {
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+      vm = createVue({
+        template: `
+                <el-date-picker
+                    ref="compo"
+                    type="yearrange"
+                    v-model="value"
+                    :default-value="defaultValue">
+                </el-date-picker>
+        `,
+        data() {
+          return {
+            value: '',
+            defaultValue: ['2010-01-01']
+          };
+        }
+      }, true);
+      setTimeout(() => {
+        let picker = vm.$refs.compo;
+        const input = picker.$el.querySelector('input');
+        input.blur();
+        input.focus();
+        setTimeout(() => {
+          const left = picker.picker.$el.querySelector('.is-left .el-date-range-picker__header');
+          const right = picker.picker.$el.querySelector('.is-right .el-date-range-picker__header');
+          const newLeft = left.textContent.replace(/\s/g, '');
+          const newRight = right.textContent.replace(/\s/g, '');
+          expect(newLeft).to.equal('2010年-2019年');
+          expect(newRight).to.equal('2020年-2029年');
+          vm.defaultValue = ['1998-01-01'];
+          setTimeout(() => {
+            expect(left.textContent.replace(/\s/g, '')).to.equal('1990年-1999年');
+            expect(right.textContent.replace(/\s/g, '')).to.equal('2000年-2009年');
+            done();
+          }, DELAY);
+        });
+      }, DELAY);
+    });
+
+    it('value', (done) => {
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+      vm = createVue({
+        template: `
+                <el-date-picker
+                    ref="compo"
+                    type="yearrange"
+                    v-model="value">
+                </el-date-picker>
+        `,
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
+      setTimeout(() => {
+        let picker = vm.$refs.compo;
+        const input = picker.$el.querySelector('input');
+        input.blur();
+        input.focus();
+        setTimeout(() => {
+          const left = picker.picker.$el.querySelector('.is-left .el-date-range-picker__header');
+          expect(left.textContent.replace(/\s/g, '')).to.equal('2020年-2029年');
+          vm.value = ['2028/06/22', '2029/07/22'];
+          setTimeout(() => {
+            expect(left.textContent.replace(/\s/g, '')).to.equal('2020年-2029年');
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('clear value', (done) => {
+      destroyVM(vm); // nuke beforeEach's vm before creating our own
+      vm = createVue({
+        template: `
+              <el-date-picker v-model="value" type="yearrange"></el-date-picker>
+          `,
+        data() {
+          return {
+            value: [new Date(2000, 10, 1), new Date(2000, 11, 1)]
+          };
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+      input.focus();
+      setTimeout(() => {
+        triggerEvent(input, 'mouseenter', true);
+        setTimeout(() => {
+          expect(vm.$el.querySelector('.el-icon-circle-close').style.display).to.be.empty;
+          vm.$el.querySelector('.el-icon-circle-close').click();
+          expect(vm.value).to.equal(null);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('shortcuts', (done) => {
+      let test;
+      vm = createTest(DatePicker, {
+        type: 'yearrange',
+        pickerOptions: {
+          shortcuts: [{
+            text: '近三年',
+            onClick(picker) {
+              test = true;
+              picker.$emit('pick', new Date(), new Date().setFullYear(new Date().getFullYear() + 3));
+            }
+          }]
+        }
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(() => {
+        const shortcut = vm.picker.$el.querySelector('.el-picker-panel__shortcut');
+
+        expect(shortcut.textContent).to.include('近三年');
+        expect(vm.picker.$el.querySelector('.el-picker-panel__sidebar')).to.be.ok;
+
+        shortcut.click();
+        setTimeout(() => {
+          expect(test).to.true;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('yearrange:unlink-panels', (done) => {
+      vm = createTest(DatePicker, {
+        type: 'yearrange',
+        unlinkPanels: true,
+        defaultValue: ['2000-07-01', '2020-07-01']
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(() => {
+        const left = vm.picker.$el.querySelector('.is-left .el-date-range-picker__header');
+        const right = vm.picker.$el.querySelector('.is-right .el-date-range-picker__header');
+        const leftNextBtn = left.querySelector('.el-icon-d-arrow-right');
+        expect(left.textContent.replace(/\s/g, '')).to.equal('2000年-2009年');
+        expect(right.textContent.replace(/\s/g, '')).to.equal('2020年-2029年');
+        expect(leftNextBtn.classList.contains('is-disabled')).to.false;
+        leftNextBtn.click();
+        setTimeout(() => {
+          expect(left.textContent.replace(/\s/g, '')).to.equal('2010年-2019年');
+          expect(leftNextBtn.classList.contains('is-disabled')).to.true;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
   });
 
   describe('picker-options:selectableRange', () => {
