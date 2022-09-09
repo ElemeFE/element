@@ -304,10 +304,13 @@ export default {
     disabled() {
       this.computePresentContent();
     },
-    value(val) {
+    value(val, oldVal) {
       if (!isEqual(val, this.checkedValue)) {
         this.checkedValue = val;
         this.computePresentContent();
+      }
+      if (!isEqual(val, oldVal)) {
+        this.dispatch('ElFormItem', 'el.form.change', [val]);
       }
     },
     checkedValue(val) {
@@ -323,7 +326,6 @@ export default {
 
         this.$emit('input', val);
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', [val]);
       }
     },
     options: {
