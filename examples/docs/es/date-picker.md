@@ -476,6 +476,7 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false                |
 | prefix-icon       | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
 | clear-icon        | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
+| append-to-body    | Si adjuntar el cuadro de DatePicker al cuerpo | boolean       | —                 | true       |
 
 ### Opciones del Picker
 | Atributo       | Descripción                                                  | Tipo                           | Valores aceptados | Por defecto |
