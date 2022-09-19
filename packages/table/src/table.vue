@@ -542,7 +542,7 @@
         } else if (this.maxHeight) {
           let maxHeight = parseHeight(this.maxHeight);
           if (typeof maxHeight === 'number') {
-            maxHeight = this.layout.scrollX ? maxHeight - this.layout.gutterWidth : maxHeight;
+            maxHeight = this.layout.scrollX ? maxHeight - this.layout.gutterHeight : maxHeight;
             if (this.showHeader) {
               maxHeight -= this.layout.headerHeight;
             }
@@ -563,7 +563,7 @@
             };
           }
           return {
-            bottom: (this.layout.scrollX && this.data.length) ? this.layout.gutterWidth + 'px' : ''
+            bottom: (this.layout.scrollX && this.data.length) ? this.layout.gutterHeight + 'px' : ''
           };
         } else {
           if (this.showSummary) {
