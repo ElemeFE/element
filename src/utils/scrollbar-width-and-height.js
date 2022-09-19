@@ -4,8 +4,8 @@ let scrollBarWidth;
 let scrollBarHeight;
 
 export default function() {
-  if (Vue.prototype.$isServer) return 0;
-  if (scrollBarWidth !== undefined) return scrollBarWidth;
+  if (Vue.prototype.$isServer) return { scrollBarWidth: 0, scrollBarHeight: 0 };
+  if (scrollBarWidth !== undefined) return { scrollBarWidth, scrollBarHeight };
 
   const outer = document.createElement('div');
   outer.className = 'el-scrollbar__wrap';
