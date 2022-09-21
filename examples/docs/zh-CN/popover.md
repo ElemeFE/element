@@ -146,7 +146,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 |  offset        |  出现位置的偏移量  | Number           | — |  0 |
 |  transition     |  定义渐变动画      | String             | — | fade-in-linear |
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |
-|  popper-options        | [popper.js](https://popper.js.org/) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+|  popper-options        | [popper.js](https://popper.js.org/docs/v2/) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/docs/v2/) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | popper-class | 为 popper 添加类名 | String | — | — |
 | open-delay | 触发方式为 hover 时的显示延迟，单位为毫秒 | Number | — | — |
 | close-delay | 触发方式为 hover 时的隐藏延迟，单位为毫秒 | number | — | 200 |

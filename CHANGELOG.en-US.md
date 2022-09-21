@@ -1,5 +1,34 @@
 ## Changelog
 
+### 2.15.10
+
+*2022-09-13*
+
+#### Bug fixes
+
+- DatePicker
+  - Fix props placement error (#21908 by @lqzhgood)
+- Loading
+  - Fix sticky DOM error (#22087 by @zzjjhh001)
+- Docs
+  - Fix Popover docs (#22083 by @lm312)
+  - Fix Skeleton docs (#22092 by @lm312)
+  - Fix DatePicker docs (#21970 by @guojiongwei)
+- Tree: 
+  - fix lazy-load default check problem (#21934 by @kiss-yu)
+
+#### Optimization
+
+- I18n
+  - Add translation of Sinhalese (#21936 by @sayuri-gi)
+  - Update translation of Spanish (#21924 by @jcardus)
+  - Add translation of Malaysian (#22028 by @iorange0411)
+  - Update translation of Swahili (#21904 by @Cholowao)
+- Utils
+  - update date-util.js (#22099 by @Due07)  
+- DatePicker
+  - add months And years type (#21918 by @akiko123456)
+
 ### 2.15.9
 
 *2022-06-02*
@@ -18,7 +47,7 @@
   - Fix Calendar docs (#21814 by @GoJam11)
   - Fix TimePicker docs (#21803 by @Alanscut)
   - Fix DatePicker docs (#21877 by @Nirvanaiu)
-- 其他
+- Other
   - Fix codepen display bug (#21863 by @bofeng)
 
 #### Optimization
