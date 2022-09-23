@@ -432,6 +432,10 @@
           if (keyCode === 13 && this.userInputDate === null && this.userInputTime === null) { // Enter
             this.emit(this.date, false);
           }
+          // ESC 按键
+          if (keyCode === 27) {
+            this.$emit('pick', this.value);
+          }
         }
       },
 
