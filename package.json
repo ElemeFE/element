@@ -86,7 +86,7 @@
     "babel-regenerator-runtime": "^6.5.0",
     "chai": "^4.2.0",
     "chokidar": "^1.7.0",
-    "copy-webpack-plugin": "^5.0.0",
+    "copy-webpack-plugin": "^5.1.2",
     "coveralls": "^3.0.3",
     "cp-cli": "^1.0.2",
     "cross-env": "^3.1.3",
