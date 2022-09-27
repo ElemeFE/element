@@ -8,7 +8,7 @@ export default {
       now: 'Ahora',
       today: 'Hoy',
       cancel: 'Cancelar',
-      clear: 'Despejar',
+      clear: 'Limpiar',
       confirm: 'Confirmar',
       selectDate: 'Seleccionar fecha',
       selectTime: 'Seleccionar hora',
@@ -91,7 +91,7 @@ export default {
       emptyText: 'Sin Datos',
       confirmFilter: 'Confirmar',
       resetFilter: 'Reiniciar',
-      clearFilter: 'Despejar',
+      clearFilter: 'Limpiar',
       sumText: 'Suma'
     },
     tree: {
@@ -114,6 +114,9 @@ export default {
     popconfirm: {
       confirmButtonText: 'Si',
       cancelButtonText: 'No'
+    },
+    empty: {
+      description: 'Sin Datos'
     }
   }
 };

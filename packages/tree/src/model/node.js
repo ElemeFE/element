@@ -23,7 +23,7 @@ export const getChildState = node => {
 };
 
 const reInitChecked = function(node) {
-  if (node.childNodes.length === 0) return;
+  if (node.childNodes.length === 0 || node.loading) return;
 
   const {all, none, half} = getChildState(node.childNodes);
   if (all) {
@@ -220,7 +220,7 @@ export default class Node {
 
     if (!(child instanceof Node)) {
       if (!batch) {
-        const children = this.getChildren(true);
+        const children = this.getChildren(true) || [];
         if (children.indexOf(child.data) === -1) {
           if (typeof index === 'undefined' || index < 0) {
             children.push(child.data);
@@ -463,12 +463,11 @@ export default class Node {
       this.loading = true;
 
       const resolve = (children) => {
-        this.loaded = true;
-        this.loading = false;
         this.childNodes = [];
 
         this.doCreateChildren(children, defaultProps);
-
+        this.loaded = true;
+        this.loading = false;
         this.updateLeafState();
         if (callback) {
           callback.call(this, children);

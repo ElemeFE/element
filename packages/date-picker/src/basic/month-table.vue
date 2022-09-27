@@ -37,6 +37,14 @@
       return NaN;
     }
   };
+
+  // remove the first element that satisfies `pred` from arr
+  // return a new array if modification occurs
+  // return the original array otherwise
+  const removeFromArray = function(arr, pred) {
+    const idx = typeof pred === 'function' ? arrayFindIndex(arr, pred) : arr.indexOf(pred);
+    return idx >= 0 ? [...arr.slice(0, idx), ...arr.slice(idx + 1)] : arr;
+  };
   export default {
     props: {
       disabledDate: {},
@@ -205,6 +213,13 @@
             }
             this.rangeState.selecting = false;
           }
+        } else if (this.selectionMode === 'months') {
+          const value = this.value || [];
+          const year = this.date.getFullYear();
+          const newValue = arrayFindIndex(value, date => date.getFullYear() === year && date.getMonth() === month) >= 0
+            ? removeFromArray(value, date => date.getTime() === newDate.getTime())
+            : [...value, newDate];
+          this.$emit('pick', newValue);
         } else {
           this.$emit('pick', month);
         }

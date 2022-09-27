@@ -176,6 +176,22 @@
             {
               "path": "/avatar",
               "title": "Avatar 头像"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton 骨架屏"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty 空状态"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions 描述列表"
+            },
+            {
+              "path": "/result",
+              "title": "Result 结果"
             }
           ]
         },
@@ -470,6 +486,22 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions"
+            },
+            {
+              "path": "/result",
+              "title": "Result"
             }
           ]
         },
@@ -768,6 +800,22 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions"
+            },
+            {
+              "path": "/result",
+              "title": "Result"
             }
           ]
         },
@@ -1066,6 +1114,22 @@
             {
               "path": "/badge",
               "title": "Badge"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty"
+            },
+            {
+              "path": "/descriptions",
+              "title": "Descriptions"
+            },
+            {
+              "path": "/result",
+              "title": "Result"
             }
           ]
         },

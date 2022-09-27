@@ -233,14 +233,14 @@ Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no pu
 
 ### Slots
 
-| Nombre | Descripcíon                            |
+| Nombre | Descripción                            |
 | ------ | -------------------------------------- |
 | —      | contenido de Diálogo                   |
 | title  | contenido del título de Diálogo        |
 | footer | contenido del pie de página de Diálogo |
 
 ### Eventos
-| Nombre de Evento | Descripcíon                              | Parámetros |
+| Nombre de Evento | Descripción                   | Parámetros |
 | ---------------- | ---------------------------------------- | ---------- |
 | open             | se activa cuando se abre el cuadro de Diálogo | —          |
 | opened           | se activa cuando la animación de apertura del Dialog termina. | — |

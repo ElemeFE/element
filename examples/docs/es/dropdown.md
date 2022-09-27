@@ -38,7 +38,7 @@ Pase el ratón por el menú desplegable para desplegarlo y obtener más acciones
 
 Utilizando un botón para activar la lista desplegable.
 
-:::demo Utilice `split-button` para dividir el elemento detonante en un grupo de botones, siendo el botón izquierdo un botón normal y el botón derecho el objetivo real de la detonacion. Si desea insertar una línea de separación entre la posición tres y la posición cuatro, sólo añada un divisor de clase a la posición cuatro.
+:::demo Utilice `split-button` para dividir el elemento detonante en un grupo de botones, siendo el botón izquierdo un botón normal y el botón derecho el objetivo real de la detonación. Si desea insertar una línea de separación entre la posición tres y la posición cuatro, sólo añada un divisor de clase a la posición cuatro.
 
 ```html
 <el-dropdown>
@@ -281,6 +281,7 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | show-timeout  | Tiempo de retardo antes de mostrar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 250         |
 | hide-timeout  | Tiempo de retardo antes de ocultar un dropdown (solamente trabaja cuando se dispara `hover`) | number  | —                                        | 150         |
 | tabindex      | [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) de Dropdown | number              |          —         | 0           |
+| disabled      | si el desplegable está desactivado       | boolean | —                                      | false       |
 
 ### Dropdown Slots
 
@@ -290,13 +291,13 @@ Además del tamaño predeterminado, el componente Dropdown proporciona tres tama
 | dropdown | contenido del menu Dropdown, normalmente es un elemento `<el-dropdown-menu>` |
 
 ### Dropdown Eventos
-| Nombre         | Descripción                              | Parametros                               |
-| -------------- | ---------------------------------------- | ---------------------------------------- |
-| click          | si `split-button` es `true`, se activa al hacer clic en el botón izquierdo | —                                        |
-| command        | activa cuando se hace clic en un elemento desplegable | el comando enviado desde el elemento desplegable |
-| visible-change | se activa cuando aparece/desaparece el desplegable | true cuando aparece, y false de otro modo |
+| Nombre         | Descripción                                                  | Parámetros                                       |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------ |
+| click          | si `split-button` es `true`, se activa al hacer clic en el botón izquierdo | —                                                |
+| command        | activa cuando se hace clic en un elemento desplegable        | el comando enviado desde el elemento desplegable |
+| visible-change | se activa cuando aparece/desaparece el desplegable           | true cuando aparece, y false de otro modo        |
 
-### Dropdown Menu Item Atributos
+### Dropdown Menú Ítem Atributos
 | Atributo | Descripción                              | Tipo                 | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | -------------------- | ----------------- | ----------- |
 | command  | un comando que se enviará al `command` callback del Dropdown | string/number/object | —                 | —           |

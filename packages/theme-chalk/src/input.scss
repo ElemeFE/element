@@ -120,6 +120,10 @@
     transition: $--border-transition-base;
     width: 100%;
 
+    &::-ms-reveal {
+      display: none;
+    }
+
     &::placeholder {
       color: $--input-placeholder-color;
     }

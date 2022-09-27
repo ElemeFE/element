@@ -32,6 +32,17 @@ describe('Badge', () => {
     expect(vm.$el.querySelector('.el-badge__content.is-dot')).to.exist;
   });
 
+  it('is dot with type', () => {
+    vm = createVue(`
+      <el-badge is-dot type="success">
+        <button>click</button>
+      </el-badge>
+    `);
+
+    expect(vm.$el.querySelector('.el-badge__content.is-dot')).to.exist;
+    expect(vm.$el.querySelector('.el-badge__content.el-badge__content--success.is-dot')).to.exist;
+  });
+
   it('max', () => {
     vm = createTest(Badge, { max: 100, value: 200 });
     expect(vm.content).to.equal('100+');
