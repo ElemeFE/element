@@ -1,0 +1,6 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(affix) {
+    z-index: $--index-affix;
+}

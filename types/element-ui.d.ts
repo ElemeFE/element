@@ -80,6 +80,7 @@ import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElPopconfirm } from './popconfirm'
+import { ElAffix } from './affix'
 import { ElSkeleton } from './skeleton'
 import { ElSkeletonItem } from './skeleton-item'
 import { ElCascaderPanel } from './cascader-panel'
@@ -352,6 +353,9 @@ export class Drawer extends ElDrawer {}
 
 /** Popconfirm Component */
 export class Popconfirm extends ElPopconfirm {}
+
+/** Affix Component */
+export class Affix extends ElAffix {}
 
 /** Skeleton Component */
 export class Skeleton extends ElSkeleton {}

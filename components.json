@@ -79,6 +79,7 @@
   "page-header": "./packages/page-header/index.js",
   "cascader-panel": "./packages/cascader-panel/index.js",
   "avatar": "./packages/avatar/index.js",
+  "affix": "./packages/affix/index.js",
   "drawer": "./packages/drawer/index.js",
   "popconfirm": "./packages/popconfirm/index.js",
   "skeleton": "./packages/skeleton/index.js",
