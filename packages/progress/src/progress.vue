@@ -17,7 +17,7 @@
     <div class="el-progress-bar" v-if="type === 'line'">
       <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px'}">
         <div class="el-progress-bar__inner" :style="barStyle">
-          <div class="el-progress-bar__innerText" v-if="showText && textInside">{{content}}</div>
+          <div class="el-progress-bar__innerText" :style="{fontSize: progressTextSize + 'px'}" v-if="showText && textInside">{{content}}</div>
         </div>
       </div>
     </div>

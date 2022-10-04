@@ -6,12 +6,17 @@
   position: relative;
   line-height: 1;
 
+  @include m(line) {
+    display: table;
+    width: 100%;
+  }
+
   @include e(text) {
     font-size:14px;
     color: $--color-text-regular;
-    display: inline-block;
+    display: table-cell;
     vertical-align: middle;
-    margin-left: 10px;
+    padding-left: 10px;
     line-height: 1;
 
     i {
@@ -30,6 +35,7 @@
       width: 100%;
       text-align: center;
       margin: 0;
+      padding: 0;
       transform: translate(0, -50%);
 
       i {
@@ -91,11 +97,9 @@
 }
 
 @include b(progress-bar) {
-  padding-right: 50px;
-  display: inline-block;
+  display: table-cell;
   vertical-align: middle;
   width: 100%;
-  margin-right: -55px;
   box-sizing: border-box;
 
   @include e(outer) {

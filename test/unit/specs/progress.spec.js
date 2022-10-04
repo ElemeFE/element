@@ -98,10 +98,11 @@ describe('Progress', () => {
   it('should work with stroke-width', () => {
     vm = createVue({
       template: `
-        <el-progress :text-inside="true" :stroke-width="36" :percentage="0"></el-progress>
+        <el-progress :text-inside="true" :stroke-width="50" :percentage="0"></el-progress>
       `
     }, true);
-    expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(12);
+    expect(vm.$el.querySelector('.el-progress-bar__innerText').offsetTop).to.be.equal(9);
+    expect(vm.$el.querySelector('.el-progress-bar__innerText').style.fontSize).to.be.equal('32px');
   });
   it('color', () => {
     vm = createVue({
