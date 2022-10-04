@@ -86,5 +86,6 @@
   "empty": "./packages/empty/index.js",
   "descriptions": "./packages/descriptions/index.js",
   "descriptions-item": "./packages/descriptions-item/index.js",
-  "result": "./packages/result/index.js"
+  "result": "./packages/result/index.js",
+  "chat-message": "./packages/chat-message/index.js"
 }
