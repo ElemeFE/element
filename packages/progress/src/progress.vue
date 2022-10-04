@@ -26,7 +26,7 @@
         <path
           class="el-progress-circle__track"
           :d="trackPath"
-          stroke="#e5e9f2"
+          stroke="strokeColor"
           :stroke-width="relativeStrokeWidth"
           fill="none"
           :style="trailPathStyle"></path>
@@ -68,6 +68,10 @@
       status: {
         type: String,
         validator: val => ['success', 'exception', 'warning'].indexOf(val) > -1
+      },
+      strokeColor: {
+        type: String,
+        default: '#e5e9f2'
       },
       strokeWidth: {
         type: Number,
