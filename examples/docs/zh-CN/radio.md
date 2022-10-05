@@ -187,7 +187,7 @@
 ### Radio Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| change  | 绑定值变化时触发的事件 |  选中的 Radio label 值  |
+| input  | 绑定值变化时触发的事件 |  选中的 Radio label 值  |
 
 ### Radio-group Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
@@ -201,7 +201,7 @@
 ### Radio-group Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| change  | 绑定值变化时触发的事件 |  选中的 Radio label 值  |
+| input  | 绑定值变化时触发的事件 |  选中的 Radio label 值  |
 
 ### Radio-button Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
