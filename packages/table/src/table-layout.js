@@ -129,6 +129,13 @@ class TableLayout {
     return false;
   }
 
+  getFixedColumnWidth(column) {
+    if (column.children) {
+      return column.children.reduce((pre, cur) => pre + this.getFixedColumnWidth(cur), 0);
+    }
+    return column.realWidth || column.width;
+  }
+
   updateColumnsWidth() {
     if (Vue.prototype.$isServer) return;
     const fit = this.fit;
@@ -198,8 +205,8 @@ class TableLayout {
 
     if (fixedColumns.length > 0) {
       let fixedWidth = 0;
-      fixedColumns.forEach(function(column) {
-        fixedWidth += column.realWidth || column.width;
+      fixedColumns.forEach((column) => {
+        fixedWidth += this.getFixedColumnWidth(column);
       });
 
       this.fixedWidth = fixedWidth;
@@ -208,8 +215,8 @@ class TableLayout {
     const rightFixedColumns = this.store.states.rightFixedColumns;
     if (rightFixedColumns.length > 0) {
       let rightFixedWidth = 0;
-      rightFixedColumns.forEach(function(column) {
-        rightFixedWidth += column.realWidth || column.width;
+      rightFixedColumns.forEach((column) => {
+        rightFixedWidth += this.getFixedColumnWidth(column);
       });
 
       this.rightFixedWidth = rightFixedWidth;
