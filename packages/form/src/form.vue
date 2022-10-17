@@ -123,7 +123,7 @@
         }
 
         let valid = true;
-        let hasWarning = false;
+        let noWarning = true;
         let count = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
@@ -139,11 +139,11 @@
             invalidFields = objectAssign({}, invalidFields, field);
 
             if (warningMessage) {
-              hasWarning = true;
+              noWarning = false;
             }
             warningFields = objectAssign({}, warningFields, warningField);
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid, invalidFields, hasWarning, warningFields);
+              callback(valid, invalidFields, noWarning, warningFields);
             }
           });
         });

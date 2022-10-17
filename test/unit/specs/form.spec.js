@@ -1019,9 +1019,9 @@ describe('Form', () => {
         };
       }
     }, true);
-    vm.$refs.form.validate((valid, _invalidFields, hasWarning, warningFields) => {
+    vm.$refs.form.validate((valid, _invalidFields, noWarning, warningFields) => {
       expect(valid).to.equal(true);
-      expect(hasWarning).to.equal(true);
+      expect(noWarning).to.equal(false);
       expect(warningFields.name.length).to.equal(1);
       done();
     });

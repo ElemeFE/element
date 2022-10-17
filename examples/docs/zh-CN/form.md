@@ -539,9 +539,9 @@ W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.h
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid, _, hasWarning) => {
+        this.$refs[formName].validate((valid, _, noWarning) => {
           if (valid) {
-            if (!hasWarning) {
+            if (noWarning) {
               alert('submit!');
             } else {
               alert('please notice warning');

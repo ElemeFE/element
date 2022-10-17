@@ -286,7 +286,7 @@
         const model = {
           [this.prop]: this.fieldValue
         };
-        
+
         delete rule.ruleIndex;
 
         const validator = new AsyncValidator(descriptor);

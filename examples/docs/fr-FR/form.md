@@ -543,9 +543,9 @@ Lorsqu'un `el-form-item` est imbriqué dans un autre `el-form-item`, la largeur 
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid, _, hasWarning) => {
+        this.$refs[formName].validate((valid, _, noWarning) => {
           if (valid) {
-            if (!hasWarning) {
+            if (noWarning) {
               alert('submit!');
             } else {
               alert('please notice warning');
