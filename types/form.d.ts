@@ -8,8 +8,10 @@ export interface ValidateCallback {
    *
    * @param isValid Whether the form is valid
    * @param invalidFields fields that fail validation
+   * @param noWarnning Whether the form passed without warnning
+   * @param warnningFields fields that fail warnning validation
    */
-  (isValid: boolean, invalidFields: object): void
+  (isValid: boolean, invalidFields: object, noWarnning: boolean, warnningFields: object): void
 }
 
 export interface ValidateFieldCallback {
@@ -17,6 +19,9 @@ export interface ValidateFieldCallback {
    * The callback to tell the field validation result
    *
    * @param errorMessage The error message. It will be empty if there is no error
+   * @param invalidFields fields that fail validation
+   * @param warnningMessage The warnning message. It will be empty if there is no warnning
+   * @param warnningFields fields that fail warnning validation
    */
   (errorMessage: string): void
 }
