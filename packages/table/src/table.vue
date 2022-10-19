@@ -624,7 +624,14 @@
       data: {
         immediate: true,
         handler(value) {
-          this.store.commit('setData', value);
+          if (Array.isArray(value)) {
+            this.store.commit('setData', value);
+          } else {
+            console.error('Type check failed for prop "data". Expected Array, got ' +
+            typeof value +
+            ', In order to let the page continue, we changed "data" to [] !');
+            this.store.commit('setData', []);
+          }
         }
       },
 
