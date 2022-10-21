@@ -23,7 +23,7 @@ export interface ValidateFieldCallback {
    * @param warnningMessage The warnning message. It will be empty if there is no warnning
    * @param warnningFields fields that fail warnning validation
    */
-  (errorMessage: string): void
+  (errorMessage: string, invalidFields: object, warnningMessage: string, warnningFields: object): void
 }
 
 /** Form Component */
