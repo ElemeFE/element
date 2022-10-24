@@ -112,6 +112,24 @@ You can choose week, month, year or multiple dates by extending the standard dat
     </el-date-picker>
   </div>
 </div>
+<div class="container">
+  <div class="block">
+    <span class="demonstration">months</span>
+    <el-date-picker
+      type="months"
+      v-model="value5"
+      placeholder="Pick one or more months">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">years</span>
+    <el-date-picker
+      type="years"
+      v-model="value6"
+      placeholder="Pick one or more years">
+    </el-date-picker>
+  </div>
+</div>
 
 <script>
   export default {
@@ -120,7 +138,9 @@ You can choose week, month, year or multiple dates by extending the standard dat
         value1: '',
         value2: '',
         value3: '',
-        value4: ''
+        value4: '',
+        value5: '',
+        value6: ''
       };
     }
   };
@@ -442,7 +462,7 @@ When picking a date range, you can assign the time part for start date and end d
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
-| type | type of the picker | string | year/month/date/dates/datetime/ week/datetimerange/daterange/ monthrange | date |
+| type | type of the picker | string | year/month/date/dates/months/years/datetime/ week/datetimerange/daterange/ monthrange | date |
 | format | format of the displayed value in the input box | string | see [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |
@@ -456,6 +476,7 @@ When picking a date range, you can assign the time part for start date and end d
 | prefix-icon | Custom prefix icon class | string | — | el-icon-date |
 | clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 | validate-event | whether to trigger form validation | boolean | - | true |
+| append-to-body | whether to append DatePicker itself to body | boolean   | — | true |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

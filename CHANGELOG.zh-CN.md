@@ -1,5 +1,34 @@
 ## 更新日志
 
+### 2.15.10
+
+*2022-09-13*
+
+#### Bug 修复
+
+- DatePicker
+  - 修复 props placement 报错信息 问题 (#21908 by @lqzhgood)
+- Loading
+  - 修复 使用 Loading 的DOM元素 sticky失效 问题 (#22087 by @zzjjhh001)
+- Docs
+  - 修复 Popover 文案 (#22083 by @lm312)
+  - 修复 Skeleton 文案 (#22092 by @lm312)
+  - 修复 DatePicker 文案 (#21970 by @guojiongwei)
+- Tree
+  - 修复 懒加载默认选中 问题 (#21934 by @kiss-yu)
+
+#### 优化
+
+- I18n
+  - 新增 僧伽罗语 翻译 (#21936 by @sayuri-gi)
+  - 更新 西班牙语 翻译 (#21924 by @jcardus)
+  - 新增 马来西亚语 翻译 (#22028 by @iorange0411)
+  - 更新 斯瓦希里语 翻译 (#21904 by @Cholowao)
+- Utils
+  - 更新 date-util.js (#22099 by @Due07)
+- DatePicker
+  - 新增 months 和 years 类型 (#21918 by @akiko123456)
+
 ### 2.15.9
 
 *2022-06-02*
