@@ -1,12 +1,12 @@
-import { arrayFindIndex } from 'element-ui/src/utils/util';
-import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { getStyle, hasClass, removeClass, addClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
+import { addClass, removeClass } from 'element-ui/src/utils/dom';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';
 import TableRow from './table-row.js';
+import { getCell, getColumnByCell, getRowIdentity } from './util';
+import { arrayFindIndex } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElTableBody',
@@ -24,40 +24,111 @@ export default {
       required: true
     },
     stripe: Boolean,
-    context: {},
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    minIndexForShow: Number,
+    maxIndexForShow: Number
   },
 
-  render(h) {
+  render (h) {
     const data = this.data || [];
+    let {
+      columns,
+      treeIndent,
+      fixed,
+      getSpan,
+      getColspanRealWidth,
+      getRowClass,
+      getRowStyle,
+      getCellStyle,
+      getCellClass,
+      getKeyOfRow,
+      wrappedRowRender,
+      tooltipContent,
+      table,
+      rowRender,
+      hasExpandColumn,
+      columnsCount,
+      minIndexForShow,
+      maxIndexForShow,
+      firstDefaultColumnIndex
+    } = this;
+    columns = columns.filter(column => {
+      // 允许固定表格中的固定列、非固定表格中的列、复选框
+      if (
+        (fixed && column.fixed === fixed) ||
+        !fixed ||
+        column.type === 'selection'
+      ) {
+        return true;
+      }
+      return false;
+    });
+    const store = this.store;
+    const { isRowExpanded, assertRowKey } = store;
+    const {
+      treeData,
+      lazyTreeNodeMap,
+      childrenColumnName,
+      rowKey
+    } = store.states;
+    const rowRenderParams = {
+      isRowExpanded,
+      assertRowKey,
+      treeData,
+      lazyTreeNodeMap,
+      childrenColumnName,
+      rowKey,
+      store,
+      fixed,
+      columns,
+      treeIndent,
+      getSpan,
+      getColspanRealWidth,
+      getRowClass,
+      getRowStyle,
+      getCellStyle,
+      getCellClass,
+      getKeyOfRow,
+      table,
+      rowRender,
+      hasExpandColumn,
+      columnsCount,
+      minIndexForShow,
+      maxIndexForShow,
+      firstDefaultColumnIndex
+    };
     return (
-      <table
-        class="el-table__body"
-        cellspacing="0"
-        cellpadding="0"
-        border="0">
+      <table class='el-table__body' cellspacing='0' cellpadding='0' border='0'>
         <colgroup>
-          {
-            this.columns.map(column => <col name={column.id} key={column.id} />)
-          }
+          {columns.map(column => (
+            <col name={column.id} key={column.id} />
+          ))}
         </colgroup>
         <tbody>
-          {
-            data.reduce((acc, row) => {
-              return acc.concat(this.wrappedRowRender(row, acc.length));
-            }, [])
-          }
-          <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
+          {data.reduce((acc, row) => {
+            rowRenderParams.isSelected = store.isSelected(row);
+            rowRenderParams.isExpanded =
+              store.states.expandRows.indexOf(row) > -1;
+            return acc.concat(
+              wrappedRowRender(row, acc.length, rowRenderParams)
+            );
+          }, [])}
+          <el-tooltip
+            effect={table.tooltipEffect}
+            placement='top'
+            ref='tooltip'
+            content={tooltipContent}
+          ></el-tooltip>
         </tbody>
       </table>
     );
   },
 
   computed: {
-    table() {
+    table () {
       return this.$parent;
     },
 
@@ -70,10 +141,11 @@ export default {
       columnsCount: states => states.columns.length,
       leftFixedCount: states => states.fixedColumns.length,
       rightFixedCount: states => states.rightFixedColumns.length,
-      hasExpandColumn: states => states.columns.some(({ type }) => type === 'expand')
+      hasExpandColumn: states =>
+        states.columns.some(({ type }) => type === 'expand')
     }),
 
-    columnsHidden() {
+    columnsHidden () {
       return this.columns.map((column, index) => this.isColumnHidden(index));
     },
 
@@ -85,13 +157,9 @@ export default {
   watch: {
     // don't trigger getter of currentRow in getCellClass. see https://jsfiddle.net/oe2b4hqt/
     // update DOM manually. see https://github.com/ElemeFE/element/pull/13954/files#diff-9b450c00d0a9dec0ffad5a3176972e40
-    'store.states.hoverRow'(newVal, oldVal) {
+    'store.states.hoverRow' (newVal, oldVal) {
       if (!this.store.states.isComplex || this.$isServer) return;
-      let raf = window.requestAnimationFrame;
-      if (!raf) {
-        raf = (fn) => setTimeout(fn, 16);
-      }
-      raf(() => {
+      const changeHoverClass = () => {
         const rows = this.$el.querySelectorAll('.el-table__row');
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
@@ -101,22 +169,27 @@ export default {
         if (newRow) {
           addClass(newRow, 'hover-row');
         }
-      });
+      };
+      let raf = window.requestAnimationFrame;
+      if (!raf) {
+        raf = fn => setTimeout(fn, 17);
+      }
+      raf(changeHoverClass);
     }
   },
 
-  data() {
+  data () {
     return {
       tooltipContent: ''
     };
   },
 
-  created() {
+  created () {
     this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
   },
 
   methods: {
-    getKeyOfRow(row, index) {
+    getKeyOfRow (row, index) {
       const rowKey = this.table.rowKey;
       if (rowKey) {
         return getRowIdentity(row, rowKey);
@@ -124,17 +197,20 @@ export default {
       return index;
     },
 
-    isColumnHidden(index) {
+    isColumnHidden (index) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
         return index < this.columnsCount - this.rightFixedLeafCount;
       } else {
-        return (index < this.leftFixedLeafCount) || (index >= this.columnsCount - this.rightFixedLeafCount);
+        return (
+          index < this.leftFixedLeafCount ||
+          index >= this.columnsCount - this.rightFixedLeafCount
+        );
       }
     },
 
-    getSpan(row, column, rowIndex, columnIndex) {
+    getSpan (row, column, rowIndex, columnIndex) {
       let rowspan = 1;
       let colspan = 1;
       const fn = this.table.spanMethod;
@@ -156,7 +232,7 @@ export default {
       return { rowspan, colspan };
     },
 
-    getRowStyle(row, rowIndex) {
+    getRowStyle (row, rowIndex) {
       const rowStyle = this.table.rowStyle;
       if (typeof rowStyle === 'function') {
         return rowStyle.call(null, {
@@ -167,9 +243,12 @@ export default {
       return rowStyle || null;
     },
 
-    getRowClass(row, rowIndex) {
+    getRowClass (row, rowIndex) {
       const classes = ['el-table__row'];
-      if (this.table.highlightCurrentRow && row === this.store.states.currentRow) {
+      if (
+        this.table.highlightCurrentRow &&
+        row === this.store.states.currentRow
+      ) {
         classes.push('current-row');
       }
 
@@ -180,10 +259,12 @@ export default {
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);
       } else if (typeof rowClassName === 'function') {
-        classes.push(rowClassName.call(null, {
-          row,
-          rowIndex
-        }));
+        classes.push(
+          rowClassName.call(null, {
+            row,
+            rowIndex
+          })
+        );
       }
 
       if (this.store.states.expandRows.indexOf(row) > -1) {
@@ -193,7 +274,7 @@ export default {
       return classes;
     },
 
-    getCellStyle(rowIndex, columnIndex, row, column) {
+    getCellStyle (rowIndex, columnIndex, row, column) {
       const cellStyle = this.table.cellStyle;
       if (typeof cellStyle === 'function') {
         return cellStyle.call(null, {
@@ -206,23 +287,25 @@ export default {
       return cellStyle;
     },
 
-    getCellClass(rowIndex, columnIndex, row, column) {
+    getCellClass (rowIndex, columnIndex, row, column) {
       const classes = [column.id, column.align, column.className];
 
-      if (this.isColumnHidden(columnIndex)) {
-        classes.push('is-hidden');
-      }
+      // if (this.isColumnHidden(columnIndex)) {
+      //   classes.push('is-hidden');
+      // }
 
       const cellClassName = this.table.cellClassName;
       if (typeof cellClassName === 'string') {
         classes.push(cellClassName);
       } else if (typeof cellClassName === 'function') {
-        classes.push(cellClassName.call(null, {
-          rowIndex,
-          columnIndex,
-          row,
-          column
-        }));
+        classes.push(
+          cellClassName.call(null, {
+            rowIndex,
+            columnIndex,
+            row,
+            column
+          })
+        );
       }
 
       classes.push('el-table__cell');
@@ -230,84 +313,38 @@ export default {
       return classes.join(' ');
     },
 
-    getColspanRealWidth(columns, colspan, index) {
+    getColspanRealWidth (columns, colspan, index) {
       if (colspan < 1) {
         return columns[index].realWidth;
       }
-      const widthArr = columns.map(({ realWidth }) => realWidth).slice(index, index + colspan);
+      const widthArr = columns
+        .map(({ realWidth }) => realWidth)
+        .slice(index, index + colspan);
       return widthArr.reduce((acc, width) => acc + width, -1);
     },
 
-    handleCellMouseEnter(event, row) {
-      const table = this.table;
-      const cell = getCell(event);
-
-      if (cell) {
-        const column = getColumnByCell(table, cell);
-        const hoverState = table.hoverState = { cell, column, row };
-        table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
-      }
-
-      // 判断是否text-overflow, 如果是就显示tooltip
-      const cellChild = event.target.querySelector('.cell');
-      if (!(hasClass(cellChild, 'el-tooltip') && cellChild.childNodes.length)) {
-        return;
-      }
-      // use range width instead of scrollWidth to determine whether the text is overflowing
-      // to address a potential FireFox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1074543#c3
-      const range = document.createRange();
-      range.setStart(cellChild, 0);
-      range.setEnd(cellChild, cellChild.childNodes.length);
-      const rangeWidth = range.getBoundingClientRect().width;
-      const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
-        (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
-      if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
-        const tooltip = this.$refs.tooltip;
-        // TODO 会引起整个 Table 的重新渲染，需要优化
-        this.tooltipContent = cell.innerText || cell.textContent;
-        tooltip.referenceElm = cell;
-        tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
-        tooltip.doDestroy();
-        tooltip.setExpectedState(true);
-        this.activateTooltip(tooltip);
-      }
-    },
-
-    handleCellMouseLeave(event) {
-      const tooltip = this.$refs.tooltip;
-      if (tooltip) {
-        tooltip.setExpectedState(false);
-        tooltip.handleClosePopper();
-      }
-      const cell = getCell(event);
-      if (!cell) return;
-
-      const oldHoverState = this.table.hoverState || {};
-      this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
-    },
-
-    handleMouseEnter: debounce(30, function(index) {
+    handleMouseEnter: debounce(30, function (index) {
       this.store.commit('setHoverRow', index);
     }),
 
-    handleMouseLeave: debounce(30, function() {
+    handleMouseLeave: debounce(30, function () {
       this.store.commit('setHoverRow', null);
     }),
 
-    handleContextMenu(event, row) {
+    handleContextMenu (event, row) {
       this.handleEvent(event, row, 'contextmenu');
     },
 
-    handleDoubleClick(event, row) {
+    handleDoubleClick (event, row) {
       this.handleEvent(event, row, 'dblclick');
     },
 
-    handleClick(event, row) {
+    handleClick (event, row) {
       this.store.commit('setCurrentRow', row);
       this.handleEvent(event, row, 'click');
     },
 
-    handleEvent(event, row, name) {
+    handleEvent (event, row, name) {
       const table = this.table;
       const cell = getCell(event);
       let column;
@@ -320,9 +357,26 @@ export default {
       table.$emit(`row-${name}`, row, column, event);
     },
 
-    rowRender(row, $index, treeRowData) {
-      const { treeIndent, columns, firstDefaultColumnIndex } = this;
-      const rowClasses = this.getRowClass(row, $index);
+    rowRender (row, $index, treeRowData, rowRenderParams) {
+      const {
+        treeIndent,
+        columns,
+        store,
+        getSpan,
+        getColspanRealWidth,
+        getCellStyle,
+        getCellClass,
+        getRowClass,
+        getRowStyle,
+        isSelected,
+        isExpanded,
+        fixed,
+        getKeyOfRow,
+        minIndexForShow,
+        maxIndexForShow,
+        firstDefaultColumnIndex
+      } = rowRenderParams;
+      const rowClasses = getRowClass(row, $index);
       let display = true;
       if (treeRowData) {
         rowClasses.push('el-table__row--level-' + treeRowData.level);
@@ -330,61 +384,83 @@ export default {
       }
       // 指令 v-show 会覆盖 row-style 中 display
       // 使用 :style 代替 v-show https://github.com/ElemeFE/element/issues/16995
-      let displayStyle = display ? null : {
+      let displayStyle = {
         display: 'none'
       };
+      if (display) {
+        displayStyle = null;
+      }
+      if ($index < minIndexForShow || $index > maxIndexForShow) {
+        return (
+          <TableRow
+            class={rowClasses}
+            key={getKeyOfRow(row, $index)}
+          ></TableRow>
+        );
+      }
       return (
         <TableRow
-          style={[displayStyle, this.getRowStyle(row, $index)]}
+          style={[displayStyle, getRowStyle(row, $index)]}
           class={rowClasses}
-          key={this.getKeyOfRow(row, $index)}
-          nativeOn-dblclick={($event) => this.handleDoubleClick($event, row)}
-          nativeOn-click={($event) => this.handleClick($event, row)}
-          nativeOn-contextmenu={($event) => this.handleContextMenu($event, row)}
+          key={getKeyOfRow(row, $index)}
+          nativeOn-dblclick={$event => this.handleDoubleClick($event, row)}
+          nativeOn-click={$event => this.handleClick($event, row)}
+          nativeOn-contextmenu={$event => this.handleContextMenu($event, row)}
           nativeOn-mouseenter={_ => this.handleMouseEnter($index)}
           nativeOn-mouseleave={this.handleMouseLeave}
           columns={columns}
+          firstDefaultColumnIndex={firstDefaultColumnIndex}
           row={row}
           index={$index}
-          store={this.store}
-          context={this.context || this.table.$vnode.context}
-          firstDefaultColumnIndex={firstDefaultColumnIndex}
+          store={store}
           treeRowData={treeRowData}
           treeIndent={treeIndent}
-          columnsHidden={this.columnsHidden}
-          getSpan={this.getSpan}
-          getColspanRealWidth={this.getColspanRealWidth}
-          getCellStyle={this.getCellStyle}
-          getCellClass={this.getCellClass}
-          handleCellMouseEnter={this.handleCellMouseEnter}
-          handleCellMouseLeave={this.handleCellMouseLeave}
-          isSelected={this.store.isSelected(row)}
-          isExpanded={this.store.states.expandRows.indexOf(row) > -1}
-          fixed={this.fixed}
-        >
-        </TableRow>
+          getSpan={getSpan}
+          getColspanRealWidth={getColspanRealWidth}
+          getCellStyle={getCellStyle}
+          getCellClass={getCellClass}
+          isSelected={isSelected}
+          isExpanded={isExpanded}
+          fixed={fixed}
+        ></TableRow>
       );
     },
 
-    wrappedRowRender(row, $index) {
-      const store = this.store;
-      const { isRowExpanded, assertRowKey } = store;
-      const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
-      if (this.hasExpandColumn && isRowExpanded(row)) {
-        const renderExpanded = this.table.renderExpanded;
-        const tr = this.rowRender(row, $index);
+    wrappedRowRender (row, $index, rowRenderParams) {
+      const {
+        isRowExpanded,
+        assertRowKey,
+        treeData,
+        lazyTreeNodeMap,
+        childrenColumnName,
+        rowKey,
+        table,
+        rowRender,
+        hasExpandColumn,
+        columnsCount,
+        store
+      } = rowRenderParams;
+      if (hasExpandColumn && isRowExpanded(row)) {
+        const renderExpanded = table.renderExpanded;
+        const tr = rowRender(row, $index, null, rowRenderParams);
         if (!renderExpanded) {
           console.error('[Element Error]renderExpanded is required.');
           return tr;
         }
         // 使用二维数组，避免修改 $index
-        return [[
-          tr,
-          <tr key={'expanded-row__' + tr.key}>
-            <td colspan={ this.columnsCount } class="el-table__cell el-table__expanded-cell">
-              { renderExpanded(this.$createElement, { row, $index, store: this.store }) }
-            </td>
-          </tr>]];
+        return [
+          [
+            tr,
+            <tr key={'expanded-row__' + tr.key}>
+              <td
+                colspan={columnsCount}
+                class='el-table__cell el-table__expanded-cell'
+              >
+                {renderExpanded(this.$createElement, { row, $index, store })}
+              </td>
+            </tr>
+          ]
+        ];
       } else if (Object.keys(treeData).length) {
         assertRowKey();
         // TreeTable 时，rowKey 必须由用户设定，不使用 getKeyOfRow 计算
@@ -400,12 +476,14 @@ export default {
           };
           if (typeof cur.lazy === 'boolean') {
             if (typeof cur.loaded === 'boolean' && cur.loaded) {
-              treeRowData.noLazyChildren = !(cur.children && cur.children.length);
+              treeRowData.noLazyChildren = !(
+                cur.children && cur.children.length
+              );
             }
             treeRowData.loading = cur.loading;
           }
         }
-        const tmp = [this.rowRender(row, $index, treeRowData)];
+        const tmp = [rowRender(row, $index, treeRowData, rowRenderParams)];
         // 渲染嵌套数据
         if (cur) {
           // currentRow 记录的是 index，所以还需主动增加 TreeTable 的 index
@@ -433,15 +511,20 @@ export default {
                 cur.display = !!(cur.expanded && innerTreeRowData.display);
                 if (typeof cur.lazy === 'boolean') {
                   if (typeof cur.loaded === 'boolean' && cur.loaded) {
-                    innerTreeRowData.noLazyChildren = !(cur.children && cur.children.length);
+                    innerTreeRowData.noLazyChildren = !(
+                      cur.children && cur.children.length
+                    );
                   }
                   innerTreeRowData.loading = cur.loading;
                 }
               }
               i++;
-              tmp.push(this.rowRender(node, $index + i, innerTreeRowData));
+              tmp.push(
+                rowRender(node, $index + i, innerTreeRowData, rowRenderParams)
+              );
               if (cur) {
-                const nodes = lazyTreeNodeMap[childKey] || node[childrenColumnName];
+                const nodes =
+                  lazyTreeNodeMap[childKey] || node[childrenColumnName];
                 traverse(nodes, cur);
               }
             });
@@ -453,7 +536,7 @@ export default {
         }
         return tmp;
       } else {
-        return this.rowRender(row, $index);
+        return rowRender(row, $index, null, rowRenderParams);
       }
     }
   }

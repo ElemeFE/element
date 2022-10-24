@@ -1,8 +1,8 @@
-import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
-import { getKeysMap, getRowIdentity, getColumnById, getColumnByKey, orderBy, toggleRowStatus } from '../util';
-import expand from './expand';
+import Vue from 'vue';
+import { getColumnById, getColumnByKey, getKeysMap, getRowIdentity, orderBy, toggleRowStatus } from '../util';
 import current from './current';
+import expand from './expand';
 import tree from './tree';
 
 const sortData = (data, states) => {
@@ -163,6 +163,9 @@ export default Vue.extend({
         if (emitChange) {
           this.table.$emit('select', newSelection, row);
         }
+        if (!newSelection.includes(row)) {
+          this.table.$emit('select-cancel', newSelection, [row]);
+        }
         this.table.$emit('selection-change', newSelection);
       }
     },
@@ -178,9 +181,13 @@ export default Vue.extend({
       states.isAllSelected = value;
 
       let selectionChanged = false;
+      let cancelRows = [];
       data.forEach((row, index) => {
         if (states.selectable) {
           if (states.selectable.call(null, row, index) && toggleRowStatus(selection, row, value)) {
+            if (!selection.includes(row)) {
+              cancelRows.push(row);
+            }
             selectionChanged = true;
           }
         } else {
@@ -192,6 +199,9 @@ export default Vue.extend({
 
       if (selectionChanged) {
         this.table.$emit('selection-change', selection ? selection.slice() : []);
+      }
+      if (cancelRows.length > 0) {
+        this.table.$emit('select-cancel', selection ? selection.slice() : [], cancelRows);
       }
       this.table.$emit('select-all', selection);
     },

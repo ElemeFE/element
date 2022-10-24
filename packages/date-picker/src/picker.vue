@@ -98,7 +98,6 @@ const NewPopper = {
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     arrowOffset: Popper.props.arrowOffset,
-    placement: Popper.props.placement,
     transformOrigin: Popper.props.transformOrigin
   },
   methods: Popper.methods,
@@ -390,6 +389,10 @@ export default {
     validateEvent: {
       type: Boolean,
       default: true
+    },
+    renderInTable: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -766,7 +769,7 @@ export default {
       }
 
       // Enter
-      if (keyCode === 13) {
+      if (keyCode === 13 && !this.renderInTable) {
         if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
@@ -784,7 +787,11 @@ export default {
 
       // delegate other keys to panel
       if (this.picker && this.picker.handleKeydown) {
-        this.picker.handleKeydown(event);
+        if(this.renderInTable){
+          document.body.removeEventListener('keydown', this.picker.handleKeydown)
+        } else {
+          this.picker.handleKeydown(event);
+        }
       }
     },
 

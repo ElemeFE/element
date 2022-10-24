@@ -31,17 +31,28 @@ export default class TreeStore {
   }
 
   filter(value) {
+    const $this = this;
     const filterNodeMethod = this.filterNodeMethod;
     const lazy = this.lazy;
+    $this.invisibleNodes = [];
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
       childNodes.forEach((child) => {
         child.visible = filterNodeMethod.call(child, value, child.data, child);
-
+        if (!child.visible) {
+          $this.invisibleNodes.push(child);
+        }
         traverse(child);
       });
 
+      if (node && node.getChildState) {
+        const { half, all } = node.getChildState(childNodes);
+        if (!node.isLeaf) {
+          node.checked = all;
+          node.indeterminate = half;
+        }
+      }
       if (!node.visible && childNodes.length) {
         let allHidden = true;
         allHidden = !childNodes.some(child => child.visible);
@@ -51,6 +62,9 @@ export default class TreeStore {
         } else {
           node.visible = allHidden === false;
         }
+        if (!node.visible) {
+          $this.invisibleNodes.push(node);
+        }
       }
       if (!value) return;
 
@@ -58,6 +72,13 @@ export default class TreeStore {
     };
 
     traverse(this);
+    this.invisibleNodeDataIds = [];
+    for (const node of this.invisibleNodes) {
+      if (!node.data) {
+        continue;
+      }
+      this.invisibleNodeDataIds.push(node.data[this.key]);
+    }
   }
 
   setData(newVal) {

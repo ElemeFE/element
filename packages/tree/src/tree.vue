@@ -323,6 +323,8 @@
       this.isTree = true;
 
       this.store = new TreeStore({
+        invisibleNodeDataIds: [],
+        invisibleNodes: [],
         key: this.nodeKey,
         data: this.data,
         lazy: this.lazy,

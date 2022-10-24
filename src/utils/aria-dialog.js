@@ -50,6 +50,11 @@ aria.Dialog = function(dialog, focusAfterClosed, focusFirst) {
 
   this.lastFocus = document.activeElement;
   tabEvent = (e) => {
+    const tagName = e.target.tagName;
+    const isInput = tagName === 'INPUT';
+    if (isInput) {
+      return;
+    }
     this.trapFocus(e);
   };
   this.addListeners();

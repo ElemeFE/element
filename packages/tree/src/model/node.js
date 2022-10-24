@@ -8,6 +8,9 @@ export const getChildState = node => {
   let allWithoutDisable = true;
   for (let i = 0, j = node.length; i < j; i++) {
     const n = node[i];
+    if (!n.visible) {
+      continue;
+    }
     if (n.checked !== true || n.indeterminate) {
       all = false;
       if (!n.disabled) {
@@ -133,6 +136,10 @@ export default class Node {
     }
 
     this.updateLeafState();
+  }
+
+  getChildState(node) {
+    return getChildState(node);
   }
 
   setData(data) {
@@ -372,6 +379,9 @@ export default class Node {
           const childNodes = this.childNodes;
           for (let i = 0, j = childNodes.length; i < j; i++) {
             const child = childNodes[i];
+            if (!child.visible) {
+              continue;
+            }
             passValue = passValue || value !== false;
             const isCheck = child.disabled ? child.checked : passValue;
             child.setChecked(isCheck, deep, true, passValue);

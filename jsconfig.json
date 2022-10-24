@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "es6",
+    "lib": ["ESNext"],
+    "paths": {
+      "element-ui/*": ["./*"],
+      "@/*": ["./src/*"],
+      "@mock/*": ["./mock/*"]
+    },
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*"]
+}

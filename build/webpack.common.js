@@ -36,19 +36,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jsx?|babel|es6)$/,
-        include: process.cwd(),
-        exclude: config.jsexclude,
-        loader: 'babel-loader'
-      },
-      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-            preserveWhitespace: false
+            whitespace: 'preserve'
           }
         }
+      },
+      {
+        test: /\.jsx?$/,
+        include: process.cwd(),
+        exclude: config.jsexclude,
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
@@ -64,8 +64,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new ProgressBarPlugin(),
-    new VueLoaderPlugin()
-  ]
+  plugins: [new ProgressBarPlugin(), new VueLoaderPlugin()]
 };

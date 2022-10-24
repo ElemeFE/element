@@ -3,15 +3,25 @@
     "ga": true,
     "chrome": true
   },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module",
+    "ecmaVersion": 2021,
+    "ecmaFeatures": {
+      "globalReturn": false,
+      "impliedStrict": false,
+      "jsx": true
+    }
+  },
   "plugins": ["html", "json"],
   "extends": "elemefe",
   "rules": {
-    "no-restricted-globals": ["error", "event", "fdescribe"]
-  },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "no-restricted-globals": ["error", "event", "fdescribe"],
+    "space-before-function-paren": "off"
   }
 }

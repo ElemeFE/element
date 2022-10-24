@@ -12,7 +12,7 @@ const webpackConfig = {
     path: path.resolve(process.cwd(), './lib'),
     publicPath: '/dist/',
     filename: '[name].js',
-    chunkFilename: '[id].js',
+    chunkFilename: '[name].js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
@@ -31,38 +31,39 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.(jsx?|babel|es6)$/,
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            whitespace: 'preserve'
+          }
+        }
+      },
+      {
+        test: /\.jsx?$/,
         include: process.cwd(),
         exclude: config.jsexclude,
         loader: 'babel-loader'
       },
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            preserveWhitespace: false
-          }
-        }
-      },
-      {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: path.posix.join('static', '[name].[hash:7].[ext]')
+            }
+          }
+        ]
       }
     ]
   },
-  plugins: [
-    new ProgressBarPlugin(),
-    new VueLoaderPlugin()
-  ]
+  plugins: [new ProgressBarPlugin(), new VueLoaderPlugin()]
 };
 
 module.exports = webpackConfig;

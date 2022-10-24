@@ -1,6 +1,11 @@
-import { cellStarts, cellForced, defaultRenderCell, treeCellPrefix } from './config';
-import { mergeOptions, parseWidth, parseMinWidth, compose } from './util';
 import ElCheckbox from 'element-ui/packages/checkbox';
+import {
+  cellForced,
+  cellStarts,
+  defaultRenderCell,
+  treeCellPrefix
+} from './config';
+import { compose, mergeOptions, parseMinWidth, parseWidth } from './util';
 
 let columnIdSeed = 1;
 
@@ -13,6 +18,7 @@ export default {
       default: 'default'
     },
     label: String,
+    title: String,
     className: String,
     labelClassName: String,
     property: String,
@@ -50,16 +56,18 @@ export default {
     index: [Number, Function],
     sortOrders: {
       type: Array,
-      default() {
+      default () {
         return ['ascending', 'descending', null];
       },
-      validator(val) {
-        return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
+      validator (val) {
+        return val.every(
+          order => ['ascending', 'descending', null].indexOf(order) > -1
+        );
       }
     }
   },
 
-  data() {
+  data () {
     return {
       isSubColumn: false,
       columns: []
@@ -67,7 +75,7 @@ export default {
   },
 
   computed: {
-    owner() {
+    owner () {
       let parent = this.$parent;
       while (parent && !parent.tableId) {
         parent = parent.$parent;
@@ -75,7 +83,7 @@ export default {
       return parent;
     },
 
-    columnOrTableParent() {
+    columnOrTableParent () {
       let parent = this.$parent;
       while (parent && !parent.tableId && !parent.columnId) {
         parent = parent.$parent;
@@ -83,28 +91,92 @@ export default {
       return parent;
     },
 
-    realWidth() {
+    realWidth () {
       return parseWidth(this.width);
     },
 
-    realMinWidth() {
+    realMinWidth () {
       return parseMinWidth(this.minWidth);
     },
 
-    realAlign() {
+    realAlign () {
       return this.align ? 'is-' + this.align : null;
     },
 
-    realHeaderAlign() {
+    realHeaderAlign () {
       return this.headerAlign ? 'is-' + this.headerAlign : this.realAlign;
     }
   },
 
   methods: {
-    getPropsData(...props) {
+    initColumnData () {
+      const type = this.type || 'default';
+      const sortable = this.sortable === '' ? true : this.sortable;
+      const defaults = {
+        ...cellStarts[type],
+        id: this.columnId,
+        type: type,
+        property: this.prop || this.property,
+        align: this.realAlign,
+        headerAlign: this.realHeaderAlign,
+        showOverflowTooltip:
+          this.showOverflowTooltip || this.showTooltipWhenOverflow,
+        // filter 相关属性
+        filterable: this.filters || this.filterMethod,
+        filteredValue: [],
+        filterPlacement: '',
+        isColumnGroup: false,
+        filterOpened: false,
+        // sort 相关属性
+        sortable: sortable,
+        // index 列
+        index: this.index
+      };
+      const basicProps = [
+        'columnKey',
+        'label',
+        'title',
+        'className',
+        'labelClassName',
+        'type',
+        'renderHeader',
+        'formatter',
+        'fixed',
+        'resizable'
+      ];
+      const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
+      const selectProps = ['selectable', 'reserveSelection'];
+      const filterProps = [
+        'filterMethod',
+        'filters',
+        'filterMultiple',
+        'filterOpened',
+        'filteredValue',
+        'filterPlacement'
+      ];
+
+      let column = this.getPropsData(
+        basicProps,
+        sortProps,
+        selectProps,
+        filterProps
+      );
+      column = mergeOptions(defaults, column);
+
+      // 注意 compose 中函数执行的顺序是从右到左
+      const chains = compose(
+        this.setColumnRenders,
+        this.setColumnWidth,
+        this.setColumnForcedProps
+      );
+      column = chains(column);
+
+      this.columnConfig = column;
+    },
+    getPropsData (...props) {
       return props.reduce((prev, cur) => {
         if (Array.isArray(cur)) {
-          cur.forEach((key) => {
+          cur.forEach(key => {
             prev[key] = this[key];
           });
         }
@@ -112,11 +184,11 @@ export default {
       }, {});
     },
 
-    getColumnElIndex(children, child) {
+    getColumnElIndex (children, child) {
       return [].indexOf.call(children, child);
     },
 
-    setColumnWidth(column) {
+    setColumnWidth (column) {
       if (this.realWidth) {
         column.width = this.realWidth;
       }
@@ -126,27 +198,31 @@ export default {
       if (!column.minWidth) {
         column.minWidth = 80;
       }
-      column.realWidth = column.width === undefined ? column.minWidth : column.width;
+      column.realWidth =
+        column.width === undefined ? column.minWidth : column.width;
       return column;
     },
 
-    setColumnForcedProps(column) {
+    setColumnForcedProps (column) {
       // 对于特定类型的 column，某些属性不允许设置
       const type = column.type;
       const source = cellForced[type] || {};
       Object.keys(source).forEach(prop => {
         let value = source[prop];
         if (value !== undefined) {
-          column[prop] = prop === 'className' ? `${column[prop]} ${value}` : value;
+          column[prop] =
+            prop === 'className' ? `${column[prop]} ${value}` : value;
         }
       });
       return column;
     },
 
-    setColumnRenders(column) {
+    setColumnRenders (column) {
       // renderHeader 属性不推荐使用。
       if (this.renderHeader) {
-        console.warn('[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.');
+        console.warn(
+          '[Element Warn][TableColumn]Comparing to render-header, scoped-slot header is easier to use. We recommend users to use scoped-slot header.'
+        );
       } else if (column.type !== 'selection') {
         column.renderHeader = (h, scope) => {
           const renderHeader = this.$scopedSlots.header;
@@ -154,13 +230,13 @@ export default {
         };
       }
 
-      let originRenderCell = column.renderCell;
+      let originRenderCell = column.renderCell || column.render;
       // TODO: 这里的实现调整
       if (column.type === 'expand') {
         // 对于展开行，renderCell 不允许配置的。在上一步中已经设置过，这里需要简单封装一下。
-        column.renderCell = (h, data) => (<div class="cell">
-          { originRenderCell(h, data) }
-        </div>);
+        column.renderCell = (h, data) => (
+          <div class='cell'>{originRenderCell(h, data)}</div>
+        );
         this.owner.renderExpanded = (h, data) => {
           return this.$scopedSlots.default
             ? this.$scopedSlots.default(data)
@@ -168,11 +244,26 @@ export default {
         };
       } else {
         originRenderCell = originRenderCell || defaultRenderCell;
+        let defaultScopeSlot = null;
         // 对 renderCell 进行包装
         column.renderCell = (h, data) => {
+          const { column: columnInData, fixed: isInFixedTable } = data;
+          const isFixedColumn = columnInData.fixed;
+          if (
+            (isInFixedTable && !isFixedColumn) ||
+            (!isInFixedTable && isFixedColumn)
+          ) {
+            return;
+          }
+
           let children = null;
-          if (this.$scopedSlots.default) {
-            children = this.$scopedSlots.default(data);
+          if (!defaultScopeSlot && this.$scopedSlots.default) {
+            defaultScopeSlot = this.$scopedSlots.default.bind(
+              this.$scopedSlots
+            );
+          }
+          if (defaultScopeSlot) {
+            children = defaultScopeSlot(data);
           } else {
             children = originRenderCell(h, data);
           }
@@ -181,26 +272,42 @@ export default {
             class: 'cell',
             style: {}
           };
-          if (column.showOverflowTooltip) {
+          if (columnInData.showOverflowTooltip) {
             props.class += ' el-tooltip';
-            props.style = {width: (data.column.realWidth || data.column.width) - 1 + 'px'};
+            props.style = {
+              width: (columnInData.realWidth || columnInData.width) - 1 + 'px'
+            };
           }
-          return (<div { ...props }>
-            { prefix }
-            { children }
-          </div>);
+          return (
+            <div {...props}>
+              {prefix}
+              {children}
+            </div>
+          );
         };
       }
       return column;
     },
 
-    registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
+    registerNormalWatchers () {
+      const props = [
+        // 'label',
+        // 'property',
+        // 'filters',
+        // 'filterMultiple',
+        // 'index',
+        // 'formatter',
+        // 'sortable',
+        // 'showOverflowTooltip',
+        // 'labelClassName',
+        'title',
+        'className'
+      ];
       // 一些属性具有别名
       const aliases = {
-        prop: 'property',
-        realAlign: 'align',
-        realHeaderAlign: 'headerAlign',
+        // prop: 'property',
+        // realAlign: 'align',
+        // realHeaderAlign: 'headerAlign',
         realWidth: 'width'
       };
       const allAliases = props.reduce((prev, cur) => {
@@ -211,13 +318,13 @@ export default {
       Object.keys(allAliases).forEach(key => {
         const columnKey = aliases[key];
 
-        this.$watch(key, (newVal) => {
+        this.$watch(key, newVal => {
           this.columnConfig[columnKey] = newVal;
         });
       });
     },
 
-    registerComplexWatchers() {
+    registerComplexWatchers () {
       const props = ['fixed'];
       const aliases = {
         realWidth: 'width',
@@ -231,7 +338,7 @@ export default {
       Object.keys(allAliases).forEach(key => {
         const columnKey = aliases[key];
 
-        this.$watch(key, (newVal) => {
+        this.$watch(key, newVal => {
           this.columnConfig[columnKey] = newVal;
           const updateColumns = columnKey === 'fixed';
           this.owner.store.scheduleLayout(updateColumns);
@@ -244,75 +351,53 @@ export default {
     ElCheckbox
   },
 
-  beforeCreate() {
+  beforeCreate () {
     this.row = {};
     this.column = {};
     this.$index = 0;
     this.columnId = '';
   },
 
-  created() {
+  created () {
     const parent = this.columnOrTableParent;
     this.isSubColumn = this.owner !== parent;
-    this.columnId = (parent.tableId || parent.columnId) + '_column_' + columnIdSeed++;
+    this.columnId =
+      (parent.tableId || parent.columnId) + '_column_' + columnIdSeed++;
+    // 初始化column数据
+    this.initColumnData();
+  },
 
-    const type = this.type || 'default';
-    const sortable = this.sortable === '' ? true : this.sortable;
-    const defaults = {
-      ...cellStarts[type],
-      id: this.columnId,
-      type: type,
-      property: this.prop || this.property,
-      align: this.realAlign,
-      headerAlign: this.realHeaderAlign,
-      showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
-      // filter 相关属性
-      filterable: this.filters || this.filterMethod,
-      filteredValue: [],
-      filterPlacement: '',
-      isColumnGroup: false,
-      filterOpened: false,
-      // sort 相关属性
-      sortable: sortable,
-      // index 列
-      index: this.index
-    };
-
-    const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];
-    const sortProps = ['sortMethod', 'sortBy', 'sortOrders'];
-    const selectProps = ['selectable', 'reserveSelection'];
-    const filterProps = ['filterMethod', 'filters', 'filterMultiple', 'filterOpened', 'filteredValue', 'filterPlacement'];
-
-    let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
-    column = mergeOptions(defaults, column);
-
-    // 注意 compose 中函数执行的顺序是从右到左
-    const chains = compose(this.setColumnRenders, this.setColumnWidth, this.setColumnForcedProps);
-    column = chains(column);
-
-    this.columnConfig = column;
-
+  mounted () {
     // 注册 watcher
     this.registerNormalWatchers();
     this.registerComplexWatchers();
-  },
 
-  mounted() {
     const owner = this.owner;
     const parent = this.columnOrTableParent;
-    const children = this.isSubColumn ? parent.$el.children : parent.$refs.hiddenColumns.children;
+    const children = this.isSubColumn
+      ? parent.$el.children
+      : parent.$refs.hiddenColumns.children;
     const columnIndex = this.getColumnElIndex(children, this.$el);
 
-    owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
+    owner.store.commit(
+      'insertColumn',
+      this.columnConfig,
+      columnIndex,
+      this.isSubColumn ? parent.columnConfig : null
+    );
   },
 
-  destroyed() {
+  destroyed () {
     if (!this.$parent) return;
     const parent = this.$parent;
-    this.owner.store.commit('removeColumn', this.columnConfig, this.isSubColumn ? parent.columnConfig : null);
+    this.owner.store.commit(
+      'removeColumn',
+      this.columnConfig,
+      this.isSubColumn ? parent.columnConfig : null
+    );
   },
 
-  render(h) {
+  render (h) {
     // slots 也要渲染，需要计算合并表头
     return h('div', this.$slots.default);
   }

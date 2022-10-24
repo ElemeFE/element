@@ -1,7 +1,7 @@
-import Store from './index';
 import debounce from 'throttle-debounce/debounce';
+import Store from './index';
 
-export function createStore(table, initialState = {}) {
+export function createStore (table, initialState = {}) {
   if (!table) {
     throw new Error('Table is required.');
   }
@@ -17,17 +17,17 @@ export function createStore(table, initialState = {}) {
   return store;
 }
 
-export function mapStates(mapper) {
+export function mapStates (mapper) {
   const res = {};
   Object.keys(mapper).forEach(key => {
     const value = mapper[key];
     let fn;
     if (typeof value === 'string') {
-      fn = function() {
+      fn = function () {
         return this.store.states[value];
       };
     } else if (typeof value === 'function') {
-      fn = function() {
+      fn = function () {
         return value.call(this, this.store.states);
       };
     } else {
@@ -38,4 +38,4 @@ export function mapStates(mapper) {
     }
   });
   return res;
-};
+}
