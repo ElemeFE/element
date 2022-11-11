@@ -65,7 +65,8 @@
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       buttonDisabled() {
-        return this.$options.propsData.hasOwnProperty('disabled') ? this.disabled : (this.elForm || {}).disabled;
+        const disabled = this.disabled;
+        return this.$options.propsData.hasOwnProperty('disabled') ? disabled : (this.elForm || {}).disabled;
       }
     },
 
