@@ -81,6 +81,9 @@ import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
 import Avatar from '../packages/avatar/index.js';
 import Drawer from '../packages/drawer/index.js';
+
+import Statistic from '../packages/statistic/index.js';
+
 import Popconfirm from '../packages/popconfirm/index.js';
 import Skeleton from '../packages/skeleton/index.js';
 import SkeletonItem from '../packages/skeleton-item/index.js';
@@ -88,6 +91,7 @@ import Empty from '../packages/empty/index.js';
 import Descriptions from '../packages/descriptions/index.js';
 import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
+
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -168,6 +172,7 @@ const components = [
   CascaderPanel,
   Avatar,
   Drawer,
+  Statistic,
   Popconfirm,
   Skeleton,
   SkeletonItem,
@@ -296,6 +301,9 @@ export default {
   CascaderPanel,
   Avatar,
   Drawer,
+
+  Statistic,
+
   Popconfirm,
   Skeleton,
   SkeletonItem,
@@ -303,4 +311,5 @@ export default {
   Descriptions,
   DescriptionsItem,
   Result
+
 };
