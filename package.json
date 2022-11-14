@@ -59,6 +59,7 @@
   },
   "unpkg": "lib/index.js",
   "style": "lib/theme-chalk/index.css",
+  "web-types": "./web-types.json",
   "dependencies": {
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
