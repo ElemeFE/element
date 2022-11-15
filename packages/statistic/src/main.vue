@@ -102,7 +102,6 @@ export default {
   },
   methods: {
     branch() {
-      // console.log('timeIndices', this.timeIndices);
       if (this.timeIndices) {
         clearInterval(this.timeTask);
         this.countDown();
@@ -110,12 +109,13 @@ export default {
         this.dispose();
       }
     },
-
-    magnification(num, mulriple = 1000, groupSeparator = ',') { // magnification factor
-      if (_.isNumber(num)) return false;
-      let result = String(_.divide(num, mulriple))
-        .split('.')
-        .join(groupSeparator || ',');
+    magnification(num, _mulriple = 1000, _groupSeparator = ',') { // magnification factor
+      const level = String(_mulriple).length - 1;
+      const reg = new RegExp(`\\d{1,${level}}(?=(\\d{${level}})+$)`, 'g');
+      const result = String(num)
+        .replace(reg, '$&,')
+        .split(',')
+        .join(_groupSeparator);
       return result;
     },
     dispose() {
@@ -192,7 +192,6 @@ export default {
         return (result);
       };
       this.timeTask = setInterval(function() {
-        // console.log(diffTiem);
         if (disappearTime(diffTiem)) clearInterval(than.timeTask);
         diffTiem = diffTiem < REFRESH_INTERVAL ? 0 : diffTiem - REFRESH_INTERVAL;
         than.disposeValue = formatTimeStr(format, diffTiem);
