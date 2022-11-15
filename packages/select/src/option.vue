@@ -37,10 +37,6 @@
       disabled: {
         type: Boolean,
         default: false
-      },
-      selectedColor: {
-        type: String,
-        default: '#409EFF'
       }
     },
 
@@ -135,24 +131,6 @@
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
           this.dispatch('ElSelect', 'handleOptionClick', [this, true]);
-          if (this.selectedColor !== '#409EFF') {
-            // 如果不是默认的颜色
-            if (this.$el.className === 'el-select-dropdown__item selected hover' ||
-            this.$el.className === 'el-select-dropdown__item hover'
-            ) {
-              let siblingsNode = this.$parent.$children;
-              siblingsNode.forEach(item=>{
-                if (item.$el.className === 'el-select-dropdown__item' ||
-                item.$el.className === 'el-select-dropdown__item selected') {
-                  item.$el.style.color = '#606266';
-                }
-              });
-              this.$el.style.color = this.selectedColor;
-            } else {
-              this.$el.style.color = '#606266';
-            }
-  
-          }
         }
       },
 
@@ -172,7 +150,6 @@
 
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);
-  
     },
 
     beforeDestroy() {

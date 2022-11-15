@@ -176,3 +176,5 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 | show-text  | 是否显示进度条文字内容 | boolean | — | true |
 | stroke-linecap  | circle/dashboard 类型路径两端的形状 | string | butt/round/square | round |
 | format  | 指定进度条文字内容 | function(percentage) | — | — |
+| define-back-color  | 指定进度条底色（支持 hex 格式） | string | — | — |
+| text-color  | 指定进度条字体颜色（支持 hex 格式） | string | — | — |

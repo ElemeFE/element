@@ -2,8 +2,6 @@
 
 Used to highlight a certain number or group of numbers, such as showing a numerical value, such as a dollar amount, ranking, etc.
 
-
-
 Countdown mode
 
 
@@ -16,7 +14,7 @@ The component provides a thousandth place display, but you can use rate to set t
       <el-row :gutter="20">
         <el-col :span="6">
           <div>
-            <el-statistic groupSeparator="," :precision="2" :value="value2" :title="title"></el-statistic>
+            <el-statistic group-separator="," :precision="2" :value="value2" :title="title"></el-statistic>
           </div>
         </el-col>
             <el-col :span="6">
@@ -31,7 +29,7 @@ The component provides a thousandth place display, but you can use rate to set t
         </el-col>
         <el-col :span="6">
           <div>
-            <el-statistic groupSeparator="," :precision="2" decimalSeparator="." :value="value1" :title="title">
+            <el-statistic group-separator="," :precision="2" decimal-separator="." :value="value1" :title="title">
               <template slot="prefix">
                 <i class="el-icon-s-flag" style="color: red"></i>
               </template>
@@ -94,14 +92,14 @@ If you need to add time to the original, please note that the overall time (the 
     <el-row :gutter="20">
   <el-col :span="14">
      <div style="width: 100%; display: inline-block; ">
-      <el-statistic :value="deadline2"  timeIndices title="商品降价">
+      <el-statistic :value="deadline2"  time-indices title="商品降价">
         <template slot="suffix">
           The rush is about to begin
         </template>
       </el-statistic>
     </div>
     <div style="width: 100%; display: inline-block; margin-top: 50px; ">
-      <el-statistic @finish="hilarity" :value="deadline3"   timeIndices title="The Value of Time">
+      <el-statistic @finish="hilarity" :value="deadline3"   time-indices title="The Value of Time">
         <template slot="suffix">
           <el-button type="primary " size="small" @click="add">add 10 second</el-button>
         </template>
@@ -122,7 +120,7 @@ If you need to add time to the original, please note that the overall time (the 
 
   <div style="font-size: 18px;text-align: center;" >万事成蹉跎</div>
 <div style="margin-top: 40px;"></div>
-  <el-statistic ref="statistic" @finish="hilarity" :value="deadline4" title="Distance to Tomorrow:" timeIndices > </el-statistic>
+  <el-statistic ref="statistic" @finish="hilarity" format="HH:mm:ss" :value="deadline4" title="Distance to Tomorrow:" time-indices > </el-statistic>
 </el-card>
   </el-col>
 </el-row>
@@ -177,14 +175,14 @@ export default {
 | Attribute          | Description            | Type            | Accepted Values                 | Default   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | value            | Numerical content                 | string \| number    | -          | -       |
-| decimalSeparator | Setting the decimal point            | string                  | -      | .       |
+| decimal-separator | Setting the decimal point            | string                  | -      | .       |
 | formatter        | Custom numerical presentation| v-slot \|({value}) => VNode | -   | -      |
-| groupSeparator   | Sets the thousandth identifier              | string           | -             | ,       |
+| group-separator   | Sets the thousandth identifier              | string           | -             | ,       |
 | precision        | numerical precision      | number                | -        | 0      |
 | prefix           | Sets the prefix of a number          | string \| v-slot | -             | -       |
 | suffix           |Sets the suffix of a number          | string \| v-slot     | -         | -       |
 | title            | 	Numeric titles               | string \| v-slot   | -           | -       |
-| valueStyle       | Styles numeric values          | style             | -            | -       |
+| value-style       | Styles numeric values          | style             | -            | -       |
 | rate       | Set the ratio          | number             | -            | 1000       |
 
 
@@ -201,7 +199,7 @@ export default {
 
 | Attribute          | Description            | Type            | Options                 | Default   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| timeIndices       | Whether to enable the countdown function     | boolean     | true\|false                        | false      |
+| time-indices       | Whether to enable the countdown function     | boolean     | true\|false                        | false      |
 | value         | Required value, enter the bound value   | string  | — | — |
 | format         | Formatting the countdown display   | string  | — | 'HH:mm:ss' |
 ### Statistic.Countdown Events

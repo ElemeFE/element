@@ -14,7 +14,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <div>
-            <el-statistic groupSeparator="," :precision="2" :value="value2" :title="title"></el-statistic>
+            <el-statistic group-separator="," :precision="2" :value="value2" :title="title"></el-statistic>
           </div>
         </el-col>
             <el-col :span="6">
@@ -29,7 +29,7 @@
         </el-col>
         <el-col :span="6">
           <div>
-            <el-statistic groupSeparator="," :precision="2" decimalSeparator="." :value="value1" :title="title">
+            <el-statistic group-separator="," :precision="2" decimal-separator="." :value="value1" :title="title">
               <template slot="prefix">
                 <i class="el-icon-s-flag" style="color: red"></i>
               </template>
@@ -92,14 +92,14 @@ suspend 暂定，它**只是暂停倒计时，并非暂停了时间，因为valu
     <el-row :gutter="20">
   <el-col :span="14">
      <div style="width: 100%; display: inline-block; ">
-      <el-statistic :value="deadline2"  timeIndices title="商品降价">
+      <el-statistic :value="deadline2"  time-indices title="商品降价">
         <template slot="suffix">
           抢购即将开始
         </template>
       </el-statistic>
     </div>
     <div style="width: 100%; display: inline-block; margin-top: 50px; ">
-      <el-statistic @finish="hilarity" :value="deadline3"   timeIndices title="一寸光阴一寸金">
+      <el-statistic @finish="hilarity" :value="deadline3"   time-indices title="一寸光阴一寸金">
         <template slot="suffix">
           <el-button type="primary " size="small" @click="add">add 10 second</el-button>
         </template>
@@ -120,7 +120,7 @@ suspend 暂定，它**只是暂停倒计时，并非暂停了时间，因为valu
 
   <div style="font-size: 18px;text-align: center;" >万事成蹉跎</div>
 <div style="margin-top: 40px;"></div>
-  <el-statistic ref="statistic" @finish="hilarity" :value="deadline4" title="距离明日：" timeIndices > </el-statistic>
+  <el-statistic ref="statistic" @finish="hilarity" format="HH:mm:ss" :value="deadline4" title="距离明日：" time-indices > </el-statistic>
 </el-card>
   </el-col>
 </el-row>
@@ -175,14 +175,14 @@ export default {
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | value            | 数值内容                 | string \| number    | -          | -       |
-| decimalSeparator | 设置小数点            | string                  | -      | .       |
+| decimal-separator | 设置小数点            | string                  | -      | .       |
 | formatter        | 自定义数值展示| v-slot \|({value}) => VNode | -   | -      |
-| groupSeparator   | 设置千分位标识符              | string           | -             | ,       |
+| group-separator   | 设置千分位标识符              | string           | -             | ,       |
 | precision        | 数值精度      | number                | -        | 0      |
 | prefix           | 设置数值的前缀          | string \| v-slot | -             | -       |
 | suffix           |设置数值的后缀          | string \| v-slot     | -         | -       |
 | title            | 	数值的标题               | string \| v-slot   | -           | -       |
-| valueStyle       | 设置数值的样式          | style             | -            | -       |
+| value-style        | 设置数值的样式          | style             | -            | -       |
 | rate       | 设置倍率          | number             | -            | 1000       |
 
 
@@ -199,7 +199,7 @@ export default {
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| timeIndices       | 是否开启倒计时功能     | boolean     | true\|false                        | false      |
+| time-indices       | 是否开启倒计时功能     | boolean     | true\|false                        | false      |
 | value         | 必填值，输入绑定值   | string  | — | — |
 | format         | 格式化倒计时展示   | string  | — | 'HH:mm:ss' |
 ### Statistic.Countdown Events
