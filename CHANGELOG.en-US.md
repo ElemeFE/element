@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug fixes
+- Statistic：
+  - Fixed the thousandth bit bug (#22252 by @webvs2)
+- Other
+  - Fix 2.15.11 element-theme-chalk publish fail bug
+
 ### 2.15.11
 
 *2022-11-15*
