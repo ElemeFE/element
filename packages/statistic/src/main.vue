@@ -97,7 +97,8 @@ export default {
       let { timeIndices, countDown, dispose} = this;
       timeIndices ? countDown() : dispose();
     },
-    magnification(num, _mulriple = 1000, _groupSeparator = ',') { // magnification factor
+    magnification(num, _mulriple = 1000, _groupSeparator = ',') {
+      // magnification factor
       const level = String(_mulriple).length - 1;
       const reg = new RegExp(`\\d{1,${level}}(?=(\\d{${level}})+$)`, 'g');
       const result = String(num)
