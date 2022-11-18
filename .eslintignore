@@ -1,5 +1,6 @@
 src/utils/popper.js
 src/utils/date.js
+src/utils/lodash.js
 examples/play
 *.sh
 node_modules
