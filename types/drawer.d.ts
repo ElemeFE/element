@@ -56,6 +56,9 @@ export declare class ElDrawer extends ElementUIComponent {
     /* Whether the drawer component should show, also can be decorated by `.sync` */
     visible: boolean
 
+    /** Scroll for default slot in Dialog */
+    scroll: boolean
+    
     /* Flag attribute whi */
     wrapperClosable: boolean
 
