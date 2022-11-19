@@ -137,10 +137,48 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
 ```
 :::
 
+:::demo if `previewSrcList` exists same src，should set the prop `srcId` , and `previewSrcList` element type `{ id: string; src: string }`
+```html
+<div class="demo-image__preview">
+  <el-image 
+    style="width: 100px; height: 100px"
+    :src="url" 
+    :src-id="id"
+    :preview-src-list="srcList">
+  </el-image>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        id: '2',
+        srcList: [
+          { 
+            id: '1', 
+            src: 'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          },
+          {
+            id: '2',
+            src: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+          }
+          {
+            id: '3',
+            src: 'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          },
+        ]
+      }
+    }
+  }
+</script>
+```
+
 ### Attributs
 | Attribut | Description | Type  | Valeurs acceptées | Défaut   |
 |---------- |-------- |---------- |-------------  |-------- |
 | src | Source de l'image, identique au natif. | string | — | - |
+| srcId | image id | string | — | - |
 | fit | Indique comment l'image devrait être redimmensionnée pour s'adapter à son conteneur, identique à [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | string | fill / contain / cover / none / scale-down | - |
 | alt | Attribut alt natif.| string | - | - |
 | referrer-policy | Attribut referrerPolicy natif.| string | - | - |

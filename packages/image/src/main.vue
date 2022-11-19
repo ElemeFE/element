@@ -52,6 +52,7 @@
 
     props: {
       src: String,
+      srcId: String,
       fit: String,
       lazy: Boolean,
       scrollContainer: {},
@@ -95,11 +96,13 @@
       },
       imageIndex() {
         let previewIndex = 0;
-        const srcIndex = this.previewSrcList.indexOf(this.src);
-        if (srcIndex >= 0) {
-          previewIndex = srcIndex;
-        }
-        return previewIndex;
+        const { src, srcId, previewSrcList } = this;
+        previewIndex = previewSrcList.findIndex(item => {
+          return typeof item === 'string'
+            ? item === src
+            : item.id === srcId
+        });
+        return previewIndex > 0 ? previewIndex : 0;
       }
     },
 

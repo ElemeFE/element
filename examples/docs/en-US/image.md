@@ -136,10 +136,48 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 ```
 :::
 
+:::demo if `previewSrcList` exists same src，should set the prop `srcId` , and `previewSrcList` element type `{ id: string; src: string }`
+```html
+<div class="demo-image__preview">
+  <el-image 
+    style="width: 100px; height: 100px"
+    :src="url" 
+    :src-id="id"
+    :preview-src-list="srcList">
+  </el-image>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        id: '2',
+        srcList: [
+          { 
+            id: '1', 
+            src: 'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          },
+          {
+            id: '2',
+            src: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+          }
+          {
+            id: '3',
+            src: 'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          },
+        ]
+      }
+    }
+  }
+</script>
+```
+
 ### Attributes
 | Attribute | Description | Type  | Accepted values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | src | Image source, same as native | string | — | - |
+| srcId | Image id | string | — | - |
 | fit | Indicate how the image should be resized to fit its container, same as [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | string | fill / contain / cover / none / scale-down | - |
 | alt | Native alt | string | - | - |
 | referrer-policy | Native referrerPolicy | string | - | - |
