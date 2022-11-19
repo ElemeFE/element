@@ -128,7 +128,8 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         srcList: [
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         ]
       }
     }
@@ -140,7 +141,7 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
 ### Attributs
 | Attribut | Description | Type  | Valeurs acceptées | Défaut   |
 |---------- |-------- |---------- |-------------  |-------- |
-| src | Source de l'image, identique au natif. | string | — | - |
+| src | Source de l'image, identique au natif. Ne fonctionne pas lorsque 'thumbnail-src' est la valeur de 'src' | string | — | - |
 | fit | Indique comment l'image devrait être redimmensionnée pour s'adapter à son conteneur, identique à [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | string | fill / contain / cover / none / scale-down | - |
 | alt | Attribut alt natif.| string | - | - |
 | referrer-policy | Attribut referrerPolicy natif.| string | - | - |
@@ -148,7 +149,7 @@ En plus des propriétés natives de img, ce composant supporte le lazy loading, 
 | scroll-container | Le conteneur auquel ajouter le listener du scroll en mode lazy loading. | string / HTMLElement | — | Le conteneur parent le plus proche avec la propriété overflow à auto ou scroll. |
 | preview-src-list | allow big image preview | Array | — | - |
 | z-index | set image preview z-index | Number | — | 2000 |
-
+| thumbnail-src | Afficher les vignettes, S'il y a une valeur, l'attribut SRC est ignoré. `preview-src-list` après avoir activé l’aperçu, l’image de l’aperçu est la valeur de la lecture de `src` | string | — | - |
 ### Évènements
 | Nom | Description | Paramètres |
 |---------- |-------- |---------- |

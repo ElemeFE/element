@@ -127,7 +127,8 @@ Besides the native features of img, support lazy load, custom placeholder and lo
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         srcList: [
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         ]
       }
     }
@@ -139,7 +140,7 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 ### Attributes
 | Attribute | Description | Type  | Accepted values | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| src | Image source, same as native | string | — | - |
+| src | Image source, same as native. Will not work when `thumbnail-src` is value of `src` | string | — | - |
 | fit | Indicate how the image should be resized to fit its container, same as [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | string | fill / contain / cover / none / scale-down | - |
 | alt | Native alt | string | - | - |
 | referrer-policy | Native referrerPolicy | string | - | - |
@@ -147,7 +148,7 @@ Besides the native features of img, support lazy load, custom placeholder and lo
 | scroll-container | The container to add scroll listener when using lazy load | string / HTMLElement | — | The nearest parent container whose overflow property is auto or scroll |
 | preview-src-list | allow big image preview | Array | — | - |
 | z-index | set image preview z-index | Number | — | 2000 |
-
+| thumbnail-src | Thumbnail of display, if there is a value, the `src` value will be ignored. When `preview-src-list` is enabled, the preview image reads the value of `src` | string | — | - |
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |

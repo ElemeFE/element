@@ -38,4 +38,7 @@ export declare class ElImage extends ElementUIComponent {
   previewSrcList: string[]
 
   zIndex: number
+
+  /** If there are thumbnails, 'src' is ignored by default */
+  thumbnailSrc?: string
 }
