@@ -16,7 +16,14 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer 
+        v-if="showViewer" 
+        :z-index="zIndex" 
+        :initial-index="imageIndex" 
+        :on-close="closeViewer" 
+        :url-list="previewSrcList"
+        :appendToBody="appendToBody"
+        :maskClosable="maskClosable" />
     </template>
   </div>
 </template>
@@ -62,6 +69,14 @@
       zIndex: {
         type: Number,
         default: 2000
+      },
+      appendToBody: {
+        type: Boolean,
+        default: true
+      },
+      maskClosable: {
+        type: Boolean,
+        default: true
       }
     },
 
