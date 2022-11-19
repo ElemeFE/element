@@ -239,3 +239,14 @@ export function objToArray(obj) {
   }
   return isEmpty(obj) ? [] : [obj];
 }
+
+export const findNearestComponent = (element, componentName) => {
+  let target = element;
+  while (target && target.tagName !== 'BODY') {
+    if (target.__vue__ && target.__vue__.$options.name === componentName) {
+      return target.__vue__;
+    }
+    target = target.parentNode;
+  }
+  return null;
+};

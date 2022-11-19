@@ -128,6 +128,8 @@ import { isUndefined, isFunction } from 'element-ui/src/utils/types';
 import { isDef } from 'element-ui/src/utils/shared';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
+import {on, off} from 'element-ui/src/utils/dom';
+import {findNearestComponent} from 'element-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const MigratingProps = {
@@ -226,7 +228,9 @@ export default {
       type: Function,
       default: () => (() => {})
     },
-    popperClass: String
+    popperClass: String,
+    hideDropdownOnSelect: Boolean,
+    hideDropdownOnMouseleave: Boolean
   },
 
   data() {
@@ -311,13 +315,13 @@ export default {
       }
     },
     checkedValue(val) {
-      const { value, dropDownVisible } = this;
+      const {value, dropDownVisible, hideDropdownOnSelect} = this;
       const { checkStrictly, multiple } = this.config;
 
       if (!isEqual(val, value) || isUndefined(value)) {
         this.computePresentContent();
         // hide dropdown when single mode
-        if (!multiple && !checkStrictly && dropDownVisible) {
+        if ((!multiple && !checkStrictly || hideDropdownOnSelect) && dropDownVisible) {
           this.toggleDropDownVisible(false);
         }
 
@@ -346,7 +350,7 @@ export default {
   },
 
   mounted() {
-    const { input } = this.$refs;
+    const {input, popper} = this.$refs;
     if (input && input.$el) {
       this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40;
     }
@@ -374,10 +378,23 @@ export default {
     });
 
     addResizeListener(this.$el, this.updateStyle);
+
+    if (this.hideDropdownOnMouseleave) {
+      this.offPopperMouseleaveListener = (() => {
+        const popperMouseleaveHandler = () => {
+          this.toggleDropDownVisible(false);
+        };
+        on(popper, 'mouseleave', popperMouseleaveHandler);
+        return () => {
+          off(popper, 'mouseleave', popperMouseleaveHandler);
+        };
+      })();
+    }
   },
 
   beforeDestroy() {
     removeResizeListener(this.$el, this.updateStyle);
+    this.offPopperMouseleaveListener && this.offPopperMouseleaveListener();
   },
 
   methods: {
@@ -472,7 +489,10 @@ export default {
 
         if (firstNode) {
           firstNode.focus();
-          !filtering && firstNode.click();
+          if (!filtering) {
+            const cascaderNode = findNearestComponent(firstNode, 'ElCascaderNode');
+            cascaderNode.handleExpand();
+          }
         }
       });
     },

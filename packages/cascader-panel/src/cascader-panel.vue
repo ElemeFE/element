@@ -27,12 +27,14 @@ import {
   isEmpty,
   valueEquals
 } from 'element-ui/src/utils/util';
+import {findNearestComponent} from 'element-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {
   expandTrigger: 'click', // or hover
   multiple: false,
   checkStrictly: false, // whether all nodes can be selected
+  hideRadio: false,
   emitPath: true, // wether to emit an array of all levels value in which node is located
   lazy: false,
   lazyLoad: noop,
@@ -60,23 +62,6 @@ const getMenuIndex = (el, distance) => {
   if (!el) return;
   const pieces = el.id.split('-');
   return Number(pieces[pieces.length - 2]);
-};
-
-const focusNode = el => {
-  if (!el) return;
-  el.focus();
-  !isLeaf(el) && el.click();
-};
-
-const checkNode = el => {
-  if (!el) return;
-
-  const input = el.querySelector('input');
-  if (input) {
-    input.click();
-  } else if (isLeaf(el)) {
-    el.click();
-  }
 };
 
 export default {
@@ -232,34 +217,54 @@ export default {
         return checkedNode ? checkedNode.pathNodes : [];
       });
     },
+    focusNode(el) {
+      if (!el) return;
+      el.focus();
+      if (!isLeaf(el)) {
+        const cascaderNode = findNearestComponent(el, 'ElCascaderNode');
+        cascaderNode.handleExpand();
+      }
+    },
+    checkNode(el) {
+      const {checkStrictly, hideRadio} = this.config;
+
+      if (!el) return;
+
+      const input = el.querySelector('input');
+      if (input) {
+        input.click();
+      } else if (isLeaf(el) || (checkStrictly && hideRadio)) {
+        el.click();
+      }
+    },
     handleKeyDown(e) {
       const { target, keyCode } = e;
 
       switch (keyCode) {
         case KeyCode.up:
           const prev = getSibling(target, -1);
-          focusNode(prev);
+          this.focusNode(prev);
           break;
         case KeyCode.down:
           const next = getSibling(target, 1);
-          focusNode(next);
+          this.focusNode(next);
           break;
         case KeyCode.left:
           const preMenu = this.$refs.menu[getMenuIndex(target) - 1];
           if (preMenu) {
             const expandedNode = preMenu.$el.querySelector('.el-cascader-node[aria-expanded="true"]');
-            focusNode(expandedNode);
+            this.focusNode(expandedNode);
           }
           break;
         case KeyCode.right:
           const nextMenu = this.$refs.menu[getMenuIndex(target) + 1];
           if (nextMenu) {
             const firstNode = nextMenu.$el.querySelector('.el-cascader-node[tabindex="-1"]');
-            focusNode(firstNode);
+            this.focusNode(firstNode);
           }
           break;
         case KeyCode.enter:
-          checkNode(target);
+          this.checkNode(target);
           break;
         case KeyCode.esc:
         case KeyCode.tab:

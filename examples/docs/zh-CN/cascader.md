@@ -981,7 +981,15 @@
     :props="{ multiple: true, checkStrictly: true }"
     clearable></el-cascader>
 </div>
-
+<div class="block">
+  <span class="demonstration">单选常用选项组合</span>
+  <el-cascader
+    :options="options"
+    hide-dropdown-on-mouseleave
+    hide-dropdown-on-select
+    :props="{ checkStrictly: true, hideRadio: true, expandTrigger: 'hover' }"
+    clearable></el-cascader>
+</div>
 <script>
   export default {
     data() {
@@ -1904,6 +1912,8 @@
 | debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | before-filter | 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选 | function(value) | — | — |
 | popper-class | 自定义浮层类名   | string | —  | — |
+| hide-dropdown-on-mouseleave | 当鼠标离开选择框时隐藏选择框   | boolean | —  | false |
+| hide-dropdown-on-select | 当用户选择时隐藏选择框   | boolean | —  | false |
 
 ### Cascader Events
 | 事件名称      | 说明    | 回调参数      |
@@ -1964,3 +1974,4 @@
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | 'children' |
 | disabled | 指定选项的禁用为选项对象的某个属性值 | string | — | 'disabled' |
 | leaf     | 指定选项的叶子节点的标志位为选项对象的某个属性值 | string | — | 'leaf' |
+| hideRadio| 是否隐藏单选框，当checkStrictly为true、multiple为false时有效 | boolean | — | false |

@@ -1002,6 +1002,15 @@ Dans la sélection simple, seuls les noeuds terminaux peuvent être coché, et d
     :props="{ multiple: true, checkStrictly: true }"
     clearable></el-cascader>
 </div>
+<div class="block">
+  <span class="demonstration">Combinaisons communes d'options à choix unique</span>
+  <el-cascader
+    :options="options"
+    hide-dropdown-on-mouseleave
+    hide-dropdown-on-select
+    :props="{ checkStrictly: true, hideRadio: true, expandTrigger: 'hover' }"
+    clearable></el-cascader>
+</div>
 
 <script>
   export default {
@@ -1925,6 +1934,8 @@ Vous pouvez personnaliser le contenu du noeud cascader.
 | debounce | Délai de réponse lors de la saisie du mot clé de filtre, en millisecondes | number | — | 300 |
 | before-filter | Hook fonction avant de filtrer avec la valeur à filtrer en tant que paramètre. Si `false` est renvoyé ou si une `Promise` est renvoyée puis rejetée, le filtrage sera annulé | function(value) | — | — |
 | popper-class | Nom de classe personnalisé pour la liste déroulante de Cascader   | string | —  | — |
+| hide-dropdown-on-mouseleave | Masquer la boîte de sélection lorsque la souris quitte la boîte de sélection   | boolean | —  | false |
+| hide-dropdown-on-select | Masquer la boîte de sélection lorsque l'utilisateur sélectionne   | boolean | —  | false |
 
 ### Cascader Events
 | Event Name | Description | Paramètres |
@@ -1985,3 +1996,4 @@ Vous pouvez personnaliser le contenu du noeud cascader.
 | children | Spécifie quelle clé de l'objet noeud est utilisée en tant qu'enfant du noeud | string | — | 'children' |
 | disabled | Spécifie quelle clé de l'objet noeud est utilisée comme noeud désactivé | string | — | 'disabled' |
 | leaf     | Spécifie quelle clé de l'objet est noeud utilisée comme champ feuille du noeud | string | — | 'leaf' |
+| hideRadio| Indique s'il faut masquer le bouton radio, valide lorsque checkStrictly est vrai et multiple est faux | boolean | — | false |
