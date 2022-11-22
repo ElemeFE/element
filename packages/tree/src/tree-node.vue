@@ -24,7 +24,8 @@
     ref="node"
   >
     <div class="el-tree-node__content"
-      :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
+      :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }"
+      @dblclick.stop="handleDblClick">
       <span
         @click.stop="handleExpandIconClick"
         :class="[
@@ -165,6 +166,10 @@
         }
         this.oldChecked = checked;
         this.indeterminate = indeterminate;
+      },
+
+      handleDblClick() {
+        this.tree.$emit('node-dbl-click', this.node.data, this.node, this);
       },
 
       handleClick() {

@@ -624,8 +624,18 @@ export default {
       }
     },
 
+    // 解决在 tabs 模式下，因tab切换后当前表格被隐藏导致的 scrollX 值错误，从而导致的 viewportHeight 值计算错误，
+    // 进而引发的固定列高度与表格主体高度不一致的问题
+    tableIsVisible() {
+      return this.$el.getBoundingClientRect().width > 0
+    },
+
     resizeListener () {
-      if (!this.$ready) {
+      // 表格未准备好、表格不可见时，不执行计算尺寸、布局的逻辑
+      if (!this.$ready || !this.tableIsVisible()) {
+        // 重置尺寸数据
+        this.resizeState.width = null
+        this.resizeState.height = null
         return;
       }
       let shouldUpdateLayout = false;
