@@ -153,6 +153,10 @@ class TableLayout {
     if (Vue.prototype.$isServer) return;
     const fit = this.fit;
     const bodyWidth = this.table.$el.clientWidth;
+    // 如果当前表格宽度是0时，表示当前表格不可见，不进行后续运算，以避免在 tabs 中使用时，高度错误的问题
+    if (bodyWidth === 0) {
+      return;
+    }
     let bodyMinWidth = 0;
 
     const flattenColumns = this.getFlattenColumns();
