@@ -155,7 +155,7 @@ export default {
 
       style.transitionDelay = 150 * this.index + 'ms';
       if (status === this.$parent.processStatus) {
-        step = this.currentStatus !== 'error' ? 0 : 0;
+        step = this.currentStatus !== 'error' ? 100 : 0;
       } else if (status === 'wait') {
         step = 0;
         style.transitionDelay = (-150 * this.index) + 'ms';
