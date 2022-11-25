@@ -1,5 +1,63 @@
 ## 更新日志
 
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug 修复
+- Statistics
+  - 修改 千分位 问题 (#22252 by @webvs2)
+- 其他
+  - 修复 2.15.11版本element-theme-chalk未成功发布 问题
+
+### 2.15.11
+
+*2022-11-15*
+
+#### Bug 修复
+- Docs
+  - 修复 Radio 文案 (#22178 by @bchen1029)
+  - 修复 Progress 文案 
+#### 优化
+- I18n
+  - 更新 马来西亚语 翻译 (#22185 by @z4q)
+  - 更新 挪威语 翻译 (#22145 by @Barsnes)
+- Progress
+  - 新增 defineBackColor 和 textColor 属性 (#22089 by @lm312) 
+- Statistics
+  - 新增组件 Statistics (#22159 by @webvs2)
+- Other
+  - 改进WebStorm IDE和其他JetBrains IDE中的代码帮助 (#22135 by @piotrtomiak)
+
+### 2.15.10
+
+*2022-09-13*
+
+#### Bug 修复
+
+- DatePicker
+  - 修复 props placement 报错信息 问题 (#21908 by @lqzhgood)
+- Loading
+  - 修复 使用 Loading 的DOM元素 sticky失效 问题 (#22087 by @zzjjhh001)
+- Docs
+  - 修复 Popover 文案 (#22083 by @lm312)
+  - 修复 Skeleton 文案 (#22092 by @lm312)
+  - 修复 DatePicker 文案 (#21970 by @guojiongwei)
+- Tree
+  - 修复 懒加载默认选中 问题 (#21934 by @kiss-yu)
+
+#### 优化
+
+- I18n
+  - 新增 僧伽罗语 翻译 (#21936 by @sayuri-gi)
+  - 更新 西班牙语 翻译 (#21924 by @jcardus)
+  - 新增 马来西亚语 翻译 (#22028 by @iorange0411)
+  - 更新 斯瓦希里语 翻译 (#21904 by @Cholowao)
+- Utils
+  - 更新 date-util.js (#22099 by @Due07)
+- DatePicker
+  - 新增 months 和 years 类型 (#21918 by @akiko123456)
+
 ### 2.15.9
 
 *2022-06-02*
