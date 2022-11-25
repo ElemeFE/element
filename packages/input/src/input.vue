@@ -237,7 +237,7 @@
       isWordLimitVisible() {
         return this.showWordLimit &&
           this.$attrs.maxlength &&
-          (this.type === 'text' || this.type === 'textarea') &&
+          (this.type === 'text' || this.type === 'number' || this.type === 'textarea') &&
           !this.inputDisabled &&
           !this.readonly &&
           !this.showPassword;
