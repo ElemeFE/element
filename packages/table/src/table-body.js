@@ -33,6 +33,8 @@ export default {
 
   render(h) {
     const data = this.data || [];
+    const { store } = this;
+    const context = this.context || this.table.$vnode.context;
     return (
       <table
         class="el-table__body"
@@ -47,7 +49,7 @@ export default {
         <tbody>
           {
             data.reduce((acc, row) => {
-              return acc.concat(this.wrappedRowRender(row, acc.length));
+              return acc.concat(this.wrappedRowRender(store, context, row, acc.length));
             }, [])
           }
           <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
@@ -320,7 +322,7 @@ export default {
       table.$emit(`row-${name}`, row, column, event);
     },
 
-    rowRender(row, $index, treeRowData) {
+    rowRender(store, context, row, $index, treeRowData) {
       const { treeIndent, columns, firstDefaultColumnIndex } = this;
       const rowClasses = this.getRowClass(row, $index);
       let display = true;
@@ -346,8 +348,8 @@ export default {
           columns={columns}
           row={row}
           index={$index}
-          store={this.store}
-          context={this.context || this.table.$vnode.context}
+          store={store}
+          context={context}
           firstDefaultColumnIndex={firstDefaultColumnIndex}
           treeRowData={treeRowData}
           treeIndent={treeIndent}
@@ -366,13 +368,12 @@ export default {
       );
     },
 
-    wrappedRowRender(row, $index) {
-      const store = this.store;
+    wrappedRowRender(store, context, row, $index) {
       const { isRowExpanded, assertRowKey } = store;
       const { treeData, lazyTreeNodeMap, childrenColumnName, rowKey } = store.states;
       if (this.hasExpandColumn && isRowExpanded(row)) {
         const renderExpanded = this.table.renderExpanded;
-        const tr = this.rowRender(row, $index);
+        const tr = this.rowRender(store, context, row, $index);
         if (!renderExpanded) {
           console.error('[Element Error]renderExpanded is required.');
           return tr;
@@ -405,7 +406,7 @@ export default {
             treeRowData.loading = cur.loading;
           }
         }
-        const tmp = [this.rowRender(row, $index, treeRowData)];
+        const tmp = [this.rowRender(store, context, row, $index, treeRowData)];
         // 渲染嵌套数据
         if (cur) {
           // currentRow 记录的是 index，所以还需主动增加 TreeTable 的 index
@@ -439,7 +440,7 @@ export default {
                 }
               }
               i++;
-              tmp.push(this.rowRender(node, $index + i, innerTreeRowData));
+              tmp.push(this.rowRender(store, context, node, $index + i, innerTreeRowData));
               if (cur) {
                 const nodes = lazyTreeNodeMap[childKey] || node[childrenColumnName];
                 traverse(nodes, cur);
@@ -453,7 +454,7 @@ export default {
         }
         return tmp;
       } else {
-        return this.rowRender(row, $index);
+        return this.rowRender(store, context, row, $index);
       }
     }
   }
