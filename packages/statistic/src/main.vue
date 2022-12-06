@@ -47,7 +47,7 @@ export default {
     },
     precision: {
       type: Number,
-      default: 0
+      default: null
     },
     value: {
       type: [String, Number],
@@ -139,7 +139,6 @@ export default {
           clearInterval(this.timeTask);
           this.timeTask = null;
         }
-
       } else {
         this.branch();
       }
