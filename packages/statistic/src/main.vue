@@ -1,6 +1,6 @@
 <template>
   <div class="el-statistic">
-    <div class="head">
+    <div class="head" v-if="title">
       <slot name="title">
         <span class="title">
           {{ title }}
@@ -8,15 +8,15 @@
       </slot>
     </div>
     <div class="con">
-      <span class="prefix">
-        <slot name="prefix">
+      <span class="prefix" v-if="!prefix">
+        <slot name="prefix" >
           {{ prefix }}
         </slot>
       </span>
       <span class="number" :style="valueStyle">
         <slot name="formatter"> {{ disposeValue }}</slot>
       </span>
-      <span class="suffix">
+      <span class="suffix" v-if="!suffix">
         <slot name="suffix">
           {{ suffix }}
         </slot>
@@ -97,14 +97,14 @@ export default {
       let { timeIndices, countDown, dispose} = this;
       timeIndices ? countDown() : dispose();
     },
-    magnification(num, _mulriple = 1000, _groupSeparator = ',') {
+    magnification(num, mulriple = 1000, groupSeparator = ',') {
       // magnification factor
-      const level = String(_mulriple).length - 1;
+      const level = String(mulriple).length - 1;
       const reg = new RegExp(`\\d{1,${level}}(?=(\\d{${level}})+$)`, 'g');
       const result = String(num)
         .replace(reg, '$&,')
         .split(',')
-        .join(_groupSeparator);
+        .join(groupSeparator);
       return result;
     },
     dispose() {
@@ -195,8 +195,7 @@ export default {
       if (timeTask) return;
       let than = this;
       this.timeTask = setInterval(()=> {
-        let {value} = than;
-        let diffTiem = diffDate(value, Date.now());
+        let diffTiem = diffDate(than.value, Date.now());
         than.disposeValue = formatTimeStr(diffTiem);
         stopTime(diffTiem);
       }, REFRESH_INTERVAL);
