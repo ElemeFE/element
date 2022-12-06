@@ -81,8 +81,6 @@ export default {
 
 ### 倒计时
 :::warning
-suspend 暂定，它**只是暂停倒计时，并非暂停了时间，因为value指向的是未来的时间节点**。
-
 如果需要在原基础上添加时间，请注意：整体的时间（添加的时间量和原定时间）必须是**未来**的时间节点，否则依旧是倒计时结束
 :::
 :::demo 通过 `value` 提供未来的时间，将开启倒计时功能
@@ -99,7 +97,7 @@ suspend 暂定，它**只是暂停倒计时，并非暂停了时间，因为valu
       </el-statistic>
     </div>
     <div style="width: 100%; display: inline-block; margin-top: 50px; ">
-      <el-statistic @finish="hilarity" :value="deadline3"   time-indices title="一寸光阴一寸金">
+      <el-statistic @finish="hilarity" :value="deadline3"   time-indices title="添加时间">
         <template slot="suffix">
           <el-button type="primary " size="small" @click="add">add 10 second</el-button>
         </template>
@@ -136,7 +134,8 @@ export default {
       deadline: Date.now() + 1000 * 60 * 60 * 24 * 2,
       deadline2: Date.now() + 1000 * 60 * 60 * 8,
       deadline3: Date.now() + 1000 *  60 *30,
-        deadline4: Date.now() + (new Date().setHours(23,59,59)-Date.now()) ,
+      deadline4: Date.now() + (new Date().setHours(23,59,59)-Date.now()) ,
+      stop:true
     };
   },
   methods: {
@@ -144,7 +143,8 @@ export default {
       this.$notify({
           title: '提示',
           message: '时间已到，你可知寸金难买寸光阴？',
-          duration: 0
+          duration: 0,
+
         });
     },
         clickFn(){
@@ -174,16 +174,16 @@ export default {
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| value            | 数值内容                 | string \| number    | -          | -       |
-| decimal-separator | 设置小数点            | string                  | -      | .       |
-| formatter        | 自定义数值展示| v-slot \|({value}) => VNode | -   | -      |
-| group-separator   | 设置千分位标识符              | string           | -             | ,       |
-| precision        | 数值精度      | number                | -        | 0      |
-| prefix           | 设置数值的前缀          | string \| v-slot | -             | -       |
-| suffix           |设置数值的后缀          | string \| v-slot     | -         | -       |
-| title            | 	数值的标题               | string \| v-slot   | -           | -       |
-| value-style        | 设置数值的样式          | style             | -            | -       |
-| rate       | 设置倍率          | number             | -            | 1000       |
+| value            | 数值内容                 | string \| number    |—         | —      |
+| decimal-separator | 设置小数点            | string                  | —     | .       |
+| formatter        | 自定义数值展示| v-slot \|({value}) => VNode |—  | —      |
+| group-separator   | 设置千分位标识符              | string           | —             | ,       |
+| precision        | 数值精度      | number                | —        | 0      |
+| prefix           | 设置数值的前缀          | string \| v-slot | —             | —         |
+| suffix           |设置数值的后缀          | string \| v-slot     | —         | —         |
+| title            | 	数值的标题               | string \| v-slot   | —           | —       |
+| value-style        | 设置数值的样式          | object             | —            | —       |
+| rate       | 设置倍率          | number             | —            | 1000       |
 
 
 ### Statistic Slots

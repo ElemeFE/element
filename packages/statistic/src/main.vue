@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { isNumber, ceil, fill, chain, multiply, padStart, reduce} from 'element-ui/src/utils/lodash';
+import { isNumber, chain, multiply, padStart, reduce} from 'element-ui/src/utils/lodash';
 export default {
   name: 'ElStatistic',
   data() {
@@ -109,24 +109,23 @@ export default {
     },
     dispose() {
       let { value, precision, groupSeparator, rate } = this;
-
       if (!isNumber(value)) return false;
+      let [integer, decimal] = String(value).split('.');
       if (precision) {
-        value = ceil(value, precision);
+        decimal = `${decimal || ''}${(1)
+          .toFixed(precision)
+          .replace('.', '')
+          .slice(1)}`;
+        decimal = decimal.slice(0, precision);
       }
-
-      let integer = String(value).split('.')[0];
-      let decimals =
-        String(value).split('.')[1] ||
-        (precision ? fill(Array(precision), 0).join('') : '');
       let result = 0;
       // 1000 multiplying power
       if (groupSeparator) {
         integer = this.magnification(integer, rate, groupSeparator);
       }
 
-      result = [integer, decimals].join(
-        decimals ? this.decimalSeparator : ''
+      result = [integer, decimal].join(
+        decimal ? this.decimalSeparator : ''
       );
       this.disposeValue = result;
       return result;
