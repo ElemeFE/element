@@ -446,8 +446,15 @@ export default {
         this.tableBodyHeight = this.bodyWrapper.getBoundingClientRect().height;
       }
     },
+    // 更新用于展示时的索引，索引从0开始
     updateIndexForShow () {
       const dataLength = this.data.length;
+      // 如果不是局部滚动，则全部展示
+      if (!this.height) {
+        this.minIndexForShow = 0
+        this.maxIndexForShow = dataLength - 1
+        return
+      }
       if (dataLength < MIN_DATA_QUANTITY) {
         if (this.minIndexForShow !== 0) {
           this.minIndexForShow = 0;
