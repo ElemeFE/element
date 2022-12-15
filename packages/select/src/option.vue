@@ -138,6 +138,8 @@
         this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.select.filteredOptionsCount--;
+        } else if (query === '') {
+          this.select.filteredOptionsCount = this.select.optionsCount;
         }
       }
     },
