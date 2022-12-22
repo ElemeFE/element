@@ -43,7 +43,7 @@
     </el-input>
 
     <div v-if="multiple" class="el-cascader__tags">
-      <slot name="tags" v-bind:presentTags="presentTags">
+      <slot name="tags" v-bind:presentTags="presentTags" v-bind:deleteTag="deleteTag">
         <el-tag
             v-for="tag in presentTags"
             :key="tag.key"
