@@ -43,17 +43,19 @@
     </el-input>
 
     <div v-if="multiple" class="el-cascader__tags">
-      <el-tag
-        v-for="tag in presentTags"
-        :key="tag.key"
-        type="info"
-        :size="tagSize"
-        :hit="tag.hitState"
-        :closable="tag.closable"
-        disable-transitions
-        @close="deleteTag(tag)">
-        <span>{{ tag.text }}</span>
-      </el-tag>
+      <slot name="tags" v-bind:presentTags="presentTags">
+        <el-tag
+            v-for="tag in presentTags"
+            :key="tag.key"
+            type="info"
+            :size="tagSize"
+            :hit="tag.hitState"
+            :closable="tag.closable"
+            disable-transitions
+            @close="deleteTag(tag)">
+          <span>{{ tag.text }}</span>
+        </el-tag>
+      </slot>
       <input
         v-if="filterable && !isDisabled"
         v-model.trim="inputValue"
