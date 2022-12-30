@@ -15,9 +15,9 @@
     aria-valuemax="100"
   >
     <div class="el-progress-bar" v-if="type === 'line'">
-      <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px'}">
+      <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px', backgroundColor:defineBackColor}">
         <div class="el-progress-bar__inner" :style="barStyle">
-          <div class="el-progress-bar__innerText" v-if="showText && textInside">{{content}}</div>
+          <div class="el-progress-bar__innerText" :style="{color:textColor}" v-if="showText && textInside">{{content}}</div>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
         <path
           class="el-progress-circle__track"
           :d="trackPath"
-          stroke="#e5e9f2"
+          :stroke="defineBackColor"
           :stroke-width="relativeStrokeWidth"
           fill="none"
           :style="trailPathStyle"></path>
@@ -43,7 +43,7 @@
     <div
       class="el-progress__text"
       v-if="showText && !textInside"
-      :style="{fontSize: progressTextSize + 'px'}"
+      :style="{fontSize: progressTextSize + 'px', color:textColor}"
     >
       <template v-if="!status">{{content}}</template>
       <i v-else :class="iconClass"></i>
@@ -92,6 +92,14 @@
       color: {
         type: [String, Array, Function],
         default: ''
+      },
+      defineBackColor: {
+        type: [String, Array, Function],
+        default: '#ebeef5'
+      },
+      textColor: {
+        type: [String, Array, Function],
+        default: '#606266'
       },
       format: Function
     },
