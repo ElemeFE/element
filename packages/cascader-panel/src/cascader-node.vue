@@ -134,6 +134,7 @@
             value={ node.checked }
             indeterminate={ node.indeterminate }
             disabled={ isDisabled }
+            not-need-group={ true }
             { ...events }
           ></el-checkbox>
         );
@@ -152,6 +153,7 @@
             value={ checkedValue }
             label={ value }
             disabled={ isDisabled }
+            notNeedGroup={ true }
             onChange={ this.handleCheckChange }
             nativeOnClick={ stopPropagation }>
             {/* add an empty element to avoid render label */}
