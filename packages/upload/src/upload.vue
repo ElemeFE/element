@@ -196,8 +196,11 @@ export default {
       }
     };
     data.class[`el-upload--${listType}`] = true;
+    if (drag) {
+      data.attrs = { tabindex: "0" }
+    }
     return (
-      <div {...data} tabindex="0" >
+      <div {...data} >
         {
           drag
             ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
