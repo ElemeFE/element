@@ -197,7 +197,7 @@ export default {
     };
     data.class[`el-upload--${listType}`] = true;
     if (drag) {
-      data.attrs = { tabindex: "0" }
+      data.attrs = { tabindex: '0' };
     }
     return (
       <div {...data} >
