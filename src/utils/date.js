@@ -41,6 +41,7 @@
   var literal = /\[([^]*?)\]/gm;
   var noop = function () {
   };
+  var num = 1;
 
   function regexEscape(str) {
     return str.replace( /[|\\{()[^$+*?.-]/g, '\\$&');
@@ -270,6 +271,17 @@
     mask = fecha.masks[mask] || mask || fecha.masks['default'];
 
     var literals = [];
+    //------------此处为后加的，如果传过来自定义字符串含有周，则截取第一段周和第二段周以后的内容分别返回回去。 其他传过来的默认是(yyyy-MM-dd)不会有影响。
+    var index = mask.indexOf("周");
+    if (index > -1) {
+      if (num == 1) {
+        mask = mask.substring(0, index + 1);
+        num++;
+      } else {
+        mask = mask.substring(index + 1, mask.length);
+        num = 1;
+      }
+    }
 
     // Make literals inactive by replacing them with ??
     mask = mask.replace(literal, function($0, $1) {

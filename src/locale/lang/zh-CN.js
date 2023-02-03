@@ -33,7 +33,7 @@ export default {
       month10: '10 月',
       month11: '11 月',
       month12: '12 月',
-      // week: '周次',
+      week: '周次',
       weeks: {
         sun: '日',
         mon: '一',
@@ -56,7 +56,11 @@ export default {
         oct: '十月',
         nov: '十一月',
         dec: '十二月'
-      }
+      },
+      quarter1: '第一季度',
+      quarter2: '第二季度',
+      quarter3: '第三季度',
+      quarter4: '第四季度'
     },
     select: {
       loading: '加载中',
