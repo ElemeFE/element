@@ -1,5 +1,34 @@
 ## Changelog
 
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug fixes
+- Statistic：
+  - Fixed the thousandth bit bug (#22252 by @webvs2)
+- Other
+  - Fix 2.15.11 element-theme-chalk publish fail bug
+
+### 2.15.11
+
+*2022-11-15*
+
+#### Bug fixes
+- Docs
+  - Fix Radio docs (#22178 by @bchen1029) 
+  - Fix Progress docs
+#### Optimization
+- I18n
+  - Update translation of Malaysian (#22185 by @z4q)
+  - Update translation of Norwegian (#22145 by @Barsnes)
+- Progress
+  - Add defineBackColor and textColor prop (#22089 by @lm312)
+- Statistics
+  - Add new component Statistics (#22159 by @webvs2)
+- Other
+  - Add Web Types to improve code assistance in WebStorm IDE and other JetBrains IDEs (#22135 by @piotrtomiak)
+
 ### 2.15.10
 
 *2022-09-13*

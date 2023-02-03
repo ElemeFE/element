@@ -1,5 +1,34 @@
 ## 更新日志
 
+### 2.15.12
+
+*2022-11-16*
+
+#### Bug 修复
+- Statistics
+  - 修改 千分位 问题 (#22252 by @webvs2)
+- 其他
+  - 修复 2.15.11版本element-theme-chalk未成功发布 问题
+
+### 2.15.11
+
+*2022-11-15*
+
+#### Bug 修复
+- Docs
+  - 修复 Radio 文案 (#22178 by @bchen1029)
+  - 修复 Progress 文案 
+#### 优化
+- I18n
+  - 更新 马来西亚语 翻译 (#22185 by @z4q)
+  - 更新 挪威语 翻译 (#22145 by @Barsnes)
+- Progress
+  - 新增 defineBackColor 和 textColor 属性 (#22089 by @lm312) 
+- Statistics
+  - 新增组件 Statistics (#22159 by @webvs2)
+- Other
+  - 改进WebStorm IDE和其他JetBrains IDE中的代码帮助 (#22135 by @piotrtomiak)
+
 ### 2.15.10
 
 *2022-09-13*
